@@ -24,6 +24,11 @@ public class JavaHelpers {
         return p;
     }
 
+    /**
+     * Access properties and return as Properties
+     * @param propertyfile desired properties file
+     * @return
+     */
     public static Properties accessPropertiesFile(String propertyfile) {
         Properties prop = new Properties();
         // try retrieve data from file
@@ -37,6 +42,12 @@ public class JavaHelpers {
         return prop;
     }
 
+    /**
+     * Get property file value
+     * @param propertyFile property file location path
+     * @param propertyName property name
+     * @return String data type
+     */
     public static String getPropertyValue(String propertyFile, String propertyName) {
         Properties prop = accessPropertiesFile(propertyFile);
         String variable = prop.getProperty(propertyName);

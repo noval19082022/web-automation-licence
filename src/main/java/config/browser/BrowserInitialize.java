@@ -4,6 +4,12 @@ import com.microsoft.playwright.*;
 
 public class BrowserInitialize {
 
+    /**
+     * Get browser
+     * @param browserName broser name supported by playwright
+     * @param launchOptions
+     * @return Browser playwrigh
+     */
     public Browser getBrowser(String browserName, BrowserType.LaunchOptions launchOptions) {
         FrameworkConfig.localPlaywright = Playwright.create();
         BrowserType browserType = null;
@@ -19,10 +25,21 @@ public class BrowserInitialize {
         return browserType.launch(launchOptions);
     }
 
+    /**
+     * Get browser context
+     * @param browser
+     * @param newContextOptions browser context options
+     * @return BrowserContext playwright
+     */
     public BrowserContext getBrowserContext(Browser browser, Browser.NewContextOptions newContextOptions) {
         return browser.newContext(newContextOptions);
     }
 
+    /**
+     * Get page
+     * @param browserContext browser context
+     * @return Page playwright
+     */
     public Page getPage(BrowserContext browserContext) {
         return browserContext.newPage();
     }

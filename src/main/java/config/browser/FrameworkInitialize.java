@@ -10,6 +10,10 @@ import java.nio.file.Paths;
 
 public class FrameworkInitialize {
 
+    /**
+     * Initialize playwright framework
+     * @return playwright page
+     */
     public Page initializePlaywright() {
         BrowserInitialize browserInitialize = new BrowserInitialize();
 
