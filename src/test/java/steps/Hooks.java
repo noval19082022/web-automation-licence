@@ -25,9 +25,7 @@ public class Hooks {
         FrameworkConfig.localBrowserContext.tracing().stop(new Tracing.StopOptions()
                 .setPath(Paths.get("target/trace/"+scenario.getName().trim()+"-trace.zip")));
         FrameworkConfig.localPage.close();
-        FrameworkConfig.localBrowser.close();
         FrameworkConfig.localBrowserContext.close();
-        FrameworkConfig.localPlaywright.close();
         System.out.println(scenario.getName() + " is finished");
     }
 }
