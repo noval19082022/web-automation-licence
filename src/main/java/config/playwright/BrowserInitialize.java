@@ -1,6 +1,9 @@
-package config.browser;
+package config.playwright;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
 
 public class BrowserInitialize {
 
@@ -11,13 +14,12 @@ public class BrowserInitialize {
      * @return Browser playwrigh
      */
     public Browser getBrowser(String browserName, BrowserType.LaunchOptions launchOptions) {
-        FrameworkConfig.localPlaywright = Playwright.create();
         BrowserType browserType = null;
 
         switch (browserName.toLowerCase()) {
-            case "chrome" -> browserType = FrameworkConfig.localPlaywright.chromium();
-            case "firefox" -> browserType = FrameworkConfig.localPlaywright.firefox();
-            case "webkit" -> browserType = FrameworkConfig.localPlaywright.webkit();
+            case "chrome" -> browserType = FrameworkManager.getLocalPlaywright().chromium();
+            case "firefox" -> browserType = FrameworkManager.getLocalPlaywright().firefox();
+            case "webkit" -> browserType = FrameworkManager.getLocalPlaywright().webkit();
             default -> throw new RuntimeException("Unsupported playwright browser: " + browserName + " use these name instead chrome, firefox, webkit");
         }
 
