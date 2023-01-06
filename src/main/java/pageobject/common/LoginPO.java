@@ -1,0 +1,45 @@
+package pageobject.common;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import pageobject.owner.OwnerLoginPO;
+import pageobject.tenant.TenantLoginPO;
+
+public class LoginPO {
+    protected Page page;
+    private Locator pencariKostBtn;
+    private Locator pemilikKostBtn;
+    protected Locator phoneNumberInput;
+    protected Locator passwordInput;
+    protected Locator loginBtn;
+    public LoginPO(Page page) {
+        this.page = page;
+        this.pencariKostBtn = page.getByTestId("pencariKosButton");
+        this.pemilikKostBtn = page.getByTestId("pemilikKosButton");
+        this.phoneNumberInput = page.getByTestId("phoneNumberTextbox");
+        this.passwordInput = page.getByTestId("passwordTextbox");
+        this.loginBtn = page.getByTestId("loginButton");
+    }
+
+    public TenantLoginPO clickOnPencariKostButton() {
+        pencariKostBtn.click();
+        return new TenantLoginPO(page);
+    }
+
+    public OwnerLoginPO clickOnPemilikKostButton() {
+        pemilikKostBtn.click();
+        return new OwnerLoginPO(page);
+    }
+
+    protected Object fillPassword(String password) {
+        return new LoginPO(page);
+    }
+
+    protected Object fillPhoneNumber(String phoneNumber) {
+        return new LoginPO(page);
+    }
+
+    protected Object clickOnLoginButton() {
+        return new Object();
+    }
+}

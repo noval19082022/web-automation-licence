@@ -1,49 +1,43 @@
 package runners;
 
 import com.microsoft.playwright.Playwright;
-import config.global.BrowserOptions;
 import config.global.GlobalConfig;
-import config.playwright.BrowserInitialize;
-import config.playwright.FrameworkManager;
+import config.playwright.PlaywrightSourceManager;
+import config.playwright.browser.BrowserInitialize;
+import config.playwright.browser.BrowserOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class BaseTestRunner extends AbstractTestNGCucumberTests {
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
         System.out.println("From Before suite");
-        BrowserOptions browserOptions = new BrowserOptions();
         BrowserInitialize browserInitialize = new BrowserInitialize();
 
-
-        FrameworkManager.setLocalPlaywright(Playwright.create());
-        FrameworkManager.setLocalBrowser(browserInitialize.getBrowser(GlobalConfig.BROWSER_NAME, browserOptions.launchOptions()));
+        PlaywrightSourceManager.setLocalPlaywright(Playwright.create());
+        PlaywrightSourceManager.setLocalBrowser(browserInitialize.getBrowser(GlobalConfig.BROWSER_NAME, BrowserOptions.launchOptions()));
     }
 
-    @BeforeTest
-    public void beforeTest() {
-        System.out.println("From Before test");
-    }
-
-    @BeforeClass
-    public void beforeClass() {
-        System.out.println("From Before class");
-    }
-
-    @AfterClass
-    public void afterClass() {
-        System.out.println("From After class");
-    }
-
-    @AfterTest
-    public void afterTest() {
-        System.out.println("From After test");
-    }
+    //@BeforeTest
+    //public void beforeTest() {
+    //}
+    //
+    //    @BeforeClass
+    //    public void beforeClass() {
+    //    }
+    //
+    //    @AfterClass
+    //    public void afterClass() {
+    //    }
+    //
+    //    @AfterTest
+    //    public void afterTest(){
+    //    }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
-        FrameworkManager.getLocalBrowser().close();
-        FrameworkManager.getLocalPlaywright().close();
-        System.out.println("From After suite");
+        PlaywrightSourceManager.getLocalBrowser().close();
+        PlaywrightSourceManager.getLocalPlaywright().close();
     }
 }

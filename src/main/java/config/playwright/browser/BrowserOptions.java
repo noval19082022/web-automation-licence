@@ -1,12 +1,12 @@
-package config.global;
+package config.playwright.browser;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
+import config.global.GlobalConfig;
 
 import java.nio.file.Paths;
-
 public class BrowserOptions {
-    public BrowserType.LaunchOptions launchOptions() {
+    public static BrowserType.LaunchOptions launchOptions() {
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         launchOptions.headless = GlobalConfig.HEADLESS;
         launchOptions.devtools = GlobalConfig.DEV_TOOLS;
@@ -14,10 +14,11 @@ public class BrowserOptions {
         return launchOptions;
     }
 
-    public Browser.NewContextOptions browserContextOptions() {
+    public static Browser.NewContextOptions browserContextOptions() {
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions();
         contextOptions.setAcceptDownloads(GlobalConfig.SET_ACCEPT_DOWNLOAD);
-        contextOptions.setRecordVideoDir(Paths.get("target/videos/"));
+        if (GlobalConfig.SET_VIDEO_RECORD)
+            contextOptions.setRecordVideoDir(Paths.get("target/videos/"));
         return contextOptions;
     }
 }
