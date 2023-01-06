@@ -10,7 +10,6 @@ import java.util.Properties;
 
 public class JavaHelpers {
 
-
     /**
      * set properties file to be readable
      * @param filePropertiesPath path to properties file
