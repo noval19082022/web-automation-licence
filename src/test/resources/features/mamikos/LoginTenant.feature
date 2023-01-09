@@ -1,10 +1,12 @@
 @login
 Feature: Login Tenant
 
-  @tenant @owner
+  @tenant @owner @lari
   Scenario: Login Tenant With Phone Number
 #    Given user go to mamikos homepage
-    When user login as tenant via phone number
+    When user login as tenant via phone number:
+      | phone stag    |  phone prod    | password  |
+      | 087708777615  |  087708777615  | qwerty123 |
     When user logins as owner
 
   @owner

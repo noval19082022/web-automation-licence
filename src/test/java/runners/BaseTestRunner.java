@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeSuite;
 public class BaseTestRunner extends AbstractTestNGCucumberTests {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
-        System.out.println("From Before suite");
         BrowserInitialize browserInitialize = new BrowserInitialize();
 
         PlaywrightSourceManager.setLocalPlaywright(Playwright.create());

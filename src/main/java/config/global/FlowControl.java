@@ -1,4 +1,4 @@
-package config;
+package config.global;
 
 public class FlowControl {
     private static boolean strictFlow;

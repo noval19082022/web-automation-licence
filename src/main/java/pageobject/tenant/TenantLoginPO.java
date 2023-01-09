@@ -1,7 +1,7 @@
 package pageobject.tenant;
 
 import com.microsoft.playwright.Page;
-import pageobject.common.HeaderPO;
+import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
 
 public class TenantLoginPO extends LoginPO {
@@ -22,8 +22,8 @@ public class TenantLoginPO extends LoginPO {
         return new TenantLoginPO(page);
     }
 
-    public HeaderPO clickOnLoginButton() {
+    public HomePO clickOnLoginButton() {
         loginBtn.click();
-        return new HeaderPO(page);
+        return new HomePO(page);
     }
 }

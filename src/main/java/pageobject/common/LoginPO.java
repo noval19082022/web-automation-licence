@@ -21,22 +21,30 @@ public class LoginPO {
         this.loginBtn = page.getByTestId("loginButton");
     }
 
+    /**
+     * Click on pencari kost button
+     * @return TenantLoginPO class
+     */
     public TenantLoginPO clickOnPencariKostButton() {
         pencariKostBtn.click();
         return new TenantLoginPO(page);
     }
 
+    /**
+     * Click on pemilik kost button
+     * @return OwnerLoginPO class
+     */
     public OwnerLoginPO clickOnPemilikKostButton() {
         pemilikKostBtn.click();
         return new OwnerLoginPO(page);
     }
 
     protected Object fillPassword(String password) {
-        return new LoginPO(page);
+        return new Object();
     }
 
     protected Object fillPhoneNumber(String phoneNumber) {
-        return new LoginPO(page);
+        return new Object();
     }
 
     protected Object clickOnLoginButton() {

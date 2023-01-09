@@ -12,6 +12,9 @@ public class OwnerDashboardPO {
         this.ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("account Akun"));
     }
 
+    /**
+     * Click on owner profile
+     */
     public void clickOnOwnerProfile() {
         ownerProfile.click();
     }

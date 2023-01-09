@@ -7,11 +7,17 @@ import config.playwright.browser.BrowserOptions;
 
 public class TenantContextInitializer {
 
+    /**
+     * Initialize tenant browser context
+     */
     public static void initializeTenantBrowserContext() {
         BrowserContext tenantContext = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
         TenantContext.setTenantBrowserContext(tenantContext);
     }
 
+    /**
+     * Initialize tenant page
+     */
     public static void initializeTenantPage() {
         TenantContext.getTenantBrowserContext().tracing().start(new Tracing.StartOptions()
             .setScreenshots(true)
