@@ -19,7 +19,7 @@ public class UserContext {
         return userBrowserContext;
     }
 
-    public static void setUserBrowserContext(BrowserContext userBrowserContext) {
+    public synchronized static void setUserBrowserContext(BrowserContext userBrowserContext) {
         UserContext.userBrowserContext = userBrowserContext;
     }
 }
