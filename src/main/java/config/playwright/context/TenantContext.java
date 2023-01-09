@@ -15,11 +15,19 @@ public class TenantContext {
         TenantContext.tenantPage = tenantPage;
     }
 
+    /**
+     * Get tenant browser context
+     * @return BrowserContext type
+     */
     public static BrowserContext getTenantBrowserContext() {
         return tenantBrowserContext;
     }
 
-    public static void setTenantBrowserContext(BrowserContext tenantBrowserContext) {
+    /**
+     * Set tenant browser context
+     * @param tenantBrowserContext BrowserContext type
+     */
+    public synchronized static void setTenantBrowserContext(BrowserContext tenantBrowserContext) {
         TenantContext.tenantBrowserContext = tenantBrowserContext;
     }
 }

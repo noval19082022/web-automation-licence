@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"json:target/result/essential-test/cucumber-report.json", "html:target/result/essential-test/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@saktiloginowner"
+        tags = "@cobadata"
 )
 public class EssentialTestRunner extends BaseTestRunner{
 }

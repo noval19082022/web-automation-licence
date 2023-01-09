@@ -9,18 +9,32 @@ public class OwnerLoginPO extends LoginPO {
         this.page = page;
     }
 
+    /**
+     * Fill owner password
+     * @param password password string type
+     * @return OwnerLoginPO class
+     */
     @Override
     public OwnerLoginPO fillPassword(String password) {
         passwordInput.fill(password);
         return new OwnerLoginPO(page);
     }
 
+    /**
+     * Fill phone number
+     * @param phoneNumber phone number string type
+     * @return OwnerLoginPO
+     */
     @Override
     public OwnerLoginPO fillPhoneNumber(String phoneNumber) {
         phoneNumberInput.fill(phoneNumber);
         return new OwnerLoginPO(page);
     }
 
+    /**
+     * Click on login button
+     * @return OwnerDashboardPO
+     */
     @Override
     public OwnerDashboardPO clickOnLoginButton() {
         loginBtn.click();

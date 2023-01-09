@@ -2,6 +2,8 @@ package codegen;
 
 import com.microsoft.playwright.*;
 
+import static codegen.Example.page;
+
 public class Codegen {
     public static void main(String[] args) {
         try (Playwright playwright = Playwright.create()) {
@@ -13,7 +15,15 @@ public class Codegen {
             context.route("**/*", route -> route.resume());
             // Pause the page, and start recording manually.
             Page page = context.newPage();
+            page.navigate("https://jambu.kerupux.com");
+            goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
             page.pause();
         }
+    }
+
+    public static void goToKostDetail(Page page, String kostName) {
+        page.getByText("Masukan nama lokasi/area/alamat").click();
+        page.getByPlaceholder("Coba Tebet Jakarta Selatan").fill("Kos Wild Rift DOTF Tegalrejo Yogyakarta");
+        page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item").click();
     }
 }
