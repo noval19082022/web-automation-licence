@@ -10,11 +10,13 @@ public class LocatorHelpers {
     public Locator div;
     public AriaRole roleButton;
     public AriaRole roleImg;
+    public AriaRole roleComplementary;
     public LocatorHelpers(Page page) {
         this.page = page;
         this.span = page.locator("span");
         this.div = page.locator("div");
         this.roleButton = AriaRole.BUTTON;
         this.roleImg = AriaRole.IMG;
+        this.roleComplementary = AriaRole.COMPLEMENTARY;
     }
 }
