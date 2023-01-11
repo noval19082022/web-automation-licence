@@ -59,6 +59,15 @@ public class PlaywrightHelpers {
     public void forceFill(Locator locator, String data) {
         locator.fill(data, new Locator.FillOptions().setForce(true));
     }
+
+    /**
+     * Select dropdown by value
+     * @param locator Locator type
+     * @param value String data type
+     */
+    public void selectDropdownByValue(Locator locator, String value) {
+        locator.selectOption(value);
+    }
     //----- Action Part ----\\
 
     //----- Get Part ----\\
@@ -104,6 +113,32 @@ public class PlaywrightHelpers {
         var elementOptionsHandler = new ElementHandle.WaitForElementStateOptions();
         locator.elementHandle().waitForElementState(ElementState.valueOf(state.toUpperCase()), elementOptionsHandler.setTimeout(timeout));
     }
+
+    /**
+     * Wait until url to be
+     * @param url String data type url format
+     * @return String data type URL
+     */
+    public String waitTillUrlToBe(String url) {
+        page.waitForURL(url);
+        return page.url();
+    }
+
+    /**
+     * Wait until url to be with timeout
+     * @param url String data type url format
+     * @param waitTime Double type
+     * @return String data type URL
+     */
+    public String waitTillUrlToBe(String url,Double waitTime) {
+        page.waitForURL(url, new Page.WaitForURLOptions().setTimeout(waitTime));
+        return page.url();
+    }
+
+    public String clickAndWaitNavigation(Locator locator, String url) {
+        Response response = this.page.waitForNavigation(locator::click);
+        return response.url();
+    }
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
@@ -126,5 +161,15 @@ public class PlaywrightHelpers {
      */
     public Locator locatorByRoleSetName(AriaRole role, String setName) {
         return page.getByRole(role, new Page.GetByRoleOptions().setName(setName));
+    }
+
+    /**
+     * Get locator by role and by text
+     * @param role AriaRole
+     * @param text Text data type string
+     * @return Locator type
+     */
+    public Locator locatorByRoleAndText(AriaRole role, String text) {
+        return page.getByRole(role).getByText(text);
     }
 }
