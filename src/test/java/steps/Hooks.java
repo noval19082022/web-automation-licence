@@ -63,6 +63,10 @@ public class Hooks{
             OwnerContext.getOwnerBrowserContext().close();
         }
 
+        if (FlowControl.getStrictFlow()) {
+            UserContext.getUserBrowserContext().close();
+        }
+
         System.out.println(scenario.getName() + " is finished");
     }
 }

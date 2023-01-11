@@ -3,6 +3,7 @@ package utilities;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 
@@ -135,7 +136,7 @@ public class PlaywrightHelpers {
         return page.url();
     }
 
-    public String clickAndWaitNavigation(Locator locator, String url) {
+    public String clickAndWaitNavigation(Locator locator) {
         Response response = this.page.waitForNavigation(locator::click);
         return response.url();
     }

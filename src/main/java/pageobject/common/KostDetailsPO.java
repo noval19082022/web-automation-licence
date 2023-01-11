@@ -2,7 +2,6 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -20,6 +19,7 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     public KostDetailsPO(Page page) {
         this.page = page;
         this.playwright= new PlaywrightHelpers(page);
@@ -64,6 +64,7 @@ public class KostDetailsPO {
      * @param date tomorrow, today, or specific date by number on string data type
      */
     public void selectBookingDate(String date) {
+        String datePick;
         if (date.equalsIgnoreCase("tomorrow")) {
             this.date = JavaHelpers.getCostumDateOrTime("D", 1, 0, 0);
         }
@@ -74,7 +75,8 @@ public class KostDetailsPO {
             this.date = date;
         }
         mulaiKosInput.click();
-        datePicker.getByText(this.date).nth(1).click();
+        datePick = String.format(datePickXpath, this.date);
+        datePicker.locator(datePick).click();
     }
 
     /**

@@ -55,8 +55,11 @@ public class LoginSteps {
         System.out.println("From inside scenario login google");
     }
 
-    @When("user logins as owner")
-    public void userLoginsAsOwner() {
+    @When("user login as owner:")
+    public void userLoginsAsOwner(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
         if (!FlowControl.getStrictFlow()) {
             ActiveContext.activateOwner(0);
             login = new HomePO(ActiveContext.getActivePage());
@@ -64,10 +67,9 @@ public class LoginSteps {
         }
         login.clickOnButtonMasuk()
             .clickOnPemilikKostButton()
-            .fillPhoneNumber("089604239098")
-            .fillPassword("widyarini1")
-            .clickOnLoginButton()
-            .clickOnOwnerProfile();
+            .fillPhoneNumber(phone)
+            .fillPassword(password)
+            .clickOnLoginButton();
     }
 
     @Then("user can sees owner's page")
