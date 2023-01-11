@@ -1,6 +1,7 @@
+@booking
 Feature: Booking
 
-  @user @booking
+  @user
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -11,3 +12,12 @@ Feature: Booking
       | Kos Wild Rift DOTF Tegalrejo Yogyakarta | Kos Wild Rift DOTF Tegalrejo Yogyakarta |
     And tenant booking kost
     Then tenant should success booking kost
+
+  @user
+  Scenario: Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    |  phone prod    | password     |
+      | 081362464341  |  081362464341  | 1d0lt3stb4ru |
+    And owner accept booking
+    Then owner should redirect back to pengajuan booking page
