@@ -29,11 +29,13 @@ public class Hooks{
                     OwnerContextInitializer.initializeOwnerBrowserContext();
                     OwnerContextInitializer.initializeOwnerPage();
                 }
-                case "@admin" -> System.out.println("Will add later");
+                case "@admin" -> {
+                    System.out.println("Will add later");
+                }
             }
         }
 
-        if (scenario.getSourceTagNames().contains("@user")) {
+        if (!(scenario.getSourceTagNames().contains("@tenant") || scenario.getSourceTagNames().contains("admin") || scenario.getSourceTagNames().contains("owner"))) {
             UserContextInitializer.initializeUserBrowserContext();
             UserContextInitializer.initializeUserPage();
             ActiveContext.setActiveBrowserContext(UserContext.getUserBrowserContext());
@@ -55,18 +57,19 @@ public class Hooks{
                     .setPath(Paths.get("target/trace/"+scenario.getName().replace(" ", "-").toLowerCase()+"-trace.zip")));
         }
 
-        if (TenantContext.getTenantBrowserContext()!= null) {
-            TenantContext.getTenantBrowserContext().close();
-        }
+        if (!scenario.getSourceTagNames().contains("@continue")) {
+            if (TenantContext.getTenantBrowserContext()!= null) {
+                TenantContext.getTenantBrowserContext().close();
+            }
 
-        if (OwnerContext.getOwnerBrowserContext() != null) {
-            OwnerContext.getOwnerBrowserContext().close();
-        }
+            if (OwnerContext.getOwnerBrowserContext() != null) {
+                OwnerContext.getOwnerBrowserContext().close();
+            }
 
-        if (FlowControl.getStrictFlow()) {
-            UserContext.getUserBrowserContext().close();
+            if (FlowControl.getStrictFlow()) {
+                UserContext.getUserBrowserContext().close();
+            }
         }
-
         System.out.println(scenario.getName() + " is finished");
     }
 }
