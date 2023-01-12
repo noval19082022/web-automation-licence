@@ -30,7 +30,9 @@ public class Hooks{
                     OwnerContextInitializer.initializeOwnerPage();
                 }
                 case "@admin" -> {
-                    System.out.println("Will add later");
+                    System.out.println("admin init");
+                    AdminContextInitializer.initializeAdminBrowserContext();
+                    AdminContextInitializer.initializeAdminPage();
                 }
             }
         }
@@ -64,6 +66,10 @@ public class Hooks{
 
             if (OwnerContext.getOwnerBrowserContext() != null) {
                 OwnerContext.getOwnerBrowserContext().close();
+            }
+
+            if (AdminContext.getAdminBrowserContext() != null) {
+                AdminContext.getAdminBrowserContext().close();
             }
 
             if (FlowControl.getStrictFlow()) {

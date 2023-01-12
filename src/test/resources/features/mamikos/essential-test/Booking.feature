@@ -1,7 +1,15 @@
-@booking
+@booking @essential
 Feature: Booking
 
-  @user
+  Scenario: Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod   |
+      | 087708777615 | 087708777615 |
+
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -13,7 +21,6 @@ Feature: Booking
     And tenant booking kost
     Then tenant should success booking kost
 
-  @user
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:

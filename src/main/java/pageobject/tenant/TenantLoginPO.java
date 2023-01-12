@@ -22,6 +22,7 @@ public class TenantLoginPO extends LoginPO {
         return new TenantLoginPO(page);
     }
 
+    @Override
     public HomePO clickOnLoginButton() {
         loginBtn.click();
         return new HomePO(page);
