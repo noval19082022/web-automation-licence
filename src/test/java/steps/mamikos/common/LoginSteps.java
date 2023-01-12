@@ -8,6 +8,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageobject.admin.LoginAdminMamipayPO;
 import pageobject.common.HomePO;
 
 import java.util.List;
@@ -17,11 +18,18 @@ public class LoginSteps {
 
     Page page = ActiveContext.getActivePage();
     HomePO login = new HomePO(page);
+    LoginAdminMamipayPO loginAdmin = new LoginAdminMamipayPO(page);
     private List<Map<String, String>> phoneNumberCredential;
+    private List<Map<String, String>> emailCredential;
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
         page.navigate("https://jambu.kerupux.com");
+    }
+
+    @Given("admin go to mamikos mamipay admin")
+    public void adminGoToMamikosMamipayAdmin() {
+        page.navigate("https://pay-waras.kerupux.com/pin2blkang");
     }
 
     @Then("tenant redirect back to homepage")
@@ -58,7 +66,7 @@ public class LoginSteps {
     @When("user login as owner:")
     public void userLoginsAsOwner(DataTable table) {
         phoneNumberCredential = table.asMaps(String.class, String.class);
-        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
         if (!FlowControl.getStrictFlow()) {
             ActiveContext.activateOwner(0);
@@ -72,8 +80,13 @@ public class LoginSteps {
             .clickOnLoginButton();
     }
 
-    @Then("user can sees owner's page")
-    public void userCanSeesOwnerSPage() {
-
+    @When("admin login to mamipay:")
+    public void adminLoginToMamipay(DataTable table) {
+        emailCredential = table.asMaps(String.class, String.class);
+        var email = emailCredential.get(0).get("email " + Mamikos.ENV);
+        var password = emailCredential.get(0).get("password");
+        loginAdmin.fillEmail(email);
+        loginAdmin.fillPassword(password);
+        loginAdmin.clickOnLoginButton();
     }
 }

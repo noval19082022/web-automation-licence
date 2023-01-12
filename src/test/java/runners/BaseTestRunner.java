@@ -1,6 +1,7 @@
 package runners;
 
 import com.microsoft.playwright.Playwright;
+import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.PlaywrightSourceManager;
 import config.playwright.browser.BrowserInitialize;
@@ -16,6 +17,7 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
 
         PlaywrightSourceManager.setLocalPlaywright(Playwright.create());
         PlaywrightSourceManager.setLocalBrowser(browserInitialize.getBrowser(GlobalConfig.BROWSER_NAME, BrowserOptions.launchOptions()));
+        FlowControl.setStrictFlow(false);
     }
 
     //@BeforeTest
