@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -50,6 +51,17 @@ public class TenantBookingSteps {
     @Then("tenant should success booking kost")
     public void tenantShouldSuccesBookingKost() {
         successBooking.waitUntilSuccessBookingHeadingVisible();
-        Assert.assertEquals(successBooking.getSuccessBookingHeadingText(), "Pengajuan sewa berhasil dikirimmmm");
+        Assert.assertEquals(successBooking.getSuccessBookingHeadingText(), "Pengajuan sewa berhasil dikirim");
+    }
+
+    @And("user cancel booking")
+    public void userCancelBooking() {
+        page.navigate("https://jambu.kerupux.com/user/booking/");
+        bookingForm = new BookingFormPO(page);
+        bookingForm.cancelBooking();
+        if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {
+            Assert.assertEquals(bookingForm.getSuccessCancelText().trim(), "Booking Anda berhasil dibatalkan");
+        }
+        bookingForm.closeCancelPopUp();
     }
 }

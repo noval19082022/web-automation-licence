@@ -9,11 +9,25 @@ public class BookingFormPO {
     Locator ajukanSewaButton;
     Locator bookingConfirmationCheckmark;
     Locator kirimPengajuanKePemilikButton;
+    Locator lihatSelengkapnyaTextLink;
+    Locator batalkanBookingButton;
+    Locator cancelReasonButton;
+    Locator confirmCancelButton;
+    Locator successCancel;
+    Locator okCancelButton;
+
     public BookingFormPO(Page page) {
         this.page = page;
         this.ajukanSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
+        this.lihatSelengkapnyaTextLink = page.getByText("Lihat selengkapnya").first();
+        this.batalkanBookingButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Booking"));
+        this.confirmCancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
+        this.successCancel =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
+        this.okCancelButton = page.locator(".bg-c-button");
+        this.cancelReasonButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Berubah pikiran/ada rencana lain")).locator("span");
+
     }
 
     /**
@@ -38,4 +52,49 @@ public class BookingFormPO {
         kirimPengajuanKePemilikButton.click();
         return new SuccessBookingPO(page);
     };
+
+    /**
+     * click on Lihat Selengkapnya
+     * click on Batalkan Booking
+     * click on cancel reason button
+     * click on Ya Batalkan button
+     */
+    public void cancelBooking() {
+        for (int i = 0; i < 2; i++) {
+            lihatSelengkapnyaTextLink.click();
+        }
+        if (batalkanBookingButton.isVisible()) {
+            batalkanBookingButton.click();
+            cancelReasonButton.click();
+            confirmCancelButton.click();
+        }
+    }
+
+    /**
+     * Wait until terminated is process is finished
+     * @return
+     */
+    public boolean waitUntilSuccessCancelHeadingVisible() {
+        successCancel.isVisible();
+        return false;
+    }
+
+    /**
+     * Get success cancel booking pop-up text
+     * @return String data type
+     */
+    public String getSuccessCancelText() {
+        return successCancel.textContent();
+    }
+
+    /**
+     * Close booking pop-up
+     */
+    public void closeCancelPopUp(){
+        if(okCancelButton.isVisible()){
+            okCancelButton.click();
+        }
+    }
+
+
 }
