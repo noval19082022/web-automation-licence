@@ -75,8 +75,7 @@ public class BookingFormPO {
      * @return
      */
     public boolean waitUntilSuccessCancelHeadingVisible() {
-        successCancel.isVisible();
-        return false;
+        return successCancel.isVisible();
     }
 
     /**
