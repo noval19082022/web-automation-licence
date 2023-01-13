@@ -46,7 +46,7 @@ public class SearchContractSteps {
     public void adminShouldSuccessTerminateContract() {
         if (searchContract.waitUntilSuccessTerminateVisible())
         {
-            Assert.assertEquals(searchContract.getSuccessTerminateHeadingText(), "Kontrak berhasil diakhiri.");
+            Assert.assertEquals(searchContract.getSuccessTerminateHeadingText().trim(), "Kontrak berhasil diakhiri.");
         }
     }
 
