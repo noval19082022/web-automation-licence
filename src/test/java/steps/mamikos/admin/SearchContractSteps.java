@@ -5,7 +5,9 @@ import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.admin.AdminMamipayDashboardPO;
 import pageobject.admin.SearchContractPO;
 import utilities.PlaywrightHelpers;
@@ -30,8 +32,22 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
-    @And("admin revoke contract")
-    public void adminRevokeContract() {
-        searchContract.clickOnRevokeContractButton();
+    @And("admin cancel contract")
+    public void adminCancelContract() {
+        searchContract.clickOnCancelContractButton();
     }
+
+    @And("admin terminate contract")
+    public void adminTerminateContract() {
+        searchContract.clickOnTerminateContractButton();
+    }
+
+    @Then("admin should success terminate contract")
+    public void adminShouldSuccessTerminateContract() {
+        if (searchContract.waitUntilSuccessTerminateVisible())
+        {
+            Assert.assertEquals(searchContract.getSuccessTerminateHeadingText(), "Kontrak berhasil diakhiri.");
+        }
+    }
+
 }
