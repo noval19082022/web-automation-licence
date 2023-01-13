@@ -1,6 +1,8 @@
 package runners;
 
 import com.microsoft.playwright.Playwright;
+import com.trivago.cluecumber.core.CluecumberCore;
+import com.trivago.cluecumber.engine.exceptions.CluecumberException;
 import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.PlaywrightSourceManager;
@@ -12,7 +14,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTestRunner extends AbstractTestNGCucumberTests {
     @BeforeSuite(alwaysRun = true)
-    public void beforeSuite() {
+    public void beforeSuite() throws CluecumberException {
         BrowserInitialize browserInitialize = new BrowserInitialize();
 
         PlaywrightSourceManager.setLocalPlaywright(Playwright.create());
@@ -37,8 +39,12 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
     //    }
 
     @AfterSuite(alwaysRun = true)
-    public void afterSuite() {
+    public void afterSuite() throws CluecumberException {
+        String jsonDirectory = "target/result/essential-test";
+        String reportDirectory = "target/result/cluecumber_report";
         PlaywrightSourceManager.getLocalBrowser().close();
         PlaywrightSourceManager.getLocalPlaywright().close();
+        new CluecumberCore.Builder()
+                .build().generateReports(jsonDirectory, reportDirectory);
     }
 }
