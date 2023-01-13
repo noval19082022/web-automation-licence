@@ -12,6 +12,7 @@ public class SearchContractPO {
     Locator searchBy;
     Locator searchInput;
     Locator searchButton;
+    Locator batalkanContractButton;
     public SearchContractPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -19,6 +20,7 @@ public class SearchContractPO {
         searchBy = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search by"));
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         searchInput = page.getByPlaceholder("Search");
+        batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
     }
 
     /**
@@ -42,5 +44,15 @@ public class SearchContractPO {
      */
     public void clickOnSearchButton() {
         searchButton.click();
+    }
+
+    /**
+     * Set accept dialog and click on revoke/batalkan contract button
+     */
+    public void clickOnRevokeContractButton() {
+        if (playwright.waitTillLocatorIsVisible(batalkanContractButton, 5000.00)) {
+            playwright.acceptDialog(batalkanContractButton);
+            page.waitForSelector(".callout.callout-success");
+        }
     }
 }

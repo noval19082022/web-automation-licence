@@ -9,6 +9,7 @@ Feature: Booking
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
       | 087708777615 | 087708777615 |
+    And admin revoke contract
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
