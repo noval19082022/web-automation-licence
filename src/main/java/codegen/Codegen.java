@@ -14,8 +14,8 @@ public class Codegen {
             context.route("**/*", route -> route.resume());
             // Pause the page, and start recording manually.
             Page page = context.newPage();
-            //page.navigate("https://jambu.kerupux.com");
-            //loginAdminMamipay(page);
+//            page.navigate("https://jambu.kerupux.com");
+            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
             //loginOwner(page);
             page.pause();
@@ -39,7 +39,7 @@ public class Codegen {
     }
 
     public static void loginAdminMamipay(Page page) {
-        page.navigate("https://pay-waras.kerupux.com/pin2blkang");
+        page.navigate("https://pay-jambu.kerupux.com/pin2blkang");
         page.getByPlaceholder("Email Address").click();
         page.getByPlaceholder("Email Address").fill("automationpman03@mamikos.com");
         page.getByPlaceholder("Email Address").press("Tab");

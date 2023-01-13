@@ -8,17 +8,25 @@ Feature: Booking
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
-      | 087708777615 | 087708777615 |
-    And admin revoke contract
+      | 0890867321212 | 0890867321212 |
+    And admin terminate contract
+    Then admin should success terminate contract
+
+  Scenario: Cancel Booking if Tenant Have Booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag      |  phone prod     | password    |
+      | 0890867321212    |  0890867321212   | mamikosqa123   |
+    And user cancel booking
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    |  phone prod    | password  |
-      | 087708777615  |  087708777615  | qwerty123 |
+      | 0890867321212  |  0890867321212  | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod                          |
-      | Kos Wild Rift DOTF Tegalrejo Yogyakarta | Kos Wild Rift DOTF Tegalrejo Yogyakarta |
+      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -26,6 +34,6 @@ Feature: Booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    |  phone prod    | password     |
-      | 081362464341  |  081362464341  | 1d0lt3stb4ru |
+      | 08900000000022  |  08900000000022  | mamikosqa123 |
     And owner accept booking
     Then owner should redirect back to pengajuan booking page
