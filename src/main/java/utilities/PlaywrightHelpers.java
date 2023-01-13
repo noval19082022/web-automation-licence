@@ -1,9 +1,6 @@
 package utilities;
 
-import com.microsoft.playwright.ElementHandle;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Response;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 
@@ -68,6 +65,14 @@ public class PlaywrightHelpers {
      */
     public void selectDropdownByValue(Locator locator, String value) {
         locator.selectOption(value);
+    }
+
+    /**
+     * Accept dialog
+     */
+    public void acceptDialog(Locator locator) {
+        page.onceDialog(Dialog::accept);
+        locator.click();
     }
     //----- Action Part ----\\
 
@@ -139,6 +144,25 @@ public class PlaywrightHelpers {
     public String clickAndWaitNavigation(Locator locator) {
         Response response = this.page.waitForNavigation(locator::click);
         return response.url();
+    }
+
+    /**
+     * Wait until element locator is visible
+     * @param locator Locator type
+     * @return boolean
+     */
+    public boolean waitTillLocatorIsVisible(Locator locator) {
+        return locator.isVisible();
+    }
+
+    /**
+     * Wait until element locator is visible
+     * @param locator Locator type
+     * @param timeout Double type
+     * @return boolean
+     */
+    public boolean waitTillLocatorIsVisible(Locator locator, Double timeout) {
+        return locator.isVisible(new Locator.IsVisibleOptions().setTimeout(timeout));
     }
     //---- Wait Part ----\\
 
