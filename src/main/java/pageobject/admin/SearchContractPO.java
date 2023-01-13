@@ -85,8 +85,7 @@ public class SearchContractPO {
      * @return
      */
     public boolean waitUntilSuccessTerminateVisible() {
-        successTerminateText.isVisible();
-        return false;
+        return successTerminateText.isVisible();
     }
 
     /**
