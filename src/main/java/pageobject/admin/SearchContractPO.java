@@ -3,7 +3,6 @@ package pageobject.admin;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class SearchContractPO {
@@ -93,7 +92,7 @@ public class SearchContractPO {
      * @return String data type
      */
     public String getSuccessTerminateHeadingText() {
-        return successTerminateText.textContent();
+        return playwright.getText(successTerminateText);
     }
 
 

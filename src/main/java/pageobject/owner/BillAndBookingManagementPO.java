@@ -15,6 +15,7 @@ public class BillAndBookingManagementPO {
     Locator lanjutkanButton;
     Locator simpanButton;
     Locator okButton;
+    String  roomAllotmentWrapper;
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -25,21 +26,29 @@ public class BillAndBookingManagementPO {
         lanjutkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Lanjutkan");
         simpanButton = playwright.locatorByRoleSetName(locator.roleButton, "Simpan");
         okButton = playwright.locatorByRoleSetName(locator.roleButton, "OK");
+        roomAllotmentWrapper = "#roomAllotmentWrapper.modal.fade";
+
     }
 
     /**
      * Click on room number input
      */
     public void clickOnRoomNumberInput() throws InterruptedException {
-        int maxLoop = 0;
-        do {
-            maxLoop++;
+
+        try{
+            int maxLoop = 0;
+            do {
+                maxLoop++;
+                playwright.forceClickOn(nomorKamarInput);
+                page.waitForTimeout(3000);
+                if (maxLoop == 3)
+                    break;
+            }
+            while (!pilihDiTempatRadio.isVisible());
+        } catch (Exception e) {
             playwright.forceClickOn(nomorKamarInput);
-            Thread.sleep(1000);
-            if (maxLoop == 2)
-                break;
+            page.waitForSelector(roomAllotmentWrapper, new Page.WaitForSelectorOptions().setTimeout(3000));
         }
-        while (!pilihDiTempatRadio.isVisible());
     }
 
 

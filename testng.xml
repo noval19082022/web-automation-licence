@@ -2,6 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
 
+    <parameter name="squadName" value="essential-test"/>
     <test name="Base Test">
         <classes>
             <class name="runners.EssentialTestRunner"/>

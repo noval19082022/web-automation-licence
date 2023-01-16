@@ -94,7 +94,7 @@ public class PlaywrightHelpers {
      * @return String data type
      */
     public String getText(Locator locator) {
-        return locator.textContent();
+        return locator.textContent().trim();
     }
 
     //----- Get Part ----\\
