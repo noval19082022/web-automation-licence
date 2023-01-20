@@ -8,8 +8,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.admin.AdminMamipayDashboardPO;
-import pageobject.admin.SearchContractPO;
+import pageobject.admin.mamipay.AdminMamipayDashboardPO;
+import pageobject.admin.mamipay.contract.SearchContractPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;

@@ -4,10 +4,16 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 
+import java.util.List;
+
 public class PlaywrightHelpers {
     Page page;
     public PlaywrightHelpers(Page page) {
         this.page = page;
+    }
+
+    public void navigateTo(String url) {
+        page.navigate(url);
     }
 
     //----- Action Part ----\\
