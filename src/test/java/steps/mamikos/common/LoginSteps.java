@@ -5,10 +5,9 @@ import config.global.FlowControl;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageobject.admin.LoginAdminMamipayPO;
+import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.common.HomePO;
 
 import java.util.List;
@@ -21,20 +20,6 @@ public class LoginSteps {
     LoginAdminMamipayPO loginAdmin = new LoginAdminMamipayPO(page);
     private List<Map<String, String>> phoneNumberCredential;
     private List<Map<String, String>> emailCredential;
-
-    @Given("user go to mamikos homepage")
-    public void userGoToMamikosHomepage() {
-        page.navigate("https://jambu.kerupux.com");
-    }
-
-    @Given("admin go to mamikos mamipay admin")
-    public void adminGoToMamikosMamipayAdmin() {
-        page.navigate("https://pay-waras.kerupux.com/pin2blkang");
-    }
-
-    @Then("tenant redirect back to homepage")
-    public void tenantRedirectBackToHomepage() {
-    }
 
     @When("user login as tenant via phone number:")
     public void userLoginAsTenantViaPhoneNumber(DataTable table) {
