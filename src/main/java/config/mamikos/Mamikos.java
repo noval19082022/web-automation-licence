@@ -8,4 +8,5 @@ public class Mamikos {
     public static final String URL = JavaHelpers.getPropertyValue(MAMIKOS, "mainUrl_"+ ENV);
     public static final String GENERALPASSWORD = JavaHelpers.getPropertyValue(MAMIKOS, "generalPassword");
     public static final String ADMINEMAIL = JavaHelpers.getPropertyValue(MAMIKOS, "adminEmail");
+    public static final String ADMINMAMIPAY = JavaHelpers.getPropertyValue(MAMIKOS, "backoffice_"+ENV);
 }

@@ -1,4 +1,4 @@
-package pageobject.admin;
+package pageobject.admin.mamipay.contract;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -94,6 +94,4 @@ public class SearchContractPO {
     public String getSuccessTerminateHeadingText() {
         return playwright.getText(successTerminateText);
     }
-
-
 }
