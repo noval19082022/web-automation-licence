@@ -17,8 +17,9 @@ public class JavaHelpers {
 
     /**
      * get local date or time by it pattern
+     *
      * @param pattern desired pattern e.g "dd-MM-yyyy HH:mm:ss"
-     * visit following url for pattern detail https://www.w3schools.com/java/java_date.asp
+     *                visit following url for pattern detail https://www.w3schools.com/java/java_date.asp
      * @return String data type
      */
     public static String getCurrentDateOrTime(String pattern) {
@@ -46,12 +47,12 @@ public class JavaHelpers {
     // --- Get Part --- \\
     public static int getScreenHeight() {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        return (int)size.getHeight();
+        return (int) size.getHeight();
     }
 
     public static int getScreenWidth() {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        return (int)size.getWidth();
+        return (int) size.getWidth();
     }
     // --- Get Part --- \\
 
@@ -104,4 +105,17 @@ public class JavaHelpers {
         }
     }
     //-- File Prop Reader -- \\
+
+    //-- Number--\\
+
+    /**
+     * extract number from string given
+     *
+     * @param word is the String that we want to extract
+     *             Example : "Rp. 13.000 / bulan" > 13000
+     */
+    public static int extractNumber(String word) {
+        String str = word.replaceAll("[A-Z a-z . / : , ' ; ( ) -]", "").trim();
+        return Integer.parseInt(str);
+    }
 }
