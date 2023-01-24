@@ -33,7 +33,7 @@ public class TenantPaymentSteps {
     }
 
     @When("tenant apply voucher:")
-    public void tenantApplyVoucher(DataTable table) {
+    public void tenantApplyVoucher(DataTable table) throws InterruptedException {
         voucherName = table.asMaps(String.class, String.class);
         var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
         invoice.clickOnDeleteVoucher();
@@ -53,5 +53,14 @@ public class TenantPaymentSteps {
         var totalAfterDeduction = subTotal - voucherDeductionValue;
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue);
+    }
+
+    @Then("Voucher code has been used")
+    public void voucherCodeHasBeenUsed() {
+        if (invoice.waitUntilvoucherUsedTextVisible())
+        {
+            Assert.assertEquals(invoice.getVoucherUsedText().trim(), "Kode voucher tidak bisa digunakan.");
+        }
+        invoice.closeVoucherPopUp();
     }
 }

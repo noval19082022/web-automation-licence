@@ -2,6 +2,8 @@ package pageobject.admin.mamipay.voucher;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -24,7 +26,7 @@ public class MamikosVoucherFormPO {
         this.locator = new LocatorHelpers(page);
         applyKostContent = ".select2-selection__choice";
         applyKost = page.locator(applyKostContent);
-        kostNameApplied = page.locator(".select2-selection__choice__remove");
+        kostNameApplied = page.getByRole(AriaRole.LISTITEM).getByText("×");
         kostNameInput = page.getByPlaceholder("Search Kost by name...");
         editMassVoucherButton = playwright.locatorByRoleSetName(locator.roleButton, "Edit Mass Voucher");
         yesDoItButton = playwright.locatorByRoleSetName(locator.roleButton, "Yes, Do It!");
@@ -35,6 +37,7 @@ public class MamikosVoucherFormPO {
      * @return Kost name String List
      */
     public List<String> getAllApplyKostNameInnerText() {
+        page.waitForLoadState(LoadState.LOAD);
         return applyKost.allInnerTexts();
     }
 
