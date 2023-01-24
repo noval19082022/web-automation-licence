@@ -42,8 +42,9 @@ public class InvoicePO {
      * Wait for the page to be fully loaded before interacting with elements
      * Check if the "delete voucher" button is visible before clicking on it
      */
-    public void clickOnDeleteVoucher() {
+    public void clickOnDeleteVoucher() throws InterruptedException {
         page.waitForLoadState(LoadState.LOAD);
+        page.waitForTimeout(3000);
         if (deleteVoucher.isVisible()) {
             playwright.clickOn(deleteVoucher);
         }
