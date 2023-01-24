@@ -54,4 +54,13 @@ public class TenantPaymentSteps {
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue);
     }
+
+    @Then("Voucher code has been used")
+    public void voucherCodeHasBeenUsed() {
+        if (invoice.waitUntilvoucherUsedTextVisible())
+        {
+            Assert.assertEquals(invoice.getVoucherUsedText().trim(), "Kode voucher tidak bisa digunakan.");
+        }
+        invoice.closeVoucherPopUp();
+    }
 }
