@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -11,17 +12,21 @@ public class HomePO {
     private LocatorHelpers locatorHelpers;
     private Locator btnMasuk;
     private Locator cariButton;
+    private Locator mamikosLogo;
+
     public HomePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
+        mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
     }
 
     /**
      * Click on button masuk on home page
-      * @return LoginPO class
+     *
+     * @return LoginPO class
      */
     public LoginPO clickOnButtonMasuk() {
         btnMasuk.click();
@@ -30,10 +35,27 @@ public class HomePO {
 
     /**
      * Click on search button
+     *
      * @return SearchPO
      */
     public SearchPO clickOnSearchButton() {
         cariButton.click();
         return new SearchPO(page);
+    }
+
+    /**
+     * Wait till mamikos logo is visible
+     * @return boolean type
+     */
+    public boolean waitTillLogoIsVisible() {
+        return playwright.waitTillLocatorIsVisible(mamikosLogo, 30000.0);
+    }
+
+    /**
+     * Get mamikos logo
+     * @return Locator data type of mamikos logo
+     */
+    public Locator getMamikosLogo() {
+        return mamikosLogo;
     }
 }

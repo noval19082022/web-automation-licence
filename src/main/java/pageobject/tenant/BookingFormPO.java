@@ -22,9 +22,9 @@ public class BookingFormPO {
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
         this.lihatSelengkapnyaTextLink = page.getByText("Lihat selengkapnya").first();
-        this.batalkanBookingButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Booking"));
+        this.batalkanBookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Booking"));
         this.confirmCancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
-        this.successCancel =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
+        this.successCancel = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
         this.okCancelButton = page.locator(".bg-c-button");
         this.cancelReasonButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Berubah pikiran/ada rencana lain")).locator("span");
 
@@ -46,12 +46,15 @@ public class BookingFormPO {
 
     /**
      * click on kirim pengajuan ke pemilik button
+     *
      * @return SuccessBookingPO class;
      */
     public SuccessBookingPO clickOnKirimPengajuanKePemilik() {
         kirimPengajuanKePemilikButton.click();
         return new SuccessBookingPO(page);
-    };
+    }
+
+    ;
 
     /**
      * click on Lihat Selengkapnya
@@ -72,6 +75,7 @@ public class BookingFormPO {
 
     /**
      * Wait until terminated is process is finished
+     *
      * @return
      */
     public boolean waitUntilSuccessCancelHeadingVisible() {
@@ -80,6 +84,7 @@ public class BookingFormPO {
 
     /**
      * Get success cancel booking pop-up text
+     *
      * @return String data type
      */
     public String getSuccessCancelText() {
@@ -89,8 +94,8 @@ public class BookingFormPO {
     /**
      * Close booking pop-up
      */
-    public void closeCancelPopUp(){
-        if(okCancelButton.isVisible()){
+    public void closeCancelPopUp() {
+        if (okCancelButton.isVisible()) {
             okCancelButton.click();
         }
     }

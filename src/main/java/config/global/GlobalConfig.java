@@ -3,7 +3,7 @@ package config.global;
 import utilities.JavaHelpers;
 
 public class GlobalConfig {
-    private static final String GLOBAL_CONFIG_PROPERTIES ="src/main/resources/global-config.properties";
+    private static final String GLOBAL_CONFIG_PROPERTIES = "src/main/resources/global-config.properties";
     public static final String BROWSER_NAME = JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "browserName");
     public static final boolean HEADLESS = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "headless"));
     public static final boolean DEV_TOOLS = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "devTools"));

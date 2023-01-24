@@ -18,9 +18,9 @@ public class AdminContextInitializer {
      */
     public static void initializeAdminPage() {
         AdminContext.getAdminBrowserContext().tracing().start(new Tracing.StartOptions()
-            .setScreenshots(true)
-            .setSnapshots(true)
-            .setSources(false));
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(false));
         ActiveContext.setActivePage(AdminContext.getAdminBrowserContext().newPage());
     }
 }
