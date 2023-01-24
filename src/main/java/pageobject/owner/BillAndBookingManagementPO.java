@@ -15,7 +15,8 @@ public class BillAndBookingManagementPO {
     Locator lanjutkanButton;
     Locator simpanButton;
     Locator okButton;
-    String  roomAllotmentWrapper;
+    String roomAllotmentWrapper;
+
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -35,7 +36,7 @@ public class BillAndBookingManagementPO {
      */
     public void clickOnRoomNumberInput() throws InterruptedException {
 
-        try{
+        try {
             int maxLoop = 0;
             do {
                 maxLoop++;

@@ -14,7 +14,7 @@ import utilities.PlaywrightHelpers;
 import java.util.List;
 import java.util.Map;
 
-public class VoucherSteps {
+public class AdminMamipayVoucherSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     AdminMamipayDashboardPO mamipayAdmin = new AdminMamipayDashboardPO(page);
@@ -35,8 +35,7 @@ public class VoucherSteps {
         }
         if (voucherApplyRule.equalsIgnoreCase("apply")) {
             voucherForm.fillKostName(0, kostName);
-        }
-        else if (voucherApplyRule.equalsIgnoreCase("not apply")) {
+        } else if (voucherApplyRule.equalsIgnoreCase("not apply")) {
             voucherForm.fillKostName(1, kostName);
         }
         massVoucherList = voucherForm.doneEditMassVoucher();
@@ -45,7 +44,6 @@ public class VoucherSteps {
     @Then("admin can see message voucher is updated")
     public void adminCanSeeAlertMessageIsUpdated() throws InterruptedException {
         var voucher = voucherAndKostName.get(0).get("voucher name " + Mamikos.ENV);
-        Assert.assertEquals( massVoucherList.getCalloutText(),"Voucher " +voucher+ " updated");
-        Thread.sleep(10000);
+        Assert.assertEquals(massVoucherList.getCalloutText(), "Voucher " + voucher + " updated");
     }
 }

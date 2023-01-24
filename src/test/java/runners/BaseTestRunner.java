@@ -43,15 +43,15 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
     @Parameters({"squadName"})
     @AfterSuite(alwaysRun = true)
     public void afterSuite(String squadName) throws CluecumberException {
-        String jsonDirectory = "target/result/"+squadName;
-        String reportDirectory = "target/result/"+squadName+"/cluecumber_report";
+        String jsonDirectory = "target/result/" + squadName;
+        String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
         PlaywrightSourceManager.getLocalBrowser().close();
         PlaywrightSourceManager.getLocalPlaywright().close();
         new CluecumberCore.Builder()
-            .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
-            .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
-            .setCustomPageTitle(squadName+ "Report")
-            .setExpandAttachments(true)
-            .build().generateReports(jsonDirectory, reportDirectory);
+                .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
+                .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
+                .setCustomPageTitle(squadName + "Report")
+                .setExpandAttachments(true)
+                .build().generateReports(jsonDirectory, reportDirectory);
     }
 }
