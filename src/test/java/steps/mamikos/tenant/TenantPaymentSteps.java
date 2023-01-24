@@ -33,7 +33,7 @@ public class TenantPaymentSteps {
     }
 
     @When("tenant apply voucher:")
-    public void tenantApplyVoucher(DataTable table) {
+    public void tenantApplyVoucher(DataTable table) throws InterruptedException {
         voucherName = table.asMaps(String.class, String.class);
         var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
         invoice.clickOnDeleteVoucher();
