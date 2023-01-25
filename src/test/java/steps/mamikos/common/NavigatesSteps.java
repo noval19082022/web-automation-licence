@@ -4,6 +4,8 @@ import com.microsoft.playwright.Page;
 import config.global.FlowControl;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
+import config.playwright.context.OwnerContext;
+import config.playwright.context.TenantContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import pageobject.common.HomePO;
@@ -32,5 +34,15 @@ public class NavigatesSteps {
     @When("scenario is {string}")
     public void scenarioIsContinue(String isContinue) {
         FlowControl.setContinueFlow(isContinue.equalsIgnoreCase("continue"));
+    }
+
+    @Given("tenant open browser page {string}")
+    public void tenantOpenBrowserPage(String pageNumber) {
+        ActiveContext.setActivePage(TenantContext.getTenantBrowserContext().pages().get(Integer.parseInt(pageNumber)));
+    }
+
+    @When("owner open browser page {string}")
+    public void ownerOpenBrowserPage(String pageNumber) {
+        ActiveContext.setActivePage(OwnerContext.getOwnerBrowserContext().pages().get(Integer.parseInt(pageNumber)));
     }
 }

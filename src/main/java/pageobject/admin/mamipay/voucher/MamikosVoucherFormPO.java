@@ -76,4 +76,22 @@ public class MamikosVoucherFormPO {
         playwright.clickOn(yesDoItButton);
         return new MamikosListMassVoucherPO(page);
     }
+
+    /**
+     * Check on rules
+     * @param rules voucher rules
+     */
+    public void checkOnRules(String rules) {
+        Locator ruleLoc = page.getByLabel(rules);
+        ruleLoc.check();
+    }
+
+    /**
+     * Uncheck on rules
+     * @param rules voucher rules
+     */
+    public void unCheckOnRules(String rules) {
+        Locator ruleLoc = page.getByLabel(rules);
+        ruleLoc.uncheck();
+    }
 }
