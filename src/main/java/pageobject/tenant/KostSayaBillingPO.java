@@ -13,7 +13,7 @@ public class KostSayaBillingPO {
     public KostSayaBillingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        bayarButton = page.getByTestId("userKostClaim-list").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Bayar"));
+        bayarButton = page.locator(".payment-action > .bg-c-button").first();
     }
 
     /**
