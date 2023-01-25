@@ -1,6 +1,7 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import config.global.FlowControl;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.Given;
@@ -26,5 +27,10 @@ public class NavigatesSteps {
     @When("user navigate to tagihan kost saya")
     public void userNavigateToTagihanKostSaya() {
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING);
+    }
+
+    @When("scenario is {string}")
+    public void scenarioIsContinue(String isContinue) {
+        FlowControl.setContinueFlow(isContinue.equalsIgnoreCase("continue"));
     }
 }

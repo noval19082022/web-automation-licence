@@ -13,6 +13,7 @@ public class MamikosListMassVoucherPO {
     Locator searchButton;
     Locator editButton;
     Locator callout;
+    Locator editButtonWithNameId;
     public MamikosListMassVoucherPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -44,6 +45,16 @@ public class MamikosListMassVoucherPO {
      */
     public MamikosVoucherFormPO clickOnEditButton() {
         playwright.clickOn(editButton);
+        return new MamikosVoucherFormPO(page);
+    }
+
+    /**
+     * Click on edit button
+     * @return MamikosVoucherFormPO class
+     */
+    public MamikosVoucherFormPO clickOnEditButton(String voucherId, String voucherName) {
+        editButtonWithNameId = playwright.locatorByRoleSetName(AriaRole.ROW, voucherId + " " + voucherName).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(""));
+        playwright.clickOn(editButtonWithNameId);
         return new MamikosVoucherFormPO(page);
     }
 

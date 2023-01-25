@@ -35,17 +35,13 @@ public class BillAndBookingManagementPO {
      * Click on room number input
      */
     public void clickOnRoomNumberInput() throws InterruptedException {
-
         try {
             int maxLoop = 0;
-            do {
-                maxLoop++;
+            while (!pilihDiTempatRadio.isVisible() && maxLoop < 3) {
                 playwright.forceClickOn(nomorKamarInput);
                 page.waitForTimeout(3000);
-                if (maxLoop == 3)
-                    break;
+                maxLoop++;
             }
-            while (!pilihDiTempatRadio.isVisible());
         } catch (Exception e) {
             playwright.forceClickOn(nomorKamarInput);
             page.waitForSelector(roomAllotmentWrapper, new Page.WaitForSelectorOptions().setTimeout(3000));
