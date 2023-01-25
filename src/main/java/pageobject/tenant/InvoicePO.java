@@ -20,6 +20,8 @@ public class InvoicePO {
     String appliedVoucher;
     Locator toast;
     Locator invoiceSection;
+    Locator invalidVoucherIcon;
+    Locator hapusToastButton;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -35,6 +37,8 @@ public class InvoicePO {
         toast = page.locator(".bg-c-toast__content");
         deleteVoucher = page.locator("#invoiceContent .invoice-voucher-switch");
         invoiceSection = page.locator("invoiceBill");
+        invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
+        hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
     }
 
     /**
@@ -110,5 +114,20 @@ public class InvoicePO {
      */
     public String getToastText() {
         return playwright.getText(toast);
+    }
+
+    /**
+     * Check is icon "x" is visible
+     * @return boolean true or false
+     */
+    public boolean isInvalidVoucherIconVisible() {
+        return playwright.isLocatorVisibleAfterLoad(invalidVoucherIcon, 2000.0);
+    }
+
+    /**
+     * click on hapus in toast button
+     */
+    public void clickOnHapusInToast() {
+        playwright.clickOn(hapusToastButton);
     }
 }

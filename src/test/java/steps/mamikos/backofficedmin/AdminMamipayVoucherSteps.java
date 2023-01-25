@@ -6,6 +6,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
@@ -45,5 +46,26 @@ public class AdminMamipayVoucherSteps {
     public void adminCanSeeAlertMessageIsUpdated() throws InterruptedException {
         var voucher = voucherAndKostName.get(0).get("voucher name " + Mamikos.ENV);
         Assert.assertEquals(massVoucherList.getCalloutText(), "Voucher " + voucher + " updated");
+    }
+
+    @When("admin edit voucher with id name and {string} it to kost:")
+    public void adminEditVoucherWithIdNameAndApplyItToKost(String voucherApplyRule, DataTable table) throws InterruptedException {
+        voucherAndKostName = table.asMaps(String.class, String.class);
+        var voucher = voucherAndKostName.get(0).get("voucher name " + Mamikos.ENV);
+        var kostName = voucherAndKostName.get(0).get("kost name " + Mamikos.ENV);
+        var voucherId = voucherAndKostName.get(0).get("voucher id " + Mamikos.ENV);
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton(voucherId, voucher);
+        if (voucherForm.getAllApplyKostNameInnerText().size() >= 1) {
+            voucherForm.removeKostName();
+        }
+        if (voucherApplyRule.equalsIgnoreCase("apply")) {
+            voucherForm.fillKostName(0, kostName);
+        } else if (voucherApplyRule.equalsIgnoreCase("not apply")) {
+            voucherForm.fillKostName(1, kostName);
+        }
+        massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }

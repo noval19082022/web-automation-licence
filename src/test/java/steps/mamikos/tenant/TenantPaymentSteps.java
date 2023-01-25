@@ -1,5 +1,6 @@
 package steps.mamikos.tenant;
 
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.mamikos.Mamikos;
@@ -53,5 +54,23 @@ public class TenantPaymentSteps {
         var totalAfterDeduction = subTotal - voucherDeductionValue;
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue);
+        ActiveContext.getActiveBrowserContext().pages().get(1).close();
+    }
+
+    @Then("tenant can not use the voucher")
+    public void tenantCanNotUseTheVoucher() {
+        Assert.assertEquals(invoice.getToastText(), "Kode voucher tidak bisa digunakan. "+ System.lineSeparator() +"    Silakan hapus voucher.");
+        Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
+    }
+
+    @When("tenant remove voucher by toast message")
+    public void tenantRemoveVoucherByToastMessage() {
+        invoice = new InvoicePO(ActiveContext.getActiveBrowserContext().pages().get(1));
+        invoice.clickOnHapusInToast();
+    }
+
+    @Then("tenant can see voucher is deleted")
+    public void tenantCanSeeVoucherIsDeleted() {
+        Assert.assertEquals(invoice.getToastText(), "Voucher Dihapus", "Voucher toast must appear after voucher is deleted");
     }
 }
