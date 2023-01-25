@@ -2,6 +2,7 @@ package pageobject.tenant;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -22,6 +23,8 @@ public class InvoicePO {
     Locator invoiceSection;
     Locator invalidVoucherIcon;
     Locator hapusToastButton;
+    Locator voucherWarningText;
+    Locator closeVoucherPopUpButton;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -39,6 +42,9 @@ public class InvoicePO {
         invoiceSection = page.locator("invoiceBill");
         invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
         hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
+        voucherWarningText = page.getByTestId("warning_txt");
+        closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+
     }
 
     /**
@@ -70,6 +76,7 @@ public class InvoicePO {
 
     /**
      * Fill in the voucher ID input field with the provided voucher ID
+     *
      * @param voucherIdName String data type of voucher id name
      */
     public void fillVoucherID(String voucherIdName) {
@@ -85,6 +92,7 @@ public class InvoicePO {
 
     /**
      * Extract the numerical value of the "total pembayaran" text and return it
+     *
      * @return int data type
      */
     public int getTotalPembayaran() {
@@ -93,6 +101,7 @@ public class InvoicePO {
 
     /**
      * Extract the numerical value of the "subtotal" text and return it
+     *
      * @return int data type
      */
     public int getSubTotal() {
@@ -101,6 +110,7 @@ public class InvoicePO {
 
     /**
      * Extract the numerical value of the "voucher reduction price" text for the given voucher code and return it
+     *
      * @param voucherCodeName string data type of voucher code name
      * @return int data type
      */
@@ -110,10 +120,39 @@ public class InvoicePO {
 
     /**
      * Return the text of the toast message
+     *
      * @return String data type
      */
     public String getToastText() {
         return playwright.getText(toast);
+    }
+
+    /**
+     * Wait until voucher warning text appear
+     *
+     * @return
+     */
+    public boolean waitUntilvoucherUsedTextVisible() {
+        return voucherWarningText.isVisible();
+    }
+
+    /**
+     * Get success Voucher User Text text
+     *
+     * @return String data type
+     */
+    public String getVoucherUsedText() {
+        return playwright.getText(voucherWarningText);
+    }
+
+    /**
+     * Click on the "close button" in the voucher pop-up
+     */
+    public void closeVoucherPopUp() {
+        for (int i = 0; i < 2; i++) {
+            closeVoucherPopUpButton.click();
+        }
+
     }
 
     /**

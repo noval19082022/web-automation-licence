@@ -73,4 +73,13 @@ public class TenantPaymentSteps {
     public void tenantCanSeeVoucherIsDeleted() {
         Assert.assertEquals(invoice.getToastText(), "Voucher Dihapus", "Voucher toast must appear after voucher is deleted");
     }
+
+    @Then("Voucher code has been used")
+    public void voucherCodeHasBeenUsed() {
+        if (invoice.waitUntilvoucherUsedTextVisible())
+        {
+            Assert.assertEquals(invoice.getVoucherUsedText().trim(), "Kode voucher tidak bisa digunakan.");
+        }
+        invoice.closeVoucherPopUp();
+    }
 }
