@@ -142,8 +142,6 @@ public class AdminMamipayVoucherSteps {
         voucherEdit.fillCampaignVoucher(voucher);
         voucherEdit.clickOnSearchButton();
         var voucherForm = voucherEdit.clickOnEditButton();
-        System.out.println(voucherForm.applicableEmailContent());
-        System.out.println(voucherForm.notApplicableForEmailContent());
         if (apply.equalsIgnoreCase("apply") && !voucherForm.applicableEmailContent().equalsIgnoreCase(targetEmail)) {
             voucherForm.fillNotApplicableForEmail("");
             voucherForm.fillApplicableForEmail(targetEmail);
