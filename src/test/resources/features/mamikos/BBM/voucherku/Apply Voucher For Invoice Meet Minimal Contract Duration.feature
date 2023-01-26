@@ -1,0 +1,16 @@
+@regression @voucher @BBM7
+
+@TEST_BBM-609
+Feature: Apply Voucher For Invoice Meet Minimal Contract Duration
+
+  Scenario: Invoice Yearly and Voucher For Quarterly
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     |  phone prod        | password      |
+      | 0890867321217  |  0890867321217     | mamikosqa123  |
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | AUTOQUARTERLY     | AUTOQUARTERLY     |
+    Then tenant can see voucher is applied

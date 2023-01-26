@@ -8,7 +8,8 @@ public class BrowserInitialize {
 
     /**
      * Get browser
-     * @param browserName broser name supported by playwright
+     *
+     * @param browserName   broser name supported by playwright
      * @param launchOptions
      * @return Browser playwrigh
      */
@@ -19,7 +20,8 @@ public class BrowserInitialize {
             case "chrome" -> browserType = PlaywrightSourceManager.getLocalPlaywright().chromium();
             case "firefox" -> browserType = PlaywrightSourceManager.getLocalPlaywright().firefox();
             case "webkit" -> browserType = PlaywrightSourceManager.getLocalPlaywright().webkit();
-            default -> throw new RuntimeException("Unsupported playwright browser: " + browserName + " use these name instead chrome, firefox, webkit");
+            default ->
+                    throw new RuntimeException("Unsupported playwright browser: " + browserName + " use these name instead chrome, firefox, webkit");
         }
 
         assert browserType != null;

@@ -1,0 +1,29 @@
+package pageobject.tenant;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import utilities.PlaywrightHelpers;
+
+public class KostSayaBillingPO {
+    private Page page;
+    private PlaywrightHelpers playwright;
+    private Locator bayarButton;
+
+    public KostSayaBillingPO(Page page) {
+        this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
+        bayarButton = page.locator(".payment-action > .bg-c-button").first();
+    }
+
+    /**
+     * This method clicks on the "bayar" button and
+     * @return  a new page object of type "InvoicePO".
+     * It also waits for a popup before performing the click action.
+     */
+    public InvoicePO clickOnBayarButton() {
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(bayarButton);
+        });
+        return new InvoicePO(page);
+    }
+}

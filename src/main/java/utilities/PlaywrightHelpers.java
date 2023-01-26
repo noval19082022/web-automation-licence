@@ -3,17 +3,57 @@ package utilities;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
+import com.microsoft.playwright.options.LoadState;
 
 public class PlaywrightHelpers {
     Page page;
+
     public PlaywrightHelpers(Page page) {
         this.page = page;
+    }
+
+    /**
+     * This method navigates to a specified URL
+     * default timeout
+     */
+    public void navigateTo(String url) {
+        page.navigate(url);
+    }
+
+    /**
+     * This method navigates to a specified URL with a specified timeout for the navigation to complete.
+     * @param url String data type of URL format
+     * @param timeout Double data type of specific timeout
+     */
+    public void navigateTo(String url, Double timeout) {
+        page.navigate(url, new Page.NavigateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
+     * @param url String data type of URL format
+     * @param state The load state to wait for before navigating.
+     */
+    public void navigateTo(String url, Double timeout, LoadState state) {
+        page.waitForLoadState(state);
+        page.navigate(url, new Page.NavigateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
+     * @param url String data type of URL format
+     * @param locator The locator to wait for.
+     */
+    public void navigateToAndWaitLocator(String url, Locator locator) {
+        page.navigate(url);
+        locator.waitFor();
     }
 
     //----- Action Part ----\\
 
     /**
      * Click on a desired locator
+     *
      * @param locator target locator
      */
     public void clickOn(Locator locator) {
@@ -23,6 +63,7 @@ public class PlaywrightHelpers {
     /**
      * Force click on desired locator
      * Use this method for locator that have disabled set to true
+     *
      * @param locator target locator
      */
     public void forceClickOn(Locator locator) {
@@ -31,7 +72,8 @@ public class PlaywrightHelpers {
 
     /**
      * Delay and then click to a locator
-     * @param locator Locator data type
+     *
+     * @param locator   Locator data type
      * @param delayTime Delay time in millisecond Double data type
      */
     public void delayAndClickOn(Locator locator, Double delayTime) {
@@ -40,6 +82,7 @@ public class PlaywrightHelpers {
 
     /**
      * Double-click on a desired locator
+     *
      * @param locator target locator
      */
     public void doubleClick(Locator locator) {
@@ -60,8 +103,9 @@ public class PlaywrightHelpers {
 
     /**
      * Select dropdown by value
+     *
      * @param locator Locator type
-     * @param value String data type
+     * @param value   String data type
      */
     public void selectDropdownByValue(Locator locator, String value) {
         locator.selectOption(value);
@@ -80,8 +124,9 @@ public class PlaywrightHelpers {
 
     /**
      * Get locator attribute value
+     *
      * @param locator target locator
-     * @param att target attribute
+     * @param att     target attribute
      * @return String data type
      */
     public String getAttributeValue(Locator locator, String att) {
@@ -90,6 +135,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get text content of an locator
+     *
      * @param locator target locator
      * @return String data type
      */
@@ -100,10 +146,12 @@ public class PlaywrightHelpers {
     //----- Get Part ----\\
 
     //---- Wait Part ----\\
+
     /**
      * Wait for element state to be
+     *
      * @param locator target locator
-     * @param state visible, hidden, stable, enabled, disabled, editable
+     * @param state   visible, hidden, stable, enabled, disabled, editable
      */
     public void waitForElementStateToBe(Locator locator, String state) {
         locator.elementHandle().waitForElementState(ElementState.valueOf(state.toUpperCase()));
@@ -111,8 +159,9 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for element state to be
+     *
      * @param locator target locator
-     * @param state visible, hidden, stable, enabled, disabled, editable
+     * @param state   visible, hidden, stable, enabled, disabled, editable
      * @Param timeout wait timeout on milisecond
      */
     public void waitForElementStateToBe(Locator locator, String state, Double timeout) {
@@ -122,6 +171,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait until url to be
+     *
      * @param url String data type url format
      * @return String data type URL
      */
@@ -132,11 +182,12 @@ public class PlaywrightHelpers {
 
     /**
      * Wait until url to be with timeout
-     * @param url String data type url format
+     *
+     * @param url      String data type url format
      * @param waitTime Double type
      * @return String data type URL
      */
-    public String waitTillUrlToBe(String url,Double waitTime) {
+    public String waitTillUrlToBe(String url, Double waitTime) {
         page.waitForURL(url, new Page.WaitForURLOptions().setTimeout(waitTime));
         return page.url();
     }
@@ -148,6 +199,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait until element locator is visible
+     *
      * @param locator Locator type
      * @return boolean
      */
@@ -157,6 +209,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait until element locator is visible
+     *
      * @param locator Locator type
      * @param timeout Double type
      * @return boolean
@@ -164,14 +217,21 @@ public class PlaywrightHelpers {
     public boolean waitTillLocatorIsVisible(Locator locator, Double timeout) {
         return locator.isVisible(new Locator.IsVisibleOptions().setTimeout(timeout));
     }
+
+    public boolean isLocatorVisibleAfterLoad(Locator locator, Double timeout) {
+        page.waitForLoadState(LoadState.LOAD);
+        page.waitForTimeout(timeout);
+        return locator.isVisible();
+    }
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
 
     /**
      * Filter html tag locator that contains target text
+     *
      * @param locator Locator data type
-     * @param text target text
+     * @param text    target text
      * @return Locator data type
      */
     public Locator filterLocatorHasText(Locator locator, String text) {
@@ -180,7 +240,8 @@ public class PlaywrightHelpers {
 
     /**
      * Get locator set by role and name
-     * @param role AriaRole e.g AriaRole.BUTTON
+     *
+     * @param role    AriaRole e.g AriaRole.BUTTON
      * @param setName name of the button
      * @return Locator data type
      */
@@ -190,6 +251,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get locator by role and by text
+     *
      * @param role AriaRole
      * @param text Text data type string
      * @return Locator type

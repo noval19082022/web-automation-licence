@@ -38,43 +38,35 @@ public class Hooks{
         }
 
         if (!(scenario.getSourceTagNames().contains("@tenant") || scenario.getSourceTagNames().contains("admin") || scenario.getSourceTagNames().contains("owner"))) {
-            UserContextInitializer.initializeUserBrowserContext();
-            UserContextInitializer.initializeUserPage();
-            ActiveContext.setActiveBrowserContext(UserContext.getUserBrowserContext());
-            FlowControl.setStrictFlow(true);
+            // Check if the active browser context is null or flow control is not set to continue
+            if (ActiveContext.getActiveBrowserContext() == null || !FlowControl.getContinueFlow()) {
+                UserContextInitializer.initializeUserBrowserContext();
+                UserContextInitializer.initializeUserPage();
+                ActiveContext.setActiveBrowserContext(UserContext.getUserBrowserContext());
+                FlowControl.setStrictFlow(true);
+            }
         }
         System.out.println(scenario.getName() + " is started");
     }
 
     /**
      * Will invoke after every scenario
+     *
      * @param scenario method
      */
     @After
     public void cleanUp(Scenario scenario) {
         if (scenario.isFailed()) {
-            byte[] screenshotBytes = ActiveContext.getActivePage().screenshot();
-            scenario.attach(screenshotBytes, "image/png", scenario.getName());
+            scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
             ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
-                    .setPath(Paths.get("target/trace/"+scenario.getName().replace(" ", "-").toLowerCase()+"-trace.zip")));
+                    .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
         }
 
-        if (!scenario.getSourceTagNames().contains("@continue")) {
-            if (TenantContext.getTenantBrowserContext()!= null) {
-                TenantContext.getTenantBrowserContext().close();
-            }
-
-            if (OwnerContext.getOwnerBrowserContext() != null) {
-                OwnerContext.getOwnerBrowserContext().close();
-            }
-
-            if (AdminContext.getAdminBrowserContext() != null) {
-                AdminContext.getAdminBrowserContext().close();
-            }
-
-            if (FlowControl.getStrictFlow()) {
-                UserContext.getUserBrowserContext().close();
-            }
+        if (!FlowControl.getContinueFlow()) {
+            if (TenantContext.getTenantBrowserContext() != null) TenantContext.getTenantBrowserContext().close();
+            if (OwnerContext.getOwnerBrowserContext() != null) OwnerContext.getOwnerBrowserContext().close();
+            if (AdminContext.getAdminBrowserContext() != null) AdminContext.getAdminBrowserContext().close();
+            if (UserContext.getUserBrowserContext() != null) UserContext.getUserBrowserContext().close();
         }
         System.out.println(scenario.getName() + " is finished");
     }
