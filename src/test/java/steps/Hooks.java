@@ -19,24 +19,21 @@ public class Hooks{
     public void setup(Scenario scenario) {
         for (String context : scenario.getSourceTagNames()) {
             switch (context) {
-                case "@tenant" -> {
+                case "@tenant":
                     System.out.println("tenant init");
                     TenantContextInitializer.initializeTenantBrowserContext();
                     TenantContextInitializer.initializeTenantPage();
                     break;
-                }
-                case "@owner" -> {
+                case "@owner":
                     System.out.println("owner init");
                     OwnerContextInitializer.initializeOwnerBrowserContext();
                     OwnerContextInitializer.initializeOwnerPage();
                     break;
-                }
-                case "@admin" -> {
+                case "@admin":
                     System.out.println("admin init");
                     AdminContextInitializer.initializeAdminBrowserContext();
                     AdminContextInitializer.initializeAdminPage();
                     break;
-                }
             }
         }
 
