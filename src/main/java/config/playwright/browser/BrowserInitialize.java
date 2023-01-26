@@ -17,11 +17,17 @@ public class BrowserInitialize {
         BrowserType browserType = null;
 
         switch (browserName.toLowerCase()) {
-            case "chrome" -> browserType = PlaywrightSourceManager.getLocalPlaywright().chromium();
-            case "firefox" -> browserType = PlaywrightSourceManager.getLocalPlaywright().firefox();
-            case "webkit" -> browserType = PlaywrightSourceManager.getLocalPlaywright().webkit();
-            default ->
-                    throw new RuntimeException("Unsupported playwright browser: " + browserName + " use these name instead chrome, firefox, webkit");
+            case "chrome":
+                browserType = PlaywrightSourceManager.getLocalPlaywright().chromium();
+                break;
+            case "firefox":
+                browserType = PlaywrightSourceManager.getLocalPlaywright().firefox();
+                break;
+            case "webkit":
+                browserType = PlaywrightSourceManager.getLocalPlaywright().webkit();
+                break;
+            default:
+                throw new RuntimeException("Unsupported playwright browser: " + browserName + " use these name instead chrome, firefox, webkit");
         }
 
         assert browserType != null;

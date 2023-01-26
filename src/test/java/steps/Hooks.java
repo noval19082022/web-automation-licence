@@ -23,16 +23,19 @@ public class Hooks{
                     System.out.println("tenant init");
                     TenantContextInitializer.initializeTenantBrowserContext();
                     TenantContextInitializer.initializeTenantPage();
+                    break;
                 }
                 case "@owner" -> {
                     System.out.println("owner init");
                     OwnerContextInitializer.initializeOwnerBrowserContext();
                     OwnerContextInitializer.initializeOwnerPage();
+                    break;
                 }
                 case "@admin" -> {
                     System.out.println("admin init");
                     AdminContextInitializer.initializeAdminBrowserContext();
                     AdminContextInitializer.initializeAdminPage();
+                    break;
                 }
             }
         }
