@@ -21,6 +21,7 @@ public class MamikosVoucherFormPO {
     Locator editMassVoucherButton;
     Locator yesDoItButton;
     Locator professionOption;
+    Locator inputMinimumPrice;
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -32,6 +33,7 @@ public class MamikosVoucherFormPO {
         editMassVoucherButton = playwright.locatorByRoleSetName(locator.roleButton, "Edit Mass Voucher");
         yesDoItButton = playwright.locatorByRoleSetName(locator.roleButton, "Yes, Do It!");
         professionOption = page.locator("select[name='applicable_group[profession]']");
+        inputMinimumPrice = page.locator("input[name='voucher_min_amount']");
     }
 
     /**
@@ -103,5 +105,13 @@ public class MamikosVoucherFormPO {
      */
     public void selectProfession(String profession) {
         professionOption.selectOption(profession.toLowerCase());
+    }
+
+    /**
+     * Fill minimum transaction
+     * @param minimumTransaction data string type of minimum transaction
+     */
+    public void fillMinimumTransaction(String minimumTransaction) {
+        inputMinimumPrice.fill(minimumTransaction);
     }
 }

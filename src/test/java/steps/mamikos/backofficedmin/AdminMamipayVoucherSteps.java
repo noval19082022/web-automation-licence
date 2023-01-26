@@ -23,6 +23,7 @@ public class AdminMamipayVoucherSteps {
     List<Map<String, String>> voucherAndKostName;
     List<Map<String, String>> voucherAndRules;
     List<Map<String, String>> voucherAndProfession;
+    List<Map<String, String>> voucherAndMinimumTransaction;
     List<Map<String, String>> voucherList;
 
     @And("admin edit voucher and {string} it to kost:")
@@ -115,6 +116,19 @@ public class AdminMamipayVoucherSteps {
         voucherEdit.clickOnSearchButton();
         var voucherForm = voucherEdit.clickOnEditButton();
         voucherForm.selectProfession(profession);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @When("admin edit voucher with name and set minimum transaction:")
+    public void adminEditVoucherWithNameAndSetMinimumTransaction(DataTable table) {
+        voucherAndMinimumTransaction = table.asMaps(String.class, String.class);
+        var voucher = voucherAndMinimumTransaction.get(0).get("voucher name " + Mamikos.ENV);
+        var minimumTransaction = voucherAndMinimumTransaction.get(0).get("minimum transaction");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.fillMinimumTransaction(minimumTransaction);
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }

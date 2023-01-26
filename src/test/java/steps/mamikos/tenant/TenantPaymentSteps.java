@@ -81,4 +81,10 @@ public class TenantPaymentSteps {
         }
         invoice.closeVoucherPopUp();
     }
+
+    @Then("tenant can not use voucher with message {string}")
+    public void tenantCanNotUseVoucheWithMessage(String errorMessage) {
+        Assert.assertEquals(invoice.getToastText(), errorMessage + System.lineSeparator() +"    Silakan hapus voucher.");
+        Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
+    }
 }
