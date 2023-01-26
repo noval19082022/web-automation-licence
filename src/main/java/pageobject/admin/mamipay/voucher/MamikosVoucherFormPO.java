@@ -22,6 +22,8 @@ public class MamikosVoucherFormPO {
     Locator yesDoItButton;
     Locator professionOption;
     Locator inputMinimumPrice;
+    Locator targetEmailNotApplicableInput;
+    Locator targeEmailApplyInput;
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -34,6 +36,8 @@ public class MamikosVoucherFormPO {
         yesDoItButton = playwright.locatorByRoleSetName(locator.roleButton, "Yes, Do It!");
         professionOption = page.locator("select[name='applicable_group[profession]']");
         inputMinimumPrice = page.locator("input[name='voucher_min_amount']");
+        targetEmailNotApplicableInput = page.locator("(//textarea[@class='form-control input-email'])[2]");
+        targeEmailApplyInput = page.locator("(//textarea[@class='form-control input-email'])[1]");
     }
 
     /**
@@ -113,5 +117,37 @@ public class MamikosVoucherFormPO {
      */
     public void fillMinimumTransaction(String minimumTransaction) {
         inputMinimumPrice.fill(minimumTransaction);
+    }
+
+    /**
+     * Fill not apply for tenant email
+     * @param email tenant target email
+     */
+    public void fillNotApplicableForEmail(String email) {
+        targetEmailNotApplicableInput.fill(email);
+    }
+
+    /**
+     * Fill apply for tenant email
+     * @param targetEmail tenant target email
+     */
+    public void fillApplicableForEmail(String targetEmail) {
+        targeEmailApplyInput.fill(targetEmail);
+    }
+
+    /**
+     * Get tenant email from applicable email for tenant input
+     * @return String data type of tenant email
+     */
+    public String applicableEmailContent() {
+        return targeEmailApplyInput.textContent();
+    }
+
+    /**
+     * Get tenant email from not applicable email for tenant input
+     * @return String data type of tenant email
+     */
+    public String notApplicableForEmailContent() {
+        return targetEmailNotApplicableInput.textContent();
     }
 }

@@ -24,6 +24,7 @@ public class AdminMamipayVoucherSteps {
     List<Map<String, String>> voucherAndRules;
     List<Map<String, String>> voucherAndProfession;
     List<Map<String, String>> voucherAndMinimumTransaction;
+    List<Map<String, String>> voucherAndTargetEmail;
     List<Map<String, String>> voucherList;
 
     @And("admin edit voucher and {string} it to kost:")
@@ -129,6 +130,27 @@ public class AdminMamipayVoucherSteps {
         voucherEdit.clickOnSearchButton();
         var voucherForm = voucherEdit.clickOnEditButton();
         voucherForm.fillMinimumTransaction(minimumTransaction);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @When("admin edit voucher with name and {string} target email:")
+    public void adminEditVoucherWithNameAndSetTargetEmail(String apply, DataTable table) {
+        voucherAndTargetEmail = table.asMaps(String.class, String.class);
+        var voucher = voucherAndTargetEmail.get(0).get("voucher name " + Mamikos.ENV);
+        var targetEmail = voucherAndTargetEmail.get(0).get("target email");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        System.out.println(voucherForm.applicableEmailContent());
+        System.out.println(voucherForm.notApplicableForEmailContent());
+        if (apply.equalsIgnoreCase("apply") && !voucherForm.applicableEmailContent().equalsIgnoreCase(targetEmail)) {
+            voucherForm.fillNotApplicableForEmail("");
+            voucherForm.fillApplicableForEmail(targetEmail);
+        } else if (apply.equalsIgnoreCase("not apply") && !voucherForm.notApplicableForEmailContent().equalsIgnoreCase(targetEmail)) {
+            voucherForm.fillApplicableForEmail("");
+            voucherForm.fillNotApplicableForEmail(targetEmail);
+        }
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }
