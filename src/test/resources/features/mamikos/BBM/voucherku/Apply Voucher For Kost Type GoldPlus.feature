@@ -12,23 +12,23 @@ Feature: Apply Voucher For Kost Type GoldPlus
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOGP1       | AUTOGP1       |
+      | AUTOGP1       | AUTOGP1               |
     Then tenant can see voucher is applied
 
-#  Scenario: Tenant Apply Voucher Not Applicable for Kost Type GoldPlus 1
+  Scenario: Tenant Apply Voucher Not Applicable for Kost Type GoldPlus 1
     And tenant apply voucher:
-      | voucher name stag | voucher name prod |
-      | AUTOVNAGP1         | AUTOVNAGP1       |
+      | voucher name stag   | voucher name prod |
+      | AUTOVNAGP1          | AUTOVNAGP1        |
     Then Voucher code has been used
 
-#  Scenario: Tenant Apply Voucher Applicable for Kost City
+  Scenario: Tenant Apply Voucher Applicable for Kost City
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
-      | AUTOKOSTCITY              | AUTOKOSTCITY          |
+      | AUTOKOSTCITY              | AUTOKOSTCITY      |
     Then tenant can see voucher is applied
 
-#  Scenario: Tenant Apply Voucher Not Applicable for Kost City
+  Scenario: Tenant Apply Voucher Not Applicable for Kost City
     And tenant apply voucher:
-      | voucher name stag | voucher name prod |
-      | AUTOVNAKOSTCITY         | AUTOVNAKOSTCITY       |
+      | voucher name stag | voucher name prod       |
+      | AUTOVNAKOSTCITY         | AUTOVNAKOSTCITY   |
     Then Voucher code has been used

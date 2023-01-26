@@ -14,85 +14,85 @@ Feature: Apply Voucher For Invoice Reccuring
       | VTOTALUSAGE       | VTOTALUSAGE       |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid and Recurring
+  Scenario: Invoice Reccuring and Voucher For First Full Paid and Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VBOOKINGANDRECC1        | VBOOKINGANDRECC1    |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid and Settlement
+  Scenario: Invoice Reccuring and Voucher For First Full Paid and Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VBOOKINGANDSETT1        | VBOOKINGANDSETT1    |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For Recurring
+  Scenario: Invoice Reccuring and Voucher For Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VRECONLY1               | VRECONLY1           |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For Settlement
+  Scenario: Invoice Reccuring and Voucher For Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VSETTONLY1              | VSETTONLY1          |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For Recurring and Settlement
+  Scenario: Invoice Reccuring and Voucher For Recurring and Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VRECCANDSETT1           | VRECCANDSETT1       |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid, Reccuring, and Settlement
+  Scenario: Invoice Reccuring and Voucher For First Full Paid, Reccuring, and Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VBOOKRECCSETT1          | VBOOKRECCSETT1      |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First DP
+  Scenario: Invoice Reccuring and Voucher For First DP
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VDPONLY1                | VDPONLY1            |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For First DP and First Full Paid
+  Scenario: Invoice Reccuring and Voucher For First DP and First Full Paid
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VFPANDDP1               | VFPANDDP1           |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For First DP and Settlement
+  Scenario: Invoice Reccuring and Voucher For First DP and Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VDPANDSETT1             | VDPANDSETT1         |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For First DP and Recurring
+  Scenario: Invoice Reccuring and Voucher For First DP and Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VDPANDRECC1             | VDPANDRECC1         |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, and Settlement
+  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, and Settlement
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VFPDPANDSETT1           | VFPDPANDSETT1       |
     Then Voucher code has been used
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, and Recurring
+  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, and Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VFPDPANDREC1            | VFPDPANDREC1        |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First DP, Settlement, and Recurring
+  Scenario: Invoice Reccuring and Voucher For First DP, Settlement, and Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VDPSETTANDREC1          | VDPSETTANDREC1      |
     Then tenant can see voucher is applied
 
-#  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, Settlement, and Recurring
+  Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, Settlement, and Recurring
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | VALLPRULES1             | VALLPRULES1         |

@@ -12,12 +12,12 @@ Feature: Apply Voucher For Kost Type Mamirooms
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOMAMIROOM       | AUTOMAMIROOM       |
+      | AUTOMAMIROOM       | AUTOMAMIROOM     |
     Then tenant can see voucher is applied
 
     #BBM-683
-#  Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms
+  Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOVNAMAMIROOM         | AUTOVNAMAMIROOM       |
+      | AUTOVNAMAMIROOM   | AUTOVNAMAMIROOM   |
     Then Voucher code has been used
