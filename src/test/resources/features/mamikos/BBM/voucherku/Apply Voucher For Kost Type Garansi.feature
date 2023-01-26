@@ -16,8 +16,8 @@ Feature: Apply Voucher For Kost Type Garansi
     Then tenant can see voucher is applied
 
 #    BBM-749
-#  Scenario: Tenant Apply Voucher Not Applicable for Kost Type Garansi
+  Scenario: Tenant Apply Voucher Not Applicable for Kost Type Garansi
     And tenant apply voucher:
-      | voucher name stag | voucher name prod |
-      | AUTOVNAGARANSI         | AUTOVNAGARANSI       |
+      | voucher name stag | voucher name prod     |
+      | AUTOVNAGARANSI         | AUTOVNAGARANSI   |
     Then Voucher code has been used

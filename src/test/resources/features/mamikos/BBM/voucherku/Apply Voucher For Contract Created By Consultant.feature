@@ -17,41 +17,41 @@ Feature: Apply Voucher For Contract Created By Consultant
     Then tenant can see voucher is applied
 
 #  BBM-684
-#  Scenario: Tenant Apply Voucher with Contract Rules from Owner
+  Scenario: Tenant Apply Voucher with Contract Rules from Owner
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOOWNER         | AUTOOWNER       |
     Then Voucher code has been used
 
 #  BBM-677
-#  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
+  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | AUTOBOOKFUNNEL          | AUTOBOOKFUNNEL      |
     Then Voucher code has been used
 
-#  Scenario: Tenant Apply Voucher with Contract Rules from Tenant
+  Scenario: Tenant Apply Voucher with Contract Rules from Tenant
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
       | AUTOTENANT              | AUTOTENANT          |
     Then Voucher code has been used
 
-#  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Consultant
+  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Consultant
     And tenant apply voucher:
       | voucher name stag       | voucher name prod   |
-      | AUTOFUNNELCONS              | AUTOFUNNELCONS          |
+      | AUTOFUNNELCONS              | AUTOFUNNELCONS  |
     Then tenant can see voucher is applied
 
-#  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Owner
+  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Owner
     And tenant apply voucher:
       | voucher name stag             | voucher name prod         |
       | AUTOFUNNELOWNER               | AUTOFUNNELOWNER           |
     Then Voucher code has been used
 
 #  BBM-675
-#  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
+  Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
     And tenant apply voucher:
-      | voucher name stag             | voucher name prod         |
+      | voucher name stag             | voucher name prod        |
       | AUTOFUNOWNCONS                | AUTOFUNOWNCONS           |
     Then tenant can see voucher is applied
 
