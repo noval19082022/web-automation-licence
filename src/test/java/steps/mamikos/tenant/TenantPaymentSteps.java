@@ -1,6 +1,5 @@
 package steps.mamikos.tenant;
 
-import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.mamikos.Mamikos;

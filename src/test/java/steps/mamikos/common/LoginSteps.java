@@ -5,7 +5,6 @@ import config.global.FlowControl;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.common.HomePO;

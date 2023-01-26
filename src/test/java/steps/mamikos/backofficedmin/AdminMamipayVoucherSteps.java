@@ -21,6 +21,7 @@ public class AdminMamipayVoucherSteps {
     AdminMamipayDashboardPO mamipayAdmin = new AdminMamipayDashboardPO(page);
     MamikosListMassVoucherPO massVoucherList = null;
     List<Map<String, String>> voucherAndKostName;
+    List<Map<String, String>> voucherAndRules;
 
     @And("admin edit voucher and {string} it to kost:")
     public void adminEditVoucherAndApplyItToKost(String voucherApplyRule, DataTable table) throws InterruptedException {
@@ -66,6 +67,40 @@ public class AdminMamipayVoucherSteps {
         } else if (voucherApplyRule.equalsIgnoreCase("not apply")) {
             voucherForm.fillKostName(1, kostName);
         }
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @When("admin edit voucher with name and set payment rules:")
+    public void adminEditVoucherWithNameAndSetPaymentRules(DataTable table) {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var rule = voucherAndRules.get(0).get("voucher rule");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.checkOnRules(rule);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @Then("admin can see below voucher is updated:")
+    public void adminCanSeeBelowVoucherIsUpdated(DataTable table) {
+        List<Map<String, String>> voucherList;
+        voucherList = table.asMaps(String.class, String.class);
+        var voucher = voucherList.get(0).get("voucher name " + Mamikos.ENV);
+        Assert.assertEquals(massVoucherList.getCalloutText(), "Voucher " + voucher + " updated");
+    }
+
+    @And("admin edit voucher with name and unset payment rules:")
+    public void adminEditVoucherWithNameAndUnsetPaymentRules(DataTable table) {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var rule = voucherAndRules.get(0).get("voucher rule");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.unCheckOnRules(rule);
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }
