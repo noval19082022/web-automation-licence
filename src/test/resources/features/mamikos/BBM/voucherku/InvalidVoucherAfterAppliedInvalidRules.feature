@@ -1,4 +1,4 @@
-@TEST_BBM-759 @sakti
+@TEST_BBM-759 @BBM7
 Feature: Invalid Voucher After Applied, Invalid Rules
 
   Scenario: Admin Activate Voucher AUTORULES
