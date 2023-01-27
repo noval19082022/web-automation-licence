@@ -16,7 +16,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VAFORMAHASISWA    | VAFORMAHASISWA   |
+      | VAFORMAHASISWA    | VAFORMAHASISWA    |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -24,7 +24,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORMAHASISWA    | VNAFORMAHASISWA   |
+      | VNAFORMAHASISWA   | VNAFORMAHASISWA   |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -32,7 +32,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VAFORKARYAWAN    | VAFORKARYAWAN   |
+      | VAFORKARYAWAN     | VAFORKARYAWAN     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -40,7 +40,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORKARYAWAN    | VNAFORKARYAWAN   |
+      | VNAFORKARYAWAN    | VNAFORKARYAWAN    |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -48,7 +48,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VAFORUNIV    | VAFORUNIV   |
+      | VAFORUNIV         | VAFORUNIV         |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -56,7 +56,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORUNIV    | VNAFORUNIV   |
+      | VNAFORUNIV        | VNAFORUNIV        |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -64,7 +64,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VAFOROTHERUNIV   | VAFOROTHERUNIV  |
+      | VAFOROTHERUNIV    | VAFOROTHERUNIV    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -72,7 +72,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VNAFOROTHERUNIV    | VNAFOROTHERUNIV   |
+      | VNAFOROTHERUNIV   | VNAFOROTHERUNIV   |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -88,7 +88,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VAFORKARYAWAN    | VAFORKARYAWAN   |
+      | VAFORKARYAWAN     | VAFORKARYAWAN     |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -96,7 +96,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORKARYAWAN    | VNAFORKARYAWAN   |
+      | VNAFORKARYAWAN    | VNAFORKARYAWAN    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -104,7 +104,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VAFORMAHASISWA    | VAFORMAHASISWA   |
+      | VAFORMAHASISWA    | VAFORMAHASISWA    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -112,7 +112,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORMAHASISWA    | VNAFORMAHASISWA   |
+      | VNAFORMAHASISWA   | VNAFORMAHASISWA   |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -120,7 +120,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VAFORCOMP   | VAFORCOMP  |
+      | VAFORCOMP         | VAFORCOMP         |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -128,7 +128,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORCOMP   | VNAFORCOMP  |
+      | VNAFORCOMP        | VNAFORCOMP        |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -136,7 +136,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VAFOROTHERCOMP    | VAFOROTHERCOMPA  |
+      | VAFOROTHERCOMP    | VAFOROTHERCOMPA   |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -144,7 +144,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VNAFOROTHERCOMP    | VNAFOROTHERCOMP   |
+      | VNAFOROTHERCOMP   | VNAFOROTHERCOMP   |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -152,7 +152,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFOROTHERDOM   | VNAFOROTHERDOM  |
+      | VNAFOROTHERDOM    | VNAFOROTHERDOM    |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -160,7 +160,7 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VNAFORUSREMAIL  | VNAFORUSREMAIL  |
+      | VNAFORUSREMAIL    | VNAFORUSREMAIL    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
     When scenario is "continue"
 
@@ -168,6 +168,6 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
     When tenant set active page to 2
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VNAFOROTHEREM  | VNAFOROTHEREM |
+      | VNAFOROTHEREM     | VNAFOROTHEREM     |
     Then tenant can see voucher is applied
     When scenario is "end"
