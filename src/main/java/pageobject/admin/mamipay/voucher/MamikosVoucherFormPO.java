@@ -20,6 +20,7 @@ public class MamikosVoucherFormPO {
     String kostName;
     Locator editMassVoucherButton;
     Locator yesDoItButton;
+    Locator professionOption;
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -30,6 +31,7 @@ public class MamikosVoucherFormPO {
         kostNameInput = page.getByPlaceholder("Search Kost by name...");
         editMassVoucherButton = playwright.locatorByRoleSetName(locator.roleButton, "Edit Mass Voucher");
         yesDoItButton = playwright.locatorByRoleSetName(locator.roleButton, "Yes, Do It!");
+        professionOption = page.locator("select[name='applicable_group[profession]']");
     }
 
     /**
@@ -93,5 +95,13 @@ public class MamikosVoucherFormPO {
     public void unCheckOnRules(String rules) {
         Locator ruleLoc = page.getByLabel(rules);
         ruleLoc.uncheck();
+    }
+
+    /**
+     * Select profession dropdown
+     * @param profession String data type mahasiswa or karyawan
+     */
+    public void selectProfession(String profession) {
+        professionOption.selectOption(profession.toLowerCase());
     }
 }

@@ -22,6 +22,8 @@ public class AdminMamipayVoucherSteps {
     MamikosListMassVoucherPO massVoucherList = null;
     List<Map<String, String>> voucherAndKostName;
     List<Map<String, String>> voucherAndRules;
+    List<Map<String, String>> voucherAndProfession;
+    List<Map<String, String>> voucherList;
 
     @And("admin edit voucher and {string} it to kost:")
     public void adminEditVoucherAndApplyItToKost(String voucherApplyRule, DataTable table) throws InterruptedException {
@@ -85,13 +87,12 @@ public class AdminMamipayVoucherSteps {
 
     @Then("admin can see below voucher is updated:")
     public void adminCanSeeBelowVoucherIsUpdated(DataTable table) {
-        List<Map<String, String>> voucherList;
         voucherList = table.asMaps(String.class, String.class);
         var voucher = voucherList.get(0).get("voucher name " + Mamikos.ENV);
         Assert.assertEquals(massVoucherList.getCalloutText(), "Voucher " + voucher + " updated");
     }
 
-    @And("admin edit voucher with name and unset payment rules:")
+    @When("admin edit voucher with name and unset payment rules:")
     public void adminEditVoucherWithNameAndUnsetPaymentRules(DataTable table) {
         voucherAndRules = table.asMaps(String.class, String.class);
         var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
@@ -101,6 +102,19 @@ public class AdminMamipayVoucherSteps {
         voucherEdit.clickOnSearchButton();
         var voucherForm = voucherEdit.clickOnEditButton();
         voucherForm.unCheckOnRules(rule);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @When("admin edit voucher with name and set profession:")
+    public void adminEditVoucherWithNameAndSetProfession(DataTable table) {
+        voucherAndProfession = table.asMaps(String.class, String.class);
+        var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        var profession = voucherAndProfession.get(0).get("profession");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.selectProfession(profession);
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }
