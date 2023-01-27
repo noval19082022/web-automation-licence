@@ -19,7 +19,7 @@ public class TenantPaymentSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostSayaBillingPO billing = new KostSayaBillingPO(page);
-    InvoicePO invoice;
+    InvoicePO invoice = new InvoicePO(page);
     List<Map<String, String>> voucherName;
 
     @When("tenant navigate to tagihan kost saya")

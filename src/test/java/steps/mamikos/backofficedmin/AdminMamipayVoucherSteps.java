@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -148,6 +149,27 @@ public class AdminMamipayVoucherSteps {
         } else if (apply.equalsIgnoreCase("not apply") && !voucherForm.notApplicableForEmailContent().equalsIgnoreCase(targetEmail)) {
             voucherForm.fillApplicableForEmail("");
             voucherForm.fillNotApplicableForEmail(targetEmail);
+        }
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @When("admin edit voucher with name end date to {string}:")
+    public void adminEditVoucherWithNameEndDateTo(String endDate, DataTable table) {
+        String currentDate = JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd hh:mm");
+        String yesterdayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -1, 0, 0);
+        String dayBeforeYesterday = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -2, 0, 0);
+        voucherList = table.asMaps(String.class, String.class);
+        var voucher = voucherList.get(0).get("voucher name " + Mamikos.ENV);
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        if (endDate.equalsIgnoreCase("")) {
+            voucherForm.fillStartDate(currentDate);
+            voucherForm.fillEndDate("");
+        } else if (endDate.equalsIgnoreCase("yesterday")) {
+            voucherForm.fillStartDate(dayBeforeYesterday);
+            voucherForm.fillEndDate(yesterdayDate);
         }
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
