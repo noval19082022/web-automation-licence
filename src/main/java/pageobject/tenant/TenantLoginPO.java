@@ -1,6 +1,7 @@
 package pageobject.tenant;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
 
@@ -25,6 +26,7 @@ public class TenantLoginPO extends LoginPO {
     @Override
     public HomePO clickOnLoginButton() {
         loginBtn.click();
+        page.waitForLoadState(LoadState.LOAD);
         return new HomePO(page);
     }
 }

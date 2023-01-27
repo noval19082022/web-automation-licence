@@ -1,4 +1,4 @@
-@BBM7 @lawackrun
+@BBM7
 Feature: Invalid Voucher After Applied, Invalid Date
 
   Scenario: Activate Voucher AUTOEXPIRED

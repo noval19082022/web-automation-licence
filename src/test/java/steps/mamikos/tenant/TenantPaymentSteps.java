@@ -53,7 +53,6 @@ public class TenantPaymentSteps {
         var totalAfterDeduction = subTotal - voucherDeductionValue;
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue);
-        ActiveContext.getActiveBrowserContext().pages().get(1).close();
     }
 
     @Then("tenant can not use the voucher")

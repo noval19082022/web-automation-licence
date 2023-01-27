@@ -23,8 +23,9 @@ public class InvoicePO {
     Locator invoiceSection;
     Locator invalidVoucherIcon;
     Locator hapusToastButton;
-    Locator voucherWarningText;
+    Locator voucherToastWarningText;
     Locator closeVoucherPopUpButton;
+    Locator voucherInputPopUpWarningText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -42,8 +43,9 @@ public class InvoicePO {
         invoiceSection = page.locator("invoiceBill");
         invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
         hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
-        voucherWarningText = page.getByTestId("warning_txt");
+        voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        voucherInputPopUpWarningText = page.getByTestId("warning_txt");
 
     }
 
@@ -133,7 +135,7 @@ public class InvoicePO {
      * @return
      */
     public boolean waitUntilvoucherUsedTextVisible() {
-        return voucherWarningText.isVisible();
+        return voucherToastWarningText.isVisible();
     }
 
     /**
@@ -142,7 +144,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String getVoucherUsedText() {
-        return playwright.getText(voucherWarningText);
+        return playwright.getText(voucherToastWarningText);
     }
 
     /**
@@ -168,5 +170,13 @@ public class InvoicePO {
      */
     public void clickOnHapusInToast() {
         playwright.clickOn(hapusToastButton);
+    }
+
+    /**
+     * Get voucher input warning text, after inputted invalid voucher
+     * @return String data type
+     */
+    public String voucherInputPopUpWarningText() {
+        return playwright.getText(voucherInputPopUpWarningText);
     }
 }

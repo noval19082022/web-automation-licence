@@ -4,9 +4,11 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.tenant.TenantLoginPO;
+import utilities.PlaywrightHelpers;
 
 public class LoginPO {
     protected Page page;
+    protected PlaywrightHelpers playwright;
     private Locator pencariKostBtn;
     private Locator pemilikKostBtn;
     protected Locator phoneNumberInput;
@@ -14,6 +16,7 @@ public class LoginPO {
     protected Locator loginBtn;
     public LoginPO(Page page) {
         this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
         this.pencariKostBtn = page.getByTestId("pencariKosButton");
         this.pemilikKostBtn = page.getByTestId("pemilikKosButton");
         this.phoneNumberInput = page.getByTestId("phoneNumberTextbox");
