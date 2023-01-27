@@ -24,6 +24,9 @@ public class MamikosVoucherFormPO {
     Locator inputMinimumPrice;
     Locator targetEmailNotApplicableInput;
     Locator targeEmailApplyInput;
+
+    Locator startDateInput;
+    Locator endDateInput;
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -38,6 +41,8 @@ public class MamikosVoucherFormPO {
         inputMinimumPrice = page.locator("input[name='voucher_min_amount']");
         targetEmailNotApplicableInput = page.locator("(//textarea[@class='form-control input-email'])[2]");
         targeEmailApplyInput = page.locator("(//textarea[@class='form-control input-email'])[1]");
+        startDateInput = page.getByLabel("Start Date*");
+        endDateInput = page.getByLabel("End Date");
     }
 
     /**
@@ -149,5 +154,41 @@ public class MamikosVoucherFormPO {
      */
     public String notApplicableForEmailContent() {
         return targetEmailNotApplicableInput.textContent();
+    }
+
+    /**
+     * Choose start date by click on date chooser
+     * @param date String type target date
+     */
+    public void chooseStartDate(String date) {
+        Locator targetDate = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(date)).getByText(date);
+        startDateInput.click();
+        targetDate.click();
+    }
+
+    /**
+     * Fill start date directly to start date input form
+     * @param date String type target date
+     */
+    public void fillStartDate(String date) {
+        startDateInput.fill(date);
+    }
+
+    /**
+     * Choose end date by click on date chooser
+     * @param date String type target date
+     */
+    public void chooseEndDate(String date) {
+        Locator targetDate = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(date)).getByText(date);
+        endDateInput.click();
+        targetDate.click();
+    }
+
+    /**
+     * Fill end date directly to start date input form
+     * @param date String type target date
+     */
+    public void fillEndDate(String date) {
+        endDateInput.fill(date);
     }
 }
