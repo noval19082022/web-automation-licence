@@ -5,11 +5,12 @@ import com.microsoft.playwright.options.LoadState;
 import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.tenant.InvoicePO;
-import pageobject.tenant.KostSayaBillingPO;
+import pageobject.tenant.profile.KostSayaBillingPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -85,5 +86,22 @@ public class TenantPaymentSteps {
     public void tenantCanNotUseVoucheWithMessage(String errorMessage) {
         Assert.assertEquals(invoice.getToastText(), errorMessage + System.lineSeparator() +"    Silakan hapus voucher.");
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
+    }
+
+    @Then("tenant can see warning message {string}")
+    public void tenantCanSeeWarningMessage(String warningMessage) {
+        Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
+    }
+
+    /**
+     * Step hanya bisa digunakan ketika pop-up input voucher tampil di layar.
+     * Step untuk flow continue pengetesan invalid dan valid voucher
+     */
+    @When("tenant input voucher:")
+    public void tenantInputVoucher(DataTable table) {
+        voucherName = table.asMaps(String.class, String.class);
+        var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
+        invoice.fillVoucherID(voucher);
+        invoice.clickOnPakaiVoucherButton();
     }
 }
