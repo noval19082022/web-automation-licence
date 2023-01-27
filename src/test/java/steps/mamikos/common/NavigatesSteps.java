@@ -45,4 +45,14 @@ public class NavigatesSteps {
     public void ownerOpenBrowserPage(String pageNumber) {
         ActiveContext.setActivePage(OwnerContext.getOwnerBrowserContext().pages().get(Integer.parseInt(pageNumber)));
     }
+
+    @When("tenant navigates to edit profile")
+    public void tenantNavigatesToEditProfile() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_EDIT_PROFILE, 60000.0);
+    }
+
+    @When("tenant close page number {int}")
+    public void tenantClosePageNumber(int pageNumber) {
+        ActiveContext.getActiveBrowserContext().pages().get(pageNumber).close();
+    }
 }
