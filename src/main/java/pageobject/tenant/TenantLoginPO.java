@@ -35,7 +35,6 @@ public class TenantLoginPO extends LoginPO {
     @Override
     public synchronized HomePO clickOnLoginButton() {
         loginBtn.click();
-        page.waitForLoadState(LoadState.LOAD);
         return new HomePO(page);
     }
 }
