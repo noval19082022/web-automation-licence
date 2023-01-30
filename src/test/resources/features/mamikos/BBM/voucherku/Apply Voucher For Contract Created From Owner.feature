@@ -15,43 +15,56 @@ Feature: Apply Voucher For Contract Created From Owner
       | voucher name stag | voucher name prod |
       | AUTOOWNER         | AUTOOWNER         |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
 #  BBM-684
   Scenario: Tenant Apply Voucher with Contract Rules from Owner
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOCONSULTANT    | AUTOCONSULTANT    |
     Then Voucher code has been used
+    When scenario is "continue"
 
 #  BBM-677
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOBOOKFUNNEL    | AUTOBOOKFUNNEL    |
     Then Voucher code has been used
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher with Contract Rules from Tenant
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOFUNNELCONS    | AUTOFUNNELCONS    |
     Then Voucher code has been used
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Consultant
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOFUNNELOWNER   | AUTOFUNNELOWNER   |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel and Owner
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOCONSOWNER     | AUTOCONSOWNER     |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
 #  BBM-675
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOFUNOWNCONS    | AUTOFUNOWNCONS    |
     Then tenant can see voucher is applied
+    When scenario is "end"
 

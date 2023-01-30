@@ -14,21 +14,28 @@ Feature: Apply Voucher For Kost Type GoldPlus
       | voucher name stag | voucher name prod |
       | AUTOGP1           | AUTOGP1           |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher Not Applicable for Kost Type GoldPlus 1
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOVNAGP1        | AUTOVNAGP1        |
     Then Voucher code has been used
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher Applicable for Kost City
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOKOSTCITY      | AUTOKOSTCITY      |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
   Scenario: Tenant Apply Voucher Not Applicable for Kost City
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOVNAKOSTCITY   | AUTOVNAKOSTCITY   |
     Then Voucher code has been used
+    When scenario is "end"
