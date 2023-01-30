@@ -223,6 +223,15 @@ public class PlaywrightHelpers {
         page.waitForTimeout(timeout);
         return locator.isVisible();
     }
+
+    /**
+     * Wait for a locator
+     * @param locator Locator data type
+     * @param duration set duration in double
+     */
+    public void waitFor(Locator locator, Double duration) {
+        locator.waitFor(new Locator.WaitForOptions().setTimeout(duration));
+    }
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\

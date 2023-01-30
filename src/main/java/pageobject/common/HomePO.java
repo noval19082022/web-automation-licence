@@ -49,7 +49,7 @@ public class HomePO {
      */
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
-        playwright.waitTillLocatorIsVisible(mamikosLogo, 30000.0);
+        playwright.waitFor(mamikosLogo, 30000.0);
     }
 
     /**
