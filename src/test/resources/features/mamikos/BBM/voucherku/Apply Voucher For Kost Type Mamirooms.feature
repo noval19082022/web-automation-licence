@@ -14,10 +14,13 @@ Feature: Apply Voucher For Kost Type Mamirooms
       | voucher name stag | voucher name prod |
       | AUTOMAMIROOM      | AUTOMAMIROOM      |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
     #BBM-683
   Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOVNAMAMIROOM   | AUTOVNAMAMIROOM   |
     Then Voucher code has been used
+    When scenario is "end"

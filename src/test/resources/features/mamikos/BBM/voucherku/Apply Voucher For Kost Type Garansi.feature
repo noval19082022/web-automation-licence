@@ -14,10 +14,13 @@ Feature: Apply Voucher For Kost Type Garansi
       | voucher name stag | voucher name prod |
       | AUTOGARANSI       | AUTOGARANSI       |
     Then tenant can see voucher is applied
+    When scenario is "continue"
 
 #    BBM-749
   Scenario: Tenant Apply Voucher Not Applicable for Kost Type Garansi
+    When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOVNAGARANSI    | AUTOVNAGARANSI    |
     Then Voucher code has been used
+    When scenario is "end"
