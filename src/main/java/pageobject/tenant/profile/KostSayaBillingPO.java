@@ -1,7 +1,8 @@
-package pageobject.tenant;
+package pageobject.tenant.profile;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
 public class KostSayaBillingPO {

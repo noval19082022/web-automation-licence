@@ -51,8 +51,27 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_EDIT_PROFILE, 60000.0);
     }
 
-    @When("tenant close page number {int}")
-    public void tenantClosePageNumber(int pageNumber) {
+    @When("tenant/owner/admin close page number {int}")
+    public synchronized void tenantClosePageNumber(int pageNumber) throws InterruptedException {
         ActiveContext.getActiveBrowserContext().pages().get(pageNumber).close();
+        Thread.sleep(2000);
+    }
+
+    @When("tenant/owner/admin refresh page {int}")
+    public void tenantRefreshPage(int pageNumber) {
+        ActiveContext.getActiveBrowserContext().pages().get(pageNumber).reload();
+    }
+
+    @When("tenant/owner/admin set active page to {int}")
+    public synchronized void tenantSetActivePageTo(int activePage) {
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(activePage));
+    }
+
+    @When("tenant/owner/admin open new page")
+    public void tenantOpenNewPage() {
+        page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            ActiveContext.getActiveBrowserContext().newPage();
+        });
+
     }
 }

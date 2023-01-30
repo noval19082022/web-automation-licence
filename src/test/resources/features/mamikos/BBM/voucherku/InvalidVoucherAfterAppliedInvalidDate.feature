@@ -1,4 +1,4 @@
-@BBM7 @lawackrun
+@BBM7
 Feature: Invalid Voucher After Applied, Invalid Date
 
   Scenario: Activate Voucher AUTOEXPIRED
@@ -8,10 +8,10 @@ Feature: Invalid Voucher After Applied, Invalid Date
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin edit voucher with name end date to "":
       | voucher name stag | voucher name prod |
-      | AUTOEXPIRED | AUTOEXPIRED |
+      | AUTOEXPIRED       | AUTOEXPIRED       |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTOEXPIRED | AUTOEXPIRED |
+      | AUTOEXPIRED       | AUTOEXPIRED       |
     When scenario is "continue"
 
   Scenario: Tenant Use Voucher AUTOEXPIRED
@@ -23,7 +23,7 @@ Feature: Invalid Voucher After Applied, Invalid Date
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOEXPIRED | AUTOEXPIRED |
+      | AUTOEXPIRED       | AUTOEXPIRED       |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -31,10 +31,10 @@ Feature: Invalid Voucher After Applied, Invalid Date
     Given admin go to mamikos mamipay admin
     And admin edit voucher with name end date to "yesterday":
       | voucher name stag | voucher name prod |
-      | AUTOEXPIRED | AUTOEXPIRED |
+      | AUTOEXPIRED       | AUTOEXPIRED       |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTOEXPIRED | AUTOEXPIRED |
+      | AUTOEXPIRED       | AUTOEXPIRED       |
     When scenario is "continue"
 
   Scenario: Tenant Use Expired Voucher AUTOEXPIRED

@@ -34,7 +34,8 @@ public class LoginSteps {
             .clickOnPencariKostButton()
             .fillPhoneNumber(phone)
             .fillPassword(password)
-            .clickOnLoginButton();
+            .clickOnLoginButton()
+            .waitTillLogoIsVisible();
     }
 
     @When("user login as tenant via facebook")

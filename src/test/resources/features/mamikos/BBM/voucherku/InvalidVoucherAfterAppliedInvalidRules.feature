@@ -7,11 +7,11 @@ Feature: Invalid Voucher After Applied, Invalid Rules
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin edit voucher with name and set payment rules:
-      | voucher name stag | voucher name prod | voucher rule |
-      | AUTORULES | AUTORULES | For Recurring |
+      | voucher name stag | voucher name prod | voucher rule  |
+      | AUTORULES         | AUTORULES         | For Recurring |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTORULES | AUTORULES |
+      | AUTORULES         | AUTORULES         |
     When scenario is "continue"
 
   Scenario: Tenant Use Voucher AUTORULES
@@ -23,18 +23,18 @@ Feature: Invalid Voucher After Applied, Invalid Rules
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTORULES | AUTORULES |
+      | AUTORULES         | AUTORULES         |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
   Scenario: Admin Deactivate Voucher AUTORULES
     Given admin go to mamikos mamipay admin
     And admin edit voucher with name and unset payment rules:
-      | voucher name stag | voucher name prod | voucher rule |
-      | AUTORULES | AUTORULES | For Recurring |
+      | voucher name stag | voucher name prod | voucher rule  |
+      | AUTORULES         | AUTORULES         | For Recurring |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTORULES | AUTORULES |
+      | AUTORULES         | AUTORULES         |
     When scenario is "continue"
 
   Scenario: Tenant Use Invalid Voucher AUTORULES

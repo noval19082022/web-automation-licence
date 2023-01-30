@@ -11,7 +11,7 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
       | AUTOTARGINV       | AUTOTARGINV       | adivouchersatu@gmail.com |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTOTARGINV   | AUTOTARGINV    |
+      | AUTOTARGINV       | AUTOTARGINV       |
     When scenario is "continue"
 
   Scenario: Tenant Use Voucher AUTOPROFESSION
@@ -23,7 +23,7 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOTARGINV    | AUTOTARGINV   |
+      | AUTOTARGINV       | AUTOTARGINV       |
     Then tenant can see voucher is applied
     When scenario is "continue"
 
@@ -34,7 +34,7 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
       | AUTOTARGINV       | AUTOTARGINV       | adivouchersatu@gmail.com |
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
-      | AUTOTARGINV   | AUTOTARGINV    |
+      | AUTOTARGINV       | AUTOTARGINV       |
     When scenario is "continue"
 
   Scenario: Tenant Use Invalid Voucher AUTOTARGINV
