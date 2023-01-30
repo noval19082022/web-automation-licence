@@ -1,4 +1,4 @@
-@BBM7  @runlagi @runlagi
+@BBM7
 Feature: Invalid Voucher After Applied, Invalid Profession
 
   Scenario: Activate voucher AUTOPROFESSION
