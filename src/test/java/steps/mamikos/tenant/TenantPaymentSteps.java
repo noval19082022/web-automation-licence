@@ -88,7 +88,7 @@ public class TenantPaymentSteps {
     }
 
     @Then("tenant can see warning message {string}")
-    public void tenantCanSeeWarningMessage(String warningMessage) {
+    public synchronized void tenantCanSeeWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
     }
 

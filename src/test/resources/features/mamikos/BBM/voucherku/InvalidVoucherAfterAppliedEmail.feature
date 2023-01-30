@@ -25,7 +25,8 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
       | voucher name stag | voucher name prod |
       | AUTOTARGINV       | AUTOTARGINV       |
     Then tenant can see voucher is applied
-    When scenario is "continue"
+    When tenant close page number 1
+    And scenario is "continue"
 
   Scenario: Admin Not Apply AUTOTARGINV With Target Email
     Given admin go to mamikos mamipay admin

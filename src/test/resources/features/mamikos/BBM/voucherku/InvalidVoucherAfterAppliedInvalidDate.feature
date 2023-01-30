@@ -25,7 +25,8 @@ Feature: Invalid Voucher After Applied, Invalid Date
       | voucher name stag | voucher name prod |
       | AUTOEXPIRED       | AUTOEXPIRED       |
     Then tenant can see voucher is applied
-    When scenario is "continue"
+    When tenant close page number 1
+    And scenario is "continue"
 
   Scenario: Admin Set Voucher AUTOEXPIRED End Date To Yesterday
     Given admin go to mamikos mamipay admin

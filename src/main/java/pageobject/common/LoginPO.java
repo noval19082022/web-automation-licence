@@ -28,7 +28,7 @@ public class LoginPO {
      * Click on pencari kost button
      * @return TenantLoginPO class
      */
-    public TenantLoginPO clickOnPencariKostButton() {
+    public synchronized TenantLoginPO clickOnPencariKostButton() {
         pencariKostBtn.click();
         return new TenantLoginPO(page);
     }

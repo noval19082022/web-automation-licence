@@ -1,4 +1,4 @@
-@BBM7 @lawackrun
+@BBM7
 Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
 
   Scenario: Tenant Edit Profession To Mahasiswa

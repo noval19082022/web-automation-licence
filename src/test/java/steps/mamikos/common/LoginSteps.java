@@ -32,6 +32,7 @@ public class LoginSteps {
         }
         login.clickOnButtonMasuk()
             .clickOnPencariKostButton()
+            .waitForPasswordInput()
             .fillPhoneNumber(phone)
             .fillPassword(password)
             .clickOnLoginButton()
