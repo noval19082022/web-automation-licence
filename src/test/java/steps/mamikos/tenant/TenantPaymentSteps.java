@@ -63,7 +63,7 @@ public class TenantPaymentSteps {
 
     @When("tenant remove voucher by toast message")
     public void tenantRemoveVoucherByToastMessage() {
-        invoice = new InvoicePO(ActiveContext.getActiveBrowserContext().pages().get(1));
+        invoice = new InvoicePO(page);
         invoice.clickOnHapusInToast();
     }
 
