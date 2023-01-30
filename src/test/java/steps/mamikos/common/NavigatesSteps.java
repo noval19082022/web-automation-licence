@@ -48,6 +48,7 @@ public class NavigatesSteps {
 
     @When("tenant navigates to edit profile")
     public void tenantNavigatesToEditProfile() {
+        page = ActiveContext.getActivePage();
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_EDIT_PROFILE, 60000.0);
     }
 

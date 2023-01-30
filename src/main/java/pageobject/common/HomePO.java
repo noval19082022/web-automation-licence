@@ -3,6 +3,7 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -45,10 +46,10 @@ public class HomePO {
 
     /**
      * Wait till mamikos logo is visible
-     * @return boolean type
      */
-    public boolean waitTillLogoIsVisible() {
-        return playwright.waitTillLocatorIsVisible(mamikosLogo, 30000.0);
+    public void waitTillLogoIsVisible() {
+        page.waitForLoadState(LoadState.LOAD);
+        playwright.waitTillLocatorIsVisible(mamikosLogo, 30000.0);
     }
 
     /**
