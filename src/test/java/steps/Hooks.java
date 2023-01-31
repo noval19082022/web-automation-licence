@@ -1,13 +1,16 @@
 package steps;
 
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import config.global.FlowControl;
+import config.global.GlobalConfig;
 import config.playwright.context.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Hooks{
 
@@ -17,34 +20,17 @@ public class Hooks{
      */
     @Before
     public void setup(Scenario scenario) {
-        for (String context : scenario.getSourceTagNames()) {
-            switch (context) {
-                case "@tenant":
-                    System.out.println("tenant init");
-                    TenantContextInitializer.initializeTenantBrowserContext();
-                    TenantContextInitializer.initializeTenantPage();
-                    break;
-                case "@owner":
-                    System.out.println("owner init");
-                    OwnerContextInitializer.initializeOwnerBrowserContext();
-                    OwnerContextInitializer.initializeOwnerPage();
-                    break;
-                case "@admin":
-                    System.out.println("admin init");
-                    AdminContextInitializer.initializeAdminBrowserContext();
-                    AdminContextInitializer.initializeAdminPage();
-                    break;
-            }
-        }
-
-        if (!(scenario.getSourceTagNames().contains("@tenant") || scenario.getSourceTagNames().contains("admin") || scenario.getSourceTagNames().contains("owner"))) {
-            // Check if the active browser context is null or flow control is not set to continue
-            if (ActiveContext.getActiveBrowserContext() == null || !FlowControl.getContinueFlow()) {
+        if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.getContinueFlow()) {
+            if (ActiveContext.getActiveBrowserContext() == null || ActiveContext.getActiveBrowserContext().pages().isEmpty()) {
                 UserContextInitializer.initializeUserBrowserContext();
                 UserContextInitializer.initializeUserPage();
                 ActiveContext.setActiveBrowserContext(UserContext.getUserBrowserContext());
                 FlowControl.setStrictFlow(true);
             }
+        }
+
+        if (scenario.getSourceTagNames().contains("@continue")) {
+            FlowControl.setContinueFlow(true);
         }
         System.out.println(scenario.getName() + " is started");
     }
@@ -56,18 +42,23 @@ public class Hooks{
      */
     @After
     public void cleanUp(Scenario scenario) {
-        if (scenario.isFailed()) {
-            scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
-            ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
-                    .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
-        }
-
-        if (!FlowControl.getContinueFlow()) {
+        if (!scenario.getSourceTagNames().contains("@continue")) {
             if (TenantContext.getTenantBrowserContext() != null) TenantContext.getTenantBrowserContext().close();
             if (OwnerContext.getOwnerBrowserContext() != null) OwnerContext.getOwnerBrowserContext().close();
             if (AdminContext.getAdminBrowserContext() != null) AdminContext.getAdminBrowserContext().close();
             if (UserContext.getUserBrowserContext() != null) UserContext.getUserBrowserContext().close();
+            if (ActiveContext.getActiveBrowserContext() != null) ActiveContext.getActiveBrowserContext().close();
+            FlowControl.setContinueFlow(false);
         }
+
+        if (scenario.isFailed()) {
+            scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
+            if (GlobalConfig.SET_TRACING) {
+                ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
+                    .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
+            }
+        }
+
         System.out.println(scenario.getName() + " is finished");
     }
 }

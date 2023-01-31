@@ -170,6 +170,7 @@ public class InvoicePO {
      */
     public void clickOnHapusInToast() {
         playwright.clickOn(hapusToastButton);
+        masukkanVoucher.waitFor();
     }
 
     /**

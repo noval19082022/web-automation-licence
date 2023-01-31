@@ -10,6 +10,7 @@ public class GlobalConfig {
     public static final double SLOW_MO = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "slowMo"));
     public static final boolean SET_ACCEPT_DOWNLOAD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setAcceptDownload"));
     public static final boolean SET_VIDEO_RECORD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setVideoRecord"));
+    public static final boolean SET_TRACING = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setTracing"));
 
     public static final int SCREEN_WIDTH = JavaHelpers.getScreenWidth();
     public static final int SCREEN_HEIGHT = JavaHelpers.getScreenHeight();

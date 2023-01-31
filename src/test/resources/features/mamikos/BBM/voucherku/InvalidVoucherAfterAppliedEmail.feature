@@ -1,6 +1,7 @@
 @BBM7
 Feature: Invalid Voucher After Applied, Invalid Email Target
 
+  @continue
   Scenario: Admin Apply AUTOTARGINV With Target Email
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,8 +13,8 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
       | AUTOTARGINV       | AUTOTARGINV       |
-    When scenario is "continue"
 
+  @continue
   Scenario: Tenant Use Voucher AUTOPROFESSION
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -25,8 +26,8 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
       | voucher name stag | voucher name prod |
       | AUTOTARGINV       | AUTOTARGINV       |
     Then tenant can see voucher is applied
-    And scenario is "continue"
 
+  @continue
   Scenario: Admin Not Apply AUTOTARGINV With Target Email
     Given admin go to mamikos mamipay admin
     And admin edit voucher with name and "not apply" target email:
@@ -35,16 +36,14 @@ Feature: Invalid Voucher After Applied, Invalid Email Target
     Then admin can see below voucher is updated:
       | voucher name stag | voucher name prod |
       | AUTOTARGINV       | AUTOTARGINV       |
-    When scenario is "continue"
 
+  @continue
   Scenario: Tenant Use Invalid Voucher AUTOTARGINV
     Given user go to mamikos homepage
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     Then tenant can not use the voucher
-    When scenario is "continue"
 
   Scenario: Tenant Remove Voucher AUTOTARGINV
     When tenant remove voucher by toast message
     Then tenant can see voucher is deleted
-    When scenario is "end"
