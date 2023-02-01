@@ -1,6 +1,5 @@
 package steps;
 
-import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import config.global.FlowControl;
 import config.global.GlobalConfig;
@@ -10,7 +9,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 import java.nio.file.Paths;
-import java.util.List;
 
 public class Hooks{
 
