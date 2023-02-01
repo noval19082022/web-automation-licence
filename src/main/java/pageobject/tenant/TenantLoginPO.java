@@ -1,7 +1,6 @@
 package pageobject.tenant;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
 

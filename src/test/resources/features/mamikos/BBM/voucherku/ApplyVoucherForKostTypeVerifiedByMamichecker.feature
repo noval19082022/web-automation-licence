@@ -1,6 +1,7 @@
-@BBM7 @lawackrun
+@BBM7
 Feature: Apply Voucher For Kost Type Verified By Mamichecker
 
+  @continue
   Scenario: Invoice Verified By Mamichecker and Voucher Applicable for Verified By Mamichecker
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -12,11 +13,9 @@ Feature: Apply Voucher For Kost Type Verified By Mamichecker
       | voucher name stag | voucher name prod |
       | AUTOMAMICHECK   | AUTOMAMICHECK   |
     Then tenant can see voucher is applied
-    When scenario is "continue"
 
   Scenario: Invoice Verified By Mamichecker and Voucher Not Applicable for Verified By Mamichecker
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | VNAMAMICHECK   | VNAMAMICHECK   |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
-    When scenario is "end"

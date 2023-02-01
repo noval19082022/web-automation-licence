@@ -3,6 +3,7 @@
 @TEST_BBM-749
 Feature: Apply Voucher For Kost Type Garansi
 
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Kost Type Garansi
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,7 +15,6 @@ Feature: Apply Voucher For Kost Type Garansi
       | voucher name stag | voucher name prod |
       | AUTOGARANSI       | AUTOGARANSI       |
     Then tenant can see voucher is applied
-    When scenario is "continue"
 
 #    BBM-749
   Scenario: Tenant Apply Voucher Not Applicable for Kost Type Garansi
@@ -23,4 +23,3 @@ Feature: Apply Voucher For Kost Type Garansi
       | voucher name stag | voucher name prod |
       | AUTOVNAGARANSI    | AUTOVNAGARANSI    |
     Then Voucher code has been used
-    When scenario is "end"

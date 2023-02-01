@@ -3,6 +3,7 @@
 @TEST_BBM-679 @TEST_BBM-683
 Feature: Apply Voucher For Kost Type Mamirooms
 
+  @continue
   Scenario: Invoice Mamirooms and Voucher Applicable for Mamirooms
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,7 +15,6 @@ Feature: Apply Voucher For Kost Type Mamirooms
       | voucher name stag | voucher name prod |
       | AUTOMAMIROOM      | AUTOMAMIROOM      |
     Then tenant can see voucher is applied
-    When scenario is "continue"
 
     #BBM-683
   Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms
@@ -23,4 +23,3 @@ Feature: Apply Voucher For Kost Type Mamirooms
       | voucher name stag | voucher name prod |
       | AUTOVNAMAMIROOM   | AUTOVNAMAMIROOM   |
     Then Voucher code has been used
-    When scenario is "end"
