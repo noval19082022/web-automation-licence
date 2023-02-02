@@ -1,6 +1,6 @@
 package utilities;
 
-import config.mamikos.Mamikos;
+import data.mamikos.Mamikos;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;

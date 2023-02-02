@@ -5,6 +5,9 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlaywrightHelpers {
     Page page;
 
@@ -267,5 +270,23 @@ public class PlaywrightHelpers {
      */
     public Locator locatorByRoleAndText(AriaRole role, String text) {
         return page.getByRole(role).getByText(text);
+    }
+
+    /**
+     * Get locators as array list
+     * @param locator Locator type
+     * @param maxIndex int type
+     * @return List of locators
+     */
+    public List<Locator> getLocators(Locator locator, int maxIndex) {
+        List<Locator> locators = new ArrayList<>();
+        for (int i = 0; i <= maxIndex; i++) {
+            Locator currentLocator = locator.nth(i);
+            if (!currentLocator.isVisible()) {
+                break;
+            }
+            locators.add(currentLocator);
+        }
+        return locators;
     }
 }

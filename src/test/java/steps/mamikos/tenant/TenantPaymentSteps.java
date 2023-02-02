@@ -2,14 +2,17 @@ package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
-import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import data.payment.Payment;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
+import pageobject.tenant.profile.RiwayatBookingPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -20,6 +23,8 @@ public class TenantPaymentSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostSayaBillingPO billing = new KostSayaBillingPO(page);
     InvoicePO invoice = new InvoicePO(page);
+    RiwayatBookingPO riwayatBooking = new RiwayatBookingPO(page);
+    MidtransPaymentPO midtrans = new MidtransPaymentPO(page);
     List<Map<String, String>> voucherName;
 
     @When("tenant navigate to tagihan kost saya")
@@ -29,6 +34,7 @@ public class TenantPaymentSteps {
 
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
+        page.pause();
         invoice = billing.clickOnBayarButton();
     }
 
@@ -102,5 +108,25 @@ public class TenantPaymentSteps {
         var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
         invoice.fillVoucherID(voucher);
         invoice.clickOnPakaiVoucherButton();
+    }
+
+    @When("tenant pay kost from riwayat booking using mandiri")
+    public void tenantPayKostFromRiwayatBooking() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnMandiri();
+        invoice.clickOnBayarSekarang();
+        var kodePerusahaan = invoice.getCompanyCodeText();
+        var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        midtrans = new MidtransPaymentPO(page);
+        midtrans.inputBillerCode(kodePerusahaan);
+        midtrans.inputPaymentCode(nomorVirtualAccount);
+        midtrans.clickOnInquireButton();
+        midtrans.clickOnPayButton();
+        midtrans.waitForSuccessTransaction();
+        ActiveContext.getActiveBrowserContext().pages().get(1).close();
     }
 }

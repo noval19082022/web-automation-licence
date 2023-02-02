@@ -7,6 +7,8 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class KostDetailsPO {
     Page page;
     PlaywrightHelpers playwright;
@@ -64,19 +66,24 @@ public class KostDetailsPO {
      * @param date tomorrow, today, or specific date by number on string data type
      */
     public void selectBookingDate(String date) {
-        String datePick;
+        Locator datePick;
         if (date.equalsIgnoreCase("tomorrow")) {
-            this.date = JavaHelpers.getCostumDateOrTime("D", 1, 0, 0);
+            this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
         }
         else if(date.equalsIgnoreCase("today")) {
-            this.date = JavaHelpers.getCurrentDateOrTime("D");
+            this.date = JavaHelpers.getCurrentDateOrTime("d");
         }
         else {
             this.date = date;
         }
         mulaiKosInput.click();
-        datePick = String.format(datePickXpath, this.date);
-        datePicker.locator(datePick).click();
+        datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
+        List<Locator> datePicks = playwright.getLocators(datePick, 10);
+        for (Locator pick : datePicks) {
+            if (pick.isEnabled() && pick.isVisible()) {
+                pick.click();
+            }
+        }
     }
 
     /**
