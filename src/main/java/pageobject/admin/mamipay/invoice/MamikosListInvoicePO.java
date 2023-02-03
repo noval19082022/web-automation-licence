@@ -17,6 +17,7 @@ public class MamikosListInvoicePO {
     Locator inputCostTitle;
     Locator inputCostValue;
     Locator addFeeAdditionalPriceButton;
+    Locator additionalPriceTypeOption;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -28,6 +29,7 @@ public class MamikosListInvoicePO {
         inputCostTitle = page.locator("input[name=\"cost_title\"]");
         inputCostValue = page.locator("input[name=\"cost_value\"]");
         addFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Fee"));
+        additionalPriceTypeOption = page.locator("#cost-type-select");
     }
 
     /**
@@ -90,5 +92,14 @@ public class MamikosListInvoicePO {
      */
     public void clickOnAddFeeInAdditionalPrice(){
         playwright.clickOn(addFeeAdditionalPriceButton);
+    }
+
+    /**
+     * Select additional price type
+     * @param costType cost type one of the following list: fixed, other, admin, discount, addon.
+     * by default dropdown value is other
+     */
+    public void selectAdditionalPriceType(String costType) {
+        playwright.selectDropdownByValue(additionalPriceTypeOption,costType);
     }
 }
