@@ -32,6 +32,8 @@ public class InvoicePO {
     Locator kodePerusahaanText;
     Locator virtualAccountText;
 
+    Locator invoiceNumber;
+
     public InvoicePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -56,6 +58,7 @@ public class InvoicePO {
         bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
+        invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
     }
 
     /**
@@ -225,5 +228,13 @@ public class InvoicePO {
      */
     public String getVirtualAccountNumberText() {
         return playwright.getText(virtualAccountText);
+    }
+
+    /**
+     * Get invoice number
+     * @return String data type of invoice number
+     */
+    public String getInvoiceNumber() {
+        return playwright.getText(invoiceNumber);
     }
 }

@@ -13,6 +13,7 @@ import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
+import testdata.InvoiceTestData;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -27,14 +28,8 @@ public class TenantPaymentSteps {
     MidtransPaymentPO midtrans = new MidtransPaymentPO(page);
     List<Map<String, String>> voucherName;
 
-    @When("tenant navigate to tagihan kost saya")
-    public void userNavigateToTagihanKostSaya() {
-        playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING, 30000.0, LoadState.LOAD);
-    }
-
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
-        page.pause();
         invoice = billing.clickOnBayarButton();
     }
 
@@ -128,5 +123,10 @@ public class TenantPaymentSteps {
         midtrans.clickOnPayButton();
         midtrans.waitForSuccessTransaction();
         ActiveContext.getActiveBrowserContext().pages().get(1).close();
+    }
+
+    @When("tenant get invoice number")
+    public void tenantGetInvoiceNumber() {
+        InvoiceTestData.setInvoiceNumber(invoice.getInvoiceNumber());
     }
 }

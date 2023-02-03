@@ -35,9 +35,11 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner accept booking
+    And owner accept booking from tenant:
+      | tenant stag | tenant prod |
+      |     Adi Auto Addons Satu       |         Adi Auto Addons  Satu  |
     Then owner should redirect back to pengajuan booking page
-
+#
   Scenario: Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -47,10 +49,19 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
     And tenant pay kost from riwayat booking using mandiri
     And tenant navigate to riwayat booking
     And tenant checkin kost from riwayat booking
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant get invoice number
 
-  Scenario: Admin Batalkan Contract
+  Scenario: Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin add additional price
+    And admin add additional price:
+      | search by |renter_phone_number|
+      | search value | 0890867321212 |
+      | invoice number | default |
+      | additional price type | default |
+      | additional price title | Automation Biaya Lainnya |
+      | addtional price value | 200000 |
