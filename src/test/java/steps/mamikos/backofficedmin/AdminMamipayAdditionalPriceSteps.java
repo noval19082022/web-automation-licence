@@ -25,6 +25,7 @@ public class AdminMamipayAdditionalPriceSteps {
         var searchValue = additionalPriceData.get("search value");
         var invoiceNumber = additionalPriceData.get("invoice number").equalsIgnoreCase("default");
         var invoiceNumberValue = invoiceNumber ? InvoiceTestData.getInvoiceNumber() : additionalPriceData.get("invoice number");
+        var additionalPriceType = additionalPriceData.get("additional price type");
         var additionalPriceName = additionalPriceData.get("additional price title");
         var additionalPriceValue = additionalPriceData.get("addtional price value");
         adminMamipay.goToMamikosSearchInvoice();
@@ -33,6 +34,9 @@ public class AdminMamipayAdditionalPriceSteps {
         invoiceAdmin.clickOnCariInvoice();
         invoiceAdmin.goToInvoiceDetail(invoiceNumberValue);
         invoiceAdmin.clickOnAddFeeInInvoice();
+        if (!additionalPriceType.equalsIgnoreCase("default")) {
+            invoiceAdmin.selectAdditionalPriceType(additionalPriceType);
+        }
         invoiceAdmin.fillAdditionalPriceName(additionalPriceName);
         invoiceAdmin.fillAdditionalPriceCostValue(additionalPriceValue);
         invoiceAdmin.clickOnAddFeeInAdditionalPrice();

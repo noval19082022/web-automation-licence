@@ -39,7 +39,7 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | tenant stag | tenant prod |
       |     Adi Auto Addons Satu       |         Adi Auto Addons  Satu  |
     Then owner should redirect back to pengajuan booking page
-#
+
   Scenario: Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
