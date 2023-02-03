@@ -1,8 +1,8 @@
 package steps.mamikos.backofficedmin;
 
 import com.microsoft.playwright.Page;
-import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

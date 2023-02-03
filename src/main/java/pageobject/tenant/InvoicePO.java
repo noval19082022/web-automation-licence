@@ -26,6 +26,13 @@ public class InvoicePO {
     Locator voucherToastWarningText;
     Locator closeVoucherPopUpButton;
     Locator voucherInputPopUpWarningText;
+    Locator pilihPembayaranButton;
+    Locator bankMandiri;
+    Locator bayarSekarangButton;
+    Locator kodePerusahaanText;
+    Locator virtualAccountText;
+
+    Locator invoiceNumber;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -46,7 +53,12 @@ public class InvoicePO {
         voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
-
+        pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
+        bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
+        bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
+        kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
+        virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
+        invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
     }
 
     /**
@@ -179,5 +191,50 @@ public class InvoicePO {
      */
     public String voucherInputPopUpWarningText() {
         return playwright.getText(voucherInputPopUpWarningText);
+    }
+
+    /**
+     * Click on pilih pembayaran to choose what method to the payment.
+     */
+    public void clickOnPilihPembayaran() {
+        playwright.clickOn(pilihPembayaranButton);
+    }
+
+    /**
+     * Choose mandiri as payment
+     */
+    public void clickOnMandiri() {
+        playwright.clickOn(bankMandiri);
+    }
+
+    /**
+     * Click on bayar sekarang button
+     */
+    public void clickOnBayarSekarang() {
+        playwright.clickOn(bayarSekarangButton);
+    }
+
+    /**
+     * Get company code text to use on midtrans
+     * @return String data type
+     */
+    public String getCompanyCodeText() {
+        return playwright.getText(kodePerusahaanText);
+    }
+
+    /**
+     * Get virtual account number to use on midtrans
+     * @return String data type
+     */
+    public String getVirtualAccountNumberText() {
+        return playwright.getText(virtualAccountText);
+    }
+
+    /**
+     * Get invoice number
+     * @return String data type of invoice number
+     */
+    public String getInvoiceNumber() {
+        return playwright.getText(invoiceNumber);
     }
 }

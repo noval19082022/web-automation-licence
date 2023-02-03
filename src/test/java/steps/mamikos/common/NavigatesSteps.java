@@ -1,11 +1,12 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
-import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
 import config.playwright.context.OwnerContext;
 import config.playwright.context.TenantContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import pageobject.common.HomePO;
@@ -24,11 +25,6 @@ public class NavigatesSteps {
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY);
-    }
-
-    @When("user navigate to tagihan kost saya")
-    public void userNavigateToTagihanKostSaya() {
-        playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING);
     }
 
     @When("scenario is {string}")
@@ -74,5 +70,15 @@ public class NavigatesSteps {
             ActiveContext.getActiveBrowserContext().newPage();
         });
 
+    }
+
+    @When("tenant navigate to riwayat booking")
+    public void tenantNavigateToRiwayatBooking() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
+    }
+
+    @When("tenant/user navigate to tagihan kost saya")
+    public void userNavigateToTagihanKostSaya() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING, 30000.0, LoadState.LOAD);
     }
 }
