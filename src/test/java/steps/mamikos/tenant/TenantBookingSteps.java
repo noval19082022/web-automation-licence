@@ -42,7 +42,7 @@ public class TenantBookingSteps {
     @When("tenant booking kost")
     public void tenantBookingKost() {
         kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate("tomorrow");
+        kostDetail.selectBookingDate("today");
         kostDetail.selectBookingPeriod("Per Bulan");
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();

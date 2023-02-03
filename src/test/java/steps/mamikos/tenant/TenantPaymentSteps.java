@@ -6,6 +6,7 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import data.payment.Payment;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -14,8 +15,11 @@ import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 import testdata.InvoiceTestData;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +31,8 @@ public class TenantPaymentSteps {
     RiwayatBookingPO riwayatBooking = new RiwayatBookingPO(page);
     MidtransPaymentPO midtrans = new MidtransPaymentPO(page);
     List<Map<String, String>> voucherName;
+    private List<Map<String, String>> filterKost;
+    private JavaHelpers java = new JavaHelpers();
 
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
@@ -128,5 +134,54 @@ public class TenantPaymentSteps {
     @When("tenant get invoice number")
     public void tenantGetInvoiceNumber() {
         InvoiceTestData.setInvoiceNumber(invoice.getInvoiceNumber());
+    }
+
+    @Then("tenant can sees total cost is equal to basic amount, admin fee plus additional price below")
+    public void tenantCanSeesTotalCostIsEqualToBasicAmountAdminFeePlusAdditionalPriceBelow(List<Integer> priceList) {
+        int totalCost = JavaHelpers.extractNumber(invoice.getTotalCost());
+        int adminCost = JavaHelpers.extractNumber(invoice.getAdminCost());
+        int rentCostPerPeriod = JavaHelpers.extractNumber(invoice.getRentCostPerPeriod());
+        int additionalPriceCost = 0;
+        for (int number : priceList) {
+            additionalPriceCost += number;
+        }
+        Assert.assertEquals( adminCost + rentCostPerPeriod, totalCost - additionalPriceCost);
+
+    }
+
+    @And("owner goes to bills details")
+    public void ownerGoesToBillsDetails(DataTable table) {
+        filterKost = table.asMaps(String.class, String.class);
+        var filter = filterKost.get(0).get("kost name " + Mamikos.ENV);
+        invoice.openManajemenKos();
+        invoice.openKelolaTagihan();
+        invoice.filterTagihanKost(filter);
+    }
+
+    @Then("owner can sees total amount is basic amount plus other price")
+    public void ownerCanSeesTotalAmountIsBasicAmountPlusOtherPrice(List<Integer> priceList) {
+        int totalCost = JavaHelpers.extractNumber(invoice.getTotalCostInvoiceDetail());
+        int perPeriodCost = JavaHelpers.extractNumber(invoice.getRentCostPerPeriodInvoiceDetail());
+        int additionalPriceCost = 0;
+        for (int number : priceList) {
+            additionalPriceCost += number;
+        }
+        Assert.assertEquals( perPeriodCost, totalCost - additionalPriceCost);
+    }
+
+    @And("owner set Kelola Tagihan filter month to {string} month")
+    public void ownerSetKelolaTagihanFilterMonthToMonth(String monthNumber) throws ParseException, InterruptedException {
+        if(monthNumber.equalsIgnoreCase("current")) {
+            monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
+        }
+        else if (monthNumber.equalsIgnoreCase("next")){
+            monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 1, 0, 0, 0);
+        }
+        invoice.selectManageNextBillsMonthFilter(monthNumber);
+    }
+
+    @And("user open invoice details")
+    public void userOpenInvoiceDetails() {
+        invoice.openBills();
     }
 }

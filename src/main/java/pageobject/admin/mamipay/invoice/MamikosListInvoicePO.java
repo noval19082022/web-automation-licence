@@ -18,6 +18,7 @@ public class MamikosListInvoicePO {
     Locator inputCostValue;
     Locator addFeeAdditionalPriceButton;
     Locator additionalPriceTypeOption;
+    Locator detailFirst;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -30,6 +31,7 @@ public class MamikosListInvoicePO {
         inputCostValue = page.locator("input[name=\"cost_value\"]");
         addFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Fee"));
         additionalPriceTypeOption = page.locator("#cost-type-select");
+        detailFirst = page.locator("tr:first-of-type td a:first-of-type + a");
     }
 
     /**
@@ -60,8 +62,9 @@ public class MamikosListInvoicePO {
      * @param invoiceText Text of unique parameter of invoice(e.g invoice number)
      */
     public void goToInvoiceDetail(String invoiceText) {
-        invoiceDetail = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(invoiceText)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Detail Fee"));
-        playwright.clickOn(invoiceDetail);
+//        invoiceDetail = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(invoiceText)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Detail Fee"));
+//        playwright.clickOn(invoiceDetail);
+        playwright.clickOn(detailFirst);
     }
 
     /**

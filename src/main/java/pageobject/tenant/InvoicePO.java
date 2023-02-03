@@ -31,8 +31,22 @@ public class InvoicePO {
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
-
+    Locator txtTotalCost;
+    Locator txtAdminCost;
+    Locator txtRentPerPeriod;
+    Locator filterKostName;
     Locator invoiceNumber;
+    Locator closeFilter;
+    Locator openTagihan;
+    Locator manajemenKosButton;
+    Locator kelolaTagihanButton;
+    Locator selectKostName;
+    Locator nextButton;
+    Locator inputMonthFilter;
+    Locator checkMonth;
+    Locator txtRentPerPeriodInvoiceDetail;
+    Locator txtTotalCostInvoiceDetail;
+    Locator txtAddCostInvoiceDetail;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -59,6 +73,19 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
+        txtTotalCost = page.locator("#invoiceDetailPayment > .invoice-detail-row-section > .invoice-detail-price");
+        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-d9b433b8]");
+        txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
+        filterKostName = page.locator(".column").first();
+        closeFilter = page.locator("i").nth(1);
+        openTagihan = page.locator("//*[@class='billing-management-table__row'][1]");
+        manajemenKosButton = page.getByRole(AriaRole.COMPLEMENTARY).getByText("Manajemen Kos");
+        kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
+        nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
+        inputMonthFilter = page.locator("//*[@class='billing-management-input-trigger bg-c-dropdown'][1]");
+        txtRentPerPeriodInvoiceDetail = page.locator("div:nth-child(10) > div:nth-child(2)");
+        txtTotalCostInvoiceDetail = page.locator("div:nth-child(14) > div:nth-child(2)");
+        txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
     }
 
     /**
@@ -237,4 +264,105 @@ public class InvoicePO {
     public String getInvoiceNumber() {
         return playwright.getText(invoiceNumber);
     }
+
+    /**
+     * Get Total Cost number
+     * @return String data type of invoice number
+     */
+    public String getTotalCost() {
+        return playwright.getText(txtTotalCost).trim();
+    }
+
+    /**
+     * Get Total Cost number in Invoice Detail
+     * @return String data type of invoice number
+     */
+    public String getTotalCostInvoiceDetail() {
+        return playwright.getText(txtTotalCostInvoiceDetail).trim();
+    }
+
+    /**
+     * Get Admin Cost number
+     * @return String data type of invoice number
+     */
+    public String getAdminCost() {
+        return playwright.getText(txtAdminCost).trim();
+    }
+
+    /**
+     * Get Additional Cost number
+     * @return String data type of invoice number
+     */
+    public String getAddCostInvoiceDetail() {
+        return playwright.getText(txtAddCostInvoiceDetail).trim();
+    }
+
+    /**
+     * Get Rent Cost Per Period number
+     * @return String data type of invoice number
+     */
+    public String getRentCostPerPeriod() {
+        return playwright.getText(txtRentPerPeriod).trim();
+    }
+
+    /**
+     * Get Rent Cost Per Period number in Invoice Detail
+     * @return String data type of invoice number
+     */
+    public String getRentCostPerPeriodInvoiceDetail() {
+        return playwright.getText(txtRentPerPeriodInvoiceDetail).trim();
+    }
+
+    /**
+     * filter Open Manajemen Kos
+     */
+    public void openManajemenKos(){
+        playwright.clickOn(manajemenKosButton);
+    }
+
+    /**
+     * filter Open Kelola Tagihan
+     */
+    public void openKelolaTagihan(){
+        playwright.clickOn(kelolaTagihanButton);
+    }
+
+    /**
+     * filter Tagihan Kost Name
+     */
+    public void filterTagihanKost(String filter) {
+        playwright.clickOn(filterKostName);
+        selectKostName = page.locator("span").filter(new Locator.FilterOptions().setHasText(filter)).locator("div");
+        playwright.clickOn(selectKostName);
+        playwright.clickOn(closeFilter);
+    }
+
+
+    /**
+     * filter Open Tagihan Kost
+     */
+    public void openBills(){
+        playwright.clickOn(openTagihan);
+    }
+
+    /**
+     * Select month filter by month number
+     * @param monthNumber 1 = January
+     * @throws InterruptedException
+     */
+    public void selectManageNextBillsMonthFilter(String monthNumber) throws InterruptedException {
+        playwright.clickOn(inputMonthFilter);
+        if (monthNumber.equals("12")){
+            playwright.clickOn(nextButton);
+            playwright.clickOn(page.getByText("Januari"));
+        }
+        else {
+            checkMonth = page.locator("//*[@class='date-wrapper']//*[@class='cell month'][" + monthNumber + "]");
+            playwright.clickOn(checkMonth);
+            page.waitForLoadState(LoadState.LOAD);
+            page.waitForTimeout(3000);
+        }
+    }
+
+
 }
