@@ -27,7 +27,6 @@ public class SearchContractPO {
         searchInput = page.getByPlaceholder("Search");
         batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
         berhentikanContractButton = page.locator(".tools-contract__btn-danger");
-//                page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         inputTerminateDate = page.getByPlaceholder("Masukkan tanggal checkout");
         berhentikanContractPopUpButton = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Akhiri Kontrak"));
         selectTerminateDate = page.locator(".skin-green > div:nth-of-type(2) > .xdsoft_timepicker .xdsoft_current");
