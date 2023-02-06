@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.midtrans.MidtransPaymentPO;
+import pageobject.owner.OwnerDashboardPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -33,7 +34,7 @@ public class TenantPaymentSteps {
     List<Map<String, String>> voucherName;
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
-
+    OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
         invoice = billing.clickOnBayarButton();
@@ -153,7 +154,7 @@ public class TenantPaymentSteps {
     public void ownerGoesToBillsDetails(DataTable table) {
         filterKost = table.asMaps(String.class, String.class);
         var filter = filterKost.get(0).get("kost name " + Mamikos.ENV);
-        invoice.openManajemenKos();
+        ownerDashboard.clickOnManagementKost();
         invoice.openKelolaTagihan();
         invoice.filterTagihanKost(filter);
     }

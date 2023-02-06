@@ -37,7 +37,6 @@ public class InvoicePO {
     Locator invoiceNumber;
     Locator closeFilter;
     Locator openTagihan;
-    Locator manajemenKosButton;
     Locator kelolaTagihanButton;
     Locator selectKostName;
     Locator nextButton;
@@ -77,7 +76,6 @@ public class InvoicePO {
         filterKostName = page.locator(".column").first();
         closeFilter = page.locator("i").nth(1);
         openTagihan = page.locator("//*[@class='billing-management-table__row'][1]");
-        manajemenKosButton = page.getByRole(AriaRole.COMPLEMENTARY).getByText("Manajemen Kos");
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
         inputMonthFilter = page.locator("//*[@class='billing-management-input-trigger bg-c-dropdown'][1]");
@@ -309,13 +307,6 @@ public class InvoicePO {
      */
     public String getRentCostPerPeriodInvoiceDetail() {
         return playwright.getText(txtRentPerPeriodInvoiceDetail).trim();
-    }
-
-    /**
-     * filter Open Manajemen Kos
-     */
-    public void openManajemenKos(){
-        playwright.clickOn(manajemenKosButton);
     }
 
     /**
