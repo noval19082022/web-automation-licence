@@ -81,4 +81,10 @@ public class NavigatesSteps {
     public void userNavigateToTagihanKostSaya() {
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING, 30000.0, LoadState.LOAD);
     }
+
+    @When("owner/user navigate to billing management")
+    public void userNavigateToBillingManagement() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.KELOLA_TAGIHAN, 30000.0, LoadState.LOAD);
+    }
+
 }

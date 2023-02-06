@@ -1,6 +1,6 @@
 package steps.example;
 
-import config.mamikos.Mamikos;
+//import config.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -25,6 +25,6 @@ public class ExampleSteps {
         dataTableList = table.asMaps(String.class, String.class);
         System.out.println(dataTableList.get(0));
         System.out.println(dataTableList.get(0).get("emailprod"));
-        System.out.println(dataTableList.get(0).get("email"+ Mamikos.ENV));
+//        System.out.println(dataTableList.get(0).get("email"+ Mamikos.ENV));
     }
 }
