@@ -31,7 +31,6 @@ public class InvoicePO {
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
-    Locator txtTotalCost;
     Locator txtAdminCost;
     Locator txtRentPerPeriod;
     Locator filterKostName;
@@ -73,7 +72,6 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
-        txtTotalCost = page.locator("#invoiceDetailPayment > .invoice-detail-row-section > .invoice-detail-price");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-d9b433b8]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
@@ -270,7 +268,7 @@ public class InvoicePO {
      * @return String data type of invoice number
      */
     public String getTotalCost() {
-        return playwright.getText(txtTotalCost).trim();
+        return playwright.getText(totalPembayaran).trim();
     }
 
     /**
