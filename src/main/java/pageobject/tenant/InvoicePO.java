@@ -265,6 +265,10 @@ public class InvoicePO {
         return playwright.getText(invoiceNumber);
     }
 
+    /**
+     * Get additional price inner text
+     * @return String data type list of additional price section
+     */
     public List<String> getAdditionalPriceInnerText() {
         page.waitForLoadState(LoadState.LOAD);
         return additionalPriceDiv.allInnerTexts();
