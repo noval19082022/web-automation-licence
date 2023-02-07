@@ -185,4 +185,9 @@ public class TenantPaymentSteps {
     public void userOpenInvoiceDetails() {
         invoice.openBills();
     }
+
+    @And("user open riwayat booking")
+    public void userOpenRiwayatBooking() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
 }
