@@ -191,4 +191,9 @@ public class TenantPaymentSteps {
         Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaTitle));
         Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaPrice));
     }
+
+    @And("user open riwayat booking")
+    public void userOpenRiwayatBooking() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
 }
