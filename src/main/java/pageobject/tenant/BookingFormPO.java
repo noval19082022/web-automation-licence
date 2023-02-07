@@ -15,6 +15,7 @@ public class BookingFormPO {
     Locator confirmCancelButton;
     Locator successCancel;
     Locator okCancelButton;
+    Locator rentDurationIncreaseButton;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -27,7 +28,7 @@ public class BookingFormPO {
         this.successCancel = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
         this.okCancelButton = page.locator(".bg-c-button");
         this.cancelReasonButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Berubah pikiran/ada rencana lain")).locator("span");
-
+        this.rentDurationIncreaseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus"));
     }
 
     /**
@@ -97,6 +98,16 @@ public class BookingFormPO {
     public void closeCancelPopUp() {
         if (okCancelButton.isVisible()) {
             okCancelButton.click();
+        }
+    }
+
+    /**
+     * Increase Rent Duration
+     * @throws InterruptedException
+     */
+    public void increaseRateDuration() throws InterruptedException {
+        if(rentDurationIncreaseButton.isVisible()) {
+            rentDurationIncreaseButton.click();
         }
     }
 

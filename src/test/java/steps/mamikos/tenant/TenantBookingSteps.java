@@ -85,4 +85,20 @@ public class TenantBookingSteps {
         riwayatBooking.clickOnCheckinPopUpButton();
         riwayatBooking.clickOnSelesaiAndKeKostSaya();
     }
+
+
+    @And("tenant booking kost for {string} and input rent duration equals to {int}")
+    public void tenantBookingKostForAndInputRentDurationEqualsTo(String bookingTime, int duration) throws InterruptedException {
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate(bookingTime);
+        kostDetail.selectBookingPeriod("Per Bulan");
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        for (int i = 1; i < duration; i++) {
+            bookingForm.increaseRateDuration();
+        }
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
 }
