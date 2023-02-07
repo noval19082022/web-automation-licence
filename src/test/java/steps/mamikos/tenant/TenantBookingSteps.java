@@ -80,6 +80,7 @@ public class TenantBookingSteps {
 
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
+        page.reload();
         riwayatBooking.clickOnCheckinButton();
         riwayatBooking.clickOnCheckinPopUpButton();
         riwayatBooking.clickOnSelesaiAndKeKostSaya();
