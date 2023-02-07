@@ -5,7 +5,6 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaywrightHelpers {
@@ -115,7 +114,8 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Accept dialog
+     * By default, playwright will dismiss dialog/alert.
+     * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
         page.onceDialog(Dialog::accept);
@@ -275,18 +275,9 @@ public class PlaywrightHelpers {
     /**
      * Get locators as array list
      * @param locator Locator type
-     * @param maxIndex int type
      * @return List of locators
      */
-    public List<Locator> getLocators(Locator locator, int maxIndex) {
-        List<Locator> locators = new ArrayList<>();
-        for (int i = 0; i <= maxIndex; i++) {
-            Locator currentLocator = locator.nth(i);
-            if (!currentLocator.isVisible()) {
-                break;
-            }
-            locators.add(currentLocator);
-        }
-        return locators;
+    public List<Locator> getLocators(Locator locator) {
+        return locator.all();
     }
 }

@@ -2,6 +2,9 @@ package pageobject.owner;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -12,14 +15,15 @@ public class OwnerDashboardPO {
     private Locator ownerProfile;
     private Locator manajemenKost;
     private Locator pengajuanBooking;
+    private Locator kelolaTagihan;
     public OwnerDashboardPO(Page page) {
         this.page = page;
-        playwright = new PlaywrightHelpers(page);
-        locator = new LocatorHelpers(page);
-        this.manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
-        this.pengajuanBooking = playwright.locatorByRoleSetName(locator.roleButton, "Pengajuan Booking");
-        this.ownerProfile = playwright.locatorByRoleSetName(locator.roleButton, "account Akun");
-
+        this.playwright = new PlaywrightHelpers(page);
+        this.locator = new LocatorHelpers(page);
+        manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
+        pengajuanBooking = playwright.locatorByRoleSetName(locator.roleButton, "Pengajuan Booking");
+        ownerProfile = playwright.locatorByRoleSetName(locator.roleButton, "account Akun");
+        kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
     }
 
     /**
@@ -40,7 +44,17 @@ public class OwnerDashboardPO {
      * Click on pengajuan booking
      */
     public PengajuanBookingPO clickOnPengajuanBooking() {
+        pengajuanBooking.waitFor();
         pengajuanBooking.click();
         return new PengajuanBookingPO(page);
+    }
+
+    /**
+     * Click on Kelola Kos and navigate to Tenant Bill Management
+     * @return TenantBillManagementPO class
+     */
+    public TenantBillManagementPO clickOnKelolaKos() {
+        playwright.clickOn(kelolaTagihan);
+        return new TenantBillManagementPO(page);
     }
 }

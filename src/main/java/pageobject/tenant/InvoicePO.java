@@ -7,6 +7,8 @@ import com.microsoft.playwright.options.LoadState;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class InvoicePO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -35,6 +37,7 @@ public class InvoicePO {
     Locator txtRentPerPeriod;
     Locator filterKostName;
     Locator invoiceNumber;
+    Locator additionalPriceDiv;
     Locator closeFilter;
     Locator openTagihan;
     Locator kelolaTagihanButton;
@@ -71,6 +74,7 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
+        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-d9b433b8]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
@@ -259,6 +263,15 @@ public class InvoicePO {
      */
     public String getInvoiceNumber() {
         return playwright.getText(invoiceNumber);
+    }
+
+    /**
+     * Get additional price inner text
+     * @return String data type list of additional price section
+     */
+    public List<String> getAdditionalPriceInnerText() {
+        page.waitForLoadState(LoadState.LOAD);
+        return additionalPriceDiv.allInnerTexts();
     }
 
     /**

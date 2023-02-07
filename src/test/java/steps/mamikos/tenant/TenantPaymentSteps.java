@@ -20,7 +20,6 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -184,6 +183,13 @@ public class TenantPaymentSteps {
     @And("user open invoice details")
     public void userOpenInvoiceDetails() {
         invoice.openBills();
+    }
+
+    @Then("tenant can see additional price biaya lainnya {string} with price {string}")
+    public void tenantCanSeeAdditionalPriceBiayaLainnyaWithPrice(String biayaLainnyaTitle, String biayaLainnyaPrice) {
+        List<String> biayaLainnyaInnerText = invoice.getAdditionalPriceInnerText();
+        Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaTitle));
+        Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaPrice));
     }
 
     @And("user open riwayat booking")

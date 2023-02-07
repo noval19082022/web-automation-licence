@@ -40,6 +40,14 @@ public class Hooks{
      */
     @After
     public void cleanUp(Scenario scenario) {
+        if (scenario.isFailed()) {
+            scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
+            if (GlobalConfig.SET_TRACING) {
+                ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
+                    .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
+            }
+        }
+
         if (!scenario.getSourceTagNames().contains("@continue")) {
             if (TenantContext.getTenantBrowserContext() != null) TenantContext.getTenantBrowserContext().close();
             if (OwnerContext.getOwnerBrowserContext() != null) OwnerContext.getOwnerBrowserContext().close();
@@ -47,14 +55,6 @@ public class Hooks{
             if (UserContext.getUserBrowserContext() != null) UserContext.getUserBrowserContext().close();
             if (ActiveContext.getActiveBrowserContext() != null) ActiveContext.getActiveBrowserContext().close();
             FlowControl.setContinueFlow(false);
-        }
-
-        if (scenario.isFailed()) {
-            scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
-            if (GlobalConfig.SET_TRACING) {
-                ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
-                    .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
-            }
         }
 
         System.out.println(scenario.getName() + " is finished");

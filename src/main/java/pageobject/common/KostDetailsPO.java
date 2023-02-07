@@ -78,7 +78,7 @@ public class KostDetailsPO {
         }
         mulaiKosInput.click();
         datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
-        List<Locator> datePicks = playwright.getLocators(datePick, 10);
+        List<Locator> datePicks = playwright.getLocators(datePick);
         for (Locator pick : datePicks) {
             if (pick.isEnabled() && pick.isVisible()) {
                 pick.click();

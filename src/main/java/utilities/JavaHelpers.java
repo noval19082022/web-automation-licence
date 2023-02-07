@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -47,6 +48,37 @@ public class JavaHelpers {
         LocalDateTime costumeDate = localDateTime.plusDays(plusDays).plusMonths(plusMonth).plusYears(plusYears);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
         return costumeDate.format(dateTimeFormatter);
+    }
+
+    /**
+     * Get month name in English
+     * @return String data type of month name.
+     */
+    public static String getMonthName() {
+        Calendar calendar = Calendar.getInstance();
+        return new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)];
+    }
+
+    /**
+     * Get month name with locale
+     * @param locale Locale type
+     * @return String data type of month name.
+     */
+    public static String getMonthName(Locale locale){
+        Calendar calendar = Calendar.getInstance();
+        return new DateFormatSymbols(locale).getMonths()[calendar.get(Calendar.MONTH)];
+    }
+
+    /**
+     * Get month name with locale
+     * @param locale Locale type
+     * @param change Increment or decrement from current month.
+     * @return String data type of month name.
+     */
+    public static String getMonthName(Locale locale, int change) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, change);
+        return new DateFormatSymbols(locale).getMonths()[calendar.get(Calendar.MONTH)];
     }
     // --- Date and Time -- \\
 

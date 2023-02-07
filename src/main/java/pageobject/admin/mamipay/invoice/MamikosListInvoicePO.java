@@ -3,12 +3,13 @@ package pageobject.admin.mamipay.invoice;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.admin.mamipay.voucher.MamikosVoucherFormPO;
+import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 public class MamikosListInvoicePO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private LocatorHelpers locator;
     Locator searchInvoiceBy;
     Locator inputSearchValue;
     Locator cariInvoice;
@@ -19,10 +20,13 @@ public class MamikosListInvoicePO {
     Locator addFeeAdditionalPriceButton;
     Locator additionalPriceTypeOption;
     Locator detailFirst;
+    Page.GetByRoleOptions pageRoleOptions;
+    Locator.GetByRoleOptions locatorRoleOptions;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        this.locator = new LocatorHelpers(page);
         searchInvoiceBy = page.locator("select[name=\"search_by\"]");
         inputSearchValue = page.locator("input[name=\"search_value\"]");
         cariInvoice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Invoice"));
@@ -32,6 +36,8 @@ public class MamikosListInvoicePO {
         addFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Fee"));
         additionalPriceTypeOption = page.locator("#cost-type-select");
         detailFirst = page.locator("tr:first-of-type td a:first-of-type + a");
+        pageRoleOptions = new Page.GetByRoleOptions();
+        locatorRoleOptions = new Locator.GetByRoleOptions();
     }
 
     /**
@@ -62,9 +68,8 @@ public class MamikosListInvoicePO {
      * @param invoiceText Text of unique parameter of invoice(e.g invoice number)
      */
     public void goToInvoiceDetail(String invoiceText) {
-//        invoiceDetail = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(invoiceText)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Detail Fee"));
-//        playwright.clickOn(invoiceDetail);
-        playwright.clickOn(detailFirst);
+        invoiceDetail = page.getByRole(AriaRole.ROW, pageRoleOptions.setName(invoiceText)).getByRole(AriaRole.LINK, locatorRoleOptions.setName("Detail Fee"));
+        playwright.clickOn(invoiceDetail);
     }
 
     /**
