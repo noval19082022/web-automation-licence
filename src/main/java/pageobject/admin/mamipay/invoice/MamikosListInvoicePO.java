@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.invoice;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -22,6 +23,8 @@ public class MamikosListInvoicePO {
     Locator detailFirst;
     Page.GetByRoleOptions pageRoleOptions;
     Locator.GetByRoleOptions locatorRoleOptions;
+    Locator otherPrice;
+    Locator getOtherPriceNumber;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -80,6 +83,13 @@ public class MamikosListInvoicePO {
     }
 
     /**
+     * Click on Detail in first invoice detail
+     */
+    public void clickOnDetailFirstButton() {
+        playwright.clickOn(detailFirst);
+    }
+
+    /**
      * Fill additional price name
      * @param priceName Price/Title name of addiontal price
      */
@@ -110,4 +120,35 @@ public class MamikosListInvoicePO {
     public void selectAdditionalPriceType(String costType) {
         playwright.selectDropdownByValue(additionalPriceTypeOption,costType);
     }
+
+    /**
+     * Get invoice detail element value
+     * @param invoiceEl input with element name that present on invoice detail
+     * @return string data type
+     */
+    public String getInvoiceElementValue(String invoiceEl) {
+        return playwright.getText(page.locator("//*[.='"+invoiceEl+"']/following-sibling::*[1]")).trim();
+    }
+
+    /**
+     * Get other price's price number
+     * @param invoiceEl input with other price Fee Type example "Admin", "Biaya Tetap" etc
+     * @return Integer data type of other price's price number
+     */
+    public Integer getOtherPriceNumber(String invoiceEl) {
+        getOtherPriceNumber = page.locator("//*[.='"+invoiceEl+"']/following-sibling::*[1]");
+        return JavaHelpers.extractNumber(playwright.getText(getOtherPriceNumber));
+    }
+
+    /**
+     * Delete active other price
+     * @param otherPriceName input with other price name
+     * @throws InterruptedException
+     */
+    public void deleteAdditionalOtherPrice(String otherPriceName) throws InterruptedException {
+        otherPrice = page.locator("//*[.='"+otherPriceName+"']/following-sibling::*//*[@title='Delete Fee']");
+        playwright.clickOn(otherPrice);
+        page.waitForSelector(".callout.callout-success");
+    }
+
 }
