@@ -196,4 +196,15 @@ public class TenantPaymentSteps {
     public void userOpenRiwayatBooking() {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
     }
+
+    @When("tenant get invoice number from riwayat booking")
+    public void tenantGetInvoiceNumberFromRiwayatBooking() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+        InvoiceTestData.setInvoiceNumber(invoice.getInvoiceNumber());
+    }
+
+    @When("tenant go to invoice page from riwayat booking")
+    public void tenantGoToInvoicePageFromRiwayatBooking() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
 }
