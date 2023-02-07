@@ -2,6 +2,7 @@ package pageobject.owner.kelolatagihan;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -50,9 +51,21 @@ public class TenantBillManagementPO {
 
     /**
      * Click on invoice list and navigate to billing details
+     * Only work if there is only one item in the list
      * @return BillDetailsPO class
      */
     public BillDetailsPO clickOnInvoiceList() {
+        playwright.clickOn(invoiceList);
+        return new BillDetailsPO(page);
+    }
+
+    /**
+     * Click on invoice list based jatuh tempo text
+     * @param setName Set with jatuh tempo test example: Belum bayar - Jatuh tempo sekarang
+     * @return BillDetailsPO class
+     */
+    public BillDetailsPO clickOnInvoiceList(String setName) {
+        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setName)).getByTestId("invoice-status-label");
         playwright.clickOn(invoiceList);
         return new BillDetailsPO(page);
     }

@@ -24,18 +24,25 @@ public class OwnerManageBillSteps {
 
     @When("owner go to bill page of kost {string} on month of {string}")
     public void ownerGoToBillPageOfKostOnMonthOf(String kostName, String month) {
-        month = month.equalsIgnoreCase("next")
-                ? JavaHelpers.getMonthName(new Locale("id", "ID"), 1)
-                : month;
+        if (month.equalsIgnoreCase("next")) {
+            month = JavaHelpers.getMonthName(new Locale("id", "ID"), 1);
+        } else if(month.equalsIgnoreCase("current")) {
+            month = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
+        }
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
         billManage.selectKosFilter(kostName);
         billManage.selectMonthFilter(month);
     }
 
-    @And("owner go to detail tagihan")
+    @When("owner go to detail tagihan")
     public void ownerGoToDetailTagihan() {
         billdetail = billManage.clickOnInvoiceList();
+    }
+
+    @When("owner go to detail tagihan with jatuh tempo is {string}")
+    public void ownerGoToDetailTagihanWithJatuhTempoIs(String jatuhTempo) {
+        billdetail = billManage.clickOnInvoiceList(jatuhTempo);
     }
 
     @Then("owner can see additional price biaya lainnya {string} with price {string}")
