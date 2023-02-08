@@ -96,7 +96,7 @@ public class InvoicePO {
     public void clickOnDeleteVoucher() throws InterruptedException {
         page.waitForLoadState(LoadState.LOAD);
         page.waitForTimeout(1000);
-        if (deleteVoucher.isEnabled()) {
+        if (deleteVoucher.isVisible()) {
             playwright.clickOn(deleteVoucher);
         }
     }
