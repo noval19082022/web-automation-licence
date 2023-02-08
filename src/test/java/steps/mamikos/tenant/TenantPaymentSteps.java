@@ -122,7 +122,6 @@ public class TenantPaymentSteps {
         page = ActiveContext.getActiveBrowserContext().pages().get(1);
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
-        page.pause();
         midtrans = new MidtransPaymentPO(page);
         midtrans.inputBillerCode(kodePerusahaan);
         midtrans.inputPaymentCode(nomorVirtualAccount);
