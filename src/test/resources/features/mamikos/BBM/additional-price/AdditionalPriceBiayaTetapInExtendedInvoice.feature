@@ -1,4 +1,4 @@
-@BBM2 @runlagidong
+@BBM2
 Feature: Additional Price Biaya Tetap On Extended Invoice
 
   Scenario: Admin Batalkan Contract
@@ -62,7 +62,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
       | search by              | renter_phone_number    |
       | search value           | 087708777615           |
       | invoice number         | default                |
-      | additional price type  | fixed                   |
+      | additional price type  | fixed                  |
       | additional price title | Automation Biaya Tetap |
       | addtional price value  | 200000                 |
 
@@ -74,7 +74,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
-    Then tenant can see additional price biaya lainnya "Automation Biaya Tetap" with price "Rp200.000"
+    Then tenant can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 
   Scenario: Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
@@ -83,4 +83,4 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto SinggahSini" on month of "next"
     And owner go to detail tagihan
-    Then owner can see additional price biaya lainnya "Automation Biaya Tetap" with price "Rp200.000"
+    Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
