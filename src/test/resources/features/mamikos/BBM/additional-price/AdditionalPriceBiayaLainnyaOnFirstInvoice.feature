@@ -68,6 +68,7 @@ Feature: Additional Price Biaya Lainnya On First Invoice
       | 087708777615 | 087708777615 | qwerty123 |
     And tenant navigate to riwayat booking
     And tenant go to invoice page from riwayat booking
+    And tenant set active page to 1
     Then tenant can see additional price biaya lainnya "Automation Biaya Lainnya" with price "Rp200.000"
 
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills

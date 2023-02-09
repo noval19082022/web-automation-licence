@@ -73,6 +73,7 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
+    And tenant set active page to 1
     Then tenant can see additional price biaya lainnya "Automation Biaya Lainnya" with price "Rp200.000"
 
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills

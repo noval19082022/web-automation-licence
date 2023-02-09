@@ -1,4 +1,4 @@
-BBM2
+@BBM2
 Feature: Additional Price Biaya Lainnya On Settlement Invoice
 
   Scenario: Admin Batalkan Contract
