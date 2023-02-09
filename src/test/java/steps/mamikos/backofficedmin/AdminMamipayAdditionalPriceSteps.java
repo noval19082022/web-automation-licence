@@ -87,4 +87,12 @@ public class AdminMamipayAdditionalPriceSteps {
             invoiceAdmin.deleteAdditionalOtherPrice(s);
         }
     }
+
+    @Then("admin can sees total cost is basic amount + admin fee")
+    public void admin_can_sees_total_cost_is_basic_amount_admin_fee() throws InterruptedException {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
+        Assert.assertEquals(totalCost, basicAmount + adminFee);
+    }
 }
