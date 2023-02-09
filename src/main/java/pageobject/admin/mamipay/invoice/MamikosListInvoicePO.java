@@ -25,6 +25,7 @@ public class MamikosListInvoicePO {
     Locator.GetByRoleOptions locatorRoleOptions;
     Locator otherPrice;
     Locator getOtherPriceNumber;
+    Locator txtBasicAmount;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -39,6 +40,7 @@ public class MamikosListInvoicePO {
         addFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Fee"));
         additionalPriceTypeOption = page.locator("#cost-type-select");
         detailFirst = page.locator("tr:first-of-type td a:first-of-type + a");
+        txtBasicAmount = page.locator("//*[.='Basic Amount']/following-sibling::dd[1]");
         pageRoleOptions = new Page.GetByRoleOptions();
         locatorRoleOptions = new Locator.GetByRoleOptions();
     }
@@ -138,6 +140,14 @@ public class MamikosListInvoicePO {
     public Integer getOtherPriceNumber(String invoiceEl) {
         getOtherPriceNumber = page.locator("//*[.='"+invoiceEl+"']/following-sibling::*[1]");
         return JavaHelpers.extractNumber(playwright.getText(getOtherPriceNumber));
+    }
+
+    /**
+     * Get basic amount as text
+     * @return string data type
+     */
+    public String getBasicAmountText() {
+        return playwright.getText(txtBasicAmount);
     }
 
     /**
