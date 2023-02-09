@@ -83,4 +83,4 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | 08900000000021 | 08900000000021 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
     And owner go to detail tagihan
-    Then owner can see additional price biaya lainnya "Automation Biaya Lainnya" with price "Rp200.000"
+    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

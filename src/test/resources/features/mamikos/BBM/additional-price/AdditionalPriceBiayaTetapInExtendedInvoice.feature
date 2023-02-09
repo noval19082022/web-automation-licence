@@ -53,7 +53,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
     And tenant go to invoice page
     And tenant get invoice number
 
-  Scenario: Admin Add Additional Price Biaya Lainnya
+  Scenario: Admin Add Additional Price Biaya Tetap
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -66,7 +66,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
       | additional price title | Automation Biaya Tetap |
       | addtional price value  | 200000                 |
 
-  Scenario: Tenant Check Additional Price Biaya Lainnya Added By Admin On Invoice
+  Scenario: Tenant Check Additional Price Biaya Tetap Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
@@ -76,7 +76,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
     And tenant set active page to 1
     Then tenant can see additional price biaya lainnya "Automation Biaya Tetap" with price "Rp200.000"
 
-  Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
+  Scenario: Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
