@@ -29,7 +29,6 @@ public class TenantBillManagementPO {
         Locator kosNameFilter = page.getByText(kostName);
         playwright.waitFor(filterKos, 30000.0);
         List<String> filterKostInnerTexts = filterKos.allInnerTexts();
-        System.out.println(filterKostInnerTexts);
         if (!filterKostInnerTexts.get(0).contains(kostName)) {
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);

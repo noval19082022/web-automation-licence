@@ -95,7 +95,7 @@ public class InvoicePO {
      */
     public void clickOnDeleteVoucher() throws InterruptedException {
         page.waitForLoadState(LoadState.LOAD);
-        page.waitForTimeout(3000);
+        page.waitForTimeout(1000);
         if (deleteVoucher.isVisible()) {
             playwright.clickOn(deleteVoucher);
         }
@@ -105,6 +105,7 @@ public class InvoicePO {
      * Click on the "masukkan voucher" button
      */
     public void clickOnMasukkanVoucher() {
+        masukkanVoucher.waitFor();
         playwright.clickOn(masukkanVoucher);
     }
 
@@ -366,6 +367,4 @@ public class InvoicePO {
             page.waitForTimeout(3000);
         }
     }
-
-
 }

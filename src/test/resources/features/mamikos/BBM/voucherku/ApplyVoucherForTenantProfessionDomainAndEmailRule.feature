@@ -1,4 +1,4 @@
-@BBM7 @lawackrun2
+@BBM7
 Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
 
   @continue

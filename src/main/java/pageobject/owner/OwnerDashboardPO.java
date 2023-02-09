@@ -54,7 +54,7 @@ public class OwnerDashboardPO {
      * @return TenantBillManagementPO class
      */
     public TenantBillManagementPO clickOnKelolaKos() {
-        playwright.clickOn(kelolaTagihan);
+        playwright.doubleClick(kelolaTagihan);
         return new TenantBillManagementPO(page);
     }
 }
