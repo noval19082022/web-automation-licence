@@ -43,7 +43,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
   Scenario: Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
+      | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | qwerty123 |
     And tenant navigate to riwayat booking
     And tenant pay kost from riwayat booking using mandiri
@@ -60,7 +60,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin add additional price:
       | search by              | renter_phone_number      |
-      | search value           | 087708777615            |
+      | search value           | 087708777615             |
       | invoice number         | default                  |
       | additional price type  | default                  |
       | additional price title | Automation Biaya Lainnya |
