@@ -131,8 +131,28 @@ public class TenantPaymentSteps {
         ActiveContext.getActiveBrowserContext().pages().get(1).close();
     }
 
+    @When("tenant pay kost from riwayat booking using mandiri without close the page")
+    public void tenantPayKostFromRiwayatBookingWithoutCloseThePage() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnMandiri();
+        invoice.clickOnBayarSekarang();
+        var kodePerusahaan = invoice.getCompanyCodeText();
+        var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        midtrans = new MidtransPaymentPO(page);
+        midtrans.inputBillerCode(kodePerusahaan);
+        midtrans.inputPaymentCode(nomorVirtualAccount);
+        midtrans.clickOnInquireButton();
+        midtrans.clickOnPayButton();
+        midtrans.waitForSuccessTransaction();
+    }
+
     @When("tenant get invoice number")
     public void tenantGetInvoiceNumber() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
         InvoiceTestData.setInvoiceNumber(invoice.getInvoiceNumber());
     }
 
@@ -187,6 +207,7 @@ public class TenantPaymentSteps {
 
     @Then("tenant can see additional price biaya lainnya {string} with price {string}")
     public void tenantCanSeeAdditionalPriceBiayaLainnyaWithPrice(String biayaLainnyaTitle, String biayaLainnyaPrice) {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
         List<String> biayaLainnyaInnerText = invoice.getAdditionalPriceInnerText();
         Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaTitle));
         Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaPrice));
@@ -206,5 +227,10 @@ public class TenantPaymentSteps {
     @When("tenant go to invoice page from riwayat booking")
     public void tenantGoToInvoicePageFromRiwayatBooking() {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
+
+    @When("tenant go to invoice DP from riwayat booking")
+    public void tenantGoToInvoiceDP() {
+        invoice = riwayatBooking.goToSettlementInvoice();
     }
 }
