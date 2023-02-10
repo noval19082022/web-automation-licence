@@ -2,8 +2,8 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import config.global.FlowControl;
-import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
@@ -32,9 +32,11 @@ public class LoginSteps {
         }
         login.clickOnButtonMasuk()
             .clickOnPencariKostButton()
+            .waitForPasswordInput()
             .fillPhoneNumber(phone)
             .fillPassword(password)
-            .clickOnLoginButton();
+            .clickOnLoginButton()
+            .waitTillLogoIsVisible();
     }
 
     @When("user login as tenant via facebook")

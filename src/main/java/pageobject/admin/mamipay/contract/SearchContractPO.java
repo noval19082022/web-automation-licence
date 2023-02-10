@@ -26,7 +26,7 @@ public class SearchContractPO {
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         searchInput = page.getByPlaceholder("Search");
         batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
-        berhentikanContractButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
+        berhentikanContractButton = page.locator(".tools-contract__btn-danger");
         inputTerminateDate = page.getByPlaceholder("Masukkan tanggal checkout");
         berhentikanContractPopUpButton = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Akhiri Kontrak"));
         selectTerminateDate = page.locator(".skin-green > div:nth-of-type(2) > .xdsoft_timepicker .xdsoft_current");
@@ -71,13 +71,18 @@ public class SearchContractPO {
      * Set accept dialog and click on terminate contract button
      */
     public void clickOnTerminateContractButton() {
-        if (berhentikanContractButton.isVisible()) {
-            berhentikanContractButton.click();
-            inputTerminateDate.click();
-            selectTerminateDate.click();
-            berhentikanContractPopUpButton.click();
-        }
+           if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
+               playwright.acceptDialog(berhentikanContractButton);
+
+               if (inputTerminateDate.isVisible()) {
+                   inputTerminateDate.click();
+                   selectTerminateDate.click();
+                   berhentikanContractPopUpButton.click();
+               }
+               page.waitForSelector(".callout.callout-success");
+           }
     }
+
 
     /**
      * Wait until terminated is process is finished
@@ -94,4 +99,5 @@ public class SearchContractPO {
     public String getSuccessTerminateHeadingText() {
         return playwright.getText(successTerminateText);
     }
+
 }

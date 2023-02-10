@@ -10,23 +10,24 @@ import config.playwright.PlaywrightSourceManager;
 import config.playwright.browser.BrowserInitialize;
 import config.playwright.browser.BrowserOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class BaseTestRunner extends AbstractTestNGCucumberTests {
-    @BeforeSuite(alwaysRun = true)
+
+    @BeforeSuite
     public void beforeSuite() throws CluecumberException {
+        System.out.println("Starting Playwright");
+    }
+
+    @BeforeTest(alwaysRun = true)
+    public void beforeTest() {
         BrowserInitialize browserInitialize = new BrowserInitialize();
 
         PlaywrightSourceManager.setLocalPlaywright(Playwright.create());
         PlaywrightSourceManager.setLocalBrowser(browserInitialize.getBrowser(GlobalConfig.BROWSER_NAME, BrowserOptions.launchOptions()));
         FlowControl.setStrictFlow(false);
+        FlowControl.setContinueFlow(false);
     }
-
-    //@BeforeTest
-    //public void beforeTest() {
-    //}
     //
     //    @BeforeClass
     //    public void beforeClass() {
@@ -36,22 +37,23 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
     //    public void afterClass() {
     //    }
     //
-    //    @AfterTest
-    //    public void afterTest(){
-    //    }
+        @Parameters({"squadName"})
+        @AfterTest(alwaysRun = true)
+        public void afterTest(String squadName) throws CluecumberException {
+            String jsonDirectory = "target/result/" + squadName;
+            String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
+            PlaywrightSourceManager.getLocalBrowser().close();
+            PlaywrightSourceManager.getLocalPlaywright().close();
+            new CluecumberCore.Builder()
+                    .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
+                    .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
+                    .setCustomPageTitle(squadName + "Report")
+                    .setExpandAttachments(true)
+                    .build().generateReports(jsonDirectory, reportDirectory);
+        }
 
-    @Parameters({"squadName"})
-    @AfterSuite(alwaysRun = true)
-    public void afterSuite(String squadName) throws CluecumberException {
-        String jsonDirectory = "target/result/" + squadName;
-        String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
-        PlaywrightSourceManager.getLocalBrowser().close();
-        PlaywrightSourceManager.getLocalPlaywright().close();
-        new CluecumberCore.Builder()
-                .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
-                .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
-                .setCustomPageTitle(squadName + "Report")
-                .setExpandAttachments(true)
-                .build().generateReports(jsonDirectory, reportDirectory);
+    @AfterSuite
+    public void afterSuite() {
+        System.out.println("Playwright Run Is Finished");
     }
 }

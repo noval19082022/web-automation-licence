@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import pageobject.admin.mamipay.contract.SearchContractPO;
+import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
 import utilities.PlaywrightHelpers;
 
@@ -13,13 +14,14 @@ public class AdminMamipayDashboardPO {
     Locator searchContract;
     Locator voucherDiscount;
     Locator mamikosVoucher;
+    Locator searchInvoice;
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         searchContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Contract"));
         voucherDiscount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Voucher Discount "));
         mamikosVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Mamikos Voucher"));
-
+        searchInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Invoice"));
     }
 
     /**
@@ -39,5 +41,14 @@ public class AdminMamipayDashboardPO {
         playwright.clickOn(voucherDiscount);
         playwright.clickOn(mamikosVoucher);
         return new MamikosListMassVoucherPO(page);
+    }
+
+    /**
+     * Go to mamikos search Invoice
+     * @return MamikosListInvoicePO class
+     */
+    public MamikosListInvoicePO goToMamikosSearchInvoice() {
+        playwright.clickOn(searchInvoice);
+        return new MamikosListInvoicePO(page);
     }
 }

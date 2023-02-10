@@ -10,20 +10,29 @@ public class TenantLoginPO extends LoginPO {
         this.page = page;
     }
 
+    /**
+     * wait for password input form to be available
+     * @return TenantLoginPO class
+     */
+    public synchronized TenantLoginPO waitForPasswordInput() {
+        passwordInput.waitFor();
+        return new TenantLoginPO(page);
+    }
+
     @Override
-    public TenantLoginPO fillPassword(String password) {
+    public synchronized TenantLoginPO fillPassword(String password) {
         passwordInput.fill(password);
         return new TenantLoginPO(page);
     }
 
     @Override
-    public TenantLoginPO fillPhoneNumber(String phoneNumber) {
+    public synchronized TenantLoginPO fillPhoneNumber(String phoneNumber) {
         phoneNumberInput.fill(phoneNumber);
         return new TenantLoginPO(page);
     }
 
     @Override
-    public HomePO clickOnLoginButton() {
+    public synchronized HomePO clickOnLoginButton() {
         loginBtn.click();
         return new HomePO(page);
     }

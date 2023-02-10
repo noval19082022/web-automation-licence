@@ -1,8 +1,8 @@
 package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
-import config.mamikos.Mamikos;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,6 +13,7 @@ import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
 import pageobject.tenant.BookingFormPO;
 import pageobject.tenant.SuccessBookingPO;
+import pageobject.tenant.profile.RiwayatBookingPO;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ public class TenantBookingSteps {
     KostDetailsPO kostDetail;
     BookingFormPO bookingForm;
     SuccessBookingPO successBooking;
+
+    RiwayatBookingPO riwayatBooking = new RiwayatBookingPO(page);
 
     private List<Map<String, String>> searchKost;
 
@@ -39,13 +42,12 @@ public class TenantBookingSteps {
     @When("tenant booking kost")
     public void tenantBookingKost() {
         kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate("tomorrow");
+        kostDetail.selectBookingDate("today");
         kostDetail.selectBookingPeriod("Per Bulan");
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();
         bookingForm.clickOnBookingConfirmationCheckmark();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
-
     }
 
     @Then("tenant should success booking kost")
@@ -64,4 +66,39 @@ public class TenantBookingSteps {
         }
         bookingForm.closeCancelPopUp();
     }
+
+    @When("tenant booking kost for {string}")
+    public void tenantBookingKostFor(String bookingTime) {
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate(bookingTime);
+        kostDetail.selectBookingPeriod("Per Bulan");
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
+    @When("tenant checkin kost from riwayat booking")
+    public void tenantCheckinKostFromRiwayatBooking() {
+        page.reload();
+        riwayatBooking.clickOnCheckinButton();
+        riwayatBooking.clickOnCheckinPopUpButton();
+        riwayatBooking.clickOnSelesaiAndKeKostSaya();
+    }
+
+
+    @And("tenant booking kost for {string} and input rent duration equals to {int}")
+    public void tenantBookingKostForAndInputRentDurationEqualsTo(String bookingTime, int duration) throws InterruptedException {
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate(bookingTime);
+        kostDetail.selectBookingPeriod("Per Bulan");
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        for (int i = 1; i < duration; i++) {
+            bookingForm.increaseRateDuration();
+        }
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
 }

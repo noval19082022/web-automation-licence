@@ -1,6 +1,7 @@
 package pageobject.owner;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import pageobject.common.LoginPO;
 
 public class OwnerLoginPO extends LoginPO {
@@ -38,6 +39,7 @@ public class OwnerLoginPO extends LoginPO {
     @Override
     public OwnerDashboardPO clickOnLoginButton() {
         loginBtn.click();
+        page.waitForLoadState(LoadState.LOAD);
         return new OwnerDashboardPO(page);
     }
 }

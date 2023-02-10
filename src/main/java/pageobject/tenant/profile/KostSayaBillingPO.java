@@ -1,7 +1,9 @@
-package pageobject.tenant;
+package pageobject.tenant.profile;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
 public class KostSayaBillingPO {
@@ -24,6 +26,7 @@ public class KostSayaBillingPO {
         page = page.waitForPopup(() -> {
             playwright.clickOn(bayarButton);
         });
+        ActiveContext.setActivePage(page);
         return new InvoicePO(page);
     }
 }

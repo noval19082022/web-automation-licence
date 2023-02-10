@@ -5,6 +5,8 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
+import java.util.List;
+
 public class PlaywrightHelpers {
     Page page;
 
@@ -112,7 +114,8 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Accept dialog
+     * By default, playwright will dismiss dialog/alert.
+     * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
         page.onceDialog(Dialog::accept);
@@ -223,6 +226,15 @@ public class PlaywrightHelpers {
         page.waitForTimeout(timeout);
         return locator.isVisible();
     }
+
+    /**
+     * Wait for a locator
+     * @param locator Locator data type
+     * @param duration set duration in double
+     */
+    public void waitFor(Locator locator, Double duration) {
+        locator.waitFor(new Locator.WaitForOptions().setTimeout(duration));
+    }
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
@@ -258,5 +270,14 @@ public class PlaywrightHelpers {
      */
     public Locator locatorByRoleAndText(AriaRole role, String text) {
         return page.getByRole(role).getByText(text);
+    }
+
+    /**
+     * Get locators as array list
+     * @param locator Locator type
+     * @return List of locators
+     */
+    public List<Locator> getLocators(Locator locator) {
+        return locator.all();
     }
 }
