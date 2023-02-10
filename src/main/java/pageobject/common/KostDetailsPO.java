@@ -46,15 +46,12 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        int maxLoop = 0;
-        do {
-            maxLoop++;
+        for (int i = 0; i < 4; i++) {
             playwright.tapKeyboard("ArrowDown");
-            if (maxLoop == 4) {
+            if (ftueSlider.isVisible()) {
                 break;
             }
         }
-        while (!roomFacilities.isVisible());
         do {
             playwright.forceClickOn(ftueSlider);
         }
