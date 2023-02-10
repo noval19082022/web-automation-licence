@@ -205,8 +205,8 @@ public class TenantPaymentSteps {
         invoice.openBills();
     }
 
-    @Then("tenant can see additional price biaya lainnya {string} with price {string}")
-    public void tenantCanSeeAdditionalPriceBiayaLainnyaWithPrice(String biayaLainnyaTitle, String biayaLainnyaPrice) {
+    @Then("tenant can see additional price {string} with price {string}")
+    public void tenantCanSeeAdditionalPriceWithPrice(String biayaLainnyaTitle, String biayaLainnyaPrice) {
         invoice = new InvoicePO(ActiveContext.getActivePage());
         List<String> biayaLainnyaInnerText = invoice.getAdditionalPriceInnerText();
         Assert.assertTrue(biayaLainnyaInnerText.get(0).contains(biayaLainnyaTitle));

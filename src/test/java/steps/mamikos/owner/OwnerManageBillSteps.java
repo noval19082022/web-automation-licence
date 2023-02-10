@@ -45,8 +45,8 @@ public class OwnerManageBillSteps {
         billdetail = billManage.clickOnInvoiceList(jatuhTempo);
     }
 
-    @Then("owner can see additional price biaya lainnya {string} with price {string}")
-    public void ownerCanSeeAdditionalPriceBiayaLainnyaWithPrice(String additionalPriceTitle, String additionalPriceValue) {
+    @Then("owner can see additional price {string} with price {string}")
+    public void ownerCanSeeAdditionalPriceWithPrice(String additionalPriceTitle, String additionalPriceValue) {
         Assert.assertEquals(billdetail.getAdditionalPriceValueText(additionalPriceTitle), additionalPriceValue);
     }
 }

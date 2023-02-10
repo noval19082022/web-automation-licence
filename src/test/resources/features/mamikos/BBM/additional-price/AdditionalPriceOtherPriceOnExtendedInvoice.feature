@@ -74,7 +74,7 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
-    Then tenant can see additional price biaya lainnya "Automation Biaya Lainnya" with price "Rp200.000"
+    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
@@ -83,4 +83,4 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto SinggahSini" on month of "next"
     And owner go to detail tagihan
-    Then owner can see additional price biaya lainnya "Automation Biaya Lainnya" with price "Rp200.000"
+    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
