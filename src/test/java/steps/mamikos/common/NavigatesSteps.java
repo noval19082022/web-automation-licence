@@ -74,6 +74,7 @@ public class NavigatesSteps {
 
     @When("tenant navigate to riwayat booking")
     public void tenantNavigateToRiwayatBooking() {
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
 

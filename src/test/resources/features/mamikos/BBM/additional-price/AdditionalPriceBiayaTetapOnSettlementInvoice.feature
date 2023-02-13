@@ -1,4 +1,4 @@
-@BBM2 @runlagidong
+@BBM2
 Feature: Additional Price Biaya Tetap On Settlement Invoice
 
   Scenario: Admin Batalkan Contract
@@ -9,7 +9,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
       | 087708777615 | 087708777615 |
-    And admin terminate contract
+    And admin akhiri contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
@@ -47,6 +47,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
       | 087708777615 | 087708777615 | qwerty123 |
     And tenant navigate to riwayat booking
     And tenant pay kost from riwayat booking using mandiri without close the page
+    And tenant set active page to 1
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 2

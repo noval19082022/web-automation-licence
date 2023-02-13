@@ -50,4 +50,8 @@ public class SearchContractSteps {
         }
     }
 
+    @When("admin akhiri contract")
+    public void adminAkhiriContract() {
+        searchContract.clickOnAkhiriContractButton();
+    }
 }

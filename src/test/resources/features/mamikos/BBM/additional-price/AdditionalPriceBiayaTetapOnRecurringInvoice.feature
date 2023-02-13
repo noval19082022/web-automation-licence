@@ -9,7 +9,7 @@ Feature: Additional Price Biaya Tetap On Invoice Recurring
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
       | 087708777615 | 087708777615 |
-    And admin terminate contract
+    And admin akhiri contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
