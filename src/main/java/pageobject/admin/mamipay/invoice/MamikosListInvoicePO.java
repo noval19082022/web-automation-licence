@@ -21,6 +21,7 @@ public class MamikosListInvoicePO {
     Locator addFeeAdditionalPriceButton;
     Locator additionalPriceTypeOption;
     Locator detailFirst;
+    Locator detailSecond;
     Page.GetByRoleOptions pageRoleOptions;
     Locator.GetByRoleOptions locatorRoleOptions;
     Locator otherPrice;
@@ -40,6 +41,7 @@ public class MamikosListInvoicePO {
         addFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Fee"));
         additionalPriceTypeOption = page.locator("#cost-type-select");
         detailFirst = page.locator("tr:first-of-type td a:first-of-type + a");
+        detailSecond = page.locator("//tr[2]//td[@class='invoice-action']//*[@class='btn btn-xs bg-maroon btn-flat']");
         txtBasicAmount = page.locator("//*[.='Basic Amount']/following-sibling::dd[1]");
         pageRoleOptions = new Page.GetByRoleOptions();
         locatorRoleOptions = new Locator.GetByRoleOptions();
@@ -89,6 +91,13 @@ public class MamikosListInvoicePO {
      */
     public void clickOnDetailFirstButton() {
         playwright.clickOn(detailFirst);
+    }
+
+    /**
+     * Click on Detail in first invoice detail
+     */
+    public void clickOnDetailSecondButton() {
+        playwright.clickOn(detailSecond);
     }
 
     /**
