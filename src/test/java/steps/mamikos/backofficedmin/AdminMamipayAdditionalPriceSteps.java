@@ -84,6 +84,30 @@ public class AdminMamipayAdditionalPriceSteps {
 
     }
 
+    @And("admin clicks on invoice details second index:")
+    public void adminClicksOnInvoiceDetailsSecondIndex(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        invoiceAdmin.clickOnDetailSecondButton();
+    }
+
+    @And("admin clicks on invoice details first index:")
+    public void adminClicksOnInvoiceDetailsFirstIndex(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        invoiceAdmin.clickOnDetailFirstButton();
+    }
+
     @When("^admin deletes additional other price with name below :$")
     public void admin_deletes_additional_other_price_with_name(List<String> otherPriceName) throws InterruptedException {
         for (String s : otherPriceName) {
