@@ -141,4 +141,19 @@ public class AdminMamipayAdditionalPriceSteps {
         int otherPriceFixed = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
         Assert.assertEquals(totalCost, basicAmount + adminFee + depositFee + otherPriceFixed);
     }
+
+    @Then("admin changes DP basic amount and verify total amount change on settlement invoice for tenant {int}:")
+    public void admin_changes_DP_basic_amount_and_verify_total_amount_change_on_settlement_invoice(int expectedAmount, DataTable table) throws InterruptedException {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        int basicAmountBeforeEdit = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        invoiceAdmin.editBasicAmount(basicAmountBeforeEdit + 10000);
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        int totalAmountSettlement = JavaHelpers.extractNumber(invoiceAdmin.getTotalAmount(1));
+        int totalAmountDP = JavaHelpers.extractNumber(invoiceAdmin.getTotalAmount(2)) - 1000;
+        Assert.assertEquals(totalAmountSettlement, (expectedAmount  - totalAmountDP));
+    }
 }

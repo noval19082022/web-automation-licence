@@ -14,8 +14,8 @@ public class Codegen {
             context.route("**/*", route -> route.resume());
             // Pause the page, and start recording manually.
             Page page = context.newPage();
-            page.navigate("https://jambu.kerupux.com");
-//            loginAdminMamipay(page);
+//            page.navigate("https://jambu.kerupux.com");
+            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
             //loginOwner(page);
             page.pause();

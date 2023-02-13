@@ -27,6 +27,9 @@ public class MamikosListInvoicePO {
     Locator otherPrice;
     Locator getOtherPriceNumber;
     Locator txtBasicAmount;
+    Locator editBasicAmount;
+    Locator basicAmountTextField;
+    Locator updateButton;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -45,6 +48,10 @@ public class MamikosListInvoicePO {
         txtBasicAmount = page.locator("//*[.='Basic Amount']/following-sibling::dd[1]");
         pageRoleOptions = new Page.GetByRoleOptions();
         locatorRoleOptions = new Locator.GetByRoleOptions();
+        editBasicAmount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        basicAmountTextField = page.getByRole(AriaRole.TEXTBOX);
+        updateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
+
     }
 
     /**
@@ -168,6 +175,26 @@ public class MamikosListInvoicePO {
         otherPrice = page.locator("//*[.='"+otherPriceName+"']/following-sibling::*//*[@title='Delete Fee']");
         playwright.clickOn(otherPrice);
         page.waitForSelector(".callout.callout-success");
+    }
+
+    /**
+     * Get total amount by it index
+     * @param invoiceIndex index input with number. By element index.
+     * @return string data type
+     */
+    public String getTotalAmount(int invoiceIndex) {
+        return playwright.getText(page.locator("tr:nth-child("+ invoiceIndex +") td:nth-child(5)"));
+    }
+
+    /**
+     * Edit basic amount on admin invoice
+     * @param newBasicAmountPrice input with desired price
+     * @throws InterruptedException
+     */
+    public void editBasicAmount(Integer newBasicAmountPrice) throws InterruptedException {
+        playwright.clickOn(editBasicAmount);
+        playwright.forceFill(basicAmountTextField, newBasicAmountPrice.toString());
+        playwright.clickOn(updateButton);
     }
 
 }
