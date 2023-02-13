@@ -34,9 +34,15 @@ public class TenantPaymentSteps {
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
         invoice = billing.clickOnBayarButton();
+    }
+
+    @When("tenant go to invoice page after pay DP")
+    public void tenantGoToInvoicePageAfterPayDP(){
+        invoice = billing.clickOnBayarDisiniButton();
     }
 
     @When("tenant apply voucher:")
