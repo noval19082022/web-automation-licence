@@ -31,6 +31,7 @@ public class OwnerManageBillSteps {
         }
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
+        billManage.reloadOnEmptyKelolaTagihanPage();
         billManage.selectKosFilter(kostName);
         billManage.selectMonthFilter(month);
     }

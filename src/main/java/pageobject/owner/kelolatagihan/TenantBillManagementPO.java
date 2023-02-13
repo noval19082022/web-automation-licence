@@ -68,4 +68,13 @@ public class TenantBillManagementPO {
         playwright.clickOn(invoiceList);
         return new BillDetailsPO(page);
     }
+
+    /**
+     * Reload page if filter kos is not visible
+     */
+    public void reloadOnEmptyKelolaTagihanPage() {
+        if(!filterKos.isVisible()) {
+            page.reload();
+        }
+    }
 }
