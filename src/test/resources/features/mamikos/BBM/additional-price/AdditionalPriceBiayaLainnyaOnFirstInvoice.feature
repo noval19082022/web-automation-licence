@@ -1,4 +1,4 @@
-@BBM2 @lawackrun
+@BBM2
 Feature: Additional Price Biaya Lainnya On First Invoice
 
   Scenario: Admin Batalkan Contract
