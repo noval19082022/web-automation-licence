@@ -74,11 +74,14 @@ public class AdminMamipayAdditionalPriceSteps {
         additionalPriceData = table.asMap(String.class, String.class);
         var additionalPriceSearchBy = additionalPriceData.get("search by");
         var searchValue = additionalPriceData.get("search value");
+        var invoiceNumber = additionalPriceData.get("invoice number").equalsIgnoreCase("default");
+        var invoiceNumberValue = invoiceNumber ? InvoiceTestData.getInvoiceNumber() : additionalPriceData.get("invoice number");
         adminMamipay.goToMamikosSearchInvoice();
         invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
         invoiceAdmin.fillInputSearchValue(searchValue);
         invoiceAdmin.clickOnCariInvoice();
-        invoiceAdmin.clickOnDetailFirstButton();
+        invoiceAdmin.goToInvoiceDetail(invoiceNumberValue);
+
     }
 
     @When("^admin deletes additional other price with name below :$")
@@ -94,5 +97,24 @@ public class AdminMamipayAdditionalPriceSteps {
         int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
         int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
         Assert.assertEquals(totalCost, basicAmount + adminFee);
+    }
+
+    @Then("admin can sees total cost is basic amount + deposit fee + biaya tetap")
+    public void admin_can_sees_total_cost_is_basic_amount_deposit_fee_biaya_tetap() {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int depositFee = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
+        int otherPriceFixed = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
+        Assert.assertEquals(totalCost, basicAmount + depositFee + otherPriceFixed);
+    }
+
+    @Then("admin can sees total cost is basic amount + deposit fee + biaya tetap + admin fee")
+    public void admin_can_sees_total_cost_is_basic_amount_deposit_fee_biaya_tetap_admin_fee() {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
+        int depositFee = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
+        int otherPriceFixed = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
+        Assert.assertEquals(totalCost, basicAmount + adminFee + depositFee + otherPriceFixed);
     }
 }
