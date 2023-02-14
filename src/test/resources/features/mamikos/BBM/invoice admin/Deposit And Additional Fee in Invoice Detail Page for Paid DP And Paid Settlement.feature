@@ -63,7 +63,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
       | invoice number         | default                  |
     Then admin can sees total cost is basic amount + deposit fee + biaya tetap + admin fee
 
-  Scenario: Tenant Pay 1st Month Booking
+  Scenario: Tenant get invoice number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |

@@ -48,6 +48,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat booking
     And tenant pay kost from riwayat booking using mandiri
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page after pay DP
+    And tenant get invoice number
 
   Scenario: Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
