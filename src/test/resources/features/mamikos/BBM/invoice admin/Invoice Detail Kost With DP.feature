@@ -44,7 +44,7 @@ Feature: Invoice Detail Kost With DP
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
-      | 0890867321212 | 0890867321212 | qwerty123 |
+      | 085432154321 | 085432154321 | qwerty123 |
     And tenant navigate to riwayat booking
     And tenant get invoice number from riwayat booking
 
