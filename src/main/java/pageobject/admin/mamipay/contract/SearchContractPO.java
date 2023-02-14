@@ -4,7 +4,10 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
 
 public class SearchContractPO {
     private Page page;
@@ -17,9 +20,11 @@ public class SearchContractPO {
     Locator berhentikanContractButton;
     Locator inputTerminateDate;
     Locator berhentikanContractPopUpButton;
-    Locator akhiriContractButton;
+    Locator akhiriContractLink;
     Locator selectTerminateDate;
     Locator successTerminateText;
+    private Locator akhiriContractButton;
+    private Locator akhiriContractHead;
     public SearchContractPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -32,8 +37,10 @@ public class SearchContractPO {
         inputTerminateDate = page.getByPlaceholder("Masukkan tanggal checkout");
         berhentikanContractPopUpButton = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Akhiri Kontrak"));
         selectTerminateDate = page.locator(".skin-green > div:nth-of-type(2) > .xdsoft_timepicker .xdsoft_current");
-        akhiriContractButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
+        akhiriContractLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
+        akhiriContractButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
+        akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
     }
 
     /**
@@ -104,11 +111,23 @@ public class SearchContractPO {
 
     /**
      * Click on akhiri contract button, and accept akhiri kontrak dialog.
+     * Or input date if date picker appear.
      */
     public void clickOnAkhiriContractButton() {
         page.waitForLoadState(LoadState.LOAD);
-        if (akhiriContractButton.isVisible()) {
-            playwright.acceptDialog(akhiriContractButton);
+        if (akhiriContractLink.isVisible()) {
+            playwright.acceptDialog(akhiriContractLink);
+        } else if (akhiriContractButton.isVisible()){
+            playwright.clickOn(akhiriContractButton);
+            inputTerminateDate.fill(JavaHelpers.getCurrentDateOrTime("dd-MM-yyyy HH:mm:ss"));
+            playwright.forceClickOn(akhiriContractHead);
+            List<Locator> akhiriContractButtonList = akhiriContractButton.all();
+            for (Locator akhiriButton : akhiriContractButtonList) {
+                if (akhiriButton.isVisible() && akhiriButton.isEnabled()) {
+                    playwright.clickOn(akhiriButton);
+                }
+            }
+            page.waitForLoadState(LoadState.LOAD);
         }
     }
 }
