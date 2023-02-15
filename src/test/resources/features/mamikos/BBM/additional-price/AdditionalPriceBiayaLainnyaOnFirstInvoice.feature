@@ -1,4 +1,4 @@
-@BBM2
+@BBM2 @terlalulawackrun
 Feature: Additional Price Biaya Lainnya On First Invoice
 
   Scenario: Admin Batalkan Contract
@@ -77,5 +77,5 @@ Feature: Additional Price Biaya Lainnya On First Invoice
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "current"
-    And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
+    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

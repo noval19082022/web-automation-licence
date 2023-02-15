@@ -70,6 +70,18 @@ public class TenantBillManagementPO {
     }
 
     /**
+     * Click on invoice list based on tenant name and jatuh tempo text
+     * @param setTenant Tenant name
+     * @param setJatuhTempo Set with jatuh tempo test example: Belum bayar - Jatuh tempo sekarang
+     * @return BillDetailsPO class
+     */
+    public BillDetailsPO clickOnInvoiceList(String setTenant, String setJatuhTempo) {
+        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setTenant).setName(setJatuhTempo)).getByTestId("invoice-status-label");
+        playwright.clickOn(invoiceList);
+        return new BillDetailsPO(page);
+    }
+
+    /**
      * Reload page if filter kos is not visible
      */
     public void reloadOnEmptyKelolaTagihanPage() {
