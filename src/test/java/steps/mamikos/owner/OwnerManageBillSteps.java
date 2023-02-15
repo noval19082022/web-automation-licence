@@ -50,4 +50,9 @@ public class OwnerManageBillSteps {
     public void ownerCanSeeAdditionalPriceWithPrice(String additionalPriceTitle, String additionalPriceValue) {
         Assert.assertEquals(billdetail.getAdditionalPriceValueText(additionalPriceTitle), additionalPriceValue);
     }
+
+    @And("owner go to detail tagihan with tenant name is {string} and jatuh tempo is {string}")
+    public void ownerGoToDetailTagihanWithTenantNameIsAndJatuhTempoIs(String tenantName, String jatuhTempoDate) {
+        billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempoDate);
+    }
 }
