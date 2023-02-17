@@ -4,8 +4,12 @@ Feature: Kost detail page
 #  @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
   Scenario: [Dweb][Kost Detail]Check property overview section
     Given user go to mamikos homepage
-    When user search property by name "PLM A" and select the matching result to go to kos details page
+    When user search property by name and select the matching result to go to kos details page
+      | kost stag                     | kost prod                                           |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see overview section on detail page
+      | kost stag                     | kost prod                                           |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
 
 #  @TEST_DOM-1701 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
 #  Scenario: [Dweb][Kost Detail] Check promo owner section login

@@ -2,6 +2,8 @@ package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -14,13 +16,17 @@ public class KostDetailSteps {
     SearchPO search = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
 
-    @When("user search property by name {string} and select the matching result to go to kos details page")
-    public void userSearchAndSelectKost(String kostName) {
+    @When("user search property by name and select the matching result to go to kos details page")
+    public void userSearchAndSelectKost(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
         search.searchKostFromHomePage(kostName);
     }
 
     @Then("user can see overview section on detail page")
-    public void userCanSeeOverViewSection() {
-        Assert.assertTrue(kostDetail.getKostTitle().contains("Kos Dom Automation PLM"));
+    public void userCanSeeOverViewSection(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
+        Assert.assertTrue(kostDetail.getKostTitle().contains(kostName));
     }
 }

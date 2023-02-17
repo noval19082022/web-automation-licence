@@ -36,6 +36,7 @@ public class KostDetailsPO {
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
+        this.kostTitle = page.locator("div[id='detailTitle']");
         this.shareButton = page.locator("//button[contains(text(),'Bagikan')]");
     }
 
@@ -106,6 +107,7 @@ public class KostDetailsPO {
     }
 
     public String getKostTitle() {
+        playwright.waitTillLocatorIsVisible(kostTitle, 10.0);
         return kostTitle.textContent();
     }
 
