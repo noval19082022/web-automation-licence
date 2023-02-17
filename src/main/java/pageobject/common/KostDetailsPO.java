@@ -21,10 +21,13 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    private Locator kostTitle;
+    private Locator shareButton;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
+
     public KostDetailsPO(Page page) {
         this.page = page;
-        this.playwright= new PlaywrightHelpers(page);
+        this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         this.kostDetailsContainer = page.locator("#detailKostContainer");
         this.datePicker = page.getByTestId("bookingInputCheckinContent-datePicker");
@@ -33,6 +36,7 @@ public class KostDetailsPO {
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
+        this.shareButton = page.locator("//button[contains(text(),'Bagikan')]");
     }
 
     /**
@@ -66,11 +70,9 @@ public class KostDetailsPO {
         Locator datePick;
         if (date.equalsIgnoreCase("tomorrow")) {
             this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
-        }
-        else if(date.equalsIgnoreCase("today")) {
+        } else if (date.equalsIgnoreCase("today")) {
             this.date = JavaHelpers.getCurrentDateOrTime("d");
-        }
-        else {
+        } else {
             this.date = date;
         }
         mulaiKosInput.click();
@@ -101,5 +103,13 @@ public class KostDetailsPO {
     public BookingFormPO clickOnAjukanSewaButton() {
         ajukanSewaButton.click();
         return new BookingFormPO(page);
+    }
+
+    public String getKostTitle() {
+        return kostTitle.textContent();
+    }
+
+    public void dismissFTUEScreen() {
+        playwright.scrollTo(0,100);
     }
 }
