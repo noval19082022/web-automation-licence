@@ -28,5 +28,9 @@ public class KostDetailSteps {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
         Assert.assertTrue(kostDetail.getKostTitle().contains(kostName));
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isPropertyGenderDisplayed(),"Property Gender Label is not displayed");
+        Assert.assertTrue(kostDetail.isPropertyLocationDisplayed(),"Property Location Label is not displayed");
+        Assert.assertTrue(kostDetail.isRoomAvailabilityDisplayed(),"Property Room AvailabilityLabel is not displayed");
     }
 }

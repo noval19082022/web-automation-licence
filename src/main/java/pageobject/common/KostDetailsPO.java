@@ -23,6 +23,9 @@ public class KostDetailsPO {
     Locator ajukanSewaButton;
     private Locator kostTitle;
     private Locator shareButton;
+    private Locator propertyGender;
+    private Locator propertyLocation;
+    private Locator roomAvailability;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
 
     public KostDetailsPO(Page page) {
@@ -38,6 +41,9 @@ public class KostDetailsPO {
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
         this.kostTitle = page.locator("div[id='detailTitle']");
         this.shareButton = page.locator("//button[contains(text(),'Bagikan')]");
+        this.propertyGender = page.locator("//span[@class='detail-kost-overview__gender-box']");
+        this.propertyLocation = page.locator("//div[@class='detail-kost-overview__area']");
+        this.roomAvailability = page.locator("//div[@class='detail-kost-overview__availability']");
     }
 
     /**
@@ -106,12 +112,26 @@ public class KostDetailsPO {
         return new BookingFormPO(page);
     }
 
+    /**
+     * get detail page
+     *
+     * @return
+     */
+
     public String getKostTitle() {
-        playwright.waitTillLocatorIsVisible(kostTitle, 10.0);
+        playwright.waitTillLocatorIsVisible(kostTitle, 3.0);
         return kostTitle.textContent();
     }
 
-    public void dismissFTUEScreen() {
-        playwright.scrollTo(0,100);
+    public boolean isPropertyGenderDisplayed() {
+        return propertyGender.isVisible();
+    }
+
+    public boolean isPropertyLocationDisplayed() {
+        return propertyLocation.isVisible();
+    }
+
+    public boolean isRoomAvailabilityDisplayed() {
+        return roomAvailability.isVisible();
     }
 }
