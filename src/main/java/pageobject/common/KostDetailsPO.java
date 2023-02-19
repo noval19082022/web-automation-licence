@@ -459,12 +459,11 @@ public class KostDetailsPO {
     public String getLatestChatText() {
         playwright.waitTillLocatorIsVisible(latestChat, 7.0);
         playwright.pageScrollInView(latestChat);
-        ;
         return latestChat.textContent();
     }
 
     public boolean isChatRoomPresent() {
-        playwright.waitTillLocatorIsVisible(chatRoom, 2.0);
+        playwright.waitTillLocatorIsVisible(chatRoom, 3.0);
         return chatRoom.isVisible();
     }
 }
