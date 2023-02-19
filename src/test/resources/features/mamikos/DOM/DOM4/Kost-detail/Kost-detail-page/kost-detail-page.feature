@@ -1,4 +1,4 @@
-#@DOM4
+@DOM4
 Feature: Kost detail page
 
 #  @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
@@ -145,7 +145,7 @@ Feature: Kost detail page
     When user want to see more detail kost location
     Then user will see login pop up
 
-  @TEST_DOM-1711 @DOM4 @automated @discovery-platform @kost-details @map @web
+#  @TEST_DOM-1711 @DOM4 @automated @discovery-platform @kost-details @map @web
   Scenario: [Dweb][Kost Detail] Check Map section when tenant login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
