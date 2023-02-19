@@ -6,6 +6,7 @@ import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
 import java.util.List;
+import java.util.Set;
 
 public class PlaywrightHelpers {
     Page page;
@@ -24,7 +25,8 @@ public class PlaywrightHelpers {
 
     /**
      * This method navigates to a specified URL with a specified timeout for the navigation to complete.
-     * @param url String data type of URL format
+     *
+     * @param url     String data type of URL format
      * @param timeout Double data type of specific timeout
      */
     public void navigateTo(String url, Double timeout) {
@@ -33,7 +35,8 @@ public class PlaywrightHelpers {
 
     /**
      * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
-     * @param url String data type of URL format
+     *
+     * @param url   String data type of URL format
      * @param state The load state to wait for before navigating.
      */
     public void navigateTo(String url, Double timeout, LoadState state) {
@@ -43,7 +46,8 @@ public class PlaywrightHelpers {
 
     /**
      * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
-     * @param url String data type of URL format
+     *
+     * @param url     String data type of URL format
      * @param locator The locator to wait for.
      */
     public void navigateToAndWaitLocator(String url, Locator locator) {
@@ -229,7 +233,8 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator
-     * @param locator Locator data type
+     *
+     * @param locator  Locator data type
      * @param duration set duration in double
      */
     public void waitFor(Locator locator, Double duration) {
@@ -274,10 +279,47 @@ public class PlaywrightHelpers {
 
     /**
      * Get locators as array list
+     *
      * @param locator Locator type
      * @return List of locators
      */
     public List<Locator> getLocators(Locator locator) {
         return locator.all();
+    }
+
+    //---- Scroll Part ----\\
+
+    /**
+     * Scroll Helper
+     */
+
+    public void pageScrollUsingCoordinate(int x, int y) {
+        page.evaluate("scroll(" + x + "," + y + ")");
+    }
+
+    public void pageScrollHeightToBottom() {
+        page.evaluate("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    public Locator pageScrollInView(Locator e) {
+        page.evaluate("arguments[0].scrollIntoView(true);", e);
+        return e;
+    }
+
+    public void pageScrollToDown(int y) {
+        page.evaluate("window.scrollBy(0," + y + ")");
+    }
+
+    /**
+     * Move Page
+     */
+
+    public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
+        // move page
+        Page nextPage = pageActive.waitForPopup(() -> {
+            locatorTarget.click();
+        });
+        nextPage.bringToFront();
+        return nextPage;
     }
 }
