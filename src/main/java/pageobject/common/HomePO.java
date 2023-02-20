@@ -15,8 +15,6 @@ public class HomePO {
     private Locator cariButton;
     private Locator mamikosLogo;
     private Locator userPhoto;
-    private Locator kostPromo;
-    private Locator lastRoomCardRecomendationSection;
 
     public HomePO(Page page) {
         this.page = page;
@@ -26,9 +24,6 @@ public class HomePO {
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
         userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
-//        this.kostPromo = page.locator("div[class='promoted-item__room']");
-        this.kostPromo = page.locator("#promoted").getByTestId("roomCardCover-photo");
-        this.lastRoomCardRecomendationSection = page.locator(".promoted-item");
     }
 
     /**
@@ -67,19 +62,5 @@ public class HomePO {
      */
     public Locator getMamikosLogo() {
         return mamikosLogo;
-    }
-
-    /**
-     * kost promo
-     */
-    public KostDetailsPO selectKostOnPromoSection(Boolean isLogin) {
-        if (isLogin) {
-            playwright.pageScrollToDown(2000);
-        } else {
-            playwright.pageScrollToDown(3000);
-        }
-//        playwright.pageScrollInView(lastRoomCardRecomendationSection);
-        page = playwright.movePageByClickLocator(page, kostPromo);
-        return new KostDetailsPO(page);
     }
 }
