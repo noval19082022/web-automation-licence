@@ -5,9 +5,11 @@ import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.common.HomePO;
+import pageobject.common.LoginPO;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,8 @@ import java.util.Map;
 public class LoginSteps {
 
     Page page = ActiveContext.getActivePage();
-    HomePO login = new HomePO(page);
+    HomePO home = new HomePO(page);
+    LoginPO login = new LoginPO(page);
     LoginAdminMamipayPO loginAdmin = new LoginAdminMamipayPO(page);
     private List<Map<String, String>> phoneNumberCredential;
     private List<Map<String, String>> emailCredential;
@@ -27,10 +30,10 @@ public class LoginSteps {
         var password = phoneNumberCredential.get(0).get("password");
         if (!FlowControl.getStrictFlow()) {
             ActiveContext.activateTenant(0);
-            login = new HomePO(ActiveContext.getActivePage());
+            home = new HomePO(ActiveContext.getActivePage());
             ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
         }
-        login.clickOnButtonMasuk()
+        home.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
@@ -56,10 +59,10 @@ public class LoginSteps {
         var password = phoneNumberCredential.get(0).get("password");
         if (!FlowControl.getStrictFlow()) {
             ActiveContext.activateOwner(0);
-            login = new HomePO(ActiveContext.getActivePage());
+            home = new HomePO(ActiveContext.getActivePage());
             ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
         }
-        login.clickOnButtonMasuk()
+        home.clickOnButtonMasuk()
             .clickOnPemilikKostButton()
             .fillPhoneNumber(phone)
             .fillPassword(password)
@@ -74,5 +77,10 @@ public class LoginSteps {
         loginAdmin.fillEmail(email);
         loginAdmin.fillPassword(password);
         loginAdmin.clickOnLoginButton();
+    }
+
+    @Then("user see login pop up in favorite page")
+    public void userSeeLoginPopUpInFavoritePage() {
+        login.checkLoginPopUpFromFavoritePage();
     }
 }
