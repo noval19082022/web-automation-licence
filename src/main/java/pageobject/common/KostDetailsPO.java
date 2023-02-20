@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -21,10 +22,15 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    private Locator kostTitle_DOM_PLM_A;
+    private Locator propertyGenderCampur;
+    private Locator propertyLocation;
+    private Locator roomAvailability;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
+
     public KostDetailsPO(Page page) {
         this.page = page;
-        this.playwright= new PlaywrightHelpers(page);
+        this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         this.kostDetailsContainer = page.locator("#detailKostContainer");
         this.datePicker = page.getByTestId("bookingInputCheckinContent-datePicker");
@@ -33,6 +39,10 @@ public class KostDetailsPO {
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
+        this.kostTitle_DOM_PLM_A = page.getByText("Kos Dom Automation PLM Tipe A Kretek Bantul").nth(2);
+        this.propertyGenderCampur = page.getByText("Kos Campur");
+        this.propertyLocation = page.getByText("place-holder Kecamatan Kretek");
+        this.roomAvailability = page.getByText("more-choices Banyak pilihan kamar untukmu");
     }
 
     /**
@@ -46,12 +56,13 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        for (int i = 0; i < 4; i++) {
-            playwright.tapKeyboard("ArrowDown");
-            if (ftueSlider.isVisible()) {
-                break;
-            }
-        }
+//        for (int i = 0; i < 4; i++) {
+//            playwright.tapKeyboard("ArrowDown");
+//            if (ftueSlider.isVisible()) {
+//                break;
+//            }
+//        }
+        playwright.pageScrollToDown(500);
         do {
             playwright.forceClickOn(ftueSlider);
         }
@@ -60,17 +71,16 @@ public class KostDetailsPO {
 
     /**
      * Select booking date
+     *
      * @param date tomorrow, today, or specific date by number on string data type
      */
     public void selectBookingDate(String date) {
         Locator datePick;
         if (date.equalsIgnoreCase("tomorrow")) {
             this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
-        }
-        else if(date.equalsIgnoreCase("today")) {
+        } else if (date.equalsIgnoreCase("today")) {
             this.date = JavaHelpers.getCurrentDateOrTime("d");
-        }
-        else {
+        } else {
             this.date = date;
         }
         mulaiKosInput.click();
@@ -85,6 +95,7 @@ public class KostDetailsPO {
 
     /**
      * select booking period
+     *
      * @param bookingPeriod string data type
      */
     public void selectBookingPeriod(String bookingPeriod) {
@@ -96,10 +107,37 @@ public class KostDetailsPO {
 
     /**
      * Click on ajukan sewa button
+     *
      * @return BookingFormPO class
      */
     public BookingFormPO clickOnAjukanSewaButton() {
         ajukanSewaButton.click();
         return new BookingFormPO(page);
+    }
+
+    /**
+     * get detail page
+     *
+     * @return
+     */
+
+    public String getKostTitlePLMA() {
+        playwright.waitTillLocatorIsVisible(kostTitle_DOM_PLM_A, 1.0);
+        return kostTitle_DOM_PLM_A.textContent();
+    }
+
+    public boolean isPropertyGenderCampurDisplayed() {
+        playwright.waitTillLocatorIsVisible(propertyGenderCampur);
+        return propertyGenderCampur.isVisible();
+    }
+
+    public boolean isPropertyLocationPLMADisplayed() {
+        playwright.waitTillLocatorIsVisible(propertyLocation);
+        return propertyLocation.isVisible();
+    }
+
+    public boolean isRoomAvailabilityPLMADisplayed() {
+        playwright.waitTillLocatorIsVisible(roomAvailability);
+        return roomAvailability.isVisible();
     }
 }
