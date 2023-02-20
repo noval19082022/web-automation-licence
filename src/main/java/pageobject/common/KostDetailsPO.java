@@ -421,8 +421,8 @@ public class KostDetailsPO {
     public boolean isStaticMapPresent() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
-        playwright.pageScrollToDown(5000);
-        playwright.waitTillLocatorIsVisible(staticMap, 2.0);
+        playwright.pageScrollToDown(3000);
+        playwright.waitTillLocatorIsVisible(staticMap, 5.0);
         return staticMap.isVisible();
     }
 
@@ -441,8 +441,8 @@ public class KostDetailsPO {
     public boolean isKostCurrentLocationPresent() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
-        playwright.pageScrollToDown(45000);
-        playwright.waitTillLocatorIsVisible(currentLocation, 2.0);
+        playwright.pageScrollToDown(3000);
+        playwright.waitTillLocatorIsVisible(currentLocation, 5.0);
         return currentLocation.isVisible();
     }
 

@@ -169,7 +169,7 @@ public class KostDetailSteps {
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
         playwright.pageScrollToDown(200);
-        Assert.assertTrue(kostDetail.isStaticMapPresent(), "Kost current position is not present!");
+        Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
         Assert.assertTrue(kostDetail.isLihatPetaButtonPresent(), "Lihat Peta Button is not present!");
         Assert.assertTrue(kostDetail.isPOILandmarkShow(), "POI Landmark is not displayed");
     }
