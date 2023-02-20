@@ -56,13 +56,12 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-//        for (int i = 0; i < 4; i++) {
-//            playwright.tapKeyboard("ArrowDown");
-//            if (ftueSlider.isVisible()) {
-//                break;
-//            }
-//        }
-        playwright.pageScrollToDown(500);
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(500);
+            if (ftueSlider.isVisible()) {
+                break;
+            }
+        }
         do {
             playwright.forceClickOn(ftueSlider);
         }
