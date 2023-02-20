@@ -14,5 +14,6 @@ public class Mamikos {
     public static final String TENANT_EDIT_PROFILE = JavaHelpers.getPropertyValue(MAMIKOS,"tenantEditProfile");
     public static final String TENANT_RIWAYAT_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "tenantRiwayatBooking");
     public static final String KELOLA_TAGIHAN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKelolaTagihan");
+    public static final String FAVORITE_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "favoritePage");
 
 }

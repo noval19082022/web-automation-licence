@@ -88,4 +88,8 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.KELOLA_TAGIHAN, 30000.0, LoadState.LOAD);
     }
 
+    @Given("tenant navigate to favorite page")
+    public void tenantNavigateToFavoritePage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.FAVORITE_PAGE, 30000.0, LoadState.LOAD);
+    }
 }
