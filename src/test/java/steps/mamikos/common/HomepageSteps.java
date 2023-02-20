@@ -9,6 +9,7 @@ import pageobject.common.HomePO;
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     HomePO home = new HomePO(page);
+
     @Then("user see flash sale section")
     public void userSeeFlashSaleSection() {
         home.scrollToViewPromoNgebutHeading();
