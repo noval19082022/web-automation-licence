@@ -21,20 +21,13 @@ public class KostDetailSteps {
     SearchPO search = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
 
-    @When("user want to search kost from homepage")
-    public void userSearchAndSelectKost(DataTable table) {
-        var kostNameData = table.asMaps(String.class, String.class);
-        var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
-        search.searchKostFromHomePage(kostName);
-    }
-
     @Then("user can see overview section on detail page")
     public void userCanSeeOverViewSection(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
-        Assert.assertTrue(kostDetail.getKostTitlePLMA().contains(kostName));
-        Assert.assertTrue(kostDetail.isPropertyGenderCampurDisplayed(), "Property Gender Label is not displayed");
-        Assert.assertTrue(kostDetail.isPropertyLocationPLMADisplayed(), "Property Location Label is not displayed");
-        Assert.assertTrue(kostDetail.isRoomAvailabilityPLMADisplayed(), "Property Room AvailabilityLabel is not displayed");
+        Assert.assertTrue(kostDetail.getKostTitle().contains(kostName));
+        Assert.assertTrue(kostDetail.isPropertyGenderDisplayed(), "Property Gender Label is not displayed");
+        Assert.assertTrue(kostDetail.isPropertyLocationDisplayed(), "Property Location Label is not displayed");
+        Assert.assertTrue(kostDetail.isRoomAvailabilityDisplayed(), "Property Room AvailabilityLabel is not displayed");
     }
 }

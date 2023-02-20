@@ -22,8 +22,8 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
-    private Locator kostTitle_DOM_PLM_A;
-    private Locator propertyGenderCampur;
+    private Locator kostTitle;
+    private Locator propertyGender;
     private Locator propertyLocation;
     private Locator roomAvailability;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
@@ -39,10 +39,10 @@ public class KostDetailsPO {
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
-        this.kostTitle_DOM_PLM_A = page.getByText("Kos Dom Automation PLM Tipe A Kretek Bantul").nth(2);
-        this.propertyGenderCampur = page.getByText("Kos Campur");
-        this.propertyLocation = page.getByText("place-holder Kecamatan Kretek");
-        this.roomAvailability = page.getByText("more-choices Banyak pilihan kamar untukmu");
+        this.kostTitle = page.locator("#detailTitle");
+        this.propertyGender = page.locator(".detail-kost-overview__gender-box");
+        this.propertyLocation = page.locator(".detail-kost-overview__area");
+        this.roomAvailability = page.locator(".detail-kost-overview__availability");
     }
 
     /**
@@ -121,22 +121,22 @@ public class KostDetailsPO {
      * @return
      */
 
-    public String getKostTitlePLMA() {
-        playwright.waitTillLocatorIsVisible(kostTitle_DOM_PLM_A, 1.0);
-        return kostTitle_DOM_PLM_A.textContent();
+    public String getKostTitle() {
+        playwright.waitTillLocatorIsVisible(kostTitle, 1.0);
+        return kostTitle.textContent();
     }
 
-    public boolean isPropertyGenderCampurDisplayed() {
-        playwright.waitTillLocatorIsVisible(propertyGenderCampur);
-        return propertyGenderCampur.isVisible();
+    public boolean isPropertyGenderDisplayed() {
+        playwright.waitTillLocatorIsVisible(propertyGender);
+        return propertyGender.isVisible();
     }
 
-    public boolean isPropertyLocationPLMADisplayed() {
+    public boolean isPropertyLocationDisplayed() {
         playwright.waitTillLocatorIsVisible(propertyLocation);
         return propertyLocation.isVisible();
     }
 
-    public boolean isRoomAvailabilityPLMADisplayed() {
+    public boolean isRoomAvailabilityDisplayed() {
         playwright.waitTillLocatorIsVisible(roomAvailability);
         return roomAvailability.isVisible();
     }
