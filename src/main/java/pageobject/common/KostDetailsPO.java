@@ -74,11 +74,13 @@ public class KostDetailsPO {
     private Locator kosRuleContent;
     private Locator seeAllKosRuleButton;
     // ------------ Map section -----------
+    private Locator lihatPeta;
     private Locator lihatPetaBtn;
     private Locator staticMap;
     private Locator currentLocation;
     private Locator kostMapContainer;
     private Locator kosLocationAddressText;
+    private Locator tanyaAlamatLengkapBtn;
     private Locator askAddressButton;
     private Locator tabPOILandmark;
     private Locator latestChat;
@@ -140,11 +142,13 @@ public class KostDetailsPO {
         this.kosRulePopUpImageElement = page.locator(".modal-content .kost-gallery-modal-content");
         this.kosRuleContent = page.locator("//div[@class='kost-rules__content']");
         this.seeAllKosRuleButton = page.locator(".detail-kost-rules__see-all");
+        this.lihatPeta = page.locator("button[class='bg-c-button kost-location__map-button bg-c-button--tertiary-inversed bg-c-button--md']");
         this.lihatPetaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat peta"));
         this.staticMap = page.getByTestId("detail-kost-location__map-static");
         this.currentLocation = page.getByTestId("current-position");
         this.kostMapContainer = page.locator("div[id='detailMap']");
         this.kosLocationAddressText = page.locator(".kost-location .kost-location__address");
+        this.tanyaAlamatLengkapBtn = page.locator("button[class='bg-c-button bg-c-button--tertiary bg-c-button--md kost-location__map-action']");
         this.askAddressButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya alamat lengkap"));
         this.tabPOILandmark = page.locator(".kost-landmark-list__tabs");
         this.latestChat = page.locator("(//div[@class='mc-balloon-chat__content']//div)[last()]");
@@ -391,7 +395,7 @@ public class KostDetailsPO {
     public boolean isFacParkingDisplayed() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
-        playwright.pageScrollToDown(2000);
+        playwright.pageScrollToDown(2200);
         return facParkingSection.isVisible();
     }
 
@@ -404,7 +408,7 @@ public class KostDetailsPO {
     public boolean isKosRulePresent() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
-        playwright.pageScrollToDown(3000);
+        playwright.pageScrollToDown(3300);
         return kosRuleSection.isVisible();
     }
 
@@ -417,17 +421,16 @@ public class KostDetailsPO {
     }
 
     // ------------ Map section -----------
-
-    public boolean isStaticMapPresent() {
+    public boolean isLihatPetaButtonPresent() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
-        playwright.pageScrollToDown(3000);
-        playwright.waitTillLocatorIsVisible(staticMap, 5.0);
-        return staticMap.isVisible();
+        playwright.pageScrollToDown(3100);
+        playwright.waitTillLocatorIsVisible(lihatPeta, 2.0);
+        return lihatPeta.isVisible();
     }
 
-    public boolean isLihatPetaButtonPresent() {
-        return lihatPetaBtn.isVisible();
+    public boolean isStaticMapPresent() {
+        return staticMap.isVisible();
     }
 
     public boolean isPOILandmarkShow() {
@@ -438,17 +441,16 @@ public class KostDetailsPO {
         lihatPetaBtn.click();
     }
 
-    public boolean isKostCurrentLocationPresent() {
+    public boolean isTanyaAlamatBtnPresent() {
         playwright.pageScrollToDown(200);
         dismissFTUE();
         playwright.pageScrollToDown(3000);
-        playwright.waitTillLocatorIsVisible(currentLocation, 5.0);
-        return currentLocation.isVisible();
+        playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn, 2.0);
+        return tanyaAlamatLengkapBtn.isVisible();
     }
 
-    public boolean isTanyaAlamatBtnPresent() {
-        playwright.waitTillLocatorIsVisible(askAddressButton, 3.0);
-        return askAddressButton.isVisible();
+    public boolean isKostCurrentLocationPresent() {
+        return currentLocation.isVisible();
     }
 
     public void clickOnTanyaAlamatBtn() {

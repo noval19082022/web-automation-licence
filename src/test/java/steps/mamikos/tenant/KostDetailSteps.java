@@ -169,8 +169,8 @@ public class KostDetailSteps {
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
         playwright.pageScrollToDown(200);
-        Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
         Assert.assertTrue(kostDetail.isLihatPetaButtonPresent(), "Lihat Peta Button is not present!");
+        Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
         Assert.assertTrue(kostDetail.isPOILandmarkShow(), "POI Landmark is not displayed");
     }
 
@@ -182,8 +182,8 @@ public class KostDetailSteps {
     @Then("user want to reached map section and see tanya alamat lengkap button")
     public void userCanSeeAlamatLengkapPetaBtn() {
         playwright.pageScrollToDown(200);
-        Assert.assertTrue(kostDetail.isKostCurrentLocationPresent(), "Kost current position is not present!");
         Assert.assertTrue(kostDetail.isTanyaAlamatBtnPresent(), "Tanya Alamat Button is not present!");
+        Assert.assertTrue(kostDetail.isKostCurrentLocationPresent(), "Kost current position is not present!");
         Assert.assertTrue(kostDetail.isPOILandmarkShow(), "POI Landmark is not displayed");
     }
 
