@@ -69,6 +69,7 @@ public class HomePO {
 
     /**
      * Get mamikos logo
+     *
      * @return Locator data type of mamikos logo
      */
     public Locator getMamikosLogo() {

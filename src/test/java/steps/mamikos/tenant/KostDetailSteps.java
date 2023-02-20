@@ -1,0 +1,40 @@
+package steps.mamikos.tenant;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
+import pageobject.common.SearchPO;
+import utilities.PlaywrightHelpers;
+
+public class KostDetailSteps {
+    Page page = ActiveContext.getActivePage();
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+
+    HomePO home = new HomePO(page);
+    SearchPO search = new SearchPO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
+
+    @When("user want to search kost from homepage")
+    public void userSearchAndSelectKost(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
+        search.searchKostFromHomePage(kostName);
+    }
+
+    @Then("user can see overview section on detail page")
+    public void userCanSeeOverViewSection(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
+        Assert.assertTrue(kostDetail.getKostTitlePLMA().contains(kostName));
+        Assert.assertTrue(kostDetail.isPropertyGenderCampurDisplayed(), "Property Gender Label is not displayed");
+        Assert.assertTrue(kostDetail.isPropertyLocationPLMADisplayed(), "Property Location Label is not displayed");
+        Assert.assertTrue(kostDetail.isRoomAvailabilityPLMADisplayed(), "Property Room AvailabilityLabel is not displayed");
+    }
+}

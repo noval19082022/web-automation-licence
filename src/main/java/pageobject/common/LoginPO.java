@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
@@ -14,6 +15,8 @@ public class LoginPO {
     protected Locator phoneNumberInput;
     protected Locator passwordInput;
     protected Locator loginBtn;
+    protected Locator FBLoginTenantFav;
+    protected Locator googleLoginTenantFav;
     public LoginPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -22,6 +25,8 @@ public class LoginPO {
         this.phoneNumberInput = page.getByTestId("phoneNumberTextbox");
         this.passwordInput = page.getByTestId("passwordTextbox");
         this.loginBtn = page.getByTestId("loginButton");
+        this.FBLoginTenantFav = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ic_facebook Masuk dengan Facebook"));
+        this.googleLoginTenantFav = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ic_google Masuk dengan Google"));
     }
 
     /**
@@ -52,5 +57,14 @@ public class LoginPO {
 
     protected Object clickOnLoginButton() {
         return new Object();
+    }
+
+    /**
+     * Check if login pop up is appear
+     * @return
+     */
+    public boolean checkLoginPopUpFromFavoritePage() {
+        return FBLoginTenantFav.isVisible()
+                && googleLoginTenantFav.isVisible();
     }
 }
