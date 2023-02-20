@@ -15,7 +15,7 @@ public class SearchPO {
         this.inputSearch = page.locator("input[title]");
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.searchBoxInput = page.locator("input[type='search']");
-        this.suggetionKostOnTheSearchList = page.locator("//div[@data-testid='suggestionBox-roomList']//a[1]");
+        this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
     }
 
     /**
