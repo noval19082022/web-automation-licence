@@ -8,7 +8,6 @@ import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import org.testng.Assert;
-import pageobject.LandingPage.LandingPage;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -16,7 +15,6 @@ public class LandingPageSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
-    LandingPage landingPage = new LandingPage(page);
 
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
@@ -27,17 +25,17 @@ public class LandingPageSteps {
 
     @When("user click on Dikelola Mamikos filter")
     public void userClickOnDikelolaMamikosFilter() throws InterruptedException {
-        landingPage.clickFilterDikelolaMamikos();
+        home.clickFilterDikelolaMamikos();
     }
 
     @Then("user validate the result kos have Dikelola Mamikos label")
     public void userValidateTheResultKosHaveDikelolaMamikosLabel() throws InterruptedException {
-        Assert.assertTrue(landingPage.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
+        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
     }
 
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
-        Assert.assertTrue(landingPage.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
+        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
 
     }
 }
