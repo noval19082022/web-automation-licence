@@ -1,4 +1,4 @@
-@BBM2
+@BBM2 @saktirunlagirun
 Feature: Additional Price Biaya Lainnya On Invoice Recurring
 
   Scenario: Admin Batalkan Contract
@@ -82,5 +82,5 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
-    And owner go to detail tagihan
+    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is "Belum bayar - Tenggat 28 hari lagi"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
