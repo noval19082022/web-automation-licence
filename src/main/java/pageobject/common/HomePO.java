@@ -33,7 +33,6 @@ public class HomePO {
     Locator enterButton;
     Locator favoriteButton;
     Locator downloadAppButton;
-    Locator kosDetailPage;
     Locator chatHeaderButton;
     Locator notificationButton;
     Locator otherButton;
@@ -65,7 +64,6 @@ public class HomePO {
         this.enterButton = page.getByTestId("entryButton");
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
-        this.kosDetailPage = page.locator("detailKostContainer");
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya dropdown-down"));
@@ -240,16 +238,6 @@ public class HomePO {
         return playwright.isLocatorVisibleAfterLoad(downloadAppButton, 50.0);
     }
 
-    /**
-     * Check detail kos page reached
-     *
-     * @return Boolean
-     * @throws InterruptedException
-     */
-    public boolean isInKosDetail() {
-        kosDetailPage.isVisible();
-        return true;
-    }
 
     /**
      * Check Chat button is displayed

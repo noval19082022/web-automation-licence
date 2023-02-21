@@ -28,6 +28,7 @@ public class KostDetailsPO {
     private Locator roomAvailability;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator bookingKosButton;
+    Locator kosDetailPage;
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -45,6 +46,7 @@ public class KostDetailsPO {
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
         this.bookingKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
+        this.kosDetailPage = page.locator("detailKostContainer");
     }
 
     /**
@@ -163,5 +165,16 @@ public class KostDetailsPO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButton, 50.0);
+    }
+
+    /**
+     * Check detail kos page reached
+     *
+     * @return Boolean
+     * @throws InterruptedException
+     */
+    public boolean isInKosDetail() {
+        kosDetailPage.isVisible();
+        return true;
     }
 }
