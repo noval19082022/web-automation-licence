@@ -24,6 +24,7 @@ public class HomePO {
     private Locator flashSaleLihatSemuaButton;
     Locator dikelolaMamikosButton;
     Locator dikelolaMamikosLabel;
+    private Locator kostPromo;
 
     //header
     Locator searchAdsButton;
@@ -66,6 +67,7 @@ public class HomePO {
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya dropdown-down"));
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         flashSaleIcon = page.getByText("flash");
+        this.kostPromo = page.locator("#promoted").getByTestId("roomCardCover-photo").nth(0);
     }
 
     /**
@@ -115,6 +117,7 @@ public class HomePO {
 
     /**
      * Check if promo ngebut heading is visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean promoNgebutHeadingIsVisible() {
@@ -123,6 +126,7 @@ public class HomePO {
 
     /**
      * Get promo ngebut options value
+     *
      * @return String data type
      */
     public String getPromoNgebutOptionsValue() {
@@ -131,6 +135,7 @@ public class HomePO {
 
     /**
      * Check is flash sale timer visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isFlashSaleTimerVisible() {
@@ -139,6 +144,7 @@ public class HomePO {
 
     /**
      * Check is flash sale kost container visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isFlashSaleKostContainerVisible() {
@@ -147,6 +153,7 @@ public class HomePO {
 
     /**
      * Check is flash sale lihat semua button visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isFlashSaleLihatSemuaButtonVisible() {
@@ -155,6 +162,7 @@ public class HomePO {
 
     /**
      * Click on filter Mamirooms button
+     *
      * @throws InterruptedException
      */
 
@@ -164,6 +172,7 @@ public class HomePO {
 
     /**
      * Check if Singgahsini/Apik label is present
+     *
      * @return displayed true, otherwise false
      */
     public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
@@ -281,9 +290,27 @@ public class HomePO {
     }
 
      /** Get all flash sale icon as list
+     *
      * @return List<Locator> of flash sale icon
      */
     public List<Locator> getAllFlashSaleLocator() {
         return flashSaleIcon.all();
+    }
+
+    /**
+     * This PO is example of move page and return new object with parameter of next page
+     *
+     * @return List<Locator> of flash sale icon
+     */
+    public KostDetailsPO selectKostOnPromoSection() {
+        Page nextPage;
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(1000);
+            if (kostPromo.isVisible()) {
+                break;
+            }
+        }
+        nextPage = playwright.movePageByClickLocator(page, kostPromo);
+        return new KostDetailsPO(nextPage);
     }
 }

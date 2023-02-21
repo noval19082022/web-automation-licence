@@ -3,6 +3,7 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -26,6 +27,20 @@ public class KostDetailsPO {
     private Locator propertyGender;
     private Locator propertyLocation;
     private Locator roomAvailability;
+
+    //---------login pop up section-------------
+    private Locator loginPopUp;
+    private Locator loginByGoogleBtn;
+    private Locator loginByFbBtn;
+    private Locator loginByAppleIdBtn;
+
+    //---------promo section-------------
+    private Locator promoOwnerSection;
+    private Locator lihatSelengkapnyaPromoOwnerBtn;
+    private Locator tanyaPemilikKostLink;
+    private Locator chatKostPopUp;
+    private Locator hubungiKostHeading;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator bookingKosButton;
     Locator kosDetailPage;
@@ -47,6 +62,19 @@ public class KostDetailsPO {
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
         this.bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         this.kosDetailPage = page.locator("detailKostContainer");
+
+        //---------login popup---------------
+        this.loginPopUp = page.locator("p[class='login-title']");
+        this.loginByGoogleBtn = page.getByTestId("loginGoogleButton");
+        this.loginByFbBtn = page.getByTestId("loginFacebookButton");
+        this.loginByAppleIdBtn = page.getByTestId("loginAppleButton");
+
+        //---------promo section-------------
+        this.promoOwnerSection = page.getByTestId("detailKostOwnerPromo");
+        this.lihatSelengkapnyaPromoOwnerBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnya"));
+        this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
+        this.chatKostPopUp = page.locator(".modal-chat__body");
+        this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
     }
 
     /**
@@ -176,5 +204,44 @@ public class KostDetailsPO {
     public boolean isInKosDetail() {
         kosDetailPage.isVisible();
         return true;
+    }
+
+    // ------- kost detail from kost promo section -----
+
+    /**
+     * get visibility promo kost on detail kost page
+     *
+     * @return 'boolean' promo owner section visibility
+     */
+    public boolean isPromoOwnerSectionDisplayed() {
+        playwright.waitTillLocatorIsVisible(promoOwnerSection);
+        return promoOwnerSection.isVisible();
+    }
+
+    public void clickOnButtonPromoOwner() {
+        lihatSelengkapnyaPromoOwnerBtn.click();
+    }
+
+    public void clickOnTanyaPemilikKost() {
+        tanyaPemilikKostLink.click();
+    }
+
+    public boolean isChatKostPopUpDisplayed() {
+        playwright.waitTillLocatorIsVisible(chatKostPopUp);
+        return chatKostPopUp.isVisible();
+    }
+
+    public String hubungiKostHeadingText() {
+        return hubungiKostHeading.textContent();
+    }
+
+    /**
+     * this method will be check login pop visibility
+     *
+     * @return 'boolean' login pop up visibility
+     */
+    public Boolean isLoginPopUpDisplayed() {
+        playwright.waitTillLocatorIsVisible(loginPopUp, 2.0);
+        return loginPopUp.isVisible() && loginByGoogleBtn.isVisible() && loginByFbBtn.isVisible() && loginByAppleIdBtn.isVisible();
     }
 }

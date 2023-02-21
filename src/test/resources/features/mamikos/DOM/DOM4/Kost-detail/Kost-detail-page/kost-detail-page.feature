@@ -10,3 +10,24 @@ Feature: Kost detail page
     Then user can see overview section on detail page
       | kost stag                     | kost prod                                           |
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+
+  @TEST_DOM-1701 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web @destaRun
+  Scenario: [Dweb][Kost Detail] Check promo owner section login
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
+    And user want to select kost on promo section
+    Then user see promo owner section
+    # user want to ask to owner for more detail kost promo
+    When user want to get more information about kost promo
+    Then user will get "Hubungi Kost" pop up
+
+  @TEST_DOM-1702 @DOM4 @automated @discovery-platform @kost-details @web @destaRun
+  Scenario: [Dweb][Kost Detail] Check promo owner section non login
+    Given user go to mamikos homepage
+    When user want to select kost on promo section
+    Then user see promo owner section
+    # user want to ask to owner for more detail kost promo
+    When user want to get more information about kost promo
+    Then user will see login pop up
