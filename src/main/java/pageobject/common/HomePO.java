@@ -26,7 +26,6 @@ public class HomePO {
     Locator dikelolaMamikosLabel;
 
     //header
-    Locator bookingKosButton;
     Locator searchAdsButton;
     Locator helpCenterButton;
     Locator termAndConditionButton;
@@ -59,7 +58,6 @@ public class HomePO {
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
 
         //header
-        this.bookingKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.searchAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
@@ -178,14 +176,6 @@ public class HomePO {
         return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
     }
 
-    /**
-     * Check element booking kos button header is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isBookingKosDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(bookingKosButton, 50.0);
-    }
 
     /**
      * Check element search ads button header is displayed
