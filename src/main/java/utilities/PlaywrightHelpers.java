@@ -6,7 +6,6 @@ import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
 import java.util.List;
-import java.util.Set;
 
 public class PlaywrightHelpers {
     Page page;
