@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -21,6 +22,10 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    Locator favoriteKostButton;
+    Locator unFavoriteKostButton;
+    Locator successFavoritePopUp;
+    Locator successUnfavoritePopUp;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -42,6 +47,10 @@ public class KostDetailsPO {
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
+        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
+        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
+        this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
+        this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
     }
 
     /**
@@ -151,5 +160,31 @@ public class KostDetailsPO {
     public boolean isRoomAvailabilityDisplayed() {
         playwright.waitTillLocatorIsVisible(roomAvailability);
         return roomAvailability.isVisible();
+    }
+
+    /**
+     * Click on favorite kost button
+     *
+     */
+    public void clickOnFavoriteKostButton() {
+        favoriteKostButton.click();
+    }
+
+    public boolean isSuccessFavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successFavoritePopUp);
+        return successFavoritePopUp.isVisible();
+    }
+
+    /**
+     * Click on favorite kost button
+     *
+     */
+    public void clickOnUnfavoriteKostButton() {
+        unFavoriteKostButton.click();
+    }
+
+    public boolean isSuccessUnfavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
+        return successUnfavoritePopUp.isVisible();
     }
 }

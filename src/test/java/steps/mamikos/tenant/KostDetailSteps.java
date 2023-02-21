@@ -29,4 +29,18 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isPropertyLocationDisplayed(), "Property Location Label is not displayed");
         Assert.assertTrue(kostDetail.isRoomAvailabilityDisplayed(), "Property Room AvailabilityLabel is not displayed");
     }
+
+    @Then("user can favorite the kost")
+    public void userCanFavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+        Assert.assertTrue(kostDetail.isSuccessFavoriteKostDisplayed(), "Success Favorite Pop up is not displayed");
+    }
+
+    @Then("user can unfavorite the kost")
+    public void userCanUnfavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnUnfavoriteKostButton();
+        Assert.assertTrue(kostDetail.isSuccessUnfavoriteKostDisplayed(), "Success Unfavorite Pop up is not displayed");
+    }
 }
