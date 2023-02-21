@@ -116,4 +116,18 @@ public class NavigatesSteps {
         playwright =new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.BOOKING, 30000.0, LoadState.LOAD);
     }
+
+    @Given("user navigates to mamikos-promo-kost")
+    public void userNavigatesToMamikosPromoKost() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-history")
+    public void userNavigatesToMamikosHistory() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.HISTORY, 30000.0, LoadState.LOAD);
+    }
+
+
 }
