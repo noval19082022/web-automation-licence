@@ -8,7 +8,10 @@ import config.playwright.context.OwnerContext;
 import config.playwright.context.TenantContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobject.common.HeaderPO;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -16,6 +19,7 @@ public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
+    HeaderPO header = new HeaderPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -91,5 +95,27 @@ public class NavigatesSteps {
     @Given("tenant navigate to favorite page")
     public void tenantNavigateToFavoritePage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.FAVORITE_PAGE, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-kost")
+    public void userNavigatesToMamikosKost() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @Then("navbar kost before login appears")
+    public void navbarKostBeforeLoginAppears() {
+        Assert.assertTrue(header.isBookingKosDisplayed(), "Download App button not present!");
+        Assert.assertTrue(header.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(header.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(header.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(header.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(header.isEnterButtonDisplayed(), "Enter button not present!");
+    }
+
+    @Given("user navigates to mamikos-booking")
+    public void userNavigatesToMamikosBooking() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.BOOKING, 30000.0, LoadState.LOAD);
     }
 }
