@@ -75,4 +75,27 @@ public class SearchSteps {
         Assert.assertTrue(home.isOtherButtonDisplayed(), "Other button not present!");
         Assert.assertTrue(home.isTenantProfilePictureDisplayed(), "Profile pic not present!");
     }
+
+    @When("user search for random keyword:")
+    public void user_search_for_random_keyword(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var searchArea = kostNameData.get(0).get("search " + Mamikos.ENV);
+        search.searchArea(searchArea);
+    }
+
+    @Then("should display the result list of keyword {string}")
+    public void should_display_the_result_list_of_keyword(String semarang) {
+        Assert.assertTrue(search.listResultKeyword(semarang), "not displayed area");
+    }
+
+    @Then("should display the result exception {string}")
+    public void should_display_the_result_exception(String notfound) {
+        Assert.assertTrue(search.setExeptionText(notfound), "is displayed Exeption Text");
+    }
+
+    @Then("user see searchbar is empty")
+    public void user_see_searchbar_is_empty() {
+        Assert.assertTrue(search.isSearchbarEmpty());
+
+    }
 }
