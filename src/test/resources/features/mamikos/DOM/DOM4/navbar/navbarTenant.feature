@@ -64,3 +64,33 @@ Feature: Navbar Tenant
       | 089988776655 | 089988776655 | qwerty123 |
     And user navigates to mamikos-booking
     Then navbar after login appears
+
+  @TEST_DOM-1850 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-other
+  Scenario: [Dweb][Navbar]Check Navbar in url Page After login 1
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 089988776655 | 089988776655 | qwerty123 |
+    And user navigates to mamikos-promo-kost
+    Then navbar after login appears
+
+  @TEST_DOM-1850 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-other
+  Scenario: [Dweb][Navbar]Check Navbar in url Page After login 1
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 089988776655 | 089988776655 | qwerty123 |
+    And user navigates to mamikos-history
+    Then navbar after login appears
+
+  @TEST_DOM-1847 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-kost-detail
+  Scenario: [Dweb][Kost Detail][Navbar] Check Navbar in Kost Detail Page After login
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 089988776655 | 089988776655 | qwerty123 |
+    When user search property name and select matching result to go kos detail
+      | favorite stag                     | favorite prod                                       |
+      | Kos Dom Automation PLM Tipe A     | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then navbar after login appears
+
