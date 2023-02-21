@@ -17,11 +17,11 @@ public class HomePO {
     private Locator userPhoto;
     private Locator promoNgebutHeading;
     private Locator promoNgebutOptions;
-
     private Locator flashSaleTimer;
     private Locator flashSaleKostListContainer;
-
     private Locator flashSaleLihatSemuaButton;
+    Locator dikelolaMamikosButton;
+    Locator dikelolaMamikosLabel;
 
     public HomePO(Page page) {
         this.page = page;
@@ -36,6 +36,8 @@ public class HomePO {
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
+        dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
+        dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
     }
 
     /**
@@ -121,5 +123,22 @@ public class HomePO {
      */
     public boolean isFlashSaleLihatSemuaButtonVisible() {
         return flashSaleLihatSemuaButton.isVisible();
+    }
+
+    /**
+     * Click on filter Mamirooms button
+     * @throws InterruptedException
+     */
+
+    public void clickFilterDikelolaMamikos() throws InterruptedException {
+        playwright.clickOn(dikelolaMamikosButton);
+    }
+
+    /**
+     * Check if Singgahsini/Apik label is present
+     * @return displayed true, otherwise false
+     */
+    public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
+        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
     }
 }
