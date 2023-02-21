@@ -22,6 +22,10 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    Locator favoriteKostButton;
+    Locator unFavoriteKostButton;
+    Locator successFavoritePopUp;
+    Locator successUnfavoritePopUp;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -45,6 +49,10 @@ public class KostDetailsPO {
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
         this.kosDetailPage = page.locator("detailKostContainer");
+        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
+        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
+        this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
+        this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
     }
 
     /**
@@ -165,5 +173,41 @@ public class KostDetailsPO {
     public boolean isInKosDetail() {
         kosDetailPage.isVisible();
         return true;
+    }
+
+    /**
+     * Click on favorite kost button
+     *
+     */
+    public void clickOnFavoriteKostButton() {
+        favoriteKostButton.click();
+    }
+
+    /**
+     * Check if success favorite pop up displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSuccessFavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successFavoritePopUp);
+        return successFavoritePopUp.isVisible();
+    }
+
+    /**
+     * Click on unfavorite kost button
+     *
+     */
+    public void clickOnUnfavoriteKostButton() {
+        unFavoriteKostButton.click();
+    }
+
+    /**
+     * Check if success unfavorite pop up displayed
+     * 
+     * @return status true / false
+     */
+    public boolean isSuccessUnfavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
+        return successUnfavoritePopUp.isVisible();
     }
 }
