@@ -12,7 +12,6 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
-    Locator clearArea;
 
 
     public SearchPO(Page page) {
@@ -23,7 +22,7 @@ public class SearchPO {
         this.searchBoxInput = page.locator("input[type='search']");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
-        this.clearArea = page.locator("//input[@type='search']");
+
 
 
     }
@@ -106,8 +105,8 @@ public class SearchPO {
      * @return
      */
     public boolean isSearchbarEmpty() {
-        clearArea.clear();
-        clearArea.isVisible();
-        return clearArea.textContent().equals("");
+        searchBoxInput.clear();
+        searchBoxInput.isVisible();
+        return searchBoxInput.textContent().equals("");
     }
 }
