@@ -215,19 +215,37 @@ public class KostDetailsPO {
         return promoOwnerSection.isVisible();
     }
 
+    /**
+     * this method will be click lihat selengkapnya button
+     *
+     */
     public void clickOnButtonPromoOwner() {
         lihatSelengkapnyaPromoOwnerBtn.click();
     }
 
+    /**
+     * this method will be click link tanya pemilik and will be redirect to chat option
+     *
+     */
     public void clickOnTanyaPemilikKost() {
         tanyaPemilikKostLink.click();
     }
 
+    /**
+     * this method will be check chat room visibility
+     *
+     * @return chat room element visibility
+     */
     public boolean isChatKostPopUpDisplayed() {
         playwright.waitTillLocatorIsVisible(chatKostPopUp);
         return chatKostPopUp.isVisible();
     }
 
+    /**
+     * this method will be check heading text "Hubungi Kost" on the detail kost promo section
+     *
+     * @return 'string' hubungi kost
+     */
     public String hubungiKostHeadingText() {
         return hubungiKostHeading.textContent();
     }
