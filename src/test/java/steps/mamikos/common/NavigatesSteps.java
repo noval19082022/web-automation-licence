@@ -8,7 +8,9 @@ import config.playwright.context.OwnerContext;
 import config.playwright.context.TenantContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -91,5 +93,27 @@ public class NavigatesSteps {
     @Given("tenant navigate to favorite page")
     public void tenantNavigateToFavoritePage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.FAVORITE_PAGE, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-kost")
+    public void userNavigatesToMamikosKost() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @Then("navbar kost before login appears")
+    public void navbarKostBeforeLoginAppears() {
+        Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
+        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
+    }
+
+    @Given("user navigates to mamikos-booking")
+    public void userNavigatesToMamikosBooking() {
+        playwright =new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.BOOKING, 30000.0, LoadState.LOAD);
     }
 }

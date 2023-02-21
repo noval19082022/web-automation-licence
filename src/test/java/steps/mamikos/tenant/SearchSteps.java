@@ -1,2 +1,47 @@
-package steps.mamikos.common;public class SearchSteps {
+package steps.mamikos.tenant;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
+
+import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
+import pageobject.common.SearchPO;
+import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
+
+import java.util.Map;
+
+public class SearchSteps {
+    Page page = ActiveContext.getActivePage();
+    HomePO homePO = new HomePO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
+    SearchPO search = new SearchPO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    private Map<String, String> cityName;
+    HomePO home = new HomePO(page);
+
+    @When("user search keyword:")
+    public void userSearchKeyword(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var searchAreaa = kostNameData.get(0).get("search " + Mamikos.ENV);
+        search.searchAreaByName(searchAreaa);
+    }
+
+    @Then("navbar before login appears")
+    public void navbarBeforeLoginAppears() {
+        Assert.assertTrue(kostDetail.isBookingKosDisplayed(), "Booking Kos button not present!");
+        Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
+        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
+    }
+
 }

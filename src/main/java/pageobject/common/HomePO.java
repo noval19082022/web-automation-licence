@@ -25,6 +25,17 @@ public class HomePO {
     Locator dikelolaMamikosButton;
     Locator dikelolaMamikosLabel;
 
+    //header
+    Locator searchAdsButton;
+    Locator helpCenterButton;
+    Locator termAndConditionButton;
+    Locator promoAdsButton;
+    Locator favoriteButton;
+    Locator downloadAppButton;
+    Locator chatHeaderButton;
+    Locator notificationButton;
+    Locator otherButton;
+    Locator searchIklanButton;
     private Locator flashSaleIcon;
 
     public HomePO(Page page) {
@@ -42,6 +53,18 @@ public class HomePO {
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+
+        //header
+        this.searchAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
+        this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
+        this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
+        this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
+        this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
+        this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
+        this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
+        this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya dropdown-down"));
+        this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         flashSaleIcon = page.getByText("flash");
     }
 
@@ -147,8 +170,117 @@ public class HomePO {
         return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
     }
 
+
     /**
-     * Get all flash sale icon as list
+     * Check element search ads button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSearchAdsDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(searchAdsButton, 50.0);
+    }
+
+    /**
+     * Check element help center button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isHelpCenterDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(helpCenterButton, 50.0);
+    }
+
+    /**
+     * Check element help center button header is displayed
+     *
+     * @return status true / false
+     */
+    public Boolean isTermConditionDisplayed() {
+        return playwright.waitTillLocatorIsVisible(termAndConditionButton, 50.0);
+    }
+
+    /**
+     * Check element promosi ads button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isPromosiAdsDisplayed() {
+        return playwright.waitTillLocatorIsVisible(promoAdsButton, 50.0);
+    }
+
+    /**
+     * Enter Button is  Displayed
+     *
+     * @return true / false
+     */
+    public boolean isEnterButtonDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(btnMasuk, 50.0);
+    }
+
+    /**
+     * Check Favorite button is displayed
+     *
+     * @return status true or false
+     */
+    public boolean isFavoriteDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(favoriteButton, 50.0);
+    }
+
+    /**
+     * Check element download app button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isDownloadAppDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(downloadAppButton, 50.0);
+    }
+
+
+    /**
+     * Check Chat button is displayed
+     *
+     * @return status true or false
+     */
+    public boolean isChatDisplayed() throws InterruptedException {
+        return playwright.isLocatorVisibleAfterLoad(chatHeaderButton, 7.0);
+    }
+
+    /**
+     * Check element notification button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isNotificationButtonDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(notificationButton, 5.0);
+    }
+
+    /**
+     * Check element other dropdown header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isOtherButtonDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(otherButton, 5.0);
+    }
+
+    /**
+     * Tenant Profile Picture is  Displayed
+     *
+     * @return Tenant Profile Picture
+     */
+    public boolean isTenantProfilePictureDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(userPhoto, 5.0);
+    }
+
+    /**
+     * Check element search iklan button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSearchIklanDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(searchIklanButton, 50.0);
+    }
+
+     /** Get all flash sale icon as list
      * @return List<Locator> of flash sale icon
      */
     public List<Locator> getAllFlashSaleLocator() {

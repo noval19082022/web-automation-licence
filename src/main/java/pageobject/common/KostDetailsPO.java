@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -26,6 +27,8 @@ public class KostDetailsPO {
     private Locator propertyLocation;
     private Locator roomAvailability;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
+    Locator bookingKosButton;
+    Locator kosDetailPage;
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -42,6 +45,8 @@ public class KostDetailsPO {
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
+        this.bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
+        this.kosDetailPage = page.locator("detailKostContainer");
     }
 
     /**
@@ -151,5 +156,25 @@ public class KostDetailsPO {
     public boolean isRoomAvailabilityDisplayed() {
         playwright.waitTillLocatorIsVisible(roomAvailability);
         return roomAvailability.isVisible();
+    }
+
+    /**
+     * Check element booking kos button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isBookingKosDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(bookingKosButton, 50.0);
+    }
+
+    /**
+     * Check detail kos page reached
+     *
+     * @return Boolean
+     * @throws InterruptedException
+     */
+    public boolean isInKosDetail() {
+        kosDetailPage.isVisible();
+        return true;
     }
 }

@@ -16,6 +16,10 @@ public class Mamikos {
     public static final String KELOLA_TAGIHAN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKelolaTagihan");
     public static final String FAVORITE_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "favoritePage");
     public static final String KOST_MURAH_DIJOGJA = JavaHelpers.getPropertyValue(MAMIKOS,"kostMurahDiJogja");
+    public static final String KOST = JavaHelpers.getPropertyValue(MAMIKOS, "kost");
+    public static final String BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "booking");
+    public static final String PROMO_KOST = JavaHelpers.getPropertyValue(MAMIKOS,"promoKost");
+    public static final String HISTORY= JavaHelpers.getPropertyValue(MAMIKOS, "history");
 
 
 }
