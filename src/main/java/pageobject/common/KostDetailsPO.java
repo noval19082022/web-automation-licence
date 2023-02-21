@@ -186,6 +186,7 @@ public class KostDetailsPO {
     /**
      * Check if success favorite pop up displayed
      *
+     * @return status true / false
      */
     public boolean isSuccessFavoriteKostDisplayed() {
         playwright.waitTillLocatorIsVisible(successFavoritePopUp);
@@ -202,7 +203,8 @@ public class KostDetailsPO {
 
     /**
      * Check if success unfavorite pop up displayed
-     *
+     * 
+     * @return status true / false
      */
     public boolean isSuccessUnfavoriteKostDisplayed() {
         playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
