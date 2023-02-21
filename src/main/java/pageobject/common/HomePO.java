@@ -305,7 +305,7 @@ public class HomePO {
     /**
      * This PO is example of move page and return new object with parameter of next page
      *
-     * @return List<Locator> of flash sale icon
+     * @return next object page
      */
     public KostDetailsPO selectKostOnPromoSection() {
         Page nextPage;
