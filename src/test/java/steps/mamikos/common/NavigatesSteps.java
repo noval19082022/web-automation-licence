@@ -11,7 +11,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.common.HeaderPO;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -19,7 +18,6 @@ public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
-    HeaderPO header = new HeaderPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -105,12 +103,12 @@ public class NavigatesSteps {
 
     @Then("navbar kost before login appears")
     public void navbarKostBeforeLoginAppears() {
-        Assert.assertTrue(header.isBookingKosDisplayed(), "Download App button not present!");
-        Assert.assertTrue(header.isSearchAdsDisplayed(), "Cari Iklan button not present!");
-        Assert.assertTrue(header.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
-        Assert.assertTrue(header.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
-        Assert.assertTrue(header.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
-        Assert.assertTrue(header.isEnterButtonDisplayed(), "Enter button not present!");
+        Assert.assertTrue(home.isBookingKosDisplayed(), "Download App button not present!");
+        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
     }
 
     @Given("user navigates to mamikos-booking")

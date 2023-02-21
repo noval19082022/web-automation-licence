@@ -8,7 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.common.HeaderPO;
+
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
@@ -24,7 +24,7 @@ public class SearchSteps {
     SearchPO search = new SearchPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Map<String, String> cityName;
-    HeaderPO header = new HeaderPO(page);
+    HomePO home = new HomePO(page);
 
     @When("user search keyword:")
     public void userSearchKeyword(DataTable table) {
@@ -35,13 +35,13 @@ public class SearchSteps {
 
     @Then("navbar before login appears")
     public void navbarBeforeLoginAppears() {
-        Assert.assertTrue(header.isBookingKosDisplayed(), "Booking Kos button not present!");
-        Assert.assertTrue(header.isDownloadAppDisplayed(), "Download App button not present!");
-        Assert.assertTrue(header.isSearchAdsDisplayed(), "Cari Iklan button not present!");
-        Assert.assertTrue(header.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
-        Assert.assertTrue(header.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
-        Assert.assertTrue(header.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
-        Assert.assertTrue(header.isEnterButtonDisplayed(), "Enter button not present!");
+        Assert.assertTrue(home.isBookingKosDisplayed(), "Booking Kos button not present!");
+        Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
+        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
     }
 
 }
