@@ -91,7 +91,7 @@ public class KostDetailsPO {
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
 
         //---------------Facility Room Section----------------------
-        this.facilityRoomSeeAllBtn = page.locator("(//button[@class='bg-c-button detail-kost-facility-category__see-more-button bg-c-button--tertiary bg-c-button--md'])[1]");
+        this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
         this.facilityRoomPopUp = page.locator("div[class='detail-kost-facilities-modal__body']");
     }
 
