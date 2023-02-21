@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -64,6 +65,21 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isLoginPopUpDisplayed(), "Login Pop up is not displayed");
     }
 
+    //---------------Facility Room Section----------------------
+    @And("user want to see more detail room facility section on the kost detail page")
+    public void userWantToSeeRoomFacilty() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        kostDetail.clickFacilityRoomSeeAll();
+    }
+
+    @Then("user see all facility room section")
+    public void userSeeAllRoomFacility() {
+        playwright.pageScrollToDown(200);
+        Assert.assertTrue(kostDetail.isRoomFacilitiyPopUpDisplayed(), "Room Facility pop up is not displayed");
+    }
+
+    //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {
         kostDetail.dismissFTUE();

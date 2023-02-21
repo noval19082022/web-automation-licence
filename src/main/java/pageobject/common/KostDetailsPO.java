@@ -23,6 +23,8 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+
+    //------------ Favorite kost section ----------------
     Locator favoriteKostButton;
     Locator unFavoriteKostButton;
     Locator successFavoritePopUp;
@@ -44,6 +46,10 @@ public class KostDetailsPO {
     private Locator tanyaPemilikKostLink;
     private Locator chatKostPopUp;
     private Locator hubungiKostHeading;
+
+    //---------------Facility Room Section----------------------
+    private Locator facilityRoomSeeAllBtn;
+    private Locator facilityRoomPopUp;
 
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
@@ -77,10 +83,16 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
+
+        //------------ Favorite kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
         this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
+
+        //---------------Facility Room Section----------------------
+        this.facilityRoomSeeAllBtn = page.locator("(//button[@class='bg-c-button detail-kost-facility-category__see-more-button bg-c-button--tertiary bg-c-button--md'])[1]");
+        this.facilityRoomPopUp = page.locator("div[class='detail-kost-facilities-modal__body']");
     }
 
     /**
@@ -217,7 +229,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be click lihat selengkapnya button
-     *
      */
     public void clickOnButtonPromoOwner() {
         lihatSelengkapnyaPromoOwnerBtn.click();
@@ -225,7 +236,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be click link tanya pemilik and will be redirect to chat option
-     *
      */
     public void clickOnTanyaPemilikKost() {
         tanyaPemilikKostLink.click();
@@ -260,9 +270,30 @@ public class KostDetailsPO {
         return loginPopUp.isVisible() && loginByGoogleBtn.isVisible() && loginByFbBtn.isVisible() && loginByAppleIdBtn.isVisible();
     }
 
+    //---------------Facility Room Section----------------------
+
+    /**
+     * this method will be click room facilty section and more facility list will be appear
+     */
+    public void clickFacilityRoomSeeAll() {
+        playwright.pageScrollUntilElementIsVisible(facilityRoomSeeAllBtn);
+        playwright.waitTillLocatorIsVisible(facilityRoomSeeAllBtn);
+        facilityRoomSeeAllBtn.click();
+    }
+
+    /**
+     * this method will be check room facilty section after click button see all
+     *
+     * @return 'boolean' facility room pop up
+     */
+    public boolean isRoomFacilitiyPopUpDisplayed() {
+        return facilityRoomPopUp.isVisible();
+    }
+
+    //------------ Favorite kost section ----------------
+
     /**
      * Click on favorite kost button
-     *
      */
     public void clickOnFavoriteKostButton() {
         favoriteKostButton.click();
@@ -280,7 +311,6 @@ public class KostDetailsPO {
 
     /**
      * Click on unfavorite kost button
-     *
      */
     public void clickOnUnfavoriteKostButton() {
         unFavoriteKostButton.click();
@@ -288,7 +318,7 @@ public class KostDetailsPO {
 
     /**
      * Check if success unfavorite pop up displayed
-     * 
+     *
      * @return status true / false
      */
     public boolean isSuccessUnfavoriteKostDisplayed() {

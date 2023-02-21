@@ -302,6 +302,7 @@ public class HomePO {
         return flashSaleIcon.all();
     }
 
+    //------------ promo section ----------------
     /**
      * This PO is example of move page and return new object with parameter of next page
      *
