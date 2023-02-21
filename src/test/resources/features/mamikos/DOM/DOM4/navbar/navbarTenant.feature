@@ -18,17 +18,17 @@ Feature: Navbar Tenant
     Given user navigates to mamikos-booking
     Then navbar kost before login appears
 
-  @bagas @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
+  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
   Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 2
     Given user navigates to mamikos-promo-kost
     Then navbar before login appears
 
-  @bagas @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
+  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
   Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 2
     Given user navigates to mamikos-history
     Then navbar before login appears
 
-  @bagas @TEST_DOM-1866 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
+  @TEST_DOM-1866 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
     Given user go to mamikos homepage
     When user search property name and select matching result to go kos detail
