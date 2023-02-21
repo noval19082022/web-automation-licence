@@ -310,6 +310,18 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Scroll Down Helper until locator is visible (per 100 pixel)
+     */
+    public void pageScrollUntilElementIsVisible(Locator locator) {
+        for (int i = 0; i < 50; i++) {
+            page.evaluate("window.scrollBy(0,100)");
+            if (locator.isVisible()) {
+                break;
+            }
+        }
+    }
+
+    /**
      * Move Page helper, it will return page object, so it can use to implement in next page taget
      * for example when select kost on promo side from home page, it will be move to kost detail
      * so this helper can be implement to return kost detail object on kostdetailPO with argument this page inside of the kost detail object
