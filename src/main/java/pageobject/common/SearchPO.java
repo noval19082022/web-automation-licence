@@ -8,7 +8,6 @@ public class SearchPO {
     Page page;
     Locator inputSearch;
     private Locator searchKost;
-    private Locator searchBoxInput;
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
@@ -19,7 +18,6 @@ public class SearchPO {
         this.page = page;
         this.inputSearch = page.locator("input[title]");
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
-        this.searchBoxInput = page.locator("input[type='search']");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
 
@@ -48,8 +46,8 @@ public class SearchPO {
 
     public void searchKostFromHomePage(String kostName) {
         searchKost.click();
-        searchBoxInput.fill(kostName);
-        searchBoxInput.press("Enter");
+        inputSearch.fill(kostName);
+        inputSearch.press("Enter");
         suggetionKostOnTheSearchList.click();
     }
 
@@ -61,7 +59,7 @@ public class SearchPO {
 
     public void searchAreaByName(String search) {
         searchKost.click();
-        searchBoxInput.fill(search);
+        inputSearch.fill(search);
         suggestionAreaOnTheSearchList.click();
     }
 
@@ -84,8 +82,8 @@ public class SearchPO {
      */
     public void searchArea(String search) {
         searchKost.click();
-        searchBoxInput.fill(search);
-        searchBoxInput.press("Enter");
+        inputSearch.fill(search);
+        inputSearch.press("Enter");
     }
 
     /**
@@ -105,8 +103,8 @@ public class SearchPO {
      * @return
      */
     public boolean isSearchbarEmpty() {
-        searchBoxInput.clear();
-        searchBoxInput.isVisible();
-        return searchBoxInput.textContent().equals("");
+        inputSearch.clear();
+        inputSearch.isVisible();
+        return inputSearch.textContent().equals("");
     }
 }
