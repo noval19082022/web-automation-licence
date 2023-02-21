@@ -30,6 +30,40 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isRoomAvailabilityDisplayed(), "Property Room AvailabilityLabel is not displayed");
     }
 
+    //------------ promo section ----------------
+    @When("user want to select kost on promo section")
+    public void userSelectKostOnPromoSection() {
+        // passing return value object to move next page
+        this.kostDetail = home.selectKostOnPromoSection();
+    }
+
+    @Then("user see promo owner section")
+    public void userSeePromoOwnerSection() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isPromoOwnerSectionDisplayed(), "Promo Owner Section is not displayed");
+    }
+
+    @When("user want to get more information about kost promo")
+    public void userWantToseeMoreAboutKostPromo() {
+        kostDetail.clickOnButtonPromoOwner();
+        kostDetail.clickOnTanyaPemilikKost();
+    }
+
+    @Then("user will get {string} pop up")
+    public void hubungiKostPopUp(String popUpMsg) {
+        Assert.assertTrue(kostDetail.isChatKostPopUpDisplayed(), "Pop Up Hubungi Kos Ini Section is not displayed");
+        Assert.assertTrue(kostDetail.hubungiKostHeadingText().contains(popUpMsg));
+    }
+
+
+    @Then("user will see login pop up")
+    public void loginPopUp() {
+        playwright.pageScrollToDown(200);
+        Assert.assertFalse(kostDetail.isChatKostPopUpDisplayed(), "Pop Up Hubungi Kos Ini Section is displayed");
+        Assert.assertTrue(kostDetail.isLoginPopUpDisplayed(), "Login Pop up is not displayed");
+    }
+
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {
         kostDetail.dismissFTUE();
