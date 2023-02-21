@@ -65,4 +65,14 @@ public class SearchSteps {
         Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
         Assert.assertTrue(kostDetail.isInKosDetail(), "You are not in kos detail page");
     }
+
+    @Then("navbar after login appears")
+    public void navbarAfterLoginAppears() throws InterruptedException {
+        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isFavoriteDisplayed(), "Favorite button not present!");
+        Assert.assertTrue(home.isChatDisplayed(), "Chat button not present!");
+        Assert.assertTrue(home.isNotificationButtonDisplayed(), "Notification button not present!");
+        Assert.assertTrue(home.isOtherButtonDisplayed(), "Other button not present!");
+        Assert.assertTrue(home.isTenantProfilePictureDisplayed(), "Profile pic not present!");
+    }
 }
