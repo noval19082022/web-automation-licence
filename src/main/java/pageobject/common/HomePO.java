@@ -59,7 +59,7 @@ public class HomePO {
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
 
         //header
-        this.bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
+        this.bookingKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.searchAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
@@ -179,7 +179,6 @@ public class HomePO {
     }
 
     /**
-<<<<<<< HEAD
      * Check element booking kos button header is displayed
      *
      * @return status true / false
