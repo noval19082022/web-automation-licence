@@ -7,6 +7,8 @@ import com.microsoft.playwright.options.LoadState;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -15,8 +17,15 @@ public class HomePO {
     private Locator cariButton;
     private Locator mamikosLogo;
     private Locator userPhoto;
+    private Locator promoNgebutHeading;
+    private Locator promoNgebutOptions;
+    private Locator flashSaleTimer;
+    private Locator flashSaleKostListContainer;
+    private Locator flashSaleLihatSemuaButton;
     Locator dikelolaMamikosButton;
     Locator dikelolaMamikosLabel;
+
+    private Locator flashSaleIcon;
 
     public HomePO(Page page) {
         this.page = page;
@@ -26,8 +35,14 @@ public class HomePO {
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
         userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
+        promoNgebutOptions = page.locator("#flashsale #userLocation");
+        flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
+        flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
+        flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+        flashSaleIcon = page.getByText("flash");
     }
 
     /**
@@ -69,6 +84,53 @@ public class HomePO {
     }
 
     /**
+     * Scroll to view promo ngebut heading
+     */
+    public void scrollToViewPromoNgebutHeading() {
+        promoNgebutHeading.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Check if promo ngebut heading is visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean promoNgebutHeadingIsVisible() {
+        return promoNgebutHeading.isVisible();
+    }
+
+    /**
+     * Get promo ngebut options value
+     * @return String data type
+     */
+    public String getPromoNgebutOptionsValue() {
+        return promoNgebutOptions.inputValue();
+    }
+
+    /**
+     * Check is flash sale timer visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean isFlashSaleTimerVisible() {
+        return flashSaleTimer.isVisible();
+    }
+
+    /**
+     * Check is flash sale kost container visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean isFlashSaleKostContainerVisible() {
+        return flashSaleKostListContainer.isVisible();
+    }
+
+    /**
+     * Check is flash sale lihat semua button visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean isFlashSaleLihatSemuaButtonVisible() {
+        return flashSaleLihatSemuaButton.isVisible();
+    }
+
+    /**
      * Click on filter Mamirooms button
      * @throws InterruptedException
      */
@@ -83,5 +145,13 @@ public class HomePO {
      */
     public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
         return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
+    }
+
+    /**
+     * Get all flash sale icon as list
+     * @return List<Locator> of flash sale icon
+     */
+    public List<Locator> getAllFlashSaleLocator() {
+        return flashSaleIcon.all();
     }
 }

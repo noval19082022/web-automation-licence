@@ -1,4 +1,4 @@
-@BBM2 @saktirunlagirun
+@BBM2
 Feature: Additional Price Biaya Lainnya On Invoice Recurring
 
   Scenario: Admin Batalkan Contract

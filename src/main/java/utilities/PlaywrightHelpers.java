@@ -6,7 +6,6 @@ import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
 
 import java.util.List;
-import java.util.Set;
 
 public class PlaywrightHelpers {
     Page page;
@@ -316,7 +315,6 @@ public class PlaywrightHelpers {
      * so this helper can be implement to return kost detail object on kostdetailPO with argument this page inside of the kost detail object
      * real example you can see DOM 4 on feature:kost detail and Scenario: [Dweb][Kost Detail] Check promo owner section login
      */
-
     public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
         // move page
         Page nextPage = pageActive.waitForPopup(() -> {
