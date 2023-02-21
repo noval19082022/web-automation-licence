@@ -18,5 +18,6 @@ public class HomepageSteps {
         Assert.assertTrue(home.isFlashSaleTimerVisible(), "Flash Sale Timer not visible");
         Assert.assertTrue(home.isFlashSaleLihatSemuaButtonVisible(), "Flash sale lihat semua button is not visible");
         Assert.assertTrue(home.isFlashSaleKostContainerVisible(), "Flash sale kost list is not visible");
+        Assert.assertTrue(home.getAllFlashSaleLocator().size() > 0, "Flash sale icon is not present");
     }
 }

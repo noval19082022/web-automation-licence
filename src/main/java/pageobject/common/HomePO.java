@@ -7,6 +7,8 @@ import com.microsoft.playwright.options.LoadState;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -23,6 +25,8 @@ public class HomePO {
     Locator dikelolaMamikosButton;
     Locator dikelolaMamikosLabel;
 
+    private Locator flashSaleIcon;
+
     public HomePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -38,6 +42,7 @@ public class HomePO {
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+        flashSaleIcon = page.getByText("flash");
     }
 
     /**
@@ -140,5 +145,13 @@ public class HomePO {
      */
     public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
         return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
+    }
+
+    /**
+     * Get all flash sale icon as list
+     * @return List<Locator> of flash sale icon
+     */
+    public List<Locator> getAllFlashSaleLocator() {
+        return flashSaleIcon.all();
     }
 }
