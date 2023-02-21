@@ -1,4 +1,4 @@
-@DOM4 @lawackrunlagi
+@DOM4
 Feature: Flash Sale
 
   Scenario: Check Flash Sale Section Oh Homepage
