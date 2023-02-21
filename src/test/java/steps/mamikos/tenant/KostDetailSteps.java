@@ -25,7 +25,6 @@ public class KostDetailSteps {
     public void userCanSeeOverViewSection(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
-        kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.getKostTitle().contains(kostName));
         Assert.assertTrue(kostDetail.isPropertyGenderDisplayed(), "Property Gender Label is not displayed");
         Assert.assertTrue(kostDetail.isPropertyLocationDisplayed(), "Property Location Label is not displayed");

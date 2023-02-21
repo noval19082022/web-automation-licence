@@ -115,26 +115,40 @@ public class KostDetailsPO {
     }
 
     /**
-     * get detail page
+     * get title detail kost page
      *
-     * @return
+     * @return 'string' kost title
      */
-
     public String getKostTitle() {
         playwright.waitTillLocatorIsVisible(kostTitle, 1.0);
         return kostTitle.textContent();
     }
 
+    /**
+     * get gender detail kost page
+     *
+     * @return 'boolean' property gender element visibility
+     */
     public boolean isPropertyGenderDisplayed() {
         playwright.waitTillLocatorIsVisible(propertyGender);
         return propertyGender.isVisible();
     }
 
+    /**
+     * get location detail kost page
+     *
+     * @return 'boolean' property location element visibility
+     */
     public boolean isPropertyLocationDisplayed() {
         playwright.waitTillLocatorIsVisible(propertyLocation);
         return propertyLocation.isVisible();
     }
 
+    /**
+     * get room detail kost page
+     *
+     * @return 'boolean' room element visibility
+     */
     public boolean isRoomAvailabilityDisplayed() {
         playwright.waitTillLocatorIsVisible(roomAvailability);
         return roomAvailability.isVisible();
