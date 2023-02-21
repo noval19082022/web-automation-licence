@@ -289,30 +289,32 @@ public class PlaywrightHelpers {
     //---- Scroll Part ----\\
 
     /**
-     * Scroll Helper
+     * Scroll Helper horizontal and vertikal (per pixel)
      */
-
     public void pageScrollUsingCoordinate(int x, int y) {
         page.evaluate("scroll(" + x + "," + y + ")");
     }
 
+    /**
+     * Scroll Helper to the bottom page
+     */
     public void pageScrollHeightToBottom() {
         page.evaluate("window.scrollBy(0,document.body.scrollHeight)");
     }
 
-    public Locator pageScrollInView(Locator e) {
-        page.evaluate("arguments[0].scrollIntoView(true);", e);
-        return e;
-    }
-
+    /**
+     * Scroll Helper vertical (per pixel)
+     */
     public void pageScrollToDown(int y) {
         page.evaluate("window.scrollBy(0," + y + ")");
     }
 
     /**
-     * Move Page
+     * Move Page helper, it will return page object, so it can use to implement in next page taget
+     * for example when select kost on promo side from home page, it will be move to kost detail
+     * so this helper can be implement to return kost detail object on kostdetailPO with argument this page inside of the kost detail object
+     * real example you can see DOM 4 on feature:kost detail and Scenario: [Dweb][Kost Detail] Check promo owner section login
      */
-
     public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
         // move page
         Page nextPage = pageActive.waitForPopup(() -> {

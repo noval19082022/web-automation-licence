@@ -6,16 +6,10 @@ import com.microsoft.playwright.Page;
 public class SearchPO {
     Page page;
     Locator inputSearch;
-    private Locator searchKost;
-    private Locator searchBoxInput;
-    private Locator suggetionKostOnTheSearchList;
 
     public SearchPO(Page page) {
         this.page = page;
         this.inputSearch = page.locator("input[title]");
-        this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
-        this.searchBoxInput = page.locator("input[type='search']");
-        this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
     }
 
     /**
@@ -28,12 +22,5 @@ public class SearchPO {
         Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
         firstResultKostName.click();
         return new KostDetailsPO(page);
-    }
-
-    public void searchKostFromHomePage(String kostName) {
-        searchKost.click();
-        searchBoxInput.fill(kostName);
-        searchBoxInput.press("Enter");
-        suggetionKostOnTheSearchList.click();
     }
 }
