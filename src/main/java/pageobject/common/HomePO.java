@@ -38,6 +38,9 @@ public class HomePO {
     Locator otherButton;
     Locator searchIklanButton;
     private Locator flashSaleIcon;
+    Locator bookingKosButtonHeadBar;
+
+
 
     public HomePO(Page page) {
         this.page = page;
@@ -55,6 +58,7 @@ public class HomePO {
         dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
 
+
         //header
         this.searchAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
@@ -66,6 +70,7 @@ public class HomePO {
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya dropdown-down"));
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
+        this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator("#promoted").getByTestId("roomCardCover-photo").nth(0);
     }
@@ -312,5 +317,14 @@ public class HomePO {
         }
         nextPage = playwright.movePageByClickLocator(page, kostPromo);
         return new KostDetailsPO(nextPage);
+    }
+
+    /**
+     * Check element booking kos button header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isBookingKosDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
     }
 }

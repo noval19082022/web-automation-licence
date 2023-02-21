@@ -63,4 +63,18 @@ public class KostDetailSteps {
         Assert.assertFalse(kostDetail.isChatKostPopUpDisplayed(), "Pop Up Hubungi Kos Ini Section is displayed");
         Assert.assertTrue(kostDetail.isLoginPopUpDisplayed(), "Login Pop up is not displayed");
     }
+
+    @Then("user can favorite the kost")
+    public void userCanFavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+        Assert.assertTrue(kostDetail.isSuccessFavoriteKostDisplayed(), "Success Favorite Pop up is not displayed");
+    }
+
+    @Then("user can unfavorite the kost")
+    public void userCanUnfavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnUnfavoriteKostButton();
+        Assert.assertTrue(kostDetail.isSuccessUnfavoriteKostDisplayed(), "Success Unfavorite Pop up is not displayed");
+    }
 }

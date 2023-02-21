@@ -23,6 +23,10 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    Locator favoriteKostButton;
+    Locator unFavoriteKostButton;
+    Locator successFavoritePopUp;
+    Locator successUnfavoritePopUp;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -42,7 +46,6 @@ public class KostDetailsPO {
     private Locator hubungiKostHeading;
 
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
-    Locator bookingKosButton;
     Locator kosDetailPage;
 
     public KostDetailsPO(Page page) {
@@ -60,7 +63,6 @@ public class KostDetailsPO {
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
-        this.bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         this.kosDetailPage = page.locator("detailKostContainer");
 
         //---------login popup---------------
@@ -75,6 +77,10 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
+        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
+        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
+        this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
+        this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
     }
 
     /**
@@ -187,15 +193,6 @@ public class KostDetailsPO {
     }
 
     /**
-     * Check element booking kos button header is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isBookingKosDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(bookingKosButton, 50.0);
-    }
-
-    /**
      * Check detail kos page reached
      *
      * @return Boolean
@@ -243,5 +240,41 @@ public class KostDetailsPO {
     public Boolean isLoginPopUpDisplayed() {
         playwright.waitTillLocatorIsVisible(loginPopUp, 2.0);
         return loginPopUp.isVisible() && loginByGoogleBtn.isVisible() && loginByFbBtn.isVisible() && loginByAppleIdBtn.isVisible();
+    }
+
+    /**
+     * Click on favorite kost button
+     *
+     */
+    public void clickOnFavoriteKostButton() {
+        favoriteKostButton.click();
+    }
+
+    /**
+     * Check if success favorite pop up displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSuccessFavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successFavoritePopUp);
+        return successFavoritePopUp.isVisible();
+    }
+
+    /**
+     * Click on unfavorite kost button
+     *
+     */
+    public void clickOnUnfavoriteKostButton() {
+        unFavoriteKostButton.click();
+    }
+
+    /**
+     * Check if success unfavorite pop up displayed
+     * 
+     * @return status true / false
+     */
+    public boolean isSuccessUnfavoriteKostDisplayed() {
+        playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
+        return successUnfavoritePopUp.isVisible();
     }
 }
