@@ -30,13 +30,11 @@ public class HomePO {
     Locator helpCenterButton;
     Locator termAndConditionButton;
     Locator promoAdsButton;
-    Locator enterButton;
     Locator favoriteButton;
     Locator downloadAppButton;
     Locator chatHeaderButton;
     Locator notificationButton;
     Locator otherButton;
-    Locator tenantProfilePicture;
     Locator searchIklanButton;
     private Locator flashSaleIcon;
 
@@ -61,13 +59,11 @@ public class HomePO {
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
         this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
-        this.enterButton = page.getByTestId("entryButton");
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya dropdown-down"));
-        this.tenantProfilePicture = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
         flashSaleIcon = page.getByText("flash");
     }
@@ -217,7 +213,7 @@ public class HomePO {
      * @return true / false
      */
     public boolean isEnterButtonDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(enterButton, 50.0);
+        return playwright.isLocatorVisibleAfterLoad(btnMasuk, 50.0);
     }
 
     /**
@@ -272,7 +268,7 @@ public class HomePO {
      * @return Tenant Profile Picture
      */
     public boolean isTenantProfilePictureDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(tenantProfilePicture, 5.0);
+        return playwright.isLocatorVisibleAfterLoad(userPhoto, 5.0);
     }
 
     /**
