@@ -123,4 +123,17 @@ public class KostDetailSteps {
         kostDetail.clickOnUnfavoriteKostButton();
         Assert.assertTrue(kostDetail.isSuccessUnfavoriteKostDisplayed(), "Success Unfavorite Pop up is not displayed");
     }
+
+    @Then("Non login user cannot favorite the kost")
+    public void nonLoginUserCannotFavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+        Assert.assertTrue(kostDetail.isLoginPopUpDisplayed(), "Login Pop up is not displayed");
+    }
+
+    @Then("user can share the kost")
+    public void userCanShareTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnShareKostButton();
+    }
 }
