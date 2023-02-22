@@ -101,4 +101,27 @@ public class SearchSteps {
         Assert.assertTrue(search.isSearchbarEmpty());
 
     }
+
+    @Given("user navigates to ugm kost listing")
+    public void userNavigatesToUgmKostListing() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.UGM_KOST_LIST, 30000.0, LoadState.LOAD);
+    }
+
+    @Then("user clicks the {string} button and the description will appears {string}")
+    public void userClicksTheButtonAndTheDescriptionWillAppears(String filter, String text) throws InterruptedException {
+        if(filter.equalsIgnoreCase("Promo Ngebut"))
+        {
+            search.clickPromoNgebutFilter();
+            String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
+            String expected = text.toLowerCase().replaceAll("\\s", "");
+            Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
+        }
+        else if(filter.equalsIgnoreCase("Kos Andalan"))
+        {
+            search.clickKosAndalanFilter();
+            String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
+            String expected = text.toLowerCase().replaceAll("\\s", "");
+            Assert.assertTrue(desc.contains(expected), "Kos Andalan Description text is wrong");
+        }
+    }
 }
