@@ -82,6 +82,15 @@ public class KostDetailsPO {
     private Locator kosRuleImageElement;
     private Locator seeAllKosRuleButton;
 
+    // ------------ Kost Map section -----------
+    private Locator lihatPetaBtn;
+    private Locator staticMap;
+    private Locator currentLocation;
+    private Locator tanyaAlamatLengkapBtn;
+    private Locator tabPOILandmark;
+    private Locator latestChat;
+    private Locator chatRoom;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -156,6 +165,15 @@ public class KostDetailsPO {
         this.kosRuleSection = page.locator(" .detail-kost-rules__content");
         this.kosRuleImageElement = page.locator(".kost-rules-gallery");
         this.seeAllKosRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua peraturan"));
+
+        // ------------ Kost Map section -----------
+        this.lihatPetaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat peta"));
+        this.staticMap = page.getByTestId("detail-kost-location__map-static");
+        this.currentLocation = page.getByTestId("current-position");
+        this.tanyaAlamatLengkapBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya alamat lengkap"));
+        this.tabPOILandmark = page.getByTestId("kost-landmark-list__tabs");
+        this.latestChat = page.locator(".mc-balloon-chat__content").locator("div").last();
+        this.chatRoom = page.locator(".mc-chat-room");
     }
 
     /**
@@ -576,6 +594,94 @@ public class KostDetailsPO {
      */
     public boolean isKosRuleImagePresent() {
         return kosRuleImageElement.isVisible();
+    }
+
+    // ------------Kost Map section -----------
+
+    /**
+     * this method will be check 'Lihat Peta' button on map section for non login condition
+     *
+     * @return 'boolean' 'Lihat Peta' button on map section for non login condition visibility
+     */
+    public boolean isLihatPetaButtonPresent() {
+        playwright.pageScrollToDown(2500);
+        playwright.pageScrollUntilElementIsVisible(lihatPetaBtn);
+        return lihatPetaBtn.isVisible();
+    }
+
+    /**
+     * this method will be check that map image is static or unclear on map section caused by non login condition
+     *
+     * @return 'boolean' that map image is static or unclear on map section caused by non login condition
+     */
+    public boolean isStaticMapPresent() {
+        return staticMap.isVisible();
+    }
+
+    /**
+     * this method will be check 'tempat terdekat landmark' on map section
+     *
+     * @return 'boolean' 'tempat terdekat landmark' on map section visibility
+     */
+    public boolean isPOILandmarkShow() {
+        return tabPOILandmark.isVisible();
+    }
+
+    /**
+     * this method will be check of funcionality from 'Lihat Peta' button on map section for non login condition
+     *
+     */
+    public void clickOnSeeMapButton() {
+        lihatPetaBtn.click();
+    }
+
+    /**
+     * this method will be check 'Tanya alamat' button on map section for login condition
+     *
+     * @return 'boolean' 'Tanya alamat' button on map section for login condition visibility
+     */
+    public boolean isTanyaAlamatBtnPresent() {
+        playwright.pageScrollToDown(2500);
+        playwright.pageScrollUntilElementIsVisible(tanyaAlamatLengkapBtn);
+        return tanyaAlamatLengkapBtn.isVisible();
+    }
+
+    /**
+     * this method will be check that map is clear and user can see more detail kost location on map section for login condition
+     *
+     * @return 'boolean' that map is clear and user can see more detail kost location on map section for login condition visibility
+     */
+    public boolean isKostCurrentLocationPresent() {
+        return currentLocation.isVisible();
+    }
+
+    /**
+     * this method will be check of funcionality from 'Tanya Alamat' button on map section for login condition
+     *
+     */
+    public void clickOnTanyaAlamatBtn() {
+        playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn, 3.0);
+        tanyaAlamatLengkapBtn.click();
+    }
+
+    /**
+     * this method will be check chat room is present for user with login condition
+     *
+     * @return 'boolean' chat room is present for user with login condition visibility
+     */
+    public boolean isChatRoomPresent() {
+        playwright.waitTillLocatorIsVisible(chatRoom, 3.0);
+        return chatRoom.isVisible();
+    }
+
+    /**
+     * this method will be check latest chat on chat room for user with login condition
+     *
+     * @return 'String' latest chat on chat room for user with login condition visibility
+     */
+    public String getLatestChatText() {
+        playwright.waitTillLocatorIsVisible(latestChat, 7.0);
+        return latestChat.textContent();
     }
 
     //------------ Favorite kost section ----------------

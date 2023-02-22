@@ -133,3 +133,28 @@ Feature: Kost detail page
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user can see kos rule list on detail kos
+
+  @TEST_DOM-1709 @DOM4 @automated @discovery-platform @kost-details @map @web
+  Scenario: [Dweb][Kost Detail] Check Map section tenant without login
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to reached map section and see lihat peta button
+    #user want to see map more detail
+    When user want to see more detail kost location
+    Then user will see login pop up
+
+  @TEST_DOM-1711 @DOM4 @automated @discovery-platform @kost-details @map @web
+  Scenario: [Dweb][Kost Detail] Check Map section when tenant login
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to reached map section and see tanya alamat lengkap button
+    #user want to see map more detail
+    When user want to ask kost address
+    Then chat room appear with latest message
