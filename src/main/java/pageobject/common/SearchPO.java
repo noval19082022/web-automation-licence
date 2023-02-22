@@ -14,6 +14,7 @@ public class SearchPO {
     private PlaywrightHelpers playwright;
     Locator resultBasedOnArea;
     Locator area;
+    Locator suggetionKostOnTheSearchListNumberSix;
 
 
     public SearchPO(Page page) {
@@ -21,10 +22,11 @@ public class SearchPO {
         this.page = page;
         this.inputSearch = page.locator("input[title]");
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
-        this.suggetionKostOnTheSearchList = page.locator("(//label[@class='results-title'])[6]");
+        this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
         this.resultBasedOnArea = page.locator(".row");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
+        suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
 
 
     }
@@ -155,5 +157,48 @@ public class SearchPO {
     public boolean checkElementbyText(String city) {
         Locator listAreaCity = page.getByTestId("popular-secondary").getByText(city);
         return playwright.waitTillLocatorIsVisible(listAreaCity);
+    }
+
+    /**
+     * List all popular search city
+     *
+     * @return popular city
+     */
+    public boolean listPopularCity(String area) {
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area));
+        return popularCity.isVisible();
+    }
+
+    /** Click one of city in popular search
+     * @param city is name of city
+     */
+    public void clickPopularCity(String city) throws InterruptedException {
+        Locator citty = page.getByTestId("popular-secondary").getByText(city);
+        playwright.clickOn(citty);
+    }
+
+
+    /**
+     * search area berdasarkan kota
+     * @param Kota
+     */
+    public void clickAreaBerdasarkanKotaBelow(String Kota){
+        Locator address = page.locator("//div[@class='bg-c-accordion bg-c-accordion--open bg-c-accordion--md']").getByText(Kota);
+        address.click();
+        resultBasedOnArea.isVisible();
+
+    }
+
+    /**
+     * Enter Text in search bar and select result
+     *
+     * @param kostName
+     */
+
+    public void suggetionKostOnTheSearchListNumberSix(String kostName) {
+        searchKost.click();
+        inputSearch.fill(kostName);
+        inputSearch.press("Enter");
+        suggetionKostOnTheSearchListNumberSix.click();
     }
 }
