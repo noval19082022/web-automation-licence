@@ -136,9 +136,10 @@ public class SearchSteps {
 
     @Then("under popular search, there's this city :")
     public void underPopularSearchThereSThisCity(DataTable table) {
-        var city = table.asMaps(String.class, String.class);
-        var popular = city.get(0).get("city " + Mamikos.ENV);
-        Assert.assertTrue(search.listPopularCity(popular), "isdisplayed");
+        var cities = table.asMaps(String.class, String.class);
+        for (Map<String, String> city : cities) {
+            Assert.assertTrue(search.listPopularCity(city.get("city " + Mamikos.ENV)), city.get("city " + Mamikos.ENV) + " is not displayed");
+        }
     }
 
     @Given("user navigates to ugm kost listing")

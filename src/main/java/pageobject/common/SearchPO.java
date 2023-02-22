@@ -177,7 +177,7 @@ public class SearchPO {
      * @return popular city
      */
     public boolean listPopularCity(String area) {
-        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area));
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
         return popularCity.isVisible();
     }
 

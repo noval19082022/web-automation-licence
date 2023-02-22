@@ -58,10 +58,10 @@ Feature: Main Search
     Then under popular search, there's this city :
       | city stag      | city prod      |
       | Yogyakarta     | Yogyakarta     |
-      | Jakarta        | Jakarta        |
+      | Jakarta      | Jakarta        |
       | Bandung        | Bandung        |
       | Surabaya       | Surabaya       |
-      | JakartaSelatan | JakartaSelatan |
+      | Jakarta Selatan | Jakarta Selatan |
       | Malang         | Malang         |
       | Semarang       | Semarang       |
       | Makassar       | Makassar       |
