@@ -66,4 +66,3 @@ Feature: Main Search
       | Semarang       | Semarang       |
       | Makassar       | Makassar       |
       | Medan          | Medan          |
-

@@ -5,9 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SearchPO {
     Page page;
     Locator inputSearch;
@@ -186,8 +183,8 @@ public class SearchPO {
      * @param Kota
      */
     public void clickAreaBerdasarkanKotaBelow(String Kota){
-        Locator address = page.locator("//div[@class='bg-c-accordion bg-c-accordion--open bg-c-accordion--md']").getByText(Kota);
-        address.click();
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Kota));
+        popularCity.click();
         resultBasedOnArea.isVisible();
 
     }
