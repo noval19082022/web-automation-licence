@@ -109,6 +109,26 @@ public class KostDetailSteps {
         kostDetail.clickOnExpandFacNotes();
     }
 
+    //------------------Owner Story Section-----------------
+    @Then("user can see owner story on detail kos and button is not present")
+    public void userCanSeeOwnerStoryOnDetailKos() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isOwnerStorySectionDisplayed(), "Owner Story section is not displayed");
+        Assert.assertTrue(kostDetail.isOwnerStoryDescDisplayed(), "Owner Story description is not displayed");
+        Assert.assertFalse(kostDetail.isExpandOwnerStoryDisplayed(), "Owner Story expand button section is displayed");
+    }
+
+    @Then("user can see owner story on detail kos and button is present")
+    public void userCanSeeOwnerStoryOnDetailKosBtnIsPresent() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isOwnerStorySectionDisplayed(), "Owner Story section is not displayed");
+        Assert.assertTrue(kostDetail.isOwnerStoryDescDisplayed(), "Owner Story description is not displayed");
+        Assert.assertTrue(kostDetail.isExpandOwnerStoryDisplayed(), "Owner Story expand button section is displayed");
+        kostDetail.clickOnExpandOwnerStory();
+    }
+
     //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {

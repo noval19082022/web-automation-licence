@@ -1,4 +1,4 @@
-#@DOM4
+@local #@DOM4
 Feature: Kost detail page
 
   @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
@@ -76,3 +76,19 @@ Feature: Kost detail page
       | kost name stag                | kost name prod                                      |
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility notes on detail kos and button is present
+
+  @TEST_DOM-1700 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
+  Scenario: [Dweb][Kost Detail]Check owner story section on kost that has 3 rows of owner story
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe B | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
+    Then user can see owner story on detail kos and button is not present
+
+  @TEST_DOM-1713 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
+  Scenario: [Dweb][Kost Detail]Check owner story section on kost that has 4 rows of owner story
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see owner story on detail kos and button is present

@@ -61,6 +61,10 @@ public class KostDetailsPO {
     private Locator facilityNotesDesc;
     private Locator expandFacilityNotesBtn;
 
+    //------------------Owner Story Section-----------------
+    private Locator ownerStorySection;
+    private Locator ownerStoryDesc;
+    private Locator expandOwnerStoryBtn;
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -113,6 +117,11 @@ public class KostDetailsPO {
         this.facilityNotesSection = page.getByText("Catatan tambahan seputar fasilitas");
         this.facilityNotesDesc = page.getByTestId("kost-facility-note-description");
         this.expandFacilityNotesBtn = page.locator("//div[@class='detail-kost-facility-notes']//button");
+
+        //------------------Owner Story Section-----------------
+        this.ownerStorySection = page.getByText("Cerita pemilik tentang kos ini");
+        this.ownerStoryDesc = page.getByTestId("kost-owner-story-content");
+        this.expandOwnerStoryBtn = page.locator("//div[@class='detail-kost-owner-story']//button");
     }
 
     /**
@@ -127,7 +136,7 @@ public class KostDetailsPO {
      */
     public void dismissFTUE() {
         for (int i = 0; i < 4; i++) {
-            playwright.pageScrollToDown(500);
+            playwright.pageScrollToDown(300);
             if (ftueSlider.isVisible()) {
                 break;
             }
@@ -262,9 +271,9 @@ public class KostDetailsPO {
     }
 
     /**
-     * this method will be check chat room visibility
+     * this method will be check 'Hubungi Kos Ini' visibility
      *
-     * @return chat room element visibility
+     * @return 'Hubungi Kos Ini' element visibility
      */
     public boolean isChatKostPopUpDisplayed() {
         playwright.waitTillLocatorIsVisible(chatKostPopUp);
@@ -379,6 +388,45 @@ public class KostDetailsPO {
     public void clickOnExpandFacNotes() {
         playwright.waitTillLocatorIsVisible(expandFacilityNotesBtn, 1.0);
         expandFacilityNotesBtn.click();
+    }
+
+    //------------------Owner Story Section-----------------
+
+    /**
+     * this method will be check 'Cerita pemilik tentang kos ini' section
+     *
+     * @return 'boolean' 'Cerita pemilik tentang kos ini' is visible
+     */
+    public boolean isOwnerStorySectionDisplayed() {
+        playwright.pageScrollUntilElementIsVisible(ownerStorySection);
+        return ownerStorySection.isVisible();
+    }
+
+    /**
+     * this method will be check description of 'Cerita pemilik tentang kos ini' section
+     *
+     * @return 'boolean' description of 'Cerita pemilik tentang kos ini' is visible
+     */
+    public boolean isOwnerStoryDescDisplayed() {
+        return ownerStoryDesc.isVisible();
+    }
+
+    /**
+     * this method will be check expantion of description on 'Cerita pemilik tentang kos ini' section
+     *
+     * @return 'boolean' expantion of description on 'Cerita pemilik tentang kos ini' is visible
+     */
+    public boolean isExpandOwnerStoryDisplayed() {
+        return expandOwnerStoryBtn.isVisible();
+    }
+
+    /**
+     * this method will be check expantion of description on 'Cerita pemilik tentang kos ini' section is clickable
+     *
+     */
+    public void clickOnExpandOwnerStory() {
+        playwright.waitTillLocatorIsVisible(expandOwnerStoryBtn);
+        expandOwnerStoryBtn.click();
     }
 
     //------------ Favorite kost section ----------------
