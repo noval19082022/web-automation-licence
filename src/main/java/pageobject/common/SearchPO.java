@@ -15,6 +15,10 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    Locator promoNgebutFilter;
+    Locator kosAndalanFilter;
+    Locator promoNgebutDesc;
+    Locator kosAndalanDesc;
 
 
     public SearchPO(Page page) {
@@ -24,6 +28,10 @@ public class SearchPO {
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
+        this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
+        this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
+        this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
+        this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
 
 
 
@@ -110,5 +118,37 @@ public class SearchPO {
         inputSearch.clear();
         inputSearch.isVisible();
         return inputSearch.textContent().equals("");
+    }
+
+    /**
+     * Click on Promo Ngebut filter button
+     * @throws InterruptedException
+     */
+    public void clickPromoNgebutFilter() throws InterruptedException {
+        promoNgebutFilter.click();
+    }
+
+    /**
+     * Get Promo Ngebut description text
+     * @return String data type
+     */
+    public String getPromoNgebutDescText() {
+        return playwright.getText(promoNgebutDesc).toLowerCase();
+    }
+
+    /**
+     * Click on Kos Andalan filter button
+     * @throws InterruptedException
+     */
+    public void clickKosAndalanFilter() throws InterruptedException {
+        kosAndalanFilter.click();
+    }
+
+    /**
+     * Get Kos Andalan description text
+     * @return String data type
+     */
+    public String getKosAndalanDescText() {
+        return playwright.getText(kosAndalanDesc).toLowerCase();
     }
 }
