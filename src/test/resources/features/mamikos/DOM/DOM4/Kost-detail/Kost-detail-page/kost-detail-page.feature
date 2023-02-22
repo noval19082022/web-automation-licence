@@ -1,4 +1,4 @@
-@local #@DOM4
+#@local #@DOM4
 Feature: Kost detail page
 
   @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
@@ -92,3 +92,44 @@ Feature: Kost detail page
       | kost name stag                | kost name prod                                      |
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see owner story on detail kos and button is present
+
+  @TEST_DOM-1712 @DOM4 @automated @discovery-platform @facility @kost-details @web @flakyDOM
+  Scenario: [Dweb][Kost Detail] Check facility share section without login
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see facility share section on detail page
+    #user want to see more detail facility share
+    When user want to see all facility share
+    Then user will see login pop up
+
+  @TEST_DOM-1698 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  Scenario: [Dweb][Kost Detail] Check facility share section with login
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see facility share section on detail page
+    #user want to see more detail facility share
+    When user want to see all facility share
+    Then user see all facility share section
+
+  @TEST_DOM-1699 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  Scenario: [Dweb][Kost Detail] Check facility parking section
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see facility parking section on detail page
+
+  @TEST_DOM-1705 @DOM4 @automated @discovery-platform @kost-details @kost-rule @web
+  Scenario: [Dweb][Kost Detail] Validate Kos rule element on kos detail
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user can see kos rule list on detail kos
