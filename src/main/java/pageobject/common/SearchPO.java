@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
 public class SearchPO {
@@ -11,6 +12,8 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    Locator resultBasedOnArea;
+    Locator area;
 
 
     public SearchPO(Page page) {
@@ -18,9 +21,10 @@ public class SearchPO {
         this.page = page;
         this.inputSearch = page.locator("input[title]");
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
-        this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
+        this.suggetionKostOnTheSearchList = page.locator("(//label[@class='results-title'])[6]");
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
-
+        this.resultBasedOnArea = page.locator(".row");
+        area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
 
 
     }
@@ -44,7 +48,7 @@ public class SearchPO {
      * @param kostName
      */
 
-    public void searchKostFromHomePage(String kostName) {
+    public void searchKostFromfirstList(String kostName) {
         searchKost.click();
         inputSearch.fill(kostName);
         inputSearch.press("Enter");
@@ -84,6 +88,7 @@ public class SearchPO {
         searchKost.click();
         inputSearch.fill(search);
         inputSearch.press("Enter");
+
     }
 
     /**
@@ -106,5 +111,49 @@ public class SearchPO {
         inputSearch.clear();
         inputSearch.isVisible();
         return inputSearch.textContent().equals("");
+    }
+
+    /**
+     * user search based on area
+     *
+     * @return
+     */
+    public boolean clickTheFirstResultBasedOnArea() {
+        suggestionAreaOnTheSearchList.click();
+        return resultBasedOnArea.isVisible();
+    }
+
+    /**
+     * user click area kota popular
+     */
+    public void clickSearchBar() {
+        searchKost.click();
+        area.click();
+    }
+
+    /**
+     * user tap popular kota
+     * @param city
+     * @return
+     */
+    public String userTapCity(String city) {
+
+        Locator areacity = page.getByTestId("popular-secondary").getByText(city);
+        playwright.waitTillLocatorIsVisible(areacity);
+        playwright.clickOn(areacity);
+
+        return city;
+
+    }
+
+    /**
+     * user see popular daerah kota
+     * @param city
+     * @return
+     */
+
+    public boolean checkElementbyText(String city) {
+        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(city);
+        return playwright.waitTillLocatorIsVisible(listAreaCity);
     }
 }
