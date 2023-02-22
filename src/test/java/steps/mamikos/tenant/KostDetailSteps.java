@@ -129,6 +129,50 @@ public class KostDetailSteps {
         kostDetail.clickOnExpandOwnerStory();
     }
 
+    //------------ Facilty Share section ----------------
+    @Then("user can see facility share section on detail page")
+    public void userSeeAllFacility() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isFacShareShow(), "Facility Share is not displayed");
+    }
+
+    @Then("user want to see all facility share")
+    public void userWantToSeeAllFacility() {
+        playwright.pageScrollToDown(200);
+        kostDetail.clickOnButtonFacShare();
+    }
+
+    @Then("user see all facility share section")
+    public void userSeeAllFacilityShareSection() {
+        playwright.pageScrollToDown(200);
+        Assert.assertTrue(kostDetail.isSharedFacilitiyTitleDisplayed(), "Facility shared title is not displayed!");
+        Assert.assertTrue(kostDetail.isSharedFacilitiyDescDisplayed(), "Facility description title is not displayed!");
+        Assert.assertTrue(kostDetail.isSharedFacilitiyPopUpDisplayed(), "Facility pop up is not displayed!");
+    }
+
+    //------------------Facilty Parking Section-----------------
+    @Then("user can see facility parking section on detail page")
+    public void user_can_see_facility_parking_section_on_detail_page() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isFacParkingTitleDisplayed(), "Facility Parking Title Section is not displayed");
+        Assert.assertTrue(kostDetail.isFacParkingDisplayed(), "Facility Parking Section is not displayed");
+    }
+
+
+    // ------------ Kos rule -------------
+    @Then("user can see kos rule list on detail kos")
+    public void user_can_see_kos_rule_list_on_detail_kos() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isKosRulePresent(), "Kos rule is not present!");
+        Assert.assertTrue(kostDetail.isKosRuleTitlePresent(), "Kos rule title is not present!");
+        Assert.assertTrue(kostDetail.isKosRuleButtonShow(), "Kos Rule Button is not displayed");
+        Assert.assertTrue(kostDetail.isKosRuleImagePresent(), "Kos rule image is not present!");
+        kostDetail.clickOnSeeAllKosRuleButton();
+    }
+
     //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {

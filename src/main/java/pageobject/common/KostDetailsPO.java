@@ -65,6 +65,23 @@ public class KostDetailsPO {
     private Locator ownerStorySection;
     private Locator ownerStoryDesc;
     private Locator expandOwnerStoryBtn;
+
+    //------------------Facilty Share Section-----------------
+    private Locator facShareSection;
+    private Locator facShareSeeAllButton;
+    private Locator facilitySharedTitle;
+    private Locator facDescription;
+
+    //------------------Facilty Parking Section-----------------
+    private Locator facParkirTitle;
+    private Locator facParkingSection;
+
+    // -------------------Kos rule ----------------------------
+    private Locator kosRuleTitle;
+    private Locator kosRuleSection;
+    private Locator kosRuleImageElement;
+    private Locator seeAllKosRuleButton;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -123,6 +140,22 @@ public class KostDetailsPO {
         this.ownerStorySection = page.getByText("Cerita pemilik tentang kos ini");
         this.ownerStoryDesc = page.getByTestId("kost-owner-story-content");
         this.expandOwnerStoryBtn = page.locator(".detail-kost-owner-story").getByRole(AriaRole.BUTTON);
+
+        //------------------Facilty Share Section-----------------
+        this.facShareSection = page.locator(".detail-kost-public-facilities");
+        this.facShareSeeAllButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kos ini"));
+        this.facilitySharedTitle = page.getByTestId("detailPagePublicFacilitiesModal").getByText("Fasilitas umum");
+        this.facDescription = page.locator(".detail-kost-facilities-modal__description");
+
+        //------------------Facilty Parking Section-----------------
+        this.facParkirTitle = page.getByText("Fasilitas parkir");
+        this.facParkingSection = page.getByTestId("detailKostFacilityCategory").getByText("Fasilitas parkir");
+
+        // -------------------Kos rule ----------------------------
+        this.kosRuleTitle = page.getByText("Peraturan di kos ini");
+        this.kosRuleSection = page.locator(" .detail-kost-rules__content");
+        this.kosRuleImageElement = page.locator(".kost-rules-gallery");
+        this.seeAllKosRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua peraturan"));
     }
 
     /**
@@ -426,6 +459,123 @@ public class KostDetailsPO {
     public void clickOnExpandOwnerStory() {
         playwright.waitTillLocatorIsVisible(expandOwnerStoryBtn);
         expandOwnerStoryBtn.click();
+    }
+
+    //------------------Facilty Share Section-----------------
+
+    /**
+     * this method will be check 'Fasilitas Umum' Section
+     *
+     * @return 'boolean' 'Fasilitas Umum' Section visibility
+     */
+    public boolean isFacShareShow() {
+        playwright.pageScrollToDown(2000);
+        playwright.pageScrollUntilElementIsVisible(facShareSection);
+        return facShareSection.isVisible();
+    }
+
+    /**
+     * this method will be check fungsional of 'Lihat semua fasilitas kos ini' button
+     */
+    public void clickOnButtonFacShare() {
+        playwright.waitTillLocatorIsVisible(facShareSeeAllButton);
+        facShareSeeAllButton.click();
+    }
+
+    /**
+     * this method will be check 'Fasilitas Umum' Title
+     *
+     * @return 'boolean' 'Fasilitas Umum' Title visibility
+     */
+    public boolean isSharedFacilitiyTitleDisplayed() {
+        return facilitySharedTitle.isVisible();
+    }
+
+    /**
+     * this method will be check 'Fasilitas Umum' contains section
+     *
+     * @return 'boolean' 'Fasilitas Umum' contains visibility
+     */
+    public boolean isSharedFacilitiyDescDisplayed() {
+        return facDescription.isVisible();
+    }
+
+    /**
+     * this method will be check 'Fasilitas Umum' section after click button see all
+     *
+     * @return 'boolean' 'Fasilitas Umum' room pop up visibility
+     */
+    public boolean isSharedFacilitiyPopUpDisplayed() {
+        return facilityRoomPopUp.isVisible();
+    }
+
+    //------------------Facilty Parking Section-----------------
+
+    /**
+     * this method will be check 'Fasilitas Parkir' title section
+     *
+     * @return 'boolean' 'Fasilitas Parkir' title visibility
+     */
+    public boolean isFacParkingTitleDisplayed() {
+        playwright.pageScrollToDown(2000);
+        playwright.pageScrollUntilElementIsVisible(facParkirTitle);
+        return facParkirTitle.isVisible();
+    }
+
+    /**
+     * this method will be check 'Fasilitas Parkir' contains section
+     *
+     * @return 'boolean' 'Fasilitas Parkir' contains visibility
+     */
+    public boolean isFacParkingDisplayed() {
+        return facParkingSection.isVisible();
+    }
+
+    // ------------ Kos rule -------------
+
+    /**
+     * this method will be check 'Peraturan Kost' containt section
+     *
+     * @return 'boolean' 'Peraturan Kost' containt visibility
+     */
+    public boolean isKosRulePresent() {
+        playwright.pageScrollToDown(2500);
+        playwright.pageScrollUntilElementIsVisible(kosRuleSection);
+        return kosRuleSection.isVisible();
+    }
+
+    /**
+     * this method will be check 'Peraturan Kost ini' title
+     *
+     * @return 'boolean' 'Peraturan Kost ini' title visibility
+     */
+    public boolean isKosRuleTitlePresent() {
+        return kosRuleTitle.isVisible();
+    }
+
+    /**
+     * this method will be check 'Lihat semua peraturan' button
+     *
+     * @return 'boolean' 'Lihat semua peraturan' button visibility
+     */
+    public boolean isKosRuleButtonShow() {
+        return seeAllKosRuleButton.isVisible();
+    }
+
+    /**
+     * this method will be check function of 'Lihat semua peraturan' button
+     */
+    public void clickOnSeeAllKosRuleButton() {
+        seeAllKosRuleButton.click();
+    }
+
+    /**
+     * this method will be check 'Peraturan Kost ini' image
+     *
+     * @return 'boolean' 'Peraturan Kost ini' image visibility
+     */
+    public boolean isKosRuleImagePresent() {
+        return kosRuleImageElement.isVisible();
     }
 
     //------------ Favorite kost section ----------------
