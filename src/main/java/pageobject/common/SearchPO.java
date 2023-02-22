@@ -15,13 +15,6 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
-    Locator promoNgebutFilter;
-    Locator kosAndalanFilter;
-    Locator promoNgebutDesc;
-    Locator kosAndalanDesc;
-    Locator genderFilter;
-    Locator saveGenderFilterButton;
-    Locator genderLabel;
 
 
     public SearchPO(Page page) {
@@ -31,13 +24,6 @@ public class SearchPO {
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
-        this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
-        this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
-        this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
-        this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
-        this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
-        this.saveGenderFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        this.genderLabel = page.locator("//div[@data-testid = 'kostRoomCard']//div[contains(text() , '\"gender\"')]");
 
 
 
@@ -124,63 +110,5 @@ public class SearchPO {
         inputSearch.clear();
         inputSearch.isVisible();
         return inputSearch.textContent().equals("");
-    }
-
-    /**
-     * Click on Promo Ngebut filter button
-     * @throws InterruptedException
-     */
-    public void clickPromoNgebutFilter() throws InterruptedException {
-        promoNgebutFilter.click();
-    }
-
-    /**
-     * Get Promo Ngebut description text
-     * @return String data type
-     */
-    public String getPromoNgebutDescText() {
-        return playwright.getText(promoNgebutDesc).toLowerCase();
-    }
-
-    /**
-     * Click on Kos Andalan filter button
-     * @throws InterruptedException
-     */
-    public void clickKosAndalanFilter() throws InterruptedException {
-        kosAndalanFilter.click();
-    }
-
-    /**
-     * Get Kos Andalan description text
-     * @return String data type
-     */
-    public String getKosAndalanDescText() {
-        return playwright.getText(kosAndalanDesc).toLowerCase();
-    }
-
-    /**
-     * Click filter by gender
-     * @throws InterruptedException
-     */
-    public void clickFilterByGender(String gender) throws InterruptedException {
-        genderFilter.click();
-        page.getByTestId("filter-gender").getByText(""+ gender +"").click();
-        saveGenderFilterButton.click();
-    }
-
-    /**
-     * Get the gender label in listing
-     * @return list of string gender
-     * @param gender is gender option (putra, putri, campur)
-     */
-    public List<String> getGenderInListing(String gender) {
-//        String xpathLocator = "//div[@data-testid = 'kostRoomCard']//div[contains(text() , '"+ gender +"')]";
-//        List<Locator> genderLabel = selenium.waitTillAllElementsAreLocated(By.xpath(xpathLocator));
-        List<Locator> genderLbl = genderLabel.all();
-        List<String> genderFilter = new ArrayList<>();
-        for (Locator a : genderLbl) {
-            genderFilter.add((playwright.getText(a)));
-        }
-        return genderFilter;
     }
 }
