@@ -133,5 +133,7 @@ public class KostDetailSteps {
 
     @Then("user can share the kost")
     public void userCanShareTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnShareKostButton();
     }
 }

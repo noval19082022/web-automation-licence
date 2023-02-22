@@ -101,40 +101,4 @@ public class SearchSteps {
         Assert.assertTrue(search.isSearchbarEmpty());
 
     }
-
-    @Given("user navigates to ugm kost listing")
-    public void userNavigatesToUgmKostListing() {
-        playwright.navigateTo(Mamikos.URL + Mamikos.UGM_KOST_LIST, 30000.0, LoadState.LOAD);
-    }
-
-    @Then("user clicks the {string} button and the description will appears {string}")
-    public void userClicksTheButtonAndTheDescriptionWillAppears(String filter, String text) throws InterruptedException {
-        if(filter.equalsIgnoreCase("Promo Ngebut"))
-        {
-            search.clickPromoNgebutFilter();
-            String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
-            String expected = text.toLowerCase().replaceAll("\\s", "");
-            Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
-        }
-        else if(filter.equalsIgnoreCase("Kos Andalan"))
-        {
-            search.clickKosAndalanFilter();
-            String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
-            String expected = text.toLowerCase().replaceAll("\\s", "");
-            Assert.assertTrue(desc.contains(expected), "Kos Andalan Description text is wrong");
-        }
-    }
-
-    @When("user sets filter gender {string}")
-    public void userSetsFilterGender(String gender) throws InterruptedException {
-        search.clickFilterByGender(gender);
-    }
-
-    @Then("user validates the result kos gender is {string}")
-    public void userValidatesTheResultKosGenderIs(String gender) {
-        List<String> resultList = search.getGenderInListing(gender);
-        for (String a : resultList) {
-            Assert.assertTrue(a.contains(gender), "Search result " + a + " not in correct gender");
-        }
-    }
 }
