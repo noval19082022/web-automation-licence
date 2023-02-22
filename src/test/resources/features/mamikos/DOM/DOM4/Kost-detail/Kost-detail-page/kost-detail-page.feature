@@ -52,3 +52,27 @@ Feature: Kost detail page
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user want to see more detail room facility section on the kost detail page
     Then user see all facility room section
+
+  @TEST_DOM-1706 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  Scenario: [Dweb][Kost Detail] Check facility bath section
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see facility bath section on detail page
+
+  @TEST_DOM-1708 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  Scenario: [Dweb][Kost Detail]Check facility notes section on kost that has 3 rows of facility notes
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe B | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
+    Then user can see facility notes on detail kos and button is not present
+
+  @TEST_DOM-1710 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  Scenario: [Dweb][Kost Detail] Check facility notes section on kost that has 4 rows of facility notes
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can see facility notes on detail kos and button is present

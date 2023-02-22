@@ -51,6 +51,16 @@ public class KostDetailsPO {
     private Locator facilityRoomSeeAllBtn;
     private Locator facilityRoomPopUp;
 
+    //--------------Facility Bath Section----------------------
+    private Locator facilityBathSection;
+    private Locator facilityBathIcon;
+    private Locator facilityBathName;
+
+    //------------------Facility Notes Section-----------------
+    private Locator facilityNotesSection;
+    private Locator facilityNotesDesc;
+    private Locator expandFacilityNotesBtn;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -91,8 +101,18 @@ public class KostDetailsPO {
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
 
         //---------------Facility Room Section----------------------
-        this.facilityRoomSeeAllBtn = page.locator("(//button[@class='bg-c-button detail-kost-facility-category__see-more-button bg-c-button--tertiary bg-c-button--md'])[1]");
+        this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
         this.facilityRoomPopUp = page.locator("div[class='detail-kost-facilities-modal__body']");
+
+        //--------------Facility Bath Section----------------------
+        this.facilityBathSection = page.getByText("Fasilitas kamar mandi");
+        this.facilityBathIcon = page.locator("//div[@class='detail-kost-bathroom-facilities']//div[@class='detail-kost-facility-item__icon']");
+        this.facilityBathName = page.locator("//div[@class='detail-kost-bathroom-facilities']//div[@class='bg-c-list-item__description']");
+
+        //------------------Facility Notes Section-----------------
+        this.facilityNotesSection = page.getByText("Catatan tambahan seputar fasilitas");
+        this.facilityNotesDesc = page.getByTestId("kost-facility-note-description");
+        this.expandFacilityNotesBtn = page.locator("//div[@class='detail-kost-facility-notes']//button");
     }
 
     /**
@@ -288,6 +308,77 @@ public class KostDetailsPO {
      */
     public boolean isRoomFacilitiyPopUpDisplayed() {
         return facilityRoomPopUp.isVisible();
+    }
+
+    //--------------Facility Bath Section----------------------
+
+    /**
+     * this method will be check bath facilty section
+     *
+     * @return 'boolean' bath facility is visible
+     */
+    public boolean isFacBathShow() {
+        playwright.pageScrollUntilElementIsVisible(facilityBathSection);
+        return facilityBathSection.isVisible();
+    }
+
+    /**
+     * this method will be check list of icon on bath facilty section
+     *
+     * @return 'boolean' icon on bath facility is not null
+     */
+    public boolean isBathFacilitiyIconDisplayed() {
+        List<Locator> facilityBathIcons = playwright.getLocators(facilityBathIcon);
+        return !facilityBathIcons.isEmpty();
+    }
+
+    /**
+     * this method will be check list of icon name on bath facilty section
+     *
+     * @return 'boolean' icon name on bath facility is not null
+     */
+    public boolean isBathFacilitiyNameDisplayed() {
+        List<Locator> facilityBathNames = playwright.getLocators(facilityBathName);
+        return !facilityBathNames.isEmpty();
+    }
+
+    //------------------Facility Notes Section-----------------
+
+    /**
+     * this method will be check 'Catatan tambahan seputar fasilitas' section
+     *
+     * @return 'boolean' 'Catatan tambahan seputar fasilitas' is visible
+     */
+    public boolean isFacilityNotesSectionDisplayed() {
+        playwright.pageScrollUntilElementIsVisible(facilityNotesSection);
+        return facilityNotesSection.isVisible();
+    }
+
+    /**
+     * this method will be check description of 'Catatan tambahan seputar fasilitas' section
+     *
+     * @return 'boolean' description of 'Catatan tambahan seputar fasilitas' is visible
+     */
+    public boolean isFacilityNotesDescDisplayed() {
+        return facilityNotesDesc.isVisible();
+    }
+
+    /**
+     * this method will be check expantion of description on 'Catatan tambahan seputar fasilitas' section
+     *
+     * @return 'boolean' expantion of description on 'Catatan tambahan seputar fasilitas' is visible
+     */
+    public boolean isExpandFacNotesDisplayed() {
+        return expandFacilityNotesBtn.isVisible();
+    }
+
+    /**
+     * this method will be check expantion of description on 'Catatan tambahan seputar fasilitas' section is clickable
+     *
+     */
+    public void clickOnExpandFacNotes() {
+        playwright.waitTillLocatorIsVisible(expandFacilityNotesBtn, 1.0);
+        expandFacilityNotesBtn.click();
     }
 
     //------------ Favorite kost section ----------------
