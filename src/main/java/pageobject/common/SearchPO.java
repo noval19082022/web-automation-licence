@@ -15,6 +15,11 @@ public class SearchPO {
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
+    Locator promoNgebutFilter;
+    Locator kosAndalanFilter;
+    Locator promoNgebutDesc;
+    Locator kosAndalanDesc;
+
 
 
     public SearchPO(Page page) {
@@ -27,6 +32,12 @@ public class SearchPO {
         this.resultBasedOnArea = page.locator(".row");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
+
+        this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
+        this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
+        this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
+        this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
+
 
 
     }
@@ -116,6 +127,7 @@ public class SearchPO {
     }
 
     /**
+<<<<<<< HEAD
      * user search based on area
      *
      * @return
@@ -200,5 +212,37 @@ public class SearchPO {
         inputSearch.fill(kostName);
         inputSearch.press("Enter");
         suggetionKostOnTheSearchListNumberSix.click();
+    }
+
+    /** Click on Promo Ngebut filter button
+     * @throws InterruptedException
+     */
+    public void clickPromoNgebutFilter() throws InterruptedException {
+        promoNgebutFilter.click();
+    }
+
+    /**
+     * Get Promo Ngebut description text
+     * @return String data type
+     */
+    public String getPromoNgebutDescText() {
+        return playwright.getText(promoNgebutDesc).toLowerCase();
+    }
+
+    /**
+     * Click on Kos Andalan filter button
+     * @throws InterruptedException
+     */
+    public void clickKosAndalanFilter() throws InterruptedException {
+        kosAndalanFilter.click();
+    }
+
+    /**
+     * Get Kos Andalan description text
+     * @return String data type
+     */
+    public String getKosAndalanDescText() {
+        return playwright.getText(kosAndalanDesc).toLowerCase();
+
     }
 }
