@@ -3,7 +3,6 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -24,11 +23,12 @@ public class KostDetailsPO {
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
 
-    //------------ Favorite kost section ----------------
+    //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
     Locator unFavoriteKostButton;
     Locator successFavoritePopUp;
     Locator successUnfavoritePopUp;
+    Locator shareKostButton;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -84,11 +84,12 @@ public class KostDetailsPO {
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
 
-        //------------ Favorite kost section ----------------
+        //------------ Favorite and share kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
         this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
+        this.shareKostButton = page.getByText("share Bagikan");
 
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.locator("(//button[@class='bg-c-button detail-kost-facility-category__see-more-button bg-c-button--tertiary bg-c-button--md'])[1]");
@@ -324,5 +325,12 @@ public class KostDetailsPO {
     public boolean isSuccessUnfavoriteKostDisplayed() {
         playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
         return successUnfavoritePopUp.isVisible();
+    }
+
+    /**
+     * Click on share kost button
+     */
+    public void clickOnShareKostButton() {
+        shareKostButton.click();
     }
 }

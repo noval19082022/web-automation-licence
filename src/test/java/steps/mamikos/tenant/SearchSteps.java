@@ -1,10 +1,12 @@
 package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -15,6 +17,7 @@ import pageobject.common.SearchPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
 import java.util.Map;
 
 public class SearchSteps {
@@ -97,5 +100,41 @@ public class SearchSteps {
     public void user_see_searchbar_is_empty() {
         Assert.assertTrue(search.isSearchbarEmpty());
 
+    }
+
+    @Given("user navigates to ugm kost listing")
+    public void userNavigatesToUgmKostListing() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.UGM_KOST_LIST, 30000.0, LoadState.LOAD);
+    }
+
+    @Then("user clicks the {string} button and the description will appears {string}")
+    public void userClicksTheButtonAndTheDescriptionWillAppears(String filter, String text) throws InterruptedException {
+        if(filter.equalsIgnoreCase("Promo Ngebut"))
+        {
+            search.clickPromoNgebutFilter();
+            String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
+            String expected = text.toLowerCase().replaceAll("\\s", "");
+            Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
+        }
+        else if(filter.equalsIgnoreCase("Kos Andalan"))
+        {
+            search.clickKosAndalanFilter();
+            String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
+            String expected = text.toLowerCase().replaceAll("\\s", "");
+            Assert.assertTrue(desc.contains(expected), "Kos Andalan Description text is wrong");
+        }
+    }
+
+    @When("user sets filter gender {string}")
+    public void userSetsFilterGender(String gender) throws InterruptedException {
+        search.clickFilterByGender(gender);
+    }
+
+    @Then("user validates the result kos gender is {string}")
+    public void userValidatesTheResultKosGenderIs(String gender) {
+        List<String> resultList = search.getGenderInListing(gender);
+        for (String a : resultList) {
+            Assert.assertTrue(a.contains(gender), "Search result " + a + " not in correct gender");
+        }
     }
 }
