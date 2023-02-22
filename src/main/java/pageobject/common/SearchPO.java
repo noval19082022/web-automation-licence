@@ -2,7 +2,11 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchPO {
     Page page;

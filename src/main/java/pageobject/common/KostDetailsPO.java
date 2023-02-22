@@ -3,7 +3,6 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -24,11 +23,12 @@ public class KostDetailsPO {
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
 
-    //------------ Favorite kost section ----------------
+    //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
     Locator unFavoriteKostButton;
     Locator successFavoritePopUp;
     Locator successUnfavoritePopUp;
+    Locator shareKostButton;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -98,11 +98,12 @@ public class KostDetailsPO {
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
 
-        //------------ Favorite kost section ----------------
+        //------------ Favorite and share kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
         this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
+        this.shareKostButton = page.getByText("share Bagikan");
 
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
@@ -116,12 +117,12 @@ public class KostDetailsPO {
         //------------------Facility Notes Section-----------------
         this.facilityNotesSection = page.getByText("Catatan tambahan seputar fasilitas");
         this.facilityNotesDesc = page.getByTestId("kost-facility-note-description");
-        this.expandFacilityNotesBtn = page.locator("//div[@class='detail-kost-facility-notes']//button");
+        this.expandFacilityNotesBtn = page.locator(".detail-kost-facility-notes").getByRole(AriaRole.BUTTON);
 
         //------------------Owner Story Section-----------------
         this.ownerStorySection = page.getByText("Cerita pemilik tentang kos ini");
         this.ownerStoryDesc = page.getByTestId("kost-owner-story-content");
-        this.expandOwnerStoryBtn = page.locator("//div[@class='detail-kost-owner-story']//button");
+        this.expandOwnerStoryBtn = page.locator(".detail-kost-owner-story").getByRole(AriaRole.BUTTON);
     }
 
     /**
@@ -383,7 +384,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be check expantion of description on 'Catatan tambahan seputar fasilitas' section is clickable
-     *
      */
     public void clickOnExpandFacNotes() {
         playwright.waitTillLocatorIsVisible(expandFacilityNotesBtn, 1.0);
@@ -422,7 +422,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be check expantion of description on 'Cerita pemilik tentang kos ini' section is clickable
-     *
      */
     public void clickOnExpandOwnerStory() {
         playwright.waitTillLocatorIsVisible(expandOwnerStoryBtn);
@@ -463,5 +462,12 @@ public class KostDetailsPO {
     public boolean isSuccessUnfavoriteKostDisplayed() {
         playwright.waitTillLocatorIsVisible(successUnfavoritePopUp);
         return successUnfavoritePopUp.isVisible();
+    }
+
+    /**
+     * Click on share kost button
+     */
+    public void clickOnShareKostButton() {
+        shareKostButton.click();
     }
 }

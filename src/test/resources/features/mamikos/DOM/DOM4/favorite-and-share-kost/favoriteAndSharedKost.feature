@@ -24,3 +24,17 @@ Feature: Favorite and Share kost
       | kost name stag                | kost name prod                                      |
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can unfavorite the kost
+
+  Scenario: [Dweb][Kost Detail][FavoriteKost] Non Login User Favourite a kos
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then Non login user cannot favorite the kost
+
+  Scenario: [Dweb][Kost Detail][FavoriteKost] User Share a kos
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user can share the kost
