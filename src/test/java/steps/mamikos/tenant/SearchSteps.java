@@ -99,7 +99,47 @@ public class SearchSteps {
     @Then("user see searchbar is empty")
     public void user_see_searchbar_is_empty() {
         Assert.assertTrue(search.isSearchbarEmpty());
+    }
 
+    @Then("user click the search result based on area")
+    public void user_click_the_search_result_based_on_area() {
+        search.clickTheFirstResultBasedOnArea();
+    }
+
+    @Then("user click the search result based on name")
+    public void user_click_the_search_result_based_on_name() {
+        kostDetail.getKostTitle();
+    }
+
+    @When("user search property by name and select the matching result to go to kos details page")
+    public void userSearchAndSelectKost(DataTable table) {
+        var kostNameData = table.asMaps(String.class, String.class);
+        var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
+        search.suggetionKostOnTheSearchListNumberSix(kostName);
+    }
+
+    @When("user clicks Search")
+    public void userClicksSearch() {
+        search.clickSearchBar();
+    }
+
+    @Then("After user click City name, city name will expand and Area name listed below it.")
+    public void after_user_click_city_name_city_name_will_expand_and_area_name_listed_below_it(DataTable table) throws InterruptedException {
+        List<List<String>> listCity = table.asLists(String.class);
+        for (int j=0; j<listCity.size(); j++) {
+            search.userTapCity(listCity.get(0).get(j));
+            for (int i=j+1; i<listCity.size(); i++) {
+                Assert.assertTrue(search.checkElementbyText(listCity.get(i).get(j)), "City not appear in dropdown.");
+            }
+        }
+    }
+
+    @Then("under popular search, there's this city :")
+    public void underPopularSearchThereSThisCity(DataTable table) {
+        var cities = table.asMaps(String.class, String.class);
+        for (Map<String, String> city : cities) {
+            Assert.assertTrue(search.listPopularCity(city.get("city " + Mamikos.ENV)), city.get("city " + Mamikos.ENV) + " is not displayed");
+        }
     }
 
     @Given("user navigates to ugm kost listing")

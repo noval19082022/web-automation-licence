@@ -5,9 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SearchPO {
     Page page;
     Locator inputSearch;
@@ -15,10 +12,14 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    Locator resultBasedOnArea;
+    Locator area;
+    Locator suggetionKostOnTheSearchListNumberSix;
     Locator promoNgebutFilter;
     Locator kosAndalanFilter;
     Locator promoNgebutDesc;
     Locator kosAndalanDesc;
+
 
 
     public SearchPO(Page page) {
@@ -28,6 +29,10 @@ public class SearchPO {
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
+        this.resultBasedOnArea = page.locator(".row");
+        area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
+        suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
+
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
@@ -56,7 +61,7 @@ public class SearchPO {
      * @param kostName
      */
 
-    public void searchKostFromHomePage(String kostName) {
+    public void searchKostFromfirstList(String kostName) {
         searchKost.click();
         inputSearch.fill(kostName);
         inputSearch.press("Enter");
@@ -96,6 +101,7 @@ public class SearchPO {
         searchKost.click();
         inputSearch.fill(search);
         inputSearch.press("Enter");
+
     }
 
     /**
@@ -121,7 +127,94 @@ public class SearchPO {
     }
 
     /**
-     * Click on Promo Ngebut filter button
+<<<<<<< HEAD
+     * user search based on area
+     *
+     * @return
+     */
+    public boolean clickTheFirstResultBasedOnArea() {
+        suggestionAreaOnTheSearchList.click();
+        return resultBasedOnArea.isVisible();
+    }
+
+    /**
+     * user click area kota popular
+     */
+    public void clickSearchBar() {
+        searchKost.click();
+        area.click();
+    }
+
+    /**
+     * user tap popular kota
+     * @param city
+     * @return
+     */
+    public String userTapCity(String city) {
+
+        Locator areacity = page.getByTestId("popular-secondary").getByText(city);
+        playwright.waitTillLocatorIsVisible(areacity);
+        playwright.clickOn(areacity);
+
+        return city;
+
+    }
+
+    /**
+     * user see popular daerah kota
+     * @param city
+     * @return
+     */
+
+    public boolean checkElementbyText(String city) {
+        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(city);
+        return playwright.waitTillLocatorIsVisible(listAreaCity);
+    }
+
+    /**
+     * List all popular search city
+     *
+     * @return popular city
+     */
+    public boolean listPopularCity(String area) {
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
+        return popularCity.isVisible();
+    }
+
+    /** Click one of city in popular search
+     * @param city is name of city
+     */
+    public void clickPopularCity(String city) throws InterruptedException {
+        Locator citty = page.getByTestId("popular-secondary").getByText(city);
+        playwright.clickOn(citty);
+    }
+
+
+    /**
+     * search area berdasarkan kota
+     * @param Kota
+     */
+    public void clickAreaBerdasarkanKotaBelow(String Kota){
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Kota));
+        popularCity.click();
+        resultBasedOnArea.isVisible();
+
+    }
+
+    /**
+     * Enter Text in search bar and select result
+     *
+     * @param kostName
+     */
+
+    public void suggetionKostOnTheSearchListNumberSix(String kostName) {
+        searchKost.click();
+        inputSearch.fill(kostName);
+        inputSearch.press("Enter");
+        suggetionKostOnTheSearchListNumberSix.click();
+    }
+
+    /** Click on Promo Ngebut filter button
      * @throws InterruptedException
      */
     public void clickPromoNgebutFilter() throws InterruptedException {
@@ -150,5 +243,6 @@ public class SearchPO {
      */
     public String getKosAndalanDescText() {
         return playwright.getText(kosAndalanDesc).toLowerCase();
+
     }
 }
