@@ -57,7 +57,7 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.hubungiKostHeadingText().contains(popUpMsg));
     }
 
-
+    //---------------login pop up Section----------------------
     @Then("user will see login pop up")
     public void loginPopUp() {
         playwright.pageScrollToDown(200);
@@ -79,6 +79,36 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isRoomFacilitiyPopUpDisplayed(), "Room Facility pop up is not displayed");
     }
 
+    //--------------Facility Bath Section----------------------
+    @Then("user can see facility bath section on detail page")
+    public void userCanSeeFacilityBathSection() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isFacBathShow(), "Bathroom Facility section is not displayed");
+        Assert.assertTrue(kostDetail.isBathFacilitiyIconDisplayed(), "Bathroom Facility icon is not displayed");
+        Assert.assertTrue(kostDetail.isBathFacilitiyNameDisplayed(), "Bathroom Facility name is not displayed");
+    }
+
+    //------------------Facility Notes Section-----------------
+    @Then("user can see facility notes on detail kos and button is not present")
+    public void userCanSeeFacilityNotesOnDetailKosBtnNotPresent() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isFacilityNotesSectionDisplayed(), "Facility Notes section is not displayed");
+        Assert.assertTrue(kostDetail.isFacilityNotesDescDisplayed(), "Facility Notes Description is not displayed");
+        Assert.assertFalse(kostDetail.isExpandFacNotesDisplayed(), "Facility Notes expand button is displayed");
+    }
+
+    @Then("user can see facility notes on detail kos and button is present")
+    public void userCanSeeFacilityNotesOnDetailKosBtnPresent() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isFacilityNotesSectionDisplayed(), "Facility Notes section is not displayed");
+        Assert.assertTrue(kostDetail.isFacilityNotesDescDisplayed(), "Facility Notes Description is not displayed");
+        Assert.assertTrue(kostDetail.isExpandFacNotesDisplayed(), "Facility Notes expand button is not displayed");
+        kostDetail.clickOnExpandFacNotes();
+    }
+
     //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {
@@ -92,5 +122,18 @@ public class KostDetailSteps {
         kostDetail.dismissFTUE();
         kostDetail.clickOnUnfavoriteKostButton();
         Assert.assertTrue(kostDetail.isSuccessUnfavoriteKostDisplayed(), "Success Unfavorite Pop up is not displayed");
+    }
+
+    @Then("Non login user cannot favorite the kost")
+    public void nonLoginUserCannotFavoriteTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+        Assert.assertTrue(kostDetail.isLoginPopUpDisplayed(), "Login Pop up is not displayed");
+    }
+
+    @Then("user can share the kost")
+    public void userCanShareTheKost() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnShareKostButton();
     }
 }
