@@ -50,3 +50,20 @@ Feature: Main Search
       | Renon             | Balikpapan Utara                | Purwokerto Timur   | Jombang    | Tawang      |
       | Seminyak          | Balikpapan Tengah               | Purwokerto Selatan | Grogol     | Mangkubumi  |
       | Jimbaran          | Balikpapan Selatan              | Purwokerto Utara   | Citangkil  | Cihideung   |
+
+  @TEST_DOM-1869 @Automated @DOM4 @Web @discovery-platform @search @search-pupular-list
+  Scenario: [Dweb][Search] Search Kos - Popular area have correct city
+    Given user go to mamikos homepage
+    When user clicks Search
+    Then under popular search, there's this city :
+      | city stag      | city prod      |
+      | Yogyakarta     | Yogyakarta     |
+      | Jakarta        | Jakarta        |
+      | Bandung        | Bandung        |
+      | Surabaya       | Surabaya       |
+      | JakartaSelatan | JakartaSelatan |
+      | Malang         | Malang         |
+      | Semarang       | Semarang       |
+      | Makassar       | Makassar       |
+      | Medan          | Medan          |
+

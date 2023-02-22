@@ -113,7 +113,7 @@ public class SearchSteps {
     public void userSearchAndSelectKost(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
-        search.searchKostFromfirstList(kostName);
+        search.suggetionKostOnTheSearchListNumberSix(kostName);
     }
 
     @When("user clicks Search")
@@ -130,5 +130,12 @@ public class SearchSteps {
                 Assert.assertTrue(search.checkElementbyText(listCity.get(i).get(j)), "City not appear in dropdown.");
             }
         }
+    }
+
+    @Then("under popular search, there's this city :")
+    public void underPopularSearchThereSThisCity(DataTable table) {
+        var city = table.asMaps(String.class, String.class);
+        var popular = city.get(0).get("city " + Mamikos.ENV);
+        Assert.assertTrue(search.listPopularCity(popular), "isdisplayed");
     }
 }
