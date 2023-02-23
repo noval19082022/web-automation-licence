@@ -214,10 +214,36 @@ public class SearchSteps {
     }
 
     @Then("user validates the result kos gender is {string}")
-    public void userValidatesTheResultKosGenderIs(String gender) throws InterruptedException {
+    public void userValidatesTheResultKosGenderIs(String gender){
         List<String> genderList = search.getListGender(gender);
         for(String a: genderList){
             Assert.assertEquals(a, gender);
+        }
+    }
+
+    @When("user sets facility filter {string}")
+    public void userSetsFacilityFilter(String facility){
+        search.selectFilterByFacility(facility);
+    }
+
+    @Then("user validates the result kos facility is {string}")
+    public void userValidatesTheResultKosFacilityIs(String facility) {
+        List<String> facilityList = search.getListFacility(facility);
+        for(String a: facilityList){
+            Assert.assertTrue(a.contains(facility), "Search result "+ a +" not in correct facility");
+        }
+    }
+
+    @And("user sets top kos rule filter {string}")
+    public void userSetsTopKosRuleFilter(String rule) {
+        search.selectFilterByKostRule(rule);
+    }
+
+    @Then("user validates the result kos rule is {string}")
+    public void userValidatesTheResultKosRuleIs(String rule) {
+        List<String> ruleList = search.getListKostRule(rule);
+        for(String a: ruleList){
+            Assert.assertTrue(a.contains(rule), "Search result "+ a +" not in correct facility");
         }
     }
 }
