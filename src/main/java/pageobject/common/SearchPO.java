@@ -5,6 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchPO {
     Page page;
     Locator inputSearch;
@@ -19,6 +22,8 @@ public class SearchPO {
     Locator kosAndalanFilter;
     Locator promoNgebutDesc;
     Locator kosAndalanDesc;
+    Locator mamiMap;
+    Locator kostName;
 
 
 
@@ -28,7 +33,7 @@ public class SearchPO {
         this.inputSearch = page.locator("input[title]");
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
-        this.suggestionAreaOnTheSearchList = page.locator("(//label[@class='results-title'])[1]");
+        this.suggestionAreaOnTheSearchList = page.locator("(//div[@class='results-box'])[1]");
         this.resultBasedOnArea = page.locator(".row");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
@@ -37,6 +42,8 @@ public class SearchPO {
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
+        this.mamiMap = page.locator("div #mamiMap");
+        this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
 
 
 
@@ -187,6 +194,7 @@ public class SearchPO {
     public void clickPopularCity(String city) throws InterruptedException {
         Locator citty = page.getByTestId("popular-secondary").getByText(city);
         playwright.clickOn(citty);
+        resultBasedOnArea.isVisible();
     }
 
 
@@ -243,6 +251,27 @@ public class SearchPO {
      */
     public String getKosAndalanDescText() {
         return playwright.getText(kosAndalanDesc).toLowerCase();
+    }
 
+    /**
+     * get property no have apartemen
+     * @return
+     */
+    public List<String> listKostAddress(){
+        List<String> addressList = new ArrayList<>();
+        if(playwright.waitTillLocatorIsVisible(mamiMap)){
+            List<Locator> kostList = kostName.all();
+            for(Locator a : kostList) {
+                addressList.add(playwright.getText(a));
+            }
+        }
+        return addressList;
+    }
+
+    /**
+     * click sugestion area first city
+     */
+    public void suggestionAreaClick(){
+        suggestionAreaOnTheSearchList.click();
     }
 }

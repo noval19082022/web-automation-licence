@@ -164,4 +164,47 @@ public class SearchSteps {
             Assert.assertTrue(desc.contains(expected), "Kos Andalan Description text is wrong");
         }
     }
+
+    @Then("listing that appear have location")
+    public void listingThatAppearHaveLocation(DataTable table) {
+        var city = table.asMaps(String.class, String.class);
+        var popular = city.get(0).get("city " + Mamikos.ENV);
+        search.clickAreaBerdasarkanKotaBelow(popular);
+    }
+
+    @And("user click area city")
+    public void userClickAreaCity(DataTable table) throws InterruptedException {
+        var city = table.asMaps(String.class, String.class);
+        var popular = city.get(0).get("city " + Mamikos.ENV);
+        search.clickPopularCity(popular);
+    }
+
+    @Then("under popular search, click city :")
+    public void underPopularSearchClickCity(DataTable table)throws InterruptedException {
+        var city = table.asMaps(String.class, String.class);
+        var popular = city.get(0).get("city " + Mamikos.ENV);
+        search.clickPopularCity(popular);
+    }
+
+
+    @Then("under area city click")
+    public void underAreaCityClick(DataTable table)throws InterruptedException {
+        var city = table.asMaps(String.class, String.class);
+        var popular = city.get(0).get("city " + Mamikos.ENV);
+        search.clickPopularCity(popular);
+    }
+
+    @Then("listing that appear have no {string} property")
+    public void listingThatAppearHaveNoProperty(String apartemen) {
+        search.suggestionAreaClick();
+        List<String> addressList = search.listKostAddress();
+        for (String a : addressList) {
+            Assert.assertFalse(a.toLowerCase().contains(apartemen.toLowerCase()), "Search result " + a + " not in correct location");
+        }
+    }
+
+    @When("user search for random keyword:{string}")
+    public void userSearchForRandomKeyword(String city) throws InterruptedException {
+        search.searchArea(city);
+    }
 }
