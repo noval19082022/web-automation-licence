@@ -193,10 +193,6 @@ public class SearchSteps {
         var city = table.asMaps(String.class, String.class);
         var popular = city.get(0).get("city " + Mamikos.ENV);
         search.clickPopularCity(popular);
-        List<String> addressList = search.listKostAddress();
-        for (String a : addressList) {
-            Assert.assertFalse(a.toLowerCase().contains(popular.toLowerCase()), "Search result " + a + " not in correct location");
-        }
     }
 
     @Then("listing that appear have no {string} property")

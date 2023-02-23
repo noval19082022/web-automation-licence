@@ -159,10 +159,12 @@ Feature: Main Search
     When user click search area based on campus
     And user click kampus berdasarkan kota
       | campus stag      |campus prod      |
-      | Bali            | UNDIP            |
+      | Bogor           | UNDIP            |
     Then under area city click
       | city stag      | city prod      |
-      | Undiksha       | Semarang       |
+      | IPB       | Semarang       |
+    Then title listing that appear have location campus in "Bogor"
+
 
   @TEST_DOM-1854 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
   Scenario: [Dweb][Search]Search Kos - Popular station and stop
@@ -201,16 +203,19 @@ Feature: Main Search
       | Halte Halimun    | Halte Halimun   |
     Then title listing that appear have location campus in "Jakarta"
 
- @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
+  @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
   Scenario: [Dweb][Search] Search Kos - Station based on city list
     Given user go to mamikos homepage
     When user click stasiun&halte
     And user click kampus berdasarkan kota
       | campus stag             |campus prod           |
       | Bandung chevron-down    | Bandung chevron-down |
-    Then under area city click
+    And under area city click
       | city stag               | city prod            |
       | Stasiun Cimekar         | Stasiun Cimekar      |
+   Then title listing that appear have location campus in "Bandung"
+
+
 
 
 
