@@ -78,7 +78,7 @@ Feature: Main Search
       | city stag      | city prod      |
       | Malang         | Malang         |
 
-   @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
@@ -118,7 +118,7 @@ Feature: Main Search
     When user clicks Search
     Then title listing that appear have location in "Malang"
 
-   @TEST_DOM-1864 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-list
+  @TEST_DOM-1864 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-list
   Scenario: [Dweb][Search] Search Kos - Popular campus
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -201,16 +201,16 @@ Feature: Main Search
       | Halte Halimun    | Halte Halimun   |
     Then title listing that appear have location campus in "Jakarta"
 
-#  @bagas @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
-#  Scenario: [Dweb][Search] Search Kos - Station based on city list
-#    Given user go to mamikos homepage
-#    When user click stasiun&halte
-#    And user click kampus berdasarkan kota
-#      | campus stag             |campus prod           |
-#      | Bandung chevron-down    | Bandung chevron-down |
-#    Then under area city click
-#      | city stag               | city prod            |
-#      | Stasiun Cimekar         | Stasiun Cimekar      |
+ @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
+  Scenario: [Dweb][Search] Search Kos - Station based on city list
+    Given user go to mamikos homepage
+    When user click stasiun&halte
+    And user click kampus berdasarkan kota
+      | campus stag             |campus prod           |
+      | Bandung chevron-down    | Bandung chevron-down |
+    Then under area city click
+      | city stag               | city prod            |
+      | Stasiun Cimekar         | Stasiun Cimekar      |
 
 
 
