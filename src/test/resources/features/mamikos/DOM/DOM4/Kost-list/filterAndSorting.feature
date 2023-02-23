@@ -17,3 +17,19 @@ Feature: Filter and Sorting
       | Putra  |
       | Putri  |
       | Campur |
+
+  Scenario Outline: [Dweb][Listing Kos][Filter] Check filter facilityShare and verify the result
+    Given user navigates to ugm kost listing
+    When user sets facility filter "<facilityShare>"
+    Then user validates the result kos facility is "<facilityShare>"
+    Examples:
+      | facilityShare |
+      | WiFi          |
+
+  Scenario Outline: [Dweb][Listing Kos][Filter] Check filter kos rule and verify the result
+    Given user navigates to ugm kost listing
+    And user sets top kos rule filter "<kos rule>"
+    Then user validates the result kos rule is "<kos rule>"
+    Examples:
+      | kos rule     |
+      | Akses 24 Jam |
