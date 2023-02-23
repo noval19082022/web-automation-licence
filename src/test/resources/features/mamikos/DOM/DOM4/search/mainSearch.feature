@@ -46,7 +46,7 @@ Feature: Main Search
     When user clicks Search
     Then After user click City name, city name will expand and Area name listed below it.
       | Bali chevron-down | Balikpapan chevron-down         | Banyumas           | Cilegon    | Tasikmalaya |
-      | Kuta               | Balikpapan Kota                | Purwokerto Barat   | Purwakarta | Cibeureum   |
+      | Kuta              | Balikpapan Kota                 | Purwokerto Barat   | Purwakarta | Cibeureum   |
       | Renon             | Balikpapan Utara                | Purwokerto Timur   | Jombang    | Tawang      |
       | Seminyak          | Balikpapan Tengah               | Purwokerto Selatan | Grogol     | Mangkubumi  |
       | Jimbaran          | Balikpapan Selatan              | Purwokerto Utara   | Citangkil  | Cihideung   |
@@ -56,13 +56,58 @@ Feature: Main Search
     Given user go to mamikos homepage
     When user clicks Search
     Then under popular search, there's this city :
-      | city stag      | city prod      |
-      | Yogyakarta     | Yogyakarta     |
-      | Jakarta      | Jakarta        |
-      | Bandung        | Bandung        |
-      | Surabaya       | Surabaya       |
+      | city stag       | city prod      |
+      | Yogyakarta      | Yogyakarta     |
+      | Jakarta         | Jakarta        |
+      | Bandung         | Bandung        |
+      | Surabaya        | Surabaya       |
       | Jakarta Selatan | Jakarta Selatan |
+      | Malang          | Malang         |
+      | Semarang        | Semarang       |
+      | Makassar        | Makassar       |
+      | Medan           | Medan          |
+
+  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  Scenario: [Dweb][Search] Search Kos in popular area have correct search result
+    Given user go to mamikos homepage
+    When user clicks Search
+    Then under popular search, there's this city :
+      | city stag      | city prod      |
       | Malang         | Malang         |
-      | Semarang       | Semarang       |
-      | Makassar       | Makassar       |
-      | Medan          | Medan          |
+    Then listing that appear have location
+      | city stag      | city prod      |
+      | Malang         | Malang         |
+
+  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  Scenario: [Dweb][Search] Search Kos in popular area have correct search result
+    Given user go to mamikos homepage
+    When user clicks Search
+    And user click area city
+      | city stag           | city prod      |
+      | Bali chevron-down   | Bali           |
+    Then under area city click
+      | city stag      | city prod      |
+      | Kuta           | Seminyak       |
+
+
+  @TEST_DOM-1860 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
+  Scenario Outline: [Dweb][Search] Check appearance of Apartemen property on listing with keyword city
+    Given user go to mamikos homepage
+    When user search for random keyword:"<city>"
+    Then listing that appear have no "Apartemen" property
+    Examples:
+      | city            |
+      | Jakarta         |
+      | Jakarta Selatan |
+      | Surabaya        |
+      | Bandung         |
+      | Yogyakarta      |
+      | Jakarta Pusat   |
+      | Semarang        |
+      | Jakarta Barat   |
+      | Malang          |
+      | UGM             |
+      | Tebet           |
+      | Kontrakan       |
+      | Bekasi          |
+      | UNDIP           |
