@@ -5,6 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchPO {
     Page page;
     Locator inputSearch;
@@ -19,6 +22,8 @@ public class SearchPO {
     Locator kosAndalanFilter;
     Locator promoNgebutDesc;
     Locator kosAndalanDesc;
+    Locator genderFilter;
+    Locator saveGenderFilterButton;
 
 
 
@@ -37,6 +42,8 @@ public class SearchPO {
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
+        this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
+        this.saveGenderFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
 
 
 
@@ -244,5 +251,30 @@ public class SearchPO {
     public String getKosAndalanDescText() {
         return playwright.getText(kosAndalanDesc).toLowerCase();
 
+    }
+
+    /**
+     * Select filter by gender
+     * @throws InterruptedException
+     */
+    public void selectFilterByGender(String gender) throws InterruptedException {
+        genderFilter.click();
+        page.getByTestId("filter-gender").getByText(""+ gender +"").click();
+        saveGenderFilterButton.click();
+    }
+
+    /**
+     * Get the gender label in listing
+     * @return list of string gender
+     * @param gender is gender option (putra, putri, campur)
+     */
+    public List<String> getListGender(String gender){
+        List<String> genderList = new ArrayList<>();
+        Locator genderLabel = page.locator("//div[@data-testid = 'kostRoomCard']//div[contains(text() , '"+ gender+"')]");
+        List<Locator> elements = genderLabel.all();
+        for(Locator a: elements){
+            genderList.add(playwright.getText(a));
+        }
+        return genderList;
     }
 }
