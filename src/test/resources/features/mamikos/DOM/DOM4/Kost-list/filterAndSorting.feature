@@ -33,3 +33,18 @@ Feature: Filter and Sorting
     Examples:
       | kos rule     |
       | Akses 24 Jam |
+
+  Scenario: [Dweb][Listing Kos][Filter] Check Kos Andalan filter
+    Given user navigates to ugm kost listing
+    And user sets Kos Andalan filter
+    Then user validated the result kos have Kos Andalan label
+
+  Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter
+    Given user navigates to mamikos kost kost jogja murah
+    When user click on Dikelola Mamikos filter
+    Then user validate the result kos have Dikelola Mamikos label
+
+  Scenario: [Dweb][Listing Kos][Filter] Check Promo Ngebut filter
+    Given user navigates to ugm kost listing
+    And user sets Promo Ngebut filter
+    Then user validated the result kos have Promo Ngebut label

@@ -29,6 +29,10 @@ public class SearchPO {
     Locator stasiunHalte;
     Locator facilityFilter;
     Locator kostRuleFilter;
+    Locator kosAndalanToggle;
+    Locator kosAndalanLabel;
+    Locator promoNgebutToggle;
+    Locator promoNgebutLabel;
 
 
 
@@ -47,6 +51,10 @@ public class SearchPO {
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
+        this.kosAndalanToggle = page.locator("[data-popper-placement='bottom-start'] .bg-c-switch");
+        this.kosAndalanLabel = page.locator(".rc-overview__label").first();
+        this.promoNgebutToggle = page.locator("//span[@data-path='lbl_flash_sale']/following-sibling::div//input");
+        this.promoNgebutLabel = page.locator(".rc-price__discount-icon").first();
         this.mamiMap = page.locator("div #mamiMap");
         this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
         this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
@@ -144,7 +152,6 @@ public class SearchPO {
     }
 
     /**
-<<<<<<< HEAD
      * user search based on area
      *
      * @return
@@ -425,5 +432,39 @@ public class SearchPO {
             ruleList.add(playwright.getText(a));
         }
         return ruleList;
+    }
+
+    /**
+     * Activate Kos Andalan filter
+     */
+    public void activateKosAndalanFilter(){
+        kosAndalanFilter.click();
+        kosAndalanToggle.click();
+    }
+
+    /**
+     *
+     * Check Kos Andalan label present
+     * @return element displayed true / false
+     */
+    public boolean isKosAndalanPropertyDisplayed() {
+        return kosAndalanLabel.isVisible();
+    }
+
+    /**
+     * Activate Promo Ngebut filter
+     */
+    public void activatePromoNgebutFilter(){
+        promoNgebutFilter.click();
+        promoNgebutToggle.click();
+    }
+
+    /**
+     *
+     * Check Promo Ngebut label present
+     * @return element displayed true / false
+     */
+    public boolean isPromoNgebutPropertyDisplayed() {
+        return promoNgebutLabel.isVisible();
     }
 }
