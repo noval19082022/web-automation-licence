@@ -192,16 +192,28 @@ Feature: Main Search
       | Stasiun Andir	     | Halte Monas	                 | Stasiun Malang Kotabaru	| Stasiun Alastua	      | Stasiun Rewulu           |
       | Stasiun Cimindi	     | Stasiun MRT Bendungan Hilir	 | Stasiun Pakisaji         | Stasiun Semarang Gudang | Stasiun Patukan          |
 
-#  @bagas @TEST_DOM-1851 @Automated @DOM4 @Web @discovery-platform @search @search-result-halte
-#  Scenario: [Dweb][Search] Search Kos based on Stasiun and stop
+  @TEST_DOM-1851 @Automated @DOM4 @Web @discovery-platform @search @search-result-halte
+  Scenario: [Dweb][Search] Search Kos based on Stasiun and stop
+    Given user go to mamikos homepage
+    When user click stasiun&halte
+    And user click button kampus
+      | campus stag      |campus prod      |
+      | Halte Halimun    | Halte Halimun   |
+    Then title listing that appear have location campus in "Jakarta"
+
+#  @bagas @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
+#  Scenario: [Dweb][Search] Search Kos - Station based on city list
 #    Given user go to mamikos homepage
 #    When user click stasiun&halte
-#    And user click button kampus
-#      | campus stag      |campus prod      |
-#      | Halte Halimun    | Halte Halimun   |
+#    And user click kampus berdasarkan kota
+#      | campus stag             |campus prod           |
+#      | Bandung chevron-down    | Bandung chevron-down |
 #    Then under area city click
-#      | city stag       | city prod      |
-#      | Jakarta         | Jakarta        |
+#      | city stag               | city prod            |
+#      | Stasiun Cimekar         | Stasiun Cimekar      |
+
+
+
 
 
 

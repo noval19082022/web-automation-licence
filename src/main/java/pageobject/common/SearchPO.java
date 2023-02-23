@@ -374,9 +374,8 @@ public class SearchPO {
      * click area halte dan stasiun
      * @return
      */
-    public List<String> stasiunDanHalteClickOn(){
+    public void stasiunDanHalteClickOn(){
         playwright.clickOn(stasiunHalte);
-        return null;
     }
 
     /**
