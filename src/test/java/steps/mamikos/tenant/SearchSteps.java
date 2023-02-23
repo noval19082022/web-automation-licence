@@ -268,4 +268,17 @@ public class SearchSteps {
     public void titleListingThatAppearHaveLocationCampusIn(String campusArea) {
         Assert.assertTrue(search.getTitleListingResult(campusArea).contains(campusArea), "Title Listing Result is not equals with the keyword!");
     }
+
+    @And("user click kampus berdasarkan kota")
+    public void userClickKampusBerdasarkanKota(DataTable table) throws InterruptedException {
+        var campus = table.asMaps(String.class, String.class);
+        var popular = campus.get(0).get("campus " + Mamikos.ENV);
+        search.clickPopularCity(popular);
+    }
+
+    @When("user click stasiun&halte")
+    public void userClickStasiunHalte() {
+        search.clickSearchBar();
+        search.stasiunDanHalteClickOn();
+    }
 }

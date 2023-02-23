@@ -26,6 +26,7 @@ public class SearchPO {
     Locator kostName;
     Locator genderFilter;
     Locator saveFilterButton;
+    Locator stasiunHalte;
 
 
 
@@ -49,6 +50,7 @@ public class SearchPO {
         this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
         this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
         this.saveFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.stasiunHalte = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Stasiun & Halte"));
 
 
 
@@ -361,5 +363,9 @@ public class SearchPO {
         Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
         popularCity.click();
 
+    }
+
+    public void stasiunDanHalteClickOn(){
+        playwright.clickOn(stasiunHalte);
     }
 }
