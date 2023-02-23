@@ -24,6 +24,8 @@ public class SearchPO {
     Locator kosAndalanDesc;
     Locator mamiMap;
     Locator kostName;
+    Locator genderFilter;
+    Locator saveFilterButton;
 
 
 
@@ -44,6 +46,8 @@ public class SearchPO {
         this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
         this.mamiMap = page.locator("div #mamiMap");
         this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
+        this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
+        this.saveFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
 
 
 
@@ -273,5 +277,30 @@ public class SearchPO {
      */
     public void suggestionAreaClick(){
         suggestionAreaOnTheSearchList.click();
+    }
+
+    /**
+     * Select filter by gender
+     * @throws InterruptedException
+     */
+    public void selectFilterByGender(String gender) throws InterruptedException {
+        genderFilter.click();
+        page.getByTestId("filter-gender").getByText(""+ gender +"").click();
+        saveFilterButton.click();
+    }
+
+    /**
+     * Get the gender label in listing
+     * @return list of string gender
+     * @param gender is gender option (putra, putri, campur)
+     */
+    public List<String> getListGender(String gender){
+        List<String> genderList = new ArrayList<>();
+        Locator genderLabel = page.locator("//div[@data-testid = 'kostRoomCard']//div[contains(text() , '"+ gender+"')]");
+        List<Locator> elements = genderLabel.all();
+        for(Locator a: elements){
+            genderList.add(playwright.getText(a));
+        }
+        return genderList;
     }
 }

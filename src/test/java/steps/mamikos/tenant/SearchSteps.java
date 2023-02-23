@@ -207,4 +207,17 @@ public class SearchSteps {
     public void userSearchForRandomKeyword(String city) throws InterruptedException {
         search.searchArea(city);
     }
+
+    @When("user sets gender filter {string}")
+    public void userSetsGenderFilter(String gender) throws InterruptedException {
+        search.selectFilterByGender(gender);
+    }
+
+    @Then("user validates the result kos gender is {string}")
+    public void userValidatesTheResultKosGenderIs(String gender) throws InterruptedException {
+        List<String> genderList = search.getListGender(gender);
+        for(String a: genderList){
+            Assert.assertEquals(a, gender);
+        }
+    }
 }
