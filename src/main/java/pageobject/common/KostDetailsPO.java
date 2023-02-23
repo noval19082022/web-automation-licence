@@ -100,6 +100,40 @@ public class KostDetailsPO {
     private Locator checkBoxKosReport;
     private Locator reportConfirmationPopUp;
 
+    //------------ Kos Owner Information Section ------------------
+    private Locator kostOwnerInformation;
+    private Locator aboutStatisticsButton;
+    private Locator statisticModal;
+    private Locator closeStatisticsModalBtn;
+    private Locator ownerNameText;
+    private Locator ownerImageProfile;
+    private Locator ownerStatus;
+    private Locator successfulTansaction;
+    private Locator bookingProcessed;
+    private Locator bookingChance;
+
+    //------------ Check Gallery Photo Section ------------------
+    private Locator seeAllPhotoButton;
+    private Locator closeButtonGallery;
+    private Locator fotoBangunanText;
+    private Locator fotoKamarText;
+    private Locator fotoKamarMandiText;
+    private Locator fotoLainnya;
+    private Locator detailPhotoButton;
+    private Locator arrowPhotoNextButton;
+
+    //-------------- Kost recomendation Section ----------------
+    private Locator relatedCard;
+    private Locator recommendationListTitle;
+    private Locator recommendationKosText;
+    private Locator seeAllRecomendationButton;
+    private Locator arrowRecommendationNextButton;
+    private Locator arrowRecommendationPrevButton;
+    private Locator photoRecommendation;
+    private Locator mixGenderFilter;
+    private Locator nextRecommendation;
+    private Locator firstKostCard;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -192,6 +226,40 @@ public class KostDetailsPO {
         this.sendReportButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Laporan"));
         this.checkBoxKosReport = page.locator(".modal-report__body").locator("label").nth(0);
         this.reportConfirmationPopUp = page.locator("#swal2-content");
+
+        //------------ Kos Owner Information Section ------------------
+        this.kostOwnerInformation = page.locator("#kostOwnerInformation");
+        this.aboutStatisticsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tentang statistik"));
+        this.statisticModal = page.getByTestId("owner-rate-modal-content");
+        this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
+        this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
+        this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
+        this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");
+        this.bookingProcessed = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(0);
+        this.bookingChance = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(1);
+
+        //------------ Check Gallery Photo Section ------------------
+        this.seeAllPhotoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua foto"));
+        this.closeButtonGallery = page.locator("//span[@class = 'detail-category-header__close']");
+        this.fotoBangunanText = page.getByText("Foto Bangunan");
+        this.fotoKamarText = page.getByText("Foto Kamar").first();
+        this.fotoKamarMandiText = page.getByText("Foto Kamar Mandi");
+        this.fotoLainnya = page.getByText("Foto Lainnya");
+        this.detailPhotoButton = page.locator("#detailPhotoContainer .detail-category-content__img-wrapper.detail-category-content__img-wrapper").first();
+        this.arrowPhotoNextButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Next slide"));
+
+        //-------------- Kost recomendation Section ----------------
+        this.relatedCard = page.locator("#relatedCard");
+        this.recommendationListTitle = page.locator("#app > div > h1");
+        this.recommendationKosText = page.getByText("Kamu mungkin menyukainya");
+        this.seeAllRecomendationButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua"));
+        this.arrowRecommendationNextButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
+        this.arrowRecommendationPrevButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
+        this.photoRecommendation = page.locator(".rc-photo__cover");
+        this.mixGenderFilter = page.locator(".rc-overview > div:nth-child(2)").first();
+        this.nextRecommendation = page.locator("//h3[@data-path='lbl_roomTitle']").nth(5);
+        this.firstKostCard = page.locator("//h3[@data-path='lbl_roomTitle']").first();
     }
 
     /**
@@ -759,6 +827,279 @@ public class KostDetailsPO {
      */
     public boolean isReportConfirmationPresent() {
         return playwright.waitTillLocatorIsVisible(reportConfirmationPopUp, 3.0);
+    }
+
+    //------------ Kos Owner Information Section ------------------
+
+    /**
+     * Check owner section is present
+     *
+     * @return true / false
+     */
+    public boolean isOwnerSectionPresent() {
+        playwright.pageScrollToDown(4800);
+        playwright.pageScrollUntilElementIsVisible(kostOwnerInformation);
+        return playwright.waitTillLocatorIsVisible(aboutStatisticsButton, 2.0);
+    }
+
+    /**
+     * Check owner name is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isOwnerNameDisplayed() {
+        playwright.pageScrollUntilElementIsVisible(ownerNameText);
+        return playwright.waitTillLocatorIsVisible(ownerNameText, 2.0);
+    }
+
+    /**
+     * Check owner picture  is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isOwnerPictureDisplayed() {
+        return playwright.waitTillLocatorIsVisible(ownerImageProfile, 2.0);
+    }
+
+    /**
+     * Check owner status is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isOwnerStatusDisplayed() {
+        return playwright.waitTillLocatorIsVisible(ownerStatus, 2.0);
+    }
+
+    /**
+     * Check number of transaction is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isNumberTransactionDisplayed() {
+        return playwright.waitTillLocatorIsVisible(successfulTansaction, 2.0);
+    }
+
+    /**
+     * Check booking processed is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isBookingProcessedDisplayed() {
+        return playwright.waitTillLocatorIsVisible(bookingProcessed, 2.0);
+    }
+
+    /**
+     * Check booking chance is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isBookingChanceDisplayed() {
+        return playwright.waitTillLocatorIsVisible(bookingChance, 2.0);
+    }
+
+    /**
+     * Click on about statistics button
+     */
+    public void clickStatisticsDetailButton() {
+        playwright.clickOn(aboutStatisticsButton);
+    }
+
+    /**
+     * Check statistics modal is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isStatisticsModalDisplayed() {
+        return playwright.waitTillLocatorIsVisible(statisticModal, 2.0);
+    }
+
+    /**
+     * Click on close statistics modal button
+     */
+    public void closeStatisticsModal() {
+        playwright.clickOn(closeStatisticsModalBtn);
+    }
+
+    //------------ Check Gallery Photo Section ------------------
+
+    /**
+     * Check button see all photo is present
+     *
+     * @return true / false
+     */
+    public boolean isSeeAllPhotoButtonPresent() {
+        return playwright.waitTillLocatorIsVisible(seeAllPhotoButton, 3.0);
+    }
+
+    /**
+     * Click on see all button
+     */
+    public void clickOnSeeAllButton() {
+        playwright.clickOn(seeAllPhotoButton);
+    }
+
+    /**
+     * Check button close photo is present
+     *
+     * @return true / false
+     */
+    public boolean isCloseButtonPresent() {
+        return playwright.waitTillLocatorIsVisible(closeButtonGallery, 1.0);
+    }
+
+    /**
+     * Check text Foto Bangunan is present
+     *
+     * @return true / false
+     */
+    public boolean isBuildingPhotosPresent() {
+        return playwright.waitTillLocatorIsVisible(fotoBangunanText, 1.0);
+    }
+
+    /**
+     * Check text foto kamar is present
+     *
+     * @return true / false
+     */
+    public boolean isRoomPhotosPresent() {
+        playwright.pageScrollUsingCoordinate(0, 2000);
+        return playwright.waitTillLocatorIsVisible(fotoKamarText, 1.0);
+    }
+
+    /**
+     * Check text foto kamar mandi is present
+     *
+     * @return true / false
+     */
+    public boolean isBathroomPhotosPresent() {
+        return playwright.waitTillLocatorIsVisible(fotoKamarMandiText, 1.0);
+    }
+
+    /**
+     * Check text foto lainnya is present
+     *
+     * @return true / false
+     */
+    public boolean isOthersPhotosPresent() {
+        return playwright.waitTillLocatorIsVisible(fotoLainnya, 1.0);
+    }
+
+    /**
+     * Click on detail photo gallery button
+     */
+    public void clickOnDetailPhotoButton() {
+        playwright.clickOn(detailPhotoButton);
+    }
+
+    /**
+     * swipe on photo gallery
+     */
+    public void clickOnArrowPhotoGalleryNextButton() {
+        playwright.waitTillLocatorIsVisible(arrowPhotoNextButton, 5.0);
+        playwright.clickOn(arrowPhotoNextButton);
+    }
+
+    //-------------- Kost recomendation Section ----------------
+
+    /**
+     * Check button see all is present
+     *
+     * @return true / false
+     */
+    public boolean isLihatSemuaKosButtonPresent() {
+        playwright.pageScrollHeightToBottom();
+        playwright.pageScrollUntilElementIsVisible(relatedCard);
+        return playwright.waitTillLocatorIsVisible(seeAllRecomendationButton, 4.0);
+    }
+
+    /**
+     * Check button arrow next is present
+     *
+     * @return true / false
+     */
+    public boolean isArrowRecommendationButtonPresent() {
+        return playwright.waitTillLocatorIsVisible(arrowRecommendationNextButton, 5.0);
+    }
+
+    /**
+     * Check list photo kos recommendation is present
+     *
+     * @return true / false
+     */
+    public boolean isListPhotoRecommendationKosPresent() {
+        List<Locator> photos = playwright.getLocators(photoRecommendation);
+        return !photos.isEmpty();
+    }
+
+    /**
+     * Get recommendation kos Desc Text
+     *
+     * @return recommendation label
+     */
+    public String getRecommendationKosLabel() {
+        String desc = playwright.getText(recommendationKosText);
+        return desc;
+    }
+
+    /**
+     * swipe on next kos recommendation
+     */
+    public void clickOnArrowRecommendationNextButton() {
+        playwright.clickOn(arrowRecommendationNextButton);
+    }
+
+    /**
+     * swipe on previous kos recommendation
+     */
+    public void clickOnArrowRecommendationPreviousButton() {
+        playwright.clickOn(arrowRecommendationPrevButton);
+    }
+
+    /**
+     * click on lihat semua kos recommendation
+     *
+     * @return next kost object
+     */
+    public KostDetailsPO clickOnSeeAllRecommendation() {
+        Page nextPage = playwright.movePageByClickLocator(page, seeAllRecomendationButton);
+        return new KostDetailsPO(nextPage);
+    }
+
+    /**
+     * Is next recommendation kos present
+     *
+     * @return true or false
+     */
+    public boolean isNextRecommendationElementPresent() {
+        return playwright.waitTillLocatorIsVisible(nextRecommendation, 3.0);
+    }
+
+    /**
+     * Is first kos recommendation present
+     *
+     * @return true or false
+     */
+    public boolean isFirstKostCardRecommendationPresent() {
+        return playwright.waitTillLocatorIsVisible(firstKostCard, 3.0);
+    }
+
+    /**
+     * Get arround recommendation kos list Desc Text
+     *
+     * @return recomendation title in listing
+     */
+    public String getRecommendationKosList() {
+        String desc = playwright.getText(recommendationListTitle);
+        return desc;
+    }
+
+    /**
+     * Check Mix gender is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isMixGenderDisplay() {
+        return playwright.waitTillLocatorIsVisible(mixGenderFilter, 5.0);
     }
 
     //------------ Favorite kost section ----------------
