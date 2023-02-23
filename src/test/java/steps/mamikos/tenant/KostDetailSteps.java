@@ -160,6 +160,19 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isFacParkingDisplayed(), "Facility Parking Section is not displayed");
     }
 
+    // ------------ Kos rule -------------
+    @Then("user can see kos rule list on detail kos")
+    public void user_can_see_kos_rule_list_on_detail_kos() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isKosRulePresent(), "Kos rule is not present!");
+        Assert.assertTrue(kostDetail.isKosRuleTitlePresent(), "Kos rule title is not present!");
+        Assert.assertTrue(kostDetail.isKosRuleButtonShow(), "Kos Rule Button is not displayed");
+        Assert.assertTrue(kostDetail.isKosRuleImagePresent(), "Kos rule image is not present!");
+        kostDetail.clickOnSeeAllKosRuleButton();
+    }
+
+
     // ------------ Kost Map section -----------
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
@@ -221,19 +234,6 @@ public class KostDetailSteps {
     public void display_pop_up_confirmation_already_have_send_report_kos() {
         Assert.assertTrue(kostDetail.isReportConfirmationPresent(), "Pop Up Confirmation send report is not present");
     }
-
-    // ------------ Kos rule -------------
-    @Then("user can see kos rule list on detail kos")
-    public void user_can_see_kos_rule_list_on_detail_kos() {
-        playwright.pageScrollToDown(200);
-        kostDetail.dismissFTUE();
-        Assert.assertTrue(kostDetail.isKosRulePresent(), "Kos rule is not present!");
-        Assert.assertTrue(kostDetail.isKosRuleTitlePresent(), "Kos rule title is not present!");
-        Assert.assertTrue(kostDetail.isKosRuleButtonShow(), "Kos Rule Button is not displayed");
-        Assert.assertTrue(kostDetail.isKosRuleImagePresent(), "Kos rule image is not present!");
-        kostDetail.clickOnSeeAllKosRuleButton();
-    }
-
 
     //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
