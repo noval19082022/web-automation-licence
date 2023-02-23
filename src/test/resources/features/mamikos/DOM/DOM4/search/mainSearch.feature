@@ -153,7 +153,7 @@ Feature: Main Search
       | UNDIP            | UNDIP           |
     Then title listing that appear have location campus in "Semarang"
 
-   @TEST_DOM-1855 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city-result
+  @TEST_DOM-1855 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city-result
   Scenario: [Dweb][Search]Search Kos - Popular campus based on city list
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -164,7 +164,7 @@ Feature: Main Search
       | city stag      | city prod      |
       | Undiksha       | Semarang       |
 
-   @TEST_DOM-1854 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
+  @TEST_DOM-1854 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
   Scenario: [Dweb][Search]Search Kos - Popular station and stop
     Given user go to mamikos homepage
     When user click stasiun&halte
@@ -181,7 +181,7 @@ Feature: Main Search
       | Halte Monas                |Halte Monas              |
       | Stasiun MRT Blok M         |Stasiun MRT Blok M       |
 
-   @TEST_DOM-1845 @Automated @DOM4 @Web @discovery-platform @search @search-stasiiun-list
+  @TEST_DOM-1845 @Automated @DOM4 @Web @discovery-platform @search @search-stasiiun-list
   Scenario: [Dweb][Search] Search Kos - Station Lists By City
     Given user go to mamikos homepage
     When user click stasiun&halte

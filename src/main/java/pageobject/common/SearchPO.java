@@ -370,8 +370,15 @@ public class SearchPO {
 
     }
 
-    public void stasiunDanHalteClickOn(){
+    /**
+     * click area halte dan stasiun
+     * @return
+     */
+    public List<String> stasiunDanHalteClickOn(){
         playwright.clickOn(stasiunHalte);
+        return null;
+    }
+
     /**
      * Select filter by facility
      * @throws InterruptedException
