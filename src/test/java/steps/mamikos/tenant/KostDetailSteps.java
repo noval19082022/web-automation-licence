@@ -173,6 +173,43 @@ public class KostDetailSteps {
         kostDetail.clickOnSeeAllKosRuleButton();
     }
 
+    // ------------ Kost Map section -----------
+    @Then("user want to reached map section and see lihat peta button")
+    public void userCanSeeLihatPetaBtn() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isLihatPetaButtonPresent(), "Lihat Peta Button is not present!");
+        Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
+        Assert.assertTrue(kostDetail.isPOILandmarkShow(), "POI Landmark is not displayed");
+    }
+
+    @When("user want to see more detail kost location")
+    public void seeKostMapBtn() {
+        kostDetail.clickOnSeeMapButton();
+    }
+
+    @Then("user want to reached map section and see tanya alamat lengkap button")
+    public void userCanSeeAlamatLengkapPetaBtn() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isTanyaAlamatBtnPresent(), "Tanya Alamat Button is not present!");
+        Assert.assertTrue(kostDetail.isKostCurrentLocationPresent(), "Kost current position is not present!");
+        Assert.assertTrue(kostDetail.isPOILandmarkShow(), "POI Landmark is not displayed");
+    }
+
+    @When("user want to ask kost address")
+    public void userAskAdreess() {
+        kostDetail.clickOnTanyaAlamatBtn();
+    }
+
+    @Then("chat room appear with latest message")
+    public void msgChatRoom() {
+        Assert.assertTrue(kostDetail.isChatRoomPresent(), "Chat room is not present!");
+        var message = "Kos DC BAR Automation Tipe A beralamat di: ";
+        Assert.assertTrue(kostDetail.getLatestChatText().trim().replaceAll("\\s", "")
+                .contains(message.replaceAll("\\s", "")), "Kos address in title is wrong");
+    }
+
     //------------ Favorite kost section ----------------
     @Then("user can favorite the kost")
     public void userCanFavoriteTheKost() {

@@ -207,7 +207,7 @@ public class SearchSteps {
     public void userSearchForRandomKeyword(String city) throws InterruptedException {
         search.searchArea(city);
     }
-
+    
     @Then("title listing that appear have location in {string}")
     public void titleListingThatAppearHaveLocationIn(String cityArea) {
         search.clickOnListPopularCity(cityArea);
@@ -239,4 +239,18 @@ public class SearchSteps {
 //            }
 //        }
 //    }
+
+
+    @When("user sets gender filter {string}")
+    public void userSetsGenderFilter(String gender) throws InterruptedException {
+        search.selectFilterByGender(gender);
+    }
+
+    @Then("user validates the result kos gender is {string}")
+    public void userValidatesTheResultKosGenderIs(String gender) throws InterruptedException {
+        List<String> genderList = search.getListGender(gender);
+        for(String a: genderList){
+            Assert.assertEquals(a, gender);
+        }
+    }
 }
