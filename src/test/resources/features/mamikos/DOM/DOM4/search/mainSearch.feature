@@ -158,11 +158,11 @@ Feature: Main Search
     Given user go to mamikos homepage
     When user click search area based on campus
     And user click kampus berdasarkan kota
-      | campus stag      |campus prod      |
-      | Bogor           | UNDIP            |
+      | campus stag      |campus prod   |
+      | Bogor            | Bogor        |
     Then under area city click
-      | city stag      | city prod      |
-      | IPB       | Semarang       |
+      | city stag      | city prod    |
+      | IPB            | IPB          |
     Then title listing that appear have location campus in "Bogor"
 
 
