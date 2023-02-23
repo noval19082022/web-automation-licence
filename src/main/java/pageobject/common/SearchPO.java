@@ -26,6 +26,7 @@ public class SearchPO {
     Locator kostName;
     Locator genderFilter;
     Locator saveFilterButton;
+    Locator stasiunHalte;
     Locator facilityFilter;
     Locator kostRuleFilter;
 
@@ -50,6 +51,7 @@ public class SearchPO {
         this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
         this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
         this.saveFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.stasiunHalte = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Stasiun & Halte"));
         this.facilityFilter = page.getByTestId("filter-facilities");
         this.kostRuleFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Aturan Kos"));
 
@@ -282,7 +284,60 @@ public class SearchPO {
     }
 
     /**
+<<<<<<< HEAD
+     * click area by kota popular
+     * @param area
+     */
+    public void clickOnListPopularCity(String area) {
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
+        popularCity.click();
+    }
+
+    /**
+     * verify area by kota popular
+     * @param listresult
+     * @return
+     */
+    public String getTitleListingResult(String listresult){
+        Locator listResult = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(listresult));
+        listResult.getByText(listresult);
+        return listresult;
+    }
+
+    /**
+     * search by campus
+     */
+    public void searchByCampus(){
+        searchKost.click();
+    }
+
+    /**
+     * Scroll down to 'City Name' and click 'City Name'
+     * @throws InterruptedException
+     */
+    public void clickOnCities(String kampus) throws InterruptedException {
+        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
+        playwright.waitTillLocatorIsVisible(areacity);
+        playwright.clickOn(areacity);
+    }
+
+    /**
+     * Get List of each Campus Name on Cities Text
+     * @param campus Station Name
+     * @return
+     */
+    public boolean isEachCampusFromCities(String campus){
+        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
+       return playwright.waitTillLocatorIsVisible(listAreaCity);
+
+    }
+
+
+     /** Select filter by gender
+     * @throws InterruptedException
+=======
      * Select filter by gender
+>>>>>>> 8d3fd00629dcb6b96d8098c7c282d05199f2619d
      */
     public void selectFilterByGender(String gender){
         genderFilter.click();
@@ -303,6 +358,24 @@ public class SearchPO {
             genderList.add(playwright.getText(a));
         }
         return genderList;
+    }
+
+    /**
+     * get area campus by click campus area
+     * @param area
+     */
+    public void getCampusArea(String area){
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
+        popularCity.click();
+
+    }
+
+    /**
+     * click area halte dan stasiun
+     * @return
+     */
+    public void stasiunDanHalteClickOn(){
+        playwright.clickOn(stasiunHalte);
     }
 
     /**

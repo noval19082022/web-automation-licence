@@ -126,6 +126,7 @@ public class SearchSteps {
     @Then("After user click City name, city name will expand and Area name listed below it.")
     public void after_user_click_city_name_city_name_will_expand_and_area_name_listed_below_it(DataTable table) throws InterruptedException {
         List<List<String>> listCity = table.asLists(String.class);
+        System.out.println("size()"+ listCity.size());
         for (int j=0; j<listCity.size(); j++) {
             search.userTapCity(listCity.get(0).get(j));
             for (int i=j+1; i<listCity.size(); i++) {
@@ -208,6 +209,39 @@ public class SearchSteps {
         search.searchArea(city);
     }
 
+    @Then("title listing that appear have location in {string}")
+    public void titleListingThatAppearHaveLocationIn(String cityArea) {
+        search.clickOnListPopularCity(cityArea);
+        Assert.assertTrue(search.getTitleListingResult(cityArea).contains(cityArea), "Title Listing Result is not equals with the keyword!");
+
+    }
+
+    @When("user click search area based on campus")
+    public void userClickSearchAreaBasedOnCampus() {
+        search.searchByCampus();
+
+    }
+
+    @Then("user verify popular campus")
+    public void userVerifyPopularCampus(DataTable table) {
+        var campus = table.asMaps(String.class, String.class);
+        for (Map<String, String> kampus : campus) {
+            Assert.assertTrue(search.listPopularCity(kampus.get("campus " + Mamikos.ENV)), kampus.get("campus " + Mamikos.ENV) + " is not displayed");
+        }
+    }
+
+    @Then("user verify campus lists by cities")
+    public void userVerifyCampusListsByCities(DataTable table) throws InterruptedException {
+        List<List<String>> campusList = table.asLists(String.class);
+        for(int i = 0; i < campusList.size() ; i++){
+            search.clickOnCities(campusList.get(0).get(i));
+            for (int j = i + 1; j < campusList.size() ; j++){
+                Assert.assertTrue(search.isEachCampusFromCities(campusList.get(i).get(j)), "Campus not appear in dropdown.");
+            }
+        }
+    }
+
+
     @When("user sets gender filter {string}")
     public void userSetsGenderFilter(String gender) throws InterruptedException {
         search.selectFilterByGender(gender);
@@ -221,29 +255,57 @@ public class SearchSteps {
         }
     }
 
-    @When("user sets facility filter {string}")
-    public void userSetsFacilityFilter(String facility){
-        search.selectFilterByFacility(facility);
+    @And("user click button kampus")
+    public void userClickButtonKampus(DataTable table) {
+        var campus = table.asMaps(String.class, String.class);
+        var popular = campus.get(0).get("campus " + Mamikos.ENV);
+        search.getCampusArea(popular);
+
+
     }
 
-    @Then("user validates the result kos facility is {string}")
-    public void userValidatesTheResultKosFacilityIs(String facility) {
-        List<String> facilityList = search.getListFacility(facility);
-        for(String a: facilityList){
-            Assert.assertTrue(a.contains(facility), "Search result "+ a +" not in correct facility");
+    @Then("title listing that appear have location campus in {string}")
+    public void titleListingThatAppearHaveLocationCampusIn(String campusArea) {
+        Assert.assertTrue(search.getTitleListingResult(campusArea).contains(campusArea), "Title Listing Result is not equals with the keyword!");
+    }
+
+    @And("user click kampus berdasarkan kota")
+    public void userClickKampusBerdasarkanKota(DataTable table) throws InterruptedException {
+        var campus = table.asMaps(String.class, String.class);
+        var popular = campus.get(0).get("campus " + Mamikos.ENV);
+        search.clickPopularCity(popular);
+    }
+
+    @When("user click stasiun&halte")
+    public void userClickStasiunHalte() {
+        search.clickSearchBar();
+        search.stasiunDanHalteClickOn();
+    }
+
+            @When("user sets facility filter {string}")
+            public void userSetsFacilityFilter (String facility){
+            search.selectFilterByFacility(facility);
         }
-    }
 
-    @And("user sets top kos rule filter {string}")
-    public void userSetsTopKosRuleFilter(String rule) {
-        search.selectFilterByKostRule(rule);
-    }
-
-    @Then("user validates the result kos rule is {string}")
-    public void userValidatesTheResultKosRuleIs(String rule) {
-        List<String> ruleList = search.getListKostRule(rule);
-        for(String a: ruleList){
-            Assert.assertTrue(a.contains(rule), "Search result "+ a +" not in correct facility");
+            @Then("user validates the result kos facility is {string}")
+            public void userValidatesTheResultKosFacilityIs (String facility){
+            List<String> facilityList = search.getListFacility(facility);
+            for (String a : facilityList) {
+                Assert.assertTrue(a.contains(facility), "Search result " + a + " not in correct facility");
+            }
         }
-    }
-}
+
+            @And("user sets top kos rule filter {string}")
+            public void userSetsTopKosRuleFilter (String rule){
+            search.selectFilterByKostRule(rule);
+        }
+
+            @Then("user validates the result kos rule is {string}")
+            public void userValidatesTheResultKosRuleIs (String rule){
+            List<String> ruleList = search.getListKostRule(rule);
+            for (String a : ruleList) {
+                Assert.assertTrue(a.contains(rule), "Search result " + a + " not in correct facility");
+            }
+        }
+
+        }
