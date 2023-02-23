@@ -91,6 +91,15 @@ public class KostDetailsPO {
     private Locator latestChat;
     private Locator chatRoom;
 
+    // ------------ Kos Report Section -----------
+    private Locator kosReportContainer;
+    private Locator kosReportButton;
+    private Locator popUpReportKos;
+    private Locator reportTextBox;
+    private Locator sendReportButton;
+    private Locator checkBoxKosReport;
+    private Locator reportConfirmationPopUp;
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -174,6 +183,15 @@ public class KostDetailsPO {
         this.tabPOILandmark = page.getByTestId("kost-landmark-list__tabs");
         this.latestChat = page.locator(".mc-balloon-chat__content").locator("div").last();
         this.chatRoom = page.locator(".mc-chat-room");
+
+        // ------------ Kos Report Section -----------
+        this.kosReportContainer = page.locator(".kost-report-container .kost-report");
+        this.kosReportButton = page.getByText("Laporkan");
+        this.popUpReportKos = page.getByText("Laporkan Kost");
+        this.reportTextBox = page.locator("#reportDescription");
+        this.sendReportButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Laporan"));
+        this.checkBoxKosReport = page.locator(".modal-report__body").locator("label").nth(0);
+        this.reportConfirmationPopUp = page.locator("#swal2-content");
     }
 
     /**
@@ -289,7 +307,6 @@ public class KostDetailsPO {
      * Check detail kos page reached
      *
      * @return Boolean
-     * @throws InterruptedException
      */
     public boolean isInKosDetail() {
         kosDetailPage.isVisible();
@@ -629,7 +646,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be check of funcionality from 'Lihat Peta' button on map section for non login condition
-     *
      */
     public void clickOnSeeMapButton() {
         lihatPetaBtn.click();
@@ -657,7 +673,6 @@ public class KostDetailsPO {
 
     /**
      * this method will be check of funcionality from 'Tanya Alamat' button on map section for login condition
-     *
      */
     public void clickOnTanyaAlamatBtn() {
         playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn, 3.0);
@@ -682,6 +697,68 @@ public class KostDetailsPO {
     public String getLatestChatText() {
         playwright.waitTillLocatorIsVisible(latestChat, 7.0);
         return latestChat.textContent();
+    }
+
+    // ------------ Kos Report Section -----------
+
+    /**
+     * Check image kos report is present
+     *
+     * @return true / false
+     */
+    public boolean isKosReportPresent() {
+        playwright.pageScrollToDown(2000);
+        playwright.pageScrollUntilElementIsVisible(kosReportContainer);
+        return kosReportContainer.isVisible();
+    }
+
+    /**
+     * Click on kos report button
+     */
+    public void clickOnKosReportButton() {
+        kosReportButton.click();
+    }
+
+    /**
+     * Check pop up image kos report is present
+     *
+     * @return true / false
+     */
+    public boolean isPopUpKosReportPresent() {
+        return playwright.waitTillLocatorIsVisible(popUpReportKos, 2.0);
+    }
+
+    /**
+     * Enter text to textbox
+     *
+     * @param textReport is text we want to enter
+     */
+    public void insertReportText(String textReport) {
+        reportTextBox.fill(textReport);
+        reportTextBox.press("Enter");
+    }
+
+    /**
+     * Click on check box kos report
+     */
+    public void clickOnCheckBox() {
+        checkBoxKosReport.click();
+    }
+
+    /**
+     * Click on send report button
+     */
+    public void clickOnSendReportButton() {
+        sendReportButton.click();
+    }
+
+    /**
+     * Check kos report pop up confirmation is present
+     *
+     * @return true / false
+     */
+    public boolean isReportConfirmationPresent() {
+        return playwright.waitTillLocatorIsVisible(reportConfirmationPopUp, 3.0);
     }
 
     //------------ Favorite kost section ----------------
