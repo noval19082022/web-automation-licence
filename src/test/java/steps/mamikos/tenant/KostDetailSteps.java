@@ -172,7 +172,6 @@ public class KostDetailSteps {
         kostDetail.clickOnSeeAllKosRuleButton();
     }
 
-
     // ------------ Kost Map section -----------
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
