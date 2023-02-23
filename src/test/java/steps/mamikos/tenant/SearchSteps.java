@@ -207,4 +207,36 @@ public class SearchSteps {
     public void userSearchForRandomKeyword(String city) throws InterruptedException {
         search.searchArea(city);
     }
+
+    @Then("title listing that appear have location in {string}")
+    public void titleListingThatAppearHaveLocationIn(String cityArea) {
+        search.clickOnListPopularCity(cityArea);
+        Assert.assertTrue(search.getTitleListingResult(cityArea).contains(cityArea), "Title Listing Result is not equals with the keyword!");
+
+    }
+
+    @When("user click search area based on campus")
+    public void userClickSearchAreaBasedOnCampus() {
+        search.searchByCampus();
+
+    }
+
+    @Then("user verify popular campus")
+    public void userVerifyPopularCampus(DataTable table) {
+        var campus = table.asMaps(String.class, String.class);
+        for (Map<String, String> kampus : campus) {
+            Assert.assertTrue(search.listPopularCity(kampus.get("campus " + Mamikos.ENV)), kampus.get("campus " + Mamikos.ENV) + " is not displayed");
+        }
+    }
+
+//    @Then("user verify campus lists by cities")
+//    public void userVerifyCampusListsByCities(DataTable table) throws InterruptedException {
+//        List<List<String>> campusList = table.asLists(String.class);
+//        for(int i = 0; i < campusList.size() ; i++){
+//            search.clickOnCities(campusList.get(0).get(i));
+//            for (int j = i + 1; j < campusList.size() ; j++){
+//                Assert.assertTrue(search.getEachCampusFromCities(campusList.get(i).get(j)), "Campus not appear in dropdown.");
+//            }
+//        }
+//    }
 }

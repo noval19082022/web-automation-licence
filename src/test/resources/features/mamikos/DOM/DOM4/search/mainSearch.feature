@@ -111,3 +111,38 @@ Feature: Main Search
       | Kontrakan       |
       | Bekasi          |
       | UNDIP           |
+
+  @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
+  Scenario: [Dweb][Search] Check search result
+    Given user go to mamikos homepage
+    When user clicks Search
+    Then title listing that appear have location in "Malang"
+
+   @TEST_DOM-1864 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-list
+  Scenario: [Dweb][Search] Search Kos - Popular campus
+    Given user go to mamikos homepage
+    When user click search area based on campus
+    Then user verify popular campus
+      | campus stag      |campus prod      |
+      | UGM              |UGM              |
+      | UNPAD Jatinangor |UNPAD Jatinangor |
+      | STAN Jakarta     |STAN Jakarta     |
+      | UNAIR            |UNAIR            |
+      | UB               |UB               |
+      | UNY              |UNY              |
+      | UI               |UI               |
+      | UNDIP            |UNDIP            |
+      | ITB              |ITB              |
+      | UMY              |UMY              |
+
+#   @TEST_DOM-1863 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city
+#  Scenario: [Dweb][Search]Search Kos - Campus Lists By City
+#    Given user go to mamikos homepage
+#    When user click search area based on campus
+#    Then user verify campus lists by cities
+#      | Bali   | Jakarta Pusat       | Bandung           | Depok           | Jakarta       | Bogor |
+#      | ISI Denpasar      | UI Salemba         | UNPAD Jatinangor   | Gundar Margonda | STAN Jakarta  | IPB   |
+
+
+
+

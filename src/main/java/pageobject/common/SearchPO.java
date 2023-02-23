@@ -27,6 +27,7 @@ public class SearchPO {
 
 
 
+
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
         this.page = page;
@@ -274,4 +275,54 @@ public class SearchPO {
     public void suggestionAreaClick(){
         suggestionAreaOnTheSearchList.click();
     }
+
+    /**
+     * click area by kota popular
+     * @param area
+     */
+    public void clickOnListPopularCity(String area) {
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
+        popularCity.click();
+    }
+
+    /**
+     * verify area by kota popular
+     * @param listresult
+     * @return
+     */
+    public String getTitleListingResult(String listresult){
+        Locator listResult = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(listresult));
+        listResult.getByText(listresult);
+        return listresult;
+    }
+
+    /**
+     * search by campus
+     */
+    public void searchByCampus(){
+        searchKost.click();
+    }
+
+//    /**
+//     * Scroll down to 'City Name' and click 'City Name'
+//     * @param city City Name
+//     * @throws InterruptedException
+//     */
+//    public void clickOnCities(String kampus) throws InterruptedException {
+//        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
+//        playwright.waitTillLocatorIsVisible(areacity);
+//        playwright.clickOn(areacity);
+//    }
+//
+//    /**
+//     * Get List of each Campus Name on Cities Text
+//     * @param campus Station Name
+//     * @return
+//     */
+//    public boolean getEachCampusFromCities(String campus){
+//        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
+//       return playwright.waitTillLocatorIsVisible(listAreaCity);
+//
+//    }
+
 }
