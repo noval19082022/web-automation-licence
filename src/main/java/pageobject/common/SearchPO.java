@@ -281,7 +281,6 @@ public class SearchPO {
     }
 
     /**
-<<<<<<< HEAD
      * click area by kota popular
      * @param area
      */
@@ -308,27 +307,26 @@ public class SearchPO {
         searchKost.click();
     }
 
-//    /**
-//     * Scroll down to 'City Name' and click 'City Name'
-//     * @param city City Name
-//     * @throws InterruptedException
-//     */
-//    public void clickOnCities(String kampus) throws InterruptedException {
-//        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
-//        playwright.waitTillLocatorIsVisible(areacity);
-//        playwright.clickOn(areacity);
-//    }
-//
-//    /**
-//     * Get List of each Campus Name on Cities Text
-//     * @param campus Station Name
-//     * @return
-//     */
-//    public boolean getEachCampusFromCities(String campus){
-//        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
-//       return playwright.waitTillLocatorIsVisible(listAreaCity);
-//
-//    }
+    /**
+     * Scroll down to 'City Name' and click 'City Name'
+     * @throws InterruptedException
+     */
+    public void clickOnCities(String kampus) throws InterruptedException {
+        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
+        playwright.waitTillLocatorIsVisible(areacity);
+        playwright.clickOn(areacity);
+    }
+
+    /**
+     * Get List of each Campus Name on Cities Text
+     * @param campus Station Name
+     * @return
+     */
+    public boolean isEachCampusFromCities(String campus){
+        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
+       return playwright.waitTillLocatorIsVisible(listAreaCity);
+
+    }
 
 
      /** Select filter by gender
@@ -353,5 +351,15 @@ public class SearchPO {
             genderList.add(playwright.getText(a));
         }
         return genderList;
+    }
+
+    /**
+     * get area campus by click campus area
+     * @param area
+     */
+    public void getCampusArea(String area){
+        Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
+        popularCity.click();
+
     }
 }

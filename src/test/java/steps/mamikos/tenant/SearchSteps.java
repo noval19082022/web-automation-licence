@@ -126,6 +126,7 @@ public class SearchSteps {
     @Then("After user click City name, city name will expand and Area name listed below it.")
     public void after_user_click_city_name_city_name_will_expand_and_area_name_listed_below_it(DataTable table) throws InterruptedException {
         List<List<String>> listCity = table.asLists(String.class);
+        System.out.println("size()"+ listCity.size());
         for (int j=0; j<listCity.size(); j++) {
             search.userTapCity(listCity.get(0).get(j));
             for (int i=j+1; i<listCity.size(); i++) {
@@ -207,7 +208,7 @@ public class SearchSteps {
     public void userSearchForRandomKeyword(String city) throws InterruptedException {
         search.searchArea(city);
     }
-    
+
     @Then("title listing that appear have location in {string}")
     public void titleListingThatAppearHaveLocationIn(String cityArea) {
         search.clickOnListPopularCity(cityArea);
@@ -229,16 +230,16 @@ public class SearchSteps {
         }
     }
 
-//    @Then("user verify campus lists by cities")
-//    public void userVerifyCampusListsByCities(DataTable table) throws InterruptedException {
-//        List<List<String>> campusList = table.asLists(String.class);
-//        for(int i = 0; i < campusList.size() ; i++){
-//            search.clickOnCities(campusList.get(0).get(i));
-//            for (int j = i + 1; j < campusList.size() ; j++){
-//                Assert.assertTrue(search.getEachCampusFromCities(campusList.get(i).get(j)), "Campus not appear in dropdown.");
-//            }
-//        }
-//    }
+    @Then("user verify campus lists by cities")
+    public void userVerifyCampusListsByCities(DataTable table) throws InterruptedException {
+        List<List<String>> campusList = table.asLists(String.class);
+        for(int i = 0; i < campusList.size() ; i++){
+            search.clickOnCities(campusList.get(0).get(i));
+            for (int j = i + 1; j < campusList.size() ; j++){
+                Assert.assertTrue(search.isEachCampusFromCities(campusList.get(i).get(j)), "Campus not appear in dropdown.");
+            }
+        }
+    }
 
 
     @When("user sets gender filter {string}")
@@ -252,5 +253,19 @@ public class SearchSteps {
         for(String a: genderList){
             Assert.assertEquals(a, gender);
         }
+    }
+
+    @And("user click button kampus")
+    public void userClickButtonKampus(DataTable table) {
+        var campus = table.asMaps(String.class, String.class);
+        var popular = campus.get(0).get("campus " + Mamikos.ENV);
+        search.getCampusArea(popular);
+
+
+    }
+
+    @Then("title listing that appear have location campus in {string}")
+    public void titleListingThatAppearHaveLocationCampusIn(String campusArea) {
+        Assert.assertTrue(search.getTitleListingResult(campusArea).contains(campusArea), "Title Listing Result is not equals with the keyword!");
     }
 }

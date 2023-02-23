@@ -135,13 +135,27 @@ Feature: Main Search
       | ITB              |ITB              |
       | UMY              |UMY              |
 
-#   @TEST_DOM-1863 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city
-#  Scenario: [Dweb][Search]Search Kos - Campus Lists By City
-#    Given user go to mamikos homepage
-#    When user click search area based on campus
-#    Then user verify campus lists by cities
-#      | Bali   | Jakarta Pusat       | Bandung           | Depok           | Jakarta       | Bogor |
-#      | ISI Denpasar      | UI Salemba         | UNPAD Jatinangor   | Gundar Margonda | STAN Jakarta  | IPB   |
+  @TEST_DOM-1863 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city
+  Scenario: [Dweb][Search]Search Kos - Campus Lists By City
+    Given user go to mamikos homepage
+    When user click search area based on campus
+    Then user verify campus lists by cities
+      | Bali chevron-down | Jakarta Pusat chevron-down    |
+      | Undiksha          | UI Salemba                    |
+
+
+  @TEST_DOM-1856 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-result
+  Scenario: [Dweb][Search]Search Kos - Popular campus result
+    Given user go to mamikos homepage
+    When user click search area based on campus
+    And user click button kampus
+      | campus stag      |campus prod      |
+      | UNDIP            | UNDIP           |
+    Then title listing that appear have location campus in "Semarang"
+
+
+
+
 
 
 
