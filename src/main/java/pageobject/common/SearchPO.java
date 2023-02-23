@@ -27,7 +27,8 @@ public class SearchPO {
     Locator genderFilter;
     Locator saveFilterButton;
     Locator stasiunHalte;
-
+    Locator facilityFilter;
+    Locator kostRuleFilter;
 
 
 
@@ -51,6 +52,8 @@ public class SearchPO {
         this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
         this.saveFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         this.stasiunHalte = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Stasiun & Halte"));
+        this.facilityFilter = page.getByTestId("filter-facilities");
+        this.kostRuleFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Aturan Kos"));
 
 
 
@@ -230,9 +233,8 @@ public class SearchPO {
     }
 
     /** Click on Promo Ngebut filter button
-     * @throws InterruptedException
      */
-    public void clickPromoNgebutFilter() throws InterruptedException {
+    public void clickPromoNgebutFilter(){
         promoNgebutFilter.click();
     }
 
@@ -246,9 +248,8 @@ public class SearchPO {
 
     /**
      * Click on Kos Andalan filter button
-     * @throws InterruptedException
      */
-    public void clickKosAndalanFilter() throws InterruptedException {
+    public void clickKosAndalanFilter(){
         kosAndalanFilter.click();
     }
 
@@ -283,6 +284,7 @@ public class SearchPO {
     }
 
     /**
+<<<<<<< HEAD
      * click area by kota popular
      * @param area
      */
@@ -333,8 +335,11 @@ public class SearchPO {
 
      /** Select filter by gender
      * @throws InterruptedException
+=======
+     * Select filter by gender
+>>>>>>> 8d3fd00629dcb6b96d8098c7c282d05199f2619d
      */
-    public void selectFilterByGender(String gender) throws InterruptedException {
+    public void selectFilterByGender(String gender){
         genderFilter.click();
         page.getByTestId("filter-gender").getByText(""+ gender +"").click();
         saveFilterButton.click();
@@ -367,5 +372,52 @@ public class SearchPO {
 
     public void stasiunDanHalteClickOn(){
         playwright.clickOn(stasiunHalte);
+    /**
+     * Select filter by facility
+     * @throws InterruptedException
+     */
+    public void selectFilterByFacility(String facility){
+        facilityFilter.click();
+        page.locator("#modalSearchFacilities").getByText(""+ facility +"").click();
+        saveFilterButton.click();
+    }
+
+    /**
+     * Get the facility label in listing
+     * @return list of string gender
+     * @param facility is facility option (Wifi, Kasur, etc.)
+     */
+    public List<String> getListFacility(String facility){
+        List<String> facilityList = new ArrayList<>();
+        Locator facilityLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '"+ facility +"']");
+        List<Locator> elements = facilityLabel.all();
+        for(Locator a: elements){
+            facilityList.add(playwright.getText(a));
+        }
+        return facilityList;
+    }
+
+    /**
+     * Select filter by kos rule
+     */
+    public void selectFilterByKostRule(String rule){
+        kostRuleFilter.click();
+        page.getByTestId("filter-property-rules").getByText(""+ rule +"").click();
+        saveFilterButton.click();
+    }
+
+    /**
+     * Get the facility label in listing
+     * @return list of string gender
+     * @param rule is facility option (Wifi, Kasur, etc.)
+     */
+    public List<String> getListKostRule(String rule){
+        List<String> ruleList = new ArrayList<>();
+        Locator ruleLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '"+ rule +"']");
+        List<Locator> elements = ruleLabel.all();
+        for(Locator a: elements){
+            ruleList.add(playwright.getText(a));
+        }
+        return ruleList;
     }
 }
