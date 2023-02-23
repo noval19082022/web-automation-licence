@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"json:target/result/dom4/cucumber-report.json", "html:target/result/dom4/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@DOM4"
+        tags = "@localhost"
 )
 public class DOM4TestRunner extends BaseTestRunner {
 }

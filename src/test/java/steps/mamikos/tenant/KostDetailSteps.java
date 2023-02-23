@@ -160,6 +160,30 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isFacParkingDisplayed(), "Facility Parking Section is not displayed");
     }
 
+    // ------------ Kos Report Section -----------
+    @Then("user can see kos report section")
+    public void i_should_reached_kos_report_section() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isKosReportPresent(), "Kos report is not present");
+    }
+
+    @And("user want to report this kos")
+    public void i_click_button_report_kos() throws InterruptedException {
+        kostDetail.clickOnKosReportButton();
+    }
+
+    @And("user send text {string} in form kos report")
+    public void user_enter_text_in_form_kos_report(String textReport) throws InterruptedException {
+        kostDetail.clickOnCheckBox();
+        kostDetail.insertReportText (textReport);
+        kostDetail.clickOnSendReportButton();
+    }
+
+    @Then("user will see display pop up confirmation already have send report kos")
+    public void display_pop_up_confirmation_already_have_send_report_kos() {
+        Assert.assertTrue(kostDetail.isReportConfirmationPresent(), "Pop Up Confirmation send report is not present");
+    }
 
     // ------------ Kos rule -------------
     @Then("user can see kos rule list on detail kos")
