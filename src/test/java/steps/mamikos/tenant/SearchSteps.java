@@ -261,11 +261,15 @@ public class SearchSteps {
         search.getCampusArea(popular);
 
 
+
     }
 
     @Then("title listing that appear have location campus in {string}")
     public void titleListingThatAppearHaveLocationCampusIn(String campusArea) {
-        Assert.assertTrue(search.getTitleListingResult(campusArea).contains(campusArea), "Title Listing Result is not equals with the keyword!");
+        List<String> addressList = search.listKostAddress();
+        for (String a : addressList) {
+            Assert.assertTrue(a.toLowerCase().contains(campusArea.toLowerCase()), "Search result " + a + " not in correct location");
+        }
     }
 
     @And("user click kampus berdasarkan kota")
