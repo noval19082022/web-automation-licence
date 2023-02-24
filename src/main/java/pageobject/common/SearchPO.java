@@ -325,7 +325,7 @@ public class SearchPO {
     public void searchByCampus(){
         searchKost.click();
     }
-
+    
     /**
      * Scroll down to 'City Name' and click 'City Name'
      * @throws InterruptedException

@@ -139,10 +139,12 @@ Feature: Main Search
   Scenario: [Dweb][Search]Search Kos - Campus Lists By City
     Given user go to mamikos homepage
     When user click search area based on campus
-    Then user verify campus lists by cities
-      | Bali chevron-down | Jakarta Pusat chevron-down    |
-      | Undiksha          | UI Salemba                    |
-
+    Then After user click City name, city name will expand and Area name listed below it.
+      | Bandung chevron-down | Jakarta chevron-down | Makassar chevron-down      | Semarang chevron-down   | Yogyakarta chevron-down  |
+      | UNPAD Jatinangor     | STAN Jakarta	        | Unhas	                     | UNNES                   | UMY                      |
+      | IPDN Jatinangor	     | BINUS                | STIMIK Dipanegara	         | Politeknik PUPR	       | UGM                      |
+      | Universitas Telkom	 | UNTAR	            | UKI Paulus	             | UNDIP	               | UNY                      |
+      | UNISBA	             | trisakti     	    | Universitas Fajar          | UDINUS                  | UAJY                     |
 
   @TEST_DOM-1856 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-result
   Scenario: [Dweb][Search]Search Kos - Popular campus result
@@ -164,7 +166,6 @@ Feature: Main Search
       | city stag      | city prod    |
       | IPB            | IPB          |
     Then title listing that appear have location campus in "Bogor"
-
 
   @TEST_DOM-1854 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
   Scenario: [Dweb][Search]Search Kos - Popular station and stop
@@ -214,21 +215,3 @@ Feature: Main Search
       | city stag               | city prod            |
       | Stasiun Cimekar         | Stasiun Cimekar      |
    Then title listing that appear have location campus in "Bandung"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
