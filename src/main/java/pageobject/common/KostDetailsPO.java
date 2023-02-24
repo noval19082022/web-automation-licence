@@ -134,6 +134,19 @@ public class KostDetailsPO {
     private Locator nextRecommendation;
     private Locator firstKostCard;
 
+    //------------ Right Panel Section -----------------
+    private Locator totalPriceText;
+    private Locator bookingDateForm;
+    private Locator bookingDate;
+    private Locator bookingDurationForm;
+    private Locator dateTextBox;
+    private Locator bookingButton;
+    private Locator tomorrowDateLabel;
+    private Locator saturdayDateLabel;
+    private Locator sundayDateLabel;
+    private Locator datePickToday;
+
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -260,6 +273,18 @@ public class KostDetailsPO {
         this.mixGenderFilter = page.locator(".rc-overview > div:nth-child(2)").first();
         this.nextRecommendation = page.locator("//h3[@data-path='lbl_roomTitle']").nth(5);
         this.firstKostCard = page.locator("//h3[@data-path='lbl_roomTitle']").first();
+
+        //------------ Right Panel Section -----------------
+        this.totalPriceText = page.locator("#priceCard .rc-price__real");
+        this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
+        this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
+        this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
+        this.bookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
+        this.datePickToday = page.locator(".today");
+        this.tomorrowDateLabel = page.locator("span[class='cell day']").first();
+        this.saturdayDateLabel = page.locator("span[class='cell day weekend sat']").first();
+        this.sundayDateLabel = page.locator("span[class='cell day weekend sun']").first();
+        this.dateTextBox = page.locator("//input[@class='booking-input-checkin__input']");
     }
 
     /**
@@ -1100,6 +1125,115 @@ public class KostDetailsPO {
      */
     public boolean isMixGenderDisplay() {
         return playwright.waitTillLocatorIsVisible(mixGenderFilter, 5.0);
+    }
+
+    //------------ Right Panel Section -----------------
+
+    /**
+     * Check if total price is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isTotalPricePresent() {
+        return playwright.waitTillLocatorIsVisible(totalPriceText, 3.0);
+    }
+
+    /**
+     * Check if form booking date is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isFormBookingDatePresent() {
+        playwright.pageScrollUsingCoordinate(0, 500);
+        return playwright.waitTillLocatorIsVisible(bookingDateForm, 3.0);
+    }
+
+    /**
+     * Click on booking date form
+     */
+    public void clickOnBookingDate() {
+        playwright.pageScrollUntilElementIsVisible(seeAllPhotoButton);
+        playwright.waitTillLocatorIsVisible(bookingDateForm, 5.0);
+        playwright.clickOn(bookingDateForm);
+    }
+
+    /**
+     * Get booking date description inside booking date
+     *
+     * @return string data type
+     */
+    public String getDescBookingDateText(String desc) {
+        Locator description = page.locator("#priceCard").getByText(desc).first();
+        playwright.pageScrollUntilElementIsVisible(description);
+        return playwright.getText(description).toLowerCase();
+    }
+
+    /**
+     * Check alert is present present / not
+     *
+     * @return true / false
+     */
+    public boolean isAlertBookingDateTextPresent(String alert) {
+        return page.getByText(alert).first().isVisible();
+    }
+
+    /**
+     * Check if booking date is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isDateBookingPresent() {
+        return playwright.waitTillLocatorIsVisible(bookingDate, 3.0);
+    }
+
+    /**
+     * Check if booking duration form is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isFormBookingDurationPresent() {
+        return playwright.waitTillLocatorIsVisible(bookingDurationForm, 3.0);
+    }
+
+    /**
+     * Check if booking duration is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isBookingButtonPresent() {
+        return bookingButton.isVisible();
+    }
+
+    /**
+     * Select Starting Date of Boarding if exist
+     *
+     * @param date date e.g. 15,20 etc
+     */
+    public void selectDateForStartBoarding(String date) {
+        if (playwright.waitTillLocatorIsVisible(dateTextBox, 5.0)) {
+            playwright.clickOn(dateTextBox);
+            if (date.equalsIgnoreCase("today")) {
+                playwright.waitTillLocatorIsVisible(datePickToday, 10.0);
+                playwright.clickOn(datePickToday);
+            } else {
+                if (playwright.waitTillLocatorIsVisible(tomorrowDateLabel, 3.0)) {
+                    tomorrowDateLabel.click();
+                } else if (playwright.waitTillLocatorIsVisible(saturdayDateLabel, 3.0)) {
+                    saturdayDateLabel.click();
+                } else {
+                    sundayDateLabel.click();
+                }
+            }
+        }
+    }
+
+    /**
+     * Select Rent Type of Booking
+     *
+     * @param type type of rent
+     */
+    public void selectRentType(String type) {
+        playwright.clickOn(page.getByText(type));
     }
 
     //------------ Favorite kost section ----------------
