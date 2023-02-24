@@ -325,9 +325,7 @@ public class SearchPO {
     public void searchByCampus(){
         searchKost.click();
     }
-<<<<<<< HEAD
-=======
-
+    
     /**
      * Scroll down to 'City Name' and click 'City Name'
      * @throws InterruptedException
@@ -349,7 +347,6 @@ public class SearchPO {
 
     }
 
->>>>>>> 804b4ddf5254e2076f536b7f608cbce2658264a6
      /** Select filter by gender
      * @throws InterruptedException
      * Select filter by gender
