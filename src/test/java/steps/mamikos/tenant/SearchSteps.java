@@ -241,7 +241,6 @@ public class SearchSteps {
         }
     }
 
-
     @When("user sets gender filter {string}")
     public void userSetsGenderFilter(String gender) throws InterruptedException {
         search.selectFilterByGender(gender);
@@ -282,30 +281,49 @@ public class SearchSteps {
         search.stasiunDanHalteClickOn();
     }
 
-            @When("user sets facility filter {string}")
-            public void userSetsFacilityFilter (String facility){
-            search.selectFilterByFacility(facility);
-        }
+    @When("user sets facility filter {string}")
+    public void userSetsFacilityFilter (String facility){
+    search.selectFilterByFacility(facility);
+    }
 
-            @Then("user validates the result kos facility is {string}")
-            public void userValidatesTheResultKosFacilityIs (String facility){
-            List<String> facilityList = search.getListFacility(facility);
-            for (String a : facilityList) {
-                Assert.assertTrue(a.contains(facility), "Search result " + a + " not in correct facility");
-            }
+    @Then("user validates the result kos facility is {string}")
+    public void userValidatesTheResultKosFacilityIs (String facility){
+        List<String> facilityList = search.getListFacility(facility);
+        for (String a : facilityList) {
+            Assert.assertTrue(a.contains(facility), "Search result " + a + " not in correct facility");
         }
+    }
 
-            @And("user sets top kos rule filter {string}")
-            public void userSetsTopKosRuleFilter (String rule){
-            search.selectFilterByKostRule(rule);
-        }
+    @And("user sets top kos rule filter {string}")
+    public void userSetsTopKosRuleFilter (String rule){
+    search.selectFilterByKostRule(rule);
+    }
 
-            @Then("user validates the result kos rule is {string}")
-            public void userValidatesTheResultKosRuleIs (String rule){
-            List<String> ruleList = search.getListKostRule(rule);
-            for (String a : ruleList) {
-                Assert.assertTrue(a.contains(rule), "Search result " + a + " not in correct facility");
-            }
+    @Then("user validates the result kos rule is {string}")
+    public void userValidatesTheResultKosRuleIs (String rule){
+        List<String> ruleList = search.getListKostRule(rule);
+        for (String a : ruleList) {
+            Assert.assertTrue(a.contains(rule), "Search result " + a + " not in correct facility");
         }
+    }
 
-        }
+    @And("user sets Kos Andalan filter")
+    public void userSetsKosAndalanFilter() {
+        search.activateKosAndalanFilter();
+    }
+
+    @Then("user validated the result kos have Kos Andalan label")
+    public void userValidatedTheResultKosHaveKosAndalanLabel() {
+        Assert.assertTrue(search.isKosAndalanPropertyDisplayed(), "Kos Andalan property is not present");
+    }
+
+    @And("user sets Promo Ngebut filter")
+    public void userSetsPromoNgebutFilter() {
+        search.activatePromoNgebutFilter();
+    }
+
+    @Then("user validated the result kos have Promo Ngebut label")
+    public void userValidatedTheResultKosHavePromoNgebutLabel() {
+        Assert.assertTrue(search.isPromoNgebutPropertyDisplayed(), "Promo Ngebut property is not present");
+    }
+}
