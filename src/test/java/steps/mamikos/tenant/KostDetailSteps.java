@@ -225,13 +225,77 @@ public class KostDetailSteps {
     @And("user send text {string} in form kos report")
     public void user_enter_text_in_form_kos_report(String textReport) throws InterruptedException {
         kostDetail.clickOnCheckBox();
-        kostDetail.insertReportText (textReport);
+        kostDetail.insertReportText(textReport);
         kostDetail.clickOnSendReportButton();
     }
 
     @Then("user will see display pop up confirmation already have send report kos")
     public void display_pop_up_confirmation_already_have_send_report_kos() {
         Assert.assertTrue(kostDetail.isReportConfirmationPresent(), "Pop Up Confirmation send report is not present");
+    }
+
+    //------------ Kos Owner Information Section ------------------
+    @Then("user can see owner information section")
+    public void i_should_reached_owner_lower_section() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        kostDetail.isOwnerSectionPresent();
+        Assert.assertTrue(kostDetail.isOwnerNameDisplayed(), "Owner name not present!");
+        Assert.assertTrue(kostDetail.isOwnerPictureDisplayed(), "Owner picture not present!");
+        Assert.assertTrue(kostDetail.isOwnerStatusDisplayed(), "Owner status not present!");
+        Assert.assertTrue(kostDetail.isNumberTransactionDisplayed(), "Number of transaction not present!");
+        Assert.assertTrue(kostDetail.isBookingProcessedDisplayed(), "Booking processed not present!");
+        Assert.assertTrue(kostDetail.isBookingChanceDisplayed(), "Booking chance not present!");
+    }
+
+    @And("user want to see more detail owner information section")
+    public void i_validate_the_elements_of_owner_section() {
+        kostDetail.clickStatisticsDetailButton();
+        Assert.assertTrue(kostDetail.isStatisticsModalDisplayed(), "Statistics modal not present!");
+        kostDetail.closeStatisticsModal();
+    }
+
+    //------------ Check Gallery Photo Section ------------------
+    @And("user want to display detail gallery")
+    public void i_can_see_lihat_semua_foto() {
+        Assert.assertTrue(kostDetail.isSeeAllPhotoButtonPresent(), "Button Lihat semua foto is not present");
+        kostDetail.clickOnSeeAllButton();
+        Assert.assertTrue(kostDetail.isCloseButtonPresent(), "Button close is not present");
+        Assert.assertTrue(kostDetail.isBuildingPhotosPresent(), "Foto Bangunan is not present");
+        Assert.assertTrue(kostDetail.isRoomPhotosPresent(), "Foto Kamar is not present");
+        Assert.assertTrue(kostDetail.isBathroomPhotosPresent(), "Foto Kamar Mandi is not present");
+        Assert.assertTrue(kostDetail.isOthersPhotosPresent(), "Foto Lainnya is not present");
+        kostDetail.clickOnDetailPhotoButton();
+        kostDetail.clickOnArrowPhotoGalleryNextButton();
+    }
+
+    //-------------- Kost Recomendation Section--------------
+    @Then("user want to see the other kost on recommendation section")
+    public void i_can_see_kost_recommendation() {
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isLihatSemuaKosButtonPresent(), "Button Lihat semua is not present");
+        Assert.assertTrue(kostDetail.isArrowRecommendationButtonPresent(), "arrow button is not present");
+        Assert.assertTrue(kostDetail.isListPhotoRecommendationKosPresent(), "Foto kos recommendation is not present");
+    }
+
+    @And("user see description recomendation kos {string}")
+    public void user_see_description_recomendation_kos(String text) {
+        Assert.assertEquals(kostDetail.getRecommendationKosLabel(), text, "Recommendation kos label in detail is not equals!");
+    }
+
+    @And("user want to explore kost recomendation section")
+    public void user_click_on_next_button_and_display_next_recommendation_kos() {
+        kostDetail.clickOnArrowRecommendationNextButton();
+        Assert.assertFalse(kostDetail.isFirstKostCardRecommendationPresent(), "First Kost Card still display");
+        kostDetail.clickOnArrowRecommendationPreviousButton();
+        Assert.assertFalse(kostDetail.isNextRecommendationElementPresent(), "Next Kost Card still display");
+        this.kostDetail = kostDetail.clickOnSeeAllRecommendation();
+    }
+
+    @And("user see listing kos recommendation arround kos with detail {string} and filter by mix gender")
+    public void user_clicks_on_previous_button_and_display_first_page_recomendation_kos(String text) {
+        Assert.assertTrue(kostDetail.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
+        Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
     }
 
     //------------ Favorite kost section ----------------
