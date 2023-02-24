@@ -230,17 +230,6 @@ public class SearchSteps {
         }
     }
 
-    @Then("user verify campus lists by cities")
-    public void userVerifyCampusListsByCities(DataTable table) throws InterruptedException {
-        List<List<String>> campusList = table.asLists(String.class);
-        for(int i = 0; i < campusList.size() ; i++){
-            search.clickOnCities(campusList.get(0).get(i));
-            for (int j = i + 1; j < campusList.size() ; j++){
-                Assert.assertTrue(search.isEachCampusFromCities(campusList.get(i).get(j)), "Campus not appear in dropdown.");
-            }
-        }
-    }
-
     @When("user sets gender filter {string}")
     public void userSetsGenderFilter(String gender) throws InterruptedException {
         search.selectFilterByGender(gender);

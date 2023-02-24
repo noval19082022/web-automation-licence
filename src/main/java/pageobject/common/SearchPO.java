@@ -317,29 +317,6 @@ public class SearchPO {
     public void searchByCampus(){
         searchKost.click();
     }
-
-    /**
-     * Scroll down to 'City Name' and click 'City Name'
-     * @throws InterruptedException
-     */
-    public void clickOnCities(String kampus) throws InterruptedException {
-        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
-        playwright.waitTillLocatorIsVisible(areacity);
-        playwright.clickOn(areacity);
-    }
-
-    /**
-     * Get List of each Campus Name on Cities Text
-     * @param campus Station Name
-     * @return
-     */
-    public boolean isEachCampusFromCities(String campus){
-        Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
-       return playwright.waitTillLocatorIsVisible(listAreaCity);
-
-    }
-
-
      /** Select filter by gender
      * @throws InterruptedException
 =======
