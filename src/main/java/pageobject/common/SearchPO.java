@@ -33,6 +33,10 @@ public class SearchPO {
     Locator kosAndalanLabel;
     Locator promoNgebutToggle;
     Locator promoNgebutLabel;
+    Locator rangeTimeFilter;
+    Locator sortingButton;
+    Locator firstPriceListing;
+    Locator lastPriceListing;
 
 
 
@@ -62,6 +66,10 @@ public class SearchPO {
         this.stasiunHalte = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Stasiun & Halte"));
         this.facilityFilter = page.getByTestId("filter-facilities");
         this.kostRuleFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Aturan Kos"));
+        this.rangeTimeFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bulanan"));
+        this.sortingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("sorting Rekomendasi"));
+        this.firstPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[1]");
+        this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
 
 
 
@@ -339,12 +347,9 @@ public class SearchPO {
 
     }
 
-
      /** Select filter by gender
      * @throws InterruptedException
-=======
      * Select filter by gender
->>>>>>> 8d3fd00629dcb6b96d8098c7c282d05199f2619d
      */
     public void selectFilterByGender(String gender){
         genderFilter.click();
@@ -466,5 +471,55 @@ public class SearchPO {
      */
     public boolean isPromoNgebutPropertyDisplayed() {
         return promoNgebutLabel.isVisible();
+    }
+
+    /** Select filter by range time
+     */
+    public void selectFilterByRangeTime(String time){
+        rangeTimeFilter.click();
+        page.getByText(""+time+"").click();
+        saveFilterButton.click();
+    }
+
+    /**
+     * Get the range time label in listing
+     * @return list of string range time
+     * @param time is range time option
+     */
+    public List<String> getListRangeTime(String time){
+        List<String> timeList = new ArrayList<>();
+        Locator timeLabel = page.locator("//div[@data-testid = 'kostRoomCard']//span[contains(text() , '"+ time +"')]");
+        List<Locator> elements = timeLabel.all();
+        for(Locator a: elements){
+            timeList.add(playwright.getText(a));
+        }
+        return timeList;
+    }
+
+    /** Select sorting
+     */
+    public void selectSorting(String sorting){
+        sortingButton.click();
+        page.getByText(""+sorting+"").click();
+    }
+
+    /**
+     * Get first property price in listing property page
+     * @return int price
+     */
+    public int getFirstPricePropertyPageListing() {
+        playwright.waitTillLocatorIsVisible(firstPriceListing, 3.0);
+        String first = playwright.getText(firstPriceListing).replaceAll("[Rp.]", "");
+        return Integer.parseInt(first);
+    }
+
+    /**
+     * Get last property price in listing property page
+     * @return int price
+     */
+    public int getLastPricePropertyPageListing() {
+        playwright.waitTillLocatorIsVisible(lastPriceListing, 3.0);
+        String last = playwright.getText(lastPriceListing).replaceAll("[Rp.]", "");
+        return Integer.parseInt(last);
     }
 }
