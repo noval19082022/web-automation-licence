@@ -313,7 +313,7 @@ public class PlaywrightHelpers {
      * Scroll Down Helper until locator is visible (per 100 pixel)
      */
     public void pageScrollUntilElementIsVisible(Locator locator) {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             page.evaluate("window.scrollBy(0,100)");
             if (locator.isVisible()) {
                 break;

@@ -8,7 +8,7 @@ Feature: Kost detail page 2
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe B | Kos DC BAR Automation Tipe B |
     Then user can see kos report section
-    #repor action
+    #report action
     When user want to report this kos
     Then user will see login pop up
 
@@ -22,49 +22,40 @@ Feature: Kost detail page 2
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user can see kos report section
-    #repor action
+    #report action
     When user want to report this kos
     And user send text "try to report this kos for testing" in form kos report
     Then user will see display pop up confirmation already have send report kos
 
-#  @TEST_DOM-1884 @Automated @DOM4 @Web @discovery-platform @kost-details @owner-lower-section
-#  Scenario: [Dweb][Kost Detail] Check Owner lower section
-#    Given user navigates to "mamikos /"
-#    When user clicks search bar
-#    And I search property with name "DC A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    Then I should reached owner lower section
-#    And I validate the elements of owner section
-#    When I click on about statistics button
-#    And I see statistics details
-#    Then I close statistics modal
-#
-#  @TEST_DOM-1883 @Automated @DOM4 @Web @discovery-platform @gallery @kost-details @owner-lower-section
-#  Scenario: [Dweb][Kost Detail] Check Detail Gallery Photo
-#    Given user navigates to "mamikos /"
-#    When user clicks search bar
-#    And I search property with name "DC A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    And I can see Lihat semua foto
-#    And user click button lihat semua foto
-#    Then display detail gallery
-#    And user click foto bangunan
-#    And user swipe the image of detail gallery photo
-#
-#  @TEST_DOM-1885 @Automated @DOM4 @Web @discovery-platform @kost-details @recommendation
-#  Scenario: [Dweb][Kost Detail] Check Recommendation Kos
-#    Given user navigates to "mamikos /"
-#    When user clicks search bar
-#    And I search property with name "PLM A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    Then I can see Kost Recommendation
-#    And user see description recomendation kos "Kamu mungkin menyukainya"
-#    And user click on next button and display next recommendation kos
-#    And user clicks on previous button and display first page recomendation kos
-#    And user click button lihat semua kos recommendation
-#    Then user see listing kos recommendation arround kos with detail "Kos di sekitar"
-#    And I see filter mix gender
-#
+  @TEST_DOM-1884 @Automated @DOM4 @Web @discovery-platform @kost-details @owner-lower-section
+  Scenario: [Dweb][Kost Detail] Check Owner lower section
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    And user can see owner information section
+    Then user want to see more detail owner information section
+
+  @TEST_DOM-1883 @Automated @DOM4 @Web @discovery-platform @gallery @kost-details @owner-lower-section
+  Scenario: [Dweb][Kost Detail] Check Detail Gallery Photo
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to display detail gallery
+
+  @TEST_DOM-1885 @Automated @DOM4 @Web @discovery-platform @kost-details @recommendation
+  Scenario: [Dweb][Kost Detail] Check Recommendation Kos
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    Then user want to see the other kost on recommendation section
+    #explore kost recomendation
+    When user see description recomendation kos "Kamu mungkin menyukainya"
+    And user want to explore kost recomendation section
+    Then user see listing kos recommendation arround kos with detail "Kos di sekitar" and filter by mix gender
+
 #  @TEST_DOM-1876 @Automated @DOM4 @Web @discovery-platform @kost-details @property-price
 #  Scenario: [Dweb][Kost Detail] Check right panel, duration and price
 #    Given user navigates to "mamikos /"

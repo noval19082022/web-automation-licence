@@ -231,7 +231,7 @@ public class SearchSteps {
     }
 
     @When("user sets gender filter {string}")
-    public void userSetsGenderFilter(String gender) throws InterruptedException {
+    public void userSetsGenderFilter(String gender) {
         search.selectFilterByGender(gender);
     }
 
@@ -318,5 +318,33 @@ public class SearchSteps {
     @Then("user validated the result kos have Promo Ngebut label")
     public void userValidatedTheResultKosHavePromoNgebutLabel() {
         Assert.assertTrue(search.isPromoNgebutPropertyDisplayed(), "Promo Ngebut property is not present");
+    }
+
+    @When("user set range time filter {string}")
+    public void userSetRangeTimeFilter(String time) {
+        search.selectFilterByRangeTime(time);
+    }
+
+    @Then("user validates the result range time is {string}")
+    public void userValidatesTheResultRangeTimeIs(String time) {
+        List<String> timeList = search.getListFacility(time);
+        for (String a : timeList) {
+            Assert.assertTrue(a.contains(time), "Search result " + a + " not in correct range time");
+        }
+    }
+
+    @When("user selects sorting {string} in kost listing")
+    public void userSelectsSortingInKostListing(String sort) {
+        search.selectSorting(sort);
+    }
+
+    @Then("user validates the price of first listing is more expensive than the last listing in listing property page")
+    public void userValidatesThePriceOfFirstListingIsMoreExpensiveThanTheLastListingInListingPropertyPage() {
+        Assert.assertTrue(search.getFirstPricePropertyPageListing() > search.getLastPricePropertyPageListing(), "First number is cheaper than last number!");
+    }
+
+    @Then("user validates the price of first listing is cheaper than the last listing in listing property page")
+    public void userValidatesThePriceOfFirstListingIsCheaperThanTheLastListingInListingPropertyPage() {
+        Assert.assertTrue(search.getFirstPricePropertyPageListing() < search.getLastPricePropertyPageListing(), "First number is not cheaper than last number!");
     }
 }
