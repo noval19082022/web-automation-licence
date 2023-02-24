@@ -48,3 +48,22 @@ Feature: Filter and Sorting
     Given user navigates to ugm kost listing
     And user sets Promo Ngebut filter
     Then user validated the result kos have Promo Ngebut label
+
+  Scenario Outline: [Dweb][Listing Kos][Filter]Check time range filter functionality
+    Given user navigates to ugm kost listing
+    When user set range time filter "<timeFilter>"
+    Then user validates the result range time is "<time>"
+    Examples:
+      | timeFilter     | time    |
+      | Mingguan       | minggu  |
+      | Per 3 Bulan    | 3 bulan |
+
+  Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termahal"
+    Given user navigates to ugm kost listing
+    When user selects sorting "Harga termahal" in kost listing
+    Then user validates the price of first listing is more expensive than the last listing in listing property page
+
+  Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termurah"
+    Given user navigates to ugm kost listing
+    When user selects sorting "Harga termurah" in kost listing
+    Then user validates the price of first listing is cheaper than the last listing in listing property page
