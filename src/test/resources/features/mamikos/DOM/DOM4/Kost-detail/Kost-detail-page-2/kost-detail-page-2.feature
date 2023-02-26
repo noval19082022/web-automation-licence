@@ -1,4 +1,4 @@
-@localhost
+#@localhost
 Feature: Kost detail page 2
 
   @TEST_DOM-1875 @Automated @DOM4 @Web @discovery-platform @kost-details @report-section
@@ -63,74 +63,67 @@ Feature: Kost detail page 2
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user sees total price property
-    #
+    #user check more detail about booking date
     When user sees form booking date
     Then user validates description "Bisa di hari H setelah pengajuan sewa."
-    And user validates description "2 bulan setelah pengajuan sewa."
-    And user sees date
-    And user sees alert message "Pastikan tanggal yang kamu masukkan benar"
-    #
+    * user validates description "2 bulan setelah pengajuan sewa."
+    * user sees date and alert message "Pastikan tanggal yang kamu masukkan benar"
+    #user try too book this room
     When user sees form booking duration
     And user select date "tomorrow" and rent type "Per bulan"
     Then user sees booking button
 
-  @TEST_DOM-1877 @Automated @DOM4 @Web @apik-badgekos @discovery-platform @kost-details
+  @TEST_DOM-1877 @Automated @DOM4 @Web @apik-badgekos @discovery-platform @kost-details @localhost
   Scenario: [Dweb][Kost Detail] Check APIK Badge Kos
-    Given user navigates to "mamikos /"
-    When user clicks search bar
-    And user search for Kost with name "chatKostName11" and selects matching result
-    And I should reached kos detail page
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                       | kost name prod                               |
+      | Kost Apik Mars White Halmahera Utara | Kos Regress Web 127 Tipe 27 Abepura Jayapura |
     Then user can see apik badge kos
 
-  @TEST_DOM-1880 @Automated @DOM4 @Web @discovery-platform @kost-details @singgahsini-badgekos
+  @TEST_DOM-1880 @Automated @DOM4 @Web @discovery-platform @kost-details @singgahsini-badgekos @localhost
   Scenario: [Dweb][Kost Detail] Check Singgahsini Badge Kos
-    Given user navigates to "mamikos /"
-    When user clicks search bar
-    And user search for Kost with name "chatKostName12" and selects matching result
-    And I should reached kos detail page
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag   | kost name prod   |
+      | Kos Laris Kretek | Kos Laris Kretek |
     Then user can see singgahsini badge kos
 
-  @TEST_DOM-1879 @Automated @DOM4 @Web @discovery-platform @kost-details @owner-badges
+  @TEST_DOM-1879 @Automated @DOM4 @Web @discovery-platform @kost-details @owner-badges @localhost
   Scenario:  [Dweb][Kost Detail] Check Owner badges section
-    Given user navigates to "mamikos /"
-    When user clicks search bar
-    And I search property with name "DC A" and select matching result to go to kos details page
-    And I should reached kos detail page
-    Then I should reached owner badges section
-    And I see owner statement
-    And I see Owner name, last online status,  Owner Profile picture, Number of success booking transaction
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user reached owner badges section
 
-#  @TEST_DOM-1881 @Automated @DOM4 @Web @discovery-platform @kost-benefit @kost-details
-#  Scenario: [Dweb][Kost Detail] Check Kost Benefit section
-#    Given user navigates to "mamikos /"
-#    When user clicks search bar
-#    And I search property with name "DC A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    And user should reached benefit section
-#    Then user see benefit title, benefit description
-#
-#  @TEST_DOM-3811 @Automated @DOM4 @Web @discovery-platform @review-kost
-#  Scenario: [Dweb][Kost Detail] Check Tenant Review section
-#    Given user navigates to "mamikos /"
-#    And user clicks on Enter button
-#    When user login in as Tenant via phone number as "DC Automation"
-#    And user clicks search bar
-#    And I search property with name "DC A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    And I should reached owner lower section
-#    Then user see review kos detail page section
-#    And user validate the elements of review section
-#
-#  @TEST_DOM-3812 @Automated @DOM4 @Web @discovery-platform @review-kost
-#  Scenario: [Dweb][Kost Detail] Click see all Tenant Review
-#    Given user navigates to "mamikos /"
-#    And user clicks on Enter button
-#    When user login in as Tenant via phone number as "DC Automation"
-#    And user clicks search bar
-#    And I search property with name "DC A" and select matching result to go to kos details page
-#    And I should reached kos detail page
-#    And I should reached owner lower section
-#    And user see review kos detail page section
-#    And user click on see all review
-#    Then user validate the elements of review modal
-#    And user close review modal
+  @TEST_DOM-1881 @Automated @DOM4 @Web @discovery-platform @kost-benefit @kost-details @localhost
+  Scenario: [Dweb][Kost Detail] Check Kost Benefit section
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user see benefit title, benefit description
+
+  @TEST_DOM-3811 @Automated @DOM4 @Web @discovery-platform @review-kost @localhost
+  Scenario: [Dweb][Kost Detail] Check Tenant Review section
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user see review kos detail page section
+
+  @TEST_DOM-3812 @Automated @DOM4 @Web @discovery-platform @review-kost @localhost
+  Scenario: [Dweb][Kost Detail] Click see all Tenant Review
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    And user see review kos detail page section
+    Then user want to see all review
