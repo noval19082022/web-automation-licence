@@ -1383,7 +1383,6 @@ public class KostDetailsPO {
         playwright.clickOn(seeAllReviewBtn);
     }
 
-
     /**
      * Check overview review modal is displayed
      *
