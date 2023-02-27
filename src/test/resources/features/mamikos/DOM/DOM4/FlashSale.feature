@@ -5,6 +5,7 @@ Feature: Flash Sale
     Given user go to mamikos homepage
     Then user see flash sale section
 
-  Scenario: User can visit flash sale landing page
-    Given user navigates to mamikos-promo-kost
+  @fiashsaledom
+  Scenario: User can visit promo ngebut landing page
+    Given user navigates to promo ngebut landing page
     Then user can see flash sale landing area

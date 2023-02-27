@@ -8,59 +8,69 @@ import utilities.PlaywrightHelpers;
 public class PromoNgebutLandingAreaPO {
     private Page page;
     private PlaywrightHelpers playwright;
-    private Locator promoHeadingText;
-    private Locator promoSubtitleText;
-    private Locator filterCityText;
-    private Locator filterCityCmb;
-    private Locator kostList;
+    private Locator countdownTimer;
+    private Locator promoNgebutHeading;
+    private Locator btnCariKostPromo;
+    private Locator imgFlashSaleBanner;
+    private Locator btnCariSekarang;
+    private Locator faqHeading;
 
     public PromoNgebutLandingAreaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        promoHeadingText = page.getByText("Promo dan Event dari Mamikos");
-        promoSubtitleText = page.getByText("Promo dari Kost");
-        filterCityText = page.getByText("Filter dari Kota");
-        filterCityCmb = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Filter dari Kota"));
-        kostList = page.locator(".row");
+        promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut akan berakhir dalam"));
+        countdownTimer = page.locator(".countdown-section");
+        btnCariKostPromo = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Kos Promo Ngebut"));
+        imgFlashSaleBanner = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("flash sale banner"));
+        btnCariSekarang = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Sekarang"));
+        faqHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Frequently asked questions"));
     }
 
     /**
-     * Check the visibility of promo heading text
+     * Check the visibility of promo ngebut heading
      * @return boolean
      */
-    public boolean isPromoHeadingTextVisible() {
-        return playwright.waitTillLocatorIsVisible(promoHeadingText);
+    public boolean isPromoNgebutHeadingVisible() {
+        return playwright.waitTillLocatorIsVisible(promoNgebutHeading);
     }
 
     /**
-     * Check the visibility of promo subtitle text
+     * Check the visibility of count down timer
      * @return boolean
      */
-    public boolean isPromoSubtitleTextVisible() {
-        return playwright.waitTillLocatorIsVisible(promoSubtitleText);
+    public boolean isCountDownTimerVisible() {
+        return playwright.waitTillLocatorIsVisible(countdownTimer);
     }
 
     /**
-     * Check the visibility of city filter
+     * Check the visibility of button cari kost
      * @return boolean
      */
-    public boolean isFilterCityTextVisible() {
-        return playwright.waitTillLocatorIsVisible(filterCityText);
+    public boolean isBtnCariKostPromoVisible() {
+        return playwright.waitTillLocatorIsVisible(btnCariKostPromo);
     }
 
     /**
-     * Get filter combo box value
-     * @return String data type
-     */
-    public String getFilterComboBoxValue() {
-        return filterCityCmb.inputValue();
-    }
-
-    /**
-     * Check the visibility of kost list
+     * Check the visibility of flash sale banner visible
      * @return boolean
      */
-    public boolean isKostListVisible() {
-        return playwright.waitTillLocatorIsVisible(kostList);
+    public boolean isFlashSaleBannerVisible() {
+        return playwright.waitTillLocatorIsVisible(imgFlashSaleBanner);
+    }
+
+    /**
+     * Check the visibility of button cari sekarang
+     * @return boolean
+     */
+    public boolean isButtonCariSekarangVisible() {
+        return playwright.waitTillLocatorIsVisible(btnCariSekarang);
+    }
+
+    /**
+     * Check the visibility of faq heading
+     * @return boolean
+     */
+    public boolean isFaqHeadingVisible() {
+        return playwright.waitTillLocatorIsVisible(faqHeading);
     }
 }
