@@ -4,6 +4,7 @@ import utilities.JavaHelpers;
 
 public class Mamikos {
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
+
     public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
     public static final String URL = JavaHelpers.getPropertyValue(MAMIKOS, "mainUrl_" + ENV);
     public static final String OWNER_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownerUrl_" + ENV);
@@ -22,4 +23,5 @@ public class Mamikos {
     public static final String HISTORY= JavaHelpers.getPropertyValue(MAMIKOS, "history");
     public static final String UGM_KOST_LIST= JavaHelpers.getPropertyValue(MAMIKOS, "ugmKostList");
     public static final String PROMO_NGEBUT = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebut");
+    public static final String PROMO_NGEBUT_AREA = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutArea");;
 }
