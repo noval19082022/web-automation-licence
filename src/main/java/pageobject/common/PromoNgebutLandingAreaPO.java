@@ -26,26 +26,50 @@ public class PromoNgebutLandingAreaPO {
         faqHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Frequently asked questions"));
     }
 
+    /**
+     * Check the visibility of promo ngebut heading
+     * @return boolean
+     */
     public boolean isPromoNgebutHeadingVisible() {
         return playwright.waitTillLocatorIsVisible(promoNgebutHeading);
     }
 
+    /**
+     * Check the visibility of count down timer
+     * @return boolean
+     */
     public boolean isCountDownTimerVisible() {
         return playwright.waitTillLocatorIsVisible(countdownTimer);
     }
 
+    /**
+     * Check the visibility of button cari kost
+     * @return boolean
+     */
     public boolean isBtnCariKostPromoVisible() {
         return playwright.waitTillLocatorIsVisible(btnCariKostPromo);
     }
 
+    /**
+     * Check the visibility of flash sale banner visible
+     * @return boolean
+     */
     public boolean isFlashSaleBannerVisible() {
         return playwright.waitTillLocatorIsVisible(imgFlashSaleBanner);
     }
 
+    /**
+     * Check the visibility of button cari sekarang
+     * @return boolean
+     */
     public boolean isButtonCariSekarangVisible() {
         return playwright.waitTillLocatorIsVisible(btnCariSekarang);
     }
 
+    /**
+     * Check the visibility of faq heading
+     * @return boolean
+     */
     public boolean isFaqHeadingVisible() {
         return playwright.waitTillLocatorIsVisible(faqHeading);
     }
