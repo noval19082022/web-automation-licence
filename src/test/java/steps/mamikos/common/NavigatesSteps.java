@@ -129,5 +129,9 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.HISTORY, 30000.0, LoadState.LOAD);
     }
 
-
+    @Given("user navigates to promo ngebut landing page")
+    public void userNavigatesToPromoNgebutLandingPage() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_NGEBUT, 30000.0, LoadState.LOAD);
+    }
 }

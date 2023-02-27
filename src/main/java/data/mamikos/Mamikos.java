@@ -21,6 +21,5 @@ public class Mamikos {
     public static final String PROMO_KOST = JavaHelpers.getPropertyValue(MAMIKOS,"promoKost");
     public static final String HISTORY= JavaHelpers.getPropertyValue(MAMIKOS, "history");
     public static final String UGM_KOST_LIST= JavaHelpers.getPropertyValue(MAMIKOS, "ugmKostList");
-
-
+    public static final String PROMO_NGEBUT = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebut");
 }
