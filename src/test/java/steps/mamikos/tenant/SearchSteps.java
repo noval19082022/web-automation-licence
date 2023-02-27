@@ -114,7 +114,7 @@ public class SearchSteps {
     @When("user search property by name and select the matching result to go to kos details page")
     public void userSearchAndSelectKost(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
-        var kostName = kostNameData.get(0).get("kost "+ Mamikos.ENV);
+        var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
         search.suggetionKostOnTheSearchListNumberSix(kostName);
     }
 
@@ -126,10 +126,10 @@ public class SearchSteps {
     @Then("After user click City name, city name will expand and Area name listed below it.")
     public void after_user_click_city_name_city_name_will_expand_and_area_name_listed_below_it(DataTable table) throws InterruptedException {
         List<List<String>> listCity = table.asLists(String.class);
-        System.out.println("size()"+ listCity.size());
-        for (int j=0; j<listCity.size(); j++) {
+        System.out.println("size()" + listCity.size());
+        for (int j = 0; j < listCity.size(); j++) {
             search.userTapCity(listCity.get(0).get(j));
-            for (int i=j+1; i<listCity.size(); i++) {
+            for (int i = j + 1; i < listCity.size(); i++) {
                 Assert.assertTrue(search.checkElementbyText(listCity.get(i).get(j)), "City not appear in dropdown.");
             }
         }
@@ -150,15 +150,12 @@ public class SearchSteps {
 
     @Then("user clicks the {string} button and the description will appears {string}")
     public void userClicksTheButtonAndTheDescriptionWillAppears(String filter, String text) throws InterruptedException {
-        if(filter.equalsIgnoreCase("Promo Ngebut"))
-        {
+        if (filter.equalsIgnoreCase("Promo Ngebut")) {
             search.clickPromoNgebutFilter();
             String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
-        }
-        else if(filter.equalsIgnoreCase("Kos Andalan"))
-        {
+        } else if (filter.equalsIgnoreCase("Kos Andalan")) {
             search.clickKosAndalanFilter();
             String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
@@ -181,7 +178,7 @@ public class SearchSteps {
     }
 
     @Then("under popular search, click city :")
-    public void underPopularSearchClickCity(DataTable table)throws InterruptedException {
+    public void underPopularSearchClickCity(DataTable table) throws InterruptedException {
         var city = table.asMaps(String.class, String.class);
         var popular = city.get(0).get("city " + Mamikos.ENV);
         search.clickPopularCity(popular);
@@ -189,7 +186,7 @@ public class SearchSteps {
 
 
     @Then("under area city click")
-    public void underAreaCityClick(DataTable table)throws InterruptedException {
+    public void underAreaCityClick(DataTable table) throws InterruptedException {
         var city = table.asMaps(String.class, String.class);
         var popular = city.get(0).get("city " + Mamikos.ENV);
         search.clickPopularCity(popular);
@@ -236,9 +233,9 @@ public class SearchSteps {
     }
 
     @Then("user validates the result kos gender is {string}")
-    public void userValidatesTheResultKosGenderIs(String gender){
+    public void userValidatesTheResultKosGenderIs(String gender) {
         List<String> genderList = search.getListGender(gender);
-        for(String a: genderList){
+        for (String a : genderList) {
             Assert.assertEquals(a, gender);
         }
     }
@@ -248,7 +245,6 @@ public class SearchSteps {
         var campus = table.asMaps(String.class, String.class);
         var popular = campus.get(0).get("campus " + Mamikos.ENV);
         search.getCampusArea(popular);
-
 
 
     }
@@ -275,12 +271,12 @@ public class SearchSteps {
     }
 
     @When("user sets facility filter {string}")
-    public void userSetsFacilityFilter (String facility){
-    search.selectFilterByFacility(facility);
+    public void userSetsFacilityFilter(String facility) {
+        search.selectFilterByFacility(facility);
     }
 
     @Then("user validates the result kos facility is {string}")
-    public void userValidatesTheResultKosFacilityIs (String facility){
+    public void userValidatesTheResultKosFacilityIs(String facility) {
         List<String> facilityList = search.getListFacility(facility);
         for (String a : facilityList) {
             Assert.assertTrue(a.contains(facility), "Search result " + a + " not in correct facility");
@@ -288,12 +284,12 @@ public class SearchSteps {
     }
 
     @And("user sets top kos rule filter {string}")
-    public void userSetsTopKosRuleFilter (String rule){
-    search.selectFilterByKostRule(rule);
+    public void userSetsTopKosRuleFilter(String rule) {
+        search.selectFilterByKostRule(rule);
     }
 
     @Then("user validates the result kos rule is {string}")
-    public void userValidatesTheResultKosRuleIs (String rule){
+    public void userValidatesTheResultKosRuleIs(String rule) {
         List<String> ruleList = search.getListKostRule(rule);
         for (String a : ruleList) {
             Assert.assertTrue(a.contains(rule), "Search result " + a + " not in correct facility");
@@ -346,5 +342,26 @@ public class SearchSteps {
     @Then("user validates the price of first listing is cheaper than the last listing in listing property page")
     public void userValidatesThePriceOfFirstListingIsCheaperThanTheLastListingInListingPropertyPage() {
         Assert.assertTrue(search.getFirstPricePropertyPageListing() < search.getLastPricePropertyPageListing(), "First number is not cheaper than last number!");
+    }
+
+    @When("user want to search kost on {string} from homepage")
+    public void user_search_for_keyword(String city) {
+        search = homePO.clickOnSearchButton();
+        search.enterTextToSearchAndSelectResultCity(city);
+        search.clickFTUEKosListingPopUp();
+    }
+
+    @Then("user sees the facilities on kos card are {string} or {string} or {string}")
+    public void user_sees_the_facilities_on_kos_card_are_or_or(String facility1, String facility2, String facility3) {
+        List<String> addressList = search.listKostFacilities();
+        for (String a : addressList) {
+            if (a.contains(facility1)) {
+                Assert.assertTrue(a.contains(facility1), "Search result " + a + " not in correct facility");
+            } else if (a.contains(facility2)) {
+                Assert.assertTrue(a.contains(facility2), "Search result " + a + " not in correct facility");
+            } else if (a.contains(facility3)) {
+                Assert.assertTrue(a.contains(facility3), "Search result " + a + " not in correct facility");
+            }
+        }
     }
 }
