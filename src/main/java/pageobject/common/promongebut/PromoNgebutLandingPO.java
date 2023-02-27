@@ -1,11 +1,11 @@
-package pageobject.common;
+package pageobject.common.promongebut;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-public class PromoNgebutLandingAreaPO {
+public class PromoNgebutLandingPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private Locator countdownTimer;
@@ -15,7 +15,7 @@ public class PromoNgebutLandingAreaPO {
     private Locator btnCariSekarang;
     private Locator faqHeading;
 
-    public PromoNgebutLandingAreaPO(Page page) {
+    public PromoNgebutLandingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut akan berakhir dalam"));
