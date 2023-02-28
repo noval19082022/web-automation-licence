@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
+import pageobject.common.KostLandingAreaPO;
 import pageobject.common.SearchPO;
 import utilities.PlaywrightHelpers;
 
@@ -24,9 +25,11 @@ public class SearchSteps {
     KostDetailsPO kostDetail = new KostDetailsPO(page);
     SearchPO search = new SearchPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
-    private Map<String, String> cityName;
     HomePO home = new HomePO(page);
     SearchPO searchPO;
+    KostLandingAreaPO kostLanding = new KostLandingAreaPO(page);
+    private Map<String, String> cityName;
+    private Map<String, String> areaSearch;
 
     @When("user search keyword:")
     public void userSearchKeyword(DataTable table) {
@@ -369,6 +372,46 @@ public class SearchSteps {
                 Assert.assertTrue(a.contains(facility3), "Search result " + a + " not in correct facility");
             }
         }
+    }
+
+    @When("user search and go to kost landing based on area:")
+    public void userGoToKostLandingBasedOnArea(DataTable table) {
+        areaSearch = table.asMap(String.class, String.class);
+        var area = areaSearch.get("search keyword");
+        var areaToClick = areaSearch.get("area result");
+        searchPO = homePO.clickOnSearchButton();
+        kostLanding = searchPO.searchByArea(area, areaToClick);
+    }
+
+    @Then("user can see the kost list are from {string}")
+    public void userCanSeeTheKostListAreFrom(String area) {
+        Assert.assertTrue(kostLanding.getResultHeadingText().contains(area), "Result is not from: " + area);
+    }
+
+    @Given("user filter price minimal to {int}, and maximal to {int}")
+    public void userFilterPriceMinimalToAndMaximalTo(int minimal, int maximal) {
+        kostLanding.filterByHarga(minimal, maximal);
+    }
+
+    @Then("user can see kost landing behavior for kost list with just {int} result")
+    public void userCanSeeKostLandingBehaviorForKostListWithJustResult(int kostList) {
+        page.pause();
+        Assert.assertEquals(kostLanding.getKostListLocator().size(), kostList, "Resul is more than one or zero");
+        Assert.assertTrue(kostLanding.isNominatimMapVisible(), "Nominatim map is not visible");
+        Assert.assertTrue(kostLanding.isFilterResetTextVisible(), "Reset filter text is not visible");
+        Assert.assertTrue(kostLanding.isFilterResetButtonVisible(), "Reset filter button is not visible");
+    }
+
+    @Given("user reset filter")
+    public void userResetFilter() {
+        kostLanding.clickOnResetFilterButton();
+    }
+
+    @Then("user can see kost list is more than {int}")
+    public void userCanSeeKostListIsMoreThan(int kostList) {
+        Assert.assertTrue(kostLanding.getKostListLocator().size() > 1, "Kost list is not greater than 1");
+        Assert.assertFalse(kostLanding.isFilterResetTextVisible(), "Reset filter text is visible");
+        Assert.assertFalse(kostLanding.isFilterResetButtonVisible(), "Reset filter button is visible");
     }
 
 
