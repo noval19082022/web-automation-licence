@@ -46,6 +46,12 @@ public class KostDetailsPO {
     private Locator tanyaPemilikKostLink;
     private Locator chatKostPopUp;
     private Locator hubungiKostHeading;
+    private Locator btnMamikosPromoNgebut;
+    private Locator btnMauDong;
+    private Locator btnSayaMengerti;
+
+    //---------------Facility Room Section----------------------
+    private Locator subtitleSpesifikasiTipeKamer;
 
     //---------------Facility Room Section----------------------
     private Locator facilityRoomSeeAllBtn;
@@ -201,6 +207,9 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
+        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
+        this.btnMauDong = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mau Dong!"));
+        this.btnSayaMengerti = page.getByText("Saya Mengerti");
 
         //------------ Favorite and share kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
@@ -208,6 +217,9 @@ public class KostDetailsPO {
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
         this.shareKostButton = page.getByText("share Bagikan");
+
+        //---------------Room Specification----------------------
+        this.subtitleSpesifikasiTipeKamer = page.getByText("Spesifikasi tipe kamar");
 
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
@@ -470,6 +482,42 @@ public class KostDetailsPO {
     }
 
     /**
+     * Scroll until promo pop up is visible, max scroll is 4 times
+     */
+    public void scrollDownToUntilPromoPopUpVisible() {
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(300);
+            if (btnMamikosPromoNgebut.isVisible()) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Check visibility of mamikos promo ngebut button
+     * @return boolean
+     */
+    public boolean isMamikosPromoNgebutButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnMamikosPromoNgebut);
+    }
+
+    /**
+     * Check visibility of Mau Dong button
+     * @return boolean
+     */
+    public boolean isMauDongButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnMauDong);
+    }
+
+    /**
+     * Check visibility of Saya Mengerti Button
+     * @return boolean
+     */
+    public boolean isSayaMengertiButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnSayaMengerti);
+    }
+
+    /**
      * this method will be click link tanya pemilik and will be redirect to chat option
      */
     public void clickOnTanyaPemilikKost() {
@@ -503,6 +551,15 @@ public class KostDetailsPO {
     public Boolean isLoginPopUpDisplayed() {
         playwright.waitTillLocatorIsVisible(loginPopUp, 2.0);
         return loginPopUp.isVisible() && loginByGoogleBtn.isVisible() && loginByFbBtn.isVisible() && loginByAppleIdBtn.isVisible();
+    }
+
+    //---------------Room Specification----------------------
+
+    /**
+     * Scroll to view spesifikasi tipe kamar
+     */
+    public void scrollToViewSpesifikasiTipeKamar() {
+        subtitleSpesifikasiTipeKamer.scrollIntoViewIfNeeded();
     }
 
     //---------------Facility Room Section----------------------
