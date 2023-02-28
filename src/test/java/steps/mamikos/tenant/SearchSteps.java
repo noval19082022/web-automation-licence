@@ -88,7 +88,10 @@ public class SearchSteps {
 
     @Then("should display the result list of keyword {string}")
     public void should_display_the_result_list_of_keyword(String semarang) {
-        Assert.assertTrue(search.listResultKeyword(semarang), "not displayed area");
+        List<String> resultList = search.listResultKeyword();
+        for (String a : resultList) {
+            Assert.assertTrue(a.contains(semarang), "Search result " + a + " not in correct location");
+        }
     }
 
     @Then("should display the result exception {string}")
@@ -170,7 +173,7 @@ public class SearchSteps {
     public void listingThatAppearHaveLocation(DataTable table) {
         var city = table.asMaps(String.class, String.class);
         var popular = city.get(0).get("city " + Mamikos.ENV);
-        search.clickAreaBerdasarkanKotaBelow(popular);
+//        search.clickAreaBerdasarkanKotaBelow(popular);
     }
 
     @And("user click area city")
@@ -193,6 +196,7 @@ public class SearchSteps {
         var city = table.asMaps(String.class, String.class);
         var popular = city.get(0).get("city " + Mamikos.ENV);
         search.clickPopularCity(popular);
+
     }
 
     @Then("listing that appear have no {string} property")
@@ -212,6 +216,10 @@ public class SearchSteps {
     @Then("title listing that appear have location in {string}")
     public void titleListingThatAppearHaveLocationIn(String cityArea) {
         search.clickOnListPopularCity(cityArea);
+        List<String> addressList = search.listKostAddress();
+        for (String a : addressList) {
+            Assert.assertTrue(a.toLowerCase().contains(cityArea.toLowerCase()), "Search result " + a + " not in correct location");
+        }
         Assert.assertTrue(search.getTitleListingResult(cityArea).contains(cityArea), "Title Listing Result is not equals with the keyword!");
 
     }

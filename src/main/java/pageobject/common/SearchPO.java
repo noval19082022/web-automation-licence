@@ -47,7 +47,7 @@ public class SearchPO {
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//div[@class='results-box'])[1]");
-        this.resultBasedOnArea = page.locator(".row");
+        this.resultBasedOnArea = page.locator("//h2[@class = 'list__title']");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
 
@@ -119,9 +119,13 @@ public class SearchPO {
      * @return
      */
 
-    public boolean listResultKeyword(String area) {
-        Locator areaCity = page.getByText(area).nth(1);
-        return areaCity.isVisible();
+    public List<String> listResultKeyword() {
+        List<String> listing = new ArrayList<>();
+            List<Locator> kostList = suggestionAreaOnTheSearchList.all();
+            for(Locator a : kostList) {
+                listing.add(playwright.getText(a));
+        }
+        return listing;
     }
 
 
@@ -325,7 +329,7 @@ public class SearchPO {
     public void searchByCampus(){
         searchKost.click();
     }
-    
+
     /**
      * Scroll down to 'City Name' and click 'City Name'
      * @throws InterruptedException

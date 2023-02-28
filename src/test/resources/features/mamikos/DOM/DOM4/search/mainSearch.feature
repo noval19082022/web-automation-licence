@@ -1,12 +1,12 @@
 Feature: Main Search
 
-  @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
+  @bagas @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
   Scenario: [Dweb][Search]5 Suggestion List should appear
     Given user go to mamikos homepage
     When user search for random keyword:
       | search stag   | search prod|
       | semarang    | semarang   |
-    Then should display the result list of keyword "semarang"
+    Then should display the result list of keyword "Semarang"
 
   @TEST_DOM-1853 @Automated @DOM4 @Web @discovery-platform @search @search-except-suggest
   Scenario: [Dweb][Search] Typing exception character
@@ -16,7 +16,7 @@ Feature: Main Search
       | asdfadjsade    | asdfadjsade   |
     Then should display the result exception "Tidak menemukan nama tempat / nama kost yang sesuai."
 
-  @TEST_DOM-1849 @Automated @DOM4 @Web @discovery-platform @search @search-clear-text
+ @TEST_DOM-1849 @Automated @DOM4 @Web @discovery-platform @search @search-clear-text
   Scenario: [Dweb][Search] Reset text on searchbar
     Given user go to mamikos homepage
     When user search for random keyword:
@@ -67,31 +67,30 @@ Feature: Main Search
       | Makassar        | Makassar       |
       | Medan           | Medan          |
 
-  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @bagas @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
-    Then under popular search, there's this city :
+    And listing that appear have location
       | city stag      | city prod      |
       | Malang         | Malang         |
-    Then listing that appear have location
-      | city stag      | city prod      |
-      | Malang         | Malang         |
+    Then title listing that appear have location in "Malang"
 
-  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+
+  @bagas @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
     And user click area city
-      | city stag           | city prod      |
-      | Bali chevron-down   | Bali           |
+      | city stag           | city prod                   |
+      | Bogor chevron-down  | Bogor chevron-down          |
     Then under area city click
-      | city stag      | city prod      |
-      | Kuta           | Seminyak       |
-
+      | city stag      | city prod           |
+      | Bogor Selatan  | Bogor Selatan       |
+    Then title listing that appear have location campus in "Bogor"
 
   @TEST_DOM-1860 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
-  Scenario Outline: [Dweb][Search] Check appearance of Apartemen property on listing with keyword city
+  Scenario Outline: [Dweb][Search] Check appearance of Apartment property on listing with keyword city
     Given user go to mamikos homepage
     When user search for random keyword:"<city>"
     Then listing that appear have no "Apartemen" property
@@ -112,7 +111,7 @@ Feature: Main Search
       | Bekasi          |
       | UNDIP           |
 
-  @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
+  @bagas @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
   Scenario: [Dweb][Search] Check search result
     Given user go to mamikos homepage
     When user clicks Search
