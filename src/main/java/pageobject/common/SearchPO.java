@@ -37,7 +37,8 @@ public class SearchPO {
     Locator sortingButton;
     Locator firstPriceListing;
     Locator lastPriceListing;
-
+    private Locator FTUETitleText;
+    private Locator popUpConfirmationbutton;
 
 
     public SearchPO(Page page) {
@@ -49,7 +50,7 @@ public class SearchPO {
         this.suggestionAreaOnTheSearchList = page.locator("(//div[@class='results-box'])[1]");
         this.resultBasedOnArea = page.locator("//h2[@class = 'list__title']");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
-        suggetionKostOnTheSearchListNumberSix =page.getByTestId("results-list__item").nth(6);
+        suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
@@ -70,9 +71,8 @@ public class SearchPO {
         this.sortingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("sorting Rekomendasi"));
         this.firstPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[1]");
         this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
-
-
-
+        this.FTUETitleText = page.locator("//h2[@data-path='lbl_popperTitle']");
+        this.popUpConfirmationbutton = page.locator("button[data-path='btn_popperAction']");
     }
 
     /**
@@ -183,6 +183,7 @@ public class SearchPO {
 
     /**
      * user tap popular kota
+     *
      * @param city
      * @return
      */
@@ -198,6 +199,7 @@ public class SearchPO {
 
     /**
      * user see popular daerah kota
+     *
      * @param city
      * @return
      */
@@ -217,7 +219,9 @@ public class SearchPO {
         return popularCity.isVisible();
     }
 
-    /** Click one of city in popular search
+    /**
+     * Click one of city in popular search
+     *
      * @param city is name of city
      */
     public void clickPopularCity(String city) throws InterruptedException {
@@ -229,9 +233,10 @@ public class SearchPO {
 
     /**
      * search area berdasarkan kota
+     *
      * @param Kota
      */
-    public void clickAreaBerdasarkanKotaBelow(String Kota){
+    public void clickAreaBerdasarkanKotaBelow(String Kota) {
         Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Kota));
         popularCity.click();
         resultBasedOnArea.isVisible();
@@ -251,14 +256,16 @@ public class SearchPO {
         suggetionKostOnTheSearchListNumberSix.click();
     }
 
-    /** Click on Promo Ngebut filter button
+    /**
+     * Click on Promo Ngebut filter button
      */
-    public void clickPromoNgebutFilter(){
+    public void clickPromoNgebutFilter() {
         promoNgebutFilter.click();
     }
 
     /**
      * Get Promo Ngebut description text
+     *
      * @return String data type
      */
     public String getPromoNgebutDescText() {
@@ -268,12 +275,13 @@ public class SearchPO {
     /**
      * Click on Kos Andalan filter button
      */
-    public void clickKosAndalanFilter(){
+    public void clickKosAndalanFilter() {
         kosAndalanFilter.click();
     }
 
     /**
      * Get Kos Andalan description text
+     *
      * @return String data type
      */
     public String getKosAndalanDescText() {
@@ -282,13 +290,14 @@ public class SearchPO {
 
     /**
      * get property no have apartemen
+     *
      * @return
      */
-    public List<String> listKostAddress(){
+    public List<String> listKostAddress() {
         List<String> addressList = new ArrayList<>();
-        if(playwright.waitTillLocatorIsVisible(mamiMap)){
+        if (playwright.waitTillLocatorIsVisible(mamiMap)) {
             List<Locator> kostList = kostName.all();
-            for(Locator a : kostList) {
+            for (Locator a : kostList) {
                 addressList.add(playwright.getText(a));
             }
         }
@@ -298,13 +307,14 @@ public class SearchPO {
     /**
      * click sugestion area first city
      */
-    public void suggestionAreaClick(){
+    public void suggestionAreaClick() {
         suggestionAreaOnTheSearchList.click();
     }
 
     /**
-<<<<<<< HEAD
+     * <<<<<<< HEAD
      * click area by kota popular
+     *
      * @param area
      */
     public void clickOnListPopularCity(String area) {
@@ -314,10 +324,11 @@ public class SearchPO {
 
     /**
      * verify area by kota popular
+     *
      * @param listresult
      * @return
      */
-    public String getTitleListingResult(String listresult){
+    public String getTitleListingResult(String listresult) {
         Locator listResult = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(listresult));
         listResult.getByText(listresult);
         return listresult;
@@ -326,51 +337,55 @@ public class SearchPO {
     /**
      * search by campus
      */
-    public void searchByCampus(){
+    public void searchByCampus() {
         searchKost.click();
     }
 
     /**
      * Scroll down to 'City Name' and click 'City Name'
+     *
      * @throws InterruptedException
      */
     public void clickOnCities(String kampus) throws InterruptedException {
-        Locator areacity= page.getByTestId("popular-secondary").getByText(kampus);
+        Locator areacity = page.getByTestId("popular-secondary").getByText(kampus);
         playwright.waitTillLocatorIsVisible(areacity);
         playwright.clickOn(areacity);
     }
 
     /**
      * Get List of each Campus Name on Cities Text
+     *
      * @param campus Station Name
      * @return
      */
-    public boolean isEachCampusFromCities(String campus){
+    public boolean isEachCampusFromCities(String campus) {
         Locator listAreaCity = page.getByTestId("popular-secondary").getByText(campus);
-       return playwright.waitTillLocatorIsVisible(listAreaCity);
+        return playwright.waitTillLocatorIsVisible(listAreaCity);
 
     }
 
-     /** Select filter by gender
-     * @throws InterruptedException
+    /**
      * Select filter by gender
+     *
+     * @throws InterruptedException Select filter by gender
      */
-    public void selectFilterByGender(String gender){
+    public void selectFilterByGender(String gender) {
         genderFilter.click();
-        page.getByTestId("filter-gender").getByText(""+ gender +"").click();
+        page.getByTestId("filter-gender").getByText("" + gender + "").click();
         saveFilterButton.click();
     }
 
     /**
      * Get the gender label in listing
-     * @return list of string gender
+     *
      * @param gender is gender option (putra, putri, campur)
+     * @return list of string gender
      */
-    public List<String> getListGender(String gender){
+    public List<String> getListGender(String gender) {
         List<String> genderList = new ArrayList<>();
-        Locator genderLabel = page.locator("//div[@data-testid = 'kostRoomCard']//div[contains(text() , '"+ gender+"')]");
+        Locator genderLabel = page.locator("//div[@data-testid = 'kostRoomCard']//div[contains(text() , '" + gender + "')]");
         List<Locator> elements = genderLabel.all();
-        for(Locator a: elements){
+        for (Locator a : elements) {
             genderList.add(playwright.getText(a));
         }
         return genderList;
@@ -378,9 +393,10 @@ public class SearchPO {
 
     /**
      * get area campus by click campus area
+     *
      * @param area
      */
-    public void getCampusArea(String area){
+    public void getCampusArea(String area) {
         Locator popularCity = page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(area)).first();
         popularCity.click();
 
@@ -388,32 +404,35 @@ public class SearchPO {
 
     /**
      * click area halte dan stasiun
+     *
      * @return
      */
-    public void stasiunDanHalteClickOn(){
+    public void stasiunDanHalteClickOn() {
         playwright.clickOn(stasiunHalte);
     }
 
     /**
      * Select filter by facility
+     *
      * @throws InterruptedException
      */
-    public void selectFilterByFacility(String facility){
+    public void selectFilterByFacility(String facility) {
         facilityFilter.click();
-        page.locator("#modalSearchFacilities").getByText(""+ facility +"").click();
+        page.locator("#modalSearchFacilities").getByText("" + facility + "").click();
         saveFilterButton.click();
     }
 
     /**
      * Get the facility label in listing
-     * @return list of string gender
+     *
      * @param facility is facility option (Wifi, Kasur, etc.)
+     * @return list of string gender
      */
-    public List<String> getListFacility(String facility){
+    public List<String> getListFacility(String facility) {
         List<String> facilityList = new ArrayList<>();
-        Locator facilityLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '"+ facility +"']");
+        Locator facilityLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '" + facility + "']");
         List<Locator> elements = facilityLabel.all();
-        for(Locator a: elements){
+        for (Locator a : elements) {
             facilityList.add(playwright.getText(a));
         }
         return facilityList;
@@ -422,22 +441,23 @@ public class SearchPO {
     /**
      * Select filter by kos rule
      */
-    public void selectFilterByKostRule(String rule){
+    public void selectFilterByKostRule(String rule) {
         kostRuleFilter.click();
-        page.getByTestId("filter-property-rules").getByText(""+ rule +"").click();
+        page.getByTestId("filter-property-rules").getByText("" + rule + "").click();
         saveFilterButton.click();
     }
 
     /**
      * Get the facility label in listing
-     * @return list of string gender
+     *
      * @param rule is facility option (Wifi, Kasur, etc.)
+     * @return list of string gender
      */
-    public List<String> getListKostRule(String rule){
+    public List<String> getListKostRule(String rule) {
         List<String> ruleList = new ArrayList<>();
-        Locator ruleLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '"+ rule +"']");
+        Locator ruleLabel = page.locator("//span[@data-testid = 'roomCardFacilities-facility']//span[text() = '" + rule + "']");
         List<Locator> elements = ruleLabel.all();
-        for(Locator a: elements){
+        for (Locator a : elements) {
             ruleList.add(playwright.getText(a));
         }
         return ruleList;
@@ -446,14 +466,14 @@ public class SearchPO {
     /**
      * Activate Kos Andalan filter
      */
-    public void activateKosAndalanFilter(){
+    public void activateKosAndalanFilter() {
         kosAndalanFilter.click();
         kosAndalanToggle.click();
     }
 
     /**
-     *
      * Check Kos Andalan label present
+     *
      * @return element displayed true / false
      */
     public boolean isKosAndalanPropertyDisplayed() {
@@ -463,52 +483,56 @@ public class SearchPO {
     /**
      * Activate Promo Ngebut filter
      */
-    public void activatePromoNgebutFilter(){
+    public void activatePromoNgebutFilter() {
         promoNgebutFilter.click();
         promoNgebutToggle.click();
     }
 
     /**
-     *
      * Check Promo Ngebut label present
+     *
      * @return element displayed true / false
      */
     public boolean isPromoNgebutPropertyDisplayed() {
         return promoNgebutLabel.isVisible();
     }
 
-    /** Select filter by range time
+    /**
+     * Select filter by range time
      */
-    public void selectFilterByRangeTime(String time){
+    public void selectFilterByRangeTime(String time) {
         rangeTimeFilter.click();
-        page.getByText(""+time+"").click();
+        page.getByText("" + time + "").click();
         saveFilterButton.click();
     }
 
     /**
      * Get the range time label in listing
-     * @return list of string range time
+     *
      * @param time is range time option
+     * @return list of string range time
      */
-    public List<String> getListRangeTime(String time){
+    public List<String> getListRangeTime(String time) {
         List<String> timeList = new ArrayList<>();
-        Locator timeLabel = page.locator("//div[@data-testid = 'kostRoomCard']//span[contains(text() , '"+ time +"')]");
+        Locator timeLabel = page.locator("//div[@data-testid = 'kostRoomCard']//span[contains(text() , '" + time + "')]");
         List<Locator> elements = timeLabel.all();
-        for(Locator a: elements){
+        for (Locator a : elements) {
             timeList.add(playwright.getText(a));
         }
         return timeList;
     }
 
-    /** Select sorting
+    /**
+     * Select sorting
      */
-    public void selectSorting(String sorting){
+    public void selectSorting(String sorting) {
         sortingButton.click();
-        page.getByText(""+sorting+"").click();
+        page.getByText("" + sorting + "").click();
     }
 
     /**
      * Get first property price in listing property page
+     *
      * @return int price
      */
     public int getFirstPricePropertyPageListing() {
@@ -519,11 +543,62 @@ public class SearchPO {
 
     /**
      * Get last property price in listing property page
+     *
      * @return int price
      */
     public int getLastPricePropertyPageListing() {
         playwright.waitTillLocatorIsVisible(lastPriceListing, 3.0);
         String last = playwright.getText(lastPriceListing).replaceAll("[Rp.]", "");
         return Integer.parseInt(last);
+    }
+
+    /**
+     * Enter Text in search bar and select result
+     *
+     * @param searchText is text we want to search
+     */
+    public void enterTextToSearchAndSelectResultCity(String searchText) {
+        inputSearch.fill(searchText);
+        inputSearch.press("Enter");
+        Locator resultLocator = page.getByText(searchText);
+        resultLocator.first().click();
+    }
+
+    /**
+     * @return true if FTUE present, otherwise false.
+     */
+    public boolean isFTUE_screenPresent() {
+        return playwright.waitTillLocatorIsVisible(FTUETitleText)
+                || playwright.waitTillLocatorIsVisible(popUpConfirmationbutton);
+    }
+
+    /**
+     * Will check First Time User Experience screen first. And then will click on close button on FTUE if present in the screen.
+     * Dismiss FTUE first time user experience by click on close button if present.
+     */
+    public void clickFTUEKosListingPopUp() {
+        while (isFTUE_screenPresent()) {
+            if (playwright.waitTillLocatorIsVisible(popUpConfirmationbutton)) {
+                playwright.clickOn(popUpConfirmationbutton);
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * List all listing facilities in search result
+     *
+     * @return list of facilities (String)
+     */
+    public List<String> listKostFacilities() {
+        String cssLocator = "div[class='rc-facilities rc-facilities--horizontal']";
+        Locator element = page.locator(cssLocator);
+        List<Locator> elements = playwright.getLocators(element);
+        List<String> facilitiesList = new ArrayList<>();
+        for (Locator a : elements) {
+            facilitiesList.add((playwright.getText(a)));
+        }
+        return facilitiesList;
     }
 }
