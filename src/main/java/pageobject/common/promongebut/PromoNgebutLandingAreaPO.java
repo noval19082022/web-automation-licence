@@ -55,4 +55,13 @@ public class PromoNgebutLandingAreaPO {
     public List<Locator> getDiscountIconLocators() {
         return discountIcon.all();
     }
+
+    /**
+     * Click on promo icon to go to kost details
+     * @param index int type
+     * @return Page playwright
+     */
+    public Page clickOnPromoIconIndex(int index) {
+       return playwright.movePageByClickLocator(page, getDiscountIconLocators().get(index));
+    }
 }

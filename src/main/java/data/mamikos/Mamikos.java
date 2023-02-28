@@ -23,5 +23,7 @@ public class Mamikos {
     public static final String HISTORY= JavaHelpers.getPropertyValue(MAMIKOS, "history");
     public static final String UGM_KOST_LIST= JavaHelpers.getPropertyValue(MAMIKOS, "ugmKostList");
     public static final String PROMO_NGEBUT = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebut");
-    public static final String PROMO_NGEBUT_AREA = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutArea");;
+    public static final String PROMO_NGEBUT_AREA = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutArea");
+    public static final String KOST_PROMO_NGEBUT_TOP = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaTop");
+    public static final String KOST_PROMO_NGEBUT_BOTTOM = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaBottom");
 }
