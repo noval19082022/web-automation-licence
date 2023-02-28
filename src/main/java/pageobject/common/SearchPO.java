@@ -96,9 +96,10 @@ public class SearchPO {
     }
 
     /**
-     *
-     * @param area
-     * @return
+     * Search by area
+     * @param area area text
+     * @param areaToClick area to click after result visible
+     * @return KostLandingAreaPO class
      */
     public KostLandingAreaPO searchByArea(String area, String areaToClick) {
         inputSearch.fill(area);
