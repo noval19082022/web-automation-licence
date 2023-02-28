@@ -413,4 +413,44 @@ public class SearchSteps {
         Assert.assertFalse(kostLanding.isFilterResetTextVisible(), "Reset filter text is visible");
         Assert.assertFalse(kostLanding.isFilterResetButtonVisible(), "Reset filter button is visible");
     }
+
+
+    @And("user want to maximize the screen size")
+    public void user_maximize_the_screen_size() {
+        page.setViewportSize(1920, 1080);
+    }
+
+    @Then("user can check the legend of map price cluster")
+    public void user_check_the_legend_of_map_price_cluster(List<String> wording) {
+        for (int i = 0; i < wording.size(); i++) {
+            Assert.assertTrue(search.isLegendPresent(wording.get(i)), "Cluster " + wording + " is not present");
+            Assert.assertEquals(search.getLegendDesc(wording.get(i)), wording.get(i), "Cluster icon not equal to " + wording.get(i));
+        }
+    }
+
+    @And("user can check the legend of map description cluster")
+    public void user_check_the_legend_of_map_description_cluster(List<String> wording) {
+        for (int i = 0; i < wording.size(); i++) {
+            Assert.assertTrue(search.isLegendDescPresent(wording.get(i)), "Description " + wording + " is not present");
+            Assert.assertEquals(search.getLegendDescText(wording.get(i)), wording.get(i), "Description text not equal to " + wording.get(i));
+        }
+    }
+
+    @And("user can check the legend of map information cluster")
+    public void user_check_the_legend_of_map_information_cluster(List<String> wording) {
+        for (int i = 0; i < wording.size(); i++) {
+            Assert.assertTrue(search.isLegendInformationPresent(wording.get(i)), "Information " + wording + " is not present");
+            Assert.assertTrue(search.getLegendInformationText(wording.get(i)).contains(wording.get(i)), "Information text not equal to " + wording.get(i));
+        }
+    }
+
+    @And("user want to close the legend map")
+    public void user_close_the_legend_map() {
+        search.clickMapLegendButton();
+    }
+
+    @Then("user will see the pop up closed")
+    public void user_see_the_pop_up_closed() {
+        Assert.assertFalse(search.isMapLegendPresent(), "Map Legend still appears!");
+    }
 }
