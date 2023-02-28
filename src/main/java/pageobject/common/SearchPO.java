@@ -40,6 +40,12 @@ public class SearchPO {
     private Locator FTUETitleText;
     private Locator popUpConfirmationbutton;
 
+    //--------- Map Section ----------
+    private Locator mapLegendButton;
+    private Locator mapLegendClosedStatus;
+
+
+
 
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
@@ -73,6 +79,8 @@ public class SearchPO {
         this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
         this.FTUETitleText = page.locator("//h2[@data-path='lbl_popperTitle']");
         this.popUpConfirmationbutton = page.locator("button[data-path='btn_popperAction']");
+        this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
+        this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
     }
 
     /**
@@ -600,5 +608,82 @@ public class SearchPO {
             facilitiesList.add((playwright.getText(a)));
         }
         return facilitiesList;
+    }
+
+
+    /**
+     * Get List of legend wording is present
+     *
+     * @param legend Legend Name
+     * @return text legend Name present / not
+     */
+    public Boolean isLegendPresent(String legend) {
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[@class='map-style__legend-icon bg-c-grid__item bg-is-col-4']").getByText(legend));
+    }
+
+    /**
+     * Get List of legend wording is present
+     *
+     * @param legend Legend Name
+     * @return text legend name
+     */
+    public String getLegendDesc(String legend) {
+        return playwright.getText(page.locator("//*[@class='map-style__legend-icon bg-c-grid__item bg-is-col-4']").getByText(legend));
+    }
+
+    /**
+     * Get List of legend wording description is present
+     *
+     * @param decs Legend description
+     * @return text legend description present / not
+     */
+    public Boolean isLegendDescPresent(String decs) {
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[@class='map-style__legend-description bg-c-grid__item bg-is-col-8']").getByText(decs));
+    }
+
+    /**
+     * Get List of legend wording description is present
+     *
+     * @param decs Legend description
+     * @return text legend description
+     */
+    public String getLegendDescText(String decs) {
+        return playwright.getText(page.locator("//*[@class='map-style__legend-description bg-c-grid__item bg-is-col-8']").getByText(decs));
+    }
+
+    /**
+     * Get List of legend wording information is present
+     *
+     * @param information Legend information
+     * @return text legend information present / not
+     */
+    public Boolean isLegendInformationPresent(String information) {
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[@class='map-style__legend-description bg-c-grid__item bg-is-col-8']").getByText(information));
+    }
+
+    /**
+     * Get List of legend wording information is present
+     *
+     * @param information Legend information
+     * @return text legend information
+     */
+    public String getLegendInformationText(String information) {
+        return playwright.getText(page.locator("//*[@class='map-style__legend-description bg-c-grid__item bg-is-col-8']").getByText(information));
+    }
+
+    /**
+     * Click on map legend information button
+     */
+    public void clickMapLegendButton() {
+        playwright.clickOn(mapLegendButton);
+    }
+
+    /**
+     * Get status map legend pop up is appears
+     *
+     * @return map legend pop up present / not
+     */
+    public boolean isMapLegendPresent() {
+        return playwright.waitTillLocatorIsVisible(mapLegendClosedStatus);
     }
 }
