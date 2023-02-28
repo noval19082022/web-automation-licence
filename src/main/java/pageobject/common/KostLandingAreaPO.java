@@ -34,10 +34,19 @@ public class KostLandingAreaPO {
         filterResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset filter"));
     }
 
+    /**
+     * Check visibility of result heading text
+     * @return boolean
+     */
     public String getResultHeadingText() {
         return playwright.getText(headingResultText);
     }
 
+    /**
+     * Filter kost by price/harga
+     * @param minimal minimal price
+     * @param maximal maximal price
+     */
     public void filterByHarga(int minimal, int maximal) {
         playwright.clickOn(filterHarga);
         filterInputMinimalPrice.fill(String.valueOf(minimal));
@@ -45,6 +54,10 @@ public class KostLandingAreaPO {
         playwright.clickOn(filterPriceSimpanButton);
     }
 
+    /**
+     * Get all kost list locators
+     * @return List<Locator>
+     */
     public List<Locator> getKostListLocator() {
         return kosLists.all();
     }
@@ -73,6 +86,9 @@ public class KostLandingAreaPO {
         return playwright.waitTillLocatorIsVisible(filterResetButton);
     }
 
+    /**
+     * Click on reset filter button
+     */
     public void clickOnResetFilterButton() {
         playwright.clickOn(filterResetButton);
     }
