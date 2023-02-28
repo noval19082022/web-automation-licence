@@ -11,11 +11,15 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.text.ParseException;
 
 public class KostDetailSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    JavaHelpers java = new JavaHelpers();
 
     HomePO home = new HomePO(page);
     SearchPO search = new SearchPO(page);
@@ -218,12 +222,12 @@ public class KostDetailSteps {
     }
 
     @And("user want to report this kos")
-    public void i_click_button_report_kos() throws InterruptedException {
+    public void i_click_button_report_kos() {
         kostDetail.clickOnKosReportButton();
     }
 
     @And("user send text {string} in form kos report")
-    public void user_enter_text_in_form_kos_report(String textReport) throws InterruptedException {
+    public void user_enter_text_in_form_kos_report(String textReport) {
         kostDetail.clickOnCheckBox();
         kostDetail.insertReportText(textReport);
         kostDetail.clickOnSendReportButton();
@@ -296,6 +300,100 @@ public class KostDetailSteps {
     public void user_clicks_on_previous_button_and_display_first_page_recomendation_kos(String text) {
         Assert.assertTrue(kostDetail.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
         Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
+    }
+
+    //------------ Right Panel Section -----------------
+    @Then("user sees total price property")
+    public void user_sees_total_price_property() {
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isTotalPricePresent(), "Total Price is not present!");
+    }
+
+    @When("user sees form booking date")
+    public void user_sees_form_booking_date() {
+        Assert.assertTrue(kostDetail.isFormBookingDatePresent(), "Form booking date is not present!");
+        kostDetail.clickOnBookingDate();
+    }
+
+    @Then("user validates description {string}")
+    public void user_validates_description(String desc) {
+        Assert.assertEquals(kostDetail.getDescBookingDateText(desc).toLowerCase(), desc.toLowerCase(), "Description is not equal / present!");
+    }
+
+    @And("user sees date and alert message {string}")
+    public void user_sees_alert_message(String alert) {
+        Assert.assertTrue(kostDetail.isDateBookingPresent(), "Date Booking is not present!");
+        Assert.assertTrue(kostDetail.isAlertBookingDateTextPresent(alert), "Alert is not equal / present!");
+        kostDetail.clickOnBookingDate();
+    }
+
+    @When("user sees form booking duration")
+    public void user_sees_form_booking_duration() {
+        Assert.assertTrue(kostDetail.isFormBookingDurationPresent(), "Booking duration form is not present!");
+    }
+
+    @And("user select date {string} and rent type {string}")
+    public void user_select_date_and_rent_type(String time, String rentType) throws ParseException {
+        String dateTime = "";
+        if (time.equalsIgnoreCase("tomorrow")) {
+            dateTime = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", "en", 0, 1, 0, 0, 0);
+        }
+        kostDetail.selectDateForStartBoarding(dateTime);
+        kostDetail.selectRentType(rentType);
+    }
+
+    @And("user sees booking button")
+    public void user_sees_booking_button() {
+        Assert.assertTrue(kostDetail.isBookingButtonPresent(), "Booking button is not present!");
+    }
+
+    // ---------- Kost Badge(Apik, SinggahSini) ---------------------
+    @Then("user can see apik badge kos")
+    public void user_can_see_apik_badge_kos() {
+        Assert.assertTrue(kostDetail.isApikBadgePresent(), "Apik Badge is not displayed");
+    }
+
+    @Then("user can see singgahsini badge kos")
+    public void userCanSeeSinggahsiniBadgeKos() {
+        Assert.assertTrue(kostDetail.isSinggahsiniBadgePresent(), "Singgahsini Badge is not displayed");
+    }
+
+    @Then("user reached owner badges section")
+    public void i_should_reached_owner_badges_section() {
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.ownerBadgesSectionAsPresent(), "owner section is not displayed");
+        Assert.assertTrue(kostDetail.isOwnerStatement(), "Owner Statement is not displayed");
+        Assert.assertTrue(kostDetail.isOwnerNameDisplayed(), "Owner name is not displayed");
+        Assert.assertTrue(kostDetail.isOwnerPictureDisplayed(), "Owner Picture is not displayed");
+        Assert.assertTrue(kostDetail.isNumberTransactionDisplayed(), "Number of transaction is not displayed");
+    }
+
+    // ----------------Kost Benefit---------------------
+    @Then("user see benefit title, benefit description")
+    public void userSeeBenefitTitleBenefitDescription() {
+        kostDetail.dismissFTUE();
+        Assert.assertTrue(kostDetail.isBenefitTitlePresent(), "Title Of Kos Benefit is not displayed");
+        Assert.assertTrue(kostDetail.isBenefitDescPresent(), "Description of Kos Benefit is not displayed");
+    }
+
+    // ------------ Kost Review Section -----------
+    @Then("user see review kos detail page section")
+    public void userSeeReviewKosDetailPageSection() {
+        kostDetail.dismissFTUE();
+        kostDetail.scrollToReviewSection();
+        Assert.assertTrue(kostDetail.isReviewOverviewDisplayed(), "Review Overview is not displayed");
+        Assert.assertTrue(kostDetail.isReviewCategoryDisplayed(), "Review Category is not displayed");
+        Assert.assertTrue(kostDetail.isUserReviewDisplayed(), "User Review is not displayed");
+    }
+
+    @And("user want to see all review")
+    public void userClickOnSeeAllReview() {
+        kostDetail.clickSeeAllReviewBtn();
+        Assert.assertTrue(kostDetail.isOverviewReviewModalDisplayed(), "Review Overview in Modal is not displayed");
+        Assert.assertTrue(kostDetail.isReviewCategoryModalDisplayed(), "Review Category in Modal is not displayed");
+        Assert.assertTrue(kostDetail.isSortingReviewDisplayed(), "Sorting Review in Modal is not displayed");
+        Assert.assertTrue(kostDetail.isUserReviewModalDisplayed(), "User Review in Modal is not displayed");
+        kostDetail.closeAllReviewModal();
     }
 
     //------------ Favorite kost section ----------------

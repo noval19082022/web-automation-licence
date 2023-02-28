@@ -106,6 +106,7 @@ public class KostDetailsPO {
     private Locator statisticModal;
     private Locator closeStatisticsModalBtn;
     private Locator ownerNameText;
+    private Locator ownerStatement;
     private Locator ownerImageProfile;
     private Locator ownerStatus;
     private Locator successfulTansaction;
@@ -133,6 +134,40 @@ public class KostDetailsPO {
     private Locator mixGenderFilter;
     private Locator nextRecommendation;
     private Locator firstKostCard;
+
+    //------------ Right Panel Section -----------------
+    private Locator totalPriceText;
+    private Locator bookingDateForm;
+    private Locator bookingDate;
+    private Locator bookingDurationForm;
+    private Locator dateTextBox;
+    private Locator bookingButton;
+    private Locator tomorrowDateLabel;
+    private Locator saturdayDateLabel;
+    private Locator sundayDateLabel;
+    private Locator datePickToday;
+
+    // ---------- Kost Badge(Apik, SinggahSini, Kost Pilihan) ---------------------
+    private Locator pilihanBadge;
+    private Locator apikBadge;
+    private Locator singgahsiniBadge;
+
+    // ----------------Kost Benefit---------------------
+    private Locator kosBenefit;
+    private Locator benefitTitle;
+    private Locator benefitDesc;
+
+    // ------------ Kost Review Section --------------
+    private Locator reviewSection;
+    private Locator overviewRatingReview;
+    private Locator reviewCategory;
+    private Locator userReview;
+    private Locator seeAllReviewBtn;
+    private Locator overviewRatingModal;
+    private Locator reviewCategoryModal;
+    private Locator sortingReviewBtn;
+    private Locator userReviewModal;
+    private Locator closeModalReviewBtn;
 
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
@@ -233,6 +268,7 @@ public class KostDetailsPO {
         this.statisticModal = page.getByTestId("owner-rate-modal-content");
         this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
+        this.ownerStatement = page.locator(".detail-kost-owner-section__kost-keeper");
         this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
         this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
         this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");
@@ -257,9 +293,43 @@ public class KostDetailsPO {
         this.arrowRecommendationNextButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
         this.arrowRecommendationPrevButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
         this.photoRecommendation = page.locator(".rc-photo__cover");
-        this.mixGenderFilter = page.locator(".rc-overview > div:nth-child(2)").first();
+        this.mixGenderFilter = page.getByText("Campur").first();
         this.nextRecommendation = page.locator("//h3[@data-path='lbl_roomTitle']").nth(5);
         this.firstKostCard = page.locator("//h3[@data-path='lbl_roomTitle']").first();
+
+        //------------ Right Panel Section -----------------
+        this.totalPriceText = page.locator("#priceCard .rc-price__real");
+        this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
+        this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
+        this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
+        this.bookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
+        this.datePickToday = page.locator(".today");
+        this.tomorrowDateLabel = page.locator("span[class='cell day']").first();
+        this.saturdayDateLabel = page.locator("span[class='cell day weekend sat']").first();
+        this.sundayDateLabel = page.locator("span[class='cell day weekend sun']").first();
+        this.dateTextBox = page.locator("//input[@class='booking-input-checkin__input']");
+
+        // ---------- Kost Badge(Apik, SinggahSini, Kost Pilihan) ---------------------
+        this.pilihanBadge = page.getByAltText("Kos Pilihan logo");
+        this.apikBadge = page.getByAltText("Apik logo");
+        this.singgahsiniBadge = page.getByAltText("Singgahsini logo");
+
+        // ----------------Kost Benefit---------------------
+        this.kosBenefit = page.getByTestId("kostBenefitContent");
+        this.benefitTitle = page.locator("#detailKostContainer .detail-kost-benefit-content span").first();
+        this.benefitDesc = page.locator("#detailKostContainer .detail-kost-benefit-content p").first();
+
+        // ------------ Kost Review Section -----------
+        this.reviewSection = page.locator("#detailKostReview");
+        this.overviewRatingReview = page.locator(".kost-review__overview-rating");
+        this.reviewCategory = page.locator(".kost-review__fac-rating");
+        this.userReview = page.locator(".kost-review__users-feedback");
+        this.seeAllReviewBtn = page.getByText("Lihat semua review");
+        this.overviewRatingModal = page.locator("#modalAllReview");
+        this.reviewCategoryModal = page.locator("div[class='kost-review-fac-rating']").first();
+        this.sortingReviewBtn = page.getByTestId("filter-tag");
+        this.userReviewModal = page.locator("div[class='users-feedback']").first();
+        this.closeModalReviewBtn = page.locator("span[class='kost-review-modal-header__close']");
     }
 
     /**
@@ -281,8 +351,7 @@ public class KostDetailsPO {
         }
         do {
             playwright.forceClickOn(ftueSlider);
-        }
-        while (ftueSlider.isVisible());
+        } while (ftueSlider.isVisible());
     }
 
     /**
@@ -1100,6 +1169,261 @@ public class KostDetailsPO {
      */
     public boolean isMixGenderDisplay() {
         return playwright.waitTillLocatorIsVisible(mixGenderFilter, 5.0);
+    }
+
+    //------------ Right Panel Section -----------------
+
+    /**
+     * Check if total price is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isTotalPricePresent() {
+        return playwright.waitTillLocatorIsVisible(totalPriceText, 3.0);
+    }
+
+    /**
+     * Check if form booking date is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isFormBookingDatePresent() {
+        playwright.pageScrollUsingCoordinate(0, 500);
+        return playwright.waitTillLocatorIsVisible(bookingDateForm, 3.0);
+    }
+
+    /**
+     * Click on booking date form
+     */
+    public void clickOnBookingDate() {
+        playwright.pageScrollUntilElementIsVisible(seeAllPhotoButton);
+        playwright.waitTillLocatorIsVisible(bookingDateForm, 5.0);
+        playwright.clickOn(bookingDateForm);
+    }
+
+    /**
+     * Get booking date description inside booking date
+     *
+     * @return string data type
+     */
+    public String getDescBookingDateText(String desc) {
+        Locator description = page.locator("#priceCard").getByText(desc).first();
+        playwright.pageScrollUntilElementIsVisible(description);
+        return playwright.getText(description).toLowerCase();
+    }
+
+    /**
+     * Check alert is present present / not
+     *
+     * @return true / false
+     */
+    public boolean isAlertBookingDateTextPresent(String alert) {
+        return page.getByText(alert).first().isVisible();
+    }
+
+    /**
+     * Check if booking date is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isDateBookingPresent() {
+        return playwright.waitTillLocatorIsVisible(bookingDate, 3.0);
+    }
+
+    /**
+     * Check if booking duration form is present
+     *
+     * @return visible true, otherwise false
+     */
+    public boolean isFormBookingDurationPresent() {
+        return playwright.waitTillLocatorIsVisible(bookingDurationForm, 3.0);
+    }
+
+    /**
+     * Check if booking duration is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isBookingButtonPresent() {
+        return bookingButton.isVisible();
+    }
+
+    /**
+     * Select Starting Date of Boarding if exist
+     *
+     * @param date date e.g. 15,20 etc
+     */
+    public void selectDateForStartBoarding(String date) {
+        if (playwright.waitTillLocatorIsVisible(dateTextBox, 5.0)) {
+            playwright.clickOn(dateTextBox);
+            if (date.equalsIgnoreCase("today")) {
+                playwright.waitTillLocatorIsVisible(datePickToday, 5.0);
+                playwright.clickOn(datePickToday);
+            } else {
+                if (playwright.waitTillLocatorIsVisible(tomorrowDateLabel, 3.0)) {
+                    tomorrowDateLabel.click();
+                } else if (playwright.waitTillLocatorIsVisible(saturdayDateLabel, 3.0)) {
+                    saturdayDateLabel.click();
+                } else {
+                    sundayDateLabel.click();
+                }
+            }
+        }
+    }
+
+    /**
+     * Select Rent Type of Booking
+     *
+     * @param type type of rent
+     */
+    public void selectRentType(String type) {
+        playwright.clickOn(page.getByText(type));
+    }
+
+    // ---------- Kost Badge(Apik, SinggahSini, Kost Pilihan) ---------------------
+
+    /**
+     * Check if Apik badge is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isApikBadgePresent() {
+        return playwright.waitTillLocatorIsVisible(apikBadge, 3.0);
+    }
+
+    /**
+     * Check if Singgahsini badge is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isSinggahsiniBadgePresent() {
+        return playwright.waitTillLocatorIsVisible(singgahsiniBadge, 3.0);
+    }
+
+    /**
+     * check owner badges section on kost detail
+     *
+     * @return owner badges label is present
+     */
+    public boolean ownerBadgesSectionAsPresent() {
+        playwright.pageScrollToDown(4000);
+        playwright.pageScrollUntilElementIsVisible(ownerImageProfile);
+        return playwright.waitTillLocatorIsVisible(ownerNameText, 2.0);
+    }
+
+    /**
+     * Check if Owner Statement is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isOwnerStatement() {
+        return playwright.waitTillLocatorIsVisible(ownerStatement, 2.0);
+    }
+
+    // ----------------Kost Benefit---------------------
+
+    /**
+     * Check if Kos Benefit Title is present
+     */
+    public boolean isBenefitTitlePresent() {
+        playwright.pageScrollUntilElementIsVisible(kosBenefit);
+        return playwright.waitTillLocatorIsVisible(benefitTitle, 2.0);
+    }
+
+    /**
+     * Check if Kos Benefit Description is present
+     */
+    public boolean isBenefitDescPresent() {
+        return playwright.waitTillLocatorIsVisible(benefitDesc, 2.0);
+    }
+
+    // ------------ Kost Review Section -----------
+
+    /**
+     * Scroll to review section
+     */
+    public void scrollToReviewSection() {
+        playwright.pageScrollToDown(4000);
+        playwright.pageScrollUntilElementIsVisible(reviewSection);
+    }
+
+    /**
+     * Check review overview is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isReviewOverviewDisplayed() {
+        return playwright.waitTillLocatorIsVisible(overviewRatingReview, 2.0);
+    }
+
+    /**
+     * Check review category is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isReviewCategoryDisplayed() {
+        return playwright.waitTillLocatorIsVisible(reviewCategory, 2.0);
+    }
+
+    /**
+     * Check user review is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isUserReviewDisplayed() {
+        return playwright.waitTillLocatorIsVisible(userReview, 2.0);
+    }
+
+    /**
+     * Click on See all review button
+     */
+    public void clickSeeAllReviewBtn() {
+        playwright.pageScrollToDown(4000);
+        playwright.pageScrollUntilElementIsVisible(seeAllReviewBtn);
+        playwright.clickOn(seeAllReviewBtn);
+    }
+
+    /**
+     * Check overview review modal is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isOverviewReviewModalDisplayed() {
+        return playwright.waitTillLocatorIsVisible(overviewRatingModal, 2.0);
+    }
+
+    /**
+     * Check overview review modal is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isReviewCategoryModalDisplayed() {
+        return playwright.waitTillLocatorIsVisible(reviewCategoryModal, 2.0);
+    }
+
+    /**
+     * Check sorting review is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSortingReviewDisplayed() {
+        return playwright.waitTillLocatorIsVisible(sortingReviewBtn, 2.0);
+    }
+
+    /**
+     * Check user review Modal is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isUserReviewModalDisplayed() {
+        return playwright.waitTillLocatorIsVisible(userReviewModal, 2.0);
+    }
+
+    /**
+     * Click on close See all review button
+     */
+    public void closeAllReviewModal() {
+        playwright.clickOn(closeModalReviewBtn);
     }
 
     //------------ Favorite kost section ----------------
