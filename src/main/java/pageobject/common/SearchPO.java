@@ -77,7 +77,6 @@ public class SearchPO {
 
     /**
      * Search kost by test
-     *
      * @param search kost name
      * @return KostDetailsPO
      */
@@ -86,6 +85,18 @@ public class SearchPO {
         Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
         firstResultKostName.click();
         return new KostDetailsPO(page);
+    }
+
+    /**
+     *
+     * @param area
+     * @return
+     */
+    public KostLandingAreaPO searchByArea(String area, String areaToClick) {
+        inputSearch.fill(area);
+        Locator firstAreaResult = page.getByText(areaToClick).first();
+        firstAreaResult.click();
+        return new KostLandingAreaPO(page);
     }
 
     /**
@@ -312,9 +323,7 @@ public class SearchPO {
     }
 
     /**
-     * <<<<<<< HEAD
      * click area by kota popular
-     *
      * @param area
      */
     public void clickOnListPopularCity(String area) {
@@ -324,7 +333,6 @@ public class SearchPO {
 
     /**
      * verify area by kota popular
-     *
      * @param listresult
      * @return
      */
