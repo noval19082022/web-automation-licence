@@ -19,6 +19,10 @@ public class KostLandingAreaPO {
     private Locator nominatimMap;
     private Locator filterResetText;
     private Locator filterResetButton;
+    private Locator imgKosTidakDitemukan;
+    private Locator headingNoKosInAreaText;
+    private Locator subtitleNoKosInAreaText;
+    private Locator nominatimEmptyList;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -32,6 +36,10 @@ public class KostLandingAreaPO {
         nominatimMap = page.getByText("map Cari berdasarkan Peta Leaflet | © OpenStreetMap, Mamikos");
         filterResetText = page.getByText("Coba kurangi atau hapus filter untuk hasil pencarian yang lebih banyak.");
         filterResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset filter"));
+        this.imgKosTidakDitemukan = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos tidak ditemukan"));
+        headingNoKosInAreaText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos di Area Ini"));
+        subtitleNoKosInAreaText = page.getByText("Cari di Area lain untuk meningkatkan hasil pencarian kos.");
+        nominatimEmptyList = page.locator("div.nominatim-list__empty");
     }
 
     /**
@@ -91,5 +99,37 @@ public class KostLandingAreaPO {
      */
     public void clickOnResetFilterButton() {
         playwright.clickOn(filterResetButton);
+    }
+
+    /**
+     * Check visibility of image banner kos tidak ditemukan
+     * @return boolean
+     */
+    public boolean isImageKosTidakDitemukanVisible() {
+        return playwright.waitTillLocatorIsVisible(imgKosTidakDitemukan);
+    }
+
+    /**
+     * Check visibility of wording "Belum Ada Kos di Area Ini".
+     * @return boolean
+     */
+    public boolean isNoKostInAreaHeadingTextVisible() {
+        return playwright.waitTillLocatorIsVisible(headingNoKosInAreaText);
+    }
+
+    /**
+     * Check visibility of wording "Cari di Area lain untuk meningkatkan hasil pencarian kos".
+     * @return boolean
+     */
+    public boolean isNoKostInAreaSubtitleTextVisible() {
+        return playwright.waitTillLocatorIsVisible(subtitleNoKosInAreaText);
+    }
+
+    /**
+     * Get text content of nominatim empty list
+     * @return List<String>
+     */
+    public List<String> getAllContentNominatimEmptyList() {
+        return nominatimEmptyList.allTextContents();
     }
 }
