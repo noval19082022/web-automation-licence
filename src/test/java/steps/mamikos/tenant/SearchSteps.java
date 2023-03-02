@@ -453,4 +453,10 @@ public class SearchSteps {
     public void user_see_the_pop_up_closed() {
         Assert.assertFalse(search.isMapLegendPresent(), "Map Legend still appears!");
     }
+
+    @Then("user can see empty state kost landing area")
+    public void userCanSeeEmptyStateKostLandingArea() {
+        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Belum Ada Kos di Area Ini"));
+        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Cari di Area lain untuk meningkatkan hasil pencarian kos."));
+    }
 }
