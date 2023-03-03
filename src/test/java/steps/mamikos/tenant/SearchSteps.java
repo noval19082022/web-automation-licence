@@ -30,6 +30,8 @@ public class SearchSteps {
     KostLandingAreaPO kostLanding = new KostLandingAreaPO(page);
     private Map<String, String> cityName;
     private Map<String, String> areaSearch;
+    private int kostListBefore;
+    private int kostListAfter;
 
     @When("user search keyword:")
     public void userSearchKeyword(DataTable table) {
@@ -409,7 +411,7 @@ public class SearchSteps {
 
     @Then("user can see kost list is more than {int}")
     public void userCanSeeKostListIsMoreThan(int kostList) {
-        Assert.assertTrue(kostLanding.getKostListLocator().size() > 1, "Kost list is not greater than 1");
+        Assert.assertTrue(kostLanding.getKostListLocator().size() > kostList, "Kost list is not greater than " + kostList);
         Assert.assertFalse(kostLanding.isFilterResetTextVisible(), "Reset filter text is visible");
         Assert.assertFalse(kostLanding.isFilterResetButtonVisible(), "Reset filter button is visible");
     }
@@ -458,5 +460,30 @@ public class SearchSteps {
     public void userCanSeeEmptyStateKostLandingArea() {
         Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Belum Ada Kos di Area Ini"));
         Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Cari di Area lain untuk meningkatkan hasil pencarian kos."));
+    }
+
+    @Then("user can see Lihat Lebih Banyak And Back To Top Button")
+    public void userCanSeeLihatLebihBanyakAndBackToTopButton() {
+        Assert.assertTrue(kostLanding.isLihatLebihBanyakButtonVisible(), "Lihat Lebih Banyak button is not visible");
+        Assert.assertTrue(kostLanding.isBackToTopButtonVisible(), "Back To To Button is not visible");
+    }
+
+    @Given("user click on Lihat Lebih Banyak button")
+    public void userClickOnLihatLebihBanyakButton() {
+        kostListBefore = kostLanding.getKostListLocator().size();
+        kostLanding.clickOnLihatLebihBanyakButton();
+        kostListAfter = kostLanding.getKostListLocator().size();
+    }
+
+
+    @Then("user can see kos lists are expanded")
+    public void userCanSeeKosListsAreExpanded() {
+        Assert.assertTrue(kostListBefore < kostListAfter);
+    }
+
+    @Then("user can use Back To Top Button")
+    public void userCanUseBackToTopButton() {
+        Assert.assertTrue(kostLanding.isBackToTopButtonEnabled(), "Back To Top Button Is Not Clickable");
+        kostLanding.clickOnBackToTopButton();
     }
 }

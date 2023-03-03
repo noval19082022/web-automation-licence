@@ -15,7 +15,7 @@ public class KostLandingAreaPO {
     private Locator filterInputMinimalPrice;
     private Locator filterInputMaximumPrice;
     private Locator filterPriceSimpanButton;
-    private Locator kosLists;
+    private Locator kostRoomCard;
     private Locator nominatimMap;
     private Locator filterResetText;
     private Locator filterResetButton;
@@ -23,6 +23,8 @@ public class KostLandingAreaPO {
     private Locator headingNoKosInAreaText;
     private Locator subtitleNoKosInAreaText;
     private Locator nominatimEmptyList;
+    private Locator lihatLebihBanyakButton;
+    private Locator backToTopButton;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -32,14 +34,16 @@ public class KostLandingAreaPO {
         filterInputMinimalPrice = page.getByRole(AriaRole.TEXTBOX).first();
         filterInputMaximumPrice = page.getByRole(AriaRole.TEXTBOX).nth(1);
         filterPriceSimpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        kosLists = page.locator(".nominatim-rooms-grid");
+        kostRoomCard = page.getByTestId("kostRoomCard");
         nominatimMap = page.getByText("map Cari berdasarkan Peta Leaflet | © OpenStreetMap, Mamikos");
         filterResetText = page.getByText("Coba kurangi atau hapus filter untuk hasil pencarian yang lebih banyak.");
         filterResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset filter"));
-        this.imgKosTidakDitemukan = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos tidak ditemukan"));
+        imgKosTidakDitemukan = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos tidak ditemukan"));
         headingNoKosInAreaText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos di Area Ini"));
         subtitleNoKosInAreaText = page.getByText("Cari di Area lain untuk meningkatkan hasil pencarian kos.");
         nominatimEmptyList = page.locator("div.nominatim-list__empty");
+        lihatLebihBanyakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat lebih banyak lagi"));
+        backToTopButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back-top"));
     }
 
     /**
@@ -67,7 +71,8 @@ public class KostLandingAreaPO {
      * @return List<Locator>
      */
     public List<Locator> getKostListLocator() {
-        return kosLists.all();
+        kostRoomCard.first().waitFor(new Locator.WaitForOptions().setTimeout(30000));
+        return kostRoomCard.all();
     }
 
     /**
@@ -131,5 +136,43 @@ public class KostLandingAreaPO {
      */
     public List<String> getAllContentNominatimEmptyList() {
         return nominatimEmptyList.allTextContents();
+    }
+
+    /**
+     * Check visibility of lihat lebih banyak lagi button visibility
+     * @return boolean
+     */
+    public boolean isLihatLebihBanyakButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton);
+    }
+
+    /**
+     * Check visibility of back to top button
+     * @return boolean
+     */
+    public boolean isBackToTopButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(backToTopButton);
+    }
+
+    /**
+     * click on lihat lebih banyak button
+     */
+    public void clickOnLihatLebihBanyakButton() {
+        playwright.clickOn(lihatLebihBanyakButton);
+    }
+
+    /**
+     * Check availability of back to top button
+     * @return boolean
+     */
+    public boolean isBackToTopButtonEnabled() {
+        return backToTopButton.isEnabled();
+    }
+
+    /**
+     * Click on back to top button
+     */
+    public void clickOnBackToTopButton() {
+        playwright.clickOn(backToTopButton);
     }
 }
