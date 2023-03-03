@@ -154,14 +154,24 @@ public class KostLandingAreaPO {
         return playwright.waitTillLocatorIsVisible(backToTopButton);
     }
 
+    /**
+     * click on lihat lebih banyak button
+     */
     public void clickOnLihatLebihBanyakButton() {
         playwright.clickOn(lihatLebihBanyakButton);
     }
 
+    /**
+     * Check availability of back to top button
+     * @return boolean
+     */
     public boolean isBackToTopButtonEnabled() {
         return backToTopButton.isEnabled();
     }
 
+    /**
+     * Click on back to top button
+     */
     public void clickOnBackToTopButton() {
         playwright.clickOn(backToTopButton);
     }
