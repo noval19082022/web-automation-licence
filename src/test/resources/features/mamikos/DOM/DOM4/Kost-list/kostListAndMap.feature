@@ -30,7 +30,6 @@ Feature: Kost List and Map
     When user want to close the legend map
     Then user will see the pop up closed
 
-  @gorby
   Scenario Outline: [Main Search][Search Popular Area] Check result of search on popular area
     Given user go to mamikos homepage
     * user want to maximize the screen size
