@@ -29,3 +29,31 @@ Feature: Kost List and Map
     #user close the legendmap
     When user want to close the legend map
     Then user will see the pop up closed
+
+  @gorby
+  Scenario Outline: [Main Search][Search Popular Area] Check result of search on popular area
+    Given user go to mamikos homepage
+    * user want to maximize the screen size
+    And user type for keyword "<city>"
+    Then user validate the suggestion result contains "<city>"
+    Examples:
+      | city            |
+      | Jakarta         |
+      | Jakarta Selatan |
+      | Surabaya        |
+      | Jakarta Pusat   |
+      | Bandung         |
+      | Yogyakarta      |
+      | Tebet           |
+      | UGM             |
+      | Malang          |
+      | Jakarta Barat   |
+      | Semarang        |
+      | Setiabudi       |
+      | UNDIP           |
+      | Kontrakan       |
+      | Medan           |
+      | Bogor           |
+      | Bekasi          |
+      | Jakarta Timur   |
+      | Kelapa Gading   |
