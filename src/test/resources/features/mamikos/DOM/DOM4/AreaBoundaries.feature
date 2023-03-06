@@ -45,3 +45,14 @@ Feature: Area Boundaries
   @areaboundaries
   Scenario: User Can Use Back To Top Button
     Then user can use Back To Top Button
+
+  @areaboundaries
+  Scenario: User Can Use Cari Berdasarkan Peta Button And Result Are Related To The Predefine Area
+    Given user go to mamikos homepage
+    When user search and go to kost landing based on area:
+      | search keyword | Bogor |
+      | area result    | Bogor |
+    Then user can see kos list result area are the list below:
+      | Tanah Sereal |
+      | Bogor |
+      | Bogor Utara |
