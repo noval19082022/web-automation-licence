@@ -39,6 +39,7 @@ public class SearchPO {
     Locator lastPriceListing;
     private Locator FTUETitleText;
     private Locator popUpConfirmationbutton;
+    private Locator suggestionResult;
 
     //--------- Map Section ----------
     private Locator mapLegendButton;
@@ -81,6 +82,7 @@ public class SearchPO {
         this.popUpConfirmationbutton = page.locator("button[data-path='btn_popperAction']");
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
+        this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
     }
 
     /**
@@ -694,5 +696,23 @@ public class SearchPO {
      */
     public boolean isMapLegendPresent() {
         return playwright.waitTillLocatorIsVisible(mapLegendClosedStatus);
+    }
+
+    /**
+     * Enter Text in search bar without select result
+     *
+     * @param searchText is text that user want to search
+     */
+    public void enterTextOnSearchSearchBox(String searchText) {
+        inputSearch.fill(searchText);
+        inputSearch.press("Enter");
+    }
+
+    /**
+     * Get suggestion text
+     * @return String data type list of suggestion result section
+     */
+    public List<String> getSuggestionText() {
+        return suggestionResult.allInnerTexts();
     }
 }
