@@ -3,9 +3,9 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KostLandingAreaPO {
@@ -30,6 +30,8 @@ public class KostLandingAreaPO {
     private Locator cariBerdasarkanPetaButton;
     private Locator kosTidakDitemukanHeading;
     private Locator hapusSemuaFilterButton;
+    private Locator sortButton;
+    private Locator kosPrice;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -53,6 +55,8 @@ public class KostLandingAreaPO {
         cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("map Cari berdasarkan Peta"));
         kosTidakDitemukanHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kos Tidak Ditemukan"));
         hapusSemuaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus semua filter"));
+        sortButton = page.getByTestId("filter-kost-sorting");
+        kosPrice = page.locator("span.rc-price__text");
     }
 
     /**
@@ -237,5 +241,35 @@ public class KostLandingAreaPO {
     public boolean hapusSemuaFilterButtonVisible() {
         playwright.waitFor(hapusSemuaFilterButton, 30000.0);
         return playwright.waitTillLocatorIsVisible(hapusSemuaFilterButton);
+    }
+
+    /**
+     * Set price sorting from cheaper to expensive or vise versa, or recommended kos
+     * @param sorting "Harga Termahal" or "Harga Termurah" or "Rekomendasi"
+     */
+    public void setPriceSortingFrom(String sorting) {
+        Locator sortingFromButton = page.getByText(sorting);
+        playwright.clickOn(sortButton);
+        playwright.clickOn(sortingFromButton);
+    }
+
+    /**
+     * Get kos price by index list
+     * @param index index of list
+     * @return
+     */
+    public int getKostPrice(int index) {
+        playwright.waitFor(kosPrice.last(), 30000.0);
+        List<Locator> kosPriceList = kosPrice.all();
+        return JavaHelpers.extractNumber(playwright.getText(kosPriceList.get(index)));
+    }
+
+    /**
+     * Get kos price list size
+     * @return int data type
+     */
+    public int getKosPriceListSize() {
+        playwright.waitFor(kosPrice.last(), 30000.0);
+        return kosPrice.all().size();
     }
 }

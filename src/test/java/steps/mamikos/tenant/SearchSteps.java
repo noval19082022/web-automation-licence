@@ -525,4 +525,44 @@ public class SearchSteps {
         Assert.assertTrue(kostLanding.isKosTidakDitemukanHeadingVisible(), "Kos Tidak Ditemukan heading is not visible");
         Assert.assertTrue(kostLanding.hapusSemuaFilterButtonVisible(), "Hapus semua filter button is not visible");
     }
+
+    @When("user set price sorting from lower to greater")
+    public void userSetPriceSortingFromLowerToGreater() {
+        kostLanding.setPriceSortingFrom("Harga Termurah");
+    }
+
+    @Then("user can see kos list rearrange from cheaper to expensive")
+    public void userCanSeeKosListRearrangeFromCheaperToExpensive() {
+        for (int i = 0; i < kostLanding.getKosPriceListSize(); i++) {
+            if (i == (kostLanding.getKosPriceListSize() - 1)) {
+                break;
+            }
+            var cheaperPrice = kostLanding.getKostPrice(i);
+            var greaterPrice = kostLanding.getKostPrice(i+1);
+            System.out.println("Iterate number " + (i + 1));
+            System.out.println("Cheaper price is " + cheaperPrice);
+            System.out.println("Expensive price is " + greaterPrice);
+            Assert.assertTrue(cheaperPrice <= greaterPrice, cheaperPrice + "is not cheaper than " + greaterPrice);
+        }
+    }
+
+    @When("user set price sorting from greater to lower")
+    public void userSetPriceSortingFromGreaterToLower() {
+        kostLanding.setPriceSortingFrom("Harga Termahal");
+    }
+
+    @Then("user can see kos list rearrange from expensive to cheaper")
+    public void userCanSeeKosListRearrangeFromExpensiveToCheaper() {
+        for (int i = 0; i < kostLanding.getKosPriceListSize(); i++) {
+            if (i == (kostLanding.getKosPriceListSize() - 1)) {
+                break;
+            }
+            var greaterPrice = kostLanding.getKostPrice(i);
+            var lowerPrice = kostLanding.getKostPrice(i+1);
+            System.out.println("Iterate number " + (i + 1));
+            System.out.println("Greater price is " + greaterPrice);
+            System.out.println("Lower price is " + lowerPrice);
+            Assert.assertTrue(greaterPrice >= lowerPrice, greaterPrice + " is not more expensive than " + lowerPrice);
+        }
+    }
 }
