@@ -487,6 +487,20 @@ public class SearchSteps {
         kostLanding.clickOnBackToTopButton();
     }
 
+    @Then("user can see kos list result area are the list below:")
+    public void userCanSeeKosListResultAreaAreTheListBelow(DataTable area) {
+        List<String> areaList = area.asList();
+        kostLanding.clickOnCariBerdasarkanPeta();
+        int kosAreaSize = kostLanding.getKosAreaSize();
+        for (int i = 0; i < kosAreaSize; i++) {
+            System.out.println(kostLanding.getKosAreaText(i));
+            if (kostLanding.getKosAreaText(i).equalsIgnoreCase("unknown")) {
+                continue;
+            }
+            Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Are " + kostLanding.getKosAreaText(i) + "Is not present in the list");
+        }
+    }
+
     @And("user type for keyword {string}")
     public void userTypeForKeyword(String city) {
         search = homePO.clickOnSearchButton();

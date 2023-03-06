@@ -5,6 +5,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KostLandingAreaPO {
@@ -25,6 +26,8 @@ public class KostLandingAreaPO {
     private Locator nominatimEmptyList;
     private Locator lihatLebihBanyakButton;
     private Locator backToTopButton;
+    private Locator areaText;
+    private Locator cariBerdasarkanPetaButton;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -44,6 +47,8 @@ public class KostLandingAreaPO {
         nominatimEmptyList = page.locator("div.nominatim-list__empty");
         lihatLebihBanyakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat lebih banyak lagi"));
         backToTopButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back-top"));
+        areaText = page.locator("span.rc-info__location");
+        cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("map Cari berdasarkan Peta"));
     }
 
     /**
@@ -174,5 +179,31 @@ public class KostLandingAreaPO {
      */
     public void clickOnBackToTopButton() {
         playwright.clickOn(backToTopButton);
+    }
+
+    /**
+     * Get kos area text based on it index
+     * @param index desired index int data type
+     * @return String
+     */
+    public String getKosAreaText(int index) {
+        List<Locator> listArea = areaText.all();
+        return playwright.getText(listArea.get(index));
+    }
+
+    /**
+     * Get kos area size
+     * @return int data type
+     */
+    public int getKosAreaSize() {
+        playwright.waitFor(areaText.first(), 30000.0);
+        return areaText.all().size();
+    }
+
+    /**
+     * Click on cari berdasarkan peta
+     */
+    public void clickOnCariBerdasarkanPeta() {
+        playwright.clickOn(cariBerdasarkanPetaButton);
     }
 }
