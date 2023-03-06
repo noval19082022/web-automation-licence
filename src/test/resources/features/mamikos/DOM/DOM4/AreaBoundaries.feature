@@ -1,4 +1,4 @@
-@DOM4
+@DOM4 @areaboundaries
 Feature: Area Boundaries
 
   @continue
@@ -65,3 +65,17 @@ Feature: Area Boundaries
       | area result    | Padang Bulan |
     When user use filter "Dikelola Mamikos"
     Then user can see kos tidak ditemukan state on kos landing area
+
+  @areaboundaries @continue
+  Scenario: User Can Use Price Sorting From Lower To Greater
+    Given user go to mamikos homepage
+    When user search and go to kost landing based on area:
+      | search keyword | Depok |
+      | area result    | Depok City |
+    When user set price sorting from lower to greater
+    Then user can see kos list rearrange from cheaper to expensive
+
+  @areaboundaries
+  Scenario: User Can Use Price Sorting From Greater To Lower
+    When user set price sorting from greater to lower
+    Then user can see kos list rearrange from expensive to cheaper
