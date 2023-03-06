@@ -28,6 +28,8 @@ public class KostLandingAreaPO {
     private Locator backToTopButton;
     private Locator areaText;
     private Locator cariBerdasarkanPetaButton;
+    private Locator kosTidakDitemukanHeading;
+    private Locator hapusSemuaFilterButton;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -49,6 +51,8 @@ public class KostLandingAreaPO {
         backToTopButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back-top"));
         areaText = page.locator("span.rc-info__location");
         cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("map Cari berdasarkan Peta"));
+        kosTidakDitemukanHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kos Tidak Ditemukan"));
+        hapusSemuaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus semua filter"));
     }
 
     /**
@@ -116,6 +120,7 @@ public class KostLandingAreaPO {
      * @return boolean
      */
     public boolean isImageKosTidakDitemukanVisible() {
+        playwright.waitFor(imgKosTidakDitemukan, 30000.0);
         return playwright.waitTillLocatorIsVisible(imgKosTidakDitemukan);
     }
 
@@ -205,5 +210,32 @@ public class KostLandingAreaPO {
      */
     public void clickOnCariBerdasarkanPeta() {
         playwright.clickOn(cariBerdasarkanPetaButton);
+    }
+
+    /**
+     * Click on filter
+     * @param filter one of the available filter Dikelola Mamikos etc
+     */
+    public void clickOnFilter(String filter) {
+        var filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter));
+        playwright.clickOn(filterButton);
+    }
+
+    /**
+     * Check visibility kos tidak ditemukan heading
+     * @return boolean
+     */
+    public boolean isKosTidakDitemukanHeadingVisible() {
+        playwright.waitFor(kosTidakDitemukanHeading, 30000.0);
+        return playwright.waitTillLocatorIsVisible(kosTidakDitemukanHeading);
+    }
+
+    /**
+     * Check visibility hapus semua filter button
+     * @return boolean
+     */
+    public boolean hapusSemuaFilterButtonVisible() {
+        playwright.waitFor(hapusSemuaFilterButton, 30000.0);
+        return playwright.waitTillLocatorIsVisible(hapusSemuaFilterButton);
     }
 }

@@ -513,4 +513,16 @@ public class SearchSteps {
         List<String> suggestionInnerText = search.getSuggestionText();
         Assert.assertTrue(suggestionInnerText.get(0).contains(suggestion));
     }
+
+    @When("user use filter {string}")
+    public void userUseFilter(String filter) {
+        kostLanding.clickOnFilter(filter);
+    }
+
+    @Then("user can see kos tidak ditemukan state on kos landing area")
+    public void userCanSeeKosTidakDitemukanStateOnKosLandingArea() {
+        Assert.assertTrue(kostLanding.isImageKosTidakDitemukanVisible(), "Image kos tidak ditemukan is not visible");
+        Assert.assertTrue(kostLanding.isKosTidakDitemukanHeadingVisible(), "Kos Tidak Ditemukan heading is not visible");
+        Assert.assertTrue(kostLanding.hapusSemuaFilterButtonVisible(), "Hapus semua filter button is not visible");
+    }
 }
