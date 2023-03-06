@@ -500,4 +500,17 @@ public class SearchSteps {
             Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Are " + kostLanding.getKosAreaText(i) + "Is not present in the list");
         }
     }
+
+    @And("user type for keyword {string}")
+    public void userTypeForKeyword(String city) {
+        search = homePO.clickOnSearchButton();
+        search.enterTextOnSearchSearchBox(city);
+    }
+
+    @Then("user validate the suggestion result contains {string}")
+    public void userValidateTheSuggestionResultContains(String suggestion) {
+        search = new SearchPO(ActiveContext.getActivePage());
+        List<String> suggestionInnerText = search.getSuggestionText();
+        Assert.assertTrue(suggestionInnerText.get(0).contains(suggestion));
+    }
 }
