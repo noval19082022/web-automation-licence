@@ -5,7 +5,7 @@ Feature: Area Boundaries
   Scenario: User Can Search Kost Based On Landing Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Padang |
+      | search keyword | Padang       |
       | area result    | Padang Bulan |
     Then user can see the kost list are from "Padang Bulan"
 
@@ -21,7 +21,7 @@ Feature: Area Boundaries
   Scenario: User Can See Area Boundaries With Result Is 0
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Lumajang |
+      | search keyword | Lumajang           |
       | area result    | Kabupaten Wonosobo |
     Then user can see empty state kost landing area
 
@@ -54,14 +54,14 @@ Feature: Area Boundaries
       | area result    | Bogor |
     Then user can see kos list result area are the list below:
       | Tanah Sereal |
-      | Bogor |
-      | Bogor Utara |
+      | Bogor        |
+      | Bogor Utara  |
 
   @areaboundaries
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Padang |
+      | search keyword | Padang       |
       | area result    | Padang Bulan |
     When user use filter "Dikelola Mamikos"
     Then user can see kos tidak ditemukan state on kos landing area
@@ -70,7 +70,7 @@ Feature: Area Boundaries
   Scenario: User Can Use Price Sorting From Lower To Greater
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Depok |
+      | search keyword | Depok      |
       | area result    | Depok City |
     When user set price sorting from lower to greater
     Then user can see kos list rearrange from cheaper to expensive
