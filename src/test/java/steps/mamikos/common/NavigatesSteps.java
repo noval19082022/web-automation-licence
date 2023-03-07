@@ -140,4 +140,10 @@ public class NavigatesSteps {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_NGEBUT_AREA, 30000.0, LoadState.LOAD);
     }
+
+    @Given("user go to landing apartment")
+    public void userGoToLandingApartment() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
+    }
 }
