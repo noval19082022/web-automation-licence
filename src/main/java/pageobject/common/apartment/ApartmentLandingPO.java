@@ -24,10 +24,17 @@ public class ApartmentLandingPO {
         apartmentListNameText = page.locator("span.rc-info__name");
     }
 
+    /**
+     * Fill apartment search input
+     * @param area
+     */
     public void fillApartmentSearchInput(String area) {
         playwright.forceFill(inputSearch, area);
     }
 
+    /**
+     * Click on search button right side of search input
+     */
     public void clickOnSearch() {
         playwright.clickOn(searchButton);
     }
