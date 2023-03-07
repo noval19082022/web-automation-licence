@@ -19,6 +19,8 @@ public class KostDetailsPO {
     Locator mulaiKosInput;
     Locator datePicker;
     Locator ftueSlider;
+    private Locator ftuePopUP;
+    private Locator ftueBookingBenefitText;
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
@@ -185,6 +187,8 @@ public class KostDetailsPO {
         this.kostDetailsContainer = page.locator("#detailKostContainer");
         this.datePicker = page.getByTestId("bookingInputCheckinContent-datePicker");
         this.ftueSlider = playwright.locatorByRoleSetName(locator.roleButton, "Next slide");
+        this.ftuePopUP = page.locator(".onboarding-ftue");
+        this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
@@ -1524,5 +1528,28 @@ public class KostDetailsPO {
      */
     public void clickOnShareKostButton() {
         shareKostButton.click();
+    }
+
+    /**
+     * Check the visibility of ftue booking benefit
+     * @return boolean
+     */
+    public boolean isFTUEBookingBenefitVisible() {
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(300);
+            if (ftueSlider.isVisible()) {
+                break;
+            }
+        }
+        return playwright.waitTillLocatorIsVisible(ftuePopUP);
+    }
+
+    /**
+     * Get ftue booking benefit wording
+     * @param index 0-4 ftue booking benefit wording currently are 5
+     * @return String data type
+     */
+    public String getFTUEBookingBenefitWording(int index) {
+        return playwright.getText(ftueBookingBenefitText.nth(index));
     }
 }

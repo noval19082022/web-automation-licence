@@ -551,7 +551,7 @@ public class SearchSteps {
         kostLanding.setPriceSortingFrom("Harga Termahal");
     }
 
-    @Then("user can see kos list rearrange from expensive to cheaper")
+    @Then("user/tenant/owner can see kos list rearrange from expensive to cheaper")
     public void userCanSeeKosListRearrangeFromExpensiveToCheaper() {
         for (int i = 0; i < kostLanding.getKosPriceListSize(); i++) {
             if (i == (kostLanding.getKosPriceListSize() - 1)) {
