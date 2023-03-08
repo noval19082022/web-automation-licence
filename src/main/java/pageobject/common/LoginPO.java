@@ -17,6 +17,10 @@ public class LoginPO {
     protected Locator loginBtn;
     protected Locator FBLoginTenantFav;
     protected Locator googleLoginTenantFav;
+    private Locator signInWithFBtBtn;
+    protected Locator emailAddressFBInput;
+    protected Locator passwordFBInput;
+    protected Locator loginFacebookBtn;
     public LoginPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -27,6 +31,10 @@ public class LoginPO {
         this.loginBtn = page.getByTestId("loginButton");
         this.FBLoginTenantFav = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ic_facebook Masuk dengan Facebook"));
         this.googleLoginTenantFav = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ic_google Masuk dengan Google"));
+        this.signInWithFBtBtn = page.getByTestId("loginFacebookButton");
+        this.emailAddressFBInput = page.getByPlaceholder("Email address or phone number");
+        this.passwordFBInput = page.getByPlaceholder("Password");
+        loginFacebookBtn = page.locator("#loginbutton");
     }
 
     /**
@@ -67,4 +75,26 @@ public class LoginPO {
         return FBLoginTenantFav.isVisible()
                 && googleLoginTenantFav.isVisible();
     }
+
+    /**
+     * Click on Sign in With Facebook button
+     * @return TenantLoginPO class
+     */
+    public synchronized TenantLoginPO clickOnSignInWithFacebookButton() {
+        signInWithFBtBtn.click();
+        return new TenantLoginPO(page);
+    }
+
+    protected Object fillEmailAddress(String phoneNumber) {
+        return new Object();
+    }
+
+    protected Object fillPasswordFacebook(String passwordFB) {
+        return new Object();
+    }
+
+    protected Object clickOnLoginFacebookButton() {
+        return new Object();
+    }
+
 }
