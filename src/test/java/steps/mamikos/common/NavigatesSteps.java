@@ -145,4 +145,10 @@ public class NavigatesSteps {
     public void adminGoToMamikosBangkrupuxAdmin() {
         playwright.navigateTo(Mamikos.ADMINBANGKRUPUX);
     }
+
+    @Given("user go to landing apartment")
+    public void userGoToLandingApartment() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
+    }
 }

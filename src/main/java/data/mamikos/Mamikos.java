@@ -27,5 +27,5 @@ public class Mamikos {
     public static final String KOST_PROMO_NGEBUT_TOP = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaTop");
     public static final String KOST_PROMO_NGEBUT_BOTTOM = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaBottom");
     public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
-
+    public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
 }
