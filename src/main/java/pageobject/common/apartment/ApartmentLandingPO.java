@@ -65,4 +65,12 @@ public class ApartmentLandingPO {
         playwright.waitFor(apartmentListNameText.last(), 30000.0);
         return playwright.getLocators(apartmentListNameText).size();
     }
+
+    /**
+     * Click on apartement list based on it index
+     * @param i int type index apartment list
+     */
+    public void clickOnApartmentListNumber(int i) {
+        playwright.clickOn(apartmentListNameText.nth(i));
+    }
 }

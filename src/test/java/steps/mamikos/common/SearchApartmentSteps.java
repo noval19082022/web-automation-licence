@@ -1,7 +1,9 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -28,5 +30,12 @@ public class SearchApartmentSteps {
     @Then("user can see apartment list")
     public void userCanSeeApartmentList() {
         Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
+    }
+
+    @When("user go to apartment details from apartment landing list number {int}")
+    public void userGoToApartmentDetailsFromApartmentLandingListNumber(int listNumber) {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
+        apartment.clickOnApartmentListNumber(listNumber - 1);
     }
 }

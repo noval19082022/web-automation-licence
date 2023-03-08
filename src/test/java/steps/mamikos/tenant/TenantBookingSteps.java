@@ -105,9 +105,9 @@ public class TenantBookingSteps {
     @Then("user/owner/tenant can see FTUE booking benefit with wording:")
     public void userCanSeeFTUEBookingBenefit(DataTable table) {
         ftueBookingBenefitTextList = table.asList(String.class);
-        System.out.println(ftueBookingBenefitTextList);
         Assert.assertTrue(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide Booking Benefit is not visible");
         for (int i = 0; i < ftueBookingBenefitTextList.size(); i++) {
+            System.out.println("Asserting: " + ftueBookingBenefitTextList.get(i));
             Assert.assertEquals(kostDetail.getFTUEBookingBenefitWording(i), ftueBookingBenefitTextList.get(i), "FTUE wording is not equals");
         }
     }
