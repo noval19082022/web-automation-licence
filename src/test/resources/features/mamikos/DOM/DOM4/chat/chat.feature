@@ -147,4 +147,5 @@ Feature: Chat and Chat Optimization
     And tenant set active page to 1
     And user click on hubungi pengelola button
     And user select question "Boleh tahu alamat lengkap apartemen ini?"
+    And user click send chat from popup
     Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
