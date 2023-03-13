@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -37,5 +38,10 @@ public class SearchApartmentSteps {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
         apartment.clickOnApartmentListNumber(listNumber - 1);
+    }
+
+    @And("user click on hubungi pengelola button")
+    public void userClickOnHubungiPengelolaButton() {
+        apartment.clickContactApt();
     }
 }

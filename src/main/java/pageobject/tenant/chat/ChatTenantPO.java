@@ -1,0 +1,120 @@
+package pageobject.tenant.chat;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import io.cucumber.java.bs.A;
+import utilities.PlaywrightHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChatTenantPO {
+    private Page page;
+    private PlaywrightHelpers playwright;
+    Locator questionsOption;
+    Locator sendQuestionButton;
+    Locator ajukanSewaButton;
+    Locator latestChat;
+    Locator chatTextBox;
+    Locator sendButton;
+    Locator disabledRoomCardBookingButton;
+    Locator seeAdsButton;
+
+    public ChatTenantPO(Page page) {
+        this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
+        questionsOption = page.locator("//p[@class='bg-c-radio__label bg-c-text bg-c-text--body-2']");
+        ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
+        sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
+        latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
+        chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
+        sendButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("send"));
+        disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
+        seeAdsButton = page.getByText("Lihat Iklan");
+    }
+
+    /**
+     * List all questions in pop up
+     * @return list questions
+     */
+    public List<String> listQuestions() {
+        List<String> questionsListing = new ArrayList<>();
+        List<Locator> questionsList = questionsOption.all();
+        for (Locator i : questionsList ){
+            questionsListing.add(playwright.getText(i));
+        }
+        return questionsListing;
+    }
+
+    /**
+     * Verify button label in question pop up is correct
+     *
+     * @return String text button Send
+     */
+    public String verifySendLabel() {
+        return playwright.getText(ajukanSewaButton);
+    }
+
+    /**
+     * Click one of question in radio button
+     * @param text is position from top
+     *
+     */
+    public void clickQuestion(String text) {
+        Locator questionOption = page.getByText(""+text+"");
+        playwright.clickOn(questionOption);
+    }
+
+    /**
+     * Click ajukan sewa button in question pop up
+     *
+     */
+    public void clickAjukanSewaButton() {
+        playwright.clickOn(ajukanSewaButton);
+    }
+
+    /**
+     * Click send in question pop up
+     * @throws InterruptedException
+     */
+    public void clickSend() {
+        playwright.clickOn(sendQuestionButton);
+    }
+
+    /**
+     * Get latest chat
+     * @return String latest chat (most bottom chat)
+     */
+    public String getLatestChatText() {
+        playwright.waitTillLocatorIsVisible(latestChat);
+        return playwright.getText(latestChat);
+
+    }
+
+    /**
+     * tenant Enter text to textbox
+     * @param message is text we want to enter
+     * Hit send after enter message
+     */
+    public void insertChatText(String message) {
+        chatTextBox.fill(message);
+        playwright.clickOn(sendButton);
+    }
+
+    /**
+     * Check booking button disable is present
+     * @return boolean
+     */
+    public boolean isBookingButtonDisablePresent() {
+        return playwright.waitTillLocatorIsVisible(disabledRoomCardBookingButton);
+    }
+
+    /**
+     * Click Lihat Iklan button
+     *
+     */
+    public void clickLihatIklanButton() {
+        playwright.clickOn(seeAdsButton);
+    }
+}
