@@ -13,7 +13,6 @@ public class ApartmentLandingPO {
     private Locator apartemenTidakDitemukanText;
     private Locator noPropertyImage;
     private Locator apartmentListNameText;
-    private Locator contactApartmentButton;
 
     public ApartmentLandingPO(Page page) {
         this.page = page;
@@ -23,7 +22,6 @@ public class ApartmentLandingPO {
         apartemenTidakDitemukanText = page.getByText("Apartemen tidak ditemukan.");
         noPropertyImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Kost tidak ditemukan"));
         apartmentListNameText = page.locator("span.rc-info__name");
-        contactApartmentButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Pengelola"));
     }
 
     /**
@@ -76,10 +74,4 @@ public class ApartmentLandingPO {
         playwright.clickOn(apartmentListNameText.nth(i));
     }
 
-    /**
-     * Click on Hubungi Pengelola Apartnent
-     */
-    public void clickContactApt() {
-        playwright.clickOn(contactApartmentButton);
-    }
 }

@@ -139,12 +139,8 @@ Feature: Chat and Chat Optimization
 
   @TEST_DOM-1739
   Scenario: [Dweb][Apartemen Detail][Chat] Check roomcard on apartemen should not display
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 081223344550  | 083176408442  | qwerty123    |
     Given user go to apartment details from apartment landing list number 1
-    And tenant set active page to 1
+    And tenant set active page to 3
     And user click on hubungi pengelola button
     And user select question "Boleh tahu alamat lengkap apartemen ini?"
     And user click send chat from popup

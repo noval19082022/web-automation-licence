@@ -25,10 +25,10 @@ public class ChatOwnerPO {
         emptyChatImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chat kosong"));
         emptyChatDesc = page.getByText("Tidak ada percakapan saat ini.");
         emptyChatIndicator = page.getByText("Chat kosong");
-        chatKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chat Tanya Pemilik"));
+        chatKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya Pemilik"));
         searchChat = page.getByPlaceholder("Cari...");
         chatTextBox = page.getByRole(AriaRole.TEXTBOX);
-        sendButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("send"));
+        sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
     }
 

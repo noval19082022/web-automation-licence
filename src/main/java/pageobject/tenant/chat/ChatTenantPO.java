@@ -29,7 +29,7 @@ public class ChatTenantPO {
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
-        sendButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("send"));
+        sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
         seeAdsButton = page.getByText("Lihat Iklan");
     }
