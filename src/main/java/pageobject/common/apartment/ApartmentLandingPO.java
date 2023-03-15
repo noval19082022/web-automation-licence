@@ -73,4 +73,5 @@ public class ApartmentLandingPO {
     public void clickOnApartmentListNumber(int i) {
         playwright.clickOn(apartmentListNameText.nth(i));
     }
+
 }

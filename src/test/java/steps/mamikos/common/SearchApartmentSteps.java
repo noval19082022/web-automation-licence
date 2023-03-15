@@ -4,9 +4,11 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.apartment.ApartmentDetailPO;
 import pageobject.common.apartment.ApartmentLandingPO;
 import utilities.PlaywrightHelpers;
 
@@ -14,6 +16,7 @@ public class SearchApartmentSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     ApartmentLandingPO apartment = new ApartmentLandingPO(page);
+    ApartmentDetailPO apartmentDetail = new ApartmentDetailPO(page);
     @When("user search {string} on landing apartment")
     public void userSearchOnLandingApartment(String area) {
         apartment.fillApartmentSearchInput(area);
@@ -38,4 +41,5 @@ public class SearchApartmentSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
         apartment.clickOnApartmentListNumber(listNumber - 1);
     }
+
 }

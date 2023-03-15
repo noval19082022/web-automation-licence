@@ -121,4 +121,11 @@ public class TenantBookingSteps {
     public void userCanNotSeeFTUEBookingBenefit() {
         Assert.assertFalse(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide booking benefit is still visible");
     }
+
+    @And("user search for Kost with name {string} and selects matching result")
+    public void userSearchForKostWithNameAndSelectsMatchingResult(String kosName) {
+        searchPO = homePO.clickOnSearchButton();
+        kostDetail = searchPO.searchByText(kosName);
+        kostDetail.waitTillKostDetailPageVisible();
+    }
 }
