@@ -303,7 +303,7 @@ public class KostDetailsPO {
 
         //-------------- Kost recomendation Section ----------------
         this.relatedCard = page.locator("#relatedCard");
-        this.recommendationListTitle = page.locator("#app > div > h1");
+        this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.recommendationKosText = page.getByText("Kamu mungkin menyukainya");
         this.seeAllRecomendationButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua"));
         this.arrowRecommendationNextButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));

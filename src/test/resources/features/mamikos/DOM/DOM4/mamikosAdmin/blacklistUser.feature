@@ -102,7 +102,7 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
 
-  @TEST_DOM-2639
+  @TEST_DOM-2639 @fixing
   Scenario: User try login via Facebook
     Given user go to mamikos homepage
     When user login as tenant via facebook:
