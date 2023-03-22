@@ -19,8 +19,6 @@ public class SearchPO {
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
     Locator promoNgebutFilter;
-    Locator dikelolaMamikosFilter;
-    Locator dikelolaMamikosDesc;
     Locator kosAndalanFilter;
     Locator promoNgebutDesc;
     Locator kosAndalanDesc;
@@ -63,8 +61,6 @@ public class SearchPO {
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
-        this.dikelolaMamikosFilter = page.getByTestId("singgahsini-filter_btn");
-        this.dikelolaMamikosDesc = page.getByText("Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. ");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
         this.kosAndalanToggle = page.locator("[data-popper-placement='bottom-start'] .bg-c-switch");
@@ -296,22 +292,6 @@ public class SearchPO {
      */
     public String getPromoNgebutDescText() {
         return playwright.getText(promoNgebutDesc).toLowerCase();
-    }
-
-    /**
-     * Click on Kos Andalan filter button
-     */
-    public void clickDikelolaMamikosFilter() {
-        dikelolaMamikosFilter.click();
-    }
-
-    /**
-     * Get Kos Andalan description text
-     *
-     * @return String data type
-     */
-    public String getDikelolaMamikosDescText() {
-        return playwright.getText(dikelolaMamikosDesc).toLowerCase();
     }
 
     /**

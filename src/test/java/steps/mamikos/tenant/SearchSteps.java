@@ -161,11 +161,6 @@ public class SearchSteps {
             String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
-        } else if (filter.equalsIgnoreCase("Dikelola Mamikos")) {
-            search.clickDikelolaMamikosFilter();
-            String desc = search.getDikelolaMamikosDescText().replaceAll("\\s", "");
-            String expected = text.toLowerCase().replaceAll("\\s", "");
-            Assert.assertTrue(desc.contains(expected), "Dikelola Mamikos Description text is wrong");
         } else if (filter.equalsIgnoreCase("Kos Andalan")) {
             search.clickKosAndalanFilter();
             String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
