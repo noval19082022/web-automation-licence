@@ -67,7 +67,7 @@ Feature: Area Boundaries
     When user search and go to kost landing based on area:
       | search keyword | Padang       |
       | area result    | Padang Bulan |
-    When user use filter "Dikelola Mamikos"
+    When user activate Dikelola Mamikos filter
     Then user can see kos tidak ditemukan state on kos landing area
 
   @areaboundaries @continue @failed

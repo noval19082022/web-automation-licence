@@ -24,9 +24,9 @@ public class LandingPageSteps {
 
     }
 
-    @When("user click on Dikelola Mamikos filter")
-    public void userClickOnDikelolaMamikosFilter() throws InterruptedException {
-        home.clickFilterDikelolaMamikos();
+    @When("user activate Dikelola Mamikos filter")
+    public void userActivateDikelolaMamikosFilter() throws InterruptedException {
+        home.activateFilterDikelolaMamikos();
     }
 
     @Then("user validate the result kos have Dikelola Mamikos label")
