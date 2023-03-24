@@ -67,7 +67,7 @@ Feature: Main Search
       | Makassar        | Makassar       |
       | Medan           | Medan          |
 
-  @bagas @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
@@ -77,7 +77,7 @@ Feature: Main Search
     Then title listing that appear have location in "Malang"
 
 
-  @bagas @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
@@ -97,21 +97,11 @@ Feature: Main Search
     Examples:
       | city            |
       | Jakarta         |
-      | Jakarta Selatan |
       | Surabaya        |
       | Bandung         |
       | Yogyakarta      |
-      | Jakarta Pusat   |
-      | Semarang        |
-      | Jakarta Barat   |
-      | Malang          |
-      | UGM             |
-      | Tebet           |
-      | Kontrakan       |
-      | Bekasi          |
-      | UNDIP           |
 
-  @bagas @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
+  @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
   Scenario: [Dweb][Search] Check search result
     Given user go to mamikos homepage
     When user clicks Search

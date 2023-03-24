@@ -176,6 +176,7 @@ public class HomePO {
 
     public void activateFilterDikelolaMamikos() throws InterruptedException {
         playwright.clickOn(dikelolaMamikosButton);
+        playwright.clickOn(dikelolaMamikosToggle);
         playwright.forceClickOn(dikelolaMamikosToggle);
     }
 
@@ -331,5 +332,12 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
+    }
+
+    /**
+     * in Active toogle di kelola mamikos
+     */
+    public void toggleDikelolaMamikos(){
+        playwright.clickOn(dikelolaMamikosToggle);
     }
 }
