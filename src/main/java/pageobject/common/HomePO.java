@@ -57,7 +57,7 @@ public class HomePO {
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
-        dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
+        dikelolaMamikosToggle = page.locator("div").getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
 
 
@@ -176,7 +176,6 @@ public class HomePO {
 
     public void activateFilterDikelolaMamikos() throws InterruptedException {
         playwright.clickOn(dikelolaMamikosButton);
-        playwright.clickOn(dikelolaMamikosToggle);
         playwright.forceClickOn(dikelolaMamikosToggle);
     }
 
