@@ -9,8 +9,8 @@ Feature: Kost List and Map
   @TEST_DOM-1835 @Automated @DOM4 @Web @desc-map-cluster @discovery-platform @filter @listing-kos @map-cluster
   Scenario: [Dweb][Listing Kos][Map]Check description or legend of map cluster
     Given user go to mamikos homepage
-    * user want to maximize the screen size
     When user want to search kost on "UGM" from homepage
+    * user want to maximize the screen size
     Then user can check the legend of map price cluster
       | 33        |
       | Rp750rb   |

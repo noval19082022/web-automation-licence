@@ -18,7 +18,7 @@ public class LandingPageSteps {
 
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
-        playwright =new PlaywrightHelpers(page);
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_MURAH_DIJOGJA, 30000.0, LoadState.LOAD);
 
     }
@@ -36,6 +36,5 @@ public class LandingPageSteps {
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
         Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
-
     }
 }

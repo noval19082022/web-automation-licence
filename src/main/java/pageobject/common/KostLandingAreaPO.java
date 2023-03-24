@@ -149,6 +149,7 @@ public class KostLandingAreaPO {
      * @return List<String>
      */
     public List<String> getAllContentNominatimEmptyList() {
+        nominatimEmptyList.textContent();
         return nominatimEmptyList.allTextContents();
     }
 
@@ -221,8 +222,11 @@ public class KostLandingAreaPO {
      * @param filter one of the available filter Dikelola Mamikos etc
      */
     public void clickOnFilter(String filter) {
-        var filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter));
+        var filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter)).first();
         playwright.clickOn(filterButton);
+        if (filter.toLowerCase().equals("dikelola mamikos")) {
+            page.locator("div.singgahsini-filter__content").locator("input[type='checkbox']").click();
+        }
     }
 
     /**

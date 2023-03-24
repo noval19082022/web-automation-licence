@@ -55,7 +55,7 @@ public class HomePO {
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
-        dikelolaMamikosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Dikelola Mamikos"));
+        dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
 
 
