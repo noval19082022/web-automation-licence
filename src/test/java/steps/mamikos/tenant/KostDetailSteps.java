@@ -298,10 +298,6 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
     }
 
-    @And("user see listing kos recommendation arround kos with detail {string} and filter by mix gender")
-    public void user_clicks_on_previous_button_and_display_first_page_recomendation_kos(String text) {
-    }
-
     //------------ Right Panel Section -----------------
     @Then("user sees total price property")
     public void user_sees_total_price_property() {
