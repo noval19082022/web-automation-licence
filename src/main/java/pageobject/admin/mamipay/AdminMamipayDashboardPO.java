@@ -15,6 +15,7 @@ public class AdminMamipayDashboardPO {
     Locator voucherDiscount;
     Locator mamikosVoucher;
     Locator searchInvoice;
+    Locator sidebarMenu;
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -51,4 +52,14 @@ public class AdminMamipayDashboardPO {
         playwright.clickOn(searchInvoice);
         return new MamikosListInvoicePO(page);
     }
+
+    /**
+     * Click sidebar menu in mamipay
+     * @param menu , menu name
+     */
+    public void NavigateToMamipayMenu (String menu){
+        sidebarMenu = page.locator("//li[@class='menu-item ']/a[contains(text(),'"+menu+"')]");
+        sidebarMenu.click();
+    }
+
 }

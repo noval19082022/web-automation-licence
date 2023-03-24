@@ -73,4 +73,18 @@ public class PromoNgebutLandingPO {
     public boolean isFaqHeadingVisible() {
         return playwright.waitTillLocatorIsVisible(faqHeading);
     }
+
+    /**
+     * Click on cari kos promo ngebut button
+     */
+    public void clickOnCariKosPromoNgebut() {
+        playwright.clickOn(btnCariKostPromo);
+    }
+
+    /**
+     * Click on cari sekarang button
+     */
+    public void clickOnCariSekarangButton() {
+        playwright.clickOn(btnCariSekarang);
+    }
 }

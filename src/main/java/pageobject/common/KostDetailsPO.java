@@ -19,6 +19,8 @@ public class KostDetailsPO {
     Locator mulaiKosInput;
     Locator datePicker;
     Locator ftueSlider;
+    private Locator ftuePopUP;
+    private Locator ftueBookingBenefitText;
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
@@ -46,6 +48,12 @@ public class KostDetailsPO {
     private Locator tanyaPemilikKostLink;
     private Locator chatKostPopUp;
     private Locator hubungiKostHeading;
+    private Locator btnMamikosPromoNgebut;
+    private Locator btnMauDong;
+    private Locator btnSayaMengerti;
+
+    //---------------Facility Room Section----------------------
+    private Locator subtitleSpesifikasiTipeKamer;
 
     //---------------Facility Room Section----------------------
     private Locator facilityRoomSeeAllBtn;
@@ -179,6 +187,8 @@ public class KostDetailsPO {
         this.kostDetailsContainer = page.locator("#detailKostContainer");
         this.datePicker = page.getByTestId("bookingInputCheckinContent-datePicker");
         this.ftueSlider = playwright.locatorByRoleSetName(locator.roleButton, "Next slide");
+        this.ftuePopUP = page.locator(".onboarding-ftue");
+        this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
@@ -201,6 +211,9 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
+        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
+        this.btnMauDong = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mau Dong!"));
+        this.btnSayaMengerti = page.getByText("Saya Mengerti");
 
         //------------ Favorite and share kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
@@ -208,6 +221,9 @@ public class KostDetailsPO {
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
         this.shareKostButton = page.getByText("share Bagikan");
+
+        //---------------Room Specification----------------------
+        this.subtitleSpesifikasiTipeKamer = page.getByText("Spesifikasi tipe kamar");
 
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
@@ -287,7 +303,7 @@ public class KostDetailsPO {
 
         //-------------- Kost recomendation Section ----------------
         this.relatedCard = page.locator("#relatedCard");
-        this.recommendationListTitle = page.locator("#app > div > h1");
+        this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.recommendationKosText = page.getByText("Kamu mungkin menyukainya");
         this.seeAllRecomendationButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua"));
         this.arrowRecommendationNextButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
@@ -406,7 +422,7 @@ public class KostDetailsPO {
      * @return 'string' kost title
      */
     public String getKostTitle() {
-        playwright.waitTillLocatorIsVisible(kostTitle, 1.0);
+        playwright.waitTillLocatorIsVisible(kostTitle);
         return kostTitle.textContent();
     }
 
@@ -470,6 +486,42 @@ public class KostDetailsPO {
     }
 
     /**
+     * Scroll until promo pop up is visible, max scroll is 4 times
+     */
+    public void scrollDownToUntilPromoPopUpVisible() {
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(300);
+            if (btnMamikosPromoNgebut.isVisible()) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Check visibility of mamikos promo ngebut button
+     * @return boolean
+     */
+    public boolean isMamikosPromoNgebutButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnMamikosPromoNgebut);
+    }
+
+    /**
+     * Check visibility of Mau Dong button
+     * @return boolean
+     */
+    public boolean isMauDongButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnMauDong);
+    }
+
+    /**
+     * Check visibility of Saya Mengerti Button
+     * @return boolean
+     */
+    public boolean isSayaMengertiButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(btnSayaMengerti);
+    }
+
+    /**
      * this method will be click link tanya pemilik and will be redirect to chat option
      */
     public void clickOnTanyaPemilikKost() {
@@ -501,8 +553,17 @@ public class KostDetailsPO {
      * @return 'boolean' login pop up visibility
      */
     public Boolean isLoginPopUpDisplayed() {
-        playwright.waitTillLocatorIsVisible(loginPopUp, 2.0);
+        playwright.waitTillLocatorIsVisible(loginPopUp);
         return loginPopUp.isVisible() && loginByGoogleBtn.isVisible() && loginByFbBtn.isVisible() && loginByAppleIdBtn.isVisible();
+    }
+
+    //---------------Room Specification----------------------
+
+    /**
+     * Scroll to view spesifikasi tipe kamar
+     */
+    public void scrollToViewSpesifikasiTipeKamar() {
+        subtitleSpesifikasiTipeKamer.scrollIntoViewIfNeeded();
     }
 
     //---------------Facility Room Section----------------------
@@ -591,7 +652,7 @@ public class KostDetailsPO {
      * this method will be check expantion of description on 'Catatan tambahan seputar fasilitas' section is clickable
      */
     public void clickOnExpandFacNotes() {
-        playwright.waitTillLocatorIsVisible(expandFacilityNotesBtn, 1.0);
+        playwright.waitTillLocatorIsVisible(expandFacilityNotesBtn);
         expandFacilityNotesBtn.click();
     }
 
@@ -812,7 +873,7 @@ public class KostDetailsPO {
      * this method will be check of funcionality from 'Tanya Alamat' button on map section for login condition
      */
     public void clickOnTanyaAlamatBtn() {
-        playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn, 3.0);
+        playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn);
         tanyaAlamatLengkapBtn.click();
     }
 
@@ -822,7 +883,7 @@ public class KostDetailsPO {
      * @return 'boolean' chat room is present for user with login condition visibility
      */
     public boolean isChatRoomPresent() {
-        playwright.waitTillLocatorIsVisible(chatRoom, 3.0);
+        playwright.waitTillLocatorIsVisible(chatRoom);
         return chatRoom.isVisible();
     }
 
@@ -832,7 +893,7 @@ public class KostDetailsPO {
      * @return 'String' latest chat on chat room for user with login condition visibility
      */
     public String getLatestChatText() {
-        playwright.waitTillLocatorIsVisible(latestChat, 7.0);
+        playwright.waitTillLocatorIsVisible(latestChat);
         return latestChat.textContent();
     }
 
@@ -862,7 +923,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isPopUpKosReportPresent() {
-        return playwright.waitTillLocatorIsVisible(popUpReportKos, 2.0);
+        return playwright.waitTillLocatorIsVisible(popUpReportKos);
     }
 
     /**
@@ -895,7 +956,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isReportConfirmationPresent() {
-        return playwright.waitTillLocatorIsVisible(reportConfirmationPopUp, 3.0);
+        return playwright.waitTillLocatorIsVisible(reportConfirmationPopUp);
     }
 
     //------------ Kos Owner Information Section ------------------
@@ -908,7 +969,7 @@ public class KostDetailsPO {
     public boolean isOwnerSectionPresent() {
         playwright.pageScrollToDown(4800);
         playwright.pageScrollUntilElementIsVisible(kostOwnerInformation);
-        return playwright.waitTillLocatorIsVisible(aboutStatisticsButton, 2.0);
+        return playwright.waitTillLocatorIsVisible(aboutStatisticsButton);
     }
 
     /**
@@ -918,7 +979,7 @@ public class KostDetailsPO {
      */
     public boolean isOwnerNameDisplayed() {
         playwright.pageScrollUntilElementIsVisible(ownerNameText);
-        return playwright.waitTillLocatorIsVisible(ownerNameText, 2.0);
+        return playwright.waitTillLocatorIsVisible(ownerNameText);
     }
 
     /**
@@ -927,7 +988,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isOwnerPictureDisplayed() {
-        return playwright.waitTillLocatorIsVisible(ownerImageProfile, 2.0);
+        return playwright.waitTillLocatorIsVisible(ownerImageProfile);
     }
 
     /**
@@ -936,7 +997,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isOwnerStatusDisplayed() {
-        return playwright.waitTillLocatorIsVisible(ownerStatus, 2.0);
+        return playwright.waitTillLocatorIsVisible(ownerStatus);
     }
 
     /**
@@ -945,7 +1006,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isNumberTransactionDisplayed() {
-        return playwright.waitTillLocatorIsVisible(successfulTansaction, 2.0);
+        return playwright.waitTillLocatorIsVisible(successfulTansaction);
     }
 
     /**
@@ -954,7 +1015,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isBookingProcessedDisplayed() {
-        return playwright.waitTillLocatorIsVisible(bookingProcessed, 2.0);
+        return playwright.waitTillLocatorIsVisible(bookingProcessed);
     }
 
     /**
@@ -963,7 +1024,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isBookingChanceDisplayed() {
-        return playwright.waitTillLocatorIsVisible(bookingChance, 2.0);
+        return playwright.waitTillLocatorIsVisible(bookingChance);
     }
 
     /**
@@ -979,7 +1040,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isStatisticsModalDisplayed() {
-        return playwright.waitTillLocatorIsVisible(statisticModal, 2.0);
+        return playwright.waitTillLocatorIsVisible(statisticModal);
     }
 
     /**
@@ -997,7 +1058,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isSeeAllPhotoButtonPresent() {
-        return playwright.waitTillLocatorIsVisible(seeAllPhotoButton, 3.0);
+        return playwright.waitTillLocatorIsVisible(seeAllPhotoButton);
     }
 
     /**
@@ -1013,7 +1074,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isCloseButtonPresent() {
-        return playwright.waitTillLocatorIsVisible(closeButtonGallery, 1.0);
+        return playwright.waitTillLocatorIsVisible(closeButtonGallery);
     }
 
     /**
@@ -1022,7 +1083,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isBuildingPhotosPresent() {
-        return playwright.waitTillLocatorIsVisible(fotoBangunanText, 1.0);
+        return playwright.waitTillLocatorIsVisible(fotoBangunanText);
     }
 
     /**
@@ -1032,7 +1093,7 @@ public class KostDetailsPO {
      */
     public boolean isRoomPhotosPresent() {
         playwright.pageScrollUsingCoordinate(0, 2000);
-        return playwright.waitTillLocatorIsVisible(fotoKamarText, 1.0);
+        return playwright.waitTillLocatorIsVisible(fotoKamarText);
     }
 
     /**
@@ -1041,7 +1102,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isBathroomPhotosPresent() {
-        return playwright.waitTillLocatorIsVisible(fotoKamarMandiText, 1.0);
+        return playwright.waitTillLocatorIsVisible(fotoKamarMandiText);
     }
 
     /**
@@ -1050,7 +1111,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isOthersPhotosPresent() {
-        return playwright.waitTillLocatorIsVisible(fotoLainnya, 1.0);
+        return playwright.waitTillLocatorIsVisible(fotoLainnya);
     }
 
     /**
@@ -1064,7 +1125,7 @@ public class KostDetailsPO {
      * swipe on photo gallery
      */
     public void clickOnArrowPhotoGalleryNextButton() {
-        playwright.waitTillLocatorIsVisible(arrowPhotoNextButton, 5.0);
+        playwright.waitTillLocatorIsVisible(arrowPhotoNextButton);
         playwright.clickOn(arrowPhotoNextButton);
     }
 
@@ -1078,7 +1139,7 @@ public class KostDetailsPO {
     public boolean isLihatSemuaKosButtonPresent() {
         playwright.pageScrollHeightToBottom();
         playwright.pageScrollUntilElementIsVisible(relatedCard);
-        return playwright.waitTillLocatorIsVisible(seeAllRecomendationButton, 4.0);
+        return playwright.waitTillLocatorIsVisible(seeAllRecomendationButton);
     }
 
     /**
@@ -1087,7 +1148,7 @@ public class KostDetailsPO {
      * @return true / false
      */
     public boolean isArrowRecommendationButtonPresent() {
-        return playwright.waitTillLocatorIsVisible(arrowRecommendationNextButton, 5.0);
+        return playwright.waitTillLocatorIsVisible(arrowRecommendationNextButton);
     }
 
     /**
@@ -1140,7 +1201,7 @@ public class KostDetailsPO {
      * @return true or false
      */
     public boolean isNextRecommendationElementPresent() {
-        return playwright.waitTillLocatorIsVisible(nextRecommendation, 3.0);
+        return playwright.waitTillLocatorIsVisible(nextRecommendation);
     }
 
     /**
@@ -1149,7 +1210,7 @@ public class KostDetailsPO {
      * @return true or false
      */
     public boolean isFirstKostCardRecommendationPresent() {
-        return playwright.waitTillLocatorIsVisible(firstKostCard, 3.0);
+        return playwright.waitTillLocatorIsVisible(firstKostCard);
     }
 
     /**
@@ -1168,7 +1229,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isMixGenderDisplay() {
-        return playwright.waitTillLocatorIsVisible(mixGenderFilter, 5.0);
+        return playwright.waitTillLocatorIsVisible(mixGenderFilter);
     }
 
     //------------ Right Panel Section -----------------
@@ -1179,7 +1240,7 @@ public class KostDetailsPO {
      * @return visible true, otherwise false
      */
     public boolean isTotalPricePresent() {
-        return playwright.waitTillLocatorIsVisible(totalPriceText, 3.0);
+        return playwright.waitTillLocatorIsVisible(totalPriceText);
     }
 
     /**
@@ -1189,7 +1250,7 @@ public class KostDetailsPO {
      */
     public boolean isFormBookingDatePresent() {
         playwright.pageScrollUsingCoordinate(0, 500);
-        return playwright.waitTillLocatorIsVisible(bookingDateForm, 3.0);
+        return playwright.waitTillLocatorIsVisible(bookingDateForm);
     }
 
     /**
@@ -1197,7 +1258,7 @@ public class KostDetailsPO {
      */
     public void clickOnBookingDate() {
         playwright.pageScrollUntilElementIsVisible(seeAllPhotoButton);
-        playwright.waitTillLocatorIsVisible(bookingDateForm, 5.0);
+        playwright.waitTillLocatorIsVisible(bookingDateForm);
         playwright.clickOn(bookingDateForm);
     }
 
@@ -1227,7 +1288,7 @@ public class KostDetailsPO {
      * @return visible true, otherwise false
      */
     public boolean isDateBookingPresent() {
-        return playwright.waitTillLocatorIsVisible(bookingDate, 3.0);
+        return playwright.waitTillLocatorIsVisible(bookingDate);
     }
 
     /**
@@ -1236,7 +1297,7 @@ public class KostDetailsPO {
      * @return visible true, otherwise false
      */
     public boolean isFormBookingDurationPresent() {
-        return playwright.waitTillLocatorIsVisible(bookingDurationForm, 3.0);
+        return playwright.waitTillLocatorIsVisible(bookingDurationForm);
     }
 
     /**
@@ -1254,15 +1315,15 @@ public class KostDetailsPO {
      * @param date date e.g. 15,20 etc
      */
     public void selectDateForStartBoarding(String date) {
-        if (playwright.waitTillLocatorIsVisible(dateTextBox, 5.0)) {
+        if (playwright.waitTillLocatorIsVisible(dateTextBox)) {
             playwright.clickOn(dateTextBox);
             if (date.equalsIgnoreCase("today")) {
-                playwright.waitTillLocatorIsVisible(datePickToday, 5.0);
+                playwright.waitTillLocatorIsVisible(datePickToday);
                 playwright.clickOn(datePickToday);
             } else {
-                if (playwright.waitTillLocatorIsVisible(tomorrowDateLabel, 3.0)) {
+                if (playwright.waitTillLocatorIsVisible(tomorrowDateLabel)) {
                     tomorrowDateLabel.click();
-                } else if (playwright.waitTillLocatorIsVisible(saturdayDateLabel, 3.0)) {
+                } else if (playwright.waitTillLocatorIsVisible(saturdayDateLabel)) {
                     saturdayDateLabel.click();
                 } else {
                     sundayDateLabel.click();
@@ -1288,7 +1349,7 @@ public class KostDetailsPO {
      * @return displayed true, otherwise false
      */
     public boolean isApikBadgePresent() {
-        return playwright.waitTillLocatorIsVisible(apikBadge, 3.0);
+        return playwright.waitTillLocatorIsVisible(apikBadge);
     }
 
     /**
@@ -1297,7 +1358,7 @@ public class KostDetailsPO {
      * @return displayed true, otherwise false
      */
     public boolean isSinggahsiniBadgePresent() {
-        return playwright.waitTillLocatorIsVisible(singgahsiniBadge, 3.0);
+        return playwright.waitTillLocatorIsVisible(singgahsiniBadge);
     }
 
     /**
@@ -1308,7 +1369,7 @@ public class KostDetailsPO {
     public boolean ownerBadgesSectionAsPresent() {
         playwright.pageScrollToDown(4000);
         playwright.pageScrollUntilElementIsVisible(ownerImageProfile);
-        return playwright.waitTillLocatorIsVisible(ownerNameText, 2.0);
+        return playwright.waitTillLocatorIsVisible(ownerNameText);
     }
 
     /**
@@ -1317,7 +1378,7 @@ public class KostDetailsPO {
      * @return displayed true, otherwise false
      */
     public boolean isOwnerStatement() {
-        return playwright.waitTillLocatorIsVisible(ownerStatement, 2.0);
+        return playwright.waitTillLocatorIsVisible(ownerStatement);
     }
 
     // ----------------Kost Benefit---------------------
@@ -1327,14 +1388,14 @@ public class KostDetailsPO {
      */
     public boolean isBenefitTitlePresent() {
         playwright.pageScrollUntilElementIsVisible(kosBenefit);
-        return playwright.waitTillLocatorIsVisible(benefitTitle, 2.0);
+        return playwright.waitTillLocatorIsVisible(benefitTitle);
     }
 
     /**
      * Check if Kos Benefit Description is present
      */
     public boolean isBenefitDescPresent() {
-        return playwright.waitTillLocatorIsVisible(benefitDesc, 2.0);
+        return playwright.waitTillLocatorIsVisible(benefitDesc);
     }
 
     // ------------ Kost Review Section -----------
@@ -1353,7 +1414,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isReviewOverviewDisplayed() {
-        return playwright.waitTillLocatorIsVisible(overviewRatingReview, 2.0);
+        return playwright.waitTillLocatorIsVisible(overviewRatingReview);
     }
 
     /**
@@ -1362,7 +1423,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isReviewCategoryDisplayed() {
-        return playwright.waitTillLocatorIsVisible(reviewCategory, 2.0);
+        return playwright.waitTillLocatorIsVisible(reviewCategory);
     }
 
     /**
@@ -1371,7 +1432,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isUserReviewDisplayed() {
-        return playwright.waitTillLocatorIsVisible(userReview, 2.0);
+        return playwright.waitTillLocatorIsVisible(userReview);
     }
 
     /**
@@ -1389,7 +1450,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isOverviewReviewModalDisplayed() {
-        return playwright.waitTillLocatorIsVisible(overviewRatingModal, 2.0);
+        return playwright.waitTillLocatorIsVisible(overviewRatingModal);
     }
 
     /**
@@ -1398,7 +1459,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isReviewCategoryModalDisplayed() {
-        return playwright.waitTillLocatorIsVisible(reviewCategoryModal, 2.0);
+        return playwright.waitTillLocatorIsVisible(reviewCategoryModal);
     }
 
     /**
@@ -1407,7 +1468,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isSortingReviewDisplayed() {
-        return playwright.waitTillLocatorIsVisible(sortingReviewBtn, 2.0);
+        return playwright.waitTillLocatorIsVisible(sortingReviewBtn);
     }
 
     /**
@@ -1416,7 +1477,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isUserReviewModalDisplayed() {
-        return playwright.waitTillLocatorIsVisible(userReviewModal, 2.0);
+        return playwright.waitTillLocatorIsVisible(userReviewModal);
     }
 
     /**
@@ -1467,5 +1528,28 @@ public class KostDetailsPO {
      */
     public void clickOnShareKostButton() {
         shareKostButton.click();
+    }
+
+    /**
+     * Check the visibility of ftue booking benefit
+     * @return boolean
+     */
+    public boolean isFTUEBookingBenefitVisible() {
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(300);
+            if (ftueSlider.isVisible()) {
+                break;
+            }
+        }
+        return playwright.waitTillLocatorIsVisible(ftuePopUP);
+    }
+
+    /**
+     * Get ftue booking benefit wording
+     * @param index 0-4 ftue booking benefit wording currently are 5
+     * @return String data type
+     */
+    public String getFTUEBookingBenefitWording(int index) {
+        return playwright.getText(ftueBookingBenefitText.nth(index));
     }
 }

@@ -17,11 +17,11 @@ public class MidtransPaymentPO {
     public MidtransPaymentPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        billerCode = page.locator("#biller_code");
-        paymentCode = page.locator("#payment_code");
+        billerCode = page.locator("#billerCode");
+        paymentCode = page.locator("#billKey");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        successTransaction = page.getByText("Success Transaction");
+        successTransaction = page.getByText("Success! Success Payment VA");
     }
 
     /**

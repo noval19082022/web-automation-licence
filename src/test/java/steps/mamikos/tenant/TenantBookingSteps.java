@@ -22,13 +22,14 @@ public class TenantBookingSteps {
     Page page = ActiveContext.getActivePage();
     HomePO homePO = new HomePO(page);
     SearchPO searchPO;
-    KostDetailsPO kostDetail;
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
     BookingFormPO bookingForm;
     SuccessBookingPO successBooking;
 
     RiwayatBookingPO riwayatBooking = new RiwayatBookingPO(page);
 
     private List<Map<String, String>> searchKost;
+    private List<String> ftueBookingBenefitTextList;
 
     @When("tenant search kost then go to kost details:")
     public void tenantSearchKostThenGoToKostDetails(DataTable table) {
@@ -101,4 +102,30 @@ public class TenantBookingSteps {
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
+    @Then("user/owner/tenant can see FTUE booking benefit with wording:")
+    public void userCanSeeFTUEBookingBenefit(DataTable table) {
+        ftueBookingBenefitTextList = table.asList(String.class);
+        Assert.assertTrue(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide Booking Benefit is not visible");
+        for (int i = 0; i < ftueBookingBenefitTextList.size(); i++) {
+            System.out.println("Asserting: " + ftueBookingBenefitTextList.get(i));
+            Assert.assertEquals(kostDetail.getFTUEBookingBenefitWording(i), ftueBookingBenefitTextList.get(i), "FTUE wording is not equals");
+        }
+    }
+
+    @When("user/tenant/owner dismiss FTUE booking benefit")
+    public void userDismissFTUEBookingBenefit() {
+        kostDetail.dismissFTUE();
+    }
+
+    @Then("user can not see FTUE booking benefit")
+    public void userCanNotSeeFTUEBookingBenefit() {
+        Assert.assertFalse(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide booking benefit is still visible");
+    }
+
+    @And("user search for Kost with name {string} and selects matching result")
+    public void userSearchForKostWithNameAndSelectsMatchingResult(String kosName) {
+        searchPO = homePO.clickOnSearchButton();
+        kostDetail = searchPO.searchByText(kosName);
+        kostDetail.waitTillKostDetailPageVisible();
+    }
 }
