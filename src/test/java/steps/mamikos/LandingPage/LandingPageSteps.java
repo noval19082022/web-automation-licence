@@ -41,7 +41,7 @@ public class LandingPageSteps {
 
     @And("user not active filter dikelola mamikos")
     public void userNotActiveFilterDikelolaMamikos() {
-        home.toggleDikelolaMamikos();
+        home.toggleDikelolaMamikosInActive();
 
     }
 }

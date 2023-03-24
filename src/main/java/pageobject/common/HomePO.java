@@ -175,8 +175,8 @@ public class HomePO {
      */
 
     public void activateFilterDikelolaMamikos() throws InterruptedException {
+        page.setViewportSize(1920, 1080);
         playwright.clickOn(dikelolaMamikosButton);
-        playwright.clickOn(dikelolaMamikosToggle);
         playwright.forceClickOn(dikelolaMamikosToggle);
     }
 
@@ -186,7 +186,7 @@ public class HomePO {
      * @return displayed true, otherwise false
      */
     public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
-        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
+        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosButton, 2000.0);
     }
 
 
@@ -337,7 +337,8 @@ public class HomePO {
     /**
      * in Active toogle di kelola mamikos
      */
-    public void toggleDikelolaMamikos(){
+    public void toggleDikelolaMamikosInActive(){
         playwright.clickOn(dikelolaMamikosToggle);
+        playwright.clickOn(dikelolaMamikosButton);
     }
 }
