@@ -7,7 +7,7 @@ Feature: Landing Page
     When user click on Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
 
-  @DOM4 @landing-page @dikelola-mamikos-filter @ribet
+  @DOM4 @landing-page @dikelola-mamikos-filter
   Scenario: [Dweb][Listing Kos][Filter] Deactivate dikelola mamikos filter
     Given user navigates to mamikos kost kost jogja murah
     When user click on Dikelola Mamikos filter

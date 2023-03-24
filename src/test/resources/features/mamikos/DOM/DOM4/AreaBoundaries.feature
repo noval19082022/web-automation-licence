@@ -1,7 +1,7 @@
 @DOM4 @areaboundaries
 Feature: Area Boundaries
 
-  @continue @fixing
+  @continue
   Scenario: User Can Search Kost Based On Landing Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -9,12 +9,12 @@ Feature: Area Boundaries
       | area result    | Padang Bulan |
     Then user can see the kost list are from "Padang Bulan"
 
-  @continue @fixing
+  @continue
   Scenario: User Can See Kost List Is Only 1
     Given user filter price minimal to 750000, and maximal to 750000
     Then user can see kost landing behavior for kost list with just 1 result
 
-  @continue @fixing
+  @continue
   Scenario: User Can Use Reset Filter Button
     Given user reset filter
     Then user can see kost list is more than 1
@@ -48,7 +48,7 @@ Feature: Area Boundaries
   Scenario: User Can Use Back To Top Button
     Then user can use Back To Top Button
 
-  @areaboundaries @fixing
+  @areaboundaries
   Scenario: User Can Use Cari Berdasarkan Peta Button And Result Are Related To The Predefine Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -62,7 +62,7 @@ Feature: Area Boundaries
       | Sukaraja     |
       | Jasinga      |
 
-  @areaboundaries @fixing
+  @areaboundaries
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:

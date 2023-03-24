@@ -44,7 +44,7 @@ Feature: Kost detail page 2
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user want to display detail gallery
 
-  @TEST_DOM-1885 @Automated @DOM4 @Web @discovery-platform @kost-details @recommendation @fixing
+  @TEST_DOM-1885 @Automated @DOM4 @Web @discovery-platform @kost-details @recommendation
   Scenario: [Dweb][Kost Detail] Check Recommendation Kos
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
