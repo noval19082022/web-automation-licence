@@ -40,9 +40,9 @@ Feature: Filter and Sorting
     And user sets Kos Andalan filter
     Then user validated the result kos have Kos Andalan label
 
-  Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter
+  Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter functionality
     Given user navigates to mamikos kost kost jogja murah
-    When user click on Dikelola Mamikos filter
+    When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
 
   Scenario: [Dweb][Listing Kos][Filter] Check Promo Ngebut filter
