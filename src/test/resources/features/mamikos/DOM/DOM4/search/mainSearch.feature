@@ -89,7 +89,7 @@ Feature: Main Search
       | Bogor Selatan  | Bogor Selatan       |
     Then title listing that appear have location campus in "Bogor"
 
-  @bagas @TEST_DOM-1860 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
+  @TEST_DOM-1860 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
   Scenario Outline: [Dweb][Search] Check appearance of Apartment property on listing with keyword city
     Given user go to mamikos homepage
     When user search for random keyword:"<city>"

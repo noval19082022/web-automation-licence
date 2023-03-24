@@ -39,6 +39,7 @@ public class HomePO {
     Locator searchIklanButton;
     private Locator flashSaleIcon;
     Locator bookingKosButtonHeadBar;
+    Locator toggleDikelolaMamikos;
 
 
 
@@ -57,6 +58,7 @@ public class HomePO {
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+        toggleDikelolaMamikos = page.getByTestId("singgahsini-filter_tgl");
 
 
         //header
@@ -173,6 +175,7 @@ public class HomePO {
 
     public void clickFilterDikelolaMamikos() throws InterruptedException {
         playwright.clickOn(dikelolaMamikosButton);
+        playwright.clickOn(toggleDikelolaMamikos);
     }
 
     /**
@@ -327,5 +330,9 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
+    }
+
+    public void toggleDikelolaMamikos(){
+        playwright.clickOn(toggleDikelolaMamikos);
     }
 }

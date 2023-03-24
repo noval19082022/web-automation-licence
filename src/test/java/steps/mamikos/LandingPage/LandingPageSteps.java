@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -36,5 +37,11 @@ public class LandingPageSteps {
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
         Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
+    }
+
+    @And("user not active filter dikelola mamikos")
+    public void userNotActiveFilterDikelolaMamikos() {
+        home.toggleDikelolaMamikos();
+
     }
 }
