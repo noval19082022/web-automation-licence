@@ -19,7 +19,6 @@ Feature: Area Boundaries
     Given user reset filter
     Then user can see kost list is more than 1
 
-  @fixing
   Scenario: User Can See Area Boundaries With Result Is 0
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:

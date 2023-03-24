@@ -1,4 +1,3 @@
-@fixing
 Feature: Landing Page
 
   @DOM4 @landing-page @dikelola-mamikos-filter
