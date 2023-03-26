@@ -176,8 +176,8 @@ public class HomePO {
 
     public void activateFilterDikelolaMamikos() throws InterruptedException {
         playwright.clickOn(dikelolaMamikosButton);
-        playwright.clickOn(dikelolaMamikosToggle);
         playwright.forceClickOn(dikelolaMamikosToggle);
+        playwright.clickOn(dikelolaMamikosButton);
     }
 
     /**
