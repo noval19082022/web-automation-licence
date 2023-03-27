@@ -294,4 +294,13 @@ public class KostLandingAreaPO {
         playwright.forceClickOn(dikelolaMamikosToggle);
         playwright.clickOn(dikelolaMamikosButton);
     }
+
+    /**
+     * Check if Singgahsini/Apik label is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
+        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosButton, 2000.0);
+    }
 }

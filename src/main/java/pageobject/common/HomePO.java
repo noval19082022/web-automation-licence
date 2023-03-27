@@ -166,15 +166,6 @@ public class HomePO {
         return flashSaleLihatSemuaButton.isVisible();
     }
 
-    /**
-     * Check if Singgahsini/Apik label is present
-     *
-     * @return displayed true, otherwise false
-     */
-    public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
-        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosLabel, 2000.0);
-    }
-
 
     /**
      * Check element search ads button header is displayed
@@ -318,12 +309,5 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
-    }
-
-    /**
-     * in Active toogle di kelola mamikos
-     */
-    public void toggleDikelolaMamikos(){
-        playwright.clickOn(dikelolaMamikosToggle);
     }
 }
