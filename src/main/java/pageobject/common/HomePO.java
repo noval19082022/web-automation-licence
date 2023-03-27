@@ -175,7 +175,6 @@ public class HomePO {
      */
 
     public void activateFilterDikelolaMamikos() throws InterruptedException {
-        page.setViewportSize(1920, 1080);
         playwright.clickOn(dikelolaMamikosButton);
         playwright.forceClickOn(dikelolaMamikosToggle);
     }

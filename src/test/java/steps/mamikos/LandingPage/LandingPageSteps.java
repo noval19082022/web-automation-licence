@@ -20,6 +20,7 @@ public class LandingPageSteps {
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
         playwright = new PlaywrightHelpers(page);
+        page.setViewportSize(1920, 1080);
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_MURAH_DIJOGJA, 30000.0, LoadState.LOAD);
 
     }
