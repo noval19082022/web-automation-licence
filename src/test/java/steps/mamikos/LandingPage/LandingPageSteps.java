@@ -10,12 +10,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.KostLandingAreaPO;
 import utilities.PlaywrightHelpers;
 
 public class LandingPageSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
+    KostLandingAreaPO landing = new KostLandingAreaPO(page);
 
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
@@ -27,22 +29,16 @@ public class LandingPageSteps {
 
     @When("user activate Dikelola Mamikos filter")
     public void userActivateDikelolaMamikosFilter() throws InterruptedException {
-        home.activateFilterDikelolaMamikos();
+        landing.activateFilterDikelolaMamikos();
     }
 
     @Then("user validate the result kos have Dikelola Mamikos label")
     public void userValidateTheResultKosHaveDikelolaMamikosLabel() throws InterruptedException {
-        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
+        Assert.assertTrue(landing.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
     }
 
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
-        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
-    }
-
-    @And("user not active filter dikelola mamikos")
-    public void userNotActiveFilterDikelolaMamikos() {
-        home.toggleDikelolaMamikosInActive();
-
+        Assert.assertTrue(landing.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
     }
 }
