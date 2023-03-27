@@ -10,12 +10,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.KostLandingAreaPO;
 import utilities.PlaywrightHelpers;
 
 public class LandingPageSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
+    KostLandingAreaPO landing = new KostLandingAreaPO(page);
 
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
@@ -26,7 +28,7 @@ public class LandingPageSteps {
 
     @When("user activate Dikelola Mamikos filter")
     public void userActivateDikelolaMamikosFilter() throws InterruptedException {
-        home.activateFilterDikelolaMamikos();
+        landing.activateFilterDikelolaMamikos();
     }
 
     @Then("user validate the result kos have Dikelola Mamikos label")
