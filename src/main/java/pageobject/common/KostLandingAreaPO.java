@@ -61,7 +61,7 @@ public class KostLandingAreaPO {
         sortButton = page.getByTestId("filter-kost-sorting");
         kosPrice = page.locator("span.rc-price__text");
         dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
-        dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
+        dikelolaMamikosToggle = page.locator("div").getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
     }
 
