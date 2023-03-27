@@ -10,7 +10,7 @@ Feature: Landing Page
   Scenario: [Dweb][Listing Kos][Filter] Deactivate dikelola mamikos filter
     Given user navigates to mamikos kost kost jogja murah
     When user activate Dikelola Mamikos filter
-    And user not active filter dikelola mamikos
+    And user activate Dikelola Mamikos filter
     Then user see Dikelola Mamikos filter is deactivate
 
   @DOM4 @landing-page @promo-ngebut-filter

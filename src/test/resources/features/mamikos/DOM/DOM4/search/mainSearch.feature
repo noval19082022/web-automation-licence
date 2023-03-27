@@ -1,6 +1,6 @@
 Feature: Main Search
 
-  @bagas @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
+  @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
   Scenario: [Dweb][Search]5 Suggestion List should appear
     Given user go to mamikos homepage
     When user search for random keyword:

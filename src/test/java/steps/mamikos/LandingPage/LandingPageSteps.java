@@ -22,6 +22,7 @@ public class LandingPageSteps {
     @Given("user navigates to mamikos kost kost jogja murah")
     public void userNavigatesToMamikosKostKostJogjaMurah() {
         playwright = new PlaywrightHelpers(page);
+        page.setViewportSize(1920, 1080);
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_MURAH_DIJOGJA, 30000.0, LoadState.LOAD);
 
     }
@@ -33,17 +34,11 @@ public class LandingPageSteps {
 
     @Then("user validate the result kos have Dikelola Mamikos label")
     public void userValidateTheResultKosHaveDikelolaMamikosLabel() throws InterruptedException {
-        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
+        Assert.assertTrue(landing.isDikelolaMamikosDisplayed(), "is Displayed diekola mamikos");
     }
 
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
-        Assert.assertTrue(home.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
-    }
-
-    @And("user not active filter dikelola mamikos")
-    public void userNotActiveFilterDikelolaMamikos() {
-        home.toggleDikelolaMamikos();
-
+        Assert.assertTrue(landing.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
     }
 }
