@@ -32,6 +32,9 @@ public class KostLandingAreaPO {
     private Locator hapusSemuaFilterButton;
     private Locator sortButton;
     private Locator kosPrice;
+    Locator dikelolaMamikosButton;
+    Locator dikelolaMamikosToggle;
+    Locator dikelolaMamikosLabel;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -57,6 +60,9 @@ public class KostLandingAreaPO {
         hapusSemuaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus semua filter"));
         sortButton = page.getByTestId("filter-kost-sorting");
         kosPrice = page.locator("span.rc-price__text");
+        dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
+        dikelolaMamikosToggle = page.locator("div").getByTestId("singgahsini-filter_tgl");
+        dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
     }
 
     /**
@@ -149,6 +155,7 @@ public class KostLandingAreaPO {
      * @return List<String>
      */
     public List<String> getAllContentNominatimEmptyList() {
+        nominatimEmptyList.textContent();
         return nominatimEmptyList.allTextContents();
     }
 
@@ -221,8 +228,11 @@ public class KostLandingAreaPO {
      * @param filter one of the available filter Dikelola Mamikos etc
      */
     public void clickOnFilter(String filter) {
-        var filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter));
+        var filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter)).first();
         playwright.clickOn(filterButton);
+        if (filter.toLowerCase().equals("dikelola mamikos")) {
+            page.locator("div.singgahsini-filter__content").locator("input[type='checkbox']").click();
+        }
     }
 
     /**
@@ -271,5 +281,26 @@ public class KostLandingAreaPO {
     public int getKosPriceListSize() {
         playwright.waitFor(kosPrice.last(), 30000.0);
         return kosPrice.all().size();
+    }
+
+    /**
+     * Click on filter Mamirooms button
+     *
+     * @throws InterruptedException
+     */
+
+    public void activateFilterDikelolaMamikos() throws InterruptedException {
+        playwright.clickOn(dikelolaMamikosButton);
+        playwright.forceClickOn(dikelolaMamikosToggle);
+        playwright.clickOn(dikelolaMamikosButton);
+    }
+
+    /**
+     * Check if Singgahsini/Apik label is present
+     *
+     * @return displayed true, otherwise false
+     */
+    public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
+        return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosButton, 2000.0);
     }
 }

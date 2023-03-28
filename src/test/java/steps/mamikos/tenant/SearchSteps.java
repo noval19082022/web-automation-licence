@@ -161,6 +161,11 @@ public class SearchSteps {
             String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
+        } else if (filter.equalsIgnoreCase("Dikelola Mamikos")) {
+            search.clickDikelolaMamikosFilter();
+            String desc = search.getDikelolaMamikosDescText().replaceAll("\\s", "");
+            String expected = text.toLowerCase().replaceAll("\\s", "");
+            Assert.assertTrue(desc.contains(expected), "Dikelola Mamikos Description text is wrong");
         } else if (filter.equalsIgnoreCase("Kos Andalan")) {
             search.clickKosAndalanFilter();
             String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
@@ -397,7 +402,10 @@ public class SearchSteps {
 
     @Then("user can see kost landing behavior for kost list with just {int} result")
     public void userCanSeeKostLandingBehaviorForKostListWithJustResult(int kostList) {
-        page.pause();
+        /**
+         * comment this page.pause() bcs this method open codegen
+         */
+//        page.pause();
         Assert.assertEquals(kostLanding.getKostListLocator().size(), kostList, "Resul is more than one or zero");
         Assert.assertTrue(kostLanding.isNominatimMapVisible(), "Nominatim map is not visible");
         Assert.assertTrue(kostLanding.isFilterResetTextVisible(), "Reset filter text is not visible");
@@ -497,7 +505,7 @@ public class SearchSteps {
             if (kostLanding.getKosAreaText(i).equalsIgnoreCase("unknown")) {
                 continue;
             }
-            Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Are " + kostLanding.getKosAreaText(i) + "Is not present in the list");
+            Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Area " + kostLanding.getKosAreaText(i) + " Is not present in the list");
         }
     }
 
@@ -538,7 +546,7 @@ public class SearchSteps {
                 break;
             }
             var cheaperPrice = kostLanding.getKostPrice(i);
-            var greaterPrice = kostLanding.getKostPrice(i+1);
+            var greaterPrice = kostLanding.getKostPrice(i + 1);
             System.out.println("Iterate number " + (i + 1));
             System.out.println("Cheaper price is " + cheaperPrice);
             System.out.println("Expensive price is " + greaterPrice);
@@ -558,7 +566,7 @@ public class SearchSteps {
                 break;
             }
             var greaterPrice = kostLanding.getKostPrice(i);
-            var lowerPrice = kostLanding.getKostPrice(i+1);
+            var lowerPrice = kostLanding.getKostPrice(i + 1);
             System.out.println("Iterate number " + (i + 1));
             System.out.println("Greater price is " + greaterPrice);
             System.out.println("Lower price is " + lowerPrice);

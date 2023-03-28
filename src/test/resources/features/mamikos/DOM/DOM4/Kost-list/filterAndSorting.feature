@@ -4,9 +4,10 @@ Feature: Filter and Sorting
     Given user navigates to ugm kost listing
     Then user clicks the "<filter>" button and the description will appears "<desc>"
     Examples:
-      | filter       | desc                                                                                                       |
-      | Promo Ngebut | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
-      | Kos Andalan  | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
+      | filter           | desc                                                                                                       |
+      | Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
+      | Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
+      | Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
     
   Scenario Outline: [Dweb][Listing Kos][Filter]Check filter gender and verify the result
     Given user navigates to ugm kost listing
@@ -39,9 +40,9 @@ Feature: Filter and Sorting
     And user sets Kos Andalan filter
     Then user validated the result kos have Kos Andalan label
 
-  Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter
+  Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter functionality
     Given user navigates to mamikos kost kost jogja murah
-    When user click on Dikelola Mamikos filter
+    When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
 
   Scenario: [Dweb][Listing Kos][Filter] Check Promo Ngebut filter

@@ -287,17 +287,13 @@ public class KostDetailSteps {
         Assert.assertEquals(kostDetail.getRecommendationKosLabel(), text, "Recommendation kos label in detail is not equals!");
     }
 
-    @And("user want to explore kost recomendation section")
-    public void user_click_on_next_button_and_display_next_recommendation_kos() {
+    @And("user want to explore kost recomendation section and see listing kos recommendation arround kos with detail {string} and filter by mix gender")
+    public void user_click_on_next_button_and_display_next_recommendation_kos(String text) {
         kostDetail.clickOnArrowRecommendationNextButton();
         Assert.assertFalse(kostDetail.isFirstKostCardRecommendationPresent(), "First Kost Card still display");
         kostDetail.clickOnArrowRecommendationPreviousButton();
         Assert.assertFalse(kostDetail.isNextRecommendationElementPresent(), "Next Kost Card still display");
         this.kostDetail = kostDetail.clickOnSeeAllRecommendation();
-    }
-
-    @And("user see listing kos recommendation arround kos with detail {string} and filter by mix gender")
-    public void user_clicks_on_previous_button_and_display_first_page_recomendation_kos(String text) {
         Assert.assertTrue(kostDetail.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
         Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
     }
