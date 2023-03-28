@@ -75,11 +75,11 @@ public class InvoicePO {
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
-        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-d9b433b8]");
+        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
         closeFilter = page.locator("i").nth(1);
-        openTagihan = page.locator("//*[@class='billing-management-table__row'][1]");
+        openTagihan = page.locator("//*[@class='billing-management-table__row']").last();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
         inputMonthFilter = page.locator("//*[@class='billing-management-input-trigger bg-c-dropdown'][1]");
