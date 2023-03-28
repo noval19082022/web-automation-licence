@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -60,6 +61,12 @@ public class InvoiceManualPO {
     private Locator buatDanKirimModal;
     private Locator buatdanKirimPopUpTable;
     // Buat dan Kirim Pop Up
+
+    //---Biaya Tambahan---//
+    private Locator invoiceTypeBiayaTambahan;
+    private Locator tambahBtn;
+    private Locator namaBiayaDropDown;
+    //---End of Biaya Tambahan---//
     
     public InvoiceManualPO(Page page){
         this.page = page;
@@ -88,6 +95,12 @@ public class InvoiceManualPO {
         buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Buat dan Kirim Invoice Mohon pastikan data pada invoice sudah sesuai sebel")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
+
+        //---Biaya Tambahan---//
+        invoiceTypeBiayaTambahan = page.getByText("Biaya Tambahan");
+        tambahBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        namaBiayaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya dropdown-down"));
+        //---End of Biaya Tambahan---//
     }
 
     /**
@@ -452,4 +465,28 @@ public class InvoiceManualPO {
         jumlahBiayaHover = page.locator("((//tbody/tr)["+rowInvoiceData.all().size()+"]/td)[4]//p").nth(2);
         assertThat(jumlahBiayaHover).hasText(jumlahBiaya);
     }
+
+    //---Biaya Tambahan---//
+    /**
+     * Click Jenis Invoice - Biaya Tambahan
+     */
+    public void clickJenisBiayaTambahan() {
+        invoiceTypeBiayaTambahan.click();
+    }
+
+    /**
+     * Click Tambah button in Buat Invoice page
+     */
+    public void clickTambah() {
+        tambahBtn.click();
+    }
+
+    /**
+     * Assert period start date and period end date are disable
+     */
+    public void assertPeriodDate(){
+        assertThat(startDateCalendar).isDisabled();
+        assertThat(endDateCalendar).isDisabled();
+    }
+    //---End of Biaya Tambahan---//
 }

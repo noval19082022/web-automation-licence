@@ -6,6 +6,7 @@ import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoiceManual.InvoiceManualPO;
 import utilities.PlaywrightHelpers;
@@ -176,5 +177,20 @@ public class InvoiceManualSteps {
         manualInvoice.hoverLastInvoiceData();
         manualInvoice.assertNamaBiayaHover(namaBiaya);
         manualInvoice.assertJumlahBiayaHover(jumlahBiaya);
+    }
+
+    //---Biaya Tambahan---//
+    @When("the user selects {string} in the Biaya Tambahan")
+    public void the_user_selects_in_the_Biaya_Tambahan(String biaya){
+        admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.clickJenisBiayaTambahan();
+        manualInvoice.clickTambah();
+        manualInvoice.setNamaBiayaInvoiceManual(biaya);
+    }
+
+    @Then("the Periode Awal and Periode Akhir are disable")
+    public void the_Periode_Awal_and_Periode_Akhir_are_disable(){
+        manualInvoice.assertPeriodDate();
     }
 }
