@@ -1186,9 +1186,9 @@ public class KostDetailsPO {
      *
      * @return next kost object
      */
-    public SearchPO clickOnSeeAllRecommendation() {
+    public KostLandingAreaPO clickOnSeeAllRecommendation() {
         Page nextPage = playwright.movePageByClickLocator(page, seeAllRecomendationButton);
-        return new SearchPO(nextPage);
+        return new KostLandingAreaPO(nextPage);
     }
 
     /**

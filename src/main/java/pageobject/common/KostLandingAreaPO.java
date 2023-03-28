@@ -36,6 +36,10 @@ public class KostLandingAreaPO {
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
 
+    //------ Recomendation Section------
+    private Locator recommendationListTitle;
+    private Locator mixGenderFilter;
+
     public KostLandingAreaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -63,6 +67,8 @@ public class KostLandingAreaPO {
         dikelolaMamikosButton = page.getByTestId("singgahsini-filter_btn");
         dikelolaMamikosToggle = page.locator("div").getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+        this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
+        this.mixGenderFilter = page.getByText("Campur").first();
     }
 
     /**
@@ -302,5 +308,26 @@ public class KostLandingAreaPO {
      */
     public boolean isDikelolaMamikosDisplayed() throws InterruptedException {
         return playwright.isLocatorVisibleAfterLoad(dikelolaMamikosButton, 2000.0);
+    }
+
+
+    /**
+     * Get arround recommendation kos list Desc Text
+     *
+     * @return recomendation title in listing
+     */
+    public String getRecommendationKosList() {
+        playwright.waitTillLocatorIsVisible(recommendationListTitle);
+        System.out.println(playwright.getText(recommendationListTitle));
+        return playwright.getText(recommendationListTitle);
+    }
+
+    /**
+     * Check Mix gender is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isMixGenderDisplay() {
+        return playwright.waitTillLocatorIsVisible(mixGenderFilter);
     }
 }
