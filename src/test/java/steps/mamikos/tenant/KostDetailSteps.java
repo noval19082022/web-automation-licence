@@ -293,9 +293,9 @@ public class KostDetailSteps {
         Assert.assertFalse(kostDetail.isFirstKostCardRecommendationPresent(), "First Kost Card still display");
         kostDetail.clickOnArrowRecommendationPreviousButton();
         Assert.assertFalse(kostDetail.isNextRecommendationElementPresent(), "Next Kost Card still display");
-        this.kostDetail = kostDetail.clickOnSeeAllRecommendation();
-        Assert.assertTrue(kostDetail.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
-        Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
+        this.search = kostDetail.clickOnSeeAllRecommendation();
+        Assert.assertTrue(search.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
+        Assert.assertTrue(search.isMixGenderDisplay(), "Mixed Gender is not display");
     }
 
     //------------ Right Panel Section -----------------

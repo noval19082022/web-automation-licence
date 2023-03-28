@@ -47,8 +47,9 @@ public class SearchPO {
     private Locator mapLegendButton;
     private Locator mapLegendClosedStatus;
 
-
-
+    //------ Recomendation Section------
+    private Locator recommendationListTitle;
+    private Locator mixGenderFilter;
 
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
@@ -87,6 +88,8 @@ public class SearchPO {
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
+        this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
+        this.mixGenderFilter = page.getByText("Campur").first();
     }
 
     /**
@@ -734,5 +737,25 @@ public class SearchPO {
      */
     public List<String> getSuggestionText() {
         return suggestionResult.allInnerTexts();
+    }
+
+    /**
+     * Get arround recommendation kos list Desc Text
+     *
+     * @return recomendation title in listing
+     */
+    public String getRecommendationKosList() {
+        playwright.waitTillLocatorIsVisible(recommendationListTitle);
+        System.out.println(playwright.getText(recommendationListTitle));
+        return playwright.getText(recommendationListTitle);
+    }
+
+    /**
+     * Check Mix gender is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isMixGenderDisplay() {
+        return playwright.waitTillLocatorIsVisible(mixGenderFilter);
     }
 }
