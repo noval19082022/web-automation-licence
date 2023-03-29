@@ -151,4 +151,9 @@ public class NavigatesSteps {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
     }
+
+    @Given("admin go to pms singgahsini")
+    public void admin_go_to_pms_singgahsini() {
+        playwright.navigateTo(Mamikos.PMS_URL);
+    }
 }
