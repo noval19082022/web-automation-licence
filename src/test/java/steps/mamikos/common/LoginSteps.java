@@ -12,6 +12,7 @@ import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
+import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.TenantLoginPO;
 
 import java.util.List;
@@ -25,10 +26,12 @@ public class LoginSteps {
     LoginAdminMamipayPO loginAdmin = new LoginAdminMamipayPO(page);
     AdminBangkrupuxLoginPO loginAdminBangkrupux = new AdminBangkrupuxLoginPO(page);
     TenantLoginPO tenantLogin = new TenantLoginPO(page);
+    LoginPMSPO loginPMS = new LoginPMSPO(page);
 
 
     private List<Map<String, String>> phoneNumberCredential;
     private List<Map<String, String>> emailCredential;
+    private List<Map<String, String>> pmsCredential;
 
     @When("user login as tenant via phone number:")
     public void userLoginAsTenantViaPhoneNumber(DataTable table) {
@@ -97,6 +100,17 @@ public class LoginSteps {
         loginAdmin.fillEmail(email);
         loginAdmin.fillPassword(password);
         loginAdmin.clickOnLoginButton();
+    }
+
+    @When("admin login pms :")
+    public void admin_login_pms(DataTable tables) {
+        pmsCredential = tables.asMaps(String.class, String.class);
+        String username = pmsCredential.get(0).get("email");
+        String password = pmsCredential.get(0).get("password");
+
+        loginPMS.fillUsername(username);
+        loginPMS.fillPassword(password);
+        loginPMS.clickLogin();
     }
 
     @Then("user see login pop up in favorite page")
