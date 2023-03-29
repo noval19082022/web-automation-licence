@@ -48,8 +48,6 @@ public class SearchPO {
     private Locator mapLegendClosedStatus;
 
 
-
-
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
         this.page = page;
