@@ -20,6 +20,8 @@ public class InvoiceManualSteps {
     private AdminMamipayDashboardPO admin = new AdminMamipayDashboardPO(page);
     private InvoiceManualPO manualInvoice = new InvoiceManualPO(page);
 
+    private String listing;
+    private String tenant;
     private List<Map<String, String>> tenantInfo;
     private List<Map<String, String>> tenantDetail;
     private List<Map<String, String>> detailBiaya;
@@ -28,9 +30,6 @@ public class InvoiceManualSteps {
     private List<Map<String, String>> hoverData;
     @When("admin input nama penyewa in buat invoice manual")
     public void admin_input_nama_penyewa_in_buat_invoice_manual(DataTable tables) {
-        String listing = "";
-        String tenant = "";
-
         tenantInfo = tables.asMaps(String.class, String.class);
 
         if (Mamikos.ENV.equalsIgnoreCase("stag")){
@@ -178,7 +177,37 @@ public class InvoiceManualSteps {
         manualInvoice.assertNamaBiayaHover(namaBiaya);
         manualInvoice.assertJumlahBiayaHover(jumlahBiaya);
     }
-
+    @When("admin click back button in buat invoice manual page")
+    public void admin_click_back_button_in_buat_invoice_manual_page() {
+        manualInvoice.clickBackButtonBuatInvoice();
+    }
+    @Then("exit buat invoice confirmation pop up should be appear")
+    public void exit_buat_invoice_confirmation_pop_up_should_be_appear() {
+        manualInvoice.assertExitInvoicePopUpAppear();
+        manualInvoice.assertExitBuatInvoicePopUpTitle();
+        manualInvoice.assertExitBuatInvoicePopUpDescription();
+        manualInvoice.assertExitBuatInvoicePopUpButton();
+    }
+    @When("admin check confirmation functionality and confirm exit")
+    public void admin_check_confirmation_functionality_and_confirm_exit() {
+        //click 'tidak' in Exit Buat Invoice Confirmation pop up
+        manualInvoice.cancelExitBuatInvoice();
+        manualInvoice.assertExitInvoicePopUpClosed();
+        //click 'ya' in Exit Buat Invoice Confirmation pop up
+        manualInvoice.clickBackButtonBuatInvoice();
+        manualInvoice.confirmExitBuatInvoice();
+    }
+    @Then("admin redirect to invoice manual page")
+    public void admin_redirect_to_invoice_manual_page() {
+        manualInvoice.assertURLInvoiceManual();
+    }
+    @Then("admin redirect to invoice manual page without confirmation")
+    public void admin_redirect_to_invoice_manual_page_without_confirmation() {
+        manualInvoice.assertURLInvoiceManual();
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.inputListingName(listing);
+        manualInvoice.inputTenantName(tenant);
+    }
     //---Biaya Tambahan---//
     @When("the user selects {string} in the Biaya Tambahan")
     public void the_user_selects_in_the_Biaya_Tambahan(String biaya){

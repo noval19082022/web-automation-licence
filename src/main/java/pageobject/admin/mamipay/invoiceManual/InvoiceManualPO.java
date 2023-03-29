@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.invoiceManual;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +41,7 @@ public class InvoiceManualPO {
     private Locator tambahBiayaButton;
     private Locator toastMessage;
     private Locator buatDanKirimButton;
+    private Locator backButtonBuatInvoice;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -61,6 +63,14 @@ public class InvoiceManualPO {
     private Locator buatDanKirimModal;
     private Locator buatdanKirimPopUpTable;
     // Buat dan Kirim Pop Up
+
+    //Exit Buat Invoice Pop Up
+    private Locator titleExitBuatInvoicePopUp;
+    private Locator descriptionExitBuatInvoicePopUp;
+    private Locator tidakButtonExitBuatInvoicePopUp;
+    private Locator yaButtonExitBuatInvoicePopUp;
+    private Locator exitBuatInvoiceModal;
+    //Exit Buat Invoice Pop Up
 
     //---Biaya Tambahan---//
     private Locator invoiceTypeBiayaTambahan;
@@ -95,6 +105,12 @@ public class InvoiceManualPO {
         buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Buat dan Kirim Invoice Mohon pastikan data pada invoice sudah sesuai sebel")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
+        backButtonBuatInvoice = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("back"));
+        exitBuatInvoiceModal = page.locator("//*[@class='bg-c-modal__inner']");
+        titleExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-title']");
+        descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
+        tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
+        yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
 
         //---Biaya Tambahan---//
         invoiceTypeBiayaTambahan = page.getByText("Biaya Tambahan");
@@ -466,6 +482,74 @@ public class InvoiceManualPO {
         assertThat(jumlahBiayaHover).hasText(jumlahBiaya);
     }
 
+    /**
+     * click back button in buat invoice page
+     */
+    public void clickBackButtonBuatInvoice() {
+        backButtonBuatInvoice.click();
+    }
+
+    /**
+     * Assert title in Exit confirmation Buat Invoice Pop Up
+     */
+    public void assertExitBuatInvoicePopUpTitle() {
+        assertThat(titleExitBuatInvoicePopUp).hasText("Yakin keluar dari halaman ini?");
+    }
+
+    /**
+     * Assert description in Exit confirmation Buat Invoice Pop Up
+     */
+    public void assertExitBuatInvoicePopUpDescription() {
+        assertThat(descriptionExitBuatInvoicePopUp).hasText("Invoice yang dibuat tidak akan tersimpan dan tidak dapat dikembalikan.");
+    }
+
+    /**
+     * Assert button in Exit confirmation Buat Invoice Pop Up
+     */
+    public void assertExitBuatInvoicePopUpButton() {
+        assertThat(tidakButtonExitBuatInvoicePopUp).hasText("Tidak");
+        assertThat(yaButtonExitBuatInvoicePopUp).hasText("Ya");
+    }
+
+    /**
+     * click tidak in Exit confirmation Buat Invoice Pop Up
+     */
+    public void cancelExitBuatInvoice() {
+        tidakButtonExitBuatInvoicePopUp.click();
+    }
+
+    /**
+     * Assert is confirmation Buat Invoice Pop Up closed ?
+     */
+    public void assertExitInvoicePopUpClosed() {
+        assertThat(exitBuatInvoiceModal).isHidden();
+    }
+
+    /**
+     * Assert is confirmation Buat Invoice Pop Up appear ?
+     */
+    public void assertExitInvoicePopUpAppear() {
+        assertThat(exitBuatInvoiceModal).isVisible();
+    }
+
+    /**
+     * click ya in Exit confirmation Buat Invoice Pop Up
+     */
+    public void confirmExitBuatInvoice() {
+        yaButtonExitBuatInvoicePopUp.click();
+    }
+
+    /**
+     * Assert URL is equal to Invoice Manual URL
+     */
+    public void assertURLInvoiceManual() {
+        if (Mamikos.ENV.equalsIgnoreCase("stag")){
+            assertThat(page).hasURL("https://pay-jambu.kerupux.com/backoffice/invoice/manual");
+        } else if (Mamikos.ENV.equalsIgnoreCase("prod")) {
+            assertThat(page).hasURL("https://bang-pay.kerupux.com/backoffice/invoice/manual");
+        }
+    }
+    
     //---Biaya Tambahan---//
     /**
      * Click Jenis Invoice - Biaya Tambahan
