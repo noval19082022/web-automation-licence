@@ -26,6 +26,10 @@ public class InvoiceManualSteps {
     private List<Map<String, String>> rincianBiaya;
     private List<Map<String, String>> invoiceData;
     private List<Map<String, String>> hoverData;
+
+    //---Biaya Tambahan Pop Up---//
+    private List<Map<String, String>> fillFields;
+    //---End of Biaya Tambahan Pop Up---//
     @When("admin input nama penyewa in buat invoice manual")
     public void admin_input_nama_penyewa_in_buat_invoice_manual(DataTable tables) {
         String listing = "";
@@ -126,12 +130,12 @@ public class InvoiceManualSteps {
     @When("admin check pop up button and confirm it")
     public void admin_check_pop_up_button_and_confirm_it() {
         //check close button
-        manualInvoice.closePopUpBuatDanKirim();
-        manualInvoice.assertPopUpBuatdanKirimClosed();
+        manualInvoice.clickClosePopUp();
+        manualInvoice.assertPopUpInInvoiceManual();
         //check kembali button
         manualInvoice.previewBuatdanKirimInvoiceManual();
-        manualInvoice.kembaliPopupBuatDanKirim();
-        manualInvoice.assertPopUpBuatdanKirimClosed();
+        manualInvoice.kembaliPopupButton();
+        manualInvoice.assertPopUpInInvoiceManual();
         //confirm button
         manualInvoice.previewBuatdanKirimInvoiceManual();
         manualInvoice.confirmPopUpBuatDanKirim();
@@ -179,7 +183,7 @@ public class InvoiceManualSteps {
         manualInvoice.assertJumlahBiayaHover(jumlahBiaya);
     }
 
-    //---Biaya Tambahan---//
+    //---Biaya Tambahan Pop Up---//
     @When("the user selects {string} in the Biaya Tambahan")
     public void the_user_selects_in_the_Biaya_Tambahan(String biaya){
         admin.NavigateToMamipayMenu("Invoice Manual");
@@ -193,4 +197,38 @@ public class InvoiceManualSteps {
     public void the_Periode_Awal_and_Periode_Akhir_are_disable(){
         manualInvoice.assertPeriodDate();
     }
+
+    @When("the user fill all fields in Tambah Biaya Tambahan pop up")
+    public void the_user_fill_all_fields_in_Tambah_Biaya_Tambahan_pop_up(DataTable tables){
+        String durasiBiaya = "";
+        String jumlahBiaya = "";
+
+        fillFields = tables.asMaps(String.class, String.class);
+
+        if (Mamikos.ENV.equalsIgnoreCase("stag")){
+            durasiBiaya = fillFields.get(0).get("Durasi Biaya");
+            jumlahBiaya = fillFields.get(0).get("Jumlah Biaya");
+        } else if (Mamikos.ENV.equalsIgnoreCase("prod")) {
+            durasiBiaya = fillFields.get(1).get("Durasi Biaya");
+            jumlahBiaya = fillFields.get(1).get("Jumlah Biaya");
+        }
+
+        manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+    }
+
+    @When("the user click {string} modal tambah biaya")
+    public void the_user_click_modal_tambah_biaya(String button){
+        if (button.equalsIgnoreCase("Close")){
+            manualInvoice.clickClosePopUp();
+        } else if (button.equalsIgnoreCase("Kembali")) {
+            manualInvoice.kembaliPopupButton();
+        }
+    }
+
+    @Then("tambah biaya modal is closed")
+    public void tambah_biaya_modal_is_closed(){
+        manualInvoice.assertPopUpInInvoiceManual();
+    }
+    //---End of Biaya Tambahan Pop Up---//
 }

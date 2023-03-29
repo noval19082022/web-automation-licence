@@ -61,12 +61,6 @@ public class InvoiceManualPO {
     private Locator buatDanKirimModal;
     private Locator buatdanKirimPopUpTable;
     // Buat dan Kirim Pop Up
-
-    //---Biaya Tambahan---//
-    private Locator invoiceTypeBiayaTambahan;
-    private Locator tambahBtn;
-    private Locator namaBiayaDropDown;
-    //---End of Biaya Tambahan---//
     
     public InvoiceManualPO(Page page){
         this.page = page;
@@ -95,12 +89,6 @@ public class InvoiceManualPO {
         buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Buat dan Kirim Invoice Mohon pastikan data pada invoice sudah sesuai sebel")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
-
-        //---Biaya Tambahan---//
-        invoiceTypeBiayaTambahan = page.getByText("Biaya Tambahan");
-        tambahBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
-        namaBiayaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya dropdown-down"));
-        //---End of Biaya Tambahan---//
     }
 
     /**
@@ -369,23 +357,16 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Click X button in Buat dan Kirim pop up
-     */
-    public void closePopUpBuatDanKirim() {
-        closePopUpButton.click();
-    }
-
-    /**
      * Assert Buat dan Kirim Pop up is not visible
      */
-    public void assertPopUpBuatdanKirimClosed() {
+    public void assertPopUpInInvoiceManual() {
         assertThat(buatDanKirimModal).isHidden();
     }
 
     /**
      * Click Kembali button in Buat dan Kirim pop up
      */
-    public void kembaliPopupBuatDanKirim() {
+    public void kembaliPopupButton() {
         kembaliPopUpButton.click();
     }
 
@@ -471,14 +452,14 @@ public class InvoiceManualPO {
      * Click Jenis Invoice - Biaya Tambahan
      */
     public void clickJenisBiayaTambahan() {
-        invoiceTypeBiayaTambahan.click();
+        biayaTambahanRadioButton.click();
     }
 
     /**
      * Click Tambah button in Buat Invoice page
      */
     public void clickTambah() {
-        tambahBtn.click();
+        tambahBiayaButton.click();
     }
 
     /**
@@ -487,6 +468,13 @@ public class InvoiceManualPO {
     public void assertPeriodDate(){
         assertThat(startDateCalendar).isDisabled();
         assertThat(endDateCalendar).isDisabled();
+    }
+
+    /**
+     * Click close (X) button in Invoice Manual pop up
+     */
+    public void clickClosePopUp() {
+        closePopUpButton.click();
     }
     //---End of Biaya Tambahan---//
 }
