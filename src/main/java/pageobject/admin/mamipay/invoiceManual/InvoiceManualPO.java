@@ -8,6 +8,7 @@ import data.mamikos.Mamikos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -71,6 +72,12 @@ public class InvoiceManualPO {
     private Locator exitBuatInvoiceModal;
     //Exit Buat Invoice Pop Up
 
+    //---Biaya Tambahan---//
+    private Locator invoiceTypeBiayaTambahan;
+    private Locator tambahBtn;
+    private Locator namaBiayaDropDown;
+    //---End of Biaya Tambahan---//
+    
     public InvoiceManualPO(Page page){
         this.page = page;
         buatInvoiceButton = page.getByTestId("create-invoice-btn");
@@ -104,6 +111,12 @@ public class InvoiceManualPO {
         descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+
+        //---Biaya Tambahan---//
+        invoiceTypeBiayaTambahan = page.getByText("Biaya Tambahan");
+        tambahBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        namaBiayaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya dropdown-down"));
+        //---End of Biaya Tambahan---//
     }
 
     /**
@@ -536,4 +549,28 @@ public class InvoiceManualPO {
             assertThat(page).hasURL("https://bang-pay.kerupux.com/backoffice/invoice/manual");
         }
     }
+    
+    //---Biaya Tambahan---//
+    /**
+     * Click Jenis Invoice - Biaya Tambahan
+     */
+    public void clickJenisBiayaTambahan() {
+        invoiceTypeBiayaTambahan.click();
+    }
+
+    /**
+     * Click Tambah button in Buat Invoice page
+     */
+    public void clickTambah() {
+        tambahBtn.click();
+    }
+
+    /**
+     * Assert period start date and period end date are disable
+     */
+    public void assertPeriodDate(){
+        assertThat(startDateCalendar).isDisabled();
+        assertThat(endDateCalendar).isDisabled();
+    }
+    //---End of Biaya Tambahan---//
 }
