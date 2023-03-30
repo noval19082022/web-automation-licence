@@ -1,3 +1,4 @@
+#Pastikan kos data test adalah kos singgah sini. Recurring Invoice hanya akan dibuat untuk kos singgah sini.
 @BBM2
 Feature: Additional Price Biaya Lainnya On Invoice Recurring
 
@@ -82,5 +83,5 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
-    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is "Belum bayar - Tenggat 28 hari lagi"
+    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
