@@ -42,8 +42,8 @@ public class HomepageSteps {
         home.clickOnSyaratKetentuanButton();
     }
 
-    @Then("user should redirect to link {string}")
-    public void userShouldRedirectToLink(String link) {
+    @Then("user should redirect to syarat dan ketentuan link {string}")
+    public void userShouldRedirectToSyaratDanKetentuanLink(String link) {
         home = new HomePO(ActiveContext.getActivePage());
         Assert.assertEquals(home.getSyaratKetentuanLinkURL(), link, "Syarat dan Ketentuan Umum link is not equal");
     }

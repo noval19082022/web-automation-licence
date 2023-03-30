@@ -25,4 +25,4 @@ Feature: Homepage
     Given user go to mamikos homepage
     And user open syarat dan ketentuan in footer
     And tenant set active page to 1
-    Then user should redirect to link "https://help.mamikos.com/post/syarat-dan-ketentuan-umum"
+    Then user should redirect to syarat dan ketentuan link "https://help.mamikos.com/post/syarat-dan-ketentuan-umum"
