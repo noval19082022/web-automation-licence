@@ -39,6 +39,17 @@ public class HomePO {
     Locator searchIklanButton;
     private Locator flashSaleIcon;
     Locator bookingKosButtonHeadBar;
+    Locator kostMenuDropdown;
+    Locator apartmentMenuDropdown;
+    Locator profileDropdown;
+    Locator profileMenu;
+    Locator riwayatTransaksiMenu;
+    Locator logOutButton;
+
+    //footer
+    private Locator kebijakanPrivasiButton;
+    private Locator kebijakanPrivasiTitle;
+    private Locator syaratKetentuanButton;
 
 
 
@@ -73,6 +84,17 @@ public class HomePO {
         this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator("#promoted").getByTestId("roomCardCover-photo").nth(0);
+        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
+        this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("apartment Apartemen"));
+        this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        this.profileMenu = page.getByTestId("profileButton");
+        this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
+        this.logOutButton = page.getByTestId("exitButton");
+
+        //footer
+        this.kebijakanPrivasiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan Privasi"));
+        this.kebijakanPrivasiTitle = page.locator("#__layout h1");
+        this.syaratKetentuanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Umum"));
     }
 
     /**
@@ -309,5 +331,100 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
+    }
+
+    /**
+     * Click on Kebijakan Privasi button
+     *
+     */
+    public void clickOnKebijakanPrivasiButton() {
+        kebijakanPrivasiButton.click();
+    }
+
+    /**
+     * Check element kebijakan privasi title is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKebijakanPrivasiTitleDisplayed() {
+        return kebijakanPrivasiTitle.isVisible();
+    }
+
+    /**
+     * Click on Syarat dan Ketentuan button
+     *
+     */
+    public void clickOnSyaratKetentuanButton() {
+        syaratKetentuanButton.click();
+    }
+
+    /**
+     * Get redirection syarat dan ketentuan link
+     * @return url is equal
+     */
+    public String getSyaratKetentuanLinkURL() {
+        return page.url();
+    }
+
+    /**
+     * Click on Cari Iklan dropdown
+     *
+     */
+    public void clickOnAdsDropdown() {
+        searchIklanButton.click();
+    }
+
+    /**
+     * Check elementt Kos Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKostMenuDisplayed() {
+        return kostMenuDropdown.isVisible();
+    }
+
+
+    /**
+     * Check element Apartment Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isApartmentMenuDisplayed() {
+        return apartmentMenuDropdown.isVisible();
+    }
+
+    /**
+     * Click on Profile dropdown
+     *
+     */
+    public void clickOnProfileDropdown() {
+        profileDropdown.click();
+    }
+
+    /**
+     * Check element Profile Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isProfileMenuDisplayed() {
+        return profileMenu.isVisible();
+    }
+
+    /**
+     * Check element Riwayat Transaksi Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isRiwayatTransaksiMenuDisplayed() {
+        return profileMenu.isVisible();
+    }
+
+    /**
+     * Check element Lot Out button is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isLogOutButtonDisplayed() {
+        return logOutButton.isVisible();
     }
 }
