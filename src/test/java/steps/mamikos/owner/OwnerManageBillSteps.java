@@ -55,4 +55,11 @@ public class OwnerManageBillSteps {
     public void ownerGoToDetailTagihanWithTenantNameIsAndJatuhTempoIs(String tenantName, String jatuhTempoDate) {
         billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempoDate);
     }
+
+    @And("owner go to detail tagihan with tenant name is {string} and jatuh tempo is current month length")
+    public void ownerGoToDetailTagihanWithTenantNameIsAndCurrenMonthLengthJatuhTempo(String tenantName) {
+        int monthLength = JavaHelpers.getMonthLength();
+        String jatuhTempo = "Belum bayar - Tenggat "+monthLength+" hari lagi";
+        billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempo);
+    }
 }
