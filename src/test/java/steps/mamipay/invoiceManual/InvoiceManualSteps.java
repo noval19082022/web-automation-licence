@@ -31,6 +31,7 @@ public class InvoiceManualSteps {
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
+    private List<Map<String, String>> requiredFields;
     //---End of Biaya Tambahan Pop Up---//
     @When("admin input nama penyewa in buat invoice manual")
     public void admin_input_nama_penyewa_in_buat_invoice_manual(DataTable tables) {
@@ -215,8 +216,8 @@ public class InvoiceManualSteps {
     //---Biaya Tambahan---//
 
     //---Biaya Tambahan Pop Up---//
-    @When("the user selects {string} in the Biaya Tambahan")
-    public void the_user_selects_in_the_Biaya_Tambahan(String biaya){
+    @When("the admin selects {string} in the Biaya Tambahan")
+    public void the_admin_selects_in_the_Biaya_Tambahan(String biaya){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
         manualInvoice.clickJenisBiayaTambahan();
@@ -229,8 +230,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertPeriodDate();
     }
 
-    @When("the user fill all fields in Tambah Biaya Tambahan pop up")
-    public void the_user_fill_all_fields_in_Tambah_Biaya_Tambahan_pop_up(DataTable tables){
+    @When("the admin fill all fields in Tambah Biaya Tambahan pop up")
+    public void the_admin_fill_all_fields_in_Tambah_Biaya_Tambahan_pop_up(DataTable tables){
         String durasiBiaya = "";
         String jumlahBiaya = "";
 
@@ -248,8 +249,8 @@ public class InvoiceManualSteps {
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
 
-    @When("the user click {string} modal tambah biaya")
-    public void the_user_click_modal_tambah_biaya(String button){
+    @When("the admin click {string} modal tambah biaya")
+    public void the_admin_click_modal_tambah_biaya(String button){
         if (button.equalsIgnoreCase("Close")){
             manualInvoice.clickClosePopUp();
         } else if (button.equalsIgnoreCase("Kembali")) {
@@ -260,6 +261,47 @@ public class InvoiceManualSteps {
     @Then("tambah biaya modal is closed")
     public void tambah_biaya_modal_is_closed(){
         manualInvoice.assertPopUpInInvoiceManual();
+    }
+
+    @When("the admin create Invoice Manual {string} and check required fields {string}, {string}, {string}, {string}, {string}")
+    public void the_admin_create_Invoice_Manual_and_check_required_fields(String invType, String nama, String awal, String akhir, String durasi, String jml){
+        admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.clickJenisBiayaTambahan();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            manualInvoice.clickJenisBiayaSewa();
+        }
+
+        manualInvoice.clickTambah();
+
+        if (!(nama.equalsIgnoreCase("-"))) {
+            manualInvoice.setNamaBiayaInvoiceManual(nama);
+        } else if (!(awal.equalsIgnoreCase("-"))) {
+            manualInvoice.setPeriodeAwalInvoiceManual(awal);
+        } else if (!(akhir.equalsIgnoreCase("-"))) {
+            manualInvoice.setPeriodeAkhirInvoiceManual(akhir);
+        } else if (!(durasi.equalsIgnoreCase("-"))) {
+            manualInvoice.setDurasiBiayaInvoiceManual(durasi);
+        } else if (!(jml.equalsIgnoreCase("-"))) {
+            manualInvoice.setJumlahBiayaInvoiceManual(jml);
+        }
+
+        manualInvoice.clickTambahSubmitInPopUp();
+    }
+
+    @Then("the error messages {string}, {string}, {string}, {string} are displayed")
+    public void the_error_messages_are_displayed(String namaErrMsg, String awalErrMsg, String akhirErrMsg, String jmlErrMsg){
+        if (!(namaErrMsg.equalsIgnoreCase("-"))){
+            manualInvoice.assertNamaBiayaErrMsg();
+        } else if (!(awalErrMsg.equalsIgnoreCase("-"))) {
+            manualInvoice.assertPeriodeAwalErrMsg();
+        } else if (!(akhirErrMsg.equalsIgnoreCase("-"))) {
+            manualInvoice.assertPeriodeAkhirErrMsg();
+        } else if (!(jmlErrMsg.equalsIgnoreCase("-"))) {
+            manualInvoice.assertJumlahBiayaErrMsg();
+        }
     }
     //---End of Biaya Tambahan Pop Up---//
 }
