@@ -54,7 +54,7 @@ public class TenantBillManagementPO {
      * @return BillDetailsPO class
      */
     public BillDetailsPO clickOnInvoiceList() {
-        playwright.clickOn(invoiceList);
+        playwright.clickOn(invoiceList.last());
         return new BillDetailsPO(page);
     }
 
