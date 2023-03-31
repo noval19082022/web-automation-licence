@@ -338,8 +338,29 @@ public class PlaywrightHelpers {
 
     /*
      * hard wait 60 second
+     *
      * */
-    public void hardWait60Seconds(){
+    public void hardWait60Seconds() {
         page.waitForTimeout(60_000);
+    }
+
+    /**
+     * Get Active URL page
+     *
+     * @return String URL Active page
+     */
+    public String getActivePageURL() {
+        String activeUrl = page.evaluate("window.location.href").toString();
+        return activeUrl;
+    }
+
+    /**
+     * Get Active Title page
+     *
+     * @return String Title Active page
+     */
+    public String getActivePageTitle() {
+        String activeTitle = page.evaluate("document.title").toString();
+        return activeTitle;
     }
 }

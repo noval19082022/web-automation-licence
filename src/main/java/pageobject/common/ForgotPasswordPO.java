@@ -20,6 +20,7 @@ public class ForgotPasswordPO {
     private Locator kirimUlangOtpBtn;
     private Locator backBtn;
     private Locator batalkanConfirmationBtn;
+    private Locator pilihMethodeVerifikasiTitle;
 
 
     public ForgotPasswordPO(Page page) {
@@ -36,6 +37,7 @@ public class ForgotPasswordPO {
         this.kirimUlangOtpBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim ulang kode"));
         this.backBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.batalkanConfirmationBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, batalkan"));
+        this.pilihMethodeVerifikasiTitle = page.getByText("Pilih Metode Verifikasi");
     }
 
     /**
@@ -84,20 +86,20 @@ public class ForgotPasswordPO {
     }
 
     /**
-     * Resend OTP From Send OTP Text and wait 60 seconds
+     * Resend OTP From Send OTP Text
      *
      * @return String text
      */
     public String getResendOTPButton() {
-        playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn, 60000.0);
+        playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn);
         return kirimUlangOtpBtn.textContent();
     }
 
     /**
-     * Resend OTP From Send OTP Page and wait 60 seconds
+     * Resend OTP From Send OTP Page
      */
     public void clickOnResendOtp() {
-        playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn, 60000.0);
+        playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn);
         kirimUlangOtpBtn.click();
     }
 
@@ -110,12 +112,11 @@ public class ForgotPasswordPO {
     }
 
     /**
-     * Get Active URL forgot password page
+     * Get Title Verifikasi Page
      *
-     * @return String URL Active page
+     * @return String 'Pilih Metode Verifikasi'
      */
-    public String getActivePageURL() {
-        String activeUrl = page.evaluate("window.location.href").toString();
-        return activeUrl;
+    public String getTitleVerifikasiPage() {
+        return pilihMethodeVerifikasiTitle.textContent();
     }
 }

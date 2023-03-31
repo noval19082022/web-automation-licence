@@ -23,14 +23,13 @@ Feature: Owner - Forgot Password
     When user want to change the owner password
     Then user redirected to "/lupa-password-pemilik"
 
-#  @TEST_DOM-2224 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Input registered phone number
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their registered phone number "0812345670005" and click send button
-#    Then user verify on page "Pilih Metode Verifikasi"
-#
+  @TEST_DOM-2224 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Input registered phone number
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their registered phone number "083843666868"
+    Then user verify on page "Pilih Metode Verifikasi"
+
 #  @TEST_DOM-2225 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Use number not registered
 #    Given user navigates to "mamikos /"
