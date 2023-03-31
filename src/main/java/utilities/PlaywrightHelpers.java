@@ -335,4 +335,11 @@ public class PlaywrightHelpers {
         nextPage.bringToFront();
         return nextPage;
     }
+
+    /*
+     * hard wait 60 second
+     * */
+    public void hardWait60Seconds(){
+        page.waitForTimeout(60_000);
+    }
 }
