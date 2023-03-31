@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
@@ -29,6 +30,7 @@ public class HomepageSteps {
     @And("user open kebijakan privasi in footer")
     public void userOpenKebijakanPrivasiInFooter() {
         home.clickOnKebijakanPrivasiButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 
     @Then("user should redirect to kebijakan privasi page")
@@ -40,12 +42,13 @@ public class HomepageSteps {
     @And("user open syarat dan ketentuan in footer")
     public void userOpenSyaratDanKetentuanInFooter() {
         home.clickOnSyaratKetentuanButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 
-    @Then("user should redirect to syarat dan ketentuan link {string}")
-    public void userShouldRedirectToSyaratDanKetentuanLink(String link) {
+    @Then("user should redirect to link {string}")
+    public void userShouldRedirectToLink(String url) {
         home = new HomePO(ActiveContext.getActivePage());
-        Assert.assertEquals(home.getSyaratKetentuanLinkURL(), link, "Syarat dan Ketentuan Umum link is not equal");
+        Assert.assertEquals(home.getURL(), url, "Link is not equal");
     }
 
     @Then("tenant can see profile dropdown option")
@@ -61,5 +64,74 @@ public class HomepageSteps {
         home.clickOnAdsDropdown();
         Assert.assertTrue(home.isKostMenuDisplayed(), "Kost Menu Dropdown is not present");
         Assert.assertTrue(home.isApartmentMenuDisplayed(), "Apartment Menu Dropdown is not present");
+    }
+
+    @When("user open tentang kami in footer")
+    public void userOpenTentangKamiInFooter() {
+        home.clickOnTentangKamiButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @Then("user should redirect to link that contains {string}")
+    public void userShouldRedirectToLinkThatContains(String url) {
+        home = new HomePO(ActiveContext.getActivePage());
+        Assert.assertTrue(home.getURL().contains(url), "URL doesn't match");
+    }
+
+    @When("user open job mamikos in footer")
+    public void userOpenJobMamikosInFooter() {
+        home.clickOnJobMamikosButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open promosikan kost anda in footer")
+    public void userOpenPromosikanKostAndaInFooter() {
+        home.clickOnPromosikanIklanAndaButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open pusat bantuan in footer")
+    public void userOpenPusatBantuanInFooter() {
+        home.clickOnPusatBantuanButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open facebook in footer")
+    public void userOpenFacebookInFooter() {
+        home.clickOnFacebookButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open twitter in footer")
+    public void userOpenTwitterInFooter() {
+        home.clickOnTwitterButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open instagram in footer")
+    public void userOpenInstagramInFooter() {
+        home.clickOnInstagramButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user open e-mail in footer")
+    public void userOpenEMailInFooter() {
+        home.clickOnEmailFooterLink();
+    }
+
+    @Then("user should redirect to Form Bantuan page")
+    public void userShouldRedirectToFormBantuanPage() {
+        Assert.assertTrue(home.isFormBantuanTitleDisplayed(), "Form Bantuan page is not present");
+    }
+
+    @When("user open whatsapp in footer")
+    public void userOpenWhatsappInFooter() {
+        home.clickOnWhatsappNumber();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @Then("user can see copyright is {string}")
+    public void userCanSeeCopyrightIs(String copyright) {
+        Assert.assertEquals(home.getCopyrightText(), copyright, "Copyright is not as expected!");
     }
 }
