@@ -94,6 +94,8 @@ public class ForgotPasswordPO {
 
     /**
      * Resend OTP From Send OTP Text and wait 60 seconds
+     *
+     * @return String text
      */
     public String getResendOTPButton() {
         playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn, 60000.0);
