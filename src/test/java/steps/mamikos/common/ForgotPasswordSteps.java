@@ -44,4 +44,9 @@ public class ForgotPasswordSteps {
         Assert.assertTrue(forgotPassword.getResendOTPButton().contains(text), "Code verification text is not equal to " + text);
         forgotPassword.clickOnResendOtp();
     }
+
+    @Then("user redirected to {string}")
+    public void user_redirect_link(String link) {
+        Assert.assertTrue(forgotPassword.getActivePageURL().contains(link), "Url doesn't match");
+    }
 }

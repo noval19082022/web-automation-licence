@@ -16,14 +16,13 @@ Feature: Owner - Forgot Password
     And user fill their registered phone number "083843666868"
     And user choose verification by WA
     Then user verify "Kirim ulang kode" and click button resend OTP
-#
-#  @TEST_DOM-2223 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Redirect to forgot password page
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    Then user redirected to "/lupa-password-pemilik"
-#
+
+  @TEST_DOM-2223 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Redirect to forgot password page
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    Then user redirected to "/lupa-password-pemilik"
+
 #  @TEST_DOM-2224 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Input registered phone number
 #    Given user navigates to "mamikos /"

@@ -108,4 +108,14 @@ public class ForgotPasswordPO {
         backBtn.click();
         batalkanConfirmationBtn.click();
     }
+
+    /**
+     * Get Active URL forgot password page
+     *
+     * @return String URL Active page
+     */
+    public String getActivePageURL() {
+        String activeUrl = page.evaluate("window.location.href").toString();
+        return activeUrl;
+    }
 }
