@@ -158,29 +158,4 @@ public class NavigatesSteps {
     public void admin_go_to_pms_singgahsini() {
         playwright.navigateTo(Mamikos.PMS_URL);
     }
-
-    @When("user want to change the owner password")
-    public void user_want_to_change_owner_password() {
-        forgotPassword.clickOnEntryToLoginPage();
-        forgotPassword.clickOnLoginAsOwner();
-        forgotPassword.clickOnLupaPassword();
-    }
-
-    @When("user fill their registered phone number {string}")
-    public void input_phone_number(String phoneNumber) {
-        forgotPassword.fillPhoneNumber(phoneNumber);
-        forgotPassword.chooseVerificationMethod();
-    }
-
-    @When("user choose verification by sms")
-    public void user_choose_verify_by_sms() {
-        forgotPassword.selectOTPBySMS();
-    }
-
-    @Then("user verify {string} and click button resend OTP")
-    public void kirim_ulang_otp_verification(String text) {
-        playwright.hardWait60Seconds();
-        Assert.assertTrue(forgotPassword.getResendOTPButton().contains(text), "Code verification text is not equal to " + text);
-        forgotPassword.clickOnResendOtp();
-    }
 }

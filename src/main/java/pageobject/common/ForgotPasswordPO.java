@@ -11,7 +11,6 @@ public class ForgotPasswordPO {
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
 
-    private Locator entryToLoginPageBtn;
     private Locator pemilikKostBtn;
     private Locator lupaPasswordBtn;
     private Locator inputPhoneNumber;
@@ -28,7 +27,6 @@ public class ForgotPasswordPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
 
-        this.entryToLoginPageBtn = page.getByTestId("entryButton");
         this.pemilikKostBtn = page.getByTestId("pemilikKosButton");
         this.lupaPasswordBtn = page.getByText("Lupa password?");
         this.inputPhoneNumber = page.getByPlaceholder("Masukkan sesuai yang Anda daftarkan");
@@ -38,13 +36,6 @@ public class ForgotPasswordPO {
         this.kirimUlangOtpBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim ulang kode"));
         this.backBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.batalkanConfirmationBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, batalkan"));
-    }
-
-    /**
-     * Entry to Login Page On Home Page
-     */
-    public void clickOnEntryToLoginPage() {
-        entryToLoginPageBtn.click();
     }
 
     /**

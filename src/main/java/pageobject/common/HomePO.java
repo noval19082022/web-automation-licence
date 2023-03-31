@@ -539,4 +539,11 @@ public class HomePO {
     public String getCopyrightText() {
         return playwright.getText(copyrightFooter);
     }
+
+    /**
+     * Entry to Login Page On Home Page
+     */
+    public void clickOnEntryToLoginPage() {
+        btnMasuk.click();
+    }
 }

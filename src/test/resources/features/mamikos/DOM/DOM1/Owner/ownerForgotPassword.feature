@@ -9,14 +9,13 @@ Feature: Owner - Forgot Password
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
 
-#  @TEST_DOM-2222 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Resend OTP via WA
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their registered phone number "083843666868" and click send button
-#    And user click otp via wa on page "Pilih Metode Verifikasi"
-#    Then user verify and click button resend OTP "Kirim ulang kode"
+  @TEST_DOM-2222 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Resend OTP via WA
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their registered phone number "083843666868"
+    And user choose verification by WA
+    Then user verify "Kirim ulang kode" and click button resend OTP
 #
 #  @TEST_DOM-2223 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Redirect to forgot password page
