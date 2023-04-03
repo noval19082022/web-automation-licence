@@ -64,10 +64,10 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | phone stag   | phone prod   | password  |
       | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using mandiri without close the page
+    And tenant pay kost from riwayat booking using mandiri
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
-    And tenant set active page to 2
+    And tenant set active page to 1
     And tenant get invoice number
 
   Scenario: Admin Add Additional Price Biaya Lainnya
@@ -81,7 +81,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | invoice number         | default                  |
       | additional price type  | default                  |
       | additional price title | Automation Biaya Lainnya |
-      | addtional price value  | 200000                   |
+      | addtional price value  | 50000                    |
 
   Scenario: Tenant Check Additional Price Biaya Lainnya Added By Admin On Settlement Invoice
     Given user go to mamikos homepage
@@ -91,7 +91,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
-    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
+    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
 
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
@@ -100,6 +100,6 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | 081362464341   | 081362464341   | 1d0lt3stb4ru |
     And owner go to bill page of kost "Kost Wild Rift Settlement" on month of "current"
     And user open invoice details
-    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
+    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
 
 

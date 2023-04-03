@@ -18,7 +18,7 @@ public class TenantBillManagementPO {
         this.playwright = new PlaywrightHelpers(page);
         filterKos = page.locator("div.bm-filter__kost");
         filterMonth = page.locator("input[type=\"text\"]").first();
-        invoiceList = page.getByTestId("invoice-status-label");
+        invoiceList = page.getByTestId("invoice-status-label").last();
     }
 
     /**

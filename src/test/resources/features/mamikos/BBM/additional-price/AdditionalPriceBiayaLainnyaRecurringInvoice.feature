@@ -26,8 +26,8 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag      | kost name prod      |
-      | Kost Adi Auto Fpaid | Kost Adi Auto Fpaid |
+      | kost name stag                                   | kost name prod      |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -35,7 +35,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
+      | 08900000000022 | 08900000000021 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod        |
       | Hagaromo Otsutsuki | Hagaromo Otsutsuki |
@@ -81,7 +81,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
+      | 08900000000022 | 08900000000021 | mamikosqa123 |
+    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
