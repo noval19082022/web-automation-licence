@@ -133,13 +133,11 @@ public class KostDetailsPO {
 
     //-------------- Kost recomendation Section ----------------
     private Locator relatedCard;
-    private Locator recommendationListTitle;
     private Locator recommendationKosText;
     private Locator seeAllRecomendationButton;
     private Locator arrowRecommendationNextButton;
     private Locator arrowRecommendationPrevButton;
     private Locator photoRecommendation;
-    private Locator mixGenderFilter;
     private Locator nextRecommendation;
     private Locator firstKostCard;
 
@@ -303,13 +301,11 @@ public class KostDetailsPO {
 
         //-------------- Kost recomendation Section ----------------
         this.relatedCard = page.locator("#relatedCard");
-        this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.recommendationKosText = page.getByText("Kamu mungkin menyukainya");
         this.seeAllRecomendationButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua"));
         this.arrowRecommendationNextButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
         this.arrowRecommendationPrevButton = page.locator("#relatedCard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
         this.photoRecommendation = page.locator(".rc-photo__cover");
-        this.mixGenderFilter = page.getByText("Campur").first();
         this.nextRecommendation = page.locator("//h3[@data-path='lbl_roomTitle']").nth(5);
         this.firstKostCard = page.locator("//h3[@data-path='lbl_roomTitle']").first();
 
@@ -1190,9 +1186,9 @@ public class KostDetailsPO {
      *
      * @return next kost object
      */
-    public KostDetailsPO clickOnSeeAllRecommendation() {
+    public KostLandingAreaPO clickOnSeeAllRecommendation() {
         Page nextPage = playwright.movePageByClickLocator(page, seeAllRecomendationButton);
-        return new KostDetailsPO(nextPage);
+        return new KostLandingAreaPO(nextPage);
     }
 
     /**
@@ -1211,25 +1207,6 @@ public class KostDetailsPO {
      */
     public boolean isFirstKostCardRecommendationPresent() {
         return playwright.waitTillLocatorIsVisible(firstKostCard);
-    }
-
-    /**
-     * Get arround recommendation kos list Desc Text
-     *
-     * @return recomendation title in listing
-     */
-    public String getRecommendationKosList() {
-        String desc = playwright.getText(recommendationListTitle);
-        return desc;
-    }
-
-    /**
-     * Check Mix gender is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isMixGenderDisplay() {
-        return playwright.waitTillLocatorIsVisible(mixGenderFilter);
     }
 
     //------------ Right Panel Section -----------------

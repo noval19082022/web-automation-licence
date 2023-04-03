@@ -11,6 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -18,6 +19,7 @@ public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
+    ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -97,7 +99,7 @@ public class NavigatesSteps {
 
     @Given("user navigates to mamikos-kost")
     public void userNavigatesToMamikosKost() {
-        playwright =new PlaywrightHelpers(page);
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST, 30000.0, LoadState.LOAD);
     }
 
@@ -113,19 +115,19 @@ public class NavigatesSteps {
 
     @Given("user navigates to mamikos-booking")
     public void userNavigatesToMamikosBooking() {
-        playwright =new PlaywrightHelpers(page);
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.BOOKING, 30000.0, LoadState.LOAD);
     }
 
     @Given("user navigates to mamikos-promo-kost")
     public void userNavigatesToMamikosPromoKost() {
-        playwright =new PlaywrightHelpers(page);
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_KOST, 30000.0, LoadState.LOAD);
     }
 
     @Given("user navigates to mamikos-history")
     public void userNavigatesToMamikosHistory() {
-        playwright =new PlaywrightHelpers(page);
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.HISTORY, 30000.0, LoadState.LOAD);
     }
 
@@ -150,5 +152,10 @@ public class NavigatesSteps {
     public void userGoToLandingApartment() {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("admin go to pms singgahsini")
+    public void admin_go_to_pms_singgahsini() {
+        playwright.navigateTo(Mamikos.PMS_URL);
     }
 }

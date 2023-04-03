@@ -75,12 +75,7 @@ public class BlacklistUserSteps {
 
     @Then("user see message error validation {string}")
     public void userSeeMessageErrorValidation(String message) {
-        /**
-         * this user doesn't get black list message
-         *
-         * to do : need to cross check for this user
-          */
-       // Assert.assertEquals(blacklistUser.getMessageAcoountBlacklist(),message, "error messages is not equal to " + message);
+        Assert.assertEquals(blacklistUser.getMessageAcoountBlacklist(),message, "error messages is not equal to " + message);
     }
 
     @And("user click on button masuk pencari kos")

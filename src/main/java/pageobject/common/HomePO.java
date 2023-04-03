@@ -39,6 +39,28 @@ public class HomePO {
     Locator searchIklanButton;
     private Locator flashSaleIcon;
     Locator bookingKosButtonHeadBar;
+    Locator kostMenuDropdown;
+    Locator apartmentMenuDropdown;
+    Locator profileDropdown;
+    Locator profileMenu;
+    Locator riwayatTransaksiMenu;
+    Locator logOutButton;
+
+    //footer
+    private Locator tentangKamiButton;
+    private Locator kebijakanPrivasiButton;
+    private Locator kebijakanPrivasiTitle;
+    private Locator syaratKetentuanButton;
+    private Locator jobMamikosButton;
+    private Locator promosikanIklanAndaButton;
+    private Locator pusatBantuanButton;
+    private Locator emailFooter;
+    private Locator formBantuanTitle;
+    private Locator whatsappButton;
+    private Locator facebookButton;
+    private Locator twitterButton;
+    private Locator instagramButton;
+    private Locator copyrightFooter;
 
 
 
@@ -73,6 +95,28 @@ public class HomePO {
         this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator("#promoted").getByTestId("roomCardCover-photo").nth(0);
+        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
+        this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("apartment Apartemen"));
+        this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        this.profileMenu = page.getByTestId("profileButton");
+        this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
+        this.logOutButton = page.getByTestId("exitButton");
+
+        //footer
+        this.tentangKamiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Tentang Kami"));
+        this.kebijakanPrivasiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan Privasi"));
+        this.kebijakanPrivasiTitle = page.locator("#__layout h1");
+        this.syaratKetentuanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Umum"));
+        this.jobMamikosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Job Mamikos"));
+        this.promosikanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Promosikan Kost Anda"));
+        this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
+        this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("email cs@mamikos.com"));
+        this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
+        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp 0813-2511-1171"));
+        this.facebookButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("facebook"));
+        this.twitterButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("twitter"));
+        this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
+        this.copyrightFooter = page.getByText("© 2023 Mamikos.com, All rights reserved");
     }
 
     /**
@@ -309,5 +353,197 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
+    }
+
+    /**
+     * Click on Kebijakan Privasi button
+     *
+     */
+    public void clickOnKebijakanPrivasiButton() {
+        kebijakanPrivasiButton.click();
+    }
+
+    /**
+     * Check element kebijakan privasi title is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKebijakanPrivasiTitleDisplayed() {
+        return kebijakanPrivasiTitle.isVisible();
+    }
+
+    /**
+     * Click on Syarat dan Ketentuan button
+     *
+     */
+    public void clickOnSyaratKetentuanButton() {
+        syaratKetentuanButton.click();
+    }
+
+    /**
+     * Get URL
+     * @return url is equal
+     */
+    public String getURL() {
+        return page.url();
+    }
+
+    /**
+     * Click on Cari Iklan dropdown
+     *
+     */
+    public void clickOnAdsDropdown() {
+        searchIklanButton.click();
+    }
+
+    /**
+     * Check elementt Kos Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKostMenuDisplayed() {
+        return kostMenuDropdown.isVisible();
+    }
+
+
+    /**
+     * Check element Apartment Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isApartmentMenuDisplayed() {
+        return apartmentMenuDropdown.isVisible();
+    }
+
+    /**
+     * Click on Profile dropdown
+     *
+     */
+    public void clickOnProfileDropdown() {
+        profileDropdown.click();
+    }
+
+    /**
+     * Check element Profile Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isProfileMenuDisplayed() {
+        return profileMenu.isVisible();
+    }
+
+    /**
+     * Check element Riwayat Transaksi Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isRiwayatTransaksiMenuDisplayed() {
+        return profileMenu.isVisible();
+    }
+
+    /**
+     * Check element Lot Out button is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isLogOutButtonDisplayed() {
+        return logOutButton.isVisible();
+    }
+
+    /**
+     * Click on Tentang Kami button
+     *
+     */
+    public void clickOnTentangKamiButton() {
+        tentangKamiButton.click();
+    }
+
+    /**
+     * Click on Job Mamikos button
+     *
+     */
+    public void clickOnJobMamikosButton() {
+        jobMamikosButton.click();
+    }
+
+    /**
+     * Click on Promosikan Iklan Anda button
+     *
+     */
+    public void clickOnPromosikanIklanAndaButton() {
+        promosikanIklanAndaButton.click();
+    }
+
+    /**
+     * Click on Pusat Bantuan button
+     *
+     */
+    public void clickOnPusatBantuanButton() {
+        pusatBantuanButton.click();
+    }
+
+    /**
+     * Click on E-mail on footer
+     *
+     */
+    public void clickOnEmailFooterLink() {
+        emailFooter.click();
+    }
+
+    /**
+     * Check element form bantuan title is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isFormBantuanTitleDisplayed() {
+        return formBantuanTitle.isVisible();
+    }
+
+    /**
+     * Click on Whatsapp number
+     *
+     */
+    public void clickOnWhatsappNumber() {
+        whatsappButton.click();
+    }
+
+    /**
+     * Click on Facebook button
+     *
+     */
+    public void clickOnFacebookButton() {
+        facebookButton.click();
+    }
+
+    /**
+     * Click on Twitter button
+     *
+     */
+    public void clickOnTwitterButton() {
+        twitterButton.click();
+    }
+
+    /**
+     * Click on Instagram button
+     *
+     */
+    public void clickOnInstagramButton() {
+        instagramButton.click();
+    }
+
+    /**
+     * Get Copyright text
+     *
+     * @return String data type
+     */
+    public String getCopyrightText() {
+        return playwright.getText(copyrightFooter);
+    }
+
+    /**
+     * Entry to Login Page On Home Page
+     */
+    public void clickOnEntryToLoginPage() {
+        btnMasuk.click();
     }
 }

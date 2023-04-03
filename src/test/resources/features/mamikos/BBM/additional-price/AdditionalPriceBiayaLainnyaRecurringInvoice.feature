@@ -1,3 +1,4 @@
+#Pastikan kos data test adalah kos singgah sini. Recurring Invoice hanya akan dibuat untuk kos singgah sini.
 @BBM2
 Feature: Additional Price Biaya Lainnya On Invoice Recurring
 

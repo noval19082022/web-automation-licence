@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
+import pageobject.common.KostLandingAreaPO;
 import pageobject.common.SearchPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -24,6 +25,7 @@ public class KostDetailSteps {
     HomePO home = new HomePO(page);
     SearchPO search = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    KostLandingAreaPO kostLandingArea = new KostLandingAreaPO(page);
 
     @Then("user can see overview section on detail page")
     public void userCanSeeOverViewSection(DataTable table) {
@@ -293,9 +295,9 @@ public class KostDetailSteps {
         Assert.assertFalse(kostDetail.isFirstKostCardRecommendationPresent(), "First Kost Card still display");
         kostDetail.clickOnArrowRecommendationPreviousButton();
         Assert.assertFalse(kostDetail.isNextRecommendationElementPresent(), "Next Kost Card still display");
-        this.kostDetail = kostDetail.clickOnSeeAllRecommendation();
-        Assert.assertTrue(kostDetail.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
-        Assert.assertTrue(kostDetail.isMixGenderDisplay(), "Mixed Gender is not display");
+        this.kostLandingArea = kostDetail.clickOnSeeAllRecommendation();
+        Assert.assertTrue(kostLandingArea.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
+        Assert.assertTrue(kostLandingArea.isMixGenderDisplay(), "Mixed Gender is not display");
     }
 
     //------------ Right Panel Section -----------------

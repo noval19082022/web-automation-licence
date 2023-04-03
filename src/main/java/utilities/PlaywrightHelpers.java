@@ -335,4 +335,32 @@ public class PlaywrightHelpers {
         nextPage.bringToFront();
         return nextPage;
     }
+
+    /*
+     * hard wait 60 second
+     *
+     * */
+    public void hardWait(double time) {
+        page.waitForTimeout(time);
+    }
+
+    /**
+     * Get Active URL page
+     *
+     * @return String URL Active page
+     */
+    public String getActivePageURL() {
+        String activeUrl = page.evaluate("window.location.href").toString();
+        return activeUrl;
+    }
+
+    /**
+     * Get Active Title page
+     *
+     * @return String Title Active page
+     */
+    public String getActivePageTitle() {
+        String activeTitle = page.evaluate("document.title").toString();
+        return activeTitle;
+    }
 }

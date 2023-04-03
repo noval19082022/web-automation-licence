@@ -18,7 +18,7 @@
         | 085542455775  | C1              |
 
     @TEST_PMAN-5689
-    Scenario Outline: Buat dan Kirim Invoice Manual
+    Scenario Outline: Buat dan Kirim Invoice Manual <Jenis Invoice>
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
@@ -44,6 +44,34 @@
         | Nama Biaya                        |  Jumlah Biaya |
         | Parkir Mobil (3 hari)             |  Rp25.000     |
         | Perpanjang sewa harian (2 Hari)   |  Rp500.000    |
+
+      Examples:
+        | Jenis Invoice   |
+        | Biaya Tambahan  |
+        | Biaya Sewa      |
+
+    @TEST_PMAN-5655 @pman-prod
+    Scenario Outline: Back from Create Invoice Manual <Jenis Invoice>
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+      And admin input nama penyewa in buat invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+        | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
+      #back if no biaya added yet
+      When admin click back button in buat invoice manual page
+      Then admin redirect to invoice manual page without confirmation
+      When admin add invoice manual "<Jenis Invoice>"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+        | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
+        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
+      #back if there is biaya added
+      When admin click back button in buat invoice manual page
+      Then exit buat invoice confirmation pop up should be appear
+      When admin check confirmation functionality and confirm exit
+      Then admin redirect to invoice manual page
 
       Examples:
         | Jenis Invoice   |
