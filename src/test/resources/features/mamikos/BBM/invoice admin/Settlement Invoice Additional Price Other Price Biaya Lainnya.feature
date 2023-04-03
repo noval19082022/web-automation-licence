@@ -91,7 +91,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
-    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
+    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
 
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
