@@ -83,5 +83,5 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000021 | mamikosqa123 |
     And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
-    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is "Belum bayar - Tenggat 30 hari lagi"
+    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
