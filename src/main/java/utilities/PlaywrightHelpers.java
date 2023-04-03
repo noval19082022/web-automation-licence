@@ -340,8 +340,8 @@ public class PlaywrightHelpers {
      * hard wait 60 second
      *
      * */
-    public void hardWait60Seconds() {
-        page.waitForTimeout(60_000);
+    public void hardWait(double time) {
+        page.waitForTimeout(time);
     }
 
     /**

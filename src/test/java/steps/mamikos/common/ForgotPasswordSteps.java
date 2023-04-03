@@ -40,7 +40,7 @@ public class ForgotPasswordSteps {
 
     @Then("user verify {string} and click button resend OTP")
     public void kirim_ulang_otp_verification(String text) {
-        playwright.hardWait60Seconds();
+        playwright.hardWait(60_000);
         Assert.assertTrue(forgotPassword.getResendOTPButton().contains(text), "Code verification text is not equal to " + text);
         forgotPassword.clickOnResendOtp();
     }
