@@ -6,6 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
 
+import java.util.List;
+
 public class ListOwnerExpenditureSteps {
     Page page = ActiveContext.getActivePage();
     listOwnerExpenditurePO list = new listOwnerExpenditurePO(page);
@@ -25,5 +27,37 @@ public class ListOwnerExpenditureSteps {
     @Then("lampiran opened in new tab")
     public void lampiran_opened_in_new_tab() {
         list.assertNewTabOpen();
+    }
+    @When("admin open filter owner expenditure")
+    public void admin_open_filter_owner_expenditure() {
+        list.clickFilter();
+    }
+    @Then("status konfirmasi manager filter should contains option:")
+    public void status_konfirmasi_manager_filter_should_contains_option(List<String> tables) {
+        list.expandStatusKonfirmasiManagerFilter();
+        for (int i=0; i<tables.size(); i++){
+            list.assertStatusKonfirmasiManager(i,tables.get(i));
+        }
+    }
+    @Then("status konfirmasi finance filter should contains option:")
+    public void status_konfirmasi_finance_filter_should_contains_option(List<String> tables) {
+        list.expandStatusKonfirmasiFinanceFilter();
+        for (int i=0; i<tables.size(); i++) {
+            list.assertStatusKonfirmasiFinance(i, tables.get(i));
+        }
+    }
+    @Then("kategori biaya filter should contains option:")
+    public void kategori_biaya_filter_should_contains_option(List<String> tables) {
+        list.expandKategoriBiayaFilter();
+        for (int i=0; i<tables.size(); i++) {
+            list.assertKategoriBiaya(i, tables.get(i));
+        }
+    }
+    @Then("tujuan transfer pengeluaran filter should contains option:")
+    public void tujuan_transfer_pengeluaran_filter_should_contains_option(List<String> tables) {
+        list.expandTujuanTransferFilter();
+        for (String x : tables){
+            list.searchAndAssertTujuanTransfer(x);
+        }
     }
 }
