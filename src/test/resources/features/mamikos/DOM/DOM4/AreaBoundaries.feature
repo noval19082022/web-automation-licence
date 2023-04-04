@@ -6,8 +6,8 @@ Feature: Area Boundaries
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
       | search keyword | Padang       |
-      | area result    | Padang Bulan |
-    Then user can see the kost list are from "Padang Bulan"
+      | area result    | Padang       |
+    Then user can see the kost list are from "Padang"
 
   @continue
   Scenario: User Can See Kost List Is Only 1

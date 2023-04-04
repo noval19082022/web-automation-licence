@@ -76,6 +76,7 @@ public class KostLandingAreaPO {
      * @return boolean
      */
     public String getResultHeadingText() {
+        playwright.waitFor(headingResultText, 30000.0);
         return playwright.getText(headingResultText);
     }
 
