@@ -66,7 +66,7 @@ public class InvoicePO {
         invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
         hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
         voucherToastWarningText = page.getByTestId("warning_txt");
-        closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
