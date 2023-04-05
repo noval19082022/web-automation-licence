@@ -9,10 +9,16 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class listOwnerExpenditurePO {
     private Page page;
 
+    //table owner expenditure
     Locator expandButton;
     Locator detailSection;
     Locator lihatLampiranLink;
     Locator filterButton;
+    Locator emptyTable;
+    Locator rowData;
+    Locator statusManagerTable;
+    Locator statusFinanceTable;
+    //table owner expenditure
 
     //Filter Pop Up
     Locator konfirmasiManagerDropdown;
@@ -24,8 +30,13 @@ public class listOwnerExpenditurePO {
     Locator kategoriBiaya;
     Locator searchFilterTujuanTransfer;
     Locator tujuanTransfer;
+    Locator menungguKonfirmasiCheckbox;
+    Locator dikonfirmasiCheckbox;
+    Locator ditolakCheckbox;
+    Locator terapkanButton;
     //Filter Pop Up
 
+    String urlLampiran;
 
     public listOwnerExpenditurePO(Page page){
         this.page = page;
@@ -33,13 +44,19 @@ public class listOwnerExpenditurePO {
         expandButton = page.getByTestId("expand-toggle");
         detailSection = page.locator("tr.sub-item.is-open");
         lihatLampiranLink = page.locator("td>a");
-        filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filter Filter"));
+        filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
         konfirmasiManagerDropdown = page.getByTestId("search-checkbox").nth(0);
         konfirmasiFinanceDropdown = page.getByTestId("search-checkbox").nth(1);
         kategoriBiayaDropdown = page.getByTestId("search-checkbox").nth(2);
         tujuanTransferDropdown = page.getByTestId("search-checkbox").nth(3);
         searchFilterTujuanTransfer = page.getByTestId("search-checkbox-searchbar");
         tujuanTransfer = page.locator(".checkbox-list").nth(3).getByRole(AriaRole.PARAGRAPH).nth(0);
+        menungguKonfirmasiCheckbox = page.getByTestId("search-checkbox-unconfirmed-0");
+        dikonfirmasiCheckbox = page.getByTestId("search-checkbox-confirmed-1");
+        ditolakCheckbox = page.getByTestId("search-checkbox-rejected-2");
+        terapkanButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Terapkan"));
+        emptyTable = page.locator(".not-found");
+        rowData = page.locator("tbody.one-row");
     }
 
     /**
@@ -63,6 +80,7 @@ public class listOwnerExpenditurePO {
     public listOwnerExpenditurePO clickFirstLihatLampiran() {
         page = page.waitForPopup(() -> {
             lihatLampiranLink.first().click();
+            urlLampiran = lihatLampiranLink.first().getAttribute("href");
         });
         return new listOwnerExpenditurePO(page);
     }
@@ -71,7 +89,7 @@ public class listOwnerExpenditurePO {
      * assert lampiran image is open in new tab
      */
     public void assertNewTabOpen() {
-        assertThat(page).hasTitle("books-kFqUBptWHhXu.jpeg (800×566)");
+        assertThat(page).hasURL(urlLampiran);
     }
 
     /**
@@ -146,5 +164,74 @@ public class listOwnerExpenditurePO {
     public void searchAndAssertTujuanTransfer(String x) {
         searchFilterTujuanTransfer.fill(x);
         assertThat(tujuanTransfer).hasText(x);
+    }
+
+    /**
+     * select one of status konfirmasi manager in filter
+     * @param status (Menunggu Konfirmasi,Dikonfirmasi,Ditolak)
+     */
+    public void selectStatusKonfirmasiManager(String status) {
+        konfirmasiManagerDropdown.click();
+        if (status.equalsIgnoreCase("Menunggu Konfirmasi")){
+            menungguKonfirmasiCheckbox.first().click();
+        } else if (status.equalsIgnoreCase("Dikonfirmasi")) {
+            dikonfirmasiCheckbox.first().click();
+        } else if (status.equalsIgnoreCase("Ditolak")) {
+            ditolakCheckbox.first().click();
+        }
+    }
+
+    /**
+     * click terapkan in filter owner expenditure
+     */
+    public void applyFilter() {
+        terapkanButton.click();
+    }
+
+    /**
+     * Assert status konfirmasi manager in list owner expenditure
+     * @param status
+     */
+    public void assertStatusKonfirmasiManagerData(String status) {
+        if (emptyTable.isVisible()){
+            System.out.println("There is no data");
+        } else {
+            int r = rowData.count();
+            for (int i=0;i<r;i++){
+                statusManagerTable = page.locator("div.bg-c-label").nth((2*i));
+                assertThat(statusManagerTable).hasText(status);
+            }
+        }
+    }
+
+    /**
+     * select one of status konfirmasi finance in filter
+     * @param status (Menunggu Konfirmasi,Dikonfirmasi,Ditolak)
+     */
+    public void selectStatusKonfirmasiFinance(String status) {
+        konfirmasiFinanceDropdown.click();
+        if (status.equalsIgnoreCase("Menunggu Konfirmasi")){
+            menungguKonfirmasiCheckbox.nth(1).click();
+        } else if (status.equalsIgnoreCase("Dikonfirmasi")) {
+            dikonfirmasiCheckbox.nth(1).click();
+        } else if (status.equalsIgnoreCase("Ditolak")) {
+            ditolakCheckbox.nth(1).click();
+        }
+    }
+
+    /**
+     * Assert status konfirmasi finance in list owner expenditure
+     * @param status
+     */
+    public void assertStatusKonfirmasiFinanceData(String status) {
+        if (emptyTable.isVisible()){
+            System.out.println("There is no data");
+        } else {
+            int r = rowData.count();
+            for (int i=0;i<r;i++){
+                statusManagerTable = page.locator("div.bg-c-label").nth(1+(2*i));
+                assertThat(statusManagerTable).hasText(status);
+            }
+        }
     }
 }
