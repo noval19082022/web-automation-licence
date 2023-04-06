@@ -71,7 +71,16 @@ public class ListOwnerExpenditureSteps {
     public void system_only_display_owner_expenditure_with_status_konfirmasi_manager(String status) {
         list.assertStatusKonfirmasiManagerData(status);
     }
-
+    @When("admin filter status konfirmasi finance {string}")
+    public void admin_filter_status_konfirmasi_finance(String status) {
+        list.clickFilter();
+        list.selectStatusKonfirmasiFinance(status);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure with status konfirmasi finance {string}")
+    public void system_only_display_owner_expenditure_with_status_konfirmasi_finance(String status) {
+        list.assertStatusKonfirmasiFinanceData(status);
+    }
     @When("admin filter kategori biaya {string}")
     public void admin_filter_kategori_biaya(String kategori) {
         list.clickFilter();

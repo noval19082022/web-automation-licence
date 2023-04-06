@@ -207,6 +207,37 @@ public class listOwnerExpenditurePO {
     }
 
     /**
+     * select one of status konfirmasi finance in filter
+     * @param status (Menunggu Konfirmasi,Dikonfirmasi,Ditolak)
+     */
+    public void selectStatusKonfirmasiFinance(String status) {
+        konfirmasiFinanceDropdown.click();
+        if (status.equalsIgnoreCase("Menunggu Konfirmasi")){
+            menungguKonfirmasiCheckbox.nth(1).click();
+        } else if (status.equalsIgnoreCase("Dikonfirmasi")) {
+            dikonfirmasiCheckbox.nth(1).click();
+        } else if (status.equalsIgnoreCase("Ditolak")) {
+            ditolakCheckbox.nth(1).click();
+        }
+    }
+
+    /**
+     * Assert status konfirmasi finance in list owner expenditure
+     * @param status
+     */
+    public void assertStatusKonfirmasiFinanceData(String status) {
+        if (emptyTable.isVisible()){
+            System.out.println("There is no data");
+        } else {
+            int r = rowData.count();
+            for (int i = 0; i < r; i++) {
+                statusManagerTable = page.locator("div.bg-c-label").nth(1+(2*i));
+                assertThat(statusManagerTable).hasText(status);
+            }
+        }
+    }
+
+    /**
      * select filter kategori biaya
      * @param kategori
      */
@@ -226,7 +257,7 @@ public class listOwnerExpenditurePO {
             System.out.println("There is no data");
         } else {
             int r = rowData.count();
-            for (int i=0;i<r;i++){
+            for (int i = 0; i < r; i++) {
                 expandButton.nth(i).focus();
                 expandButton.nth(i).click();
                 kategoriData = page.locator(".detail-table tbody").nth(i);
