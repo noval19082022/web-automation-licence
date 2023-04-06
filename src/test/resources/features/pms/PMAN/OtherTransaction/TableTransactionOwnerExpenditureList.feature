@@ -68,3 +68,15 @@
       | Menunggu Konfirmasi |
       | Dikonfirmasi        |
       | Ditolak             |
+
+    @TEST_PMAN-6550
+    Scenario Outline: Single Filter Kategori Biaya
+      When admin filter kategori biaya "<kategori>"
+      Then system only display owner expenditure contains biaya "<kategori>"
+
+      Examples:
+        | kategori                        |
+        | Administrasi & Iuran Kos        |
+        | Amenities Penyewa               |
+        | Pembayaran Wifi                 |
+        | Lainnya                         |

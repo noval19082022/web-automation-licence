@@ -18,6 +18,7 @@ public class listOwnerExpenditurePO {
     Locator rowData;
     Locator statusManagerTable;
     Locator statusFinanceTable;
+    Locator kategoriData;
     //table owner expenditure
 
     //Filter Pop Up
@@ -34,6 +35,7 @@ public class listOwnerExpenditurePO {
     Locator dikonfirmasiCheckbox;
     Locator ditolakCheckbox;
     Locator terapkanButton;
+    Locator kategoriBiayaCheckbox;
     //Filter Pop Up
 
     String urlLampiran;
@@ -200,6 +202,36 @@ public class listOwnerExpenditurePO {
             for (int i=0;i<r;i++){
                 statusManagerTable = page.locator("div.bg-c-label").nth((2*i));
                 assertThat(statusManagerTable).hasText(status);
+            }
+        }
+    }
+
+    /**
+     * select filter kategori biaya
+     * @param kategori
+     */
+    public void selectKategoriBiaya(String kategori) {
+        kategoriBiayaDropdown.click();
+        kategoriBiayaCheckbox = page.locator(".checkbox-list").nth(2).getByText(kategori);
+        kategoriBiayaCheckbox.focus();
+        kategoriBiayaCheckbox.click();
+    }
+
+    /**
+     * assert Biaya contains selected kategori filter
+     * @param kategori filter kategori
+     */
+    public void assertDataContainsKategoriBiaya(String kategori) {
+        if (emptyTable.isVisible()){
+            System.out.println("There is no data");
+        } else {
+            int r = rowData.count();
+            for (int i=0;i<r;i++){
+                expandButton.nth(i).focus();
+                expandButton.nth(i).click();
+                kategoriData = page.locator(".detail-table tbody").nth(i);
+                kategoriData.focus();
+                assertThat(kategoriData).containsText(kategori);
             }
         }
     }
