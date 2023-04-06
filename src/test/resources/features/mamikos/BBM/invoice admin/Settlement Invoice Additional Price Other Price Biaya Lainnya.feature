@@ -64,7 +64,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | phone stag   | phone prod   | password  |
       | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using mandiri
+    And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
