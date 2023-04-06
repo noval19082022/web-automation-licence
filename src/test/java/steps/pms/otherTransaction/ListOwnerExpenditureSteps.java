@@ -81,4 +81,14 @@ public class ListOwnerExpenditureSteps {
     public void system_only_display_owner_expenditure_with_status_konfirmasi_finance(String status) {
         list.assertStatusKonfirmasiFinanceData(status);
     }
+    @When("admin filter kategori biaya {string}")
+    public void admin_filter_kategori_biaya(String kategori) {
+        list.clickFilter();
+        list.selectKategoriBiaya(kategori);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure contains biaya {string}")
+    public void system_only_display_owner_expenditure_contains_biaya(String kategori) {
+        list.assertDataContainsKategoriBiaya(kategori);
+    }
 }
