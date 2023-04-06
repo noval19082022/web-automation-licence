@@ -68,3 +68,14 @@
       | Menunggu Konfirmasi |
       | Dikonfirmasi        |
       | Ditolak             |
+
+    @TEST_PMAN-6549
+    Scenario Outline: Single Filter Status Konfirmasi Finance
+      When admin filter status konfirmasi finance "<status>"
+      Then system only display owner expenditure with status konfirmasi finance "<status>"
+
+      Examples:
+        | status              |
+        | Menunggu Konfirmasi |
+        | Dikonfirmasi        |
+        | Ditolak             |
