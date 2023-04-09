@@ -59,7 +59,7 @@ public class SearchPO {
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
 
-        this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("flash Promo Ngebut"));
+        this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
         this.dikelolaMamikosFilter = page.getByTestId("singgahsini-filter_btn");
         this.dikelolaMamikosDesc = page.getByText("Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. ");
