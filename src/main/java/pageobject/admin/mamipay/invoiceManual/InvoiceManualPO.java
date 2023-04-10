@@ -97,7 +97,7 @@ public class InvoiceManualPO {
         tambahBiayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
 
         //---Tambah Biaya Pop Up---//
-        namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya dropdown-down"));
+        namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
         startDateCalendar = page.getByTestId("billing-modal-start-date").getByPlaceholder("Pilih tanggal di sini");
         endDateCalendar = page.getByTestId("billing-modal-end-date").getByPlaceholder("Pilih tanggal di sini");
         durasiBiayaText = page.getByPlaceholder("Contoh: 2 hari ");
@@ -115,7 +115,7 @@ public class InvoiceManualPO {
         closePopUpButton = page.locator("//button[@class='bg-c-modal__action-closable']");
         buatDanKirimModal = page.locator(".bg-c-modal__wrapper");
         kembaliPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
-        buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Buat dan Kirim Invoice Mohon pastikan data pada invoice sudah sesuai sebel")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
+        buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Buat dan Kirim Invoice")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
 
         //---Exit Buat Invoice Pop Up---//
         exitBuatInvoiceModal = page.locator("//*[@class='bg-c-modal__inner']");
