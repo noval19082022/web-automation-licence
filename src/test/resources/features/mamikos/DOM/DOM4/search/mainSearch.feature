@@ -1,4 +1,3 @@
-@DOM42
 Feature: Main Search
 
   @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
