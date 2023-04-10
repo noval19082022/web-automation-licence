@@ -280,7 +280,7 @@ public class KostDetailsPO {
         this.kostOwnerInformation = page.locator("#kostOwnerInformation");
         this.aboutStatisticsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tentang statistik"));
         this.statisticModal = page.getByTestId("owner-rate-modal-content");
-        this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
         this.ownerStatement = page.locator(".detail-kost-owner-section__kost-keeper");
         this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
