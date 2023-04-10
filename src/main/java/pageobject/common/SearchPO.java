@@ -335,7 +335,7 @@ public class SearchPO {
      */
     public List<String> listKostAddress() {
         List<String> addressList = new ArrayList<>();
-        if (playwright.waitTillLocatorIsVisible(mamiMap,5000.0)) {
+        if (playwright.waitTillLocatorIsVisible(kostName,10000.0)) {
             List<Locator> kostList = kostName.all();
             for (Locator a : kostList) {
                 addressList.add(playwright.getText(a));
