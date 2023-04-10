@@ -42,6 +42,11 @@ public class InvoiceManualPO {
     private Locator toastMessage;
     private Locator buatDanKirimButton;
     private Locator backButtonBuatInvoice;
+    private Locator deleteInvManual;
+    private Locator cancelDeleteInvManual;
+    private Locator deleteBtnOnConfirmationDelete;
+    private Locator emptyStateBiayaTambahan;
+    private Locator emptyStateBiayaSewa;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -95,6 +100,11 @@ public class InvoiceManualPO {
         biayaTambahanRadioButton = page.getByText("Biaya Tambahan");
         biayaSewaRadioButton = page.getByText("Biaya Sewa");
         tambahBiayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        deleteInvManual = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("delete"));
+        cancelDeleteInvManual = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        deleteBtnOnConfirmationDelete = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        emptyStateBiayaTambahan = page.getByText("Belum ada biaya tambahan");
+        emptyStateBiayaSewa = page.getByText("Belum ada biaya sewa");
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -619,6 +629,37 @@ public class InvoiceManualPO {
      */
     public void assertJumlahBiayaErrMsg(){
         assertThat(jumlahBiayaErrMsg).hasText("Jumlah biaya tidak boleh kosong.");
+    }
+
+    /**
+     * click Delete on trash icon in Buat Invoice page
+     * and click Batal on Delete Confirmation
+     * and click Delete on trash icon again
+     * and click Hapus on Delete Confirmation
+     */
+    public void clickDeleteInvManual() {
+        //click delete on Trash Icon
+        deleteInvManual.click();
+        //click Batal on Delete Confirmation
+        cancelDeleteInvManual.click();
+        //click delete on Trash Icon again
+        deleteInvManual.click();
+        //click Hapus on Delete Confirmation
+        deleteBtnOnConfirmationDelete.click();
+    }
+
+    /**
+     * Assert empty state on Biaya Tambahan table
+     */
+    public void assertEmptyStateBiayaTambahan() {
+        assertThat(emptyStateBiayaTambahan).hasText("Belum ada biaya tambahan");
+    }
+
+    /**
+     * Assert empty state on Biaya Sewa table
+     */
+    public void assertEmptyStateBiayaSewa() {
+        assertThat(emptyStateBiayaSewa).hasText("Belum ada biaya sewa");
     }
     //---End of Biaya Tambahan---//
 }

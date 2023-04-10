@@ -303,5 +303,53 @@ public class InvoiceManualSteps {
             manualInvoice.assertJumlahBiayaErrMsg();
         }
     }
+
+    @When("admin create Invoice Manual {string}")
+    public void admin_create_Invoice_Manual(String invType, DataTable tables){
+        String namaBiaya = "", periodeAwal = "", periodeAkhir = "", durasiBiaya = "", jumlahBiaya = "";
+
+        detailBiaya = tables.asMaps(String.class, String.class);
+
+        admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.clickJenisBiayaTambahan();
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            manualInvoice.clickJenisBiayaSewa();
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+        }
+
+        manualInvoice.clickTambah();
+        manualInvoice.setNamaBiayaInvoiceManual(namaBiaya);
+        manualInvoice.setPeriodeAwalInvoiceManual(periodeAwal);
+        manualInvoice.setPeriodeAkhirInvoiceManual(periodeAkhir);
+        manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+        manualInvoice.clickTambahSubmitInPopUp();
+    }
+
+    @When("the admin delete Invoice Manual")
+    public void the_admin_delete_Invoice_Manual(){
+        manualInvoice.clickDeleteInvManual();
+    }
+
+    @Then("the empty state is display in {string} table")
+    public void the_empty_state_is_display_in_table(String invType){
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.assertEmptyStateBiayaTambahan();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            manualInvoice.assertEmptyStateBiayaSewa();
+        }
+    }
     //---End of Biaya Tambahan Pop Up---//
 }
