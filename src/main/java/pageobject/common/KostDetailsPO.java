@@ -204,9 +204,9 @@ public class KostDetailsPO {
         this.loginByAppleIdBtn = page.getByTestId("loginAppleButton");
 
         //---------promo section-------------
-        this.promoOwnerSection = page.getByTestId("detailKostOwnerPromo");
+        this.promoOwnerSection = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("flash")).locator("use");
         this.lihatSelengkapnyaPromoOwnerBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnya"));
-        this.tanyaPemilikKostLink = page.getByText("tanya pemilik kos terlebih dahulu.");
+        this.tanyaPemilikKostLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya Pemilik"));
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
         this.btnMamikosPromoNgebut = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
@@ -280,7 +280,7 @@ public class KostDetailsPO {
         this.kostOwnerInformation = page.locator("#kostOwnerInformation");
         this.aboutStatisticsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tentang statistik"));
         this.statisticModal = page.getByTestId("owner-rate-modal-content");
-        this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
         this.ownerStatement = page.locator(".detail-kost-owner-section__kost-keeper");
         this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
@@ -515,6 +515,21 @@ public class KostDetailsPO {
      */
     public boolean isSayaMengertiButtonVisible() {
         return playwright.waitTillLocatorIsVisible(btnSayaMengerti);
+    }
+
+    /**
+     * Dismiss popup click saya mengerti button
+     */
+    public void clickOnSayaMengertiButton() {
+        for (int i = 0; i < 2; i++) {
+            playwright.pageScrollToDown(300);
+            if (btnSayaMengerti.isVisible()) {
+                break;
+            }
+        }
+        do {
+            playwright.forceClickOn(btnSayaMengerti);
+        } while (btnSayaMengerti.isVisible());
     }
 
     /**

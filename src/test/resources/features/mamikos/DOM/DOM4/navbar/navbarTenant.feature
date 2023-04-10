@@ -4,8 +4,8 @@ Feature: Navbar Tenant
   Scenario: [Dweb][Navbar] Check Navbar in Search Page Before login
     Given user go to mamikos homepage
     When user search keyword:
-      | search stag   | search prod|
-      | UGM    | UGM   |
+      | search stag   | search prod |
+      | UGM           | UGM         |
     Then navbar before login appears
 
   @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other

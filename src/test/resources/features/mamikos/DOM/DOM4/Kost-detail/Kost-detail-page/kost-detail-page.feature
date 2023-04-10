@@ -18,6 +18,7 @@ Feature: Kost detail page
       | phone stag   | phone prod   | password  |
       | 081223344550 | 083176408442 | qwerty123 |
     And user want to select kost on promo section
+    And tenant set active page to 1
     Then user see promo owner section
     # user want to ask to owner for more detail kost promo
     When user want to get more information about kost promo
