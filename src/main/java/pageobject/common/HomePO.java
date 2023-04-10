@@ -546,4 +546,8 @@ public class HomePO {
     public void clickOnEntryToLoginPage() {
         btnMasuk.click();
     }
+
+    public void EnterButton(){
+        btnMasuk.click();
+    }
 }
