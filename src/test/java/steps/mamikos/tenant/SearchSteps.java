@@ -402,11 +402,7 @@ public class SearchSteps {
 
     @Then("user can see kost landing behavior for kost list with just {int} result")
     public void userCanSeeKostLandingBehaviorForKostListWithJustResult(int kostList) {
-        /**
-         * comment this page.pause() bcs this method open codegen
-         */
-//        page.pause();
-        Assert.assertEquals(kostLanding.getKostListLocator().size(), kostList, "Resul is more than one or zero");
+        Assert.assertEquals(kostLanding.getKostListLocator().size(), kostList, "Result is more than one or zero");
         Assert.assertTrue(kostLanding.isNominatimMapVisible(), "Nominatim map is not visible");
         Assert.assertTrue(kostLanding.isFilterResetTextVisible(), "Reset filter text is not visible");
         Assert.assertTrue(kostLanding.isFilterResetButtonVisible(), "Reset filter button is not visible");
@@ -466,8 +462,8 @@ public class SearchSteps {
 
     @Then("user can see empty state kost landing area")
     public void userCanSeeEmptyStateKostLandingArea() {
-        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Belum Ada Kos di Area Ini"));
-        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Cari di Area lain untuk meningkatkan hasil pencarian kos."));
+        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Kos Tidak Ditemukan"));
+        Assert.assertTrue(kostLanding.getAllContentNominatimEmptyList().get(0).contains("Silahkan ubah filter untuk meningkatkan hasil pencarian kos."));
     }
 
     @Then("user can see Lihat Lebih Banyak And Back To Top Button")
@@ -491,6 +487,7 @@ public class SearchSteps {
 
     @Then("user can use Back To Top Button")
     public void userCanUseBackToTopButton() {
+        kostLanding.clickOnSayaMengertiButton();
         Assert.assertTrue(kostLanding.isBackToTopButtonEnabled(), "Back To Top Button Is Not Clickable");
         kostLanding.clickOnBackToTopButton();
     }
