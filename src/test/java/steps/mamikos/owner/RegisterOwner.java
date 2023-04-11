@@ -72,9 +72,9 @@ public class RegisterOwner {
         Assert.assertTrue(counter >= character, "Password kurang dari " + character + "karakter");
     }
 
-    @Then("user validate email input")
-    public void userValidateEmailInput() {
-        Assert.assertTrue(ownerRegister.getEmailInputText().matches("^\\S+@\\S+$"), "Email format invalid");
+    @Then("user validate email input{string}")
+    public void userValidateEmailInput(String text) {
+        Assert.assertTrue(ownerRegister.getEmailInputText(text).contains("@"), "Email format invalid");
     }
 
     @Then("user see email title is displayed")

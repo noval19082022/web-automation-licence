@@ -30,7 +30,6 @@ public class OwnerRegisterPO {
         this.ButtonDaftar = page.locator(".registration-form__submit-button");
         this.nameInputText = page.getByTestId("fullnameTextbox");
         this.phoneInputText = page.getByTestId("phoneNumberTextbox");
-        this.emailInputText = page.getByTestId("emailTextbox");
         this.passwordInputText = page.getByTestId("passwordTextbox");
         this.passwordEyeButton = page.getByRole(AriaRole.BUTTON).nth(2);
         this.passwordConfirmationInputText = page.getByTestId("repeatPasswordTextbox");
@@ -61,7 +60,9 @@ public class OwnerRegisterPO {
     public void fillOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password) throws InterruptedException{
         nameInputText.fill(name);
         phoneInputText.fill(phone);
+        playwright.hardWait(3);
         emailInputText.fill(email);
+        playwright.hardWait(3);
         passwordInputText.fill(password);
         passwordConfirmationInputText.fill(password);
     }
@@ -88,8 +89,7 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getPasswordInputText() throws InterruptedException {
-        playwright.getText(passwordInputText);
-        return String.valueOf(true);
+        return playwright.getText(passwordInputText);
     }
 
     /**
@@ -97,7 +97,7 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getEmailInputText(){
-        return playwright.getText(page.locator("//*[@data-testid='emailTextbox']"));
+        return playwright.wait(emailInputText);
     }
 
     /**

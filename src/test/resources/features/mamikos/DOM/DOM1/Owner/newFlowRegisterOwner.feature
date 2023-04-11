@@ -88,7 +88,7 @@ Feature: New Flow Register Owner
     When user clicks on Enter button
     And user clicks on Register button
     And user fills out registration form without click register "Rheza Haryo Hanggara", "0812345670001", "jutawan@mamikos.com", "asdf1234"
-    Then user validate email input
+    Then user validate email input"jutawan@mamikos.com"
 
   @TEST_DOM-2264 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] Check Email Title and Inputted email is deleted
