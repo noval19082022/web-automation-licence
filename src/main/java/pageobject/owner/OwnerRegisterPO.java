@@ -90,7 +90,7 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getPasswordInputText() throws InterruptedException {
-        return playwright.getText(passwordInputText);
+        return playwright.getInputValue(passwordInputText);
     }
 
     /**
@@ -98,7 +98,7 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getEmailInputText(){
-        return playwright.getText(emailInputText);
+        return playwright.getInputValue(emailInputText);
     }
 
     /**
@@ -114,6 +114,6 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getNameInputText(){
-        return playwright.getText(nameInputText);
+        return playwright.getInputValue(nameInputText);
     }
 }
