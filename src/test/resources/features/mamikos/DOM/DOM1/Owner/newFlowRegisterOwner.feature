@@ -97,7 +97,7 @@ Feature: New Flow Register Owner
     And user clicks on Register button
     Then user see email title is displayed
 
-  @TEST_DOM-2265 @Automated @DOM @web-covered
+  @gagal @TEST_DOM-2265 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] Input name more than 25 char
     Given user go to mamikos homepage
     When user clicks on Enter button
