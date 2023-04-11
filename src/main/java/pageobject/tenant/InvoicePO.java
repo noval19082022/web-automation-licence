@@ -48,6 +48,8 @@ public class InvoicePO {
     Locator txtRentPerPeriodInvoiceDetail;
     Locator txtTotalCostInvoiceDetail;
     Locator txtAddCostInvoiceDetail;
+    Locator txtOVO;
+    Locator noOvoTextBox;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -86,6 +88,8 @@ public class InvoicePO {
         txtRentPerPeriodInvoiceDetail = page.locator("div:nth-child(10) > div:nth-child(2)");
         txtTotalCostInvoiceDetail = page.locator("div:nth-child(14) > div:nth-child(2)");
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
+        txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
+        noOvoTextBox = page.getByPlaceholder("08...");
     }
 
     /**
@@ -366,5 +370,20 @@ public class InvoicePO {
             page.waitForLoadState(LoadState.LOAD);
             page.waitForTimeout(3000);
         }
+    }
+
+    /**
+     * Choose OVO as payment
+     */
+    public void clickOnOVO() {
+        playwright.clickOn(txtOVO);
+    }
+
+    /**
+     * Input phone number ovo
+     * @param number phone number ovo
+     */
+    public void inputPhoneNumberOvo(String number) {
+        noOvoTextBox.fill(number);
     }
 }

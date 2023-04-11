@@ -57,3 +57,50 @@
         | Bima Kunta Wira Negara (Internal Mamikos)           |
         | Carsim (Internal Mamikos)                           |
         | Other (Internal Mamikos)                            |
+
+    @TEST_PMAN-6548
+    Scenario Outline: Single Filter Status Konfirmasi Manager
+      When admin filter status konfirmasi manager "<status>"
+      Then system only display owner expenditure with status konfirmasi manager "<status>"
+
+      Examples:
+      | status              |
+      | Menunggu Konfirmasi |
+      | Dikonfirmasi        |
+      | Ditolak             |
+
+    @TEST_PMAN-6549
+    Scenario Outline: Single Filter Status Konfirmasi Finance
+      When admin filter status konfirmasi finance "<status>"
+      Then system only display owner expenditure with status konfirmasi finance "<status>"
+
+      Examples:
+        | status              |
+        | Menunggu Konfirmasi |
+        | Dikonfirmasi        |
+        | Ditolak             |
+
+    @TEST_PMAN-6550
+    Scenario Outline: Single Filter Kategori Biaya
+      When admin filter kategori biaya "<kategori>"
+      Then system only display owner expenditure contains biaya "<kategori>"
+
+      Examples:
+        | kategori                        |
+        | Administrasi & Iuran Kos        |
+        | Amenities Penyewa               |
+        | Pembayaran Wifi                 |
+        | Lainnya                         |
+
+    @TEST_PMAN-6570
+    Scenario Outline: Single Filter Tujuan Transfer Pengeluaran
+      When admin filter tujuan transfer "<vendor>"
+      Then system only display owner expenditure transfered to "<Vendor Name>" "<Nama Pemilik Rekening>" "<No Rekening>" "<Nama Bank>"
+
+      Examples:
+        | vendor                        | Vendor Name             | Nama Pemilik Rekening         | No Rekening      | Nama Bank     |
+        | Agus Haryanto (Vendor)        | Agus Haryanto           | Agus Haryanto                 | 307801035017535  | BRI           |
+        | Bagiyo Teknik (Vendor)        | Bagiyo Teknik           | Bagiyo                        | 6760559405       | BCA           |
+        | Ayu Putri (Internal Mamikos)  | Ayu Putri               | Ayu Putri Niken Pratiwi       | 3940229609       | BCA           |
+        | Febrian (Internal Mamikos)    | Febrian                 | Febrian                       | 662969867        | BCA           |
+        | Other (Internal Mamikos)      | Other                   | MAMA TEKNOLOGI PROPERTI PT    | 1262407777       | BCA           |

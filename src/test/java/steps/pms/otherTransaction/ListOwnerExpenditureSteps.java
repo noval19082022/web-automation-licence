@@ -60,4 +60,45 @@ public class ListOwnerExpenditureSteps {
             list.searchAndAssertTujuanTransfer(x);
         }
     }
+
+    @When("admin filter status konfirmasi manager {string}")
+    public void admin_filter_status_konfirmasi_manager(String status) {
+        list.clickFilter();
+        list.selectStatusKonfirmasiManager(status);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure with status konfirmasi manager {string}")
+    public void system_only_display_owner_expenditure_with_status_konfirmasi_manager(String status) {
+        list.assertStatusKonfirmasiManagerData(status);
+    }
+    @When("admin filter status konfirmasi finance {string}")
+    public void admin_filter_status_konfirmasi_finance(String status) {
+        list.clickFilter();
+        list.selectStatusKonfirmasiFinance(status);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure with status konfirmasi finance {string}")
+    public void system_only_display_owner_expenditure_with_status_konfirmasi_finance(String status) {
+        list.assertStatusKonfirmasiFinanceData(status);
+    }
+    @When("admin filter kategori biaya {string}")
+    public void admin_filter_kategori_biaya(String kategori) {
+        list.clickFilter();
+        list.selectKategoriBiaya(kategori);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure contains biaya {string}")
+    public void system_only_display_owner_expenditure_contains_biaya(String kategori) {
+        list.assertDataContainsKategoriBiaya(kategori);
+    }
+    @When("admin filter tujuan transfer {string}")
+    public void admin_filter_tujuan_transfer(String vendor) {
+        list.clickFilter();
+        list.selectTujuanTransfer(vendor);
+        list.applyFilter();
+    }
+    @Then("system only display owner expenditure transfered to {string} {string} {string} {string}")
+    public void system_only_display_owner_expenditure_transfered_to(String vendor,String accName, String accNumber, String bank) {
+        list.assertVendorName(vendor,accName,accNumber,bank);
+    }
 }

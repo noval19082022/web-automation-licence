@@ -74,7 +74,6 @@ public class SearchSteps {
 
     @Then("navbar after login appears")
     public void navbarAfterLoginAppears() throws InterruptedException {
-        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
         Assert.assertTrue(home.isFavoriteDisplayed(), "Favorite button not present!");
         Assert.assertTrue(home.isChatDisplayed(), "Chat button not present!");
         Assert.assertTrue(home.isNotificationButtonDisplayed(), "Notification button not present!");

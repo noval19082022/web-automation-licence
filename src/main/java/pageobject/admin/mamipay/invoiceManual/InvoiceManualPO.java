@@ -42,6 +42,11 @@ public class InvoiceManualPO {
     private Locator toastMessage;
     private Locator buatDanKirimButton;
     private Locator backButtonBuatInvoice;
+    private Locator deleteInvManual;
+    private Locator cancelDeleteInvManual;
+    private Locator deleteBtnOnConfirmationDelete;
+    private Locator emptyStateBiayaTambahan;
+    private Locator emptyStateBiayaSewa;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -95,9 +100,14 @@ public class InvoiceManualPO {
         biayaTambahanRadioButton = page.getByText("Biaya Tambahan");
         biayaSewaRadioButton = page.getByText("Biaya Sewa");
         tambahBiayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        deleteInvManual = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("delete"));
+        cancelDeleteInvManual = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        deleteBtnOnConfirmationDelete = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        emptyStateBiayaTambahan = page.getByText("Belum ada biaya tambahan");
+        emptyStateBiayaSewa = page.getByText("Belum ada biaya sewa");
 
         //---Tambah Biaya Pop Up---//
-        namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya dropdown-down"));
+        namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
         startDateCalendar = page.getByTestId("billing-modal-start-date").getByPlaceholder("Pilih tanggal di sini");
         endDateCalendar = page.getByTestId("billing-modal-end-date").getByPlaceholder("Pilih tanggal di sini");
         durasiBiayaText = page.getByPlaceholder("Contoh: 2 hari ");
@@ -115,7 +125,7 @@ public class InvoiceManualPO {
         closePopUpButton = page.locator("//button[@class='bg-c-modal__action-closable']");
         buatDanKirimModal = page.locator(".bg-c-modal__wrapper");
         kembaliPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
-        buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Buat dan Kirim Invoice Mohon pastikan data pada invoice sudah sesuai sebel")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
+        buatDanKirimPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Buat dan Kirim Invoice")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Buat dan Kirim"));
 
         //---Exit Buat Invoice Pop Up---//
         exitBuatInvoiceModal = page.locator("//*[@class='bg-c-modal__inner']");
@@ -619,6 +629,37 @@ public class InvoiceManualPO {
      */
     public void assertJumlahBiayaErrMsg(){
         assertThat(jumlahBiayaErrMsg).hasText("Jumlah biaya tidak boleh kosong.");
+    }
+
+    /**
+     * click Delete on trash icon in Buat Invoice page
+     * and click Batal on Delete Confirmation
+     * and click Delete on trash icon again
+     * and click Hapus on Delete Confirmation
+     */
+    public void clickDeleteInvManual() {
+        //click delete on Trash Icon
+        deleteInvManual.click();
+        //click Batal on Delete Confirmation
+        cancelDeleteInvManual.click();
+        //click delete on Trash Icon again
+        deleteInvManual.click();
+        //click Hapus on Delete Confirmation
+        deleteBtnOnConfirmationDelete.click();
+    }
+
+    /**
+     * Assert empty state on Biaya Tambahan table
+     */
+    public void assertEmptyStateBiayaTambahan() {
+        assertThat(emptyStateBiayaTambahan).hasText("Belum ada biaya tambahan");
+    }
+
+    /**
+     * Assert empty state on Biaya Sewa table
+     */
+    public void assertEmptyStateBiayaSewa() {
+        assertThat(emptyStateBiayaSewa).hasText("Belum ada biaya sewa");
     }
     //---End of Biaya Tambahan---//
 }
