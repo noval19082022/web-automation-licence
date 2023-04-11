@@ -35,6 +35,7 @@ public class KostLandingAreaPO {
     Locator dikelolaMamikosButton;
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
+    private Locator sayaMengertiButton;
 
     //------ Recomendation Section------
     private Locator recommendationListTitle;
@@ -59,7 +60,7 @@ public class KostLandingAreaPO {
         lihatLebihBanyakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat lebih banyak lagi"));
         backToTopButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back-top"));
         areaText = page.locator("span.rc-info__location");
-        cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("map Cari berdasarkan Peta"));
+        cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari berdasarkan Peta"));
         kosTidakDitemukanHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kos Tidak Ditemukan"));
         hapusSemuaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus semua filter"));
         sortButton = page.getByTestId("filter-kost-sorting");
@@ -69,6 +70,7 @@ public class KostLandingAreaPO {
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.mixGenderFilter = page.getByText("Campur").first();
+        this.sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya mengerti"));
     }
 
     /**
@@ -76,6 +78,7 @@ public class KostLandingAreaPO {
      * @return boolean
      */
     public String getResultHeadingText() {
+        playwright.waitFor(headingResultText, 30000.0);
         return playwright.getText(headingResultText);
     }
 
@@ -170,6 +173,7 @@ public class KostLandingAreaPO {
      * @return boolean
      */
     public boolean isLihatLebihBanyakButtonVisible() {
+        page.setViewportSize(1280, 720);
         return playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton);
     }
 
@@ -329,5 +333,12 @@ public class KostLandingAreaPO {
      */
     public boolean isMixGenderDisplay() {
         return playwright.waitTillLocatorIsVisible(mixGenderFilter);
+    }
+
+    /**
+     * click on saya mengerti button
+     */
+    public void clickOnSayaMengertiButton() {
+        playwright.clickOn(sayaMengertiButton);
     }
 }
