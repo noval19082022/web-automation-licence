@@ -34,6 +34,7 @@ public class OwnerRegisterPO {
         this.passwordEyeButton = page.getByRole(AriaRole.BUTTON).nth(2);
         this.passwordConfirmationInputText = page.getByTestId("repeatPasswordTextbox");
         this.emailTittle = page.getByText("Email (Opsional)");
+        this.emailInputText =  page.getByTestId("emailTextbox");
 
     }
 
