@@ -91,3 +91,16 @@
         | Amenities Penyewa               |
         | Pembayaran Wifi                 |
         | Lainnya                         |
+
+    @TEST_PMAN-6570
+    Scenario Outline: Single Filter Tujuan Transfer Pengeluaran
+      When admin filter tujuan transfer "<vendor>"
+      Then system only display owner expenditure transfered to "<Vendor Name>" "<Nama Pemilik Rekening>" "<No Rekening>" "<Nama Bank>"
+
+      Examples:
+        | vendor                        | Vendor Name             | Nama Pemilik Rekening         | No Rekening      | Nama Bank     |
+        | Agus Haryanto (Vendor)        | Agus Haryanto           | Agus Haryanto                 | 307801035017535  | BRI           |
+        | Bagiyo Teknik (Vendor)        | Bagiyo Teknik           | Bagiyo                        | 6760559405       | BCA           |
+        | Ayu Putri (Internal Mamikos)  | Ayu Putri               | Ayu Putri Niken Pratiwi       | 3940229609       | BCA           |
+        | Febrian (Internal Mamikos)    | Febrian                 | Febrian                       | 662969867        | BCA           |
+        | Other (Internal Mamikos)      | Other                   | MAMA TEKNOLOGI PROPERTI PT    | 1262407777       | BCA           |
