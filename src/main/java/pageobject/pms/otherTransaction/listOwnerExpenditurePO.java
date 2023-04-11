@@ -19,6 +19,10 @@ public class listOwnerExpenditurePO {
     Locator statusManagerTable;
     Locator statusFinanceTable;
     Locator kategoriData;
+    Locator vendorName;
+    Locator vendorBank;
+    Locator vendorAccNumber;
+    Locator vendorAccName;
     //table owner expenditure
 
     //Filter Pop Up
@@ -231,8 +235,8 @@ public class listOwnerExpenditurePO {
         } else {
             int r = rowData.count();
             for (int i = 0; i < r; i++) {
-                statusManagerTable = page.locator("div.bg-c-label").nth(1+(2*i));
-                assertThat(statusManagerTable).hasText(status);
+                statusFinanceTable = page.locator("div.bg-c-label").nth(1+(2*i));
+                assertThat(statusFinanceTable).hasText(status);
             }
         }
     }
@@ -264,6 +268,43 @@ public class listOwnerExpenditurePO {
                 kategoriData.focus();
                 assertThat(kategoriData).containsText(kategori);
             }
+        }
+    }
+
+    /**
+     * Search and choose filter tujuan transfer
+     * @param vendor vendor name
+     */
+    public void selectTujuanTransfer(String vendor) {
+        tujuanTransferDropdown.click();
+        searchFilterTujuanTransfer.focus();
+        searchFilterTujuanTransfer.fill(vendor);
+        tujuanTransfer.click();
+    }
+
+    /**
+     * Assert vendor name, bank, account name, and account number in every row
+     * @param vendor vendor name
+     * @param accName bank account name
+     * @param accNumber bank account number
+     * @param bank bank name
+     */
+    public void assertVendorName(String vendor,String accName, String accNumber, String bank) {
+        int r = rowData.count();
+
+        for (int i=0;i<r;i++){
+            vendorName = page.locator(".bg-is-col-3").nth(3+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
+            vendorBank = page.locator(".bg-is-col-3").nth(5+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
+            vendorAccNumber = page.locator(".bg-is-col-3").nth(6+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
+            vendorAccName = page.locator(".bg-is-col-3").nth(7+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
+
+            expandButton.nth(i).click();
+            vendorAccName.scrollIntoViewIfNeeded();
+            assertThat(vendorName).hasText(vendor);
+            assertThat(vendorBank).hasText(bank);
+            assertThat(vendorAccNumber).hasText(accNumber);
+            assertThat(vendorAccName).hasText(accName);
+            expandButton.nth(i).click();
         }
     }
 }

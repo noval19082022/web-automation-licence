@@ -149,6 +149,15 @@ public class PlaywrightHelpers {
         return locator.textContent().trim();
     }
 
+    /**
+     * Get value from input element
+     * @param locator playwright locator
+     * @return String data type
+     */
+    public String getInputValue(Locator locator) {
+        return locator.inputValue();
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\
