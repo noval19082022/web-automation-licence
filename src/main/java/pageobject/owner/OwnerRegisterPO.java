@@ -97,7 +97,7 @@ public class OwnerRegisterPO {
      * @return string
      */
     public String getEmailInputText(){
-        return playwright.wait(emailInputText);
+        return playwright.getText(emailInputText);
     }
 
     /**

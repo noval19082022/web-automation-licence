@@ -73,8 +73,8 @@ public class RegisterOwner {
     }
 
     @Then("user validate email input{string}")
-    public void userValidateEmailInput(String text) {
-        Assert.assertTrue(ownerRegister.getEmailInputText(text).contains("@"), "Email format invalid");
+    public void userValidateEmailInput() {
+        Assert.assertTrue(ownerRegister.getEmailInputText().matches("^\\S+@\\S+$"), "Email format invalid");
     }
 
     @Then("user see email title is displayed")
