@@ -35,9 +35,12 @@ public class listOwnerExpenditurePO {
     Locator kategoriBiaya;
     Locator searchFilterTujuanTransfer;
     Locator tujuanTransfer;
-    Locator menungguKonfirmasiCheckbox;
-    Locator dikonfirmasiCheckbox;
-    Locator ditolakCheckbox;
+    Locator menungguKonfirmasiManagerCheckbox;
+    Locator menungguKonfirmasiFinanceCheckbox;
+    Locator dikonfirmasiManagerCheckbox;
+    Locator dikonfirmasiFinanceCheckbox;
+    Locator ditolakManagerCheckbox;
+    Locator ditolakFinanceCheckbox;
     Locator terapkanButton;
     Locator kategoriBiayaCheckbox;
     //Filter Pop Up
@@ -51,15 +54,18 @@ public class listOwnerExpenditurePO {
         detailSection = page.locator("tr.sub-item.is-open");
         lihatLampiranLink = page.locator("td>a");
         filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
-        konfirmasiManagerDropdown = page.getByTestId("search-checkbox").nth(0);
-        konfirmasiFinanceDropdown = page.getByTestId("search-checkbox").nth(1);
-        kategoriBiayaDropdown = page.getByTestId("search-checkbox").nth(2);
-        tujuanTransferDropdown = page.getByTestId("search-checkbox").nth(3);
-        searchFilterTujuanTransfer = page.getByTestId("search-checkbox-searchbar");
-        tujuanTransfer = page.locator(".checkbox-list").nth(3).getByRole(AriaRole.PARAGRAPH).nth(0);
-        menungguKonfirmasiCheckbox = page.getByTestId("search-checkbox-unconfirmed-0");
-        dikonfirmasiCheckbox = page.getByTestId("search-checkbox-confirmed-1");
-        ditolakCheckbox = page.getByTestId("search-checkbox-rejected-2");
+        konfirmasiManagerDropdown = page.locator(".search-checkbox__dropdown").nth(0);
+        konfirmasiFinanceDropdown = page.locator(".search-checkbox__dropdown").nth(1);
+        kategoriBiayaDropdown = page.locator(".search-checkbox__dropdown").nth(2);
+        tujuanTransferDropdown = page.locator(".search-checkbox__dropdown").nth(3);
+        searchFilterTujuanTransfer = page.getByTestId("filter-modal").getByPlaceholder("Cari");
+        tujuanTransfer = page.getByTestId("search-checkbox-dropdown").nth(3).locator(".search-checkbox__checkbox").getByRole(AriaRole.PARAGRAPH);
+        menungguKonfirmasiManagerCheckbox = page.locator("label[for='search-checkbox-managerConfirmationStatus-0']");
+        menungguKonfirmasiFinanceCheckbox = page.locator("label[for='search-checkbox-financeConfirmationStatus-0']");
+        dikonfirmasiManagerCheckbox = page.locator("label[for='search-checkbox-managerConfirmationStatus-1']");
+        dikonfirmasiFinanceCheckbox = page.locator("label[for='search-checkbox-financeConfirmationStatus-1']");
+        ditolakManagerCheckbox = page.locator("label[for='search-checkbox-managerConfirmationStatus-2']");
+        ditolakFinanceCheckbox = page.locator("label[for='search-checkbox-financeConfirmationStatus-2']");
         terapkanButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Terapkan"));
         emptyTable = page.locator(".not-found");
         rowData = page.locator("tbody.one-row");
@@ -139,7 +145,7 @@ public class listOwnerExpenditurePO {
      * @param x Status Konfirmasi Manager
      */
     public void assertStatusKonfirmasiManager(int i,String x) {
-        statusKonfirmasiManager = page.locator(".checkbox-list").nth(0).getByRole(AriaRole.PARAGRAPH).nth(i);
+        statusKonfirmasiManager = page.getByTestId("search-checkbox-dropdown").nth(0).locator(".search-checkbox__checkbox").getByRole(AriaRole.PARAGRAPH).nth(i);
         assertThat(statusKonfirmasiManager).hasText(x);
     }
 
@@ -149,7 +155,7 @@ public class listOwnerExpenditurePO {
      * @param x Status Konfirmasi Finance
      */
     public void assertStatusKonfirmasiFinance(int i, String x) {
-        statusKonfirmasiFinance = page.locator(".checkbox-list").nth(1).getByRole(AriaRole.PARAGRAPH).nth(i);
+        statusKonfirmasiFinance = page.getByTestId("search-checkbox-dropdown").nth(1).locator(".search-checkbox__checkbox").getByRole(AriaRole.PARAGRAPH).nth(i);
         assertThat(statusKonfirmasiFinance).hasText(x);
     }
 
@@ -159,7 +165,7 @@ public class listOwnerExpenditurePO {
      * @param s Kategori Biaya
      */
     public void assertKategoriBiaya(int i, String s) {
-        kategoriBiaya = page.locator(".checkbox-list").nth(2).getByRole(AriaRole.PARAGRAPH).nth(i);
+        kategoriBiaya = page.getByTestId("search-checkbox-dropdown").nth(2).locator(".search-checkbox__checkbox").getByRole(AriaRole.PARAGRAPH).nth(i);
         assertThat(kategoriBiaya).hasText(s);
     }
 
@@ -179,11 +185,11 @@ public class listOwnerExpenditurePO {
     public void selectStatusKonfirmasiManager(String status) {
         konfirmasiManagerDropdown.click();
         if (status.equalsIgnoreCase("Menunggu Konfirmasi")){
-            menungguKonfirmasiCheckbox.first().click();
+            menungguKonfirmasiManagerCheckbox.click();
         } else if (status.equalsIgnoreCase("Dikonfirmasi")) {
-            dikonfirmasiCheckbox.first().click();
+            dikonfirmasiManagerCheckbox.click();
         } else if (status.equalsIgnoreCase("Ditolak")) {
-            ditolakCheckbox.first().click();
+            ditolakManagerCheckbox.click();
         }
     }
 
@@ -217,11 +223,11 @@ public class listOwnerExpenditurePO {
     public void selectStatusKonfirmasiFinance(String status) {
         konfirmasiFinanceDropdown.click();
         if (status.equalsIgnoreCase("Menunggu Konfirmasi")){
-            menungguKonfirmasiCheckbox.nth(1).click();
+            menungguKonfirmasiFinanceCheckbox.click();
         } else if (status.equalsIgnoreCase("Dikonfirmasi")) {
-            dikonfirmasiCheckbox.nth(1).click();
+            dikonfirmasiFinanceCheckbox.click();
         } else if (status.equalsIgnoreCase("Ditolak")) {
-            ditolakCheckbox.nth(1).click();
+            ditolakFinanceCheckbox.click();
         }
     }
 
@@ -247,7 +253,7 @@ public class listOwnerExpenditurePO {
      */
     public void selectKategoriBiaya(String kategori) {
         kategoriBiayaDropdown.click();
-        kategoriBiayaCheckbox = page.locator(".checkbox-list").nth(2).getByText(kategori);
+        kategoriBiayaCheckbox = page.locator(".search-checkbox__checkbox").getByText(kategori);
         kategoriBiayaCheckbox.focus();
         kategoriBiayaCheckbox.click();
     }
@@ -262,11 +268,12 @@ public class listOwnerExpenditurePO {
         } else {
             int r = rowData.count();
             for (int i = 0; i < r; i++) {
-                expandButton.nth(i).focus();
+                expandButton.nth(i).scrollIntoViewIfNeeded();
                 expandButton.nth(i).click();
                 kategoriData = page.locator(".detail-table tbody").nth(i);
-                kategoriData.focus();
+                kategoriData.scrollIntoViewIfNeeded();
                 assertThat(kategoriData).containsText(kategori);
+                expandButton.nth(i).click();
             }
         }
     }
@@ -298,6 +305,7 @@ public class listOwnerExpenditurePO {
             vendorAccNumber = page.locator(".bg-is-col-3").nth(6+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
             vendorAccName = page.locator(".bg-is-col-3").nth(7+(8*i)).getByRole(AriaRole.PARAGRAPH).last();
 
+            expandButton.nth(i).scrollIntoViewIfNeeded();
             expandButton.nth(i).click();
             vendorAccName.scrollIntoViewIfNeeded();
             assertThat(vendorName).hasText(vendor);

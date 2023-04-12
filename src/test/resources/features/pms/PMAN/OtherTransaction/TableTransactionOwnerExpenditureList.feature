@@ -104,3 +104,16 @@
         | Ayu Putri (Internal Mamikos)  | Ayu Putri               | Ayu Putri Niken Pratiwi       | 3940229609       | BCA           |
         | Febrian (Internal Mamikos)    | Febrian                 | Febrian                       | 662969867        | BCA           |
         | Other (Internal Mamikos)      | Other                   | MAMA TEKNOLOGI PROPERTI PT    | 1262407777       | BCA           |
+
+    @TEST_PMAN-6633
+    Scenario: Multiple Filter Owner Expenditure
+      When admin filter status konfirmasi manager "Dikonfirmasi"
+      And admin filter status konfirmasi finance "Menunggu Konfirmasi"
+      And admin filter kategori biaya "Perbaikan AC"
+      And admin filter tujuan transfer "Clean and Cool Indonesia"
+#      And admin filter tanggal mulai "today"
+#      And admin filter tanggal akhir "tomorrow"
+      Then system only display owner expenditure with status konfirmasi manager "Dikonfirmasi"
+      And system only display owner expenditure with status konfirmasi finance "Menunggu Konfirmasi"
+      And system only display owner expenditure contains biaya "Perbaikan AC"
+      And system only display owner expenditure transfered to "Clean and Cool Indonesia" "Lina Wardana" "1821208756" "BCA"
