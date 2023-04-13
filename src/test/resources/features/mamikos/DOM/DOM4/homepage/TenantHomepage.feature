@@ -1,4 +1,4 @@
-@DOM4
+@DOM42
 Feature: Homepage
 
   Scenario: [Dweb][Homepage]Check cari iklan dropdown items
