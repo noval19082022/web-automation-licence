@@ -1,4 +1,4 @@
-@DOM42
+@DOM4
 Feature: Homepage
 
   Scenario: [Dweb][Homepage]Check cari iklan dropdown items
@@ -52,6 +52,7 @@ Feature: Homepage
     When user open twitter in footer
     Then user should redirect to link that contains "https://twitter.com/mamikosapp"
 
+  @DOM42
   Scenario: [Dweb][Homepage]Check redirection instagram on homepage
     Given user go to mamikos homepage
     When user open instagram in footer
