@@ -355,8 +355,8 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
+        playwright.pageScrollToDown(300);
         for (int i = 0; i < 4; i++) {
-            playwright.pageScrollToDown(300);
             if (ftueSlider.isVisible()) {
                 break;
             }
