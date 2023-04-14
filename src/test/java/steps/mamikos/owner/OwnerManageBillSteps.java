@@ -6,8 +6,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.kelolatagihan.BillDetailsPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.BillDetailsPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -31,6 +31,7 @@ public class OwnerManageBillSteps {
         }
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
+        billManage.reloadOnEmptyKelolaTagihanPage();
         billManage.selectKosFilter(kostName);
         billManage.selectMonthFilter(month);
     }
@@ -48,5 +49,17 @@ public class OwnerManageBillSteps {
     @Then("owner can see additional price {string} with price {string}")
     public void ownerCanSeeAdditionalPriceWithPrice(String additionalPriceTitle, String additionalPriceValue) {
         Assert.assertEquals(billdetail.getAdditionalPriceValueText(additionalPriceTitle), additionalPriceValue);
+    }
+
+    @And("owner go to detail tagihan with tenant name is {string} and jatuh tempo is {string}")
+    public void ownerGoToDetailTagihanWithTenantNameIsAndJatuhTempoIs(String tenantName, String jatuhTempoDate) {
+        billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempoDate);
+    }
+
+    @And("owner go to detail tagihan with tenant name is {string} and jatuh tempo is current month length")
+    public void ownerGoToDetailTagihanWithTenantNameIsAndCurrenMonthLengthJatuhTempo(String tenantName) {
+        int monthLength = JavaHelpers.getMonthLength();
+        String jatuhTempo = "Belum bayar - Tenggat "+monthLength+" hari lagi";
+        billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempo);
     }
 }

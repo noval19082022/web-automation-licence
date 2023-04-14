@@ -14,10 +14,11 @@ public class Codegen {
             context.route("**/*", route -> route.resume());
             // Pause the page, and start recording manually.
             Page page = context.newPage();
-//            page.navigate("https://jambu.kerupux.com");
-            loginAdminMamipay(page);
+            page.navigate("https://jambu.kerupux.com");
+//            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
             //loginOwner(page);
+//            loginPMS(page);
             page.pause();
         }
     }
@@ -44,6 +45,13 @@ public class Codegen {
         page.getByPlaceholder("Email Address").fill("automationpman03@mamikos.com");
         page.getByPlaceholder("Email Address").press("Tab");
         page.getByPlaceholder("Password").fill("qwerty123");
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login")).click();
+    }
+
+    public static void loginPMS(Page page){
+        page.navigate("https://sini-jambu.kerupux.com/login");
+        page.getByPlaceholder("Email").fill("pman@mamiteam.com");
+        page.getByPlaceholder("Password").fill("pmanM4m1t34m");
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login")).click();
     }
 }

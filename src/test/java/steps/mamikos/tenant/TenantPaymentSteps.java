@@ -34,9 +34,15 @@ public class TenantPaymentSteps {
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
         invoice = billing.clickOnBayarButton();
+    }
+
+    @When("tenant go to invoice page after pay DP")
+    public void tenantGoToInvoicePageAfterPayDP(){
+        invoice = billing.clickOnBayarDisiniButton();
     }
 
     @When("tenant apply voucher:")
@@ -232,5 +238,26 @@ public class TenantPaymentSteps {
     @When("tenant go to invoice DP from riwayat booking")
     public void tenantGoToInvoiceDP() {
         invoice = riwayatBooking.goToSettlementInvoice();
+    }
+
+    @And("tenant pay kost from riwayat booking using ovo {string}")
+    public void tenantPayKostFromRiwayatBookingUsingOvo(String phoneNumber) {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnOVO();
+        invoice.inputPhoneNumberOvo(phoneNumber);
+        invoice.clickOnBayarSekarang();
+        page.reload();
+        ActiveContext.getActiveBrowserContext().pages().get(1).close();
+    }
+
+    @And("tenant pay kost from riwayat booking using ovo {string} without close the page")
+    public void tenantPayKostFromRiwayatBookingUsingOvoWithoutCloseThePage(String phoneNumber) {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnOVO();
+        invoice.inputPhoneNumberOvo(phoneNumber);
+        invoice.clickOnBayarSekarang();
+        page.reload();
     }
 }

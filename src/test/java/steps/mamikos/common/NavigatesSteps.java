@@ -8,7 +8,10 @@ import config.playwright.context.OwnerContext;
 import config.playwright.context.TenantContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
@@ -16,6 +19,7 @@ public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
+    ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -74,6 +78,7 @@ public class NavigatesSteps {
 
     @When("tenant navigate to riwayat booking")
     public void tenantNavigateToRiwayatBooking() {
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
 
@@ -90,5 +95,67 @@ public class NavigatesSteps {
     @Given("tenant navigate to favorite page")
     public void tenantNavigateToFavoritePage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.FAVORITE_PAGE, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-kost")
+    public void userNavigatesToMamikosKost() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @Then("navbar kost before login appears")
+    public void navbarKostBeforeLoginAppears() {
+        Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
+        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
+        Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
+        Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
+    }
+
+    @Given("user navigates to mamikos-booking")
+    public void userNavigatesToMamikosBooking() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.BOOKING, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-promo-kost")
+    public void userNavigatesToMamikosPromoKost() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to mamikos-history")
+    public void userNavigatesToMamikosHistory() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.HISTORY, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to promo ngebut landing page")
+    public void userNavigatesToPromoNgebutLandingPage() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_NGEBUT, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigates to promo ngebut landing area")
+    public void userNavigatesToPromoNgebutLandingArea() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROMO_NGEBUT_AREA, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("admin go to mamikos bangkrupux admin")
+    public void adminGoToMamikosBangkrupuxAdmin() {
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX);
+    }
+
+    @Given("user go to landing apartment")
+    public void userGoToLandingApartment() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("admin go to pms singgahsini")
+    public void admin_go_to_pms_singgahsini() {
+        playwright.navigateTo(Mamikos.PMS_URL);
     }
 }

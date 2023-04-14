@@ -28,8 +28,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | phone stag    | phone prod    | password      |
       | 0890867321212 | 0890867321212 | mamikosqa123  |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto Fpaid       | Kost Adi Auto Fpaid       |
+      | kost name stag                                         | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara       | Kost Adi Auto Fpaid       |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag      | phone prod      | password      |
-      | 08900000000021  | 08900000000021  | mamikosqa123  |
+      | 08900000000022  | 08900000000021  | mamikosqa123  |
     And owner accept booking
     Then owner should redirect back to pengajuan booking page
 
@@ -47,13 +47,13 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | phone stag    | phone prod    | password     |
       | 0890867321212  | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using mandiri
+    And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant navigate to riwayat booking
     And tenant checkin kost from riwayat booking
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant get invoice number
-
+#
   Scenario: Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -81,10 +81,10 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag      | phone prod      | password      |
-      | 08900000000021  | 08900000000021  | mamikosqa123  |
+      | 08900000000022  | 08900000000021  | mamikosqa123  |
     And owner goes to bills details
-      | kost name stag            | kost name prod          |
-      | Kost Adi Auto Fpaid       | Kost Adi Auto Fpaid     |
+      | kost name stag                                         | kost name prod          |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara       | Kost Adi Auto Fpaid     |
     And owner set Kelola Tagihan filter month to "next" month
     And user open invoice details
     Then owner can sees total amount is basic amount plus other price

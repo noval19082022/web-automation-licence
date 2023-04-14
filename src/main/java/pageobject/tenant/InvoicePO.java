@@ -48,6 +48,8 @@ public class InvoicePO {
     Locator txtRentPerPeriodInvoiceDetail;
     Locator txtTotalCostInvoiceDetail;
     Locator txtAddCostInvoiceDetail;
+    Locator txtOVO;
+    Locator noOvoTextBox;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -66,7 +68,7 @@ public class InvoicePO {
         invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
         hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
         voucherToastWarningText = page.getByTestId("warning_txt");
-        closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
@@ -75,17 +77,19 @@ public class InvoicePO {
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
-        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-d9b433b8]");
+        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
         closeFilter = page.locator("i").nth(1);
-        openTagihan = page.locator("//*[@class='billing-management-table__row'][1]");
+        openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
         inputMonthFilter = page.locator("//*[@class='billing-management-input-trigger bg-c-dropdown'][1]");
         txtRentPerPeriodInvoiceDetail = page.locator("div:nth-child(10) > div:nth-child(2)");
         txtTotalCostInvoiceDetail = page.locator("div:nth-child(14) > div:nth-child(2)");
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
+        txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
+        noOvoTextBox = page.getByPlaceholder("08...");
     }
 
     /**
@@ -366,5 +370,20 @@ public class InvoicePO {
             page.waitForLoadState(LoadState.LOAD);
             page.waitForTimeout(3000);
         }
+    }
+
+    /**
+     * Choose OVO as payment
+     */
+    public void clickOnOVO() {
+        playwright.clickOn(txtOVO);
+    }
+
+    /**
+     * Input phone number ovo
+     * @param number phone number ovo
+     */
+    public void inputPhoneNumberOvo(String number) {
+        noOvoTextBox.fill(number);
     }
 }

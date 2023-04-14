@@ -36,4 +36,22 @@ public class TenantLoginPO extends LoginPO {
         loginBtn.click();
         return new HomePO(page);
     }
+
+    @Override
+    public synchronized TenantLoginPO fillEmailAddress(String emailAddress) {
+        emailAddressFBInput.fill(emailAddress);
+        return new TenantLoginPO(page);
+    }
+
+    @Override
+    public synchronized TenantLoginPO fillPasswordFacebook(String passwordFB) {
+        passwordFBInput.fill(passwordFB);
+        return new TenantLoginPO(page);
+    }
+
+    @Override
+    public synchronized HomePO clickOnLoginFacebookButton() {
+        loginFacebookBtn.click();
+        return new HomePO(page);
+    }
 }

@@ -18,7 +18,7 @@ public class TenantBillManagementPO {
         this.playwright = new PlaywrightHelpers(page);
         filterKos = page.locator("div.bm-filter__kost");
         filterMonth = page.locator("input[type=\"text\"]").first();
-        invoiceList = page.getByTestId("invoice-status-label");
+        invoiceList = page.getByTestId("invoice-status-label").last();
     }
 
     /**
@@ -54,7 +54,7 @@ public class TenantBillManagementPO {
      * @return BillDetailsPO class
      */
     public BillDetailsPO clickOnInvoiceList() {
-        playwright.clickOn(invoiceList);
+        playwright.clickOn(invoiceList.last());
         return new BillDetailsPO(page);
     }
 
@@ -67,5 +67,26 @@ public class TenantBillManagementPO {
         Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setName)).getByTestId("invoice-status-label");
         playwright.clickOn(invoiceList);
         return new BillDetailsPO(page);
+    }
+
+    /**
+     * Click on invoice list based on tenant name and jatuh tempo text
+     * @param setTenant Tenant name
+     * @param setJatuhTempo Set with jatuh tempo test example: Belum bayar - Jatuh tempo sekarang
+     * @return BillDetailsPO class
+     */
+    public BillDetailsPO clickOnInvoiceList(String setTenant, String setJatuhTempo) {
+        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setTenant).setName(setJatuhTempo)).getByTestId("invoice-status-label");
+        playwright.clickOn(invoiceList);
+        return new BillDetailsPO(page);
+    }
+
+    /**
+     * Reload page if filter kos is not visible
+     */
+    public void reloadOnEmptyKelolaTagihanPage() {
+        if(!filterKos.isVisible()) {
+            page.reload();
+        }
     }
 }

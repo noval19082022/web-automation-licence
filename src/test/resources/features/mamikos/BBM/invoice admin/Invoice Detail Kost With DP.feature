@@ -40,6 +40,14 @@ Feature: Invoice Detail Kost With DP
     And owner accept booking
     Then owner should redirect back to pengajuan booking page
 
+  Scenario: Tenant Get Invoice Number
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 085432154321 | 085432154321 | qwerty123 |
+    And tenant navigate to riwayat booking
+    And tenant get invoice number from riwayat booking
+
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -47,5 +55,6 @@ Feature: Invoice Detail Kost With DP
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search invoice by contact number:
       | search by              | renter_phone_number      |
-      | search value           | 085432154321            |
+      | search value           | 085432154321             |
+      | invoice number         | default                  |
     Then admin can sees total cost is basic amount + admin fee

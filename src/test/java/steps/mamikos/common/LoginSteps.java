@@ -5,11 +5,15 @@ import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
+import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
+import pageobject.pms.LoginPMSPO;
+import pageobject.tenant.TenantLoginPO;
 
 import java.util.List;
 import java.util.Map;
@@ -20,8 +24,14 @@ public class LoginSteps {
     HomePO home = new HomePO(page);
     LoginPO login = new LoginPO(page);
     LoginAdminMamipayPO loginAdmin = new LoginAdminMamipayPO(page);
+    AdminBangkrupuxLoginPO loginAdminBangkrupux = new AdminBangkrupuxLoginPO(page);
+    TenantLoginPO tenantLogin = new TenantLoginPO(page);
+    LoginPMSPO loginPMS = new LoginPMSPO(page);
+
+
     private List<Map<String, String>> phoneNumberCredential;
     private List<Map<String, String>> emailCredential;
+    private List<Map<String, String>> pmsCredential;
 
     @When("user login as tenant via phone number:")
     public void userLoginAsTenantViaPhoneNumber(DataTable table) {
@@ -42,9 +52,22 @@ public class LoginSteps {
             .waitTillLogoIsVisible();
     }
 
-    @When("user login as tenant via facebook")
-    public void userLoginAsTenantViaFacebook() {
-        System.out.println("From inside scenario login facebook");
+    @When("user login as tenant via facebook:")
+    public void userLoginAsTenantViaFacebook(DataTable table) {
+        emailCredential = table.asMaps(String.class, String.class);
+        var email = emailCredential.get(0).get("email " + Mamikos.ENV);
+        var password = emailCredential.get(0).get("password");
+        if (!FlowControl.getStrictFlow()) {
+            ActiveContext.activateOwner(0);
+            home = new HomePO(ActiveContext.getActivePage());
+            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
+        }
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .clickOnSignInWithFacebookButton()
+                .fillEmailAddress(email)
+                .fillPasswordFacebook(password)
+                .clickOnLoginFacebookButton();
     }
 
     @When("user login as tenant via google")
@@ -79,8 +102,40 @@ public class LoginSteps {
         loginAdmin.clickOnLoginButton();
     }
 
+    @When("admin login pms :")
+    public void admin_login_pms(DataTable tables) {
+        pmsCredential = tables.asMaps(String.class, String.class);
+        String username = pmsCredential.get(0).get("email");
+        String password = pmsCredential.get(0).get("password");
+
+        loginPMS.fillUsername(username);
+        loginPMS.fillPassword(password);
+        loginPMS.clickLogin();
+    }
+
     @Then("user see login pop up in favorite page")
     public void userSeeLoginPopUpInFavoritePage() {
         login.checkLoginPopUpFromFavoritePage();
+    }
+
+    @When("admin login to bangkrupux:")
+    public void adminLoginToBangkrupux(DataTable table) {
+        emailCredential = table.asMaps(String.class, String.class);
+        var email = emailCredential.get(0).get("email " + Mamikos.ENV);
+        var password = emailCredential.get(0).get("password");
+        loginAdminBangkrupux.fillEmail(email);
+        loginAdminBangkrupux.fillPassword(password);
+        loginAdminBangkrupux.clickOnLoginButton();
+    }
+
+    @And("user login from kost detail via phone number:")
+    public void userLoginFromKostDetailViaPhoneNumber(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        tenantLogin.waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password)
+                .clickOnLoginButton();
     }
 }

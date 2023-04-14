@@ -12,6 +12,7 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,6 +80,15 @@ public class JavaHelpers {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, change);
         return new DateFormatSymbols(locale).getMonths()[calendar.get(Calendar.MONTH)];
+    }
+
+    /**
+     * Get month length of days
+     * @return current month length of days, will be 30, 31, 28 or 29 for Feb
+     */
+    public static int getMonthLength() {
+        YearMonth currentYearMonth = YearMonth.now();
+        return currentYearMonth.lengthOfMonth();
     }
     // --- Date and Time -- \\
 

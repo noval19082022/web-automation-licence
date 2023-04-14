@@ -41,6 +41,14 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     And owner accept booking
     Then owner should redirect back to pengajuan booking page
 
+  Scenario: Tenant Get Invoice Number
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0890867321212 | 0890867321212 | mamikosqa123 |
+    And tenant navigate to riwayat booking
+    And tenant get invoice number from riwayat booking
+
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -49,6 +57,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     And admin search invoice by contact number:
       | search by              | renter_phone_number      |
       | search value           | 0890867321212            |
+      | invoice number         | default                  |
     Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
     When admin deletes additional other price with name below :
       | Listrik |

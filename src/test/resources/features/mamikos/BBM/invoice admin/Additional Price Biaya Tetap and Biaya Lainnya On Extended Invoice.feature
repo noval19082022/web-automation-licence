@@ -47,7 +47,12 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using mandiri
+    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant navigate to riwayat booking
+    And tenant checkin kost from riwayat booking
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant get invoice number
 
   Scenario: Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
@@ -67,8 +72,6 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
-    And tenant checkin kost from riwayat booking
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     Then tenant can sees total cost is equal to basic amount, admin fee plus additional price below
@@ -84,5 +87,4 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And owner set Kelola Tagihan filter month to "next" month
     And user open invoice details
-    Then owner can sees total amount is basic amount plus other price
-      | 50000 |
+    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"

@@ -4,6 +4,7 @@ import utilities.JavaHelpers;
 
 public class Mamikos {
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
+
     public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
     public static final String URL = JavaHelpers.getPropertyValue(MAMIKOS, "mainUrl_" + ENV);
     public static final String OWNER_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownerUrl_" + ENV);
@@ -15,5 +16,17 @@ public class Mamikos {
     public static final String TENANT_RIWAYAT_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "tenantRiwayatBooking");
     public static final String KELOLA_TAGIHAN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKelolaTagihan");
     public static final String FAVORITE_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "favoritePage");
-
+    public static final String KOST_MURAH_DIJOGJA = JavaHelpers.getPropertyValue(MAMIKOS,"kostMurahDiJogja");
+    public static final String KOST = JavaHelpers.getPropertyValue(MAMIKOS, "kost");
+    public static final String BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "booking");
+    public static final String PROMO_KOST = JavaHelpers.getPropertyValue(MAMIKOS,"promoKost");
+    public static final String HISTORY= JavaHelpers.getPropertyValue(MAMIKOS, "history");
+    public static final String UGM_KOST_LIST= JavaHelpers.getPropertyValue(MAMIKOS, "ugmKostList");
+    public static final String PROMO_NGEBUT = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebut");
+    public static final String PROMO_NGEBUT_AREA = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutArea");
+    public static final String KOST_PROMO_NGEBUT_TOP = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaTop");
+    public static final String KOST_PROMO_NGEBUT_BOTTOM = JavaHelpers.getPropertyValue(MAMIKOS, "promoNgebutAreaBottom");
+    public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
+    public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
+    public static final String PMS_URL = JavaHelpers.getPropertyValue(MAMIKOS, "PMSUrl_" + ENV);
 }

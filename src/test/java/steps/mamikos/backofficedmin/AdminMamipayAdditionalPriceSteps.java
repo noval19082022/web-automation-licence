@@ -74,6 +74,33 @@ public class AdminMamipayAdditionalPriceSteps {
         additionalPriceData = table.asMap(String.class, String.class);
         var additionalPriceSearchBy = additionalPriceData.get("search by");
         var searchValue = additionalPriceData.get("search value");
+        var invoiceNumber = additionalPriceData.get("invoice number").equalsIgnoreCase("default");
+        var invoiceNumberValue = invoiceNumber ? InvoiceTestData.getInvoiceNumber() : additionalPriceData.get("invoice number");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        invoiceAdmin.goToInvoiceDetail(invoiceNumberValue);
+
+    }
+
+    @And("admin clicks on invoice details second index:")
+    public void adminClicksOnInvoiceDetailsSecondIndex(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        invoiceAdmin.clickOnDetailSecondButton();
+    }
+
+    @And("admin clicks on invoice details first index:")
+    public void adminClicksOnInvoiceDetailsFirstIndex(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
         adminMamipay.goToMamikosSearchInvoice();
         invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
         invoiceAdmin.fillInputSearchValue(searchValue);
@@ -94,5 +121,39 @@ public class AdminMamipayAdditionalPriceSteps {
         int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
         int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
         Assert.assertEquals(totalCost, basicAmount + adminFee);
+    }
+
+    @Then("admin can sees total cost is basic amount + deposit fee + biaya tetap")
+    public void admin_can_sees_total_cost_is_basic_amount_deposit_fee_biaya_tetap() {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int depositFee = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
+        int otherPriceFixed = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
+        Assert.assertEquals(totalCost, basicAmount + depositFee + otherPriceFixed);
+    }
+
+    @Then("admin can sees total cost is basic amount + deposit fee + biaya tetap + admin fee")
+    public void admin_can_sees_total_cost_is_basic_amount_deposit_fee_biaya_tetap_admin_fee() {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
+        int depositFee = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
+        int otherPriceFixed = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
+        Assert.assertEquals(totalCost, basicAmount + adminFee + depositFee + otherPriceFixed);
+    }
+
+    @Then("admin changes DP basic amount and verify total amount change on settlement invoice for tenant {int}:")
+    public void admin_changes_DP_basic_amount_and_verify_total_amount_change_on_settlement_invoice(int expectedAmount, DataTable table) throws InterruptedException {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        int basicAmountBeforeEdit = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        invoiceAdmin.editBasicAmount(basicAmountBeforeEdit + 10000);
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        int totalAmountSettlement = JavaHelpers.extractNumber(invoiceAdmin.getTotalAmount(1));
+        int totalAmountDP = JavaHelpers.extractNumber(invoiceAdmin.getTotalAmount(2)) - 1000;
+        Assert.assertEquals(totalAmountSettlement, (expectedAmount  - totalAmountDP));
     }
 }

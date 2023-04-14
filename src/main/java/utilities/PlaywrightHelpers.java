@@ -24,7 +24,8 @@ public class PlaywrightHelpers {
 
     /**
      * This method navigates to a specified URL with a specified timeout for the navigation to complete.
-     * @param url String data type of URL format
+     *
+     * @param url     String data type of URL format
      * @param timeout Double data type of specific timeout
      */
     public void navigateTo(String url, Double timeout) {
@@ -33,7 +34,8 @@ public class PlaywrightHelpers {
 
     /**
      * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
-     * @param url String data type of URL format
+     *
+     * @param url   String data type of URL format
      * @param state The load state to wait for before navigating.
      */
     public void navigateTo(String url, Double timeout, LoadState state) {
@@ -43,7 +45,8 @@ public class PlaywrightHelpers {
 
     /**
      * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
-     * @param url String data type of URL format
+     *
+     * @param url     String data type of URL format
      * @param locator The locator to wait for.
      */
     public void navigateToAndWaitLocator(String url, Locator locator) {
@@ -146,6 +149,15 @@ public class PlaywrightHelpers {
         return locator.textContent().trim();
     }
 
+    /**
+     * Get value from input element
+     * @param locator playwright locator
+     * @return String data type
+     */
+    public String getInputValue(Locator locator) {
+        return locator.inputValue();
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\
@@ -229,7 +241,8 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator
-     * @param locator Locator data type
+     *
+     * @param locator  Locator data type
      * @param duration set duration in double
      */
     public void waitFor(Locator locator, Double duration) {
@@ -274,10 +287,89 @@ public class PlaywrightHelpers {
 
     /**
      * Get locators as array list
+     *
      * @param locator Locator type
      * @return List of locators
      */
     public List<Locator> getLocators(Locator locator) {
         return locator.all();
+    }
+
+    //---- Scroll Part ----\\
+
+    /**
+     * Scroll Helper horizontal and vertikal (per pixel)
+     */
+    public void pageScrollUsingCoordinate(int x, int y) {
+        page.evaluate("scroll(" + x + "," + y + ")");
+    }
+
+    /**
+     * Scroll Helper to the bottom page
+     */
+    public void pageScrollHeightToBottom() {
+        page.evaluate("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    /**
+     * Scroll Helper vertical (per pixel)
+     */
+    public void pageScrollToDown(int y) {
+        page.evaluate("window.scrollBy(0," + y + ")");
+    }
+
+    /**
+     * Scroll Down Helper until locator is visible (per 100 pixel)
+     */
+    public void pageScrollUntilElementIsVisible(Locator locator) {
+        for (int i = 0; i < 100; i++) {
+            page.evaluate("window.scrollBy(0,100)");
+            if (locator.isVisible()) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Move Page helper, it will return page object, so it can use to implement in next page taget
+     * for example when select kost on promo side from home page, it will be move to kost detail
+     * so this helper can be implement to return kost detail object on kostdetailPO with argument this page inside of the kost detail object
+     * real example you can see DOM 4 on feature:kost detail and Scenario: [Dweb][Kost Detail] Check promo owner section login
+     */
+    public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
+        // move page
+        Page nextPage = pageActive.waitForPopup(() -> {
+            locatorTarget.click();
+        });
+        nextPage.bringToFront();
+        return nextPage;
+    }
+
+    /*
+     * hard wait 60 second
+     *
+     * */
+    public void hardWait(double time) {
+        page.waitForTimeout(time);
+    }
+
+    /**
+     * Get Active URL page
+     *
+     * @return String URL Active page
+     */
+    public String getActivePageURL() {
+        String activeUrl = page.evaluate("window.location.href").toString();
+        return activeUrl;
+    }
+
+    /**
+     * Get Active Title page
+     *
+     * @return String Title Active page
+     */
+    public String getActivePageTitle() {
+        String activeTitle = page.evaluate("document.title").toString();
+        return activeTitle;
     }
 }

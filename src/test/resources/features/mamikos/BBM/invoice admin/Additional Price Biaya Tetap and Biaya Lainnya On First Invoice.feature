@@ -1,5 +1,4 @@
 @regression @BBM2 @TEST_BBM-1339
-
 #  kost used: Kost Adi Auto Fpaid
 #  (Kost Regular FullPaid without Additional Fee and Deposit)
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
@@ -38,8 +37,18 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
-    And owner accept booking
+    And owner accept booking from tenant:
+      | tenant stag          | tenant prod          |
+      | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
+
+  Scenario: Tenant Get Invoice Number
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0890867321212 | 0890867321212 | mamikosqa123 |
+    And tenant navigate to riwayat booking
+    And tenant get invoice number from riwayat booking
 
   Scenario: Add Biaya Tetap + Biaya Lainnya On First Invoice From Mamipay
     Given admin go to mamikos mamipay admin
