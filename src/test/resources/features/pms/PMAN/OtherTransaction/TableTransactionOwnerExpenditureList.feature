@@ -117,3 +117,14 @@
       And system only display owner expenditure with status konfirmasi finance "Menunggu Konfirmasi"
       And system only display owner expenditure contains biaya "Perbaikan AC"
       And system only display owner expenditure transfered to "Clean and Cool Indonesia" "Lina Wardana" "1821208756" "BCA"
+
+    @TEST_PMAN-6376
+    Scenario: Reset Filter Owner Expenditure
+      When admin choose some filter
+      And admin reset filter from pop up
+      Then counter in filter disappear
+      When admin filter status konfirmasi manager "Menunggu Konfirmasi"
+      And admin filter status konfirmasi finance "Menunggu Konfirmasi"
+      Then counter in filter button "visible"
+      When admin reset filter owner expenditure
+      Then counter in filter button "hidden"
