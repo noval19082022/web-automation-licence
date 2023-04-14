@@ -295,6 +295,7 @@ public class KostDetailSteps {
         kostDetail.clickOnArrowRecommendationPreviousButton();
         Assert.assertFalse(kostDetail.isNextRecommendationElementPresent(), "Next Kost Card still display");
         this.kostLandingArea = kostDetail.clickOnSeeAllRecommendation();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         Assert.assertTrue(kostLandingArea.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
         Assert.assertTrue(kostLandingArea.isMixGenderDisplay(), "Mixed Gender is not display");
     }

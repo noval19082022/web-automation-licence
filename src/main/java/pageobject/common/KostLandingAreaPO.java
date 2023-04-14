@@ -321,7 +321,8 @@ public class KostLandingAreaPO {
      * @return recomendation title in listing
      */
     public String getRecommendationKosList() {
-        playwright.waitTillLocatorIsVisible(recommendationListTitle);
+        playwright.waitTillLocatorIsVisible(recommendationListTitle, 5000.0);
+        playwright.pageScrollUntilElementIsVisible(recommendationListTitle);
         System.out.println(playwright.getText(recommendationListTitle));
         return playwright.getText(recommendationListTitle);
     }
@@ -332,7 +333,7 @@ public class KostLandingAreaPO {
      * @return status true / false
      */
     public boolean isMixGenderDisplay() {
-        return playwright.waitTillLocatorIsVisible(mixGenderFilter);
+        return playwright.waitTillLocatorIsVisible(mixGenderFilter, 5000.0);
     }
 
     /**
