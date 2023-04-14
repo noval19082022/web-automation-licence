@@ -11,7 +11,7 @@ public class GlobalConfig {
     public static final boolean SET_ACCEPT_DOWNLOAD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setAcceptDownload"));
     public static final boolean SET_VIDEO_RECORD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setVideoRecord"));
     public static final boolean SET_TRACING = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setTracing"));
+    public static final int SCREEN_WIDTH = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ?  1920 : JavaHelpers.getScreenWidth();
+    public static final int SCREEN_HEIGHT = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ? 1080 : JavaHelpers.getScreenWidth();
 
-    public static final int SCREEN_WIDTH = JavaHelpers.getScreenWidth();
-    public static final int SCREEN_HEIGHT = JavaHelpers.getScreenHeight();
 }
