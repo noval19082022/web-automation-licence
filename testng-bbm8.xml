@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+    <parameter name="squadName" value="BBM8"/>
+    <test name="BBM8TestRunner">
+        <classes>
+            <class name="runners.BBM8TestRunner"/>
+        </classes>
+    </test>
+
+</suite>

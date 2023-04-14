@@ -54,4 +54,14 @@ public class SearchContractSteps {
     public void adminAkhiriContract() {
         searchContract.clickOnAkhiriContractButton();
     }
+
+    @When("admin search contract by tenant kost name:")
+    public void adminSearchContractByTenantKostName(DataTable table) {
+        searchData = table.asMaps(String.class, String.class);
+        var kostName = searchData.get(0).get("kostName " + Mamikos.ENV);
+        admin.clickOnSearchContract();
+        searchContract.selectSearchBy("kost_name");
+        searchContract.fillSearchByValue(kostName);
+        searchContract.clickOnSearchButton();
+    }
 }
