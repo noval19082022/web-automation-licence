@@ -23,6 +23,8 @@ public class listOwnerExpenditurePO {
     Locator vendorBank;
     Locator vendorAccNumber;
     Locator vendorAccName;
+    Locator resetFilterButton;
+    Locator counterFilter;
     //table owner expenditure
 
     //Filter Pop Up
@@ -43,6 +45,8 @@ public class listOwnerExpenditurePO {
     Locator ditolakFinanceCheckbox;
     Locator terapkanButton;
     Locator kategoriBiayaCheckbox;
+    Locator resetFilterPopUp;
+    Locator closePopUpButton;
     //Filter Pop Up
 
     String urlLampiran;
@@ -69,6 +73,10 @@ public class listOwnerExpenditurePO {
         terapkanButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Terapkan"));
         emptyTable = page.locator(".not-found");
         rowData = page.locator("tbody.one-row");
+        resetFilterPopUp = page.getByTestId("filter-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Reset"));
+        closePopUpButton = page.locator(".bg-c-modal__action-closable");
+        resetFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
+        counterFilter = page.locator(".bg-c-badge-counter--black");
     }
 
     /**
@@ -314,5 +322,61 @@ public class listOwnerExpenditurePO {
             assertThat(vendorAccName).hasText(accName);
             expandButton.nth(i).click();
         }
+    }
+
+    /**
+     * click reset button in filter modal
+     */
+    public void clickResetPopUp() {
+        resetFilterPopUp.click();
+    }
+
+    /**
+     * close filter owner expenditure modal
+     */
+    public void closeFilter() {
+        closePopUpButton.click();
+    }
+
+    /**
+     * Assert counter in Status Konfirmasi Manager hidden
+     */
+    public void assertCounterStatusKonfirmasiManagerNotVisible() {
+        assertThat(counterFilter.nth(1)).isHidden();
+    }
+
+    /**
+     * Assert counter in Status Konfirmasi Finance hidden
+     */
+    public void assertCounterStatusKonfirmasiFinanceNotVisible() {
+        assertThat(counterFilter.nth(2)).isHidden();
+    }
+
+    /**
+     * Assert counter in kategori biaya hidden
+     */
+    public void assertCounterKategoriBiayaNotVisible() {
+        assertThat(counterFilter.nth(3)).isHidden();
+    }
+
+    /**
+     * Assert counter filter hidden
+     */
+    public void assertCounterFilterHidden() {
+        assertThat(counterFilter.first()).isHidden();
+    }
+
+    /**
+     * Assert counter filter visible
+     */
+    public void assertCounterFilterVisible() {
+        assertThat(counterFilter.first()).isVisible();
+    }
+
+    /**
+     * click Reset button in owner expenditure
+     */
+    public void clickResetButton() {
+        resetFilterButton.click();
     }
 }

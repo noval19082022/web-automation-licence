@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
 
 import java.util.List;
-
 public class ListOwnerExpenditureSteps {
     Page page = ActiveContext.getActivePage();
     listOwnerExpenditurePO list = new listOwnerExpenditurePO(page);
@@ -100,5 +99,36 @@ public class ListOwnerExpenditureSteps {
     @Then("system only display owner expenditure transfered to {string} {string} {string} {string}")
     public void system_only_display_owner_expenditure_transfered_to(String vendor,String accName, String accNumber, String bank) {
         list.assertVendorName(vendor,accName,accNumber,bank);
+    }
+    @When("admin choose some filter")
+    public void admin_choose_some_filter() {
+        list.clickFilter();
+        list.selectStatusKonfirmasiManager("Menunggu Konfirmasi");
+        list.selectStatusKonfirmasiFinance("Menunggu Konfirmasi");
+        list.selectKategoriBiaya("Perbaikan Wifi");
+    }
+    @When("admin reset filter from pop up")
+    public void admin_reset_filter_from_pop_up() {
+        list.clickResetPopUp();
+    }
+    @Then("counter in filter disappear")
+    public void counter_in_filter_disappear() {
+        list.clickFilter();
+        list.assertCounterStatusKonfirmasiManagerNotVisible();
+        list.assertCounterStatusKonfirmasiFinanceNotVisible();
+        list.assertCounterKategoriBiayaNotVisible();
+        list.closeFilter();
+    }
+    @When("admin reset filter owner expenditure")
+    public void admin_reset_filter_owner_expenditure() {
+        list.clickResetButton();
+    }
+    @Then("counter in filter button {string}")
+    public void counter_in_filter_button(String visibility) {
+        if (visibility.equalsIgnoreCase("visible")){
+            list.assertCounterFilterVisible();
+        } else if (visibility.equalsIgnoreCase("hidden")) {
+            list.assertCounterFilterHidden();
+        }
     }
 }
