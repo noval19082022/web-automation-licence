@@ -10,7 +10,7 @@ public class BillAndBookingManagementPO {
     private PlaywrightHelpers playwright;
     private LocatorHelpers locator;
     Locator nomorKamarInput;
-    Locator pilihDiTempatRadio;
+    Locator pilihKamarRadio;
     Locator terapkanButton;
     Locator lanjutkanButton;
     Locator simpanButton;
@@ -22,7 +22,7 @@ public class BillAndBookingManagementPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         nomorKamarInput = page.getByPlaceholder("Silakan pilih nomor kamar");
-        pilihDiTempatRadio = page.locator(".mami-radio").first();
+        pilihKamarRadio = page.locator(".mami-radio");
         terapkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Terapkan");
         lanjutkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Lanjutkan");
         simpanButton = playwright.locatorByRoleSetName(locator.roleButton, "Simpan");
@@ -37,7 +37,7 @@ public class BillAndBookingManagementPO {
     public void clickOnRoomNumberInput() throws InterruptedException {
         try {
             int maxLoop = 0;
-            while (!pilihDiTempatRadio.isVisible() && maxLoop < 3) {
+            while (!pilihKamarRadio.first().isVisible() && maxLoop < 3) {
                 playwright.forceClickOn(nomorKamarInput);
                 page.waitForTimeout(3000);
                 maxLoop++;
@@ -53,7 +53,7 @@ public class BillAndBookingManagementPO {
      * Click on pilih ditempat radio
      */
     public void clickOnPilihDitempat() {
-        pilihDiTempatRadio.click();
+        pilihKamarRadio.first().click();
     }
 
     /**
@@ -83,5 +83,12 @@ public class BillAndBookingManagementPO {
     public PengajuanBookingPO clickOkButton() {
         playwright.clickAndWaitNavigation(okButton);
         return new PengajuanBookingPO(page);
+    }
+
+    /**
+     * Click on one of the rooms radio
+     */
+    public void clickOnOneRooms() {
+        pilihKamarRadio.nth(1).click();
     }
 }
