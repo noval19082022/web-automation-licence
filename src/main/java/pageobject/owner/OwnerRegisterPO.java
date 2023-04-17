@@ -38,14 +38,24 @@ public class OwnerRegisterPO {
 
     }
 
+    /**
+     * user as owner click pemilik kost button
+     */
     public void pemilikKostLogin(){
         pemilikKostButton.click();
     }
 
+    /**
+     * user as owner click register button
+     */
     public void RegisterSekarang(){
         registerSekarangButton.click();
     }
 
+    /**
+     * user as owner click Button Daftar
+     * @return
+     */
     public Boolean disableButtonRegister() {
         return ButtonDaftar.isDisabled();
     }
