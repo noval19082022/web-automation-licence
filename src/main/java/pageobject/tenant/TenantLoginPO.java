@@ -52,6 +52,7 @@ public class TenantLoginPO extends LoginPO {
     @Override
     public synchronized HomePO clickOnLoginFacebookButton() {
         loginFacebookBtn.click();
+        playwright.hardWait(5000);
         return new HomePO(page);
     }
 }

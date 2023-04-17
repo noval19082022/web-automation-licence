@@ -260,4 +260,9 @@ public class TenantPaymentSteps {
         invoice.clickOnBayarSekarang();
         page.reload();
     }
+
+    @And("tenant click button bayar sekarang")
+    public void tenantClickButtonBayarSekarang() {
+        invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
 }

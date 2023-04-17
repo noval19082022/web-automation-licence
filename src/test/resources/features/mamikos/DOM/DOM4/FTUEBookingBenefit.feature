@@ -85,5 +85,5 @@ Feature: FTUE Booking Benefit
       | phone stag   | phone prod   | password  |
       | 081223344550 | 083176408442 | qwerty123 |
     And user go to apartment details from apartment landing list number 1
-    And tenant set active page to 1
+    And tenant set active page to 0
     Then user can not see FTUE booking benefit

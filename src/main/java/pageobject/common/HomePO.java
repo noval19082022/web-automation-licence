@@ -91,12 +91,12 @@ public class HomePO {
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya"));
-        this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Iklan dropdown-down"));
+        this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
         this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator(".rc-photo__cover").first();
-        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
-        this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("apartment Apartemen"));
+        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
+        this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apartemen"));
         this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
@@ -110,12 +110,12 @@ public class HomePO {
         this.jobMamikosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Job Mamikos"));
         this.promosikanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Promosikan Kost Anda"));
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("email cs@mamikos.com"));
+        this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
-        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp 0813-2511-1171"));
-        this.facebookButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("facebook"));
-        this.twitterButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("twitter"));
-        this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
+        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("0813-2511-1171"));
+        this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
+        this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
+        this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
         this.copyrightFooter = page.getByText("© 2023 Mamikos.com, All rights reserved");
     }
 
