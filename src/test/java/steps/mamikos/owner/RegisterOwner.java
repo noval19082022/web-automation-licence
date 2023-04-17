@@ -2,30 +2,18 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
-import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.OwnerRegisterPO;
-import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
-import pageobject.owner.kelolatagihan.PengajuanBookingPO;
-import utilities.PlaywrightHelpers;
 
 import java.util.List;
-import java.util.Map;
 
 public class RegisterOwner {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
-    OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking;
     HomePO home = new HomePO(page);
-    BillAndBookingManagementPO billBookingManage;
-    List<Map<String, String>> tenantNames;
     OwnerRegisterPO ownerRegister = new OwnerRegisterPO(page);
 
     @When("user clicks on Enter button")
