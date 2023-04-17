@@ -71,9 +71,7 @@ public class OwnerRegisterPO {
     public void fillOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password) throws InterruptedException{
         nameInputText.fill(name);
         phoneInputText.fill(phone);
-        playwright.hardWait(3);
         emailInputText.fill(email);
-        playwright.hardWait(3);
         passwordInputText.fill(password);
         passwordConfirmationInputText.fill(password);
     }
