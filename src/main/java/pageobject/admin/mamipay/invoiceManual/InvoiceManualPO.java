@@ -47,6 +47,11 @@ public class InvoiceManualPO {
     private Locator deleteBtnOnConfirmationDelete;
     private Locator emptyStateBiayaTambahan;
     private Locator emptyStateBiayaSewa;
+    private Locator namaBiayaOnTable;
+    private Locator awalPeriodOnTable;
+    private Locator akhirPeriodOnTable;
+    private Locator jumlahBiayaOnTable;
+    private Locator disburseToPemilikOnTable;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -63,6 +68,7 @@ public class InvoiceManualPO {
     private Locator periodeAwalErrMsg;
     private Locator periodeAkhirErrMsg;
     private Locator jumlahBiayaErrMsg;
+    private Locator lainnyaField;
     // Tambah Biaya Pop Up
 
     // Buat dan Kirim Pop Up
@@ -105,6 +111,8 @@ public class InvoiceManualPO {
         deleteBtnOnConfirmationDelete = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         emptyStateBiayaTambahan = page.getByText("Belum ada biaya tambahan");
         emptyStateBiayaSewa = page.getByText("Belum ada biaya sewa");
+        awalPeriodOnTable = page.locator("(//td)[2]");
+        akhirPeriodOnTable = page.locator("(//td)[3]");
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -118,6 +126,7 @@ public class InvoiceManualPO {
         periodeAwalErrMsg = page.getByText("Periode awal tidak boleh kosong.");
         periodeAkhirErrMsg = page.getByText("Periode akhir tidak boleh kosong.");
         jumlahBiayaErrMsg = page.getByText("Jumlah biaya tidak boleh kosong.");
+        lainnyaField = page.locator("//input[@data-testid='billing-modal-nama-biaya']");
 
         //---Buat dan Kirim Pop Up---//
         buatDanKirimButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat dan Kirim"));
@@ -660,6 +669,55 @@ public class InvoiceManualPO {
      */
     public void assertEmptyStateBiayaSewa() {
         assertThat(emptyStateBiayaSewa).hasText("Belum ada biaya sewa");
+    }
+
+    /**
+     * Input value in Lainnya field
+     * @param lainnya
+     */
+    public void setLainnyaInvoiceManual(String lainnya) {
+        lainnyaField.fill(lainnya);
+    }
+
+    /**
+     * Assert Nama Biaya on table
+     * @param nama
+     */
+    public void assertNamaBiayaOnTable(String nama) {
+        namaBiayaOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(nama));
+        assertThat(namaBiayaOnTable).hasText(nama);
+    }
+
+    /**
+     * Assert Awal Periode on table
+     */
+    public void assertAwalPeriodOnTable() {
+        assertThat(awalPeriodOnTable);
+    }
+
+    /**
+     * Assert Akhir Periode on table
+     */
+    public void assertAkhirPeriodOnTable() {
+        assertThat(akhirPeriodOnTable);
+    }
+
+    /**
+     * Assert Jumlah Biaya on table
+     * @param jml
+     */
+    public void assertJumlahBiayaOnTable(String jml) {
+        jumlahBiayaOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(jml));
+        assertThat(jumlahBiayaOnTable);
+    }
+
+    /**
+     * Assert Disburse to Pemilik on table
+     * @param disburse
+     */
+    public void assertDisburseToPemilikOnTable(String disburse) {
+        disburseToPemilikOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(disburse));
+        assertThat(disburseToPemilikOnTable);
     }
     //---End of Biaya Tambahan---//
 }

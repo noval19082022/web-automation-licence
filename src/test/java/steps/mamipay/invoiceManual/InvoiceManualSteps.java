@@ -351,5 +351,45 @@ public class InvoiceManualSteps {
             manualInvoice.assertEmptyStateBiayaSewa();
         }
     }
+
+    @When("the admin create Invoice Manual {string} and input all fields {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_admin_create_Invoice_Manual_and_input_all_fields(String invType, String nama, String lainnya, String awal, String akhir, String durasi, String jml){
+        admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.clickJenisBiayaTambahan();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            manualInvoice.clickJenisBiayaSewa();
+        }
+
+        manualInvoice.clickTambah();
+
+        manualInvoice.setNamaBiayaInvoiceManual(nama);
+        if (!(lainnya.equalsIgnoreCase("-"))) {
+            manualInvoice.setLainnyaInvoiceManual(lainnya);
+        }
+        if (!(awal.equalsIgnoreCase("-"))){
+            manualInvoice.setPeriodeAwalInvoiceManual(awal);
+        }
+        if (!(akhir.equalsIgnoreCase("-"))){
+            manualInvoice.setPeriodeAkhirInvoiceManual(akhir);
+        }
+        if (!(durasi.equalsIgnoreCase("-"))){
+            manualInvoice.setDurasiBiayaInvoiceManual(durasi);
+        }
+        manualInvoice.setJumlahBiayaInvoiceManual(jml);
+
+        manualInvoice.clickTambahSubmitInPopUp();
+    }
+
+    @Then("{string}, {string}, {string}, {string}, {string} are displayed in the biaya tambahan table")
+    public void are_displayed_in_the_biaya_tambahan_table(String nama, String awal, String akhir, String jml, String disburse){
+        manualInvoice.assertNamaBiayaOnTable(nama);
+        manualInvoice.assertAwalPeriodOnTable();
+        manualInvoice.assertAkhirPeriodOnTable();
+        manualInvoice.assertJumlahBiayaOnTable(jml);
+        manualInvoice.assertDisburseToPemilikOnTable(disburse);
+    }
     //---End of Biaya Tambahan Pop Up---//
 }
