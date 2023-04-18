@@ -128,4 +128,8 @@ public class TenantBookingSteps {
         kostDetail = searchPO.searchByText(kosName);
         kostDetail.waitTillKostDetailPageVisible();
     }
+    @And("tenant cancel all need confirmation booking request")
+    public void tenantCancelAllNeedConfirmationBookingRequest() {
+        kostDetail.cancelAllBookingWithDefaultReason();
+    }
 }
