@@ -17,6 +17,10 @@ public class ChatOwnerPO {
     Locator chatTextBox;
     Locator sendButton;
     Locator nantiSajaButton;
+    Locator acceptFromChatRoomButton;
+    Locator yaTerimaButton;
+
+    Locator notPaidFirstRent;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -30,6 +34,9 @@ public class ChatOwnerPO {
         chatTextBox = page.getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        acceptFromChatRoomButton = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
+        yaTerimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
+        notPaidFirstRent = page.getByTestId("booking-status-label");
     }
 
     /**
@@ -97,4 +104,22 @@ public class ChatOwnerPO {
         playwright.clickOn(sendButton);
     }
 
+    /**
+     * Click on accept chat button
+     *
+     */
+    public void clickAcceptFromChatOwner() {
+        playwright.waitTillLocatorIsVisible(acceptFromChatRoomButton);
+        playwright.clickOn(acceptFromChatRoomButton);
+        playwright.clickOn(yaTerimaButton);
+    }
+
+    /**
+     * Get notPaidFirstRent value text
+     *
+     * @return
+     */
+    public String getNotPaidFirstRentText(){
+        return playwright.getText(notPaidFirstRent);
+    }
 }
