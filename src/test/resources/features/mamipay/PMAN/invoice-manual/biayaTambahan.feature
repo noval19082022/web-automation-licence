@@ -80,3 +80,22 @@ Feature: Invoice Manual - Biaya Tambahan
       | Deposit                                     | -       | -     | -         | sehari        | 100000        | Deposit (sehari)                                    | -             | -               | Rp100.000             | Tidak               |
       | Penggantian kerusakan/kehilangan fasilitas  | -       | today | tomorrow  | Kursi         | 50000         | Penggantian kerusakan/kehilangan fasilitas (Kursi)  | today         | tomorrow        | Rp50.000              | Tidak               |
       | Lainnya                                     | sampah  | today | tomorrow  | 1 hari        | 7500          | sampah (1 hari)                                     | today         | tomorrow        | Rp7.500               | Ya                  |
+
+  @TEST_PMAN-5992 @pman-prod
+  Scenario: add multiple biaya tambahan
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And admin create multiple Invoice Manual "Biaya Tambahan"
+      | Nama Biaya    | Lainnya | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
+      | Parkir Mobil  | -       | today         | tomorrow        | automation pman | 50000         |
+      | Laundry       | -       | today         | tomorrow        | automation pman | 50000         |
+      | Deposit       | -       | -             | -               | automation pman | 50000         |
+      | Lainnya       | Sampah  | -             | -               | automation pman | 50000         |
+    Then "Biaya Tambahan" Invoice Manual
+      | Nama Biaya on Table             | Row |
+      | Parkir Mobil (automation pman)  | 1   |
+      | Laundry (automation pman)       | 2   |
+      | Deposit (automation pman)       | 3   |
+      | Sampah (automation pman)        | 4   |
