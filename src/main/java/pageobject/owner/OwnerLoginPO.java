@@ -40,6 +40,7 @@ public class OwnerLoginPO extends LoginPO {
     public OwnerDashboardPO clickOnLoginButton() {
         loginBtn.click();
         page.waitForLoadState(LoadState.LOAD);
+        page.waitForTimeout(5000);
         return new OwnerDashboardPO(page);
     }
 }

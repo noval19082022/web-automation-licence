@@ -31,6 +31,8 @@ public class KostDetailsPO {
     Locator successFavoritePopUp;
     Locator successUnfavoritePopUp;
     Locator shareKostButton;
+    Locator filterButton;
+    Locator needConfirmation;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -196,6 +198,8 @@ public class KostDetailsPO {
         this.propertyLocation = page.locator(".detail-kost-overview__area");
         this.roomAvailability = page.locator(".detail-kost-overview__availability");
         this.kosDetailPage = page.locator("detailKostContainer");
+        this.filterButton = page.locator(".filter-item-mobile:first-child span");
+        this.needConfirmation = page.locator("li:nth-child(2) button");
 
         //---------login popup---------------
         this.loginPopUp = page.locator("p[class='login-title']");
@@ -355,8 +359,8 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
+        playwright.pageScrollToDown(300);
         for (int i = 0; i < 4; i++) {
-            playwright.pageScrollToDown(300);
             if (ftueSlider.isVisible()) {
                 break;
             }
@@ -1543,5 +1547,12 @@ public class KostDetailsPO {
      */
     public String getFTUEBookingBenefitWording(int index) {
         return playwright.getText(ftueBookingBenefitText.nth(index));
+    }
+    /**
+     * Click on filter in riwayat booking
+     */
+    public void cancelAllBookingWithDefaultReason() {
+        filterButton.click();
+        needConfirmation.click();
     }
 }
