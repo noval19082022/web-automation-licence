@@ -132,4 +132,18 @@ public class TenantBookingSteps {
     public void tenantCancelAllNeedConfirmationBookingRequest() {
         kostDetail.cancelAllBookingWithDefaultReason();
     }
+
+    @When("tenant booking kost for {string} with DP")
+    public void tenantBookingKostForDP(String bookingTime) {
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate(bookingTime);
+        kostDetail.selectBookingPeriod("Per Bulan");
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        bookingForm.clickUbahButton();
+        bookingForm.selectPayWithDP();
+        bookingForm.clickSimpanButton();
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
 }

@@ -1,5 +1,5 @@
-@occupancyAndBilling @OB @BBM5 @BBM-5 @acceptFromChat  @noval123
-Feature: Accept Booking from Chat room
+@occupancyAndBilling @OB @BBM5 @BBM-3 @BBM-7 @acceptFromChat @noval123
+Feature: Accept Booking from Chat room with DP
 
   Scenario: Delete contract
     Given admin go to mamikos mamipay admin
@@ -21,17 +21,17 @@ Feature: Accept Booking from Chat room
     And tenant navigate to riwayat booking
     And tenant cancel all need confirmation booking request
 
-    @rentKostMonth
-  Scenario: Tenant booking Bulanan for Kost not set DP
-      Given user go to mamikos homepage
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password      |
-        | 08100000622   | 0890867321212 | qwerty123     |
-      And tenant search kost then go to kost details:
-        | kost name stag            | kost name prod            |
-        | Kost Automation new       | Kost Adi Auto FullPaid AddFee Deposit       |
-      And tenant booking kost for "today"
-      Then tenant should success booking kost
+  @rentKostMonthWithDP
+  Scenario: Tenant booking Bulanan for Kost set DP
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password      |
+      | 08100000622   | 0890867321212 | qwerty123     |
+    And tenant search kost then go to kost details:
+      | kost name stag            | kost name prod            |
+      | Kost Automation new       | Kost Adi Auto FullPaid AddFee Deposit       |
+    And tenant booking kost for "today" with DP
+    Then tenant should success booking kost
 
   @TEST_BBM-5 @acceptBooking
   Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
@@ -43,7 +43,7 @@ Feature: Accept Booking from Chat room
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
     And user click chat button in top bar owner home page
-    Then system display title "Belum bayar sewa pertama" after accept booking from chat room
+    Then system display title "Belum bayar DP" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
     When Owner can see name of Tenant is "Tenant Automation Accept Chat"

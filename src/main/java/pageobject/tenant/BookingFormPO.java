@@ -16,6 +16,9 @@ public class BookingFormPO {
     Locator successCancel;
     Locator okCancelButton;
     Locator rentDurationIncreaseButton;
+    Locator ubahButton;
+    Locator selectPayWithDP;
+    Locator simpanButton;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -29,6 +32,9 @@ public class BookingFormPO {
         this.okCancelButton = page.locator(".bg-c-button");
         this.cancelReasonButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Berubah pikiran/ada rencana lain")).locator("span");
         this.rentDurationIncreaseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus"));
+        this.ubahButton = page.locator(".booking-payment-option .booking-form-section__action .bg-c-text");
+        this.selectPayWithDP = page.locator("[for='bookingFormRadio-paymentSelect-0'] > .bg-c-radio__icon");
+        this.simpanButton = page.locator(".bg-c-button--secondary");
     }
 
     /**
@@ -111,5 +117,24 @@ public class BookingFormPO {
         }
     }
 
+    /**
+     * Click on ubah button on booking form
+     */
+    public void clickUbahButton() {
+        ubahButton.click();
+    }
 
+    /**
+     * Click on DP button on booking form
+     */
+    public void selectPayWithDP() {
+        selectPayWithDP.click();
+    }
+
+    /**
+     * Click on Simpan button on booking form
+     */
+    public void clickSimpanButton() {
+        simpanButton.click();
+    }
 }
