@@ -46,6 +46,11 @@ public class HomePO {
     Locator riwayatTransaksiMenu;
     Locator logOutButton;
 
+    //Content
+    private Locator seeAllPromoAds;
+    private Locator seeAllPromoOwner;
+    private Locator popularArea;
+
     //footer
     private Locator tentangKamiButton;
     private Locator kebijakanPrivasiButton;
@@ -79,6 +84,9 @@ public class HomePO {
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
+        this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
+        this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
+        this.popularArea = page.locator(".popular-area .popular-area-cards > a");
 
 
         //header
@@ -547,7 +555,29 @@ public class HomePO {
         btnMasuk.click();
     }
 
+    /**
+     * Click Masuk buttom
+     *
+     */
     public void EnterButton(){
         btnMasuk.click();
+    }
+
+    /**
+     * Click see all promo owner buttom
+     *
+     */
+    public void clickOnSeeAllPromoOwnerButton() {
+        playwright.pageScrollToDown(3000);
+        seeAllPromoOwner.click();
+    }
+
+    /**
+     * Click see all promo ads buttom
+     *
+     */
+    public void clickOnSeeAllPromoAdsButton() {
+        playwright.pageScrollToDown(300);
+        seeAllPromoAds.click();
     }
 }
