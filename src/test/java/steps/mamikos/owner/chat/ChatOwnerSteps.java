@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 
@@ -14,6 +15,7 @@ public class ChatOwnerSteps {
     Page page = ActiveContext.getActivePage();
     ChatOwnerPO chat = new ChatOwnerPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
+    OwnerDashboardPO owner = new OwnerDashboardPO(page);
 
     @And("user click chat button in top bar owner home page")
     public void userClickChatButtonInTopBarOwnerHomePage() {
@@ -77,5 +79,47 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isKostNameDisplayed());
         Assert.assertTrue(chat.isPriceKostDisplayed());
         Assert.assertTrue(chat.isSisaKamarDisplayed());
+    }
+
+    @And("user dismiss FTUE MARS and FTUE Broadcast")
+    public void userDismissFTUEMARSAndFTUEBroadcast() {
+        chat.dismissFTUEMars();
+        chat.dismissFTUEBroadcast();
+    }
+
+    @And("user open chatroom from {string}")
+    public void userOpenChatroomFrom(String inputText) {
+        chat.searchChatTenant(inputText);
+    }
+
+    @And("user cancel send chat on FTUE Before Chat")
+    public void userCancelSendChatOnFTUEBeforeChat() {
+        chat.clickBackOnFTUEBeforeChat();
+    }
+
+    @Then("user still see FTUE before send chat")
+    public void userStillSeeFTUEBeforeSendChat() {
+        Assert.assertTrue(chat.isFTUEBeforeChatPresent(), "FTUE Before send chat is not appear");
+        chat.clickCloseOnFTUEBeforeChat();
+    }
+
+    @Then("user see attachment button is disabled")
+    public void userSeeAttachmentButtonIsDisabled() {
+        Assert.assertTrue(chat.isAttachmentButtonDisabled(), "Button is enabled");
+    }
+
+    @And("user dismiss FTUE goldplus")
+    public void userDismissFTUEGoldplus() {
+        owner.dismissFTUEGoldplus();
+    }
+
+    @And("user dismiss FTUE MARS Goldplus and FTUE Broadcast")
+    public void userDismissFTUEMARSGoldplusAndFTUEBroadcast() {
+        chat.dismissFTUEMarsGPAndBroadCast();
+    }
+
+    @Then("user see attachment button is enabled")
+    public void userSeeAttachmentButtonIsEnabled() {
+        Assert.assertTrue(chat.isAttachmentButtonEnabled(), "Button is disabled");
     }
 }
