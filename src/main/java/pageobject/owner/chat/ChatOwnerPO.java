@@ -17,6 +17,11 @@ public class ChatOwnerPO {
     Locator chatTextBox;
     Locator sendButton;
     Locator nantiSajaButton;
+    Locator FTUEBeforeChat;
+    Locator backFTUEBeforeChat;
+    Locator closeFTUEBeforeChat;
+    Locator ownerRunsOutQuotaWording;
+    Locator attachmentButton;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -30,6 +35,11 @@ public class ChatOwnerPO {
         chatTextBox = page.getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        FTUEBeforeChat = page.getByText("Kuota chat room akan berkurang Kini berlaku sistem kuota chat mingguan. Jika lan");
+        backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
+        closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
+        ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
+        attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
     }
 
     /**
@@ -97,4 +107,68 @@ public class ChatOwnerPO {
         playwright.clickOn(sendButton);
     }
 
+    /**
+     * Dismiss FTUE Mars
+     */
+    public void dismissFTUEMars() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat cara kedua")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+    }
+
+    /**
+     * Dismiss FTUE Broadcast
+     */
+    public void dismissFTUEBroadcast() {
+        page.getByTestId("ftueTooltipStandard").click();
+        page.getByTestId("ftueTooltipComponent").getByRole(AriaRole.BUTTON).click();
+    }
+
+    /**
+     * Check FTUE before send chat is present
+     * @return true if appear
+     */
+    public boolean isFTUEBeforeChatPresent() {
+        return FTUEBeforeChat.isVisible();
+    }
+
+    /**
+     * Click back on FTUE Before chat FTUE Mars
+     */
+    public void clickBackOnFTUEBeforeChat() {
+        backFTUEBeforeChat.click();
+    }
+
+    /**
+     * Click close button on FTUE Before chat FTUE Mars
+     */
+    public void clickCloseOnFTUEBeforeChat() {
+        closeFTUEBeforeChat.click();
+    }
+
+    /**
+     * Check is attachment button disabled
+     * @return true if appear
+     */
+    public boolean isAttachmentButtonDisabled() {
+        return attachmentButton.isDisabled();
+    }
+
+    /**
+     * Check is attachment button enabled
+     * @return true if appear
+     */
+    public boolean isAttachmentButtonEnabled() {
+        return attachmentButton.isEnabled();
+    }
+
+    /**
+     * Dismiss FTUE Mars Godlplus
+     */
+    public void dismissFTUEMarsGPAndBroadCast() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+        page.getByRole(AriaRole.TOOLTIP, new Page.GetByRoleOptions().setName("Baru! Anda bisa menawarkan kos ke banyak orang lewat Broadcast Chat.")).getByRole(AriaRole.BUTTON).click();
+    }
 }
