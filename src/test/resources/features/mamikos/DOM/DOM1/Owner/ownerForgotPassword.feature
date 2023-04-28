@@ -65,14 +65,13 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "08912an"
     Then user get error message "Nomor handphone hanya dapat diisi dengan angka"
 
-#  @TEST_DOM-2230 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Phone number is more than 14 char
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their unregistered phone number "089125555555555"
-#    Then user get error message "Nomor handphone lebih dari 14 karakter."
-#
+  @TEST_DOM-2230 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Phone number is more than 14 char
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their unregistered phone number "089125555555555"
+    Then user get error message "Nomor handphone lebih dari 14 karakter."
+
 #  @TEST_DOM-2231 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Input empty phone number
 #    Given user navigates to "mamikos /"
