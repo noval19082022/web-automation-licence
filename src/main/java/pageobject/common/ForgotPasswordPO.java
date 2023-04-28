@@ -176,11 +176,15 @@ public class ForgotPasswordPO {
     /**
      * check if message appear
      *
-     * @return Boolean
+     * @return Boolean message is appear or got limiter 429(terjadi galat)
      * @input String message
      */
     public Boolean isMessageAppear(String message) {
-        return page.getByText(message).isVisible();
+        if (page.getByText(message).isVisible()) {
+            return page.getByText(message).isVisible();
+        } else {
+            return page.getByText("Terjadi galat. Silakan coba lagi.").isVisible();
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-@DOM1 @tester
+@DOM1
 Feature: Owner - Forgot Password
 
   @TEST_DOM-2235 @Automated @DOM @web-covered
