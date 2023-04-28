@@ -155,4 +155,24 @@ public class ForgotPasswordPO {
     public String getMessage(String message) {
         return page.getByText(message).textContent();
     }
+
+    /**
+     * check if message appear
+     *
+     * @return Boolean
+     * @input String message
+     */
+    public Boolean isMessageAppear(String message) {
+        return page.getByText(message).isVisible();
+    }
+
+    /**
+     * input OTP
+     */
+    public void fillOTP(String otp) {
+        page.getByRole(AriaRole.TEXTBOX).first().fill(String.valueOf(otp.charAt(0)));
+        page.getByRole(AriaRole.TEXTBOX).nth(1).fill(String.valueOf(otp.charAt(1)));
+        page.getByRole(AriaRole.TEXTBOX).nth(2).fill(String.valueOf(otp.charAt(2)));
+        page.getByRole(AriaRole.TEXTBOX).nth(3).fill(String.valueOf(otp.charAt(3)));
+    }
 }

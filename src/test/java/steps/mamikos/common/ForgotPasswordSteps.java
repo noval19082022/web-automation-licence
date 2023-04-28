@@ -2,6 +2,7 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -48,6 +49,11 @@ public class ForgotPasswordSteps {
         forgotPassword.selectOTPByWA();
     }
 
+    @And("user input invalid code otp {string}")
+    public void user_input_invalid_code_otp(String otp) {
+        forgotPassword.fillOTP(otp);
+    }
+
     @Then("user verify {string} and click button resend OTP")
     public void kirim_ulang_otp_verification(String text) {
         playwright.hardWait(60_000);
@@ -79,5 +85,10 @@ public class ForgotPasswordSteps {
     @Then("user verify otp form appear on page send OTP {string}")
     public void otp_message(String message) {
         Assert.assertTrue(forgotPassword.getMessage(message).contains(message), "Message is not equal to " + message);
+    }
+
+    @Then("user verify invalid OTP message {string}")
+    public void invalid_otp_message(String message) {
+        Assert.assertTrue(forgotPassword.isMessageAppear(message), "Message is not equal to " + message);
     }
 }

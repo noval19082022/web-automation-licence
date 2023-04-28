@@ -103,16 +103,15 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "085275574561"
     Then user get error message "Nomor HP tidak terdaftar sebagai pemilik kos."
 
-#  @TEST_DOM-2235 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Use Invalid OTP
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their registered phone number "083843666868" and click send button
-#    And user click otp via wa on page "Pilih Metode Verifikasi"
-#    And user input invalid code otp "0000"
-#    Then user verify invalid OTP message "Kode verifikasi salah." "Mohon masukkan kode verifikasi yang kami kirim."
-#
+  @TEST_DOM-2235 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Use Invalid OTP
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their registered phone number "083843666868"
+    And user choose verification by WA
+    And user input invalid code otp "0000"
+    Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
+
 #  @TEST_DOM-2236 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Cancel verification page input OTP and ubah password
 #    Given user navigates to "mamikos /"
