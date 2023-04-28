@@ -121,18 +121,16 @@ Feature: Owner - Forgot Password
     And user click back button on page otp
     Then user see popup verifikasi batalkan proses "Yakin batalkan proses verifikasi?"
 
-#  @TEST_DOM-2237 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to SMS
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their registered phone number "085941399178" and click send button
-#    And user click otp via sms on page "Pilih Metode Verifikasi"
-#    And user click back button on page otp
-#    And user click ya, batalkan
-#    And user click otp via sms on page "Pilih Metode Verifikasi"
-#    Then user see toast message "Mohon tunggu" "detik lagi untuk kirim ulang kode verifikasi." in forgot password
-#
+  @TEST_DOM-2237 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to SMS
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their registered phone number "083843666868"
+    And user choose verification by sms
+    And user click back button, batalkan
+    And user choose verification by sms
+    Then user see toast message "Mohon tunggu" "detik lagi untuk kirim ulang kode verifikasi." in forgot password
+
 #  @TEST_DOM-2238 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to WA
 #    Given user navigates to "mamikos /"

@@ -91,6 +91,9 @@ public class ForgotPasswordPO {
      * Choose SMS to send OTP
      */
     public void selectOTPBySMS() {
+        if (pilihMethodeVerifikasiBtn.isVisible()) {
+            pilihMethodeVerifikasiBtn.click();
+        }
         sendOtpBySMSBtn.click();
     }
 
@@ -125,7 +128,9 @@ public class ForgotPasswordPO {
      */
     public void backButtonFromSendOTPPage() {
         backBtn.click();
-        batalkanConfirmationBtn.click();
+        if (batalkanConfirmationBtn.isVisible()) {
+            batalkanConfirmationBtn.click();
+        }
     }
 
     /**

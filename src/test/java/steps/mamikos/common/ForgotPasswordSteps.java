@@ -59,9 +59,20 @@ public class ForgotPasswordSteps {
         forgotPassword.backButton();
     }
 
+    @And("user click back button, batalkan")
+    public void user_click_back_batalkan() {
+        forgotPassword.backButtonFromSendOTPPage();
+    }
+
     @Then("user see popup verifikasi batalkan proses {string}")
     public void verification_msg(String message) {
         Assert.assertTrue(forgotPassword.isMessageAppear(message), "Message is not equal to " + message);
+    }
+
+    @Then("user see toast message {string} {string} in forgot password")
+    public void toastMsg(String message1, String message2) {
+        Assert.assertTrue(forgotPassword.isMessageAppear(message1), "Message is not equal to " + message1);
+        Assert.assertTrue(forgotPassword.isMessageAppear(message2), "Message is not equal to " + message2);
     }
 
     @Then("user verify {string} and click button resend OTP")
