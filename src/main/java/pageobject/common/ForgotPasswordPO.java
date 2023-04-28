@@ -121,10 +121,19 @@ public class ForgotPasswordPO {
 
     /**
      * Back Button From Send OTP Page
+     * And click pop up confirmation
      */
     public void backButtonFromSendOTPPage() {
         backBtn.click();
         batalkanConfirmationBtn.click();
+    }
+
+    /**
+     * Back Button From Send OTP Page
+     */
+    public void backButton() {
+        playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.TEXTBOX).first());
+        backBtn.click();
     }
 
     /**

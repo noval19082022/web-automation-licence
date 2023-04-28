@@ -54,6 +54,16 @@ public class ForgotPasswordSteps {
         forgotPassword.fillOTP(otp);
     }
 
+    @And("user click back button on page otp")
+    public void user_click_back() {
+        forgotPassword.backButton();
+    }
+
+    @Then("user see popup verifikasi batalkan proses {string}")
+    public void verification_msg(String message) {
+        Assert.assertTrue(forgotPassword.isMessageAppear(message), "Message is not equal to " + message);
+    }
+
     @Then("user verify {string} and click button resend OTP")
     public void kirim_ulang_otp_verification(String text) {
         playwright.hardWait(60_000);
