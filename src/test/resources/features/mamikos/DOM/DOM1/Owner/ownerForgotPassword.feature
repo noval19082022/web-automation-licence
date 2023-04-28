@@ -96,14 +96,13 @@ Feature: Owner - Forgot Password
     And user choose verification by sms
     Then user verify otp form appear on page send OTP "Mohon isi kolom berikut dengan kode verifikasi yang kami kirimkan ke ********6868 melalui SMS."
 
-#  @TEST_DOM-2234 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] User use number login via facebook on owner feature
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their unregistered phone number "085275574561"
-#    Then user get error message "Nomor HP tidak terdaftar sebagai pemilik kos."
-#
+  @TEST_DOM-2234 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] User use number login via facebook on owner feature
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their unregistered phone number "085275574561"
+    Then user get error message "Nomor HP tidak terdaftar sebagai pemilik kos."
+
 #  @TEST_DOM-2235 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Use Invalid OTP
 #    Given user navigates to "mamikos /"
