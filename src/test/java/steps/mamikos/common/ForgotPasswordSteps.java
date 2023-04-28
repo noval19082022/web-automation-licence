@@ -28,6 +28,11 @@ public class ForgotPasswordSteps {
         forgotPassword.chooseVerificationMethod();
     }
 
+    @When("user fill their unregistered phone number {string}")
+    public void input_phone_number_unregist(String phoneNumber) {
+        forgotPassword.fillPhoneNumber(phoneNumber);
+    }
+
     @When("user choose verification by sms")
     public void user_choose_verify_by_sms() {
         forgotPassword.selectOTPBySMS();
@@ -54,5 +59,10 @@ public class ForgotPasswordSteps {
     public void user_get_active_title(String title) {
         Assert.assertEquals(playwright.getActivePageTitle(), "Lupa Password Pemilik - Mamikos", "Active page title is not equal to Lupa Password Pemilik - Mamikos");
         Assert.assertTrue(forgotPassword.getTitleVerifikasiPage().contains(title), "Title is not equal to " + title);
+    }
+
+    @Then("user get error message {string}")
+    public void user_get_error_message(String message) {
+        Assert.assertTrue(forgotPassword.getErrorMessage().contains(message), "Error message is not equal to " + message);
     }
 }

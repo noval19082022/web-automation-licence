@@ -30,22 +30,20 @@ Feature: Owner - Forgot Password
     And user fill their registered phone number "083843666868"
     Then user verify on page "Pilih Metode Verifikasi"
 
-#  @TEST_DOM-2225 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Use number not registered
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their unregistered phone number "08743333999"
-#    Then user get error message "Masukkan nomor handphone yang terdaftar."
-#
+  @TEST_DOM-2225 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Use number not registered
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their unregistered phone number "08743333999"
+    Then user get error message "Masukkan nomor handphone yang terdaftar."
+
 #  @TEST_DOM-2226 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Wrong phone number format
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
 #    And user fill their unregistered phone number "09129299222"
 #    Then user get error message "Nomor handphone harus diawali dengan 08"
-#
+
 #  @TEST_DOM-2227 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Phone number less than 8 characters
 #    Given user navigates to "mamikos /"
