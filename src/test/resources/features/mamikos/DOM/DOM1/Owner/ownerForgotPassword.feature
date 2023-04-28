@@ -44,13 +44,12 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "09129299222"
     Then user get error message "Nomor handphone harus diawali dengan 08"
 
-#  @TEST_DOM-2227 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Phone number less than 8 characters
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their unregistered phone number "0812923"
-#    Then user get error message "Nomor handphone kurang dari 8 karakter."
+  @TEST_DOM-2227 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Phone number less than 8 characters
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their unregistered phone number "0812923"
+    Then user get error message "Nomor handphone kurang dari 8 karakter."
 #
 #  @TEST_DOM-2228 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Phone number contains alphabet or symbol
