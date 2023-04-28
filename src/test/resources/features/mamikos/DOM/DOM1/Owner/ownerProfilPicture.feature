@@ -1,6 +1,5 @@
-@DOM
+@DOM1
 Feature: Owner - Profile Picture
-
 
   @TEST_DOM-2284 @Automated @DOM @web-covered
   Scenario: [Setelan Akun][Profile Picture] Profile Picture is null
