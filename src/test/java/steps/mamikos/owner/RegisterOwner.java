@@ -78,4 +78,14 @@ public class RegisterOwner {
         }
         Assert.assertTrue(counter >= character, "Name is less than " + character);
     }
+
+    @Then("user verify profile picture is null")
+    public void userVerifyProfilePictureIsNull() {
+        Assert.assertTrue(ownerRegister.isProfilePictureNul(), "Profile picture is not null");
+    }
+
+    @Then("user verify profile picture is show")
+    public void userVerifyProfilePictureIsShow() {
+        Assert.assertTrue(ownerRegister.isProfilePictureNotNull(), "Profile picture is null");
+    }
 }
