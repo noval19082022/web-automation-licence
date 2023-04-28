@@ -64,11 +64,27 @@ public class ForgotPasswordPO {
     }
 
     /**
+     * clear Phone Number On Owner or Tenant Login Page
+     */
+    public void clearInputPhoneNumber() {
+        inputPhoneNumber.clear();
+    }
+
+    /**
      * Choose Verification Method
      */
     public void chooseVerificationMethod() {
         playwright.waitTillLocatorIsVisible(pilihMethodeVerifikasiBtn);
         pilihMethodeVerifikasiBtn.click();
+    }
+
+    /**
+     * button Verification Method is disable
+     *
+     * @return boolean
+     */
+    public Boolean buuttonVerificationMethodIsDisable() {
+        return pilihMethodeVerifikasiBtn.isDisabled();
     }
 
     /**

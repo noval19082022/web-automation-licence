@@ -33,6 +33,11 @@ public class ForgotPasswordSteps {
         forgotPassword.fillPhoneNumber(phoneNumber);
     }
 
+    @When("user clear their unregistered phone number")
+    public void clear_input_phone_number_unregist() {
+        forgotPassword.clearInputPhoneNumber();
+    }
+
     @When("user choose verification by sms")
     public void user_choose_verify_by_sms() {
         forgotPassword.selectOTPBySMS();
@@ -64,5 +69,10 @@ public class ForgotPasswordSteps {
     @Then("user get error message {string}")
     public void user_get_error_message(String message) {
         Assert.assertTrue(forgotPassword.getErrorMessage(message).contains(message), "Error message is not equal to " + message);
+    }
+
+    @Then("user see button choose verify method is disabled")
+    public void verify_button_is_disable() {
+        Assert.assertTrue(forgotPassword.buuttonVerificationMethodIsDisable());
     }
 }
