@@ -101,6 +101,9 @@ public class ForgotPasswordPO {
      * Choose WhatsApp to send OTP
      */
     public void selectOTPByWA() {
+        if (pilihMethodeVerifikasiBtn.isVisible()) {
+            pilihMethodeVerifikasiBtn.click();
+        }
         sendOtpByWABtn.click();
     }
 

@@ -75,6 +75,11 @@ public class ForgotPasswordSteps {
         Assert.assertTrue(forgotPassword.isMessageAppear(message2), "Message is not equal to " + message2);
     }
 
+    @Then("user verify otp form appear on page OTP {string}")
+    public void verification_msg_otp(String message) {
+        Assert.assertTrue(forgotPassword.isMessageAppear(message), "Message is not equal to " + message);
+    }
+
     @Then("user verify {string} and click button resend OTP")
     public void kirim_ulang_otp_verification(String text) {
         playwright.hardWait(60_000);
