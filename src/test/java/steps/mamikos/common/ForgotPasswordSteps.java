@@ -63,6 +63,6 @@ public class ForgotPasswordSteps {
 
     @Then("user get error message {string}")
     public void user_get_error_message(String message) {
-        Assert.assertTrue(forgotPassword.getErrorMessage().contains(message), "Error message is not equal to " + message);
+        Assert.assertTrue(forgotPassword.getErrorMessage(message).contains(message), "Error message is not equal to " + message);
     }
 }

@@ -21,7 +21,6 @@ public class ForgotPasswordPO {
     private Locator backBtn;
     private Locator batalkanConfirmationBtn;
     private Locator pilihMethodeVerifikasiTitle;
-    private Locator getErrorMessagePhone;
 
 
     public ForgotPasswordPO(Page page) {
@@ -39,7 +38,6 @@ public class ForgotPasswordPO {
         this.backBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.batalkanConfirmationBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, batalkan"));
         this.pilihMethodeVerifikasiTitle = page.getByText("Pilih Metode Verifikasi");
-        this.getErrorMessagePhone = page.getByText("Masukkan nomor handphone yang terdaftar.");
     }
 
     /**
@@ -126,9 +124,9 @@ public class ForgotPasswordPO {
      * Get error message
      *
      * @return String error message
+     * @input String message
      */
-    public String getErrorMessage() {
-        playwright.waitTillLocatorIsVisible(getErrorMessagePhone);
-        return getErrorMessagePhone.textContent();
+    public String getErrorMessage(String message) {
+        return page.getByText(message).textContent();
     }
 }
