@@ -80,15 +80,14 @@ Feature: Owner - Forgot Password
     And user clear their unregistered phone number
     Then user see button choose verify method is disabled
 
-#  @TEST_DOM-2232 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] Send OTP via WA
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user click login with owner and click forgot password button
-#    And user fill their registered phone number "083843666868" and click send button
-#    And user click otp via wa on page "Pilih Metode Verifikasi"
-#    Then user verify otp form appear on page send OTP "Mohon isi kolom berikut dengan kode verifikasi yang kami kirimkan ke ********6868 melalui WhatsApp."
-#
+  @TEST_DOM-2232 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] Send OTP via WA
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their registered phone number "083843666868"
+    And user choose verification by WA
+    Then user verify otp form appear on page send OTP "Mohon isi kolom berikut dengan kode verifikasi yang kami kirimkan ke ********6868 melalui WhatsApp."
+
 #  @TEST_DOM-2233 @Automated @DOM @web-covered
 #  Scenario: [WEB][Forgot Password][Owner] Send OTP via sms
 #    Given user navigates to "mamikos /"

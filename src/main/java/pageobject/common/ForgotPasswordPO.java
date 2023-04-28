@@ -145,4 +145,14 @@ public class ForgotPasswordPO {
     public String getErrorMessage(String message) {
         return page.getByText(message).textContent();
     }
+
+    /**
+     * Get message
+     *
+     * @return String message
+     * @input String message
+     */
+    public String getMessage(String message) {
+        return page.getByText(message).textContent();
+    }
 }

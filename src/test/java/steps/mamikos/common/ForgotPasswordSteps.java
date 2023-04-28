@@ -75,4 +75,9 @@ public class ForgotPasswordSteps {
     public void verify_button_is_disable() {
         Assert.assertTrue(forgotPassword.buuttonVerificationMethodIsDisable());
     }
+
+    @Then("user verify otp form appear on page send OTP {string}")
+    public void otp_message(String message) {
+        Assert.assertTrue(forgotPassword.getMessage(message).contains(message), "Message is not equal to " + message);
+    }
 }
