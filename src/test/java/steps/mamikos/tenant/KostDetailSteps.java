@@ -37,6 +37,21 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isRoomAvailabilityDisplayed(), "Property Room AvailabilityLabel is not displayed");
     }
 
+    @And("user want to dismiss FTUE")
+    public void kosRule() {
+        kostDetail.dismissFTUE();
+    }
+
+    @Then("user will see rule {string}")
+    public void user_can_see_rule(String rule) {
+        Assert.assertTrue(kostDetail.isRuleTextPresent(rule));
+    }
+
+    @And("user want to booking this kos")
+    public void user_click_booking_button() {
+        kostDetail.clickOnBookingButton();
+    }
+
     //------------ promo section ----------------
     @When("user want to select kost on promo section")
     public void userSelectKostOnPromoSection() {

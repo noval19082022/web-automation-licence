@@ -68,15 +68,35 @@ public class TenantBookingSteps {
         bookingForm.closeCancelPopUp();
     }
 
+    @And("user cancel booking with reason {string}")
+    public void user_cancel_booking_with_reason(String reason) throws InterruptedException{
+        page.navigate("https://jambu.kerupux.com/user/booking/");
+        bookingForm = new BookingFormPO(page);
+        bookingForm.cancelBookingWithReason(reason);
+        if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {
+            Assert.assertEquals(bookingForm.getSuccessCancelText().trim(), "Booking Anda berhasil dibatalkan");
+        }
+        bookingForm.closeCancelPopUp();
+    }
+
     @When("tenant booking kost for {string}")
     public void tenantBookingKostFor(String bookingTime) {
-        kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate(bookingTime);
-        kostDetail.selectBookingPeriod("Per Bulan");
-        bookingForm = kostDetail.clickOnAjukanSewaButton();
-        bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
-        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        if (bookingTime.equalsIgnoreCase("today")){
+            kostDetail.dismissFTUE();
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+            bookingForm.clickOnAjukanSewaButton();
+            bookingForm.clickOnBookingConfirmationCheckmark();
+            successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        } else if (bookingTime.equalsIgnoreCase("Tomorrow")){
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+          //  bookingForm.clickOnAjukanSewaButton();
+         //   bookingForm.clickOnBookingConfirmationCheckmark();
+         //   successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        }
     }
 
     @When("tenant checkin kost from riwayat booking")
@@ -127,5 +147,37 @@ public class TenantBookingSteps {
         searchPO = homePO.clickOnSearchButton();
         kostDetail = searchPO.searchByText(kosName);
         kostDetail.waitTillKostDetailPageVisible();
+    }
+    @And("tenant cancel all need confirmation booking request")
+    public void tenantCancelAllNeedConfirmationBookingRequest() {
+        kostDetail.cancelAllBookingWithDefaultReason();
+    }
+
+    @And("user click Save Draft Button")
+    public void userClickSaveDraftButton() {
+        kostDetail.clickSaveDraftButton();
+    }
+    @And("user click back button")
+    public void userClickBackButton() {
+        kostDetail.clickBackButton();
+    }
+
+    @Then("user can see shortcut homepage with {string}")
+    public void userCanSeeShortcutHomepageWith(String kosCheckedByOwner) {
+        Assert.assertEquals(kostDetail.getKosCheckedByOwner(), kosCheckedByOwner, "Pengajuan sewa lagi dicek pemilik");
+    }
+
+    @And("user click on Draft menu")
+    public void userClickOnDraftMenu() {
+        kostDetail.clickOnDraftMenu();
+    }
+    @And("user click delete button on tab one draft booking")
+    public void userClickDeleteButtonOnTabOneDraftBooking() {
+        kostDetail.clickDeleteButtonOnTabOneDraftBooking();
+    }
+
+    @And("user click Mau Coba Dong section at homepage")
+    public void userClickMauCobaDongSectionAtHomepage() {
+        kostDetail.clickMauCobaDongSectionAtHomepage();
     }
 }

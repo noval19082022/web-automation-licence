@@ -29,4 +29,6 @@ public class Mamikos {
     public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
     public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
     public static final String PMS_URL = JavaHelpers.getPropertyValue(MAMIKOS, "PMSUrl_" + ENV);
+    public static final String OWNERPAGE_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKos");
+
 }

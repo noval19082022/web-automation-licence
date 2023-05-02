@@ -134,4 +134,15 @@ public class HomepageSteps {
     public void userCanSeeCopyrightIs(String copyright) {
         Assert.assertEquals(home.getCopyrightText(), copyright, "Copyright is not as expected!");
     }
+
+    @When("user see all owner promo")
+    public void userSeeAllOwnerPromo() {
+        home.clickOnSeeAllPromoOwnerButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user see all promo ads")
+    public void userSeeAllPromoAds() {
+        home.clickOnSeeAllPromoAdsButton();
+    }
 }

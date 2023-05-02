@@ -1,0 +1,33 @@
+package steps.mamikos.owner;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
+import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
+import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import utilities.PlaywrightHelpers;
+
+public class OwnerRejectBookingSteps {
+    Page page = ActiveContext.getActivePage();
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+    PengajuanBookingPO pengajuanBooking;
+    BillAndBookingManagementPO billBookingManage;
+
+    @When("owner reject booking")
+    public void ownerRejectBooking() {
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        billBookingManage = pengajuanBooking.ownerRejectBooking();
+        billBookingManage.ownerChooseReasonReject();
+        billBookingManage.clickPilihButton();
+    }
+
+
+    @And("owner see all kost terisi")
+    public void ownerSeeAllKostTerisi() {
+
+    }
+}

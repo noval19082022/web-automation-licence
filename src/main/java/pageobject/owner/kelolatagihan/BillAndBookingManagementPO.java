@@ -2,6 +2,7 @@ package pageobject.owner.kelolatagihan;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -16,6 +17,11 @@ public class BillAndBookingManagementPO {
     Locator simpanButton;
     Locator okButton;
     String roomAllotmentWrapper;
+    Locator reasonChoice;
+    Locator IUnderstandBtn;
+    Locator statusTandC;
+    Locator pilihButton;
+    Locator doneButton;
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -28,7 +34,11 @@ public class BillAndBookingManagementPO {
         simpanButton = playwright.locatorByRoleSetName(locator.roleButton, "Simpan");
         okButton = playwright.locatorByRoleSetName(locator.roleButton, "OK");
         roomAllotmentWrapper = "#roomAllotmentWrapper.modal.fade";
-
+        IUnderstandBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        statusTandC = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+        reasonChoice = page.locator(".reject-modal__reason-option-overlay").first();
+        doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
     }
 
     /**
@@ -90,5 +100,24 @@ public class BillAndBookingManagementPO {
      */
     public void clickOnOneRooms() {
         pilihKamarRadio.nth(1).click();
+    }
+
+    /**
+     * choose reason to reject booking
+     */
+    public void ownerChooseReasonReject () {
+        playwright.clickOn(reasonChoice);
+        playwright.waitTillLocatorIsVisible(IUnderstandBtn);
+        playwright.clickOn(IUnderstandBtn);
+        playwright.clickOn(statusTandC);
+    }
+
+    /**
+     * Click pilih button after owner reject  tenant
+     */
+    public PengajuanBookingPO clickPilihButton() {
+        playwright.clickOn(pilihButton);
+        playwright.clickOn(doneButton);
+        return new PengajuanBookingPO(page);
     }
 }

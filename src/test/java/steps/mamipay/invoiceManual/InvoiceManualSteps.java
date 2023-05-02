@@ -447,5 +447,19 @@ public class InvoiceManualSteps {
             }
         }
     }
+
+    @When("admin delete all {string} or sewa on Invoice Manual")
+    public void admin_delete_all_or_sewa_on_Invoice_Manual(String invType){
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.deleteAllBiaya();
+        }
+    }
+
+    @Then("the empty state of {string} is displayed")
+    public void the_empty_state_of_is_displayed(String invType){
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.assertEmptyStateBiayaTambahan();
+        }
+    }
     //---End of Biaya Tambahan Pop Up---//
 }

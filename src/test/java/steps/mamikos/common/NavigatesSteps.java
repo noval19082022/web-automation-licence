@@ -82,7 +82,7 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
 
-    @When("tenant/user navigate to tagihan kost saya")
+    @When("tenant user navigate to tagihan kost saya")
     public void userNavigateToTagihanKostSaya() {
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING, 30000.0, LoadState.LOAD);
     }
@@ -157,5 +157,10 @@ public class NavigatesSteps {
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
         playwright.navigateTo(Mamikos.PMS_URL);
+    }
+
+    @When("owner navigates to property saya kos")
+    public void userNavigateToPropertySayaKos() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
     }
 }
