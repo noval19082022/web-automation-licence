@@ -2,6 +2,7 @@ package pageobject.owner.kelolatagihan;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -10,25 +11,34 @@ public class BillAndBookingManagementPO {
     private PlaywrightHelpers playwright;
     private LocatorHelpers locator;
     Locator nomorKamarInput;
-    Locator pilihDiTempatRadio;
+    Locator pilihKamarRadio;
     Locator terapkanButton;
     Locator lanjutkanButton;
     Locator simpanButton;
     Locator okButton;
     String roomAllotmentWrapper;
+    Locator reasonChoice;
+    Locator IUnderstandBtn;
+    Locator statusTandC;
+    Locator pilihButton;
+    Locator doneButton;
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         nomorKamarInput = page.getByPlaceholder("Silakan pilih nomor kamar");
-        pilihDiTempatRadio = page.locator(".mami-radio").first();
+        pilihKamarRadio = page.locator(".mami-radio");
         terapkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Terapkan");
         lanjutkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Lanjutkan");
         simpanButton = playwright.locatorByRoleSetName(locator.roleButton, "Simpan");
         okButton = playwright.locatorByRoleSetName(locator.roleButton, "OK");
         roomAllotmentWrapper = "#roomAllotmentWrapper.modal.fade";
-
+        IUnderstandBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        statusTandC = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+        reasonChoice = page.locator(".reject-modal__reason-option-overlay").first();
+        doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
     }
 
     /**
@@ -37,7 +47,7 @@ public class BillAndBookingManagementPO {
     public void clickOnRoomNumberInput() throws InterruptedException {
         try {
             int maxLoop = 0;
-            while (!pilihDiTempatRadio.isVisible() && maxLoop < 3) {
+            while (!pilihKamarRadio.first().isVisible() && maxLoop < 3) {
                 playwright.forceClickOn(nomorKamarInput);
                 page.waitForTimeout(3000);
                 maxLoop++;
@@ -53,7 +63,7 @@ public class BillAndBookingManagementPO {
      * Click on pilih ditempat radio
      */
     public void clickOnPilihDitempat() {
-        pilihDiTempatRadio.click();
+        pilihKamarRadio.first().click();
     }
 
     /**
@@ -82,6 +92,32 @@ public class BillAndBookingManagementPO {
      */
     public PengajuanBookingPO clickOkButton() {
         playwright.clickAndWaitNavigation(okButton);
+        return new PengajuanBookingPO(page);
+    }
+
+    /**
+     * Click on one of the rooms radio
+     */
+    public void clickOnOneRooms() {
+        pilihKamarRadio.nth(1).click();
+    }
+
+    /**
+     * choose reason to reject booking
+     */
+    public void ownerChooseReasonReject () {
+        playwright.clickOn(reasonChoice);
+        playwright.waitTillLocatorIsVisible(IUnderstandBtn);
+        playwright.clickOn(IUnderstandBtn);
+        playwright.clickOn(statusTandC);
+    }
+
+    /**
+     * Click pilih button after owner reject  tenant
+     */
+    public PengajuanBookingPO clickPilihButton() {
+        playwright.clickOn(pilihButton);
+        playwright.clickOn(doneButton);
         return new PengajuanBookingPO(page);
     }
 }

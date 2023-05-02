@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.awt.*;
+
 public class PengajuanBookingPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -13,6 +15,9 @@ public class PengajuanBookingPO {
     private Locator terimaButton;
     private Locator yaTerimaButton;
     private Locator terimaButtonWithName;
+    private Locator tolakButton;
+    private Locator yaTolakButton;
+
 
     public PengajuanBookingPO(Page page) {
         this.page = page;
@@ -20,6 +25,8 @@ public class PengajuanBookingPO {
         locator = new LocatorHelpers(page);
         this.terimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Terima");
         this.yaTerimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Terima");
+        this.tolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Tolak");
+        this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
     }
 
     /**
@@ -42,4 +49,14 @@ public class PengajuanBookingPO {
         yaTerimaButton.click();
         return new BillAndBookingManagementPO(page);
     }
+
+    /**
+     * Click on tolak and go to popup reason reject booking
+     */
+    public BillAndBookingManagementPO ownerRejectBooking() {
+        tolakButton.click();
+        yaTolakButton.click();
+        return new BillAndBookingManagementPO(page);
+    }
+
 }

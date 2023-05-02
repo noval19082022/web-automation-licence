@@ -54,4 +54,17 @@ public class OwnerAcceptBookingSteps {
         billBookingManage.clickOnSimpan();
         billBookingManage.clickOkButton();
     }
+
+    @When("owner accept booking and select the room")
+    public void ownerAcceptBookingAndSelectTheRoom() throws InterruptedException {
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        billBookingManage = pengajuanBooking.ownerAcceptBooking();
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnOneRooms();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
+        billBookingManage.clickOkButton();
+    }
 }

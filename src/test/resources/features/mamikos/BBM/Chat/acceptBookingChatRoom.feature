@@ -44,3 +44,7 @@ Feature: Accept Booking from Chat room
     And user clicks on Accept button from chat room
     And user click chat button in top bar owner home page
     Then system display title "Belum bayar sewa pertama" after accept booking from chat room
+
+    #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
+    When Owner can see name of Tenant is "Tenant Automation Accept Chat"
+    Then Owner can see Kost name, harga kos, sisa kamar
