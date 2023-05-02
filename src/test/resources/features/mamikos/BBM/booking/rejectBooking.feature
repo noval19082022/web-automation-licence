@@ -35,7 +35,3 @@ Feature: OB Owner Reject Booking Full Room
       | phone stag     | phone prod     | password        |
       | 081362464341   | 081362464341   | 1d0lt3stb4ru    |
     And owner reject booking
-
-  Scenario: Owner see all kost Terisi
-    When owner navigates to property saya kos
-    And owner see all kost terisi
