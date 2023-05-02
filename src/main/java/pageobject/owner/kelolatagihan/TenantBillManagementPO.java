@@ -13,12 +13,16 @@ public class TenantBillManagementPO {
     Locator filterKos;
     Locator filterMonth;
     Locator invoiceList;
+    Locator sudahByrTab;
+    Locator successTransferLabel;
     public TenantBillManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         filterKos = page.locator("div.bm-filter__kost");
         filterMonth = page.locator("input[type=\"text\"]").first();
         invoiceList = page.getByTestId("invoice-status-label").last();
+        sudahByrTab = page.getByText("Sudah bayar");
+        successTransferLabel = page.getByTestId("invoice-status-label");
     }
 
     /**
@@ -88,5 +92,20 @@ public class TenantBillManagementPO {
         if(!filterKos.isVisible()) {
             page.reload();
         }
+    }
+
+    /**
+     * clicks on Sudah bayar tab
+     */
+    public void clicksOnSudahBayarTab() {
+        playwright.clickOn(sudahByrTab);
+    }
+
+    /**
+     * Get Label success transfer
+     * @return String data type of label success
+     */
+    public String getLabelSuccessTransfer() {
+        return playwright.getText(successTransferLabel);
     }
 }

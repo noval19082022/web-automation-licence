@@ -1,0 +1,41 @@
+@booking @rejectBooking @BBM81
+Feature: OB Owner Reject Booking Full Room
+
+  Scenario: Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant kost name:
+      | kostName stag                  | kostName prod            |
+      | Dont Starve To Get Her         | Dont Starve To Get Her   |
+    And admin terminate contract
+    Then admin should success terminate contract
+
+  @continue
+  Scenario: Cancel Booking if Tenant Have Booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     |  phone prod     | password  |
+      | 0890000000131  |  0890000000131  | qwerty123 |
+    And user cancel booking
+
+  Scenario: Tenant Booking Kost
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag            | kost name prod            |
+      | Dont Starve To Get Her    | Dont Starve To Get Her    |
+    And tenant booking kost
+    Then tenant should success booking kost
+
+  @continue
+  Scenario: Owner Reject Booking Full Room
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password        |
+      | 081362464341   | 081362464341   | 1d0lt3stb4ru    |
+    And owner reject booking
+
+  Scenario: Owner see all kost Terisi
+    When owner navigates to property saya kos
+    And owner see all kost terisi
