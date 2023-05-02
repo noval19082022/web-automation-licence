@@ -80,7 +80,6 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isPriceKostDisplayed());
         Assert.assertTrue(chat.isSisaKamarDisplayed());
     }
-
     @And("user dismiss FTUE MARS and FTUE Broadcast")
     public void userDismissFTUEMARSAndFTUEBroadcast() {
         chat.dismissFTUEMars();
