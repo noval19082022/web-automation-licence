@@ -87,6 +87,28 @@ public class TenantBookingSteps {
         riwayatBooking.clickOnSelesaiAndKeKostSaya();
     }
 
+    @And("user will see Jumlah Penyewa can add until 3 Penyewa")
+    public void add_three_penyewa() {
+        bookingForm = new BookingFormPO(page);
+        bookingForm.addJumlahPenyewa(3);
+    }
+
+    @And("user will see enable and tick Check box {string}")
+    public void checkmark(String checkmarkname) {
+        bookingForm.checkMark(checkmarkname);
+    }
+
+    @When("user want to upload berkas wajib if user haven't upload it")
+    public void uploadBerkas() {
+        bookingForm.uploadBerkasBooking();
+    }
+
+    @And("user can set Ajukan Sewa")
+    public void ajukanSewa() {
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
 
     @And("tenant booking kost for {string} and input rent duration equals to {int}")
     public void tenantBookingKostForAndInputRentDurationEqualsTo(String bookingTime, int duration) throws InterruptedException {

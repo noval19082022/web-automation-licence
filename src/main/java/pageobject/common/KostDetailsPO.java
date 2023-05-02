@@ -349,6 +349,13 @@ public class KostDetailsPO {
     }
 
     /**
+     * click booking
+     */
+    public void clickOnBookingButton() {
+        bookingButton.click();
+    }
+
+    /**
      * Wait until kost detail kontainer id is visible
      */
     public void waitTillKostDetailPageVisible() {
@@ -1554,5 +1561,21 @@ public class KostDetailsPO {
     public void cancelAllBookingWithDefaultReason() {
         filterButton.click();
         needConfirmation.click();
+    }
+
+    /**
+     * @param text is present
+     * @return boolean
+     */
+    public Boolean isRuleTextPresent(String text) {
+        if (seeAllKosRuleButton.isVisible()) {
+            seeAllKosRuleButton.click();
+        }
+
+        if (!page.getByText(text).first().isVisible()) {
+            playwright.pageScrollToDown(1000);
+        }
+
+        return page.getByText(text).first().isVisible();
     }
 }
