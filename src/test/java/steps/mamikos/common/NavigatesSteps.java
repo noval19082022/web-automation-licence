@@ -82,7 +82,7 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
 
-    @When("tenant/user navigate to tagihan kost saya")
+    @When("tenant user navigate to tagihan kost saya")
     public void userNavigateToTagihanKostSaya() {
         playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA_BILLING, 30000.0, LoadState.LOAD);
     }
