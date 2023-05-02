@@ -8,12 +8,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 
 public class ChatOwnerSteps {
     Page page = ActiveContext.getActivePage();
-
     ChatOwnerPO chat = new ChatOwnerPO(page);
-
+    BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
 
     @And("user click chat button in top bar owner home page")
     public void userClickChatButtonInTopBarOwnerHomePage() {
@@ -49,5 +49,33 @@ public class ChatOwnerSteps {
     @When("owner enter text {string} in chat page")
     public void ownerEnterTextInChatPage(String chatMsg) {
         chat.insertChatText(chatMsg);
+    }
+
+    @And("user clicks on Accept button from chat room")
+    public void userClickOnAcceptButtonFromChatRoom() throws InterruptedException {
+        chat.clickAcceptFromChatOwner();
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnPilihDitempat();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
+      //  billBookingManage.clickOkButton();
+    }
+
+    @Then("system display title {string} after accept booking from chat room")
+    public void ownerCanSeeAdditionalPriceWithPrice(String notPaidFirstRent) {
+        Assert.assertEquals(chat.getNotPaidFirstRentText(), notPaidFirstRent, "Belum bayar sewa pertama");
+    }
+
+    @And("Owner can see name of Tenant is {string}")
+    public void owner_can_see_name_of_tenant_is(String tenantName) {
+        Assert.assertEquals(chat.getTenantName(),tenantName,"Tenant name doesn't match");
+    }
+
+    @And("Owner can see Kost name, harga kos, sisa kamar")
+    public void owner_can_see_kost_name_harga_kos_sisa_kamar() {
+        Assert.assertTrue(chat.isKostNameDisplayed());
+        Assert.assertTrue(chat.isPriceKostDisplayed());
+        Assert.assertTrue(chat.isSisaKamarDisplayed());
     }
 }
