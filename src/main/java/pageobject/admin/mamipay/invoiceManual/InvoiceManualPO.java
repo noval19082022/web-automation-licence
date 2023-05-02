@@ -8,7 +8,6 @@ import data.mamikos.Mamikos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -52,6 +51,7 @@ public class InvoiceManualPO {
     private Locator akhirPeriodOnTable;
     private Locator jumlahBiayaOnTable;
     private Locator disburseToPemilikOnTable;
+    private Locator namaBiayaTableList;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -718,6 +718,25 @@ public class InvoiceManualPO {
     public void assertDisburseToPemilikOnTable(String disburse) {
         disburseToPemilikOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(disburse));
         assertThat(disburseToPemilikOnTable);
+    }
+
+    /**
+     * Assert Nama Biaya tambahan in specific row
+     * @param row
+     */
+    public void assertNamaBiayaInRow(int row) {
+        int index = 6*(row-1);
+        namaBiayaTableList = page.locator("(//td)["+index+"]");
+        assertThat(namaBiayaTableList);
+    }
+
+    /**
+     * Assert Nama Biaya on Table list
+     * @param namaBiayaTable
+     */
+    public void assertNamaBiayaTableList(String namaBiayaTable) {
+        namaBiayaOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(namaBiayaTable));
+        assertThat(namaBiayaOnTable).hasText(namaBiayaTable);
     }
     //---End of Biaya Tambahan---//
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
 
-    <parameter name="squadName" value="DOM4"/>
-    <test name="DOM4TestRunner">
+    <parameter name="squadName" value="DOM1"/>
+    <test name="DOM1TestRunner">
         <classes>
             <class name="runners.DOM1TestRunner"/>
         </classes>

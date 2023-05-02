@@ -25,7 +25,7 @@ Feature: New Flow Register Owner
     Then user verify error messages
       | Nomor handphone harus diawali dengan 08. |
 
-  @gagal @TEST_DOM-2249 @Automated @DOM @web-covered
+  @TEST_DOM-2249 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] Fill form with valid data and show password field
     Given user go to mamikos homepage
     When user clicks on Enter button
@@ -82,7 +82,7 @@ Feature: New Flow Register Owner
     Then user verify error messages
       | Alamat email ini sudah digunakan untuk verifikasi di akun lain. |
 
-  @bagas @gagal @TEST_DOM-2263 @Automated @DOM @web-covered
+  @TEST_DOM-2263 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] input email Correct
     Given user go to mamikos homepage
     When user clicks on Enter button
@@ -97,7 +97,7 @@ Feature: New Flow Register Owner
     And user clicks on Register button
     Then user see email title is displayed
 
-  @gagal @TEST_DOM-2265 @Automated @DOM @web-covered
+  @TEST_DOM-2265 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] Input name more than 25 char
     Given user go to mamikos homepage
     When user clicks on Enter button
