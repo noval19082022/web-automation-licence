@@ -20,6 +20,8 @@ public class OwnerRegisterPO {
     Locator passwordEyeButton;
     Locator passwordConfirmationInputText;
     Locator emailTittle;
+    Locator profilePictureNull;
+    Locator profilPictureNotNull;
 
     public OwnerRegisterPO(Page page){
         this.page = page;
@@ -35,6 +37,8 @@ public class OwnerRegisterPO {
         this.passwordConfirmationInputText = page.getByTestId("repeatPasswordTextbox");
         this.emailTittle = page.getByText("Email (Opsional)");
         this.emailInputText =  page.getByTestId("emailTextbox");
+        this.profilePictureNull = page.locator("//i[@class='mdi mdi-account-circle mdi-48px']");
+        this.profilPictureNotNull = page.locator("//img[@class='c-mk-header__avatar']");
 
     }
 
@@ -123,5 +127,21 @@ public class OwnerRegisterPO {
      */
     public String getNameInputText(){
         return playwright.getInputValue(nameInputText);
+    }
+
+    /**
+     * Get Profile Picture Is Null
+     */
+    public Boolean isProfilePictureNul (){
+        playwright.clickOn( page.locator("//a[@class='c-mk-header__menu-item-link user-menu']"));
+        return profilePictureNull.isVisible();
+    }
+
+    /**
+     * Get Profile Picture Is Show
+     */
+    public Boolean isProfilePictureNotNull(){
+        playwright.clickOn( page.locator("//a[@class='c-mk-header__menu-item-link user-menu']"));
+        return profilPictureNotNull.isVisible();
     }
 }
