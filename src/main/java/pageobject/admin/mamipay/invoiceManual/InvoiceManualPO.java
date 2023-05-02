@@ -52,6 +52,10 @@ public class InvoiceManualPO {
     private Locator jumlahBiayaOnTable;
     private Locator disburseToPemilikOnTable;
     private Locator namaBiayaTableList;
+    private Locator actionBtn;
+    private Locator deleteActionBtn;
+    private Locator cancelOnDelConfirmation;
+    private Locator deleteOnDelConfirmation;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -113,6 +117,10 @@ public class InvoiceManualPO {
         emptyStateBiayaSewa = page.getByText("Belum ada biaya sewa");
         awalPeriodOnTable = page.locator("(//td)[2]");
         akhirPeriodOnTable = page.locator("(//td)[3]");
+        actionBtn = page.getByText("edit delete");
+        deleteActionBtn = page.locator("((//div[@class='action-button'])[1]/button)[2]");
+        cancelOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        deleteOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -262,7 +270,7 @@ public class InvoiceManualPO {
             calendar.add(Calendar.DATE, 1);
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
-            endDate = page.locator("//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')]");
+            endDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
         } else {
             endDate = page.getByTestId("billing-modal-end-date").getByText(periodeAkhir);
         }
@@ -737,6 +745,35 @@ public class InvoiceManualPO {
     public void assertNamaBiayaTableList(String namaBiayaTable) {
         namaBiayaOnTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(namaBiayaTable));
         assertThat(namaBiayaOnTable).hasText(namaBiayaTable);
+    }
+
+    /**
+     * Delete all biaya sewa/tambahan
+     * Check if the delete button on biaya table appears
+     * Then do delete biaya
+     * If the delete button on biaya table not appears
+     * Then stop delete and return empty state on biaya table
+     */
+    public void deleteAllBiaya() {
+        int i;
+        for (i=0; i<=3; i++){
+            if (isDeleteBiayaVisible()){
+                deleteActionBtn.click();
+                cancelOnDelConfirmation.click();
+                deleteActionBtn.click();
+                deleteOnDelConfirmation.click();
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Check if the delete confirmation pop is visible
+     * @return String delete confirmation pop is visible
+     */
+    public boolean isDeleteBiayaVisible(){
+        return actionBtn != null;
     }
     //---End of Biaya Tambahan---//
 }

@@ -1,4 +1,4 @@
-@pman @mamipay @invoice-manual
+@pman @mamipay @invoice-manual @biayaTambahan
 
 Feature: Invoice Manual - Biaya Tambahan
 
@@ -81,7 +81,7 @@ Feature: Invoice Manual - Biaya Tambahan
       | Penggantian kerusakan/kehilangan fasilitas  | -       | today | tomorrow  | Kursi         | 50000         | Penggantian kerusakan/kehilangan fasilitas (Kursi)  | today         | tomorrow        | Rp50.000              | Tidak               |
       | Lainnya                                     | sampah  | today | tomorrow  | 1 hari        | 7500          | sampah (1 hari)                                     | today         | tomorrow        | Rp7.500               | Ya                  |
 
-  @TEST_PMAN-5992 @pman-prod
+  @continue @TEST_PMAN-5992 @pman-prod
   Scenario: add multiple biaya tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -99,3 +99,8 @@ Feature: Invoice Manual - Biaya Tambahan
       | Laundry (automation pman)       | 2   |
       | Deposit (automation pman)       | 3   |
       | Sampah (automation pman)        | 4   |
+
+  @continue @TEST_PMAN-5964 @pman-prod
+  Scenario: delete multiple biaya tambahan
+    When admin delete all "biaya tambahan" or sewa on Invoice Manual
+    Then the empty state of "biaya tambahan" is displayed
