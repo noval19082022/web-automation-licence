@@ -68,15 +68,35 @@ public class TenantBookingSteps {
         bookingForm.closeCancelPopUp();
     }
 
+    @And("user cancel booking with reason {string}")
+    public void user_cancel_booking_with_reason(String reason) throws InterruptedException{
+        page.navigate("https://jambu.kerupux.com/user/booking/");
+        bookingForm = new BookingFormPO(page);
+        bookingForm.cancelBookingWithReason(reason);
+        if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {
+            Assert.assertEquals(bookingForm.getSuccessCancelText().trim(), "Booking Anda berhasil dibatalkan");
+        }
+        bookingForm.closeCancelPopUp();
+    }
+
     @When("tenant booking kost for {string}")
     public void tenantBookingKostFor(String bookingTime) {
-        kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate(bookingTime);
-        kostDetail.selectBookingPeriod("Per Bulan");
-        bookingForm = kostDetail.clickOnAjukanSewaButton();
-        bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
-        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        if (bookingTime.equalsIgnoreCase("today")){
+            kostDetail.dismissFTUE();
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+            bookingForm.clickOnAjukanSewaButton();
+            bookingForm.clickOnBookingConfirmationCheckmark();
+            successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        } else if (bookingTime.equalsIgnoreCase("Tomorrow")){
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+          //  bookingForm.clickOnAjukanSewaButton();
+         //   bookingForm.clickOnBookingConfirmationCheckmark();
+         //   successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        }
     }
 
     @When("tenant checkin kost from riwayat booking")
@@ -87,28 +107,6 @@ public class TenantBookingSteps {
         riwayatBooking.clickOnSelesaiAndKeKostSaya();
     }
 
-    @And("user will see Jumlah Penyewa can add until 3 Penyewa")
-    public void add_three_penyewa() {
-        bookingForm = new BookingFormPO(page);
-        bookingForm.addJumlahPenyewa(3);
-    }
-
-    @And("user will see enable and tick Check box {string}")
-    public void checkmark(String checkmarkname) {
-        bookingForm.checkMark(checkmarkname);
-    }
-
-    @When("user want to upload berkas wajib if user haven't upload it")
-    public void uploadBerkas() {
-        bookingForm.uploadBerkasBooking();
-    }
-
-    @And("user can set Ajukan Sewa")
-    public void ajukanSewa() {
-        bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
-        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
-    }
 
     @And("tenant booking kost for {string} and input rent duration equals to {int}")
     public void tenantBookingKostForAndInputRentDurationEqualsTo(String bookingTime, int duration) throws InterruptedException {
@@ -155,17 +153,31 @@ public class TenantBookingSteps {
         kostDetail.cancelAllBookingWithDefaultReason();
     }
 
-    @When("tenant booking kost for {string} with DP")
-    public void tenantBookingKostForDP(String bookingTime) {
-        kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate(bookingTime);
-        kostDetail.selectBookingPeriod("Per Bulan");
-        bookingForm = kostDetail.clickOnAjukanSewaButton();
-        bookingForm.clickUbahButton();
-        bookingForm.selectPayWithDP();
-        bookingForm.clickSimpanButton();
-        bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
-        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    @And("user click Save Draft Button")
+    public void userClickSaveDraftButton() {
+        kostDetail.clickSaveDraftButton();
+    }
+    @And("user click back button")
+    public void userClickBackButton() {
+        kostDetail.clickBackButton();
+    }
+
+    @Then("user can see shortcut homepage with {string}")
+    public void userCanSeeShortcutHomepageWith(String kosCheckedByOwner) {
+        Assert.assertEquals(kostDetail.getKosCheckedByOwner(), kosCheckedByOwner, "Pengajuan sewa lagi dicek pemilik");
+    }
+
+    @And("user click on Draft menu")
+    public void userClickOnDraftMenu() {
+        kostDetail.clickOnDraftMenu();
+    }
+    @And("user click delete button on tab one draft booking")
+    public void userClickDeleteButtonOnTabOneDraftBooking() {
+        kostDetail.clickDeleteButtonOnTabOneDraftBooking();
+    }
+
+    @And("user click Mau Coba Dong section at homepage")
+    public void userClickMauCobaDongSectionAtHomepage() {
+        kostDetail.clickMauCobaDongSectionAtHomepage();
     }
 }
