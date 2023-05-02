@@ -24,6 +24,16 @@ public class KostDetailsPO {
     Locator roomFacilities;
     Locator bookingPeriodInput;
     Locator ajukanSewaButton;
+    Locator saveDraftButton;
+    Locator backButton;
+    Locator textPopup;
+    Locator kosCheckedByOwner;
+    Locator draftMenu;
+    Locator deleteButtonOnTabOneDraftBooking;
+
+    Locator mauCobaDongSectionAtHomepage;
+
+    Locator hapusDraft;
 
     //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
@@ -177,6 +187,7 @@ public class KostDetailsPO {
     private Locator userReviewModal;
     private Locator closeModalReviewBtn;
 
+
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
 
@@ -200,6 +211,14 @@ public class KostDetailsPO {
         this.kosDetailPage = page.locator("detailKostContainer");
         this.filterButton = page.locator(".filter-item-mobile:first-child span");
         this.needConfirmation = page.locator("li:nth-child(2) button");
+        this.saveDraftButton = page.locator("//*[@class='bg-c-button bg-c-button--primary-naked bg-c-button--md bg-c-button--block']");
+        this.textPopup = page.getByText("Fasilitas umum");
+        this.backButton = page.locator(".booking-request-form__back-btn");
+        this.kosCheckedByOwner = page.locator(".booking-shortcut__card-title");
+        this.draftMenu = page.locator("//a[normalize-space()='Draft']");
+        this.deleteButtonOnTabOneDraftBooking = page.locator(".btn-default[data-v-195f9976]");
+        this.hapusDraft = page.locator("//button[contains(.,'Hapus Draft')]");
+        this.mauCobaDongSectionAtHomepage = page.locator(".bg-c-text--button-sm");
 
         //---------login popup---------------
         this.loginPopUp = page.locator("p[class='login-title']");
@@ -1554,5 +1573,53 @@ public class KostDetailsPO {
     public void cancelAllBookingWithDefaultReason() {
         filterButton.click();
         needConfirmation.click();
+    }
+
+    /**
+     * Click on save draft button
+     */
+    public void clickSaveDraftButton() {
+        saveDraftButton.click();
+    }
+    /**
+     * Wait until FTUE
+     * @return
+     */
+    public boolean isElementFTUEDisplayed() {
+        return textPopup.isVisible();
+    }
+    /**
+     * Click on back button
+     */
+    public void clickBackButton() {
+        backButton.click();
+    }
+    /**
+     * Get notPaidFirstRent value text
+     * @return
+     */
+    public String getKosCheckedByOwner(){
+        playwright.pageScrollUntilElementIsVisible(kosCheckedByOwner);
+        return playwright.getText(kosCheckedByOwner);
+    }
+
+    /**
+     * Click on draft menu button
+     */
+    public void clickOnDraftMenu() {
+        draftMenu.click();
+    }
+    /**
+     * Click on delete draft button
+     */
+    public void clickDeleteButtonOnTabOneDraftBooking() {
+        deleteButtonOnTabOneDraftBooking.click();
+        hapusDraft.click();
+    }
+    /**
+     * Click on mau coba dong section button
+     */
+    public void clickMauCobaDongSectionAtHomepage() {
+        mauCobaDongSectionAtHomepage.click();
     }
 }

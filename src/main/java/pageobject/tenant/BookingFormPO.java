@@ -1,5 +1,6 @@
 package pageobject.tenant;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -74,6 +75,21 @@ public class BookingFormPO {
         }
     }
 
+    /**
+     * cancel booking with select reason
+     */
+    public void cancelBookingWithReason(String reason) {
+        for (int i = 0; i < 2; i++) {
+            lihatSelengkapnyaTextLink.click();
+        }
+        if (batalkanBookingButton.isVisible()) {
+            batalkanBookingButton.click();
+            String selector = "//*[@class='radio success']/label[contains(.,'" + reason + "')]";
+            ElementHandle element = page.querySelector(selector);
+            element.click();
+            confirmCancelButton.click();
+        }
+    }
     /**
      * Wait until terminated is process is finished
      *
