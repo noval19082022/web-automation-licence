@@ -57,4 +57,11 @@ public class OwnerDashboardPO {
         playwright.doubleClick(kelolaTagihan);
         return new TenantBillManagementPO(page);
     }
+
+    /**
+     * Dismiss FTUE Godlplus
+     */
+    public void dismissFTUEGoldplus() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja")).click();
+    }
 }
