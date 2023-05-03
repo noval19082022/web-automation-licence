@@ -101,10 +101,10 @@ public class BookingFormPO {
 
             if (uploadDoc != null) {
                 uploadDoc.setInputFiles(Paths.get(projectpath + "/src/main/resources/images/upload.jpg"));
-                playwright.hardWait(5_000);;
+                playwright.hardWait(5_000);
             }
 
-            if (page.getByText("Pada saat masuk kos, mohon siapkan kartu identitas asli untuk verifikasi").isVisible()){
+            if (page.getByText("Pada saat masuk kos, mohon siapkan kartu identitas asli untuk verifikasi").isVisible()) {
                 break;
             }
 
@@ -118,9 +118,12 @@ public class BookingFormPO {
      * click on Ya Batalkan button
      */
     public void cancelBooking() {
-        for (int i = 0; i < 2; i++) {
-            lihatSelengkapnyaTextLink.click();
+        if (lihatSelengkapnyaTextLink.isVisible()) {
+            for (int i = 0; i < 2; i++) {
+                lihatSelengkapnyaTextLink.click();
+            }
         }
+
         if (batalkanBookingButton.isVisible()) {
             batalkanBookingButton.click();
             cancelReasonButton.click();
@@ -143,6 +146,7 @@ public class BookingFormPO {
             confirmCancelButton.click();
         }
     }
+
     /**
      * Wait until terminated is process is finished
      *

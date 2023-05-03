@@ -39,7 +39,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user click delete button on tab one draft booking
     And user go to mamikos homepage
     And user click Mau Coba Dong section at homepage
-    Then tenant user navigate to tagihan kost saya
+    Then tenant navigate to tagihan kost saya
 
   @TEST_BBM-906 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Coba cara baru bayar kos]Check when tenant not have booked status (batalkan booking) and draft booking (delete draft)
@@ -70,4 +70,4 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user click delete button on tab one draft booking
     And user go to mamikos homepage
     And user click Mau Coba Dong section at homepage
-    Then tenant user navigate to tagihan kost saya
+    Then tenant navigate to tagihan kost saya
