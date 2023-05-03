@@ -26,10 +26,13 @@ Feature: Owner - Login
     And user click button close login form
     Then user verify login form close
 
-#  @TEST_DOM-242 @Automated @DOM @web-covered
-#  Scenario: New Flow Login Owner - Login From Homepage
-#    Given user navigates to "mamikos /room/kost-bantul-kost-campur-eksklusif-kos-danraneymu-mamitest-1?redirection_source=list%20kos%20result"
-#    When I should reached kos detail page
-#    And user scroll to view maps
-#    And user click view maps
-#    Then verify popup login displayed
+  @TEST_DOM-242 @Automated @DOM @web-covered
+  Scenario: New Flow Login Owner - Login From Homepage
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to reached map section and see lihat peta button
+    #user want to see map more detail
+    When user want to see more detail kost location
+    Then user will see login pop up
