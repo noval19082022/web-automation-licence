@@ -9,14 +9,14 @@ Feature: Owner - Login
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     Then user redirected to "owner"
 
-#  @TEST_DOM-2242 @Automated @DOM @web-covered
-#  Scenario: [WEB][Login Owner] Login with invalid password
-#    Given user go to mamikos homepage
-#    When user login as owner:
-#      | phone stag   | phone prod   | password       |
-#      | 081362464341 | 081362464341 | 1d0lt3stb4ru99 |
-#    Then user see the form input error "Nomor dan password tidak sesuai"
-#
+  @TEST_DOM-2242 @Automated @DOM @web-covered
+  Scenario: [WEB][Login Owner] Login with invalid password
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password       |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru99 |
+    Then user get error message "Nomor dan password tidak sesuai"
+
 #  @TEST_DOM-2243 @Automated @DOM @web-covered
 #  Scenario: [WEB][Login Owner] Owner Want to cancel login
 #    Given user go to mamikos homepage
