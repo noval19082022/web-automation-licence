@@ -30,6 +30,9 @@ public class ChatOwnerPO {
     Locator closeFTUEBeforeChat;
     Locator ownerRunsOutQuotaWording;
     Locator attachmentButton;
+    Locator weeklyQuotaChatlistHeader;
+    Locator registerGoldplusButton;
+    Locator weeklyQuotaChatroomHeader;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -55,6 +58,9 @@ public class ChatOwnerPO {
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
+        weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
+        weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
+        registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
     }
 
     /**
@@ -175,8 +181,6 @@ public class ChatOwnerPO {
     }
 
     /**
-=======
->>>>>>> 1191d7b19c95e811d803238abdd6713a47734a53
      * Dismiss FTUE Mars
      */
     public void dismissFTUEMars() {
@@ -239,5 +243,44 @@ public class ChatOwnerPO {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
         page.getByRole(AriaRole.TOOLTIP, new Page.GetByRoleOptions().setName("Baru! Anda bisa menawarkan kos ke banyak orang lewat Broadcast Chat.")).getByRole(AriaRole.BUTTON).click();
+    }
+
+    /**
+     * Check Weekly Quota Header in chatlist is present
+     * @return true if appear
+     */
+    public boolean isWeeklyQuotaChatlistPresent() {
+        return weeklyQuotaChatlistHeader.isVisible();
+    }
+
+    /**
+     * Check Register goldplus button in chatlist is present
+     * @return true if appear
+     */
+    public boolean isRegisterGPButtonChatlistPresent() {
+        return registerGoldplusButton.isVisible();
+    }
+
+    /**
+     * Click close button on FTUE Before chat FTUE Mars
+     */
+    public void clickHeaderMarsChatroom() {
+        weeklyQuotaChatroomHeader.click();
+    }
+
+    /**
+     * Check Weekly Quota Header in chatroom is present
+     * @return true if appear
+     */
+    public boolean isWeeklyQuotaChatroomPresent() {
+        return weeklyQuotaChatroomHeader.isVisible();
+    }
+
+    /**
+     * Check Register goldplus button in chatroom is present
+     * @return true if appear
+     */
+    public boolean isRegisterGPButtonChatroomPresent() {
+        return registerGoldplusButton.isVisible();
     }
 }

@@ -20,6 +20,7 @@ public class ChatTenantPO {
     Locator sendButton;
     Locator disabledRoomCardBookingButton;
     Locator seeAdsButton;
+    Locator ownerLastSeen;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -32,6 +33,7 @@ public class ChatTenantPO {
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
         seeAdsButton = page.getByText("Lihat Iklan");
+        ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
     }
 
     /**
@@ -116,5 +118,13 @@ public class ChatTenantPO {
      */
     public void clickLihatIklanButton() {
         playwright.clickOn(seeAdsButton);
+    }
+
+    /**
+     * Check Owner Last Seen chatroom is present
+     * @return true if appear
+     */
+    public boolean isOwnerLastSeenPresent() {
+        return ownerLastSeen.isVisible();
     }
 }
