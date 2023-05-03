@@ -4,15 +4,15 @@ Feature: Booking with upload docs
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 081234567  | 083176408442 | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
     And user cancel booking
 
   Scenario: [Kost Detail][Booking Form][Peraturan Kost][Booking Form ke 2][Summary Booking]Tenant booking for kost when Owner set ON Khusus Karyawan, ON Bisa Pasutri, and ON Boleh bawa anak and with set ON KTP, buku nikah, kartu keluarga
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 081234567  | 083176408442 | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
       | Desta Automation tobelo | kost payment desta 2 |
