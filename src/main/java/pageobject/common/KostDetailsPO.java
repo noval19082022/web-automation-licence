@@ -1622,4 +1622,26 @@ public class KostDetailsPO {
     public void clickMauCobaDongSectionAtHomepage() {
         mauCobaDongSectionAtHomepage.click();
     }
+
+    /**
+     * click booking
+     */
+    public void clickOnBookingButton() {
+        bookingButton.click();
+    }
+
+    /**
+     * @param text is present
+     * @return boolean
+     */
+    public Boolean isRuleTextPresent(String text) {
+        if (seeAllKosRuleButton.isVisible()) {
+            seeAllKosRuleButton.click();
+        }
+
+        if (!page.getByText(text).first().isVisible()) {
+            playwright.pageScrollToDown(1000);
+        }
+        return page.getByText(text).first().isVisible();
+    }
 }
