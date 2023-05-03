@@ -28,10 +28,23 @@ public class MamifotoPO {
     //Locator Mamifoto Landing Page
     Locator headerMamifoto;
     Locator lihatPaketButton;
+    Locator bacaPanduan;
+    Locator headerBacaPanduan;
+    Locator closePopUpBacaPanduanIcon;
+    Locator faqFirstList;
+    Locator headerFAQ;
+    Locator contentFAQfirstList;
+
+
+
+    //Locator Mamifoto at Select Package
     Locator packageFirstMamifotoNonGP;
     Locator popUpDoesntHaveProperty;
     Locator addedNewKostPopUpButton;
     Locator nantiSajaButton;
+    Locator headerPilihPaket;
+    Locator backPilihPaketIcon;
+
 
     public MamifotoPO(Page page) {
         this.page = page;
@@ -44,12 +57,20 @@ public class MamifotoPO {
         this.titleTingkatkanKinerja = page.getByText("Tingkatkan Kinerja Kos");
         this.subtitleTingkatkanKinerja =  page.getByText("Lengkapi kos Anda dengan fitur berikut.");
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
-        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
+        this.mamifotoInfoUntukAnda =  page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan"));
         this.lihatPaketButton =   page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
         this.packageFirstMamifotoNonGP = page.getByTestId("select-mamifoto-package").first();
         this.popUpDoesntHaveProperty =  page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
         this.addedNewKostPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Kos"));
         this.nantiSajaButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        this.headerPilihPaket = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pilih Paket"));
+        this.backPilihPaketIcon = page.getByTestId("back-button");
+        this.bacaPanduan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Baca Panduan"));
+        this.headerBacaPanduan =  page.getByText("Panduan persiapan foto/video");
+        this.closePopUpBacaPanduanIcon =  page.getByTestId("mamifoto-landing-guides-modal").getByRole(AriaRole.BUTTON);
+        this.headerFAQ = page.getByText("Tanya Jawab");
+        this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
+        this.contentFAQfirstList =  page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
 
     }
 
@@ -167,4 +188,75 @@ public class MamifotoPO {
     public void clickOnNantiSajaButton() {
       nantiSajaButton.click();
     }
+
+    /**
+     * Check Lihat Paket Mamifoto Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderSelectPackageisAppear() {
+        return headerPilihPaket.isVisible();
+    }
+
+    /**
+     * Click on back icon at select package
+     */
+    public void clickOnBackSelectPackage() {
+        backPilihPaketIcon.click();
+    }
+
+    /**
+     * Scroll down to section baca panduan
+     */
+    public void scrollDownToBacaPanduan() {
+        bacaPanduan.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Click on Baca Panduan Mamifoto
+     */
+    public void clickOnBacaPanduan() {
+        bacaPanduan.click();
+    }
+
+    /**
+     * Check Baca Panduan header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderBacaPanduanisAppear() {
+        return headerBacaPanduan.isVisible();
+    }
+
+    /**
+     * Click on icon close pop up Baca Panduan
+     */
+    public void clickOnCloseBacaPanduan() {
+        closePopUpBacaPanduanIcon.click();
+    }
+
+    /**
+     * Scroll down to section FAQ or Tanya Jawab
+     */
+    public void scrollDownToFAQMamifoto() {
+        headerFAQ.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Click on first list FAQ
+     */
+    public void clickOnFirstListFAQ() {
+        faqFirstList.click();
+    }
+
+    /**
+     * Check content text FAQ is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean contentFirstFAQisAppear() {
+        return contentFAQfirstList.isVisible();
+    }
+
+
 }
