@@ -461,5 +461,86 @@ public class InvoiceManualSteps {
             manualInvoice.assertEmptyStateBiayaTambahan();
         }
     }
+
+    @When("admin edit Invoice Manual {string} and check them on the table")
+    public void admin_edit_Invoice_Manual_and_check_them_on_the_table(String invType, DataTable tables){
+        String namaBiaya = "", periodeAwal = "", periodeAkhir = "", durasiBiaya = "", jumlahBiaya = "";
+        String namaBiayaTable = "", jumlahBiayaTable = "", disburseToPemilik = "";
+
+        detailBiaya = tables.asMaps(String.class, String.class);
+
+        manualInvoice.clickEditInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+            namaBiayaTable = detailBiaya.get(0).get("Nama Biaya on Table");
+            jumlahBiayaTable = detailBiaya.get(0).get("Jumlah Biaya on Table");
+            disburseToPemilik = detailBiaya.get(0).get("Disburse to Pemilik");
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+            namaBiayaTable = detailBiaya.get(0).get("Nama Biaya on Table");
+            jumlahBiayaTable = detailBiaya.get(0).get("Jumlah Biaya on Table");
+            disburseToPemilik = detailBiaya.get(0).get("Disburse to Pemilik");
+        }
+
+        manualInvoice.setEditNamaBiayaInvoiceManual(namaBiaya);
+        manualInvoice.setPeriodeAwalInvoiceManual(periodeAwal);
+        manualInvoice.setPeriodeAkhirInvoiceManual(periodeAkhir);
+        manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+        manualInvoice.clickTambahSubmitInPopUp();
+
+        manualInvoice.assertNamaBiayaOnTable(namaBiayaTable);
+        manualInvoice.assertAwalPeriodOnTable();
+        manualInvoice.assertAkhirPeriodOnTable();
+        manualInvoice.assertJumlahBiayaOnTable(jumlahBiayaTable);
+        manualInvoice.assertDisburseToPemilikOnTable(disburseToPemilik);
+    }
+
+    @When("admin edit Invoice Manual {string} into Lainnya and check them on the table")
+    public void admin_edit_Invoice_Manual_into_Lainnya_and_check_them_on_the_table(String invType, DataTable tables){
+        String namaBiaya = "", lainnya = "", jumlahBiaya = "";
+        String namaBiayaTable = "", jumlahBiayaTable = "", disburseToPemilik = "";
+
+        detailBiaya = tables.asMaps(String.class, String.class);
+
+        manualInvoice.clickEditInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            lainnya = detailBiaya.get(0).get("Lainnya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+            namaBiayaTable = detailBiaya.get(0).get("Nama Biaya on Table");
+            jumlahBiayaTable = detailBiaya.get(0).get("Jumlah Biaya on Table");
+            disburseToPemilik = detailBiaya.get(0).get("Disburse to Pemilik");
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            lainnya = detailBiaya.get(0).get("Lainnya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+            namaBiayaTable = detailBiaya.get(0).get("Nama Biaya on Table");
+            jumlahBiayaTable = detailBiaya.get(0).get("Jumlah Biaya on Table");
+            disburseToPemilik = detailBiaya.get(0).get("Disburse to Pemilik");
+        }
+
+        manualInvoice.setEditNamaBiayaInvoiceManual(namaBiaya);
+        manualInvoice.setLainnyaInvoiceManual(lainnya);
+        manualInvoice.clearDurasiBiayaInvoiceManual();
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+        manualInvoice.clickTambahSubmitInPopUp();
+
+        manualInvoice.assertNamaBiayaOnTable(namaBiayaTable);
+        manualInvoice.assertAwalPeriodOnTable();
+        manualInvoice.assertAkhirPeriodOnTable();
+        manualInvoice.assertJumlahBiayaOnTable(jumlahBiayaTable);
+        manualInvoice.assertDisburseToPemilikOnTable(disburseToPemilik);
+    }
     //---End of Biaya Tambahan Pop Up---//
 }
