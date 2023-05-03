@@ -17,18 +17,15 @@ Feature: Owner - Login
       | 081362464341 | 081362464341 | 1d0lt3stb4ru99 |
     Then user get error message "Nomor dan password tidak sesuai"
 
-#  @TEST_DOM-2243 @Automated @DOM @web-covered
-#  Scenario: [WEB][Login Owner] Owner Want to cancel login
-#    Given user go to mamikos homepage
-#    When user login as owner:
-#      | phone stag   | phone prod   | password     |
-#      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
-#    And user click button pemilik kost
-#    And user verify login form owner
-#    And user click back button in login owner
-#    And user click button close login form
-#    Then user verify login form close
-#
+  @TEST_DOM-2243 @Automated @DOM @web-covered
+  Scenario: [WEB][Login Owner] Owner Want to cancel login
+    Given user go to mamikos homepage
+    When user clicks on Enter button
+    And user verify login form owner
+    And user click back button in login owner
+    And user click button close login form
+    Then user verify login form close
+
 #  @TEST_DOM-242 @Automated @DOM @web-covered
 #  Scenario: New Flow Login Owner - Login From Homepage
 #    Given user navigates to "mamikos /room/kost-bantul-kost-campur-eksklusif-kos-danraneymu-mamitest-1?redirection_source=list%20kos%20result"
