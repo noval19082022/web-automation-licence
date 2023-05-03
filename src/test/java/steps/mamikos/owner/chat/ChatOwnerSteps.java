@@ -121,4 +121,17 @@ public class ChatOwnerSteps {
     public void userSeeAttachmentButtonIsEnabled() {
         Assert.assertTrue(chat.isAttachmentButtonEnabled(), "Button is disabled");
     }
+
+    @And("user see the appearence of Mars chatlist")
+    public void userSeeTheAppearenceOfMarsChatlist() {
+        Assert.assertTrue(chat.isWeeklyQuotaChatlistPresent(), "Weekly Quota Information in chatlist is not present");
+        Assert.assertTrue(chat.isRegisterGPButtonChatlistPresent(), "Register GP Button in chatlist is not present");
+    }
+
+    @Then("user see the appearence of Mars chatroom")
+    public void userSeeTheAppearenceOfMarsChatroom() {
+        chat.clickHeaderMarsChatroom();
+        Assert.assertTrue(chat.isWeeklyQuotaChatroomPresent(), "Weekly Quota Information in chatroom is not present");
+        Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
+    }
 }

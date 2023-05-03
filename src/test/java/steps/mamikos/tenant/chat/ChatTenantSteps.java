@@ -70,4 +70,8 @@ public class ChatTenantSteps {
         chat.clickLihatIklanButton();
     }
 
+    @Then("user cant see last owner seen")
+    public void userCantSeeLastOwnerSeen() {
+        Assert.assertFalse(chat.isOwnerLastSeenPresent(), "owner last seen is display");
+    }
 }
