@@ -79,7 +79,6 @@ public class MamifotoSteps {
 
     @When("owner click Baca Panduan button")
     public void owner_click_button() {
-       mamifoto.scrollDownToBacaPanduan();
        mamifoto.clickOnBacaPanduan();
     }
 
@@ -91,7 +90,6 @@ public class MamifotoSteps {
 
     @When("owner click any faq button")
     public void owner_click_any_faq_button() {
-        mamifoto.scrollDownToFAQMamifoto();
         mamifoto.clickOnFirstListFAQ();
     }
 
@@ -100,6 +98,10 @@ public class MamifotoSteps {
         Assert.assertTrue(mamifoto.contentFirstFAQisAppear(),"content is not appear");
     }
 
-
-
+    @Then("owner click info untuk anda for mamifoto non property")
+    public void owner_click_info_untuk_anda_for_mamifoto_non_property() throws InterruptedException {
+        MamifotoTitle.MamifotoInfoUntukAnda = mamifoto.getMamifotoInfoUntukAndaNonPropertyText();
+        Assert.assertEquals(MamifotoTitle.MamifotoInfoUntukAnda,mamifoto.getMamifotoInfoUntukAndaNonPropertyText());
+        mamifoto.clickOnMamifotoInfoUntukAndaNonProperty();
+    }
 }
