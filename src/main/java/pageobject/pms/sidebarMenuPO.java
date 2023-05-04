@@ -48,6 +48,7 @@ public class sidebarMenuPO {
      * click Other Transaction Sidebar Menu
      */
     public void clickOtherTransactionMenu() {
+        otherTransactionButton.waitFor();
         otherTransactionButton.click();
     }
 }
