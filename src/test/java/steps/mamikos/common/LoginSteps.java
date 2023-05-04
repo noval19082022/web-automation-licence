@@ -8,6 +8,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
@@ -138,4 +139,25 @@ public class LoginSteps {
                 .fillPassword(password)
                 .clickOnLoginButton();
     }
+
+    @And("user verify login form owner")
+    public void verify_login_owner() {
+        Assert.assertTrue(login.popUpOwnerLogin(), "login owner not showing");
+    }
+
+    @And("user click back button in login owner")
+    public void clickBack() {
+        login.clickBackOnPopUpLogin();
+    }
+
+    @And("user click button close login form")
+    public void close() {
+        login.clickCloseOnPopUpLogin();
+    }
+
+    @Then("user verify login form close")
+    public void verifyHome() {
+        Assert.assertTrue(!login.popUpLogin(), "pop up login is showing");
+    }
+
 }

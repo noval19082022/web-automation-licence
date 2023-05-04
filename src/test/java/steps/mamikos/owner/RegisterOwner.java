@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
-import pageobject.owner.OwnerLoginPO;
 import pageobject.owner.OwnerRegisterPO;
 
 import java.util.List;
@@ -17,33 +16,12 @@ public class RegisterOwner {
     Page page = ActiveContext.getActivePage();
     HomePO home = new HomePO(page);
     OwnerRegisterPO ownerRegister = new OwnerRegisterPO(page);
-    LoginPO loginPO = new LoginPO(page);
 
     @When("user clicks on Enter button")
     public void userClicksOnEnterButton() {
         home.EnterButton();
         ownerRegister.pemilikKostLogin();
 
-    }
-
-    @And("user verify login form owner")
-    public void verify_login_owner() {
-        Assert.assertTrue(loginPO.popUpOwnerLogin(), "login owner not showing");
-    }
-
-    @And("user click back button in login owner")
-    public void clickBack() {
-        loginPO.clickBackOnPopUpLogin();
-    }
-
-    @And("user click button close login form")
-    public void close() {
-        loginPO.clickCloseOnPopUpLogin();
-    }
-
-    @Then("user verify login form close")
-    public void verifyHome() {
-        Assert.assertTrue(!loginPO.popUpLogin(), "pop up login is showing");
     }
 
     @And("user clicks on Register button")
