@@ -21,6 +21,10 @@ public class LoginPO {
     protected Locator emailAddressFBInput;
     protected Locator passwordFBInput;
     protected Locator loginFacebookBtn;
+    private Locator loginOwnerPopUp;
+    private Locator backButtonLogin;
+    private Locator closeBtn;
+
     public LoginPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -35,10 +39,14 @@ public class LoginPO {
         this.emailAddressFBInput = page.getByPlaceholder("Email address or phone number");
         this.passwordFBInput = page.getByPlaceholder("Password");
         loginFacebookBtn = page.locator("#loginbutton");
+        this.loginOwnerPopUp = page.getByText("Login Pemilik Kos");
+        this.backButtonLogin = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
+        this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
     }
 
     /**
      * Click on pencari kost button
+     *
      * @return TenantLoginPO class
      */
     public synchronized TenantLoginPO clickOnPencariKostButton() {
@@ -48,6 +56,7 @@ public class LoginPO {
 
     /**
      * Click on pemilik kost button
+     *
      * @return OwnerLoginPO class
      */
     public OwnerLoginPO clickOnPemilikKostButton() {
@@ -69,6 +78,7 @@ public class LoginPO {
 
     /**
      * Check if login pop up is appear
+     *
      * @return
      */
     public boolean checkLoginPopUpFromFavoritePage() {
@@ -78,6 +88,7 @@ public class LoginPO {
 
     /**
      * Click on Sign in With Facebook button
+     *
      * @return TenantLoginPO class
      */
     public synchronized TenantLoginPO clickOnSignInWithFacebookButton() {
@@ -97,4 +108,34 @@ public class LoginPO {
         return new Object();
     }
 
+    /**
+     * verify that login owner pop up is appear
+     *
+     * @return Boolean
+     */
+    public Boolean popUpOwnerLogin() {
+        return loginOwnerPopUp.isVisible();
+    }
+
+    /**
+     * Click back Pop up Login
+     */
+    public void clickBackOnPopUpLogin() {
+        backButtonLogin.click();
+    }
+
+    /**
+     * Click Close on Pop up Login
+     */
+    public void clickCloseOnPopUpLogin() {
+        closeBtn.click();
+    }
+
+    /**
+     * Click back Pop up Login
+     * @return Boolean
+     */
+    public Boolean popUpLogin() {
+        return page.getByText("Masuk ke Mamikos").isVisible();
+    }
 }

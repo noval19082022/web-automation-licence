@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoginPO;
 import pageobject.owner.OwnerRegisterPO;
 
 import java.util.List;
@@ -61,13 +62,13 @@ public class RegisterOwner {
     }
 
     @Then("user validate email input")
-    public void userValidateEmailInput()  {
+    public void userValidateEmailInput() {
         Assert.assertTrue(ownerRegister.getEmailInputText().matches("^\\S+@\\S+$"), "Email format invalid");
     }
 
     @Then("user see email title is displayed")
     public void userSeeEmailTitleIsDisplayed() {
-        Assert.assertTrue(ownerRegister.isEmailTitleAvailable(),"Email (Opsional) not displayed");
+        Assert.assertTrue(ownerRegister.isEmailTitleAvailable(), "Email (Opsional) not displayed");
     }
 
     @Then("user verify name is equal or more than {int} characters")
