@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto
+@LIMO2 @Mamifoto @MamifotoDoesntHavePropertyActive
 
 Feature: Entry Point Mamifoto when doesnt have property active
 
@@ -23,8 +23,8 @@ Feature: Entry Point Mamifoto when doesnt have property active
     Then owner click info untuk anda for mamifoto non property
     And owner can see mamifoto page
 
-  @continue
-  Scenario: Owner dont have property active click "lihat paket" button MamiFoto
+  @continue @TEST_LIMO-3161 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  Scenario: [WEB][MamiFoto] Owner dont have property active purchase MamiFoto package
     When owner click Lihat Paket button
     And owner select package mamifoto
     Then owner see pop up doesnt have property
