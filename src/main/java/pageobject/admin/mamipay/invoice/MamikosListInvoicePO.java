@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.invoice;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.cucumber.java.en.Then;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -25,6 +26,7 @@ public class MamikosListInvoicePO {
     Page.GetByRoleOptions pageRoleOptions;
     Locator.GetByRoleOptions locatorRoleOptions;
     Locator otherPrice;
+    Locator otherPriceName;
     Locator getOtherPriceNumber;
     Locator txtBasicAmount;
     Locator editBasicAmount;
@@ -82,7 +84,7 @@ public class MamikosListInvoicePO {
      * @param invoiceText Text of unique parameter of invoice(e.g invoice number)
      */
     public void goToInvoiceDetail(String invoiceText) {
-        invoiceDetail = page.getByRole(AriaRole.ROW, pageRoleOptions.setName(invoiceText)).getByRole(AriaRole.LINK, locatorRoleOptions.setName("Detail Fee"));
+        invoiceDetail = page.getByRole(AriaRole.ROW, pageRoleOptions.setName(invoiceText)).getByRole(AriaRole.LINK, locatorRoleOptions.setName("Detail Fee")).first();
         playwright.clickOn(invoiceDetail);
     }
 
@@ -197,4 +199,17 @@ public class MamikosListInvoicePO {
         playwright.clickOn(updateButton);
     }
 
+    /**
+     * Check the visibility of aditional price is visible
+     * @return boolean
+     */
+    public boolean isAdditionalPriceNameIsVisible(String otherPrice) {
+        otherPriceName = page.locator("//*[.='"+otherPrice+"']");
+        for (int i = 0; i < 4; i++) {
+            if (otherPriceName.isVisible()) {
+                break;
+            }
+        }
+        return playwright.waitTillLocatorIsVisible(otherPriceName);
+    }
 }
