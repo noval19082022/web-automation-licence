@@ -841,5 +841,12 @@ public class InvoiceManualPO {
     public void assertErrMsgLainnya(String error) {
         assertThat(errMsgLainnya).hasText(error);
     }
+
+    /**
+     * Clear Lainnya field
+     */
+    public void clearLainnyaField() {
+        lainnyaField.clear();
+    }
     //---End of Biaya Tambahan---//
 }

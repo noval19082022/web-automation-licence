@@ -122,16 +122,13 @@ Feature: Invoice Manual - Biaya Tambahan
       | Lainnya     | Sampah  | -             | 30000         | Sampah              | tomorrow      | day after tomorrow  | Rp30.000              | Ya                  |
 
   @TEST_PMAN-6534
-  Scenario Outline: Lainnya Validation Biaya Tambahan
+  Scenario: Lainnya Validation Biaya Tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin creates Invoice Manual "Biaya Tambahan" and input Lainnya field "<Name>"
-    Then the error message Lainnya is displayed "Jenis invoice tidak sesuai. Pilih jenis invoice Biaya Sewa untuk biaya ini."
-
-    Examples:
-      | Name                          |
+    And the admin creates Invoice Manual "Biaya Tambahan" Lainnya
+    Then error message "Jenis invoice tidak sesuai. Pilih jenis invoice Biaya Sewa untuk biaya ini." appear if user input Lainnya field :
       | relokasi                      |
       | RELOKASI                      |
       | sewa harian                   |

@@ -543,8 +543,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertDisburseToPemilikOnTable(disburseToPemilik);
     }
 
-    @When("the admin creates Invoice Manual {string} and input Lainnya field {string}")
-    public void the_admin_creates_Invoice_Manual_and_input_Lainnya_field(String invType, String name){
+    @When("the admin creates Invoice Manual {string} Lainnya")
+    public void the_admin_creates_Invoice_Manual_and_input_Lainnya_field(String invType){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
 
@@ -557,12 +557,15 @@ public class InvoiceManualSteps {
         manualInvoice.clickTambah();
 
         manualInvoice.setNamaBiayaLainnyaInvoiceManual();
-        manualInvoice.setLainnyaInvoiceManual(name);
     }
 
-    @Then("the error message Lainnya is displayed {string}")
-    public void the_error_message_Lainnya_is_displayed(String error){
-        manualInvoice.assertErrMsgLainnya(error);
+    @Then("error message {string} appear if user input Lainnya field :")
+    public void error_message_appear_if_user_input_lainnya_field(String error, List<String> keywordLainnya) {
+        for(String keyword: keywordLainnya){
+            manualInvoice.setLainnyaInvoiceManual(keyword);
+            manualInvoice.assertErrMsgLainnya(error);
+            manualInvoice.clearLainnyaField();
+        }
     }
     //---End of Biaya Tambahan Pop Up---//
 }
