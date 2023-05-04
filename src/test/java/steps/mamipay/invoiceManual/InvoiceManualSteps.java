@@ -230,8 +230,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertPeriodDate();
     }
 
-    @When("the admin fill all fields in Tambah Biaya Tambahan pop up")
-    public void the_admin_fill_all_fields_in_Tambah_Biaya_Tambahan_pop_up(DataTable tables){
+    @When("the admin fills all fields in Tambah Biaya Tambahan pop up")
+    public void the_admin_fills_all_fields_in_Tambah_Biaya_Tambahan_pop_up(DataTable tables){
         String durasiBiaya = "";
         String jumlahBiaya = "";
 
@@ -249,8 +249,8 @@ public class InvoiceManualSteps {
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
 
-    @When("the admin click {string} modal tambah biaya")
-    public void the_admin_click_modal_tambah_biaya(String button){
+    @When("the admin clicks {string} modal tambah biaya")
+    public void the_admin_clicks_modal_tambah_biaya(String button){
         if (button.equalsIgnoreCase("Close")){
             manualInvoice.clickClosePopUp();
         } else if (button.equalsIgnoreCase("Kembali")) {
@@ -263,8 +263,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertPopUpInInvoiceManual();
     }
 
-    @When("the admin create Invoice Manual {string} and check required fields {string}, {string}, {string}, {string}, {string}")
-    public void the_admin_create_Invoice_Manual_and_check_required_fields(String invType, String nama, String awal, String akhir, String durasi, String jml){
+    @When("the admin creates Invoice Manual {string} and checks required fields {string}, {string}, {string}, {string}, {string}")
+    public void the_admin_creates_Invoice_Manual_and_checks_required_fields(String invType, String nama, String awal, String akhir, String durasi, String jml){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
 
@@ -304,8 +304,8 @@ public class InvoiceManualSteps {
         }
     }
 
-    @When("admin create Invoice Manual {string}")
-    public void admin_create_Invoice_Manual(String invType, DataTable tables){
+    @When("admin creates Invoice Manual {string}")
+    public void admin_creates_Invoice_Manual(String invType, DataTable tables){
         String namaBiaya = "", periodeAwal = "", periodeAkhir = "", durasiBiaya = "", jumlahBiaya = "";
 
         detailBiaya = tables.asMaps(String.class, String.class);
@@ -338,8 +338,8 @@ public class InvoiceManualSteps {
         manualInvoice.clickTambahSubmitInPopUp();
     }
 
-    @When("the admin delete Invoice Manual")
-    public void the_admin_delete_Invoice_Manual(){
+    @When("the admin deletes Invoice Manual")
+    public void the_admin_deletes_Invoice_Manual(){
         manualInvoice.clickDeleteInvManual();
     }
 
@@ -352,8 +352,8 @@ public class InvoiceManualSteps {
         }
     }
 
-    @When("the admin create Invoice Manual {string} and input all fields {string}, {string}, {string}, {string}, {string}, {string}")
-    public void the_admin_create_Invoice_Manual_and_input_all_fields(String invType, String nama, String lainnya, String awal, String akhir, String durasi, String jml){
+    @When("the admin creates Invoice Manual {string} and input all fields {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_admin_creates_Invoice_Manual_and_input_all_fields(String invType, String nama, String lainnya, String awal, String akhir, String durasi, String jml){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
 
@@ -392,8 +392,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertDisburseToPemilikOnTable(disburse);
     }
 
-    @When("admin create multiple Invoice Manual {string}")
-    public void admin_create_multiple_invoice_manual(String invType, DataTable tables){
+    @When("admin creates multiple Invoice Manual {string}")
+    public void admin_creates_multiple_invoice_manual(String invType, DataTable tables){
         String namaBiaya = "", lainnya = "", periodeAwal = "", periodeAkhir = "", durasiBiaya = "", jumlahBiaya = "";
 
         detailBiaya = tables.asMaps(String.class, String.class);
@@ -432,8 +432,8 @@ public class InvoiceManualSteps {
         }
     }
 
-    @Then("{string} Invoice Manual")
-    public void Invoice_Manual(String invType, DataTable tables){
+    @Then("{string} Invoice Manual are displayed on table")
+    public void Invoice_Manual_are_displayed_on_table(String invType, DataTable tables){
         String namaBiayaTable = "";
         Integer row = 0;
 
@@ -448,8 +448,8 @@ public class InvoiceManualSteps {
         }
     }
 
-    @When("admin delete all {string} or sewa on Invoice Manual")
-    public void admin_delete_all_or_sewa_on_Invoice_Manual(String invType){
+    @When("admin deletes all {string} or sewa on Invoice Manual")
+    public void admin_deletes_all_or_sewa_on_Invoice_Manual(String invType){
         if (invType.equalsIgnoreCase("Biaya Tambahan")){
             manualInvoice.deleteAllBiaya();
         }
@@ -462,8 +462,8 @@ public class InvoiceManualSteps {
         }
     }
 
-    @When("admin edit Invoice Manual {string} and check them on the table")
-    public void admin_edit_Invoice_Manual_and_check_them_on_the_table(String invType, DataTable tables){
+    @When("admin edits Invoice Manual {string} and checks them on the table")
+    public void admin_edits_Invoice_Manual_and_checks_them_on_the_table(String invType, DataTable tables){
         String namaBiaya = "", periodeAwal = "", periodeAkhir = "", durasiBiaya = "", jumlahBiaya = "";
         String namaBiayaTable = "", jumlahBiayaTable = "", disburseToPemilik = "";
 
@@ -505,8 +505,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertDisburseToPemilikOnTable(disburseToPemilik);
     }
 
-    @When("admin edit Invoice Manual {string} into Lainnya and check them on the table")
-    public void admin_edit_Invoice_Manual_into_Lainnya_and_check_them_on_the_table(String invType, DataTable tables){
+    @When("admin edits Invoice Manual {string} into Lainnya and checks them on the table")
+    public void admin_edits_Invoice_Manual_into_Lainnya_and_checks_them_on_the_table(String invType, DataTable tables){
         String namaBiaya = "", lainnya = "", jumlahBiaya = "";
         String namaBiayaTable = "", jumlahBiayaTable = "", disburseToPemilik = "";
 
@@ -541,6 +541,28 @@ public class InvoiceManualSteps {
         manualInvoice.assertAkhirPeriodOnTable();
         manualInvoice.assertJumlahBiayaOnTable(jumlahBiayaTable);
         manualInvoice.assertDisburseToPemilikOnTable(disburseToPemilik);
+    }
+
+    @When("the admin creates Invoice Manual {string} and input Lainnya field {string}")
+    public void the_admin_creates_Invoice_Manual_and_input_Lainnya_field(String invType, String name){
+        admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.clickJenisBiayaTambahan();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")){
+            manualInvoice.clickJenisBiayaSewa();
+        }
+
+        manualInvoice.clickTambah();
+
+        manualInvoice.setNamaBiayaLainnyaInvoiceManual();
+        manualInvoice.setLainnyaInvoiceManual(name);
+    }
+
+    @Then("the error message Lainnya is displayed {string}")
+    public void the_error_message_Lainnya_is_displayed(String error){
+        manualInvoice.assertErrMsgLainnya(error);
     }
     //---End of Biaya Tambahan Pop Up---//
 }
