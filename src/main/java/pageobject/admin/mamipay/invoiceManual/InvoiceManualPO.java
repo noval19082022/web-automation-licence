@@ -74,6 +74,7 @@ public class InvoiceManualPO {
     private Locator periodeAkhirErrMsg;
     private Locator jumlahBiayaErrMsg;
     private Locator lainnyaField;
+    private Locator errMsgLainnya;
     // Tambah Biaya Pop Up
 
     // Buat dan Kirim Pop Up
@@ -141,6 +142,7 @@ public class InvoiceManualPO {
         periodeAkhirErrMsg = page.getByText("Periode akhir tidak boleh kosong.");
         jumlahBiayaErrMsg = page.getByText("Jumlah biaya tidak boleh kosong.");
         lainnyaField = page.locator("//input[@data-testid='billing-modal-nama-biaya']");
+        errMsgLainnya = page.getByTestId("error-message");
 
         //---Buat dan Kirim Pop Up---//
         buatDanKirimButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat dan Kirim"));
@@ -820,6 +822,31 @@ public class InvoiceManualPO {
      */
     public void clearDurasiBiayaInvoiceManual() {
         durasiBiayaText.clear();
+    }
+
+    /**
+     * Set Nama Biaya for Lainnya
+     */
+    public void setNamaBiayaLainnyaInvoiceManual() {
+        namaBiayaDropdownValue = page.locator("//div[@class='bg-c-dropdown']//li[contains(.,'Lainnya')]");
+
+        namaBiayaDropdown.click();
+        namaBiayaDropdownValue.click();
+    }
+
+    /**
+     * Assert Error Message on Lainnya Nama Biaya
+     * @param error
+     */
+    public void assertErrMsgLainnya(String error) {
+        assertThat(errMsgLainnya).hasText(error);
+    }
+
+    /**
+     * Clear Lainnya field
+     */
+    public void clearLainnyaField() {
+        lainnyaField.clear();
     }
     //---End of Biaya Tambahan---//
 }
