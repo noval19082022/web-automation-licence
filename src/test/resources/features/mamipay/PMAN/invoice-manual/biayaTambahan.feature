@@ -104,3 +104,19 @@ Feature: Invoice Manual - Biaya Tambahan
   Scenario: delete multiple biaya tambahan
     When admin delete all "biaya tambahan" or sewa on Invoice Manual
     Then the empty state of "biaya tambahan" is displayed
+
+  @TEST_PMAN-6055 @pman-prod
+  Scenario: Edit Biaya Tambahan
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And admin create Invoice Manual "Biaya Tambahan"
+      | Nama Biaya    | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+      | Parkir Mobil  | today         | tomorrow        | 3 hari        | 50000         |
+    And admin edit Invoice Manual "Biaya Tambahan" and check them on the table
+      | Nama Biaya  | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table | Disburse to Pemilik |
+      | Laundry     | edit for tomorrow | day after tomorrow  | 5 Kg          | 25000         | Laundry (5 Kg)      | tomorrow      | day after tomorrow  | Rp25.000              | Tidak               |
+    And admin edit Invoice Manual "Biaya Tambahan" into Lainnya and check them on the table
+      | Nama Biaya  | Lainnya | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table | Disburse to Pemilik |
+      | Lainnya     | Sampah  | -             | 30000         | Sampah              | tomorrow      | day after tomorrow  | Rp30.000              | Ya                  |

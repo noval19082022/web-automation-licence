@@ -56,6 +56,7 @@ public class InvoiceManualPO {
     private Locator deleteActionBtn;
     private Locator cancelOnDelConfirmation;
     private Locator deleteOnDelConfirmation;
+    private Locator editInvManBtn;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -90,6 +91,10 @@ public class InvoiceManualPO {
     private Locator yaButtonExitBuatInvoicePopUp;
     private Locator exitBuatInvoiceModal;
     //Exit Buat Invoice Pop Up
+
+    //---Edit Invoice Manual Pop Up---//
+    private Locator namaBiayaDropdownEdit;
+    //---Edit Invoice Manual Pop Up---//
     
     public InvoiceManualPO(Page page){
         this.page = page;
@@ -121,6 +126,7 @@ public class InvoiceManualPO {
         deleteActionBtn = page.locator("((//div[@class='action-button'])[1]/button)[2]");
         cancelOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
         deleteOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        editInvManBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("edit"));
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -245,7 +251,14 @@ public class InvoiceManualPO {
             calendar.add(Calendar.DATE, 1);
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
-            startDate = page.locator("//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')]");
+            startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+        } else if (periodeAwal.equalsIgnoreCase("edit for tomorrow")) {
+            //get tomorrow date
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 1);
+            Date dt = calendar.getTime();
+            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+            startDate = page.locator("(//span[@class='cell day selected today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
         } else {
             startDate = page.getByTestId("billing-modal-start-date").getByText(periodeAwal);
         }
@@ -271,6 +284,13 @@ public class InvoiceManualPO {
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             endDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+        } else if (periodeAkhir.equalsIgnoreCase("day after tomorrow")) {
+            //get day after tomorrow
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 2);
+            Date dt = calendar.getTime();
+            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+            endDate = page.locator("(//span[@class='cell day disabled today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
         } else {
             endDate = page.getByTestId("billing-modal-end-date").getByText(periodeAkhir);
         }
@@ -774,6 +794,32 @@ public class InvoiceManualPO {
      */
     public boolean isDeleteBiayaVisible(){
         return actionBtn != null;
+    }
+
+    /**
+     * Click Edit Invoice Manual
+     */
+    public void clickEditInvoice() {
+        editInvManBtn.click();
+    }
+
+    /**
+     * Choose nama biaya for edit
+     * @param namaBiaya
+     */
+    public void setEditNamaBiayaInvoiceManual(String namaBiaya) {
+        namaBiayaDropdownEdit = page.locator("//div[@data-testid='billing-modal-jenis-biaya']");
+        namaBiayaDropdownValue = page.locator("//div[@class='bg-c-dropdown']//li[contains(.,'"+namaBiaya+"')]");
+
+        namaBiayaDropdownEdit.click();
+        namaBiayaDropdownValue.click();
+    }
+
+    /**
+     * Clear durasi biaya
+     */
+    public void clearDurasiBiayaInvoiceManual() {
+        durasiBiayaText.clear();
     }
     //---End of Biaya Tambahan---//
 }
