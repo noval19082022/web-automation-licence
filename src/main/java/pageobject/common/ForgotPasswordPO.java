@@ -64,6 +64,13 @@ public class ForgotPasswordPO {
     }
 
     /**
+     * clear Phone Number On Owner or Tenant Login Page
+     */
+    public void clearInputPhoneNumber() {
+        inputPhoneNumber.clear();
+    }
+
+    /**
      * Choose Verification Method
      */
     public void chooseVerificationMethod() {
@@ -72,9 +79,21 @@ public class ForgotPasswordPO {
     }
 
     /**
+     * button Verification Method is disable
+     *
+     * @return boolean
+     */
+    public Boolean buuttonVerificationMethodIsDisable() {
+        return pilihMethodeVerifikasiBtn.isDisabled();
+    }
+
+    /**
      * Choose SMS to send OTP
      */
     public void selectOTPBySMS() {
+        if (pilihMethodeVerifikasiBtn.isVisible()) {
+            pilihMethodeVerifikasiBtn.click();
+        }
         sendOtpBySMSBtn.click();
     }
 
@@ -82,6 +101,9 @@ public class ForgotPasswordPO {
      * Choose WhatsApp to send OTP
      */
     public void selectOTPByWA() {
+        if (pilihMethodeVerifikasiBtn.isVisible()) {
+            pilihMethodeVerifikasiBtn.click();
+        }
         sendOtpByWABtn.click();
     }
 
@@ -105,10 +127,21 @@ public class ForgotPasswordPO {
 
     /**
      * Back Button From Send OTP Page
+     * And click pop up confirmation
      */
     public void backButtonFromSendOTPPage() {
         backBtn.click();
-        batalkanConfirmationBtn.click();
+        if (batalkanConfirmationBtn.isVisible()) {
+            batalkanConfirmationBtn.click();
+        }
+    }
+
+    /**
+     * Back Button From Send OTP Page
+     */
+    public void backButton() {
+        playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.TEXTBOX).first());
+        backBtn.click();
     }
 
     /**
@@ -118,5 +151,49 @@ public class ForgotPasswordPO {
      */
     public String getTitleVerifikasiPage() {
         return pilihMethodeVerifikasiTitle.textContent();
+    }
+
+    /**
+     * Get error message
+     *
+     * @return String error message
+     * @input String message
+     */
+    public String getErrorMessage(String message) {
+        return page.getByText(message).textContent();
+    }
+
+    /**
+     * Get message
+     *
+     * @return String message
+     * @input String message
+     */
+    public String getMessage(String message) {
+        return page.getByText(message).textContent();
+    }
+
+    /**
+     * check if message appear
+     *
+     * @return Boolean message is appear or got limiter 429(terjadi galat)
+     * @input String message
+     */
+    public Boolean isMessageAppear(String message) {
+        if (page.getByText(message).isVisible()) {
+            return page.getByText(message).isVisible();
+        } else {
+            return page.getByText("Terjadi galat. Silakan coba lagi.").isVisible();
+        }
+    }
+
+    /**
+     * input OTP
+     */
+    public void fillOTP(String otp) {
+        page.getByRole(AriaRole.TEXTBOX).first().fill(String.valueOf(otp.charAt(0)));
+        page.getByRole(AriaRole.TEXTBOX).nth(1).fill(String.valueOf(otp.charAt(1)));
+        page.getByRole(AriaRole.TEXTBOX).nth(2).fill(String.valueOf(otp.charAt(2)));
+        page.getByRole(AriaRole.TEXTBOX).nth(3).fill(String.valueOf(otp.charAt(3)));
     }
 }

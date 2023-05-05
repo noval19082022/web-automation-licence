@@ -158,4 +158,9 @@ public class NavigatesSteps {
     public void admin_go_to_pms_singgahsini() {
         playwright.navigateTo(Mamikos.PMS_URL);
     }
+
+    @When("owner navigates to property saya kos")
+    public void userNavigateToPropertySayaKos() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
+    }
 }

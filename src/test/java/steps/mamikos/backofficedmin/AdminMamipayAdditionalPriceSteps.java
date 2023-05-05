@@ -156,4 +156,20 @@ public class AdminMamipayAdditionalPriceSteps {
         int totalAmountDP = JavaHelpers.extractNumber(invoiceAdmin.getTotalAmount(2)) - 1000;
         Assert.assertEquals(totalAmountSettlement, (expectedAmount  - totalAmountDP));
     }
+
+    @Then("admin can sees total cost is basic amount + add ons fee + admin fee")
+    public void admin_can_sees_total_cost_is_basic_amount_add_ons_fee_admin_fee() {
+        int totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
+        int basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getBasicAmountText().split(",", 2)[0]);
+        int adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
+        int addonsFee = invoiceAdmin.getOtherPriceNumber("Add Ons");
+        Assert.assertEquals(totalCost, basicAmount + addonsFee + adminFee);
+    }
+
+    @Then("user can not see additional price with name below :$")
+    public void user_can_not_see_additional_price_with_name_below(List<String> otherPriceName) {
+        for (String s : otherPriceName) {
+            Assert.assertFalse(invoiceAdmin.isAdditionalPriceNameIsVisible(s), "Add ons additional price is still visible");
+        }
+    }
 }

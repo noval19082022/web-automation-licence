@@ -62,4 +62,14 @@ public class OwnerManageBillSteps {
         String jatuhTempo = "Belum bayar - Tenggat "+monthLength+" hari lagi";
         billdetail = billManage.clickOnInvoiceList(tenantName, jatuhTempo);
     }
+
+    @And("user clicks Sudah bayar tab")
+    public void userClicksSudahBayarTab() {
+        billManage.clicksOnSudahBayarTab();
+    }
+
+    @Then("user will see Status Tagihan and money disbursed to owner’s bank {string}")
+    public void userWillSeeStatusTagihanAndMoneyDisbursedToOwnerSBank(String labelSuccess) {
+        Assert.assertEquals(billManage.getLabelSuccessTransfer(), labelSuccess);
+    }
 }

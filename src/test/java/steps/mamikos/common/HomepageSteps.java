@@ -134,4 +134,35 @@ public class HomepageSteps {
     public void userCanSeeCopyrightIs(String copyright) {
         Assert.assertEquals(home.getCopyrightText(), copyright, "Copyright is not as expected!");
     }
+
+    @When("user see all owner promo")
+    public void userSeeAllOwnerPromo() {
+        home.clickOnSeeAllPromoOwnerButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @When("user see all promo ads")
+    public void userSeeAllPromoAds() {
+        home.clickOnSeeAllPromoAdsButton();
+    }
+
+    @When("user open Download App menu")
+    public void userOpenDownloadAppMenu() {
+        home.clickOnDownloadAppButton();
+    }
+
+    @When("user open Booking Kos menu")
+    public void userOpenBookingKosMenu() {
+        home.clickOnBookingKosHeaderButton();
+    }
+
+    @When("user open Popular Area in Jakarta")
+    public void userOpenPopularAreaInJakarta() {
+        home.clickPopularAreaOnJakarta();
+    }
+
+    @When("user open Around University in UGM")
+    public void userOpenAroundUniversityInUGM() {
+        home.clickAroundUGM();
+    }
 }

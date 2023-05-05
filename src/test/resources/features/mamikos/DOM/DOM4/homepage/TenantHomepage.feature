@@ -71,3 +71,33 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check copyright on footer on homepage
 		Given user go to mamikos homepage
 		Then user can see copyright is "© 2023 Mamikos.com, All rights reserved"
+
+	Scenario: [Dweb][Homepage]Check redirection Lihat semua on owner promo section
+		Given user go to mamikos homepage
+		When user see all owner promo
+		Then user should redirect to link that contains "/promo-kost?city="
+
+	Scenario: [Dweb][Homepage]Check redirection Lihat semua on promo ads section
+		Given user go to mamikos homepage
+		When user see all promo ads
+		Then user should redirect to link "https://promo.mamikos.com/"
+
+	Scenario: [Dweb][Homepage]Check redirection Download App menu on header
+		Given user go to mamikos homepage
+		When user open Download App menu
+		Then user should redirect to link "https://play.google.com/store/apps/details?id=com.git.mami.kos"
+
+	Scenario: [Dweb][Homepage]Check redirection Booking Kos menu on header
+		Given user go to mamikos homepage
+		When user open Booking Kos menu
+		Then user should redirect to link that contains "/booking"
+
+	Scenario: [Dweb][Homepage]Check redirection Popular Area - Jakarta
+		Given user go to mamikos homepage
+		When user open Popular Area in Jakarta
+		Then user should redirect to link that contains "/kost/kost-jakarta-murah"
+
+	Scenario: [Dweb][Homepage]Check redirection Around University - UGM
+		Given user go to mamikos homepage
+		When user open Around University in UGM
+		Then user should redirect to link that contains "/kost/kost-dekat-ugm-murah"
