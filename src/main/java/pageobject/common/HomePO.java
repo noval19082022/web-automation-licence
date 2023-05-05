@@ -49,7 +49,8 @@ public class HomePO {
     //Content
     private Locator seeAllPromoAds;
     private Locator seeAllPromoOwner;
-    private Locator popularArea;
+    private Locator popularAreaJakarta;
+    private Locator aroundUnivUGM;
 
     //footer
     private Locator tentangKamiButton;
@@ -86,7 +87,8 @@ public class HomePO {
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
-        this.popularArea = page.locator(".popular-area .popular-area-cards > a");
+        this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
+        this.aroundUnivUGM = page.getByTestId("link-UGM");
 
 
         //header
@@ -579,5 +581,39 @@ public class HomePO {
     public void clickOnSeeAllPromoAdsButton() {
         playwright.pageScrollToDown(300);
         seeAllPromoAds.click();
+    }
+
+    /**
+     * Click Download App buttom
+     *
+     */
+    public void clickOnDownloadAppButton() {
+        downloadAppButton.click();
+    }
+
+    /**
+     * Click Booking Kos Header buttom
+     *
+     */
+    public void clickOnBookingKosHeaderButton() {
+        bookingKosButtonHeadBar.click();
+    }
+
+    /**
+     * Click Jakarta on Popular Area
+     *
+     */
+    public void clickPopularAreaOnJakarta() {
+        playwright.pageScrollToDown(3000);
+        popularAreaJakarta.click();
+    }
+
+    /**
+     * Click UGM on Around University
+     *
+     */
+    public void clickAroundUGM() {
+        playwright.pageScrollToDown(3000);
+        aroundUnivUGM.click();
     }
 }
