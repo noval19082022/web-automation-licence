@@ -1,0 +1,108 @@
+package steps.pms.otherTransaction;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pageobject.pms.otherTransaction.AddOwnerExpenditurePO;
+import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
+
+import java.util.List;
+import java.util.Map;
+
+public class AddOwnerExpenditureSteps {
+    Page page = ActiveContext.getActivePage();
+    AddOwnerExpenditurePO add = new AddOwnerExpenditurePO(page);
+    listOwnerExpenditurePO list = new listOwnerExpenditurePO(page);
+
+    private List<Map<String, String>> biayaPengeluaran;
+
+    @When("admin add new owner expenditure {string} in property {string}")
+    public void admin_add_new_owner_expenditure_in_property(String type, String name) {
+        add.clickTambahData();
+        add.chooseCashOutType(type);
+        add.selectProperty(name);
+    }
+    @When("admin add multiple biaya pengeluaran :")
+    public void admin_add_multiple_biaya_pengeluaran(DataTable tables) {
+        biayaPengeluaran = tables.asMaps(String.class, String.class);
+
+        for (Map<String,String> biaya : biayaPengeluaran){
+            String no = biaya.get("no");
+            String category = biaya.get("Kategori Pengeluaran");
+            String name = biaya.get("Nama Pengeluaran");
+            String quantity = biaya.get("Kuantitas");
+            String amount = biaya.get("Nominal Pengeluaran");
+            String status = biaya.get("Status Persediaan");
+            String product = biaya.get("Jenis Produk");
+
+            add.setKategoriPengeluaran(category,no);
+            add.setNamaPengeluaran(name,no);
+            add.setKuantitas(quantity,no);
+            add.setNominalPengeluaran(amount,no);
+            add.setStatusPersediaan(status,no);
+            add.setJenisProduk(product,no);
+
+            //Tambah Pengeluaran if any
+            if (Integer.parseInt(no) < biayaPengeluaran.size()){
+                add.addMorePengeluaran();
+            }
+        }
+    }
+    @When("admin upload valid attachment")
+    public void admin_upload_valid_attachment() {
+        add.uploadAttachment("jpg");
+    }
+    @When("admin input no invoice biaya {string}")
+    public void admin_input_no_invoice_biaya(String invoice) {
+        add.setNoInvoiceBiaya(invoice);
+    }
+    @When("admin choose tujuan transfer {string}")
+    public void admin_choose_tujuan_transfer(String vendor) {
+        add.setTujuanTransfer(vendor);
+    }
+    @When("submit owner expenditure")
+    public void submit_owner_expenditure() {
+        add.submitAddOwnerExpenditure();
+    }
+    @Then("owner expenditure confirmation pop up appear")
+    public void owner_expenditure_confirmation_pop_up_appear() {
+        add.assertConfirmationPopUpAddOwnerExpenditure();
+    }
+    @When("user {string} tambah data owner expenditure")
+    public void user_tambah_data_owner_expenditure(String action) {
+        if (action.equalsIgnoreCase("cancel")){
+            add.cancelAddOwnerExpenditure();
+        } else if (action.equalsIgnoreCase("confirm")) {
+            add.confirmAddOwnerExpenditure();
+        }
+    }
+    @Then("confirmation pop up should closed")
+    public void confirmation_pop_up_should_closed() {
+        add.assertConfirmationPopUpAddOwnerExpenditureClosed();
+    }
+    @Then("toast message {string} should be appear")
+    public void toast_message_should_be_appear(String message) {
+        add.assertToastMessage(message);
+    }
+    @Then("new owner expenditure record should be on the first list contains:")
+    public void new_owner_expenditure_record_should_be_on_the_first_list_contains(DataTable tables) {
+        List<Map<String, String>> data = tables.asMaps(String.class,String.class);
+        for (Map<String,String> record : data) {
+            String tipe = record.get("Tipe Pengajuan Cash Out");
+            String prop = record.get("Nama Properti");
+            String total = record.get("Total Pengeluaran");
+
+            list.assertTipePengajuanCashoutFirstData(tipe);
+            list.assertPropertynameFirstData(prop);
+            list.assertTotalPengeluaranFirstData(total);
+        }
+    }
+    @Then("should contains nama pengeluaran:")
+    public void should_contains_nama_pengeluaran(List<String> tables) {
+        for (String pengeluaran: tables) {
+            list.assertFirstDataContainsPengeluaran(pengeluaran);
+        }
+    }
+}

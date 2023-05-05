@@ -25,6 +25,9 @@ public class listOwnerExpenditurePO {
     Locator vendorAccName;
     Locator resetFilterButton;
     Locator counterFilter;
+    Locator tipePengajuanCashoutFirstData;
+    Locator propertyNameFirstData;
+    Locator totalPengeluaranFirstData;
     //table owner expenditure
 
     //Filter Pop Up
@@ -77,6 +80,9 @@ public class listOwnerExpenditurePO {
         closePopUpButton = page.locator(".bg-c-modal__action-closable");
         resetFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
         counterFilter = page.locator(".bg-c-badge-counter--black");
+        tipePengajuanCashoutFirstData = page.locator("(//*[@class='main-item'])[1]/td").nth(2);
+        propertyNameFirstData = page.locator("(//*[@class='main-item'])[1]/td").nth(3);
+        totalPengeluaranFirstData = page.locator("((//*[@class='main-item'])[1]/td)[6]/p");
     }
 
     /**
@@ -378,5 +384,41 @@ public class listOwnerExpenditurePO {
      */
     public void clickResetButton() {
         resetFilterButton.click();
+    }
+
+    /**
+     * assert Tipe Pengajuan Cashout in first data list owner expenditure
+     * @param tipe
+     */
+    public void assertTipePengajuanCashoutFirstData(String tipe) {
+        assertThat(tipePengajuanCashoutFirstData).hasText(tipe);
+    }
+
+    /**
+     * assert property name in first data list owner expenditure
+     * @param prop property name
+     */
+    public void assertPropertynameFirstData(String prop) {
+        assertThat(propertyNameFirstData).hasText(prop);
+    }
+
+    /**
+     * assert total pengeluaran in first data list owner expenditure
+     * @param total
+     */
+    public void assertTotalPengeluaranFirstData(String total) {
+        assertThat(totalPengeluaranFirstData).hasText(total);
+    }
+
+    /**
+     * assert pengeluaran in first data list owner expenditure
+     * @param pengeluaran
+     */
+    public void assertFirstDataContainsPengeluaran(String pengeluaran) {
+        expandButton.first().click();
+        kategoriData = page.locator(".detail-table tbody").first();
+        kategoriData.scrollIntoViewIfNeeded();
+        assertThat(kategoriData).containsText(pengeluaran);
+        expandButton.first().click();
     }
 }
