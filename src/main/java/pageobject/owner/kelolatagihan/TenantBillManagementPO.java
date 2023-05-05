@@ -44,7 +44,7 @@ public class TenantBillManagementPO {
      * @param month String type month name
      */
     public void selectMonthFilter(String month) {
-        Locator monthName = page.getByText(month);
+        Locator monthName = page.getByTestId("billingManagementFilterDate-wrapper").getByText(month);
         playwright.waitFor(filterMonth, 30000.0);
         if (!filterMonth.allInnerTexts().get(0).contains(month)) {
             playwright.clickOn(filterMonth);
