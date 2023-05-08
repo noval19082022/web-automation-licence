@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_BBM-1421 @lawackrun1
+@regression @BBM2 @TEST_BBM-1421
 
 #  kost used: Kost Adi Auto SinggahSini
 #  (Kost SinggahSini FullPaid without Additional Fee and Deposit)
