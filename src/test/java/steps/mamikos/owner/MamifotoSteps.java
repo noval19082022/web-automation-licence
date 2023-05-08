@@ -1,8 +1,5 @@
 package steps.mamikos.owner;
 
-import pageobject.tenant.InvoicePO;
-import testdata.InvoiceTestData;
-import testdata.MamifotoTitle;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
@@ -10,8 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamifotoPO;
+import testdata.MamifotoTitle;
 import utilities.PlaywrightHelpers;
-import java.util.Locale;
 
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();

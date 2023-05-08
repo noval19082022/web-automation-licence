@@ -4,7 +4,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
