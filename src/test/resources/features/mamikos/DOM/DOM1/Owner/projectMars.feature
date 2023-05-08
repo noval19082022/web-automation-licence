@@ -28,8 +28,8 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 083838716xxx   | 083132396282   | qamamikos    |
-    And user dismiss FTUE goldplus
+      | 0888881251     | 083132396282   | qamamikos    |
+#    And user dismiss FTUE goldplus
     And user click chat button in top bar owner home page
     And user dismiss FTUE MARS Goldplus and FTUE Broadcast
     And search chat in chatlist "Tenant Mars"
