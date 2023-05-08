@@ -196,4 +196,24 @@ public class ForgotPasswordPO {
         page.getByRole(AriaRole.TEXTBOX).nth(2).fill(String.valueOf(otp.charAt(2)));
         page.getByRole(AriaRole.TEXTBOX).nth(3).fill(String.valueOf(otp.charAt(3)));
     }
+
+    /**
+     * click on text hyperlink
+     * @param text
+     */
+    public void clickText(String text) {
+        page.getByText(text).click();
+    }
+
+    /**
+     * click on text hyperlink
+     *
+     * @param text
+     * @return nextPage forgot password
+     */
+    public ForgotPasswordPO clickTextAndRedierctNextPage(String text) {
+        Page nextPage = playwright.movePageByClickLocator(page,
+                page.getByText(text));
+        return new ForgotPasswordPO(nextPage);
+    }
 }
