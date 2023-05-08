@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_BBM-1421
+@regression @BBM2 @TEST_BBM-1421 @lawackrun1
 
 #  kost used: Kost Adi Auto SinggahSini
 #  (Kost SinggahSini FullPaid without Additional Fee and Deposit)
@@ -38,7 +38,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner accept booking
+    And owner accept booking from tenant:
+      | tenant stag          | tenant prod          |
+      | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking

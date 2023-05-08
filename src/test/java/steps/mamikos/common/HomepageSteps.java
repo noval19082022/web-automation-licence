@@ -9,8 +9,6 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);

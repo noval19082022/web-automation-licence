@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
-import pageobject.common.LoginPO;
 import pageobject.owner.OwnerRegisterPO;
 
 import java.util.List;
