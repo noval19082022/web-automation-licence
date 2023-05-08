@@ -568,4 +568,14 @@ public class InvoiceManualSteps {
         }
     }
     //---End of Biaya Tambahan Pop Up---//
+
+    //---Biaya Sewa---//
+    @Then("{string}, {string}, {string}, {string} are displayed in the biaya sewa table")
+    public void are_displayed_in_the_biaya_sewa_table(String nama, String awal, String akhir, String jml){
+        manualInvoice.assertNamaBiayaOnTable(nama);
+        manualInvoice.assertAwalPeriodOnTable();
+        manualInvoice.assertAkhirPeriodOnTable();
+        manualInvoice.assertJumlahBiayaOnTable(jml);
+    }
+    //---End of Biaya Sewa---//
 }
