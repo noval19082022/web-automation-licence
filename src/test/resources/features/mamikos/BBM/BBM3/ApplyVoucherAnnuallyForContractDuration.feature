@@ -29,7 +29,7 @@ Feature: Apply Voucher Annually For Contract Duration
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod      |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
-    And tenant booking kost "Per Tahun"
+    And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
