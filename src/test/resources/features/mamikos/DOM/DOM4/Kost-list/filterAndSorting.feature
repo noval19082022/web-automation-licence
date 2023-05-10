@@ -1,5 +1,7 @@
+@DOM4
 Feature: Filter and Sorting
 
+  @TEST_DOM-1832 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check description of filter
     Given user navigates to ugm kost listing
     Then user clicks the "<filter>" button and the description will appears "<desc>"
@@ -8,7 +10,7 @@ Feature: Filter and Sorting
       | Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
       | Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
       | Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
-    
+  @TEST_DOM-1836 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check filter gender and verify the result
     Given user navigates to ugm kost listing
     When user sets gender filter "<gender>"
@@ -18,7 +20,7 @@ Feature: Filter and Sorting
       | Putra  |
       | Putri  |
       | Campur |
-
+  @TEST_DOM-1839 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter] Check filter facilityShare and verify the result
     Given user navigates to ugm kost listing
     When user sets facility filter "<facilityShare>"
@@ -26,7 +28,7 @@ Feature: Filter and Sorting
     Examples:
       | facilityShare |
       | WiFi          |
-
+  @TEST_DOM-1841 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter] Check filter kos rule and verify the result
     Given user navigates to ugm kost listing
     And user sets top kos rule filter "<kos rule>"
@@ -34,22 +36,22 @@ Feature: Filter and Sorting
     Examples:
       | kos rule     |
       | Akses 24 Jam |
-
+  @TEST_DOM-1834 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Kos Andalan filter
     Given user navigates to ugm kost listing
     And user sets Kos Andalan filter
     Then user validated the result kos have Kos Andalan label
-
+  @TEST_DOM-4863 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter functionality
     Given user navigates to mamikos kost kost jogja murah
     When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
-
+  @TEST_DOM-4864 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Promo Ngebut filter
     Given user navigates to ugm kost listing
     And user sets Promo Ngebut filter
     Then user validated the result kos have Promo Ngebut label
-
+  @TEST_DOM-1774 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check time range filter functionality
     Given user navigates to ugm kost listing
     When user set range time filter "<timeFilter>"
@@ -58,12 +60,12 @@ Feature: Filter and Sorting
       | timeFilter     | time    |
       | Mingguan       | minggu  |
       | Per 3 Bulan    | 3 bulan |
-
+  @TEST_DOM-1843 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termahal"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga termahal" in kost listing
     Then user validates the price of first listing is more expensive than the last listing in listing property page
-
+  @TEST_DOM-1837 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termurah"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga termurah" in kost listing
