@@ -56,6 +56,22 @@ public class MamikosListInvoicePO {
     }
 
     /**
+     * This method will set status on Change Status Invoice Page
+     * @param status
+     */
+    public void setStatusPaidOrUnpaid(String status) {
+        page.getByRole(AriaRole.COMBOBOX).selectOption(status);
+    }
+
+    /**
+     * this method will fill date on change status invoice page
+     * @param date
+     */
+    public void setDate(String date) {
+        page.getByPlaceholder("Transaction Date").fill(date);
+    }
+
+    /**
      * Search invoice by
      * @param searchBy String data type
      */

@@ -22,6 +22,17 @@ public class SearchContractSteps {
     private SearchContractPO searchContract = new SearchContractPO(page);
     private AdminMamipayDashboardPO admin = new AdminMamipayDashboardPO(page);
 
+    @When("admin go to {string} menu")
+    public void adminGoestToLeftMenu(String menu) {
+        admin.clickOnTextHyperlink(menu);
+    }
+
+    @When("admin search contract by kost level {string}")
+    public void adminSearchContractByKostLevel(String kostLevel) {
+        searchContract.selectKosLevel(kostLevel);
+        searchContract.clickOnSearchButton();
+    }
+
     @When("admin search contract by tenant phone number:")
     public void adminSearchContractByTenantPhoneNumber(DataTable table) {
         searchData = table.asMaps(String.class, String.class);
@@ -44,8 +55,7 @@ public class SearchContractSteps {
 
     @Then("admin should success terminate contract")
     public void adminShouldSuccessTerminateContract() {
-        if (searchContract.waitUntilSuccessTerminateVisible())
-        {
+        if (searchContract.waitUntilSuccessTerminateVisible()) {
             Assert.assertEquals(searchContract.getSuccessTerminateHeadingText().trim(), "Kontrak berhasil diakhiri.");
         }
     }
