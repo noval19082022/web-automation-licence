@@ -13,8 +13,8 @@ Feature: Search Contract
 
     # see detail pop up
     And admin search contract by tenant phone number:
-      | phone stag   | phone prod   |
-      | 081197878841 | 081197878841 |
+      | phone stag   | phone prod  |
+      | 081197878841 | 08119787884 |
     And admin search contract by kost level "APIK"
     And admin akhiri contract
     Then admin should success terminate contract
