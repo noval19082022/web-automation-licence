@@ -51,6 +51,19 @@ public class TenantBookingSteps {
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
+    @When("tenant booking kost {string} {string}")
+    public void tenantBookingKost(String boardingDate, String paymentPeriod){
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate(boardingDate);
+        kostDetail.selectBookingPeriod(paymentPeriod);
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
+
+
     @And("user will see Jumlah Penyewa can add until 3 Penyewa")
     public void add_three_penyewa() {
         bookingForm = new BookingFormPO(page);
@@ -203,4 +216,5 @@ public class TenantBookingSteps {
     public void userClickMauCobaDongSectionAtHomepage() {
         kostDetail.clickMauCobaDongSectionAtHomepage();
     }
+
 }
