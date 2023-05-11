@@ -12,7 +12,6 @@ Feature: Search Contract
     And admin want to reactivate invoice by invoice number "43568812/2023/05/75761"
 
     # see detail pop up
-    And admin go to "Search Contract" menu
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
       | 081197878841 | 081197878841 |
