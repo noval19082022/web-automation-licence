@@ -51,10 +51,10 @@ public class TenantBookingSteps {
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
-    @When("tenant booking kost {string}")
-    public void tenantBookingKost(String paymentPeriod) {
+    @When("tenant booking kost {string} {string}")
+    public void tenantBookingKost(String boardingDate, String paymentPeriod){
         kostDetail.dismissFTUE();
-        kostDetail.selectBookingDate("today");
+        kostDetail.selectBookingDate(boardingDate);
         kostDetail.selectBookingPeriod(paymentPeriod);
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();
@@ -216,4 +216,5 @@ public class TenantBookingSteps {
     public void userClickMauCobaDongSectionAtHomepage() {
         kostDetail.clickMauCobaDongSectionAtHomepage();
     }
+
 }
