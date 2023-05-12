@@ -17,3 +17,21 @@
         | Kekurangan biaya sewa kamar       | -       | -     | -         | 3 hari          | 500000        | Kekurangan biaya sewa kamar (3 hari)        | -             | -               | Rp500.000             |
         | Pindah tipe kamar/kos (relokasi)  | -       | today | tomorrow  | 2A ke 1A        | 20000         | Pindah tipe kamar/kos (relokasi) (2A ke 1A) | today         | tomorrow        | Rp20.000              |
         | Lainnya                           | Sampah  | today | tomorrow  | Tambahan Kasur  | 100000        | Sampah (Tambahan Kasur)                     | today         | tomorrow        | Rp100.000             |
+
+    @TEST_PMAN-5767 @pman-prod
+    Scenario Outline: <button> modal tambah biaya sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And the admin selects "Kekurangan biaya sewa kamar" in the "Biaya Sewa"
+      When the admin fills all fields in Tambah Biaya Sewa pop up
+        | Durasi Biaya  | Jumlah Biaya  |
+        | Kebersihan    | 25000         |
+      And the admin clicks "<button>" modal tambah biaya
+      Then tambah biaya modal is closed
+
+      Examples:
+        | button      |
+        | close       |
+        | kembali     |
