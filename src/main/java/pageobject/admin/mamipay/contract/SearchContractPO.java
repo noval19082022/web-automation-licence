@@ -23,6 +23,7 @@ public class SearchContractPO {
     Locator akhiriContractLink;
     Locator selectTerminateDate;
     Locator successTerminateText;
+    private Locator editDepositBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
 
@@ -42,6 +43,7 @@ public class SearchContractPO {
         akhiriContractButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
+        editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
     }
 
     /**
@@ -52,6 +54,13 @@ public class SearchContractPO {
     public void selectKosLevel(String kostLevel) {
         page.locator(".select2-search").click();
         page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(kostLevel)).click();
+    }
+
+    /**
+     * Click on edit deposit button
+     */
+    public void clickOnEditDepositButton() {
+        editDepositBtn.click();
     }
 
     /**

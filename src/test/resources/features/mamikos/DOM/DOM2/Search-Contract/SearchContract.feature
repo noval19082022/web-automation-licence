@@ -30,24 +30,24 @@ Feature: Search Contract
 
     # see detail pop up
     And admin search contract by tenant phone number:
-      | phone stag   | phone prod  |
+      | phone stag   | phone prod   |
       | 089220220105 | 089220220105 |
     And admin search contract by kost level "SinggahSini"
     Then admin want to akhiri contract but akhiri kontrak button is disabled
 
-#	#popup terminate non kost selection
-#	#(after tenant paid the order contract)
-#  @TEST_DOM-433 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
-#  Scenario: [BackOffice][popup terminate][mamirooms] Admin See detail pop up
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "081177778888"
-#    And user fills kost level "mamirooms"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see Konfirmasi Sisa Deposit button hidden
+  @TEST_DOM-433 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
+  Scenario: [BackOffice][popup terminate][mamirooms] Admin See detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod   |
+      | 081177778888 | 081177778888 |
+    And admin search contract by kost level "Mamirooms"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
+
 #	#admin search data tenant with valid invoice
 #  @TEST_DOM-430 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchValidInput @web @web-covered
 #  Scenario: [BackOffice][search contract] Admin search data tenant with valid input

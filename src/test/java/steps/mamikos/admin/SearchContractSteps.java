@@ -33,6 +33,16 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @And("admin want to edit deposit")
+    public void editDeposit() {
+        searchContract.clickOnEditDepositButton();
+    }
+
+    @Then("admin will see detail pop up {string}")
+    public void detailPopUp(String popUp) {
+        Assert.assertTrue(admin.getPopUpText(popUp), "pop up " + popUp + " is doesn't appear");
+    }
+
     @Then("admin want to akhiri contract but akhiri kontrak button is disabled")
     public void akhiriButtonIsDisable() {
         Assert.assertTrue(searchContract.isTerminatedContractButtonDissable(), "Akhiri Konrak button is not disable");

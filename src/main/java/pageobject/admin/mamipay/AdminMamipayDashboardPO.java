@@ -30,7 +30,16 @@ public class AdminMamipayDashboardPO {
      * @param text
      */
     public void clickOnTextHyperlink(String text) {
-        page.getByText(text).click();
+        page.getByText(text).first().click();
+    }
+
+    /**
+     * this method will check if admin get pop up
+     * @param popUp
+     * @return boolean
+     */
+    public Boolean getPopUpText(String popUp) {
+        return page.getByText(popUp).first().isVisible();
     }
 
     /**
