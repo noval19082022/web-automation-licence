@@ -436,6 +436,34 @@ public class InvoiceManualSteps {
                 manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
                 manualInvoice.clickTambahSubmitInPopUp();
             }
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            manualInvoice.clickJenisBiayaSewa();
+            for (int i=0; i<4; i++){
+                manualInvoice.clickTambah();
+                namaBiaya = detailBiaya.get(i).get("Nama Biaya");
+                manualInvoice.setNamaBiayaInvoiceManual(namaBiaya);
+
+                lainnya = detailBiaya.get(i).get("Lainnya");
+                if (!(lainnya.equalsIgnoreCase("-"))){
+                    manualInvoice.setLainnyaInvoiceManual(lainnya);
+                }
+
+                periodeAwal = detailBiaya.get(i).get("Periode Awal");
+                if (!(periodeAwal.equalsIgnoreCase("-"))){
+                    manualInvoice.setPeriodeAwalInvoiceManual(periodeAwal);
+                }
+
+                periodeAkhir = detailBiaya.get(i).get("Periode Akhir");
+                if (!(periodeAkhir.equalsIgnoreCase("-"))){
+                    manualInvoice.setPeriodeAkhirInvoiceManual(periodeAkhir);
+                }
+
+                durasiBiaya = detailBiaya.get(i).get("Durasi Biaya");
+                jumlahBiaya = detailBiaya.get(i).get("Jumlah Biaya");
+                manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+                manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+                manualInvoice.clickTambahSubmitInPopUp();
+            }
         }
     }
 
@@ -447,6 +475,12 @@ public class InvoiceManualSteps {
         detailBiaya = tables.asMaps(String.class, String.class);
 
         if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            for (int i=0; i<4; i++){
+                namaBiayaTable = detailBiaya.get(i).get("Nama Biaya on Table");
+                manualInvoice.assertNamaBiayaTableList(namaBiayaTable);
+                manualInvoice.assertNamaBiayaInRow(row);
+            }
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
             for (int i=0; i<4; i++){
                 namaBiayaTable = detailBiaya.get(i).get("Nama Biaya on Table");
                 manualInvoice.assertNamaBiayaTableList(namaBiayaTable);

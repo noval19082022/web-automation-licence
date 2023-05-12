@@ -35,3 +35,22 @@
         | button      |
         | close       |
         | kembali     |
+
+    @TEST_PMAN-5775 @pman-prod
+    Scenario: Add multiple biaya sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And admin creates multiple Invoice Manual "Biaya Sewa"
+        | Nama Biaya                        | Lainnya     | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
+        | Perpanjang sewa harian            | -           | today         | tomorrow        | automation pman | 50000         |
+        | Kekurangan biaya sewa kamar       | -           | -             | -               | automation pman | 50000         |
+        | Pindah tipe kamar/kos (relokasi)  | -           | today         | tomorrow        | automation pman | 50000         |
+        | Lainnya                           | Ganti Lampu | -             | -               | automation pman | 100000        |
+      Then "Biaya Sewa" Invoice Manual are displayed on table
+        | Nama Biaya on Table                                 | Row |
+        | Perpanjang sewa harian (automation pman)            | 1   |
+        | Kekurangan biaya sewa kamar (automation pman)       | 2   |
+        | Pindah tipe kamar/kos (relokasi) (automation pman)  | 3   |
+        | Ganti Lampu (automation pman)                       | 4   |
