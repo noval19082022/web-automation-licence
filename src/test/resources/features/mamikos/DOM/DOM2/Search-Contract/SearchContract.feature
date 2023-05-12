@@ -48,18 +48,16 @@ Feature: Search Contract
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
 
-#	#admin search data tenant with valid invoice
-#  @TEST_DOM-430 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchValidInput @web @web-covered
-#  Scenario: [BackOffice][search contract] Admin search data tenant with valid input
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    And user search by "Related Invoice Number" and input field "95357497/2023/04/01822"
-#    And user click search button
-#    And user click see log button
-#    Then user will see detail data contract
-##		Then user will see detail data tenant (detail tenant, detail kost, contract period, invoice url, from booking, added by consultant, ramaining checkout, harga sewa, deposit, status kontrak, action button)
-#	#admin search data tenant with valid Renter number
+  @TEST_DOM-430 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchValidInput @web @web-covered
+  Scenario: [BackOffice][search contract] Admin search data tenant with valid input
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search by "Related Invoice Number" and input field "95357497/2023/04/01822"
+    And admin want to see log contract
+    Then admin will see detail pop up "Data Contract"
+
 #  @TEST_DOM-402 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][search contract] Admin see sisa deposit
 #    Given user navigates to "backoffice"

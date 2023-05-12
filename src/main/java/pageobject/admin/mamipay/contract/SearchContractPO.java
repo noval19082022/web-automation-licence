@@ -24,6 +24,7 @@ public class SearchContractPO {
     Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
+    private Locator seeLogBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
 
@@ -44,6 +45,7 @@ public class SearchContractPO {
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
+        seeLogBtn = page.locator("a").getByText("See log").first();
     }
 
     /**
@@ -61,6 +63,13 @@ public class SearchContractPO {
      */
     public void clickOnEditDepositButton() {
         editDepositBtn.click();
+    }
+
+    /**
+     * Click on see log button
+     */
+    public void clickOnSeeLogButton() {
+        seeLogBtn.click();
     }
 
     /**

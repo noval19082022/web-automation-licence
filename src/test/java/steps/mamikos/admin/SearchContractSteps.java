@@ -33,9 +33,22 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @When("admin search by {string} and input field {string}")
+    public void adminSearchContractBy(String searchBy, String inputField) {
+        admin.clickOnSearchContract();
+        searchContract.selectSearchBy(searchBy);
+        searchContract.fillSearchByValue(inputField);
+        searchContract.clickOnSearchButton();
+    }
+
     @And("admin want to edit deposit")
     public void editDeposit() {
         searchContract.clickOnEditDepositButton();
+    }
+
+    @And("admin want to see log contract")
+    public void seeLog() {
+        searchContract.clickOnSeeLogButton();
     }
 
     @Then("admin will see detail pop up {string}")
