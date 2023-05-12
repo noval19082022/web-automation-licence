@@ -37,20 +37,20 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
     //    public void afterClass() {
     //    }
     //
-        @Parameters({"squadName"})
-        @AfterTest(alwaysRun = true)
-        public void afterTest(String squadName) throws CluecumberException {
-            String jsonDirectory = "target/result/" + squadName;
-            String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
-            PlaywrightSourceManager.getLocalBrowser().close();
-            PlaywrightSourceManager.getLocalPlaywright().close();
-            new CluecumberCore.Builder()
-                    .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
-                    .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
-                    .setCustomPageTitle(squadName + "Report")
-                    .setExpandAttachments(true)
-                    .build().generateReports(jsonDirectory, reportDirectory);
-        }
+    @Parameters({"squadName"})
+    @AfterTest(alwaysRun = true)
+    public void afterTest(String squadName) throws CluecumberException {
+        String jsonDirectory = "target/result/" + squadName;
+        String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
+        PlaywrightSourceManager.getLocalBrowser().close();
+        PlaywrightSourceManager.getLocalPlaywright().close();
+        new CluecumberCore.Builder()
+            .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
+            .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)
+            .setCustomPageTitle(squadName + "Report")
+            .setExpandAttachments(true)
+            .build().generateReports(jsonDirectory, reportDirectory);
+    }
 
     @AfterSuite
     public void afterSuite() {

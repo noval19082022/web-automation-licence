@@ -237,6 +237,8 @@ public class TenantPaymentSteps {
 
     @When("tenant go to invoice DP from riwayat booking")
     public void tenantGoToInvoiceDP() {
+        page = ActiveContext.getActivePage();
+        riwayatBooking = new RiwayatBookingPO(page);
         invoice = riwayatBooking.goToSettlementInvoice();
     }
 
