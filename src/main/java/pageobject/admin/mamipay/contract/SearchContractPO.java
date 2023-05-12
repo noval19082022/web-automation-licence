@@ -25,6 +25,7 @@ public class SearchContractPO {
     Locator successTerminateText;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
+
     public SearchContractPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -45,6 +46,7 @@ public class SearchContractPO {
 
     /**
      * Select dropdown search kost level
+     *
      * @param kostLevel option value String type
      */
     public void selectKosLevel(String kostLevel) {
@@ -54,6 +56,7 @@ public class SearchContractPO {
 
     /**
      * Select dropdown search by it value
+     *
      * @param optionValue option value String type
      */
     public void selectSearchBy(String optionValue) {
@@ -62,6 +65,7 @@ public class SearchContractPO {
 
     /**
      * Fill search input value
+     *
      * @param search String type e.g (Phone Number Tenant or Phone Number Owner)
      */
     public void fillSearchByValue(String search) {
@@ -73,6 +77,19 @@ public class SearchContractPO {
      */
     public void clickOnSearchButton() {
         searchButton.click();
+    }
+
+
+    /**
+     * check if akhiri kontak button on terminate kontrak pop up is disable
+     *
+     * @return boolean
+     */
+    public Boolean isTerminatedContractButtonDissable() {
+        if (page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak")).isVisible()) {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak")).click();
+        }
+        return page.locator("div").locator("input").getByText("Akhiri Kontrak").isDisabled();
     }
 
     /**
@@ -89,21 +106,22 @@ public class SearchContractPO {
      * Set accept dialog and click on terminate contract button
      */
     public void clickOnTerminateContractButton() {
-           if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
-               playwright.acceptDialog(berhentikanContractButton);
+        if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
+            playwright.acceptDialog(berhentikanContractButton);
 
-               if (inputTerminateDate.isVisible()) {
-                   inputTerminateDate.click();
-                   selectTerminateDate.click();
-                   berhentikanContractPopUpButton.click();
-               }
-               page.waitForSelector(".callout.callout-success");
-           }
+            if (inputTerminateDate.isVisible()) {
+                inputTerminateDate.click();
+                selectTerminateDate.click();
+                berhentikanContractPopUpButton.click();
+            }
+            page.waitForSelector(".callout.callout-success");
+        }
     }
 
 
     /**
      * Wait until terminated is process is finished
+     *
      * @return
      */
     public boolean waitUntilSuccessTerminateVisible() {
@@ -112,6 +130,7 @@ public class SearchContractPO {
 
     /**
      * Get success terminate heading text
+     *
      * @return String data type
      */
     public String getSuccessTerminateHeadingText() {
@@ -126,7 +145,7 @@ public class SearchContractPO {
         page.waitForLoadState(LoadState.LOAD);
         if (akhiriContractLink.isVisible()) {
             playwright.acceptDialog(akhiriContractLink);
-        } else if (akhiriContractButton.isVisible()){
+        } else if (akhiriContractButton.isVisible()) {
             playwright.clickOn(akhiriContractButton);
             inputTerminateDate.fill(JavaHelpers.getCurrentDateOrTime("dd-MM-yyyy HH:mm:ss"));
             playwright.forceClickOn(akhiriContractHead);

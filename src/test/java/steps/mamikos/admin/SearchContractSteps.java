@@ -33,6 +33,11 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @Then("admin want to akhiri contract but akhiri kontrak button is disabled")
+    public void akhiriButtonIsDisable() {
+        Assert.assertTrue(searchContract.isTerminatedContractButtonDissable(), "Akhiri Konrak button is not disable");
+    }
+
     @When("admin search contract by tenant phone number:")
     public void adminSearchContractByTenantPhoneNumber(DataTable table) {
         searchData = table.asMaps(String.class, String.class);
