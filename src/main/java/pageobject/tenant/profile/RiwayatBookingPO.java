@@ -43,7 +43,9 @@ public class RiwayatBookingPO {
      */
     public InvoicePO goToSettlementInvoice() {
         playwright.clickOn(bayarSekarangButton);
-        playwright.clickOn(bayarPelunasanButton);
+        page.waitForPopup(() -> {
+            playwright.clickOn(bayarPelunasanButton);
+        });
         return new InvoicePO(page);
     }
 

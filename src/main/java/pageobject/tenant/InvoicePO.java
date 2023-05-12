@@ -350,7 +350,7 @@ public class InvoicePO {
      * filter Open Tagihan Kost
      */
     public void openBills(){
-        playwright.clickOn(openTagihan);
+        playwright.clickOn(openTagihan.last());
     }
 
     /**

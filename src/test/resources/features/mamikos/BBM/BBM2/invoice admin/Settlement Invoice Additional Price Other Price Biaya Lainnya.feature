@@ -7,42 +7,44 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
-      | phone stag    | phone prod    |
-      | 087708777618  | 087708777618  |
+      | phone stag   | phone prod   |
+      | 087708777618 | 087708777618 |
     And admin terminate contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password   |
-      | 087708777618  | 087708777618  | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 087708777618 | 087708777618 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password   |
-      | 087708777618  | 087708777618  | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 087708777618 | 087708777618 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag               | kost name prod             |
-      | Kost Wild Rift Settlement    | Kost Wild Rift Settlement  |
+      | kost name stag            | kost name prod            |
+      | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod      | password      |
-      | 081362464341    | 081362464341    | 1d0lt3stb4ru  |
-    And owner accept booking
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+    And owner accept booking from tenant:
+      | tenant stag      | tenant prod      |
+      | Nunu And Willump | Nunu And Willump |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Check Invoice number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 087708777618   | 087708777618  | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat booking
     And tenant get invoice number from riwayat booking
 
@@ -52,11 +54,11 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin clicks on invoice details first index:
-      | search by              | renter_phone_number      |
-      | search value           | 087708777618             |
+      | search by    | renter_phone_number |
+      | search value | 087708777618        |
     Then admin changes DP basic amount and verify total amount change on settlement invoice for tenant 900000:
-      | search by              | renter_phone_number      |
-      | search value           | 087708777618             |
+      | search by    | renter_phone_number |
+      | search value | 087708777618        |
 
   Scenario: Tenant Pay DP Invoice
     Given user go to mamikos homepage
@@ -64,7 +66,8 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | phone stag   | phone prod   | password  |
       | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using mandiri
+    And tenant set active page to 0
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
@@ -96,10 +99,10 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
   Scenario: Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 081362464341   | 081362464341   | 1d0lt3stb4ru |
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     And owner go to bill page of kost "Kost Wild Rift Settlement" on month of "current"
-    And user open invoice details
+    And owner go to detail tagihan with tenant name is "Nunu And Willump" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
 
 
