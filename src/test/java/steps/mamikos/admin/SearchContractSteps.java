@@ -33,7 +33,7 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
-    @When("admin search by {string} and input field {string}")
+    @When("admin search contract by {string} and input field {string}")
     public void adminSearchContractBy(String searchBy, String inputField) {
         admin.clickOnSearchContract();
         searchContract.selectSearchBy(searchBy);
@@ -54,6 +54,16 @@ public class SearchContractSteps {
     @Then("admin will see detail pop up {string}")
     public void detailPopUp(String popUp) {
         Assert.assertTrue(admin.getPopUpText(popUp), "pop up " + popUp + " is doesn't appear");
+    }
+
+    @And("admin input biaya kerusakan {string}")
+    public void biayaKerusakan(String biayaKerusakan) {
+        admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
+    }
+
+    @Then("admin will see sisa deposit")
+    public void sisaDeposit() {
+        Assert.assertTrue(admin.getSisaDepositOnDetailPopup(), "Sisa deposit pop up is doesn't appear");
     }
 
     @Then("admin want to akhiri contract but akhiri kontrak button is disabled")

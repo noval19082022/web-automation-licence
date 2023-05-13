@@ -54,22 +54,22 @@ Feature: Search Contract
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin search by "Related Invoice Number" and input field "95357497/2023/04/01822"
+    And admin search contract by "Related Invoice Number" and input field "95357497/2023/04/01822"
     And admin want to see log contract
     Then admin will see detail pop up "Data Contract"
 
-#  @TEST_DOM-402 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][search contract] Admin see sisa deposit
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "089220211208"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see detail pop up edit deposit Apik "Edit Deposit for Confirm to Finance"
-#    And user input biaya kerusakan "50000"
-#    Then user will see sisa deposit
+  @TEST_DOM-402 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][search contract] Admin see sisa deposit
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
+    And admin input biaya kerusakan "50000"
+    Then admin will see sisa deposit
+
 #	#admin search data tenant with invalid Renter number
 #  @TEST_DOM-403 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @InputDamageDetails @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][search contract] Search data tenant with input Damage Details more than 200 characters
