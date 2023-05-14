@@ -15,6 +15,7 @@ public class Codegen {
             // Pause the page, and start recording manually.
             Page page = context.newPage();
             page.navigate("https://jambu.kerupux.com");
+//            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
 //            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
             //loginOwner(page);

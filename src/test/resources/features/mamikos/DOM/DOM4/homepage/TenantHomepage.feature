@@ -71,32 +71,32 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check copyright on footer on homepage
 		Given user go to mamikos homepage
 		Then user can see copyright is "© 2023 Mamikos.com, All rights reserved"
-
+	@TEST_DOM-4855 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Lihat semua on owner promo section
 		Given user go to mamikos homepage
 		When user see all owner promo
 		Then user should redirect to link that contains "/promo-kost?city="
-
+	@TEST_DOM-4856 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Lihat semua on promo ads section
 		Given user go to mamikos homepage
 		When user see all promo ads
 		Then user should redirect to link "https://promo.mamikos.com/"
-
+	@TEST_DOM-4857 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Download App menu on header
 		Given user go to mamikos homepage
 		When user open Download App menu
 		Then user should redirect to link "https://play.google.com/store/apps/details?id=com.git.mami.kos"
-
+	@TEST_DOM-4858 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Booking Kos menu on header
 		Given user go to mamikos homepage
 		When user open Booking Kos menu
 		Then user should redirect to link that contains "/booking"
-
+	@TEST_DOM-4859 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Popular Area - Jakarta
 		Given user go to mamikos homepage
 		When user open Popular Area in Jakarta
 		Then user should redirect to link that contains "/kost/kost-jakarta-murah"
-
+	@TEST_DOM-4860 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Around University - UGM
 		Given user go to mamikos homepage
 		When user open Around University in UGM

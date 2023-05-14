@@ -215,13 +215,21 @@ public class InvoiceManualSteps {
     //---Biaya Tambahan---//
 
     //---Biaya Tambahan Pop Up---//
-    @When("the admin selects {string} in the Biaya Tambahan")
-    public void the_admin_selects_in_the_Biaya_Tambahan(String biaya){
+    @When("the admin selects {string} in the {string}")
+    public void the_admin_selects_in_the(String biaya, String invType){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
-        manualInvoice.clickJenisBiayaTambahan();
-        manualInvoice.clickTambah();
-        manualInvoice.setNamaBiayaInvoiceManual(biaya);
+
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            manualInvoice.clickJenisBiayaTambahan();
+            manualInvoice.clickTambah();
+            manualInvoice.setNamaBiayaInvoiceManual(biaya);
+        } else {
+            manualInvoice.clickJenisBiayaSewa();
+            manualInvoice.clickTambah();
+            manualInvoice.setNamaBiayaInvoiceManual(biaya);
+        }
+
     }
 
     @Then("the Periode Awal and Periode Akhir are disable")
@@ -428,6 +436,34 @@ public class InvoiceManualSteps {
                 manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
                 manualInvoice.clickTambahSubmitInPopUp();
             }
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            manualInvoice.clickJenisBiayaSewa();
+            for (int i=0; i<4; i++){
+                manualInvoice.clickTambah();
+                namaBiaya = detailBiaya.get(i).get("Nama Biaya");
+                manualInvoice.setNamaBiayaInvoiceManual(namaBiaya);
+
+                lainnya = detailBiaya.get(i).get("Lainnya");
+                if (!(lainnya.equalsIgnoreCase("-"))){
+                    manualInvoice.setLainnyaInvoiceManual(lainnya);
+                }
+
+                periodeAwal = detailBiaya.get(i).get("Periode Awal");
+                if (!(periodeAwal.equalsIgnoreCase("-"))){
+                    manualInvoice.setPeriodeAwalInvoiceManual(periodeAwal);
+                }
+
+                periodeAkhir = detailBiaya.get(i).get("Periode Akhir");
+                if (!(periodeAkhir.equalsIgnoreCase("-"))){
+                    manualInvoice.setPeriodeAkhirInvoiceManual(periodeAkhir);
+                }
+
+                durasiBiaya = detailBiaya.get(i).get("Durasi Biaya");
+                jumlahBiaya = detailBiaya.get(i).get("Jumlah Biaya");
+                manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+                manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+                manualInvoice.clickTambahSubmitInPopUp();
+            }
         }
     }
 
@@ -439,6 +475,12 @@ public class InvoiceManualSteps {
         detailBiaya = tables.asMaps(String.class, String.class);
 
         if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            for (int i=0; i<4; i++){
+                namaBiayaTable = detailBiaya.get(i).get("Nama Biaya on Table");
+                manualInvoice.assertNamaBiayaTableList(namaBiayaTable);
+                manualInvoice.assertNamaBiayaInRow(row);
+            }
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
             for (int i=0; i<4; i++){
                 namaBiayaTable = detailBiaya.get(i).get("Nama Biaya on Table");
                 manualInvoice.assertNamaBiayaTableList(namaBiayaTable);
@@ -575,6 +617,25 @@ public class InvoiceManualSteps {
         manualInvoice.assertAwalPeriodOnTable();
         manualInvoice.assertAkhirPeriodOnTable();
         manualInvoice.assertJumlahBiayaOnTable(jml);
+    }
+
+    @When("the admin fills all fields in Tambah Biaya Sewa pop up")
+    public void the_admin_fills_all_fields_in_Tambah_Biaya_Sewa_pop_up(DataTable tables){
+        String durasiBiaya = "";
+        String jumlahBiaya = "";
+
+        fillFields = tables.asMaps(String.class, String.class);
+
+        if (Mamikos.ENV.equalsIgnoreCase("stag")){
+            durasiBiaya = fillFields.get(0).get("Durasi Biaya");
+            jumlahBiaya = fillFields.get(0).get("Jumlah Biaya");
+        } else if (Mamikos.ENV.equalsIgnoreCase("prod")) {
+            durasiBiaya = fillFields.get(1).get("Durasi Biaya");
+            jumlahBiaya = fillFields.get(1).get("Jumlah Biaya");
+        }
+
+        manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
     //---End of Biaya Sewa---//
 }

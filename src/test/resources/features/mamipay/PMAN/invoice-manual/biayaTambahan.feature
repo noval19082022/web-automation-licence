@@ -8,7 +8,7 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin selects "Deposit" in the Biaya Tambahan
+    And the admin selects "Deposit" in the "Biaya Tambahan"
     Then the Periode Awal and Periode Akhir are disable
 
   @TEST_PMAN-5771 @pman-prod
@@ -17,7 +17,7 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin selects "Deposit" in the Biaya Tambahan
+    And the admin selects "Deposit" in the "Biaya Tambahan"
     When the admin fills all fields in Tambah Biaya Tambahan pop up
       | Durasi Biaya  | Jumlah Biaya  |
       | Park Fee      | 25000         |
