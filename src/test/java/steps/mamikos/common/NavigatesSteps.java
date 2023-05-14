@@ -7,6 +7,7 @@ import config.playwright.context.ActiveContext;
 import config.playwright.context.OwnerContext;
 import config.playwright.context.TenantContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -162,5 +163,10 @@ public class NavigatesSteps {
     @When("owner navigates to property saya kos")
     public void userNavigateToPropertySayaKos() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
+    }
+
+    @And("tenant navigates to voucher saya page")
+    public void tenantNavigatesToVoucherSayaPage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.VOUCHER_SAYA, 30000.0, LoadState.LOAD);
     }
 }
