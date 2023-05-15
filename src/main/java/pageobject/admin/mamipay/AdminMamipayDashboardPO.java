@@ -11,6 +11,8 @@ import utilities.PlaywrightHelpers;
 public class AdminMamipayDashboardPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    Locator inputBiayaKerusakanOnPopUp;
+    Locator sisaDepositTextOnPopUp;
     Locator searchContract;
     Locator voucherDiscount;
     Locator mamikosVoucher;
@@ -19,6 +21,8 @@ public class AdminMamipayDashboardPO {
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        inputBiayaKerusakanOnPopUp = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Rp"));
+        sisaDepositTextOnPopUp = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).getByText("Sisa Deposit", new Locator.GetByTextOptions().setExact(true));
         searchContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Contract"));
         voucherDiscount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Voucher Discount "));
         mamikosVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Mamikos Voucher"));
@@ -30,7 +34,32 @@ public class AdminMamipayDashboardPO {
      * @param text
      */
     public void clickOnTextHyperlink(String text) {
-        page.getByText(text).click();
+        page.getByText(text).first().click();
+    }
+
+    /**
+     * this method will check if admin get pop up
+     * @param popUp
+     * @return boolean
+     */
+    public Boolean getPopUpText(String popUp) {
+        return page.getByText(popUp).first().isVisible();
+    }
+
+    /**
+     * Input Biaya kerusakan on edit deposit menu
+     * @param biaya
+     */
+    public void inputBiayaKerusakanOnEditDposit(String biaya) {
+        inputBiayaKerusakanOnPopUp.fill(biaya);
+    }
+
+    /**
+     * check sisa deposit on detail pop up after click Edit Deposit btn
+     * @return
+     */
+    public Boolean getSisaDepositOnDetailPopup(){
+        return sisaDepositTextOnPopUp.isVisible();
     }
 
     /**
