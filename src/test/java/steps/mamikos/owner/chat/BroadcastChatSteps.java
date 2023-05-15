@@ -19,7 +19,7 @@ public class BroadcastChatSteps {
     }
 
     @When("user enter text {string} on Broadcast list kos")
-    public void user_enter_text_on_BC_list_kos(String text) {
+    public void user_enter_text_on_broadcast_list_kos(String text) {
         broadcast.searchKostBC(text);
     }
 
@@ -98,8 +98,8 @@ public class BroadcastChatSteps {
         broadcast.clickOnCloseTooltip();
     }
 
-    @Then("the broadcast chat tooltip should not be visible")
-    public void the_broadcast_chat_tooltip_should_not_be_visible() {
+    @Then("broadcast chat tooltip should not be visible")
+    public void broadcast_chat_tooltip_should_not_be_visible() {
         Assert.assertFalse(broadcast.isTooltipBroadcastDisplayed(), "Tooltip is present!");
     }
 

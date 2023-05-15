@@ -99,7 +99,7 @@ Feature: Broadcast Chat Owner
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When user click chat button in top bar owner home page
-    And the user click broadcast chat entry point
+    And user click broadcast chat entry point
     Then user redirected to "/broadcast-chat?redirection_source=Halaman%20Chat"
 
   @TEST_LIMO-1207 @Broadcast-chat @GP2 @automated @listing-monetization @web

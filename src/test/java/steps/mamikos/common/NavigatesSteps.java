@@ -171,7 +171,7 @@ public class NavigatesSteps {
     }
 
     @When("owner navigates to {string}")
-    public void userNavigateToPropertySayaKos(String path) {
+    public void userNavigateTo(String path) {
         playwright.navigateTo(Mamikos.OWNER_URL+path, 30000.0, LoadState.LOAD);
         playwright.waitTillUrlToBe(Mamikos.OWNER_URL+path, 30000.0);
     }

@@ -134,8 +134,8 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
     }
 
-    @When("the user click broadcast chat entry point")
-    public void the_user_click_broadcast_chat_entry_point() {
+    @When("user click broadcast chat entry point")
+    public void user_click_broadcast_chat_entry_point() {
         chat.clickOnBCChatPage();
     }
 }
