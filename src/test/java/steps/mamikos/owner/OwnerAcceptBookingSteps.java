@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ public class OwnerAcceptBookingSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     PengajuanBookingPO pengajuanBooking;
-    BillAndBookingManagementPO billBookingManage;
+    BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
     public void ownerAcceptBooking() throws InterruptedException {
@@ -66,5 +67,9 @@ public class OwnerAcceptBookingSteps {
         billBookingManage.clickOnLanjutkanButton();
         billBookingManage.clickOnSimpan();
         billBookingManage.clickOkButton();
+    }
+    @And("user clicks on Booking Details button")
+    public void userClicksOnBookingDetailsButton() {
+        billBookingManage.clickOnLihatDetailButton();
     }
 }

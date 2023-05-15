@@ -159,5 +159,8 @@ public class LoginSteps {
     public void verifyHome() {
         Assert.assertTrue(!login.popUpLogin(), "pop up login is showing");
     }
-
+    @And("user logs out as a Tenant user")
+    public void userLogsOutAsTenant() throws InterruptedException {
+        tenantLogin.logoutAsTenant();
+    }
 }

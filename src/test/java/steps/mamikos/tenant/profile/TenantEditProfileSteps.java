@@ -1,4 +1,4 @@
-package steps.mamikos.tenant;
+package steps.mamikos.tenant.profile;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;

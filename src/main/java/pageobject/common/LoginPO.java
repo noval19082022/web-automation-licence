@@ -24,6 +24,8 @@ public class LoginPO {
     private Locator loginOwnerPopUp;
     private Locator backButtonLogin;
     private Locator closeBtn;
+    Locator profileTenantButton;
+    Locator keluarButton;
 
     public LoginPO(Page page) {
         this.page = page;
@@ -42,6 +44,8 @@ public class LoginPO {
         this.loginOwnerPopUp = page.getByText("Login Pemilik Kos");
         this.backButtonLogin = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
+        profileTenantButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        keluarButton = page.getByTestId("exitButton");
     }
 
     /**
@@ -133,9 +137,18 @@ public class LoginPO {
 
     /**
      * Click back Pop up Login
+     *
      * @return Boolean
      */
     public Boolean popUpLogin() {
         return page.getByText("Masuk ke Mamikos").isVisible();
+    }
+
+    /**
+     * User Log out as a Tenant
+     */
+    public void logoutAsTenant() {
+        profileTenantButton.click();
+        keluarButton.click();
     }
 }

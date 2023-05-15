@@ -33,6 +33,44 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @When("admin search contract by {string} and input field {string}")
+    public void adminSearchContractBy(String searchBy, String inputField) {
+        admin.clickOnSearchContract();
+        searchContract.selectSearchBy(searchBy);
+        searchContract.fillSearchByValue(inputField);
+        searchContract.clickOnSearchButton();
+    }
+
+    @And("admin want to edit deposit")
+    public void editDeposit() {
+        searchContract.clickOnEditDepositButton();
+    }
+
+    @And("admin want to see log contract")
+    public void seeLog() {
+        searchContract.clickOnSeeLogButton();
+    }
+
+    @Then("admin will see detail pop up {string}")
+    public void detailPopUp(String popUp) {
+        Assert.assertTrue(admin.getPopUpText(popUp), "pop up " + popUp + " is doesn't appear");
+    }
+
+    @And("admin input biaya kerusakan {string}")
+    public void biayaKerusakan(String biayaKerusakan) {
+        admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
+    }
+
+    @Then("admin will see sisa deposit")
+    public void sisaDeposit() {
+        Assert.assertTrue(admin.getSisaDepositOnDetailPopup(), "Sisa deposit pop up is doesn't appear");
+    }
+
+    @Then("admin want to akhiri contract but akhiri kontrak button is disabled")
+    public void akhiriButtonIsDisable() {
+        Assert.assertTrue(searchContract.isTerminatedContractButtonDissable(), "Akhiri Konrak button is not disable");
+    }
+
     @When("admin search contract by tenant phone number:")
     public void adminSearchContractByTenantPhoneNumber(DataTable table) {
         searchData = table.asMaps(String.class, String.class);
