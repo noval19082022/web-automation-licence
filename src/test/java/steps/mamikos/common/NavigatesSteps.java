@@ -169,4 +169,8 @@ public class NavigatesSteps {
     public void tenantNavigatesToVoucherSayaPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.VOUCHER_SAYA, 30000.0, LoadState.LOAD);
     }
+    @When("owner navigate to pengajuan booking page")
+    public void userNavigateToPengajuanBooking() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
+    }
 }
