@@ -46,8 +46,8 @@ public class BillAndBookingManagementPO {
         doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
         lihatDetailButton = page.locator("(//span[normalize-space()='Lihat Detail'])[1]");
         confirmationPopup = page.locator("//h3[@class='bg-c-modal__body-title']");
-        makeRuleButton = page.locator(".bg-c-button--lg.bg-c-button--primary");
-        makeRuleBookingPage = page.locator(".booking-setting__title");
+        makeRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat peraturan"));
+        makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
     }
 
     /**

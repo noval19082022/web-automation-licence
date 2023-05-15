@@ -44,7 +44,7 @@ public class LoginPO {
         this.loginOwnerPopUp = page.getByText("Login Pemilik Kos");
         this.backButtonLogin = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
-        profileTenantButton = page.locator("[alt='User Photo']");
+        profileTenantButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         keluarButton = page.getByTestId("exitButton");
     }
 
