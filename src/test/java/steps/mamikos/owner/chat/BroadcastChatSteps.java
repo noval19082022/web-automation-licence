@@ -44,7 +44,7 @@ public class BroadcastChatSteps {
     }
 
     @When("user clicks on the close icon next to the search bar to reset it")
-    public void the_user_clicks_on_the_close_icon_next_to_the_search_bar_to_reset_it() {
+    public void user_clicks_on_the_close_icon_next_to_the_search_bar_to_reset_it() {
         broadcast.clickOnCloseSearchBroadcastSearchIcon();
     }
 
