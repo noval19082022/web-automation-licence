@@ -1572,6 +1572,7 @@ public class KostDetailsPO {
      */
     public void cancelAllBookingWithDefaultReason() {
         filterButton.click();
+        page.pause();
         needConfirmation.click();
     }
 

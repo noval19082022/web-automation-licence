@@ -138,4 +138,8 @@ public class LoginSteps {
                 .fillPassword(password)
                 .clickOnLoginButton();
     }
+    @And("user logs out as a Tenant user")
+    public void userLogsOutAsTenant() throws InterruptedException {
+        tenantLogin.logoutAsTenant();
+    }
 }

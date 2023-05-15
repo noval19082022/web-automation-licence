@@ -21,6 +21,9 @@ public class LoginPO {
     protected Locator emailAddressFBInput;
     protected Locator passwordFBInput;
     protected Locator loginFacebookBtn;
+
+    Locator profileTenantButton;
+    Locator keluarButton;
     public LoginPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -35,6 +38,8 @@ public class LoginPO {
         this.emailAddressFBInput = page.getByPlaceholder("Email address or phone number");
         this.passwordFBInput = page.getByPlaceholder("Password");
         loginFacebookBtn = page.locator("#loginbutton");
+        profileTenantButton = page.locator("[alt='User Photo']");
+        keluarButton = page.getByTestId("exitButton");
     }
 
     /**
@@ -96,5 +101,11 @@ public class LoginPO {
     protected Object clickOnLoginFacebookButton() {
         return new Object();
     }
-
+    /**
+     * User Log out as a Tenant
+     */
+    public void logoutAsTenant() {
+        profileTenantButton.click();
+        keluarButton.click();
+    }
 }

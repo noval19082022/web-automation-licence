@@ -163,4 +163,8 @@ public class NavigatesSteps {
     public void userNavigateToPropertySayaKos() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
     }
+    @When("owner navigate to pengajuan booking page")
+    public void userNavigateToPengajuanBooking() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
+    }
 }
