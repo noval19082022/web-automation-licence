@@ -32,6 +32,7 @@ public class ChatOwnerPO {
     Locator weeklyQuotaChatlistHeader;
     Locator registerGoldplusButton;
     Locator weeklyQuotaChatroomHeader;
+    Locator broadcastChatBtn;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -60,6 +61,7 @@ public class ChatOwnerPO {
         weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
         weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
+        broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
     }
 
     /**
@@ -282,4 +284,12 @@ public class ChatOwnerPO {
     public boolean isRegisterGPButtonChatroomPresent() {
         return registerGoldplusButton.isVisible();
     }
+
+    /**
+     * Click Broadcast Chat Entry Point from Chat Page
+     */
+    public void clickOnBCChatPage() {
+        playwright.clickOn(broadcastChatBtn);
+    }
+
 }

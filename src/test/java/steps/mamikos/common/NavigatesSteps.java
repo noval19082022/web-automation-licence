@@ -28,7 +28,12 @@ public class NavigatesSteps {
 
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY);
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
+    }
+
+    @Given("admin navigates to Goldplus Testing Tools")
+    public void adminNavigatesToGoldplusTestingTools() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
     }
 
     @When("scenario is {string}")
@@ -163,4 +168,11 @@ public class NavigatesSteps {
     public void userNavigateToPropertySayaKos() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
     }
+
+    @When("owner navigates to {string}")
+    public void userNavigateToPropertySayaKos(String path) {
+        playwright.navigateTo(Mamikos.OWNER_URL+path, 30000.0, LoadState.LOAD);
+        playwright.waitTillUrlToBe(Mamikos.OWNER_URL+path, 30000.0);
+    }
+
 }
