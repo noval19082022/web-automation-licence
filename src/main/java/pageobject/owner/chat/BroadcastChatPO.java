@@ -82,7 +82,6 @@ public class BroadcastChatPO {
         return listSelectBroadcastKost.isVisible();
     }
 
-
     /**
      * click on icon close at search bar broadcast chat
      */

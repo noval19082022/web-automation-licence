@@ -28,8 +28,6 @@ public class OwnerDashboardPO {
         pengajuanBooking = playwright.locatorByRoleSetName(locator.roleButton, "Pengajuan Booking");
         ownerProfile = playwright.locatorByRoleSetName(locator.roleButton, "account Akun");
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
-        this.page = page;
-        this.playwright = new PlaywrightHelpers(page);
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("'broadcast-message'"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
