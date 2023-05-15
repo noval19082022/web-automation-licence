@@ -9,8 +9,6 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -144,5 +142,25 @@ public class HomepageSteps {
     @When("user see all promo ads")
     public void userSeeAllPromoAds() {
         home.clickOnSeeAllPromoAdsButton();
+    }
+
+    @When("user open Download App menu")
+    public void userOpenDownloadAppMenu() {
+        home.clickOnDownloadAppButton();
+    }
+
+    @When("user open Booking Kos menu")
+    public void userOpenBookingKosMenu() {
+        home.clickOnBookingKosHeaderButton();
+    }
+
+    @When("user open Popular Area in Jakarta")
+    public void userOpenPopularAreaInJakarta() {
+        home.clickPopularAreaOnJakarta();
+    }
+
+    @When("user open Around University in UGM")
+    public void userOpenAroundUniversityInUGM() {
+        home.clickAroundUGM();
     }
 }

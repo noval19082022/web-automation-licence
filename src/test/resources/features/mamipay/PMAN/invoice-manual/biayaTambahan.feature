@@ -8,7 +8,7 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin selects "Deposit" in the Biaya Tambahan
+    And the admin selects "Deposit" in the "Biaya Tambahan"
     Then the Periode Awal and Periode Akhir are disable
 
   @TEST_PMAN-5771 @pman-prod
@@ -17,11 +17,11 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin selects "Deposit" in the Biaya Tambahan
-    When the admin fill all fields in Tambah Biaya Tambahan pop up
+    And the admin selects "Deposit" in the "Biaya Tambahan"
+    When the admin fills all fields in Tambah Biaya Tambahan pop up
       | Durasi Biaya  | Jumlah Biaya  |
       | Park Fee      | 25000         |
-    And the admin click "<button>" modal tambah biaya
+    And the admin clicks "<button>" modal tambah biaya
     Then tambah biaya modal is closed
 
     Examples:
@@ -35,7 +35,7 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin create Invoice Manual "Biaya Tambahan" and check required fields "<Nama Biaya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
+    And the admin creates Invoice Manual "Biaya Tambahan" and checks required fields "<Nama Biaya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
     Then the error messages "<Nama Biaya Error Msg>", "<Awal Error Msg>", "<Akhir Error Msg>", "<Jumlah Biaya Error Msg>" are displayed
 
     Examples:
@@ -52,10 +52,10 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And admin create Invoice Manual "Biaya Tambahan"
+    And admin creates Invoice Manual "Biaya Tambahan"
       | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
       | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
-    And the admin delete Invoice Manual
+    And the admin deletes Invoice Manual
     Then the empty state is display in "Biaya Tambahan" table
 
   @TEST_PMAN-5595 @pman-prod
@@ -64,7 +64,7 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And the admin create Invoice Manual "Biaya Tambahan" and input all fields "<Nama Biaya>", "<Lainnya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
+    And the admin creates Invoice Manual "Biaya Tambahan" and input all fields "<Nama Biaya>", "<Lainnya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
     Then "<Nama Biaya on Table>", "<Awal on Table>", "<Akhir on Table>", "<Jumlah Biaya on Table>", "<Disburse to Pemilik>" are displayed in the biaya tambahan table
 
     Examples:
@@ -87,13 +87,13 @@ Feature: Invoice Manual - Biaya Tambahan
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
-    And admin create multiple Invoice Manual "Biaya Tambahan"
+    And admin creates multiple Invoice Manual "Biaya Tambahan"
       | Nama Biaya    | Lainnya | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
       | Parkir Mobil  | -       | today         | tomorrow        | automation pman | 50000         |
       | Laundry       | -       | today         | tomorrow        | automation pman | 50000         |
       | Deposit       | -       | -             | -               | automation pman | 50000         |
       | Lainnya       | Sampah  | -             | -               | automation pman | 50000         |
-    Then "Biaya Tambahan" Invoice Manual
+    Then "Biaya Tambahan" Invoice Manual are displayed on table
       | Nama Biaya on Table             | Row |
       | Parkir Mobil (automation pman)  | 1   |
       | Laundry (automation pman)       | 2   |
@@ -102,5 +102,46 @@ Feature: Invoice Manual - Biaya Tambahan
 
   @continue @TEST_PMAN-5964 @pman-prod
   Scenario: delete multiple biaya tambahan
-    When admin delete all "biaya tambahan" or sewa on Invoice Manual
+    When admin deletes all "biaya tambahan" or sewa on Invoice Manual
     Then the empty state of "biaya tambahan" is displayed
+
+  @TEST_PMAN-6055 @pman-prod
+  Scenario: Edit Biaya Tambahan
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And admin creates Invoice Manual "Biaya Tambahan"
+      | Nama Biaya    | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+      | Parkir Mobil  | today         | tomorrow        | 3 hari        | 50000         |
+    And admin edits Invoice Manual "Biaya Tambahan" and checks them on the table
+      | Nama Biaya  | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table | Disburse to Pemilik |
+      | Laundry     | edit for tomorrow | day after tomorrow  | 5 Kg          | 25000         | Laundry (5 Kg)      | tomorrow      | day after tomorrow  | Rp25.000              | Tidak               |
+    And admin edits Invoice Manual "Biaya Tambahan" into Lainnya and checks them on the table
+      | Nama Biaya  | Lainnya | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table | Disburse to Pemilik |
+      | Lainnya     | Sampah  | -             | 30000         | Sampah              | tomorrow      | day after tomorrow  | Rp30.000              | Ya                  |
+
+  @TEST_PMAN-6534
+  Scenario: Lainnya Validation Biaya Tambahan
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And the admin creates Invoice Manual "Biaya Tambahan" Lainnya
+    Then error message "Jenis invoice tidak sesuai. Pilih jenis invoice Biaya Sewa untuk biaya ini." appear if user input Lainnya field :
+      | relokasi                      |
+      | RELOKASI                      |
+      | sewa harian                   |
+      | ini seWa Harian               |
+      | perpanjang sewa harian        |
+      | ssewa hariann 12              |
+      | extend                        |
+      | extEND kontrak                |
+      | perpanjang                    |
+      | Perpanjangan                  |
+      | kurang sewa                   |
+      | tenant ini kurang sewa        |
+      | selisih                       |
+      | ada selisih di invoicenya     |
+      | pindah                        |
+      | tenant 2 Taylor Pindah kamar  |

@@ -103,6 +103,17 @@ public class ForgotPasswordSteps {
         Assert.assertTrue(forgotPassword.getErrorMessage(message).contains(message), "Error message is not equal to " + message);
     }
 
+    @When("user click text {string}")
+    public void clickText(String text) {
+        this.forgotPassword = forgotPassword.clickTextAndRedierctNextPage(text);
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @Then("user directed to wa and verify pretext {string}")
+    public void verifyPretext(String msg){
+        Assert.assertTrue(forgotPassword.isMessageAppear(msg), "message not appear");
+    }
+
     @Then("user see button choose verify method is disabled")
     public void verify_button_is_disable() {
         Assert.assertTrue(forgotPassword.buuttonVerificationMethodIsDisable());

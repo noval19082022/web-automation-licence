@@ -26,6 +26,14 @@ public class AdminMamipayDashboardPO {
     }
 
     /**
+     * this method will click the hyperlink text on admin dashboard
+     * @param text
+     */
+    public void clickOnTextHyperlink(String text) {
+        page.getByText(text).click();
+    }
+
+    /**
      * Click on search contract
      * @return SearchContractPO class
      */
@@ -61,5 +69,4 @@ public class AdminMamipayDashboardPO {
         sidebarMenu = page.locator("//li[@class='menu-item ']/a[contains(text(),'"+menu+"')]");
         sidebarMenu.click();
     }
-
 }

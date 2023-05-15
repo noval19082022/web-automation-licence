@@ -25,6 +25,7 @@ public class MamikosListInvoicePO {
     Page.GetByRoleOptions pageRoleOptions;
     Locator.GetByRoleOptions locatorRoleOptions;
     Locator otherPrice;
+    Locator otherPriceName;
     Locator getOtherPriceNumber;
     Locator txtBasicAmount;
     Locator editBasicAmount;
@@ -55,6 +56,22 @@ public class MamikosListInvoicePO {
     }
 
     /**
+     * This method will set status on Change Status Invoice Page
+     * @param status
+     */
+    public void setStatusPaidOrUnpaid(String status) {
+        page.getByRole(AriaRole.COMBOBOX).selectOption(status);
+    }
+
+    /**
+     * this method will fill date on change status invoice page
+     * @param date
+     */
+    public void setDate(String date) {
+        page.getByPlaceholder("Transaction Date").fill(date);
+    }
+
+    /**
      * Search invoice by
      * @param searchBy String data type
      */
@@ -82,7 +99,7 @@ public class MamikosListInvoicePO {
      * @param invoiceText Text of unique parameter of invoice(e.g invoice number)
      */
     public void goToInvoiceDetail(String invoiceText) {
-        invoiceDetail = page.getByRole(AriaRole.ROW, pageRoleOptions.setName(invoiceText)).getByRole(AriaRole.LINK, locatorRoleOptions.setName("Detail Fee"));
+        invoiceDetail = page.getByRole(AriaRole.ROW, pageRoleOptions.setName(invoiceText)).getByRole(AriaRole.LINK, locatorRoleOptions.setName("Detail Fee")).first();
         playwright.clickOn(invoiceDetail);
     }
 
@@ -197,4 +214,17 @@ public class MamikosListInvoicePO {
         playwright.clickOn(updateButton);
     }
 
+    /**
+     * Check the visibility of aditional price is visible
+     * @return boolean
+     */
+    public boolean isAdditionalPriceNameIsVisible(String otherPrice) {
+        otherPriceName = page.locator("//*[.='"+otherPrice+"']");
+        for (int i = 0; i < 4; i++) {
+            if (otherPriceName.isVisible()) {
+                break;
+            }
+        }
+        return playwright.waitTillLocatorIsVisible(otherPriceName);
+    }
 }

@@ -141,11 +141,11 @@ Feature: Owner - Forgot Password
     And user choose verification by WA
     Then user verify otp form appear on page OTP "Verifikasi Nomor Handphone"
 
-#  @TEST_DOM-2239 @Automated @DOM @web-covered
-#  Scenario: [WEB][Forgot Password][Owner] User direct to Whatsapp
-#    Given user go to mamikos homepage
-#    When user want to change the owner password
-#    And user fill their unregistered phone number "085742883683"
-#    And user get error message "Nomor HP ini sudah digunakan untuk verifikasi di akun lain."
-#    When user click underline "Mohon hubungi CS Mamikos."
-#    Then user directed to wa and verify pretext "Halo, nomor handphone/email saya 085742883683 sudah pernah digunakan untuk verifikasi di akun lain. Mohon bantuannya."
+  @TEST_DOM-2239 @Automated @DOM @web-covered
+  Scenario: [WEB][Forgot Password][Owner] User direct to Whatsapp
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    And user fill their unregistered phone number "085742883683"
+    And user get error message "Nomor HP ini sudah digunakan untuk verifikasi di akun lain."
+    When user click text "Mohon hubungi CS Mamikos."
+    Then user directed to wa and verify pretext "Halo, nomor handphone/email saya 085742883683 sudah pernah digunakan untuk verifikasi di akun lain. Mohon bantuannya."

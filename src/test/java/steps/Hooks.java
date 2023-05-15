@@ -30,7 +30,7 @@ public class Hooks{
         if (scenario.getSourceTagNames().contains("@continue")) {
             FlowControl.setContinueFlow(true);
         }
-        System.out.println(scenario.getName() + " is started");
+        System.out.println("\n" + scenario.getName() + " is started");
     }
 
     /**
@@ -41,11 +41,13 @@ public class Hooks{
     @After
     public void cleanUp(Scenario scenario) {
         if (scenario.isFailed()) {
+            System.out.println(scenario.getName() + " is failed");
             scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
             if (GlobalConfig.SET_TRACING) {
                 ActiveContext.getActiveBrowserContext().tracing().stop(new Tracing.StopOptions()
                     .setPath(Paths.get("target/trace/" + scenario.getName().replace(" ", "-").toLowerCase() + "-trace.zip")));
             }
+            System.out.println("Failed URL is: " + ActiveContext.getActivePage().url());
         }
 
         if (!scenario.getSourceTagNames().contains("@continue")) {

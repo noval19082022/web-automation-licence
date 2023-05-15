@@ -7,8 +7,6 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.awt.*;
-
 public class PengajuanBookingPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -50,7 +48,9 @@ public class PengajuanBookingPO {
      * @return BillAndBookingManagementPO class
      */
     public BillAndBookingManagementPO ownerAcceptBooking(String tenantName) {
-        terimaButtonWithName = page.getByTestId("bookingRequestList-list").locator("div").filter(new Locator.FilterOptions().setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
+        terimaButtonWithName = page.getByTestId("bookingRequestList-list")
+                .locator("div").filter(new Locator.FilterOptions()
+                        .setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
         playwright.clickOn(terimaButtonWithName);
         yaTerimaButton.click();
         return new BillAndBookingManagementPO(page);

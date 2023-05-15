@@ -1,0 +1,248 @@
+package pageobject.pms.otherTransaction;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+
+import java.nio.file.Paths;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+public class AddOwnerExpenditurePO {
+
+    private Page page;
+
+    Locator tambahDataButton;
+    Locator tipePengajuanCashOutDropdown;
+    Locator tipeCashOut;
+    Locator propertyNameInputText;
+    Locator propertyNameSuggestion;
+    Locator kategoriPengeluaranDropdown;
+    Locator kategoriPengeluaran;
+    Locator namaPengeluaran;
+    Locator kuantitas;
+    Locator nominalPengeluaran;
+    Locator statusPersediaanDropdown;
+    Locator statusPersediaan;
+    Locator jenisProdukDropdown;
+    Locator jenisProduk;
+    Locator tambahPengeluaranButton;
+    Locator uploadButton;
+    Locator noInvoiceField;
+    Locator tujuanTransferDropdown;
+    Locator searchTujuanTransferField;
+    Locator vendorName;
+    Locator addOwnerExpenditureButton;
+    Locator titlePopUpAddOwnerExpenditure;
+    Locator bodyPopUpAddOwnerExpenditure;
+    Locator buttonTambahPopUpAddOwnerExpenditure;
+    Locator buttonBatalPopUpAddOwnerExpenditure;
+    Locator confirmationPopUp;
+    Locator toastMessage;
+    public AddOwnerExpenditurePO(Page page) {
+        this.page = page;
+
+        tambahDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Data"));
+        tipePengajuanCashOutDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tipe pengajuan cash-out"));
+        propertyNameInputText = page.getByPlaceholder("Pilih properti");
+        propertyNameSuggestion = page.locator("a[role='button']");
+        kategoriPengeluaranDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kategori pengeluaran"));
+        statusPersediaanDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status persediaan"));
+        jenisProdukDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jenis produk"));
+        tambahPengeluaranButton = page.getByTestId("add-expense");
+        uploadButton = page.locator("input[type='file']");
+        noInvoiceField = page.getByTestId("cost-invoice-number");
+        tujuanTransferDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tujuan transfer pengeluaran"));
+        searchTujuanTransferField =   page.getByPlaceholder("Cari tujuan transfer");
+        addOwnerExpenditureButton = page.getByTestId("add-expenditure");
+        titlePopUpAddOwnerExpenditure = page.locator("h3.bg-c-modal__body-title");
+        bodyPopUpAddOwnerExpenditure = page.locator("p.bg-c-modal__body-description");
+        buttonBatalPopUpAddOwnerExpenditure = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        buttonTambahPopUpAddOwnerExpenditure = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah").setExact(true));
+        confirmationPopUp = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Yakin ingin tambahkan data ini? Data yang ditambahkan akan dilanjutkan ke tahap ")).locator("div").first();
+        toastMessage = page.locator(".bg-c-toast__content");
+    }
+
+    /**
+     * click Tambah Data
+     */
+    public void clickTambahData() {
+        tambahDataButton.click();
+    }
+
+    /**
+     * choose cash out type
+     * @param type
+     */
+    public void chooseCashOutType(String type) {
+        tipeCashOut = page.locator("a").filter(new Locator.FilterOptions().setHasText(type));
+        tipePengajuanCashOutDropdown.click();
+        tipeCashOut.click();
+    }
+
+    /**
+     * search and select property suggestion
+     * @param name
+     */
+    public void selectProperty(String name) {
+        propertyNameInputText.click();
+        propertyNameInputText.fill(name);
+        propertyNameSuggestion.waitFor();
+        propertyNameSuggestion.first().click();
+    }
+
+    /**
+     * choose category pengeluaran
+     * @param category
+     * @param no pengeluaran n
+     */
+    public void setKategoriPengeluaran(String category, String no) {
+        kategoriPengeluaran = page.locator("a").filter(new Locator.FilterOptions().setHasText(category));
+        kategoriPengeluaranDropdown.click();
+        kategoriPengeluaran.nth(Integer.parseInt(no)-1).click();
+
+    }
+
+    /**
+     * Fill nama pengeluaran field
+     * @param name
+     * @param no pengeluaran n
+     */
+    public void setNamaPengeluaran(String name, String no) {
+        namaPengeluaran = page.getByTestId("expense-name-"+(Integer.parseInt(no)-1)+"");
+        namaPengeluaran.fill(name);
+    }
+
+    /**
+     * fill kuantitas
+     * @param quantity
+     * @param no pengeluaran n
+     */
+    public void setKuantitas(String quantity, String no) {
+        kuantitas = page.getByTestId("expense-qty-"+(Integer.parseInt(no)-1)+"");
+        kuantitas.fill(quantity);
+    }
+
+    /**
+     * fill nominal pengeluaran
+     * @param amount
+     * @param no pengeluaran n
+     */
+    public void setNominalPengeluaran(String amount, String no) {
+        nominalPengeluaran = page.getByTestId("input-currency-masking").nth(Integer.parseInt(no)-1);
+        nominalPengeluaran.focus();
+        nominalPengeluaran.fill(amount);
+    }
+
+    /**
+     * choose status persediaan
+     * @param status (Non Stock. Stock)
+     * @param no pengeluaran n
+     */
+    public void setStatusPersediaan(String status, String no) {
+        statusPersediaan = page.locator("//*[@data-testid='expense-stock-status-"+(Integer.parseInt(no)-1)+"']/child::*//div[normalize-space()='"+status+"']");
+        statusPersediaanDropdown.click();
+        statusPersediaan.click();
+    }
+
+    /**
+     * choose jenis produk
+     * @param product (LSSS, LSAP, SSSP, LMH, PC)
+     * @param no pengeluaran n
+     */
+    public void setJenisProduk(String product, String no) {
+        jenisProduk = page.locator("a").filter(new Locator.FilterOptions().setHasText(product));
+        jenisProdukDropdown.scrollIntoViewIfNeeded();
+        jenisProdukDropdown.click();
+        jenisProduk.nth(Integer.parseInt(no)-1).click();
+    }
+
+    /**
+     * Add pengeluaran
+     */
+    public void addMorePengeluaran() {
+        tambahPengeluaranButton.click();
+    }
+
+    /**
+     * upload lampiran
+     * @param fileType
+     */
+    public void uploadAttachment(String fileType) {
+        switch (fileType){
+            case "jpg":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/file/pdf example.pdf"));
+                break;
+            default:
+                System.out.println("File Type not Supported yet");
+        }
+    }
+
+    /**
+     * fill no invoice
+     * @param invoice invoice number
+     */
+    public void setNoInvoiceBiaya(String invoice) {
+        noInvoiceField.fill(invoice);
+    }
+
+    /**
+     * choose tujuan transfer
+     * @param vendor
+     */
+    public void setTujuanTransfer(String vendor) {
+        vendorName = page.locator("a").filter(new Locator.FilterOptions().setHasText(vendor));
+
+        tujuanTransferDropdown.click();
+        searchTujuanTransferField.click();
+        searchTujuanTransferField.fill(vendor);
+        vendorName.click();
+    }
+
+    /**
+     * tambah data owner expenditure, but only click on Tambah Data button
+     */
+    public void submitAddOwnerExpenditure() {
+        addOwnerExpenditureButton.scrollIntoViewIfNeeded();
+        addOwnerExpenditureButton.click();
+    }
+
+    /**
+     * Assert confirmation pop up add owner expenditure content
+     */
+    public void assertConfirmationPopUpAddOwnerExpenditure() {
+        assertThat(titlePopUpAddOwnerExpenditure).hasText("Yakin ingin tambahkan data ini?");
+        assertThat(bodyPopUpAddOwnerExpenditure).hasText("Data yang ditambahkan akan dilanjutkan ke tahap konfirmasi.");
+        assertThat(buttonBatalPopUpAddOwnerExpenditure).isEnabled();
+        assertThat(buttonTambahPopUpAddOwnerExpenditure).isEnabled();
+    }
+
+    /**
+     * close pop up add owner expenditure
+     */
+    public void cancelAddOwnerExpenditure() {
+        buttonBatalPopUpAddOwnerExpenditure.click();
+    }
+
+    /**
+     * confirm add owner expenditure
+     */
+    public void confirmAddOwnerExpenditure() {
+        buttonTambahPopUpAddOwnerExpenditure.click();
+    }
+
+    /**
+     * assert confirmation pop up add owner expenditure not visible
+     */
+    public void assertConfirmationPopUpAddOwnerExpenditureClosed() {
+        assertThat(confirmationPopUp).isHidden();
+    }
+
+    /**
+     * assert message in toast message
+     * @param message
+     */
+    public void assertToastMessage(String message) {
+        assertThat(toastMessage).hasText(message);
+    }
+}

@@ -3,7 +3,6 @@ package steps.mamikos.owner.chat;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -120,5 +119,18 @@ public class ChatOwnerSteps {
     @Then("user see attachment button is enabled")
     public void userSeeAttachmentButtonIsEnabled() {
         Assert.assertTrue(chat.isAttachmentButtonEnabled(), "Button is disabled");
+    }
+
+    @And("user see the appearence of Mars chatlist")
+    public void userSeeTheAppearenceOfMarsChatlist() {
+        Assert.assertTrue(chat.isWeeklyQuotaChatlistPresent(), "Weekly Quota Information in chatlist is not present");
+        Assert.assertTrue(chat.isRegisterGPButtonChatlistPresent(), "Register GP Button in chatlist is not present");
+    }
+
+    @Then("user see the appearence of Mars chatroom")
+    public void userSeeTheAppearenceOfMarsChatroom() {
+        chat.clickHeaderMarsChatroom();
+        Assert.assertTrue(chat.isWeeklyQuotaChatroomPresent(), "Weekly Quota Information in chatroom is not present");
+        Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
     }
 }

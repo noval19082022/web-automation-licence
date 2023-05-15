@@ -1,22 +1,13 @@
 package steps.mamikos.bangkrupux;
+
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.admin.mamipay.AdminMamipayDashboardPO;
-import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.admin.mamipay.bangkrupux.BlacklistUserPO;
-import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
 import pageobject.common.HomePO;
-import utilities.JavaHelpers;
-import utilities.PlaywrightHelpers;
-
-import java.util.List;
-import java.util.Map;
 
 public class BlacklistUserSteps {
     Page page = ActiveContext.getActivePage();

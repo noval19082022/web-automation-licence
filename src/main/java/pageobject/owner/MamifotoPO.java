@@ -3,12 +3,8 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
-import pageobject.common.SearchPO;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
 
 public class MamifotoPO {
     private Page page;
@@ -24,14 +20,27 @@ public class MamifotoPO {
     Locator subtitleTingkatkanKinerja;
     Locator sewaMamifoto;
     Locator mamifotoInfoUntukAnda;
+    Locator mamiFotoInfoUntukAndaNonProperty;
 
     //Locator Mamifoto Landing Page
     Locator headerMamifoto;
     Locator lihatPaketButton;
+    Locator bacaPanduan;
+    Locator headerBacaPanduan;
+    Locator closePopUpBacaPanduanIcon;
+    Locator faqFirstList;
+    Locator headerFAQ;
+    Locator contentFAQfirstList;
+
+
+    //Locator Mamifoto at Select Package
     Locator packageFirstMamifotoNonGP;
     Locator popUpDoesntHaveProperty;
     Locator addedNewKostPopUpButton;
     Locator nantiSajaButton;
+    Locator headerPilihPaket;
+    Locator backPilihPaketIcon;
+
 
     public MamifotoPO(Page page) {
         this.page = page;
@@ -42,14 +51,23 @@ public class MamifotoPO {
         this.fiturPromosiSidebar = page.getByText("Fitur Promosi");
         this.homeOwnerSidebar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
         this.titleTingkatkanKinerja = page.getByText("Tingkatkan Kinerja Kos");
-        this.subtitleTingkatkanKinerja =  page.getByText("Lengkapi kos Anda dengan fitur berikut.");
+        this.subtitleTingkatkanKinerja = page.getByText("Lengkapi kos Anda dengan fitur berikut.");
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
-        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
-        this.lihatPaketButton =   page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
+        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan"));
+        this.lihatPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
         this.packageFirstMamifotoNonGP = page.getByTestId("select-mamifoto-package").first();
-        this.popUpDoesntHaveProperty =  page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
+        this.popUpDoesntHaveProperty = page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
         this.addedNewKostPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Kos"));
-        this.nantiSajaButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        this.nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        this.headerPilihPaket = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pilih Paket"));
+        this.backPilihPaketIcon = page.getByTestId("back-button");
+        this.bacaPanduan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Baca Panduan"));
+        this.headerBacaPanduan = page.getByText("Panduan persiapan foto/video");
+        this.closePopUpBacaPanduanIcon = page.getByTestId("mamifoto-landing-guides-modal").getByRole(AriaRole.BUTTON);
+        this.headerFAQ = page.getByText("Tanya Jawab");
+        this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
+        this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
+        this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
 
     }
 
@@ -94,6 +112,7 @@ public class MamifotoPO {
 
     /**
      * Get Title at section kinerja kost
+     *
      * @return string
      */
     public String getKinerjaTitle() throws InterruptedException {
@@ -102,6 +121,7 @@ public class MamifotoPO {
 
     /**
      * Get subtitle at section kinerja kost
+     *
      * @return string
      */
     public String getKinerjaSubTitle() throws InterruptedException {
@@ -110,6 +130,7 @@ public class MamifotoPO {
 
     /**
      * Get Text Mamifoto at section Info Untuk Anda
+     *
      * @return string
      */
     public String getMamifotoInfoUntukAndaText() throws InterruptedException {
@@ -139,6 +160,7 @@ public class MamifotoPO {
 
     /**
      * Get Pop Up doesnt have property
+     *
      * @return pop up is appear
      */
     public boolean getPopUpDoesntHaveProperty() {
@@ -147,6 +169,7 @@ public class MamifotoPO {
 
     /**
      * Get button Tambah Kos at pop up doesnt have property
+     *
      * @return button added new kost is appear
      */
     public boolean getAddedNewKostPopUpButton() {
@@ -155,6 +178,7 @@ public class MamifotoPO {
 
     /**
      * Get button Nanti Saja at pop up doesnt have property
+     *
      * @return button Nanti Saja is appear
      */
     public boolean getNantiSajaButton() {
@@ -165,6 +189,82 @@ public class MamifotoPO {
      * Click on nanti saja button
      */
     public void clickOnNantiSajaButton() {
-      nantiSajaButton.click();
+        nantiSajaButton.click();
     }
+
+    /**
+     * Check Lihat Paket Mamifoto Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderSelectPackageisAppear() {
+        return headerPilihPaket.isVisible();
+    }
+
+    /**
+     * Click on back icon at select package
+     */
+    public void clickOnBackSelectPackage() {
+        backPilihPaketIcon.click();
+    }
+
+
+    /**
+     * Click on Baca Panduan Mamifoto
+     */
+    public void clickOnBacaPanduan() {
+        bacaPanduan.scrollIntoViewIfNeeded();
+        bacaPanduan.click();
+    }
+
+    /**
+     * Check Baca Panduan header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderBacaPanduanisAppear() {
+        return headerBacaPanduan.isVisible();
+    }
+
+    /**
+     * Click on icon close pop up Baca Panduan
+     */
+    public void clickOnCloseBacaPanduan() {
+        closePopUpBacaPanduanIcon.click();
+    }
+
+
+    /**
+     * Click on first list FAQ
+     */
+    public void clickOnFirstListFAQ() {
+        headerFAQ.scrollIntoViewIfNeeded();
+        faqFirstList.click();
+    }
+
+    /**
+     * Check content text FAQ is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean contentFirstFAQisAppear() {
+        return contentFAQfirstList.isVisible();
+    }
+
+    /**
+     * Get Text Mamifoto at section Info Untuk Anda for non property
+     *
+     * @return string
+     */
+    public String getMamifotoInfoUntukAndaNonPropertyText() throws InterruptedException {
+        return playwright.getText(mamiFotoInfoUntukAndaNonProperty);
+    }
+
+    /**
+     * Click on Mamifoto at section Info untuk Anda for non property
+     */
+    public void clickOnMamifotoInfoUntukAndaNonProperty() {
+        mamiFotoInfoUntukAndaNonProperty.click();
+    }
+
 }
