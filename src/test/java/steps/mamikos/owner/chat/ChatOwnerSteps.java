@@ -133,4 +133,9 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isWeeklyQuotaChatroomPresent(), "Weekly Quota Information in chatroom is not present");
         Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
     }
+
+    @When("user click broadcast chat entry point")
+    public void user_click_broadcast_chat_entry_point() {
+        chat.clickOnBCChatPage();
+    }
 }
