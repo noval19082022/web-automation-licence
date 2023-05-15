@@ -61,7 +61,7 @@ public class BroadcastChatPO {
      */
     public String getWarningBroadcastText() {
         playwright.hardWait(5);
-        playwright.waitTillLocatorIsVisible(warningBroadcastText,5.0);
+        playwright.waitTillLocatorIsVisible(warningBroadcastText,5000.0);
         return playwright.getText(warningBroadcastText);
     }
 
@@ -184,7 +184,7 @@ public class BroadcastChatPO {
      * @return tooltip broadcast chat is present
      */
     public boolean isTooltipBroadcastDisplayed() {
-        return playwright.waitTillLocatorIsVisible(tooltipBroadcast, 2.0);
+        return playwright.waitTillLocatorIsVisible(tooltipBroadcast, 2000.0);
     }
 
     /**
@@ -209,6 +209,6 @@ public class BroadcastChatPO {
      * @return tooltip broadcast chat is present
      */
     public boolean isLihatPenerimaPageDisplayed() {
-        return playwright.waitTillLocatorIsVisible(lihatPenerimaSection, 2.0);
+        return playwright.waitTillLocatorIsVisible(lihatPenerimaSection, 2000.0);
     }
 }
