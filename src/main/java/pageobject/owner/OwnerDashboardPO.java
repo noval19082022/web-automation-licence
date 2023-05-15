@@ -39,7 +39,7 @@ public class OwnerDashboardPO {
     public void clickOnText(String menu) {
         playwright.waitTillLocatorIsVisible(page.getByText(menu),3000.0);
         playwright.delayAndClickOn(page.getByText(menu),3000.0);
-        playwright.hardWait(5);
+        playwright.hardWait(5000);
     }
 
     /**
@@ -48,7 +48,7 @@ public class OwnerDashboardPO {
     public void clickOnTextButton(String buttonText) {
         playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)),3000.0);
         playwright.clickOn(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)));
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
     }
 
     /**
@@ -57,7 +57,7 @@ public class OwnerDashboardPO {
      * @return status true / false
      */
     public boolean isTextDisplayed(String text) {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         return playwright.isLocatorVisibleAfterLoad(page.getByText(text), 3000.0);
     }
 
@@ -78,7 +78,7 @@ public class OwnerDashboardPO {
      */
     public void clickOnButtonIconClose(){
         playwright.clickOn(closePopUpIcon);
-        playwright.hardWait(2);
+        playwright.hardWait(2000);
     }
 
     /**

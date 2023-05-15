@@ -19,7 +19,7 @@ public class GoldplusSteps {
     public void user_wants_to_subscribe(int pacakge) {
         navigate.userNavigateToPropertySayaKos("/goldplus/submission/periode/gp"+pacakge);
         owner.clickOnTextButton("Pilih");
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         owner.clickOnText("Bayar Sekarang");
     }
 

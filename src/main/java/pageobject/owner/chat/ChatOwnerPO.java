@@ -69,7 +69,7 @@ public class ChatOwnerPO {
      *
      */
     public void clickChatOwner() {
-        playwright.hardWait(5);
+        playwright.hardWait(5000);
         playwright.clickOn(ownerChatButton);
     }
 
@@ -143,7 +143,7 @@ public class ChatOwnerPO {
      * @return
      */
     public String getNotPaidFirstRentText(){
-        playwright.hardWait(5);
+        playwright.hardWait(5000);
         return playwright.getText(notPaidFirstRent);
     }
 

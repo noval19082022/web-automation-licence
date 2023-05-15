@@ -60,7 +60,7 @@ public class BroadcastChatPO {
      * @return Text of broadcast
      */
     public String getWarningBroadcastText() {
-        playwright.hardWait(5);
+        playwright.hardWait(5000);
         playwright.waitTillLocatorIsVisible(warningBroadcastText,5000.0);
         return playwright.getText(warningBroadcastText);
     }
@@ -78,7 +78,7 @@ public class BroadcastChatPO {
      *
      */
     public boolean isKostCardDisabled() {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         return listSelectBroadcastKost.isVisible();
     }
 
@@ -88,7 +88,7 @@ public class BroadcastChatPO {
     public void clickOnCloseSearchBroadcastSearchIcon() {
         playwright.clickOn(closeSearchBroadcastSearchIcon);
         page.reload();
-        playwright.hardWait(5);
+        playwright.hardWait(5000);
     }
 
     /**
@@ -166,7 +166,7 @@ public class BroadcastChatPO {
      * click on back Button BC
      */
     public void clickOnBackButtonBC() {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         playwright.clickOn(backButtonBC);
     }
 
@@ -175,7 +175,7 @@ public class BroadcastChatPO {
      */
     public void clickOnBroadcastChatIcon() {
         playwright.clickOn(broadcastChatIcon);
-        playwright.hardWait(10);
+        playwright.hardWait(5000);
     }
 
     /**
