@@ -35,3 +35,13 @@ Feature: Add Owner Expenditure
       | Wifi        |
       | Sabun Mandi |
       | Wipol       |
+
+  @TEST_PMAN-6311
+  Scenario Outline: Search active and expired property
+    When admin add new owner expenditure and search property "<keyword>"
+    Then system should show property suggestion "<property name>"
+
+    Examples:
+      | keyword | property name                                             |
+      | Asgard  | Kost Singgahsini Asgard Halmahera Utara                   |
+      | Beruang | Kost Singgahsini Beruang Terbang Mamitest Halmahera Utara |
