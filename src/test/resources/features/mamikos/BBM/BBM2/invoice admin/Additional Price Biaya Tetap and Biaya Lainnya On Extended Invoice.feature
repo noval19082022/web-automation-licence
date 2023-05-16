@@ -49,7 +49,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "0890867321212"
     And tenant navigate to riwayat booking
     And tenant checkin kost from riwayat booking
     And tenant navigate to tagihan kost saya
@@ -88,5 +88,5 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And owner set Kelola Tagihan filter month to "next" month
-    And user open invoice details
+    And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"

@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_TENG-12 @TEST_TENG-9 @TEST_TENG-8
+@regression @BBM2 @TEST_TENG-12 @TEST_TENG-9 @TEST_TENG-8 @lawackrun1
 Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Admin Batalkan Contract
@@ -66,7 +66,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | phone stag   | phone prod   | password  |
       | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat booking
-    And tenant pay kost from riwayat booking using mandiri
+    And tenant pay kost from riwayat booking using ovo "087708777618"
     And tenant set active page to 0
     And tenant navigate to riwayat booking
     And tenant go to invoice DP from riwayat booking

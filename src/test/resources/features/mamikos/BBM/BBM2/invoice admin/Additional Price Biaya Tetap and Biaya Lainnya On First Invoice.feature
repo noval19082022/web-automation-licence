@@ -81,6 +81,6 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     And owner goes to bills details
       | kost name stag      | kost name prod      |
       | Kost Adi Auto Fpaid | Kost Adi Auto Fpaid |
-    And user open invoice details
+    And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can sees total amount is basic amount plus other price
       | 50000 |
