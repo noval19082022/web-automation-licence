@@ -54,3 +54,20 @@
         | Kekurangan biaya sewa kamar (automation pman)       | 2   |
         | Pindah tipe kamar/kos (relokasi) (automation pman)  | 3   |
         | Ganti Lampu (automation pman)                       | 4   |
+
+    @TEST_PMAN-5784 @pman-prod
+    Scenario Outline: Check required fields in the Biaya Sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And the admin creates Invoice Manual "Biaya Sewa" and checks required fields "<Nama Biaya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
+      Then the error messages "<Nama Biaya Error Msg>", "<Awal Error Msg>", "<Akhir Error Msg>", "<Jumlah Biaya Error Msg>" are displayed
+
+      Examples:
+        | Nama Biaya              | Awal  | Akhir     | Durasi Biaya  | Jumlah Biaya  | Nama Biaya Error Msg            | Awal Error Msg                    | Akhir Error Msg                   | Jumlah Biaya Error Msg            |
+        | -                       | -     | -         | -             | -             | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
+        | Perpanjang sewa harian  | -     | -         | -             | -             | -                               | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
+        | -                       | today | -         | -             | -             | Nama biaya tidak boleh kosong.  | -                                 | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
+        | -                       | -     | -         | 1 hari        | -             | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
+        | -                       | -     | -         | -             | 11000         | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | -                                 |
