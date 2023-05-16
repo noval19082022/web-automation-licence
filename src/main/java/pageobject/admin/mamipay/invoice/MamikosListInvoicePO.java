@@ -31,6 +31,20 @@ public class MamikosListInvoicePO {
     Locator editBasicAmount;
     Locator basicAmountTextField;
     Locator updateButton;
+    Locator shortlink;
+    Locator invoiceNumber;
+    Locator invoiceName;
+    Locator scheduledDate;
+    Locator orderType;
+    Locator paymentMethod;
+    Locator totalamount;
+    Locator ownerrenter;
+    Locator invoicestatus;
+    Locator blankScreen;
+    Locator resetButton;
+    Locator inputScheduleFrom;
+    Locator inputScheduleTo;
+    Locator dataScheduledDate;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -52,7 +66,20 @@ public class MamikosListInvoicePO {
         editBasicAmount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
         basicAmountTextField = page.getByRole(AriaRole.TEXTBOX);
         updateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
-
+        shortlink = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Shortlink"));
+        invoiceNumber = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Invoice Number"));
+        invoiceName = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Invoice Name"));
+        scheduledDate = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Scheduled Date"));
+        orderType = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Order Type"));
+        paymentMethod = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Payment Method"));
+        totalamount = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Total Amount"));
+        ownerrenter = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Owner/Renter"));
+        invoicestatus = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Invoice Status"));
+        blankScreen = page.locator(".box-footer");
+        resetButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reset"));
+        inputScheduleFrom = page.locator("input[name='schedule_date_from']");
+        inputScheduleTo = page.locator("input[name='schedule_date_to']");
+        dataScheduledDate = page.locator("//tr[1]/td[4]");
     }
 
     /**
@@ -226,5 +253,79 @@ public class MamikosListInvoicePO {
             }
         }
         return playwright.waitTillLocatorIsVisible(otherPriceName);
+    }
+
+    /**
+     * Verify Data Transaction
+     * @throws  InterruptedException
+     */
+    public void verifyDataTransaction () throws InterruptedException{
+        playwright.waitTillLocatorIsVisible(shortlink);
+        playwright.waitTillLocatorIsVisible(invoiceNumber);
+        playwright.waitTillLocatorIsVisible(invoiceName);
+        playwright.waitTillLocatorIsVisible(scheduledDate);
+        playwright.waitTillLocatorIsVisible(orderType);
+        playwright.waitTillLocatorIsVisible(paymentMethod);
+        playwright.waitTillLocatorIsVisible(totalamount);
+        playwright.waitTillLocatorIsVisible(ownerrenter);
+        playwright.waitTillLocatorIsVisible(invoicestatus);
+    }
+
+    /**
+     * user get blank Screen
+     * @throws  InterruptedException
+     */
+    public void getBlankScreen () throws InterruptedException{
+        playwright.getText(blankScreen);
+    }
+
+    /**
+     * Click Button reset
+     * @throws  InterruptedException
+     */
+    public void clickReset () throws  InterruptedException{
+        playwright.clickOn(resetButton);
+    }
+
+    /**
+     * verify data based other invoice booking
+     * @throws  InterruptedException
+     */
+
+    public void getDataInvoice (String otherInvoiceBooking) throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(page.locator("//td[.='"+otherInvoiceBooking+"']"));
+    }
+
+    /**
+//     * user choose pament method
+//     * @throws  InterruptedException
+//     */
+    public void selectPayment (String method){
+        playwright.selectDropdownByValue(page.locator("select[name='payment_method']"),method);
+    }
+
+    /**
+     * user verify data transaction with method has been selected earlier
+     * @throws  InterruptedException
+     */
+    public void showResultData (String resultMethod) throws  InterruptedException{
+        playwright.waitTillLocatorIsVisible(page.locator("(//td[contains(.,'"+resultMethod+"')])[1]"));
+    }
+
+    /**
+     * user input schdule date from and to
+     * @throws  InterruptedException
+     */
+    public void choosescheduleDate (String From, String To) throws InterruptedException{
+        inputScheduleFrom.fill(From);
+        inputScheduleTo.fill(To);
+    }
+
+    /**
+     * verify data transaction that already selected
+     * @throws  InterruptedException
+     */
+    public void showDataBaseOnSchduleDate () throws InterruptedException{
+        playwright.getText(dataScheduledDate);
     }
 }

@@ -1,0 +1,91 @@
+@allinvoice @backoffice @invoice @regression @DOM2
+Feature: search invoice
+
+  @DOM2 @searchInvoiceGlobal @TEST_DOM-647 @Automated @web-covered
+  Scenario: [BackOffice][Search Invoice] search invoice with use invoice number
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "ST/90743755/2020/11/0031"
+    Then admin verify data transaction
+
+    #   Scenario: admin wrong input invoice
+    And admin click button reset input invoice number "ST/90743755/2020/11/003"
+    Then admin get blank screen
+
+  @DOM2 @searchInvoiceGlobal @TEST_DOM-708
+  Scenario: [Mamipay][Search Invoice] Search Invoice With Invoice Code
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice code "915000"
+    Then admin get blank screen
+
+#    Scenario: search invoice with use invalid invoice code
+    And admin click button reset input invoice code "915"
+    Then admin verify data transaction
+
+  @TEST_DOM-4886 @DOM2 @searchInvoiceGlobal
+  Scenario: [Mamipay][Search Invoice]Search invoice GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "GP2/20210225/00002146/8312"
+    Then admin will get data invoice "GP2/20210225/00002146/8312"
+
+    #    Scenario: search wrong invoice GP
+    And admin click button reset
+    And admin want to search invoice number "GP2/20210225/00002146/111"
+    Then admin get blank screen
+
+  @TEST_DOM-4885 @DOM2 @searchInvoiceGlobal
+  Scenario: [Mamipay][Search Invoice]Search Premium invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "PRE/20210727/48346/36691"
+    Then admin will get data invoice "PRE/20210727/48346/36691"
+
+    #    Scenario: search wrong premium invoice
+    And admin click button reset
+    And admin want to search invoice number "PRE/20210727/48346/111"
+    Then admin get blank screen
+
+  @TEST_DOM-4888 @DOM2 @searchInvoiceGlobal @basedOnPaymentMethod
+  Scenario Outline: [Mamipay][Search Invoice]Search transaction based on payment method
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin choose method "<method>"
+    Then admin will get data transatcion with method "<output>"
+    Examples:
+      | method      | output      |
+      | mandiri     | mandiri     |
+      | indomaret   | indomaret   |
+      | other       | other       |
+      | permata     | permata     |
+      | gopay       | gopay       |
+      | alfamart    | alfamart    |
+      | lawson      | lawson      |
+      | dandan      | dandan      |
+      | linkaja     | linkaja     |
+      | bri         | bri         |
+      | bni         | bni         |
+      | dana        | dana        |
+      | ovo         | ovo         |
+      | credit_card | credit_card |
+
+  @DOM2 @searchInvoiceGlobal @TEST_DOM-692
+  Scenario: [Mamipay][Search Invoice]Search Invoice With Schedule Date
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "All Invoice"
+    And admin choose date picker "2021-07-01" and "2021-07-19"
+    Then data transaction appeared
