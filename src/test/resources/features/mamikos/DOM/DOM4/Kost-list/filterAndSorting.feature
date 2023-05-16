@@ -64,9 +64,9 @@ Feature: Filter and Sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termahal"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga termahal" in kost listing
-    Then user validates the price of first listing is more expensive than the last listing in listing property page
+    Then user can see kos list rearrange from expensive to cheaper
   @TEST_DOM-1837 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termurah"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga termurah" in kost listing
-    Then user validates the price of first listing is cheaper than the last listing in listing property page
+    Then user can see kos list rearrange from cheaper to expensive

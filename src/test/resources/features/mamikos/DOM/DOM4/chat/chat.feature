@@ -6,7 +6,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     |  phone prod     | password     |
-      | 0812345670002  |  087880495933  | qwerty123    |
+      | 083838716086   |  087880495933  | qwerty123    |
     And user click chat button in top bar owner home page
     Then user see chat empty image
     And user see text "Tidak ada percakapan saat ini." in empty chat description
@@ -53,6 +53,9 @@ Feature: Chat and Chat Optimization
   @TEST_DOM-1734
   Scenario: [Dweb][Kost Detail][Chat] Tenant can send message to Owner
     When user go to mamikos homepage
+    And user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081223344550  | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod                             |
       | Kose Mamiset Automation | Kost Automation Mix Tobelo Halmahera Utara |

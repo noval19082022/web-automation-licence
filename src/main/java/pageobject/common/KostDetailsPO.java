@@ -237,8 +237,8 @@ public class KostDetailsPO {
         this.btnSayaMengerti = page.getByText("Saya Mengerti");
 
         //------------ Favorite and share kost section ----------------
-        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist Simpan"));
-        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("wishlist-glyph Hapus"));
+        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
         this.shareKostButton = page.getByText("share Bagikan");
