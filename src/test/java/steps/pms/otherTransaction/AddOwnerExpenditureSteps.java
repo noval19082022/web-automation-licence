@@ -105,4 +105,13 @@ public class AddOwnerExpenditureSteps {
             list.assertFirstDataContainsPengeluaran(pengeluaran);
         }
     }
+    @When("admin add new owner expenditure and search property {string}")
+    public void admin_add_new_owner_expenditure_and_search_property(String property) {
+        add.clickTambahData();
+        add.searchProperty(property);
+    }
+    @Then("system should show property suggestion {string}")
+    public void system_should_show_property_suggestion(String property) {
+        add.assertPropertySuggestion(property);
+    }
 }

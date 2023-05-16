@@ -245,4 +245,22 @@ public class AddOwnerExpenditurePO {
     public void assertToastMessage(String message) {
         assertThat(toastMessage).hasText(message);
     }
+
+    /**
+     * Only Search property in tambah owner expenditure
+     * @param name
+     */
+    public void searchProperty(String name) {
+        propertyNameInputText.click();
+        propertyNameInputText.fill(name);
+    }
+
+    /**
+     * Assert property suggestion are correct
+     * @param property expected property name
+     */
+    public void assertPropertySuggestion(String property) {
+        propertyNameSuggestion.first().waitFor();
+        assertThat(propertyNameSuggestion.first()).hasText(property);
+    }
 }
