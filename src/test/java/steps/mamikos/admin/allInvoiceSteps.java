@@ -4,7 +4,6 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 
@@ -57,7 +56,7 @@ public class allInvoiceSteps {
 
     @Then("admin will get data invoice {string}")
     public void adminWillGetDataInvoice(String otherInvoiceBooking) throws InterruptedException {
-        invoicePO.getDataInvoice (otherInvoiceBooking);
+        invoicePO.getDataInvoice(otherInvoiceBooking);
     }
 
     @And("admin click button reset")
@@ -84,7 +83,7 @@ public class allInvoiceSteps {
 
     @Then("data transaction appeared")
     public void dataTransactionAppeared() throws InterruptedException {
-        invoicePO.showDataBaseOnSchduleDate ();
+        invoicePO.showDataBaseOnSchduleDate();
     }
 
     @And("admin input amount from and to {string} and {string}")
@@ -93,8 +92,8 @@ public class allInvoiceSteps {
     }
 
     @Then("appeared data with amount {string}")
-    public void appearedDataWithAmount(String dataNominal) throws  InterruptedException {
-        invoicePO.showRsultBasedOnNominal (dataNominal) ;
+    public void appearedDataWithAmount(String dataNominal) throws InterruptedException {
+        invoicePO.showRsultBasedOnNominal(dataNominal);
     }
 
     @And("admin choose method Status {string}")
@@ -119,22 +118,21 @@ public class allInvoiceSteps {
 
     @And("admin click change status")
     public void adminClickChangeStatus() throws InterruptedException {
-        invoicePO.clickChangeStatus ();
+        invoicePO.clickChangeStatus();
     }
 
     @And("admin change {string}")
     public void adminChange(String method) throws InterruptedException {
-        invoicePO.changeToPaid (method);
+        invoicePO.changeToPaid(method);
     }
 
     @And("admin input date and time {string}")
     public void adminInputDateAndTime(String date) throws InterruptedException {
         invoicePO.inputDateAndTime(date);
-
     }
 
     @Then("invoice will changes to {string}")
-    public void invoiceWillChangesTo(String status) throws  InterruptedException {
-        invoicePO.showInvoiceAfterChange (status);
+    public void invoiceWillChangesTo(String status) throws InterruptedException {
+        invoicePO.showInvoiceAfterChange(status);
     }
 }

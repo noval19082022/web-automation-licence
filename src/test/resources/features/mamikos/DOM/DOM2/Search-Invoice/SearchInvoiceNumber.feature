@@ -110,10 +110,10 @@ Feature: search invoice
     And admin choose method Status "<method>"
     Then admin will get data Status with method "<output>"
     Examples:
-      | method      | output      |
-      | Unpaid      | Unpaid      |
-      | Paid        | Paid        |
-      | Expired     | Expired     |
+      | method  | output  |
+      | Unpaid  | Unpaid  |
+      | Paid    | Paid    |
+      | Expired | Expired |
 
   @TEST_DOM-4889 @TEST_DOM-4890 @DOM2 @searchInvoiceGlobal
   Scenario Outline: [Mamipay][Search Invoice]Search transaction baded on order type
@@ -125,15 +125,15 @@ Feature: search invoice
     And admin choose order type "<method>"
     Then appeared data transaction with order type "<output>"
     Examples:
-      | method              | output                |
-      | Pengajuan Sewa      | Bayar Sewa Kos        |
-      | Bayar Paket Premium | Bayar Saldo MamiAds   |
+      | method              | output              |
+      | Pengajuan Sewa      | Bayar Sewa Kos      |
+      | Bayar Paket Premium | Bayar Saldo MamiAds |
 
-  @TEST_DOM-4891 @DOM2 @searchInvoiceGlobal @checkStatusLogInvoice @TEST_DOM-722
+  @TEST_DOM-4891 @DOM2 @searchInvoiceGlobal @checkStatusLogInvoice @TEST_DOM-4892
   Scenario Outline: [Mamipay][Search Invoice]Change transaction from unpaid to paid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
+      | email stag                  | email prod                 | password  |
       | bAutomation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin want to search invoice number "45111793/2021/04/0018"
     And admin click change status
@@ -141,9 +141,9 @@ Feature: search invoice
     And admin input date and time "2021-02-04 16:35:11"
     Then invoice will changes to "<output>"
     Examples:
-      | method    | output   |
-      | Paid      | Paid     |
-      | Unpaid    | Unpaid   |
+      | method | output |
+      | Paid   | Paid   |
+      | Unpaid | Unpaid |
 
 
 
