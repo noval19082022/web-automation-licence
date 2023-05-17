@@ -71,3 +71,12 @@
         | -                       | today | -         | -             | -             | Nama biaya tidak boleh kosong.  | -                                 | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
         | -                       | -     | -         | 1 hari        | -             | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  |
         | -                       | -     | -         | -             | 11000         | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | -                                 |
+
+    @TEST_PMAN-5743 @pman-prod
+    Scenario: Periode is disabled when choose Jenis Biaya Kekurangan biaya sewa kamar
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And the admin selects "Kekurangan biaya sewa kamar" in the "Biaya Sewa"
+      Then the Periode Awal and Periode Akhir are disable
