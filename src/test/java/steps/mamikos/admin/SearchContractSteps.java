@@ -46,6 +46,20 @@ public class SearchContractSteps {
         searchContract.clickOnEditDepositButton();
     }
 
+    @And("admin input detail kerusakan {string} on edit deposit page")
+    public void inputDetailKerusakan(String text) {
+        String inputMorethan200 = null;
+        for (int i = 0; i < 10; i++) {
+            inputMorethan200 = inputMorethan200 + text;
+        }
+        searchContract.inputDetailKerusakan(inputMorethan200);
+    }
+
+    @Then("admin see maximal length {string}")
+    public void maxlength(String max) {
+        Assert.assertTrue(admin.getPopUpText(max), "max text not equals " + max);
+    }
+
     @And("admin want to see log contract")
     public void seeLog() {
         searchContract.clickOnSeeLogButton();
@@ -61,9 +75,9 @@ public class SearchContractSteps {
         admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
     }
 
-    @Then("admin will see sisa deposit")
+    @Then("admin will see additional notes menu deposit")
     public void sisaDeposit() {
-        Assert.assertTrue(admin.getSisaDepositOnDetailPopup(), "Sisa deposit pop up is doesn't appear");
+        Assert.assertTrue(admin.getAdditionalNotesMenuOnDetailPopup(), "Additional notes menu transaction pop up is doesn't appear");
     }
 
     @Then("admin want to akhiri contract but akhiri kontrak button is disabled")

@@ -24,6 +24,7 @@ public class SearchContractPO {
     Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
+    private Locator inputTextDetailKerusakan;
     private Locator seeLogBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
@@ -45,6 +46,7 @@ public class SearchContractPO {
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
+        inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
     }
 
@@ -63,6 +65,15 @@ public class SearchContractPO {
      */
     public void clickOnEditDepositButton() {
         editDepositBtn.click();
+    }
+
+    /**
+     * input text detail kerusakan
+     * @param text
+     */
+    public void inputDetailKerusakan(String text) {
+        inputTextDetailKerusakan.click();
+        page.keyboard().type(text);
     }
 
     /**
