@@ -69,6 +69,7 @@ public class SearchContractPO {
 
     /**
      * input text detail kerusakan
+     *
      * @param text
      */
     public void inputDetailKerusakan(String text) {
@@ -186,5 +187,14 @@ public class SearchContractPO {
             }
             page.waitForLoadState(LoadState.LOAD);
         }
+    }
+
+    /**
+     * check id data is blank
+     *
+     * @return boolean
+     */
+    public boolean checkBlankData() {
+        return !page.locator("tbody").first().locator("tr").first().isVisible();
     }
 }

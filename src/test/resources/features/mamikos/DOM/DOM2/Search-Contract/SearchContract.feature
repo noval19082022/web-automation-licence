@@ -82,24 +82,23 @@ Feature: Search Contract
     And admin input detail kerusakan "characters more than 200" on edit deposit page
     Then admin see maximal length "200/200"
 
-#	#admin search data tenant with invalid tenant name
-#  @TEST_DOM-411 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchInvalidInput @web @web-covered
-#  Scenario Outline: [BackOffice][search contract] Search by invalid input
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "<searchBy>" and input field "<input>"
-#    And user click search button
-#    Then user will get blank data detail
-#    Examples:
-#      | searchBy              | input               |
-#      | Kost Name             | kost anggun         |
-#      | Owner Phone Number    | 0856220211208       |
-#      | Renter Phone Number   | 0856220211208       |
-#      | Renter Name           | embul owner         |
-#      | Related Invoice Number| 83900841/2021/12/00 |
-#      | Related Invoice Code  | 83900841            |
+  @TEST_DOM-411 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchInvalidInput @web @web-covered
+  Scenario Outline: [BackOffice][search contract] Search by invalid input
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "<searchBy>" and input field "<input>"
+    Then admin will get blank data detail
+    Examples:
+      | searchBy              | input               |
+      | Kost Name             | kost anggun         |
+      | Owner Phone Number    | 0856220211208       |
+      | Renter Phone Number   | 0856220211208       |
+      | Renter Name           | embul owner         |
+      | Related Invoice Number| 83900841/2021/12/00 |
+      | Related Invoice Code  | 83900841            |
+
 #	#admin search data tenant based on period
 #  @TEST_DOM-415 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
 #  Scenario: [BackOffice][search contract] Search data tenant  based on period
@@ -204,6 +203,7 @@ Feature: Search Contract
 #    And user fills kost level "SinggahSini"
 #    And user click search button
 #    And user click button extend contract
+#    And user click cancel button on custom extend contract page
 #    Then user redirect to search contract menu detail
 #	#admin check log  data contract
 #  @TEST_DOM-401 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @seeDataContract @web @web-covered
@@ -213,18 +213,6 @@ Feature: Search Contract
 #    And user click on Search Contract Menu form left bar
 #    And user click see log button
 #    Then user will see detail data contract
-#	## See detail pop up "Deposit for confirm to finance"
-#	#
-#	#  2. Selection kost :
-#	#
-#	#* mamiroom
-#	#* APIK
-#	#* ELITE
-#	#
-#	#3. Edit Deposit visible if :
-#	#
-#	#* Kost already payment
-#	#* Kost already terminate by admin
 #  @TEST_DOM-429 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
 #  Scenario: [BackOffice][Search Contract][Edit Deposit][kost APIK] See detail pop up
 #    Given user navigates to "backoffice"
