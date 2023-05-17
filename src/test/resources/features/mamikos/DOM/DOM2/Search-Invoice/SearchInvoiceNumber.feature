@@ -133,8 +133,8 @@ Feature: search invoice
   Scenario Outline: [Mamipay][Search Invoice]Change transaction from unpaid to paid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                  | email prod                 | password  |
-      | bAutomation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin want to search invoice number "45111793/2021/04/0018"
     And admin click change status
     And admin change "<method>"
