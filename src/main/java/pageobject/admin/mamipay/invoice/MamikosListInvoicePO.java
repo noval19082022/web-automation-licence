@@ -345,7 +345,7 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void choosescheduleDate(String From, String To) throws InterruptedException {
+    public void chooseSchedule(String From, String To) throws InterruptedException {
         inputScheduleFrom.click();
         page.keyboard().type(From);
         inputScheduleTo.click();
@@ -358,7 +358,7 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void showDataBaseOnSchduleDate() throws InterruptedException {
+    public void showDataBaseOnScehduleDate() throws InterruptedException {
         playwright.getText(dataScheduledDate);
     }
 
@@ -380,7 +380,7 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void showRsultBasedOnNominal(String dataNominal) throws InterruptedException {
+    public void showResultBasedOnNominal(String dataNominal) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("(//td[.='" + dataNominal + "'])[1]"));
     }
 

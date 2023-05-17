@@ -78,12 +78,12 @@ public class allInvoiceSteps {
 
     @And("admin choose date picker {string} and {string}")
     public void adminChooseDatePickerAnd(String From, String To) throws InterruptedException {
-        invoicePO.choosescheduleDate(From, To);
+        invoicePO.chooseSchedule(From, To);
     }
 
     @Then("data transaction appeared")
     public void dataTransactionAppeared() throws InterruptedException {
-        invoicePO.showDataBaseOnSchduleDate();
+        invoicePO.showDataBaseOnScehduleDate();
     }
 
     @And("admin input amount from and to {string} and {string}")
@@ -93,7 +93,7 @@ public class allInvoiceSteps {
 
     @Then("appeared data with amount {string}")
     public void appearedDataWithAmount(String dataNominal) throws InterruptedException {
-        invoicePO.showRsultBasedOnNominal(dataNominal);
+        invoicePO.showResultBasedOnNominal(dataNominal);
     }
 
     @And("admin choose method Status {string}")
