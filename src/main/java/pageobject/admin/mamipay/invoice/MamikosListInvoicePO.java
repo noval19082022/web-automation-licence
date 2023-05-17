@@ -345,7 +345,7 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void chooseSchedule(String From, String To) throws InterruptedException {
+    public void chooseScehdule(String From, String To) throws InterruptedException {
         inputScheduleFrom.click();
         page.keyboard().type(From);
         inputScheduleTo.click();

@@ -78,7 +78,7 @@ public class allInvoiceSteps {
 
     @And("admin choose date picker {string} and {string}")
     public void adminChooseDatePickerAnd(String From, String To) throws InterruptedException {
-        invoicePO.chooseSchedule(From, To);
+        invoicePO.chooseScehdule(From, To);
     }
 
     @Then("data transaction appeared")
