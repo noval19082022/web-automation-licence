@@ -80,3 +80,19 @@
         | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
       And the admin selects "Kekurangan biaya sewa kamar" in the "Biaya Sewa"
       Then the Periode Awal and Periode Akhir are disable
+
+    @TEST_PMAN-6039 @pman-prod
+    Scenario: Edit Biaya Sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And admin creates Invoice Manual "Biaya Sewa"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
+        | Perpanjang sewa harian  | today         | tomorrow        | automation pman | 50000         |
+      And admin edits Invoice Manual "Biaya Sewa" and checks them on the table
+        | Nama Biaya                  | Periode Awal  | Periode Akhir | Durasi Biaya    | Jumlah Biaya  | Nama Biaya on Table                           | Awal on Table | Akhir on Table      | Jumlah Biaya on Table |
+        | Kekurangan biaya sewa kamar | -             | -             | automation pman | 20000         | Kekurangan biaya sewa kamar (automation pman) | -             | -                   | Rp20.000              |
+      And admin edits Invoice Manual "Biaya Sewa" into Lainnya and checks them on the table
+        | Nama Biaya  | Lainnya     | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table |
+        | Lainnya     | Kebersihan  | tomorrow          | day after tomorrow  | -             | 30000         | Kebersihan          | tomorrow      | day after tomorrow  | Rp30.000              |
