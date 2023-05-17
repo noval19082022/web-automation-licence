@@ -80,8 +80,6 @@ public class allInvoiceSteps {
     @And("admin choose date picker {string} and {string}")
     public void adminChooseDatePickerAnd(String From, String To) throws InterruptedException {
         invoicePO.choosescheduleDate(From, To);
-//        invoicePO.clickOnCariInvoice();
-
     }
 
     @Then("data transaction appeared")
