@@ -85,7 +85,7 @@ Feature: search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
-      | bagas@mamikos.com | Automation.pw1@mamikos.com | b4g45321~ |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user click "All Invoice"
     And admin choose date picker "2021-07-01" and "2021-07-19"
     Then data transaction appeared
@@ -95,7 +95,7 @@ Feature: search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
-      | bagas@mamikos.com | Automation.pw1@mamikos.com | b4g45321~ |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user click "All Invoice"
     And admin input amount from and to "50000" and "50000"
     Then appeared data with amount "50000"
@@ -105,7 +105,7 @@ Feature: search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
-      | bagas@mamikos.com | Automation.pw1@mamikos.com | b4g45321~ |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user click "All Invoice"
     And admin choose method Status "<method>"
     Then admin will get data Status with method "<output>"
@@ -120,7 +120,7 @@ Feature: search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
-      | bagas@mamikos.com | Automation.pw1@mamikos.com | b4g45321~ |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user click "All Invoice"
     And admin choose order type "<method>"
     Then appeared data transaction with order type "<output>"
@@ -134,7 +134,7 @@ Feature: search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
-      | bagas@mamikos.com | Automation.pw1@mamikos.com | b4g45321~ |
+      | bAutomation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin want to search invoice number "45111793/2021/04/0018"
     And admin click change status
     And admin change "<method>"
