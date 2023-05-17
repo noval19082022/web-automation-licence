@@ -318,15 +318,14 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-
     public void getDataInvoice(String otherInvoiceBooking) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("//td[.='" + otherInvoiceBooking + "']"));
     }
 
     /**
-     * //     * user choose pament method
-     * //     * @throws  InterruptedException
-     * //
+     * user choose pament method
+     * @throws  InterruptedException
+     *
      */
     public void selectPayment(String method) {
         playwright.selectDropdownByValue(page.locator("select[name='payment_method']"), method);
@@ -381,7 +380,6 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-
     public void showRsultBasedOnNominal(String dataNominal) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("(//td[.='" + dataNominal + "'])[1]"));
     }
@@ -407,7 +405,6 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-
     public void selectOrderType(String selectOrderType) throws InterruptedException {
         playwright.selectDropdownByValue(page.locator("select[name='order_type']"), selectOrderType);
     }
@@ -417,7 +414,6 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-
     public void resultDataBasedOnOrderType(String resultType) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("(//td[contains(.,'" + resultType + "')])[1]"));
     }
