@@ -45,6 +45,10 @@ public class MamikosListInvoicePO {
     Locator inputScheduleFrom;
     Locator inputScheduleTo;
     Locator dataScheduledDate;
+    Locator valueFrom;
+    Locator valueTo;
+    Locator clickChangeStatus;
+    Locator inputDateAndTime;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -80,6 +84,10 @@ public class MamikosListInvoicePO {
         inputScheduleFrom = page.locator("input[name='schedule_date_from']");
         inputScheduleTo = page.locator("input[name='schedule_date_to']");
         dataScheduledDate = page.locator("//tr[1]/td[4]");
+        valueFrom = page.locator("input[name='nominal_from']");
+        valueTo = page.locator("input[name='nominal_to']");
+        clickChangeStatus = page.locator("//a[.='Change Status']");
+        inputDateAndTime = page.locator("//input[@name='paid_at']");
     }
 
     /**
@@ -317,8 +325,11 @@ public class MamikosListInvoicePO {
      * @throws  InterruptedException
      */
     public void choosescheduleDate (String From, String To) throws InterruptedException{
-        inputScheduleFrom.fill(From);
-        inputScheduleTo.fill(To);
+        inputScheduleFrom.click();
+        page.keyboard().type(From);
+        inputScheduleTo.click();
+        page.keyboard().type(To);
+        playwright.clickOn(cariInvoice);
     }
 
     /**
@@ -327,5 +338,91 @@ public class MamikosListInvoicePO {
      */
     public void showDataBaseOnSchduleDate () throws InterruptedException{
         playwright.getText(dataScheduledDate);
+    }
+    /**
+     * input nominal from and to
+     * @throws  InterruptedException
+     */
+    public void inputValueAmount (String nominalFrom, String nominalTo) throws InterruptedException {
+        valueFrom.click();
+        page.keyboard().type(nominalFrom);
+        valueTo.click();
+        page.keyboard().type(nominalTo);
+        playwright.clickOn(cariInvoice);
+    }
+
+    /**
+     * verify data based on nominal
+     * @throws  InterruptedException
+     */
+
+    public void showRsultBasedOnNominal (String dataNominal) throws  InterruptedException{
+        playwright.waitTillLocatorIsVisible(page.locator("(//td[.='"+dataNominal+"'])[1]"));
+    }
+
+    /**
+     * choose status transaction
+     * @throws  InterruptedException
+     */
+    public void selectDetailStatus (String statusTransaction) throws InterruptedException {
+        playwright.selectDropdownByValue(page.locator("select[name='status']"), statusTransaction);
+    }
+
+    /**
+     * verify data transaction based on status
+     */
+    public void resultDataBasedOnStatus (String dataStatus){
+        playwright.waitTillLocatorIsVisible(page.locator("(//span[.='"+dataStatus+"'])[1]"));
+    }
+
+    /**
+     * select order type
+     * @throws  InterruptedException
+     */
+
+    public void selectOrderType (String selectOrderType) throws InterruptedException{
+        playwright.selectDropdownByValue(page.locator("select[name='order_type']"),selectOrderType );
+    }
+
+    /**
+     * verify data based on order type
+     * @throws  InterruptedException
+     */
+
+    public void resultDataBasedOnOrderType (String resultType) throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(page.locator("(//td[contains(.,'"+resultType+"')])[1]"));
+    }
+
+    /**
+     * user click status invoice
+     * @throws  InterruptedException
+     */
+    public void clickChangeStatus () throws  InterruptedException{
+        playwright.clickOn(clickChangeStatus);
+    }
+
+    /**
+     * user change status invoice to paid
+     * @throws  InterruptedException
+     */
+    public void changeToPaid (String method) throws  InterruptedException{
+        playwright.selectDropdownByValue(page.getByRole(AriaRole.COMBOBOX),method );
+    }
+
+    /**
+     * user input date and time
+     * @throws  InterruptedException
+     */
+    public void inputDateAndTime (String date) throws  InterruptedException{
+        inputDateAndTime.click();
+        page.keyboard().type(date);
+    }
+
+    /**
+     * invoice ststus updated
+     * @throws  InterruptedException
+     */
+    public void  showInvoiceAfterChange (String status) throws  InterruptedException{
+        playwright.waitTillLocatorIsVisible(page.locator("//span[text()='"+status+"']"));
     }
 }

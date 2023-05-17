@@ -80,12 +80,63 @@ public class allInvoiceSteps {
     @And("admin choose date picker {string} and {string}")
     public void adminChooseDatePickerAnd(String From, String To) throws InterruptedException {
         invoicePO.choosescheduleDate(From, To);
-        invoicePO.clickOnCariInvoice();
+//        invoicePO.clickOnCariInvoice();
 
     }
 
     @Then("data transaction appeared")
     public void dataTransactionAppeared() throws InterruptedException {
         invoicePO.showDataBaseOnSchduleDate ();
+    }
+
+    @And("admin input amount from and to {string} and {string}")
+    public void adminInputAmountFromAndToAnd(String nominalFrom, String nominalTo) throws InterruptedException {
+        invoicePO.inputValueAmount(nominalFrom, nominalTo);
+    }
+
+    @Then("appeared data with amount {string}")
+    public void appearedDataWithAmount(String dataNominal) throws  InterruptedException {
+        invoicePO.showRsultBasedOnNominal (dataNominal) ;
+    }
+
+    @And("admin choose method Status {string}")
+    public void adminChooseMethodStatus(String method) throws InterruptedException {
+        invoicePO.selectDetailStatus(method);
+    }
+
+    @Then("admin will get data Status with method {string}")
+    public void adminWillGetDataStatusWithMethod(String output) {
+        invoicePO.resultDataBasedOnStatus(output);
+    }
+
+    @And("admin choose order type {string}")
+    public void adminChooseOrderType(String method) throws InterruptedException {
+        invoicePO.selectOrderType(method);
+    }
+
+    @Then("appeared data transaction with order type {string}")
+    public void appearedDataTransactionWithOrderType(String output) throws InterruptedException {
+        invoicePO.resultDataBasedOnOrderType(output);
+    }
+
+    @And("admin click change status")
+    public void adminClickChangeStatus() throws InterruptedException {
+        invoicePO.clickChangeStatus ();
+    }
+
+    @And("admin change {string}")
+    public void adminChange(String method) throws InterruptedException {
+        invoicePO.changeToPaid (method);
+    }
+
+    @And("admin input date and time {string}")
+    public void adminInputDateAndTime(String date) throws InterruptedException {
+        invoicePO.inputDateAndTime(date);
+
+    }
+
+    @Then("invoice will changes to {string}")
+    public void invoiceWillChangesTo(String status) throws  InterruptedException {
+        invoicePO.showInvoiceAfterChange (status);
     }
 }
