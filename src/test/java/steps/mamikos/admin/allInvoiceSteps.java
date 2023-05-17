@@ -78,12 +78,12 @@ public class allInvoiceSteps {
 
     @And("admin choose date picker {string} and {string}")
     public void adminChooseDatePickerAnd(String From, String To) throws InterruptedException {
-        invoicePO.chooseScehdule(From, To);
+        invoicePO.chooseSchedule(From, To);
     }
 
     @Then("data transaction appeared")
     public void dataTransactionAppeared() throws InterruptedException {
-        invoicePO.showDataBaseOnScehduleDate();
+        invoicePO.showDataBaseOnScheduleDate();
     }
 
     @And("admin input amount from and to {string} and {string}")
@@ -134,5 +134,9 @@ public class allInvoiceSteps {
     @Then("invoice will changes to {string}")
     public void invoiceWillChangesTo(String status) throws InterruptedException {
         invoicePO.showInvoiceAfterChange(status);
+    }
+
+    @And("admin click checkbox not in mamipay")
+    public void adminClickCheckboxNotInMamipay() {
     }
 }
