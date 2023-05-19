@@ -1,0 +1,52 @@
+@regression @BBM8
+
+Feature: Search invoice
+  @TEST_BBM-859 @autoExtendTrue @continue
+  Scenario: Auto extend is true
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on Search Invoice Menu form left bar
+    And user select "True" on auto extend selection
+    And user click search invoice button on search invoice admin page
+    Then user verify search invoice results have auto extend "True", "success"
+
+  @TEST_BBM-858 @autoExtendFalse @continue
+  Scenario: Auto extend is false
+    When admin clicks on Search Invoice Menu form left bar
+    And user select "False" on auto extend selection
+    And user click search invoice button on search invoice admin page
+    Then user verify search invoice results have auto extend "False", "danger"
+
+  @TEST_BBM-861 @reminderStatusInformationH-5 @continue
+  Scenario: Reminder status information H-5
+    When admin clicks on Search Invoice Menu form left bar
+    And admin search invoice:
+      | search by              | invoice_number          |
+      | search value           | 15906136/2021/11/0015   |
+    And admin clicks on see log button with link value "/52856"
+    And admin set active page to 1
+    Then admin verify invoice log has "Billing Reminder H-5" as "Reminder Type"
+    And user verify PN Template content with "Wah, 5 hari lagi sewa kos habis"
+
+  @TEST_BBM-861 @reminderStatusInformationH-1 @continue
+  Scenario: Reminder status information H-1
+    Then admin verify invoice log has "Billing Reminder H-1" as "Reminder Type"
+    And user verify PN Template content with "Udah coba bayar kosan yang anti ribet?"
+
+  @TEST_BBM-862 @billingReminderDueDate @continue
+  Scenario: Billing reminder due date
+    Then user verify PN Template content with "Pake Mamikos, bayar kos bisa di mana aja"
+
+  @TEST_BBM-864 @pnReminderStatusInformation @continue
+  Scenario: PN reminder status information
+    Then admin verify PN reminder status information
+      | Platform          | Content                                | Created At          | Reminder Type             | Status    |
+      | Push Notification | Udah coba bayar kosan yang anti ribet? | 2021-09-07 09:05:06 | Billing Reminder Due Date | delivered |
+
+  @TEST_BBM-860 @whatsAppReminderStatusInformation
+  Scenario: Whatsapp reminder status information
+    Then admin verify WhatsApp reminder status information
+      | Platform          | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status    |
+      | WhatsApp          | Hai  Laksana Adi, Udah coba bayar kosan yang anti ribet? Cuma beberapa klik, uang sewa langsung diterima pemilik.Yuk, cobain langsung di https://mamikos.com/user/kost-saya?tagihan=true&ch=08 | 2021-09-06 05:12:10 | Billing Reminder Without Voucher Today | pending   |

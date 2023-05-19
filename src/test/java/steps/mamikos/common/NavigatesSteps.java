@@ -185,4 +185,9 @@ public class NavigatesSteps {
     public void userNavigateToPengajuanBooking() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
     }
+
+    @When("admin navigates to Search Invoice Page")
+    public void adminNavigatesToSearchInvoicePage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.SEARCH_INVOICE);
+    }
 }
