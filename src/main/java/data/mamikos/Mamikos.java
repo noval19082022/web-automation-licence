@@ -34,4 +34,6 @@ public class Mamikos {
     public static final String GOLDPLUS_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusTestingTools");
     public static final String VOUCHER_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "voucherSaya");
     public static final String PENGAJUAN_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "pengajuanBooking");
+    public static final String SEARCH_INVOICE = JavaHelpers.getPropertyValue(MAMIKOS, "searchInvoice");
+
 }
