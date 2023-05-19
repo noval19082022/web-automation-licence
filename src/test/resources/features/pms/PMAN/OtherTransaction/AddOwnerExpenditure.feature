@@ -45,3 +45,13 @@ Feature: Add Owner Expenditure
       | keyword | property name                                             |
       | Asgard  | Kost Singgahsini Asgard Halmahera Utara                   |
       | Beruang | Kost Singgahsini Beruang Terbang Mamitest Halmahera Utara |
+
+  @TEST_PMAN-6439
+  Scenario Outline: Search terminated and auto_terminated property
+    When admin add new owner expenditure and search property "<keyword>"
+    Then property suggestion not appear
+
+    Examples:
+      | keyword     |
+      | Jotunheim   |
+      | Woodchuck   |

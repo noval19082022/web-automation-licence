@@ -114,4 +114,8 @@ public class AddOwnerExpenditureSteps {
     public void system_should_show_property_suggestion(String property) {
         add.assertPropertySuggestion(property);
     }
+    @Then("property suggestion not appear")
+    public void property_suggestion_not_appear() {
+        add.assertPropertySuggestionNotAppear();
+    }
 }

@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 import java.nio.file.Paths;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.setDefaultAssertionTimeout;
 
 public class AddOwnerExpenditurePO {
 
@@ -39,6 +40,7 @@ public class AddOwnerExpenditurePO {
     Locator buttonBatalPopUpAddOwnerExpenditure;
     Locator confirmationPopUp;
     Locator toastMessage;
+    Locator propertynameSuggestionBox;
     public AddOwnerExpenditurePO(Page page) {
         this.page = page;
 
@@ -61,6 +63,7 @@ public class AddOwnerExpenditurePO {
         buttonTambahPopUpAddOwnerExpenditure = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah").setExact(true));
         confirmationPopUp = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Yakin ingin tambahkan data ini? Data yang ditambahkan akan dilanjutkan ke tahap ")).locator("div").first();
         toastMessage = page.locator(".bg-c-toast__content");
+        propertynameSuggestionBox = page.locator(".bg-c-searchbar>div").nth(1);
     }
 
     /**
@@ -262,5 +265,12 @@ public class AddOwnerExpenditurePO {
     public void assertPropertySuggestion(String property) {
         propertyNameSuggestion.first().waitFor();
         assertThat(propertyNameSuggestion.first()).hasText(property);
+    }
+
+    /**
+     * Assert property name suggestion not appear
+     */
+    public void assertPropertySuggestionNotAppear() {
+        assertThat(propertynameSuggestionBox).not().isVisible();
     }
 }
