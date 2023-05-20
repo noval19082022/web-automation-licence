@@ -99,18 +99,17 @@ Feature: Search Contract
       | Related Invoice Number| 83900841/2021/12/00 |
       | Related Invoice Code  | 83900841            |
 
-#	#admin search data tenant based on period
-#  @TEST_DOM-415 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
-#  Scenario: [BackOffice][search contract] Search data tenant  based on period
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "089220220101"
-#    And user fills kost level "SinggahSini"
-#    And user click search button
-#    Then user redirect to search contract menu detail
-#	#admin search data tenant based on kost level
+  @TEST_DOM-415 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
+  Scenario: [BackOffice][search contract] Search data tenant based on period
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220220101"
+    And admin want to search contract periode for "Last Month"
+    And admin search contract by kost level "SinggahSini"
+    Then admin redirect to search contract menu detail
+
 #  @TEST_DOM-416 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnKostLevel @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][search contract] Search data tenant  based on kost level
 #    Given user navigates to "backoffice"

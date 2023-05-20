@@ -61,6 +61,16 @@ public class SearchContractPO {
     }
 
     /**
+     * Select dropdown search contract periode
+     *
+     * @param periode
+     */
+    public void selectPeriodSearchContract(String periode) {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Contract Date Period ")).click();
+        page.getByText(periode).click();
+    }
+
+    /**
      * Click on edit deposit button
      */
     public void clickOnEditDepositButton() {
@@ -82,6 +92,24 @@ public class SearchContractPO {
      */
     public void clickOnSeeLogButton() {
         seeLogBtn.click();
+    }
+
+    /**
+     * check id data is blank
+     *
+     * @return boolean
+     */
+    public boolean checkBlankData() {
+        return !page.locator("tbody").first().locator("tr").first().isVisible();
+    }
+
+    /**
+     * check if search contract header is visible
+     *
+     * @return boolean
+     */
+    public boolean isSearchContractHeaderVisible() {
+        return page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Contract")).isVisible();
     }
 
     /**
@@ -187,14 +215,5 @@ public class SearchContractPO {
             }
             page.waitForLoadState(LoadState.LOAD);
         }
-    }
-
-    /**
-     * check id data is blank
-     *
-     * @return boolean
-     */
-    public boolean checkBlankData() {
-        return !page.locator("tbody").first().locator("tr").first().isVisible();
     }
 }

@@ -33,6 +33,11 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @And("admin want to search contract periode for {string}")
+    public void searchContractFor(String periode) {
+        searchContract.selectPeriodSearchContract(periode);
+    }
+
     @When("admin search contract by {string} and input field {string}")
     public void adminSearchContractBy(String searchBy, String inputField) {
         admin.clickOnSearchContract();
@@ -64,6 +69,11 @@ public class SearchContractSteps {
     public void adminGetBlankData() {
         Assert.assertTrue(admin.getPopUpText("Search Contract"), "Search Contract");
         Assert.assertTrue(searchContract.checkBlankData(), "Data Display");
+    }
+
+    @Then("admin redirect to search contract menu detail")
+    public void searcContractMenu() {
+        Assert.assertTrue(searchContract.isSearchContractHeaderVisible(), "Search Contract Header is not visible");
     }
 
     @And("admin want to see log contract")

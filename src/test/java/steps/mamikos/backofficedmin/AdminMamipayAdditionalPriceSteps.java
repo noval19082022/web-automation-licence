@@ -69,8 +69,8 @@ public class AdminMamipayAdditionalPriceSteps {
         Assert.assertEquals(totalCost, totalToAssert, "Is not match");
     }
 
-    @And("admin search invoice by contact number:")
-    public void adminSearchInvoiceByContactNumber(DataTable table) {
+    @And("admin search invoice by contact number and go to invoice detail fee:")
+    public void adminSearchInvoiceByContactNumberAndGoTOInvoiceDetailFee(DataTable table) {
         additionalPriceData = table.asMap(String.class, String.class);
         var additionalPriceSearchBy = additionalPriceData.get("search by");
         var searchValue = additionalPriceData.get("search value");
@@ -171,5 +171,21 @@ public class AdminMamipayAdditionalPriceSteps {
         for (String s : otherPriceName) {
             Assert.assertFalse(invoiceAdmin.isAdditionalPriceNameIsVisible(s), "Add ons additional price is still visible");
         }
+    }
+
+    @And("admin clicks on Search Invoice Menu form left bar")
+    public void adminClickOnSearchInvoice() {
+        adminMamipay.goToMamikosSearchInvoice();
+    }
+
+    @And("admin search invoice:")
+    public void adminSearchInvoiceByContactNumber(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
     }
 }

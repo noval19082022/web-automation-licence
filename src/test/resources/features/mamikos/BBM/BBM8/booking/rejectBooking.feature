@@ -1,4 +1,4 @@
-@booking @rejectBooking @BBM81
+@booking @rejectBooking @BBM8
 Feature: OB Owner Reject Booking Full Room
 
   Scenario: Admin Batalkan Contract
@@ -35,3 +35,9 @@ Feature: OB Owner Reject Booking Full Room
       | phone stag     | phone prod     | password        |
       | 081362464341   | 081362464341   | 1d0lt3stb4ru    |
     And owner reject booking
+
+  Scenario: Owner set room kost Kosong
+    When owner navigates to property saya kos
+    And owner search kost "Dont Starve To Get Her" on property saya page
+    And owner click update kamar kost
+    And owner set status kamar is kosong
