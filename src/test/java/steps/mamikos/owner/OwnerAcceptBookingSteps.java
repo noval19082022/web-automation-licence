@@ -68,8 +68,4 @@ public class OwnerAcceptBookingSteps {
         billBookingManage.clickOnSimpan();
         billBookingManage.clickOkButton();
     }
-    @And("user clicks on Booking Details button")
-    public void userClicksOnBookingDetailsButton() {
-        billBookingManage.clickOnLihatDetailButton();
-    }
 }

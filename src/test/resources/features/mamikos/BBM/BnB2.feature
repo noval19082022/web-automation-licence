@@ -1,4 +1,4 @@
-@BBM5  @rabu
+@BBM5  @senin
 Feature: BnB feature with background booking kost - reject atur booking
 
   Scenario: booking kost
@@ -11,7 +11,7 @@ Feature: BnB feature with background booking kost - reject atur booking
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost ARAC1 Danurejan Yogyakarta | Kost Adi Auto FullPaid AddFee Deposit|
+      | Yamie Panda Kost Deposit Wirobrajan Yogyakarta | Kost Adi Auto FullPaid AddFee Deposit|
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user
@@ -20,15 +20,9 @@ Feature: BnB feature with background booking kost - reject atur booking
   Scenario: [Atur Booking][Reject Reason] Check reject booking reason Tanggal masuk/check-in kos terlalu dekat and have BSS varian
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password     |
-      | 089604239098  | 0890867321212 | widyarini1   |
-    And owner navigate to pengajuan booking page
-    And user clicks on Booking Details button
-    And owner reject booking from view detail
-    And owner select reason reject kos "Tidak boleh pasutri"
-    Then owner can see confirmation Atur Booking popup
-    And owner click on make rules booking button
-    Then owner can see make rules booking page
+      | phone stag  | phone prod    | password    |
+      | 081362464341  | 0890867321212 | 1d0lt3stb4ru   |
+    And owner reject booking
 
 
 
