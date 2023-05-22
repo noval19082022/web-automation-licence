@@ -41,6 +41,8 @@ public class AddOwnerExpenditurePO {
     Locator confirmationPopUp;
     Locator toastMessage;
     Locator propertynameSuggestionBox;
+    Locator kotaText;
+    Locator sisaKontrakText;
     public AddOwnerExpenditurePO(Page page) {
         this.page = page;
 
@@ -64,6 +66,8 @@ public class AddOwnerExpenditurePO {
         confirmationPopUp = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Yakin ingin tambahkan data ini? Data yang ditambahkan akan dilanjutkan ke tahap ")).locator("div").first();
         toastMessage = page.locator(".bg-c-toast__content");
         propertynameSuggestionBox = page.locator(".bg-c-searchbar>div").nth(1);
+        kotaText = page.locator(".bg-c-field__description").nth(1);
+        sisaKontrakText = page.locator(".bg-c-field__description").nth(2);
     }
 
     /**
@@ -90,7 +94,7 @@ public class AddOwnerExpenditurePO {
     public void selectProperty(String name) {
         propertyNameInputText.click();
         propertyNameInputText.fill(name);
-        propertyNameSuggestion.waitFor();
+        propertyNameSuggestion.first().waitFor();
         propertyNameSuggestion.first().click();
     }
 
@@ -272,5 +276,47 @@ public class AddOwnerExpenditurePO {
      */
     public void assertPropertySuggestionNotAppear() {
         assertThat(propertynameSuggestionBox).not().isVisible();
+    }
+
+    /**
+     * Assert Kota
+     * @param text expected kota
+     */
+    public void assertKota(String text) {
+        assertThat(kotaText).hasText(text);
+    }
+
+    /**
+     * Assert Sisa Kontrak Kerja Sama
+     * @param text expected sisa kontrak kerja sama
+     */
+    public void assertSisaKontrak(String text) {
+        assertThat(sisaKontrakText).hasText(text);
+    }
+
+    /**
+     * Assert Kota is not "-"
+     */
+    public void assertKotaNotEmpty() {
+        assertThat(kotaText).not().hasText("-");
+    }
+
+    /**
+     * Assert Sisa Kontrak Kerja Sama is not "-"
+     */
+    public void assertSisaKontrakNotEmpty() {
+        assertThat(sisaKontrakText).not().hasText("-");
+    }
+
+    /**
+     * Edit serached property
+     * @param property property name
+     */
+    public void editSearchProperty(String property) {
+        propertyNameInputText.click();
+        propertyNameInputText.clear();
+        propertyNameInputText.fill(property);
+        propertyNameSuggestion.first().waitFor();
+        propertyNameSuggestion.first().click();
     }
 }

@@ -118,4 +118,18 @@ public class AddOwnerExpenditureSteps {
     public void property_suggestion_not_appear() {
         add.assertPropertySuggestionNotAppear();
     }
+    @When("admin edit and choose property {string}")
+    public void admin_edit_and_choose_property(String property) {
+        add.editSearchProperty(property);
+    }
+    @Then("kota and sisa kontrak kerja sama should be {string}")
+    public void kota_and_sisa_kontrak_kerja_sama_should_be(String text) {
+        add.assertKota(text);
+        add.assertSisaKontrak(text);
+    }
+    @Then("system should be auto fill kota and sisa kontrak kerja sama")
+    public void system_should_be_auto_fill_kota_and_sisa_kontrak_kerja_sama() {
+        add.assertKotaNotEmpty();
+        add.assertSisaKontrakNotEmpty();
+    }
 }

@@ -55,3 +55,12 @@ Feature: Add Owner Expenditure
       | keyword     |
       | Jotunheim   |
       | Woodchuck   |
+
+  @TEST_PMAN-6312
+  Scenario: Auto Fill Kota and Sisa Kontrak Kerja Sama
+    #terminated property
+    When admin add new owner expenditure and search property "Jotunheim"
+    Then kota and sisa kontrak kerja sama should be "-"
+    #active property
+    When admin edit and choose property "Asgard"
+    Then system should be auto fill kota and sisa kontrak kerja sama
