@@ -24,9 +24,7 @@ public class BillAndBookingManagementPO {
     Locator pilihButton;
     Locator doneButton;
     Locator lihatDetailButton;
-    Locator confirmationPopup;
-    Locator makeRuleButton;
-    Locator makeRuleBookingPage;
+
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -45,9 +43,6 @@ public class BillAndBookingManagementPO {
         reasonChoice = page.locator(".reject-modal__reason-option-overlay").first();
         doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
         lihatDetailButton = page.locator("(//span[normalize-space()='Lihat Detail'])[1]");
-        confirmationPopup = page.locator("//h3[@class='bg-c-modal__body-title']");
-        makeRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat peraturan"));
-        makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
     }
 
     /**
@@ -136,39 +131,5 @@ public class BillAndBookingManagementPO {
     public void clickOnLihatDetailButton() {
         lihatDetailButton.waitFor();
         lihatDetailButton.click();
-    }
-
-    /**
-     * Click on reason reject booking
-     */
-    public PengajuanBookingPO ownerSelectRejectBookingKos(String reason) {
-        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
-        ElementHandle element = page.querySelector(selector);
-        element.click();
-        playwright.pageScrollUntilElementIsVisible(statusTandC);
-        playwright.clickOn(statusTandC);
-        playwright.clickOn(pilihButton);
-        return new PengajuanBookingPO(page);
-    }
-    /**
-     * Check confirmation Atur Booking popup
-     * @return confirmation Atur Booking popup
-     */
-    public boolean isAppearConfirmationPopup() {
-        return playwright.waitTillLocatorIsVisible(confirmationPopup);
-    }
-    /**
-     * Click on reason reject booking
-     */
-    public PengajuanBookingPO ownerClickOnMakeRulesBookingButton() {
-        playwright.clickOn(makeRuleButton);
-        return new PengajuanBookingPO(page);
-    }
-    /**
-     * Check direct make rule page
-     * @return make rule page
-     */
-    public boolean isAppearMakeRuleBookingPage() {
-        return playwright.waitTillLocatorIsVisible(makeRuleBookingPage);
     }
 }
