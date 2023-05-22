@@ -1,4 +1,4 @@
-@BBM5  @senin
+@BBM5
 Feature: BnB feature with background booking kost - reject atur booking
 
   Scenario: booking kost
