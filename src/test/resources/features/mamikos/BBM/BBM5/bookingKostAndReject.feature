@@ -1,5 +1,5 @@
 @BBM5
-Feature: BnB feature with background booking kost - reject atur booking
+Feature: BnB feature with background booking kost - reject booking
 
   Scenario: booking kost
     Given user go to mamikos homepage
