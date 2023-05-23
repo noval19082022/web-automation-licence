@@ -64,3 +64,24 @@ Feature: Add Owner Expenditure
     #active property
     When admin edit and choose property "Asgard"
     Then system should be auto fill kota and sisa kontrak kerja sama
+
+  @TEST_PMAN-6313 @pman-prod
+  Scenario: Verify Kategori Pengeluaran List
+    When admin tambah data owner expenditure
+    Then admin verify kategori pengeluaran list should contains :
+      | Administrasi & Iuran Kos                    |
+      | Amenities Penyewa                           |
+      | Bahan Pembersih Kos & Dapur                 |
+      | Gaji & Biaya Operasional Staff              |
+      | Pembayaran Listrik                          |
+      | Pembayaran PDAM                             |
+      | Pembayaran Wifi                             |
+      | Pengendalian Hama                           |
+      | Perbaikan AC                                |
+      | Perbaikan Fasilitas Bangunan                |
+      | Perbaikan Fasilitas Kamar                   |
+      | Perbaikan Fasilitas Umum                    |
+      | Perbaikan Wifi                              |
+      | Perlengkapan Dapur                          |
+      | Perlengkapan Kebersihan Kos                 |
+      | Lainnya                                     |
