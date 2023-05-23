@@ -372,4 +372,46 @@ public class PlaywrightHelpers {
         String activeTitle = page.evaluate("document.title").toString();
         return activeTitle;
     }
+
+
+    /**
+     * Click based on Text
+     */
+    public void clickOnText(String menu) {
+        waitTillLocatorIsVisible(page.getByText(menu),3000.0);
+        delayAndClickOn(page.getByText(menu),3000.0);
+        hardWait(5000);
+    }
+
+    /**
+     * Click based on Text Button
+     */
+    public void clickOnTextButton(String buttonText) {
+        waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)),3000.0);
+        clickOn(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)));
+        hardWait(3000);
+    }
+
+    /**
+     * Check element based on text is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isTextDisplayed(String text) {
+        hardWait(3000);
+        return isLocatorVisibleAfterLoad(page.getByText(text), 3000.0);
+    }
+
+
+    /**
+     * Check if element button based on text is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isButtonWithTextDisplayed(String button){
+        hardWait(3000.0);
+        return waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(button)),5000.0);
+    }
+
+
 }
