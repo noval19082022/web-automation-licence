@@ -373,23 +373,45 @@ public class PlaywrightHelpers {
         return activeTitle;
     }
 
-
     /**
-     * Click based on Text
+     * Click on a desired locator based on text
+     *
+     * @param words target locator
+     * default timeout
      */
-    public void clickOnText(String menu) {
-        waitTillLocatorIsVisible(page.getByText(menu),3000.0);
-        delayAndClickOn(page.getByText(menu),3000.0);
-        hardWait(5000);
+    public void clickOnText(String words) {
+        clickOn(page.getByText(words));
     }
 
     /**
-     * Click based on Text Button
+     * Click on a desired locator based on text
+     *
+     * @param words   locator target locator
+     * @param timeout Double data type of specific timeout
+     */
+    public void clickOnText(String words, Double timeout) {
+        delayAndClickOn(page.getByText(words),timeout);
+    }
+
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param buttonText target locator
+     * default timeout
      */
     public void clickOnTextButton(String buttonText) {
-        waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)),3000.0);
-        clickOn(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)));
-        hardWait(3000);
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+    }
+
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param buttonText target locator
+     * @param duration Double data type of specific timeout
+     */
+    public void clickOnTextButton(String buttonText, double duration) {
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        hardWait(duration);
     }
 
     /**
@@ -398,20 +420,39 @@ public class PlaywrightHelpers {
      * @return status true / false
      */
     public boolean isTextDisplayed(String text) {
-        hardWait(3000);
-        return isLocatorVisibleAfterLoad(page.getByText(text), 3000.0);
+        return waitTillLocatorIsVisible(page.getByText(text));
     }
-
 
     /**
-     * Check if element button based on text is displayed
+     * Wait until element locator is visible
      *
-     * @return status true / false
+     * @param text Locator type based on text
+     * @param duration Double type
+     * @return boolean
      */
-    public boolean isButtonWithTextDisplayed(String button){
-        hardWait(3000.0);
-        return waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(button)),5000.0);
+    public boolean isTextDisplayed(String text, double duration) {
+        return isLocatorVisibleAfterLoad(page.getByText(text), duration);
     }
 
+    /**
+     * Wait until element locator button based on text is visible
+     *
+     * @param button Locator type based on text
+     * default timeout
+     * @return boolean
+     */
+    public boolean isButtonWithTextDisplayed(String button){
+        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON,button));
+    }
 
+    /**
+     * Wait until element locator button based on text is visible
+     *
+     * @param button Locator type based on text
+     * @param duration Double type
+     * @return boolean
+     */
+    public boolean isButtonWithTextDisplayed(String button, double duration){
+        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON,button),duration);
+    }
 }
