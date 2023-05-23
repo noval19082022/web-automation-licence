@@ -372,4 +372,87 @@ public class PlaywrightHelpers {
         String activeTitle = page.evaluate("document.title").toString();
         return activeTitle;
     }
+
+    /**
+     * Click on a desired locator based on text
+     *
+     * @param words target locator
+     * default timeout
+     */
+    public void clickOnText(String words) {
+        clickOn(page.getByText(words));
+    }
+
+    /**
+     * Click on a desired locator based on text
+     *
+     * @param words   locator target locator
+     * @param timeout Double data type of specific timeout
+     */
+    public void clickOnText(String words, Double timeout) {
+        delayAndClickOn(page.getByText(words),timeout);
+    }
+
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param buttonText target locator
+     * default timeout
+     */
+    public void clickOnTextButton(String buttonText) {
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+    }
+
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param buttonText target locator
+     * @param duration Double data type of specific timeout
+     */
+    public void clickOnTextButton(String buttonText, double duration) {
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        hardWait(duration);
+    }
+
+    /**
+     * Check element based on text is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isTextDisplayed(String text) {
+        return waitTillLocatorIsVisible(page.getByText(text));
+    }
+
+    /**
+     * Wait until element locator is visible
+     *
+     * @param text Locator type based on text
+     * @param duration Double type
+     * @return boolean
+     */
+    public boolean isTextDisplayed(String text, double duration) {
+        return isLocatorVisibleAfterLoad(page.getByText(text), duration);
+    }
+
+    /**
+     * Wait until element locator button based on text is visible
+     *
+     * @param button Locator type based on text
+     * default timeout
+     * @return boolean
+     */
+    public boolean isButtonWithTextDisplayed(String button){
+        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON,button));
+    }
+
+    /**
+     * Wait until element locator button based on text is visible
+     *
+     * @param button Locator type based on text
+     * @param duration Double type
+     * @return boolean
+     */
+    public boolean isButtonWithTextDisplayed(String button, double duration){
+        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON,button),duration);
+    }
 }

@@ -37,6 +37,11 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
     }
 
+    @When("admin navigates to Admin Goldplus Package")
+    public void adminNavigatesToAdminGoldplusPackage() {
+        playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
+    }
+
     @When("scenario is {string}")
     public void scenarioIsContinue(String isContinue) {
         FlowControl.setContinueFlow(isContinue.equalsIgnoreCase("continue"));
