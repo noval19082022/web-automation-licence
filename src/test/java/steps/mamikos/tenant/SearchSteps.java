@@ -51,14 +51,6 @@ public class SearchSteps {
         Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
     }
 
-    @When("user search property name and select matching result to go kos detail")
-    public void user_search_property_name_and_select_matching_result_to_go_kos_detail(DataTable table) {
-        var kostNameData = table.asMaps(String.class, String.class);
-        var kostName = kostNameData.get(0).get("favorite " + Mamikos.ENV);
-        searchPO = homePO.clickOnSearchButton();
-        kostDetail = searchPO.searchByText(kostName);
-    }
-
     @Then("user in kost detail navbar before login appears")
     public void userInKostDetailNavbarBeforeLoginAppears() throws InterruptedException {
 
@@ -111,13 +103,13 @@ public class SearchSteps {
         search.clickTheFirstResultBasedOnArea();
     }
 
-    @Then("user click the search result based on name")
-    public void user_click_the_search_result_based_on_name() {
+    @Then("user see the search result based on name")
+    public void user_see_the_search_result_based_on_name() {
         kostDetail.getKostTitle();
     }
 
-    @When("user search property by name and select the matching result to go to kos details page")
-    public void userSearchAndSelectKost(DataTable table) {
+    @When("user search property by name Autocomplete")
+    public void userSearchPropertyByNameAutocomplete(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
         search.suggetionKostOnTheSearchListNumberSix(kostName);

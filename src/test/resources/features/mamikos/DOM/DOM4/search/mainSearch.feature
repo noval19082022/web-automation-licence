@@ -32,13 +32,13 @@ Feature: Main Search
       | sindu    | sindu   |
     Then user click the search result based on area
 
-  @TEST_DOM-1846 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
+  @bagas @TEST_DOM-1846 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
   Scenario: [Dweb][Search] Select Autocomplete for "Nama"
     Given user go to mamikos homepage
-    When user search property by name and select the matching result to go to kos details page
+    When user search property by name Autocomplete
       | kost stag  | kost prod   |
       | Ran        | Ran         |
-    Then user click the search result based on name
+    Then user see the search result based on name
 
   @TEST_DOM-1871 @Automated @DOM4 @Web @discovery-platform @search @search-area-list
   Scenario: [Dweb][Search] Search Kos - Area List have correct dropdown
