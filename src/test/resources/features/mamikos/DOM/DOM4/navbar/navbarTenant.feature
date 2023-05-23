@@ -4,8 +4,8 @@ Feature: Navbar Tenant
   Scenario: [Dweb][Navbar] Check Navbar in Search Page Before login
     Given user go to mamikos homepage
     When user search keyword:
-      | search stag   | search prod |
-      | UGM           | UGM         |
+      | search stag | search prod |
+      | UGM         | UGM         |
     Then navbar before login appears
 
   @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
@@ -31,9 +31,9 @@ Feature: Navbar Tenant
   @TEST_DOM-1866 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
     Given user go to mamikos homepage
-    When user search property name and select matching result to go kos detail
-      | favorite stag                     | favorite prod                                       |
-      | Kos Dom Automation PLM Tipe A     | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    When tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user in kost detail navbar before login appears
 
   @TEST_DOM-1852 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-search
@@ -43,8 +43,8 @@ Feature: Navbar Tenant
       | phone stag   | phone prod   | password  |
       | 089988776655 | 089988776655 | qwerty123 |
     And user search keyword:
-      | search stag   | search prod|
-      | UGM    | UGM   |
+      | search stag | search prod |
+      | UGM         | UGM         |
     Then navbar after login appears
 
   @TEST_DOM-1850 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-other
@@ -89,8 +89,8 @@ Feature: Navbar Tenant
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 089988776655 | 089988776655 | qwerty123 |
-    When user search property name and select matching result to go kos detail
-      | favorite stag                     | favorite prod                                       |
-      | Kos Dom Automation PLM Tipe A     | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then navbar after login appears
 
