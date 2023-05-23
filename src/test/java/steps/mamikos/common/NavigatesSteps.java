@@ -40,7 +40,6 @@ public class NavigatesSteps {
     @When("admin navigates to Admin Goldplus Package")
     public void adminNavigatesToAdminGoldplusPackage() {
         playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
-        System.out.println(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
     }
 
     @When("scenario is {string}")
