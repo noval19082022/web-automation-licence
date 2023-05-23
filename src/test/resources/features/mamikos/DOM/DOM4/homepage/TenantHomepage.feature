@@ -1,4 +1,3 @@
-@DOM-4724
 Feature: Homepage
 
 	@TEST_DOM-4621 @Automated @DOM4 @Web @discovery-platform @homepage
