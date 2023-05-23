@@ -132,4 +132,15 @@ public class AddOwnerExpenditureSteps {
         add.assertKotaNotEmpty();
         add.assertSisaKontrakNotEmpty();
     }
+    @When("admin tambah data owner expenditure")
+    public void admin_tambah_data_owner_expenditure() {
+        add.clickTambahData();
+    }
+    @Then("admin verify kategori pengeluaran list should contains :")
+    public void admin_verify_kategori_pengeluaran_list_should_contains(List<String> pengeluaran) {
+        add.expandKategoriPengeluaran();
+        for (int i=0;i< pengeluaran.size();i++) {
+            add.assertKategoriPengeluaranList(i, pengeluaran.get(i));
+        }
+    }
 }
