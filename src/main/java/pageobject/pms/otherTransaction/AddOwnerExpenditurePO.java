@@ -43,6 +43,7 @@ public class AddOwnerExpenditurePO {
     Locator propertynameSuggestionBox;
     Locator kotaText;
     Locator sisaKontrakText;
+    Locator kategoriPengeluaranList;
     public AddOwnerExpenditurePO(Page page) {
         this.page = page;
 
@@ -68,6 +69,7 @@ public class AddOwnerExpenditurePO {
         propertynameSuggestionBox = page.locator(".bg-c-searchbar>div").nth(1);
         kotaText = page.locator(".bg-c-field__description").nth(1);
         sisaKontrakText = page.locator(".bg-c-field__description").nth(2);
+        kategoriPengeluaranList = page.locator("//*[@data-testid='expense-category-0']//a");
     }
 
     /**
@@ -318,5 +320,24 @@ public class AddOwnerExpenditurePO {
         propertyNameInputText.fill(property);
         propertyNameSuggestion.first().waitFor();
         propertyNameSuggestion.first().click();
+    }
+
+    /**
+     * Expand kategori pengeluaran
+     */
+    public void expandKategoriPengeluaran() {
+        kategoriPengeluaranDropdown.waitFor();
+        kategoriPengeluaranDropdown.scrollIntoViewIfNeeded();
+        kategoriPengeluaranDropdown.click();
+    }
+
+    /**
+     * Assert Kategori Pengeluaran options
+     * @param i index
+     * @param pengeluaran kategori pengeluaran name
+     */
+    public void assertKategoriPengeluaranList(int i,String pengeluaran) {
+        kategoriPengeluaranList.nth(i).scrollIntoViewIfNeeded();
+        assertThat(kategoriPengeluaranList.nth(i)).hasText(pengeluaran);
     }
 }
