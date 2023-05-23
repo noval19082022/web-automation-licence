@@ -28,7 +28,7 @@ Feature: Navbar Tenant
     Given user navigates to mamikos-history
     Then navbar before login appears
 
-  @bagas @TEST_DOM-1866 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
+  @TEST_DOM-1866 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -83,7 +83,7 @@ Feature: Navbar Tenant
     And user navigates to mamikos-history
     Then navbar after login appears
 
-  @bagas @TEST_DOM-1847 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-kost-detail
+  @TEST_DOM-1847 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar] Check Navbar in Kost Detail Page After login
     Given user go to mamikos homepage
     When user login as tenant via phone number:

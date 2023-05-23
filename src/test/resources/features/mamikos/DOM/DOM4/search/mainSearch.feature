@@ -32,7 +32,7 @@ Feature: Main Search
       | sindu    | sindu   |
     Then user click the search result based on area
 
-  @bagas @TEST_DOM-1846 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
+  @TEST_DOM-1846 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
   Scenario: [Dweb][Search] Select Autocomplete for "Nama"
     Given user go to mamikos homepage
     When user search property by name Autocomplete
