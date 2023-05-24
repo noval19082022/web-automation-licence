@@ -1,10 +1,11 @@
 package pageobject.owner;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
 
 public class MamifotoPO {
     private Page page;
@@ -31,6 +32,7 @@ public class MamifotoPO {
     Locator faqFirstList;
     Locator headerFAQ;
     Locator contentFAQfirstList;
+    Locator riwayatPaketButton;
 
 
     //Locator Mamifoto at Select Package
@@ -40,6 +42,22 @@ public class MamifotoPO {
     Locator nantiSajaButton;
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
+
+    //Locator Mamifoto at history transaction
+    Locator headerRiwayatPembelian;
+    Locator tabSelesaiMamifoto;
+    Locator succsesPaymentTextMamifoto;
+    Locator seeDetailTransactionMamifoto;
+
+    //Locator Mamifoto at Status Pembelian Page
+    Locator headerStatusPembelian;
+    Locator titleAlreadyPaid;
+    Locator subTitleAlreadyPaid;
+
+
+
+
+
 
 
     public MamifotoPO(Page page) {
@@ -68,6 +86,14 @@ public class MamifotoPO {
         this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
         this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
+        this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
+        this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
+        this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
+        this.succsesPaymentTextMamifoto = page.getByText("Pembayaran Berhasil");
+        this.seeDetailTransactionMamifoto = page.getByText("Lihat Detail Transaksi");
+        this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
+        this.titleAlreadyPaid =  page.getByText("Pembayaran Telah Lunas");
+        this.subTitleAlreadyPaid = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi untuk membuat janji dengan fotografer. J");
 
     }
 
@@ -267,4 +293,92 @@ public class MamifotoPO {
         mamiFotoInfoUntukAndaNonProperty.click();
     }
 
+
+    /**
+     * Click on button Riwayat Paket
+     */
+    public void clickOnRiwayatPaketMamifoto() {
+        riwayatPaketButton.click();
+    }
+
+    /**
+     * Check Mamifoto History Transaction Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderHistoryisAppear() {
+        return headerRiwayatPembelian.isVisible();
+    }
+
+    /**
+     * Click on tab selesai at riwayat page mamifoto
+     */
+    public void clickOnTabSelesaiMamifoto() {
+        tabSelesaiMamifoto.click();
+    }
+
+    /**
+     * Get Text status transaction succsess
+     *
+     * @return string
+     */
+    public String getSuccsessTransactioMamifotoText() throws InterruptedException {
+        return playwright.getText(succsesPaymentTextMamifoto);
+    }
+
+    /**
+     * Click on tab selesai at riwayat page mamifoto
+     */
+    public void clickOnSeeDetailTransactionMamifoto() {
+        seeDetailTransactionMamifoto.click();
+    }
+
+    /**
+     * Check Mamifoto Status Pembelian Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderStatusPembelianisAppear() {
+        return headerStatusPembelian.isVisible();
+    }
+
+    /**
+     * Get Text Title Status Pembelian Page
+     *
+     * @return string
+     */
+    public String getStatusPembelianTitleText() throws InterruptedException {
+        return playwright.getText(titleAlreadyPaid);
+    }
+
+    /**
+     * Get Text Sub Title Status Pembelian Page
+     *
+     * @return string
+     */
+    public String getMStatusPembelianSubTitleText() throws InterruptedException {
+        return playwright.getText(subTitleAlreadyPaid);
+    }
+
+    /**
+     * Get URL
+     * @return url is equal
+     */
+    public String getURL() {
+        return page.url();
+    }
+
+    /**
+     * Click on Hubungi Kami button and check redirection
+     */
+    public void clickOnContactUsMamifoto() {
+
+        Page page1 = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami")).click();
+        });
+
+        page1.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS")).isVisible();
+    }
+
 }
+

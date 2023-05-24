@@ -16,6 +16,7 @@ public class MamifotoSteps {
     MamifotoPO mamifoto = new MamifotoPO (page);
 
 
+
     @When("owner click menu sidebar Mamifoto")
     public void owner_click_menu_sidebar_mamifoto() {
         mamifoto.clickOnFiturPromosi();
@@ -100,5 +101,48 @@ public class MamifotoSteps {
         MamifotoTitle.MamifotoInfoUntukAnda = mamifoto.getMamifotoInfoUntukAndaNonPropertyText();
         Assert.assertEquals(MamifotoTitle.MamifotoInfoUntukAnda,mamifoto.getMamifotoInfoUntukAndaNonPropertyText());
         mamifoto.clickOnMamifotoInfoUntukAndaNonProperty();
+    }
+
+    @Then("owner click riwayat paket button")
+    public void owner_click_riwayat_paket_button() {
+        mamifoto.clickOnRiwayatPaketMamifoto();
+    }
+
+    @Then("owner see Riwayat MamiFoto purchase page")
+    public void owner_see_riwayat_mami_foto_purchase_page() {
+        Assert.assertTrue(mamifoto.mamifotoHeaderHistoryisAppear(),"Riwayat Pembelian Mamifoto does'nt appear!");
+    }
+
+    @When("owner click tab Selesai at riwayat page")
+    public void owner_click_tab_selesai_at_riwayat_page() {
+        mamifoto.clickOnTabSelesaiMamifoto();
+
+    }
+
+    @When("owner click Lihat Detail Transaksi with status {string}")
+    public void owner_click_lihat_detail_transaksi_with_status(String status) throws InterruptedException {
+        Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
+        mamifoto.clickOnSeeDetailTransactionMamifoto();
+    }
+
+    @Then("owner see status pembelian page")
+    public void owner_see_status_pembelian_page() throws InterruptedException {
+       Assert.assertTrue(mamifoto.mamifotoHeaderStatusPembelianisAppear(),"Status Pembelian page doesnt appear");
+       MamifotoTitle.titleStatusPembelianMamifoto = mamifoto.getStatusPembelianTitleText();
+       MamifotoTitle.subTitleStatusPembelianMamifoto = mamifoto.getMStatusPembelianSubTitleText();
+       Assert.assertEquals(MamifotoTitle.titleStatusPembelianMamifoto,mamifoto.getStatusPembelianTitleText());
+       Assert.assertEquals(MamifotoTitle.subTitleStatusPembelianMamifoto,mamifoto.getMStatusPembelianSubTitleText());
+    }
+
+    @When("click Hubungi Kami button")
+    public void click_hubungi_kami_button() throws InterruptedException {
+      mamifoto.clickOnContactUsMamifoto();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @Then("owner connected to WA CS Mamikos {string}")
+    public void owner_connected_to_wa_cs_mamikos(String url) {
+        mamifoto = new MamifotoPO(ActiveContext.getActivePage());
+        Assert.assertTrue(mamifoto.getURL().contains(url), "URL doesn't match");
     }
 }
