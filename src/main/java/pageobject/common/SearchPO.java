@@ -595,32 +595,11 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        inputSearch.fill(searchText);
+        inputSearch.click();
+        inputSearch.type(searchText);
         inputSearch.press("Enter");
         Locator resultLocator = page.getByText(searchText);
         resultLocator.first().click();
-    }
-
-    /**
-     * @return true if FTUE present, otherwise false.
-     */
-    public boolean isFTUE_screenPresent() {
-        return playwright.waitTillLocatorIsVisible(FTUETitleText)
-                || playwright.waitTillLocatorIsVisible(popUpConfirmationbutton);
-    }
-
-    /**
-     * Will check First Time User Experience screen first. And then will click on close button on FTUE if present in the screen.
-     * Dismiss FTUE first time user experience by click on close button if present.
-     */
-    public void clickFTUEKosListingPopUp() {
-        while (isFTUE_screenPresent()) {
-            if (playwright.waitTillLocatorIsVisible(popUpConfirmationbutton)) {
-                playwright.clickOn(popUpConfirmationbutton);
-            } else {
-                break;
-            }
-        }
     }
 
     /**

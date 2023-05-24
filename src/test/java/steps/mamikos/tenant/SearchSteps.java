@@ -351,11 +351,10 @@ public class SearchSteps {
         Assert.assertTrue(search.getFirstPricePropertyPageListing() < search.getLastPricePropertyPageListing(), "First number is not cheaper than last number!");
     }
 
-    @When("user want to search kost on {string} from homepage")
+    @When("user want to search kost list by place on {string} from homepage")
     public void user_search_for_keyword(String city) {
         search = homePO.clickOnSearchButton();
         search.enterTextToSearchAndSelectResultCity(city);
-        search.clickFTUEKosListingPopUp();
     }
 
     @Then("user sees the facilities on kos card are {string} or {string} or {string}")
@@ -419,6 +418,7 @@ public class SearchSteps {
 
     @Then("user can check the legend of map price cluster")
     public void user_check_the_legend_of_map_price_cluster(List<String> wording) {
+        playwright.hardWait(2_000);
         for (int i = 0; i < wording.size(); i++) {
             Assert.assertTrue(search.isLegendPresent(wording.get(i)), "Cluster " + wording + " is not present");
             Assert.assertEquals(search.getLegendDesc(wording.get(i)), wording.get(i), "Cluster icon not equal to " + wording.get(i));
