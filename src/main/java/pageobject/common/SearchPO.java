@@ -71,13 +71,13 @@ public class SearchPO {
         this.promoNgebutLabel = page.locator(".rc-price__discount-icon").first();
         this.mamiMap = page.locator("div #mamiMap");
         this.kostName = page.locator("//span[contains(@class,'rc-info__name bg-c-text bg-c-text--title-4')]");
-        this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("male-and-female Semua Tipe Kos"));
+        this.genderFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Semua Tipe Kos"));
         this.saveFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         this.stasiunHalte = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Stasiun & Halte"));
         this.facilityFilter = page.getByTestId("filter-facilities");
         this.kostRuleFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Aturan Kos"));
         this.rangeTimeFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bulanan"));
-        this.sortingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("sorting Rekomendasi"));
+        this.sortingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Rekomendasi"));
         this.firstPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[1]");
         this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
         this.FTUETitleText = page.locator("//h2[@data-path='lbl_popperTitle']");
@@ -595,32 +595,11 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        inputSearch.fill(searchText);
+        inputSearch.click();
+        inputSearch.type(searchText);
         inputSearch.press("Enter");
         Locator resultLocator = page.getByText(searchText);
         resultLocator.first().click();
-    }
-
-    /**
-     * @return true if FTUE present, otherwise false.
-     */
-    public boolean isFTUE_screenPresent() {
-        return playwright.waitTillLocatorIsVisible(FTUETitleText)
-                || playwright.waitTillLocatorIsVisible(popUpConfirmationbutton);
-    }
-
-    /**
-     * Will check First Time User Experience screen first. And then will click on close button on FTUE if present in the screen.
-     * Dismiss FTUE first time user experience by click on close button if present.
-     */
-    public void clickFTUEKosListingPopUp() {
-        while (isFTUE_screenPresent()) {
-            if (playwright.waitTillLocatorIsVisible(popUpConfirmationbutton)) {
-                playwright.clickOn(popUpConfirmationbutton);
-            } else {
-                break;
-            }
-        }
     }
 
     /**
@@ -647,7 +626,7 @@ public class SearchPO {
      * @return text legend Name present / not
      */
     public Boolean isLegendPresent(String legend) {
-        return playwright.waitTillLocatorIsVisible(page.locator("//*[@class='map-style__legend-icon bg-c-grid__item bg-is-col-4']").getByText(legend));
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[@class='map-style__legend-icon bg-c-grid__item bg-is-col-4']//div[contains(text(), '" + legend + "')]"));
     }
 
     /**

@@ -80,7 +80,7 @@ public class TenantBillManagementPO {
      * @return BillDetailsPO class
      */
     public BillDetailsPO clickOnInvoiceList(String setTenant, String setJatuhTempo) {
-        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setTenant).setName(setJatuhTempo)).getByTestId("invoice-status-label");
+        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setTenant).setName(setJatuhTempo)).getByTestId("invoice-status-label").last();
         playwright.clickOn(invoiceList);
         return new BillDetailsPO(page);
     }

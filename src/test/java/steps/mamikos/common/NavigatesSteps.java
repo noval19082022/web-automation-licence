@@ -29,7 +29,17 @@ public class NavigatesSteps {
 
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY);
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
+    }
+
+    @Given("admin navigates to Goldplus Testing Tools")
+    public void adminNavigatesToGoldplusTestingTools() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+    }
+
+    @When("admin navigates to Admin Goldplus Package")
+    public void adminNavigatesToAdminGoldplusPackage() {
+        playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
     }
 
     @When("scenario is {string}")
@@ -165,8 +175,19 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
     }
 
+    @When("owner navigates to {string}")
+    public void userNavigateTo(String path) {
+        playwright.navigateTo(Mamikos.OWNER_URL+path, 30000.0, LoadState.LOAD);
+        playwright.waitTillUrlToBe(Mamikos.OWNER_URL+path, 30000.0);
+    }
+
     @And("tenant navigates to voucher saya page")
     public void tenantNavigatesToVoucherSayaPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.VOUCHER_SAYA, 30000.0, LoadState.LOAD);
+    }
+
+    @When("admin navigates to Search Invoice Page")
+    public void adminNavigatesToSearchInvoicePage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.SEARCH_INVOICE);
     }
 }

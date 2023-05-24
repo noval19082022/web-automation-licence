@@ -1,13 +1,18 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import pageobject.common.LoginPO;
 
 public class OwnerLoginPO extends LoginPO {
+
+    Locator profileOwnerBtn;
+
     public OwnerLoginPO(Page page) {
         super(page);
         this.page = page;
+        profileOwnerBtn = page.locator(".c-mk-header__username");
     }
 
     /**
@@ -42,5 +47,13 @@ public class OwnerLoginPO extends LoginPO {
         page.waitForLoadState(LoadState.LOAD);
         page.waitForTimeout(5000);
         return new OwnerDashboardPO(page);
+    }
+
+    /**
+     * User Log out as a Owner
+     */
+    public void logoutAsOwner() {
+        profileOwnerBtn.click();
+        playwright.clickOnText("Logout ");
     }
 }

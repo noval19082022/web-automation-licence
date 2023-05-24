@@ -53,7 +53,7 @@ Feature: Invoice Detail Kost With DP
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search invoice by contact number:
+    And admin search invoice by contact number and go to invoice detail fee:
       | search by              | renter_phone_number      |
       | search value           | 085432154321             |
       | invoice number         | default                  |

@@ -1,5 +1,6 @@
 package pageobject.owner.kelolatagihan;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -17,13 +18,14 @@ public class PengajuanBookingPO {
     private Locator yaTolakButton;
 
 
+
     public PengajuanBookingPO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
         locator = new LocatorHelpers(page);
         this.terimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Terima");
         this.yaTerimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Terima");
-        this.tolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Tolak");
+        this.tolakButton = page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
     }
 
@@ -58,5 +60,4 @@ public class PengajuanBookingPO {
         yaTolakButton.click();
         return new BillAndBookingManagementPO(page);
     }
-
 }

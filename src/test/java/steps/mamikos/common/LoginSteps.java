@@ -13,6 +13,8 @@ import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
+import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.TenantLoginPO;
 
@@ -28,6 +30,7 @@ public class LoginSteps {
     AdminBangkrupuxLoginPO loginAdminBangkrupux = new AdminBangkrupuxLoginPO(page);
     TenantLoginPO tenantLogin = new TenantLoginPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
+    OwnerLoginPO owner = new OwnerLoginPO(page);
 
 
     private List<Map<String, String>> phoneNumberCredential;
@@ -160,4 +163,18 @@ public class LoginSteps {
         Assert.assertTrue(!login.popUpLogin(), "pop up login is showing");
     }
 
+    @And("user logs out as a Tenant user")
+    public void userLogsOutAsTenant() throws InterruptedException {
+        tenantLogin.logoutAsTenant();
+    }
+
+    @Then("mamikos bangkrupux admin should be successfully logged out")
+    public void mamikos_bangkrupux_admin_should_be_successfully_logged_out() {
+        loginAdminBangkrupux.logoutAsMamikosBangkrupuxAdmin();
+    }
+
+    @And("owner should successfully log out")
+    public void owner_should_successfully_log_out(){
+        owner.logoutAsOwner();
+    }
 }

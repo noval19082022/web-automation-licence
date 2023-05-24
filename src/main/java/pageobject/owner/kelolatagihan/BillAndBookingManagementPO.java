@@ -1,5 +1,6 @@
 package pageobject.owner.kelolatagihan;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -22,6 +23,8 @@ public class BillAndBookingManagementPO {
     Locator statusTandC;
     Locator pilihButton;
     Locator doneButton;
+    Locator lihatDetailButton;
+
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -39,6 +42,7 @@ public class BillAndBookingManagementPO {
         pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
         reasonChoice = page.locator(".reject-modal__reason-option-overlay").first();
         doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
+        lihatDetailButton = page.locator("(//span[normalize-space()='Lihat Detail'])[1]");
     }
 
     /**
@@ -119,5 +123,13 @@ public class BillAndBookingManagementPO {
         playwright.clickOn(pilihButton);
         playwright.clickOn(doneButton);
         return new PengajuanBookingPO(page);
+    }
+
+    /**
+     * Click on lihat detail
+     */
+    public void clickOnLihatDetailButton() {
+        lihatDetailButton.waitFor();
+        lihatDetailButton.click();
     }
 }

@@ -105,4 +105,42 @@ public class AddOwnerExpenditureSteps {
             list.assertFirstDataContainsPengeluaran(pengeluaran);
         }
     }
+    @When("admin add new owner expenditure and search property {string}")
+    public void admin_add_new_owner_expenditure_and_search_property(String property) {
+        add.clickTambahData();
+        add.searchProperty(property);
+    }
+    @Then("system should show property suggestion {string}")
+    public void system_should_show_property_suggestion(String property) {
+        add.assertPropertySuggestion(property);
+    }
+    @Then("property suggestion not appear")
+    public void property_suggestion_not_appear() {
+        add.assertPropertySuggestionNotAppear();
+    }
+    @When("admin edit and choose property {string}")
+    public void admin_edit_and_choose_property(String property) {
+        add.editSearchProperty(property);
+    }
+    @Then("kota and sisa kontrak kerja sama should be {string}")
+    public void kota_and_sisa_kontrak_kerja_sama_should_be(String text) {
+        add.assertKota(text);
+        add.assertSisaKontrak(text);
+    }
+    @Then("system should be auto fill kota and sisa kontrak kerja sama")
+    public void system_should_be_auto_fill_kota_and_sisa_kontrak_kerja_sama() {
+        add.assertKotaNotEmpty();
+        add.assertSisaKontrakNotEmpty();
+    }
+    @When("admin tambah data owner expenditure")
+    public void admin_tambah_data_owner_expenditure() {
+        add.clickTambahData();
+    }
+    @Then("admin verify kategori pengeluaran list should contains :")
+    public void admin_verify_kategori_pengeluaran_list_should_contains(List<String> pengeluaran) {
+        add.expandKategoriPengeluaran();
+        for (int i=0;i< pengeluaran.size();i++) {
+            add.assertKategoriPengeluaranList(i, pengeluaran.get(i));
+        }
+    }
 }

@@ -51,14 +51,6 @@ public class SearchSteps {
         Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
     }
 
-    @When("user search property name and select matching result to go kos detail")
-    public void user_search_property_name_and_select_matching_result_to_go_kos_detail(DataTable table) {
-        var kostNameData = table.asMaps(String.class, String.class);
-        var kostName = kostNameData.get(0).get("favorite " + Mamikos.ENV);
-        searchPO = homePO.clickOnSearchButton();
-        kostDetail = searchPO.searchByText(kostName);
-    }
-
     @Then("user in kost detail navbar before login appears")
     public void userInKostDetailNavbarBeforeLoginAppears() throws InterruptedException {
 
@@ -111,13 +103,13 @@ public class SearchSteps {
         search.clickTheFirstResultBasedOnArea();
     }
 
-    @Then("user click the search result based on name")
-    public void user_click_the_search_result_based_on_name() {
+    @Then("user see the search result based on name")
+    public void user_see_the_search_result_based_on_name() {
         kostDetail.getKostTitle();
     }
 
-    @When("user search property by name and select the matching result to go to kos details page")
-    public void userSearchAndSelectKost(DataTable table) {
+    @When("user search property by name Autocomplete")
+    public void userSearchPropertyByNameAutocomplete(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var kostName = kostNameData.get(0).get("kost " + Mamikos.ENV);
         search.suggetionKostOnTheSearchListNumberSix(kostName);
@@ -359,11 +351,10 @@ public class SearchSteps {
         Assert.assertTrue(search.getFirstPricePropertyPageListing() < search.getLastPricePropertyPageListing(), "First number is not cheaper than last number!");
     }
 
-    @When("user want to search kost on {string} from homepage")
+    @When("user want to search kost list by place on {string} from homepage")
     public void user_search_for_keyword(String city) {
         search = homePO.clickOnSearchButton();
         search.enterTextToSearchAndSelectResultCity(city);
-        search.clickFTUEKosListingPopUp();
     }
 
     @Then("user sees the facilities on kos card are {string} or {string} or {string}")
@@ -427,6 +418,7 @@ public class SearchSteps {
 
     @Then("user can check the legend of map price cluster")
     public void user_check_the_legend_of_map_price_cluster(List<String> wording) {
+        playwright.hardWait(2_000);
         for (int i = 0; i < wording.size(); i++) {
             Assert.assertTrue(search.isLegendPresent(wording.get(i)), "Cluster " + wording + " is not present");
             Assert.assertEquals(search.getLegendDesc(wording.get(i)), wording.get(i), "Cluster icon not equal to " + wording.get(i));
