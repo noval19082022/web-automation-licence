@@ -39,7 +39,6 @@ public class BillingReminderPO {
     /**
      * click on Billing Reminder Menu
      */
-
     public void clickOnBillingReminderMenu() {
         page.reload();
         playwright.hardWait(2);
@@ -50,7 +49,6 @@ public class BillingReminderPO {
      * Select dropdown on billing reminder menu
      *
      */
-
     public void clickOnBillingTemplateMenu(String menu) {
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menu)).click();
     }
@@ -58,7 +56,6 @@ public class BillingReminderPO {
     /**
      *  Delete billing reminder period
      */
-
     public void deleteBillingReminderPeriod(String period){
         page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).click();
     }
@@ -66,7 +63,6 @@ public class BillingReminderPO {
     /**
      *  Edit billing reminder period
      */
-
     public void editBillingReminderPeriod(String day){
         page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")).click();
     }
@@ -104,14 +100,23 @@ public class BillingReminderPO {
 
     }
 
+    /**
+     * click on Add Template Button
+     */
     public void clickOnAddTemplateButton() {
         addTemplateButton.click();
     }
 
+    /**
+     * click on Create Template Button
+     */
     public void clickOnCreateTemplateButton() {
         createTemplateButton.click();
     }
 
+    /**
+     * click on Save Template Button
+     */
     public void clickOnSaveTemplateButton() {
         saveTemplateButton.click();
     }
