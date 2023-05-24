@@ -1,42 +1,42 @@
 @regression @billingReminder @BBM3
 
-@TEST_BBM-987 @TEST_BBM-989 @TEST_BBM-985 @TEST_BBM-983
-Feature: Billing Reminder - Email Template
+@TEST_BBM-978 @TEST_BBM-981 @TEST_BBM-979 @TEST_BBM-977
+Feature: Billing Reminder - PN Template
 
-  Background: User arrived on Email Template page
+  Background: User arrived on PN Template page
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    Then user open " Email Template" submenu of Billing Reminder Template
+    Then user open " PN Template" submenu of Billing Reminder Template
 
   Scenario: user set the initial state to display Billing template Day -1
     When user set the initial state to display Billing template Day -1
 
-#  @BBM-987
+#  BBM-979
   Scenario: Delete Template
     When user delete billing Template with content "untuk automation"
     Then user verify delete billing Template with content "untuk automation"
 
- #  BBM-983
+#  BBM-977
   Scenario: Add Template With Existing Day Period
-    Given user create new template:
-      | day   | subject                 | content                    |
-      | 0     | untuk automation        | untuk automation content   |
+    Given user create new PN template:
+      | day     | title                   | content                    |
+      | -5      | untuk automation        | untuk automation content   |
     Then user verify cannot create billing reminder template
 
-#    BBM-985
+#  BBM-978
   Scenario: Add Template
-    Given user create new template:
-      | day     | subject                 | content                    |
+    Given user create new PN template:
+      | day     | title                   | content                    |
       | -1      | untuk automation        | untuk automation content   |
     Then user verify Template subject with "untuk automation"
     Then user verify Template content with "untuk automation content"
 
-#  BBM-989
+#  BBM-981
   Scenario: Edit Template
-    Given user edit template:
-      | day     | subject                 | content                    |
+    Given user edit PN template:
+      | day     | title                   | content                    |
       | -1      | untuk automation        | untuk automation content   |
     Then user verify Template subject with "untuk automation"
     Then user verify Template content with "untuk automation content"
