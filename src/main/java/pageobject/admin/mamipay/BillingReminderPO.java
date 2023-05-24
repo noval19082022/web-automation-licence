@@ -21,6 +21,9 @@ public class BillingReminderPO {
     Locator cannotCreateTemplateText;
     Locator saveTemplateButton;
     Locator SMSTextField;
+    Locator selectWATemplateDropdown;
+    Locator WATemplateSubjectText;
+    Locator selectWAPeriodDropdown;
 
     public BillingReminderPO(Page page) {
         this.page = page;
@@ -28,6 +31,8 @@ public class BillingReminderPO {
         billingReminderMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Billing Reminder Template "));
         addTemplateButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Template"));
         selectPeriodDropdown = page.getByRole(AriaRole.COMBOBOX);
+        selectWAPeriodDropdown = page.locator("select[name=\"period\"]");
+        selectWATemplateDropdown = page.locator("select[name=\"notification_whatsapp_template_id\"]");
         subjectTextField =  page.locator("input[name=\"subject\"]");
         titleTextField = page.locator("input[name=\"title\"]");
         SMSTextField = page.getByRole(AriaRole.TEXTBOX);
@@ -35,6 +40,7 @@ public class BillingReminderPO {
         createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
         templateCreatedText = page.getByText("Template created.");
         templateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("untuk automation").setExact(true));
+        WATemplateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("recurringbooking_voucher_d_plus_1_update"));
         cannotCreateTemplateText = page.getByText("Cannot create template.");
         saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
 
@@ -112,6 +118,28 @@ public class BillingReminderPO {
     }
 
     /**
+     * Check Email template Day -1 is present
+     * @return true / false
+     */
+    public boolean isWABillingTemplateDisplayed(){
+        return WATemplateSubjectText.isVisible();
+    }
+
+    /**
+     * Set Email Template
+     */
+    public void setWABillingTemplate(String day, String WATemplate) {
+        if (!isWABillingTemplateDisplayed()){
+            addTemplateButton.click();
+            selectWAPeriodDropdown.selectOption(day);
+            selectWATemplateDropdown.selectOption(WATemplate);
+            createTemplateButton.click();
+            templateCreatedText.waitFor();
+        }
+
+    }
+
+    /**
      * click on Add Template Button
      */
     public void clickOnAddTemplateButton() {
@@ -170,6 +198,22 @@ public class BillingReminderPO {
      */
     public void fillTemplatePeriod(String day) {
         selectPeriodDropdown.selectOption(day);
+    }
+
+    /**
+     * Fill WA Period Template period
+     * @param day input string that will be used to fill Email Template Subject
+     */
+    public void fillWATemplatePeriod(String day) {
+        selectWAPeriodDropdown.selectOption(day);
+    }
+
+    /**
+     * Fill Period Template period
+     * @param WATemplate input string that will be used to fill Email Template Subject
+     */
+    public void fillWATemplate(String WATemplate) {
+        selectWATemplateDropdown.selectOption(WATemplate);
     }
 
     /**

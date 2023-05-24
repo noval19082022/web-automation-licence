@@ -1,4 +1,4 @@
-@regression @billingReminder @BBM30
+@regression @billingReminder @BBM3
 
 @TEST_BBM-988 @TEST_BBM-984 @TEST_BBM-982 @TEST_BBM-980
 Feature: Billing Reminder - SMS Template
