@@ -20,6 +20,7 @@ public class BillingReminderPO {
     Locator templateSubjectText;
     Locator cannotCreateTemplateText;
     Locator saveTemplateButton;
+    Locator SMSTextField;
 
     public BillingReminderPO(Page page) {
         this.page = page;
@@ -29,6 +30,7 @@ public class BillingReminderPO {
         selectPeriodDropdown = page.getByRole(AriaRole.COMBOBOX);
         subjectTextField =  page.locator("input[name=\"subject\"]");
         titleTextField = page.locator("input[name=\"title\"]");
+        SMSTextField = page.getByRole(AriaRole.TEXTBOX);
         contentTextField = page.locator("textarea[name=\"content\"]");
         createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
         templateCreatedText = page.getByText("Template created.");
@@ -90,14 +92,17 @@ public class BillingReminderPO {
     /**
      * Set Email Template
      */
-    public void setBillingTemplate() {
+    public void setBillingTemplate(String day) {
         if (!isBillingTemplateDisplayed()){
             addTemplateButton.click();
-            selectPeriodDropdown.selectOption("-1");
+            selectPeriodDropdown.selectOption(day);
             if (subjectTextField.isVisible())
                 subjectTextField.fill("untuk automation");
             else if (titleTextField.isVisible()){
                 titleTextField.fill("untuk automation");
+            }
+            else if (SMSTextField.isVisible()){
+                SMSTextField.fill("untuk automation");
             }
             contentTextField.fill("untuk automation");
             createTemplateButton.click();
@@ -149,6 +154,14 @@ public class BillingReminderPO {
      */
     public void fillTemplateContent(String content) {
         contentTextField.fill(content);
+    }
+
+    /**
+     * Fill Content Template Content
+     * @param text input string that will be used to fill Email Template Subject
+     */
+    public void fillSMSTextBox(String text) {
+        SMSTextField.fill(text);
     }
 
     /**

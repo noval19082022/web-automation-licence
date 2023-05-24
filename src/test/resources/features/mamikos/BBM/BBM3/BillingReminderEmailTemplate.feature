@@ -11,7 +11,7 @@ Feature: Billing Reminder - Email Template
     Then user open " Email Template" submenu of Billing Reminder Template
 
   Scenario: user set the initial state to display Billing template Day -1
-    When user set the initial state to display Billing template Day -1
+    When user set the initial state to display Billing template Day "-1"
 
 #  @BBM-987
   Scenario: Delete Template
