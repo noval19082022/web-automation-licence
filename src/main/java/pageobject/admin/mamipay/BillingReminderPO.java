@@ -13,6 +13,7 @@ public class BillingReminderPO {
     Locator addTemplateButton;
     Locator selectPeriodDropdown;
     Locator subjectTextField;
+    Locator titleTextField;
     Locator contentTextField;
     Locator createTemplateButton;
     Locator templateCreatedText;
@@ -27,6 +28,7 @@ public class BillingReminderPO {
         addTemplateButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Template"));
         selectPeriodDropdown = page.getByRole(AriaRole.COMBOBOX);
         subjectTextField =  page.locator("input[name=\"subject\"]");
+        titleTextField = page.locator("input[name=\"title\"]");
         contentTextField = page.locator("textarea[name=\"content\"]");
         createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
         templateCreatedText = page.getByText("Template created.");
@@ -85,18 +87,22 @@ public class BillingReminderPO {
      * Check Email template Day -1 is present
      * @return true / false
      */
-    public boolean isEmailTemplateDisplayed(){
+    public boolean isBillingTemplateDisplayed(){
         return templateSubjectText.isVisible();
     }
 
     /**
      * Set Email Template
      */
-    public void setEmailTemplate() {
-        if (!isEmailTemplateDisplayed()){
+    public void setBillingTemplate() {
+        if (!isBillingTemplateDisplayed()){
             addTemplateButton.click();
             selectPeriodDropdown.selectOption("-1");
-            subjectTextField.fill("untuk automation");
+            if (subjectTextField.isVisible())
+                subjectTextField.fill("untuk automation");
+            else if (titleTextField.isVisible()){
+                titleTextField.fill("untuk automation");
+            }
             contentTextField.fill("untuk automation");
             createTemplateButton.click();
             templateCreatedText.waitFor();
@@ -117,7 +123,15 @@ public class BillingReminderPO {
     }
 
     /**
-     * Fill Email Template Subject
+     * Fill Title Template Subject
+     * @param title input string that will be used to fill Email Template Subject
+     */
+    public void fillTemplateTitle(String title) {
+        titleTextField.fill(title);
+    }
+
+    /**
+     * Fill Subject Template Subject
      * @param subject input string that will be used to fill Email Template Subject
      */
     public void fillTemplateSubject(String subject) {
@@ -125,7 +139,7 @@ public class BillingReminderPO {
     }
 
     /**
-     * Fill Email Template Content
+     * Fill Content Template Content
      * @param content input string that will be used to fill Email Template Subject
      */
     public void fillTemplateContent(String content) {
@@ -133,7 +147,7 @@ public class BillingReminderPO {
     }
 
     /**
-     * Fill Email Template period
+     * Fill Period Template period
      * @param day input string that will be used to fill Email Template Subject
      */
     public void fillTemplatePeriod(String day) {
