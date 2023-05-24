@@ -76,6 +76,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Delay and then force click to a locator
+     *
+     * @param locator   Locator data type
+     * @param delayTime Delay time in millisecond Double data type
+     */
+    public void delayAndForceClickOn(Locator locator, Double delayTime) {
+        locator.click(new Locator.ClickOptions().setForce(true).setDelay(delayTime));
+    }
+
+    /**
      * Delay and then click to a locator
      *
      * @param locator   Locator data type
@@ -92,6 +102,16 @@ public class PlaywrightHelpers {
      */
     public void doubleClick(Locator locator) {
         locator.dblclick();
+    }
+
+    /**
+     * Double-click on a desired locator
+     *
+     * @param locator target locator
+     * @param delayTime Delay time in millisecond Double data type
+     */
+    public void doubleClickAndDelay(Locator locator, Double delayTime) {
+        locator.dblclick(new Locator.DblclickOptions().setDelay(delayTime));
     }
 
     public void scrollTo(double deltaX, double deltaY) {
