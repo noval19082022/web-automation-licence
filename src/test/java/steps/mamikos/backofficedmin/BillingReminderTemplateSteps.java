@@ -25,9 +25,9 @@ public class BillingReminderTemplateSteps {
 
     }
 
-    @When("user set the initial state to display Billing template Day -1")
-    public void user_set_the_initial_state_to_display_billing_template(){
-        BillingReminderPO.setBillingTemplate();
+    @When("user set the initial state to display Billing template Day {string}")
+    public void user_set_the_initial_state_to_display_billing_template(String day){
+        BillingReminderPO.setBillingTemplate(day);
 
     }
 
@@ -108,6 +108,28 @@ public class BillingReminderTemplateSteps {
         BillingReminderPO.editBillingReminderPeriod(day);
         BillingReminderPO.fillTemplateTitle(title);
         BillingReminderPO.fillTemplateContent(content);
+        BillingReminderPO.clickOnSaveTemplateButton();
+    }
+
+    @Given("user create new SMS template:")
+    public void userCreateNewSMSTemplate(DataTable table) {
+        inputBillingReminderData = table.asMaps(String.class, String.class);
+        var day = inputBillingReminderData.get(0).get("day");
+        var text = inputBillingReminderData.get(0).get("text");
+        BillingReminderPO.clickOnAddTemplateButton();
+        BillingReminderPO.fillTemplatePeriod(day);
+        BillingReminderPO.fillSMSTextBox(text);
+        BillingReminderPO.clickOnCreateTemplateButton();
+    }
+
+    @Given("user edit SMS template:")
+    public void userEditSMSTemplate(DataTable table) {
+        inputBillingReminderData = table.asMaps(String.class, String.class);
+        var day = inputBillingReminderData.get(0).get("day");
+        var text = inputBillingReminderData.get(0).get("text");
+        var content = inputBillingReminderData.get(0).get("content");
+        BillingReminderPO.editBillingReminderPeriod(day);
+        BillingReminderPO.fillSMSTextBox(text);
         BillingReminderPO.clickOnSaveTemplateButton();
     }
 

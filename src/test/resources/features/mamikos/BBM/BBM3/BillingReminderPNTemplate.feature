@@ -11,7 +11,7 @@ Feature: Billing Reminder - PN Template
     Then user open " PN Template" submenu of Billing Reminder Template
 
   Scenario: user set the initial state to display Billing template Day -1
-    When user set the initial state to display Billing template Day -1
+    When user set the initial state to display Billing template Day "-1"
 
 #  BBM-979
   Scenario: Delete Template
