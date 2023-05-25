@@ -365,10 +365,10 @@ public class PlaywrightHelpers {
         return nextPage;
     }
 
-    /*
-     * hard wait 60 second
-     *
-     * */
+    /**
+     * Hard wait before an action
+     * @param time Double data type
+     */
     public void hardWait(double time) {
         page.waitForTimeout(time);
     }
