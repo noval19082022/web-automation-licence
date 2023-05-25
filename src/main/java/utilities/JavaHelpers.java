@@ -94,14 +94,16 @@ public class JavaHelpers {
     }
 
     public static String extractDateFromString(String inputString) {
-        String regexPattern = "\\b(?:\\d{4}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})|\\d{1,2}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{4}|\\p{Alpha}{3,}|\\p{Alpha}{4})|(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,})-(?:\\d{4}))\\b";
+        String regexPattern = "\\b(?:\\d{4}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})|\\d{1,2}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{4}|\\p{Alpha}{3,}|\\p{Alpha}{4})|(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,})-(?:\\d{4})|\\d{1,2}\\s+(?:\\p{Alpha}{3,})\\s+\\d{4})\\b";
+
+
 
         Pattern regex = Pattern.compile(regexPattern);
         Matcher matcher = regex.matcher(inputString);
 
         try {
             if (matcher.find()) {
-                return matcher.group();
+                return matcher.group().split(",")[0];
             }
         } catch (Exception e) {
             e.printStackTrace();
