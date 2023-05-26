@@ -31,7 +31,6 @@ public class BillingReminderTemplateSteps {
 
     }
 
-
     @When("user delete billing Template with content {string}")
     public void userDeleteBillingTemplateWithContent(String period) {
         BillingReminderPO.deleteBillingReminderPeriod(period);
@@ -127,10 +126,35 @@ public class BillingReminderTemplateSteps {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
         var text = inputBillingReminderData.get(0).get("text");
-        var content = inputBillingReminderData.get(0).get("content");
         BillingReminderPO.editBillingReminderPeriod(day);
         BillingReminderPO.fillSMSTextBox(text);
         BillingReminderPO.clickOnSaveTemplateButton();
+    }
+
+    @Given("user create new WhatsApp template:")
+    public void userCreateNewWhatsAppTemplate(DataTable table) {
+        inputBillingReminderData = table.asMaps(String.class, String.class);
+        var day = inputBillingReminderData.get(0).get("day");
+        var WATemplate = inputBillingReminderData.get(0).get("WATemplate");
+        BillingReminderPO.clickOnAddTemplateButton();
+        BillingReminderPO.fillWATemplatePeriod(day);
+        BillingReminderPO.fillWATemplate(WATemplate);
+        BillingReminderPO.clickOnCreateTemplateButton();
+    }
+
+    @Given("user edit WhatsApp template:")
+    public void userEditWhatsAppTemplate(DataTable table) {
+        inputBillingReminderData = table.asMaps(String.class, String.class);
+        var day = inputBillingReminderData.get(0).get("day");
+        var WATemplate = inputBillingReminderData.get(0).get("WATemplate");
+        BillingReminderPO.editBillingReminderPeriod(day);
+        BillingReminderPO.fillWATemplate(WATemplate);
+        BillingReminderPO.clickOnSaveTemplateButton();
+    }
+
+    @When("user set the initial state to display Billing template Day {string} {string}")
+    public void userSetTheInitialStateToDisplayBillingTemplateDay(String day, String Template) {
+        BillingReminderPO.setWABillingTemplate(day, Template);
     }
 
 }

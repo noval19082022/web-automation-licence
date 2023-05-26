@@ -15,6 +15,13 @@ public class TenantBillManagementPO {
     Locator invoiceList;
     Locator sudahByrTab;
     Locator successTransferLabel;
+    Locator kostDropdown;
+    Locator searchKostTextbox;
+    Locator lihatSelengkapnyaButton;
+    Locator roomNumberText;
+    Locator updateRoomNumberButton;
+    Locator saveButton;
+
     public TenantBillManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -23,13 +30,20 @@ public class TenantBillManagementPO {
         invoiceList = page.getByTestId("invoice-status-label").last();
         sudahByrTab = page.getByText("Sudah bayar");
         successTransferLabel = page.getByTestId("invoice-status-label");
+        kostDropdown = page.locator("(//*[@class='bg-c-select__trigger-text'])[1]");
+        searchKostTextbox = page.getByPlaceholder("Cari nama kos");
+        lihatSelengkapnyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selengkapnya"));
+        roomNumberText = page.locator("//*[@class='tenant-header__room-info']/p");
+        updateRoomNumberButton = page.getByText("Ubah nomor kamar chevron-right");
+        saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+
     }
 
     /**
      * Select kos filter by kos name
      * @param kostName Kos Name
      */
-    public void selectKosFilter(String kostName) {
+    public void selectKosBillPageFilter(String kostName) {
         Locator kosNameFilter = page.getByText(kostName);
         playwright.waitFor(filterKos, 30000.0);
         List<String> filterKostInnerTexts = filterKos.allInnerTexts();
@@ -107,5 +121,52 @@ public class TenantBillManagementPO {
      */
     public String getLabelSuccessTransfer() {
         return playwright.getText(successTransferLabel);
+    }
+
+    /**
+     * user as owner click kost dropdown
+     * user enter kost name
+     * user choose kost name
+     */
+    public void searchKostPenyewa(String kostName){
+        playwright.waitTillLocatorIsVisible(kostDropdown);
+        kostDropdown.click();
+        searchKostTextbox.fill(kostName);
+        Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName));
+        playwright.clickOn(kostSearch);
+    }
+
+    /**
+     * clicks on lihat selengkapnya
+     */
+    public void clicksOnLihatSelengkapnya() {
+        playwright.clickOn(lihatSelengkapnyaButton);
+    }
+
+    /**
+     * get room number on penyewa page
+     * @return room number
+     */
+    public String getRoomNumberText(){
+        return playwright.getText(roomNumberText);
+    }
+
+    /**
+     * click update room number button
+     *
+     */
+    public void clickOnUbahRoomNumberBtn() {
+        playwright.clickOn(updateRoomNumberButton);
+    }
+
+    /**
+     * click Ubah room number
+     * and change into the old number (change into first condition)
+     * @param roomNumber
+     */
+    public void chooseRoomNumber(String roomNumber) {
+        Locator element = page.locator(" div.room-list-select.room-allotment__options > div:nth-child("+roomNumber+") > div");
+        playwright.clickOn(element);
+        playwright.clickOn(saveButton);
     }
 }
