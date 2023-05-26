@@ -20,6 +20,7 @@ public class OwnerDashboardPO {
     Locator broadcastChatBtn;
     Locator warningBroadcastText;
     Locator closePopUpIcon;
+    private Locator penyewaMenu;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -32,6 +33,7 @@ public class OwnerDashboardPO {
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("'broadcast-message'"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
+        penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
     }
 
     /**
@@ -120,5 +122,15 @@ public class OwnerDashboardPO {
      */
     public void dismissFTUEGoldplus() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja")).click();
+    }
+
+    /**
+     * Click on Kelola Kos and navigate to Tenant Bill Management
+     *
+     * @return TenantBillManagementPO class
+     */
+    public TenantBillManagementPO clickOnPenyewaKos() {
+        playwright.doubleClick(penyewaMenu);
+        return new TenantBillManagementPO(page);
     }
 }

@@ -32,7 +32,7 @@ public class OwnerManageBillSteps {
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
         billManage.reloadOnEmptyKelolaTagihanPage();
-        billManage.selectKosFilter(kostName);
+        billManage.selectKosBillPageFilter(kostName);
         billManage.selectMonthFilter(month);
     }
 
@@ -71,5 +71,30 @@ public class OwnerManageBillSteps {
     @Then("user will see Status Tagihan and money disbursed to owner’s bank {string}")
     public void userWillSeeStatusTagihanAndMoneyDisbursedToOwnerSBank(String labelSuccess) {
         Assert.assertEquals(billManage.getLabelSuccessTransfer(), labelSuccess);
+    }
+
+    @Then("user can see Penyewa list")
+    public void userCanSeePenyewaList() {
+        
+    }
+
+    @Then("user can see room number with {string}")
+    public void userCanSeeRoomNumberWith(String roomNumber) {
+        Assert.assertEquals(billManage.getRoomNumberText(),roomNumber, "doesn't not match for room number");
+    }
+
+    @And("user change room number with {string}")
+    public void userChangeRoomNumberWith(String roomNumber) {
+        billManage.clickOnUbahRoomNumberBtn();
+        billManage.chooseRoomNumber(roomNumber);
+    }
+
+    @And("owner go to Penyewa page of kost {string}")
+    public void ownerGoToPenyewaPageOfKost(String kostName) {
+        ownerDashboard.clickOnManagementKost();
+        billManage = ownerDashboard.clickOnPenyewaKos();
+        billManage.searchKostPenyewa(kostName);
+        billManage.clicksOnLihatSelengkapnya();
+
     }
 }
