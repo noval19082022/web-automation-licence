@@ -8,5 +8,7 @@ public class MamifotoTitle {
     public static String MamifotoInfoUntukAnda;
     public static String titleStatusPembelianMamifoto;
     public static String subTitleStatusPembelianMamifoto;
+    public static String descriptionDoesntHaveTransactionMamifoto;
+    public static String titleInvoiceExpiredMamifoto;
 
 }

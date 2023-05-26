@@ -129,9 +129,9 @@ public class MamifotoSteps {
     public void owner_see_status_pembelian_page() throws InterruptedException {
        Assert.assertTrue(mamifoto.mamifotoHeaderStatusPembelianisAppear(),"Status Pembelian page doesnt appear");
        MamifotoTitle.titleStatusPembelianMamifoto = mamifoto.getStatusPembelianTitleText();
-       MamifotoTitle.subTitleStatusPembelianMamifoto = mamifoto.getMStatusPembelianSubTitleText();
+       MamifotoTitle.subTitleStatusPembelianMamifoto = mamifoto.getStatusPembelianSubTitleText();
        Assert.assertEquals(MamifotoTitle.titleStatusPembelianMamifoto,mamifoto.getStatusPembelianTitleText());
-       Assert.assertEquals(MamifotoTitle.subTitleStatusPembelianMamifoto,mamifoto.getMStatusPembelianSubTitleText());
+       Assert.assertEquals(MamifotoTitle.subTitleStatusPembelianMamifoto,mamifoto.getStatusPembelianSubTitleText());
     }
 
     @When("click Hubungi Kami button")
@@ -144,5 +144,40 @@ public class MamifotoSteps {
     public void owner_connected_to_wa_cs_mamikos(String url) {
         mamifoto = new MamifotoPO(ActiveContext.getActivePage());
         Assert.assertTrue(mamifoto.getURL().contains(url), "URL doesn't match");
+        page.bringToFront();
+
+    }
+
+    @When("owner click Lihat Detail Transaksi old Pro Photo with status {string}")
+    public void owner_click_lihat_detail_transaksi_old_pro_photo_with_status(String status) throws InterruptedException {
+        mamifoto.clicOnIconBackSuccsessPaymentMamifoto();
+        Assert.assertEquals(mamifoto.getSuccsessTransactioProphotoText(),status,"Text doesn't match");
+        mamifoto.clickOnSeeDetailTransactionProphoto();
+    }
+
+    @When("owner click tab Dalam Proses at riwayat page")
+    public void owner_click_tab_dalam_proses_at_riwayat_page() {
+        mamifoto.clicOnTabDalamProsesMamifoto();
+    }
+
+    @Then("owner see description {string}")
+    public void owner_see_description(String text) throws InterruptedException {
+        MamifotoTitle.descriptionDoesntHaveTransactionMamifoto = mamifoto.getDoesntHaveTransactionDescText();
+        Assert.assertEquals(mamifoto.getDoesntHaveTransactionDescText(),MamifotoTitle.descriptionDoesntHaveTransactionMamifoto);
+        Assert.assertEquals(mamifoto.getDoesntHaveTransactionText(),text,"text doesnt match");
+    }
+
+    @When("owner click Lihat Detail Transaksi expired with status {string}")
+    public void owner_click_lihat_detail_transaksi_expired_with_status(String string) throws InterruptedException {
+        Assert.assertEquals(mamifoto.getTextTransactionMamifotoExpired(),string,"Text doesnt match");
+        mamifoto.clicOnDetailTransactionExpired();
+    }
+
+    @Then("owner see expired invoice mamifoto")
+    public void owner_see_expired_invoice_mamifoto() throws InterruptedException {
+        MamifotoTitle.titleInvoiceExpiredMamifoto = mamifoto.getTextInvoiceExpiredTitle();
+        Assert.assertEquals(mamifoto.getTextInvoiceExpiredTitle(),MamifotoTitle.titleInvoiceExpiredMamifoto);
+        mamifoto.clickOnButtonBackInvoiceExpired();
+
     }
 }

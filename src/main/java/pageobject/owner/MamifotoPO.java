@@ -6,6 +6,7 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MamifotoPO {
     private Page page;
@@ -43,16 +44,30 @@ public class MamifotoPO {
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
 
+
     //Locator Mamifoto at history transaction
     Locator headerRiwayatPembelian;
     Locator tabSelesaiMamifoto;
     Locator succsesPaymentTextMamifoto;
     Locator seeDetailTransactionMamifoto;
+    Locator seeDetailTransactionProphoto;
+    Locator succsesPaymentTextProphoto;
+    Locator tabDalamProsesMamifoto;
+    Locator doesntHaveTransactionText;
+    Locator doesntHaveTransactionDescText;
+    Locator seeDetailTransactionExpired;
+    Locator expiredPaymentMamifotoText;
+
 
     //Locator Mamifoto at Status Pembelian Page
     Locator headerStatusPembelian;
     Locator titleAlreadyPaid;
     Locator subTitleAlreadyPaid;
+    Locator backIconPembelianMamifoto;
+
+    //Locator Invoice Expired Mamifoto
+    Locator titleInvoiceExpired;
+    Locator buttonBackInvoiceExpired;
 
 
 
@@ -89,11 +104,21 @@ public class MamifotoPO {
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
         this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
         this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
-        this.succsesPaymentTextMamifoto = page.getByText("Pembayaran Berhasil");
-        this.seeDetailTransactionMamifoto = page.getByText("Lihat Detail Transaksi");
+        this.succsesPaymentTextMamifoto = page.getByText("MamiFoto A Non GP Pembayaran Berhasil");
+        this.seeDetailTransactionMamifoto =   page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^MamiFoto A Non GP Pembayaran Berhasil Rp650\\.000 Lihat Detail Transaksi$"))).locator("button");
         this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
         this.titleAlreadyPaid =  page.getByText("Pembayaran Telah Lunas");
         this.subTitleAlreadyPaid = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi untuk membuat janji dengan fotografer. J");
+        this.backIconPembelianMamifoto = page.getByTestId("back-button");
+        this.seeDetailTransactionProphoto = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Pro Photo Pembayaran Berhasil Rp1\\.000\\.000 Lihat Detail Transaksi$"))).locator("button");
+        this.succsesPaymentTextProphoto = page.getByText("Pro Photo Pembayaran Berhasil");
+        this.tabDalamProsesMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Dalam Proses"));
+        this.doesntHaveTransactionText = page.getByText("Belum Ada Transaksi");
+        this.doesntHaveTransactionDescText = page.getByText("Transaksi yang masih dalam proses akan muncul di halaman ini.");
+        this.expiredPaymentMamifotoText =  page.getByText("MamiFoto A GP Kadaluwarsa").first();
+        this.seeDetailTransactionExpired = page.getByText("Lihat Detail Transaksi").first();
+        this.titleInvoiceExpired = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Invoice Kedaluwarsa"));
+        this.buttonBackInvoiceExpired = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
 
     }
 
@@ -327,7 +352,7 @@ public class MamifotoPO {
     }
 
     /**
-     * Click on tab selesai at riwayat page mamifoto
+     * Click on Lihat detail transaksi at riwayat page mamifoto
      */
     public void clickOnSeeDetailTransactionMamifoto() {
         seeDetailTransactionMamifoto.click();
@@ -356,7 +381,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getMStatusPembelianSubTitleText() throws InterruptedException {
+    public String getStatusPembelianSubTitleText() throws InterruptedException {
         return playwright.getText(subTitleAlreadyPaid);
     }
 
@@ -378,6 +403,86 @@ public class MamifotoPO {
         });
 
         page1.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS")).isVisible();
+    }
+
+    /**
+     * Click on Lihat detail transaksi at riwayat page prophoto
+     */
+    public void clickOnSeeDetailTransactionProphoto() {
+        seeDetailTransactionProphoto.click();
+    }
+
+    /**
+     * Click on icon back at pembayaran berhasil page
+     */
+    public void clicOnIconBackSuccsessPaymentMamifoto() {
+        backIconPembelianMamifoto.click();
+    }
+
+    /**
+     * Get Text status transaction succsess old prophoto
+     *
+     * @return string
+     */
+    public String getSuccsessTransactioProphotoText() throws InterruptedException {
+        return playwright.getText(succsesPaymentTextProphoto);
+    }
+
+    /**
+     * Get Text doesnt have transaction mamifoto at tab dalam proses
+     *
+     * @return string
+     */
+    public String getDoesntHaveTransactionText() throws InterruptedException {
+        return playwright.getText(doesntHaveTransactionText);
+    }
+
+    /**
+     * Get Text doesnt have transaction desc mamifoto at tab dalam proses
+     *
+     * @return string
+     */
+    public String getDoesntHaveTransactionDescText() throws InterruptedException {
+        return playwright.getText(doesntHaveTransactionDescText);
+    }
+
+    /**
+     * Click on tab dalam proses mamifoto
+     */
+    public void clicOnTabDalamProsesMamifoto() {
+        tabDalamProsesMamifoto.click();
+    }
+
+    /**
+     * Click on lihat detail transaksi expired
+     */
+    public void clicOnDetailTransactionExpired() {
+        seeDetailTransactionExpired.click();
+    }
+
+    /**
+     * Get Text Transaction expired mamifoto
+     *
+     * @return string
+     */
+    public String getTextTransactionMamifotoExpired() throws InterruptedException {
+        return playwright.getText(expiredPaymentMamifotoText);
+    }
+
+    /**
+     * Get Text Transaction expired mamifoto
+     *
+     * @return string
+     */
+    public String getTextInvoiceExpiredTitle() throws InterruptedException {
+        return playwright.getText(titleInvoiceExpired);
+    }
+
+    /**
+     * Click on button back at invoice kadaluarsa page
+     */
+    public void clickOnButtonBackInvoiceExpired() {
+        buttonBackInvoiceExpired.click();
     }
 
 }
