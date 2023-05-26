@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
@@ -15,6 +16,8 @@ public class RiwayatBookingPO {
     Locator chekcinOnPopUpButton;
     Locator doneToKostSayaButton;
     Locator bayarPelunasanButton;
+    Locator lihatSelengkapnyaButton;
+    Locator refundText;
 
     public RiwayatBookingPO(Page page) {
         this.page = page;
@@ -24,6 +27,8 @@ public class RiwayatBookingPO {
         chekcinOnPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Pastikan")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Check-in"));
         doneToKostSayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai & ke Kos Saya"));
         bayarPelunasanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Pelunasan Sekarang"));
+        lihatSelengkapnyaButton = page.getByText("Lihat selengkapnya");
+        refundText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apakah uang saya bisa dikembalikan?"));
     }
 
     /**
@@ -69,5 +74,23 @@ public class RiwayatBookingPO {
     public void clickOnSelesaiAndKeKostSaya() {
         playwright.clickOn(doneToKostSayaButton);
         page.waitForLoadState(LoadState.LOAD);
+    }
+
+    /**
+     * click on Lihat seengkapnya
+     *
+     */
+    public void clickSelengkapnyaButton() {
+        playwright.clickOn(lihatSelengkapnyaButton);
+    }
+
+    /**
+     * click on Apakah uang saya bisa dikembalikan link
+     *
+     */
+    public void clickOnRefundLink() {
+        page.waitForPopup(() -> {
+            playwright.clickOn(refundText);
+        });
     }
 }
