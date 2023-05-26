@@ -37,6 +37,11 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
     }
 
+    @When("admin navigates to Admin Goldplus Package")
+    public void adminNavigatesToAdminGoldplusPackage() {
+        playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
+    }
+
     @When("scenario is {string}")
     public void scenarioIsContinue(String isContinue) {
         FlowControl.setContinueFlow(isContinue.equalsIgnoreCase("continue"));
@@ -179,11 +184,6 @@ public class NavigatesSteps {
     @And("tenant navigates to voucher saya page")
     public void tenantNavigatesToVoucherSayaPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.VOUCHER_SAYA, 30000.0, LoadState.LOAD);
-    }
-    
-    @When("owner navigate to pengajuan booking page")
-    public void userNavigateToPengajuanBooking() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
     }
 
     @When("admin navigates to Search Invoice Page")
