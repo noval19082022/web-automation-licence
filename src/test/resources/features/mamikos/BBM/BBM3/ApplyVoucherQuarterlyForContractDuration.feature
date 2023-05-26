@@ -48,7 +48,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag   | voucher name prod   |
@@ -100,7 +100,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
