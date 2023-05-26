@@ -7,7 +7,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000616   | 0890867321212 | qwerty123     |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 
   @TEST_BBM-900 @Automated @kost-saya-revamp-phase1 @web @xray-update
@@ -31,10 +31,10 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And user click on Draft menu
     And user click delete button on tab one draft booking
     And user go to mamikos homepage
@@ -61,11 +61,11 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user click Save Draft Button
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And user click on Draft menu
     And user click delete button on tab one draft booking
     And user go to mamikos homepage

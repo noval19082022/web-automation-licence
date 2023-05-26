@@ -18,7 +18,7 @@ Feature: Accept Booking from Chat room
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000622   | 0890867321212 | qwerty123     |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 
     @rentKostMonth

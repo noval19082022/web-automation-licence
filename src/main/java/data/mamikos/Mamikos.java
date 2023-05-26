@@ -35,5 +35,6 @@ public class Mamikos {
     public static final String VOUCHER_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "voucherSaya");
     public static final String PENGAJUAN_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "pengajuanBooking");
     public static final String SEARCH_INVOICE = JavaHelpers.getPropertyValue(MAMIKOS, "searchInvoice");
+    public static final String TENANT_RIWAYAT_KOST = JavaHelpers.getPropertyValue(MAMIKOS, "tenantRiwayatKost");
 
 }
