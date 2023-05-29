@@ -110,15 +110,16 @@ Feature: Search Contract
     And admin search contract by kost level "SinggahSini"
     Then admin redirect to search contract menu detail
 
-#  @TEST_DOM-416 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnKostLevel @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][search contract] Search data tenant  based on kost level
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    When user fills kost level "Mamikos Goldplus 2"
-#    And user click search button
-#    Then user verify that detail kos is "Mamikos Goldplus 2"
+  @TEST_DOM-416 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnKostLevel @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][search contract] Search data tenant  based on kost level
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin search contract by kost level "Mamikos Goldplus 2"
+    Then admin verify see text "Mamikos Goldplus 2"
+
 #	#admin search data tenant based on period custome range
 #  @TEST_DOM-419 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnPeriod @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][search contract] Search data tenant based on period with custom range

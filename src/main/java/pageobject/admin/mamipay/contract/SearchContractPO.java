@@ -57,7 +57,8 @@ public class SearchContractPO {
      */
     public void selectKosLevel(String kostLevel) {
         page.locator(".select2-search").click();
-        page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(kostLevel)).click();
+        page.keyboard().type(kostLevel);
+        page.keyboard().press("Enter");
     }
 
     /**
@@ -95,7 +96,7 @@ public class SearchContractPO {
     }
 
     /**
-     * check id data is blank
+     * check if data is blank
      *
      * @return boolean
      */

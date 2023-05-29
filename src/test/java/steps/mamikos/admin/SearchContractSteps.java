@@ -60,6 +60,11 @@ public class SearchContractSteps {
         searchContract.inputDetailKerusakan(inputMorethan200);
     }
 
+    @Then("admin verify see text {string}")
+    public void seeText(String text) {
+        Assert.assertTrue(admin.getPopUpText(text), "Text " + text + " isn't exist");
+    }
+
     @Then("admin see maximal length {string}")
     public void maxlength(String max) {
         Assert.assertTrue(admin.getPopUpText(max), "max text not equals " + max);
