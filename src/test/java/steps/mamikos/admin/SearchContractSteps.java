@@ -36,6 +36,7 @@ public class SearchContractSteps {
     @And("admin want to search contract periode for {string}")
     public void searchContractFor(String periode) {
         searchContract.selectPeriodSearchContract(periode);
+        searchContract.clickOnSearchButton();
     }
 
     @When("admin search contract by {string} and input field {string}")

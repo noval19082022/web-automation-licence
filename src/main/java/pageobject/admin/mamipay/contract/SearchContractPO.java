@@ -68,7 +68,7 @@ public class SearchContractPO {
      */
     public void selectPeriodSearchContract(String periode) {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Contract Date Period ")).click();
-        page.getByText(periode).click();
+        page.locator("li").getByText(periode).click();
     }
 
     /**

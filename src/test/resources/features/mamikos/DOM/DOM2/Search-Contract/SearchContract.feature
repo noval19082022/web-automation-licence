@@ -120,20 +120,20 @@ Feature: Search Contract
     And admin search contract by kost level "Mamikos Goldplus 2"
     Then admin verify see text "Mamikos Goldplus 2"
 
-#	#admin search data tenant based on period custome range
-#  @TEST_DOM-419 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnPeriod @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][search contract] Search data tenant based on period with custom range
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    Then user choose contract date period
-#    And user select date period "Today"
-#    And user click search button
-#    Then user choose contract date period
-#    And user select date period "Yesterday"
-#    And user click search button
-#    Then user Navigate "Search Contract" page
+	#admin search data tenant based on period custome range
+  @TEST_DOM-419 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnPeriod @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][search contract] Search data tenant based on period with custom range
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin want to search contract periode for "Today"
+    Then admin redirect to search contract menu detail
+    When admin go to "Search Contract" menu
+    And admin want to search contract periode for "Yesterday"
+    Then admin redirect to search contract menu detail
+
 #	#invoice not paid yet and admin batalkan contract
 #  @TEST_DOM-421 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @adminBatalkanContract @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][search contract] batalkan kontrak
