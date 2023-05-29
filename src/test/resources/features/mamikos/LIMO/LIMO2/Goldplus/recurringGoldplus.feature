@@ -11,7 +11,7 @@ Feature: Check all entry point Recurring GP
       | phone stag | phone prod | password |
       | 082233545514 | 0          | 12345678 |
     When user wants to subscribe Goldplus 1
-    Then payment success using ovo as payment method
+    Then payment owner success using ovo as payment method
 
     #Scenario wants to create gp recurring
     Given admin go to mamikos mamipay admin
