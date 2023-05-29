@@ -21,6 +21,8 @@ public class OwnerDashboardPO {
     Locator warningBroadcastText;
     Locator closePopUpIcon;
     private Locator penyewaMenu;
+    Locator notificationButton;
+    Locator firstNotificationText;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -34,6 +36,8 @@ public class OwnerDashboardPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
+        notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
+        firstNotificationText = page.locator(".c-notification__item").first();
     }
 
     /**
@@ -93,5 +97,20 @@ public class OwnerDashboardPO {
     public TenantBillManagementPO clickOnPenyewaKos() {
         playwright.doubleClick(penyewaMenu);
         return new TenantBillManagementPO(page);
+    }
+
+    /**
+     * Click on notification button header
+     *
+     */
+    public void clickNotificationButton() {
+        playwright.clickOn(notificationButton);
+    }
+
+    /**
+     * Click on first notification owner
+     */
+    public void clickFirstNotificationText() {
+        playwright.clickOn(firstNotificationText);
     }
 }
