@@ -32,4 +32,14 @@ public class TenantEditProfileSteps {
         tenantEditProfile.selectCompany(company);
         tenantEditProfile.clickONSaveButton();
     }
+
+    @Then("user can see {string} on profile page")
+    public void user_can_see_x_on_profile_page(String textAlert) {
+        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert),textAlert,"not appears alert on profile");
+    }
+
+    @Then("user see button simpan edit profile disable")
+    public void user_see_button_simpan_edit_profile_disable () {
+        tenantEditProfile.assertSimpanButtonDisable();
+    }
 }

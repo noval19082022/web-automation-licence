@@ -23,6 +23,7 @@ public class OwnerDashboardPO {
     private Locator penyewaMenu;
     Locator notificationButton;
     Locator firstNotificationText;
+    Locator mamipoinButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -38,6 +39,7 @@ public class OwnerDashboardPO {
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
         notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
         firstNotificationText = page.locator(".c-notification__item").first();
+        mamipoinButton = page.getByText("MamiPoin");
     }
 
     /**
@@ -112,5 +114,10 @@ public class OwnerDashboardPO {
      */
     public void clickFirstNotificationText() {
         playwright.clickOn(firstNotificationText);
+     * Click on Mamipoin Button
+     *
+     */
+    public void clickMamipoinButton() {
+        playwright.clickOn(mamipoinButton);
     }
 }
