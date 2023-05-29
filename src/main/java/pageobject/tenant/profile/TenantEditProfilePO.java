@@ -5,19 +5,22 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class TenantEditProfilePO {
     Page page;
     PlaywrightHelpers playwright;
     Locator selectedProfession;
     Locator selectedJob;
     Locator professionMahasiswa;
-
     Locator professionKaryawan;
     Locator universityOrProfessionDropdown;
     Locator saveButton;
     Locator okButton;
     Locator popUpHeadTitle;
     Locator popUpDescriptionContent;
+    Locator simpanButton;
+
     public TenantEditProfilePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -30,6 +33,7 @@ public class TenantEditProfilePO {
         popUpHeadTitle = page.locator("h2[id]");
         popUpDescriptionContent = page.locator("div[id='swal2-content']");
         okButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("OK"));
+        simpanButton = page.locator(".hidden-xs.btn-primary");
     }
 
     /**
@@ -104,5 +108,21 @@ public class TenantEditProfilePO {
         Locator company = page.locator("//a[contains(.,'"+ companyName +"')]");
         playwright.clickOn(universityOrProfessionDropdown);
         playwright.clickOn(company);
+    }
+
+    /**
+     * get text alert on edit profile
+     * @return string
+     */
+    public String getAlertOnProfile(String alert) {
+        Locator alertValue = page.locator("//p[contains(.,'"+alert+"')]");
+        return playwright.getText(alertValue);
+    }
+
+    /**
+     * Assert simpan button are disable
+     */
+    public void assertSimpanButtonDisable(){
+        assertThat(simpanButton).isDisabled();
     }
 }

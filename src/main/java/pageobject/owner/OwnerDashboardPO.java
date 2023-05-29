@@ -21,6 +21,7 @@ public class OwnerDashboardPO {
     Locator warningBroadcastText;
     Locator closePopUpIcon;
     private Locator penyewaMenu;
+    Locator mamipoinButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -34,6 +35,7 @@ public class OwnerDashboardPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
+        mamipoinButton = page.getByText("MamiPoin");
     }
 
     /**
@@ -93,5 +95,13 @@ public class OwnerDashboardPO {
     public TenantBillManagementPO clickOnPenyewaKos() {
         playwright.doubleClick(penyewaMenu);
         return new TenantBillManagementPO(page);
+    }
+
+    /**
+     * Click on Mamipoin Button
+     *
+     */
+    public void clickMamipoinButton() {
+        playwright.clickOn(mamipoinButton);
     }
 }
