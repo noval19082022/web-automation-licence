@@ -177,3 +177,21 @@ Feature: Search Contract
     Given admin go to mamikos mamipay admin
     And admin search contract by "Renter Phone Number" and input field "081197878841"
     Then admin cancel contract
+
+        #admin cancel extend invoice
+  @TEST_DOM-413 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @cancelExtendContract @discovery-platform @web @web-covered
+  Scenario: [Backoffice][search contract] Cancel extend contract
+	#	aktivasi kontrak singgahsini
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to reactivate invoice by invoice number "69903537/2023/01/43864"
+
+   # see detail pop up
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod  |
+      | 081197878841 | 08119787884 |
+    And admin search contract by kost level "SinggahSini"
+    And admin akhiri contract
+    Then admin should success terminate contract
