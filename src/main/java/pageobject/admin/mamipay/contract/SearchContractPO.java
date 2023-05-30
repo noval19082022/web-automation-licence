@@ -221,7 +221,6 @@ public class SearchContractPO {
     }
 
     /**
-<<<<<<< HEAD
      * Select Filter Search By
      *
      * @param filterText
