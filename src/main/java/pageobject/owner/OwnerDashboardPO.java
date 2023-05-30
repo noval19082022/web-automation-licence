@@ -114,8 +114,10 @@ public class OwnerDashboardPO {
      */
     public void clickFirstNotificationText() {
         playwright.clickOn(firstNotificationText);
-     * Click on Mamipoin Button
-     *
+    }
+
+     /*
+     *Click on Mamipoin Button
      */
     public void clickMamipoinButton() {
         playwright.clickOn(mamipoinButton);
