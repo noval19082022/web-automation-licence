@@ -89,10 +89,32 @@ Feature: Add Owner Expenditure
   @TEST_PMAN-6314 @pman-prod
   Scenario: Nama Pengeluaran Validation
     When admin tambah data owner expenditure
+    #empty nama pengeluaran
     And admin fill biaya pengeluaran except nama pengeluaran
     Then tambah pengeluaran button should be disabled
+    #valid nama pengeluaran
     When admin fill nama pengeluaran "Gaji Penjaga"
     Then tambah pengeluaran button should be enable
+    #nama pengeluaran more than 50 characters
     When admin fill nama pengeluaran more than 50 characters
     Then nama pengeluaran should be only contains 50 characters
+    And tambah pengeluaran button should be enable
+
+  @TEST_PMAN-6315 @pman-prod
+  Scenario: Kuantitas Validation
+    When admin tambah data owner expenditure
+    #empty kuantitas
+    And admin fill biaya pengeluaran except kuantitas
+    Then tambah pengeluaran button should be disabled
+    #kuantitas = 0
+    When admin fill kuantitas "0"
+    Then kuantitas field value should be "0"
+    And tambah pengeluaran button should be disabled
+    #input char in kuantitas
+    When admin fill kuantitas "abcdefghijklmnopqrstuvwxyz"
+    Then kuantitas field value should be empty
+    And tambah pengeluaran button should be disabled
+    #input valid kuantitas
+    When admin fill kuantitas "50"
+    Then kuantitas field value should be "50"
     And tambah pengeluaran button should be enable

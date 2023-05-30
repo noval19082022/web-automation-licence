@@ -1,6 +1,7 @@
 package pageobject.pms.otherTransaction;
 
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Mouse;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
@@ -106,6 +107,7 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setKategoriPengeluaran(String category, String no) {
+        page.mouse().wheel(0,500);
         kategoriPengeluaran = page.locator("a").filter(new Locator.FilterOptions().setHasText(category));
         kategoriPengeluaranDropdown.click();
         kategoriPengeluaran.nth(Integer.parseInt(no)-1).click();
@@ -129,6 +131,7 @@ public class AddOwnerExpenditurePO {
      */
     public void setKuantitas(String quantity, String no) {
         kuantitas = page.getByTestId("expense-qty-"+(Integer.parseInt(no)-1)+"");
+        kuantitas.scrollIntoViewIfNeeded();
         kuantitas.fill(quantity);
     }
 
@@ -361,5 +364,17 @@ public class AddOwnerExpenditurePO {
      */
     public void assertNamaPengeluaran(String expected) {
         assertThat(namaPengeluaran).hasValue(expected);
+    }
+
+    /**
+     * Assert Kuantitas Value
+     * @param qty kuantitas value
+     */
+    public void assertKuantitasValue(String qty) {
+        if (qty.equalsIgnoreCase("empty")){
+            assertThat(kuantitas).hasValue("");
+        } else {
+            assertThat(kuantitas).hasValue(qty);
+        }
     }
 }
