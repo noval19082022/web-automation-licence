@@ -7,6 +7,8 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class MamikosListInvoicePO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -56,6 +58,13 @@ public class MamikosListInvoicePO {
     Locator clickOnBasicAmount;
     Locator updateAmountButton;
     Locator headerSearchInvoice;
+    Locator dataDetailInvoice;
+    Locator firstInvoiceNumber;
+    Locator rowListInvoiceNumber;
+    Locator paidInvoiceList;
+    Locator Refund;
+    Locator searchByDropdownlist;
+    Locator searchRefund;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -102,6 +111,13 @@ public class MamikosListInvoicePO {
         clickOnBasicAmount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
         updateAmountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
         headerSearchInvoice = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Invoice"));
+        dataDetailInvoice = page.locator("//tbody[1]/tr[1]");
+        firstInvoiceNumber = page.locator("//tr[1]//td[2]");
+        rowListInvoiceNumber = page.locator("//td[2]");
+        paidInvoiceList = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Paid Invoice List "));
+        Refund = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Refund "));
+        searchByDropdownlist = page.locator(".col-xs-2:nth-child(1) .filter-option");
+        searchRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
     }
 
     /**
@@ -532,4 +548,90 @@ public class MamikosListInvoicePO {
         return playwright.getText(headerSearchInvoice);
     }
 
+    /**
+     * verify invoice number is appeared
+     *
+     * @return
+     */
+    public String getInvoiceNumber(String name) {
+        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(name)));
+    }
+
+    /**
+     * verify invoice header is appeared
+     *
+     * @return
+     */
+    public String getSearchInvoicePageHeader() {
+        return playwright.getText(headerSearchInvoice);
+    }
+
+    /**
+     * verify data detail invoice is appeared
+     */
+    public void checkDataDetailInvoice() {
+        playwright.waitTillLocatorIsVisible(dataDetailInvoice);
+    }
+
+    /**
+     * verify first invoice
+     *
+     * @return
+     */
+    public String getFirstInvoiceTextOnList() {
+        playwright.waitTillLocatorIsVisible(firstInvoiceNumber);
+        return playwright.getText(firstInvoiceNumber);
+    }
+
+    /**
+     * verify size invoice
+     *
+     * @return
+     */
+    public Integer totalRowListInvoice() {
+        List<Locator> listLocator = rowListInvoiceNumber.all();
+        return listLocator.size();
+    }
+
+    /**
+     * user click paid invoice list and refund
+     */
+    public void clickPaidInvoiceList() {
+        page.reload();
+        playwright.hardWait(5);
+        playwright.clickOn(paidInvoiceList);
+        playwright.clickOn(Refund);
+    }
+
+    /**
+     * Select Filter Search By
+     *
+     * @param filterText
+     * @throws InterruptedException
+     */
+    public void selectFilterSearchBy(String filterText) throws InterruptedException {
+        playwright.clickOn(searchByDropdownlist);
+        playwright.clickOn(page.locator("//span[normalize-space()='" + filterText + "']"));
+    }
+
+    /**
+     * Enter Search Text in to Search box
+     *
+     * @param searchText search text
+     * @throws InterruptedException
+     */
+    public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
+        playwright.clickOn(page.locator("input[name='search_value']"));
+        page.keyboard().type(searchText);
+        playwright.clickOn(searchRefund);
+    }
+
+    /**
+     * Get result coloum kost detail
+     *
+     * @return string data type
+     */
+    public boolean listInColoumKostDetail(String kostName) {
+        return playwright.waitTillLocatorIsVisible(page.locator("//tbody[1]/tr[1]/td[contains(.,'" + kostName + "')]"));
+    }
 }

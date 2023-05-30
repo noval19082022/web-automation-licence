@@ -6,12 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
+import pageobject.admin.mamipay.contract.SearchContractPO;
 import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 
 public class allInvoiceSteps {
     private Page page = ActiveContext.getActivePage();
     private AdminMamipayDashboardPO admin = new AdminMamipayDashboardPO(page);
     private MamikosListInvoicePO invoicePO = new MamikosListInvoicePO(page);
+    private SearchContractPO searchContractPO = new SearchContractPO(page);
 
     @And("admin want to search invoice number {string}")
     public void adminWantToSearchInvoiceNumber(String invoiceNumber) {
@@ -169,5 +171,45 @@ public class allInvoiceSteps {
     @Then("user redirect to {string} page")
     public void userRedirectToPage(String pageHeader) {
         Assert.assertEquals(invoicePO.getInvoiceDiscountPageHeader(), pageHeader, "Invoice Admin Fee Discount Settings");
+    }
+
+    @Then("verify invoice number {string}")
+    public void verifyInvoiceNumber(String messageInvoice) {
+        Assert.assertEquals(invoicePO.getInvoiceNumber(messageInvoice), messageInvoice);
+    }
+
+    @And("user search by {string} and input field {string}")
+    public void userSearchByAndInputField(String sortBy, String input) throws InterruptedException {
+        searchContractPO.selectFilterSearchBy(sortBy);
+        searchContractPO.enterTextToSearchTextbox(input);
+        invoicePO.clickOnCariInvoice();
+    }
+
+    @Then("user will get data detail invoice")
+    public void userWillGetDataDetailInvoice() {
+        Assert.assertEquals(invoicePO.getSearchInvoicePageHeader(), "Search Invoice");
+        invoicePO.checkDataDetailInvoice();
+    }
+
+    @Then("user get invoice result on the list equals to {int}")
+    public void userGetInvoiceResultOnTheListEqualsTo(Integer input) {
+        Assert.assertNotNull(invoicePO.getFirstInvoiceTextOnList());
+        Assert.assertTrue(invoicePO.totalRowListInvoice() == input);
+    }
+
+    @And("admin go to Paid Invoice list refund Page")
+    public void adminGoToPaidInvoiceListRefundPage() {
+        invoicePO.clickPaidInvoiceList();
+    }
+
+    @And("user search by {string} and input field {string} refund menu")
+    public void userSearchByAndInputFieldRefundMenu(String sortBy, String input) throws InterruptedException {
+        invoicePO.selectFilterSearchBy(sortBy);
+        invoicePO.enterTextToSearchTextbox(input);
+    }
+
+    @Then("user see list in coloum kost detail with name kost {string}")
+    public void userSeeListInColoumKostDetailWithNameKost(String kostName) {
+        Assert.assertTrue(invoicePO.listInColoumKostDetail(kostName), "Error message is not equal to " + kostName);
     }
 }

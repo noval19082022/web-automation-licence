@@ -27,6 +27,7 @@ public class SearchContractPO {
     private Locator seeLogBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
+    Locator searchTextBox;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -46,6 +47,7 @@ public class SearchContractPO {
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
         seeLogBtn = page.locator("a").getByText("See log").first();
+        searchTextBox = page.locator("input[name='search_value']");
     }
 
     /**
@@ -175,5 +177,28 @@ public class SearchContractPO {
             }
             page.waitForLoadState(LoadState.LOAD);
         }
+    }
+
+    /**
+     * Select Filter Search By
+     *
+     * @param filterText
+     * @throws InterruptedException
+     */
+    public void selectFilterSearchBy(String filterText) throws InterruptedException {
+        playwright.clickOn(page.locator("select[name=search_by]"));
+        page.keyboard().type(filterText);
+        page.keyboard().down("Enter");
+    }
+
+    /**
+     * Enter Search Text in to Search box
+     *
+     * @param searchText search text
+     * @throws InterruptedException
+     */
+    public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
+        playwright.clickOn(page.locator("input[name=search_value]"));
+        page.keyboard().type(searchText);
     }
 }

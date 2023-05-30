@@ -186,5 +186,55 @@ Feature: search invoice
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user click "Search Invoice"
+    And admin want to search invoice number "ST/90743755/2020/11/0031"
+    Then verify invoice number "ST/90743755/2020/11/0031"
 
+  @DOM2 @searchValidInvoice @TEST_DOM-712
+  Scenario Outline: : search by valid invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "Search Invoice"
+    And user search by "<searchBy>" and input field "<input>"
+    Then user will get data detail invoice
+    Examples:
+      | searchBy            | input                  |
+      | Invoice Number      | 99491321/2023/02/62310 |
+      | Invoice Code        | 2RIWW                  |
+      | Owner Phone Number  | 083843666900           |
+      | Renter Phone Number | 083139263046           |
+      | Renter Name         | Ullrich                |
 
+  @DOM2 @searchInvoiceByrecuringInvoice @TEST_DOM-696
+  Scenario Outline:Search Invoice With Invoice Number And invoice Type Recurring Invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "Search Invoice"
+    And user search by "<searchBy>" and input field "<input>"
+    Then verify invoice number "<input>"
+    Examples:
+      | searchBy       | input                     |
+      | Invoice Number | DP/78931168/2023/01/11844 |
+
+  @DOM2 @TEST_DOM-690
+  Scenario: [Mamipay][Search Invoice] Search Invoice With Invoice Number And invoice Type First Invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "Search Invoice"
+    And admin want to search invoice number "ST/45892576/2023/05/00158"
+    Then user get invoice result on the list equals to 1
+
+  @TEST_DOM-4894 @DOM2 @searchByNameKost
+  Scenario: [Mamipay][Search Invoice]Check list of data transaction on tab paid Search by Nama Kost
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to Paid Invoice list refund Page
+    And user search by "Kost Name" and input field "kost payment automation casablanca campur" refund menu
+    Then user see list in coloum kost detail with name kost "kost payment automation casablanca campur"
