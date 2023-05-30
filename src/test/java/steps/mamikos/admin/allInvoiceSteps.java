@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 
@@ -99,6 +100,7 @@ public class allInvoiceSteps {
     @And("admin choose method Status {string}")
     public void adminChooseMethodStatus(String method) throws InterruptedException {
         invoicePO.selectDetailStatus(method);
+        invoicePO.clickOnCariInvoice();
     }
 
     @Then("admin will get data Status with method {string}")
@@ -109,6 +111,7 @@ public class allInvoiceSteps {
     @And("admin choose order type {string}")
     public void adminChooseOrderType(String method) throws InterruptedException {
         invoicePO.selectOrderType(method);
+        invoicePO.clickOnCariInvoice();
     }
 
     @Then("appeared data transaction with order type {string}")
@@ -137,6 +140,34 @@ public class allInvoiceSteps {
     }
 
     @And("admin click checkbox not in mamipay")
-    public void adminClickCheckboxNotInMamipay() {
+    public void adminClickCheckboxNotInMamipay() throws InterruptedException {
+        invoicePO.checklistNotInMamipay();
+
+    }
+
+    @And("user click see log button")
+    public void userClickSeeLogButton() throws InterruptedException {
+        invoicePO.clickSeeLogButton();
+    }
+
+    @Then("user see status log invoice {string}")
+    public void userSeeStatusLogInvoice(String status) throws InterruptedException {
+        Assert.assertEquals(invoicePO.logStatusInvoice(status), "paid");
+    }
+
+    @And("user click on detail fee button")
+    public void userClickOnDetailFeeButton() throws InterruptedException {
+        invoicePO.userClickOnDetailFee();
+
+    }
+
+    @And("user change basic amount {string}")
+    public void userChangeBasicAmount(String amount) throws InterruptedException {
+        invoicePO.userClickOnBasicAmount(amount);
+    }
+
+    @Then("user redirect to {string} page")
+    public void userRedirectToPage(String pageHeader) {
+        Assert.assertEquals(invoicePO.getInvoiceDiscountPageHeader(), pageHeader, "Invoice Admin Fee Discount Settings");
     }
 }

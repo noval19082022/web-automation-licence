@@ -49,6 +49,13 @@ public class MamikosListInvoicePO {
     Locator valueTo;
     Locator clickChangeStatus;
     Locator inputDateAndTime;
+    Locator checklistNotInMamipay;
+    Locator clickSubmitChange;
+    Locator logButtonSearchContract;
+    Locator clickOnDetailFee;
+    Locator clickOnBasicAmount;
+    Locator updateAmountButton;
+    Locator headerSearchInvoice;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -88,6 +95,13 @@ public class MamikosListInvoicePO {
         valueTo = page.locator("input[name='nominal_to']");
         clickChangeStatus = page.locator("//a[.='Change Status']");
         inputDateAndTime = page.locator("//input[@name='paid_at']");
+        checklistNotInMamipay = page.locator("#notMamipay");
+        clickSubmitChange = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit Change"));
+        logButtonSearchContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("View Log"));
+        clickOnDetailFee = page.locator("(//a[@class='btn btn-xs bg-maroon btn-flat'][normalize-space()='Detail Fee'])[1]");
+        clickOnBasicAmount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        updateAmountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
+        headerSearchInvoice = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Invoice"));
     }
 
     /**
@@ -324,8 +338,8 @@ public class MamikosListInvoicePO {
 
     /**
      * user choose pament method
-     * @throws  InterruptedException
      *
+     * @throws InterruptedException
      */
     public void selectPayment(String method) {
         playwright.selectDropdownByValue(page.locator("select[name='payment_method']"), method);
@@ -444,6 +458,7 @@ public class MamikosListInvoicePO {
     public void inputDateAndTime(String date) throws InterruptedException {
         inputDateAndTime.click();
         page.keyboard().type(date);
+        playwright.clickOn(clickSubmitChange);
     }
 
     /**
@@ -454,4 +469,67 @@ public class MamikosListInvoicePO {
     public void showInvoiceAfterChange(String status) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("//span[text()='" + status + "']"));
     }
+
+    /**
+     * user checklist section not in mamipay
+     *
+     * @throws InterruptedException
+     */
+    public void checklistNotInMamipay() throws InterruptedException {
+        playwright.clickOn(checklistNotInMamipay);
+    }
+
+    /**
+     * click see log button
+     *
+     * @throws InterruptedException
+     */
+    public void clickSeeLogButton() throws InterruptedException {
+        if (playwright.waitTillLocatorIsVisible(logButtonSearchContract)) {
+            playwright.clickOn(logButtonSearchContract);
+        } else {
+            playwright.clickOn(logButtonSearchContract);
+        }
+    }
+
+    /**
+     * log status invoice
+     *
+     * @param status
+     * @return
+     * @throws InterruptedException
+     */
+    public String logStatusInvoice(String status) throws InterruptedException {
+        return page.locator("td").getByText(status).nth(0).textContent();
+    }
+
+    /**
+     * click on detail fee button
+     * * @throws InterruptedException
+     */
+    public void userClickOnDetailFee() throws InterruptedException {
+        playwright.clickOn(clickOnDetailFee);
+    }
+
+    /**
+     * click on basic amount button
+     * * @throws InterruptedException
+     */
+    public void userClickOnBasicAmount(String amount) throws InterruptedException {
+        playwright.clickOn(clickOnBasicAmount);
+        basicAmountTextField.click();
+        basicAmountTextField.clear();
+        page.keyboard().type(amount);
+        playwright.clickOn(updateAmountButton);
+    }
+
+    /**
+     * Get invoice discount Page Header
+     *
+     * @return
+     */
+    public String getInvoiceDiscountPageHeader() {
+        return playwright.getText(headerSearchInvoice);
+    }
+
 }

@@ -145,5 +145,46 @@ Feature: search invoice
       | Paid   | Paid   |
       | Unpaid | Unpaid |
 
+  @TEST_DOM-4893 @DOM2 @searchInvoiceGlobal
+  Scenario: [Mamipay][Search Invoice]Change transaction from unpaid to paid not in mamipay
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "45111793/2021/04/0018"
+    And admin click change status
+    And admin click checkbox not in mamipay
+    And admin input date and time "2021-02-04 16:35:11"
+    Then invoice will changes to "Paid"
+
+  @DOM2 @checkStatusLogInvoice @TEST_DOM-722
+  Scenario: check status Log invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "ST/90743755/2020/11/0031"
+    And user click see log button
+    Then user see status log invoice "Paid"
+
+  @DOM2 @changePrice @TEST_DOM-716
+  Scenario: check status Log invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "Search Invoice"
+    And admin choose method Status "Unpaid"
+    And user click on detail fee button
+    And user change basic amount "10000"
+    Then user redirect to "Search Invoice" page
+
+  @DOM2 @SearchInvoiceByInvoiceNumber @TEST_DOM-707
+  Scenario: Check the log of any updates made regarding the invoice via search invoice menu
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user click "Search Invoice"
 
 
