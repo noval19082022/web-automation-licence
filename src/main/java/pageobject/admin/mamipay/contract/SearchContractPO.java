@@ -100,7 +100,7 @@ public class SearchContractPO {
      *
      * @return boolean
      */
-    public boolean isContractDataVisible()() {
+    public boolean isContractDataVisible() {
         return page.locator("tbody").first().locator("tr").first().isVisible();
     }
 
