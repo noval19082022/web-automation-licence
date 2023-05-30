@@ -1,4 +1,4 @@
-@DOM-3898 @DOM1
+@DOM1
 Feature: Blacklist User
 
   @continue

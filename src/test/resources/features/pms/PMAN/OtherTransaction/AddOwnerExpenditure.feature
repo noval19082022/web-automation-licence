@@ -55,3 +55,44 @@ Feature: Add Owner Expenditure
       | keyword     |
       | Jotunheim   |
       | Woodchuck   |
+
+  @TEST_PMAN-6312
+  Scenario: Auto Fill Kota and Sisa Kontrak Kerja Sama
+    #terminated property
+    When admin add new owner expenditure and search property "Jotunheim"
+    Then kota and sisa kontrak kerja sama should be "-"
+    #active property
+    When admin edit and choose property "Asgard"
+    Then system should be auto fill kota and sisa kontrak kerja sama
+
+  @TEST_PMAN-6313 @pman-prod
+  Scenario: Verify Kategori Pengeluaran List
+    When admin tambah data owner expenditure
+    Then admin verify kategori pengeluaran list should contains :
+      | Administrasi & Iuran Kos                    |
+      | Amenities Penyewa                           |
+      | Bahan Pembersih Kos & Dapur                 |
+      | Gaji & Biaya Operasional Staff              |
+      | Pembayaran Listrik                          |
+      | Pembayaran PDAM                             |
+      | Pembayaran Wifi                             |
+      | Pengendalian Hama                           |
+      | Perbaikan AC                                |
+      | Perbaikan Fasilitas Bangunan                |
+      | Perbaikan Fasilitas Kamar                   |
+      | Perbaikan Fasilitas Umum                    |
+      | Perbaikan Wifi                              |
+      | Perlengkapan Dapur                          |
+      | Perlengkapan Kebersihan Kos                 |
+      | Lainnya                                     |
+
+  @TEST_PMAN-6314 @pman-prod
+  Scenario: Nama Pengeluaran Validation
+    When admin tambah data owner expenditure
+    And admin fill biaya pengeluaran except nama pengeluaran
+    Then tambah pengeluaran button should be disabled
+    When admin fill nama pengeluaran "Gaji Penjaga"
+    Then tambah pengeluaran button should be enable
+    When admin fill nama pengeluaran more than 50 characters
+    Then nama pengeluaran should be only contains 50 characters
+    And tambah pengeluaran button should be enable

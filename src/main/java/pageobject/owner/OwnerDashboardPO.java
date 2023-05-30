@@ -20,6 +20,10 @@ public class OwnerDashboardPO {
     Locator broadcastChatBtn;
     Locator warningBroadcastText;
     Locator closePopUpIcon;
+    private Locator penyewaMenu;
+    Locator notificationButton;
+    Locator firstNotificationText;
+    Locator mamipoinButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -32,45 +36,10 @@ public class OwnerDashboardPO {
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("'broadcast-message'"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
-    }
-
-    /**
-     * Click based on Text
-     */
-    public void clickOnText(String menu) {
-        playwright.waitTillLocatorIsVisible(page.getByText(menu),3000.0);
-        playwright.delayAndClickOn(page.getByText(menu),3000.0);
-        playwright.hardWait(5000);
-    }
-
-    /**
-     * Click based on Text Button
-     */
-    public void clickOnTextButton(String buttonText) {
-        playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)),3000.0);
-        playwright.clickOn(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText)));
-        playwright.hardWait(3000);
-    }
-
-    /**
-     * Check element based on text is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isTextDisplayed(String text) {
-        playwright.hardWait(3000);
-        return playwright.isLocatorVisibleAfterLoad(page.getByText(text), 3000.0);
-    }
-
-
-    /**
-     * Check if element button based on text is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isButtonWithTextDisplayed(String button){
-        playwright.hardWait(3000.0);
-        return playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(button)),5000.0);
+        penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
+        notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
+        firstNotificationText = page.locator(".c-notification__item").first();
+        mamipoinButton = page.getByText("MamiPoin");
     }
 
     /**
@@ -120,5 +89,37 @@ public class OwnerDashboardPO {
      */
     public void dismissFTUEGoldplus() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja")).click();
+    }
+
+    /**
+     * Click on Kelola Kos and navigate to Tenant Bill Management
+     *
+     * @return TenantBillManagementPO class
+     */
+    public TenantBillManagementPO clickOnPenyewaKos() {
+        playwright.doubleClick(penyewaMenu);
+        return new TenantBillManagementPO(page);
+    }
+
+    /**
+     * Click on notification button header
+     *
+     */
+    public void clickNotificationButton() {
+        playwright.clickOn(notificationButton);
+    }
+
+    /**
+     * Click on first notification owner
+     */
+    public void clickFirstNotificationText() {
+        playwright.clickOn(firstNotificationText);
+    }
+
+     /*
+     *Click on Mamipoin Button
+     */
+    public void clickMamipoinButton() {
+        playwright.clickOn(mamipoinButton);
     }
 }

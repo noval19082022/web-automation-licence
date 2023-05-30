@@ -18,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JavaHelpers {
 
@@ -89,6 +91,24 @@ public class JavaHelpers {
     public static int getMonthLength() {
         YearMonth currentYearMonth = YearMonth.now();
         return currentYearMonth.lengthOfMonth();
+    }
+
+    public static String extractDateFromString(String inputString) {
+        String regexPattern = "\\b(?:\\d{4}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})|\\d{1,2}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{4}|\\p{Alpha}{3,}|\\p{Alpha}{4})|(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,})-(?:\\d{4})|\\d{1,2}\\s+(?:\\p{Alpha}{3,})\\s+\\d{4})\\b";
+
+
+
+        Pattern regex = Pattern.compile(regexPattern);
+        Matcher matcher = regex.matcher(inputString);
+
+        try {
+            if (matcher.find()) {
+                return matcher.group().split(",")[0];
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "No date format found on the string provided :" + inputString;
     }
     // --- Date and Time -- \\
 

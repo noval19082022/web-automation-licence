@@ -11,6 +11,7 @@ public class AdminBangkrupuxLoginPO extends LoginPO {
     private PlaywrightHelpers playwright;
     private LocatorHelpers locator;
     Locator emailInput;
+    Locator profileMamikosBangkrupuxAdminBtn;
 
     public AdminBangkrupuxLoginPO(Page page) {
         super(page);
@@ -20,6 +21,8 @@ public class AdminBangkrupuxLoginPO extends LoginPO {
         emailInput = page.getByPlaceholder("Phone Number");
         passwordInput = page.getByPlaceholder("Password");
         loginBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign me in"));
+        profileMamikosBangkrupuxAdminBtn = page.locator(".dropdown-toggle");
+
     }
 
     /**
@@ -49,5 +52,13 @@ public class AdminBangkrupuxLoginPO extends LoginPO {
     public AdminBangkrupuxLoginPO clickOnLoginButton() {
         loginBtn.click();
         return new AdminBangkrupuxLoginPO(page);
+    }
+
+    /**
+     * User Log out as a Mamikos Bangkrupux Admin
+     */
+    public void logoutAsMamikosBangkrupuxAdmin() {
+        profileMamikosBangkrupuxAdminBtn.click();
+        playwright.clickOnText("Sign Out ");
     }
 }

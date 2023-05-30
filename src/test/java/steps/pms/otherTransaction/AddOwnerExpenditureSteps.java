@@ -118,4 +118,59 @@ public class AddOwnerExpenditureSteps {
     public void property_suggestion_not_appear() {
         add.assertPropertySuggestionNotAppear();
     }
+    @When("admin edit and choose property {string}")
+    public void admin_edit_and_choose_property(String property) {
+        add.editSearchProperty(property);
+    }
+    @Then("kota and sisa kontrak kerja sama should be {string}")
+    public void kota_and_sisa_kontrak_kerja_sama_should_be(String text) {
+        add.assertKota(text);
+        add.assertSisaKontrak(text);
+    }
+    @Then("system should be auto fill kota and sisa kontrak kerja sama")
+    public void system_should_be_auto_fill_kota_and_sisa_kontrak_kerja_sama() {
+        add.assertKotaNotEmpty();
+        add.assertSisaKontrakNotEmpty();
+    }
+    @When("admin tambah data owner expenditure")
+    public void admin_tambah_data_owner_expenditure() {
+        add.clickTambahData();
+    }
+    @Then("admin verify kategori pengeluaran list should contains :")
+    public void admin_verify_kategori_pengeluaran_list_should_contains(List<String> pengeluaran) {
+        add.expandKategoriPengeluaran();
+        for (int i=0;i< pengeluaran.size();i++) {
+            add.assertKategoriPengeluaranList(i, pengeluaran.get(i));
+        }
+    }
+    @When("admin fill biaya pengeluaran except nama pengeluaran")
+    public void admin_fill_biaya_pengeluaran_except_nama_pengeluaran() {
+        add.setKategoriPengeluaran("Amenities Penyewa","1");
+        add.setKuantitas("2","1");
+        add.setNominalPengeluaran("40000","1");
+        add.setStatusPersediaan("Stock","1");
+        add.setJenisProduk("LSSS","1");
+    }
+    @When("admin fill nama pengeluaran {string}")
+    public void admin_fill_nama_pengeluaran(String name) {
+        add.setNamaPengeluaran(name,"1");
+    }
+
+    @Then("tambah pengeluaran button should be disabled")
+    public void tambah_pengeluaran_button_should_be_disabled() {
+        add.assertTambahPengeluaranButtonDisable();
+    }
+    @Then("tambah pengeluaran button should be enable")
+    public void tambah_pengeluaran_button_should_be_enable() {
+        add.assertTambahPengeluaranButtonEnable();
+    }
+    @When("admin fill nama pengeluaran more than 50 characters")
+    public void admin_fill_nama_pengeluaran_more_than_50_characters() {
+        add.setNamaPengeluaran("Lorem ipsum dolor sit amet, consectetur adipiscing elit","1");
+    }
+    @Then("nama pengeluaran should be only contains 50 characters")
+    public void nama_pengeluaran_should_be_only_contains_50_characters() {
+        String expected = "Lorem ipsum dolor sit amet, consectetur adipiscing";
+        add.assertNamaPengeluaran(expected);
+    }
 }

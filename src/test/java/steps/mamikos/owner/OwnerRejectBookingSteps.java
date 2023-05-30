@@ -32,27 +32,4 @@ public class OwnerRejectBookingSteps {
     public void ownerSeeAllKostTerisi() {
 
     }
-
-    @And("owner reject booking from view detail")
-    public void ownerRejectBookingFromViewDetail() {
-        billBookingManage = pengajuanBooking.ownerRejectBookingFromViewDetail();
-    }
-
-    @And("owner select reason reject kos {string}")
-    public void ownerSelectRejectBookingKos(String reason) {
-        billBookingManage.ownerSelectRejectBookingKos(reason);
-    }
-
-    @Then("owner can see confirmation Atur Booking popup")
-    public void ownerCanSeeConfirmationAturBookingPopup() {
-        Assert.assertTrue(billBookingManage.isAppearConfirmationPopup());
-    }
-    @And("owner click on make rules booking button")
-    public void ownerClickOnMakeRulesBookingButton() {
-        billBookingManage.ownerClickOnMakeRulesBookingButton();
-    }
-    @Then("owner can see make rules booking page")
-    public void ownerCanSeeMakeRulesBookingPage() {
-        Assert.assertTrue(billBookingManage.isAppearMakeRuleBookingPage());
-    }
 }

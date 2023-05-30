@@ -45,7 +45,7 @@ Feature: Invoice Detail Kost With DP
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
       | 085432154321 | 085432154321 | qwerty123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment

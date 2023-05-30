@@ -44,7 +44,7 @@ Feature: Apply Voucher For Kost Type Premium
     When user login as tenant via facebook:
       | email stag                                  |  email prod                                  | password  |
       | dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  |  dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  | mamikosqa |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag  | voucher name prod  |

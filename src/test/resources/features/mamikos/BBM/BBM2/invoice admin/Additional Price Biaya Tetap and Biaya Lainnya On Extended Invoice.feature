@@ -48,9 +48,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0890867321212"
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
