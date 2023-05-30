@@ -340,4 +340,26 @@ public class AddOwnerExpenditurePO {
         kategoriPengeluaranList.nth(i).scrollIntoViewIfNeeded();
         assertThat(kategoriPengeluaranList.nth(i)).hasText(pengeluaran);
     }
+
+    /**
+     * Assert tambah pengeluaran button disable
+     */
+    public void assertTambahPengeluaranButtonDisable() {
+        assertThat(tambahPengeluaranButton).isDisabled();
+    }
+
+    /**
+     * Assert tambah pengeluaran button enable
+     */
+    public void assertTambahPengeluaranButtonEnable() {
+        assertThat(tambahPengeluaranButton).isEnabled();
+    }
+
+    /**
+     * Assert Nama Pengeluaran value
+     * @param expected expected nama pengeluaran
+     */
+    public void assertNamaPengeluaran(String expected) {
+        assertThat(namaPengeluaran).hasValue(expected);
+    }
 }

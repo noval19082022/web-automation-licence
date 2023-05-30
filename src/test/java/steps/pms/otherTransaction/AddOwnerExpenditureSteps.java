@@ -143,4 +143,34 @@ public class AddOwnerExpenditureSteps {
             add.assertKategoriPengeluaranList(i, pengeluaran.get(i));
         }
     }
+    @When("admin fill biaya pengeluaran except nama pengeluaran")
+    public void admin_fill_biaya_pengeluaran_except_nama_pengeluaran() {
+        add.setKategoriPengeluaran("Amenities Penyewa","1");
+        add.setKuantitas("2","1");
+        add.setNominalPengeluaran("40000","1");
+        add.setStatusPersediaan("Stock","1");
+        add.setJenisProduk("LSSS","1");
+    }
+    @When("admin fill nama pengeluaran {string}")
+    public void admin_fill_nama_pengeluaran(String name) {
+        add.setNamaPengeluaran(name,"1");
+    }
+
+    @Then("tambah pengeluaran button should be disabled")
+    public void tambah_pengeluaran_button_should_be_disabled() {
+        add.assertTambahPengeluaranButtonDisable();
+    }
+    @Then("tambah pengeluaran button should be enable")
+    public void tambah_pengeluaran_button_should_be_enable() {
+        add.assertTambahPengeluaranButtonEnable();
+    }
+    @When("admin fill nama pengeluaran more than 50 characters")
+    public void admin_fill_nama_pengeluaran_more_than_50_characters() {
+        add.setNamaPengeluaran("Lorem ipsum dolor sit amet, consectetur adipiscing elit","1");
+    }
+    @Then("nama pengeluaran should be only contains 50 characters")
+    public void nama_pengeluaran_should_be_only_contains_50_characters() {
+        String expected = "Lorem ipsum dolor sit amet, consectetur adipiscing";
+        add.assertNamaPengeluaran(expected);
+    }
 }
