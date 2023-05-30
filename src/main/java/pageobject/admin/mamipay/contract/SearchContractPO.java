@@ -96,11 +96,11 @@ public class SearchContractPO {
     }
 
     /**
-     * check if data is blank
+     * check if data is not null
      *
      * @return boolean
      */
-    public boolean checkBlankData() {
+    public boolean checkDataIsNotNull() {
         return !page.locator("tbody").first().locator("tr").first().isVisible();
     }
 

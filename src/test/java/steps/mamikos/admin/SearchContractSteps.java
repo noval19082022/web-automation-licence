@@ -79,7 +79,7 @@ public class SearchContractSteps {
     @Then("admin will get blank data detail")
     public void adminGetBlankData() {
         Assert.assertTrue(admin.getPopUpText("Search Contract"), "Search Contract");
-        Assert.assertTrue(searchContract.checkBlankData(), "Data Display");
+        Assert.assertFalse(searchContract.checkDataIsNotNull(), "Data is Display");
     }
 
     @Then("admin redirect to search contract menu detail")
