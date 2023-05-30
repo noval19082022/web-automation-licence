@@ -242,7 +242,9 @@ public class SearchContractPO {
     public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
         playwright.clickOn(page.locator("input[name=search_value]"));
         page.keyboard().type(searchText);
-=======
+
+    }
+    /**
      * Click on batalkan kontrak on admin pay if kontrak is exist
      */
     public void batalkanContractIfExist() {
@@ -250,6 +252,5 @@ public class SearchContractPO {
             page.onDialog(dialog -> dialog.accept());
             page.getByText("Batalkan Kontrak").first().click();
         }
->>>>>>> 894fbce9e6493b136e705159ce21922c318a20c3
     }
 }
