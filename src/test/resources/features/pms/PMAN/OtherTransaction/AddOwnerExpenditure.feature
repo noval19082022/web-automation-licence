@@ -111,7 +111,7 @@ Feature: Add Owner Expenditure
     Then kuantitas field value should be "0"
     And tambah pengeluaran button should be disabled
     #input char in kuantitas
-    When admin fill kuantitas "abcdefghijklmnopqrstuvwxyz"
+    When admin fill kuantitas "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-="
     Then kuantitas field value should be empty
     And tambah pengeluaran button should be disabled
     #input valid kuantitas
