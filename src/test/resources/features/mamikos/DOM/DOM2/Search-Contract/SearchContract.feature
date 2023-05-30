@@ -91,13 +91,13 @@ Feature: Search Contract
     And admin search contract by "<searchBy>" and input field "<input>"
     Then admin will get blank data detail
     Examples:
-      | searchBy              | input               |
-      | Kost Name             | kost anggun         |
-      | Owner Phone Number    | 0856220211208       |
-      | Renter Phone Number   | 0856220211208       |
-      | Renter Name           | embul owner         |
-      | Related Invoice Number| 83900841/2021/12/00 |
-      | Related Invoice Code  | 83900841            |
+      | searchBy               | input               |
+      | Kost Name              | kost anggun         |
+      | Owner Phone Number     | 0856220211208       |
+      | Renter Phone Number    | 0856220211208       |
+      | Renter Name            | embul owner         |
+      | Related Invoice Number | 83900841/2021/12/00 |
+      | Related Invoice Code   | 83900841            |
 
   @TEST_DOM-415 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
   Scenario: [BackOffice][search contract] Search data tenant based on period
@@ -134,49 +134,50 @@ Feature: Search Contract
     And admin want to search contract periode for "Yesterday"
     Then admin redirect to search contract menu detail
 
-#	#invoice not paid yet and admin batalkan contract
-#  @TEST_DOM-421 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @adminBatalkanContract @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][search contract] batalkan kontrak
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user access search contract menu
-#    And user search for "payment" and cancel contract
-#
-#		#  Scenario: Cancel booking if tenant have booking
-#    Given user navigates to "mamikos /"
-#    When user clicks on Enter button
-#    And user login in as Tenant via phone number as "PF batalkan kontrak"
-#    When user navigates to "mamikos /user/booking/"
-#    And user cancel booking
-#
-#		#  Scenario: Tenant booking and payment for weekly period
-#    Given user navigates to "mamikos /"
-#    When user clicks search bar
-#    And I search property with name "payment" and select matching result to go to kos details page
-#    And user choose boarding date is "today" and clicks on Booking button on Kost details page
-#    And user select payment period "Per Minggu"
-#    And user selects T&C checkbox and clicks on Book button
-#    Then system display successfully booking
-#
-#		#  Scenario: Owner accept booking from tenant
-#    Given user navigates to "mamikos /"
-#    When user logs out as a Tenant user
-#    And user clicks on Enter button
-#    And user fills out owner login as "payment" and click on Enter button
-#    And user navigates to booking request and filter booking need confirmation
-#    And user clicks accept button on payment booking
-#    And select first room available and clicks on next button
-#    And user enters deposit fee, penalty fee, additional costs, down payment, and click on save button
-#    And user navigates to "mamikos /"
-#    And user logs out as a Tenant user
-#
-#		#   Scenario: Invoice not paid yet and Admin batalkan contract
-#    Given user navigates to "backoffice"
-##			When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    And user Navigate "Search Contract" page
-#    And user search for "payment" and cancel contract
-#    Then user see popup succsessful batalkan and status contract change to cancelled
+	#invoice not paid yet and admin batalkan contract
+  @TEST_DOM-421 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @adminBatalkanContract @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][search contract] batalkan kontrak
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "081197878841"
+    And admin want to batalkan contract if exist
+
+		#  Scenario: Cancel booking if tenant have booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 081197878841 | 08119787884 | Perempuan |
+    And user cancel booking
+
+		#  Scenario: Tenant booking and payment for weekly period
+    Given user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag          | kost name prod       |
+      | Desta Automation tobelo | kost payment desta 2 |
+    And user want to dismiss FTUE
+    When user sees form booking duration
+    And user select date "tomorrow" and rent type "Per bulan"
+    Then user want to booking this kos
+    * user can set Ajukan Sewa
+
+		#  Scenario: Owner accept booking from tenant
+    Given user go to mamikos homepage
+    When user logs out as a Tenant user
+    And user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner accept booking from tenant:
+      | tenant stag | tenant prod |
+      | Coba Daftar | Desta       |
+    Then owner should redirect back to pengajuan booking page
+
+        #   Scenario: Invoice not paid yet and Admin batalkan contract
+    Given admin go to mamikos mamipay admin
+    And admin search contract by "Renter Phone Number" and input field "081197878841"
+    Then admin cancel contract
+
 #	#admin cancle extend invoice
 #  @TEST_DOM-413 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @cancelExtendContract @discovery-platform @web @web-covered
 #  Scenario: [Backoffice][search contract] Cancel extend contract

@@ -47,6 +47,11 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @And("admin want to batalkan contract if exist")
+    public void cancelIfExist() {
+        searchContract.batalkanContractIfExist();
+    }
+
     @And("admin want to edit deposit")
     public void editDeposit() {
         searchContract.clickOnEditDepositButton();

@@ -217,4 +217,14 @@ public class SearchContractPO {
             page.waitForLoadState(LoadState.LOAD);
         }
     }
+
+    /**
+     * Click on batalkan kontrak on admin pay if kontrak is exist
+     */
+    public void batalkanContractIfExist() {
+        if (page.getByText("Batalkan Kontrak").first().isVisible()) {
+            page.onDialog(dialog -> dialog.accept());
+            page.getByText("Batalkan Kontrak").first().click();
+        }
+    }
 }
