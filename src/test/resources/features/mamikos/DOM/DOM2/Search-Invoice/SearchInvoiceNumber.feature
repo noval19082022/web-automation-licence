@@ -129,7 +129,7 @@ Feature: search invoice
       | Pengajuan Sewa      | Bayar Sewa Kos      |
       | Bayar Paket Premium | Bayar Saldo MamiAds |
 
-  @TEST_DOM-4891 @DOM2 @searchInvoiceGlobal @checkStatusLogInvoice @TEST_DOM-4892
+  @TEST_DOM-4891 @DOM2 @searchInvoiceGlobal @checkStatusLogInvoice
   Scenario Outline: [Mamipay][Search Invoice]Change transaction from unpaid to paid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -143,7 +143,21 @@ Feature: search invoice
     Examples:
       | method | output |
       | Paid   | Paid   |
-      | Unpaid | Unpaid |
+
+  @TEST_DOM-4892 @DOM2 @searchInvoiceGlobal
+  Scenario Outline: [Mamipay][Search Invoice]Change transaction from Paid to Unpaid
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to search invoice number "45111793/2021/04/0018"
+    And admin click change status
+    And admin change "<method>"
+    And admin input date and time "2021-02-04 16:35:11"
+    Then invoice will changes to "<output>"
+    Examples:
+      | method | output |
+      | Unpaid   | Unpaid |
 
   @TEST_DOM-4893 @DOM2 @searchInvoiceGlobal
   Scenario: [Mamipay][Search Invoice]Change transaction from unpaid to paid not in mamipay
