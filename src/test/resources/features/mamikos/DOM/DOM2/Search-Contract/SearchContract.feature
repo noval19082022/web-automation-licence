@@ -206,16 +206,16 @@ Feature: Search Contract
     And admin want to see log contract
     Then admin will see detail pop up "Data Contract"
 
-#  @TEST_DOM-429 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
-#  Scenario: [BackOffice][Search Contract][Edit Deposit][kost APIK] See detail pop up
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "089220211208"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see detail pop up edit deposit Apik "Edit Deposit for Confirm to Finance"
+  @TEST_DOM-429 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit][kost APIK] See detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Edit Deposit for Confirm to Finance"
+
 #	#input bank name in  pop up "Deposit for confirm to finance"
 #  @TEST_DOM-417 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
 #  Scenario: [BackOffice][Search Contract][Edit Deposit] Input Bank in name detail pop up
