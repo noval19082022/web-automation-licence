@@ -101,7 +101,7 @@ public class SearchContractPO {
      * @return boolean
      */
     public boolean checkDataIsNotNull() {
-        return !page.locator("tbody").first().locator("tr").first().isVisible();
+        return page.locator("tbody").first().locator("tr").first().isVisible();
     }
 
     /**
