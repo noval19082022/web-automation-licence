@@ -96,11 +96,11 @@ public class SearchContractPO {
     }
 
     /**
-     * check if data is not null
+     * check if contract data is not null
      *
      * @return boolean
      */
-    public boolean checkDataIsNotNull() {
+    public boolean isContractDataVisible()() {
         return page.locator("tbody").first().locator("tr").first().isVisible();
     }
 
