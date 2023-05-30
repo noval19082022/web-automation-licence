@@ -24,6 +24,7 @@ public class SearchContractPO {
     Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
+    private Locator inputTextDetailKerusakan;
     private Locator seeLogBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
@@ -46,6 +47,7 @@ public class SearchContractPO {
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
+        inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
         searchTextBox = page.locator("input[name='search_value']");
     }
@@ -57,7 +59,18 @@ public class SearchContractPO {
      */
     public void selectKosLevel(String kostLevel) {
         page.locator(".select2-search").click();
-        page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(kostLevel)).click();
+        page.keyboard().type(kostLevel);
+        page.keyboard().press("Enter");
+    }
+
+    /**
+     * Select dropdown search contract periode
+     *
+     * @param periode
+     */
+    public void selectPeriodSearchContract(String periode) {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Contract Date Period ")).click();
+        page.locator("li").getByText(periode).click();
     }
 
     /**
@@ -68,10 +81,38 @@ public class SearchContractPO {
     }
 
     /**
+     * input text detail kerusakan
+     *
+     * @param text
+     */
+    public void inputDetailKerusakan(String text) {
+        inputTextDetailKerusakan.click();
+        page.keyboard().type(text);
+    }
+
+    /**
      * Click on see log button
      */
     public void clickOnSeeLogButton() {
         seeLogBtn.click();
+    }
+
+    /**
+     * check if contract data is not null
+     *
+     * @return boolean
+     */
+    public boolean isContractDataVisible() {
+        return page.locator("tbody").first().locator("tr").first().isVisible();
+    }
+
+    /**
+     * check if search contract header is visible
+     *
+     * @return boolean
+     */
+    public boolean isSearchContractHeaderVisible() {
+        return page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Contract")).isVisible();
     }
 
     /**
@@ -180,6 +221,7 @@ public class SearchContractPO {
     }
 
     /**
+<<<<<<< HEAD
      * Select Filter Search By
      *
      * @param filterText
@@ -200,5 +242,14 @@ public class SearchContractPO {
     public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
         playwright.clickOn(page.locator("input[name=search_value]"));
         page.keyboard().type(searchText);
+=======
+     * Click on batalkan kontrak on admin pay if kontrak is exist
+     */
+    public void batalkanContractIfExist() {
+        if (page.getByText("Batalkan Kontrak").first().isVisible()) {
+            page.onDialog(dialog -> dialog.accept());
+            page.getByText("Batalkan Kontrak").first().click();
+        }
+>>>>>>> 894fbce9e6493b136e705159ce21922c318a20c3
     }
 }
