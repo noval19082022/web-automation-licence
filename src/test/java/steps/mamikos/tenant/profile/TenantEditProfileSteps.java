@@ -2,6 +2,7 @@ package steps.mamikos.tenant.profile;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -41,5 +42,38 @@ public class TenantEditProfileSteps {
     @Then("user see button simpan edit profile disable")
     public void user_see_button_simpan_edit_profile_disable () {
         tenantEditProfile.assertSimpanButtonDisable();
+    }
+
+    @And("user click dropdown and fills {string} on edit profile")
+    public void userClickDropdownAndFillsOnEditProfile(String textSearch) {
+        tenantEditProfile.clickOnAndFillDropdown(textSearch);
+    }
+
+    @Then("user can see information {string}")
+    public void userCanSeeInformation(String messageEmptyData) {
+        Assert.assertEquals(tenantEditProfile.getMessageEmptyData(messageEmptyData), messageEmptyData, "message don't natch");
+        tenantEditProfile.clickOnClosePopUp();
+    }
+
+    @Then("red hint {string} text will show up")
+    public void redHintTextWillShowUp(String warningMessage) {
+        Assert.assertEquals(tenantEditProfile.getMessageEmptyData(warningMessage), warningMessage, "message don't natch");
+        tenantEditProfile.clickOnClosePopUp();
+    }
+
+    @And("user click on ubah button on informasi penyewa")
+    public void user_click_on_ubah_button_on_informasi_penyewa() {
+        tenantEditProfile.clickOnUbahInformasiPenyewa();
+    }
+
+    @And("user choose profession {string} on ubah informasi penyewa")
+    public void userChooseProfessionOnUbahInformasiPenyewa(String profession) {
+        tenantEditProfile.clickOnUbahProfesiToKaryawan(profession);
+    }
+
+    @When("user choose pekerjaan {string} from dropdown")
+    public void userChoosePekerjaanFromDropdown(String company) {
+        tenantEditProfile.selectCompany(company);
+        tenantEditProfile.clickONSaveButton();
     }
 }
