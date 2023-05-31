@@ -51,15 +51,16 @@ public class AdminMamipayDashboardPO {
      * @param biaya
      */
     public void inputBiayaKerusakanOnEditDposit(String biaya) {
-        inputBiayaKerusakanOnPopUp.fill(biaya);
+        inputBiayaKerusakanOnPopUp.click();
+        page.keyboard().type(biaya);
     }
 
     /**
-     * check sisa deposit on detail pop up after click Edit Deposit btn
+     * additonal notes menu on detail pop up after click Edit Deposit btn
      * @return
      */
-    public Boolean getSisaDepositOnDetailPopup(){
-        return sisaDepositTextOnPopUp.isVisible();
+    public Boolean getAdditionalNotesMenuOnDetailPopup(){
+        return page.getByText("Additional Notes Minus").first().isVisible();
     }
 
     /**
