@@ -216,20 +216,21 @@ Feature: Search Contract
     And admin want to edit deposit
     Then admin will see detail pop up "Edit Deposit for Confirm to Finance"
 
-#	#input bank name in  pop up "Deposit for confirm to finance"
-#  @TEST_DOM-417 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
-#  Scenario: [BackOffice][Search Contract][Edit Deposit] Input Bank in name detail pop up
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "081280003230"
-#    And user fills kost level "SinggahSini"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see Konfirmasi Sisa Deposit button hidden
-#    And user click drop down bank name and choose one bank
-#    Then user see dropdown will be close
+	#input bank name in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-417 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Input Bank in name detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+
 #	#input nomer rekening in  pop up "Deposit for confirm to finance"
 #  @TEST_DOM-418 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNomorRekeningDetailEditDeposit @web @web-covered
 #  Scenario: [BackOffice][Search Contract][Edit Deposit] Input nomer rekening detail pop up

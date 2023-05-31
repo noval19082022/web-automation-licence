@@ -27,6 +27,8 @@ public class SearchContractPO {
     private Locator inputTextDetailKerusakan;
     private Locator seeLogBtn;
     private Locator akhiriContractButton;
+    private Locator bankNameText;
+    private Locator konfirmasiSisaDepoBtn;
     private Locator akhiriContractHead;
 
     public SearchContractPO(Page page) {
@@ -46,6 +48,8 @@ public class SearchContractPO {
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
+        bankNameText = page.locator("//div[@class='tools-contract__modal modal fade in']//select[@name='destination_bank']");
+        konfirmasiSisaDepoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Konfirmasi Sisa Deposit"));
         inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
     }
@@ -216,6 +220,33 @@ public class SearchContractPO {
             }
             page.waitForLoadState(LoadState.LOAD);
         }
+    }
+
+    /**
+     * choose bank aceh on edit deposit
+     */
+    public void chooseBankAceh(String bankName) {
+        bankNameText.click();
+        page.keyboard().type(bankName);
+        page.mouse().down();
+    }
+
+    /**
+     * check if bank name is exist on the detail edit deposit
+     * @param bankName
+     * @return string bank name
+     */
+    public String getTextBankOnEditDeposit(String bankName) {
+        return page.getByText(bankName).first().textContent();
+    }
+
+    /**
+     * check if sisa deposit button is disable
+     *
+     * @return boolean
+     */
+    public boolean isSisaDepositBtnDisable() {
+        return konfirmasiSisaDepoBtn.isDisabled();
     }
 
     /**

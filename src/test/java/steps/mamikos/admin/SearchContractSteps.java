@@ -66,6 +66,21 @@ public class SearchContractSteps {
         searchContract.inputDetailKerusakan(inputMorethan200);
     }
 
+    @And("admin want to choose {string} for transfer deposit")
+    public void chooseBank(String bankName) {
+        searchContract.chooseBankAceh(bankName);
+    }
+
+    @Then("admin see dropdown close and see bank {string}")
+    public void bank(String bankName) {
+        Assert.assertEquals(searchContract.getTextBankOnEditDeposit(bankName), bankName);
+    }
+
+    @Then("admin will see Konfirmasi Sisa Deposit button hidden")
+    public void sisaDepositBtn() {
+        Assert.assertTrue(searchContract.isSisaDepositBtnDisable());
+    }
+
     @Then("admin verify see text {string}")
     public void seeText(String text) {
         Assert.assertTrue(admin.getPopUpText(text), "Text " + text + " isn't exist");
