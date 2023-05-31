@@ -62,7 +62,6 @@ public class MamikosListInvoicePO {
     Locator firstInvoiceNumber;
     Locator rowListInvoiceNumber;
     Locator paidInvoiceList;
-    Locator Refund;
     Locator searchByDropdownlist;
     Locator searchRefund;
 
@@ -115,7 +114,6 @@ public class MamikosListInvoicePO {
         firstInvoiceNumber = page.locator("//tr[1]//td[2]");
         rowListInvoiceNumber = page.locator("//td[2]");
         paidInvoiceList = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Paid Invoice List "));
-        Refund = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Refund "));
         searchByDropdownlist = page.locator(".col-xs-2:nth-child(1) .filter-option");
         searchRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
     }
@@ -596,11 +594,11 @@ public class MamikosListInvoicePO {
     /**
      * user click paid invoice list and refund
      */
-    public void clickPaidInvoiceList() {
+    public void clickPaidInvoiceList(String invoiceList) {
         page.reload();
         playwright.hardWait(5);
         playwright.clickOn(paidInvoiceList);
-        playwright.clickOn(Refund);
+        playwright.clickOn(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(invoiceList)).nth(0));
     }
 
     /**

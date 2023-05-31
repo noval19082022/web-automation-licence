@@ -197,11 +197,6 @@ public class allInvoiceSteps {
         Assert.assertTrue(invoicePO.totalRowListInvoice() == input);
     }
 
-    @And("admin go to Paid Invoice list refund Page")
-    public void adminGoToPaidInvoiceListRefundPage() {
-        invoicePO.clickPaidInvoiceList();
-    }
-
     @And("user search by {string} and input field {string} refund menu")
     public void userSearchByAndInputFieldRefundMenu(String sortBy, String input) throws InterruptedException {
         invoicePO.selectFilterSearchBy(sortBy);
@@ -211,5 +206,10 @@ public class allInvoiceSteps {
     @Then("user see list in coloum kost detail with name kost {string}")
     public void userSeeListInColoumKostDetailWithNameKost(String kostName) {
         Assert.assertTrue(invoicePO.listInColoumKostDetail(kostName), "Error message is not equal to " + kostName);
+    }
+
+    @And("admin go to paid invoicr list {string}")
+    public void adminGoToPaidInvoicrList(String InvoiceList) {
+        invoicePO.clickPaidInvoiceList(InvoiceList);
     }
 }

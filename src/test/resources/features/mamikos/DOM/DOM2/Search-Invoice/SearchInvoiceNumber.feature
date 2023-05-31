@@ -249,6 +249,6 @@ Feature: search invoice
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin go to Paid Invoice list refund Page
+    And admin go to paid invoicr list "Refund"
     And user search by "Kost Name" and input field "kost payment automation casablanca campur" refund menu
     Then user see list in coloum kost detail with name kost "kost payment automation casablanca campur"
