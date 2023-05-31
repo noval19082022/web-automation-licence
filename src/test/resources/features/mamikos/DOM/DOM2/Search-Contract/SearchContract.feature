@@ -259,19 +259,20 @@ Feature: Search Contract
     Then admin will see Konfirmasi Sisa Deposit button hidden
     And admin input nama pemilik rekening on edit deposit page "Noval"
 
-#	#input detail kerusakan in  pop up "Deposit for confirm to finance"
-#  @TEST_DOM-412 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][Search Contract][Edit Deposit][kost SinggahSini] Admin See detail pop up
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "081280003230"
-#    And user fills kost level "SinggahSini"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see Konfirmasi Sisa Deposit button hidden
-#	#click button simpan draf detail pop up "Deposit for confirm to finance"
+	#input detail kerusakan in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-412 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit][kost SinggahSini] Admin See detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+
+	#click button simpan draf detail pop up "Deposit for confirm to finance"
 #  @TEST_DOM-735 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
 #  Scenario: [BackOffice][Search Contract][Edit deposit] click button simpan draf detail pop up
 #    Given user navigates to "backoffice"
