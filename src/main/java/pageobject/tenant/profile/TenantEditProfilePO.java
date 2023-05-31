@@ -24,6 +24,9 @@ public class TenantEditProfilePO {
     Locator emptyDataMessage;
     Locator closePopup;
     Locator ubahInformasiPenyewa;
+    Locator professionLainnya;
+    Locator lainnyaField;
+    Locator searchTextBoxOnEditProfile;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -38,10 +41,12 @@ public class TenantEditProfilePO {
         popUpDescriptionContent = page.locator("div[id='swal2-content']");
         okButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("OK"));
         simpanButton = page.locator(".hidden-xs.btn-primary");
-        searchTextBox = page.getByPlaceholder("Search");
+        searchTextBox = page.getByPlaceholder("Search").first();
         closePopup = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).first();
         ubahInformasiPenyewa = page.locator(".booking-form-tenant-info .booking-form-section__action .bg-c-text");
-
+        professionLainnya = page.locator("label").filter(new Locator.FilterOptions().setHasText("Lainnya"));
+        lainnyaField = page.getByTestId("jobDescription-input");
+        searchTextBoxOnEditProfile = page.getByTestId("inputProfession-jobDetailOptions").getByPlaceholder("Search");
     }
 
     /**
@@ -114,6 +119,7 @@ public class TenantEditProfilePO {
      */
     public void selectCompany(String companyName){
         Locator company = page.locator("//a[contains(.,'"+ companyName +"')]");
+        playwright.clickOn(universityOrProfessionDropdown);
         playwright.clickOn(company);
     }
 
@@ -139,7 +145,11 @@ public class TenantEditProfilePO {
      */
     public void clickOnAndFillDropdown(String textSearch){
         playwright.clickOn(universityOrProfessionDropdown);
-        searchTextBox.fill(textSearch);
+        if (playwright.waitTillLocatorIsVisible(searchTextBox, 1000.0)){
+            searchTextBox.fill(textSearch);
+        }else {
+            searchTextBoxOnEditProfile.fill(textSearch);
+        }
     }
 
     /**
@@ -171,11 +181,44 @@ public class TenantEditProfilePO {
 
 
     /**
-     * click on Propession button
+     * click on Profession button on form booking page
      *
      */
-    public void clickOnUbahProfesiToKaryawan(String profession) {
-        Locator professionRadio = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
-        professionRadio.click();
+    public void clickOnUbahProfessionTo(String profession) {
+        Locator professionRadioFormBooking = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
+        professionRadioFormBooking.click();
+    }
+
+    /**
+     * click on Profession button on edit profile page
+     *
+     */
+    public void clickOnUbahProfessionToOnEditProfile(String profession) {
+        Locator professionRadioEditProfile = page.locator("label").filter(new Locator.FilterOptions().setHasText(profession));
+        professionRadioEditProfile.click();
+    }
+
+    /**
+     * Click on radio lainnya
+     */
+    public void clickOnRadioLainnya() {
+        playwright.clickOn(professionLainnya);
+    }
+
+    /**
+     * Input value in Lainnya field
+     * @param lainnya
+     */
+    public void setLainnyaJobs (String lainnya) {
+        lainnyaField.fill(lainnya);
+    }
+
+    /**
+     * Select company or university
+     * @param valueInput String type company or university
+     */
+    public void selectValueDropdown(String valueInput){
+        Locator dropdownValue = page.locator("//a[contains(.,'"+ valueInput +"')]");
+        playwright.clickOn(dropdownValue);
     }
 }

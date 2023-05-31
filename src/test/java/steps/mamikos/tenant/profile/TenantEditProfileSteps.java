@@ -68,12 +68,24 @@ public class TenantEditProfileSteps {
 
     @And("user choose profession {string} on ubah informasi penyewa")
     public void userChooseProfessionOnUbahInformasiPenyewa(String profession) {
-        tenantEditProfile.clickOnUbahProfesiToKaryawan(profession);
+        tenantEditProfile.clickOnUbahProfessionTo(profession);
     }
 
     @When("user choose pekerjaan {string} from dropdown")
     public void userChoosePekerjaanFromDropdown(String company) {
-        tenantEditProfile.selectCompany(company);
+        tenantEditProfile.selectValueDropdown(company);
         tenantEditProfile.clickONSaveButton();
+    }
+
+    @And("tenant choose profession as lainnya at {string}")
+    public void tenantChooseProfessionAsLainnyaAt(String jobs) {
+        tenantEditProfile.clickOnRadioLainnya();
+        tenantEditProfile.setLainnyaJobs(jobs);
+        tenantEditProfile.clickONSaveButton();
+    }
+
+    @And("user choose profession {string} on edit profile page")
+    public void userChooseProfessionOnEditProfilePage(String profession) {
+        tenantEditProfile.clickOnUbahProfessionToOnEditProfile(profession);
     }
 }
