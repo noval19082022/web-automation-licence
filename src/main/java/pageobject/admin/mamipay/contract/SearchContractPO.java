@@ -28,6 +28,7 @@ public class SearchContractPO {
     private Locator seeLogBtn;
     private Locator akhiriContractButton;
     private Locator akhiriContractHead;
+    Locator searchTextBox;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -48,6 +49,7 @@ public class SearchContractPO {
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
         inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
+        searchTextBox = page.locator("input[name='search_value']");
     }
 
     /**
@@ -218,6 +220,29 @@ public class SearchContractPO {
         }
     }
 
+    /**
+     * Select Filter Search By
+     *
+     * @param filterText
+     * @throws InterruptedException
+     */
+    public void selectFilterSearchBy(String filterText) throws InterruptedException {
+        playwright.clickOn(page.locator("select[name=search_by]"));
+        page.keyboard().type(filterText);
+        page.keyboard().down("Enter");
+    }
+
+    /**
+     * Enter Search Text in to Search box
+     *
+     * @param searchText search text
+     * @throws InterruptedException
+     */
+    public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
+        playwright.clickOn(page.locator("input[name=search_value]"));
+        page.keyboard().type(searchText);
+
+    }
     /**
      * Click on batalkan kontrak on admin pay if kontrak is exist
      */
