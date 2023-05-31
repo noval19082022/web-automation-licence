@@ -223,9 +223,10 @@ public class SearchContractPO {
     }
 
     /**
-     * choose bank aceh on edit deposit
+     * choose bank on edit deposit page
+     * @param bankName
      */
-    public void chooseBankAceh(String bankName) {
+    public void chooseBankOnEditDepositPage(String bankName) {
         bankNameText.click();
         page.keyboard().type(bankName);
         page.mouse().down();
@@ -238,6 +239,15 @@ public class SearchContractPO {
      */
     public String getTextBankOnEditDeposit(String bankName) {
         return page.getByText(bankName).first().textContent();
+    }
+
+    /**
+     * input rekening number on edit deposit page
+     * @param rekening
+     */
+    public void inputRekeningOnEditDepositPage(String rekening) {
+        page.getByRole(AriaRole.SPINBUTTON).click();
+        page.keyboard().type(rekening);
     }
 
     /**

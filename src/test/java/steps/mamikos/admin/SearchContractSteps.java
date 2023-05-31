@@ -68,7 +68,12 @@ public class SearchContractSteps {
 
     @And("admin want to choose {string} for transfer deposit")
     public void chooseBank(String bankName) {
-        searchContract.chooseBankAceh(bankName);
+        searchContract.chooseBankOnEditDepositPage(bankName);
+    }
+
+    @And("admin input nomor rekening on edit deposit page {string}")
+    public void inputRekening(String rekening) {
+        searchContract.inputRekeningOnEditDepositPage(rekening);
     }
 
     @Then("admin see dropdown close and see bank {string}")
