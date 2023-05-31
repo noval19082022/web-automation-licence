@@ -81,6 +81,11 @@ public class SearchContractSteps {
         searchContract.inputRekeningNameOnEditDepositPage(rekeningName);
     }
 
+    @And("admin input transfer date on edit deposit page {string}")
+    public void inputDate(String date) {
+        searchContract.inputTransferDateOnEditDepositPage(date);
+    }
+
     @Then("admin see dropdown close and see bank {string}")
     public void bank(String bankName) {
         Assert.assertEquals(searchContract.getTextBankOnEditDeposit(bankName), bankName);
@@ -125,6 +130,11 @@ public class SearchContractSteps {
     @And("admin input biaya kerusakan {string}")
     public void biayaKerusakan(String biayaKerusakan) {
         admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
+    }
+
+    @And("admin want to simpan draft edit deposit")
+    public void adminWantToSimpanDraftEditDeposit() {
+        searchContract.simpanDraftEditDeposit();
     }
 
     @Then("admin will see additional notes menu deposit")

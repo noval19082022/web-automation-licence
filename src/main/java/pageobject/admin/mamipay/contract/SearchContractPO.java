@@ -260,6 +260,22 @@ public class SearchContractPO {
     }
 
     /**
+     * input transfer date on edit deposit page
+     * @param date
+     */
+    public void inputTransferDateOnEditDepositPage(String date) {
+        page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("input[name='transfer_due_date']").click();
+        page.keyboard().type(date);
+    }
+
+    /**
+     * click on simpan draft on edit deposit page
+     */
+    public void simpanDraftEditDeposit() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan Draf")).click();
+    }
+
+    /**
      * check if sisa deposit button is disable
      *
      * @return boolean

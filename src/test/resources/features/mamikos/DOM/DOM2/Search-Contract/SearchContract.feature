@@ -272,20 +272,23 @@ Feature: Search Contract
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
 
-	#click button simpan draf detail pop up "Deposit for confirm to finance"
-#  @TEST_DOM-735 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
-#  Scenario: [BackOffice][Search Contract][Edit deposit] click button simpan draf detail pop up
-#    Given user navigates to "backoffice"
-#    When user login  as a Admin via credentials
-#    And user click on Search Contract Menu form left bar
-#    Then user Navigate "Search Contract" page
-#    And user search by "Renter Phone Number" and input field "081280003230"
-#    And user fills kost level "SinggahSini"
-#    And user click search button
-#    And user click edit deposit button
-#    Then user will see Konfirmasi Sisa Deposit button hidden
-#    And user input nomor rekening "1550000036"
-#    And user input nama pemilik rekening "Noval"
-#    And user input transfer date
-#    And user click on simpan Draft button
-#    Then user will see message "Berhasil disimpan sebagai draf"
+#	click button simpan draf detail pop up "Deposit for confirm to finance"
+  @TEST_DOM-735 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit deposit] click button simpan draf detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+    And admin input nomor rekening on edit deposit page "1550000036"
+    And admin input nama pemilik rekening on edit deposit page "Noval"
+    And admin input transfer date on edit deposit page "2022-02-02"
+    And admin input detail kerusakan "rusak" on edit deposit page
+    And admin want to simpan draft edit deposit
+    Then admin will see detail pop up "Berhasil disimpan sebagai draf"
