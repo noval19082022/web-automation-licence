@@ -1,4 +1,4 @@
-@BBM811 @validationJobs
+@BBM8 @validationJobs
 Feature: Edit profile for jobs as Lainnya
 
   @TEST_BBM-1513 @continue
