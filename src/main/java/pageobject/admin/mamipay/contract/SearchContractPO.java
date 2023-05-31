@@ -251,6 +251,15 @@ public class SearchContractPO {
     }
 
     /**
+     * input rekening name on edit deposit page
+     * @param rekeningName
+     */
+    public void inputRekeningNameOnEditDepositPage(String rekeningName) {
+        page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("input[name='destination_name']").click();
+        page.keyboard().type(rekeningName);
+    }
+
+    /**
      * check if sisa deposit button is disable
      *
      * @return boolean

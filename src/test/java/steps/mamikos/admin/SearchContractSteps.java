@@ -76,6 +76,11 @@ public class SearchContractSteps {
         searchContract.inputRekeningOnEditDepositPage(rekening);
     }
 
+    @And("admin input nama pemilik rekening on edit deposit page {string}")
+    public void inputRekname(String rekeningName) {
+        searchContract.inputRekeningNameOnEditDepositPage(rekeningName);
+    }
+
     @Then("admin see dropdown close and see bank {string}")
     public void bank(String bankName) {
         Assert.assertEquals(searchContract.getTextBankOnEditDeposit(bankName), bankName);
