@@ -137,7 +137,7 @@ public class MamiPoinOwnerPO {
 
     /**
      * Get text total potongan mamipoin
-     * @return String total potongan mamipoin
+     * @return int total potongan mamipoin
      */
     public int getTotalDiscountMamipoinText() {
         return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
