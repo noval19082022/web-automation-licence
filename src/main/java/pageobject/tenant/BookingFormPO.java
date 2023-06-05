@@ -6,7 +6,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import java.awt.*;
 import java.nio.file.Paths;
 
 public class BookingFormPO {
