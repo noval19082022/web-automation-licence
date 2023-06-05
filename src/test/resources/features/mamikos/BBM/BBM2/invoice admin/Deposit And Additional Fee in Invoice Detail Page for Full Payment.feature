@@ -46,7 +46,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment

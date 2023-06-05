@@ -85,3 +85,14 @@ Feature: Add Owner Expenditure
       | Perlengkapan Dapur                          |
       | Perlengkapan Kebersihan Kos                 |
       | Lainnya                                     |
+
+  @TEST_PMAN-6314 @pman-prod
+  Scenario: Nama Pengeluaran Validation
+    When admin tambah data owner expenditure
+    And admin fill biaya pengeluaran except nama pengeluaran
+    Then tambah pengeluaran button should be disabled
+    When admin fill nama pengeluaran "Gaji Penjaga"
+    Then tambah pengeluaran button should be enable
+    When admin fill nama pengeluaran more than 50 characters
+    Then nama pengeluaran should be only contains 50 characters
+    And tambah pengeluaran button should be enable

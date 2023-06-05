@@ -6,7 +6,7 @@ Feature: BnB feature with background booking kost - reject booking
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000090   | 0890867321212 | qwerty123     |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
     And tenant search kost then go to kost details:

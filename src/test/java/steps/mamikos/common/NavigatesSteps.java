@@ -32,11 +32,6 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
     }
 
-    @Given("admin navigates to Goldplus Testing Tools")
-    public void adminNavigatesToGoldplusTestingTools() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
-    }
-
     @When("admin navigates to Admin Goldplus Package")
     public void adminNavigatesToAdminGoldplusPackage() {
         playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
@@ -87,8 +82,8 @@ public class NavigatesSteps {
 
     }
 
-    @When("tenant navigate to riwayat booking")
-    public void tenantNavigateToRiwayatBooking() {
+    @When("tenant navigate to riwayat and draf booking")
+    public void tenantNavigateToRiwayatAndDrafBooking() {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
@@ -189,5 +184,11 @@ public class NavigatesSteps {
     @When("admin navigates to Search Invoice Page")
     public void adminNavigatesToSearchInvoicePage() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.SEARCH_INVOICE);
+    }
+
+    @And("tenant navigate to riwayat kos page")
+    public void tenantNavigateToRiwayatKosPage() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_KOST, 30000.0, LoadState.LOAD);
     }
 }

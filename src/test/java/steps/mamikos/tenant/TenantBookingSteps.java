@@ -126,6 +126,7 @@ public class TenantBookingSteps {
             bookingForm.clickOnBookingConfirmationCheckmark();
             successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
         } else if (bookingTime.equalsIgnoreCase("Tomorrow")){
+            kostDetail.dismissFTUE();
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
@@ -207,6 +208,7 @@ public class TenantBookingSteps {
     public void userClickOnDraftMenu() {
         kostDetail.clickOnDraftMenu();
     }
+
     @And("user click delete button on tab one draft booking")
     public void userClickDeleteButtonOnTabOneDraftBooking() {
         kostDetail.clickDeleteButtonOnTabOneDraftBooking();
@@ -217,4 +219,9 @@ public class TenantBookingSteps {
         kostDetail.clickMauCobaDongSectionAtHomepage();
     }
 
+    @Then("user can see validation on jobs with {string}")
+    public void userCanSeeValidationOnJobsWith(String messsageRequired) {
+        bookingForm.clickOnAjukanSewaButton();
+        Assert.assertEquals(bookingForm.getAlertJobsTextAfterClick(), messsageRequired, "text not same in the display");
+    }
 }

@@ -373,17 +373,17 @@ public class InvoicePO {
     }
 
     /**
-     * Choose OVO as payment
-     */
-    public void clickOnOVO() {
-        playwright.clickOn(txtOVO);
-    }
-
-    /**
-     * Input phone number ovo
+     * payment using ovo as payment method
      * @param number phone number ovo
      */
-    public void inputPhoneNumberOvo(String number) {
+    public void paymentOVO(String number){
+        clickOnPilihPembayaran();
+        playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
+        playwright.hardWait(5);
+        playwright.clickOnText("Saya Sudah Bayar");
+        page.reload();
     }
+
 }

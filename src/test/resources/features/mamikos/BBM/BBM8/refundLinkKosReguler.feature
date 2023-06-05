@@ -1,4 +1,4 @@
-@BBM81
+@BBM8
 Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar 2)
 
   @TEST_BBM-42
@@ -7,7 +7,7 @@ Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar
     When user login as tenant via phone number:
       | phone stag    |  phone prod     | password  |
       | 089000000611  |  089000000611   | qwerty123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant click button lihat selengkapnya riwayat booking
     And user click on link refund
     And tenant set active page to 1

@@ -28,4 +28,9 @@ public class OwnerDashboardSteps {
     public void userClickOnWidgetPenyewa() {
 
     }
+
+    @When("user click mamipoin in owner's menu")
+    public void user_click_mamipoin_in_owner_s_menu() {
+        ownerDashboardPO.clickMamipoinButton();
+    }
 }
