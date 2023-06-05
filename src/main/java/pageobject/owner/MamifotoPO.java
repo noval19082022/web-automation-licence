@@ -64,12 +64,15 @@ public class MamifotoPO {
     Locator titleAlreadyPaid;
     Locator subTitleAlreadyPaid;
     Locator backIconPembelianMamifoto;
+    Locator buttonHubungiKami;
+
 
     //Locator Invoice Expired Mamifoto
     Locator titleInvoiceExpired;
     Locator buttonBackInvoiceExpired;
 
-
+    //Locator CS Web Mamikos
+    Locator titleCSMamikos;
 
 
 
@@ -105,12 +108,12 @@ public class MamifotoPO {
         this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
         this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
         this.succsesPaymentTextMamifoto = page.getByText("MamiFoto A Non GP Pembayaran Berhasil");
-        this.seeDetailTransactionMamifoto =   page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^MamiFoto A Non GP Pembayaran Berhasil Rp650\\.000 Lihat Detail Transaksi$"))).locator("button");
+        this.seeDetailTransactionMamifoto =  page.getByRole(AriaRole.BUTTON).nth(1);
         this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
         this.titleAlreadyPaid =  page.getByText("Pembayaran Telah Lunas");
         this.subTitleAlreadyPaid = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi untuk membuat janji dengan fotografer. J");
         this.backIconPembelianMamifoto = page.getByTestId("back-button");
-        this.seeDetailTransactionProphoto = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Pro Photo Pembayaran Berhasil Rp1\\.000\\.000 Lihat Detail Transaksi$"))).locator("button");
+        this.seeDetailTransactionProphoto = page.getByRole(AriaRole.BUTTON).nth(0);
         this.succsesPaymentTextProphoto = page.getByText("Pro Photo Pembayaran Berhasil");
         this.tabDalamProsesMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Dalam Proses"));
         this.doesntHaveTransactionText = page.getByText("Belum Ada Transaksi");
@@ -119,6 +122,8 @@ public class MamifotoPO {
         this.seeDetailTransactionExpired = page.getByText("Lihat Detail Transaksi").first();
         this.titleInvoiceExpired = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Invoice Kedaluwarsa"));
         this.buttonBackInvoiceExpired = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
+        this.buttonHubungiKami =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami"));
+        this.titleCSMamikos =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS"));
 
     }
 
@@ -166,7 +171,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getKinerjaTitle() throws InterruptedException {
+    public String getKinerjaTitle() {
         return playwright.getText(titleTingkatkanKinerja);
     }
 
@@ -175,7 +180,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getKinerjaSubTitle() throws InterruptedException {
+    public String getKinerjaSubTitle()  {
         return playwright.getText(subtitleTingkatkanKinerja);
     }
 
@@ -184,7 +189,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getMamifotoInfoUntukAndaText() throws InterruptedException {
+    public String getMamifotoInfoUntukAndaText()  {
         return playwright.getText(mamifotoInfoUntukAnda);
     }
 
@@ -307,7 +312,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getMamifotoInfoUntukAndaNonPropertyText() throws InterruptedException {
+    public String getMamifotoInfoUntukAndaNonPropertyText()  {
         return playwright.getText(mamiFotoInfoUntukAndaNonProperty);
     }
 
@@ -347,7 +352,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getSuccsessTransactioMamifotoText() throws InterruptedException {
+    public String getSuccsessTransactioMamifotoText()  {
         return playwright.getText(succsesPaymentTextMamifoto);
     }
 
@@ -372,7 +377,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getStatusPembelianTitleText() throws InterruptedException {
+    public String getStatusPembelianTitleText() {
         return playwright.getText(titleAlreadyPaid);
     }
 
@@ -381,7 +386,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getStatusPembelianSubTitleText() throws InterruptedException {
+    public String getStatusPembelianSubTitleText()  {
         return playwright.getText(subTitleAlreadyPaid);
     }
 
@@ -393,16 +398,17 @@ public class MamifotoPO {
         return page.url();
     }
 
+
     /**
      * Click on Hubungi Kami button and check redirection
      */
     public void clickOnContactUsMamifoto() {
 
-        Page page1 = page.waitForPopup(() -> {
-            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami")).click();
+        page.waitForPopup(() -> {
+            buttonHubungiKami.click();
         });
 
-        page1.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS")).isVisible();
+        titleCSMamikos.isVisible();
     }
 
     /**
@@ -424,7 +430,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getSuccsessTransactioProphotoText() throws InterruptedException {
+    public String getSuccsessTransactioProphotoText(){
         return playwright.getText(succsesPaymentTextProphoto);
     }
 
@@ -433,7 +439,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getDoesntHaveTransactionText() throws InterruptedException {
+    public String getDoesntHaveTransactionText(){
         return playwright.getText(doesntHaveTransactionText);
     }
 
@@ -442,7 +448,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getDoesntHaveTransactionDescText() throws InterruptedException {
+    public String getDoesntHaveTransactionDescText(){
         return playwright.getText(doesntHaveTransactionDescText);
     }
 
@@ -465,7 +471,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getTextTransactionMamifotoExpired() throws InterruptedException {
+    public String getTextTransactionMamifotoExpired() {
         return playwright.getText(expiredPaymentMamifotoText);
     }
 
@@ -474,7 +480,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getTextInvoiceExpiredTitle() throws InterruptedException {
+    public String getTextInvoiceExpiredTitle() {
         return playwright.getText(titleInvoiceExpired);
     }
 
