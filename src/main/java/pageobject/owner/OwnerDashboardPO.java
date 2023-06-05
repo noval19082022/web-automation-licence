@@ -3,7 +3,6 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 import pageobject.owner.kelolatagihan.PengajuanBookingPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;

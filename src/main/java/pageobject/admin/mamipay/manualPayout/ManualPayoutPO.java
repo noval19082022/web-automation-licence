@@ -3,8 +3,6 @@ package pageobject.admin.mamipay.manualPayout;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import data.mamikos.Mamikos;
-import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 

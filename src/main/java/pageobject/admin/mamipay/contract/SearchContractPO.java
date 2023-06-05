@@ -4,10 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
-import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
 
 public class SearchContractPO {
     private Page page;
@@ -30,6 +27,7 @@ public class SearchContractPO {
     private Locator bankNameText;
     private Locator konfirmasiSisaDepoBtn;
     private Locator akhiriContractHead;
+    private Locator callout;
     Locator searchTextBox;
 
     public SearchContractPO(Page page) {
@@ -54,6 +52,7 @@ public class SearchContractPO {
         inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
         searchTextBox = page.locator("input[name='search_value']");
+        callout = page.locator(".callout");
     }
 
     /**
@@ -194,6 +193,22 @@ public class SearchContractPO {
     }
 
     /**
+     * Wait for callout messagge to be visible
+     * @return visible true otherwise false
+     */
+    public boolean waitForCalloutMessage() {
+        return playwright.waitTillLocatorIsVisible(callout);
+    }
+
+    /**
+     * Get callout text
+     * @return String data type
+     */
+    public String getCalloutText() {
+        return playwright.getText(callout);
+    }
+
+    /**
      * Get success terminate heading text
      *
      * @return String data type
@@ -208,20 +223,11 @@ public class SearchContractPO {
      */
     public void clickOnAkhiriContractButton() {
         page.waitForLoadState(LoadState.LOAD);
-        if (akhiriContractLink.isVisible()) {
-            playwright.acceptDialog(akhiriContractLink);
-        } else if (akhiriContractButton.isVisible()) {
-            playwright.clickOn(akhiriContractButton);
-            inputTerminateDate.fill(JavaHelpers.getCurrentDateOrTime("dd-MM-yyyy HH:mm:ss"));
-            playwright.forceClickOn(akhiriContractHead);
-            List<Locator> akhiriContractButtonList = akhiriContractButton.all();
-            for (Locator akhiriButton : akhiriContractButtonList) {
-                if (akhiriButton.isVisible() && akhiriButton.isEnabled()) {
-                    playwright.clickOn(akhiriButton);
-                }
-            }
-            page.waitForLoadState(LoadState.LOAD);
+        if (playwright.waitTillLocatorIsVisible(akhiriContractButton)) {
+            playwright.forceClickOn(akhiriContractButton);
+            playwright.forceClickOn(akhiriContractLink);
         }
+        page.waitForLoadState(LoadState.LOAD);
     }
 
     /**
@@ -309,7 +315,7 @@ public class SearchContractPO {
         page.keyboard().type(searchText);
 
     }
-    
+
     /**
      * Click on batalkan kontrak on admin pay if kontrak is exist
      */

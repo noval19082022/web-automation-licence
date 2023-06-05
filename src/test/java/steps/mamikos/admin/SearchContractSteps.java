@@ -169,8 +169,8 @@ public class SearchContractSteps {
 
     @Then("admin should success terminate contract")
     public void adminShouldSuccessTerminateContract() {
-        if (searchContract.waitUntilSuccessTerminateVisible()) {
-            Assert.assertEquals(searchContract.getSuccessTerminateHeadingText().trim(), "Kontrak berhasil diakhiri.");
+        if (searchContract.waitForCalloutMessage()) {
+            Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
         }
     }
 

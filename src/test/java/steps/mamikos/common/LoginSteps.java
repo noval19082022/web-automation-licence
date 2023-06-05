@@ -13,7 +13,6 @@ import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
-import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.TenantLoginPO;

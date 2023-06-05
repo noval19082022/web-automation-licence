@@ -1,14 +1,12 @@
 package pageobject.pms.otherTransaction;
 
 import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Mouse;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
 import java.nio.file.Paths;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.setDefaultAssertionTimeout;
 
 public class AddOwnerExpenditurePO {
 
