@@ -173,4 +173,24 @@ public class AddOwnerExpenditureSteps {
         String expected = "Lorem ipsum dolor sit amet, consectetur adipiscing";
         add.assertNamaPengeluaran(expected);
     }
+    @When("admin fill biaya pengeluaran except kuantitas")
+    public void admin_fill_biaya_pengeluaran_except_kuantitas() {
+        add.setKategoriPengeluaran("Amenities Penyewa","1");
+        add.setNamaPengeluaran("Token Listrik","1");
+        add.setNominalPengeluaran("20000","1");
+        add.setStatusPersediaan("Stock","1");
+        add.setJenisProduk("LSSS","1");
+    }
+    @When("admin fill kuantitas {string}")
+    public void admin_fill_kuantitas(String qty) {
+        add.setKuantitas(qty,"1");
+    }
+    @Then("kuantitas field value should be {string}")
+    public void kuantitas_field_value_should_be(String qty) {
+        add.assertKuantitasValue(qty);
+    }
+    @Then("kuantitas field value should be empty")
+    public void kuantitas_field_value_should_be_empty() {
+        add.assertKuantitasValue("empty");
+    }
 }
