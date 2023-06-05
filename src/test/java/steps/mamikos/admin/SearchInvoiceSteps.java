@@ -2,10 +2,8 @@ package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;

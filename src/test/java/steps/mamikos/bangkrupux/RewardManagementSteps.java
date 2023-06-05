@@ -7,7 +7,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.admin.mamipay.bangkrupux.BlacklistUserPO;
 import pageobject.admin.mamipay.bangkrupux.RewardManagementPO;
 import pageobject.common.HomePO;
 

@@ -2,11 +2,9 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.OwnerDashboardPO;
 import utilities.PlaywrightHelpers;
 
 public class CommonSteps {
