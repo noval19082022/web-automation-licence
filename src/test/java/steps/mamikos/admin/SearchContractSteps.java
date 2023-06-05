@@ -66,6 +66,36 @@ public class SearchContractSteps {
         searchContract.inputDetailKerusakan(inputMorethan200);
     }
 
+    @And("admin want to choose {string} for transfer deposit")
+    public void chooseBank(String bankName) {
+        searchContract.chooseBankOnEditDepositPage(bankName);
+    }
+
+    @And("admin input nomor rekening on edit deposit page {string}")
+    public void inputRekening(String rekening) {
+        searchContract.inputRekeningOnEditDepositPage(rekening);
+    }
+
+    @And("admin input nama pemilik rekening on edit deposit page {string}")
+    public void inputRekname(String rekeningName) {
+        searchContract.inputRekeningNameOnEditDepositPage(rekeningName);
+    }
+
+    @And("admin input transfer date on edit deposit page {string}")
+    public void inputDate(String date) {
+        searchContract.inputTransferDateOnEditDepositPage(date);
+    }
+
+    @Then("admin see dropdown close and see bank {string}")
+    public void bank(String bankName) {
+        Assert.assertEquals(searchContract.getTextBankOnEditDeposit(bankName), bankName);
+    }
+
+    @Then("admin will see Konfirmasi Sisa Deposit button hidden")
+    public void sisaDepositBtn() {
+        Assert.assertTrue(searchContract.isSisaDepositBtnDisable());
+    }
+
     @Then("admin verify see text {string}")
     public void seeText(String text) {
         Assert.assertTrue(admin.getPopUpText(text), "Text " + text + " isn't exist");
@@ -100,6 +130,11 @@ public class SearchContractSteps {
     @And("admin input biaya kerusakan {string}")
     public void biayaKerusakan(String biayaKerusakan) {
         admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
+    }
+
+    @And("admin want to simpan draft edit deposit")
+    public void adminWantToSimpanDraftEditDeposit() {
+        searchContract.simpanDraftEditDeposit();
     }
 
     @Then("admin will see additional notes menu deposit")
