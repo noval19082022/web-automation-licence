@@ -6,10 +6,12 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.awt.*;
 import java.nio.file.Paths;
 
 public class BookingFormPO {
     Page page;
+    PlaywrightHelpers playwright;
     Locator ajukanSewaButton;
     Locator bookingConfirmationCheckmark;
     Locator kirimPengajuanKePemilikButton;
@@ -25,9 +27,11 @@ public class BookingFormPO {
     Locator simpanButton;
     Locator closeBtn;
     Locator uploadDoc;
+    Locator alertTextAfterClick;
 
     public BookingFormPO(Page page) {
         this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
         this.ajukanSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
@@ -43,6 +47,7 @@ public class BookingFormPO {
         this.simpanButton = page.locator(".bg-c-button--secondary");
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.uploadDoc = page.locator("div").getByTestId("bookingDocumentUploader").first().locator("//input[@type='file']");
+        this.alertTextAfterClick = page.getByText("Masukkan pekerjaan untuk memproses pengajuan sewa.");
     }
 
     /**
@@ -205,4 +210,13 @@ public class BookingFormPO {
     public void clickSimpanButton() {
         simpanButton.click();
     }
+
+    /**
+     * get error alert on jobs after click
+     * @return String Masukkan pekerjaan untuk memproses pengajuan sewa.
+     */
+    public String getAlertJobsTextAfterClick() {
+        return alertTextAfterClick.textContent().trim();
+    }
+
 }

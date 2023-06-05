@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamiPoinOwnerPO;
 import utilities.PlaywrightHelpers;
@@ -44,5 +45,24 @@ public class MamiPoinOwnerSteps {
     @Then("user see status changed to {string}")
     public void user_see_status_changed_to_berhasil(String berhasilStatus) {
         Assert.assertEquals(mamipoinOwner.getDetailStatusText(), berhasilStatus, "status match!");
+    }
+
+    @When("user verify point is > {int}")
+    public void user_verify_point_is_bigger(Integer discountMamipoinOwner) {
+        Assert.assertTrue(mamipoinOwner.getMamipoinOwnerText() > discountMamipoinOwner);
+    }
+
+    @When("user verify point is < {int}")
+    public void user_verify_point_is_smaller(Integer discountMamipoinOwner) {
+        Assert.assertTrue(mamipoinOwner.getMamipoinOwnerText() < discountMamipoinOwner);
+    }
+    @And("user click toggle mamipoin")
+    public void user_click_toggle_mamipoin(){
+        mamipoinOwner.clickOnMamiPoinToggle();
+    }
+
+    @Then("user see total potongan mamipoin {int}")
+    public void user_see_total_potongan_mamipoin(int totalMamipoin) {
+        Assert.assertEquals(mamipoinOwner.getTotalDiscountMamipoinText(), totalMamipoin, "total discount mamipoint is not match");
     }
 }

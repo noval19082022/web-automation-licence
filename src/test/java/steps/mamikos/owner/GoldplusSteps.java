@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,14 +34,18 @@ public class GoldplusSteps {
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputGoldplusPhoneNumber(phoneNumber);
         playwright.clickOnTextButton("Reset");
+        Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
     }
 
     @When("user sets recurring for number {string}")
     public void user_sets_recurring_for_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputRecurringPhoneNumber(phoneNumber);
         playwright.clickOnTextButton("Create Recurring");
+        Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
 
         @Then("user verify list of Periode Berlangganan is appear")
@@ -107,7 +112,6 @@ public class GoldplusSteps {
 
     @When("owner wants to access goldplus dashboard")
     public void owner_wants_to_access_goldplus_dashboard(){
-        playwright.clickOnText("Nanti Saja");
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
     }
 

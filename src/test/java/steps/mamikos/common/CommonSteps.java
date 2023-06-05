@@ -23,7 +23,7 @@ public class CommonSteps {
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
     public void owner_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text));
+        Assert.assertTrue(playwright.isTextDisplayed(text,1000));
     }
 
     @Then("user/owner/tenant should not be able to see the text {string}")
