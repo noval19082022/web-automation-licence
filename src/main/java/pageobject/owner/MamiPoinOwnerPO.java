@@ -3,6 +3,7 @@ package pageobject.owner;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class MamiPoinOwnerPO {
@@ -17,6 +18,9 @@ public class MamiPoinOwnerPO {
     Locator finishButton;
     Locator lihatStatusButton;
     Locator berhasilStatusText;
+    Locator mamipoinOwnerText;
+    Locator mamipoinToggle;
+    Locator discountMamipoinText;
 
     public MamiPoinOwnerPO(Page page) {
         this.page = page;
@@ -30,6 +34,9 @@ public class MamiPoinOwnerPO {
         finishButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke"));
         lihatStatusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Status"));
         berhasilStatusText = page.locator("//span[.='Berhasil']");
+        mamipoinOwnerText = page.locator(".info-count");
+        mamipoinToggle =  page.getByRole(AriaRole.CHECKBOX);
+        discountMamipoinText = page.locator(".discount-text");
     }
 
     /**
@@ -108,4 +115,32 @@ public class MamiPoinOwnerPO {
     public String getDetailStatusText(){
         return playwright.getText(berhasilStatusText);
     }
+
+    /**
+     * Get value from mamipoin owner
+     *
+     * @return integer mamipoin owner
+     */
+    public int getMamipoinOwnerText(){
+        return JavaHelpers.extractNumber(playwright.getText(mamipoinOwnerText));
+    }
+
+    /**
+     * Click toggle mamipoin
+     *
+     */
+    public void clickOnMamiPoinToggle() {
+        playwright.hardWait(3000);
+        playwright.pageScrollUntilElementIsVisible(mamipoinToggle);
+        playwright.clickOn(mamipoinToggle);
+    }
+
+    /**
+     * Get text total potongan mamipoin
+     * @return int total potongan mamipoin
+     */
+    public int getTotalDiscountMamipoinText() {
+        return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
+    }
+
 }
