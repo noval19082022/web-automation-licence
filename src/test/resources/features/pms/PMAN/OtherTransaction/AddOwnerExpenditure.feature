@@ -96,3 +96,17 @@ Feature: Add Owner Expenditure
     When admin fill nama pengeluaran more than 50 characters
     Then nama pengeluaran should be only contains 50 characters
     And tambah pengeluaran button should be enable
+
+  @TEST_PMAN-6316 @pman-prod
+  Scenario: Nominal Pengeluaran Validation
+    When admin tambah data owner expenditure
+    #empty nominal
+    And admin fill biaya pengeluaran except nominal
+    Then tambah pengeluaran button should be disabled
+    #nominal pengeluaran 0
+    When admin fill biaya pengeluaran "0"
+    Then tambah pengeluaran button should be disabled
+    #valid nominal pengeluaran
+    When admin fill biaya pengeluaran "10000"
+    Then biaya pengeluaran value should be "10.000"
+    And tambah pengeluaran button should be enable

@@ -362,4 +362,12 @@ public class AddOwnerExpenditurePO {
     public void assertNamaPengeluaran(String expected) {
         assertThat(namaPengeluaran).hasValue(expected);
     }
+
+    /**
+     * Assert Biaya Pengeluaran value
+     * @param value expected biaya pengeluaran
+     */
+    public void assertBiayaPengeluaran(String value) {
+        assertThat(nominalPengeluaran).hasValue(value);
+    }
 }
