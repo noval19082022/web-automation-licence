@@ -138,11 +138,9 @@ public class SearchContractPO {
 
     /**
      * Wait until terminated is process is finished
-     *
      * @return
      */
     public boolean waitUntilSuccessTerminateVisible() {
-        playwright.waitFor(successTerminateText, 30000.0);
         return successTerminateText.isVisible();
     }
 
