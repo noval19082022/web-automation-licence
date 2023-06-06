@@ -193,4 +193,48 @@ public class AddOwnerExpenditureSteps {
     public void kuantitas_field_value_should_be_empty() {
         add.assertKuantitasValue("empty");
     }
+    @When("admin upload {string} attachment")
+    public void admin_upload_attachment(String format) {
+        add.uploadAttachment(format);
+    }
+    @When("admin delete attachment")
+    public void admin_delete_attachment() {
+        add.deleteAttachment();
+    }
+    @Then("{string} attachment should be uploaded")
+    public void attachment_should_be_uploaded(String format) {
+        String filename = "";
+        switch (format){
+            case "jpg":
+                filename = "ABY06593.jpg";
+                break;
+            case "jpeg":
+                filename = "ABY05305.jpeg";
+                break;
+            case "png":
+                filename = "BG_Anniv Mamikos ke7.png";
+                break;
+            case "pdf":
+                filename = "pdf example.pdf";
+                break;
+            case "jpg 8MB":
+                filename = "jpg8MB.jpg";
+                break;
+            case "pdf 8MB":
+                filename = "pdf8MB.pdf";
+                break;
+            default:
+                System.out.println("Invalid Format");
+        }
+        add.assertFileName(filename);
+        add.assertTrashIconVisible();
+    }
+    @Then("show upload attachment error message")
+    public void show_upload_attachment_error_message() {
+        add.assertAttachmentErrorMessage();
+    }
+    @When("admin upload invalid attachment")
+    public void admin_upload_invalid_attachment() {
+        add.uploadAttachment("svg");
+    }
 }
