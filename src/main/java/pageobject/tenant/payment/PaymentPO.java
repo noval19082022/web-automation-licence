@@ -64,10 +64,11 @@ public class PaymentPO {
         page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").click();
         page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").fill("1234");
         page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT").click();
-        PlaywrightHelpers pw = new PlaywrightHelpers(page1);
-        pw.hardWait(3_000);
-        String url = pw.getActivePageURL();
-        String urlPaymentSignature = url.replace("https://pay-jambu.kerupux.com/invoice/select-payment/", "https://pay-jambu.kerupux.com/invoice/success-payment/").replace("step=1", "step=3");
+        page1.waitForTimeout(3_000);
+        String urlPaymentSignature = page1.evaluate("window.location.href")
+                .toString()
+                .replace("https://pay-jambu.kerupux.com/invoice/select-payment/", "https://pay-jambu.kerupux.com/invoice/success-payment/")
+                .replace("step=1", "step=3");
         page1.navigate(urlPaymentSignature);
         page1.close();
     }
