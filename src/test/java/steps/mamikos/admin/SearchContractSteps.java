@@ -57,6 +57,11 @@ public class SearchContractSteps {
         searchContract.clickOnEditDepositButton();
     }
 
+    @And("admin want to extend contract")
+    public void extendContract() {
+        searchContract.clickOnExtendContractButton();
+    }
+
     @And("admin input detail kerusakan {string} on edit deposit page")
     public void inputDetailKerusakan(String text) {
         String inputMorethan200 = null;
