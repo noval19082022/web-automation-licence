@@ -2,14 +2,21 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
+import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
 public class CommonSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    TenantLoginPO users = new TenantLoginPO(page);
+    HomePO home = new HomePO(page);
+
 
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
@@ -31,4 +38,9 @@ public class CommonSteps {
         Assert.assertFalse(playwright.isTextDisplayed(text));
     }
 
+    @And("user/owner/tenant logs out")
+    public void userLogsOutAsTenant() {
+        playwright.navigateToAndWaitLocator(Mamikos.URL, home.getMamikosLogo());
+        users.logoutAsTenant();
+    }
 }
