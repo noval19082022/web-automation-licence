@@ -23,6 +23,7 @@ public class SearchContractPO {
     private Locator editDepositBtn;
     private Locator inputTextDetailKerusakan;
     private Locator seeLogBtn;
+    private Locator extendContractBtn;
     private Locator akhiriContractButton;
     private Locator bankNameText;
     private Locator konfirmasiSisaDepoBtn;
@@ -51,6 +52,7 @@ public class SearchContractPO {
         konfirmasiSisaDepoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Konfirmasi Sisa Deposit"));
         inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
+        extendContractBtn = page.locator("a").getByText("Extend Kontrak").first();
         searchTextBox = page.locator("input[name='search_value']");
         callout = page.locator(".callout");
     }
@@ -281,6 +283,13 @@ public class SearchContractPO {
      */
     public void simpanDraftEditDeposit() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan Draf")).click();
+    }
+
+    /**
+     * Click on extend contract btn
+     */
+    public void clickOnExtendContractButton() {
+        extendContractBtn.click();
     }
 
     /**
