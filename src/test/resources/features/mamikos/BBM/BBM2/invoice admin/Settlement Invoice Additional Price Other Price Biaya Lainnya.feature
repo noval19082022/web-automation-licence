@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_TENG-12 @TEST_TENG-9 @TEST_TENG-8 @lawackrun1
+@regression @BBM2 @TEST_TENG-12 @TEST_TENG-9 @TEST_TENG-8
 Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Admin Batalkan Contract
@@ -9,7 +9,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
       | 087708777618 | 087708777618 |
-    And admin terminate contract
+    And admin akhiri contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
