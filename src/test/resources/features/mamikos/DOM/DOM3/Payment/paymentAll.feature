@@ -59,3 +59,14 @@ Feature: Payment All
     And tenant select payment method BNI with VA number "9881012892202100" and amount "501000"
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see that the text "Pembayaran Berhasil" is displayed
+
+  @paymentCreditCard @TEST_DOM-573
+  Scenario: Tenant pay kos credit card
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method Credit Card
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see that the text "Pembayaran Berhasil" is displayed

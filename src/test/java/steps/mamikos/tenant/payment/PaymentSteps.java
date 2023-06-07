@@ -18,6 +18,11 @@ public class PaymentSteps {
         paymentPO.paymentUsingBNI(VA, amount);
     }
 
+    @And("tenant select payment method Credit Card")
+    public void tenantSelectPaymentMethodCreditCard() {
+        paymentPO.paymentUsingCC();
+    }
+
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);

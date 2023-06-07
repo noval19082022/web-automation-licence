@@ -42,6 +42,37 @@ public class PaymentPO {
     }
 
     /**
+     * Payment method using cc
+     */
+    public void paymentUsingCC() {
+        playwright.navigateTo(Mamikos.URL + "/user/booking", 30000.0, LoadState.LOAD);
+        Page page1 = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        });
+        page1.getByText("Pilih", new Page.GetByTextOptions().setExact(true)).click();
+        page1.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1).click();
+        page1.getByPlaceholder("0000 0000 0000 0000").click();
+        page1.keyboard().type("4000 0000 0000 1091");
+        page1.getByPlaceholder("MM").click();
+        page1.keyboard().type("12");
+        page1.getByPlaceholder("YY").click();
+        page1.keyboard().type("99");
+        page1.getByPlaceholder("000", new Page.GetByPlaceholderOptions().setExact(true)).click();
+        page1.keyboard().type("010");
+        page1.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        page1.waitForLoadState();
+        page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").click();
+        page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").fill("1234");
+        page1.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT").click();
+        PlaywrightHelpers pw = new PlaywrightHelpers(page1);
+        pw.hardWait(3_000);
+        String url = pw.getActivePageURL();
+        String urlPaymentSignature = url.replace("https://pay-jambu.kerupux.com/invoice/select-payment/", "https://pay-jambu.kerupux.com/invoice/success-payment/").replace("step=1", "step=3");
+        page1.navigate(urlPaymentSignature);
+        page1.close();
+    }
+
+    /**
      * it will navigate to detail invoice from riwayat booking after payment
      */
     public void seeInvoiceAfterPayment() {
