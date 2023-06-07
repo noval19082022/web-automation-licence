@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
-import pageobject.tenant.profile.RiwayatBookingPO;
 import pageobject.tenant.profile.RiwayatKostPO;
 import utilities.PlaywrightHelpers;
 

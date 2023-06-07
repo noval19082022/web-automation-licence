@@ -1,4 +1,4 @@
-@BBM2 @lawackrun
+@BBM2
 Feature: Additional Price Biaya Lainnya On Extended Invoice
 
   Scenario: Admin Batalkan Contract
@@ -8,22 +8,20 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
       | phone stag   | phone prod   |
-      | 087708777615 | 087708777615 |
+      | 087708777618 | 087708777618 |
     And admin akhiri contract
     Then admin should success terminate contract
 
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | 087708777618 | 087708777618 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
@@ -36,8 +34,8 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag        | tenant prod        |
-      | Hagaromo Otsutsuki | Hagaromo Otsutsuki |
+      | tenant stag      | tenant prod      |
+      | Nunu And Willump | Nunu And Willump |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking
@@ -60,7 +58,7 @@ Feature: Additional Price Biaya Lainnya On Extended Invoice
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin add additional price:
       | search by              | renter_phone_number      |
-      | search value           | 087708777615             |
+      | search value           | 087708777618             |
       | invoice number         | default                  |
       | additional price type  | default                  |
       | additional price title | Automation Biaya Lainnya |

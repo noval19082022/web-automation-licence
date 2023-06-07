@@ -200,7 +200,7 @@ public class KostDetailsPO {
         this.ftueSlider = playwright.locatorByRoleSetName(locator.roleButton, "Next slide");
         this.ftuePopUP = page.locator(".onboarding-ftue");
         this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
-        this.mulaiKosInput = page.locator(".booking-input-checkin__input-icon");
+        this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");

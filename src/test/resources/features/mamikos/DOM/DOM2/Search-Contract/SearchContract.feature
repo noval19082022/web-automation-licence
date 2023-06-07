@@ -177,3 +177,118 @@ Feature: Search Contract
     Given admin go to mamikos mamipay admin
     And admin search contract by "Renter Phone Number" and input field "081197878841"
     Then admin cancel contract
+
+        #admin cancel extend invoice
+  @TEST_DOM-413 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @cancelExtendContract @discovery-platform @web @web-covered
+  Scenario: [Backoffice][search contract] Cancel extend contract
+	#	aktivasi kontrak singgahsini
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to reactivate invoice by invoice number "69903537/2023/01/43864"
+
+   # see detail pop up
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod  |
+      | 081197878841 | 08119787884 |
+    And admin search contract by kost level "SinggahSini"
+    And admin akhiri contract
+    Then admin should success terminate contract
+
+  @TEST_DOM-401 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @seeDataContract @web @web-covered
+  Scenario: [Backoffice][search contract] see log detail data contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin want to see log contract
+    Then admin will see detail pop up "Data Contract"
+
+  @TEST_DOM-429 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit][kost APIK] See detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Edit Deposit for Confirm to Finance"
+
+	#input bank name in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-417 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Input Bank in name detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+
+	#input nomer rekening in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-418 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNomorRekeningDetailEditDeposit @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Input nomer rekening detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin input nomor rekening on edit deposit page "1550000036"
+
+	#input nama rekening in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-420 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNameRekeningDetailEditDeposit @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Input nama rekening detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin input nama pemilik rekening on edit deposit page "Noval"
+
+	#input detail kerusakan in  pop up "Deposit for confirm to finance"
+  @TEST_DOM-412 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit][kost SinggahSini] Admin See detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+
+#	click button simpan draf detail pop up "Deposit for confirm to finance"
+  @TEST_DOM-735 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
+  Scenario: [BackOffice][Search Contract][Edit deposit] click button simpan draf detail pop up
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+    And admin input nomor rekening on edit deposit page "1550000036"
+    And admin input nama pemilik rekening on edit deposit page "Noval"
+    And admin input transfer date on edit deposit page "2022-02-02"
+    And admin input detail kerusakan "rusak" on edit deposit page
+    And admin want to simpan draft edit deposit
+    Then admin will see detail pop up "Berhasil disimpan sebagai draf"

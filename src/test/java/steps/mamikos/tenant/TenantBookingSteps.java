@@ -130,9 +130,6 @@ public class TenantBookingSteps {
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
-          //  bookingForm.clickOnAjukanSewaButton();
-         //   bookingForm.clickOnBookingConfirmationCheckmark();
-         //   successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
         }
     }
 

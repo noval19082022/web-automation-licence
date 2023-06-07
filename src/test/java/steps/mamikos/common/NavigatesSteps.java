@@ -32,11 +32,6 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
     }
 
-    @Given("admin navigates to Goldplus Testing Tools")
-    public void adminNavigatesToGoldplusTestingTools() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
-    }
-
     @When("admin navigates to Admin Goldplus Package")
     public void adminNavigatesToAdminGoldplusPackage() {
         playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
