@@ -1,6 +1,6 @@
-@BBM8 @updateRoom
+@updateRoom
 Feature: [Detail Penyewa][Ubah Nomor Kamar]Update Room number
-
+#  sudah di remove
   @TEST_BBM-15
   Scenario: Update Room number with added room number from Tambah Kamar button
     Given user go to mamikos homepage
