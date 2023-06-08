@@ -210,4 +210,22 @@ public class AddOwnerExpenditureSteps {
     public void biaya_pengeluaran_value_should_be(String value) {
         add.assertBiayaPengeluaran(value);
     }
+    @When("admin add 30 pengeluaran")
+    public void admin_add_pengeluaran() {
+        for (int i=1;i<=30;i++){
+            add.setKategoriPengeluaran("Amenities Penyewa",String.valueOf(i));
+            add.setNamaPengeluaran("Sabun Mandi",String.valueOf(i));
+            add.setKuantitas("5",String.valueOf(i));
+            add.setNominalPengeluaran("50000",String.valueOf(i));
+            add.setStatusPersediaan("Non Stock",String.valueOf(i));
+            add.setJenisProduk("LSSS",String.valueOf(i));
+            if (i<30){
+                add.addMorePengeluaran();
+            }
+        }
+    }
+    @Then("admin can't add more pengeluaran")
+    public void admin_can_t_add_more_pengeluaran() {
+        add.assertTambahPengeluaranButtonDisable();
+    }
 }

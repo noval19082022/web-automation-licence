@@ -131,3 +131,9 @@ Feature: Add Owner Expenditure
     #valid nominal pengeluaran
     When admin fill biaya pengeluaran "10000"
     Then biaya pengeluaran value should be "10.000"
+
+  @TEST_PMAN-6538 @pman-prod
+  Scenario: Max 30 pengeluaran each Owner Expenditure
+    When admin tambah data owner expenditure
+    And admin add 30 pengeluaran
+    Then admin can't add more pengeluaran
