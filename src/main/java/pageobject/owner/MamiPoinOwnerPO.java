@@ -124,7 +124,6 @@ public class MamiPoinOwnerPO {
      * @return integer mamipoin owner
      */
     public int getMamipoinWidgetText(){
-        System.out.println(JavaHelpers.extractNumber(playwright.getText(mamipoinWidgetText)));
         return JavaHelpers.extractNumber(playwright.getText(mamipoinWidgetText));
     }
 
