@@ -8,18 +8,18 @@ Feature: Apply Voucher For Kost Type Premium
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant kost name:
-      | kostName stag          | kostName prod    |
-      | Kos Raya Gasim         | Kos Raya Gasim   |
-    And admin terminate contract
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod   |
+      | 083824996373 | 083824996373 |
+    And admin akhiri contract
     Then admin should success terminate contract
 
   @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                                  |  email prod                                  | password  |
-      | dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  |  dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag     |  phone prod     | password  |
+      | 083824996373   |  083824996373   | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -41,9 +41,9 @@ Feature: Apply Voucher For Kost Type Premium
   @continue
   Scenario: Tenant Apply Voucher for Kost Type Premium
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                                  |  email prod                                  | password  |
-      | dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  |  dorothy_ucqktkv_vijayvergiyaberg@tfbnw.net  | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag     |  phone prod     | password  |
+      | 083824996373   |  083824996373   | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
