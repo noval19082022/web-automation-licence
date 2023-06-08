@@ -33,4 +33,8 @@ public class CommonSteps {
         Assert.assertFalse(playwright.isTextDisplayed(text));
     }
 
+    @Then("user/owner/tenant go back to previous page")
+    public void user_go_back_to_previous_page(){
+        page.goBack();
+    }
 }
