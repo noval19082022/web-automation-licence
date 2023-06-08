@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import pageobject.tenant.payment.PaymentPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -386,4 +387,37 @@ public class InvoicePO {
         page.reload();
     }
 
+    /**
+     * select payment method using BNI
+     * @return PaymentPO with next active page
+     */
+    public PaymentPO paymentUsingBNI() {
+        page.getByText("Pilih", new Page.GetByTextOptions().setExact(true)).click();
+        page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        return new PaymentPO(page);
+    }
+
+    /**
+     * select payment method using kredit card
+     * @param ccNumber
+     * @param month
+     * @param years (2 digit)
+     * @param ccv
+     * @return PaymentPO with next active page
+     */
+    public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
+        page.getByText("Pilih", new Page.GetByTextOptions().setExact(true)).click();
+        page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1).click();
+        page.getByPlaceholder("0000 0000 0000 0000").click();
+        page.keyboard().type(ccNumber);
+        page.getByPlaceholder("MM").click();
+        page.keyboard().type(month);
+        page.getByPlaceholder("YY").click();
+        page.keyboard().type(years);
+        page.getByPlaceholder("000", new Page.GetByPlaceholderOptions().setExact(true)).click();
+        page.keyboard().type(ccv);
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        return new PaymentPO(page);
+    }
 }

@@ -58,7 +58,7 @@ Feature: Payment All
     And tenant navigate to riwayat and draf booking
     And tenant select payment method BNI with VA number "9881012892202100" and amount "501000"
     And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see that the text "Pembayaran Berhasil" is displayed
+    Then tenant will see payment is success
 
   @paymentCreditCard @TEST_DOM-573
   Scenario: Tenant pay kos credit card
@@ -67,6 +67,6 @@ Feature: Payment All
       | phone stag | phone prod   | password  |
       | 0892202100 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method Credit Card
+    And tenant select payment method Credit Card with cc number is "4000 0000 0000 1091", expired date month "12" years "99", and ccv is "010"
     And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see that the text "Pembayaran Berhasil" is displayed
+    Then tenant will see payment is success
