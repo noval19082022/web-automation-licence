@@ -96,3 +96,25 @@
       And admin edits Invoice Manual "Biaya Sewa" into Lainnya and checks them on the table
         | Nama Biaya  | Lainnya     | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table |
         | Lainnya     | Kebersihan  | tomorrow          | day after tomorrow  | -             | 30000         | Kebersihan          | tomorrow      | day after tomorrow  | Rp30.000              |
+
+    @TEST_PMAN-6575
+    Scenario: Lainnya Validation Biaya Sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And the admin creates Invoice Manual "Biaya Sewa" Lainnya
+      Then error message "Jenis invoice tidak sesuai. Pilih jenis invoice Biaya Tambahan untuk biaya ini." appear if user input Lainnya field :
+        | parkir                |
+        | tempat PArkIR         |
+        | sekamar berdua        |
+        | tamu menginap         |
+        | KeliStriKAN 21 hari   |
+        | air                   |
+        | wifi                  |
+        | KeLaUNDryaN           |
+        | deposit               |
+        | denda                 |
+        | KeKERUSAKANAN 21 hari |
+        | kehilangan            |
+        | asuransi              |

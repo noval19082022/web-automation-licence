@@ -173,6 +173,7 @@ public class AddOwnerExpenditureSteps {
         String expected = "Lorem ipsum dolor sit amet, consectetur adipiscing";
         add.assertNamaPengeluaran(expected);
     }
+
     @When("admin fill biaya pengeluaran except kuantitas")
     public void admin_fill_biaya_pengeluaran_except_kuantitas() {
         add.setKategoriPengeluaran("Amenities Penyewa","1");
@@ -192,6 +193,22 @@ public class AddOwnerExpenditureSteps {
     @Then("kuantitas field value should be empty")
     public void kuantitas_field_value_should_be_empty() {
         add.assertKuantitasValue("empty");
+    }
+    @When("admin fill biaya pengeluaran except nominal")
+    public void admin_fill_biaya_pengeluaran_except_nominal() {
+        add.setKategoriPengeluaran("Pembayaran Listrik","1");
+        add.setNamaPengeluaran("Token Listrik","1");
+        add.setKuantitas("2","1");
+        add.setStatusPersediaan("Non Stock","1");
+        add.setJenisProduk("LSSS","1");
+    }
+    @When("admin fill biaya pengeluaran {string}")
+    public void admin_fill_biaya_pengeluaran(String value) {
+        add.setNominalPengeluaran(value,"1");
+    }
+    @Then("biaya pengeluaran value should be {string}")
+    public void biaya_pengeluaran_value_should_be(String value) {
+        add.assertBiayaPengeluaran(value);
     }
     @When("admin upload {string} attachment")
     public void admin_upload_attachment(String format) {

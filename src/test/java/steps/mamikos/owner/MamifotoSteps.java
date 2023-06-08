@@ -7,13 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamifotoPO;
-import testdata.MamifotoTitle;
 import utilities.PlaywrightHelpers;
 
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamifotoPO mamifoto = new MamifotoPO (page);
+
 
 
     @When("owner click menu sidebar Mamifoto")
@@ -34,17 +34,14 @@ public class MamifotoSteps {
     }
 
     @Then("owner click section Tingkatkan Kinerja Kost")
-    public void owner_click_section_tingkatkan_kinerja_kost() throws InterruptedException {
-        MamifotoTitle.TitletingkatkanKinerja = mamifoto.getKinerjaTitle();
-        Assert.assertEquals(MamifotoTitle.TitletingkatkanKinerja,mamifoto.getKinerjaTitle());
-        MamifotoTitle.subTitleTingkatkan = mamifoto.getKinerjaSubTitle();
-        Assert.assertEquals(MamifotoTitle.subTitleTingkatkan,mamifoto.getKinerjaSubTitle());
+    public void owner_click_section_tingkatkan_kinerja_kost()  {
+        Assert.assertEquals(mamifoto.getKinerjaTitle(),mamifoto.getKinerjaTitle(),"text doesnt match");
+        Assert.assertEquals(mamifoto.getKinerjaSubTitle(),mamifoto.getKinerjaSubTitle(),"text doesnt match");
         mamifoto.clickOnSewaMamifoto();
     }
     @Then("owner click info untuk anda for mamifoto")
-    public void owner_click_info_untuk_anda_for_mamifoto() throws InterruptedException {
-       MamifotoTitle.MamifotoInfoUntukAnda = mamifoto.getMamifotoInfoUntukAndaText();
-       Assert.assertEquals(MamifotoTitle.MamifotoInfoUntukAnda,mamifoto.getMamifotoInfoUntukAndaText());
+    public void owner_click_info_untuk_anda_for_mamifoto()  {
+       Assert.assertEquals(mamifoto.getMamifotoInfoUntukAndaText(),mamifoto.getMamifotoInfoUntukAndaText(),"text doesnt match");
        mamifoto.clickOnMamifotoInfoUntukAnda();
     }
     @When("owner click Lihat Paket button")
@@ -96,9 +93,82 @@ public class MamifotoSteps {
     }
 
     @Then("owner click info untuk anda for mamifoto non property")
-    public void owner_click_info_untuk_anda_for_mamifoto_non_property() throws InterruptedException {
-        MamifotoTitle.MamifotoInfoUntukAnda = mamifoto.getMamifotoInfoUntukAndaNonPropertyText();
-        Assert.assertEquals(MamifotoTitle.MamifotoInfoUntukAnda,mamifoto.getMamifotoInfoUntukAndaNonPropertyText());
+    public void owner_click_info_untuk_anda_for_mamifoto_non_property() {
+        Assert.assertEquals(mamifoto.getMamifotoInfoUntukAndaNonPropertyText(),mamifoto.getMamifotoInfoUntukAndaNonPropertyText(),"text doenst match");
         mamifoto.clickOnMamifotoInfoUntukAndaNonProperty();
+    }
+
+    @Then("owner click riwayat paket button")
+    public void owner_click_riwayat_paket_button() {
+        mamifoto.clickOnRiwayatPaketMamifoto();
+    }
+
+    @Then("owner see Riwayat MamiFoto purchase page")
+    public void owner_see_riwayat_mami_foto_purchase_page() {
+        Assert.assertTrue(mamifoto.mamifotoHeaderHistoryisAppear(),"Riwayat Pembelian Mamifoto does'nt appear!");
+    }
+
+    @When("owner click tab Selesai at riwayat page")
+    public void owner_click_tab_selesai_at_riwayat_page() {
+        mamifoto.clickOnTabSelesaiMamifoto();
+
+    }
+
+    @When("owner click Lihat Detail Transaksi with status {string}")
+    public void owner_click_lihat_detail_transaksi_with_status(String status)  {
+        Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
+        mamifoto.clickOnSeeDetailTransactionMamifoto();
+    }
+
+    @Then("owner see status pembelian page")
+    public void owner_see_status_pembelian_page()  {
+       Assert.assertTrue(mamifoto.mamifotoHeaderStatusPembelianisAppear(),"Status Pembelian page doesnt appear");
+       Assert.assertEquals(mamifoto.getStatusPembelianTitleText(),mamifoto.getStatusPembelianTitleText(),"Title doesnt match");
+       Assert.assertEquals(mamifoto.getStatusPembelianSubTitleText(),mamifoto.getStatusPembelianSubTitleText(),"title doesnt match");
+    }
+
+    @When("click Hubungi Kami button")
+    public void click_hubungi_kami_button()  {
+      mamifoto.clickOnContactUsMamifoto();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
+
+    @Then("owner connected to WA CS Mamikos {string}")
+    public void owner_connected_to_wa_cs_mamikos(String url) {
+        mamifoto = new MamifotoPO(ActiveContext.getActivePage());
+        Assert.assertTrue(mamifoto.getURL().contains(url), "URL doesn't match");
+        page.bringToFront();
+
+    }
+
+    @When("owner click Lihat Detail Transaksi old Pro Photo with status {string}")
+    public void owner_click_lihat_detail_transaksi_old_pro_photo_with_status(String status) {
+        mamifoto.clicOnIconBackSuccsessPaymentMamifoto();
+        Assert.assertEquals(mamifoto.getSuccsessTransactioProphotoText(),status,"Text doesn't match");
+        mamifoto.clickOnSeeDetailTransactionProphoto();
+    }
+
+    @When("owner click tab Dalam Proses at riwayat page")
+    public void owner_click_tab_dalam_proses_at_riwayat_page() {
+        mamifoto.clicOnTabDalamProsesMamifoto();
+    }
+
+    @Then("owner see description {string}")
+    public void owner_see_description(String text) {
+        Assert.assertEquals(mamifoto.getDoesntHaveTransactionDescText(),mamifoto.getDoesntHaveTransactionDescText(),"text doesnt match");
+        Assert.assertEquals(mamifoto.getDoesntHaveTransactionText(),text,"text doesnt match");
+    }
+
+    @When("owner click Lihat Detail Transaksi expired with status {string}")
+    public void owner_click_lihat_detail_transaksi_expired_with_status(String string)  {
+        Assert.assertEquals(mamifoto.getTextTransactionMamifotoExpired(),string,"Text doesnt match");
+        mamifoto.clicOnDetailTransactionExpired();
+    }
+
+    @Then("owner see expired invoice mamifoto")
+    public void owner_see_expired_invoice_mamifoto()  {
+        Assert.assertEquals(mamifoto.getTextInvoiceExpiredTitle(),mamifoto.getTextInvoiceExpiredTitle(),"title doesnt match");
+        mamifoto.clickOnButtonBackInvoiceExpired();
+
     }
 }

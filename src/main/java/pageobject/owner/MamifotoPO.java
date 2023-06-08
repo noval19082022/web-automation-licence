@@ -1,10 +1,12 @@
 package pageobject.owner;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class MamifotoPO {
     private Page page;
@@ -31,6 +33,7 @@ public class MamifotoPO {
     Locator faqFirstList;
     Locator headerFAQ;
     Locator contentFAQfirstList;
+    Locator riwayatPaketButton;
 
 
     //Locator Mamifoto at Select Package
@@ -40,6 +43,39 @@ public class MamifotoPO {
     Locator nantiSajaButton;
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
+
+
+    //Locator Mamifoto at history transaction
+    Locator headerRiwayatPembelian;
+    Locator tabSelesaiMamifoto;
+    Locator succsesPaymentTextMamifoto;
+    Locator seeDetailTransactionMamifoto;
+    Locator seeDetailTransactionProphoto;
+    Locator succsesPaymentTextProphoto;
+    Locator tabDalamProsesMamifoto;
+    Locator doesntHaveTransactionText;
+    Locator doesntHaveTransactionDescText;
+    Locator seeDetailTransactionExpired;
+    Locator expiredPaymentMamifotoText;
+
+
+    //Locator Mamifoto at Status Pembelian Page
+    Locator headerStatusPembelian;
+    Locator titleAlreadyPaid;
+    Locator subTitleAlreadyPaid;
+    Locator backIconPembelianMamifoto;
+    Locator buttonHubungiKami;
+
+
+    //Locator Invoice Expired Mamifoto
+    Locator titleInvoiceExpired;
+    Locator buttonBackInvoiceExpired;
+
+    //Locator CS Web Mamikos
+    Locator titleCSMamikos;
+
+
+
 
 
     public MamifotoPO(Page page) {
@@ -68,6 +104,26 @@ public class MamifotoPO {
         this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
         this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
+        this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
+        this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
+        this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
+        this.succsesPaymentTextMamifoto = page.getByText("MamiFoto A Non GP Pembayaran Berhasil");
+        this.seeDetailTransactionMamifoto =  page.getByRole(AriaRole.BUTTON).nth(1);
+        this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
+        this.titleAlreadyPaid =  page.getByText("Pembayaran Telah Lunas");
+        this.subTitleAlreadyPaid = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi untuk membuat janji dengan fotografer. J");
+        this.backIconPembelianMamifoto = page.getByTestId("back-button");
+        this.seeDetailTransactionProphoto = page.getByRole(AriaRole.BUTTON).nth(0);
+        this.succsesPaymentTextProphoto = page.getByText("Pro Photo Pembayaran Berhasil");
+        this.tabDalamProsesMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Dalam Proses"));
+        this.doesntHaveTransactionText = page.getByText("Belum Ada Transaksi");
+        this.doesntHaveTransactionDescText = page.getByText("Transaksi yang masih dalam proses akan muncul di halaman ini.");
+        this.expiredPaymentMamifotoText =  page.getByText("MamiFoto A GP Kadaluwarsa").first();
+        this.seeDetailTransactionExpired = page.getByText("Lihat Detail Transaksi").first();
+        this.titleInvoiceExpired = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Invoice Kedaluwarsa"));
+        this.buttonBackInvoiceExpired = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
+        this.buttonHubungiKami =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami"));
+        this.titleCSMamikos =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS"));
 
     }
 
@@ -115,7 +171,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getKinerjaTitle() throws InterruptedException {
+    public String getKinerjaTitle() {
         return playwright.getText(titleTingkatkanKinerja);
     }
 
@@ -124,7 +180,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getKinerjaSubTitle() throws InterruptedException {
+    public String getKinerjaSubTitle()  {
         return playwright.getText(subtitleTingkatkanKinerja);
     }
 
@@ -133,7 +189,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getMamifotoInfoUntukAndaText() throws InterruptedException {
+    public String getMamifotoInfoUntukAndaText()  {
         return playwright.getText(mamifotoInfoUntukAnda);
     }
 
@@ -256,7 +312,7 @@ public class MamifotoPO {
      *
      * @return string
      */
-    public String getMamifotoInfoUntukAndaNonPropertyText() throws InterruptedException {
+    public String getMamifotoInfoUntukAndaNonPropertyText()  {
         return playwright.getText(mamiFotoInfoUntukAndaNonProperty);
     }
 
@@ -267,4 +323,173 @@ public class MamifotoPO {
         mamiFotoInfoUntukAndaNonProperty.click();
     }
 
+
+    /**
+     * Click on button Riwayat Paket
+     */
+    public void clickOnRiwayatPaketMamifoto() {
+        riwayatPaketButton.click();
+    }
+
+    /**
+     * Check Mamifoto History Transaction Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderHistoryisAppear() {
+        return headerRiwayatPembelian.isVisible();
+    }
+
+    /**
+     * Click on tab selesai at riwayat page mamifoto
+     */
+    public void clickOnTabSelesaiMamifoto() {
+        tabSelesaiMamifoto.click();
+    }
+
+    /**
+     * Get Text status transaction succsess
+     *
+     * @return string
+     */
+    public String getSuccsessTransactioMamifotoText()  {
+        return playwright.getText(succsesPaymentTextMamifoto);
+    }
+
+    /**
+     * Click on Lihat detail transaksi at riwayat page mamifoto
+     */
+    public void clickOnSeeDetailTransactionMamifoto() {
+        seeDetailTransactionMamifoto.click();
+    }
+
+    /**
+     * Check Mamifoto Status Pembelian Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderStatusPembelianisAppear() {
+        return headerStatusPembelian.isVisible();
+    }
+
+    /**
+     * Get Text Title Status Pembelian Page
+     *
+     * @return string
+     */
+    public String getStatusPembelianTitleText() {
+        return playwright.getText(titleAlreadyPaid);
+    }
+
+    /**
+     * Get Text Sub Title Status Pembelian Page
+     *
+     * @return string
+     */
+    public String getStatusPembelianSubTitleText()  {
+        return playwright.getText(subTitleAlreadyPaid);
+    }
+
+    /**
+     * Get URL
+     * @return url is equal
+     */
+    public String getURL() {
+        return page.url();
+    }
+
+
+    /**
+     * Click on Hubungi Kami button and check redirection
+     */
+    public void clickOnContactUsMamifoto() {
+
+        page.waitForPopup(() -> {
+            buttonHubungiKami.click();
+        });
+
+        titleCSMamikos.isVisible();
+    }
+
+    /**
+     * Click on Lihat detail transaksi at riwayat page prophoto
+     */
+    public void clickOnSeeDetailTransactionProphoto() {
+        seeDetailTransactionProphoto.click();
+    }
+
+    /**
+     * Click on icon back at pembayaran berhasil page
+     */
+    public void clicOnIconBackSuccsessPaymentMamifoto() {
+        backIconPembelianMamifoto.click();
+    }
+
+    /**
+     * Get Text status transaction succsess old prophoto
+     *
+     * @return string
+     */
+    public String getSuccsessTransactioProphotoText(){
+        return playwright.getText(succsesPaymentTextProphoto);
+    }
+
+    /**
+     * Get Text doesnt have transaction mamifoto at tab dalam proses
+     *
+     * @return string
+     */
+    public String getDoesntHaveTransactionText(){
+        return playwright.getText(doesntHaveTransactionText);
+    }
+
+    /**
+     * Get Text doesnt have transaction desc mamifoto at tab dalam proses
+     *
+     * @return string
+     */
+    public String getDoesntHaveTransactionDescText(){
+        return playwright.getText(doesntHaveTransactionDescText);
+    }
+
+    /**
+     * Click on tab dalam proses mamifoto
+     */
+    public void clicOnTabDalamProsesMamifoto() {
+        tabDalamProsesMamifoto.click();
+    }
+
+    /**
+     * Click on lihat detail transaksi expired
+     */
+    public void clicOnDetailTransactionExpired() {
+        seeDetailTransactionExpired.click();
+    }
+
+    /**
+     * Get Text Transaction expired mamifoto
+     *
+     * @return string
+     */
+    public String getTextTransactionMamifotoExpired() {
+        return playwright.getText(expiredPaymentMamifotoText);
+    }
+
+    /**
+     * Get Text Transaction expired mamifoto
+     *
+     * @return string
+     */
+    public String getTextInvoiceExpiredTitle() {
+        return playwright.getText(titleInvoiceExpired);
+    }
+
+    /**
+     * Click on button back at invoice kadaluarsa page
+     */
+    public void clickOnButtonBackInvoiceExpired() {
+        buttonBackInvoiceExpired.click();
+    }
+
 }
+

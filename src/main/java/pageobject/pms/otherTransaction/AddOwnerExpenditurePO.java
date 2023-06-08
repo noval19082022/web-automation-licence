@@ -388,8 +388,7 @@ public class AddOwnerExpenditurePO {
         assertThat(namaPengeluaran).hasValue(expected);
     }
 
-    /**
-     * Assert Kuantitas Value
+    /** Assert Kuantitas Value
      * @param qty kuantitas value
      */
     public void assertKuantitasValue(String qty) {
@@ -398,6 +397,13 @@ public class AddOwnerExpenditurePO {
         } else {
             assertThat(kuantitas).hasValue(qty);
         }
+    }
+
+    /** Assert Biaya Pengeluaran value
+     * @param value expected biaya pengeluaran
+     */
+    public void assertBiayaPengeluaran(String value) {
+        assertThat(nominalPengeluaran).hasValue(value);
     }
 
     /**

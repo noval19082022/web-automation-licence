@@ -119,6 +119,19 @@ Feature: Add Owner Expenditure
     Then kuantitas field value should be "50"
     And tambah pengeluaran button should be enable
 
+  @TEST_PMAN-6316 @pman-prod
+  Scenario: Nominal Pengeluaran Validation
+    When admin tambah data owner expenditure
+    #empty nominal
+    And admin fill biaya pengeluaran except nominal
+    Then tambah pengeluaran button should be disabled
+    #nominal pengeluaran 0
+    When admin fill biaya pengeluaran "0"
+    Then tambah pengeluaran button should be disabled
+    #valid nominal pengeluaran
+    When admin fill biaya pengeluaran "10000"
+    Then biaya pengeluaran value should be "10.000"
+
   @TEST_PMAN-6035 @pman-prod
   Scenario: Upload Valid Format Attachment
     When admin tambah data owner expenditure
@@ -151,3 +164,4 @@ Feature: Add Owner Expenditure
     When admin tambah data owner expenditure
     And admin upload invalid attachment
     Then show upload attachment error message
+
