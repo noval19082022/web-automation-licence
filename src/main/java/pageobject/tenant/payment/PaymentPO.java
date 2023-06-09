@@ -3,13 +3,14 @@ package pageobject.tenant.payment;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 import data.mamikos.Mamikos;
+import data.payment.Payment;
 import utilities.PlaywrightHelpers;
 
 public class PaymentPO {
     Page page;
     PlaywrightHelpers playwright;
-    private final String urlPaymentBNIStagging = "https://portalbeta.bni-ecollection.com/partner/simulator/payment-simulator/index";
     private Locator paymentSuccessText;
 
     public PaymentPO(Page page) {
@@ -25,7 +26,7 @@ public class PaymentPO {
      * @param amount
      */
     public void paymentUsingBNI(String virtualAcount, String amount) {
-        page.navigate(urlPaymentBNIStagging);
+        playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
         page.getByLabel("VA Number").click();
         page.keyboard().type(virtualAcount);
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("")).click();
@@ -61,6 +62,7 @@ public class PaymentPO {
 
     /**
      * check if payment is success
+     *
      * @return boolean
      */
     public boolean isPaymentSuccess() {
