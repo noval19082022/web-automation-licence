@@ -1,13 +1,12 @@
 @LIMO2 @Mamifoto @TEST_LIMO-3020
-
 Feature: Check Mamifoto Landing Page
-
+  
   @continue @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner visits Landing Page of MamiFoto
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 082233545506 | 082144865600 | qwerty123 |
+      | phone stag   | phone prod | password  |
+      | 082233545506 | 0          | qwerty123 |
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
 
