@@ -33,6 +33,7 @@ public class InvoicePO {
     Locator bankMandiri;
     Locator bankBNI;
     Locator kartuKredit;
+    Locator dana;
     Locator inputKartuKreditNumber;
     Locator inputKartuKreditMonth;
     Locator inputKartuKreditYear;
@@ -81,6 +82,7 @@ public class InvoicePO {
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
         kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
+        dana = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("DANA")).nth(1);
         inputKartuKreditNumber = page.getByPlaceholder("0000 0000 0000 0000");
         inputKartuKreditMonth = page.getByPlaceholder("MM");
         inputKartuKreditYear = page.getByPlaceholder("YY");
@@ -429,6 +431,21 @@ public class InvoicePO {
         inputKartuKreditCCV.click();
         page.keyboard().type(ccv);
         clickOnBayarSekarang();
+        return new PaymentPO(page);
+    }
+
+    /**
+     * Select payment method and direct process using dana
+     * @return
+     */
+    public PaymentPO paymentUsingDANA() {
+        clickOnPilihPembayaran();
+        dana.click();
+        clickOnBayarSekarang();
+        page = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via DANA")).click();
+        });
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 }

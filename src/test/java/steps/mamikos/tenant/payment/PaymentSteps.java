@@ -35,6 +35,14 @@ public class PaymentSteps {
         paymentPO.paymentUsingCC();
     }
 
+    @And("tenant select payment method with DANA")
+    public void tenantSelectPaymentMethodWithDANA() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        paymentPO = invoicePO.paymentUsingDANA();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
+    }
+
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
