@@ -16,6 +16,14 @@ public class GoldplusPO {
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
     Locator selectRadioButtonYes;
+    Locator registerGPButton;
+    Locator pilihPeriodeGPButton;
+    Locator pilihBayarSekarang;
+    Locator pilihPeriodeTitle;
+    Locator lihatInvoiceButton;
+    Locator messageText;
+    Locator lihatTagihan;
+    Locator actionButtonPopUp;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -28,12 +36,20 @@ public class GoldplusPO {
         editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
+        registerGPButton = page.getByTestId("registerGP_btn");
+        pilihPeriodeGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+        pilihBayarSekarang = page.locator(".bg-c-button--primary");
+        pilihPeriodeTitle = page.getByText("Pilih Periode Berlangganan");
+        lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
+        messageText = page.locator(".bg-c-empty-state__description");
+        lihatTagihan = page.locator(".goldplus-payment-list-table__row");
+
     }
 
     /**
      * Input phone number to reset Goldplus
      */
-    public void inputGoldplusPhoneNumber (String phoneNumberGP) {
+    public void inputGoldplusPhoneNumber(String phoneNumberGP) {
         goldplusPhoneNumberInput.fill(phoneNumberGP);
     }
 
@@ -94,4 +110,88 @@ public class GoldplusPO {
         playwright.clickOn(selectRadioButtonYes);
     }
 
+    /**
+     * Click on register GP button on owner dashboard
+     *
+     *
+     */
+    public void clickOnRegisterGP() {
+        playwright.clickOn(registerGPButton);
+    }
+
+    /**
+     * Click on GP package button on subscibe GP list package
+     * @param gpPackage
+     *
+     */
+    public void choosePaketGP(String gpPackage) {
+       String gpPackageButton = "//*[@data-testid='beli" + gpPackage + "_btn']";
+       playwright.clickOn(page.locator(gpPackageButton));
+    }
+
+    /**
+     * Click on Pilih Periode Button
+     *
+     *
+     */
+    public void clickOnPilihPeriodeButton() {
+        playwright.clickOn(pilihPeriodeGPButton);
+    }
+
+    public void clickOnBayarSekarang() {
+        playwright.clickOn(pilihBayarSekarang);
+    }
+
+    public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
+        String infoUntukAnda = "//p[contains(.,'"+ infoUntukAndaMessage +"')]";
+        playwright.clickOn(page.locator(infoUntukAnda));
+    }
+
+    public boolean isPilihPeriodeScreen() {
+        return playwright.waitTillLocatorIsVisible(pilihPeriodeTitle);
+    }
+
+    public void isLihatInvoiceDisplayed() {
+        playwright.waitTillLocatorIsVisible(lihatInvoiceButton);
+    }
+
+    public void clickOnLihatInvoice() {
+        playwright.clickOn(lihatInvoiceButton);
+    }
+
+    public boolean isDetailTagihanVisible() {
+        return playwright.isTextDisplayed("Detail Tagihan");
+    }
+
+    public String getTitleEmptyState(String title) {
+       return playwright.getText(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(title)));
+    }
+
+    public String getMessage() {
+        return playwright.getText(messageText).replaceAll("\\s", "");
+    }
+
+    public boolean isInvoiceUniversal() {
+//        String jenisPembayaran = "//*[contains(text(),'Paket GoldPlus ')]";
+        return playwright.isTextDisplayed("Paket GoldPlus ", 3);
+    }
+
+
+    public boolean isConfirmationPopUpVisible(String titlePopUp) {
+        return playwright.isTextDisplayed(titlePopUp);
+    }
+
+    public void clickOnActionButtonPopUp(String actionText) {
+        actionButtonPopUp= page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(actionText));
+        System.out.println(actionButtonPopUp);
+        playwright.pageScrollUntilElementIsVisible(actionButtonPopUp);
+        playwright.clickOn(actionButtonPopUp);
+    }
+
+
+    public int getCountInvoiceUnpaid() {
+        int unpaidInvoiceCount = (int) page.locator("//tr[@class='goldplus-payment-list-table__row']").count();
+        System.out.println(unpaidInvoiceCount);
+        return unpaidInvoiceCount;
+    }
 }

@@ -190,4 +190,9 @@ public class NavigatesSteps {
     public void adminNavigatesToSearchInvoicePage() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.SEARCH_INVOICE);
     }
+
+    @And("user navigates to owner dashboard")
+    public void userNavigatesToOwnerDashboard() {
+        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0, LoadState.LOAD);
+    }
 }

@@ -14,4 +14,9 @@ public class commonSteps {
     public void admin_go_to_other_transation_menu() {
         menu.clickOtherTransactionMenu();
     }
+
+    @When("owner click back button")
+    public void ownerClickBackButton() {
+        page.goBack();
+    }
 }
