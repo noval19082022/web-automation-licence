@@ -34,6 +34,7 @@ public class InvoicePO {
     Locator bankBNI;
     Locator kartuKredit;
     Locator dana;
+    Locator linkAja;
     Locator inputKartuKreditNumber;
     Locator inputKartuKreditMonth;
     Locator inputKartuKreditYear;
@@ -83,6 +84,7 @@ public class InvoicePO {
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
         kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
         dana = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("DANA")).nth(1);
+        linkAja = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("LinkAja")).nth(1);
         inputKartuKreditNumber = page.getByPlaceholder("0000 0000 0000 0000");
         inputKartuKreditMonth = page.getByPlaceholder("MM");
         inputKartuKreditYear = page.getByPlaceholder("YY");
@@ -436,7 +438,7 @@ public class InvoicePO {
 
     /**
      * Select payment method and direct process using dana
-     * @return
+     * @return PaymentPO
      */
     public PaymentPO paymentUsingDANA() {
         clickOnPilihPembayaran();
@@ -444,6 +446,21 @@ public class InvoicePO {
         clickOnBayarSekarang();
         page = page.waitForPopup(() -> {
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via DANA")).click();
+        });
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
+        return new PaymentPO(page);
+    }
+
+    /**
+     * Select payment method and direct process using Link aja
+     * @return PaymentPO
+     */
+    public PaymentPO paymentUsingLinkAja() {
+        clickOnPilihPembayaran();
+        linkAja.click();
+        clickOnBayarSekarang();
+        page = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via LinkAja")).click();
         });
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
