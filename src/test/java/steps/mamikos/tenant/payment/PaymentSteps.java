@@ -9,6 +9,8 @@ import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 
+import java.util.Optional;
+
 public class PaymentSteps {
     Page page = ActiveContext.getActivePage();
     RiwayatBookingPO riwayatBookingPO = new RiwayatBookingPO(page);
@@ -35,11 +37,15 @@ public class PaymentSteps {
 
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
         paymentPO.seeInvoiceAfterPayment();
     }
 
     @Then("tenant will see payment is success")
     public void paymentSuccess() {
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
         Assert.assertTrue(paymentPO.isPaymentSuccess(), "Payment failed");
     }
 }
