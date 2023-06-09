@@ -31,6 +31,12 @@ public class InvoicePO {
     Locator voucherInputPopUpWarningText;
     Locator pilihPembayaranButton;
     Locator bankMandiri;
+    Locator bankBNI;
+    Locator kartuKredit;
+    Locator inputKartuKreditNumber;
+    Locator inputKartuKreditMonth;
+    Locator inputKartuKreditYear;
+    Locator inputKartuKreditCCV;
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
@@ -73,6 +79,12 @@ public class InvoicePO {
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
+        bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
+        kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
+        inputKartuKreditNumber = page.getByPlaceholder("0000 0000 0000 0000");
+        inputKartuKreditMonth = page.getByPlaceholder("MM");
+        inputKartuKreditYear = page.getByPlaceholder("YY");
+        inputKartuKreditCCV = page.getByPlaceholder("000", new Page.GetByPlaceholderOptions().setExact(true));
         bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
@@ -332,7 +344,7 @@ public class InvoicePO {
     /**
      * filter Open Kelola Tagihan
      */
-    public void openKelolaTagihan(){
+    public void openKelolaTagihan() {
         playwright.clickOn(kelolaTagihanButton);
     }
 
@@ -350,7 +362,7 @@ public class InvoicePO {
     /**
      * filter Open Tagihan Kost
      */
-    public void openBills(){
+    public void openBills() {
         playwright.clickOn(openTagihan.last());
     }
 
@@ -361,11 +373,10 @@ public class InvoicePO {
      */
     public void selectManageNextBillsMonthFilter(String monthNumber) throws InterruptedException {
         playwright.clickOn(inputMonthFilter);
-        if (monthNumber.equals("12")){
+        if (monthNumber.equals("12")) {
             playwright.clickOn(nextButton);
             playwright.clickOn(page.getByText("Januari"));
-        }
-        else {
+        } else {
             checkMonth = page.locator("//*[@class='date-wrapper']//*[@class='cell month'][" + monthNumber + "]");
             playwright.clickOn(checkMonth);
             page.waitForLoadState(LoadState.LOAD);
@@ -377,7 +388,7 @@ public class InvoicePO {
      * payment using ovo as payment method
      * @param number phone number ovo
      */
-    public void paymentOVO(String number){
+    public void paymentOVO(String number) {
         clickOnPilihPembayaran();
         playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
@@ -392,9 +403,9 @@ public class InvoicePO {
      * @return PaymentPO with next active page
      */
     public PaymentPO paymentUsingBNI() {
-        page.getByText("Pilih", new Page.GetByTextOptions().setExact(true)).click();
-        page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1).click();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        clickOnPilihPembayaran();
+        bankBNI.click();
+        clickOnBayarSekarang();
         return new PaymentPO(page);
     }
 
@@ -402,22 +413,22 @@ public class InvoicePO {
      * select payment method using kredit card
      * @param ccNumber
      * @param month
-     * @param years (2 digit)
+     * @param years    (2 digit)
      * @param ccv
      * @return PaymentPO with next active page
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
-        page.getByText("Pilih", new Page.GetByTextOptions().setExact(true)).click();
-        page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1).click();
-        page.getByPlaceholder("0000 0000 0000 0000").click();
+        clickOnPilihPembayaran();
+        kartuKredit.click();
+        inputKartuKreditNumber.click();
         page.keyboard().type(ccNumber);
-        page.getByPlaceholder("MM").click();
+        inputKartuKreditMonth.click();
         page.keyboard().type(month);
-        page.getByPlaceholder("YY").click();
+        inputKartuKreditYear.click();
         page.keyboard().type(years);
-        page.getByPlaceholder("000", new Page.GetByPlaceholderOptions().setExact(true)).click();
+        inputKartuKreditCCV.click();
         page.keyboard().type(ccv);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).click();
+        clickOnBayarSekarang();
         return new PaymentPO(page);
     }
 }
