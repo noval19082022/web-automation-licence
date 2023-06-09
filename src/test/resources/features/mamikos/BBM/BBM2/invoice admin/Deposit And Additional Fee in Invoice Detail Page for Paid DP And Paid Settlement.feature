@@ -12,7 +12,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
     And admin search contract by tenant phone number:
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
-    And admin terminate contract
+    And admin akhiri contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
@@ -46,7 +46,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page after pay DP
@@ -68,7 +68,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
     And tenant get invoice number

@@ -12,6 +12,7 @@ public class GoldplusPO {
     Locator warningBroadcastText;
     Locator closePopUpIcon;
     Locator goldplusPhoneNumberInput;
+    Locator recurringPhoneNumberInput;
     Locator editPackageAdminGP1Button;
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
@@ -32,6 +33,7 @@ public class GoldplusPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         goldplusPhoneNumberInput = page.locator("form").filter(new Locator.FilterOptions().setHasText("Reset")).getByPlaceholder("Phone Number");
+        recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
         editPackageAdminGP1Button = page.locator("//tr[4]//div[@class='btn-group']");
         editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
@@ -51,6 +53,13 @@ public class GoldplusPO {
      */
     public void inputGoldplusPhoneNumber(String phoneNumberGP) {
         goldplusPhoneNumberInput.fill(phoneNumberGP);
+    }
+
+    /**
+     * Input phone number to recurring Goldplus
+     */
+    public void inputRecurringPhoneNumber (String phoneNumberGP) {
+        recurringPhoneNumberInput.fill(phoneNumberGP);
     }
 
     /**

@@ -385,7 +385,9 @@ public class KostDetailsPO {
             }
         }
         do {
-            playwright.forceClickOn(ftueSlider);
+            if (ftueSlider.isVisible()) {
+                playwright.forceClickOn(ftueSlider);
+            }
         } while (ftueSlider.isVisible());
     }
 

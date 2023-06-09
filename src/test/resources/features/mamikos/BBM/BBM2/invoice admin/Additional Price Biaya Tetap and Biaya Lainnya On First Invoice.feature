@@ -11,7 +11,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     And admin search contract by tenant phone number:
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
-    And admin terminate contract
+    And admin akhiri contract
     Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
@@ -47,7 +47,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
   Scenario: Add Biaya Tetap + Biaya Lainnya On First Invoice From Mamipay
@@ -68,7 +68,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And user open riwayat booking
     Then tenant can sees total cost is equal to basic amount, admin fee plus additional price below
       | 50000 |

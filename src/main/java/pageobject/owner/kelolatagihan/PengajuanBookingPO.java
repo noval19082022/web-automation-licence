@@ -1,6 +1,5 @@
 package pageobject.owner.kelolatagihan;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -16,6 +15,8 @@ public class PengajuanBookingPO {
     private Locator terimaButtonWithName;
     private Locator tolakButton;
     private Locator yaTolakButton;
+    private Locator rejectButton;
+    private Locator acceptButton;
 
 
 
@@ -27,6 +28,8 @@ public class PengajuanBookingPO {
         this.yaTerimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Terima");
         this.tolakButton = page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
+        this.rejectButton =  page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
+        this.acceptButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Tolak"));
     }
 
     /**
@@ -58,6 +61,15 @@ public class PengajuanBookingPO {
     public BillAndBookingManagementPO ownerRejectBooking() {
         tolakButton.click();
         yaTolakButton.click();
+        return new BillAndBookingManagementPO(page);
+    }
+
+    /**
+     * Click on tolak and go to popup reason reject booking from view detail
+     */
+    public BillAndBookingManagementPO ownerRejectBookingFromViewDetail() {
+        rejectButton.click();
+        acceptButton.click();
         return new BillAndBookingManagementPO(page);
     }
 }

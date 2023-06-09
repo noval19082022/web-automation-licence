@@ -45,7 +45,7 @@ Feature: Additional Price Biaya Lainnya On First Invoice
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | qwerty123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
   Scenario: Admin Add Additional Price Biaya Lainnya To First Invoice
@@ -66,7 +66,7 @@ Feature: Additional Price Biaya Lainnya On First Invoice
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | qwerty123 |
-    And tenant navigate to riwayat booking
+    And tenant navigate to riwayat and draf booking
     And tenant go to invoice page from riwayat booking
     And tenant set active page to 1
     Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

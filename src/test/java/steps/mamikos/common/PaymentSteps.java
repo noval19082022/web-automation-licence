@@ -1,4 +1,4 @@
-package steps.mamikos.tenant;
+package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
@@ -23,7 +23,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
-public class TenantPaymentSteps {
+public class PaymentSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostSayaBillingPO billing = new KostSayaBillingPO(page);
@@ -245,26 +245,23 @@ public class TenantPaymentSteps {
     @And("tenant pay kost from riwayat booking using ovo {string}")
     public void tenantPayKostFromRiwayatBookingUsingOvo(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
-        invoice.clickOnPilihPembayaran();
-        invoice.clickOnOVO();
-        invoice.inputPhoneNumberOvo(phoneNumber);
-        invoice.clickOnBayarSekarang();
-        page.reload();
+        invoice.paymentOVO(phoneNumber);
         ActiveContext.getActiveBrowserContext().pages().get(1).close();
     }
 
     @And("tenant pay kost from riwayat booking using ovo {string} without close the page")
     public void tenantPayKostFromRiwayatBookingUsingOvoWithoutCloseThePage(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
-        invoice.clickOnPilihPembayaran();
-        invoice.clickOnOVO();
-        invoice.inputPhoneNumberOvo(phoneNumber);
-        invoice.clickOnBayarSekarang();
-        page.reload();
+        invoice.paymentOVO(phoneNumber);
     }
 
     @And("tenant click button bayar sekarang")
     public void tenantClickButtonBayarSekarang() {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
+    }
+
+    @When("payment owner/tenant/user success using ovo as payment method")
+    public void payment_owner_success_using_ovo_as_payment_method() {
+        invoice.paymentOVO("081280003230");
     }
 }

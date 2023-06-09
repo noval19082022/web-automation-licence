@@ -3,7 +3,6 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 import pageobject.owner.kelolatagihan.PengajuanBookingPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
@@ -21,6 +20,9 @@ public class OwnerDashboardPO {
     Locator warningBroadcastText;
     Locator closePopUpIcon;
     private Locator penyewaMenu;
+    Locator notificationButton;
+    Locator firstNotificationText;
+    Locator mamipoinButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -34,6 +36,9 @@ public class OwnerDashboardPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
+        notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
+        firstNotificationText = page.locator(".c-notification__item").first();
+        mamipoinButton = page.getByText("MamiPoin");
     }
 
     /**
@@ -93,5 +98,27 @@ public class OwnerDashboardPO {
     public TenantBillManagementPO clickOnPenyewaKos() {
         playwright.doubleClick(penyewaMenu);
         return new TenantBillManagementPO(page);
+    }
+
+    /**
+     * Click on notification button header
+     *
+     */
+    public void clickNotificationButton() {
+        playwright.clickOn(notificationButton);
+    }
+
+    /**
+     * Click on first notification owner
+     */
+    public void clickFirstNotificationText() {
+        playwright.clickOn(firstNotificationText);
+    }
+
+     /**
+      * Click on Mamipoin Button
+     */
+    public void clickMamipoinButton() {
+        playwright.clickOn(mamipoinButton);
     }
 }

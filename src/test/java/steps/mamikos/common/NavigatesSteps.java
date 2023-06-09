@@ -32,11 +32,6 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
     }
 
-    @Given("admin navigates to Goldplus Testing Tools")
-    public void adminNavigatesToGoldplusTestingTools() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
-    }
-
     @When("admin navigates to Admin Goldplus Package")
     public void adminNavigatesToAdminGoldplusPackage() {
         playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_GOLDPLUS_PACKAGE);
@@ -87,8 +82,8 @@ public class NavigatesSteps {
 
     }
 
-    @When("tenant navigate to riwayat booking")
-    public void tenantNavigateToRiwayatBooking() {
+    @When("tenant navigate to riwayat and draf booking")
+    public void tenantNavigateToRiwayatAndDrafBooking() {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING, 30000.0, LoadState.LOAD);
     }
@@ -194,5 +189,16 @@ public class NavigatesSteps {
     @And("user navigates to owner dashboard")
     public void userNavigatesToOwnerDashboard() {
         playwright.navigateTo(Mamikos.OWNER_URL, 30000.0, LoadState.LOAD);
+    }
+
+    @And("tenant navigate to riwayat kos page")
+    public void tenantNavigateToRiwayatKosPage() {
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_KOST, 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner navigate to pengajuan booking page")
+    public void userNavigateToPengajuanBooking() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
     }
 }

@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -9,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.chat.ChatOwnerPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -20,7 +22,12 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
+
     private Integer unpaidInvoice;
+
+    ChatOwnerPO chat = new ChatOwnerPO(page);
+    OwnerDashboardPO owner = new OwnerDashboardPO(page);
+
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
@@ -32,8 +39,18 @@ public class GoldplusSteps {
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputGoldplusPhoneNumber(phoneNumber);
         playwright.clickOnTextButton("Reset");
+        Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
+    }
+
+    @When("user sets recurring for number {string}")
+    public void user_sets_recurring_for_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+        goldplus.inputRecurringPhoneNumber(phoneNumber);
+        playwright.clickOnTextButton("Create Recurring");
+        Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
 
     @Then("user verify list of Periode Berlangganan is appear")
@@ -141,5 +158,30 @@ public class GoldplusSteps {
         unpaidInvoice = goldplus.getCountInvoiceUnpaid();
         System.out.println("Unpaid invoice ="+ unpaidInvoice);
         Assert.assertTrue(unpaidInvoice == unpaidInvoiceExpected);
+    }
+
+    @When("owner wants to extends Goldplus from chatlist")
+    public void owner_wants_to_extends_goldplus_from_chatlist() {
+        chat.clickChatOwner();
+        playwright.clickOnTextButton("Perpanjang");
+    }
+
+    @When("owner wants to extends Goldplus from chatroom")
+    public void owner_wants_to_extends_goldplus_from_chatroom() {
+        chat.clickChatOwner();
+        chat.dismissFTUEMarsGPAndBroadCast();
+        playwright.clickOnTextButton("Akbar Susilo");
+        playwright.clickOnTextButton("Perpanjang");
+    }
+
+    @When("owner wants to extends Goldplus from notif center")
+    public void owner_wants_to_extends_goldplus_from_notif_center() {
+        owner.clickNotificationButton();
+        owner.clickFirstNotificationText();
+    }
+
+    @When("owner wants to access goldplus dashboard")
+    public void owner_wants_to_access_goldplus_dashboard(){
+        playwright.clickOnText("Perpanjang paket Goldplus yuk!");
     }
 }

@@ -33,6 +33,12 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @And("admin want to search contract periode for {string}")
+    public void searchContractFor(String periode) {
+        searchContract.selectPeriodSearchContract(periode);
+        searchContract.clickOnSearchButton();
+    }
+
     @When("admin search contract by {string} and input field {string}")
     public void adminSearchContractBy(String searchBy, String inputField) {
         admin.clickOnSearchContract();
@@ -41,9 +47,79 @@ public class SearchContractSteps {
         searchContract.clickOnSearchButton();
     }
 
+    @And("admin want to batalkan contract if exist")
+    public void cancelIfExist() {
+        searchContract.batalkanContractIfExist();
+    }
+
     @And("admin want to edit deposit")
     public void editDeposit() {
         searchContract.clickOnEditDepositButton();
+    }
+
+    @And("admin want to extend contract")
+    public void extendContract() {
+        searchContract.clickOnExtendContractButton();
+    }
+
+    @And("admin input detail kerusakan {string} on edit deposit page")
+    public void inputDetailKerusakan(String text) {
+        String inputMorethan200 = null;
+        for (int i = 0; i < 10; i++) {
+            inputMorethan200 = inputMorethan200 + text;
+        }
+        searchContract.inputDetailKerusakan(inputMorethan200);
+    }
+
+    @And("admin want to choose {string} for transfer deposit")
+    public void chooseBank(String bankName) {
+        searchContract.chooseBankOnEditDepositPage(bankName);
+    }
+
+    @And("admin input nomor rekening on edit deposit page {string}")
+    public void inputRekening(String rekening) {
+        searchContract.inputRekeningOnEditDepositPage(rekening);
+    }
+
+    @And("admin input nama pemilik rekening on edit deposit page {string}")
+    public void inputRekname(String rekeningName) {
+        searchContract.inputRekeningNameOnEditDepositPage(rekeningName);
+    }
+
+    @And("admin input transfer date on edit deposit page {string}")
+    public void inputDate(String date) {
+        searchContract.inputTransferDateOnEditDepositPage(date);
+    }
+
+    @Then("admin see dropdown close and see bank {string}")
+    public void bank(String bankName) {
+        Assert.assertEquals(searchContract.getTextBankOnEditDeposit(bankName), bankName);
+    }
+
+    @Then("admin will see Konfirmasi Sisa Deposit button hidden")
+    public void sisaDepositBtn() {
+        Assert.assertTrue(searchContract.isSisaDepositBtnDisable());
+    }
+
+    @Then("admin verify see text {string}")
+    public void seeText(String text) {
+        Assert.assertTrue(admin.getPopUpText(text), "Text " + text + " isn't exist");
+    }
+
+    @Then("admin see maximal length {string}")
+    public void maxlength(String max) {
+        Assert.assertTrue(admin.getPopUpText(max), "max text not equals " + max);
+    }
+
+    @Then("admin will get blank data detail")
+    public void adminGetBlankData() {
+        Assert.assertTrue(admin.getPopUpText("Search Contract"), "Search Contract");
+        Assert.assertFalse(searchContract.isContractDataVisible(), "Data contract is Display");
+    }
+
+    @Then("admin redirect to search contract menu detail")
+    public void searcContractMenu() {
+        Assert.assertTrue(searchContract.isSearchContractHeaderVisible(), "Search Contract Header is not visible");
     }
 
     @And("admin want to see log contract")
@@ -61,9 +137,14 @@ public class SearchContractSteps {
         admin.inputBiayaKerusakanOnEditDposit(biayaKerusakan);
     }
 
-    @Then("admin will see sisa deposit")
+    @And("admin want to simpan draft edit deposit")
+    public void adminWantToSimpanDraftEditDeposit() {
+        searchContract.simpanDraftEditDeposit();
+    }
+
+    @Then("admin will see additional notes menu deposit")
     public void sisaDeposit() {
-        Assert.assertTrue(admin.getSisaDepositOnDetailPopup(), "Sisa deposit pop up is doesn't appear");
+        Assert.assertTrue(admin.getAdditionalNotesMenuOnDetailPopup(), "Additional notes menu transaction pop up is doesn't appear");
     }
 
     @Then("admin want to akhiri contract but akhiri kontrak button is disabled")
@@ -93,8 +174,8 @@ public class SearchContractSteps {
 
     @Then("admin should success terminate contract")
     public void adminShouldSuccessTerminateContract() {
-        if (searchContract.waitUntilSuccessTerminateVisible()) {
-            Assert.assertEquals(searchContract.getSuccessTerminateHeadingText().trim(), "Kontrak berhasil diakhiri.");
+        if (searchContract.waitForCalloutMessage()) {
+            Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
         }
     }
 

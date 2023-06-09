@@ -7,6 +7,8 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class MamikosListInvoicePO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -49,6 +51,22 @@ public class MamikosListInvoicePO {
     Locator valueTo;
     Locator clickChangeStatus;
     Locator inputDateAndTime;
+    Locator checklistNotInMamipay;
+    Locator clickSubmitChange;
+    Locator logButtonSearchContract;
+    Locator clickOnDetailFee;
+    Locator clickOnBasicAmount;
+    Locator updateAmountButton;
+    Locator headerSearchInvoice;
+    Locator dataDetailInvoice;
+    Locator firstInvoiceNumber;
+    Locator rowListInvoiceNumber;
+    Locator paidInvoiceList;
+    Locator searchByDropdownlist;
+    Locator searchRefund;
+    Locator editAddOns;
+    Locator updateFeeAdditionalPriceButton;
+    Locator actionResult;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -88,6 +106,22 @@ public class MamikosListInvoicePO {
         valueTo = page.locator("input[name='nominal_to']");
         clickChangeStatus = page.locator("//a[.='Change Status']");
         inputDateAndTime = page.locator("//input[@name='paid_at']");
+        checklistNotInMamipay = page.locator("#notMamipay");
+        clickSubmitChange = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit Change"));
+        logButtonSearchContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("View Log"));
+        clickOnDetailFee = page.locator("(//a[@class='btn btn-xs bg-maroon btn-flat'][normalize-space()='Detail Fee'])[1]");
+        clickOnBasicAmount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        updateAmountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
+        headerSearchInvoice = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Invoice"));
+        dataDetailInvoice = page.locator("//tbody[1]/tr[1]");
+        firstInvoiceNumber = page.locator("//tr[1]//td[2]");
+        rowListInvoiceNumber = page.locator("//td[2]");
+        paidInvoiceList = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Paid Invoice List "));
+        searchByDropdownlist = page.locator(".col-xs-2:nth-child(1) .filter-option");
+        searchRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        editAddOns = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("adiautomation Add Ons 100000  ")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(""));
+        updateFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Fee"));
+        actionResult = page.getByText("The cost value must be an integer.");
     }
 
     /**
@@ -324,8 +358,8 @@ public class MamikosListInvoicePO {
 
     /**
      * user choose pament method
-     * @throws  InterruptedException
      *
+     * @throws InterruptedException
      */
     public void selectPayment(String method) {
         playwright.selectDropdownByValue(page.locator("select[name='payment_method']"), method);
@@ -444,6 +478,7 @@ public class MamikosListInvoicePO {
     public void inputDateAndTime(String date) throws InterruptedException {
         inputDateAndTime.click();
         page.keyboard().type(date);
+        playwright.clickOn(clickSubmitChange);
     }
 
     /**
@@ -453,5 +488,177 @@ public class MamikosListInvoicePO {
      */
     public void showInvoiceAfterChange(String status) throws InterruptedException {
         playwright.waitTillLocatorIsVisible(page.locator("//span[text()='" + status + "']"));
+    }
+
+    /**
+     * user checklist section not in mamipay
+     *
+     * @throws InterruptedException
+     */
+    public void checklistNotInMamipay() throws InterruptedException {
+        playwright.clickOn(checklistNotInMamipay);
+    }
+
+    /**
+     * click see log button
+     *
+     * @throws InterruptedException
+     */
+    public void clickSeeLogButton() throws InterruptedException {
+        if (playwright.waitTillLocatorIsVisible(logButtonSearchContract)) {
+            playwright.clickOn(logButtonSearchContract);
+        } else {
+            playwright.clickOn(logButtonSearchContract);
+        }
+    }
+
+    /**
+     * log status invoice
+     *
+     * @param status
+     * @return
+     * @throws InterruptedException
+     */
+    public String logStatusInvoice(String status) throws InterruptedException {
+        return page.locator("td").getByText(status).nth(0).textContent();
+    }
+
+    /**
+     * click on detail fee button
+     * * @throws InterruptedException
+     */
+    public void userClickOnDetailFee() throws InterruptedException {
+        playwright.clickOn(clickOnDetailFee);
+    }
+
+    /**
+     * click on basic amount button
+     * * @throws InterruptedException
+     */
+    public void userClickOnBasicAmount(String amount) throws InterruptedException {
+        playwright.clickOn(clickOnBasicAmount);
+        basicAmountTextField.click();
+        basicAmountTextField.clear();
+        page.keyboard().type(amount);
+        playwright.clickOn(updateAmountButton);
+    }
+
+    /**
+     * Get invoice discount Page Header
+     *
+     * @return
+     */
+    public String getInvoiceDiscountPageHeader() {
+        return playwright.getText(headerSearchInvoice);
+    }
+
+    /**
+     * verify invoice number is appeared
+     *
+     * @return
+     */
+    public String getInvoiceNumber(String name) {
+        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(name)));
+    }
+
+    /**
+     * verify invoice header is appeared
+     *
+     * @return
+     */
+    public String getSearchInvoicePageHeader() {
+        return playwright.getText(headerSearchInvoice);
+    }
+
+    /**
+     * verify data detail invoice is appeared
+     */
+    public void checkDataDetailInvoice() {
+        playwright.waitTillLocatorIsVisible(dataDetailInvoice);
+    }
+
+    /**
+     * verify first invoice
+     *
+     * @return
+     */
+    public String getFirstInvoiceTextOnList() {
+        playwright.waitTillLocatorIsVisible(firstInvoiceNumber);
+        return playwright.getText(firstInvoiceNumber);
+    }
+
+    /**
+     * verify size invoice
+     *
+     * @return
+     */
+    public Integer totalRowListInvoice() {
+        List<Locator> listLocator = rowListInvoiceNumber.all();
+        return listLocator.size();
+    }
+
+    /**
+     * user click paid invoice list and refund
+     */
+    public void clickPaidInvoiceList(String invoiceList) {
+        page.reload();
+        playwright.hardWait(5);
+        playwright.clickOn(paidInvoiceList);
+        playwright.clickOn(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(invoiceList)).nth(0));
+    }
+
+    /**
+     * Select Filter Search By
+     *
+     * @param filterText
+     * @throws InterruptedException
+     */
+    public void selectFilterSearchBy(String filterText) throws InterruptedException {
+        playwright.clickOn(searchByDropdownlist);
+        playwright.clickOn(page.locator("//span[normalize-space()='" + filterText + "']"));
+    }
+
+    /**
+     * Enter Search Text in to Search box
+     *
+     * @param searchText search text
+     * @throws InterruptedException
+     */
+    public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
+        playwright.clickOn(page.locator("input[name='search_value']"));
+        page.keyboard().type(searchText);
+        playwright.clickOn(searchRefund);
+    }
+
+    /**
+     * Get result coloum kost detail
+     *
+     * @return string data type
+     */
+    public boolean listInColoumKostDetail(String kostName) {
+        return playwright.waitTillLocatorIsVisible(page.locator("//tbody[1]/tr[1]/td[contains(.,'" + kostName + "')]"));
+    }
+
+    /**
+     * click on edit addons button on field
+     *
+     */
+    public void clickOnEditButton() {
+        playwright.clickOn(editAddOns);
+    }
+
+    /**
+     * Click on add fee in additional price
+     */
+    public void clickOnUpdateFeeInAdditionalPrice() {
+        playwright.clickOn(updateFeeAdditionalPriceButton);
+    }
+
+    /**
+     * Get action result message, success or fail message
+     * @return string data type, succes or fail message
+     */
+    public String getActionResultMessage() {
+        return playwright.getText(actionResult);
     }
 }

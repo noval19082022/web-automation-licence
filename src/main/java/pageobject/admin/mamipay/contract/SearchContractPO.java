@@ -4,10 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
-import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
 
 public class SearchContractPO {
     private Page page;
@@ -24,9 +21,15 @@ public class SearchContractPO {
     Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
+    private Locator inputTextDetailKerusakan;
     private Locator seeLogBtn;
+    private Locator extendContractBtn;
     private Locator akhiriContractButton;
+    private Locator bankNameText;
+    private Locator konfirmasiSisaDepoBtn;
     private Locator akhiriContractHead;
+    private Locator callout;
+    Locator searchTextBox;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -45,7 +48,13 @@ public class SearchContractPO {
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
         akhiriContractHead = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa"));
         editDepositBtn = page.locator("a").getByText("Edit Deposit").first();
+        bankNameText = page.locator("//div[@class='tools-contract__modal modal fade in']//select[@name='destination_bank']");
+        konfirmasiSisaDepoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Konfirmasi Sisa Deposit"));
+        inputTextDetailKerusakan = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("textarea[name='remark']");
         seeLogBtn = page.locator("a").getByText("See log").first();
+        extendContractBtn = page.locator("a").getByText("Extend Kontrak").first();
+        searchTextBox = page.locator("input[name='search_value']");
+        callout = page.locator(".callout");
     }
 
     /**
@@ -55,7 +64,18 @@ public class SearchContractPO {
      */
     public void selectKosLevel(String kostLevel) {
         page.locator(".select2-search").click();
-        page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(kostLevel)).click();
+        page.keyboard().type(kostLevel);
+        page.keyboard().press("Enter");
+    }
+
+    /**
+     * Select dropdown search contract periode
+     *
+     * @param periode
+     */
+    public void selectPeriodSearchContract(String periode) {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Contract Date Period ")).click();
+        page.locator("li").getByText(periode).click();
     }
 
     /**
@@ -66,10 +86,38 @@ public class SearchContractPO {
     }
 
     /**
+     * input text detail kerusakan
+     *
+     * @param text
+     */
+    public void inputDetailKerusakan(String text) {
+        inputTextDetailKerusakan.click();
+        page.keyboard().type(text);
+    }
+
+    /**
      * Click on see log button
      */
     public void clickOnSeeLogButton() {
         seeLogBtn.click();
+    }
+
+    /**
+     * check if contract data is not null
+     *
+     * @return boolean
+     */
+    public boolean isContractDataVisible() {
+        return page.locator("tbody").first().locator("tr").first().isVisible();
+    }
+
+    /**
+     * check if search contract header is visible
+     *
+     * @return boolean
+     */
+    public boolean isSearchContractHeaderVisible() {
+        return page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Search Contract")).isVisible();
     }
 
     /**
@@ -147,6 +195,22 @@ public class SearchContractPO {
     }
 
     /**
+     * Wait for callout messagge to be visible
+     * @return visible true otherwise false
+     */
+    public boolean waitForCalloutMessage() {
+        return playwright.waitTillLocatorIsVisible(callout);
+    }
+
+    /**
+     * Get callout text
+     * @return String data type
+     */
+    public String getCalloutText() {
+        return playwright.getText(callout);
+    }
+
+    /**
      * Get success terminate heading text
      *
      * @return String data type
@@ -161,19 +225,113 @@ public class SearchContractPO {
      */
     public void clickOnAkhiriContractButton() {
         page.waitForLoadState(LoadState.LOAD);
-        if (akhiriContractLink.isVisible()) {
-            playwright.acceptDialog(akhiriContractLink);
-        } else if (akhiriContractButton.isVisible()) {
-            playwright.clickOn(akhiriContractButton);
-            inputTerminateDate.fill(JavaHelpers.getCurrentDateOrTime("dd-MM-yyyy HH:mm:ss"));
-            playwright.forceClickOn(akhiriContractHead);
-            List<Locator> akhiriContractButtonList = akhiriContractButton.all();
-            for (Locator akhiriButton : akhiriContractButtonList) {
-                if (akhiriButton.isVisible() && akhiriButton.isEnabled()) {
-                    playwright.clickOn(akhiriButton);
-                }
-            }
-            page.waitForLoadState(LoadState.LOAD);
+        if (playwright.waitTillLocatorIsVisible(akhiriContractButton)) {
+            playwright.forceClickOn(akhiriContractButton);
+            playwright.forceClickOn(akhiriContractLink);
+        }
+        page.waitForLoadState(LoadState.LOAD);
+    }
+
+    /**
+     * choose bank on edit deposit page
+     * @param bankName
+     */
+    public void chooseBankOnEditDepositPage(String bankName) {
+        bankNameText.click();
+        page.keyboard().type(bankName);
+        page.mouse().down();
+    }
+
+    /**
+     * check if bank name is exist on the detail edit deposit
+     * @param bankName
+     * @return string bank name
+     */
+    public String getTextBankOnEditDeposit(String bankName) {
+        return page.getByText(bankName).first().textContent();
+    }
+
+    /**
+     * input rekening number on edit deposit page
+     * @param rekening
+     */
+    public void inputRekeningOnEditDepositPage(String rekening) {
+        page.getByRole(AriaRole.SPINBUTTON).click();
+        page.keyboard().type(rekening);
+    }
+
+    /**
+     * input rekening name on edit deposit page
+     * @param rekeningName
+     */
+    public void inputRekeningNameOnEditDepositPage(String rekeningName) {
+        page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("input[name='destination_name']").click();
+        page.keyboard().type(rekeningName);
+    }
+
+    /**
+     * input transfer date on edit deposit page
+     * @param date
+     */
+    public void inputTransferDateOnEditDepositPage(String date) {
+        page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Edit Deposit for Confirm to Finance")).locator("input[name='transfer_due_date']").click();
+        page.keyboard().type(date);
+    }
+
+    /**
+     * click on simpan draft on edit deposit page
+     */
+    public void simpanDraftEditDeposit() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan Draf")).click();
+    }
+
+    /**
+     * Click on extend contract btn
+     */
+    public void clickOnExtendContractButton() {
+        extendContractBtn.click();
+    }
+
+    /**
+     * check if sisa deposit button is disable
+     *
+     * @return boolean
+     */
+    public boolean isSisaDepositBtnDisable() {
+        return konfirmasiSisaDepoBtn.isDisabled();
+    }
+
+    /**
+     * Select Filter Search By
+     *
+     * @param filterText
+     * @throws InterruptedException
+     */
+    public void selectFilterSearchBy(String filterText) throws InterruptedException {
+        playwright.clickOn(page.locator("select[name=search_by]"));
+        page.keyboard().type(filterText);
+        page.keyboard().down("Enter");
+    }
+
+    /**
+     * Enter Search Text in to Search box
+     *
+     * @param searchText search text
+     * @throws InterruptedException
+     */
+    public void enterTextToSearchTextbox(String searchText) throws InterruptedException {
+        playwright.clickOn(page.locator("input[name=search_value]"));
+        page.keyboard().type(searchText);
+
+    }
+
+    /**
+     * Click on batalkan kontrak on admin pay if kontrak is exist
+     */
+    public void batalkanContractIfExist() {
+        if (page.getByText("Batalkan Kontrak").first().isVisible()) {
+            page.onDialog(dialog -> dialog.accept());
+            page.getByText("Batalkan Kontrak").first().click();
         }
     }
 }

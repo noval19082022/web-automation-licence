@@ -1,0 +1,45 @@
+package steps.mamikos.bangkrupux;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobject.admin.mamipay.bangkrupux.ChatPO;
+import testdata.BangKrupuxTestData;
+import utilities.PlaywrightHelpers;
+
+public class ChatSteps {
+    Page page = ActiveContext.getActivePage();
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    ChatPO chatAdmin = new ChatPO(page);
+
+    @When("user click on the Group Chat")
+    public void user_click_on_the_group_chat() {
+        chatAdmin.clickOnTenantChat();
+    }
+
+    @And("user go to Rajawali Chat Room")
+    public void user_go_to_rajawali_chat_room() {
+        chatAdmin.clickOnChatRoomMenu();
+    }
+
+    @Then("user able to see Kos Name")
+    public void user_able_to_see_kost_name() {
+        BangKrupuxTestData.setKostName(chatAdmin.getChatKosTitle());
+        chatAdmin.clickOnKosTitleChatHeader();
+    }
+
+    @When("user click on Kos Name from chat list")
+    public void user_click_on_kost_name_from_chat_list() {
+        chatAdmin.clickOnKosTitleChatList();
+    }
+
+    @Then("user will directed to Kos Detail in new tab")
+    public void user_will_directed_to_kost_detail_in_newTab() {
+        page = ActiveContext.getActivePage();
+        playwright = new PlaywrightHelpers(page);
+        Assert.assertTrue(playwright.getActivePageURL().contains(BangKrupuxTestData.getKostName()), "Url doesn't match");
+    }
+}

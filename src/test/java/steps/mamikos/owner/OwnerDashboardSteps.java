@@ -3,7 +3,6 @@ package steps.mamikos.owner;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
@@ -27,5 +26,10 @@ public class OwnerDashboardSteps {
     @And("user click on widget Penyewa")
     public void userClickOnWidgetPenyewa() {
 
+    }
+
+    @When("user click mamipoin in owner's menu")
+    public void user_click_mamipoin_in_owner_s_menu() {
+        ownerDashboardPO.clickMamipoinButton();
     }
 }

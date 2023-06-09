@@ -318,9 +318,7 @@ Feature: Broadcast Chat Owner
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigates to Goldplus Testing Tools
     And user wants to reset Goldplus for owner with phone number "08646547892"
-    Then user will see that the text "Reset success!" is displayed
 
   @TEST_LIMO-1180 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat]User already submit request GP 2 but not paid yet;click Broadcast Chat entry point in Kelola Page
@@ -338,9 +336,7 @@ Feature: Broadcast Chat Owner
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigates to Goldplus Testing Tools
     And user wants to reset Goldplus for owner with phone number "08646547892"
-    Then user will see that the text "Reset success!" is displayed
 
   @TEST_LIMO-1178 @TEST_LIMO-1175 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat]User already submit request GP 1 but not paid yet;click Broadcast Chat entry point in Chat Page
@@ -364,9 +360,7 @@ Feature: Broadcast Chat Owner
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigates to Goldplus Testing Tools
     And user wants to reset Goldplus for owner with phone number "08646547892"
-    Then user will see that the text "Reset success!" is displayed
 
   @TEST_LIMO-1158 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][View Receiver]user want to see receiver
