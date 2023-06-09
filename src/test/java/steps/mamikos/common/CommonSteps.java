@@ -17,7 +17,6 @@ public class CommonSteps {
     TenantLoginPO users = new TenantLoginPO(page);
     HomePO home = new HomePO(page);
 
-
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
         playwright.clickOnText(text);
@@ -30,7 +29,7 @@ public class CommonSteps {
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
     public void owner_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text,1000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 1000));
     }
 
     @Then("user/owner/tenant should not be able to see the text {string}")
@@ -42,5 +41,10 @@ public class CommonSteps {
     public void userLogsOutAsTenant() {
         playwright.navigateToAndWaitLocator(Mamikos.URL, home.getMamikosLogo());
         users.logoutAsTenant();
+    }
+
+    @Then("user/owner/tenant go back to previous page")
+    public void user_go_back_to_previous_page() {
+        page.goBack();
     }
 }

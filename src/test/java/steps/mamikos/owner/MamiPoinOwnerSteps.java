@@ -47,6 +47,16 @@ public class MamiPoinOwnerSteps {
         Assert.assertEquals(mamipoinOwner.getDetailStatusText(), berhasilStatus, "status match!");
     }
 
+    @When("user verify mamipoin on widget < {int}")
+    public void user_verify_mamipoin_on_widget_smaller(Integer mamipoin) {
+        Assert.assertTrue(mamipoinOwner.getMamipoinWidgetText() < mamipoin);
+    }
+
+    @When("user verify mamipoin on widget > {int}")
+    public void user_verify_mamipoin_on_widget_bigger(Integer mamipoin) {
+        Assert.assertTrue(mamipoinOwner.getMamipoinWidgetText() > mamipoin);
+    }
+
     @When("user verify point is > {int}")
     public void user_verify_point_is_bigger(Integer discountMamipoinOwner) {
         Assert.assertTrue(mamipoinOwner.getMamipoinOwnerText() > discountMamipoinOwner);
@@ -56,6 +66,7 @@ public class MamiPoinOwnerSteps {
     public void user_verify_point_is_smaller(Integer discountMamipoinOwner) {
         Assert.assertTrue(mamipoinOwner.getMamipoinOwnerText() < discountMamipoinOwner);
     }
+
     @And("user click toggle mamipoin")
     public void user_click_toggle_mamipoin(){
         mamipoinOwner.clickOnMamiPoinToggle();
