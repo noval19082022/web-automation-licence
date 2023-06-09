@@ -188,4 +188,16 @@ public class AdminMamipayAdditionalPriceSteps {
         invoiceAdmin.fillInputSearchValue(searchValue);
         invoiceAdmin.clickOnCariInvoice();
     }
+
+    @When("admin edit additional fee price amount to {string}")
+    public void admin_edit_additional_fee_price_amount_to(String additionalPriceValue) {
+        invoiceAdmin.clickOnEditButton();
+        invoiceAdmin.fillAdditionalPriceCostValue(additionalPriceValue);
+        invoiceAdmin.clickOnUpdateFeeInAdditionalPrice();
+    }
+
+    @Then("admins can sees error message")
+    public void admins_can_sees_error_message() {
+        Assert.assertEquals(invoiceAdmin.getActionResultMessage(), "The cost value must be an integer.", "Message is not fail message");
+    }
 }
