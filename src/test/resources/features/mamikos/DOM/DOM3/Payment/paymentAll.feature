@@ -103,3 +103,14 @@ Feature: Payment All
     And tenant select payment method using Mandiri
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
+  @paymentOvo @TEST_DOM-484
+  Scenario: Tenant pay kos ovo
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
