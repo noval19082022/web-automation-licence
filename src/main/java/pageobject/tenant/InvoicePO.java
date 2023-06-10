@@ -31,6 +31,7 @@ public class InvoicePO {
     Locator voucherInputPopUpWarningText;
     Locator pilihPembayaranButton;
     Locator bankMandiri;
+    Locator bankPermata;
     Locator bankBNI;
     Locator kartuKredit;
     Locator dana;
@@ -42,6 +43,7 @@ public class InvoicePO {
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
+    Locator kodePembayaranPermata;
     Locator txtAdminCost;
     Locator txtRentPerPeriod;
     Locator filterKostName;
@@ -81,6 +83,7 @@ public class InvoicePO {
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
+        bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
         kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
         dana = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("DANA")).nth(1);
@@ -92,6 +95,7 @@ public class InvoicePO {
         bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
+        kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
@@ -257,6 +261,13 @@ public class InvoicePO {
     }
 
     /**
+     * Choose permata as payment
+     */
+    public void clickOnPermata() {
+        playwright.clickOn(bankPermata);
+    }
+
+    /**
      * Click on bayar sekarang button
      */
     public void clickOnBayarSekarang() {
@@ -277,6 +288,14 @@ public class InvoicePO {
      */
     public String getVirtualAccountNumberText() {
         return playwright.getText(virtualAccountText);
+    }
+
+    /**
+     * Get kode pembayaran number to use on midtrans PERMATA
+     * @return String data type
+     */
+    public String getKodePembayaranNumberText() {
+        return kodePembayaranPermata.textContent().trim();
     }
 
     /**

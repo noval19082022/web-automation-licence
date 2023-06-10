@@ -78,6 +78,19 @@ public class PaymentSteps {
         midtransPaymentPO.waitForSuccessTransaction();
     }
 
+    @And("tenant select payment method using Permata")
+    public void tenantSelectPaymentMethodUsingPermata() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO.paymentForPermata(kodePembayaran);
+    }
+
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception

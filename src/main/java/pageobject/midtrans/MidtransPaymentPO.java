@@ -3,14 +3,20 @@ package pageobject.midtrans;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.payment.Payment;
 import utilities.PlaywrightHelpers;
+
+import java.util.Optional;
 
 public class MidtransPaymentPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator billerCode;
     Locator paymentCode;
+    Locator vaCodePlaceHolder;
     Locator inquireButton;
+    Locator bayarButtonOnPermataMidtrans;
     Locator payButton;
     Locator successTransaction;
 
@@ -19,8 +25,10 @@ public class MidtransPaymentPO {
         this.playwright = new PlaywrightHelpers(page);
         billerCode = page.locator("#billerCode");
         paymentCode = page.locator("#billKey");
+        vaCodePlaceHolder = page.getByPlaceholder("Virtual Account Number");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
+        bayarButtonOnPermataMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar"));
         successTransaction = page.getByText("Success! Success Payment VA");
     }
 
@@ -38,6 +46,19 @@ public class MidtransPaymentPO {
      */
     public void inputPaymentCode(String code) {
         paymentCode.fill(code);
+    }
+
+    /**
+     * Payment process midtrans for permata
+     * @param kodePembayaran payment virtual account
+     */
+    public void paymentForPermata(String kodePembayaran) {
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
+        vaCodePlaceHolder.click();
+        page.keyboard().type(kodePembayaran);
+        inquireButton.click();
+        bayarButtonOnPermataMidtrans.click();
     }
 
     /**
