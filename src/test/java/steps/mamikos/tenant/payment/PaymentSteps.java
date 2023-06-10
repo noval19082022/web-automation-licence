@@ -1,21 +1,27 @@
 package steps.mamikos.tenant.payment;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
+import data.payment.Payment;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
+import utilities.PlaywrightHelpers;
 
 import java.util.Optional;
 
 public class PaymentSteps {
     Page page = ActiveContext.getActivePage();
+    PlaywrightHelpers playwright;
     RiwayatBookingPO riwayatBookingPO = new RiwayatBookingPO(page);
     InvoicePO invoicePO;
     PaymentPO paymentPO;
+    MidtransPaymentPO midtransPaymentPO;
 
     @And("tenant select payment method BNI with VA number {string} and amount {string}")
     public void paymentBNI(String VA, String amount) {
@@ -49,6 +55,27 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         paymentPO = invoicePO.paymentUsingLinkAja();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
+    }
+
+    @And("tenant select payment method using Mandiri")
+    public void tenantSelectPaymentMethodUsingMandiri() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnMandiri();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCompanyCodeText();
+        var nomorVirtualAccount = invoicePO.getVirtualAccountNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO.inputBillerCode(kodePerusahaan);
+        midtransPaymentPO.inputPaymentCode(nomorVirtualAccount);
+        midtransPaymentPO.clickOnInquireButton();
+        midtransPaymentPO.clickOnPayButton();
+        midtransPaymentPO.waitForSuccessTransaction();
     }
 
     @And("tenant want to see invoice on riwayat booking after payment")
