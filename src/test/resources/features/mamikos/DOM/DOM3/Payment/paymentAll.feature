@@ -100,7 +100,7 @@ Feature: Payment All
       | phone stag | phone prod   | password  |
       | 0892202100 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method using Mandiri
+    And tenant pay kost from riwayat booking using mandiri without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
