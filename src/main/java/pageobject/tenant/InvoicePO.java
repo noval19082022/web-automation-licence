@@ -89,7 +89,7 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
-        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
+        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-addOn");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
@@ -396,6 +396,14 @@ public class InvoicePO {
         playwright.hardWait(5);
         playwright.clickOnText("Saya Sudah Bayar");
         page.reload();
+    }
+
+    /**
+     * choose payment using ovo as payment method without input phone number
+     */
+    public void choosePaymentUsingOVO(){
+        clickOnPilihPembayaran();
+        playwright.clickOn(txtOVO);
     }
 
     /**

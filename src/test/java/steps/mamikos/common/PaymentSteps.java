@@ -264,4 +264,9 @@ public class PaymentSteps {
     public void payment_owner_success_using_ovo_as_payment_method() {
         invoice.paymentOVO("081280003230");
     }
+
+    @When("tenant make bill payments using ovo")
+    public void tenantMakeBillPaymentsUsingOvo() {
+        invoice.choosePaymentUsingOVO();
+    }
 }
