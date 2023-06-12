@@ -131,3 +131,37 @@ Feature: Add Owner Expenditure
     #valid nominal pengeluaran
     When admin fill biaya pengeluaran "10000"
     Then biaya pengeluaran value should be "10.000"
+
+  @TEST_PMAN-6035 @pman-prod
+  Scenario: Upload Valid Format Attachment
+    When admin tambah data owner expenditure
+    #upload valid jpg
+    And admin upload "jpg" attachment
+    Then "jpg" attachment should be uploaded
+    #uplaod valid jpeg
+    When admin delete attachment
+    And admin upload "jpeg" attachment
+    Then "jpeg" attachment should be uploaded
+    #uplaod valid png
+    When admin delete attachment
+    And admin upload "png" attachment
+    Then "png" attachment should be uploaded
+    #uplaod valid pdf
+    When admin delete attachment
+    And admin upload "pdf" attachment
+    Then "pdf" attachment should be uploaded
+    #upload valid jpg more than 8MB
+    When admin delete attachment
+    And admin upload "jpg 8MB" attachment
+    Then show upload attachment error message
+    #upload valid pdf more than 8MB
+    When admin delete attachment
+    And admin upload "pdf 8MB" attachment
+    Then show upload attachment error message
+
+  @TEST_PMAN-6036 @pman-prod
+  Scenario: Upload Invalid Format Attachment
+    When admin tambah data owner expenditure
+    And admin upload invalid attachment
+    Then show upload attachment error message
+

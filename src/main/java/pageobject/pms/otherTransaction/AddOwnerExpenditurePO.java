@@ -43,6 +43,9 @@ public class AddOwnerExpenditurePO {
     Locator kotaText;
     Locator sisaKontrakText;
     Locator kategoriPengeluaranList;
+    Locator deleteAttachment;
+    Locator attachmentFileName;
+    Locator attachmentErrorMessage;
     public AddOwnerExpenditurePO(Page page) {
         this.page = page;
 
@@ -69,6 +72,9 @@ public class AddOwnerExpenditurePO {
         kotaText = page.locator(".bg-c-field__description").nth(1);
         sisaKontrakText = page.locator(".bg-c-field__description").nth(2);
         kategoriPengeluaranList = page.locator("//*[@data-testid='expense-category-0']//a");
+        deleteAttachment = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("delete"));
+        attachmentFileName = page.locator("p.bg-c-text--title-5").nth(1);
+        attachmentErrorMessage = page.locator(".bg-c-field__message").first();
     }
 
     /**
@@ -181,7 +187,25 @@ public class AddOwnerExpenditurePO {
     public void uploadAttachment(String fileType) {
         switch (fileType){
             case "jpg":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/images/ownerExpenditure/ABY06593.jpg"));
+                break;
+            case "jpeg":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/images/ownerExpenditure/ABY05305.jpeg"));
+                break;
+            case "png":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/images/ownerExpenditure/BG_Anniv Mamikos ke7.png"));
+                break;
+            case "pdf":
                 uploadButton.setInputFiles(Paths.get("src/main/resources/file/pdf example.pdf"));
+                break;
+            case "jpg 8MB":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/images/ownerExpenditure/jpg8MB.jpg"));
+                break;
+            case "pdf 8MB":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/file/pdf8MB.pdf"));
+                break;
+            case "svg":
+                uploadButton.setInputFiles(Paths.get("src/main/resources/images/ownerExpenditure/toothwithcrown.svg"));
                 break;
             default:
                 System.out.println("File Type not Supported yet");
@@ -375,11 +399,42 @@ public class AddOwnerExpenditurePO {
         }
     }
 
-    /**
-     * Assert Biaya Pengeluaran value
+    /** Assert Biaya Pengeluaran value
      * @param value expected biaya pengeluaran
      */
     public void assertBiayaPengeluaran(String value) {
         assertThat(nominalPengeluaran).hasValue(value);
+    }
+
+    /**
+     * delete attachment upload
+     */
+    public void deleteAttachment() {
+        deleteAttachment.waitFor();
+        deleteAttachment.click();
+    }
+
+    /**
+     * Assert file name that succesfully upload
+     * @param filename
+     */
+    public void assertFileName(String filename) {
+        attachmentFileName.scrollIntoViewIfNeeded();
+        assertThat(attachmentFileName).hasText(filename);
+    }
+
+    /**
+     * Assert trash icon to delete attachment is visible
+     */
+    public void assertTrashIconVisible() {
+        assertThat(deleteAttachment).isVisible();
+    }
+
+    /**
+     * Assert error message when upload invalid attachment visible and have correct message
+     */
+    public void assertAttachmentErrorMessage() {
+        assertThat(attachmentErrorMessage).isVisible();
+        assertThat(attachmentErrorMessage).hasText("File harus berupa .pdf/.jpg/.jpeg/.png dengan ukuran maksimal 8 MB.");
     }
 }
