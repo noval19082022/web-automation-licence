@@ -184,6 +184,32 @@ public class SearchContractSteps {
         searchContract.clickOnAkhiriContractButton();
     }
 
+    @And("admin search contract by tenant phone number and akhiri contract:")
+    public void adminSearchContractByTenantPhoneNumberAndAkhiriContract(DataTable table) {
+        searchData = table.asMaps(String.class, String.class);
+        var phoneNumber = searchData.get(0).get("phone " + Mamikos.ENV);
+        var akhiriContractButtonSize = 0;
+        admin.clickOnSearchContract();
+        searchContract.selectSearchBy("renter_phone_number");
+        searchContract.fillSearchByValue(phoneNumber);
+        searchContract.clickOnSearchButton();
+        if (searchContract.isAkhiriContractButtonVisible()) {
+            akhiriContractButtonSize = searchContract.getAkhiriContractButtonSize();
+            for(int i = 0; i < akhiriContractButtonSize; i++) {
+                searchContract.clickOnAkhiriContractButton();
+                if (searchContract.waitForCalloutMessage()) {
+                    Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
+                }
+                if (akhiriContractButtonSize > 1) {
+                    //improvement should add break condition when iterate is equal to akhiriContractButtonSize
+                    searchContract.selectSearchBy("renter_phone_number");
+                    searchContract.fillSearchByValue(phoneNumber);
+                    searchContract.clickOnSearchButton();
+                }
+            }
+        }
+    }
+
     @When("admin search contract by tenant kost name:")
     public void adminSearchContractByTenantKostName(DataTable table) {
         searchData = table.asMaps(String.class, String.class);

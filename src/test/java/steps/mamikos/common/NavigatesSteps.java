@@ -196,4 +196,10 @@ public class NavigatesSteps {
     public void userNavigateToPengajuanBooking() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
     }
+
+    @When("user/owner/tenant navigates to old prophoto page")
+    public void owner_navigates_to_old_prophoto_page() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.PROPHOTO, 30000.0, LoadState.LOAD);
+    }
+
 }

@@ -37,4 +37,7 @@ public class Mamikos {
     public static final String TENANT_RIWAYAT_KOST = JavaHelpers.getPropertyValue(MAMIKOS, "tenantRiwayatKost");
     public static final String PENGAJUAN_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "pengajuanBooking");
     public static final String ADMIN_GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS,"adminGoldplusPackage");
+    public static final String PROPHOTO = JavaHelpers.getPropertyValue(MAMIKOS,"oldProPhoto");
+    public static final String MAMIFOTO = JavaHelpers.getPropertyValue(MAMIKOS,"mamifoto");
+
 }

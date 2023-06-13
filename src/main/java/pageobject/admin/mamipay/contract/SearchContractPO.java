@@ -225,8 +225,8 @@ public class SearchContractPO {
      */
     public void clickOnAkhiriContractButton() {
         page.waitForLoadState(LoadState.LOAD);
-        if (playwright.waitTillLocatorIsVisible(akhiriContractButton)) {
-            playwright.forceClickOn(akhiriContractButton);
+        if (playwright.waitTillLocatorIsVisible(akhiriContractButton.first())) {
+            playwright.forceClickOn(akhiriContractButton.first());
             playwright.forceClickOn(akhiriContractLink);
         }
         page.waitForLoadState(LoadState.LOAD);
@@ -333,5 +333,22 @@ public class SearchContractPO {
             page.onDialog(dialog -> dialog.accept());
             page.getByText("Batalkan Kontrak").first().click();
         }
+    }
+
+    /**
+     * Chect the visibility of akhiri contract button
+     * @return visible true otherwise false
+     */
+    public boolean isAkhiriContractButtonVisible() {
+        page.waitForLoadState(LoadState.LOAD);
+        return akhiriContractButton.first().isVisible();
+    }
+
+    /**
+     * Get akhiri contract button size
+     * @return int data type
+     */
+    public int getAkhiriContractButtonSize() {
+        return playwright.getLocators(akhiriContractButton).size();
     }
 }
