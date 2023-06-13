@@ -89,7 +89,7 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
-        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-addOn");
+        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
