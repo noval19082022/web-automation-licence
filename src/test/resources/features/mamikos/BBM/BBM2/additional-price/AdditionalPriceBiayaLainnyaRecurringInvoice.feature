@@ -7,11 +7,9 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag   | phone prod   |
       | 087708777615 | 087708777615 |
-    And admin akhiri contract
-    Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
