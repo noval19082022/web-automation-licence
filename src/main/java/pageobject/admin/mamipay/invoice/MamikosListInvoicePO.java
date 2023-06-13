@@ -64,6 +64,9 @@ public class MamikosListInvoicePO {
     Locator paidInvoiceList;
     Locator searchByDropdownlist;
     Locator searchRefund;
+    Locator editAddOns;
+    Locator updateFeeAdditionalPriceButton;
+    Locator actionResult;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -116,6 +119,9 @@ public class MamikosListInvoicePO {
         paidInvoiceList = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Paid Invoice List "));
         searchByDropdownlist = page.locator(".col-xs-2:nth-child(1) .filter-option");
         searchRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        editAddOns = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("adiautomation Add Ons 100000  ")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(""));
+        updateFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Fee"));
+        actionResult = page.getByText("The cost value must be an integer.");
     }
 
     /**
@@ -631,5 +637,28 @@ public class MamikosListInvoicePO {
      */
     public boolean listInColoumKostDetail(String kostName) {
         return playwright.waitTillLocatorIsVisible(page.locator("//tbody[1]/tr[1]/td[contains(.,'" + kostName + "')]"));
+    }
+
+    /**
+     * click on edit addons button on field
+     *
+     */
+    public void clickOnEditButton() {
+        playwright.clickOn(editAddOns);
+    }
+
+    /**
+     * Click on add fee in additional price
+     */
+    public void clickOnUpdateFeeInAdditionalPrice() {
+        playwright.clickOn(updateFeeAdditionalPriceButton);
+    }
+
+    /**
+     * Get action result message, success or fail message
+     * @return string data type, succes or fail message
+     */
+    public String getActionResultMessage() {
+        return playwright.getText(actionResult);
     }
 }
