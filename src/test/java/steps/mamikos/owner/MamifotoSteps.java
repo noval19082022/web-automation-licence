@@ -173,7 +173,7 @@ public class MamifotoSteps {
 
     }
 
-    @Then("owner should redirect to login page {string}")
+    @Then("user/owner/tenant should redirect to login page {string}")
     public void owner_should_redirect_to_login_page(String loginProphoto) {
         mamifoto = new MamifotoPO(ActiveContext.getActivePage());
         Assert.assertTrue(mamifoto.getURL().contains(loginProphoto), "URL doesn't match");
