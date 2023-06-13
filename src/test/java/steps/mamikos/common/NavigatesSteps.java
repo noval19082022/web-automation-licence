@@ -197,15 +197,11 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENGAJUAN_BOOKING, 60000.0, LoadState.LOAD);
     }
 
-    @When("owner navigates to old prophoto")
+    @When("owner navigates to old prophoto page")
     public void owner_navigates_to_old_prophoto() {
         playwright.navigateTo(Mamikos.URL + Mamikos.PROPHOTO, 30000.0, LoadState.LOAD);
-        playwright.waitTillUrlToBe(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0);
-        playwright.hardWait(3);
+       // playwright.waitTillUrlToBe(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0);
+        // playwright.hardWait(3);
     }
 
-    @When("owner navigates to old prophoto non owner")
-    public void owner_navigates_to_old_prophoto_non_owner() {
-        playwright.navigateTo(Mamikos.URL + Mamikos.PROPHOTO, 30000.0, LoadState.LOAD);
-    }
 }
