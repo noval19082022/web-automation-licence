@@ -70,3 +70,58 @@ Feature: Payment All
     And tenant select payment method Credit Card with cc number is "4000 0000 0000 1091", expired date month "12" years "99", and ccv is "010"
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
+  @paymentDana @TEST_DOM-577
+  Scenario: Tenant pay kos Dana
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method with DANA
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @paymentLinkAja @TEST_DOM-574
+  Scenario: Tenant pay kos LinkAja
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method using LinkAja
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @paymentMandiri @TEST_DOM-487
+  Scenario: Tenant pay kos mandiri
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using mandiri without close the page
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @paymentOvo @TEST_DOM-484
+  Scenario: Tenant pay kos ovo
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @paymentPermata @TEST_DOM-486
+  Scenario: Tenant pay kos permata
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method using Permata
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
