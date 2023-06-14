@@ -10,7 +10,7 @@ Feature: Multiple Invoice
     When user wants to subscribe Goldplus 2
     And user navigates to owner dashboard
     And user click info untuk anda "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!"
-    Then verify redirect to pilih periode screen
+    Then owner will see that the text "Pilih Periode Berlangganan" is displayed
     And user navigates to owner dashboard
 
     #multiple invoice from Broadcast chat while on process buy GP1
@@ -25,6 +25,6 @@ Feature: Multiple Invoice
     When owner navigates to property saya kos
     And owner search kost "Kos Adelia 4565 Tipe A" on property saya page
     And owner atur promo owner
-    Then verify redirect to invoice universal
+    Then owner will see that the text "Paket GoldPlus " is displayed
     When owner navigates to "/goldplus/payment"
     Then verify unpaid invoice is 1

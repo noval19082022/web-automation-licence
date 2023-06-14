@@ -22,7 +22,6 @@ public class GoldplusPO {
     Locator registerGPButton;
     Locator pilihPeriodeGPButton;
     Locator pilihBayarSekarang;
-    Locator pilihPeriodeTitle;
     Locator lihatInvoiceButton;
     Locator messageText;
     Locator lihatTagihanTable;
@@ -43,7 +42,6 @@ public class GoldplusPO {
         registerGPButton = page.getByTestId("registerGP_btn");
         pilihPeriodeGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
         pilihBayarSekarang = page.locator(".bg-c-button--primary");
-        pilihPeriodeTitle = page.getByText("Pilih Periode Berlangganan");
         lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
         messageText = page.locator(".bg-c-empty-state__description");
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
@@ -121,38 +119,6 @@ public class GoldplusPO {
     }
 
     /**
-     * Click on register GP button on owner dashboard
-     *
-     *
-     */
-    public void clickOnRegisterGP() {
-        playwright.clickOn(registerGPButton);
-    }
-
-    /**
-     * Click on GP package button on subscibe GP list package
-     * @param gpPackage
-     *
-     */
-    public void choosePaketGP(String gpPackage) {
-       String gpPackageButton = "//*[@data-testid='beli" + gpPackage + "_btn']";
-       playwright.clickOn(page.locator(gpPackageButton));
-    }
-
-    /**
-     * Click on Pilih Periode Button
-     *
-     *
-     */
-    public void clickOnPilihPeriodeButton() {
-        playwright.clickOn(pilihPeriodeGPButton);
-    }
-
-    public void clickOnBayarSekarang() {
-        playwright.clickOn(pilihBayarSekarang);
-    }
-
-    /**
      * Click on Info Untuk Anda on owner dashboard
      * @param infoUntukAndaMessage
      *
@@ -162,18 +128,10 @@ public class GoldplusPO {
     }
 
     /**
-     * Verify pilih periode screen
-     * @return boolean, true
+     * Click on Lihat invoice button on broadcast chat screen
+     *
      *
      */
-    public boolean isPilihPeriodeScreen() {
-        return playwright.waitTillLocatorIsVisible(pilihPeriodeTitle);
-    }
-
-    public void isLihatInvoiceDisplayed() {
-        playwright.waitTillLocatorIsVisible(lihatInvoiceButton);
-    }
-
     public void clickOnLihatInvoice() {
         playwright.clickOn(lihatInvoiceButton);
     }
@@ -188,16 +146,6 @@ public class GoldplusPO {
     }
 
     /**
-     * Verify title empty state page
-     * @param title
-     * @return title text
-     */
-    public String getTitleEmptyState(String title) {
-       return playwright.getText(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(title)));
-    }
-
-
-    /**
      * Get message text empty state
      * @return String message text
      *
@@ -205,17 +153,6 @@ public class GoldplusPO {
     public String getMessage() {
         return playwright.getText(messageText).replaceAll("\\s", "");
     }
-
-
-    /**
-     * Verify redirection to invoice universal
-     * @return boolean, true is invoice universal screen
-     *
-     */
-    public boolean isInvoiceUniversal() {
-        return playwright.isTextDisplayed("Paket GoldPlus ", 3);
-    }
-
 
     public boolean isConfirmationPopUpVisible(String titlePopUp) {
         return playwright.isTextDisplayed(titlePopUp);

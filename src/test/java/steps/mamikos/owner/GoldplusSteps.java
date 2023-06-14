@@ -95,56 +95,24 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Save");
     }
 
-    @And("user purchase {string}")
-    public void userPurchase(String gpPackage) {
-        goldplus.clickOnRegisterGP();
-        if (gpPackage.equals("Goldplus 1")){
-            goldplus.choosePaketGP("GP1");
-        } else if (gpPackage.equals("Goldplus 2")){
-            goldplus.choosePaketGP("GP2");
-        }
-        goldplus.clickOnPilihPeriodeButton();
-        goldplus.clickOnBayarSekarang();
-    }
-
     @And("user click info untuk anda {string}")
     public void userClickInfoUntukAnda(String infoUntukAnda) {
         goldplus.clickOnInfoUntukAnda(infoUntukAnda);
     }
 
-    @Then("verify redirect to pilih periode screen")
-    public void verifyRedirectToPilihPeriodeScreen() {
-        Assert.assertTrue(goldplus.isPilihPeriodeScreen(), "It's doesn't pilih periode screen!");
-    }
-
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
-        goldplus.isLihatInvoiceDisplayed();
         goldplus.clickOnLihatInvoice();
-        Assert.assertTrue(goldplus.isDetailTagihanVisible(), "Detail tagihan doesn't visible");
-    }
-
-    @Then("user see Title {string} with message {string} on page {string}")
-    public void userSeeTitleWithMessageOnPage(String title, String message, String page) {
-        switch (page){
-            case "cek properti sekitar":
-                Assert.assertEquals(goldplus.getTitleEmptyState(title), title);
-                Assert.assertEquals(goldplus.getMessage(), message);
-        }
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
     }
 
     @Then("user see Title on page {string} is {string} with message:")
     public void userSeeTitleOnPageIsWithMessage(String page, String title, String docString) {
         switch (page){
             case "cek properti sekitar":
-                Assert.assertEquals(goldplus.getTitleEmptyState(title), title);
+                Assert.assertTrue(playwright.isTextDisplayed(title, 1000));
                 Assert.assertEquals(goldplus.getMessage(),docString.replaceAll("\\s", ""));
         }
-    }
-
-    @Then("verify redirect to invoice universal")
-    public void verifyRedirectToInvoiceUniversal() {
-        Assert.assertTrue(goldplus.isInvoiceUniversal(), "Doesn't invoice universal!");
     }
 
     @Then("verify unpaid invoice is {int}")
