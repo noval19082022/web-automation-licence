@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -23,7 +25,7 @@ public class GoldplusPO {
     Locator pilihPeriodeTitle;
     Locator lihatInvoiceButton;
     Locator messageText;
-    Locator lihatTagihan;
+    Locator lihatTagihanTable;
     Locator actionButtonPopUp;
 
     public GoldplusPO(Page page) {
@@ -44,8 +46,7 @@ public class GoldplusPO {
         pilihPeriodeTitle = page.getByText("Pilih Periode Berlangganan");
         lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
         messageText = page.locator(".bg-c-empty-state__description");
-        lihatTagihan = page.locator(".goldplus-payment-list-table__row");
-
+        lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
     }
 
     /**
@@ -151,11 +152,20 @@ public class GoldplusPO {
         playwright.clickOn(pilihBayarSekarang);
     }
 
+    /**
+     * Click on Info Untuk Anda on owner dashboard
+     * @param infoUntukAndaMessage
+     *
+     */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        String infoUntukAnda = "//p[contains(.,'"+ infoUntukAndaMessage +"')]";
-        playwright.clickOn(page.locator(infoUntukAnda));
+        playwright.clickOnText(infoUntukAndaMessage);
     }
 
+    /**
+     * Verify pilih periode screen
+     * @return boolean, true
+     *
+     */
     public boolean isPilihPeriodeScreen() {
         return playwright.waitTillLocatorIsVisible(pilihPeriodeTitle);
     }
@@ -168,20 +178,41 @@ public class GoldplusPO {
         playwright.clickOn(lihatInvoiceButton);
     }
 
+    /**
+     * Verify Detail Tagihan visible
+     * @return boolean, true
+     *
+     */
     public boolean isDetailTagihanVisible() {
         return playwright.isTextDisplayed("Detail Tagihan");
     }
 
+    /**
+     * Verify title empty state page
+     * @param title
+     * @return title text
+     */
     public String getTitleEmptyState(String title) {
        return playwright.getText(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(title)));
     }
 
+
+    /**
+     * Get message text empty state
+     * @return String message text
+     *
+     */
     public String getMessage() {
         return playwright.getText(messageText).replaceAll("\\s", "");
     }
 
+
+    /**
+     * Verify redirection to invoice universal
+     * @return boolean, true is invoice universal screen
+     *
+     */
     public boolean isInvoiceUniversal() {
-//        String jenisPembayaran = "//*[contains(text(),'Paket GoldPlus ')]";
         return playwright.isTextDisplayed("Paket GoldPlus ", 3);
     }
 
@@ -197,10 +228,13 @@ public class GoldplusPO {
         playwright.clickOn(actionButtonPopUp);
     }
 
-
+    /**
+     * Get unpaid invoice GP
+     * @return int, count of unpaid invoice GP
+     *
+     */
     public int getCountInvoiceUnpaid() {
-        int unpaidInvoiceCount = (int) page.locator("//tr[@class='goldplus-payment-list-table__row']").count();
-        System.out.println(unpaidInvoiceCount);
-        return unpaidInvoiceCount;
+       playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
+       return playwright.getLocators(lihatTagihanTable).size();
     }
 }

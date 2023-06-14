@@ -147,17 +147,9 @@ public class GoldplusSteps {
         Assert.assertTrue(goldplus.isInvoiceUniversal(), "Doesn't invoice universal!");
     }
 
-    @And("owner click {string} on confirmation pop up")
-    public void ownerClickOnConfirmationPopUp(String actionText) {
-//        Assert.assertTrue(goldplus.isConfirmationPopUpVisible("Yakin ingin membatalkan pembayaran tagihan?"), "Confirmation pop up doesn't appear!");
-        goldplus.clickOnActionButtonPopUp(actionText);
-    }
-
     @Then("verify unpaid invoice is {int}")
-    public void verifyUnpaidInvoiceIs(int unpaidInvoiceExpected) {
-        unpaidInvoice = goldplus.getCountInvoiceUnpaid();
-        System.out.println("Unpaid invoice ="+ unpaidInvoice);
-        Assert.assertTrue(unpaidInvoice == unpaidInvoiceExpected);
+    public void verifyUnpaidInvoiceIs(int unpaidInvoice) {
+        Assert.assertTrue(unpaidInvoice == goldplus.getCountInvoiceUnpaid());
     }
 
     @When("owner wants to extends Goldplus from chatlist")

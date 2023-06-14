@@ -19,11 +19,21 @@ public class PromoOwnerPO {
         aturPromoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Atur Promo"));
     }
 
+    /**
+     * Click selengkapnya button on kost list on property saya kos
+     *
+     *
+     */
     public void clickOnSelengkapnya() {
         playwright.clickOn(lihatSelengkapnyaButton);
 
     }
 
+    /**
+     * Click atur promo owner from property saya -> kos -> selengkapnya
+     *
+     *
+     */
     public void clickAturPromo() {
         playwright.clickOn(aturPromoButton);
     }
