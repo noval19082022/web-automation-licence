@@ -10,6 +10,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
       | phone stag   | phone prod   |
       | 087708777615 | 087708777615 |
 
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -19,9 +20,6 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod        |
       | Kost Adi Auto DP Only | Kost Adi Auto DP Only |
