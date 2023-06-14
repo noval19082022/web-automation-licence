@@ -24,6 +24,7 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
+        playwright.hardWait(3);
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
@@ -171,4 +172,11 @@ public class MamifotoSteps {
         mamifoto.clickOnButtonBackInvoiceExpired();
 
     }
+
+    @Then("user/owner/tenant should redirect to login page {string}")
+    public void owner_should_redirect_to_login_page(String loginProphoto) {
+        mamifoto = new MamifotoPO(ActiveContext.getActivePage());
+        Assert.assertTrue(mamifoto.getURL().contains(loginProphoto), "URL doesn't match");
+    }
+
 }

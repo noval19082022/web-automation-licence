@@ -31,8 +31,11 @@ public class InvoicePO {
     Locator voucherInputPopUpWarningText;
     Locator pilihPembayaranButton;
     Locator bankMandiri;
+    Locator bankPermata;
     Locator bankBNI;
     Locator kartuKredit;
+    Locator dana;
+    Locator linkAja;
     Locator inputKartuKreditNumber;
     Locator inputKartuKreditMonth;
     Locator inputKartuKreditYear;
@@ -40,6 +43,7 @@ public class InvoicePO {
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
+    Locator kodePembayaranPermata;
     Locator txtAdminCost;
     Locator txtRentPerPeriod;
     Locator filterKostName;
@@ -57,6 +61,7 @@ public class InvoicePO {
     Locator txtAddCostInvoiceDetail;
     Locator txtOVO;
     Locator noOvoTextBox;
+    Locator additionalPriceDivAddOn;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -79,8 +84,11 @@ public class InvoicePO {
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
+        bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
         kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
+        dana = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("DANA")).nth(1);
+        linkAja = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("LinkAja")).nth(1);
         inputKartuKreditNumber = page.getByPlaceholder("0000 0000 0000 0000");
         inputKartuKreditMonth = page.getByPlaceholder("MM");
         inputKartuKreditYear = page.getByPlaceholder("YY");
@@ -88,6 +96,7 @@ public class InvoicePO {
         bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
+        kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
@@ -103,6 +112,8 @@ public class InvoicePO {
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
+        additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+
     }
 
     /**
@@ -253,6 +264,13 @@ public class InvoicePO {
     }
 
     /**
+     * Choose permata as payment
+     */
+    public void clickOnPermata() {
+        playwright.clickOn(bankPermata);
+    }
+
+    /**
      * Click on bayar sekarang button
      */
     public void clickOnBayarSekarang() {
@@ -276,6 +294,14 @@ public class InvoicePO {
     }
 
     /**
+     * Get kode pembayaran number to use on midtrans PERMATA
+     * @return String data type
+     */
+    public String getKodePembayaranNumberText() {
+        return kodePembayaranPermata.textContent().trim();
+    }
+
+    /**
      * Get invoice number
      * @return String data type of invoice number
      */
@@ -288,9 +314,16 @@ public class InvoicePO {
      * @return String data type list of additional price section
      */
     public List<String> getAdditionalPriceInnerText() {
+        List<String> textAdditionalPrice = null;
         page.waitForLoadState(LoadState.LOAD);
-        additionalPriceDiv.waitFor();
-        return additionalPriceDiv.allInnerTexts();
+        if (playwright.waitTillLocatorIsVisible(additionalPriceDiv)){
+            additionalPriceDiv.waitFor();
+            textAdditionalPrice = additionalPriceDiv.allInnerTexts();
+        }else {
+            additionalPriceDivAddOn.waitFor();
+            textAdditionalPrice = additionalPriceDivAddOn.allInnerTexts();
+        }
+        return textAdditionalPrice;
     }
 
     /**
@@ -437,6 +470,36 @@ public class InvoicePO {
         inputKartuKreditCCV.click();
         page.keyboard().type(ccv);
         clickOnBayarSekarang();
+        return new PaymentPO(page);
+    }
+
+    /**
+     * Select payment method and direct process using dana
+     * @return PaymentPO
+     */
+    public PaymentPO paymentUsingDANA() {
+        clickOnPilihPembayaran();
+        dana.click();
+        clickOnBayarSekarang();
+        page = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via DANA")).click();
+        });
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
+        return new PaymentPO(page);
+    }
+
+    /**
+     * Select payment method and direct process using Link aja
+     * @return PaymentPO
+     */
+    public PaymentPO paymentUsingLinkAja() {
+        clickOnPilihPembayaran();
+        linkAja.click();
+        clickOnBayarSekarang();
+        page = page.waitForPopup(() -> {
+            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via LinkAja")).click();
+        });
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 }

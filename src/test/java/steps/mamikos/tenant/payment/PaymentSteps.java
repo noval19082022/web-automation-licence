@@ -5,10 +5,12 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PaymentSteps {
@@ -16,6 +18,7 @@ public class PaymentSteps {
     RiwayatBookingPO riwayatBookingPO = new RiwayatBookingPO(page);
     InvoicePO invoicePO;
     PaymentPO paymentPO;
+    MidtransPaymentPO midtransPaymentPO;
 
     @And("tenant select payment method BNI with VA number {string} and amount {string}")
     public void paymentBNI(String VA, String amount) {
@@ -35,6 +38,35 @@ public class PaymentSteps {
         paymentPO.paymentUsingCC();
     }
 
+    @And("tenant select payment method with DANA")
+    public void tenantSelectPaymentMethodWithDANA() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        paymentPO = invoicePO.paymentUsingDANA();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
+    }
+
+    @And("tenant select payment method using LinkAja")
+    public void tenantSelectPaymentMethodUsingLinkAja() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        paymentPO = invoicePO.paymentUsingLinkAja();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
+    }
+
+    @And("tenant select payment method using Permata")
+    public void tenantSelectPaymentMethodUsingPermata() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO.paymentForPermata(kodePembayaran);
+    }
+
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
@@ -47,5 +79,12 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
         Assert.assertTrue(paymentPO.isPaymentSuccess(), "Payment failed");
+    }
+
+    @Then("tenant can not sees price with name {string} on invoice page")
+    public void tenantCanNotSeesPriceWithNameOnInvoicePage(String addOnsPriceType) {
+        invoicePO = new InvoicePO(ActiveContext.getActivePage());
+        List<String> biayaLainnyaInnerText = invoicePO.getAdditionalPriceInnerText();
+        Assert.assertFalse(biayaLainnyaInnerText.get(0).contains(addOnsPriceType));
     }
 }
