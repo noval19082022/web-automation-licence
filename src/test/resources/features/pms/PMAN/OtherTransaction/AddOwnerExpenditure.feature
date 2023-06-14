@@ -165,3 +165,8 @@ Feature: Add Owner Expenditure
     And admin upload invalid attachment
     Then show upload attachment error message
 
+  @TEST_PMAN-6538 @pman-prod
+  Scenario: Max 30 pengeluaran each Owner Expenditure
+    When admin tambah data owner expenditure
+    And admin add 30 pengeluaran
+    Then admin can't add more pengeluaran
