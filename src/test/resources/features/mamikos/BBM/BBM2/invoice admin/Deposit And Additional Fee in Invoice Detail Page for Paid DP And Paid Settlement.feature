@@ -9,12 +9,11 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
-    And admin akhiri contract
-    Then admin should success terminate contract
 
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -24,9 +23,6 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 0890867321212 | 0890867321212 | mamikosqa123  |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Adi Auto DP AddFee Deposit       | Kost Adi Auto DP AddFee Deposit       |
