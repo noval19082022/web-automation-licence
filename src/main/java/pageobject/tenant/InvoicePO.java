@@ -61,6 +61,7 @@ public class InvoicePO {
     Locator txtAddCostInvoiceDetail;
     Locator txtOVO;
     Locator noOvoTextBox;
+    Locator additionalPriceDivAddOn;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -111,6 +112,8 @@ public class InvoicePO {
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
+        additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+
     }
 
     /**
@@ -311,9 +314,16 @@ public class InvoicePO {
      * @return String data type list of additional price section
      */
     public List<String> getAdditionalPriceInnerText() {
+        List<String> textAdditionalPrice = null;
         page.waitForLoadState(LoadState.LOAD);
-        additionalPriceDiv.waitFor();
-        return additionalPriceDiv.allInnerTexts();
+        if (playwright.waitTillLocatorIsVisible(additionalPriceDiv)){
+            additionalPriceDiv.waitFor();
+            textAdditionalPrice = additionalPriceDiv.allInnerTexts();
+        }else {
+            additionalPriceDivAddOn.waitFor();
+            textAdditionalPrice = additionalPriceDivAddOn.allInnerTexts();
+        }
+        return textAdditionalPrice;
     }
 
     /**

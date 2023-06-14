@@ -10,6 +10,7 @@ import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PaymentSteps {
@@ -78,5 +79,12 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
         Assert.assertTrue(paymentPO.isPaymentSuccess(), "Payment failed");
+    }
+
+    @Then("tenant can not sees price with name {string} on invoice page")
+    public void tenantCanNotSeesPriceWithNameOnInvoicePage(String addOnsPriceType) {
+        invoicePO = new InvoicePO(ActiveContext.getActivePage());
+        List<String> biayaLainnyaInnerText = invoicePO.getAdditionalPriceInnerText();
+        Assert.assertFalse(biayaLainnyaInnerText.get(0).contains(addOnsPriceType));
     }
 }

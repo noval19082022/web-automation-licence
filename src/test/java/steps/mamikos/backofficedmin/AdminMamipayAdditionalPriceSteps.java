@@ -200,4 +200,28 @@ public class AdminMamipayAdditionalPriceSteps {
     public void admins_can_sees_error_message() {
         Assert.assertEquals(invoiceAdmin.getActionResultMessage(), "The cost value must be an integer.", "Message is not fail message");
     }
+
+    @When("admin edit additional price:")
+    public void adminEditAdditionalPrice(DataTable table) {
+        additionalPriceData = table.asMap(String.class, String.class);
+        var additionalPriceSearchBy = additionalPriceData.get("search by");
+        var searchValue = additionalPriceData.get("search value");
+        var invoiceNumber = additionalPriceData.get("invoice number").equalsIgnoreCase("default");
+        var invoiceNumberValue = invoiceNumber ? InvoiceTestData.getInvoiceNumber() : additionalPriceData.get("invoice number");
+        var additionalPriceType = additionalPriceData.get("additional price type");
+        var additionalPriceName = additionalPriceData.get("additional price title");
+        var additionalPriceValue = additionalPriceData.get("addtional price value");
+        adminMamipay.goToMamikosSearchInvoice();
+        invoiceAdmin.selectSearchInvoiceBy(additionalPriceSearchBy);
+        invoiceAdmin.fillInputSearchValue(searchValue);
+        invoiceAdmin.clickOnCariInvoice();
+        invoiceAdmin.goToInvoiceDetail(invoiceNumberValue);
+        invoiceAdmin.clickOnEditButton();
+        if (!additionalPriceType.equalsIgnoreCase("default")) {
+            invoiceAdmin.selectAdditionalPriceType(additionalPriceType);
+        }
+        invoiceAdmin.fillAdditionalPriceName(additionalPriceName);
+        invoiceAdmin.fillAdditionalPriceCostValue(additionalPriceValue);
+        invoiceAdmin.clickOnUpdateFeeInAdditionalPrice();
+    }
 }
