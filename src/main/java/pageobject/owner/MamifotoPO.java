@@ -1,12 +1,10 @@
 package pageobject.owner;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class MamifotoPO {
     private Page page;
