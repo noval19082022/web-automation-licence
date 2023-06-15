@@ -16,6 +16,6 @@ public class PromoOwnerSteps {
     @And("owner atur promo owner")
     public void ownerAturPromoOwner() {
         promoOwner.clickOnSelengkapnya();
-        promoOwner.clickAturPromo();
+        playwright.clickOnTextButton("Atur Promo");
     }
 }

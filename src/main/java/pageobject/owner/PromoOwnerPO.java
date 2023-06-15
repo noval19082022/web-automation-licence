@@ -9,14 +9,12 @@ public class PromoOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator lihatSelengkapnyaButton;
-    Locator aturPromoButton;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
-        aturPromoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Atur Promo"));
     }
 
     /**
@@ -27,14 +25,5 @@ public class PromoOwnerPO {
     public void clickOnSelengkapnya() {
         playwright.clickOn(lihatSelengkapnyaButton);
 
-    }
-
-    /**
-     * Click atur promo owner from property saya -> kos -> selengkapnya
-     *
-     *
-     */
-    public void clickAturPromo() {
-        playwright.clickOn(aturPromoButton);
     }
 }
