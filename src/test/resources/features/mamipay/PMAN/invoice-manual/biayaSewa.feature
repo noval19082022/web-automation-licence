@@ -118,3 +118,15 @@
         | KeKERUSAKANAN 21 hari |
         | kehilangan            |
         | asuransi              |
+
+    @TEST_PMAN-5965 @pman-prod
+    Scenario: delete biaya sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And admin creates Invoice Manual "Biaya Sewa"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
+        | Perpanjang sewa harian  | today         | tomorrow        | automation pman | 50000         |
+      And the admin deletes Invoice Manual
+      Then the empty state is display in "Biaya Sewa" table
