@@ -96,7 +96,6 @@ public class TenantBookingSteps {
     @And("user cancel booking")
     public void userCancelBooking() {
         page.navigate("https://jambu.kerupux.com/user/booking/");
-        page.pause();
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBooking();
     }

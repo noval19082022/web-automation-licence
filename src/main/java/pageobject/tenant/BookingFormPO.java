@@ -138,7 +138,6 @@ public class BookingFormPO {
 
         if(tungguKonfirmasiPemilik.first().isVisible()){
             bookingNeedConfirmation = playwright.getLocators(tungguKonfirmasiPemilik).size();
-            System.out.println(bookingNeedConfirmation);
             for (int i = 0; i < bookingNeedConfirmation; i++) {
                 lihatSelengkapnyaTextLink.first().click();
                 batalkanBookingButton.first().click();
