@@ -170,3 +170,27 @@ Feature: Add Owner Expenditure
     When admin tambah data owner expenditure
     And admin add 30 pengeluaran
     Then admin can't add more pengeluaran
+
+  @TEST_PMAN-6537 @pman-prod
+  Scenario: Total Pengeluaran Calculation
+    When admin tambah data owner expenditure
+    #there is no pengeluaran yet
+    Then total pengeluaran should be "-"
+    #Add pengeluaran 1
+    When admin add pengeluaran :
+      | no  | Kategori Pengeluaran        | Nama Pengeluaran  | Kuantitas | Nominal Pengeluaran | Status Persediaan | Jenis Produk  |
+      | 1   | Administrasi & Iuran Kos    | Wifi              | 1         | 50000               | Non Stock         | LSSS          |
+    Then total pengeluaran should be "Rp50.000"
+    #Add pengeluaran 2
+    When admin add pengeluaran :
+      | no  | Kategori Pengeluaran        | Nama Pengeluaran  | Kuantitas | Nominal Pengeluaran | Status Persediaan | Jenis Produk  |
+      | 2   | Amenities Penyewa           | Sabun Mandi       | 1         | 20000               | Stock             | LSAP          |
+    Then total pengeluaran should be "Rp70.000"
+    #Add pengeluaran 3
+    When admin add pengeluaran :
+      | no  | Kategori Pengeluaran        | Nama Pengeluaran  | Kuantitas | Nominal Pengeluaran | Status Persediaan | Jenis Produk  |
+      | 3   | Bahan Pembersih Kos & Dapur | Wipol             | 1         | 10000               | Stock             | PC            |
+    Then total pengeluaran should be "Rp80.000"
+    #Remove pengeluaran 2
+    When admin remove pengeluaran "2"
+    Then total pengeluaran should be "Rp60.000"
