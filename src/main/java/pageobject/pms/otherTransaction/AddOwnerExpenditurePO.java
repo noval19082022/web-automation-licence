@@ -46,6 +46,9 @@ public class AddOwnerExpenditurePO {
     Locator deleteAttachment;
     Locator attachmentFileName;
     Locator attachmentErrorMessage;
+    Locator totalPengeluaran;
+    Locator deletePengeluaranButton;
+    Locator confirmDeletePengeluaran;
     public AddOwnerExpenditurePO(Page page) {
         this.page = page;
 
@@ -75,6 +78,8 @@ public class AddOwnerExpenditurePO {
         deleteAttachment = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("delete"));
         attachmentFileName = page.locator("p.bg-c-text--title-5").nth(1);
         attachmentErrorMessage = page.locator(".bg-c-field__message").first();
+        totalPengeluaran = page.locator(".bg-c-field__description").nth(3);
+        confirmDeletePengeluaran = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
     }
 
     /**
@@ -436,5 +441,23 @@ public class AddOwnerExpenditurePO {
     public void assertAttachmentErrorMessage() {
         assertThat(attachmentErrorMessage).isVisible();
         assertThat(attachmentErrorMessage).hasText("File harus berupa .pdf/.jpg/.jpeg/.png dengan ukuran maksimal 8 MB.");
+    }
+
+    /**
+     * Assert total pengeluaran value
+     * @param total total pengeluaran
+     */
+    public void assertTotalPengeluaran(String total) {
+        assertThat(totalPengeluaran).hasText(total);
+    }
+
+    /**
+     * delete pengeluaran ke-n
+     * @param index n
+     */
+    public void deletePengeluaran(String index) {
+        deletePengeluaranButton = page.getByTestId("delete-expense-"+(Integer.parseInt(index)-1)+"");
+        deletePengeluaranButton.click();
+        confirmDeletePengeluaran.click();
     }
 }
