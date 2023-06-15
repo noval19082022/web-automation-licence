@@ -19,6 +19,7 @@ public class BookingFormPO {
     Locator cancelReasonButton;
     Locator confirmCancelButton;
     Locator successCancel;
+    Locator bookingKamuDibatalkan;
     Locator okCancelButton;
     Locator rentDurationIncreaseButton;
     Locator ubahButton;
@@ -27,6 +28,7 @@ public class BookingFormPO {
     Locator closeBtn;
     Locator uploadDoc;
     Locator alertTextAfterClick;
+    Locator tungguKonfirmasiPemilik;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -34,10 +36,11 @@ public class BookingFormPO {
         this.ajukanSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
-        this.lihatSelengkapnyaTextLink = page.getByText("Lihat selengkapnya").first();
+        this.lihatSelengkapnyaTextLink = page.locator("//*[@class='--waiting']/../following-sibling::*/*[@class='text-primary']");
         this.batalkanBookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Booking"));
         this.confirmCancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
         this.successCancel = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
+        bookingKamuDibatalkan = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Kamu Dibatalkan"));
         this.okCancelButton = page.locator(".bg-c-button");
         this.cancelReasonButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Berubah pikiran/ada rencana lain")).locator("span");
         this.rentDurationIncreaseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus"));
@@ -47,6 +50,7 @@ public class BookingFormPO {
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.uploadDoc = page.locator("div").getByTestId("bookingDocumentUploader").first().locator("//input[@type='file']");
         this.alertTextAfterClick = page.getByText("Masukkan pekerjaan untuk memproses pengajuan sewa.");
+        tungguKonfirmasiPemilik = page.locator("label").filter(new Locator.FilterOptions().setHasText("Tunggu Konfirmasi"));
     }
 
     /**
@@ -116,22 +120,37 @@ public class BookingFormPO {
     }
 
     /**
+     * Check visibility of booking kamu dibatalkan button
+     * @return visible true otherwise false
+     */
+    public boolean isBookingKamuDibatalkanVisible() {
+        return bookingKamuDibatalkan.isVisible();
+    }
+
+    /**
      * click on Lihat Selengkapnya
      * click on Batalkan Booking
      * click on cancel reason button
      * click on Ya Batalkan button
      */
     public void cancelBooking() {
-        if (lihatSelengkapnyaTextLink.isVisible()) {
-            for (int i = 0; i < 2; i++) {
-                lihatSelengkapnyaTextLink.click();
-            }
-        }
+        var bookingNeedConfirmation = 0;
 
-        if (batalkanBookingButton.isVisible()) {
-            batalkanBookingButton.click();
-            cancelReasonButton.click();
-            confirmCancelButton.click();
+        if(tungguKonfirmasiPemilik.first().isVisible()){
+            bookingNeedConfirmation = playwright.getLocators(tungguKonfirmasiPemilik).size();
+            System.out.println(bookingNeedConfirmation);
+            for (int i = 0; i < bookingNeedConfirmation; i++) {
+                lihatSelengkapnyaTextLink.first().click();
+                batalkanBookingButton.first().click();
+                cancelReasonButton.click();
+                confirmCancelButton.click();
+                if (waitUntilSuccessCancelHeadingVisible()) {
+                    closeCancelPopUp();
+                } else if (isBookingKamuDibatalkanVisible()){
+                    playwright.clickOn(closeBtn);
+                    page.reload();
+                }
+            }
         }
     }
 
