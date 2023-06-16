@@ -85,3 +85,15 @@ Feature: Payment Staging
     And admin input detail kerusakan "rusak" on edit deposit page
     And admin want to simpan draft edit deposit
     Then admin will see detail pop up "Berhasil disimpan sebagai draf"
+
+  @TEST_DOM-618 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] see Sisa Deposit
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
+    And admin input biaya kerusakan "60000"
+    Then admin will see additional notes menu deposit
