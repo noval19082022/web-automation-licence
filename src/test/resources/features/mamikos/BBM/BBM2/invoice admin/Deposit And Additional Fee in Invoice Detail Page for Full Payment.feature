@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_BBM-1329 @TEST_BBM-1330
+@regression @BBM2 @TEST_BBM-1329 @TEST_BBM-1330 @lawackrun1
 
 #  kost used: Kost Adi Auto FullPaid AddFee Deposit
 #  (Kost Regular FullPaid with Additional Fee and Deposit)
@@ -34,7 +34,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     When user login as owner:
       | phone stag      | phone prod      | password      |
       | 08900000000021  | 08900000000021  | mamikosqa123  |
-    And owner accept booking
+    And owner accept booking from tenant:
+      | tenant stag          | tenant prod          |
+      | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Get Invoice Number
