@@ -1,4 +1,4 @@
-@BBM2 @lawackrun1
+@BBM2
 Feature: Additional Price Biaya Lainnya On Extended Invoice
 
   Scenario: Admin Batalkan Contract
