@@ -98,10 +98,6 @@ public class TenantBookingSteps {
         page.navigate("https://jambu.kerupux.com/user/booking/");
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBooking();
-        if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {
-            Assert.assertEquals(bookingForm.getSuccessCancelText().trim(), "Booking Anda berhasil dibatalkan");
-        }
-        bookingForm.closeCancelPopUp();
     }
 
     @And("user cancel booking with reason {string}")

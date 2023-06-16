@@ -254,4 +254,51 @@ public class AddOwnerExpenditureSteps {
     public void admin_upload_invalid_attachment() {
         add.uploadAttachment("svg");
     }
+    @When("admin add 30 pengeluaran")
+    public void admin_add_pengeluaran() {
+        for (int i=1;i<=30;i++){
+            add.setKategoriPengeluaran("Amenities Penyewa",String.valueOf(i));
+            add.setNamaPengeluaran("Sabun Mandi",String.valueOf(i));
+            add.setKuantitas("5",String.valueOf(i));
+            add.setNominalPengeluaran("50000",String.valueOf(i));
+            add.setStatusPersediaan("Non Stock",String.valueOf(i));
+            add.setJenisProduk("LSSS",String.valueOf(i));
+            if (i<30){
+                add.addMorePengeluaran();
+            }
+        }
+    }
+    @Then("admin can't add more pengeluaran")
+    public void admin_can_t_add_more_pengeluaran() {
+        add.assertTambahPengeluaranButtonDisable();
+    }
+    @Then("total pengeluaran should be {string}")
+    public void total_pengeluaran_should_be(String total) {
+        add.assertTotalPengeluaran(total);
+    }
+    @When("admin add pengeluaran :")
+    public void admin_add_pengeluaran(DataTable tables) {
+        biayaPengeluaran = tables.asMaps(String.class, String.class);
+        for (Map<String,String> biaya : biayaPengeluaran){
+            String no = biaya.get("no");
+            String category = biaya.get("Kategori Pengeluaran");
+            String name = biaya.get("Nama Pengeluaran");
+            String quantity = biaya.get("Kuantitas");
+            String amount = biaya.get("Nominal Pengeluaran");
+            String status = biaya.get("Status Persediaan");
+            String product = biaya.get("Jenis Produk");
+
+            add.setKategoriPengeluaran(category,no);
+            add.setNamaPengeluaran(name,no);
+            add.setKuantitas(quantity,no);
+            add.setNominalPengeluaran(amount,no);
+            add.setStatusPersediaan(status,no);
+            add.setJenisProduk(product,no);
+        }
+        add.addMorePengeluaran();
+    }
+    @When("admin remove pengeluaran {string}")
+    public void admin_remove_pengeluaran(String index) {
+        add.deletePengeluaran(index);
+    }
 }

@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -17,6 +19,13 @@ public class GoldplusPO {
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
     Locator selectRadioButtonYes;
+    Locator registerGPButton;
+    Locator pilihPeriodeGPButton;
+    Locator pilihBayarSekarang;
+    Locator lihatInvoiceButton;
+    Locator messageText;
+    Locator lihatTagihanTable;
+    Locator actionButtonPopUp;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -30,12 +39,18 @@ public class GoldplusPO {
         editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
+        registerGPButton = page.getByTestId("registerGP_btn");
+        pilihPeriodeGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+        pilihBayarSekarang = page.locator(".bg-c-button--primary");
+        lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
+        messageText = page.locator(".bg-c-empty-state__description");
+        lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
     }
 
     /**
      * Input phone number to reset Goldplus
      */
-    public void inputGoldplusPhoneNumber (String phoneNumberGP) {
+    public void inputGoldplusPhoneNumber(String phoneNumberGP) {
         goldplusPhoneNumberInput.fill(phoneNumberGP);
     }
 
@@ -103,4 +118,60 @@ public class GoldplusPO {
         playwright.clickOn(selectRadioButtonYes);
     }
 
+    /**
+     * Click on Info Untuk Anda on owner dashboard
+     * @param infoUntukAndaMessage
+     *
+     */
+    public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
+        playwright.clickOnText(infoUntukAndaMessage);
+    }
+
+    /**
+     * Click on Lihat invoice button on broadcast chat screen
+     *
+     *
+     */
+    public void clickOnLihatInvoice() {
+        playwright.clickOn(lihatInvoiceButton);
+    }
+
+    /**
+     * Verify Detail Tagihan visible
+     * @return boolean, true
+     *
+     */
+    public boolean isDetailTagihanVisible() {
+        return playwright.isTextDisplayed("Detail Tagihan");
+    }
+
+    /**
+     * Get message text empty state
+     * @return String message text
+     *
+     */
+    public String getMessage() {
+        return playwright.getText(messageText).replaceAll("\\s", "");
+    }
+
+    public boolean isConfirmationPopUpVisible(String titlePopUp) {
+        return playwright.isTextDisplayed(titlePopUp);
+    }
+
+    public void clickOnActionButtonPopUp(String actionText) {
+        actionButtonPopUp= page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(actionText));
+        System.out.println(actionButtonPopUp);
+        playwright.pageScrollUntilElementIsVisible(actionButtonPopUp);
+        playwright.clickOn(actionButtonPopUp);
+    }
+
+    /**
+     * Get unpaid invoice GP
+     * @return int, count of unpaid invoice GP
+     *
+     */
+    public int getCountInvoiceUnpaid() {
+       playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
+       return playwright.getLocators(lihatTagihanTable).size();
+    }
 }

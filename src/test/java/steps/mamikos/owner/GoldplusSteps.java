@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -21,8 +22,12 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
+
+    private Integer unpaidInvoice;
+
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
+
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
@@ -48,7 +53,7 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
 
-        @Then("user verify list of Periode Berlangganan is appear")
+    @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
         playwright.hardWait(1000);
         List<Map<String, String>> table = dataTable.asMaps();
@@ -90,6 +95,31 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Save");
     }
 
+    @And("user click info untuk anda {string}")
+    public void userClickInfoUntukAnda(String infoUntukAnda) {
+        goldplus.clickOnInfoUntukAnda(infoUntukAnda);
+    }
+
+    @Then("user verify Lihat Invoice visible")
+    public void userVerifyLihatInvoiceVisible() {
+        goldplus.clickOnLihatInvoice();
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
+    }
+
+    @Then("user see Title on page {string} is {string} with message:")
+    public void userSeeTitleOnPageIsWithMessage(String page, String title, String docString) {
+        switch (page){
+            case "cek properti sekitar":
+                Assert.assertTrue(playwright.isTextDisplayed(title, 1000));
+                Assert.assertEquals(goldplus.getMessage(),docString.replaceAll("\\s", ""));
+        }
+    }
+
+    @Then("verify unpaid invoice is {int}")
+    public void verifyUnpaidInvoiceIs(int unpaidInvoice) {
+        Assert.assertTrue(unpaidInvoice == goldplus.getCountInvoiceUnpaid());
+    }
+
     @When("owner wants to extends Goldplus from chatlist")
     public void owner_wants_to_extends_goldplus_from_chatlist() {
         chat.clickChatOwner();
@@ -114,5 +144,4 @@ public class GoldplusSteps {
     public void owner_wants_to_access_goldplus_dashboard(){
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
     }
-
 }

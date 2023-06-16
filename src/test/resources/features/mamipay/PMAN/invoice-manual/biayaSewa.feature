@@ -36,7 +36,7 @@
         | close       |
         | kembali     |
 
-    @TEST_PMAN-5775 @pman-prod
+    @continue @TEST_PMAN-5775 @pman-prod
     Scenario: Add multiple biaya sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -54,6 +54,11 @@
         | Kekurangan biaya sewa kamar (automation pman)       | 2   |
         | Pindah tipe kamar/kos (relokasi) (automation pman)  | 3   |
         | Ganti Lampu (automation pman)                       | 4   |
+
+    @TEST_PMAN-5966 @pman-prod
+    Scenario: delete multiple biaya sewa
+      When admin deletes all "Biaya Sewa" or sewa on Invoice Manual
+      Then the empty state of "Biaya Sewa" is displayed
 
     @TEST_PMAN-5784 @pman-prod
     Scenario Outline: Check required fields in the Biaya Sewa
@@ -118,3 +123,15 @@
         | KeKERUSAKANAN 21 hari |
         | kehilangan            |
         | asuransi              |
+
+    @TEST_PMAN-5965 @pman-prod
+    Scenario: delete biaya sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And admin creates Invoice Manual "Biaya Sewa"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya    | Jumlah Biaya  |
+        | Perpanjang sewa harian  | today         | tomorrow        | automation pman | 50000         |
+      And the admin deletes Invoice Manual
+      Then the empty state is display in "Biaya Sewa" table
