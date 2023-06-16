@@ -47,7 +47,7 @@ Feature: Invoice Detail Kost With DP
     And tenant get invoice number from riwayat booking
 
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment
-    FGiven admin go to mamikos mamipay admin
+    Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
