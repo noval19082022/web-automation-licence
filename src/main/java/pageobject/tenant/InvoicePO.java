@@ -314,16 +314,9 @@ public class InvoicePO {
      * @return String data type list of additional price section
      */
     public List<String> getAdditionalPriceInnerText() {
-        List<String> textAdditionalPrice = null;
         page.waitForLoadState(LoadState.LOAD);
-        if (playwright.waitTillLocatorIsVisible(additionalPriceDiv)){
-            additionalPriceDiv.waitFor();
-            textAdditionalPrice = additionalPriceDiv.allInnerTexts();
-        }else {
-            additionalPriceDivAddOn.waitFor();
-            textAdditionalPrice = additionalPriceDivAddOn.allInnerTexts();
-        }
-        return textAdditionalPrice;
+        playwright.waitFor(additionalPriceDiv, 2000.0);
+        return additionalPriceDiv.allInnerTexts();
     }
 
     /**
