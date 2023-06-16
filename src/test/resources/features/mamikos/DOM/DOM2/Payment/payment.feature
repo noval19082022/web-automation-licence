@@ -56,3 +56,14 @@ Feature: Payment Staging
     And admin want to edit deposit
     And admin want to choose "Bank Aceh Syariah" for transfer deposit
     Then admin see dropdown close and see bank "Bank Aceh Syariah"
+
+  @TEST_DOM-620 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Input Damage Details more than 200 characters
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    And admin input detail kerusakan "characters more than 200" on edit deposit page
+    Then admin see maximal length "200/200"
