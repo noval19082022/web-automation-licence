@@ -315,7 +315,7 @@ public class InvoicePO {
      */
     public List<String> getAdditionalPriceInnerText() {
         page.waitForLoadState(LoadState.LOAD);
-        playwright.waitFor(additionalPriceDiv, 2000.0);
+        playwright.waitFor(additionalPriceDiv, 10000.0);
         return additionalPriceDiv.allInnerTexts();
     }
 
