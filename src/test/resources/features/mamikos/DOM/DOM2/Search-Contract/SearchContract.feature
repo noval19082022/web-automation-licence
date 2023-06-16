@@ -33,7 +33,8 @@ Feature: Search Contract
       | phone stag   | phone prod   |
       | 089220220105 | 089220220105 |
     And admin search contract by kost level "SinggahSini"
-    Then admin want to akhiri contract but akhiri kontrak button is disabled
+    And admin akhiri contract
+    Then admin should success terminate contract
 
   @TEST_DOM-433 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
   Scenario: [BackOffice][popup terminate][mamirooms] Admin See detail pop up
