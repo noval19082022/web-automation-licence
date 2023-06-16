@@ -156,11 +156,7 @@ Feature: Search Contract
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
       | Desta Automation tobelo | kost payment desta 2 |
-    And user want to dismiss FTUE
-    When user sees form booking duration
-    And user select date "tomorrow" and rent type "Per bulan"
-    Then user want to booking this kos
-    * user can set Ajukan Sewa
+    And tenant booking kost for "today"
 
 		#  Scenario: Owner accept booking from tenant
     Given user go to mamikos homepage
