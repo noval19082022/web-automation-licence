@@ -27,3 +27,17 @@ Feature: Payment Staging
     And admin go to "Search Contract" menu
     And admin want to search contract periode for "Yesterday"
     Then admin redirect to search contract menu detail
+
+  @TEST_DOM-622 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] See detail pop up Apik
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod    |
+      | 089220211208 | 0890867321212 |
+    And admin search contract by kost level "APIK"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
