@@ -2,7 +2,6 @@ package pageobject.owner;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
 public class PromoOwnerPO {
