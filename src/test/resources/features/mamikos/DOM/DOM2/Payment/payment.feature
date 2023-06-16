@@ -97,3 +97,13 @@ Feature: Payment Staging
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
     And admin input biaya kerusakan "60000"
     Then admin will see additional notes menu deposit
+
+  @TEST_DOM-617 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] see Data Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin want to see log contract
+    Then admin will see detail pop up "Data Contract"
