@@ -67,3 +67,21 @@ Feature: Payment Staging
     And admin want to edit deposit
     And admin input detail kerusakan "characters more than 200" on edit deposit page
     Then admin see maximal length "200/200"
+
+  @TEST_DOM-619 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Admin simpan draft
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+    And admin input nomor rekening on edit deposit page "1550000036"
+    And admin input nama pemilik rekening on edit deposit page "Noval"
+    And admin input transfer date on edit deposit page "2022-02-02"
+    And admin input detail kerusakan "rusak" on edit deposit page
+    And admin want to simpan draft edit deposit
+    Then admin will see detail pop up "Berhasil disimpan sebagai draf"
