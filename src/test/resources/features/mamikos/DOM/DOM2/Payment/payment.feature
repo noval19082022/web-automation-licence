@@ -41,3 +41,18 @@ Feature: Payment Staging
     And admin search contract by kost level "APIK"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
+
+  @TEST_DOM-621 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] input Bank Edit Deposit
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Contract" menu
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod    |
+      | 081280003230 | 0890867321212 |
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
