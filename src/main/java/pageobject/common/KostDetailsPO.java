@@ -378,15 +378,16 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
+        var maxLoop = 0;
         playwright.pageScrollToDown(300);
-        for (int i = 0; i < 4; i++) {
-            if (ftueSlider.isVisible()) {
-                break;
-            }
-        }
+        playwright.waitFor(ftueSlider, 5000.0);
         do {
+            maxLoop++;
             if (ftueSlider.isVisible()) {
                 playwright.forceClickOn(ftueSlider);
+            }
+            if (maxLoop == 7) {
+                break;
             }
         } while (ftueSlider.isVisible());
     }
