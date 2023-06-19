@@ -1,4 +1,4 @@
-@regression @BBM40 @voucher
+@regression @BBM4 @voucher
 
 Feature: Apply Voucher For Invoice Settlement
 
