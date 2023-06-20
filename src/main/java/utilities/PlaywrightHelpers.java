@@ -400,7 +400,7 @@ public class PlaywrightHelpers {
      * default timeout
      */
     public void clickOnText(String words) {
-        clickOn(page.getByText(words));
+        clickOn(page.getByText(words).first());
     }
 
     /**
