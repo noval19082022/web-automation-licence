@@ -19,6 +19,8 @@ public class GoldplusPO {
     Locator selectRadioButtonYes;
     Locator messageText;
     Locator lihatTagihanTable;
+    Locator actionButtonPopUp;
+    Locator widgetGP;
     Locator snkGoldplusCheckbox;
 
     public GoldplusPO(Page page) {
@@ -35,6 +37,7 @@ public class GoldplusPO {
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
+        widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
     }
 
@@ -153,5 +156,24 @@ public class GoldplusPO {
     public int getCountInvoiceUnpaid() {
        playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
        return playwright.getLocators(lihatTagihanTable).size();
+    }
+
+    /**
+     * Click widget GP when status menunggu pembayaran
+     *
+     *
+     */
+    public void clickOnWidgetGP() {
+        playwright.clickOn(widgetGP);
+    }
+
+    /**
+     * Click Pilih on GP package
+     * Entry point from status menunggu pembayaran Then ganti paket
+     * Redirect to GP package list
+     */
+    public void clickOnGPPackage(int pacakge) {
+        Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
+        playwright.clickOn(pilihGPButton);
     }
 }
