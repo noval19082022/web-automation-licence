@@ -23,7 +23,6 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
-
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
@@ -38,6 +37,17 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @When("user choose Goldplus package {int}")
+    public void user_choose_goldplus_package(int packages) {
+        goldplus.clickOnGoldplusPackageButton(packages);
+        playwright.clickOnTextButton("Pilih");
+    }
+
+    @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
+    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus(){
+        goldplus.clickOnCheckbox();
     }
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
@@ -105,7 +115,7 @@ public class GoldplusSteps {
 
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
-        goldplus.clickOnLihatInvoice();
+        playwright.clickOnTextButton("Lihat Invoice");
         Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
     }
 
