@@ -73,4 +73,19 @@ public class OwnerAcceptBookingSteps {
     public void userClicksOnBookingDetailsButton() {
         billBookingManage.clickOnLihatDetailButton();
     }
+
+    @And("owner go to select the room page from tenant:")
+    public void ownerGoToSelectTheRoomPage(DataTable table) throws InterruptedException {
+        tenantNames = table.asMaps(String.class, String.class);
+        var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
+        billBookingManage.clickOnRoomNumberInput();
+    }
+
+    @Then("user can not see pilih di tempat as an option")
+    public void userCannotSeeUpdateRoomNumber() {
+        Assert.assertFalse(billBookingManage.isPilihKamarDiTempatVisible());
+    }
 }

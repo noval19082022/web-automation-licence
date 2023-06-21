@@ -169,4 +169,12 @@ public class TenantBillManagementPO {
         playwright.clickOn(element);
         playwright.clickOn(saveButton);
     }
+
+    /**
+     * to check is update room number button appear or not
+     * @return boolean
+     */
+    public boolean isUpdateRoomNumberVisible() {
+        return updateRoomNumberButton.isVisible();
+    }
 }

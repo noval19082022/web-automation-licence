@@ -4,6 +4,7 @@ import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.cucumber.java.en.Then;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -27,6 +28,7 @@ public class BillAndBookingManagementPO {
     Locator confirmationPopup;
     Locator makeRuleButton;
     Locator makeRuleBookingPage;
+    Locator pilihKamarDitempatRadio;
 
 
     public BillAndBookingManagementPO(Page page) {
@@ -49,6 +51,7 @@ public class BillAndBookingManagementPO {
         confirmationPopup = page.locator("//h3[@class='bg-c-modal__body-title']");
         makeRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat peraturan"));
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
+        pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
     }
 
     /**
@@ -172,5 +175,14 @@ public class BillAndBookingManagementPO {
      */
     public boolean isAppearMakeRuleBookingPage() {
         return playwright.waitTillLocatorIsVisible(makeRuleBookingPage);
+    }
+
+    /**
+     * check is pilih di tempat is visible or not
+     * when choosing room number in owner dashboard
+     * @return boolean
+     */
+    public boolean isPilihKamarDiTempatVisible() {
+        return pilihKamarDitempatRadio.isVisible();
     }
 }
