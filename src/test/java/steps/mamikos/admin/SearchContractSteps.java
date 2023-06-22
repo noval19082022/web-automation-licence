@@ -219,4 +219,9 @@ public class SearchContractSteps {
         searchContract.fillSearchByValue(kostName);
         searchContract.clickOnSearchButton();
     }
+
+    @When("admin clicks on invoice number {string} on first index contract")
+    public void admin_clicks_on_invoice_number_on_first_index_contract(String index) {
+        searchContract.clicksOnInvoiceNumberOnFirstIndex(index);
+    }
 }

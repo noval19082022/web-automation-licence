@@ -11,7 +11,6 @@ Feature: Multiple Invoice
     And user navigates to owner dashboard
     And user click info untuk anda "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!"
     Then owner will see that the text "Pilih Periode Berlangganan" is displayed
-    And user navigates to owner dashboard
 
     #multiple invoice from Broadcast chat while on process buy GP1
     When owner navigates to "/broadcast-chat"
@@ -28,3 +27,21 @@ Feature: Multiple Invoice
     Then owner will see that the text "Paket GoldPlus " is displayed
     When owner navigates to "/goldplus/payment"
     Then verify unpaid invoice is 1
+
+  @TEST_LIMO-2331
+  Scenario: Multiple invoice from GP dashboard
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password  |
+      | 085951394565  | qwerty123 |
+    And user click widget GP "Menunggu Pembayaran"
+    And user click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
+    Then owner will see that the text "Paket GoldPlus 2 periode 4 bulan" is displayed
+    When owner navigates to "/goldplus/payment"
+    Then verify unpaid invoice is 1
+    When user navigates to owner dashboard
+    And user click widget GP "Menunggu Pembayaran"
+    And user click "Ganti Paket" on pop up "Anda masih memiliki tagihan aktif"
+    And user wants to subscribe Goldplus 1
+    And owner navigates to "/goldplus/payment"
+    Then verify unpaid invoice is 2

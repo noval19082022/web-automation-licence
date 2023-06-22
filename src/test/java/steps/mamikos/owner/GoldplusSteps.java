@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
 import pageobject.owner.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
@@ -22,19 +23,31 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
-
-    private Integer unpaidInvoice;
-
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
-
+    HomePO home = new HomePO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
-        navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+       if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
+            goldplus.clickOnGPPackage(pacakge);
+        } else{
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+        }
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @When("user choose Goldplus package {int}")
+    public void user_choose_goldplus_package(int packages) {
+        goldplus.clickOnGoldplusPackageButton(packages);
+        playwright.clickOnTextButton("Pilih");
+    }
+
+    @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
+    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus(){
+        goldplus.clickOnCheckbox();
     }
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
@@ -102,7 +115,7 @@ public class GoldplusSteps {
 
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
-        goldplus.clickOnLihatInvoice();
+        playwright.clickOnTextButton("Lihat Invoice");
         Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
     }
 
@@ -143,5 +156,21 @@ public class GoldplusSteps {
     @When("owner wants to access goldplus dashboard")
     public void owner_wants_to_access_goldplus_dashboard(){
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
+    }
+
+    @And("user click widget GP {string}")
+    public void userClickWidgetGP(String statusGP) {
+        goldplus.clickOnWidgetGP();
+    }
+
+    @And("user click {string} on pop up {string}")
+    public void userClickOnPopUp(String action, String titlePopUp) {
+        Assert.assertTrue(playwright.isTextDisplayed(titlePopUp, 1000));
+        playwright.clickOnTextButton(action);
+    }
+
+    @Then("verify unpaid invoice added {int}")
+    public void verifyUnpaidInvoiceAdded(int arg0) {
+
     }
 }

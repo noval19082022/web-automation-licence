@@ -47,4 +47,15 @@ public class CommonSteps {
     public void user_go_back_to_previous_page() {
         page.goBack();
     }
+
+    @Then("The system should display {string} button as enabled")
+    public void the_system_should_display_button_as_enabled(String buttonName) {
+        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+    }
+
+    @Then("The system should display {string} button as disabled")
+    public void the_system_should_display_button_as_disabled(String buttonName) {
+        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+    }
+
 }

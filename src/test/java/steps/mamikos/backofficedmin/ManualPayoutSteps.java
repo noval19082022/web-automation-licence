@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 import pageobject.admin.mamipay.manualPayout.ManualPayoutPO;
@@ -37,17 +38,110 @@ public class ManualPayoutSteps {
         manualPayout.clickOnSearchButton();
     }
 
-    @And("admin want to search invoice with select type {string}")
-    public void adminWantToSearchInvoiceWithSelectType(String type) {
+    @And("admin want to search invoice in manual payout menu with select type {string}")
+    public void adminWantToSearchInvoiceInManualPayoutMenuWithSelectType(String type) {
         admin.clickOnTextHyperlink("Manual Payout");
         manualPayout.selectInvoiceType(type);
         manualPayout.clickOnSearchButton();
     }
 
-    @And("admin want to search invoice with select status {string}")
-    public void adminWantToSearchInvoiceWithSelectStatus(String status) {
+    @And("admin want to search invoice in manual payout menu with select status {string}")
+    public void adminWantToSearchInvoiceInManualPayoutMenuWithSelectStatus(String status) {
         admin.clickOnTextHyperlink("Manual Payout");
         manualPayout.selectInvoiceStatus(status);
         manualPayout.clickOnSearchButton();
+    }
+
+    @And("admin want to search invoice in manual payout menu with start date from {string} to {string}")
+    public void adminWantToSearchInvoiceInManualPayoutMenuWithStartDateFromTo(String startDate, String endDate) {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.fillStartDateValue(startDate);
+        manualPayout.fillEndDateValue(endDate);
+        manualPayout.clickOnSearchButton();
+    }
+
+    @Then("admin verify transaction based on create date from {string} to {string}")
+    public void adminVerifyTransactionBasedOnCreateDateFromTo(String createFrom, String createTo) throws InterruptedException {
+        manualPayout.vefirytTransactionbyCreateDate(createFrom, createTo);
+    }
+
+    @And("admin want to create payout without input the mandatory data")
+    public void adminWantToCreatePayoutWithoutInputTheMandatoryData() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnCreatePayoutButton();
+        manualPayout.clickOnConfirmButton();
+    }
+
+    @Then("admin see warning cannot input payout data")
+    public void adminSeeWarningCannotInputPayoutData() {
+        Assert.assertTrue(manualPayout.isAmountWarningVisible(), "Amount pop up warning is not visible");
+        Assert.assertTrue(manualPayout.isReasonWarningVisible(), "Reason pop up warning is not visible");
+    }
+
+    @And("admin want to create invalid payout data")
+    public void adminWantToCreateInvalidPayoutData() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnCreatePayoutButton();
+        manualPayout.selectPayoutType("Disbursement");
+        manualPayout.fillAccountNumber("test AT");
+        manualPayout.fillAccountName("4343353553223");
+        manualPayout.selectBankAccount("Mandiri");
+        manualPayout.fillAmount("11000");
+        manualPayout.fillReason("testing AT");
+        manualPayout.fillInvoice("DP/61392246/2021/05/0037");
+        manualPayout.clickOnConfirmButton();
+    }
+
+    @Then("admin see warning not allowed input payout data")
+    public void adminSeeWarningNotAllowedInputPayoutData() {
+        Assert.assertTrue(manualPayout.isNotAllowedErrorMessageVisible(), "Error message is not display!");
+    }
+
+    @And("admin want to create payout with amount less than 10000")
+    public void adminWantToCreatePayoutWithAmountLessThan10000() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnCreatePayoutButton();
+        manualPayout.selectPayoutType("Disbursement");
+        manualPayout.fillAccountNumber("test AT");
+        manualPayout.fillAccountName("4343353553223");
+        manualPayout.selectBankAccount("Mandiri");
+        manualPayout.fillAmount("1000");
+        manualPayout.fillReason("testing AT");
+        manualPayout.fillInvoice("79370282/2021/04/0037");
+        manualPayout.clickOnConfirmButton();
+    }
+
+    @Then("admin see warning minimal amount")
+    public void adminSeeWarningMinimalAmount() {
+        Assert.assertTrue(manualPayout.isMinimalAmountWarningVisible(), "Minimal Amount Warning is not display!");
+    }
+
+    @And("admin want to create payout with disbursement type")
+    public void adminWantToCreatePayoutWithDisbursementType() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnCreatePayoutButton();
+        manualPayout.selectPayoutType("Disbursement");
+        manualPayout.fillAccountNumber("test AT");
+        manualPayout.fillAccountName("4343353553223");
+        manualPayout.selectBankAccount("Mandiri");
+        manualPayout.fillAmount("11000");
+        manualPayout.fillReason("testing AT");
+        manualPayout.fillInvoice("79370282/2021/04/0037");
+        manualPayout.clickOnConfirmButton();
+    }
+
+    @Then("admin see payout ready to processed message")
+    public void adminSeePayoutReadyToProcessedMessage() {
+        Assert.assertTrue(manualPayout.isPayoutReadyToPrecessedMessageVisible(), "Payout Ready to Precessed message is not display!");
+    }
+
+    @And("admin cancel payout transaction")
+    public void adminCancelPayoutTransaction() {
+        manualPayout.clickCancelButtonOnMainPage();
+    }
+
+    @And("admin see payout canceled message")
+    public void adminSeePayoutCanceledMessage() {
+        Assert.assertTrue(manualPayout.isPayoutCanceledMessageVisible(), "Payout Canceled message is not display!");
     }
 }
