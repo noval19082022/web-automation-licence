@@ -30,6 +30,8 @@ public class SearchContractPO {
     private Locator akhiriContractHead;
     private Locator callout;
     Locator searchTextBox;
+    Locator invoiceEl;
+    Locator detailInvoiceEl;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -350,5 +352,17 @@ public class SearchContractPO {
      */
     public int getAkhiriContractButtonSize() {
         return playwright.getLocators(akhiriContractButton).size();
+    }
+
+    /**
+     * click on invoice on contract first index
+     *
+     * @param index 1,2,3,4,5 etc
+     */
+    public void clicksOnInvoiceNumberOnFirstIndex(String index) {
+        invoiceEl = page.locator("(//tr[1]/following::ul/li/a[contains(text(), 'Pembayaran')])[" + index + "]");
+        playwright.clickOn(invoiceEl);
+        detailInvoiceEl = page.locator("//td[1]/a");
+        playwright.clickOn(detailInvoiceEl);
     }
 }

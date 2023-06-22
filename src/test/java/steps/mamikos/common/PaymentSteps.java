@@ -269,4 +269,19 @@ public class PaymentSteps {
     public void tenantMakeBillPaymentsUsingOvo() {
         invoice.choosePaymentUsingOVO();
     }
+
+
+    @And("tenant pay booking to extended contract using ovo {string}")
+    public void tenantPayBookingToExtendedContractUsingOvo(String phoneNumber) {
+        invoice.paymentOVO(phoneNumber);
+    }
+
+    @Then("tenant can not sees add on price on payment page")
+    public void tenantCanNotSeesAddOnPriceOnPaymentPage() {
+        int basicAmount = invoice.getBasicPrice();
+        int adminFee = invoice.getAdminPrice();
+        int totalAmount = invoice.getSubTotal();
+        Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
+    }
+
 }

@@ -62,6 +62,8 @@ public class InvoicePO {
     Locator txtOVO;
     Locator noOvoTextBox;
     Locator additionalPriceDivAddOn;
+    Locator perDurationPriceText;
+    Locator biayaLayananMamikosText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -72,7 +74,7 @@ public class InvoicePO {
         voucherCodeInput = page.getByTestId("codeVoucher_txt");
         pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         totalPembayaran = page.locator("//*[.='Total Pembayaran']/following-sibling::*");
-        subTotal = page.locator("//*[.='Sub Total']/following-sibling::*");
+        subTotal = page.locator("//*[.='Sub Total']/following-sibling::*").first();
         appliedVoucher = "//*[@class='invoice-detail-row-section']//*[contains(text(), '%s')]/following-sibling::*";
         toast = page.locator(".bg-c-toast__content");
         deleteVoucher = page.locator("#invoiceContent .invoice-voucher-switch");
@@ -82,7 +84,7 @@ public class InvoicePO {
         voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
-        pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
+        pilihPembayaranButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
@@ -113,6 +115,8 @@ public class InvoicePO {
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
         additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+        biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
+        perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
 
     }
 
@@ -501,5 +505,22 @@ public class InvoicePO {
         });
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
+    }
+
+
+    /**
+     * Get per period / or basic amount price
+     * @return per period price / or basic amount price as integer
+     */
+    public int getBasicPrice() {
+        return JavaHelpers.extractNumber(playwright.getText(perDurationPriceText));
+    }
+
+    /**
+     * Get admin fee
+     * @return integer data type of biaya Layanan Mamikos
+     */
+    public int getAdminPrice(){
+        return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosText));
     }
 }
