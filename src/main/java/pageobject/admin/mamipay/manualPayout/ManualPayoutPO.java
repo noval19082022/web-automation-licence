@@ -27,14 +27,22 @@ public class ManualPayoutPO {
     private Locator reasonField;
     private Locator invoiceNumberField;
     private Locator confirmButton;
-    private Locator cancelOnCreationFormButton;
     private Locator cancelOnMainPageButton;
+    private Locator changeTypeButton;
+    private Locator changeTypeDropdown;
+    private Locator changeInvoiceButton;
+    private Locator submitChangeButton;
+    private Locator editButton;
+    private Locator updatePayoutButton;
+    private Locator transferButton;
     private Locator amountWarning;
     private Locator reasonWaring;
     private Locator notAllowedWarning;
     private Locator minimalAmountWarning;
     private Locator readyToProcessedMessage;
     private Locator payoutCanceledMessage;
+    private Locator successUpdateMessage;
+    private Locator processingPayoutMessage;
 
     public ManualPayoutPO(Page page) {
         this.page = page;
@@ -54,14 +62,22 @@ public class ManualPayoutPO {
         reasonField = page.locator("textarea[name=\"reason\"]");
         invoiceNumberField = page.locator("input[name=\"invoice_number\"]");
         confirmButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Payout"));
-        cancelOnCreationFormButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Cancel"));
-        cancelOnMainPageButton =page.locator("(//a[text()='Cancel'])[1]");
+        cancelOnMainPageButton = page.locator("(//a[text()='Cancel'])[1]");
+        changeTypeButton = page.locator("(//a[text()='Change Type'])[1]");
+        changeTypeDropdown = page.getByRole(AriaRole.COMBOBOX);
+        changeInvoiceButton = page.locator("(//a[text()='Change Invoice'])[1]");
+        submitChangeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit Change"));
+        editButton = page.locator("(//a[text()='Edit'])[1]");
+        updatePayoutButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Payout"));
+        transferButton = page.locator("(//a[text()='Transfer'])[1]");
         amountWarning = page.getByText("Amount required.");
         reasonWaring = page.getByText("Reason required.");
         notAllowedWarning = page.getByText("Not allowed to create transfer.");
         minimalAmountWarning = page.getByText("Amount minimal 10000.");
         readyToProcessedMessage = page.getByText("Payout ready to be processed.");
         payoutCanceledMessage = page.getByText("Payout cancelled.");
+        successUpdateMessage = page.getByText("Data telah berhasil diupdate.");
+        processingPayoutMessage = page.getByText("Payout is processing.");
     }
 
     /**
@@ -250,5 +266,71 @@ public class ManualPayoutPO {
      */
     public boolean isPayoutCanceledMessageVisible() {
         return payoutCanceledMessage.isVisible();
+    }
+
+    /**
+     * Click on Change Type button
+     */
+    public void clickOnChangeTypeButton() {
+        changeTypeButton.click();
+    }
+
+    /**
+     * Change Payout type
+     * @param type String data type
+     */
+    public void changePayoutType(String type) {
+        playwright.selectDropdownByValue(changeTypeDropdown, type);
+    }
+
+    /**
+     * Click on Submit Change button
+     */
+    public void clickOnSubmitChangeButton() {
+        submitChangeButton.click();
+    }
+
+    /**
+     * Check if Success Update Payout type message visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean isSuccessUpdateMessageVisible() {
+        return successUpdateMessage.isVisible();
+    }
+
+    /**
+     * Click on Change Type button
+     */
+    public void clickOnChangeInvoiceButton() {
+        changeInvoiceButton.click();
+    }
+
+    /**
+     * Click on Edit button on main page
+     */
+    public void clickEditButtonOnMainPage() {
+        editButton.click();
+    }
+
+    /**
+     * Click on Update Payout button
+     */
+    public void clickOnUpdatePayoutButton() {
+        updatePayoutButton.click();
+    }
+
+    /**
+     * Click on Transfer button on main page
+     */
+    public void clickOnTransferButtonOnMainPage() {
+        playwright.acceptDialog(transferButton);
+    }
+
+    /**
+     * Check if Processing Payout message visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean isProcessingPayoutMessageVisible() {
+        return processingPayoutMessage.isVisible();
     }
 }

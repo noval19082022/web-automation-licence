@@ -116,11 +116,11 @@ public class ManualPayoutSteps {
         Assert.assertTrue(manualPayout.isMinimalAmountWarningVisible(), "Minimal Amount Warning is not display!");
     }
 
-    @And("admin want to create payout with disbursement type")
-    public void adminWantToCreatePayoutWithDisbursementType() {
+    @And("admin want to create payout with type {string}")
+    public void adminWantToCreatePayoutWithType(String type) {
         admin.clickOnTextHyperlink("Manual Payout");
         manualPayout.clickOnCreatePayoutButton();
-        manualPayout.selectPayoutType("Disbursement");
+        manualPayout.selectPayoutType(type);
         manualPayout.fillAccountNumber("test AT");
         manualPayout.fillAccountName("4343353553223");
         manualPayout.selectBankAccount("Mandiri");
@@ -143,5 +143,50 @@ public class ManualPayoutSteps {
     @And("admin see payout canceled message")
     public void adminSeePayoutCanceledMessage() {
         Assert.assertTrue(manualPayout.isPayoutCanceledMessageVisible(), "Payout Canceled message is not display!");
+    }
+
+    @And("admin want to change payout type into {string}")
+    public void adminWantToChangePayoutTypeInto(String type) {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnChangeTypeButton();
+        manualPayout.changePayoutType(type);
+        manualPayout.clickOnSubmitChangeButton();
+    }
+
+    @Then("admin see payout data successfully updated message")
+    public void adminSeePayoutDataSuccessfullyUpdatedMessage() {
+        Assert.assertTrue(manualPayout.isSuccessUpdateMessageVisible(), "Payout Canceled message is not display!");
+    }
+
+    @And("admin want to change invoice number into {string}")
+    public void adminWantToChangeInvoiceNumberInto(String invoice) {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnChangeInvoiceButton();
+        manualPayout.fillInvoice(invoice);
+        manualPayout.clickOnSubmitChangeButton();
+    }
+
+    @And("admin want to edit bank name, account, amount, and reason payout")
+    public void adminWantToEditBankNameAccountAmountAndReasonPayout() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickEditButtonOnMainPage();
+        manualPayout.fillAccountNumber("111111111111");
+        manualPayout.fillAccountName("111111111111");
+        manualPayout.selectBankAccount("BRI");
+        manualPayout.fillAmount("12011");
+        manualPayout.fillReason("change reason AT");
+        manualPayout.fillInvoice("79370282/2021/04/0037");
+        manualPayout.clickOnUpdatePayoutButton();
+    }
+
+    @And("admin want to transfer on manual payout menu")
+    public void adminWantToTransferOnManualPayoutMenu() {
+        admin.clickOnTextHyperlink("Manual Payout");
+        manualPayout.clickOnTransferButtonOnMainPage();
+    }
+
+    @Then("admin see processing payout message")
+    public void adminSeeProcessingPayoutMessage() {
+        Assert.assertTrue(manualPayout.isProcessingPayoutMessageVisible(), "Processing Payout message is not display!");
     }
 }
