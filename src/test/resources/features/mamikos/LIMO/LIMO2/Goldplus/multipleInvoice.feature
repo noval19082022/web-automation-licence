@@ -56,6 +56,3 @@ Feature: Multiple Invoice
     Then verify unpaid invoice is 2
     When user click Lihat Tagihan on riwayat
     Then payment owner success using ovo as payment method
-
-
-

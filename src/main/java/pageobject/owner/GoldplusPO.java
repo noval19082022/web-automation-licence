@@ -22,7 +22,6 @@ public class GoldplusPO {
     Locator actionButtonPopUp;
     Locator widgetGP;
     Locator snkGoldplusCheckbox;
-    Locator lihatTagihanRiwayat;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -40,7 +39,6 @@ public class GoldplusPO {
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
         widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
-        lihatTagihanRiwayat = page.getByText("Lihat Tagihan").first();
     }
 
     /**
