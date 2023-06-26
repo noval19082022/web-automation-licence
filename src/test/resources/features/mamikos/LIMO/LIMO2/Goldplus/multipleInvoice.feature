@@ -45,3 +45,13 @@ Feature: Multiple Invoice
     And user wants to subscribe Goldplus 1
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice is 2
+
+  @TEST_LIMO-2325
+  Scenario: Paid 1 of unpaid invoice GP
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password  |
+      | 085951394565  | qwerty123 |
+    And owner navigates to "/goldplus/payment"
+    And user click Lihat Tagihan on riwayat
+    Then payment owner success using ovo as payment method
