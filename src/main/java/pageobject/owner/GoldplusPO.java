@@ -178,14 +178,4 @@ public class GoldplusPO {
         Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
         playwright.clickOn(pilihGPButton);
     }
-
-    /**
-     * Click Lihat Tagihan on Riwayat Tagihan GP
-     *
-     *
-     */
-    public void clickOnLihatTagihanOnRiwayat() {
-        playwright.waitTillLocatorIsVisible(lihatTagihanRiwayat, 3000.0);
-        playwright.clickOn(lihatTagihanRiwayat);
-    }
 }

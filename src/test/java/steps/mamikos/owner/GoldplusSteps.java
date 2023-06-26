@@ -171,7 +171,8 @@ public class GoldplusSteps {
 
     @When("user click Lihat Tagihan on riwayat")
     public void userClickLihatTagihanOnRiwayat() {
-        goldplus.clickOnLihatTagihanOnRiwayat();
+        playwright.hardWait(3000.0);
+        playwright.clickOnText("Lihat Tagihan");
         playwright.clickOnText("Bayar Sekarang");
     }
 }
