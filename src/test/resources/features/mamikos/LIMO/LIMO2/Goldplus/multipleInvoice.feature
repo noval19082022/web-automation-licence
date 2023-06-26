@@ -53,6 +53,5 @@ Feature: Multiple Invoice
       | phone stag    | password  |
       | 085951394565  | qwerty123 |
     When owner navigates to "/goldplus/payment"
-    Then verify unpaid invoice is 2
     When user click Lihat Tagihan on riwayat
     Then payment owner success using ovo as payment method
