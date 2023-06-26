@@ -2,7 +2,7 @@
 Feature: Create OOO "Undertable" Type
 
   @continue
-  Scenario: Delete OOO
+  Scenario: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini
     When admin login pms :
       | email                 | password    |
