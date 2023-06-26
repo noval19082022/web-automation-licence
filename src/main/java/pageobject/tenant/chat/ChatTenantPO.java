@@ -3,6 +3,8 @@ package pageobject.tenant.chat;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import pageobject.common.KostDetailsPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
 public class ChatTenantPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    String date;
     Locator questionsOption;
     Locator sendQuestionButton;
     Locator ajukanSewaButton;
@@ -20,6 +23,8 @@ public class ChatTenantPO {
     Locator disabledRoomCardBookingButton;
     Locator seeAdsButton;
     Locator ownerLastSeen;
+    Locator ajukanSewaChatRoomButton;
+    Locator ajukanSewaPopUpChatRoomButton;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -33,6 +38,8 @@ public class ChatTenantPO {
         disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
         seeAdsButton = page.getByText("Lihat Iklan");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
+        ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa")).nth(1);
+        ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--secondary bg-c-button--lg bg-c-button--block']");
     }
 
     /**
@@ -125,5 +132,32 @@ public class ChatTenantPO {
      */
     public boolean isOwnerLastSeenPresent() {
         return ownerLastSeen.isVisible();
+    }
+
+    /**
+     * Click on Ajukan Sewa from chatroom
+     * Select booking date
+     * @param date tomorrow, today, or specific date by number on string data type
+     *
+     * Click on Ajukan Sewa from Pop Up Chat Room Button
+     */
+    public void clickOnAjukanSewaChatRoomButton(String date) {
+        playwright.clickOn(ajukanSewaChatRoomButton);
+        Locator datePick;
+        if (date.equalsIgnoreCase("tomorrow")) {
+            this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        } else if (date.equalsIgnoreCase("today")) {
+            this.date = JavaHelpers.getCurrentDateOrTime("d");
+        } else {
+            this.date = date;
+        }
+        datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
+        List<Locator> datePicks = playwright.getLocators(datePick);
+        for (Locator pick : datePicks) {
+            if (pick.isEnabled() && pick.isVisible()) {
+                pick.click();
+            }
+        }
+        playwright.clickOn(ajukanSewaPopUpChatRoomButton);
     }
 }

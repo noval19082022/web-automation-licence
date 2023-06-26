@@ -1648,4 +1648,21 @@ public class KostDetailsPO {
         }
         return page.getByText(text).first().isVisible();
     }
+
+    /**
+     * click calendar
+     */
+    public void clickOnCalendar() {
+        playwright.waitTillLocatorIsVisible(dateTextBox);
+        playwright.clickOn(mulaiKosInput);
+    }
+
+    /**
+     * get BSS information
+     *
+     * @return 'string' BSS information
+     */
+    public String getBSSInformationText(String infoBSSText) {
+            return playwright.getText(page.getByText(infoBSSText));
+    }
 }
