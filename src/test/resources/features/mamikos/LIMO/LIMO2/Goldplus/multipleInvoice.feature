@@ -52,6 +52,6 @@ Feature: Multiple Invoice
     When user login as owner:
       | phone stag    | password  |
       | 085951394565  | qwerty123 |
-    When owner navigates to "/goldplus/payment"
-    When user click Lihat Tagihan on riwayat
+    And owner navigates to "/goldplus/payment"
+    And user click Lihat Tagihan on riwayat
     Then payment owner success using ovo as payment method
