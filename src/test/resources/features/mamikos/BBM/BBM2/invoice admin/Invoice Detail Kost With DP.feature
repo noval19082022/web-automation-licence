@@ -8,24 +8,20 @@ Feature: Invoice Detail Kost With DP
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
-      | phone stag    | phone prod    |
-      | 085432154321  | 085432154321 |
-    And admin terminate contract
-    Then admin should success terminate contract
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag   | phone prod   |
+      | 085432154321 | 085432154321 |
 
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 085432154321  | 085432154321  | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 085432154321 | 085432154321 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 085432154321  | 085432154321 | qwerty123  |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod        |
       | Kost Adi Auto Add Ons | Kost Adi Auto Add Ons |
@@ -35,15 +31,17 @@ Feature: Invoice Detail Kost With DP
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod      | password      |
-      | 08900000000021  | 08900000000021  | mamikosqa123  |
-    And owner accept booking
+      | phone stag     | phone prod     | password     |
+      | 08900000000021 | 08900000000021 | mamikosqa123 |
+    And owner accept booking from tenant:
+      | tenant stag  | tenant prod  |
+      | Sang Pencari | Sang Pencari |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Get Invoice Number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod   | password  |
+      | phone stag   | phone prod   | password  |
       | 085432154321 | 085432154321 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
@@ -54,7 +52,7 @@ Feature: Invoice Detail Kost With DP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search invoice by contact number and go to invoice detail fee:
-      | search by              | renter_phone_number      |
-      | search value           | 085432154321             |
-      | invoice number         | default                  |
+      | search by      | renter_phone_number |
+      | search value   | 085432154321        |
+      | invoice number | default             |
     Then admin can sees total cost is basic amount + admin fee

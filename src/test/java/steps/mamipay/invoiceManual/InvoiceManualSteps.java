@@ -493,6 +493,8 @@ public class InvoiceManualSteps {
     public void admin_deletes_all_or_sewa_on_Invoice_Manual(String invType){
         if (invType.equalsIgnoreCase("Biaya Tambahan")){
             manualInvoice.deleteAllBiaya();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            manualInvoice.deleteAllBiaya();
         }
     }
 
@@ -500,6 +502,8 @@ public class InvoiceManualSteps {
     public void the_empty_state_of_is_displayed(String invType){
         if (invType.equalsIgnoreCase("Biaya Tambahan")){
             manualInvoice.assertEmptyStateBiayaTambahan();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            manualInvoice.assertEmptyStateBiayaSewa();
         }
     }
 

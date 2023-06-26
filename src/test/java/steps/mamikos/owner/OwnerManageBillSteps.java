@@ -97,4 +97,9 @@ public class OwnerManageBillSteps {
         billManage.clicksOnLihatSelengkapnya();
 
     }
+
+    @Then("user can not see update room number button")
+    public void userCannotSeeUpdateRoomNumber() {
+        Assert.assertFalse(billManage.isUpdateRoomNumberVisible());
+    }
 }

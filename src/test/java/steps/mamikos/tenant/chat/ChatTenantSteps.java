@@ -1,13 +1,16 @@
 package steps.mamikos.tenant.chat;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import pageobject.common.KostDetailsPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.tenant.chat.ChatTenantPO;
+import utilities.JavaHelpers;
 
 import java.util.List;
 
@@ -73,5 +76,10 @@ public class ChatTenantSteps {
     @Then("user cant see last owner seen")
     public void userCantSeeLastOwnerSeen() {
         Assert.assertFalse(chat.isOwnerLastSeenPresent(), "owner last seen is display");
+    }
+
+    @And("user click Ajukan Sewa {string} from chat room")
+    public void userClickAjukanSewaFromChatRoom(String dateToday) {
+        chat.clickOnAjukanSewaChatRoomButton(dateToday);
     }
 }

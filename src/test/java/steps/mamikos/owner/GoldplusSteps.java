@@ -4,9 +4,11 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
 import pageobject.owner.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
@@ -23,13 +25,29 @@ public class GoldplusSteps {
     GoldplusPO goldplus = new GoldplusPO(page);
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
+    HomePO home = new HomePO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
-        navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+       if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
+            goldplus.clickOnGPPackage(pacakge);
+        } else{
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+        }
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @When("user choose Goldplus package {int}")
+    public void user_choose_goldplus_package(int packages) {
+        goldplus.clickOnGoldplusPackageButton(packages);
+        playwright.clickOnTextButton("Pilih");
+    }
+
+    @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
+    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus(){
+        goldplus.clickOnCheckbox();
     }
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
@@ -48,7 +66,7 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
 
-        @Then("user verify list of Periode Berlangganan is appear")
+    @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
         playwright.hardWait(1000);
         List<Map<String, String>> table = dataTable.asMaps();
@@ -90,6 +108,31 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Save");
     }
 
+    @And("user click info untuk anda {string}")
+    public void userClickInfoUntukAnda(String infoUntukAnda) {
+        goldplus.clickOnInfoUntukAnda(infoUntukAnda);
+    }
+
+    @Then("user verify Lihat Invoice visible")
+    public void userVerifyLihatInvoiceVisible() {
+        playwright.clickOnTextButton("Lihat Invoice");
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
+    }
+
+    @Then("user see Title on page {string} is {string} with message:")
+    public void userSeeTitleOnPageIsWithMessage(String page, String title, String docString) {
+        switch (page){
+            case "cek properti sekitar":
+                Assert.assertTrue(playwright.isTextDisplayed(title, 1000));
+                Assert.assertEquals(goldplus.getMessage(),docString.replaceAll("\\s", ""));
+        }
+    }
+
+    @Then("verify unpaid invoice is {int}")
+    public void verifyUnpaidInvoiceIs(int unpaidInvoice) {
+        Assert.assertTrue(unpaidInvoice == goldplus.getCountInvoiceUnpaid());
+    }
+
     @When("owner wants to extends Goldplus from chatlist")
     public void owner_wants_to_extends_goldplus_from_chatlist() {
         chat.clickChatOwner();
@@ -115,4 +158,21 @@ public class GoldplusSteps {
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
     }
 
+    @And("user click widget GP {string}")
+    public void userClickWidgetGP(String statusGP) {
+        goldplus.clickOnWidgetGP();
+    }
+
+    @And("user click {string} on pop up {string}")
+    public void userClickOnPopUp(String action, String titlePopUp) {
+        Assert.assertTrue(playwright.isTextDisplayed(titlePopUp, 1000));
+        playwright.clickOnTextButton(action);
+    }
+
+    @When("user click Lihat Tagihan on riwayat")
+    public void userClickLihatTagihanOnRiwayat() {
+        playwright.hardWait(3000.0);
+        playwright.clickOnText("Lihat Tagihan");
+        playwright.clickOnText("Bayar Sekarang");
+    }
 }

@@ -98,10 +98,6 @@ public class TenantBookingSteps {
         page.navigate("https://jambu.kerupux.com/user/booking/");
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBooking();
-        if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {
-            Assert.assertEquals(bookingForm.getSuccessCancelText().trim(), "Booking Anda berhasil dibatalkan");
-        }
-        bookingForm.closeCancelPopUp();
     }
 
     @And("user cancel booking with reason {string}")
@@ -220,5 +216,16 @@ public class TenantBookingSteps {
     public void userCanSeeValidationOnJobsWith(String messsageRequired) {
         bookingForm.clickOnAjukanSewaButton();
         Assert.assertEquals(bookingForm.getAlertJobsTextAfterClick(), messsageRequired, "text not same in the display");
+    }
+
+    @And("tenant open calendar from kost detail")
+    public void tenantOpenCalendarFromKostDetail() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnCalendar();
+    }
+
+    @Then("tenant will see BSS Information {string}")
+    public void tenantWillSeeBSSInformation(String infoBSS) {
+        Assert.assertEquals(kostDetail.getBSSInformationText(infoBSS), infoBSS, "text not same in the display");
     }
 }

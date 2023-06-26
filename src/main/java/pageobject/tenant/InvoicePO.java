@@ -62,6 +62,7 @@ public class InvoicePO {
     Locator txtOVO;
     Locator noOvoTextBox;
     Locator additionalPriceDivAddOn;
+    Locator voucherDivSection;
     Locator perDurationPriceText;
     Locator biayaLayananMamikosText;
 
@@ -115,6 +116,7 @@ public class InvoicePO {
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
         additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+        voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
         biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
 
@@ -127,8 +129,8 @@ public class InvoicePO {
      */
     public void clickOnDeleteVoucher() throws InterruptedException {
         page.waitForLoadState(LoadState.LOAD);
-        page.waitForTimeout(1000);
-        if (deleteVoucher.isVisible()) {
+        playwright.waitFor(voucherDivSection, 5000.0);
+        if (playwright.waitTillLocatorIsVisible(deleteVoucher)) {
             playwright.clickOn(deleteVoucher);
         }
     }
@@ -322,7 +324,7 @@ public class InvoicePO {
         page.waitForLoadState(LoadState.LOAD);
         playwright.hardWait(3);
         if (playwright.waitTillLocatorIsVisible(additionalPriceDiv)){
-            additionalPriceDiv.waitFor();
+            playwright.waitFor(additionalPriceDiv,10000.0);
             textAdditionalPrice = additionalPriceDiv.allInnerTexts();
         }else {
             additionalPriceDivAddOn.waitFor();

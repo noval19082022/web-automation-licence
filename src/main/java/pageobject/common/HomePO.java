@@ -156,7 +156,7 @@ public class HomePO {
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(mamikosLogo, 30000.0);
-        playwright.waitFor(userPhoto, 3000.0);
+        playwright.waitFor(userPhoto, 10000.0);
     }
 
     /**

@@ -70,7 +70,10 @@ public class PaymentSteps {
 
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
-        Assert.assertEquals(invoice.getToastText(), "Kode voucher tidak bisa digunakan. "+ System.lineSeparator() +"    Silakan hapus voucher.");
+        var voucherInvalidWording = "Kode voucher tidak bisa digunakan. Silakan hapus voucher.";
+        String toastStringRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
+        String toastRemoveExtraSpace = toastStringRemoveLineSeparator.replaceAll("\\s+", " ");
+        Assert.assertEquals(toastRemoveExtraSpace, voucherInvalidWording);
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
     }
 
@@ -96,7 +99,10 @@ public class PaymentSteps {
 
     @Then("tenant can not use voucher with message {string}")
     public void tenantCanNotUseVoucheWithMessage(String errorMessage) {
-        Assert.assertEquals(invoice.getToastText(), errorMessage + System.lineSeparator() +"    Silakan hapus voucher.");
+        String voucherErrorMessage = errorMessage + "Silakan hapus voucher.";
+        String voucherErrorMessageActualRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
+        String voucherErrorMessageActualRemoveExtraSpace = voucherErrorMessageActualRemoveLineSeparator.replaceAll("\\s+", " ");
+        Assert.assertEquals(voucherErrorMessageActualRemoveExtraSpace, voucherErrorMessage);
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
     }
 

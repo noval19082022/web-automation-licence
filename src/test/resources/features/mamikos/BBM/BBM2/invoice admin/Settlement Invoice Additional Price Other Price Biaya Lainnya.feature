@@ -6,12 +6,11 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag   | phone prod   |
       | 087708777618 | 087708777618 |
-    And admin akhiri contract
-    Then admin should success terminate contract
 
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -21,9 +20,6 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777618 | 087708777618 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Wild Rift Settlement | Kost Wild Rift Settlement |

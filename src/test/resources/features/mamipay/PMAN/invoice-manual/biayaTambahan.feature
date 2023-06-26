@@ -102,8 +102,8 @@ Feature: Invoice Manual - Biaya Tambahan
 
   @TEST_PMAN-5964 @pman-prod
   Scenario: delete multiple biaya tambahan
-    When admin deletes all "biaya tambahan" or sewa on Invoice Manual
-    Then the empty state of "biaya tambahan" is displayed
+    When admin deletes all "Biaya Tambahan" or sewa on Invoice Manual
+    Then the empty state of "Biaya Tambahan" is displayed
 
   @TEST_PMAN-6055 @pman-prod
   Scenario: Edit Biaya Tambahan

@@ -17,6 +17,11 @@ public class GoldplusPO {
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
     Locator selectRadioButtonYes;
+    Locator messageText;
+    Locator lihatTagihanTable;
+    Locator actionButtonPopUp;
+    Locator widgetGP;
+    Locator snkGoldplusCheckbox;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -30,12 +35,34 @@ public class GoldplusPO {
         editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
+        messageText = page.locator(".bg-c-empty-state__description");
+        lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
+        widgetGP = page.locator(".membership-card__label");
+        snkGoldplusCheckbox =  page.locator("label");
+    }
+
+    /**
+     * Get list periode gp, salldo free mamiads, actual price, discount price
+     *
+     * @param goldplus input goldplus package 1 or 2
+     */
+    public void clickOnGoldplusPackageButton(int goldplus){
+        playwright.clickOn(page.getByTestId("beliGP"+goldplus+"_btn"));
+
+    }
+
+    /**
+     * Click on Checkbox Syarat dan Ketentuan Goldplus
+     *
+     */
+    public void clickOnCheckbox(){
+        playwright.clickOn(snkGoldplusCheckbox);
     }
 
     /**
      * Input phone number to reset Goldplus
      */
-    public void inputGoldplusPhoneNumber (String phoneNumberGP) {
+    public void inputGoldplusPhoneNumber(String phoneNumberGP) {
         goldplusPhoneNumberInput.fill(phoneNumberGP);
     }
 
@@ -103,4 +130,50 @@ public class GoldplusPO {
         playwright.clickOn(selectRadioButtonYes);
     }
 
+    /**
+     * Click on Info Untuk Anda on owner dashboard
+     * @param infoUntukAndaMessage
+     *
+     */
+    public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
+        playwright.clickOnText(infoUntukAndaMessage);
+    }
+
+    /**
+     * Get message text empty state
+     * @return String message text
+     *
+     */
+    public String getMessage() {
+        return playwright.getText(messageText).replaceAll("\\s", "");
+    }
+
+    /**
+     * Get unpaid invoice GP
+     * @return int, count of unpaid invoice GP
+     *
+     */
+    public int getCountInvoiceUnpaid() {
+       playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
+       return playwright.getLocators(lihatTagihanTable).size();
+    }
+
+    /**
+     * Click widget GP when status menunggu pembayaran
+     *
+     *
+     */
+    public void clickOnWidgetGP() {
+        playwright.clickOn(widgetGP);
+    }
+
+    /**
+     * Click Pilih on GP package
+     * Entry point from status menunggu pembayaran Then ganti paket
+     * Redirect to GP package list
+     */
+    public void clickOnGPPackage(int pacakge) {
+        Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
+        playwright.clickOn(pilihGPButton);
+    }
 }
