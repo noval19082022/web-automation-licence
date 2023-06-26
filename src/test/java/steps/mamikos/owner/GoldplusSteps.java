@@ -169,8 +169,9 @@ public class GoldplusSteps {
         playwright.clickOnTextButton(action);
     }
 
-    @Then("verify unpaid invoice added {int}")
-    public void verifyUnpaidInvoiceAdded(int arg0) {
-
+    @When("user click Lihat Tagihan on riwayat")
+    public void userClickLihatTagihanOnRiwayat() {
+        goldplus.clickOnLihatTagihanOnRiwayat();
+        playwright.clickOnText("Bayar Sekarang");
     }
 }
