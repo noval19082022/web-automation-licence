@@ -1,4 +1,4 @@
-@arac @pms @BBM8 @TEST_BBM-3723
+@arac @pms @TEST_BBM-3723
 Feature: Create OOO "Room Preparation" Type
 
   @TEST_BBM-3738
