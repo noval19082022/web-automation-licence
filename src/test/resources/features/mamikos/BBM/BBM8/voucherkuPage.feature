@@ -5,9 +5,10 @@ Feature: Voucher Saya Page
   @continue
   Scenario: Voucher List Display and Scrolling
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                         |  email prod                         | password  |
-      | olivia_ryhwyat_sadanson@tfbnw.net  |  olivia_ryhwyat_sadanson@tfbnw.net  | mamikosqa |
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password      |
+      | 0819090909   | 0819090909   | qwerty123     |
     And tenant navigates to voucher saya page
     Then user see voucher list header
     And user see "Tersedia" tab on voucher saya page

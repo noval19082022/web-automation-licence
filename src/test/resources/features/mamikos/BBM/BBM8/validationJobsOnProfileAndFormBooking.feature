@@ -1,7 +1,7 @@
 @BBM8 @validationJobs
 Feature: Edit profile for jobs as Lainnya
 
-  @TEST_BBM-1513 @continue
+  @TEST_BBM-1513
   Scenario: Click Ajukan Sewa Button if user has not fill Deskripsi when user choose Lainnya as Pekerjaan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -16,7 +16,10 @@ Feature: Edit profile for jobs as Lainnya
   @TEST_BBM-1510 @continue
   Scenario: Change pekerjaan to Karyawan and fill with invalid data from booking detail
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password      |
+      | 08100000630   | 08100000630   | qwerty123     |
+    And tenant search kost then go to kost details:
       | kost name stag                                                  | kost name prod                                            |
       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     And tenant booking kost for "Tomorrow"
