@@ -145,3 +145,13 @@ Feature: Payment Staging
     And admin search contract by kost level "mamirooms"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
+
+  @TEST_DOM-613 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] Search Data Tenant Based On Kost Level
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    Then admin go to "Search Contract" menu
+    And admin search contract by kost level "Mamikos Goldplus 2"
+    Then admin verify see text "Mamikos Goldplus 2"
