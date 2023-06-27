@@ -207,4 +207,14 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.PROPHOTO, 30000.0, LoadState.LOAD);
     }
 
+    @When("tenant/user navigate to kost saya page")
+    public void userNavigateToKostSayaPage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.KOST_SAYA, 30000.0, LoadState.LOAD);
+    }
+
+    @When("tenant/user navigate to kontrak kost saya")
+    public void userNavigateToKontrakKostSaya() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.KONTRAK_KOST_SAYA, 30000.0, LoadState.LOAD);
+    }
+
 }

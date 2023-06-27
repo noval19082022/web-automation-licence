@@ -39,5 +39,6 @@ public class Mamikos {
     public static final String ADMIN_GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS,"adminGoldplusPackage");
     public static final String PROPHOTO = JavaHelpers.getPropertyValue(MAMIKOS,"oldProPhoto");
     public static final String MAMIFOTO = JavaHelpers.getPropertyValue(MAMIKOS,"mamifoto");
-
+    public static final String KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kostSaya");
+    public static final String KONTRAK_KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKostSaya");
 }
