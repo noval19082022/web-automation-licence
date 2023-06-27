@@ -193,3 +193,20 @@ Feature: Payment Staging
       | Renter Phone Number    | 083139263046          |
       | Renter Name            | Ullrich               |
       | Related Invoice Number | 83900841/2021/12/0043 |
+
+  @TEST_DOM-609 @Automated @web-covered
+  Scenario Outline: [BackOffice][Search Contract][Edit Deposit] search invalid Input
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "<searchBy>" and input field "<input>"
+    Then admin will get blank data detail
+    Examples:
+      | searchBy               | input               |
+      | Kost Name              | kost anggun         |
+      | Owner Phone Number     | 0856220211208       |
+      | Renter Phone Number    | 0856220211208       |
+      | Renter Name            | embul owner         |
+      | Related Invoice Number | 83900841/2021/12/00 |
+      | Related Invoice Code   | 83900841            |
