@@ -152,7 +152,7 @@ Feature: Payment Staging
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    Then admin go to "Search Contract" menu
+    And admin go to "Search Contract" menu
     And admin search contract by kost level "Mamikos Goldplus 2"
     Then admin verify see text "Mamikos Goldplus 2"
 
@@ -177,3 +177,19 @@ Feature: Payment Staging
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin input nama pemilik rekening on edit deposit page "Noval"
+
+  @TEST_DOM-610 @Automated @web-covered
+  Scenario Outline: [BackOffice][Search Contract][Edit Deposit] search Valid Input
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "<searchBy>" and input field "<input>"
+    Then admin redirect to search contract menu detail
+    Examples:
+      | searchBy               | input                 |
+      | Kost Name              | Kost Princess         |
+      | Owner Phone Number     | 083843666900          |
+      | Renter Phone Number    | 083139263046          |
+      | Renter Name            | Ullrich               |
+      | Related Invoice Number | 83900841/2021/12/0043 |
