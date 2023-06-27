@@ -82,9 +82,9 @@ Feature: Voucher Saya Page
 
   Scenario: Empty State Landing Page displayed
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                       |  email prod                         | password  |
-      | karen_fvvmbmm_listein@tfbnw.net  |  karen_fvvmbmm_listein@tfbnw.net    | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password      |
+      | 089767561234 | 089767561234 | mamikosqa123  |
     And tenant navigates to voucher saya page
     When user click "Tersedia" tab on voucher saya page
     Then user see Tersedia Empty State Landing Page
