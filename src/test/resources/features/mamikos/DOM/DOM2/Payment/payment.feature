@@ -124,3 +124,13 @@ Feature: Payment Staging
     And admin search contract by kost level "SinggahSini"
     And admin akhiri contract
     Then admin should success terminate contract
+
+  @TEST_DOM-615 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] search Based On Period
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220220101"
+    And admin search contract by kost level "SinggahSini"
+    Then admin redirect to search contract menu detail
