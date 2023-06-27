@@ -1,6 +1,6 @@
 @regression @voucher @BBM3 @voucher @TEST_BBM-592
 
-Feature: Invoice Type based on contract
+Feature: Invoice Type based on User
 
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
