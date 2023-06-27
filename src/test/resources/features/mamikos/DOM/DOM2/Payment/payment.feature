@@ -134,3 +134,14 @@ Feature: Payment Staging
     And admin search contract by "Renter Phone Number" and input field "089220220101"
     And admin search contract by kost level "SinggahSini"
     Then admin redirect to search contract menu detail
+
+  @TEST_DOM-614 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] See detail pop up Mamirooms
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "081177778888"
+    And admin search contract by kost level "mamirooms"
+    And admin want to edit deposit
+    Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
