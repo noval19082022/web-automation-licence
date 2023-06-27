@@ -5,7 +5,6 @@ Feature: Voucher Saya Page
   @continue
   Scenario: Voucher List Display and Scrolling
     Given user go to mamikos homepage
-    Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password      |
       | 0819090909   | 0819090909   | qwerty123     |
