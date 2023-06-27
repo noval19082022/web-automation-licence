@@ -155,3 +155,14 @@ Feature: Payment Staging
     Then admin go to "Search Contract" menu
     And admin search contract by kost level "Mamikos Goldplus 2"
     Then admin verify see text "Mamikos Goldplus 2"
+
+  @TEST_DOM-612 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] See detail pop up Singgah Sini
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Related Invoice Number" and input field "36282552/2023/05/51559"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin will see Konfirmasi Sisa Deposit button hidden
