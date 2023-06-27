@@ -166,3 +166,14 @@ Feature: Payment Staging
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
+
+  @TEST_DOM-611 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] input Name Rekening Detail Edit Deposit
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    Then admin input nama pemilik rekening on edit deposit page "Noval"
