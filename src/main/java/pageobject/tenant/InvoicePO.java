@@ -101,7 +101,7 @@ public class InvoicePO {
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
-        additionalPriceDiv = page.locator(".collapse-content > div:nth-of-type(1)");
+        additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
