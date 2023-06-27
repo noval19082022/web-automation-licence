@@ -2,6 +2,7 @@ package steps.mamikos.tenant.profile;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,6 +10,9 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.tenant.profile.RiwayatKostPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class RiwayatKostSteps {
     Page page = ActiveContext.getActivePage();
@@ -53,5 +57,50 @@ public class RiwayatKostSteps {
     public void userWillSeeEmptyState() {
         Assert.assertEquals(riwayatKost.getEmptyStateTitle(), "Belum Ada Kos", "Empty state title is not correct");
         Assert.assertTrue(riwayatKost.isEmptyStateSubtitlePresent(), "Empty State Subtitle not present");
+    }
+
+    @Then("there will be a review menu with the title {string}")
+    public void there_will_be_a_review_menu_with_the_title(String title){
+        Assert.assertEquals(riwayatKost.getTitleRiwayatKosReviewText().replaceAll("\n",""),title, "title is not correct");
+    }
+
+    @Then("there will be a kost saya with the title {string}")
+    public void there_will_be_a_kost_saya_with_the_title(String title){
+        Assert.assertEquals(riwayatKost.getTitleKosSayaText().replaceAll("\n",""),title, "title is not correct");
+    }
+
+    @Then("user will see review form")
+    public void user_will_see_review_form(){
+        Assert.assertEquals(riwayatKost.getTitleReviewText(),"Yuk, kasih review untuk kos yang kamu sewa", "title is not correct");
+    }
+
+    @When("user click ajukan berhenti sewa on kontrak saya page")
+    public void user_click_ajukan_berhenti_sewa_on_kos_saya_page () {
+        riwayatKost.clickAjukanBerhentiSewaText();
+    }
+
+    @Then("there will be a ajukan sewa with the title {string}")
+    public void there_will_be_a_ajukan_sewa_with_the_title(String title){
+        Assert.assertEquals(riwayatKost.getTitleAjukanSewaText(),title, "title is not correct");
+    }
+
+    @When("user click title ajukan sewa")
+    public void userClickTitleAjukanSewa() {
+        riwayatKost.clickAjukanSewaTitle();
+    }
+
+    @Then("user see at review page contains:")
+    public void user_see_at_review_page_contains(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(riwayatKost.getAllReviewPage(i),content.get("Review Page"),"Review page should contain" + content.get("Review Page"));
+            i++;
+        }
+    }
+
+    @Then("user see ajukan berhenti sewa button is disabled")
+    public void user_see_edit_finished_button_is_disabled() {
+        Assert.assertTrue(riwayatKost.isAjukanBerhentiSewaButtonDisabled(), "ajukan berhenti sewa button is not disabled");
     }
 }

@@ -21,6 +21,12 @@ public class RiwayatKostPO {
     Locator bookingFormTitle;
     Locator emptyStateTitleRiwayatKos;
     Locator emptyStateSubtitleRiwayatKos;
+    Locator reviewKostSayaTitle;
+    Locator titleReview;
+    Locator ajukanBerhentiSewaButton;
+    Locator ajukanSewaTitle;
+    Locator reviewPage;
+    Locator konfirmAjukanBerhentiSewaButton;
 
     public RiwayatKostPO(Page page) {
         this.page = page;
@@ -38,6 +44,11 @@ public class RiwayatKostPO {
         bookingFormTitle = page.getByTestId("booking-request-form__container").getByText("Pengajuan Sewa", new Locator.GetByTextOptions().setExact(true));
         emptyStateTitleRiwayatKos = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos"));
         emptyStateSubtitleRiwayatKos = page.getByText("Semua kos yang pernah kamu sewa di Mamikos nantinya akan muncul di halaman ini.");
+        reviewKostSayaTitle = page.locator(".user-review-card--flexbox > div");
+        titleReview = page.getByText("Yuk, kasih review untuk kos yang kamu sewa");
+        ajukanBerhentiSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan berhenti sewa"));
+        ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
+        konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
     }
 
     /**
@@ -127,5 +138,75 @@ public class RiwayatKostPO {
      */
     public boolean isEmptyStateSubtitlePresent(){
         return emptyStateSubtitleRiwayatKos.isVisible();
+    }
+
+    /**
+     * Get Riwayat Kos Review title Text
+     *
+     * @return string "Bagaimana pengalaman ngekosmu?"
+     */
+    public String getTitleRiwayatKosReviewText(){
+        return playwright.getText(reviewKostCardEmpty);
+    }
+
+    /**
+     * Get Kost saya title Text
+     *
+     * @return string "Bagaimana pengalaman ngekosmu?" on kost saya page
+     */
+    public String getTitleKosSayaText(){
+        return playwright.getText(reviewKostSayaTitle);
+    }
+
+    /**
+     * Get Review title Text
+     *
+     * @return string "Tulis review kamu lebih lanjut"
+     */
+    public String getTitleReviewText(){
+        return playwright.getText(titleReview);
+    }
+
+    /**
+     * Click Ajukan Berhenti Sewa text
+     *
+     */
+    public void clickAjukanBerhentiSewaText() {
+        playwright.clickOn(ajukanBerhentiSewaButton);
+    }
+
+    /**
+     * Get Ajukan sewa title Text
+     *
+     * @return string title ajukan sewa
+     */
+    public String getTitleAjukanSewaText(){
+        return playwright.getText(ajukanSewaTitle);
+    }
+
+    /**
+     * Click on Ajukan Sewa Title
+     *
+     */
+    public void clickAjukanSewaTitle() {
+        playwright.clickOn(ajukanSewaTitle);
+    }
+
+    /**
+     * Get Text of Review Title by index
+     * @param index - index review title
+     * @return text of Review Page
+     */
+    public String getAllReviewPage (int index){
+        reviewPage = page.locator("//*[contains(@data-path, 'lbl')]");
+        return playwright.getText(reviewPage.nth(index));
+    }
+
+    /**
+     * Verify button Ajukan Berhenti Sewa is disabled
+     * @return true if disabled
+     */
+    public boolean isAjukanBerhentiSewaButtonDisabled() {
+        return konfirmAjukanBerhentiSewaButton.isDisabled();
     }
 }
