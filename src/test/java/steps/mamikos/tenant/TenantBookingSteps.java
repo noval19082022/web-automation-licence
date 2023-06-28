@@ -228,4 +228,34 @@ public class TenantBookingSteps {
     public void tenantWillSeeBSSInformation(String infoBSS) {
         Assert.assertEquals(kostDetail.getBSSInformationText(infoBSS), infoBSS, "text not same in the display");
     }
+
+    @When("tenant fill booking data for {string} in kost detail")
+    public void tenantFillBookingDataFor(String bookingTime) {
+        if (bookingTime.equalsIgnoreCase("today")) {
+            kostDetail.dismissFTUE();
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+        } else if (bookingTime.equalsIgnoreCase("tommorrow")) {
+            kostDetail.dismissFTUE();
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+        }
+    }
+
+    @Then("tenant should see ajukan sewa button is {string}")
+    public void tenantShouldSeeAjukanSewais(String status) {
+        if (status.equalsIgnoreCase("enable")) {
+            Assert.assertTrue(kostDetail.isAjukanSewaButtonEnable());
+        } else if (status.equalsIgnoreCase("disable")) {
+            Assert.assertFalse(kostDetail.isAjukanSewaButtonEnable());
+        }
+    }
+
+    @When("tenant booking kost after fill date and rent type")
+    public void tenantBookingKostAfterFillDateAndRentType() {
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
 }

@@ -43,6 +43,10 @@ public class KostDetailsPO {
     Locator shareKostButton;
     Locator filterButton;
     Locator needConfirmation;
+    Locator seeCompleteBtn;
+    Locator cancelBookingBtn;
+    Locator reasonOption;
+    Locator yesCancelBookingBtn;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -211,6 +215,10 @@ public class KostDetailsPO {
         this.kosDetailPage = page.locator("detailKostContainer");
         this.filterButton = page.locator(".filter-item-mobile:first-child span");
         this.needConfirmation = page.locator("li:nth-child(2) button");
+        this.seeCompleteBtn = page.locator(".booking-list-card:nth-child(1) .hidden-xs .text-primary");
+        this.cancelBookingBtn = page.locator(".--is-detail .detail-cancel button");
+        this.reasonOption = page.locator(".fade.in .form-options");
+        this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
         this.saveDraftButton = page.locator("//*[@class='bg-c-button bg-c-button--primary-naked bg-c-button--md bg-c-button--block']");
         this.textPopup = page.getByText("Fasilitas umum");
         this.backButton = page.locator(".booking-request-form__back-btn");
@@ -1574,9 +1582,26 @@ public class KostDetailsPO {
      * Click on filter in riwayat booking
      */
     public void cancelAllBookingWithDefaultReason() {
-        filterButton.click();
-        page.pause();
-        needConfirmation.click();
+        var maxLoop = 0;
+        do {
+            maxLoop++;
+            filterButton.click();
+            needConfirmation.waitFor();
+            needConfirmation.click();
+            playwright.hardWait(2000);
+            if (seeCompleteBtn.isVisible()) {
+                seeCompleteBtn.click();
+                cancelBookingBtn.click();
+                playwright.waitTillLocatorIsVisible(reasonOption);
+                yesCancelBookingBtn.click();
+                page.reload();
+                filterButton.waitFor();
+            }
+            if (maxLoop == 5) {
+                break;
+            }
+        } while (seeCompleteBtn.isVisible());
+
     }
 
     /**
@@ -1664,5 +1689,13 @@ public class KostDetailsPO {
      */
     public String getBSSInformationText(String infoBSSText) {
             return playwright.getText(page.getByText(infoBSSText));
+    }
+
+    /**
+     * check is it ajukan sewa button is enable
+     * @return boolean
+     */
+    public boolean isAjukanSewaButtonEnable(){
+        return ajukanSewaButton.isEnabled();
     }
 }
