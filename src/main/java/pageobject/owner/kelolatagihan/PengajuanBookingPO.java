@@ -17,6 +17,7 @@ public class PengajuanBookingPO {
     private Locator yaTolakButton;
     private Locator rejectButton;
     private Locator acceptButton;
+    Locator terimaButtonPopUp;
 
 
 
@@ -30,6 +31,7 @@ public class PengajuanBookingPO {
         this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
         this.rejectButton =  page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.acceptButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Tolak"));
+        terimaButtonPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
     }
 
     /**
@@ -71,5 +73,12 @@ public class PengajuanBookingPO {
         rejectButton.click();
         acceptButton.click();
         return new BillAndBookingManagementPO(page);
+    }
+
+    /**
+     * Click on terima popup from view detail
+     */
+    public void clickOnTerimaPopUp() {
+        terimaButtonPopUp.click();
     }
 }

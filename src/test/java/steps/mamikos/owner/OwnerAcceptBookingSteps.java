@@ -20,7 +20,7 @@ public class OwnerAcceptBookingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking;
+    PengajuanBookingPO pengajuanBooking = new PengajuanBookingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
@@ -87,5 +87,16 @@ public class OwnerAcceptBookingSteps {
     @Then("user can not see pilih di tempat as an option")
     public void userCannotSeeUpdateRoomNumber() {
         Assert.assertFalse(billBookingManage.isPilihKamarDiTempatVisible());
+    }
+
+    @And("owner accept booking via Homepage")
+    public void ownerAcceptBookingViaHomepage() throws InterruptedException {
+        ownerDashboard.clickOnTerimaViaHomepage();
+        pengajuanBooking.clickOnTerimaPopUp();
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnOneRooms();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
     }
 }
