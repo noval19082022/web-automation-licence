@@ -18,6 +18,9 @@ public class PengajuanBookingPO {
     private Locator rejectButton;
     private Locator acceptButton;
     Locator terimaButtonPopUp;
+    private Locator searchKost;
+    private Locator searchKostInputText;
+    private Locator searchKostFirstOption;
 
 
 
@@ -32,6 +35,9 @@ public class PengajuanBookingPO {
         this.rejectButton =  page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.acceptButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Tolak"));
         terimaButtonPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
+        this.searchKost = page.getByPlaceholder("Pilih Kos");
+        this.searchKostInputText = page.getByTestId("bookingRequestKosFilter-searchBar");
+        this.searchKostFirstOption = page.locator(".bg-c-dropdown__menu--fixed li:nth-of-type(1) .bg-c-dropdown__menu-item-content");
     }
 
     /**
@@ -80,5 +86,16 @@ public class PengajuanBookingPO {
      */
     public void clickOnTerimaPopUp() {
         terimaButtonPopUp.click();
+    }
+
+    /**
+     * search kost name on filter pengajuan booking page
+     * @param kostName that want to search
+     */
+    public  BillAndBookingManagementPO searchKostOnKostFilter(String kostName) {
+        searchKost.click();
+        searchKostInputText.fill(kostName);
+        searchKostFirstOption.click();
+        return new BillAndBookingManagementPO(page);
     }
 }

@@ -114,7 +114,9 @@ public class TenantBookingSteps {
     @When("tenant booking kost for {string}")
     public void tenantBookingKostFor(String bookingTime) {
         if (bookingTime.equalsIgnoreCase("today")){
-            kostDetail.dismissFTUE();
+            if (kostDetail.isFTUEBookingBenefitVisible()) {
+                kostDetail.dismissFTUE();
+            }
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
