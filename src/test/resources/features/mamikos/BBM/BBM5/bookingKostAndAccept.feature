@@ -1,4 +1,4 @@
-@BBM2 @regression @confirmBooking
+@BBM2 @regression @confirmBooking @TEST_BBM-13
 Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more than 1 waiting booking)
 
   Scenario: Admin Batalkan Contract
