@@ -23,6 +23,8 @@ public class OwnerDashboardPO {
     Locator notificationButton;
     Locator firstNotificationText;
     Locator mamipoinButton;
+    Locator terimaButton;
+    Locator pengajuanSewaSection;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -39,6 +41,8 @@ public class OwnerDashboardPO {
         notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
+        terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
+        pengajuanSewaSection = page.locator(".booking-confirmation-section__content");
     }
 
     /**
@@ -120,5 +124,21 @@ public class OwnerDashboardPO {
      */
     public void clickMamipoinButton() {
         playwright.clickOn(mamipoinButton);
+    }
+
+    /**
+     * Click on Terima Button on owner dashboard
+     */
+    public void clickOnTerimaViaHomepage() {
+        playwright.clickOn(terimaButton);
+    }
+
+    /**
+     * check if pengajuan section dashboard is present
+     *
+     * @return true if appears pengajuan sewa section
+     */
+    public boolean isPengajuanSewaSectionPresent() {
+        return playwright.waitTillLocatorIsVisible(pengajuanSewaSection);
     }
 }

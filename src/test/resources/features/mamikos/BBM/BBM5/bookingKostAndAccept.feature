@@ -1,0 +1,38 @@
+@BBM2 @regression @confirmBooking
+Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more than 1 waiting booking)
+
+  Scenario: Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag  | phone prod  |
+      | 08100000622 | 08100000622 |
+    And admin akhiri contract
+    Then admin should success terminate contract
+
+  @continue
+  Scenario: Cancel Booking if Tenant Have Booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 08100000622 | 08100000622 | qwerty123 |
+    And user cancel booking
+
+  Scenario: Tenant Booking Kost
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag    | kost name prod    |
+      | kost reykjavik    | kost reykjavik    |
+    And tenant booking kost for "today" and input rent duration equals to 4
+    Then tenant should success booking kost
+
+  Scenario: Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod    | password     |
+      | 0890000000289 | 0890000000289 | Bismillah@01 |
+    And owner accept booking via Homepage
+    And owner back to owner dashboard
+    Then owner can see pengajuan sewa detail on dashboard

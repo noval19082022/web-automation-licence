@@ -3,6 +3,7 @@ package steps.mamikos.owner;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
@@ -31,5 +32,10 @@ public class OwnerDashboardSteps {
     @When("user click mamipoin in owner's menu")
     public void user_click_mamipoin_in_owner_s_menu() {
         ownerDashboardPO.clickMamipoinButton();
+    }
+
+    @Then("owner can see pengajuan sewa detail on dashboard")
+    public void ownerCanSeePengajuanSewaDetailOnDashboard() {
+        Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
 }
