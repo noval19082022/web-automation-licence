@@ -1,7 +1,7 @@
-@BBM8
-Feature: [Profile][Jenis kelamin,dob]check field required on update profile form
+@BBM8 @update-profile
+Feature: Check field required on update profile form
 
-  @TEST_BBM-26 @booking-and-billing @update-profile @web
+  @TEST_BBM-26
   Scenario: Check field required on update profile form
     Given user go to mamikos homepage
     When user login as tenant via phone number:

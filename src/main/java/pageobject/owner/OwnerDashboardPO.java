@@ -100,7 +100,8 @@ public class OwnerDashboardPO {
      * @return TenantBillManagementPO class
      */
     public TenantBillManagementPO clickOnPenyewaKos() {
-        playwright.doubleClick(penyewaMenu);
+        playwright.hardWait(1000);
+        playwright.clickOn(penyewaMenu);
         return new TenantBillManagementPO(page);
     }
 
