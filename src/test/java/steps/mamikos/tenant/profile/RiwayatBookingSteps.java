@@ -32,4 +32,9 @@ public class RiwayatBookingSteps {
         Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
 
     }
+
+    @Then("tenant/user should reached history booking page")
+    public void x_should_reached_history_booking_page() {
+        Assert.assertTrue(riwayatBooking.isInHistoryBookingSection());
+    }
 }

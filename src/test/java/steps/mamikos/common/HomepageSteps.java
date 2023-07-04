@@ -163,4 +163,15 @@ public class HomepageSteps {
     public void userOpenAroundUniversityInUGM() {
         home.clickAroundUGM();
     }
+
+    @Then("user can see Lihat pengajuan sewa lainnya text")
+    public void user_can_see_lihat_pengajuan_sewa_text() {
+        Assert.assertTrue(home.isLihatPengajuanLainBtnVisible(), "lihat pengajuan sewa lainnya not visible");
+    }
+
+    @When("user click on Lihat pengajuan sewa lainnya button")
+    public void user_click_on_lihat_pengajuan_sewa_lainnya_button() {
+        home.clickLihatPengajuanLainBtn();
+    }
+
 }

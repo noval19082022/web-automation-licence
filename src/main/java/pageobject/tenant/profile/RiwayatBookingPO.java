@@ -17,6 +17,7 @@ public class RiwayatBookingPO {
     Locator bayarPelunasanButton;
     Locator lihatSelengkapnyaButton;
     Locator refundText;
+    Locator userBookingSection;
 
     public RiwayatBookingPO(Page page) {
         this.page = page;
@@ -28,6 +29,7 @@ public class RiwayatBookingPO {
         bayarPelunasanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Pelunasan Sekarang"));
         lihatSelengkapnyaButton = page.getByText("Lihat selengkapnya");
         refundText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apakah uang saya bisa dikembalikan?"));
+        userBookingSection = page.locator("#userBookingSection");
     }
 
     /**
@@ -91,5 +93,14 @@ public class RiwayatBookingPO {
         page.waitForPopup(() -> {
             playwright.clickOn(refundText);
         });
+    }
+
+    /**
+     * Check if history booking section id is visible in the viewport
+     * @return true if booking section id is visible
+     */
+    public boolean isInHistoryBookingSection() {
+        playwright.waitTillLocatorIsVisible(userBookingSection);
+        return userBookingSection.isVisible();
     }
 }
