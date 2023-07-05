@@ -65,6 +65,7 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
+        manajemenKost.waitFor();
         manajemenKost.click();
     }
 
@@ -83,7 +84,7 @@ public class OwnerDashboardPO {
      * @return TenantBillManagementPO class
      */
     public TenantBillManagementPO clickOnKelolaKos() {
-        playwright.doubleClick(kelolaTagihan);
+        playwright.clickOn(kelolaTagihan);
         return new TenantBillManagementPO(page);
     }
 
