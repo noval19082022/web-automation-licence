@@ -278,7 +278,7 @@ public class InvoiceManualPO {
             //get today date
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
-            endDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(1);
+            endDate = page.locator("//span[@class='cell day today'][contains(text(),'"+today.format(dates)+"')]");
         } else if (periodeAkhir.equalsIgnoreCase("tomorrow")) {
             //get tomorrow date
             Calendar calendar = Calendar.getInstance();

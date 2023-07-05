@@ -270,8 +270,8 @@ public class InvoiceManualSteps {
         manualInvoice.assertPopUpInInvoiceManual();
     }
 
-    @When("the admin creates Invoice Manual {string} and checks required fields {string}, {string}, {string}, {string}, {string}")
-    public void the_admin_creates_Invoice_Manual_and_checks_required_fields(String invType, String nama, String awal, String akhir, String durasi, String jml){
+    @When("admin tambah pengeluaran {string}")
+    public void admin_tambah_pengeluaran(String invType){
         admin.NavigateToMamipayMenu("Invoice Manual");
         manualInvoice.clickBuatInvoice();
 
@@ -280,18 +280,24 @@ public class InvoiceManualSteps {
         } else if (invType.equalsIgnoreCase("Biaya Sewa")){
             manualInvoice.clickJenisBiayaSewa();
         }
-
+    }
+    @When("Checks required fields {string}, {string}, {string}, {string}, {string}")
+    public void Checks_required_fields(String nama, String awal, String akhir, String durasi, String jml){
         manualInvoice.clickTambah();
 
         if (!(nama.equalsIgnoreCase("-"))) {
             manualInvoice.setNamaBiayaInvoiceManual(nama);
-        } else if (!(awal.equalsIgnoreCase("-"))) {
+        }
+        if (!(awal.equalsIgnoreCase("-"))) {
             manualInvoice.setPeriodeAwalInvoiceManual(awal);
-        } else if (!(akhir.equalsIgnoreCase("-"))) {
+        }
+        if (!(akhir.equalsIgnoreCase("-"))) {
             manualInvoice.setPeriodeAkhirInvoiceManual(akhir);
-        } else if (!(durasi.equalsIgnoreCase("-"))) {
+        }
+        if (!(durasi.equalsIgnoreCase("-"))) {
             manualInvoice.setDurasiBiayaInvoiceManual(durasi);
-        } else if (!(jml.equalsIgnoreCase("-"))) {
+        }
+        if (!(jml.equalsIgnoreCase("-"))) {
             manualInvoice.setJumlahBiayaInvoiceManual(jml);
         }
 
@@ -302,13 +308,17 @@ public class InvoiceManualSteps {
     public void the_error_messages_are_displayed(String namaErrMsg, String awalErrMsg, String akhirErrMsg, String jmlErrMsg){
         if (!(namaErrMsg.equalsIgnoreCase("-"))){
             manualInvoice.assertNamaBiayaErrMsg();
-        } else if (!(awalErrMsg.equalsIgnoreCase("-"))) {
+        }
+        if (!(awalErrMsg.equalsIgnoreCase("-"))) {
             manualInvoice.assertPeriodeAwalErrMsg();
-        } else if (!(akhirErrMsg.equalsIgnoreCase("-"))) {
+        }
+        if (!(akhirErrMsg.equalsIgnoreCase("-"))) {
             manualInvoice.assertPeriodeAkhirErrMsg();
-        } else if (!(jmlErrMsg.equalsIgnoreCase("-"))) {
+        }
+        if (!(jmlErrMsg.equalsIgnoreCase("-"))) {
             manualInvoice.assertJumlahBiayaErrMsg();
         }
+        manualInvoice.clickClosePopUp();
     }
 
     @When("admin creates Invoice Manual {string}")
