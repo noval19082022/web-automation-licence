@@ -115,7 +115,7 @@ public class InvoicePO {
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
-        additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+        additionalPriceDivAddOn = page.locator(".collapse.details-collapsible");
         voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
         biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
