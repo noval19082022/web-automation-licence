@@ -103,4 +103,19 @@ public class RiwayatKostSteps {
     public void user_see_edit_finished_button_is_disabled() {
         Assert.assertTrue(riwayatKost.isAjukanBerhentiSewaButtonDisabled(), "ajukan berhenti sewa button is not disabled");
     }
+
+    @Then("there will be a Kost Review submitted with the title {string}")
+    public void thereWillBeAKostReviewSubmittedWithTheTitle(String title) {
+        Assert.assertEquals(riwayatKost.getTitleKostReviewSubmittedText().replaceAll("\n",""),title, "title is not correct");
+    }
+
+    @And("there will be a Kost Review submitted with the stars amount {string}")
+    public void there_will_be_a_kost_review_submitted_with_the_stars_amount(String title){
+        Assert.assertEquals(riwayatKost.getStarsKostReviewSubmittedText().replaceAll("\n",""),title, "title is not correct");
+    }
+
+    @And("user verify Kost Review entry point is not displayed")
+    public void user_verify_Kost_Review_entry_point_is_not_displayed() {
+        Assert.assertFalse(riwayatKost.isKostReviewEntryPointNotDisplayed());
+    }
 }
