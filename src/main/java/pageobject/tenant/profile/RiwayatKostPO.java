@@ -27,6 +27,8 @@ public class RiwayatKostPO {
     Locator ajukanSewaTitle;
     Locator reviewPage;
     Locator konfirmAjukanBerhentiSewaButton;
+    Locator titleKostReviewSubmitted;
+    Locator starsKostReviewSubmitted;
 
     public RiwayatKostPO(Page page) {
         this.page = page;
@@ -49,6 +51,8 @@ public class RiwayatKostPO {
         ajukanBerhentiSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan berhenti sewa"));
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
+        titleKostReviewSubmitted = page.locator(".user-review-card--reviewed__text");
+        starsKostReviewSubmitted = page.locator(".bg-c-text--body-1");
     }
 
     /**
@@ -208,5 +212,31 @@ public class RiwayatKostPO {
      */
     public boolean isAjukanBerhentiSewaButtonDisabled() {
         return konfirmAjukanBerhentiSewaButton.isDisabled();
+    }
+
+    /**
+     * Get Kost Review Submitted Text
+     *
+     * @return string "Kamu memberikan nilai:"
+     */
+    public String getTitleKostReviewSubmittedText(){
+        return playwright.getText(titleKostReviewSubmitted);
+    }
+
+    /**
+     * Get Kost Review Submitted Stars Amount
+     *
+     * @return string "3"
+     */
+    public String getStarsKostReviewSubmittedText(){
+        return playwright.getText(starsKostReviewSubmitted);
+    }
+
+    /**
+     * Verify Kost Review entry point is not displayed
+     * @return boolean
+     */
+    public Boolean isKostReviewEntryPointNotDisplayed() {
+        return playwright.waitTillLocatorIsVisible(starsKostReviewSubmitted);
     }
 }
