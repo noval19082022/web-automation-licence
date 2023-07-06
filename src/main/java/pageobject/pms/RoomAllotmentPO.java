@@ -80,7 +80,7 @@ public class RoomAllotmentPO {
         } else if (day.equalsIgnoreCase("tomorrow")) {
             tomorrow.first().click();
         } else {
-            Locator date = page.locator("//*[contains(@class,'cell day') and normalize-space(text()) = '" + day + "']").first();
+            Locator date = page.locator("//*[not(contains(@class,'muted')) and contains(@class,'cell day') and normalize-space(text()) = '" + day + "']").first();
             date.click();
         }
     }
@@ -98,7 +98,7 @@ public class RoomAllotmentPO {
         } else if (day.equalsIgnoreCase("tomorrow")) {
             tomorrow.last().click();
         } else {
-            Locator date = page.locator("//*[contains(@class,'cell day') and normalize-space(text()) = '" + day + "']").last();
+            Locator date = page.locator("//*[not(contains(@class,'muted')) and contains(@class,'cell day') and normalize-space(text()) = '" + day + "']").last();
             date.click();
         }
     }

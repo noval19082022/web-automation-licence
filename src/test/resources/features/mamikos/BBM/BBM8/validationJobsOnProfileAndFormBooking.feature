@@ -61,7 +61,7 @@ Feature: Edit profile for jobs as Lainnya
     And user click dropdown and fills "aaa" on edit profile
     Then user can see information "There is no data"
 
-  @TEST_BBM-1500 @continue
+  @TEST_BBM-1500
   Scenario: Change pekerjaan to Mahasiswa and Karyawan with invalid data instantion from edit profile page
     When user choose profession "Mahasiswa" on edit profile page
     And user click dropdown and fills "abcd" on edit profile
