@@ -103,7 +103,7 @@ Feature: Inquiry and Create Manual Payout
       | Additional Payout to Owner |
 
   @TEST_DOM-519 @Automated @web-covered @createAndChangeManualPayout
-  Scenario Outline: [Mamipay][Manual Payout] Change payout type from Additional Payout to Owner to <type>
+  Scenario Outline: [Mamipay][Manual Payout] Change payout type to <type>
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
