@@ -144,7 +144,9 @@ public class RewardManagementPO {
     public void clickOnUpdateReward() {
         playwright.clickOn(updateRewardButton);
         playwright.hardWait(3000);
-        playwright.clickOn(yesUpdateRewardButton);
+        if (yesUpdateRewardButton.isVisible()) {
+            playwright.clickOn(yesUpdateRewardButton);
+        }
     }
 
     /**
