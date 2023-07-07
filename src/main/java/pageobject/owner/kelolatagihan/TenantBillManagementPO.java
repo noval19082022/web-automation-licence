@@ -82,7 +82,7 @@ public class TenantBillManagementPO {
      * @return BillDetailsPO class
      */
     public BillDetailsPO clickOnInvoiceList(String setName) {
-        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setName)).getByTestId("invoice-status-label");
+        Locator invoiceList = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(setName)).getByTestId("invoice-status-label").last();
         playwright.clickOn(invoiceList);
         return new BillDetailsPO(page);
     }
