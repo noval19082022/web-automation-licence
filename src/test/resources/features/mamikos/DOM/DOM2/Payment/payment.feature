@@ -210,3 +210,16 @@ Feature: Payment Staging
       | Renter Name            | embul owner         |
       | Related Invoice Number | 83900841/2021/12/00 |
       | Related Invoice Code   | 83900841            |
+
+  @TEST_DOM-608 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit]input Nomor Rekening Detail Edit Deposit
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "081280003230"
+    And admin search contract by kost level "SinggahSini"
+    And admin want to edit deposit
+    And admin want to choose "Bank Aceh Syariah" for transfer deposit
+    Then admin see dropdown close and see bank "Bank Aceh Syariah"
+    And admin input nomor rekening on edit deposit page "1550000036"
