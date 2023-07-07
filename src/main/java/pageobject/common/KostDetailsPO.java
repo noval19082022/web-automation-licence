@@ -206,7 +206,7 @@ public class KostDetailsPO {
         this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
-        this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
+        this.bookingPeriodInput = page.locator("div.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
         this.kostTitle = page.locator("#detailTitle");
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
