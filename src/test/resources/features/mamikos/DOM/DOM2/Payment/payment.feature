@@ -223,3 +223,19 @@ Feature: Payment Staging
     And admin want to choose "Bank Aceh Syariah" for transfer deposit
     Then admin see dropdown close and see bank "Bank Aceh Syariah"
     And admin input nomor rekening on edit deposit page "1550000036"
+
+  @TEST_DOM-607 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit Deposit] see Lihat Akhiri Kontrak
+    # aktivasi kontrak singgahsini
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin want to reactivate invoice by invoice number "69903537/2023/01/43864"
+
+    And admin search contract by tenant phone number:
+      | phone stag   | phone prod   |
+      | 089220220105 | 089220220105 |
+    And admin search contract by kost level "SinggahSini"
+    And admin akhiri contract
+    Then admin should success terminate contract
