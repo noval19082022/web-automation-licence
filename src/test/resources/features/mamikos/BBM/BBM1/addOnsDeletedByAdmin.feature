@@ -1,4 +1,4 @@
-@BBM8
+@BBM1 @TEST_BBM-995
 Feature: Add Ons - Deleted by Admin
 
   Scenario: Admin Batalkan Contract
