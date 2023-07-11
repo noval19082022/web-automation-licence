@@ -217,4 +217,8 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.KONTRAK_KOST_SAYA, 30000.0, LoadState.LOAD);
     }
 
+    @And("tenant navigate to mamipoint guideline page")
+    public void tenantNavigateToMamipointGuidelinePage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_GUIDELINE, 30000.0, LoadState.LOAD);
+    }
 }
