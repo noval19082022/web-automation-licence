@@ -1,6 +1,6 @@
 Feature: Breadcrumb Kost Detail
 
-  @DOM4 @DOM-5273
+  @DOM4 @DOM-5273 @TEST_DOM-5275
   Scenario Outline:[Kost Detail] Checking Breadcrumb on Kost Detail
     Given user go to mamikos homepage
     When user visit page <path url>
