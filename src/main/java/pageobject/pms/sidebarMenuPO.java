@@ -51,4 +51,12 @@ public class sidebarMenuPO {
         otherTransactionButton.waitFor();
         otherTransactionButton.click();
     }
+
+    /**
+     * click Tenant Communication Menu
+     */
+    public void clickTenantCommunicationMenu() {
+        tenantCommunicationButton.waitFor();
+        tenantCommunicationButton.click();
+    }
 }
