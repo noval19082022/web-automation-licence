@@ -62,4 +62,11 @@ public class OwnerRejectBookingSteps {
     public void ownerChooseFilterKostFor(String kostName) {
         billBookingManage = pengajuanBooking.searchKostOnKostFilter(kostName);
     }
+
+    @When("owner reject booking from dashboard")
+    public void user_click_on_reject_booking() {
+        ownerDashboard.clickOnTolakViaHomepage();
+        pengajuanBooking.clickYaTolakOnPengajuanBooking();
+    }
+
 }
