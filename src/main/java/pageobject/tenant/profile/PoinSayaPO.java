@@ -196,7 +196,7 @@ public class PoinSayaPO {
 
     /**
      * Get Expired Point Information on Mamipoin Landing Page
-     * @return text
+     * @return String
      */
     public String getTextExpiredPointInfoOnLandingPage() {
         return playwright.getText(expiredPoinInfo);

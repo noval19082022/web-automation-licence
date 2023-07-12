@@ -111,7 +111,7 @@ public class PoinSayaSteps {
         Assert.assertEquals(poinSaya.getTextExpiredPointInfoOnLandingPage(), expPoinInfo, "Expired information point not equal to " + expPoinInfo);
     }
 
-    @Then("display MamiPoin with text {string}")
+    @Then("user will see display MamiPoin with text {string}")
     public void displayMamiPoinWithText(String textMamipoin) {
         Assert.assertEquals(poinSaya.getTextNoHaveMamipoin(), textMamipoin, "Text is not equal to " +textMamipoin);
     }

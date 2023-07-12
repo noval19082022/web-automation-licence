@@ -33,4 +33,4 @@ Feature: MamiPoin Tenant Landing Page
       | 0890867321220 | 0890867321220 | mamikosqa123 |
     And user navigate to tagihan kost saya
     And tenant go to invoice page
-    Then display MamiPoin with text "Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya."
+    Then user will see display MamiPoin with text "Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya."
