@@ -2,6 +2,7 @@ package steps.mamikos.tenant.profile;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -11,10 +12,12 @@ import pageobject.common.HomePO;
 import pageobject.tenant.profile.RiwayatKostPO;
 import utilities.PlaywrightHelpers;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
 public class RiwayatKostSteps {
+    List<Map<String, String>> reviewText;
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
@@ -116,6 +119,29 @@ public class RiwayatKostSteps {
 
     @And("user verify Kost Review entry point is not displayed")
     public void user_verify_Kost_Review_entry_point_is_not_displayed() {
-        Assert.assertFalse(riwayatKost.isKostReviewEntryPointNotDisplayed());
+        Assert.assertTrue(riwayatKost.isKostReviewEntryPointNotDisplayed());
+    }
+    @When("user stop rent kost with reason {string}")
+    public void user_stop_rent_with_reason(String reason) {
+        riwayatKost.clickReasonStopRent(reason);
+    }
+
+    @And("user input review kost with rating 5:")
+    public void user_click_input_review(DataTable table) {
+        reviewText = table.asMaps(String.class, String.class);
+        var review = reviewText.get(0).get("review stop rent " + Mamikos.ENV);
+        riwayatKost.clickReviewKebersihan();
+        riwayatKost.clickReviewKeamanan();
+        riwayatKost.clickReviewKenyamanan();
+        riwayatKost.clickReviewFasilitasKamar();
+        riwayatKost.clickReviewFasilitasUmum();
+        riwayatKost.clickReviewKesesuaianHarga();
+        riwayatKost.fillReviewKost(review);
+        riwayatKost.clickKirimButton();
+        }
+    @When("user click ajukan berhenti sewa on kontrak saya after review kos")
+    public void user_click_ajukan_berhenti_sewa_on_kos_saya_page_after_review_kos () {
+        riwayatKost.clickAjukanBerhentiSewaTextAfterReviewKos();
     }
 }
+

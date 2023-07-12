@@ -221,4 +221,15 @@ public class NavigatesSteps {
     public void tenantNavigateToMamipointGuidelinePage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_GUIDELINE, 30000.0, LoadState.LOAD);
     }
+    @And("user navigates to help page")
+    public void userNavigateToHelpPage() {
+        page.bringToFront();
+        playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
+        playwright.hardWait(3);
+    }
+
+    @And("user navigate to penyewa page")
+    public void userNavigateToPenyewaPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
+    }
 }

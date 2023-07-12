@@ -1,5 +1,6 @@
 package pageobject.owner.kelolatagihan;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -21,6 +22,12 @@ public class TenantBillManagementPO {
     Locator roomNumberText;
     Locator updateRoomNumberButton;
     Locator saveButton;
+    Locator kostDropdownInPenyewaMenu;
+    Locator selectKost;
+    Locator kontrakSewaButton;
+    Locator tolakButton;
+    Locator ubahKontrakPenyewaButton;
+
 
     public TenantBillManagementPO(Page page) {
         this.page = page;
@@ -36,7 +43,11 @@ public class TenantBillManagementPO {
         roomNumberText = page.locator("//*[@class='tenant-header__room-info']/p");
         updateRoomNumberButton = page.getByText("Ubah nomor kamar chevron-right");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-
+        kostDropdownInPenyewaMenu = page.locator("(//div[@class='bg-c-select__trigger bg-c-select__trigger--lg'])[1]");
+        selectKost = page.locator("a").filter(new Locator.FilterOptions().setHasText("kost bali for contract section Tobelo Utara Halmahera Utara"));
+        kontrakSewaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak sewa"));
+        tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
+        ubahKontrakPenyewaButton = page.getByTestId("btn-edit-contract");
     }
 
     /**
@@ -176,5 +187,47 @@ public class TenantBillManagementPO {
      */
     public boolean isUpdateRoomNumberVisible() {
         return updateRoomNumberButton.isVisible();
+    }
+
+    /**
+     * user as owner click kost dropdown
+     * user enter kost name
+     * user choose kost name
+     */
+    public void searchKostInPenyewaMenu(String kostName) {
+        playwright.waitTillLocatorIsVisible(kostDropdownInPenyewaMenu);
+        kostDropdownInPenyewaMenu.click();
+        searchKostTextbox.fill(kostName);
+        selectKost.click();
+        lihatSelengkapnyaButton.click();
+    }
+
+    /**
+     * user as owner click kontrak sewa
+     */
+    public void clickOnKontrakSewaButton() {
+        kontrakSewaButton.click();
+    }
+
+    /**
+     * user as owner click tolak berhenti sewa
+     */
+    public void clickOnTolakButton() {
+        tolakButton.click();
+    }
+
+    /**
+     * user as owner click ubah kontrak penyewa
+     */
+    public void clickOnUbahKontrakPenyewaButton() {
+        ubahKontrakPenyewaButton.click();
+    }
+
+    /**
+     * this method will be information activities tagihan in my kos displayed
+     */
+    public String isPriceDisplayed(String price){
+        Locator totalAmount = page.locator("//p[.='"+price+"']");
+        return playwright.getText(totalAmount);
     }
 }
