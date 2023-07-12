@@ -99,4 +99,8 @@ public class PengajuanBookingPO {
         searchKostFirstOption.click();
         return new BillAndBookingManagementPO(page);
     }
+
+    public void clickYaTolakOnPengajuanBooking() {
+        yaTolakButton.click();
+    }
 }

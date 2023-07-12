@@ -172,6 +172,7 @@ public class KostDetailsPO {
 
     //------------ Right Panel Section -----------------
     private Locator totalPriceText;
+    private Locator discountPriceKostDetailText;
     private Locator bookingDateForm;
     private Locator bookingDate;
     private Locator bookingDurationForm;
@@ -364,6 +365,7 @@ public class KostDetailsPO {
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
+        this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
         this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
         this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
@@ -452,10 +454,10 @@ public class KostDetailsPO {
      * @param bookingPeriod string data type
      */
     public void selectBookingPeriod(String bookingPeriod) {
-        if (!page.getByText(bookingPeriod).isVisible()) {
+        if (!page.getByText(bookingPeriod).last().isVisible()) {
             bookingPeriodInput.click();
         }
-        page.getByText(bookingPeriod).click();
+        page.getByText(bookingPeriod).last().click();
     }
 
     /**
@@ -1720,6 +1722,14 @@ public class KostDetailsPO {
     public boolean isAjukanSewaButtonEnable(){
         return ajukanSewaButton.isEnabled();
     }
+
+    /**
+     * check if harga coret is visible
+     * @return boolean, true if harga coret visible
+     */
+    public boolean isHargaCoretVisible() {
+        return discountPriceKostDetailText.isVisible();
+    }
     /**
      * Click on chat pemilik button
      */
@@ -1795,4 +1805,5 @@ public class KostDetailsPO {
     public Boolean isKategoriBantuanTittleDisplayed(){
         return playwright.waitTillLocatorIsVisible(kategoriBantuanTittle);
     }
+
 }
