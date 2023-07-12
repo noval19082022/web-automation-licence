@@ -1,4 +1,4 @@
-@regression @mamipoinTenant @BBM3 @disini
+@regression @mamipoinTenant @BBM3
 
 Feature: MamiPoin Tenant Entry Point
 
