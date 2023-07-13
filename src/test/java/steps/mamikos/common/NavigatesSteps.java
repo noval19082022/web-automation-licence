@@ -186,7 +186,7 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.SEARCH_INVOICE);
     }
 
-    @And("user navigates to owner dashboard")
+    @And("owner/user navigates to owner dashboard")
     public void userNavigatesToOwnerDashboard() {
         playwright.navigateTo(Mamikos.OWNER_URL, 30000.0, LoadState.LOAD);
     }
@@ -217,4 +217,24 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.KONTRAK_KOST_SAYA, 30000.0, LoadState.LOAD);
     }
 
+    @And("tenant navigate to mamipoint guideline page")
+    public void tenantNavigateToMamipointGuidelinePage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_GUIDELINE, 30000.0, LoadState.LOAD);
+    }
+    @And("user navigates to help page")
+    public void userNavigateToHelpPage() {
+        page.bringToFront();
+        playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
+        playwright.hardWait(3);
+    }
+
+    @And("user navigate to penyewa page")
+    public void userNavigateToPenyewaPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin navigate to mamikos voucher menu")
+    public void tenantNavigateToMamikosVoucherPage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
+    }
 }

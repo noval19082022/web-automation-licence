@@ -186,7 +186,7 @@ public class PaymentSteps {
         filterKost = table.asMaps(String.class, String.class);
         var filter = filterKost.get(0).get("kost name " + Mamikos.ENV);
         ownerDashboard.clickOnManagementKost();
-        invoice.openKelolaTagihan();
+        ownerDashboard.clickOnKelolaKos();
         invoice.filterTagihanKost(filter);
     }
 
@@ -289,5 +289,4 @@ public class PaymentSteps {
         int totalAmount = invoice.getSubTotal();
         Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
     }
-
 }
