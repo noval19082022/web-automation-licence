@@ -232,4 +232,9 @@ public class NavigatesSteps {
     public void userNavigateToPenyewaPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigate to mamikos voucher menu")
+    public void tenantNavigateToMamikosVoucherPage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
+    }
 }
