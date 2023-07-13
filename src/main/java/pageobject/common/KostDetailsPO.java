@@ -1,7 +1,6 @@
 package pageobject.common;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
@@ -34,6 +33,20 @@ public class KostDetailsPO {
     Locator mauCobaDongSectionAtHomepage;
 
     Locator hapusDraft;
+
+    Locator chatPemilikButton;
+
+    Locator bantuanButton;
+
+    Locator chatListTittle;
+
+    Locator informationKosDetail;
+
+    Locator tagihanKosTittle;
+    Locator contractTittle;
+    Locator chatOwnerTittle;
+    Locator forumTittle;
+    Locator kategoriBantuanTittle;
 
     //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
@@ -159,6 +172,7 @@ public class KostDetailsPO {
 
     //------------ Right Panel Section -----------------
     private Locator totalPriceText;
+    private Locator discountPriceKostDetailText;
     private Locator bookingDateForm;
     private Locator bookingDate;
     private Locator bookingDurationForm;
@@ -206,7 +220,7 @@ public class KostDetailsPO {
         this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
-        this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
+        this.bookingPeriodInput = page.locator("div.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
         this.kostTitle = page.locator("#detailTitle");
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
@@ -227,6 +241,15 @@ public class KostDetailsPO {
         this.deleteButtonOnTabOneDraftBooking = page.locator(".btn-default[data-v-195f9976]");
         this.hapusDraft = page.locator("//button[contains(.,'Hapus Draft')]");
         this.mauCobaDongSectionAtHomepage = page.locator(".bg-c-text--button-sm");
+        this.chatPemilikButton = page.getByTestId("userKostActivities-menus").locator("div").filter(new Locator.FilterOptions().setHasText("Chat pemilik"));
+        this.chatListTittle = page.getByText("Chat room");
+        this.bantuanButton = page.getByTestId("userKostActivities-menus").locator("div").filter(new Locator.FilterOptions().setHasText("Bantuan"));
+        this.informationKosDetail = page.getByText("Informasi Kos");
+        this.tagihanKosTittle = page.getByText("Tagihan kos");
+        this.contractTittle = page.getByText("Kontrak");
+        this.chatOwnerTittle = page.getByText("Chat pemilik");
+        this.forumTittle = page.getByText("Forum");
+        this.kategoriBantuanTittle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kategori Bantuan"));
 
         //---------login popup---------------
         this.loginPopUp = page.locator("p[class='login-title']");
@@ -342,6 +365,7 @@ public class KostDetailsPO {
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
+        this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
         this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
         this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
@@ -430,10 +454,10 @@ public class KostDetailsPO {
      * @param bookingPeriod string data type
      */
     public void selectBookingPeriod(String bookingPeriod) {
-        if (!page.getByText(bookingPeriod).isVisible()) {
+        if (!page.getByText(bookingPeriod).last().isVisible()) {
             bookingPeriodInput.click();
         }
-        page.getByText(bookingPeriod).click();
+        page.getByText(bookingPeriod).last().click();
     }
 
     /**
@@ -1698,4 +1722,88 @@ public class KostDetailsPO {
     public boolean isAjukanSewaButtonEnable(){
         return ajukanSewaButton.isEnabled();
     }
+
+    /**
+     * check if harga coret is visible
+     * @return boolean, true if harga coret visible
+     */
+    public boolean isHargaCoretVisible() {
+        return discountPriceKostDetailText.isVisible();
+    }
+    /**
+     * Click on chat pemilik button
+     */
+    public void clickOnChatPemilikButton() {
+        chatPemilikButton.click();
+    }
+
+    /**
+     * Click on bantuan button
+     */
+    public void clickOnBantuanMenuButton() {
+        bantuanButton.click();
+    }
+
+    /**
+     * Click on button text
+     */
+    public void clickOnBytextButton(String buttonText) {
+        String selector = "(//a[normalize-space()='"+ buttonText +"'])";
+        ElementHandle element = page.querySelector(selector);
+        element.click();
+    }
+
+    /**
+     * this method will be chatlist tittle displayed
+     */
+    public Boolean isChatListTittleDisplayed() {
+        playwright.hardWait(3);
+        return playwright.waitTillLocatorIsVisible(chatListTittle);
+    }
+
+    /**
+     * this method will be information kos detail displayed
+     */
+    public Boolean isInformationKosDetaileDisplayed() {
+        playwright.hardWait(3);
+        return playwright.waitTillLocatorIsVisible(informationKosDetail);
+    }
+
+    /**
+     * this method will be information activities tagihan in my kos displayed
+     */
+    public Boolean isTagihanKosDisplayed(){
+        return playwright.waitTillLocatorIsVisible(tagihanKosTittle);
+    }
+    /**
+     * this method will be information activities contract in my kos displayed
+     */
+    public Boolean isKontrakDisplayed(){
+        return playwright.waitTillLocatorIsVisible(contractTittle);
+    }
+    /**
+     * this method will be information activities chat pemilik in mya kos displayed
+     */
+    public Boolean isChatPemilikDisplayed(){
+        return playwright.waitTillLocatorIsVisible(chatOwnerTittle);
+    }
+    /**
+     * this method will be information activities bantuan in mya kos displayed
+     */
+    public Boolean isBantuanDisplayed(){
+        return playwright.waitTillLocatorIsVisible(bantuanButton);
+    }
+    /**
+     * this method will be information activities forum in mya kos displayed
+     */
+    public Boolean isForumDisplayed(){
+        return playwright.waitTillLocatorIsVisible(forumTittle);
+    }
+    /**
+     * this method will be information activities forum in mya kos displayed
+     */
+    public Boolean isKategoriBantuanTittleDisplayed(){
+        return playwright.waitTillLocatorIsVisible(kategoriBantuanTittle);
+    }
+
 }

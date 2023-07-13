@@ -436,4 +436,44 @@ public class KostDetailSteps {
         kostDetail.dismissFTUE();
         kostDetail.clickOnShareKostButton();
     }
+
+    @And("user clicks on Chat pemilik menu")
+    public void userClickOnChatPemilikMenu() {
+        kostDetail.clickOnChatPemilikButton();
+    }
+
+    @And("user clicks on Bantuan menu")
+    public void userClickOnBantuanMenu() {
+        kostDetail.clickOnBantuanMenuButton();
+    }
+
+    @And("user clicks on {string}")
+    public void userClickOnByText(String buttonText) {
+        kostDetail.clickOnBytextButton(buttonText);
+    }
+
+    @Then("user can see Chat list title")
+    public void userCanSeeChatListTittle() {
+        Assert.assertTrue(kostDetail.isChatListTittleDisplayed(), "Login Pop up is not displayed");
+    }
+
+    @Then("user can see informasi kos page")
+    public void userCanSeeInformationKosDetail() {
+        Assert.assertTrue(kostDetail.isInformationKosDetaileDisplayed(), "Login Pop up is not displayed");
+        page.goBack();
+    }
+
+    @Then("user see activities in My Kos")
+    public void userCanSeeActivitiesInMyKos() {
+        Assert.assertTrue(kostDetail.isTagihanKosDisplayed(), "Tagihan kos");
+        Assert.assertTrue(kostDetail.isKontrakDisplayed(), "Kontrak");
+        Assert.assertTrue(kostDetail.isChatPemilikDisplayed(), "Chat pemilik");
+        Assert.assertTrue(kostDetail.isBantuanDisplayed(), "Bantuan");
+        Assert.assertTrue(kostDetail.isForumDisplayed(), "Forum");
+    }
+
+    @Then("user can see Kategori Bantuan on mamihelp page")
+    public void userCanSeeKategoriBantuan() {
+        Assert.assertTrue(kostDetail.isKategoriBantuanTittleDisplayed(), "Kategori Bantuan");
+    }
 }

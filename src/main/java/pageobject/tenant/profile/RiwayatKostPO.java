@@ -1,5 +1,6 @@
 package pageobject.tenant.profile;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -24,11 +25,24 @@ public class RiwayatKostPO {
     Locator reviewKostSayaTitle;
     Locator titleReview;
     Locator ajukanBerhentiSewaButton;
+
+    Locator ajukanBerhentiSewaButtonAfterReviewKos;
     Locator ajukanSewaTitle;
     Locator reviewPage;
     Locator konfirmAjukanBerhentiSewaButton;
     Locator titleKostReviewSubmitted;
     Locator starsKostReviewSubmitted;
+
+    Locator reviewKebersihan;
+    Locator reviewFasilitasKamar;
+    Locator reviewFasilitasUmum;
+    Locator reviewKesesuaianHarga;
+    Locator reviewKeamanan;
+    Locator reviewKenyamanan;
+    Locator kirimButton;
+    Locator fillReviewKost;
+    Locator closePopUpButton;
+
 
     public RiwayatKostPO(Page page) {
         this.page = page;
@@ -49,10 +63,20 @@ public class RiwayatKostPO {
         reviewKostSayaTitle = page.locator(".user-review-card--flexbox > div");
         titleReview = page.getByText("Yuk, kasih review untuk kos yang kamu sewa");
         ajukanBerhentiSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan berhenti sewa"));
+        ajukanBerhentiSewaButtonAfterReviewKos = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Berhenti Sewa").setExact(true));
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
         titleKostReviewSubmitted = page.locator(".user-review-card--reviewed__text");
         starsKostReviewSubmitted = page.locator(".bg-c-text--body-1");
+        reviewKebersihan = page.locator("span:nth-child(5) > .bg-c-icon > use").first();
+        reviewKeamanan = page.locator("div:nth-child(2) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        reviewKenyamanan = page.locator("div:nth-child(3) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        reviewFasilitasKamar = page.locator("div:nth-child(4) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        reviewFasilitasUmum = page.locator("div:nth-child(5) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        reviewKesesuaianHarga = page.locator("div:nth-child(6) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        kirimButton = page.locator(".bg-c-button--primary");
+        fillReviewKost = page.getByPlaceholder("Ceritakan pengalamanmu di sini");
+        closePopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).nth(1);
     }
 
     /**
@@ -238,5 +262,89 @@ public class RiwayatKostPO {
      */
     public Boolean isKostReviewEntryPointNotDisplayed() {
         return playwright.waitTillLocatorIsVisible(starsKostReviewSubmitted);
+    }
+
+    /**
+     * Click reason Ajukan Berhenti Sewa text
+     *
+     */
+    public void clickReasonStopRent(String reason) {
+        String selector = "//p[contains(.,'"+ reason +"')]";
+        ElementHandle element = page.querySelector(selector);
+        element.click();
+    }
+
+    /**
+     * Click star kebersihan in review kos
+     *
+     */
+    public void clickReviewKebersihan() {
+        playwright.clickOn(reviewKebersihan);
+    }
+
+    /**
+     * Click star keamanan in review kos
+     *
+     */
+    public void clickReviewKeamanan() {
+        playwright.clickOn(reviewKeamanan);
+    }
+
+    /**
+     * Click star kenyamanan in review kos
+     *
+     */
+    public void clickReviewKenyamanan() {
+        playwright.clickOn(reviewKenyamanan);
+    }
+
+    /**
+     * Click star fasilitas kamar in review kos
+     *
+     */
+    public void clickReviewFasilitasKamar() {
+        playwright.clickOn(reviewFasilitasKamar);
+    }
+
+    /**
+     * Click star fasilitas kamar in review kos
+     *
+     */
+    public void clickReviewFasilitasUmum() {
+        playwright.clickOn(reviewFasilitasUmum);
+    }
+
+    /**
+     * Click star kesesuaian harga in review kos
+     *
+     */
+    public void clickReviewKesesuaianHarga() {
+        playwright.clickOn(reviewKesesuaianHarga);
+    }
+
+    /**
+     * Click kirim button in review kos
+     *
+     */
+    public void clickKirimButton() {
+        playwright.clickOn(kirimButton);
+        playwright.clickOn(closePopUpButton);
+    }
+
+    /**
+     * fill review in review kos
+     *
+     */
+    public void fillReviewKost(String reviewText) {
+        playwright.pageScrollUntilElementIsVisible(fillReviewKost);
+        fillReviewKost.fill(reviewText);
+    }
+    /**
+     * Click Ajukan Berhenti Sewa text
+     *
+     */
+    public void clickAjukanBerhentiSewaTextAfterReviewKos() {
+        playwright.pageScrollUntilElementIsVisible(ajukanBerhentiSewaButtonAfterReviewKos);
+        playwright.clickOn(ajukanBerhentiSewaButtonAfterReviewKos);
     }
 }

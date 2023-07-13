@@ -62,8 +62,6 @@ public class TenantBookingSteps {
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
-
-
     @And("user will see Jumlah Penyewa can add until 3 Penyewa")
     public void add_three_penyewa() {
         bookingForm = new BookingFormPO(page);
@@ -231,16 +229,14 @@ public class TenantBookingSteps {
         Assert.assertEquals(kostDetail.getBSSInformationText(infoBSS), infoBSS, "text not same in the display");
     }
 
-    @When("tenant fill booking data for {string} in kost detail")
-    public void tenantFillBookingDataFor(String bookingTime) {
+    @When("tenant fill booking data for {string} and {string}")
+    public void tenantFillBookingDataFor(String bookingTime, String rentType) {
         if (bookingTime.equalsIgnoreCase("today")) {
-            kostDetail.dismissFTUE();
             kostDetail.selectBookingDate(bookingTime);
-            kostDetail.selectBookingPeriod("Per Bulan");
-        } else if (bookingTime.equalsIgnoreCase("tommorrow")) {
-            kostDetail.dismissFTUE();
+            kostDetail.selectBookingPeriod(rentType);
+        } else if (bookingTime.equalsIgnoreCase("tomorrow")) {
             kostDetail.selectBookingDate(bookingTime);
-            kostDetail.selectBookingPeriod("Per Bulan");
+            kostDetail.selectBookingPeriod(rentType);
         }
     }
 
@@ -259,5 +255,23 @@ public class TenantBookingSteps {
         bookingForm.clickOnAjukanSewaButton();
         bookingForm.clickOnBookingConfirmationCheckmark();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
+    @Then("tenant/user can see harga coret on price section")
+    public void user_can_see_harga_coret_on_price_section() {
+        Assert.assertTrue(kostDetail.isHargaCoretVisible());
+    }
+
+    @Then("tenant/user can not see harga coret on price section")
+    public void user_can_not_see_harga_coret_on_price_section() {
+        Assert.assertFalse(kostDetail.isHargaCoretVisible());
+    }
+
+    @And("tenant/user dismiss promo ngebut pop up")
+    public void user_dismiss_promo_ngebut_pop_up() {
+        kostDetail.scrollDownToUntilPromoPopUpVisible();
+        if (kostDetail.isMamikosPromoNgebutButtonVisible()) {
+            kostDetail.clickOnSayaMengertiButton();
+        }
     }
 }

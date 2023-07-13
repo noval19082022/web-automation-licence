@@ -24,6 +24,7 @@ public class OwnerDashboardPO {
     Locator firstNotificationText;
     Locator mamipoinButton;
     Locator terimaButton;
+    Locator tolakButton;
     Locator pengajuanSewaSection;
 
     public OwnerDashboardPO(Page page) {
@@ -42,7 +43,8 @@ public class OwnerDashboardPO {
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
-        pengajuanSewaSection = page.locator(".booking-confirmation-section__content");
+        tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
+        pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
     }
 
     /**
@@ -65,7 +67,7 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
-        manajemenKost.waitFor();
+        playwright.waitTillLocatorIsVisible(manajemenKost, 3000.0);
         manajemenKost.click();
     }
 
@@ -84,6 +86,7 @@ public class OwnerDashboardPO {
      * @return TenantBillManagementPO class
      */
     public TenantBillManagementPO clickOnKelolaKos() {
+        kelolaTagihan.waitFor();
         playwright.clickOn(kelolaTagihan);
         return new TenantBillManagementPO(page);
     }
@@ -136,11 +139,19 @@ public class OwnerDashboardPO {
     }
 
     /**
+     * Click on Tolak Button on owner dashboard
+     */
+    public void clickOnTolakViaHomepage() {
+        playwright.clickOn(tolakButton);
+    }
+
+    /**
      * check if pengajuan section dashboard is present
      *
      * @return true if appears pengajuan sewa section
      */
     public boolean isPengajuanSewaSectionPresent() {
+        pengajuanSewaSection.waitFor();
         return playwright.waitTillLocatorIsVisible(pengajuanSewaSection);
     }
 }

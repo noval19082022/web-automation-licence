@@ -13,7 +13,8 @@ Feature: Listing Availability on Kost Detail
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kos Dhiandra Auto Listing | Kos Dhiandra Auto Listing |
-    And tenant fill booking data for "today" in kost detail
+    And user want to dismiss FTUE
+    And tenant fill booking data for "today" and "Per Bulan"
     Then tenant should see ajukan sewa button is "enable"
     When tenant booking kost after fill date and rent type
     Then tenant should success booking kost

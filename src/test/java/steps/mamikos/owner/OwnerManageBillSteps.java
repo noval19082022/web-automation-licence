@@ -102,4 +102,28 @@ public class OwnerManageBillSteps {
     public void userCannotSeeUpdateRoomNumber() {
         Assert.assertFalse(billManage.isUpdateRoomNumberVisible());
     }
+
+    @And("user search kost in penyewa menu {string}")
+    public void userSearchKostInPenyewaMenu(String kostName) {
+        billManage.searchKostInPenyewaMenu(kostName);
+    }
+
+    @And("user click on kontrak sewa button")
+    public void userClickOnKontrakSewaButton() {
+        billManage.clickOnKontrakSewaButton();
+    }
+
+    @And("user click on tolak button")
+    public void userClickOnTolakButton() {
+        billManage.clickOnTolakButton();
+    }
+
+    @And("user click on Ubah kontrak penyewa button")
+    public void userClickOnUbahKontrakPenyewaButton() {
+        billManage.clickOnUbahKontrakPenyewaButton();
+    }
+    @And("user check prices penyewa owner are same to contract at kos saya {string}")
+    public void userCheckPricePenyewaOnOwner(String price) {
+        Assert.assertEquals(billManage.isPriceDisplayed(price), "Rp900.000 / bulan");
+    }
 }
