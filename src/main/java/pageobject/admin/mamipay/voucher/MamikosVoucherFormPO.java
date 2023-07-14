@@ -191,4 +191,5 @@ public class MamikosVoucherFormPO {
     public void fillEndDate(String date) {
         endDateInput.fill(date);
     }
+
 }

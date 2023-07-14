@@ -173,4 +173,41 @@ public class AdminMamipayVoucherSteps {
         }
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
+    @Then("admin see {string} filter list option on voucher menu:")
+    public void admin_see_all_filter_list_option_are(String filter) {
+        String title = mamipayAdmin.getAllFilterOptions(filter);
+        Assert.assertEquals(filter, title);
+    }
+    @And("admin click on dropdown filter status")
+    public void user_click_on_filter_status_dropdown() {
+        mamipayAdmin.clickOnFilterStatusDropdown();
+    }
+
+    @And("admin click on dropdown filter rules")
+    public void user_click_on_filter_rules_dropdown() {
+        mamipayAdmin.clickOnFilterRulesDropdown();
+    }
+
+    @And("admin click on dropdown filter team")
+    public void user_click_on_filter_team_dropdown() {
+        mamipayAdmin.clickOnFilterTeamDropdown();
+    }
+
+    @When("admin choose to filter {string} and click search button:")
+    public void admin_choose_filter_and_click_on_search_button(String filter) {
+        String title = mamipayAdmin.getAllFilterOptions(filter);
+        Assert.assertEquals(filter, title);
+        mamipayAdmin.clickOnFilter(filter);
+        mamipayAdmin.clickOnSearchButton();
+    }
+    @When("admin see voucher with selected filter {string} is displayed:")
+    public void admin_see_voucher_with_select_filter_is_displayed(String filter) {
+        String title = mamipayAdmin.getResultSelectFilter(filter);
+        Assert.assertEquals(filter, title);
+    }
+    @And("admin input voucher with value {string} and click search button:")
+    public void user_click_on_input_voucher(String id) {
+        mamipayAdmin.clickOnInputVoucher(id);
+        mamipayAdmin.clickOnSearchButton();
+    }
 }
