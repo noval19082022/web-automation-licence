@@ -289,5 +289,4 @@ public class PaymentSteps {
         int totalAmount = invoice.getSubTotal();
         Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
     }
-
 }

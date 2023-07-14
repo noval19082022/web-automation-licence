@@ -226,4 +226,21 @@ public class NavigatesSteps {
     public void userVisitPage(String pathUrl) {
         page.navigate(Mamikos.URL + pathUrl);
     }
+    
+    @And("user navigates to help page")
+    public void userNavigateToHelpPage() {
+        page.bringToFront();
+        playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
+        playwright.hardWait(3);
+    }
+
+    @And("user navigate to penyewa page")
+    public void userNavigateToPenyewaPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin navigate to mamikos voucher menu")
+    public void tenantNavigateToMamikosVoucherPage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
+    }
 }

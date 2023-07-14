@@ -102,7 +102,7 @@ public class InvoicePO {
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
-        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
+        txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
         closeFilter = page.locator("i").nth(1);

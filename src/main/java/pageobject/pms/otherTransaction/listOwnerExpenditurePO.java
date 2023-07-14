@@ -23,6 +23,7 @@ public class listOwnerExpenditurePO {
     Locator vendorBank;
     Locator vendorAccNumber;
     Locator vendorAccName;
+    Locator firstInvoiceNumber;
     Locator resetFilterButton;
     Locator counterFilter;
     Locator tipePengajuanCashoutFirstData;
@@ -83,6 +84,7 @@ public class listOwnerExpenditurePO {
         tipePengajuanCashoutFirstData = page.locator("(//*[@class='main-item'])[1]/td").nth(2);
         propertyNameFirstData = page.locator("(//*[@class='main-item'])[1]/td").nth(3);
         totalPengeluaranFirstData = page.locator("((//*[@class='main-item'])[1]/td)[6]/p");
+        firstInvoiceNumber = page.locator(".bg-is-col-3 p").nth(7);
     }
 
     /**
@@ -419,6 +421,37 @@ public class listOwnerExpenditurePO {
         kategoriData = page.locator(".detail-table tbody").first();
         kategoriData.scrollIntoViewIfNeeded();
         assertThat(kategoriData).containsText(pengeluaran);
+        expandButton.first().click();
+    }
+
+    /**
+     * Assert first no invoice biaya
+     * @param invoice
+     */
+    public void assertFirstNoInvoice(String invoice) {
+        assertThat(firstInvoiceNumber).hasText(invoice);
+    }
+
+    /**
+     * Assert first data vendor
+     * @param vendor vendor name
+     * @param owner vendor owner name
+     * @param acc vendor bank account number
+     * @param bank vendor bank account name
+     */
+    public void assertFirstVendorName(String vendor, String owner, String acc, String bank) {
+        vendorName = page.locator(".bg-is-col-3").nth(3).getByRole(AriaRole.PARAGRAPH).last();
+        vendorBank = page.locator(".bg-is-col-3").nth(5).getByRole(AriaRole.PARAGRAPH).last();
+        vendorAccNumber = page.locator(".bg-is-col-3").nth(6).getByRole(AriaRole.PARAGRAPH).last();
+        vendorAccName = page.locator(".bg-is-col-3").nth(7).getByRole(AriaRole.PARAGRAPH).last();
+
+        expandButton.first().scrollIntoViewIfNeeded();
+        expandButton.first().click();
+        vendorAccName.scrollIntoViewIfNeeded();
+        assertThat(vendorName).hasText(vendor);
+        assertThat(vendorBank).hasText(bank);
+        assertThat(vendorAccNumber).hasText(acc);
+        assertThat(vendorAccName).hasText(owner);
         expandButton.first().click();
     }
 }
