@@ -21,6 +21,10 @@ public class PengajuanBookingPO {
     private Locator searchKost;
     private Locator searchKostInputText;
     private Locator searchKostFirstOption;
+    private Locator lainnyaRejectReasonRadioBtn;
+    private Locator lainnyaRejectReasonInput;
+    private Locator tncCheckmarkRejectReason;
+    private Locator pilihOnRejectButton;
 
 
 
@@ -38,6 +42,10 @@ public class PengajuanBookingPO {
         this.searchKost = page.getByPlaceholder("Pilih Kos");
         this.searchKostInputText = page.getByTestId("bookingRequestKosFilter-searchBar");
         this.searchKostFirstOption = page.locator(".bg-c-dropdown__menu--fixed li:nth-of-type(1) .bg-c-dropdown__menu-item-content");
+        this.lainnyaRejectReasonRadioBtn = page.locator("div:nth-child(10) > .reject-modal__reason-option-overlay");
+        this.lainnyaRejectReasonInput = page.getByPlaceholder("Masukkan alasan lainnya di sini");
+        this.tncCheckmarkRejectReason = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        this.pilihOnRejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
     }
 
     /**
@@ -100,7 +108,23 @@ public class PengajuanBookingPO {
         return new BillAndBookingManagementPO(page);
     }
 
+    /**
+     * click "Ya, Tolak" when reject booking request
+     */
     public void clickYaTolakOnPengajuanBooking() {
         yaTolakButton.click();
+    }
+
+    /**
+     * click and input reason on lainnya
+     * reject reason until check tnc and click pilih
+     * @param reason stands for input reason string
+     */
+    public void clickAndFillLainnyaRejectReason(String reason) {
+        lainnyaRejectReasonRadioBtn.click();
+        lainnyaRejectReasonInput.fill(reason);
+        tncCheckmarkRejectReason.click();
+        pilihOnRejectButton.click();
+        playwright.hardWait(1000);
     }
 }
