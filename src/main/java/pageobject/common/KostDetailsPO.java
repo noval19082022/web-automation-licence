@@ -471,6 +471,15 @@ public class KostDetailsPO {
     }
 
     /**
+     * get list breadcrumb on detail kost
+     * example breadcrumb is "Home > Kost Semarang > Kost Putra Dorgiocavall Bulusan Semarang"
+     * @return string list of breadcrumb
+     */
+    public List<String> getListBreadCrumb() {
+        return page.locator("ol").locator("li").locator(".breadcrumb-trail").allInnerTexts();
+    }
+
+    /**
      * get title detail kost page
      *
      * @return 'string' kost title
