@@ -52,7 +52,7 @@ public class MamifotoSteps {
 
     @And("owner select package mamifoto")
     public void owner_select_package_mamifoto() {
-       mamifoto.clickOnMamifotoPackageNonGPFirst();
+       mamifoto.clickOnMamifotoPackageFirst();
     }
 
     @Then("owner see pop up doesnt have property")
@@ -177,6 +177,33 @@ public class MamifotoSteps {
     public void owner_should_redirect_to_login_page(String loginProphoto) {
         mamifoto = new MamifotoPO(ActiveContext.getActivePage());
         Assert.assertTrue(mamifoto.getURL().contains(loginProphoto), "URL doesn't match");
+    }
+
+    @When("owner wants to select Mamifoto package")
+    public void owner_wants_to_select_mamifoto_package() {
+        mamifoto.clickOnFiturPromosi();
+        mamifoto.clickOnMamifotoSidebar();
+        mamifoto.clickOnLihatPaket();
+        Assert.assertTrue(mamifoto.mamifotoHeaderSelectPackageisAppear(),"Lihat Paket is not Appear");
+    }
+
+    @Then("verify discount price on the package list")
+    public void verify_discount_price_on_the_package_list() {
+        Assert.assertEquals(mamifoto.getTextHeaderDiscountMemberGP(),mamifoto.getTextHeaderDiscountMemberGP(),"text doesnt match");
+    }
+
+    @Then("verify  discount price on the detail tagihan")
+    public void verify_discount_price_on_the_detail_tagihan() {
+        Assert.assertEquals(mamifoto.getTextDiscountMemberGPDetailTagihan(),mamifoto.getTextDiscountMemberGPDetailTagihan(),"Text doesnt match");
+        Assert.assertEquals(mamifoto.getTextDiscountAmountGPDetailTagihan(),mamifoto.getTextDiscountAmountGPDetailTagihan(),"price doesnt match");
+    }
+
+    @When("owner paid MamiFoto")
+    public void owner_paid_mami_foto() {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(5000);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertEquals(mamifoto.getTextDiscountGPInvoiceMamifoto(),mamifoto.getTextDiscountGPInvoiceMamifoto(),"text doesnt match");
     }
 
 }
