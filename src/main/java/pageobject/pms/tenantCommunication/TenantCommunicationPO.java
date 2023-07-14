@@ -26,6 +26,7 @@ public class TenantCommunicationPO {
     Locator pilihStatusTahapanValue;
     Locator terapkanButton;
     Locator resetButton;
+    Locator emptyPageTenantTrackerText;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -43,7 +44,7 @@ public class TenantCommunicationPO {
         pilihStatusTahapanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Status"));
         terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
-
+        emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
     }
 
     /**
@@ -51,9 +52,11 @@ public class TenantCommunicationPO {
      * Select Main Page filter
      */
     public void selectMainPageFilter(String mainPageFilter) {
-        searchFieldMainPage = page.locator("//li/a[contains(., '" + mainPageFilter + "')]");
-        playwright.clickOn(mainPageFilterMenu);
-        playwright.clickOn(searchFieldMainPage);
+        if(playwright.waitTillLocatorIsVisible(mainPageFilterMenu,2.0)) {
+            searchFieldMainPage = page.locator("//li/a[contains(., '" + mainPageFilter + "')]");
+            playwright.clickOn(mainPageFilterMenu);
+            playwright.clickOn(searchFieldMainPage);
+        }
     }
 
     /**
@@ -106,6 +109,7 @@ public class TenantCommunicationPO {
      * @return true if actions column is visible
      */
     public boolean verifyPaginationMenuOnDetailTenant() {
+        paginationMenuDetailTenant.scrollIntoViewIfNeeded();
         return playwright.waitTillLocatorIsVisible(paginationMenuDetailTenant);
     }
 
@@ -178,6 +182,22 @@ public class TenantCommunicationPO {
     public Boolean isPropertyNameOnMainPageFilter(String propertyName){
         tenantNameOnTheFirstRow = page.locator("//a[contains(.,'"+propertyName+"')]").first();
         return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
+    }
+
+    /**
+     * Get Property Name on Profile Page Filter
+     * @return property name e.g. Mindful Peaks
+     */
+    public Boolean isPropertyNameOnProfilePageFilter(String propertyName){
+        tenantNameOnTheFirstRow = page.locator("//td[contains(.,'"+propertyName+"')]").first();
+        return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
+    }
+
+    /**
+     * get Text Empty Page
+     */
+    public String getEmptyPageTenatTrackerText() {
+        return playwright.getText(emptyPageTenantTrackerText);
     }
 
 }
