@@ -35,12 +35,13 @@ public class MamifotoPO {
 
 
     //Locator Mamifoto at Select Package
-    Locator packageFirstMamifotoNonGP;
+    Locator packageFirstMamifoto;
     Locator popUpDoesntHaveProperty;
     Locator addedNewKostPopUpButton;
     Locator nantiSajaButton;
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
+    Locator headerDiscountGP;
 
 
     //Locator Mamifoto at history transaction
@@ -72,6 +73,16 @@ public class MamifotoPO {
     //Locator CS Web Mamikos
     Locator titleCSMamikos;
 
+    //Locator Detail Tagihan Mamifoto
+    Locator textDiscountGP;
+    Locator priceDiscountGP;
+    Locator buttonBayarSekarang;
+
+    //Locator invoice mamifoto
+    Locator headerInvoiceMamifoto;
+    Locator textDiskonGPInvoiceMamifoto;
+
+
 
 
 
@@ -89,7 +100,7 @@ public class MamifotoPO {
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
         this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan"));
         this.lihatPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
-        this.packageFirstMamifotoNonGP = page.getByTestId("select-mamifoto-package").first();
+        this.packageFirstMamifoto = page.getByTestId("select-mamifoto-package").first();
         this.popUpDoesntHaveProperty = page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
         this.addedNewKostPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Kos"));
         this.nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
@@ -122,6 +133,12 @@ public class MamifotoPO {
         this.buttonBackInvoiceExpired = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         this.buttonHubungiKami =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami"));
         this.titleCSMamikos =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS"));
+        this.headerDiscountGP = page.getByText("Diskon member GoldPlus");
+        this.textDiscountGP =  page.getByText("Diskon member GoldPlus Hanya berlaku untuk member GoldPlus");
+        this.priceDiscountGP = page.locator(".mamifoto-payment-detail__discount");
+        this.buttonBayarSekarang =  page.getByTestId("mamifoto-button-pay");
+        this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
+        this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
 
     }
 
@@ -208,8 +225,8 @@ public class MamifotoPO {
     /**
      * Click on package mamifoto non GP first list
      */
-    public void clickOnMamifotoPackageNonGPFirst() {
-        packageFirstMamifotoNonGP.click();
+    public void clickOnMamifotoPackageFirst() {
+        packageFirstMamifoto.click();
     }
 
     /**
@@ -487,6 +504,58 @@ public class MamifotoPO {
      */
     public void clickOnButtonBackInvoiceExpired() {
         buttonBackInvoiceExpired.click();
+    }
+
+    /**
+     * Get Text Header Discount Member GP
+     *
+     * @return string
+     */
+    public String getTextHeaderDiscountMemberGP() {
+        return playwright.getText(headerDiscountGP);
+    }
+
+    /**
+     * Get Text discount member Gp at detail tagihan page
+     *
+     * @return string
+     */
+    public String getTextDiscountMemberGPDetailTagihan() {
+        return playwright.getText(textDiscountGP);
+    }
+
+    /**
+     * Get Text discount amount Gp at detail tagihan page
+     *
+     * @return string
+     */
+    public String getTextDiscountAmountGPDetailTagihan() {
+        return playwright.getText(priceDiscountGP);
+    }
+
+    /**
+     * Click on button bayar sekarang
+     */
+    public void clickOnButtonBayarSekarangMamifoto() {
+        buttonBayarSekarang.click();
+    }
+
+    /**
+     * Check Mamifoto Invoice Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderInvoiceisAppear() {
+        return headerInvoiceMamifoto.isVisible();
+    }
+
+    /**
+     * Get Text discount Gp at invoice page
+     *
+     * @return string
+     */
+    public String getTextDiscountGPInvoiceMamifoto() {
+        return playwright.getText(textDiskonGPInvoiceMamifoto);
     }
 
 }

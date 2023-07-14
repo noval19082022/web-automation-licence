@@ -70,4 +70,49 @@ public class PoinSayaSteps {
     public void user_clicks_link_on_pusat_bantuan() {
         poinSaya.clickLinkOnPusatBantuan();
     }
+
+    @Then("user verify mamipoin tenant entry point is not displayed")
+    public void userVerifyMamipoinTenantEntryPointIsNotDisplayed() {
+        Assert.assertFalse(poinSaya.isMamipoinTenantEntryPointNotDisplayed());
+    }
+
+    @And("user verify the amount of poin owned by the tenant is {string}")
+    public void userVerifyTheAmountOfPoinOwnedByTheTenantIs(String mamipoinTenant) {
+        Assert.assertEquals(poinSaya.verifyAmountOfPoinOwnedByTenant(mamipoinTenant), mamipoinTenant, "Amount of poin text not equals!");
+    }
+
+    @And("user clicks on mamipoin tenant entry point button")
+    public void userClicksOnMamipoinTenantEntryPointButton() {
+        poinSaya.clickOnEntryPointTenantMamipoin();
+    }
+
+    @Then("user verify title in the mamipoin tenant landing page is displayed")
+    public void userVerifyTitleInTheMamipoinTenantLandingPageIsDisplayed() {
+        Assert.assertTrue(poinSaya.isTitleInTheMamipoinTenantLandingPageDisplayed());
+    }
+
+    @And("user verify informasi poin button is displayed")
+    public void userVerifyInformasiPoinButtonIsDisplayed() {
+        Assert.assertTrue(poinSaya.isInformasiPoinButtonDisplayed());
+    }
+
+    @And("user verify riwayat poin button is displayed")
+    public void userVerifyRiwayatPoinButtonIsDisplayed() {
+        Assert.assertTrue(poinSaya.isRiwayatPoinButtonDisplayed());
+    }
+
+    @And("user verify dapatkan poin button is displayed")
+    public void userVerifyDapatkanPoinButtonIsDisplayed() {
+        Assert.assertTrue(poinSaya.isDapatkanPoinButtonDisplayed());
+    }
+
+    @And("user verify expired point information on mamipoin landing page {string}")
+    public void userVerifyExpiredPointInformationOnMamipoinLandingPage(String expPoinInfo) {
+        Assert.assertEquals(poinSaya.getTextExpiredPointInfoOnLandingPage(), expPoinInfo, "Expired information point not equal to " + expPoinInfo);
+    }
+
+    @Then("user will see display MamiPoin with text {string}")
+    public void displayMamiPoinWithText(String textMamipoin) {
+        Assert.assertEquals(poinSaya.getTextNoHaveMamipoin(), textMamipoin, "Text is not equal to " +textMamipoin);
+    }
 }
