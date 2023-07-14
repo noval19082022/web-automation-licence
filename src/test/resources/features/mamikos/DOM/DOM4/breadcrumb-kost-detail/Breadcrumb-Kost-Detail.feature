@@ -2,11 +2,10 @@ Feature: Breadcrumb Kost Detail
 
   @DOM4 @DOM-5273 @TEST_DOM-5275
   Scenario Outline:[Kost Detail] Checking Breadcrumb on Kost Detail
-    Given user go to mamikos homepage
-    When user visit page <path url>
-    Then user verify content of breadcrumb is <breadcrumb path>
+    Given user visit page <path url>
+    Then user verify content of breadcrumb is <breadcrumb path bakpia4>
     Examples:
-      | breadcrumb path                                                                                    | path url                                                                                                                                                   |
+      | breadcrumb path bakpia4                                                                            | path url                                                                                                                                                   |
       | "Home > Kuncara Kos8"                                                                              | "/room/kost-yogyakarta-kost-putra-eksklusif-kuncara-kos8?redirection_source=list%20kos%20result"                                                           |
       | "Home > Kost Semarang > Kost Putra Dorgiocavall Bulusan Semarang"                                  | "/room/kost-semarang-kost-putra-eksklusif-kost-putra-dorgiocavall-bulusan-semarang?redirection_source=list%20kos%20result"                                 |
       | "Home > Kost Wisma Putri Ardovina Perum Korpri Bulusan Tembalang Semarang"                         | "/room/kost-kost-putri-murah-kost-wisma-putri-ardovina-perum-korpri-bulusan-tembalang-semarang-1?redirection_source=list%20kos%20result"                   |
