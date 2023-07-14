@@ -10,7 +10,8 @@ Scenario: [WEB][MamiFoto] Owner GP purchase MamiFoto package
     | 087133998156 | 0          | qwerty123 |
   When owner wants to select Mamifoto package
   Then verify discount price on the package list
-  And owner select package mamifoto
+  #verify at detail tagihan page
+  When owner select package mamifoto
   Then verify  discount price on the detail tagihan
   #owner paid Mamifoto
   When owner paid MamiFoto
