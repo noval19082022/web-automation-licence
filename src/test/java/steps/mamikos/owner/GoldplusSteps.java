@@ -9,9 +9,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
-import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
@@ -183,7 +183,6 @@ public class GoldplusSteps {
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnNaikkanIklanAndaButton();
-        page.pause();
     }
 
     @When("owner click on next button to go to slide number {int}")
