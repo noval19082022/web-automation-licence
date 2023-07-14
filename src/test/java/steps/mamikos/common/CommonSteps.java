@@ -28,7 +28,7 @@ public class CommonSteps {
     }
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
-    public void owner_will_see_that_the_text_is_displayed(String text) {
+    public void user_will_see_that_the_text_is_displayed(String text) {
         Assert.assertTrue(playwright.isTextDisplayed(text, 1000));
     }
 
@@ -58,4 +58,8 @@ public class CommonSteps {
         Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
     }
 
+    @Then("user redirected to {string}")
+    public void user_redirect_link(String link) {
+        Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
+    }
 }

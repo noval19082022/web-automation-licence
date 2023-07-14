@@ -9,9 +9,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
-import pageobject.owner.GoldplusPO;
+import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.goldplus.PanduanGoldplusPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -26,6 +27,7 @@ public class GoldplusSteps {
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
+    PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
@@ -174,5 +176,52 @@ public class GoldplusSteps {
         playwright.hardWait(3000.0);
         playwright.clickOnText("Lihat Tagihan");
         playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @When("owner go to panduan gold plus page")
+    public void ownerGoToPanduanGoldPlusPage() {
+        owner.clickOnGpWidgetButton();
+        goldplus.clickOnPelajariCaranyaButton();
+        panduanGP.clickOnNaikkanIklanAndaButton();
+        page.pause();
+    }
+
+    @When("owner click on next button to go to slide number {int}")
+    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipper(Integer swiperNumber) {
+        if (swiperNumber <= 6) {
+            panduanGP.clickOnNextButton();
+        }
+    }
+
+    @Then("owner can see swipper number {int} is selected")
+    public void ownerCanSeeSwipperNumberNumberIsSelected(int number) {
+        Assert.assertFalse(panduanGP.getGPswipperAttribute(number -1 , "class").contains(".gp-swiper__step--dim"));
+    }
+
+    @Then("owner can see selected swiper with title {int}")
+    public void ownerCanSeeSelectedSwiperWithTitleNumber(int number) {
+        Assert.assertEquals(Integer.parseInt(panduanGP.getSelectedSwiperTitle()), number);
+    }
+
+    @Then("owner can see swiper text body is {string}")
+    public void ownerCanSeeSwiperTextBodyIsTextBody(String textbody) {
+        Assert.assertEquals(panduanGP.getSelectedSwiperBodyText(), textbody);
+    }
+
+    @Then("owner can see swiper right or next button is disabled")
+    public void ownerCanSeeSwiperRightNextButtonIsDisabled() {
+        Assert.assertTrue(panduanGP.isNextButtonDisabled());
+    }
+
+    @Then("owner can see swiper left or previous button is disabled")
+    public void ownerCanSeeSwiperLeftOrPreviousButtonIsDisabled() {
+        Assert.assertTrue(panduanGP.isPreviousButtonDisabled());
+    }
+
+    @When("owner click on previous button to go to slide number {int}")
+    public void ownerClickOnPreviousButtonToGoToSlideNumberNumber(int number) {
+        if (number >= 2) {
+            panduanGP.clickOnPreviousButton();
+        }
     }
 }
