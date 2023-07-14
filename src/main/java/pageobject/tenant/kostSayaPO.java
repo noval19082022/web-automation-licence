@@ -120,6 +120,7 @@ public class kostSayaPO {
      * this method will be information tittle Kamu belum menyewa kos displayed
      */
     public Boolean getTitleKosSayaStillEmpty(){
+        page.reload();
         return playwright.waitTillLocatorIsVisible(kostSayaStillEmptyTittle);
     }
 }
