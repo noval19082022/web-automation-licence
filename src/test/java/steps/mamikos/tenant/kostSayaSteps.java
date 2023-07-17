@@ -55,6 +55,6 @@ public class kostSayaSteps {
     }
     @Then("user will see kos saya is still empty")
     public void userWillSeeKosSayaIsStillEmpty() {
-        Assert.assertTrue(kostSaya.getTitleKosSayaStillEmpty(), "Verifikasi nomor HP");
+        Assert.assertTrue(kostSaya.getTitleKosSayaStillEmpty(), "Kamu belum menyewa kos");
     }
 }

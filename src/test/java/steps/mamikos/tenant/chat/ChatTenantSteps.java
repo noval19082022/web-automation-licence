@@ -1,16 +1,13 @@
 package steps.mamikos.tenant.chat;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
-import pageobject.common.KostDetailsPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.tenant.chat.ChatTenantPO;
-import utilities.JavaHelpers;
 
 import java.util.List;
 

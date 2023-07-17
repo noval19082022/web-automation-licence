@@ -3,7 +3,6 @@ package pageobject.tenant.chat;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.common.KostDetailsPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 

@@ -1,6 +1,8 @@
 package pageobject.common;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
@@ -471,6 +473,15 @@ public class KostDetailsPO {
     }
 
     /**
+     * get list breadcrumb on detail kost
+     * example breadcrumb is "Home > Kost Semarang > Kost Putra Dorgiocavall Bulusan Semarang"
+     * @return string list of breadcrumb
+     */
+    public List<String> getListBreadCrumb() {
+        return page.locator("ol").locator("li").locator(".breadcrumb-trail").allInnerTexts();
+    }
+
+    /**
      * get title detail kost page
      *
      * @return 'string' kost title
@@ -548,6 +559,7 @@ public class KostDetailsPO {
             if (btnMamikosPromoNgebut.isVisible()) {
                 break;
             }
+            playwright.hardWait(500);
         }
     }
 

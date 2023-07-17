@@ -8,6 +8,5 @@ import io.cucumber.testng.CucumberOptions;
         glue = "steps",
         tags = "@LIMO2"
 )
-
 public class LIMO2TestRunner  extends BaseTestRunner{
 }

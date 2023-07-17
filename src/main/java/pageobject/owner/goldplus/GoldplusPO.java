@@ -1,4 +1,4 @@
-package pageobject.owner;
+package pageobject.owner.goldplus;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -22,6 +22,7 @@ public class GoldplusPO {
     Locator actionButtonPopUp;
     Locator widgetGP;
     Locator snkGoldplusCheckbox;
+    Locator pelajariCaranyaButton;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -39,6 +40,7 @@ public class GoldplusPO {
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
         widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
+        pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
     }
 
     /**
@@ -175,5 +177,12 @@ public class GoldplusPO {
     public void clickOnGPPackage(int pacakge) {
         Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
         playwright.clickOn(pilihGPButton);
+    }
+
+    /**
+     * Click on Pelajari Caranya button
+     */
+    public void clickOnPelajariCaranyaButton() {
+        playwright.clickOn(pelajariCaranyaButton);
     }
 }

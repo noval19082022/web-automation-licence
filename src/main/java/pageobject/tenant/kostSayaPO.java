@@ -1,6 +1,5 @@
 package pageobject.tenant;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -120,6 +119,7 @@ public class kostSayaPO {
      * this method will be information tittle Kamu belum menyewa kos displayed
      */
     public Boolean getTitleKosSayaStillEmpty(){
+        page.reload();
         return playwright.waitTillLocatorIsVisible(kostSayaStillEmptyTittle);
     }
 }

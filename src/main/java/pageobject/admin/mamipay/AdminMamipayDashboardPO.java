@@ -9,8 +9,6 @@ import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class AdminMamipayDashboardPO {
     private Page page;
     private PlaywrightHelpers playwright;

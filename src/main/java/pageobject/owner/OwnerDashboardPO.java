@@ -26,6 +26,7 @@ public class OwnerDashboardPO {
     Locator terimaButton;
     Locator tolakButton;
     Locator pengajuanSewaSection;
+    Locator gpWidgetButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -45,6 +46,7 @@ public class OwnerDashboardPO {
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
+        gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
     }
 
     /**
@@ -153,5 +155,12 @@ public class OwnerDashboardPO {
     public boolean isPengajuanSewaSectionPresent() {
         pengajuanSewaSection.waitFor();
         return playwright.waitTillLocatorIsVisible(pengajuanSewaSection);
+    }
+
+    /**
+     * Click on gold plus widget button
+     */
+    public void clickOnGpWidgetButton() {
+        playwright.clickOn(gpWidgetButton);
     }
 }
