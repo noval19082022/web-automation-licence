@@ -10,9 +10,11 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
+import pageobject.admin.mamipay.voucher.MamikosVoucherFormPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +23,16 @@ public class AdminMamipayVoucherSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     AdminMamipayDashboardPO mamipayAdmin = new AdminMamipayDashboardPO(page);
     MamikosListMassVoucherPO massVoucherList = null;
+    MamikosVoucherFormPO voucherForm = new MamikosVoucherFormPO(page);
     List<Map<String, String>> voucherAndKostName;
     List<Map<String, String>> voucherAndRules;
     List<Map<String, String>> voucherAndProfession;
     List<Map<String, String>> voucherAndMinimumTransaction;
     List<Map<String, String>> voucherAndTargetEmail;
     List<Map<String, String>> voucherList;
+    private Map<String, String> userCreateNewMassVoucher;
+    private Map<String, String> paymentRules;
+
 
     @And("admin edit voucher and {string} it to kost:")
     public void adminEditVoucherAndApplyItToKost(String voucherApplyRule, DataTable table) throws InterruptedException {
@@ -173,4 +179,61 @@ public class AdminMamipayVoucherSteps {
         }
         massVoucherList = voucherForm.doneEditMassVoucher();
     }
+
+    @Then("user create new mass voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")
+    public void userCreateNewMassVoucherWithTeamDiscountTypeStartDateAndEndDateTo(String team, String type, String startDate, String endDate, DataTable table) throws InterruptedException, ParseException {
+        String currentDate = JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd hh:mm");
+        String yesterdayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -1, 0, 0);
+        String dayBeforeYesterday = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -2, 0, 0);
+        userCreateNewMassVoucher = table.asMap(String.class, String.class);
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        var voucherName = userCreateNewMassVoucher.get("voucher name");
+        var voucherCode = userCreateNewMassVoucher.get("code");
+        var voucherDiscountAmount = userCreateNewMassVoucher.get("discount amount");
+        var voucherTotalQuota = userCreateNewMassVoucher.get("total quota");
+        var voucherDailyuota = userCreateNewMassVoucher.get("daily quota");
+        var voucherMaximumDiscount = userCreateNewMassVoucher.get("max discount");
+        var voucherMinimumTransaction = userCreateNewMassVoucher.get("min transaction");
+        mamipayAdmin.goToMamikosVoucher();
+        massVoucherList.clickOnCreateButton();
+        massVoucherList.fillVocName(voucherName);
+        massVoucherList.chooseStartDate(startDate);
+        if (endDate.equalsIgnoreCase("")) {
+            voucherForm.fillEndDate("");
+        } else if (endDate.equalsIgnoreCase("yesterday")) {
+            voucherForm.fillEndDate(yesterdayDate);
+        }
+        massVoucherList.selectOncampaignTeam(team);
+        massVoucherList.fillVocCode(voucherCode);
+        massVoucherList.selectOnVocTypeButton(type);
+        massVoucherList.fillDiscountAmount(voucherDiscountAmount);
+        massVoucherList.fillTotalQuota(voucherTotalQuota);
+        massVoucherList.fillDailyQuota(voucherDailyuota);
+        massVoucherList.fillMaxDiscountAmount(voucherMaximumDiscount);
+        massVoucherList.fillMinTransaction(voucherMinimumTransaction);
+    }
+
+    @And("^admin master tick payment rules :$")
+    public void admin_master_tick_payment_rules(List<String> paymentRules) throws InterruptedException {
+        for (String paymentRule : paymentRules) {
+            massVoucherList.tickOnPaymentRules(paymentRule);
+        }
+    }
+
+
+//    @And("admin master tick payment rules :")
+//    public void admin_master_tick_payment_rules(DataTable table) throws InterruptedException {
+//        paymentRules = table.asMap(String.class, String.class); {
+//            massVoucherList.tickOnPaymentRules(value);
+//        }
+//    }
+//    @And("admin select contract rules :")
+//    public void adminSelectContractRules() {
+//
+//    }
+//
+//    @Then("admin can sees callout message is {string}")
+//    public void adminCanSeesCalloutMessageIs(String arg0) {
+//    }
+
 }
