@@ -219,11 +219,35 @@ public class MamifotoSteps {
     }
 
     @When("owner paid MamiFoto Non GP")
-    public void owner_paid_mami_foto_non_gp() {
+    public void owner_paid_mami_foto_non_gp()  {
         mamifoto.clickOnButtonBayarSekarangMamifoto();
-        playwright.hardWait(5000);
+        playwright.hardWait(10000.0);
         Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
         Assert.assertFalse(mamifoto.discountGPInvoiceMamifoto(),"Discount GP is appear");
     }
+
+    @Then("verify unpaid invoice mamifoto is {int}")
+    public void verify_unpaid_invoice_mamifoto_is(Integer unpaidInvoice) {
+        System.out.println(mamifoto.getCountMamifotoInvoiceUnpaid());
+        Assert.assertTrue(unpaidInvoice == mamifoto.getCountMamifotoInvoiceUnpaid());
+    }
+
+    @When("owner click back previous button")
+    public void owner_click_back_previous_button() {
+        page.goBack();
+        playwright.hardWait(3000.0);
+        page.reload();
+    }
+
+    @When("owner click button lihat paket")
+    public void owner_click_button_lihat_paket() {
+        mamifoto.clickOnLihatPaket();
+    }
+
+    @Then("owner paid transaction unpaid")
+    public void owner_paid_transaction_unpaid() {
+        mamifoto.clickOnSeeFirstDetailTransaction();
+    }
+
 
 }
