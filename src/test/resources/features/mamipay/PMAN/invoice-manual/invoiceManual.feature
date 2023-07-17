@@ -77,3 +77,24 @@
         | Jenis Invoice   |
         | Biaya Tambahan  |
         | Biaya Sewa      |
+
+    @TEST_PMAN-5744 @pman-prod
+    Scenario Outline: Durasi Biaya in <Jenis Invoice> max 255 characters
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+      And admin input nama penyewa in buat invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+        | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
+      When admin add invoice manual "<Jenis Invoice>" without submit
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya              | Jumlah Biaya  |
+        | Parkir Mobil            | today         | tomorrow        | more than 255 characters  | 25000         |
+        | Perpanjang sewa harian  | today         | tomorrow        | more than 255 characters  | 500000        |
+      Then durasi biaya should be only contains "max 255 characters" and counter show "255 / 255"
+
+      Examples:
+        | Jenis Invoice   |
+        | Biaya Tambahan  |
+        | Biaya Sewa      |

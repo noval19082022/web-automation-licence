@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import data.mamikos.Mamikos;
+import utilities.JavaHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -75,6 +76,8 @@ public class InvoiceManualPO {
     private Locator jumlahBiayaErrMsg;
     private Locator lainnyaField;
     private Locator errMsgLainnya;
+    private Locator durasiBiayachar;
+    private Locator counterText;
     // Tambah Biaya Pop Up
 
     // Buat dan Kirim Pop Up
@@ -158,6 +161,7 @@ public class InvoiceManualPO {
         descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+
     }
 
     /**
@@ -847,6 +851,24 @@ public class InvoiceManualPO {
      */
     public void clearLainnyaField() {
         lainnyaField.clear();
+    }
+
+    /**
+     * Assert Durasi Biaya
+     * @param char255
+     */
+    public void assertDurasiBiaya(String char255) {
+        durasiBiayachar = page.getByPlaceholder("Contoh: 2 hari ");
+        assertThat(durasiBiayachar).hasValue(char255);
+    }
+
+    /**
+     * Assert counter text
+     * @param counter
+     */
+    public void assertCounterTxt(String counter) {
+        counterText = page.getByText("255 / 255");
+        assertThat(counterText).hasText(counter);
     }
     //---End of Biaya Tambahan---//
 }
