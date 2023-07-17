@@ -559,6 +559,7 @@ public class KostDetailsPO {
             if (btnMamikosPromoNgebut.isVisible()) {
                 break;
             }
+            playwright.hardWait(500);
         }
     }
 

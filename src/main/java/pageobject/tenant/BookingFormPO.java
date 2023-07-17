@@ -29,6 +29,10 @@ public class BookingFormPO {
     Locator uploadDoc;
     Locator alertTextAfterClick;
     Locator tungguKonfirmasiPemilik;
+    Locator tncBookingRegulerLink;
+    Locator tncBookingSinggahsiniLink;
+    Locator tncBookingContentText;
+    Locator okPahamButton;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -51,6 +55,10 @@ public class BookingFormPO {
         this.uploadDoc = page.locator("div").getByTestId("bookingDocumentUploader").first().locator("//input[@type='file']");
         this.alertTextAfterClick = page.getByText("Masukkan pekerjaan untuk memproses pengajuan sewa.");
         tungguKonfirmasiPemilik = page.locator("label").filter(new Locator.FilterOptions().setHasText("Tunggu Konfirmasi"));
+        this.tncBookingRegulerLink = page.locator("a.bg-c-link--medium:nth-child(1)");
+        this.tncBookingSinggahsiniLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan"));
+        this.tncBookingContentText = page.getByTestId("bookingTncModal-title");
+        this.okPahamButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke Paham"));
     }
 
     /**
@@ -236,4 +244,51 @@ public class BookingFormPO {
         return alertTextAfterClick.textContent().trim();
     }
 
+    /**
+     * get TnC booking reguler text
+     * @return String
+     */
+    public String getTnCBookingTextReguler() {
+        return playwright.getText(tncBookingRegulerLink);
+    }
+
+    /**
+     * get TnC booking singgahsini text
+     * @return String
+     */
+    public String getTnCBookingTextSinggahsini() {
+        return playwright.getText(tncBookingSinggahsiniLink);
+    }
+
+    /**
+     * click on TnC booking reguler
+     * on ajukan sewa pup up booking form
+     */
+    public void clickOnTnCBookingReguler() {
+        tncBookingRegulerLink.waitFor();
+        tncBookingRegulerLink.click();
+    }
+
+    /**
+     * click on TnC booking singgahsini
+     * on ajukan sewa pup up booking form
+     */
+    public void clickTnCBookingSinggahsini() {
+        tncBookingSinggahsiniLink.click();
+    }
+
+    /**
+     * get header booking content text
+     * @return String
+     */
+    public String getTnCBookingContentText() {
+        return playwright.getText(tncBookingContentText);
+    }
+
+    /**
+     * click "Ok Paham" Button on TnC booking
+     */
+    public void clickOkPahamButton() {
+        okPahamButton.click();
+    }
 }

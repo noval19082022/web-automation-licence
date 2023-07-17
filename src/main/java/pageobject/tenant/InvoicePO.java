@@ -65,6 +65,8 @@ public class InvoicePO {
     Locator voucherDivSection;
     Locator perDurationPriceText;
     Locator biayaLayananMamikosText;
+    Locator tncInvoiceFullText;
+    Locator tncInvoiceText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -119,7 +121,8 @@ public class InvoicePO {
         voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
         biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
-
+        tncInvoiceFullText = page.locator(".first-column.column");
+        tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
     }
 
     /**
@@ -441,9 +444,13 @@ public class InvoicePO {
     /**
      * choose payment using ovo as payment method without input phone number
      */
-    public void choosePaymentUsingOVO(){
+    public void choosePaymentUsing(String method){
         clickOnPilihPembayaran();
-        playwright.clickOn(txtOVO);
+        if (method.equalsIgnoreCase("Kartu Kredit")) {
+            playwright.clickOn(kartuKredit);
+        } else if (method.equalsIgnoreCase("OVO")) {
+            playwright.clickOn(txtOVO);
+        }
     }
 
     /**
@@ -510,7 +517,6 @@ public class InvoicePO {
         return new PaymentPO(page);
     }
 
-
     /**
      * Get per period / or basic amount price
      * @return per period price / or basic amount price as integer
@@ -525,5 +531,20 @@ public class InvoicePO {
      */
     public int getAdminPrice(){
         return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosText));
+    }
+
+    /**
+     * get full text of term and condition on invoice page
+     * @return string
+     */
+    public String getTnCInvoiceFullText() {
+        return tncInvoiceFullText.innerText();
+    }
+
+    /**
+     * click term and condition on invoice
+     */
+    public void clickTnCInvoice() {
+        tncInvoiceText.click();
     }
 }
