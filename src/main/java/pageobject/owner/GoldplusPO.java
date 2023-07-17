@@ -22,6 +22,7 @@ public class GoldplusPO {
     Locator actionButtonPopUp;
     Locator widgetGP;
     Locator snkGoldplusCheckbox;
+    Locator weeklyPeriode;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -39,6 +40,7 @@ public class GoldplusPO {
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
         widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
+        weeklyPeriode = page.locator(".bg-c-radio__icon").first();
     }
 
     /**
@@ -154,8 +156,8 @@ public class GoldplusPO {
      *
      */
     public int getCountInvoiceUnpaid() {
-       playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
-       return playwright.getLocators(lihatTagihanTable).size();
+        playwright.hardWait(3000);
+        return playwright.getLocators(lihatTagihanTable).size();
     }
 
     /**
@@ -164,6 +166,7 @@ public class GoldplusPO {
      *
      */
     public void clickOnWidgetGP() {
+        playwright.hardWait(3000);
         playwright.clickOn(widgetGP);
     }
 
@@ -175,5 +178,23 @@ public class GoldplusPO {
     public void clickOnGPPackage(int pacakge) {
         Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
         playwright.clickOn(pilihGPButton);
+    }
+
+    /**
+     * Verify jenis pembayaran (Goldplus monthlu, Goldplus weeklu, Mamiads, Mamifoto)
+     * @param jenisPembayaran
+     * @return text jenisPembayaran
+     */
+    public String getJenisPembayaran(String jenisPembayaran) {
+        return playwright.getText(page.locator("#invoiceBill").getByText(jenisPembayaran));
+    }
+
+    /**
+     * Select periode weekly
+     *
+     *
+     */
+    public void clickOnPeriodeWeekly() {
+        playwright.clickOn(weeklyPeriode);
     }
 }

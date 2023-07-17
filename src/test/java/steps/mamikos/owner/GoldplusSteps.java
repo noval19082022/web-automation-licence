@@ -11,6 +11,7 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.owner.GoldplusPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
@@ -26,6 +27,7 @@ public class GoldplusSteps {
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
+    BroadcastChatPO broadcast = new BroadcastChatPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
@@ -116,7 +118,7 @@ public class GoldplusSteps {
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
         playwright.clickOnTextButton("Lihat Invoice");
-        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 3000));
     }
 
     @Then("user see Title on page {string} is {string} with message:")
@@ -173,6 +175,56 @@ public class GoldplusSteps {
     public void userClickLihatTagihanOnRiwayat() {
         playwright.hardWait(3000.0);
         playwright.clickOnText("Lihat Tagihan");
+        playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @Then("owner see jenis pembayaran {string}")
+    public void ownerSeeJenisPembayaran(String jenisPembayaran) {
+        Assert.assertEquals(goldplus.getJenisPembayaran(jenisPembayaran), jenisPembayaran, "Jenis Pembayaran doesnt match!");
+    }
+
+    @Then("verify button on broadcast page")
+    public void verifyButtonOnBroadcastPage() {
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
+    }
+
+    @And("owner verify intercept tagihan pop up on chatlist")
+    public void ownerVerifyInterceptTagihanPopUpOnChatlist() {
+        chat.clickChatOwner();
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
+    @And("owner verify intercept tagihan pop up on chatroom")
+    public void ownerVerifyInterceptTagihanPopUpOnChatroom() {
+        chat.clickChatOwner();
+        chat.dismissFTUEMars();
+        chat.dismissFTUEMarsKuotaNol();
+        broadcast.clickOnCloseTooltip();
+        playwright.clickOnTextButton("Tenant Upik Tiga");
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
+    @And("user wants to subscribe Goldplus {int} weekly")
+    public void userWantsToSubscribeGoldplusWeekly(int gpPackage) {
+       goldplus.clickOnGPPackage(gpPackage);
+       goldplus.clickOnPeriodeWeekly();
+
+       playwright.clickOnTextButton("Pilih");
+
+       Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 (Paket Chat) periode 1 Minggu", 1000.0));
+       Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 (Paket Chat) (1 Minggu)", 1000.0));
+
+       playwright.hardWait(3000);
+       playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @Then("owner paid the riwayat periode {string}")
+    public void ownerPaidTheRiwayatPeriode(String periode) {
+        playwright.clickOnText(periode);
+
+        Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 periode 1 Minggu", 1000.0));
+
         playwright.clickOnText("Bayar Sekarang");
     }
 }

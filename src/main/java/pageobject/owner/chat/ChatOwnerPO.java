@@ -292,4 +292,7 @@ public class ChatOwnerPO {
         playwright.clickOn(broadcastChatBtn);
     }
 
+    public void dismissFTUEMarsKuotaNol() {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
+    }
 }
