@@ -24,7 +24,7 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
@@ -117,6 +117,7 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Detail Transaksi with status {string}")
     public void owner_click_lihat_detail_transaksi_with_status(String status)  {
+        playwright.hardWait(3000);
         Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
         mamifoto.clickOnSeeDetailTransactionMamifoto();
     }
@@ -204,6 +205,25 @@ public class MamifotoSteps {
         playwright.hardWait(5000);
         Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
         Assert.assertEquals(mamifoto.getTextDiscountGPInvoiceMamifoto(),mamifoto.getTextDiscountGPInvoiceMamifoto(),"text doesnt match");
+    }
+
+    @Then("verify discount price GP doesnt appear on the package list")
+    public void verify_discount_price_gp_doesnt_appear_on_the_package_list() {
+        Assert.assertFalse(mamifoto.mamifotoHeaderDiscountGP(),"Header diskon is appear");
+    }
+
+    @Then("verify  discount price GP doesnt appear the detail tagihan")
+    public void verify_discount_price_gp_doesnt_appear_the_detail_tagihan() {
+        Assert.assertFalse(mamifoto.discountMemberGPDetailTagihan(),"Discount Member is appear");
+        Assert.assertFalse(mamifoto.discountAmountGPDetailTagihan(),"Discount Ammount is appear");
+    }
+
+    @When("owner paid MamiFoto Non GP")
+    public void owner_paid_mami_foto_non_gp() {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(5000);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertFalse(mamifoto.discountGPInvoiceMamifoto(),"Discount GP is appear");
     }
 
 }
