@@ -27,6 +27,8 @@ public class OwnerDashboardPO {
     Locator tolakButton;
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
+    Locator helpCenter;
+    Locator seeAllNotification;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -40,13 +42,15 @@ public class OwnerDashboardPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
-        notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
+        notificationButton = page.locator(".notification-menu > .bg-c-icon");
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
+        helpCenter = page.locator("//*[text()='Pusat Bantuan']");
+        seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
     }
 
     /**
@@ -163,4 +167,22 @@ public class OwnerDashboardPO {
     public void clickOnGpWidgetButton() {
         playwright.clickOn(gpWidgetButton);
     }
+
+    /**
+     * Click on pusat bantuan owner
+     */
+    public void clickHelpCenterOwner() {
+        playwright.pageScrollUntilElementIsVisible(helpCenter);
+        playwright.clickOn(helpCenter);
+    }
+
+    /**
+     * Click on see all notification
+     */
+    public void clicOnSeeAllNotification() {
+        playwright.waitTillLocatorIsVisible(seeAllNotification);
+        playwright.clickOn(seeAllNotification);
+    }
+
+
 }

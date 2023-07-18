@@ -38,4 +38,20 @@ public class OwnerDashboardSteps {
     public void ownerCanSeePengajuanSewaDetailOnDashboard() {
         Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
+
+    @When("owner click Pusat Bantuan")
+    public void owner_click_pusat_bantuan() {
+        ownerDashboardPO.clickHelpCenterOwner();
+    }
+
+    @When("owner open notification icon")
+    public void owner_open_notification_icon() {
+       ownerDashboardPO.clickNotificationButton();
+
+    }
+
+    @And("owner wants to see all notification")
+    public void owner_wants_to_see_all_notification() {
+        ownerDashboardPO.clicOnSeeAllNotification();
+    }
 }
