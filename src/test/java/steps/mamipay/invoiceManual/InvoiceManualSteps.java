@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoiceManual.InvoiceManualPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -27,6 +28,11 @@ public class InvoiceManualSteps {
     private List<Map<String, String>> rincianBiaya;
     private List<Map<String, String>> invoiceData;
     private List<Map<String, String>> hoverData;
+
+    //---test data---//
+    private String invoiceManual = "src/test/resources/testdata/mamipay/invoiceManual.properties";
+    private String char256 = JavaHelpers.getPropertyValue(invoiceManual, "char256");
+    private String char255 = JavaHelpers.getPropertyValue(invoiceManual, "char255");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -71,7 +77,7 @@ public class InvoiceManualSteps {
 
     @When("admin add invoice manual {string}")
     public void admin_add_invoice_manual (String type, DataTable tables){
-        String namaBiaya = "",periodeAwal = "",periodeAkhir = "",durasiBiaya = "",jumlahBiaya = "";
+        String namaBiaya = "",periodeAwal = "",periodeAkhir = "",durasiBiaya = "", jumlahBiaya = "";
 
         detailBiaya = tables.asMaps(String.class, String.class);
 
@@ -97,6 +103,47 @@ public class InvoiceManualSteps {
         manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
         manualInvoice.submitBiayaInvoiceManual(type);
+    }
+
+    @When("admin add invoice manual {string} without submit")
+    public void admin_add_invoice_manual_without_submit(String type, DataTable tables){
+        String namaBiaya = "",periodeAwal = "",periodeAkhir = "",durasiBiaya = "", jumlahBiaya = "";
+
+        detailBiaya = tables.asMaps(String.class, String.class);
+
+        if (type.equalsIgnoreCase("Biaya Tambahan")){
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
+        } else if (type.equalsIgnoreCase("Biaya Sewa")) {
+            namaBiaya = detailBiaya.get(1).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(1).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(1).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(1).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(1).get("Jumlah Biaya");
+        }
+
+        manualInvoice.selectJenisInvoice(type);
+        manualInvoice.tambahBiayaButton();
+        manualInvoice.setNamaBiayaInvoiceManual(namaBiaya);
+        manualInvoice.setPeriodeAwalInvoiceManual(periodeAwal);
+        manualInvoice.setPeriodeAkhirInvoiceManual(periodeAkhir);
+        if (durasiBiaya.equalsIgnoreCase("more than 255 characters")){
+            manualInvoice.setDurasiBiayaInvoiceManual(char256);
+        } else {
+            manualInvoice.setDurasiBiayaInvoiceManual(durasiBiaya);
+        }
+        manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
+    }
+
+    @Then("durasi biaya should be only contains {string} and counter show {string}")
+    public void durasi_biaya_should_be_only_contains_and_counter_show(String durasiBiaya, String counter){
+        if (durasiBiaya.equalsIgnoreCase("max 255 characters")){
+            manualInvoice.assertDurasiBiaya(char255);
+            manualInvoice.assertCounterTxt(counter);
+        }
     }
 
     @Then("admin verify data {string} in Buat dan Kirim pop up correct")
