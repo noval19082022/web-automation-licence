@@ -98,3 +98,26 @@
         | Jenis Invoice   |
         | Biaya Tambahan  |
         | Biaya Sewa      |
+
+    @TEST_PMAN-5657 @pman-prod
+    Scenario Outline: Change Jenis Invoice - When There Are Biaya Tambahan & Biaya Sewa Data
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+      And admin input nama penyewa in buat invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+        | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
+      And admin add invoice manual "<Jenis Invoice>"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+        | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
+        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
+      #change invoice type
+      When admin select Jenis Invoice "<Change Invoice>"
+      Then empty state on the biaya "<Jenis Invoice>" table is displayed
+
+      Examples:
+        | Jenis Invoice   | Change Invoice  |
+        | Biaya Tambahan  | Biaya Sewa      |
+        | Biaya Sewa      | Biaya Tambahan  |

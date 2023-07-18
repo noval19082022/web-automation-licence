@@ -58,6 +58,10 @@ public class InvoiceManualPO {
     private Locator cancelOnDelConfirmation;
     private Locator deleteOnDelConfirmation;
     private Locator editInvManBtn;
+    private Locator popUpChangeInvConfirmTitle;
+    private Locator popUpChangeInvConfirmSubtitle;
+    private Locator batalBtnOnChangeInvConfirmation;
+    private Locator lanjutkanBtnOnChangeInvConfirmation;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -131,6 +135,10 @@ public class InvoiceManualPO {
         cancelOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
         deleteOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         editInvManBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("edit"));
+        popUpChangeInvConfirmTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Yakin ingin mengganti jenis invoice ini?"));
+        popUpChangeInvConfirmSubtitle = page.getByText("Anda hanya dapat memilih 1 jenis invoice. Perubahan jenis invoice akan menghapus");
+        batalBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        lanjutkanBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -600,6 +608,36 @@ public class InvoiceManualPO {
         } else if (Mamikos.ENV.equalsIgnoreCase("prod")) {
             assertThat(page).hasURL("https://bang-pay.kerupux.com/backoffice/invoice/manual");
         }
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Title
+     * @param title
+     */
+    public void assertChangeInvConfirmationTitle(String title) {
+        assertThat(popUpChangeInvConfirmTitle).hasText(title);
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Subtitle
+     * @param subtitle
+     */
+    public void assertChangeInvConfirmationSubtitle(String subtitle){
+        assertThat(popUpChangeInvConfirmSubtitle).hasText(subtitle);
+    }
+
+    /**
+     * Click Batal button on Change Invoice Confirmation
+     */
+    public void clickBatalOnChangeInvConfirmation(){
+        batalBtnOnChangeInvConfirmation.click();
+    }
+
+    /**
+     * Click Lanjutkan button on Change Invoice Confirmation
+     */
+    public void clickLanjutkanOnChangeInvConfirmation(){
+        lanjutkanBtnOnChangeInvConfirmation.click();
     }
 
     //---Biaya Tambahan---//
