@@ -1,19 +1,29 @@
 package pageobject.admin.mamipay.voucher;
 
+import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.text.ParseException;
 
 public class MamikosListMassVoucherPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private JavaHelpers java = new JavaHelpers();
     Locator singleVoucherButton;
     Locator campaignNameInput;
     Locator searchButton;
     Locator editButton;
     Locator callout;
     Locator editButtonWithNameId;
+    Locator addMassButton;
+    Locator updateEl;
+
     public MamikosListMassVoucherPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -21,6 +31,7 @@ public class MamikosListMassVoucherPO {
         campaignNameInput = page.locator("input[name=\"campaign_voucher\"]");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         editButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        addMassButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Mass Voucher"));
         callout = page.locator(".callout");
     }
 
@@ -40,11 +51,11 @@ public class MamikosListMassVoucherPO {
     }
 
     /**
-     * Click on edit button
+     * Click on Add Mass button
      * @return MamikosVoucherFormPO class
      */
-    public MamikosVoucherFormPO clickOnEditButton() {
-        playwright.clickOn(editButton);
+    public MamikosVoucherFormPO clickOnCreateButton() {
+        playwright.clickOn(addMassButton);
         return new MamikosVoucherFormPO(page);
     }
 
@@ -87,4 +98,19 @@ public class MamikosListMassVoucherPO {
             this.playwright = new PlaywrightHelpers(page);
         }
     }
+
+    /**
+     * Click on edit button
+     * @return MamikosVoucherFormPO class
+     */
+    public MamikosVoucherFormPO clickOnEditButton() {
+        playwright.clickOn(editButton);
+        return new MamikosVoucherFormPO(page);
+    }
+
+    public void clickOnUpdateIconIndex(String index) throws InterruptedException {
+        updateEl = page.locator("(//i[@class='fa fa-pencil']/parent::a)["+index+"]");
+        playwright.clickOn(updateEl);
+    }
+
 }
