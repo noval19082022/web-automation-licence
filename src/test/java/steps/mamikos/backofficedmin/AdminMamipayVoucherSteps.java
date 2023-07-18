@@ -281,7 +281,6 @@ public class AdminMamipayVoucherSteps {
         mamipayAdmin.clickOnInputVoucher(id);
         mamipayAdmin.clickOnSearchButton();
     }
-}
 
     @Then("admin can sees callout message is {string}")
     public void admin_can_sees_callout_message_is(String callOutMessage) {
