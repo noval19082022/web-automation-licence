@@ -235,7 +235,6 @@ public class MamifotoSteps {
     @When("owner click back previous button")
     public void owner_click_back_previous_button() {
         page.goBack();
-        playwright.hardWait(3000.0);
         page.reload();
     }
 
@@ -246,6 +245,7 @@ public class MamifotoSteps {
 
     @Then("owner paid transaction unpaid")
     public void owner_paid_transaction_unpaid() {
+        playwright.hardWait(5000.0);
         mamifoto.clickOnSeeFirstDetailTransaction();
     }
 

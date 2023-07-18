@@ -47,7 +47,6 @@ Feature: Owner Purchase Mamifoto
     * owner click riwayat paket button
     Then verify unpaid invoice mamifoto is 1
     And owner back to Mamifoto Landing Page
-
     #multiple invoice mamifoto
     When owner click button lihat paket
     * owner select package mamifoto
@@ -55,16 +54,15 @@ Feature: Owner Purchase Mamifoto
     * owner click back previous button
     * owner click riwayat paket button
     Then verify unpaid invoice mamifoto is 2
-
     #paid first invoice unpaid mamifoto
     When owner paid transaction unpaid
     Then payment owner success using ovo as payment method
-    * owner click back previous button
+    When owner click back previous button
     Then verify unpaid invoice mamifoto is 1
     #paid second invoice unpaid mamifoto
     When owner paid transaction unpaid
     Then payment owner success using ovo as payment method
-    * owner click back previous button
+    When owner click back previous button
     Then verify unpaid invoice mamifoto is 0
 
 
