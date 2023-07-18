@@ -193,7 +193,7 @@ public class GoldplusSteps {
     public void verifyButtonOnBroadcastPage() {
         playwright.hardWait(3000);
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
-        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Ajukan Ganti Paket"));
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
     }
 
     @And("owner click button on chatlist")
