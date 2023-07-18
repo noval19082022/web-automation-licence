@@ -365,4 +365,14 @@ public class SearchContractPO {
         detailInvoiceEl = page.locator("//td[1]/a");
         playwright.clickOn(detailInvoiceEl);
     }
+
+    /**
+     * check table header name is visible or not
+     * @param headerName refers to table header name
+     * @return boolean
+     */
+    public boolean isTableHeaderIsVisible(String headerName) {
+        Locator tableHeader = page.locator("//th[text()='" + headerName + "']");
+        return tableHeader.isVisible();
+    }
 }

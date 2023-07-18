@@ -224,4 +224,9 @@ public class SearchContractSteps {
     public void admin_clicks_on_invoice_number_on_first_index_contract(String index) {
         searchContract.clicksOnInvoiceNumberOnFirstIndex(index);
     }
+
+    @Then("admin verify {string} column is displayed")
+    public void admin_verify_contract_id_column_is_displayed(String tableHeader) {
+        Assert.assertTrue(searchContract.isTableHeaderIsVisible(tableHeader));
+    }
 }
