@@ -17,8 +17,9 @@ public class CommonSteps {
     TenantLoginPO users = new TenantLoginPO(page);
     HomePO home = new HomePO(page);
 
-    @When("user/owner/tenant click {string}")
+    @When("user/owner/tenant click on {string}")
     public void user_click(String text) {
+        playwright.hardWait(5);
         playwright.clickOnText(text);
     }
 
@@ -28,7 +29,7 @@ public class CommonSteps {
     }
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
-    public void owner_will_see_that_the_text_is_displayed(String text) {
+    public void user_will_see_that_the_text_is_displayed(String text) {
         Assert.assertTrue(playwright.isTextDisplayed(text, 1000));
     }
 
@@ -50,12 +51,16 @@ public class CommonSteps {
 
     @Then("The system should display {string} button as enabled")
     public void the_system_should_display_button_as_enabled(String buttonName) {
-        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
     }
 
     @Then("The system should display {string} button as disabled")
     public void the_system_should_display_button_as_disabled(String buttonName) {
-        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
     }
 
+    @Then("user redirected to {string}")
+    public void user_redirect_link(String link) {
+        Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
+    }
 }

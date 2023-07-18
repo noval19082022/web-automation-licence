@@ -11,11 +11,12 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.KostLandingAreaPO;
-import pageobject.common.SearchPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
+import java.util.HashSet;
+import java.util.List;
 
 public class KostDetailSteps {
     Page page = ActiveContext.getActivePage();
@@ -23,9 +24,21 @@ public class KostDetailSteps {
     JavaHelpers java = new JavaHelpers();
 
     HomePO home = new HomePO(page);
-    SearchPO search = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
     KostLandingAreaPO kostLandingArea = new KostLandingAreaPO(page);
+
+    @Then("user verify content of breadcrumb is {string}")
+    public void userSeeBreadcrumb(String breadcrumbPath) {
+        // get list breadcrumb form kost detail
+        var listBread = kostDetail.getListBreadCrumb();
+        // remove duplicate list using Set
+        var set = new HashSet<>(listBread);
+        listBread.clear();
+        listBread.addAll(set);
+        // split breadcrumbpath into list string to compare with get list breadcrumb that get from kostdetail
+        var breadExpectationList = breadcrumbPath.split(" > ");
+        Assert.assertTrue(listBread.containsAll(List.of(breadExpectationList)));
+    }
 
     @Then("user can see overview section on detail page")
     public void userCanSeeOverViewSection(DataTable table) {

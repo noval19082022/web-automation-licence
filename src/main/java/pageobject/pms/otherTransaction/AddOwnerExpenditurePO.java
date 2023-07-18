@@ -53,16 +53,13 @@ public class AddOwnerExpenditurePO {
         this.page = page;
 
         tambahDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Data"));
-        tipePengajuanCashOutDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tipe pengajuan cash-out"));
+        tipePengajuanCashOutDropdown = page.locator(".bg-c-select").nth(0);
         propertyNameInputText = page.getByPlaceholder("Pilih properti");
         propertyNameSuggestion = page.locator("a[role='button']");
-        kategoriPengeluaranDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kategori pengeluaran"));
-        statusPersediaanDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status persediaan"));
-        jenisProdukDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jenis produk"));
         tambahPengeluaranButton = page.getByTestId("add-expense");
         uploadButton = page.locator("input[type='file']");
         noInvoiceField = page.getByTestId("cost-invoice-number");
-        tujuanTransferDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tujuan transfer pengeluaran"));
+        tujuanTransferDropdown = page.locator(".bg-c-select").last();
         searchTujuanTransferField =   page.getByPlaceholder("Cari tujuan transfer");
         addOwnerExpenditureButton = page.getByTestId("add-expenditure");
         titlePopUpAddOwnerExpenditure = page.locator("h3.bg-c-modal__body-title");
@@ -94,7 +91,7 @@ public class AddOwnerExpenditurePO {
      * @param type
      */
     public void chooseCashOutType(String type) {
-        tipeCashOut = page.locator("a").filter(new Locator.FilterOptions().setHasText(type));
+        tipeCashOut = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText(type)).locator("a");
         tipePengajuanCashOutDropdown.click();
         tipeCashOut.click();
     }
@@ -117,10 +114,12 @@ public class AddOwnerExpenditurePO {
      */
     public void setKategoriPengeluaran(String category, String no) {
         page.mouse().wheel(0,500);
-        kategoriPengeluaran = page.locator("a").filter(new Locator.FilterOptions().setHasText(category));
-        kategoriPengeluaranDropdown.click();
-        kategoriPengeluaran.nth(Integer.parseInt(no)-1).click();
-
+        kategoriPengeluaranDropdown = page.locator(".bg-c-select").nth(Integer.parseInt(no)+(2*(Integer.parseInt(no)-1)));
+        if (!category.equalsIgnoreCase("-")){
+            kategoriPengeluaran = page.locator("a").filter(new Locator.FilterOptions().setHasText(category));
+            kategoriPengeluaranDropdown.click();
+            kategoriPengeluaran.nth(Integer.parseInt(no)-1).click();
+        }
     }
 
     /**
@@ -129,8 +128,10 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setNamaPengeluaran(String name, String no) {
-        namaPengeluaran = page.getByTestId("expense-name-"+(Integer.parseInt(no)-1)+"");
-        namaPengeluaran.fill(name);
+        if (!name.equalsIgnoreCase("-")){
+            namaPengeluaran = page.getByTestId("expense-name-"+(Integer.parseInt(no)-1)+"");
+            namaPengeluaran.fill(name);
+        }
     }
 
     /**
@@ -139,9 +140,11 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setKuantitas(String quantity, String no) {
-        kuantitas = page.getByTestId("expense-qty-"+(Integer.parseInt(no)-1)+"");
-        kuantitas.scrollIntoViewIfNeeded();
-        kuantitas.fill(quantity);
+        if (!quantity.equalsIgnoreCase("-")){
+            kuantitas = page.getByTestId("expense-qty-"+(Integer.parseInt(no)-1)+"");
+            kuantitas.scrollIntoViewIfNeeded();
+            kuantitas.fill(quantity);
+        }
     }
 
     /**
@@ -150,9 +153,11 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setNominalPengeluaran(String amount, String no) {
-        nominalPengeluaran = page.getByTestId("input-currency-masking").nth(Integer.parseInt(no)-1);
-        nominalPengeluaran.focus();
-        nominalPengeluaran.fill(amount);
+        if (!amount.equalsIgnoreCase("-")){
+            nominalPengeluaran = page.getByTestId("input-currency-masking").nth(Integer.parseInt(no)-1);
+            nominalPengeluaran.focus();
+            nominalPengeluaran.fill(amount);
+        }
     }
 
     /**
@@ -161,9 +166,12 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setStatusPersediaan(String status, String no) {
-        statusPersediaan = page.locator("//*[@data-testid='expense-stock-status-"+(Integer.parseInt(no)-1)+"']/child::*//div[normalize-space()='"+status+"']");
-        statusPersediaanDropdown.click();
-        statusPersediaan.click();
+        statusPersediaanDropdown = page.locator(".bg-c-select").nth(Integer.parseInt(no)+(2*(Integer.parseInt(no)-1))+1);
+        if(!status.equalsIgnoreCase("-")){
+            statusPersediaan = page.locator("//*[@data-testid='expense-stock-status-"+(Integer.parseInt(no)-1)+"']/child::*//div[normalize-space()='"+status+"']");
+            statusPersediaanDropdown.click();
+            statusPersediaan.click();
+        }
     }
 
     /**
@@ -172,10 +180,13 @@ public class AddOwnerExpenditurePO {
      * @param no pengeluaran n
      */
     public void setJenisProduk(String product, String no) {
-        jenisProduk = page.locator("a").filter(new Locator.FilterOptions().setHasText(product));
-        jenisProdukDropdown.scrollIntoViewIfNeeded();
-        jenisProdukDropdown.click();
-        jenisProduk.nth(Integer.parseInt(no)-1).click();
+        jenisProdukDropdown = page.locator(".bg-c-select").nth(Integer.parseInt(no)+(2*(Integer.parseInt(no)-1))+2);
+        if (!product.equalsIgnoreCase("-")){
+            jenisProduk = page.locator("a").filter(new Locator.FilterOptions().setHasText(product));
+            jenisProdukDropdown.scrollIntoViewIfNeeded();
+            jenisProdukDropdown.click();
+            jenisProduk.nth(Integer.parseInt(no)-1).click();
+        }
     }
 
     /**

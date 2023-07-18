@@ -1,5 +1,6 @@
 package pageobject.admin.mamipay;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -18,6 +19,12 @@ public class AdminMamipayDashboardPO {
     Locator mamikosVoucher;
     Locator searchInvoice;
     Locator sidebarMenu;
+    Locator filterStatusDropdown;
+    Locator filterRuleDropdown;
+    Locator filterTeamDropdown;
+
+    Locator searchButton;
+
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -27,10 +34,15 @@ public class AdminMamipayDashboardPO {
         voucherDiscount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Voucher Discount "));
         mamikosVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Mamikos Voucher"));
         searchInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Invoice"));
+        filterStatusDropdown = page.locator("div:nth-child(7) > span > .selection > .select2-selection > .select2-selection__arrow");
+        filterRuleDropdown = page.locator(".select2-selection__arrow").first();
+        filterTeamDropdown = page.locator("div:nth-child(5) > span > .selection > .select2-selection > .select2-selection__arrow");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
     }
 
     /**
      * this method will click the hyperlink text on admin dashboard
+     *
      * @param text
      */
     public void clickOnTextHyperlink(String text) {
@@ -39,6 +51,7 @@ public class AdminMamipayDashboardPO {
 
     /**
      * this method will check if admin get pop up
+     *
      * @param popUp
      * @return boolean
      */
@@ -48,6 +61,7 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Input Biaya kerusakan on edit deposit menu
+     *
      * @param biaya
      */
     public void inputBiayaKerusakanOnEditDposit(String biaya) {
@@ -57,14 +71,16 @@ public class AdminMamipayDashboardPO {
 
     /**
      * additonal notes menu on detail pop up after click Edit Deposit btn
+     *
      * @return
      */
-    public Boolean getAdditionalNotesMenuOnDetailPopup(){
+    public Boolean getAdditionalNotesMenuOnDetailPopup() {
         return page.getByText("Additional Notes Minus").first().isVisible();
     }
 
     /**
      * Click on search contract
+     *
      * @return SearchContractPO class
      */
     public SearchContractPO clickOnSearchContract() {
@@ -74,6 +90,7 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Go to mamikos voucher by click on voucher discount and mamikos voucher
+     *
      * @return MamikosListMassVoucherPO class after navigate to it
      */
     public MamikosListMassVoucherPO goToMamikosVoucher() {
@@ -84,6 +101,7 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Go to mamikos search Invoice
+     *
      * @return MamikosListInvoicePO class
      */
     public MamikosListInvoicePO goToMamikosSearchInvoice() {
@@ -93,10 +111,81 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Click sidebar menu in mamipay
+     *
      * @param menu , menu name
      */
-    public void NavigateToMamipayMenu (String menu){
-        sidebarMenu = page.locator("//li[@class='menu-item ']/a[contains(text(),'"+menu+"')]");
+    public void NavigateToMamipayMenu(String menu) {
+        sidebarMenu = page.locator("//li[@class='menu-item ']/a[contains(text(),'" + menu + "')]");
         sidebarMenu.click();
+    }
+
+    /**
+     * admin click on filter status
+     *
+     */
+    public void clickOnFilterStatusDropdown() {
+        filterStatusDropdown.click();
+    }
+
+    /**
+     * admin click on filter rules
+     *
+     */
+    public void clickOnFilterRulesDropdown() {
+        filterRuleDropdown.click();
+    }
+
+    /**
+     * admin click on filter team
+     *
+     */
+    public void clickOnFilterTeamDropdown() {
+        filterTeamDropdown.click();
+    }
+
+    /**
+     * admin click on dropdown filter status
+     *
+     */
+    public String getAllFilterOptions(String filter) {
+        Locator text = page.locator("//li[normalize-space()='"+filter+"']");
+        return playwright.getText(text);
+    }
+    /**
+     * admin click on filter
+     *
+     */
+    public void clickOnFilter(String filter) {
+        String text = "//li[normalize-space()='"+filter+"']";
+        ElementHandle element = page.querySelector(text);
+        element.click();
+    }
+
+    /**
+     * admin click on search button
+     *
+     */
+    public void clickOnSearchButton() {
+       playwright.clickOn(searchButton);
+    }
+
+    /**
+     * admin see result select filter
+     *
+     */
+    public String getResultSelectFilter(String filter) {
+        Locator text = page.locator("(//*[.='"+filter+"'])[1]");
+        return playwright.getText(text);
+    }
+
+    /**
+     * admin input voucher
+     *
+     */
+    public void clickOnInputVoucher(String id) {
+        String inputTextbox = "//*[@name='campaign_voucher']";
+        ElementHandle element = page.querySelector(inputTextbox);
+        element.click();
+        element.fill(id);
     }
 }

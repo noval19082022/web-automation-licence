@@ -1,9 +1,9 @@
 package pageobject.tenant.chat;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.common.KostDetailsPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -25,6 +25,12 @@ public class ChatTenantPO {
     Locator ownerLastSeen;
     Locator ajukanSewaChatRoomButton;
     Locator ajukanSewaPopUpChatRoomButton;
+    Locator ubahJadwalButton;
+    Locator cancelSurveyButton;
+    Locator surveyKosButton;
+    Locator dropdownTimeSurvey;
+    Locator tenantChatButton;
+    Locator confirmationUbahJadwalButton;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -40,6 +46,12 @@ public class ChatTenantPO {
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa")).nth(1);
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--secondary bg-c-button--lg bg-c-button--block']");
+        ubahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Jadwal"));
+        cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Survei"));
+        surveyKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Kos"));
+        dropdownTimeSurvey =  page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
+        tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
+        confirmationUbahJadwalButton = page.locator("//button[normalize-space()='Batalkan Survei']//following-sibling::button");
     }
 
     /**
@@ -95,6 +107,7 @@ public class ChatTenantPO {
      * @return String latest chat (most bottom chat)
      */
     public String getLatestChatText() {
+        playwright.pageScrollHeightToBottom();
         playwright.waitTillLocatorIsVisible(latestChat);
         return playwright.getText(latestChat);
 
@@ -159,5 +172,76 @@ public class ChatTenantPO {
             }
         }
         playwright.clickOn(ajukanSewaPopUpChatRoomButton);
+    }
+
+    /**
+     * Click on ubah jadwal button
+     *
+     */
+    public void clickOnUbahJadwalOnHeaderChatRoomButton() {
+        playwright.waitTillLocatorIsVisible(ubahJadwalButton);
+        playwright.clickOn(ubahJadwalButton);
+    }
+
+    /**
+     * Click on batalkan survey button
+     *
+     */
+    public void clickOnBatalkanSurveiButton() {
+        playwright.clickOn(cancelSurveyButton);
+    }
+
+    /**
+     * Click on survey button
+     *
+     */
+    public void clickOnSurveyKosButton() {
+        playwright.clickOn(surveyKosButton);
+    }
+
+    /**
+     * admin input voucher
+     *
+     */
+    public void inputTimeSurvey(String time) {
+        playwright.waitTillLocatorIsVisible(dropdownTimeSurvey);
+        playwright.clickOn(dropdownTimeSurvey);
+        String text = "//div[normalize-space()='"+time+"']";
+        ElementHandle element = page.querySelector(text);
+        element.click();
+    }
+    /**
+     * Click on owner chat button on header
+     *
+     */
+    public void clickOnChatTenant() {
+        playwright.hardWait(5000);
+        playwright.clickOn(tenantChatButton);
+    }
+    /**
+     * Click on owner chat button on header
+     *
+     */
+    public void clickOnSendFormButton(String send) {
+        String inputTextbox = "//button[normalize-space()='"+send+"']";
+        ElementHandle element = page.querySelector(inputTextbox);
+        element.click();
+    }
+
+    /**
+     * Click on confirmation ubah jadwal button
+     *
+     */
+    public void clickOnConfirmationUbahJadwalButton() {
+        playwright.clickOn(confirmationUbahJadwalButton);
+    }
+
+    /**
+     * Check if question list displayed
+     * @return true if appear
+     */
+    public boolean isQuestionDisplayed(String question) {
+        String xpathLocator = "//p[contains(.,'" + question + "')]";
+        return page.querySelector(xpathLocator) != null;
     }
 }

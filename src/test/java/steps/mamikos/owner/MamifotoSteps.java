@@ -24,7 +24,7 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
@@ -52,7 +52,7 @@ public class MamifotoSteps {
 
     @And("owner select package mamifoto")
     public void owner_select_package_mamifoto() {
-       mamifoto.clickOnMamifotoPackageNonGPFirst();
+       mamifoto.clickOnMamifotoPackageFirst();
     }
 
     @Then("owner see pop up doesnt have property")
@@ -117,6 +117,7 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Detail Transaksi with status {string}")
     public void owner_click_lihat_detail_transaksi_with_status(String status)  {
+        playwright.hardWait(3000);
         Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
         mamifoto.clickOnSeeDetailTransactionMamifoto();
     }
@@ -178,5 +179,75 @@ public class MamifotoSteps {
         mamifoto = new MamifotoPO(ActiveContext.getActivePage());
         Assert.assertTrue(mamifoto.getURL().contains(loginProphoto), "URL doesn't match");
     }
+
+    @When("owner wants to select Mamifoto package")
+    public void owner_wants_to_select_mamifoto_package() {
+        mamifoto.clickOnFiturPromosi();
+        mamifoto.clickOnMamifotoSidebar();
+        mamifoto.clickOnLihatPaket();
+        Assert.assertTrue(mamifoto.mamifotoHeaderSelectPackageisAppear(),"Lihat Paket is not Appear");
+    }
+
+    @Then("verify discount price on the package list")
+    public void verify_discount_price_on_the_package_list() {
+        Assert.assertEquals(mamifoto.getTextHeaderDiscountMemberGP(),mamifoto.getTextHeaderDiscountMemberGP(),"text doesnt match");
+    }
+
+    @Then("verify  discount price on the detail tagihan")
+    public void verify_discount_price_on_the_detail_tagihan() {
+        Assert.assertEquals(mamifoto.getTextDiscountMemberGPDetailTagihan(),mamifoto.getTextDiscountMemberGPDetailTagihan(),"Text doesnt match");
+        Assert.assertEquals(mamifoto.getTextDiscountAmountGPDetailTagihan(),mamifoto.getTextDiscountAmountGPDetailTagihan(),"price doesnt match");
+    }
+
+    @When("owner paid MamiFoto")
+    public void owner_paid_mami_foto() {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(5000);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertEquals(mamifoto.getTextDiscountGPInvoiceMamifoto(),mamifoto.getTextDiscountGPInvoiceMamifoto(),"text doesnt match");
+    }
+
+    @Then("verify discount price GP doesnt appear on the package list")
+    public void verify_discount_price_gp_doesnt_appear_on_the_package_list() {
+        Assert.assertFalse(mamifoto.mamifotoHeaderDiscountGP(),"Header diskon is appear");
+    }
+
+    @Then("verify  discount price GP doesnt appear the detail tagihan")
+    public void verify_discount_price_gp_doesnt_appear_the_detail_tagihan() {
+        Assert.assertFalse(mamifoto.discountMemberGPDetailTagihan(),"Discount Member is appear");
+        Assert.assertFalse(mamifoto.discountAmountGPDetailTagihan(),"Discount Ammount is appear");
+    }
+
+    @When("owner paid MamiFoto Non GP")
+    public void owner_paid_mami_foto_non_gp()  {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(10000.0);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertFalse(mamifoto.discountGPInvoiceMamifoto(),"Discount GP is appear");
+    }
+
+    @Then("verify unpaid invoice mamifoto is {int}")
+    public void verify_unpaid_invoice_mamifoto_is(Integer unpaidInvoice) {
+        System.out.println(mamifoto.getCountMamifotoInvoiceUnpaid());
+        Assert.assertTrue(unpaidInvoice == mamifoto.getCountMamifotoInvoiceUnpaid());
+    }
+
+    @When("owner click back previous button")
+    public void owner_click_back_previous_button() {
+        page.goBack();
+        page.reload();
+    }
+
+    @When("owner click button lihat paket")
+    public void owner_click_button_lihat_paket() {
+        mamifoto.clickOnLihatPaket();
+    }
+
+    @Then("owner paid transaction unpaid")
+    public void owner_paid_transaction_unpaid() {
+        playwright.hardWait(5000.0);
+        mamifoto.clickOnSeeFirstDetailTransaction();
+    }
+
 
 }

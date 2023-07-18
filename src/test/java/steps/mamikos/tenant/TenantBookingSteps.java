@@ -274,4 +274,38 @@ public class TenantBookingSteps {
             kostDetail.clickOnSayaMengertiButton();
         }
     }
+
+    @And("tenant/user click ajukan sewa button on kost detail page")
+    public void tenant_click_ajukan_sewa_on_kost_detail() {
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+    }
+
+    @And("tenant/user click ajukan sewa button on pengajuan sewa page")
+    public void tenant_click_ajukan_sewa_on_pengajuan_sewa() {
+        bookingForm.clickOnAjukanSewaButton();
+    }
+
+    @Then("tenant/user can see TnC with {string}")
+    public void user_can_see_tnc_with_x(String text) {
+        if (text.equalsIgnoreCase("Syarat Ketentuan Umum") || text.equalsIgnoreCase("Syarat dan Ketentuan Umum")) {
+            Assert.assertEquals(bookingForm.getTnCBookingTextReguler(), text, "text not same with tnc booking");
+        } else if(text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
+            Assert.assertEquals(bookingForm.getTnCBookingTextSinggahsini(), text, "text not same with tnc booking");
+        }
+    }
+
+    @When("tenant/user click on TnC with {string}")
+    public void user_click_on_tnc_with_x(String text) {
+        if (text.equalsIgnoreCase("Syarat Ketentuan Umum") || text.equalsIgnoreCase("Syarat dan Ketentuan Umum")) {
+            bookingForm.clickOnTnCBookingReguler();
+        } else if (text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
+            bookingForm.clickTnCBookingSinggahsini();
+        }
+    }
+
+    @Then("tenant/user can see TnC content with {string}")
+    public void user_can_see_tnc_content_text_with_x(String text) {
+        Assert.assertEquals(bookingForm.getTnCBookingContentText(), text, "text not same with the content");
+        bookingForm.clickOkPahamButton();
+    }
 }

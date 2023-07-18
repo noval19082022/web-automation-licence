@@ -54,11 +54,11 @@ public class AddOwnerExpenditureSteps {
     public void admin_upload_valid_attachment() {
         add.uploadAttachment("jpg");
     }
-    @When("admin input no invoice biaya {string}")
+    @When("admin input/edit no invoice biaya {string}")
     public void admin_input_no_invoice_biaya(String invoice) {
         add.setNoInvoiceBiaya(invoice);
     }
-    @When("admin choose tujuan transfer {string}")
+    @When("admin choose/edit tujuan transfer {string}")
     public void admin_choose_tujuan_transfer(String vendor) {
         add.setTujuanTransfer(vendor);
     }
