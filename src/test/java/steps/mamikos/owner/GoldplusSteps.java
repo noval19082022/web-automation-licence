@@ -185,8 +185,9 @@ public class GoldplusSteps {
 
     @Then("verify button on broadcast page")
     public void verifyButtonOnBroadcastPage() {
+        playwright.hardWait(3000);
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
-        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Ajukan Ganti Paket"));
     }
 
     @And("owner verify intercept tagihan pop up on chatlist")
@@ -201,7 +202,7 @@ public class GoldplusSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
-        playwright.clickOnTextButton("Tenant Upik Tiga");
+        playwright.clickOnTextButton("Raney Upik Bersatu");
         playwright.clickOnTextButton("Lanjut Bayar");
     }
 

@@ -138,6 +138,7 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
+        playwright.hardWait(3000);
         playwright.clickOnText(infoUntukAndaMessage);
     }
 
