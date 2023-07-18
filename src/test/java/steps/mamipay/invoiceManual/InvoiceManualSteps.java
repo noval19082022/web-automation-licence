@@ -33,6 +33,8 @@ public class InvoiceManualSteps {
     private String invoiceManual = "src/test/resources/testdata/mamipay/invoiceManual.properties";
     private String char256 = JavaHelpers.getPropertyValue(invoiceManual, "char256");
     private String char255 = JavaHelpers.getPropertyValue(invoiceManual, "char255");
+    private String popUpTitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupTitle");
+    private String popUpSubtitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupSubtitle");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -259,7 +261,25 @@ public class InvoiceManualSteps {
         manualInvoice.inputListingName(listing);
         manualInvoice.inputTenantName(tenant);
     }
-    //---Biaya Tambahan---//
+
+    @When("admin select Jenis Invoice {string}")
+    public void admin_select_Jenis_Invoice(String type){
+        manualInvoice.selectJenisInvoice(type);
+        manualInvoice.assertChangeInvConfirmationTitle(popUpTitleChangeInvConfirmation);
+        manualInvoice.assertChangeInvConfirmationSubtitle(popUpSubtitleChangeInvConfirmation);
+        manualInvoice.clickBatalOnChangeInvConfirmation();
+        manualInvoice.selectJenisInvoice(type);
+        manualInvoice.clickLanjutkanOnChangeInvConfirmation();
+    }
+
+    @Then("empty state on the biaya {string} table is displayed")
+    public void empty_state_on_the_biaya_table_is_displayed(String emptyState){
+        if (emptyState.equalsIgnoreCase("Biaya Sewa")){
+            manualInvoice.assertEmptyStateBiayaTambahan();
+        } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
+            manualInvoice.assertEmptyStateBiayaSewa();
+        }
+    }
 
     //---Biaya Tambahan Pop Up---//
     @When("the admin selects {string} in the {string}")
