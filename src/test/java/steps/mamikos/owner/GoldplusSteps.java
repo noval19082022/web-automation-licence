@@ -36,6 +36,12 @@ public class GoldplusSteps {
         } else{
             navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
         }
+        playwright.hardWait(3000);
+        if (playwright.isTextDisplayed("1 Minggu") == true) {
+            System.out.println("weekly");
+            goldplus.clickOnPeriodeWeekly();
+        }
+        playwright.hardWait(3000);
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
@@ -190,25 +196,28 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Ajukan Ganti Paket"));
     }
 
-    @And("owner verify intercept tagihan pop up on chatlist")
-    public void ownerVerifyInterceptTagihanPopUpOnChatlist() {
+    @And("owner click button on chatlist")
+    public void ownerClickButtonOnChatlist() {
         chat.clickChatOwner();
         playwright.clickOnTextButton("Lanjut Bayar");
     }
 
-    @And("owner verify intercept tagihan pop up on chatroom")
-    public void ownerVerifyInterceptTagihanPopUpOnChatroom() {
+    @And("owner click button on chatrooms {string}")
+    public void ownerClickButtonOnChatrooms(String tenantName) {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
-        playwright.clickOnTextButton("Raney Upik Bersatu");
+        playwright.hardWait(3000);
+        playwright.clickOnTextButton(tenantName);
+        playwright.hardWait(3000);
         playwright.clickOnTextButton("Lanjut Bayar");
     }
 
     @And("user wants to subscribe Goldplus {int} weekly")
     public void userWantsToSubscribeGoldplusWeekly(int gpPackage) {
        goldplus.clickOnGPPackage(gpPackage);
+
        goldplus.clickOnPeriodeWeekly();
 
        playwright.clickOnTextButton("Pilih");
