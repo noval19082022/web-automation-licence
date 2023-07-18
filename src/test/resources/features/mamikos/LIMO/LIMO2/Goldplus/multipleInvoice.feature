@@ -1,24 +1,24 @@
 @regression @LIMO2 @listing-monetization @multiple-invoice @LIMO2-staging
 Feature: Multiple Invoice
 
-  @buyGP @multipleInvoice @continue
-  Scenario: Buy GP until status unpaid invoice and check redirection while 1 unpaid invoice
+  @TEST_LIMO-2338 @buyGP @multipleInvoice @continue
+  Scenario: Buy GP until 2 unpaid invoice
     Given user go to mamikos homepage
     When user login as owner:
-        |phone stag | password |
-        | 081905128517 | qwerty123         |
+      | phone stag   | password  |
+      | 081905128517 | qwerty123 |
     And user wants to subscribe Goldplus 1
     And user navigates to owner dashboard
-    When user click widget GP "Menunggu Pembayaran"
+    And user click widget GP "Menunggu Pembayaran"
     And user click "Ganti Paket" on pop up "Anda masih memiliki tagihan aktif"
     And user wants to subscribe Goldplus 1
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice is 2
 
-  @checkInfoUntukAndaMultipleInvoice @continue
-   Scenario: Check redirection info untuk anda 1 unpaid invoice
+  @TEST_LIMO-2667 @checkInfoUntukAndaMultipleInvoice @continue
+  Scenario: Check redirection info untuk anda 1 unpaid invoice
     Given user navigates to owner dashboard
-    And user click info untuk anda "Kuota chat habis. 2 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas"
+    When user click info untuk anda "Kuota chat habis. 2 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas"
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
   @checkBCMultipleInvoice @continue
@@ -34,27 +34,26 @@ Feature: Multiple Invoice
     And owner atur promo owner
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
-  @checkChatlistMultipleInvoice @continue
-   Scenario: Check Lanjut bayar button on chatlist
+  @TEST_LIMO-2336 @checkChatlistMultipleInvoice @continue
+  Scenario: Check Lanjut bayar button on chatlist
     Given owner navigates to owner dashboard
-    When owner click button on chatlist
+    When owner click lanjut bayar button on chatlist
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
-   @checkChatroomsMultipleInvoice @continue
-   Scenario: Check lanjut bayar button on chatrooms
+  @checkChatroomsMultipleInvoice @continue
+  Scenario: Check lanjut bayar button on chatrooms
     Given owner navigates to owner dashboard
-    When owner click button on chatrooms "Raney Upik Bertiga"
+    When owner click lanjut bayar button on chatrooms "Raney Upik Bertiga"
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
-
-   @paidTheUnpaidInvoice @continue
-   Scenario: Paid the unpaid invoice
+  @paidTheUnpaidInvoice @continue
+  Scenario: Paid the unpaid invoice
     Given owner navigates to "/goldplus/payment"
     When user click Lihat Tagihan on riwayat
-    And payment owner success using ovo as payment method
+    Then payment owner success using ovo as payment method
 
-   @continue
-   Scenario: delete or reset data GP
+  @continue
+  Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |

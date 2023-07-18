@@ -196,14 +196,14 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
     }
 
-    @And("owner click button on chatlist")
-    public void ownerClickButtonOnChatlist() {
+    @And("owner click lanjut bayar button on chatlist")
+    public void ownerClickLanjutBayarButtonOnChatlist(){
         chat.clickChatOwner();
         playwright.clickOnTextButton("Lanjut Bayar");
     }
 
-    @And("owner click button on chatrooms {string}")
-    public void ownerClickButtonOnChatrooms(String tenantName) {
+    @And("owner click lanjut bayar button on chatrooms {string}")
+    public void ownerClickLanjutBayarButtonOnChatrooms(String tenantName) {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
@@ -212,29 +212,5 @@ public class GoldplusSteps {
         playwright.clickOnTextButton(tenantName);
         playwright.hardWait(3000);
         playwright.clickOnTextButton("Lanjut Bayar");
-    }
-
-    @And("user wants to subscribe Goldplus {int} weekly")
-    public void userWantsToSubscribeGoldplusWeekly(int gpPackage) {
-       goldplus.clickOnGPPackage(gpPackage);
-
-       goldplus.clickOnPeriodeWeekly();
-
-       playwright.clickOnTextButton("Pilih");
-
-       Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 (Paket Chat) periode 1 Minggu", 1000.0));
-       Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 (Paket Chat) (1 Minggu)", 1000.0));
-
-       playwright.hardWait(3000);
-       playwright.clickOnText("Bayar Sekarang");
-    }
-
-    @Then("owner paid the riwayat periode {string}")
-    public void ownerPaidTheRiwayatPeriode(String periode) {
-        playwright.clickOnText(periode);
-
-        Assert.assertTrue(playwright.isTextDisplayed("GoldPlus 1 periode 1 Minggu", 1000.0));
-
-        playwright.clickOnText("Bayar Sekarang");
     }
 }
