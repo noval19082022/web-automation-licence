@@ -1,11 +1,14 @@
 package pageobject.admin.mamipay.voucher;
 
+import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.text.ParseException;
 
 public class MamikosListMassVoucherPO {
@@ -16,9 +19,11 @@ public class MamikosListMassVoucherPO {
     Locator campaignNameInput;
     Locator searchButton;
     Locator editButton;
+    Locator updateEl;
     Locator callout;
     Locator editButtonWithNameId;
     Locator addMassButton;
+    Locator totalKosQuotaInput;
     Locator totalQuotaInput;
     Locator monthlyQuotaInput;
     Locator discountAmountInput;
@@ -35,6 +40,14 @@ public class MamikosListMassVoucherPO {
     Locator timeDateInput;
     Locator endDateInput;
     Locator paymentRulesEl;
+    Locator submitMassButton;
+    Locator voucherStatusEl;
+    Locator submitEditMassButton;
+    Locator confirmationEditButton;
+    Locator uploadCampignImage;
+    Locator imageCampaignUploaded;
+    Locator campaignTnCInput;
+    Locator campaignTitleInput;
     public MamikosListMassVoucherPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -44,7 +57,7 @@ public class MamikosListMassVoucherPO {
         editButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
         addMassButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Mass Voucher"));
         callout = page.locator(".callout");
-        totalQuotaInput = page.locator("input[name=\"kost_limit\"]");
+        totalKosQuotaInput = page.locator("input[name=\"kost_limit\"]");
         monthlyQuotaInput = page.locator("input[name=\"kost_limit_monthly\"]");
         discountAmountInput = page.locator("input[name=\"voucher_amount\"]");
         maximumAmountInput = page.locator("input[name=\"voucher_max_amount\"]");
@@ -59,6 +72,14 @@ public class MamikosListMassVoucherPO {
         startDateInput = page.getByLabel("Start Date*");
         timeDateInput = page.locator ("//body[@class='skin-green sidebar-mini']/div[5]//div[@class='xdsoft_time xdsoft_current']");
         endDateInput = page.getByLabel("End Date");
+        submitMassButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Mass Voucher"));
+        totalQuotaInput = page.locator("#total_limit");
+        submitEditMassButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Mass Voucher"));
+        confirmationEditButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Yes, Do It!"));
+        uploadCampignImage = page.locator("\"#inputCampaignImage\"");
+        imageCampaignUploaded = page.locator("#campaignImage");
+        campaignTnCInput = page.locator(".note-editable");
+        campaignTitleInput = page.locator("input[name=\"public_campaign\\[title\\]\"]");
     }
 
     /**
@@ -81,6 +102,22 @@ public class MamikosListMassVoucherPO {
      */
     public void fillVocName(String voucherName) {
         playwright.forceFill(voucherNameInput, voucherName);
+    }
+
+    /**
+     * Fill campaign title
+     * @param campaignTitle
+     */
+    public void fillCampaignTitle(String campaignTitle) {
+        playwright.forceFill(campaignTitleInput, campaignTitle);
+    }
+
+    /**
+     * Fill campaign T&C
+     * @param campaignTnC
+     */
+    public void fillCampaignTnC(String campaignTnC) {
+        playwright.forceFill(campaignTnCInput, campaignTnC);
     }
 
     /**
@@ -143,6 +180,14 @@ public class MamikosListMassVoucherPO {
     }
 
     /**
+     * Fill each quota total
+     * @param totalKosQuota campaign name, voucher name, or id String data type
+     */
+    public void fillTotalKosQuota(String totalKosQuota) {
+        playwright.forceFill(totalKosQuotaInput, totalKosQuota);
+    }
+
+    /**
      * Fill campaign voucher name, or id
      * @param voucher campaign name, voucher name, or id String data type
      */
@@ -167,12 +212,35 @@ public class MamikosListMassVoucherPO {
     }
 
     /**
+     * Click on Submit Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnSubmitAddMassVocButton() {
+        playwright.clickOn(submitMassButton);
+    }
+
+    /**
+     * Click on Submit Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnEditAddMassVocButton() {
+        playwright.clickOn(submitEditMassButton);
+        playwright.clickOn(confirmationEditButton);
+    }
+
+
+    /**
      * Click on edit button
      * @return MamikosVoucherFormPO class
      */
     public MamikosVoucherFormPO clickOnEditButton() {
         playwright.clickOn(editButton);
         return new MamikosVoucherFormPO(page);
+    }
+
+    public void clickOnUpdateIconIndex(String index) throws InterruptedException {
+        updateEl = page.locator("(//i[@class='fa fa-pencil']/parent::a)["+index+"]");
+        playwright.clickOn(updateEl);
     }
 
     /**
@@ -247,9 +315,65 @@ public class MamikosListMassVoucherPO {
     public void tickOnPaymentRules(String value) throws InterruptedException {
         paymentRulesEl = page.getByLabel(value);
         paymentRulesEl.check();
-//        String paymentRulesEl = ".form-group-payment-rules input[value='"+value+"']";
-//        selenium.clickOn(By.cssSelector(paymentRulesEl));
-//        selenium.hardWait(1);
+    }
+
+    /**
+     * Tick on contract rules based on it value
+     * @param value payment rules element value booking_with_dp, booking, pelunasan, tenant
+     */
+    public void tickOnContractRules(String value) throws InterruptedException {
+        paymentRulesEl = page.getByLabel(value);
+        paymentRulesEl.check();
+    }
+
+    /**
+     * Tick on important rules based on it value
+     * @param value payment rules element value booking_with_dp, booking, pelunasan, tenant
+     */
+    public void tickOnImportantRules(String value) throws InterruptedException {
+        paymentRulesEl = page.getByLabel(value);
+        paymentRulesEl.check();
+    }
+
+    /**
+     * Untick on important rules based on it value
+     * @param value payment rules element value booking_with_dp, booking, pelunasan, tenant
+     */
+    public void untickOnImportantRules(String value) throws InterruptedException {
+        paymentRulesEl = page.getByLabel(value);
+        paymentRulesEl.uncheck();
+    }
+
+    /**
+     * Get voucher status text
+     * @param index index from top to bottom start with 1
+     * @return strign data type
+     */
+    public String getVoucherListStatusIndex(String index) {
+        voucherStatusEl = page.locator(".box tr:nth-child("+index+") span");
+        return playwright.getText(voucherStatusEl);
+    }
+
+    /**
+     * Upload campaign image
+     */
+    public void uploadCampaignImage() throws InterruptedException {
+        String imagePath = "src/main/resources/images/ownerExpenditure/ABY06593.jpg";
+        FileChooser fileChooser = page.waitForFileChooser(() -> page.locator("#inputCampaignImage").click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(imageCampaignUploaded);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Upload csv file for mass voucher
+     * @throws InterruptedException
+     */
+    public void uploadMassVoucherCSVFile() throws InterruptedException {
+        String csvPath = "src/main/resources/file/massVoucherFile.csv";
+        FileChooser fileChooser = page.waitForFileChooser(() -> page.locator("input[name=\"applicable_group\\[email_csv\\]\"]").click());
+        fileChooser.setFiles(Paths.get(csvPath));
+        playwright.hardWait(1000);
     }
 
 }

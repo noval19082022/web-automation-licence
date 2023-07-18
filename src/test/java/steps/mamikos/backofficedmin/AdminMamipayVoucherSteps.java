@@ -7,6 +7,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
@@ -15,6 +16,7 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,7 @@ public class AdminMamipayVoucherSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     AdminMamipayDashboardPO mamipayAdmin = new AdminMamipayDashboardPO(page);
     MamikosListMassVoucherPO massVoucherList = null;
+    MamikosListMassVoucherPO massVoucherListVoucher = new MamikosListMassVoucherPO(page);
     MamikosVoucherFormPO voucherForm = new MamikosVoucherFormPO(page);
     List<Map<String, String>> voucherAndKostName;
     List<Map<String, String>> voucherAndRules;
@@ -32,6 +35,8 @@ public class AdminMamipayVoucherSteps {
     List<Map<String, String>> voucherList;
     private Map<String, String> userCreateNewMassVoucher;
     private Map<String, String> paymentRules;
+    private Map<String, String> userInputDataVoucher;
+    private String voucherPrefix;
 
 
     @And("admin edit voucher and {string} it to kost:")
@@ -188,8 +193,8 @@ public class AdminMamipayVoucherSteps {
         userCreateNewMassVoucher = table.asMap(String.class, String.class);
         MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
         var voucherName = userCreateNewMassVoucher.get("voucher name");
-        var voucherCode = userCreateNewMassVoucher.get("code");
         var voucherDiscountAmount = userCreateNewMassVoucher.get("discount amount");
+        var voucherTotalKosQuota = userCreateNewMassVoucher.get("total kos quota");
         var voucherTotalQuota = userCreateNewMassVoucher.get("total quota");
         var voucherDailyuota = userCreateNewMassVoucher.get("daily quota");
         var voucherMaximumDiscount = userCreateNewMassVoucher.get("max discount");
@@ -204,10 +209,10 @@ public class AdminMamipayVoucherSteps {
             voucherForm.fillEndDate(yesterdayDate);
         }
         massVoucherList.selectOncampaignTeam(team);
-        massVoucherList.fillVocCode(voucherCode);
         massVoucherList.selectOnVocTypeButton(type);
         massVoucherList.fillDiscountAmount(voucherDiscountAmount);
         massVoucherList.fillTotalQuota(voucherTotalQuota);
+        massVoucherList.fillTotalKosQuota(voucherTotalKosQuota);
         massVoucherList.fillDailyQuota(voucherDailyuota);
         massVoucherList.fillMaxDiscountAmount(voucherMaximumDiscount);
         massVoucherList.fillMinTransaction(voucherMinimumTransaction);
@@ -216,24 +221,111 @@ public class AdminMamipayVoucherSteps {
     @And("^admin master tick payment rules :$")
     public void admin_master_tick_payment_rules(List<String> paymentRules) throws InterruptedException {
         for (String paymentRule : paymentRules) {
-            massVoucherList.tickOnPaymentRules(paymentRule);
+            massVoucherListVoucher.tickOnPaymentRules(paymentRule);
         }
     }
 
 
-//    @And("admin master tick payment rules :")
-//    public void admin_master_tick_payment_rules(DataTable table) throws InterruptedException {
-//        paymentRules = table.asMap(String.class, String.class); {
-//            massVoucherList.tickOnPaymentRules(value);
-//        }
-//    }
-//    @And("admin select contract rules :")
-//    public void adminSelectContractRules() {
-//
-//    }
-//
-//    @Then("admin can sees callout message is {string}")
-//    public void adminCanSeesCalloutMessageIs(String arg0) {
-//    }
+    @When("^admin select contract rules :$")
+    public void admin_select_contract_rules(List<String> contractRules) throws InterruptedException {
+        for (String contractRule : contractRules) {
+            massVoucherListVoucher.tickOnContractRules(contractRule);
+        }
+    }
 
+    @And("admin select important rules :")
+    public void adminSelectImportantRules(List<String> importantRules) throws InterruptedException {
+        for (String importantRule : importantRules) {
+            massVoucherListVoucher.tickOnImportantRules(importantRule);
+        }
+    }
+
+    @And("admin master clicks on add mass voucher button in voucher form")
+    public void adminMasterClicksOnAddMassVoucherButtonInVoucherForm() {
+        massVoucherListVoucher.clickOnSubmitAddMassVocButton();
+    }
+
+
+    @Then("admin can sees callout message is {string}")
+    public void admin_can_sees_callout_message_is(String callOutMessage) {
+        Assert.assertEquals(massVoucherListVoucher.getCalloutText(), callOutMessage);
+    }
+
+
+    @And("admin search mass voucher with name and edit index {string}:")
+    public void adminSearchMassVoucherWithNameAndEditIndex(String index, DataTable table) throws InterruptedException {
+        voucherAndProfession = table.asMaps(String.class, String.class);
+        var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        voucherEdit.clickOnUpdateIconIndex(index);
+    }
+
+    @When("admin update mass voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")
+    public void adminUpdateMassVoucherWithTeamDiscountTypeStartDateAndEndDateTo(String arg0, String arg1, String arg2, String arg3) {
+    }
+
+    @And("admin master inputs mass voucher code {string}")
+    public void admin_master_inputs_mass_voucher_code(String prefix) {
+        int length = 4;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        voucherPrefix = prefix + generatedString.toUpperCase();
+        massVoucherListVoucher.fillVocCode(voucherPrefix);
+    }
+
+    @And("admin search mass voucher with name:")
+    public void adminSearchMassVoucherWithName(DataTable table) throws InterruptedException {
+        voucherAndProfession = table.asMaps(String.class, String.class);
+        var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        massVoucherListVoucher.fillCampaignVoucher(voucher);
+        massVoucherListVoucher.clickOnSearchButton();
+    }
+
+    @Then("admin can sees first index voucher status in mass voucher is {string}")
+    public void admin_can_sees_first_index_voucher_status_in_mass_voucher_is(String status) {
+        Assert.assertEquals(massVoucherListVoucher.getVoucherListStatusIndex("1"), status);
+    }
+
+    @And("admin master clicks on edit mass voucher button in voucher form")
+    public void adminMasterClicksOnEditMassVoucherButtonInVoucherForm() {
+        massVoucherListVoucher.clickOnEditAddMassVocButton();
+    }
+
+    @Then("admin can sees callout message contains {string}")
+    public void admin_can_sees_callout_message_contains(String calloutText) {
+        List<String> calloutTextSplit = Arrays.asList(calloutText.split(" "));
+        for (int i = 0; i < calloutTextSplit.size(); i++) {
+            Assert.assertTrue(massVoucherListVoucher.getCalloutText().contains(calloutTextSplit.get(i)));
+        }
+    }
+
+    @And("admin master upload voucher campaign image")
+    public void adminMasterUploadVoucherCampaignImage() throws InterruptedException {
+        massVoucherListVoucher.uploadCampaignImage();
+
+    }
+
+    @Then("user create new mass voucher with:")
+    public void userCreateNewMassVoucherWith(DataTable table) throws InterruptedException {
+        userInputDataVoucher = table.asMap(String.class, String.class);
+        var campaignTitle = userInputDataVoucher.get("campaign title");
+        var campaignTnC = userInputDataVoucher.get("campaign T&C");
+        massVoucherListVoucher.fillCampaignTitle(campaignTitle);
+        massVoucherListVoucher.fillCampaignTnC(campaignTnC);
+    }
+
+    @And("admin master upload mass voucher csv file")
+    public void adminMasterUploadMassVoucherCsvFile() throws InterruptedException {
+        massVoucherListVoucher.uploadMassVoucherCSVFile();
+    }
+
+    @And("admin uncheck important rules :")
+    public void adminUncheckImportantRules(List<String> importantRules) throws InterruptedException {
+        for (String importantRule : importantRules) {
+            massVoucherListVoucher.untickOnImportantRules(importantRule);
+        }
+    }
 }
