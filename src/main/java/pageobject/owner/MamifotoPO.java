@@ -58,6 +58,7 @@ public class MamifotoPO {
     Locator doesntHaveTransactionDescText;
     Locator seeDetailTransactionExpired;
     Locator expiredPaymentMamifotoText;
+    Locator lihatTagihanTableMamifoto;
 
 
     //Locator Mamifoto at Status Pembelian Page
@@ -141,6 +142,7 @@ public class MamifotoPO {
         this.buttonBayarSekarang =  page.getByTestId("mamifoto-button-pay");
         this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
         this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
+        this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
 
     }
 
@@ -598,8 +600,27 @@ public class MamifotoPO {
      * @return string
      */
     public boolean discountGPInvoiceMamifoto() {
+        playwright.waitTillLocatorIsVisible(textDiskonGPInvoiceMamifoto,3000.0);
         return textDiskonGPInvoiceMamifoto.isVisible();
     }
+
+    /**
+     * Get unpaid invoice Mamifoto
+     * @return int, count of unpaid invoice Mamifoto
+     *
+     */
+    public int getCountMamifotoInvoiceUnpaid() {
+        return playwright.getLocators(lihatTagihanTableMamifoto).size();
+    }
+
+    /**
+     * Click on Lihat detail transaksi at first riwayat page
+     */
+    public void clickOnSeeFirstDetailTransaction() {
+        Locator invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
+        invoiceUnpaid.click();
+    }
+
 
 }
 

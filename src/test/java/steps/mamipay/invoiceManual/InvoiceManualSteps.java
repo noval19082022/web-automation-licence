@@ -301,14 +301,14 @@ public class InvoiceManualSteps {
         }
     }
 
-    @Then("the Buat dan Kirim button is disabled")
-    public void the_Buat_dan_Kirim_Button_is_disabled(){
-        manualInvoice.assertBuatDanKirimDisable();
-    }
-
     @Then("the pop up confirmation is not displayed")
     public void the_pop_up_confirmation_is_not_displayed(){
         manualInvoice.changeInvConfirmationPopUpIsNotDisplay();
+    }
+
+    @Then("the Buat dan Kirim button is disabled")
+    public void the_Buat_dan_Kirim_Button_is_disabled(){
+        manualInvoice.assertBuatDanKirimDisable();
     }
 
     //---Biaya Tambahan Pop Up---//
