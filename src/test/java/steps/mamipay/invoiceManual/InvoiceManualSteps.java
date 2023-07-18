@@ -262,14 +262,18 @@ public class InvoiceManualSteps {
         manualInvoice.inputTenantName(tenant);
     }
 
-    @When("admin select Jenis Invoice {string}")
-    public void admin_select_Jenis_Invoice(String type){
-        manualInvoice.selectJenisInvoice(type);
-        manualInvoice.assertChangeInvConfirmationTitle(popUpTitleChangeInvConfirmation);
-        manualInvoice.assertChangeInvConfirmationSubtitle(popUpSubtitleChangeInvConfirmation);
-        manualInvoice.clickBatalOnChangeInvConfirmation();
-        manualInvoice.selectJenisInvoice(type);
-        manualInvoice.clickLanjutkanOnChangeInvConfirmation();
+    @When("admin selects Jenis Invoice {string} when {string}")
+    public void admin_selects_Jenis_Invoice(String type, String biaya){
+        if (biaya.equalsIgnoreCase("There are Biaya Data")){
+            manualInvoice.selectJenisInvoice(type);
+            manualInvoice.assertChangeInvConfirmationTitle(popUpTitleChangeInvConfirmation);
+            manualInvoice.assertChangeInvConfirmationSubtitle(popUpSubtitleChangeInvConfirmation);
+            manualInvoice.clickBatalOnChangeInvConfirmation();
+            manualInvoice.selectJenisInvoice(type);
+            manualInvoice.clickLanjutkanOnChangeInvConfirmation();
+        } else if (biaya.equalsIgnoreCase("There is no Biaya Data")) {
+            manualInvoice.selectJenisInvoice(type);
+        }
     }
 
     @Then("empty state on the biaya {string} table is displayed")
@@ -279,6 +283,11 @@ public class InvoiceManualSteps {
         } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
             manualInvoice.assertEmptyStateBiayaSewa();
         }
+    }
+
+    @Then("the pop up confirmation is not displayed")
+    public void the_pop_up_confirmation_is_not_displayed(){
+        manualInvoice.changeInvConfirmationPopUpIsNotDisplay();
     }
 
     //---Biaya Tambahan Pop Up---//
