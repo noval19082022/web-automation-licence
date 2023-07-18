@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class TenantCommunicationPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -27,6 +29,11 @@ public class TenantCommunicationPO {
     Locator terapkanButton;
     Locator resetButton;
     Locator emptyPageTenantTrackerText;
+    Locator stateActionButton;
+    Locator stateActionButtonText;
+    Locator actionButton;
+    Locator displayDataRow;
+    Locator columName;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -37,7 +44,7 @@ public class TenantCommunicationPO {
         textProfilePenyewa = page.getByText("Profil Penyewa");
         textNamaPenyewa = page.locator(".tenant-profile__title");
         textRiwayatPencarian = page.getByText("Riwayat Pencarian Kos");
-        paginationMenuDetailTenant = page.getByTestId("tenat-tracker-pagination");
+        paginationMenuDetailTenant = page.locator(".bg-c-pagination");
         secondPagination = page.locator("button:nth-of-type(3) > span");
         penyewaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
         pilihFaseTahapanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Fase"));
@@ -45,6 +52,8 @@ public class TenantCommunicationPO {
         terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
+        actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
+        displayDataRow = page.locator(".tenant-tracker__result-text");
     }
 
     /**
@@ -198,6 +207,60 @@ public class TenantCommunicationPO {
      */
     public String getEmptyPageTenatTrackerText() {
         return playwright.getText(emptyPageTenantTrackerText);
+    }
+
+    /**
+     * Set to Tandai belum follow-up
+     * click Action Button Tandai Sudah FollowUp
+     */
+    public void setStateActionTenantCommunication(String state) {
+        stateActionButton = page.getByText(state);
+        if (playwright.waitTillLocatorIsVisible(stateActionButton, 3.0)) {
+            playwright.clickOn(stateActionButton);
+        }
+    }
+
+    /**
+     * get Text state action
+     */
+    public String getStateActionTextButton(String stateText) {
+        stateActionButtonText = page.getByText(stateText).first();
+        return playwright.getText(stateActionButtonText);
+    }
+
+    /**
+     * Click action button in tenant communication
+     */
+    public void clickActionButton() {
+        actionButton.waitFor();
+        playwright.clickOn(actionButton);
+    }
+
+    /**
+     * get Tenant Name on Main Page Filter
+     */
+    public String getTenantNameOnMainPageFilter() {
+        tenantNameOnTheFirstRow = page.locator("//*[@class='bg-c-link bg-c-link--high']").first();
+        return playwright.getText(tenantNameOnTheFirstRow);
+    }
+
+    /**
+     * Verify display data row
+     * @return true if actions column is visible
+     */
+    public boolean verifyDisplayDataRow(){
+        return playwright.waitTillLocatorIsVisible(displayDataRow);
+    }
+
+    /**
+     * Get Text of Head Table Segment by index
+     * @param index - index head table
+     * @return text of Head Table
+     */
+    public String getColumnName (int index){
+        columName = page.locator("//thead//tr//th//div//p");
+        List<Locator> elements = playwright.getLocators(columName);
+        return playwright.getText(elements.get(index));
     }
 
 }
