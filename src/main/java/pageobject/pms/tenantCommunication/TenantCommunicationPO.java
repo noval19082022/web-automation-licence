@@ -34,6 +34,10 @@ public class TenantCommunicationPO {
     Locator actionButton;
     Locator displayDataRow;
     Locator columName;
+    Locator buttonTambahCatatan;
+    Locator fieldNote;
+    Locator simpanNoteButton;
+    Locator prioritasText;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -54,6 +58,10 @@ public class TenantCommunicationPO {
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
         displayDataRow = page.locator(".tenant-tracker__result-text");
+        buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
+        fieldNote = page.getByPlaceholder("Tulis di sini...");
+        simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        prioritasText = page.locator("//a[contains(.,'prioritaskan')]").first();
     }
 
     /**
@@ -261,6 +269,56 @@ public class TenantCommunicationPO {
         columName = page.locator("//thead//tr//th//div//p");
         List<Locator> elements = playwright.getLocators(columName);
         return playwright.getText(elements.get(index));
+    }
+
+    /**
+     * click Tambah Catatan
+     */
+    public void clickOnTambahCatatan() {
+        playwright.clickOn(buttonTambahCatatan);
+    }
+
+    /**
+     * Enter Text in search bar note
+     * @param keyword is text we want to search
+     */
+    public void enterTextNote(String keyword) {
+        fieldNote.fill(keyword);
+    }
+
+    /**
+     * Click Simpan Note
+     */
+    public void clickSimpanNote() {
+        playwright.clickOn(simpanNoteButton);
+    }
+
+    /**
+     * get Text "Filter Result Note"
+     */
+    public String getFilterResultNote() {
+        return playwright.getText(prioritasText);
+    }
+
+    /**
+     * Click Prioritaskan Note
+     */
+    public void clickPrioritaskan() {
+        playwright.clickOn(prioritasText);
+    }
+
+    /**
+     * clear Note
+     */
+    public void clearNoteField() {
+        fieldNote.clear();
+    }
+
+    /**
+     * check Note is clear
+     */
+    public Boolean isFieldNoteClear() {
+        return playwright.waitTillLocatorIsVisible(prioritasText);
     }
 
 }
