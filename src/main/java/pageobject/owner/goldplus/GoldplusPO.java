@@ -1,4 +1,4 @@
-package pageobject.owner;
+package pageobject.owner.goldplus;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -23,6 +23,7 @@ public class GoldplusPO {
     Locator widgetGP;
     Locator snkGoldplusCheckbox;
     Locator weeklyPeriode;
+    Locator pelajariCaranyaButton;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -41,6 +42,7 @@ public class GoldplusPO {
         widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
+        pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
     }
 
     /**
@@ -182,6 +184,7 @@ public class GoldplusPO {
     }
 
     /**
+<<<<<<< HEAD:src/main/java/pageobject/owner/GoldplusPO.java
      * Verify jenis pembayaran (Goldplus monthlu, Goldplus weeklu, Mamiads, Mamifoto)
      * @param jenisPembayaran
      * @return text jenisPembayaran
@@ -197,5 +200,15 @@ public class GoldplusPO {
      */
     public void clickOnPeriodeWeekly() {
         playwright.clickOn(weeklyPeriode);
+
+    }
+
+    /**
+     * Click on Pelajari Caranya button
+     *
+     *
+     */
+    public void clickOnPelajariCaranyaButton() {
+        playwright.clickOn(pelajariCaranyaButton);
     }
 }

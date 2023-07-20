@@ -2,15 +2,20 @@ package steps.pms.tenantCommunication;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.pms.HomepagePO;
 import pageobject.pms.tenantCommunication.TenantCommunicationPO;
+
+import java.util.List;
+import java.util.Map;
 
 public class TenantCommunicationSteps {
     Page page = ActiveContext.getActivePage();
     TenantCommunicationPO tenantCommunication = new TenantCommunicationPO(page);
+    HomepagePO homepage = new HomepagePO(page);
 
 
     @And("user choose {string} and input {string} in the search field on main page")
@@ -91,5 +96,40 @@ public class TenantCommunicationSteps {
     @Then("user can see {string} on page")
     public void user_see_empty_data_on_page(String text){
         Assert.assertEquals(tenantCommunication.getEmptyPageTenatTrackerText(),text);
+    }
+
+    @And("user click action Button on tenant communication page")
+    public void userClickActionButtonOnTenantCommunicationPage() {
+        tenantCommunication.clickActionButton();
+    }
+
+    @And("user set the initial state to {string}")
+    public void userSetTheInitialStateTo(String state) {
+        tenantCommunication.setStateActionTenantCommunication(state);
+    }
+
+    @Then("user verify search result on main page bse contains {string}")
+    public void userVerifySearchResultOnMainPageBseContains(String stateText) {
+        Assert.assertEquals(tenantCommunication.getStateActionTextButton(stateText), stateText);
+    }
+
+    @Then("user verify nama penyewa on main page filter is {string}")
+    public void user_verify_nama_penyewa_on_main_page_filter_is(String tenantName) {
+        Assert.assertEquals(tenantCommunication.getTenantNameOnMainPageFilter(), tenantName, "Tenant Name does not match" + tenantName);
+    }
+
+    @Then("user see display data row from 20 riwayat")
+    public void user_see_display_data_row_from_20_riwayat() {
+        Assert.assertTrue(tenantCommunication.verifyDisplayDataRow());
+    }
+
+    @Then("user see at Tenant Main Page Column contains")
+    public void user_see_at_Tenant_Main_Page_Column_contains(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(tenantCommunication.getColumnName(i),content.get("Head Table"),"Table Segment should contain " + content.get("Head Table"));
+            i++;
+        }
     }
 }

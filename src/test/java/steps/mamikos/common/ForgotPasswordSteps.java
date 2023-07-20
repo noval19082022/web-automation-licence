@@ -87,11 +87,6 @@ public class ForgotPasswordSteps {
         forgotPassword.clickOnResendOtp();
     }
 
-    @Then("user redirected to {string}")
-    public void user_redirect_link(String link) {
-        Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
-    }
-
     @Then("user verify on page {string}")
     public void user_get_active_title(String title) {
         Assert.assertEquals(playwright.getActivePageTitle(), "Lupa Password Pemilik - Mamikos", "Active page title is not equal to Lupa Password Pemilik - Mamikos");

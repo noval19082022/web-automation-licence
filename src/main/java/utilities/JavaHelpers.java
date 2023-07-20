@@ -266,4 +266,55 @@ public class JavaHelpers {
         return dateFormat.format(date);
     }
 
+    /**
+     * Update time string to required timezone time string
+     *
+     * @param String actualTimeFormat Time Format for time input
+     * @param String time
+     * @param String expectedTimeFormat Time Format we want our result to be
+     * @param int    icrementDate number by what we need to increment date to
+     * @param int    increamentHour Amount of time we need to increment hour to
+     * @param int    increamentMinute Amount of time we need to increment minutes to
+     * @param int    increamentSeconds Amount of time we need to increment seconds
+     *               to
+     * @return String converted time
+     * @throws ParseException Example for date format are :
+     *                        <p>
+     *                        "yyyy MMM dd" for "2013 Nov 28"
+     *                        <p>
+     *                        "yyyyMMdd_HHmmss" for "20130131000000"
+     *                        <p>
+     *                        "yyyy MMM dd HH:mm:ss" for "2013 Jan 31 00:00:00"
+     *                        <p>
+     *                        "dd MMM yyyy" for "28 Nov 2017"
+     *                        <p>
+     *                        <p>
+     *                        <p>
+     *                        Example for time format:
+     *                        <p>
+     *                        "HH:mm:ss" for "16:00:00"(24 hr format)
+     *                        <p>
+     *                        "hh:mm:ss" for "4:00:00"(12 hr format)
+     */
+    public String updateTime(String actualTimeFormat,
+                             String time,
+                             String expectedTimeFormat,
+                             int increamentDate,
+                             int increamentHour,
+                             int increamentMinute,
+                             int increamentSeconds
+    ) throws ParseException {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        DateFormat resultDateFormat = new SimpleDateFormat(expectedTimeFormat);
+        Date date = new SimpleDateFormat(actualTimeFormat).parse(time + " " + year); // we're parsing current year
+        // incase year not passed
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, increamentDate);
+        calendar.add(Calendar.HOUR, increamentHour);
+        calendar.add(Calendar.MINUTE, increamentMinute);
+        calendar.add(Calendar.SECOND, increamentSeconds);
+        return resultDateFormat.format(calendar.getTime());
+    }
+
 }
