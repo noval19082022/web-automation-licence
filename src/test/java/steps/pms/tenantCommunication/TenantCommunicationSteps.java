@@ -115,7 +115,7 @@ public class TenantCommunicationSteps {
 
     @Then("user verify nama penyewa on main page filter is {string}")
     public void user_verify_nama_penyewa_on_main_page_filter_is(String tenantName) {
-        Assert.assertEquals(tenantCommunication.getTenantNameOnMainPageFilter(), tenantName, "Tenant Name does not match" + tenantName);
+        Assert.assertEquals(tenantCommunication.getTenantNameOnMainPageFilter(tenantName), tenantName, "Tenant Name does not match" + tenantName);
     }
 
     @Then("user see display data row from 20 riwayat")
@@ -132,4 +132,34 @@ public class TenantCommunicationSteps {
             i++;
         }
     }
+
+    @And("user fill {string} in note field")
+    public void user_fill_note_field(String keyword) {
+        tenantCommunication.clickOnTambahCatatan();
+        tenantCommunication.enterTextNote(keyword);
+        tenantCommunication.clickSimpanNote();
+    }
+
+    @Then("user verify search result on main page bse contains Prioritaskan")
+    public void user_verify_search_result_on_main_page_bse_contains_Prioritaskan() {
+        Assert.assertEquals(tenantCommunication.getFilterResultNote(), "prioritaskan");
+    }
+
+    @And("user click note prioritaskan")
+    public void user_click_Note_Prioritaskan() {
+        tenantCommunication.clickPrioritaskan();
+    }
+
+    @And("user clear note field")
+    public void user_clear_note_field() {
+        tenantCommunication.clearNoteField();
+        tenantCommunication.clickSimpanNote();
+    }
+
+    @Then("user verify search result on main page bse contains Tambah Catatan")
+    public void user_verify_search_result_on_main_page_bse_contains_Tambah_Catatan() {
+        Assert.assertFalse(tenantCommunication.isFieldNoteClear(), "note is appear");
+    }
+
+
 }

@@ -138,4 +138,5 @@ public class ChatOwnerSteps {
     public void user_click_broadcast_chat_entry_point() {
         chat.clickOnBCChatPage();
     }
+
 }

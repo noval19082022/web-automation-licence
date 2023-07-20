@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class SearchContractPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -32,6 +34,7 @@ public class SearchContractPO {
     Locator searchTextBox;
     Locator invoiceEl;
     Locator detailInvoiceEl;
+    Locator tableHeader;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -364,5 +367,14 @@ public class SearchContractPO {
         playwright.clickOn(invoiceEl);
         detailInvoiceEl = page.locator("//td[1]/a");
         playwright.clickOn(detailInvoiceEl);
+    }
+
+    /**
+     * check table header is visible or not
+     * @param headerName refer to table header name
+     */
+    public void isTableHeaderVisible(String headerName) {
+        tableHeader = page.locator("//th[text()='" + headerName + "']");
+        assertThat(tableHeader).isVisible();
     }
 }

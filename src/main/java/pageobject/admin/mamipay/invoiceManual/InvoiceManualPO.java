@@ -640,6 +640,13 @@ public class InvoiceManualPO {
         lanjutkanBtnOnChangeInvConfirmation.click();
     }
 
+    /**
+     * Assert Change Invoice Confirmation Pop Up
+     */
+    public void changeInvConfirmationPopUpIsNotDisplay(){
+        assertThat(popUpChangeInvConfirmTitle).isHidden();
+    }
+
     //---Biaya Tambahan---//
     /**
      * Click Jenis Invoice - Biaya Tambahan
