@@ -1,8 +1,8 @@
 @regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization
 Feature: Gold Plus
 
-  @TEST_LIMO-151 @chooseGP @continue
-  Scenario: Owner choose gold plus 1
+  @TEST_LIMO-1661 @chooseGP @continue
+  Scenario: [Goldplus][Owner Dashboard][Widget GP] Check owner can select package GP
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |

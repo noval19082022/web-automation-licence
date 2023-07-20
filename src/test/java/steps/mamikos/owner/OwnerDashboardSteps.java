@@ -54,4 +54,11 @@ public class OwnerDashboardSteps {
     public void owner_wants_to_see_all_notification() {
         ownerDashboardPO.clicOnSeeAllNotification();
     }
+
+    @Then("validate that owner have {string}")
+    public void validate_that_owner_have(String gplabel) {
+        Assert.assertEquals(ownerDashboardPO.getTextGpLabel(), gplabel, "GP Level is not equal to " + gplabel);
+
+    }
+
 }

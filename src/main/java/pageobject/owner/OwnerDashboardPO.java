@@ -29,6 +29,7 @@ public class OwnerDashboardPO {
     Locator gpWidgetButton;
     Locator helpCenter;
     Locator seeAllNotification;
+    Locator gpLevel;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -51,6 +52,8 @@ public class OwnerDashboardPO {
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
         helpCenter = page.locator("//*[text()='Pusat Bantuan']");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
+        gpLevel = page.locator(".membership-card__label");
+
     }
 
     /**
@@ -182,6 +185,15 @@ public class OwnerDashboardPO {
     public void clicOnSeeAllNotification() {
         playwright.waitTillLocatorIsVisible(seeAllNotification);
         playwright.clickOn(seeAllNotification);
+    }
+
+    /**
+     * Get Text gp label
+     *
+     * @return gpLevel
+     */
+    public String getTextGpLabel() {
+        return playwright.getText(gpLevel);
     }
 
 
