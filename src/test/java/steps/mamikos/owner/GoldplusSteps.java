@@ -40,7 +40,6 @@ public class GoldplusSteps {
         }
         playwright.hardWait(3000);
         if (playwright.isTextDisplayed("1 Minggu") == true) {
-            System.out.println("weekly");
             goldplus.clickOnPeriodeWeekly();
         }
         playwright.hardWait(3000);

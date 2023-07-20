@@ -184,8 +184,7 @@ public class GoldplusPO {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/pageobject/owner/GoldplusPO.java
-     * Verify jenis pembayaran (Goldplus monthlu, Goldplus weeklu, Mamiads, Mamifoto)
+     * Verify jenis pembayaran (Goldplus monthly, Goldplus weekly, Mamiads, Mamifoto)
      * @param jenisPembayaran
      * @return text jenisPembayaran
      */
