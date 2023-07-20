@@ -292,6 +292,11 @@ public class ChatOwnerPO {
         playwright.clickOn(broadcastChatBtn);
     }
 
+    /**
+     * Click close FTUE on chatlist when kuota mars is 0
+     *
+     *
+     */
     public void dismissFTUEMarsKuotaNol() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
     }
