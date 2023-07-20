@@ -39,7 +39,6 @@ public class OwnerDashboardSteps {
         Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
 
-<<<<<<< HEAD
     @When("owner click Pusat Bantuan")
     public void owner_click_pusat_bantuan() {
         ownerDashboardPO.clickHelpCenterOwner();
@@ -62,10 +61,10 @@ public class OwnerDashboardSteps {
 
     }
 
-=======
     @When("owner click close icon pop up")
     public void ownerClickCloseIconPopUp() {
         plawright.clickOnTextButton("close");
     }
->>>>>>> develop
-}
+
+    }
+
