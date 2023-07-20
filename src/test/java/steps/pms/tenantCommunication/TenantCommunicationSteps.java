@@ -115,7 +115,7 @@ public class TenantCommunicationSteps {
 
     @Then("user verify nama penyewa on main page filter is {string}")
     public void user_verify_nama_penyewa_on_main_page_filter_is(String tenantName) {
-        Assert.assertEquals(tenantCommunication.getTenantNameOnMainPageFilter(), tenantName, "Tenant Name does not match" + tenantName);
+        Assert.assertEquals(tenantCommunication.getTenantNameOnMainPageFilter(tenantName), tenantName, "Tenant Name does not match" + tenantName);
     }
 
     @Then("user see display data row from 20 riwayat")
