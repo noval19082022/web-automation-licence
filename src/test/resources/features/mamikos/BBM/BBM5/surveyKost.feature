@@ -8,7 +8,7 @@ Feature: Survey Tenant
       | phone stag  | phone prod  | password  |
       | 0890867321216 | 08100000622 | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    And user click on "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini"
     And user batalkan survey if the survey already submitted
     And user input time survey "10:00"
     And user click on "Kirim form" button
@@ -21,7 +21,7 @@ Feature: Survey Tenant
       | phone stag  | phone prod  | password  |
       | 0890867321216 | 08100000622 | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    And user click on "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini"
     And user change schedule survey if the survey already submitted
     And user input time survey "8:00"
     And user click on Ubah Jadwal button
@@ -34,7 +34,7 @@ Feature: Survey Tenant
       | phone stag  | phone prod  | password  |
       | 0890867321216 | 08100000622 | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    And user click on "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini"
     And user batalkan survey if the survey already submitted
     Then chat room appear with latest message "Survei Kost Adi Auto SinggahSini Tobelo Halmahera Utara dibatalkan."
 

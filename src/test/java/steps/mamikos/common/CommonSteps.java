@@ -17,7 +17,7 @@ public class CommonSteps {
     TenantLoginPO users = new TenantLoginPO(page);
     HomePO home = new HomePO(page);
 
-    @When("user/owner/tenant click on {string}")
+    @When("user/owner/tenant click {string}")
     public void user_click(String text) {
         playwright.hardWait(5);
         playwright.clickOnText(text);
