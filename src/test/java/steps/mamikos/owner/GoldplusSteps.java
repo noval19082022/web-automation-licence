@@ -13,6 +13,7 @@ import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
+import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -28,6 +29,7 @@ public class GoldplusSteps {
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
     PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
+    MamiAdsPO mamiads = new MamiAdsPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
@@ -223,4 +225,55 @@ public class GoldplusSteps {
             panduanGP.clickOnPreviousButton();
         }
     }
+
+    @When("owner clicks on coba sekarang button")
+    public void ownerClickOnCobaSekarangButton() {
+        panduanGP.clickCobaSekarangButton();
+    }
+
+    //------ GP Onboarding Pop-Up ------//
+    @Then("owner can see gp onboarding swiper number {int} is selected")
+    public void ownerCanSeeGpOnboardingSwiperNumberSwiperNumberIsSelected(int swiperNumber) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpActiveCounter(), swiperNumber);
+    }
+
+    @Then("owner can see gp onboarding pop-up text head {string} is selected")
+    public void ownerCanSeeGpOnboardingPopUpTextHeadTextHeadIsSelected(String textHead) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpTextHead(), textHead);
+    }
+
+    @Then("owner can see gp onboarding pop-up text body {string} is selected")
+    public void ownerCanSeeGpOnboardingPopUpTextBodyTextBodyIsSelected(String textBody) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpTextBody(), textBody);
+    }
+
+    @Then("owner can see gp onboarding pop-up image alt text {string} is visible")
+    public void ownerCanSeeGpOnboardingPopUpImageAltTextImageAltTextIsVisible(String imageAltValue) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpImageAltAttributeValue(), imageAltValue);
+    }
+
+    @When("owner click on next button on gp onboarding pop-up to go to slide number {int}")
+    public void ownerClickOnNextButtonOnGpOnboardingPopUpToGoToSlideNumberSwiperNumber(int swiperNumber) {
+        if (swiperNumber <= 6) {
+            mamiads.clickGpOnboardingpopUpNextButton();
+        }
+    }
+
+    @Then("owner can see swiper left or previous button on gold plus onboarding pop-up is disabled")
+    public void ownerCanSeeSwiperLeftOrPreviousButtonOnGoldPlusOnboardingPopUpIsDisabled() {
+        Assert.assertTrue(mamiads.isGpOnboardingpopUpPreviousButtonDisabled());
+    }
+
+    @Then("owner can see swiper right or next button on gold plus onboarding pop-up is disabled")
+    public void ownerCanSeeSwiperRightOrNextButtonOnGoldPlusOnboardingPopUpIsDisabled() {
+        Assert.assertTrue(mamiads.isGpOnboardingpopUpNextButtonDisabled());
+    }
+
+    @When("onwer click on previous button on gp onboarding pop-up to go to slide number {int}")
+    public void onwerClickOnPreviousButtonOnGpOnboardingPopUpToGoToSlideNumberSwiperNumber(int swiperNumber) {
+        if (swiperNumber >= 2) {
+            mamiads.clickGpOnboardingpopUpPreviousButton();
+        }
+    }
+    //------ GP Onboarding Pop-Up ------//
 }

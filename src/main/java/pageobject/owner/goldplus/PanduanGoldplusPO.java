@@ -14,6 +14,7 @@ public class PanduanGoldplusPO {
     Locator swipperNextButton;
     Locator swipperPreviousButton;
     Locator selectedSwiperText;
+    Locator cobaSekarangButton;
 
     public PanduanGoldplusPO(Page page) {
         this.page = page;
@@ -23,6 +24,7 @@ public class PanduanGoldplusPO {
         swipperNextButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-right"));
         swipperPreviousButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-left"));
         selectedSwiperText = page.locator(".gp-swiper .gp-swiper__step:not(.gp-swiper__step--dim) p");
+        cobaSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
     }
 
     /**
@@ -75,7 +77,17 @@ public class PanduanGoldplusPO {
         return swipperPreviousButton.getAttribute("disabled") != null;
     }
 
+    /**
+     * Click on previous button on gp swipper to slide to left item
+     */
     public void clickOnPreviousButton() {
         playwright.clickOn(swipperPreviousButton);
+    }
+
+    /**
+     * Click on coba sekarang button
+     */
+    public void clickCobaSekarangButton() {
+        playwright.clickOn(cobaSekarangButton);
     }
 }
