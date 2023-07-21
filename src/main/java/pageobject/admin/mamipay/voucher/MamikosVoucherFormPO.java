@@ -54,6 +54,9 @@ public class MamikosVoucherFormPO {
     Locator imageCampaignUploaded;
     Locator campaignTnCInput;
     Locator campaignTitleInput;
+    Locator updateMassVoucherButton;
+    Locator activeCheckbox;
+    Locator alertMessageDisplayed;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -63,7 +66,7 @@ public class MamikosVoucherFormPO {
         applyKost = page.locator(applyKostContent);
         kostNameApplied = page.getByRole(AriaRole.LISTITEM).getByText("×");
         kostNameInput = page.getByPlaceholder("Search Kost by name...");
-        editMassVoucherButton = playwright.locatorByRoleSetName(locator.roleButton, "Edit Mass Voucher");
+        editMassVoucherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Mass Voucher"));
         yesDoItButton = playwright.locatorByRoleSetName(locator.roleButton, "Yes, Do It!");
         professionOption = page.locator("select[name='applicable_group[profession]']");
         inputMinimumPrice = page.locator("input[name='voucher_min_amount']");
@@ -92,7 +95,9 @@ public class MamikosVoucherFormPO {
         imageCampaignUploaded = page.locator("#campaignImage");
         campaignTnCInput = page.locator(".note-editable");
         campaignTitleInput = page.locator("input[name=\"public_campaign\\[title\\]\"]");
-
+        updateMassVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        activeCheckbox = page.locator("//b[normalize-space()='Active']//preceding-sibling::input");
+        alertMessageDisplayed = page.getByText("Voucher AUTOVINVALID updated");
     }
 
     /**
@@ -457,4 +462,20 @@ public class MamikosVoucherFormPO {
         playwright.hardWait(1000);
     }
 
+    /**
+     * Click on edit Mass voucher button
+     */
+    public void activateMassVoucher() {
+        playwright.clickOn(updateMassVoucherButton);
+        playwright.waitTillLocatorIsVisible(activeCheckbox);
+        playwright.clickOn(activeCheckbox);
+        playwright.clickOn(editMassVoucherButton);
+        playwright.clickOn(yesDoItButton);
+    }
+    /**
+     * this method will be information activities update voucher
+     */
+    public Boolean isAlertMessageDisplayed(){
+        return playwright.waitTillLocatorIsVisible(alertMessageDisplayed);
+    }
 }
