@@ -108,7 +108,7 @@ public class ChatTenantPO {
      */
     public String getLatestChatText() {
         playwright.pageScrollHeightToBottom();
-        playwright.waitTillLocatorIsVisible(latestChat);
+        playwright.hardWait(5);
         return playwright.getText(latestChat);
 
     }
@@ -223,8 +223,9 @@ public class ChatTenantPO {
      *
      */
     public void clickOnSendFormButton(String send) {
-        String inputTextbox = "//button[normalize-space()='"+send+"']";
+        String inputTextbox = "//*[normalize-space()='"+send+"']";
         ElementHandle element = page.querySelector(inputTextbox);
+        playwright.hardWait(5000);
         element.click();
     }
 
