@@ -30,6 +30,7 @@ public class OwnerDashboardPO {
     Locator helpCenter;
     Locator seeAllNotification;
     Locator gpLevel;
+    Locator kuotaChat;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -53,6 +54,7 @@ public class OwnerDashboardPO {
         helpCenter = page.locator("//*[text()='Pusat Bantuan']");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpLevel = page.locator(".membership-card__label");
+        kuotaChat = page.getByTestId("popperReference").getByText("1 chat room");
 
     }
 
@@ -196,5 +198,15 @@ public class OwnerDashboardPO {
         return playwright.getText(gpLevel);
     }
 
+
+    /**
+     * Verify kuota chat when open chatlist
+     *
+     * @return kuotaChat
+     */
+    public String getKuotaChat() {
+        playwright.waitTillLocatorIsVisible(kuotaChat);
+        return playwright.getText(kuotaChat);
+    }
 
 }

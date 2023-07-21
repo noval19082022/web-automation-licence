@@ -66,5 +66,17 @@ public class OwnerDashboardSteps {
         plawright.clickOnTextButton("close");
     }
 
+    @Then("user verify text {string} on section info untuk anda is appear")
+    public void user_verify_text_on_section_info_untuk_anda_is_appear(String textInfoUntukAnda) {
+       plawright.clickOnText(textInfoUntukAnda);
     }
+
+    @Then("user verify kuota chat is {string}")
+    public void user_verify_kuota_chat_is(String kuotaText) {
+        Assert.assertEquals(ownerDashboardPO.getKuotaChat(),kuotaText,"kuota chat doesnt match");
+        page.reload();
+    }
+
+
+}
 
