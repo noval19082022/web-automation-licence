@@ -15,5 +15,3 @@ Feature: Owner Dashboard GP
     And owner navigates to "/"
     Then owner click "BARU: Chat tanpa batas dengan berlangganan paket GoldPlus!"
     * user should redirect to link "https://mamikos.com/info/mamikos-goldplus-2/"
-
-

@@ -29,7 +29,6 @@ public class OwnerDashboardPO {
     Locator gpWidgetButton;
     Locator seeAllNotification;
     Locator gpStatus;
-    Locator kuotaChat;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -52,7 +51,6 @@ public class OwnerDashboardPO {
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatus = page.locator(".membership-card__label");
-        kuotaChat = page.getByTestId("popperReference").getByText("1 chat room");
 
     }
 
@@ -186,17 +184,6 @@ public class OwnerDashboardPO {
      */
     public String getTextGPStatus() {
         return playwright.getText(gpStatus);
-    }
-
-
-    /**
-     * Verify kuota chat when open chatlist
-     *
-     * @return kuotaChat
-     */
-    public String getKuotaChat() {
-        playwright.waitTillLocatorIsVisible(kuotaChat);
-        return playwright.getText(kuotaChat);
     }
 
 }
