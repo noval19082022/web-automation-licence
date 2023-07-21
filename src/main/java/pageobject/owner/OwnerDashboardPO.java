@@ -27,9 +27,8 @@ public class OwnerDashboardPO {
     Locator tolakButton;
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
-    Locator helpCenter;
     Locator seeAllNotification;
-    Locator gpLevel;
+    Locator gpStatus;
     Locator kuotaChat;
 
     public OwnerDashboardPO(Page page) {
@@ -51,9 +50,8 @@ public class OwnerDashboardPO {
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
-        helpCenter = page.locator("//*[text()='Pusat Bantuan']");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
-        gpLevel = page.locator(".membership-card__label");
+        gpStatus = page.locator(".membership-card__label");
         kuotaChat = page.getByTestId("popperReference").getByText("1 chat room");
 
     }
@@ -174,14 +172,6 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on pusat bantuan owner
-     */
-    public void clickHelpCenterOwner() {
-        playwright.pageScrollUntilElementIsVisible(helpCenter);
-        playwright.clickOn(helpCenter);
-    }
-
-    /**
      * Click on see all notification
      */
     public void clicOnSeeAllNotification() {
@@ -190,12 +180,12 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Get Text gp label
+     * Verify GP Status ( Menunggu pembayaran, Sedang Diproses, Goldplus 1, Goldplus 2)
      *
-     * @return gpLevel
+     * @return text gpStatus
      */
-    public String getTextGpLabel() {
-        return playwright.getText(gpLevel);
+    public String getTextGPStatus() {
+        return playwright.getText(gpStatus);
     }
 
 

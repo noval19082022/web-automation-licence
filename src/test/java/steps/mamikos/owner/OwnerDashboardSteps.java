@@ -39,11 +39,6 @@ public class OwnerDashboardSteps {
         Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
 
-    @When("owner click Pusat Bantuan")
-    public void owner_click_pusat_bantuan() {
-        ownerDashboardPO.clickHelpCenterOwner();
-    }
-
     @When("owner open notification icon")
     public void owner_open_notification_icon() {
        ownerDashboardPO.clickNotificationButton();
@@ -56,8 +51,8 @@ public class OwnerDashboardSteps {
     }
 
     @Then("validate that owner have {string}")
-    public void validate_that_owner_have(String gplabel) {
-        Assert.assertEquals(ownerDashboardPO.getTextGpLabel(), gplabel, "GP Level is not equal to " + gplabel);
+    public void validate_that_owner_have(String gpStatus) {
+        Assert.assertEquals(ownerDashboardPO.getTextGPStatus(), gpStatus, "GP Level is not equal to " + gpStatus);
 
     }
 

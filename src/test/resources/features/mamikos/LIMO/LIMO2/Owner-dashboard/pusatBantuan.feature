@@ -8,7 +8,7 @@ Feature: [Owner][Pusat Bantuan Owner] Owner accsess page pusat bantuan
       | phone stag | phone prod | password |
       | 083176408311 | 0          | mamikosignite |
     And user clicks on the close button
-    When owner click Pusat Bantuan
+    When owner click "Pusat Bantuan"
     Then user should redirect to link "https://help.mamikos.com/pemilik"
 
 
