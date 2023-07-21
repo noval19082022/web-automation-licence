@@ -38,4 +38,9 @@ public class OwnerDashboardSteps {
     public void ownerCanSeePengajuanSewaDetailOnDashboard() {
         Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
+
+    @When("owner click close icon pop up")
+    public void ownerClickCloseIconPopUp() {
+        plawright.clickOnTextButton("close");
+    }
 }

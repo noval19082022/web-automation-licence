@@ -59,4 +59,12 @@ public class sidebarMenuPO {
         tenantCommunicationButton.waitFor();
         tenantCommunicationButton.click();
     }
+
+    /**
+     * click Survey Tracker Menu
+     */
+    public void clickSurveyTrackerMenu() {
+        survetTrackerButton.waitFor();
+        survetTrackerButton.click();
+    }
 }

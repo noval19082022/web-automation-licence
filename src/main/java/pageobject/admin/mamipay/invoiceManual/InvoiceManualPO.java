@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import data.mamikos.Mamikos;
+import utilities.JavaHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,6 +58,10 @@ public class InvoiceManualPO {
     private Locator cancelOnDelConfirmation;
     private Locator deleteOnDelConfirmation;
     private Locator editInvManBtn;
+    private Locator popUpChangeInvConfirmTitle;
+    private Locator popUpChangeInvConfirmSubtitle;
+    private Locator batalBtnOnChangeInvConfirmation;
+    private Locator lanjutkanBtnOnChangeInvConfirmation;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -75,6 +80,8 @@ public class InvoiceManualPO {
     private Locator jumlahBiayaErrMsg;
     private Locator lainnyaField;
     private Locator errMsgLainnya;
+    private Locator durasiBiayachar;
+    private Locator counterText;
     // Tambah Biaya Pop Up
 
     // Buat dan Kirim Pop Up
@@ -128,6 +135,10 @@ public class InvoiceManualPO {
         cancelOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
         deleteOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         editInvManBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("edit"));
+        popUpChangeInvConfirmTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Yakin ingin mengganti jenis invoice ini?"));
+        popUpChangeInvConfirmSubtitle = page.getByText("Anda hanya dapat memilih 1 jenis invoice. Perubahan jenis invoice akan menghapus");
+        batalBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        lanjutkanBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -158,6 +169,7 @@ public class InvoiceManualPO {
         descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+
     }
 
     /**
@@ -598,6 +610,43 @@ public class InvoiceManualPO {
         }
     }
 
+    /**
+     * Assert Change Invoice Confirmation Title
+     * @param title
+     */
+    public void assertChangeInvConfirmationTitle(String title) {
+        assertThat(popUpChangeInvConfirmTitle).hasText(title);
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Subtitle
+     * @param subtitle
+     */
+    public void assertChangeInvConfirmationSubtitle(String subtitle){
+        assertThat(popUpChangeInvConfirmSubtitle).hasText(subtitle);
+    }
+
+    /**
+     * Click Batal button on Change Invoice Confirmation
+     */
+    public void clickBatalOnChangeInvConfirmation(){
+        batalBtnOnChangeInvConfirmation.click();
+    }
+
+    /**
+     * Click Lanjutkan button on Change Invoice Confirmation
+     */
+    public void clickLanjutkanOnChangeInvConfirmation(){
+        lanjutkanBtnOnChangeInvConfirmation.click();
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Pop Up
+     */
+    public void changeInvConfirmationPopUpIsNotDisplay(){
+        assertThat(popUpChangeInvConfirmTitle).isHidden();
+    }
+
     //---Biaya Tambahan---//
     /**
      * Click Jenis Invoice - Biaya Tambahan
@@ -847,6 +896,24 @@ public class InvoiceManualPO {
      */
     public void clearLainnyaField() {
         lainnyaField.clear();
+    }
+
+    /**
+     * Assert Durasi Biaya
+     * @param char255
+     */
+    public void assertDurasiBiaya(String char255) {
+        durasiBiayachar = page.getByPlaceholder("Contoh: 2 hari ");
+        assertThat(durasiBiayachar).hasValue(char255);
+    }
+
+    /**
+     * Assert counter text
+     * @param counter
+     */
+    public void assertCounterTxt(String counter) {
+        counterText = page.getByText("255 / 255");
+        assertThat(counterText).hasText(counter);
     }
     //---End of Biaya Tambahan---//
 }

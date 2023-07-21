@@ -16,6 +16,7 @@ public class BroadcastChatSteps {
     @Then("user verify pop up message {string} is appear")
     public void user_verify_pop_up_message_is_appear(String message) {
         Assert.assertEquals(broadcast.getWarningBroadcastText(), message, "Warning Message is different");
+        playwright.hardWait(3000);
     }
 
     @When("user enter text {string} on Broadcast list kos")

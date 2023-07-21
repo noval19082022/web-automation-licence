@@ -153,3 +153,16 @@ Feature: Invoice Manual - Biaya Tambahan
       | ada selisih di invoicenya     |
       | pindah                        |
       | tenant 2 Taylor Pindah kamar  |
+      | Biaya Sewa                    |
+      | BIAYA SEWA                    |
+      | biaya sewa                    |
+      | BiAya sEwA                    |
+      |  Biaya Sewa                   |
+      | biaya    sewa                 |
+      | biaya sewa                    |
+      | Ini Biaya Sewa                |
+      | biaya sewa &                  |
+      | biayasewa                     |
+      | biayaSewa                     |
+      | biay4 s3wa                    |
+      | biaya sevva                   |

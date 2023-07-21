@@ -271,9 +271,9 @@ public class PaymentSteps {
         invoice.paymentOVO("081280003230");
     }
 
-    @When("tenant make bill payments using ovo")
-    public void tenantMakeBillPaymentsUsingOvo() {
-        invoice.choosePaymentUsingOVO();
+    @When("tenant make bill payments using {string}")
+    public void tenantMakeBillPaymentsUsingOvo(String method) {
+        invoice.choosePaymentUsing(method);
     }
 
 
@@ -289,4 +289,15 @@ public class PaymentSteps {
         int totalAmount = invoice.getSubTotal();
         Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
     }
+
+    @Then("tenant can see TnC {string} on invoice")
+    public void tenant_can_see_tnc_x_on_invoice(String tnc) {
+        Assert.assertEquals(invoice.getTnCInvoiceFullText(), tnc, "not the same text");
+    }
+
+    @And("tenant click text Syarat dan Ketentuan Umum on invoice")
+    public void tenant_click_text_x_on_invoice() {
+        invoice.clickTnCInvoice();
+    }
+
 }

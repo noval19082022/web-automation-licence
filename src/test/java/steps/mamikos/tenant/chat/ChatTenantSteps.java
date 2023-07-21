@@ -8,12 +8,13 @@ import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.tenant.chat.ChatTenantPO;
+import utilities.PlaywrightHelpers;
 
 import java.util.List;
 
 public class ChatTenantSteps {
     Page page = ActiveContext.getActivePage();
-
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     ChatTenantPO chat = new ChatTenantPO(page);
     ChatOwnerPO chatOwner = new ChatOwnerPO(page);
 
@@ -78,5 +79,50 @@ public class ChatTenantSteps {
     @And("user click Ajukan Sewa {string} from chat room")
     public void userClickAjukanSewaFromChatRoom(String dateToday) {
         chat.clickOnAjukanSewaChatRoomButton(dateToday);
+    }
+
+    @And("user batalkan survey if the survey already submitted")
+    public void user_cancel_survey() {
+        if (playwright.isButtonWithTextDisplayed("Ubah Jadwal",20)) {
+            chat.clickOnUbahJadwalOnHeaderChatRoomButton();
+            chat.clickOnBatalkanSurveiButton();
+            chat.clickOnSurveyKosButton();
+        }else {
+            chat.clickOnSurveyKosButton();
+        }
+    }
+
+    @And("user change schedule survey if the survey already submitted")
+    public void user_change_schedule_survey() {
+            chat.clickOnUbahJadwalOnHeaderChatRoomButton();
+        }
+    @And("user click on survey kos button")
+    public void user_click_on_survey_kos_button() {
+        chat.clickOnSurveyKosButton();
+    }
+
+    @And("user input time survey {string}")
+    public void user_input_time_survey(String time) {
+        chat.inputTimeSurvey(time);
+    }
+
+    @And("user click on chat button in top bar tenant home page")
+    public void userClickOnChatButtonInTopBarTenantHomePage() {
+        chat.clickOnChatTenant();
+    }
+
+    @And("user click on {string} button")
+    public void userClickOnSendFormButton(String send) {
+        chat.clickOnSendFormButton(send);
+    }
+
+    @And("user click on Ubah Jadwal button")
+    public void userClickOnUbahJadwalButton() {
+        chat.clickOnConfirmationUbahJadwalButton();
+    }
+
+    @Then("question {string} is not displayed")
+    public void question_is_not_displayed(String question){
+        Assert.assertFalse(chat.isQuestionDisplayed(question), "Question is not displayed");
     }
 }

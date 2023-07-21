@@ -19,6 +19,7 @@ public class CommonSteps {
 
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
+        playwright.hardWait(5);
         playwright.clickOnText(text);
     }
 
@@ -50,12 +51,12 @@ public class CommonSteps {
 
     @Then("The system should display {string} button as enabled")
     public void the_system_should_display_button_as_enabled(String buttonName) {
-        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
     }
 
     @Then("The system should display {string} button as disabled")
     public void the_system_should_display_button_as_disabled(String buttonName) {
-        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '"+buttonName+"')]"));
+        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
     }
 
     @Then("user redirected to {string}")

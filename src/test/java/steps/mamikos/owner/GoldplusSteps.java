@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
@@ -28,6 +29,7 @@ public class GoldplusSteps {
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
+    BroadcastChatPO broadcast = new BroadcastChatPO(page);
     PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
     MamiAdsPO mamiads = new MamiAdsPO(page);
 
@@ -38,6 +40,11 @@ public class GoldplusSteps {
         } else{
             navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
         }
+        playwright.hardWait(3000);
+        if (playwright.isTextDisplayed("1 Minggu") == true) {
+            goldplus.clickOnPeriodeWeekly();
+        }
+        playwright.hardWait(3000);
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
@@ -120,7 +127,7 @@ public class GoldplusSteps {
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
         playwright.clickOnTextButton("Lihat Invoice");
-        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 3000));
     }
 
     @Then("user see Title on page {string} is {string} with message:")
@@ -180,6 +187,36 @@ public class GoldplusSteps {
         playwright.clickOnText("Bayar Sekarang");
     }
 
+    @Then("owner see jenis pembayaran {string}")
+    public void ownerSeeJenisPembayaran(String jenisPembayaran) {
+        Assert.assertEquals(goldplus.getJenisPembayaran(jenisPembayaran), jenisPembayaran, "Jenis Pembayaran doesnt match!");
+    }
+
+    @Then("verify button on broadcast page")
+    public void verifyButtonOnBroadcastPage() {
+        playwright.hardWait(3000);
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
+    }
+
+    @And("owner click lanjut bayar button on chatlist")
+    public void ownerClickLanjutBayarButtonOnChatlist(){
+        chat.clickChatOwner();
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
+    @And("owner click lanjut bayar button on chatrooms {string}")
+    public void ownerClickLanjutBayarButtonOnChatrooms(String tenantName) {
+        chat.clickChatOwner();
+        chat.dismissFTUEMars();
+        chat.dismissFTUEMarsKuotaNol();
+        broadcast.clickOnCloseTooltip();
+        playwright.hardWait(3000);
+        playwright.clickOnTextButton(tenantName);
+        playwright.hardWait(3000);
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
     //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
@@ -218,7 +255,6 @@ public class GoldplusSteps {
     @Then("owner can see swiper left or previous button is disabled")
     public void ownerCanSeeSwiperLeftOrPreviousButtonIsDisabled() {
         Assert.assertTrue(panduanGP.isPreviousButtonDisabled());
-        page.pause();
     }
 
     @When("owner click on previous button to go to slide number {int}")
@@ -305,6 +341,5 @@ public class GoldplusSteps {
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnMemantauPerformaKosButton();
-        page.pause();
     }
 }

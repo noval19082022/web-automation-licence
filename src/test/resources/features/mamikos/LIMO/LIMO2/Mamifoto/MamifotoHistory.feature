@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto
+@LIMO2 @Mamifoto @MamifotoHistory
 
 Feature: Owner can see MamiFoto Purchase History
 
@@ -14,32 +14,33 @@ Feature: Owner can see MamiFoto Purchase History
     * owner click riwayat paket button
     * owner see Riwayat MamiFoto purchase page
 
-  @continue
+  @checkDoesntHaveTransaction @continue
   Scenario: Owner didnt have any transaction in Dalam proses Riwayat screen tab
     When owner click tab Dalam Proses at riwayat page
     Then owner see description "Belum Ada Transaksi"
 
-  @continue
+  @checkHistorySuccsessPaid @continue
   Scenario: Owner see MamiFoto detail in MamiFoto Purchase with status "Pembayaran Berhasil"
     When owner click tab Selesai at riwayat page
     * owner click Lihat Detail Transaksi with status "MamiFoto A Non GP Pembayaran Berhasil"
     Then owner see status pembelian page
 
-  @continue
+  @checkBacaPanduan @continue
   Scenario: Owner see "baca panduan" MamiFoto after complete purchase
     And owner click Baca Panduan button
     Then owner see detail panduan pop up
 
-  @continue
+  @checkWAredirect @continue
   Scenario: Owner click "Hubungi Kami" MamiFoto after complete purchase
     When click Hubungi Kami button
     Then owner connected to WA CS Mamikos "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"
 
-  @continue
+  @checkOldProphoto @continue
     Scenario: Owner has at least one invoice old Prophoto packages or new MamiFoto packages
     When owner set active page to 0
     * owner click Lihat Detail Transaksi old Pro Photo with status "Pro Photo Pembayaran Berhasil"
     Then owner see status pembelian page
+    And owner should successfully log out
 
   @MamifotoExpired @TEST_LIMO-3787 @declarative @listing-monetization @reviewed @Automated @web @playWright
     Scenario: Owner see MamiFoto detail in MamiFoto Purchase with status "Kadaluarsa"

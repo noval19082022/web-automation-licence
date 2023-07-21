@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class MamifotoPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -56,6 +58,7 @@ public class MamifotoPO {
     Locator doesntHaveTransactionDescText;
     Locator seeDetailTransactionExpired;
     Locator expiredPaymentMamifotoText;
+    Locator lihatTagihanTableMamifoto;
 
 
     //Locator Mamifoto at Status Pembelian Page
@@ -115,7 +118,7 @@ public class MamifotoPO {
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
         this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
-        this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
+        this.tabSelesaiMamifoto = page.locator("//a[contains(.,'Selesai')]");
         this.succsesPaymentTextMamifoto = page.getByText("MamiFoto A Non GP Pembayaran Berhasil");
         this.seeDetailTransactionMamifoto =  page.getByRole(AriaRole.BUTTON).nth(1);
         this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
@@ -139,6 +142,7 @@ public class MamifotoPO {
         this.buttonBayarSekarang =  page.getByTestId("mamifoto-button-pay");
         this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
         this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
+        this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
 
     }
 
@@ -375,7 +379,9 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at riwayat page mamifoto
      */
     public void clickOnSeeDetailTransactionMamifoto() {
-        seeDetailTransactionMamifoto.click();
+        Locator element = page.locator("//div[@id='mamifoto-history-done']//button");
+        List<Locator> elements = playwright.getLocators(element);
+        elements.get(1).click();
     }
 
     /**
@@ -430,7 +436,9 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at riwayat page prophoto
      */
     public void clickOnSeeDetailTransactionProphoto() {
-        seeDetailTransactionProphoto.click();
+        this.seeDetailTransactionProphoto = page.locator("//div[@id='mamifoto-history-done']//button");
+        List<Locator> elements = playwright.getLocators(seeDetailTransactionProphoto);
+        elements.get(1).click();
     }
 
     /**
@@ -546,6 +554,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderInvoiceisAppear() {
+        playwright.waitTillLocatorIsVisible(headerInvoiceMamifoto,3000.0);
         return headerInvoiceMamifoto.isVisible();
     }
 
@@ -557,6 +566,61 @@ public class MamifotoPO {
     public String getTextDiscountGPInvoiceMamifoto() {
         return playwright.getText(textDiskonGPInvoiceMamifoto);
     }
+
+    /**
+     * Check Diskon Mamifoto Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderDiscountGP() {
+        return headerDiscountGP.isVisible();
+    }
+
+    /**
+     * Check discount member Gp at detail tagihan page
+     *
+     *  @return boolean type, appear true otherwise false
+     */
+    public boolean discountMemberGPDetailTagihan() {
+        return textDiscountGP.isVisible();
+    }
+
+    /**
+     * check discount amount Gp at detail tagihan page
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean discountAmountGPDetailTagihan() {
+        return priceDiscountGP.isVisible();
+    }
+
+    /**
+     * check discount Gp at invoice page
+     *
+     * @return string
+     */
+    public boolean discountGPInvoiceMamifoto() {
+        playwright.waitTillLocatorIsVisible(textDiskonGPInvoiceMamifoto,3000.0);
+        return textDiskonGPInvoiceMamifoto.isVisible();
+    }
+
+    /**
+     * Get unpaid invoice Mamifoto
+     * @return int, count of unpaid invoice Mamifoto
+     *
+     */
+    public int getCountMamifotoInvoiceUnpaid() {
+        return playwright.getLocators(lihatTagihanTableMamifoto).size();
+    }
+
+    /**
+     * Click on Lihat detail transaksi at first riwayat page
+     */
+    public void clickOnSeeFirstDetailTransaction() {
+        Locator invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
+        invoiceUnpaid.click();
+    }
+
 
 }
 
