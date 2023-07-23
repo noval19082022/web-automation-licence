@@ -8,11 +8,9 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321205 | 0890867321205 |
-    And admin terminate contract
-    Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage

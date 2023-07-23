@@ -161,5 +161,24 @@ public class TenantCommunicationSteps {
         Assert.assertFalse(tenantCommunication.isFieldNoteClear(), "note is appear");
     }
 
+    @And("user filled {string} in note field tracker WA status")
+    public void user_filled_note_field_tracker_wa_status(String keyword) {
+        tenantCommunication.enterTextNoteStatusWA(keyword);
+    }
+
+    @And("user click Tambah in tracker status WA")
+    public void user_click_Tambah_in_tracker_status_WA() {
+        tenantCommunication.clickTambahStatusWA();
+    }
+
+    @Then("success add tracker pop-up appear and {string} Status is updated")
+    public void success_add_tracker_pop_up_appear_and_whatsapp_status_is_updated(String WA) {
+        Assert.assertEquals(tenantCommunication.getTextStatusWA(), WA, "status matched");
+    }
+
+    @And("user click track status chat WA")
+    public void user_click_track_status_chat_wa() {
+        tenantCommunication.clickTrackStatusWAButton();
+    }
 
 }

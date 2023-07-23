@@ -67,6 +67,9 @@ public class InvoicePO {
     Locator biayaLayananMamikosText;
     Locator tncInvoiceFullText;
     Locator tncInvoiceText;
+    Locator mamipoinToggleButtonOn;
+    Locator mamipoinToggleButtonOff;
+    Locator tenantPointEstimate;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -123,6 +126,9 @@ public class InvoicePO {
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
         tncInvoiceFullText = page.locator(".first-column.column");
         tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
+        mamipoinToggleButtonOn = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--off']");
+        mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
+        tenantPointEstimate = page.locator(".mamipoin-estimated-text");
     }
 
     /**
@@ -130,7 +136,7 @@ public class InvoicePO {
      * Wait for the page to be fully loaded before interacting with elements
      * Check if the "delete voucher" button is visible before clicking on it
      */
-    public void clickOnDeleteVoucher() throws InterruptedException {
+    public void clickOnDeleteVoucher() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(voucherDivSection, 5000.0);
         if (playwright.waitTillLocatorIsVisible(deleteVoucher)) {
@@ -546,5 +552,41 @@ public class InvoicePO {
      */
     public void clickTnCInvoice() {
         tncInvoiceText.click();
+    }
+
+    /**
+     * Click MamiPoin Toggle Button to On
+     */
+    public void clickMamipoinToggleButtonToOn() {
+        playwright.hardWait(3000.0);
+        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOn)) {
+            playwright.clickOn(mamipoinToggleButtonOn);
+        } else {
+            playwright.clickOn(mamipoinToggleButtonOff);
+            playwright.hardWait(3000.0);
+            playwright.clickOn(mamipoinToggleButtonOn);
+            playwright.hardWait(3000.0);
+        }
+    }
+
+    /**
+     * Click MamiPoin Toggle Button to Off
+     */
+    public void clickMamipoinToggleButtonToOff() {
+        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
+            playwright.clickOn(mamipoinToggleButtonOff);
+        } else {
+            playwright.clickOn(mamipoinToggleButtonOn);
+            playwright.hardWait(3000.0);
+            playwright.clickOn(mamipoinToggleButtonOff);
+        }
+    }
+
+    /**
+     * Check if Point Estimate is not visible on invoice
+     */
+    public Boolean isPointEstimateTenantVisible() {
+        playwright.hardWait(3000.0);
+        return tenantPointEstimate.isVisible();
     }
 }
