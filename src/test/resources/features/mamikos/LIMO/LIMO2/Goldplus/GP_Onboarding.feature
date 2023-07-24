@@ -26,7 +26,7 @@ Feature: Owner Dashboard GP-ONboarding
 
   @continue
   Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swiper Functionality Left To Right
-    Then owner can see swipper number <number> is selected
+    Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<text_body>"
     When owner click on next button to go to slide number <number>
@@ -46,7 +46,7 @@ Feature: Owner Dashboard GP-ONboarding
 
   @continue
   Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swipper Functionality Right To Left
-    Then owner can see swipper number <number> is selected
+    Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<text_body>"
     When owner click on previous button to go to slide number <number>
@@ -114,3 +114,36 @@ Feature: Owner Dashboard GP-ONboarding
       | 3             | Pilih Iklan Properti Anda          | Anda bebas memilih properti yang ingin diiklankan.             | illustration make property ads       |
       | 2             | Beli Saldo MamiAds                 | Klik “Beli Saldo” pada halaman MamiAds.                        | illustration buy mamiads             |
       | 1             | Kunjungi Menu MamiAds              | Klik Kelola pada halaman utama Mamikos, lalu pilih MamiAds.    | illustration mamiads click           |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Owner visit “Panduan Fitur di GoldPlus” and click “Memantau Performa Kos”
+    When owner navigates to owner dashboard
+    And owner go to panduan gold plus memantau performa kos page
+    Then owner will see that the text "Pantau Performa Bisnis Kos dengan Statistik GoldPlus" is displayed
+    Then owner will see that the text "Statistik GoldPlus memperlihatkan data terkini seputar iklan kos Anda, untuk keputusan bisnis yang lebih baik." is displayed
+    Then owner will see that the text "Di Statistik GoldPlus, Anda dapat melihat:" is displayed
+    Then owner will see that the text "Performa Iklan Kos Anda" is displayed
+    * owner will see that the text "Anda bisa lihat seberapa banyak kunjungan iklan, chat, booking, dan performa lainnya di kos Anda." is displayed
+    Then owner will see that the text "Gambaran Profil Pencari Kos" is displayed
+    * owner will see that the text "Cari tahu pencari kos seperti apa yang mem-booking kos Anda." is displayed
+    Then owner will see that the text "Cara menggunakan Statistik GoldPlus" is displayed
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Left/Previous Button Should Be Disabled
+    Then owner can see swiper left or previous button is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Left To Right
+    Then owner can see gp onboarding number <number> is selected
+    Then owner can see gp onboarding text title is "<onboarding text title>"
+    Then owner can see gp onboarding text body is "<onboarding text body>"
+    Then owner can see gp onboarding image alt text is "<image alternative text>"
+    Then owner can see swiper number <number> is selected
+    Then owner can see selected swiper with title <number>
+    Then owner can see swiper text body is "<onboarding text title>"
+    When owner click on next button to go to slide number <number>
+    Examples:
+      | number | onboarding text title     | onboarding text body                                  | image alternative text       |
+      | 1      | Klik menu “Statistik”     | Lihat menu di layar bawah, dan klik “Statistik”.      | illustration click statistic |
+      | 2      | Klik “Statistik GoldPlus” | Ada tiga jenis statistik, pilih “Statistik GoldPlus”. | illustration click GoldPlus  |
+      | 3      | Pilih Nama Kos            | Klik kos yang Anda ingin lihat statistiknya.          | illustration select kost     |
