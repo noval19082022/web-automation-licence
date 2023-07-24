@@ -5,6 +5,8 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.DataBookingPO;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class DataBookingSteps {
     DataBookingPO dataBooking = new DataBookingPO(page);
 
     private List<Map<String, String>> searchTenantData;
+    private Map<String, String> durationFormData;
 
     @And("admin go to data booking menu")
     public void admin_go_to_data_booking_menu() {
@@ -54,4 +57,60 @@ public class DataBookingSteps {
     public void admin_verify_dialog_alert_text_on_form_booking_is_x(String text) {
         dataBooking.assertDialogMessageTextTo(text);
     }
+
+    @And("admin fill duration booking form with:")
+    public void admin_fill_duration_booking_form_with(DataTable table) {
+        durationFormData = table.asMap(String.class, String.class);
+        var bookingType = durationFormData.get("booking type");
+        var oldContractId = durationFormData.get("old contract id");
+        var rentCount = durationFormData.get("rent count");
+        var checkinDate = durationFormData.get("checkin date");
+        var duration = durationFormData.get("duration of the lease");
+        if (bookingType.equalsIgnoreCase("New Booking")) {
+            dataBooking.setBookingTypeTo(bookingType);
+        } else {
+            dataBooking.setBookingTypeTo(bookingType);
+            dataBooking.fillOldContractId(oldContractId);
+            dataBooking.clickCheckOldContract();
+            Assert.assertTrue(dataBooking.isContractValidOrNotMessageVisible("Contract Valid!"), "contract is not valid");
+        }
+        dataBooking.selectRentCount(rentCount);
+        dataBooking.selectCheckInDate(checkinDate);
+        dataBooking.selectRentDuration(duration);
+    }
+
+    @And("admin fill booking type with {string} and contract id with {string}")
+    public void admin_fill_booking_type_with_x_and_contract_id_with_x(String type, String contractId) {
+        dataBooking.setBookingTypeTo(type);
+        dataBooking.fillOldContractId(contractId);
+    }
+
+    @And("admin click submit button")
+    public void admin_click_submit_button() {
+        dataBooking.clickSubmitButton();
+    }
+
+    @Then("admin should see success message {string} on data booking page")
+    public void admin_should_see_success_message_popup_on_data_booking_page(String alertMessage) {
+        Assert.assertTrue(dataBooking.isSuccessMessageVisible(alertMessage), "success message popup is not visible");
+    }
+
+    @Then("admin should see check contract id alert message is {string}")
+    public void admin_should_see_check_contract_id_alert_message_is_x(String message) {
+        dataBooking.assertDialogMessageTextTo(message);
+        dataBooking.clickCheckOldContract();
+    }
+
+    @When("admin process to reject booking")
+    public void admin_process_to_reject_booking() {
+        dataBooking.clickFirstActionButton();
+        dataBooking.clickOnRejectedListButton();
+    }
+
+    @And("admin reject booking with {string} as the reason")
+    public void admin_reject_booking_with_x_as_the_reason(String reason) {
+        dataBooking.chooseRejectReason(reason);
+        dataBooking.clickOnSendRejectBookingButton();
+    }
+
 }
