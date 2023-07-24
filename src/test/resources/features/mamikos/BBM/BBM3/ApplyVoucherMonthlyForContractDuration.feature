@@ -25,7 +25,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod      |
+      | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
@@ -37,7 +37,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Adi Auto Voucher Dua | Adi Auto Voucher Dua |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Apply Voucher AUTOMONTHLY
@@ -49,7 +49,7 @@ Feature: Apply Voucher Monthly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOMONTHLY       | AUTOMONTHLY      |
+      | AUTOMONTHLY       | AUTOMONTHLY       |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract
@@ -57,11 +57,9 @@ Feature: Apply Voucher Monthly For Contract Duration
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321211 | 0890867321211 |
-    And admin terminate contract
-    Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
@@ -76,7 +74,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod      |
+      | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
@@ -88,7 +86,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Adi Auto Voucher Dua | Adi Auto Voucher Dua |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Apply Voucher AUTOMONTHLY
@@ -100,5 +98,5 @@ Feature: Apply Voucher Monthly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOMONTHLY       | AUTOMONTHLY      |
+      | AUTOMONTHLY       | AUTOMONTHLY       |
     Then tenant can see voucher is applied
