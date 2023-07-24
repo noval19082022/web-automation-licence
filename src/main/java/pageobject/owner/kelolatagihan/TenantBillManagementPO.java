@@ -2,6 +2,7 @@ package pageobject.owner.kelolatagihan;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
@@ -26,6 +27,27 @@ public class TenantBillManagementPO {
     Locator kontrakSewaButton;
     Locator tolakButton;
     Locator ubahKontrakPenyewaButton;
+    Locator tenantHeaderTxt;
+    Locator headerContractStatus;
+    Locator tenantPhoto;
+    Locator detailTenantName;
+    Locator detailTenantGender;
+    Locator detailTenantStatus;
+    Locator detailTenantJob;
+    Locator disclaimerCheckinTenant;
+    Locator detailStartContract;
+    Locator detailEndContract;
+    Locator detailTotalBill;
+    Locator detailRentDuration;
+    Locator detailNearestBill;
+    Locator hentikanSewaButton;
+    Locator ubahKontrakPenyewaBtn;
+    Locator contractNumber1;
+    Locator contractList;
+    Locator contractPageEmpty;
+    Locator contractName;
+    Locator clickSelengkapnyaContract;
+
 
 
     public TenantBillManagementPO(Page page) {
@@ -38,7 +60,7 @@ public class TenantBillManagementPO {
         successTransferLabel = page.getByTestId("invoice-status-label");
         kostDropdown = page.locator("(//*[@class='bg-c-select__trigger-text'])[1]");
         searchKostTextbox = page.getByPlaceholder("Cari nama kos");
-        lihatSelengkapnyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selengkapnya"));
+        lihatSelengkapnyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selengkapnya")).first();
         roomNumberText = page.locator("//*[@class='tenant-header__room-info']/p");
         updateRoomNumberButton = page.getByText("Ubah nomor kamar chevron-right");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
@@ -47,6 +69,12 @@ public class TenantBillManagementPO {
         kontrakSewaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak sewa"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         ubahKontrakPenyewaButton = page.getByTestId("btn-edit-contract");
+        headerContractStatus = page.getByTestId("statusContractLabel-active");
+        tenantPhoto = page.locator("//div[@class='bg-c-avatar bg-c-avatar--xl']");
+        disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
+        contractNumber1 = page.locator("(//div[@class='tenant-list__card'])[1]");
+        contractList = page.locator("//div[@class='tenant-card-item__info']");
+        disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
     }
 
     /**
@@ -229,4 +257,187 @@ public class TenantBillManagementPO {
         Locator totalAmount = page.locator("//p[.='"+price+"']");
         return playwright.getText(totalAmount);
     }
+
+    /**
+     * get Tenant Name on header penyewa page
+     * @return Tenant Name
+     */
+    public String getTenantHeaderName(String name) {
+        tenantHeaderTxt = page.getByTestId("tenant-header").getByText(name);
+        return playwright.getText(tenantHeaderTxt);
+    }
+
+    /**
+     * get Phone Number on header penyewa page
+     * @return Phone Number
+     */
+    public String getHeaderPhoneNumber(String phoneNumber) {
+        tenantHeaderTxt = page.getByTestId("tenant-header").getByText(phoneNumber);
+        return playwright.getText(tenantHeaderTxt);
+    }
+
+    /**
+     * get Contract Status on header penyewa page
+     * @return Contact Status
+     */
+    public String getHeaderContractStatus() {
+        return playwright.getText(headerContractStatus);
+    }
+
+    /**
+     * assert tenant photo is visible
+     * @return true or false
+     */
+    public boolean isTenantPhotoVisible() {
+        return tenantPhoto.isVisible();
+    }
+
+    /**
+     * get Tenant Name on detail penyewa page
+     * @return Tenant Name
+     */
+    public String getDetailTenantName(String name) {
+        detailTenantName =  page.getByTestId("tab-biodata").getByText(name);
+        return playwright.getText(detailTenantName);
+    }
+
+    /**
+     * get Tenant Gender on detail penyewa page
+     * @return Tenant Gender
+     */
+    public String getDetailTenantGender(String gender) {
+        detailTenantGender = page.getByText(gender);
+        return playwright.getText(detailTenantGender);
+    }
+
+    /**
+     * get Tenant status on detail penyewa page
+     * @return Tenant status
+     */
+    public String getDetailTenantStatus(String status) {
+        detailTenantStatus = page.getByText(status);
+        return playwright.getText(detailTenantStatus);
+    }
+
+    /**
+     * get Tenant job on detail penyewa page
+     * @return Tenant job
+     */
+    public String getDetailTenantJob(String job) {
+        detailTenantJob = page.getByText(job);
+        return playwright.getText(detailTenantJob);
+    }
+
+    /**
+     * assert disclaimer text is not display
+     */
+    public boolean isDisclaimerTextVisible() {
+        return disclaimerCheckinTenant.isVisible();
+    }
+
+    /**
+     * get Start Contract on detail rent contract
+     * @return Start Contract
+     */
+    public String getDetailStartContract(String start) {
+        detailStartContract = page.getByText(start);
+        return playwright.getText(detailStartContract);
+    }
+
+    /**
+     * get End Contract on detail rent contract
+     * @return End Contract
+     */
+    public String getDetailEndContract(String end) {
+        detailEndContract = page.getByText(end);
+        return playwright.getText(detailEndContract);
+    }
+
+    /**
+     * get Total Bill on detail rent contract
+     * @return Total Bill
+     */
+    public String getDetailTotalBill() {
+        detailTotalBill = page.locator("//div[contains(text(),'Total yang ditagih')]/../following-sibling::div");
+        return playwright.getText(detailTotalBill);
+    }
+
+    /**
+     * get Rent Duration on detail rent contract
+     * @return Rent Duration
+     */
+    public String getDetailRentDuration(String duration) {
+        detailRentDuration = page.getByText(duration);
+        return playwright.getText(detailRentDuration);
+    }
+
+    /**
+     * get Nearest Bill on detail rent contract
+     * @return Nearest Bill
+     */
+    public String getDetailNearestBill(String nearestBill) {
+        detailNearestBill = page.getByText(nearestBill);
+        return playwright.getText(detailNearestBill);
+    }
+
+    /**
+     * Verify system display terminate contract link
+     */
+    public void displayTerminateContract() {
+        hentikanSewaButton = page.getByTestId("btn-terminate-contract");
+        hentikanSewaButton.isVisible();
+    }
+
+    /**
+     * assert ubah kontrak sewa button is display
+     */
+    public void ubahKontrakPenyewaIsVisible() {
+        ubahKontrakPenyewaBtn = page.getByTestId("btn-edit-contract");
+        ubahKontrakPenyewaBtn.isVisible();
+    }
+
+    /**
+     * Get number of booking list
+     * @throws InterruptedException
+     * @return number of elements
+     */
+    public int getNumberListOfContract() throws InterruptedException {
+        playwright.hardWait(2);
+        int numberOfElements = 0;
+        if (contractNumber1.isVisible()){
+            numberOfElements = playwright.getLocators(contractList).size();
+        } else {
+            contractPageEmpty.isVisible();
+        }
+        return numberOfElements;
+    }
+
+    /**
+     * Get one data booking status
+     * @param index is number for specific data want to get
+     * @return booking status
+     */
+    public String getContractName(int index) {
+//        contractName = page.getByText(index);
+        contractName = page.locator("(//div[@class='tenant-card-item__content']/p)[" + index + "]");
+        return playwright.getText(contractName);
+    }
+
+    /**
+     * Click selengkapnya button based on contract name (tenant's contract)
+     * @throws InterruptedException
+     */
+    public void clickSelengkapnyaContract(int index) throws InterruptedException {
+        clickSelengkapnyaContract = page.locator("(//b[contains(., 'Selengkapnya')])[" + index + "]");
+        playwright.forceClickOn(clickSelengkapnyaContract);
+    }
+
+    /**
+     * get disclaimer tenant hasn't
+     * checkin text
+     */
+    public String getDisclaimerText() {
+        return playwright.getText(disclaimerCheckinTenant);
+    }
+
 }
