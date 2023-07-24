@@ -313,4 +313,9 @@ public class GoldplusSteps {
         }
     }
     //------ GP Onboarding Pop-Up ------//
+    @When("owner close pop up detail manfaat")
+    public void owner_close_pop_up_detail_manfaat() {
+        playwright.hardWait(1000.0);
+        goldplus.clickOnCLosePopUpManfaat();
+    }
 }

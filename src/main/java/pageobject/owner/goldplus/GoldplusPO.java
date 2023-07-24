@@ -24,6 +24,7 @@ public class GoldplusPO {
     Locator snkGoldplusCheckbox;
     Locator weeklyPeriode;
     Locator pelajariCaranyaButton;
+    Locator closePopUpDetailManfaat;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -43,6 +44,7 @@ public class GoldplusPO {
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
+        closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
     }
 
     /**
@@ -210,4 +212,16 @@ public class GoldplusPO {
     public void clickOnPelajariCaranyaButton() {
         playwright.clickOn(pelajariCaranyaButton);
     }
+
+    /**
+     * Click on icon close pop up detail manfaat
+     *
+     *
+     */
+    public void clickOnCLosePopUpManfaat() {
+        playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
+        playwright.clickOn(closePopUpDetailManfaat);
+    }
+
+
 }
