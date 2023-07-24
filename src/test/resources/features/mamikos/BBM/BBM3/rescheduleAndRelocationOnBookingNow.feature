@@ -12,7 +12,8 @@ Feature: Reschedule and Relocation
     And admin fill the input field on booking form with:
       | search by       | value          |
       | by Phone Number | 0890867321227  |
-    And admin click next button
+    And admin click search button on booking now
+    And admin click next button on booking now
 
   @TEST_BBM-1155 @TEST_BBM-1154
   Scenario: Success Reschedule
@@ -22,7 +23,7 @@ Feature: Reschedule and Relocation
       | rent count            | Weekly      |
       | checkin date          | 2030-08-25  |
       | duration of the lease | 1 Minggu    |
-    And admin click next button
+    And admin click next button on booking now
     And admin click submit button
     Then admin should see success message "Success! Successfully created booking" on data booking page
     When admin process to reject booking
@@ -37,7 +38,7 @@ Feature: Reschedule and Relocation
       | rent count            | Weekly      |
       | checkin date          | 2030-08-25  |
       | duration of the lease | 1 Minggu    |
-    And admin click next button
+    And admin click next button on booking now
     And admin click submit button
     Then admin should see success message "Success! Successfully created booking" on data booking page
     When admin process to reject booking

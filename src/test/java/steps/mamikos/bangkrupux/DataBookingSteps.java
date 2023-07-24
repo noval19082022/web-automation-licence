@@ -40,10 +40,15 @@ public class DataBookingSteps {
         searchTenantData = table.asMaps(String.class, String.class);
         var searchType = searchTenantData.get(0).get("search by");
         var searchValue = searchTenantData.get(0).get("value");
-        dataBooking.searchTenantBy(searchType,searchValue);
+        dataBooking.fillSearchTenantBy(searchType,searchValue);
     }
 
-    @And("admin click next button")
+    @And("admin click search button on booking now")
+    public void admin_click_search_button() {
+        dataBooking.clickSearchButton();
+    }
+
+    @And("admin click next button on booking now")
     public void admin_click_next_button() {
         dataBooking.clickNextButton();
     }
@@ -56,6 +61,7 @@ public class DataBookingSteps {
     @Then("admin verify dialog alert text on form booking is {string}")
     public void admin_verify_dialog_alert_text_on_form_booking_is_x(String text) {
         dataBooking.assertDialogMessageTextTo(text);
+        dataBooking.clickSearchButton();
     }
 
     @And("admin fill duration booking form with:")

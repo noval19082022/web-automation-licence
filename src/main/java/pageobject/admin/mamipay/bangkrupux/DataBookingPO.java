@@ -95,7 +95,7 @@ public class DataBookingPO {
 
     /**
      * click, fill, and choose kost name
-     * the first/highlighted kost name on suggestion will be click
+     * the first/highlighted kost name on suggestion will be clicked
      * @param listing refers to kost name
      */
     public void chooseListingName(String listing) {
@@ -112,10 +112,16 @@ public class DataBookingPO {
      * @param value refers to name or phone number of the tenant
      *              and the name should be unique
      */
-    public void searchTenantBy(String type, String value) {
+    public void fillSearchTenantBy(String type, String value) {
         isSectionTitleVisible("Identity");
         playwright.selectDropdownByValue(searchTenantDropdown, type);
         searchTenantInputText.fill(value);
+    }
+
+    /**
+     * click on search tenant on identity section
+     */
+    public void clickSearchButton() {
         searchTenantButton.click();
     }
 
@@ -132,8 +138,10 @@ public class DataBookingPO {
      */
     public void assertDialogMessageTextTo(String text) {
         page.onceDialog(dialog -> {
-            dialog.message().equals(text);
+            String message = dialog.message();
             dialog.accept();
+            System.out.println("Actual = " + message);
+            assert message.equals(text);
         });
     }
 
