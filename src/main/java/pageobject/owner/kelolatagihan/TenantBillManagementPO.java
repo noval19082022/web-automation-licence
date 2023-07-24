@@ -139,8 +139,8 @@ public class TenantBillManagementPO {
      * user choose kost name
      */
     public void searchKostPenyewa(String kostName){
-        playwright.waitForElementStateToBe(kostDropdown, "enabled");
-        kostDropdown.click();
+        playwright.hardWait(3000.0);
+        playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName));
         playwright.clickOn(kostSearch);
