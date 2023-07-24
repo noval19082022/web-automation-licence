@@ -1,6 +1,5 @@
 package pageobject.tenant;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -71,6 +70,7 @@ public class InvoicePO {
     Locator mamipoinToggleButtonOn;
     Locator mamipoinToggleButtonOff;
     Locator tenantPointEstimate;
+    Locator discountMamipoinText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -130,6 +130,8 @@ public class InvoicePO {
         mamipoinToggleButtonOn = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--off']");
         mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
+        discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
+
     }
 
     /**
@@ -589,5 +591,14 @@ public class InvoicePO {
     public Boolean isPointEstimateTenantVisible() {
         playwright.hardWait(3000.0);
         return tenantPointEstimate.isVisible();
+    }
+
+    /**
+     * return discount mamipoin text
+     *
+     * @return int data type
+     */
+    public int getDiscountMamipoinText() {
+        return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
     }
 }
