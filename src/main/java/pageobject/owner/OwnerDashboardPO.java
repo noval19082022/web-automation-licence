@@ -27,6 +27,8 @@ public class OwnerDashboardPO {
     Locator tolakButton;
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
+    Locator seeAllNotification;
+    Locator gpStatus;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -40,13 +42,16 @@ public class OwnerDashboardPO {
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
-        notificationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("notification"));
+        notificationButton = page.locator(".notification-menu > .bg-c-icon");
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
+        seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
+        gpStatus = page.locator(".membership-card__label");
+
     }
 
     /**
@@ -163,4 +168,22 @@ public class OwnerDashboardPO {
     public void clickOnGpWidgetButton() {
         playwright.clickOn(gpWidgetButton);
     }
+
+    /**
+     * Click on see all notification
+     */
+    public void clicOnSeeAllNotification() {
+        playwright.waitTillLocatorIsVisible(seeAllNotification);
+        playwright.clickOn(seeAllNotification);
+    }
+
+    /**
+     * Verify GP Status ( Menunggu pembayaran, Sedang Diproses, Goldplus 1, Goldplus 2)
+     *
+     * @return text gpStatus
+     */
+    public String getTextGPStatus() {
+        return playwright.getText(gpStatus);
+    }
+
 }

@@ -300,4 +300,32 @@ public class PaymentSteps {
         invoice.clickTnCInvoice();
     }
 
+    @When("system display remaining payment {string} use mamipoin for payment monthly")
+    public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
+        String remainingPaymentBefore = "Rp10.001.000";
+        String remainingPaymentAfter = "Rp9.877.544";
+
+        if(condition.equals("before")){
+            Assert.assertEquals(invoice.getTotalCost(), remainingPaymentBefore, "Remaining payment before doesn't match");
+        }
+        else {
+            Assert.assertEquals(invoice.getTotalCost(), remainingPaymentAfter, "Remaining payment after doesn't match");
+        }
+    }
+
+    @When("user clicks on mamipoin toggle button to ON")
+    public void user_clicks_on_mamipoin_toggle_button_to_on() {
+        invoice.clickMamipoinToggleButtonToOn();
+    }
+
+    @When("user clicks on mamipoin toggle button to OFF")
+    public void user_clicks_on_mamipoin_toggle_button_to_off() {
+        invoice.clickMamipoinToggleButtonToOff();
+    }
+
+    @Then("tenant point estimate not displayed on invoice")
+    public void tenant_point_estimate_not_displayed_on_invoice()  {
+        Assert.assertFalse(invoice.isPointEstimateTenantVisible());
+    }
+
 }
