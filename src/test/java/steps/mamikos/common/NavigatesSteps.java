@@ -244,8 +244,13 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
     }
 
-    @And("tenant navigate to mamipoint expired page")
-    public void tenantNavigateToMamipointExpiredPage() {
+    @And("tenant navigate to mamipoin expired page")
+    public void tenantNavigateToMamipoinExpiredPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_EXPIRED, 30000.0, LoadState.LOAD);
+    }
+
+    @And("tenant navigate to mamipoin history page")
+    public void tenantNavigateToMamipoinHistoryPage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 30000.0, LoadState.LOAD);
     }
 }
