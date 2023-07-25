@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PoinSayaPO {
     Page page;
     PlaywrightHelpers playwright;
@@ -23,6 +25,13 @@ public class PoinSayaPO {
     Locator dapatkanPoinButton;
     Locator expiredPoinInfo;
     Locator noHaveMamipoinText;
+    Locator titleInformasiPoinPage;
+    Locator subtitleInformasiPoinPage;
+    Locator lihatCaranyaButon;
+    Locator tableTitleTanggalKedaluwarsa;
+    Locator tableTitleJumlahMamipoin;
+    Locator fieldValueTable;
+    Locator subtitleTidakAdaPoinYangTersedia;
 
     public PoinSayaPO(Page page) {
         this.page = page;
@@ -41,6 +50,12 @@ public class PoinSayaPO {
         dapatkanPoinButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Semua")).nth(1);
         expiredPoinInfo = page.locator(".card__info-poin");
         noHaveMamipoinText = page.getByText("Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya.");
+        titleInformasiPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tanggal Kedaluwarsa")).first();
+        subtitleInformasiPoinPage = page.getByText("Poin Kamu akan kedaluwarsa dalam waktu 6 bulan dari saat Kamu mendapatkan poin.");
+        lihatCaranyaButon = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Caranya"));
+        tableTitleTanggalKedaluwarsa = page.locator("//h1[@class='table-title'][text()='Tanggal Kedaluwarsa']");
+        tableTitleJumlahMamipoin = page.locator("//h1[@class='table-title-right'][text()='Jumlah MamiPoin']");
+        subtitleTidakAdaPoinYangTersedia = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tidak Ada Poin yang Tersedia"));
     }
 
     /**
@@ -208,5 +223,61 @@ public class PoinSayaPO {
      */
     public String getTextNoHaveMamipoin() {
         return playwright.getText(noHaveMamipoinText);
+    }
+
+    /**
+     * Verify title in the informasi poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheInformasiPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleInformasiPoinPage);
+    }
+
+    /**
+     * Verify subtitle in the informasi poin page is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleInTheInformasiPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleInformasiPoinPage);
+    }
+
+    /**
+     * Click on lihat caranya button
+     */
+    public void clickOnLihatCaranyaButton() {
+        playwright.clickOn(lihatCaranyaButon);
+    }
+
+    /**
+     * Verify table title tanggal kedaluwarsa is displayed
+     * @return boolean
+     */
+    public Boolean isTableTitleTanggalKedaluwarsaDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tableTitleTanggalKedaluwarsa);
+    }
+
+    /**
+     * Verify table title jumlah mamipoin is displayed
+     * @return boolean
+     */
+    public Boolean isTableTitleJumlahMamipoinDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tableTitleJumlahMamipoin);
+    }
+
+    /**
+     * check expired date is visible or not
+     * @param fieldValue refer to table contents
+     */
+    public void isFieldValueVisible(String fieldValue) {
+        fieldValueTable = page.locator("//div[text()='" + fieldValue + "']");
+        assertThat(fieldValueTable).isVisible();
+    }
+
+    /**
+     * Verify subtitle tidak ada poin yang tersedia is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleTidakAdaPoinYangTersediaDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleTidakAdaPoinYangTersedia);
     }
 }

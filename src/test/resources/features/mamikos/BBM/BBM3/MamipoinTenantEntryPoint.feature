@@ -18,7 +18,7 @@ Feature: MamiPoin Tenant Entry Point
       | phone stag    | phone prod    | password     |
       | 0890867321215 | 0890867321215 | mamikosqa123 |
     And user navigate to kost saya page
-    And user verify the amount of poin owned by the tenant is "123.456"
+    And user verify the amount of poin owned by the tenant is "1.000"
     And user clicks on mamipoin tenant entry point button
     Then user verify title in the mamipoin tenant landing page is displayed
 
