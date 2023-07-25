@@ -9,6 +9,8 @@ import org.testng.Assert;
 import pageobject.tenant.profile.PoinSayaPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 
 public class PoinSayaSteps {
     Page page = ActiveContext.getActivePage();
@@ -114,5 +116,42 @@ public class PoinSayaSteps {
     @Then("user will see display MamiPoin with text {string}")
     public void displayMamiPoinWithText(String textMamipoin) {
         Assert.assertEquals(poinSaya.getTextNoHaveMamipoin(), textMamipoin, "Text is not equal to " +textMamipoin);
+    }
+
+    @When("user verify title in the informasi poin page is displayed")
+    public void user_verify_title_in_the_informasi_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleInTheInformasiPoinPageDisplayed());
+    }
+
+    @When("user verify subtitle in the informasi poin page is displayed")
+    public void user_verify_subtitle_in_the_informasi_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isSubtitleInTheInformasiPoinPageDisplayed());
+    }
+
+    @When("user clicks on lihat caranya button")
+    public void user_clicks_on_lihat_caranya_button() {
+        poinSaya.clickOnLihatCaranyaButton();
+    }
+
+    @When("user verify table title tanggal kedaluwarsa is displayed")
+    public void user_verify_table_title_tanggal_kedaluwarsa_is_displayed() {
+        Assert.assertTrue(poinSaya.isTableTitleTanggalKedaluwarsaDisplayed());
+    }
+
+    @When("user verify table title jumlah mamipoin is displayed")
+    public void user_verify_table_title_jumlah_mamipoin_is_displayed() {
+        Assert.assertTrue(poinSaya.isTableTitleJumlahMamipoinDisplayed());
+    }
+
+    @Then("user verify expired point on information point page")
+    public void user_verify_expired_point_on_information_point_page(List<String> date) {
+        for (String s : date) {
+            poinSaya.isFieldValueVisible(s);
+        }
+    }
+
+    @And("user verify subtitle tidak ada poin yang tersedia is displayed")
+    public void user_verify_subtitle_tidak_ada_poin_yang_tersedia_is_displayed() throws InterruptedException {
+        Assert.assertTrue(poinSaya.isSubtitleTidakAdaPoinYangTersediaDisplayed());
     }
 }
