@@ -25,7 +25,7 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod      |
+      | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And tenant booking kost "tomorrow" "Per 6 Bulan"
     Then tenant should success booking kost
@@ -36,8 +36,8 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag          | tenant prod          |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | tenant stag           | tenant prod           |
+      | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
 #  @BBM-617
@@ -49,8 +49,8 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
-      | voucher name stag   | voucher name prod   |
-      | VSEMIANNUALLY       | VSEMIANNUALLY       |
+      | voucher name stag | voucher name prod |
+      | VSEMIANNUALLY     | VSEMIANNUALLY     |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract
@@ -58,11 +58,9 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321205 | 0890867321205 |
-    And admin terminate contract
-    Then admin should success terminate contract
 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
@@ -77,7 +75,7 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod      |
+      | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
@@ -88,8 +86,8 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag          | tenant prod          |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | tenant stag           | tenant prod           |
+      | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
 #  @BBM-617
@@ -102,5 +100,5 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VSEMIANNUALLY     | VSEMIANNUALLY      |
+      | VSEMIANNUALLY     | VSEMIANNUALLY     |
     Then tenant can see voucher is applied
