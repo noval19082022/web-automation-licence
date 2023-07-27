@@ -1,6 +1,7 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
@@ -19,6 +20,7 @@ public class CommonSteps {
 
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
+        playwright.hardWait(5);
         playwright.clickOnText(text);
     }
 
@@ -28,8 +30,8 @@ public class CommonSteps {
     }
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
-    public void owner_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text, 1000));
+    public void user_will_see_that_the_text_is_displayed(String text) {
+        Assert.assertTrue(playwright.isTextDisplayed(text, 2000));
     }
 
     @Then("user/owner/tenant should not be able to see the text {string}")
@@ -46,5 +48,30 @@ public class CommonSteps {
     @Then("user/owner/tenant go back to previous page")
     public void user_go_back_to_previous_page() {
         page.goBack();
+    }
+
+    @Then("The system should display {string} button as enabled")
+    public void the_system_should_display_button_as_enabled(String buttonName) {
+        Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
+    }
+
+    @Then("The system should display {string} button as disabled")
+    public void the_system_should_display_button_as_disabled(String buttonName) {
+        Assert.assertTrue(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
+    }
+
+    @Then("user redirected to {string}")
+    public void user_redirect_link(String link) {
+        Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
+    }
+
+    @Then("user/owner/tenant will see that the text {string} is displayed on the table")
+    public void user_will_see_that_the_text_is_displayed_on_the_table(String text) {
+        Assert.assertTrue(playwright.waitTillLocatorIsVisible(playwright.locatorByRoleSetName(AriaRole.CELL, text).first()));
+    }
+
+    @Then("admin/user/owner/tenant will get empty table list data")
+    public void users_will_get_empty_table_list_data() {
+        Assert.assertFalse(page.isVisible("//tbody/tr"));
     }
 }

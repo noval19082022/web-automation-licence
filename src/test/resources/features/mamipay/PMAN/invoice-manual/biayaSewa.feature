@@ -60,22 +60,30 @@
       When admin deletes all "Biaya Sewa" or sewa on Invoice Manual
       Then the empty state of "Biaya Sewa" is displayed
 
-    @TEST_PMAN-5784 @pman-prod
-    Scenario Outline: Check required fields in the Biaya Sewa
+    @continue @TEST_PMAN-5784 @pman-prod
+    Scenario: Check required fields Nama Biaya in the Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
-        | email stag  | email prod  | password  |
-        | <Account>   | <Account>   | qwerty123 |
-      And the admin creates Invoice Manual "Biaya Sewa" and checks required fields "<Nama Biaya>", "<Awal>", "<Akhir>", "<Durasi Biaya>", "<Jumlah Biaya>"
-      Then the error messages "<Nama Biaya Error Msg>", "<Awal Error Msg>", "<Akhir Error Msg>", "<Jumlah Biaya Error Msg>" are displayed
+        | email stag                    | email prod                    | password  |
+        | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123 |
+      And admin tambah pengeluaran "Biaya Sewa"
+      And Checks required fields "-", "today", "today", "1 Hari", "10000"
+      Then the error messages "Nama biaya tidak boleh kosong.", "-", "-", "-" are displayed
 
-      Examples:
-        | Nama Biaya              | Awal  | Akhir     | Durasi Biaya  | Jumlah Biaya  | Nama Biaya Error Msg            | Awal Error Msg                    | Akhir Error Msg                   | Jumlah Biaya Error Msg            | Account                      |
-        | -                       | -     | -         | -             | -             | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  | automationpman01@mamikos.com |
-        | Perpanjang sewa harian  | -     | -         | -             | -             | -                               | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  | automationpman02@mamikos.com |
-        | -                       | today | -         | -             | -             | Nama biaya tidak boleh kosong.  | -                                 | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  | automationpman03@mamikos.com |
-        | -                       | -     | -         | 1 hari        | -             | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | Jumlah biaya tidak boleh kosong.  | automationpman01@mamikos.com |
-        | -                       | -     | -         | -             | 11000         | Nama biaya tidak boleh kosong.  | Periode awal tidak boleh kosong.  | Periode akhir tidak boleh kosong. | -                                 | automationpman02@mamikos.com |
+    @continue @TEST_PMAN-7574 @pman-prod
+    Scenario: Check required fields Periode Awal in the Biaya Sewa
+      And Checks required fields "Perpanjang sewa harian", "-", "-", "1 Hari", "10000"
+      Then the error messages "-", "Periode awal tidak boleh kosong.", "-", "-" are displayed
+
+    @continue @TEST_PMAN-7575 @pman-prod
+    Scenario: Check required fields Periode Akhir in the Biaya Sewa
+      And Checks required fields "Perpanjang sewa harian", "today", "-", "1 Hari", "10000"
+      Then the error messages "-", "-", "Periode akhir tidak boleh kosong.", "-" are displayed
+
+    @TEST_PMAN-7576 @pman-prod
+    Scenario: Check required fields Jumlah Biaya in the Biaya Sewa
+      And Checks required fields "Perpanjang sewa harian", "today", "today", "1 Hari", "-"
+      Then the error messages "-", "-", "-", "Jumlah biaya tidak boleh kosong." are displayed
 
     @TEST_PMAN-5743 @pman-prod
     Scenario: Periode is disabled when choose Jenis Biaya Kekurangan biaya sewa kamar

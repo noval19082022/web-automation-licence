@@ -17,6 +17,9 @@ public class RiwayatBookingPO {
     Locator bayarPelunasanButton;
     Locator lihatSelengkapnyaButton;
     Locator refundText;
+    Locator userBookingSection;
+    Locator textBookingStatusFirstList;
+    Locator textRejectReasonFirstList;
 
     public RiwayatBookingPO(Page page) {
         this.page = page;
@@ -26,8 +29,11 @@ public class RiwayatBookingPO {
         chekcinOnPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Pastikan")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Check-in"));
         doneToKostSayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai & ke Kos Saya"));
         bayarPelunasanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Pelunasan Sekarang"));
-        lihatSelengkapnyaButton = page.getByText("Lihat selengkapnya");
+        lihatSelengkapnyaButton = page.getByText("Lihat selengkapnya").first();
         refundText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apakah uang saya bisa dikembalikan?"));
+        userBookingSection = page.locator("#userBookingSection");
+        textBookingStatusFirstList = page.locator(".booking-list-card:nth-child(1) .card-header label");
+        textRejectReasonFirstList = page.locator(".header-reject-reason:nth-child(1) span");
     }
 
     /**
@@ -76,10 +82,10 @@ public class RiwayatBookingPO {
     }
 
     /**
-     * click on Lihat seengkapnya
+     * click on Lihat selengkapnya urutan pertama
      *
      */
-    public void clickSelengkapnyaButton() {
+    public void clickFirstSelengkapnyaButton() {
         playwright.clickOn(lihatSelengkapnyaButton);
     }
 
@@ -91,5 +97,31 @@ public class RiwayatBookingPO {
         page.waitForPopup(() -> {
             playwright.clickOn(refundText);
         });
+    }
+
+    /**
+     * Check if history booking section id is visible in the viewport
+     * @return true if booking section id is visible
+     */
+    public boolean isInHistoryBookingSection() {
+        playwright.waitTillLocatorIsVisible(userBookingSection);
+        return userBookingSection.isVisible();
+    }
+
+    /**
+     * get first booking status on riwayat and draft booking page
+     * @return String booking status e.g Pemilik menolak
+     */
+    public String getFirstListBookingStatusText() {
+        return playwright.getText(textBookingStatusFirstList);
+    }
+
+    /**
+     * click lihat selengkapnya and get reject reason
+     * @return String reason e.g Saya sudah ada yang punya
+     */
+    public String getRejectReasonOnDetailsFirstKostList() {
+        lihatSelengkapnyaButton.click();
+        return playwright.getText(textRejectReasonFirstList);
     }
 }

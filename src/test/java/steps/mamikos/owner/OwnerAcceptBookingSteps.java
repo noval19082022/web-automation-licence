@@ -20,7 +20,7 @@ public class OwnerAcceptBookingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking;
+    PengajuanBookingPO pengajuanBooking = new PengajuanBookingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
@@ -72,5 +72,31 @@ public class OwnerAcceptBookingSteps {
     @And("user clicks on Booking Details button")
     public void userClicksOnBookingDetailsButton() {
         billBookingManage.clickOnLihatDetailButton();
+    }
+
+    @And("owner go to select the room page from tenant:")
+    public void ownerGoToSelectTheRoomPage(DataTable table) throws InterruptedException {
+        tenantNames = table.asMaps(String.class, String.class);
+        var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
+        billBookingManage.clickOnRoomNumberInput();
+    }
+
+    @Then("user can not see pilih di tempat as an option")
+    public void userCannotSeeUpdateRoomNumber() {
+        Assert.assertFalse(billBookingManage.isPilihKamarDiTempatVisible());
+    }
+
+    @And("owner accept booking via Homepage")
+    public void ownerAcceptBookingViaHomepage() throws InterruptedException {
+        ownerDashboard.clickOnTerimaViaHomepage();
+        pengajuanBooking.clickOnTerimaPopUp();
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnOneRooms();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
     }
 }

@@ -47,12 +47,30 @@ public class OwnerRejectBookingSteps {
     public void ownerCanSeeConfirmationAturBookingPopup() {
         Assert.assertTrue(billBookingManage.isAppearConfirmationPopup());
     }
+
     @And("owner click on make rules booking button")
     public void ownerClickOnMakeRulesBookingButton() {
         billBookingManage.ownerClickOnMakeRulesBookingButton();
     }
+
     @Then("owner can see make rules booking page")
     public void ownerCanSeeMakeRulesBookingPage() {
         Assert.assertTrue(billBookingManage.isAppearMakeRuleBookingPage());
+    }
+
+    @And("owner choose filter kost for {string}")
+    public void ownerChooseFilterKostFor(String kostName) {
+        billBookingManage = pengajuanBooking.searchKostOnKostFilter(kostName);
+    }
+
+    @When("owner reject booking from dashboard")
+    public void user_click_on_reject_booking() {
+        ownerDashboard.clickOnTolakViaHomepage();
+        pengajuanBooking.clickYaTolakOnPengajuanBooking();
+    }
+
+    @And("owner select other reject with custom reason {string}")
+    public void owner_select_other_reject_with_custom_reason_x(String reason) {
+        pengajuanBooking.clickAndFillLainnyaRejectReason(reason);
     }
 }

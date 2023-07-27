@@ -8,9 +8,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.GoldplusPO;
+import pageobject.common.HomePO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.goldplus.GoldplusPO;
+import pageobject.owner.goldplus.PanduanGoldplusPO;
+import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -22,19 +26,39 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
-
-    private Integer unpaidInvoice;
-
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
-
+    HomePO home = new HomePO(page);
+    BroadcastChatPO broadcast = new BroadcastChatPO(page);
+    PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
+    MamiAdsPO mamiads = new MamiAdsPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int pacakge) {
-        navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+       if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
+            goldplus.clickOnGPPackage(pacakge);
+        } else{
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+        }
+        playwright.hardWait(3000);
+        if (playwright.isTextDisplayed("1 Minggu") == true) {
+            goldplus.clickOnPeriodeWeekly();
+        }
+        playwright.hardWait(3000);
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @When("user choose Goldplus package {int}")
+    public void user_choose_goldplus_package(int packages) {
+        goldplus.clickOnGoldplusPackageButton(packages);
+        playwright.clickOnTextButton("Pilih");
+    }
+
+    @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
+    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus(){
+        goldplus.clickOnCheckbox();
     }
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
@@ -102,8 +126,8 @@ public class GoldplusSteps {
 
     @Then("user verify Lihat Invoice visible")
     public void userVerifyLihatInvoiceVisible() {
-        goldplus.clickOnLihatInvoice();
-        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 1000));
+        playwright.clickOnTextButton("Lihat Invoice");
+        Assert.assertTrue(playwright.isTextDisplayed("Detail Tagihan", 3000));
     }
 
     @Then("user see Title on page {string} is {string} with message:")
@@ -143,5 +167,184 @@ public class GoldplusSteps {
     @When("owner wants to access goldplus dashboard")
     public void owner_wants_to_access_goldplus_dashboard(){
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
+    }
+
+    @And("user click widget GP {string}")
+    public void userClickWidgetGP(String statusGP) {
+        goldplus.clickOnWidgetGP();
+    }
+
+    @And("user click {string} on pop up {string}")
+    public void userClickOnPopUp(String action, String titlePopUp) {
+        Assert.assertTrue(playwright.isTextDisplayed(titlePopUp, 1000));
+        playwright.clickOnTextButton(action);
+    }
+
+    @When("user click Lihat Tagihan on riwayat")
+    public void userClickLihatTagihanOnRiwayat() {
+        playwright.hardWait(3000.0);
+        playwright.clickOnText("Lihat Tagihan");
+        playwright.clickOnText("Bayar Sekarang");
+    }
+
+    @Then("owner see jenis pembayaran {string}")
+    public void ownerSeeJenisPembayaran(String jenisPembayaran) {
+        Assert.assertEquals(goldplus.getJenisPembayaran(jenisPembayaran), jenisPembayaran, "Jenis Pembayaran doesnt match!");
+    }
+
+    @Then("verify button on broadcast page")
+    public void verifyButtonOnBroadcastPage() {
+        playwright.hardWait(3000);
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
+    }
+
+    @And("owner click lanjut bayar button on chatlist")
+    public void ownerClickLanjutBayarButtonOnChatlist(){
+        chat.clickChatOwner();
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
+    @And("owner click lanjut bayar button on chatrooms {string}")
+    public void ownerClickLanjutBayarButtonOnChatrooms(String tenantName) {
+        chat.clickChatOwner();
+        chat.dismissFTUEMars();
+        chat.dismissFTUEMarsKuotaNol();
+        broadcast.clickOnCloseTooltip();
+        playwright.hardWait(3000);
+        playwright.clickOnTextButton(tenantName);
+        playwright.hardWait(3000);
+        playwright.clickOnTextButton("Lanjut Bayar");
+    }
+
+    //------ GP Onboarding ------//
+    @When("owner go to panduan gold plus page")
+    public void ownerGoToPanduanGoldPlusPage() {
+        owner.clickOnGpWidgetButton();
+        goldplus.clickOnPelajariCaranyaButton();
+        panduanGP.clickOnNaikkanIklanAndaButton();
+    }
+
+    @When("owner click on next button to go to slide number {int}")
+    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipper(Integer swiperNumber) {
+        if (swiperNumber <= 6) {
+            panduanGP.clickOnNextButton();
+        }
+    }
+
+    @Then("owner can see swiper number {int} is selected")
+    public void ownerCanSeeSwiperNumberNumberIsSelected(int number) {
+        Assert.assertFalse(panduanGP.getGPswipperAttribute(number -1 , "class").contains(".gp-swiper__step--dim"));
+    }
+
+    @Then("owner can see selected swiper with title {int}")
+    public void ownerCanSeeSelectedSwiperWithTitleNumber(int number) {
+        Assert.assertEquals(Integer.parseInt(panduanGP.getSelectedSwiperTitle()), number);
+    }
+
+    @Then("owner can see swiper text body is {string}")
+    public void ownerCanSeeSwiperTextBodyIsTextBody(String textbody) {
+        Assert.assertEquals(panduanGP.getSelectedSwiperBodyText(), textbody);
+    }
+
+    @Then("owner can see swiper right or next button is disabled")
+    public void ownerCanSeeSwiperRightNextButtonIsDisabled() {
+        Assert.assertTrue(panduanGP.isNextButtonDisabled());
+    }
+
+    @Then("owner can see swiper left or previous button is disabled")
+    public void ownerCanSeeSwiperLeftOrPreviousButtonIsDisabled() {
+        Assert.assertTrue(panduanGP.isPreviousButtonDisabled());
+    }
+
+    @When("owner click on previous button to go to slide number {int}")
+    public void ownerClickOnPreviousButtonToGoToSlideNumberNumber(int number) {
+        if (number >= 2) {
+            panduanGP.clickOnPreviousButton();
+        }
+    }
+
+    @When("owner clicks on coba sekarang button")
+    public void ownerClickOnCobaSekarangButton() {
+        panduanGP.clickCobaSekarangButton();
+    }
+
+    @Then("owner can see gp onboarding text title is {string}")
+    public void ownerCanSeeGpOnboardingTextTitleIs(String textTitle) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingTitle(), textTitle);
+    }
+
+    @Then("owner can see gp onboarding text body is {string}")
+    public void ownerCanSeeGpOnboardingTextBodyIs(String textBody) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingBodyText(), textBody);
+    }
+
+    @Then("owner can see gp onboarding number {int} is selected")
+    public void ownerCanSeeGpOnboardingNumberNumberIsSelected(int number) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingNumber(), number);
+    }
+
+    @Then("owner can see gp onboarding image alt text is {string}")
+    public void ownerCanSeeGpOnboardingImageAltTextIs(String altText) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingImageAltText(), altText);
+    }
+    //------ GP Onboarding ------//
+
+    //------ GP Onboarding Pop-Up ------//
+    @Then("owner can see gp onboarding swiper number {int} is selected")
+    public void ownerCanSeeGpOnboardingSwiperNumberSwiperNumberIsSelected(int swiperNumber) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpActiveCounter(), swiperNumber);
+    }
+
+    @Then("owner can see gp onboarding pop-up text head {string} is selected")
+    public void ownerCanSeeGpOnboardingPopUpTextHeadTextHeadIsSelected(String textHead) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpTextHead(), textHead);
+    }
+
+    @Then("owner can see gp onboarding pop-up text body {string} is selected")
+    public void ownerCanSeeGpOnboardingPopUpTextBodyTextBodyIsSelected(String textBody) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpTextBody(), textBody);
+    }
+
+    @Then("owner can see gp onboarding pop-up image alt text {string} is visible")
+    public void ownerCanSeeGpOnboardingPopUpImageAltTextImageAltTextIsVisible(String imageAltValue) {
+        Assert.assertEquals(mamiads.getGpOnboardingpopUpImageAltAttributeValue(), imageAltValue);
+    }
+
+    @When("owner click on next button on gp onboarding pop-up to go to slide number {int}")
+    public void ownerClickOnNextButtonOnGpOnboardingPopUpToGoToSlideNumberSwiperNumber(int swiperNumber) {
+        if (swiperNumber <= 6) {
+            mamiads.clickGpOnboardingpopUpNextButton();
+        }
+    }
+
+    @Then("owner can see swiper left or previous button on gold plus onboarding pop-up is disabled")
+    public void ownerCanSeeSwiperLeftOrPreviousButtonOnGoldPlusOnboardingPopUpIsDisabled() {
+        Assert.assertTrue(mamiads.isGpOnboardingpopUpPreviousButtonDisabled());
+    }
+
+    @Then("owner can see swiper right or next button on gold plus onboarding pop-up is disabled")
+    public void ownerCanSeeSwiperRightOrNextButtonOnGoldPlusOnboardingPopUpIsDisabled() {
+        Assert.assertTrue(mamiads.isGpOnboardingpopUpNextButtonDisabled());
+    }
+
+    @When("onwer click on previous button on gp onboarding pop-up to go to slide number {int}")
+    public void onwerClickOnPreviousButtonOnGpOnboardingPopUpToGoToSlideNumberSwiperNumber(int swiperNumber) {
+        if (swiperNumber >= 2) {
+            mamiads.clickGpOnboardingpopUpPreviousButton();
+        }
+    }
+    //------ GP Onboarding Pop-Up ------//
+
+    @And("owner go to panduan gold plus memantau performa kos page")
+    public void ownerGoToPanduanGoldPlusMemantauPerformaKosPage() {
+        owner.clickOnGpWidgetButton();
+        goldplus.clickOnPelajariCaranyaButton();
+        panduanGP.clickOnMemantauPerformaKosButton();
+    }
+    @When("owner close pop up detail manfaat")
+    public void owner_close_pop_up_detail_manfaat() {
+        playwright.hardWait(1000.0);
+        goldplus.clickOnCLosePopUpManfaat();
     }
 }

@@ -70,7 +70,10 @@ public class PaymentSteps {
 
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
-        Assert.assertEquals(invoice.getToastText(), "Kode voucher tidak bisa digunakan. "+ System.lineSeparator() +"    Silakan hapus voucher.");
+        var voucherInvalidWording = "Kode voucher tidak bisa digunakan. Silakan hapus voucher.";
+        String toastStringRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
+        String toastRemoveExtraSpace = toastStringRemoveLineSeparator.replaceAll("\\s+", " ");
+        Assert.assertEquals(toastRemoveExtraSpace, voucherInvalidWording);
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
     }
 
@@ -96,7 +99,10 @@ public class PaymentSteps {
 
     @Then("tenant can not use voucher with message {string}")
     public void tenantCanNotUseVoucheWithMessage(String errorMessage) {
-        Assert.assertEquals(invoice.getToastText(), errorMessage + System.lineSeparator() +"    Silakan hapus voucher.");
+        String voucherErrorMessage = errorMessage + "Silakan hapus voucher.";
+        String voucherErrorMessageActualRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
+        String voucherErrorMessageActualRemoveExtraSpace = voucherErrorMessageActualRemoveLineSeparator.replaceAll("\\s+", " ");
+        Assert.assertEquals(voucherErrorMessageActualRemoveExtraSpace, voucherErrorMessage);
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
     }
 
@@ -180,7 +186,7 @@ public class PaymentSteps {
         filterKost = table.asMaps(String.class, String.class);
         var filter = filterKost.get(0).get("kost name " + Mamikos.ENV);
         ownerDashboard.clickOnManagementKost();
-        invoice.openKelolaTagihan();
+        ownerDashboard.clickOnKelolaKos();
         invoice.filterTagihanKost(filter);
     }
 
@@ -265,8 +271,61 @@ public class PaymentSteps {
         invoice.paymentOVO("081280003230");
     }
 
-    @When("tenant make bill payments using ovo")
-    public void tenantMakeBillPaymentsUsingOvo() {
-        invoice.choosePaymentUsingOVO();
+    @When("tenant make bill payments using {string}")
+    public void tenantMakeBillPaymentsUsingOvo(String method) {
+        invoice.choosePaymentUsing(method);
     }
+
+
+    @And("tenant pay booking to extended contract using ovo {string}")
+    public void tenantPayBookingToExtendedContractUsingOvo(String phoneNumber) {
+        invoice.paymentOVO(phoneNumber);
+    }
+
+    @Then("tenant can not sees add on price on payment page")
+    public void tenantCanNotSeesAddOnPriceOnPaymentPage() {
+        int basicAmount = invoice.getBasicPrice();
+        int adminFee = invoice.getAdminPrice();
+        int totalAmount = invoice.getSubTotal();
+        Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
+    }
+
+    @Then("tenant can see TnC {string} on invoice")
+    public void tenant_can_see_tnc_x_on_invoice(String tnc) {
+        Assert.assertEquals(invoice.getTnCInvoiceFullText(), tnc, "not the same text");
+    }
+
+    @And("tenant click text Syarat dan Ketentuan Umum on invoice")
+    public void tenant_click_text_x_on_invoice() {
+        invoice.clickTnCInvoice();
+    }
+
+    @When("system display remaining payment {string} use mamipoin for payment monthly")
+    public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
+        String remainingPaymentBefore = "Rp10.001.000";
+        String remainingPaymentAfter = "Rp9.877.544";
+
+        if(condition.equals("before")){
+            Assert.assertEquals(invoice.getTotalCost(), remainingPaymentBefore, "Remaining payment before doesn't match");
+        }
+        else {
+            Assert.assertEquals(invoice.getTotalCost(), remainingPaymentAfter, "Remaining payment after doesn't match");
+        }
+    }
+
+    @When("user clicks on mamipoin toggle button to ON")
+    public void user_clicks_on_mamipoin_toggle_button_to_on() {
+        invoice.clickMamipoinToggleButtonToOn();
+    }
+
+    @When("user clicks on mamipoin toggle button to OFF")
+    public void user_clicks_on_mamipoin_toggle_button_to_off() {
+        invoice.clickMamipoinToggleButtonToOff();
+    }
+
+    @Then("tenant point estimate not displayed on invoice")
+    public void tenant_point_estimate_not_displayed_on_invoice()  {
+        Assert.assertFalse(invoice.isPointEstimateTenantVisible());
+    }
+
 }

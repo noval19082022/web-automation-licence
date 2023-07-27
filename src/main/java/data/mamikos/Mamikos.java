@@ -39,5 +39,12 @@ public class Mamikos {
     public static final String ADMIN_GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS,"adminGoldplusPackage");
     public static final String PROPHOTO = JavaHelpers.getPropertyValue(MAMIKOS,"oldProPhoto");
     public static final String MAMIFOTO = JavaHelpers.getPropertyValue(MAMIKOS,"mamifoto");
+    public static final String KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kostSaya");
+    public static final String KONTRAK_KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKostSaya");
+    public static final String MAMIPOIN_GUIDELINE = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinGuideline");
+    public static final String HELP_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "helpPage");
+    public static final String PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "penyewa");
+    public static final String MAMIPOIN_EXPIRED = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinExpired");
 
+    public static final String MAMIKOS_VOUCHER = JavaHelpers.getPropertyValue(MAMIKOS, "mamikosVoucher");
 }

@@ -62,8 +62,6 @@ public class TenantBookingSteps {
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
-
-
     @And("user will see Jumlah Penyewa can add until 3 Penyewa")
     public void add_three_penyewa() {
         bookingForm = new BookingFormPO(page);
@@ -114,7 +112,9 @@ public class TenantBookingSteps {
     @When("tenant booking kost for {string}")
     public void tenantBookingKostFor(String bookingTime) {
         if (bookingTime.equalsIgnoreCase("today")){
-            kostDetail.dismissFTUE();
+            if (kostDetail.isFTUEBookingBenefitVisible()) {
+                kostDetail.dismissFTUE();
+            }
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
@@ -217,4 +217,124 @@ public class TenantBookingSteps {
         bookingForm.clickOnAjukanSewaButton();
         Assert.assertEquals(bookingForm.getAlertJobsTextAfterClick(), messsageRequired, "text not same in the display");
     }
+
+    @And("tenant open calendar from kost detail")
+    public void tenantOpenCalendarFromKostDetail() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnCalendar();
+    }
+
+    @Then("tenant will see BSS Information {string}")
+    public void tenantWillSeeBSSInformation(String infoBSS) {
+        Assert.assertEquals(kostDetail.getBSSInformationText(infoBSS), infoBSS, "text not same in the display");
+    }
+
+    @When("tenant fill booking data for {string} and {string}")
+    public void tenantFillBookingDataFor(String bookingTime, String rentType) {
+        if (bookingTime.equalsIgnoreCase("today")) {
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod(rentType);
+        } else if (bookingTime.equalsIgnoreCase("tomorrow")) {
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod(rentType);
+        }
+    }
+
+    @Then("tenant should see ajukan sewa button is {string}")
+    public void tenantShouldSeeAjukanSewais(String status) {
+        if (status.equalsIgnoreCase("enable")) {
+            Assert.assertTrue(kostDetail.isAjukanSewaButtonEnable());
+        } else if (status.equalsIgnoreCase("disable")) {
+            Assert.assertFalse(kostDetail.isAjukanSewaButtonEnable());
+        }
+    }
+
+    @When("tenant booking kost after fill date and rent type")
+    public void tenantBookingKostAfterFillDateAndRentType() {
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+        bookingForm.clickOnAjukanSewaButton();
+        bookingForm.clickOnBookingConfirmationCheckmark();
+        successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+    }
+
+    @Then("tenant/user can see harga coret on price section")
+    public void user_can_see_harga_coret_on_price_section() {
+        Assert.assertTrue(kostDetail.isHargaCoretVisible());
+    }
+
+    @Then("tenant/user can not see harga coret on price section")
+    public void user_can_not_see_harga_coret_on_price_section() {
+        Assert.assertFalse(kostDetail.isHargaCoretVisible());
+    }
+
+    @And("tenant/user dismiss promo ngebut pop up")
+    public void user_dismiss_promo_ngebut_pop_up() {
+        kostDetail.scrollDownToUntilPromoPopUpVisible();
+        if (kostDetail.isMamikosPromoNgebutButtonVisible()) {
+            kostDetail.clickOnSayaMengertiButton();
+        }
+    }
+
+    @And("tenant/user click ajukan sewa button on kost detail page")
+    public void tenant_click_ajukan_sewa_on_kost_detail() {
+        bookingForm = kostDetail.clickOnAjukanSewaButton();
+    }
+
+    @And("tenant/user click ajukan sewa button on pengajuan sewa page")
+    public void tenant_click_ajukan_sewa_on_pengajuan_sewa() {
+        bookingForm.clickOnAjukanSewaButton();
+    }
+
+    @Then("tenant/user can see TnC with {string}")
+    public void user_can_see_tnc_with_x(String text) {
+        if (text.equalsIgnoreCase("Syarat Ketentuan Umum") || text.equalsIgnoreCase("Syarat dan Ketentuan Umum")) {
+            Assert.assertEquals(bookingForm.getTnCBookingTextReguler(), text, "text not same with tnc booking");
+        } else if(text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
+            Assert.assertEquals(bookingForm.getTnCBookingTextSinggahsini(), text, "text not same with tnc booking");
+        }
+    }
+
+    @When("tenant/user click on TnC with {string}")
+    public void user_click_on_tnc_with_x(String text) {
+        if (text.equalsIgnoreCase("Syarat Ketentuan Umum") || text.equalsIgnoreCase("Syarat dan Ketentuan Umum")) {
+            bookingForm.clickOnTnCBookingReguler();
+        } else if (text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
+            bookingForm.clickTnCBookingSinggahsini();
+        }
+    }
+
+    @Then("tenant/user can see TnC content with {string}")
+    public void user_can_see_tnc_content_text_with_x(String text) {
+        Assert.assertEquals(bookingForm.getTnCBookingContentText(), text, "text not same with the content");
+        bookingForm.clickOkPahamButton();
+    }
+
+    @Then("tenant/user can see refund policy on kost detail")
+    public void tenant_can_see_refund_policy() {
+        Assert.assertTrue(kostDetail.isRefundPolicySectionVisible(), "refund policy in kost detail is not visible");
+    }
+
+    @When("tenant/user click bagaimana ketentuannya")
+    public void tenant_click_bagaimana_ketentuannya() {
+        kostDetail.clickBagaimanaKetentuan();
+    }
+
+    @Then("tenant/user can see refund policy information with:")
+    public void tenant_can_see_refund_policy_information(List<String> refundSubtitle) {
+        Assert.assertTrue(kostDetail.isTnCRefundVisible(), "Syarat dan Ketentuan Refund is not visible");
+        for (String s : refundSubtitle) {
+            kostDetail.isTnCRefundPoint(s);
+        }
+    }
+
+    @When("tenant/user click refund policy mamikos")
+    public void tenant_click_refund_policy_mamikos() {
+        kostDetail.clickRefundPolicyMamikos();
+    }
+
+    @When("tenant/user click on ketentuan waktu berikut")
+    public void tenant_click_on_ketentuan_waktu_berikut() {
+        kostDetail.clickTimeConditionRefund();
+    }
+
 }

@@ -1,5 +1,6 @@
 package pageobject.common;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -9,6 +10,8 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class KostDetailsPO {
     Page page;
@@ -35,6 +38,20 @@ public class KostDetailsPO {
 
     Locator hapusDraft;
 
+    Locator chatPemilikButton;
+
+    Locator bantuanButton;
+
+    Locator chatListTittle;
+
+    Locator informationKosDetail;
+
+    Locator tagihanKosTittle;
+    Locator contractTittle;
+    Locator chatOwnerTittle;
+    Locator forumTittle;
+    Locator kategoriBantuanTittle;
+
     //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
     Locator unFavoriteKostButton;
@@ -43,6 +60,10 @@ public class KostDetailsPO {
     Locator shareKostButton;
     Locator filterButton;
     Locator needConfirmation;
+    Locator seeCompleteBtn;
+    Locator cancelBookingBtn;
+    Locator reasonOption;
+    Locator yesCancelBookingBtn;
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -155,6 +176,7 @@ public class KostDetailsPO {
 
     //------------ Right Panel Section -----------------
     private Locator totalPriceText;
+    private Locator discountPriceKostDetailText;
     private Locator bookingDateForm;
     private Locator bookingDate;
     private Locator bookingDurationForm;
@@ -187,6 +209,16 @@ public class KostDetailsPO {
     private Locator userReviewModal;
     private Locator closeModalReviewBtn;
 
+    // ------------ Refund Policy Section --------------
+    private Locator refundPolicySection;
+    private Locator canRefundText;
+    private Locator accordingToTnCRefundText;
+    private Locator whatAreTheTermsText;
+    private Locator tncRefundtitleText;
+    private Locator refundPolicyMamikos;
+    private Locator timeConditionText;
+    private Locator tncRefundPoint;
+
 
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
@@ -202,7 +234,7 @@ public class KostDetailsPO {
         this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
-        this.bookingPeriodInput = page.locator("input.booking-rent-type__input");
+        this.bookingPeriodInput = page.locator("div.booking-rent-type__input");
         this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
         this.kostTitle = page.locator("#detailTitle");
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
@@ -211,6 +243,10 @@ public class KostDetailsPO {
         this.kosDetailPage = page.locator("detailKostContainer");
         this.filterButton = page.locator(".filter-item-mobile:first-child span");
         this.needConfirmation = page.locator("li:nth-child(2) button");
+        this.seeCompleteBtn = page.locator(".booking-list-card:nth-child(1) .hidden-xs .text-primary");
+        this.cancelBookingBtn = page.locator(".--is-detail .detail-cancel button");
+        this.reasonOption = page.locator(".fade.in .form-options");
+        this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
         this.saveDraftButton = page.locator("//*[@class='bg-c-button bg-c-button--primary-naked bg-c-button--md bg-c-button--block']");
         this.textPopup = page.getByText("Fasilitas umum");
         this.backButton = page.locator(".booking-request-form__back-btn");
@@ -219,6 +255,15 @@ public class KostDetailsPO {
         this.deleteButtonOnTabOneDraftBooking = page.locator(".btn-default[data-v-195f9976]");
         this.hapusDraft = page.locator("//button[contains(.,'Hapus Draft')]");
         this.mauCobaDongSectionAtHomepage = page.locator(".bg-c-text--button-sm");
+        this.chatPemilikButton = page.getByTestId("userKostActivities-menus").locator("div").filter(new Locator.FilterOptions().setHasText("Chat pemilik"));
+        this.chatListTittle = page.getByText("Chat room");
+        this.bantuanButton = page.getByTestId("userKostActivities-menus").locator("div").filter(new Locator.FilterOptions().setHasText("Bantuan"));
+        this.informationKosDetail = page.getByText("Informasi Kos");
+        this.tagihanKosTittle = page.getByText("Tagihan kos");
+        this.contractTittle = page.getByText("Kontrak");
+        this.chatOwnerTittle = page.getByText("Chat pemilik");
+        this.forumTittle = page.getByText("Forum");
+        this.kategoriBantuanTittle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kategori Bantuan"));
 
         //---------login popup---------------
         this.loginPopUp = page.locator("p[class='login-title']");
@@ -334,6 +379,7 @@ public class KostDetailsPO {
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
+        this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
         this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
         this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
@@ -365,6 +411,15 @@ public class KostDetailsPO {
         this.sortingReviewBtn = page.getByTestId("filter-tag");
         this.userReviewModal = page.locator("div[class='users-feedback']").first();
         this.closeModalReviewBtn = page.locator("span[class='kost-review-modal-header__close']");
+
+        // ------------ Refund Policy Section --------------
+        this.refundPolicySection = page.locator(".detail-kost-refund div");
+        this.canRefundText = page.getByText("Bisa Refund");
+        this.accordingToTnCRefundText = page.getByText("Sesuai dengan ketentuan dan kebijakan refund yang berlaku di Mamikos.");
+        this.whatAreTheTermsText = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bagaimana ketentuannya?"));
+        this.tncRefundtitleText = page.locator("//p[contains(.,'Syarat dan Ketentuan Refund')]");
+        this.refundPolicyMamikos = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan refund Mamikos"));
+        this.timeConditionText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("ketentuan waktu berikut"));
     }
 
     /**
@@ -378,15 +433,16 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
+        var maxLoop = 0;
         playwright.pageScrollToDown(300);
-        for (int i = 0; i < 4; i++) {
-            if (ftueSlider.isVisible()) {
-                break;
-            }
-        }
+        playwright.waitFor(ftueSlider, 5000.0);
         do {
+            maxLoop++;
             if (ftueSlider.isVisible()) {
                 playwright.forceClickOn(ftueSlider);
+            }
+            if (maxLoop == 7) {
+                break;
             }
         } while (ftueSlider.isVisible());
     }
@@ -421,10 +477,10 @@ public class KostDetailsPO {
      * @param bookingPeriod string data type
      */
     public void selectBookingPeriod(String bookingPeriod) {
-        if (!page.getByText(bookingPeriod).isVisible()) {
+        if (!page.getByText(bookingPeriod).last().isVisible()) {
             bookingPeriodInput.click();
         }
-        page.getByText(bookingPeriod).click();
+        page.getByText(bookingPeriod).last().click();
     }
 
     /**
@@ -435,6 +491,15 @@ public class KostDetailsPO {
     public BookingFormPO clickOnAjukanSewaButton() {
         ajukanSewaButton.click();
         return new BookingFormPO(page);
+    }
+
+    /**
+     * get list breadcrumb on detail kost
+     * example breadcrumb is "Home > Kost Semarang > Kost Putra Dorgiocavall Bulusan Semarang"
+     * @return string list of breadcrumb
+     */
+    public List<String> getListBreadCrumb() {
+        return page.locator("ol").locator("li").locator(".breadcrumb-trail").allInnerTexts();
     }
 
     /**
@@ -515,6 +580,7 @@ public class KostDetailsPO {
             if (btnMamikosPromoNgebut.isVisible()) {
                 break;
             }
+            playwright.hardWait(500);
         }
     }
 
@@ -1557,6 +1623,7 @@ public class KostDetailsPO {
             if (ftueSlider.isVisible()) {
                 break;
             }
+            playwright.hardWait(500);
         }
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
     }
@@ -1573,9 +1640,26 @@ public class KostDetailsPO {
      * Click on filter in riwayat booking
      */
     public void cancelAllBookingWithDefaultReason() {
-        filterButton.click();
-        page.pause();
-        needConfirmation.click();
+        var maxLoop = 0;
+        do {
+            maxLoop++;
+            filterButton.click();
+            needConfirmation.waitFor();
+            needConfirmation.click();
+            playwright.hardWait(2000);
+            if (seeCompleteBtn.isVisible()) {
+                seeCompleteBtn.click();
+                cancelBookingBtn.click();
+                playwright.waitTillLocatorIsVisible(reasonOption);
+                yesCancelBookingBtn.click();
+                page.reload();
+                filterButton.waitFor();
+            }
+            if (maxLoop == 5) {
+                break;
+            }
+        } while (seeCompleteBtn.isVisible());
+
     }
 
     /**
@@ -1646,5 +1730,164 @@ public class KostDetailsPO {
             playwright.pageScrollToDown(1000);
         }
         return page.getByText(text).first().isVisible();
+    }
+
+    /**
+     * click calendar
+     */
+    public void clickOnCalendar() {
+        playwright.waitTillLocatorIsVisible(dateTextBox);
+        playwright.clickOn(mulaiKosInput);
+    }
+
+    /**
+     * get BSS information
+     *
+     * @return 'string' BSS information
+     */
+    public String getBSSInformationText(String infoBSSText) {
+            return playwright.getText(page.getByText(infoBSSText));
+    }
+
+    /**
+     * check is it ajukan sewa button is enable
+     * @return boolean
+     */
+    public boolean isAjukanSewaButtonEnable(){
+        return ajukanSewaButton.isEnabled();
+    }
+
+    /**
+     * check if harga coret is visible
+     * @return boolean, true if harga coret visible
+     */
+    public boolean isHargaCoretVisible() {
+        return discountPriceKostDetailText.isVisible();
+    }
+    /**
+     * Click on chat pemilik button
+     */
+    public void clickOnChatPemilikButton() {
+        chatPemilikButton.click();
+    }
+
+    /**
+     * Click on bantuan button
+     */
+    public void clickOnBantuanMenuButton() {
+        bantuanButton.click();
+    }
+
+    /**
+     * Click on button text
+     */
+    public void clickOnBytextButton(String buttonText) {
+        String selector = "(//a[normalize-space()='"+ buttonText +"'])";
+        ElementHandle element = page.querySelector(selector);
+        element.click();
+    }
+
+    /**
+     * this method will be chatlist tittle displayed
+     */
+    public Boolean isChatListTittleDisplayed() {
+        playwright.hardWait(3);
+        return playwright.waitTillLocatorIsVisible(chatListTittle);
+    }
+
+    /**
+     * this method will be information kos detail displayed
+     */
+    public Boolean isInformationKosDetaileDisplayed() {
+        playwright.hardWait(3);
+        return playwright.waitTillLocatorIsVisible(informationKosDetail);
+    }
+
+    /**
+     * this method will be information activities tagihan in my kos displayed
+     */
+    public Boolean isTagihanKosDisplayed(){
+        return playwright.waitTillLocatorIsVisible(tagihanKosTittle);
+    }
+    /**
+     * this method will be information activities contract in my kos displayed
+     */
+    public Boolean isKontrakDisplayed(){
+        return playwright.waitTillLocatorIsVisible(contractTittle);
+    }
+    /**
+     * this method will be information activities chat pemilik in mya kos displayed
+     */
+    public Boolean isChatPemilikDisplayed(){
+        return playwright.waitTillLocatorIsVisible(chatOwnerTittle);
+    }
+    /**
+     * this method will be information activities bantuan in mya kos displayed
+     */
+    public Boolean isBantuanDisplayed(){
+        return playwright.waitTillLocatorIsVisible(bantuanButton);
+    }
+    /**
+     * this method will be information activities forum in mya kos displayed
+     */
+    public Boolean isForumDisplayed(){
+        return playwright.waitTillLocatorIsVisible(forumTittle);
+    }
+    /**
+     * this method will be information activities forum in mya kos displayed
+     */
+    public Boolean isKategoriBantuanTittleDisplayed(){
+        return playwright.waitTillLocatorIsVisible(kategoriBantuanTittle);
+    }
+
+    /**
+     * check is refund policy section and all inside it is visible or not
+     * @return boolean, true if visible
+     */
+    public boolean isRefundPolicySectionVisible() {
+        canRefundText.isVisible();
+        accordingToTnCRefundText.isVisible();
+        return refundPolicySection.isVisible();
+    }
+
+    /**
+     * click bagaimana ketentuannya? text on refund policy section
+     */
+    public void clickBagaimanaKetentuan() {
+        playwright.pageScrollUntilElementIsVisible(whatAreTheTermsText);
+        whatAreTheTermsText.click();
+    }
+
+    /**
+     * check is refund tnc title visible or not
+     * @return boolean, true if visible
+     */
+    public boolean isTnCRefundVisible() {
+        return playwright.waitTillLocatorIsVisible(tncRefundtitleText);
+    }
+
+    /**
+     * scroll until element and click "kebijakan refund mamikos"
+     */
+    public void clickRefundPolicyMamikos() {
+        playwright.pageScrollUntilElementIsVisible(refundPolicyMamikos);
+        refundPolicyMamikos.click();
+    }
+
+    /**
+     * click on "ketentuan waktu berikut" text on refund tnc
+     */
+    public void clickTimeConditionRefund() {
+        timeConditionText.click();
+    }
+
+    /**
+     * check TnC refund is visible
+     * @param refundSubtile refer to TnC refund list/point
+     *                      e.g. Refund sebelum check-in
+     */
+    public void isTnCRefundPoint(String refundSubtile) {
+        tncRefundPoint = page.getByText(refundSubtile);
+        assertThat(tncRefundPoint).isVisible();
     }
 }

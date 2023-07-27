@@ -219,4 +219,16 @@ public class SearchContractSteps {
         searchContract.fillSearchByValue(kostName);
         searchContract.clickOnSearchButton();
     }
+
+    @When("admin clicks on invoice number {string} on first index contract")
+    public void admin_clicks_on_invoice_number_on_first_index_contract(String index) {
+        searchContract.clicksOnInvoiceNumberOnFirstIndex(index);
+    }
+
+    @Then("admin verify table header row is displayed with name:")
+    public void admin_verify_table_header_row_is_displayed_with_name(List<String> tableHeader) {
+        for (String s : tableHeader) {
+            searchContract.isTableHeaderVisible(s);
+        }
+    }
 }

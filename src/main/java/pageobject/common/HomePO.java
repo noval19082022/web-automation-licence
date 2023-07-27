@@ -25,6 +25,7 @@ public class HomePO {
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
     private Locator kostPromo;
+    private Locator lihatPengajuanLainBtn;
 
     //header
     Locator searchAdsButton;
@@ -89,6 +90,7 @@ public class HomePO {
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
+        this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
 
 
         //header
@@ -156,7 +158,7 @@ public class HomePO {
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(mamikosLogo, 30000.0);
-        playwright.waitFor(userPhoto, 3000.0);
+        playwright.waitFor(userPhoto, 10000.0);
     }
 
     /**
@@ -615,5 +617,21 @@ public class HomePO {
     public void clickAroundUGM() {
         playwright.pageScrollToDown(3000);
         aroundUnivUGM.click();
+    }
+
+    /**
+     * Check visibility of lihat pengajuan lain button
+     * @return boolean
+     */
+    public boolean isLihatPengajuanLainBtnVisible() {
+        return lihatPengajuanLainBtn.isVisible();
+    }
+
+    /**
+     * Click lihat pengajuan lain button
+     */
+    public void clickLihatPengajuanLainBtn() {
+        playwright.pageScrollToDown(500);
+        lihatPengajuanLainBtn.click();
     }
 }

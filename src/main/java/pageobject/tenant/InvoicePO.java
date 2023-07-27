@@ -62,6 +62,15 @@ public class InvoicePO {
     Locator txtOVO;
     Locator noOvoTextBox;
     Locator additionalPriceDivAddOn;
+    Locator voucherDivSection;
+    Locator perDurationPriceText;
+    Locator biayaLayananMamikosText;
+    Locator tncInvoiceFullText;
+    Locator tncInvoiceText;
+    Locator mamipoinToggleButtonOn;
+    Locator mamipoinToggleButtonOff;
+    Locator tenantPointEstimate;
+    Locator discountMamipoinText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -72,7 +81,7 @@ public class InvoicePO {
         voucherCodeInput = page.getByTestId("codeVoucher_txt");
         pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         totalPembayaran = page.locator("//*[.='Total Pembayaran']/following-sibling::*");
-        subTotal = page.locator("//*[.='Sub Total']/following-sibling::*");
+        subTotal = page.locator("//*[.='Sub Total']/following-sibling::*").first();
         appliedVoucher = "//*[@class='invoice-detail-row-section']//*[contains(text(), '%s')]/following-sibling::*";
         toast = page.locator(".bg-c-toast__content");
         deleteVoucher = page.locator("#invoiceContent .invoice-voucher-switch");
@@ -82,7 +91,7 @@ public class InvoicePO {
         voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
-        pilihPembayaranButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Pilih"));
+        pilihPembayaranButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
@@ -99,7 +108,7 @@ public class InvoicePO {
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
         invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
-        txtRentPerPeriod = page.locator(".bg-c-text--body-1[data-v-f4a1d764]");
+        txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
         closeFilter = page.locator("i").nth(1);
@@ -112,7 +121,16 @@ public class InvoicePO {
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
-        additionalPriceDivAddOn = page.getByTestId("invoiceBillingRoomContent-addOn");
+        additionalPriceDivAddOn = page.locator(".collapse.details-collapsible");
+        voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
+        biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
+        perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
+        tncInvoiceFullText = page.locator(".first-column.column");
+        tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
+        mamipoinToggleButtonOn = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--off']");
+        mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
+        tenantPointEstimate = page.locator(".mamipoin-estimated-text");
+        discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
 
     }
 
@@ -121,10 +139,10 @@ public class InvoicePO {
      * Wait for the page to be fully loaded before interacting with elements
      * Check if the "delete voucher" button is visible before clicking on it
      */
-    public void clickOnDeleteVoucher() throws InterruptedException {
+    public void clickOnDeleteVoucher() {
         page.waitForLoadState(LoadState.LOAD);
-        page.waitForTimeout(1000);
-        if (deleteVoucher.isVisible()) {
+        playwright.waitFor(voucherDivSection, 5000.0);
+        if (playwright.waitTillLocatorIsVisible(deleteVoucher)) {
             playwright.clickOn(deleteVoucher);
         }
     }
@@ -316,8 +334,9 @@ public class InvoicePO {
     public List<String> getAdditionalPriceInnerText() {
         List<String> textAdditionalPrice = null;
         page.waitForLoadState(LoadState.LOAD);
+        playwright.hardWait(3000);
         if (playwright.waitTillLocatorIsVisible(additionalPriceDiv)){
-            additionalPriceDiv.waitFor();
+            playwright.waitFor(additionalPriceDiv,10000.0);
             textAdditionalPrice = additionalPriceDiv.allInnerTexts();
         }else {
             additionalPriceDivAddOn.waitFor();
@@ -434,9 +453,13 @@ public class InvoicePO {
     /**
      * choose payment using ovo as payment method without input phone number
      */
-    public void choosePaymentUsingOVO(){
+    public void choosePaymentUsing(String method){
         clickOnPilihPembayaran();
-        playwright.clickOn(txtOVO);
+        if (method.equalsIgnoreCase("Kartu Kredit")) {
+            playwright.clickOn(kartuKredit);
+        } else if (method.equalsIgnoreCase("OVO")) {
+            playwright.clickOn(txtOVO);
+        }
     }
 
     /**
@@ -501,5 +524,81 @@ public class InvoicePO {
         });
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
+    }
+
+    /**
+     * Get per period / or basic amount price
+     * @return per period price / or basic amount price as integer
+     */
+    public int getBasicPrice() {
+        return JavaHelpers.extractNumber(playwright.getText(perDurationPriceText));
+    }
+
+    /**
+     * Get admin fee
+     * @return integer data type of biaya Layanan Mamikos
+     */
+    public int getAdminPrice(){
+        return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosText));
+    }
+
+    /**
+     * get full text of term and condition on invoice page
+     * @return string
+     */
+    public String getTnCInvoiceFullText() {
+        return tncInvoiceFullText.innerText();
+    }
+
+    /**
+     * click term and condition on invoice
+     */
+    public void clickTnCInvoice() {
+        tncInvoiceText.click();
+    }
+
+    /**
+     * Click MamiPoin Toggle Button to On
+     */
+    public void clickMamipoinToggleButtonToOn() {
+        playwright.hardWait(3000.0);
+        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOn)) {
+            playwright.clickOn(mamipoinToggleButtonOn);
+        } else {
+            playwright.clickOn(mamipoinToggleButtonOff);
+            playwright.hardWait(3000.0);
+            playwright.clickOn(mamipoinToggleButtonOn);
+            playwright.hardWait(3000.0);
+        }
+    }
+
+    /**
+     * Click MamiPoin Toggle Button to Off
+     */
+    public void clickMamipoinToggleButtonToOff() {
+        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
+            playwright.clickOn(mamipoinToggleButtonOff);
+        } else {
+            playwright.clickOn(mamipoinToggleButtonOn);
+            playwright.hardWait(3000.0);
+            playwright.clickOn(mamipoinToggleButtonOff);
+        }
+    }
+
+    /**
+     * Check if Point Estimate is not visible on invoice
+     */
+    public Boolean isPointEstimateTenantVisible() {
+        playwright.hardWait(3000.0);
+        return tenantPointEstimate.isVisible();
+    }
+
+    /**
+     * return discount mamipoin text
+     *
+     * @return int data type
+     */
+    public int getDiscountMamipoinText() {
+        return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
     }
 }

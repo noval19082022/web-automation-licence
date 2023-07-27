@@ -1,11 +1,9 @@
-package pageobject.owner;
+package pageobject.owner.goldplus;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
 
 public class GoldplusPO {
     private Page page;
@@ -19,13 +17,14 @@ public class GoldplusPO {
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
     Locator selectRadioButtonYes;
-    Locator registerGPButton;
-    Locator pilihPeriodeGPButton;
-    Locator pilihBayarSekarang;
-    Locator lihatInvoiceButton;
     Locator messageText;
     Locator lihatTagihanTable;
     Locator actionButtonPopUp;
+    Locator widgetGP;
+    Locator snkGoldplusCheckbox;
+    Locator weeklyPeriode;
+    Locator pelajariCaranyaButton;
+    Locator closePopUpDetailManfaat;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -39,12 +38,31 @@ public class GoldplusPO {
         editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
-        registerGPButton = page.getByTestId("registerGP_btn");
-        pilihPeriodeGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
-        pilihBayarSekarang = page.locator(".bg-c-button--primary");
-        lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
         messageText = page.locator(".bg-c-empty-state__description");
         lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
+        widgetGP = page.locator(".membership-card__label");
+        snkGoldplusCheckbox =  page.locator("label");
+        weeklyPeriode = page.locator(".bg-c-radio__icon").first();
+        pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
+        closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
+    }
+
+    /**
+     * Get list periode gp, salldo free mamiads, actual price, discount price
+     *
+     * @param goldplus input goldplus package 1 or 2
+     */
+    public void clickOnGoldplusPackageButton(int goldplus){
+        playwright.clickOn(page.getByTestId("beliGP"+goldplus+"_btn"));
+
+    }
+
+    /**
+     * Click on Checkbox Syarat dan Ketentuan Goldplus
+     *
+     */
+    public void clickOnCheckbox(){
+        playwright.clickOn(snkGoldplusCheckbox);
     }
 
     /**
@@ -124,25 +142,8 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
+        playwright.hardWait(3000);
         playwright.clickOnText(infoUntukAndaMessage);
-    }
-
-    /**
-     * Click on Lihat invoice button on broadcast chat screen
-     *
-     *
-     */
-    public void clickOnLihatInvoice() {
-        playwright.clickOn(lihatInvoiceButton);
-    }
-
-    /**
-     * Verify Detail Tagihan visible
-     * @return boolean, true
-     *
-     */
-    public boolean isDetailTagihanVisible() {
-        return playwright.isTextDisplayed("Detail Tagihan");
     }
 
     /**
@@ -154,24 +155,73 @@ public class GoldplusPO {
         return playwright.getText(messageText).replaceAll("\\s", "");
     }
 
-    public boolean isConfirmationPopUpVisible(String titlePopUp) {
-        return playwright.isTextDisplayed(titlePopUp);
-    }
-
-    public void clickOnActionButtonPopUp(String actionText) {
-        actionButtonPopUp= page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(actionText));
-        System.out.println(actionButtonPopUp);
-        playwright.pageScrollUntilElementIsVisible(actionButtonPopUp);
-        playwright.clickOn(actionButtonPopUp);
-    }
-
     /**
      * Get unpaid invoice GP
      * @return int, count of unpaid invoice GP
      *
      */
     public int getCountInvoiceUnpaid() {
-       playwright.waitTillLocatorIsVisible(lihatTagihanTable,3000.0);
-       return playwright.getLocators(lihatTagihanTable).size();
+        playwright.hardWait(3000);
+        return playwright.getLocators(lihatTagihanTable).size();
     }
+
+    /**
+     * Click widget GP when status menunggu pembayaran
+     *
+     *
+     */
+    public void clickOnWidgetGP() {
+        playwright.hardWait(3000);
+        playwright.clickOn(widgetGP);
+    }
+
+    /**
+     * Click Pilih on GP package
+     * Entry point from status menunggu pembayaran Then ganti paket
+     * Redirect to GP package list
+     */
+    public void clickOnGPPackage(int pacakge) {
+        Locator pilihGPButton = page.getByTestId("beliGP"+pacakge+"_btn");
+        playwright.clickOn(pilihGPButton);
+    }
+
+    /**
+     * Verify jenis pembayaran (Goldplus monthly, Goldplus weekly, Mamiads, Mamifoto)
+     * @param jenisPembayaran
+     * @return text jenisPembayaran
+     */
+    public String getJenisPembayaran(String jenisPembayaran) {
+        return playwright.getText(page.locator("#invoiceBill").getByText(jenisPembayaran));
+    }
+
+    /**
+     * Select periode weekly
+     *
+     *
+     */
+    public void clickOnPeriodeWeekly() {
+        playwright.clickOn(weeklyPeriode);
+
+    }
+
+    /**
+     * Click on Pelajari Caranya button
+     *
+     *
+     */
+    public void clickOnPelajariCaranyaButton() {
+        playwright.clickOn(pelajariCaranyaButton);
+    }
+
+    /**
+     * Click on icon close pop up detail manfaat
+     *
+     *
+     */
+    public void clickOnCLosePopUpManfaat() {
+        playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
+        playwright.clickOn(closePopUpDetailManfaat);
+    }
+
+
 }

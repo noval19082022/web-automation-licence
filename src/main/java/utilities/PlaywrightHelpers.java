@@ -400,7 +400,7 @@ public class PlaywrightHelpers {
      * default timeout
      */
     public void clickOnText(String words) {
-        clickOn(page.getByText(words));
+        clickOn(page.getByText(words).first());
     }
 
     /**
@@ -451,7 +451,7 @@ public class PlaywrightHelpers {
      * @return boolean
      */
     public boolean isTextDisplayed(String text, double duration) {
-        return isLocatorVisibleAfterLoad(page.getByText(text), duration);
+        return isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
     }
 
     /**

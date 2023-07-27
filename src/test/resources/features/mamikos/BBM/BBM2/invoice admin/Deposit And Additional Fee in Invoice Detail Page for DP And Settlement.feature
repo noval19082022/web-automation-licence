@@ -34,7 +34,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
     When user login as owner:
       | phone stag      | phone prod      | password      |
       | 08900000000021  | 08900000000021  | mamikosqa123  |
-    And owner accept booking
+    And owner accept booking from tenant:
+      | tenant stag          | tenant prod          |
+      | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
   @TEST_BBM-1326
