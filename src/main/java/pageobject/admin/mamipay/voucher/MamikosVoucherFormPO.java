@@ -1,5 +1,6 @@
 package pageobject.admin.mamipay.voucher;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -57,6 +58,7 @@ public class MamikosVoucherFormPO {
     Locator updateMassVoucherButton;
     Locator activeCheckbox;
     Locator alertMessageDisplayed;
+    Locator dropdownContractPeriod;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -97,7 +99,8 @@ public class MamikosVoucherFormPO {
         campaignTitleInput = page.locator("input[name=\"public_campaign\\[title\\]\"]");
         updateMassVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
         activeCheckbox = page.locator("//b[normalize-space()='Active']//preceding-sibling::input");
-        alertMessageDisplayed = page.getByText("Voucher AUTOVINVALID updated");
+        alertMessageDisplayed = page.locator("//div[@class='callout callout-success']");
+        dropdownContractPeriod = page.locator("select[name=\"min_contract_duration\"]");
     }
 
     /**
@@ -477,5 +480,24 @@ public class MamikosVoucherFormPO {
      */
     public Boolean isAlertMessageDisplayed(){
         return playwright.waitTillLocatorIsVisible(alertMessageDisplayed);
+    }
+    /**
+     * Click on dropdown contract period button
+     */
+    public void clickOnDropdownContractPeriod() {
+        playwright.clickOn(dropdownContractPeriod);
+    }
+    /**
+     * Click on edit pencil icon
+     */
+    public void clickOnEditPencilIcon() {
+        playwright.clickOn(updateMassVoucherButton);
+    }
+
+    /**
+     * Choose contract period
+     */
+    public void chooseContractPeriode(String contractPeriod) {
+        playwright.selectDropdownByValue(dropdownContractPeriod,contractPeriod);
     }
 }
