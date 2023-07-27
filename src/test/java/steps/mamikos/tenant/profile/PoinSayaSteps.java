@@ -151,7 +151,47 @@ public class PoinSayaSteps {
     }
 
     @And("user verify subtitle tidak ada poin yang tersedia is displayed")
-    public void user_verify_subtitle_tidak_ada_poin_yang_tersedia_is_displayed() throws InterruptedException {
+    public void user_verify_subtitle_tidak_ada_poin_yang_tersedia_is_displayed() {
         Assert.assertTrue(poinSaya.isSubtitleTidakAdaPoinYangTersediaDisplayed());
+    }
+
+    @When("user verify title in the riwayat poin page is displayed")
+    public void user_verify_title_in_the_riwayat_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleInTheRiwayatPoinPageDisplayed());
+    }
+
+    @And("user verify filter in the riwayat poin page is displayed")
+    public void userVerifyFilterInTheRiwayatPoinPageIsDisplayed(List<String> filterText) {
+        for (String s : filterText) {
+            poinSaya.isFilterVisible(s);
+        }
+    }
+
+    @And("user verify {string} class on selected filter {string}")
+    public void user_verify_class_on_selected_filter(String attribute, String filter) {
+        Assert.assertEquals(poinSaya.getFilterElementAttribute(filter).substring(30,47), attribute, "Selected filter doesn't have " + attribute + " value");
+        Assert.assertEquals(poinSaya.getFilterText(filter), filter, "Selected filter is not equal to " + filter);
+    }
+
+    @Then("user verify point history grouped by months")
+    public void userVerifyPointHistoryGroupedByMonths(List<String> date) {
+        for (String s : date) {
+            poinSaya.isHistoryDatePoinVisible(s);
+        }
+    }
+
+    @When("user click {string} filter")
+    public void user_click_filter(String filter) {
+        poinSaya.clickOnFilters(filter);
+    }
+
+    @When("user verify title riwayat masih kosong is displayed")
+    public void user_verify_title_riwayat_masih_kosong_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleRiwayatMasihKosongDisplayed());
+    }
+
+    @When("user verify subtitle riwayat masih kosong is displayed")
+    public void user_verify_subtitle_riwayat_masih_kosong_is_displayed() {
+        Assert.assertTrue(poinSaya.isSubtitleRiwayatMasihKosongDisplayed());
     }
 }
