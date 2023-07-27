@@ -251,3 +251,11 @@ Feature: Payment Staging
     And admin input detail kerusakan "characters more than 200" on edit deposit page
     Then admin see maximal length "200/200"
 
+  @TEST_DOM-732
+  Scenario: [BackOffice][Search Contract][Edit deposit] See Deposit Button for contract terminated
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    Then admin verify see text "terminated"
