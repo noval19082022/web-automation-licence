@@ -1,4 +1,4 @@
-@BBM7
+@BBM7 @regression @TEST_BBM-763
 Feature: Invalid Voucher After Applied, Invalid Profession
 
   @continue

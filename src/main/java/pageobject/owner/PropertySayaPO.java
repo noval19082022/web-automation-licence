@@ -24,8 +24,8 @@ public class PropertySayaPO {
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
         updateKamarButton = page.getByText("Update Kamar", new Page.GetByTextOptions().setExact(true));
         editAction = page.locator("(//*[@class='room-table__cta bg-c-icon bg-c-icon--md'])[1]");
-        updateKamarCheckbox = page.locator(".check");
-        updateKamarButtonPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Kamar"));
+        updateKamarCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark")).locator("svg");
+        updateKamarButtonPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
     }
 
     /**
@@ -54,9 +54,12 @@ public class PropertySayaPO {
      *
      */
     public void clickUpdateKamarEmptyButton() {
+        playwright.waitTillLocatorIsVisible(editAction);
         playwright.clickOn(editAction);
-        playwright.clickOn(updateKamarCheckbox);
-        playwright.clickOn(updateKamarButtonPopup);
+        if (updateKamarCheckbox.isChecked()) {
+            playwright.clickOn(updateKamarCheckbox);
+            playwright.clickOn(updateKamarButtonPopup);
+        }
     }
 
 
