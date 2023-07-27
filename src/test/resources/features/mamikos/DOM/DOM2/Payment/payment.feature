@@ -239,3 +239,15 @@ Feature: Payment Staging
     And admin search contract by kost level "SinggahSini"
     And admin akhiri contract
     Then admin should success terminate contract
+
+  @TEST_DOM-727 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @TESTSET_PF-1394 @TESTSET_PF-2238 @Automated @web-covered
+  Scenario: [BackOffice][Search Contract][Edit deposit] Input detail kerusakan detail pop up more than 200 character
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin want to edit deposit
+    And admin input detail kerusakan "characters more than 200" on edit deposit page
+    Then admin see maximal length "200/200"
+
