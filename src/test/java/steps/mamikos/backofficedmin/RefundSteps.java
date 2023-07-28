@@ -9,16 +9,35 @@ import java.util.Optional;
 
 public class RefundSteps {
     Page page = ActiveContext.getActivePage();
-    RefundPO refundPO;
+    RefundPO refundPO = new RefundPO(page);
 
     @And("admin pick one invoice on list to refund")
     public void adminRefund() {
-        this.refundPO = Optional.ofNullable(refundPO).orElseGet(() -> new RefundPO(page));
         refundPO.clickOnRefundBtn();
     }
 
     @And("admin fill bank name {string} on refund detail")
     public void adminFillBankNameOnRefundDetail(String bankName) {
         refundPO.fillBankName(bankName);
+    }
+
+    @And("admin visit transferred list on refund page")
+    public void adminVisitTransferedListOnRefundPage() {
+        refundPO.clickOnTransferredBtn();
+    }
+
+    @And("admin want to export the refund report")
+    public void adminWantToExportTheRefundReport() {
+        refundPO.exportReport();
+    }
+
+    @And("admin choose export report for today")
+    public void adminChooseExportReportForToday() {
+        refundPO.exportReportForToday();
+    }
+
+    @And("admin download the transferred refund report")
+    public void adminDownloadTheTransferredRefundReport() {
+        refundPO.clickOnDownloadXls();
     }
 }

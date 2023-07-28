@@ -270,3 +270,17 @@ Feature: Payment Staging
     And admin pick one invoice on list to refund
     And admin fill bank name "Bank Noval" on refund detail
     Then admin verify see text "No results found"
+
+  @TEST_DOM-638 @Automated @web-covered
+  Scenario: [BackOffice][Refund] export Report
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin want to export the refund report
+    And admin choose export report for today
+#    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
+#    Then user will get message success download and file exported send email (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
+
