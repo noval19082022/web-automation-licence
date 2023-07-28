@@ -8,7 +8,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321215 | 0890867321215 | mamikosqa123 |
-    And tenant navigate to mamipoint expired page
+    And tenant navigate to mamipoin expired page
     Then user verify title in the informasi poin page is displayed
     And user verify subtitle in the informasi poin page is displayed
     And user verify table title tanggal kedaluwarsa is displayed
@@ -25,7 +25,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321220 | 0890867321220 | mamikosqa123 |
-    And tenant navigate to mamipoint expired page
+    And tenant navigate to mamipoin expired page
     Then user verify title in the informasi poin page is displayed
     And user verify subtitle in the informasi poin page is displayed
     And user verify subtitle tidak ada poin yang tersedia is displayed

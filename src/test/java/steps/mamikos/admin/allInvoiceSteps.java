@@ -100,7 +100,7 @@ public class allInvoiceSteps {
     }
 
     @And("admin choose method Status {string}")
-    public void adminChooseMethodStatus(String method) throws InterruptedException {
+    public void adminChooseMethodStatus(String method) {
         invoicePO.selectDetailStatus(method);
         invoicePO.clickOnCariInvoice();
     }

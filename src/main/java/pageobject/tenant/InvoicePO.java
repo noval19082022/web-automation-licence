@@ -212,6 +212,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String getToastText() {
+        playwright.hardWait(250);
         return playwright.getText(toast);
     }
 
