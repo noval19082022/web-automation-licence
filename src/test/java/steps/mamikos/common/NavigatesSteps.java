@@ -249,6 +249,11 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/refund", 30000.0, LoadState.LOAD);
     }
 
+    @And("admin bangkrupux navigate to data booking menu")
+    public void adminAccessToDataBookingMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/booking/users", 30000.0, LoadState.LOAD);
+    }
+
     @And("tenant navigate to mamipoint expired page")
     public void tenantNavigateToMamipointExpiredPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_EXPIRED, 30000.0, LoadState.LOAD);

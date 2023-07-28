@@ -45,6 +45,16 @@ public class CommonSteps {
         users.logoutAsTenant();
     }
 
+    @And("user/tenant/admin close unused browser tab")
+    public void adminAccessToDataBookingMenu() {
+        var tabTotal = ActiveContext.getActiveBrowserContext().pages().size();
+        for (int i = tabTotal; i >= 0; i--) {
+            if (i == 1) break;
+            ActiveContext.getActiveBrowserContext().pages().get(i - 1).close();
+        }
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
+    }
+
     @Then("user/owner/tenant go back to previous page")
     public void user_go_back_to_previous_page() {
         page.goBack();
