@@ -148,6 +148,9 @@ public class BillAndBookingManagementPO {
         String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
+        if (IUnderstandBtn.isVisible()) {
+            playwright.clickOn(IUnderstandBtn);
+        }
         playwright.pageScrollUntilElementIsVisible(statusTandC);
         playwright.clickOn(statusTandC);
         playwright.clickOn(pilihButton);

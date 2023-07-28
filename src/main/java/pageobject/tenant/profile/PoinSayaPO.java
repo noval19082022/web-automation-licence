@@ -32,6 +32,12 @@ public class PoinSayaPO {
     Locator tableTitleJumlahMamipoin;
     Locator fieldValueTable;
     Locator subtitleTidakAdaPoinYangTersedia;
+    Locator titleRiwayatPoinPage;
+    Locator filterButton;
+    Locator aktifFilter;
+    Locator historyDateText;
+    Locator titleRiwayatMasihKosong;
+    Locator subtitleRiwayatMasihKosong;
 
     public PoinSayaPO(Page page) {
         this.page = page;
@@ -56,6 +62,9 @@ public class PoinSayaPO {
         tableTitleTanggalKedaluwarsa = page.locator("//h1[@class='table-title'][text()='Tanggal Kedaluwarsa']");
         tableTitleJumlahMamipoin = page.locator("//h1[@class='table-title-right'][text()='Jumlah MamiPoin']");
         subtitleTidakAdaPoinYangTersedia = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tidak Ada Poin yang Tersedia"));
+        titleRiwayatPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Poin"));
+        titleRiwayatMasihKosong = page.getByText("Riwayat Masih Kosong");
+        subtitleRiwayatMasihKosong = page.getByText("Penerimaan dan penukaran poin Kamu akan tercatat di halaman ini.");
     }
 
     /**
@@ -279,5 +288,76 @@ public class PoinSayaPO {
      */
     public Boolean isSubtitleTidakAdaPoinYangTersediaDisplayed() {
         return playwright.waitTillLocatorIsVisible(subtitleTidakAdaPoinYangTersedia);
+    }
+
+    /**
+     * Verify title in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheRiwayatPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleRiwayatPoinPage);
+    }
+
+    /**
+     * check filter is visible or not
+     * @param filterText refer to table contents
+     */
+    public void isFilterVisible(String filterText) {
+        filterButton = page.getByText(filterText);
+        assertThat(filterButton).isVisible();
+    }
+
+    /**
+     * Get element attribute from filter
+     * @param filter input string that define filter value
+     * @return attribute value
+     */
+    public String getFilterElementAttribute(String filter) {
+        aktifFilter = page.locator("//div[contains(text(), '" + filter + "')]");
+        return playwright.getAttributeValue(aktifFilter,"class");
+    }
+
+    /**
+     *  Get selected filter text
+     * @param filter input string that define filter value
+     * @return
+     */
+    public String getFilterText(String filter) {
+        filterButton = page.getByText(filter);
+        return playwright.getText(filterButton);
+    }
+
+    /**
+     * check history date is visible or not
+     * @param historyDate refer to history date
+     */
+    public void isHistoryDatePoinVisible(String historyDate) {
+        historyDateText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(historyDate));
+        assertThat(historyDateText).isVisible();
+    }
+
+    /**
+     * Click on Selected Filters
+     * @param filter input string that define filter value
+     */
+    public void clickOnFilters(String filter) {
+        filterButton = page.getByText(filter);
+        playwright.clickOn(filterButton);
+    }
+
+    /**
+     * Verify title riwayat masih kosong in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleRiwayatMasihKosongDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleRiwayatMasihKosong);
+    }
+
+    /**
+     * Verify subtitle riwayat masih kosong in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleRiwayatMasihKosongDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleRiwayatMasihKosong);
     }
 }

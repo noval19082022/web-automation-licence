@@ -1,4 +1,4 @@
-@BBM7
+@BBM7 @regression @TEST_BBM-736 @TEST_BBM-737 @TEST_BBM-640 @TEST_BBM-633 @TEST_BBM-630
 Feature: Apply Voucher For Platform
 
   @continue
