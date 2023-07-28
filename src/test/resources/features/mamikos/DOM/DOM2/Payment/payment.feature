@@ -259,3 +259,14 @@ Feature: Payment Staging
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by "Renter Phone Number" and input field "089220211208"
     Then admin verify see text "terminated"
+
+  @TEST_DOM-640 @Automated @web-covered
+  Scenario: [BackOffice][Refund] Input invalid bank name
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin fill bank name "Bank Noval" on refund detail
+    Then admin verify see text "No results found"

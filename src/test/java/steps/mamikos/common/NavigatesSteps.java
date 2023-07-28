@@ -244,6 +244,11 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
     }
 
+    @And("admin navigate to mamipay refund page")
+    public void adminVisitRefundPageOnMamipay() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/refund", 30000.0, LoadState.LOAD);
+    }
+
     @And("tenant navigate to mamipoint expired page")
     public void tenantNavigateToMamipointExpiredPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_EXPIRED, 30000.0, LoadState.LOAD);
