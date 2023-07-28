@@ -29,7 +29,7 @@ Feature: Owner Dashboard GP-ONboarding
     Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<text_body>"
-    When owner click on next button to go to slide number <number>
+    When owner click on next button to go to slide number <number> with total number slides are 7
     Examples:
       | number | text_body                          |
       | 1      | Kunjungi Menu MamiAds              |
@@ -141,9 +141,31 @@ Feature: Owner Dashboard GP-ONboarding
     Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<onboarding text title>"
-    When owner click on next button to go to slide number <number>
+    When owner click on next button to go to slide number <number> with total number slides are 4
     Examples:
-      | number | onboarding text title     | onboarding text body                                  | image alternative text       |
-      | 1      | Klik menu “Statistik”     | Lihat menu di layar bawah, dan klik “Statistik”.      | illustration click statistic |
-      | 2      | Klik “Statistik GoldPlus” | Ada tiga jenis statistik, pilih “Statistik GoldPlus”. | illustration click GoldPlus  |
-      | 3      | Pilih Nama Kos            | Klik kos yang Anda ingin lihat statistiknya.          | illustration select kost     |
+      | number | onboarding text title           | onboarding text body                                          | image alternative text       |
+      | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
+      | 2      | Klik “Statistik GoldPlus”       | Ada tiga jenis statistik, pilih “Statistik GoldPlus”.         | illustration click GoldPlus  |
+      | 3      | Pilih Nama Kos                  | Klik kos yang Anda ingin lihat statistiknya.                  | illustration select kost     |
+      | 4      | Selesai! Cek Statistik Kos Anda | Di halaman ini, Anda bisa melihat performa kos GoldPlus Anda. | illustration check statistic |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Right/Next Button Should Be Disabled
+    Then owner can see swiper right or next button is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Right To Left
+    Then owner can see gp onboarding number <number> is selected
+    Then owner can see gp onboarding text title is "<onboarding text title>"
+    Then owner can see gp onboarding text body is "<onboarding text body>"
+    Then owner can see gp onboarding image alt text is "<image alternative text>"
+    Then owner can see swiper number <number> is selected
+    Then owner can see selected swiper with title <number>
+    Then owner can see swiper text body is "<onboarding text title>"
+    When owner click on previous button to go to slide number <number>
+    Examples:
+      | number | onboarding text title           | onboarding text body                                          | image alternative text       |
+      | 4      | Selesai! Cek Statistik Kos Anda | Di halaman ini, Anda bisa melihat performa kos GoldPlus Anda. | illustration check statistic |
+      | 3      | Pilih Nama Kos                  | Klik kos yang Anda ingin lihat statistiknya.                  | illustration select kost     |
+      | 2      | Klik “Statistik GoldPlus”       | Ada tiga jenis statistik, pilih “Statistik GoldPlus”.         | illustration click GoldPlus  |
+      | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
