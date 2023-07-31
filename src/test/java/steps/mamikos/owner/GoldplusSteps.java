@@ -335,13 +335,6 @@ public class GoldplusSteps {
         }
     }
 
-    @Then("user verify list of Goldplus package is appear")
-    public void userVerifyListOfGoldplusPackageIsAppear() {
-        playwright.hardWait(3000);
-        Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
-        playwright.hardWait(3000);
-    }
-
     @Then("user verify {string} is appear")
     public void userVerifyIsAppear(String textMessage) {
         switch(textMessage){
