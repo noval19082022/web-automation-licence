@@ -2,25 +2,10 @@ package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.common.HomePO;
-import pageobject.owner.OwnerDashboardPO;
-import pageobject.owner.chat.BroadcastChatPO;
-import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldPlusStatisticPO;
-import pageobject.owner.goldplus.GoldplusPO;
-import pageobject.owner.goldplus.PanduanGoldplusPO;
-import pageobject.owner.mamiads.MamiAdsPO;
-import steps.mamikos.common.NavigatesSteps;
-import utilities.PlaywrightHelpers;
-
-import java.util.List;
-import java.util.Map;
 
 public class GoldplusStatisticSteps {
     Page page = ActiveContext.getActivePage();

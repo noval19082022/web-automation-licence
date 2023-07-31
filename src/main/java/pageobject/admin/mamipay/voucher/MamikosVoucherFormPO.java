@@ -1,6 +1,5 @@
 package pageobject.admin.mamipay.voucher;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;

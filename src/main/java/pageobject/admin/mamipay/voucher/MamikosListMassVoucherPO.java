@@ -1,15 +1,10 @@
 package pageobject.admin.mamipay.voucher;
 
-import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.io.File;
-import java.nio.file.Paths;
-import java.text.ParseException;
 
 public class MamikosListMassVoucherPO {
     private Page page;
