@@ -440,4 +440,5 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.fillMinTransaction(voucherMinimumTransaction);
         massVoucherForm.fillTargetedEmail(voucherTargetedEmail);
     }
+
 }
