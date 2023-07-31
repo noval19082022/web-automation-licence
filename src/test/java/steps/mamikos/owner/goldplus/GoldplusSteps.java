@@ -1,4 +1,4 @@
-package steps.mamikos.owner;
+package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
@@ -267,6 +267,7 @@ public class GoldplusSteps {
     @When("owner clicks on coba sekarang button")
     public void ownerClickOnCobaSekarangButton() {
         panduanGP.clickCobaSekarangButton();
+        page.pause();
     }
 
     @Then("owner can see gp onboarding text title is {string}")

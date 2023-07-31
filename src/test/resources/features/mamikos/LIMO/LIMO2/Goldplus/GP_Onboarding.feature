@@ -6,7 +6,7 @@ Feature: Owner Dashboard GP-ONboarding
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 087133998156 | 0          | qwerty123 |
+      | 0876623632   | 0          | 12345678 |
     And owner go to panduan gold plus page
     Then owner will see that the text "Naikkan Posisi Iklan Properti dengan MamiAds" is displayed
     Then owner will see that the text "Dengan Saldo MamiAds, iklan Anda bisa mendapat lebih banyak pengunjung." is displayed
@@ -169,3 +169,23 @@ Feature: Owner Dashboard GP-ONboarding
       | 3      | Pilih Nama Kos                  | Klik kos yang Anda ingin lihat statistiknya.                  | illustration select kost     |
       | 2      | Klik “Statistik GoldPlus”       | Ada tiga jenis statistik, pilih “Statistik GoldPlus”.         | illustration click GoldPlus  |
       | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Coba Sekarang Button Functionality
+    When owner clicks on coba sekarang button
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Available Package
+    When owner can see gp statistic header text as "Statistik GoldPlus"
+    Then owner can see gp statistic filter text number <number> is "<package>"
+    Examples:
+      | number | package    |
+      | 1      | Semua      |
+      | 2      | Goldplus 1 |
+      | 3      | Goldplus 2 |
+      | 4      | Goldplus 3 |
+      | 5      | Goldplus 4 |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List
+    Then owner can see gp statistic list active package and it contents elements
