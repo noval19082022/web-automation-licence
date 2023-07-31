@@ -110,7 +110,6 @@ public class MamikosVoucherFormPO {
         alertMessageDisplayed = page.locator("//div[@class='callout callout-success']");
         dropdownContractPeriod = page.locator("select[name=\"min_contract_duration\"]");
         inputTartedEmail = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("e.g: sobirin@gmail.com,rodriguez@yahuu.com");
-//                page.locator("form-control input-email");
         voucherPrefixInput = page.locator("input[name=\"prefix\\[name\\]\"]");
         totalTargetedEmailInput = page.locator("input[name=\"prefix\\[voucher_limit\\]\"]");
         singleDailyQuotaInput = page.locator("input[name=\"limit_daily\"]");
