@@ -156,6 +156,7 @@ public class OwnerDashboardPO {
      * Click on Tolak Button on owner dashboard
      */
     public void clickOnTolakViaHomepage() {
+        tolakButton.waitFor();
         playwright.clickOn(tolakButton);
     }
 

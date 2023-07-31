@@ -1,6 +1,7 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
@@ -44,6 +45,16 @@ public class CommonSteps {
         users.logoutAsTenant();
     }
 
+    @And("user/tenant/admin close unused browser tab")
+    public void adminAccessToDataBookingMenu() {
+        var tabTotal = ActiveContext.getActiveBrowserContext().pages().size();
+        for (int i = tabTotal; i >= 0; i--) {
+            if (i == 1) break;
+            ActiveContext.getActiveBrowserContext().pages().get(i - 1).close();
+        }
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
+    }
+
     @Then("user/owner/tenant go back to previous page")
     public void user_go_back_to_previous_page() {
         page.goBack();
@@ -62,5 +73,15 @@ public class CommonSteps {
     @Then("user redirected to {string}")
     public void user_redirect_link(String link) {
         Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
+    }
+
+    @Then("user/owner/tenant will see that the text {string} is displayed on the table")
+    public void user_will_see_that_the_text_is_displayed_on_the_table(String text) {
+        Assert.assertTrue(playwright.waitTillLocatorIsVisible(playwright.locatorByRoleSetName(AriaRole.CELL, text).first()));
+    }
+
+    @Then("admin/user/owner/tenant will get empty table list data")
+    public void users_will_get_empty_table_list_data() {
+        Assert.assertFalse(page.isVisible("//tbody/tr"));
     }
 }

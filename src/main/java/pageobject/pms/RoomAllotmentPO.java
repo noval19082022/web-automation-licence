@@ -14,6 +14,7 @@ public class RoomAllotmentPO {
     // ----------- Create/edit Out of order modal -----------
     Locator outOfOrderTypeDropdown;
     Locator outOfOrderType;
+    Locator noteOutOfOrderInputText;
     Locator startDate;
     Locator endDate;
     Locator todayDate;
@@ -34,6 +35,7 @@ public class RoomAllotmentPO {
         this.playwright = new PlaywrightHelpers(page);
         createOutOfOrderStatusBtn = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Buat status Out of Order"));
         outOfOrderTypeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kategori Out of Order"));
+        noteOutOfOrderInputText = page.getByPlaceholder("Tulis keterangan Out of Order");
         startDate = page.getByPlaceholder("Pilih tanggal mulai");
         endDate = page.getByPlaceholder("Pilih tanggal akhir");
         todayDate = page.locator("//span[contains(@class,'today')]");
@@ -171,4 +173,19 @@ public class RoomAllotmentPO {
         return playwright.isLocatorVisibleAfterLoad(outOfOrderFlag,3000.0);
     }
 
+    /**
+     * Click and fill note for out of order
+     * @param note refers to text that wanna fill to
+     */
+    public void fillNoteOutOfOrder(String note) {
+        noteOutOfOrderInputText.fill(note);
+    }
+
+    /**
+     * Check is the save button on out of order is or not
+     * @return boolean, true if enable
+     */
+    public boolean isSaveButtonEnable() {
+        return saveBtn.isEnabled();
+    }
 }
