@@ -376,4 +376,43 @@ public class AdminMamipayVoucherSteps {
     public void admin_can_sees_callout_message_is() {
         Assert.assertTrue(massVoucherForm.isAlertMessageDisplayed(), "Voucher AUTOVINVALID updated");
     }
+
+    @Then("user create new single voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")
+    public void userCreateNewSingleVoucherWithTeamDiscountTypeStartDateAndEndDateTo(String team, String type, String startDate, String endDate, DataTable table) throws InterruptedException, ParseException {
+        String currentDate = JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd hh:mm");
+        String yesterdayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -1, 0, 0);
+        String dayBeforeYesterday = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -2, 0, 0);
+        userCreateNewMassVoucher = table.asMap(String.class, String.class);
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        MamikosVoucherFormPO massVoucherForm = new MamikosVoucherFormPO(page);
+        var voucherName = userCreateNewMassVoucher.get("voucher name");
+        var voucherDiscountAmount = userCreateNewMassVoucher.get("discount amount");
+        var voucherTotalKosQuota = userCreateNewMassVoucher.get("total each kos quota");
+        var voucherTotalEachQuota = userCreateNewMassVoucher.get("total each quota");
+        var singleVoucherDailyuota = userCreateNewMassVoucher.get("daily quota");
+        var voucherMaximumDiscount = userCreateNewMassVoucher.get("max discount");
+        var voucherMinimumTransaction = userCreateNewMassVoucher.get("min transaction");
+        var voucherTargetedEmail = userCreateNewMassVoucher.get("targeted email");
+        var voucherTotalTargetedEmail = userCreateNewMassVoucher.get("total targeted email");
+        mamipayAdmin.goToMamikosVoucher();
+        massVoucherList.clickSingleVoucher();
+        massVoucherList.clickOnAddSingleButton();
+        massVoucherForm.fillVocName(voucherName);
+        massVoucherForm.chooseFormStartDate(startDate);
+        if (endDate.equalsIgnoreCase("")) {
+            voucherForm.fillEndDateSingleVoucher("");
+        } else if (endDate.equalsIgnoreCase("yesterday")) {
+            voucherForm.fillEndDateSingleVoucher(yesterdayDate);
+        }
+        massVoucherForm.selectOncampaignTeam(team);
+        massVoucherForm.selectOnVocTypeButton(type);
+        massVoucherForm.fillTotalTargetedEmail(voucherTotalTargetedEmail);
+        massVoucherForm.filTotalEachQuota(voucherTotalEachQuota);
+        massVoucherForm.fillDiscountAmount(voucherDiscountAmount);
+        massVoucherForm.fillTotalKosQuota(voucherTotalKosQuota);
+        massVoucherForm.fillSingleDailyQuota(singleVoucherDailyuota);
+        massVoucherForm.fillMaxDiscountAmount(voucherMaximumDiscount);
+        massVoucherForm.fillMinTransaction(voucherMinimumTransaction);
+        massVoucherForm.fillTargetedEmail(voucherTargetedEmail);
+    }
 }
