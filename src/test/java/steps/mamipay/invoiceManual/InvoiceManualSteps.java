@@ -28,6 +28,7 @@ public class InvoiceManualSteps {
     private List<Map<String, String>> rincianBiaya;
     private List<Map<String, String>> invoiceData;
     private List<Map<String, String>> hoverData;
+    private List<Map<String, String>> changeInvoice;
 
     //---test data---//
     private String invoiceManual = "src/test/resources/testdata/mamipay/invoiceManual.properties";
@@ -276,6 +277,21 @@ public class InvoiceManualSteps {
         }
     }
 
+    @When("admin selects Jenis Invoice")
+    public void admin_selects_Jenis_Invoice(DataTable tables){
+        String jenisInvoice = "", changeInvoiceTo = "", changeInvoiceAgainTo = "";
+
+        changeInvoice = tables.asMaps(String.class, String.class);
+
+        jenisInvoice = changeInvoice.get(0).get("Jenis Invoice");
+        changeInvoiceTo = changeInvoice.get(0).get("Change Invoice to");
+        changeInvoiceAgainTo = changeInvoice.get(0).get("Change Invoice again to");
+
+        manualInvoice.selectJenisInvoice(jenisInvoice);
+        manualInvoice.selectJenisInvoice(changeInvoiceTo);
+        manualInvoice.selectJenisInvoice(changeInvoiceAgainTo);
+    }
+
     @Then("empty state on the biaya {string} table is displayed")
     public void empty_state_on_the_biaya_table_is_displayed(String emptyState){
         if (emptyState.equalsIgnoreCase("Biaya Sewa")){
@@ -288,6 +304,11 @@ public class InvoiceManualSteps {
     @Then("the pop up confirmation is not displayed")
     public void the_pop_up_confirmation_is_not_displayed(){
         manualInvoice.changeInvConfirmationPopUpIsNotDisplay();
+    }
+
+    @Then("the Buat dan Kirim button is disabled")
+    public void the_Buat_dan_Kirim_Button_is_disabled(){
+        manualInvoice.assertBuatDanKirimDisable();
     }
 
     //---Biaya Tambahan Pop Up---//

@@ -256,6 +256,11 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.clickOnSubmitAddMassVocButton();
     }
 
+    @And("admin master clicks on add single voucher button in voucher form")
+    public void adminMasterClicksOnAddSingleVoucherButtonInVoucherForm() {
+        massVoucherForm.clickOnSubmitAddSingleVocButton();
+    }
+
     @And("admin click on dropdown filter rules")
     public void user_click_on_filter_rules_dropdown() {
         mamipayAdmin.clickOnFilterRulesDropdown();
@@ -312,6 +317,16 @@ public class AdminMamipayVoucherSteps {
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
         voucherPrefix = prefix + generatedString.toUpperCase();
         massVoucherForm.fillVocCode(voucherPrefix);
+    }
+
+    @And("admin master inputs prefix voucher code {string}")
+    public void admin_master_inputs_prefix_voucher_code(String prefix) {
+        int length = 4;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        voucherPrefix = prefix + generatedString.toUpperCase();
+        massVoucherForm.fillPrefixCode(voucherPrefix);
     }
 
     @And("admin search mass voucher with name:")
@@ -375,6 +390,16 @@ public class AdminMamipayVoucherSteps {
     @Then("System display alert message on mamipay web")
     public void admin_can_sees_callout_message_is() {
         Assert.assertTrue(massVoucherForm.isAlertMessageDisplayed(), "Voucher AUTOVINVALID updated");
+    }
+
+    @When("admin select minimum type of contract period {string}")
+    public void admin_select_minimum_contract_periode(String contractPeriod) throws InterruptedException {
+            massVoucherForm.clickOnDropdownContractPeriod();
+            massVoucherForm.chooseContractPeriode(contractPeriod);
+    }
+    @And("admin master clicks on edit pencil icon")
+    public void adminClickOnEditPencilIcon() {
+        massVoucherForm.clickOnEditPencilIcon();
     }
 
     @Then("user create new single voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")

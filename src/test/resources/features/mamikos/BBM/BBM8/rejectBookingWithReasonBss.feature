@@ -24,7 +24,7 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod            |
-      | Dont Starve To Get Her       | Dont Starve To Get Her       |
+      | Dont Starve To Get Her       | Dont Starve To Get Her    |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -35,6 +35,7 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
       | phone stag    | phone prod    | password       |
       | 081362464341  | 081362464341  | 1d0lt3stb4ru   |
     And owner navigate to pengajuan booking page
+    And owner choose filter kost for "Dont Starve To Get Her"
     And user clicks on Booking Details button
     And owner reject booking from view detail
     And owner select reason reject kos "Tanggal masuk/check-in kos terlalu dekat"

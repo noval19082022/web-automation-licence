@@ -66,5 +66,30 @@ public class OwnerDashboardSteps {
        plawright.clickOnText(textInfoUntukAnda);
     }
 
+    @When("verify ftue {string}")
+    public void verify_ftue(String isDisplayed) {
+        if (isDisplayed.equals("displayed")) {
+            Assert.assertTrue(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE doesn't displayed!" );
+        }else {
+            Assert.assertFalse(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE displayed!");
+        }
+
+    }
+
+    @When("verify title ftue is {string} and description {string}")
+    public void verify_title_ftue_is_and_description(String titleFtue, String descFtue) {
+        Assert.assertEquals(ownerDashboardPO.getTitleFtue(titleFtue), titleFtue, "Title FTUE doesn't match!");
+        Assert.assertEquals(ownerDashboardPO.getDescFtue(descFtue), descFtue, "Description FTUE doesn't match!");
+    }
+
+    @When("user click close icon tooltip broadcast chat on chatlist")
+    public void user_click_close_icon_tooltip_broadcast_chat_on_chatlist() throws InterruptedException {
+        ownerDashboardPO.clickOnCloseIconBcTooltip();
+    }
+
+    @Then("verify label goldplus on chatlist")
+    public void verify_label_goldplus_on_chatlist() {
+        Assert.assertTrue(ownerDashboardPO.isGoldplusLabelDisplayed(), "Owner doesn't goldplus member!");
+    }
 }
 

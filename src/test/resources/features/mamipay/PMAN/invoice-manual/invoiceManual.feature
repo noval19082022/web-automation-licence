@@ -122,8 +122,8 @@
         | Biaya Tambahan  | Biaya Sewa      |
         | Biaya Sewa      | Biaya Tambahan  |
 
-    @TEST_PMAN-5745 @pman-prod
-    Scenario Outline: Change Jenis Invoice - When There Is No Biaya Tambahan & Biaya Sewa Data
+    @continue @TEST_PMAN-5745 @pman-prod
+    Scenario: Change Jenis Invoice - When There Is No Biaya Tambahan & Biaya Sewa Data
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
@@ -132,12 +132,12 @@
         | property name                                                     | tenant name     |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
         | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
-      And admin selects Jenis Invoice "<Jenis Invoice>" when "There is no Biaya Data"
       #change invoice type
-      When admin selects Jenis Invoice "<Change Invoice>" when "There is no Biaya Data"
+      When admin selects Jenis Invoice
+        | Jenis Invoice   | Change Invoice to | Change Invoice again to |
+        | Biaya Tambahan  | Biaya Sewa        | Biaya Tambahan          |
       Then the pop up confirmation is not displayed
 
-      Examples:
-        | Jenis Invoice   | Change Invoice  |
-        | Biaya Tambahan  | Biaya Sewa      |
-        | Biaya Sewa      | Biaya Tambahan  |
+    @TEST_PMAN-5822
+    Scenario: Disable Buat dan Kirim Button
+      Then the Buat dan Kirim button is disabled
