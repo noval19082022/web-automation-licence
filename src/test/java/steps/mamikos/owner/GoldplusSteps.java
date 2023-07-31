@@ -324,15 +324,30 @@ public class GoldplusSteps {
     public void userVerifyIsAppear(String textMessage) {
         switch(textMessage){
             case "list of Goldplus package":
+                playwright.hardWait(3000);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Daftar GoldPlus":
+                chat.dismissFTUEMars();
+                chat.dismissFTUEMarsKuotaNol();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa kuota mingguan", 2000.0), "Daftar GoldPlus doesn't displayed!");
                 Assert.assertTrue(playwright.isTextDisplayed("1 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
                 playwright.clickOnTextButton(textMessage);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
+            case "Pilih Periode Berlangganan":
+                Assert.assertTrue(playwright.isTextDisplayed("Pilih Periode Berlangganan", 2000.0), "Text doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: GoldPlus 2", 2000.0), "Paket GP Anda is not GP2!");
         }
+    }
+
+    @When("owner click {string} on broadcast chat page")
+    public void ownerClickOnBroadcastChatPage(String buttonText) {
+        playwright.clickOnTextButton(buttonText);
+        Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: Goldplus 2", 2000.0), "Paket GP Anda is not GP2!");
+        playwright.clickOnTextButton("Pilih");
+        playwright.hardWait(3000);
+        playwright.clickOnText("Bayar Sekarang");
     }
 
 

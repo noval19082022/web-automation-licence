@@ -221,7 +221,7 @@ public class GoldplusPO {
      *
      */
     public boolean isGpPackageTableDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(gpPackageTable, 3000.0);
+        return playwright.isLocatorVisibleAfterLoad(gpPackageTable, 5000.0);
     }
 
     /**
