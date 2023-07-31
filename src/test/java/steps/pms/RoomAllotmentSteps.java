@@ -23,13 +23,19 @@ public class RoomAllotmentSteps {
         OOOData = table.asMap(String.class, String.class);
         var roomNumber = OOOData.get("room number");
         var type = OOOData.get("type");
+        var note = OOOData.get("note");
         var startDate = OOOData.get("start date");
         var endDate = OOOData.get("end date");
         roomAllotment.setRoomOutOfOrder(roomNumber);
         roomAllotment.setOutOfOrderType(type);
+        if (note != null) {
+            roomAllotment.fillNoteOutOfOrder(note);
+        }
         roomAllotment.setOutOfOrderStartDate(startDate);
         roomAllotment.setOutOfOrderEndDate(endDate);
-        roomAllotment.clickSaveBtn();
+        if (roomAllotment.isSaveButtonEnable()) {
+            roomAllotment.clickSaveBtn();
+        }
     }
 
     @And("Admin delete OOO on:")
@@ -64,5 +70,10 @@ public class RoomAllotmentSteps {
         var roomNumber = outOfOrderFlagData.get(0).get("room number");
         var startDate = outOfOrderFlagData.get(0).get("start date");
         Assert.assertFalse(roomAllotment.isOutOfOrderOnRoomVisible(roomNumber,startDate));
+    }
+
+    @Then("Admin can see that save button is disable")
+    public void admin_can_see_that_save_button_is_disable() {
+        Assert.assertFalse(roomAllotment.isSaveButtonEnable(), "save button on modal is enable");
     }
 }
