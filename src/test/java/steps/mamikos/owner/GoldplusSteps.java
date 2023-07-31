@@ -217,6 +217,7 @@ public class GoldplusSteps {
         playwright.clickOnTextButton(buttonTxt);
     }
 
+    //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
         owner.clickOnGpWidgetButton();
@@ -231,8 +232,8 @@ public class GoldplusSteps {
         }
     }
 
-    @Then("owner can see swipper number {int} is selected")
-    public void ownerCanSeeSwipperNumberNumberIsSelected(int number) {
+    @Then("owner can see swiper number {int} is selected")
+    public void ownerCanSeeSwiperNumberNumberIsSelected(int number) {
         Assert.assertFalse(panduanGP.getGPswipperAttribute(number -1 , "class").contains(".gp-swiper__step--dim"));
     }
 
@@ -267,6 +268,27 @@ public class GoldplusSteps {
     public void ownerClickOnCobaSekarangButton() {
         panduanGP.clickCobaSekarangButton();
     }
+
+    @Then("owner can see gp onboarding text title is {string}")
+    public void ownerCanSeeGpOnboardingTextTitleIs(String textTitle) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingTitle(), textTitle);
+    }
+
+    @Then("owner can see gp onboarding text body is {string}")
+    public void ownerCanSeeGpOnboardingTextBodyIs(String textBody) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingBodyText(), textBody);
+    }
+
+    @Then("owner can see gp onboarding number {int} is selected")
+    public void ownerCanSeeGpOnboardingNumberNumberIsSelected(int number) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingNumber(), number);
+    }
+
+    @Then("owner can see gp onboarding image alt text is {string}")
+    public void ownerCanSeeGpOnboardingImageAltTextIs(String altText) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingImageAltText(), altText);
+    }
+    //------ GP Onboarding ------//
 
     //------ GP Onboarding Pop-Up ------//
     @Then("owner can see gp onboarding swiper number {int} is selected")
@@ -352,4 +374,16 @@ public class GoldplusSteps {
 
 
     //------ GP Onboarding Pop-Up ------//
+
+    @And("owner go to panduan gold plus memantau performa kos page")
+    public void ownerGoToPanduanGoldPlusMemantauPerformaKosPage() {
+        owner.clickOnGpWidgetButton();
+        goldplus.clickOnPelajariCaranyaButton();
+        panduanGP.clickOnMemantauPerformaKosButton();
+    }
+    @When("owner close pop up detail manfaat")
+    public void owner_close_pop_up_detail_manfaat() {
+        playwright.hardWait(1000.0);
+        goldplus.clickOnCLosePopUpManfaat();
+    }
 }

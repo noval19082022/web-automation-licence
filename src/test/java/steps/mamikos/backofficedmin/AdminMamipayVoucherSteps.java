@@ -376,4 +376,14 @@ public class AdminMamipayVoucherSteps {
     public void admin_can_sees_callout_message_is() {
         Assert.assertTrue(massVoucherForm.isAlertMessageDisplayed(), "Voucher AUTOVINVALID updated");
     }
+
+    @When("admin select minimum type of contract period {string}")
+    public void admin_select_minimum_contract_periode(String contractPeriod) throws InterruptedException {
+            massVoucherForm.clickOnDropdownContractPeriod();
+            massVoucherForm.chooseContractPeriode(contractPeriod);
+    }
+    @And("admin master clicks on edit pencil icon")
+    public void adminClickOnEditPencilIcon() {
+        massVoucherForm.clickOnEditPencilIcon();
+    }
 }

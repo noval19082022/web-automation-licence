@@ -308,4 +308,33 @@ public class TenantBookingSteps {
         Assert.assertEquals(bookingForm.getTnCBookingContentText(), text, "text not same with the content");
         bookingForm.clickOkPahamButton();
     }
+
+    @Then("tenant/user can see refund policy on kost detail")
+    public void tenant_can_see_refund_policy() {
+        Assert.assertTrue(kostDetail.isRefundPolicySectionVisible(), "refund policy in kost detail is not visible");
+    }
+
+    @When("tenant/user click bagaimana ketentuannya")
+    public void tenant_click_bagaimana_ketentuannya() {
+        kostDetail.clickBagaimanaKetentuan();
+    }
+
+    @Then("tenant/user can see refund policy information with:")
+    public void tenant_can_see_refund_policy_information(List<String> refundSubtitle) {
+        Assert.assertTrue(kostDetail.isTnCRefundVisible(), "Syarat dan Ketentuan Refund is not visible");
+        for (String s : refundSubtitle) {
+            kostDetail.isTnCRefundPoint(s);
+        }
+    }
+
+    @When("tenant/user click refund policy mamikos")
+    public void tenant_click_refund_policy_mamikos() {
+        kostDetail.clickRefundPolicyMamikos();
+    }
+
+    @When("tenant/user click on ketentuan waktu berikut")
+    public void tenant_click_on_ketentuan_waktu_berikut() {
+        kostDetail.clickTimeConditionRefund();
+    }
+
 }

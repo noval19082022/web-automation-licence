@@ -39,8 +39,57 @@ public class OwnerDashboardSteps {
         Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
     }
 
+    @When("owner open notification icon")
+    public void owner_open_notification_icon() {
+       ownerDashboardPO.clickNotificationButton();
+
+    }
+
+    @And("owner wants to see all notification")
+    public void owner_wants_to_see_all_notification() {
+        ownerDashboardPO.clicOnSeeAllNotification();
+    }
+
+    @Then("validate that owner have {string}")
+    public void validate_that_owner_have(String gpStatus) {
+        Assert.assertEquals(ownerDashboardPO.getTextGPStatus(), gpStatus, "GP Level is not equal to " + gpStatus);
+
+    }
+
     @When("owner click close icon pop up")
     public void ownerClickCloseIconPopUp() {
         plawright.clickOnTextButton("close");
     }
+
+    @Then("user verify text {string} on section info untuk anda is appear")
+    public void user_verify_text_on_section_info_untuk_anda_is_appear(String textInfoUntukAnda) {
+       plawright.clickOnText(textInfoUntukAnda);
+    }
+
+    @When("verify ftue {string}")
+    public void verify_ftue(String isDisplayed) {
+        if (isDisplayed.equals("displayed")) {
+            Assert.assertTrue(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE doesn't displayed!" );
+        }else {
+            Assert.assertFalse(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE displayed!");
+        }
+
+    }
+
+    @When("verify title ftue is {string} and description {string}")
+    public void verify_title_ftue_is_and_description(String titleFtue, String descFtue) {
+        Assert.assertEquals(ownerDashboardPO.getTitleFtue(titleFtue), titleFtue, "Title FTUE doesn't match!");
+        Assert.assertEquals(ownerDashboardPO.getDescFtue(descFtue), descFtue, "Description FTUE doesn't match!");
+    }
+
+    @When("user click close icon tooltip broadcast chat on chatlist")
+    public void user_click_close_icon_tooltip_broadcast_chat_on_chatlist() throws InterruptedException {
+        ownerDashboardPO.clickOnCloseIconBcTooltip();
+    }
+
+    @Then("verify label goldplus on chatlist")
+    public void verify_label_goldplus_on_chatlist() {
+        Assert.assertTrue(ownerDashboardPO.isGoldplusLabelDisplayed(), "Owner doesn't goldplus member!");
+    }
 }
+

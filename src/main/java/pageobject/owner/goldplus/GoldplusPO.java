@@ -26,6 +26,7 @@ public class GoldplusPO {
     Locator pelajariCaranyaButton;
     Locator gpPackageTable;
     Locator daftarButtonOnLandingPageGP;
+    Locator closePopUpDetailManfaat;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -47,6 +48,7 @@ public class GoldplusPO {
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
         gpPackageTable = page.locator(".goldplus-package-content__packages-wrapper");
         daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
+        closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
     }
 
     /**
@@ -225,11 +227,12 @@ public class GoldplusPO {
     }
 
     /**
-     * Verify link Daftar button on Landing page Goldplus
-     * @return boolean
-     *
-     */
-    public boolean isLinkButtonDisplayed() {
-        return playwright.waitTillLocatorIsVisible(daftarButtonOnLandingPageGP);
+    * Click on icon close pop up detail manfaat
+    *
+    *
+    */
+    public void clickOnCLosePopUpManfaat() {
+        playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
+        playwright.clickOn(closePopUpDetailManfaat);
     }
 }

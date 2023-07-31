@@ -7,11 +7,9 @@ Feature: Invoice Type based on contract
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321228 | 0890867321228 |
-    And admin akhiri contract
-    Then admin should success terminate contract
 
   @continue
   Scenario: Cancel Booking if Tenant Have Booking

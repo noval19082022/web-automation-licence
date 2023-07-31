@@ -1,4 +1,4 @@
-@BBM3
+@BBM3 @regression
 Feature: Search Data Tenant on Bangkerupux Admin
 
   @continue @TEST_BBM-1157
@@ -13,7 +13,8 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin fill the input field on booking form with:
       | search by       | value         |
       | by Phone Number | 082245501000  |
-    And admin click next button
+    And admin click search button on booking now
+    And admin click next button on booking now
     Then admin should be in "Duration" form step
 
   @TEST_BBM-1158
@@ -24,7 +25,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin fill the input field on booking form with:
       | search by       | value         |
       | by Phone Number | 087797740000  |
-    And admin click next button
+    And admin click search button on booking now
     Then admin verify dialog alert text on form booking is "User not found"
 
   @continue @TEST_BBM-1189
@@ -39,7 +40,8 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin fill the input field on booking form with:
       | search by       | value          |
       | by Name         | adiSinggahSini |
-    And admin click next button
+    And admin click search button on booking now
+    And admin click next button on booking now
     Then admin should be in "Duration" form step
 
   @TEST_BBM-1188
@@ -49,6 +51,6 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin select room with kost name "Kost Adi Auto SinggahSini"
     And admin fill the input field on booking form with:
       | search by       | value           |
-      | by Phone Number | Dh1andraAd1thya |
-    And admin click next button
+      | by Name         | DhiandraAdithya |
+    And admin click search button on booking now
     Then admin verify dialog alert text on form booking is "User not found"

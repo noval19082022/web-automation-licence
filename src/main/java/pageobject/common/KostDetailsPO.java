@@ -11,6 +11,8 @@ import utilities.PlaywrightHelpers;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class KostDetailsPO {
     Page page;
     PlaywrightHelpers playwright;
@@ -207,6 +209,16 @@ public class KostDetailsPO {
     private Locator userReviewModal;
     private Locator closeModalReviewBtn;
 
+    // ------------ Refund Policy Section --------------
+    private Locator refundPolicySection;
+    private Locator canRefundText;
+    private Locator accordingToTnCRefundText;
+    private Locator whatAreTheTermsText;
+    private Locator tncRefundtitleText;
+    private Locator refundPolicyMamikos;
+    private Locator timeConditionText;
+    private Locator tncRefundPoint;
+
 
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
@@ -399,6 +411,15 @@ public class KostDetailsPO {
         this.sortingReviewBtn = page.getByTestId("filter-tag");
         this.userReviewModal = page.locator("div[class='users-feedback']").first();
         this.closeModalReviewBtn = page.locator("span[class='kost-review-modal-header__close']");
+
+        // ------------ Refund Policy Section --------------
+        this.refundPolicySection = page.locator(".detail-kost-refund div");
+        this.canRefundText = page.getByText("Bisa Refund");
+        this.accordingToTnCRefundText = page.getByText("Sesuai dengan ketentuan dan kebijakan refund yang berlaku di Mamikos.");
+        this.whatAreTheTermsText = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bagaimana ketentuannya?"));
+        this.tncRefundtitleText = page.locator("//p[contains(.,'Syarat dan Ketentuan Refund')]");
+        this.refundPolicyMamikos = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan refund Mamikos"));
+        this.timeConditionText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("ketentuan waktu berikut"));
     }
 
     /**
@@ -1819,4 +1840,54 @@ public class KostDetailsPO {
         return playwright.waitTillLocatorIsVisible(kategoriBantuanTittle);
     }
 
+    /**
+     * check is refund policy section and all inside it is visible or not
+     * @return boolean, true if visible
+     */
+    public boolean isRefundPolicySectionVisible() {
+        canRefundText.isVisible();
+        accordingToTnCRefundText.isVisible();
+        return refundPolicySection.isVisible();
+    }
+
+    /**
+     * click bagaimana ketentuannya? text on refund policy section
+     */
+    public void clickBagaimanaKetentuan() {
+        playwright.pageScrollUntilElementIsVisible(whatAreTheTermsText);
+        whatAreTheTermsText.click();
+    }
+
+    /**
+     * check is refund tnc title visible or not
+     * @return boolean, true if visible
+     */
+    public boolean isTnCRefundVisible() {
+        return playwright.waitTillLocatorIsVisible(tncRefundtitleText);
+    }
+
+    /**
+     * scroll until element and click "kebijakan refund mamikos"
+     */
+    public void clickRefundPolicyMamikos() {
+        playwright.pageScrollUntilElementIsVisible(refundPolicyMamikos);
+        refundPolicyMamikos.click();
+    }
+
+    /**
+     * click on "ketentuan waktu berikut" text on refund tnc
+     */
+    public void clickTimeConditionRefund() {
+        timeConditionText.click();
+    }
+
+    /**
+     * check TnC refund is visible
+     * @param refundSubtile refer to TnC refund list/point
+     *                      e.g. Refund sebelum check-in
+     */
+    public void isTnCRefundPoint(String refundSubtile) {
+        tncRefundPoint = page.getByText(refundSubtile);
+        assertThat(tncRefundPoint).isVisible();
+    }
 }

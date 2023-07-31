@@ -48,6 +48,8 @@ public class sidebarMenuPO {
      * click Other Transaction Sidebar Menu
      */
     public void clickOtherTransactionMenu() {
+        page.waitForTimeout(1500);
+        tenantCommunicationButton.waitFor();
         otherTransactionButton.waitFor();
         otherTransactionButton.click();
     }

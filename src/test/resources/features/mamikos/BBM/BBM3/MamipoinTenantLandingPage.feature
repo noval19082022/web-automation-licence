@@ -13,7 +13,7 @@ Feature: MamiPoin Tenant Landing Page
     And user verify informasi poin button is displayed
     And user verify riwayat poin button is displayed
     And user verify dapatkan poin button is displayed
-    And user verify expired point information on mamipoin landing page "1.000 poin kedaluwarsa pada 31 Okt 2040"
+    And user verify expired point information on mamipoin landing page "1.000 poin kedaluwarsa pada 30 Jun 2047"
 
   @TEST_BBM-420
   Scenario: Information about points that will expire and Tenant has no point

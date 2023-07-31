@@ -42,7 +42,6 @@ public class HomePO {
     Locator bookingKosButtonHeadBar;
     Locator kostMenuDropdown;
     Locator apartmentMenuDropdown;
-    Locator profileDropdown;
     Locator profileMenu;
     Locator riwayatTransaksiMenu;
     Locator logOutButton;
@@ -78,7 +77,7 @@ public class HomePO {
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
-        userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        userPhoto = page.getByAltText("User Photo");
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
@@ -109,7 +108,6 @@ public class HomePO {
         this.kostPromo = page.locator(".rc-photo__cover").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
         this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apartemen"));
-        this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
         this.logOutButton = page.getByTestId("exitButton");
@@ -432,7 +430,7 @@ public class HomePO {
      *
      */
     public void clickOnProfileDropdown() {
-        profileDropdown.click();
+        userPhoto.click();
     }
 
     /**
