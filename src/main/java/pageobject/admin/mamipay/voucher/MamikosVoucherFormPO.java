@@ -33,21 +33,26 @@ public class MamikosVoucherFormPO {
     Locator startDateInput;
     Locator endDateInput;
     Locator totalKosQuotaInput;
+    Locator totalEachQuotaInput;
     Locator totalQuotaInput;
     Locator monthlyQuotaInput;
     Locator discountAmountInput;
+    Locator totalTargetedEmailInput;
     Locator maximumAmountInput;
     Locator minimumTransactionInput;
     Locator selectTypeButton;
     Locator campaignTeamButton;
     Locator voucherCodeInput;
+    Locator voucherPrefixInput;
     Locator dailyQuotaInput;
+    Locator singleDailyQuotaInput;
     Locator voucherNameInput;
     Locator startDateEditText;
     Locator endDateEditText;
     Locator timeDateInput;
     Locator paymentRulesEl;
     Locator submitMassButton;
+    Locator submitSingleButton;
     Locator voucherStatusEl;
     Locator submitEditMassButton;
     Locator confirmationEditButton;
@@ -59,6 +64,8 @@ public class MamikosVoucherFormPO {
     Locator activeCheckbox;
     Locator alertMessageDisplayed;
     Locator dropdownContractPeriod;
+    Locator inputTartedEmail;
+    Locator endDateInputSingleVoc;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -76,6 +83,7 @@ public class MamikosVoucherFormPO {
         targeEmailApplyInput = page.locator("(//textarea[@class='form-control input-email'])[1]");
         startDateInput = page.getByLabel("Start Date*");
         endDateInput = page.getByLabel("End Date");
+        endDateInputSingleVoc = page.locator("#end-date");
         totalKosQuotaInput = page.locator("input[name=\"kost_limit\"]");
         monthlyQuotaInput = page.locator("input[name=\"kost_limit_monthly\"]");
         discountAmountInput = page.locator("input[name=\"voucher_amount\"]");
@@ -101,6 +109,13 @@ public class MamikosVoucherFormPO {
         activeCheckbox = page.locator("//b[normalize-space()='Active']//preceding-sibling::input");
         alertMessageDisplayed = page.locator("//div[@class='callout callout-success']");
         dropdownContractPeriod = page.locator("select[name=\"min_contract_duration\"]");
+        inputTartedEmail = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("e.g: sobirin@gmail.com,rodriguez@yahuu.com");
+//                page.locator("form-control input-email");
+        voucherPrefixInput = page.locator("input[name=\"prefix\\[name\\]\"]");
+        totalTargetedEmailInput = page.locator("input[name=\"prefix\\[voucher_limit\\]\"]");
+        singleDailyQuotaInput = page.locator("input[name=\"limit_daily\"]");
+        submitSingleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Single Voucher"));
+        totalEachQuotaInput = page.locator("input[name=\"limit\"]");
     }
 
     /**
@@ -251,6 +266,14 @@ public class MamikosVoucherFormPO {
     }
 
     /**
+     * Fill end date directly to start date input form
+     * @param date String type target date
+     */
+    public void fillEndDateSingleVoucher(String date) {
+        endDateInputSingleVoc.fill(date);
+    }
+
+    /**
      * Click on voucher campaign team
      */
     public void selectOncampaignTeam(String team) {
@@ -297,11 +320,27 @@ public class MamikosVoucherFormPO {
     }
 
     /**
+     * Fill voucher code
+     * @param prefixCode
+     */
+    public void fillPrefixCode(String prefixCode) {
+        playwright.forceFill(voucherPrefixInput, prefixCode);
+    }
+
+    /**
      * Fill minimum transaction
      * @param minTransaction campaign name, voucher name, or id String data type
      */
     public void fillMinTransaction(String minTransaction) {
         playwright.forceFill(minimumTransactionInput, minTransaction);
+    }
+
+    /**
+     * Fill targeted Email
+     * @param targetedEmail campaign name, voucher name, or id String data type
+     */
+    public void fillTargetedEmail(String targetedEmail) {
+        playwright.forceFill(inputTartedEmail, targetedEmail);
     }
 
     /**
@@ -321,6 +360,13 @@ public class MamikosVoucherFormPO {
         playwright.forceFill(discountAmountInput, discountAmount);
     }
 
+    /**
+     * Fill discount amount
+     * @param totalEmail campaign name, voucher name, or id String data type
+     */
+    public void fillTotalTargetedEmail(String totalEmail) {
+        playwright.forceFill(totalTargetedEmailInput, totalEmail);
+    }
 
     /**
      * Fill each quota monthly
@@ -338,6 +384,14 @@ public class MamikosVoucherFormPO {
         playwright.forceFill(dailyQuotaInput, dailyQuota);
     }
 
+    /**
+     * Fill each quota daily
+     * @param dailyQuota campaign name, voucher name, or id String data type
+     */
+    public void fillSingleDailyQuota(String dailyQuota) {
+        playwright.forceFill(singleDailyQuotaInput, dailyQuota);
+    }
+
 
     /**
      * Fill each quota total
@@ -348,11 +402,19 @@ public class MamikosVoucherFormPO {
     }
 
     /**
-     * Fill each quota total
+     * Fill each kos quota total
      * @param totalKosQuota campaign name, voucher name, or id String data type
      */
     public void fillTotalKosQuota(String totalKosQuota) {
         playwright.forceFill(totalKosQuotaInput, totalKosQuota);
+    }
+
+    /**
+     * Fill each quota total
+     * @param totalEachQuota campaign name, voucher name, or id String data type
+     */
+    public void filTotalEachQuota(String totalEachQuota) {
+        playwright.forceFill(totalEachQuotaInput, totalEachQuota);
     }
 
     /**
@@ -361,6 +423,14 @@ public class MamikosVoucherFormPO {
      */
     public void clickOnSubmitAddMassVocButton() {
         playwright.clickOn(submitMassButton);
+    }
+
+    /**
+     * Click on Submit Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnSubmitAddSingleVocButton() {
+        playwright.clickOn(submitSingleButton);
     }
 
     /**
@@ -394,7 +464,13 @@ public class MamikosVoucherFormPO {
 
         startDateInput.click();
         page.click("xpath=" + dateElement);
-        endDateInput.click();
+//        endDateInput.click();
+        if (endDateInput.isVisible()){
+            endDateInput.click();
+        }
+        else if (endDateInputSingleVoc.isVisible()){
+            endDateInputSingleVoc.click();
+        }
     }
 
     /**
