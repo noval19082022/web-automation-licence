@@ -24,6 +24,8 @@ public class GoldplusPO {
     Locator snkGoldplusCheckbox;
     Locator weeklyPeriode;
     Locator pelajariCaranyaButton;
+    Locator gpPackageTable;
+    Locator daftarButtonOnLandingPageGP;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -43,6 +45,8 @@ public class GoldplusPO {
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
+        gpPackageTable = page.locator(".goldplus-package-content__packages-wrapper");
+        daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
     }
 
     /**
@@ -209,5 +213,23 @@ public class GoldplusPO {
      */
     public void clickOnPelajariCaranyaButton() {
         playwright.clickOn(pelajariCaranyaButton);
+    }
+
+    /**
+     * Verify package table is display
+     * @return boolean (true if table displayed, false if table doesn't displayed)
+     *
+     */
+    public boolean isGpPackageTableDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(gpPackageTable, 3000.0);
+    }
+
+    /**
+     * Verify link Daftar button on Landing page Goldplus
+     * @return boolean
+     *
+     */
+    public boolean isLinkButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(daftarButtonOnLandingPageGP);
     }
 }

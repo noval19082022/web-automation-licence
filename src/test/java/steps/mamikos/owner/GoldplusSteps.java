@@ -194,19 +194,19 @@ public class GoldplusSteps {
 
     @Then("verify button on broadcast page")
     public void verifyButtonOnBroadcastPage() {
-        playwright.hardWait(3000);
+        playwright.hardWait(5000);
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
     }
 
-    @And("owner click lanjut bayar button on chatlist")
-    public void ownerClickLanjutBayarButtonOnChatlist(){
+    @When("owner click {string} button on chatlist")
+    public void ownerClickButtonOnChatlist(String buttonTxt) {
         chat.clickChatOwner();
-        playwright.clickOnTextButton("Lanjut Bayar");
+        playwright.clickOnTextButton(buttonTxt);
     }
 
-    @And("owner click lanjut bayar button on chatrooms {string}")
-    public void ownerClickLanjutBayarButtonOnChatrooms(String tenantName) {
+    @When("owner click {string} button on chatrooms {string}")
+    public void ownerClickButtonOnChatrooms(String buttonTxt, String tenantName) {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
@@ -214,7 +214,7 @@ public class GoldplusSteps {
         playwright.hardWait(3000);
         playwright.clickOnTextButton(tenantName);
         playwright.hardWait(3000);
-        playwright.clickOnTextButton("Lanjut Bayar");
+        playwright.clickOnTextButton(buttonTxt);
     }
 
     @When("owner go to panduan gold plus page")
@@ -312,5 +312,29 @@ public class GoldplusSteps {
             mamiads.clickGpOnboardingpopUpPreviousButton();
         }
     }
+
+    @Then("user verify list of Goldplus package is appear")
+    public void userVerifyListOfGoldplusPackageIsAppear() {
+        playwright.hardWait(3000);
+        Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
+        playwright.hardWait(3000);
+    }
+
+    @Then("user verify {string} is appear")
+    public void userVerifyIsAppear(String textMessage) {
+        switch(textMessage){
+            case "list of Goldplus package":
+                Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
+                break;
+            case "Daftar GoldPlus":
+                Assert.assertTrue(playwright.isTextDisplayed("Sisa kuota mingguan", 2000.0), "Daftar GoldPlus doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("1 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
+                playwright.clickOnTextButton(textMessage);
+                Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
+                break;
+        }
+    }
+
+
     //------ GP Onboarding Pop-Up ------//
 }
