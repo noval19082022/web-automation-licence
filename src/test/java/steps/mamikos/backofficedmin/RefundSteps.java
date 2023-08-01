@@ -68,4 +68,10 @@ public class RefundSteps {
     public void adminSetToRefundThePaidInvoice() {
         refundPO.clickOnRefundAndTransfer();
     }
+
+    @And("admin set rekening number {string} and rekening owner {string} for refund")
+    public void adminSetRekeningNumberAndRekeningOwnerForRefund(String rekeningNumber, String rekeningOwner) {
+        refundPO.fillRekeningNumber(rekeningNumber);
+        refundPO.fillRekeningName(rekeningOwner);
+    }
 }

@@ -123,4 +123,24 @@ public class RefundPO {
     public void clickOnRefundAndTransfer() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer")).click();
     }
+
+    /**
+     * input rekening Number for refund
+     *
+     * @param rekeningNumber
+     */
+    public void fillRekeningNumber(String rekeningNumber) {
+        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening")).click();
+        page.keyboard().type(rekeningNumber);
+    }
+
+    /**
+     * input rekening Name for refund
+     *
+     * @param rekeningName
+     */
+    public void fillRekeningName(String rekeningName) {
+        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening")).click();
+        page.keyboard().type(rekeningName);
+    }
 }
