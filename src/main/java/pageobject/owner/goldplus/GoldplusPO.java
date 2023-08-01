@@ -24,6 +24,8 @@ public class GoldplusPO {
     Locator snkGoldplusCheckbox;
     Locator weeklyPeriode;
     Locator pelajariCaranyaButton;
+    Locator gpPackageTable;
+    Locator daftarButtonOnLandingPageGP;
     Locator closePopUpDetailManfaat;
     Locator gpStatusFilter;
     Locator backFromFilter;
@@ -50,6 +52,8 @@ public class GoldplusPO {
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
+        gpPackageTable = page.locator(".goldplus-package-content__packages-wrapper");
+        daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
         closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
         gpStatusFilter = page.locator(".goldplus-room-card__gp-status");
         backFromFilter = page.locator(".bg-c-icon[data-v-7e8d294e]");
@@ -227,14 +231,24 @@ public class GoldplusPO {
     }
 
     /**
-     * Click on icon close pop up detail manfaat
-     *
+     * Verify package table is display
+     * @return boolean (true if table displayed, false if table doesn't displayed)
      *
      */
+    public boolean isGpPackageTableDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(gpPackageTable, 5000.0);
+    }
+
+    /**
+    * Click on icon close pop up detail manfaat
+    *
+    *
+    */
     public void clickOnCLosePopUpManfaat() {
         playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
         playwright.clickOn(closePopUpDetailManfaat);
     }
+<<<<<<< HEAD
 
     /**
      * Get status paket goldplus at tab filter
@@ -279,3 +293,6 @@ public class GoldplusPO {
         lihatSelengkapnyaTagihanGP.click();
     }
 }
+=======
+}
+>>>>>>> develop
