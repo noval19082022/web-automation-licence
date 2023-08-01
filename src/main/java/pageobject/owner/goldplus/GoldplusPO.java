@@ -248,7 +248,6 @@ public class GoldplusPO {
         playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
         playwright.clickOn(closePopUpDetailManfaat);
     }
-<<<<<<< HEAD
 
     /**
      * Get status paket goldplus at tab filter
@@ -293,6 +292,3 @@ public class GoldplusPO {
         lihatSelengkapnyaTagihanGP.click();
     }
 }
-=======
-}
->>>>>>> develop
