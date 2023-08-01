@@ -6,7 +6,7 @@ Feature: Owner Dashboard GP-ONboarding
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 0876623632   | 0          | 12345678 |
+      | 087133998156 | 0          | qwerty123 |
     And owner go to panduan gold plus page
     Then owner will see that the text "Naikkan Posisi Iklan Properti dengan MamiAds" is displayed
     Then owner will see that the text "Dengan Saldo MamiAds, iklan Anda bisa mendapat lebih banyak pengunjung." is displayed
