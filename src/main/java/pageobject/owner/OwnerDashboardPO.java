@@ -29,6 +29,9 @@ public class OwnerDashboardPO {
     Locator gpWidgetButton;
     Locator seeAllNotification;
     Locator gpStatus;
+    Locator ftueChatListOwner;
+    Locator icnCloseBcTooltip;
+    Locator gpLabelChatList;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -51,6 +54,10 @@ public class OwnerDashboardPO {
         gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatus = page.locator(".membership-card__label");
+        ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
+        icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
+        gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
+
 
     }
 
@@ -187,4 +194,56 @@ public class OwnerDashboardPO {
         return playwright.getText(gpStatus);
     }
 
+    /**
+     * check FTUE at chat list is present
+     *
+     * @return true if appears FTUE Chat List section
+     */
+    public boolean isFTUEChatDisplayed() {
+        return playwright.waitTillLocatorIsVisible(ftueChatListOwner);
+    }
+
+    /**
+     * Get title FTUE text
+     *
+     * @return titleFtue
+     * @params titleFtue
+     */
+    public String getTitleFtue(String titleFtue) {
+        String titleFtueElement = "//p[contains(.,'" + titleFtue + "')]";
+        playwright.waitTillLocatorIsVisible(page.locator(titleFtueElement));
+        return playwright.getText(page.locator(titleFtueElement));
+    }
+
+    /**
+     * Get description FTUE text
+     *
+     * @return descFtue
+     * @params descFtue
+     */
+    public String getDescFtue(String descFtue) {
+        String descElement = "//p[contains(.,'" + descFtue + "')]";
+        playwright.waitTillLocatorIsVisible(page.locator(descElement));
+        return playwright.getText(page.locator(descElement));
+    }
+
+    /**
+     * Click on close icon Broadcast Chat tooltip
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnCloseIconBcTooltip() throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(icnCloseBcTooltip);
+        playwright.clickOn(icnCloseBcTooltip);
+    }
+
+    /**
+     * Verify Goldplus Label is display or not
+     *
+     * @return gpLabelChatList
+     */
+    public boolean isGoldplusLabelDisplayed() {
+        playwright.waitTillLocatorIsVisible(gpLabelChatList);
+        return gpLabelChatList.isVisible();
+    }
 }
