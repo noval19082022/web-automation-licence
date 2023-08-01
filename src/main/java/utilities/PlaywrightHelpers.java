@@ -451,7 +451,7 @@ public class PlaywrightHelpers {
      * @return boolean
      */
     public boolean isTextDisplayed(String text, double duration) {
-        return isLocatorVisibleAfterLoad(page.getByText(text), duration);
+        return isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
     }
 
     /**

@@ -1,4 +1,4 @@
-@LIMO2 @regression @gp-onboarding @owner
+@LIMO2 @regression @gp-onboarding @owner @illbealive
 Feature: Owner Dashboard GP-ONboarding
 
   @continue
@@ -26,36 +26,166 @@ Feature: Owner Dashboard GP-ONboarding
 
   @continue
   Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swiper Functionality Left To Right
-    Then owner can see swipper number <number> is selected
+    Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<text_body>"
-    When owner click on next button to go to slide number <number>
+    When owner click on next button to go to slide number <number> with total number slides are 7
     Examples:
-      | number | text_body                                 |
-      | 1      | Kunjungi Menu MamiAds                     |
-      | 2      | Beli Saldo MamiAds                        |
-      | 3      | Pilih Iklan Properti Anda                 |
-      | 4      | Pilih Jenis Anggaran                      |
-      | 5      | Anggaran Aktif Setiap Hari                |
-      | 6      | Kendalikan Pengeluaran Saldo              |
-      | 7      | Pantau Performa di Statistik Iklan        |
+      | number | text_body                          |
+      | 1      | Kunjungi Menu MamiAds              |
+      | 2      | Beli Saldo MamiAds                 |
+      | 3      | Pilih Iklan Properti Anda          |
+      | 4      | Pilih Jenis Anggaran               |
+      | 5      | Anggaran Aktif Setiap Hari         |
+      | 6      | Kendalikan Pengeluaran Saldo       |
+      | 7      | Pantau Performa di Statistik Iklan |
 
   @continue
   Scenario: [Web Owner][GP-Onboarding] Swiper Right/Next Button Should Be Disabled
-      Then owner can see swiper right or next button is disabled
+    Then owner can see swiper right or next button is disabled
 
   @continue
   Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swipper Functionality Right To Left
-    Then owner can see swipper number <number> is selected
+    Then owner can see swiper number <number> is selected
     Then owner can see selected swiper with title <number>
     Then owner can see swiper text body is "<text_body>"
     When owner click on previous button to go to slide number <number>
     Examples:
-      | number | text_body                                 |
-      | 7      | Pantau Performa di Statistik Iklan        |
-      | 6      | Kendalikan Pengeluaran Saldo              |
-      | 5      | Anggaran Aktif Setiap Hari                |
-      | 4      | Pilih Jenis Anggaran                      |
-      | 3      | Pilih Iklan Properti Anda                 |
-      | 2      | Beli Saldo MamiAds                        |
-      | 1      | Kunjungi Menu MamiAds                     |
+      | number | text_body                          |
+      | 7      | Pantau Performa di Statistik Iklan |
+      | 6      | Kendalikan Pengeluaran Saldo       |
+      | 5      | Anggaran Aktif Setiap Hari         |
+      | 4      | Pilih Jenis Anggaran               |
+      | 3      | Pilih Iklan Properti Anda          |
+      | 2      | Beli Saldo MamiAds                 |
+      | 1      | Kunjungi Menu MamiAds              |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Owner click on "Coba Sekarang"
+    When owner clicks on coba sekarang button
+    Then owner will see that the text "Properti Tampil Lebih di Atas" is displayed
+    * owner will see that the text "Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian." is displayed
+    Then owner will see that the text "Properti Tampil di Banyak Tempat" is displayed
+    * owner will see that the text "Iklan tayang di berbagai titik strategis di aplikasi dan web Mamikos." is displayed
+    Then owner will see that the text "Tentukan Anggaran Harian" is displayed
+    * owner will see that the text "Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda." is displayed
+    Then owner will see that the text "Pantau Performa Iklan" is displayed
+    * owner will see that the text "Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda." is displayed
+    Then owner will see that the text "Cara Menggunakan MamiAds" is displayed
+
+  @continue
+  Scenario: Swiper Left/Previous Button On Gold Plus Onboarding Pop-Up Should Be Disabled
+    Then owner can see swiper left or previous button on gold plus onboarding pop-up is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use MamiAds Onboarding Pop-Up Swiper From Right To Left
+    Then owner can see gp onboarding swiper number <swiper number> is selected
+    Then owner can see gp onboarding pop-up text head "<text head>" is selected
+    Then owner can see gp onboarding pop-up text body "<text body>" is selected
+    Then owner can see gp onboarding pop-up image alt text "<image alt text>" is visible
+    When owner click on next button on gp onboarding pop-up to go to slide number <swiper number>
+    Examples:
+      | swiper number | text head                          | text body                                                      | image alt text                       |
+      | 1             | Kunjungi Menu MamiAds              | Klik Kelola pada halaman utama Mamikos, lalu pilih MamiAds.    | illustration mamiads click           |
+      | 2             | Beli Saldo MamiAds                 | Klik “Beli Saldo” pada halaman MamiAds.                        | illustration buy mamiads             |
+      | 3             | Pilih Iklan Properti Anda          | Anda bebas memilih properti yang ingin diiklankan.             | illustration make property ads       |
+      | 4             | Pilih Jenis Anggaran               | Anda dapat membatasi pemakaian saldo MamiAds sesuai kebutuhan. | illustration choose budget type      |
+      | 5             | Anggaran Aktif Setiap Hari         | Setiap hari, iklan dinaikkan dengan anggaran yang sama.        | illustration mamiads success         |
+      | 6             | Kendalikan Pengeluaran Saldo       | Nonaktifkan MamiAds Anda untuk menghentikan pemakaian saldo.   | illustration mamiads balance control |
+      | 7             | Pantau Performa di Statistik Iklan | Lihat perkembangan iklan Anda di sini.                         | illustration mamiads statistic       |
+
+  @continue
+  Scenario: Swiper Right/Next Button On Gold Plus Onboarding Pop-Up Should Be Disabled
+    Then owner can see swiper right or next button on gold plus onboarding pop-up is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use MamiAds Onboarding Pop-Up Swiper Left To Right
+    Then owner can see gp onboarding swiper number <swiper number> is selected
+    Then owner can see gp onboarding pop-up text head "<text head>" is selected
+    Then owner can see gp onboarding pop-up text body "<text body>" is selected
+    Then owner can see gp onboarding pop-up image alt text "<image alt text>" is visible
+    When onwer click on previous button on gp onboarding pop-up to go to slide number <swiper number>
+    Examples:
+      | swiper number | text head                          | text body                                                      | image alt text                       |
+      | 7             | Pantau Performa di Statistik Iklan | Lihat perkembangan iklan Anda di sini.                         | illustration mamiads statistic       |
+      | 6             | Kendalikan Pengeluaran Saldo       | Nonaktifkan MamiAds Anda untuk menghentikan pemakaian saldo.   | illustration mamiads balance control |
+      | 5             | Anggaran Aktif Setiap Hari         | Setiap hari, iklan dinaikkan dengan anggaran yang sama.        | illustration mamiads success         |
+      | 4             | Pilih Jenis Anggaran               | Anda dapat membatasi pemakaian saldo MamiAds sesuai kebutuhan. | illustration choose budget type      |
+      | 3             | Pilih Iklan Properti Anda          | Anda bebas memilih properti yang ingin diiklankan.             | illustration make property ads       |
+      | 2             | Beli Saldo MamiAds                 | Klik “Beli Saldo” pada halaman MamiAds.                        | illustration buy mamiads             |
+      | 1             | Kunjungi Menu MamiAds              | Klik Kelola pada halaman utama Mamikos, lalu pilih MamiAds.    | illustration mamiads click           |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Owner visit “Panduan Fitur di GoldPlus” and click “Memantau Performa Kos”
+    When owner navigates to owner dashboard
+    And owner go to panduan gold plus memantau performa kos page
+    Then owner will see that the text "Pantau Performa Bisnis Kos dengan Statistik GoldPlus" is displayed
+    Then owner will see that the text "Statistik GoldPlus memperlihatkan data terkini seputar iklan kos Anda, untuk keputusan bisnis yang lebih baik." is displayed
+    Then owner will see that the text "Di Statistik GoldPlus, Anda dapat melihat:" is displayed
+    Then owner will see that the text "Performa Iklan Kos Anda" is displayed
+    * owner will see that the text "Anda bisa lihat seberapa banyak kunjungan iklan, chat, booking, dan performa lainnya di kos Anda." is displayed
+    Then owner will see that the text "Gambaran Profil Pencari Kos" is displayed
+    * owner will see that the text "Cari tahu pencari kos seperti apa yang mem-booking kos Anda." is displayed
+    Then owner will see that the text "Cara menggunakan Statistik GoldPlus" is displayed
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Left/Previous Button Should Be Disabled
+    Then owner can see swiper left or previous button is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Left To Right
+    Then owner can see gp onboarding number <number> is selected
+    Then owner can see gp onboarding text title is "<onboarding text title>"
+    Then owner can see gp onboarding text body is "<onboarding text body>"
+    Then owner can see gp onboarding image alt text is "<image alternative text>"
+    Then owner can see swiper number <number> is selected
+    Then owner can see selected swiper with title <number>
+    Then owner can see swiper text body is "<onboarding text title>"
+    When owner click on next button to go to slide number <number> with total number slides are 4
+    Examples:
+      | number | onboarding text title           | onboarding text body                                          | image alternative text       |
+      | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
+      | 2      | Klik “Statistik GoldPlus”       | Ada tiga jenis statistik, pilih “Statistik GoldPlus”.         | illustration click GoldPlus  |
+      | 3      | Pilih Nama Kos                  | Klik kos yang Anda ingin lihat statistiknya.                  | illustration select kost     |
+      | 4      | Selesai! Cek Statistik Kos Anda | Di halaman ini, Anda bisa melihat performa kos GoldPlus Anda. | illustration check statistic |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Right/Next Button Should Be Disabled
+    Then owner can see swiper right or next button is disabled
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Right To Left
+    Then owner can see gp onboarding number <number> is selected
+    Then owner can see gp onboarding text title is "<onboarding text title>"
+    Then owner can see gp onboarding text body is "<onboarding text body>"
+    Then owner can see gp onboarding image alt text is "<image alternative text>"
+    Then owner can see swiper number <number> is selected
+    Then owner can see selected swiper with title <number>
+    Then owner can see swiper text body is "<onboarding text title>"
+    When owner click on previous button to go to slide number <number>
+    Examples:
+      | number | onboarding text title           | onboarding text body                                          | image alternative text       |
+      | 4      | Selesai! Cek Statistik Kos Anda | Di halaman ini, Anda bisa melihat performa kos GoldPlus Anda. | illustration check statistic |
+      | 3      | Pilih Nama Kos                  | Klik kos yang Anda ingin lihat statistiknya.                  | illustration select kost     |
+      | 2      | Klik “Statistik GoldPlus”       | Ada tiga jenis statistik, pilih “Statistik GoldPlus”.         | illustration click GoldPlus  |
+      | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Coba Sekarang Button Functionality
+    When owner clicks on coba sekarang button
+
+  @continue
+  Scenario Outline: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Available Package
+    When owner can see gp statistic header text as "Statistik GoldPlus"
+    Then owner can see gp statistic filter text number <number> is "<package>"
+    Examples:
+      | number | package    |
+      | 1      | Semua      |
+      | 2      | Goldplus 1 |
+      | 3      | Goldplus 2 |
+      | 4      | Goldplus 3 |
+      | 5      | Goldplus 4 |
+
+  @continue
+  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List
+    Then owner can see gp statistic list active package and it contents elements

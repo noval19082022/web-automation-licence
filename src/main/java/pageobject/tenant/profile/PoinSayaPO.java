@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PoinSayaPO {
     Page page;
     PlaywrightHelpers playwright;
@@ -23,6 +25,19 @@ public class PoinSayaPO {
     Locator dapatkanPoinButton;
     Locator expiredPoinInfo;
     Locator noHaveMamipoinText;
+    Locator titleInformasiPoinPage;
+    Locator subtitleInformasiPoinPage;
+    Locator lihatCaranyaButon;
+    Locator tableTitleTanggalKedaluwarsa;
+    Locator tableTitleJumlahMamipoin;
+    Locator fieldValueTable;
+    Locator subtitleTidakAdaPoinYangTersedia;
+    Locator titleRiwayatPoinPage;
+    Locator filterButton;
+    Locator aktifFilter;
+    Locator historyDateText;
+    Locator titleRiwayatMasihKosong;
+    Locator subtitleRiwayatMasihKosong;
 
     public PoinSayaPO(Page page) {
         this.page = page;
@@ -41,6 +56,15 @@ public class PoinSayaPO {
         dapatkanPoinButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Semua")).nth(1);
         expiredPoinInfo = page.locator(".card__info-poin");
         noHaveMamipoinText = page.getByText("Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya.");
+        titleInformasiPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tanggal Kedaluwarsa")).first();
+        subtitleInformasiPoinPage = page.getByText("Poin Kamu akan kedaluwarsa dalam waktu 6 bulan dari saat Kamu mendapatkan poin.");
+        lihatCaranyaButon = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Caranya"));
+        tableTitleTanggalKedaluwarsa = page.locator("//h1[@class='table-title'][text()='Tanggal Kedaluwarsa']");
+        tableTitleJumlahMamipoin = page.locator("//h1[@class='table-title-right'][text()='Jumlah MamiPoin']");
+        subtitleTidakAdaPoinYangTersedia = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tidak Ada Poin yang Tersedia"));
+        titleRiwayatPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Poin"));
+        titleRiwayatMasihKosong = page.getByText("Riwayat Masih Kosong");
+        subtitleRiwayatMasihKosong = page.getByText("Penerimaan dan penukaran poin Kamu akan tercatat di halaman ini.");
     }
 
     /**
@@ -208,5 +232,132 @@ public class PoinSayaPO {
      */
     public String getTextNoHaveMamipoin() {
         return playwright.getText(noHaveMamipoinText);
+    }
+
+    /**
+     * Verify title in the informasi poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheInformasiPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleInformasiPoinPage);
+    }
+
+    /**
+     * Verify subtitle in the informasi poin page is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleInTheInformasiPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleInformasiPoinPage);
+    }
+
+    /**
+     * Click on lihat caranya button
+     */
+    public void clickOnLihatCaranyaButton() {
+        playwright.clickOn(lihatCaranyaButon);
+    }
+
+    /**
+     * Verify table title tanggal kedaluwarsa is displayed
+     * @return boolean
+     */
+    public Boolean isTableTitleTanggalKedaluwarsaDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tableTitleTanggalKedaluwarsa);
+    }
+
+    /**
+     * Verify table title jumlah mamipoin is displayed
+     * @return boolean
+     */
+    public Boolean isTableTitleJumlahMamipoinDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tableTitleJumlahMamipoin);
+    }
+
+    /**
+     * check expired date is visible or not
+     * @param fieldValue refer to table contents
+     */
+    public void isFieldValueVisible(String fieldValue) {
+        fieldValueTable = page.locator("//div[text()='" + fieldValue + "']");
+        assertThat(fieldValueTable).isVisible();
+    }
+
+    /**
+     * Verify subtitle tidak ada poin yang tersedia is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleTidakAdaPoinYangTersediaDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleTidakAdaPoinYangTersedia);
+    }
+
+    /**
+     * Verify title in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheRiwayatPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleRiwayatPoinPage);
+    }
+
+    /**
+     * check filter is visible or not
+     * @param filterText refer to table contents
+     */
+    public void isFilterVisible(String filterText) {
+        filterButton = page.getByText(filterText);
+        assertThat(filterButton).isVisible();
+    }
+
+    /**
+     * Get element attribute from filter
+     * @param filter input string that define filter value
+     * @return attribute value
+     */
+    public String getFilterElementAttribute(String filter) {
+        aktifFilter = page.locator("//div[contains(text(), '" + filter + "')]");
+        return playwright.getAttributeValue(aktifFilter,"class");
+    }
+
+    /**
+     *  Get selected filter text
+     * @param filter input string that define filter value
+     * @return
+     */
+    public String getFilterText(String filter) {
+        filterButton = page.getByText(filter);
+        return playwright.getText(filterButton);
+    }
+
+    /**
+     * check history date is visible or not
+     * @param historyDate refer to history date
+     */
+    public void isHistoryDatePoinVisible(String historyDate) {
+        historyDateText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(historyDate));
+        assertThat(historyDateText).isVisible();
+    }
+
+    /**
+     * Click on Selected Filters
+     * @param filter input string that define filter value
+     */
+    public void clickOnFilters(String filter) {
+        filterButton = page.getByText(filter);
+        playwright.clickOn(filterButton);
+    }
+
+    /**
+     * Verify title riwayat masih kosong in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleRiwayatMasihKosongDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleRiwayatMasihKosong);
+    }
+
+    /**
+     * Verify subtitle riwayat masih kosong in the riwayat poin page is displayed
+     * @return boolean
+     */
+    public Boolean isSubtitleRiwayatMasihKosongDisplayed() {
+        return playwright.waitTillLocatorIsVisible(subtitleRiwayatMasihKosong);
     }
 }

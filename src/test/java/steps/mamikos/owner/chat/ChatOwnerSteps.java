@@ -16,7 +16,7 @@ public class ChatOwnerSteps {
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
 
-    @And("user click on chat button in top bar owner home page")
+    @And("user click chat button in top bar owner home page")
     public void userClickChatButtonInTopBarOwnerHomePage() {
         chat.clickChatOwner();
     }

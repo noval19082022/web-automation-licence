@@ -1,4 +1,4 @@
-@BBM7
+@BBM7 @regression @TEST_BBM-641 @TEST_BBM-742
 Feature: Apply Voucher For Kost Type Verified By Mamichecker
 
   @continue

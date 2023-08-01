@@ -48,6 +48,8 @@ public class sidebarMenuPO {
      * click Other Transaction Sidebar Menu
      */
     public void clickOtherTransactionMenu() {
+        page.waitForTimeout(1500);
+        tenantCommunicationButton.waitFor();
         otherTransactionButton.waitFor();
         otherTransactionButton.click();
     }
@@ -58,5 +60,13 @@ public class sidebarMenuPO {
     public void clickTenantCommunicationMenu() {
         tenantCommunicationButton.waitFor();
         tenantCommunicationButton.click();
+    }
+
+    /**
+     * click Survey Tracker Menu
+     */
+    public void clickSurveyTrackerMenu() {
+        survetTrackerButton.waitFor();
+        survetTrackerButton.click();
     }
 }

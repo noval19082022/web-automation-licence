@@ -34,13 +34,21 @@ public class TenantCommunicationPO {
     Locator actionButton;
     Locator displayDataRow;
     Locator columName;
+    Locator buttonTambahCatatan;
+    Locator fieldNote;
+    Locator simpanNoteButton;
+    Locator prioritasText;
+    Locator fieldNoteStatusWA;
+    Locator buttonTambahStatusWA;
+    Locator getStatusWA;
+    Locator trackChatWAButton;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        mainPageFilterMenu = page.locator(".action-bar__search-type");
-        mainPageSearchField = page.getByTestId("search-field");
-        mainPageSearchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari"));
+        mainPageFilterMenu = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--lg']");
+        mainPageSearchField = page.locator("//*[@class='bg-c-input__field']");
+        mainPageSearchButton = page.locator("//button[.='Cari']");
         textProfilePenyewa = page.getByText("Profil Penyewa");
         textNamaPenyewa = page.locator(".tenant-profile__title");
         textRiwayatPencarian = page.getByText("Riwayat Pencarian Kos");
@@ -53,7 +61,15 @@ public class TenantCommunicationPO {
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
-        displayDataRow = page.locator(".tenant-tracker__result-text");
+        displayDataRow = page.locator("//p[contains(.,'Menampilkan 20 dari')]");
+        buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
+        fieldNote = page.getByPlaceholder("Tulis di sini...");
+        simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        prioritasText = page.locator("//a[contains(.,'prioritaskan')]").first();
+        fieldNoteStatusWA = page.getByPlaceholder("Tulis catatan di sini");
+        buttonTambahStatusWA = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        getStatusWA = page.locator("tbody > tr:nth-of-type(1) .table-body__label");
+        trackChatWAButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plusTrack Status Chat WA"));
     }
 
     /**
@@ -239,8 +255,8 @@ public class TenantCommunicationPO {
     /**
      * get Tenant Name on Main Page Filter
      */
-    public String getTenantNameOnMainPageFilter() {
-        tenantNameOnTheFirstRow = page.locator("//*[@class='bg-c-link bg-c-link--high']").first();
+    public String getTenantNameOnMainPageFilter(String tenantName) {
+        tenantNameOnTheFirstRow = page.locator("//*[@class='bg-c-link bg-c-link--high'][contains(., '"+tenantName+"')]").first();
         return playwright.getText(tenantNameOnTheFirstRow);
     }
 
@@ -261,6 +277,85 @@ public class TenantCommunicationPO {
         columName = page.locator("//thead//tr//th//div//p");
         List<Locator> elements = playwright.getLocators(columName);
         return playwright.getText(elements.get(index));
+    }
+
+    /**
+     * click Tambah Catatan
+     */
+    public void clickOnTambahCatatan() {
+        playwright.clickOn(buttonTambahCatatan);
+    }
+
+    /**
+     * Enter Text in search bar note
+     * @param keyword is text we want to search
+     */
+    public void enterTextNote(String keyword) {
+        fieldNote.fill(keyword);
+    }
+
+    /**
+     * Click Simpan Note
+     */
+    public void clickSimpanNote() {
+        playwright.clickOn(simpanNoteButton);
+    }
+
+    /**
+     * get Text "Filter Result Note"
+     */
+    public String getFilterResultNote() {
+        return playwright.getText(prioritasText);
+    }
+
+    /**
+     * get Text status "Whatsapp"
+     */
+    public String getTextStatusWA() {
+        return playwright.getText(getStatusWA);
+    }
+
+    /**
+     * Click Prioritaskan Note
+     */
+    public void clickPrioritaskan() {
+        playwright.clickOn(prioritasText);
+    }
+
+    /**
+     * clear Note
+     */
+    public void clearNoteField() {
+        fieldNote.clear();
+    }
+
+    /**
+     * check Note is clear
+     */
+    public Boolean isFieldNoteClear() {
+        return playwright.waitTillLocatorIsVisible(prioritasText);
+    }
+
+    /**
+     * Enter Text in tambah tracker status WA
+     * @param keyword is text we want to search
+     */
+    public void enterTextNoteStatusWA(String keyword) {
+        fieldNoteStatusWA.fill(keyword);
+    }
+
+    /**
+     * click Tambah on tracker status WA
+     */
+    public void clickTambahStatusWA() {
+        playwright.clickOn(buttonTambahStatusWA);
+    }
+
+    /**
+     * Click on Track Status Chat WA
+     */
+    public void clickTrackStatusWAButton() {
+        playwright.clickOn(trackChatWAButton);
     }
 
 }
