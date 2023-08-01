@@ -14,6 +14,7 @@ Feature: Dashboard GP
     * user click "Lihat Selengkapnya"
     * user will see that the text "Paket GoldPlus Anda" is displayed
     * user see status goldplus is "Goldplus 1"
+
   @checkAllFilter @continue @dashboardGP
   Scenario: Check all Filter Page Paket GoldPlus Anda (Semua, Aktif, Menunggu Pembayaran Sedan Diproses)
     When user click "Aktif"
@@ -37,5 +38,3 @@ Feature: Dashboard GP
     * user will see that the text "Semua tagihan yang belum dibayar dan tagihan mendatang akan muncul di halaman ini." is displayed
     When user click tab selesai
     Then user see list detail tagihan goldplus
-
-

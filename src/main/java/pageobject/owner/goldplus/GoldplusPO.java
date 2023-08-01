@@ -261,7 +261,6 @@ public class GoldplusPO {
     /**
      * Click on icon back from filter gp
      *
-     *
      */
     public void clickOnIconBackFilter() {
         playwright.clickOn(backFromFilter);
@@ -270,13 +269,16 @@ public class GoldplusPO {
     /**
      * Scroll to tagihan goldplus at dashboard GP
      *
-     *
      */
     public void scrollToTagihanSection() {
         tagihanGPSection.scrollIntoViewIfNeeded();
-
     }
 
+    /**
+     * Verify list tagihan GP is display
+     * @return boolean (true if table displayed, false if table doesn't displayed)
+     *
+     */
     public boolean isListDetailTagihanIsDisplayed() {
         return tableTagihanGP.isVisible();
     }
@@ -288,6 +290,9 @@ public class GoldplusPO {
         tabSelesaiRincianBayar.click();
     }
 
+    /**
+     * Click on lihat selengkapnya at section detail tagihan dashboard GP
+     */
     public void lihatSelngkapnyaSectionDetailTagihan() {
         lihatSelengkapnyaTagihanGP.click();
     }
