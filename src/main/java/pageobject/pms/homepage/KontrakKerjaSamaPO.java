@@ -2,7 +2,11 @@ package pageobject.pms.homepage;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.PlaywrightHelpers;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class KontrakKerjaSamaPO {
     private Page page;
@@ -20,19 +24,178 @@ public class KontrakKerjaSamaPO {
     Locator ubahProfilPemilikButton;
     //End Profil Pemilik
 
+    //Edit Profil Pemilik
+    Locator namaPemilikInput;
+    Locator noHPPemilikInput;
+    Locator alamatPemilikInput;
+    Locator provinsiPemilikInput;
+    Locator kotaPemilikInput;
+    Locator kecamatanPemilikInput;
+    Locator kelurahanPemilikInput;
+    Locator dropdownOptions;
+    Locator simpanButton;
+    Locator confirmSimpanButton;
+    //End Edit Profil Pemilik
+
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
 
         kontrakKerjaSamaTab = page.locator("[aria-controls='contract']");
         sectionOwnerProfile = page.locator("#owner-profile");
-        namaPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(0);
-        nomorHPPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(1);
-        alamatPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(2);
-        provinsiPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(3);
-        kotaPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(4);
-        kecamatanPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(5);
-        kelurahanPemilik = page.locator("#owner-profile .bg-c-list-item__description").nth(6);
-        ubahProfilPemilikButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Ubah")).first();
+        namaPemilik = page.locator(".bg-c-list-item__description").nth(0);
+        nomorHPPemilik = page.locator(".bg-c-list-item__description").nth(1);
+        alamatPemilik = page.locator(".bg-c-list-item__description").nth(2);
+        provinsiPemilik = page.locator(".bg-c-list-item__description").nth(3);
+        kotaPemilik = page.locator(".bg-c-list-item__description").nth(4);
+        kecamatanPemilik = page.locator(".bg-c-list-item__description").nth(5);
+        kelurahanPemilik = page.locator(".bg-c-list-item__description").nth(6);
+        ubahProfilPemilikButton = page.locator("#owner-profile").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
+
+        namaPemilikInput = page.locator("input.bg-c-input__field").nth(0);
+        noHPPemilikInput = page.locator("input.bg-c-input__field").nth(1);
+        alamatPemilikInput = page.locator("textarea.bg-c-textarea__field");
+        provinsiPemilikInput = page.locator(".bg-c-select__trigger").first();
+        kotaPemilikInput = page.locator(".bg-c-select__trigger").nth(1);
+        kecamatanPemilikInput = page.locator(".bg-c-select__trigger").nth(2);
+        kelurahanPemilikInput = page.locator(".bg-c-select__trigger").last();
+        dropdownOptions = page.locator(".bg-c-dropdown__menu-item-content");
+        simpanButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Simpan"));
+        confirmSimpanButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
     }
 
+    /**
+     * Go to Kontrak Kerja Sama tab
+     */
+    public void clickKontrakKerjaSamaTab() {
+        kontrakKerjaSamaTab.click();
+        page.waitForLoadState();
+    }
+
+    /**
+     * Assert Nama Pemilik - Profil Pemilik Section
+     * @param nama
+     */
+    public void assertNamaPemilik(String nama) {
+        sectionOwnerProfile.waitFor();
+        assertThat(namaPemilik).hasText(nama);
+    }
+
+    /**
+     * Assert No HP Pemilik - Profil Pemilik Section
+     * @param noHP
+     */
+    public void assertNoHPPemilik(String noHP) {
+        assertThat(nomorHPPemilik).hasText(noHP);
+    }
+
+    /**
+     * Assert Alamat Pemilik - Profil Pemilik Section
+     * @param alamat
+     */
+    public void assertAlamatPemilik(String alamat) {
+        assertThat(alamatPemilik).hasText(alamat);
+    }
+
+    /**
+     * Assert Provinsi Pemilik - Profil Pemilik Section
+     * @param provinsi
+     */
+    public void assertProvinsiPemilik(String provinsi) {
+        assertThat(provinsiPemilik).hasText(provinsi);
+    }
+
+    /**
+     * Assert Kota Pemilik - Profil Pemilik Section
+     * @param kota
+     */
+    public void assertKotaPemilik(String kota) {
+        assertThat(kotaPemilik).hasText(kota);
+    }
+
+    /**
+     * Assert Kecamatan Pemilik - Profil Pemilik Section
+     * @param kecamatan
+     */
+    public void assertKecamatanPemilik(String kecamatan) {
+        assertThat(kecamatanPemilik).hasText(kecamatan);
+    }
+
+    /**
+     * Assert Kelurahan Pemilik - Profil Pemilik Section
+     * @param kelurahan
+     */
+    public void assertKelurahanPemilik(String kelurahan) {
+        assertThat(kelurahanPemilik).hasText(kelurahan);
+    }
+
+    /**
+     * Ubah Profil Pemilik
+     */
+    public void ubahProfilPemilik() {
+        ubahProfilPemilikButton.click();
+    }
+
+    /**
+     * Edit Nama Pemilik - Profil Pemilik Section
+     * @param nama
+     */
+    public void editNamaPemilik(String nama) {
+        namaPemilikInput.fill(nama);
+    }
+
+    /**
+     * Edit No HP Pemilik  - Profil Pemilik Section
+     * @param noHP
+     */
+    public void editNoHPPemilik(String noHP) {
+        noHPPemilikInput.fill(noHP);
+    }
+
+    public void editAlamatPemilik(String alamat) {
+        alamatPemilikInput.fill(alamat);
+    }
+
+    /**
+     * Edit Provinsi Pemilik - Profil Pemilik Section
+     * @param provinsi
+     */
+    public void editProvinsiPemilik(String provinsi) {
+        provinsiPemilikInput.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(provinsi)).click();
+    }
+
+    /**
+     * Edit Kota Pemilik - Profil Pemilik Section
+     * @param kota
+     */
+    public void editKotaPemilik(String kota) {
+        kotaPemilikInput.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(kota)).click();
+    }
+
+    /**
+     * Edit Kecamatan Pemilik - Profil Pemilik Section
+     * @param kecamatan
+     */
+    public void editKecamatanPemilik(String kecamatan) {
+        kecamatanPemilikInput.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(kecamatan)).click();
+    }
+
+    /**
+     * Edit Kelurahan Pemilik - Profil Pemilik Section
+     * @param kelurahan
+     */
+    public void editKelurahanPemilik(String kelurahan) {
+        kelurahanPemilikInput.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(kelurahan)).click();
+    }
+
+    /**
+     * Save ubah Profil Pemilik
+     */
+    public void submitEditProfilPemilik() {
+        simpanButton.click();
+        confirmSimpanButton.click();
+    }
 }

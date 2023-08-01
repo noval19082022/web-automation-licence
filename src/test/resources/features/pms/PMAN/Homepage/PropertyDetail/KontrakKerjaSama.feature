@@ -1,4 +1,4 @@
-@regression @pman @pms @detailpropertypms @test
+@regression @pman @pms @detailpropertypms
 
 Feature: Kontrak Kerja Sama
   Background: Open Detail Property
@@ -12,19 +12,19 @@ Feature: Kontrak Kerja Sama
   Scenario: See and Edit Kontrak Kerja Sama - Profil Pemilik
     When admin see profil pemilik
     Then profil pemilik section match with data
-      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kecamatan   |
+      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
     #Admin edit profil pemilik
     When admin edit profil pemilik
-      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kecamatan   |
-      | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
+      | Nama    | Nomor HP      | Alamat                  | Provinsi    | kota/Kabupaten    | Kecamatan | Kelurahan     |
+      | Chandra | 084423230606  | Jl Tentara Pelajar No2  | Jawa Tengah | Kabupaten Cilacap | Adipala   | Adireja Wetan |
     Then profil pemilik section match with data
-      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kecamatan   |
-      | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
+      | Nama    | Nomor HP      | Alamat                  | Provinsi    | kota/Kabupaten    | Kecamatan | Kelurahan     |
+      | Chandra | 084423230606  | Jl Tentara Pelajar No2  | Jawa Tengah | Kabupaten Cilacap | Adipala   | Adireja Wetan |
     #Revert back profil pemilik
     When admin edit profil pemilik
-      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kecamatan   |
+      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
     Then profil pemilik section match with data
-      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kecamatan   |
+      | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
