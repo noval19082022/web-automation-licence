@@ -267,7 +267,6 @@ public class GoldplusSteps {
     @When("owner clicks on coba sekarang button")
     public void ownerClickOnCobaSekarangButton() {
         panduanGP.clickCobaSekarangButton();
-        page.pause();
     }
 
     @Then("owner can see gp onboarding text title is {string}")
