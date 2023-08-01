@@ -1,4 +1,4 @@
-package steps.mamikos.owner;
+package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
@@ -225,9 +225,9 @@ public class GoldplusSteps {
         panduanGP.clickOnNaikkanIklanAndaButton();
     }
 
-    @When("owner click on next button to go to slide number {int}")
-    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipper(Integer swiperNumber) {
-        if (swiperNumber <= 6) {
+    @When("owner click on next button to go to slide number {int} with total number slides are {int}")
+    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipperWithTotalNumberSlidesAre(Integer swiperNumber, Integer totalNumberSlide) {
+        if (swiperNumber <= totalNumberSlide - 1) {
             panduanGP.clickOnNextButton();
         }
     }
