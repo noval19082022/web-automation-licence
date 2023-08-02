@@ -81,4 +81,9 @@ public class RefundSteps {
     public void adminVerifyDownloadButtonIsDisable() {
         Assert.assertTrue(refundPO.IsOnDownloadXlsDisable());
     }
+
+    @Then("admin verify transferred transaction for user {string} is visible")
+    public void adminVerifyTransferredTransactionForUserIsDone(String username) {
+        Assert.assertTrue(refundPO.transferredUserName().contains(username));
+    }
 }

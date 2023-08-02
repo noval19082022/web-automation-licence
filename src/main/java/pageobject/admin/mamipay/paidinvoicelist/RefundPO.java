@@ -7,18 +7,50 @@ import com.microsoft.playwright.options.*;
 public class RefundPO {
     private Page page;
     private Locator refundBtn;
+    //--- refund detail ----
     private Locator selectBank;
+    private Locator searchBankName;
+    private Locator checkMarkAdminFee;
+    private Locator inputAmountRefund;
+    private Locator inputRekeningNunmber;
+    private Locator inputRekeningName;
+    private Locator refundBtnAction;
+    // transferred list
     private Locator transferred;
+    private Locator firstTransferredUserOnlist;
     private Locator exportReport;
+    //--- export transferred report detail ----
     private Locator chooseDateTransferredReport;
+    private Locator chooseExportForToday;
+    private Locator downloadXlsReport;
+    //--- Data booking menu on bang kerupux ---
+    private Locator filterTransactionBtn;
+    private Locator phoneNumberPlaceHolder;
+    private Locator cariBtn;
 
     public RefundPO(Page page) {
         this.page = page;
         this.refundBtn = page.getByRole(AriaRole.BUTTON).getByText("Refund").first();
+        //--- refund detail ----
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
+        this.searchBankName = page.locator("input[type='search']");
+        this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp200 (Kesalahan Owner)");
+        this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
+        this.inputRekeningNunmber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
+        this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
+        this.refundBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer"));
+        //--- transferred list
         this.transferred = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Transferred"));
+        this.firstTransferredUserOnlist = page.locator("//tbody/tr[1]/td[8]");
         this.exportReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Export"));
+        //--- export transferred detail ---
         this.chooseDateTransferredReport = page.locator("#refund-invoice-daterange");
+        this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
+        this.downloadXlsReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX"));
+        //-- data booking menu on bank kerupux ---
+        this.filterTransactionBtn = page.getByText("Tampilkan Filter");
+        this.phoneNumberPlaceHolder = page.getByPlaceholder("Ex: 081987654321");
+        this.cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
     }
 
     /**
@@ -35,7 +67,7 @@ public class RefundPO {
      */
     public void fillBankName(String bankName) {
         selectBank.click();
-        page.locator("input[type='search']").click();
+        searchBankName.click();
         page.keyboard().type(bankName);
         page.keyboard().press("Enter");
     }
@@ -59,22 +91,23 @@ public class RefundPO {
      */
     public void exportReportForToday() {
         chooseDateTransferredReport.click();
-        page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today")).click();
+        chooseExportForToday.click();
     }
 
     /**
      * download transferred report
      */
     public void clickOnDownloadXls() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX")).click();
+        downloadXlsReport.click();
     }
 
     /**
      * check if download xls disable
+     *
      * @return
      */
     public boolean IsOnDownloadXlsDisable() {
-        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX")).isDisabled();
+        return downloadXlsReport.isDisabled();
     }
 
     /**
@@ -83,10 +116,10 @@ public class RefundPO {
      * @param tenantPhone
      */
     public void filterTransactionUsingTenantPhoneNumber(String tenantPhone) {
-        page.getByText("Tampilkan Filter").click();
-        page.getByPlaceholder("Ex: 081987654321").click();
+        filterTransactionBtn.click();
+        phoneNumberPlaceHolder.click();
         page.keyboard().type(tenantPhone);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari")).click();
+        cariBtn.click();
     }
 
     /**
@@ -104,7 +137,7 @@ public class RefundPO {
      * uncheck the admin fee on refund process
      */
     public void unCheckAdminFee() {
-        page.getByLabel("Biaya admin dikembalikan Rp200 (Kesalahan Owner)").uncheck();
+        checkMarkAdminFee.uncheck();
     }
 
     /**
@@ -113,8 +146,8 @@ public class RefundPO {
      * @param amount
      */
     public void fillRefundAmount(String amount) {
-        page.getByPlaceholder("Input paid amount").first().clear();
-        page.getByPlaceholder("Input paid amount").first().click();
+        inputAmountRefund.clear();
+        inputAmountRefund.click();
         page.keyboard().type(amount);
     }
 
@@ -129,7 +162,7 @@ public class RefundPO {
      * set or click refund for paid invoice
      */
     public void clickOnRefundAndTransfer() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer")).click();
+        refundBtnAction.click();
     }
 
     /**
@@ -138,7 +171,7 @@ public class RefundPO {
      * @param rekeningNumber
      */
     public void fillRekeningNumber(String rekeningNumber) {
-        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening")).click();
+        inputRekeningNunmber.click();
         page.keyboard().type(rekeningNumber);
     }
 
@@ -148,7 +181,17 @@ public class RefundPO {
      * @param rekeningName
      */
     public void fillRekeningName(String rekeningName) {
-        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening")).click();
+        inputRekeningName.click();
         page.keyboard().type(rekeningName);
+    }
+
+
+    /**
+     * get text first list account on transferred invoice list
+     *
+     * @return
+     */
+    public String transferredUserName() {
+        return firstTransferredUserOnlist.textContent().trim();
     }
 }

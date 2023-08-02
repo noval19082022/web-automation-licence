@@ -35,9 +35,4 @@ public class FlipSteps {
         Assert.assertTrue(flipPO.verifyOnTestMode());
         flipPO.setForceTransaction();
     }
-
-    @Then("admin verify transferred transaction for user {string} is visible")
-    public void adminVerifyTransferredTransactionForUserIsDone(String username) {
-        Assert.assertTrue(flipPO.transferredUserName().contains(username));
-    }
 }
