@@ -440,3 +440,14 @@ Feature: Payment Staging
     And admin visit transferred list on refund page
     And admin search transferred refund by tenant Phone Number and input field "083829167577"
     Then admin verify see text "( from Credit Card )"
+
+  @TEST_DOM-634 @Automated @web-covered
+  Scenario: [BackOffice][Refund] click Close Button Popup Refund
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin close the refund detail
+    Then admin verify see text "Daftar Invoice Refund"

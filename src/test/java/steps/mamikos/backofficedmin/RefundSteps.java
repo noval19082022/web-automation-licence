@@ -91,4 +91,9 @@ public class RefundSteps {
     public void adminSearchTransferredRefundByTenantPhoneNumberAndInputField(String tenantPhoneNumber) {
         refundPO.searchTransferredListByPhoneNumber(tenantPhoneNumber);
     }
+
+    @And("admin close the refund detail")
+    public void adminCloseTheRefundDetail() {
+        refundPO.closeRefundDetailPopUp();
+    }
 }

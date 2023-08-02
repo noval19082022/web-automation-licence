@@ -15,6 +15,7 @@ public class RefundPO {
     private Locator inputRekeningNunmber;
     private Locator inputRekeningName;
     private Locator refundBtnAction;
+    private Locator closeBtnActionOnRefundDetail;
     // transferred list
     private Locator transferred;
     private Locator searchBy;
@@ -43,6 +44,7 @@ public class RefundPO {
         this.inputRekeningNunmber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
         this.refundBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer"));
+        this.closeBtnActionOnRefundDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
         //--- transferred list
         this.transferred = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Transferred"));
         this.searchBy = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search By")).nth(1);
@@ -214,5 +216,12 @@ public class RefundPO {
         searchPlaceHolder.click();
         page.keyboard().type(tenantPhoneNumber);
         searchBtnAction.click();
+    }
+
+    /**
+     * admin clickOn Close Btn on refund pop up detail after click refund invoice on list
+     */
+    public void closeRefundDetailPopUp() {
+        closeBtnActionOnRefundDetail.click();
     }
 }
