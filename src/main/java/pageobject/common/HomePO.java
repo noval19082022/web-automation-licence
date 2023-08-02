@@ -77,7 +77,7 @@ public class HomePO {
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
-        userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
+        userPhoto = page.locator("//div[@class='user-profile-dropdown__trigger']//child::div");
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");

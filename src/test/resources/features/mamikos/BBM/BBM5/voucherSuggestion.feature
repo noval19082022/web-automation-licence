@@ -1,4 +1,4 @@
-@regression @BBM5 @voucher @selasa
+@regression @BBM5 @voucher
 
 Feature: Voucher Suggestion
   @TEST_BBM-475 @TEST_BBM-476 @TEST_BBM-477 @TEST_BBM-478 @TEST_BBM-700 @TEST_BBM-708
