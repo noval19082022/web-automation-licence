@@ -3,6 +3,8 @@ package steps.mamikos.backofficedmin;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.admin.mamipay.paidinvoicelist.RefundPO;
 
 public class RefundSteps {
@@ -73,5 +75,10 @@ public class RefundSteps {
     public void adminSetRekeningNumberAndRekeningOwnerForRefund(String rekeningNumber, String rekeningOwner) {
         refundPO.fillRekeningNumber(rekeningNumber);
         refundPO.fillRekeningName(rekeningOwner);
+    }
+
+    @Then("admin verify download button is disable")
+    public void adminVerifyDownloadButtonIsDisable() {
+        Assert.assertTrue(refundPO.IsOnDownloadXlsDisable());
     }
 }

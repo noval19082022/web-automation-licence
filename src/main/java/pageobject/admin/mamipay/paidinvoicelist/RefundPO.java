@@ -70,6 +70,14 @@ public class RefundPO {
     }
 
     /**
+     * check if download xls disable
+     * @return
+     */
+    public boolean IsOnDownloadXlsDisable() {
+        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX")).isDisabled();
+    }
+
+    /**
      * filter data booking using tenant phone number
      *
      * @param tenantPhone

@@ -414,3 +414,19 @@ Feature: Payment Staging
     When admin navigate to mamipay refund page
     And admin visit transferred list on refund page
     Then admin verify transferred transaction for user "testing automation refund" is visible
+
+  @TEST_DOM-636 @Automated @web-covered
+  Scenario: [BackOffice][Refund] export Report Before 1 Hour
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin want to export the refund report
+    Then admin verify download button is disable
+#    And admin choose export report for today
+#    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
+#  (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
+#    Then user will get error message
+
