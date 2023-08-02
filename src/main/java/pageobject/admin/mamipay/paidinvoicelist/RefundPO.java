@@ -17,6 +17,10 @@ public class RefundPO {
     private Locator refundBtnAction;
     // transferred list
     private Locator transferred;
+    private Locator searchBy;
+    private Locator tenantPhoneNumberOptionOnSearchBy;
+    private Locator searchPlaceHolder;
+    private Locator searchBtnAction;
     private Locator firstTransferredUserOnlist;
     private Locator exportReport;
     //--- export transferred report detail ----
@@ -41,6 +45,10 @@ public class RefundPO {
         this.refundBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer"));
         //--- transferred list
         this.transferred = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Transferred"));
+        this.searchBy = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search By")).nth(1);
+        this.tenantPhoneNumberOptionOnSearchBy = page.locator("#bs-select-1-5");
+        this.searchPlaceHolder = page.getByPlaceholder("Search");
+        this.searchBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         this.firstTransferredUserOnlist = page.locator("//tbody/tr[1]/td[8]");
         this.exportReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Export"));
         //--- export transferred detail ---
@@ -193,5 +201,18 @@ public class RefundPO {
      */
     public String transferredUserName() {
         return firstTransferredUserOnlist.textContent().trim();
+    }
+
+    /**
+     * admin search or sorting refund list by tenant phone number
+     *
+     * @param tenantPhoneNumber
+     */
+    public void searchTransferredListByPhoneNumber(String tenantPhoneNumber) {
+        searchBy.click();
+        tenantPhoneNumberOptionOnSearchBy.click();
+        searchPlaceHolder.click();
+        page.keyboard().type(tenantPhoneNumber);
+        searchBtnAction.click();
     }
 }

@@ -430,3 +430,13 @@ Feature: Payment Staging
 #  (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
 #    Then user will get error message
 
+  @TEST_DOM-635 @Automated @web-covered
+  Scenario: [BackOffice][Refund] transaction CreditCard On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    Then admin verify see text "( from Credit Card )"

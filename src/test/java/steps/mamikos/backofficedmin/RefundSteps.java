@@ -86,4 +86,9 @@ public class RefundSteps {
     public void adminVerifyTransferredTransactionForUserIsDone(String username) {
         Assert.assertTrue(refundPO.transferredUserName().contains(username));
     }
+
+    @And("admin search transferred refund by tenant Phone Number and input field {string}")
+    public void adminSearchTransferredRefundByTenantPhoneNumberAndInputField(String tenantPhoneNumber) {
+        refundPO.searchTransferredListByPhoneNumber(tenantPhoneNumber);
+    }
 }
