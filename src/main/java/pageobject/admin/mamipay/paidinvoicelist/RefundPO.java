@@ -24,6 +24,7 @@ public class RefundPO {
     private Locator searchBtnAction;
     private Locator firstTransferredUserOnlist;
     private Locator exportReport;
+    private Locator receiptBtn;
     //--- export transferred report detail ----
     private Locator chooseDateTransferredReport;
     private Locator chooseExportForToday;
@@ -53,6 +54,7 @@ public class RefundPO {
         this.searchBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         this.firstTransferredUserOnlist = page.locator("//tbody/tr[1]/td[8]");
         this.exportReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Export"));
+        this.receiptBtn = page.getByRole(AriaRole.ROW).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Receipt")).first();
         //--- export transferred detail ---
         this.chooseDateTransferredReport = page.locator("#refund-invoice-daterange");
         this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
@@ -223,5 +225,12 @@ public class RefundPO {
      */
     public void closeRefundDetailPopUp() {
         closeBtnActionOnRefundDetail.click();
+    }
+
+    /**
+     * admin download receipt action button on transferred invoicce list
+     */
+    public void clickOnReceiptTransferredInvoice() {
+        receiptBtn.click();
     }
 }

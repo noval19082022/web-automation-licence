@@ -451,3 +451,15 @@ Feature: Payment Staging
     And admin pick one invoice on list to refund
     And admin close the refund detail
     Then admin verify see text "Daftar Invoice Refund"
+
+  @TEST_DOM-632 @Automated @web-covered
+  Scenario: [BackOffice][Refund] download Receipt Flip On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    And admin want to download receipt transferred invoice
+		#    Then user successed download receipt - (need improvement for popup success from FE)

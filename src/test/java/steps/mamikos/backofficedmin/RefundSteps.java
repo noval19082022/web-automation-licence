@@ -96,4 +96,9 @@ public class RefundSteps {
     public void adminCloseTheRefundDetail() {
         refundPO.closeRefundDetailPopUp();
     }
+
+    @And("admin want to download receipt transferred invoice")
+    public void adminWantToSeeReceiptTransferredInvoice() {
+        refundPO.clickOnReceiptTransferredInvoice();
+    }
 }
