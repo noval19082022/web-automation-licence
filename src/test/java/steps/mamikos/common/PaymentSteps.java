@@ -108,12 +108,7 @@ public class PaymentSteps {
 
     @Then("tenant can see warning message {string}")
     public synchronized void tenantCanSeeWarningMessage(String warningMessage) {
-        invoice.clickOnDeleteVoucher();
-        invoice.clickOnMasukkanVoucher();
-        invoice.clickOnMasukkanVoucherPopUp();
-        invoice.clickOnPakaiVoucherButton();
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
-
     }
 
     /**
