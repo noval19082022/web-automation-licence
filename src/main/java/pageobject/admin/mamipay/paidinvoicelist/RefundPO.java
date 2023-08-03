@@ -193,8 +193,6 @@ public class RefundPO {
      * @param rekeningName
      */
     public void fillRekeningName(String rekeningName) {
-//        inputRekeningName.click();
-//        page.keyboard().type(rekeningName);
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputRekeningName, rekeningName);
     }
 
@@ -224,7 +222,6 @@ public class RefundPO {
      * admin clickOn Close Btn on refund pop up detail after click refund invoice on list
      */
     public void closeRefundDetailPopUp() {
-//        closeBtnActionOnRefundDetail.click();
         playwrightHelpers.clickOn(closeBtnActionOnRefundDetail);
     }
 
