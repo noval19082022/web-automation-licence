@@ -66,6 +66,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * click on locator and typing inside of placeholder like real keyboard
+     * @param element
+     * @param type
+     */
+    public void clickLocatorAndTypeKeyboard(Locator element, String type) {
+        clickOn(element);
+        realKeyboardType(type);
+    }
+
+    /**
      * Force click on desired locator
      * Use this method for locator that have disabled set to true
      *
@@ -474,6 +484,13 @@ public class PlaywrightHelpers {
         page.keyboard().type(text);
     }
 
+    /**
+     *  press real keyboard, for ex 'Enter'
+     * @param keyboardKey
+     */
+    public void pressKeyboardKey(String keyboardKey) {
+        page.keyboard().press(keyboardKey);
+    }
     /**
      * Wait until element locator button based on text is visible
      *

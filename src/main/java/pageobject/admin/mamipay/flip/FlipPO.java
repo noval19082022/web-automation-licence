@@ -46,12 +46,9 @@ public class FlipPO {
      */
     public void visitFlipSandboxAndLogin(String userName, String email, String password) {
         playwrightHelpers.navigateTo(flipSanbox, 30000.0);
-        playwrightHelpers.clickOn(idPlaceholder);
-        playwrightHelpers.realKeyboardType(userName);
-        playwrightHelpers.clickOn(emailPlaceholder);
-        playwrightHelpers.realKeyboardType(email);
-        playwrightHelpers.clickOn(passwordPlaceholder);
-        playwrightHelpers.realKeyboardType(password);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(idPlaceholder, userName);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(emailPlaceholder, email);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(passwordPlaceholder, password);
         playwrightHelpers.clickOn(loginBtn);
         playwrightHelpers.hardWait(3000.0);
     }

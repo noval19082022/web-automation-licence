@@ -3,16 +3,18 @@ package pageobject.admin.mamipay.paidinvoicelist;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.*;
+import utilities.PlaywrightHelpers;
 
 public class RefundPO {
     private Page page;
+    private PlaywrightHelpers playwrightHelpers;
     private Locator refundBtn;
     //--- refund detail ----
     private Locator selectBank;
     private Locator searchBankName;
     private Locator checkMarkAdminFee;
     private Locator inputAmountRefund;
-    private Locator inputRekeningNunmber;
+    private Locator inputRekeningNumber;
     private Locator inputRekeningName;
     private Locator refundBtnAction;
     private Locator closeBtnActionOnRefundDetail;
@@ -36,13 +38,14 @@ public class RefundPO {
 
     public RefundPO(Page page) {
         this.page = page;
+        this.playwrightHelpers = new PlaywrightHelpers(page);
         this.refundBtn = page.getByRole(AriaRole.BUTTON).getByText("Refund").first();
         //--- refund detail ----
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
         this.searchBankName = page.locator("input[type='search']");
         this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp200 (Kesalahan Owner)");
         this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
-        this.inputRekeningNunmber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
+        this.inputRekeningNumber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
         this.refundBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer"));
         this.closeBtnActionOnRefundDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
@@ -69,7 +72,7 @@ public class RefundPO {
      * admin click refund btn for the first invoice list
      */
     public void clickOnRefundBtn() {
-        refundBtn.click();
+        playwrightHelpers.clickOn(refundBtn);
     }
 
     /**
@@ -78,39 +81,38 @@ public class RefundPO {
      * @param bankName
      */
     public void fillBankName(String bankName) {
-        selectBank.click();
-        searchBankName.click();
-        page.keyboard().type(bankName);
-        page.keyboard().press("Enter");
+        playwrightHelpers.clickOn(selectBank);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(searchBankName, bankName);
+        playwrightHelpers.pressKeyboardKey("Enter");
     }
 
     /**
      * click on transferred to redirect to the transferred list invoice
      */
     public void clickOnTransferredBtn() {
-        transferred.click();
+        playwrightHelpers.clickOn(transferred);
     }
 
     /**
      * Export report transferred invoice
      */
     public void exportReport() {
-        exportReport.click();
+        playwrightHelpers.clickOn(exportReport);
     }
 
     /**
      * choose date on download report for today
      */
     public void exportReportForToday() {
-        chooseDateTransferredReport.click();
-        chooseExportForToday.click();
+        playwrightHelpers.clickOn(chooseDateTransferredReport);
+        playwrightHelpers.clickOn(chooseExportForToday);
     }
 
     /**
      * download transferred report
      */
     public void clickOnDownloadXls() {
-        downloadXlsReport.click();
+        playwrightHelpers.clickOn(downloadXlsReport);
     }
 
     /**
@@ -128,10 +130,9 @@ public class RefundPO {
      * @param tenantPhone
      */
     public void filterTransactionUsingTenantPhoneNumber(String tenantPhone) {
-        filterTransactionBtn.click();
-        phoneNumberPlaceHolder.click();
-        page.keyboard().type(tenantPhone);
-        cariBtn.click();
+        playwrightHelpers.clickOn(filterTransactionBtn);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(phoneNumberPlaceHolder, tenantPhone);
+        playwrightHelpers.clickOn(cariBtn);
     }
 
     /**
@@ -159,8 +160,7 @@ public class RefundPO {
      */
     public void fillRefundAmount(String amount) {
         inputAmountRefund.clear();
-        inputAmountRefund.click();
-        page.keyboard().type(amount);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(inputAmountRefund, amount);
     }
 
     /**
@@ -174,7 +174,7 @@ public class RefundPO {
      * set or click refund for paid invoice
      */
     public void clickOnRefundAndTransfer() {
-        refundBtnAction.click();
+        playwrightHelpers.clickOn(refundBtnAction);
     }
 
     /**
@@ -183,8 +183,7 @@ public class RefundPO {
      * @param rekeningNumber
      */
     public void fillRekeningNumber(String rekeningNumber) {
-        inputRekeningNunmber.click();
-        page.keyboard().type(rekeningNumber);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(inputRekeningNumber, rekeningNumber);
     }
 
     /**
@@ -193,8 +192,9 @@ public class RefundPO {
      * @param rekeningName
      */
     public void fillRekeningName(String rekeningName) {
-        inputRekeningName.click();
-        page.keyboard().type(rekeningName);
+//        inputRekeningName.click();
+//        page.keyboard().type(rekeningName);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(inputRekeningName, rekeningName);
     }
 
 
@@ -213,24 +213,24 @@ public class RefundPO {
      * @param tenantPhoneNumber
      */
     public void searchTransferredListByPhoneNumber(String tenantPhoneNumber) {
-        searchBy.click();
-        tenantPhoneNumberOptionOnSearchBy.click();
-        searchPlaceHolder.click();
-        page.keyboard().type(tenantPhoneNumber);
-        searchBtnAction.click();
+        playwrightHelpers.clickOn(searchBy);
+        playwrightHelpers.clickOn(tenantPhoneNumberOptionOnSearchBy);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(searchPlaceHolder, tenantPhoneNumber);
+        playwrightHelpers.clickOn(searchBtnAction);
     }
 
     /**
      * admin clickOn Close Btn on refund pop up detail after click refund invoice on list
      */
     public void closeRefundDetailPopUp() {
-        closeBtnActionOnRefundDetail.click();
+//        closeBtnActionOnRefundDetail.click();
+        playwrightHelpers.clickOn(closeBtnActionOnRefundDetail);
     }
 
     /**
      * admin download receipt action button on transferred invoicce list
      */
     public void clickOnReceiptTransferredInvoice() {
-        receiptBtn.click();
+        playwrightHelpers.clickOn(receiptBtn);
     }
 }
