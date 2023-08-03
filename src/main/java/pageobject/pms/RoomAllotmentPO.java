@@ -23,6 +23,7 @@ public class RoomAllotmentPO {
     Locator saveBtn;
     // ----------- Out of order details modal -----------
     Locator actionOnModal;
+    Locator editOutOfOrder;
     Locator deleteOutOfOrder;
     Locator confirmDelete;
     // ----------- Search on room allotment page -----------
@@ -42,6 +43,7 @@ public class RoomAllotmentPO {
         yesterday = page.locator("//span[contains(@class,'today')]/../preceding-sibling::div[1]");
         tomorrow = page.locator("//span[contains(@class,'today')]/../following-sibling::div[1]");
         actionOnModal = page.locator("svg", new Page.LocatorOptions().setHasText("more-vertical"));
+        editOutOfOrder = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Edit"));
         deleteOutOfOrder = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Delete"));
         confirmDelete = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut hapus"));
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
@@ -122,6 +124,13 @@ public class RoomAllotmentPO {
      */
     public void clickActionOnModal() {
         actionOnModal.click();
+    }
+
+    /**
+     * Click on edit in ooo modal
+     */
+    public void editOutOfOrder() {
+        editOutOfOrder.click();
     }
 
     /**

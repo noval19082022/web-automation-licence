@@ -37,6 +37,18 @@ public class RoomAllotmentSteps {
         }
     }
 
+    @And("admin edit OOO on:")
+    public void admin_edit_ooo_on(DataTable table) {
+        outOfOrderFlagData = table.asMaps(String.class, String.class);
+        var roomNumber = outOfOrderFlagData.get(0).get("room number");
+        var startDate = outOfOrderFlagData.get(0).get("start date");
+        if (roomAllotment.isOutOfOrderOnRoomVisible(roomNumber, startDate)) {
+            roomAllotment.clickOutOfOrderFlag(roomNumber, startDate);
+            roomAllotment.clickActionOnModal();
+            roomAllotment.editOutOfOrder();
+        }
+    }
+
     @And("admin delete OOO on:")
     public void admin_delete_ooo_on(DataTable table) {
         outOfOrderFlagData = table.asMaps(String.class, String.class);
