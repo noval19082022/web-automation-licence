@@ -265,6 +265,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String voucherInputPopUpWarningText() {
+        playwright.hardWait(1000);
         return playwright.getText(voucherInputPopUpWarningText);
     }
 
@@ -601,5 +602,13 @@ public class InvoicePO {
      */
     public int getDiscountMamipoinText() {
         return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
+    }
+
+    /**
+     * Click on the "pakai voucher" button
+     */
+    public boolean isVoucherSuggestionEmptyStateVisible() {
+        String xpathLocator = "//div[@class='box-empty__title']";
+        return page.querySelector(xpathLocator).isVisible();
     }
 }

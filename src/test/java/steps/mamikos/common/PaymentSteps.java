@@ -327,5 +327,24 @@ public class PaymentSteps {
     public void tenant_point_estimate_not_displayed_on_invoice()  {
         Assert.assertFalse(invoice.isPointEstimateTenantVisible());
     }
+    @And("tenant clicks Pakai voucher list:")
+    public void tenant_clicks_on_pakai_button(DataTable table) {
+        voucherName = table.asMaps(String.class, String.class);
+        var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
+        invoice.clickOnDeleteVoucher();
+        invoice.clickOnMasukkanVoucher();
+        invoice.clickOnPakaiVoucherButton();
+    }
 
+    @Then("tenant can see voucher suggestion empty state")
+        public void tenant_can_see_voucher_suggestion_empty_state(){
+        invoice.clickOnMasukkanVoucher();
+        Assert.assertTrue(invoice.isVoucherSuggestionEmptyStateVisible());
+        }
+
+    @Then("tenant display warning message {string}")
+    public synchronized void systemDisplayWarningMessage(String warningMessage) {
+        Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
+
+    }
 }

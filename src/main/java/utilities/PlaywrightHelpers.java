@@ -7,6 +7,8 @@ import com.microsoft.playwright.options.LoadState;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PlaywrightHelpers {
     Page page;
 
@@ -501,4 +503,16 @@ public class PlaywrightHelpers {
     public boolean isButtonWithTextDisplayed(String button, double duration){
         return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON,button),duration);
     }
+
+    //---- Assert Part ----\\
+
+    /**
+     * Playwright Assert locator is visible
+     *
+     * @param locator Locator type
+     */
+    public void assertVisible(Locator locator) {
+        assertThat(locator).isVisible();
+    }
+    //---- Assert Part ----\\
 }
