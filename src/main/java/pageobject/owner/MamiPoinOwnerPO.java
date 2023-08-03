@@ -169,7 +169,7 @@ public class MamiPoinOwnerPO {
      * @return boolean
      */
     public Boolean isTitleInTheMamipoinOwnerLandingPageDisplayed() {
-        return titleMamipoinOwnerLandingPage.isVisible();
+        return playwright.waitTillLocatorIsVisible(titleMamipoinOwnerLandingPage);
     }
 
     /**
@@ -177,7 +177,7 @@ public class MamiPoinOwnerPO {
      * @return boolean
      */
     public Boolean isTukarPoinButtonDisplayed() {
-        return tukarPoinButton.isVisible();
+        return playwright.waitTillLocatorIsVisible(tukarPoinButton);
     }
 
     /**
@@ -185,7 +185,7 @@ public class MamiPoinOwnerPO {
      * @return boolean
      */
     public Boolean isRiwayatHadiahButtonDisplayed() {
-        return riwayatHadiahButton.isVisible();
+        return playwright.waitTillLocatorIsVisible(riwayatHadiahButton);
     }
 
     /**
@@ -193,7 +193,7 @@ public class MamiPoinOwnerPO {
      * @return boolean
      */
     public Boolean isRiwayatPoinButtonDisplayed() {
-        return riwayatPoinButton.isVisible();
+        return playwright.waitTillLocatorIsVisible(riwayatPoinButton);
     }
 
     /**
@@ -201,6 +201,6 @@ public class MamiPoinOwnerPO {
      * @return boolean
      */
     public Boolean isSyaratDanKetentuanButtonDisplayed() {
-        return syaratDanKetentuanButton.isVisible();
+        return playwright.waitTillLocatorIsVisible(syaratDanKetentuanButton);
     }
 }

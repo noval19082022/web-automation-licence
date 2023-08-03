@@ -280,20 +280,20 @@ public class GoldplusPO {
      *
      */
     public boolean isListDetailTagihanIsDisplayed() {
-        return tableTagihanGP.isVisible();
+        return playwright.waitTillLocatorIsVisible(tableTagihanGP);
     }
 
     /**
      * Click on tab Selesai at page rincian pembayaran goldplus
      */
     public void clickTabSelesai() {
-        tabSelesaiRincianBayar.click();
+        playwright.clickOn(tabSelesaiRincianBayar);
     }
 
     /**
      * Click on lihat selengkapnya at section detail tagihan dashboard GP
      */
     public void lihatSelngkapnyaSectionDetailTagihan() {
-        lihatSelengkapnyaTagihanGP.click();
+        playwright.clickOn(lihatSelengkapnyaTagihanGP);
     }
 }
