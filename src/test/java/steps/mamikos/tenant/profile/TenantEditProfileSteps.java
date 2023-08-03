@@ -92,4 +92,44 @@ public class TenantEditProfileSteps {
     public void userClickOnProfileCard() {
         tenantEditProfile.clickOnProfileCard();
     }
+
+    @And("user click kota asal dropdown")
+    public void userClickKotaAsalDropdown() throws InterruptedException {
+        tenantEditProfile.userClickKotaAsalDropdown();
+    }
+
+    @And("user click simpan button")
+    public void userClickSimpanButton() throws InterruptedException {
+        tenantEditProfile.userClickSimpanButton();
+    }
+
+    @And("user click on last education tenant")
+    public void userClickOnLastEducationTenant() throws InterruptedException {
+        tenantEditProfile.userClickLastEducationTenant();
+    }
+
+    @And("user input phone number darurat more than {string} character")
+    public void userInputPhoneNumberDaruratMoreThanCharacter(String phone) throws InterruptedException {
+        tenantEditProfile.userInputPhoneNumberMoreThan14(phone);
+    }
+
+    @And("user choose profession {string}")
+    public void userChooseProfession(String profession1) throws InterruptedException {
+        tenantEditProfile.userChooseProfession(profession1);
+    }
+
+    @And("user fills {string} in search dropdown pillih universitas")
+    public void userFillsInSearchDropdownPillihUniversitas(String universitas) throws InterruptedException {
+        tenantEditProfile.userChooseUniversitasIndonesia(universitas);
+    }
+
+    @Then("user see list universitas")
+    public void userSeeListUniversitas() {
+        Assert.assertTrue(tenantEditProfile.seeListUniversitas(), "Phone number placeholder is not equal to ");
+    }
+
+    @And("user click universitas")
+    public void userClickUniversitas() throws InterruptedException{
+        tenantEditProfile.userClickUniversitas();
+    }
 }
