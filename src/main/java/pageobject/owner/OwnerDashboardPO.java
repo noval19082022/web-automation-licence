@@ -29,6 +29,7 @@ public class OwnerDashboardPO {
     Locator gpWidgetButton;
     Locator seeAllNotification;
     Locator gpStatus;
+    Locator menuKelolaProperty;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -185,6 +186,16 @@ public class OwnerDashboardPO {
      */
     public String getTextGPStatus() {
         return playwright.getText(gpStatus);
+    }
+
+    /**
+     * click on menu one of feature kelola property
+     * @param menu is menu on feature kelola property
+     */
+    public void clickOnMenuKelolaProperty(String menu){
+        menuKelolaProperty = page.locator("//p[contains(.,'"+menu+"')]");
+        playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);
+        playwright.clickOn(menuKelolaProperty);
     }
 
 }

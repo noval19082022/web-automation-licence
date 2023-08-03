@@ -66,5 +66,9 @@ public class OwnerDashboardSteps {
        plawright.clickOnText(textInfoUntukAnda);
     }
 
+    @And("user click menu {string} on feature waktunya mengelola property")
+    public void userClickOnFeatureWaktunyaMengelolaProperty(String menu) {
+        ownerDashboardPO.clickOnMenuKelolaProperty(menu);
+    }
 }
 
