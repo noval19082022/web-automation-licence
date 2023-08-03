@@ -536,3 +536,13 @@ Feature: Payment Staging
     When admin navigate to mamipay refund page
     And admin visit transferred list on refund page
     Then admin verify transferred transaction for user "testing automation refund" is visible
+
+  @TEST_DOM-630 @Automated @web-covered
+  Scenario: [BackOffice][Refund] direction Tab To Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    Then admin verify see text "Receipt"
