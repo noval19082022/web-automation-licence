@@ -1,4 +1,4 @@
-@regression @BBM4 @voucher
+@regression @BBM40 @voucher
 
 Feature: Apply Voucher For Invoice Settlement
 
@@ -45,7 +45,7 @@ Feature: Apply Voucher For Invoice Settlement
       | phone stag    | phone prod    | password      |
       | 0890867321211 | 0890867321211 | mamikosqa123  |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0890867321211"
+    And tenant pay kost from riwayat booking using ovo "0890867321211" without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
@@ -159,5 +159,3 @@ Feature: Apply Voucher For Invoice Settlement
       | voucher name stag | voucher name prod |
       | AUTOALLPAYRULES      | AUTOALLPAYRULES    |
     Then tenant can see voucher is applied
-
-
