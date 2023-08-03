@@ -22,6 +22,11 @@ public class MamiPoinOwnerPO {
     Locator mamipoinOwnerText;
     Locator mamipoinToggle;
     Locator discountMamipoinText;
+    Locator titleMamipoinOwnerLandingPage;
+    Locator tukarPoinButton;
+    Locator riwayatHadiahButton;
+    Locator riwayatPoinButton;
+    Locator syaratDanKetentuanButton;
 
     public MamiPoinOwnerPO(Page page) {
         this.page = page;
@@ -39,6 +44,11 @@ public class MamiPoinOwnerPO {
         mamipoinOwnerText = page.locator(".info-count");
         mamipoinToggle =  page.getByRole(AriaRole.CHECKBOX);
         discountMamipoinText = page.locator(".discount-text");
+        titleMamipoinOwnerLandingPage = page.locator("//div[@class='c-navigation__title'][contains(.,'MamiPoin')]");
+        tukarPoinButton = page.locator("//div[@class='c-mk-card exchange-card__card']");
+        riwayatHadiahButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Riwayat Hadiah')]");
+       riwayatPoinButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Riwayat Poin')]");
+        syaratDanKetentuanButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Syarat dan Ketentuan')]");
     }
 
     /**
@@ -154,4 +164,43 @@ public class MamiPoinOwnerPO {
         return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
     }
 
+    /**
+     * Verify title in the mamipoin owner landing page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheMamipoinOwnerLandingPageDisplayed() {
+        return titleMamipoinOwnerLandingPage.isVisible();
+    }
+
+    /**
+     * Verify tukar poin button is displayed
+     * @return boolean
+     */
+    public Boolean isTukarPoinButtonDisplayed() {
+        return tukarPoinButton.isVisible();
+    }
+
+    /**
+     * Verify riwayat hadiah button is displayed
+     * @return boolean
+     */
+    public Boolean isRiwayatHadiahButtonDisplayed() {
+        return riwayatHadiahButton.isVisible();
+    }
+
+    /**
+     * Verify riwayat poin button is displayed
+     * @return boolean
+     */
+    public Boolean isRiwayatPoinButtonDisplayed() {
+        return riwayatPoinButton.isVisible();
+    }
+
+    /**
+     * Verify riwayat poin button is displayed
+     * @return boolean
+     */
+    public Boolean isSyaratDanKetentuanButtonDisplayed() {
+        return syaratDanKetentuanButton.isVisible();
+    }
 }

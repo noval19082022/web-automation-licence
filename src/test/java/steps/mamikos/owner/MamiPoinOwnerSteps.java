@@ -76,4 +76,29 @@ public class MamiPoinOwnerSteps {
     public void user_see_total_potongan_mamipoin(int totalMamipoin) {
         Assert.assertEquals(mamipoinOwner.getTotalDiscountMamipoinText(), totalMamipoin, "total discount mamipoint is not match");
     }
+
+    @Then("user verify title in the mamipoin owner landing page is displayed")
+    public void user_verify_title_in_the_mamipoin_owner_landing_page_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isTitleInTheMamipoinOwnerLandingPageDisplayed());
+    }
+
+    @Then("user verify tukar poin button is displayed")
+    public void user_verify_tukar_poin_button_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isTukarPoinButtonDisplayed());
+    }
+
+    @Then("user verify riwayat hadiah button is displayed")
+    public void user_verify_riwayat_hadiah_button_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isRiwayatHadiahButtonDisplayed());
+    }
+
+    @Then("user verify riwayat poin owner button is displayed")
+    public void user_verify_riwayat_poin_owner_button_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isRiwayatPoinButtonDisplayed());
+    }
+
+    @Then("user verify syarat dan ketentuan button is displayed")
+    public void user_verify_syarat_dan_ketentuan_button_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isSyaratDanKetentuanButtonDisplayed());
+    }
 }
