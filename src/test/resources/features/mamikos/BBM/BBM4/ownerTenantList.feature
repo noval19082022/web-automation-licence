@@ -9,10 +9,10 @@ Feature: Owner Tenant List
       | 08900000000022   | 08900000000022 | mamikosqa123    |
     And owner go to Penyewa page of kost "Kost Adi Auto SinggahSini"
     Then user can see "Adi Teng Voucher Suggestion" as tenant name, "0890867321217" as phone number, "Sedang menyewa" status, and photo
-    When user can see detail tenant ("Adi Teng Voucher Suggestion", "Laki-laki", "Kawin", "Karyawan")
+    When user can see detail tenant ("Adi Teng Voucher Suggestion", "Laki-laki", "Kawin", "kuliah")
     Then user cannot see checkin tenant disclaimer alert
     When user click on kontrak sewa button
-    Then user can see detail contract ("27 Juni 2023", "27 Juni 2025", "10.000.000", "2 tahun", "27 Juni 2024")
+    Then user can see detail contract ("28 Juli 2023", "28 Juli 2025", "10.000.000", "2 tahun", "28 Juli 2024")
     When system display change contract rent button
     Then system display terminate contract link
     And user navigate to penyewa page
