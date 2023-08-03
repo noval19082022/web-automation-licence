@@ -34,10 +34,10 @@ public class RoomAllotmentPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         createOutOfOrderStatusBtn = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Buat status Out of Order"));
-        outOfOrderTypeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kategori Out of Order"));
-        noteOutOfOrderInputText = page.getByPlaceholder("Tulis keterangan Out of Order");
-        startDate = page.getByPlaceholder("Pilih tanggal mulai");
-        endDate = page.getByPlaceholder("Pilih tanggal akhir");
+        outOfOrderTypeDropdown = page.getByTestId("outOfOrderCategory_ddl").first();
+        noteOutOfOrderInputText = page.locator("#outOfOrderNote_txt");
+        startDate = page.locator("#outOfOrderDate-datePickerStart");
+        endDate = page.locator("#outOfOrderDate-datePickerEnd");
         todayDate = page.locator("//span[contains(@class,'today')]");
         yesterday = page.locator("//span[contains(@class,'today')]/../preceding-sibling::div[1]");
         tomorrow = page.locator("//span[contains(@class,'today')]/../following-sibling::div[1]");
