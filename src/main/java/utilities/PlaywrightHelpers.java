@@ -466,6 +466,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Helper to type like real keyboard
+     * note: this method need some action such as click locator
+     * @param text string
+     */
+    public void realKeyboardType(String text) {
+        page.keyboard().type(text);
+    }
+
+    /**
      * Wait until element locator button based on text is visible
      *
      * @param button Locator type based on text

@@ -46,13 +46,13 @@ public class FlipPO {
      */
     public void visitFlipSandboxAndLogin(String userName, String email, String password) {
         playwrightHelpers.navigateTo(flipSanbox, 30000.0);
-        idPlaceholder.click();
-        page.keyboard().type(userName);
-        emailPlaceholder.click();
-        page.keyboard().type(email);
-        passwordPlaceholder.click();
-        page.keyboard().type(password);
-        loginBtn.click();
+        playwrightHelpers.clickOn(idPlaceholder);
+        playwrightHelpers.realKeyboardType(userName);
+        playwrightHelpers.clickOn(emailPlaceholder);
+        playwrightHelpers.realKeyboardType(email);
+        playwrightHelpers.clickOn(passwordPlaceholder);
+        playwrightHelpers.realKeyboardType(password);
+        playwrightHelpers.clickOn(loginBtn);
         playwrightHelpers.hardWait(3000.0);
     }
 
@@ -62,21 +62,21 @@ public class FlipPO {
      * @return boolean
      */
     public boolean verifyOnTestMode() {
-        return popUpTextTestMode.isVisible();
+        return playwrightHelpers.waitTillLocatorIsVisible(popUpTextTestMode);
     }
 
     /**
      * user navigate to domestic transaction
      */
     public void navigateToDomesticTransaction() {
-        riwayatTransactionMenu.click();
-        domesticTransactionMenu.click();
+        playwrightHelpers.clickOn(riwayatTransactionMenu);
+        playwrightHelpers.clickOn(domesticTransactionMenu);
     }
 
     /**
      * set force transaction for refund
      */
     public void setForceTransaction() {
-        setForceTransaction.click();
+        playwrightHelpers.clickOn(setForceTransaction);
     }
 }
