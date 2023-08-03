@@ -101,4 +101,9 @@ public class RefundSteps {
     public void adminWantToSeeReceiptTransferredInvoice() {
         refundPO.clickOnReceiptTransferredInvoice();
     }
+
+    @Then("admin verify bank name for refund is {string}")
+    public void adminVerifyBankNameForRefundIs(String bankName) {
+        Assert.assertEquals(refundPO.getBankNameForRefund(), bankName);
+    }
 }

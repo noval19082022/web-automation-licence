@@ -11,6 +11,7 @@ public class RefundPO {
     private PlaywrightHelpers playwrightHelpers;
     private Locator refundBtn;
     //--- refund detail ----
+    private Locator selectedBankForRefund;
     private Locator selectBank;
     private Locator searchBankName;
     private Locator checkMarkAdminFee;
@@ -42,6 +43,7 @@ public class RefundPO {
         this.playwrightHelpers = new PlaywrightHelpers(page);
         this.refundBtn = page.getByRole(AriaRole.BUTTON).getByText("Refund").first();
         //--- refund detail ----
+        this.selectedBankForRefund = page.getByRole(AriaRole.COMBOBOX).getByRole(AriaRole.TEXTBOX).first();
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
         this.searchBankName = page.locator("input[type='search']");
         this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp200 (Kesalahan Owner)");
@@ -230,5 +232,13 @@ public class RefundPO {
      */
     public void clickOnReceiptTransferredInvoice() {
         playwrightHelpers.clickOn(receiptBtn);
+    }
+
+    /**
+     * get bank name for refund
+     * @return
+     */
+    public String getBankNameForRefund() {
+        return selectedBankForRefund.textContent().trim();
     }
 }

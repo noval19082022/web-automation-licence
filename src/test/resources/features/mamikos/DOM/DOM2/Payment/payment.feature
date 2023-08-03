@@ -546,3 +546,14 @@ Feature: Payment Staging
     And admin navigate to mamipay refund page
     And admin visit transferred list on refund page
     Then admin verify see text "Receipt"
+
+  @TEST_DOM-629 @Automated @web-covered
+  Scenario: [BackOffice][Refund] popup refund section bank
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin fill bank name "BANK MANTAP (Mandiri Taspen)" on refund detail
+    Then admin verify bank name for refund is "BANK MANTAP (Mandiri Taspen)"
