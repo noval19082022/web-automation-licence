@@ -9,8 +9,6 @@ import utilities.PlaywrightHelpers;
 
 import java.util.List;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
