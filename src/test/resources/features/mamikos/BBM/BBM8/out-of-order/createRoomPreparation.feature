@@ -12,18 +12,18 @@ Feature: Create OOO "Room Preparation" Type
     And admin search "Kost Singgahsini Auto Listing"
     And admin delete OOO on:
       | room number | start date |
-      | 1           | 1          |
+      | 1           | 2          |
     Then admin can not see out of order on:
       | room number | start date |
-      | 1           | 1          |
+      | 1           | 2          |
 
 #  @TEST_BBM-3723
   Scenario: Create OOO "Room Preparation"
     When admin set out of order on room "1"
     And admin fill OOO data with:
       | type        | Room Preparation |
-      | start date  | 1                |
+      | start date  | 2                |
       | end date    | 5                |
     Then admin can see out of order on:
       | room number | start date |
-      | 1           | 1          |
+      | 1           | 2          |
