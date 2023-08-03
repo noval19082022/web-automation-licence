@@ -557,3 +557,15 @@ Feature: Payment Staging
     And admin pick one invoice on list to refund
     And admin fill bank name "BANK MANTAP (Mandiri Taspen)" on refund detail
     Then admin verify bank name for refund is "BANK MANTAP (Mandiri Taspen)"
+
+  @TEST_DOM-628 @Automated @web-covered
+  Scenario: [BackOffice][Refund] transaction Flip On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    Then admin verify see text "Flip"
+
