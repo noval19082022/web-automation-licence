@@ -88,4 +88,8 @@ public class TenantEditProfileSteps {
     public void userChooseProfessionOnEditProfilePage(String profession) {
         tenantEditProfile.clickOnUbahProfessionToOnEditProfile(profession);
     }
+    @And("user click on profile card")
+    public void userClickOnProfileCard() {
+        tenantEditProfile.clickOnProfileCard();
+    }
 }

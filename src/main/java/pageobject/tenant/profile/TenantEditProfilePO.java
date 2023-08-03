@@ -27,6 +27,7 @@ public class TenantEditProfilePO {
     Locator professionLainnya;
     Locator lainnyaField;
     Locator searchTextBoxOnEditProfile;
+    Locator profileCard;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -47,6 +48,7 @@ public class TenantEditProfilePO {
         professionLainnya = page.locator("label").filter(new Locator.FilterOptions().setHasText("Lainnya"));
         lainnyaField = page.getByTestId("jobDescription-input");
         searchTextBoxOnEditProfile = page.getByTestId("inputProfession-jobDetailOptions").getByPlaceholder("Search");
+        profileCard = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
     }
 
     /**
@@ -215,10 +217,18 @@ public class TenantEditProfilePO {
 
     /**
      * Select company or university
+     *
      * @param valueInput String type company or university
      */
-    public void selectValueDropdown(String valueInput){
-        Locator dropdownValue = page.locator("//a[contains(.,'"+ valueInput +"')]");
+    public void selectValueDropdown(String valueInput) {
+        Locator dropdownValue = page.locator("//a[contains(.,'" + valueInput + "')]");
         playwright.clickOn(dropdownValue);
+    }
+
+    /**
+     * Click on profile card
+     */
+    public void clickOnProfileCard() {
+        playwright.clickOn(profileCard);
     }
 }
