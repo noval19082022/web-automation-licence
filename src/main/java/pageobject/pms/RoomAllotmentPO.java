@@ -130,14 +130,14 @@ public class RoomAllotmentPO {
      * Click on edit in ooo modal
      */
     public void editOutOfOrder() {
-        editOutOfOrder.click();
+        playwright.clickOn(editOutOfOrder);
     }
 
     /**
      * Click on delete in ooo modal
      */
     public void deleteOutOfOrder() {
-        deleteOutOfOrder.click();
+        playwright.clickOn(deleteOutOfOrder);
     }
 
     /**
