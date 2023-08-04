@@ -18,6 +18,7 @@ public class RefundPO {
     private Locator inputAmountRefund;
     private Locator inputRekeningNumber;
     private Locator inputRekeningName;
+    private Locator refundReasonDropDown;
     private Locator refundBtnAction;
     private Locator closeBtnActionOnRefundDetail;
     // transferred list
@@ -55,6 +56,7 @@ public class RefundPO {
         this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
         this.inputRekeningNumber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
+        this.refundReasonDropDown = page.locator(".refund-invoice__modal-select").first();
         this.refundBtnAction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refund & Transfer"));
         this.closeBtnActionOnRefundDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
         //--- transferred list
@@ -180,7 +182,7 @@ public class RefundPO {
      * choose Pemilik membatalkan for refund reason
      */
     public void chooseRefundReasonPemilikMembatalkan() {
-        playwrightHelpers.selectDropdownByValue(page.locator(".refund-invoice__modal-select").first(), "Pemilik Membatalkan");
+        playwrightHelpers.selectDropdownByValue(refundReasonDropDown, "Pemilik Membatalkan");
     }
 
     /**
