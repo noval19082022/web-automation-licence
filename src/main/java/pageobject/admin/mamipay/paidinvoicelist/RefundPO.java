@@ -250,6 +250,6 @@ public class RefundPO {
      * @return
      */
     public String getBankNameForRefund() {
-        return selectedBankForRefund.textContent().trim();
+        return playwrightHelpers.getText(selectedBankForRefund);
     }
 }
