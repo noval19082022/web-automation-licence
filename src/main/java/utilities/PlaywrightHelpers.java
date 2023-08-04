@@ -203,6 +203,13 @@ public class PlaywrightHelpers {
         return locator.inputValue();
     }
 
+    /**
+     * uncheck box
+     */
+    public void uncheckBox(Locator locator) {
+        locator.uncheck();
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\

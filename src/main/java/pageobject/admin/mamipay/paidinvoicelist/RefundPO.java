@@ -163,7 +163,7 @@ public class RefundPO {
      * uncheck the admin fee on refund process
      */
     public void unCheckAdminFee() {
-        checkMarkAdminFee.uncheck();
+        playwrightHelpers.uncheckBox(checkMarkAdminFee);
     }
 
     /**
