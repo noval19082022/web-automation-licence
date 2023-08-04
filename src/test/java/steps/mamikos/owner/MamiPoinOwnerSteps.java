@@ -101,4 +101,45 @@ public class MamiPoinOwnerSteps {
     public void user_verify_syarat_dan_ketentuan_button_is_displayed() {
         Assert.assertTrue(mamipoinOwner.isSyaratDanKetentuanButtonDisplayed());
     }
+
+    @When("user clicks on tukar poin button")
+    public void user_clicks_on_tukar_poin_button() {
+        mamipoinOwner.clickOnTukarPoinButton();
+    }
+
+    @Then("user verify tukar poin onboarding is appear")
+    public void user_verify_tukar_poin_onboarding_is_appear() {
+        //Poin Anda
+        Assert.assertEquals(mamipoinOwner.getPoinAndaOnboardingText(),"Pastikan poin Anda cukup untuk ditukarkan dengan hadiah yang Anda inginkan.");
+        mamipoinOwner.clickOnNextButton();
+
+        //Hadiah Bisa Ditukar
+        Assert.assertEquals(mamipoinOwner.getHadiahBisaDitukarOnboardingText(),"Anda dapat menukar poin Anda sesuai dengan jumlah yang dibutuhkan hadiah terkait.");
+        mamipoinOwner.clickOnNextButton();
+
+        //Bantuan
+        Assert.assertEquals(mamipoinOwner.getBantuanOnboardingText(),"Tekan tombol Bantuan untuk kembali mempelajari cara penukaran poin.");
+        mamipoinOwner.clickOnSelesaiButton();
+    }
+
+    @Then("user verify title in the tukar poin page is displayed")
+    public void user_verify_title_in_the_tukar_poin_page_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isTitleInTheTukarPoinPageDisplayed());
+    }
+
+    @Then("user verify logo in the tukar poin page is displayed")
+    public void user_verify_logo_in_the_tukar_poin_page_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isLogoInTheTukarPoinPageDisplayed());
+    }
+
+    @Then("user verify the amount of MamiPoin Anda is {string}")
+    public void user_verify_the_amount_of_mami_poin_anda_is(String amountOfMamipoinAnda) {
+        Assert.assertEquals(mamipoinOwner.verifyAmountOfMamipoinAnda(amountOfMamipoinAnda),"123.456 Poin");
+    }
+
+    @Then("user verify bantuan button is displayed")
+    public void user_verify_bantuan_button_is_displayed() {
+        Assert.assertTrue(mamipoinOwner.isBantuanButtonDisplayed());
+    }
+
 }
