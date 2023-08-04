@@ -155,7 +155,8 @@ public class TenantEditProfilePO {
      * @return string
      */
     public String getAlertOnProfile(String alert) {
-        return playwright.getText(page.locator("//p[contains(.,'" + alert + "')]"));
+        Locator alartValue = page.locator("//p[contains(.,'" + alert + "')]");
+        return playwright.getText(alartValue);
     }
 
     /**
@@ -209,7 +210,8 @@ public class TenantEditProfilePO {
      * click on Profession button on form booking page
      */
     public void clickOnUbahProfessionTo(String profession) {
-        playwright.clickOn(page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession)));
+        Locator professionRadioFromBooking = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
+        professionRadioFromBooking.click();
     }
 
     /**

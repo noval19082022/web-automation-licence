@@ -497,7 +497,7 @@ public class PlaywrightHelpers {
     public void assertVisible(Locator locator) {
         assertThat(locator).isVisible();
     }
-    //---- Assert Part ----\\
+
     /**
      * Playwright Assert locator is disable
      *
@@ -506,5 +506,6 @@ public class PlaywrightHelpers {
     public void assertDisable(Locator locator) {
         assertThat(locator).isDisabled();
     }
+    //---- Assert Part ----\\
 
 }
