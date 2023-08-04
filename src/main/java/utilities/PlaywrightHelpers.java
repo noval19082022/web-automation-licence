@@ -338,6 +338,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Clear text
+     *
+     * @param locator target locator
+     */
+    public void clearText(Locator locator){
+        locator.clear();
+    }
+
+    /**
      * Get locators as array list
      *
      * @param locator Locator type
@@ -538,5 +547,15 @@ public class PlaywrightHelpers {
     public void assertVisible(Locator locator) {
         assertThat(locator).isVisible();
     }
+
+    /**
+     * Playwright Assert locator is disable
+     *
+     * @param locator Locator type
+     */
+    public void assertDisable(Locator locator) {
+        assertThat(locator).isDisabled();
+    }
     //---- Assert Part ----\\
+
 }
