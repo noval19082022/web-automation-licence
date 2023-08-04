@@ -301,7 +301,8 @@ public class TenantEditProfilePO {
      */
     public void userChooseProfession(String chooseProfessi) throws InterruptedException {
         playwright.clickOn(profesi);
-        playwright.clickOn(page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi)));
+        Locator chooseProfesi = page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi));
+        playwright.clickOn(chooseProfesi);
     }
 
     /**
