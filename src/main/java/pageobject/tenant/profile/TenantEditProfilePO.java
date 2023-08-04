@@ -3,6 +3,7 @@ package pageobject.tenant.profile;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.cucumber.java.vi.Cho;
 import utilities.PlaywrightHelpers;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -35,6 +36,8 @@ public class TenantEditProfilePO {
     Locator pilihNamaKampus;
     Locator searchNamaKampus;
     Locator listKampus;
+    Locator ChooseNamaKampus;
+    Locator popUpSaveprofil;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -63,6 +66,8 @@ public class TenantEditProfilePO {
         pilihNamaKampus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama kampus/sekolah dropdown-down"));
         searchNamaKampus = page.getByTestId("inputProfession-workplaceOption").getByPlaceholder("Search");
         listKampus = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
+        ChooseNamaKampus = page.locator("a").filter(new Locator.FilterOptions().setHasText("Universitas")).nth(0);
+        popUpSaveprofil = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Profil Disimpan"));
     }
 
     /**
@@ -170,9 +175,9 @@ public class TenantEditProfilePO {
     public void clickOnAndFillDropdown(String textSearch) {
         playwright.clickOn(universityOrProfessionDropdown);
         if (playwright.waitTillLocatorIsVisible(searchTextBox, 1000.0)) {
-            searchTextBox.fill(textSearch);
+            playwright.forceFill(searchTextBox, textSearch);
         } else {
-            searchTextBoxOnEditProfile.fill(textSearch);
+            playwright.forceFill(searchTextBoxOnEditProfile, textSearch);
         }
     }
 
@@ -266,7 +271,7 @@ public class TenantEditProfilePO {
      */
     public void userClickSimpanButton() throws InterruptedException {
         playwright.clickOn(saveButton);
-        playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Profil Disimpan")));
+        playwright.waitTillLocatorIsVisible(popUpSaveprofil);
     }
 
     /**
@@ -281,7 +286,7 @@ public class TenantEditProfilePO {
      *
      * @throws InterruptedException
      */
-    public void userInputPhoneNumberMoreThan14(String phone) throws InterruptedException {
+    public void userInputPhoneNumber(String phone) throws InterruptedException {
         playwright.clickOn(nomorDarurat);
         nomorDarurat.clear();
         nomorDarurat.type(phone);
@@ -289,22 +294,22 @@ public class TenantEditProfilePO {
 
     /**
      * click on profession radio
-     * @param profession should be Mahasiswa, Karyawan, Lainnya
+     * @param chooseProfessi should be Mahasiswa, Karyawan, Lainnya
      * @throws InterruptedException
      */
-    public void userChooseProfession(String profession) throws InterruptedException {
+    public void userChooseProfession(String chooseProfessi) throws InterruptedException {
         playwright.clickOn(profesi);
-        playwright.clickOn(page.locator("a").filter(new Locator.FilterOptions().setHasText(profession)));
+        playwright.clickOn(page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi)));
     }
 
-/**
- * click on choose universitas
- *
- */
-public void userChooseUniversitasIndonesia(String universitas) throws InterruptedException {
-    playwright.clickOn(pilihNamaKampus);
-    searchNamaKampus.type(universitas);
-    playwright.clickOn( page.locator("a").filter(new Locator.FilterOptions().setHasText(universitas)));
+    /**
+     * click on choose universitas
+     *
+     */
+    public void userChooseUniversitasIndonesia(String universitas) throws InterruptedException {
+        playwright.clickOn(pilihNamaKampus);
+        playwright.forceFill(searchNamaKampus, universitas);
+        ChooseNamaKampus.click();
     }
 
     /**

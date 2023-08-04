@@ -110,7 +110,7 @@ public class TenantEditProfileSteps {
 
     @And("user input phone number darurat more than {string} character")
     public void userInputPhoneNumberDaruratMoreThanCharacter(String phone) throws InterruptedException {
-        tenantEditProfile.userInputPhoneNumberMoreThan14(phone);
+        tenantEditProfile.userInputPhoneNumber(phone);
     }
 
     @And("user choose profession {string}")

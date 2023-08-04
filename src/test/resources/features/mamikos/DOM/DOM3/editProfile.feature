@@ -64,7 +64,7 @@ Feature: Edit Profile
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
-    And user fills "universitas indonesia" in search dropdown pillih universitas
+    And user fills "Universitas Indonesia" in search dropdown pillih universitas
     Then user see button simpan edit profile disable
 
   @TEST_DOM-180 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web @web-covered
