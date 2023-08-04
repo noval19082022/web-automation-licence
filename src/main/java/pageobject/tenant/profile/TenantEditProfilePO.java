@@ -37,6 +37,8 @@ public class TenantEditProfilePO {
     Locator listKampus;
     Locator chooseNamaKampus;
     Locator popUpSaveprofil;
+    Locator calender;
+    Locator chooseTanggal;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -67,6 +69,8 @@ public class TenantEditProfilePO {
         listKampus = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
         chooseNamaKampus = page.locator("a").filter(new Locator.FilterOptions().setHasText("Universitas")).nth(0);
         popUpSaveprofil = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Profil Disimpan"));
+        calender = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("calendar"));
+        chooseTanggal = page.getByText("2", new Page.GetByTextOptions().setExact(true));
     }
 
     /**
@@ -210,14 +214,16 @@ public class TenantEditProfilePO {
      * click on Profession button on form booking page
      */
     public void clickOnUbahProfessionTo(String profession) {
-        playwright.clickOn(page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession)));
+        Locator professionRadioEditProfil = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
+        playwright.clickOn(professionRadioEditProfil);
     }
 
     /**
      * click on Profession button on edit profile page
      */
     public void clickOnUbahProfessionToOnEditProfile(String profession) {
-        playwright.clickOn(page.locator("label").filter(new Locator.FilterOptions().setHasText(profession)));
+        Locator ubahProfession = page.locator("label").filter(new Locator.FilterOptions().setHasText(profession));
+        playwright.clickOn(ubahProfession);
     }
 
     /**
@@ -321,5 +327,15 @@ public class TenantEditProfilePO {
      */
     public void userClickUniversitas()throws InterruptedException{
         playwright.clickOn(pilihNamaKampus);
+    }
+
+    /**
+     * click icon calendar
+     *
+     * @throws InterruptedException
+     */
+    public void clickIconCalendar() throws InterruptedException {
+        playwright.clickOn(calender);
+        playwright.clickOn(chooseTanggal);
     }
 }
