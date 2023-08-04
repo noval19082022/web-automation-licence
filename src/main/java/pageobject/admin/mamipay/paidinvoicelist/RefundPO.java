@@ -172,7 +172,7 @@ public class RefundPO {
      * @param amount
      */
     public void fillRefundAmount(String amount) {
-        inputAmountRefund.clear();
+        playwrightHelpers.clearText(inputAmountRefund);
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputAmountRefund, amount);
     }
 
