@@ -3,7 +3,6 @@ package pageobject.tenant.profile;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import io.cucumber.java.vi.Cho;
 import utilities.PlaywrightHelpers;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -30,13 +29,13 @@ public class TenantEditProfilePO {
     Locator searchTextBoxOnEditProfile;
     Locator profileCard;
     Locator kotaAsalDropDown;
-    Locator LastEducationTenant;
+    Locator lastEducationTenant;
     Locator nomorDarurat;
     Locator profesi;
     Locator pilihNamaKampus;
     Locator searchNamaKampus;
     Locator listKampus;
-    Locator ChooseNamaKampus;
+    Locator chooseNamaKampus;
     Locator popUpSaveprofil;
 
     public TenantEditProfilePO(Page page) {
@@ -60,13 +59,13 @@ public class TenantEditProfilePO {
         searchTextBoxOnEditProfile = page.getByTestId("inputProfession-jobDetailOptions").getByPlaceholder("Search");
         profileCard = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
         kotaAsalDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota asal dropdown-down"));
-        LastEducationTenant = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pendidikan terakhir dropdown-down"));
+        lastEducationTenant = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pendidikan terakhir dropdown-down"));
         nomorDarurat = page.getByPlaceholder("xxxx xxxx");
         profesi = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pekerjaan dropdown-down"));
         pilihNamaKampus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama kampus/sekolah dropdown-down"));
         searchNamaKampus = page.getByTestId("inputProfession-workplaceOption").getByPlaceholder("Search");
         listKampus = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
-        ChooseNamaKampus = page.locator("a").filter(new Locator.FilterOptions().setHasText("Universitas")).nth(0);
+        chooseNamaKampus = page.locator("a").filter(new Locator.FilterOptions().setHasText("Universitas")).nth(0);
         popUpSaveprofil = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Profil Disimpan"));
     }
 
@@ -237,7 +236,7 @@ public class TenantEditProfilePO {
      * @param lainnya
      */
     public void setLainnyaJobs(String lainnya) {
-        lainnyaField.fill(lainnya);
+        playwright.forceFill(lainnyaField, lainnya);
     }
 
     /**
@@ -278,7 +277,7 @@ public class TenantEditProfilePO {
      * user click last education tenant
      */
     public void userClickLastEducationTenant() throws InterruptedException {
-        playwright.clickOn(LastEducationTenant);
+        playwright.clickOn(lastEducationTenant);
     }
 
     /**
@@ -309,7 +308,7 @@ public class TenantEditProfilePO {
     public void userChooseUniversitasIndonesia(String universitas) throws InterruptedException {
         playwright.clickOn(pilihNamaKampus);
         playwright.forceFill(searchNamaKampus, universitas);
-        ChooseNamaKampus.click();
+        chooseNamaKampus.click();
     }
 
     /**
