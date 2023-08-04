@@ -180,7 +180,7 @@ public class RefundPO {
      * choose Pemilik membatalkan for refund reason
      */
     public void chooseRefundReasonPemilikMembatalkan() {
-        page.locator(".refund-invoice__modal-select").first().selectOption("Pemilik Membatalkan");
+        playwrightHelpers.selectDropdownByValue(page.locator(".refund-invoice__modal-select").first(), "Pemilik Membatalkan");
     }
 
     /**
