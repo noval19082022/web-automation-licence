@@ -203,15 +203,14 @@ public class TenantEditProfilePO {
      * click on Ubah button
      */
     public void clickOnUbahInformasiPenyewa() {
-        ubahInformasiPenyewa.click();
+        playwright.clickOn(ubahInformasiPenyewa);
     }
 
     /**
      * click on Profession button on form booking page
      */
     public void clickOnUbahProfessionTo(String profession) {
-        Locator professionRadioFromBooking = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
-        professionRadioFromBooking.click();
+        playwright.clickOn(page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession)));
     }
 
     /**
