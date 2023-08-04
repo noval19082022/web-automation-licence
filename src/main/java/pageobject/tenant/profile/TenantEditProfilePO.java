@@ -155,15 +155,14 @@ public class TenantEditProfilePO {
      * @return string
      */
     public String getAlertOnProfile(String alert) {
-        Locator alertValue = page.locator("//p[contains(.,'" + alert + "')]");
-        return playwright.getText(alertValue);
+        return playwright.getText(page.locator("//p[contains(.,'" + alert + "')]"));
     }
 
     /**
      * Assert simpan button are disable
      */
     public void assertSimpanButtonDisable() {
-        assertThat(simpanButton).isDisabled();
+        playwright.assertDisable(simpanButton);
     }
 
     /**
@@ -206,21 +205,18 @@ public class TenantEditProfilePO {
         ubahInformasiPenyewa.click();
     }
 
-
     /**
      * click on Profession button on form booking page
      */
     public void clickOnUbahProfessionTo(String profession) {
-        Locator professionRadioFormBooking = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
-        professionRadioFormBooking.click();
+        playwright.clickOn(page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession)));
     }
 
     /**
      * click on Profession button on edit profile page
      */
     public void clickOnUbahProfessionToOnEditProfile(String profession) {
-        Locator professionRadioEditProfile = page.locator("label").filter(new Locator.FilterOptions().setHasText(profession));
-        professionRadioEditProfile.click();
+        playwright.clickOn(page.locator("label").filter(new Locator.FilterOptions().setHasText(profession)));
     }
 
     /**
@@ -287,8 +283,8 @@ public class TenantEditProfilePO {
      */
     public void userInputPhoneNumber(String phone) throws InterruptedException {
         playwright.clickOn(nomorDarurat);
-        nomorDarurat.clear();
-        nomorDarurat.type(phone);
+        playwright.clearText(nomorDarurat);
+        playwright.forceFill(nomorDarurat, phone);
     }
 
     /**
@@ -308,7 +304,7 @@ public class TenantEditProfilePO {
     public void userChooseUniversitasIndonesia(String universitas) throws InterruptedException {
         playwright.clickOn(pilihNamaKampus);
         playwright.forceFill(searchNamaKampus, universitas);
-        chooseNamaKampus.click();
+        playwright.clickOn(chooseNamaKampus);
     }
 
     /**
