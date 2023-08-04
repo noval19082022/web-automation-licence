@@ -1,5 +1,5 @@
 @DOM2
-Feature: Payment Staging
+Feature: Payment BackOffice Staging
 
   @TEST_DOM-623 @Automated @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit] cancel Extend Contract

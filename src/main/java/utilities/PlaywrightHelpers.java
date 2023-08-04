@@ -4,6 +4,7 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.SelectOption;
 
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class PlaywrightHelpers {
 
     /**
      * click on locator and typing inside of placeholder like real keyboard
+     *
      * @param element
      * @param type
      */
@@ -119,7 +121,7 @@ public class PlaywrightHelpers {
     /**
      * Double-click on a desired locator
      *
-     * @param locator target locator
+     * @param locator   target locator
      * @param delayTime Delay time in millisecond Double data type
      */
     public void doubleClickAndDelay(Locator locator, Double delayTime) {
@@ -146,6 +148,16 @@ public class PlaywrightHelpers {
      */
     public void selectDropdownByValue(Locator locator, String value) {
         locator.selectOption(value);
+    }
+
+    /**
+     * Select dropdown by value
+     *
+     * @param locator Locator type
+     * @param object  SelectOption object type
+     */
+    public void selectDropdownBySelectOption(Locator locator, SelectOption object) {
+        locator.selectOption(object);
     }
 
     /**
@@ -183,6 +195,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get value from input element
+     *
      * @param locator playwright locator
      * @return String data type
      */
@@ -379,6 +392,7 @@ public class PlaywrightHelpers {
 
     /**
      * Hard wait before an action
+     *
      * @param time Double data type
      */
     public void hardWait(double time) {
@@ -409,7 +423,7 @@ public class PlaywrightHelpers {
      * Click on a desired locator based on text
      *
      * @param words target locator
-     * default timeout
+     *              default timeout
      */
     public void clickOnText(String words) {
         clickOn(page.getByText(words).first());
@@ -422,27 +436,27 @@ public class PlaywrightHelpers {
      * @param timeout Double data type of specific timeout
      */
     public void clickOnText(String words, Double timeout) {
-        delayAndClickOn(page.getByText(words),timeout);
+        delayAndClickOn(page.getByText(words), timeout);
     }
 
     /**
      * Click on a desired locator based on button text
      *
      * @param buttonText target locator
-     * default timeout
+     *                   default timeout
      */
     public void clickOnTextButton(String buttonText) {
-        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON, buttonText));
     }
 
     /**
      * Click on a desired locator based on button text
      *
      * @param buttonText target locator
-     * @param duration Double data type of specific timeout
+     * @param duration   Double data type of specific timeout
      */
     public void clickOnTextButton(String buttonText, double duration) {
-        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON, buttonText));
         hardWait(duration);
     }
 
@@ -458,7 +472,7 @@ public class PlaywrightHelpers {
     /**
      * Wait until element locator is visible
      *
-     * @param text Locator type based on text
+     * @param text     Locator type based on text
      * @param duration Double type
      * @return boolean
      */
@@ -470,16 +484,17 @@ public class PlaywrightHelpers {
      * Wait until element locator button based on text is visible
      *
      * @param button Locator type based on text
-     * default timeout
+     *               default timeout
      * @return boolean
      */
-    public boolean isButtonWithTextDisplayed(String button){
-        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON,button));
+    public boolean isButtonWithTextDisplayed(String button) {
+        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON, button));
     }
 
     /**
      * Helper to type like real keyboard
      * note: this method need some action such as click locator
+     *
      * @param text string
      */
     public void realKeyboardType(String text) {
@@ -487,21 +502,23 @@ public class PlaywrightHelpers {
     }
 
     /**
-     *  press real keyboard, for ex 'Enter'
+     * press real keyboard, for ex 'Enter'
+     *
      * @param keyboardKey
      */
     public void pressKeyboardKey(String keyboardKey) {
         page.keyboard().press(keyboardKey);
     }
+
     /**
      * Wait until element locator button based on text is visible
      *
-     * @param button Locator type based on text
+     * @param button   Locator type based on text
      * @param duration Double type
      * @return boolean
      */
-    public boolean isButtonWithTextDisplayed(String button, double duration){
-        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON,button),duration);
+    public boolean isButtonWithTextDisplayed(String button, double duration) {
+        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON, button), duration);
     }
 
     //---- Assert Part ----\\

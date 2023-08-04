@@ -34,6 +34,11 @@ public class RefundPO {
     private Locator chooseExportForToday;
     private Locator downloadXlsReport;
     //--- Data booking menu on bang kerupux ---
+    private Locator actionBtnOnInvoiceList;
+    private Locator actionTransferredPermission;
+    private Locator allowRefundBox;
+    private Locator refundReasons;
+    private Locator sendBtnRefund;
     private Locator filterTransactionBtn;
     private Locator phoneNumberPlaceHolder;
     private Locator cariBtn;
@@ -66,6 +71,11 @@ public class RefundPO {
         this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
         this.downloadXlsReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX"));
         //-- data booking menu on bank kerupux ---
+        this.actionBtnOnInvoiceList = page.getByRole(AriaRole.BUTTON).getByText("Actions").first();
+        this.actionTransferredPermission = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(" Actions  Detail  Cancel  Check In  Show Booking Remarks  Edit Listing Note  Transfer Permission")).getByText("Transfer Permission");
+        this.allowRefundBox = page.getByRole(AriaRole.COMBOBOX);
+        this.refundReasons = page.locator("select[name='refund_reason']");
+        this.sendBtnRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send"));
         this.filterTransactionBtn = page.getByText("Tampilkan Filter");
         this.phoneNumberPlaceHolder = page.getByPlaceholder("Ex: 081987654321");
         this.cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
@@ -142,11 +152,11 @@ public class RefundPO {
      * Set allow refund transaction on data booking
      */
     public void setAllowRefundTransaction() {
-        page.getByRole(AriaRole.BUTTON).getByText("Actions").first().click();
-        page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(" Actions  Detail  Cancel  Check In  Show Booking Remarks  Edit Listing Note  Transfer Permission")).getByText("Transfer Permission").click();
-        page.getByRole(AriaRole.COMBOBOX).selectOption(new SelectOption().setValue("allow_refund"));
-        page.locator("select[name='refund_reason']").selectOption("booking_is_cancelled");
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send")).click();
+        playwrightHelpers.clickOn(actionBtnOnInvoiceList);
+        playwrightHelpers.clickOn(actionTransferredPermission);
+        playwrightHelpers.selectDropdownBySelectOption(allowRefundBox, new SelectOption().setValue("allow_refund"));
+        playwrightHelpers.selectDropdownByValue(refundReasons, "booking_is_cancelled");
+        playwrightHelpers.clickOn(sendBtnRefund);
     }
 
     /**
@@ -236,6 +246,7 @@ public class RefundPO {
 
     /**
      * get bank name for refund
+     *
      * @return
      */
     public String getBankNameForRefund() {
