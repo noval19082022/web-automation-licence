@@ -215,7 +215,7 @@ public class RefundPO {
      * @return
      */
     public String transferredUserName() {
-        return firstTransferredUserOnlist.textContent().trim();
+        return playwrightHelpers.getText(firstTransferredUserOnlist);
     }
 
     /**
