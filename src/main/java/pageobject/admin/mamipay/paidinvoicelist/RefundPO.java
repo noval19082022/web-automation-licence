@@ -134,7 +134,7 @@ public class RefundPO {
      * @return
      */
     public boolean IsOnDownloadXlsDisable() {
-        return downloadXlsReport.isDisabled();
+        return playwrightHelpers.isButtonDisable(downloadXlsReport);
     }
 
     /**

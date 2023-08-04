@@ -537,6 +537,10 @@ public class PlaywrightHelpers {
         return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON, button), duration);
     }
 
+    public boolean isButtonDisable(Locator locator) {
+        return locator.isDisabled();
+    }
+
     //---- Assert Part ----\\
 
     /**
