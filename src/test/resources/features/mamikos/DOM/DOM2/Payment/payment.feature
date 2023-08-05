@@ -626,6 +626,52 @@ Feature: Payment BackOffice Staging
     And user click on detail fee button
     Then admin verify see text "GP2 Staging"
 
+  @TEST_DOM-648 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] Create add ons without fill mandatory fields
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "", description "", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill add ons name and price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "description", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: create add ons without fill add ons name and description
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "description", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+    #  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "des", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "tester", price "5000", notes "test" and create it
+    Then admin verify see text "success created new add ons."
+    And admin bangkerupux delete add ons that has name "tester"
+
   @TEST_DOM-646 @Automated @web-covered
   Scenario: [BackOffice][Discount Admin Fee] Admin edit invoice discount
     Given admin go to mamikos mamipay admin
@@ -648,5 +694,4 @@ Feature: Payment BackOffice Staging
     And admin bangkerupux create admin fee discount with name discount "hapus langsung" amount "999"
     And admin bangkerupux want to delete admin fee discount that has name "hapus langsung"
     Then admin verify see text "Success."
-
 
