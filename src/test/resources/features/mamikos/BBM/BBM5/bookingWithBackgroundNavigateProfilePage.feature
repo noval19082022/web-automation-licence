@@ -1,4 +1,4 @@
-@BBM5 @rabu
+@BBM5
 Feature: BnB feature with background navigate profile page
 
   @background @kost-saya-revamp-phase2

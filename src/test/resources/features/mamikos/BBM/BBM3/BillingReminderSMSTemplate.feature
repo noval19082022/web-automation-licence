@@ -11,7 +11,7 @@ Feature: Billing Reminder - SMS Template
     Then user open " SMS Template" submenu of Billing Reminder Template
 
   Scenario: user set the initial state to display SMS template Day -5
-    When user set the initial state to display Billing template Day "-5"
+    When user set the initial state to display Billing template Day "-7"
 
 #  BBM-988
   Scenario: Delete Template
