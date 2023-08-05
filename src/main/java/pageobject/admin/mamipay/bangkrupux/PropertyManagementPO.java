@@ -32,7 +32,7 @@ public class PropertyManagementPO {
     /**
      * click On Property menu after open up property management menu
      */
-    public void clicOnPropertyMenu() {
+    public void clickOnPropertyMenu() {
         playwrightHelpers.clickOn(propertyMenu);
     }
 

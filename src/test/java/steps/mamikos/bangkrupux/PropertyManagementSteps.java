@@ -14,7 +14,7 @@ public class PropertyManagementSteps {
     @And("admin bangkrupux navigate to property management menu")
     public void adminVisitRefundPageOnMamipay() {
         propertyManagementPO.openUpPropertyManagementMenu();
-        propertyManagementPO.clicOnPropertyMenu();
+        propertyManagementPO.clickOnPropertyMenu();
     }
 
     @And("admin bangkerupux search property name {string} on property management menu")
