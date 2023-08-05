@@ -645,7 +645,8 @@ Feature: Payment BackOffice Staging
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to discount admin fee discount menu
-    And admin bangkerupux want to delete admin fee discount that has name "hapus"
+    And admin bangkerupux create admin fee discount with name discount "hapus langsung" amount "999"
+    And admin bangkerupux want to delete admin fee discount that has name "hapus langsung"
     Then admin verify see text "Success."
 
 
