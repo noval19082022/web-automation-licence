@@ -672,6 +672,18 @@ Feature: Payment BackOffice Staging
     Then admin verify see text "success created new add ons."
     And admin bangkerupux delete add ons that has name "tester"
 
+  @TEST_DOM-643 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] Click button delete on add ons menu
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "delete", description "delete", price "9999", notes "test" and create it
+    And admin bangkerupux delete add ons that has name "delete"
+    Then admin verify see text "Deleted."
+
   @TEST_DOM-646 @Automated @web-covered
   Scenario: [BackOffice][Discount Admin Fee] Admin edit invoice discount
     Given admin go to mamikos mamipay admin
