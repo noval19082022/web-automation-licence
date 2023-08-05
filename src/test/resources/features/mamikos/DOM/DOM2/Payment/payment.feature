@@ -614,3 +614,14 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux navigate to property management menu
     And admin bangkerupux search property name "payment squad 1" on property management menu
     Then admin verify see text "payment squad 1"
+
+  @TEST_DOM-651 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Discount admin fee recuring booking
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Invoice" menu
+    And user search by "Renter Phone Number" and input field "089220220201"
+    And user click on detail fee button
+    Then admin verify see text "GP2 Staging"
