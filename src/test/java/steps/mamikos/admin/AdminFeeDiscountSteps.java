@@ -26,6 +26,25 @@ public class AdminFeeDiscountSteps {
 
     @And("admin bangkrupux save after input field on edit discount admin fee")
     public void adminBangkrupuxSaveAfterInputFieldOnEditDiscountAdminFee() {
-        adminFeeDiscountPO.saveEditAdminFee();
+        adminFeeDiscountPO.saveAction();
+    }
+
+    @And("admin bangkerupux want to delete admin fee discount")
+    public void adminBangkerupuxWantToDeleteAdminFeeDiscount() {
+        adminFeeDiscountPO.deleteLastAdminFeeOnlist();
+    }
+
+    @And("admin bangkerupux create admin fee discount with name discount {string} amount {string}")
+    public void adminBangkerupuxCreateAdminFeeDiscountWithNameDiscountAmount(String name, String amount) {
+        adminFeeDiscountPO.createNewAdminFeeDiscountBtn();
+        adminFeeDiscountPO.fillOnAdminFeeName(name);
+        adminFeeDiscountPO.selectKostLevelOnCreate();
+        adminFeeDiscountPO.fillOnAdminFeeAmount(amount);
+        adminFeeDiscountPO.saveAction();
+    }
+
+    @And("admin bangkerupux want to delete admin fee discount that has name {string}")
+    public void adminBangkerupuxWantToDeleteAdminFeeDiscountThatHasName(String adminFeeName) {
+        adminFeeDiscountPO.deleteAdminFeeName(adminFeeName);
     }
 }

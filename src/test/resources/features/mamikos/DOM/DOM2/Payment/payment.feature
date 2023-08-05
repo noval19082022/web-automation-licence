@@ -637,3 +637,15 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux input amount "999" for discount admin fee
     And admin bangkrupux save after input field on edit discount admin fee
     Then admin verify see text "Success."
+
+  @TEST_DOM-645 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Admin delete invoice discount
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to discount admin fee discount menu
+    And admin bangkerupux want to delete admin fee discount that has name "hapus"
+    Then admin verify see text "Success."
+
+
