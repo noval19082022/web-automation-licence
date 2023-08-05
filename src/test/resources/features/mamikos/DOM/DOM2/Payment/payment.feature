@@ -569,3 +569,14 @@ Feature: Payment BackOffice Staging
     And admin search transferred refund by tenant Phone Number and input field "083829167577"
     Then admin verify see text "Flip"
 
+  @TEST_DOM-627 @Automated @web-covered
+  Scenario: [BackOffice][Refund] no Input Bank Account
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin set rekening number "" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "The refund account field is required when cc transaction id is not present."
