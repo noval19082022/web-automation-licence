@@ -1,9 +1,7 @@
 package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import pageobject.admin.mamipay.bangkrupux.PropertyManagementPO;
 

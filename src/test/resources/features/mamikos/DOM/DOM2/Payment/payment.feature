@@ -625,3 +625,15 @@ Feature: Payment BackOffice Staging
     And user search by "Renter Phone Number" and input field "089220220201"
     And user click on detail fee button
     Then admin verify see text "GP2 Staging"
+#
+#  @TEST_DOM-646 @Automated @web-covered
+#  Scenario: [BackOffice][Discount Admin Fee] Admin edit invoice discount
+#    Given admin go to mamikos mamipay admin
+#    When admin login to mamipay:
+#      | email stag                 | email prod                 | password  |
+#      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+#    And user click on invoice admin fee discount Menu form left bar
+#    And user click on edit button
+#    And user input discount amount "999"
+#    And user click on save button
+#    Then user see message "Success."
