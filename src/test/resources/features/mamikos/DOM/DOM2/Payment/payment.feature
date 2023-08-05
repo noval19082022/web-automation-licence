@@ -604,3 +604,13 @@ Feature: Payment BackOffice Staging
     And admin set rekening number "300100500" and rekening owner "test" for refund
     And admin close the refund detail
     Then admin verify see text "Daftar Invoice Refund"
+
+  @TEST_DOM-650 @Automated @web-covered
+  Scenario: [BackOffice][Property Level] Create Property Level
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to property management menu
+    And admin bangkerupux search property name "payment squad 1" on property management menu
+    Then admin verify see text "payment squad 1"
