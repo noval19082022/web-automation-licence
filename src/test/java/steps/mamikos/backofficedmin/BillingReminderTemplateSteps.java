@@ -46,7 +46,7 @@ public class BillingReminderTemplateSteps {
     public void userCreateNewTemplate(DataTable table) {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
-        var subject = inputBillingReminderData.get(0).get("title");
+        var subject = inputBillingReminderData.get(0).get("subject");
         var content = inputBillingReminderData.get(0).get("content");
         BillingReminderPO.clickOnAddTemplateButton();
         BillingReminderPO.fillTemplatePeriod(day);
