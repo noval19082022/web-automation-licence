@@ -483,7 +483,7 @@ public class TenantEditProfilePO {
      */
     public boolean isDropdownResultsListContains(String text){
         List<String> resultList = new ArrayList<>();
-        for (String dropDownSearchResult : dropdownResult.allInnerTexts()) {
+        for (String dropDownSearchResult : playwright.getListInnerTextFromListLocator(dropdownResult)) {
             resultList.add(dropDownSearchResult);
         }
         return resultList.get(0).contains(text);

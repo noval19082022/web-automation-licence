@@ -194,6 +194,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * get list text from locator that represent list, for example kost name on listing
+     * @param locator
+     * @return list string
+     */
+    public List<String> getListInnerTextFromListLocator(Locator locator) {
+        return locator.allInnerTexts();
+    }
+
+    /**
      * Get value from input element
      *
      * @param locator playwright locator
