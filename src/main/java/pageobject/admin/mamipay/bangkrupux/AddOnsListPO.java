@@ -67,15 +67,15 @@ public class AddOnsListPO {
      */
     public void createAddOnsAfterInputField() {
         playwrightHelpers.clickOn(createActionBtn);
-        if (yesBtnDialog.isVisible()) playwrightHelpers.clickOn(yesBtnDialog);
+        if (playwrightHelpers.waitTillLocatorIsVisible(yesBtnDialog)) playwrightHelpers.clickOn(yesBtnDialog);
     }
 
     /**
      * cancel pop up "Please complete all mandatory fields"
      */
     public void cancelPopUp() {
-        if (createAddOnsBtn.isVisible()) playwrightHelpers.clickOn(createActionBtn);
-        if (updateActionBtn.isVisible()) playwrightHelpers.clickOn(updateActionBtn);
+        if (playwrightHelpers.waitTillLocatorIsVisible(createAddOnsBtn)) playwrightHelpers.clickOn(createActionBtn);
+        if (playwrightHelpers.waitTillLocatorIsVisible(updateActionBtn)) playwrightHelpers.clickOn(updateActionBtn);
         playwrightHelpers.clickOn(cancelPopUpBtn);
     }
 
@@ -105,7 +105,7 @@ public class AddOnsListPO {
      */
     public void updateAddOnsAfterInputField() {
         playwrightHelpers.clickOn(updateActionBtn);
-        if (yesBtnDialog.isVisible()) playwrightHelpers.clickOn(yesBtnDialog);
+        if (playwrightHelpers.waitTillLocatorIsVisible(yesBtnDialog)) playwrightHelpers.clickOn(yesBtnDialog);
     }
 
     /**
