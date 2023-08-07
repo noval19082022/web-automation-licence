@@ -120,7 +120,7 @@ public class TenantEditProfileSteps {
 
     @And("user fills {string} in search dropdown pillih universitas")
     public void userFillsInSearchDropdownPillihUniversitas(String universitas) throws InterruptedException {
-        tenantEditProfile.userChooseUniversitasIndonesia(universitas);
+        tenantEditProfile.userChooseUniversitas(universitas);
     }
 
     @Then("user see list universitas")
@@ -131,5 +131,41 @@ public class TenantEditProfileSteps {
     @And("user click universitas")
     public void userClickUniversitas() throws InterruptedException{
         tenantEditProfile.userClickUniversitas();
+    }
+
+    @And("user click icon calendar")
+    public void userClickIconCalendar() throws InterruptedException {
+        tenantEditProfile.clickIconCalendar();
+    }
+
+    @And("user select city {string}")
+    public void userSelectCity(String kota)throws InterruptedException {
+        tenantEditProfile.userSelectCity(kota);
+    }
+
+    @And("user click on marital status dropdown {string}")
+    public void userClickOnMaritalStatusDropdown(String status) throws InterruptedException {
+        tenantEditProfile.clickOnMaritalStatusDropdown(status);
+    }
+
+    @And("user select {string}")
+    public void userSelect(String pendidikan) throws InterruptedException {
+        tenantEditProfile.userSelectPendidikan(pendidikan);
+
+    }
+
+    @And("user fills fullname {string}")
+    public void userFillsFullname(String name) throws InterruptedException {
+        tenantEditProfile.userClickFieldFullName(name);
+    }
+
+    @Then("user see message error {string}")
+    public void userSeeMessageError(String errorMessage) {
+        Assert.assertEquals(tenantEditProfile.messageErrorFullName(), errorMessage, "Error message is not equal to " + errorMessage);
+    }
+
+    @Then("user verify button simpan is active")
+    public void userVerifyButtonSimpanIsActive() {
+        tenantEditProfile.isButtonSimpanNotDisabled();
     }
 }
