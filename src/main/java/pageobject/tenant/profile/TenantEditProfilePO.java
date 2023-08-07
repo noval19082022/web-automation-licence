@@ -51,6 +51,9 @@ public class TenantEditProfilePO {
     Locator dropDownListProfessi;
     Locator dropdownResult;
     Locator kotaAsal;
+    Locator chooseLainnya;
+    Locator chooseInstansiSearch;
+    Locator errorMessageFullName;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -92,6 +95,9 @@ public class TenantEditProfilePO {
         dropDownListProfessi = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
         dropdownResult = page.locator("//a[contains(.,'Indonesia')]");
         kotaAsal = page.locator("//*[.='Kota Asal']/following-sibling::*");
+        chooseLainnya = page.getByTestId("inputProfession-workplaceOption").locator("a");
+        chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
+        errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
     }
 
     /**
@@ -331,7 +337,6 @@ public class TenantEditProfilePO {
      *
      */
     public void userChooseUniversitas(String universitas) throws InterruptedException {
-        Locator chooseLainnya =  page.getByTestId("inputProfession-workplaceOption").locator("a");
         playwright.clickOn(pilihNamaKampus);
         playwright.forceFill(searchNamaKampus, universitas);
         playwright.clickOn(chooseLainnya);
@@ -402,7 +407,6 @@ public class TenantEditProfilePO {
      * appears message error fullname
      */
     public String messageErrorFullName() {
-        Locator errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         playwright.waitTillLocatorIsVisible(errorMessageFullName);
         return playwright.getText(errorMessageFullName);
     }
@@ -428,7 +432,6 @@ public class TenantEditProfilePO {
      * choose instansi
      */
     public void chooseInstansi(String chooseInstansi)throws InterruptedException {
-        Locator chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
         playwright.clickOn(instansi);
         playwright.forceFill(searchInstansi, chooseInstansi);
         playwright.clickOn(chooseInstansiSearch);
@@ -459,10 +462,9 @@ public class TenantEditProfilePO {
     /**
      * user verify no data in search universitas
      */
-    public String getDropdownResult(String message){
+    public boolean getDropdownResult(String message){
         Locator result = page.getByText(message);
-        playwright.waitTillLocatorIsVisible(result);
-        return message;
+        return playwright.waitTillLocatorIsVisible(result);
     }
 
     /**
@@ -470,7 +472,6 @@ public class TenantEditProfilePO {
      *
      */
     public void userChooseNoUniversitas(String universitas) throws InterruptedException {
-        Locator chooseLainnya = page.getByTestId("inputProfession-workplaceOption").locator("a");
         playwright.clickOn(pilihNamaKampus);
         playwright.forceFill(searchNamaKampus, universitas);
     }
