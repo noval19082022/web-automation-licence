@@ -46,7 +46,8 @@ Feature: Add Ons - Fee Recurring Invoice Negative Scenario
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
