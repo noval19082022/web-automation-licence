@@ -9,8 +9,8 @@ Feature: Billing Reminder - WhatsApp Template
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user open " Whatsapp Template" submenu of Billing Reminder Template
 
-  Scenario: user set the initial state to display Whatsapp template Day -5
-    When user set the initial state to display Billing template Day "-5" "42"
+  Scenario: user set the initial state to display Whatsapp template Day 3
+    When user set the initial state to display Billing template Day "3" "42"
 
   @deleteWATemplate @TEST_BBM-975
   Scenario: Delete Template
@@ -28,12 +28,12 @@ Feature: Billing Reminder - WhatsApp Template
   Scenario: Add Template
     Given user create new WhatsApp template:
       | day     | WATemplate  |
-      | -5      | 42          |
+      | 0      | 42          |
     Then user verify Template subject with "recurringbooking_voucher_d_plus_1_update"
 
   @editWATemplate @TEST_BBM-976
   Scenario: Edit Template
     Given user edit WhatsApp template:
       | day     | WATemplate  |
-      | -5      | 42          |
+      | 0      | 42          |
     Then user verify Template subject with "recurringbooking_voucher_d_plus_1_update"

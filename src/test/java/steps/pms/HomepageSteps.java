@@ -10,7 +10,7 @@ public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     HomepagePO homepage = new HomepagePO(page);
 
-    @And("Admin go to room allotment page")
+    @And("admin go to room allotment page")
     public void admin_go_to_room_allotment_page() {
         homepage.clickActionButton();
         homepage.clickRoomAllotment();
