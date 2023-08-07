@@ -27,6 +27,12 @@ public class GoldplusPO {
     Locator gpPackageTable;
     Locator daftarButtonOnLandingPageGP;
     Locator closePopUpDetailManfaat;
+    Locator gpStatusFilter;
+    Locator backFromFilter;
+    Locator tagihanGPSection;
+    Locator tableTagihanGP;
+    Locator lihatSelengkapnyaTagihanGP;
+    Locator tabSelesaiRincianBayar;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -49,6 +55,13 @@ public class GoldplusPO {
         gpPackageTable = page.locator(".goldplus-package-content__packages-wrapper");
         daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
         closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
+        gpStatusFilter = page.locator(".goldplus-room-card__gp-status");
+        backFromFilter = page.locator(".bg-c-icon[data-v-7e8d294e]");
+        tagihanGPSection = page.locator("//div[@class='gold-plus-features']/div[4]");
+        tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
+        lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
+        tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
+
     }
 
     /**
@@ -234,5 +247,53 @@ public class GoldplusPO {
     public void clickOnCLosePopUpManfaat() {
         playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
         playwright.clickOn(closePopUpDetailManfaat);
+    }
+
+    /**
+     * Get status paket goldplus at tab filter
+     *
+     * @return String status paket goldplus
+     */
+    public String getStatusPaketGoldPlus() {
+        return playwright.getText(gpStatusFilter).replaceAll("\n", " ");
+    }
+
+    /**
+     * Click on icon back from filter gp
+     *
+     */
+    public void clickOnIconBackFilter() {
+        playwright.clickOn(backFromFilter);
+    }
+
+    /**
+     * Scroll to tagihan goldplus at dashboard GP
+     *
+     */
+    public void scrollToTagihanSection() {
+        tagihanGPSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Verify list tagihan GP is display
+     * @return boolean (true if table displayed, false if table doesn't displayed)
+     *
+     */
+    public boolean isListDetailTagihanIsDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tableTagihanGP);
+    }
+
+    /**
+     * Click on tab Selesai at page rincian pembayaran goldplus
+     */
+    public void clickTabSelesai() {
+        playwright.clickOn(tabSelesaiRincianBayar);
+    }
+
+    /**
+     * Click on lihat selengkapnya at section detail tagihan dashboard GP
+     */
+    public void lihatSelngkapnyaSectionDetailTagihan() {
+        playwright.clickOn(lihatSelengkapnyaTagihanGP);
     }
 }
