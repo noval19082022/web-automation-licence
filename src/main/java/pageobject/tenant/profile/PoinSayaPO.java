@@ -59,7 +59,7 @@ public class PoinSayaPO {
         titleInformasiPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tanggal Kedaluwarsa")).first();
         subtitleInformasiPoinPage = page.getByText("Poin Kamu akan kedaluwarsa dalam waktu 6 bulan dari saat Kamu mendapatkan poin.");
         lihatCaranyaButon = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Caranya"));
-        tableTitleTanggalKedaluwarsa = page.locator("//h1[@class='table-title'][text()='Tanggal Kedaluwarsa']");
+        tableTitleTanggalKedaluwarsa = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tanggal Kedaluwarsa")).first();
         tableTitleJumlahMamipoin = page.locator("//h1[@class='table-title-right'][text()='Jumlah MamiPoin']");
         subtitleTidakAdaPoinYangTersedia = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Tidak Ada Poin yang Tersedia"));
         titleRiwayatPoinPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Poin"));

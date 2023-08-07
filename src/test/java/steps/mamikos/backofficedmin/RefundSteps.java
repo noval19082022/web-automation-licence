@@ -3,6 +3,8 @@ package steps.mamikos.backofficedmin;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.admin.mamipay.paidinvoicelist.RefundPO;
 
 public class RefundSteps {
@@ -67,5 +69,41 @@ public class RefundSteps {
     @And("admin set to refund the paid invoice")
     public void adminSetToRefundThePaidInvoice() {
         refundPO.clickOnRefundAndTransfer();
+    }
+
+    @And("admin set rekening number {string} and rekening owner {string} for refund")
+    public void adminSetRekeningNumberAndRekeningOwnerForRefund(String rekeningNumber, String rekeningOwner) {
+        refundPO.fillRekeningNumber(rekeningNumber);
+        refundPO.fillRekeningName(rekeningOwner);
+    }
+
+    @Then("admin verify download button is disable")
+    public void adminVerifyDownloadButtonIsDisable() {
+        Assert.assertTrue(refundPO.IsOnDownloadXlsDisable());
+    }
+
+    @Then("admin verify transferred transaction for user {string} is visible")
+    public void adminVerifyTransferredTransactionForUserIsDone(String username) {
+        Assert.assertTrue(refundPO.transferredUserName().contains(username));
+    }
+
+    @And("admin search transferred refund by tenant Phone Number and input field {string}")
+    public void adminSearchTransferredRefundByTenantPhoneNumberAndInputField(String tenantPhoneNumber) {
+        refundPO.searchTransferredListByPhoneNumber(tenantPhoneNumber);
+    }
+
+    @And("admin close the refund detail")
+    public void adminCloseTheRefundDetail() {
+        refundPO.closeRefundDetailPopUp();
+    }
+
+    @And("admin want to download receipt transferred invoice")
+    public void adminWantToSeeReceiptTransferredInvoice() {
+        refundPO.clickOnReceiptTransferredInvoice();
+    }
+
+    @Then("admin verify bank name for refund is {string}")
+    public void adminVerifyBankNameForRefundIs(String bankName) {
+        Assert.assertEquals(refundPO.getBankNameForRefund(), bankName);
     }
 }

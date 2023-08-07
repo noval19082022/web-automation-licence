@@ -31,4 +31,4 @@ Feature: Main Page Add Tracker Status WA
   Scenario: Tanya Alamat via map is tracked on BSE Tenant Tracker
     When user choose "Nama Penyewa" and input "Irvi Tenant Add Ons" in the search field on main page
     And user click search button on main page filter
-    Then user verify search result on main page bse contains "Tanya Alamat"
+    Then user verify search result on main page bse contains "Terbayar Lunas"

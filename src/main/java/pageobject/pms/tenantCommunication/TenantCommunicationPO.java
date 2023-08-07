@@ -97,6 +97,7 @@ public class TenantCommunicationPO {
      *
      */
     public void clickSearchButtonMainPageFilter() {
+        playwright.waitFor(mainPageSearchButton,3000.0);
         playwright.clickOn(mainPageSearchButton);
     }
 
@@ -206,6 +207,7 @@ public class TenantCommunicationPO {
      */
     public Boolean isPropertyNameOnMainPageFilter(String propertyName){
         tenantNameOnTheFirstRow = page.locator("//a[contains(.,'"+propertyName+"')]").first();
+        playwright.waitFor(tenantNameOnTheFirstRow,3000.0);
         return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
     }
 
