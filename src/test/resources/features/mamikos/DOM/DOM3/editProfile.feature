@@ -259,5 +259,124 @@ Feature: Edit Profile
     And user fills "Indonesia" in pilih universitas
     Then user verify dropdown results list contains "Indonesia"
 
+  @TEST_DOM-335 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Mahasiswa - Lainnya- Edit Profile]fill text box
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "mahasiswa"
+    And user fills "Lainnya" in search dropdown pillih universitas
+    And user fill "A" on custom university input
+    Then user verify button simpan is active
 
+  @TEST_DOM-329 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]Choose list office
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "PT Adhi Karya (Persero) Tbk"
+    Then user click simpan button
 
+  @TEST_DOM-330 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]Change office name
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "Adira Dinamika Multi Finance Tbk"
+    Then user click simpan button
+
+  @TEST_DOM-328 @TESTSET_UG-4895 @TESTSET_PF-1961 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][profesion - Edit Profile ]choose profesion lainnya
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user click dropdown pilih instansi "lainnya"
+    And user fills instansi "Wirausaha"
+    Then user click simpan button
+
+  @TEST_DOM-326 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]type university name not matched with list
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "mahasiswa"
+    And user fills "Akmal" in pilih universitas
+    Then user verify message "There is no data" in search dropdown
+
+  @TEST_DOM-327 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][profesion - Edit Profile ]Not choose profesion
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession Lainnya
+    Then user see button simpan edit profile disable
+
+  @TEST_DOM-324 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]type university name matched with list
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Mahasiswa"
+    And user fills "Indonesia" in pilih universitas
+    Then user verify dropdown results list contains "Indonesia"
+
+  @TEST_DOM-323 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]Select Mahasiswa and choose universitas indonesia
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "mahasiswa"
+    And user fills "Universitas Indonesia" in search dropdown pillih universitas
+    Then user click simpan button
+
+  @TEST_DOM-307 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario Outline: [Tenant][Status - Edit profile]Change marital status
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user click on marital status dropdown
+    And user select martial status "<marital status>"
+    Then user click simpan button
+    Examples:
+      | marital status      |
+      | Belum Kawin         |
+      | Kawin Memiliki Anak |
+
+#    //next merge
+  @TEST_DOM-306 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Status - Edit Profile]Not choose marital status
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
