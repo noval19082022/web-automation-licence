@@ -46,7 +46,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
-    And tenant set active page to 1
+    And tenant set active page to 2
     And tenant get invoice number
 
   Scenario: Admin Add Additional Price Biaya Tetap
