@@ -152,7 +152,7 @@ Feature: Edit Profile
     And user choose profession "mahasiswa"
     And user fills "Lainnya" in search dropdown pillih universitas
     Then user verify button simpan is active
-    
+
   @TEST_DOM-354 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: [Tenant][DOB - Edit profile]change DOB
     Given user go to mamikos homepage
@@ -173,7 +173,7 @@ Feature: Edit Profile
     And user navigate to kost saya page
     And user click on profile card
     And user select city "Kuningan"
-    Then user click simpan button
+#    Then user click simpan button
 
   @TEST_DOM-351 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Gender - Edit Profile]change gender

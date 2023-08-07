@@ -31,7 +31,6 @@ public class TenantEditProfilePO {
     Locator lainnyaField;
     Locator searchTextBoxOnEditProfile;
     Locator profileCard;
-    Locator kotaAsalDropDown;
     Locator lastEducationTenant;
     Locator nomorDarurat;
     Locator profesi;
@@ -51,6 +50,7 @@ public class TenantEditProfilePO {
     Locator fillInstansi;
     Locator dropDownListProfessi;
     Locator dropdownResult;
+    Locator kotaAsal;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -72,8 +72,7 @@ public class TenantEditProfilePO {
         lainnyaField = page.getByTestId("jobDescription-input");
         searchTextBoxOnEditProfile = page.getByTestId("inputProfession-jobDetailOptions").getByPlaceholder("Search");
         profileCard = page.getByTestId("user-profile-card");
-        kotaAsalDropDown = page.getByText("Kota Asal Kabupaten Simeulue Kabupaten Aceh Singkil Kabupaten Aceh Selatan Kabup");
-        lastEducationTenant = page.getByText("Pendidikan Terakhir S3 S2 S1 Diploma SMK/MAK SMA/MA SMP/MTS SD/MI S1 dropdown-do");
+        lastEducationTenant = page.locator("//*[.='Pendidikan Terakhir']/following-sibling::*");
         nomorDarurat = page.getByPlaceholder("xxxx xxxx");
         profesi = page.getByTestId("inputProfession-jobOptions");
         pilihNamaKampus = page.getByTestId("inputProfession-workplaceOption");
@@ -84,14 +83,15 @@ public class TenantEditProfilePO {
         chooseTanggal = page.getByText("8", new Page.GetByTextOptions().setExact(true));
         asalKota = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota asal dropdown-down"));
         searchKota = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
-        martialStatus =  page.getByText("Status Belum Kawin Kawin Kawin memiliki anak Kawin dropdown-down Belum Kawin Kaw");
+        martialStatus = page.locator("//*[.='Status']/following-sibling::*");
         namaLengkap = page.getByPlaceholder("Masukan nama lengkap kamu");
-        jenisKlamin = page.getByText("Jenis Kelamin Laki-laki Perempuan Laki-laki dropdown-down Laki-laki Perempuan");
+        jenisKlamin = page.locator("//*[.='Jenis Kelamin']/following-sibling::*");
         instansi = page.getByTestId("inputProfession-workplaceOption");
         searchInstansi = page.getByTestId("inputProfession-workplaceOption").getByPlaceholder("Search");
         fillInstansi = page.getByPlaceholder("Tulis nama instansi Anda di sini");
         dropDownListProfessi = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
         dropdownResult = page.locator("//a[contains(.,'Indonesia')]");
+        kotaAsal = page.locator("//*[.='Kota Asal']/following-sibling::*");
     }
 
     /**
@@ -284,7 +284,7 @@ public class TenantEditProfilePO {
      * user click kota asal
      */
     public void userClickKotaAsalDropdown() throws InterruptedException {
-        playwright.clickOn(kotaAsalDropDown);
+        playwright.clickOn(kotaAsal);
     }
 
     /**
@@ -367,7 +367,6 @@ public class TenantEditProfilePO {
      */
     public void userSelectCity(String kota) throws InterruptedException {
         Locator pilihKota = page.locator("a").filter(new Locator.FilterOptions().setHasText(kota)).nth(0);
-        Locator kotaAsal = page.getByText("Kota Asal Kabupaten Simeulue Kabupaten Aceh Singkil Kabupaten Aceh Selatan Kabup");
         playwright.clickOn(kotaAsal);
         playwright.forceFill(searchKota, kota);
         playwright.clickOn(pilihKota);
