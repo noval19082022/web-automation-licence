@@ -208,4 +208,19 @@ public class TenantEditProfileSteps {
     public void userVerifyDropdownResultsListContains(String result) {
         Assert.assertTrue(tenantEditProfile.isDropdownResultsListContains(result), "Dropdown results not containing " + result);
     }
+
+    @And("user fill {string} on custom university input")
+    public void userFillOnCustomUniversityInput(String text) {
+        tenantEditProfile.userFillNamaKampus(text);
+    }
+
+    @And("user click on marital status dropdown")
+    public void userClickOnMaritalStatusDropdown() {
+        tenantEditProfile.martialStatus();
+    }
+
+    @And("user select martial status {string}")
+    public void userSelectMartialStatus(String martial)throws InterruptedException {
+        tenantEditProfile.selectMaritalStatus(martial);
+    }
 }
