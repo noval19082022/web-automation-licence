@@ -26,7 +26,7 @@ Feature: Add Ons - Fee Recurring Invoice Positive Scenario
     And tenant search kost then go to kost details:
       | kost name stag           | kost name prod           |
       | Kost Adi Auto Add Ons    | Kost Adi Auto Add Ons    |
-    And tenant booking kost for "today" and input rent duration equals to 4
+    And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking

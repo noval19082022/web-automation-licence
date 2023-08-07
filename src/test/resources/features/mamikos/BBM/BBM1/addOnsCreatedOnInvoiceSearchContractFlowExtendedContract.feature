@@ -26,7 +26,7 @@ Feature: Add Ons - Extended Contract
     And tenant search kost then go to kost details:
       | kost name stag           | kost name prod            |
       | Kost Adi Auto Add Ons    | Kost Adi Auto Add Ons     |
-    And tenant booking kost for "today" and input rent duration equals to 4
+    And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -83,6 +83,6 @@ Feature: Add Ons - Extended Contract
     And admin search contract by tenant phone number:
       | phone stag    | phone prod    |
       | 0891111020198 | 0891111020198 |
-    And admin clicks on invoice number "3" on first index contract
+    And admin clicks on invoice number "2" on first index contract
     And tenant set active page to 1
     Then tenant can see additional price "Laundry" with price "Rp100.000"

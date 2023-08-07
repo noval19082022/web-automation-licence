@@ -26,7 +26,7 @@ Feature: Add Ons - Fee Recurring Invoice Negative Scenario
     And tenant search kost then go to kost details:
       | kost name stag           | kost name prod           |
       | Kost Adi Auto Add Ons    | Kost Adi Auto Add Ons    |
-    And tenant booking kost for "today" and input rent duration equals to 4
+    And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -55,7 +55,7 @@ Feature: Add Ons - Fee Recurring Invoice Negative Scenario
   Scenario: Tenant Check-in To Kost For Add Ons Fee Recurring Auto Extend Invoice And Check Add Ons Requirement
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
-    And tenant set active page to 1
+    And tenant set active page to 2
     Then tenant can not sees add on price on payment page
     When tenant pay booking to extended contract using ovo "081280003230"
     Then tenant can not sees add on price on payment page

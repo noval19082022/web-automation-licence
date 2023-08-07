@@ -4,9 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.Cookie;
 import config.playwright.context.ActiveContext;
 import data.api.UserCookies;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
-import pageobject.common.apartment.ApartmentDetailPO;
 
 import java.util.List;
 
