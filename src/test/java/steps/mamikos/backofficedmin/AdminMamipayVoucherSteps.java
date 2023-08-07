@@ -441,4 +441,29 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.fillTargetedEmail(voucherTargetedEmail);
     }
 
+    @And("admin edit voucher with name and set voucher aplicable on city:")
+    public void adminEditVoucherWithNameAndSetVoucherAplicableOnCity(DataTable table) throws InterruptedException {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var city = voucherAndRules.get(0).get("voucher City");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.selectVoucherAplicableOnCity(city);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @And("admin edit voucher with name and set voucher not aplicable on city:")
+    public void adminEditVoucherWithNameAndSetVoucherNotAplicableOnCity(DataTable table) throws InterruptedException {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var city = voucherAndRules.get(0).get("voucher City");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.selectVoucherNotAplicableOnCity(city);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
 }
