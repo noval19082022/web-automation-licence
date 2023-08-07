@@ -34,9 +34,10 @@ public class TenantEditProfileSteps {
         tenantEditProfile.clickONSaveButton();
     }
 
-    @Then("user can see {string} on profile page")
-    public void user_can_see_x_on_profile_page(String textAlert) {
-        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert),textAlert,"not appears alert on profile");
+    @Then("user can see {string} on profile page {string}")
+    public void user_can_see_x_on_profile_page(String textAlert, String indexText) {
+        int index = Integer.parseInt(indexText);
+        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert, index),textAlert,"not appears alert on profile");
     }
 
     @Then("user see button simpan edit profile disable")

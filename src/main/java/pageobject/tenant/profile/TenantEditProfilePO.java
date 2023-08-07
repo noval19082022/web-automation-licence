@@ -1,5 +1,6 @@
 package pageobject.tenant.profile;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -187,9 +188,10 @@ public class TenantEditProfilePO {
      *
      * @return string
      */
-    public String getAlertOnProfile(String alert) {
-        Locator alartValue = page.locator("//p[contains(.,'" + alert + "')]");
-        return playwright.getText(alartValue);
+    public String getAlertOnProfile(String alert, int index) {
+        ElementHandle[] elements = page.querySelectorAll("//i[contains(.,'" + alert + "')]").toArray(new ElementHandle[index]);
+        ElementHandle alartValue = elements[index];
+        return alartValue.textContent();
     }
 
     /**
