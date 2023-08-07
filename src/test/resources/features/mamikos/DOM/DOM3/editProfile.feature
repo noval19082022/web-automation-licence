@@ -328,7 +328,7 @@ Feature: Edit Profile
       | 089220221220  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
-    And user choose profession Lainnya
+    And user choose profession "Lainnya"
     Then user see button simpan edit profile disable
 
   @TEST_DOM-324 @Automated @DOM3 @web-covered

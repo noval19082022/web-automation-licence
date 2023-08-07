@@ -223,9 +223,4 @@ public class TenantEditProfileSteps {
     public void userSelectMartialStatus(String martial)throws InterruptedException {
         tenantEditProfile.selectMaritalStatus(martial);
     }
-
-    @And("user choose profession Lainnya")
-    public void userChooseProfessionLainnya()throws InterruptedException {
-        tenantEditProfile.userChooseProfessionLainnya();
-    }
 }

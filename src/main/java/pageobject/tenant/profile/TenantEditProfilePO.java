@@ -55,7 +55,6 @@ public class TenantEditProfilePO {
     Locator chooseInstansiSearch;
     Locator errorMessageFullName;
     Locator fillNamaKampus;
-    Locator chooseProfesiLainnya;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -101,7 +100,6 @@ public class TenantEditProfilePO {
         chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
         errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
-        chooseProfesiLainnya = page.getByTestId("inputProfession-jobOptions").locator("a").filter(new Locator.FilterOptions().setHasText("Lainnya"));
     }
 
     /**
@@ -332,7 +330,7 @@ public class TenantEditProfilePO {
      */
     public void userChooseProfession(String chooseProfessi) throws InterruptedException {
         playwright.clickOn(profesi);
-        Locator chooseProfesi = page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi));
+        Locator chooseProfesi = page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi)).nth(0);
         playwright.clickOn(chooseProfesi);
     }
 
@@ -515,14 +513,5 @@ public class TenantEditProfilePO {
     public void selectMaritalStatus(String martial) throws InterruptedException{
         Locator martialChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(martial));
         playwright.clickOn(martialChoose);
-    }
-
-    /**
-     * click on profession lainnya
-     * @throws InterruptedException
-     */
-    public void userChooseProfessionLainnya() throws InterruptedException {
-        playwright.clickOn(profesi);
-        playwright.clickOn(chooseProfesiLainnya);
     }
 }
