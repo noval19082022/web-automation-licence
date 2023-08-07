@@ -150,7 +150,7 @@ Feature: Edit Profile
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
-    And user fills "Universitas Indonesia" in search dropdown pillih universitas
+    And user fills "Lainnya" in search dropdown pillih universitas
     Then user verify button simpan is active
 
 
