@@ -14,6 +14,8 @@ public class AddOnsListPO {
     private Locator pricePlaceHolder;
     private Locator notesPlaceHolder;
     private Locator createActionBtn;
+    private Locator updateActionBtn;
+    private Locator cancelActionBtn;
     private Locator yesBtnDialog;
     private Locator cancelPopUpBtn;
     private Locator acceptDeleteBtnOnPopUp;
@@ -27,6 +29,8 @@ public class AddOnsListPO {
         this.pricePlaceHolder = page.getByRole(AriaRole.SPINBUTTON);
         this.notesPlaceHolder = page.getByPlaceholder("Input notes");
         this.createActionBtn = page.locator("a").filter(new Locator.FilterOptions().setHasText("Create Add On"));
+        this.updateActionBtn = page.locator("a").filter(new Locator.FilterOptions().setHasText("Update Add On"));
+        this.cancelActionBtn = page.locator("a").filter(new Locator.FilterOptions().setHasText("Cancel"));
         this.yesBtnDialog = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Yes"));
         this.cancelPopUpBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
         this.acceptDeleteBtnOnPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("DELETE").setExact(true));
@@ -40,14 +44,14 @@ public class AddOnsListPO {
     }
 
     /**
-     * input field create add ons
+     * input field create or edit add ons
      *
      * @param name
      * @param description
      * @param price
      * @param notes
      */
-    public void inputCreateField(String name, String description, String price, String notes) {
+    public void inputCreateOrEditField(String name, String description, String price, String notes) {
         playwrightHelpers.clearText(namePlaceHolder);
         playwrightHelpers.clickLocatorAndTypeKeyboard(namePlaceHolder, name);
         playwrightHelpers.clearText(descriptionPlaceHolder);
@@ -63,25 +67,51 @@ public class AddOnsListPO {
      */
     public void createAddOnsAfterInputField() {
         playwrightHelpers.clickOn(createActionBtn);
-        if (yesBtnDialog.isVisible()) {
-            playwrightHelpers.clickOn(yesBtnDialog);
-        }
+        if (yesBtnDialog.isVisible()) playwrightHelpers.clickOn(yesBtnDialog);
     }
 
     /**
      * cancel pop up "Please complete all mandatory fields"
      */
     public void cancelPopUp() {
+        if (createAddOnsBtn.isVisible()) playwrightHelpers.clickOn(createActionBtn);
+        if (updateActionBtn.isVisible()) playwrightHelpers.clickOn(updateActionBtn);
         playwrightHelpers.clickOn(cancelPopUpBtn);
     }
 
     /**
-     * delet add ons that has name
+     * delete add ons that has name
+     *
      * @param addOnsName
      */
     public void deleteAddOns(String addOnsName) {
         Locator addOns = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(addOnsName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).first();
         playwrightHelpers.clickOn(addOns);
         playwrightHelpers.clickOn(acceptDeleteBtnOnPopUp);
+    }
+
+    /**
+     * edit add ons that has name
+     *
+     * @param addOnsName
+     */
+    public void editAddOns(String addOnsName) {
+        Locator addOns = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(addOnsName)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")).first();
+        playwrightHelpers.clickOn(addOns);
+    }
+
+    /**
+     * update add ons after edit field
+     */
+    public void updateAddOnsAfterInputField() {
+        playwrightHelpers.clickOn(updateActionBtn);
+        if (yesBtnDialog.isVisible()) playwrightHelpers.clickOn(yesBtnDialog);
+    }
+
+    /**
+     * admin click on cancel btn from create or edit page
+     */
+    public void cancelCreateOrEditAddOns() {
+        playwrightHelpers.clickOn(cancelActionBtn);
     }
 }

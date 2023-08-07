@@ -684,6 +684,59 @@ Feature: Payment BackOffice Staging
     And admin bangkerupux delete add ons that has name "delete"
     Then admin verify see text "Deleted."
 
+  @TEST_DOM-642 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] visit form edit add ons
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+
+    ## create add ons for testing purpose
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "edit add ons", description "edit", price "9999", notes "test" and create it
+
+    #  Scenario: Positive case Edit add ons Name
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit", price "9999", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons description
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "9999", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons price
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "5000", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons notes
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "5000", notes "edit notes" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Click button cancel on edit page
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux cancel edit add ons
+    Then admin verify see text "Add Ons List"
+
+    #  Scenario: Positive case Click button cancel on pop up edit
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux cancel edit add ons pop up
+    Then admin verify see text "Edit Add On"
+
+    ## Delete add ons after test
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux delete add ons that has name "edit add ons"
+    Then admin verify see text "Deleted."
+
   @TEST_DOM-646 @Automated @web-covered
   Scenario: [BackOffice][Discount Admin Fee] Admin edit invoice discount
     Given admin go to mamikos mamipay admin
