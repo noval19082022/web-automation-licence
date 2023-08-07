@@ -5,6 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class TenantEditProfilePO {
@@ -28,7 +31,6 @@ public class TenantEditProfilePO {
     Locator lainnyaField;
     Locator searchTextBoxOnEditProfile;
     Locator profileCard;
-    Locator kotaAsalDropDown;
     Locator lastEducationTenant;
     Locator nomorDarurat;
     Locator profesi;
@@ -42,6 +44,16 @@ public class TenantEditProfilePO {
     Locator searchKota;
     Locator martialStatus;
     Locator namaLengkap;
+    Locator jenisKlamin;
+    Locator instansi;
+    Locator searchInstansi;
+    Locator fillInstansi;
+    Locator dropDownListProfessi;
+    Locator dropdownResult;
+    Locator kotaAsal;
+    Locator chooseLainnya;
+    Locator chooseInstansiSearch;
+    Locator errorMessageFullName;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -63,8 +75,7 @@ public class TenantEditProfilePO {
         lainnyaField = page.getByTestId("jobDescription-input");
         searchTextBoxOnEditProfile = page.getByTestId("inputProfession-jobDetailOptions").getByPlaceholder("Search");
         profileCard = page.getByTestId("user-profile-card");
-        kotaAsalDropDown = page.getByText("Kota Asal Kabupaten Simeulue Kabupaten Aceh Singkil Kabupaten Aceh Selatan Kabup");
-        lastEducationTenant = page.getByText("Pendidikan Terakhir S3 S2 S1 Diploma SMK/MAK SMA/MA SMP/MTS SD/MI S1 dropdown-do");
+        lastEducationTenant = page.locator("//*[.='Pendidikan Terakhir']/following-sibling::*");
         nomorDarurat = page.getByPlaceholder("xxxx xxxx");
         profesi = page.getByTestId("inputProfession-jobOptions");
         pilihNamaKampus = page.getByTestId("inputProfession-workplaceOption");
@@ -75,8 +86,18 @@ public class TenantEditProfilePO {
         chooseTanggal = page.getByText("8", new Page.GetByTextOptions().setExact(true));
         asalKota = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota asal dropdown-down"));
         searchKota = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
-        martialStatus =  page.getByText("Status Belum Kawin Kawin Kawin memiliki anak Kawin dropdown-down Belum Kawin Kaw");
+        martialStatus = page.locator("//*[.='Status']/following-sibling::*");
         namaLengkap = page.getByPlaceholder("Masukan nama lengkap kamu");
+        jenisKlamin = page.locator("//*[.='Jenis Kelamin']/following-sibling::*");
+        instansi = page.getByTestId("inputProfession-workplaceOption");
+        searchInstansi = page.getByTestId("inputProfession-workplaceOption").getByPlaceholder("Search");
+        fillInstansi = page.getByPlaceholder("Tulis nama instansi Anda di sini");
+        dropDownListProfessi = page.getByTestId("inputProfession-workplaceOption").getByRole(AriaRole.LIST);
+        dropdownResult = page.locator("//a[contains(.,'Indonesia')]");
+        kotaAsal = page.locator("//*[.='Kota Asal']/following-sibling::*");
+        chooseLainnya = page.getByTestId("inputProfession-workplaceOption").locator("a");
+        chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
+        errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
     }
 
     /**
@@ -269,7 +290,7 @@ public class TenantEditProfilePO {
      * user click kota asal
      */
     public void userClickKotaAsalDropdown() throws InterruptedException {
-        playwright.clickOn(kotaAsalDropDown);
+        playwright.clickOn(kotaAsal);
     }
 
     /**
@@ -316,7 +337,6 @@ public class TenantEditProfilePO {
      *
      */
     public void userChooseUniversitas(String universitas) throws InterruptedException {
-        Locator chooseLainnya =  page.getByTestId("inputProfession-workplaceOption").locator("a");
         playwright.clickOn(pilihNamaKampus);
         playwright.forceFill(searchNamaKampus, universitas);
         playwright.clickOn(chooseLainnya);
@@ -352,7 +372,6 @@ public class TenantEditProfilePO {
      */
     public void userSelectCity(String kota) throws InterruptedException {
         Locator pilihKota = page.locator("a").filter(new Locator.FilterOptions().setHasText(kota)).nth(0);
-        Locator kotaAsal = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(kota));
         playwright.clickOn(kotaAsal);
         playwright.forceFill(searchKota, kota);
         playwright.clickOn(pilihKota);
@@ -388,7 +407,6 @@ public class TenantEditProfilePO {
      * appears message error fullname
      */
     public String messageErrorFullName() {
-        Locator errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         playwright.waitTillLocatorIsVisible(errorMessageFullName);
         return playwright.getText(errorMessageFullName);
     }
@@ -399,5 +417,75 @@ public class TenantEditProfilePO {
      */
     public void isButtonSimpanNotDisabled() {
         playwright.assertVisible(simpanButton);
+    }
+
+    /**
+     * choose jenis kelamin
+     */
+    public void chooseJenisKelamin(String kelamin)throws InterruptedException {
+        Locator chooseKelamin = page.locator("a").filter(new Locator.FilterOptions().setHasText(kelamin));
+        playwright.clickOn(jenisKlamin);
+        playwright.clickOn(chooseKelamin);
+    }
+
+    /**
+     * choose instansi
+     */
+    public void chooseInstansi(String chooseInstansi)throws InterruptedException {
+        playwright.clickOn(instansi);
+        playwright.forceFill(searchInstansi, chooseInstansi);
+        playwright.clickOn(chooseInstansiSearch);
+    }
+
+    /**
+     * user fill instansi
+     */
+    public void userFillInstansi(String fillsInstansi){
+        playwright.clickOn(fillInstansi);
+        playwright.forceFill(fillInstansi,fillsInstansi);
+    }
+
+    /**
+     * user choose dropdown instansi
+     */
+    public void chooseDropdownProfesi(){
+        playwright.clickOn(instansi);
+    }
+
+    /**
+     * verfiy dropdown list profesi
+     */
+    public boolean dropdownWillDisplayed() {
+        return playwright.waitTillLocatorIsVisible(dropDownListProfessi);
+    }
+
+    /**
+     * user verify no data in search universitas
+     */
+    public boolean getDropdownResult(String message){
+        Locator result = page.getByText(message);
+        return playwright.waitTillLocatorIsVisible(result);
+    }
+
+    /**
+     * click on choose no data universitas
+     *
+     */
+    public void userChooseNoUniversitas(String universitas) throws InterruptedException {
+        playwright.clickOn(pilihNamaKampus);
+        playwright.forceFill(searchNamaKampus, universitas);
+    }
+
+    /**
+     * Is Dropdown Result List Contains Inputted Text
+     * @param text
+     * @return true or false
+     */
+    public boolean isDropdownResultsListContains(String text){
+        List<String> resultList = new ArrayList<>();
+        for (String dropDownSearchResult : playwright.getListInnerTextFromListLocator(dropdownResult)) {
+            resultList.add(dropDownSearchResult);
+        }
+        return resultList.get(0).contains(text);
     }
 }
