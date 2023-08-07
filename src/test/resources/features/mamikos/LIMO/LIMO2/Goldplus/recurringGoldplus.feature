@@ -19,13 +19,13 @@ Feature: Check all entry point Recurring GP
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user sets recurring for number "082233545514"
 
-  @continue
+  @continue @TEST_LIMO-2626
   Scenario: owner see reminder pop up recurring at owner dashboard
     And owner navigates to "/"
     And owner click "Nanti Saja"
     Then user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
 
-  @continue
+  @continue @TEST_LIMO-2335
   Scenario: owner see entry point GP recurring from widget GP
     When owner wants to access goldplus dashboard
     Then owner will see that the text "GoldPlus 1 periode 3 bulan" is displayed
