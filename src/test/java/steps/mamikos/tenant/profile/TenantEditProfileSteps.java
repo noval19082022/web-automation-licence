@@ -168,4 +168,59 @@ public class TenantEditProfileSteps {
     public void userVerifyButtonSimpanIsActive() {
         tenantEditProfile.isButtonSimpanNotDisabled();
     }
+
+    @And("user choose dropdown {string}")
+    public void userChooseDropdown(String jenisKlamin)throws InterruptedException {
+        tenantEditProfile.chooseJenisKelamin(jenisKlamin);
+    }
+
+    @And("user click dropdown pilih instansi {string}")
+    public void userClickDropdownPilihInstansi(String instansi)throws InterruptedException {
+        tenantEditProfile.chooseInstansi(instansi);
+    }
+
+    @And("user fills instansi {string}")
+    public void userFillsInstansi(String instansi) {
+        tenantEditProfile.userFillInstansi(instansi);
+    }
+
+    @And("user click dropdown prefession")
+    public void userClickDropdownPrefession() {
+        tenantEditProfile.chooseDropdownProfesi();
+    }
+
+    @Then("Dropdown will displayed list office name")
+    public void dropdownWillDisplayedListOfficeName() {
+        Assert.assertTrue(tenantEditProfile.dropdownWillDisplayed(), "element is displayed");
+    }
+
+    @Then("user verify message {string} in search dropdown")
+    public void userVerifyMessageInSearchDropdown(String noData) {
+        Assert.assertEquals(tenantEditProfile.getDropdownResult(noData), noData, "Dropdown message is not equal to " + noData);
+    }
+
+    @And("user fills {string} in pilih universitas")
+    public void userFillsInPilihUniversitas(String universitas)throws InterruptedException {
+        tenantEditProfile.userChooseNoUniversitas(universitas);
+    }
+
+    @Then("user verify dropdown results list contains {string}")
+    public void userVerifyDropdownResultsListContains(String result) {
+        Assert.assertTrue(tenantEditProfile.isDropdownResultsListContains(result), "Dropdown results not containing " + result);
+    }
+
+    @And("user fill {string} on custom university input")
+    public void userFillOnCustomUniversityInput(String text) {
+        tenantEditProfile.userFillNamaKampus(text);
+    }
+
+    @And("user click on marital status dropdown")
+    public void userClickOnMaritalStatusDropdown() {
+        tenantEditProfile.martialStatus();
+    }
+
+    @And("user select martial status {string}")
+    public void userSelectMartialStatus(String martial)throws InterruptedException {
+        tenantEditProfile.selectMaritalStatus(martial);
+    }
 }
