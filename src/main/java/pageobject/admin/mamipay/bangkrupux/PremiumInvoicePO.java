@@ -13,6 +13,7 @@ public class PremiumInvoicePO {
     private Locator searchByOption;
     private Locator inputSearchBy;
     private Locator cariInvoiceBtn;
+    private Locator tableListData;
 
     public PremiumInvoicePO(Page page) {
         this.page = page;
@@ -22,6 +23,7 @@ public class PremiumInvoicePO {
         this.searchByOption = page.locator("select[name='search_by']");
         this.inputSearchBy = page.locator("input[name='search_value']");
         this.cariInvoiceBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Invoice"));
+        this.tableListData = page.locator(".box-body");
     }
 
     /**
@@ -48,5 +50,12 @@ public class PremiumInvoicePO {
      */
     public void clickOnSearchPackageInvoice() {
         playwrightHelpers.clickOn(cariInvoiceBtn);
+    }
+
+    /**
+     * check if data list is null or blank
+     */
+    public boolean isDataListBlannk() {
+        return playwrightHelpers.isDataBlankorNull(tableListData);
     }
 }

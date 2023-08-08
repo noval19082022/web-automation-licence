@@ -550,6 +550,15 @@ public class PlaywrightHelpers {
         return locator.isDisabled();
     }
 
+    /**
+     * check if data is null or blank
+     * @param locator
+     * @return
+     */
+    public boolean isDataBlankorNull(Locator locator) {
+        return locator.textContent().isBlank();
+    }
+
     //---- Assert Part ----\\
 
     /**

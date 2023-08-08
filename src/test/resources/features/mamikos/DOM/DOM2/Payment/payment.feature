@@ -780,3 +780,13 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "08119787884"
     Then admin verify see text "Desta Owner"
+
+  @TEST_DOM-679 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter invalid owner number premium
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "0811978499"
+    Then admin bangkerupux get blank data list on package invoice list

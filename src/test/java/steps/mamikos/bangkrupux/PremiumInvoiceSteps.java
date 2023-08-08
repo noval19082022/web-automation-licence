@@ -3,6 +3,7 @@ package steps.mamikos.bangkrupux;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import pageobject.admin.mamipay.bangkrupux.PremiumInvoicePO;
 
 public class PremiumInvoiceSteps {
@@ -18,5 +19,10 @@ public class PremiumInvoiceSteps {
     public void adminBangkrupuxSearchPackageInvoiceListPremiumByAndInputField(String searchBy, String inputField) {
         premiumInvoicePO.searchPackageInvoiceBy(searchBy, inputField);
         premiumInvoicePO.clickOnSearchPackageInvoice();
+    }
+
+    @Then("admin bangkerupux get blank data list on package invoice list")
+    public void adminBangkerupuxGetBlankDataListOnPackageInvoiceList() {
+        premiumInvoicePO.isDataListBlannk();
     }
 }
