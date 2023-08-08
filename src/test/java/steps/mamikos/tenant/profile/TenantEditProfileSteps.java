@@ -34,9 +34,10 @@ public class TenantEditProfileSteps {
         tenantEditProfile.clickONSaveButton();
     }
 
-    @Then("user can see {string} on profile page")
-    public void user_can_see_x_on_profile_page(String textAlert) {
-        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert),textAlert,"not appears alert on profile");
+    @Then("user can see {string} on profile page {string}")
+    public void user_can_see_x_on_profile_page(String textAlert, String indexText) {
+        int index = Integer.parseInt(indexText);
+        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert, index),textAlert,"not appears alert on profile");
     }
 
     @Then("user see button simpan edit profile disable")
@@ -207,5 +208,20 @@ public class TenantEditProfileSteps {
     @Then("user verify dropdown results list contains {string}")
     public void userVerifyDropdownResultsListContains(String result) {
         Assert.assertTrue(tenantEditProfile.isDropdownResultsListContains(result), "Dropdown results not containing " + result);
+    }
+
+    @And("user fill {string} on custom university input")
+    public void userFillOnCustomUniversityInput(String text) {
+        tenantEditProfile.userFillNamaKampus(text);
+    }
+
+    @And("user click on marital status dropdown")
+    public void userClickOnMaritalStatusDropdown() {
+        tenantEditProfile.martialStatus();
+    }
+
+    @And("user select martial status {string}")
+    public void userSelectMartialStatus(String martial)throws InterruptedException {
+        tenantEditProfile.selectMaritalStatus(martial);
     }
 }

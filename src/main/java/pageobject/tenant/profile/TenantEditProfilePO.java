@@ -1,5 +1,6 @@
 package pageobject.tenant.profile;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -7,8 +8,6 @@ import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class TenantEditProfilePO {
     Page page;
@@ -54,6 +53,7 @@ public class TenantEditProfilePO {
     Locator chooseLainnya;
     Locator chooseInstansiSearch;
     Locator errorMessageFullName;
+    Locator fillNamaKampus;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -98,6 +98,7 @@ public class TenantEditProfilePO {
         chooseLainnya = page.getByTestId("inputProfession-workplaceOption").locator("a");
         chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
         errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
+        fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
     }
 
     /**
@@ -185,9 +186,10 @@ public class TenantEditProfilePO {
      *
      * @return string
      */
-    public String getAlertOnProfile(String alert) {
-        Locator alartValue = page.locator("//p[contains(.,'" + alert + "')]");
-        return playwright.getText(alartValue);
+    public String getAlertOnProfile(String alert, int index) {
+        ElementHandle[] elements = page.querySelectorAll("//i[contains(.,'" + alert + "')]").toArray(new ElementHandle[index]);
+        ElementHandle alartValue = elements[index];
+        return alartValue.textContent();
     }
 
     /**
@@ -328,7 +330,7 @@ public class TenantEditProfilePO {
      */
     public void userChooseProfession(String chooseProfessi) throws InterruptedException {
         playwright.clickOn(profesi);
-        Locator chooseProfesi = page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi));
+        Locator chooseProfesi = page.locator("a").filter(new Locator.FilterOptions().setHasText(chooseProfessi)).nth(0);
         playwright.clickOn(chooseProfesi);
     }
 
@@ -461,10 +463,12 @@ public class TenantEditProfilePO {
 
     /**
      * user verify no data in search universitas
+     * @return
      */
-    public boolean getDropdownResult(String message){
+    public String getDropdownResult(String message){
         Locator result = page.getByText(message);
-        return playwright.waitTillLocatorIsVisible(result);
+        playwright.waitTillLocatorIsVisible(result);
+        return message;
     }
 
     /**
@@ -487,5 +491,27 @@ public class TenantEditProfilePO {
             resultList.add(dropDownSearchResult);
         }
         return resultList.get(0).contains(text);
+    }
+
+    /**
+     * user fill nama kampus
+     */
+    public void userFillNamaKampus(String text){
+        playwright.forceFill(fillNamaKampus, text);
+    }
+
+    /**
+     * click martila status drop down
+     */
+    public void martialStatus (){
+        playwright.clickOn(martialStatus);
+    }
+
+    /**
+     * user choose marital status is kawin
+     */
+    public void selectMaritalStatus(String martial) throws InterruptedException{
+        Locator martialChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(martial));
+        playwright.clickOn(martialChoose);
     }
 }
