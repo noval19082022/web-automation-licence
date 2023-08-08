@@ -9,8 +9,6 @@ import utilities.PlaywrightHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class TenantEditProfilePO {
     Page page;
     PlaywrightHelpers playwright;

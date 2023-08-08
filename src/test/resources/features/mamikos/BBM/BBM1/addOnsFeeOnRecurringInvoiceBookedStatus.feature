@@ -69,7 +69,7 @@ Feature: Add Ons Fee On Recurring Invoice With Booked Status
     Scenario: add ons fee on recurring from add ons that added on first invoice with booked status
       When tenant navigate to tagihan kost saya
       And tenant go to invoice page
-      And tenant set active page to 1
+      And tenant set active page to 2
       Then tenant can see additional price "adiautomation" with price "Rp100.000"
       When tenant make bill payments using "OVO"
       Then tenant can see additional price "adiautomation" with price "Rp100.000"

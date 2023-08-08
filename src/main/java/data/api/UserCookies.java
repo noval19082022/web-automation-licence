@@ -1,6 +1,7 @@
 package data.api;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 public class UserCookies {
     @Getter
