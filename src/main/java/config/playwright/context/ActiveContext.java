@@ -1,6 +1,5 @@
 package config.playwright.context;
 
-import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
