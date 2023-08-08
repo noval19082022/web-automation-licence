@@ -27,7 +27,7 @@ Feature: Add Ons - Kost With DP
     And tenant search kost then go to kost details:
       | kost name stag                   | kost name prod                  |
       | Kost Adi Auto With DP Add Ons    | Kost Adi Auto With DP Add Ons   |
-    And tenant booking kost for "today" and input rent duration equals to 4
+    And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -46,7 +46,8 @@ Feature: Add Ons - Kost With DP
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant set active page to 0
     Then tenant navigate to riwayat and draf booking
 
   Scenario: Admin Master Add, Add Ons Kost With DP To Settlement Invoice

@@ -34,9 +34,10 @@ public class TenantEditProfileSteps {
         tenantEditProfile.clickONSaveButton();
     }
 
-    @Then("user can see {string} on profile page")
-    public void user_can_see_x_on_profile_page(String textAlert) {
-        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert),textAlert,"not appears alert on profile");
+    @Then("user can see {string} on profile page {string}")
+    public void user_can_see_x_on_profile_page(String textAlert, String indexText) {
+        int index = Integer.parseInt(indexText);
+        Assert.assertEquals(tenantEditProfile.getAlertOnProfile(textAlert, index),textAlert,"not appears alert on profile");
     }
 
     @Then("user see button simpan edit profile disable")
@@ -167,5 +168,60 @@ public class TenantEditProfileSteps {
     @Then("user verify button simpan is active")
     public void userVerifyButtonSimpanIsActive() {
         tenantEditProfile.isButtonSimpanNotDisabled();
+    }
+
+    @And("user choose dropdown {string}")
+    public void userChooseDropdown(String jenisKlamin)throws InterruptedException {
+        tenantEditProfile.chooseJenisKelamin(jenisKlamin);
+    }
+
+    @And("user click dropdown pilih instansi {string}")
+    public void userClickDropdownPilihInstansi(String instansi)throws InterruptedException {
+        tenantEditProfile.chooseInstansi(instansi);
+    }
+
+    @And("user fills instansi {string}")
+    public void userFillsInstansi(String instansi) {
+        tenantEditProfile.userFillInstansi(instansi);
+    }
+
+    @And("user click dropdown prefession")
+    public void userClickDropdownPrefession() {
+        tenantEditProfile.chooseDropdownProfesi();
+    }
+
+    @Then("Dropdown will displayed list office name")
+    public void dropdownWillDisplayedListOfficeName() {
+        Assert.assertTrue(tenantEditProfile.dropdownWillDisplayed(), "element is displayed");
+    }
+
+    @Then("user verify message {string} in search dropdown")
+    public void userVerifyMessageInSearchDropdown(String noData) {
+        Assert.assertEquals(tenantEditProfile.getDropdownResult(noData), noData, "Dropdown message is not equal to " + noData);
+    }
+
+    @And("user fills {string} in pilih universitas")
+    public void userFillsInPilihUniversitas(String universitas)throws InterruptedException {
+        tenantEditProfile.userChooseNoUniversitas(universitas);
+    }
+
+    @Then("user verify dropdown results list contains {string}")
+    public void userVerifyDropdownResultsListContains(String result) {
+        Assert.assertTrue(tenantEditProfile.isDropdownResultsListContains(result), "Dropdown results not containing " + result);
+    }
+
+    @And("user fill {string} on custom university input")
+    public void userFillOnCustomUniversityInput(String text) {
+        tenantEditProfile.userFillNamaKampus(text);
+    }
+
+    @And("user click on marital status dropdown")
+    public void userClickOnMaritalStatusDropdown() {
+        tenantEditProfile.martialStatus();
+    }
+
+    @And("user select martial status {string}")
+    public void userSelectMartialStatus(String martial)throws InterruptedException {
+        tenantEditProfile.selectMaritalStatus(martial);
     }
 }

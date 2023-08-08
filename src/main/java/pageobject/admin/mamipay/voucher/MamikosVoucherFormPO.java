@@ -65,6 +65,9 @@ public class MamikosVoucherFormPO {
     Locator dropdownContractPeriod;
     Locator inputTartedEmail;
     Locator endDateInputSingleVoc;
+    Locator listCity;
+    Locator applicableForCityEditText;
+    Locator notApplicableForCityEditText;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -114,6 +117,9 @@ public class MamikosVoucherFormPO {
         singleDailyQuotaInput = page.locator("input[name=\"limit_daily\"]");
         submitSingleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Single Voucher"));
         totalEachQuotaInput = page.locator("input[name=\"limit\"]");
+        listCity = page.locator("//span[@class='select2-selection__choice__remove']");
+        applicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("Search City...");
+        notApplicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Not Applicable For")).getByPlaceholder("Search City...");
     }
 
     /**
@@ -576,4 +582,37 @@ public class MamikosVoucherFormPO {
     public void chooseContractPeriode(String contractPeriod) {
         playwright.selectDropdownByValue(dropdownContractPeriod,contractPeriod);
     }
+
+    /**
+     * Select city for voucher is applicable
+     * @throws InterruptedException
+     */
+    public void selectVoucherAplicableOnCity(String city) throws InterruptedException {
+        List<Locator> listCities = playwright.getLocators(listCity);
+        int count = listCities.size();
+        if (count>0){
+            for (int i=0 ; i<count; i++){
+                playwright.clickOn(page.locator("(//span[@class='select2-selection__choice__remove'])[" + i+1 + "]"));
+            }
+        }
+        playwright.forceFill(applicableForCityEditText, city);
+        playwright.clickOn(page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(city)));
+    }
+
+    /**
+     * Select city for voucher is not applicable
+     * @throws InterruptedException
+     */
+    public void selectVoucherNotAplicableOnCity(String city) throws InterruptedException {
+        List<Locator> listCities = playwright.getLocators(listCity);
+        int count = listCities.size();
+        if (count>0){
+            for (int i=0 ; i<count; i++){
+                playwright.clickOn(page.locator("(//span[@class='select2-selection__choice__remove'])[" + i+1 + "]"));
+            }
+        }
+        playwright.forceFill(notApplicableForCityEditText, city);
+        playwright.clickOn(page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(city)));
+    }
+
 }

@@ -7,7 +7,7 @@ Feature: Billing Reminder - SMS Template
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      | automationpman02@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user open " SMS Template" submenu of Billing Reminder Template
 
 #  Scenario: user set the initial state to display SMS template Day -5

@@ -8,6 +8,6 @@ Feature: Check field required on update profile form
       | phone stag    |  phone prod    | password  |
       | 089220221221  |  089220221221  | qwerty123 |
     And tenant navigates to edit profile
-    Then user can see "Jenis kelamin tidak boleh kosong" on profile page
-    When user can see "Tanggal lahir belum diisi." on profile page
+    Then user can see "Wajib diisi" on profile page "0"
+    When user can see "Wajib diisi" on profile page "1"
     Then user see button simpan edit profile disable
