@@ -770,3 +770,13 @@ Feature: Payment BackOffice Staging
     And admin bangkerupux create admin fee discount with name discount "create invoice discount hapus langsung" amount "999"
     And admin bangkerupux want to delete admin fee discount that has name "create invoice discount hapus langsung"
     Then admin verify see text "Success."
+
+  @TEST_DOM-680 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter valid owner number premium
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "08119787884"
+    Then admin verify see text "Desta Owner"
