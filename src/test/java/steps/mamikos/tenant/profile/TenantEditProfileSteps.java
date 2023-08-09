@@ -185,8 +185,8 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userFillInstansi(instansi);
     }
 
-    @And("user click dropdown prefession")
-    public void userClickDropdownPrefession() {
+    @And("user click dropdown profession")
+    public void userClickDropdownProfession() {
         tenantEditProfile.chooseDropdownProfesi();
     }
 
@@ -220,8 +220,18 @@ public class TenantEditProfileSteps {
         tenantEditProfile.martialStatus();
     }
 
-    @And("user select martial status {string}")
-    public void userSelectMartialStatus(String martial)throws InterruptedException {
+    @And("user select marital status {string}")
+    public void userSelectMaritalStatus(String martial)throws InterruptedException {
         tenantEditProfile.selectMaritalStatus(martial);
+    }
+
+    @Then("user see marital status")
+    public void userSeeMaritalStatus() {
+        Assert.assertTrue(tenantEditProfile.dropdownListStatus(), "element is displayed");
+    }
+
+    @Then("user see validation message {string}")
+    public void userSeeValidationMessage(String number) {
+        Assert.assertTrue(tenantEditProfile.verifyErrorMessagePhoneNumber(number), "element is displayed");
     }
 }
