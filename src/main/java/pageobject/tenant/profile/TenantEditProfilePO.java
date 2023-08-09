@@ -64,8 +64,8 @@ public class TenantEditProfilePO {
         professionKaryawan = page.locator("label").filter(new Locator.FilterOptions().setHasText("Karyawan"));
         universityOrProfessionDropdown = page.locator("//div[@class='bg-c-select']");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        popUpHeadTitle = page.locator("h2[id]");
-        popUpDescriptionContent = page.locator("div[id='swal2-content']");
+        popUpHeadTitle = page.locator("//h3[@class='bg-c-modal__body-title']");
+        popUpDescriptionContent = page.locator("//p[@class='bg-c-modal__body-description']");
         okButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("OK"));
         simpanButton = page.locator(".bg-u-ml-md");
         searchTextBox = page.getByPlaceholder("Search").first();
@@ -431,12 +431,14 @@ public class TenantEditProfilePO {
     }
 
     /**
-     * choose instansi
+     * choose instansi if exist
      */
     public void chooseInstansi(String chooseInstansi)throws InterruptedException {
         playwright.clickOn(instansi);
         playwright.forceFill(searchInstansi, chooseInstansi);
-        playwright.clickOn(chooseInstansiSearch);
+        if (playwright.waitTillLocatorIsVisible(chooseInstansiSearch)) {
+            playwright.clickOn(chooseInstansiSearch);
+        }
     }
 
     /**

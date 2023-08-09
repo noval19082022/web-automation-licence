@@ -78,11 +78,9 @@ public class TenantEditProfileSteps {
         tenantEditProfile.clickONSaveButton();
     }
 
-    @And("tenant choose profession as lainnya at {string}")
-    public void tenantChooseProfessionAsLainnyaAt(String jobs) {
-        tenantEditProfile.clickOnRadioLainnya();
+    @And("tenant fill job description with {string}")
+    public void tenantFillJobDescriptionWith(String jobs) {
         tenantEditProfile.setLainnyaJobs(jobs);
-        tenantEditProfile.clickONSaveButton();
     }
 
     @And("user choose profession {string} on edit profile page")
