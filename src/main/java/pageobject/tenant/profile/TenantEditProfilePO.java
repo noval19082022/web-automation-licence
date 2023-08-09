@@ -54,6 +54,7 @@ public class TenantEditProfilePO {
     Locator chooseInstansiSearch;
     Locator errorMessageFullName;
     Locator fillNamaKampus;
+    Locator listStatus;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -64,8 +65,8 @@ public class TenantEditProfilePO {
         professionKaryawan = page.locator("label").filter(new Locator.FilterOptions().setHasText("Karyawan"));
         universityOrProfessionDropdown = page.locator("//div[@class='bg-c-select']");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        popUpHeadTitle = page.locator("h2[id]");
-        popUpDescriptionContent = page.locator("div[id='swal2-content']");
+        popUpHeadTitle = page.locator("//h3[@class='bg-c-modal__body-title']");
+        popUpDescriptionContent = page.locator("//p[@class='bg-c-modal__body-description']");
         okButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("OK"));
         simpanButton = page.locator(".bg-u-ml-md");
         searchTextBox = page.getByPlaceholder("Search").first();
@@ -99,16 +100,9 @@ public class TenantEditProfilePO {
         chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
         errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
+        listStatus =  page.getByTestId("userEditProfile").getByRole(AriaRole.LIST);
     }
 
-    /**
-     * Get selected profession
-     *
-     * @return String data type
-     */
-    public String getSelectedProfessionText() {
-        return playwright.getText(selectedProfession);
-    }
 
     /**
      * click on radio mahasiswa
@@ -161,24 +155,6 @@ public class TenantEditProfilePO {
      */
     public String getPopUpDescriptionContent() {
         return playwright.getText(popUpDescriptionContent);
-    }
-
-    /**
-     * Click on radio karyawan
-     */
-    public void clickOnRadioKaryawan() {
-        playwright.clickOn(professionKaryawan);
-    }
-
-    /**
-     * Select company for karyawan
-     *
-     * @param companyName String type company name
-     */
-    public void selectCompany(String companyName) {
-        Locator company = page.locator("//a[contains(.,'" + companyName + "')]");
-        playwright.clickOn(universityOrProfessionDropdown);
-        playwright.clickOn(company);
     }
 
     /**
@@ -245,21 +221,6 @@ public class TenantEditProfilePO {
     public void clickOnUbahProfessionTo(String profession) {
         Locator professionRadioEditProfil = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
         playwright.clickOn(professionRadioEditProfil);
-    }
-
-    /**
-     * click on Profession button on edit profile page
-     */
-    public void clickOnUbahProfessionToOnEditProfile(String profession) {
-        Locator ubahProfession = page.locator("label").filter(new Locator.FilterOptions().setHasText(profession));
-        playwright.clickOn(ubahProfession);
-    }
-
-    /**
-     * Click on radio lainnya
-     */
-    public void clickOnRadioLainnya() {
-        playwright.clickOn(professionLainnya);
     }
 
     /**
@@ -431,12 +392,14 @@ public class TenantEditProfilePO {
     }
 
     /**
-     * choose instansi
+     * choose instansi if exist
      */
     public void chooseInstansi(String chooseInstansi)throws InterruptedException {
         playwright.clickOn(instansi);
         playwright.forceFill(searchInstansi, chooseInstansi);
-        playwright.clickOn(chooseInstansiSearch);
+        if (playwright.waitTillLocatorIsVisible(chooseInstansiSearch)) {
+            playwright.clickOn(chooseInstansiSearch);
+        }
     }
 
     /**
@@ -513,5 +476,20 @@ public class TenantEditProfilePO {
     public void selectMaritalStatus(String martial) throws InterruptedException{
         Locator martialChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(martial));
         playwright.clickOn(martialChoose);
+    }
+
+    /**
+     * verfiy dropdown list status
+     */
+    public boolean dropdownListStatus() {
+        return playwright.waitTillLocatorIsVisible(listStatus);
+    }
+
+    /**
+     * verify error message phone number
+     */
+    public boolean verifyErrorMessagePhoneNumber(String number){
+        Locator phoneNumber = page.getByText(number);
+        return playwright.waitTillLocatorIsVisible(phoneNumber);
     }
 }
