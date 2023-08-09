@@ -54,6 +54,7 @@ public class MamikosVoucherFormPO {
     Locator submitSingleButton;
     Locator voucherStatusEl;
     Locator submitEditMassButton;
+    Locator submitEditSingleButton;
     Locator confirmationEditButton;
     Locator uploadCampignImage;
     Locator imageCampaignUploaded;
@@ -68,6 +69,7 @@ public class MamikosVoucherFormPO {
     Locator listCity;
     Locator applicableForCityEditText;
     Locator notApplicableForCityEditText;
+    Locator voucherList;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -120,6 +122,7 @@ public class MamikosVoucherFormPO {
         listCity = page.locator("//span[@class='select2-selection__choice__remove']");
         applicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("Search City...");
         notApplicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Not Applicable For")).getByPlaceholder("Search City...");
+        submitEditSingleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Single Voucher"));
     }
 
     /**
@@ -449,6 +452,15 @@ public class MamikosVoucherFormPO {
     }
 
     /**
+     * Click on Submit Single button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnEditSingleVocButton() {
+        playwright.clickOn(submitEditSingleButton);
+        playwright.clickOn(confirmationEditButton);
+    }
+
+    /**
      * Input voucher start date based on current date, tommorrow, or desired date number
      * @param startDate input with tomorrow, today, or dateNumber
      * @throws ParseException
@@ -470,7 +482,6 @@ public class MamikosVoucherFormPO {
 
         startDateInput.click();
         page.click("xpath=" + dateElement);
-//        endDateInput.click();
         if (endDateInput.isVisible()){
             endDateInput.click();
         }

@@ -17,7 +17,7 @@ public class AddOnsListSteps {
 
     @And("admin bangkerupux input name {string}, description {string}, price {string}, notes {string} and create it")
     public void adminBangkerupuxInputNameDescriptionPriceNotesAndCreateIt(String name, String description, String price, String notes) {
-        addOnsListPO.inputCreateField(name, description, price, notes);
+        addOnsListPO.inputCreateOrEditField(name, description, price, notes);
         addOnsListPO.createAddOnsAfterInputField();
     }
 
@@ -29,5 +29,26 @@ public class AddOnsListSteps {
     @And("admin bangkerupux delete add ons that has name {string}")
     public void adminBangkerupuxDeleteAddOnsThatHasName(String addOnsName) {
         addOnsListPO.deleteAddOns(addOnsName);
+    }
+
+    @And("admin bangkerupux edit add ons that has name {string}")
+    public void adminBangkerupuxEditAddOnsThatHasName(String addOnsName) {
+        addOnsListPO.editAddOns(addOnsName);
+    }
+
+    @And("admin bangkerupux input name {string}, description {string}, price {string}, notes {string} and update it")
+    public void adminBangkerupuxInputNameDescriptionPriceNotesAndUpdateIt(String name, String description, String price, String notes) {
+        addOnsListPO.inputCreateOrEditField(name, description, price, notes);
+        addOnsListPO.updateAddOnsAfterInputField();
+    }
+
+    @And("admin bangkerupux cancel create/edit add ons")
+    public void adminBangkerupuxCancelCreateOrEditAddOns() {
+        addOnsListPO.cancelCreateOrEditAddOns();
+    }
+
+    @And("admin bangkerupux cancel edit add ons pop up")
+    public void adminBangkerupuxCancelEditAddOnsPopUp() {
+        addOnsListPO.cancelPopUp();
     }
 }
