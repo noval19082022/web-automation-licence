@@ -6,10 +6,11 @@ import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
+
 public class PromoOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
-    public String judulPromoOwner;
+    public String judulPromoOwner = "";
 
     Locator lihatSelengkapnyaButton;
     Locator aturPromo;
@@ -52,6 +53,12 @@ public class PromoOwnerPO {
         playwright.clickOn(lihatSelengkapnyaButton);
     }
 
+    /**
+     * Click atur promo button
+     * redefine variable page because when click atur promo button will be open new tab
+     * @return active page
+     *
+     */
     public Page clickOnAturPromo(){
         page = page.waitForPopup(() -> {
             playwright.clickOn(aturPromo);
@@ -60,39 +67,72 @@ public class PromoOwnerPO {
         return ActiveContext.getActivePage();
     }
 
+    /**
+     * Get Text promo status
+     * @param promoStatus
+     * @return status (Belum Ada, Menunggu Verifikasi, Aktif)
+     *
+     */
     public String getTextStatus(String promoStatus) {
         Locator status = page.getByText(promoStatus);
         return playwright.getText(status);
     }
 
+    /**
+     * Verify is Button Promo
+     * @param buttonText
+     * @return promoButton
+     *
+     */
     public boolean isButtonPromo(String buttonText) {
         Locator promoButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(buttonText));
         return playwright.waitTillLocatorIsVisible(promoButton,1000.0);
     }
 
+    /**
+     * Click buat promo button
+     * All status promo, the button still Buat Promo
+     *
+     */
     public void clickOnBuatPromo() {
         Locator buatPromoButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Buat Promo"));
         playwright.clickOn(buatPromoButton);
     }
 
+    /**
+     * Input promo owner (judul, deskripsi, start date, end date promo)
+     * @param titleText
+     */
     public void inputPromoOwner(String titleText) {
         judulPromoField = page.locator("(//*[@class='input'])[1]");
         detailPromoField = page.locator("//*[@class='textarea']");
-        playwright.clickOn(judulPromoField);
+
         setJudulPromo(titleText);
-        judulPromoField.fill(titleText);
-        playwright.clickOn(detailPromoField);
-        detailPromoField.fill("Deskripsi promo create owner");
+        playwright.forceFill(judulPromoField, titleText);
+        playwright.forceFill(detailPromoField, "Deskripsi promo create owner");
     }
 
+    /**
+     * Set judul promo
+     * @param judulText
+     */
     private void setJudulPromo(String judulText) {
         judulPromoOwner = judulText;
     }
 
+    /**
+     * Get judul promo
+     * @return judul promo
+     */
     public String getJudulPromoOwner() {
         return judulPromoOwner;
     }
 
+    /**
+     * Select start date promo
+     * @param periodePromo
+     *
+     */
     public void selectStartDatePromo(String periodePromo) {
         startDatePicker = page.locator("//div[contains(@class, 'period1')]//input[@class='input']");
         playwright.pageScrollUntilElementIsVisible(startDatePicker);
@@ -112,6 +152,11 @@ public class PromoOwnerPO {
         playwright.clickOn(startDatePromo);
     }
 
+    /**
+     * Select end date promo
+     * @param periodePromo
+     *
+     */
     public void selectEndDatePromo(String periodePromo) {
         endDatePicker = page.locator("//div[contains(@class, 'period2')]//input[@class='input']");
         playwright.clickOn(endDatePicker);
@@ -129,19 +174,38 @@ public class PromoOwnerPO {
         playwright.clickOn(endDatePromo);
     }
 
+    /**
+     * Click button Pasang promo
+     * Appear when status promo is Belum Ada
+     *
+     */
     public void clickOnPasangPromo() {
         pasangPromoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pasang Promo"));
         playwright.clickOn(pasangPromoButton);
     }
 
+    /**
+     * Get judul promo anda
+     * @return
+     */
     public String getPromoAnda() {
         return judulPromoOwner;
     }
 
+    /**
+     * Verify edit promo displayed
+     * @return boolean (true, false)
+     *
+     */
     public boolean isEditPromoButton() {
         return playwright.isButtonWithTextDisplayed("Edit Promo");
     }
 
+    /**
+     * Edit judul promo owner
+     * @param titleText
+     *
+     */
     public void editPromoOwner(String titleText) {
         judulPromoField = page.locator("(//*[@class='input'])[1]");
         playwright.clickOn(judulPromoField);
@@ -151,49 +215,79 @@ public class PromoOwnerPO {
         playwright.clickOnText("Edit Promo");
     }
 
+    /**
+     * Get warning message
+     * @param warningText
+     * @return
+     */
     public String getTextWarningMessage(String warningText) {
         warningMessagePromo = page.locator(".premium-promo-field__date-error");
         return playwright.getText(warningMessagePromo);
     }
 
-    public boolean isWarningPeriodePromoDisplayed(String warningText) {
-        System.out.println(playwright.isTextDisplayed(warningText));
-        return playwright.isTextDisplayed(warningText);
-    }
-
+    /**
+     * Click Seacrh promo box on admin
+     *
+     */
     public void clickOnSeachPromo() {
-        playwright.clickOn(searchPromoBox);
-        searchPromoBox.fill("Update promo owner AT");
+        playwright.forceFill(searchPromoBox, "Update promo owner AT");
         playwright.clickOn(searchButton);
     }
 
+    /**
+     * Verify status promo is Unverified on admin
+     * @return boolean verificationAdminStatus
+     */
     public boolean isUnverifiedStatus() {
         return playwright.waitTillLocatorIsVisible(verificationAdminStatus);
     }
 
+    /**
+     * Click verification promo button
+     *
+     *
+     */
     public void clickOnVerificationPromo() {
         playwright.clickOn(verifiedPromoButton);
     }
 
+    /**
+     * Get alert success update message on admin
+     * @return alertSuccessAdmin message
+     *
+     */
     public String getAlertSuccessUpdate() {
         playwright.waitTillLocatorIsVisible(alertSuccessAdmin);
         return playwright.getText(alertSuccessAdmin).replaceAll("×\\s+", "");
     }
 
+    /**
+     * Click unverification promo button
+     *
+     *
+     */
     public void clickOnUnverificationPromo() {
         playwright.clickOn(unverificationPromoButton);
     }
 
+    /**
+     * Click edit promo button
+     *
+     *
+     */
     public void clickOnEditPromo() {
         editPromoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Promo"));
 
         playwright.clickOn(editPromoButton);
     }
 
+    /**
+     * Click delete promo from admin
+     * click OK on dialog confirmation pop up
+     *
+     */
     public void clickOnDeletePromo() {
         playwright.clickOn(deletePromoButton);
         playwright.acceptDialog(deletePromoButton);
     }
-
-
 }
