@@ -101,14 +101,6 @@ public class TenantEditProfilePO {
         fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
     }
 
-    /**
-     * Get selected profession
-     *
-     * @return String data type
-     */
-    public String getSelectedProfessionText() {
-        return playwright.getText(selectedProfession);
-    }
 
     /**
      * click on radio mahasiswa
@@ -161,24 +153,6 @@ public class TenantEditProfilePO {
      */
     public String getPopUpDescriptionContent() {
         return playwright.getText(popUpDescriptionContent);
-    }
-
-    /**
-     * Click on radio karyawan
-     */
-    public void clickOnRadioKaryawan() {
-        playwright.clickOn(professionKaryawan);
-    }
-
-    /**
-     * Select company for karyawan
-     *
-     * @param companyName String type company name
-     */
-    public void selectCompany(String companyName) {
-        Locator company = page.locator("//a[contains(.,'" + companyName + "')]");
-        playwright.clickOn(universityOrProfessionDropdown);
-        playwright.clickOn(company);
     }
 
     /**
@@ -245,21 +219,6 @@ public class TenantEditProfilePO {
     public void clickOnUbahProfessionTo(String profession) {
         Locator professionRadioEditProfil = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(profession));
         playwright.clickOn(professionRadioEditProfil);
-    }
-
-    /**
-     * click on Profession button on edit profile page
-     */
-    public void clickOnUbahProfessionToOnEditProfile(String profession) {
-        Locator ubahProfession = page.locator("label").filter(new Locator.FilterOptions().setHasText(profession));
-        playwright.clickOn(ubahProfession);
-    }
-
-    /**
-     * Click on radio lainnya
-     */
-    public void clickOnRadioLainnya() {
-        playwright.clickOn(professionLainnya);
     }
 
     /**
