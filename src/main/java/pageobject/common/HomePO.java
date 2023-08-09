@@ -17,6 +17,7 @@ public class HomePO {
     private Locator cariButton;
     private Locator mamikosLogo;
     private Locator userPhoto;
+    private Locator noUserPhoto;
     private Locator promoNgebutHeading;
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
@@ -77,7 +78,8 @@ public class HomePO {
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
-        userPhoto = page.getByAltText("User Photo");
+        userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        noUserPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
@@ -156,7 +158,7 @@ public class HomePO {
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(mamikosLogo, 30000.0);
-        playwright.waitFor(userPhoto, 10000.0);
+        playwright.assertVisible(userPhoto.or(noUserPhoto));
     }
 
     /**

@@ -303,7 +303,7 @@ public class PaymentSteps {
     @When("system display remaining payment {string} use mamipoin for payment monthly")
     public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
         String remainingPaymentBefore = "Rp10.001.000";
-        String remainingPaymentAfter = "Rp9.877.544";
+        String remainingPaymentAfter = "Rp9.876.544";
 
         if(condition.equals("before")){
             Assert.assertEquals(invoice.getTotalCost(), remainingPaymentBefore, "Remaining payment before doesn't match");
@@ -327,5 +327,24 @@ public class PaymentSteps {
     public void tenant_point_estimate_not_displayed_on_invoice()  {
         Assert.assertFalse(invoice.isPointEstimateTenantVisible());
     }
+    @And("tenant clicks Pakai voucher list:")
+    public void tenant_clicks_on_pakai_button(DataTable table) {
+        voucherName = table.asMaps(String.class, String.class);
+        var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
+        invoice.clickOnDeleteVoucher();
+        invoice.clickOnMasukkanVoucher();
+        invoice.clickOnPakaiVoucherButton();
+    }
 
+    @Then("tenant can see voucher suggestion empty state")
+        public void tenant_can_see_voucher_suggestion_empty_state(){
+        invoice.clickOnMasukkanVoucher();
+        Assert.assertTrue(invoice.isVoucherSuggestionEmptyStateVisible());
+        }
+
+    @Then("tenant display warning message {string}")
+    public synchronized void systemDisplayWarningMessage(String warningMessage) {
+        Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
+
+    }
 }

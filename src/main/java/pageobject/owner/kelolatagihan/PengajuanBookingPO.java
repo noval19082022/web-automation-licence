@@ -66,9 +66,9 @@ public class PengajuanBookingPO {
         terimaButtonWithName = page.getByTestId("bookingRequestList-list")
                 .locator("div").filter(new Locator.FilterOptions()
                         .setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
-        terimaButtonWithName.waitFor();
+        playwright.waitTillLocatorIsVisible(terimaButtonWithName);
         playwright.clickOn(terimaButtonWithName);
-        yaTerimaButton.click();
+        playwright.clickOn(yaTerimaButton);
         return new BillAndBookingManagementPO(page);
     }
 

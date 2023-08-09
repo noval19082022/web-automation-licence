@@ -2,7 +2,6 @@ package pageobject.owner.kelolatagihan;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
@@ -83,9 +82,9 @@ public class TenantBillManagementPO {
      */
     public void selectKosBillPageFilter(String kostName) {
         Locator kosNameFilter = page.getByText(kostName);
-        playwright.waitFor(filterKos, 30000.0);
         List<String> filterKostInnerTexts = filterKos.allInnerTexts();
         if (!filterKostInnerTexts.get(0).contains(kostName)) {
+            playwright.waitFor(filterKos, 30000.0);
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);
         }

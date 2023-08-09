@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import java.util.Locale;
-
 public class SurveyTrackerPO {
     private Page page;
     private PlaywrightHelpers playwright;

@@ -6,9 +6,9 @@ Feature: MamiPoin Tenant Informasi Poin Page
   Scenario: MamiPoin Tenant Informasi Poin Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0890867321215 | 0890867321215 | mamikosqa123 |
-    And tenant navigate to mamipoin expired page
+      | phone stag | phone prod    | password  |
+      | 0892202108 | 0890867321215 | qwerty123 |
+    And tenant navigate to mamipoint expired page
     Then user verify title in the informasi poin page is displayed
     And user verify subtitle in the informasi poin page is displayed
     And user verify table title tanggal kedaluwarsa is displayed
@@ -17,7 +17,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
   @TENG-187
   Scenario: Description on Tanggal Kedaluwarsa
     Then user verify expired point on information point page
-      | 30 Jun 2047 |
+      | 30 Nov 2023 |
 
   @TEST_TENG-200 @TEST_BBM-413 @TEST_TENG-201 @TEST_BBM-405
   Scenario: MamiPoin Tenant Informasi Poin Page When the User Poin is Empty
@@ -25,7 +25,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321220 | 0890867321220 | mamikosqa123 |
-    And tenant navigate to mamipoin expired page
+    And tenant navigate to mamipoint expired page
     Then user verify title in the informasi poin page is displayed
     And user verify subtitle in the informasi poin page is displayed
     And user verify subtitle tidak ada poin yang tersedia is displayed

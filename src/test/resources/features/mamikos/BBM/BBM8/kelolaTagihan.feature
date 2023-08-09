@@ -1,4 +1,4 @@
-@BBM8
+@BBM8 @kelolaTagihan
 Feature: Check Detail Tagihan
 
   @TEST_BBM-57

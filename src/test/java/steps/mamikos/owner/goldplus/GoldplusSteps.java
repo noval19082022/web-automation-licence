@@ -1,4 +1,4 @@
-package steps.mamikos.owner;
+package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
@@ -225,9 +225,9 @@ public class GoldplusSteps {
         panduanGP.clickOnNaikkanIklanAndaButton();
     }
 
-    @When("owner click on next button to go to slide number {int}")
-    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipper(Integer swiperNumber) {
-        if (swiperNumber <= 6) {
+    @When("owner click on next button to go to slide number {int} with total number slides are {int}")
+    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipperWithTotalNumberSlidesAre(Integer swiperNumber, Integer totalNumberSlide) {
+        if (swiperNumber <= totalNumberSlide - 1) {
             panduanGP.clickOnNextButton();
         }
     }
@@ -378,5 +378,40 @@ public class GoldplusSteps {
     public void owner_close_pop_up_detail_manfaat() {
         playwright.hardWait(1000.0);
         goldplus.clickOnCLosePopUpManfaat();
+    }
+
+    //------ Dashboard GP ------//
+    @When("owner wants to accses dashboard GP")
+    public void owner_wants_to_accses_dashboard_gp() {
+        owner.clickOnGpWidgetButton();
+    }
+
+    @When("user see status goldplus is {string}")
+    public void user_see_status_goldplus_is(String statusGP) {
+        Assert.assertEquals(goldplus.getStatusPaketGoldPlus(), statusGP, "status paket goldplus is not match");
+    }
+
+    @When("owner click back to dashboard GP")
+    public void owner_click_back_to_dashboard_gp() {
+        goldplus.clickOnIconBackFilter();
+    }
+
+    @When("user scroll to section pembayaran tagihan goldplus")
+    public void user_scroll_to_section_pembayaran_tagihan_goldplus() {
+       goldplus.scrollToTagihanSection();
+    }
+
+    @Then("user see list detail tagihan goldplus")
+    public void user_see_list_detail_tagihan_goldplus() {
+        goldplus.isListDetailTagihanIsDisplayed();
+    }
+    @When("user click tab selesai")
+    public void user_click_tab_selesai() {
+        goldplus.clickTabSelesai();
+    }
+
+    @When("owner click lihat selengkapnya at section tagihan")
+    public void owner_click_lihat_selengkapnya_at_section_tagihan() {
+        goldplus.lihatSelngkapnyaSectionDetailTagihan();
     }
 }
