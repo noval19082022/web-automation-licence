@@ -220,7 +220,7 @@ Feature: Edit Profile
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
-    And user click dropdown prefession
+    And user click dropdown profession
     Then Dropdown will displayed list office name
 
   @TEST_DOM-340 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @web-covered
