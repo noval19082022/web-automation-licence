@@ -26,7 +26,7 @@ Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
     And tenant search kost then go to kost details:
       | kost name stag           | kost name prod           |
       | Kost Adi Auto Add Ons    | Kost Adi Auto Add Ons    |
-    And tenant booking kost for "today" and input rent duration equals to 4
+    And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -60,7 +60,8 @@ Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
@@ -68,7 +69,7 @@ Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
     Scenario: Add ons Fee On Auto Extend from add ons that added on first invoice with booked status
       When tenant navigate to tagihan kost saya
       And tenant go to invoice page
-      And tenant set active page to 1
+      And tenant set active page to 2
       Then tenant can see additional price "adiautomation" with price "Rp100.000"
 
 
