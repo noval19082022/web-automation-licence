@@ -263,4 +263,9 @@ public class NavigatesSteps {
     public void tenantNavigateToMamipoinHistoryPage() {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigates to Promo Owner")
+    public void adminNavigatesToPromoOwner() {
+        playwright.navigateTo(Mamikos.URL + "/admin/promo", 30000.0, LoadState.LOAD);
+    }
 }
