@@ -4,7 +4,7 @@ Feature: Admin - Single Voucher
 
   @BBM-838
   @continue
-  Scenario: Create Mass Voucher Prefix Without Fill Email Field
+  Scenario: Create Targeted Voucher Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
