@@ -144,8 +144,8 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userSelectCity(kota);
     }
 
-    @And("user click on marital status dropdown {string}")
-    public void userClickOnMaritalStatusDropdown(String status) throws InterruptedException {
+    @And("user click on martial status dropdown {string}")
+    public void userClickOnMartialStatusDropdown(String status) throws InterruptedException {
         tenantEditProfile.clickOnMaritalStatusDropdown(status);
     }
 
@@ -185,8 +185,8 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userFillInstansi(instansi);
     }
 
-    @And("user click dropdown prefession")
-    public void userClickDropdownPrefession() {
+    @And("user click dropdown profession")
+    public void userClickDropdownProfession() {
         tenantEditProfile.chooseDropdownProfesi();
     }
 
@@ -215,8 +215,8 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userFillNamaKampus(text);
     }
 
-    @And("user click on marital status dropdown")
-    public void userClickOnMaritalStatusDropdown() {
+    @And("user click on martial status dropdown")
+    public void userClickOnMartialStatusDropdown() {
         tenantEditProfile.martialStatus();
     }
 

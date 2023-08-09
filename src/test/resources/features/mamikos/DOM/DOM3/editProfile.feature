@@ -103,7 +103,7 @@ Feature: Edit Profile
     And user select city "kabupaten aceh barat"
     And user choose profession "mahasiswa"
     And user fills "Universitas Indonesia" in search dropdown pillih universitas
-    And user click on marital status dropdown "kawin"
+    And user click on martial status dropdown "kawin"
     And user click on last education tenant
     And user select "S1"
     And user input phone number darurat more than "0812123123" character
@@ -357,30 +357,30 @@ Feature: Edit Profile
     Then user click simpan button
 
   @TEST_DOM-307 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @web-covered
-  Scenario Outline: [Tenant][Status - Edit profile]Change marital status
+  Scenario Outline: [Tenant][Status - Edit profile]Change martial status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 089220221220  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
-    And user click on marital status dropdown
-    And user select martial status "<marital status>"
+    And user click on martial status dropdown
+    And user select martial status "<martial status>"
     Then user click simpan button
     Examples:
-      | marital status      |
+      | martial status      |
       | Belum Kawin         |
       | Kawin Memiliki Anak |
 
   @TEST_DOM-306 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @web-covered
-  Scenario: [Tenant][Status - Edit Profile]Not choose marital status
+  Scenario: [Tenant][Status - Edit Profile]Not choose martial status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 089513193288  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
-    And user click on marital status dropdown
+    And user click on martial status dropdown
     Then user see martial status
 
   @TEST_DOM-305 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @web-covered
@@ -426,5 +426,5 @@ Feature: Edit Profile
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
-    And user click dropdown prefession
+    And user click dropdown profession
     Then Dropdown will displayed list office name
