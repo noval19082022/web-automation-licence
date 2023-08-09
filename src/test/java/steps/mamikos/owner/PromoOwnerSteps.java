@@ -45,7 +45,7 @@ public class PromoOwnerSteps {
 
     @Then("verify judul promo {string}")
     public void verifyJudulPromo(String titleText) {
-        Assert.assertEquals(promoOwner.getPromoAnda(), promoOwner.getJudulPromoOwner(), "Judul promo Anda doesn't match!");
+        Assert.assertEquals(promoOwner.getJudulPromoOwner(), titleText, "Judul promo Anda doesn't match!");
     }
 
     @When("owner edit promo kost owner with title {string}")

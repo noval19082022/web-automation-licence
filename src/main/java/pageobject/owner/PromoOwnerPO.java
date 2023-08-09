@@ -4,13 +4,15 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
+import lombok.Getter;
+import lombok.Setter;
 import utilities.PlaywrightHelpers;
 
 
 public class PromoOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
-    public String judulPromoOwner = "";
+    @Setter @Getter private String judulPromoOwner;
 
     Locator lihatSelengkapnyaButton;
     Locator aturPromo;
@@ -107,25 +109,9 @@ public class PromoOwnerPO {
         judulPromoField = page.locator("(//*[@class='input'])[1]");
         detailPromoField = page.locator("//*[@class='textarea']");
 
-        setJudulPromo(titleText);
+        setJudulPromoOwner(titleText);
         playwright.forceFill(judulPromoField, titleText);
         playwright.forceFill(detailPromoField, "Deskripsi promo create owner");
-    }
-
-    /**
-     * Set judul promo
-     * @param judulText
-     */
-    private void setJudulPromo(String judulText) {
-        judulPromoOwner = judulText;
-    }
-
-    /**
-     * Get judul promo
-     * @return judul promo
-     */
-    public String getJudulPromoOwner() {
-        return judulPromoOwner;
     }
 
     /**
@@ -185,14 +171,6 @@ public class PromoOwnerPO {
     }
 
     /**
-     * Get judul promo anda
-     * @return
-     */
-    public String getPromoAnda() {
-        return judulPromoOwner;
-    }
-
-    /**
      * Verify edit promo displayed
      * @return boolean (true, false)
      *
@@ -208,9 +186,8 @@ public class PromoOwnerPO {
      */
     public void editPromoOwner(String titleText) {
         judulPromoField = page.locator("(//*[@class='input'])[1]");
-        playwright.clickOn(judulPromoField);
-        judulPromoField.fill(titleText);
-        setJudulPromo(titleText);
+        playwright.forceFill(judulPromoField, titleText);
+        setJudulPromoOwner(titleText);
 
         playwright.clickOnText("Edit Promo");
     }
