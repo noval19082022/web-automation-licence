@@ -1,5 +1,6 @@
-@DOM3 @editProfile
+@DOM1 @editProfile
 Feature: Edit Profile
+#//edit profil tenant will cover in dom 1
 
 	#After create New account tenant
   @TEST_DOM-179 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web @web-covered
@@ -371,12 +372,59 @@ Feature: Edit Profile
       | Belum Kawin         |
       | Kawin Memiliki Anak |
 
-#    //next merge
   @TEST_DOM-306 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Status - Edit Profile]Not choose marital status
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089513193288  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user click on marital status dropdown
+    Then user see martial status
+
+  @TEST_DOM-305 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Education - Edit Profile]last education
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 089220221220  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
+    And user click on last education tenant
+    And user select "S1"
+    Then user click simpan button
+
+  @TEST_DOM-300 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][No.darurat - Edit Profile ]input number darurat < 8
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user input phone number darurat more than "0812" character
+    Then user see validation message "Nomor Kontak Darurat minimal mengandung 8 karakter."
+
+  @TEST_DOM-299 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][No.darurat - Edit Profile ]input number darurat > 14
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user input phone number darurat more than "0812123123000014" character
+    Then user see validation message "Nomor Kontak Darurat tidak boleh lebih dari 14 karakter."
+
+  @TEST_DOM-278 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile] Dropdown list office name
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089220221220  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Karyawan"
+    And user click dropdown prefession
+    Then Dropdown will displayed list office name

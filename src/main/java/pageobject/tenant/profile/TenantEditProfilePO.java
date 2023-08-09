@@ -55,6 +55,7 @@ public class TenantEditProfilePO {
     Locator chooseInstansiSearch;
     Locator errorMessageFullName;
     Locator fillNamaKampus;
+    Locator listStatus;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -100,6 +101,7 @@ public class TenantEditProfilePO {
         chooseInstansiSearch = page.getByTestId("inputProfession-workplaceOption").locator("a");
         errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
+        listStatus =  page.getByTestId("userEditProfile").getByRole(AriaRole.LIST);
     }
 
     /**
@@ -513,5 +515,20 @@ public class TenantEditProfilePO {
     public void selectMaritalStatus(String martial) throws InterruptedException{
         Locator martialChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(martial));
         playwright.clickOn(martialChoose);
+    }
+
+    /**
+     * verfiy dropdown list status
+     */
+    public boolean dropdownListStatus() {
+        return playwright.waitTillLocatorIsVisible(listStatus);
+    }
+
+    /**
+     * verify error message phone number
+     */
+    public boolean verifyErrorMessagePhoneNumber(String number){
+        Locator phoneNumber = page.getByText(number);
+        return playwright.waitTillLocatorIsVisible(phoneNumber);
     }
 }

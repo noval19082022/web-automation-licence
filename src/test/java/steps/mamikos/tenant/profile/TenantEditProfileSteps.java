@@ -223,4 +223,14 @@ public class TenantEditProfileSteps {
     public void userSelectMartialStatus(String martial)throws InterruptedException {
         tenantEditProfile.selectMaritalStatus(martial);
     }
+
+    @Then("user see martial status")
+    public void userSeeMartialStatus() {
+        Assert.assertTrue(tenantEditProfile.dropdownListStatus(), "element is displayed");
+    }
+
+    @Then("user see validation message {string}")
+    public void userSeeValidationMessage(String number) {
+        Assert.assertTrue(tenantEditProfile.verifyErrorMessagePhoneNumber(number), "element is displayed");
+    }
 }
