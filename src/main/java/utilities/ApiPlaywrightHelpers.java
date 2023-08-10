@@ -23,7 +23,7 @@ public class ApiPlaywrightHelpers {
      * @param headers headers
      * @return APIRequestContext
      */
-    public static APIRequestContext setBaseUrlAndHeaders(String URL, Map<String, String> headers) {
+    public APIRequestContext setBaseUrlAndHeaders(String URL, Map<String, String> headers) {
         return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(URL).setExtraHTTPHeaders(headers));
     }
 

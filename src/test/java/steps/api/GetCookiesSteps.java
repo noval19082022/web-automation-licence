@@ -7,6 +7,7 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.Cookie;
+import com.microsoft.playwright.options.RequestOptions;
 import config.playwright.context.ActiveContext;
 import data.api.CreateBooking;
 import data.api.UserCookies;
@@ -27,8 +28,8 @@ public class GetCookiesSteps {
     private List<Cookie> cookieList;
     private String cookieString;
     private Map<String, String> headers = new HashMap<>();
-    private APIRequestContext request;
-    private APIResponse apiResponse;
+    private APIRequestContext tenantProfileRequest;
+    private APIResponse tenantProfileResponse;
     private ApiPlaywrightHelpers apiPwHelpers = new ApiPlaywrightHelpers(page);
     private Map<Object, Object> createBookingBody = new HashMap<>();
 
@@ -44,17 +45,17 @@ public class GetCookiesSteps {
         //headers.put("Accept", "application/json");
         headers.put("Cookie", UserCookies.getTenantCookie());
         headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
-        request = ApiPlaywrightHelpers.setBaseUrlAndHeaders(Mamikos.URL, headers);
-        apiResponse = request.get(ApiEndpoints.TENANT_PROFILE);
-        Assert.assertEquals(apiResponse.status(), 200);
-        Assert.assertTrue(apiResponse.ok());
+        tenantProfileRequest = apiPwHelpers.setBaseUrlAndHeaders(Mamikos.URL, headers);
+        tenantProfileResponse = tenantProfileRequest.get(ApiEndpoints.TENANT_PROFILE);
+        Assert.assertEquals(tenantProfileResponse.status(), 200);
+        Assert.assertTrue(tenantProfileResponse.ok());
     }
 
     @When("playwright make json file for tenant booking from tenant profile data")
     public void playwrightMakeJsonFileForTenantBookingFromTenantProfileData() {
         String todayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 0, 0);
         String plusOneMonthDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 1, 0);
-        String jsonString = apiResponse.text();
+        String jsonString = tenantProfileResponse.text();
         boolean isMarried = false;
         boolean isMarriedNull = false;
 
@@ -128,5 +129,6 @@ public class GetCookiesSteps {
 
         JsonHelpers.createJsonFileFromJsonString(JsonHelpers.createJsonStringFromMap(createBookingBody),
                 "target/createBookingBody.json");
+        CreateBooking.setCreateBookingBody(createBookingBody);
     }
 }

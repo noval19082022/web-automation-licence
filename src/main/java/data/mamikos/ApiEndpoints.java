@@ -9,5 +9,6 @@ public class ApiEndpoints {
 
     // ---- Tenant Block ---- //
     public static final String TENANT_PROFILE = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantProfile");
+    public static final String CREATE_BOOKING = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "createBooking");
     // ---- Tenant Block ---- //
 }
