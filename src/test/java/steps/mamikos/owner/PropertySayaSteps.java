@@ -3,6 +3,9 @@ package steps.mamikos.owner;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
 import utilities.PlaywrightHelpers;
 
@@ -25,5 +28,72 @@ public class PropertySayaSteps {
     @And("owner set status kamar is kosong")
     public void ownerSetStatusKamarIsKosong() {
         propertySaya.clickUpdateKamarEmptyButton();
+    }
+
+    @Then("user see kos with name {string}, status {string} and type {string}")
+    public void userSeeKosWithNameStatusAndType(String name, String status, String type) {
+        Assert.assertTrue(propertySaya.getFirstKosName().contains(name), "Kos name is wrong");
+        Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
+        Assert.assertEquals(propertySaya.getFirstKosType(type), type, "Kos type is wrong");
+    }
+
+    @And("user click kos {string} in update price list")
+    public void userClickKosInUpdatePriceList(String kosName) {
+        propertySaya.clickOnKosName(kosName);
+    }
+
+    @When("user click see other prices")
+    public void user_click_see_other_prices() {
+        propertySaya.clickSeeOtherPrices();
+    }
+
+    @When("user input daily price with {string}")
+    public void user_input_daily_price_with(String dailyPrice) {
+        propertySaya.inputDailyPriceKos(dailyPrice);
+    }
+
+    @When("user input weekly price with {string}")
+    public void user_input_weekly_price_with(String weeklyPrice) {
+        propertySaya.inputWeeklyPrice(weeklyPrice);
+    }
+
+    @When("user input monthly price with {string}")
+    public void user_input_monthly_price_with(String monthlyPrice) {
+        propertySaya.inputMonthlyPrice(monthlyPrice);
+    }
+
+    @When("user input three monthly price with {string}")
+    public void user_input_three_monthly_price_with(String threeMonthlyPrice) {
+        propertySaya.inputThreeMonthlyPrice(threeMonthlyPrice);
+    }
+
+    @When("user input six monthly price with {string}")
+    public void user_input_six_monthly_price_with(String sixMonthlyPrice) {
+        propertySaya.inputSixMonthlyPrice(sixMonthlyPrice);
+    }
+
+    @When("user input yearly price with {string}")
+    public void user_input_yearly_price_with(String yearlyPrice) {
+        propertySaya.inputYearlyPrice(yearlyPrice);
+    }
+
+    @And("user click back button in page")
+    public void click_back_button_in_page() {
+        page.goBack();
+    }
+
+    @When("user click continue input data on pop up")
+    public void user_click_continue_input_data_on_pop_up() {
+        propertySaya.clickContinueInputDataPopUp();
+    }
+
+    @And("user clicks update price button")
+    public void userClicksUpdatePriceButton() {
+        propertySaya.clickButtonUpdate();
+    }
+
+    @Then("user see pop up success update price {string}")
+    public void userSeePopUpSuccessUpdatePrice(String messageSuccess) {
+        Assert.assertEquals(propertySaya.getToastSuccessUpdatePrice(), messageSuccess, "Pop up success update price is wrong");
     }
 }
