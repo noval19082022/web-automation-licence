@@ -19,7 +19,7 @@ public class MamiAdsPO {
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
     //--- Beli Saldo Mamiads Page ----//
-    private Locator pilihSaldoBtnFor6000;
+    private Locator pilihSaldoBtnForFisrtVoucher;
     private Locator bayarSekarangBtnOnDetailTagihan;
 
     //--- GP Onboarding Pop - Up ---//
@@ -44,7 +44,7 @@ public class MamiAdsPO {
         this.cobaSekarangBtnOnPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         //--- Beli Saldo Mamiads Page ---//
-        this.pilihSaldoBtnFor6000 = page.locator(".bg-c-button").first();
+        this.pilihSaldoBtnForFisrtVoucher = page.locator(".bg-c-button").first();
         this.bayarSekarangBtnOnDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
 
         //--- GP Onboarding Pop - Up ---//
@@ -134,7 +134,7 @@ public class MamiAdsPO {
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
             playwright.clickOn(cobaSekarangBtnOnPopUp);
         playwright.clickOn(beliSaldoBtn);
-        playwright.clickOn(pilihSaldoBtnFor6000);
+        playwright.clickOn(pilihSaldoBtnForFisrtVoucher);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
         page.reload();
     }

@@ -810,7 +810,7 @@ Feature: Payment BackOffice Staging
     And owner want to buy mamiads saldo and pick the first voucher on list
     And payment owner success using ovo as payment method
 
-		#  Scenario: Admin check the transaction on Menu Premium Package status paid
+    #  Scenario: Admin check the transaction on Menu Premium Package status paid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
