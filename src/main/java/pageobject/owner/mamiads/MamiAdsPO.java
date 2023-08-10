@@ -3,6 +3,7 @@ package pageobject.owner.mamiads;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -10,6 +11,16 @@ public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    //--- Saldo Mamiads Onboarding ---//
+    private Locator saldoMamiadsCard;
+    //--- Mamiads Webview Page ---//
+    private Locator cobaSekarangBtnOnWebview;
+    //--- Mamiads Page ---//
+    private Locator cobaSekarangBtnOnPopUp;
+    private Locator beliSaldoBtn;
+    //--- Beli Saldo Mamiads Page ----//
+    private Locator pilihSaldoBtnFor6000;
+    private Locator bayarSekarangBtnOnDetailTagihan;
 
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
@@ -25,6 +36,18 @@ public class MamiAdsPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        //--- Saldo Mamiads Onboarding ---//
+        this.saldoMamiadsCard = page.locator(".mamiads-card");
+        //--- Mamiads Webview Page ---//
+        this.cobaSekarangBtnOnWebview = page.locator("#globalNavbar").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Coba Sekarang"));
+        //--- Mamiads Page ---//
+        this.cobaSekarangBtnOnPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
+        this.beliSaldoBtn = page.getByText("Beli Saldo");
+        //--- Beli Saldo Mamiads Page ---//
+        this.pilihSaldoBtnFor6000 = page.locator(".bg-c-button").first();
+        this.bayarSekarangBtnOnDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
+
+        //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
         gpOnboardingPopUpActiveTextBody = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(2)");
@@ -94,6 +117,26 @@ public class MamiAdsPO {
      */
     public void clickGpOnboardingpopUpPreviousButton() {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
+    }
+
+    /**
+     * owner buy mamiads saldo for the first voucher on list,
+     * on jambu the price is Rp.6000,00
+     */
+    public void ownerBuyMamiAdsSaldoAndPickTheFirstVoucherList() {
+        playwright.clickOn(saldoMamiadsCard);
+        // this condition will handle if owner redirect to the https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard
+        if (playwright.getActivePageURL().equals(Mamikos.URL + "/mamiads?redirectionSource=Owner%20Dashboard") ||
+                playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnWebview))
+            playwright.clickOn(cobaSekarangBtnOnWebview);
+        // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
+                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
+            playwright.clickOn(cobaSekarangBtnOnPopUp);
+        playwright.clickOn(beliSaldoBtn);
+        playwright.clickOn(pilihSaldoBtnFor6000);
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+        page.reload();
     }
 }
 
