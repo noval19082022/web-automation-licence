@@ -49,6 +49,7 @@ public class PaymentPO {
                 .replace("select-payment/", "success-payment/")
                 .replace("step=1", "step=3");
         page.navigate(urlPaymentSignature);
+        page.reload();
     }
 
     /**

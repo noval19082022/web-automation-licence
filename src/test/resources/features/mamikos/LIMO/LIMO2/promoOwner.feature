@@ -1,0 +1,85 @@
+@regression @promoOwner @LIMO2 @listing-monetization
+Feature: Atur promo owner
+
+  @TEST_LIMO-2442 @createNewPromo @promoAktif @continue
+  Scenario: Create new promo owner
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 08713399866  | qwerty123  |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
+    And owner atur promo owner
+    Then verify status promo is "Belum Ada"
+    When owner create new promo owner with title "Judul promo owner AT" for periode promo "tomorrow"
+    Then verify judul promo "Judul promo owner AT"
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
+  Scenario: Edit promo while status promo menunggu verifikasi
+    Given owner edit promo kost owner with title "Update promo owner AT"
+    Then verify judul promo "Update promo owner AT"
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif @continue
+  Scenario: Edit start date promo more than end date promo
+    And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
+    Then verify warning "Tanggal berakhir tidak boleh sebelum tanggal mulai." is displayed
+
+  @TEST_LIMO-4244 @verifiedPromoOwner @promoAktif
+  Scenario: Verifikasi Promo Owner from admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin navigates to Promo Owner
+    And admin search the title promo on search box
+    Then admin verified the promo owner
+
+  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner @continue
+  Scenario: Check Promo Owner after verified by admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 08713399866  | qwerty123  |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
+    And owner atur promo owner
+    And verify status promo is "Aktif"
+
+  @TEST-LIMO-4245 @unvefiedPromoOwner
+  Scenario: Admin unverified promo
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin navigates to Promo Owner
+    And admin search the title promo on search box
+    Then admin unverified the promo owner
+
+  @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
+  Scenario: Check Promo Owner after unverified by admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 08713399866  | qwerty123  |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
+    And owner atur promo owner
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo @continue
+  Scenario: Edit valid periode promo
+    And owner edit promo kost owner with start date "the day after tomorrow" and end date "the day after tomorrow"
+    When owner click edit promo button
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
+  Scenario: Delete promo owner
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin navigates to Promo Owner
+    And admin search the title promo on search box
+    And admin delete the promo admin

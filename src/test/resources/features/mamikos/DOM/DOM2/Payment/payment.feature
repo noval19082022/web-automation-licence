@@ -1,4 +1,5 @@
-Feature: Payment Staging
+@DOM2
+Feature: Payment BackOffice Staging
 
   @TEST_DOM-623 @Automated @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit] cancel Extend Contract
@@ -335,7 +336,7 @@ Feature: Payment Staging
 
     #  Scenario: Admin edit paid amount & uncheck admin fee
     Given admin go to mamikos mamipay admin
-    And admin navigate to mamipay refund page
+    When admin navigate to mamipay refund page
     And admin pick one invoice on list to refund
     And admin uncheck admin fee for refund
     And admin edit paid amount credit card "20000" for refund
@@ -343,3 +344,449 @@ Feature: Payment Staging
     And admin set to refund the paid invoice
     Then admin verify see text "Refund transaction created."
 
+  @TEST_DOM-639 @Automated @web-covered
+  Scenario: [BackOffice][Refund] see Transaction Flip Success
+    ## delete contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag | phone prod  |
+      | 0892202100 | 08119787884 |
+    And admin want to batalkan contract if exist
+
+    ## cancel booking if tenant have booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And user cancel booking
+
+    ## create contract
+    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
+    And tenant booking kost for "today"
+    And tenant logs out
+
+    ## owner accept
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner accept booking and select the room
+    Then owner should redirect back to pengajuan booking page
+    And owner logs out
+
+    ## Scenario: Tenant pay boarding house
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant close unused browser tab
+
+    #  Scenario: data booking
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to data booking menu
+    And admin filter booking transaction using tenant phone "0892202100"
+    And admin set allow refund the transaction
+
+    #  Scenario: Admin edit paid amount & uncheck admin fee
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin uncheck admin fee for refund
+    And admin edit paid amount credit card "20000" for refund
+    And admin change of reason list to pemilik membatalkan for refund
+    And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "Refund transaction created."
+
+    #  Scenario: Admin payment from bigflip
+    Given admin go to big flip bussiness and login for test mode
+    * admin verify on flip test mode
+    When admin navigate to riwayat transaksi domestic page on big flip test mode
+    Then admin set force success transaction on flip
+
+    #  Scenario: Admin see that refund transaction in success
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    Then admin verify transferred transaction for user "testing automation refund" is visible
+
+  @TEST_DOM-636 @Automated @web-covered
+  Scenario: [BackOffice][Refund] export Report Before 1 Hour
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin want to export the refund report
+    Then admin verify download button is disable
+#    And admin choose export report for today
+#    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
+#  (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
+#    Then user will get error message
+
+  @TEST_DOM-635 @Automated @web-covered
+  Scenario: [BackOffice][Refund] transaction CreditCard On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    Then admin verify see text "( from Credit Card )"
+
+  @TEST_DOM-634 @Automated @web-covered
+  Scenario: [BackOffice][Refund] click Close Button Popup Refund
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin close the refund detail
+    Then admin verify see text "Daftar Invoice Refund"
+
+  @TEST_DOM-632 @Automated @web-covered
+  Scenario: [BackOffice][Refund] download Receipt Flip On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    And admin want to download receipt transferred invoice
+		#    Then user successed download receipt - (need improvement for popup success from FE)
+
+  @TEST_DOM-631 @Automated @web-covered
+  Scenario: [BackOffice][Refund] Refund Payment Ovo
+    ## delete contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag | phone prod  |
+      | 0892202100 | 08119787884 |
+    And admin want to batalkan contract if exist
+
+    ## cancel booking if tenant have booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And user cancel booking
+
+    ## create contract
+    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
+    And tenant booking kost for "today"
+    And tenant logs out
+
+    ## owner accept
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner accept booking and select the room
+    Then owner should redirect back to pengajuan booking page
+    And owner logs out
+
+    ## Scenario: Tenant pay boarding house
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant close unused browser tab
+
+    #  Scenario: data booking
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to data booking menu
+    And admin filter booking transaction using tenant phone "0892202100"
+    And admin set allow refund the transaction
+
+    #  Scenario: Admin edit paid amount & uncheck admin fee
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin uncheck admin fee for refund
+    And admin edit paid amount credit card "20000" for refund
+    And admin change of reason list to pemilik membatalkan for refund
+    And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "Refund transaction created."
+
+    #  Scenario: Admin payment from bigflip
+    Given admin go to big flip bussiness and login for test mode
+    * admin verify on flip test mode
+    When admin navigate to riwayat transaksi domestic page on big flip test mode
+    Then admin set force success transaction on flip
+
+    #  Scenario: Admin see that refund transaction in success
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    Then admin verify transferred transaction for user "testing automation refund" is visible
+
+  @TEST_DOM-630 @Automated @web-covered
+  Scenario: [BackOffice][Refund] direction Tab To Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    Then admin verify see text "Receipt"
+
+  @TEST_DOM-629 @Automated @web-covered
+  Scenario: [BackOffice][Refund] popup refund section bank
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin fill bank name "BANK MANTAP (Mandiri Taspen)" on refund detail
+    Then admin verify bank name for refund is "BANK MANTAP (Mandiri Taspen)"
+
+  @TEST_DOM-628 @Automated @web-covered
+  Scenario: [BackOffice][Refund] transaction Flip On Transferred Tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search transferred refund by tenant Phone Number and input field "083829167577"
+    Then admin verify see text "Flip"
+
+  @TEST_DOM-627 @Automated @web-covered
+  Scenario: [BackOffice][Refund] no Input Bank Account
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin set rekening number "" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "The refund account field is required when cc transaction id is not present."
+
+  @TEST_DOM-626 @Automated @web-covered
+  Scenario: [BackOffice][Refund] no Input Account Name
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin set rekening number "300100500" and rekening owner "" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "The refund account name field is required when cc transaction id is not present."
+
+  @TEST_DOM-625 @Automated @web-covered
+  Scenario: [BackOffice][Refund] click Back Button Popup Refund
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin set rekening number "300100500" and rekening owner "test" for refund
+    And admin close the refund detail
+    Then admin verify see text "Daftar Invoice Refund"
+
+  @TEST_DOM-650 @Automated @web-covered
+  Scenario: [BackOffice][Property Level] Create Property Level
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to property management menu
+    And admin bangkerupux search property name "payment squad 1" on property management menu
+    Then admin verify see text "payment squad 1"
+
+  @TEST_DOM-651 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Discount admin fee recuring booking
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Invoice" menu
+    And user search by "Renter Phone Number" and input field "089220220201"
+    And user click on detail fee button
+    Then admin verify see text "GP2 Staging"
+
+  @TEST_DOM-648 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] Create add ons without fill mandatory fields
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "", description "", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill add ons name and price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "description", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: create add ons without fill add ons name and description
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "description", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "", price "5000", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+    #  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "", description "des", price "", notes "test" and create it
+    Then admin verify see text "Please complete all mandatory fields"
+
+#  Scenario: Create add ons without fill price
+    When admin bangkerupux cancel pop all mandatory required on create add ons
+    And admin bangkerupux input name "tester", description "tester", price "5000", notes "test" and create it
+    Then admin verify see text "success created new add ons."
+    And admin bangkerupux delete add ons that has name "tester"
+
+  @TEST_DOM-643 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] Click button delete on add ons menu
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "delete", description "delete", price "9999", notes "test" and create it
+    And admin bangkerupux delete add ons that has name "delete"
+    Then admin verify see text "Deleted."
+
+  @TEST_DOM-642 @Automated @web-covered
+  Scenario: [BackOffice][Add Ons List] visit form edit add ons
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Add Ons List" menu
+
+    ## create add ons for testing purpose
+    And admin bangkerupux create add ons on add ons list menu
+    And admin bangkerupux input name "edit add ons", description "edit", price "9999", notes "test" and create it
+
+    #  Scenario: Positive case Edit add ons Name
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit", price "9999", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons description
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "9999", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons price
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "5000", notes "test" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Edit add ons notes
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux input name "edit add ons nama", description "edit description", price "5000", notes "edit notes" and update it
+    Then admin verify see text "success updated new add ons."
+
+    #  Scenario: Positive case Click button cancel on edit page
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux cancel edit add ons
+    Then admin verify see text "Add Ons List"
+
+    #  Scenario: Positive case Click button cancel on pop up edit
+    When admin go to "Add Ons List" menu
+    And admin bangkerupux edit add ons that has name "edit add ons"
+    And admin bangkerupux cancel edit add ons pop up
+    Then admin verify see text "Edit Add On"
+
+    ## Delete add ons after test
+    And admin go to "Add Ons List" menu
+    And admin bangkerupux delete add ons that has name "edit add ons"
+    Then admin verify see text "Deleted."
+
+  @TEST_DOM-646 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Admin edit invoice discount
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to discount admin fee discount menu
+    And admin bangkrupux want to edit discount admin fee
+    And admin bangkrupux input amount "999" for discount admin fee
+    And admin bangkrupux save after input field on edit discount admin fee
+    Then admin verify see text "Success."
+
+  @TEST_DOM-645 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Admin delete invoice discount
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to discount admin fee discount menu
+    And admin bangkerupux create admin fee discount with name discount "hapus langsung" amount "999"
+    And admin bangkerupux want to delete admin fee discount that has name "hapus langsung"
+    Then admin verify see text "Success."
+
+  @TEST_DOM-641 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Admin create invoice discount
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to discount admin fee discount menu
+    And admin bangkerupux create admin fee discount with name discount "create invoice discount hapus langsung" amount "999"
+    And admin bangkerupux want to delete admin fee discount that has name "create invoice discount hapus langsung"
+    Then admin verify see text "Success."
+
+  @TEST_DOM-680 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter valid owner number premium
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "08119787884"
+    Then admin verify see text "Desta Owner"
+
+  @TEST_DOM-679 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter invalid owner number premium
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "0811978499"
+    Then admin bangkerupux get blank data list on package invoice list

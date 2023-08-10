@@ -46,7 +46,7 @@ public class CommonSteps {
     }
 
     @And("user/tenant/admin close unused browser tab")
-    public void adminAccessToDataBookingMenu() {
+    public void userCloseUnusedTab() {
         var tabTotal = ActiveContext.getActiveBrowserContext().pages().size();
         for (int i = tabTotal; i >= 0; i--) {
             if (i == 1) break;

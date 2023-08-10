@@ -45,25 +45,31 @@ Feature: Edit profile for jobs as Lainnya
   @TEST_BBM-1497 @TEST_BBM-1499 @TEST_BBM-1501 @continue
   Scenario: User able to change Profesi to Mahasiswa, Karyawan and Lainnya from edit profile page
     When tenant navigates to edit profile
-    And tenant choose profession as lainnya at "Wiraswasta"
+    And user choose profession "Lainnya"
+    And tenant fill job description with "Wiraswasta"
+    And user click simpan button
     Then tenant success update profile
     When tenant navigates to edit profile
-    And tenant choose profession as karyawan working at "Bukit Asam Tbk"
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "Bukit Asam Tbk"
+    And user click simpan button
     Then tenant success update profile
     When tenant navigates to edit profile
-    And tenant choose profession as mahasiswa studying at "Universitas Bengkulu"
+    And user choose profession "Mahasiswa"
+    And user fills "Universitas Lampung" in search dropdown pillih universitas
+    And user click simpan button
     Then tenant success update profile
 
   @TEST_BBM-1498 @continue
   Scenario: Change pekerjaan to Mahasiswa and Karyawan with invalid data instantion from edit profile page
     When tenant navigates to edit profile
-    And user choose profession "Karyawan" on edit profile page
-    And user click dropdown and fills "aaa" on edit profile
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "abcd"
     Then user can see information "There is no data"
 
   @TEST_BBM-1500
   Scenario: Change pekerjaan to Mahasiswa and Karyawan with invalid data instantion from edit profile page
-    When user choose profession "Mahasiswa" on edit profile page
-    And user click dropdown and fills "abcd" on edit profile
+    When user choose profession "Mahasiswa"
+    And user fills "abcd" in pilih universitas
     Then user can see information "There is no data"
 

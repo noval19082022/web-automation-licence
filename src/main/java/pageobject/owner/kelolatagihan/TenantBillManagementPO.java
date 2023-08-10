@@ -82,9 +82,9 @@ public class TenantBillManagementPO {
      */
     public void selectKosBillPageFilter(String kostName) {
         Locator kosNameFilter = page.getByText(kostName);
-        playwright.waitFor(filterKos, 30000.0);
         List<String> filterKostInnerTexts = filterKos.allInnerTexts();
         if (!filterKostInnerTexts.get(0).contains(kostName)) {
+            playwright.waitFor(filterKos, 30000.0);
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);
         }
