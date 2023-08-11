@@ -148,7 +148,6 @@ public class MamiAdsPO {
      * @param saldo you can use ex. '6000' or '6.000'
      */
     private void beliSaldo(String saldo) {
-        ;
         var listSaldo = playwright.getListInnerTextFromListLocator(saldoTitleList);
         listSaldo.stream().forEach(innerTxt -> {
             if (innerTxt.equals(saldo) || innerTxt.replace(".", "").equals(saldo))
