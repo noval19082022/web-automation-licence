@@ -40,14 +40,14 @@ public class MamiAdsPO {
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
         //--- Mamiads Webview Page ---//
-        this.cobaSekarangBtnOnWebview = page.locator("#globalNavbar").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Coba Sekarang"));
+        this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").nth(1);
         //--- Mamiads Page ---//
-        this.cobaSekarangBtnOnPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
+        this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         //--- Beli Saldo Mamiads Page ---//
         this.saldoTitleList = page.locator(".balance-list-item__name");
         this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
-        this.bayarSekarangBtnOnDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
+        this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
 
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
@@ -143,16 +143,17 @@ public class MamiAdsPO {
     }
 
     /**
-     * private method for logic buy saldo on mamiads saldo page
+     * logic to buy saldo on mamiads saldo page
      *
      * @param saldo you can use ex. '6000' or '6.000'
      */
-    private void beliSaldo(String saldo) {
+    public void beliSaldo(String saldo) {
         var listSaldo = playwright.getListInnerTextFromListLocator(saldoTitleList);
-        listSaldo.stream().forEach(innerTxt -> {
-            if (innerTxt.equals(saldo) || innerTxt.replace(".", "").equals(saldo))
-                playwright.clickOn(buySaldoBtnList.nth(listSaldo.indexOf(innerTxt)));
-        });
+        for (String saldoTxt : listSaldo) {
+            if (saldoTxt.equals(saldo) || saldoTxt.replace(".", "").equals(saldo))
+                playwright.clickOn(buySaldoBtnList.nth(listSaldo.indexOf(saldoTxt)));
+                break;
+        }
     }
 }
 
