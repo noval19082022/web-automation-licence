@@ -9,8 +9,8 @@ public class MamiAdsSteps {
     Page page = ActiveContext.getActivePage();
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
 
-    @And("owner want to buy mamiads saldo and pick the first voucher on list")
-    public void ownerWantToBuyMamiadsSaldo() {
-        mamiAdsPO.ownerBuyMamiAdsSaldoAndPickTheFirstVoucherList();
+    @And("owner want to buy mamiads saldo with nominal {string}")
+    public void ownerWantToBuyMamiadsSaldo(String saldo) {
+        mamiAdsPO.ownerBuyMamiadsSaldo(saldo);
     }
 }

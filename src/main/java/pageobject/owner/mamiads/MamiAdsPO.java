@@ -19,7 +19,8 @@ public class MamiAdsPO {
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
     //--- Beli Saldo Mamiads Page ----//
-    private Locator pilihSaldoBtnForFisrtVoucher;
+    private Locator saldoTitleList;
+    private Locator buySaldoBtnList;
     private Locator bayarSekarangBtnOnDetailTagihan;
 
     //--- GP Onboarding Pop - Up ---//
@@ -44,7 +45,8 @@ public class MamiAdsPO {
         this.cobaSekarangBtnOnPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         //--- Beli Saldo Mamiads Page ---//
-        this.pilihSaldoBtnForFisrtVoucher = page.locator(".bg-c-button").first();
+        this.saldoTitleList = page.locator(".balance-list-item__name");
+        this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
         this.bayarSekarangBtnOnDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
 
         //--- GP Onboarding Pop - Up ---//
@@ -120,10 +122,11 @@ public class MamiAdsPO {
     }
 
     /**
-     * owner buy mamiads saldo for the first voucher on list,
-     * on jambu the price is Rp.6000,00
+     * owner buy mamiads saldo
+     *
+     * @param saldo String
      */
-    public void ownerBuyMamiAdsSaldoAndPickTheFirstVoucherList() {
+    public void ownerBuyMamiadsSaldo(String saldo) {
         playwright.clickOn(saldoMamiadsCard);
         // this condition will handle if owner redirect to the https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard
         if (playwright.getActivePageURL().equals(Mamikos.URL + "/mamiads?redirectionSource=Owner%20Dashboard") ||
@@ -134,9 +137,23 @@ public class MamiAdsPO {
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
             playwright.clickOn(cobaSekarangBtnOnPopUp);
         playwright.clickOn(beliSaldoBtn);
-        playwright.clickOn(pilihSaldoBtnForFisrtVoucher);
+
+        beliSaldo(saldo);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
-        page.reload();
+    }
+
+    /**
+     * private method for logic buy saldo on mamiads saldo page
+     *
+     * @param saldo you can use ex. '6000' or '6.000'
+     */
+    private void beliSaldo(String saldo) {
+        ;
+        var listSaldo = playwright.getListInnerTextFromListLocator(saldoTitleList);
+        listSaldo.stream().forEach(innerTxt -> {
+            if (innerTxt.equals(saldo) || innerTxt.replace(".", "").equals(saldo))
+                playwright.clickOn(buySaldoBtnList.nth(listSaldo.indexOf(innerTxt)));
+        });
     }
 }
 
