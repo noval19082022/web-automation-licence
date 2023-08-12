@@ -7,6 +7,9 @@ import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -131,7 +134,7 @@ public class MamiAdsPO {
         playwright.clickOn(saldoMamiadsCard);
         handleRedirectToMamiadsWebview();
         clickOnBeliSaldoBtn();
-        choosingSaldoTobuy(saldo);
+        choosingSaldoToBuy(saldo);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
     }
 
@@ -163,14 +166,19 @@ public class MamiAdsPO {
      *
      * @param saldo you can use ex. '6000' or '6.000'
      */
-    public void choosingSaldoTobuy(String saldo) {
-        var listSaldo = playwright.getListInnerTextFromListLocator(saldoTitleList);
-        for (String saldoTxt : listSaldo) {
-            String saldoReplace = saldoTxt.replace(".", "");
-            if (saldoTxt.equals(saldo) || saldoReplace.equals(saldo)) {
-                playwright.clickOn(buySaldoBtnList.nth(listSaldo.indexOf(saldoTxt)));
-                break;
-            }
+    public void choosingSaldoToBuy(String saldo) {
+        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleList);
+
+        int indexToClick = IntStream.range(0, listSaldoTitles.size())
+                .filter(i -> {
+                    String saldoTxt = listSaldoTitles.get(i);
+                    return saldoTxt.equals(saldo) || saldoTxt.replace(".", "").equals(saldo);
+                })
+                .findFirst()
+                .orElse(-1);
+
+        if (indexToClick != -1) {
+            playwright.clickOn(buySaldoBtnList.nth(indexToClick));
         }
     }
 }
