@@ -40,7 +40,7 @@ public class MamiAdsPO {
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
         //--- Mamiads Webview Page ---//
-        this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").nth(1);
+        this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").first();
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
@@ -61,6 +61,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up active counter
+     *
      * @return Integer data type
      */
     public int getGpOnboardingpopUpActiveCounter() {
@@ -128,18 +129,33 @@ public class MamiAdsPO {
      */
     public void ownerBuyMamiadsSaldo(String saldo) {
         playwright.clickOn(saldoMamiadsCard);
+        handleRedirectToMamiadsWebview();
+        clickOnBeliSaldoBtn();
+        choosingSaldoTobuy(saldo);
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+    }
+
+    /**
+     * this method is use for if owner redirect to mamiads webview
+     * example page is 'https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard'
+     */
+    public void handleRedirectToMamiadsWebview() {
         // this condition will handle if owner redirect to the https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard
         if (playwright.getActivePageURL().equals(Mamikos.URL + "/mamiads?redirectionSource=Owner%20Dashboard") ||
                 playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnWebview))
             playwright.clickOn(cobaSekarangBtnOnWebview);
+    }
+
+    /**
+     * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
+     * and this method also handle if pop up is appear on mamiads page
+     */
+    public void clickOnBeliSaldoBtn() {
         // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
             playwright.clickOn(cobaSekarangBtnOnPopUp);
         playwright.clickOn(beliSaldoBtn);
-
-        beliSaldo(saldo);
-        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
     }
 
     /**
@@ -147,12 +163,14 @@ public class MamiAdsPO {
      *
      * @param saldo you can use ex. '6000' or '6.000'
      */
-    public void beliSaldo(String saldo) {
+    public void choosingSaldoTobuy(String saldo) {
         var listSaldo = playwright.getListInnerTextFromListLocator(saldoTitleList);
         for (String saldoTxt : listSaldo) {
-            if (saldoTxt.equals(saldo) || saldoTxt.replace(".", "").equals(saldo))
+            String saldoReplace = saldoTxt.replace(".", "");
+            if (saldoTxt.equals(saldo) || saldoReplace.equals(saldo)) {
                 playwright.clickOn(buySaldoBtnList.nth(listSaldo.indexOf(saldoTxt)));
                 break;
+            }
         }
     }
 }
