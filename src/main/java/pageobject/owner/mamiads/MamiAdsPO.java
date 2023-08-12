@@ -8,7 +8,6 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class MamiAdsPO {
     private Page page;
@@ -169,17 +168,18 @@ public class MamiAdsPO {
     public void choosingSaldoToBuy(String saldo) {
         List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleList);
 
-        int indexToClick = IntStream.range(0, listSaldoTitles.size())
-                .filter(i -> {
-                    String saldoTxt = listSaldoTitles.get(i);
-                    return saldoTxt.equals(saldo) || saldoTxt.replace(".", "").equals(saldo);
-                })
-                .findFirst()
-                .orElse(-1);
-
-        if (indexToClick != -1) {
-            playwright.clickOn(buySaldoBtnList.nth(indexToClick));
+        for (String saldoTxt : listSaldoTitles) {
+            String saldoWithoutDots = saldoTxt.replace(".", "");
+            // Check if the current saldoTxt matches the provided saldo or its format without dots
+            if (saldoTxt.equals(saldo) || saldoWithoutDots.equals(saldo)) {
+                // Get the index of the matching saldoTxt in the list
+                int index = listSaldoTitles.indexOf(saldoTxt);
+                // Click on the corresponding button using the calculated index
+                playwright.clickOn(buySaldoBtnList.nth(index));
+                break; // Exit the loop since we've found a match
+            }
         }
     }
+
 }
 
