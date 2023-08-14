@@ -9,6 +9,8 @@ import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -95,5 +97,25 @@ public class PropertySayaSteps {
     @Then("user see pop up success update price {string}")
     public void userSeePopUpSuccessUpdatePrice(String messageSuccess) {
         Assert.assertEquals(propertySaya.getToastSuccessUpdatePrice(), messageSuccess, "Pop up success update price is wrong");
+    }
+
+    @When("user click see kos button")
+    public void user_click_see_kos_button() {
+        propertySaya.clickFirstSeeKos();
+    }
+
+    @When("user click Lihat Selengkapnya button for edit")
+    public void user_click_Lihat_Selengkapnya_button_for_edit() {
+        propertySaya.clickOnLihatSelengkapnyaButton();
+    }
+
+    @When("user click Chat in kos list")
+    public void user_click_Chat_in_kos_list() {
+        propertySaya.clickChat();
+    }
+
+    @When("user click review in kost list")
+    public void user_click_review_in_kost_list() {
+        propertySaya.clickReview();
     }
 }

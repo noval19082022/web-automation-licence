@@ -27,6 +27,10 @@ public class PropertySayaPO {
     Locator continueInputDataButton;
     Locator updatePriceButton;
     Locator messageSuccessUpdatePrice;
+    Locator firstSeeKosButton;
+    Locator statisticChoiceSelection;
+    Locator chatButton;
+    Locator reviewButton;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -44,6 +48,11 @@ public class PropertySayaPO {
         continueInputDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Isi Data"));
         updatePriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Harga"));
         messageSuccessUpdatePrice = page.getByText("Harga berhasil diupdate");
+        firstSeeKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Kos"));
+        statisticChoiceSelection = page.locator(".statistic__choice");
+        chatButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat 0"));
+        reviewButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Review 0"));
+
     }
 
     /**
@@ -199,6 +208,34 @@ public class PropertySayaPO {
      */
     public String getToastSuccessUpdatePrice() {
         return playwright.getText(messageSuccessUpdatePrice);
+    }
+
+    /**
+     * Click on see kos button in first kos list
+     */
+    public void clickFirstSeeKos() {
+        playwright.clickOn(firstSeeKosButton);
+    }
+
+    /**
+     * Click on lihat selengkapnya button in first kos list
+     */
+    public void clickOnLihatSelengkapnyaButton() {
+        playwright.clickOn(lihatSelengkapnyaButton);
+    }
+
+    /**
+     * Click on chat button in kos list
+     */
+    public void clickChat() {
+        playwright.clickOn(chatButton);
+    }
+
+    /**
+     * Click on review button in kos list
+     */
+    public void clickReview() {
+        playwright.clickOn(reviewButton);
     }
 
 }
