@@ -106,4 +106,14 @@ public class RefundSteps {
     public void adminVerifyBankNameForRefundIs(String bankName) {
         Assert.assertEquals(refundPO.getBankNameForRefund(), bankName);
     }
+
+    @And("admin visit failed list on refund page")
+    public void adminVisitFailedListOnRefundPage() {
+        refundPO.clickOnFailedBtn();
+    }
+
+    @And("admin pick one invoice on failed list")
+    public void adminPickOneInvoiceOnFailedList() {
+        refundPO.clickOnDetailFailedInvoiceList();
+    }
 }

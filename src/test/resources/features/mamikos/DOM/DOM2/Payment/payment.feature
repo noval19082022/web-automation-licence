@@ -953,3 +953,81 @@ Feature: Payment BackOffice Staging
       | invoice                    | shortlink                                                                                                                             |
       | GP1/20230802/00012139/4597 | https://pay-jambu.kerupux.com/invoice/select-payment/96152?signature=88cf29ef9b9a01dc744213c9006a2417e153201de854e3be2e4ac65922972d9d |
       | GP2/20230801/00012132/6676 | https://pay-jambu.kerupux.com/invoice/select-payment/96000?signature=32b4422fdf70734dc879f1af84df1d4a8eb81a1c7d3f3df115a706e6f67ffd43 |
+
+  @TEST_DOM-660
+  Scenario: [BackOffice][Refund] Set transaction refund Failed
+        ## delete contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag | phone prod  |
+      | 0892202100 | 08119787884 |
+    And admin want to batalkan contract if exist
+
+    ## cancel booking if tenant have booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And user cancel booking
+
+    ## create contract
+    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
+    And tenant booking kost for "today"
+    And tenant logs out
+
+    ## owner accept
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner accept booking and select the room
+    Then owner should redirect back to pengajuan booking page
+    And owner logs out
+
+    ## Scenario: Tenant pay boarding house
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant close unused browser tab
+
+    #  Scenario: data booking
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to data booking menu
+    And admin filter booking transaction using tenant phone "0892202100"
+    And admin set allow refund the transaction
+
+    #  Scenario: Admin edit paid amount & uncheck admin fee
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin uncheck admin fee for refund
+    And admin edit paid amount credit card "20000" for refund
+    And admin change of reason list to pemilik membatalkan for refund
+    And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "Refund transaction created."
+
+    #  Scenario: Admin payment from bigflip
+    Given admin go to big flip bussiness and login for test mode
+    * admin verify on flip test mode
+    When admin navigate to riwayat transaksi domestic page on big flip test mode
+    Then admin set failed transaction on flip
+
+  @TEST_DOM-757
+  Scenario: [BackOffice][Refund Menu][Failed Tab] resend from failed tab
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit failed list on refund page
+    And admin pick one invoice on failed list
+    And admin set to refund the paid invoice
+    Then admin verify see text "Refund transaction created."
