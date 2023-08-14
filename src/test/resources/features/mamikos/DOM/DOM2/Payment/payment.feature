@@ -876,3 +876,17 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "PRE/20000811/56545/34420"
     Then admin bangkerupux get blank data list on package invoice list
 
+  @TEST_DOM-688 @Automated @web-covered
+  Scenario Outline: [BackOffice][Invoice Security] Open Invoice Booking from search invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
+    Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
+    Examples:
+      | invoice               | shortlink                                   |
+      | 34716463/2022/02/0009 | https://pay-jambu.kerupux.com/invoice/fTbwj |
+      | 12865544/2022/02/0082 | https://pay-jambu.kerupux.com/invoice/lTRwj |
+      | 57653153/2022/02/0003 | https://pay-jambu.kerupux.com/invoice/9H9CP |
+
