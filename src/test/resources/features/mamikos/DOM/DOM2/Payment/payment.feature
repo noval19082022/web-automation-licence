@@ -904,3 +904,18 @@ Feature: Payment BackOffice Staging
       | invoice                    | shortlink                                                                                                                             |
       | GP2/20220217/00005909/3769 | https://pay-jambu.kerupux.com/invoice/select-payment/48481?signature=83511d18f0cb74ebd3c45c6d1ae0c3904672603da4a699ee9b5fb3a945352323 |
 
+  @TEST_DOM-686 @Automated @web-covered
+  Scenario Outline: [BackOffice][Invoice Security] Open Invoice Expired Booking from All invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "All Invoice List" menu
+    And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
+    Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
+    Examples:
+      | invoice                  | shortlink                                                                                                                             |
+      | PRE/20220221/50864/80817 | https://pay-jambu.kerupux.com/invoice/select-payment/48611?signature=bab937d125dd83f785beaf0e53fe3405a0aea1aad95f4f8183f3b7c586c38c54 |
+      | DP/19024270/2022/02/0185 | https://pay-jambu.kerupux.com/invoice/select-payment/48731?signature=995fe6af375ef93d58afcafa5b34a96766644988aa6e02f67262b12229aaf434 |
+      | 44331680/2022/03/0017    | https://pay-jambu.kerupux.com/invoice/select-payment/46750?signature=081102610d26b3bdcaffc1ecd5ad29e277f179b2b6b9978878aab219183a5ff6 |
+
