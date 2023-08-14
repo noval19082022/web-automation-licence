@@ -1046,3 +1046,14 @@ Feature: Payment BackOffice Staging
     And admin pick one invoice on failed list
     And admin set to refund the paid invoice
     Then admin verify see text "Refund transaction created."
+
+  @TEST_DOM-644 @Automated @web-covered
+  Scenario: [BackOffice][Discount Admin Fee] Recurring booking discount admin fee
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 089220220201 | 083176408442 | qwerty123 |
+    And user visit page "/user/riwayat-transaksi/65093"
+    Then user will see that the text "Tagihan 16 Feb 2022" is displayed
+    When user click "Lihat Rincian"
+    Then user will see that the text "GP2 Staging" is displayed
