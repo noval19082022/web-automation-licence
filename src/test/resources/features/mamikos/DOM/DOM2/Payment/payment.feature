@@ -939,3 +939,17 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "PRE/20230814/56592/78363"
     Then admin bangkerupux click on shorlink invoice on invoice list "https://pay-jambu.kerupux.com/invoice/select-payment/97907?signature=31cf780c263edeecee662927b00e6ecbab8119c90be8f3272d5e61fa42063a03"
+
+  @TEST_DOM-683 @Automated @web-covered
+  Scenario Outline: [BackOffice][Invoice Security] Open invoice unpaid froms list GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "GoldPlus Invoice List" menu
+    And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
+    Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
+    Examples:
+      | invoice                    | shortlink                                                                                                                             |
+      | GP1/20230802/00012139/4597 | https://pay-jambu.kerupux.com/invoice/select-payment/96152?signature=88cf29ef9b9a01dc744213c9006a2417e153201de854e3be2e4ac65922972d9d |
+      | GP2/20230801/00012132/6676 | https://pay-jambu.kerupux.com/invoice/select-payment/96000?signature=32b4422fdf70734dc879f1af84df1d4a8eb81a1c7d3f3df115a706e6f67ffd43 |
