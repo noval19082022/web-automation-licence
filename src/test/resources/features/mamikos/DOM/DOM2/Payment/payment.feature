@@ -839,3 +839,12 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux filter the status of package invoice list premium for "unpaid" transaction
     Then admin bangkerupux see transaction status list on package invoice list is only "unpaid"
 
+  @TEST_DOM-673 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter Invalid premium package invoice use GP Invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "GP3/20210623/00003930/7590"
+    Then admin bangkerupux get blank data list on package invoice list
