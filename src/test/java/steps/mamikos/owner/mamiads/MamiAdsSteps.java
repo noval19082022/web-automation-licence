@@ -11,6 +11,6 @@ public class MamiAdsSteps {
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
-        mamiAdsPO.ownerBuyMamiadsSaldo(saldo);
+        mamiAdsPO.purchaseOwnerSaldoFromMamiads(saldo);
     }
 }

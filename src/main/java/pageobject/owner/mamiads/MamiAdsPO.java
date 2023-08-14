@@ -3,11 +3,8 @@ package pageobject.owner.mamiads;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
 
 public class MamiAdsPO {
     private Page page;
@@ -15,14 +12,10 @@ public class MamiAdsPO {
     private LocatorHelpers locatorHelpers;
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
-    //--- Mamiads Webview Page ---//
-    private Locator cobaSekarangBtnOnWebview;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
     //--- Beli Saldo Mamiads Page ----//
-    private Locator saldoTitleList;
-    private Locator buySaldoBtnList;
     private Locator bayarSekarangBtnOnDetailTagihan;
 
     //--- GP Onboarding Pop - Up ---//
@@ -41,14 +34,10 @@ public class MamiAdsPO {
         this.locatorHelpers = new LocatorHelpers(page);
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
-        //--- Mamiads Webview Page ---//
-        this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").first();
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         //--- Beli Saldo Mamiads Page ---//
-        this.saldoTitleList = page.locator(".balance-list-item__name");
-        this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
 
         //--- GP Onboarding Pop - Up ---//
@@ -125,27 +114,16 @@ public class MamiAdsPO {
     }
 
     /**
-     * owner buy mamiads saldo
+     * owner buy mamiads saldo,
+     * This method is only valid for owners who have purchased saldo at Mamiads.
      *
      * @param saldo String
      */
-    public void ownerBuyMamiadsSaldo(String saldo) {
+    public void purchaseOwnerSaldoFromMamiads(String saldo) {
         playwright.clickOn(saldoMamiadsCard);
-        handleRedirectToMamiadsWebview();
         clickOnBeliSaldoBtn();
         choosingSaldoToBuy(saldo);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
-    }
-
-    /**
-     * this method is use for if owner redirect to mamiads webview
-     * example page is 'https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard'
-     */
-    public void handleRedirectToMamiadsWebview() {
-        // this condition will handle if owner redirect to the https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard
-        if (playwright.getActivePageURL().equals(Mamikos.URL + "/mamiads?redirectionSource=Owner%20Dashboard") ||
-                playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnWebview))
-            playwright.clickOn(cobaSekarangBtnOnWebview);
     }
 
     /**
@@ -155,30 +133,19 @@ public class MamiAdsPO {
     public void clickOnBeliSaldoBtn() {
         // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
+                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
             playwright.clickOn(cobaSekarangBtnOnPopUp);
+        }
         playwright.clickOn(beliSaldoBtn);
     }
 
     /**
-     * logic to buy saldo on mamiads saldo page
+     * buy saldo on mamiads saldo page
      *
-     * @param saldo you can use ex. '6000' or '6.000'
+     * @param saldo you should use ex. 'Rp6000'
      */
     public void choosingSaldoToBuy(String saldo) {
-        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleList);
-
-        for (String saldoTxt : listSaldoTitles) {
-            String saldoWithoutDots = saldoTxt.replace(".", "");
-            // Check if the current saldoTxt matches the provided saldo or its format without dots
-            if (saldoTxt.equals(saldo) || saldoWithoutDots.equals(saldo)) {
-                // Get the index of the matching saldoTxt in the list
-                int index = listSaldoTitles.indexOf(saldoTxt);
-                // Click on the corresponding button using the calculated index
-                playwright.clickOn(buySaldoBtnList.nth(index));
-                break; // Exit the loop since we've found a match
-            }
-        }
+        playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
     }
 
 }

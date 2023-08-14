@@ -807,7 +807,7 @@ Feature: Payment BackOffice Staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner want to buy mamiads saldo with nominal "205.000"
+    And owner want to buy mamiads saldo with nominal "Rp6.000"
     And payment owner success using ovo as payment method
 
     #  Scenario: Admin check the transaction on Menu Premium Package status paid
