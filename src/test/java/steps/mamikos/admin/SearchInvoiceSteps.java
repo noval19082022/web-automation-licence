@@ -103,7 +103,6 @@ public class SearchInvoiceSteps {
 
     @And("admin bangkerupux want to search invoice by {string} and input field {string}")
     public void adminBangkerupuxWantToSearchInvoiceByAndInputField(String searchBy, String inputField) {
-        admin.clickOnTextHyperlink("Search Invoice");
         invoicePO.selectSearchInvoiceBy(searchBy);
         invoicePO.fillInputSearchValue(inputField);
         invoicePO.clickOnCariInvoice();

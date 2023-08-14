@@ -882,6 +882,7 @@ Feature: Payment BackOffice Staging
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "Search Invoice" menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
@@ -889,4 +890,17 @@ Feature: Payment BackOffice Staging
       | 34716463/2022/02/0009 | https://pay-jambu.kerupux.com/invoice/fTbwj |
       | 12865544/2022/02/0082 | https://pay-jambu.kerupux.com/invoice/lTRwj |
       | 57653153/2022/02/0003 | https://pay-jambu.kerupux.com/invoice/9H9CP |
+
+  @TEST_DOM-687 @Automated @web-covered
+  Scenario Outline: [BackOffice][Invoice Security] Open invoice Paid froms list GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin go to "GoldPlus Invoice List" menu
+    And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
+    Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
+    Examples:
+      | invoice                    | shortlink                                                                                                                             |
+      | GP2/20220217/00005909/3769 | https://pay-jambu.kerupux.com/invoice/select-payment/48481?signature=83511d18f0cb74ebd3c45c6d1ae0c3904672603da4a699ee9b5fb3a945352323 |
 
