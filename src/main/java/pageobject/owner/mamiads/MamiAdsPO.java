@@ -121,9 +121,25 @@ public class MamiAdsPO {
      */
     public void purchaseOwnerSaldoFromMamiads(String saldo) {
         playwright.clickOn(saldoMamiadsCard);
+        handlePopupMamiAds();
         clickOnBeliSaldoBtn();
         choosingSaldoToBuy(saldo);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+    }
+
+    /**
+     * Handle popup and button clicks when owner visits Mamiads page.
+     * This method addresses the conditions when a popup appears on the page visited by the owner.
+     * If the 'Coba Sekarang' button on the popup is visible or the 'Beli Saldo' button is not visible,
+     * the method clicks on the 'Coba Sekarang' button.
+     */
+    public void handlePopupMamiAds() {
+        // Check if the 'Coba Sekarang' button on the popup is visible
+        // OR if the 'Beli Saldo' button is not visible
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
+                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
+            playwright.clickOn(cobaSekarangBtnOnPopUp);
+        }
     }
 
     /**
@@ -131,18 +147,13 @@ public class MamiAdsPO {
      * and this method also handle if pop up is appear on mamiads page
      */
     public void clickOnBeliSaldoBtn() {
-        // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
-        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
-            playwright.clickOn(cobaSekarangBtnOnPopUp);
-        }
         playwright.clickOn(beliSaldoBtn);
     }
 
     /**
      * buy saldo on mamiads saldo page
      *
-     * @param saldo you should use ex. 'Rp6000'
+     * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
         playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
