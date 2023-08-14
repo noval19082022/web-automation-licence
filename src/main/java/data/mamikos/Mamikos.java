@@ -47,4 +47,5 @@ public class Mamikos {
     public static final String MAMIPOIN_EXPIRED = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinExpired");
     public static final String MAMIPOIN_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinHistory");
     public static final String MAMIKOS_VOUCHER = JavaHelpers.getPropertyValue(MAMIKOS, "mamikosVoucher");
+    public static final String AKUN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerSetting") ;
 }
