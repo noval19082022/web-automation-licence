@@ -35,6 +35,26 @@ public class KontrakKerjaSamaPO {
     Locator confirmSimpanButton;
     //End Edit Profil Pemilik
 
+    //Informasi Transfer Pendapatan
+    Locator nomorRekening;
+    Locator namaBank;
+    Locator cabangBank;
+    Locator namaPemilikRekening;
+    Locator tanggalTransferPemilik;
+    Locator ubahInformasiTransferPendapatanButton;
+    //End Informasi Transfer Pendapatan
+
+    //Edit Informasi Transfer Pendapatan
+    Locator nomorRekeningInput;
+    Locator namaBankInput;
+    Locator namaBankSelect;
+    Locator cabangBankInput;
+    Locator namaPemilikRekeningInput;
+    Locator tanggalTransferPemilikInput;
+    Locator tanggalTransferPemilikSelect;
+    //End Edit Informasi Transfer Pendapatan
+
+
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
 
@@ -59,6 +79,20 @@ public class KontrakKerjaSamaPO {
         dropdownOptions = page.locator(".bg-c-dropdown__menu-item-content");
         simpanButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Simpan"));
         confirmSimpanButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
+
+        nomorRekening = page.locator("#disbursement-information .bg-c-list-item__description").first();
+        namaBank = page.locator("#disbursement-information .bg-c-list-item__description").nth(1);
+        cabangBank = page.locator("#disbursement-information .bg-c-list-item__description").nth(2);
+        namaPemilikRekening = page.locator("#disbursement-information .bg-c-list-item__description").nth(3);
+        tanggalTransferPemilik = page.locator("#disbursement-information .bg-c-list-item__description").nth(4);
+        ubahInformasiTransferPendapatanButton = page.locator("#disbursement-information").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
+
+        nomorRekeningInput = page.locator("input.bg-c-input__field").nth(0);
+        namaBankInput = page.locator("input.bg-c-input__field").nth(1);
+        cabangBankInput = page.locator("input.bg-c-input__field").nth(2);
+        namaPemilikRekeningInput = page.locator("input.bg-c-input__field").nth(3);
+        namaBankSelect = page.locator(".bg-c-select").first();
+        tanggalTransferPemilikSelect = page.locator(".bg-c-select").last();
     }
 
     /**
@@ -193,6 +227,108 @@ public class KontrakKerjaSamaPO {
      * Save ubah Profil Pemilik
      */
     public void submitEditProfilPemilik() {
+        simpanButton.click();
+        confirmSimpanButton.click();
+    }
+
+    /**
+     * Assert No Rekening in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
+     * @param noRek
+     */
+    public void assertNoRekening(String noRek) {
+        assertThat(nomorRekening).hasText(noRek);
+    }
+
+    /**
+     * Assert Nama Bank in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
+     * @param bankName
+     */
+    public void assertNamaBank(String bankName) {
+        assertThat(namaBank).hasText(bankName);
+    }
+
+    /**
+     * Assert Cabang Bank in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
+     * @param branch
+     */
+    public void assertCabangBank(String branch) {
+        assertThat(cabangBank).hasText(branch);
+    }
+
+    /**
+     * Assert Nama Pemilik Rekening in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
+     * @param pemilik
+     */
+    public void assertNamaPemilikRekening(String pemilik) {
+        assertThat(namaPemilikRekening).hasText(pemilik);
+    }
+
+    /**
+     * Assert Tanggal Transfer ke Pemilik in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
+     * @param tanggalTransfer
+     */
+    public void assertTanggalTransfer(String tanggalTransfer) {
+        assertThat(tanggalTransferPemilik).hasText(tanggalTransfer);
+    }
+
+    /**
+     * Click Ubah in Informasi Transfer Pendapatan
+     */
+    public void ubahInformasiTransferPendapatan() {
+        ubahInformasiTransferPendapatanButton.waitFor();
+        ubahInformasiTransferPendapatanButton.click();
+    }
+
+    /**
+     * Nomor Rekening field in Edit Informasi Transfer Pendapatan form
+     * @param noRek
+     */
+    public void editNoRekening(String noRek) {
+        nomorRekeningInput.fill(noRek);
+    }
+
+    /**
+     * Nama Bank field in Edit Informasi Transfer Pendapatan form
+     * @param bankName
+     */
+    public void editNamaBank(String bankName) {
+        Locator bank = page.locator("a").filter(new Locator.FilterOptions().setHasText(bankName)).first();
+        namaBankSelect.click();
+        namaBankInput.fill(bankName);
+        bank.click();
+    }
+
+    /**
+     * Cabang Bank field in Edit Informasi Transfer Pendapatan form
+     * @param branch
+     */
+    public void editCabangBank(String branch) {
+        cabangBankInput.fill(branch);
+    }
+
+    /**
+     * Nama Pemilik Rekening in Edit Informasi Transfer Pendapatan form
+     * @param pemilik
+     */
+    public void editNamaPemilikBank(String pemilik) {
+        namaPemilikRekeningInput.fill(pemilik);
+    }
+
+    /**
+     * Tanggal Transfer in Edit Informasi Transfer Pendapatan form
+     * @param tanggalTransfer
+     */
+    public void editTanggalTransfer(String tanggalTransfer) {
+        Locator tanggal = page.locator("a").filter(new Locator.FilterOptions().setHasText(tanggalTransfer));
+
+        tanggalTransferPemilikSelect.click();
+        tanggal.click();
+    }
+
+    /**
+     * Simpan edit Informasi Transfer Pendapatan
+     */
+    public void submitEditInformasiTransferPendapatan() {
         simpanButton.click();
         confirmSimpanButton.click();
     }

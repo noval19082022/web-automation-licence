@@ -28,3 +28,24 @@ Feature: Kontrak Kerja Sama
     Then profil pemilik section match with data
       | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
+
+  @TEST_PMAN-3948
+  Scenario: See and Edit Kontrak Kerja Sama - Informasi Transfer Pendapatan
+    When admin see profil pemilik
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+    #Admin edit informasi transfer pendapatan
+    When admin edit informasi transfer pendapatan
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+    #revert back informasi transfer pendapatan
+    When admin edit informasi transfer pendapatan
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
