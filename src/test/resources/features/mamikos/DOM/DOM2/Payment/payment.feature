@@ -828,3 +828,14 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "PRE/20230811/56545/34420"
     Then admin verify see text "PRE/20230811/56545/34420"
+
+  @TEST_DOM-676 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Filter by status unpaid
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux filter the status of package invoice list premium for "unpaid" transaction
+    Then admin bangkerupux see transaction status list on package invoice list is only "unpaid"
+
