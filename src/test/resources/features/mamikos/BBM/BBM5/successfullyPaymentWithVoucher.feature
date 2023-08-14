@@ -1,4 +1,4 @@
-@regression @BBM5 @voucher @selasa
+@regression @BBM5 @voucher
 
 Feature: Successfully Payment with Voucher
 
