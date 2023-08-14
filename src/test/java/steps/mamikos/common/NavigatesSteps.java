@@ -268,4 +268,9 @@ public class NavigatesSteps {
     public void adminNavigatesToPromoOwner() {
         playwright.navigateTo(Mamikos.URL + "/admin/promo", 30000.0, LoadState.LOAD);
     }
+
+    @When("owner navigates to property saya apartemen")
+    public void userNavigateToPropertySayaApartemen() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_APARTEMEN, 30000.0, LoadState.LOAD);
+    }
 }
