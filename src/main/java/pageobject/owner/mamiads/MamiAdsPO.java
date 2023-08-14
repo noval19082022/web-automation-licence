@@ -144,7 +144,6 @@ public class MamiAdsPO {
 
     /**
      * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
-     * and this method also handle if pop up is appear on mamiads page
      */
     public void clickOnBeliSaldoBtn() {
         playwright.clickOn(beliSaldoBtn);
