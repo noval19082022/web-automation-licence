@@ -929,3 +929,13 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "PRE/20230814/56591/16250"
     Then admin verify see text "paid"
     *    admin bangkerupux click on shorlink invoice on invoice list "https://pay-jambu.kerupux.com/invoice/select-payment/97876?signature=38fcc2e07bfe0cc42dd67e018622e9076333811666c5189d5f6ae9c572c27783"
+
+  @TEST_DOM-684 @Automated @web-covered
+  Scenario: BackOffice][Invoice Security] Open invoice unpaid from list premium
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "PRE/20230814/56592/78363"
+    Then admin bangkerupux click on shorlink invoice on invoice list "https://pay-jambu.kerupux.com/invoice/select-payment/97907?signature=31cf780c263edeecee662927b00e6ecbab8119c90be8f3272d5e61fa42063a03"
