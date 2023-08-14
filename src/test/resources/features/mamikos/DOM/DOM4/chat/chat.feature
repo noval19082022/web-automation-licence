@@ -71,7 +71,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     |  phone prod     | password      |
-      | 083176408311   |  083132824758   | mamikosignite |
+      | 083176408311   |  083132824758   | qwerty123 |
     And user click chat button in top bar owner home page
     And search chat in chatlist "Raney Arora"
     Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
