@@ -1,3 +1,4 @@
+@DOM2
 Feature: Inquiry and Create Manual Payout
 
   @TEST_DOM-428 @Automated @web-covered
