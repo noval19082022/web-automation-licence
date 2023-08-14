@@ -76,9 +76,19 @@ public class PremiumInvoicePO {
 
     /**
      * get list transaction status 'expired, paid, unpaid'
+     *
      * @return
      */
     public List<String> getListStatusTransaction() {
         return playwrightHelpers.getListInnerTextFromListLocator(statusList);
+    }
+
+    /**
+     * get status transaction the first invoice on list
+     *
+     * @return
+     */
+    public String getInvoiceStatusTransaction() {
+        return playwrightHelpers.getText(statusList.first());
     }
 }

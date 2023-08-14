@@ -848,3 +848,20 @@ Feature: Payment BackOffice Staging
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux search package invoice list premium by "Invoice Number" and input field "GP3/20210623/00003930/7590"
     Then admin bangkerupux get blank data list on package invoice list
+
+  @TEST_DOM-672 @Automated @web-covered
+  Scenario: [Owner][Payment premium] Owner unpaid premium paket
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 08123450977 | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp205.000"
+
+    #  Scenario: Admin check the transaction on Menu Premium Package status unpaid
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to package invoice list menu on premium invoice
+    And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "08123450977"
+    Then admin bangkerupux see transaction status on package invoice list is "unpaid"
