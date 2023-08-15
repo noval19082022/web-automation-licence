@@ -17,6 +17,7 @@ public class KontrakKerjaSamaSteps {
 
     private List<Map<String, String>> profilPemilik;
     private List<Map<String, String>> profilPemilikEdit;
+    private List<Map<String, String>> transfer;
 
     @When("admin see profil pemilik")
     public void admin_see_profil_pemilik() {
@@ -61,5 +62,39 @@ public class KontrakKerjaSamaSteps {
         contract.editKecamatanPemilik(kecamatan);
         contract.editKelurahanPemilik(kelurahan);
         contract.submitEditProfilPemilik();
+    }
+
+    @When("admin edit informasi transfer pendapatan")
+    public void admin_edit_informasi_transfer_pendapatan(DataTable tables) {
+        transfer = tables.asMaps(String.class, String.class);
+        String noRek = transfer.get(0).get("Nomor Rekening");
+        String bankName = transfer.get(0).get("Nama Bank");
+        String branch = transfer.get(0).get("Cabang");
+        String pemilik = transfer.get(0).get("Nama Pemilik");
+        String tanggalTransfer = transfer.get(0).get("Tanggal Transfer");
+
+        contract.ubahInformasiTransferPendapatan();
+        contract.editNoRekening(noRek);
+        contract.editNamaBank(bankName);
+        contract.editCabangBank(branch);
+        contract.editNamaPemilikBank(pemilik);
+        contract.editTanggalTransfer(tanggalTransfer);
+        contract.submitEditInformasiTransferPendapatan();
+    }
+
+    @Then("informasi transfer pendapatan should be match with data")
+    public void informasi_transfer_pendapatan_should_be_match_with_data(DataTable tables) {
+        transfer = tables.asMaps(String.class, String.class);
+        String noRek = transfer.get(0).get("Nomor Rekening");
+        String bankName = transfer.get(0).get("Nama Bank");
+        String branch = transfer.get(0).get("Cabang");
+        String pemilik = transfer.get(0).get("Nama Pemilik");
+        String tanggalTransfer = transfer.get(0).get("Tanggal Transfer");
+
+        contract.assertNoRekening(noRek);
+        contract.assertNamaBank(bankName);
+        contract.assertCabangBank(branch);
+        contract.assertNamaPemilikRekening(pemilik);
+        contract.assertTanggalTransfer(tanggalTransfer);
     }
 }
