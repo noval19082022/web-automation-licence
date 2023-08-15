@@ -33,6 +33,7 @@ public class ChatOwnerPO {
     Locator registerGoldplusButton;
     Locator weeklyQuotaChatroomHeader;
     Locator broadcastChatBtn;
+    Locator gpPacakgeText;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -62,6 +63,7 @@ public class ChatOwnerPO {
         weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
+        gpPacakgeText = page.getByText("Kini, Anda bisa balas chat sepuasnya ");
     }
 
     /**
@@ -299,5 +301,13 @@ public class ChatOwnerPO {
      */
     public void dismissFTUEMarsKuotaNol() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
+    }
+
+    /**
+     * Get Gp Package text on chat menu
+     * @return String text "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
+     */
+    public String gpPacakgeText() {
+        return playwright.getText(gpPacakgeText);
     }
 }

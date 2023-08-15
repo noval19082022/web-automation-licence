@@ -414,4 +414,9 @@ public class GoldplusSteps {
     public void owner_click_lihat_selengkapnya_at_section_tagihan() {
         goldplus.lihatSelngkapnyaSectionDetailTagihan();
     }
+
+    @Then("owner will see card box contains {string}")
+    public void owner_will_see_card_box_contains(String benefit) {
+        Assert.assertTrue(chat.gpPacakgeText().contains(benefit),"GP Package not contain benefit "+benefit);
+    }
 }
