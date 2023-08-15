@@ -26,7 +26,7 @@ public class FlipSteps {
 
     @When("admin navigate to riwayat transaksi domestic page on big flip test mode")
     public void adminNavigateToRiwayatTransaksiDomesticPageOnBigFlipTestMode() {
-        flipPO.navigateToDomesticTransaction();
+        flipPO.navigateToRiwayatTransaction();
         Assert.assertTrue(flipPO.verifyOnTestMode());
     }
 
@@ -34,5 +34,11 @@ public class FlipSteps {
     public void adminSetForceSuccessTransactionOnFlip() {
         Assert.assertTrue(flipPO.verifyOnTestMode());
         flipPO.setForceTransaction();
+    }
+
+    @Then("admin set failed transaction on flip")
+    public void adminSetFailedTransactionOnFlip() {
+        Assert.assertTrue(flipPO.verifyOnTestMode());
+        flipPO.setFailedTransaction();
     }
 }

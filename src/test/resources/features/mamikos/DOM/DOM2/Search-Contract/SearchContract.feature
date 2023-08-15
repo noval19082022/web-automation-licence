@@ -1,3 +1,4 @@
+@DOM2
 Feature: Search Contract
 
 	#popup terminate non kost selection
