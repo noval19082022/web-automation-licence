@@ -184,8 +184,7 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Get text content of an locator
-     *
+     * Get text content of a locator
      * @param locator target locator
      * @return String data type
      */

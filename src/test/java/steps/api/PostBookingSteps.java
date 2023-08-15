@@ -14,7 +14,10 @@ import data.api.CreateBooking;
 import data.api.UserCookies;
 import data.mamikos.ApiEndpoints;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JavaHelpers;
@@ -34,11 +37,14 @@ public class PostBookingSteps {
 
     @When("playwright create booking for tenant")
     public void playwrightCreateBookingForTenant() {
+        page.pause();
 //        String createBookingEndpoints = JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{roomId}", "39645784");
 //        createBookingEndpoints =  JavaHelpers.formatString(createBookingEndpoints, "{roomTypeId}", "6230");
         System.out.println(ApiEndpoints.CREATE_BOOKING);
         createBookingBody = CreateBooking.getCreateBookingBody();
         System.out.println(createBookingBody);
+        createBookingHeaders.put("authorization", "GIT WEB:WEB");
+        createBookingHeaders.put ("content-type", "application/json");
         createBookingHeaders.put("Accept", "application/json");
         createBookingHeaders.put("Cookie", UserCookies.getTenantCookie());
         createBookingHeaders.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
@@ -46,6 +52,5 @@ public class PostBookingSteps {
         System.out.println(createBookingResponse.url());
         System.out.println(createBookingResponse.text());
         System.out.println(createBookingResponse.status());
-        page.pause();
     }
 }
