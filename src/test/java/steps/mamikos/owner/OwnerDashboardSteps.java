@@ -2,12 +2,16 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
@@ -95,6 +99,100 @@ public class OwnerDashboardSteps {
     @Then("verify label goldplus on chatlist")
     public void verify_label_goldplus_on_chatlist() {
         Assert.assertTrue(ownerDashboardPO.isGoldplusLabelDisplayed(), "Owner doesn't goldplus member!");
+    }
+
+    @Then("check the header menu display on homepage owner")
+    public void check_the_header_menu_display_on_homepage_owner() {
+        Assert.assertTrue(ownerDashboardPO.isHelpCenterOwnerDisplayed(), "Element Pusat Bantuan not present!");
+        Assert.assertTrue(ownerDashboardPO.isNotificationOwnerButtonDisplayed(), "Element Notifikasi Button not present!");
+    }
+
+    @Then("user see username in top right shows as {string}")
+    public void user_see_username_in_top_right_shows_as(String name) {
+        Assert.assertEquals(ownerDashboardPO.getOwnerUsername(), name, "Username label is wrong");
+    }
+
+    @When("user click mamikos.com logo")
+    public void userClickMamikosComLogo() {
+        ownerDashboardPO.clickOnMamikosLogo();
+    }
+
+    @And("user click booking kos button")
+    public void userClickBookingKosButton() {
+        ownerDashboardPO.clickOnBookingKos();
+    }
+
+    @And("user click promosi iklan anda button")
+    public void userClickPromosiIklanAndaButton() {
+        ownerDashboardPO.clickOnPromosiIklanAnda();
+    }
+
+    @And("user clicks pusat bantuan on nav bar owner")
+    public void userClicksPusatBantuanOnNavBarOwner() {
+        ownerDashboardPO.clickOnPusatBantuan();
+    }
+
+    @Then("user will be verify dropdown in property saya")
+    public void user_will_be_verify_dropdown_in_property_saya() {
+        Assert.assertTrue(ownerDashboardPO.isPropertyMenuDropdownShowing(), "Dropdown is not showing");
+    }
+
+    @When("user click profile on header")
+    public void user_click_profile_on_header() {
+        ownerDashboardPO.clickOnOwnerProfile();
+    }
+
+    @Then("user see dropdown with button owner page and exit")
+    public void user_see_dropdown_with_button_owner_page_and_exit() {
+        Assert.assertTrue(ownerDashboardPO.isOwnerPageDisplayed(), "Owner page menu is missing");
+        Assert.assertTrue(ownerDashboardPO.isExitButtonDisplayed(), "Exit menu is missing");
+    }
+
+    @When("user click owner page button")
+    public void user_click_owner_page_button() {
+        ownerDashboardPO.clickOnOwnerPage();
+    }
+
+    @When("user click Chat CS button")
+    public void user_click_Chat_CS_button() {
+        ownerDashboardPO.clickOnChatCS();
+    }
+
+    @Then("user see Contact us pop up is appear")
+    public void user_see_Contact_us_pop_up_is_appear() {
+        Assert.assertTrue(ownerDashboardPO.isContactUsPresent(), "Contact CS pop up is not appear");
+    }
+
+    @Then("user see user's name {string} in owner dashboard")
+    public void user_see_user_s_name_in_owner_dashboard(String userName) {
+        Assert.assertEquals(ownerDashboardPO.getUserGreeting().trim(), userName, "Username greeting is wrong");
+    }
+
+    @When("user click username in owner dashboard")
+    public void user_click_username_in_owner_dashboard() {
+        ownerDashboardPO.clickUserGreeting();
+    }
+
+    @When("user click owner username on header")
+    public void user_click_owner_username_on_header() {
+        ownerDashboardPO.clickOwnerUserName();
+    }
+
+    @Then("user see owner's name & phone number, text link {string} & {string}")
+    public void user_see_owner_s_name_phone_number_text_link(String settings, String logout) {
+        Assert.assertEquals(ownerDashboardPO.getSettingsLabel(), settings, "Settings label is wrong");
+        Assert.assertEquals(ownerDashboardPO.getLogoutLabel(), logout, "Logout label is wrong");
+    }
+
+    @And("user see widget waktunya mengelola properti is as expected")
+    public void user_see_widget_waktunya_mengelola_properti_is_as_expected(DataTable dataTable){
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 1;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to "+content.get("title"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"),"subtitle not equal to"+content.get("subtitle"));
+            i++;
+        }
     }
 }
 

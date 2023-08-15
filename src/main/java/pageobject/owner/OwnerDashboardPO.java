@@ -33,6 +33,24 @@ public class OwnerDashboardPO {
     Locator ftueChatListOwner;
     Locator icnCloseBcTooltip;
     Locator gpLabelChatList;
+    Locator helpCenterOwnerButton;
+    Locator notificationOwnerButton;
+    Locator ownerUserName;
+    Locator mamikosLogo;
+    Locator bookingKosButton;
+    Locator promoAdsButton;
+    Locator homeHelpCenterButton;
+    Locator propertySayaDropdownMenu;
+    Locator ownerPageButton;
+    Locator ownerLogoutButton;
+    Locator chatCSButton;
+    Locator contactUsPopUp;
+    Locator greetingUserLabel;
+    Locator accountSettingsButton;
+    Locator addKostButton;
+    Locator widgetTitleWaktunyaMengelolaProperti;
+    Locator widgetSubtitleWaktunyaMengelolaProperti;
+    Locator logoutOwnerPageButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -40,7 +58,7 @@ public class OwnerDashboardPO {
         this.locator = new LocatorHelpers(page);
         manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
         pengajuanBooking = playwright.locatorByRoleSetName(locator.roleButton, "Pengajuan Booking");
-        ownerProfile = playwright.locatorByRoleSetName(locator.roleButton, "account Akun");
+        ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("'broadcast-message'"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -58,8 +76,24 @@ public class OwnerDashboardPO {
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
-
-
+        helpCenterOwnerButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pusat Bantuan"));
+        notificationOwnerButton = page.locator("[href='#basic-notification']");
+        ownerUserName = page.locator(".c-mk-header__username");
+        mamikosLogo = page.locator(".c-mk-header__logo");
+        bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
+        promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
+        propertySayaDropdownMenu = page.getByText("kos-marketing Properti Saya chevron-right Kos Apartemen");
+        ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
+        ownerLogoutButton = page.getByTestId("exitButton");
+        chatCSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat CS"));
+        contactUsPopUp = page.frameLocator("iframe[title=\"Find more information here\"]").getByTestId("widget-header-view");
+        greetingUserLabel = page.locator(".greeting-section__name");
+        accountSettingsButton = page.getByText("Setelan Akun");
+        logoutOwnerPageButton = page.getByText("Logout");
+        addKostButton = page.locator("//p[contains(.,'Tambah Properti')]");
+        widgetTitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-title bg-c-text bg-c-text--title-5']");
+        widgetSubtitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-subtitle bg-c-text bg-c-text--body-2']");
     }
 
     /**
@@ -255,5 +289,165 @@ public class OwnerDashboardPO {
     public boolean isGoldplusLabelDisplayed() {
         playwright.waitTillLocatorIsVisible(gpLabelChatList);
         return gpLabelChatList.isVisible();
+    }
+
+    /**
+     * Check element help center owner button header is displayed
+     *
+     * @return status true / false
+     */
+    public Boolean isHelpCenterOwnerDisplayed() {
+        return playwright.waitTillLocatorIsVisible(helpCenterOwnerButton);
+    }
+
+    /**
+     * Check element notification button owner header is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isNotificationOwnerButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(notificationOwnerButton);
+    }
+
+    /**
+     * Get owner username in top right
+     *
+     * @return String owner username
+     */
+    public String getOwnerUsername() {
+        return playwright.getText(ownerUserName);
+    }
+
+    /**
+     * Click mamikos.com logo
+     */
+    public void clickOnMamikosLogo() {
+        playwright.clickOn(mamikosLogo);
+    }
+
+    /**
+     * Click booking kos on dashboard
+     */
+    public void clickOnBookingKos() {
+        playwright.clickOn(bookingKosButton);
+    }
+
+    /**
+     * Click booking kos on dashboard
+     */
+    public void clickOnPromosiIklanAnda() {
+        playwright.clickOn(promoAdsButton);
+    }
+
+    /**
+     * Click booking kos on dashboard
+     */
+    public void clickOnPusatBantuan() {
+        playwright.clickOn(homeHelpCenterButton);
+    }
+
+    /**
+     * Check  dropdown property saya
+     * @return true if dropdown menu showing. Otherwise false
+     */
+    public boolean isPropertyMenuDropdownShowing(){
+        return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
+    }
+
+    /**
+     * Check element owner page is displayed
+     *
+     * @return status true / false
+     */
+    public Boolean isOwnerPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(ownerPageButton);
+    }
+
+    /**
+     * Check element Exit button is displayed
+     *
+     * @return status true / false
+     */
+    public Boolean isExitButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(ownerLogoutButton);
+    }
+
+    /**
+     * Click on Owner Page
+     */
+    public void clickOnOwnerPage() {
+        playwright.clickOn(ownerPageButton);
+    }
+
+    /**
+     * Click on "Chat CS"
+     */
+    public void clickOnChatCS() {
+        playwright.clickOn(chatCSButton);
+    }
+
+    /**
+     * Check contact us pop up is present
+     * @return true if appear
+     */
+    public boolean isContactUsPresent() {
+        return playwright.waitTillLocatorIsVisible(contactUsPopUp);
+    }
+
+    /**
+     * Get username greeting in owner dashboard
+     * @return String "Halo, <username>"
+     */
+    public String getUserGreeting() {
+        return playwright.getText(greetingUserLabel);
+    }
+
+    /**
+     * Click on username greeting in owner dashboard
+     * */
+    public void clickUserGreeting() {
+        playwright.clickOn(greetingUserLabel);
+    }
+
+    /**
+     * Click on Owner username in top right
+     */
+    public void clickOwnerUserName() {
+        playwright.clickOn(ownerUserName);
+    }
+
+    /**
+     * Get Settings label in pop up main menu
+     *
+     * @return text settings label
+     */
+    public String getSettingsLabel() {
+        return playwright.getText(accountSettingsButton);
+    }
+
+    /**
+     * Get Logout label in pop up main menu
+     *
+     * @return text logout label
+     */
+    public String getLogoutLabel() {
+        return playwright.getText(logoutOwnerPageButton).trim();
+    }
+
+    /**
+     * Get Text of Review Title by index
+     * @param index - index review title
+     * @return text of Review Page
+     */
+    public String widgetWaktunyaMengelolaProperti (String widgetList, int index){
+        String value= "";
+        page.waitForLoadState();
+        playwright.pageScrollUntilElementIsVisible(widgetTitleWaktunyaMengelolaProperti.nth(4));
+        if (widgetList.equals("title")) {
+            value = playwright.getText(widgetTitleWaktunyaMengelolaProperti.nth(index));
+        } else if (widgetList.equals("subtitle")) {
+            value = playwright.getText(widgetSubtitleWaktunyaMengelolaProperti.nth(index));
+        }
+        return value;
     }
 }
