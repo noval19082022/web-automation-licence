@@ -16,7 +16,7 @@ import java.util.Optional;
 public class PaymentSteps {
     Page page = ActiveContext.getActivePage();
     RiwayatBookingPO riwayatBookingPO = new RiwayatBookingPO(page);
-    InvoicePO invoicePO;
+    InvoicePO invoicePO = new InvoicePO(page);
     PaymentPO paymentPO;
     MidtransPaymentPO midtransPaymentPO;
 
