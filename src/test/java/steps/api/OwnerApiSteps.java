@@ -3,7 +3,6 @@ package steps.api;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.Cookie;
 import com.microsoft.playwright.options.RequestOptions;
 import config.playwright.context.ActiveContext;
 import data.mamikos.ApiEndpoints;

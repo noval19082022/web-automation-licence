@@ -9,8 +9,6 @@ import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
