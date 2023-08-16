@@ -65,7 +65,7 @@ public class ChatOwnerPO {
         weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
-        gpPacakgeText = page.locator("//*[@data-testid='popperReference']");
+        gpPacakgeText =  page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
     }
