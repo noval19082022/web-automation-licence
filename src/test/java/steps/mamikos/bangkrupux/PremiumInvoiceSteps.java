@@ -38,4 +38,9 @@ public class PremiumInvoiceSteps {
         premiumInvoicePO.getListStatusTransaction().forEach(
                 statusActual -> Assert.assertEquals(statusActual, status));
     }
+
+    @Then("admin bangkerupux see transaction status on package invoice list is {string}")
+    public void adminBangkerupuxSeeTransactionStatusOnPackageInvoiceListIsOnly(String status) {
+        Assert.assertEquals(premiumInvoicePO.getInvoiceStatusTransaction(), status);
+    }
 }

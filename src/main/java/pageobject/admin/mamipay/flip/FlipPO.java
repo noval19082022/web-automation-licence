@@ -19,8 +19,8 @@ public class FlipPO {
     //----- flip sandbox -----
     private Locator popUpTextTestMode;
     private Locator riwayatTransactionMenu;
-    private Locator domesticTransactionMenu;
     private Locator setForceTransaction;
+    private Locator setFailedTransaction;
 
     public FlipPO(Page page) {
         this.page = page;
@@ -33,8 +33,8 @@ public class FlipPO {
         //---- flip sandbox ----
         this.popUpTextTestMode = page.getByText("Anda sedang berada dalam Test Mode.", new Page.GetByTextOptions().setExact(true));
         this.riwayatTransactionMenu = page.getByTestId("qa-menu-bar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Riwayat Transaksi"));
-        this.domesticTransactionMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Domestik"));
         this.setForceTransaction = page.getByTestId("qa-button").getByText("Force Success").first();
+        this.setFailedTransaction = page.getByTestId("qa-button").getByText("Force Failed").first();
     }
 
     /**
@@ -63,11 +63,10 @@ public class FlipPO {
     }
 
     /**
-     * user navigate to domestic transaction
+     * user navigate to riwayat transaction
      */
-    public void navigateToDomesticTransaction() {
+    public void navigateToRiwayatTransaction() {
         playwrightHelpers.clickOn(riwayatTransactionMenu);
-        playwrightHelpers.clickOn(domesticTransactionMenu);
     }
 
     /**
@@ -75,5 +74,12 @@ public class FlipPO {
      */
     public void setForceTransaction() {
         playwrightHelpers.clickOn(setForceTransaction);
+    }
+
+    /**
+     * set failed transaction for refund
+     */
+    public void setFailedTransaction() {
+        playwrightHelpers.clickOn(setFailedTransaction);
     }
 }
