@@ -54,6 +54,49 @@ public class KontrakKerjaSamaPO {
     Locator tanggalTransferPemilikSelect;
     //End Edit Informasi Transfer Pendapatan
 
+    //Detail Kerja Sama
+    Locator detailKerjaSamaSection;
+    Locator jenisProduk;
+    Locator modelKerjaSama;
+    Locator basicCommission;
+    Locator totalKamar;
+    Locator tipeJp;
+    Locator presentaseJp;
+    Locator jumlahJp;
+    Locator tipeAdp;
+    Locator presentaseAdp;
+    Locator jumlahAdp;
+    Locator pendapatanPemilikBooking;
+    Locator pendapatanMamikosBooking;
+    Locator jangkaWaktu;
+    Locator awalKerjaSama;
+    Locator akhirKerjaSama;
+    Locator biayaKeanggotaan;
+    Locator ubahDetailKerjaSamaButton;
+    Locator hybridSection;
+    Locator pendapatanPemilikDbet;
+    Locator pendapatanMamikosDbet;
+    //End Detail Kerja Sama
+
+    //Edit Detail Kerja Sama
+    Locator jenisProdukSelect;
+    Locator jenisProdukInput;
+    Locator modelKerjaSamaSelect;
+    Locator basiCommissionInput;
+    Locator tipeJpSelect;
+    Locator tipeJpNone;
+    Locator presentaseJpInput;
+    Locator jumlahJpInput;
+    Locator tipeAdpSelect;
+    Locator tipeAdpNone;
+    Locator presentaseAdpInput;
+    Locator jumlahAdpInput;
+    Locator hybridButton;
+    Locator hybridButtonOff;
+    Locator penpadatanDbetMamikosInput;
+    Locator jangkaWaktuKerjaSamaInput;
+    Locator biayaKeanggotaanInput;
+    //End Edit Detail Kerja Sama
 
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
@@ -93,6 +136,45 @@ public class KontrakKerjaSamaPO {
         namaPemilikRekeningInput = page.locator("input.bg-c-input__field").nth(3);
         namaBankSelect = page.locator(".bg-c-select").first();
         tanggalTransferPemilikSelect = page.locator(".bg-c-select").last();
+
+        detailKerjaSamaSection = page.locator("#partnership-detail");
+        jenisProduk = page.locator("#partnership-detail .bg-c-list-item__description").nth(0);
+        modelKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(1);
+        basicCommission = page.locator("#partnership-detail .bg-c-list-item__description").nth(2);
+        totalKamar = page.locator("#partnership-detail .bg-c-list-item__description").nth(3);
+        tipeJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(4);
+        presentaseJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(5);
+        jumlahJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(6);
+        tipeAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(7);
+        presentaseAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(8);
+        jumlahAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(9);
+        pendapatanPemilikBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(10);
+        pendapatanMamikosBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(11);
+        jangkaWaktu = page.locator("#partnership-detail .bg-c-list-item__description").nth(12);
+        awalKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(13);
+        akhirKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(14);
+        biayaKeanggotaan = page.locator("#partnership-detail .bg-c-list-item__description").nth(15);
+        ubahDetailKerjaSamaButton = page.locator("#partnership-detail").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
+        hybridSection = page.getByText("Ketentuan Komisi dari Penyewa DBET");
+        pendapatanPemilikDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(12);
+        pendapatanMamikosDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(13);
+
+        jenisProdukSelect = page.locator(".bg-c-select").first();
+        modelKerjaSamaSelect = page.locator(".bg-c-select").nth(1);
+        basiCommissionInput = page.locator(".bg-c-input__field").first();
+        tipeJpSelect = page.locator(".bg-c-select").nth(2);
+        tipeJpNone = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("None")).locator("a");
+        presentaseJpInput = page.locator(".bg-c-input__field").nth(2);
+        jumlahJpInput = page.locator(".bg-c-input__field").nth(3);
+        tipeAdpSelect = page.locator(".bg-c-select").nth(3);
+        tipeAdpNone = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("None")).locator("a");
+        presentaseAdpInput = page.locator(".bg-c-input__field").nth(4);
+        jumlahAdpInput = page.locator(".bg-c-input__field").nth(5);
+        hybridButton = page.locator(".bg-c-switch__input");
+        hybridButtonOff = page.locator(".bg-c-switch--off");
+        penpadatanDbetMamikosInput = page.locator(".bg-c-input__field").nth(9);
+        jangkaWaktuKerjaSamaInput = page.getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Bulan")).getByRole(AriaRole.TEXTBOX);
+        biayaKeanggotaanInput = page.getByTestId("input-currency-masking").last();
     }
 
     /**
@@ -331,5 +413,204 @@ public class KontrakKerjaSamaPO {
     public void submitEditInformasiTransferPendapatan() {
         simpanButton.click();
         confirmSimpanButton.click();
+    }
+
+    /**
+     * scroll to view section detail kerja sama
+     */
+    public void viewScetionDetailKerjaSama() {
+        detailKerjaSamaSection.waitFor();
+        detailKerjaSamaSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Assert model kerja sama section
+     * @param produk
+     * @param model
+     * @param commission
+     * @param roomTotal
+     */
+    public void assertModelKerjaSama(String produk, String model, String commission, String roomTotal) {
+        assertThat(jenisProduk).hasText(produk);
+        assertThat(modelKerjaSama).hasText(model);
+        assertThat(basicCommission).hasText(commission);
+        assertThat(totalKamar).hasText(roomTotal);
+    }
+
+    /**
+     * Assert Revenue share section
+     * @param jpType
+     * @param jpPrecentage
+     * @param jpAmount
+     * @param adpType
+     * @param adpPrecentage
+     * @param adpAmount
+     * @param revBookingPemilik
+     * @param revBookingMamikos
+     */
+    public void assertRevenuShare(String jpType, String jpPrecentage, String jpAmount, String adpType, String adpPrecentage, String adpAmount, String revBookingPemilik, String revBookingMamikos) {
+        assertThat(tipeJp).hasText(jpType);
+        assertThat(presentaseJp).hasText(jpPrecentage);
+        assertThat(jumlahJp).hasText(jpAmount);
+        assertThat(tipeAdp).hasText(adpType);
+        assertThat(presentaseAdp).hasText(adpPrecentage);
+        assertThat(jumlahAdp).hasText(adpAmount);
+        assertThat(pendapatanPemilikBooking).hasText(revBookingPemilik);
+        assertThat(pendapatanMamikosBooking).hasText(revBookingMamikos);
+    }
+
+    /**
+     * assert contract section
+     * @param month
+     * @param start
+     * @param end
+     * @param fee
+     */
+    public void assertContractDuration(String month, String start, String end, String fee) {
+        assertThat(jangkaWaktu).hasText(month);
+        assertThat(awalKerjaSama).hasText(start);
+        assertThat(akhirKerjaSama).hasText(end);
+        assertThat(biayaKeanggotaan).hasText(fee);
+    }
+
+    /**
+     * click ubah detail kerja sama
+     */
+    public void ubahDetailKerjaSama() {
+        ubahDetailKerjaSamaButton.click();
+    }
+
+    /**
+     * edit Jenis Produk
+     * @param produk
+     */
+    public void editJenisProduk(String produk) {
+        jenisProdukSelect.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(produk)).click();
+    }
+
+    /**
+     * edit model kerja sama
+     * @param model
+     */
+    public void editModelKerjaSama(String model) {
+        modelKerjaSamaSelect.click();
+        dropdownOptions.filter(new Locator.FilterOptions().setHasText(model)).click();
+    }
+
+    /**
+     * edit Basic Commission
+     * @param commission
+     */
+    public void editBasicCommission(String commission) {
+        basiCommissionInput.fill(commission);
+    }
+
+    /**
+     * edit revenue share JP
+     * @param jpType
+     * @param jpPrecentage
+     * @param jpAmount
+     */
+    public void editJp(String jpType, String jpPrecentage, String jpAmount) {
+        tipeJpSelect.scrollIntoViewIfNeeded();
+        if (jpType.equalsIgnoreCase("none")){
+            tipeJpSelect.click();
+            tipeJpNone.click();
+        } else {
+            tipeJpSelect.click();
+            dropdownOptions.filter(new Locator.FilterOptions().setHasText(jpType)).click();
+            presentaseJpInput.fill(jpPrecentage);
+            jumlahJpInput.fill(jpAmount);
+        }
+    }
+
+    /**
+     * edit revenue share ADP
+     * @param adpType
+     * @param adpPrecentage
+     * @param adpAmount
+     */
+    public void editAdp(String adpType, String adpPrecentage, String adpAmount) {
+        tipeAdpSelect.scrollIntoViewIfNeeded();
+        if (adpType.equalsIgnoreCase("none")){
+            tipeAdpSelect.click();
+            tipeAdpNone.click();
+        } else {
+            tipeAdpSelect.click();
+            dropdownOptions.filter(new Locator.FilterOptions().setHasText(adpType)).click();
+            presentaseAdpInput.fill(adpPrecentage);
+            jumlahAdpInput.fill(adpAmount);
+        }
+    }
+
+    /**
+     * Edit jangka waktu kerja sama
+     * @param month
+     */
+    public void editJangkaWaktuKerjaSama(String month) {
+        jangkaWaktuKerjaSamaInput.scrollIntoViewIfNeeded();
+        jangkaWaktuKerjaSamaInput.fill(month);
+    }
+
+    /**
+     * Edit biaya keanggotaan
+     * @param fee
+     */
+    public void editBiayaKeanggotaan(String fee) {
+        biayaKeanggotaanInput.scrollIntoViewIfNeeded();
+        biayaKeanggotaanInput.fill(fee);
+    }
+
+    /**
+     * Save edit detail kerja sama
+     */
+    public void submitEditDetailKerjaSama() {
+        simpanButton.scrollIntoViewIfNeeded();
+        simpanButton.click();
+        confirmSimpanButton.click();
+    }
+
+    /**
+     * turn on and set hybrid precentage value
+     * @param precentage
+     */
+    public void setHybridRevenue(String precentage) {
+        if (hybridButtonOff.isVisible()){
+            hybridButton.scrollIntoViewIfNeeded();
+            hybridButton.click();
+            penpadatanDbetMamikosInput.fill(precentage);
+        }
+    }
+
+    /**
+     * turn off hybrid revenue share
+     */
+    public void turnOffHybridRevenue() {
+        if (!hybridButtonOff.isVisible()){
+            hybridButton.click();
+        }
+    }
+
+    /**
+     * Assert hybrid revenue section
+     * @param state hidden / visible
+     */
+    public void assertHybridContractSection(String state) {
+        if (state.equalsIgnoreCase("visible")){
+            assertThat(hybridSection).isVisible();
+        } else if (state.equalsIgnoreCase("hidden")) {
+            assertThat(hybridSection).isHidden();
+        }
+    }
+
+    /**
+     * Assert hybrid revenue share
+     * @param precentagePemilik
+     * @param precentageMamikos
+     */
+    public void assertHybridRevenue(String precentagePemilik, String precentageMamikos) {
+        assertThat(pendapatanPemilikDbet).hasText(precentagePemilik);
+        assertThat(pendapatanMamikosDbet).hasText(precentageMamikos);
     }
 }
