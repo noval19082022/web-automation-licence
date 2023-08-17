@@ -194,5 +194,41 @@ public class OwnerDashboardSteps {
             i++;
         }
     }
+
+    @And("user click on rating card details")
+    public void user_click_on_rating_card_details() {
+        ownerDashboardPO.clickOnRatingCardDetails();
+    }
+
+    @Then("user validate review section with {string} and {string}")
+    public void user_validate(String noReview, String nonPrem) {
+        Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(noReview), "Message is not equal to " + noReview);
+        Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(nonPrem), "Message is not equal to " + nonPrem);
+    }
+
+    @Then("user verify there are only {int} review lists")
+    public void user_verify_there_are_only_review_lists(Integer number) {
+        Assert.assertEquals(ownerDashboardPO.getReviewListsCard(), number, "Kos review list should have " + number + " items");
+    }
+
+    @When("user click one of review lists")
+    public void user_click_one_of_review_lists() {
+        ownerDashboardPO.clickOnKosReviewListing();
+    }
+
+    @Then("user should see the review detail page")
+    public void user_should_see_the_review_detail_page() {
+        Assert.assertTrue(ownerDashboardPO.isDetailedReviewListsAppear(), "Detailed kos review lists is not appear");
+    }
+
+    @Then("user verify there are more than {int} review lists")
+    public void user_verify_there_are_more_than_int_review_lists(int number) {
+        Assert.assertTrue( ownerDashboardPO.getRatingCardWrapperSize() > number, "Kost review lists are not more than " + number);
+    }
+
+    @And("user verify there is no kos review section")
+    public void user_verify_there_is_no_kos_review_section() {
+        Assert.assertFalse(ownerDashboardPO.isSeeAllKostReviewTextAppear(), "See all kost review text is appeared");
+    }
 }
 

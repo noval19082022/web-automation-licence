@@ -116,4 +116,20 @@ public class PropertySayaSteps {
     public void user_click_review_in_kost_list() {
         propertySaya.clickReview();
     }
+
+    @And("owner add room with name or room number {string}")
+    public void ownerAddRoomWithNameOrRoomNumber(String roomNumber) {
+        propertySaya.addRoom(roomNumber);
+    }
+
+    @Then("user see total room is {string} in update room page")
+    public void user_see_total_room_is_in_update_room_page(String room) throws InterruptedException {
+        Assert.assertEquals(propertySaya.getTextTotalRoom(), room, "Total room is wrong");
+    }
+
+    @When("user delete room name or number in room allotment")
+    public void user_delete_room_name_or_number_in_room_allotment() throws InterruptedException {
+        propertySaya.clickOnFirstDeleteRoomIcon();
+    }
+
 }
