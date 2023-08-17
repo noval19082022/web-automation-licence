@@ -33,6 +33,10 @@ public class PropertySayaPO {
     Locator textTotalRoom;
     Locator firstDeleteButton;
     Locator deleteButtonInPopUp;
+    Locator icnClose;
+    Locator optionProperty;
+    Locator addDataButton;
+    Locator addNewKosButton;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -59,6 +63,9 @@ public class PropertySayaPO {
         textTotalRoom = page.locator(".room-table__total-room-label");
         firstDeleteButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("delete")).first();
         deleteButtonInPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
+        addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
+        addNewKosButton= page.getByText("+ Tambah Kos Baru");
     }
 
     /**
@@ -270,6 +277,30 @@ public class PropertySayaPO {
         playwright.hardWait(3000.0);
         playwright.clickOn(firstDeleteButton);
         playwright.clickOn(deleteButtonInPopUp);
+    }
+
+    /**
+     * Click icon close on page Pilih Jenis Properti
+     */
+    public void clickOnIconClose() {
+        playwright.clickOn(icnClose);
+    }
+
+    /**
+     * Click on radio button "Kos" or "Apartemen"
+     * Click on add data button
+     */
+    public void selectOptionAddProperty(String option) {
+        optionProperty = page.locator("//label[contains(.,'"+option+"')]");
+        playwright.clickOn(optionProperty);
+        playwright.clickOn(addDataButton);
+    }
+
+    /**
+     * Click on add new kos button
+     */
+    public void clickAddNewKos() {
+        playwright.clickOn(addNewKosButton);
     }
 
 }
