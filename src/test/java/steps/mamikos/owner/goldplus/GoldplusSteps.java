@@ -414,4 +414,22 @@ public class GoldplusSteps {
     public void owner_click_lihat_selengkapnya_at_section_tagihan() {
         goldplus.lihatSelngkapnyaSectionDetailTagihan();
     }
+
+    @Then("owner will see card box contains {string}")
+    public void owner_will_see_card_box_contains(String benefit) {
+        Assert.assertTrue(chat.gpPacakgeText().contains(benefit),"GP Package not contain benefit "+benefit);
+    }
+
+    @And("owner will see chat list page empty state")
+    public void owner_will_see_chat_list_page_empty_state(){
+        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
+        chat.dismissFTUEMarsKuotaNol();
+    }
+
+    @Then("user verify last ftue is {string}")
+    public void user_verify_last_ftue_is(String kuota) {
+        Assert.assertEquals(chat.lastFTUEnonGoldplusText(),kuota,"FTUE doesnt match");
+
+    }
+
 }

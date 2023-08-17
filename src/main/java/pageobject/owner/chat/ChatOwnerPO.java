@@ -33,6 +33,9 @@ public class ChatOwnerPO {
     Locator registerGoldplusButton;
     Locator weeklyQuotaChatroomHeader;
     Locator broadcastChatBtn;
+    Locator gpPacakgeText;
+    Locator lastFTUEMars;
+    Locator chatListEmptyState;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -62,6 +65,9 @@ public class ChatOwnerPO {
         weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
+        gpPacakgeText =  page.getByTestId("popperReference");
+        lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
+        chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
     }
 
     /**
@@ -300,4 +306,29 @@ public class ChatOwnerPO {
     public void dismissFTUEMarsKuotaNol() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
     }
+
+    /**
+     * Get Gp Package text on chat menu
+     * @return String text "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
+     */
+    public String gpPacakgeText() {
+        return playwright.getText(gpPacakgeText);
+    }
+
+    /**
+     * Get Ftue last text on chat menu
+     * @return String text "Anda hanya bisa balas 1 chat room per minggu. Kuota tidak berlaku akumulasi(tidak dapat dikumpul)."
+     */
+    public String lastFTUEnonGoldplusText() {
+        return playwright.getText(lastFTUEMars);
+    }
+
+    /**
+     * Verify is chat list empty state present
+     * return boolean true or false
+     */
+    public boolean isChatListEmptyStatePresent() {
+        return playwright.waitTillLocatorIsVisible(chatListEmptyState,2000.0);
+    }
+
 }
