@@ -317,4 +317,15 @@ public class JavaHelpers {
         return resultDateFormat.format(calendar.getTime());
     }
 
+    //--- String Manipulator ---//
+    /**
+     * Format string
+     * @param format String to format
+     * @param args format args
+     * @return String data type
+     */
+    public static String formatString(String format, Object... args)  {
+        return String.format(format, args);
+    }
+    //--- String Manipulator ---//
 }
