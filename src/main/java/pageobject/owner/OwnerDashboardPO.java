@@ -8,6 +8,8 @@ import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class OwnerDashboardPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -51,6 +53,11 @@ public class OwnerDashboardPO {
     Locator widgetTitleWaktunyaMengelolaProperti;
     Locator widgetSubtitleWaktunyaMengelolaProperti;
     Locator logoutOwnerPageButton;
+    Locator ratingCardDetails;
+    Locator textOnReviewList;
+    Locator reviewLists;
+    Locator detailReviewLists;
+    Locator ratingCardWrapperLists;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -94,6 +101,10 @@ public class OwnerDashboardPO {
         addKostButton = page.locator("//p[contains(.,'Tambah Properti')]");
         widgetTitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-title bg-c-text bg-c-text--title-5']");
         widgetSubtitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-subtitle bg-c-text bg-c-text--body-2']");
+        ratingCardDetails = page.locator(".rating-card__details");
+        reviewLists = page.locator(".rating-card");
+        detailReviewLists = page.locator("//*[@class='row stats-list']");
+        ratingCardWrapperLists = page.locator(".rating-card__wrapper");
     }
 
     /**
@@ -449,5 +460,68 @@ public class OwnerDashboardPO {
             value = playwright.getText(widgetSubtitleWaktunyaMengelolaProperti.nth(index));
         }
         return value;
+    }
+
+    /**
+     * Scroll to Rating Card Details and Click Rating Card Details
+     */
+    public void clickOnRatingCardDetails() {
+        playwright.pageScrollUntilElementIsVisible(ratingCardDetails);
+        playwright.clickOn(ratingCardDetails);
+    }
+
+    /**
+     * Check contact us pop up is present
+     * @return true if appear
+     */
+    public boolean isTextOnReviewListPresent(String text) {
+        playwright.hardWait(3000.0);
+        textOnReviewList = page.locator("//p[contains(.,'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(textOnReviewList);
+    }
+
+    /**
+     * Get Review Lists Card
+     * @return integer
+     */
+    public Integer getReviewListsCard() {
+        playwright.hardWait(5000.0);
+        List<Locator> listCities = playwright.getLocators(reviewLists);
+        return listCities.size();
+    }
+
+    /**
+     * Click on Kos Review Listing
+     */
+    public void clickOnKosReviewListing() {
+        playwright.clickOn(reviewLists.first());
+    }
+
+    /**
+     * Is Detailed Review Lists Appear?
+     * @return true or false
+     */
+    public Boolean isDetailedReviewListsAppear() {
+        return playwright.waitTillLocatorIsVisible(detailReviewLists.first());
+    }
+
+    /**
+     * Get Rating Card Wrapper List Size
+     *
+     * @return int
+     */
+    public Integer getRatingCardWrapperSize() {
+        playwright.hardWait(2000.0);
+        List<Locator> listCard = playwright.getLocators(ratingCardWrapperLists);
+        return listCard.size();
+    }
+
+    /**
+     * Is See All Kost Review Text Appear?
+     *
+     * @return true or false
+     */
+    public Boolean isSeeAllKostReviewTextAppear() {
+        return playwright.waitTillLocatorIsVisible(reviewLists);
     }
 }

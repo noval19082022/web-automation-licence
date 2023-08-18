@@ -28,6 +28,15 @@ public class PropertySayaPO {
     Locator statisticChoiceSelection;
     Locator chatButton;
     Locator reviewButton;
+    Locator addRoomButton;
+    Locator roomNameField;
+    Locator textTotalRoom;
+    Locator firstDeleteButton;
+    Locator deleteButtonInPopUp;
+    Locator icnClose;
+    Locator optionProperty;
+    Locator addDataButton;
+    Locator addNewKosButton;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -49,7 +58,14 @@ public class PropertySayaPO {
         statisticChoiceSelection = page.locator(".statistic__choice");
         chatButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat 0"));
         reviewButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Review 0"));
-
+        addRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Tambahkan Kamar"));
+        roomNameField = page.getByLabel("Nama/ Nomor Kamar");
+        textTotalRoom = page.locator(".room-table__total-room-label");
+        firstDeleteButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("delete")).first();
+        deleteButtonInPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
+        addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
+        addNewKosButton= page.getByText("+ Tambah Kos Baru");
     }
 
     /**
@@ -233,6 +249,58 @@ public class PropertySayaPO {
      */
     public void clickReview() {
         playwright.clickOn(reviewButton);
+    }
+
+    /**
+     * Click on add room button in room allotment
+     * Fill room name field with text
+     * Click on update room button in pop up
+     */
+    public void addRoom(String roomName) {
+        playwright.clickOn(addRoomButton);
+        roomNameField.fill(roomName);
+        playwright.clickOn(updateKamarButtonPopup);
+    }
+
+    /**
+     * Get number of total room
+     */
+    public String getTextTotalRoom() {
+        playwright.hardWait(3000.0);
+        return playwright.getText(textTotalRoom);
+    }
+
+    /**
+     * click on Delete Room Icon
+     */
+    public void clickOnFirstDeleteRoomIcon() {
+        playwright.hardWait(3000.0);
+        playwright.clickOn(firstDeleteButton);
+        playwright.clickOn(deleteButtonInPopUp);
+    }
+
+    /**
+     * Click icon close on page Pilih Jenis Properti
+     */
+    public void clickOnIconClose() {
+        playwright.clickOn(icnClose);
+    }
+
+    /**
+     * Click on radio button "Kos" or "Apartemen"
+     * Click on add data button
+     */
+    public void selectOptionAddProperty(String option) {
+        optionProperty = page.locator("//label[contains(.,'"+option+"')]");
+        playwright.clickOn(optionProperty);
+        playwright.clickOn(addDataButton);
+    }
+
+    /**
+     * Click on add new kos button
+     */
+    public void clickAddNewKos() {
+        playwright.clickOn(addNewKosButton);
     }
 
 }

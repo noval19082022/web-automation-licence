@@ -3,6 +3,7 @@ package steps.mamikos.owner;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -115,5 +116,35 @@ public class PropertySayaSteps {
     @When("user click review in kost list")
     public void user_click_review_in_kost_list() {
         propertySaya.clickReview();
+    }
+
+    @And("owner add room with name or room number {string}")
+    public void ownerAddRoomWithNameOrRoomNumber(String roomNumber) {
+        propertySaya.addRoom(roomNumber);
+    }
+
+    @Then("user see total room is {string} in update room page")
+    public void user_see_total_room_is_in_update_room_page(String room) {
+        Assert.assertEquals(propertySaya.getTextTotalRoom(), room, "Total room is wrong");
+    }
+
+    @When("user delete room name or number in room allotment")
+    public void user_delete_room_name_or_number_in_room_allotment() {
+        propertySaya.clickOnFirstDeleteRoomIcon();
+    }
+
+    @When("user click icon close on page pilih jenis properti")
+    public void user_click_icon_close_on_page_pilih_jenis_properti() {
+        propertySaya.clickOnIconClose();
+    }
+
+    @And("user selects {string} option and click on Add Data button")
+    public void userSelectsOptionAndClickOnAddDataButton(String option) {
+        propertySaya.selectOptionAddProperty(option);
+    }
+
+    @Given("user click add new kos button")
+    public void user_click_add_new_kos_button() {
+        propertySaya.clickAddNewKos();
     }
 }
