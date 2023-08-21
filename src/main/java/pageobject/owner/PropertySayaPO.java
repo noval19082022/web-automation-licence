@@ -37,6 +37,11 @@ public class PropertySayaPO {
     Locator optionProperty;
     Locator addDataButton;
     Locator addNewKosButton;
+    Locator closePopupBBKIcon;
+    Locator fullnameTextbox;
+    Locator bankAccountNumberTextbox;
+    Locator bankOwnerNameTextbox;
+    Locator bankNameDropdown;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -66,6 +71,11 @@ public class PropertySayaPO {
         icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
         addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
         addNewKosButton= page.getByText("+ Tambah Kos Baru");
+        closePopupBBKIcon = page.locator(".owner-intercept-booking-modal__close-button");
+        fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
+        bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
+        bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
+        bankNameDropdown = page.getByPlaceholder("Masukkan nama bank");
     }
 
     /**
@@ -301,6 +311,45 @@ public class PropertySayaPO {
      */
     public void clickAddNewKos() {
         playwright.clickOn(addNewKosButton);
+    }
+
+    /**
+     * Click on close at pop up BBL
+     */
+    public void clickClosePopUpBBK() {
+        playwright.clickOn(closePopupBBKIcon);
+    }
+
+    /**
+     * Get Full Name inputted text in Mamipay Form
+     * @return String Full Name inputted text
+     */
+    public String getInputTextFullName() {
+        return playwright.getInputValue(fullnameTextbox);
+    }
+
+    /**
+     * Get Bank account number inputted text in Mamipay Form
+     * @return String Bank account number inputted text
+     */
+    public String getInputTextBankAcc() {
+        return playwright.getInputValue(bankAccountNumberTextbox);
+    }
+
+    /**
+     * Get Bank owner name inputted text in Mamipay Form
+     * @return String Bank owner name inputted text
+     */
+    public String getInputTextBankOwnerName() {
+        return playwright.getInputValue(bankOwnerNameTextbox);
+    }
+
+    /**
+     * Get Bank name inputted text in Mamipay Form
+     * @return String Bank name inputted text
+     */
+    public String getInputTextBankName() {
+        return playwright.getInputValue(bankNameDropdown);
     }
 
 }
