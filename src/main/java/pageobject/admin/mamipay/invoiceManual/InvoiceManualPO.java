@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.invoiceManual;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +27,17 @@ public class InvoiceManualPO {
     private Locator lastInvoiceData;
     private Locator namaBiayaHover;
     private Locator jumlahBiayaHover;
+    private Locator invoiceNumberLast;
     // Invoice List Page
+
+    // Invoice Detail Page
+    private Locator jenisPembayaran;
+    private Locator totalPembayaranOnLeftSide;
+    private Locator listingName;
+    private Locator jnsBiayaOnRincianPmbayaran;
+    private Locator namaBiayaOnRincianPmbayaran;
+    private Locator totalPembayaranOnRightSide;
+    // Invoice Detail Page
 
     // Buat Invoice Page
     private Locator propertyNameText;
@@ -111,6 +122,12 @@ public class InvoiceManualPO {
         buatInvoiceButton = page.getByTestId("create-invoice-btn");
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
+        invoiceNumberLast = page.locator("td > .bg-c-link ").last();
+
+        //---Invoice Detail Page---//
+        listingName = page.getByText("Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara");
+        namaBiayaOnRincianPmbayaran = page.getByText("Parkir Mobil (3 hari)");
+        totalPembayaranOnRightSide = page.locator("//div[@class='invoice-detail-row-section']//p)[4]");
 
         //---Buat Invoice Page---//
         backButtonBuatInvoice = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("back"));
@@ -653,6 +670,69 @@ public class InvoiceManualPO {
      */
     public void assertBuatDanKirimDisable(){
         assertThat(buatDanKirimBtnDisable).isDisabled();
+    }
+
+    /**
+     * clicks Last Invoice Number
+     * @return invoice number
+     */
+    public Page clickInvoiceNumber(){
+        page = page.waitForPopup(() -> {invoiceNumberLast.click();});
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
+    }
+
+    /**
+     * assert Jenis Pembayaran on Detail Invoice Page
+     * @param invType
+     */
+    public void assertJenisPembayaran(String invType){
+        jenisPembayaran = page.locator("#invoiceBill").getByText(invType);
+        assertThat(jenisPembayaran);
+        System.out.println(jenisPembayaran);
+    }
+
+    /**
+     * assert Total Pembayaran on Left Side on Detail Invoice Page
+     */
+    public void assertTotalPembayaranOnLeftSide(){
+        totalPembayaranOnLeftSide = page.locator("#invoiceBill").getByText("Rp25.000");
+        assertThat(totalPembayaranOnLeftSide);
+        System.out.println(totalPembayaranOnLeftSide);
+    }
+
+    /**
+     * assert Listing Name on Detail Invoice Page
+     */
+    public void assertListingName(){
+        assertThat(listingName);
+        System.out.println(listingName);
+    }
+
+    /**
+     * assert Jenis Biaya on Rincian Pembayaran at Detail Invoice Page
+     * @param invType
+     */
+    public void assertJenisBiayaOnRincianPembayaran(String invType){
+        jnsBiayaOnRincianPmbayaran = page.getByTestId("invoiceBillingDetails-payment").getByText(invType);
+        assertThat(jnsBiayaOnRincianPmbayaran);
+        System.out.println(jnsBiayaOnRincianPmbayaran);
+    }
+
+    /**
+     * assert Nama Biaya on Rincian Pembayaran at Detail Invoice Page
+     */
+    public void assertNamaBiayaOnRincianPembayaran(){
+        assertThat(namaBiayaOnRincianPmbayaran);
+        System.out.println(namaBiayaOnRincianPmbayaran);
+    }
+
+    /**
+     * assert Total Pembayaran on Right Side at Detail Invoice Page
+     */
+    public void assertTotalPembayaranOnRightSide(){
+        assertThat(totalPembayaranOnRightSide);
+        System.out.println(totalPembayaranOnRightSide);
     }
 
     //---Biaya Tambahan---//

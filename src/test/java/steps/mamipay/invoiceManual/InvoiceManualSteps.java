@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoiceManual.InvoiceManualPO;
+import pageobject.common.HomePO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -19,6 +20,8 @@ public class InvoiceManualSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private AdminMamipayDashboardPO admin = new AdminMamipayDashboardPO(page);
     private InvoiceManualPO manualInvoice = new InvoiceManualPO(page);
+    HomePO home = new HomePO(page);
+    Page page1;
 
     private String listing;
     private String tenant;
@@ -91,11 +94,11 @@ public class InvoiceManualSteps {
             durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
             jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
         } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaBiaya = detailBiaya.get(1).get("Nama Biaya");
-            periodeAwal = detailBiaya.get(1).get("Periode Awal");
-            periodeAkhir = detailBiaya.get(1).get("Periode Akhir");
-            durasiBiaya = detailBiaya.get(1).get("Durasi Biaya");
-            jumlahBiaya = detailBiaya.get(1).get("Jumlah Biaya");
+            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+            periodeAwal = detailBiaya.get(0).get("Periode Awal");
+            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
         }
 
         manualInvoice.selectJenisInvoice(type);
@@ -161,11 +164,11 @@ public class InvoiceManualSteps {
             jumlahBiaya = rincianBiaya.get(0).get("Jumlah Biaya");
             disburseToPenmilik = rincianBiaya.get(0).get("Disburse to Pemilik");
         } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaBiaya = rincianBiaya.get(1).get("Nama Biaya");
-            periodeAwal = rincianBiaya.get(1).get("Awal");
-            periodeAkhir = rincianBiaya.get(1).get("Akhir");
-            jumlahBiaya = rincianBiaya.get(1).get("Jumlah Biaya");
-            disburseToPenmilik = rincianBiaya.get(1).get("Disburse to Pemilik");
+            namaBiaya = rincianBiaya.get(0).get("Nama Biaya");
+            periodeAwal = rincianBiaya.get(0).get("Awal");
+            periodeAkhir = rincianBiaya.get(0).get("Akhir");
+            jumlahBiaya = rincianBiaya.get(0).get("Jumlah Biaya");
+            disburseToPenmilik = rincianBiaya.get(0).get("Disburse to Pemilik");
         }
 
         manualInvoice.previewBuatdanKirimInvoiceManual();
@@ -201,9 +204,9 @@ public class InvoiceManualSteps {
             jumlahBiaya = invoiceData.get(0).get("Jumlah Biaya");
             statusInvoice = invoiceData.get(0).get("Status Invoice");
         } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaListing = invoiceData.get(1).get("Nama Listing");
-            jumlahBiaya = invoiceData.get(1).get("Jumlah Biaya");
-            statusInvoice = invoiceData.get(1).get("Status Invoice");
+            namaListing = invoiceData.get(0).get("Nama Listing");
+            jumlahBiaya = invoiceData.get(0).get("Jumlah Biaya");
+            statusInvoice = invoiceData.get(0).get("Status Invoice");
         }
 
         manualInvoice.goToLastPageInvoiceManual();
@@ -223,8 +226,8 @@ public class InvoiceManualSteps {
             namaBiaya = hoverData.get(0).get("Nama Biaya");
             jumlahBiaya = hoverData.get(0).get("Jumlah Biaya");
         } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaBiaya = hoverData.get(1).get("Nama Biaya");
-            jumlahBiaya = hoverData.get(1).get("Jumlah Biaya");
+            namaBiaya = hoverData.get(0).get("Nama Biaya");
+            jumlahBiaya = hoverData.get(0).get("Jumlah Biaya");
         }
 
         manualInvoice.hoverLastInvoiceData();
@@ -304,6 +307,41 @@ public class InvoiceManualSteps {
     @Then("the pop up confirmation is not displayed")
     public void the_pop_up_confirmation_is_not_displayed(){
         manualInvoice.changeInvConfirmationPopUpIsNotDisplay();
+    }
+
+    @When("admin clicks invoice number with unpaid status")
+    public void admin_clicks_invoice_number_with_unpaid_status(){
+        page1 = manualInvoice.clickInvoiceNumber();
+    }
+
+    @When("click Invoice Manual menu")
+    public void click_Invoice_Manual_menu(){
+        admin.NavigateToMamipayMenu("Invoice Manual");
+    }
+
+    @Then("invoice detail for {string} is displayed")
+    public void invoice_detail_for_is_displayed(String invType){
+        if (invType.equalsIgnoreCase("Biaya Tambahan")){
+            playwright.hardWait(10000);
+            home = new HomePO(page1);
+            System.out.println(home.getURL());
+            manualInvoice.assertJenisPembayaran(invType);
+            manualInvoice.assertTotalPembayaranOnLeftSide();
+            manualInvoice.assertListingName();
+            manualInvoice.assertJenisBiayaOnRincianPembayaran(invType);
+            manualInvoice.assertNamaBiayaOnRincianPembayaran();
+            manualInvoice.assertTotalPembayaranOnRightSide();
+        } else if (invType.equalsIgnoreCase("Biaya Sewa")) {
+            playwright.hardWait(10000);
+            home = new HomePO(page1);
+            System.out.println(home.getURL());
+            manualInvoice.assertJenisPembayaran(invType);
+            manualInvoice.assertTotalPembayaranOnLeftSide();
+            manualInvoice.assertListingName();
+            manualInvoice.assertJenisBiayaOnRincianPembayaran(invType);
+            manualInvoice.assertNamaBiayaOnRincianPembayaran();
+            manualInvoice.assertTotalPembayaranOnRightSide();
+        }
     }
 
     @Then("the Buat dan Kirim button is disabled")
