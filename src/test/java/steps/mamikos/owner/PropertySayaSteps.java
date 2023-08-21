@@ -147,4 +147,29 @@ public class PropertySayaSteps {
     public void user_click_add_new_kos_button() {
         propertySaya.clickAddNewKos();
     }
+
+    @And("owner close pop up BBK at kos list page")
+    public void ownerClosePopUpBBKAtKosListPage() {
+        propertySaya.clickClosePopUpBBK();
+    }
+
+    @Then("user see activate mamipay form with Full Name {string}")
+    public void user_see_activate_mamipay_form_with_Full_Name(String fullName) {
+        Assert.assertEquals(propertySaya.getInputTextFullName().trim(), fullName, "Full Name in mamipay form is wrong");
+    }
+
+    @When("user see activate mamipay form with Bank Account Number {string}")
+    public void user_see_activate_mamipay_form_with_Bank_Account_Number(String accountNo) throws InterruptedException {
+        Assert.assertEquals(propertySaya.getInputTextBankAcc().trim(), accountNo, "Bank account number in mamipay form is wrong");
+    }
+
+    @When("user see active mamipay form with Bank Owner Name {string}")
+    public void user_see_active_mamipay_form_with_Bank_Owner_Name(String bankOwnerName) {
+        Assert.assertEquals(propertySaya.getInputTextBankOwnerName().trim(), bankOwnerName, "Bank owner name in mamipay form is wrong");
+    }
+
+    @When("user see active mamipay form with Bank Name {string}")
+    public void user_see_active_mamipay_form_with_Bank_Name(String bankName) {
+        Assert.assertEquals(propertySaya.getInputTextBankName().trim(), bankName, "Bank name in mamipay form is wrong");
+    }
 }
