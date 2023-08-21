@@ -37,13 +37,13 @@ Feature: Multiple Invoice
   @TEST_LIMO-2336 @checkChatlistMultipleInvoice @continue
   Scenario: Check Lanjut bayar button on chatlist
     Given owner navigates to owner dashboard
-    When owner click lanjut bayar button on chatlist
+    When owner click "Lanjut Bayar" button on chatlist
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
   @checkChatroomsMultipleInvoice @continue
   Scenario: Check lanjut bayar button on chatrooms
     Given owner navigates to owner dashboard
-    When owner click lanjut bayar button on chatrooms "Raney Upik Bertiga"
+    When owner click "Lanjut Bayar" button on chatrooms "Raney Upik Bertiga"
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
   @paidTheUnpaidInvoice @continue

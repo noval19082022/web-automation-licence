@@ -43,8 +43,10 @@ Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
+    When tenant set active page to 0
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 

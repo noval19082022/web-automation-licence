@@ -72,6 +72,7 @@ public class InvoiceManualPO {
     private Locator popUpChangeInvConfirmSubtitle;
     private Locator batalBtnOnChangeInvConfirmation;
     private Locator lanjutkanBtnOnChangeInvConfirmation;
+    private Locator buatDanKirimBtnDisable;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -155,6 +156,7 @@ public class InvoiceManualPO {
         popUpChangeInvConfirmSubtitle = page.getByText("Anda hanya dapat memilih 1 jenis invoice. Perubahan jenis invoice akan menghapus");
         batalBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
         lanjutkanBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        buatDanKirimBtnDisable = page.locator("//button[contains(., 'Buat dan Kirim')]");
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -661,6 +663,13 @@ public class InvoiceManualPO {
      */
     public void changeInvConfirmationPopUpIsNotDisplay(){
         assertThat(popUpChangeInvConfirmTitle).isHidden();
+    }
+
+    /**
+     * Assert Buat dan Kirim button when disable
+     */
+    public void assertBuatDanKirimDisable(){
+        assertThat(buatDanKirimBtnDisable).isDisabled();
     }
 
     /**

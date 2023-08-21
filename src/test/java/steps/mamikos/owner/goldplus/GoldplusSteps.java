@@ -1,4 +1,4 @@
-package steps.mamikos.owner;
+package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
@@ -194,19 +194,19 @@ public class GoldplusSteps {
 
     @Then("verify button on broadcast page")
     public void verifyButtonOnBroadcastPage() {
-        playwright.hardWait(3000);
+        playwright.hardWait(5000);
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Lihat Detail Paket"));
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Beli Paket"));
     }
 
-    @And("owner click lanjut bayar button on chatlist")
-    public void ownerClickLanjutBayarButtonOnChatlist(){
+    @When("owner click {string} button on chatlist")
+    public void ownerClickButtonOnChatlist(String buttonTxt) {
         chat.clickChatOwner();
-        playwright.clickOnTextButton("Lanjut Bayar");
+        playwright.clickOnTextButton(buttonTxt);
     }
 
-    @And("owner click lanjut bayar button on chatrooms {string}")
-    public void ownerClickLanjutBayarButtonOnChatrooms(String tenantName) {
+    @When("owner click {string} button on chatrooms {string}")
+    public void ownerClickButtonOnChatrooms(String buttonTxt, String tenantName) {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
@@ -214,9 +214,10 @@ public class GoldplusSteps {
         playwright.hardWait(3000);
         playwright.clickOnTextButton(tenantName);
         playwright.hardWait(3000);
-        playwright.clickOnTextButton("Lanjut Bayar");
+        playwright.clickOnTextButton(buttonTxt);
     }
 
+    //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
         owner.clickOnGpWidgetButton();
@@ -224,15 +225,15 @@ public class GoldplusSteps {
         panduanGP.clickOnNaikkanIklanAndaButton();
     }
 
-    @When("owner click on next button to go to slide number {int}")
-    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipper(Integer swiperNumber) {
-        if (swiperNumber <= 6) {
+    @When("owner click on next button to go to slide number {int} with total number slides are {int}")
+    public void ownerClickOnNextButtonOnPanduanGoldPlusSwipperWithTotalNumberSlidesAre(Integer swiperNumber, Integer totalNumberSlide) {
+        if (swiperNumber <= totalNumberSlide - 1) {
             panduanGP.clickOnNextButton();
         }
     }
 
-    @Then("owner can see swipper number {int} is selected")
-    public void ownerCanSeeSwipperNumberNumberIsSelected(int number) {
+    @Then("owner can see swiper number {int} is selected")
+    public void ownerCanSeeSwiperNumberNumberIsSelected(int number) {
         Assert.assertFalse(panduanGP.getGPswipperAttribute(number -1 , "class").contains(".gp-swiper__step--dim"));
     }
 
@@ -267,6 +268,27 @@ public class GoldplusSteps {
     public void ownerClickOnCobaSekarangButton() {
         panduanGP.clickCobaSekarangButton();
     }
+
+    @Then("owner can see gp onboarding text title is {string}")
+    public void ownerCanSeeGpOnboardingTextTitleIs(String textTitle) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingTitle(), textTitle);
+    }
+
+    @Then("owner can see gp onboarding text body is {string}")
+    public void ownerCanSeeGpOnboardingTextBodyIs(String textBody) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingBodyText(), textBody);
+    }
+
+    @Then("owner can see gp onboarding number {int} is selected")
+    public void ownerCanSeeGpOnboardingNumberNumberIsSelected(int number) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingNumber(), number);
+    }
+
+    @Then("owner can see gp onboarding image alt text is {string}")
+    public void ownerCanSeeGpOnboardingImageAltTextIs(String altText) {
+        Assert.assertEquals(panduanGP.getSelectedOnboardingImageAltText(), altText);
+    }
+    //------ GP Onboarding ------//
 
     //------ GP Onboarding Pop-Up ------//
     @Then("owner can see gp onboarding swiper number {int} is selected")
@@ -312,5 +334,102 @@ public class GoldplusSteps {
             mamiads.clickGpOnboardingpopUpPreviousButton();
         }
     }
+
+    @Then("user verify {string} is appear")
+    public void userVerifyIsAppear(String textMessage) {
+        switch(textMessage){
+            case "list of Goldplus package":
+                playwright.hardWait(3000);
+                Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
+                break;
+            case "Daftar GoldPlus":
+                chat.dismissFTUEMars();
+                chat.dismissFTUEMarsKuotaNol();
+                Assert.assertTrue(playwright.isTextDisplayed("Sisa kuota mingguan", 2000.0), "Daftar GoldPlus doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("1 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
+                playwright.clickOnTextButton(textMessage);
+                Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
+                break;
+            case "Pilih Periode Berlangganan":
+                Assert.assertTrue(playwright.isTextDisplayed("Pilih Periode Berlangganan", 2000.0), "Text doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: GoldPlus 2", 2000.0), "Paket GP Anda is not GP2!");
+        }
+    }
+
+    @When("owner click {string} on broadcast chat page")
+    public void ownerClickOnBroadcastChatPage(String buttonText) {
+        playwright.clickOnTextButton(buttonText);
+        Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: Goldplus 2", 2000.0), "Paket GP Anda is not GP2!");
+        playwright.clickOnTextButton("Pilih");
+        playwright.hardWait(3000);
+        playwright.clickOnText("Bayar Sekarang");
+    }
+
+
     //------ GP Onboarding Pop-Up ------//
+
+    @And("owner go to panduan gold plus memantau performa kos page")
+    public void ownerGoToPanduanGoldPlusMemantauPerformaKosPage() {
+        owner.clickOnGpWidgetButton();
+        goldplus.clickOnPelajariCaranyaButton();
+        panduanGP.clickOnMemantauPerformaKosButton();
+    }
+    @When("owner close pop up detail manfaat")
+    public void owner_close_pop_up_detail_manfaat() {
+        playwright.hardWait(1000.0);
+        goldplus.clickOnCLosePopUpManfaat();
+    }
+
+    //------ Dashboard GP ------//
+    @When("owner wants to accses dashboard GP")
+    public void owner_wants_to_accses_dashboard_gp() {
+        owner.clickOnGpWidgetButton();
+    }
+
+    @When("user see status goldplus is {string}")
+    public void user_see_status_goldplus_is(String statusGP) {
+        Assert.assertEquals(goldplus.getStatusPaketGoldPlus(), statusGP, "status paket goldplus is not match");
+    }
+
+    @When("owner click back to dashboard GP")
+    public void owner_click_back_to_dashboard_gp() {
+        goldplus.clickOnIconBackFilter();
+    }
+
+    @When("user scroll to section pembayaran tagihan goldplus")
+    public void user_scroll_to_section_pembayaran_tagihan_goldplus() {
+       goldplus.scrollToTagihanSection();
+    }
+
+    @Then("user see list detail tagihan goldplus")
+    public void user_see_list_detail_tagihan_goldplus() {
+        goldplus.isListDetailTagihanIsDisplayed();
+    }
+    @When("user click tab selesai")
+    public void user_click_tab_selesai() {
+        goldplus.clickTabSelesai();
+    }
+
+    @When("owner click lihat selengkapnya at section tagihan")
+    public void owner_click_lihat_selengkapnya_at_section_tagihan() {
+        goldplus.lihatSelngkapnyaSectionDetailTagihan();
+    }
+
+    @Then("owner will see card box contains {string}")
+    public void owner_will_see_card_box_contains(String benefit) {
+        Assert.assertTrue(chat.gpPacakgeText().contains(benefit),"GP Package not contain benefit "+benefit);
+    }
+
+    @And("owner will see chat list page empty state")
+    public void owner_will_see_chat_list_page_empty_state(){
+        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
+        chat.dismissFTUEMarsKuotaNol();
+    }
+
+    @Then("user verify last ftue is {string}")
+    public void user_verify_last_ftue_is(String kuota) {
+        Assert.assertEquals(chat.lastFTUEnonGoldplusText(),kuota,"FTUE doesnt match");
+
+    }
+
 }

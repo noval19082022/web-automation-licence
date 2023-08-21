@@ -22,6 +22,18 @@ public class MamiPoinOwnerPO {
     Locator mamipoinOwnerText;
     Locator mamipoinToggle;
     Locator discountMamipoinText;
+    Locator titleMamipoinOwnerLandingPage;
+    Locator tukarPoinButton;
+    Locator riwayatHadiahButton;
+    Locator riwayatPoinButton;
+    Locator syaratDanKetentuanButton;
+    Locator poinAndaOnboarding;
+    Locator hadiahBisaDitukarOnboarding;
+    Locator bantuanOnboarding;
+    Locator selesaiButton;
+    Locator titleTukarPoinPage;
+    Locator logoTukarPoinPage;
+    Locator bantuanButton;
 
     public MamiPoinOwnerPO(Page page) {
         this.page = page;
@@ -39,6 +51,19 @@ public class MamiPoinOwnerPO {
         mamipoinOwnerText = page.locator(".info-count");
         mamipoinToggle =  page.getByRole(AriaRole.CHECKBOX);
         discountMamipoinText = page.locator(".discount-text");
+        titleMamipoinOwnerLandingPage = page.locator("//div[@class='c-navigation__title'][contains(.,'MamiPoin')]");
+        tukarPoinButton = page.locator("//div[@class='c-mk-card exchange-card__card']");
+        riwayatHadiahButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Riwayat Hadiah')]");
+        riwayatPoinButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Riwayat Poin')]");
+        syaratDanKetentuanButton = page.locator("//*[@href='javascript:void(0)'][contains(.,'Syarat dan Ketentuan')]");
+        poinAndaOnboarding = page.locator("//p[@class='message'][contains(text(),'Pastikan poin Anda cukup untuk')]");
+        hadiahBisaDitukarOnboarding = page.locator("//p[@class='message'][contains(text(),'Anda dapat menukar poin Anda')]");
+        bantuanOnboarding = page.locator("//p[@class='message'][contains(text(),'Tekan tombol Bantuan untuk')]");
+        selesaiButton = page.locator("//button[@type='button'][contains(.,'Selesai')]");
+        titleTukarPoinPage = page.locator("//strong[@class='link-text'][contains(.,'Menu MamiPoin')]");
+        logoTukarPoinPage = page.locator("//img[@class='mamipoin-image']");
+        bantuanButton = page.locator("//button[@type='button'][@class='button faq-button is-rounded --desktop']");
+
     }
 
     /**
@@ -154,4 +179,119 @@ public class MamiPoinOwnerPO {
         return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
     }
 
+    /**
+     * Verify title in the mamipoin owner landing page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheMamipoinOwnerLandingPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleMamipoinOwnerLandingPage);
+    }
+
+    /**
+     * Verify tukar poin button is displayed
+     * @return boolean
+     */
+    public Boolean isTukarPoinButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(tukarPoinButton);
+    }
+
+    /**
+     * Verify riwayat hadiah button is displayed
+     * @return boolean
+     */
+    public Boolean isRiwayatHadiahButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(riwayatHadiahButton);
+    }
+
+    /**
+     * Verify riwayat poin button is displayed
+     * @return boolean
+     */
+    public Boolean isRiwayatPoinButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(riwayatPoinButton);
+    }
+
+    /**
+     * Verify riwayat poin button is displayed
+     * @return boolean
+     */
+    public Boolean isSyaratDanKetentuanButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(syaratDanKetentuanButton);
+    }
+
+    /**
+     * Click on tukar poin button
+
+     */
+    public void clickOnTukarPoinButton() {
+        playwright.clickOn(tukarPoinButton);
+    }
+
+    /**
+     * Get Poin Anda Onboarding Text
+     *
+     * @return text of poin anda onboarding
+     */
+    public String getPoinAndaOnboardingText(){
+        return playwright.getText(poinAndaOnboarding);
+    }
+
+    /**
+     * Get Hadiah Bisa Ditukar Onboarding Text
+     *
+     * @return text of hadiah bisa ditukar onboarding
+     */
+    public String getHadiahBisaDitukarOnboardingText(){
+        return playwright.getText(hadiahBisaDitukarOnboarding);
+    }
+
+    /**
+     * Get Bantuan Onboarding Text
+     *
+     * @return text of bantuan onboarding
+     */
+    public String getBantuanOnboardingText(){
+        return playwright.getText(bantuanOnboarding);
+    }
+
+    /**
+     * Click on Selesai Button on Tukar Poin Page Onboarding
+     *
+     */
+    public void clickOnSelesaiButton()  {
+        playwright.clickOn(selesaiButton);
+    }
+
+    /**
+     * Verify title in the tukar poin page is displayed
+     * @return boolean
+     */
+    public Boolean isTitleInTheTukarPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(titleTukarPoinPage);
+    }
+
+    /**
+     * Verify logo in the tukar poin page is displayed
+     * @return boolean
+     */
+    public Boolean isLogoInTheTukarPoinPageDisplayed() {
+        return playwright.waitTillLocatorIsVisible(logoTukarPoinPage);
+    }
+
+    /**
+     * Verify the amount of Mamipoin Anda
+     * @return amount of poin
+     * @param poin
+     */
+    public String verifyAmountOfMamipoinAnda(String poin) {
+        return playwright.getText(page.locator("//strong[@class='info-total'][contains(text(),'"+ poin +"')]"));
+    }
+
+    /**
+     * Verify bantuan button is displayed
+     * @return boolean
+     */
+    public Boolean isBantuanButtonDisplayed() {
+        return playwright.waitTillLocatorIsVisible(bantuanButton);
+    }
 }

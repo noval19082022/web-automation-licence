@@ -1,4 +1,4 @@
-@BBM7 @saktirun1
+@BBM7 @regression @TEST_BBM-758
 Feature: Invalid Voucher After Applied, Invalid Minimum Transaction
 
   @continue

@@ -9,6 +9,8 @@ import org.testng.Assert;
 import pageobject.tenant.profile.PoinSayaPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 
 public class PoinSayaSteps {
     Page page = ActiveContext.getActivePage();
@@ -114,5 +116,82 @@ public class PoinSayaSteps {
     @Then("user will see display MamiPoin with text {string}")
     public void displayMamiPoinWithText(String textMamipoin) {
         Assert.assertEquals(poinSaya.getTextNoHaveMamipoin(), textMamipoin, "Text is not equal to " +textMamipoin);
+    }
+
+    @When("user verify title in the informasi poin page is displayed")
+    public void user_verify_title_in_the_informasi_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleInTheInformasiPoinPageDisplayed());
+    }
+
+    @When("user verify subtitle in the informasi poin page is displayed")
+    public void user_verify_subtitle_in_the_informasi_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isSubtitleInTheInformasiPoinPageDisplayed());
+    }
+
+    @When("user clicks on lihat caranya button")
+    public void user_clicks_on_lihat_caranya_button() {
+        poinSaya.clickOnLihatCaranyaButton();
+    }
+
+    @When("user verify table title tanggal kedaluwarsa is displayed")
+    public void user_verify_table_title_tanggal_kedaluwarsa_is_displayed() {
+        Assert.assertTrue(poinSaya.isTableTitleTanggalKedaluwarsaDisplayed());
+    }
+
+    @When("user verify table title jumlah mamipoin is displayed")
+    public void user_verify_table_title_jumlah_mamipoin_is_displayed() {
+        Assert.assertTrue(poinSaya.isTableTitleJumlahMamipoinDisplayed());
+    }
+
+    @Then("user verify expired point on information point page")
+    public void user_verify_expired_point_on_information_point_page(List<String> date) {
+        for (String s : date) {
+            poinSaya.isFieldValueVisible(s);
+        }
+    }
+
+    @And("user verify subtitle tidak ada poin yang tersedia is displayed")
+    public void user_verify_subtitle_tidak_ada_poin_yang_tersedia_is_displayed() {
+        Assert.assertTrue(poinSaya.isSubtitleTidakAdaPoinYangTersediaDisplayed());
+    }
+
+    @When("user verify title in the riwayat poin page is displayed")
+    public void user_verify_title_in_the_riwayat_poin_page_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleInTheRiwayatPoinPageDisplayed());
+    }
+
+    @And("user verify filter in the riwayat poin page is displayed")
+    public void userVerifyFilterInTheRiwayatPoinPageIsDisplayed(List<String> filterText) {
+        for (String s : filterText) {
+            poinSaya.isFilterVisible(s);
+        }
+    }
+
+    @And("user verify {string} class on selected filter {string}")
+    public void user_verify_class_on_selected_filter(String attribute, String filter) {
+        Assert.assertEquals(poinSaya.getFilterElementAttribute(filter).substring(30,47), attribute, "Selected filter doesn't have " + attribute + " value");
+        Assert.assertEquals(poinSaya.getFilterText(filter), filter, "Selected filter is not equal to " + filter);
+    }
+
+    @Then("user verify point history grouped by months")
+    public void userVerifyPointHistoryGroupedByMonths(List<String> date) {
+        for (String s : date) {
+            poinSaya.isHistoryDatePoinVisible(s);
+        }
+    }
+
+    @When("user click {string} filter")
+    public void user_click_filter(String filter) {
+        poinSaya.clickOnFilters(filter);
+    }
+
+    @When("user verify title riwayat masih kosong is displayed")
+    public void user_verify_title_riwayat_masih_kosong_is_displayed() {
+        Assert.assertTrue(poinSaya.isTitleRiwayatMasihKosongDisplayed());
+    }
+
+    @When("user verify subtitle riwayat masih kosong is displayed")
+    public void user_verify_subtitle_riwayat_masih_kosong_is_displayed() {
+        Assert.assertTrue(poinSaya.isSubtitleRiwayatMasihKosongDisplayed());
     }
 }

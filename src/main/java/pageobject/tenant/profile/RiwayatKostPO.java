@@ -42,6 +42,7 @@ public class RiwayatKostPO {
     Locator kirimButton;
     Locator fillReviewKost;
     Locator closePopUpButton;
+    Locator kostReviewEntryPointNotDisplayed;
 
 
     public RiwayatKostPO(Page page) {
@@ -77,6 +78,7 @@ public class RiwayatKostPO {
         kirimButton = page.locator(".bg-c-button--primary");
         fillReviewKost = page.getByPlaceholder("Ceritakan pengalamanmu di sini");
         closePopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).nth(1);
+        kostReviewEntryPointNotDisplayed = page.locator("//div[@id='contentBox']");
     }
 
     /**
@@ -261,7 +263,7 @@ public class RiwayatKostPO {
      * @return boolean
      */
     public Boolean isKostReviewEntryPointNotDisplayed() {
-        return playwright.waitTillLocatorIsVisible(starsKostReviewSubmitted);
+        return playwright.waitTillLocatorIsVisible(kostReviewEntryPointNotDisplayed);
     }
 
     /**

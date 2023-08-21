@@ -16,7 +16,7 @@ import java.util.Optional;
 public class PaymentSteps {
     Page page = ActiveContext.getActivePage();
     RiwayatBookingPO riwayatBookingPO = new RiwayatBookingPO(page);
-    InvoicePO invoicePO;
+    InvoicePO invoicePO = new InvoicePO(page);
     PaymentPO paymentPO;
     MidtransPaymentPO midtransPaymentPO;
 
@@ -86,5 +86,18 @@ public class PaymentSteps {
         invoicePO = new InvoicePO(ActiveContext.getActivePage());
         List<String> biayaLainnyaInnerText = invoicePO.getAdditionalPriceInnerText();
         Assert.assertFalse(biayaLainnyaInnerText.get(0).contains(addOnsPriceType));
+    }
+
+    @Then("user should see potongan mamipoin is {int} and total payment is {int}")
+    public void user_should_see_potongan_mamipoin_and_total_payment(int DiscMamipoin, int ttlPayment) {
+        invoicePO = new InvoicePO(ActiveContext.getActivePage());
+        Assert.assertEquals(invoicePO.getDiscountMamipoinText(), DiscMamipoin, "Discount mamipoin is not equal");
+        Assert.assertEquals(invoicePO.getTotalPembayaran(), ttlPayment, "Total payment is not equal");
+    }
+
+    @And("user remove voucher")
+    public void userRemoveVoucher() {
+        invoicePO = new InvoicePO(ActiveContext.getActivePage());
+        invoicePO.clickOnDeleteVoucher();
     }
 }

@@ -243,4 +243,39 @@ public class NavigatesSteps {
     public void tenantNavigateToMamikosVoucherPage() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.MAMIKOS_VOUCHER, 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigate to mamipay refund page")
+    public void adminVisitRefundPageOnMamipay() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/refund", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin bangkrupux navigate to data booking menu")
+    public void adminAccessToDataBookingMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/booking/users", 30000.0, LoadState.LOAD);
+    }
+
+    @And("tenant navigate to mamipoint expired page")
+    public void tenantNavigateToMamipointExpiredPage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_EXPIRED, 30000.0, LoadState.LOAD);
+    }
+
+    @And("tenant navigate to mamipoin history page")
+    public void tenantNavigateToMamipoinHistoryPage() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin navigates to Promo Owner")
+    public void adminNavigatesToPromoOwner() {
+        playwright.navigateTo(Mamikos.URL + "/admin/promo", 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner navigates to property saya apartemen")
+    public void userNavigateToPropertySayaApartemen() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_APARTEMEN, 30000.0, LoadState.LOAD);
+    }
+
+    @And("owner navigates to Akun menu")
+    public void ownerNavigatesToAkunMenu() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.AKUN, 30000.0, LoadState.LOAD);
+    }
 }

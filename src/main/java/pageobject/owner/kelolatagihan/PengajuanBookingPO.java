@@ -32,7 +32,7 @@ public class PengajuanBookingPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
         locator = new LocatorHelpers(page);
-        this.terimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Terima");
+        this.terimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Terima").first();
         this.yaTerimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Terima");
         this.tolakButton = page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
@@ -66,9 +66,9 @@ public class PengajuanBookingPO {
         terimaButtonWithName = page.getByTestId("bookingRequestList-list")
                 .locator("div").filter(new Locator.FilterOptions()
                         .setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
-        terimaButtonWithName.waitFor();
+        playwright.waitTillLocatorIsVisible(terimaButtonWithName);
         playwright.clickOn(terimaButtonWithName);
-        yaTerimaButton.click();
+        playwright.clickOn(yaTerimaButton);
         return new BillAndBookingManagementPO(page);
     }
 
@@ -85,6 +85,7 @@ public class PengajuanBookingPO {
      * Click on tolak and go to popup reason reject booking from view detail
      */
     public BillAndBookingManagementPO ownerRejectBookingFromViewDetail() {
+        rejectButton.waitFor();
         rejectButton.click();
         acceptButton.click();
         return new BillAndBookingManagementPO(page);
@@ -112,6 +113,7 @@ public class PengajuanBookingPO {
      * click "Ya, Tolak" when reject booking request
      */
     public void clickYaTolakOnPengajuanBooking() {
+        playwright.waitTillLocatorIsVisible(yaTolakButton);
         yaTolakButton.click();
     }
 

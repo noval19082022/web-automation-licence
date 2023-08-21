@@ -24,7 +24,7 @@ public class RekomendasiListingPO {
         this.locatorHelpers = new LocatorHelpers(page);
 
         this.favoritHeader = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
-        this.userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        this.userPhoto = page.getByAltText("User Photo");
         this.userProfile = page.getByTestId("profileButton");
         this.mulaiCariDanSewaKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mulai cari dan sewa kos"));
         this.masukkanKodeDariPemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Masukkan kode dari pemilik"));

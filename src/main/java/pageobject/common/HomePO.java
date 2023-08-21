@@ -17,6 +17,7 @@ public class HomePO {
     private Locator cariButton;
     private Locator mamikosLogo;
     private Locator userPhoto;
+    private Locator noUserPhoto;
     private Locator promoNgebutHeading;
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
@@ -42,7 +43,6 @@ public class HomePO {
     Locator bookingKosButtonHeadBar;
     Locator kostMenuDropdown;
     Locator apartmentMenuDropdown;
-    Locator profileDropdown;
     Locator profileMenu;
     Locator riwayatTransaksiMenu;
     Locator logOutButton;
@@ -79,6 +79,7 @@ public class HomePO {
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
         userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        noUserPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
@@ -109,7 +110,6 @@ public class HomePO {
         this.kostPromo = page.locator(".rc-photo__cover").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
         this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apartemen"));
-        this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
         this.logOutButton = page.getByTestId("exitButton");
@@ -158,7 +158,7 @@ public class HomePO {
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(mamikosLogo, 30000.0);
-        playwright.waitFor(userPhoto, 10000.0);
+        playwright.assertVisible(userPhoto.or(noUserPhoto));
     }
 
     /**
@@ -432,7 +432,7 @@ public class HomePO {
      *
      */
     public void clickOnProfileDropdown() {
-        profileDropdown.click();
+        userPhoto.click();
     }
 
     /**

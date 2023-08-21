@@ -39,5 +39,6 @@ public class LoginPMSPO {
      */
     public void clickLogin() {
         loginButton.click();
+        page.waitForLoadState();
     }
 }

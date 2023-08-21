@@ -41,7 +41,7 @@ public class BlacklistUserPO {
         noteTextBox = page.locator("[name='note']");
         submitButton = page.locator(".btn-danger");
         adminSuccessMessage = page.locator(".alert");
-        accountBlacklistMessage = page.locator(".swal2-content");
+        accountBlacklistMessage = page.getByTestId("inputProfession-jobOptions").getByText("Wajib diisi");
         unblacklistBtn = page.locator(".btn-success");
         blacklistBtn = page.locator("//a[.='Blacklist']");
     }

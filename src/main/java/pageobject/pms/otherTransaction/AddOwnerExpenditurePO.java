@@ -72,7 +72,7 @@ public class AddOwnerExpenditurePO {
         kotaText = page.locator(".bg-c-field__description").nth(1);
         sisaKontrakText = page.locator(".bg-c-field__description").nth(2);
         kategoriPengeluaranList = page.locator("//*[@data-testid='expense-category-0']//a");
-        deleteAttachment = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("delete"));
+        deleteAttachment = page.getByTitle("delete");
         attachmentFileName = page.locator("p.bg-c-text--title-5").nth(1);
         attachmentErrorMessage = page.locator(".bg-c-field__message").first();
         totalPengeluaran = page.locator(".bg-c-field__description").nth(3);
@@ -367,6 +367,7 @@ public class AddOwnerExpenditurePO {
      * Expand kategori pengeluaran
      */
     public void expandKategoriPengeluaran() {
+        kategoriPengeluaranDropdown = page.getByTestId("expense-category-0").nth(0);
         kategoriPengeluaranDropdown.waitFor();
         kategoriPengeluaranDropdown.scrollIntoViewIfNeeded();
         kategoriPengeluaranDropdown.click();

@@ -38,6 +38,10 @@ public class TenantCommunicationPO {
     Locator fieldNote;
     Locator simpanNoteButton;
     Locator prioritasText;
+    Locator fieldNoteStatusWA;
+    Locator buttonTambahStatusWA;
+    Locator getStatusWA;
+    Locator trackChatWAButton;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -62,6 +66,10 @@ public class TenantCommunicationPO {
         fieldNote = page.getByPlaceholder("Tulis di sini...");
         simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         prioritasText = page.locator("//a[contains(.,'prioritaskan')]").first();
+        fieldNoteStatusWA = page.getByPlaceholder("Tulis catatan di sini");
+        buttonTambahStatusWA = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        getStatusWA = page.locator("tbody > tr:nth-of-type(1) .table-body__label");
+        trackChatWAButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plusTrack Status Chat WA"));
     }
 
     /**
@@ -89,6 +97,7 @@ public class TenantCommunicationPO {
      *
      */
     public void clickSearchButtonMainPageFilter() {
+        playwright.waitFor(mainPageSearchButton,3000.0);
         playwright.clickOn(mainPageSearchButton);
     }
 
@@ -198,6 +207,7 @@ public class TenantCommunicationPO {
      */
     public Boolean isPropertyNameOnMainPageFilter(String propertyName){
         tenantNameOnTheFirstRow = page.locator("//a[contains(.,'"+propertyName+"')]").first();
+        playwright.waitFor(tenantNameOnTheFirstRow,3000.0);
         return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
     }
 
@@ -301,6 +311,13 @@ public class TenantCommunicationPO {
     }
 
     /**
+     * get Text status "Whatsapp"
+     */
+    public String getTextStatusWA() {
+        return playwright.getText(getStatusWA);
+    }
+
+    /**
      * Click Prioritaskan Note
      */
     public void clickPrioritaskan() {
@@ -319,6 +336,28 @@ public class TenantCommunicationPO {
      */
     public Boolean isFieldNoteClear() {
         return playwright.waitTillLocatorIsVisible(prioritasText);
+    }
+
+    /**
+     * Enter Text in tambah tracker status WA
+     * @param keyword is text we want to search
+     */
+    public void enterTextNoteStatusWA(String keyword) {
+        fieldNoteStatusWA.fill(keyword);
+    }
+
+    /**
+     * click Tambah on tracker status WA
+     */
+    public void clickTambahStatusWA() {
+        playwright.clickOn(buttonTambahStatusWA);
+    }
+
+    /**
+     * Click on Track Status Chat WA
+     */
+    public void clickTrackStatusWAButton() {
+        playwright.clickOn(trackChatWAButton);
     }
 
 }

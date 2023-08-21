@@ -32,7 +32,7 @@ Feature: MamiPoin Tenant Dapatkan Poin Page
     When user click on tab Syarat dan Ketentuan
     Then user verify "Syarat dan Ketentuan" has "active" attribute
 
-  @BBM-417 @continue
+  @BBM-417
   Scenario: Pusat Bantuan redirection
     When tenant navigate to mamipoint guideline page
     Then user verify title in the dapatkan poin page is displayed

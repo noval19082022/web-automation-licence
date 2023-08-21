@@ -1,3 +1,4 @@
+@DOM2
 Feature: Search Contract
 
 	#popup terminate non kost selection
@@ -33,7 +34,8 @@ Feature: Search Contract
       | phone stag   | phone prod   |
       | 089220220105 | 089220220105 |
     And admin search contract by kost level "SinggahSini"
-    Then admin want to akhiri contract but akhiri kontrak button is disabled
+    And admin akhiri contract
+    Then admin should success terminate contract
 
   @TEST_DOM-433 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
   Scenario: [BackOffice][popup terminate][mamirooms] Admin See detail pop up
@@ -156,11 +158,7 @@ Feature: Search Contract
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
       | Desta Automation tobelo | kost payment desta 2 |
-    And user want to dismiss FTUE
-    When user sees form booking duration
-    And user select date "tomorrow" and rent type "Per bulan"
-    Then user want to booking this kos
-    * user can set Ajukan Sewa
+    And tenant booking kost for "today"
 
 		#  Scenario: Owner accept booking from tenant
     Given user go to mamikos homepage

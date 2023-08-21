@@ -256,6 +256,11 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.clickOnSubmitAddMassVocButton();
     }
 
+    @And("admin master clicks on add single voucher button in voucher form")
+    public void adminMasterClicksOnAddSingleVoucherButtonInVoucherForm() {
+        massVoucherForm.clickOnSubmitAddSingleVocButton();
+    }
+
     @And("admin click on dropdown filter rules")
     public void user_click_on_filter_rules_dropdown() {
         mamipayAdmin.clickOnFilterRulesDropdown();
@@ -300,6 +305,18 @@ public class AdminMamipayVoucherSteps {
         voucherEdit.clickOnUpdateIconIndex(index);
     }
 
+    @And("admin search single voucher with name and edit index {string}:")
+    public void adminSearchSingleVoucherWithNameAndEditIndex(String index, DataTable table) throws InterruptedException {
+        voucherAndProfession = table.asMaps(String.class, String.class);
+        var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        massVoucherList.clickSingleVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        voucherEdit.clickOnUpdateIconIndex(index);
+    }
+
     @When("admin update mass voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")
     public void adminUpdateMassVoucherWithTeamDiscountTypeStartDateAndEndDateTo(String arg0, String arg1, String arg2, String arg3) {
     }
@@ -314,10 +331,30 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.fillVocCode(voucherPrefix);
     }
 
+    @And("admin master inputs prefix voucher code {string}")
+    public void admin_master_inputs_prefix_voucher_code(String prefix) {
+        int length = 4;
+        boolean useLetters = true;
+        boolean useNumbers = false;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        voucherPrefix = prefix + generatedString.toUpperCase();
+        massVoucherForm.fillPrefixCode(voucherPrefix);
+    }
+
     @And("admin search mass voucher with name:")
     public void adminSearchMassVoucherWithName(DataTable table) throws InterruptedException {
         voucherAndProfession = table.asMaps(String.class, String.class);
         var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        massVoucherListVoucher.fillCampaignVoucher(voucher);
+        massVoucherListVoucher.clickOnSearchButton();
+    }
+
+    @And("admin search single voucher with name:")
+    public void adminSearchSingleVoucherWithName(DataTable table) throws InterruptedException {
+        voucherAndProfession = table.asMaps(String.class, String.class);
+        var voucher = voucherAndProfession.get(0).get("voucher name " + Mamikos.ENV);
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        massVoucherList.clickSingleVoucher();
         massVoucherListVoucher.fillCampaignVoucher(voucher);
         massVoucherListVoucher.clickOnSearchButton();
     }
@@ -330,6 +367,11 @@ public class AdminMamipayVoucherSteps {
     @And("admin master clicks on edit mass voucher button in voucher form")
     public void adminMasterClicksOnEditMassVoucherButtonInVoucherForm() {
         massVoucherForm.clickOnEditAddMassVocButton();
+    }
+
+    @And("admin master clicks on edit single voucher button in voucher form")
+    public void adminMasterClicksOnSingleMassVoucherButtonInVoucherForm() {
+        massVoucherForm.clickOnEditSingleVocButton();
     }
 
     @Then("admin can sees callout message contains {string}")
@@ -365,5 +407,128 @@ public class AdminMamipayVoucherSteps {
         for (String importantRule : importantRules) {
             massVoucherForm.untickOnImportantRules(importantRule);
         }
+    }
+
+    @And("admin activate mass voucher")
+    public void adminActivateMassVoucher() throws InterruptedException {
+        massVoucherForm.activateMassVoucher();
+    }
+
+    @Then("System display alert message on mamipay web")
+    public void admin_can_sees_callout_message_is() {
+        Assert.assertTrue(massVoucherForm.isAlertMessageDisplayed(), "Voucher AUTOVINVALID updated");
+    }
+
+    @When("admin select minimum type of contract period {string}")
+    public void admin_select_minimum_contract_periode(String contractPeriod) throws InterruptedException {
+            massVoucherForm.clickOnDropdownContractPeriod();
+            massVoucherForm.chooseContractPeriode(contractPeriod);
+    }
+    @And("admin master clicks on edit pencil icon")
+    public void adminClickOnEditPencilIcon() {
+        massVoucherForm.clickOnEditPencilIcon();
+    }
+
+    @Then("user create new single voucher with team {string}, discount type {string}, start date {string} and end date to {string}:")
+    public void userCreateNewSingleVoucherWithTeamDiscountTypeStartDateAndEndDateTo(String team, String type, String startDate, String endDate, DataTable table) throws InterruptedException, ParseException {
+        String currentDate = JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd hh:mm");
+        String yesterdayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -1, 0, 0);
+        String dayBeforeYesterday = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -2, 0, 0);
+        userCreateNewMassVoucher = table.asMap(String.class, String.class);
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        MamikosVoucherFormPO massVoucherForm = new MamikosVoucherFormPO(page);
+        var voucherName = userCreateNewMassVoucher.get("voucher name");
+        var voucherDiscountAmount = userCreateNewMassVoucher.get("discount amount");
+        var voucherTotalKosQuota = userCreateNewMassVoucher.get("total each kos quota");
+        var voucherTotalEachQuota = userCreateNewMassVoucher.get("total each quota");
+        var singleVoucherDailyuota = userCreateNewMassVoucher.get("daily quota");
+        var voucherMaximumDiscount = userCreateNewMassVoucher.get("max discount");
+        var voucherMinimumTransaction = userCreateNewMassVoucher.get("min transaction");
+        var voucherTargetedEmail = userCreateNewMassVoucher.get("targeted email");
+        var voucherTotalTargetedEmail = userCreateNewMassVoucher.get("total targeted email");
+        mamipayAdmin.goToMamikosVoucher();
+        massVoucherList.clickSingleVoucher();
+        massVoucherList.clickOnAddSingleButton();
+        massVoucherForm.fillVocName(voucherName);
+        massVoucherForm.chooseFormStartDate(startDate);
+        if (endDate.equalsIgnoreCase("")) {
+            voucherForm.fillEndDateSingleVoucher("");
+        } else if (endDate.equalsIgnoreCase("yesterday")) {
+            voucherForm.fillEndDateSingleVoucher(yesterdayDate);
+        }
+        massVoucherForm.selectOncampaignTeam(team);
+        massVoucherForm.selectOnVocTypeButton(type);
+        massVoucherForm.fillTotalTargetedEmail(voucherTotalTargetedEmail);
+        massVoucherForm.filTotalEachQuota(voucherTotalEachQuota);
+        massVoucherForm.fillDiscountAmount(voucherDiscountAmount);
+        massVoucherForm.fillTotalKosQuota(voucherTotalKosQuota);
+        massVoucherForm.fillSingleDailyQuota(singleVoucherDailyuota);
+        massVoucherForm.fillMaxDiscountAmount(voucherMaximumDiscount);
+        massVoucherForm.fillMinTransaction(voucherMinimumTransaction);
+        massVoucherForm.fillTargetedEmail(voucherTargetedEmail);
+    }
+
+    @Then("user create new single voucher with team {string}, discount type {string}, start date {string} and end date to {string} without email:")
+    public void userCreateNewSingleVoucherWithTeamDiscountTypeStartDateAndEndDateToWithoutEmail(String team, String type, String startDate, String endDate, DataTable table) throws InterruptedException, ParseException {
+        String currentDate = JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd hh:mm");
+        String yesterdayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -1, 0, 0);
+        String dayBeforeYesterday = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd hh:mm", -2, 0, 0);
+        userCreateNewMassVoucher = table.asMap(String.class, String.class);
+        MamikosListMassVoucherPO massVoucherList = new MamikosListMassVoucherPO(page);
+        MamikosVoucherFormPO massVoucherForm = new MamikosVoucherFormPO(page);
+        var voucherName = userCreateNewMassVoucher.get("voucher name");
+        var voucherDiscountAmount = userCreateNewMassVoucher.get("discount amount");
+        var voucherTotalKosQuota = userCreateNewMassVoucher.get("total each kos quota");
+        var voucherTotalEachQuota = userCreateNewMassVoucher.get("total each quota");
+        var singleVoucherDailyuota = userCreateNewMassVoucher.get("daily quota");
+        var voucherMaximumDiscount = userCreateNewMassVoucher.get("max discount");
+        var voucherMinimumTransaction = userCreateNewMassVoucher.get("min transaction");
+        var voucherTargetedEmail = userCreateNewMassVoucher.get("targeted email");
+        var voucherTotalTargetedEmail = userCreateNewMassVoucher.get("total targeted email");
+        mamipayAdmin.goToMamikosVoucher();
+        massVoucherList.clickSingleVoucher();
+        massVoucherList.clickOnAddSingleButton();
+        massVoucherForm.fillVocName(voucherName);
+        massVoucherForm.chooseFormStartDate(startDate);
+        if (endDate.equalsIgnoreCase("")) {
+            voucherForm.fillEndDateSingleVoucher("");
+        } else if (endDate.equalsIgnoreCase("yesterday")) {
+            voucherForm.fillEndDateSingleVoucher(yesterdayDate);
+        }
+        massVoucherForm.selectOncampaignTeam(team);
+        massVoucherForm.selectOnVocTypeButton(type);
+        massVoucherForm.fillTotalTargetedEmail(voucherTotalTargetedEmail);
+        massVoucherForm.filTotalEachQuota(voucherTotalEachQuota);
+        massVoucherForm.fillDiscountAmount(voucherDiscountAmount);
+        massVoucherForm.fillTotalKosQuota(voucherTotalKosQuota);
+        massVoucherForm.fillSingleDailyQuota(singleVoucherDailyuota);
+        massVoucherForm.fillMaxDiscountAmount(voucherMaximumDiscount);
+        massVoucherForm.fillMinTransaction(voucherMinimumTransaction);
+    }
+
+    @And("admin edit voucher with name and set voucher aplicable on city:")
+    public void adminEditVoucherWithNameAndSetVoucherAplicableOnCity(DataTable table) throws InterruptedException {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var city = voucherAndRules.get(0).get("voucher City");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.selectVoucherAplicableOnCity(city);
+        massVoucherList = voucherForm.doneEditMassVoucher();
+    }
+
+    @And("admin edit voucher with name and set voucher not aplicable on city:")
+    public void adminEditVoucherWithNameAndSetVoucherNotAplicableOnCity(DataTable table) throws InterruptedException {
+        voucherAndRules = table.asMaps(String.class, String.class);
+        var voucher = voucherAndRules.get(0).get("voucher name " + Mamikos.ENV);
+        var city = voucherAndRules.get(0).get("voucher City");
+        var voucherEdit = mamipayAdmin.goToMamikosVoucher();
+        voucherEdit.fillCampaignVoucher(voucher);
+        voucherEdit.clickOnSearchButton();
+        var voucherForm = voucherEdit.clickOnEditButton();
+        voucherForm.selectVoucherNotAplicableOnCity(city);
+        massVoucherList = voucherForm.doneEditMassVoucher();
     }
 }

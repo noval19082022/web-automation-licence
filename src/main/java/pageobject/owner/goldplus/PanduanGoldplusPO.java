@@ -15,6 +15,11 @@ public class PanduanGoldplusPO {
     Locator swipperPreviousButton;
     Locator selectedSwiperText;
     Locator cobaSekarangButton;
+    Locator memantauPerformaKos;
+    Locator onboardingTitleText;
+    Locator onboardingBodyText;
+    Locator selectedOnboardingNumber;
+    Locator selectedOnboardingImage;
 
     public PanduanGoldplusPO(Page page) {
         this.page = page;
@@ -25,6 +30,11 @@ public class PanduanGoldplusPO {
         swipperPreviousButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-left"));
         selectedSwiperText = page.locator(".gp-swiper .gp-swiper__step:not(.gp-swiper__step--dim) p");
         cobaSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
+        memantauPerformaKos = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Memantau Performa Kos"));
+        onboardingTitleText = page.locator(".swiper-slide-active h4");
+        onboardingBodyText = page.locator(".swiper-slide-active .gp-swiper__slide-text p");
+        selectedOnboardingNumber = page.locator(".swiper-slide-active .gp-swiper__slide-counter p");
+        selectedOnboardingImage = page.locator(".swiper-slide-active img");
     }
 
     /**
@@ -89,5 +99,44 @@ public class PanduanGoldplusPO {
      */
     public void clickCobaSekarangButton() {
         playwright.clickOn(cobaSekarangButton);
+    }
+
+    /**
+     * Click on memantau performa kos button
+     */
+    public void clickOnMemantauPerformaKosButton() {
+        playwright.clickOn(memantauPerformaKos);
+    }
+
+    /**
+     * Get selected onboarding title
+     * @return String data type
+     */
+    public String getSelectedOnboardingTitle() {
+        return playwright.getText(onboardingTitleText);
+    }
+
+    /**
+     * Get selected onboarding body text
+     * @return String data type
+     */
+    public String getSelectedOnboardingBodyText() {
+        return playwright.getText(onboardingBodyText);
+    }
+
+    /**
+     * Get selected onboarding number
+     * @return int data type
+     */
+    public int getSelectedOnboardingNumber() {
+        return Integer.parseInt(playwright.getText(selectedOnboardingNumber));
+    }
+
+    /**
+     * Get selected onboarding image alt text
+     * @return String data type
+     */
+    public String getSelectedOnboardingImageAltText() {
+        return playwright.getAttributeValue(selectedOnboardingImage, "alt");
     }
 }
