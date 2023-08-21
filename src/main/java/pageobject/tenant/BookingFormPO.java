@@ -198,7 +198,6 @@ public class BookingFormPO {
      * Close booking pop-up
      */
     public void closeCancelPopUp() {
-        page.pause();
         if (okCancelButton.isVisible()) {
             okCancelButton.click();
         }
