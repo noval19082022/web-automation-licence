@@ -79,7 +79,7 @@ public class GoldplusSteps {
 
     @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.hardWait(1000);
+        playwright.hardWait(2000);
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;
         for (Map<String, String> content : table) {
