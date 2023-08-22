@@ -35,7 +35,7 @@ Feature: Subscribe GP from all entry point
   Scenario: Check subscribe GP from entry point Atur Promo
     Given owner navigates to property saya kos
     When owner search kost "Kos Premium Automation 517" on property saya page
-    And owner atur promo owner
+    And owner cek promo owner when not GP
     Then user verify "list of Goldplus package" is appear
 
   @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromBC @continue
