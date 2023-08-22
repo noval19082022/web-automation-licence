@@ -3,7 +3,6 @@ package data.mamikos;
 import utilities.JavaHelpers;
 
 public class ApiEndpoints {
-
     private static final String MAMI_API_ENDPOINTS_FILE = "src/main/resources/mamikos-endpoint.properties";
 
     public static final String BAKPAO = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "bakpao");
@@ -13,8 +12,11 @@ public class ApiEndpoints {
     public static final String GARUDA = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "garuda");
 
     // ---- Tenant Block ---- //
+    public static final String CREATE_DEVICE_ID = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "createDeviceId");
     public static final String TENANT_PROFILE = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantProfile");
     public static final String TENANT_BOOKING_LIST = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBookingList");
+    public static final String TENANT_BATALKAN_BOOKING_REASON = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBatalkanBookingReason");
+    public static final String TENANT_BATALKAN_BOOKING = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBatalkanBooking");
     // ---- Tenant Block ---- //
 
     // ---- Owner Block ---- //

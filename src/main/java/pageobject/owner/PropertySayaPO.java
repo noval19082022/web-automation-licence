@@ -42,6 +42,9 @@ public class PropertySayaPO {
     Locator bankAccountNumberTextbox;
     Locator bankOwnerNameTextbox;
     Locator bankNameDropdown;
+    Locator termAndConsCheckbox;
+    Locator submitDataMamipayButton;
+    Locator backButtonActivationSent;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -76,6 +79,9 @@ public class PropertySayaPO {
         bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
         bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
         bankNameDropdown = page.getByPlaceholder("Masukkan nama bank");
+        termAndConsCheckbox= page.locator(".check");
+        submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
+        backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
     }
 
     /**
@@ -317,7 +323,9 @@ public class PropertySayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        playwright.clickOn(closePopupBBKIcon);
+        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)){
+            playwright.clickOn(closePopupBBKIcon);
+        }
     }
 
     /**
@@ -350,6 +358,60 @@ public class PropertySayaPO {
      */
     public String getInputTextBankName() {
         return playwright.getInputValue(bankNameDropdown);
+    }
+
+    /**
+     * Fill out Full Name
+     * @param fullName
+     */
+    public void fillInputNameForm(String fullName) {
+        playwright.clearText(fullnameTextbox);
+        playwright.clickLocatorAndTypeKeyboard(fullnameTextbox, fullName);
+    }
+
+    /**
+     * Fill out Bank Account Number Form
+     * @param bankAccountNumber bank account number
+     */
+    public void fillBankAccountNumberForm(String bankAccountNumber) {
+        playwright.clearText(bankAccountNumberTextbox);
+        playwright.clickLocatorAndTypeKeyboard(bankAccountNumberTextbox, bankAccountNumber);
+    }
+
+    /**
+     * Fill out Bank Account Name Form
+     * @param bankAccountName bank account name
+     */
+    public void fillBankAccountNameForm(String bankAccountName) {
+        playwright.clearText(bankOwnerNameTextbox);
+        playwright.clickLocatorAndTypeKeyboard(bankOwnerNameTextbox, bankAccountName);
+    }
+
+    /**
+     * Fill out Bank Name
+     * @param bankName
+     */
+    public void fillInputBankName(String bankName) {
+        playwright.clickOn(bankNameDropdown);
+        playwright.clearText(bankNameDropdown);
+        playwright.clickLocatorAndTypeKeyboard(bankNameDropdown, bankName);
+        Locator element = page.locator("a").filter(new Locator.FilterOptions().setHasText(bankName));
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Click on the term and conditions checkbox
+     */
+    public void clickTermsAndConsCheckbox() {
+        playwright.clickOn(termAndConsCheckbox);
+    }
+
+    /**
+     * Click on Submit mamipay datd
+     */
+    public void clickSubmitButtonMamipay() {
+        playwright.clickOn(submitDataMamipayButton);
+        playwright.clickOn(backButtonActivationSent);
     }
 
 }

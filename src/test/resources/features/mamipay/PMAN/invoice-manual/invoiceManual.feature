@@ -17,8 +17,8 @@
         | 0895346050317 | A1              |
         | 085542455775  | C1              |
 
-    @TEST_PMAN-5689
-    Scenario Outline: Buat dan Kirim Invoice Manual <Jenis Invoice>
+    @continue @TEST_PMAN-5689
+    Scenario: Buat dan Kirim Invoice Manual Biaya Tambahan
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
@@ -27,28 +27,53 @@
         | property name                                                     | tenant name     |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
         | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
-      When admin add invoice manual "<Jenis Invoice>"
+      When admin add invoice manual "Biaya Tambahan"
         | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
         | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
-        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
-      Then admin verify data "<Jenis Invoice>" in Buat dan Kirim pop up correct
+      Then admin verify data "Biaya Tambahan" in Buat dan Kirim pop up correct
         | Nama Biaya                        | Awal    | Akhir       | Jumlah Biaya   | Disburse to Pemilik |
         | Parkir Mobil (3 hari)             | today   | tomorrow    | Rp 25.000      | Ya                  |
-        | Perpanjang sewa harian (2 Hari)   | today   | tomorrow    | Rp 500.000     | -                   |
       When admin check pop up button and confirm it
-      Then invoice manual "<Jenis Invoice>" created
+      Then invoice manual "Biaya Tambahan" created
         | Nama Listing                                              | Jumlah Biaya  | Status Invoice  |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp25.000      | unpaid          |
-        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp500.000     | unpaid          |
-      And show detail biaya "<Jenis Invoice>" if hovered
+      And show detail biaya "Biaya Tambahan" if hovered
         | Nama Biaya                        |  Jumlah Biaya |
         | Parkir Mobil (3 hari)             |  Rp25.000     |
+
+    @TEST_PMAN-5766
+    Scenario: Check invoice data in invoice page
+      When admin clicks invoice number with unpaid status
+      Then invoice detail for "Biaya Tambahan" is displayed
+
+    @continue @TEST_PMAN-5689
+    Scenario: Buat dan Kirim Invoice Manual Biaya Sewa
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+      And admin input nama penyewa in buat invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+        | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
+      When admin add invoice manual "Biaya Sewa"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
+      Then admin verify data "Biaya Sewa" in Buat dan Kirim pop up correct
+        | Nama Biaya                        | Awal    | Akhir       | Jumlah Biaya   | Disburse to Pemilik |
+        | Perpanjang sewa harian (2 Hari)   | today   | tomorrow    | Rp 500.000     | -                   |
+      When admin check pop up button and confirm it
+      Then invoice manual "Biaya Sewa" created
+        | Nama Listing                                              | Jumlah Biaya  | Status Invoice  |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp500.000     | unpaid          |
+      And show detail biaya "Biaya Sewa" if hovered
+        | Nama Biaya                        |  Jumlah Biaya |
         | Perpanjang sewa harian (2 Hari)   |  Rp500.000    |
 
-      Examples:
-        | Jenis Invoice   |
-        | Biaya Tambahan  |
-        | Biaya Sewa      |
+    @TEST_PMAN-5766
+    Scenario: Check invoice data in invoice page
+      When admin clicks invoice number with unpaid status
+      Then invoice detail for "Biaya Sewa" is displayed
 
     @TEST_PMAN-5655 @pman-prod
     Scenario Outline: Back from Create Invoice Manual <Jenis Invoice>
