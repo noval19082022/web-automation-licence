@@ -75,8 +75,8 @@
       When admin clicks invoice number with unpaid status
       Then invoice detail for "Biaya Sewa" is displayed
 
-    @TEST_PMAN-5655 @pman-prod
-    Scenario Outline: Back from Create Invoice Manual <Jenis Invoice>
+    @TEST_PMAN-5655 @pman-prod @continue
+    Scenario: Back from Create Invoice Manual Biaya Tambahan
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
@@ -88,20 +88,37 @@
       #back if no biaya added yet
       When admin click back button in buat invoice manual page
       Then admin redirect to invoice manual page without confirmation
-      When admin add invoice manual "<Jenis Invoice>"
+      #back if there is biaya added
+      When admin create invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+      When admin add invoice manual "Biaya Tambahan"
         | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
         | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
-        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
-      #back if there is biaya added
       When admin click back button in buat invoice manual page
       Then exit buat invoice confirmation pop up should be appear
       When admin check confirmation functionality and confirm exit
       Then admin redirect to invoice manual page
 
-      Examples:
-        | Jenis Invoice   |
-        | Biaya Tambahan  |
-        | Biaya Sewa      |
+    @TEST_PMAN-7961 @pman-prod
+    Scenario: Back from Create Invoice Manual Biaya Sewa
+      When admin create invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+      #back if no biaya added yet
+      When admin click back button in buat invoice manual page
+      Then admin redirect to invoice manual page without confirmation
+      #back if there is biaya added
+      When admin create invoice manual
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+      When admin add invoice manual "Biaya Sewa"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+        | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
+      When admin click back button in buat invoice manual page
+      Then exit buat invoice confirmation pop up should be appear
+      When admin check confirmation functionality and confirm exit
+      Then admin redirect to invoice manual page
 
     @TEST_PMAN-5744 @pman-prod
     Scenario Outline: Durasi Biaya in <Jenis Invoice> max 255 characters
@@ -124,8 +141,8 @@
         | Biaya Tambahan  |
         | Biaya Sewa      |
 
-    @TEST_PMAN-5657 @pman-prod
-    Scenario Outline: Change Jenis Invoice - When There Are Biaya Tambahan & Biaya Sewa Data
+    @TEST_PMAN-5657 @pman-prod @continue
+    Scenario: Change Jenis Invoice to Biaya Tambahan When There Are Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
@@ -134,18 +151,24 @@
         | property name                                                     | tenant name     |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
         | Kost Apik Khusus Automation Mamitest PMAN Tipe C Halmahera Utara  | Yudha Ferroza   |
-      And admin add invoice manual "<Jenis Invoice>"
+      And admin add invoice manual "Biaya Sewa"
         | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
-        | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
         | Perpanjang sewa harian  | today         | tomorrow        | 2 Hari        | 500000        |
       #change invoice type
-      When admin selects Jenis Invoice "<Change Invoice>" when "There are Biaya Data"
-      Then empty state on the biaya "<Jenis Invoice>" table is displayed
+      When admin selects Jenis Invoice "Biaya Tambahan" when "There are Biaya Data"
+      Then empty state on the biaya "Biaya Tambahan" table is displayed
 
-      Examples:
-        | Jenis Invoice   | Change Invoice  |
-        | Biaya Tambahan  | Biaya Sewa      |
-        | Biaya Sewa      | Biaya Tambahan  |
+    @TEST_PMAN-7962 @pman-prod
+    Scenario: Change Jenis Invoice to Biaya Sewa When There Are Biaya Tambahan
+      When admin go to invoice manual page
+        | property name                                                     | tenant name     |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
+      And admin add invoice manual "Biaya Tambahan"
+        | Nama Biaya              | Periode Awal  | Periode Akhir   | Durasi Biaya  | Jumlah Biaya  |
+        | Parkir Mobil            | today         | tomorrow        | 3 hari        | 25000         |
+      #change invoice type
+      When admin selects Jenis Invoice "Biaya Sewa" when "There are Biaya Data"
+      Then empty state on the biaya "Biaya Sewa" table is displayed
 
     @continue @TEST_PMAN-5745 @pman-prod
     Scenario: Change Jenis Invoice - When There Is No Biaya Tambahan & Biaya Sewa Data
