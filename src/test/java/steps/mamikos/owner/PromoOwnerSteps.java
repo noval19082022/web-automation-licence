@@ -14,9 +14,7 @@ import utilities.PlaywrightHelpers;
 public class PromoOwnerSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
-    NavigatesSteps navigate = new NavigatesSteps();
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
-    HomePO home = new HomePO(page);
     Page page1;
 
     @And("owner atur promo owner")
@@ -36,10 +34,8 @@ public class PromoOwnerSteps {
     public void ownerCreateNewPromoOwnerWithTitleForPeriodePromo(String titleText, String periodePromo) {
         promoOwner.clickOnBuatPromo();
         promoOwner.inputPromoOwner(titleText);
-
         promoOwner.selectStartDatePromo(periodePromo);
         promoOwner.selectEndDatePromo(periodePromo);
-
         promoOwner.clickOnPasangPromo();
     }
 
@@ -53,7 +49,6 @@ public class PromoOwnerSteps {
         playwright.hardWait(2000);
         promoOwner.clickOnBuatPromo();
         Assert.assertTrue(promoOwner.isEditPromoButton(), "Button doesn't match!");
-
         promoOwner.editPromoOwner(titleText);
     }
 
@@ -80,7 +75,6 @@ public class PromoOwnerSteps {
         Assert.assertTrue(promoOwner.isUnverifiedStatus(), "Status doesn't match!");
         promoOwner.clickOnVerificationPromo();
         Assert.assertEquals(promoOwner.getAlertSuccessUpdate(), "Success! Promo is updated.", "message doesn't match!");
-
         adminSearchTheTitlePromoOnSearchBox();
         Assert.assertFalse(promoOwner.isUnverifiedStatus(), "Status doesn't match!");
     }
