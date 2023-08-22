@@ -178,10 +178,10 @@
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Penyewa
-      And admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
+      When admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
       Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Listing
-      And admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
       Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
