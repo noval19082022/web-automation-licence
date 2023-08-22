@@ -5,6 +5,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import utilities.PlaywrightHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,6 +16,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class InvoiceManualPO {
 
     private Page page;
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     // Invoice List Page
     private Locator buatInvoiceButton;
@@ -28,6 +30,13 @@ public class InvoiceManualPO {
     private Locator namaBiayaHover;
     private Locator jumlahBiayaHover;
     private Locator invoiceNumberLast;
+    private Locator searchBar;
+    private Locator searchBtn;
+    private Locator noInvoiceCol;
+    private Locator detailPenyewaCol;
+    private Locator namaListingCol;
+    private Locator searchDropDown;
+    private Locator selectSearchBy;
     // Invoice List Page
 
     // Invoice Detail Page
@@ -123,6 +132,12 @@ public class InvoiceManualPO {
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
         invoiceNumberLast = page.locator("td > .bg-c-link ").last();
+        searchBar = page.getByTestId("invoice-manual-filter-searchbar");
+        searchBtn = page.getByTestId("invoice-manual-filter-button-apply");
+        noInvoiceCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(0);
+        detailPenyewaCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(1);
+        namaListingCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(2);
+        searchDropDown = page.locator("//span[@class='bg-c-select__trigger-text']");
 
         //---Invoice Detail Page---//
         listingName = page.getByText("Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara");
@@ -733,6 +748,55 @@ public class InvoiceManualPO {
     public void assertTotalPembayaranOnRightSide(){
         assertThat(totalPembayaranOnRightSide);
         System.out.println(totalPembayaranOnRightSide);
+    }
+
+    /**
+     * enter Search Value on the Search Bar
+     * @param value
+     */
+    public void enterSearchValue(String value){
+        searchBar.click();
+        searchBar.fill(value);
+        searchBtn.click();
+    }
+
+    /**
+     * assert Nomor Invoice on No Invoice coloumn
+     * @param result1
+     */
+    public void assertNoInvoice(String result1){assertThat(noInvoiceCol).hasText(result1);
+    }
+
+    /**
+     * assert Detail Penyewa on Detail Penyewa coloumn
+     * Split the detail penyewa value
+     * And get the nama penyewa only
+     * @param result2
+     * @return
+     */
+    public String assertDetailPenyewa(String result2){String full = playwright.getText(detailPenyewaCol);
+        String result = full.substring(0,24);
+        System.out.println(result);
+        return result2;
+    }
+
+    /**
+     * assert Nama Listing on Nama Listing coloumn
+     * @param result3
+     */
+    public void assertNamaListing(String result3){
+        assertThat(namaListingCol).hasText(result3);
+    }
+
+    /**
+     * clicks on Search By dropdown
+     * then selects Search By based on Value
+     * @param searchBy
+     */
+    public void selectSearchBy(String searchBy){
+        searchDropDown.click();
+        selectSearchBy = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchBy));
+        selectSearchBy.click();
     }
 
     //---Biaya Tambahan---//

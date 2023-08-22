@@ -349,6 +349,27 @@ public class InvoiceManualSteps {
         manualInvoice.assertBuatDanKirimDisable();
     }
 
+    @When("admin search by {string} with value {string}")
+    public void admin_search_by_with_value(String searchBy, String value){
+        if (searchBy.equalsIgnoreCase("Nomor Invoice")){
+            admin.NavigateToMamipayMenu("Invoice Manual");
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Penyewa")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Listing")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        }
+    }
+
+    @Then("the result is displayed according the value {string}, {string}, {string}")
+    public void the_result_is_displayed_according_the_value(String result1, String result2, String result3){
+        manualInvoice.assertNoInvoice(result1);
+        manualInvoice.assertDetailPenyewa(result2);
+        manualInvoice.assertNamaListing(result3);
+    }
+
     //---Biaya Tambahan Pop Up---//
     @When("the admin selects {string} in the {string}")
     public void the_admin_selects_in_the(String biaya, String invType){

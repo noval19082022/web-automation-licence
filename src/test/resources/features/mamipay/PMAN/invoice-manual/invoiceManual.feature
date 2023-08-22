@@ -166,3 +166,22 @@
     @TEST_PMAN-5822
     Scenario: Disable Buat dan Kirim Button
       Then the Buat dan Kirim button is disabled
+
+    @continue @TEST_PMAN-6045
+    Scenario: Search invoice manual by Nomor Invoice
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+      And admin search by "Nomor Invoice" with value "MI/49220517/2022/09/80637"
+      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+
+    @continue @TEST_PMAN-6045
+    Scenario: Search invoice manual by Nama Penyewa
+      And admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
+      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+
+    @TEST_PMAN-6045
+    Scenario: Search invoice manual by Nama Listing
+      And admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
