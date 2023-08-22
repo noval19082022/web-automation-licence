@@ -172,4 +172,36 @@ public class PropertySayaSteps {
     public void user_see_active_mamipay_form_with_Bank_Name(String bankName) {
         Assert.assertEquals(propertySaya.getInputTextBankName().trim(), bankName, "Bank name in mamipay form is wrong");
     }
+
+    @Then("user input field name with {string} at form activate mamipay")
+    public void user_input_field_name_with_at_form_activate_mamipay(String fullName) {
+        propertySaya.fillInputNameForm(fullName);
+    }
+
+    @And("user fill out activate mamipay form with Bank Account Number {string}")
+    public void user_fill_out_activate_mamipay_form_with_bank_account_number(String bankAccountNumber) {
+        propertySaya.fillBankAccountNumberForm(bankAccountNumber);
+    }
+
+    @Then("user fill out active mamipay form with  Bank Owner Name {string}")
+    public void user_fill_out_active_mamipay_form_with_Bank_Owner_Name(String bankAccountName) {
+        propertySaya.fillBankAccountNameForm(bankAccountName);
+    }
+
+    @Then("user select bank account with {string}")
+    public void user_select_bank_account_with(String bankName) {
+        propertySaya.fillInputBankName(bankName);
+    }
+
+    @When("user clicks on Terms And Conditions checkbox in Mamipay form")
+    public void user_clicks_on_Terms_And_Conditions_checkbox_in_Mamipay_form() {
+        propertySaya.clickTermsAndConsCheckbox();
+    }
+
+    @When("user click submit data button to activate mamipay")
+    public void user_click_submit_data_button_to_activate_mamipay() {
+        propertySaya.clickSubmitButtonMamipay();
+    }
+
+
 }

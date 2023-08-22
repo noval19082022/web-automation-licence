@@ -32,7 +32,7 @@ Feature: Atur promo owner
     When admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin navigates to Promo Owner
+    And admin bangkrupux navigates to Promo Owner
     And admin search the title promo on search box
     Then admin verified the promo owner
 
@@ -53,7 +53,7 @@ Feature: Atur promo owner
     When admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin navigates to Promo Owner
+    And admin bangkrupux navigates to Promo Owner
     And admin search the title promo on search box
     Then admin unverified the promo owner
 
@@ -80,6 +80,6 @@ Feature: Atur promo owner
     When admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin navigates to Promo Owner
+    And admin bangkrupux navigates to Promo Owner
     And admin search the title promo on search box
     And admin delete the promo admin
