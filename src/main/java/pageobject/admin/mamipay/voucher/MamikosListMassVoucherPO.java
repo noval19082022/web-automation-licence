@@ -19,6 +19,7 @@ public class MamikosListMassVoucherPO {
     Locator addMassButton;
     Locator updateEl;
     Locator addSingleButton;
+    Locator addPartnerVoucherButton;
 
     public MamikosListMassVoucherPO(Page page) {
         this.page = page;
@@ -30,6 +31,7 @@ public class MamikosListMassVoucherPO {
         addMassButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Mass Voucher"));
         callout = page.locator(".callout");
         addSingleButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Single Voucher"));
+        addPartnerVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Bulk Add Vouchers Partner"));
     }
 
     /**
@@ -53,6 +55,15 @@ public class MamikosListMassVoucherPO {
      */
     public MamikosVoucherFormPO clickOnCreateButton() {
         playwright.clickOn(addMassButton);
+        return new MamikosVoucherFormPO(page);
+    }
+
+    /**
+     * Click on Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public MamikosVoucherFormPO clickOnCreatePartnerVoucherButton() {
+        playwright.clickOn(addPartnerVoucherButton);
         return new MamikosVoucherFormPO(page);
     }
 
