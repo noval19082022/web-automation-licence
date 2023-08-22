@@ -6,6 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import lombok.Getter;
 import lombok.Setter;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 
@@ -123,17 +124,24 @@ public class PromoOwnerPO {
         startDatePicker = page.locator("//div[contains(@class, 'period1')]//input[@class='input']");
         playwright.pageScrollUntilElementIsVisible(startDatePicker);
         playwright.clickOn(startDatePicker);
-        Locator startDatePromo = null;
         String locatorElement;
-
-        switch (periodePromo){
-            case "tomorrow": locatorElement = "//*[@class='datepicker-cell is-selectable dots manual-selected']"; break;
-            case "the day after tomorrow": locatorElement = ".datepicker1 div:nth-of-type(2) > a:nth-of-type(2)"; break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + periodePromo);
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 1, 0, 0);
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 2, 0, 0);
+        try {
+            switch (periodePromo){
+                case "tomorrow":
+                    locatorElement = tomorrowDate;
+                    break;
+                case "the day after tomorrow":
+                    locatorElement = theDayAfterTomorrowDate;
+                    break;
+                default:
+                    locatorElement = periodePromo;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unexpected value: " + periodePromo);
         }
-
-        startDatePromo = page.locator(locatorElement);
+        Locator startDatePromo = page.locator(".dropdown.is-active").getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(locatorElement));
         playwright.hardWait(2000.0);
         playwright.clickOn(startDatePromo);
     }
@@ -146,17 +154,25 @@ public class PromoOwnerPO {
     public void selectEndDatePromo(String periodePromo) {
         endDatePicker = page.locator("//div[contains(@class, 'period2')]//input[@class='input']");
         playwright.clickOn(endDatePicker);
-        Locator endDatePromo = null;
         String locatorElement;
-
-        switch (periodePromo){
-            case "tomorrow": locatorElement = ".datepicker2 div:nth-of-type(2) > a:nth-of-type(1)"; break;
-            case "the day after tomorrow": locatorElement = ".datepicker2 div:nth-of-type(2) > a:nth-of-type(2)"; break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + periodePromo);
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 1, 0, 0);
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 2, 0, 0);
+        try {
+            switch (periodePromo){
+                case "tomorrow":
+                    locatorElement = tomorrowDate;
+                    break;
+                case "the day after tomorrow":
+                    locatorElement = theDayAfterTomorrowDate;
+                    break;
+                default:
+                    locatorElement = periodePromo;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unexpected value: " + periodePromo);
         }
 
-        endDatePromo = page.locator(locatorElement);
+        Locator endDatePromo = page.locator(".dropdown.is-active").getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(locatorElement));
         playwright.clickOn(endDatePromo);
     }
 
