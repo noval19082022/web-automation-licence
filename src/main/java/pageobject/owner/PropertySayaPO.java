@@ -3,6 +3,7 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 import utilities.PlaywrightHelpers;
 
 public class PropertySayaPO {
@@ -45,6 +46,9 @@ public class PropertySayaPO {
     Locator termAndConsCheckbox;
     Locator submitDataMamipayButton;
     Locator backButtonActivationSent;
+    Locator editDataKos;
+    Locator fasilitasFeature;
+    Locator editSelesaiButton;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -82,6 +86,7 @@ public class PropertySayaPO {
         termAndConsCheckbox= page.locator(".check");
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
+        editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
     }
 
     /**
@@ -412,6 +417,59 @@ public class PropertySayaPO {
     public void clickSubmitButtonMamipay() {
         playwright.clickOn(submitDataMamipayButton);
         playwright.clickOn(backButtonActivationSent);
+    }
+
+    /**
+     * Click button edit kost
+     * @param dataKos which part to edit
+     */
+    public void clickEditDataKos(String dataKos) {
+        page.waitForLoadState(LoadState.LOAD);
+        editDataKos = page.locator("//span[contains(.,'"+dataKos+"')]/following-sibling::span");
+        playwright.clickOn(editDataKos);
+    }
+
+    /**
+     * Click facilities checkbox
+     * @param section  is facility section, example "Fasilitas Umum"
+     * @param facility is facility name
+     */
+    public void clickFacilitiesCheckbox(String section, String facility) {
+        fasilitasFeature = page.locator("//h4[contains(., '"+section+"')]/following::div//span[contains(text(), '"+facility+"')]").first();
+        playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
+        playwright.clickOn(fasilitasFeature);
+    }
+
+    /**
+     * Verify button edit finish is disabled
+     * @return true if disabled
+     */
+    public boolean isEditFinishedButtonDisabled() {
+        return editSelesaiButton.isDisabled();
+    }
+
+    /**
+     * Get warning title in certain facility
+     *
+     * @param facility is facility section
+     * @return error message title
+     */
+    public String getWarningTitleFacility(String facility) {
+        Locator element = page.locator("//h4[contains(text(), '" + facility + "')]/following-sibling::div[1]//p[1]").first();
+        playwright.pageScrollUntilElementIsVisible(element);
+        return playwright.getText(element);
+    }
+
+    /**
+     * Get warning description in certain facility
+     *
+     * @param facility is facility section
+     * @return error message description
+     */
+    public String getWarningDescFacility(String facility) {
+        Locator element = page.locator("//h4[contains(text(), '" + facility + "')]/following-sibling::div[1]//p[2]").first();
+        playwright.pageScrollUntilElementIsVisible(element);
+        return playwright.getText(element);
     }
 
 }

@@ -28,6 +28,7 @@ Feature: Homepage
   @ownerPage @listingGP @continue
   Scenario: Click "halaman pemilik" will redirect to Owner page
     When user navigates to owner dashboard
+    And owner click "Nanti Saja"
     And user click mamikos.com logo
     And user click profile on header
     Then user see dropdown with button owner page and exit
