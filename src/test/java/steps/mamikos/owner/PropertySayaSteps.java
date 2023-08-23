@@ -10,6 +10,8 @@ import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -203,5 +205,26 @@ public class PropertySayaSteps {
         propertySaya.clickSubmitButtonMamipay();
     }
 
+    @And("user click button edit {string} kos")
+    public void userClickButtonEditKos(String updateData) {
+        propertySaya.clickEditDataKos(updateData);
+    }
 
+    @When("user uncheck/check facilities under {string}")
+    public void user_check_facilities_under(String section, List<String> facilities) {
+        for (String facility : facilities) {
+            propertySaya.clickFacilitiesCheckbox(section, facility);
+        }
+    }
+
+    @Then("user see edit finished button is disabled")
+    public void userSeeEditFinishedButtonIsDisabled() {
+        Assert.assertTrue(propertySaya.isEditFinishedButtonDisabled());
+    }
+
+    @And("user see {string} has warning title {string} and description {string}")
+    public void user_see_has_warning_title_and_description(String facility, String title, String desc) {
+        Assert.assertEquals(propertySaya.getWarningTitleFacility(facility), title, "Warning title in " + facility + " is wrong");
+        Assert.assertEquals(propertySaya.getWarningDescFacility(facility), desc, "Warning description in " + facility + " is wrong");
+    }
 }

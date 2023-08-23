@@ -245,6 +245,7 @@ public class OwnerDashboardPO {
      * @param menu is menu on feature kelola property
      */
     public void clickOnMenuKelolaProperty(String menu){
+        page.reload();
         menuKelolaProperty = page.locator("//p[contains(.,'"+menu+"')]");
         playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);
         playwright.clickOn(menuKelolaProperty);
@@ -453,7 +454,7 @@ public class OwnerDashboardPO {
     public String widgetWaktunyaMengelolaProperti (String widgetList, int index){
         String value= "";
         page.waitForLoadState();
-        playwright.pageScrollUntilElementIsVisible(widgetTitleWaktunyaMengelolaProperti.nth(4));
+        playwright.pageScrollUntilElementIsVisible(widgetTitleWaktunyaMengelolaProperti.nth(5));
         if (widgetList.equals("title")) {
             value = playwright.getText(widgetTitleWaktunyaMengelolaProperti.nth(index));
         } else if (widgetList.equals("subtitle")) {
