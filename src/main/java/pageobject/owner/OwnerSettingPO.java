@@ -59,7 +59,7 @@ public class OwnerSettingPO {
      *
      */
     public void clearPhoneNumber() {
-        phoneNumberField.clear();
+        playwright.clearText(phoneNumberField);
     }
 
     /**
@@ -176,6 +176,6 @@ public class OwnerSettingPO {
      *
      */
     public void clearNamaLengkapOwner() {
-        nameOwnerField.clear();
+        playwright.clearText(nameOwnerField);
     }
 }
