@@ -2,11 +2,14 @@ package pageobject.owner;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import lombok.Getter;
+import lombok.Setter;
 import utilities.PlaywrightHelpers;
 
 public class OwnerSettingPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    @Setter @Getter private String nameOwner;
 
     Locator ubahDataPribadi;
     Locator phoneNumberField;
@@ -15,6 +18,9 @@ public class OwnerSettingPO {
     Locator messageValidationButton;
     Locator otpPopUp;
     Locator resendCode;
+    Locator nameOwnerField;
+    Locator username;
+    Locator profilePicture;
 
     public OwnerSettingPO(Page page) {
         this.page = page;
@@ -26,6 +32,9 @@ public class OwnerSettingPO {
         messageValidationButton = page.locator("//button[@class='swal2-confirm swal2-styled']");
         resendCode = page.locator("//button[contains(@class,'resend-button')]");
         otpPopUp = page.locator(".bg-c-pin");
+        nameOwnerField = page.locator("[name='name']");
+        username = page.locator("//p[@class='navbar-owner-dashboard__username bg-c-text bg-c-text--body-2']");
+        profilePicture = page.locator("//i[@class='mdi mdi-account-circle mdi-48px']");
     }
 
     /**
@@ -121,5 +130,52 @@ public class OwnerSettingPO {
     public void clickOnResendCode() {
         playwright.waitTillLocatorIsVisible(resendCode, 62000.0);
         playwright.clickOn(resendCode);
+    }
+
+    /**
+     * Input Nama Lengkap owner
+     * @param text
+     */
+    public void inputNameOwner(String text) {
+        playwright.forceFill(nameOwnerField, text);
+        setNameOwner(text);
+    }
+
+    /**
+     * Get username on navbar
+     * @return username
+     */
+    public String getUsername() {
+        return playwright.getText(username);
+    }
+
+    /**
+     * Verify profile picture displayed or not
+     * @return boolean (true, false)
+     *
+     */
+    public boolean isProfilePictureDisplayed() {
+        playwright.waitTillLocatorIsVisible(profilePicture, 3000.0);
+        return playwright.isLocatorVisibleAfterLoad(profilePicture, 3000.0);
+    }
+
+    /**
+     * Click pengaturan akun
+     * Check and uncheck rekomendasi via email,notifikasi via chat,notifikasi kos via SMS
+     * @param textDescription
+     *
+     */
+    public void clickOnPengaturanAkun(String textDescription) {
+        String element = "//label[contains(.,'"+textDescription+"')]";
+        playwright.clickOn(page.locator(element));
+    }
+
+    /**
+     * Delete nama lengkap owner
+     *
+     *
+     */
+    public void clearNamaLengkapOwner() {
+        nameOwnerField.clear();
     }
 }
