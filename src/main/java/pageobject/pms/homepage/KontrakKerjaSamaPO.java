@@ -9,6 +9,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class KontrakKerjaSamaPO {
     private Page page;
 
+    Locator toastMessage;
+
     //Profil Pemilik
     Locator kontrakKerjaSamaTab;
     Locator sectionOwnerProfile;
@@ -98,8 +100,47 @@ public class KontrakKerjaSamaPO {
     Locator biayaKeanggotaanInput;
     //End Edit Detail Kerja Sama
 
+    //Biaya Tambahan
+    Locator biayaTambahanSection;
+    Locator biayaTambahanName;
+    Locator amountBiayaTambahan;
+    Locator ubahBiayaTambahanButton;
+    //End Biaya Tambahan
+
+    //Detail Biaya Tambahan
+    Locator tambahBiayaButton;
+    Locator namaBiayaEditField;
+    Locator hargaBiayaEditField;
+    Locator tambahBiayaModalButton;
+    Locator ubahBiayaModalButton;
+    Locator biayaTambahanDetail;
+    Locator actionButton;
+    Locator actionUbahButton;
+    Locator actionHapusButton;
+    Locator confirmHapusButton;
+    //End Detail Biaya Tambahan
+
+    //Rincian Tipe Kamar dan Harga
+    Locator rincianTipeKamarSection;
+    Locator tipeKamar;
+    Locator gender;
+    Locator jumlahKamar;
+    Locator hargaOTA;
+    Locator hargaBulanan;
+    Locator harga3bulan;
+    Locator harga6bulan;
+    Locator hargaStaticBulanan;
+    Locator hargaStatic3Bulan;
+    Locator hargaStatic6Bulan;
+    Locator hargaPublishBulanan;
+    Locator hargaPublish3Bulan;
+    Locator hargaPublish6Bulan;
+    //End Rincian Tipe Kamar dan Harga
+
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
+
+        toastMessage = page.locator(".bg-c-toast__content");
 
         kontrakKerjaSamaTab = page.locator("[aria-controls='contract']");
         sectionOwnerProfile = page.locator("#owner-profile");
@@ -175,6 +216,22 @@ public class KontrakKerjaSamaPO {
         penpadatanDbetMamikosInput = page.locator(".bg-c-input__field").nth(9);
         jangkaWaktuKerjaSamaInput = page.getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Bulan")).getByRole(AriaRole.TEXTBOX);
         biayaKeanggotaanInput = page.getByTestId("input-currency-masking").last();
+
+        biayaTambahanSection = page.locator(".organism-additional-price");
+        biayaTambahanName = page.locator(".organism-additional-price .bg-c-list-item__title--has-description");
+        amountBiayaTambahan = page.locator(".organism-additional-price .bg-c-list-item__description");
+        ubahBiayaTambahanButton = page.locator(".organism-additional-price").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
+        tambahBiayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Biaya"));
+        namaBiayaEditField = page.getByPlaceholder("Masukkan nama biaya");
+        hargaBiayaEditField = page.getByLabel("Harga");
+        tambahBiayaModalButton = page.getByTestId("additional-cost-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tambah"));
+        ubahBiayaModalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
+        biayaTambahanDetail = page.locator(".ss-table td");
+        actionUbahButton = page.getByRole(AriaRole.MENU).locator("div").filter(new Locator.FilterOptions().setHasText("Ubah")).first();
+        actionHapusButton = page.getByRole(AriaRole.MENU).locator("div").filter(new Locator.FilterOptions().setHasText("Hapus")).first();
+        confirmHapusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+
+        rincianTipeKamarSection = page.locator(".organism-room-price");
     }
 
     /**
@@ -418,7 +475,7 @@ public class KontrakKerjaSamaPO {
     /**
      * scroll to view section detail kerja sama
      */
-    public void viewScetionDetailKerjaSama() {
+    public void viewSectionDetailKerjaSama() {
         detailKerjaSamaSection.waitFor();
         detailKerjaSamaSection.scrollIntoViewIfNeeded();
     }
@@ -613,4 +670,151 @@ public class KontrakKerjaSamaPO {
         assertThat(pendapatanPemilikDbet).hasText(precentagePemilik);
         assertThat(pendapatanMamikosDbet).hasText(precentageMamikos);
     }
+
+    /**
+     * View section Biaya Tambahan
+     */
+    public void viewSectionBiayaTambahan() {
+        biayaTambahanSection.waitFor();
+        biayaTambahanSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Assert All Biaya Tambahan in Kontrak Kerja Sama
+     * @param i biaya tambahan ke-i
+     * @param fee nama biaya
+     * @param amount harga
+     */
+    public void assertBiayaTambahan(int i, String fee, String amount) {
+        assertThat(biayaTambahanName.nth(i)).hasText(fee);
+        assertThat(amountBiayaTambahan.nth(i)).hasText(amount);
+    }
+
+    /**
+     * Click Ubah biaya tambahan
+     */
+    public void ubahBiayaTambahan() {
+        ubahBiayaTambahanButton.click();
+    }
+
+    /**
+     * Add biaya tambahan
+     * @param fee
+     * @param amount
+     */
+    public void addBiayaTambahan(String fee, String amount) {
+        tambahBiayaButton.click();
+        namaBiayaEditField.fill(fee);
+        hargaBiayaEditField.fill(amount);
+        tambahBiayaModalButton.click();
+
+        //Asserting toast message
+        assertThat(toastMessage).hasText(" Perubahan berhasil ditambahkan. ");
+    }
+
+    /**
+     * Assert All Biaya Tambahan in Detail Biaya Tambahan
+     * @param i Biaya tambahan ke-i
+     * @param fee Nama Biaya
+     * @param amount Harga
+     */
+    public void assertDetailBiayaTambahan(int i, String fee, String amount) {
+        assertThat(biayaTambahanDetail.nth((i*3))).hasText(fee);
+        assertThat(biayaTambahanDetail.nth((i*3)+1)).hasText(amount);
+    }
+
+
+    /**
+     * Edit Biaya Tambahan
+     * @param feename Nama Biaya that want to edit
+     * @param fee
+     * @param amount
+     */
+    public void editBiayaTambahan(String feename, String fee, String amount) {
+        actionButton = page.locator("//td[contains(text(),'"+feename+"')]//following-sibling::*/div");
+
+        actionButton.click();
+        actionUbahButton.click();
+        namaBiayaEditField.fill(fee);
+        hargaBiayaEditField.fill(amount);
+        ubahBiayaModalButton.click();
+
+        //Asserting toast message
+        assertThat(toastMessage).hasText(" Perubahan berhasil diubah. ");
+    }
+
+    /**
+     * delete biaya tambahan
+     * @param feeName Nama Biaya that want to delete
+     */
+    public void deleteBiayaTambahan(String feeName) {
+        actionButton = page.locator("//td[contains(text(),'"+feeName+"')]//following-sibling::*/div");
+
+        biayaTambahanDetail.last().waitFor();
+        actionButton.click();
+        actionHapusButton.click();
+        confirmHapusButton.click();
+
+        //Asserting toast message
+        assertThat(toastMessage).hasText(" Perubahan berhasil dihapus. ");
+    }
+
+    /**
+     * View section rincian tipe kamar dan harga
+     */
+    public void viewSectionRincianTipeKamarDanHarga() {
+        rincianTipeKamarSection.scrollIntoViewIfNeeded();
+    }
+
+    /**
+     * Assert rincian tipe kamar dan harga
+     * @param i
+     * @param type Tipe Kamar
+     * @param gender Gender
+     * @param room Total Kamar
+     * @param ota Harga Static Harian (OTA)
+     * @param monthly Harga Sew Bulanan
+     * @param threeMonth Harga Sewa 3 Bulan
+     * @param sixMonth Harga Sewa 6 Bulan
+     * @param staticMonthly Harga Kerja Sama (Static) Bulanan
+     * @param staticThreeMonth Harga Kerja Sama (Static) 3 Bulan
+     * @param staticSixMonth Harga Kerja Sama (Static) 6 Bulan
+     * @param publishMonthly Harga Kerja Sama (Publish) Bulanan
+     * @param publishThreeMonth Harga Kerja Sama (Publish) 3 Bulan
+     * @param publishSixMonth Harga Kerja Sama (Publish) 6 Bulan
+     */
+    public void assertTipeDanHargaKamar(int i, String type, String gender, String room, String ota, String monthly, String threeMonth, String sixMonth, String staticMonthly, String staticThreeMonth, String staticSixMonth, String publishMonthly, String publishThreeMonth, String publishSixMonth) {
+        String index = String.valueOf(i+2);
+
+        tipeKamar = page.locator("((//tr)["+index+"]//td)[1]");
+        this.gender = page.locator("((//tr)["+index+"]//td)[2]");
+        jumlahKamar = page.locator("((//tr)["+index+"]//td)[3]");
+        hargaOTA = page.locator("((//tr)["+index+"]//td)[4]");
+        hargaBulanan = page.locator("((//tr)["+index+"]//td)[5]");
+        harga3bulan = page.locator("((//tr)["+index+"]//td)[6]");
+        harga6bulan = page.locator("((//tr)["+index+"]//td)[7]");
+        hargaStaticBulanan = page.locator("((//tr)["+index+"]//td)[8]");
+        hargaStatic3Bulan = page.locator("((//tr)["+index+"]//td)[9]");
+        hargaStatic6Bulan = page.locator("((//tr)["+index+"]//td)[10]");
+        hargaPublishBulanan = page.locator("((//tr)["+index+"]//td)[11]");
+        hargaPublish3Bulan = page.locator("((//tr)["+index+"]//td)[12]");
+        hargaPublish6Bulan = page.locator("((//tr)["+index+"]//td)[13]");
+
+        assertThat(tipeKamar).hasText(type);
+        assertThat(this.gender).hasText(gender);
+        assertThat(jumlahKamar).hasText(room);
+        assertThat(hargaOTA).hasText(ota);
+        assertThat(hargaBulanan).hasText(monthly);
+        assertThat(harga3bulan).hasText(threeMonth);
+        assertThat(harga6bulan).hasText(sixMonth);
+        assertThat(hargaStaticBulanan).hasText(staticMonthly);
+        assertThat(hargaStatic3Bulan).hasText(staticThreeMonth);
+        assertThat(hargaStatic6Bulan).hasText(staticSixMonth);
+        assertThat(hargaPublishBulanan).hasText(publishMonthly);
+        assertThat(hargaPublish3Bulan).hasText(publishThreeMonth);
+        assertThat(hargaPublish6Bulan).hasText(publishSixMonth);
+
+    }
+
+
 }

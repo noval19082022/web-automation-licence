@@ -21,6 +21,8 @@ public class KontrakKerjaSamaSteps {
     private List<Map<String, String>> profilPemilikEdit;
     private List<Map<String, String>> transfer;
     private List<Map<String, String>> kontrak;
+    private List<Map<String, String>> additionelFee;
+    private List<Map<String, String>> detailListing;
 
     @When("admin see profil pemilik")
     public void admin_see_profil_pemilik() {
@@ -126,7 +128,7 @@ public class KontrakKerjaSamaSteps {
 
         playwright.hardWait(5000);
         page.reload();
-        contract.viewScetionDetailKerjaSama();
+        contract.viewSectionDetailKerjaSama();
 
         contract.assertModelKerjaSama(produk, model, commission,roomTotal);
         contract.assertRevenuShare(jpType, jpPrecentage, jpAmount, adpType, adpPrecentage, adpAmount, revBookingPemilik, revBookingMamikos);
@@ -170,7 +172,7 @@ public class KontrakKerjaSamaSteps {
         String precentagePemilik = kontrak.get(0).get("Pemilik DBET");
         String precentageMamikos = kontrak.get(0).get("Mamikos DBET");
 
-        contract.viewScetionDetailKerjaSama();
+        contract.viewSectionDetailKerjaSama();
         contract.assertHybridContractSection("visible");
         contract.assertHybridRevenue(precentagePemilik, precentageMamikos);
     }
@@ -182,7 +184,94 @@ public class KontrakKerjaSamaSteps {
     }
     @Then("kontrak kerja sama should not contains hybrid rev share")
     public void kontrak_kerja_sama_should_not_contains_hybrid_rev_share() {
-        contract.viewScetionDetailKerjaSama();
+        contract.viewSectionDetailKerjaSama();
         contract.assertHybridContractSection("hidden");
+    }
+    
+    @When("admin see biaya tambahan")
+    public void admin_see_biaya_tambahan() {
+        contract.viewSectionBiayaTambahan();
+    }
+
+    @Then("biaya tambahan should contains")
+    public void biaya_tambahan_should_contains(DataTable tables) {
+        additionelFee = tables.asMaps(String.class, String.class);
+
+        contract.viewSectionBiayaTambahan();
+
+        for (int i=0;i< additionelFee.size();i++){
+            String fee = additionelFee.get(i).get("Nama Biaya");
+            String amount = additionelFee.get(i).get("Amount");
+
+            contract.assertBiayaTambahan(i, fee, amount);
+        }
+    }
+
+    @When("admin add new biaya tambahan")
+    public void admin_add_new_biaya_tambahan(DataTable tables) {
+        additionelFee = tables.asMaps(String.class, String.class);
+
+        contract.ubahBiayaTambahan();
+        for (int i=0;i< additionelFee.size();i++){
+            String fee = additionelFee.get(i).get("Nama Biaya");
+            String amount = additionelFee.get(i).get("Amount");
+
+            contract.addBiayaTambahan(fee, amount);
+        }
+    }
+
+    @Then("detail biaya tambahan should contains")
+    public void detail_biaya_tambahan_should_contains(DataTable tables) {
+        additionelFee = tables.asMaps(String.class, String.class);
+
+        for (int i=0;i< additionelFee.size();i++){
+            String fee = additionelFee.get(i).get("Nama Biaya");
+            String amount = additionelFee.get(i).get("Amount");
+
+            contract.assertDetailBiayaTambahan(i, fee, amount);
+        }
+    }
+    @When("admin edit biaya tambahan {string} to")
+    public void admin_edit_biaya_tambahan_to(String feeName, DataTable tables) {
+        additionelFee = tables.asMaps(String.class, String.class);
+
+        for (int i=0;i< additionelFee.size();i++){
+            String fee = additionelFee.get(i).get("Nama Biaya");
+            String amount = additionelFee.get(i).get("Amount");
+
+            contract.editBiayaTambahan(feeName, fee, amount);
+        }
+    }
+
+    @When("admin delete biaya tambahan {string}")
+    public void admin_delete_biaya_tambahan(String feeName){
+        contract.deleteBiayaTambahan(feeName);
+    }
+
+    @When("admin see rincian tipe kamar dan harga")
+    public void admin_see_rincian_tipe_kamar_dan_harga() {
+        contract.viewSectionRincianTipeKamarDanHarga();
+    }
+    @Then("rincian tipe kamar dan harga should match")
+    public void rincian_tipe_kamar_dan_harga_should_match(DataTable tables) {
+        detailListing = tables.asMaps(String.class, String.class);
+
+        for (int i=0;i< detailListing.size();i++){
+            String type = detailListing.get(i).get("Tipe Kamar");
+            String gender = detailListing.get(i).get("Gender");
+            String room = detailListing.get(i).get("Jumlah Kamar");
+            String ota = detailListing.get(i).get("Harga OTA");
+            String monthly = detailListing.get(i).get("Harga Bulanan");
+            String threeMonth = detailListing.get(i).get("Harga 3 Bulan");
+            String sixMonth = detailListing.get(i).get("Harga 6 Bulan");
+            String staticMonthly = detailListing.get(i).get("Static Bulanan");
+            String staticThreeMonth = detailListing.get(i).get("Static 3 Bulan");
+            String staticSixMonth = detailListing.get(i).get("Static 6 Bulan");
+            String publishMonthly = detailListing.get(i).get("Publish Bulanan");
+            String publishThreeMonth = detailListing.get(i).get("Publish 3 Bulan");
+            String publishSixMonth = detailListing.get(i).get("Publish 6 Bulan");
+
+            contract.assertTipeDanHargaKamar(i, type,gender,room,ota,monthly,threeMonth,sixMonth,staticMonthly,staticThreeMonth,staticSixMonth,publishMonthly,publishThreeMonth,publishSixMonth);
+        }
     }
 }
