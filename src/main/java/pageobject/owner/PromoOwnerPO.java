@@ -283,4 +283,14 @@ public class PromoOwnerPO {
         playwright.clickOn(deletePromoButton);
         playwright.acceptDialog(deletePromoButton);
     }
+
+    /**
+     * Click promo owner for non GP
+     * if owner non GP, there is no new tab
+     *
+     */
+    public void clickOnPromoNonGP() {
+       playwright.clickOn(lihatSelengkapnyaButton);
+       playwright.clickOn(aturPromo);
+    }
 }
