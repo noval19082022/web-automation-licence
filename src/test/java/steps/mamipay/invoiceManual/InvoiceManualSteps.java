@@ -62,6 +62,29 @@ public class InvoiceManualSteps {
         manualInvoice.inputTenantName(tenant);
     }
 
+    @When("admin create invoice manual")
+    public void admin_create_invoice_manual(DataTable tables){
+        tenantInfo = tables.asMaps(String.class, String.class);
+        listing = tenantInfo.get(0).get("property name");
+        tenant = tenantInfo.get(0).get("tenant name");
+
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.inputListingName(listing);
+        manualInvoice.inputTenantName(tenant);
+    }
+
+    @When("admin go to invoice manual page")
+    public void admin_go_to_invoive_manual_page(DataTable tables){
+        tenantInfo = tables.asMaps(String.class, String.class);
+        listing = tenantInfo.get(0).get("property name");
+        tenant = tenantInfo.get(0).get("tenant name");
+
+        manualInvoice.clickBackButtonBuatInvoice();
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.inputListingName(listing);
+        manualInvoice.inputTenantName(tenant);
+    }
+
     @Then("tenant information should be auto fill")
     public void tenant_information_should_be_auto_fill(DataTable tables) {
         String noHP = "";
@@ -87,19 +110,11 @@ public class InvoiceManualSteps {
 
         detailBiaya = tables.asMaps(String.class, String.class);
 
-        if (type.equalsIgnoreCase("Biaya Tambahan")){
-            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
-            periodeAwal = detailBiaya.get(0).get("Periode Awal");
-            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
-            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
-            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
-        } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
-            periodeAwal = detailBiaya.get(0).get("Periode Awal");
-            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
-            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
-            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
-        }
+        namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+        periodeAwal = detailBiaya.get(0).get("Periode Awal");
+        periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+        durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+        jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
 
         manualInvoice.selectJenisInvoice(type);
         manualInvoice.tambahBiayaButton();
@@ -261,9 +276,6 @@ public class InvoiceManualSteps {
     @Then("admin redirect to invoice manual page without confirmation")
     public void admin_redirect_to_invoice_manual_page_without_confirmation() {
         manualInvoice.assertURLInvoiceManual();
-        manualInvoice.clickBuatInvoice();
-        manualInvoice.inputListingName(listing);
-        manualInvoice.inputTenantName(tenant);
     }
 
     @When("admin selects Jenis Invoice {string} when {string}")
@@ -298,9 +310,9 @@ public class InvoiceManualSteps {
     @Then("empty state on the biaya {string} table is displayed")
     public void empty_state_on_the_biaya_table_is_displayed(String emptyState){
         if (emptyState.equalsIgnoreCase("Biaya Sewa")){
-            manualInvoice.assertEmptyStateBiayaTambahan();
-        } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
             manualInvoice.assertEmptyStateBiayaSewa();
+        } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
+            manualInvoice.assertEmptyStateBiayaTambahan();
         }
     }
 
@@ -347,6 +359,27 @@ public class InvoiceManualSteps {
     @Then("the Buat dan Kirim button is disabled")
     public void the_Buat_dan_Kirim_Button_is_disabled(){
         manualInvoice.assertBuatDanKirimDisable();
+    }
+
+    @When("admin search by {string} with value {string}")
+    public void admin_search_by_with_value(String searchBy, String value){
+        if (searchBy.equalsIgnoreCase("Nomor Invoice")){
+            admin.NavigateToMamipayMenu("Invoice Manual");
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Penyewa")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Listing")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        }
+    }
+
+    @Then("the result is displayed according the value {string}, {string}, {string}")
+    public void the_result_is_displayed_according_the_value(String result1, String result2, String result3){
+        manualInvoice.assertNoInvoice(result1);
+        manualInvoice.assertDetailPenyewa(result2);
+        manualInvoice.assertNamaListing(result3);
     }
 
     //---Biaya Tambahan Pop Up---//
