@@ -141,7 +141,7 @@ public class JavaHelpers {
     /**
      * Access properties and return as Properties
      * @param propertyfile desired properties file
-     * @return
+     * @return Properties data type
      */
     public static Properties accessPropertiesFile(String propertyfile) {
         Properties prop = new Properties();
@@ -326,6 +326,15 @@ public class JavaHelpers {
      */
     public static String formatString(String format, Object... args)  {
         return String.format(format, args);
+    }
+
+    /**
+     * Remove extra new line and trim
+     * @param removeLineString
+     * @return String data type
+     */
+    public static String removeExtraNewLine(String removeLineString) {
+        return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
     }
     //--- String Manipulator ---//
 }

@@ -28,6 +28,22 @@ public class BroadcastChatPO {
     Locator cancelGoldPlusButton;
     Locator backGoldplusbutton;
     Locator lihatPenerimaSection;
+    private Locator andaBelumMemilikiKosActiveText;
+    private Locator tambahPenerimaButton;
+    private Locator broadcastChatPackageContent;
+    private Locator lihatDetailButton;
+    private Locator ajukanGantiPaketButton;
+    private Locator beliPaketButton;
+    private Locator gpHeader;
+    private Locator lihatRincianButton;
+    private Locator bacaSelengkapnyaButton;
+    private Locator tambahBroadcastChatButton;
+    private Locator pilihKosButton;
+    private Locator toastContentText;
+    private Locator bantuanDanTipsButton;
+    private Locator displayingSearchResultKosNameText;
+    private Locator emptyKosHeaderText;
+    private Locator emptyKosBodyText;
 
     public BroadcastChatPO(Page page) {
         this.page = page;
@@ -52,6 +68,22 @@ public class BroadcastChatPO {
         cancelGoldPlusButton = page.locator("//a[@class='back-icon']");
         backGoldplusbutton = page.locator("//span[@class='goldplus-header__back-button']");
         lihatPenerimaSection = page.getByTestId("broadcastChat-sectionRecepientMessage");
+        tambahPenerimaButton = playwright.getButtonBySetName("Tambah Penerima");
+        andaBelumMemilikiKosActiveText = page.getByText("Anda belum memiliki kos aktif");
+        broadcastChatPackageContent = page.getByTestId("broadcastChatDesktop");
+        lihatDetailButton = playwright.getButtonBySetName("Lihat Detail");
+        ajukanGantiPaketButton = playwright.getButtonBySetName("Ajukan Ganti Paket");
+        beliPaketButton = playwright.getButtonBySetName("Beli Paket");
+        gpHeader = page.locator("div.broadcast-chat-content__alert").getByRole(AriaRole.PARAGRAPH).first();
+        lihatRincianButton = playwright.getButtonByText("Lihat Rincian");
+        bacaSelengkapnyaButton = page.getByTestId("broadcastChatDesktop").locator("a");
+        tambahBroadcastChatButton = playwright.getButtonBySetName("Tambah Broadcast Chat");
+        toastContentText = page.locator(".bg-c-toast__content");
+        bantuanDanTipsButton = playwright.getButtonBySetName("Bantuan & Tips");
+        displayingSearchResultKosNameText = page.getByTestId("broadcastChat-listKos").getByRole(AriaRole.PARAGRAPH).first();
+        pilihKosButton = playwright.getButtonByText("Pilih Kos");
+        emptyKosHeaderText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).first();
+        emptyKosBodyText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).last();
     }
 
     /**
@@ -60,8 +92,7 @@ public class BroadcastChatPO {
      * @return Text of broadcast
      */
     public String getWarningBroadcastText() {
-        playwright.hardWait(5000);
-        playwright.waitTillLocatorIsVisible(warningBroadcastText,5000.0);
+        playwright.waitTillLocatorIsVisible(warningBroadcastText,30000.0);
         return playwright.getText(warningBroadcastText);
     }
 
@@ -70,7 +101,7 @@ public class BroadcastChatPO {
      * Insert text to search kost BroadcastChat
      */
     public void searchKostBC(String text) {
-        searchKostInputBC.fill(text);
+        playwright.forceFill(searchKostInputBC, text);
     }
 
     /**
@@ -78,8 +109,7 @@ public class BroadcastChatPO {
      *
      */
     public boolean isKostCardDisabled() {
-        playwright.hardWait(3000);
-        return listSelectBroadcastKost.isVisible();
+        return playwright.getAttributeValue(kostListBroadcastChat, "class").contains("disabled-card");
     }
 
     /**
@@ -87,16 +117,15 @@ public class BroadcastChatPO {
      */
     public void clickOnCloseSearchBroadcastSearchIcon() {
         playwright.clickOn(closeSearchBroadcastSearchIcon);
-        page.reload();
-        playwright.hardWait(5000);
+        playwright.reloadPage();
+        playwright.hardWait(1500.0);
     }
 
     /**
      * verify kost list at broadcast chat is show
      */
     public boolean isKosListDisplayed() {
-        playwright.waitTillLocatorIsVisible(playwright.getLocators(kostListBroadcastChat).get(0),5000.0);
-        return playwright.isLocatorVisibleAfterLoad(playwright.getLocators(kostListBroadcastChat).get(0),5000.0);
+        return playwright.waitTillLocatorIsVisible(playwright.getLocators(kostListBroadcastChat).get(0));
     }
 
     /**
@@ -210,5 +239,125 @@ public class BroadcastChatPO {
      */
     public boolean isLihatPenerimaPageDisplayed() {
         return playwright.waitTillLocatorIsVisible(lihatPenerimaSection, 2000.0);
+    }
+
+    /**
+     * Click on tambah penerima button
+     */
+    public void clickOnTambahPenerimaButton() {
+        playwright.clickOn(tambahPenerimaButton);
+    }
+
+    /**
+     * Verify anda belum memiliki kos aktif text displayed
+     * @return boolean visible true, otherwise false
+     */
+    public boolean isAndaBelumMemilikiKosAktifTextDisplayed() {
+        return playwright.waitTillLocatorIsVisible(andaBelumMemilikiKosActiveText);
+    }
+
+    /**
+     * Verify the visibility of tambahkan button
+     * @return boolean visible true, otherwise false
+     */
+    public boolean isTambahkanPenerimaButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(tambahPenerimaButton);
+    }
+
+    /**
+     * Verify the visibility of broadcast chat package content
+     * @return boolean visible true, otherwise false
+     */
+    public boolean isBroadcastChatPackageContentVisible() {
+        return playwright.waitTillLocatorIsVisible(broadcastChatPackageContent);
+    }
+
+    /**
+     * Verify the visibility of lihat detail button
+     * @return boolean visible true, otherwise false
+     */
+    public boolean isLihatDetailButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(lihatDetailButton);
+    }
+
+    /**
+     * Verify the visibility of ajukan ganti paket button
+     * @return boolean visible true, otherwise false
+     */
+    public boolean isAjukanGantiPaketVisible() {
+        return playwright.waitTillLocatorIsVisible(ajukanGantiPaketButton);
+    }
+
+    public boolean isBeliPaketButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(beliPaketButton);
+    }
+
+    /**
+     * Get GP header text
+     * @return String data type
+     */
+    public String getGpPackageHeader() {
+        return playwright.getText(gpHeader);
+    }
+
+    /**
+     * Click on lihat rincian button
+     */
+    public void clickOnLihatRincianButton() {
+        playwright.clickOn(lihatRincianButton);
+    }
+
+    public void clicksOnLihatSelengkapnyaButton() {
+        playwright.clickOn(bacaSelengkapnyaButton);
+    }
+
+    public void clickOnTambahBroadcastChatButton() {
+        if (!playwright.getActivePageURL().contains("kos")) {
+            playwright.clickOn(tambahBroadcastChatButton);
+        }
+    }
+
+    /**
+     * Click on tambah broadcast result kos name
+     * @param kosName kost name
+     */
+    public void clickOnTambahBroadcastChatKostNameResult(String kosName) {
+        Locator kosNameResult = page.getByText(kosName);
+        if (playwright.waitTillLocatorIsVisible(kosNameResult, 2000.0))
+            playwright.clickOn(kosNameResult);
+    }
+
+    /**
+     * Click on pilih kos button
+     */
+    public void clicksOnPilihKosButton() {
+        playwright.clickOn(pilihKosButton);
+    }
+
+    /**
+     * Get toast text
+     * @return String data type
+     */
+    public String getToastText() {
+        return playwright.getText(toastContentText);
+    }
+
+    /**
+     * Click on bantuan dan tips button
+     */
+    public Page clicksOnBantuanTipsButton() {
+        return playwright.movePageByClickLocator(page, bantuanDanTipsButton);
+    }
+
+    public String getDisplayingSearchResultKosNameText() {
+        return playwright.getText(displayingSearchResultKosNameText);
+    }
+
+    public String getEmptyKosHeaderText() {
+        return playwright.getText(emptyKosHeaderText);
+    }
+
+    public String getEmptyKosBodyText() {
+        return playwright.getText(emptyKosBodyText);
     }
 }

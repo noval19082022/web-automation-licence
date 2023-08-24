@@ -36,11 +36,11 @@ public class GoldplusSteps {
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
 
     @When("user wants to subscribe Goldplus {int}")
-    public void user_wants_to_subscribe_goldplus(int pacakge) {
+    public void user_wants_to_subscribe_goldplus(int paket) {
        if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
-            goldplus.clickOnGPPackage(pacakge);
+            goldplus.clickOnGPPackage(paket);
         } else{
-            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+paket);
         }
         playwright.hardWait(3000);
         if (playwright.isTextDisplayed("1 Minggu") == true) {
