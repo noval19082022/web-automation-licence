@@ -49,6 +49,8 @@ public class PropertySayaPO {
     Locator editDataKos;
     Locator fasilitasFeature;
     Locator editSelesaiButton;
+    Locator titleSuccessEditPopUpText;
+    Locator doneButtonEditKosPopUp;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -87,6 +89,8 @@ public class PropertySayaPO {
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
+        titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
+        doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
     }
 
     /**
@@ -449,8 +453,15 @@ public class PropertySayaPO {
     }
 
     /**
+     * Click on edit done in add kos form page
+     */
+    public void clickEditDoneButton() {
+        playwright.hardWait(2000.0);
+        playwright.clickOn(editSelesaiButton);
+    }
+
+    /**
      * Get warning title in certain facility
-     *
      * @param facility is facility section
      * @return error message title
      */
@@ -462,7 +473,6 @@ public class PropertySayaPO {
 
     /**
      * Get warning description in certain facility
-     *
      * @param facility is facility section
      * @return error message description
      */
@@ -470,6 +480,21 @@ public class PropertySayaPO {
         Locator element = page.locator("//h4[contains(text(), '" + facility + "')]/following-sibling::div[1]//p[2]").first();
         playwright.pageScrollUntilElementIsVisible(element);
         return playwright.getText(element);
+    }
+
+    /**
+     * Get title for success edit pop up
+     * @return String pop up title
+     */
+    public String getTitlePopUpSuccessEditKos() {
+        return playwright.getText(titleSuccessEditPopUpText);
+    }
+
+    /**
+     * Click 'Done' in success edit kos pop up
+     */
+    public void clickDoneEditKosPopUp() {
+        playwright.clickOn(doneButtonEditKosPopUp);
     }
 
 }
