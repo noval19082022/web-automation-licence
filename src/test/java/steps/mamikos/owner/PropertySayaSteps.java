@@ -227,4 +227,19 @@ public class PropertySayaSteps {
         Assert.assertEquals(propertySaya.getWarningTitleFacility(facility), title, "Warning title in " + facility + " is wrong");
         Assert.assertEquals(propertySaya.getWarningDescFacility(facility), desc, "Warning description in " + facility + " is wrong");
     }
+
+    @Then("user click button edit finished")
+    public void userClickButtonEditFinished() {
+        propertySaya.clickEditDoneButton();
+    }
+
+    @Then("user see success add data kos pop up with text {string}")
+    public void user_see_success_add_data_kos_pop_up_with_text(String message) {
+        Assert.assertEquals(propertySaya.getTitlePopUpSuccessEditKos().trim(), message, "Pop up title success message in edit kos is wrong");
+    }
+
+    @When("user click done in success page pop up of edit kos")
+    public void user_click_done_in_success_page_pop_up_of_edit_kos() throws InterruptedException {
+        propertySaya.clickDoneEditKosPopUp();
+    }
 }
