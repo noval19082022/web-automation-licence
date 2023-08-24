@@ -69,7 +69,7 @@ Feature: Kontrak Kerja Sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
       | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 1 November 2021 | 31 October 2023   | Rp25.000          |
 
-  @TEST_PMAN-4041
+  @TEST_PMAN-4041 @continue
   Scenario: See and Edit Detail Kerja Sama Hybrid
     #Admin edit detail kerja sama Hybrid
     When admin turn on Hybrid and set mamikos precentage to "10" percent
@@ -79,3 +79,52 @@ Feature: Kontrak Kerja Sama
     #revert back contract
     When admin turn off Hybrid
     Then kontrak kerja sama should not contains hybrid rev share
+
+  @TEST_PMAN-4559 @continue
+  Scenario: See, Add, Edit, and Delete Biaya Tambahan
+    #Admin see biaya tambahan section
+    When admin see biaya tambahan
+    Then biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp75.000  |
+      | Kebersihan Bulanan  | Rp15.000  |
+      | Gas Lpg Mingguan    | Rp5.000   |
+    #Admin add biaya tambahan
+    When admin add new biaya tambahan
+      | Nama Biaya     | Amount    |
+      | Listrik        | 25000  |
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000 |
+      | Kebersihan Bulanan  | Rp 15.000 |
+      | Gas Lpg Mingguan    | Rp 5.000  |
+      | Listrik             | Rp 25.000 |
+    #Admin edit biaya tambahan
+    When admin edit biaya tambahan "Listrik" to
+      | Nama Biaya   | Amount |
+      | Laundry      | 10000  |
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000 |
+      | Kebersihan Bulanan  | Rp 15.000 |
+      | Gas Lpg Mingguan    | Rp 5.000  |
+      | Laundry             | Rp 10.000 |
+    #Admin delete biaya tambahan
+    When admin delete biaya tambahan "Laundry"
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000  |
+      | Kebersihan Bulanan  | Rp 15.000  |
+      | Gas Lpg Mingguan    | Rp 5.000   |
+
+  @TEST_PMAN-3852
+  Scenario: See Rincian Tipe Kamar dan Harga
+    When admin go to pms singgahsini
+    And admin go to detail property "Khusus Automation"
+    And admin see profil pemilik
+    And admin see rincian tipe kamar dan harga
+    Then rincian tipe kamar dan harga should match
+      | Tipe Kamar  | Gender  | Jumlah Kamar  | Harga OTA | Harga Bulanan  | Harga 3 Bulan  | Harga 6 Bulan | Static Bulanan  | Static 3 Bulan  | Static 6 Bulan  | Publish Bulanan | Publish 3 Bulan | Publish 6 Bulan |
+      | Tipe A      | campur  | 3             | -         | Rp850.000      | Rp0            | Rp4.050.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
+      | Tipe B      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
+      | Tipe C      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
