@@ -363,13 +363,16 @@ public class InvoiceManualSteps {
 
     @When("admin search by {string} with value {string}")
     public void admin_search_by_with_value(String searchBy, String value){
-        if (searchBy.equalsIgnoreCase("Nomor Invoice")){
+        if (searchBy.equalsIgnoreCase("Nomor Invoice without change Search By")){
             admin.NavigateToMamipayMenu("Invoice Manual");
             manualInvoice.enterSearchValue(value);
         } else if (searchBy.equalsIgnoreCase("Nama Penyewa")) {
             manualInvoice.selectSearchBy(searchBy);
             manualInvoice.enterSearchValue(value);
         } else if (searchBy.equalsIgnoreCase("Nama Listing")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nomor Invoice")) {
             manualInvoice.selectSearchBy(searchBy);
             manualInvoice.enterSearchValue(value);
         }
@@ -380,6 +383,15 @@ public class InvoiceManualSteps {
         manualInvoice.assertNoInvoice(result1);
         manualInvoice.assertDetailPenyewa(result2);
         manualInvoice.assertNamaListing(result3);
+    }
+
+    @Then("the result is displayed according the value Search per word {string}")
+    public void the_result_is_displayed_according_the_value_Search_per_word(String result){
+        if (result.equalsIgnoreCase("Data yang dicari tidak ditemukan")){
+            manualInvoice.assertNotFound(result);
+        } else {
+            manualInvoice.assertNamaListing(result);
+        }
     }
 
     //---Biaya Tambahan Pop Up---//
