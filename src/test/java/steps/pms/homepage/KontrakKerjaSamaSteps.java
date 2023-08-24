@@ -21,7 +21,7 @@ public class KontrakKerjaSamaSteps {
     private List<Map<String, String>> profilPemilikEdit;
     private List<Map<String, String>> transfer;
     private List<Map<String, String>> kontrak;
-    private List<Map<String, String>> additionelFee;
+    private List<Map<String, String>> additionalFee;
     private List<Map<String, String>> detailListing;
 
     @When("admin see profil pemilik")
@@ -195,13 +195,13 @@ public class KontrakKerjaSamaSteps {
 
     @Then("biaya tambahan should contains")
     public void biaya_tambahan_should_contains(DataTable tables) {
-        additionelFee = tables.asMaps(String.class, String.class);
+        additionalFee = tables.asMaps(String.class, String.class);
 
         contract.viewSectionBiayaTambahan();
 
-        for (int i=0;i< additionelFee.size();i++){
-            String fee = additionelFee.get(i).get("Nama Biaya");
-            String amount = additionelFee.get(i).get("Amount");
+        for (int i = 0; i< additionalFee.size(); i++){
+            String fee = additionalFee.get(i).get("Nama Biaya");
+            String amount = additionalFee.get(i).get("Amount");
 
             contract.assertBiayaTambahan(i, fee, amount);
         }
@@ -209,12 +209,12 @@ public class KontrakKerjaSamaSteps {
 
     @When("admin add new biaya tambahan")
     public void admin_add_new_biaya_tambahan(DataTable tables) {
-        additionelFee = tables.asMaps(String.class, String.class);
+        additionalFee = tables.asMaps(String.class, String.class);
 
         contract.ubahBiayaTambahan();
-        for (int i=0;i< additionelFee.size();i++){
-            String fee = additionelFee.get(i).get("Nama Biaya");
-            String amount = additionelFee.get(i).get("Amount");
+        for (int i = 0; i< additionalFee.size(); i++){
+            String fee = additionalFee.get(i).get("Nama Biaya");
+            String amount = additionalFee.get(i).get("Amount");
 
             contract.addBiayaTambahan(fee, amount);
         }
@@ -222,22 +222,22 @@ public class KontrakKerjaSamaSteps {
 
     @Then("detail biaya tambahan should contains")
     public void detail_biaya_tambahan_should_contains(DataTable tables) {
-        additionelFee = tables.asMaps(String.class, String.class);
+        additionalFee = tables.asMaps(String.class, String.class);
 
-        for (int i=0;i< additionelFee.size();i++){
-            String fee = additionelFee.get(i).get("Nama Biaya");
-            String amount = additionelFee.get(i).get("Amount");
+        for (int i = 0; i< additionalFee.size(); i++){
+            String fee = additionalFee.get(i).get("Nama Biaya");
+            String amount = additionalFee.get(i).get("Amount");
 
             contract.assertDetailBiayaTambahan(i, fee, amount);
         }
     }
     @When("admin edit biaya tambahan {string} to")
     public void admin_edit_biaya_tambahan_to(String feeName, DataTable tables) {
-        additionelFee = tables.asMaps(String.class, String.class);
+        additionalFee = tables.asMaps(String.class, String.class);
 
-        for (int i=0;i< additionelFee.size();i++){
-            String fee = additionelFee.get(i).get("Nama Biaya");
-            String amount = additionelFee.get(i).get("Amount");
+        for (int i = 0; i< additionalFee.size(); i++){
+            String fee = additionalFee.get(i).get("Nama Biaya");
+            String amount = additionalFee.get(i).get("Amount");
 
             contract.editBiayaTambahan(feeName, fee, amount);
         }
