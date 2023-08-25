@@ -198,4 +198,9 @@ public class BroadcastChatSteps {
         Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosHeaderText()), "Properti Tidak Ditemukan");
         Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosBodyText()), "Maaf, kami tidak menemukan properti yang Anda cari. Coba cari dengan nama lain.");
     }
+
+    @When("owner enter broadcast message from list chat row number {int}")
+    public void ownerEnterBroadcastMessageFromListChatRowNumber(int messageRow) {
+        page.pause();
+    }
 }

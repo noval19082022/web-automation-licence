@@ -169,10 +169,9 @@ Feature: Broadcast Chat Owner
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-    And owner click "Tambah Broadcast Chat"
-    And user enter text "Kos Fathul Khair Jetis Yogyakarta" on Broadcast list kos
-    And user click "Kos Fathul Khair Jetis Yogyakarta"
-    And user click "Pilih Kos" button
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Pilih Kos button
+    And owner enter broadcast message from list chat row number 1
     And user click "Masukan Pesan"
     And user selects message row number 1 on the broadcast chat dashboard
     And user click "Pilih Pesan"
