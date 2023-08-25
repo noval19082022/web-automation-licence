@@ -30,6 +30,9 @@ public class RefundPO {
     private Locator firstTransferredUserOnlist;
     private Locator exportReport;
     private Locator receiptBtn;
+    // failed list
+    private Locator failed;
+    private Locator detailBtn;
     //--- export transferred report detail ----
     private Locator chooseDateTransferredReport;
     private Locator chooseExportForToday;
@@ -68,6 +71,9 @@ public class RefundPO {
         this.firstTransferredUserOnlist = page.locator("//tbody/tr[1]/td[8]");
         this.exportReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Export"));
         this.receiptBtn = page.getByRole(AriaRole.ROW).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Receipt")).first();
+        //---- failed list
+        this.failed = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Failed"));
+        this.detailBtn = page.getByRole(AriaRole.ROW).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Detail")).first();
         //--- export transferred detail ---
         this.chooseDateTransferredReport = page.locator("#refund-invoice-daterange");
         this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
@@ -253,5 +259,19 @@ public class RefundPO {
      */
     public String getBankNameForRefund() {
         return playwrightHelpers.getText(selectedBankForRefund);
+    }
+
+    /**
+     * click on failed to redirect to the failed list invoice
+     */
+    public void clickOnFailedBtn() {
+        playwrightHelpers.clickOn(failed);
+    }
+
+    /**
+     * click on detailBtn on first list of failed refund
+     */
+    public void clickOnDetailFailedInvoiceList() {
+        playwrightHelpers.clickOn(detailBtn);
     }
 }

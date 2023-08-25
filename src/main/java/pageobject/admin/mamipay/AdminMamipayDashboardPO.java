@@ -22,7 +22,7 @@ public class AdminMamipayDashboardPO {
     Locator filterStatusDropdown;
     Locator filterRuleDropdown;
     Locator filterTeamDropdown;
-
+    Locator partnerVoucher;
     Locator searchButton;
 
     public AdminMamipayDashboardPO(Page page) {
@@ -33,6 +33,7 @@ public class AdminMamipayDashboardPO {
         searchContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Contract"));
         voucherDiscount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Voucher Discount "));
         mamikosVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Mamikos Voucher"));
+        partnerVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Partner Voucher"));
         searchInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Search Invoice"));
         filterStatusDropdown = page.locator("div:nth-child(7) > span > .selection > .select2-selection > .select2-selection__arrow");
         filterRuleDropdown = page.locator(".select2-selection__arrow").first();
@@ -187,5 +188,16 @@ public class AdminMamipayDashboardPO {
         ElementHandle element = page.querySelector(inputTextbox);
         element.click();
         element.fill(id);
+    }
+
+    /**
+     * Go to mamikos voucher by click on voucher discount and mamikos voucher
+     *
+     * @return MamikosListPartnerVoucherPO class after navigate to it
+     */
+    public MamikosListMassVoucherPO goToPartneroucher() {
+        playwright.clickOn(voucherDiscount);
+        playwright.clickOn(partnerVoucher);
+        return new MamikosListMassVoucherPO(page);
     }
 }

@@ -30,6 +30,9 @@ public class RoomAllotmentPO {
     Locator searchDropdownPropertyName;
     Locator searchInputPropertyName;
     Locator firstSugestionPropertyName;
+    // ----------- Out of order can not mark modal -----------
+    Locator titlePopupCanNotMark;
+    Locator subtitlePopupCanNotMark;
 
     public RoomAllotmentPO(Page page){
         this.page = page;
@@ -49,6 +52,8 @@ public class RoomAllotmentPO {
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         searchDropdownPropertyName = page.locator(".bg-c-select.mb-16 .bg-c-select__trigger");
         searchInputPropertyName = page.getByPlaceholder("Search");
+        titlePopupCanNotMark = page.locator(".bg-c-modal__body-title");
+        subtitlePopupCanNotMark = page.locator(".bg-c-modal__body-description");
     }
 
     /**
@@ -58,7 +63,7 @@ public class RoomAllotmentPO {
     public void setRoomOutOfOrder(String number) {
         Locator roomNumber = page.locator("//span[@class='cv-sidebar__room-number' and text()=' "+ number +" ']");
         playwright.clickOn(roomNumber);
-        createOutOfOrderStatusBtn.click();
+        playwright.clickOn(createOutOfOrderStatusBtn);
     }
 
     /**
@@ -116,14 +121,14 @@ public class RoomAllotmentPO {
         int r = Integer.parseInt(room)+1;
         outOfOrderFlag = page.locator(".cv-daily__day-allotment:nth-of-type(" + r + ") > " +
                                               ".cv-daily__day--occupied:nth-of-type(" + startDate + ") > .tenant-label");
-        outOfOrderFlag.click();
+        playwright.clickOn(outOfOrderFlag);
     }
 
     /**
      * Click on action button in ooo modal
      */
     public void clickActionOnModal() {
-        actionOnModal.click();
+        playwright.clickOn(actionOnModal);
     }
 
     /**
@@ -144,7 +149,7 @@ public class RoomAllotmentPO {
      * Click on Lanjut hapus in confirmation modal
      */
     public void confirmDeleteOutOfOrder() {
-        confirmDelete.click();
+        playwright.clickOn(confirmDelete);
         playwright.hardWait(3000);
     }
 
@@ -152,7 +157,7 @@ public class RoomAllotmentPO {
      * Click on save button when creating ooo
      */
     public void clickSaveBtn() {
-        saveBtn.click();
+        playwright.clickOn(saveBtn);
         playwright.hardWait(3000);
     }
 
@@ -196,5 +201,31 @@ public class RoomAllotmentPO {
      */
     public boolean isSaveButtonEnable() {
         return saveBtn.isEnabled();
+    }
+
+    /**
+     * check is the date on date picker disable or not
+     * @param day refers to date
+     */
+    public void isSpesificEndDateDisable(int day) {
+        playwright.clickOn(endDate);
+        Locator date = page.locator("//*[not(contains(@class,'muted')) and contains(@class,'cell day') and normalize-space(text()) = '" + day + "']").last();
+        playwright.isButtonDisable(date);
+    }
+
+    /**
+     * get title text of title popup when can not mark ooo
+     * @return String text
+     */
+    public String getTitlePopup() {
+        return playwright.getText(titlePopupCanNotMark);
+    }
+
+    /**
+     * get subtitle text of title popup when can not mark ooo
+     * @return String text
+     */
+    public String getSubtitlePopup() {
+        return playwright.getText(subtitlePopupCanNotMark);
     }
 }

@@ -264,8 +264,33 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 30000.0, LoadState.LOAD);
     }
 
-    @And("admin navigates to Promo Owner")
+    @And("admin bangkrupux navigates to Promo Owner")
     public void adminNavigatesToPromoOwner() {
         playwright.navigateTo(Mamikos.URL + "/admin/promo", 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner navigates to property saya apartemen")
+    public void userNavigateToPropertySayaApartemen() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_APARTEMEN, 30000.0, LoadState.LOAD);
+    }
+
+    @And("owner navigates to Akun menu")
+    public void ownerNavigatesToAkunMenu() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.AKUN, 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin bangkrupux navigate to kost owner menu")
+    public void adminNavigatesToKostOwnerMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin go to kost level menu")
+    public void adminGoToKostLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/level", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin go to room level menu")
+    public void adminGoToRoomLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/room-level", 30000.0, LoadState.LOAD);
     }
 }

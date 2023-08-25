@@ -16,16 +16,17 @@ public class RoomAllotmentSteps {
     Page page = ActiveContext.getActivePage();
     RoomAllotmentPO roomAllotment = new RoomAllotmentPO(page);
 
-    private Map<String, String> OOOData;
+    private Map<String, String> OooData;
+    private Map<String, String> OooPopupData;
     private List<Map<String , String>> outOfOrderFlagData;
 
     @And("admin fill OOO data with:")
     public void admin_create_ooo_on(DataTable table) {
-        OOOData = table.asMap(String.class, String.class);
-        var type = OOOData.get("type");
-        var note = OOOData.get("note");
-        var startDate = OOOData.get("start date");
-        var endDate = OOOData.get("end date");
+        OooData = table.asMap(String.class, String.class);
+        var type = OooData.get("type");
+        var note = OooData.get("note");
+        var startDate = OooData.get("start date");
+        var endDate = OooData.get("end date");
         roomAllotment.setOutOfOrderType(type);
         if (note != null) {
             roomAllotment.fillNoteOutOfOrder(note);
@@ -62,6 +63,16 @@ public class RoomAllotmentSteps {
         }
     }
 
+    @And("admin edit start date to {string}")
+    public void adminEditStarDateToX(String date) {
+        roomAllotment.setOutOfOrderStartDate(date);
+    }
+
+    @Then("admin can see date {int} is disable")
+    public void admincanSeeDateXIsDisable(int date) {
+        roomAllotment.isSpesificEndDateDisable(date);
+    }
+
     @And("admin search {string}")
     public void admin_search_on_room_allotment(String propertyName) {
         roomAllotment.searchPropertyName(propertyName);
@@ -91,5 +102,14 @@ public class RoomAllotmentSteps {
     @When("admin set out of order on room {string}")
     public void admin_set_out_of_order_on_room_x(String room) {
         roomAllotment.setRoomOutOfOrder(room);
+    }
+    
+    @Then("admin can see popup with:")
+    public void adminCanSeePopupWith(DataTable table) {
+        OooPopupData = table.asMap(String.class, String.class);
+        var title = OooPopupData.get("title");
+        var subtitle = OooPopupData.get("subtitle");
+        Assert.assertEquals(roomAllotment.getTitlePopup(), title);
+        Assert.assertEquals(roomAllotment.getSubtitlePopup(), subtitle);
     }
 }
