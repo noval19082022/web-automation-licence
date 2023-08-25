@@ -51,6 +51,7 @@ public class ChatSteps {
     public void admin_select_filter(String type) {
         chatAdmin.setChatSearchType(type);
     }
+    
     @And("admin fill search chat with {string}")
     public void admin_fill_search_chat_with_x(String text) {
         if(text != null){
@@ -58,6 +59,7 @@ public class ChatSteps {
         }
         chatAdmin.clickOnAllCategory();
     }
+
     @Then("admin can see result data")
     public void admin_can_see_result_data(){
         chatAdmin.getResutlSearch();
