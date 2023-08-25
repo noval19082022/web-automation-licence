@@ -371,6 +371,49 @@ public class PlaywrightHelpers {
     public void waitFor(Locator locator, Double duration) {
         locator.waitFor(new Locator.WaitForOptions().setTimeout(duration));
     }
+
+    /**
+     * Wait till page loaded
+     */
+    public void waitTillPageLoaded() {
+        page.waitForLoadState(LoadState.LOAD);
+    }
+
+    /**
+     * Wait till page loaded
+     * @param timeout double data type
+     */
+    public void waitTillPageLoaded(Double timeout) {
+        page.waitForLoadState(LoadState.LOAD, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    public void waitTillDomContentLoaded() {
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+    }
+
+    public void waitTillDomContentLoaded(Double timeout) {
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * Hard wait until a locator visibility is ended
+     * @param locator Locator data type
+     * @param waitTimeDelay Double data type
+     * @param maxLoop int data type
+     */
+    public void waitTillLocatorIsNotVisible(Locator locator, Double waitTimeDelay, int maxLoop) {
+        if (waitTillLocatorIsVisible(locator)) {
+            var loop = 0;
+            do {
+                hardWait(1000.0);
+                loop++;
+                if (loop >= maxLoop) {
+                    break;
+                }
+            } while (waitTillLocatorIsVisible(locator));
+        }
+    }
+
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
@@ -503,6 +546,14 @@ public class PlaywrightHelpers {
     public String getActivePageURL() {
         String activeUrl = page.evaluate("window.location.href").toString();
         return activeUrl;
+    }
+
+    /**
+     * Get page URL
+     * @return string data type
+     */
+    public String getPageUrl() {
+        return page.url();
     }
 
     /**
@@ -649,6 +700,7 @@ public class PlaywrightHelpers {
     public void assertDisable(Locator locator) {
         assertThat(locator).isDisabled();
     }
+
     //---- Assert Part ----\\
 
 }

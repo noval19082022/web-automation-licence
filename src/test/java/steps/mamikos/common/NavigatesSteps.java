@@ -287,5 +287,6 @@ public class NavigatesSteps {
     @When("owner navigates to broadcast chat page")
     public void ownerNavigatesToBroadcastChatPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.BROADCAST_CHAT, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
     }
 }

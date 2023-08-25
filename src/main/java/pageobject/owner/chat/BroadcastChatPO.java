@@ -29,7 +29,7 @@ public class BroadcastChatPO {
     Locator backGoldplusbutton;
     Locator lihatPenerimaSection;
     private Locator andaBelumMemilikiKosActiveText;
-    private Locator tambahPenerimaButton;
+    private Locator tambahKosButton;
     private Locator broadcastChatPackageContent;
     private Locator lihatDetailButton;
     private Locator ajukanGantiPaketButton;
@@ -44,7 +44,10 @@ public class BroadcastChatPO {
     private Locator displayingSearchResultKosNameText;
     private Locator emptyKosHeaderText;
     private Locator emptyKosBodyText;
-
+    private Locator masukkanPesanButton;
+    private Locator pilihPesanButton;
+    private Locator tidakJadiButtonPopUp;
+    private Locator keluarButton;
     public BroadcastChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -68,7 +71,7 @@ public class BroadcastChatPO {
         cancelGoldPlusButton = page.locator("//a[@class='back-icon']");
         backGoldplusbutton = page.locator("//span[@class='goldplus-header__back-button']");
         lihatPenerimaSection = page.getByTestId("broadcastChat-sectionRecepientMessage");
-        tambahPenerimaButton = playwright.getButtonBySetName("Tambah Penerima");
+        tambahKosButton = playwright.getButtonBySetName("Tambah Kos");
         andaBelumMemilikiKosActiveText = page.getByText("Anda belum memiliki kos aktif");
         broadcastChatPackageContent = page.getByTestId("broadcastChatDesktop");
         lihatDetailButton = playwright.getButtonBySetName("Lihat Detail");
@@ -84,6 +87,10 @@ public class BroadcastChatPO {
         pilihKosButton = playwright.getButtonByText("Pilih Kos");
         emptyKosHeaderText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).first();
         emptyKosBodyText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).last();
+        masukkanPesanButton = page.getByText("Masukan Pesan");
+        pilihPesanButton = playwright.getButtonBySetName("Pilih Pesan");
+        tidakJadiButtonPopUp = playwright.getButtonBySetName("Tidak Jadi");
+        keluarButton = playwright.getButtonBySetName("Keluar");
     }
 
     /**
@@ -244,8 +251,8 @@ public class BroadcastChatPO {
     /**
      * Click on tambah penerima button
      */
-    public void clickOnTambahPenerimaButton() {
-        playwright.clickOn(tambahPenerimaButton);
+    public void clickOnTambahKosButton() {
+        playwright.delayAndClickOn(tambahKosButton, 1500.0);
     }
 
     /**
@@ -257,11 +264,11 @@ public class BroadcastChatPO {
     }
 
     /**
-     * Verify the visibility of tambahkan button
+     * Verify the visibility of tambahkan kos button
      * @return boolean visible true, otherwise false
      */
-    public boolean isTambahkanPenerimaButtonVisible() {
-        return playwright.waitTillLocatorIsVisible(tambahPenerimaButton);
+    public boolean isTambahKosButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(tambahKosButton);
     }
 
     /**
@@ -288,6 +295,10 @@ public class BroadcastChatPO {
         return playwright.waitTillLocatorIsVisible(ajukanGantiPaketButton);
     }
 
+    /**
+     * Verify the visibility of beli paket button
+     * @return boolean visible true, otherwise false
+     */
     public boolean isBeliPaketButtonVisible() {
         return playwright.waitTillLocatorIsVisible(beliPaketButton);
     }
@@ -307,10 +318,16 @@ public class BroadcastChatPO {
         playwright.clickOn(lihatRincianButton);
     }
 
+    /**
+     * Click on lihat selengkapnya button
+     */
     public void clicksOnLihatSelengkapnyaButton() {
         playwright.clickOn(bacaSelengkapnyaButton);
     }
 
+    /**
+     * Click on tambah broadcast chat button
+     */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
             playwright.clickOn(tambahBroadcastChatButton);
@@ -322,9 +339,8 @@ public class BroadcastChatPO {
      * @param kosName kost name
      */
     public void clickOnTambahBroadcastChatKostNameResult(String kosName) {
-        Locator kosNameResult = page.getByText(kosName);
-        if (playwright.waitTillLocatorIsVisible(kosNameResult, 2000.0))
-            playwright.clickOn(kosNameResult);
+        Locator kosNameResult = page.getByTestId("broadcastChat-listKos").getByText(kosName);
+        playwright.clickOn(kosNameResult);
     }
 
     /**
@@ -349,15 +365,71 @@ public class BroadcastChatPO {
         return playwright.movePageByClickLocator(page, bantuanDanTipsButton);
     }
 
+    /**
+     * Get displaying search result kos name text
+     * @return String data type
+     */
     public String getDisplayingSearchResultKosNameText() {
         return playwright.getText(displayingSearchResultKosNameText);
     }
 
+    /**
+     * Get empty kos header text
+     * @return String data type
+     */
     public String getEmptyKosHeaderText() {
         return playwright.getText(emptyKosHeaderText);
     }
 
+    /**
+     * Get empty kos body text
+     * @return String data type
+     */
     public String getEmptyKosBodyText() {
         return playwright.getText(emptyKosBodyText);
+    }
+
+    /**
+     * Click on masukkan pesan button
+     */
+    public void clicksOnMasukkanPesanButton() {
+        playwright.clickOn(masukkanPesanButton);
+    }
+
+    /**
+     * Click on pilih pesan button
+     */
+    public void clicksOnPilihPesanButton() {
+        playwright.clickOn(pilihPesanButton);
+    }
+
+    /**
+     * Click on tidak jadi button
+     */
+    public void clicksOnPilihTidakJadiButton() {
+        playwright.clickOn(tidakJadiButtonPopUp);
+    }
+
+    /**
+     * Click on keluar button
+     */
+    public void clicksOnKeluarButton() {
+        playwright.clickOn(keluarButton);
+    }
+
+    /**
+     * Get button detail text
+     * @return String data type
+     */
+    public String getButtonDetailText() {
+        return playwright.getText(lihatDetailButton);
+    }
+
+    /**
+     * Get button submission text
+     * @return String data type
+     */
+    public String getButtonSubmissionText() {
+        return playwright.getText(ajukanGantiPaketButton);
     }
 }

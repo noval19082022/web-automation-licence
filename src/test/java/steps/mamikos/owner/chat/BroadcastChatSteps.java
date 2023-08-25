@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.BroadcastChatPO;
 import utilities.JavaHelpers;
@@ -14,6 +15,7 @@ import utilities.PlaywrightHelpers;
 public class BroadcastChatSteps {
     Page page = ActiveContext.getActivePage();
     BroadcastChatPO broadcast = new BroadcastChatPO(page);
+    LoadingPO loading = new LoadingPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
 
@@ -129,20 +131,21 @@ public class BroadcastChatSteps {
         ownerDashboard.clickOnBroadcastChat();
     }
 
-    @When("owner click on tambah penerima button on no kos active pop-up broadcast chat owner")
-    public void ownerClickOnTambahPenerimaButtonOnNoKosActivePopUpBroadcastChatOwner() {
-        broadcast.clickOnTambahPenerimaButton();
+    @When("owner click on Tambah Kos button on no kos active pop-up broadcast chat owner")
+    public void ownerClickOnTambahKosButtonOnNoKosActivePopUpBroadcastChatOwner() {
+        broadcast.clickOnTambahKosButton();
     }
 
     @Then("owner should not be able to see anda belum memiliki kos aktif pop-up broadcast chat owner")
     public void ownerShouldNotBeAbleToSeeAndaBelumMemilikiKosAktifPopUpBroadcastChatOwner() {
-        Assert.assertFalse(broadcast.isTambahkanPenerimaButtonVisible(), "Anda belum memiliki kos aktif pop-up broadcast chat owner is visible");
+        Assert.assertFalse(broadcast.isTambahKosButtonVisible(), "Anda belum memiliki kos aktif pop-up broadcast chat owner is visible");
         Assert.assertFalse(broadcast.isAndaBelumMemilikiKosAktifTextDisplayed(), "Anda belum memiliki kos aktif pop-up broadcast chat owner is visible");
     }
 
     @Then("owner with active package should be able to see the broadcast chat page")
     public void ownerWithActivePackageShouldBeAbleToSeeTheBroadcastChatPage() {
         Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");
         Assert.assertTrue(broadcast.isAjukanGantiPaketVisible(), "Ajukan ganti paket button is not displayed");
     }
@@ -150,6 +153,7 @@ public class BroadcastChatSteps {
     @Then("owner non gp should be able to see the broadcast chat page for non gp owner")
     public void ownerNonGpShouldBeAbleToSeeTheBroadcastChatPageForNonGpOwner() {
         Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");
         Assert.assertTrue(broadcast.isBeliPaketButtonVisible(), "Beli paket button is not displayed");
         Assert.assertEquals(broadcast.getGpPackageHeader(), "Fitur ini khusus pengguna GoldPlus 2");
@@ -169,11 +173,11 @@ public class BroadcastChatSteps {
     public void ownerAddBroadcastChatForKost(String kostName) {
         broadcast.clickOnTambahBroadcastChatButton();
         broadcast.searchKostBC(kostName);
-        broadcast.clickOnTambahBroadcastChatKostNameResult(kostName);
     }
 
-    @When("owner clicks Pilih Kos button")
-    public void ownerClicksPilihKosButton() {
+    @When("owner clicks Kos {string} and Pilih Kos button")
+    public void ownerClicksPilihKosButton(String kostName) {
+        broadcast.clickOnTambahBroadcastChatKostNameResult(kostName);
         broadcast.clicksOnPilihKosButton();
     }
 
@@ -197,5 +201,35 @@ public class BroadcastChatSteps {
     public void ownerCanSeeEmptyKosListCondition() {
         Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosHeaderText()), "Properti Tidak Ditemukan");
         Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosBodyText()), "Maaf, kami tidak menemukan properti yang Anda cari. Coba cari dengan nama lain.");
+    }
+
+    @And("owner Masukan Pesan and choose row number {int} from the broadcast chat dashboard")
+    public void ownerMasukanPesanAndChooseRowNumberFromTheBroadcastChatDashboard(int broadcastChatOptionNumber) {
+        broadcast.clicksOnMasukkanPesanButton();
+        broadcast.selectMessageOptionBC(broadcastChatOptionNumber);
+        broadcast.clicksOnPilihPesanButton();
+    }
+
+    @And("user clicks on Tidak Jadi button")
+    public void userClicksOnTidakJadiButton() {
+        broadcast.clicksOnPilihTidakJadiButton();
+    }
+
+    @And("owner clicks on Keluar button")
+    public void ownerClicksOnKeluarButton() {
+        broadcast.clicksOnKeluarButton();
+    }
+
+    @When("owner edit template message on Broadcast Chat to row number {int}")
+    public void ownerEditTemplateMessageOnBroadcastChatToRowNumber(int rowNumber) {
+        broadcast.clickUbahTemplateBroadcastText();
+        broadcast.selectMessageOptionBC(rowNumber);
+        broadcast.clicksOnPilihPesanButton();
+    }
+
+    @Then("owner can sees button {string} and button {string} is visible")
+    public void ownerCanSeesButtonAndButtonIsVisible(String buttonString, String buttonString1) {
+        Assert.assertEquals(broadcast.getButtonDetailText(), buttonString);
+        Assert.assertEquals(broadcast.getButtonSubmissionText(), buttonString1);
     }
 }
