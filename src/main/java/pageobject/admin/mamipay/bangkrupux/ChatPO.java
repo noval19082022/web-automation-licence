@@ -95,7 +95,7 @@ public class ChatPO {
     }
 
     /**
-     * Click on All category chat
+     * Click on All category
      */
     public void clickOnAllCategory() {
         allChatMenu.click();
