@@ -13,7 +13,6 @@ import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
 import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
-import pageobject.owner.goldplus.GoldPlusStatisticPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
