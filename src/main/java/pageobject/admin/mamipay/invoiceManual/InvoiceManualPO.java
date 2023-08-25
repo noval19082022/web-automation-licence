@@ -37,6 +37,7 @@ public class InvoiceManualPO {
     private Locator namaListingCol;
     private Locator searchDropDown;
     private Locator selectSearchBy;
+    private Locator notFound;
     // Invoice List Page
 
     // Invoice Detail Page
@@ -138,6 +139,7 @@ public class InvoiceManualPO {
         detailPenyewaCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(1);
         namaListingCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(2);
         searchDropDown = page.locator("//span[@class='bg-c-select__trigger-text']");
+        notFound = page.getByText("Data yang dicari tidak ditemukan");
 
         //---Invoice Detail Page---//
         listingName = page.getByText("Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara");
@@ -797,6 +799,14 @@ public class InvoiceManualPO {
         searchDropDown.click();
         selectSearchBy = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchBy));
         selectSearchBy.click();
+    }
+
+    /**
+     * assert if result is not found
+     * @param result
+     */
+    public void assertNotFound(String result){
+        assertThat(notFound).hasText(result);
     }
 
     //---Biaya Tambahan---//

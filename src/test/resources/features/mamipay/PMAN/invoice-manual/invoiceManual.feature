@@ -196,7 +196,7 @@
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
         | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
-      And admin search by "Nomor Invoice" with value "MI/49220517/2022/09/80637"
+      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/80637"
       Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
@@ -204,7 +204,37 @@
       When admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
       Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
-    @TEST_PMAN-6045
+    @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Listing
       When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
       Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+
+    @continue @TEST_PMAN-6046
+    Scenario: Search Nama Listing per word with value "Singgahsini"
+      When admin search by "Nama Listing" with value "Singgahsini"
+      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
+
+    @continue @TEST_PMAN-6046
+    Scenario: Search Nama Listing per word with value "khus"
+      When admin search by "Nama Listing" with value "khus"
+      Then the result is displayed according the value Search per word "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+
+    @continue @TEST_PMAN-6046
+    Scenario: Search Nama Listing per word with value "Omen tipe c"
+      When admin search by "Nama Listing" with value "Omen tipe c"
+      Then the result is displayed according the value Search per word "Kost Singgahsini Omen Tipe C Halmahera Utara"
+
+    @continue @TEST_PMAN-6046
+    Scenario: Search Nama Listing per word with value "Halmahera Utara"
+      When admin search by "Nama Listing" with value "Halmahera Utara"
+      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
+
+    @continue @TEST_PMAN-6046
+    Scenario: Search Nomor Invoice per word with value "12345"
+      When admin search by "Nomor Invoice" with value "12345"
+      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
+
+    @TEST_PMAN-6046
+    Scenario: Search Nama Penyewa per word with value "asdf yoohoo"
+      When admin search by "Nama Penyewa" with value "asdf yoohoo"
+      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
