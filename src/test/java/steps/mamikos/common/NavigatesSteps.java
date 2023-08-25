@@ -283,4 +283,14 @@ public class NavigatesSteps {
     public void adminNavigatesToKostOwnerMenu() {
         playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 30000.0, LoadState.LOAD);
     }
+
+    @And("admin go to kost level menu")
+    public void adminGoToKostLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/level", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin go to room level menu")
+    public void adminGoToRoomLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/room-level", 30000.0, LoadState.LOAD);
+    }
 }
