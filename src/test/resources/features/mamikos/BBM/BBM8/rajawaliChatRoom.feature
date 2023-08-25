@@ -1,7 +1,7 @@
 @rajawalichatRoom @BBM8
 Feature: Rajawali Chat Room
 
-  Background: Delete OOO From Room Allotment Page
+  Background: Login admin and navigates to Rajawali chat
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                   | email prod              |password   |
