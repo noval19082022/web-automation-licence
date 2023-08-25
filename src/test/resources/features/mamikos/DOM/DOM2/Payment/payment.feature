@@ -324,6 +324,7 @@ Feature: Payment BackOffice Staging
     And tenant navigate to riwayat and draf booking
     And tenant select payment method Credit Card with cc number is "4000 0000 0000 1091", expired date month "12" years "99", and ccv is "010"
     And tenant close unused browser tab
+    And tenant logs out
 
     #  Scenario: data booking
     Given admin go to mamikos bangkrupux admin
@@ -520,6 +521,7 @@ Feature: Payment BackOffice Staging
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0892202100"
     And tenant close unused browser tab
+    And tenant logs out
 
     #  Scenario: data booking
     Given admin go to mamikos bangkrupux admin
@@ -780,8 +782,8 @@ Feature: Payment BackOffice Staging
   Scenario: [BackOffice][Discount Admin Fee] Admin create invoice discount
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to discount admin fee discount menu
     And admin bangkerupux create admin fee discount with name discount "create invoice discount hapus langsung" amount "999"
     And admin bangkerupux want to delete admin fee discount that has name "create invoice discount hapus langsung"
@@ -811,8 +813,8 @@ Feature: Payment BackOffice Staging
   Scenario: [Owner][Payment premium] Admin search expired invoice number
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux filter the status of package invoice list premium for "expired" transaction
     Then admin bangkerupux see transaction status list on package invoice list is only "expired"
@@ -849,8 +851,8 @@ Feature: Payment BackOffice Staging
   Scenario: [Owner][Payment premium] Filter by status unpaid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux filter the status of package invoice list premium for "unpaid" transaction
     Then admin bangkerupux see transaction status list on package invoice list is only "unpaid"
@@ -896,16 +898,16 @@ Feature: Payment BackOffice Staging
   Scenario Outline: [BackOffice][Invoice Security] Open Invoice Booking from search invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag | email prod | password  |
+      | <email>    | <email>    | qwerty123 |
     And admin go to "Search Invoice" menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
-      | invoice               | shortlink                                   |
-      | 34716463/2022/02/0009 | https://pay-jambu.kerupux.com/invoice/fTbwj |
-      | 12865544/2022/02/0082 | https://pay-jambu.kerupux.com/invoice/lTRwj |
-      | 57653153/2022/02/0003 | https://pay-jambu.kerupux.com/invoice/9H9CP |
+      | email                   | invoice               | shortlink                                   |
+      | uncle.coop2@mamikos.com | 34716463/2022/02/0009 | https://pay-jambu.kerupux.com/invoice/fTbwj |
+      | uncle.coop1@mamikos.com | 12865544/2022/02/0082 | https://pay-jambu.kerupux.com/invoice/lTRwj |
+      | uncle.coop2@mamikos.com | 57653153/2022/02/0003 | https://pay-jambu.kerupux.com/invoice/9H9CP |
 
   @TEST_DOM-687 @Automated @web-covered
   Scenario Outline: [BackOffice][Invoice Security] Open invoice Paid froms list GP
@@ -924,16 +926,16 @@ Feature: Payment BackOffice Staging
   Scenario Outline: [BackOffice][Invoice Security] Open Invoice Expired Booking from All invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag | email prod | password  |
+      | <email>    | <email>    | qwerty123 |
     And admin go to "All Invoice List" menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
-      | invoice                  | shortlink                                                                                                                             |
-      | PRE/20220221/50864/80817 | https://pay-jambu.kerupux.com/invoice/select-payment/48611?signature=bab937d125dd83f785beaf0e53fe3405a0aea1aad95f4f8183f3b7c586c38c54 |
-      | DP/19024270/2022/02/0185 | https://pay-jambu.kerupux.com/invoice/select-payment/48731?signature=995fe6af375ef93d58afcafa5b34a96766644988aa6e02f67262b12229aaf434 |
-      | 44331680/2022/03/0017    | https://pay-jambu.kerupux.com/invoice/select-payment/46750?signature=081102610d26b3bdcaffc1ecd5ad29e277f179b2b6b9978878aab219183a5ff6 |
+      | email                   | invoice                  | shortlink                                                                                                                             |
+      | uncle.coop2@mamikos.com | PRE/20220221/50864/80817 | https://pay-jambu.kerupux.com/invoice/select-payment/48611?signature=bab937d125dd83f785beaf0e53fe3405a0aea1aad95f4f8183f3b7c586c38c54 |
+      | uncle.coop2@mamikos.com | DP/19024270/2022/02/0185 | https://pay-jambu.kerupux.com/invoice/select-payment/48731?signature=995fe6af375ef93d58afcafa5b34a96766644988aa6e02f67262b12229aaf434 |
+      | uncle.coop2@mamikos.com | 44331680/2022/03/0017    | https://pay-jambu.kerupux.com/invoice/select-payment/46750?signature=081102610d26b3bdcaffc1ecd5ad29e277f179b2b6b9978878aab219183a5ff6 |
 
   @TEST_DOM-685 @Automated @web-covered
   Scenario: [BackOffice][Invoice Security] Open Invoice paid from list premium
@@ -960,8 +962,8 @@ Feature: Payment BackOffice Staging
   Scenario Outline: [BackOffice][Invoice Security] Open invoice unpaid froms list GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+      | email stag              | email prod              | password  |
+      | uncle.coop2@mamikos.com | uncle.coop2@mamikos.com | qwerty123 |
     And admin go to "GoldPlus Invoice List" menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
@@ -1009,6 +1011,7 @@ Feature: Payment BackOffice Staging
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0892202100"
     And tenant close unused browser tab
+    And tenant logs out
 
     #  Scenario: data booking
     Given admin go to mamikos bangkrupux admin
