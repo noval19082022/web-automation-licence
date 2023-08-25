@@ -46,3 +46,9 @@ Feature: Edit Kost
     And owner search kost "Kos oke bebek Tipe o" on property saya page
     Then user see kos with name "Kos oke bebek Tipe o", status "Aktif" and type "Kos Campur"
 
+  @TEST_LIMO-2878 @EditKosAddress
+  Scenario: [Web][Edit Kost] Edit kost address with valid data
+    When owner search kost "Kos oke bebek Tipe o" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user click "Edit Data Kos"
+
