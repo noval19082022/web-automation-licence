@@ -12,8 +12,7 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag  | phone prod  | password |
       | <phoneStag> | <phoneProd> | <pass>   |
-    When user click "Fitur Promosi"
-    When owner navigates to broadcast chat page
+    When owner goes to broadcast chat
     Then user redirected to "/broadcast-chat"
     Examples:
       | phoneStag   | phoneProd | pass      |
@@ -152,7 +151,7 @@ Feature: Broadcast Chat Owner
     Then owner can see empty kos list condition
 
   @TEST_LIMO-1187 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat][Select Kost]User clear search bar after result tidak ditemukan
+  Scenario: [Broadcast Chat][Select Kost] User clear search bar after result tidak ditemukan
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
@@ -163,7 +162,7 @@ Feature: Broadcast Chat Owner
     Then the list of Kos should be displayed
 
   @TEST_LIMO-1201 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat][View Receiver]user want to back from page view receiver
+  Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
@@ -179,7 +178,7 @@ Feature: Broadcast Chat Owner
     Then user redirected to "/broadcast-chat/kos"
 
   @TEST_LIMO-1189 @TEST_LIMO-1185 @TEST_LIMO-1186 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
-  Scenario: [Broadcast Chat][Select Message]User change message template on the list
+  Scenario: [Broadcast Chat][Select Message] User change message template on the list
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
