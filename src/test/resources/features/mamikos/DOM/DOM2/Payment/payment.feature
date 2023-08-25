@@ -383,6 +383,7 @@ Feature: Payment BackOffice Staging
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0892202100"
     And tenant close unused browser tab
+    And tenant logs out
 
     #  Scenario: data booking
     Given admin go to mamikos bangkrupux admin
