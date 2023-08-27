@@ -1,6 +1,7 @@
 package utilities;
 
 import data.mamikos.Mamikos;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
@@ -328,4 +329,14 @@ public class JavaHelpers {
         return String.format(format, args);
     }
     //--- String Manipulator ---//
+
+    /**
+     * Generate random Alphanumeric String
+     *
+     * @param totalChar is total character of generated String
+     * @return String random alphanumeric
+     */
+    public String generateAlphanumeric(int totalChar) {
+        return RandomStringUtils.randomAlphanumeric(totalChar);
+    }
 }
