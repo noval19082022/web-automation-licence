@@ -234,7 +234,37 @@
       When admin search by "Nomor Invoice" with value "12345"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
 
-    @TEST_PMAN-6046
+    @continue @TEST_PMAN-6046
     Scenario: Search Nama Penyewa per word with value "asdf yoohoo"
       When admin search by "Nama Penyewa" with value "asdf yoohoo"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Paid" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Paid" on the "Status Invoice" dropdown
+      Then "paid" Status Invoice is displayed
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Unpaid" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown
+      Then "unpaid" Status Invoice is displayed
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Expired" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Expired" on the "Status Invoice" dropdown
+      Then "expired" Status Invoice is displayed
+
+    @TEST_PMAN-6212
+    Scenario: Filter Invoice Manual
+      When admin refresh page and clicks Filter in Invoice Manual
+      #Default Filter Unpaid
+      And admin clicks "Terapkan" button on Filter
+      Then "unpaid" Status Invoice is displayed
+      When admin clicks "Reset" button on Filter
+      Then the counter on filter is disappears
