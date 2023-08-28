@@ -33,7 +33,9 @@ Feature: Check Mamifoto Landing Page
     And owner click Baca Panduan button
     Then owner see detail panduan pop up
 
-  @continue
+  @FAQMamifoto
   Scenario: Owner click FAQ
     And owner click any faq button
     Then owner see detail FAQ
+    And owner should successfully log out
+

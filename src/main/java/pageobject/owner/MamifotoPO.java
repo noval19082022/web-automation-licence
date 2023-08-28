@@ -175,7 +175,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderLandingPageisAppear() {
-        return headerMamifoto.isVisible();
+        return playwright.isLocatorVisibleAfterLoad(headerMamifoto,2000.0);
     }
 
     /**
@@ -216,7 +216,7 @@ public class MamifotoPO {
      * Click on Mamifoto at section Info untuk Anda
      */
     public void clickOnMamifotoInfoUntukAnda() {
-        mamifotoInfoUntukAnda.click();
+        playwright.clickOn(mamifotoInfoUntukAnda);
     }
 
     /**

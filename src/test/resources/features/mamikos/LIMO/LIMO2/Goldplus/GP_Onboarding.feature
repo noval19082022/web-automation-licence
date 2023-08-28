@@ -189,3 +189,4 @@ Feature: Owner Dashboard GP-ONboarding
   @continue
   Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List
     Then owner can see gp statistic list active package and it contents elements
+    And owner should successfully log out
