@@ -56,7 +56,7 @@ public class RekomendasiListingPO {
      *
      */
     public void clickOnUserPhoto() {
-        userPhoto.click();
+        playwright.clickOn(userPhoto);
     }
 
     /**
@@ -65,7 +65,7 @@ public class RekomendasiListingPO {
      *
      */
     public void clickOnProfile() {
-        userProfile.click();
+        playwright.clickOn(userProfile);
     }
 
     /**
@@ -74,7 +74,7 @@ public class RekomendasiListingPO {
      *
      */
     public boolean isMulaiCariDanSewaKosIsVisible() {
-        playwright.waitTillLocatorIsVisible(mulaiCariDanSewaKosButton);
+       playwright.isLocatorVisibleAfterLoad(mulaiCariDanSewaKosButton,2000.0);
         return mulaiCariDanSewaKosButton.isVisible();
     }
 

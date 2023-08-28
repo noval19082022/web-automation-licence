@@ -13,6 +13,15 @@ public class ApartmentLandingPO {
     private Locator apartemenTidakDitemukanText;
     private Locator noPropertyImage;
     private Locator apartmentListNameText;
+    private Locator favoriteHeader;
+    private Locator historyTab;
+    private Locator favoriteTab;
+
+    private Locator hapusHistoryButton;
+    private Locator detailApartment;
+    private Locator rekomendasiTitle;
+
+
 
     public ApartmentLandingPO(Page page) {
         this.page = page;
@@ -22,6 +31,13 @@ public class ApartmentLandingPO {
         apartemenTidakDitemukanText = page.getByText("Apartemen tidak ditemukan.");
         noPropertyImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Kost tidak ditemukan"));
         apartmentListNameText = page.locator("span.rc-info__name");
+        favoriteHeader =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
+        historyTab = page.locator("[data-testid='history-tab'] > .col-xs-6");
+        favoriteTab = page.locator("[data-testid='favourite-tab'] > .col-xs-6");
+        detailApartment = page.locator("#detailApartmentContainer");
+        hapusHistoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Histori"));
+        rekomendasiTitle = page.locator(".premium-recom-title");
+
     }
 
     /**
@@ -72,6 +88,63 @@ public class ApartmentLandingPO {
      */
     public void clickOnApartmentListNumber(int i) {
         playwright.clickOn(apartmentListNameText.nth(i));
+    }
+
+    /**
+     * Click on tab pernah dilihat apartment
+     */
+    public void clickOnHistoryApartment() {
+        playwright.clickOn(favoriteHeader);
+        playwright.clickOn(historyTab);
+    }
+
+    /**
+     * Get properti name on pernah dilihat tab
+     * @param propertyName for specific menu want to get
+     * @return properti name
+     */
+    public String getLastSeenDetailProperti(String propertyName) {
+        String propertyNameLocator = "//*[contains(text(),'"+ propertyName +"')]";
+        playwright.waitTillLocatorIsVisible(page.locator(propertyNameLocator));
+        return playwright.getText(page.locator(propertyNameLocator));
+    }
+
+    /**
+     * is hapus histori button present
+     *
+     * @return true
+     */
+    public boolean isHapusHistoryVisible() {
+         playwright.waitTillLocatorIsVisible(hapusHistoryButton,2000.0);
+        return hapusHistoryButton.isVisible();
+    }
+
+
+    /**
+     * Wait container for apartment is visible
+     *
+     * @return true
+     */
+    public void waitTillApartmentDetailPageVisible() {
+        playwright.waitForElementStateToBe(detailApartment, "visible");
+    }
+
+    /**
+     * Click on tab difavoritkan apartment
+     */
+    public void clickOnFavoriteApartment() {
+        playwright.clickOn(favoriteHeader);
+        playwright.clickOn(favoriteTab);
+    }
+
+    /**
+     * is rekomendasi section is present
+     *
+     * @return boolean
+     */
+    public boolean isRekomendasiSectionVisible(){
+        playwright.waitTillLocatorIsVisible(rekomendasiTitle);
+        return rekomendasiTitle.isVisible();
     }
 
 }
