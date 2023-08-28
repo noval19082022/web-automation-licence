@@ -72,6 +72,7 @@ public class NavigatesSteps {
     @When("tenant/owner/admin set active page to {int}")
     public synchronized void tenantSetActivePageTo(int activePage) {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(activePage));
+        playwright.bringPageToView(ActiveContext.getActivePage());
     }
 
     @When("tenant/owner/admin open new page")
@@ -79,7 +80,6 @@ public class NavigatesSteps {
         page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
             ActiveContext.getActiveBrowserContext().newPage();
         });
-
     }
 
     @When("tenant navigate to riwayat and draf booking")
@@ -282,5 +282,21 @@ public class NavigatesSteps {
     @And("admin bangkrupux navigate to kost owner menu")
     public void adminNavigatesToKostOwnerMenu() {
         playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin go to kost level menu")
+    public void adminGoToKostLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/level", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin go to room level menu")
+    public void adminGoToRoomLevelMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/room-level", 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner navigates to broadcast chat page")
+    public void ownerNavigatesToBroadcastChatPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.BROADCAST_CHAT, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
     }
 }

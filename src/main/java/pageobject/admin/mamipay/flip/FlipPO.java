@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.regex.Pattern;
+
 public class FlipPO {
     private Page page;
     private PlaywrightHelpers playwrightHelpers;
@@ -18,6 +20,9 @@ public class FlipPO {
 
     //----- flip sandbox -----
     private Locator popUpTextTestMode;
+    private Locator moneyTransferredMenu;
+    private Locator nextBtnPopUpMoneyTransferred;
+    private Locator okPahamBtnPopUpMoneyTransferred;
     private Locator riwayatTransactionMenu;
     private Locator setForceTransaction;
     private Locator setFailedTransaction;
@@ -31,8 +36,11 @@ public class FlipPO {
         this.passwordPlaceholder = page.locator("input[name='password']");
         this.loginBtn = page.getByTestId("qa-button");
         //---- flip sandbox ----
-        this.popUpTextTestMode = page.getByText("Anda sedang berada dalam Test Mode.", new Page.GetByTextOptions().setExact(true));
-        this.riwayatTransactionMenu = page.getByTestId("qa-menu-bar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Riwayat Transaksi"));
+        this.popUpTextTestMode = page.locator("div").filter(new Locator.FilterOptions().setHasText("Anda sedang dalam TEST Mode. Untuk kembali dan bertransaksi di LIVE Mode")).nth(3);
+        this.moneyTransferredMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Money Transfer"));
+        this.nextBtnPopUpMoneyTransferred = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selanjutnya"));
+        this.okPahamBtnPopUpMoneyTransferred = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("OK, Paham"));
+        this.riwayatTransactionMenu = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Buat TransaksiRiwayat Transaksi$"))).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Riwayat Transaksi"));
         this.setForceTransaction = page.getByTestId("qa-button").getByText("Force Success").first();
         this.setFailedTransaction = page.getByTestId("qa-button").getByText("Force Failed").first();
     }
@@ -66,6 +74,8 @@ public class FlipPO {
      * user navigate to riwayat transaction
      */
     public void navigateToRiwayatTransaction() {
+        playwrightHelpers.clickOn(moneyTransferredMenu);
+        dismissPopUpMoneyTransferredMenu();
         playwrightHelpers.clickOn(riwayatTransactionMenu);
     }
 
@@ -81,5 +91,19 @@ public class FlipPO {
      */
     public void setFailedTransaction() {
         playwrightHelpers.clickOn(setFailedTransaction);
+    }
+
+    /**
+     * Action to dismiss pop up on Money Transferred Menu
+     */
+    private void dismissPopUpMoneyTransferredMenu() {
+        playwrightHelpers.waitTillLocatorIsVisible(nextBtnPopUpMoneyTransferred);
+        do {
+            playwrightHelpers.clickOn(nextBtnPopUpMoneyTransferred);
+        } while (playwrightHelpers.waitTillLocatorIsVisible(nextBtnPopUpMoneyTransferred));
+
+        if (playwrightHelpers.waitTillLocatorIsVisible(okPahamBtnPopUpMoneyTransferred)) {
+            playwrightHelpers.clickOn(okPahamBtnPopUpMoneyTransferred);
+        }
     }
 }
