@@ -14,9 +14,6 @@ public class ApartmentLandingPO {
     private Locator noPropertyImage;
     private Locator apartmentListNameText;
     private Locator favoriteHeader;
-    private Locator historyTab;
-    private Locator favoriteTab;
-
     private Locator hapusHistoryButton;
     private Locator detailApartment;
     private Locator rekomendasiTitle;
@@ -32,8 +29,6 @@ public class ApartmentLandingPO {
         noPropertyImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Kost tidak ditemukan"));
         apartmentListNameText = page.locator("span.rc-info__name");
         favoriteHeader =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
-        historyTab = page.locator("[data-testid='history-tab'] > .col-xs-6");
-        favoriteTab = page.locator("[data-testid='favourite-tab'] > .col-xs-6");
         detailApartment = page.locator("#detailApartmentContainer");
         hapusHistoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Histori"));
         rekomendasiTitle = page.locator(".premium-recom-title");
@@ -95,7 +90,7 @@ public class ApartmentLandingPO {
      */
     public void clickOnHistoryApartment() {
         playwright.clickOn(favoriteHeader);
-        playwright.clickOn(historyTab);
+       playwright.clickOnText("Pernah Dilihat");
     }
 
     /**
@@ -134,7 +129,7 @@ public class ApartmentLandingPO {
      */
     public void clickOnFavoriteApartment() {
         playwright.clickOn(favoriteHeader);
-        playwright.clickOn(favoriteTab);
+        playwright.clickOnText("Difavoritkan");
     }
 
     /**
