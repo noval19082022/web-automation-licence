@@ -23,7 +23,7 @@ Feature: Entry Point Mamifoto when doesnt have property active
     Then owner click info untuk anda for mamifoto non property
     And owner can see mamifoto page
 
-  @continue @TEST_LIMO-3161 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3161 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner dont have property active purchase MamiFoto package
     When owner click Lihat Paket button
     And owner select package mamifoto

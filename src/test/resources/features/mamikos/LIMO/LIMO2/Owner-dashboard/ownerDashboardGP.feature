@@ -10,6 +10,7 @@ Feature: Owner Dashboard GP
     Then owner click "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
     * user will see that the text "Sisa kuota mingguan" is displayed
     * user will see that the text "1 chat room" is displayed
+    And owner should successfully log out
 
   @TEST_LIMO-1725 @continue
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
@@ -62,7 +63,7 @@ Feature: Owner Dashboard GP
     * user click close icon tooltip broadcast chat on chatlist
     Then verify label goldplus on chatlist
 
-  @continue
+    @resetGP
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
