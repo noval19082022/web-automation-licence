@@ -364,7 +364,14 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator
-     *
+     * @param locator  Locator data type
+     */
+    public void waitFor(Locator locator) {
+        locator.waitFor();
+    }
+
+    /**
+     * Wait for a locator with timeout
      * @param locator  Locator data type
      * @param duration set duration in double
      */

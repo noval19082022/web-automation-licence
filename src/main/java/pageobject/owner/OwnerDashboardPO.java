@@ -16,7 +16,7 @@ public class OwnerDashboardPO {
     private LocatorHelpers locator;
     private Locator ownerProfile;
     private Locator manajemenKost;
-    private Locator pengajuanBooking;
+    private Locator pengajuanSewaBtn;
     private Locator kelolaTagihan;
     private Locator broadcastChatBtn;
     Locator warningBroadcastText;
@@ -66,7 +66,7 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
-        pengajuanBooking = playwright.locatorByRoleSetName(locator.roleButton, "Pengajuan Booking");
+        pengajuanSewaBtn = playwright.getButtonBySetName("Pengajuan Sewa");
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
@@ -138,8 +138,8 @@ public class OwnerDashboardPO {
      * Click on pengajuan booking
      */
     public PengajuanBookingPO clickOnPengajuanBooking() {
-        pengajuanBooking.waitFor();
-        pengajuanBooking.click();
+        playwright.waitFor(pengajuanSewaBtn);
+        playwright.clickOn(pengajuanSewaBtn);
         return new PengajuanBookingPO(page);
     }
 
