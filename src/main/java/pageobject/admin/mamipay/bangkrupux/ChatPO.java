@@ -91,14 +91,14 @@ public class ChatPO {
      * @param text refers to text that wanna fill to
      */
     public void fillSearch(String text) {
-        chatSearchInput.fill(text);
+        playwright.forceFill(chatSearchInput, text);
     }
 
     /**
      * Click on All category
      */
     public void clickOnAllCategory() {
-        allChatMenu.click();
+        playwright.clickOn(allChatMenu);
     }
 
     /**
