@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
-import java.awt.*;
 import java.util.List;
 
 public class LoadingPO {
