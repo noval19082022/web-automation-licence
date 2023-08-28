@@ -6,3 +6,6 @@ Feature: Create Device ID And Login
       | device_identifier | Mamitest0891111020198     |
       | device_uuid       | Mamitest0891111020198uuid |
       | device_platform   | Mamitest                  |
+      | phone_number      | 0891111020198             |
+      | password | mamikosqa123 |
+    When tenant login trough api
