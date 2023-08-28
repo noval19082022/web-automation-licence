@@ -3,7 +3,7 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -137,10 +137,10 @@ public class OwnerDashboardPO {
     /**
      * Click on pengajuan booking
      */
-    public PengajuanBookingPO clickOnPengajuanBooking() {
+    public PengajuanSewaPO clickOnPengajuanSewa() {
         playwright.waitFor(pengajuanSewaBtn);
-        playwright.clickOn(pengajuanSewaBtn);
-        return new PengajuanBookingPO(page);
+        playwright.doubleClick(pengajuanSewaBtn);
+        return new PengajuanSewaPO(page);
     }
 
     /**

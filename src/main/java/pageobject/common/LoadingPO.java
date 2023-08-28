@@ -4,6 +4,9 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
+import java.awt.*;
+import java.util.List;
+
 public class LoadingPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -24,7 +27,12 @@ public class LoadingPO {
     public void waitForLoadingIconDisappear() {
         var waitDelay = 1000.0;
         var maxLoop = 10;
-        playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
+        List<Locator> loadingIconList = playwright.getLocators(loadingIcon);
+        if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {
+            for (Locator loadingIcon : loadingIconList) {
+                playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
+            }
+        }
         playwright.waitTillLocatorIsNotVisible(loadingAnimation, waitDelay, maxLoop);
     }
 }
