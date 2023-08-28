@@ -138,8 +138,7 @@ public class ApartmentLandingPO {
      * @return boolean
      */
     public boolean isRekomendasiSectionVisible(){
-        playwright.waitTillLocatorIsVisible(rekomendasiTitle);
-        return rekomendasiTitle.isVisible();
+        return playwright.waitTillLocatorIsVisible(rekomendasiTitle);
     }
 
 }

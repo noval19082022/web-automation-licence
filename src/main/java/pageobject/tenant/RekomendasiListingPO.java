@@ -74,8 +74,7 @@ public class RekomendasiListingPO {
      *
      */
     public boolean isMulaiCariDanSewaKosIsVisible() {
-       playwright.isLocatorVisibleAfterLoad(mulaiCariDanSewaKosButton,2000.0);
-        return mulaiCariDanSewaKosButton.isVisible();
+      return playwright.isLocatorVisibleAfterLoad(mulaiCariDanSewaKosButton,2000.0);
     }
 
     /**
