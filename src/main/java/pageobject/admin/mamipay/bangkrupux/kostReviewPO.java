@@ -92,7 +92,7 @@ public class kostReviewPO {
      *
      */
     public void clickOnCreateReviewButton() {
-        createReviewButton.click();
+        playwright.clickOn(createReviewButton);
     }
 
     /**
@@ -100,7 +100,7 @@ public class kostReviewPO {
      *
      */
     public void clickOnCancelReviewButton() {
-        cancelReviewButton.click();
+        playwright.clickOn(cancelReviewButton);
     }
 
     /**
@@ -109,7 +109,7 @@ public class kostReviewPO {
      * @param anonymous input string that will match input value
      */
     public void fillOnAnonymous(String anonymous) {
-        anonymousDropdown.selectOption(anonymous);
+        playwright.selectDropdownByValue(anonymousDropdown, anonymous);
     }
 
     /**
@@ -118,7 +118,7 @@ public class kostReviewPO {
      * @param reviewType input string that will match input value
      */
     public void fillOnReviewType(String reviewType) {
-        reviewTypeDropdown.selectOption(reviewType);
+        playwright.selectDropdownByValue(reviewTypeDropdown, reviewType);
     }
 
     /**
@@ -127,7 +127,7 @@ public class kostReviewPO {
      * @param contractId input string that will match input value
      */
     public void fillOnContractId(String contractId) {
-        contractIdDropdown.fill(contractId);
+        playwright.forceFill(contractIdDropdown, contractId);
         playwright.clickOn(searchKostNameButton);
     }
 
@@ -137,7 +137,7 @@ public class kostReviewPO {
      * @param ota input string that will match input value
      */
     public void fillOnOTA (String ota) {
-        OTADropdown.selectOption(ota);
+       playwright.selectDropdownByValue(OTADropdown, ota);
     }
 
 
@@ -147,7 +147,7 @@ public class kostReviewPO {
      * @param clean input string that will match input value
      */
     public void fillOnKebersihan(String clean) {
-        kebersihanDropdown.selectOption(clean);
+        playwright.selectDropdownByValue(kebersihanDropdown, clean);
     }
 
     /**
@@ -156,7 +156,7 @@ public class kostReviewPO {
      * @param happy input string that will match input value
      */
     public void fillOnKenyamanan(String happy) {
-        kenyamananDropdown.selectOption(happy);
+        playwright.selectDropdownByValue(kenyamananDropdown, happy);
     }
 
     /**
@@ -165,7 +165,7 @@ public class kostReviewPO {
      * @param roomFacilities input string that will match input value
      */
     public void fillOnFasilitasKamar(String roomFacilities) {
-        fasilitasKamarDropdown.selectOption(roomFacilities);
+        playwright.selectDropdownByValue(fasilitasKamarDropdown, roomFacilities);
     }
 
     /**
@@ -174,7 +174,7 @@ public class kostReviewPO {
      * @param security input string that will match input value
      */
     public void fillOnKeamanan(String security) {
-        keamananDropdown.selectOption(security);
+        playwright.selectDropdownByValue(keamananDropdown, security);
     }
 
     /**
@@ -183,7 +183,7 @@ public class kostReviewPO {
      * @param publicFacilities input string that will match input value
      */
     public void fillOnFasilitasUmum(String publicFacilities) {
-        fasilitasUmumDropdown.selectOption(publicFacilities);
+        playwright.selectDropdownByValue(fasilitasUmumDropdown, publicFacilities);
     }
 
     /**
@@ -192,7 +192,7 @@ public class kostReviewPO {
      * @param price input string that will match input value
      */
     public void fillOnKesesuaianHarga(String price) {
-        kesesuiaianHargaDropdown.selectOption(price);
+        playwright.selectDropdownByValue(kesesuiaianHargaDropdown, price);
     }
 
     /**
@@ -239,7 +239,7 @@ public class kostReviewPO {
      *
      */
     public void clickOnSaveReviewButton() {
-        saveReviewButton.click();
+        playwright.clickOn(saveReviewButton);
     }
 
     /**
@@ -247,7 +247,7 @@ public class kostReviewPO {
      * @param startDate String type target date
      */
     public void fillStartDate(String startDate){
-        startDateInput.click();
+        playwright.clickOn(startDateInput);
         playwright.clickOn(page.locator("//a[text()='"+startDate+"']"));
     }
 
@@ -280,10 +280,10 @@ public class kostReviewPO {
         String dateElement = "//a[text()='"+day+"']";
         String date = java.getTimeStamp("YYYY/MM");
 
-        startDateInput.click();
+        playwright.clickOn(startDateInput);
         page.click("xpath=" + dateElement);
         if (endDateInput.isVisible()){
-            endDateInput.click();
+            playwright.clickOn(endDateInput);
         }
     }
 
@@ -307,7 +307,7 @@ public class kostReviewPO {
         String dateElement = "//a[text()='"+day+"']";
         String date = java.getTimeStamp("YYYY/MM");
 
-        endDateInput.click();
+        playwright.clickOn(endDateInput);
         page.click("xpath=" + dateElement);
         }
 
