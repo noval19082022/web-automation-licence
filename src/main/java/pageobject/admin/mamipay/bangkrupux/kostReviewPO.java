@@ -256,7 +256,7 @@ public class kostReviewPO {
      * @param endDate String type target date
      */
     public void fillEndDate(String endDate) {
-        endDateInput.click();
+        playwright.clickOn(endDateInput);
         playwright.clickOn(page.locator("//a[text()='"+endDate+"']"))  ;
     }
 
