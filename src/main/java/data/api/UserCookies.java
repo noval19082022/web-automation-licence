@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class UserCookies {
-    @Getter
-    @Setter
+    @Getter @Setter
     private static String tenantCookie, ownerCookie;
 }
