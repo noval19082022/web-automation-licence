@@ -28,6 +28,15 @@ public class ApiPlaywrightHelpers {
     }
 
     /**
+     * Set base URL
+     * @param url base URL
+     * @return APIRequestContext
+     */
+    public static APIRequestContext setBaseUrl(String url) {
+        return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(url));
+    }
+
+    /**
      * get cookies list
      * @return List<Cookie>
      */

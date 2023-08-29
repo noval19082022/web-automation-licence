@@ -38,6 +38,7 @@ public class GetCookiesSteps {
         cookieList = apiPwHelpers.getCookieList();
         cookieString = apiPwHelpers.parseCookieToString(cookieList);
         UserCookies.setTenantCookie(cookieString);
+        System.out.println(UserCookies.getTenantCookie());
     }
 
     @When("playwright get tenant data profile")

@@ -11,7 +11,9 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
     And tenant navigates to edit profile
-    And tenant choose profession as mahasiswa studying at "Universitas Bengkulu"
+    And user choose profession "Mahasiswa"
+    And user fills "Universitas Lampung" in search dropdown pillih universitas
+    And user click simpan button
     Then tenant success update profile
 
   @continue
@@ -83,7 +85,9 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
   Scenario: Tenant Edit Profession To Karyawan
     When tenant set active page to 1
     And tenant navigates to edit profile
-    And tenant choose profession as karyawan working at "Bukit Asam Tbk"
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "Bukit Asam Tbk"
+    And user click simpan button
     Then tenant success update profile
 
   @continue

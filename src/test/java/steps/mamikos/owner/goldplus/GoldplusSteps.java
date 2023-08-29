@@ -10,8 +10,10 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.PromoOwnerPO;
 import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
@@ -32,22 +34,22 @@ public class GoldplusSteps {
     BroadcastChatPO broadcast = new BroadcastChatPO(page);
     PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
     MamiAdsPO mamiads = new MamiAdsPO(page);
+    PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
+    GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
-    public void user_wants_to_subscribe_goldplus(int pacakge) {
-       if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
-            goldplus.clickOnGPPackage(pacakge);
+    public void user_wants_to_subscribe_goldplus(int paket) {
+        if (home.getURL().equals(Mamikos.URL+"/goldplus/submission/packages")){
+            goldplus.clickOnGPPackage(paket);
         } else{
-            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+paket);
         }
-        playwright.hardWait(3000);
-        if (playwright.isTextDisplayed("1 Minggu") == true) {
+
+        if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
-        playwright.hardWait(3000);
-        playwright.clickOnTextButton("Pilih");
-        playwright.hardWait(3000);
-        playwright.clickOnText("Bayar Sekarang");
+        gpSubmission.clicksOnPilihPaketButton();
+        gpSubmission.clicksOnBayarSekarangButton();
     }
 
     @When("user choose Goldplus package {int}")
@@ -79,7 +81,7 @@ public class GoldplusSteps {
 
     @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.hardWait(1000);
+        playwright.hardWait(2000);
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;
         for (Map<String, String> content : table) {
@@ -351,8 +353,8 @@ public class GoldplusSteps {
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Pilih Periode Berlangganan":
-                Assert.assertTrue(playwright.isTextDisplayed("Pilih Periode Berlangganan", 2000.0), "Text doesn't displayed!");
-                Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: GoldPlus 2", 2000.0), "Paket GP Anda is not GP2!");
+                Assert.assertTrue(playwright.isTextDisplayed("Paket GoldPlus", 2000.0), "Text doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("Pilih satu paket GoldPlus di bawah ini.", 2000.0), "Paket GP Anda is not GP2!");
         }
     }
 
@@ -414,4 +416,27 @@ public class GoldplusSteps {
     public void owner_click_lihat_selengkapnya_at_section_tagihan() {
         goldplus.lihatSelngkapnyaSectionDetailTagihan();
     }
+
+    @Then("owner will see card box contains {string}")
+    public void owner_will_see_card_box_contains(String benefit) {
+        Assert.assertTrue(chat.gpPacakgeText().contains(benefit),"GP Package not contain benefit "+benefit);
+    }
+
+    @And("owner will see chat list page empty state")
+    public void owner_will_see_chat_list_page_empty_state(){
+        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
+        chat.dismissFTUEMarsKuotaNol();
+    }
+
+    @Then("user verify last ftue is {string}")
+    public void user_verify_last_ftue_is(String kuota) {
+        Assert.assertEquals(chat.lastFTUEnonGoldplusText(),kuota,"FTUE doesnt match");
+
+    }
+
+    @When("owner cek promo owner when not GP")
+    public void owner_cek_promo_owner_when_not_gp() {
+        promoOwner.clickOnPromoNonGP();
+    }
+
 }

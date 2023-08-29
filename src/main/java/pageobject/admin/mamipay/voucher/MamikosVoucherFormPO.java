@@ -54,6 +54,7 @@ public class MamikosVoucherFormPO {
     Locator submitSingleButton;
     Locator voucherStatusEl;
     Locator submitEditMassButton;
+    Locator submitEditSingleButton;
     Locator confirmationEditButton;
     Locator uploadCampignImage;
     Locator imageCampaignUploaded;
@@ -68,6 +69,14 @@ public class MamikosVoucherFormPO {
     Locator listCity;
     Locator applicableForCityEditText;
     Locator notApplicableForCityEditText;
+    Locator voucherList;
+    Locator partnerVoucherCode;
+    Locator partnerVoucherTitle;
+    Locator updatePartnerVoucher;
+    Locator errorMessageText;
+    Locator partnerVoucherTotalQuota;
+    Locator addPartnerVoucher;
+    Locator fieldRequiredValidationMessage;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -120,6 +129,14 @@ public class MamikosVoucherFormPO {
         listCity = page.locator("//span[@class='select2-selection__choice__remove']");
         applicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("Search City...");
         notApplicableForCityEditText = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Not Applicable For")).getByPlaceholder("Search City...");
+        submitEditSingleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Single Voucher"));
+        partnerVoucherCode = page.getByPlaceholder("VOUCHER1, VOUCHER2");
+        updatePartnerVoucher = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Voucher"));
+        errorMessageText = page.locator("//*[@class='callout callout-danger']/descendant::li");
+        partnerVoucherTitle = page.locator("input[name=\"public_campaign\\[title\\]\"]");
+        partnerVoucherTotalQuota = page.locator("input[name=\"limit\"]");
+        addPartnerVoucher = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Voucher"));
+        fieldRequiredValidationMessage = page.locator("//*[@class='callout callout-danger']//li");
     }
 
     /**
@@ -435,6 +452,15 @@ public class MamikosVoucherFormPO {
      * Click on Submit Add Mass button
      * @return MamikosVoucherFormPO class
      */
+    public void clickOnUpdatePartnerVocButton() {
+        playwright.clickOn(updatePartnerVoucher);
+        playwright.clickOn(confirmationEditButton);
+    }
+
+    /**
+     * Click on Submit Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
     public void clickOnSubmitAddSingleVocButton() {
         playwright.clickOn(submitSingleButton);
     }
@@ -445,6 +471,15 @@ public class MamikosVoucherFormPO {
      */
     public void clickOnEditAddMassVocButton() {
         playwright.clickOn(submitEditMassButton);
+        playwright.clickOn(confirmationEditButton);
+    }
+
+    /**
+     * Click on Submit Single button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnEditSingleVocButton() {
+        playwright.clickOn(submitEditSingleButton);
         playwright.clickOn(confirmationEditButton);
     }
 
@@ -470,7 +505,6 @@ public class MamikosVoucherFormPO {
 
         startDateInput.click();
         page.click("xpath=" + dateElement);
-//        endDateInput.click();
         if (endDateInput.isVisible()){
             endDateInput.click();
         }
@@ -615,4 +649,51 @@ public class MamikosVoucherFormPO {
         playwright.clickOn(page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(city)));
     }
 
+    /**
+     * Fill partner voucher code
+     * @param voucherCode
+     */
+    public void fillPartnerVoucherCode(String voucherCode) {
+        partnerVoucherCode.fill(voucherCode);
+    }
+
+    /**
+     * Fill partner voucher title
+     * @param voucherTitle
+     */
+    public void fillPartnerVoucherTitle(String voucherTitle) {
+        partnerVoucherCode.fill(voucherTitle);
+    }
+
+    /**
+     * Get message error
+     * @return message error field is required
+     */
+    public String getMessageError() {
+        return playwright.getText(errorMessageText);
+    }
+
+    /**
+     * Fill partner voucher code
+     * @param totalQuota
+     */
+    public void fillPartnerVoucherTotalQuota(String totalQuota) {
+        partnerVoucherTotalQuota.fill(totalQuota);
+    }
+
+    /**
+     * Click on Submit Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public void clickOnAddPartnerVocButton() {
+        playwright.clickOn(addPartnerVoucher);
+    }
+
+    /**
+     * get message validation field required
+     * @return string message
+     */
+    public String getMessageValidationFieldRequired(String index) {
+        return playwright.getText(fieldRequiredValidationMessage.getByText(index));
+    }
 }

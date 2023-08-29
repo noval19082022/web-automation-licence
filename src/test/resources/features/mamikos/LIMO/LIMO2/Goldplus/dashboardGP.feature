@@ -26,7 +26,7 @@ Feature: Dashboard GP
     Then user will see that the text "Kos GoldPlus Tidak Ditemukan" is displayed
     * user will see that the text "Saat ini belum ada kos GoldPlus Anda yang Sedang Diproses." is displayed
 
-  @TEST_LIMO-49 @continue @dashboardGP @listTagihanGP
+  @TEST_LIMO-49 @dashboardGP @listTagihanGP
   Scenario: Check list tagihan GP from dashboard GP
     When owner click back to dashboard GP
     And user scroll to section pembayaran tagihan goldplus

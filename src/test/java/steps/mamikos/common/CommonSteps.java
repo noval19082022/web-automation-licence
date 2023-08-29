@@ -20,7 +20,6 @@ public class CommonSteps {
 
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
-        playwright.hardWait(5);
         playwright.clickOnText(text);
     }
 

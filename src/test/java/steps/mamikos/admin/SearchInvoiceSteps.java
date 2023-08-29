@@ -100,4 +100,17 @@ public class SearchInvoiceSteps {
             }
         }
     }
+
+    @And("admin bangkerupux want to search invoice by {string} and input field {string}")
+    public void adminBangkerupuxWantToSearchInvoiceByAndInputField(String searchBy, String inputField) {
+        invoicePO.selectSearchInvoiceBy(searchBy);
+        invoicePO.fillInputSearchValue(inputField);
+        invoicePO.clickOnCariInvoice();
+    }
+
+    @And("admin bangkerupux click on shorlink invoice on invoice list {string}")
+    public void adminBangkerupuxClickOnShorlinkInvoiceOnInvoiceList(String link) {
+        admin.clickOnTextHyperlink(link);
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
 }

@@ -7,6 +7,8 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -141,7 +143,7 @@ public class JavaHelpers {
     /**
      * Access properties and return as Properties
      * @param propertyfile desired properties file
-     * @return
+     * @return Properties data type
      */
     public static Properties accessPropertiesFile(String propertyfile) {
         Properties prop = new Properties();
@@ -321,4 +323,41 @@ public class JavaHelpers {
         return resultDateFormat.format(calendar.getTime());
     }
 
+    //--- String Manipulator ---//
+    /**
+     * Format string
+     * @param format String to format
+     * @param args format args
+     * @return String data type
+     */
+    public static String formatString(String format, Object... args)  {
+        return String.format(format, args);
+    }
+
+    /**
+     * Remove extra new line and trim
+     * @param removeLineString
+     * @return String data type
+     */
+    public static String removeExtraNewLine(String removeLineString) {
+        return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
+    }
+    //--- String Manipulator ---//
+
+    //--- Encrypt Decrypt ---//
+    public static String generateMd5(String md5Target) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(md5Target.getBytes());
+        byte[] digest = md.digest();
+        return bytesToHexString(digest);
+    }
+
+    public static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+    //--- Encrypt Decrypt ---//
 }

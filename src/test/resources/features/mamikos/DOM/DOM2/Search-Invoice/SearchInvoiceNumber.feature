@@ -1,5 +1,5 @@
-@allinvoice @backoffice @invoice @regression @DOM2
-Feature: search invoice
+@DOM2
+Feature: Search Invoice
 
   @DOM2 @searchInvoiceGlobal @TEST_DOM-647 @Automated @web-covered
   Scenario: [BackOffice][Search Invoice] search invoice with use invoice number

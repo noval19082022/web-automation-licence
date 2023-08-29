@@ -10,6 +10,13 @@ public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    //--- Saldo Mamiads Onboarding ---//
+    private Locator saldoMamiadsCard;
+    //--- Mamiads Page ---//
+    private Locator cobaSekarangBtnOnPopUp;
+    private Locator beliSaldoBtn;
+    //--- Beli Saldo Mamiads Page ----//
+    private Locator bayarSekarangBtnOnDetailTagihan;
 
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
@@ -25,6 +32,15 @@ public class MamiAdsPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        //--- Saldo Mamiads Onboarding ---//
+        this.saldoMamiadsCard = page.locator(".mamiads-card");
+        //--- Mamiads Page ---//
+        this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
+        this.beliSaldoBtn = page.getByText("Beli Saldo");
+        //--- Beli Saldo Mamiads Page ---//
+        this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
+
+        //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
         gpOnboardingPopUpActiveTextBody = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(2)");
@@ -36,6 +52,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up active counter
+     *
      * @return Integer data type
      */
     public int getGpOnboardingpopUpActiveCounter() {
@@ -95,5 +112,51 @@ public class MamiAdsPO {
     public void clickGpOnboardingpopUpPreviousButton() {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
+
+    /**
+     * owner buy mamiads saldo,
+     * This method is only valid for owners who have purchased saldo at Mamiads.
+     *
+     * @param saldo String
+     */
+    public void purchaseOwnerSaldoFromMamiads(String saldo) {
+        playwright.clickOn(saldoMamiadsCard);
+        handlePopupMamiAds();
+        clickOnBeliSaldoBtn();
+        choosingSaldoToBuy(saldo);
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+    }
+
+    /**
+     * Handle popup and button clicks when owner visits Mamiads page.
+     * This method addresses the conditions when a popup appears on the page visited by the owner.
+     * If the 'Coba Sekarang' button on the popup is visible or the 'Beli Saldo' button is not visible,
+     * the method clicks on the 'Coba Sekarang' button.
+     */
+    public void handlePopupMamiAds() {
+        // Check if the 'Coba Sekarang' button on the popup is visible
+        // OR if the 'Beli Saldo' button is not visible
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
+                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
+            playwright.clickOn(cobaSekarangBtnOnPopUp);
+        }
+    }
+
+    /**
+     * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
+     */
+    public void clickOnBeliSaldoBtn() {
+        playwright.clickOn(beliSaldoBtn);
+    }
+
+    /**
+     * buy saldo on mamiads saldo page
+     *
+     * @param saldo you should use ex. 'Rp6.000'
+     */
+    public void choosingSaldoToBuy(String saldo) {
+        playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
+    }
+
 }
 

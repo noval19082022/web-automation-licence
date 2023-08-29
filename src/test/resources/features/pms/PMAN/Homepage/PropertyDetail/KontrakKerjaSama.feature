@@ -1,15 +1,14 @@
 @regression @pman @pms @detailpropertypms
 
 Feature: Kontrak Kerja Sama
-  Background: Open Detail Property
+
+  @continue @TEST_PMAN-3950
+  Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
     And admin go to detail property "Khusus Automation"
-
-  @TEST_PMAN-3950
-  Scenario: See and Edit Kontrak Kerja Sama - Profil Pemilik
     When admin see profil pemilik
     Then profil pemilik section match with data
       | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
@@ -28,3 +27,104 @@ Feature: Kontrak Kerja Sama
     Then profil pemilik section match with data
       | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
+
+  @continue @TEST_PMAN-3948
+  Scenario: See and Edit Informasi Transfer Pendapatan
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+    #Admin edit informasi transfer pendapatan
+    When admin edit informasi transfer pendapatan
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+    #revert back informasi transfer pendapatan
+    When admin edit informasi transfer pendapatan
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+    Then informasi transfer pendapatan should be match with data
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+
+  @continue @TEST_PMAN-3949
+  Scenario: See and Edit Detail Kerja Sama
+    When admin see detail kerja sama
+    Then detail kerja sama should be match with data
+      | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 1 November 2021 | 31 October 2023   | Rp25.000          |
+    #Admin edit detail kerja sama
+    When admin edit detail kerja sama
+      | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
+      | Singgahsini   | Commission Rate   | 15%               | Partial | 10            | 2000000   | 6 Bulan   | 5               | 4000000     | 32            | 5000              |
+    Then detail kerja sama should be match with data
+      | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
+      | Singgahsini   | Commission Rate   | 15%               | 9           | Partial | 10%           | Rp2.000.000 | 6 Bulan   | 5%              | Rp4.000.000 | 70%             | 30%             | 32 Bulan      | 1 November 2021 | 30 June 2024      | Rp5.000           |
+    #revert back detail kerja sama
+    When admin edit detail kerja sama
+      | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
+      | Apik          | Static Rate       | 20%               | Full A  | 5%            | 4000000   | None      | -               | -           | 24            | 25000          |
+    Then detail kerja sama should be match with data
+      | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 1 November 2021 | 31 October 2023   | Rp25.000          |
+
+  @TEST_PMAN-4041 @continue
+  Scenario: See and Edit Detail Kerja Sama Hybrid
+    #Admin edit detail kerja sama Hybrid
+    When admin turn on Hybrid and set mamikos precentage to "10" percent
+    Then kontrak kerja sama should contains hybrid rev share
+      | Pemilik DBET  | Mamikos DBET  |
+      | 90%           | 10%           |
+    #revert back contract
+    When admin turn off Hybrid
+    Then kontrak kerja sama should not contains hybrid rev share
+
+  @TEST_PMAN-4559 @continue
+  Scenario: See, Add, Edit, and Delete Biaya Tambahan
+    #Admin see biaya tambahan section
+    When admin see biaya tambahan
+    Then biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp75.000  |
+      | Kebersihan Bulanan  | Rp15.000  |
+      | Gas Lpg Mingguan    | Rp5.000   |
+    #Admin add biaya tambahan
+    When admin add new biaya tambahan
+      | Nama Biaya     | Amount    |
+      | Listrik        | 25000  |
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000 |
+      | Kebersihan Bulanan  | Rp 15.000 |
+      | Gas Lpg Mingguan    | Rp 5.000  |
+      | Listrik             | Rp 25.000 |
+    #Admin edit biaya tambahan
+    When admin edit biaya tambahan "Listrik" to
+      | Nama Biaya   | Amount |
+      | Laundry      | 10000  |
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000 |
+      | Kebersihan Bulanan  | Rp 15.000 |
+      | Gas Lpg Mingguan    | Rp 5.000  |
+      | Laundry             | Rp 10.000 |
+    #Admin delete biaya tambahan
+    When admin delete biaya tambahan "Laundry"
+    Then detail biaya tambahan should contains
+      | Nama Biaya          | Amount    |
+      | Wifi Bulanan        | Rp 75.000  |
+      | Kebersihan Bulanan  | Rp 15.000  |
+      | Gas Lpg Mingguan    | Rp 5.000   |
+
+  @TEST_PMAN-3852
+  Scenario: See Rincian Tipe Kamar dan Harga
+    When admin go to pms singgahsini
+    And admin go to detail property "Khusus Automation"
+    And admin see profil pemilik
+    And admin see rincian tipe kamar dan harga
+    Then rincian tipe kamar dan harga should match
+      | Tipe Kamar  | Gender  | Jumlah Kamar  | Harga OTA | Harga Bulanan  | Harga 3 Bulan  | Harga 6 Bulan | Static Bulanan  | Static 3 Bulan  | Static 6 Bulan  | Publish Bulanan | Publish 3 Bulan | Publish 6 Bulan |
+      | Tipe A      | campur  | 3             | -         | Rp850.000      | Rp0            | Rp4.050.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
+      | Tipe B      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
+      | Tipe C      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |

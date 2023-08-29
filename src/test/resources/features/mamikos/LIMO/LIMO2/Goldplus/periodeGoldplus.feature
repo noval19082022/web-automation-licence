@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization
+@regression @LIMO2 @listing-monetization @periodeGP
 Feature: Check Period Goldplus Page
 
   @TEST_LIMO-2326
@@ -6,7 +6,7 @@ Feature: Check Period Goldplus Page
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp2"
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |
@@ -33,15 +33,14 @@ Feature: Check Period Goldplus Page
     When user go to mamikos homepage
     And user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp1"
     Then user verify list of Periode Berlangganan is appear
       | periodGP | freeMamiAds            | actualPrice | discPrice |
-      | 1 Bulan  | Gratis MamiAds 120.000 | Rp59.000    | Rp70.000  |
-      | 3 Bulan  | Gratis MamiAds 177.000 | Rp168.150   | Rp200.000 |
+      | 1 Bulan  | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
+      | 3 Bulan  | Gratis MamiAds 177.000 | Rp168.150   | Rp300.000 |
       | 4 Bulan  | Gratis MamiAds 236.000 | Rp224.200   | Rp300.000 |
       | 6 Bulan  | Gratis MamiAds 354.000 | Rp318.600   | Rp354.000 |
-      | 9 Bulan  | Gratis MamiAds 531.000 | Rp477.900   | Rp531.000 |
       | 12 Bulan | Gratis MamiAds 708.000 | Rp637.200   | Rp708.000 |
     And user should not be able to see the text "Favorit"
     And owner should successfully log out
@@ -69,15 +68,14 @@ Feature: Check Period Goldplus Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp1"
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |
-      | 1 Bulan         | Gratis MamiAds 120.000 | Rp59.000    | Rp70.000  |
-      | 3 Bulan Favorit | Gratis MamiAds 177.000 | Rp168.150   | Rp200.000 |
+      | 1 Bulan         | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
+      | 3 Bulan Favorit | Gratis MamiAds 177.000 | Rp168.150   | Rp300.000 |
       | 4 Bulan Favorit | Gratis MamiAds 236.000 | Rp224.200   | Rp300.000 |
       | 6 Bulan         | Gratis MamiAds 354.000 | Rp318.600   | Rp354.000 |
-      | 9 Bulan         | Gratis MamiAds 531.000 | Rp477.900   | Rp531.000 |
       | 12 Bulan        | Gratis MamiAds 708.000 | Rp637.200   | Rp708.000 |
     And owner should successfully log out
 
