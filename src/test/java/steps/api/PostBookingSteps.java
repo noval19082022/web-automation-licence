@@ -112,7 +112,7 @@ public class PostBookingSteps {
 
     @When("playwright create booking for tenant")
     public void playwrightCreateBookingForTenant() throws NoSuchAlgorithmException, InvalidKeyException {
-        var createBookingEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.CREATE_BOOKING.replace("{songId}/{roomTypeId}", songId + "/" + roomTypeId);
+        var createBookingEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{songId}/{roomTypeId}", songId + "/" + roomTypeId);
         var data = "POST" + " " + createBookingEndpoint + " " +  ApiEndpoints.X_GIT_TIME;
         var signature = JavaHelpers.bytesToHexString(JavaHelpers.generateHmacSha256(ApiEndpoints.SECRET_KEY, data));
         bookingBody = CreateBooking.getCreateBookingBody();

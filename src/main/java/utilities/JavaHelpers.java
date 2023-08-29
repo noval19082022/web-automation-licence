@@ -192,6 +192,13 @@ public class JavaHelpers {
         return Integer.parseInt(str);
     }
 
+    /**
+     * extract number from string given
+     * @param baseString is the String that we want to extract
+     * @param targetString is the String that we want to replace
+     * @param replaceString is the String that we want to replace with
+     * @return
+     */
     public static String formatString(String baseString, String targetString, String replaceString) {
         return baseString.replace(targetString, replaceString);
     }
