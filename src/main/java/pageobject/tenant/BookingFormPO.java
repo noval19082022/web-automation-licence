@@ -37,7 +37,7 @@ public class BookingFormPO {
     public BookingFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        this.ajukanSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
+        this.ajukanSewaButton = playwright.getButtonBySetName("Ajukan Sewa", true);
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
         this.lihatSelengkapnyaWaitingConfirmationTextLink = page.locator("//*[@class='--waiting']/parent::*/following-sibling::button");
@@ -65,7 +65,7 @@ public class BookingFormPO {
      * Click on ajukan sewa button on booking form
      */
     public void clickOnAjukanSewaButton() {
-        ajukanSewaButton.click();
+        playwright.clickOn(ajukanSewaButton);
     }
 
     /**

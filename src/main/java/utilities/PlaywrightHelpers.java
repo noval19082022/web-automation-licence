@@ -275,6 +275,16 @@ public class PlaywrightHelpers {
         return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
     }
 
+    /**
+     * Get button by aria role with set name and exact
+     * @param buttonText text on button
+     * @param exact boolean
+     * @return Locator playwright
+     */
+    public Locator getButtonBySetName(String buttonText, boolean exact) {
+        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText).setExact(exact));
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\
