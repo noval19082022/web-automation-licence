@@ -6,20 +6,12 @@ import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Request;
-import com.microsoft.playwright.options.Cookie;
 import com.microsoft.playwright.options.RequestOptions;
 import config.playwright.context.ActiveContext;
 import data.api.CreateBooking;
 import data.api.CreateDeviceId;
-import data.api.UserCookies;
 import data.mamikos.ApiEndpoints;
-import data.mamikos.Mamikos;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
-import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JavaHelpers;
 import utilities.JsonHelpers;
@@ -27,7 +19,6 @@ import utilities.JsonHelpers;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PostBookingSteps {

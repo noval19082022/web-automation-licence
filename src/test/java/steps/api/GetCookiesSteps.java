@@ -1,8 +1,5 @@
 package steps.api;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
@@ -18,7 +15,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JavaHelpers;
-import utilities.JsonHelpers;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
