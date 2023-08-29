@@ -28,18 +28,18 @@ Feature: Accept Booking from Chat room with DP
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-#  @TEST_BBM-5 @acceptBooking
-#  Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
-#    Given user go to mamikos homepage
-#    When user login as owner:
-#      | phone stag   | phone prod    | password     |
-#      | 085600867992 | 0890867321212 | qwerty123 |
-#    And user click chat button in top bar owner home page
-#    And search chat in chatlist "Tenant Automation Accept Chat"
-#    And user clicks on Accept button from chat room
-#    And user click chat button in top bar owner home page
-#    Then system display title "Belum bayar DP" after accept booking from chat room
-#
-#    #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
-#    When Owner can see name of Tenant is "Tenant Automation Accept Chat"
-#    Then Owner can see Kost name, harga kos, sisa kamar
+  @TEST_BBM-5 @acceptBooking
+  Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password     |
+      | 085600867992 | 0890867321212 | qwerty123 |
+    And user click chat button in top bar owner home page
+    And search chat in chatlist "Tenant Automation Accept Chat"
+    And user clicks on Accept button from chat room
+    And user click chat button in top bar owner home page
+    Then system display title "Belum bayar DP" after accept booking from chat room
+
+    #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
+    When Owner can see name of Tenant is "Tenant Automation Accept Chat"
+    Then Owner can see Kost name, harga kos, sisa kamar
