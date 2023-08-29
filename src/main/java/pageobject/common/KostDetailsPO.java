@@ -229,13 +229,13 @@ public class KostDetailsPO {
         this.locator = new LocatorHelpers(page);
         this.kostDetailsContainer = page.locator("#detailKostContainer");
         this.datePicker = page.getByTestId("bookingInputCheckinContent-datePicker");
-        this.ftueSlider = playwright.locatorByRoleSetName(locator.roleButton, "Next slide");
+        this.ftueSlider = page.getByText("Lanjut");
         this.ftuePopUP = page.locator(".onboarding-ftue");
         this.ftueBookingBenefitText = page.locator(".swiper-slide h4");
         this.mulaiKosInput = page.getByPlaceholder("Mulai kos");
         this.roomFacilities = page.getByTestId("detailKostFacilityCategory");
         this.bookingPeriodInput = page.locator("div.booking-rent-type__input");
-        this.ajukanSewaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ajukan Sewa");
+        this.ajukanSewaButton = playwright.getButtonBySetName("Ajukan Sewa", true);
         this.kostTitle = page.locator("#detailTitle");
         this.propertyGender = page.locator(".detail-kost-overview__gender-box");
         this.propertyLocation = page.locator(".detail-kost-overview__area");
@@ -438,13 +438,16 @@ public class KostDetailsPO {
         playwright.waitFor(ftueSlider, 5000.0);
         do {
             maxLoop++;
-            if (ftueSlider.isVisible()) {
-                playwright.forceClickOn(ftueSlider);
+            if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
+                playwright.clickOn(ftueSlider.first());
+            }
+            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
+                playwright.forceClickOn(btnSayaMengerti);
             }
             if (maxLoop == 7) {
                 break;
             }
-        } while (ftueSlider.isVisible());
+        } while (playwright.waitTillLocatorIsVisible(ftueSlider));
     }
 
     /**
@@ -489,7 +492,7 @@ public class KostDetailsPO {
      * @return BookingFormPO class
      */
     public BookingFormPO clickOnAjukanSewaButton() {
-        ajukanSewaButton.click();
+        playwright.clickOn(ajukanSewaButton);
         return new BookingFormPO(page);
     }
 
@@ -1625,6 +1628,7 @@ public class KostDetailsPO {
             }
             playwright.hardWait(500);
         }
+        playwright.waitFor(ftuePopUP);
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
     }
 
