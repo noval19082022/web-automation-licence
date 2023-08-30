@@ -1,5 +1,6 @@
 package steps.api;
 
+import api.Requirement;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
@@ -43,12 +44,8 @@ public class GetCookiesSteps {
     @When("playwright get tenant data profile")
     public void playwrightGetTenantDataProfile() throws NoSuchAlgorithmException, InvalidKeyException {
         var tenantProfileEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.TENANT_PROFILE;
-        var data = "GET" + " " + tenantProfileEndpoint + " " +  ApiEndpoints.X_GIT_TIME;
-        var signature = JavaHelpers.bytesToHexString(JavaHelpers.generateHmacSha256(ApiEndpoints.SECRET_KEY, data));
-        headers.put("Authorization", "GIT "+ signature + ":" + CreateDeviceId.getDeviceToken());
-        headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
-        headers.put("Content-Type", "application/json");
-        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrlAndHeaders(Mamikos.URL, headers);
+        var signature = Requirement.createSignatureKey("GET", tenantProfileEndpoint);
+        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandartHeaders(signature));
         tenantProfileResponse = tenantProfileRequest.get(tenantProfileEndpoint, RequestOptions.create().setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(tenantProfileResponse.url());
         System.out.println(tenantProfileResponse.text());

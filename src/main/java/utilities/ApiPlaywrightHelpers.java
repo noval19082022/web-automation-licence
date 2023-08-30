@@ -23,7 +23,7 @@ public class ApiPlaywrightHelpers {
      * @param headers headers
      * @return APIRequestContext
      */
-    public static APIRequestContext setBaseUrlAndHeaders(String URL, Map<String, String> headers) {
+    public static APIRequestContext setBaseUrl(String URL, Map<String, String> headers) {
         return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(URL).setExtraHTTPHeaders(headers));
     }
 
@@ -34,16 +34,6 @@ public class ApiPlaywrightHelpers {
      */
     public static APIRequestContext setBaseUrl(String url) {
         return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(url));
-    }
-
-    /**
-     * Set base URL with headers
-     * @param url
-     * @param headers
-     * @return
-     */
-    public static APIRequestContext setBaseUrl(String url, Map<String, String> headers) {
-        return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(url).setExtraHTTPHeaders(headers));
     }
 
     /**
