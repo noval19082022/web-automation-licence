@@ -6,7 +6,7 @@ Feature: Check Period Goldplus Page
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp2"
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |
@@ -33,7 +33,7 @@ Feature: Check Period Goldplus Page
     When user go to mamikos homepage
     And user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp1"
     Then user verify list of Periode Berlangganan is appear
       | periodGP | freeMamiAds            | actualPrice | discPrice |
@@ -68,7 +68,7 @@ Feature: Check Period Goldplus Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
-      | 0895332021442 | 0          | digantilagi |
+      | 082233545515 | 0          | 12345678 |
     When owner navigates to "/goldplus/submission/periode/gp1"
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |

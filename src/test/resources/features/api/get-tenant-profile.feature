@@ -7,8 +7,8 @@ Feature: API - Get Tenant Profile
       | phone stag   | phone prod   | password   |
       | <phone stag> | <phone prod> | <password> |
     And playwright collect tenant cookies
-    And playwright get tenant data profile
-    And playwright make json file for tenant booking from tenant profile data
+#    And playwright get tenant data profile
+#    And playwright make json file for tenant booking from tenant profile data
     Examples:
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |

@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillDetailsPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
@@ -20,6 +21,7 @@ public class OwnerManageBillSteps {
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     TenantBillManagementPO billManage = new TenantBillManagementPO(page);
     BillDetailsPO billdetail = new BillDetailsPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
 
     @When("owner go to bill page of kost {string} on month of {string}")
@@ -32,6 +34,7 @@ public class OwnerManageBillSteps {
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
         billManage.reloadOnEmptyKelolaTagihanPage();
+        loading.waitForLoadingIconDisappear();
         billManage.selectKosBillPageFilter(kostName);
         billManage.selectMonthFilter(month);
     }

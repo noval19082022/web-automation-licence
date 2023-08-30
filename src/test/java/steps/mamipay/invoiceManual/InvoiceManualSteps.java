@@ -39,6 +39,11 @@ public class InvoiceManualSteps {
     private String char255 = JavaHelpers.getPropertyValue(invoiceManual, "char255");
     private String popUpTitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupTitle");
     private String popUpSubtitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupSubtitle");
+    private String statusInvTitle = JavaHelpers.getPropertyValue(invoiceManual, "statusInvTitle");
+    private String jenisBiayaTitle = JavaHelpers.getPropertyValue(invoiceManual, "jenisBiayaTitle");
+    private String tglInvDibuat = JavaHelpers.getPropertyValue(invoiceManual, "tglInvDibuat");
+    private String tglMulaiTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglMulaiTitle");
+    private String tglAkhirTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglAkhirTitle");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -862,4 +867,57 @@ public class InvoiceManualSteps {
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
     //---End of Biaya Sewa---//
+
+    //---Filter Invoice Manual---//
+    @When("admin clicks Filter in Invoice Manual")
+    public void admin_clicks_Filter_in_Invoice_Manual(){
+        manualInvoice.clicksFilter();
+        manualInvoice.assertFilterTitleNSubtitle();
+        manualInvoice.assertStatusInvTitle(statusInvTitle);
+        manualInvoice.assertJenisBiaya(jenisBiayaTitle);
+        manualInvoice.assertTanggalInvoiceDibuat(tglInvDibuat);
+        manualInvoice.assertTanggalMulaiTitle(tglMulaiTitle);
+        manualInvoice.assertTanggalAkhirTitle(tglAkhirTitle);
+    }
+
+    @When("admin clicks {string} button on Filter")
+    public void admin_clicks_button_on_Filter(String btn){
+        if (btn.equalsIgnoreCase("Terapkan")){
+            manualInvoice.clicksTerapkan();
+        } else if (btn.equalsIgnoreCase("Reset")) {
+            manualInvoice.clicksFilter();
+            manualInvoice.clicksReset();
+        } else if (btn.equalsIgnoreCase("Main Reset")) {
+            manualInvoice.clicksMainReset();
+            manualInvoice.counterOnFilterIsHidden();
+        }
+    }
+
+    @Then("{string} Status Invoice is displayed")
+    public void Status_Invoice_is_displayed(String result){
+        manualInvoice.assertValueStatusInv(result);
+    }
+
+    @Then("the counter on filter is disappears")
+    public void the_counter_on_filter_is_disappears(){
+        manualInvoice.counterOnFilterIsHidden();
+    }
+
+    @When("admin ticks {string} on the {string} dropdown")
+    public void admin_ticks_on_the_dropdown(String statusInv, String dropdown){
+        if (dropdown.equalsIgnoreCase("Status Invoice")){
+            manualInvoice.ticksStatusInvoice(statusInv);
+        } else if (dropdown.equalsIgnoreCase("Jenis Biaya")) {
+
+        }
+    }
+
+    @When("admin refresh page and clicks Filter in Invoice Manual")
+    public void admin_refresh_page_and_clicks_Filter_in_Invoice_Manual(){
+        //refresh page first, to check default Unpaid filter
+        manualInvoice.refreshPageInvoiceManual();
+        manualInvoice.clicksFilter();
+        manualInvoice.clicksCloseOnFilter();
+    }
+    //---End of Filter Invoice Manual---//
 }
