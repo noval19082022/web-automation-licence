@@ -8,20 +8,20 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
-import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
 public class OwnerRejectBookingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking = new PengajuanBookingPO(page);
+    PengajuanSewaPO pengajuanBooking = new PengajuanSewaPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
 
     @When("owner reject booking")
     public void ownerRejectBooking() {
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage.clickOnLihatDetailButton();
         billBookingManage = pengajuanBooking.ownerRejectBooking();
         billBookingManage.ownerChooseReasonReject();

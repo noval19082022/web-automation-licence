@@ -3,10 +3,13 @@ package utilities;
 import data.mamikos.Mamikos;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -16,7 +19,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -187,6 +193,17 @@ public class JavaHelpers {
     }
 
     /**
+     * extract number from string given
+     * @param baseString is the String that we want to extract
+     * @param targetString is the String that we want to replace
+     * @param replaceString is the String that we want to replace with
+     * @return
+     */
+    public static String formatString(String baseString, String targetString, String replaceString) {
+        return baseString.replace(targetString, replaceString);
+    }
+
+    /**
      * Update time string to required timezone time string
      *
      * @param String        actualTimeFormat Time Format for time input
@@ -345,12 +362,33 @@ public class JavaHelpers {
         return bytesToHexString(digest);
     }
 
+    /**
+     * Convert bytes to hex string
+     * @param bytes byte array
+     * @return
+     */
     public static String bytesToHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
             sb.append(String.format("%02x", b));
         }
         return sb.toString();
+    }
+
+    /**
+     * Generate HmacSha256
+     * @param secretKey secret key
+     * @param message desired message
+     * @return byte array
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     */
+    public static byte[] generateHmacSha256(String secretKey, String message)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac hmacSha256 = Mac.getInstance("HmacSHA256");
+        SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "HmacSHA256");
+        hmacSha256.init(keySpec);
+        return hmacSha256.doFinal(message.getBytes());
     }
     //--- Encrypt Decrypt ---//
 }

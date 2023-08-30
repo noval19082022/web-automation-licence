@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
-import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -20,13 +20,13 @@ public class OwnerAcceptBookingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking = new PengajuanBookingPO(page);
+    PengajuanSewaPO pengajuanBooking = new PengajuanSewaPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
     public void ownerAcceptBooking() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking();
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnPilihDitempat();
@@ -46,7 +46,7 @@ public class OwnerAcceptBookingSteps {
         tenantNames = table.asMaps(String.class, String.class);
         var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnPilihDitempat();
@@ -59,7 +59,7 @@ public class OwnerAcceptBookingSteps {
     @When("owner accept booking and select the room")
     public void ownerAcceptBookingAndSelectTheRoom() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking();
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnOneRooms();
@@ -79,7 +79,7 @@ public class OwnerAcceptBookingSteps {
         tenantNames = table.asMaps(String.class, String.class);
         var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
         billBookingManage.clickOnRoomNumberInput();
     }
