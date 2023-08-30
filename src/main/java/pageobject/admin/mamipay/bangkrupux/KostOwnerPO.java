@@ -6,8 +6,6 @@ import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class KostOwnerPO {
     private Page page;
     PlaywrightHelpers playwright;

@@ -9,7 +9,7 @@ Feature: Gold Plus
       | 082233545506 | 0          | qwerty123 |
     And user click "Daftar" button
     And user choose Goldplus package 1
-    Then user will see that the text "GoldPlus 1 (4 bulan) Rp224.200" is displayed
+    Then user will see that the text "GoldPlus 1 (Paket Chat) periode 4 Bulan" is displayed
 
   @TEST_LIMO-146 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
@@ -41,6 +41,7 @@ Feature: Gold Plus
     When owner click back previous button
     And user navigates to owner dashboard
     Then validate that owner have "Menunggu Pembayaran"
+    And owner should successfully log out
 
     @continue #reset GP
     Scenario: delete or reset data GP

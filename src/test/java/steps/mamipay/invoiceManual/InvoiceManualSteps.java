@@ -39,6 +39,11 @@ public class InvoiceManualSteps {
     private String char255 = JavaHelpers.getPropertyValue(invoiceManual, "char255");
     private String popUpTitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupTitle");
     private String popUpSubtitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupSubtitle");
+    private String statusInvTitle = JavaHelpers.getPropertyValue(invoiceManual, "statusInvTitle");
+    private String jenisBiayaTitle = JavaHelpers.getPropertyValue(invoiceManual, "jenisBiayaTitle");
+    private String tglInvDibuat = JavaHelpers.getPropertyValue(invoiceManual, "tglInvDibuat");
+    private String tglMulaiTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglMulaiTitle");
+    private String tglAkhirTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglAkhirTitle");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -57,6 +62,29 @@ public class InvoiceManualSteps {
         }
 
         admin.NavigateToMamipayMenu("Invoice Manual");
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.inputListingName(listing);
+        manualInvoice.inputTenantName(tenant);
+    }
+
+    @When("admin create invoice manual")
+    public void admin_create_invoice_manual(DataTable tables){
+        tenantInfo = tables.asMaps(String.class, String.class);
+        listing = tenantInfo.get(0).get("property name");
+        tenant = tenantInfo.get(0).get("tenant name");
+
+        manualInvoice.clickBuatInvoice();
+        manualInvoice.inputListingName(listing);
+        manualInvoice.inputTenantName(tenant);
+    }
+
+    @When("admin go to invoice manual page")
+    public void admin_go_to_invoive_manual_page(DataTable tables){
+        tenantInfo = tables.asMaps(String.class, String.class);
+        listing = tenantInfo.get(0).get("property name");
+        tenant = tenantInfo.get(0).get("tenant name");
+
+        manualInvoice.clickBackButtonBuatInvoice();
         manualInvoice.clickBuatInvoice();
         manualInvoice.inputListingName(listing);
         manualInvoice.inputTenantName(tenant);
@@ -87,19 +115,11 @@ public class InvoiceManualSteps {
 
         detailBiaya = tables.asMaps(String.class, String.class);
 
-        if (type.equalsIgnoreCase("Biaya Tambahan")){
-            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
-            periodeAwal = detailBiaya.get(0).get("Periode Awal");
-            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
-            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
-            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
-        } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            namaBiaya = detailBiaya.get(0).get("Nama Biaya");
-            periodeAwal = detailBiaya.get(0).get("Periode Awal");
-            periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
-            durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
-            jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
-        }
+        namaBiaya = detailBiaya.get(0).get("Nama Biaya");
+        periodeAwal = detailBiaya.get(0).get("Periode Awal");
+        periodeAkhir = detailBiaya.get(0).get("Periode Akhir");
+        durasiBiaya = detailBiaya.get(0).get("Durasi Biaya");
+        jumlahBiaya = detailBiaya.get(0).get("Jumlah Biaya");
 
         manualInvoice.selectJenisInvoice(type);
         manualInvoice.tambahBiayaButton();
@@ -261,9 +281,6 @@ public class InvoiceManualSteps {
     @Then("admin redirect to invoice manual page without confirmation")
     public void admin_redirect_to_invoice_manual_page_without_confirmation() {
         manualInvoice.assertURLInvoiceManual();
-        manualInvoice.clickBuatInvoice();
-        manualInvoice.inputListingName(listing);
-        manualInvoice.inputTenantName(tenant);
     }
 
     @When("admin selects Jenis Invoice {string} when {string}")
@@ -298,9 +315,9 @@ public class InvoiceManualSteps {
     @Then("empty state on the biaya {string} table is displayed")
     public void empty_state_on_the_biaya_table_is_displayed(String emptyState){
         if (emptyState.equalsIgnoreCase("Biaya Sewa")){
-            manualInvoice.assertEmptyStateBiayaTambahan();
-        } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
             manualInvoice.assertEmptyStateBiayaSewa();
+        } else if (emptyState.equalsIgnoreCase("Biaya Tambahan")) {
+            manualInvoice.assertEmptyStateBiayaTambahan();
         }
     }
 
@@ -347,6 +364,39 @@ public class InvoiceManualSteps {
     @Then("the Buat dan Kirim button is disabled")
     public void the_Buat_dan_Kirim_Button_is_disabled(){
         manualInvoice.assertBuatDanKirimDisable();
+    }
+
+    @When("admin search by {string} with value {string}")
+    public void admin_search_by_with_value(String searchBy, String value){
+        if (searchBy.equalsIgnoreCase("Nomor Invoice without change Search By")){
+            admin.NavigateToMamipayMenu("Invoice Manual");
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Penyewa")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nama Listing")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        } else if (searchBy.equalsIgnoreCase("Nomor Invoice")) {
+            manualInvoice.selectSearchBy(searchBy);
+            manualInvoice.enterSearchValue(value);
+        }
+    }
+
+    @Then("the result is displayed according the value {string}, {string}, {string}")
+    public void the_result_is_displayed_according_the_value(String result1, String result2, String result3){
+        manualInvoice.assertNoInvoice(result1);
+        manualInvoice.assertDetailPenyewa(result2);
+        manualInvoice.assertNamaListing(result3);
+    }
+
+    @Then("the result is displayed according the value Search per word {string}")
+    public void the_result_is_displayed_according_the_value_Search_per_word(String result){
+        if (result.equalsIgnoreCase("Data yang dicari tidak ditemukan")){
+            manualInvoice.assertNotFound(result);
+        } else {
+            manualInvoice.assertNamaListing(result);
+        }
     }
 
     //---Biaya Tambahan Pop Up---//
@@ -817,4 +867,57 @@ public class InvoiceManualSteps {
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
     //---End of Biaya Sewa---//
+
+    //---Filter Invoice Manual---//
+    @When("admin clicks Filter in Invoice Manual")
+    public void admin_clicks_Filter_in_Invoice_Manual(){
+        manualInvoice.clicksFilter();
+        manualInvoice.assertFilterTitleNSubtitle();
+        manualInvoice.assertStatusInvTitle(statusInvTitle);
+        manualInvoice.assertJenisBiaya(jenisBiayaTitle);
+        manualInvoice.assertTanggalInvoiceDibuat(tglInvDibuat);
+        manualInvoice.assertTanggalMulaiTitle(tglMulaiTitle);
+        manualInvoice.assertTanggalAkhirTitle(tglAkhirTitle);
+    }
+
+    @When("admin clicks {string} button on Filter")
+    public void admin_clicks_button_on_Filter(String btn){
+        if (btn.equalsIgnoreCase("Terapkan")){
+            manualInvoice.clicksTerapkan();
+        } else if (btn.equalsIgnoreCase("Reset")) {
+            manualInvoice.clicksFilter();
+            manualInvoice.clicksReset();
+        } else if (btn.equalsIgnoreCase("Main Reset")) {
+            manualInvoice.clicksMainReset();
+            manualInvoice.counterOnFilterIsHidden();
+        }
+    }
+
+    @Then("{string} Status Invoice is displayed")
+    public void Status_Invoice_is_displayed(String result){
+        manualInvoice.assertValueStatusInv(result);
+    }
+
+    @Then("the counter on filter is disappears")
+    public void the_counter_on_filter_is_disappears(){
+        manualInvoice.counterOnFilterIsHidden();
+    }
+
+    @When("admin ticks {string} on the {string} dropdown")
+    public void admin_ticks_on_the_dropdown(String statusInv, String dropdown){
+        if (dropdown.equalsIgnoreCase("Status Invoice")){
+            manualInvoice.ticksStatusInvoice(statusInv);
+        } else if (dropdown.equalsIgnoreCase("Jenis Biaya")) {
+
+        }
+    }
+
+    @When("admin refresh page and clicks Filter in Invoice Manual")
+    public void admin_refresh_page_and_clicks_Filter_in_Invoice_Manual(){
+        //refresh page first, to check default Unpaid filter
+        manualInvoice.refreshPageInvoiceManual();
+        manualInvoice.clicksFilter();
+        manualInvoice.clicksCloseOnFilter();
+    }
+    //---End of Filter Invoice Manual---//
 }

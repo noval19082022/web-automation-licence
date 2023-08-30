@@ -93,14 +93,14 @@ public class TenantBookingSteps {
 
     @And("user cancel booking")
     public void userCancelBooking() {
-        page.navigate("https://jambu.kerupux.com/user/booking/");
+        page.navigate(Mamikos.URL + "/user/booking/");
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBooking();
     }
 
     @And("user cancel booking with reason {string}")
     public void user_cancel_booking_with_reason(String reason) throws InterruptedException{
-        page.navigate("https://jambu.kerupux.com/user/booking/");
+        page.navigate(Mamikos.URL + "/user/booking/");
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBookingWithReason(reason);
         if (bookingForm.waitUntilSuccessCancelHeadingVisible()) {

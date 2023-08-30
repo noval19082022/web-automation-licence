@@ -102,9 +102,9 @@ public class BillAndBookingManagementPO {
     /**
      * Click ok button after owner accepted new tenant
      */
-    public PengajuanBookingPO clickOkButton() {
+    public PengajuanSewaPO clickOkButton() {
         playwright.clickAndWaitNavigation(okButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -127,10 +127,10 @@ public class BillAndBookingManagementPO {
     /**
      * Click pilih button after owner reject  tenant
      */
-    public PengajuanBookingPO clickPilihButton() {
+    public PengajuanSewaPO clickPilihButton() {
         playwright.clickOn(pilihButton);
         playwright.clickOn(doneButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -144,7 +144,7 @@ public class BillAndBookingManagementPO {
     /**
      * Click on reason reject booking
      */
-    public PengajuanBookingPO ownerSelectRejectBookingKos(String reason) {
+    public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
         String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
@@ -154,7 +154,7 @@ public class BillAndBookingManagementPO {
         playwright.pageScrollUntilElementIsVisible(statusTandC);
         playwright.clickOn(statusTandC);
         playwright.clickOn(pilihButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -167,9 +167,9 @@ public class BillAndBookingManagementPO {
     /**
      * Click on reason reject booking
      */
-    public PengajuanBookingPO ownerClickOnMakeRulesBookingButton() {
+    public PengajuanSewaPO ownerClickOnMakeRulesBookingButton() {
         playwright.clickOn(makeRuleButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
     /**
      * Check direct make rule page

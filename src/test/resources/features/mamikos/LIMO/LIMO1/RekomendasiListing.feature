@@ -1,3 +1,4 @@
+@regression @LIMO1 @LIMO1-staging
 Feature: Rekomendasi Listing
 
   @TEST_LIMO-305
@@ -7,5 +8,21 @@ Feature: Rekomendasi Listing
       | phone stag    | password  |
       | 0812233445566 | qwerty123 |
     Then verify message "Belum ada kos yang di favorit." di Favorit page
+    And verify no rekomendasi on kos saya page
+
+  @TEST_LIMO-302
+  Scenario: There is no rekomendasi
+    Given user go to mamikos homepage
+    And user login as tenant via phone number:
+      | phone stag    | password  |
+      | 0827777777774 | qwerty123 |
+    When tenant search kost then go to apartment details:
+      | kost name stag                | kost name prod                                      |
+      | Silalay 123|  |
+    Then tenant open tab pernah dilihat at menu favorite
+    Then tenant verify the property with name "Silalay 123" is appear
+    And tenant verify the Hapus History button is appear
+    When tenant open tab difavoritkan at menu favorite
+    Then user verify rekomendasi listing section didn't display
     And verify no rekomendasi on kos saya page
 

@@ -562,7 +562,7 @@ public class PropertySayaPO {
             dialog.dismiss();
         });
         playwright.clickOn(locationTextBox);
-        locationTextBox.fill(locationName);
+        playwright.fill(locationTextBox,locationName);
     }
 
     /**
@@ -580,7 +580,7 @@ public class PropertySayaPO {
     public void enterAddressNotes(String notes) {
         playwright.pageScrollUntilElementIsVisible(addressNotesInput);
         playwright.clearText(addressNotesInput);
-        addressNotesInput.fill(notes);
+        playwright.fill(addressNotesInput,notes);
     }
 
 }

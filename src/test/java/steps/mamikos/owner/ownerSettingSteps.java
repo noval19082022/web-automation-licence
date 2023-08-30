@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerSettingPO;
 import utilities.PlaywrightHelpers;
@@ -53,5 +54,33 @@ public class ownerSettingSteps {
         } else if (ownerSettingPO.getMessageValidation() == "Terjadi Galat. Silahkan coba lagi atau tunggu beberapa menit."){
             ownerSettingPO.clickOnConfirmValidation();
         }
+    }
+
+    @And("owner fills nama lengkap owner {string}")
+    public void ownerFillsNamaLengkapOwner(String text) {
+        ownerSettingPO.inputNameOwner(text);
+        ownerSettingPO.clickOnSubmitButton();
+        playwright.hardWait(2);
+    }
+
+    @Then("verify nama lengkap owner")
+    public void verifyNamaLengkapOwner() {
+        Assert.assertEquals(ownerSettingPO.getUsername(), ownerSettingPO.getNameOwner(), "Username doesn't match!");
+    }
+
+    @Then("verify the profile picture is displayed")
+    public void verifyTheProfilePictureIsDisplayed() {
+        Assert.assertTrue(ownerSettingPO.isProfilePictureDisplayed(), "Profile picture doesn't match!");
+    }
+
+    @And("owner click on {string}")
+    public void ownerClickOn(String textDescription) {
+        ownerSettingPO.clickOnPengaturanAkun(textDescription);
+    }
+
+    @When("owner delete nama lengkap owner")
+    public void ownerDeleteNamaLengkapOwner() {
+        ownerSettingPO.clearNamaLengkapOwner();
+        Assert.assertTrue(ownerSettingPO.isSimpanDisable(), "Button is enable!");
     }
 }
