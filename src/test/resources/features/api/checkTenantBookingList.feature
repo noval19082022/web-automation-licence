@@ -7,7 +7,8 @@ Feature: Tenant Booking List API
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And playwright collect tenant cookies
-    Then playwright get tenant booking status with parameter:
-      | page | 1 |
-      | sort | |
+    And playwright get tenant booking status with parameter:
+      | page   | 1      |
+      | sort   |        |
       | status | booked |
+    Then playwright batalkan tenant booking

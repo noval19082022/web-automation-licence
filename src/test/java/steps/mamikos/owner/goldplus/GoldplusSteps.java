@@ -13,6 +13,7 @@ import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
 import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
@@ -34,22 +35,21 @@ public class GoldplusSteps {
     PanduanGoldplusPO panduanGP = new PanduanGoldplusPO(page);
     MamiAdsPO mamiads = new MamiAdsPO(page);
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
+    GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
-    public void user_wants_to_subscribe_goldplus(int pacakge) {
-       if (home.getURL().equals("https://owner-jambu.kerupux.com/goldplus/submission/packages")){
-            goldplus.clickOnGPPackage(pacakge);
+    public void user_wants_to_subscribe_goldplus(int paket) {
+        if (home.getURL().equals(Mamikos.URL+"/goldplus/submission/packages")){
+            goldplus.clickOnGPPackage(paket);
         } else{
-            navigate.userNavigateTo("/goldplus/submission/periode/gp"+pacakge);
+            navigate.userNavigateTo("/goldplus/submission/periode/gp"+paket);
         }
-        playwright.hardWait(3000);
-        if (playwright.isTextDisplayed("1 Minggu") == true) {
+
+        if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
-        playwright.hardWait(3000);
-        playwright.clickOnTextButton("Pilih");
-        playwright.hardWait(3000);
-        playwright.clickOnText("Bayar Sekarang");
+        gpSubmission.clicksOnPilihPaketButton();
+        gpSubmission.clicksOnBayarSekarangButton();
     }
 
     @When("user choose Goldplus package {int}")

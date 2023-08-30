@@ -37,6 +37,16 @@ public class ApiPlaywrightHelpers {
     }
 
     /**
+     * Set base URL with headers
+     * @param url
+     * @param headers
+     * @return
+     */
+    public static APIRequestContext setBaseUrl(String url, Map<String, String> headers) {
+        return PlaywrightSourceManager.getLocalPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(url).setExtraHTTPHeaders(headers));
+    }
+
+    /**
      * get cookies list
      * @return List<Cookie>
      */

@@ -15,7 +15,7 @@ public class BookingFormPO {
     Locator bookingConfirmationCheckmark;
     Locator kirimPengajuanKePemilikButton;
     Locator lihatSelengkapnyaWaitingConfirmationTextLink;
-    Locator batalkanBookingButton;
+    Locator batalkanPengajuanSewaButton;
     Locator cancelReasonButton;
     Locator confirmCancelButton;
     Locator successCancel;
@@ -37,11 +37,11 @@ public class BookingFormPO {
     public BookingFormPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        this.ajukanSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
+        this.ajukanSewaButton = playwright.getButtonBySetName("Ajukan Sewa", true);
         this.bookingConfirmationCheckmark = page.getByTestId("booking-confirmationModal").locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.kirimPengajuanKePemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim pengajuan ke pemilik"));
         this.lihatSelengkapnyaWaitingConfirmationTextLink = page.locator("//*[@class='--waiting']/parent::*/following-sibling::button");
-        this.batalkanBookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Booking"));
+        this.batalkanPengajuanSewaButton = page.getByTestId("detailBookingCardCancel_btn");
         this.confirmCancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
         this.successCancel = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Anda berhasil dibatalkan"));
         bookingKamuDibatalkan = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Booking Kamu Dibatalkan"));
@@ -65,7 +65,7 @@ public class BookingFormPO {
      * Click on ajukan sewa button on booking form
      */
     public void clickOnAjukanSewaButton() {
-        ajukanSewaButton.click();
+        playwright.clickOn(ajukanSewaButton);
     }
 
     /**
@@ -147,7 +147,7 @@ public class BookingFormPO {
             bookingNeedConfirmation = playwright.getLocators(tungguKonfirmasiPemilik).size();
             for (int i = 0; i < bookingNeedConfirmation; i++) {
                 playwright.clickOn(lihatSelengkapnyaWaitingConfirmationTextLink.first());
-                playwright.clickOn(batalkanBookingButton.first());
+                playwright.clickOn(batalkanPengajuanSewaButton.first());
                 playwright.clickOn(cancelReasonButton);
                 playwright.clickOn(confirmCancelButton);
                 if (waitUntilSuccessCancelHeadingVisible()) {
@@ -167,8 +167,8 @@ public class BookingFormPO {
         for (int i = 0; i < 2; i++) {
             lihatSelengkapnyaWaitingConfirmationTextLink.click();
         }
-        if (batalkanBookingButton.isVisible()) {
-            batalkanBookingButton.click();
+        if (batalkanPengajuanSewaButton.isVisible()) {
+            batalkanPengajuanSewaButton.click();
             String selector = "//*[@class='radio success']/label[contains(.,'" + reason + "')]";
             ElementHandle element = page.querySelector(selector);
             element.click();

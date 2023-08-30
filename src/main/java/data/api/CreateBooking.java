@@ -19,7 +19,8 @@ public class CreateBooking {
             contactIntroduction,
             contactWorkPlace,
             firstPaymentType,
-            sessionId;
+            sessionId,
+            tenantProfileResponse;
 
     @Setter @Getter
     private static int duration,
@@ -36,7 +37,7 @@ public class CreateBooking {
             isBringChild;
 
     @Setter @Getter
-    private static long contactPhone;
+    private static Object contactPhone;
 
     @Setter @Getter
     private static Map<Object, Object> createBookingBody = new HashMap<>();

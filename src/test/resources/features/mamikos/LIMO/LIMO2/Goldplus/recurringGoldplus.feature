@@ -48,7 +48,7 @@ Feature: Check all entry point Recurring GP
     And owner wants to extends Goldplus from chatroom
     Then owner will see that the text "GP1 3 bulan" is displayed
 
-  @continue
+  @resetGP
     Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     And user wants to reset Goldplus for owner with phone number "082233545514"
