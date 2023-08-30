@@ -3,10 +3,15 @@ package utilities;
 import data.mamikos.Mamikos;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -141,7 +146,7 @@ public class JavaHelpers {
     /**
      * Access properties and return as Properties
      * @param propertyfile desired properties file
-     * @return
+     * @return Properties data type
      */
     public static Properties accessPropertiesFile(String propertyfile) {
         Properties prop = new Properties();
@@ -185,6 +190,17 @@ public class JavaHelpers {
     public static int extractNumber(String word) {
         String str = word.replaceAll("[A-Z a-z . / : , ' ; ( ) -]", "").trim();
         return Integer.parseInt(str);
+    }
+
+    /**
+     * extract number from string given
+     * @param baseString is the String that we want to extract
+     * @param targetString is the String that we want to replace
+     * @param replaceString is the String that we want to replace with
+     * @return
+     */
+    public static String formatString(String baseString, String targetString, String replaceString) {
+        return baseString.replace(targetString, replaceString);
     }
 
     /**
@@ -327,5 +343,52 @@ public class JavaHelpers {
     public static String formatString(String format, Object... args)  {
         return String.format(format, args);
     }
+
+    /**
+     * Remove extra new line and trim
+     * @param removeLineString
+     * @return String data type
+     */
+    public static String removeExtraNewLine(String removeLineString) {
+        return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
+    }
     //--- String Manipulator ---//
+
+    //--- Encrypt Decrypt ---//
+    public static String generateMd5(String md5Target) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(md5Target.getBytes());
+        byte[] digest = md.digest();
+        return bytesToHexString(digest);
+    }
+
+    /**
+     * Convert bytes to hex string
+     * @param bytes byte array
+     * @return
+     */
+    public static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Generate HmacSha256
+     * @param secretKey secret key
+     * @param message desired message
+     * @return byte array
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     */
+    public static byte[] generateHmacSha256(String secretKey, String message)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac hmacSha256 = Mac.getInstance("HmacSHA256");
+        SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "HmacSHA256");
+        hmacSha256.init(keySpec);
+        return hmacSha256.doFinal(message.getBytes());
+    }
+    //--- Encrypt Decrypt ---//
 }

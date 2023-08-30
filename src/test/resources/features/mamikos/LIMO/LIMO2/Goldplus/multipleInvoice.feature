@@ -31,7 +31,7 @@ Feature: Multiple Invoice
   Scenario: Check redirection Atur Promo
     Given owner navigates to property saya kos
     When owner search kost "Kos Premium Automation 517" on property saya page
-    And owner atur promo owner
+    And owner cek promo owner when not GP
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
   @TEST_LIMO-2336 @checkChatlistMultipleInvoice @continue
@@ -52,7 +52,7 @@ Feature: Multiple Invoice
     When user click Lihat Tagihan on riwayat
     Then payment owner success using ovo as payment method
 
-  @continue
+  @resetGP
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

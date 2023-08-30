@@ -35,7 +35,7 @@ Feature: Owner can see MamiFoto Purchase History
     When click Hubungi Kami button
     Then owner connected to WA CS Mamikos "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"
 
-  @checkOldProphoto @continue
+  @checkOldProphoto
     Scenario: Owner has at least one invoice old Prophoto packages or new MamiFoto packages
     When owner set active page to 0
     * owner click Lihat Detail Transaksi old Pro Photo with status "Pro Photo Pembayaran Berhasil"

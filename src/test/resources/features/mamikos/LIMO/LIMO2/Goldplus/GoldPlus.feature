@@ -41,6 +41,7 @@ Feature: Gold Plus
     When owner click back previous button
     And user navigates to owner dashboard
     Then validate that owner have "Menunggu Pembayaran"
+    And owner should successfully log out
 
     @continue #reset GP
     Scenario: delete or reset data GP
