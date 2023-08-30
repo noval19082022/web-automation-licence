@@ -239,7 +239,7 @@ Feature: Broadcast Chat Owner
     And user click "Pilih Pesan"
     And user input message on Broadcast Chat "<Messages>"
     And user click "Preview Pesan" button
-    Then user should see the message "Mohon untuk tidak mengisi nomor handphone/email/link" displayed under the broadcast text field
+    Then user should see the message "Mohon untuk tidak mengisi nomor handphone/email/link" displayed under text field
     Examples:
       | Messages                                     |
       | Kirim email ke mamattheend@mail.com          |
