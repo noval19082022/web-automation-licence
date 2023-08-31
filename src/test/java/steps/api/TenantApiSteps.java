@@ -1,7 +1,6 @@
 package steps.api;
 
 import api.Requirement;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
@@ -15,7 +14,6 @@ import data.api.UserCookies;
 import data.mamikos.ApiEndpoints;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;

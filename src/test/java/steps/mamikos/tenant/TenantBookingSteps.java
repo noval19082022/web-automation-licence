@@ -18,8 +18,6 @@ import pageobject.tenant.profile.RiwayatBookingPO;
 import java.util.List;
 import java.util.Map;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class TenantBookingSteps {
     Page page = ActiveContext.getActivePage();
     HomePO homePO = new HomePO(page);
