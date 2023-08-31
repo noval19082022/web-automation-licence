@@ -6,7 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-public class PengajuanBookingPO {
+public class PengajuanSewaPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locator;
@@ -28,7 +28,7 @@ public class PengajuanBookingPO {
 
 
 
-    public PengajuanBookingPO(Page page) {
+    public PengajuanSewaPO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
         locator = new LocatorHelpers(page);

@@ -6,12 +6,15 @@ import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.invoiceManual.InvoiceManualPO;
 import pageobject.common.HomePO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +42,11 @@ public class InvoiceManualSteps {
     private String char255 = JavaHelpers.getPropertyValue(invoiceManual, "char255");
     private String popUpTitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupTitle");
     private String popUpSubtitleChangeInvConfirmation = JavaHelpers.getPropertyValue(invoiceManual, "changeInvPopupSubtitle");
+    private String statusInvTitle = JavaHelpers.getPropertyValue(invoiceManual, "statusInvTitle");
+    private String jenisBiayaTitle = JavaHelpers.getPropertyValue(invoiceManual, "jenisBiayaTitle");
+    private String tglInvDibuat = JavaHelpers.getPropertyValue(invoiceManual, "tglInvDibuat");
+    private String tglMulaiTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglMulaiTitle");
+    private String tglAkhirTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglAkhirTitle");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -862,4 +870,121 @@ public class InvoiceManualSteps {
         manualInvoice.setJumlahBiayaInvoiceManual(jumlahBiaya);
     }
     //---End of Biaya Sewa---//
+
+    //---Filter Invoice Manual---//
+    @When("admin clicks Filter in Invoice Manual")
+    public void admin_clicks_Filter_in_Invoice_Manual(){
+        manualInvoice.clicksFilter();
+        manualInvoice.assertFilterTitleNSubtitle();
+        manualInvoice.assertStatusInvTitle(statusInvTitle);
+        manualInvoice.assertJenisBiaya(jenisBiayaTitle);
+        manualInvoice.assertTanggalInvoiceDibuat(tglInvDibuat);
+        manualInvoice.assertTanggalMulaiTitle(tglMulaiTitle);
+        manualInvoice.assertTanggalAkhirTitle(tglAkhirTitle);
+    }
+
+    @When("admin clicks {string} button on Filter")
+    public void admin_clicks_button_on_Filter(String btn){
+        if (btn.equalsIgnoreCase("Terapkan")){
+            manualInvoice.clicksTerapkan();
+        } else if (btn.equalsIgnoreCase("Reset")) {
+            manualInvoice.clicksFilter();
+            manualInvoice.clicksReset();
+        } else if (btn.equalsIgnoreCase("Main Reset")) {
+            manualInvoice.clicksMainReset();
+            manualInvoice.counterOnFilterIsHidden();
+        }
+    }
+
+    @Then("{string} Status Invoice is displayed")
+    public void Status_Invoice_is_displayed(String result){
+        manualInvoice.assertValueStatusInv(result);
+    }
+
+    @Then("the counter on filter is disappears")
+    public void the_counter_on_filter_is_disappears(){
+        manualInvoice.counterOnFilterIsHidden();
+    }
+
+    @When("admin ticks {string} on the {string} dropdown")
+    public void admin_ticks_on_the_dropdown(String value, String dropdown){
+        if (dropdown.equalsIgnoreCase("Status Invoice")){
+            manualInvoice.ticksStatusInvoice(value);
+        } else if (dropdown.equalsIgnoreCase("Jenis Biaya")) {
+            if (value.equalsIgnoreCase("Biaya Tambahan")){
+                manualInvoice.tickJenisBiayaTambahan(value);
+            } else if (value.equalsIgnoreCase("Biaya Sewa")) {
+                manualInvoice.tickJenisBiayaSewa(value);
+            }
+        }
+    }
+
+    @Then("{string} Jenis Biaya is displayed")
+    public void Jenis_Biaya_is_displayed(String result){
+        manualInvoice.assertValueJenisBiaya(result);
+    }
+
+    @When("admin refresh page and clicks Filter in Invoice Manual")
+    public void admin_refresh_page_and_clicks_Filter_in_Invoice_Manual(){
+        //refresh page first, to check default Unpaid filter
+        manualInvoice.refreshPageInvoiceManual();
+        manualInvoice.clicksFilter();
+        manualInvoice.clicksCloseOnFilter();
+    }
+
+    @When("admin selects the date for {string}")
+    public void admin_selects_the_date_for(String date){
+        if (date.equalsIgnoreCase("today")){
+            manualInvoice.clickCalViewOnTglMulai();
+            manualInvoice.setTanggalMulai(date);
+        } else if (date.equalsIgnoreCase("tomorrow")) {
+            manualInvoice.clickCalViewOnTglAkhir();
+            manualInvoice.setTanggalAkhir(date);
+            manualInvoice.clicksTerapkan();
+        }
+    }
+
+    @When("admin selects the date for {string} with clicks Terapkan")
+    public void admin_selects_the_date_for_with_clicks_Terapkan(String date){
+        manualInvoice.clickCalViewOnTglMulai();
+        manualInvoice.setTanggalMulai(date);
+        manualInvoice.clicksTerapkan();
+    }
+
+    @Then("the Tanggal Invoice Dibuat {string} is displayed according to the filter")
+    public void the_Tanggal_Invoice_Dibuat_is_displayed_according_to_the_filter(String result){
+        if (result.equalsIgnoreCase("today")){
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date day = new Date();
+            String expectedDate = today.format(day);
+            manualInvoice.assertDibuatOleh(expectedDate);
+        }
+    }
+
+    @Then("the {string}, {string}, {string}, {string} are displayed according to the search and filter")
+    public void are_displayed_according_to_the_search_and_filter(String result1, String result2, String result3, String result4){
+        manualInvoice.assertNamaListing(result1);
+        manualInvoice.assertValueStatusInv(result2);
+        manualInvoice.assertValueJenisBiaya(result3);
+        if (result4.equalsIgnoreCase("today")){
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date day = new Date();
+            String expectedDate = today.format(day);
+            manualInvoice.assertDibuatOleh(expectedDate);
+        }
+    }
+
+    @When("admin ticks {string} on the {string} dropdown without clicks Terapkan")
+    public void admin_ticks_on_the_dropdown_without_clicks_Terapkan(String value, String dropdown){
+        if (dropdown.equalsIgnoreCase("Status Invoice")){
+            manualInvoice.ticksStatusInvoiceWithoutClicksTerapkan(value);
+        } else if (dropdown.equalsIgnoreCase("Jenis Biaya")) {
+            if (value.equalsIgnoreCase("Biaya Tambahan")){
+                manualInvoice.tickJenisBiayaTambahanWithoutClicksTerapkan(value);
+            } else if (value.equalsIgnoreCase("Biaya Sewa")) {
+                manualInvoice.tickJenisBiayaSewaWithoutClicksTerapkan(value);
+            }
+        }
+    }
+    //---End of Filter Invoice Manual---//
 }

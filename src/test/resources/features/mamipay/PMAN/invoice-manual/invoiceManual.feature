@@ -234,7 +234,69 @@
       When admin search by "Nomor Invoice" with value "12345"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
 
-    @TEST_PMAN-6046
+    @continue @TEST_PMAN-6046
     Scenario: Search Nama Penyewa per word with value "asdf yoohoo"
       When admin search by "Nama Penyewa" with value "asdf yoohoo"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Paid" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Paid" on the "Status Invoice" dropdown
+      Then "paid" Status Invoice is displayed
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Unpaid" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown
+      Then "unpaid" Status Invoice is displayed
+
+    @continue @TEST_PMAN-6213
+    Scenario: Check Status Invoice "Expired" in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Expired" on the "Status Invoice" dropdown
+      Then "expired" Status Invoice is displayed
+
+    @continue @TEST_PMAN-6215
+    Scenario: Filter Tanggal Mulai and Tanggal Akhir
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin selects the date for "today"
+      And admin selects the date for "tomorrow"
+      Then the Tanggal Invoice Dibuat "today" is displayed according to the filter
+
+    @continue @TEST_PMAN-6214
+    Scenario: Check Jenis Biaya Tambahan in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown
+      Then "Biaya Tambahan" Jenis Biaya is displayed
+
+    @continue @TEST_PMAN-6214
+    Scenario: Check Jenis Biaya Sewa in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Biaya Sewa" on the "Jenis Biaya" dropdown
+      Then "Biaya Sewa" Jenis Biaya is displayed
+
+    @continue @TEST_PMAN-5900
+    Scenario: Search and Filter Invoice Manual
+      When admin clicks "Main Reset" button on Filter
+      And admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown without clicks Terapkan
+      And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown without clicks Terapkan
+      And admin selects the date for "today" with clicks Terapkan
+      Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
+
+    @TEST_PMAN-6212
+    Scenario: Filter Invoice Manual
+      When admin refresh page and clicks Filter in Invoice Manual
+      #Default Filter Unpaid
+      And admin clicks "Terapkan" button on Filter
+      Then "unpaid" Status Invoice is displayed
+      When admin clicks "Reset" button on Filter
+      Then the counter on filter is disappears

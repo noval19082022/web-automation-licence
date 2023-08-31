@@ -9,6 +9,7 @@ Feature: Subscribe GP from all entry point
       | <ownerPhone> | <password> |
     And user click info untuk anda "<infoUntukAnda>"
     Then user verify "<expectedDisplay>" is appear
+    And owner should successfully log out
     Examples:
       | ownerPhone     | password  | infoUntukAnda                                                                          | expectedDisplay            |
       | 081905128517   | qwerty123 | Kuota chat habis. 2 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat. | list of Goldplus package   |
