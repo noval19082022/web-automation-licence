@@ -34,10 +34,14 @@ public class PostBookingSteps {
     @When("playwright make json file for tenant booking from tenant profile data")
     public void playwrightMakeJsonFileForTenantBookingFromTenantProfileData() {
         String todayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 0, 0);
-        String plusOneMonthDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 1, 0);
+        String currentDayOfMonth = JavaHelpers.getCostumDateOrTime("d", 0, 0, 0);
+        String plusOneMonthDate = currentDayOfMonth.equalsIgnoreCase("31")
+                ? JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 1, 0)
+                : JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 0, 0);
         String jsonString = CreateBooking.getTenantProfileResponse();
         boolean isMarried = false;
         boolean isMarriedNull = false;
+        String paymentType = CreateBooking.isDownPaymentActive() ? "dp" : "full";
 
         JsonHelpers.createJsonFileFromJsonString(jsonString, "target/tenantProfile.json");
 
@@ -70,7 +74,6 @@ public class PostBookingSteps {
         CreateBooking.setContactIdentity("Mamitest" + CreateBooking.getContactPhone());
         CreateBooking.setContactIntroduction("Saya dari tadi cuman ingin tidur");
         CreateBooking.setContactWorkPlace("Mamitest Workplace");
-        CreateBooking.setFlashSale(false);
         CreateBooking.setMarried(isMarried);
         CreateBooking.setBringChild(isMarried);
         CreateBooking.setMarriageBookId(0);
@@ -79,7 +82,7 @@ public class PostBookingSteps {
         CreateBooking.setPhotoIdentityId(0);
         CreateBooking.setSessionId("QA Mamitest Session");
         CreateBooking.setTotalRenter(1);
-        CreateBooking.setFirstPaymentType("full");
+        CreateBooking.setFirstPaymentType(paymentType);
 
         createBookingBody.put("rent_count_type", CreateBooking.getRentCountType());
         createBookingBody.put("checkin", CreateBooking.getCheckIn());
