@@ -25,7 +25,12 @@ public class Requirement {
         return JavaHelpers.bytesToHexString(JavaHelpers.generateHmacSha256(ApiEndpoints.SECRET_KEY, data));
     }
 
-    public static Map<String, String> mamikosStandartHeaders(String signature) {
+    /**
+     * Create standard headers for mamikos api
+     * @param signature signature key
+     * @return headers map
+     */
+    public static Map<String, String> mamikosStandardHeaders(String signature) {
         headers.put("Authorization", "GIT "+ signature + ":" + CreateDeviceId.getDeviceToken());
         headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
         headers.put("Content-Type", "application/json");

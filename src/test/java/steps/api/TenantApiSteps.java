@@ -48,7 +48,7 @@ public class TenantApiSteps {
     public void playwrightGetTenantDataProfile() throws NoSuchAlgorithmException, InvalidKeyException {
         var tenantProfileEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.TENANT_PROFILE;
         var signature = Requirement.createSignatureKey("GET", tenantProfileEndpoint);
-        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandartHeaders(signature));
+        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandardHeaders(signature));
         tenantProfileResponse = tenantProfileRequest.get(tenantProfileEndpoint, RequestOptions.create().setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(tenantProfileResponse.url());
         System.out.println(tenantProfileResponse.text());
@@ -63,7 +63,7 @@ public class TenantApiSteps {
         var roomId = roomIdOrSongId.get("songId");
         var kosDetailEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.KOS_DETAIL + "/" + roomIdOrSongId.get("songId");
         var signature = Requirement.createSignatureKey("GET", kosDetailEndpoint);
-        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandartHeaders(signature));
+        tenantProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandardHeaders(signature));
         tenantProfileResponse = tenantProfileRequest.get(kosDetailEndpoint, RequestOptions.create().setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(tenantProfileResponse.url());
         Assert.assertTrue(tenantProfileResponse.ok());

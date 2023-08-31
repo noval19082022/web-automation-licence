@@ -113,7 +113,7 @@ public class PostBookingSteps {
         var createBookingEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{songId}/{roomTypeId}", songId + "/" + roomTypeId);
         var signature = Requirement.createSignatureKey("POST", createBookingEndpoint);
         bookingBody = CreateBooking.getCreateBookingBody();
-        createBookingRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, Requirement.mamikosStandartHeaders(signature));
+        createBookingRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, Requirement.mamikosStandardHeaders(signature));
         createBookingResponse = createBookingRequest.post(createBookingEndpoint, RequestOptions.create()
                 .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN)
                 .setData(bookingBody));
