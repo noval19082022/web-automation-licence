@@ -1134,7 +1134,7 @@ public class InvoiceManualPO {
      * click on Filter
      */
     public void clicksFilter(){
-        filter.click();
+        playwright.clickOn(filter);
     }
 
     /**
@@ -1195,15 +1195,15 @@ public class InvoiceManualPO {
      * click Close (X) on Filter
      */
     public void clicksCloseOnFilter(){
-        closeFilterBtn.click();
-        filter.click();
+        playwright.clickOn(closeFilterBtn);
+        playwright.clickOn(filter);
     }
 
     /**
      * click on Terapkan button
      */
     public void clicksTerapkan(){
-        terapkanBtn.click();
+        playwright.clickOn(terapkanBtn);
     }
 
     /**
@@ -1219,7 +1219,7 @@ public class InvoiceManualPO {
      * click Reset button on Filter pop up
      */
     public void clicksReset(){
-        resetBtn.click();
+        playwright.clickOn(resetBtn);
     }
 
     /**
@@ -1233,7 +1233,7 @@ public class InvoiceManualPO {
      * clicks Main Reset button on Invoice Manual
      */
     public void clicksMainReset(){
-        mainResetBtn.click();
+        playwright.clickOn(mainResetBtn);
     }
 
     /**
@@ -1242,14 +1242,14 @@ public class InvoiceManualPO {
      */
     public void ticksStatusInvoice(String statusInv){
         //clicks Status Invoice dropdown
-        statusInvDropdown.click();
+        playwright.clickOn(statusInvDropdown);
 
         //ticks Paid/Unpaid/Expired
         tickPaid = page.locator("//p[contains(., '" +statusInv+ "')]");
-        tickPaid.click();
+        playwright.clickOn(tickPaid);
 
         //clicks Terapkan button
-        terapkanBtn.click();
+        playwright.clickOn(terapkanBtn);
     }
 
     /**
@@ -1259,11 +1259,11 @@ public class InvoiceManualPO {
      */
     public void ticksStatusInvoiceWithoutClicksTerapkan(String statusInv){
         //clicks Status Invoice dropdown
-        statusInvDropdown.click();
+        playwright.clickOn(statusInvDropdown);
 
         //ticks Paid/Unpaid/Expired
         tickPaid = page.locator("//p[contains(., '" +statusInv+ "')]");
-        tickPaid.click();
+        playwright.clickOn(tickPaid);
     }
 
     /**
@@ -1273,11 +1273,11 @@ public class InvoiceManualPO {
      */
     public void tickJenisBiayaTambahanWithoutClicksTerapkan(String value){
         //clicks Jenis Biaya dropdown
-        jenisBiayaDropdown.click();
+        playwright.clickOn(jenisBiayaDropdown);
 
         //biaya tambahan
         tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
-        tickJenisBiaya.click();
+        playwright.clickOn(tickJenisBiaya);
     }
 
     /**
@@ -1287,11 +1287,11 @@ public class InvoiceManualPO {
      */
     public void tickJenisBiayaSewaWithoutClicksTerapkan(String value){
         //clicks Jenis Biaya dropdown
-        jenisBiayaDropdown.click();
+        playwright.clickOn(jenisBiayaDropdown);
 
         //biaya sewa
         tickJenisBiaya = page.locator("//div[@data-testid='select-checkbox-rent-1']//p[contains(text(),'" +value+ "')]");
-        tickJenisBiaya.click();
+        playwright.clickOn(tickJenisBiaya);
     }
 
     /**
@@ -1305,14 +1305,14 @@ public class InvoiceManualPO {
      * clicks Calendar View on Tanggal Mulai
      */
     public void clickCalViewOnTglMulai(){
-        calViewTglMulai.click();
+        playwright.clickOn(calViewTglMulai);
     }
 
     /**
      * clicks Calendar View on Tanggal Akhir
      */
     public void clickCalViewOnTglAkhir(){
-        calViewTglAkhir.click();
+        playwright.clickOn(calViewTglAkhir);
     }
 
     /**
@@ -1325,7 +1325,7 @@ public class InvoiceManualPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             startDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(0);
-            startDate.click();
+            playwright.clickOn(startDate);
         } else if (date.equalsIgnoreCase("tomorrow")) {
             //get tomorrow date
             Calendar calendar = Calendar.getInstance();
@@ -1333,7 +1333,7 @@ public class InvoiceManualPO {
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
-            startDate.click();
+            playwright.clickOn(startDate);
         }
     }
 
@@ -1347,7 +1347,7 @@ public class InvoiceManualPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             startDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(0);
-            startDate.click();
+            playwright.clickOn(startDate);
         } else if (date.equalsIgnoreCase("tomorrow")) {
             //get tomorrow date
             Calendar calendar = Calendar.getInstance();
@@ -1355,7 +1355,7 @@ public class InvoiceManualPO {
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
-            startDate.click();
+            playwright.clickOn(startDate);
         }
     }
 
@@ -1374,14 +1374,14 @@ public class InvoiceManualPO {
      */
     public void tickJenisBiayaTambahan(String value){
         //clicks Jenis Biaya dropdown
-        jenisBiayaDropdown.click();
+        playwright.clickOn(jenisBiayaDropdown);
 
         //biaya tambahan
         tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
-        tickJenisBiaya.click();
+        playwright.clickOn(tickJenisBiaya);
 
         //clicks Terapkan button
-        terapkanBtn.click();
+        playwright.clickOn(terapkanBtn);
     }
 
     /**
@@ -1391,14 +1391,14 @@ public class InvoiceManualPO {
      */
     public void tickJenisBiayaSewa(String value){
         //clicks Jenis Biaya dropdown
-        jenisBiayaDropdown.click();
+        playwright.clickOn(jenisBiayaDropdown);
 
         //biaya sewa
         tickJenisBiaya = page.locator("//div[@data-testid='select-checkbox-rent-1']//p[contains(text(),'" +value+ "')]");
-        tickJenisBiaya.click();
+        playwright.clickOn(tickJenisBiaya);
 
         //clicks Terapkan button
-        terapkanBtn.click();
+        playwright.clickOn(terapkanBtn);
     }
 
     /**
