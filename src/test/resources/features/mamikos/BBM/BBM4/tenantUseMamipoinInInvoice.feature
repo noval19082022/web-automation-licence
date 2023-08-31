@@ -20,7 +20,6 @@ Feature: Tenant use MamiPoin in Invoice
     Given user go to mamikos homepage
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
-    And user clicks on mamipoin toggle button to ON
     And tenant apply voucher:
       | voucher name stag     | voucher name prod   |
       | MAMIVCHTEST           | MAMIVCHTEST         |
