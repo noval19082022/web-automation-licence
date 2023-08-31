@@ -37,6 +37,7 @@ public class PaymentPO {
         // CC
         this.codeCCPlaceHolder = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here");
         this.submitBtnForCC = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT");
+        // riwayat booking
         this.lihatSelengkapnya = page.getByText("Lihat selengkapnya").first();
         this.lihatInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice"));
     }
