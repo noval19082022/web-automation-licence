@@ -35,7 +35,7 @@ public class TenantBookingApiSteps {
         var bookingStatusEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.TENANT_BOOKING_LIST;
         requestTenantBookingStatus = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, Requirement.mamikosStandardHeaders(Requirement.createSignatureKey("GET", bookingStatusEndpoint)));
         tenantBookingStatusResponse = requestTenantBookingStatus.get(bookingStatusEndpoint, RequestOptions.create()
-            .setQueryParam(page, page).setQueryParam("sort", sort).setQueryParam("status", status)
+            .setQueryParam("page", page).setQueryParam("sort", sort).setQueryParam("status", status)
             .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(tenantBookingStatusResponse.url());
         Assert.assertEquals(tenantBookingStatusResponse.status(), 200);
