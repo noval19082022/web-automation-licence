@@ -10,13 +10,36 @@ import utilities.PlaywrightHelpers;
 
 public class PaymentPO {
     Page page;
-    PlaywrightHelpers playwright;
+    private PlaywrightHelpers playwright;
     private Locator paymentSuccessText;
+    // BNI
+    private Locator vaNumberPlaceHolder;
+    private Locator searchBtn;
+    private Locator paymentAmount;
+    private Locator flagBtn;
+    // CC
+    private Locator codeCCPlaceHolder;
+    private Locator submitBtnForCC;
+    // riwayat booking
+    private Locator lihatSelengkapnya;
+    private Locator lihatInvoice;
+
 
     public PaymentPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.paymentSuccessText = page.getByText("Pembayaran Berhasil").first();
+        // BNI
+        this.vaNumberPlaceHolder = page.getByLabel("VA Number");
+        this.searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
+        this.paymentAmount = page.getByLabel("Payment Amount");
+        this.flagBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
+        // CC
+        this.codeCCPlaceHolder = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here");
+        this.submitBtnForCC = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT");
+        // riwayat booking
+        this.lihatSelengkapnya = page.getByText("Lihat selengkapnya").first();
+        this.lihatInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice"));
     }
 
     /**
@@ -27,13 +50,12 @@ public class PaymentPO {
      */
     public void paymentUsingBNI(String virtualAcount, String amount) {
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
-        page.getByLabel("VA Number").click();
-        page.keyboard().type(virtualAcount);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("")).click();
-        page.getByLabel("Payment Amount").click();
-        page.keyboard().type(amount);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag")).click();
-        page.getByText("Transaction success. VA number " + virtualAcount + " has been paid with amount IDR " + amount).isVisible();
+        playwright.clickLocatorAndTypeKeyboard(vaNumberPlaceHolder, virtualAcount);
+        playwright.clickOn(searchBtn);
+        playwright.clickLocatorAndTypeKeyboard(paymentAmount, amount);
+        playwright.clickOn(flagBtn);
+        var transactionSuccessTxt = page.getByText("Transaction success. VA number " + virtualAcount + " has been paid with amount IDR " + amount);
+        playwright.assertVisible(transactionSuccessTxt);
     }
 
     /**
@@ -41,14 +63,13 @@ public class PaymentPO {
      */
     public void paymentUsingCC() {
         page.waitForLoadState();
-        page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").click();
-        page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here").fill("1234");
-        page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT").click();
+        playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
+        playwright.clickOn(submitBtnForCC);
         page.waitForTimeout(3_000);
-        String urlPaymentSignature = page.url()
+        String urlPaymentSignature = playwright.getActivePageURL()
                 .replace("select-payment/", "success-payment/")
                 .replace("step=1", "step=3");
-        page.navigate(urlPaymentSignature);
+        playwright.navigateTo(urlPaymentSignature);
         page.reload();
     }
 
@@ -56,9 +77,9 @@ public class PaymentPO {
      * it will navigate to detail invoice from riwayat booking after payment
      */
     public void seeInvoiceAfterPayment() {
-        page.navigate(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING);
-        page.getByText("Lihat selengkapnya").first().click();
-        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice")).click();
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING);
+        playwright.clickOn(lihatSelengkapnya);
+        playwright.clickOn(lihatInvoice);
     }
 
     /**
@@ -67,7 +88,7 @@ public class PaymentPO {
      * @return boolean
      */
     public boolean isPaymentSuccess() {
-        System.out.println(paymentSuccessText.textContent());
-        return paymentSuccessText.isVisible();
+        playwright.getActivePageURL();
+        return playwright.waitTillLocatorIsVisible(paymentSuccessText);
     }
 }

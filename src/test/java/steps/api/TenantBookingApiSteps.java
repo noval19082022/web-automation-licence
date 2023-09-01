@@ -35,7 +35,7 @@ public class TenantBookingApiSteps {
         var bookingListFinalEndpoint = JavaHelpers.formatString(ApiEndpoints.TENANT_BOOKING_LIST, page, sort, status);
         headers.put("Cookie", UserCookies.getTenantCookie());
         headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
-        request = ApiPlaywrightHelpers.setBaseUrlAndHeaders(Mamikos.URL, headers);
+        request = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, headers);
         apiResponse = request.get(ApiEndpoints.GARUDA + bookingListFinalEndpoint);
         System.out.println(apiResponse.url());
         Assert.assertEquals(apiResponse.status(), 200);
