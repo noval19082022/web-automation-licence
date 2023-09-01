@@ -9,6 +9,7 @@ import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
 import data.api.CreateBooking;
 import data.mamikos.ApiEndpoints;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JavaHelpers;
@@ -27,6 +28,7 @@ public class PostBookingSteps {
     private String bookingDataFile = "src/test/resources/testdata/ajukanSewa/ajukanSewa.properties";
     private String songId = JavaHelpers.getPropertyValue(bookingDataFile, "songId1");
     private String roomTypeId = JavaHelpers.getPropertyValue(bookingDataFile, "roomTypeId1");
+    private Map<String, String> kosIdData = new HashMap<>();
 
     @When("playwright make json file for tenant booking from tenant profile data")
     public void playwrightMakeJsonFileForTenantBookingFromTenantProfileData() {
@@ -34,7 +36,7 @@ public class PostBookingSteps {
         String currentDayOfMonth = JavaHelpers.getCostumDateOrTime("d", 0, 0, 0);
         String plusOneMonthDate = currentDayOfMonth.equalsIgnoreCase("31")
                 ? JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 1, 0)
-                : JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 0, 0);
+                : JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 1, 0);
         String jsonString = CreateBooking.getTenantProfileResponse();
         boolean isMarried = false;
         boolean isMarriedNull = false;
@@ -48,7 +50,7 @@ public class PostBookingSteps {
 
         JsonObject tenantProfileData = tenantDataArray.get(0).getAsJsonObject();
         JsonObject profileObject = tenantProfileObject.getAsJsonObject("profile");
-        String gender = profileObject.get("gender").getAsString().toLowerCase()
+        String gender = profileObject.get("gender").getAsString()
                 .equalsIgnoreCase("laki-laki") ? "male" : "female";
 
         if (profileObject.get("marital_status").isJsonNull()) {
@@ -108,9 +110,12 @@ public class PostBookingSteps {
         CreateBooking.setCreateBookingBody(createBookingBody);
     }
 
-    @When("playwright create booking for tenant")
-    public void playwrightCreateBookingForTenant() throws NoSuchAlgorithmException, InvalidKeyException {
-        var createBookingEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{songId}/{roomTypeId}", songId + "/" + roomTypeId);
+    @When("playwright create booking for tenant:")
+    public void playwrightCreateBookingForTenant(DataTable table) throws NoSuchAlgorithmException, InvalidKeyException {
+        kosIdData = table.asMap(String.class, String.class);
+        var tableSongId = kosIdData.get("songId");
+        var tableRoomTypeId = kosIdData.get("roomTypeId");
+        var createBookingEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{songId}/{roomTypeId}", tableSongId + "/" + tableRoomTypeId);
         var signature = Requirement.createSignatureKey("POST", createBookingEndpoint);
         bookingBody = CreateBooking.getCreateBookingBody();
         createBookingRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, Requirement.mamikosStandardHeaders(signature));
