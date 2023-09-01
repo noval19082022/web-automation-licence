@@ -1,15 +1,13 @@
 package steps.api;
 
+import api.Requirement;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
-import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.RequestOptions;
-import config.playwright.context.ActiveContext;
 import data.api.CreateBooking;
-import data.api.CreateDeviceId;
 import data.mamikos.ApiEndpoints;
 import io.cucumber.java.en.When;
 import utilities.ApiPlaywrightHelpers;
@@ -22,13 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PostBookingSteps {
-    private Page page = ActiveContext.getActivePage();
-    private Map<String, String> createBookingHeaders = new HashMap<>();
     private APIRequestContext createBookingRequest;
     private APIResponse createBookingResponse;
     private Map<Object, Object> createBookingBody = new HashMap<>();
     private Map<Object, Object> bookingBody = new HashMap<>();
-    private ApiPlaywrightHelpers apiHelpers = new ApiPlaywrightHelpers(page);
     private String bookingDataFile = "src/test/resources/testdata/ajukanSewa/ajukanSewa.properties";
     private String songId = JavaHelpers.getPropertyValue(bookingDataFile, "songId1");
     private String roomTypeId = JavaHelpers.getPropertyValue(bookingDataFile, "roomTypeId1");
@@ -36,10 +31,14 @@ public class PostBookingSteps {
     @When("playwright make json file for tenant booking from tenant profile data")
     public void playwrightMakeJsonFileForTenantBookingFromTenantProfileData() {
         String todayDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 0, 0);
-        String plusOneMonthDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 1, 0);
+        String currentDayOfMonth = JavaHelpers.getCostumDateOrTime("d", 0, 0, 0);
+        String plusOneMonthDate = currentDayOfMonth.equalsIgnoreCase("31")
+                ? JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 1, 0)
+                : JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 1, 0, 0);
         String jsonString = CreateBooking.getTenantProfileResponse();
         boolean isMarried = false;
         boolean isMarriedNull = false;
+        String paymentType = CreateBooking.isDownPaymentActive() ? "dp" : "full";
 
         JsonHelpers.createJsonFileFromJsonString(jsonString, "target/tenantProfile.json");
 
@@ -72,7 +71,6 @@ public class PostBookingSteps {
         CreateBooking.setContactIdentity("Mamitest" + CreateBooking.getContactPhone());
         CreateBooking.setContactIntroduction("Saya dari tadi cuman ingin tidur");
         CreateBooking.setContactWorkPlace("Mamitest Workplace");
-        CreateBooking.setFlashSale(false);
         CreateBooking.setMarried(isMarried);
         CreateBooking.setBringChild(isMarried);
         CreateBooking.setMarriageBookId(0);
@@ -81,7 +79,7 @@ public class PostBookingSteps {
         CreateBooking.setPhotoIdentityId(0);
         CreateBooking.setSessionId("QA Mamitest Session");
         CreateBooking.setTotalRenter(1);
-        CreateBooking.setFirstPaymentType("full");
+        CreateBooking.setFirstPaymentType(paymentType);
 
         createBookingBody.put("rent_count_type", CreateBooking.getRentCountType());
         createBookingBody.put("checkin", CreateBooking.getCheckIn());
@@ -113,14 +111,9 @@ public class PostBookingSteps {
     @When("playwright create booking for tenant")
     public void playwrightCreateBookingForTenant() throws NoSuchAlgorithmException, InvalidKeyException {
         var createBookingEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.CREATE_BOOKING, "{songId}/{roomTypeId}", songId + "/" + roomTypeId);
-        var data = "POST" + " " + createBookingEndpoint + " " +  ApiEndpoints.X_GIT_TIME;
-        var signature = JavaHelpers.bytesToHexString(JavaHelpers.generateHmacSha256(ApiEndpoints.SECRET_KEY, data));
+        var signature = Requirement.createSignatureKey("POST", createBookingEndpoint);
         bookingBody = CreateBooking.getCreateBookingBody();
-        System.out.println(bookingBody);
-        createBookingHeaders.put("Authorization", "GIT "+ signature + ":" + CreateDeviceId.getDeviceToken());
-        createBookingHeaders.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
-        createBookingHeaders.put("Content-Type", "application/json");
-        createBookingRequest = ApiPlaywrightHelpers.setBaseUrlAndHeaders(ApiEndpoints.STAGING, createBookingHeaders);
+        createBookingRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, Requirement.mamikosStandardHeaders(signature));
         createBookingResponse = createBookingRequest.post(createBookingEndpoint, RequestOptions.create()
                 .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN)
                 .setData(bookingBody));
