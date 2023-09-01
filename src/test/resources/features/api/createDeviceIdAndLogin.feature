@@ -13,4 +13,11 @@ Feature: Create Device ID And Login
     And playwright get kos detail:
       | songId | 39645784 |
     And playwright make json file for tenant booking from tenant profile data
-    Then playwright create booking for tenant
+    And playwright create booking for tenant:
+      | songId     | 39645784 |
+      | roomTypeId | 6230     |
+    And playwright get tenant booking status with parameter:
+      | page   |        |
+      | sort   |        |
+      | status | booked |
+    And playwright batalkan pengajuan sewa for tenant

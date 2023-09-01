@@ -11,4 +11,3 @@ Feature: Tenant Booking List API
       | page   | 1      |
       | sort   |        |
       | status | booked |
-    Then playwright batalkan tenant booking

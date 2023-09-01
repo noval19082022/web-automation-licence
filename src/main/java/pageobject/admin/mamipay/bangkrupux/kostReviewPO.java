@@ -3,8 +3,6 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
-import pageobject.admin.mamipay.invoice.MamikosListInvoicePO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
