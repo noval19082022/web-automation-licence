@@ -3,11 +3,11 @@ package pageobject.pms.homepage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import utilities.PlaywrightHelpers;
 
 public class OverviewPO {
     private Page page;
+    private PlaywrightHelpers playwright;
 
     Locator profilProperty;
     Locator maps;
@@ -42,10 +42,15 @@ public class OverviewPO {
     Locator asDropdown;
     Locator hospiDropdown;
     Locator dropdownOptions;
+    Locator bseNameEdit;
+    Locator bdNameEdit;
+    Locator asNameEdit;
+    Locator hospiNameEdit;
     //End Penanggung Jawab Edit
 
     public OverviewPO(Page page){
         this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
 
         profilProperty = page.locator(".organism-property-profile .bg-c-text--body-2");
         maps = page.locator(".organism-property-profile .bg-c-text--body-2 a");
@@ -76,28 +81,6 @@ public class OverviewPO {
     }
 
     /**
-     * Assert Profil Property in Detail Property
-     * @param id
-     * @param nama
-     * @param produk
-     * @param tipe
-     * @param pekerjaan
-     * @param agama
-     * @param alamat
-     * @param map
-     */
-    public void assertProfilProperty(String id, String nama, String produk, String tipe, String pekerjaan, String agama, String alamat, String map) {
-        assertThat(profilProperty.nth(0)).hasText(id);
-        assertThat(profilProperty.nth(1)).hasText(nama);
-        assertThat(profilProperty.nth(2)).hasText(produk);
-        assertThat(profilProperty.nth(3)).hasText(tipe);
-        assertThat(profilProperty.nth(4)).hasText(pekerjaan);
-        assertThat(profilProperty.nth(5)).hasText(agama);
-        assertThat(profilProperty.nth(6)).hasText(alamat);
-        assertThat(maps).hasAttribute("href",map);
-    }
-
-    /**
      * Edit profil property
      * @param name
      * @param occupation
@@ -109,56 +92,42 @@ public class OverviewPO {
         String[] work = occupation.split("\\s*,\\s*");
         String[] agama = religion.split("\\s*,\\s*");
 
-        ubahProfilButton.click();
-        propertyName.fill(name);
+        playwright.clickOn(ubahProfilButton);
+        playwright.fill(propertyName,name);
 
         //uncheck all active pekerjaan
-        pekerjaanDropdown.click();
+        playwright.clickOn(pekerjaanDropdown);
         while (pekerjaanActive.first().isVisible()){
-            pekerjaanActive.first().click();
+            playwright.clickOn(pekerjaanActive.first());
         }
         //check pekerjaan based data given
         for (String p: work) {
             pekerjaan = page.getByText(p);
-            pekerjaan.click();
+            playwright.clickOn(pekerjaan);
         }
 
         //uncheck all active religion
-        religionDropdown.click();
+        playwright.clickOn(religionDropdown);
         while (religionActive.first().isVisible()){
-            religionActive.first().click();
+            playwright.clickOn(religionActive.first());
         }
         //check agama based on data given
         for (String a: agama) {
             this.religion = page.getByText(a);
-            this.religion.click();
+            playwright.clickOn(this.religion);
         }
-        religionDropdown.click();
+        playwright.clickOn(religionDropdown);
 
-        alamat.fill(address);
-        petaLokasi.fill(location);
-        simpanButton.click();
+        playwright.fill(alamat,address);
+        playwright.fill(petaLokasi,location);
+        playwright.clickOn(simpanButton);
     }
 
     /**
      * scroll into view section penanggung jawab
      */
     public void viewSectionPenanggungJawab() {
-        penanggungJawabSection.scrollIntoViewIfNeeded();
-    }
-
-    /**
-     * Assert penanggung jawab in Detail property
-     * @param bse
-     * @param bd
-     * @param as
-     * @param hospi
-     */
-    public void assertPenanggungJawab(String bse, String bd, String as, String hospi) {
-        assertThat(bseName).hasText(bse);
-        assertThat(bdName).hasText(bd);
-        assertThat(asName).hasText(as);
-        assertThat(hospiName).hasText(hospi);
+        playwright.pageScrollUntilElementIsVisible(penanggungJawabSection);
     }
 
     /**
@@ -169,24 +138,124 @@ public class OverviewPO {
      * @param hospi
      */
     public void editPenanggungJawab(String bse, String bd, String as, String hospi) {
-        editButton.click();
+        playwright.clickOn(editButton);
         //edit BSE
-        bseDropdown.click();
-        dropdownOptions.filter(new Locator.FilterOptions().setHasText(bse)).click();
+        playwright.clickOn(bseDropdown);
+        bseNameEdit = dropdownOptions.filter(new Locator.FilterOptions().setHasText(bse));
+        playwright.clickOn(bseNameEdit);
 
         //edit BD
-        bdDropdown.click();
-        dropdownOptions.filter(new Locator.FilterOptions().setHasText(bd)).click();
+        playwright.clickOn(bdDropdown);
+        bdNameEdit = dropdownOptions.filter(new Locator.FilterOptions().setHasText(bd));
+        playwright.clickOn(bdNameEdit);
 
         //edit AS
-        asDropdown.click();
-        dropdownOptions.filter(new Locator.FilterOptions().setHasText(as)).click();
+        playwright.clickOn(asDropdown);
+        asNameEdit = dropdownOptions.filter(new Locator.FilterOptions().setHasText(as));
+        playwright.clickOn(asNameEdit);
 
         //edit Hospitality
-        hospiDropdown.click();
-        dropdownOptions.filter(new Locator.FilterOptions().setHasText(hospi)).click();
+        playwright.clickOn(hospiDropdown);
+        hospiNameEdit = dropdownOptions.filter(new Locator.FilterOptions().setHasText(hospi));
+        playwright.clickOn(hospiNameEdit);
 
-        simpanButton.click();
-        confirmSimpanButton.click();
+        playwright.clickOn(simpanButton);
+        playwright.clickOn(confirmSimpanButton);
+    }
+
+    /**
+     * Get ID Property in Profil Property
+     * @return id property
+     */
+    public String getIdProperty() {
+        return playwright.getText(profilProperty.nth(0));
+    }
+
+    /**
+     * Get Nama Property in Profil Property
+     * @return nama property
+     */
+    public String getNamaProperty() {
+        return playwright.getText(profilProperty.nth(1));
+    }
+
+    /**
+     * Get Produk in Profil Property
+     * @return produk
+     */
+    public String getProduk() {
+        return playwright.getText(profilProperty.nth(2));
+    }
+
+    /**
+     * Get Tipe in Profil Property
+     * @return Tipe
+     */
+    public String getTipe() {
+        return playwright.getText(profilProperty.nth(3));
+    }
+
+    /**
+     * Get Pekerjaan in Profil Property
+     * @return pekerjaan
+     */
+    public String getPekerjaan() {
+        return playwright.getText(profilProperty.nth(4));
+    }
+
+    /**
+     * Get Agama in profil property
+     * @return agama
+     */
+    public String getAgama() {
+        return playwright.getText(profilProperty.nth(5));
+    }
+
+    /**
+     * Get Alamat in Profil Property
+     * @return alamat
+     */
+    public String getAlamat() {
+        return playwright.getText(profilProperty.nth(6));
+    }
+
+    /**
+     * Get href in Lihat Lokasi Profil Property
+     * @return google map link (href)
+     */
+    public String getMap() {
+        return playwright.getAttributeValue(maps,"href");
+    }
+
+    /**
+     * Get BSE name in Penanggung Jawab Section
+     * @return BSE name
+     */
+    public String getBseName() {
+        return playwright.getText(bseName);
+    }
+
+    /**
+     * Get BD name in Penanggung Jawab Section
+     * @return BD name
+     */
+    public String getBdName() {
+        return playwright.getText(bdName);
+    }
+
+    /**
+     * Get AS name in Penanggung Jawab Section
+     * @return AS name
+     */
+    public String getAsName() {
+        return playwright.getText(asName);
+    }
+
+    /**
+     * Get Hospitality Name in Penanggung Jawab Section
+     * @return Hospitality Name
+     */
+    public String getHospiName() {
+        return playwright.getText(hospiName);
     }
 }

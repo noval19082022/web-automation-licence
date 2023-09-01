@@ -5,6 +5,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.pms.homepage.OverviewPO;
 
 import java.util.List;
@@ -30,7 +31,14 @@ public class OverviewSteps {
         String alamat = profil.get(0).get("Alamat");
         String map = profil.get(0).get("Peta Lokasi");
 
-        overview.assertProfilProperty(id,nama,produk,tipe,pekerjaan,agama,alamat,map);
+        Assert.assertEquals(overview.getIdProperty(),id);
+        Assert.assertEquals(overview.getNamaProperty(),nama);
+        Assert.assertEquals(overview.getProduk(),produk);
+        Assert.assertEquals(overview.getTipe(),tipe);
+        Assert.assertEquals(overview.getPekerjaan(),pekerjaan);
+        Assert.assertEquals(overview.getAgama(),agama);
+        Assert.assertEquals(overview.getAlamat(),alamat);
+        Assert.assertEquals(overview.getMap(),map);
     }
 
     @When("admin edit profil property")
@@ -57,7 +65,10 @@ public class OverviewSteps {
         String as = penanggungJawab.get(0).get("AS");
         String hospi = penanggungJawab.get(0).get("Hospitality");
 
-        overview.assertPenanggungJawab(bse,bd,as,hospi);
+        Assert.assertEquals(overview.getBseName(),bse);
+        Assert.assertEquals(overview.getBdName(),bd);
+        Assert.assertEquals(overview.getAsName(),as);
+        Assert.assertEquals(overview.getHospiName(),hospi);
     }
     @When("admin edit penanggung jawab")
     public void admin_edit_penanggung_jawab(DataTable tables) {
