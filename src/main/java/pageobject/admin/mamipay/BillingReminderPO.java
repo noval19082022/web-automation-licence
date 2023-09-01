@@ -1,5 +1,6 @@
 package pageobject.admin.mamipay;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -85,7 +86,6 @@ public class BillingReminderPO {
     public Boolean isTableContentTemplateAppeared(String content){
         return page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).isVisible();
     }
-
 
     /**
      * Check Email template Day -1 is present
@@ -240,6 +240,7 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableSubjectTemplate(String subject){
+        playwright.hardWait(5000);
         return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true)));
     }
 

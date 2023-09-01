@@ -1,6 +1,7 @@
-@regression @tenantTracker @BBM3 @noval
+@regression @BBM4 @voucher
 
-Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
+@TEST_BBM-2355
+Feature: Apply Voucher Annually For Contract Duration
 
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
@@ -11,7 +12,6 @@ Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
       | phone stag    | phone prod    |
       | 0890867321205 | 0890867321205 |
 
-  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,11 +20,14 @@ Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
     And user cancel booking
 
   Scenario: Tenant Booking Kost
-    When user go to mamikos homepage
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag           | kost name prod            |
-      | Kost Adi Auto Regular    | Kost Adi Auto Regular     |
-    And tenant booking kost for "today" and input rent duration equals to 4
+      | kost name stag            | kost name prod            |
+      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+    And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -34,29 +37,17 @@ Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag           | tenant prod           |
-      | Kost Adi Auto Regular | Kost Adi Auto Regular |
+      | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
-  Scenario: Tenant Pay 1st Month Booking For Add Ons
+  Scenario: Tenant Apply Voucher VYEARLYUSAGE
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
-    And tenant set active page to 0
-    And tenant navigate to riwayat and draf booking
-    When tenant set active page to 0
-    And tenant checkin kost from riwayat booking
-    Then tenant navigate to tagihan kost saya
-
-  @TEST_BBM-574 @TEST_BBM-571 @TEST_BBM-556
-  Scenario: Check-in Fase and Status for Uncontrolled Property
-    Given admin go to pms singgahsini
-    When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
-    And admin go to tenant communication menu
-    And user choose "Nama Properti" and input "Kost jakarta barat" in the search field on main page
-    And user click search button on main page filter
-    Then user can see "Data Tidak Ditemukan" on page
+    And tenant click button bayar sekarang
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | VYEARLYUSAGE      | VYEARLYUSAGE      |
+    Then tenant can see voucher is applied

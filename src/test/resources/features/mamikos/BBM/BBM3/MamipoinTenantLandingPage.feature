@@ -13,24 +13,24 @@ Feature: MamiPoin Tenant Landing Page
     And user verify informasi poin button is displayed
     And user verify riwayat poin button is displayed
     And user verify dapatkan poin button is displayed
-    And user verify expired point information on mamipoin landing page "1.600 poin kedaluwarsa pada 30 Nov 2023"
+    And user verify expired point information on mamipoin landing page "279 poin kedaluwarsa pada 29 Feb 2024"
 
-#  @TEST_BBM-420
-#  Scenario: Information about points that will expire and Tenant has no point
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag    | phone prod    | password     |
-#      | 0890867321220 | 0890867321220 | mamikosqa123 |
-#    And user navigate to kost saya page
-#    And user clicks on mamipoin tenant entry point button
-#    Then user verify expired point information on mamipoin landing page "Tidak ada poin yang tersedia"
-#
-#  @TEST_BBM-384
-#  Scenario: MamiPoin display on user without Poin
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag    | phone prod    | password     |
-#      | 0890867321220 | 0890867321220 | mamikosqa123 |
-#    And user navigate to tagihan kost saya
-#    And tenant go to invoice page
-#    Then user will see display MamiPoin with text "Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya."
+  @TEST_BBM-420
+  Scenario: Information about points that will expire and Tenant has no point
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0890867321220 | 0890867321220 | mamikosqa123 |
+    And user navigate to kost saya page
+    And user clicks on mamipoin tenant entry point button
+    Then user verify expired point information on mamipoin landing page "Tidak ada poin yang tersedia"
+
+  @TEST_BBM-384
+  Scenario: MamiPoin display on user without Poin
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0890867321220 | 0890867321220 | mamikosqa123 |
+    And user navigate to tagihan kost saya
+    And tenant go to invoice page
+    Then user will see display MamiPoin with text "Poin kamu masih 0. Yuk, bayar dulu dan dapatkan poinnya."

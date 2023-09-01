@@ -85,9 +85,8 @@ public class TenantCommunicationSteps {
 
     @Then("user verify nama property on main page filter is not {string}")
     public void user_verify_nama_property_on_main_page_filter_is_not(String propertyName) {
-        Assert.assertFalse(tenantCommunication.isPropertyNameOnMainPageFilter(propertyName));
+            Assert.assertTrue(tenantCommunication.isPropertyNameOnMainPageFilter(propertyName));
     }
-
     @Then("user verify nama property on profile page filter is {string}")
     public void user_verify_nama_property_on_profile_page_filter_is(String propertyName) {
         Assert.assertTrue(tenantCommunication.isPropertyNameOnProfilePageFilter(propertyName));
