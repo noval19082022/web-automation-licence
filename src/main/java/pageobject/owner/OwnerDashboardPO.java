@@ -553,7 +553,6 @@ public class OwnerDashboardPO {
      * @return String subtitle text mamiads
      */
     public String getSubtitleMamiads() {
-        playwright.waitTillLocatorIsVisible(mamiadsSubtitle);
         return playwright.getText(mamiadsSubtitle);
     }
 
@@ -562,6 +561,7 @@ public class OwnerDashboardPO {
      * @return String lihat disini text
      */
     public String getLihatDisiniMamiads() {
+        playwright.waitTillLocatorIsVisible(mamiadsSubtitle);
         return playwright.getText(mamiadsLihatDisini);
     }
 

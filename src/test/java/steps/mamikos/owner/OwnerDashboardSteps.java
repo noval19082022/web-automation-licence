@@ -231,17 +231,13 @@ public class OwnerDashboardSteps {
         Assert.assertFalse(ownerDashboardPO.isSeeAllKostReviewTextAppear(), "See all kost review text is appeared");
     }
 
-    @Then("user verify message {string} in saldo MamiAds")
-    public void user_verify_message_x_in_saldo_mamiads(String subtitle) {
+    @Then("user verify title {string} and message {string} in saldo MamiAds")
+    public void user_verify_message_x_in_saldo_mamiads(String titleText, String subtitle) {
+        Assert.assertEquals(ownerDashboardPO.getLihatDisiniMamiads(), titleText, "The text is not equal to " + titleText);
         Assert.assertEquals(ownerDashboardPO.getSubtitleMamiads(), subtitle, "The text is not equal to " + subtitle);
     }
 
-    @When("user verify title {string} in saldo MamiAds")
-    public void userVerifyTitleInSaldoMamiAds(String titleText) {
-        Assert.assertEquals(ownerDashboardPO.getLihatDisiniMamiads(), titleText, "The text is not equal to " + titleText);
-    }
-
-    @When("user click on Saldo MamiAds button")
+    @When("user click on Saldo MamiAds at owner dashboard")
     public void user_click_on_saldo_mamiads_button() {
         ownerDashboardPO.clickSaldoMamiAdsButton();
     }
