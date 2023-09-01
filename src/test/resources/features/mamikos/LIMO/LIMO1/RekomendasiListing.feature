@@ -17,12 +17,27 @@ Feature: Rekomendasi Listing
       | phone stag    | password  |
       | 0827777777774 | qwerty123 |
     When tenant search kost then go to apartment details:
-      | kost name stag                | kost name prod                                      |
-      | Silalay 123|  |
+      | kost name stag | kost name prod |
+      | Silalay 123    |                |
     Then tenant open tab pernah dilihat at menu favorite
-    Then tenant verify the property with name "Silalay 123" is appear
+    And tenant verify the property with name "Silalay 123" is appear
     And tenant verify the Hapus History button is appear
     When tenant open tab difavoritkan at menu favorite
     Then user verify rekomendasi listing section didn't display
     And verify no rekomendasi on kos saya page
+
+  @TEST_LIMO-301
+  Scenario: There is no rekomendasi booking cancel
+    Given user go to mamikos homepage
+    And user login as tenant via phone number:
+      | phone stag    | password    |
+      | 0890000000265 | Bismillah01 |
+    When tenant search kost then go to kost details:
+      | kost name stag         | kost name prod |
+      | Kos Upik Merapi Tipe C |                |
+    And tenant booking kost "tomorrow" "Per Bulan"
+    Then tenant should success booking kost
+    And user cancel booking
+    Then tenant check status booking is "Dibatalkan"
+
 
