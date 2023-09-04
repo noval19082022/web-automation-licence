@@ -55,7 +55,7 @@ Feature: Voucher cannot use invoice settlement
       | phone stag  | phone prod  | password  |
       | 0890867321217 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method BNI with VA number "9881012867321217" and amount "46000"
+    And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 

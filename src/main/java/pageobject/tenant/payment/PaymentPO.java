@@ -88,7 +88,6 @@ public class PaymentPO {
      * @return String "Pembayaran Berhasil"
      */
     public String isPaymentSuccessText() {
-        playwright.getActivePageURL();
         return playwright.getText(paymentSuccessText);
     }
 }

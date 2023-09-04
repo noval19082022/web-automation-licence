@@ -1,4 +1,4 @@
-@DOM1
+@DOM11
 Feature: Payment All
 
   Background: Delete and create contract
