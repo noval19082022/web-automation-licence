@@ -926,7 +926,7 @@ public class KostDetailsPO {
     public boolean isLihatPetaButtonPresent() {
         playwright.pageScrollToDown(2500);
         playwright.pageScrollUntilElementIsVisible(lihatPetaBtn);
-        return lihatPetaBtn.isVisible();
+        return playwright.waitTillLocatorIsVisible(lihatPetaBtn);
     }
 
     /**
@@ -935,7 +935,8 @@ public class KostDetailsPO {
      * @return 'boolean' that map image is static or unclear on map section caused by non login condition
      */
     public boolean isStaticMapPresent() {
-        return staticMap.isVisible();
+        playwright.getText(staticMap);
+        return playwright.waitTillLocatorIsVisible(staticMap);
     }
 
     /**
@@ -944,7 +945,8 @@ public class KostDetailsPO {
      * @return 'boolean' 'tempat terdekat landmark' on map section visibility
      */
     public boolean isPOILandmarkShow() {
-        return tabPOILandmark.isVisible();
+        playwright.getText(tabPOILandmark);
+        return playwright.waitTillLocatorIsVisible(tabPOILandmark);
     }
 
     /**
