@@ -17,6 +17,9 @@ public class RekomendasiListingPO {
     Locator userProfile;
     Locator mulaiCariDanSewaKosButton;
     Locator masukkanKodeDariPemilikButton;
+    Locator rekomendasiTitle;
+    Locator paginationNumberAct;
+    Locator rekomendasiListingActual;
 
     public RekomendasiListingPO(Page page) {
         this.page = page;
@@ -28,6 +31,9 @@ public class RekomendasiListingPO {
         this.userProfile = page.getByTestId("profileButton");
         this.mulaiCariDanSewaKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mulai cari dan sewa kos"));
         this.masukkanKodeDariPemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Masukkan kode dari pemilik"));
+        this.rekomendasiTitle = page.locator(".premium-recom-title");
+        this.paginationNumberAct = page.locator("//div[@class='premium-recom-slider-item']");
+        this.rekomendasiListingActual = page.locator("//*[@class=‘premium-recom-slide’]//div[@class=‘track-list-booking-kost’]");
     }
 
     /**
@@ -84,5 +90,51 @@ public class RekomendasiListingPO {
      */
     public boolean isMasukkanKodeDariPemilikIsVisible() {
         return masukkanKodeDariPemilikButton.isVisible();
+    }
+
+    /**
+     * is rekomendasi section is present
+     *
+     * @return boolean
+     */
+    public boolean isRekomendasiSectionVisible(){
+        return playwright.isLocatorVisibleAfterLoad(rekomendasiTitle,2000.0);
+    }
+
+    /**
+     * Pagination number get as integer
+     * @return integer data type
+     */
+    public int getPaginationActual() {
+        try {
+            return Integer.parseInt(playwright.getText(paginationNumberAct));
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Rekomendasi listing number get as integer
+     * @return integer data type
+     */
+    public int getRekomendasiActual() {
+        try {
+            return Integer.parseInt(playwright.getText(rekomendasiListingActual));
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * verify menu user tenant
+     * @param menuUser for spesific menu user want to get
+     * @return menuUser
+     */
+    public String getMenuUserTenant(String menuUser) {
+        String menuUserLocator = "//li[contains(.,'"+ menuUser +"')]";
+        playwright.isLocatorVisibleAfterLoad(page.locator(menuUserLocator),2000.0);
+        return playwright.getText(page.locator(menuUserLocator));
     }
 }

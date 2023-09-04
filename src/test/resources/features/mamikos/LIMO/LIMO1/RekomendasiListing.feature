@@ -41,29 +41,27 @@ Feature: Rekomendasi Listing
     Then tenant check status booking is "Dibatalkan"
 
   @TEST_LIMO-304 @TEST_LIMO-303
-  Scenario Outline: Rekomendasi page is appear when tenant have contract booking active
+  Scenario Outline: Check rekomendasi section at favorite page and kos saya page
     Given user go to mamikos homepage
-    When user login as owner:
+    And user login as tenant via phone number:
       | phone stag    | password   |
       | <tenantPhone> | <password> |
-    When tenant search kost then go to kost details:
+    And tenant search kost then go to kost details:
       | kost name stag          | kost name prod |
       | Kos Raney Momogi Tipe A |                |
-    Then tenant open tab pernah dilihat at menu favorite
+    When tenant open tab pernah dilihat at menu favorite
     And tenant verify the property with name "Kos Raney Momogi Tipe A Danurejan Yogyakarta" is appear
     And tenant verify the Hapus History button is appear
     When tenant open tab difavoritkan at menu favorite
-#   And do validation rekomendasi "<validation>" with maximal <countPerPage> per page and maximal page is <countPage>
+    #And do validation rekomendasi "<validation>" with maximal <countPerPage> per page and maximal page is <countPage>
     Then user verify rekomendasi listing section is displayed
     And user verify the rekomendasi listing max is 2 page
     And user verify the max 8 rekomendasi listing
     #MA-5289-Make sure rekomendasi on kos saya max 8 properti (MA-5289)
-    And do validation rekomendasi "<validation>" on kos saya page
+    And do validation rekomendasi "<validation>" on "Kos Saya" page
     And user verify the rekomendasi listing max is <countPerPage> page
     And user verify the max <maxPage> rekomendasi listing
     Examples:
       | tenantPhone   | password     | validation    | countPerPage | maxPage |
       | 0828888888880 | qwerty123    | displayed     | 4            | 2       |
       | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       |
-
-
