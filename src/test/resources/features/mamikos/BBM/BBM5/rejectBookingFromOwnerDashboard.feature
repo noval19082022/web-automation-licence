@@ -9,6 +9,7 @@ Feature: Reject Booking From Owner Dashboard
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag            | phone prod            |
       | <tenant phone number> | <tenant phone number> |
+
     #Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -16,6 +17,7 @@ Feature: Reject Booking From Owner Dashboard
       | <tenant phone number>  | <tenant phone number> | qwerty123  |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
+
     #Scenario: create booking
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
