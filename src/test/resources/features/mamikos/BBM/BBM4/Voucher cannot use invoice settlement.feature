@@ -54,7 +54,7 @@ Feature: Voucher cannot use invoice settlement
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0888123321888" without close the page
+    And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
