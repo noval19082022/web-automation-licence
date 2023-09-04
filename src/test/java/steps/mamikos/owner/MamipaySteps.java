@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamipayPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.PropertySayaPO;
 import utilities.PlaywrightHelpers;
 
 public class MamipaySteps {
@@ -15,6 +16,7 @@ public class MamipaySteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamipayPO mamipayPO = new MamipayPO(ActiveContext.getActivePage());
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(ActiveContext.getActivePage());
+    PropertySayaPO propertySaya = new PropertySayaPO (ActiveContext.getActivePage());
     Page page1;
 
 
@@ -68,5 +70,33 @@ public class MamipaySteps {
     @And("owner click term and condition")
     public void ownerClickTermAndCondition() {
         mamipayPO.clickOnChecTnC();
+    }
+
+    @Then("verify info untuk anda Auto BBK is displayed")
+    public void verifyInfoUntukAndaAutoBBKIsDisplayed() {
+        Assert.assertTrue(mamipayPO.isInfoUntukAndaAutoBbkDisplayed(), "Info untuk anda Auto BBK doesn't appear!");
+    }
+
+    @Then("verify form {string} for Auto BBK")
+    public void verifyFormForAutoBBK(String title) {
+        Assert.assertEquals(mamipayPO.getTitleForm(), title, "Title doesn't match!");
+    }
+
+    @Then("verify info untuk anda Auto BBK not displayed")
+    public void verifyInfoUntukAndaAutoBBKNotDisplayed() {
+        playwright.hardWait(2000);
+        Assert.assertFalse(mamipayPO.isInfoUntukAndaAutoBbkDisplayed(), "Info untuk anda Auto BBK is appear!");
+        playwright.hardWait(2000);
+    }
+
+    @And("owner verify Auto BBK pop up is displayed")
+    public void ownerVerifyAutoBBKPopUpIsDisplayed() {
+        Assert.assertTrue(propertySaya.isPopUpModalVisible(), "Auto BBK pop up doesn't displayed!");
+        Assert.assertEquals(mamipayPO.getTitleAutoBbkPopUp(), "Ingin Kamar Kosong Anda Cepat Terisi?", "Title pop up doesn't match!");
+    }
+
+    @Then("owner verify Auto BBK pop up is not displayed")
+    public void ownerVerifyAutoBBKPopUpIsNotDisplayed() {
+        Assert.assertFalse(propertySaya.isPopUpModalVisible(), "Auto BBK pop up doesn't displayed!");
     }
 }
