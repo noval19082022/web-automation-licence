@@ -8,11 +8,12 @@ Feature: Owner Tenant List
       | phone stag       | phone prod     | password        |
       | 08900000000022   | 08900000000022 | mamikosqa123    |
     And owner go to Penyewa page of kost "Kost Adi Auto SinggahSini"
-    Then user can see "Adi Teng Voucher Suggestion" as tenant name, "0890867321217" as phone number, "Sedang menyewa" status, and photo
-    When user can see detail tenant ("Adi Teng Voucher Suggestion", "Laki-laki", "Kawin", "kuliah")
+    And user click Selengkapnya button on "Adi Teng Blacklist Mamipoin" contract
+    Then user can see "Adi Teng Blacklist Mamipoin" as tenant name, "0890867321216" as phone number, "Sedang menyewa" status, and photo
+    When user can see detail tenant ("Adi Teng Blacklist Mamipoin", "Laki-laki", "Kawin", "kerja")
     Then user cannot see checkin tenant disclaimer alert
     When user click on kontrak sewa button
-    Then user can see detail contract ("28 Juli 2023", "28 Juli 2025", "10.000.000", "2 tahun", "28 Juli 2024")
+    Then user can see detail contract ("14 Juni 2022", "14 Juni 2034", "10.000.000", "12 tahun", "14 Juni 2033")
     When system display change contract rent button
     Then system display terminate contract link
     And user navigate to penyewa page

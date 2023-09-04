@@ -51,6 +51,8 @@ public class PropertySayaPO {
     Locator editSelesaiButton;
     Locator titleSuccessEditPopUpText;
     Locator doneButtonEditKosPopUp;
+    Locator modalPopUp;
+    Locator statusKos;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -91,6 +93,8 @@ public class PropertySayaPO {
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
         titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
+        modalPopUp = page.locator("//div[@class='modal-content']");
+        statusKos = page.locator(".kos-card__status-name--kos-verified");
     }
 
     /**
@@ -497,4 +501,21 @@ public class PropertySayaPO {
         playwright.clickOn(doneButtonEditKosPopUp);
     }
 
+    /**
+     * Verify Pop up modal visible
+     * @return boolean true, false
+     *
+     */
+    public boolean isPopUpModalVisible() {
+        return playwright.isLocatorVisibleAfterLoad(modalPopUp, 3000.0);
+    }
+
+    /**
+     * Verify status kos
+     * @return statusKos
+     *
+     */
+    public boolean isStatusKos() {
+        return playwright.waitTillLocatorIsVisible(statusKos, 3000.0);
+    }
 }

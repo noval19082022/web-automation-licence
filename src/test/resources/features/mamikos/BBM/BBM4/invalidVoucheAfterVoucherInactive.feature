@@ -20,7 +20,7 @@ Feature: Invalid Voucher After Applied, Voucher Is Inactive
       | 0890867321217 | 08100000622 | mamikosqa123 |
     And user navigate to tagihan kost saya
     And user click on "Bayar" button
-    When tenant set active page to 1
+    And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOVINVALID | AUTOVINVALID |
@@ -36,13 +36,15 @@ Feature: Invalid Voucher After Applied, Voucher Is Inactive
     And admin activate mass voucher
     Then System display alert message on mamipay web
 
-  Scenario: Hapus Button Functionality on Toast Message
+  Scenario: Tenant can't Input Voucher AUTOVINVALID
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0890867321217 | 08100000622 | mamikosqa123 |
     And user navigate to tagihan kost saya
     And user click on "Bayar" button
-    When tenant set active page to 1
-    Then tenant can not use the voucher
-    And tenant remove voucher by toast message
+    And tenant set active page to 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | AUTOVINVALID | AUTOVINVALID |
+    Then tenant can see warning message "Kode voucher tidak ditemukan."

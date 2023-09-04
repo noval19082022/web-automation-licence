@@ -16,6 +16,9 @@ public class MamipayPO {
     Locator termAndCondition;
     Locator username;
     Locator bankNameLabel;
+    Locator autoBbkCard;
+    Locator titleForm;
+    Locator titleAutoBbkPopUp;
 
     public MamipayPO(Page page){
         this.page = page;
@@ -28,6 +31,9 @@ public class MamipayPO {
         termAndCondition = page.locator("//a[.='Syarat dan Ketentuan']");
         username = page.locator(".c-mk-header__username");
         bankNameLabel = page.locator("//label[.='Nama Bank']");
+        autoBbkCard = page.locator("//*[@class='auto-bbk-info-bar']");
+        titleForm = page.locator(".title");
+        titleAutoBbkPopUp = page.locator(".owner-intercept-booking-modal__body-title");
     }
 
     /**
@@ -152,5 +158,32 @@ public class MamipayPO {
      */
     public String getUsername() {
         return playwright.getText(username);
+    }
+
+    /**
+     * Verify info untuk anda auto BBK dislayed
+     * @return boolean true or false
+     *
+     */
+    public boolean isInfoUntukAndaAutoBbkDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(autoBbkCard, 3000.0);
+    }
+
+    /**
+     * Verify title text on form Auto BBK
+     * @return titleForm text
+     *
+     */
+    public String getTitleForm() {
+        return playwright.getText(titleForm);
+    }
+
+    /**
+     * Get title on pop up Auto BBK pop up
+     * @return titleAutoBbkPopUp
+     *
+     */
+    public String getTitleAutoBbkPopUp() {
+        return playwright.getText(titleAutoBbkPopUp);
     }
 }

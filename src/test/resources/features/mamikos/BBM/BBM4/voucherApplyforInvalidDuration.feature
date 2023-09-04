@@ -21,8 +21,8 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
-      | phone stag  | phone prod  |
-      | 0890867321217 | 0890867321217 |
+      | phone stag    | phone prod  |
+      | 0888123321888 | 08100000622 |
     And admin akhiri contract
     Then admin should success terminate contract
 
@@ -30,8 +30,8 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
+      | phone stag    | phone prod  | password  |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag    | kost name prod    |
       | kost reykjavik    | kost reykjavik    |
@@ -52,8 +52,8 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
   Scenario: Tenant Input Voucher AUTOCHNGEPERIOD
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
+      | phone stag    | phone prod  | password  |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
@@ -78,7 +78,7 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:

@@ -6,26 +6,26 @@ Feature: Voucher cannot use invoice settlement
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag   | phone prod   |
-      | 0890867321217 | 087708777618 |
+      | phone stag    | phone prod   |
+      | 0888123321888 | 087708777618 |
 
+    @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 0890867321217 | 087708777618 | mamikosqa123 |
+      | phone stag    | phone prod   | password  |
+      | 0888123321888 | 087708777618 | mamikosqa123 |
     And user cancel booking
+
   @tenantBookingKos
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
+
   @ownerAcceptKos
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
@@ -36,11 +36,12 @@ Feature: Voucher cannot use invoice settlement
     And owner back to owner dashboard
 
   @tenantInputVoucher
+  @continue
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
+      | phone stag    | phone prod  | password  |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
@@ -49,11 +50,9 @@ Feature: Voucher cannot use invoice settlement
     Then tenant can see voucher is applied
 
   @tenantPayDPWithVoucher
+  @continue
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
     And tenant want to see invoice on riwayat booking after payment
@@ -62,9 +61,6 @@ Feature: Voucher cannot use invoice settlement
   @tenantPaySTWithVoucher
   Scenario: Invoice Settlement and Voucher For First Full Paid
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 0890867321217 | 0890867321211 | mamikosqa123  |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page after pay DP
     And tenant apply voucher:
