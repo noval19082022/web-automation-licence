@@ -41,7 +41,7 @@ public class BlacklistUserPO {
         noteTextBox = page.locator("[name='note']");
         submitButton = page.locator(".btn-danger");
         adminSuccessMessage = page.locator(".alert");
-        accountBlacklistMessage = page.getByTestId("inputProfession-jobOptions").getByText("Wajib diisi");
+        accountBlacklistMessage = page.getByText("Ada kendala pada akun Anda. Harap hubungi customer service Mamikos.");
         unblacklistBtn = page.locator(".btn-success");
         blacklistBtn = page.locator("//a[.='Blacklist']");
     }

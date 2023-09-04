@@ -2,12 +2,16 @@
 Feature: Blacklist User
 
   @continue
-  Scenario Outline:: [WEB][Blacklist][Filter] Admin search filter by Phone Number
+  Scenario: Admin login into bangkerupux
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And user access menu blacklist user
+
+  @continue
+  Scenario Outline:: [WEB][Blacklist][Filter] Admin search filter by Phone Number
+    Given admin go to mamikos bangkrupux admin
+    When user access menu blacklist user
     Then user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     Examples:
       | dropDown     | value                                   |
