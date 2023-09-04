@@ -85,10 +85,10 @@ public class PaymentPO {
     /**
      * check if payment is success
      *
-     * @return boolean
+     * @return String "Pembayaran Berhasil"
      */
-    public boolean isPaymentSuccess() {
+    public String isPaymentSuccessText() {
         playwright.getActivePageURL();
-        return playwright.waitTillLocatorIsVisible(paymentSuccessText);
+        return playwright.getText(paymentSuccessText);
     }
 }

@@ -78,7 +78,7 @@ public class PaymentSteps {
     public void paymentSuccess() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
-        Assert.assertTrue(paymentPO.isPaymentSuccess(), "Payment failed");
+        Assert.assertEquals(paymentPO.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
 
     @Then("tenant can not sees price with name {string} on invoice page")
