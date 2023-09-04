@@ -1,6 +1,9 @@
-@DOM1 @editProfile
+@DOM1
 Feature: Edit Profile
 #//edit profil tenant will cover in dom 1
+
+  Background: set active page to the first page
+    Given user close unused browser tab
 
 	#After create New account tenant
   @TEST_DOM-179 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web @web-covered
@@ -11,7 +14,7 @@ Feature: Edit Profile
       | 089220221221  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
-    Then user see message error validation "Wajib diisi"
+    Then user will see that the text "Wajib diisi" is displayed
 
   @TEST_DOM-187 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web @web-covered
   Scenario: [Web Tenant][City - Edit Profile ]not select city
@@ -54,7 +57,7 @@ Feature: Edit Profile
       | 089220221221  | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
-    Then user see message error validation "Wajib diisi"
+    Then user will see that the text "Wajib diisi" is displayed
 
   @TEST_DOM-184 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web @web-covered
   Scenario: [Web Tenant][Pekerjaan - Mahasiswa - Edit Profile]Choose list Universitas
