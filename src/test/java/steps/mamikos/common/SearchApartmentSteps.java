@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -13,7 +14,6 @@ import pageobject.common.SearchPO;
 import pageobject.common.apartment.ApartmentDetailPO;
 import pageobject.common.apartment.ApartmentLandingPO;
 import utilities.PlaywrightHelpers;
-import io.cucumber.datatable.DataTable;
 
 import java.util.List;
 import java.util.Map;

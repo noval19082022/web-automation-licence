@@ -58,6 +58,8 @@ public class PropertySayaPO {
     Locator promoNgebutLabel;
     Locator closeInfobarButton;
     Locator priceKostTextBoxDisable;
+    Locator modalPopUp;
+    Locator statusKos;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -103,6 +105,8 @@ public class PropertySayaPO {
         promoNgebutLabel = page.locator(".media-content");
         closeInfobarButton = page.locator(".delete");
         priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
+        modalPopUp = page.locator("//div[@class='modal-content']");
+        statusKos = page.locator(".kos-card__status-name--kos-verified");
     }
 
     /**
@@ -612,4 +616,19 @@ public class PropertySayaPO {
         playwright.clickOn(closeInfobarButton);
     }
 
+    /**
+     * Verify Pop up modal visible
+     * @return boolean true, false
+     */
+    public boolean isPopUpModalVisible() {
+        return playwright.isLocatorVisibleAfterLoad(modalPopUp, 3000.0);
+    }
+
+    /**
+     * Verify status kos
+     * @return statusKos
+     */
+    public boolean isStatusKos() {
+        return playwright.waitTillLocatorIsVisible(statusKos, 3000.0);
+    }
 }

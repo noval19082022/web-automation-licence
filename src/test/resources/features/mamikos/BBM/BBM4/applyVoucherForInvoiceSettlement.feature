@@ -46,8 +46,11 @@ Feature: Apply Voucher For Invoice Settlement
       | 0890867321211 | 0890867321211 | mamikosqa123  |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0890867321211" without close the page
-    And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see payment is success
+    And tenant set active page to 0
+    And tenant navigate to riwayat and draf booking
+    And tenant go to invoice DP from riwayat booking
+    And tenant set active page to 2
+    And tenant get invoice number
 
   @continue
   Scenario: Invoice Settlement and Voucher For First Full Paid

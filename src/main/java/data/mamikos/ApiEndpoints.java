@@ -20,6 +20,7 @@ public class ApiEndpoints {
     public static final String TENANT_BOOKING_LIST = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBookingList");
     public static final String TENANT_BATALKAN_BOOKING_REASON = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBatalkanBookingReason");
     public static final String TENANT_BATALKAN_BOOKING = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantBatalkanBooking");
+    public static final String KOS_DETAIL = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "kosDetail");
     public static final String TENANT_LOGIN = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "tenantLogin");
     public static final String CREATE_BOOKING = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "createBooking");
     // ---- Tenant Block ---- //

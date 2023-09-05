@@ -17,7 +17,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
   @TENG-187
   Scenario: Description on Tanggal Kedaluwarsa
     Then user verify expired point on information point page
-      | 30 Nov 2023 |
+      | 29 Feb 2024 |
 
   @TEST_TENG-200 @TEST_BBM-413 @TEST_TENG-201 @TEST_BBM-405
   Scenario: MamiPoin Tenant Informasi Poin Page When the User Poin is Empty

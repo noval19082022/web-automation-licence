@@ -58,7 +58,9 @@ public class OwnerDashboardPO {
     Locator reviewLists;
     Locator detailReviewLists;
     Locator ratingCardWrapperLists;
-
+    Locator mamiadsSubtitle;
+    Locator mamiadsLihatDisini;
+    Locator saldoMamiAdsButton;
     private Locator fiturPromosiExpand;
 
     public OwnerDashboardPO(Page page) {
@@ -107,6 +109,9 @@ public class OwnerDashboardPO {
         reviewLists = page.locator(".rating-card");
         detailReviewLists = page.locator("//*[@class='row stats-list']");
         ratingCardWrapperLists = page.locator(".rating-card__wrapper");
+        mamiadsSubtitle = page.locator("//span[@class='bg-c-text bg-c-text--body-4']");
+        mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");
+        saldoMamiAdsButton = page.locator(".mamiads-card");
         fiturPromosiExpand = page.getByText("Fitur Promosi");
     }
 
@@ -541,5 +546,29 @@ public class OwnerDashboardPO {
      */
     public void clickOnBroadcastChat() {
         playwright.clickOn(broadcastChatBtn);
+    }
+
+    /**
+     * Get text of mamiads subtitle
+     * @return String subtitle text mamiads
+     */
+    public String getSubtitleMamiads() {
+        return playwright.getText(mamiadsSubtitle);
+    }
+
+    /**
+     * Get text lihat disini mamiads
+     * @return String lihat disini text
+     */
+    public String getLihatDisiniMamiads() {
+        playwright.waitTillLocatorIsVisible(mamiadsSubtitle);
+        return playwright.getText(mamiadsLihatDisini);
+    }
+
+    /**
+     * Click on saldo mamiads card on owner dashboard
+     */
+    public void clickSaldoMamiAdsButton() {
+        playwright.clickOn(saldoMamiAdsButton);
     }
 }

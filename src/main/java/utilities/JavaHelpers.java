@@ -366,6 +366,13 @@ public class JavaHelpers {
     }
 
     //--- Encrypt Decrypt ---//
+
+    /**
+     * Generate Md5
+     * @param md5Target target string
+     * @return String data type
+     * @throws NoSuchAlgorithmException if md5 algorithm not found
+     */
     public static String generateMd5(String md5Target) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(md5Target.getBytes());

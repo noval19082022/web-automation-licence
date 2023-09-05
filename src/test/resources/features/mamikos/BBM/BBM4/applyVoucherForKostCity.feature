@@ -21,8 +21,9 @@ Feature: Apply Voucher For Kost City
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
-    And tenant navigate to tagihan kost saya
-    And tenant go to invoice page
+    And user navigate to tagihan kost saya
+    And user click on "Bayar" button
+    And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOCITY          | AUTOCITY          |
@@ -46,8 +47,9 @@ Feature: Apply Voucher For Kost City
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
-    And tenant navigate to tagihan kost saya
-    And tenant go to invoice page
+    And user navigate to tagihan kost saya
+    And user click on "Bayar" button
+    And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOCITY          | AUTOCITY          |

@@ -20,7 +20,7 @@ Feature: Billing Reminder - PN Template
 #  Scenario: Add Template With Existing Day Period
     Given user create new PN template:
       | day     | title                   | content                    |
-      | -7      | untuk automation        | untuk automation content   |
+      | -1      | untuk automation        | untuk automation content   |
     Then user verify cannot create billing reminder template
 
 #  Scenario: Delete Template

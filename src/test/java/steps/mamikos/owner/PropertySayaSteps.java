@@ -328,4 +328,13 @@ public class PropertySayaSteps {
         Assert.assertEquals(propertySaya.getYearlyPrice(), this.yearlyPrice, "Yearly price is not correct");
     }
 
+    @Then("verify tambah data pop up is appear")
+    public void verifyTambahDataPopUpIsAppear() {
+        Assert.assertTrue(propertySaya.isPopUpModalVisible(), "Pop up modal doesn't appear!");
+    }
+
+    @And("verify kos is {string}")
+    public void verifyKosIs(String statusKos) {
+        Assert.assertTrue(propertySaya.isStatusKos(), "Status kos doesn't match!");
+    }
 }
