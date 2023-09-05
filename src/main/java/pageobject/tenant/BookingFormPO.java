@@ -53,7 +53,7 @@ public class BookingFormPO {
         this.simpanButton = page.locator(".bg-c-button--secondary");
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.uploadDoc = page.locator("div").getByTestId("bookingDocumentUploader").first().locator("//input[@type='file']");
-        this.alertTextAfterClick = page.getByText("Masukkan pekerjaan untuk memproses pengajuan sewa.");
+        this.alertTextAfterClick = page.getByText("Masukkan nama pekerjaan untuk memproses pengajuan sewa.");
         tungguKonfirmasiPemilik = page.getByText("Tunggu Konfirmasi");
         this.tncBookingRegulerLink = page.locator("a.bg-c-link--medium:nth-child(1)");
         this.tncBookingSinggahsiniLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan"));
