@@ -55,6 +55,9 @@ public class PropertySayaPO {
     Locator locationTextBox;
     Locator locationAutoComplete;
     Locator addressNotesInput;
+    Locator promoNgebutLabel;
+    Locator closeInfobarButton;
+    Locator priceKostTextBoxDisable;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -97,6 +100,9 @@ public class PropertySayaPO {
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
         locationTextBox = page.getByTestId("mamikosInput");
         addressNotesInput = page.getByRole(AriaRole.TEXTBOX).nth(2);
+        promoNgebutLabel = page.locator(".media-content");
+        closeInfobarButton = page.locator(".delete");
+        priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
     }
 
     /**
@@ -581,6 +587,29 @@ public class PropertySayaPO {
         playwright.pageScrollUntilElementIsVisible(addressNotesInput);
         playwright.clearText(addressNotesInput);
         playwright.fill(addressNotesInput,notes);
+    }
+
+    /**
+     * Get text in promo ngebut infobar
+     * @return String promo ngebut info
+     */
+    public String getPromoNgebutInfo() {
+        return playwright.getText(promoNgebutLabel);
+    }
+
+    /**
+     * Verify if monthly price field is enable
+     * @return true if enable
+     */
+    public boolean isMonthlyPriceFieldDisable() {
+        return playwright.isButtonDisable(priceKostTextBoxDisable.first());
+    }
+
+    /**
+     * Click close infobar button
+     */
+    public void clickCloseInfobar() {
+        playwright.clickOn(closeInfobarButton);
     }
 
 }

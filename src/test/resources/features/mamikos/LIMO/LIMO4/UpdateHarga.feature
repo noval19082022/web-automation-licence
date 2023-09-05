@@ -1,4 +1,4 @@
-@regression @LIMO4 @EX-LG
+@regression @LIMO41 @EX-LG
 Feature: Update Harga
 
   @TEST_LIMO-2798 @continue
@@ -49,3 +49,25 @@ Feature: Update Harga
     And user see three monthly price is 7500000
     And user see six monthly price is 15000000
     And user see yearly price is 30000000
+
+  @TEST_LIMO-2905 @continue
+  Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Active without update price
+    When owner navigates to property saya kos
+    And owner search kost "Kost Tester" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Harga"
+    And user click see other prices
+    And user memorize daily, weekly, monthly, three monthly, six monthly, and yearly price
+    And user clicks update price button
+    Then user see pop up success update price "Harga berhasil diupdate"
+    And user see daily, weekly, monthly, three monthly, six monthly, and yearly price is same with previous price
+
+  @TEST_LIMO-2734 @continue
+  Scenario: [WEB][Update Harga] Owner can't update price when "promo ngebut" active
+    When owner navigates to property saya kos
+    And owner search kost "Kose Putra Automation" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Harga"
+    Then user see infobar in update price with text "Anda sedang mengikuti promo ngebut, harga tidak dapat diubah sampai promo berakhir"
+    And user see monthly price field is disabled
+    When user close infobar promo ngebut in update price

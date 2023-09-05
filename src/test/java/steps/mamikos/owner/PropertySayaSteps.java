@@ -19,6 +19,12 @@ public class PropertySayaSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     PropertySayaPO propertySaya = new PropertySayaPO (page);
     private JavaHelpers javaHelpers = new JavaHelpers();
+    private Integer dailyPrice = null;
+    private Integer weeklyPrice = null;
+    private Integer monthlyPrice = null;
+    private Integer threeMonthlyPrice = null;
+    private Integer sixMonthlyPrice = null;
+    private Integer yearlyPrice = null;
 
 
     @And("owner search kost {string} on property saya page")
@@ -285,6 +291,41 @@ public class PropertySayaSteps {
     public void user_input_address_note_and_random_text(String note) {
         String random = javaHelpers.generateAlphanumeric(6);
         propertySaya.enterAddressNotes(note + random);
+    }
+
+    @When("user memorize daily, weekly, monthly, three monthly, six monthly, and yearly price")
+    public void user_memorize_daily_weekly_monthly_three_monthly_six_monthly_and_yearly_price() {
+        this.dailyPrice = propertySaya.getDailyPrice();
+        this.weeklyPrice = propertySaya.getWeeklyPrice();
+        this.monthlyPrice = propertySaya.getMonthlyPrice();
+        this.threeMonthlyPrice = propertySaya.getThreeMonthlyPrice();
+        this.sixMonthlyPrice = propertySaya.getSixMonthlyPrice();
+        this.yearlyPrice = propertySaya.getYearlyPrice();
+    }
+
+    @Then("user see infobar in update price with text {string}")
+    public void user_see_infobar_in_update_price_with_text(String text) {
+        Assert.assertEquals(JavaHelpers.removeExtraNewLine(propertySaya.getPromoNgebutInfo()), text);
+    }
+
+    @Then("user see monthly price field is disabled")
+    public void user_see_monthly_price_field_is_disabled() {
+        Assert.assertTrue(propertySaya.isMonthlyPriceFieldDisable(), "Monthly price field is not disable");
+    }
+
+    @When("user close infobar promo ngebut in update price")
+    public void user_close_infobar_promo_ngebut_in_update_price() throws InterruptedException {
+        propertySaya.clickCloseInfobar();
+    }
+
+    @Then("user see daily, weekly, monthly, three monthly, six monthly, and yearly price is same with previous price")
+    public void user_see_daily_weekly_monthly_three_monthly_six_monthly_and_yearly_price_is_same_with_previous_price() {
+        Assert.assertEquals(propertySaya.getDailyPrice(), this.dailyPrice, "Daily price is not correct");
+        Assert.assertEquals(propertySaya.getWeeklyPrice(), this.weeklyPrice, "Weekly price is not correct");
+        Assert.assertEquals(propertySaya.getMonthlyPrice(), this.monthlyPrice, "Monthly price is not correct");
+        Assert.assertEquals(propertySaya.getThreeMonthlyPrice(), this.threeMonthlyPrice, "Three monthly price is not correct");
+        Assert.assertEquals(propertySaya.getSixMonthlyPrice(), this.sixMonthlyPrice, "Six monthly price is not correct");
+        Assert.assertEquals(propertySaya.getYearlyPrice(), this.yearlyPrice, "Yearly price is not correct");
     }
 
 }
