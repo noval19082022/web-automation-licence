@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class PropertySayaPO {
@@ -51,6 +52,12 @@ public class PropertySayaPO {
     Locator editSelesaiButton;
     Locator titleSuccessEditPopUpText;
     Locator doneButtonEditKosPopUp;
+    Locator locationTextBox;
+    Locator locationAutoComplete;
+    Locator addressNotesInput;
+    Locator promoNgebutLabel;
+    Locator closeInfobarButton;
+    Locator priceKostTextBoxDisable;
     Locator modalPopUp;
     Locator statusKos;
 
@@ -93,6 +100,11 @@ public class PropertySayaPO {
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
         titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
+        locationTextBox = page.getByTestId("mamikosInput");
+        addressNotesInput = page.getByRole(AriaRole.TEXTBOX).nth(2);
+        promoNgebutLabel = page.locator(".media-content");
+        closeInfobarButton = page.locator(".delete");
+        priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
         modalPopUp = page.locator("//div[@class='modal-content']");
         statusKos = page.locator(".kos-card__status-name--kos-verified");
     }
@@ -105,7 +117,7 @@ public class PropertySayaPO {
     public void searchKostPropertySaya(String kostName){
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
-        Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName));
+        Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
         playwright.clickOn(kostSearch);
     }
 
@@ -225,6 +237,55 @@ public class PropertySayaPO {
     public void inputYearlyPrice(String yearlyPrice) {
         priceKostTextBox.nth(5).clear();
         priceKostTextBox.nth(5).fill(yearlyPrice);
+    }
+
+    /**
+     * Get text price daily
+     *
+     * @return Integer daily price
+     */
+    public int getDailyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(1)));
+    }
+
+    /**
+     * Get text price weekly
+     * @return Integer weekly price
+     */
+    public int getWeeklyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(2)));
+    }
+
+    /**
+     * Get text price monthly
+     * @return Integer monthly price
+     */
+    public int getMonthlyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.first()));
+    }
+
+    /**
+     * Get text price three monthly
+     * @return Integer three monthly price
+     */
+    public int getThreeMonthlyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(3)));
+    }
+
+    /**
+     * Get text price six monthly
+     * @return Integer six monthly price
+     */
+    public int getSixMonthlyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(4)));
+    }
+
+    /**
+     * Get text price yearly
+     * @return Integer yearly price
+     */
+    public int getYearlyPrice() {
+        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(5)));
     }
 
     /**
@@ -502,9 +563,62 @@ public class PropertySayaPO {
     }
 
     /**
+     * Input kost location in create kost page
+     */
+    public void insertKosLocation(String locationName) {
+        playwright.hardWait(3000.0);
+        page.onDialog(dialog -> {
+            System.out.println(String.format("Allow", dialog.message()));
+            dialog.dismiss();
+        });
+        playwright.clickOn(locationTextBox);
+        playwright.fill(locationTextBox,locationName);
+    }
+
+    /**
+     * Click on the first autocomplete result
+     */
+    public void clickOnFirstResult(String location) {
+        locationAutoComplete = page.getByText(location).first();
+        playwright.clickOn(locationAutoComplete);
+    }
+
+    /**
+     * Enter address notes
+     * @param notes is address notes
+     */
+    public void enterAddressNotes(String notes) {
+        playwright.pageScrollUntilElementIsVisible(addressNotesInput);
+        playwright.clearText(addressNotesInput);
+        playwright.fill(addressNotesInput,notes);
+    }
+
+    /**
+     * Get text in promo ngebut infobar
+     * @return String promo ngebut info
+     */
+    public String getPromoNgebutInfo() {
+        return playwright.getText(promoNgebutLabel);
+    }
+
+    /**
+     * Verify if monthly price field is enable
+     * @return true if enable
+     */
+    public boolean isMonthlyPriceFieldDisable() {
+        return playwright.isButtonDisable(priceKostTextBoxDisable.first());
+    }
+
+    /**
+     * Click close infobar button
+     */
+    public void clickCloseInfobar() {
+        playwright.clickOn(closeInfobarButton);
+    }
+
+    /**
      * Verify Pop up modal visible
      * @return boolean true, false
-     *
      */
     public boolean isPopUpModalVisible() {
         return playwright.isLocatorVisibleAfterLoad(modalPopUp, 3000.0);
@@ -513,7 +627,6 @@ public class PropertySayaPO {
     /**
      * Verify status kos
      * @return statusKos
-     *
      */
     public boolean isStatusKos() {
         return playwright.waitTillLocatorIsVisible(statusKos, 3000.0);

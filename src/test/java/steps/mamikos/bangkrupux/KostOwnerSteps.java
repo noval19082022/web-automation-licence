@@ -24,4 +24,9 @@ public class KostOwnerSteps {
         kostOwner.clickOnFirstRadioButton();
         kostOwner.clickOnRejectButton();
     }
+
+    @And("user verify the kos in admin kos owner")
+    public void userVerifyTheKosInAdminKosOwner() {
+        kostOwner.clickOnFirstVerifyButton();
+    }
 }

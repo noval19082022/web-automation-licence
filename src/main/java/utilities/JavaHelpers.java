@@ -1,6 +1,7 @@
 package utilities;
 
 import data.mamikos.Mamikos;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Mac;
@@ -353,6 +354,16 @@ public class JavaHelpers {
         return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
     }
     //--- String Manipulator ---//
+
+    /**
+     * Generate random Alphanumeric String
+     *
+     * @param totalChar is total character of generated String
+     * @return String random alphanumeric
+     */
+    public String generateAlphanumeric(int totalChar) {
+        return RandomStringUtils.randomAlphanumeric(totalChar);
+    }
 
     //--- Encrypt Decrypt ---//
 
