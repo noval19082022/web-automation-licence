@@ -12,5 +12,5 @@ Feature: Apply Voucher For Invoice Meet Minimal Contract Duration
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOQUARTERLY     | AUTOQUARTERLY     |
+      | AUTOSUGGESTION    | AUTOQUARTERLY     |
     Then tenant can see voucher is applied
