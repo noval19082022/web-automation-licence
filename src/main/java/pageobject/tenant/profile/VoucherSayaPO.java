@@ -103,6 +103,7 @@ public class VoucherSayaPO {
      * @return true if voucher card present
      */
     public boolean isVoucherCardVisible(){
+        playwright.waitFor(checkVoucherCard, 3000.0);
         return checkVoucherCard.isVisible();
     }
 
