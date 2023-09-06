@@ -34,7 +34,8 @@ public class CreateBooking {
     private static boolean
             isFlashSale,
             isMarried,
-            isBringChild;
+            isBringChild,
+            isDownPaymentActive;
 
     @Setter @Getter
     private static Object contactPhone;

@@ -54,19 +54,6 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
-    @And("tenant select payment method using Permata")
-    public void tenantSelectPaymentMethodUsingPermata() {
-        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
-        invoicePO.clickOnPilihPembayaran();
-        invoicePO.clickOnPermata();
-        invoicePO.clickOnBayarSekarang();
-        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
-        page = ActiveContext.getActiveBrowserContext().pages().get(1);
-        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
-        midtransPaymentPO.paymentForPermata(kodePembayaran);
-    }
-
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
@@ -78,7 +65,7 @@ public class PaymentSteps {
     public void paymentSuccess() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
-        Assert.assertTrue(paymentPO.isPaymentSuccess(), "Payment failed");
+        Assert.assertEquals(paymentPO.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
 
     @Then("tenant can not sees price with name {string} on invoice page")
@@ -99,5 +86,18 @@ public class PaymentSteps {
     public void userRemoveVoucher() {
         invoicePO = new InvoicePO(ActiveContext.getActivePage());
         invoicePO.clickOnDeleteVoucher();
+    }
+
+    @And("tenant select payment method using {string}")
+    public void tenantSelectPaymentMethodUsing(String Bank) {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        page = ActiveContext.getActiveBrowserContext().pages().get(1);
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
     }
 }

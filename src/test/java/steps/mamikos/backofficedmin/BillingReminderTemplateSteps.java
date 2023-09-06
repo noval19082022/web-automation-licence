@@ -3,6 +3,7 @@ package steps.mamikos.backofficedmin;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,7 +27,7 @@ public class BillingReminderTemplateSteps {
     }
 
     @When("user set the initial state to display Billing template Day {string}")
-    public void user_set_the_initial_state_to_display_billing_template(String day){
+    public void user_set_the_initial_state_to_display_billing_template(String day) {
         BillingReminderPO.setBillingTemplate(day);
 
     }
@@ -39,7 +40,6 @@ public class BillingReminderTemplateSteps {
     @Then("user verify delete billing Template with content {string}")
     public void userVerifyDeleteBillingTemplateWithContent(String content) {
         Assert.assertFalse(BillingReminderPO.isTableContentTemplateAppeared(content), "Template table content " + content + " is still appeared");
-
     }
 
     @Given("user create new template:")

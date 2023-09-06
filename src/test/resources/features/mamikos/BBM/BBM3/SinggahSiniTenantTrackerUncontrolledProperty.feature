@@ -1,4 +1,4 @@
-@regression @tenantTracker @BBM3
+@regression @tenantTracker @BBM3 @noval
 
 Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
 
@@ -57,6 +57,6 @@ Feature: SinggahSini - Tenant Tracker - Uncontrolled Property
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
     And admin go to tenant communication menu
-    And user choose "Nama Properti" and input "Kost Adi Auto Regular" in the search field on main page
+    And user choose "Nama Properti" and input "Kost jakarta barat" in the search field on main page
     And user click search button on main page filter
     Then user can see "Data Tidak Ditemukan" on page

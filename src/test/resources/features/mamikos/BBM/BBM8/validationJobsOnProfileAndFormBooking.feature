@@ -11,7 +11,7 @@ Feature: Edit profile for jobs as Lainnya
       | kost name stag                               | kost name prod                         |
       | kost jawa Tobelo Utara Halmahera Utara       | kost jawa Tobelo Utara Halmahera Utara |
     And tenant booking kost for "Tomorrow"
-    Then user can see validation on jobs with "Masukkan pekerjaan untuk memproses pengajuan sewa."
+    Then user can see validation on jobs with "Masukkan nama pekerjaan untuk memproses pengajuan sewa."
 
   @TEST_BBM-1510 @continue
   Scenario: Change pekerjaan to Karyawan and fill with invalid data from booking detail

@@ -1,6 +1,7 @@
 package utilities;
 
 import data.mamikos.Mamikos;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Mac;
@@ -354,7 +355,24 @@ public class JavaHelpers {
     }
     //--- String Manipulator ---//
 
+    /**
+     * Generate random Alphanumeric String
+     *
+     * @param totalChar is total character of generated String
+     * @return String random alphanumeric
+     */
+    public String generateAlphanumeric(int totalChar) {
+        return RandomStringUtils.randomAlphanumeric(totalChar);
+    }
+
     //--- Encrypt Decrypt ---//
+
+    /**
+     * Generate Md5
+     * @param md5Target target string
+     * @return String data type
+     * @throws NoSuchAlgorithmException if md5 algorithm not found
+     */
     public static String generateMd5(String md5Target) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(md5Target.getBytes());

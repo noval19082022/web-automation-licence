@@ -14,6 +14,7 @@ public class KostOwnerPO {
     Locator firstRejectButton;
     Locator firstRejectReasonRadioButton;
     Locator rejectButton;
+    Locator firstVerifyButton;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -23,6 +24,7 @@ public class KostOwnerPO {
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
         firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
+        firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
     }
 
     /**
@@ -65,5 +67,12 @@ public class KostOwnerPO {
      */
     public void clickOnRejectButton() {
         playwright.clickOn(rejectButton);
+    }
+
+    /**
+     * Click on first verify button
+     */
+    public void clickOnFirstVerifyButton() {
+        playwright.clickOn(firstVerifyButton);
     }
 }
