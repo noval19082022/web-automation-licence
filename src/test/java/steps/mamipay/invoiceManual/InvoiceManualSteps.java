@@ -25,6 +25,7 @@ public class InvoiceManualSteps {
     private InvoiceManualPO manualInvoice = new InvoiceManualPO(page);
     HomePO home = new HomePO(page);
     Page page1;
+    JavaHelpers java = new JavaHelpers();
 
     private String listing;
     private String tenant;
@@ -47,6 +48,7 @@ public class InvoiceManualSteps {
     private String tglInvDibuat = JavaHelpers.getPropertyValue(invoiceManual, "tglInvDibuat");
     private String tglMulaiTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglMulaiTitle");
     private String tglAkhirTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglAkhirTitle");
+    private String toastUbahStatus = JavaHelpers.getPropertyValue(invoiceManual, "toastUbahStatus");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -437,23 +439,21 @@ public class InvoiceManualSteps {
 
     @When("admin set waktu pembayaran {string}")
     public void admin_set_waktu_pembayaran(String time){
-        if (time.equalsIgnoreCase("1000")){
-            manualInvoice.setTimeOnUbahStatus(time);
-            manualInvoice.clicksSimpanOnUbahStatus();
-            manualInvoice.toastUbahStatus();
-        }
+        manualInvoice.setTimeOnUbahStatus(time);
+        manualInvoice.clicksSimpanOnUbahStatus();
+        Assert.assertEquals(manualInvoice.getToastUbahStatus(), toastUbahStatus, "the toast message does not match");
     }
 
     @Then("Status Invoice is {string} and paid date at {string}, {string}")
     public void Status_Invoice_is_and_paid_date_at(String statusInv, String date, String time){
-        manualInvoice.assertValueStatusInv(statusInv);
+        Assert.assertEquals(manualInvoice.getValueStatusInv(statusInv), statusInv, "Status Invoice does not match");
         if (date.equalsIgnoreCase("today")){
             SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
             Date day = new Date();
-            String expectedDate = today.format(day);
-            manualInvoice.assertPaidDate(expectedDate);
+            String expectedDate = "at "+today.format(day)+", "+time;
+
+            Assert.assertTrue(manualInvoice.getPaidTime().contains(expectedDate));
         }
-        manualInvoice.assertTime(time);
     }
 
     //---Biaya Tambahan Pop Up---//

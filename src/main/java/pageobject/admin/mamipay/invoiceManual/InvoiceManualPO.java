@@ -924,27 +924,19 @@ public class InvoiceManualPO {
     }
 
     /**
-     * assert toast Ubah Status Invoice
+     * Get toast success add biaya sewa / biaya tambahan
+     * @return String biaya sewa / biaya tambahan toast
      */
-    public void toastUbahStatus(){
-        playwright.assertVisible(toastUbahStatus);
+    public String getToastUbahStatus(){
+        return playwright.getText(toastUbahStatus);
     }
 
     /**
-     * assert Paid Date on Status Invoice coloumn
-     * @param expectedDate
+     * get Paid Time on Status Invoice coloumn
+     * @return String Time
      */
-    public void assertPaidDate(String expectedDate){
-        assertThat(statusInvCol).containsText(expectedDate);
-    }
-
-    /**
-     * assert Time on Status Invoice coloumn
-     * @param time
-     */
-    public void assertTime(String time){
-        assertThat(statusInvCol).containsText(time);
-        System.out.println(time);
+    public String getPaidTime(){
+        return playwright.getText(statusInvCol);
     }
 
     //---Biaya Tambahan---//
@@ -1302,6 +1294,16 @@ public class InvoiceManualPO {
     public void assertValueStatusInv(String result){
         valueStatusInv = page.getByTestId("invoice-manual-item-0").getByText(result);
         assertThat(valueStatusInv).hasText(result);
+    }
+
+    /**
+     * get Value on Status Invoice coloumn
+     * @param statusInv
+     * @return String Status Invoice
+     */
+    public String getValueStatusInv(String statusInv){
+        valueStatusInv = page.locator("//tr[@data-testid='invoice-manual-item-0']//div[contains(., '" +statusInv+ "')]");
+        return playwright.getText(valueStatusInv);
     }
 
     /**

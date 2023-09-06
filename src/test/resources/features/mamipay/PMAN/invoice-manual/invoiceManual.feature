@@ -196,8 +196,8 @@
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
         | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
-      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/80637"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/46053"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Penyewa
