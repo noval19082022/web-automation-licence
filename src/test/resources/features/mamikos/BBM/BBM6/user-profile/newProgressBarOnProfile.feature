@@ -1,6 +1,6 @@
 Feature: New Progress bar on Profile
 
-	@TEST_BBM-4612 @Manual @update-user-profile @web @TEST_BBM-4610
+	@TEST_BBM-4612 @Manual @update-user-profile @TEST_BBM-4610
 	Scenario: [Profile][Informasi Pribadi]Tenant only complete for mandatory profile
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
