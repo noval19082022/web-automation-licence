@@ -402,6 +402,60 @@ public class InvoiceManualSteps {
         }
     }
 
+    @When("choose action {string}")
+    public void choose_action(String button){
+        if (button.equalsIgnoreCase("Ubah Status")){
+            manualInvoice.clicksKebabBtn();
+            manualInvoice.clicksUbahStatus();
+        } else if (button.equalsIgnoreCase("Lihat Detail")) {
+
+        }
+    }
+
+    @When("admin close Ubah Status Invoice and open Ubah Status again")
+    public void admin_close_Ubah_Status_Invoice_and_open_Ubah_Status_again(){
+        manualInvoice.clicksKembaliOnUbahStatus();
+        manualInvoice.clicksKebabBtn();
+        manualInvoice.clicksUbahStatus();
+        manualInvoice.clickClosePopUp();
+        manualInvoice.clicksKebabBtn();
+        manualInvoice.clicksUbahStatus();
+    }
+
+    @When("admin go to last page")
+    public void admin_go_to_last_page(){
+        manualInvoice.goToLastPageInvoiceManual();
+    }
+
+    @When("admin set tanggal pembayaran {string}")
+    public void admin_set_tanggal_pembayaran(String date){
+        if (date.equalsIgnoreCase("today")){
+            manualInvoice.clicksCalViewOnUbahStatus();
+            manualInvoice.setTanggalMulai(date);
+        }
+    }
+
+    @When("admin set waktu pembayaran {string}")
+    public void admin_set_waktu_pembayaran(String time){
+        if (time.equalsIgnoreCase("1000")){
+            manualInvoice.setTimeOnUbahStatus(time);
+            manualInvoice.clicksSimpanOnUbahStatus();
+            manualInvoice.toastUbahStatus();
+        }
+    }
+
+    @Then("Status Invoice is {string} and paid date at {string}, {string}")
+    public void Status_Invoice_is_and_paid_date_at(String statusInv, String date, String time){
+        manualInvoice.assertValueStatusInv(statusInv);
+        if (date.equalsIgnoreCase("today")){
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date day = new Date();
+            String expectedDate = today.format(day);
+            manualInvoice.assertPaidDate(expectedDate);
+        }
+        manualInvoice.assertTime(time);
+    }
+
     //---Biaya Tambahan Pop Up---//
     @When("the admin selects {string} in the {string}")
     public void the_admin_selects_in_the(String biaya, String invType){

@@ -40,6 +40,9 @@ public class InvoiceManualPO {
     private Locator notFound;
     private Locator clearSearchValue;
     private Locator dibuatOlehCol;
+    private Locator kebabBtn;
+    private Locator ubahStatusBtn;
+    private Locator statusInvCol;
     // Invoice List Page
 
     //Filter Invoice Manual
@@ -150,7 +153,16 @@ public class InvoiceManualPO {
     //---Edit Invoice Manual Pop Up---//
     private Locator namaBiayaDropdownEdit;
     //---Edit Invoice Manual Pop Up---//
-    
+
+    //---Ubah Status Invoice---//
+    private Locator kembaliBtnOnUbahStatus;
+    private Locator calViewOnUbahStatus;
+    private Locator timeOnUbahStatus;
+    private Locator timeField;
+    private Locator simpanBtnOnUbahStatus;
+    private Locator toastUbahStatus;
+    //---Ubah Status Invoice---//
+
     public InvoiceManualPO(Page page){
         this.page = page;
 
@@ -168,6 +180,9 @@ public class InvoiceManualPO {
         notFound = page.getByText("Data yang dicari tidak ditemukan");
         clearSearchValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         dibuatOlehCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(6);
+        kebabBtn = page.getByTestId("invoice-manual-item-0").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("open options for this item"));
+        ubahStatusBtn = page.getByTestId("invoice-manual-item-0").getByTestId("invoice-manual-change-status");
+        statusInvCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(5);
 
         //---Filter Invoice Manual---//
         filter = page.getByTestId("invoice-manual-filter-button-filter");
@@ -247,6 +262,13 @@ public class InvoiceManualPO {
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
 
+        //---Ubah Status Invoice---//
+        kembaliBtnOnUbahStatus = page.getByTestId("change-status-cancel");
+        calViewOnUbahStatus = page.getByPlaceholder("Pilih tanggal di sini");
+        timeOnUbahStatus = page.getByTestId("change-status-paid-time");
+        timeField = page.locator("//*[@data-testid='change-status-paid-time']");
+        simpanBtnOnUbahStatus = page.getByTestId("change-status-save");
+        toastUbahStatus = page.locator("//*[@class='global-toast bg-c-toast bg-c-toast--fixed']");
     }
 
     /**
@@ -856,6 +878,73 @@ public class InvoiceManualPO {
      */
     public void clearSearchValue(){
         clearSearchValue.click();
+    }
+
+    /**
+     * clicks Kebab button on Action coloumn
+     */
+    public void clicksKebabBtn(){
+        playwright.clickOn(kebabBtn);
+    }
+
+    /**
+     * clicks Ubah Status button
+     */
+    public void clicksUbahStatus(){
+        playwright.clickOn(ubahStatusBtn);
+    }
+
+    /**
+     * clicks Kembali button on Ubah Status Invoice pop up
+     */
+    public void clicksKembaliOnUbahStatus(){
+        playwright.clickOn(kembaliBtnOnUbahStatus);
+    }
+
+    /**
+     * clicks Calendar View on Ubah Status Invoice pop up
+     */
+    public void clicksCalViewOnUbahStatus(){
+        playwright.clickOn(calViewOnUbahStatus);
+    }
+
+    /**
+     * set Time on Ubah Status Invoice
+     * @param time
+     */
+    public void setTimeOnUbahStatus(String time){
+        playwright.fillCharacterByCharacter(timeField, time);
+    }
+
+    /**
+     * clicks Simpan on Ubah Status Invoice
+     */
+    public void  clicksSimpanOnUbahStatus(){
+        playwright.clickOn(simpanBtnOnUbahStatus);
+    }
+
+    /**
+     * assert toast Ubah Status Invoice
+     */
+    public void toastUbahStatus(){
+        playwright.assertVisible(toastUbahStatus);
+    }
+
+    /**
+     * assert Paid Date on Status Invoice coloumn
+     * @param expectedDate
+     */
+    public void assertPaidDate(String expectedDate){
+        assertThat(statusInvCol).containsText(expectedDate);
+    }
+
+    /**
+     * assert Time on Status Invoice coloumn
+     * @param time
+     */
+    public void assertTime(String time){
+        assertThat(statusInvCol).containsText(time);
+        System.out.println(time);
     }
 
     //---Biaya Tambahan---//

@@ -292,7 +292,7 @@
       And admin selects the date for "today" with clicks Terapkan
       Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
 
-    @TEST_PMAN-6212
+    @continue @TEST_PMAN-6212
     Scenario: Filter Invoice Manual
       When admin refresh page and clicks Filter in Invoice Manual
       #Default Filter Unpaid
@@ -300,3 +300,25 @@
       Then "unpaid" Status Invoice is displayed
       When admin clicks "Reset" button on Filter
       Then the counter on filter is disappears
+
+    @continue @TEST_PMAN-6144
+    Scenario: Ubah Status Invoice from Unpaid to Paid
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown
+      When admin go to last page
+      And choose action "Ubah Status"
+      And admin close Ubah Status Invoice and open Ubah Status again
+      And admin set tanggal pembayaran "today"
+      And admin set waktu pembayaran "1000"
+      Then Status Invoice is "paid" and paid date at "today", "10:00"
+
+    @TEST_PMAN-6253
+    Scenario: Ubah Status Invoice from Expired to Paid
+      When admin clicks "Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Expired" on the "Status Invoice" dropdown
+      When admin go to last page
+      And choose action "Ubah Status"
+      And admin set tanggal pembayaran "today"
+      And admin set waktu pembayaran "1000"
+      Then Status Invoice is "paid" and paid date at "today", "10:00"
