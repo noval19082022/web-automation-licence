@@ -55,6 +55,10 @@ public class TenantEditProfilePO {
     Locator errorMessageFullName;
     Locator fillNamaKampus;
     Locator listStatus;
+    Locator profilDisclaimer;
+    Locator profilePresentageInformation;
+    Locator profileMicrocopyInformation;
+    Locator batalButton;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -101,6 +105,10 @@ public class TenantEditProfilePO {
         errorMessageFullName = page.getByText("Nama lengkap wajib diisi");
         fillNamaKampus = page.getByPlaceholder("Tulis nama kampus/sekolah Anda di sini");
         listStatus =  page.getByTestId("userEditProfile").getByRole(AriaRole.LIST);
+        profilDisclaimer = page.locator("//div[@class=\"bg-c-alert__content\"]");
+        profilePresentageInformation = page.locator("//*[@class=\"bg-c-progress-bar__labels\"]");
+        profileMicrocopyInformation = page.locator("//p[contains(.,'Profil yang lengkap')]");
+        batalButton = page.locator("//button[contains(.,'Batal')]");
     }
 
 
@@ -492,4 +500,37 @@ public class TenantEditProfilePO {
         Locator phoneNumber = page.getByText(number);
         return playwright.waitTillLocatorIsVisible(phoneNumber);
     }
+
+    /**
+     * user verify information on profile page
+     * @return
+     */
+    public String getProfileDisclaimer(){
+        return playwright.getText(profilDisclaimer);
+    }
+
+    /**
+     * user verify information presetage
+     * @return
+     */
+    public String getProfilePersentageInformation() {
+        return playwright.getText(profilePresentageInformation);
+    }
+
+    /**
+     * user verify sub information on kost saya page
+     * @return
+     */
+    public String getProfileMicrocoyInformation(String text) {
+        return playwright.getText(profileMicrocopyInformation);
+    }
+
+    /**
+     * user click on Batal button
+     */
+    public void userClickBatalButton() {
+        batalButton.scrollIntoViewIfNeeded();
+        playwright.clickOn(batalButton);
+    }
+
 }
