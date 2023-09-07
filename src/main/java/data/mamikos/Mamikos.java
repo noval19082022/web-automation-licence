@@ -50,4 +50,5 @@ public class Mamikos {
     public static final String OWNERPAGE_APARTEMEN = JavaHelpers.getPropertyValue(MAMIKOS, "mamikosApartemen");
     public static final String BROADCAST_CHAT = JavaHelpers.getPropertyValue(MAMIKOS, "broadcastChat");
     public static final String AKUN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerSetting") ;
+    public static final String PROPERTY_SAYA_APARTEMENT = JavaHelpers.getPropertyValue(MAMIKOS, "propertyApartement");
 }
