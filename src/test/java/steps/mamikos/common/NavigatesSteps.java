@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
+import pageobject.pms.LoginPMSPO;
 import utilities.PlaywrightHelpers;
 
 public class NavigatesSteps {
@@ -19,6 +20,7 @@ public class NavigatesSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
+    LoginPMSPO loginPMS = new LoginPMSPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -160,9 +162,7 @@ public class NavigatesSteps {
 
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
-        page = FlowControl.isPmsFlow() ? PmsActiveContext.getPmsActivePage() : PmsActiveContext.getPmsActivePage1();
-        playwright = new PlaywrightHelpers(page);
-        playwright.navigateTo(Mamikos.PMS_URL);
+        loginPMS.navigateToPmsLoginPage();
     }
 
     @When("owner navigates to property saya kos")

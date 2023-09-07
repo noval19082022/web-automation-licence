@@ -18,33 +18,38 @@ public class Hooks{
      */
     @Before
     public void setup(Scenario scenario) {
-        if (scenario.getSourceTagNames().contains("@pmsContext") || scenario.getSourceTagNames().contains("@pmsContext1")) {
+        if (scenario.getSourceTagNames().contains("@multipleContext")) {
             if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
-                if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
-                    System.out.println("saya di sini gaes");
-                    //ini ngeset pms browser context
-                    PmsContextInitializer.initializePmsBrowserContext();
-                    PmsContextInitializer.initializePmsPage();
-                    FlowControl.setPmsFlow(true);
-                    FlowControl.setPmsFlow1(false);
-                    System.out.println("selesai init browser context pms");
+                if (scenario.getSourceTagNames().contains("@pmsContext")) {
+                    System.out.println("saya ke sini karena pmsContext true");
+                    if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
+                        PmsContextInitializer.initializePmsBrowserContext();
+                        PmsContextInitializer.initializePmsPage();
+                        FlowControl.setPmsFlow(true);
+                        FlowControl.setPmsFlow1(false);
+                    }
                 }
-
-                if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
-                    //ini ngeset pms browser context 1
-                    PmsContextInitializer1.initializePmsBrowserContext1();
-                    PmsContextInitializer1.initializePmsPage1();
-                    FlowControl.setPmsFlow1(true);
-                    FlowControl.setPmsFlow(false);
+                if (scenario.getSourceTagNames().contains("@pmsContext1")) {
+                    System.out.println("saya ke sini karena pmsContext1 true");
+                    if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
+                        PmsContextInitializer1.initializePmsBrowserContext1();
+                        PmsContextInitializer1.initializePmsPage1();
+                        FlowControl.setPmsFlow1(true);
+                        FlowControl.setPmsFlow(false);
+                    }
                 }
             }
+            FlowControl.setMultipleContextFlow(true);
         }
 
         if (scenario.getSourceTagNames().contains("@continue")) {
             FlowControl.setContinueFlow(true);
         }
 
-        if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
+        if ((!scenario.getSourceTagNames().contains("@continue") && !FlowControl.isMultipleContextFlow()) || !FlowControl.isContinueFlow()) {
+            System.out.println("seharusnya tidak ke sini");
+            System.out.println(!scenario.getSourceTagNames().contains("@continue") && !scenario.getSourceTagNames().contains("@multipleContext"));
+            System.out.println(!FlowControl.isContinueFlow());
             if (ActiveContext.getActiveBrowserContext() == null || ActiveContext.getActiveBrowserContext().pages().isEmpty()) {
                 UserContextInitializer.initializeUserBrowserContext();
                 UserContextInitializer.initializeUserPage();
@@ -79,6 +84,8 @@ public class Hooks{
             if (AdminContext.getAdminBrowserContext() != null) AdminContext.getAdminBrowserContext().close();
             if (UserContext.getUserBrowserContext() != null) UserContext.getUserBrowserContext().close();
             if (ActiveContext.getActiveBrowserContext() != null) ActiveContext.getActiveBrowserContext().close();
+            if (PmsContext.getPmsBrowserContext() != null) PmsContext.getPmsBrowserContext().close();
+            if (PmsContext.getPmsBrowserContext1() != null) PmsContext.getPmsBrowserContext1().close();
             FlowControl.setContinueFlow(false);
         }
 

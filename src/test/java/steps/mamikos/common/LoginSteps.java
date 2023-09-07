@@ -3,6 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import config.playwright.context.PmsActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -100,6 +101,7 @@ public class LoginSteps {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
+        loginAdmin = new LoginAdminMamipayPO(page);
         loginAdmin.fillEmail(email);
         loginAdmin.fillPassword(password);
         loginAdmin.clickOnLoginButton();
@@ -110,7 +112,6 @@ public class LoginSteps {
         pmsCredential = tables.asMaps(String.class, String.class);
         String username = pmsCredential.get(0).get("email");
         String password = pmsCredential.get(0).get("password");
-
         loginPMS.fillUsername(username);
         loginPMS.fillPassword(password);
         loginPMS.clickLogin();
