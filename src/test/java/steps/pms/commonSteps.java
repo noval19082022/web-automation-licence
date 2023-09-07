@@ -24,4 +24,9 @@ public class commonSteps {
     public void admin_go_to_survey_tracker_menu() {
         menu.clickSurveyTrackerMenu();
     }
+
+    @When("admin go to role management menu")
+    public void admin_go_to_role_management_menu() {
+        menu.clickRoleManagementMenu();
+    }
 }

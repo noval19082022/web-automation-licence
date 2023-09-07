@@ -97,8 +97,6 @@ public class OwnerManageBillSteps {
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnPenyewaKos();
         billManage.searchKostPenyewa(kostName);
-        billManage.clicksOnLihatSelengkapnya();
-
     }
 
     @Then("user can not see update room number button")

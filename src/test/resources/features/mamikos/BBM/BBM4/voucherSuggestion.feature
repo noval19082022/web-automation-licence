@@ -10,14 +10,13 @@ Feature: Voucher Suggestion
     And user navigate to tagihan kost saya
     And user click on "Bayar" button
     And tenant set active page to 1
-    And tenant clicks Pakai voucher list:
+    And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOSUGGESTION | AUTOSUGGESTION |
+      | AUTOSUGGESTION    | AUTOSUGGESTION       |
     Then tenant can see voucher is applied
-    Then tenant can see warning message "Masukkan kode voucher."
-    And tenant input voucher:
+    And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | TENGSALAH | TENGSALAH |
+      | TENGSALAH         | TENGSALAH |
     Then tenant display warning message "Kode voucher tidak ditemukan."
 
     #    BBM-708

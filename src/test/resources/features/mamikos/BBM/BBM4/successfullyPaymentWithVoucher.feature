@@ -9,24 +9,22 @@ Scenario: Admin Batalkan Contract
     | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
   And admin search contract by tenant phone number:
     | phone stag    | phone prod    |
-    | 0890867321217 | 0890867321217 |
+    | 0888123321888 | 0890867321217 |
   And admin akhiri contract
   Then admin should success terminate contract
 
   @cancelBooking
+  @continue
   Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod | password  |
-      | 0890867321217 | 0892202105 | mamikosqa123 |
+      | 0888123321888 | 0892202105 | mamikosqa123 |
     And user cancel booking
 
   @tenantBookingKos
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag    | kost name prod    |
       | kost reykjavik    | kost reykjavik    |
@@ -44,25 +42,23 @@ Scenario: Admin Batalkan Contract
     Then owner can see pengajuan sewa detail on dashboard
 
   @tenantInputVoucher
+  @continue
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
+      | phone stag    | phone prod  | password     |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | TIRTAYASA4 | AUTOCHNGEPERIOD |
+      | TIRTAYASA4        | AUTOCHNGEPERIOD |
     Then tenant can see voucher is applied
 
   @tenantPayWithVoucher
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321217 | 08100000622 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method BNI with VA number "9881012867321217" and amount "641000"
+    And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success

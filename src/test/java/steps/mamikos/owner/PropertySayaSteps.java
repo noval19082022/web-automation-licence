@@ -2,20 +2,28 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
-import utilities.PlaywrightHelpers;
-
+import utilities.JavaHelpers;
 import java.util.List;
+import java.util.Map;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     PropertySayaPO propertySaya = new PropertySayaPO (page);
+    private JavaHelpers javaHelpers = new JavaHelpers();
+    private Integer dailyPrice = null;
+    private Integer weeklyPrice = null;
+    private Integer monthlyPrice = null;
+    private Integer threeMonthlyPrice = null;
+    private Integer sixMonthlyPrice = null;
+    private Integer yearlyPrice = null;
 
 
     @And("owner search kost {string} on property saya page")
@@ -78,6 +86,36 @@ public class PropertySayaSteps {
     @When("user input yearly price with {string}")
     public void user_input_yearly_price_with(String yearlyPrice) {
         propertySaya.inputYearlyPrice(yearlyPrice);
+    }
+
+    @And("user see daily price is {int}")
+    public void user_see_daily_price_is(Integer dailyPrice) {
+        Assert.assertEquals(propertySaya.getDailyPrice(), dailyPrice, "Daily price is not correct");
+    }
+
+    @And("user see weekly price is {int}")
+    public void user_see_weekly_price_is(Integer weeklyPrice) {
+        Assert.assertEquals(propertySaya.getWeeklyPrice(), weeklyPrice, "Weekly price is not correct");
+    }
+
+    @And("user see monthly price is {int}")
+    public void user_see_monthly_price_is(Integer monthlyPrice) {
+        Assert.assertEquals(propertySaya.getMonthlyPrice(), monthlyPrice, "Monthly price is not correct");
+    }
+
+    @And("user see three monthly price is {int}")
+    public void user_see_three_monthly_price_is(Integer threeMonthPrice) {
+        Assert.assertEquals(propertySaya.getThreeMonthlyPrice(), threeMonthPrice, "Three monthly price is not correct");
+    }
+
+    @Then("user see six monthly price is {int}")
+    public void user_see_six_monthly_price_is(Integer sixMonthlyPrice) {
+        Assert.assertEquals(propertySaya.getSixMonthlyPrice(), sixMonthlyPrice, "Six monthly price is not correct");
+    }
+
+    @And("user see yearly price is {int}")
+    public void user_see_yearly_price_is(Integer yearlyPrice) {
+        Assert.assertEquals(propertySaya.getYearlyPrice(), yearlyPrice, "Yearly price is not correct");
     }
 
     @And("user click back button in page")
@@ -237,9 +275,146 @@ public class PropertySayaSteps {
     public void user_see_success_add_data_kos_pop_up_with_text(String message) {
         Assert.assertEquals(propertySaya.getTitlePopUpSuccessEditKos().trim(), message, "Pop up title success message in edit kos is wrong");
     }
-
     @When("user click done in success page pop up of edit kos")
     public void user_click_done_in_success_page_pop_up_of_edit_kos() throws InterruptedException {
         propertySaya.clickDoneEditKosPopUp();
+    }
+
+    @Given("user input kost location {string} and clicks on first autocomplete suggestion")
+    public void user_input_kost_location_and_clicks_on_first_autocomplete_result(String location) {
+        propertySaya.insertKosLocation(location);
+        propertySaya.clickOnFirstResult(location);
+    }
+
+    @Given("user input address note {string} and random text")
+    public void user_input_address_note_and_random_text(String note) {
+        String random = javaHelpers.generateAlphanumeric(6);
+        propertySaya.enterAddressNotes(note + random);
+    }
+
+    @When("user memorize daily, weekly, monthly, three monthly, six monthly, and yearly price")
+    public void user_memorize_daily_weekly_monthly_three_monthly_six_monthly_and_yearly_price() {
+        this.dailyPrice = propertySaya.getDailyPrice();
+        this.weeklyPrice = propertySaya.getWeeklyPrice();
+        this.monthlyPrice = propertySaya.getMonthlyPrice();
+        this.threeMonthlyPrice = propertySaya.getThreeMonthlyPrice();
+        this.sixMonthlyPrice = propertySaya.getSixMonthlyPrice();
+        this.yearlyPrice = propertySaya.getYearlyPrice();
+    }
+
+    @Then("user see infobar in update price with text {string}")
+    public void user_see_infobar_in_update_price_with_text(String text) {
+        Assert.assertEquals(JavaHelpers.removeExtraNewLine(propertySaya.getPromoNgebutInfo()), text);
+    }
+
+    @Then("user see monthly price field is disabled")
+    public void user_see_monthly_price_field_is_disabled() {
+        Assert.assertTrue(propertySaya.isMonthlyPriceFieldDisable(), "Monthly price field is not disable");
+    }
+
+    @When("user close infobar promo ngebut in update price")
+    public void user_close_infobar_promo_ngebut_in_update_price() throws InterruptedException {
+        propertySaya.clickCloseInfobar();
+    }
+
+    @Then("user see daily, weekly, monthly, three monthly, six monthly, and yearly price is same with previous price")
+    public void user_see_daily_weekly_monthly_three_monthly_six_monthly_and_yearly_price_is_same_with_previous_price() {
+        Assert.assertEquals(propertySaya.getDailyPrice(), this.dailyPrice, "Daily price is not correct");
+        Assert.assertEquals(propertySaya.getWeeklyPrice(), this.weeklyPrice, "Weekly price is not correct");
+        Assert.assertEquals(propertySaya.getMonthlyPrice(), this.monthlyPrice, "Monthly price is not correct");
+        Assert.assertEquals(propertySaya.getThreeMonthlyPrice(), this.threeMonthlyPrice, "Three monthly price is not correct");
+        Assert.assertEquals(propertySaya.getSixMonthlyPrice(), this.sixMonthlyPrice, "Six monthly price is not correct");
+        Assert.assertEquals(propertySaya.getYearlyPrice(), this.yearlyPrice, "Yearly price is not correct");
+    }
+
+    @Then("verify tambah data pop up is appear")
+    public void verifyTambahDataPopUpIsAppear() {
+        Assert.assertTrue(propertySaya.isPopUpModalVisible(), "Pop up modal doesn't appear!");
+    }
+
+    @And("verify kos is {string}")
+    public void verifyKosIs(String statusKos) {
+        Assert.assertTrue(propertySaya.isStatusKos(), "Status kos doesn't match!");
+    }
+
+    @And("owner click tambah data iklan {string}")
+    public void ownerClickTambahDataIklan(String jenisProperti) {
+        propertySaya.clickTambahDataIklan(jenisProperti);
+    }
+
+    @And("owner fills data apartemen with Property Name is {string}")
+    public void ownerFillsDataApartemenWithPropertyNameIs(String propertyName) {
+        propertySaya.inputPropertyName(propertyName);
+    }
+
+    @Then("owner input requirement field add apartemen is as expected")
+    public void ownerInputRequirementFieldAddApartemenIsAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        propertySaya.inputPropertyName(table.get(0).get("nama project"));
+        propertySaya.selectPropertyName(table.get(0).get("nama project"));
+        propertySaya.inputNamaUnit(table.get(0).get("nama unit"));
+        propertySaya.inputNoUnit(table.get(0).get("nomor unit"));
+        propertySaya.selectUnitType(table.get(0).get("tipe unit"));
+        propertySaya.inputLantai(table.get(0).get("lantai"));
+        propertySaya.inputUnitSize(table.get(0).get("luas unit"));
+        propertySaya.inputDescription(table.get(0).get("deskripsi"));
+    }
+
+    @And("owner input harga sewa {string} is {string}")
+    public void ownerInputHargaSewaIs(String priceType, String price) {
+        propertySaya.selectPriceType(priceType);
+        propertySaya.inputApartementPrice(priceType, price);
+    }
+
+    @And("owner select fasilitas unit {string} and fasilitas kamar {string}")
+    public void ownerSelectFasilitasUnitAndFasilitasKamar(String fasilitasUnit, String fasilitasKamar) {
+        propertySaya.selectFasilitasUnit(fasilitasUnit);
+        propertySaya.selectFasilitasKamar(fasilitasKamar);
+
+        if (fasilitasKamar.equals("Semi Furnished")|| fasilitasKamar.equals("Furnished")){
+            propertySaya.clickFurnished("Bed");
+        }
+    }
+
+    @And("owner upload cover photo apartemen")
+    public void ownerUploadCoverPhotoApartemen() {
+        propertySaya.uploadCoverPhotoApartemen();
+    }
+
+    @And("owner upload photo apartemen")
+    public void ownerUploadPhotoApartemen() {
+        propertySaya.uploadCoverPhotoApartemen();
+    }
+
+    @And("owner upload photo {string} of apartemen")
+    public void ownerUploadPhotoOfApartemen(String typePhoto) {
+        propertySaya.uploadPhotoApartemen(typePhoto);
+    }
+
+    @Then("owner can see url link is for property saya apartemen")
+    public void ownerCanSeeUrlLinkIsForPropertySayaApartemen() {
+        Assert.assertEquals(page.url(), Mamikos.URL + Mamikos.PROPERTY_SAYA_APARTEMENT, "URL is not equal");
+    }
+
+    @And("owner click edit data apartemen")
+    public void ownerClickEditDataApartemen() {
+        propertySaya.clickEditDataApartemen();
+    }
+
+    @Then("verify status apartemen {string}")
+    public void verifyStatusApartemen(String status) {
+        Assert.assertEquals(propertySaya.getStatusProperty(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+    }
+
+    @And("owner search apart {string} on property saya page")
+    public void ownerSearchApartOnPropertySayaPage(String namaUnit) {
+        propertySaya.searchApartPropertySaya(namaUnit);
+
+    }
+
+    @And("owner submit edit data apartemen")
+    public void ownerSubmitEditDataApartemen() {
+        propertySaya.clickOnSubmitButton();
+        propertySaya.clickOnSelesaiButton();
     }
 }
