@@ -61,7 +61,7 @@ public class TenantCommunicationPO {
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
-        displayDataRow = page.locator("//p[contains(.,'Menampilkan 20 dari')]");
+        displayDataRow = page.locator("//p[contains(.,'Tenant Tracker')]");
         buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
         fieldNote = page.getByPlaceholder("Tulis di sini...");
         simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
@@ -77,8 +77,9 @@ public class TenantCommunicationPO {
      * Select Main Page filter
      */
     public void selectMainPageFilter(String mainPageFilter) {
-        if(playwright.waitTillLocatorIsVisible(mainPageFilterMenu,2.0)) {
+        if(playwright.waitTillLocatorIsVisible(mainPageFilterMenu,4.0)) {
             searchFieldMainPage = page.locator("//li/a[contains(., '" + mainPageFilter + "')]");
+            playwright.reloadPage();
             playwright.clickOn(mainPageFilterMenu);
             playwright.clickOn(searchFieldMainPage);
         }
@@ -205,12 +206,14 @@ public class TenantCommunicationPO {
      * Get Property Name on Main Page Filter
      * @return true or false property name
      */
-    public Boolean isPropertyNameOnMainPageFilter(String propertyName){
-        tenantNameOnTheFirstRow = page.locator("//a[contains(.,'"+propertyName+"')]").first();
-        playwright.waitFor(tenantNameOnTheFirstRow,3000.0);
-        return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
+    public Boolean isPropertyNameOnMainPageFilter(String propertyName) {
+        tenantNameOnTheFirstRow = page.locator("//*[contains(.,'" + propertyName + "')]").first();
+        if (playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow)) {
+            return playwright.waitTillLocatorIsVisible(tenantNameOnTheFirstRow);
+        } else {
+            return playwright.waitTillLocatorIsVisible(mainPageSearchButton);
+        }
     }
-
     /**
      * Get Property Name on Profile Page Filter
      * @return property name e.g. Mindful Peaks

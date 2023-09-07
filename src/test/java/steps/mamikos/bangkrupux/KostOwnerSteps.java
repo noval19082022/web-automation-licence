@@ -36,4 +36,9 @@ public class KostOwnerSteps {
     public void verifyDisplayed(String alertMessage) {
         Assert.assertEquals(kostOwner.getAlertMessage(), alertMessage, "Alert message doesn't match!");
     }
+
+    @And("user verify the kos in admin kos owner")
+    public void userVerifyTheKosInAdminKosOwner() {
+        kostOwner.clickOnFirstVerifyButton();
+    }
 }

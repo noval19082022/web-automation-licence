@@ -260,6 +260,38 @@
       And admin ticks "Expired" on the "Status Invoice" dropdown
       Then "expired" Status Invoice is displayed
 
+    @continue @TEST_PMAN-6215
+    Scenario: Filter Tanggal Mulai and Tanggal Akhir
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin selects the date for "today"
+      And admin selects the date for "tomorrow"
+      Then the Tanggal Invoice Dibuat "today" is displayed according to the filter
+
+    @continue @TEST_PMAN-6214
+    Scenario: Check Jenis Biaya Tambahan in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown
+      Then "Biaya Tambahan" Jenis Biaya is displayed
+
+    @continue @TEST_PMAN-6214
+    Scenario: Check Jenis Biaya Sewa in filter
+      When admin clicks "Main Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Biaya Sewa" on the "Jenis Biaya" dropdown
+      Then "Biaya Sewa" Jenis Biaya is displayed
+
+    @continue @TEST_PMAN-5900
+    Scenario: Search and Filter Invoice Manual
+      When admin clicks "Main Reset" button on Filter
+      And admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown without clicks Terapkan
+      And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown without clicks Terapkan
+      And admin selects the date for "today" with clicks Terapkan
+      Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
+
     @TEST_PMAN-6212
     Scenario: Filter Invoice Manual
       When admin refresh page and clicks Filter in Invoice Manual

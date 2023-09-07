@@ -1,4 +1,4 @@
-@BBM8
+@BBM8 @riwayatHadiah
 Feature: Owner - Riwayat Hadiah
 
   Scenario: Reward List Status Success
