@@ -6,23 +6,25 @@ import config.playwright.PlaywrightSourceManager;
 import config.playwright.browser.BrowserOptions;
 
 public class PmsContextInitializer {
+    private BrowserContext pmsBrowserContext;
 
     /**
      * Initialize tenant browser context
      */
     public static void initializePmsBrowserContext() {
-        BrowserContext tenantContext = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
-        TenantContext.setTenantBrowserContext(tenantContext);
+        BrowserContext pmsBrowserContext = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
+        PmsContext.setPmsBrowserContext(pmsBrowserContext);
     }
 
     /**
      * Initialize tenant page
      */
     public static void initializePmsPage() {
-        TenantContext.getTenantBrowserContext().tracing().start(new Tracing.StartOptions()
+        PmsContext.getPmsBrowserContext().tracing().start(new Tracing.StartOptions()
             .setScreenshots(true)
             .setSnapshots(true)
             .setSources(false));
-        ActiveContext.setActivePage(TenantContext.getTenantBrowserContext().newPage());
+        PmsActiveContext.setPmsActivePage(PmsContext.getPmsBrowserContext().newPage());
+        ActiveContext.setActivePage(PmsActiveContext.getPmsActivePage());
     }
 }

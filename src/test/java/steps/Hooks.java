@@ -18,6 +18,32 @@ public class Hooks{
      */
     @Before
     public void setup(Scenario scenario) {
+        if (scenario.getSourceTagNames().contains("@pmsContext") || scenario.getSourceTagNames().contains("@pmsContext1")) {
+            if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
+                if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
+                    System.out.println("saya di sini gaes");
+                    //ini ngeset pms browser context
+                    PmsContextInitializer.initializePmsBrowserContext();
+                    PmsContextInitializer.initializePmsPage();
+                    FlowControl.setPmsFlow(true);
+                    FlowControl.setPmsFlow1(false);
+                    System.out.println("selesai init browser context pms");
+                }
+
+                if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
+                    //ini ngeset pms browser context 1
+                    PmsContextInitializer1.initializePmsBrowserContext1();
+                    PmsContextInitializer1.initializePmsPage1();
+                    FlowControl.setPmsFlow1(true);
+                    FlowControl.setPmsFlow(false);
+                }
+            }
+        }
+
+        if (scenario.getSourceTagNames().contains("@continue")) {
+            FlowControl.setContinueFlow(true);
+        }
+
         if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
             if (ActiveContext.getActiveBrowserContext() == null || ActiveContext.getActiveBrowserContext().pages().isEmpty()) {
                 UserContextInitializer.initializeUserBrowserContext();
@@ -27,27 +53,6 @@ public class Hooks{
             }
         }
 
-        if (scenario.getSourceTagNames().contains("@pmsContext") || scenario.getSourceTagNames().contains("@pmsContext1")) {
-            if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
-                if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
-                    PmsContextInitializer.initializePmsBrowserContext();
-                    PmsContextInitializer.initializePmsPage();
-                    PmsActiveContext.setPmsActiveBrowserContext(PmsContext.getPmsBrowserContext());
-                    FlowControl.setPmsFlow(true);
-                }
-
-                if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
-                    PmsContextInitializer1.initializePmsBrowserContext();
-                    PmsContextInitializer1.initializePmsPage();
-                    PmsActiveContext.setPmsActiveBrowserContext1(PmsContext.getPmsBrowserContext1());
-                    FlowControl.setPmsFlow1(true);
-                }
-            }
-        }
-
-        if (scenario.getSourceTagNames().contains("@continue")) {
-            FlowControl.setContinueFlow(true);
-        }
         System.out.println("\n" + scenario.getName() + " is started");
     }
 

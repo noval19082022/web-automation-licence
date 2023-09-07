@@ -27,7 +27,7 @@ public class PmsActiveContext {
      * @param pageIndex index page
      */
     public synchronized static void pmsActiveContext1(int pageIndex) {
-        PmsActiveContext.setPmsActiveBrowserContext(PmsContext.getPmsBrowserContext1());
+        PmsActiveContext.setPmsActiveBrowserContext1(PmsContext.getPmsBrowserContext1());
         PmsActiveContext.setPmsActivePage1(PmsContext.getPmsBrowserContext1().pages().get(pageIndex));
     }
 }

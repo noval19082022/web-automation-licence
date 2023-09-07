@@ -10,19 +10,19 @@ public class PmsContextInitializer1 {
     /**
      * Initialize tenant browser context
      */
-    public static void initializePmsBrowserContext() {
+    public static void initializePmsBrowserContext1() {
         BrowserContext tenantContext = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
-        TenantContext.setTenantBrowserContext(tenantContext);
+        PmsContext.setPmsBrowserContext1(tenantContext);
     }
 
     /**
      * Initialize tenant page
      */
-    public static void initializePmsPage() {
-        TenantContext.getTenantBrowserContext().tracing().start(new Tracing.StartOptions()
+    public static void initializePmsPage1() {
+        PmsContext.getPmsBrowserContext1().tracing().start(new Tracing.StartOptions()
             .setScreenshots(true)
             .setSnapshots(true)
             .setSources(false));
-        ActiveContext.setActivePage(TenantContext.getTenantBrowserContext().newPage());
+        PmsActiveContext.setPmsActivePage1(PmsContext.getPmsBrowserContext1().newPage());
     }
 }

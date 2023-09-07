@@ -15,7 +15,7 @@ import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
 public class NavigatesSteps {
-    Page page = PmsActiveContext.getPmsActivePage();
+    Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
@@ -160,12 +160,7 @@ public class NavigatesSteps {
 
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
-        if (FlowControl.isPmsFlow()) {
-            page = PmsActiveContext.getPmsActivePage();
-        }else if (FlowControl.isPmsFlow1()){
-            page = PmsActiveContext.getPmsActivePage1();
-        }
-
+        page = FlowControl.isPmsFlow() ? PmsActiveContext.getPmsActivePage() : PmsActiveContext.getPmsActivePage1();
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.PMS_URL);
     }
