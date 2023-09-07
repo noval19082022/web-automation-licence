@@ -10,6 +10,7 @@ public class RekomendasiListingPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    public static String firstPropertyRekomendasi;
 
     Locator favoritHeader;
     Locator emptyStateMessage;
@@ -20,6 +21,7 @@ public class RekomendasiListingPO {
     Locator rekomendasiTitle;
     Locator paginationNumberAct;
     Locator rekomendasiListingActual;
+    Locator firstPropertyRekomendasiKosSaya;
 
     public RekomendasiListingPO(Page page) {
         this.page = page;
@@ -34,6 +36,7 @@ public class RekomendasiListingPO {
         this.rekomendasiTitle = page.locator(".premium-recom-title");
         this.paginationNumberAct = page.locator("//div[@class='premium-recom-slider-item']");
         this.rekomendasiListingActual = page.locator("//*[@class=‘premium-recom-slide’]//div[@class=‘track-list-booking-kost’]");
+        this.firstPropertyRekomendasiKosSaya =  page.getByText("kos Sarane Automation 1-N");
     }
 
     /**
@@ -137,4 +140,75 @@ public class RekomendasiListingPO {
         playwright.isLocatorVisibleAfterLoad(page.locator(menuUserLocator),2000.0);
         return playwright.getText(page.locator(menuUserLocator));
     }
+
+    /**
+     * Click on menu favorite at header homepage
+     */
+    public void clickOnFavoriteHeader(){
+        playwright.clickOn(favoritHeader);
+    }
+
+    /**
+     * Verify property last seen is present
+     * @param propertyName
+     * @return boolean
+     */
+    public boolean isPropertyVisible(String propertyName) {
+        String element = "//*[contains(., '" + propertyName+ "')]";
+        return playwright.waitTillLocatorIsVisible(page.locator(element),1000.0);
+    }
+
+    /**
+     * Click First rekomendasi and switch new tab
+     * @return active page
+     * @throws InterruptedException
+     */
+    public void clickOnFirstRekomendasi(){
+       playwright.clickOn(firstPropertyRekomendasiKosSaya);
+    }
+
+    /**
+     * user get first property on rekomendasi section
+     * @param page
+     * @return firstPropertyRekomendasi
+     */
+    public String getFirstProperty(String page) throws InterruptedException {
+        switch (page) {
+            case "Kos Saya":
+                playwright.pageScrollUntilElementIsVisible(firstPropertyRekomendasiKosSaya);
+                firstPropertyRekomendasi = playwright.getText(firstPropertyRekomendasiKosSaya);
+                break;
+        }
+        return firstPropertyRekomendasi;
+    }
+
+    /**
+     * User get favorit property rekomendasi
+     *
+     * @return firstPropertyRekomendasi
+     */
+    public String getFavoritPropertyRekomendasi() {
+        return RekomendasiListingPO.firstPropertyRekomendasi;
+    }
+
+    /**
+     * Verify the favorit property from rekomendasi is present
+     * @param favoritPropertyRekomendasi
+     * @return boolean
+     */
+    public boolean isRekomendasiAfterFavoritVisible(String favoritPropertyRekomendasi) {
+        String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
+        return playwright.isLocatorVisibleAfterLoad(page.locator(propertyFavorit),3000.0);
+    }
+    /**
+     * Click property on favorit section
+     * @param favoritPropertyRekomendasi
+     * @throws InterruptedException
+     */
+    public void clickOnPropertyFavorit(String favoritPropertyRekomendasi) throws InterruptedException {
+        String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
+        playwright.waitTillLocatorIsVisible(page.locator(propertyFavorit),1000.0);
+        playwright.clickOn(page.locator(propertyFavorit));
+    }
+
 }

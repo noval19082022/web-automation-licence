@@ -15,6 +15,7 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    private static String propertyName;
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
@@ -86,6 +87,21 @@ public class SearchPO {
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
     }
+    /**
+     * user set propertyName from input
+     * @param kostName
+     */
+    public void setPropertyName(String kostName) {
+        SearchPO.propertyName = kostName;
+    }
+
+    /**
+     * get propertyName from input
+     * @return propertyName
+     */
+    public String getPropertyName() {
+        return SearchPO.propertyName;
+    }
 
     /**
      * Search kost by test
@@ -93,6 +109,7 @@ public class SearchPO {
      * @return KostDetailsPO
      */
     public KostDetailsPO searchByText(String search) {
+        setPropertyName(search);
         inputSearch.fill(search);
         Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
         firstResultKostName.click();
