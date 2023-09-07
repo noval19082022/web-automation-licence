@@ -92,4 +92,36 @@ public class RoleManagementSteps {
     public void admin_rename_role_name_to(String name){
         role.fillRoleName(name);
     }
+
+    @When("admin assign member {string} to role {string}")
+    public void admin_assign_member_to_role(String member, String roleName){
+        role.searchRole(roleName);
+        role.assignMember();
+        role.addMember(member);
+    }
+    @Then("system show tambah member error message {string}")
+    public void system_show_tambah_member_error_message(String error){
+        Assert.assertEquals(role.getMemberErrorMessage(),error);
+    }
+
+    @Then("member {string} should/still registered")
+    public void member_should_registered(String member){
+        Assert.assertTrue(role.isMemberRegistered(member));
+    }
+    @Then("member {string} not registered")
+    public void member_not_registered(String member){
+        Assert.assertFalse(role.isMemberRegistered(member));
+    }
+    @When("admin delete member {string}")
+    public void admin_delete_member(String member){
+        role.deleteMember(member);
+    }
+    @When("admin cancel confirmation to delete")
+    public void admin_cancel_confirmation_to_delete(){
+        role.cancelDeleteMember();
+    }
+    @When("admin confirm to delete member")
+    public void admin_confirm_to_delete_member(){
+        role.confirmDeleteMember();
+    }
 }

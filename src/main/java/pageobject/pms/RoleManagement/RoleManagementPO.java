@@ -16,6 +16,7 @@ public class RoleManagementPO {
     Locator actionButton;
     Locator actionHapusButton;
     Locator actionEditButton;
+    Locator actionAssignMemberButton;
     Locator confirmHapusButton;
 
     //Tambah Role
@@ -28,6 +29,14 @@ public class RoleManagementPO {
     Locator toast;
     Locator roleNameErrorMessage;
     //End Tambah Role
+
+    //Assign Member
+    Locator memberField;
+    Locator tambahMemberButton;
+    Locator errorMember;
+    Locator hapusMemberButton;
+    Locator cancelHapusMemberButton;
+    //End Assign Member
 
     public RoleManagementPO(Page page){
         this.page = page;
@@ -48,6 +57,11 @@ public class RoleManagementPO {
         actionHapusButton = page.locator(".bg-c-list-item__description").filter(new Locator.FilterOptions().setHasText("Hapus"));
         actionEditButton = page.locator(".bg-c-list-item__description").filter(new Locator.FilterOptions().setHasText("Edit"));
         confirmHapusButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Hapus"));
+        actionAssignMemberButton = page.locator(".bg-c-list-item__description").filter(new Locator.FilterOptions().setHasText("Atur Member"));
+        memberField = page.getByPlaceholder("Cari berdasarkan nama lengkap/email");
+        tambahMemberButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
+        errorMember = page.locator(".bg-c-field__message");
+        cancelHapusMemberButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Batal"));
     }
 
     /**
@@ -161,5 +175,37 @@ public class RoleManagementPO {
     public void editRole() {
         playwright.clickOn(actionButton);
         playwright.clickOn(actionEditButton);
+    }
+
+    public void assignMember() {
+        playwright.clickOn(actionButton);
+        playwright.clickOn(actionAssignMemberButton);
+    }
+
+    public void addMember(String member) {
+        playwright.fill(memberField,member);
+        playwright.clickOn(tambahMemberButton);
+    }
+
+    public String getMemberErrorMessage() {
+        return playwright.getText(errorMember);
+    }
+
+    public boolean isMemberRegistered(String member) {
+        return playwright.isTextDisplayed(member);
+    }
+
+    public void deleteMember(String member) {
+        hapusMemberButton = page.locator("//tr/td[contains(text(),'"+member+"')]/following-sibling::*");
+
+        playwright.clickOn(hapusMemberButton);
+    }
+
+    public void cancelDeleteMember() {
+        playwright.clickOn(cancelHapusMemberButton);
+    }
+
+    public void confirmDeleteMember() {
+        playwright.clickOn(confirmHapusButton);
     }
 }

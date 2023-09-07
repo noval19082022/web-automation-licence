@@ -1,4 +1,4 @@
-@pman @role-management
+@pman @role-management @test
 
   Feature: Role Management
 
@@ -65,6 +65,34 @@
         | Akses Disbursement - Approve / Unapprove  |
       And admin submit add new role
       Then system should show toast message "Perubahan berhasil disimpan."
+
+    @TEST_PMAN-3685 @continue
+    Scenario: Assign Member to Role
+      #add invalid member
+      When admin assign member "giska@mamiteam.com" to role "Automation Test PMAN"
+      Then system show tambah member error message "Member tidak ditemukan"
+      #add valid member
+      When admin go to role management menu
+      When admin assign member "automationpman01@mamikos.com" to role "Automation Test PMAN"
+      Then member "automationpman01@mamikos.com" should registered
+
+#    @TEST_PMAN-3689
+#    Scenario: Check Button Availability According to Permissions
+
+    @TEST_PMAN-3695 @continue
+    Scenario: Delete Member
+      #cancel delete member
+      When admin delete member "automationpman01@mamikos.com"
+      But admin cancel confirmation to delete
+      Then member "automationpman01@mamikos.com" still registered
+      #confiem delete member
+      When admin delete member "automationpman01@mamikos.com"
+      But admin confirm to delete member
+      Then member "automationpman01@mamikos.com" not registered
+
+#    @TEST_PMAN-5322
+#    Scenario: Check Button Availability According to Permissions
+
 
     @TEST_PMAN-3692
     Scenario: Delete Role
