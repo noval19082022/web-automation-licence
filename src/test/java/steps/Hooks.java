@@ -27,6 +27,22 @@ public class Hooks{
             }
         }
 
+        if (scenario.getSourceTagNames().contains("@pmsContext") || scenario.getSourceTagNames().contains("@pmsContext1")) {
+            if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.getContinueFlow()) {
+                if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
+                    PmsContextInitializer.initializePmsBrowserContext();
+                    PmsContextInitializer.initializePmsPage();
+                    PmsActiveContext.setPmsActiveBrowserContext(PmsContext.getPmsBrowserContext());
+                }
+
+                if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
+                    PmsContextInitializer1.initializePmsBrowserContext();
+                    PmsContextInitializer1.initializePmsPage();
+                    PmsActiveContext.setPmsActiveBrowserContext1(PmsContext.getPmsBrowserContext1());
+                }
+            }
+        }
+
         if (scenario.getSourceTagNames().contains("@continue")) {
             FlowControl.setContinueFlow(true);
         }
