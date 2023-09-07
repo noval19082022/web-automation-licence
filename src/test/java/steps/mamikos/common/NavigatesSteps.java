@@ -3,9 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
-import config.playwright.context.ActiveContext;
-import config.playwright.context.OwnerContext;
-import config.playwright.context.TenantContext;
+import config.playwright.context.*;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,7 +15,7 @@ import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
 
 public class NavigatesSteps {
-    Page page = ActiveContext.getActivePage();
+    Page page = PmsActiveContext.getPmsActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
@@ -162,6 +160,13 @@ public class NavigatesSteps {
 
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
+        if (FlowControl.isPmsFlow()) {
+            page = PmsActiveContext.getPmsActivePage();
+        }else if (FlowControl.isPmsFlow1()){
+            page = PmsActiveContext.getPmsActivePage1();
+        }
+
+        playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.PMS_URL);
     }
 

@@ -41,7 +41,7 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
+        if (!FlowControl.isStrictFlow()) {
             ActiveContext.activateTenant(0);
             home = new HomePO(ActiveContext.getActivePage());
             ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
@@ -60,7 +60,7 @@ public class LoginSteps {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
+        if (!FlowControl.isStrictFlow()) {
             ActiveContext.activateOwner(0);
             home = new HomePO(ActiveContext.getActivePage());
             ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
@@ -83,7 +83,7 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
+        if (!FlowControl.isStrictFlow()) {
             ActiveContext.activateOwner(0);
             home = new HomePO(ActiveContext.getActivePage());
             ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");

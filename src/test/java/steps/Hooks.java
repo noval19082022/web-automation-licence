@@ -18,7 +18,7 @@ public class Hooks{
      */
     @Before
     public void setup(Scenario scenario) {
-        if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.getContinueFlow()) {
+        if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
             if (ActiveContext.getActiveBrowserContext() == null || ActiveContext.getActiveBrowserContext().pages().isEmpty()) {
                 UserContextInitializer.initializeUserBrowserContext();
                 UserContextInitializer.initializeUserPage();
@@ -28,17 +28,19 @@ public class Hooks{
         }
 
         if (scenario.getSourceTagNames().contains("@pmsContext") || scenario.getSourceTagNames().contains("@pmsContext1")) {
-            if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.getContinueFlow()) {
+            if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
                 if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
                     PmsContextInitializer.initializePmsBrowserContext();
                     PmsContextInitializer.initializePmsPage();
                     PmsActiveContext.setPmsActiveBrowserContext(PmsContext.getPmsBrowserContext());
+                    FlowControl.setPmsFlow(true);
                 }
 
                 if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
                     PmsContextInitializer1.initializePmsBrowserContext();
                     PmsContextInitializer1.initializePmsPage();
                     PmsActiveContext.setPmsActiveBrowserContext1(PmsContext.getPmsBrowserContext1());
+                    FlowControl.setPmsFlow1(true);
                 }
             }
         }
