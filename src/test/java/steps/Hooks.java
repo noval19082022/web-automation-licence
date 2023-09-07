@@ -7,6 +7,7 @@ import config.playwright.context.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import testdata.ScenarioInformations;
 
 import java.nio.file.Paths;
 
@@ -31,6 +32,8 @@ public class Hooks{
             FlowControl.setContinueFlow(true);
         }
         System.out.println("\n" + scenario.getName() + " is started");
+        ScenarioInformations.setScenarioName(scenario.getName());
+        ScenarioInformations.setScenarioTags(scenario.getSourceTagNames());
     }
 
     /**
