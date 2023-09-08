@@ -3,6 +3,8 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import lombok.Getter;
+import lombok.Setter;
 import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
-    private static String propertyName;
+    //private static String propertyName;
+    @Setter @Getter public static String Property;
+
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
@@ -87,20 +91,13 @@ public class SearchPO {
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
     }
-    /**
-     * user set propertyName from input
-     * @param kostName
-     */
-    public void setPropertyName(String kostName) {
-        SearchPO.propertyName = kostName;
-    }
 
     /**
      * get propertyName from input
-     * @return propertyName
+     * @return Property
      */
     public String getPropertyName() {
-        return SearchPO.propertyName;
+       return this.Property;
     }
 
     /**
@@ -109,7 +106,7 @@ public class SearchPO {
      * @return KostDetailsPO
      */
     public KostDetailsPO searchByText(String search) {
-        setPropertyName(search);
+        setProperty(search);
         inputSearch.fill(search);
         Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
         firstResultKostName.click();

@@ -36,7 +36,7 @@ public class RekomendasiListingPO {
         this.rekomendasiTitle = page.locator(".premium-recom-title");
         this.paginationNumberAct = page.locator("//div[@class='premium-recom-slider-item']");
         this.rekomendasiListingActual = page.locator("//*[@class=‘premium-recom-slide’]//div[@class=‘track-list-booking-kost’]");
-        this.firstPropertyRekomendasiKosSaya =  page.getByText("kos Sarane Automation 1-N");
+        this.firstPropertyRekomendasiKosSaya =  page.locator("(//*[@class='rc-info__name bg-c-text bg-c-text--body-4'])[1]");
     }
 
     /**
@@ -150,11 +150,11 @@ public class RekomendasiListingPO {
 
     /**
      * Verify property last seen is present
-     * @param propertyName
+     * @param property
      * @return boolean
      */
-    public boolean isPropertyVisible(String propertyName) {
-        String element = "//*[contains(., '" + propertyName+ "')]";
+    public boolean isPropertyVisible(String property) {
+        String element = "//*[contains(., '" + property+ "')]";
         return playwright.waitTillLocatorIsVisible(page.locator(element),1000.0);
     }
 

@@ -72,7 +72,7 @@ public class RekomendasiListingSteps {
     @Then("verify last seen property doesn't display on rekomendasi section")
     public void verify_last_seen_property_doesn_t_display_on_rekomendasi_section() {
         Assert.assertTrue(rekomendasiListing.isRekomendasiSectionVisible(), "Mungkin cocok untuk anda doesn't display!");
-        Assert.assertFalse(rekomendasiListing.isPropertyVisible(searchListing.getPropertyName()), "Property already display!");
+        Assert.assertFalse(rekomendasiListing.isPropertyVisible(searchListing.getProperty()), "Property already display!");
     }
 
     @Then("tenant open menu kost saya")
