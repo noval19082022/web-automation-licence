@@ -10,14 +10,14 @@ public class MamikosBrowserContextInitializer {
     private static BrowserContext browserContext2 = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
 
     /**
-     * Initialize tenant browser context
+     * Initialize browser context number one
      */
     public static void initializeBrowserContextOne() {
         MamikosBrowserContext.setBrowserContextOne(browserContext1);
     }
 
     /**
-     * Initialize tenant page
+     * Initialize browser context number one page
      */
     public static void initializeBrowserContextOnePage() {
         MamikosBrowserContext.getBrowserContextOne().tracing().start(new Tracing.StartOptions()
@@ -29,14 +29,14 @@ public class MamikosBrowserContextInitializer {
     }
 
     /**
-     * Initialize tenant browser context
+     * Initialize browser context number two
      */
     public static void initializeBrowserContextTwo() {
         MamikosBrowserContext.setBrowserContextTwo(browserContext2);
     }
 
     /**
-     * Initialize tenant page
+     * Initialize browser context number two page
      */
     public static void initializeBrowserContextTwoPage() {
         MamikosBrowserContext.getBrowserContextTwo().tracing().start(new Tracing.StartOptions()
