@@ -409,19 +409,32 @@ public class InvoiceManualSteps {
         if (button.equalsIgnoreCase("Ubah Status")){
             manualInvoice.clicksKebabBtn();
             manualInvoice.clicksUbahStatus();
-        } else if (button.equalsIgnoreCase("Lihat Detail")) {
-
         }
     }
 
-    @When("admin close Ubah Status Invoice and open Ubah Status again")
-    public void admin_close_Ubah_Status_Invoice_and_open_Ubah_Status_again(){
+    @When("admin clicks Kembali button")
+    public void admin_clicks_Kembali_button(){
+        //set Tanggal
+        manualInvoice.clicksCalViewOnUbahStatus();
+        manualInvoice.setTanggalMulai("today");
+        //set Time
+        manualInvoice.setTimeOnUbahStatus("1000");
         manualInvoice.clicksKembaliOnUbahStatus();
-        manualInvoice.clicksKebabBtn();
-        manualInvoice.clicksUbahStatus();
+    }
+
+    @Then("status invoice manual {string}")
+    public void status_invoice_manual(String statusInvoice){
+        Assert.assertEquals(manualInvoice.getValueStatusInv(statusInvoice), statusInvoice, "Status Invoice does not match");
+    }
+
+    @When("admin clicks close button")
+    public void admin_clicks_close_button(){
+        //set Tanggal
+        manualInvoice.clicksCalViewOnUbahStatus();
+        manualInvoice.setTanggalMulai("today");
+        //set Time
+        manualInvoice.setTimeOnUbahStatus("1000");
         manualInvoice.clickClosePopUp();
-        manualInvoice.clicksKebabBtn();
-        manualInvoice.clicksUbahStatus();
     }
 
     @When("admin go to last page")
@@ -441,11 +454,11 @@ public class InvoiceManualSteps {
     public void admin_set_waktu_pembayaran(String time){
         manualInvoice.setTimeOnUbahStatus(time);
         manualInvoice.clicksSimpanOnUbahStatus();
-        Assert.assertEquals(manualInvoice.getToastUbahStatus(), toastUbahStatus, "the toast message does not match");
     }
 
     @Then("Status Invoice is {string} and paid date at {string}, {string}")
     public void Status_Invoice_is_and_paid_date_at(String statusInv, String date, String time){
+        Assert.assertEquals(manualInvoice.getToastUbahStatus(), toastUbahStatus, "the toast message does not match");
         Assert.assertEquals(manualInvoice.getValueStatusInv(statusInv), statusInv, "Status Invoice does not match");
         if (date.equalsIgnoreCase("today")){
             SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");

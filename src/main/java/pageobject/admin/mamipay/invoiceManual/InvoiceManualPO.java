@@ -180,9 +180,9 @@ public class InvoiceManualPO {
         notFound = page.getByText("Data yang dicari tidak ditemukan");
         clearSearchValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         dibuatOlehCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(6);
-        kebabBtn = page.getByTestId("invoice-manual-item-0").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("open options for this item"));
-        ubahStatusBtn = page.getByTestId("invoice-manual-item-0").getByTestId("invoice-manual-change-status");
-        statusInvCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(5);
+        kebabBtn = page.getByTestId("invoice-manual-action-btn");
+        ubahStatusBtn = page.getByTestId("invoice-manual-change-status");
+        statusInvCol = page.locator("//tr").last().locator("td").nth(5);
 
         //---Filter Invoice Manual---//
         filter = page.getByTestId("invoice-manual-filter-button-filter");
@@ -884,14 +884,14 @@ public class InvoiceManualPO {
      * clicks Kebab button on Action coloumn
      */
     public void clicksKebabBtn(){
-        playwright.clickOn(kebabBtn);
+        playwright.clickOn(kebabBtn.last());
     }
 
     /**
      * clicks Ubah Status button
      */
     public void clicksUbahStatus(){
-        playwright.clickOn(ubahStatusBtn);
+        playwright.clickOn(ubahStatusBtn.last());
     }
 
     /**
@@ -1298,11 +1298,11 @@ public class InvoiceManualPO {
 
     /**
      * get Value on Status Invoice coloumn
-     * @param statusInv
+     * @param statusInvoice
      * @return String Status Invoice
      */
-    public String getValueStatusInv(String statusInv){
-        valueStatusInv = page.locator("//tr[@data-testid='invoice-manual-item-0']//div[contains(., '" +statusInv+ "')]");
+    public String getValueStatusInv(String statusInvoice){
+        valueStatusInv = page.locator("//tr/td/div[contains(., '" +statusInvoice+ "')]").last();
         return playwright.getText(valueStatusInv);
     }
 

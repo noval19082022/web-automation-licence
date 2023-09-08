@@ -202,12 +202,12 @@
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Penyewa
       When admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Listing
       When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6046
     Scenario: Search Nama Listing per word with value "Singgahsini"
@@ -306,8 +306,16 @@
       And admin clicks Filter in Invoice Manual
       And admin ticks "Unpaid" on the "Status Invoice" dropdown
       When admin go to last page
+      #check Kembali when set Tanggal and Time
       And choose action "Ubah Status"
-      And admin close Ubah Status Invoice and open Ubah Status again
+      And admin clicks Kembali button
+      Then status invoice manual "unpaid"
+      #check Close when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks close button
+      Then status invoice manual "unpaid"
+      #check Status Invooice when clicks Simpan
+      And choose action "Ubah Status"
       And admin set tanggal pembayaran "today"
       And admin set waktu pembayaran "1000"
       Then Status Invoice is "paid" and paid date at "today", "10:00"
@@ -318,6 +326,15 @@
       And admin clicks Filter in Invoice Manual
       And admin ticks "Expired" on the "Status Invoice" dropdown
       When admin go to last page
+      #check Kembali when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks Kembali button
+      Then status invoice manual "expired"
+      #check Close when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks close button
+      Then status invoice manual "expired"
+      #check Status Invooice when clicks Simpan
       And choose action "Ubah Status"
       And admin set tanggal pembayaran "today"
       And admin set waktu pembayaran "1000"
