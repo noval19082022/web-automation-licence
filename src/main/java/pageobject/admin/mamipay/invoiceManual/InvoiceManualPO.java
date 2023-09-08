@@ -40,6 +40,9 @@ public class InvoiceManualPO {
     private Locator notFound;
     private Locator clearSearchValue;
     private Locator dibuatOlehCol;
+    private Locator kebabBtn;
+    private Locator ubahStatusBtn;
+    private Locator statusInvCol;
     // Invoice List Page
 
     //Filter Invoice Manual
@@ -150,7 +153,16 @@ public class InvoiceManualPO {
     //---Edit Invoice Manual Pop Up---//
     private Locator namaBiayaDropdownEdit;
     //---Edit Invoice Manual Pop Up---//
-    
+
+    //---Ubah Status Invoice---//
+    private Locator kembaliBtnOnUbahStatus;
+    private Locator calViewOnUbahStatus;
+    private Locator timeOnUbahStatus;
+    private Locator timeField;
+    private Locator simpanBtnOnUbahStatus;
+    private Locator toastUbahStatus;
+    //---Ubah Status Invoice---//
+
     public InvoiceManualPO(Page page){
         this.page = page;
 
@@ -168,6 +180,9 @@ public class InvoiceManualPO {
         notFound = page.getByText("Data yang dicari tidak ditemukan");
         clearSearchValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         dibuatOlehCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(6);
+        kebabBtn = page.getByTestId("invoice-manual-action-btn");
+        ubahStatusBtn = page.getByTestId("invoice-manual-change-status");
+        statusInvCol = page.locator("//tr").last().locator("td").nth(5);
 
         //---Filter Invoice Manual---//
         filter = page.getByTestId("invoice-manual-filter-button-filter");
@@ -247,6 +262,13 @@ public class InvoiceManualPO {
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
 
+        //---Ubah Status Invoice---//
+        kembaliBtnOnUbahStatus = page.getByTestId("change-status-cancel");
+        calViewOnUbahStatus = page.getByPlaceholder("Pilih tanggal di sini");
+        timeOnUbahStatus = page.getByTestId("change-status-paid-time");
+        timeField = page.locator("//*[@data-testid='change-status-paid-time']");
+        simpanBtnOnUbahStatus = page.getByTestId("change-status-save");
+        toastUbahStatus = page.locator("//*[@class='global-toast bg-c-toast bg-c-toast--fixed']");
     }
 
     /**
@@ -858,6 +880,65 @@ public class InvoiceManualPO {
         clearSearchValue.click();
     }
 
+    /**
+     * clicks Kebab button on Action coloumn
+     */
+    public void clicksKebabBtn(){
+        playwright.clickOn(kebabBtn.last());
+    }
+
+    /**
+     * clicks Ubah Status button
+     */
+    public void clicksUbahStatus(){
+        playwright.clickOn(ubahStatusBtn.last());
+    }
+
+    /**
+     * clicks Kembali button on Ubah Status Invoice pop up
+     */
+    public void clicksKembaliOnUbahStatus(){
+        playwright.clickOn(kembaliBtnOnUbahStatus);
+    }
+
+    /**
+     * clicks Calendar View on Ubah Status Invoice pop up
+     */
+    public void clicksCalViewOnUbahStatus(){
+        playwright.clickOn(calViewOnUbahStatus);
+    }
+
+    /**
+     * set Time on Ubah Status Invoice
+     * @param time
+     */
+    public void setTimeOnUbahStatus(String time){
+        playwright.fillCharacterByCharacter(timeField, time);
+    }
+
+    /**
+     * clicks Simpan on Ubah Status Invoice
+     */
+    public void  clicksSimpanOnUbahStatus(){
+        playwright.clickOn(simpanBtnOnUbahStatus);
+    }
+
+    /**
+     * Get toast success add biaya sewa / biaya tambahan
+     * @return String biaya sewa / biaya tambahan toast
+     */
+    public String getToastUbahStatus(){
+        return playwright.getText(toastUbahStatus);
+    }
+
+    /**
+     * get Paid Time on Status Invoice coloumn
+     * @return String Time
+     */
+    public String getPaidTime(){
+        return playwright.getText(statusInvCol);
+    }
+
     //---Biaya Tambahan---//
     /**
      * Click Jenis Invoice - Biaya Tambahan
@@ -1213,6 +1294,16 @@ public class InvoiceManualPO {
     public void assertValueStatusInv(String result){
         valueStatusInv = page.getByTestId("invoice-manual-item-0").getByText(result);
         assertThat(valueStatusInv).hasText(result);
+    }
+
+    /**
+     * get Value on Status Invoice coloumn
+     * @param statusInvoice
+     * @return String Status Invoice
+     */
+    public String getValueStatusInv(String statusInvoice){
+        valueStatusInv = page.locator("//tr/td/div[contains(., '" +statusInvoice+ "')]").last();
+        return playwright.getText(valueStatusInv);
     }
 
     /**

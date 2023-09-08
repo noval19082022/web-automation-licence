@@ -3,9 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
-import config.playwright.context.ActiveContext;
-import config.playwright.context.OwnerContext;
-import config.playwright.context.TenantContext;
+import config.playwright.context.*;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
+import pageobject.pms.LoginPMSPO;
 import utilities.PlaywrightHelpers;
 
 public class NavigatesSteps {
@@ -21,10 +20,13 @@ public class NavigatesSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
+    LoginPMSPO loginPMS = new LoginPMSPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
-        playwright.navigateToAndWaitLocator(Mamikos.URL, home.getMamikosLogo());
+        page = ActiveContext.getActivePage();
+        home = new HomePO(page);
+        home.navigatesToHomepage();
     }
 
     @Given("admin go to mamikos mamipay admin")
@@ -40,16 +42,6 @@ public class NavigatesSteps {
     @When("scenario is {string}")
     public void scenarioIsContinue(String isContinue) {
         FlowControl.setContinueFlow(isContinue.equalsIgnoreCase("continue"));
-    }
-
-    @Given("tenant open browser page {string}")
-    public void tenantOpenBrowserPage(String pageNumber) {
-        ActiveContext.setActivePage(TenantContext.getTenantBrowserContext().pages().get(Integer.parseInt(pageNumber)));
-    }
-
-    @When("owner open browser page {string}")
-    public void ownerOpenBrowserPage(String pageNumber) {
-        ActiveContext.setActivePage(OwnerContext.getOwnerBrowserContext().pages().get(Integer.parseInt(pageNumber)));
     }
 
     @When("tenant navigates to edit profile")
@@ -162,7 +154,7 @@ public class NavigatesSteps {
 
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
-        playwright.navigateTo(Mamikos.PMS_URL);
+        loginPMS.navigateToPmsLoginPage();
     }
 
     @When("owner navigates to property saya kos")
