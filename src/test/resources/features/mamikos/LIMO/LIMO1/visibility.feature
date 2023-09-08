@@ -15,7 +15,7 @@ Feature: Visibility
     When user go back to previous page
     Then user redirected to owner dashboard
     When user click on Saldo MamiAds at owner dashboard
-    Then user redirected to mamiads page from sidebar
+    Then user redirected to mamiads page
 
   @TEST_LIMO-289
   Scenario: Check redirection mamiads when all listing full occupied
@@ -25,4 +25,33 @@ Feature: Visibility
       | 083843666858 | 083843666858 | qwerty123    |
     Then user verify title "Rp25.000" and message "Pakai MamiAds, bikin iklan makin terlihat" in saldo MamiAds
     When user click on Saldo MamiAds at owner dashboard
-    Then user redirected to mamiads page from owner dashboard
+    Then user redirected to mamiads page
+
+  @TEST_LIMO-295 @TEST_LIMO-296
+  Scenario Outline: Never Purchase MamiAds and all listing is allocated and Ever Purchase MamiAds and all listing is allocated
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password     |
+      | <phone number> | <phone number> | <password>   |
+    And user click on Saldo MamiAds at owner dashboard
+    And user close mamiads onboarding popup
+    And user filter iklan by iklan nonaktif
+    Then user see title "Semua Iklan Anda Sudah Naik" with message "Iklan properti Anda akan naik ke posisi yang lebih tinggi pada hasil pencarian."
+
+    Examples:
+      | phone number  | password  |
+      | 089145645624  | qwerty123 |
+      | 082233545514  | 12345678  |
+
+  @TEST_LIMO-292
+  Scenario: Never Purchase MamiAds, Saldo < 5000 and have active ads the first click will redirect to MamiAds Purchase
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password     |
+      | 083832357442 | 083832357442 | qwerty123    |
+    Then user verify title "Rp1.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
+    When user click on Saldo MamiAds at owner dashboard
+    Then user redirected to top up mamiads page
+    When user go back to previous page
+    And user click on Saldo MamiAds at owner dashboard
+    Then user redirected to mamiads page
