@@ -20,6 +20,7 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to mamiads page")
     public void userRedirectedToMamiadsPage() {
+        playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.MAMIADS));
     }
 
@@ -28,8 +29,9 @@ public class RedirectOwnerSteps {
         assertThat(page).hasURL(Mamikos.URL + Mamikos.MAMIADS_FROM_OWNER_DASHBOARD);
     }
 
-    @And("user redirected to top up mamiads page")
+    @And("user redirected to pembelian saldo mamiads page")
     public void userRedirectedToTopUpMamiadsPage() {
+        playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.getPageUrl().contains(Mamikos.TOP_UP_MAMIADS));
     }
 }

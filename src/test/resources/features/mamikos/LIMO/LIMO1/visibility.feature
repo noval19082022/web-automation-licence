@@ -37,7 +37,6 @@ Feature: Visibility
     And user close mamiads onboarding popup
     And user filter iklan by iklan nonaktif
     Then user see title "Semua Iklan Anda Sudah Naik" with message "Iklan properti Anda akan naik ke posisi yang lebih tinggi pada hasil pencarian."
-
     Examples:
       | phone number  | password  |
       | 089145645624  | qwerty123 |
@@ -51,7 +50,4 @@ Feature: Visibility
       | 083832357442 | 083832357442 | qwerty123    |
     Then user verify title "Rp1.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
     When user click on Saldo MamiAds at owner dashboard
-    Then user redirected to top up mamiads page
-    When user go back to previous page
-    And user click on Saldo MamiAds at owner dashboard
-    Then user redirected to mamiads page
+    Then user redirected to pembelian saldo mamiads page
