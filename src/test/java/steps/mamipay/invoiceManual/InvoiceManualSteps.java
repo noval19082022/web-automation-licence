@@ -25,6 +25,7 @@ public class InvoiceManualSteps {
     private InvoiceManualPO manualInvoice = new InvoiceManualPO(page);
     HomePO home = new HomePO(page);
     Page page1;
+    JavaHelpers java = new JavaHelpers();
 
     private String listing;
     private String tenant;
@@ -47,6 +48,7 @@ public class InvoiceManualSteps {
     private String tglInvDibuat = JavaHelpers.getPropertyValue(invoiceManual, "tglInvDibuat");
     private String tglMulaiTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglMulaiTitle");
     private String tglAkhirTitle = JavaHelpers.getPropertyValue(invoiceManual, "tglAkhirTitle");
+    private String toastUbahStatus = JavaHelpers.getPropertyValue(invoiceManual, "toastUbahStatus");
 
     //---Biaya Tambahan Pop Up---//
     private List<Map<String, String>> fillFields;
@@ -399,6 +401,71 @@ public class InvoiceManualSteps {
             manualInvoice.assertNotFound(result);
         } else {
             manualInvoice.assertNamaListing(result);
+        }
+    }
+
+    @When("choose action {string}")
+    public void choose_action(String button){
+        if (button.equalsIgnoreCase("Ubah Status")){
+            manualInvoice.clicksKebabBtn();
+            manualInvoice.clicksUbahStatus();
+        }
+    }
+
+    @When("admin clicks Kembali button")
+    public void admin_clicks_Kembali_button(){
+        //set Tanggal
+        manualInvoice.clicksCalViewOnUbahStatus();
+        manualInvoice.setTanggalMulai("today");
+        //set Time
+        manualInvoice.setTimeOnUbahStatus("1000");
+        manualInvoice.clicksKembaliOnUbahStatus();
+    }
+
+    @Then("status invoice manual {string}")
+    public void status_invoice_manual(String statusInvoice){
+        Assert.assertEquals(manualInvoice.getValueStatusInv(statusInvoice), statusInvoice, "Status Invoice does not match");
+    }
+
+    @When("admin clicks close button")
+    public void admin_clicks_close_button(){
+        //set Tanggal
+        manualInvoice.clicksCalViewOnUbahStatus();
+        manualInvoice.setTanggalMulai("today");
+        //set Time
+        manualInvoice.setTimeOnUbahStatus("1000");
+        manualInvoice.clickClosePopUp();
+    }
+
+    @When("admin go to last page")
+    public void admin_go_to_last_page(){
+        manualInvoice.goToLastPageInvoiceManual();
+    }
+
+    @When("admin set tanggal pembayaran {string}")
+    public void admin_set_tanggal_pembayaran(String date){
+        if (date.equalsIgnoreCase("today")){
+            manualInvoice.clicksCalViewOnUbahStatus();
+            manualInvoice.setTanggalMulai(date);
+        }
+    }
+
+    @When("admin set waktu pembayaran {string}")
+    public void admin_set_waktu_pembayaran(String time){
+        manualInvoice.setTimeOnUbahStatus(time);
+        manualInvoice.clicksSimpanOnUbahStatus();
+    }
+
+    @Then("Status Invoice is {string} and paid date at {string}, {string}")
+    public void Status_Invoice_is_and_paid_date_at(String statusInv, String date, String time){
+        Assert.assertEquals(manualInvoice.getToastUbahStatus(), toastUbahStatus, "the toast message does not match");
+        Assert.assertEquals(manualInvoice.getValueStatusInv(statusInv), statusInv, "Status Invoice does not match");
+        if (date.equalsIgnoreCase("today")){
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date day = new Date();
+            String expectedDate = "at "+today.format(day)+", "+time;
+
+            Assert.assertTrue(manualInvoice.getPaidTime().contains(expectedDate));
         }
     }
 
