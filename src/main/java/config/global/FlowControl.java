@@ -1,22 +1,10 @@
 package config.global;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class FlowControl {
-    private static boolean strictFlow;
-    private static boolean continueFlow;
+    @Getter @Setter
+    private static boolean contextOneFlow,contextTwoFlow,continueFlow,strictFlow, multipleContextFlow;
 
-    public static synchronized void setStrictFlow(boolean strictFlow) {
-        FlowControl.strictFlow = strictFlow;
-    }
-
-    public static boolean getStrictFlow() {
-        return strictFlow;
-    }
-
-    public static synchronized void setContinueFlow(boolean continueFlow) {
-        FlowControl.continueFlow = continueFlow;
-    }
-
-    public static boolean getContinueFlow() {
-        return continueFlow;
-    }
 }

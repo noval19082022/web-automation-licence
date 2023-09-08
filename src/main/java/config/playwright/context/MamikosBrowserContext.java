@@ -5,11 +5,11 @@ import com.microsoft.playwright.Page;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ActiveContext {
+public class MamikosBrowserContext {
     @Setter @Getter
-    private static BrowserContext activeBrowserContext;
+    private static BrowserContext browserContextOne, browserContextTwo;
     @Setter @Getter
-    private static Page activePage;
+    private static Page contextOneActivePage, contextTwoActivePage;
     @Setter @Getter
     private static String contextName;
 }

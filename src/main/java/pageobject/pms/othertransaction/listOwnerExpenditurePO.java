@@ -1,4 +1,4 @@
-package pageobject.pms.otherTransaction;
+package pageobject.pms.othertransaction;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;

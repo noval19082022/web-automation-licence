@@ -1,20 +1,17 @@
-@essential
+@essential @finalcontextimplement
 Feature: Login Tenant
 
-  @tenant @owner @larilagi
+#  @continue @context1
   Scenario: Login Tenant With Phone Number
-    Given tenant open browser page "0"
+#    Given tenant set browser context to "context1"
     When user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    |  phone prod    | password  |
       | 087708777615  |  087708777615  | qwerty123 |
-    When owner open browser page "0"
-    When user login as owner:
-      | phone stag    |  phone prod    | password     |
-      | 081362464341  |  081362464341  | 1d0lt3stb4ru |
 
-  @owner @example3 @example4 @lari
+#  @context2
   Scenario: Login as owner
+#    Given owner set browser context to "context2"
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    |  phone prod    | password     |
