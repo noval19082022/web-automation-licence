@@ -9,8 +9,11 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 import java.nio.file.Paths;
+import java.util.Collection;
 
 public class Hooks{
+    private Collection<String> tags = null;
+    private Boolean multipleContext = false;
 
     /**
      * Will invoke before every scenario
@@ -18,24 +21,24 @@ public class Hooks{
      */
     @Before
     public void setup(Scenario scenario) {
-        if (scenario.getSourceTagNames().contains("@multipleContext")) {
+        tags = scenario.getSourceTagNames();
+        multipleContext = tags.contains("@context1") || tags.contains("@context2");
+        if (multipleContext) {
             if (!scenario.getSourceTagNames().contains("@continue") || !FlowControl.isContinueFlow()) {
-                if (scenario.getSourceTagNames().contains("@pmsContext")) {
-                    System.out.println("saya ke sini karena pmsContext true");
-                    if(PmsContext.getPmsBrowserContext() == null || PmsContext.getPmsBrowserContext().pages().isEmpty()) {
-                        PmsContextInitializer.initializePmsBrowserContext();
-                        PmsContextInitializer.initializePmsPage();
-                        FlowControl.setPmsFlow(true);
-                        FlowControl.setPmsFlow1(false);
+                if (scenario.getSourceTagNames().contains("@context1")) {
+                    System.out.println("saya ke sini karena context1 true");
+                    if(MamikosBrowserContext.getBrowserContextOne() == null || MamikosBrowserContext.getBrowserContextOne().pages().isEmpty()) {
+                        MamikosBrowserContextInitializer.initializeBrowserContextOne();
+                        MamikosBrowserContextInitializer.initializeBrowserContextOnePage();
+                        FlowControl.setContextOneFlow(true);
                     }
                 }
-                if (scenario.getSourceTagNames().contains("@pmsContext1")) {
-                    System.out.println("saya ke sini karena pmsContext1 true");
-                    if(PmsContext.getPmsBrowserContext1() == null || PmsContext.getPmsBrowserContext1().pages().isEmpty()) {
-                        PmsContextInitializer1.initializePmsBrowserContext1();
-                        PmsContextInitializer1.initializePmsPage1();
-                        FlowControl.setPmsFlow1(true);
-                        FlowControl.setPmsFlow(false);
+                if (scenario.getSourceTagNames().contains("@context2")) {
+                    System.out.println("saya ke sini karena context2 true");
+                    if(MamikosBrowserContext.getBrowserContextTwo() == null || MamikosBrowserContext.getBrowserContextTwo().pages().isEmpty()) {
+                        MamikosBrowserContextInitializer.initializeBrowserContextTwo();
+                        MamikosBrowserContextInitializer.initializeBrowserContextTwoPage();
+                        FlowControl.setContextTwoFlow(true);
                     }
                 }
             }
@@ -46,7 +49,7 @@ public class Hooks{
             FlowControl.setContinueFlow(true);
         }
 
-        if ((!scenario.getSourceTagNames().contains("@continue") && !FlowControl.isMultipleContextFlow()) || !FlowControl.isContinueFlow()) {
+        if (!scenario.getSourceTagNames().contains("@continue") && !FlowControl.isMultipleContextFlow() && !FlowControl.isContinueFlow()) {
             System.out.println("seharusnya tidak ke sini");
             System.out.println(!scenario.getSourceTagNames().contains("@continue") && !scenario.getSourceTagNames().contains("@multipleContext"));
             System.out.println(!FlowControl.isContinueFlow());
@@ -79,13 +82,11 @@ public class Hooks{
         }
 
         if (!scenario.getSourceTagNames().contains("@continue")) {
-            if (TenantContext.getTenantBrowserContext() != null) TenantContext.getTenantBrowserContext().close();
-            if (OwnerContext.getOwnerBrowserContext() != null) OwnerContext.getOwnerBrowserContext().close();
             if (AdminContext.getAdminBrowserContext() != null) AdminContext.getAdminBrowserContext().close();
             if (UserContext.getUserBrowserContext() != null) UserContext.getUserBrowserContext().close();
             if (ActiveContext.getActiveBrowserContext() != null) ActiveContext.getActiveBrowserContext().close();
-            if (PmsContext.getPmsBrowserContext() != null) PmsContext.getPmsBrowserContext().close();
-            if (PmsContext.getPmsBrowserContext1() != null) PmsContext.getPmsBrowserContext1().close();
+            if (MamikosBrowserContext.getBrowserContextOne() != null) MamikosBrowserContext.getBrowserContextOne().close();
+            if (MamikosBrowserContext.getBrowserContextTwo() != null) MamikosBrowserContext.getBrowserContextTwo().close();
             FlowControl.setContinueFlow(false);
         }
 

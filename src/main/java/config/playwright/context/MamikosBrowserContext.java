@@ -2,15 +2,14 @@ package config.playwright.context;
 
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
-import config.global.FlowControl;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PmsActiveContext {
+public class MamikosBrowserContext {
     @Setter @Getter
-    private static BrowserContext pmsActiveBrowserContext, pmsActiveBrowserContext1;
+    private static BrowserContext browserContextOne, browserContextTwo;
     @Setter @Getter
-    private static Page pmsActivePage, pmsActivePage1;
+    private static Page contextOneActivePage, contextTwoActivePage;
     @Setter @Getter
     private static String contextName;
 }

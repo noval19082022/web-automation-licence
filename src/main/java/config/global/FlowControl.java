@@ -5,6 +5,6 @@ import lombok.Setter;
 
 public class FlowControl {
     @Getter @Setter
-    private static boolean pmsFlow,pmsFlow1,continueFlow,strictFlow, multipleContextFlow;
+    private static boolean contextOneFlow,contextTwoFlow,continueFlow,strictFlow, multipleContextFlow;
 
 }

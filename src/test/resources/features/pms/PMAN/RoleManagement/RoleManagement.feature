@@ -2,18 +2,18 @@
 
   Feature: Role Management
 
-    @TEST_PMAN-3690 @continue @pmsContext @pmsContext1 @multipleContext
+    @TEST_PMAN-3690 @continue @context1 @context2
     Scenario: Add Role
-      Given pms set browser context to "pmsContext"
+      Given pms set browser context to "context1"
       Given admin go to pms singgahsini
 
-
     Scenario: Test
-      Given pms set browser context to "pmsContext1"
+      Given pms set browser context to "context2"
       Given admin go to pms singgahsini
       When admin login pms :
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |
+
 #      And admin go to role management menu
 #      #back from tambah Role
 #      When admin go to tambah role
