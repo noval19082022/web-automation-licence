@@ -23,6 +23,9 @@ public class LoginPMSPO {
         loginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
     }
 
+    /**
+     * navigate to PMS login page
+     */
     public void navigateToPmsLoginPage() {
         pw.navigateTo(Mamikos.PMS_URL, 30000.0, LoadState.LOAD);
     }
