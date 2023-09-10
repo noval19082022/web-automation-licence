@@ -3,7 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
-import config.playwright.context.*;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

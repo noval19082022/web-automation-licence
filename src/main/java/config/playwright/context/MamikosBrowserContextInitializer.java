@@ -1,19 +1,16 @@
 package config.playwright.context;
 
-import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Tracing;
 import config.playwright.PlaywrightSourceManager;
 import config.playwright.browser.BrowserOptions;
 
 public class MamikosBrowserContextInitializer {
-    private static BrowserContext browserContext1 = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
-    private static BrowserContext browserContext2 = PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions());
 
     /**
      * Initialize browser context number one
      */
     public static void initializeBrowserContextOne() {
-        MamikosBrowserContext.setBrowserContextOne(browserContext1);
+        MamikosBrowserContext.setBrowserContextOne(PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions()));
     }
 
     /**
@@ -32,7 +29,7 @@ public class MamikosBrowserContextInitializer {
      * Initialize browser context number two
      */
     public static void initializeBrowserContextTwo() {
-        MamikosBrowserContext.setBrowserContextTwo(browserContext2);
+        MamikosBrowserContext.setBrowserContextTwo(PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions()));
     }
 
     /**
