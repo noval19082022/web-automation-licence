@@ -1,7 +1,6 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
-import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
