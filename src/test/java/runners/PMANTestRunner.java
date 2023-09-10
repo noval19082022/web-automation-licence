@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"json:target/result/pman/cucumber-report.json", "html:target/result/pman/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@test"
+        tags = "@pman"
 )
 
 public class PMANTestRunner extends BaseTestRunner{
