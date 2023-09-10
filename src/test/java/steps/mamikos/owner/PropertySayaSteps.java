@@ -2,6 +2,8 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,10 +14,10 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.Map;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     PropertySayaPO propertySaya = new PropertySayaPO (page);
     private JavaHelpers javaHelpers = new JavaHelpers();
     private Integer dailyPrice = null;
@@ -335,5 +337,86 @@ public class PropertySayaSteps {
     @And("verify kos is {string}")
     public void verifyKosIs(String statusKos) {
         Assert.assertTrue(propertySaya.isStatusKos(), "Status kos doesn't match!");
+    }
+
+    @And("owner click tambah data iklan {string}")
+    public void ownerClickTambahDataIklan(String jenisProperti) {
+        propertySaya.clickTambahDataIklan(jenisProperti);
+    }
+
+    @And("owner fills data apartemen with Property Name is {string}")
+    public void ownerFillsDataApartemenWithPropertyNameIs(String propertyName) {
+        propertySaya.inputPropertyName(propertyName);
+    }
+
+    @Then("owner input requirement field add apartemen is as expected")
+    public void ownerInputRequirementFieldAddApartemenIsAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        propertySaya.inputPropertyName(table.get(0).get("nama project"));
+        propertySaya.selectPropertyName(table.get(0).get("nama project"));
+        propertySaya.inputNamaUnit(table.get(0).get("nama unit"));
+        propertySaya.inputNoUnit(table.get(0).get("nomor unit"));
+        propertySaya.selectUnitType(table.get(0).get("tipe unit"));
+        propertySaya.inputLantai(table.get(0).get("lantai"));
+        propertySaya.inputUnitSize(table.get(0).get("luas unit"));
+        propertySaya.inputDescription(table.get(0).get("deskripsi"));
+    }
+
+    @And("owner input harga sewa {string} is {string}")
+    public void ownerInputHargaSewaIs(String priceType, String price) {
+        propertySaya.selectPriceType(priceType);
+        propertySaya.inputApartementPrice(priceType, price);
+    }
+
+    @And("owner select fasilitas unit {string} and fasilitas kamar {string}")
+    public void ownerSelectFasilitasUnitAndFasilitasKamar(String fasilitasUnit, String fasilitasKamar) {
+        propertySaya.selectFasilitasUnit(fasilitasUnit);
+        propertySaya.selectFasilitasKamar(fasilitasKamar);
+
+        if (fasilitasKamar.equals("Semi Furnished")|| fasilitasKamar.equals("Furnished")){
+            propertySaya.clickFurnished("Bed");
+        }
+    }
+
+    @And("owner upload cover photo apartemen")
+    public void ownerUploadCoverPhotoApartemen() {
+        propertySaya.uploadCoverPhotoApartemen();
+    }
+
+    @And("owner upload photo apartemen")
+    public void ownerUploadPhotoApartemen() {
+        propertySaya.uploadCoverPhotoApartemen();
+    }
+
+    @And("owner upload photo {string} of apartemen")
+    public void ownerUploadPhotoOfApartemen(String typePhoto) {
+        propertySaya.uploadPhotoApartemen(typePhoto);
+    }
+
+    @Then("owner can see url link is for property saya apartemen")
+    public void ownerCanSeeUrlLinkIsForPropertySayaApartemen() {
+        Assert.assertEquals(page.url(), Mamikos.URL + Mamikos.PROPERTY_SAYA_APARTEMENT, "URL is not equal");
+    }
+
+    @And("owner click edit data apartemen")
+    public void ownerClickEditDataApartemen() {
+        propertySaya.clickEditDataApartemen();
+    }
+
+    @Then("verify status apartemen {string}")
+    public void verifyStatusApartemen(String status) {
+        Assert.assertEquals(propertySaya.getStatusProperty(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+    }
+
+    @And("owner search apart {string} on property saya page")
+    public void ownerSearchApartOnPropertySayaPage(String namaUnit) {
+        propertySaya.searchApartPropertySaya(namaUnit);
+
+    }
+
+    @And("owner submit edit data apartemen")
+    public void ownerSubmitEditDataApartemen() {
+        propertySaya.clickOnSubmitButton();
+        propertySaya.clickOnSelesaiButton();
     }
 }
