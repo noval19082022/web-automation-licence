@@ -432,4 +432,61 @@ public class PropertySayaSteps {
         propertySaya.clickOnSubmitButton();
         propertySaya.clickOnSelesaiButton();
     }
+
+    @When("user enter text {string} on search bar in room allotment and hit enter")
+    public void user_enter_text_on_search_bar_in_room_allotment_and_hit_enter(String text) {
+        propertySaya.searchNameOrRoomNo(text);
+    }
+
+    @When("user click edit button in first row of the table")
+    public void user_click_edit_button_in_first_row_of_the_table() throws InterruptedException {
+        propertySaya.clickFirstEditButton();
+    }
+
+    @When("user tick already inhabited checkbox")
+    public void user_tick_already_inhabited_checkbox() throws InterruptedException {
+        propertySaya.clickAlreadyInhabitedCheckbox();
+    }
+
+    @Then("user can sees toast on update room/price as {string} {string}")
+    public void user_can_sees_toast_x(String statusRoom, String room) {
+        Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "status room is wrong");
+        Assert.assertEquals(propertySaya.getTextTotalRoom(), room, "Total room is wrong");
+    }
+
+    @When("user filter the room with {string} in update room page")
+    public void user_filter_the_room_with_in_update_room_page(String filter) {
+        propertySaya.filterRoomTable(filter);
+    }
+
+    @When("user fill room floor in room allotment page with {string}")
+    public void user_fill_room_floor_in_room_allotment_page_with(String text) {
+        propertySaya.insertTextFloor(text);
+    }
+
+    @When("user fill room name in room allotment page with {string}")
+    public void user_fill_room_name_in_room_allotment_page_with(String roomName) {
+        propertySaya.insertTextRoomName(roomName);
+    }
+
+    @Then("user see label {string} in room name")
+    public void user_see_label_in_room_name_or_number(String roomNo) {
+        Assert.assertEquals(propertySaya.getGoldPlusLabel(roomNo), roomNo);
+    }
+
+    @Then("user see error message {string} under room name field in update room page")
+    public void user_see_error_message_under_room_name_field_in_update_room_page(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message room name is wrong");
+    }
+
+    @Then("user see error message {string} under floor field in update room page")
+    public void user_see_error_message_under_floor_field_in_update_room_page(String error) {
+        Assert.assertEquals(propertySaya.getErrorFloor().trim(), error, "Error message floor is wrong");
+    }
+
+    @Then("user see room list is empty in room allotment page")
+    public void user_see_room_list_is_empty_in_room_allotment_page() {
+        Assert.assertTrue(propertySaya.isTableEmpty(), "Table is not empty");
+    }
+
 }
