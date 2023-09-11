@@ -196,18 +196,18 @@
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
         | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
-      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/80637"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/46053"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Penyewa
       When admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Listing
       When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
-      Then the result is displayed according the value "MI/49220517/2022/09/80637", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6046
     Scenario: Search Nama Listing per word with value "Singgahsini"
@@ -292,7 +292,7 @@
       And admin selects the date for "today" with clicks Terapkan
       Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
 
-    @TEST_PMAN-6212
+    @continue @TEST_PMAN-6212
     Scenario: Filter Invoice Manual
       When admin refresh page and clicks Filter in Invoice Manual
       #Default Filter Unpaid
@@ -300,3 +300,42 @@
       Then "unpaid" Status Invoice is displayed
       When admin clicks "Reset" button on Filter
       Then the counter on filter is disappears
+
+    @continue @TEST_PMAN-6144
+    Scenario: Ubah Status Invoice from Unpaid to Paid
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Unpaid" on the "Status Invoice" dropdown
+      When admin go to last page
+      #check Kembali when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks Kembali button
+      Then status invoice manual "unpaid"
+      #check Close when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks close button
+      Then status invoice manual "unpaid"
+      #check Status Invooice when clicks Simpan
+      And choose action "Ubah Status"
+      And admin set tanggal pembayaran "today"
+      And admin set waktu pembayaran "1000"
+      Then Status Invoice is "paid" and paid date at "today", "10:00"
+
+    @TEST_PMAN-6253
+    Scenario: Ubah Status Invoice from Expired to Paid
+      When admin clicks "Reset" button on Filter
+      And admin clicks Filter in Invoice Manual
+      And admin ticks "Expired" on the "Status Invoice" dropdown
+      When admin go to last page
+      #check Kembali when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks Kembali button
+      Then status invoice manual "expired"
+      #check Close when set Tanggal and Time
+      And choose action "Ubah Status"
+      And admin clicks close button
+      Then status invoice manual "expired"
+      #check Status Invooice when clicks Simpan
+      And choose action "Ubah Status"
+      And admin set tanggal pembayaran "today"
+      And admin set waktu pembayaran "1000"
+      Then Status Invoice is "paid" and paid date at "today", "10:00"

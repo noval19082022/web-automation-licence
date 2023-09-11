@@ -18,3 +18,5 @@ Feature: Listing Availability on Kost Detail
     Then tenant should see ajukan sewa button is "enable"
     When tenant booking kost after fill date and rent type
     Then tenant should success booking kost
+    And tenant navigate to riwayat and draf booking
+    And user cancel booking

@@ -1,15 +1,20 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import lombok.Getter;
+import lombok.Setter;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+import java.nio.file.Paths;
 
 public class PropertySayaPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    @Setter @Getter private String searchPropertyName;
     Locator kostDropdown;
     Locator searchKostTextbox;
     Locator lihatSelengkapnyaButton;
@@ -61,6 +66,25 @@ public class PropertySayaPO {
     Locator modalPopUp;
     Locator statusKos;
     Locator warningPrice;
+    Locator tambahDataIklan;
+    Locator tambahIklanBaru;
+    Locator jenisPropertiRadioButton;
+    Locator propertyNameField;
+    Locator unitNameField;
+    Locator unitNumberField;
+    Locator unitTypeField;
+    Locator floorPropertyField;
+    Locator unitSizeField;
+    Locator priceTypeCheckBox;
+    Locator priceApartementField;
+    Locator uploadCoverPhotoField;
+    Locator uploadPhotoApartement;
+    Locator gantiFotoButton;
+    Locator editDataApartemenLink;
+    Locator statusApartement;
+    Locator apartDropdown;
+    Locator selesaiLink;
+    Locator descriptionField;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -108,6 +132,19 @@ public class PropertySayaPO {
         priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
         modalPopUp = page.locator("//div[@class='modal-content']");
         statusKos = page.locator(".kos-card__status-name--kos-verified");
+        tambahDataIklan = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Tambahkan Data Iklan"));
+        tambahIklanBaru = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Iklan Baru"));
+        propertyNameField = page.locator("//input[@id='propertyName']");
+        unitNameField = page.locator("//input[@name='Nama unit']");
+        unitNumberField = page.locator("//input[@name='Nomor unit']");
+        unitTypeField = page.locator("//select[@id='unitType']");
+        floorPropertyField = page.locator("//input[@id='propertyFloor']");
+        unitSizeField = page.locator("//input[@id='unitSize']");
+        uploadCoverPhotoField = page.locator("//div[@id='photoCover']");
+        gantiFotoButton = page.locator("//a[.='Ganti Foto']");
+        apartDropdown = page.getByText("Cari apartemen Anda disini...");
+        selesaiLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("SELESAI"));
+        descriptionField = page.locator("//textarea[@id='propertyDescription']");
     }
 
     /**
@@ -654,5 +691,252 @@ public class PropertySayaPO {
      */
     public boolean isButtonUpdatePriceDisable() {
         return updatePriceButton.isDisabled();
+    }
+
+    /**
+     * Click tambah data iklan -> tambah iklan baru -> choose add kos or apartement
+     * @param jenisProperti
+     * e.g Kost, Apartemen
+     *
+     */
+    public void clickTambahDataIklan(String jenisProperti) {
+        playwright.clickOn(tambahDataIklan);
+        playwright.clickOn(tambahIklanBaru);
+        jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
+        playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
+        playwright.clickOn(jenisPropertiRadioButton);
+        playwright.clickOnTextButton("Tambahkan Data", 3000.0);
+    }
+
+    /**
+     * Input property name
+     * @param propertyName
+     * Can use add and edit
+     * If edit nama project field doesn't appear
+     *
+     */
+    public void inputPropertyName(String propertyName) {
+        if (propertyNameField.isVisible()) {
+            playwright.forceFill(propertyNameField, propertyName);
+        }
+    }
+
+    /**
+     * Input nama unit apartemen
+     * @param namaUnit
+     *
+     */
+    public void inputNamaUnit(String namaUnit) {
+        playwright.forceFill(unitNameField, namaUnit);
+    }
+
+    /**
+     * Input nomor unit
+     * @param nomorUnit
+     *
+     */
+    public void inputNoUnit(String nomorUnit) {
+        playwright.forceFill(unitNumberField, nomorUnit);
+    }
+
+    /**
+     * Select tipe unit
+     * @param tipeUnit
+     * e.g 1-Room Studio, 2 BR, 3 BR, 4 BR, Lainnya
+     *
+     */
+    public void selectUnitType(String tipeUnit) {
+        playwright.selectDropdownByValue(unitTypeField, tipeUnit);
+    }
+
+    /**
+     * input lantai apartemen
+     * @param lantai
+     *
+     */
+    public void inputLantai(String lantai) {
+        playwright.forceFill(floorPropertyField, lantai);
+    }
+
+    /**
+     * Input unit size
+     * @param luasUnit
+     *
+     */
+    public void inputUnitSize(String luasUnit) {
+        playwright.forceFill(unitSizeField, luasUnit);
+    }
+
+    /**
+     * Select price type
+     * @param priceType
+     *
+     */
+    public void selectPriceType(String priceType) {
+        priceTypeCheckBox = page.locator("label").filter(new Locator.FilterOptions().setHasText(priceType));
+        playwright.clickOn(priceTypeCheckBox);
+    }
+
+    /**
+     * Input apartemen price
+     * After check price type, then input the price
+     * @param priceType e.g Perhari, Perminggu, Perbulan, Pertahun
+     * @param price
+     *
+     */
+    public void inputApartementPrice(String priceType, String price) {
+        String element;
+        switch (priceType){
+            case "Perhari": element = "Daily"; break;
+            case "Perminggu": element = "Weekly"; break;
+            case "Perbulan": element = "Monthly"; break;
+            case "Pertahun": element = "Yearly"; break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + priceType);
+        }
+        priceApartementField = page.locator("//input[@id='inputPrice"+element+"']");
+        playwright.waitTillLocatorIsVisible(priceApartementField, 3000.0);
+        playwright.forceFill(priceApartementField, price);
+    }
+
+    /**
+     * Select fasilitas unit
+     * @param fasilitasUnit
+     *
+     */
+    public void selectFasilitasUnit(String fasilitasUnit) {
+        String element = "//label[contains(.,'"+ fasilitasUnit +"')]";
+        playwright.clickOn(page.locator(element));
+    }
+
+    /**
+     * Select fasilitas kamar
+     * @param fasilitasKamar
+     */
+    public void selectFasilitasKamar(String fasilitasKamar) {
+        String element = "";
+        switch (fasilitasKamar){
+            case "Not Furnished": element = "[for='isFurnished0']"; break;
+            case "Semi Furnished": element = "[for='isFurnished1']"; break;
+            case "Furnished": element = "[for='isFurnished2']"; break;
+        }
+        playwright.clickOn(page.locator(element));
+    }
+
+    /**
+     * Upload phoyo cover apartemen
+     * Photo can't > 5mb
+     *
+     */
+    public void uploadCoverPhotoApartemen() {
+        String imagePath = "src/main/resources/images/upload5Mb.jpg";
+        FileChooser fileChooser = page.waitForFileChooser(() -> uploadCoverPhotoField.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(uploadCoverPhotoField);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Upload photo apartemen
+     * @param photoType e.g photo kamar, kamar mandi, dan lainnya
+     * photo can't > 5mb
+     */
+    public void uploadPhotoApartemen(String photoType) {
+        String element = "";
+        switch (photoType){
+            case "kamar": element = "Bedroom"; break;
+            case "kamar mandi": element = "Bath"; break;
+            case "lainnya": element = "Other"; break;
+        }
+        uploadPhotoApartement = page.locator("//div[@id='photo"+element+"']");
+
+        String imagePath = "src/main/resources/images/upload5Mb.jpg";
+        FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoApartement.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(uploadPhotoApartement);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Select property name
+     * After owner input property name, will be display dropdown suggestion of property name
+     *
+     */
+    public void selectPropertyName(String namaProject) {
+        if (propertyNameField.isVisible()) {
+            playwright.clickOnText(namaProject);
+        }
+    }
+
+    /**
+     * Click furniture if check fasilitas kamar is semi furnished and furnished
+     * @param furniture
+     *
+     */
+    public void clickFurnished(String furniture) {
+        playwright.clickOnText(furniture);
+    }
+
+    /**
+     * Click edit apartemen link
+     * Property name from getSearchPropertyName
+     *
+     */
+    public void clickEditDataApartemen() {
+        editDataApartemenLink = page.locator("//p[contains(., '"+getSearchPropertyName()+"')]/following::a[@class='clickable-link edit-data-link'][1]");
+        playwright.clickOn(editDataApartemenLink);
+    }
+
+    /**
+     * Get status property
+     * @param searchPropertyName
+     * @return statusApartement
+     * e.g Aktif, Diperiksa Admin
+     *
+     */
+    public String getStatusProperty(String searchPropertyName) {
+        statusApartement = page.locator("//p[contains(., '"+searchPropertyName+"')]/parent::*/preceding::span[@class='status unverified-waiting']");
+        return playwright.getText(statusApartement);
+    }
+
+    /**
+     * Search apartemen property
+     * @param namaUnit
+     *
+     */
+    public void searchApartPropertySaya(String namaUnit) {
+        setSearchPropertyName(namaUnit);
+        playwright.clickOn(apartDropdown);
+        searchKostTextbox.fill(namaUnit);
+        Locator apartSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(namaUnit));
+        playwright.clickOn(apartSearch);
+    }
+
+    /**
+     * Click submit button
+     *
+     *
+     */
+    public void clickOnSubmitButton() {
+        playwright.clickOnTextButton("Submit", 3000.0);
+        playwright.hardWait(2000);
+    }
+
+    /**
+     * Click on selesai button
+     *
+     *
+     */
+    public void clickOnSelesaiButton() {
+        playwright.waitTillLocatorIsVisible(selesaiLink, 3000.0);
+        playwright.clickOn(selesaiLink);
+    }
+
+    /**
+     * Input descirption
+     * @param deskripsi
+     */
+    public void inputDescription(String deskripsi) {
+        playwright.forceFill(descriptionField, deskripsi);
     }
 }

@@ -221,4 +221,24 @@ public class TenantEditProfileSteps {
     public void userSeeValidationMessage(String number) {
         Assert.assertTrue(tenantEditProfile.verifyErrorMessagePhoneNumber(number), "element is displayed");
     }
+
+    @Then("user see profile information with {string}")
+    public void userSeeProfileInformation(String text) {
+        Assert.assertEquals(tenantEditProfile.getProfileDisclaimer(), text, "element not displayed");
+    }
+
+    @Then("user see percentage based on field that was filled {string}")
+    public void userSeePercentageBasedOnFieldThatWasFilled(String text) {
+        Assert.assertEquals(tenantEditProfile.getProfilePersentageInformation(), text, "element not displayed");
+    }
+
+    @When("user will see microcopy information {string}")
+    public void userWillSeeMicrocopyInformation(String text) {
+        Assert.assertEquals(tenantEditProfile.getProfileMicrocoyInformation(text),text, "element not displayed");
+    }
+
+    @And("user click on batal button")
+    public void userClickOnBatalButton() {
+        tenantEditProfile.userClickBatalButton();
+    }
 }

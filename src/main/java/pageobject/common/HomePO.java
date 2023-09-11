@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -129,6 +130,13 @@ public class HomePO {
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
         this.copyrightFooter = page.getByText("© 2023 Mamikos.com, All rights reserved");
+    }
+
+    /**
+     * Navigates to homepage
+     */
+    public void navigatesToHomepage() {
+        playwright.navigateToAndWaitLocator(Mamikos.URL, getMamikosLogo());
     }
 
     /**

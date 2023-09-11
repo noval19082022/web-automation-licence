@@ -184,6 +184,7 @@ public class InvoicePO {
      * @return int data type
      */
     public int getTotalPembayaran() {
+        playwright.waitFor(totalPembayaran, 5000.0);
         return JavaHelpers.extractNumber(playwright.getText(totalPembayaran));
     }
 
@@ -203,6 +204,7 @@ public class InvoicePO {
      * @return int data type
      */
     public int getVoucherReductionPrice(String voucherCodeName) {
+        playwright.waitFor(page.locator(String.format(appliedVoucher, voucherCodeName)), 5000.0);
         return JavaHelpers.extractNumber(playwright.getText(page.locator(String.format(appliedVoucher, voucherCodeName))));
     }
 
