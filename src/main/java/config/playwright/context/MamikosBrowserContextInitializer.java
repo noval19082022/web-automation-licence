@@ -22,6 +22,7 @@ public class MamikosBrowserContextInitializer {
             .setSnapshots(true)
             .setSources(false));
         MamikosBrowserContext.setContextOneActivePage(MamikosBrowserContext.getBrowserContextOne().newPage());
+        ActiveContext.setActiveBrowserContext(MamikosBrowserContext.getBrowserContextOne());
         ActiveContext.setActivePage(MamikosBrowserContext.getContextOneActivePage());
     }
 
@@ -41,6 +42,7 @@ public class MamikosBrowserContextInitializer {
                 .setSnapshots(true)
                 .setSources(false));
         MamikosBrowserContext.setContextTwoActivePage(MamikosBrowserContext.getBrowserContextTwo().newPage());
+        ActiveContext.setActiveBrowserContext(MamikosBrowserContext.getBrowserContextTwo());
         ActiveContext.setActivePage(MamikosBrowserContext.getContextTwoActivePage());
     }
 }
