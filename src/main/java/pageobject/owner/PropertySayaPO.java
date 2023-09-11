@@ -60,6 +60,7 @@ public class PropertySayaPO {
     Locator priceKostTextBoxDisable;
     Locator modalPopUp;
     Locator statusKos;
+    Locator warningPrice;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -244,48 +245,54 @@ public class PropertySayaPO {
      *
      * @return Integer daily price
      */
-    public int getDailyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(1)));
+    public String getDailyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(1)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price weekly
      * @return Integer weekly price
      */
-    public int getWeeklyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(2)));
+    public String getWeeklyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(2)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price monthly
      * @return Integer monthly price
      */
-    public int getMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.first()));
+    public String getMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.first()));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price three monthly
      * @return Integer three monthly price
      */
-    public int getThreeMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(3)));
+    public String getThreeMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(3)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price six monthly
      * @return Integer six monthly price
      */
-    public int getSixMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(4)));
+    public String getSixMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(4)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price yearly
      * @return Integer yearly price
      */
-    public int getYearlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(5)));
+    public String getYearlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(5)));
+        return String.valueOf(number);
     }
 
     /**
@@ -630,5 +637,22 @@ public class PropertySayaPO {
      */
     public boolean isStatusKos() {
         return playwright.waitTillLocatorIsVisible(statusKos, 3000.0);
+    }
+
+    /**
+     * Get text warning price daily, weekly, monthly, three monthly,six monthly, yearly price
+     * @return String warning daily, weekly, monthly, three monthly,six monthly, yearly price
+     */
+    public String getWarningYearlyPrice(Integer i) {
+        warningPrice = page.locator(".media-content");
+        return playwright.getText(warningPrice.nth(i));
+    }
+
+    /**
+     * Check if button update price is disable
+     * @return true if disable
+     */
+    public boolean isButtonUpdatePriceDisable() {
+        return updatePriceButton.isDisabled();
     }
 }

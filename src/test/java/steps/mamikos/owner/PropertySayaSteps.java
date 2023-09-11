@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,18 +14,19 @@ import utilities.JavaHelpers;
 
 
 import java.util.List;
+import java.util.Map;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     PropertySayaPO propertySaya = new PropertySayaPO (page);
     private JavaHelpers javaHelpers = new JavaHelpers();
-    private Integer dailyPrice = null;
-    private Integer weeklyPrice = null;
-    private Integer monthlyPrice = null;
-    private Integer threeMonthlyPrice = null;
-    private Integer sixMonthlyPrice = null;
-    private Integer yearlyPrice = null;
+    private String dailyPrice = null;
+    private String weeklyPrice = null;
+    private String monthlyPrice = null;
+    private String threeMonthlyPrice = null;
+    private String sixMonthlyPrice = null;
+    private String yearlyPrice = null;
 
 
     @And("owner search kost {string} on property saya page")
@@ -89,33 +91,33 @@ public class PropertySayaSteps {
         propertySaya.inputYearlyPrice(yearlyPrice);
     }
 
-    @And("user see daily price is {int}")
-    public void user_see_daily_price_is(Integer dailyPrice) {
+    @And("user see daily price is {string}")
+    public void user_see_daily_price_is(String dailyPrice) {
         Assert.assertEquals(propertySaya.getDailyPrice(), dailyPrice, "Daily price is not correct");
     }
 
-    @And("user see weekly price is {int}")
-    public void user_see_weekly_price_is(Integer weeklyPrice) {
+    @And("user see weekly price is {string}")
+    public void user_see_weekly_price_is(String weeklyPrice) {
         Assert.assertEquals(propertySaya.getWeeklyPrice(), weeklyPrice, "Weekly price is not correct");
     }
 
-    @And("user see monthly price is {int}")
-    public void user_see_monthly_price_is(Integer monthlyPrice) {
+    @And("user see monthly price is {string}")
+    public void user_see_monthly_price_is(String monthlyPrice) {
         Assert.assertEquals(propertySaya.getMonthlyPrice(), monthlyPrice, "Monthly price is not correct");
     }
 
-    @And("user see three monthly price is {int}")
-    public void user_see_three_monthly_price_is(Integer threeMonthPrice) {
+    @And("user see three monthly price is {string}")
+    public void user_see_three_monthly_price_is(String threeMonthPrice) {
         Assert.assertEquals(propertySaya.getThreeMonthlyPrice(), threeMonthPrice, "Three monthly price is not correct");
     }
 
-    @Then("user see six monthly price is {int}")
-    public void user_see_six_monthly_price_is(Integer sixMonthlyPrice) {
+    @Then("user see six monthly price is {string}")
+    public void user_see_six_monthly_price_is(String sixMonthlyPrice) {
         Assert.assertEquals(propertySaya.getSixMonthlyPrice(), sixMonthlyPrice, "Six monthly price is not correct");
     }
 
-    @And("user see yearly price is {int}")
-    public void user_see_yearly_price_is(Integer yearlyPrice) {
+    @And("user see yearly price is {string}")
+    public void user_see_yearly_price_is(String yearlyPrice) {
         Assert.assertEquals(propertySaya.getYearlyPrice(), yearlyPrice, "Yearly price is not correct");
     }
 
@@ -336,5 +338,20 @@ public class PropertySayaSteps {
     @And("verify kos is {string}")
     public void verifyKosIs(String statusKos) {
         Assert.assertTrue(propertySaya.isStatusKos(), "Status kos doesn't match!");
+    }
+
+    @And("user see warning price with:")
+    public void userSeeWarningPriceWith(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(propertySaya.getWarningYearlyPrice(i), content.get("warningMessage"), "title not equal to "+content.get("title"));
+            i++;
+        }
+    }
+
+    @And("user see button update price disable")
+    public void user_see_button_update_price_disable() throws InterruptedException {
+        Assert.assertTrue(propertySaya.isButtonUpdatePriceDisable(), "Button update price enable");
     }
 }
