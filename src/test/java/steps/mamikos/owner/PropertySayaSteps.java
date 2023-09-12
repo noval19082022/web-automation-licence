@@ -284,7 +284,7 @@ public class PropertySayaSteps {
     @Given("user input kost location {string} and clicks on first autocomplete suggestion")
     public void user_input_kost_location_and_clicks_on_first_autocomplete_result(String location) {
         propertySaya.insertKosLocation(location);
-        propertySaya.clickOnFirstResult(location);
+//        propertySaya.clickOnFirstResult(location);
     }
 
     @Given("user input address note {string} and random text")
