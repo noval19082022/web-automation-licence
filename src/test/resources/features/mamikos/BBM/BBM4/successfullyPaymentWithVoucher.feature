@@ -52,7 +52,7 @@ Scenario: Admin Batalkan Contract
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | TIRTAYASA4        | AUTOCHNGEPERIOD |
+      | AUTOCHNGEPERIOD   | AUTOCHNGEPERIOD |
     Then tenant can see voucher is applied
 
   @tenantPayWithVoucher
