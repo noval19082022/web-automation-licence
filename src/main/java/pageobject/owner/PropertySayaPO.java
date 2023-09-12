@@ -65,6 +65,7 @@ public class PropertySayaPO {
     Locator priceKostTextBoxDisable;
     Locator modalPopUp;
     Locator statusKos;
+    Locator warningPrice;
     Locator tambahDataIklan;
     Locator tambahIklanBaru;
     Locator jenisPropertiRadioButton;
@@ -84,6 +85,17 @@ public class PropertySayaPO {
     Locator apartDropdown;
     Locator selesaiLink;
     Locator descriptionField;
+    Locator searchInput;
+    Locator firstEditButton;
+    Locator alreadyInhabitedCheckbox;
+    Locator statusRoom;
+    Locator roomFilterDropdown;
+    Locator filterTable;
+    Locator floorFieldInput;
+    Locator roomName;
+    Locator errorMessageRoomName;
+    Locator errorMessageFloor;
+    Locator emptyTable;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -144,6 +156,15 @@ public class PropertySayaPO {
         apartDropdown = page.getByText("Cari apartemen Anda disini...");
         selesaiLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("SELESAI"));
         descriptionField = page.locator("//textarea[@id='propertyDescription']");
+        searchInput = page.getByPlaceholder("Masukkan nama atau nomor kamar");
+        firstEditButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit")).first();
+        alreadyInhabitedCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        statusRoom = page.locator(".bg-c-label").first();
+        roomFilterDropdown = page.locator(".availability-option__button");
+        floorFieldInput = page.locator("#modalAddFloorInput_txt");
+        errorMessageRoomName = page.locator(".bg-c-field__message");
+        errorMessageFloor = page.getByText("Maks. 50 karakter.");
+        emptyTable = page.locator(".is-empty");
     }
 
     /**
@@ -281,48 +302,54 @@ public class PropertySayaPO {
      *
      * @return Integer daily price
      */
-    public int getDailyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(1)));
+    public String getDailyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(1)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price weekly
      * @return Integer weekly price
      */
-    public int getWeeklyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(2)));
+    public String getWeeklyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(2)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price monthly
      * @return Integer monthly price
      */
-    public int getMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.first()));
+    public String getMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.first()));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price three monthly
      * @return Integer three monthly price
      */
-    public int getThreeMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(3)));
+    public String getThreeMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(3)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price six monthly
      * @return Integer six monthly price
      */
-    public int getSixMonthlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(4)));
+    public String getSixMonthlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(4)));
+        return String.valueOf(number);
     }
 
     /**
      * Get text price yearly
      * @return Integer yearly price
      */
-    public int getYearlyPrice() {
-        return JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(5)));
+    public String getYearlyPrice() {
+        int number = JavaHelpers.extractNumber(playwright.getInputValue(priceKostTextBox.nth(5)));
+        return String.valueOf(number);
     }
 
     /**
@@ -404,6 +431,7 @@ public class PropertySayaPO {
         playwright.hardWait(3000.0);
         playwright.clickOn(firstDeleteButton);
         playwright.clickOn(deleteButtonInPopUp);
+        playwright.reloadPage();
     }
 
     /**
@@ -670,6 +698,23 @@ public class PropertySayaPO {
     }
 
     /**
+     * Get text warning price daily, weekly, monthly, three monthly,six monthly, yearly price
+     * @return String warning daily, weekly, monthly, three monthly,six monthly, yearly price
+     */
+    public String getWarningYearlyPrice(Integer i) {
+        warningPrice = page.locator(".media-content");
+        return playwright.getText(warningPrice.nth(i));
+    }
+
+    /**
+     * Check if button update price is disable
+     * @return true if disable
+     */
+    public boolean isButtonUpdatePriceDisable() {
+        return updatePriceButton.isDisabled();
+    }
+
+    /**
      * Click tambah data iklan -> tambah iklan baru -> choose add kos or apartement
      * @param jenisProperti
      * e.g Kost, Apartemen
@@ -914,5 +959,100 @@ public class PropertySayaPO {
      */
     public void inputDescription(String deskripsi) {
         playwright.forceFill(descriptionField, deskripsi);
+    }
+
+    /**
+     * Insert text to search bar in room allotment and hit enter
+     * @param text is text we want to insert
+     */
+    public void searchNameOrRoomNo(String text) {
+        playwright.fill(searchInput, text);
+        playwright.pressKeyboardKey("Enter");
+    }
+
+    /**
+     * Click on first Edit Button in room name/number table
+     */
+    public void clickFirstEditButton() {
+        playwright.clickOn(firstEditButton);
+    }
+
+    /**
+     * Click on already inhabited checkbox
+     */
+    public void clickAlreadyInhabitedCheckbox() throws InterruptedException {
+        playwright.clickOn(alreadyInhabitedCheckbox);
+    }
+
+    /**
+     * Get room status after update room
+     * @return return toast text e.g Anda berhasil update kamar
+     */
+    public String getRoomStatus() {
+        playwright.hardWait(2000.0);
+        return playwright.getText(statusRoom);
+    }
+
+    /**
+     * Filter room table with selected text in param
+     * @param filter is room filter text
+     */
+    public void filterRoomTable(String filter) {
+        playwright.hardWait(1000.0);
+        playwright.clickOn(roomFilterDropdown);
+        filterTable = page.getByText(filter).first();
+        playwright.clickOn(filterTable);
+    }
+
+    /**
+     * Fill floor field with text
+     * @param floor is text for floor
+     */
+    public void insertTextFloor(String floor) {
+        playwright.clearText(floorFieldInput);
+        playwright.fill(floorFieldInput, floor);
+    }
+
+    /**
+     * Fill room name field with text
+     * @param room is text for room name/number
+     */
+    public void insertTextRoomName(String room) {
+        playwright.clearText(roomNameField);
+        playwright.fill(roomNameField, room);
+    }
+
+    /**
+     * Get goldplus label beside room Name/number
+     * @param roomNo is room name/number
+     * @return text goldplus
+     */
+    public String getGoldPlusLabel(String roomNo) {
+        roomName = page.locator("//td[normalize-space()='" + roomNo + "']");
+        return playwright.getText(roomName);
+    }
+
+    /**
+     * Get error message below room name field
+     * @return error message below room name field
+     */
+    public String getErrorRoomName() {
+        return playwright.getText(errorMessageRoomName);
+    }
+
+    /**
+     * Get error message below floor field
+     * @return error message below floor field
+     */
+    public String getErrorFloor() {
+        return playwright.getText(errorMessageFloor);
+    }
+
+    /**
+     * Verify if table is empty
+     * @return true if empty
+     */
+    public boolean isTableEmpty() {
+        return playwright.waitTillLocatorIsVisible(emptyTable);
     }
 }

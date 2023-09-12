@@ -19,12 +19,12 @@ public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PropertySayaPO propertySaya = new PropertySayaPO (page);
     private JavaHelpers javaHelpers = new JavaHelpers();
-    private Integer dailyPrice = null;
-    private Integer weeklyPrice = null;
-    private Integer monthlyPrice = null;
-    private Integer threeMonthlyPrice = null;
-    private Integer sixMonthlyPrice = null;
-    private Integer yearlyPrice = null;
+    private String dailyPrice = null;
+    private String weeklyPrice = null;
+    private String monthlyPrice = null;
+    private String threeMonthlyPrice = null;
+    private String sixMonthlyPrice = null;
+    private String yearlyPrice = null;
 
 
     @And("owner search kost {string} on property saya page")
@@ -89,33 +89,33 @@ public class PropertySayaSteps {
         propertySaya.inputYearlyPrice(yearlyPrice);
     }
 
-    @And("user see daily price is {int}")
-    public void user_see_daily_price_is(Integer dailyPrice) {
+    @And("user see daily price is {string}")
+    public void user_see_daily_price_is(String dailyPrice) {
         Assert.assertEquals(propertySaya.getDailyPrice(), dailyPrice, "Daily price is not correct");
     }
 
-    @And("user see weekly price is {int}")
-    public void user_see_weekly_price_is(Integer weeklyPrice) {
+    @And("user see weekly price is {string}")
+    public void user_see_weekly_price_is(String weeklyPrice) {
         Assert.assertEquals(propertySaya.getWeeklyPrice(), weeklyPrice, "Weekly price is not correct");
     }
 
-    @And("user see monthly price is {int}")
-    public void user_see_monthly_price_is(Integer monthlyPrice) {
+    @And("user see monthly price is {string}")
+    public void user_see_monthly_price_is(String monthlyPrice) {
         Assert.assertEquals(propertySaya.getMonthlyPrice(), monthlyPrice, "Monthly price is not correct");
     }
 
-    @And("user see three monthly price is {int}")
-    public void user_see_three_monthly_price_is(Integer threeMonthPrice) {
+    @And("user see three monthly price is {string}")
+    public void user_see_three_monthly_price_is(String threeMonthPrice) {
         Assert.assertEquals(propertySaya.getThreeMonthlyPrice(), threeMonthPrice, "Three monthly price is not correct");
     }
 
-    @Then("user see six monthly price is {int}")
-    public void user_see_six_monthly_price_is(Integer sixMonthlyPrice) {
+    @Then("user see six monthly price is {string}")
+    public void user_see_six_monthly_price_is(String sixMonthlyPrice) {
         Assert.assertEquals(propertySaya.getSixMonthlyPrice(), sixMonthlyPrice, "Six monthly price is not correct");
     }
 
-    @And("user see yearly price is {int}")
-    public void user_see_yearly_price_is(Integer yearlyPrice) {
+    @And("user see yearly price is {string}")
+    public void user_see_yearly_price_is(String yearlyPrice) {
         Assert.assertEquals(propertySaya.getYearlyPrice(), yearlyPrice, "Yearly price is not correct");
     }
 
@@ -338,6 +338,20 @@ public class PropertySayaSteps {
         Assert.assertTrue(propertySaya.isStatusKos(), "Status kos doesn't match!");
     }
 
+    @And("user see warning price with:")
+    public void userSeeWarningPriceWith(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(propertySaya.getWarningYearlyPrice(i), content.get("warningMessage"), "title not equal to "+content.get("title"));
+            i++;
+        }
+    }
+
+    @And("user see button update price disable")
+    public void user_see_button_update_price_disable() throws InterruptedException {
+        Assert.assertTrue(propertySaya.isButtonUpdatePriceDisable(), "Button update price enable");
+    }
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
         propertySaya.clickTambahDataIklan(jenisProperti);
@@ -418,4 +432,61 @@ public class PropertySayaSteps {
         propertySaya.clickOnSubmitButton();
         propertySaya.clickOnSelesaiButton();
     }
+
+    @When("user enter text {string} on search bar in room allotment and hit enter")
+    public void user_enter_text_on_search_bar_in_room_allotment_and_hit_enter(String text) {
+        propertySaya.searchNameOrRoomNo(text);
+    }
+
+    @When("user click edit button in first row of the table")
+    public void user_click_edit_button_in_first_row_of_the_table() throws InterruptedException {
+        propertySaya.clickFirstEditButton();
+    }
+
+    @When("user tick already inhabited checkbox")
+    public void user_tick_already_inhabited_checkbox() throws InterruptedException {
+        propertySaya.clickAlreadyInhabitedCheckbox();
+    }
+
+    @Then("user can sees toast on update room/price as {string} {string}")
+    public void user_can_sees_toast_x(String statusRoom, String room) {
+        Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "status room is wrong");
+        Assert.assertEquals(propertySaya.getTextTotalRoom(), room, "Total room is wrong");
+    }
+
+    @When("user filter the room with {string} in update room page")
+    public void user_filter_the_room_with_in_update_room_page(String filter) {
+        propertySaya.filterRoomTable(filter);
+    }
+
+    @When("user fill room floor in room allotment page with {string}")
+    public void user_fill_room_floor_in_room_allotment_page_with(String text) {
+        propertySaya.insertTextFloor(text);
+    }
+
+    @When("user fill room name in room allotment page with {string}")
+    public void user_fill_room_name_in_room_allotment_page_with(String roomName) {
+        propertySaya.insertTextRoomName(roomName);
+    }
+
+    @Then("user see label {string} in room name")
+    public void user_see_label_in_room_name_or_number(String roomNo) {
+        Assert.assertEquals(propertySaya.getGoldPlusLabel(roomNo), roomNo);
+    }
+
+    @Then("user see error message {string} under room name field in update room page")
+    public void user_see_error_message_under_room_name_field_in_update_room_page(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message room name is wrong");
+    }
+
+    @Then("user see error message {string} under floor field in update room page")
+    public void user_see_error_message_under_floor_field_in_update_room_page(String error) {
+        Assert.assertEquals(propertySaya.getErrorFloor().trim(), error, "Error message floor is wrong");
+    }
+
+    @Then("user see room list is empty in room allotment page")
+    public void user_see_room_list_is_empty_in_room_allotment_page() {
+        Assert.assertTrue(propertySaya.isTableEmpty(), "Table is not empty");
+    }
+
 }
