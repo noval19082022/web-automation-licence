@@ -179,6 +179,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Input to locator character by character
+     * @param locator locator targeted locator
+     * @param data data String data type
+     */
+    public void fillCharacterByCharacter(Locator locator, String data){
+        locator.type(data);
+    }
+
+    /**
      * Select dropdown by value
      *
      * @param locator Locator type

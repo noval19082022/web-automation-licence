@@ -1,7 +1,6 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
-import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -41,11 +40,6 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateTenant(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
@@ -60,11 +54,6 @@ public class LoginSteps {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateOwner(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
                 .clickOnPencariKostButton()
                 .clickOnSignInWithFacebookButton()
@@ -83,11 +72,6 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateOwner(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
             .clickOnPemilikKostButton()
             .fillPhoneNumber(phone)
@@ -100,6 +84,7 @@ public class LoginSteps {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
+        loginAdmin = new LoginAdminMamipayPO(page);
         loginAdmin.fillEmail(email);
         loginAdmin.fillPassword(password);
         loginAdmin.clickOnLoginButton();
@@ -110,7 +95,6 @@ public class LoginSteps {
         pmsCredential = tables.asMaps(String.class, String.class);
         String username = pmsCredential.get(0).get("email");
         String password = pmsCredential.get(0).get("password");
-
         loginPMS.fillUsername(username);
         loginPMS.fillPassword(password);
         loginPMS.clickLogin();

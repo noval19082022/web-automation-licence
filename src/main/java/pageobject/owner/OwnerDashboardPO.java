@@ -91,7 +91,7 @@ public class OwnerDashboardPO {
         notificationOwnerButton = page.locator("[href='#basic-notification']");
         ownerUserName = page.locator(".c-mk-header__username");
         mamikosLogo = page.locator(".c-mk-header__logo");
-        bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
+        bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         propertySayaDropdownMenu = page.getByText("kos-marketing Properti Saya chevron-right Kos Apartemen");
@@ -371,6 +371,7 @@ public class OwnerDashboardPO {
      * @return true if dropdown menu showing. Otherwise false
      */
     public boolean isPropertyMenuDropdownShowing(){
+        playwright.hardWait(2000.0);
         return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
     }
 

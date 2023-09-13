@@ -4,9 +4,9 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
-import pageobject.pms.otherTransaction.AddOwnerExpenditurePO;
-import pageobject.pms.otherTransaction.EditOwnerExpenditurePO;
-import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
+import pageobject.pms.othertransaction.AddOwnerExpenditurePO;
+import pageobject.pms.othertransaction.EditOwnerExpenditurePO;
+import pageobject.pms.othertransaction.listOwnerExpenditurePO;
 
 import java.util.List;
 import java.util.Map;
