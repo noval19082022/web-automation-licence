@@ -61,6 +61,7 @@ public class OwnerDashboardPO {
     Locator mamiadsSubtitle;
     Locator mamiadsLihatDisini;
     Locator saldoMamiAdsButton;
+    Locator propertySekitar;
     private Locator fiturPromosiExpand;
 
     public OwnerDashboardPO(Page page) {
@@ -113,6 +114,7 @@ public class OwnerDashboardPO {
         mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");
         saldoMamiAdsButton = page.locator(".mamiads-card");
         fiturPromosiExpand = page.getByText("Fitur Promosi");
+        propertySekitar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cek Properti Sekitar"));
     }
 
     /**
@@ -571,5 +573,12 @@ public class OwnerDashboardPO {
      */
     public void clickSaldoMamiAdsButton() {
         playwright.clickOn(saldoMamiAdsButton);
+    }
+
+    /**
+     * Click on cek properti sekitar
+     */
+    public void clickOnPropertySekitar() {
+        playwright.clickOn(propertySekitar);
     }
 }

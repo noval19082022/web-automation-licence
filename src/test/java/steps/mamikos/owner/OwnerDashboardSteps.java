@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.owner.MamifotoPO;
 import pageobject.owner.OwnerDashboardPO;
 import utilities.PlaywrightHelpers;
 
@@ -240,6 +241,12 @@ public class OwnerDashboardSteps {
     @When("user click on Saldo MamiAds at owner dashboard")
     public void user_click_on_saldo_mamiads_button() {
         ownerDashboardPO.clickSaldoMamiAdsButton();
+    }
+
+    @When("owner accsess cek properti sekitar")
+    public void owner_accsess_cek_properti_sekitar() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickOnPropertySekitar();
     }
 }
 
