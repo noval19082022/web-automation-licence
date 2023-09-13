@@ -465,6 +465,7 @@ public class KostDetailsPO {
             this.date = date;
         }
         mulaiKosInput.click();
+        playwright.waitFor(datePicker, 5000.0);
         datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
         List<Locator> datePicks = playwright.getLocators(datePick);
         for (Locator pick : datePicks) {
