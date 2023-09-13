@@ -84,8 +84,8 @@ public class BroadcastChatSteps {
         Assert.assertEquals(broadcast.getCountText(),countText);
     }
 
-    @Then("user should see the message {string} displayed under the broadcast text field")
-    public void user_should_see_warning_message_under_broadcast_textfield(String error) {
+    @Then("user should see the message {string} displayed under text field")
+    public void userShouldSeeTheMessageDisplayedUnderTextField(String error) {
         Assert.assertEquals(broadcast.getErrorInputBroadcastText().trim(), error, "Error message is wrong");
     }
 

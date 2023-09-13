@@ -3,6 +3,8 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import lombok.Getter;
+import lombok.Setter;
 import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    //private static String propertyName;
+    @Setter @Getter public static String Property;
+
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
@@ -88,11 +93,20 @@ public class SearchPO {
     }
 
     /**
+     * get propertyName from input
+     * @return Property
+     */
+    public String getPropertyName() {
+       return this.Property;
+    }
+
+    /**
      * Search kost by test
      * @param search kost name
      * @return KostDetailsPO
      */
     public KostDetailsPO searchByText(String search) {
+        setProperty(search);
         inputSearch.fill(search);
         Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
         firstResultKostName.click();

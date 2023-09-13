@@ -2,6 +2,7 @@ package steps.mamikos.tenant.profile;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -42,5 +43,11 @@ public class RiwayatBookingSteps {
     public void user_check_booking_status_is_rejected_by_owner_with_reason_x(String reason) {
         Assert.assertEquals(riwayatBooking.getFirstListBookingStatusText(), "Pemilik Menolak");
         Assert.assertEquals(riwayatBooking.getRejectReasonOnDetailsFirstKostList(), reason);
+    }
+
+    @Then("tenant check status booking is {string}")
+    public void tenant_check_status_booking_is(String status) {
+        page.navigate(Mamikos.URL + "/user/booking/");
+        Assert.assertEquals(riwayatBooking.getFirstListBookingStatusText(), status);
     }
 }

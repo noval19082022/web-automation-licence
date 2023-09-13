@@ -86,7 +86,6 @@ public class BillingReminderPO {
         return page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).isVisible();
     }
 
-
     /**
      * Check Email template Day -1 is present
      * @return true / false
@@ -240,6 +239,7 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableSubjectTemplate(String subject){
+        playwright.hardWait(5000);
         return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true)));
     }
 

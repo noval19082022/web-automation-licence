@@ -1,5 +1,4 @@
-@regression @tenantTracker @BBM3
-
+@regression @tenantTracker @BBM3 @noval1
 Feature: SinggahSini - Tenant Tracker - Main Page Reset Filter
 
   @TEST_BBM-569 @continue
@@ -17,8 +16,8 @@ Feature: SinggahSini - Tenant Tracker - Main Page Reset Filter
 
   @TEST_BBM-568
   Scenario: Reset Filter on Filter Menu
-    When user choose "Nama Properti" and input "Kost Adi Auto Mamiroom" in the search field on main page
+    When user choose "Nama Properti" and input "Kost Adi Auto Regular" in the search field on main page
     And user click search button on main page filter
-    Then user verify nama property on main page filter is "Kost Adi Auto Mamiroom"
+    Then user verify nama property on main page filter is "Kost Adi Auto Regular"
     When user click reset button in PMS Admin
-    Then user verify nama property on main page filter is not "Kost Adi Auto Mamiroom"
+    Then user verify nama property on main page filter is not "Kost Adi Auto Regular"

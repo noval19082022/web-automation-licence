@@ -7,7 +7,7 @@ Feature: Billing Reminder - Email Template
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user open " Email Template" submenu of Billing Reminder Template
 
  # Scenario: user set the initial state to display Billing template Day -1
@@ -23,23 +23,17 @@ Feature: Billing Reminder - Email Template
     When user delete billing Template with content "untuk automation"
     Then user verify delete billing Template with content "untuk automation"
 
-#    BBM-985
-  Scenario: Add Template
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman02@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    Then user open " Email Template" submenu of Billing Reminder Template
+#  Scenario: Add Template
     Given user create new template:
       | day     | subject                 | content                    |
-      | -7      | untuk automation        | untuk automation content   |
+      | 0       | untuk automation        | untuk automation content   |
     Then user verify Template subject with "untuk automation"
     Then user verify Template content with "untuk automation content"
 
  # Scenario: Edit Template
     Given user edit template:
       | day     | subject                 | content                    |
-      | -7      | untuk automation        | untuk automation content   |
+      | 0       | untuk automation        | untuk automation content   |
     Then user verify Template subject with "untuk automation"
     Then user verify Template content with "untuk automation content"
 

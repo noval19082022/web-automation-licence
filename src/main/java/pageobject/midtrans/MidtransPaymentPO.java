@@ -28,7 +28,7 @@ public class MidtransPaymentPO {
         vaCodePlaceHolder = page.getByPlaceholder("Virtual Account Number");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        bayarButtonOnPermataMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar"));
+        bayarButtonOnPermataMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         successTransaction = page.getByText("Success! Success Payment VA");
     }
 
@@ -52,13 +52,13 @@ public class MidtransPaymentPO {
      * Payment process midtrans for permata
      * @param kodePembayaran payment virtual account
      */
-    public void paymentForPermata(String kodePembayaran) {
+    public void paymentForPermata(String kodePembayaran, String Bank) {
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
-        vaCodePlaceHolder.click();
-        page.keyboard().type(kodePembayaran);
-        inquireButton.click();
-        bayarButtonOnPermataMidtrans.click();
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
+        playwright.selectDropdownByValue(page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target bank selection")), Bank);
+        playwright.clickOn(inquireButton);
+        playwright.clickOn(bayarButtonOnPermataMidtrans);
     }
 
     /**

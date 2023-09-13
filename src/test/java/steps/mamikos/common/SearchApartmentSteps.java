@@ -4,18 +4,29 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
+import pageobject.common.SearchPO;
 import pageobject.common.apartment.ApartmentDetailPO;
 import pageobject.common.apartment.ApartmentLandingPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class SearchApartmentSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     ApartmentLandingPO apartment = new ApartmentLandingPO(page);
     ApartmentDetailPO apartmentDetail = new ApartmentDetailPO(page);
+    SearchPO searchPO;
+    HomePO homePO = new HomePO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
+    private List<Map<String, String>> searchApartment;
     @When("user search {string} on landing apartment")
     public void userSearchOnLandingApartment(String area) {
         apartment.fillApartmentSearchInput(area);
@@ -40,5 +51,34 @@ public class SearchApartmentSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
         apartment.clickOnApartmentListNumber(listNumber - 1);
     }
+    @Then("tenant open tab pernah dilihat at menu favorite")
+    public void tenant_open_tab_pernah_dilihat_at_menu_favorite() {
+        apartment.clickOnHistoryApartment();
+    }
 
+    @Then("tenant verify the property with name {string} is appear")
+    public void tenant_verify_the_property_with_name_is_appear(String propertyName) {
+        Assert.assertEquals(apartment.getLastSeenDetailProperti(propertyName), propertyName, "There is no last seen detail properti!");
+    }
+
+    @Then("tenant verify the Hapus History button is appear")
+    public void tenant_verify_the_hapus_history_button_is_appear() {
+        Assert.assertTrue(apartment.isHapusHistoryVisible(), "hapus histori button is visible");
+    }
+    @When("tenant search kost then go to apartment details:")
+    public void tenant_search_kost_then_go_to_apartment_details(DataTable table) {
+        searchApartment = table.asMaps(String.class, String.class);
+        var kostName = searchApartment.get(0).get("kost name " + Mamikos.ENV);
+        searchPO = homePO.clickOnSearchButton();
+        kostDetail = searchPO.searchByText(kostName);
+        apartment.waitTillApartmentDetailPageVisible();
+    }
+    @When("tenant open tab difavoritkan at menu favorite")
+    public void tenant_open_tab_difavoritkan_at_menu_favorite() {
+        apartment.clickOnFavoriteApartment();
+    }
+    @Then("user verify rekomendasi listing section didn't display")
+    public void user_verify_rekomendasi_listing_section_didn_t_display() {
+        Assert.assertFalse(apartment.isRekomendasiSectionVisible(), "rekomendasi listing is display!");
+    }
 }

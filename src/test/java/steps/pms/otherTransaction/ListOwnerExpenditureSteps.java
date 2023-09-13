@@ -4,7 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
+import pageobject.pms.othertransaction.listOwnerExpenditurePO;
 
 import java.util.List;
 public class ListOwnerExpenditureSteps {

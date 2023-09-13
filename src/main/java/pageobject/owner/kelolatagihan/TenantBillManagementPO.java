@@ -324,7 +324,7 @@ public class TenantBillManagementPO {
      * @return Tenant job
      */
     public String getDetailTenantJob(String job) {
-        detailTenantJob = page.getByText(job);
+        detailTenantJob = page.getByText(job, new Page.GetByTextOptions().setExact(true));
         return playwright.getText(detailTenantJob);
     }
 

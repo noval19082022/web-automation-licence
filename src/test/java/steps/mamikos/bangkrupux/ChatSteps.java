@@ -10,6 +10,7 @@ import pageobject.admin.mamipay.bangkrupux.ChatPO;
 import testdata.BangKrupuxTestData;
 import utilities.PlaywrightHelpers;
 
+
 public class ChatSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -42,4 +43,23 @@ public class ChatSteps {
         playwright = new PlaywrightHelpers(page);
         Assert.assertTrue(playwright.getActivePageURL().contains(BangKrupuxTestData.getKostName()), "Url doesn't match");
     }
+
+    @When("admin select filter {string}")
+    public void admin_select_filter(String type) {
+        chatAdmin.setChatSearchType(type);
+    }
+
+    @And("admin fill search chat with {string}")
+    public void admin_fill_search_chat_with_x(String text) {
+        if(text != null){
+            chatAdmin.fillSearch(text);
+        }
+        chatAdmin.clickOnAllCategory();
+    }
+
+    @Then("admin can see result data")
+    public void admin_can_see_result_data(){
+        chatAdmin.getResutlSearch();
+    }
+
 }
