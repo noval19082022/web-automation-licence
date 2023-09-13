@@ -144,7 +144,8 @@ public class TenantCommunicationPO {
      * Select Pagination Number
      */
     public void clickPaginationNumber(String paginationNumber) {
-        paginationNumberButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(paginationNumber));
+      //  paginationNumberButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(paginationNumber));
+        paginationNumberButton = page.locator("//button[.='"+paginationNumber+"']");
         playwright.clickOn(paginationNumberButton);
     }
 

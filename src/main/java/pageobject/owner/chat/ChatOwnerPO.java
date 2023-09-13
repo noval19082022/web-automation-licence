@@ -122,6 +122,7 @@ public class ChatOwnerPO {
         if (nantiSajaButton.isVisible()){
             playwright.clickOn(nantiSajaButton);
         }
+        page.keyboard().press("Space");
         playwright.clickOn(chatOnList);
     }
 
@@ -166,8 +167,6 @@ public class ChatOwnerPO {
      * @return true if kost name otherwise false
      */
     public boolean isKostNameDisplayed() {
-        Locator closeToast = page.locator("page.getByRole('button', { name: 'close' })");
-       // playwright.clickOn(closeToast);
         return playwright.waitTillLocatorIsVisible(roomTitle);
     }
 

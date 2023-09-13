@@ -5,8 +5,8 @@ Feature: BnB feature with background go to kos saya page
   Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (BBM-912)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 081280003230 | 08100000622 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0892202303 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on masukkan kode dari pemilik button
     And user input valid unique code "DSQ641" and click Kirim Kode unik button
@@ -16,8 +16,8 @@ Feature: BnB feature with background go to kos saya page
   Scenario: [Tenant side - Kost saya][Verify phone number]Tenant input valid unique code if tenant not verification phone number, but tenant Cancel verification phone number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 081280003230 | 08100000622 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0892202303 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on masukkan kode dari pemilik button
     And user input valid unique code "DSQ641" and click Kirim Kode unik button

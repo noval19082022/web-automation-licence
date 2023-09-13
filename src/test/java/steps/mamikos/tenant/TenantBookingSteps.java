@@ -111,18 +111,18 @@ public class TenantBookingSteps {
 
     @When("tenant booking kost for {string}")
     public void tenantBookingKostFor(String bookingTime) {
-        if (bookingTime.equalsIgnoreCase("today")){
+        if (bookingTime.equalsIgnoreCase("today")) {
             if (kostDetail.isFTUEBookingBenefitVisible()) {
                 kostDetail.dismissFTUE();
             }
-            kostDetail.selectBookingDate(bookingTime);
-            kostDetail.selectBookingPeriod("Per Bulan");
-            bookingForm = kostDetail.clickOnAjukanSewaButton();
-            bookingForm.clickOnAjukanSewaButton();
-            bookingForm.clickOnBookingConfirmationCheckmark();
-            successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+                kostDetail.selectBookingDate(bookingTime);
+                kostDetail.selectBookingPeriod("Per Bulan");
+                bookingForm = kostDetail.clickOnAjukanSewaButton();
+                bookingForm.clickOnAjukanSewaButton();
+                bookingForm.clickOnBookingConfirmationCheckmark();
+                successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+
         } else if (bookingTime.equalsIgnoreCase("Tomorrow")){
-            kostDetail.dismissFTUE();
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();

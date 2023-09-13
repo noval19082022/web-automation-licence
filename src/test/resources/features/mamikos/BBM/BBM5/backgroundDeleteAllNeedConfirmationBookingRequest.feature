@@ -1,4 +1,4 @@
-@BBM5 @send
+@BBM5
 Feature: BnB feature with background Delete All Need Confirmation Booking Request
 
   @cancelAll
@@ -6,7 +6,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
-      | 08100000616   | 0890867321212 | qwerty123     |
+      | 08100000622   | 0890867321212 | qwerty123     |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 
