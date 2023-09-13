@@ -48,8 +48,7 @@ Feature: Edit Kost
 #
   @TEST_LIMO-2878 @EditKosAddress
   Scenario: [Web][Edit Kost] Edit kost address with valid data
-    When owner search kost "Kos oke bebek Tipe o" on property saya page
-    And user click Lihat Selengkapnya button for edit
+    When user click Lihat Selengkapnya button for edit
     And user click "Edit Data Kos"
     And user click button edit "Alamat Kos" kos
     And user input kost location "Tobelo" and clicks on first autocomplete suggestion
