@@ -194,7 +194,7 @@ public class TenantBookingSteps {
 
     @Then("user can see shortcut homepage with {string}")
     public void userCanSeeShortcutHomepageWith(String kosCheckedByOwner) {
-        Assert.assertEquals(kostDetail.getKosCheckedByOwner(), kosCheckedByOwner, "Pengajuan sewa lagi dicek pemilik");
+        Assert.assertEquals(kostDetail.getKosCheckedByOwner(), kosCheckedByOwner, "Mau lanjut ajukan sewa di kos ini?");
     }
 
     @And("user click on Draft menu")

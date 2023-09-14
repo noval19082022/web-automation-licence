@@ -1,4 +1,4 @@
-@BBM5 @inter
+@BBM5
 Feature: BnB feature with background create booking twice
 
   Scenario: Tenant Booking Kost Twice

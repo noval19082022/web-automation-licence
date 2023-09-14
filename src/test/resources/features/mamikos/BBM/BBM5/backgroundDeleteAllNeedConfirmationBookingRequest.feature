@@ -31,7 +31,6 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
-    And tenant navigate to riwayat and draf booking
     And user go to mamikos homepage
     Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
     And tenant navigate to riwayat and draf booking
