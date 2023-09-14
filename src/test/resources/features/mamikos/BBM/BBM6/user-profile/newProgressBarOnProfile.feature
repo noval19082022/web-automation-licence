@@ -46,7 +46,7 @@ Feature: New Progress bar on Profile
 		And user navigate to kost saya page
 		Then user see percentage based on field that was filled "10% 1 / 10 data profil terisi"
 
-	@TEST_BBM-4615 @reddot
+	@TEST_BBM-4615
 	Scenario: [Profile Page][User Profile]Check red dot at navbar when tenant not complete fill the profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
