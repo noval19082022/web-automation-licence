@@ -2,9 +2,11 @@
 
 Feature: Role Management
 
-  @TEST_PMAN-3690 @continue
+  @TEST_PMAN-3690 @continue @context1 @context2
   Scenario: Add Role
-    Given admin go to pms singgahsini
+    Given owner set browser context to "context1"
+    And bring page to front
+    And admin go to pms singgahsini
     When admin login pms :
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
@@ -76,8 +78,24 @@ Feature: Role Management
     When admin assign member "automationpman01@mamikos.com" to role "Automation Test PMAN"
     Then member "automationpman01@mamikos.com" should registered
 
+  @TEST_PMAN-3689 @continue
+  Scenario: Check Button Available
+    Given owner set browser context to "context2"
+    And bring page to front
+    When admin go to pms singgahsini
+    And admin login pms :
+      | email                         | password   |
+      | automationpman01@mamikos.com  | qwerty123  |
+    #check permission homepage
+    Then admin automation have permission for button
+      | Lihat Detail        |
+      | Ketersediaan Kamar  |
+      | Unduh CSV           |
+
   @TEST_PMAN-3695 @continue
   Scenario: Delete Member
+    Given owner set browser context to "context1"
+    And bring page to front
       #cancel delete member
     When admin delete member "automationpman01@mamikos.com"
     But admin cancel confirmation to delete
@@ -87,8 +105,20 @@ Feature: Role Management
     But admin confirm to delete member
     Then member "automationpman01@mamikos.com" not registered
 
+  @TEST_PMAN-5322 @continue
+  Scenario: Check Button Not Available
+    Given owner set browser context to "context2"
+    And bring page to front
+    When admin refresh page 0
+    Then admin automation doesn't have permission for button
+      | Lihat Detail        |
+      | Ketersediaan Kamar  |
+      | Unduh CSV           |
+
   @TEST_PMAN-3692
   Scenario: Delete Role
+    Given owner set browser context to "context1"
+    And bring page to front
     When admin go to role management menu
     And admin delete role "Automation Test PMAN"
     Then role "Automation Test PMAN" should not exist

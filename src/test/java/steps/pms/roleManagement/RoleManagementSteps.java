@@ -5,6 +5,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.pms.HomepagePO;
 import pageobject.pms.roleManagement.RoleManagementPO;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class RoleManagementSteps {
     Page page = ActiveContext.getActivePage();
     RoleManagementPO role = new RoleManagementPO(page);
+    HomepagePO homepage = new HomepagePO(page);
 
     private List<String> permissions;
 
@@ -120,6 +122,20 @@ public class RoleManagementSteps {
     @When("admin confirm to delete member")
     public void admin_confirm_to_delete_member(){
         role.confirmDeleteMember();
+    }
+
+    @Then("admin automation have permission for button")
+    public void admin_automation_have_permission_for_button(List<String> Button) {
+        for (String button: Button) {
+            Assert.assertTrue(homepage.isButtonExist(button));
+        }
+    }
+
+    @Then("admin automation doesn't have permission for button")
+    public void admin_automation_doesn_t_have_permission_for_button(List<String> Button) {
+        for (String button: Button) {
+            Assert.assertFalse(homepage.isButtonExist(button));
+        }
     }
 }
 
