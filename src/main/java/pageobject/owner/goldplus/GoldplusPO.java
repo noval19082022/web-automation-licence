@@ -100,7 +100,7 @@ public class GoldplusPO {
     }
 
     /**
-     * Input phone number to recurring Goldplus
+     * set recurring days for Goldplus (H-7 - H-0)
      */
     public void selectRecurringPeriod (String period) {
         playwright.selectDropdownByValue(selectRecurringPeriod,period);
