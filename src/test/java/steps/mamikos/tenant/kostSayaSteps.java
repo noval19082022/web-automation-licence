@@ -35,7 +35,7 @@ public class kostSayaSteps {
     public void userCanSeeActivitiesInMyKos() {
         Assert.assertTrue(kostSaya.getTitleVerification(), "Verifikasi nomor HP");
         Assert.assertTrue(kostSaya.getTenantPhoneNum1(), "08*******714");
-        Assert.assertTrue(kostSaya.getTenantPhoneNum2(), "08*******303.");
+        Assert.assertTrue(kostSaya.getTenantPhoneNum2(), "08*****303.");
         Assert.assertTrue(kostSaya.getAlertVerif(), "Setelah verifikasi berhasil, kamu akan menggunakan nomor 08*******714 di profilmu.");
         Assert.assertTrue(kostSaya.getOtpWording(), "Kirim OTP ke 08*******714");
     }
