@@ -15,6 +15,8 @@ public class MamiAdsPO {
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
+    private Locator titleEmptyFilterText;
+    private Locator messageEmptyFilterText;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
 
@@ -37,6 +39,8 @@ public class MamiAdsPO {
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
+        this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
+        this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
 
@@ -158,5 +162,38 @@ public class MamiAdsPO {
         playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
     }
 
+    /**
+     * click on filter Semua Iklan on mamiads page
+     */
+    public void clickOnSemuaIklan() {
+        playwright.clickOnText("Semua Iklan");
+    }
+
+    /**
+     * click on filter Iklan Nonaktif on mamiads page
+     */
+    public void clickOnIklanNonaktif() {
+        playwright.clickOnText("Iklan Nonaktif");
+    }
+
+    /**
+     * Get title text
+     * ex: Semua Iklan Anda Sudah Naik
+     * @return String title
+     */
+    public String getTitleText(){
+        playwright.waitFor(titleEmptyFilterText);
+        return playwright.getText(titleEmptyFilterText);
+    }
+
+    /**
+     * Get message empty filter text
+     * ex: Iklan properti Anda akan naik ke posisi yang lebih tinggi pada hasil pencarian.
+     * @return String title
+     */
+    public String getMessageText() {
+        playwright.waitFor(messageEmptyFilterText);
+        return playwright.getText(messageEmptyFilterText);
+    }
 }
 
