@@ -464,7 +464,6 @@ public class InvoiceManualSteps {
             SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
             Date day = new Date();
             String expectedDate = "at "+today.format(day)+", "+time;
-
             Assert.assertTrue(manualInvoice.getPaidTime().contains(expectedDate));
         }
     }

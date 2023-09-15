@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -31,7 +32,9 @@ public class NavigatesSteps {
 
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
+        if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, 30000.0);
+        }
     }
 
     @When("admin navigates to Admin Goldplus Package")
@@ -62,7 +65,7 @@ public class NavigatesSteps {
     }
 
     @When("tenant/owner/admin set active page to {int}")
-    public synchronized void tenantSetActivePageTo(int activePage) {
+    public synchronized void tenantSetActivePageTo(int activePage) throws InterruptedException {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(activePage));
         playwright.bringPageToView(ActiveContext.getActivePage());
     }
