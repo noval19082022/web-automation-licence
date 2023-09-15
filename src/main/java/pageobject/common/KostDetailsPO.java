@@ -1650,8 +1650,8 @@ public class KostDetailsPO {
         filterButton.click();
         needConfirmation.waitFor();
         needConfirmation.click();
-        playwright.hardWait(2000);
         if (seeCompleteBtn.isVisible()) {
+            playwright.waitFor(seeCompleteBtn,5000.0);
             seeCompleteBtn.click();
             cancelBookingBtn.click();
             playwright.waitTillLocatorIsVisible(reasonOption);
