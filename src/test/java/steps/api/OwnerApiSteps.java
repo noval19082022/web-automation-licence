@@ -1,5 +1,6 @@
 package steps.api;
 
+import api.Requirement;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
@@ -8,10 +9,14 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.ApiEndpoints;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,18 +30,23 @@ public class OwnerApiSteps {
     private Map<Object, Object> ownerLoginBody = new HashMap<>();
     private List<Map<String, String>> phoneNumberCredential;
     private String baseUrl = "";
+    APIRequestContext ownerProfileRequest;
+    APIResponse ownerProfileResponse;
 
-    @Given("playwright create owner login auth:")
-    public void playwrightCreateOwnerLoginAuth(DataTable table) {
-        phoneNumberCredential = table.asMaps(String.class, String.class);
-        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
-        var password = phoneNumberCredential.get(0).get("password");
-        ownerLoginBody.put("phone_number", phone);
-        ownerLoginBody.put("password", password);
-        baseUrl = ApiEndpoints.BAKPAO;
-        request = apiPwHelpers.setBaseUrl(baseUrl);
-        apiResponse = request.post(ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_LOGIN, RequestOptions.create().setData(ownerLoginBody));
-        Assert.assertEquals(apiResponse.status(), 200);
-        Assert.assertTrue(apiResponse.ok());
+    @When("playwright get owner profile")
+    public void playwrightGetOwnerProfile() throws NoSuchAlgorithmException, InvalidKeyException {
+        var ownerProfileEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_PROFILE;
+        var signature = Requirement.createSignatureKey("GET", ownerProfileEndpoint);
+        ownerProfileRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandardHeaders(signature));
+        ownerProfileResponse = ownerProfileRequest.get(ownerProfileEndpoint, RequestOptions.create().setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        System.out.println(ownerProfileResponse.url());
+        System.out.println(ownerProfileResponse.text());
+        Assert.assertEquals(ownerProfileResponse.status(), 200);
+        Assert.assertTrue(ownerProfileResponse.ok());
+    }
+
+    @When("playwright create accept booking body for owner")
+    public void playwrightCreateAcceptBookingBodyForOwner() {
+        System.out.println("playwright create accept booking body for owner");
     }
 }
