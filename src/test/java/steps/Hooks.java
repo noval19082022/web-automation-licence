@@ -58,6 +58,9 @@ public class Hooks{
             FlowControl.setContinueFlow(true);
             FlowControl.setStrictFlow(false);
         }
+        if (tags.contains("@apiflow")) {
+            FlowControl.setApiFlow(true);
+        }
 
         System.out.println("\n" + scenario.getName() + " is started");
         ScenarioInformations.setScenarioName(scenario.getName());
@@ -73,6 +76,7 @@ public class Hooks{
     public void cleanUp(Scenario scenario) {
         FlowControl.setContinueFlow(tags.contains("@continue"));
         FlowControl.setStrictFlow(true);
+        FlowControl.setApiFlow(false);
         if (scenario.isFailed()) {
             System.out.println(scenario.getName() + " is failed");
             scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());

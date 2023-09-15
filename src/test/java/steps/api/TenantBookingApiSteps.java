@@ -10,6 +10,7 @@ import data.api.AjukanSewaStatus;
 import data.api.CreateDeviceId;
 import data.mamikos.ApiEndpoints;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
@@ -28,7 +29,10 @@ public class TenantBookingApiSteps {
     private APIResponse tenantBookingStatusResponse, batalkanPengajuanSewaResponse;
     private Map<Object, Object> batalkanBookingBody = new HashMap<>();
     private Map<String, String> dataTable;
-    private List<String> booked = new ArrayList<>(), confirmed = new ArrayList<>(), verified = new ArrayList<>(), checkedIn = new ArrayList<>();
+    private List<String> booked = new ArrayList<>();
+    private List<String> confirmed = new ArrayList<>();
+    private List<String> verified = new ArrayList<>();
+    private List<String> checkedIn = new ArrayList<>();
 
     @Then("playwright get tenant booking status with parameter:")
     public void playwrightGetTenantBookingStatusWithParameter(DataTable table) throws NoSuchAlgorithmException, InvalidKeyException {
@@ -60,7 +64,7 @@ public class TenantBookingApiSteps {
                         break;
                     case "confirmed":
                         confirmed.add(statusValue);
-                        AjukanSewaStatus.setConfirmed(booked);
+                        AjukanSewaStatus.setConfirmed(confirmed);
                         break;
                     case "verified":
                         verified.add(statusValue);
@@ -74,30 +78,49 @@ public class TenantBookingApiSteps {
                         throw new IllegalStateException("Unexpected value: " + status);
                 }
             }
+        } else {
+            switch (status) {
+                case "booked":
+                    AjukanSewaStatus.setBooked(booked);
+                    break;
+                case "confirmed":
+                    AjukanSewaStatus.setConfirmed(confirmed);
+                    break;
+                case "verified":
+                    AjukanSewaStatus.setVerified(verified);
+                    break;
+                case "checked_in":
+                    AjukanSewaStatus.setCheckedIn(checkedIn);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + status);
+            }
         }
-        System.out.println("AjukanSewaStatus.getBooked() = " + AjukanSewaStatus.getBooked());
-        System.out.println("AjukanSewaStatus.getConfirmed() = " + AjukanSewaStatus.getConfirmed());
-        System.out.println("AjukanSewaStatus.getVerified() = " + AjukanSewaStatus.getVerified());
-        System.out.println("AjukanSewaStatus.getCheckedIn() = " + AjukanSewaStatus.getCheckedIn());
     }
 
     @Then("playwright batalkan pengajuan sewa for tenant")
     public void playwrightBatalkanPengajuanSewaForTenant() throws NoSuchAlgorithmException, InvalidKeyException {
         batalkanBookingBody.put("cancel_reason", "Mamitest Automation Alasan Lainnya Batalkan Pengajuan Sewa");
         batalkanBookingBody.put("reason_id", null);
-
-        for (int i = 0; i < AjukanSewaStatus.getBooked().size(); i++ ) {
-            var bookingId = AjukanSewaStatus.getBooked().get(i);
-            var batalkanPengajuanSewaEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.TENANT_BATALKAN_BOOKING, "{bookingId}", bookingId);
-            var batalkanPengajuanSewaSignature = Requirement.createSignatureKey("POST", batalkanPengajuanSewaEndpoint);
-            var batalkanPengajuanSewaHeaders = Requirement.mamikosStandardHeaders(batalkanPengajuanSewaSignature);
-            var batalkanPengajuanSewaRequestOptions = RequestOptions.create().setData(batalkanBookingBody).setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN);
-            batalkanPengajuanSewaRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, batalkanPengajuanSewaHeaders);
-            batalkanPengajuanSewaResponse = batalkanPengajuanSewaRequest.post(batalkanPengajuanSewaEndpoint, batalkanPengajuanSewaRequestOptions);
-            System.out.println(batalkanPengajuanSewaResponse.url());
-            Assert.assertEquals(batalkanPengajuanSewaResponse.status(), 200);
-            Assert.assertTrue(batalkanPengajuanSewaResponse.ok());
-            System.out.println("apiResponse.text() = " + batalkanPengajuanSewaResponse.text());
+        if (AjukanSewaStatus.getBooked() != null) {
+            for (int i = 0; i < AjukanSewaStatus.getBooked().size(); i++ ) {
+                var bookingId = AjukanSewaStatus.getBooked().get(i);
+                var batalkanPengajuanSewaEndpoint = ApiEndpoints.V1_PREFIX + JavaHelpers.formatString(ApiEndpoints.TENANT_BATALKAN_BOOKING, "{bookingId}", bookingId);
+                var batalkanPengajuanSewaSignature = Requirement.createSignatureKey("POST", batalkanPengajuanSewaEndpoint);
+                var batalkanPengajuanSewaHeaders = Requirement.mamikosStandardHeaders(batalkanPengajuanSewaSignature);
+                var batalkanPengajuanSewaRequestOptions = RequestOptions.create().setData(batalkanBookingBody).setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN);
+                batalkanPengajuanSewaRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.STAGING, batalkanPengajuanSewaHeaders);
+                batalkanPengajuanSewaResponse = batalkanPengajuanSewaRequest.post(batalkanPengajuanSewaEndpoint, batalkanPengajuanSewaRequestOptions);
+                System.out.println(batalkanPengajuanSewaResponse.url());
+                Assert.assertEquals(batalkanPengajuanSewaResponse.status(), 200);
+                Assert.assertTrue(batalkanPengajuanSewaResponse.ok());
+                System.out.println("apiResponse.text() = " + batalkanPengajuanSewaResponse.text());
+            }
         }
+    }
+
+    @And("playwright check for active contract and active booking")
+    public void playwrightCheckForActiveContractAndActiveBooking() {
+        AjukanSewaStatus.setContractPresent(!AjukanSewaStatus.getConfirmed().isEmpty() || !AjukanSewaStatus.getVerified().isEmpty() || !AjukanSewaStatus.getCheckedIn().isEmpty());
     }
 }

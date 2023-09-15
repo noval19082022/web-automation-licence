@@ -13,4 +13,6 @@ public class AjukanSewaStatus {
      */
     @Setter @Getter
     private static List<String> booked, confirmed, verified, checkedIn;
+    @Setter @Getter
+    private static boolean contractPresent;
 }

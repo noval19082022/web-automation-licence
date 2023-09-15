@@ -1,4 +1,4 @@
-@regression @addons @TEST_BBM-1092 @TEST_BBM-1093 @TEST_BBM-1094 @BBM1
+@regression @addons @TEST_BBM-1092 @TEST_BBM-1093 @TEST_BBM-1094 @BBM1 @implementonbbm1
 
 Feature: Add Ons - Extended Contract
 
@@ -18,42 +18,45 @@ Feature: Add Ons - Extended Contract
 
   @continue
   Scenario Outline: Get Active Contract And Active Booking For Add Ons - Extended Contract
-    And playwright get tenant booking status with parameter:
-      | page   |         |
-      | sort   |          |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
       | status | <booking> |
     Examples:
-      | booking |
-      | booked |
-      | confirmed |
-      | verified |
+      | booking    |
+      | booked     |
+      | confirmed  |
+      | verified   |
+      | checked_in |
+
+  @continue
+  Scenario: Verify Active Contract And Active Booking For Add Ons - Extended Contract
+    When playwright check for active contract and active booking
 
   @continue
   Scenario: Tenant Batalkan Pengajuan Sewa For Add Ons - Extended Contract
     And playwright batalkan pengajuan sewa for tenant
 
-  @continue
+  @continue @apiflow
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
+    Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0891111020198 | 0891111020198 |
-    And admin akhiri contract
-    Then admin should success terminate contract
 
   @continue
   Scenario: Playwright Create Booking
     And playwright get tenant data profile
     And playwright get kos detail:
-      | songId | 39645784 |
+      | songId | 58650684 |
     And playwright make json file for tenant booking from tenant profile data
     And playwright create booking for tenant:
-      | songId     | 39645784 |
-      | roomTypeId | 6230     |
-
+      | songId     | 58650684 |
+      | roomTypeId | 6194     |
+#
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -70,11 +73,10 @@ Feature: Add Ons - Extended Contract
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
-    Then tenant navigate to tagihan kost saya
 
   Scenario: Admin Master Add, Add Ons Fee On Auto Extend Invoice With Booked Status
     Given admin go to mamikos mamipay admin

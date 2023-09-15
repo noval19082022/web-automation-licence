@@ -212,7 +212,9 @@ public class PlaywrightHelpers {
      * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
-        page.onceDialog(Dialog::accept);
+        page.onDialog(dialog -> {
+            dialog.accept();
+        });
         locator.click();
     }
     //----- Action Part ----\\
@@ -538,9 +540,7 @@ public class PlaywrightHelpers {
      */
     public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
         // move page
-        Page nextPage = pageActive.waitForPopup(() -> {
-            locatorTarget.click();
-        });
+        Page nextPage = pageActive.waitForPopup(new Page.WaitForPopupOptions().setTimeout(3000.0), locatorTarget::click);
         nextPage.bringToFront();
         return nextPage;
     }
