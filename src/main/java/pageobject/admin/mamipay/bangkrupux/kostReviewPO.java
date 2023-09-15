@@ -41,6 +41,9 @@ public class kostReviewPO {
     Locator deleteReviewButton;
     Locator contractIdDropdown;
     Locator cancelReviewButton;
+    Locator rejectReviewKosButton;
+    Locator inputKosName;
+    Locator searchButton;
 
     public kostReviewPO(Page page) {
         this.page = page;
@@ -73,6 +76,9 @@ public class kostReviewPO {
         deleteReviewButton = page.locator("//a[@onclick=\"return confirm('Yakin mau hapus saya?')\"]");
         contractIdDropdown = page.getByPlaceholder("Contract ID");
         cancelReviewButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
+        rejectReviewKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        inputKosName = page.getByPlaceholder("Nama kos");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
     }
 
     /**
@@ -256,6 +262,28 @@ public class kostReviewPO {
     public void fillEndDate(String endDate) {
         playwright.clickOn(endDateInput);
         playwright.clickOn(page.locator("//a[text()='"+endDate+"']"))  ;
+    }
+
+    /**
+     * admin click on reject review kost button
+     *
+     */
+    public void clickOnRejectReviewKos() {
+        if (rejectReviewKosButton.isVisible()) {
+            playwright.clickOn(rejectReviewKosButton);
+            playwright.acceptDialog(rejectReviewKosButton);
+        } else {
+            playwright.clickOn(searchButton);
+        }
+    }
+
+    /**
+     * admin input kos name in kos review page
+     *
+     */
+    public void inputKostName(String kosName) {
+        inputKosName.fill(kosName);
+        playwright.clickOn(searchButton);
     }
 
     /**

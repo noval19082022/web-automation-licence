@@ -71,10 +71,13 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
     }
 
-    @When("user sets recurring for number {string}")
-    public void user_sets_recurring_for_number(String phoneNumber) {
+    //------ Recurring Mamipay ------//
+
+    @When("user sets recurring {string} for number {string}")
+    public void user_sets_recurring_for_number(String period, String phoneNumber) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputRecurringPhoneNumber(phoneNumber);
+        goldplus.selectRecurringPeriod(period);
         playwright.clickOnTextButton("Create Recurring");
         Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
@@ -149,7 +152,7 @@ public class GoldplusSteps {
     @When("owner wants to extends Goldplus from chatlist")
     public void owner_wants_to_extends_goldplus_from_chatlist() {
         chat.clickChatOwner();
-        playwright.clickOnTextButton("Perpanjang");
+        goldplus.clickOnPerpanjangBtn();
     }
 
     @When("owner wants to extends Goldplus from chatroom")
@@ -157,7 +160,7 @@ public class GoldplusSteps {
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
         playwright.clickOnTextButton("Akbar Susilo");
-        playwright.clickOnTextButton("Perpanjang");
+        goldplus.clickOnPerpanjangBtn();
     }
 
     @When("owner wants to extends Goldplus from notif center")
@@ -407,6 +410,7 @@ public class GoldplusSteps {
     public void user_see_list_detail_tagihan_goldplus() {
         goldplus.isListDetailTagihanIsDisplayed();
     }
+
     @When("user click tab selesai")
     public void user_click_tab_selesai() {
         goldplus.clickTabSelesai();
@@ -431,12 +435,29 @@ public class GoldplusSteps {
     @Then("user verify last ftue is {string}")
     public void user_verify_last_ftue_is(String kuota) {
         Assert.assertEquals(chat.lastFTUEnonGoldplusText(),kuota,"FTUE doesnt match");
-
     }
 
     @When("owner cek promo owner when not GP")
     public void owner_cek_promo_owner_when_not_gp() {
         promoOwner.clickOnPromoNonGP();
+    }
+
+    @Then("owner will see pop up reminder recurring is displayed")
+    public void owner_will_see_pop_up_reminder_recurring_is_displayed(){
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Perpanjang"));
+        Assert.assertTrue(playwright.isTextDisplayed("Masa aktif GoldPlus akan habis."));
+        Assert.assertTrue(playwright.isTextDisplayed("Ayo, segera perpanjang paket GoldPlus Anda sekarang."));
+    }
+
+    @When("owner wants to proccess recurring GP")
+    public void owner_wants_to_proccess_recurring_GP(){
+        goldplus.clickOnPerpanjangBtn();
+    }
+
+    @When("owner will be redirected to invoice recurring")
+    public void owner_will_be_redirected_to_invoice_recurring(){
+        playwright.waitTillPageLoaded();
+        Assert.assertTrue(goldplus.gpPackageText());
     }
 
 }

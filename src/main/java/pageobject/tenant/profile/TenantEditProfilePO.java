@@ -59,6 +59,9 @@ public class TenantEditProfilePO {
     Locator profilePresentageInformation;
     Locator profileMicrocopyInformation;
     Locator batalButton;
+    Locator reddotOnProfilePicture;
+    Locator reddotOnProfileMenu;
+    Locator profileMenuButton;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -109,6 +112,9 @@ public class TenantEditProfilePO {
         profilePresentageInformation = page.locator("//*[@class=\"bg-c-progress-bar__labels\"]");
         profileMicrocopyInformation = page.locator("//p[contains(.,'Profil yang lengkap')]");
         batalButton = page.locator("//button[contains(.,'Batal')]");
+        reddotOnProfilePicture = page.locator("//*[@data-testid=\"navbarRedDot-avatar\"]");
+        reddotOnProfileMenu = page.locator("//*[@data-testid=\"navbarRedDot-avatar\"]");
+        profileMenuButton = page.locator("//*[@class=\"bg-c-avatar bg-c-avatar--sm\"]");
     }
 
 
@@ -531,6 +537,27 @@ public class TenantEditProfilePO {
     public void userClickBatalButton() {
         batalButton.scrollIntoViewIfNeeded();
         playwright.clickOn(batalButton);
+    }
+
+    /**
+     * verify red dot on navbar
+     */
+    public boolean verifyReddotOnProfilePicture() {
+        return playwright.waitTillLocatorIsVisible(reddotOnProfileMenu);
+    }
+
+    /**
+     * verify red dot on menu
+     */
+    public boolean verifyReddotOnProfileMenu() {
+        return playwright.waitTillLocatorIsVisible(reddotOnProfileMenu);
+    }
+
+    /**
+     * user click profile on navbar
+     */
+    public void userClickProfile() {
+        playwright.clickOn(profileMenuButton);
     }
 
 }
