@@ -17,9 +17,15 @@ public class MamiAdsPO {
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
+    private Locator cobaSekarangBtn;
+    private Locator titleSelesaiRiwayatSaldoText;
+    private Locator messageSelesaiRiwayatSaldoText;
+    private Locator titleDalamProsesRiwayatSaldoText;
+    private Locator messageDalamProsesRiwayatSaldoText;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
-
+    private Locator countHistoryIcon;
+    private Locator titleDetailTagihanText;
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
     Locator gpOnboardingPopUpActiveTextHead;
@@ -41,9 +47,15 @@ public class MamiAdsPO {
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
+        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
+        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
+        this.messageSelesaiRiwayatSaldoText = page.getByText("Transaksi yang sudah selesai akan muncul di halaman ini.");
+        this.messageDalamProsesRiwayatSaldoText = page.getByText("Transaksi yang masih dalam proses akan muncul di halaman ini.");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
-
+        this.cobaSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang")).nth(1);
+        this.countHistoryIcon = page.locator(".history-icon__counter");
+        this.titleDetailTagihanText = page.getByText("Detail Tagihan");
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
@@ -194,6 +206,66 @@ public class MamiAdsPO {
     public String getMessageText() {
         playwright.waitFor(messageEmptyFilterText);
         return playwright.getText(messageEmptyFilterText);
+    }
+
+    /**
+     * click on Coba Sekarang on mamiads landing page
+     */
+    public void clickOnCobaSekarang() {
+        playwright.clickOn(cobaSekarangBtn);
+    }
+
+    /**
+     * Get Title text on Selesai Tab on Riwayat Saldo
+     * @return String title
+     */
+    public String getTitleSelesaiText() {
+        playwright.waitFor(titleSelesaiRiwayatSaldoText);
+        return playwright.getText(titleSelesaiRiwayatSaldoText);
+    }
+
+    /**
+     * Get Title text on Dalam Proses Tab on Riwayat Saldo
+     * @return String title
+     */
+    public String getTitleDalamProsesText(){
+        playwright.waitFor(titleDalamProsesRiwayatSaldoText);
+        return playwright.getText(titleDalamProsesRiwayatSaldoText);
+    }
+
+    /**
+     * Get Message text on Selesai Tab on Riwayat Saldo
+     * @return String title
+     */
+    public String getMessageSelesaiText(){
+        playwright.waitFor(messageSelesaiRiwayatSaldoText);
+        return playwright.getText(messageSelesaiRiwayatSaldoText);
+    }
+
+    /**
+     * Get Message text on Dalam Proses Tab on Riwayat Saldo
+     * @return String title
+     */
+    public String getMessageDalamProsesText(){
+        playwright.waitFor(messageDalamProsesRiwayatSaldoText);
+        return playwright.getText(messageDalamProsesRiwayatSaldoText);
+    }
+
+    /**
+     * Get count riwayat beli saldo
+     * @return int countHistoryIcn
+     */
+    public int getCountRiwayatBeliSaldo(){
+        return Integer.parseInt(playwright.getText(countHistoryIcon));
+    }
+
+    /**
+     * Get Detail Tagihan Text on Detail Tagihan page
+     * @return String title
+     */
+    public String getDetailTagihanText(){
+        playwright.waitFor(titleDetailTagihanText);
+        return playwright.getText(titleDetailTagihanText);
     }
 }
 
