@@ -291,4 +291,10 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.BROADCAST_CHAT, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
+
+    @When("admin navigates to {string}")
+    public void adminNavigateTo(String path) {
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX+path, 30000.0, LoadState.LOAD);
+        playwright.waitTillUrlToBe(Mamikos.ADMINBANGKRUPUX+path, 30000.0);
+    }
 }

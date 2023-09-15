@@ -243,17 +243,17 @@ public class KostDetailsPO {
         this.kosDetailPage = page.locator("detailKostContainer");
         this.filterButton = page.locator(".filter-item-mobile:first-child span");
         this.needConfirmation = page.locator("li:nth-child(2) button");
-        this.seeCompleteBtn = page.locator(".booking-list-card:nth-child(1) .hidden-xs .text-primary");
-        this.cancelBookingBtn = page.locator(".--is-detail .detail-cancel button");
+        this.seeCompleteBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnyachevron-down"));
+        this.cancelBookingBtn = page.getByTestId("detailBookingCardCancel_btn");
         this.reasonOption = page.locator(".fade.in .form-options");
         this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
-        this.saveDraftButton = page.locator("//*[@class='bg-c-button bg-c-button--primary-naked bg-c-button--md bg-c-button--block']");
+        this.saveDraftButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan ke Draft"));
         this.textPopup = page.getByText("Fasilitas umum");
         this.backButton = page.locator(".booking-request-form__back-btn");
         this.kosCheckedByOwner = page.locator(".booking-shortcut__card-title");
         this.draftMenu = page.locator("//a[normalize-space()='Draft']");
-        this.deleteButtonOnTabOneDraftBooking = page.locator(".btn-default[data-v-195f9976]");
-        this.hapusDraft = page.locator("//button[contains(.,'Hapus Draft')]");
+        this.deleteButtonOnTabOneDraftBooking = page.locator("#draftBookingWrapper").getByRole(AriaRole.BUTTON).first();
+        this.hapusDraft = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Draft"));
         this.mauCobaDongSectionAtHomepage = page.locator(".bg-c-text--button-sm");
         this.chatPemilikButton = page.getByTestId("userKostActivities-menus").locator("div").filter(new Locator.FilterOptions().setHasText("Chat pemilik"));
         this.chatListTittle = page.getByText("Chat room");
@@ -465,6 +465,7 @@ public class KostDetailsPO {
             this.date = date;
         }
         mulaiKosInput.click();
+        playwright.waitFor(datePicker, 5000.0);
         datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
         List<Locator> datePicks = playwright.getLocators(datePick);
         for (Locator pick : datePicks) {
@@ -1646,27 +1647,20 @@ public class KostDetailsPO {
      * Click on filter in riwayat booking
      */
     public void cancelAllBookingWithDefaultReason() {
-        var maxLoop = 0;
-        do {
-            maxLoop++;
-            filterButton.click();
-            needConfirmation.waitFor();
-            needConfirmation.click();
-            playwright.hardWait(2000);
-            if (seeCompleteBtn.isVisible()) {
-                seeCompleteBtn.click();
-                cancelBookingBtn.click();
-                playwright.waitTillLocatorIsVisible(reasonOption);
-                yesCancelBookingBtn.click();
-                page.reload();
-                filterButton.waitFor();
-            }
-            if (maxLoop == 5) {
-                break;
-            }
-        } while (seeCompleteBtn.isVisible());
-
+        filterButton.click();
+        needConfirmation.waitFor();
+        needConfirmation.click();
+        if (seeCompleteBtn.isVisible()) {
+            playwright.waitFor(seeCompleteBtn,5000.0);
+            seeCompleteBtn.click();
+            cancelBookingBtn.click();
+            playwright.waitTillLocatorIsVisible(reasonOption);
+            yesCancelBookingBtn.click();
+            page.reload();
+            filterButton.waitFor();
+        }
     }
+
 
     /**
      * Click on save draft button
@@ -1788,6 +1782,7 @@ public class KostDetailsPO {
      * Click on button text
      */
     public void clickOnBytextButton(String buttonText) {
+        playwright.hardWait(3000);
         String selector = "(//a[normalize-space()='"+ buttonText +"'])";
         ElementHandle element = page.querySelector(selector);
         element.click();
