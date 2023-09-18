@@ -165,7 +165,7 @@ public class ApartmentLandingPO {
      * get list time period apartement
      */
     public List<String> getApartmentListByPeriod() {
-        playwright.waitTillLocatorIsVisible(listTimePeriod.first());
+        playwright.waitTillPageLoaded();
         return playwright.getListInnerTextFromListLocator(listTimePeriod);
     }
 }

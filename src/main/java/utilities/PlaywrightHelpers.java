@@ -250,6 +250,7 @@ public class PlaywrightHelpers {
      * @return list string
      */
     public List<String> getListInnerTextFromListLocator(Locator locator) {
+        waitTillLocatorIsVisible(locator.first());
         return locator.allInnerTexts();
     }
 
