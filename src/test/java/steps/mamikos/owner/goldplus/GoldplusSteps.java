@@ -159,7 +159,7 @@ public class GoldplusSteps {
     public void owner_wants_to_extends_goldplus_from_chatroom() {
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
-        playwright.clickOnTextButton("Akbar Susilo");
+        playwright.clickOnTextButton("Irvi Tenant Add Ons");
         goldplus.clickOnPerpanjangBtn();
     }
 
