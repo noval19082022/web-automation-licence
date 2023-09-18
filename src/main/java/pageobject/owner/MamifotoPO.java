@@ -101,7 +101,7 @@ public class MamifotoPO {
         this.titleTingkatkanKinerja = page.getByText("Tingkatkan Kinerja Kos");
         this.subtitleTingkatkanKinerja = page.getByText("Lengkapi kos Anda dengan fitur berikut.");
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
-        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan"));
+        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosan Anda!"));
         this.lihatPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
         this.packageFirstMamifoto = page.getByTestId("select-mamifoto-package").first();
         this.popUpDoesntHaveProperty = page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
