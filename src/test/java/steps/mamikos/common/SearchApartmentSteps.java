@@ -81,4 +81,17 @@ public class SearchApartmentSteps {
     public void user_verify_rekomendasi_listing_section_didn_t_display() {
         Assert.assertFalse(apartment.isRekomendasiSectionVisible(), "rekomendasi listing is display!");
     }
+
+    @When("user filter apartment by time period is {string}")
+    public void userFilterApartmentByTimePeriodIs(String period) {
+        apartment.filterByTimePeriod(period);
+    }
+
+    @Then("user/tenant see displays apartment lists by time period is {string}")
+    public void userSeeDisplaysApartmentListsByTimePeriodIs(String period) {
+        Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
+        for (var listTimePeriod : apartment.getApartmentListByPeriod()) {
+            Assert.assertEquals(listTimePeriod.replace("/", "").trim(), period);
+        }
+    }
 }
