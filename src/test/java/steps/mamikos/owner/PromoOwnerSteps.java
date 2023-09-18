@@ -63,17 +63,17 @@ public class PromoOwnerSteps {
         playwright.hardWait(3000.0);
     }
 
-    @And("admin search the title promo on search box")
-    public void adminSearchTheTitlePromoOnSearchBox() {
-        promoOwner.clickOnSeachPromo();
+    @And("admin search the title promo {string} on search box")
+    public void adminSearchTheTitlePromoOnSearchBox(String promoTitle) {
+        promoOwner.clickOnSeachPromo(promoTitle);
     }
 
-    @Then("admin verified the promo owner")
-    public void adminVerifiedThePromoOwner() {
+    @Then("admin verified the promo owner {string}")
+    public void adminVerifiedThePromoOwner(String promoTitle) {
         Assert.assertTrue(promoOwner.isUnverifiedStatus(), "Status doesn't match!");
         promoOwner.clickOnVerificationPromo();
         Assert.assertEquals(promoOwner.getAlertSuccessUpdate(), "Success! Promo is updated.", "message doesn't match!");
-        adminSearchTheTitlePromoOnSearchBox();
+        adminSearchTheTitlePromoOnSearchBox(promoTitle);
         Assert.assertFalse(promoOwner.isUnverifiedStatus(), "Status doesn't match!");
     }
 
