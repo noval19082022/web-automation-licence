@@ -34,6 +34,7 @@ public class MamifotoPO {
     Locator headerFAQ;
     Locator contentFAQfirstList;
     Locator riwayatPaketButton;
+    Locator panduanAreaClick;
 
 
     //Locator Mamifoto at Select Package
@@ -143,6 +144,7 @@ public class MamifotoPO {
         this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
         this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
         this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
+        this.panduanAreaClick = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Panduan area & fasilitas"));
 
     }
 
@@ -545,7 +547,7 @@ public class MamifotoPO {
      * Click on button bayar sekarang
      */
     public void clickOnButtonBayarSekarangMamifoto() {
-        buttonBayarSekarang.click();
+        playwright.clickOn(buttonBayarSekarang);
     }
 
     /**
@@ -620,7 +622,12 @@ public class MamifotoPO {
         Locator invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
         invoiceUnpaid.click();
     }
-
+    /**
+     * Click on button bayar sekarang
+     */
+    public void clickOnPanduanArea() {
+        playwright.clickOn(panduanAreaClick);
+    }
 
 }
 

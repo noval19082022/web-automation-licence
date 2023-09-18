@@ -56,5 +56,6 @@ public class Mamikos {
     public static final String CEK_PROPERTY_SEKITAR = JavaHelpers.getPropertyValue(MAMIKOS, "cekPropertySekitar") ;
     public static final String TOP_UP_MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsBalance");
     public static final String MAMIADS_GUIDE = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuide");
+    public static final String MAMIADS_GUIDE_GP = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuideGP");
 
 }

@@ -51,4 +51,14 @@ public class MamiAdsSteps {
     public void user_redirected_to_guides_page_mami_ads() {
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE);
     }
+
+    @Then("tap back button on panduan Mamiads.")
+    public void tap_back_button_on_panduan_mamiads() {
+       mamiAdsPO.clickOnPanduanMamiAdsBackButton();
+    }
+
+    @Then("user redirected to guides page mamiAds from GP")
+    public void user_redirected_to_guides_page_mami_ads_from_gp() {
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE_GP);
+    }
 }
