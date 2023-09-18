@@ -11,7 +11,7 @@ Feature: BnB feature with background booking kost - reject booking
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Yamie Panda Kost Deposit Wirobrajan Yogyakarta | Kost Adi Auto FullPaid AddFee Deposit|
+      | Kost Mini Regression Rajeg Tangerang | Kost Adi Auto FullPaid AddFee Deposit|
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user
@@ -21,8 +21,13 @@ Feature: BnB feature with background booking kost - reject booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod    | password    |
-      | 081362464341  | 0890867321212 | 1d0lt3stb4ru   |
-    And owner reject booking
+      | 0891202109  | 0890867321212 | qwerty123   |
+    And owner navigate to pengajuan booking page
+    And owner choose filter kost for "Kost Mini Regression Rajeg Tangerang"
+    And user clicks on Booking Details button
+    And owner reject booking from view detail
+    And owner select reason reject kos "Tanggal masuk/check-in kos terlalu dekat"
+    Then owner can see confirmation Atur Booking popup
 
 
 

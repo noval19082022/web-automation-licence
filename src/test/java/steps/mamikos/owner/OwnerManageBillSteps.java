@@ -125,7 +125,7 @@ public class OwnerManageBillSteps {
     }
     @And("user check prices penyewa owner are same to contract at kos saya {string}")
     public void userCheckPricePenyewaOnOwner(String price) {
-        Assert.assertEquals(billManage.isPriceDisplayed(price), "Rp900.000 / bulan");
+        Assert.assertEquals(billManage.isPriceDisplayed(price), "Rp12.000.000 / tahun");
     }
 
     @Then("user can see {string} as tenant name, {string} as phone number, {string} status, and photo")

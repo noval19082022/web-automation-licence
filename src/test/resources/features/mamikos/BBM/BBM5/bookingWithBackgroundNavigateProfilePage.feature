@@ -1,14 +1,23 @@
 @BBM5
 Feature: BnB feature with background navigate profile page
+  
+  Scenario: Reject request review kos
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin navigates to "review"
+    And admin reject request review kos "Kost Cyllene Tipe A Tobelo Utara Halmahera Utara"
 
-  @background @kost-saya-revamp-phase2
+
+  @kost-saya-revamp-phase2
   Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (BBM-912)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0890000000314 | 08100000622 | Bismillah@01 |
     And tenant navigate to kost saya page
-    And user clicks on Chat pemilik menu
+    And user click on chat button in top bar tenant home page
     Then user can see Chat list title
 
   @TEST_BBM-911
@@ -46,15 +55,19 @@ Feature: BnB feature with background navigate profile page
       | 0890000000314 | 08100000622 | Bismillah@01 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
-    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user click review kost
+    And user input review kost with rating 5:
+      | review stop rent stag       |
+      | Kost sangat aman dan bersih |
+    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
     And user click ajukan berhenti sewa on kontrak saya after review kos
     And user logs out as a Tenant user
     When user login as owner:
       | phone stag  | phone prod  | password  |
-      | 0890000000289 | 08100000622 | Bismillah@01 |
+      | 0890000000382 | 08100000622 | Bismillah@01 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "kost bali for contract section Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "Kost Cyllene Tipe A Tobelo Utara Halmahera Utara"
     And user click on kontrak sewa button
     And user click on tolak button
     And user click on Ubah kontrak penyewa button
-    Then user check prices penyewa owner are same to contract at kos saya "Rp900.000 / bulan"
+    Then user check prices penyewa owner are same to contract at kos saya "Rp12.000.000 / tahun"

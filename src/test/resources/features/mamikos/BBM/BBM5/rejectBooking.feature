@@ -35,7 +35,7 @@ Feature: OB Owner Reject Booking Full Room
       | phone stag     | phone prod     | password        |
       | 081362464341   | 081362464341   | 1d0lt3stb4ru    |
     And owner reject booking from dashboard
-    And owner select reason reject kos "Kamar tidak tersedia untuk penyewa"
+    And owner select reason reject kos "Calon penyewa perlu survei terlebih dulu"
 
   Scenario: Owner set room kost Kosong
     When owner navigates to property saya kos
