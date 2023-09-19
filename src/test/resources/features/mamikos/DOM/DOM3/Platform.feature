@@ -37,7 +37,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When user go to landing apartment
     Then user redirected to "/apartemen"
-    Then user search "Bandung" on landing apartment
+    And user search "Bandung" on landing apartment
     Then user will see displays apartment lists by area and city
       | Coblong       |
       | Sumur Bandung |
@@ -47,3 +47,9 @@ Feature: [Test-Execution][DOM] Web - Platform
       | Coblong       |
       | Sumur Bandung |
       | Bandung       |
+
+  @TEST_DOM-397 @Automated @DOM3 @web-covered
+  Scenario: [Web][Landing Kos][Popular city] Search Another Category
+    Given user go to mamikos homepage
+    When user visit search page, and visit popular search based on "Area" for location on "Yogyakarta"
+    Then user can see kost list is more than 10
