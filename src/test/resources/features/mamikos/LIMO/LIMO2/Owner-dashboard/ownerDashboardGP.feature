@@ -15,6 +15,7 @@ Feature: Owner Dashboard GP
 
   @TEST_LIMO-1725 @continue
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
+    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233452 | 0          | qwerty123 |
@@ -28,6 +29,7 @@ Feature: Owner Dashboard GP
 
   @TEST_LIMO-1724 @continue
   Scenario: See info untuk anda while MARS NON GP with doesnt have unreplied chat and doesnt have quota
+    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233453 | 0          | qwerty123 |
@@ -41,6 +43,7 @@ Feature: Owner Dashboard GP
 
   @TEST_LIMO-1742
   Scenario: See info untuk anda while MARS GP with have unreplied chat Goldplus 1 or Goldplus 2
+    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233454 | 0          | qwerty123 |
