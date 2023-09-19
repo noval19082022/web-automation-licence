@@ -18,7 +18,7 @@ Feature: Check Period Goldplus Page
       | 9 Bulan         | Gratis MamiAds 80.000  | Rp100.000   | Rp120.000 |
       | 12 Bulan        | Gratis MamiAds 120.000 | Rp160.000   | Rp170.000 |
 
-  @TEST_LIMO-3147
+  @TEST_LIMO-3147 @continue
     #Scenario: Setting label favorite change to no
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
     Given admin go to mamikos bangkrupux admin
@@ -56,11 +56,6 @@ Feature: Check Period Goldplus Page
   @TEST_LIMO-3146
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
     #Scenario: Setting label favorite more than 1
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin navigates to Admin Goldplus Package
     Then admin successfully adds additional favorite labels
     And mamikos bangkrupux admin should be successfully logged out
 

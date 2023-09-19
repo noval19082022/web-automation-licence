@@ -7,12 +7,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamifotoPO;
+import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamifotoPO mamifoto = new MamifotoPO (page);
+    InvoicePO invoice = new InvoicePO(page);
 
 
 
@@ -227,9 +229,9 @@ public class MamifotoSteps {
     }
 
     @Then("verify unpaid invoice mamifoto is {int}")
-    public void verify_unpaid_invoice_mamifoto_is(Integer unpaidInvoice) {
+    public void verify_unpaid_invoice_mamifoto_is(int unpaidInvoice) {
         System.out.println(mamifoto.getCountMamifotoInvoiceUnpaid());
-        Assert.assertTrue(unpaidInvoice == mamifoto.getCountMamifotoInvoiceUnpaid());
+        Assert.assertEquals(unpaidInvoice, mamifoto.getCountMamifotoInvoiceUnpaid());
     }
 
     @When("owner click back previous button")
@@ -246,7 +248,12 @@ public class MamifotoSteps {
     @Then("owner paid transaction unpaid")
     public void owner_paid_transaction_unpaid() {
         playwright.hardWait(5000.0);
-        mamifoto.clickOnSeeFirstDetailTransaction();
+        while (mamifoto.checkUnpaidInvoiceMamifoto()){
+            mamifoto.clickOnSeeFirstDetailTransaction();
+            invoice.paymentOVO("081280003230");
+            page.goBack();
+            page.reload();
+        }
     }
 
     @When("owner click tab panduan area")

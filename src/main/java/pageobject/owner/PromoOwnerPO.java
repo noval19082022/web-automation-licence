@@ -222,7 +222,7 @@ public class PromoOwnerPO {
      * Click Seacrh promo box on admin
      *
      */
-    public void clickOnSeachPromo() {
+    public void clickOnSeachPromo(String promoTitle) {
         playwright.forceFill(searchPromoBox, "Update promo owner AT");
         playwright.clickOn(searchButton);
     }
@@ -280,8 +280,10 @@ public class PromoOwnerPO {
      *
      */
     public void clickOnDeletePromo() {
-        playwright.clickOn(deletePromoButton);
-        playwright.acceptDialog(deletePromoButton);
+        if (playwright.waitTillLocatorIsVisible(deletePromoButton)){
+            playwright.clickOn(deletePromoButton);
+            playwright.acceptDialog(deletePromoButton);
+        }
     }
 
     /**
