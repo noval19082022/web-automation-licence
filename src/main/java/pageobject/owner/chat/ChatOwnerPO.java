@@ -75,7 +75,7 @@ public class ChatOwnerPO {
      *
      */
     public void clickChatOwner() {
-        playwright.waitFor(ownerChatButton, 5000.0);
+        playwright.waitTillPageLoaded();
         playwright.clickOn(ownerChatButton);
     }
 

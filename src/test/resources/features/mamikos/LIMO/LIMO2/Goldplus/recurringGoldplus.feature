@@ -2,6 +2,13 @@
 # Recurring GPLT
 Feature: Goldplus Recurring
 
+  Scenario: delete or reset data GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Goldplus for owner with phone number "082233545514"
+
   @continue
   Scenario: Owner Purchase GP
     Given user go to mamikos homepage

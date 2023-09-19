@@ -198,6 +198,7 @@ public class OwnerDashboardPO {
       * Click on Mamipoin Button
      */
     public void clickMamipoinButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
     }
 
@@ -541,6 +542,7 @@ public class OwnerDashboardPO {
      * Click in order to expand promotion feature
      */
     public void clickToExpandFiturPromosi() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(fiturPromosiExpand);
     }
 
