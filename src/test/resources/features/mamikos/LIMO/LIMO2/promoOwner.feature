@@ -1,4 +1,4 @@
-@regression @promoOwner @LIMO2 @listing-monetization
+@regression @promoOwner @LIMO21 @listing-monetization
 Feature: Atur promo owner
 
   @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
@@ -21,7 +21,7 @@ Feature: Atur promo owner
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
     Then verify status promo is "Belum Ada"
-    When owner create new promo owner with title "Judul promo owner AT" for periode promo "tomorrow"
+    When owner create new promo owner with title "Update promo owner AT" for periode promo "tomorrow"
     Then verify judul promo "Judul promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
