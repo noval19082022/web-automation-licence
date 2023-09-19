@@ -265,6 +265,13 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * check box
+     */
+    public void checkBox(Locator locator) {
+        locator.check();
+    }
+
+    /**
      * uncheck box
      */
     public void uncheckBox(Locator locator) {
