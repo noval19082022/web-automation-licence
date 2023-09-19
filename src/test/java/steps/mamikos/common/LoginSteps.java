@@ -151,7 +151,7 @@ public class LoginSteps {
     }
 
     @And("user logs out as a Tenant user")
-    public void userLogsOutAsTenant() throws InterruptedException {
+    public void userLogsOutAsTenant() {
         tenantLogin.logoutAsTenant();
     }
 

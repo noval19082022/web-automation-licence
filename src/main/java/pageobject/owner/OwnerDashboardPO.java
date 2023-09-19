@@ -198,6 +198,7 @@ public class OwnerDashboardPO {
       * Click on Mamipoin Button
      */
     public void clickMamipoinButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
     }
 

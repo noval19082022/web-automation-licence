@@ -478,9 +478,12 @@ public class InvoicePO {
                 break;
             }
         } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
-        page.waitForClose(() -> {
-            ActiveContext.getActiveBrowserContext().pages().get(1).close();
-        });
+        int totalPage = ActiveContext.getActiveBrowserContext().pages().size();
+        if(totalPage > 1){
+            page.waitForClose(() -> {
+                ActiveContext.getActiveBrowserContext().pages().get(1).close();
+            });
+        }
     }
 
     /**

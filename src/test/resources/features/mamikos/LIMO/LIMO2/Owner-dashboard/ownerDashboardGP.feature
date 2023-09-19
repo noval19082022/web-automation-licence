@@ -8,13 +8,13 @@ Feature: Owner Dashboard GP
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
     Then owner click "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
-    * user will see that the text "Sisa kuota mingguan" is displayed
-    * user will see that the text "1 chat room" is displayed
-    And owner should successfully log out
+    And user will see that the text "Sisa kuota mingguan" is displayed
+    And user will see that the text "1 chat room" is displayed
+    When owner navigates to owner dashboard
+    Then owner should successfully log out
 
   @TEST_LIMO-1725 @continue
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
-    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233452 | 0          | qwerty123 |
@@ -28,7 +28,6 @@ Feature: Owner Dashboard GP
 
   @TEST_LIMO-1724 @continue
   Scenario: See info untuk anda while MARS NON GP with doesnt have unreplied chat and doesnt have quota
-    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233453 | 0          | qwerty123 |
@@ -42,7 +41,6 @@ Feature: Owner Dashboard GP
 
   @TEST_LIMO-1742
   Scenario: See info untuk anda while MARS GP with have unreplied chat Goldplus 1 or Goldplus 2
-    Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233454 | 0          | qwerty123 |
