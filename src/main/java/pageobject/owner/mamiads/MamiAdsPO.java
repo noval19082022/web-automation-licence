@@ -19,13 +19,11 @@ public class MamiAdsPO {
     private Locator messageEmptyFilterText;
     private Locator cobaSekarangBtn;
     private Locator titleSelesaiRiwayatSaldoText;
-    private Locator messageSelesaiRiwayatSaldoText;
     private Locator titleDalamProsesRiwayatSaldoText;
-    private Locator messageDalamProsesRiwayatSaldoText;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
-    private Locator titleDetailTagihanText;
+    private Locator detailTagihanSection;
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
     Locator gpOnboardingPopUpActiveTextHead;
@@ -47,15 +45,13 @@ public class MamiAdsPO {
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
-        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
-        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
-        this.messageSelesaiRiwayatSaldoText = page.getByText("Transaksi yang sudah selesai akan muncul di halaman ini.");
-        this.messageDalamProsesRiwayatSaldoText = page.getByText("Transaksi yang masih dalam proses akan muncul di halaman ini.");
+        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done > div > div.transaction-empty-state > div > h4");
+        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads > div > div.transaction-empty-state > div > h4");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.cobaSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang")).nth(1);
         this.countHistoryIcon = page.locator(".history-icon__counter");
-        this.titleDetailTagihanText = page.getByText("Detail Tagihan");
+        this.detailTagihanSection = page.locator(".purchase-detail__header");
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
@@ -234,24 +230,6 @@ public class MamiAdsPO {
     }
 
     /**
-     * Get Message text on Selesai Tab on Riwayat Saldo
-     * @return String title
-     */
-    public String getMessageSelesaiText(){
-        playwright.waitFor(messageSelesaiRiwayatSaldoText);
-        return playwright.getText(messageSelesaiRiwayatSaldoText);
-    }
-
-    /**
-     * Get Message text on Dalam Proses Tab on Riwayat Saldo
-     * @return String title
-     */
-    public String getMessageDalamProsesText(){
-        playwright.waitFor(messageDalamProsesRiwayatSaldoText);
-        return playwright.getText(messageDalamProsesRiwayatSaldoText);
-    }
-
-    /**
      * Get count riwayat beli saldo
      * @return int countHistoryIcn
      */
@@ -260,12 +238,22 @@ public class MamiAdsPO {
     }
 
     /**
-     * Get Detail Tagihan Text on Detail Tagihan page
-     * @return String title
+     * check if detail tagihan is present
+     *
+     * @return true if appears detail tagihan
      */
-    public String getDetailTagihanText(){
-        playwright.waitFor(titleDetailTagihanText);
-        return playwright.getText(titleDetailTagihanText);
+    public boolean isDetailTagihanPresent() {
+        detailTagihanSection.waitFor();
+        return playwright.waitTillLocatorIsVisible(detailTagihanSection);
     }
+
+    /**
+     * Click on bayar sekarang button and wait until page loaded
+     */
+    public void clicksOnBayarSekarangButton() {
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+        playwright.waitTillPageLoaded();
+    }
+
 }
 
