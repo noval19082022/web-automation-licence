@@ -31,3 +31,19 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkrupux check the checkbox Active on create new san junipero
     And admin bangkrupux save Sanjunipero on create new san junipero
     Then admin bangkerupux verify success create new sanjunipero "Success! Record success to saved."
+
+  @TEST_DOM-399 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive case tenant search apartment by Area
+    Given user go to mamikos homepage
+    When user go to landing apartment
+    Then user redirected to "/apartemen"
+    Then user search "Bandung" on landing apartment
+    Then user will see displays apartment lists by area and city
+      | Coblong       |
+      | Sumur Bandung |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Sumur Bandung |
+      | Bandung       |

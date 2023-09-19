@@ -27,6 +27,7 @@ public class SearchApartmentSteps {
     HomePO homePO = new HomePO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
     private List<Map<String, String>> searchApartment;
+
     @When("user search {string} on landing apartment")
     public void userSearchOnLandingApartment(String area) {
         apartment.fillApartmentSearchInput(area);
@@ -51,6 +52,7 @@ public class SearchApartmentSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.APARTMENT, 30000.0, LoadState.LOAD);
         apartment.clickOnApartmentListNumber(listNumber - 1);
     }
+
     @Then("tenant open tab pernah dilihat at menu favorite")
     public void tenant_open_tab_pernah_dilihat_at_menu_favorite() {
         apartment.clickOnHistoryApartment();
@@ -65,6 +67,7 @@ public class SearchApartmentSteps {
     public void tenant_verify_the_hapus_history_button_is_appear() {
         Assert.assertTrue(apartment.isHapusHistoryVisible(), "hapus histori button is visible");
     }
+
     @When("tenant search kost then go to apartment details:")
     public void tenant_search_kost_then_go_to_apartment_details(DataTable table) {
         searchApartment = table.asMaps(String.class, String.class);
@@ -73,10 +76,12 @@ public class SearchApartmentSteps {
         kostDetail = searchPO.searchByText(kostName);
         apartment.waitTillApartmentDetailPageVisible();
     }
+
     @When("tenant open tab difavoritkan at menu favorite")
     public void tenant_open_tab_difavoritkan_at_menu_favorite() {
         apartment.clickOnFavoriteApartment();
     }
+
     @Then("user verify rekomendasi listing section didn't display")
     public void user_verify_rekomendasi_listing_section_didn_t_display() {
         Assert.assertFalse(apartment.isRekomendasiSectionVisible(), "rekomendasi listing is display!");
@@ -93,5 +98,10 @@ public class SearchApartmentSteps {
         for (var listTimePeriod : apartment.getApartmentListByPeriod()) {
             Assert.assertEquals(listTimePeriod.replace("/", "").trim(), period);
         }
+    }
+
+    @Then("user will see displays apartment lists by area and city")
+    public void userWillSeeDisplaysApartmentListsByAreaAndCity(List<String> listValidationArea) {
+        Assert.assertTrue(apartment.getCityAndAreaValidationOnList().containsAll(listValidationArea), "Area validation not match");
     }
 }

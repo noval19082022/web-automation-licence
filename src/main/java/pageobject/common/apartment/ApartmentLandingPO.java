@@ -22,6 +22,7 @@ public class ApartmentLandingPO {
     private Locator rekomendasiTitle;
     private Locator filteringPeriod;
     private Locator listTimePeriod;
+    private Locator listApartementArea;
 
 
     public ApartmentLandingPO(Page page) {
@@ -38,6 +39,7 @@ public class ApartmentLandingPO {
         rekomendasiTitle = page.locator(".premium-recom-title");
         this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka Waktu Harian Mingguan Bulanan Tahunan$"))).getByRole(AriaRole.COMBOBOX);
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
+        this.listApartementArea = page.locator("//span[@class='rc-info__location bg-c-text bg-c-text--body-3']");
     }
 
     /**
@@ -167,5 +169,13 @@ public class ApartmentLandingPO {
     public List<String> getApartmentListByPeriod() {
         playwright.waitTillPageLoaded();
         return playwright.getListInnerTextFromListLocator(listTimePeriod);
+    }
+
+    /**
+     * get apartement area from list
+     * @return
+     */
+    public List<String> getCityAndAreaValidationOnList() {
+        return playwright.getListInnerTextFromListLocator(listApartementArea);
     }
 }
