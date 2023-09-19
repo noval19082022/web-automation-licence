@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AcceptBooking {
     @Setter @Getter
-    private String name,
+    private static String name,
         phoneNumber,
         gender,
         email,
@@ -22,7 +22,7 @@ public class AcceptBooking {
         existingTenant,
         dpAmount;
     @Setter @Getter
-    private int roomNumber,
+    private static int roomNumber,
         amount,
         duration,
         photoId,
@@ -34,8 +34,8 @@ public class AcceptBooking {
         dpSettlementDate;
 
     @Setter @Getter
-    private List<Object> question, additionalCosts;
+    private static List<Object> question, additionalCosts;
 
     @Setter @Getter
-    private boolean ownerAccept, saveCostGroup, useDp, designerRoomId;
+    private static boolean ownerAccept, saveCostGroup, useDp, designerRoomId;
 }

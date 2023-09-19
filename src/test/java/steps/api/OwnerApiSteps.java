@@ -6,6 +6,8 @@ import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.RequestOptions;
 import config.playwright.context.ActiveContext;
+import data.api.AcceptBooking;
+import data.api.CreateBooking;
 import data.mamikos.ApiEndpoints;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -47,6 +49,16 @@ public class OwnerApiSteps {
 
     @When("playwright create accept booking body for owner")
     public void playwrightCreateAcceptBookingBodyForOwner() {
-        System.out.println("playwright create accept booking body for owner");
+        AcceptBooking.setName(CreateBooking.getContactName());
+        AcceptBooking.setPhoneNumber(String.valueOf(CreateBooking.getContactPhone()));
+        AcceptBooking.setGender(CreateBooking.getContactGender());
+        AcceptBooking.setEmail("");
+        AcceptBooking.setOccupation(CreateBooking.getContactJob());
+        AcceptBooking.setMaritalStatus(CreateBooking.isMarried() ? "married" : "single");
+        AcceptBooking.setStartDate(CreateBooking.getCheckIn());
+        AcceptBooking.setRentType(CreateBooking.getRentCountType());
+        AcceptBooking.setParentPhoneNumber("");
+        AcceptBooking.setFixedBilling("");
+        AcceptBooking.setBillingDate("");
     }
 }
