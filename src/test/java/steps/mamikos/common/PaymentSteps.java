@@ -278,12 +278,12 @@ public class PaymentSteps {
 
     @And("tenant pay booking to extended contract using ovo {string}")
     public void tenantPayBookingToExtendedContractUsingOvo(String phoneNumber) {
-        invoice.paymentOVO(phoneNumber);
+        invoice.paymentOvoClosePage(phoneNumber);
     }
 
     @And("tenant pay booking to extended contract using ovo {string} without close the page")
     public void tenantPayBookingToExtendedContractUsingOvoWithoutClosePage(String phoneNumber) {
-        invoice.paymentOvoClosePage(phoneNumber);
+        invoice.paymentOVO(phoneNumber);
     }
 
     @Then("tenant can not sees add on price on payment page")
@@ -350,6 +350,5 @@ public class PaymentSteps {
     @Then("tenant display warning message {string}")
     public synchronized void systemDisplayWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
-
     }
 }
