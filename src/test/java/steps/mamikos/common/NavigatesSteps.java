@@ -16,7 +16,6 @@ import pageobject.common.HomePO;
 import pageobject.pms.LoginPMSPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NavigatesSteps {
