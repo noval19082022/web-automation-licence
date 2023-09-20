@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import utilities.PlaywrightHelpers;
 
-
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class RedirectOwnerSteps {

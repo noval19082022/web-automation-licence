@@ -478,6 +478,27 @@ public class InvoicePO {
                 break;
             }
         } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+    }
+
+    /**
+     * Pay with ovo close page
+     * @param number phone number
+     */
+    public void paymentOvoClosePage(String number) {
+        var maxReload = 0;
+        clickOnPilihPembayaran();
+        playwright.clickOn(txtOVO);
+        noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
+        playwright.clickOnText("Saya Sudah Bayar");
+        playwright.clickOn(sudahBayarButton);
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
         int totalPage = ActiveContext.getActiveBrowserContext().pages().size();
         if(totalPage > 1){
             page.waitForClose(() -> {
