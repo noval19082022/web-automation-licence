@@ -252,7 +252,6 @@ public class PaymentSteps {
     public void tenantPayKostFromRiwayatBookingUsingOvo(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
         invoice.paymentOVO(phoneNumber);
-        ActiveContext.getActiveBrowserContext().pages().get(1).close();
     }
 
     @And("tenant pay kost from riwayat booking using ovo {string} without close the page")

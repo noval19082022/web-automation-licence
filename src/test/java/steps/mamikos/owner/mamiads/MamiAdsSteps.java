@@ -1,13 +1,17 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
-import io.cucumber.java.bs.A;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.mamiads.MamiAdsPO;
 import utilities.PlaywrightHelpers;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class MamiAdsSteps {
     Page page = ActiveContext.getActivePage();
@@ -54,6 +58,27 @@ public class MamiAdsSteps {
     public void userVerifyCountOfRiwayatAdded(int numberAdded) {
         int riwayatAfterBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
         Assert.assertEquals(riwayatAfterBeliSaldo, (riwayatBeforeBeliSaldo+numberAdded), "Count of riwayat doesn't Match");
+    }
+
+    @When("user navigates to mamiads dashboard")
+    public void user_navigates_to_mamiads_dashboard() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
+    @Then("user redirected to guides page mamiAds")
+    public void user_redirected_to_guides_page_mami_ads() {
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE);
+    }
+
+    @Then("tap back button on panduan Mamiads.")
+    public void tap_back_button_on_panduan_mamiads() {
+       mamiAdsPO.clickOnPanduanMamiAdsBackButton();
+    }
+
+    @Then("user redirected to guides page mamiAds from GP")
+    public void user_redirected_to_guides_page_mami_ads_from_gp() {
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE_GP);
     }
 
     @And("user will see title and message on Dalam Proses tab")

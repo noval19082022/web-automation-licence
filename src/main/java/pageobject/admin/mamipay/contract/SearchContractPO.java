@@ -17,10 +17,8 @@ public class SearchContractPO {
     Locator searchButton;
     Locator batalkanContractButton;
     Locator berhentikanContractButton;
-    Locator inputTerminateDate;
     Locator berhentikanContractPopUpButton;
     Locator akhiriContractLink;
-    Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
     private Locator inputTextDetailKerusakan;
@@ -45,9 +43,7 @@ public class SearchContractPO {
         searchInput = page.getByPlaceholder("Search");
         batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
         berhentikanContractButton = page.locator(".tools-contract__btn-danger");
-        inputTerminateDate = page.getByPlaceholder("Masukkan tanggal checkout");
-        berhentikanContractPopUpButton = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Akhiri Kontrak"));
-        selectTerminateDate = page.locator(".skin-green > div:nth-of-type(2) > .xdsoft_timepicker .xdsoft_current");
+        berhentikanContractPopUpButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         akhiriContractLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         akhiriContractButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
@@ -179,12 +175,7 @@ public class SearchContractPO {
     public void clickOnTerminateContractButton() {
         if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
             playwright.acceptDialog(berhentikanContractButton);
-
-            if (inputTerminateDate.isVisible()) {
-                inputTerminateDate.click();
-                selectTerminateDate.click();
-                berhentikanContractPopUpButton.click();
-            }
+            berhentikanContractPopUpButton.click();
             page.waitForSelector(".callout.callout-success");
         }
     }

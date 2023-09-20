@@ -1,9 +1,9 @@
 package pageobject.owner;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
-import com.microsoft.playwright.options.LoadState;
 public class OwnerNavigateToPO {
     private Page page;
     private PlaywrightHelpers playwright;

@@ -31,7 +31,7 @@ public class kostSayaPO {
         this.sendButton = page.locator("//button[normalize-space()='Kirim kode unik']");
         this.verificationTittle = page.getByText("Verifikasi nomor HP");
         this.tenantPhoneNum1Tittle = page.getByTestId("userKostGetOTP-desc").getByText("08*******714");
-        this.tenantPhoneNum2Tittle = page.getByText("08*******230.");
+        this.tenantPhoneNum2Tittle = page.getByText("08*****303.");
         this.alertVerifTittle = page.getByText("Setelah verifikasi berhasil, kamu akan menggunakan nomor 08*******714 di profilm");
         this.otpWordingTittle = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim OTP ke 08*******714"));
         this.sendOtpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim OTP ke 08*******714"));

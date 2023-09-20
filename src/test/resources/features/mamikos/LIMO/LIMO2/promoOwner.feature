@@ -1,6 +1,16 @@
 @regression @promoOwner @LIMO2 @listing-monetization
 Feature: Atur promo owner
 
+  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
+  Scenario: Delete promo owner
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin bangkrupux navigates to Promo Owner
+    And admin search the title promo "Update promo owner AT" on search box
+    And admin delete the promo admin
+
   @TEST_LIMO-2442 @createNewPromo @promoAktif @continue
   Scenario: Create new promo owner
     Given user go to mamikos homepage
@@ -11,8 +21,8 @@ Feature: Atur promo owner
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
     Then verify status promo is "Belum Ada"
-    When owner create new promo owner with title "Judul promo owner AT" for periode promo "tomorrow"
-    Then verify judul promo "Judul promo owner AT"
+    When owner create new promo owner with title "Update promo owner AT" for periode promo "tomorrow"
+    Then verify judul promo "Update promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
   @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
@@ -21,7 +31,7 @@ Feature: Atur promo owner
     Then verify judul promo "Update promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif @continue
+  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
   Scenario: Edit start date promo more than end date promo
     And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
     Then verify warning "Tanggal berakhir tidak boleh sebelum tanggal mulai." is displayed
@@ -33,10 +43,10 @@ Feature: Atur promo owner
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin bangkrupux navigates to Promo Owner
-    And admin search the title promo on search box
-    Then admin verified the promo owner
+    And admin search the title promo "Update promo owner AT" on search box
+    Then admin verified the promo owner "Update promo owner AT"
 
-  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner @continue
+  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner
   Scenario: Check Promo Owner after verified by admin
     Given user go to mamikos homepage
     When user login as owner:
@@ -54,7 +64,7 @@ Feature: Atur promo owner
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin bangkrupux navigates to Promo Owner
-    And admin search the title promo on search box
+    And admin search the title promo "Update promo owner AT" on search box
     Then admin unverified the promo owner
 
   @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
@@ -68,7 +78,7 @@ Feature: Atur promo owner
     And owner atur promo owner
     And verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo @continue
+  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo
   Scenario: Edit valid periode promo
     And owner edit promo kost owner with start date "the day after tomorrow" and end date "the day after tomorrow"
     When owner click edit promo button
@@ -81,5 +91,5 @@ Feature: Atur promo owner
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin bangkrupux navigates to Promo Owner
-    And admin search the title promo on search box
+    And admin search the title promo "Update promo owner AT" on search box
     And admin delete the promo admin

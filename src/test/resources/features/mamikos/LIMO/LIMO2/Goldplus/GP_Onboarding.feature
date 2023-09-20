@@ -1,7 +1,7 @@
 @LIMO2 @regression @gp-onboarding @owner @illbealive
 Feature: Owner Dashboard GP-ONboarding
 
-  @continue
+  @continue @TEST_LIMO-383
   Scenario: [Web Owner][GP-Onboarding] Owner visit “Panduan Fitur di GoldPlus”
     Given user go to mamikos homepage
     When user login as owner:
@@ -115,7 +115,7 @@ Feature: Owner Dashboard GP-ONboarding
       | 2             | Beli Saldo MamiAds                 | Klik “Beli Saldo” pada halaman MamiAds.                        | illustration buy mamiads             |
       | 1             | Kunjungi Menu MamiAds              | Klik Kelola pada halaman utama Mamikos, lalu pilih MamiAds.    | illustration mamiads click           |
 
-  @continue
+  @continue @TEST_LIMO-384
   Scenario: [Web Owner][GP-Onboarding] Owner visit “Panduan Fitur di GoldPlus” and click “Memantau Performa Kos”
     When owner navigates to owner dashboard
     And owner go to panduan gold plus memantau performa kos page

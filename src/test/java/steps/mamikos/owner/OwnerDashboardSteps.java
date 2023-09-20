@@ -241,5 +241,11 @@ public class OwnerDashboardSteps {
     public void user_click_on_saldo_mamiads_button() {
         ownerDashboardPO.clickSaldoMamiAdsButton();
     }
+
+    @When("owner accsess cek properti sekitar")
+    public void owner_accsess_cek_properti_sekitar() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickOnPropertySekitar();
+    }
 }
 

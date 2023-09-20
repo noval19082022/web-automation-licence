@@ -19,6 +19,7 @@ public class MamiAdsPO {
     private Locator messageEmptyFilterText;
     private Locator titleSelesaiRiwayatSaldoText;
     private Locator titleDalamProsesRiwayatSaldoText;
+    private Locator paduanMamiadsBackButton;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
@@ -46,6 +47,7 @@ public class MamiAdsPO {
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
         this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
         this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
+        this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
@@ -146,7 +148,6 @@ public class MamiAdsPO {
     public void handlePopupMamiAds() {
         // Check if the 'Coba Sekarang' button on the popup is visible
         // OR if the 'Beli Saldo' button is not visible
-        playwright.waitTillPageLoaded();
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
             playwright.clickOn(cobaSekarangBtnOnPopUp);
@@ -248,5 +249,13 @@ public class MamiAdsPO {
         playwright.waitTillPageLoaded();
     }
 
+
+    /**
+     * Click on Panduan MamiAds Back Button
+     *
+     */
+    public void clickOnPanduanMamiAdsBackButton() {
+        playwright.clickOn(paduanMamiadsBackButton);
+    }
 }
 

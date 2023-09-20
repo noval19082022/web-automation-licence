@@ -67,6 +67,7 @@ public class InvoiceManualSteps {
         }
 
         admin.NavigateToMamipayMenu("Invoice Manual");
+        playwright.waitTillPageLoaded(10000.000);
         manualInvoice.clickBuatInvoice();
         manualInvoice.inputListingName(listing);
         manualInvoice.inputTenantName(tenant);
@@ -431,7 +432,7 @@ public class InvoiceManualSteps {
     public void admin_clicks_close_button(){
         //set Tanggal
         manualInvoice.clicksCalViewOnUbahStatus();
-        manualInvoice.setTanggalMulai("today");
+        manualInvoice.setTanggalMulai("selected today");
         //set Time
         manualInvoice.setTimeOnUbahStatus("1000");
         manualInvoice.clickClosePopUp();
@@ -454,6 +455,7 @@ public class InvoiceManualSteps {
     public void admin_set_waktu_pembayaran(String time){
         manualInvoice.setTimeOnUbahStatus(time);
         manualInvoice.clicksSimpanOnUbahStatus();
+        manualInvoice.clicksUbahOnUbahStatus();
     }
 
     @Then("Status Invoice is {string} and paid date at {string}, {string}")
@@ -464,7 +466,6 @@ public class InvoiceManualSteps {
             SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
             Date day = new Date();
             String expectedDate = "at "+today.format(day)+", "+time;
-
             Assert.assertTrue(manualInvoice.getPaidTime().contains(expectedDate));
         }
     }

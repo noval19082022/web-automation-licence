@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @BBM5 @BBM-5 @acceptFromChat  @noval123
+@occupancyAndBilling @OB @BBM5 @BBM-5 @acceptFromChat
 Feature: Accept Booking from Chat room
 
   Scenario: Delete contract
@@ -38,11 +38,11 @@ Feature: Accept Booking from Chat room
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | phone prod    | password      |
-      | 085600867992   | 0890867321212 | Bismillah@02     |
+      | 085600867992  | 0890867321212 | Bismillah@02  |
+    And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
-    And user click chat button in top bar owner home page
     Then system display title "Belum bayar sewa pertama" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
