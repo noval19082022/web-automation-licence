@@ -45,8 +45,8 @@ public class MamiAdsPO {
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
-        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done > div > div.transaction-empty-state > div > h4");
-        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads > div > div.transaction-empty-state > div > h4");
+        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
+        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.cobaSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang")).nth(1);
@@ -148,6 +148,7 @@ public class MamiAdsPO {
     public void handlePopupMamiAds() {
         // Check if the 'Coba Sekarang' button on the popup is visible
         // OR if the 'Beli Saldo' button is not visible
+        playwright.waitTillPageLoaded();
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
             playwright.clickOn(cobaSekarangBtnOnPopUp);
@@ -222,6 +223,7 @@ public class MamiAdsPO {
 
     /**
      * Get Title text on Dalam Proses Tab on Riwayat Saldo
+     *
      * @return String title
      */
     public String getTitleDalamProsesText(){

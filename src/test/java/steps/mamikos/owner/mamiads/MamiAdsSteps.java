@@ -61,15 +61,15 @@ public class MamiAdsSteps {
         Assert.assertEquals(riwayatAfterBeliSaldo, (riwayatBeforeBeliSaldo+numberAdded), "Count of riwayat doesn't Match");
     }
 
-    @And("will see title {string} and message {string} on Dalam Proses tab")
-    public void willSeeTitleAndMessageOnDalamProsesTab(String title, String message) {
-        Assert.assertEquals(mamiAdsPO.getTitleDalamProsesText(), title, "Title doesn't match!");
-        Assert.assertTrue(playwright.isTextDisplayed(message), "Message doesn't match!");
+    @And("user will see title and message on Dalam Proses tab")
+    public void willSeeTitleAndMessageOnDalamProsesTab() {
+        Assert.assertEquals(mamiAdsPO.getTitleDalamProsesText(), "Belum Ada Transaksi");
+        Assert.assertTrue(playwright.isTextDisplayed("Transaksi yang masih dalam proses akan muncul di halaman ini."));
     }
 
-    @Then("will see title {string} and message {string} on Selesai tab")
-    public void willSeeTitleAndMessageOnSelesaiTab(String title, String message) {
-        Assert.assertEquals(mamiAdsPO.getTitleSelesaiText(), title, "Title doesn't match!");
-        Assert.assertTrue(playwright.isTextDisplayed(message), "Message doesn't match!");
+    @And("user will see title and message on Selesai tab")
+    public void willSeeTitleAndMessageOnSelesaiTab() {
+        Assert.assertEquals(mamiAdsPO.getTitleSelesaiText(), "Belum Ada Transaksi");
+        Assert.assertTrue(playwright.isTextDisplayed("Transaksi yang sudah selesai akan muncul di halaman ini."));
     }
 }
