@@ -22,7 +22,7 @@ Feature: Atur promo owner
     And owner atur promo owner
     Then verify status promo is "Belum Ada"
     When owner create new promo owner with title "Update promo owner AT" for periode promo "tomorrow"
-    Then verify judul promo "Judul promo owner AT"
+    Then verify judul promo "Update promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
   @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
