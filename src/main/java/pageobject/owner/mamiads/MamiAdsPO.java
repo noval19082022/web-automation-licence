@@ -17,7 +17,6 @@ public class MamiAdsPO {
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
-    private Locator cobaSekarangBtn;
     private Locator titleSelesaiRiwayatSaldoText;
     private Locator titleDalamProsesRiwayatSaldoText;
     //--- Beli Saldo Mamiads Page ----//
@@ -49,7 +48,6 @@ public class MamiAdsPO {
         this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
-        this.cobaSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang")).nth(1);
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
         //--- GP Onboarding Pop - Up ---//
@@ -203,13 +201,6 @@ public class MamiAdsPO {
     public String getMessageText() {
         playwright.waitFor(messageEmptyFilterText);
         return playwright.getText(messageEmptyFilterText);
-    }
-
-    /**
-     * click on Coba Sekarang on mamiads landing page
-     */
-    public void clickOnCobaSekarang() {
-        playwright.clickOn(cobaSekarangBtn);
     }
 
     /**

@@ -8,6 +8,7 @@ import pageobject.owner.OwnerNavigateToPO;
 public class NavigateToOwnerStep {
     Page page = ActiveContext.getActivePage();
     OwnerNavigateToPO ownerNavigate = new OwnerNavigateToPO(page);
+
     @And("user navigate to mamiads history page")
     public void userNavigateToMamiadsHistoryPage() {
         ownerNavigate.navigateToMamiadsHistory();

@@ -37,11 +37,6 @@ public class MamiAdsSteps {
         Assert.assertEquals(mamiAdsPO.getMessageText(), message);
     }
 
-    @And("user click Coba Sekarang on MamiAds landing page")
-    public void userClickOnMamiAdsPage() {
-        mamiAdsPO.clickOnCobaSekarang();
-    }
-
     @And("user verify count of riwayat before beli saldo")
     public void userVerifyCountOfRiwayatBeforeBeliSaldo() {
         riwayatBeforeBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
