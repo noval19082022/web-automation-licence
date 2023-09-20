@@ -146,7 +146,7 @@ public class OwnerDashboardPO {
      */
     public PengajuanSewaPO clickOnPengajuanSewa() {
         playwright.waitFor(pengajuanSewaBtn);
-        playwright.doubleClick(pengajuanSewaBtn);
+        playwright.clickOn(pengajuanSewaBtn);
         return new PengajuanSewaPO(page);
     }
 
