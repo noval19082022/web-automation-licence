@@ -231,6 +231,7 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(gpWidgetButton);
     }
 
