@@ -255,4 +255,9 @@ public class MamifotoSteps {
             page.reload();
         }
     }
+
+    @When("owner click tab panduan area")
+    public void owner_click_tab_panduan_area() {
+        mamifoto.clickOnPanduanArea();
+    }
 }
