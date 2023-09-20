@@ -25,4 +25,4 @@ Feature: Check when accsess prophoto Landing Page
       | 081223344550 | 0          | qwerty123 |
     When tenant navigates to old prophoto page
     Then user go to mamikos homepage
-    And owner should successfully log out
+    And user logs out as a Tenant user

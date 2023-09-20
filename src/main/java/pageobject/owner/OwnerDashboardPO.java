@@ -82,7 +82,7 @@ public class OwnerDashboardPO {
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
-        gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
+        gpWidgetButton = page.locator(".membership-card__title");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatus = page.locator(".membership-card__label");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
@@ -198,6 +198,7 @@ public class OwnerDashboardPO {
       * Click on Mamipoin Button
      */
     public void clickMamipoinButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
     }
 
@@ -230,6 +231,7 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
+        playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(gpWidgetButton);
     }
 
@@ -541,6 +543,7 @@ public class OwnerDashboardPO {
      * Click in order to expand promotion feature
      */
     public void clickToExpandFiturPromosi() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(fiturPromosiExpand);
     }
 

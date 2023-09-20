@@ -17,6 +17,7 @@ public class MamiAdsPO {
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
+    private Locator paduanMamiadsBackButton;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
 
@@ -41,6 +42,7 @@ public class MamiAdsPO {
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
+        this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
 
@@ -194,6 +196,14 @@ public class MamiAdsPO {
     public String getMessageText() {
         playwright.waitFor(messageEmptyFilterText);
         return playwright.getText(messageEmptyFilterText);
+    }
+
+    /**
+     * Click on Panduan MamiAds Back Button
+     *
+     */
+    public void clickOnPanduanMamiAdsBackButton() {
+        playwright.clickOn(paduanMamiadsBackButton);
     }
 }
 
