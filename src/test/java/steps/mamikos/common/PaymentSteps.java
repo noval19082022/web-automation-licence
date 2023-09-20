@@ -251,7 +251,7 @@ public class PaymentSteps {
     @And("tenant pay kost from riwayat booking using ovo {string}")
     public void tenantPayKostFromRiwayatBookingUsingOvo(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
-        invoice.paymentOVO(phoneNumber);
+        invoice.paymentOvoClosePage(phoneNumber);
     }
 
     @And("tenant pay kost from riwayat booking using ovo {string} without close the page")
@@ -281,8 +281,14 @@ public class PaymentSteps {
         invoice.paymentOVO(phoneNumber);
     }
 
+    @And("tenant pay booking to extended contract using ovo {string} without close the page")
+    public void tenantPayBookingToExtendedContractUsingOvoWithoutClosePage(String phoneNumber) {
+        invoice.paymentOvoClosePage(phoneNumber);
+    }
+
     @Then("tenant can not sees add on price on payment page")
     public void tenantCanNotSeesAddOnPriceOnPaymentPage() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
         int basicAmount = invoice.getBasicPrice();
         int adminFee = invoice.getAdminPrice();
         int totalAmount = invoice.getSubTotal();
