@@ -16,6 +16,9 @@ import pageobject.common.HomePO;
 import pageobject.pms.LoginPMSPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -65,8 +68,9 @@ public class NavigatesSteps {
     }
 
     @When("tenant/owner/admin set active page to {int}")
-    public synchronized void tenantSetActivePageTo(int activePage) throws InterruptedException {
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(activePage));
+    public synchronized void tenantSetActivePageTo(int activePage) {
+        List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
+        ActiveContext.setActivePage(listPage.get(activePage));
         playwright.bringPageToView(ActiveContext.getActivePage());
     }
 
