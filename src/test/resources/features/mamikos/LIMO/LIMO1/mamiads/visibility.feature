@@ -51,3 +51,20 @@ Feature: Visibility
     Then user verify title "Rp1.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to pembelian saldo mamiads page
+
+  @TEST_LIMO-297 @TEST_LIMO-298
+  Scenario Outline: Never Purchase MamiAds And Ever Purchase MamiAds, Saldo < 5000 and have active ads the first click will redirect to MamiAds Purchase
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password     |
+      | <phone number> | <phone number> | qwerty123    |
+    Then user verify title "<saldo mamiads>" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
+    When user click on Saldo MamiAds at owner dashboard
+    Then user redirected to pembelian saldo mamiads page
+    When user go back to previous page
+    And user click on Saldo MamiAds at owner dashboard
+    Then user redirected to mamiads page
+    Examples:
+      | phone number  | saldo mamiads |
+      | 089504016010  | Rp3.500       |
+      | 083176408323  | Rp4.000       |
