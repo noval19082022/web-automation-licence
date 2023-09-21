@@ -61,4 +61,19 @@ public class MamiAdsSteps {
     public void user_redirected_to_guides_page_mami_ads_from_gp() {
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE_GP);
     }
+
+    @When("owner see button coba sekarang at header")
+    public void owner_see_button_coba_sekarang_at_header() {
+        mamiAdsPO.isCobaSekarangButtonHeaderisDisplayed();
+    }
+
+    @And("user click question {string}")
+    public void user_click_question(String questionText) throws InterruptedException {
+        mamiAdsPO.clickOnQuestionText(questionText);
+    }
+
+    @Then("user verify answer text {string}")
+    public void user_verify_answer_text(String answerText) {
+        Assert.assertEquals(mamiAdsPO.getAnswerText(answerText), answerText);
+    }
 }

@@ -260,4 +260,9 @@ public class MamifotoSteps {
     public void owner_click_tab_panduan_area() {
         mamifoto.clickOnPanduanArea();
     }
+
+    @When("owner close pop up panduan")
+    public void owner_close_pop_up_panduan() {
+        mamifoto.clickOnCloseBacaPanduan();
+    }
 }
