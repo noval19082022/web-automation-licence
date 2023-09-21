@@ -207,7 +207,7 @@ public class GoldplusSteps {
     @When("owner click {string} button on chatlist")
     public void ownerClickButtonOnChatlist(String buttonTxt) {
         chat.clickChatOwner();
-        playwright.clickOnTextButton(buttonTxt);
+        chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
     @When("owner click {string} button on chatrooms {string}")
@@ -217,7 +217,7 @@ public class GoldplusSteps {
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
         chat.searchChatTenant(tenantName);
-        playwright.clickOnTextButton(buttonTxt);
+        chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
     //------ GP Onboarding ------//
@@ -456,10 +456,5 @@ public class GoldplusSteps {
     public void owner_will_be_redirected_to_invoice_recurring(){
         playwright.waitTillPageLoaded();
         Assert.assertTrue(goldplus.gpPackageText());
-    }
-
-    @Then("owner click option {string} on info untuk anda section")
-    public void ownerClickOptionOnInfoUntukAndaSection(String option) {
-        goldplus.clickOnOptionInfoUntukAnda(option);
     }
 }
