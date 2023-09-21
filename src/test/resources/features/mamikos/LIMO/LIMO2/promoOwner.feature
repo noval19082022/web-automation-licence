@@ -25,12 +25,12 @@ Feature: Atur promo owner
     Then verify judul promo "Update promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
-#  @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
-#  Scenario: Edit promo while status promo menunggu verifikasi
-#    Given owner edit promo kost owner with title "Update promo owner AT"
-#    Then verify judul promo "Update promo owner AT"
-#    And verify status promo is "Menunggu Verifikasi"
-#
+  @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
+  Scenario: Edit promo while status promo menunggu verifikasi
+    Given owner edit promo kost owner with title "Update promo owner AT"
+    Then verify judul promo "Update promo owner AT"
+    And verify status promo is "Menunggu Verifikasi"
+
 #  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
 #  Scenario: Edit start date promo more than end date promo
 #    And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
