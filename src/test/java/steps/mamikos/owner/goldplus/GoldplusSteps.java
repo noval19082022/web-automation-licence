@@ -460,4 +460,8 @@ public class GoldplusSteps {
         Assert.assertTrue(goldplus.gpPackageText());
     }
 
+    @Then("owner click option {string} on info untuk anda section")
+    public void ownerClickOptionOnInfoUntukAndaSection(String option) {
+        goldplus.clickOnOptionInfoUntukAnda(option);
+    }
 }
