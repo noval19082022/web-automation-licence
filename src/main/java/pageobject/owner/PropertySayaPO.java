@@ -10,11 +10,14 @@ import lombok.Setter;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class PropertySayaPO {
     private Page page;
     private PlaywrightHelpers playwright;
     @Setter @Getter private String searchPropertyName;
+    @Setter @Getter public String propertyName;
+
     Locator kostDropdown;
     Locator searchKostTextbox;
     Locator lihatSelengkapnyaButton;
@@ -85,6 +88,20 @@ public class PropertySayaPO {
     Locator apartDropdown;
     Locator selesaiLink;
     Locator descriptionField;
+    Locator kostNameField;
+    Locator roomTypeCheckbox;
+    Locator roomTypeField;
+    Locator kostTypeImage;
+    Locator descKosField;
+    Locator selectYear;
+    Locator noteKosField;
+    Locator uploadPeraturanButton;
+    Locator errorMessage;
+    Locator yearDropdown;
+    Locator ubahFoto;
+    Locator lanjutkanButton;
+    Locator inputLocation;
+    Locator firstLocationSuggestion;
     Locator searchInput;
     Locator firstEditButton;
     Locator alreadyInhabitedCheckbox;
@@ -96,6 +113,20 @@ public class PropertySayaPO {
     Locator errorMessageRoomName;
     Locator errorMessageFloor;
     Locator emptyTable;
+    Locator uploadPhotoKos;
+    Locator mapField;
+    Locator roomSizeProperty;
+    Locator totalRoomField;
+    Locator roomAvailableField;
+    Locator priceMonthlyField;
+    Locator minRentDuractionCheckbox;
+    Locator otherPriceCheckbox;
+    Locator otherKostPriceMonthlyCheckbox;
+    Locator otherKostPriceMonthlyField;
+    Locator minRentDurationDropdown;
+    Locator minRentDurationChoose;
+    Locator deleteKostIcon;
+
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -156,6 +187,18 @@ public class PropertySayaPO {
         apartDropdown = page.getByText("Cari apartemen Anda disini...");
         selesaiLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("SELESAI"));
         descriptionField = page.locator("//textarea[@id='propertyDescription']");
+        kostNameField = page.locator("input[type='text']").first();
+        roomTypeCheckbox = page.locator("//span[@class='bg-c-checkbox__icon']").first();
+        roomTypeField = page.locator("input[type='text']").nth(1);
+        descKosField = page.locator("textarea").first();
+        selectYear = page.locator(".bg-c-select__trigger");
+        noteKosField = page.locator("textarea").nth(1);
+        uploadPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload Peraturan"));
+        errorMessage = page.locator(".images__error");
+        ubahFoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Foto"));
+        lanjutkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        inputLocation = page.locator("//*[@data-testid='mamikosInput']");
+        firstLocationSuggestion = page.locator("//*[@data-testid='suggestionItem']").first();
         searchInput = page.getByPlaceholder("Masukkan nama atau nomor kamar");
         firstEditButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit")).first();
         alreadyInhabitedCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
@@ -165,6 +208,14 @@ public class PropertySayaPO {
         errorMessageRoomName = page.locator(".bg-c-field__message");
         errorMessageFloor = page.getByText("Maks. 50 karakter.");
         emptyTable = page.locator(".is-empty");
+        mapField = page.locator("[src='/_nuxt/img/de2002c.svg']");
+        totalRoomField = page.getByPlaceholder("Jumlah kamar", new Page.GetByPlaceholderOptions().setExact(true));
+        roomAvailableField = page.getByPlaceholder("Jumlah kamar yang kosong");
+        priceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div[@class='bg-c-field']/input[@class='input step-seven__input']");
+        minRentDuractionCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda ingin terapkan minimum durasi sewa? Jangka waktu minimum untuk bisa menyewa kamar kos Anda.")).locator("span");
+        otherPriceCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga sewa selain bulanan")).locator("span");
+        minRentDurationDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Min. 1 Bln dropdown-down"));
+        deleteKostIcon = page.locator("[title='Verify'] > .fa");
     }
 
     /**
@@ -962,6 +1013,160 @@ public class PropertySayaPO {
     }
 
     /**
+     * Input kos name
+     * @param kosName (include random text from property saya steps)
+     */
+    public void inputKosName(String kosName) {
+        playwright.waitTillLocatorIsVisible(kostNameField, 3000.0);
+        playwright.forceFill(kostNameField, kosName);
+    }
+
+    /**
+     * Checklist roomtype
+     * @param roomTypeCheck
+     */
+    public void checkRoomType(String roomTypeCheck) {
+        if (roomTypeCheck.equals("yes")){
+            playwright.clickOn(roomTypeCheckbox);
+        }
+    }
+
+    /**
+     * input room type name
+     * @param roomTypeName
+     *
+     */
+    public void inputRoomTypeName(String roomTypeName) {
+        if(roomTypeCheckbox.isChecked()){
+            playwright.forceFill(roomTypeField, roomTypeName);
+        }
+    }
+
+    /**
+     * Select kost type
+     * @param kosType
+     * e.g putra, putri, campur
+     */
+    public void selectKostType(String kosType) {
+        kostTypeImage = page.locator("[alt='type-kost-"+ kosType +"']");
+        playwright.clickOn(kostTypeImage);
+    }
+
+    /**
+     * Input description kos
+     * @param descKos
+     *
+     */
+    public void inputDescKos(String descKos) {
+        playwright.forceFill(descKosField, Objects.requireNonNullElse(descKos, ""));
+    }
+
+    /**
+     * Select the year of build kos
+     * @param buildKos
+     *
+     */
+    public void selectBuildKos(String buildKos) {
+        playwright.clickOn(selectYear);
+        yearDropdown = page.locator("a").filter(new Locator.FilterOptions().setHasText(buildKos));
+        playwright.waitTillLocatorIsVisible(yearDropdown);
+        playwright.clickOn(yearDropdown);
+    }
+
+    /**
+     * Input other note on data kos
+     * @param otherNote
+     *
+     */
+    public void inputOtherNote(String otherNote) {
+        playwright.forceFill(noteKosField, Objects.requireNonNullElse(otherNote, ""));
+    }
+
+    /**
+     * Click atur peraturan button
+     *
+     *
+     */
+    public void clickOnAturPeraturanKos() {
+        playwright.clickOnTextButton("Atur Peraturan");
+    }
+
+    /**
+     * Check 1 of the kost rule
+     * @param rule
+     */
+    public void clickKosRulesCheckbox(String rule) {
+        playwright.clickOnText(rule);
+    }
+
+    /**
+     * Upload the invalid aturan kos
+     *
+     *
+     */
+    public void uploadInvalidAturanKos() {
+        String imagePath = "src/main/resources/images/mamikos.gif";
+        FileChooser fileChooser = page.waitForFileChooser(() -> uploadPeraturanButton.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(uploadPeraturanButton);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Get error message upload foto
+     * @return errorMessage
+     */
+    public String getErrorUpload() {
+        return playwright.getText(errorMessage).replaceAll("close  error-round-glyph \\s+", "");
+    }
+
+    /**
+     * Upload valid aturan kos
+     *
+     *
+     */
+    public void uploadValidAturanKos() {
+        String imagePath = "src/main/resources/images/aturan-kos.png";
+        FileChooser fileChooser = page.waitForFileChooser(() -> ubahFoto.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(ubahFoto);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * check error upload visible or no
+     * @return errorMessage
+     *
+     */
+    public boolean isErrorUploadDisappear() {
+        return playwright.isLocatorVisibleAfterLoad(errorMessage, 3000.0);
+    }
+
+    /**
+     * CLick Lanjutkan button from data kos to alamat kos
+     * Allow the geolocation permission
+     *
+     */
+    public void allowLocation() {
+        playwright.acceptDialog(lanjutkanButton);
+        playwright.hardWait(5000.0);
+    }
+
+    /**
+     * Input location kos
+     * @param keyLocation
+     * select the first location suggestion
+     *
+     */
+    public void inputLocationKos(String keyLocation) {
+        page.reload();
+        playwright.clickOn(inputLocation);
+        playwright.realKeyboardType(keyLocation);;
+        playwright.hardWait(10000.0);
+        playwright.clickOn(firstLocationSuggestion);
+    }
+
+    /**
      * Insert text to search bar in room allotment and hit enter
      * @param text is text we want to insert
      */
@@ -1054,5 +1259,152 @@ public class PropertySayaPO {
      */
     public boolean isTableEmpty() {
         return playwright.waitTillLocatorIsVisible(emptyTable);
+    }
+
+    /**
+     * Click Lanjutkan button (without access geolocation permission)
+     *
+     */
+    public void clickOnLanjutkan() {
+        playwright.waitTillLocatorIsVisible(lanjutkanButton);
+        playwright.clickOn(lanjutkanButton);
+    }
+
+    /**
+     * upload invalid photo kos
+     * @param photoName
+     *
+     */
+    public void uploadInvalidPhotoKos(String photoName) {
+        String imagePath = "src/main/resources/images/mamikos.gif";
+        uploadPhotoKos = page.getByText("camera + Tambah foto "+photoName);
+        FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(uploadPhotoKos);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Upload valid photo kos
+     *
+     *
+     */
+    public void uploadValidPhotoKos() {
+        String imagePath = "src/main/resources/images/upload5Mb.jpg";
+        FileChooser fileChooser = page.waitForFileChooser(() -> ubahFoto.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(ubahFoto);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * select room size
+     * @param roomSize
+     *
+     */
+    public void selectRoomSize(String roomSize) {
+        roomSizeProperty = page.locator("//span[.='"+ roomSize +"']");
+        playwright.clickOn(roomSizeProperty);
+    }
+
+    /**
+     * Input total room
+     * @param totalRoom
+     *
+     */
+    public void inputTotalRoom(String totalRoom) {
+        playwright.forceFill(totalRoomField, totalRoom);
+    }
+
+    /**
+     * input room available
+     * @param roomAvailable
+     *
+     */
+    public void inputRoomAvailable(String roomAvailable) {
+        playwright.forceFill(roomAvailableField, roomAvailable);
+    }
+
+    /**
+     * Input monthly price
+     * @param monthlyPrice
+     *
+     */
+    public void inputMonthyPrice(String monthlyPrice) {
+        playwright.clickOn(priceMonthlyField);
+        playwright.realKeyboardType(monthlyPrice);
+        playwright.pressKeyboardKey("Tab");
+    }
+
+    /**
+     * Select minimum rent duration
+     * @param minRentDuration
+     * @param min_rent_duration
+     *
+     */
+    public void selectMinRentDuration(String minRentDuration, String min_rent_duration) {
+        minRentDurationChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(min_rent_duration));
+        if (minRentDuration.equals("yes")){
+            playwright.clickOn(minRentDuractionCheckbox);
+            playwright.clickOn(minRentDurationDropdown);
+            playwright.clickOn(minRentDurationChoose);
+        }
+    }
+
+    /**
+     * checklist the other price
+     * @param checkOtherPrice
+     *
+     */
+    public void selectOtherPrice(String checkOtherPrice) {
+        if (checkOtherPrice.equals("yes")){
+            playwright.clickOn(otherPriceCheckbox);
+        }
+    }
+
+    /**
+     * Input other price
+     * @param priceType
+     * @param otherPrice
+     * @param index
+     * eg. harga per hari, harga per minggu, per 3 bulan, per 6 bulan, per tahun
+     *
+     */
+    public void inputOtherPrice(String priceType, String otherPrice, int index) {
+        otherKostPriceMonthlyCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga Per " + priceType)).locator("span");
+        otherKostPriceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div["+ index +"]/div[@class='bg-c-field']/input[@class='input step-seven__input']");
+
+        playwright.clickOn(otherKostPriceMonthlyCheckbox);
+        playwright.clickOn(otherKostPriceMonthlyField);
+        playwright.realKeyboardType(otherPrice);
+        playwright.pressKeyboardKey("Tab");
+    }
+
+    /**
+     * Click Selesai button for add kos
+     *
+     *
+     */
+    public void clickOnSelesaiSubmit() {
+        playwright.clickOnTextButton("Selesai");
+    }
+
+    /**
+     * Waiting the page loaded
+     *
+     *
+     */
+    public void waitPageLoaded() {
+        playwright.waitTillPageLoaded(10000.0);
+    }
+
+    /**
+     * Delete kos owner
+     *
+     *
+     */
+    public void deleteKosOwner() {
+        playwright.forceClickOn(deleteKostIcon);
+        playwright.acceptDialog(deleteKostIcon);
     }
 }

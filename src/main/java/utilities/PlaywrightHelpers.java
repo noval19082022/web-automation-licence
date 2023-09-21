@@ -212,7 +212,7 @@ public class PlaywrightHelpers {
      * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
-        page.onceDialog(Dialog::accept);
+        page.onDialog(Dialog::accept);
         locator.click();
     }
     //----- Action Part ----\\

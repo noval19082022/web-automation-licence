@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
 import utilities.JavaHelpers;
@@ -25,6 +26,7 @@ public class PropertySayaSteps {
     private String threeMonthlyPrice = null;
     private String sixMonthlyPrice = null;
     private String yearlyPrice = null;
+    private String kosNamePrefix;
 
 
     @And("owner search kost {string} on property saya page")
@@ -433,6 +435,69 @@ public class PropertySayaSteps {
         propertySaya.clickOnSelesaiButton();
     }
 
+    @And("owner fills valid data kos as expected")
+    public void ownerFillsValidDataKosAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        int length = 8;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        kosNamePrefix = table.get(0).get("kos name") + " "+ generatedString.toUpperCase();
+        propertySaya.inputKosName(kosNamePrefix);
+        propertySaya.setPropertyName(kosNamePrefix);
+        System.out.println("SET: "+ propertySaya.getPropertyName());
+        propertySaya.checkRoomType(table.get(0).get("room type check"));
+        propertySaya.inputRoomTypeName(table.get(0).get("room type name"));
+        propertySaya.selectKostType(table.get(0).get("kos type"));
+        propertySaya.inputDescKos(table.get(0).get("description kos"));
+        propertySaya.selectBuildKos(table.get(0).get("build kos"));
+        propertySaya.inputOtherNote(table.get(0).get("other note"));
+
+       }
+
+    @And("owner set rules kos:")
+    public void ownerSetRulesKos(List<String> rules) {
+        propertySaya.clickOnAturPeraturanKos();
+        for (String rule : rules) {
+            propertySaya.clickKosRulesCheckbox(rule);
+        }
+    }
+
+    @And("owner upload rule kos")
+    public void ownerUploadRuleKos() {
+        propertySaya.uploadInvalidAturanKos();
+    }
+
+    @Then("verify warning upload gagal")
+    public void verifyWarningUploadGagal() {
+        Assert.assertEquals(propertySaya.getErrorUpload(), "Upload Gagal Format foto tidak didukung", "Error doesn't match!");
+    }
+
+    @When("owner upload valid rule kos")
+    public void ownerUploadValidRuleKos() {
+        propertySaya.uploadValidAturanKos();
+    }
+
+    @Then("verify warning upload gagal disappear")
+    public void verifyWarningUploadGagalDisappear() {
+        Assert.assertFalse(propertySaya.isErrorUploadDisappear(), "Error upload alredy displayed");
+    }
+
+    @And("owner accept know the location")
+    public void ownerAcceptKnowTheLocation() {
+        propertySaya.allowLocation();
+    }
+
+    @And("owner input address is {string}")
+    public void ownerInputAddressIs(String keyLocation) {
+        propertySaya.inputLocationKos(keyLocation);
+    }
+
+    @When("owner click Lanjutkan for input kos address")
+    public void ownerClickLanjutkanForInputKosAddress() {
+        propertySaya.allowLocation();
+    }
+
     @When("user enter text {string} on search bar in room allotment and hit enter")
     public void user_enter_text_on_search_bar_in_room_allotment_and_hit_enter(String text) {
         propertySaya.searchNameOrRoomNo(text);
@@ -489,4 +554,69 @@ public class PropertySayaSteps {
         Assert.assertTrue(propertySaya.isTableEmpty(), "Table is not empty");
     }
 
+    @And("owner click lanjutkan button for next steps")
+    public void ownerClickLanjutkanButtonForNextSteps() {
+        propertySaya.clickOnLanjutkan();
+    }
+
+    @And("owner invalid upload photo {string}")
+    public void ownerInvalidUploadPhoto(String photoName) {
+        propertySaya.uploadInvalidPhotoKos(photoName);
+    }
+
+    @When("owner valid upload photo kos")
+    public void ownerValidUploadPhotoKos() {
+        propertySaya.uploadValidPhotoKos();
+    }
+
+    @And("owner select size room {string}")
+    public void ownerSelectSizeRoom(String roomSize) {
+        propertySaya.selectRoomSize(roomSize);
+    }
+
+    @And("owner input total room and room available as expected")
+    public void ownerInputTotalRoomAndRoomAvailableAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.inputTotalRoom(table.get(0).get("total room"));
+        propertySaya.inputRoomAvailable(table.get(0).get("room available"));
+    }
+
+    @And("owner input the price room as expected")
+    public void ownerInputThePriceRoomAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
+        propertySaya.selectMinRentDuration(table.get(0).get("check min rent duration"), table.get(0).get("min rent duration"));
+        propertySaya.selectOtherPrice(table.get(0).get("check other price"));
+            propertySaya.inputOtherPrice("Hari", table.get(0).get("daily price"), 1);
+            propertySaya.inputOtherPrice("Minggu", table.get(0).get("weekly price"), 2);
+            propertySaya.inputOtherPrice("3 Bulan", table.get(0).get("three monthly price"), 3);
+            propertySaya.inputOtherPrice("6 Bulan", table.get(0).get("six monthly price"), 4);
+            propertySaya.inputOtherPrice("Tahun", table.get(0).get("yearly price"), 5);
+    }
+
+    @And("owner click done in success page")
+    public void ownerClickDoneInSuccessPage() {
+        propertySaya.clickOnSelesaiSubmit();
+    }
+
+    @Then("user see kos with valid name, status {string} and type {string}")
+    public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
+        propertySaya.waitPageLoaded();
+        System.out.println("AUTOMATION: "+ propertySaya.getPropertyName());
+        Assert.assertEquals(propertySaya.getFirstKosName(),propertySaya.getPropertyName(),  "Kos name is wrong");
+        Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
+        Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
+    }
+
+    @Then("check setter getter")
+    public void checkSetterGetter() {
+        System.out.println("SET 3: "+ propertySaya.getPropertyName());
+    }
+
+    @And("user delete the kos in admin kos owner")
+    public void userDeleteTheKosInAdminKosOwner() {
+        propertySaya.deleteKosOwner();
+    }
 }

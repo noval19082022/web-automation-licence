@@ -61,6 +61,7 @@ public class OwnerDashboardPO {
     Locator mamiadsSubtitle;
     Locator mamiadsLihatDisini;
     Locator saldoMamiAdsButton;
+    Locator noProperty;
     private Locator fiturPromosiExpand;
 
     public OwnerDashboardPO(Page page) {
@@ -113,6 +114,7 @@ public class OwnerDashboardPO {
         mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");
         saldoMamiAdsButton = page.locator(".mamiads-card");
         fiturPromosiExpand = page.getByText("Fitur Promosi");
+        noProperty = page.locator(".no-property");
     }
 
     /**
@@ -571,5 +573,52 @@ public class OwnerDashboardPO {
      */
     public void clickSaldoMamiAdsButton() {
         playwright.clickOn(saldoMamiAdsButton);
+    }
+
+    /**
+     * Click Waktunya Mengelola Properti
+     * @param action
+     *
+     */
+    public void clickOnWaktunyaMengelolaProperti(String action) {
+        Locator element = page.locator("//p[contains(., '"+ action +"')]");
+        playwright.pageScrollUntilElementIsVisible(element);
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Validate have active kos
+     * @return noProperty
+     *
+     */
+    public boolean isNoHaveActiveKos() {
+        return playwright.isLocatorVisibleAfterLoad(noProperty, 2000.0);
+    }
+
+    /**
+     * Click Tambah button kos
+     *
+     *
+     */
+    public void clickOnTambahKos() {
+        playwright.clickOnTextButton("Tambah Kos", 3000.0);
+    }
+
+    /**
+     * Click tambah kos baru button
+     *
+     *
+     */
+    public void clickOnTambahKosBaru() {
+        playwright.clickOnText("Tambah Kos Baru", 3000.0);
+    }
+
+    /**
+     * Verify is tambah kos visible
+     * @return boolean true false
+     *
+     */
+    public boolean isTambahKosVisible() {
+        return playwright.isButtonWithTextDisplayed("Tambah Kos");
     }
 }
