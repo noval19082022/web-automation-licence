@@ -1,4 +1,4 @@
-@regression @promoOwner @LIMO21 @listing-monetization
+@regression @promoOwner @LIMO2 @listing-monetization
 Feature: Atur promo owner
 
   @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
@@ -31,65 +31,65 @@ Feature: Atur promo owner
     Then verify judul promo "Update promo owner AT"
     And verify status promo is "Menunggu Verifikasi"
 
-#  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
-#  Scenario: Edit start date promo more than end date promo
-#    And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
-#    Then verify warning "Tanggal berakhir tidak boleh sebelum tanggal mulai." is displayed
-#
-#  @TEST_LIMO-4244 @verifiedPromoOwner @promoAktif
-#  Scenario: Verifikasi Promo Owner from admin
-#    Given admin go to mamikos bangkrupux admin
-#    When admin login to bangkrupux:
-#      | email stag                   | email prod                   |password  |
-#      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-#    And admin bangkrupux navigates to Promo Owner
-#    And admin search the title promo "Update promo owner AT" on search box
-#    Then admin verified the promo owner "Update promo owner AT"
-#
-#  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner
-#  Scenario: Check Promo Owner after verified by admin
-#    Given user go to mamikos homepage
-#    When user login as owner:
-#      | phone stag   | password   |
-#      | 08713399866  | qwerty123  |
-#    And owner navigates to property saya kos
-#    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
-#    And owner atur promo owner
-#    And verify status promo is "Aktif"
-#
-#  @TEST-LIMO-4245 @unvefiedPromoOwner
-#  Scenario: Admin unverified promo
-#    Given admin go to mamikos bangkrupux admin
-#    When admin login to bangkrupux:
-#      | email stag                   | email prod                   |password  |
-#      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-#    And admin bangkrupux navigates to Promo Owner
-#    And admin search the title promo "Update promo owner AT" on search box
-#    Then admin unverified the promo owner
-#
-#  @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
-#  Scenario: Check Promo Owner after unverified by admin
-#    Given user go to mamikos homepage
-#    When user login as owner:
-#      | phone stag   | password   |
-#      | 08713399866  | qwerty123  |
-#    And owner navigates to property saya kos
-#    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
-#    And owner atur promo owner
-#    And verify status promo is "Menunggu Verifikasi"
-#
-#  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo
-#  Scenario: Edit valid periode promo
-#    And owner edit promo kost owner with start date "the day after tomorrow" and end date "the day after tomorrow"
-#    When owner click edit promo button
-#    And verify status promo is "Menunggu Verifikasi"
-#
-#  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
-#  Scenario: Delete promo owner
-#    Given admin go to mamikos bangkrupux admin
-#    When admin login to bangkrupux:
-#      | email stag                   | email prod                   |password  |
-#      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-#    And admin bangkrupux navigates to Promo Owner
-#    And admin search the title promo "Update promo owner AT" on search box
-#    And admin delete the promo admin
+  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
+  Scenario: Edit start date promo more than end date promo
+    And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
+    Then verify warning "Tanggal berakhir tidak boleh sebelum tanggal mulai." is displayed
+
+  @TEST_LIMO-4244 @verifiedPromoOwner @promoAktif
+  Scenario: Verifikasi Promo Owner from admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin bangkrupux navigates to Promo Owner
+    And admin search the title promo "Update promo owner AT" on search box
+    Then admin verified the promo owner "Update promo owner AT"
+
+  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner
+  Scenario: Check Promo Owner after verified by admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 08713399866  | qwerty123  |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
+    And owner atur promo owner
+    And verify status promo is "Aktif"
+
+  @TEST-LIMO-4245 @unvefiedPromoOwner
+  Scenario: Admin unverified promo
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin bangkrupux navigates to Promo Owner
+    And admin search the title promo "Update promo owner AT" on search box
+    Then admin unverified the promo owner
+
+  @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
+  Scenario: Check Promo Owner after unverified by admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 08713399866  | qwerty123  |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
+    And owner atur promo owner
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo
+  Scenario: Edit valid periode promo
+    And owner edit promo kost owner with start date "the day after tomorrow" and end date "the day after tomorrow"
+    When owner click edit promo button
+    And verify status promo is "Menunggu Verifikasi"
+
+  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
+  Scenario: Delete promo owner
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And admin bangkrupux navigates to Promo Owner
+    And admin search the title promo "Update promo owner AT" on search box
+    And admin delete the promo admin
