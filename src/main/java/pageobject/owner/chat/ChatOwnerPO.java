@@ -113,10 +113,9 @@ public class ChatOwnerPO {
 
     /**
      * Search Chat
-     *
-     * @throws InterruptedException
      */
     public void searchChatTenant(String inputText) {
+        playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'"+inputText+"')])[1]");
         searchChat.fill(inputText);
         if (nantiSajaButton.isVisible()){
