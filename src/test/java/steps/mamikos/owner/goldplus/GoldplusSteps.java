@@ -216,9 +216,7 @@ public class GoldplusSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
-        playwright.hardWait(3000);
-        playwright.clickOnTextButton(tenantName);
-        playwright.hardWait(3000);
+        chat.searchChatTenant(tenantName);
         playwright.clickOnTextButton(buttonTxt);
     }
 
