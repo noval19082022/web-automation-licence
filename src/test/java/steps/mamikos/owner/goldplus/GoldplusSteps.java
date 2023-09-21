@@ -216,9 +216,7 @@ public class GoldplusSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
-        playwright.hardWait(3000);
-        playwright.clickOnTextButton(tenantName);
-        playwright.hardWait(3000);
+        chat.searchChatTenant(tenantName);
         playwright.clickOnTextButton(buttonTxt);
     }
 
@@ -460,4 +458,8 @@ public class GoldplusSteps {
         Assert.assertTrue(goldplus.gpPackageText());
     }
 
+    @Then("owner click option {string} on info untuk anda section")
+    public void ownerClickOptionOnInfoUntukAndaSection(String option) {
+        goldplus.clickOnOptionInfoUntukAnda(option);
+    }
 }
