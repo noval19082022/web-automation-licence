@@ -1,13 +1,21 @@
 @newowner-dashboard @regression @LIMO2 @listing-monetization @ownerDashboardGP
 Feature: Owner Dashboard GP
 
+  @resetGP
+  Scenario: delete or reset data GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then user wants to reset Goldplus for owner with phone number "088112233454"
+
   @TEST_LIMO-1723
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and quota
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    Then owner click "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
+    Then owner click option "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking." on info untuk anda section
     And user will see that the text "Sisa kuota mingguan" is displayed
     And user will see that the text "1 chat room" is displayed
     When owner navigates to owner dashboard
@@ -21,9 +29,9 @@ Feature: Owner Dashboard GP
       | 088112233452 | 0          | qwerty123 |
     Then user will see that the text "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat." is displayed
 
-  @checkRedirectionInfoUntukAndaDoesntHaveQuota @continue
+  @checkRedirectionInfoUntukAndaDoesntHaveQuota
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
-    When owner click "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat. "
+    When owner click option "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas" on info untuk anda section
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages"
     And owner should successfully log out
 
@@ -35,9 +43,9 @@ Feature: Owner Dashboard GP
       | 088112233453 | 0          | qwerty123 |
     Then user will see that the text "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! " is displayed
 
-  @checkRedirectionInfoUntukAndaDoesntHaveQuota @continue
+  @checkRedirectionInfoUntukAndaDoesntHaveQuota
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
-    When owner click "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! "
+    When owner click option "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! chevron-right" on info untuk anda section
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages?redirection_source=infountukanda"
     And owner should successfully log out
 
@@ -54,7 +62,7 @@ Feature: Owner Dashboard GP
     When owner navigates to "/"
     * owner click close icon pop up
     Then validate that owner have "GoldPlus 1"
-    When owner click "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus."
+    When owner click option "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus. chevron-r" on info untuk anda section
     Then verify ftue "displayed"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."
 
@@ -64,7 +72,7 @@ Feature: Owner Dashboard GP
     * user click close icon tooltip broadcast chat on chatlist
     Then verify label goldplus on chatlist
 
-    @resetGP
+  @resetGP
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
