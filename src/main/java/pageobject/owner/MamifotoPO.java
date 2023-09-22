@@ -35,6 +35,7 @@ public class MamifotoPO {
     Locator contentFAQfirstList;
     Locator riwayatPaketButton;
     Locator panduanAreaClick;
+    Locator detailTitle;
 
 
     //Locator Mamifoto at Select Package
@@ -638,6 +639,16 @@ public class MamifotoPO {
      */
     public void clickOnPanduanArea() {
         playwright.clickOn(panduanAreaClick);
+    }
+
+    /**
+     * Check title and detail title On Panduan Persiapan Foto or Video
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean titleOnPanduanAndAreaAppear(String titleAndDetailText) {
+        detailTitle = page.getByText(titleAndDetailText);
+        playwright.waitTillLocatorIsVisible(detailTitle);
+        return playwright.waitTillLocatorIsVisible(detailTitle);
     }
 
 }
