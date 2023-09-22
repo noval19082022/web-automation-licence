@@ -19,6 +19,7 @@ import utilities.ApiPlaywrightHelpers;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,16 +50,39 @@ public class OwnerApiSteps {
 
     @When("playwright create accept booking body for owner")
     public void playwrightCreateAcceptBookingBodyForOwner() {
+        AcceptBooking.setRoomId(1);
         AcceptBooking.setName(CreateBooking.getContactName());
         AcceptBooking.setPhoneNumber(String.valueOf(CreateBooking.getContactPhone()));
+        AcceptBooking.setRoomNumber(1);
         AcceptBooking.setGender(CreateBooking.getContactGender());
         AcceptBooking.setEmail("");
         AcceptBooking.setOccupation(CreateBooking.getContactJob());
-        AcceptBooking.setMaritalStatus(CreateBooking.isMarried() ? "married" : "single");
+        AcceptBooking.setQuestion(Collections.singletonList(""));
+        AcceptBooking.setMaritalStatus(String.valueOf(CreateBooking.isMarried()));
         AcceptBooking.setStartDate(CreateBooking.getCheckIn());
         AcceptBooking.setRentType(CreateBooking.getRentCountType());
+        AcceptBooking.setAmount(10000000);
+        AcceptBooking.setDuration(1);
+        AcceptBooking.setPhotoId(1);
+        AcceptBooking.setParentName("");
         AcceptBooking.setParentPhoneNumber("");
+        AcceptBooking.setPhotoIdentifierId(null);
+        AcceptBooking.setPhotoDocumentId(null);
         AcceptBooking.setFixedBilling("");
         AcceptBooking.setBillingDate("");
+        AcceptBooking.setFirstAmount(0);
+        AcceptBooking.setDepositAmount(0);
+        AcceptBooking.setFineAmount(0);
+        AcceptBooking.setFineMaximumLength("");
+        AcceptBooking.setFineDurationType("");
+        AcceptBooking.setExistingTenant("");
+        AcceptBooking.setOwnerAccept(true);
+        AcceptBooking.setAdditionalCosts(Collections.emptyList());
+        AcceptBooking.setSaveCostGroup(false);
+        AcceptBooking.setUseDp(false);
+        AcceptBooking.setDpAmount(0);
+        AcceptBooking.setDpDate(CreateBooking.getCheckIn());
+        AcceptBooking.setDpSettlementDate(CreateBooking.getCheckIn());
+        AcceptBooking.setDesignerRoomId(309175);
     }
 }

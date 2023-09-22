@@ -15,14 +15,18 @@ public class AcceptBooking {
         maritalStatus,
         startDate,
         rentType,
+        parentName,
         parentPhoneNumber,
         fixedBilling,
         billingDate,
         fineMaximumLength,
+        fineDurationType,
         existingTenant,
-        dpAmount;
+        dpDate,
+    dpSettlementDate;
     @Setter @Getter
-    private static int roomNumber,
+    private static Integer roomId,
+        roomNumber,
         amount,
         duration,
         photoId,
@@ -31,11 +35,12 @@ public class AcceptBooking {
         firstAmount,
         depositAmount,
         fineAmount,
-        dpSettlementDate;
+        dpAmount,
+    designerRoomId;
 
     @Setter @Getter
     private static List<Object> question, additionalCosts;
 
     @Setter @Getter
-    private static boolean ownerAccept, saveCostGroup, useDp, designerRoomId;
+    private static boolean ownerAccept, saveCostGroup, useDp;
 }
