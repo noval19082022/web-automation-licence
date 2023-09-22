@@ -360,6 +360,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderHistoryisAppear() {
+        playwright.waitTillDomContentLoaded(5000.0);
         return headerRiwayatPembelian.isVisible();
     }
 
