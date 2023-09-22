@@ -106,7 +106,7 @@ public class HomePO {
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya"));
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
-        this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
+        this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator(".rc-photo__cover").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
@@ -327,8 +327,8 @@ public class HomePO {
      *
      * @return Tenant Profile Picture
      */
-    public boolean isTenantProfilePictureDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(userPhoto, 5.0);
+    public void isTenantProfilePictureDisplayed() {
+        playwright.assertVisible(userPhoto.or(noUserPhoto));
     }
 
     /**
