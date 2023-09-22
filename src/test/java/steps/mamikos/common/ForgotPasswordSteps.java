@@ -123,4 +123,9 @@ public class ForgotPasswordSteps {
     public void invalid_otp_message(String message) {
         Assert.assertTrue(forgotPassword.isMessageAppear(message), "Message is not equal to " + message);
     }
+
+    @And("user click on lupa password?")
+    public void click_on_lupa_password() {
+        forgotPassword.clickOnLupaPassword();
+    }
 }

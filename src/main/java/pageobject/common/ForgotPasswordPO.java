@@ -14,6 +14,7 @@ public class ForgotPasswordPO {
     private Locator pemilikKostBtn;
     private Locator lupaPasswordBtn;
     private Locator inputPhoneNumber;
+    private Locator inputPhoneNumberTenant;
     private Locator pilihMethodeVerifikasiBtn;
     private Locator sendOtpBySMSBtn;
     private Locator sendOtpByWABtn;
@@ -31,6 +32,7 @@ public class ForgotPasswordPO {
         this.pemilikKostBtn = page.getByTestId("pemilikKosButton");
         this.lupaPasswordBtn = page.getByText("Lupa password?");
         this.inputPhoneNumber = page.getByPlaceholder("Masukkan sesuai yang Anda daftarkan");
+        this.inputPhoneNumberTenant = page.getByPlaceholder("Masukkan sesuai yang kamu daftarkan");
         this.pilihMethodeVerifikasiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih metode verifikasi"));
         this.sendOtpBySMSBtn = page.getByTestId("selectOtpSms");
         this.sendOtpByWABtn = page.getByTestId("selectOtpWhatsApp");
@@ -60,7 +62,7 @@ public class ForgotPasswordPO {
      * @input String phone number
      */
     public void fillPhoneNumber(String PhoneNumber) {
-        inputPhoneNumber.fill(PhoneNumber);
+        (inputPhoneNumber.or(inputPhoneNumberTenant)).fill(PhoneNumber);
     }
 
     /**
