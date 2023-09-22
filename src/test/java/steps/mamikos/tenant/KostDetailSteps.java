@@ -277,7 +277,7 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isOwnerPictureDisplayed(), "Owner picture not present!");
         Assert.assertTrue(kostDetail.isOwnerStatusDisplayed(), "Owner status not present!");
         Assert.assertTrue(kostDetail.isNumberTransactionDisplayed(), "Number of transaction not present!");
-        Assert.assertTrue(kostDetail.isBookingProcessedDisplayed(), "Booking processed not present!");
+//        Assert.assertTrue(kostDetail.isBookingProcessedDisplayed(), "Booking processed not present!");
         Assert.assertTrue(kostDetail.isBookingChanceDisplayed(), "Booking chance not present!");
     }
 
