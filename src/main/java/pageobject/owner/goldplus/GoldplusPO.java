@@ -169,8 +169,9 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.hardWait(3000);
-        playwright.clickOnText(infoUntukAndaMessage);
+        playwright.waitTillPageLoaded(5000.0);
+        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.clickOn(infoUntukAndaOption);
     }
 
     /**
@@ -325,14 +326,5 @@ public class GoldplusPO {
         playwright.hardWait(3000);
         playwright.waitTillLocatorIsVisible(gpPackageText);
         return gpPackageText.isVisible();
-    }
-
-    /**
-     * Click option info untuk anda section on home page owner
-     */
-    public void clickOnOptionInfoUntukAnda(String option){
-        playwright.waitTillPageLoaded(5000.0);
-        infoUntukAndaOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(option));
-        playwright.clickOn(infoUntukAndaOption);
     }
 }

@@ -10,49 +10,49 @@ Feature: Check content Mamifoto
       | 082233545511 | 0          | 12345678 |
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
-    And owner will see that the text "Listing Kos Tampil Memikat dengan MamiFoto" is displayed
-    And owner will see that the text "Paket foto dan video profesional yang mampu meningkatkan daya tarik properti Anda. Kos makin menarik, bisnis pun makin naik." is displayed
-    And owner will see that the text "Manfaat MamiFoto untuk Anda" is displayed
-    And owner will see that the text "Pengambilan Foto Berkualitas" is displayed
-    And owner will see that the text "Foto dan video yang dihasilkan menggambarkan kondisi properti Anda dengan baik." is displayed
-    And owner will see that the text "Hasil Diupload Tim Mamikos" is displayed
-    And owner will see that the text "Foto dan video yang ditayangkan adalah yang telah diseleksi dan disesuaikan untuk bisnis Anda." is displayed
-    And owner will see that the text "Peningkatan Kinerja Listing" is displayed
-    And owner will see that the text "Pemilik kos yang memasang foto profesional berkesempatan dapat kenaikan jumlah klik dan sewa." is displayed
-    And owner will see that the text "Proses Menggunakan MamiFoto" is displayed
-    And owner will see that the text "Pesan MamiFoto" is displayed
-    And owner will see that the text "Ambil paket yang sesuai dengan kebutuhan Anda." is displayed
-    And owner will see that the text "Buat Janji dengan Fotografer" is displayed
-    And owner will see that the text "Kami akan menghubungi untuk menentukan jadwal foto di properti Anda." is displayed
-    And owner will see that the text "Foto dan Video di-upload Mamikos" is displayed
-    And owner will see that the text "Setelah sesi foto, hasil akan tayang di listing Anda dalam waktu maks 2 minggu." is displayed
-    And owner will see that the text "Persiapan Kos Sebelum Difoto" is displayed
-    And owner will see that the text "Sembari menunggu fotografer datang, yuk simak apa saja yang harus Anda persiapkan sebelum sesi foto dimulai." is displayed
+    And owner will see title and detail title "Listing Kos Tampil Memikat dengan MamiFoto" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Paket foto dan video profesional yang mampu meningkatkan daya tarik properti Anda. Kos makin menarik, bisnis pun makin naik." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Manfaat MamiFoto untuk Anda" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pengambilan Foto Berkualitas" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Foto dan video yang dihasilkan menggambarkan kondisi properti Anda dengan baik." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Hasil Diupload Tim Mamikos" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Foto dan video yang ditayangkan adalah yang telah diseleksi dan disesuaikan untuk bisnis Anda." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Peningkatan Kinerja Listing" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pemilik kos yang memasang foto profesional berkesempatan dapat kenaikan jumlah klik dan sewa." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Proses Menggunakan MamiFoto" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pesan MamiFoto" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Ambil paket yang sesuai dengan kebutuhan Anda." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Buat Janji dengan Fotografer" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Kami akan menghubungi untuk menentukan jadwal foto di properti Anda." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Foto dan Video di-upload Mamikos" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Setelah sesi foto, hasil akan tayang di listing Anda dalam waktu maks 2 minggu." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Persiapan Kos Sebelum Difoto" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Sembari menunggu fotografer datang, yuk simak apa saja yang harus Anda persiapkan sebelum sesi foto dimulai." on panduan panduan persiapan foto or video
 
   @panduanMamifotoContent @continue
   Scenario: [WEB][MamiFoto] Check content Mamifoto at panduan page
     When owner click Baca Panduan button
-      #point Kamar Tidur
-    Then owner will see that the text "Kamar Tidur" is displayed
-    And owner will see that the text "Rapikan tempat tidur." is displayed
-    And owner will see that the text "Rapikan, bersihkan, barang-barang dan kabel yang ada." is displayed
-    And owner will see that the text "Pastikan sudah menyediakan seluruh fasilitas kamar di tempatnya dan menyingkirkan barang-barang yang tidak diperlukan." is displayed
-    And owner will see that the text "Apabila ada jendela, buka korden dan rapikan." is displayed
-    And owner will see that the text "Lap jendela/kaca agar terlihat bersih." is displayed
-    And owner will see that the text "Pemakaian sprei polos lebih menarik untuk tenant." is displayed
-    And owner will see that the text "Pengecatan ulang kamar yang sudah lama akan menjadi jauh lebih menarik." is displayed
-      #point Kamar Mandi
-    Then owner will see that the text "Kamar Mandi" is displayed
-    And owner will see that the text "Bersihkan kamar mandi." is displayed
-    And owner will see that the text "Lap jendela dan kaca agar terlihat bersih." is displayed
-    And owner will see that the text "Tempatkan peralatan kamar mandi dengan rapi agar terlihat menarik." is displayed
-    And owner will see that the text "Pastikan kamar mandi dalam kondisi kering saat fotografer datang." is displayed
-     #point detail
-    And owner will see that the text "Apabila kamar kos memiliki fasilitas unggulan yang perlu ditonjolkan, maka persiapkan dengan baik dan posisikan di tempat yang diinginkan owner." is displayed
-    And owner will see that the text "Infokan detail ini kepada tim fotografer." is displayed
+    #point Kamar Tidur
+    Then owner will see title and detail title "Kamar Tidur" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan tempat tidur." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan, bersihkan, barang-barang dan kabel yang ada." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan sudah menyediakan seluruh fasilitas kamar di tempatnya dan menyingkirkan barang-barang yang tidak diperlukan." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Apabila ada jendela, buka korden dan rapikan." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Lap jendela/kaca agar terlihat bersih." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pemakaian sprei polos lebih menarik untuk tenant." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pengecatan ulang kamar yang sudah lama akan menjadi jauh lebih menarik." on panduan panduan persiapan foto or video
+    #point Kamar Mandi
+    And owner will see title and detail title "Bersihkan kamar mandi." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Lap jendela dan kaca agar terlihat bersih." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Tempatkan peralatan kamar mandi dengan rapi agar terlihat menarik." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan kamar mandi dalam kondisi kering saat fotografer datang." on panduan panduan persiapan foto or video
+    #point detail
+    And owner will see title and detail title "Apabila kamar kos memiliki fasilitas unggulan yang perlu ditonjolkan, maka persiapkan dengan baik dan posisikan di tempat yang diinginkan owner." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Infokan detail ini kepada tim fotografer." on panduan panduan persiapan foto or video
 
-      #check at tab Panduan area dan fasilitas
+    #check at tab Panduan area dan fasilitas
     When owner click tab panduan area
+<<<<<<< HEAD
       #Tampak Depan Kost
     And owner will see that the text "Tampak Depan Kos" is displayed
     And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
@@ -88,3 +88,21 @@ Feature: Check content Mamifoto
     Then user verify answer text "Hasil foto dan video akan ditayangkan di listing Mamikos Anda serta dikirim ke email Anda setelah sesi foto dalam waktu maksimum 7 hari kerja untuk paket MamiFoto A dan maksimum 14 hari kerja untuk MamiFoto B."
     When user click question "Bisakah saya mengubah/menambah foto sendiri?"
     Then user verify answer text "Ya, Anda bisa mengubah maupun menambahkan foto sendiri meski Anda telah menggunakan MamiFoto. Klik di sini untuk lihat cara mengubah dan menambahkan foto kos."
+
+    #Tampak Depan Kost
+    Then owner will see title and detail title "Tampak Depan Kos" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan area tampak depan sebaik mungkin." on panduan panduan persiapan foto or video
+    #Lorong dan Taman
+    And owner will see title and detail title "Lorong dan Taman" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan area taman." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
+    #Detail
+    And owner will see title and detail title "Bersihkan dan rapikan dapur umum." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan parkiran kos sebaik mungkin." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan ruang tunggu." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan dan bersihkan ruang laundry." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan dan bersihkan area lainnya." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Lap kaca/jendela agar terlihat bersih." on panduan panduan persiapan foto or video
+    And owner will see title and detail title " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video

@@ -36,6 +36,7 @@ public class ChatOwnerPO {
     Locator gpPacakgeText;
     Locator lastFTUEMars;
     Locator chatListEmptyState;
+    Locator buttonOnChatRoomList;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -327,6 +328,15 @@ public class ChatOwnerPO {
      */
     public boolean isChatListEmptyStatePresent() {
         return playwright.waitTillLocatorIsVisible(chatListEmptyState,2000.0);
+    }
+
+    /**
+     * Click on button on chat list or chat room owner
+     */
+    public void clickButtonOnChatRoomList(String buttonText) {
+        buttonOnChatRoomList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.waitFor(buttonOnChatRoomList);
+        playwright.clickOn(buttonOnChatRoomList);
     }
 
 }

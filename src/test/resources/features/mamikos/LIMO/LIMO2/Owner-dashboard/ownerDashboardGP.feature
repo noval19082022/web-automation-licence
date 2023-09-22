@@ -15,7 +15,7 @@ Feature: Owner Dashboard GP
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    Then owner click option "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking." on info untuk anda section
+    And user click info untuk anda "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
     And user will see that the text "Sisa kuota mingguan" is displayed
     And user will see that the text "1 chat room" is displayed
     When owner navigates to owner dashboard
@@ -31,7 +31,7 @@ Feature: Owner Dashboard GP
 
   @checkRedirectionInfoUntukAndaDoesntHaveQuota
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
-    When owner click option "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas" on info untuk anda section
+    And user click info untuk anda "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat."
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages"
     And owner should successfully log out
 
@@ -45,7 +45,7 @@ Feature: Owner Dashboard GP
 
   @checkRedirectionInfoUntukAndaDoesntHaveQuota
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
-    When owner click option "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! chevron-right" on info untuk anda section
+    And user click info untuk anda "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!"
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages?redirection_source=infountukanda"
     And owner should successfully log out
 
@@ -62,7 +62,7 @@ Feature: Owner Dashboard GP
     When owner navigates to "/"
     * owner click close icon pop up
     Then validate that owner have "GoldPlus 1"
-    When owner click option "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus. chevron-r" on info untuk anda section
+    And user click info untuk anda "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus."
     Then verify ftue "displayed"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."
 

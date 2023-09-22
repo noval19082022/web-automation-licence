@@ -265,4 +265,9 @@ public class MamifotoSteps {
     public void owner_close_pop_up_panduan() {
         mamifoto.clickOnCloseBacaPanduan();
     }
+
+    @And("owner will see title and detail title {string} on panduan panduan persiapan foto or video")
+    public void ownerWillSeeTitleAndDetailTitleOnPanduanPanduanPersiapanFotoVideo(String titleAndDetailText) {
+        Assert.assertTrue(mamifoto.titleOnPanduanAndAreaAppear(titleAndDetailText),"title doesnt appear");
+    }
 }
