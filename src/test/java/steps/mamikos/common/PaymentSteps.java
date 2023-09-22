@@ -251,8 +251,7 @@ public class PaymentSteps {
     @And("tenant pay kost from riwayat booking using ovo {string}")
     public void tenantPayKostFromRiwayatBookingUsingOvo(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
-        invoice.paymentOVO(phoneNumber);
-        ActiveContext.getActiveBrowserContext().pages().get(1).close();
+        invoice.paymentOvoClosePage(phoneNumber);
     }
 
     @And("tenant pay kost from riwayat booking using ovo {string} without close the page")
@@ -279,11 +278,17 @@ public class PaymentSteps {
 
     @And("tenant pay booking to extended contract using ovo {string}")
     public void tenantPayBookingToExtendedContractUsingOvo(String phoneNumber) {
+        invoice.paymentOvoClosePage(phoneNumber);
+    }
+
+    @And("tenant pay booking to extended contract using ovo {string} without close the page")
+    public void tenantPayBookingToExtendedContractUsingOvoWithoutClosePage(String phoneNumber) {
         invoice.paymentOVO(phoneNumber);
     }
 
     @Then("tenant can not sees add on price on payment page")
     public void tenantCanNotSeesAddOnPriceOnPaymentPage() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
         int basicAmount = invoice.getBasicPrice();
         int adminFee = invoice.getAdminPrice();
         int totalAmount = invoice.getSubTotal();
@@ -345,6 +350,5 @@ public class PaymentSteps {
     @Then("tenant display warning message {string}")
     public synchronized void systemDisplayWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
-
     }
 }

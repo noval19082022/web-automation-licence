@@ -30,7 +30,7 @@ public class CommonSteps {
 
     @Then("user/owner/tenant will see that the text {string} is displayed")
     public void user_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text, 2000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
     }
 
     @Then("user/owner/tenant should not be able to see the text {string}")
@@ -82,5 +82,10 @@ public class CommonSteps {
     @Then("admin/user/owner/tenant will get empty table list data")
     public void users_will_get_empty_table_list_data() {
         Assert.assertFalse(page.isVisible("//tbody/tr"));
+    }
+
+    @And("bring page to front")
+    public void bringPageToFront() {
+        page.bringToFront();
     }
 }

@@ -241,4 +241,20 @@ public class TenantEditProfileSteps {
     public void userClickOnBatalButton() {
         tenantEditProfile.userClickBatalButton();
     }
+
+    @Then("user can see reddot on {string}")
+    public void userCanSeeReddotOnProfilePicture(String text) {
+        if(text.equalsIgnoreCase("profile picture")) {
+            Assert.assertTrue(tenantEditProfile.verifyReddotOnProfilePicture(),"element not diplayed");
+        }
+        else if(text.equalsIgnoreCase("profile menu")) {
+            Assert.assertTrue(tenantEditProfile.verifyReddotOnProfileMenu(), "element not displayed");
+        }
+    }
+
+    @And("user click on profile picture")
+    public void userClickOnProfilePicture() {
+        tenantEditProfile.userClickProfile();
+    }
+
 }

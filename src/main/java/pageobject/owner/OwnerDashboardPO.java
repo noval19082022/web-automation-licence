@@ -62,6 +62,8 @@ public class OwnerDashboardPO {
     Locator mamiadsLihatDisini;
     Locator saldoMamiAdsButton;
     Locator noProperty;
+    Locator propertySekitar;
+
     private Locator fiturPromosiExpand;
 
     public OwnerDashboardPO(Page page) {
@@ -82,7 +84,7 @@ public class OwnerDashboardPO {
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
-        gpWidgetButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("mamikos GoldPlus"));
+        gpWidgetButton = page.locator(".membership-card__title");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatus = page.locator(".membership-card__label");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
@@ -115,6 +117,7 @@ public class OwnerDashboardPO {
         saldoMamiAdsButton = page.locator(".mamiads-card");
         fiturPromosiExpand = page.getByText("Fitur Promosi");
         noProperty = page.locator(".no-property");
+        propertySekitar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cek Properti Sekitar"));
     }
 
     /**
@@ -146,7 +149,7 @@ public class OwnerDashboardPO {
      */
     public PengajuanSewaPO clickOnPengajuanSewa() {
         playwright.waitFor(pengajuanSewaBtn);
-        playwright.doubleClick(pengajuanSewaBtn);
+        playwright.clickOn(pengajuanSewaBtn);
         return new PengajuanSewaPO(page);
     }
 
@@ -198,6 +201,7 @@ public class OwnerDashboardPO {
       * Click on Mamipoin Button
      */
     public void clickMamipoinButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
     }
 
@@ -230,6 +234,7 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
+        playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(gpWidgetButton);
     }
 
@@ -541,6 +546,7 @@ public class OwnerDashboardPO {
      * Click in order to expand promotion feature
      */
     public void clickToExpandFiturPromosi() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(fiturPromosiExpand);
     }
 
@@ -576,6 +582,7 @@ public class OwnerDashboardPO {
     }
 
     /**
+<<<<<<< HEAD
      * Click Waktunya Mengelola Properti
      * @param action
      *
@@ -620,5 +627,12 @@ public class OwnerDashboardPO {
      */
     public boolean isTambahKosVisible() {
         return playwright.isButtonWithTextDisplayed("Tambah Kos");
+    }
+
+    /**
+     * Click on cek properti sekitar
+     */
+    public void clickOnPropertySekitar() {
+        playwright.clickOn(propertySekitar);
     }
 }

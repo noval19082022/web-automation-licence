@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,6 +15,8 @@ import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.pms.LoginPMSPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
 
 public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
@@ -31,7 +34,9 @@ public class NavigatesSteps {
 
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY);
+        if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, 30000.0);
+        }
     }
 
     @When("admin navigates to Admin Goldplus Package")
@@ -63,7 +68,8 @@ public class NavigatesSteps {
 
     @When("tenant/owner/admin set active page to {int}")
     public synchronized void tenantSetActivePageTo(int activePage) {
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(activePage));
+        List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
+        ActiveContext.setActivePage(listPage.get(activePage));
         playwright.bringPageToView(ActiveContext.getActivePage());
     }
 
@@ -288,7 +294,14 @@ public class NavigatesSteps {
 
     @When("owner navigates to broadcast chat page")
     public void ownerNavigatesToBroadcastChatPage() {
+        playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.BROADCAST_CHAT, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
+    }
+
+    @When("admin navigates to {string}")
+    public void adminNavigateTo(String path) {
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX+path, 30000.0, LoadState.LOAD);
+        playwright.waitTillUrlToBe(Mamikos.ADMINBANGKRUPUX+path, 30000.0);
     }
 }

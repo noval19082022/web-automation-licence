@@ -262,5 +262,11 @@ public class OwnerDashboardSteps {
     public void verifyTambahKosButtonDisplayed() {
         Assert.assertTrue(ownerDashboardPO.isTambahKosVisible());
     }
+
+    @When("owner accsess cek properti sekitar")
+    public void owner_accsess_cek_properti_sekitar() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickOnPropertySekitar();
+    }
 }
 

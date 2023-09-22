@@ -33,6 +33,11 @@ public class BookingFormPO {
     Locator tncBookingSinggahsiniLink;
     Locator tncBookingContentText;
     Locator okPahamButton;
+    Locator filterButton;
+    Locator needConfirmation;
+    Locator seeCompleteBtn;
+    Locator cancelBookingBtn;
+    Locator yesCancelBookingBtn;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -59,6 +64,11 @@ public class BookingFormPO {
         this.tncBookingSinggahsiniLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan"));
         this.tncBookingContentText = page.getByTestId("bookingTncModal-title");
         this.okPahamButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke Paham"));
+        this.filterButton = page.locator(".filter-item-mobile:first-child span");
+        this.needConfirmation = page.locator("li:nth-child(2) button");
+        this.seeCompleteBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnyachevron-down"));
+        this.cancelBookingBtn = page.getByTestId("detailBookingCardCancel_btn");
+        this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
     }
 
     /**
@@ -164,15 +174,17 @@ public class BookingFormPO {
      * cancel booking with select reason
      */
     public void cancelBookingWithReason(String reason) {
-        for (int i = 0; i < 2; i++) {
-            lihatSelengkapnyaWaitingConfirmationTextLink.click();
-        }
-        if (batalkanPengajuanSewaButton.isVisible()) {
-            batalkanPengajuanSewaButton.click();
-            String selector = "//*[@class='radio success']/label[contains(.,'" + reason + "')]";
-            ElementHandle element = page.querySelector(selector);
-            element.click();
-            confirmCancelButton.click();
+            filterButton.click();
+            needConfirmation.waitFor();
+            needConfirmation.click();
+            playwright.hardWait(2000);
+            if (seeCompleteBtn.isVisible()) {
+                seeCompleteBtn.click();
+                cancelBookingBtn.click();
+                String selector = "//*[@class='radio success']/label[contains(.,'" + reason + "')]";
+                ElementHandle element = page.querySelector(selector);
+                element.click();
+                yesCancelBookingBtn.click();
         }
     }
 

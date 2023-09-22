@@ -1,6 +1,9 @@
 package utilities;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
@@ -212,7 +215,9 @@ public class PlaywrightHelpers {
      * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
-        page.onDialog(Dialog::accept);
+        page.onDialog(dialog -> {
+            dialog.accept();
+        });
         locator.click();
     }
     //----- Action Part ----\\
@@ -538,9 +543,7 @@ public class PlaywrightHelpers {
      */
     public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
         // move page
-        Page nextPage = pageActive.waitForPopup(() -> {
-            locatorTarget.click();
-        });
+        Page nextPage = pageActive.waitForPopup(new Page.WaitForPopupOptions().setTimeout(3000.0), locatorTarget::click);
         nextPage.bringToFront();
         return nextPage;
     }

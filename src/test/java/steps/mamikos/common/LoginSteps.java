@@ -1,7 +1,9 @@
 package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
+import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -85,9 +87,11 @@ public class LoginSteps {
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
         loginAdmin = new LoginAdminMamipayPO(page);
-        loginAdmin.fillEmail(email);
-        loginAdmin.fillPassword(password);
-        loginAdmin.clickOnLoginButton();
+        if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
+            loginAdmin.fillEmail(email);
+            loginAdmin.fillPassword(password);
+            loginAdmin.clickOnLoginButton();
+        }
     }
 
     @When("admin login pms :")
@@ -147,7 +151,7 @@ public class LoginSteps {
     }
 
     @And("user logs out as a Tenant user")
-    public void userLogsOutAsTenant() throws InterruptedException {
+    public void userLogsOutAsTenant() {
         tenantLogin.logoutAsTenant();
     }
 

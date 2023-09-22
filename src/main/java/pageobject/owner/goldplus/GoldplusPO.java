@@ -13,6 +13,7 @@ public class GoldplusPO {
     Locator closePopUpIcon;
     Locator goldplusPhoneNumberInput;
     Locator recurringPhoneNumberInput;
+    Locator selectRecurringPeriod;
     Locator editPackageAdminGP1Button;
     Locator editPackageAdminGP2Button;
     Locator selectRadioButtonNo;
@@ -33,6 +34,8 @@ public class GoldplusPO {
     Locator tableTagihanGP;
     Locator lihatSelengkapnyaTagihanGP;
     Locator tabSelesaiRincianBayar;
+    Locator gpPackageText;
+    Locator infoUntukAndaOption;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -42,6 +45,7 @@ public class GoldplusPO {
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         goldplusPhoneNumberInput = page.locator("form").filter(new Locator.FilterOptions().setHasText("Reset")).getByPlaceholder("Phone Number");
         recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
+        selectRecurringPeriod = page.locator("[name='h']");
         editPackageAdminGP1Button = page.locator("//tr[5]//div[@class='btn-group']");
         editPackageAdminGP2Button = page.locator("//tr[4]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
@@ -61,7 +65,7 @@ public class GoldplusPO {
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
-
+        gpPackageText = page.getByText("GoldPlus 1 periode 4 Bulan").first();
     }
 
     /**
@@ -96,6 +100,12 @@ public class GoldplusPO {
         recurringPhoneNumberInput.fill(phoneNumberGP);
     }
 
+    /**
+     * set recurring days for Goldplus (H-7 - H-0)
+     */
+    public void selectRecurringPeriod (String period) {
+        playwright.selectDropdownByValue(selectRecurringPeriod,period);
+    }
     /**
      * Get list periode gp, salldo free mamiads, actual price, discount price
      *
@@ -159,8 +169,9 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.hardWait(3000);
-        playwright.clickOnText(infoUntukAndaMessage);
+        playwright.waitTillPageLoaded(5000.0);
+        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.clickOn(infoUntukAndaOption);
     }
 
     /**
@@ -295,5 +306,25 @@ public class GoldplusPO {
      */
     public void lihatSelngkapnyaSectionDetailTagihan() {
         playwright.clickOn(lihatSelengkapnyaTagihanGP);
+    }
+
+
+    /**
+     * Click 'Perpanjang' button on pop up recurring GoldPlus
+     *
+     */
+    public void clickOnPerpanjangBtn(){
+        playwright.clickOnTextButton("Perpanjang");
+    }
+
+    /**
+     * Verify 'GoldPlus 1 periode 4 Bulan' is display
+     * @return boolean (true if text displayed, false if text doesn't displayed)
+     *
+     */
+    public Boolean gpPackageText(){
+        playwright.hardWait(3000);
+        playwright.waitTillLocatorIsVisible(gpPackageText);
+        return gpPackageText.isVisible();
     }
 }

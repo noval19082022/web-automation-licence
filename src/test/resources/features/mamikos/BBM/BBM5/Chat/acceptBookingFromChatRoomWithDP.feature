@@ -1,6 +1,7 @@
 @occupancyAndBilling @OB @BBM5 @BBM-3 @BBM-7 @acceptFromChat
 Feature: Accept Booking from Chat room with DP
 
+  @deleteContract
   Scenario: Delete contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -33,12 +34,12 @@ Feature: Accept Booking from Chat room with DP
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod    | password     |
-      | 085600867992 | 0890867321212 | qwerty123 |
+      | 085600867992 | 0890867321212 | Bismillah@02 |
+    And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
-    And user click chat button in top bar owner home page
-    Then system display title "Belum bayar DP" after accept booking from chat room
+    Then system display title "Belum bayar sewa pertama" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
     When Owner can see name of Tenant is "Tenant Automation Accept Chat"

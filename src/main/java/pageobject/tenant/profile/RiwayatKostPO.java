@@ -271,6 +271,7 @@ public class RiwayatKostPO {
      *
      */
     public void clickReasonStopRent(String reason) {
+        playwright.hardWait(3000);
         String selector = "//p[contains(.,'"+ reason +"')]";
         ElementHandle element = page.querySelector(selector);
         element.click();

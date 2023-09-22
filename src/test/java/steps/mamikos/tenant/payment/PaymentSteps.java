@@ -100,4 +100,9 @@ public class PaymentSteps {
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
         midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
     }
+
+    @And("tenant is on invoice page and pay using ovo {string} without close the page")
+    public void tenantIsOnInvoicePageAndPayUsingOvoWithoutCloseThePage(String phoneNumber) {
+        invoicePO.paymentOVO(phoneNumber);
+    }
 }

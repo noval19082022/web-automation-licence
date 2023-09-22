@@ -64,7 +64,7 @@ public class TenantBillManagementPO {
         updateRoomNumberButton = page.getByText("Ubah nomor kamar chevron-right");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         kostDropdownInPenyewaMenu = page.locator("(//div[@class='bg-c-select__trigger bg-c-select__trigger--lg'])[1]");
-        selectKost = page.locator("a").filter(new Locator.FilterOptions().setHasText("kost bali for contract section Tobelo Utara Halmahera Utara"));
+        selectKost = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kost Cyllene Tipe A Tobelo Utara Halmahera Utara"));
         kontrakSewaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak sewa"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         ubahKontrakPenyewaButton = page.getByTestId("btn-edit-contract");

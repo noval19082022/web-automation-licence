@@ -36,6 +36,7 @@ public class ChatOwnerPO {
     Locator gpPacakgeText;
     Locator lastFTUEMars;
     Locator chatListEmptyState;
+    Locator buttonOnChatRoomList;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -75,7 +76,7 @@ public class ChatOwnerPO {
      *
      */
     public void clickChatOwner() {
-        playwright.hardWait(5000);
+        playwright.waitTillPageLoaded();
         playwright.clickOn(ownerChatButton);
     }
 
@@ -113,15 +114,15 @@ public class ChatOwnerPO {
 
     /**
      * Search Chat
-     *
-     * @throws InterruptedException
      */
     public void searchChatTenant(String inputText) {
+        playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'"+inputText+"')])[1]");
         searchChat.fill(inputText);
         if (nantiSajaButton.isVisible()){
             playwright.clickOn(nantiSajaButton);
         }
+        page.keyboard().press("Space");
         playwright.clickOn(chatOnList);
     }
 
@@ -166,8 +167,6 @@ public class ChatOwnerPO {
      * @return true if kost name otherwise false
      */
     public boolean isKostNameDisplayed() {
-        Locator closeToast = page.locator("page.getByRole('button', { name: 'close' })");
-       // playwright.clickOn(closeToast);
         return playwright.waitTillLocatorIsVisible(roomTitle);
     }
 
@@ -329,6 +328,15 @@ public class ChatOwnerPO {
      */
     public boolean isChatListEmptyStatePresent() {
         return playwright.waitTillLocatorIsVisible(chatListEmptyState,2000.0);
+    }
+
+    /**
+     * Click on button on chat list or chat room owner
+     */
+    public void clickButtonOnChatRoomList(String buttonText) {
+        buttonOnChatRoomList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.waitFor(buttonOnChatRoomList);
+        playwright.clickOn(buttonOnChatRoomList);
     }
 
 }

@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import pageobject.tenant.payment.PaymentPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -71,6 +72,8 @@ public class InvoicePO {
     Locator mamipoinToggleButtonOff;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
+    Locator sudahBayarButton;
+    Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -131,7 +134,8 @@ public class InvoicePO {
         mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
-
+        sudahBayarButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
+        pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
     }
 
     /**
@@ -277,7 +281,7 @@ public class InvoicePO {
      * Click on pilih pembayaran to choose what method to the payment.
      */
     public void clickOnPilihPembayaran() {
-        playwright.clickOn(pilihPembayaranButton);
+        playwright.forceClickOn(pilihPembayaranButton);
     }
 
     /**
@@ -460,13 +464,47 @@ public class InvoicePO {
      * @param number phone number ovo
      */
     public void paymentOVO(String number) {
+        var maxReload = 0;
         clickOnPilihPembayaran();
         playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
-        playwright.hardWait(5);
         playwright.clickOnText("Saya Sudah Bayar");
-        page.reload();
+        playwright.clickOn(sudahBayarButton);
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+    }
+
+    /**
+     * Pay with ovo close page
+     * @param number phone number
+     */
+    public void paymentOvoClosePage(String number) {
+        var maxReload = 0;
+        clickOnPilihPembayaran();
+        playwright.clickOn(txtOVO);
+        noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
+        playwright.clickOnText("Saya Sudah Bayar");
+        playwright.clickOn(sudahBayarButton);
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+        int totalPage = ActiveContext.getActiveBrowserContext().pages().size();
+        if(totalPage > 1){
+            page.waitForClose(() -> {
+                ActiveContext.getActiveBrowserContext().pages().get(1).close();
+            });
+        }
     }
 
     /**

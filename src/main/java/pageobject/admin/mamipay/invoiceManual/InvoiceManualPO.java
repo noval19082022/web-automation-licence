@@ -160,6 +160,7 @@ public class InvoiceManualPO {
     private Locator timeOnUbahStatus;
     private Locator timeField;
     private Locator simpanBtnOnUbahStatus;
+    private Locator ubahBtnOnUbahStatus;
     private Locator toastUbahStatus;
     //---Ubah Status Invoice---//
 
@@ -268,6 +269,7 @@ public class InvoiceManualPO {
         timeOnUbahStatus = page.getByTestId("change-status-paid-time");
         timeField = page.locator("//*[@data-testid='change-status-paid-time']");
         simpanBtnOnUbahStatus = page.getByTestId("change-status-save");
+        ubahBtnOnUbahStatus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         toastUbahStatus = page.locator("//*[@class='global-toast bg-c-toast bg-c-toast--fixed']");
     }
 
@@ -275,6 +277,7 @@ public class InvoiceManualPO {
      * Click buat invoice in Invoice Manual
      */
     public void clickBuatInvoice() {
+        playwright.waitTillLocatorIsVisible(buatInvoiceButton);
         buatInvoiceButton.click();
     }
 
@@ -372,6 +375,11 @@ public class InvoiceManualPO {
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             startDate = page.locator("(//span[@class='cell day selected today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+        } else if (periodeAwal.equalsIgnoreCase("selected today")) {
+            //get selected today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day selected today'][contains(., '" +today.format(dates)+ "')]").nth(0);
         } else {
             startDate = page.getByTestId("billing-modal-start-date").getByText(periodeAwal);
         }
@@ -924,6 +932,13 @@ public class InvoiceManualPO {
     }
 
     /**
+     * clicks Ubah on 'Yakin ubah status invoice ini?' pop up
+     */
+    public void clicksUbahOnUbahStatus(){
+        playwright.clickOn(ubahBtnOnUbahStatus);
+    }
+
+    /**
      * Get toast success add biaya sewa / biaya tambahan
      * @return String biaya sewa / biaya tambahan toast
      */
@@ -1425,6 +1440,12 @@ public class InvoiceManualPO {
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
             playwright.clickOn(startDate);
+        } else if (date.equalsIgnoreCase("selected today")) {
+            //get today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day selected today'][contains(., '" +today.format(dates)+ "')]").nth(0);
+            playwright.clickOn(startDate);
         }
     }
 
@@ -1485,7 +1506,7 @@ public class InvoiceManualPO {
         playwright.clickOn(jenisBiayaDropdown);
 
         //biaya sewa
-        tickJenisBiaya = page.locator("//div[@data-testid='select-checkbox-rent-1']//p[contains(text(),'" +value+ "')]");
+        tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
         playwright.clickOn(tickJenisBiaya);
 
         //clicks Terapkan button
