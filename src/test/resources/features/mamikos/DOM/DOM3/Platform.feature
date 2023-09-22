@@ -53,3 +53,12 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When user visit search page, and visit popular search based on "Area" for location on "Yogyakarta"
     Then user can see kost list is more than 10
+
+  @TEST_DOM-396 @TESTSET_UG-4895 @TESTSET_UG-6226 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][FB - Tennat login page]Login with FB
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                          | email prod                          | password    |
+      | lingga_ccabvrn_marqansyah@tfbnw.net | lingga_ccabvrn_marqansyah@tfbnw.net | joinmamikos |
+    Then navbar after login appears
+
