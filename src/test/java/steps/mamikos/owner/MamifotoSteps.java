@@ -260,4 +260,9 @@ public class MamifotoSteps {
     public void owner_click_tab_panduan_area() {
         mamifoto.clickOnPanduanArea();
     }
+
+    @And("owner will see title and detail title {string} on panduan panduan persiapan foto or video")
+    public void ownerWillSeeTitleAndDetailTitleOnPanduanPanduanPersiapanFotoVideo(String titleAndDetailText) {
+        Assert.assertTrue(mamifoto.titleOnPanduanAndAreaAppear(titleAndDetailText),"title doesnt appear");
+    }
 }
