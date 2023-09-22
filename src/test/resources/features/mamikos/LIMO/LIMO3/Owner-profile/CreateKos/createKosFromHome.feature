@@ -19,7 +19,7 @@ Feature: Create Kos From Home
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
-      | 089673406382 | qwerty123 |
+      | 083128754260 | qwerty123 |
     And owner navigates to property saya kos
     And owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"

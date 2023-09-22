@@ -19,7 +19,8 @@ import data.mamikos.Mamikos;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
-    PropertySayaPO propertySaya = new PropertySayaPO (page);
+    PropertySayaPO propertySaya = new PropertySayaPO(page);
+
     private JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
     private String weeklyPrice = null;
@@ -28,7 +29,6 @@ public class PropertySayaSteps {
     private String sixMonthlyPrice = null;
     private String yearlyPrice = null;
     private String kosNamePrefix;
-
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
@@ -279,6 +279,7 @@ public class PropertySayaSteps {
     public void user_see_success_add_data_kos_pop_up_with_text(String message) {
         Assert.assertEquals(propertySaya.getTitlePopUpSuccessEditKos().trim(), message, "Pop up title success message in edit kos is wrong");
     }
+
     @When("user click done in success page pop up of edit kos")
     public void user_click_done_in_success_page_pop_up_of_edit_kos() throws InterruptedException {
         propertySaya.clickDoneEditKosPopUp();
@@ -346,7 +347,7 @@ public class PropertySayaSteps {
         List<Map<String, String>> table = dataTable.asMaps();
         int i = 0;
         for (Map<String, String> content : table) {
-            Assert.assertEquals(propertySaya.getWarningYearlyPrice(i), content.get("warningMessage"), "title not equal to "+content.get("title"));
+            Assert.assertEquals(propertySaya.getWarningYearlyPrice(i), content.get("warningMessage"), "title not equal to " + content.get("title"));
             i++;
         }
     }
@@ -355,6 +356,7 @@ public class PropertySayaSteps {
     public void user_see_button_update_price_disable() throws InterruptedException {
         Assert.assertTrue(propertySaya.isButtonUpdatePriceDisable(), "Button update price enable");
     }
+
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
         propertySaya.clickTambahDataIklan(jenisProperti);
@@ -389,7 +391,7 @@ public class PropertySayaSteps {
         propertySaya.selectFasilitasUnit(fasilitasUnit);
         propertySaya.selectFasilitasKamar(fasilitasKamar);
 
-        if (fasilitasKamar.equals("Semi Furnished")|| fasilitasKamar.equals("Furnished")){
+        if (fasilitasKamar.equals("Semi Furnished") || fasilitasKamar.equals("Furnished")) {
             propertySaya.clickFurnished("Bed");
         }
     }
@@ -443,7 +445,7 @@ public class PropertySayaSteps {
         boolean useLetters = true;
         boolean useNumbers = true;
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-        kosNamePrefix = table.get(0).get("kos name") + " "+ generatedString.toUpperCase();
+        kosNamePrefix = table.get(0).get("kos name") + " " + generatedString.toUpperCase();
         propertySaya.inputKosName(kosNamePrefix);
         Mamikos.setPropertyKosName(kosNamePrefix);
         propertySaya.checkRoomType(table.get(0).get("room type check"));
@@ -453,7 +455,7 @@ public class PropertySayaSteps {
         propertySaya.selectBuildKos(table.get(0).get("build kos"));
         propertySaya.inputOtherNote(table.get(0).get("other note"));
 
-       }
+    }
 
     @And("owner set rules kos:")
     public void ownerSetRulesKos(List<String> rules) {
@@ -588,12 +590,15 @@ public class PropertySayaSteps {
 
         propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
         propertySaya.selectMinRentDuration(table.get(0).get("check min rent duration"), table.get(0).get("min rent duration"));
-        propertySaya.selectOtherPrice(table.get(0).get("check other price"));
+
+        if (table.get(0).get("check other price").equals("yes")) {
+            propertySaya.selectOtherPrice(table.get(0).get("check other price"));
             propertySaya.inputOtherPrice("Hari", table.get(0).get("daily price"), 1);
             propertySaya.inputOtherPrice("Minggu", table.get(0).get("weekly price"), 2);
             propertySaya.inputOtherPrice("3 Bulan", table.get(0).get("three monthly price"), 3);
             propertySaya.inputOtherPrice("6 Bulan", table.get(0).get("six monthly price"), 4);
             propertySaya.inputOtherPrice("Tahun", table.get(0).get("yearly price"), 5);
+        }
     }
 
     @And("owner click done in success page")
@@ -604,8 +609,19 @@ public class PropertySayaSteps {
     @Then("user see kos with valid name, status {string} and type {string}")
     public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
         propertySaya.waitPageLoaded();
-        Assert.assertEquals(propertySaya.getFirstKosName().substring(0, 28),Mamikos.getPropertyKosName(),  "Kos name is wrong");
+        Assert.assertEquals(propertySaya.getFirstKosName().substring(0, 28), Mamikos.getPropertyKosName(), "Kos name is wrong");
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
+    }
+
+    @And("user delete first kos on the list")
+    public void userDeleteFirstKosOnTheList() {
+        propertySaya.clickDeleteKosDraft();
+        propertySaya.clickHapusOnPopUpConfirmation();
+    }
+
+    @And("owner click {string} on Kebijakan BBK Baru Mamikos")
+    public void ownerClickOnKebijakanBBKBaruMamikos(String text) {
+        propertySaya.clickOnNewBBKPopUp(text);
     }
 }

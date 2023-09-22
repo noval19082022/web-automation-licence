@@ -16,7 +16,9 @@ import java.util.Objects;
 public class PropertySayaPO {
     private Page page;
     private PlaywrightHelpers playwright;
-    @Setter @Getter private String searchPropertyName;
+    @Setter
+    @Getter
+    private String searchPropertyName;
 
     Locator kostDropdown;
     Locator searchKostTextbox;
@@ -125,9 +127,8 @@ public class PropertySayaPO {
     Locator otherKostPriceMonthlyField;
     Locator minRentDurationDropdown;
     Locator minRentDurationChoose;
-
-    Locator popUpButton;
-
+    Locator hapusDraftKos;
+    Locator hapusKonfirm;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -156,13 +157,13 @@ public class PropertySayaPO {
         deleteButtonInPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
         addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
-        addNewKosButton= page.getByText("+ Tambah Kos Baru");
+        addNewKosButton = page.getByText("+ Tambah Kos Baru");
         closePopupBBKIcon = page.locator(".owner-intercept-booking-modal__close-button");
         fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
         bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
         bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
         bankNameDropdown = page.getByPlaceholder("Masukkan nama bank");
-        termAndConsCheckbox= page.locator(".check");
+        termAndConsCheckbox = page.locator(".check");
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
@@ -216,7 +217,8 @@ public class PropertySayaPO {
         minRentDuractionCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda ingin terapkan minimum durasi sewa? Jangka waktu minimum untuk bisa menyewa kamar kos Anda.")).locator("span");
         otherPriceCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga sewa selain bulanan")).locator("span");
         minRentDurationDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Min. 1 Bln dropdown-down"));
-
+        hapusDraftKos = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Kos")).first();
+        hapusKonfirm = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus").setExact(true));
     }
 
     /**
@@ -224,7 +226,7 @@ public class PropertySayaPO {
      * user enter kost name
      * user choose kost name
      */
-    public void searchKostPropertySaya(String kostName){
+    public void searchKostPropertySaya(String kostName) {
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
@@ -233,7 +235,6 @@ public class PropertySayaPO {
 
     /**
      * user as owner click update kamar button
-     *
      */
     public void clickUpdateKamarButton() {
         playwright.clickOn(lihatSelengkapnyaButton);
@@ -242,7 +243,6 @@ public class PropertySayaPO {
 
     /**
      * user as owner click update kamar kost button
-     *
      */
     public void clickUpdateKamarEmptyButton() {
         playwright.waitTillLocatorIsVisible(editAction);
@@ -255,6 +255,7 @@ public class PropertySayaPO {
 
     /**
      * Get first kos name in kos list
+     *
      * @return string kos name
      */
     public String getFirstKosName() {
@@ -263,6 +264,7 @@ public class PropertySayaPO {
 
     /**
      * Get first kos status in kos list
+     *
      * @return string kos status
      */
     public String getFirstKosStatus(String status) {
@@ -272,6 +274,7 @@ public class PropertySayaPO {
 
     /**
      * Get first kos type in kos list
+     *
      * @return string kos type
      */
     public String getFirstKosType(String type) {
@@ -281,10 +284,11 @@ public class PropertySayaPO {
 
     /**
      * Click on kos name in update price
+     *
      * @param kosName is kos name
      */
     public void clickOnKosName(String kosName) {
-        kostNameText = page.locator("//span[.='"+kosName+"']");
+        kostNameText = page.locator("//span[.='" + kosName + "']");
         playwright.clickOn(kostNameText);
     }
 
@@ -297,6 +301,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text in daily price text box
+     *
      * @param dailyPrice is text we want to search
      */
     public void inputDailyPriceKos(String dailyPrice) {
@@ -306,6 +311,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text in weekly price text box
+     *
      * @param weeklyPrice is text we want to search
      */
     public void inputWeeklyPrice(String weeklyPrice) {
@@ -315,6 +321,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text in monthly price text box
+     *
      * @param monthlyPrice is text we want to search
      */
     public void inputMonthlyPrice(String monthlyPrice) {
@@ -324,6 +331,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text in three monthly price text box
+     *
      * @param threeMonthlyPrice is text we want to search
      */
     public void inputThreeMonthlyPrice(String threeMonthlyPrice) {
@@ -333,6 +341,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text in six monthly price text box
+     *
      * @param sixMonthlyPrice is text we want to search
      */
     public void inputSixMonthlyPrice(String sixMonthlyPrice) {
@@ -342,6 +351,7 @@ public class PropertySayaPO {
 
     /**
      * Enter Text yearly price text box
+     *
      * @param yearlyPrice is text we want to search
      */
     public void inputYearlyPrice(String yearlyPrice) {
@@ -361,6 +371,7 @@ public class PropertySayaPO {
 
     /**
      * Get text price weekly
+     *
      * @return Integer weekly price
      */
     public String getWeeklyPrice() {
@@ -370,6 +381,7 @@ public class PropertySayaPO {
 
     /**
      * Get text price monthly
+     *
      * @return Integer monthly price
      */
     public String getMonthlyPrice() {
@@ -379,6 +391,7 @@ public class PropertySayaPO {
 
     /**
      * Get text price three monthly
+     *
      * @return Integer three monthly price
      */
     public String getThreeMonthlyPrice() {
@@ -388,6 +401,7 @@ public class PropertySayaPO {
 
     /**
      * Get text price six monthly
+     *
      * @return Integer six monthly price
      */
     public String getSixMonthlyPrice() {
@@ -397,6 +411,7 @@ public class PropertySayaPO {
 
     /**
      * Get text price yearly
+     *
      * @return Integer yearly price
      */
     public String getYearlyPrice() {
@@ -408,7 +423,7 @@ public class PropertySayaPO {
      * Click 'Lanjut Isi Data' in attention pop up
      */
     public void clickContinueInputDataPopUp() {
-        if (playwright.waitTillLocatorIsVisible(continueInputDataButton)){
+        if (playwright.waitTillLocatorIsVisible(continueInputDataButton)) {
             playwright.clickOn(continueInputDataButton);
         }
     }
@@ -423,6 +438,7 @@ public class PropertySayaPO {
 
     /**
      * Get message success update price
+     *
      * @return message success update price
      */
     public String getToastSuccessUpdatePrice() {
@@ -498,7 +514,7 @@ public class PropertySayaPO {
      * Click on add data button
      */
     public void selectOptionAddProperty(String option) {
-        optionProperty = page.locator("//label[contains(.,'"+option+"')]");
+        optionProperty = page.locator("//label[contains(.,'" + option + "')]");
         playwright.clickOn(optionProperty);
         playwright.clickOn(addDataButton);
     }
@@ -514,13 +530,14 @@ public class PropertySayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)){
+        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)) {
             playwright.clickOn(closePopupBBKIcon);
         }
     }
 
     /**
      * Get Full Name inputted text in Mamipay Form
+     *
      * @return String Full Name inputted text
      */
     public String getInputTextFullName() {
@@ -529,6 +546,7 @@ public class PropertySayaPO {
 
     /**
      * Get Bank account number inputted text in Mamipay Form
+     *
      * @return String Bank account number inputted text
      */
     public String getInputTextBankAcc() {
@@ -537,6 +555,7 @@ public class PropertySayaPO {
 
     /**
      * Get Bank owner name inputted text in Mamipay Form
+     *
      * @return String Bank owner name inputted text
      */
     public String getInputTextBankOwnerName() {
@@ -545,6 +564,7 @@ public class PropertySayaPO {
 
     /**
      * Get Bank name inputted text in Mamipay Form
+     *
      * @return String Bank name inputted text
      */
     public String getInputTextBankName() {
@@ -553,6 +573,7 @@ public class PropertySayaPO {
 
     /**
      * Fill out Full Name
+     *
      * @param fullName
      */
     public void fillInputNameForm(String fullName) {
@@ -562,6 +583,7 @@ public class PropertySayaPO {
 
     /**
      * Fill out Bank Account Number Form
+     *
      * @param bankAccountNumber bank account number
      */
     public void fillBankAccountNumberForm(String bankAccountNumber) {
@@ -571,6 +593,7 @@ public class PropertySayaPO {
 
     /**
      * Fill out Bank Account Name Form
+     *
      * @param bankAccountName bank account name
      */
     public void fillBankAccountNameForm(String bankAccountName) {
@@ -580,6 +603,7 @@ public class PropertySayaPO {
 
     /**
      * Fill out Bank Name
+     *
      * @param bankName
      */
     public void fillInputBankName(String bankName) {
@@ -607,27 +631,30 @@ public class PropertySayaPO {
 
     /**
      * Click button edit kost
+     *
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
         page.waitForLoadState(LoadState.LOAD);
-        editDataKos = page.locator("//span[contains(.,'"+dataKos+"')]/following-sibling::span");
+        editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
         playwright.clickOn(editDataKos);
     }
 
     /**
      * Click facilities checkbox
+     *
      * @param section  is facility section, example "Fasilitas Umum"
      * @param facility is facility name
      */
     public void clickFacilitiesCheckbox(String section, String facility) {
-        fasilitasFeature = page.locator("//h4[contains(., '"+section+"')]/following::div//span[contains(text(), '"+facility+"')]").first();
+        fasilitasFeature = page.locator("//h4[contains(., '" + section + "')]/following::div//span[contains(text(), '" + facility + "')]").first();
         playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
         playwright.clickOn(fasilitasFeature);
     }
 
     /**
      * Verify button edit finish is disabled
+     *
      * @return true if disabled
      */
     public boolean isEditFinishedButtonDisabled() {
@@ -644,6 +671,7 @@ public class PropertySayaPO {
 
     /**
      * Get warning title in certain facility
+     *
      * @param facility is facility section
      * @return error message title
      */
@@ -655,6 +683,7 @@ public class PropertySayaPO {
 
     /**
      * Get warning description in certain facility
+     *
      * @param facility is facility section
      * @return error message description
      */
@@ -666,6 +695,7 @@ public class PropertySayaPO {
 
     /**
      * Get title for success edit pop up
+     *
      * @return String pop up title
      */
     public String getTitlePopUpSuccessEditKos() {
@@ -689,7 +719,7 @@ public class PropertySayaPO {
             dialog.dismiss();
         });
         playwright.clickOn(locationTextBox);
-        playwright.fill(locationTextBox,locationName);
+        playwright.fill(locationTextBox, locationName);
     }
 
     /**
@@ -702,16 +732,18 @@ public class PropertySayaPO {
 
     /**
      * Enter address notes
+     *
      * @param notes is address notes
      */
     public void enterAddressNotes(String notes) {
         playwright.pageScrollUntilElementIsVisible(addressNotesInput);
         playwright.clearText(addressNotesInput);
-        playwright.fill(addressNotesInput,notes);
+        playwright.fill(addressNotesInput, notes);
     }
 
     /**
      * Get text in promo ngebut infobar
+     *
      * @return String promo ngebut info
      */
     public String getPromoNgebutInfo() {
@@ -720,6 +752,7 @@ public class PropertySayaPO {
 
     /**
      * Verify if monthly price field is enable
+     *
      * @return true if enable
      */
     public boolean isMonthlyPriceFieldDisable() {
@@ -735,6 +768,7 @@ public class PropertySayaPO {
 
     /**
      * Verify Pop up modal visible
+     *
      * @return boolean true, false
      */
     public boolean isPopUpModalVisible() {
@@ -743,6 +777,7 @@ public class PropertySayaPO {
 
     /**
      * Verify status kos
+     *
      * @return statusKos
      */
     public boolean isStatusKos() {
@@ -751,6 +786,7 @@ public class PropertySayaPO {
 
     /**
      * Get text warning price daily, weekly, monthly, three monthly,six monthly, yearly price
+     *
      * @return String warning daily, weekly, monthly, three monthly,six monthly, yearly price
      */
     public String getWarningYearlyPrice(Integer i) {
@@ -760,6 +796,7 @@ public class PropertySayaPO {
 
     /**
      * Check if button update price is disable
+     *
      * @return true if disable
      */
     public boolean isButtonUpdatePriceDisable() {
@@ -768,9 +805,8 @@ public class PropertySayaPO {
 
     /**
      * Click tambah data iklan -> tambah iklan baru -> choose add kos or apartement
-     * @param jenisProperti
-     * e.g Kost, Apartemen
      *
+     * @param jenisProperti e.g Kost, Apartemen
      */
     public void clickTambahDataIklan(String jenisProperti) {
         playwright.clickOn(tambahDataIklan);
@@ -783,10 +819,9 @@ public class PropertySayaPO {
 
     /**
      * Input property name
-     * @param propertyName
-     * Can use add and edit
-     * If edit nama project field doesn't appear
      *
+     * @param propertyName Can use add and edit
+     *                     If edit nama project field doesn't appear
      */
     public void inputPropertyName(String propertyName) {
         if (propertyNameField.isVisible()) {
@@ -796,8 +831,8 @@ public class PropertySayaPO {
 
     /**
      * Input nama unit apartemen
-     * @param namaUnit
      *
+     * @param namaUnit
      */
     public void inputNamaUnit(String namaUnit) {
         playwright.forceFill(unitNameField, namaUnit);
@@ -805,8 +840,8 @@ public class PropertySayaPO {
 
     /**
      * Input nomor unit
-     * @param nomorUnit
      *
+     * @param nomorUnit
      */
     public void inputNoUnit(String nomorUnit) {
         playwright.forceFill(unitNumberField, nomorUnit);
@@ -814,9 +849,8 @@ public class PropertySayaPO {
 
     /**
      * Select tipe unit
-     * @param tipeUnit
-     * e.g 1-Room Studio, 2 BR, 3 BR, 4 BR, Lainnya
      *
+     * @param tipeUnit e.g 1-Room Studio, 2 BR, 3 BR, 4 BR, Lainnya
      */
     public void selectUnitType(String tipeUnit) {
         playwright.selectDropdownByValue(unitTypeField, tipeUnit);
@@ -824,8 +858,8 @@ public class PropertySayaPO {
 
     /**
      * input lantai apartemen
-     * @param lantai
      *
+     * @param lantai
      */
     public void inputLantai(String lantai) {
         playwright.forceFill(floorPropertyField, lantai);
@@ -833,8 +867,8 @@ public class PropertySayaPO {
 
     /**
      * Input unit size
-     * @param luasUnit
      *
+     * @param luasUnit
      */
     public void inputUnitSize(String luasUnit) {
         playwright.forceFill(unitSizeField, luasUnit);
@@ -842,8 +876,8 @@ public class PropertySayaPO {
 
     /**
      * Select price type
-     * @param priceType
      *
+     * @param priceType
      */
     public void selectPriceType(String priceType) {
         priceTypeCheckBox = page.locator("label").filter(new Locator.FilterOptions().setHasText(priceType));
@@ -853,45 +887,60 @@ public class PropertySayaPO {
     /**
      * Input apartemen price
      * After check price type, then input the price
+     *
      * @param priceType e.g Perhari, Perminggu, Perbulan, Pertahun
      * @param price
-     *
      */
     public void inputApartementPrice(String priceType, String price) {
         String element;
-        switch (priceType){
-            case "Perhari": element = "Daily"; break;
-            case "Perminggu": element = "Weekly"; break;
-            case "Perbulan": element = "Monthly"; break;
-            case "Pertahun": element = "Yearly"; break;
+        switch (priceType) {
+            case "Perhari":
+                element = "Daily";
+                break;
+            case "Perminggu":
+                element = "Weekly";
+                break;
+            case "Perbulan":
+                element = "Monthly";
+                break;
+            case "Pertahun":
+                element = "Yearly";
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + priceType);
         }
-        priceApartementField = page.locator("//input[@id='inputPrice"+element+"']");
+        priceApartementField = page.locator("//input[@id='inputPrice" + element + "']");
         playwright.waitTillLocatorIsVisible(priceApartementField, 3000.0);
         playwright.forceFill(priceApartementField, price);
     }
 
     /**
      * Select fasilitas unit
-     * @param fasilitasUnit
      *
+     * @param fasilitasUnit
      */
     public void selectFasilitasUnit(String fasilitasUnit) {
-        String element = "//label[contains(.,'"+ fasilitasUnit +"')]";
+        String element = "//label[contains(.,'" + fasilitasUnit + "')]";
         playwright.clickOn(page.locator(element));
     }
 
     /**
      * Select fasilitas kamar
+     *
      * @param fasilitasKamar
      */
     public void selectFasilitasKamar(String fasilitasKamar) {
         String element = "";
-        switch (fasilitasKamar){
-            case "Not Furnished": element = "[for='isFurnished0']"; break;
-            case "Semi Furnished": element = "[for='isFurnished1']"; break;
-            case "Furnished": element = "[for='isFurnished2']"; break;
+        switch (fasilitasKamar) {
+            case "Not Furnished":
+                element = "[for='isFurnished0']";
+                break;
+            case "Semi Furnished":
+                element = "[for='isFurnished1']";
+                break;
+            case "Furnished":
+                element = "[for='isFurnished2']";
+                break;
         }
         playwright.clickOn(page.locator(element));
     }
@@ -899,7 +948,6 @@ public class PropertySayaPO {
     /**
      * Upload phoyo cover apartemen
      * Photo can't > 5mb
-     *
      */
     public void uploadCoverPhotoApartemen() {
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
@@ -911,17 +959,24 @@ public class PropertySayaPO {
 
     /**
      * Upload photo apartemen
+     *
      * @param photoType e.g photo kamar, kamar mandi, dan lainnya
-     * photo can't > 5mb
+     *                  photo can't > 5mb
      */
     public void uploadPhotoApartemen(String photoType) {
         String element = "";
-        switch (photoType){
-            case "kamar": element = "Bedroom"; break;
-            case "kamar mandi": element = "Bath"; break;
-            case "lainnya": element = "Other"; break;
+        switch (photoType) {
+            case "kamar":
+                element = "Bedroom";
+                break;
+            case "kamar mandi":
+                element = "Bath";
+                break;
+            case "lainnya":
+                element = "Other";
+                break;
         }
-        uploadPhotoApartement = page.locator("//div[@id='photo"+element+"']");
+        uploadPhotoApartement = page.locator("//div[@id='photo" + element + "']");
 
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoApartement.click());
@@ -933,7 +988,6 @@ public class PropertySayaPO {
     /**
      * Select property name
      * After owner input property name, will be display dropdown suggestion of property name
-     *
      */
     public void selectPropertyName(String namaProject) {
         if (propertyNameField.isVisible()) {
@@ -943,8 +997,8 @@ public class PropertySayaPO {
 
     /**
      * Click furniture if check fasilitas kamar is semi furnished and furnished
-     * @param furniture
      *
+     * @param furniture
      */
     public void clickFurnished(String furniture) {
         playwright.clickOnText(furniture);
@@ -953,29 +1007,28 @@ public class PropertySayaPO {
     /**
      * Click edit apartemen link
      * Property name from getSearchPropertyName
-     *
      */
     public void clickEditDataApartemen() {
-        editDataApartemenLink = page.locator("//p[contains(., '"+getSearchPropertyName()+"')]/following::a[@class='clickable-link edit-data-link'][1]");
+        editDataApartemenLink = page.locator("//p[contains(., '" + getSearchPropertyName() + "')]/following::a[@class='clickable-link edit-data-link'][1]");
         playwright.clickOn(editDataApartemenLink);
     }
 
     /**
      * Get status property
+     *
      * @param searchPropertyName
      * @return statusApartement
      * e.g Aktif, Diperiksa Admin
-     *
      */
     public String getStatusProperty(String searchPropertyName) {
-        statusApartement = page.locator("//p[contains(., '"+searchPropertyName+"')]/parent::*/preceding::span[@class='status unverified-waiting']");
+        statusApartement = page.locator("//p[contains(., '" + searchPropertyName + "')]/parent::*/preceding::span[@class='status unverified-waiting']");
         return playwright.getText(statusApartement);
     }
 
     /**
      * Search apartemen property
-     * @param namaUnit
      *
+     * @param namaUnit
      */
     public void searchApartPropertySaya(String namaUnit) {
         setSearchPropertyName(namaUnit);
@@ -987,8 +1040,6 @@ public class PropertySayaPO {
 
     /**
      * Click submit button
-     *
-     *
      */
     public void clickOnSubmitButton() {
         playwright.clickOnTextButton("Submit", 3000.0);
@@ -997,8 +1048,6 @@ public class PropertySayaPO {
 
     /**
      * Click on selesai button
-     *
-     *
      */
     public void clickOnSelesaiButton() {
         playwright.waitTillLocatorIsVisible(selesaiLink, 3000.0);
@@ -1007,6 +1056,7 @@ public class PropertySayaPO {
 
     /**
      * Input descirption
+     *
      * @param deskripsi
      */
     public void inputDescription(String deskripsi) {
@@ -1015,6 +1065,7 @@ public class PropertySayaPO {
 
     /**
      * Input kos name
+     *
      * @param kosName (include random text from property saya steps)
      */
     public void inputKosName(String kosName) {
@@ -1024,39 +1075,40 @@ public class PropertySayaPO {
 
     /**
      * Checklist roomtype
+     *
      * @param roomTypeCheck
      */
     public void checkRoomType(String roomTypeCheck) {
-        if (roomTypeCheck.equals("yes")){
+        if (roomTypeCheck.equals("yes")) {
             playwright.clickOn(roomTypeCheckbox);
         }
     }
 
     /**
      * input room type name
-     * @param roomTypeName
      *
+     * @param roomTypeName
      */
     public void inputRoomTypeName(String roomTypeName) {
-        if(roomTypeCheckbox.isChecked()){
+        if (roomTypeCheckbox.isChecked()) {
             playwright.forceFill(roomTypeField, roomTypeName);
         }
     }
 
     /**
      * Select kost type
-     * @param kosType
-     * e.g putra, putri, campur
+     *
+     * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
-        kostTypeImage = page.locator("[alt='type-kost-"+ kosType +"']");
+        kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
         playwright.clickOn(kostTypeImage);
     }
 
     /**
      * Input description kos
-     * @param descKos
      *
+     * @param descKos
      */
     public void inputDescKos(String descKos) {
         playwright.forceFill(descKosField, Objects.requireNonNullElse(descKos, ""));
@@ -1064,8 +1116,8 @@ public class PropertySayaPO {
 
     /**
      * Select the year of build kos
-     * @param buildKos
      *
+     * @param buildKos
      */
     public void selectBuildKos(String buildKos) {
         playwright.clickOn(selectYear);
@@ -1076,8 +1128,8 @@ public class PropertySayaPO {
 
     /**
      * Input other note on data kos
-     * @param otherNote
      *
+     * @param otherNote
      */
     public void inputOtherNote(String otherNote) {
         playwright.forceFill(noteKosField, Objects.requireNonNullElse(otherNote, ""));
@@ -1085,8 +1137,6 @@ public class PropertySayaPO {
 
     /**
      * Click atur peraturan button
-     *
-     *
      */
     public void clickOnAturPeraturanKos() {
         playwright.clickOnTextButton("Atur Peraturan");
@@ -1094,6 +1144,7 @@ public class PropertySayaPO {
 
     /**
      * Check 1 of the kost rule
+     *
      * @param rule
      */
     public void clickKosRulesCheckbox(String rule) {
@@ -1102,8 +1153,6 @@ public class PropertySayaPO {
 
     /**
      * Upload the invalid aturan kos
-     *
-     *
      */
     public void uploadInvalidAturanKos() {
         String imagePath = "src/main/resources/images/mamikos.gif";
@@ -1115,6 +1164,7 @@ public class PropertySayaPO {
 
     /**
      * Get error message upload foto
+     *
      * @return errorMessage
      */
     public String getErrorUpload() {
@@ -1123,8 +1173,6 @@ public class PropertySayaPO {
 
     /**
      * Upload valid aturan kos
-     *
-     *
      */
     public void uploadValidAturanKos() {
         String imagePath = "src/main/resources/images/aturan-kos.png";
@@ -1136,8 +1184,8 @@ public class PropertySayaPO {
 
     /**
      * check error upload visible or no
-     * @return errorMessage
      *
+     * @return errorMessage
      */
     public boolean isErrorUploadDisappear() {
         return playwright.isLocatorVisibleAfterLoad(errorMessage, 3000.0);
@@ -1146,7 +1194,6 @@ public class PropertySayaPO {
     /**
      * CLick Lanjutkan button from data kos to alamat kos
      * Allow the geolocation permission
-     *
      */
     public void allowLocation() {
         playwright.acceptDialog(lanjutkanButton);
@@ -1155,20 +1202,21 @@ public class PropertySayaPO {
 
     /**
      * Input location kos
-     * @param keyLocation
-     * select the first location suggestion
      *
+     * @param keyLocation select the first location suggestion
      */
     public void inputLocationKos(String keyLocation) {
         page.reload();
         playwright.clickOn(inputLocation);
-        playwright.realKeyboardType(keyLocation);;
+        playwright.realKeyboardType(keyLocation);
+        ;
         playwright.hardWait(10000.0);
         playwright.clickOn(firstLocationSuggestion);
     }
 
     /**
      * Insert text to search bar in room allotment and hit enter
+     *
      * @param text is text we want to insert
      */
     public void searchNameOrRoomNo(String text) {
@@ -1192,6 +1240,7 @@ public class PropertySayaPO {
 
     /**
      * Get room status after update room
+     *
      * @return return toast text e.g Anda berhasil update kamar
      */
     public String getRoomStatus() {
@@ -1201,6 +1250,7 @@ public class PropertySayaPO {
 
     /**
      * Filter room table with selected text in param
+     *
      * @param filter is room filter text
      */
     public void filterRoomTable(String filter) {
@@ -1212,6 +1262,7 @@ public class PropertySayaPO {
 
     /**
      * Fill floor field with text
+     *
      * @param floor is text for floor
      */
     public void insertTextFloor(String floor) {
@@ -1221,6 +1272,7 @@ public class PropertySayaPO {
 
     /**
      * Fill room name field with text
+     *
      * @param room is text for room name/number
      */
     public void insertTextRoomName(String room) {
@@ -1230,6 +1282,7 @@ public class PropertySayaPO {
 
     /**
      * Get goldplus label beside room Name/number
+     *
      * @param roomNo is room name/number
      * @return text goldplus
      */
@@ -1240,6 +1293,7 @@ public class PropertySayaPO {
 
     /**
      * Get error message below room name field
+     *
      * @return error message below room name field
      */
     public String getErrorRoomName() {
@@ -1248,6 +1302,7 @@ public class PropertySayaPO {
 
     /**
      * Get error message below floor field
+     *
      * @return error message below floor field
      */
     public String getErrorFloor() {
@@ -1256,6 +1311,7 @@ public class PropertySayaPO {
 
     /**
      * Verify if table is empty
+     *
      * @return true if empty
      */
     public boolean isTableEmpty() {
@@ -1264,7 +1320,6 @@ public class PropertySayaPO {
 
     /**
      * Click Lanjutkan button (without access geolocation permission)
-     *
      */
     public void clickOnLanjutkan() {
         playwright.waitTillLocatorIsVisible(lanjutkanButton);
@@ -1273,12 +1328,12 @@ public class PropertySayaPO {
 
     /**
      * upload invalid photo kos
-     * @param photoName
      *
+     * @param photoName
      */
     public void uploadInvalidPhotoKos(String photoName) {
         String imagePath = "src/main/resources/images/mamikos.gif";
-        uploadPhotoKos = page.getByText("camera + Tambah foto "+photoName);
+        uploadPhotoKos = page.getByText("camera + Tambah foto " + photoName);
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
@@ -1287,8 +1342,6 @@ public class PropertySayaPO {
 
     /**
      * Upload valid photo kos
-     *
-     *
      */
     public void uploadValidPhotoKos() {
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
@@ -1300,18 +1353,18 @@ public class PropertySayaPO {
 
     /**
      * select room size
-     * @param roomSize
      *
+     * @param roomSize
      */
     public void selectRoomSize(String roomSize) {
-        roomSizeProperty = page.locator("//span[.='"+ roomSize +"']");
+        roomSizeProperty = page.locator("//span[.='" + roomSize + "']");
         playwright.clickOn(roomSizeProperty);
     }
 
     /**
      * Input total room
-     * @param totalRoom
      *
+     * @param totalRoom
      */
     public void inputTotalRoom(String totalRoom) {
         playwright.forceFill(totalRoomField, totalRoom);
@@ -1319,8 +1372,8 @@ public class PropertySayaPO {
 
     /**
      * input room available
-     * @param roomAvailable
      *
+     * @param roomAvailable
      */
     public void inputRoomAvailable(String roomAvailable) {
         playwright.forceFill(roomAvailableField, roomAvailable);
@@ -1328,8 +1381,8 @@ public class PropertySayaPO {
 
     /**
      * Input monthly price
-     * @param monthlyPrice
      *
+     * @param monthlyPrice
      */
     public void inputMonthyPrice(String monthlyPrice) {
         playwright.clickOn(priceMonthlyField);
@@ -1339,13 +1392,13 @@ public class PropertySayaPO {
 
     /**
      * Select minimum rent duration
+     *
      * @param minRentDuration
      * @param min_rent_duration
-     *
      */
     public void selectMinRentDuration(String minRentDuration, String min_rent_duration) {
         minRentDurationChoose = page.locator("a").filter(new Locator.FilterOptions().setHasText(min_rent_duration));
-        if (minRentDuration.equals("yes")){
+        if (minRentDuration.equals("yes")) {
             playwright.clickOn(minRentDuractionCheckbox);
             playwright.clickOn(minRentDurationDropdown);
             playwright.clickOn(minRentDurationChoose);
@@ -1354,26 +1407,25 @@ public class PropertySayaPO {
 
     /**
      * checklist the other price
-     * @param checkOtherPrice
      *
+     * @param checkOtherPrice
      */
     public void selectOtherPrice(String checkOtherPrice) {
-        if (checkOtherPrice.equals("yes")){
+        if (checkOtherPrice.equals("yes")) {
             playwright.clickOn(otherPriceCheckbox);
         }
     }
 
     /**
      * Input other price
+     *
      * @param priceType
      * @param otherPrice
-     * @param index
-     * eg. harga per hari, harga per minggu, per 3 bulan, per 6 bulan, per tahun
-     *
+     * @param index      eg. harga per hari, harga per minggu, per 3 bulan, per 6 bulan, per tahun
      */
     public void inputOtherPrice(String priceType, String otherPrice, int index) {
         otherKostPriceMonthlyCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga Per " + priceType)).locator("span");
-        otherKostPriceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div["+ index +"]/div[@class='bg-c-field']/input[@class='input step-seven__input']");
+        otherKostPriceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div[" + index + "]/div[@class='bg-c-field']/input[@class='input step-seven__input']");
 
         playwright.clickOn(otherKostPriceMonthlyCheckbox);
         playwright.clickOn(otherKostPriceMonthlyField);
@@ -1383,8 +1435,6 @@ public class PropertySayaPO {
 
     /**
      * Click Selesai button for add kos
-     *
-     *
      */
     public void clickOnSelesaiSubmit() {
         playwright.clickOnTextButton("Selesai");
@@ -1392,10 +1442,31 @@ public class PropertySayaPO {
 
     /**
      * Waiting the page loaded
-     *
-     *
      */
     public void waitPageLoaded() {
         playwright.waitTillPageLoaded(10000.0);
+    }
+
+    /**
+     * Click delete button on kos draft
+     */
+    public void clickDeleteKosDraft() {
+        playwright.clickOn(hapusDraftKos);
+    }
+
+    /**
+     * Click delete button on pop up confirmation
+     */
+    public void clickHapusOnPopUpConfirmation() {
+        playwright.clickOn(hapusKonfirm);
+    }
+
+    /**
+     * Click hapus button on pop up konfirmasi Hapus draft kos
+     *
+     * @param text
+     */
+    public void clickOnNewBBKPopUp(String text) {
+        playwright.clickOnTextButton(text);
     }
 }
