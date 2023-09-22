@@ -15,6 +15,7 @@ import utilities.JavaHelpers;
 
 import java.util.List;
 import java.util.Map;
+import data.mamikos.Mamikos;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
@@ -444,8 +445,7 @@ public class PropertySayaSteps {
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
         kosNamePrefix = table.get(0).get("kos name") + " "+ generatedString.toUpperCase();
         propertySaya.inputKosName(kosNamePrefix);
-        propertySaya.setPropertyName(kosNamePrefix);
-        System.out.println("SET: "+ propertySaya.getPropertyName());
+        Mamikos.setPropertyKosName(kosNamePrefix);
         propertySaya.checkRoomType(table.get(0).get("room type check"));
         propertySaya.inputRoomTypeName(table.get(0).get("room type name"));
         propertySaya.selectKostType(table.get(0).get("kos type"));
@@ -604,19 +604,8 @@ public class PropertySayaSteps {
     @Then("user see kos with valid name, status {string} and type {string}")
     public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
         propertySaya.waitPageLoaded();
-        System.out.println("AUTOMATION: "+ propertySaya.getPropertyName());
-        Assert.assertEquals(propertySaya.getFirstKosName(),propertySaya.getPropertyName(),  "Kos name is wrong");
+        Assert.assertEquals(propertySaya.getFirstKosName().substring(0, 28),Mamikos.getPropertyKosName(),  "Kos name is wrong");
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
-    }
-
-    @Then("check setter getter")
-    public void checkSetterGetter() {
-        System.out.println("SET 3: "+ propertySaya.getPropertyName());
-    }
-
-    @And("user delete the kos in admin kos owner")
-    public void userDeleteTheKosInAdminKosOwner() {
-        propertySaya.deleteKosOwner();
     }
 }

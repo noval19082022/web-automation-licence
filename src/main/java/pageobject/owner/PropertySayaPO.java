@@ -16,7 +16,6 @@ public class PropertySayaPO {
     private Page page;
     private PlaywrightHelpers playwright;
     @Setter @Getter private String searchPropertyName;
-    @Setter @Getter public String propertyName;
 
     Locator kostDropdown;
     Locator searchKostTextbox;
@@ -125,7 +124,8 @@ public class PropertySayaPO {
     Locator otherKostPriceMonthlyField;
     Locator minRentDurationDropdown;
     Locator minRentDurationChoose;
-    Locator deleteKostIcon;
+
+    Locator popUpButton;
 
 
     public PropertySayaPO(Page page) {
@@ -215,7 +215,7 @@ public class PropertySayaPO {
         minRentDuractionCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda ingin terapkan minimum durasi sewa? Jangka waktu minimum untuk bisa menyewa kamar kos Anda.")).locator("span");
         otherPriceCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga sewa selain bulanan")).locator("span");
         minRentDurationDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Min. 1 Bln dropdown-down"));
-        deleteKostIcon = page.locator("[title='Verify'] > .fa");
+
     }
 
     /**
@@ -1396,15 +1396,5 @@ public class PropertySayaPO {
      */
     public void waitPageLoaded() {
         playwright.waitTillPageLoaded(10000.0);
-    }
-
-    /**
-     * Delete kos owner
-     *
-     *
-     */
-    public void deleteKosOwner() {
-        playwright.forceClickOn(deleteKostIcon);
-        playwright.acceptDialog(deleteKostIcon);
     }
 }

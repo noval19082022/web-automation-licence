@@ -14,7 +14,6 @@ Feature: Create Kos From Home
     When owner create new kos
     Then user should redirect to link "https://owner-jambu.kerupux.com/kos/create?step=1"
 
-
   @TEST_LIMO-2768 @continue @createNewKos
   Scenario: [Form add New Kost][Data Kos]Check checkbox regulations kos and uploaded regulations kos with invalid value
     Given user go to mamikos homepage
@@ -22,6 +21,7 @@ Feature: Create Kos From Home
       | phone stag   | password  |
       | 089673406382 | qwerty123 |
     And owner navigates to property saya kos
+    And owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
@@ -85,14 +85,4 @@ Feature: Create Kos From Home
       | 300000        | yes                     | Min. 1 Hari       | yes               | 50000       | 200000       | 800000              | 1700000           | 3000000      |
     And owner click lanjutkan button for next steps
     And owner click done in success page
-#    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
-
-  @admindeleteKos
-  Scenario: Delete kos in admin
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "kos Automation TEST" in admin kos owner page
-    And user delete the kos in admin kos owner
+    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"

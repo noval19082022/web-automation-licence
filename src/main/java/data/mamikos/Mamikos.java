@@ -1,5 +1,7 @@
 package data.mamikos;
 
+import lombok.Getter;
+import lombok.Setter;
 import utilities.JavaHelpers;
 
 public class Mamikos {
@@ -54,5 +56,8 @@ public class Mamikos {
     public static final String MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiads") ;
     public static final String MAMIADS_FROM_OWNER_DASHBOARD = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsFromOwnerDashboard");
     public static final String TOP_UP_MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsBalance");
+
+    @Setter @Getter
+    private static  String propertyKosName;
 
 }
