@@ -28,5 +28,6 @@ public class ApiEndpoints {
     // ---- Owner Block ---- //
     public static final String OWNER_LOGIN = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerLogin");
     public static final String OWNER_PROFILE = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerProfile");
+    public static final String OWNER_BOOKING_LIST = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerBookingList");
     // ---- Owner Block ---- //
 }
