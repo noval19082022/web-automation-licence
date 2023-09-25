@@ -45,8 +45,16 @@ public class OwnerAcceptBookingSteps {
     public void ownerAcceptBookingFromTenant(DataTable table) throws InterruptedException {
         tenantNames = table.asMaps(String.class, String.class);
         var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+        var maxLoop = 0;
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+        do {
+            pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+            maxLoop++;
+            if (maxLoop >= 10) {
+                break;
+            }
+        } while (!pengajuanBooking.terimaButtonWithNameVisible(tenantName));
+
         billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnPilihDitempat();

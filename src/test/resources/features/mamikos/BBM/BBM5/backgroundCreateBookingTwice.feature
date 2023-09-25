@@ -17,7 +17,7 @@ Feature: BnB feature with background create booking twice
     And tenant search kost then go to kost details:
       | kost name stag    | kost name prod    |
       | kost reykjavik    | kost reykjavik    |
-    And tenant booking kost for "today"
+    And tenant booking kost for "Tomorrow"
     And user go to mamikos homepage
     And user logs out as a Tenant user
 
@@ -38,7 +38,7 @@ Feature: BnB feature with background create booking twice
     And user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000618   | 08100000618   | qwerty123     |
-    Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
+    Then user can see shortcut homepage with "Yah, pengajuan sewamu ditolak"
     When tenant navigate to riwayat and draf booking
     And user cancel booking
     Then user redirected to "/user/booking"

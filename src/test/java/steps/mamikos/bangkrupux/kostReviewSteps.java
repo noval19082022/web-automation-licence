@@ -175,4 +175,9 @@ public class kostReviewSteps {
     public void userClickCancelOnCreateReviewSection() throws InterruptedException  {
         kostReview.clickOnCancelReviewButton();
     }
+    @And("admin reject request review kos {string}")
+    public void adminRejectRequestReviewKos(String kosName) {
+        kostReview.inputKostName(kosName);
+        kostReview.clickOnRejectReviewKos();
+    }
 }

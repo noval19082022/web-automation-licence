@@ -1,4 +1,4 @@
-@regression @tenantTracker @BBM3 @inter
+@regression @tenantTracker @BBM3
 
 Feature: SinggahSini - Tenant Tracker - Main Page
 
@@ -10,7 +10,7 @@ Feature: SinggahSini - Tenant Tracker - Main Page
       | pman@mamiteam.com | pmanM4m1t34m  |
     And admin go to tenant communication menu
     Then user see pagination menu on Detail Tenant is displayed
-    When user click pagination number "2137"
+    When user click pagination number "2"
     Then user see display data row from 20 riwayat
 
   @TEST_BBM-554

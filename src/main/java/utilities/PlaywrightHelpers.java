@@ -147,6 +147,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Wait till locator is visible then click on desired locator
+     *
+     * @param locator target locator
+     */
+    public void waitForLocatorVisibleAndClickOn(Locator locator) {
+        waitTillLocatorIsVisible(locator);
+        locator.click();
+    }
+
+    /**
      * Scroll to coordinate
      * @param deltaX
      * @param deltaY
