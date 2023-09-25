@@ -3,6 +3,8 @@ package pageobject.owner.mamiads;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -291,6 +293,21 @@ public class MamiAdsPO {
     public String getAnswerText(String answerText) {
         String answerTextLocator = "//p[contains(.,'" + answerText + "')]";
         return playwright.getText(page.locator(answerTextLocator));
+    }
+
+    /**
+     * Navigates to Mamiads History page
+     */
+    public void navigatesToMamiadsHistory() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS_HISTORY, 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Navigates to Mamiads page
+     */
+    public void navigatesToMamiads() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
     }
 }
 

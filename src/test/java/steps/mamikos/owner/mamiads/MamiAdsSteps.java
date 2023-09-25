@@ -19,6 +19,16 @@ public class MamiAdsSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
 
+    @When("user navigates to mamiads dashboard")
+    public void user_navigates_to_mamiads_dashboard() {
+        mamiAdsPO.navigatesToMamiads();
+    }
+
+    @And("user navigate to mamiads history page")
+    public void userNavigateToMamiadsHistoryPage() {
+        mamiAdsPO.navigatesToMamiadsHistory();
+    }
+
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
         mamiAdsPO.purchaseOwnerSaldoFromMamiads(saldo);
@@ -58,12 +68,6 @@ public class MamiAdsSteps {
     public void userVerifyCountOfRiwayatAdded(int numberAdded) {
         int riwayatAfterBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
         Assert.assertEquals(riwayatAfterBeliSaldo, (riwayatBeforeBeliSaldo+numberAdded), "Count of riwayat doesn't Match");
-    }
-
-    @When("user navigates to mamiads dashboard")
-    public void user_navigates_to_mamiads_dashboard() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
-        playwright.bringPageToView(page);
     }
 
     @Then("user redirected to guides page mamiAds")

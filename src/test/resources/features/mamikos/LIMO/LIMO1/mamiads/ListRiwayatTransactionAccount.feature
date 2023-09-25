@@ -18,9 +18,9 @@ Feature: List Riwayat Transaction Account
     When user login as owner:
       | phone stag    | phone prod    | password  |
       | 083176408449  | 0895365624343 | qwerty123 |
-    And user navigate to mamiads page
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user verify count of riwayat before beli saldo
     And user wants to buy saldo MamiAds "Rp6.000"
-    And user navigate to mamiads page
+    And user navigates to mamiads dashboard
     Then user verify count of riwayat added 1
