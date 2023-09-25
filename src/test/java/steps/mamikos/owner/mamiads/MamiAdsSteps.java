@@ -92,4 +92,19 @@ public class MamiAdsSteps {
         Assert.assertEquals(mamiAdsPO.getTitleSelesaiText(), "Belum Ada Transaksi");
         Assert.assertTrue(playwright.isTextDisplayed("Transaksi yang sudah selesai akan muncul di halaman ini."));
     }
+
+    @When("owner see button coba sekarang at header")
+    public void owner_see_button_coba_sekarang_at_header() {
+        mamiAdsPO.isCobaSekarangButtonHeaderisDisplayed();
+    }
+
+    @And("user click question {string}")
+    public void user_click_question(String questionText) throws InterruptedException {
+        mamiAdsPO.clickOnQuestionText(questionText);
+    }
+
+    @Then("user verify answer text {string}")
+    public void user_verify_answer_text(String answerText) {
+        Assert.assertEquals(mamiAdsPO.getAnswerText(answerText), answerText);
+    }
 }

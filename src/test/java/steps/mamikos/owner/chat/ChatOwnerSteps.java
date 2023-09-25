@@ -106,7 +106,7 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isAttachmentButtonDisabled(), "Button is enabled");
     }
 
-    @And("user dismiss FTUE goldplus")
+    @And("user/owner dismiss FTUE goldplus")
     public void userDismissFTUEGoldplus() {
         owner.dismissFTUEGoldplus();
     }

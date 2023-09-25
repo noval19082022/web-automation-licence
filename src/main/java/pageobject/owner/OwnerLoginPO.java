@@ -56,4 +56,9 @@ public class OwnerLoginPO extends LoginPO {
         profileOwnerBtn.click();
         playwright.clickOnText("Logout ");
     }
+
+    public void clickOnLoginButtonMA() {
+        playwright.clickOn(loginBtn);
+
+    }
 }

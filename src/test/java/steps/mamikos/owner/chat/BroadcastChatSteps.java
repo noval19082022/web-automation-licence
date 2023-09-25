@@ -183,7 +183,7 @@ public class BroadcastChatSteps {
 
     @Then("owner can see toast with content text is {string}")
     public void ownerCanSeeToastContentIs(String toastText) {
-        Assert.assertEquals(broadcast.getToastText(), toastText);
+        Assert.assertEquals(broadcast.getToastText(), toastText, "Toast doesn't match");
     }
 
     @When("owner goes to Tambah Broadcast Chat Bantuan & Tips Page")

@@ -20,6 +20,7 @@ public class MamiAdsPO {
     private Locator titleSelesaiRiwayatSaldoText;
     private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
+    private Locator cobaSekarangButtonHeader;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
@@ -48,6 +49,7 @@ public class MamiAdsPO {
         this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
         this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
+        this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
@@ -256,6 +258,39 @@ public class MamiAdsPO {
      */
     public void clickOnPanduanMamiAdsBackButton() {
         playwright.clickOn(paduanMamiadsBackButton);
+    }
+
+    /**
+     * Get coba sekarang button at header
+     *
+     */
+    public boolean isCobaSekarangButtonHeaderisDisplayed() {
+        return playwright.waitTillLocatorIsVisible(cobaSekarangButtonHeader,1000.0);
+    }
+
+    /**
+     * Click On Text Question
+     *
+     * @return
+     * @param
+     */
+    public void clickOnQuestionText(String questionText) throws InterruptedException {
+        playwright.pageScrollUsingCoordinate(5,5);
+        String questionTextLocator = "//p[contains(.,'" + questionText + "')]";
+        playwright.waitTillLocatorIsVisible(page.locator(questionTextLocator),1000.0);
+        playwright.clickOn(page.locator(questionTextLocator));
+
+    }
+
+    /**
+     * Get Text Answer
+     *
+     * @return answerText
+     * @param answerText
+     */
+    public String getAnswerText(String answerText) {
+        String answerTextLocator = "//p[contains(.,'" + answerText + "')]";
+        return playwright.getText(page.locator(answerTextLocator));
     }
 }
 
