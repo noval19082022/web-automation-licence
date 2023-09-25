@@ -43,6 +43,8 @@ public class HomePO {
     private Locator flashSaleIcon;
     Locator bookingKosButtonHeadBar;
     Locator kostMenuDropdown;
+    Locator singgahsiniApikMenuDropDown;
+    Locator kosAndalanMenuDropDown;
     Locator apartmentMenuDropdown;
     Locator profileMenu;
     Locator riwayatTransaksiMenu;
@@ -109,7 +111,9 @@ public class HomePO {
         this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator(".rc-photo__cover").first();
-        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
+        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
+        this.singgahsiniApikMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Singgahsini & Apik"));
+        this.kosAndalanMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apartemen"));
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
@@ -423,6 +427,24 @@ public class HomePO {
      */
     public boolean isKostMenuDisplayed() {
         return kostMenuDropdown.isVisible();
+    }
+
+    /**
+     * Check elementt Singgahsini and Apik Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSinggahsiniApikMenuDisplayed() {
+        return singgahsiniApikMenuDropDown.isVisible();
+    }
+
+    /**
+     * Check elementt Kos Andalan Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKosAndalanMenuDisplayed() {
+        return kosAndalanMenuDropDown.isVisible();
     }
 
 
