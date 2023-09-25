@@ -1,4 +1,4 @@
-@regression @BBM4 @voucher @voucher-admin @checkfailed
+@regression @BBM4 @voucher @voucher-admin
 
 Feature: Admin - Mass Voucher
 
