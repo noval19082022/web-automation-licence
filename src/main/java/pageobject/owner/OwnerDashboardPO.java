@@ -140,7 +140,7 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
-        playwright.waitTillLocatorIsVisible(manajemenKost, 3000.0);
+        playwright.waitFor(manajemenKost);
         manajemenKost.click();
     }
 
