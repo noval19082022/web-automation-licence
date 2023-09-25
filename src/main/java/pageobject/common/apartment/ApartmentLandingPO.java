@@ -5,8 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ApartmentLandingPO {
     Page page;
@@ -22,9 +24,12 @@ public class ApartmentLandingPO {
     private Locator rekomendasiTitle;
     private Locator filteringPeriod;
     private Locator filteringFurniture;
+    private Locator filteringPrice;
     private Locator listTimePeriod;
     private Locator listFurniture;
+    private Locator listPrice;
     private Locator listApartementArea;
+    private Locator fullyBookedOncard;
 
 
     public ApartmentLandingPO(Page page) {
@@ -41,9 +46,12 @@ public class ApartmentLandingPO {
         rekomendasiTitle = page.locator(".premium-recom-title");
         this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka Waktu Harian Mingguan Bulanan Tahunan$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Perabotan Semua Furnished Semi Furnished Not furnished$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Urutkan Acak Harga Termurah Harga Termahal$|^Urutkan Acak Harga Termurah Harga Termahal Kosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
         this.listFurniture = page.locator("//div[@class='rc-price__additional-data']");
+        this.listPrice = page.locator("//span[@class='rc-price__text bg-c-text bg-c-text--body-1']");
         this.listApartementArea = page.locator("//span[@class='rc-info__location bg-c-text bg-c-text--body-3']");
+        this.fullyBookedOncard = page.locator("div:nth-child(2) > div > .apartment-rc > .apartment-rc__inner > .apartment-rc__full > .apartment-rc__full-label");
     }
 
     /**
@@ -177,6 +185,7 @@ public class ApartmentLandingPO {
 
     /**
      * get apartement area from list
+     *
      * @return
      */
     public List<String> getCityAndAreaValidationOnList() {
@@ -185,6 +194,7 @@ public class ApartmentLandingPO {
 
     /**
      * user filtering apartment list on landing by furniture, example Furnished, Semi Furnished, Not furnished
+     *
      * @param furniture
      */
     public void filterByFurniture(String furniture) {
@@ -193,10 +203,58 @@ public class ApartmentLandingPO {
 
     /**
      * get list furniture period apartement
+     *
      * @return
      */
     public List<String> getApartmentListByFurniture() {
         playwright.waitTillPageLoaded();
         return playwright.getListInnerTextFromListLocator(listFurniture);
+    }
+
+    /**
+     * user filtering apartment list on landing by price direction, example Acak, Harga Termurah, Harga Termahal,penuh ke kosong
+     *
+     * @param price
+     */
+    public void filterByPriceDirection(String price) {
+        String direction = price.toLowerCase().equals("acak") ? "-" :
+                price.toLowerCase().equals("harga termurah") ? "asc" :
+                        price.toLowerCase().equals("harga termahal") ? "desc" :
+                                price.toLowerCase().equals("kosong ke penuh") ? "availability" : "-";
+        playwright.selectDropdownByValue(filteringPrice, direction);
+    }
+
+    /**
+     * get list of price
+     * @return
+     */
+    public List<Integer> getApartmentListByPrice() {
+        playwright.waitTillPageLoaded();
+        return convertStringListToIntList(playwright.getListInnerTextFromListLocator(listPrice));
+    }
+
+    private List<Integer> convertStringListToIntList(List<String> stringList) {
+        List<Integer> intList = new ArrayList<>();
+
+        for (String s : stringList) {
+            // Remove "Rp" prefix and any thousands separator (",") if present
+            String numericPart = s.replace("Rp", "").replace(".", "");
+
+            // Parse the remaining string to an integer
+            int intValue = Integer.parseInt(numericPart);
+
+            intList.add(intValue);
+        }
+
+        return intList;
+    }
+
+    /**
+     * check if fully booked is visible
+     * @return
+     */
+    public boolean isFullyBooked() {
+        playwright.waitTillPageLoaded();
+        return playwright.waitTillLocatorIsVisible(fullyBookedOncard);
     }
 }

@@ -122,4 +122,54 @@ public class SearchApartmentSteps {
             Assert.assertEquals(result.trim(), furniture);
         }
     }
+
+    @When("user filter apartment by price direction is {string}")
+    public void userFilterApartmentByPriceIs(String price) {
+        apartment.filterByPriceDirection(price);
+    }
+
+    @Then("user see displays apartment lists by price direction is {string}")
+    public void userSeeDisplaysApartmentListsByPriceDirectionIs(String price) {
+        Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
+        boolean assertionResult = (price.toLowerCase().equals("kosong ke penuh")) ? !apartment.isFullyBooked() :
+                (price.toLowerCase().equals("acak")) ? isRandom(apartment.getApartmentListByPrice()) :
+                        (price.toLowerCase().equals("harga termurah")) ? isSortedAscending(apartment.getApartmentListByPrice()) :
+                                (price.toLowerCase().equals("harga termahal")) ? isSortedDescending(apartment.getApartmentListByPrice()) :
+                                        false;
+
+        Assert.assertTrue(assertionResult, "apartment is sorted incorrectly");
+    }
+
+    private boolean isRandom(List<Integer> prices) {
+        // Check if the prices are not sorted in ascending or descending order
+        boolean ascending = true;
+        boolean descending = true;
+
+        for (int i = 1; i < prices.size(); i++) {
+            ascending = (prices.get(i) >= prices.get(i - 1)) ? ascending : false;
+            descending = (prices.get(i) <= prices.get(i - 1)) ? descending : false;
+        }
+
+        return !(ascending || descending);
+    }
+
+    private boolean isSortedAscending(List<Integer> prices) {
+        // Check if the prices are sorted in ascending order
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices.get(i) < prices.get(i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isSortedDescending(List<Integer> prices) {
+        // Check if the prices are sorted in descending order
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices.get(i) > prices.get(i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

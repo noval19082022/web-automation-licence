@@ -76,3 +76,16 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user filter apartment by furniture is "Not furnished"
     Then user see displays apartment lists by furniture is "Not Furnished"
 
+  @TEST_DOM-393 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive Case Tenant Sort Apartment by Price
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user filter apartment by price direction is "Acak"
+    Then user see displays apartment lists by price direction is "Acak"
+
+		#  Scenario: Positive case tenant sort the list of apartments from the cheapest
+    When user filter apartment by price direction is "Harga Termurah"
+    Then user see displays apartment lists by price direction is "Harga Termurah"
+
+		#  Scenario: Positive case tenant sort the list of apartments most expensive
+    When user filter apartment by price direction is "Harga Termahal"
+    Then user see displays apartment lists by price direction is "Harga Termahal"
