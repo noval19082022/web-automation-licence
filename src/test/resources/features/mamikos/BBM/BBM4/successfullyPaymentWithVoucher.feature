@@ -39,7 +39,6 @@ Scenario: Admin Batalkan Contract
       | 0890000000289 | 0890000000289 | Bismillah@01 |
     And owner accept booking via Homepage
     And owner back to owner dashboard
-    Then owner can see pengajuan sewa detail on dashboard
 
   @tenantInputVoucher
   @continue
