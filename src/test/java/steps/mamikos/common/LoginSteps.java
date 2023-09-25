@@ -81,6 +81,16 @@ public class LoginSteps {
             .clickOnLoginButton();
     }
 
+    @When("user login as owner from mamiads landing page:")
+    public void userLoginsAsOwnerFromMamiAds(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        owner.fillPhoneNumber(phone)
+                .fillPassword(password)
+                .clickOnLoginButtonMA();
+    }
+
     @When("admin login to mamipay:")
     public void adminLoginToMamipay(DataTable table) {
         emailCredential = table.asMaps(String.class, String.class);
@@ -151,7 +161,7 @@ public class LoginSteps {
     }
 
     @And("user logs out as a Tenant user")
-    public void userLogsOutAsTenant() throws InterruptedException {
+    public void userLogsOutAsTenant() {
         tenantLogin.logoutAsTenant();
     }
 

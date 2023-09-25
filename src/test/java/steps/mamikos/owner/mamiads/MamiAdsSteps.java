@@ -1,14 +1,22 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.mamiads.MamiAdsPO;
+import utilities.PlaywrightHelpers;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class MamiAdsSteps {
     Page page = ActiveContext.getActivePage();
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
@@ -31,5 +39,41 @@ public class MamiAdsSteps {
         Assert.assertEquals(mamiAdsPO.getTitleText(), title);
         Assert.assertEquals(mamiAdsPO.getMessageText(), message);
 
+    }
+
+    @When("user navigates to mamiads dashboard")
+    public void user_navigates_to_mamiads_dashboard() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
+    @Then("user redirected to guides page mamiAds")
+    public void user_redirected_to_guides_page_mami_ads() {
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE);
+    }
+
+    @Then("tap back button on panduan Mamiads.")
+    public void tap_back_button_on_panduan_mamiads() {
+       mamiAdsPO.clickOnPanduanMamiAdsBackButton();
+    }
+
+    @Then("user redirected to guides page mamiAds from GP")
+    public void user_redirected_to_guides_page_mami_ads_from_gp() {
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE_GP);
+    }
+
+    @When("owner see button coba sekarang at header")
+    public void owner_see_button_coba_sekarang_at_header() {
+        mamiAdsPO.isCobaSekarangButtonHeaderisDisplayed();
+    }
+
+    @And("user click question {string}")
+    public void user_click_question(String questionText) throws InterruptedException {
+        mamiAdsPO.clickOnQuestionText(questionText);
+    }
+
+    @Then("user verify answer text {string}")
+    public void user_verify_answer_text(String answerText) {
+        Assert.assertEquals(mamiAdsPO.getAnswerText(answerText), answerText);
     }
 }

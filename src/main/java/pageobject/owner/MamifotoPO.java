@@ -34,6 +34,8 @@ public class MamifotoPO {
     Locator headerFAQ;
     Locator contentFAQfirstList;
     Locator riwayatPaketButton;
+    Locator panduanAreaClick;
+    Locator detailTitle;
 
 
     //Locator Mamifoto at Select Package
@@ -84,6 +86,7 @@ public class MamifotoPO {
     //Locator invoice mamifoto
     Locator headerInvoiceMamifoto;
     Locator textDiskonGPInvoiceMamifoto;
+    Locator invoiceUnpaid;
 
 
 
@@ -143,7 +146,8 @@ public class MamifotoPO {
         this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
         this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
         this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
-
+        this.panduanAreaClick = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Panduan area & fasilitas"));
+        this.invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
     }
 
 
@@ -151,6 +155,7 @@ public class MamifotoPO {
      * Click on Fitur Promosi Sidebar menu
      */
     public void clickOnFiturPromosi() {
+        playwright.waitTillPageLoaded();
         fiturPromosiSidebar.click();
     }
 
@@ -356,6 +361,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderHistoryisAppear() {
+        playwright.waitTillDomContentLoaded(5000.0);
         return headerRiwayatPembelian.isVisible();
     }
 
@@ -545,7 +551,7 @@ public class MamifotoPO {
      * Click on button bayar sekarang
      */
     public void clickOnButtonBayarSekarangMamifoto() {
-        buttonBayarSekarang.click();
+        playwright.clickOn(buttonBayarSekarang);
     }
 
     /**
@@ -617,10 +623,33 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at first riwayat page
      */
     public void clickOnSeeFirstDetailTransaction() {
-        Locator invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
         invoiceUnpaid.click();
+        playwright.waitTillPageLoaded();
     }
 
+    /**
+     * Check unpaid Invoice Mamifoto
+     * return true or false
+     */
+    public boolean checkUnpaidInvoiceMamifoto(){
+        return playwright.waitTillLocatorIsVisible(invoiceUnpaid);
+    }
+    /**
+     * Click on button bayar sekarang
+     */
+    public void clickOnPanduanArea() {
+        playwright.clickOn(panduanAreaClick);
+    }
+
+    /**
+     * Check title and detail title On Panduan Persiapan Foto or Video
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean titleOnPanduanAndAreaAppear(String titleAndDetailText) {
+        detailTitle = page.getByText(titleAndDetailText);
+        playwright.waitTillLocatorIsVisible(detailTitle);
+        return playwright.waitTillLocatorIsVisible(detailTitle);
+    }
 
 }
 

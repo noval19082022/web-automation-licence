@@ -35,6 +35,7 @@ public class GoldplusPO {
     Locator lihatSelengkapnyaTagihanGP;
     Locator tabSelesaiRincianBayar;
     Locator gpPackageText;
+    Locator infoUntukAndaOption;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -168,8 +169,9 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.hardWait(3000);
-        playwright.clickOnText(infoUntukAndaMessage);
+        playwright.waitTillPageLoaded(5000.0);
+        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.clickOn(infoUntukAndaOption);
     }
 
     /**

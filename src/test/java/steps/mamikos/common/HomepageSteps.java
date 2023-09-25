@@ -61,6 +61,8 @@ public class HomepageSteps {
     public void tenantCanSeeAdsDropdownOption() {
         home.clickOnAdsDropdown();
         Assert.assertTrue(home.isKostMenuDisplayed(), "Kost Menu Dropdown is not present");
+        Assert.assertTrue(home.isSinggahsiniApikMenuDisplayed(), "Singgahsini and Apik Menu Dropdown is not present");
+        Assert.assertTrue(home.isKosAndalanMenuDisplayed(), "Kos Andalan Menu Dropdown is not present");
         Assert.assertTrue(home.isApartmentMenuDisplayed(), "Apartment Menu Dropdown is not present");
     }
 

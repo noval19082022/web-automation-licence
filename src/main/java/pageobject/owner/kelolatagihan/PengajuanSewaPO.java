@@ -73,6 +73,18 @@ public class PengajuanSewaPO {
     }
 
     /**
+     * Check if terima button with name visible
+     * @param tenantName Tenant Name
+     * @return boolean
+     */
+    public boolean terimaButtonWithNameVisible(String tenantName) {
+        terimaButtonWithName = page.getByTestId("bookingRequestList-list")
+                .locator("div").filter(new Locator.FilterOptions()
+                        .setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
+        return playwright.waitTillLocatorIsVisible(terimaButtonWithName);
+    }
+
+    /**
      * Click on tolak and go to popup reason reject booking
      */
     public BillAndBookingManagementPO ownerRejectBooking() {

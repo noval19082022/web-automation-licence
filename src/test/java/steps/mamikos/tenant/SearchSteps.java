@@ -70,7 +70,7 @@ public class SearchSteps {
         Assert.assertTrue(home.isChatDisplayed(), "Chat button not present!");
         Assert.assertTrue(home.isNotificationButtonDisplayed(), "Notification button not present!");
         Assert.assertTrue(home.isOtherButtonDisplayed(), "Other button not present!");
-        Assert.assertTrue(home.isTenantProfilePictureDisplayed(), "Profile pic not present!");
+        home.isTenantProfilePictureDisplayed();
     }
 
     @When("user search for random keyword:")

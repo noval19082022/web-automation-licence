@@ -40,6 +40,6 @@ Feature: Reject Booking From Owner Dashboard
       | 0890000000289 | 0890000000289 | Bismillah@01 |
     Then owner can see pengajuan sewa detail on dashboard
     When owner reject booking from dashboard
-    And owner select reason reject kos "Tidak boleh bawa anak"
+    And owner select reason reject kos "Tanggal masuk/check-in kos terlalu dekat"
     And owner navigates to owner dashboard
     Then owner can see pengajuan sewa detail on dashboard

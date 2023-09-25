@@ -36,7 +36,7 @@
       When admin check pop up button and confirm it
       Then invoice manual "Biaya Tambahan" created
         | Nama Listing                                              | Jumlah Biaya  | Status Invoice  |
-        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp25.000      | unpaid          |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp25.000      | Unpaid          |
       And show detail biaya "Biaya Tambahan" if hovered
         | Nama Biaya                        |  Jumlah Biaya |
         | Parkir Mobil (3 hari)             |  Rp25.000     |
@@ -65,7 +65,7 @@
       When admin check pop up button and confirm it
       Then invoice manual "Biaya Sewa" created
         | Nama Listing                                              | Jumlah Biaya  | Status Invoice  |
-        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp500.000     | unpaid          |
+        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara   | Rp500.000     | Unpaid          |
       And show detail biaya "Biaya Sewa" if hovered
         | Nama Biaya                        |  Jumlah Biaya |
         | Perpanjang sewa harian (2 Hari)   |  Rp500.000    |
@@ -196,18 +196,18 @@
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
         | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
-      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/46053"
-      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      And admin search by "Nomor Invoice without change Search By" with value "MI/49220517/2022/09/32172"
+      Then the result is displayed according the value "MI/49220517/2022/09/32172", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Penyewa
       When admin search by "Nama Penyewa" with value "Indah Trivena Tampubolon"
-      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/32172", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6045
     Scenario: Search invoice manual by Nama Listing
       When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
-      Then the result is displayed according the value "MI/49220517/2022/09/46053", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+      Then the result is displayed according the value "MI/49220517/2022/09/32172", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
     @continue @TEST_PMAN-6046
     Scenario: Search Nama Listing per word with value "Singgahsini"
@@ -244,21 +244,21 @@
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
       And admin ticks "Paid" on the "Status Invoice" dropdown
-      Then "paid" Status Invoice is displayed
+      Then "Paid" Status Invoice is displayed
 
     @continue @TEST_PMAN-6213
     Scenario: Check Status Invoice "Unpaid" in filter
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
       And admin ticks "Unpaid" on the "Status Invoice" dropdown
-      Then "unpaid" Status Invoice is displayed
+      Then "Unpaid" Status Invoice is displayed
 
     @continue @TEST_PMAN-6213
     Scenario: Check Status Invoice "Expired" in filter
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
       And admin ticks "Expired" on the "Status Invoice" dropdown
-      Then "expired" Status Invoice is displayed
+      Then "Expired" Status Invoice is displayed
 
     @continue @TEST_PMAN-6215
     Scenario: Filter Tanggal Mulai and Tanggal Akhir
@@ -290,14 +290,14 @@
       And admin ticks "Unpaid" on the "Status Invoice" dropdown without clicks Terapkan
       And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown without clicks Terapkan
       And admin selects the date for "today" with clicks Terapkan
-      Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
+      Then the "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara", "Unpaid", "Biaya Tambahan", "today" are displayed according to the search and filter
 
     @continue @TEST_PMAN-6212
     Scenario: Filter Invoice Manual
       When admin refresh page and clicks Filter in Invoice Manual
       #Default Filter Unpaid
       And admin clicks "Terapkan" button on Filter
-      Then "unpaid" Status Invoice is displayed
+      Then "Unpaid" Status Invoice is displayed
       When admin clicks "Reset" button on Filter
       Then the counter on filter is disappears
 
@@ -309,16 +309,16 @@
       #check Kembali when set Tanggal and Time
       And choose action "Ubah Status"
       And admin clicks Kembali button
-      Then status invoice manual "unpaid"
+      Then status invoice manual "Unpaid"
       #check Close when set Tanggal and Time
       And choose action "Ubah Status"
       And admin clicks close button
-      Then status invoice manual "unpaid"
+      Then status invoice manual "Unpaid"
       #check Status Invooice when clicks Simpan
       And choose action "Ubah Status"
-      And admin set tanggal pembayaran "today"
+      And admin set tanggal pembayaran "selected today"
       And admin set waktu pembayaran "1000"
-      Then Status Invoice is "paid" and paid date at "today", "10:00"
+      Then Status Invoice is "Paid" and paid date at "today", "10:00"
 
     @TEST_PMAN-6253
     Scenario: Ubah Status Invoice from Expired to Paid
@@ -329,13 +329,13 @@
       #check Kembali when set Tanggal and Time
       And choose action "Ubah Status"
       And admin clicks Kembali button
-      Then status invoice manual "expired"
+      Then status invoice manual "Expired"
       #check Close when set Tanggal and Time
       And choose action "Ubah Status"
       And admin clicks close button
-      Then status invoice manual "expired"
-      #check Status Invooice when clicks Simpan
+      Then status invoice manual "Expired"
+      #check Status Invoice when clicks Simpan
       And choose action "Ubah Status"
-      And admin set tanggal pembayaran "today"
+      And admin set tanggal pembayaran "selected today"
       And admin set waktu pembayaran "1000"
-      Then Status Invoice is "paid" and paid date at "today", "10:00"
+      Then Status Invoice is "Paid" and paid date at "today", "10:00"

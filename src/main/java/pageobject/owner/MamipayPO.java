@@ -19,6 +19,7 @@ public class MamipayPO {
     Locator autoBbkCard;
     Locator titleForm;
     Locator titleAutoBbkPopUp;
+    Locator kirimData;
 
     public MamipayPO(Page page){
         this.page = page;
@@ -34,6 +35,8 @@ public class MamipayPO {
         autoBbkCard = page.locator("//*[@class='auto-bbk-info-bar']");
         titleForm = page.locator(".title");
         titleAutoBbkPopUp = page.locator(".owner-intercept-booking-modal__body-title");
+//        lewatiButton = page.locator(".booking-register-wrapper");
+        kirimData = page.locator(".bg-c-button");
     }
 
     /**
@@ -185,5 +188,14 @@ public class MamipayPO {
      */
     public String getTitleAutoBbkPopUp() {
         return playwright.getText(titleAutoBbkPopUp);
+    }
+
+    /**
+     * Verify the Kirim data button on form input BBK is disable
+     *
+     *
+     */
+    public void kirimDataDisable() {
+        playwright.isButtonDisable(kirimData);
     }
 }

@@ -99,4 +99,9 @@ public class MamipaySteps {
     public void ownerVerifyAutoBBKPopUpIsNotDisplayed() {
         Assert.assertFalse(propertySaya.isPopUpModalVisible(), "Auto BBK pop up doesn't displayed!");
     }
+
+    @Then("owner see next button disable")
+    public void ownerSeeNextButtonDisable() {
+        mamipayPO.kirimDataDisable();
+    }
 }
