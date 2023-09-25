@@ -13,7 +13,6 @@ public class TenantRegisterPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         passwordInputText = page.locator("//*[@data-testid='passwordTextbox']");
-
     }
 
     /**
