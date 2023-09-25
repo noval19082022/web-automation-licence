@@ -21,7 +21,9 @@ public class ApartmentLandingPO {
     private Locator detailApartment;
     private Locator rekomendasiTitle;
     private Locator filteringPeriod;
+    private Locator filteringFurniture;
     private Locator listTimePeriod;
+    private Locator listFurniture;
     private Locator listApartementArea;
 
 
@@ -38,7 +40,9 @@ public class ApartmentLandingPO {
         hapusHistoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Histori"));
         rekomendasiTitle = page.locator(".premium-recom-title");
         this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka Waktu Harian Mingguan Bulanan Tahunan$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Perabotan Semua Furnished Semi Furnished Not furnished$"))).getByRole(AriaRole.COMBOBOX);
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
+        this.listFurniture = page.locator("//div[@class='rc-price__additional-data']");
         this.listApartementArea = page.locator("//span[@class='rc-info__location bg-c-text bg-c-text--body-3']");
     }
 
@@ -177,5 +181,22 @@ public class ApartmentLandingPO {
      */
     public List<String> getCityAndAreaValidationOnList() {
         return playwright.getListInnerTextFromListLocator(listApartementArea);
+    }
+
+    /**
+     * user filtering apartment list on landing by furniture, example Furnished, Semi Furnished, Not furnished
+     * @param furniture
+     */
+    public void filterByFurniture(String furniture) {
+        playwright.selectDropdownByValue(filteringFurniture, furniture);
+    }
+
+    /**
+     * get list furniture period apartement
+     * @return
+     */
+    public List<String> getApartmentListByFurniture() {
+        playwright.waitTillPageLoaded();
+        return playwright.getListInnerTextFromListLocator(listFurniture);
     }
 }

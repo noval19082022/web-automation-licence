@@ -62,3 +62,17 @@ Feature: [Test-Execution][DOM] Web - Platform
       | lingga_ccabvrn_marqansyah@tfbnw.net | lingga_ccabvrn_marqansyah@tfbnw.net | joinmamikos |
     Then navbar after login appears
 
+  @TEST_DOM-395 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Furniture
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user filter apartment by furniture is "Furnished"
+    Then user see displays apartment lists by furniture is "Furnished"
+
+		#  Scenario: Positive case tenant search apartment filter by furniture "Semi Furnished"
+    When user filter apartment by furniture is "Semi Furnished"
+    Then user see displays apartment lists by furniture is "Semi Furnished"
+
+		#  Scenario: Positive case tenant search apartment filter by furniture "Not furnished"
+    When user filter apartment by furniture is "Not furnished"
+    Then user see displays apartment lists by furniture is "Not Furnished"
+

@@ -104,4 +104,22 @@ public class SearchApartmentSteps {
     public void userWillSeeDisplaysApartmentListsByAreaAndCity(List<String> listValidationArea) {
         Assert.assertTrue(apartment.getCityAndAreaValidationOnList().containsAll(listValidationArea), "Area validation not match");
     }
+
+    @When("user filter apartment by furniture is {string}")
+    public void userFilterApartmentByFurnitureIs(String furniture) {
+        apartment.filterByFurniture(furniture);
+    }
+
+    @Then("user see displays apartment lists by furniture is {string}")
+    public void userSeeDisplaysApartmentListsByFurnitureIs(String furniture) {
+        Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
+        for (var listFurniturePeriod : apartment.getApartmentListByFurniture()) {
+            // Find the index of the "·" character
+            int indexOfDot = listFurniturePeriod.indexOf("·");
+            // Extract the substring after "·"
+            String result = listFurniturePeriod.substring(indexOfDot + 1).trim();
+
+            Assert.assertEquals(result.trim(), furniture);
+        }
+    }
 }
