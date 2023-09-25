@@ -20,9 +20,11 @@ public class OwnerNavigateToPO {
     }
 
     /**
-     * Navigates to Mamiads History page
+     * Navigates to Mamiads page
      */
     public void navigateToMamiads() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
     }
+
+
 }
