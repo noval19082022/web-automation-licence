@@ -52,7 +52,7 @@ Feature: Check content Mamifoto
 
     #check at tab Panduan area dan fasilitas
     When owner click tab panduan area
-<<<<<<< HEAD
+
       #Tampak Depan Kost
     And owner will see that the text "Tampak Depan Kos" is displayed
     And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
