@@ -1,9 +1,8 @@
-@regression @BBM4 @voucher @voucher-admin
+@regression @BBM4 @voucher @voucher-admin @checkfailed
 
 Feature: Admin - Single Voucher
 
   @BBM-838
-  @continue
   Scenario: Create Targeted Voucher Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

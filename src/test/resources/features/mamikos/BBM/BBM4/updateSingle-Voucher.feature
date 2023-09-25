@@ -1,9 +1,8 @@
-@regression @BBM4 @voucher @voucher-admin
+@regression @BBM4 @voucher @voucher-admin @checkfailed
 
 Feature: Admin - Single Voucher
 
-  @TEST_BBM-830 @TEST_BBM-842
-  @continue
+  @TEST_BBM-830 @TEST_BBM-842 @continue
   Scenario: Create Single Voucher Prefix Without Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -36,8 +35,7 @@ Feature: Admin - Single Voucher
     And admin master clicks on add single voucher button in voucher form
     Then admin can sees callout message is "New targeted voucher added!"
 
-  @TEST_BBM-836 @TEST_BBM-844 @TEST_BBM-842
-  @continue
+  @TEST_BBM-836 @TEST_BBM-844 @TEST_BBM-842 @continue
   Scenario: Update Single Voucher
     Given admin go to mamikos mamipay admin
     And admin search single voucher with name and edit index "1":
