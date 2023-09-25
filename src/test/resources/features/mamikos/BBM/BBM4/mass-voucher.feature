@@ -2,8 +2,7 @@
 
 Feature: Admin - Mass Voucher
 
-  @TEST_BBM-822
-  @continue
+  @TEST_BBM-822 @continue
   Scenario: Create Mass Voucher Prefix Without Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -34,8 +33,7 @@ Feature: Admin - Mass Voucher
     And admin master clicks on add mass voucher button in voucher form
     Then admin can sees callout message is "New mass voucher added!"
 
-  @TEST_BBM-820 @TEST_BBM-817 @TEST_BBM-815
-  @continue
+  @TEST_BBM-820 @TEST_BBM-817 @TEST_BBM-815 @continue
   Scenario: Update Mass Voucher
     Given admin go to mamikos mamipay admin
     And admin search mass voucher with name and edit index "1":
@@ -49,8 +47,7 @@ Feature: Admin - Mass Voucher
       | BBM                 | BBM                 |
     Then admin can sees first index voucher status in mass voucher is "Active"
 
-  @TEST_BBM-819
-  @continue
+  @TEST_BBM-819 @continue
   Scenario: Mass Voucher Status Publish
     Given admin go to mamikos mamipay admin
     And admin search mass voucher with name and edit index "1":
@@ -65,8 +62,7 @@ Feature: Admin - Mass Voucher
     And admin master clicks on edit mass voucher button in voucher form
     Then admin can sees callout message contains "Voucher BBM updated"
 
-  @TEST_BBM-818
-  @continue
+  @TEST_BBM-818 @continue
   Scenario: Mass Voucher Renter Email(CSV)
     Given admin go to mamikos mamipay admin
     And admin search mass voucher with name and edit index "1":

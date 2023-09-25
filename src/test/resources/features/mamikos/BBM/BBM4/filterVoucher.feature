@@ -1,13 +1,17 @@
-@BBM4
+@BBM4 @filtervouchercheck
 Feature: Filter Voucher
 
   @TEST_BBM-841 @TEST_BBM-843 @continue
-  Scenario Outline: Filter Mass Voucher - Status
+  Scenario: Login Admin For Filter Mass Voucher - Status
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigate to mamikos voucher menu
+
+  @TEST_BBM-841 @TEST_BBM-843 @continue
+  Scenario Outline: Filter Mass Voucher - Status
+    Given admin go to mamikos mamipay admin
+    When admin navigate to mamikos voucher menu
     And admin click on dropdown filter status
     Then admin see "<filter>" filter list option on voucher menu:
     When admin choose to filter "<filter>" and click search button:
