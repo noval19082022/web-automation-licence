@@ -52,17 +52,16 @@ Feature: Check content Mamifoto
 
     #check at tab Panduan area dan fasilitas
     When owner click tab panduan area
-
-      #Tampak Depan Kost
+    #Tampak Depan Kost
     And owner will see that the text "Tampak Depan Kos" is displayed
     And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
     And owner will see that the text "Rapikan area tampak depan sebaik mungkin." is displayed
-          #Lorong dan Taman
+    #Lorong dan Taman
     And owner will see that the text "Lorong dan Taman" is displayed
     And owner will see that the text "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." is displayed
     And owner will see that the text "Rapikan area taman." is displayed
     And owner will see that the text "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." is displayed
-      #Detail
+    #Detail
     And owner will see that the text "Bersihkan dan rapikan dapur umum." is displayed
     And owner will see that the text "Rapikan parkiran kos sebaik mungkin." is displayed
     And owner will see that the text "Rapikan ruang tunggu." is displayed
