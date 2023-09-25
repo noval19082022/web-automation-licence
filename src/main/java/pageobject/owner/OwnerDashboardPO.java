@@ -575,10 +575,11 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on saldo mamiads card on owner dashboard
+     * Wait till locator is visible and click
+     * on saldo mamiads card on owner dashboard
      */
     public void clickSaldoMamiAdsButton() {
-        playwright.clickOn(saldoMamiAdsButton);
+        playwright.waitForLocatorVisibleAndClickOn(saldoMamiAdsButton);
     }
 
     /**
