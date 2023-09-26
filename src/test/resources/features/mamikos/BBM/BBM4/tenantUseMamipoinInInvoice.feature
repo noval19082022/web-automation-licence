@@ -24,4 +24,5 @@ Feature: Tenant use MamiPoin in Invoice
       | voucher name stag     | voucher name prod   |
       | MAMIVCHTEST           | MAMIVCHTEST         |
     Then user should see potongan mamipoin is 2000 and total payment is 989000
+    And user clicks on mamipoin toggle button to OFF
 

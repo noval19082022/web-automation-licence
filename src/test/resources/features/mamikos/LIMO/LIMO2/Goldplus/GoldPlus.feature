@@ -20,8 +20,8 @@ Feature: Gold Plus
   @TEST_LIMO-148 @TEST_LIMO-149 @uncheckT&C @continue
   Scenario: Owner Cek warning toast and button bayar sekarang disable if uncheck the checkbox
     Given user click checkbox Syarat dan Ketentuan Umum GoldPlus
-    Then user will see that the text "Mohon untuk menyetujui Syarat dan Ketentuan yang berlaku" is displayed
-    Then The system should display "Bayar Sekarang" button as disabled
+    Then owner can see toast with content text is "Mohon untuk menyetujui Syarat dan Ketentuan yang berlaku"
+    And The system should display "Bayar Sekarang" button as disabled
 
   @checkAndUncheckT&C @continue
   Scenario: Owner Cek syarat dan ketentuan before uncheck and check warning toast and button bayar sekarang disable if uncheck the checkbox

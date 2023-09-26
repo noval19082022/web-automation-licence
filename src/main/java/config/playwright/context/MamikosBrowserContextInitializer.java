@@ -14,6 +14,7 @@ public class MamikosBrowserContextInitializer {
     /**
      * Initialize browser context number one
      */
+
     public static void initializeBrowserContextOne() {
         MamikosBrowserContext.setBrowserContextOne(PlaywrightSourceManager.getLocalBrowser().newContext(BrowserOptions.browserContextOptions()));
     }
@@ -27,9 +28,13 @@ public class MamikosBrowserContextInitializer {
             .setScreenshots(true)
             .setSnapshots(true)
             .setSources(false));
+
+        MamikosBrowserContext.getBrowserContextOne().grantPermissions(grantPermissions);
+
         browserContext1.grantPermissions(grantPermissions);
         browserContext1.setDefaultNavigationTimeout(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         browserContext1.setDefaultTimeout(GlobalConfig.DEFAULT_TIMEOUT);
+
         MamikosBrowserContext.setContextOneActivePage(MamikosBrowserContext.getBrowserContextOne().newPage());
         ActiveContext.setActiveBrowserContext(MamikosBrowserContext.getBrowserContextOne());
         ActiveContext.setActivePage(MamikosBrowserContext.getContextOneActivePage());
@@ -51,9 +56,13 @@ public class MamikosBrowserContextInitializer {
                 .setScreenshots(true)
                 .setSnapshots(true)
                 .setSources(false));
+
+        MamikosBrowserContext.getBrowserContextTwo().grantPermissions(grantPermissions);
+
         browserContext2.grantPermissions(grantPermissions);
         browserContext2.setDefaultNavigationTimeout(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         browserContext2.setDefaultTimeout(GlobalConfig.DEFAULT_TIMEOUT);
+
         MamikosBrowserContext.setContextTwoActivePage(MamikosBrowserContext.getBrowserContextTwo().newPage());
         ActiveContext.setActiveBrowserContext(MamikosBrowserContext.getBrowserContextTwo());
         ActiveContext.setActivePage(MamikosBrowserContext.getContextTwoActivePage());

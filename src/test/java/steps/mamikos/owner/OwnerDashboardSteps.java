@@ -242,6 +242,27 @@ public class OwnerDashboardSteps {
         ownerDashboardPO.clickSaldoMamiAdsButton();
     }
 
+    @And("owner click {string} on waktunya mengelola properti")
+    public void ownerClickOnWaktunyaMengelolaProperti(String action) {
+        ownerDashboardPO.clickOnWaktunyaMengelolaProperti(action);
+    }
+
+    @Then("verify that owner not yet have active kos")
+    public void verifyThatOwnerNotYetHaveActiveKos() {
+        Assert.assertTrue(ownerDashboardPO.isNoHaveActiveKos(), "Owner have active kos!");
+    }
+
+    @When("owner create new kos")
+    public void ownerCreateNewKos() {
+        ownerDashboardPO.clickOnTambahKos();
+        ownerDashboardPO.clickOnTambahKosBaru();
+    }
+
+    @And("verify tambah kos button displayed")
+    public void verifyTambahKosButtonDisplayed() {
+        Assert.assertTrue(ownerDashboardPO.isTambahKosVisible());
+    }
+
     @When("owner accsess cek properti sekitar")
     public void owner_accsess_cek_properti_sekitar() {
         ownerDashboardPO.clickToExpandFiturPromosi();
