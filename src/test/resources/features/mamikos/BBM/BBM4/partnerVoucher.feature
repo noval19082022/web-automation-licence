@@ -91,7 +91,6 @@ Feature: Voucher Discount - Partner Voucher
       |Email count must be the same with voucher code count   |
 
   @TEST_BBM-826
-  @continue
   Scenario: Add or Update voucher with more than 1 voucher code
     Given admin go to mamikos mamipay admin
     And user access Partner voucher page

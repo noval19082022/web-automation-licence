@@ -156,7 +156,6 @@ Feature: Apply Voucher For Invoice Settlement
       | AUTODPSETREC      | AUTODPSETREC    |
     Then tenant can see voucher is applied
 
-  @continue
   Scenario: Invoice Settlement and Voucher For First Paid, DP, Settlement, and Recurring
     And tenant apply voucher:
       | voucher name stag | voucher name prod |

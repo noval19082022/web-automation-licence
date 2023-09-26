@@ -42,12 +42,28 @@ Feature: Visibility
       | 089145645624  | qwerty123 |
       | 082233545514  | 12345678  |
 
-  @TEST_LIMO-292
-  Scenario: Never Purchase MamiAds, Saldo < 5000 and have active ads the first click will redirect to MamiAds Purchase
+  @TEST_LIMO-292 @TEST_LIMO-298
+  Scenario Outline: Never Purchase MamiAds And Ever Purchase MamiAds, Saldo < 5000 and have active ads the first click will redirect to MamiAds Purchase
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password     |
+      | <phone number> | <phone number> | qwerty123    |
+    And user click on Saldo MamiAds at owner dashboard
+    Then user redirected to pembelian saldo mamiads page
+    Examples:
+      | phone number  |
+      | 083832357442  |
+      | 083176408323  |
+
+  @TEST_LIMO-297
+  Scenario: Never Purchase MamiAds, Saldo < 5000 and have not active ads the first click will redirect to MamiAds Purchase
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password     |
-      | 083832357442 | 083832357442 | qwerty123    |
-    Then user verify title "Rp1.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
+      | 089504016010 | 089504016010 | qwerty123    |
+    Then user verify title "Rp3.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to pembelian saldo mamiads page
+    When user go back to previous page
+    And user click on Saldo MamiAds at owner dashboard
+    Then user redirected to mamiads page

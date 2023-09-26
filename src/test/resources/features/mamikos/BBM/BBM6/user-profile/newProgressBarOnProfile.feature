@@ -33,8 +33,9 @@ Feature: New Progress bar on Profile
 		And user navigate to kost saya page
 		Then user see percentage based on field that was filled "10% 1 / 10 data profil terisi"
 		And user click on profile card
-		Then user see message error validation "Wajib diisi"
 		And user choose profession "lainnya"
+		Then user will see that the text "Wajib diisi" is displayed
+		And user choose profession "mahasiswa"
 		Then user see button simpan edit profile disable
 
 	@TEST_BBM-4610

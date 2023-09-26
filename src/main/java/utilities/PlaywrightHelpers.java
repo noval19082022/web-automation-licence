@@ -147,6 +147,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Wait till locator is visible then click on desired locator
+     *
+     * @param locator target locator
+     */
+    public void waitForLocatorVisibleAndClickOn(Locator locator) {
+        waitTillLocatorIsVisible(locator);
+        locator.click();
+    }
+
+    /**
      * Scroll to coordinate
      * @param deltaX
      * @param deltaY
@@ -250,6 +260,7 @@ public class PlaywrightHelpers {
      * @return list string
      */
     public List<String> getListInnerTextFromListLocator(Locator locator) {
+        waitTillLocatorIsVisible(locator.first());
         return locator.allInnerTexts();
     }
 
@@ -261,6 +272,13 @@ public class PlaywrightHelpers {
      */
     public String getInputValue(Locator locator) {
         return locator.inputValue();
+    }
+
+    /**
+     * check box
+     */
+    public void checkBox(Locator locator) {
+        locator.check();
     }
 
     /**

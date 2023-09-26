@@ -61,7 +61,9 @@ public class OwnerDashboardPO {
     Locator mamiadsSubtitle;
     Locator mamiadsLihatDisini;
     Locator saldoMamiAdsButton;
+    Locator noProperty;
     Locator propertySekitar;
+
     private Locator fiturPromosiExpand;
 
     public OwnerDashboardPO(Page page) {
@@ -114,6 +116,7 @@ public class OwnerDashboardPO {
         mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");
         saldoMamiAdsButton = page.locator(".mamiads-card");
         fiturPromosiExpand = page.getByText("Fitur Promosi");
+        noProperty = page.locator(".no-property");
         propertySekitar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cek Properti Sekitar"));
     }
 
@@ -137,7 +140,7 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
-        playwright.waitTillLocatorIsVisible(manajemenKost, 3000.0);
+        playwright.waitFor(manajemenKost);
         manajemenKost.click();
     }
 
@@ -572,10 +575,59 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on saldo mamiads card on owner dashboard
+     * Wait till locator is visible and click
+     * on saldo mamiads card on owner dashboard
      */
     public void clickSaldoMamiAdsButton() {
-        playwright.clickOn(saldoMamiAdsButton);
+        playwright.waitForLocatorVisibleAndClickOn(saldoMamiAdsButton);
+    }
+
+    /**
+<<<<<<< HEAD
+     * Click Waktunya Mengelola Properti
+     * @param action
+     *
+     */
+    public void clickOnWaktunyaMengelolaProperti(String action) {
+        Locator element = page.locator("//p[contains(., '"+ action +"')]");
+        playwright.pageScrollUntilElementIsVisible(element);
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Validate have active kos
+     * @return noProperty
+     *
+     */
+    public boolean isNoHaveActiveKos() {
+        return playwright.isLocatorVisibleAfterLoad(noProperty, 2000.0);
+    }
+
+    /**
+     * Click Tambah button kos
+     *
+     *
+     */
+    public void clickOnTambahKos() {
+        playwright.clickOnTextButton("Tambah Kos", 3000.0);
+    }
+
+    /**
+     * Click tambah kos baru button
+     *
+     *
+     */
+    public void clickOnTambahKosBaru() {
+        playwright.clickOnText("Tambah Kos Baru", 3000.0);
+    }
+
+    /**
+     * Verify is tambah kos visible
+     * @return boolean true false
+     *
+     */
+    public boolean isTambahKosVisible() {
+        return playwright.isButtonWithTextDisplayed("Tambah Kos");
     }
 
     /**

@@ -220,7 +220,7 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_GUIDELINE, 30000.0, LoadState.LOAD);
     }
 
-    @When("user visit page {string}")
+    @When("user/admin/tenant visit page {string}")
     public void userVisitPage(String pathUrl) {
         page.navigate(Mamikos.URL + pathUrl);
     }

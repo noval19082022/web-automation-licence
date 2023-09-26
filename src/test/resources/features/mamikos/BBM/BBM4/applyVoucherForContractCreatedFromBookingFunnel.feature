@@ -108,7 +108,6 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
       | VCTRFROMBFCO1     | VCTRFROMBFCO1       |
     Then tenant can see voucher is applied
 
-  @continue
   @BBM-781
   Scenario: Tenant Apply Voucher with Contract Rules from Tenant Funnel
     When tenant set active page to 1

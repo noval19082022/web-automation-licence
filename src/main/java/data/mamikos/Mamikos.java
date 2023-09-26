@@ -1,5 +1,7 @@
 package data.mamikos;
 
+import lombok.Getter;
+import lombok.Setter;
 import utilities.JavaHelpers;
 
 public class Mamikos {
@@ -55,7 +57,11 @@ public class Mamikos {
     public static final String MAMIADS_FROM_OWNER_DASHBOARD = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsFromOwnerDashboard") ;
     public static final String CEK_PROPERTY_SEKITAR = JavaHelpers.getPropertyValue(MAMIKOS, "cekPropertySekitar") ;
     public static final String TOP_UP_MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsBalance");
+    public static final String MAMIADS_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsHistory");
     public static final String MAMIADS_GUIDE = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuide");
     public static final String MAMIADS_GUIDE_GP = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuideGP");
+
+    @Setter @Getter
+    private static  String propertyKosName;
 
 }

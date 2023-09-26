@@ -355,7 +355,7 @@ public class KostDetailsPO {
         this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
         this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");
         this.bookingProcessed = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(0);
-        this.bookingChance = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(1);
+        this.bookingChance = page.getByText("Peluang Booking", new Page.GetByTextOptions().setExact(true));
 
         //------------ Check Gallery Photo Section ------------------
         this.seeAllPhotoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua foto"));

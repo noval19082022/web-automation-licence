@@ -50,7 +50,7 @@ public class RoomAllotmentPO {
         deleteOutOfOrder = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Delete"));
         confirmDelete = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut hapus"));
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        searchDropdownPropertyName = page.locator(".bg-c-select.mb-16 .bg-c-select__trigger");
+        searchDropdownPropertyName = page.locator("//div[@class=\"bg-c-select__trigger bg-c-select__trigger--md\"]");
         searchInputPropertyName = page.getByPlaceholder("Search");
         titlePopupCanNotMark = page.locator(".bg-c-modal__body-title");
         subtitlePopupCanNotMark = page.locator(".bg-c-modal__body-description");
