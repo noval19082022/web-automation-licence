@@ -726,4 +726,14 @@ public class SearchPO {
     public List<String> getSuggestionText() {
         return suggestionResult.allInnerTexts();
     }
+
+    /**
+     * click on popular area or kampus or statsiun on the search page
+     * @param place (Kampus, Area, Stasiun & Halte)
+     * @param popPlace (UGM, Yogyakarta, etc..)
+     */
+    public void clickPopularArea(String place, String popPlace) {
+        playwright.clickOn(page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName(place)));
+        playwright.clickOn(page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(popPlace)));
+    }
 }
