@@ -1,6 +1,7 @@
 @BBM5
 Feature: BnB feature with background navigate profile page
-  
+
+  @rejectReview
   Scenario: Reject request review kos
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -55,11 +56,11 @@ Feature: BnB feature with background navigate profile page
       | 0890000000314 | 08100000622 | Bismillah@01 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
+    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
     And user click review kost
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
     And user click ajukan berhenti sewa on kontrak saya after review kos
     And user logs out as a Tenant user
     When user login as owner:
