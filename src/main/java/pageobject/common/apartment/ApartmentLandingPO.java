@@ -3,6 +3,7 @@ package pageobject.common.apartment;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
@@ -236,13 +237,7 @@ public class ApartmentLandingPO {
         List<Integer> intList = new ArrayList<>();
 
         for (String s : stringList) {
-            // Remove "Rp" prefix and any thousands separator (",") if present
-            String numericPart = s.replace("Rp", "").replace(".", "");
-
-            // Parse the remaining string to an integer
-            int intValue = Integer.parseInt(numericPart);
-
-            intList.add(intValue);
+            intList.add(JavaHelpers.extractNumber(s));
         }
 
         return intList;
