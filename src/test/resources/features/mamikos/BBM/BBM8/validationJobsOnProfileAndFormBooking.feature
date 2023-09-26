@@ -10,6 +10,7 @@ Feature: Edit profile for jobs as Lainnya
     And tenant search kost then go to kost details:
       | kost name stag                               | kost name prod                         |
       | kost jawa Tobelo Utara Halmahera Utara       | kost jawa Tobelo Utara Halmahera Utara |
+    And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then user can see validation on jobs with "Masukkan nama pekerjaan untuk memproses pengajuan sewa."
 
@@ -22,6 +23,7 @@ Feature: Edit profile for jobs as Lainnya
     And tenant search kost then go to kost details:
       | kost name stag                                                  | kost name prod                                            |
       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     And user click on ubah button on informasi penyewa
     And user choose profession "Lainnya" on ubah informasi penyewa
