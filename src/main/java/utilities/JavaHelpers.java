@@ -370,7 +370,7 @@ public class JavaHelpers {
      * @param stringTarget
      * @param character
      * @return example, you have "aba - aka" and you want get string after "-"
-     * then use thia=s method will return "aka"
+     * then use this method will return "aka"
      */
     public static String getStringAfterSpecificChar(String stringTarget, String character) {
         // Find the index of the character
@@ -381,7 +381,7 @@ public class JavaHelpers {
     }
 
     /**
-     * remove specific word or word on string and also trim it
+     * remove specific char or word on string and also trim it
      * @param stringTarget
      * @param character
      * @return
