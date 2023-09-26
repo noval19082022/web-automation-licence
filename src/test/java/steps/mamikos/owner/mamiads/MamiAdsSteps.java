@@ -17,6 +17,17 @@ public class MamiAdsSteps {
     Page page = ActiveContext.getActivePage();
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    private Integer riwayatBeforeBeliSaldo;
+
+    @When("user navigates to mamiads dashboard")
+    public void user_navigates_to_mamiads_dashboard() {
+        mamiAdsPO.navigatesToMamiads();
+    }
+
+    @And("user navigate to mamiads history page")
+    public void userNavigateToMamiadsHistoryPage() {
+        mamiAdsPO.navigatesToMamiadsHistory();
+    }
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
@@ -38,13 +49,25 @@ public class MamiAdsSteps {
     public void user_see_title_x_with_message_x(String title, String message) {
         Assert.assertEquals(mamiAdsPO.getTitleText(), title);
         Assert.assertEquals(mamiAdsPO.getMessageText(), message);
-
     }
 
-    @When("user navigates to mamiads dashboard")
-    public void user_navigates_to_mamiads_dashboard() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
-        playwright.bringPageToView(page);
+    @And("user verify count of riwayat before beli saldo")
+    public void userVerifyCountOfRiwayatBeforeBeliSaldo() {
+        riwayatBeforeBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
+    }
+
+    @And("user wants to buy saldo MamiAds {string}")
+    public void userWantsToBuySaldoMamiAds(String saldo) {
+        mamiAdsPO.clickOnBeliSaldoBtn();
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+        mamiAdsPO.isDetailTagihanPresent();
+        mamiAdsPO.clicksOnBayarSekarangButton();
+    }
+
+    @Then("user verify count of riwayat added {int}")
+    public void userVerifyCountOfRiwayatAdded(int numberAdded) {
+        int riwayatAfterBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
+        Assert.assertEquals(riwayatAfterBeliSaldo, (riwayatBeforeBeliSaldo+numberAdded), "Count of riwayat doesn't Match");
     }
 
     @Then("user redirected to guides page mamiAds")
@@ -60,6 +83,18 @@ public class MamiAdsSteps {
     @Then("user redirected to guides page mamiAds from GP")
     public void user_redirected_to_guides_page_mami_ads_from_gp() {
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIADS_GUIDE_GP);
+    }
+
+    @And("user will see title and message on Dalam Proses tab")
+    public void willSeeTitleAndMessageOnDalamProsesTab() {
+        Assert.assertEquals(mamiAdsPO.getTitleDalamProsesText(), "Belum Ada Transaksi");
+        Assert.assertTrue(playwright.isTextDisplayed("Transaksi yang masih dalam proses akan muncul di halaman ini."));
+    }
+
+    @And("user will see title and message on Selesai tab")
+    public void willSeeTitleAndMessageOnSelesaiTab() {
+        Assert.assertEquals(mamiAdsPO.getTitleSelesaiText(), "Belum Ada Transaksi");
+        Assert.assertTrue(playwright.isTextDisplayed("Transaksi yang sudah selesai akan muncul di halaman ini."));
     }
 
     @When("owner see button coba sekarang at header")

@@ -3,6 +3,8 @@ package pageobject.owner.mamiads;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -17,11 +19,14 @@ public class MamiAdsPO {
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
+    private Locator titleSelesaiRiwayatSaldoText;
+    private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
-
+    private Locator countHistoryIcon;
+    private Locator detailTagihanSection;
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
     Locator gpOnboardingPopUpActiveTextHead;
@@ -43,11 +48,14 @@ public class MamiAdsPO {
         this.beliSaldoBtn = page.getByText("Beli Saldo");
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
+        this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
+        this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
-
+        this.countHistoryIcon = page.locator(".history-icon__counter");
+        this.detailTagihanSection = page.locator(".purchase-detail__header");
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
@@ -201,6 +209,52 @@ public class MamiAdsPO {
     }
 
     /**
+     * Get Title text on Selesai Tab on Riwayat Saldo
+     * @return String title
+     */
+    public String getTitleSelesaiText() {
+        playwright.waitFor(titleSelesaiRiwayatSaldoText);
+        return playwright.getText(titleSelesaiRiwayatSaldoText);
+    }
+
+    /**
+     * Get Title text on Dalam Proses Tab on Riwayat Saldo
+     *
+     * @return String title
+     */
+    public String getTitleDalamProsesText(){
+        playwright.waitFor(titleDalamProsesRiwayatSaldoText);
+        return playwright.getText(titleDalamProsesRiwayatSaldoText);
+    }
+
+    /**
+     * Get count riwayat beli saldo
+     * @return int countHistoryIcn
+     */
+    public int getCountRiwayatBeliSaldo(){
+        return Integer.parseInt(playwright.getText(countHistoryIcon));
+    }
+
+    /**
+     * check if detail tagihan is present
+     *
+     * @return true if appears detail tagihan
+     */
+    public boolean isDetailTagihanPresent() {
+        detailTagihanSection.waitFor();
+        return playwright.waitTillLocatorIsVisible(detailTagihanSection);
+    }
+
+    /**
+     * Click on bayar sekarang button and wait until page loaded
+     */
+    public void clicksOnBayarSekarangButton() {
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+        playwright.waitTillPageLoaded();
+    }
+
+
+    /**
      * Click on Panduan MamiAds Back Button
      *
      */
@@ -239,6 +293,21 @@ public class MamiAdsPO {
     public String getAnswerText(String answerText) {
         String answerTextLocator = "//p[contains(.,'" + answerText + "')]";
         return playwright.getText(page.locator(answerTextLocator));
+    }
+
+    /**
+     * Navigates to Mamiads History page
+     */
+    public void navigatesToMamiadsHistory() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS_HISTORY, 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Navigates to Mamiads page
+     */
+    public void navigatesToMamiads() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
     }
 }
 

@@ -15,7 +15,6 @@ import utilities.JavaHelpers;
 
 import java.util.List;
 import java.util.Map;
-import data.mamikos.Mamikos;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
