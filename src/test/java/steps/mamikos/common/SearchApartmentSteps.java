@@ -13,6 +13,7 @@ import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
 import pageobject.common.apartment.ApartmentDetailPO;
 import pageobject.common.apartment.ApartmentLandingPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -96,7 +97,7 @@ public class SearchApartmentSteps {
     public void userSeeDisplaysApartmentListsByTimePeriodIs(String period) {
         Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
         for (var listTimePeriod : apartment.getApartmentListByPeriod()) {
-            Assert.assertEquals(listTimePeriod.replace("/", "").trim(), period);
+            Assert.assertEquals(JavaHelpers.removeCharAndWhiteSpaceFromString(listTimePeriod, "/"), period);
         }
     }
 
@@ -114,11 +115,7 @@ public class SearchApartmentSteps {
     public void userSeeDisplaysApartmentListsByFurnitureIs(String furniture) {
         Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
         for (var listFurniturePeriod : apartment.getApartmentListByFurniture()) {
-            // Find the index of the "·" character
-            int indexOfDot = listFurniturePeriod.indexOf("·");
-            // Extract the substring after "·"
-            String result = listFurniturePeriod.substring(indexOfDot + 1).trim();
-
+            String result = JavaHelpers.getStringAfterSpecificChar(listFurniturePeriod, "·");
             Assert.assertEquals(result.trim(), furniture);
         }
     }

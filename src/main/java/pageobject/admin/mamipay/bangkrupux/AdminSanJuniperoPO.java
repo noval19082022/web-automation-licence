@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class AdminSanJuniperoPO {
@@ -151,8 +152,9 @@ public class AdminSanJuniperoPO {
      * @return
      */
     public String getSuccessMessageOnCreateSanJunipero() {
-        return playwrightHelpers.getText(successMessageOnCreateSanJunipero)
-                .replace("×", "")
-                .trim();
+        return JavaHelpers.
+                removeCharAndWhiteSpaceFromString(
+                        playwrightHelpers.getText(successMessageOnCreateSanJunipero),
+                        "×");
     }
 }

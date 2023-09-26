@@ -365,6 +365,30 @@ public class JavaHelpers {
         return RandomStringUtils.randomAlphanumeric(totalChar);
     }
 
+    /**
+     * get string after char
+     * @param stringTarget
+     * @param character
+     * @return example, you have "aba - aka" and you want get string after "-"
+     * then use thia=s method will return "aka"
+     */
+    public static String getStringAfterSpecificChar(String stringTarget, String character) {
+        // Find the index of the character
+        int indexOfDot = stringTarget.indexOf(character);
+        // Extract the substring after the character
+        String result = stringTarget.substring(indexOfDot + 1).trim();
+        return result;
+    }
+
+    /**
+     * remove specific word or word on string and also trim it
+     * @param stringTarget
+     * @param character
+     * @return
+     */
+    public static String removeCharAndWhiteSpaceFromString(String stringTarget, String character) {
+        return stringTarget.replace(character, "").trim();
+    }
     //--- Encrypt Decrypt ---//
 
     /**
