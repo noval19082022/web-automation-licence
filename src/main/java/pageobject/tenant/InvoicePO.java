@@ -663,6 +663,7 @@ public class InvoicePO {
      * @return int data type
      */
     public int getDiscountMamipoinText() {
+        playwright.hardWait(2000.0);
         return JavaHelpers.extractNumber(playwright.getText(discountMamipoinText));
     }
 

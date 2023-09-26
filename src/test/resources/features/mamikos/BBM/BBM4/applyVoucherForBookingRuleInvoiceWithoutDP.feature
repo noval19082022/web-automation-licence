@@ -356,7 +356,6 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
 
 
   @BBM-614
-  @continue
   Scenario: Tenant Apply Voucher Applicable for Other Tenant Email
     When tenant set active page to 1
     And tenant apply voucher:

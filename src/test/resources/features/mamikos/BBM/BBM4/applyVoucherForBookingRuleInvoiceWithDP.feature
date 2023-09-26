@@ -156,7 +156,6 @@ Feature: Apply Voucher For Booking Rule, Invoice With DP
       | AUTODPSETREC          | AUTODPSETREC      |
     Then tenant can see voucher is applied
 
-  @continue
   Scenario: Invoice DP and Voucher For First Full Paid, DP, Settlement, and Recurring
     When tenant set active page to 1
     And tenant apply voucher:

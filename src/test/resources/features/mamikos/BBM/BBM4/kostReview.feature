@@ -135,7 +135,6 @@ Feature: Kost Review
     Then user verify success edit alert with "Success! Review Updated"
 
   @TEST_BBM-550
-  @continue
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
     And user click Delete button on "Just a test content that will match 25 characters of input edit"
