@@ -5,8 +5,10 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.pms.DisbursementPO;
 import pageobject.pms.HomepagePO;
 import pageobject.pms.roleManagement.RoleManagementPO;
+import pageobject.pms.sidebarMenuPO;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ public class RoleManagementSteps {
     Page page = ActiveContext.getActivePage();
     RoleManagementPO role = new RoleManagementPO(page);
     HomepagePO homepage = new HomepagePO(page);
+    sidebarMenuPO sidebarmenu = new sidebarMenuPO(page);
+    DisbursementPO disbursement = new DisbursementPO(page);
 
     private List<String> permissions;
 
@@ -136,6 +140,45 @@ public class RoleManagementSteps {
         for (String button: Button) {
             Assert.assertFalse(homepage.isButtonExist(button));
         }
+    }
+
+    @When("admin go to Disbursement menu")
+    public void admin_go_to_Disbursement_menu(){
+        sidebarmenu.clickDisbursementMenu();
+    }
+
+    @Then("admin automation has permission on Disbursement for button")
+    public void admin_automation_has_permission_on_Disbursement_for_button(List<String> button){
+        for (String listButton: button){
+            Assert.assertTrue(disbursement.isButtonExist(listButton));
+        }
+    }
+
+    @When("admin Filter Status Data Pendapatan {string}")
+    public void admin_Filter_Status_Data_Pendapatan(String filter){
+        disbursement.clicksFilter();
+        disbursement.tickStatusDataPendapatan(filter);
+    }
+
+    @When("admin go back to role management page")
+    public void admin_go_back_to_role_management_page(){
+        role.clickBackButton();
+    }
+
+    @When("admin edit and add permission")
+    public void admin_edit_and_add_permission(List<String> tables){
+        role.editRole();
+        permissions = tables;
+
+        for (int i=0; i<permissions.size(); i++){
+            role.checkPermission(permissions.get(i));
+        }
+    }
+
+    @When("admin go to Disbursement menu and refresh page")
+    public void admin_go_to_Disbursement_menu_and_refresh_page(){
+        sidebarmenu.clickDisbursementMenu();
+        disbursement.refreshPage();
     }
 }
 
