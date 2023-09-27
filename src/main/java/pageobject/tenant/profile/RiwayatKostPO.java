@@ -67,8 +67,8 @@ public class RiwayatKostPO {
         ajukanBerhentiSewaButtonAfterReviewKos = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Berhenti Sewa").setExact(true));
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
-        titleKostReviewSubmitted = page.locator(".user-review-card--reviewed__text");
-        starsKostReviewSubmitted = page.locator(".bg-c-text--body-1");
+        titleKostReviewSubmitted = page.locator("//p[@class=\"user-review-card--reviewed__text bg-c-text bg-c-text--label-2\"]");
+        starsKostReviewSubmitted = page.locator("p.bg-c-text--body-1:nth-child(2)");
         reviewKebersihan = page.locator("span:nth-child(5) > .bg-c-icon > use").first();
         reviewKeamanan = page.locator("div:nth-child(2) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
         reviewKenyamanan = page.locator("div:nth-child(3) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");

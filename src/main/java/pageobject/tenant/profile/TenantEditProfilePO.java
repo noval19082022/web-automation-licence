@@ -560,4 +560,17 @@ public class TenantEditProfilePO {
         playwright.clickOn(profileMenuButton);
     }
 
+    /**
+     * user verify not visible red dot
+     */
+    public boolean isReddotProfileVisible() {
+        return reddotOnProfilePicture.isVisible();
+    }
+
+    /**
+     * user verify not visible user presentage
+     */
+    public boolean isPersentageVisible() {
+        return profilePresentageInformation.isVisible();
+    }
 }
