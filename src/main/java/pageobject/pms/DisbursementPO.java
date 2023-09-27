@@ -3,6 +3,7 @@ package pageobject.pms;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
 
 public class DisbursementPO {
@@ -47,17 +48,17 @@ public class DisbursementPO {
         switch (button){
             case "Konfirmasi":
                 if (isStatusDataPendapatanMenungguKonfirmasi()){
-                    if (playwright.isLocatorVisibleAfterLoad(actionBtn, 3000.0)){
+                    if (playwright.isLocatorVisibleAfterLoad(actionBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
                         playwright.clickOn(actionBtn);
-                        exist = playwright.isLocatorVisibleAfterLoad(konfirmasiBtn, 1000.0);
+                        exist = playwright.isLocatorVisibleAfterLoad(konfirmasiBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                         playwright.clickOn(actionBtn);
                     }
                 }
                 break;
             case "Lihat Detail":
-                if (playwright.isLocatorVisibleAfterLoad(actionBtn,3000.0)){
+                if (playwright.isLocatorVisibleAfterLoad(actionBtn,GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
                     playwright.clickOn(actionBtn);
-                    exist = playwright.isLocatorVisibleAfterLoad(seeDetailBtn,1000.0);
+                    exist = playwright.isLocatorVisibleAfterLoad(seeDetailBtn,GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                     playwright.clickOn(actionBtn);
                 }
                 break;
@@ -72,7 +73,7 @@ public class DisbursementPO {
      * @return
      */
     public boolean isStatusDataPendapatanMenungguKonfirmasi(){
-        playwright.isLocatorVisibleAfterLoad(statusMenungguKonfirmasi, 3000.0);
+        playwright.isLocatorVisibleAfterLoad(statusMenungguKonfirmasi, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         return statusMenungguKonfirmasi.textContent().contains("Menunggu Konfirmasi");
     }
 
