@@ -1782,7 +1782,6 @@ public class KostDetailsPO {
      * Click on button text
      */
     public void clickOnBytextButton(String buttonText) {
-        playwright.hardWait(3000);
         String selector = "(//a[normalize-space()='"+ buttonText +"'])";
         ElementHandle element = page.querySelector(selector);
         element.click();
