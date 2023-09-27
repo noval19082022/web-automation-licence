@@ -257,4 +257,13 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userClickProfile();
     }
 
+    @Then("user can not see reddot on profile picture")
+    public void userCanNotSeeReddotOnProfilePicture() {
+        Assert.assertFalse(tenantEditProfile.isReddotProfileVisible());
+    }
+
+    @Then("user can not see percentage user profile")
+    public void userCanNotSeePercentageUserProfile() {
+        Assert.assertFalse(tenantEditProfile.isPersentageVisible());
+    }
 }
