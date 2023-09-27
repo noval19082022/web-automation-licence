@@ -51,9 +51,15 @@ public class OwnerApiSteps {
     @When("playwright create accept booking body for owner")
     public void playwrightCreateAcceptBookingBodyForOwner() throws NoSuchAlgorithmException, InvalidKeyException {
         var ownerBookingListEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_LIST;
-        var signature = Requirement.createSignatureKey("GET", ownerBookingListEndpoint);
-        var ownerBookingListRequest = ApiPlaywrightHelpers.setBaseUrl(Mamikos.URL, Requirement.mamikosStandardHeaders(signature));
-        var ownerBookingListResponse = ownerBookingListRequest.get(ownerBookingListEndpoint, RequestOptions.create().setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        var signature = Requirement.createSignatureKey("GET", ownerBookingListEndpoint, ApiEndpoints.X_GIT_TIME_APP);
+        var headers = Requirement.mamikosAppHeaders(signature);
+        var ownerBookingListRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
+        var ownerBookingListResponse = ownerBookingListRequest.get(ownerBookingListEndpoint, RequestOptions.create()
+                .setQueryParam("limit", "1")
+                .setQueryParam("offset", "0")
+                .setQueryParam("group[]", "0")
+                .setQueryParam("access", ApiEndpoints.ACCESS)
+                .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(ownerBookingListResponse.url());
         System.out.println(ownerBookingListResponse.text());
         Assert.assertEquals(ownerBookingListResponse.status(), 200);
