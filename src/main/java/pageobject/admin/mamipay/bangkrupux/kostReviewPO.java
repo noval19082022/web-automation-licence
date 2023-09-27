@@ -76,7 +76,7 @@ public class kostReviewPO {
         deleteReviewButton = page.locator("//a[@onclick=\"return confirm('Yakin mau hapus saya?')\"]");
         contractIdDropdown = page.getByPlaceholder("Contract ID");
         cancelReviewButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
-        rejectReviewKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        rejectReviewKosButton = page.locator("(//a[@class='btn btn-xs btn-danger'])[1]");
         inputKosName = page.getByPlaceholder("Nama kos");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
     }
