@@ -3,6 +3,8 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -61,7 +63,8 @@ public class MamifotoPO {
     Locator seeDetailTransactionExpired;
     Locator expiredPaymentMamifotoText;
     Locator lihatTagihanTableMamifoto;
-
+    Locator packageNameMamifoto;
+    Locator waitingPayment;
 
     //Locator Mamifoto at Status Pembelian Page
     Locator headerStatusPembelian;
@@ -87,6 +90,15 @@ public class MamifotoPO {
     Locator headerInvoiceMamifoto;
     Locator textDiskonGPInvoiceMamifoto;
     Locator invoiceUnpaid;
+
+    //Locator admin mamifoto
+    Locator buttonPremiumAddOn;
+    Locator inputPhoneNumber;
+    Locator selectPackageMamifoto;
+    Locator buttonSaveTransaction;
+    Locator alertSuccsess;
+    Locator ownerPhoneNumber;
+    Locator statusInvoice;
 
 
 
@@ -148,6 +160,16 @@ public class MamifotoPO {
         this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
         this.panduanAreaClick = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Panduan area & fasilitas"));
         this.invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
+        this.buttonPremiumAddOn =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Premium Add On Request"));
+        this.inputPhoneNumber =  page.locator("#phone_number");
+        this.selectPackageMamifoto =   page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Add On Package"));
+        this.buttonSaveTransaction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
+        this.alertSuccsess = page.locator("//div[@class='alert alert-success alert-dismissable']");
+        this.ownerPhoneNumber = page.locator("//tbody[1]/tr[1]/td[1]");
+        this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
+        this.packageNameMamifoto = page.getByTestId("mamifoto-history-on-progress").getByText("MamiFoto A GP");
+        this.waitingPayment = page.getByText("Menunggu Pembayaran");
+
     }
 
 
@@ -649,6 +671,59 @@ public class MamifotoPO {
         detailTitle = page.getByText(titleAndDetailText);
         playwright.waitTillLocatorIsVisible(detailTitle);
         return playwright.waitTillLocatorIsVisible(detailTitle);
+    }
+
+    /**
+     * Navigates to Mamiads page
+     */
+    public void navigatesToPremiumAddOn() {
+        playwright.navigateTo(Mamikos.URL + "/admin/premium-add-on/", 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Added transaction mamifoto from menu premium add on
+     */
+    public void addTransactionMamifotoFromAdmin(String phoneNumber) {
+        playwright.clickOn(buttonPremiumAddOn);
+        playwright.fill(inputPhoneNumber,phoneNumber);
+        playwright.selectDropdownByValue(selectPackageMamifoto,"MamiFoto A GP");
+        playwright.clickOn(selectPackageMamifoto);
+        playwright.clickOn(buttonSaveTransaction);
+    }
+
+    /**
+     * Get Text owner phone number from table
+     *
+     * @return string
+     */
+    public String getTextOwnerPhoneNumber() {
+        return playwright.getText(ownerPhoneNumber);
+    }
+
+    /**
+     * Get Text status invoice mamifoto from table
+     *
+     * @return string
+     */
+    public String getTextStatusInvoiceMamifoto() {
+        return playwright.getText(statusInvoice);
+    }
+
+    /**
+     * Get Text invoice unpaid mamifoto
+     *
+     * @return string
+     */
+    public String getTextInvoiceUnpaidMamifoto()  {
+        return playwright.getText(waitingPayment);
+    }
+
+    /**
+     * Get Text package name mamifoto at history
+     * @return string
+     */
+    public String getTextPackageMamifoto()  {
+        return playwright.getText(packageNameMamifoto);
     }
 
 }

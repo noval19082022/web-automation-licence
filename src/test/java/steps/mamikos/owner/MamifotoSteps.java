@@ -270,4 +270,29 @@ public class MamifotoSteps {
     public void ownerWillSeeTitleAndDetailTitleOnPanduanPanduanPersiapanFotoVideo(String titleAndDetailText) {
         Assert.assertTrue(mamifoto.titleOnPanduanAndAreaAppear(titleAndDetailText),"title doesnt appear");
     }
+
+    @And("admin bangkrupux navigate to premium add on menu")
+    public void admin_bangkrupux_navigate_to_premium_add_on_menu() {
+        mamifoto.navigatesToPremiumAddOn();
+    }
+
+    @When("admin create invoice mamifoto from phone number {string}")
+    public void admin_create_invoice_mamifoto_from_phone_number(String phoneNumber) {
+       mamifoto.addTransactionMamifotoFromAdmin(phoneNumber);
+    }
+
+    @Then("invoice mamifoto succsess created with status {string} and for owner {string}")
+    public void invoice_mamifoto_succsess_created_with_status_and_for_owner(String status, String phone) {
+        Assert.assertEquals(mamifoto.getTextStatusInvoiceMamifoto(), status, "status is not match");
+        Assert.assertEquals(mamifoto.getTextOwnerPhoneNumber().replaceAll("[^0-9]", ""), phone,"phone number is not match");
+    }
+
+    @Then("owner can verify transaction have status {string} from {string}")
+    public void owner_can_verify_transaction_have_status_from(String status, String packageName) {
+        Assert.assertEquals(mamifoto.getTextInvoiceUnpaidMamifoto(), status, "status is not match");
+        Assert.assertEquals(mamifoto.getTextPackageMamifoto(), packageName, "package name is not match");
+        mamifoto.clickOnSeeFirstDetailTransaction();
+    }
+
+
 }
