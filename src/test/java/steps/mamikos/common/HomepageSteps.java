@@ -117,10 +117,12 @@ public class HomepageSteps {
     @When("user open e-mail in footer")
     public void userOpenEMailInFooter() {
         home.clickOnEmailFooterLink();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 
     @Then("user should redirect to Form Bantuan page")
     public void userShouldRedirectToFormBantuanPage() {
+        home = new HomePO(ActiveContext.getActivePage());
         Assert.assertTrue(home.isFormBantuanTitleDisplayed(), "Form Bantuan page is not present");
     }
 

@@ -129,11 +129,11 @@ public class HomePO {
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
-        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("0813-2511-1171"));
+        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp +6281325111171"));
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
-        this.copyrightFooter = page.getByText("© 2023 Mamikos.com, All rights reserved");
+        this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
     }
 
     /**
@@ -538,7 +538,7 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isFormBantuanTitleDisplayed() {
-        return formBantuanTitle.isVisible();
+        return playwright.waitTillLocatorIsVisible(formBantuanTitle, 10.0);
     }
 
     /**
