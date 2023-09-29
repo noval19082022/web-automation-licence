@@ -192,6 +192,7 @@ public class RoleManagementPO {
     public void addMember(String member) {
         playwright.fill(memberField,member);
         playwright.clickOn(tambahMemberButton);
+        playwright.waitTillPageLoaded(3000.000);
     }
 
     /**
@@ -208,6 +209,7 @@ public class RoleManagementPO {
      * @return boolean
      */
     public boolean isMemberRegistered(String member) {
+        playwright.waitTillPageLoaded(3000.000);
         return playwright.isTextDisplayed(member);
     }
 
