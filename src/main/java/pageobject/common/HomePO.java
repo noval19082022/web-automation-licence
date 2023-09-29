@@ -538,7 +538,6 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isFormBantuanTitleDisplayed() {
-//        return formBantuanTitle.isVisible();
         return playwright.waitTillLocatorIsVisible(formBantuanTitle, 10.0);
     }
 
