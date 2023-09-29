@@ -10,4 +10,8 @@ Feature: Get Owner Profile
       | password          | mamikosqa123               |
     When owner login trough api
     And playwright get owner profile
+    And playwright get owner booking list with parameters:
+      | offset | 1 |
+      | group  |   |
+      | limit  |   |
     And playwright create accept booking body for owner

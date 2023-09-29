@@ -12,13 +12,10 @@ public class AcceptBooking {
         gender,
         email,
         occupation,
-        maritalStatus,
         startDate,
         rentType,
         parentName,
         parentPhoneNumber,
-        fixedBilling,
-        billingDate,
         fineMaximumLength,
         fineDurationType,
         existingTenant,
@@ -36,11 +33,12 @@ public class AcceptBooking {
         depositAmount,
         fineAmount,
         dpAmount,
-    designerRoomId;
+        designerRoomId,
+        billingDate;
 
     @Setter @Getter
     private static List<Object> question, additionalCosts;
 
     @Setter @Getter
-    private static boolean ownerAccept, saveCostGroup, useDp;
+    private static boolean ownerAccept, saveCostGroup, useDp, maritalStatus, fixedBilling;
 }

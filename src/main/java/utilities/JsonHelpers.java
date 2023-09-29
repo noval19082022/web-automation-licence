@@ -63,6 +63,10 @@ public class JsonHelpers {
         return jsonElement.getAsJsonObject();
     }
 
+    public static JsonObject createJsonObject(JsonElement jsonElement, String key) {
+        return jsonElement.getAsJsonObject().get(key).getAsJsonObject();
+    }
+
     /**
      * Create JSON Array from JSON Object
      * @param jsonObject JSON Object
@@ -71,5 +75,17 @@ public class JsonHelpers {
      */
     public static JsonArray createJsonArray(JsonObject jsonObject, String key) {
         return jsonObject.getAsJsonArray(key);
+    }
+
+    public static String getJsonObjectValueAsString(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsString();
+    }
+
+    public static int getJsonObjectValueAsInt(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsInt();
+    }
+
+    public static boolean getJsonObjectValueAsBoolean(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsBoolean();
     }
 }
