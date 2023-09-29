@@ -11,7 +11,7 @@ Feature: Get Owner Profile
     When owner login trough api
     And playwright get owner profile
     And playwright get owner booking list with parameters:
-      | offset | 1 |
+      | offset |   |
       | group  |   |
-      | limit  |   |
-    And playwright create accept booking body for owner
+      | limit  | 1 |
+    And playwright set accept booking data for owner

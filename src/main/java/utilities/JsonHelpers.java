@@ -88,4 +88,8 @@ public class JsonHelpers {
     public static boolean getJsonObjectValueAsBoolean(JsonObject jsonObject, String key) {
         return jsonObject.get(key).getAsBoolean();
     }
+
+    public static Object getJsonObjectValueAsObject(JsonObject jsonObject, String key) {
+        return jsonObject.get(key);
+    }
 }

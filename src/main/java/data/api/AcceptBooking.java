@@ -3,7 +3,9 @@ package data.api;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AcceptBooking {
     @Setter @Getter
@@ -16,11 +18,10 @@ public class AcceptBooking {
         rentType,
         parentName,
         parentPhoneNumber,
-        fineMaximumLength,
         fineDurationType,
         existingTenant,
         dpDate,
-    dpSettlementDate;
+        dpSettlementDate;
     @Setter @Getter
     private static Integer roomId,
         roomNumber,
@@ -34,11 +35,38 @@ public class AcceptBooking {
         fineAmount,
         dpAmount,
         designerRoomId,
-        billingDate;
+        billingDate,
+        fineMaximumLength;
 
     @Setter @Getter
-    private static List<Object> question, additionalCosts;
+    private static List<Object> additionalCosts;
 
     @Setter @Getter
-    private static boolean ownerAccept, saveCostGroup, useDp, maritalStatus, fixedBilling;
+    private static List<Map<String, String>> question = new ArrayList<>();
+
+    @Setter @Getter
+    private static boolean ownerAccept, saveCostGroup, useDp, fixedBilling;
+
+    @Setter @Getter
+    private static Object maritalStatus;
+
+    /**
+     * Set rent type duration
+     * @param rentTypeDurationIndonesia rent type duration in Indonesian
+     * @return rent type duration in English as String
+     */
+    public static String rentType (String rentTypeDurationIndonesia) {
+        switch (rentTypeDurationIndonesia) {
+            case "Hari":
+                return "day";
+            case "Minggu":
+                return "week";
+            case "Bulan":
+                return "month";
+            case "Tahun":
+                return "year";
+            default:
+                return "month";
+        }
+    }
 }

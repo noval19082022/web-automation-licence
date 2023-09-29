@@ -24,24 +24,14 @@ import utilities.JsonHelpers;
 import javax.xml.crypto.Data;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OwnerApiSteps {
-    private Page page = ActiveContext.getActivePage();
-    private Map<String, String> headers = new HashMap<>();
-    private APIRequestContext request;
-    private APIResponse apiResponse;
-    private ApiPlaywrightHelpers apiPwHelpers = new ApiPlaywrightHelpers(page);
-    private Map<Object, Object> ownerLoginBody = new HashMap<>();
-    private List<Map<String, String>> phoneNumberCredential;
-    private String baseUrl = "";
     private String listBookingJson = "";
     private APIRequestContext ownerProfileRequest;
     private APIResponse ownerProfileResponse;
     private Map<String, String> listBookingParams;
+    private List<Map<String, String>> question = new ArrayList<>();
 
     @When("playwright get owner profile")
     public void playwrightGetOwnerProfile() throws NoSuchAlgorithmException, InvalidKeyException {
@@ -79,67 +69,43 @@ public class OwnerApiSteps {
         JsonHelpers.createJsonFileFromJsonString(listBookingJson, "target/ownerBookingList.json");
     }
 
-    @When("playwright create accept booking body for owner")
-    public void playwrightCreateAcceptBookingBodyForOwner() {
+    @When("playwright set accept booking data for owner")
+    public void playwrightSetAcceptBookingDataForOwner() {
         JsonElement listBookingJsonElement = JsonHelpers.createJsonElementFromJsonFile("target/ownerBookingList.json");
         JsonObject listBookingJsonObject = JsonHelpers.createJsonObject(listBookingJsonElement);
         JsonArray listBookingData = JsonHelpers.createJsonArray(listBookingJsonObject, "data");
         JsonObject bookingObject = JsonHelpers.createJsonObject(listBookingData.get(0));
-        Boolean isMarried = JsonHelpers.getJsonObjectValueAsInt(bookingObject, "is_married") == 0 ? null : bookingObject.get("is_married").getAsBoolean();
-        //Boolean isMarried = JsonHelpers
-        AcceptBooking.setRoomId(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "room_id"));
-        AcceptBooking.setName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "name"));
-        AcceptBooking.setPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "phone_number"));
-        //later
-        AcceptBooking.setRoomNumber(1);
-        AcceptBooking.setGender(JsonHelpers.getJsonObjectValueAsString(bookingObject, "gender"));
-        AcceptBooking.setEmail(JsonHelpers.getJsonObjectValueAsString(bookingObject, "email"));
-        AcceptBooking.setOccupation(JsonHelpers.getJsonObjectValueAsString(bookingObject, "job"));
-        //later
-        AcceptBooking.setQuestion(Collections.singletonList(""));
-        AcceptBooking.setMaritalStatus(isMarried);
-        AcceptBooking.setStartDate(JsonHelpers.getJsonObjectValueAsString(bookingObject, "checkin_date"));
-        //later
-        AcceptBooking.setRentType(JsonHelpers.getJsonObjectValueAsString(bookingObject, "rent_type"));
-        AcceptBooking.setAmount(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "remaining_payment"));
-        AcceptBooking.setDuration(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "duration_count"));
-        //later
-        AcceptBooking.setPhotoId(1);
-        AcceptBooking.setParentName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_name"));
-        AcceptBooking.setParentPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_phone_number"));
-        AcceptBooking.setPhotoIdentifierId(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "photo_identifier_id"));
-        AcceptBooking.setPhotoDocumentId(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "photo_document_id"));
-        //later
-        AcceptBooking.setFixedBilling(false);
-        //later
-        AcceptBooking.setBillingDate(0);
-        //later
-        AcceptBooking.setFirstAmount(0);
-        //later
-        AcceptBooking.setDepositAmount(0);
-        //later
-        AcceptBooking.setFineAmount(0);
-        //later
-        AcceptBooking.setFineMaximumLength("");
-        //later
-        AcceptBooking.setFineDurationType("");
-        //later
-        AcceptBooking.setExistingTenant("");
-        //owner_aggerment?
-        AcceptBooking.setOwnerAccept(true);
+        //app flow
         //later
         AcceptBooking.setAdditionalCosts(Collections.emptyList());
-        //later
-        AcceptBooking.setSaveCostGroup(false);
-        //later
-        AcceptBooking.setUseDp(false);
-        //later
-        AcceptBooking.setDpAmount(0);
-        //later
-        AcceptBooking.setDpDate(CreateBooking.getCheckIn());
-        //later
-        AcceptBooking.setDpSettlementDate(CreateBooking.getCheckIn());
-        //designer id room available
+        AcceptBooking.setAmount(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "remaining_payment"));
+        AcceptBooking.setDepositAmount(0);
+        //get random id from designer id end point
         AcceptBooking.setDesignerRoomId(309175);
+        AcceptBooking.setDuration(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "duration_count"));
+        AcceptBooking.setEmail(JsonHelpers.getJsonObjectValueAsString(bookingObject, "email"));
+        AcceptBooking.setFineAmount(0);
+        AcceptBooking.setFineDurationType("Day");
+        AcceptBooking.setFineMaximumLength(0);
+        AcceptBooking.setFixedBilling(false);
+        AcceptBooking.setGender(JsonHelpers.getJsonObjectValueAsString(bookingObject, "gender"));
+        AcceptBooking.setName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "name"));
+        AcceptBooking.setOccupation(JsonHelpers.getJsonObjectValueAsString(bookingObject, "job"));
+        //cari dari mana
+        AcceptBooking.setOwnerAccept(true);
+        AcceptBooking.setParentName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_name"));
+        AcceptBooking.setParentPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_phone_number"));
+        AcceptBooking.setPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "phone_number"));
+        //lets check booking detail
+        AcceptBooking.setPhotoDocumentId(0);
+        AcceptBooking.setPhotoId(62255);
+        //lets check booking detail
+        AcceptBooking.setPhotoIdentifierId(0);
+        AcceptBooking.setQuestion(question);
+        AcceptBooking.setRentType(AcceptBooking.rentType(JsonHelpers.getJsonObjectValueAsString(bookingObject, "duration_type")));
+        AcceptBooking.setRoomId(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "room_id"));
+        AcceptBooking.setSaveCostGroup(false);
+        AcceptBooking.setStartDate(JsonHelpers.getJsonObjectValueAsString(bookingObject, "checkin_date"));
+        //app
     }
 }
