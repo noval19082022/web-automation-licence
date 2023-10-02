@@ -142,6 +142,7 @@ public class ChatOwnerPO {
      */
     public void clickAcceptFromChatOwner() {
         playwright.clickOn(acceptFromChatRoomButton);
+        playwright.waitFor(yaTerimaButton);
         playwright.clickOn(yaTerimaButton);
     }
 

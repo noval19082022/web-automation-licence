@@ -226,7 +226,6 @@ public class OwnerDashboardPO {
      * @return true if appears pengajuan sewa section
      */
     public boolean isPengajuanSewaSectionPresent() {
-        pengajuanSewaSection.waitFor();
         return playwright.waitTillLocatorIsVisible(pengajuanSewaSection);
     }
 

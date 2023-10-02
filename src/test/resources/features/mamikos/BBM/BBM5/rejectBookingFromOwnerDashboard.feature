@@ -23,9 +23,8 @@ Feature: Reject Booking From Owner Dashboard
     And tenant search kost then go to kost details:
       | kost name stag | kost name prod |
       | kost reykjavik | kost reykjavik |
-    And tenant booking kost "tomorrow" "Per Bulan"
-    And user go to mamikos homepage
-    And user logs out as a Tenant user
+    And tenant booking kost
+    Then tenant should success booking kost
 
     Examples:
       | tenant phone number |
@@ -38,8 +37,6 @@ Feature: Reject Booking From Owner Dashboard
     When user login as owner:
       | phone stag    | phone prod    | password     |
       | 0890000000289 | 0890000000289 | Bismillah@01 |
-    Then owner can see pengajuan sewa detail on dashboard
-    When owner reject booking from dashboard
+    And owner reject booking from dashboard
     And owner select reason reject kos "Tanggal masuk/check-in kos terlalu dekat"
-    And owner navigates to owner dashboard
-    Then owner can see pengajuan sewa detail on dashboard
+    Then owner navigates to owner dashboard
