@@ -554,6 +554,14 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Scroll down to locator
+     * @param locator
+     */
+    public void pageScrollInView(Locator locator) {
+        locator.scrollIntoViewIfNeeded();
+    }
+
+    /**
      * Move Page helper, it will return page object, so it can use to implement in next page taget
      * for example when select kost on promo side from home page, it will be move to kost detail
      * so this helper can be implement to return kost detail object on kostdetailPO with argument this page inside of the kost detail object

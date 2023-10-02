@@ -154,6 +154,13 @@ public class RoleManagementSteps {
         }
     }
 
+    @Then("admin automation has permission on Disbursement at Detail Transfer Pendapatan page")
+    public void admin_automation_has_permission_on_Disbursement_at_Detail_Transfer_Pendapatan_page(List<String> button){
+        for (String listButton: button){
+            Assert.assertTrue(disbursement.isButtonExistInDetailTransferPendapatan(listButton));
+        }
+    }
+
     @When("admin Filter Status Data Pendapatan {string}")
     public void admin_Filter_Status_Data_Pendapatan(String filter){
         disbursement.clicksFilter();
