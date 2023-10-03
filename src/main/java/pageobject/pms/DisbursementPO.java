@@ -21,6 +21,12 @@ public class DisbursementPO {
     Locator statusDtPndptn;
     Locator terapkanBtn;
     Locator cariBtn;
+    Locator tambahkanTransaksiBtn;
+    Locator rincianPenjualanSection;
+    Locator tambahkanBtnBiayaLainnya;
+    Locator biayaPenguranganSection;
+    Locator tambahkanBtnTambahanPendapatan;
+    Locator tambahanPendapatanSection;
 
     public DisbursementPO(Page page) {
         this.page = page;
@@ -36,14 +42,20 @@ public class DisbursementPO {
         statusDataPendapatanDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status data pendapatan dropdown-down"));
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari"));
+        tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
+        tambahkanBtnBiayaLainnya = page.locator("//button[contains(., 'Tambahkan')]").nth(1);
+        tambahkanBtnTambahanPendapatan = page.locator("//button[contains(., 'Tambahkan')]").nth(2);
+        rincianPenjualanSection = page.locator("//div[@class='invoice-interaction mb-24']");
+        biayaPenguranganSection = page.locator("//div[@class='flex align-center justify-space-between mb-24']").nth(0);
+        tambahanPendapatanSection = page.locator("//div[@class='flex align-center justify-space-between mb-24']").nth(1);
     }
 
     /**
-     * Check button is exist or not in page
+     * Check button is exist or not in Disbursement page
      * @param button
      * @return boolean
      */
-    public boolean isButtonExist(String button) {
+    public boolean isButtonExistInDisbursement(String button) {
         boolean exist = false;
         switch (button){
             case "Konfirmasi":
@@ -60,6 +72,40 @@ public class DisbursementPO {
                     playwright.clickOn(actionBtn);
                     exist = playwright.isLocatorVisibleAfterLoad(seeDetailBtn,GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                     playwright.clickOn(actionBtn);
+                }
+                break;
+            default:
+                System.out.println("Invalid button");
+        }
+        return exist;
+    }
+
+    /**
+     * Check button is exist or not in Disbursement - Detail Transfer Pendapatan page
+     * @param button
+     * @return
+     */
+    public boolean isButtonExistInDetailTransferPendapatan(String button){
+        boolean exist = false;
+        switch (button){
+            case "Tambahkan Transaksi":
+                if (playwright.isLocatorVisibleAfterLoad(actionBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
+                   playwright.clickOn(actionBtn);
+                   playwright.clickOn(seeDetailBtn);
+                   playwright.pageScrollInView(rincianPenjualanSection);
+                   exist = playwright.isLocatorVisibleAfterLoad(tambahkanTransaksiBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+                }
+                break;
+            case "Tambahkan in Biaya Lainnya":
+                playwright.pageScrollInView(biayaPenguranganSection);
+                if (playwright.isLocatorVisibleAfterLoad(tambahkanBtnBiayaLainnya, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
+                    exist = playwright.isLocatorVisibleAfterLoad(tambahkanBtnBiayaLainnya, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+                }
+                break;
+            case "Tambahkan in Tambahan Pendapatan":
+                playwright.pageScrollInView(tambahanPendapatanSection);
+                if (playwright.isLocatorVisibleAfterLoad(tambahkanBtnTambahanPendapatan, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
+                    exist = playwright.isLocatorVisibleAfterLoad(tambahkanBtnTambahanPendapatan, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                 }
                 break;
             default:
