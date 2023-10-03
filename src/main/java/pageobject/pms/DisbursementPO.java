@@ -22,8 +22,11 @@ public class DisbursementPO {
     Locator terapkanBtn;
     Locator cariBtn;
     Locator tambahkanTransaksiBtn;
+    Locator rincianPenjualanSection;
     Locator tambahkanBtnBiayaLainnya;
+    Locator biayaPenguranganSection;
     Locator tambahkanBtnTambahanPendapatan;
+    Locator tambahanPendapatanSection;
 
     public DisbursementPO(Page page) {
         this.page = page;
@@ -42,6 +45,9 @@ public class DisbursementPO {
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
         tambahkanBtnBiayaLainnya = page.locator("//button[contains(., 'Tambahkan')]").nth(1);
         tambahkanBtnTambahanPendapatan = page.locator("//button[contains(., 'Tambahkan')]").nth(2);
+        rincianPenjualanSection = page.locator("//div[@class='invoice-interaction mb-24']");
+        biayaPenguranganSection = page.locator("//div[@class='flex align-center justify-space-between mb-24']").nth(0);
+        tambahanPendapatanSection = page.locator("//div[@class='flex align-center justify-space-between mb-24']").nth(1);
     }
 
     /**
@@ -49,7 +55,7 @@ public class DisbursementPO {
      * @param button
      * @return boolean
      */
-    public boolean isButtonExist(String button) {
+    public boolean isButtonExistInDisbursement(String button) {
         boolean exist = false;
         switch (button){
             case "Konfirmasi":
@@ -86,18 +92,18 @@ public class DisbursementPO {
                 if (playwright.isLocatorVisibleAfterLoad(actionBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
                    playwright.clickOn(actionBtn);
                    playwright.clickOn(seeDetailBtn);
-                    playwright.pageScrollInView(tambahkanTransaksiBtn);
+                   playwright.pageScrollInView(rincianPenjualanSection);
                    exist = playwright.isLocatorVisibleAfterLoad(tambahkanTransaksiBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                 }
                 break;
             case "Tambahkan in Biaya Lainnya":
-                playwright.pageScrollInView(tambahkanBtnBiayaLainnya);
+                playwright.pageScrollInView(biayaPenguranganSection);
                 if (playwright.isLocatorVisibleAfterLoad(tambahkanBtnBiayaLainnya, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
                     exist = playwright.isLocatorVisibleAfterLoad(tambahkanBtnBiayaLainnya, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                 }
                 break;
             case "Tambahkan in Tambahan Pendapatan":
-                playwright.pageScrollInView(tambahkanBtnTambahanPendapatan);
+                playwright.pageScrollInView(tambahanPendapatanSection);
                 if (playwright.isLocatorVisibleAfterLoad(tambahkanBtnTambahanPendapatan, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT)){
                     exist = playwright.isLocatorVisibleAfterLoad(tambahkanBtnTambahanPendapatan, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
                 }
