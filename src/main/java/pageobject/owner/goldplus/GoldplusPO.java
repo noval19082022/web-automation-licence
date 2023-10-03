@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -36,6 +38,12 @@ public class GoldplusPO {
     Locator tabSelesaiRincianBayar;
     Locator gpPackageText;
     Locator infoUntukAndaOption;
+    Locator tutupListBalanceGP;
+    Locator rincianMamiadsText;
+    Locator saldoMamiadsText;
+    Locator changeGPButton;
+    Locator listGPPage;
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -66,6 +74,12 @@ public class GoldplusPO {
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
         gpPackageText = page.getByText("GoldPlus 1 periode 4 Bulan").first();
+        tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
+        rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
+        saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
+        changeGPButton = page.locator("//*[@class='bg-c-button bg-c-button--tertiary-naked bg-c-button--md']");
+        listGPPage = page.locator("//h2[contains(.,'Paket GoldPlus')]");
+
     }
 
     /**
@@ -327,4 +341,103 @@ public class GoldplusPO {
         playwright.waitTillLocatorIsVisible(gpPackageText);
         return gpPackageText.isVisible();
     }
+
+    /**
+     * Get MamiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
+     *
+     * @param index input with mamiadsSaldo
+     * @return String MAmiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
+     */
+    public String mamiadsSaldo(String mamiadsSaldo, int index) {
+        String element = "";
+        switch (mamiadsSaldo) {
+            case "saldo":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-name')]";
+                break;
+            case "cashback":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-cashback')]";
+                break;
+            case "disc":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-discount bg-c-text bg-c-text--body-4')]";
+                break;
+            case "salePrice":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-sale-price')]";
+                break;
+            case "discPriceMamiAds":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-discount-price')]";
+                break;
+            case "saving":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-saving')]";
+                break;
+        }
+        playwright.pageScrollUntilElementIsVisible(tutupListBalanceGP);
+        return  playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+
+    /**
+     * user choose saldo
+     *
+     * @param saldo type saldo
+     * @throws InterruptedException
+     */
+    public void chooseSaldo(String saldo) throws InterruptedException {
+        Locator element = page.locator("//p[contains(.,'" + saldo + "')]");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Get text rincian MamiAds
+     *
+     * @return String text rincian MamiAds
+     */
+    public String getTextRinicianMamiAds() {
+        return playwright.getText(rincianMamiadsText);
+    }
+
+    /**
+     * Get text saldo MamiAds
+     *
+     * @return String text saldo MamiAds
+     */
+    public String getTextSaldoMamiAds() {
+        return playwright.getText(saldoMamiadsText);
+    }
+
+    /**
+     * Verify the mamiads package not displayed from rincian pembayaran
+     *
+     * @return false
+     */
+    public boolean isRincianNotVisible() {
+        return playwright.waitTillLocatorIsVisible(rincianMamiadsText);
+    }
+
+    /**
+     * Verify the saldo mamiads not displayed from rincian pembayaran
+     *
+     * @return false
+     */
+    public boolean isSaldoNotVisible() {
+        return playwright.waitTillLocatorIsVisible(saldoMamiadsText);
+    }
+
+    /**
+     * Scroll to element Ubah Package GP
+     *
+     */
+    public void scrollToUbahPackage() {
+        playwright.pageScrollUntilElementIsVisible(changeGPButton);
+    }
+
+    /**
+     * Click on ubah gold plus
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnUbahGoldPlus() throws InterruptedException {
+        playwright.pageScrollUntilElementIsVisible(changeGPButton);
+        playwright.clickOn(changeGPButton);
+        playwright.pageScrollUntilElementIsVisible(listGPPage);
+    }
+
 }

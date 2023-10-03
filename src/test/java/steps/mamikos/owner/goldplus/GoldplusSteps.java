@@ -19,7 +19,6 @@ import pageobject.owner.goldplus.PanduanGoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
-
 import java.util.List;
 import java.util.Map;
 
@@ -456,5 +455,51 @@ public class GoldplusSteps {
     public void owner_will_be_redirected_to_invoice_recurring(){
         playwright.waitTillPageLoaded();
         Assert.assertTrue(goldplus.gpPackageText());
+    }
+    @And("user view detail list saldo MamiAds")
+    public void user_view_detail_list_saldo_mamiads( DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        int j = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(goldplus.mamiadsSaldo("saldo", i), content.get("saldo"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("cashback", i), content.get("cashback"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("salePrice", i), content.get("salePrice"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("saving", i), content.get("saving"));
+            try {
+                if (!content.get("disc").isEmpty()) {
+                    Assert.assertEquals(goldplus.mamiadsSaldo("disc", j), content.get("disc"));
+                    Assert.assertEquals(goldplus.mamiadsSaldo("discPriceMamiAds", j), content.get("discPriceMamiAds"));
+                    j++;
+                }
+            } catch (java.lang.NullPointerException ignored) {
+            }
+            i++;
+        }
+    }
+
+    @And("user choose saldo {string} on GoldPlus section")
+    public void user_choose_saldo_on_goldplus_section(String saldo) throws InterruptedException {
+        goldplus.chooseSaldo(saldo);
+    }
+
+    @Then("user verify the {string} and the price is {string} already {string} on Rincian Pembayaran")
+    public void user_verify_the_and_the_price_is_already_on_rincian_pembayaran(String saldo, String rincian, String validation) {
+        switch (validation){
+            case "choosen":
+                Assert.assertEquals(goldplus.getTextSaldoMamiAds(), saldo, "saldo MamiAds  is not match");
+                Assert.assertEquals(goldplus.getTextRinicianMamiAds(), rincian, "rincian MamiAds  is not match");
+                break;
+            case "removed":
+                Assert.assertFalse(goldplus.isRincianNotVisible(), "rincian Mamiads doesn't removed");
+                Assert.assertFalse(goldplus.isSaldoNotVisible(), "saldo MamiAds doesn't removed");
+                break;
+        }
+        goldplus.scrollToUbahPackage();
+    }
+
+    @And("user click on ubah package gold plus button")
+    public void user_click_on_ubah_package_gold_plus_button() throws InterruptedException {
+        goldplus.clickOnUbahGoldPlus();
     }
 }
