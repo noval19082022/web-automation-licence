@@ -3,11 +3,15 @@ package pageobject.pms.homepage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
+import utilities.PlaywrightHelpers;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class KontrakKerjaSamaPO {
     private Page page;
+//    private PlaywrightHelpers playwright;
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     Locator toastMessage;
 
@@ -98,6 +102,13 @@ public class KontrakKerjaSamaPO {
     Locator penpadatanDbetMamikosInput;
     Locator jangkaWaktuKerjaSamaInput;
     Locator biayaKeanggotaanInput;
+    Locator modelKerjaSamaTxt;
+    Locator tipeJpTxt;
+    Locator persentaseJpTxt;
+    Locator jumlahJpTxt;
+    Locator tipeAdpTxt;
+    Locator persentaseAdpTxt;
+    Locator jumlahAdpTxt;
     //End Edit Detail Kerja Sama
 
     //Biaya Tambahan
@@ -816,5 +827,38 @@ public class KontrakKerjaSamaPO {
 
     }
 
+    public String getModelKerjaSama(String model){
+        modelKerjaSamaTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Model Kerja Sama')]//following::div[contains(text(), '" +model+ "')]");
+        return playwright.getText(modelKerjaSamaTxt);
+    }
 
+    public String getTipeJP(String jpType){
+        tipeJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Tipe Add On JP')]//following::div[contains(text(), '" +jpType+ "')]");
+        return playwright.getText(tipeJpTxt);
+    }
+
+    public String getPersentaseJP(String jpPrecentage) {
+        persentaseJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Persentase Add On JP')]/following-sibling::div[contains(text(), '" +jpPrecentage+ "')]");
+        return playwright.getText(persentaseJpTxt);
+    }
+
+    public String getJumlahJP(String jpAmount) {
+        jumlahJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Jumlah Add On JP')]/following-sibling::div[contains(text(), '" +jpAmount+ "')]");
+        return playwright.getText(jumlahJpTxt);
+    }
+
+    public String getTipeADP(String adpType) {
+        tipeAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Tipe Add On ADP')]/following-sibling::div[contains(text(), '" +adpType+ "')]");
+        return playwright.getText(tipeAdpTxt);
+    }
+
+    public String getPersentaseADP(String adpPrecentage) {
+        persentaseAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Persentase Add On ADP')]/following-sibling::div[contains(text(), '" +adpPrecentage+ "')]");
+        return playwright.getText(persentaseAdpTxt);
+    }
+
+    public String getJumlahADP(String adpAmount) {
+        jumlahAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Jumlah Add On ADP')]/following-sibling::div[contains(text(), '" +adpAmount+ "')]");
+        return playwright.getText(jumlahAdpTxt);
+    }
 }

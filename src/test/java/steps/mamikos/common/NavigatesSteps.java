@@ -20,6 +20,7 @@ import java.util.List;
 
 public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
+    Page page1;
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
@@ -78,6 +79,7 @@ public class NavigatesSteps {
         page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
             ActiveContext.getActiveBrowserContext().newPage();
         });
+        ActiveContext.setActivePage(page);
     }
 
     @When("tenant navigate to riwayat and draf booking")
@@ -303,5 +305,11 @@ public class NavigatesSteps {
     public void adminNavigateTo(String path) {
         playwright.navigateTo(Mamikos.ADMINBANGKRUPUX+path, 30000.0, LoadState.LOAD);
         playwright.waitTillUrlToBe(Mamikos.ADMINBANGKRUPUX+path, 30000.0);
+    }
+
+    @When("admin navigates to Kontrak Kerja Sama")
+    public void admin_navigates_to_Kontrak_Kerja_Sama(){
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.KONTRAK_KERJA_SAMA, 30000.0, LoadState.LOAD);
     }
 }
