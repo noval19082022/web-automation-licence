@@ -20,6 +20,10 @@ Feature: FTUE Booking Benefit
 
   @ftuebookingbenefit @TEST_DOM-1718
   Scenario: User Can Use Button On FTUE Booking Benefit
+    Given user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag       | kost name prod               |
+      | Kose Full Automation | Kost Automation Putri Tobelo |
     When user dismiss FTUE booking benefit
     Then user can not see FTUE booking benefit
 

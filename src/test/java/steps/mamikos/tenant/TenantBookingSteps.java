@@ -169,7 +169,7 @@ public class TenantBookingSteps {
 
     @Then("user can not see FTUE booking benefit")
     public void userCanNotSeeFTUEBookingBenefit() {
-        Assert.assertFalse(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide booking benefit is still visible");
+        Assert.assertFalse(kostDetail.isFTUEBookingBenefitIsNotVisible(), "FTUE Slide booking benefit is still visible");
     }
 
     @And("user search for Kost with name {string} and selects matching result")
