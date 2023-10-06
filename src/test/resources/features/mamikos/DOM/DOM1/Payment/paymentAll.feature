@@ -56,7 +56,7 @@ Feature: Payment All
       | phone stag | phone prod   | password  |
       | 0892202100 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method BNI with VA number "9881012892202100" and amount "501000"
+    And tenant select payment method using BNI
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
