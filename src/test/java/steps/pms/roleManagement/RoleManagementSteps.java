@@ -150,7 +150,14 @@ public class RoleManagementSteps {
     @Then("admin automation has permission on Disbursement for button")
     public void admin_automation_has_permission_on_Disbursement_for_button(List<String> button){
         for (String listButton: button){
-            Assert.assertTrue(disbursement.isButtonExist(listButton));
+            Assert.assertTrue(disbursement.isButtonExistInDisbursement(listButton));
+        }
+    }
+
+    @Then("admin automation has permission on Disbursement at Detail Transfer Pendapatan page")
+    public void admin_automation_has_permission_on_Disbursement_at_Detail_Transfer_Pendapatan_page(List<String> button){
+        for (String listButton: button){
+            Assert.assertTrue(disbursement.isButtonExistInDetailTransferPendapatan(listButton));
         }
     }
 
@@ -179,6 +186,30 @@ public class RoleManagementSteps {
     public void admin_go_to_Disbursement_menu_and_refresh_page(){
         sidebarmenu.clickDisbursementMenu();
         disbursement.refreshPage();
+    }
+
+    @When("admin edit and untick permission")
+    public void admin_edit_and_untick_permission(List<String> tables){
+        role.editRole();
+        permissions = tables;
+
+        for (int i=0; i<permissions.size(); i++){
+            role.untickPermission(permissions.get(i));
+        }
+    }
+
+    @Then("the buttons in Detail Transfer Pendapatan page are not available")
+    public void the_buttons_in_Detail_Transfer_Pendapatan_page_are_not_available(List<String> button){
+        for (String listButton: button){
+            Assert.assertFalse(disbursement.isButtonExistInDetailTransferPendapatan(listButton));
+        }
+    }
+
+    @Then("the buttons in Disbursement menu are not available")
+    public void the_buttons_in_Disbursement_menu_are_not_available(List<String> button){
+        for (String listButton: button){
+            Assert.assertFalse(disbursement.isButtonExistInDisbursement(listButton));
+        }
     }
 }
 
