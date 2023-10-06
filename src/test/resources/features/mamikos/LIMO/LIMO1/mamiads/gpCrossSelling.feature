@@ -39,3 +39,19 @@ Feature: GP Crosseling
     And user choose Goldplus package 2
     And user verify the "Saldo MamiAds 1.500.000" and the price is "Rp1.350.000" already "choosen" on Rincian Pembayaran
 
+  @TEST_LIMO-288
+  Scenario: Cancel select saldo mamiads
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password |
+      | 085720962105 | 0          | qwerty123 |
+    And user click "Daftar" button
+    And user choose Goldplus package 1
+    # scenario ubah package before select saldo mamiads (MA-4881)
+    When user click on ubah package gold plus button
+    And user choose Goldplus package 2
+    And user choose saldo "Rp27.000" on GoldPlus section
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
+    # scenario cancel saldo mamiads (MA-4885)
+    And user unchoose saldo on GoldPlus section
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran

@@ -386,6 +386,16 @@ public class GoldplusPO {
     }
 
     /**
+     * user unchoose saldo
+     *
+     * @throws InterruptedException
+     */
+    public void unCheckedSaldo() throws InterruptedException {
+        Locator element = page.locator("//div[@class='goldplus-mamiads-detail__item bg-c-card bg-c-card--md bg-c-card--light active']");
+        playwright.clickOn(element);
+    }
+
+    /**
      * Get text rincian MamiAds
      *
      * @return String text rincian MamiAds

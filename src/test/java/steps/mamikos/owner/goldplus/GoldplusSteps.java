@@ -502,4 +502,9 @@ public class GoldplusSteps {
     public void user_click_on_ubah_package_gold_plus_button() throws InterruptedException {
         goldplus.clickOnUbahGoldPlus();
     }
+
+    @Then("user unchoose saldo on GoldPlus section")
+    public void user_unchoose_saldo_on_gold_plus_section() throws InterruptedException {
+        goldplus.unCheckedSaldo();
+    }
 }
