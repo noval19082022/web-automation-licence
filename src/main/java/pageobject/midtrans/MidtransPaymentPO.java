@@ -16,7 +16,7 @@ public class MidtransPaymentPO {
     Locator paymentCode;
     Locator vaCodePlaceHolder;
     Locator inquireButton;
-    Locator bayarButtonOnPermataMidtrans;
+    Locator bayarButtonOnMidtrans;
     Locator payButton;
     Locator successTransaction;
 
@@ -28,7 +28,7 @@ public class MidtransPaymentPO {
         vaCodePlaceHolder = page.getByPlaceholder("Virtual Account Number");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        bayarButtonOnPermataMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
+        bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         successTransaction = page.getByText("Success! Success Payment VA");
     }
 
@@ -58,7 +58,7 @@ public class MidtransPaymentPO {
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.selectDropdownByValue(page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target bank selection")), Bank);
         playwright.clickOn(inquireButton);
-        playwright.clickOn(bayarButtonOnPermataMidtrans);
+        playwright.clickOn(bayarButtonOnMidtrans);
     }
 
     /**
@@ -70,7 +70,7 @@ public class MidtransPaymentPO {
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.clickOn(inquireButton);
-        playwright.clickOn(bayarButtonOnPermataMidtrans);
+        playwright.clickOn(bayarButtonOnMidtrans);
     }
 
     /**
