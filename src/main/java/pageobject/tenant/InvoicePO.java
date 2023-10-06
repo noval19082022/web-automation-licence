@@ -299,6 +299,13 @@ public class InvoicePO {
     }
 
     /**
+     * Choose permata as payment
+     */
+    public void clickOnBNI(){
+        playwright.clickOn(bankBNI);
+    }
+
+    /**
      * Click on bayar sekarang button
      */
     public void clickOnBayarSekarang() {

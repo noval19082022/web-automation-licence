@@ -62,6 +62,18 @@ public class MidtransPaymentPO {
     }
 
     /**
+     * Payment process midtrans for BNI
+     * @param kodePembayaran payment virtual account
+     */
+    public void paymentForBNI(String kodePembayaran){
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
+        playwright.clickOn(inquireButton);
+        playwright.clickOn(bayarButtonOnPermataMidtrans);
+    }
+
+    /**
      * Click on inquire button
      */
     public void clickOnInquireButton() {
