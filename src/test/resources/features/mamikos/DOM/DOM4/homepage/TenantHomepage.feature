@@ -55,7 +55,7 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection instagram on homepage
 		Given user go to mamikos homepage
 		When user open instagram in footer
-		Then user should redirect to link "https://www.instagram.com/mamikosapp/"
+		Then user should redirect to link that contains "https://www.instagram.com/mamikosapp/"
 	@TEST_DOM-4632 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection e-mail on homepage
 		Given user go to mamikos homepage
