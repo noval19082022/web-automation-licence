@@ -41,12 +41,8 @@ public class DisbursementSteps {
         disbursement.clicksRefreshHalamanIniBtn();
 
         Assert.assertEquals(disbursement.getModelKerjaSamaBooking(), modelKerjaSamaBooking);
-        System.out.println(disbursement.getModelKerjaSamaBooking());
         Assert.assertEquals(disbursement.getModelKerjaSamaDBET(), modelKerjaSamaDBET);
-        System.out.println(disbursement.getModelKerjaSamaDBET());
         Assert.assertEquals(disbursement.getAddOnJP(), addOnJP);
-        System.out.println(disbursement.getAddOnJP());
         Assert.assertEquals(disbursement.getAddOnADP(), addOnADP);
-        System.out.println(disbursement.getAddOnADP());
     }
 }
