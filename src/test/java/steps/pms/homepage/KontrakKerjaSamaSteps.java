@@ -280,10 +280,8 @@ public class KontrakKerjaSamaSteps {
     @When("admin edit detail kerja sama on Model, JP, and ADP")
     public void admin_edit_detail_kerja_sama_on_Model_JP_and_ADP(DataTable tables){
         kontrak = tables.asMaps(String.class, String.class);
-//        String produk = kontrak.get(0).get("Jenis Produk");
-        String model = kontrak.get(0).get("Model Kerja Sama");
-//        String commission = kontrak.get(0).get("Basic Commission");
 
+        String model = kontrak.get(0).get("Model Kerja Sama");
         String jpType = kontrak.get(0).get("Tipe JP");
         String jpPrecentage = kontrak.get(0).get("Presentase JP");
         String jpAmount = kontrak.get(0).get("Jumlah JP");
@@ -291,31 +289,20 @@ public class KontrakKerjaSamaSteps {
         String adpPrecentage = kontrak.get(0).get("Presentase ADP");
         String adpAmount = kontrak.get(0).get("Jumlah ADP");
 
-//        String month = kontrak.get(0).get("Jangka Waktu");
-//        String fee = kontrak.get(0).get("Biaya Keanggotaan");
-
         contract.ubahDetailKerjaSama();
-//        contract.editJenisProduk(produk);
         contract.editModelKerjaSama(model);
-//        contract.editBasicCommission(commission);
 
         contract.editJp(jpType, jpPrecentage, jpAmount);
         contract.editAdp(adpType, adpPrecentage, adpAmount);
 
-//        contract.editJangkaWaktuKerjaSama(month);
-//        contract.editBiayaKeanggotaan(fee);
         contract.submitEditDetailKerjaSama();
     }
 
     @Then("detail kerja sama on Model, JP, and ADP should be match with data")
     public void detail_kerja_sama_on_Model_JP_and_ADP_should_be_match_with_data(DataTable tables){
         kontrak = tables.asMaps(String.class, String.class);
-//        String produk = kontrak.get(0).get("Jenis Produk");
+
         String model = kontrak.get(0).get("Model Kerja Sama");
-
-//        String commission = kontrak.get(0).get("Basic Commission");
-//        String roomTotal = kontrak.get(0).get("Total Kamar");
-
         String jpType = kontrak.get(0).get("Tipe JP");
         String jpPrecentage = kontrak.get(0).get("Presentase JP");
         String jpAmount = kontrak.get(0).get("Jumlah JP");
@@ -323,22 +310,10 @@ public class KontrakKerjaSamaSteps {
         String adpPrecentage = kontrak.get(0).get("Presentase ADP");
         String adpAmount = kontrak.get(0).get("Jumlah ADP");
 
-//        String revBookingPemilik = kontrak.get(0).get("Pemilik Booking");
-//        String revBookingMamikos = kontrak.get(0).get("Mamikos Booking");
-//        String month = kontrak.get(0).get("Jangka Waktu");
-//        String start = kontrak.get(0).get("Awal Kerja Sama");
-//        String end = kontrak.get(0).get("Akhir Kerja Sama");
-//        String fee = kontrak.get(0).get("Biaya Keanggotaan");
-
         playwright.hardWait(5000);
         page.reload();
         contract.viewSectionDetailKerjaSama();
 
-//        contract.assertModelKerjaSama(produk, model, commission,roomTotal);
-//        contract.assertRevenuShare(jpType, jpPrecentage, jpAmount, adpType, adpPrecentage, adpAmount, revBookingPemilik, revBookingMamikos);
-//        contract.assertContractDuration(month, start, end, fee);
-//
-//        Assert.assertEquals(role.getToastMessage(),toastMessage);
         Assert.assertEquals(contract.getModelKerjaSama(model), model);
         Assert.assertEquals(contract.getTipeJP(jpType), jpType);
         Assert.assertEquals(contract.getPersentaseJP(jpPrecentage), jpPrecentage);
@@ -346,6 +321,5 @@ public class KontrakKerjaSamaSteps {
         Assert.assertEquals(contract.getTipeADP(adpType), adpType);
         Assert.assertEquals(contract.getPersentaseADP(adpPrecentage), adpPrecentage);
         Assert.assertEquals(contract.getJumlahADP(adpAmount), adpAmount);
-//        Assert.assertTrue(contract.getDetailKerjaSama(), model, jpType, jpPrecentage, jpAmount, adpType, adpPrecentage, adpAmount);
     }
 }

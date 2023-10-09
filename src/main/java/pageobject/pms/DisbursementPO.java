@@ -34,6 +34,10 @@ public class DisbursementPO {
     Locator tambahanPendapatanSection;
     Locator riwayatTransferPendapatanBtn;
     Locator refreshHalamanIniBtn;
+    Locator modelKerjaSamaBooking;
+    Locator modelKerjaSamaDBET;
+    Locator addOnJP;
+    Locator addOnADP;
 
     public DisbursementPO(Page page) {
         this.page = page;
@@ -156,13 +160,6 @@ public class DisbursementPO {
         playwright.clickOn(terapkanBtn);
     }
 
-//    /**
-//     * Clicks Cari button
-//     */
-//    public void clicksCariBtn(){
-//        playwright.clickOn(cariBtn);
-//    }
-
     /**
      * Refresh page on Disbursement menu
      */
@@ -170,28 +167,67 @@ public class DisbursementPO {
         playwright.reloadPage();
     }
 
+    /**
+     * Search Property name on Disbursement menu
+     * @param property
+     */
     public void searchProperty(String property){
         playwright.fill(searchProperty, property);
         playwright.clickOn(cariBtn);
     }
 
+    /**
+     * Clicks Lihat Detail on Kebab button
+     */
     public void clicksLihatDetail(){
         playwright.clickOn(actionBtn);
         playwright.clickOn(seeDetailBtn);
     }
 
-    public Page clicksRiwayatTransferPendapatan(){
-        page = page.waitForPopup(() -> {playwright.clickOn(riwayatTransferPendapatanBtn);});
-        ActiveContext.setActivePage(page);
-        return ActiveContext.getActivePage();
-
-//        page = page.waitForPopup(() -> {invoiceNumberLast.click();});
-//        ActiveContext.setActivePage(page);
-//        return ActiveContext.getActivePage();
-//        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("reload Refresh Halaman ini")).click();
-    }
-
+    /**
+     * Clicks Refresh Halaman Ini button in Detail Transfer Pendapatan
+     */
     public void clicksRefreshHalamanIniBtn() {
         playwright.clickOn(refreshHalamanIniBtn);
+    }
+
+    /**
+     * Get Model Kerja Sama on Booking
+     * @return String model kerja sama booking
+     */
+    public String getModelKerjaSamaBooking() {
+        modelKerjaSamaBooking = page.locator("//div[@class='bg-c-list-item__description']//li").nth(0);
+        String full = playwright.getText(modelKerjaSamaBooking);
+        String result = full.substring(9);
+        return result;
+    }
+
+    /**
+     * Get Model Kerja Sama on DBET
+     * @return String model kerja sama DBET
+     */
+    public String getModelKerjaSamaDBET() {
+        modelKerjaSamaDBET = page.locator("//div[@class='bg-c-list-item__description']//li").nth(1);
+        String full = playwright.getText(modelKerjaSamaDBET);
+        String result = full.substring(6);
+        return result;
+    }
+
+    /**
+     * Get Add On JP
+     * @return String Add On JP
+     */
+    public String getAddOnJP() {
+        addOnJP = page.locator("//div[@class='bg-c-list-item__description']//li").nth(2);
+        return playwright.getText(addOnJP);
+    }
+
+    /**
+     * Get Add On ADP
+     * @return String Add On ADP
+     */
+    public String getAddOnADP() {
+        addOnADP = page.locator("//div[@class='bg-c-list-item__description']//li").nth(3);
+        return playwright.getText(addOnADP);
     }
 }

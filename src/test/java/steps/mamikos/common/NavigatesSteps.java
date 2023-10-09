@@ -71,6 +71,7 @@ public class NavigatesSteps {
     public synchronized void tenantSetActivePageTo(int activePage) {
         List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
         ActiveContext.setActivePage(listPage.get(activePage));
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         playwright.bringPageToView(ActiveContext.getActivePage());
     }
 
