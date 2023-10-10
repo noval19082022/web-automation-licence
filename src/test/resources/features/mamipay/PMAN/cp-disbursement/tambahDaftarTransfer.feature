@@ -20,7 +20,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik |
       | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          |
 
-  @TEST_PMAN-3340 @continue
+  @TEST_PMAN-3339 @continue
   Scenario: Ensure data not deleted when popup closed
     When admin fill remaining field
       | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
