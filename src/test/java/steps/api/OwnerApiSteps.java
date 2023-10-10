@@ -17,6 +17,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JsonHelpers;
@@ -32,6 +33,8 @@ public class OwnerApiSteps {
     private APIResponse ownerProfileResponse;
     private Map<String, String> listBookingParams;
     private List<Map<String, String>> question = new ArrayList<>();
+    private Map<Object, Object> acceptBookingBody = new HashMap<>();
+    private Map<Object, Object> roomId = new HashMap<>();
 
     @When("playwright get owner profile")
     public void playwrightGetOwnerProfile() throws NoSuchAlgorithmException, InvalidKeyException {
@@ -71,41 +74,125 @@ public class OwnerApiSteps {
 
     @When("playwright set accept booking data for owner")
     public void playwrightSetAcceptBookingDataForOwner() {
-        JsonElement listBookingJsonElement = JsonHelpers.createJsonElementFromJsonFile("target/ownerBookingList.json");
-        JsonObject listBookingJsonObject = JsonHelpers.createJsonObject(listBookingJsonElement);
-        JsonArray listBookingData = JsonHelpers.createJsonArray(listBookingJsonObject, "data");
-        JsonObject bookingObject = JsonHelpers.createJsonObject(listBookingData.get(0));
+        //accept booking details data
+        JsonObject ownerBookingAcceptDetailsJson = JsonHelpers.createJsonObject(JsonHelpers.createJsonElementFromJsonFile("target/ownerBookingAcceptDetails.json"));
+        JsonObject ownerBookingAcceptDetailData = JsonHelpers.createJsonObject(ownerBookingAcceptDetailsJson.get("data"));
+        JsonElement roomAdditionalPriceElement = ownerBookingAcceptDetailData.get("room_additional_price");
+        JsonArray roomAdditionalPrice = JsonHelpers.createJsonArray(roomAdditionalPriceElement);
+        JsonObject additionalPriceList = JsonHelpers.createJsonObject(roomAdditionalPrice.get(0));
+        JsonObject deposit = JsonHelpers.createJsonObject(roomAdditionalPrice.get(2));
+        JsonArray depositData = JsonHelpers.createJsonArray(deposit.get("data"));
+        JsonObject depositDataObject = JsonHelpers.createJsonObject(depositData.get(0));
+        JsonObject fine = JsonHelpers.createJsonObject(roomAdditionalPrice.get(1));
+        JsonArray fineData = JsonHelpers.createJsonArray(fine.get("data"));
+        JsonElement tenantPhotoDocumentElement = ownerBookingAcceptDetailData.get("tenant_photo_document");
+        JsonElement tenantPhotoIdentifierElement = ownerBookingAcceptDetailData.get("tenant_photo_identifier_id");
+        var depositAmount = depositData.isEmpty() ? 0 : JsonHelpers.getJsonObjectValueAsInt(depositDataObject, "price");
+        var fineAmount = fineData.isEmpty() ? 0 : JsonHelpers.getJsonObjectValueAsInt(fineData.get(0).getAsJsonObject(), "price");
+        var tenantPhotoDocumentId = tenantPhotoDocumentElement.isJsonNull() ? 0 : JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "tenant_photo_document_id");
+        var tenantPhotoIdentifierId = tenantPhotoIdentifierElement.isJsonNull() ? 0 : JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "tenant_photo_identifier_id");
+        //accept booking details data
+
         //app flow
-        //later
-        AcceptBooking.setAdditionalCosts(Collections.emptyList());
-        AcceptBooking.setAmount(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "remaining_payment"));
-        AcceptBooking.setDepositAmount(0);
+        AcceptBooking.setAdditionalCosts(additionalPriceList.get("data").getAsJsonArray());
+        AcceptBooking.setAmount(JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "amount"));
+        AcceptBooking.setDepositAmount(depositAmount);
+
         //get random id from designer id end point
         AcceptBooking.setDesignerRoomId(309175);
-        AcceptBooking.setDuration(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "duration_count"));
-        AcceptBooking.setEmail(JsonHelpers.getJsonObjectValueAsString(bookingObject, "email"));
-        AcceptBooking.setFineAmount(0);
+        AcceptBooking.setDuration(JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "duration"));
+        AcceptBooking.setEmail(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "email"));
+        AcceptBooking.setFineAmount(fineAmount);
         AcceptBooking.setFineDurationType("Day");
         AcceptBooking.setFineMaximumLength(0);
         AcceptBooking.setFixedBilling(false);
-        AcceptBooking.setGender(JsonHelpers.getJsonObjectValueAsString(bookingObject, "gender"));
-        AcceptBooking.setName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "name"));
-        AcceptBooking.setOccupation(JsonHelpers.getJsonObjectValueAsString(bookingObject, "job"));
+        AcceptBooking.setGender(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "gender"));
+        AcceptBooking.setName(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "name"));
+        AcceptBooking.setOccupation(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "occupation"));
         //cari dari mana
-        AcceptBooking.setOwnerAccept(true);
-        AcceptBooking.setParentName(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_name"));
-        AcceptBooking.setParentPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "parent_phone_number"));
-        AcceptBooking.setPhoneNumber(JsonHelpers.getJsonObjectValueAsString(bookingObject, "phone_number"));
+        AcceptBooking.setOwnerAccept(JsonHelpers.getJsonObjectValueAsBoolean(ownerBookingAcceptDetailData, "owner_agreement"));
+        AcceptBooking.setParentName(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "parent_name"));
+        AcceptBooking.setParentPhoneNumber(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "parent_phone_number"));
+        AcceptBooking.setPhoneNumber(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "phone_number"));
         //lets check booking detail
-        AcceptBooking.setPhotoDocumentId(0);
-        AcceptBooking.setPhotoId(62255);
+        AcceptBooking.setPhotoDocumentId(tenantPhotoDocumentId);
+        AcceptBooking.setPhotoId(JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "tenant_photo_id"));
         //lets check booking detail
-        AcceptBooking.setPhotoIdentifierId(0);
+        AcceptBooking.setPhotoIdentifierId(tenantPhotoIdentifierId);
         AcceptBooking.setQuestion(question);
-        AcceptBooking.setRentType(AcceptBooking.rentType(JsonHelpers.getJsonObjectValueAsString(bookingObject, "duration_type")));
-        AcceptBooking.setRoomId(JsonHelpers.getJsonObjectValueAsInt(bookingObject, "room_id"));
+        AcceptBooking.setRentType(AcceptBooking.rentType(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "rent_type")));
+        AcceptBooking.setRoomId(JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "room_id"));
         AcceptBooking.setSaveCostGroup(false);
-        AcceptBooking.setStartDate(JsonHelpers.getJsonObjectValueAsString(bookingObject, "checkin_date"));
+        AcceptBooking.setStartDate(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "start_date"));
         //app
+    }
+
+    @When("playwright get owner room booking detail")
+    public void playwrightGetOwnerRoomBookingDetail() throws NoSuchAlgorithmException, InvalidKeyException {
+        var ownerRoomBookingDetailEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_ROOM_BOOKING_DETAIL;
+        var signature = Requirement.createSignatureKey("GET", ownerRoomBookingDetailEndpoint, ApiEndpoints.X_GIT_TIME_APP);
+        var headers = Requirement.mamikosAppHeaders(signature);
+        var ownerRoomBookingDetailRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
+        var ownerRoomBookingDetailResponse = ownerRoomBookingDetailRequest.get(ownerRoomBookingDetailEndpoint, RequestOptions.create()
+                .setQueryParam("booking_id", 77492)
+                .setQueryParam("access", ApiEndpoints.ACCESS)
+                .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        System.out.println(ownerRoomBookingDetailResponse.url());
+        System.out.println(ownerRoomBookingDetailResponse.text());
+        Assert.assertEquals(ownerRoomBookingDetailResponse.status(), 200);
+        Assert.assertTrue(ownerRoomBookingDetailResponse.ok());
+    }
+
+    @When("playwright create body accept booking for owner")
+    public void playwrightCreateBodyAcceptBookingForOwner() {
+        acceptBookingBody.put("additional_costs", AcceptBooking.getAdditionalCosts());
+        acceptBookingBody.put("amount", AcceptBooking.getAmount());
+        acceptBookingBody.put("deposit_amount", AcceptBooking.getDepositAmount());
+        acceptBookingBody.put("designer_room_id", AcceptBooking.getDesignerRoomId());
+        acceptBookingBody.put("duration", AcceptBooking.getDuration());
+        acceptBookingBody.put("email", AcceptBooking.getEmail());
+        acceptBookingBody.put("fine_amount", AcceptBooking.getFineAmount());
+        acceptBookingBody.put("fine_duration_type", AcceptBooking.getFineDurationType());
+        acceptBookingBody.put("fine_maximum_length", AcceptBooking.getFineMaximumLength());
+        acceptBookingBody.put("fixed_billing", AcceptBooking.isFixedBilling());
+        acceptBookingBody.put("gender", AcceptBooking.getGender());
+        acceptBookingBody.put("name", AcceptBooking.getName());
+        acceptBookingBody.put("occupation", AcceptBooking.getOccupation());
+        acceptBookingBody.put("owner_accept", AcceptBooking.isOwnerAccept());
+        acceptBookingBody.put("parent_name", AcceptBooking.getParentName());
+        acceptBookingBody.put("parent_phone_number", AcceptBooking.getParentPhoneNumber());
+        acceptBookingBody.put("phone_number", AcceptBooking.getPhoneNumber());
+        acceptBookingBody.put("photo_document_id", AcceptBooking.getPhotoDocumentId());
+        acceptBookingBody.put("photo_id", AcceptBooking.getPhotoId());
+        acceptBookingBody.put("photo_identifier_id", AcceptBooking.getPhotoIdentifierId());
+        acceptBookingBody.put("question", AcceptBooking.getQuestion());
+        acceptBookingBody.put("rent_type", AcceptBooking.getRentType());
+        acceptBookingBody.put("room_id", AcceptBooking.getRoomId());
+        acceptBookingBody.put("save_cost_group", AcceptBooking.isSaveCostGroup());
+        acceptBookingBody.put("start_date", AcceptBooking.getStartDate());
+        var acceptBookingBodyJsonString = JsonHelpers.createJsonStringFromMap(acceptBookingBody);
+        JsonHelpers.createJsonFileFromJsonString(acceptBookingBodyJsonString, "target/acceptBookingBodyNamaSementara.json");
+    }
+
+    @When("playwright get owner booking accept details")
+    public void playwrightGetOwnerBookingAcceptDetails() throws NoSuchAlgorithmException, InvalidKeyException {
+        var ownerBookingAcceptDetailsEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_ACCEPT + "77853";
+        var signature = Requirement.createSignatureKey("GET", ownerBookingAcceptDetailsEndpoint, ApiEndpoints.X_GIT_TIME_APP);
+        var headers = Requirement.mamikosAppHeaders(signature);
+        var ownerBookingAcceptDetailsRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
+        var ownerBookingAcceptDetailsResponse = ownerBookingAcceptDetailsRequest.get(ownerBookingAcceptDetailsEndpoint, RequestOptions.create()
+                .setQueryParam("access", ApiEndpoints.ACCESS)
+                .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        System.out.println(ownerBookingAcceptDetailsResponse.url());
+        System.out.println(ownerBookingAcceptDetailsResponse.text());
+        Assert.assertEquals(ownerBookingAcceptDetailsResponse.status(), 200);
+        Assert.assertTrue(ownerBookingAcceptDetailsResponse.ok());
+        JsonHelpers.createJsonFileFromJsonString(ownerBookingAcceptDetailsResponse.text(), "target/ownerBookingAcceptDetails.json");
+    }
+
+    @When("playwright get owner available room for kos with id:")
+    public void playwrightGetOwnerAvailableRoomForKosWithId(DataTable table) {
+        var dataTable = table.asMaps(String.class, String.class);
+        var kosId = dataTable.get(0).get("kosId");
     }
 }

@@ -46,16 +46,16 @@ Feature: Add Ons - Extended Contract
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0891111020198 | 0891111020198 |
-
-  @continue
-  Scenario: Playwright Create Booking
-    And playwright get tenant data profile
-    And playwright get kos detail:
-      | songId | 58650684 |
-    And playwright make json file for tenant booking from tenant profile data
-    And playwright create booking for tenant:
-      | songId     | 58650684 |
-      | roomTypeId | 6194     |
+#
+#  @continue
+#  Scenario: Playwright Create Booking
+#    And playwright get tenant data profile
+#    And playwright get kos detail:
+#      | songId | 58650684 |
+#    And playwright make json file for tenant booking from tenant profile data
+#    And playwright create booking for tenant:
+#      | songId     | 58650684 |
+#      | roomTypeId | 6194     |
 
 #  Scenario: Owner Accept Booking
 #    Given user go to mamikos homepage

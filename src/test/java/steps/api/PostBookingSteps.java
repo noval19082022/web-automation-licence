@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
+import data.api.AcceptBooking;
 import data.api.CreateBooking;
 import data.mamikos.ApiEndpoints;
 import io.cucumber.datatable.DataTable;
@@ -125,5 +126,10 @@ public class PostBookingSteps {
         System.out.println(createBookingResponse.url());
         System.out.println(createBookingResponse.text());
         System.out.println(createBookingResponse.status());
+        JsonHelpers.createJsonFileFromJsonString(createBookingResponse.text(), "target/createBookingResponse.json");
+        JsonObject createBookingResponseJson = JsonHelpers.createJsonObject(JsonHelpers.createJsonElementFromJsonFile("target/createBookingResponse.json"));
+        JsonObject dataObject = JsonHelpers.createJsonObject(createBookingResponseJson.get("data"));
+        AcceptBooking.setBookingId(dataObject.get("id").getAsInt());
+        System.out.println("Booking id is: " + AcceptBooking.getBookingId());
     }
 }

@@ -23,7 +23,7 @@ public class AcceptBooking {
         dpDate,
         dpSettlementDate;
     @Setter @Getter
-    private static Integer roomId,
+    private static int roomId,
         roomNumber,
         amount,
         duration,
@@ -36,10 +36,7 @@ public class AcceptBooking {
         dpAmount,
         designerRoomId,
         billingDate,
-        fineMaximumLength;
-
-    @Setter @Getter
-    private static List<Object> additionalCosts;
+        fineMaximumLength, bookingId;
 
     @Setter @Getter
     private static List<Map<String, String>> question = new ArrayList<>();
@@ -48,7 +45,7 @@ public class AcceptBooking {
     private static boolean ownerAccept, saveCostGroup, useDp, fixedBilling;
 
     @Setter @Getter
-    private static Object maritalStatus;
+    private static Object maritalStatus, additionalCosts;
 
     /**
      * Set rent type duration

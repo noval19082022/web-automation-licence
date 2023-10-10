@@ -32,5 +32,7 @@ public class ApiEndpoints {
     public static final String OWNER_LOGIN = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerLogin");
     public static final String OWNER_PROFILE = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerProfile");
     public static final String OWNER_BOOKING_LIST = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerBookingList");
+    public static final String OWNER_ROOM_BOOKING_DETAIL = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerRoomBookingDetail");
+    public static final String OWNER_BOOKING_ACCEPT = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerAcceptBooking");
     // ---- Owner Block ---- //
 }

@@ -77,11 +77,15 @@ public class JsonHelpers {
         return jsonObject.getAsJsonArray(key);
     }
 
+    public static JsonArray createJsonArray(JsonElement jsonElement) {
+        return jsonElement.getAsJsonArray();
+    }
+
     public static String getJsonObjectValueAsString(JsonObject jsonObject, String key) {
         return jsonObject.get(key).getAsString();
     }
 
-    public static int getJsonObjectValueAsInt(JsonObject jsonObject, String key) {
+    public static Integer getJsonObjectValueAsInt(JsonObject jsonObject, String key) {
         return jsonObject.get(key).getAsInt();
     }
 
