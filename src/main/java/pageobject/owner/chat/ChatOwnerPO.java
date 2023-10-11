@@ -52,11 +52,11 @@ public class ChatOwnerPO {
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         acceptFromChatRoomButton = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
         yaTerimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
-        notPaidFirstRent = page.locator(".mc-chat-room__header-content > .bg-c-label");
+        notPaidFirstRent = page.locator("div[class='mc-chat-room-header__content'] div[class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-blue']");
         tenantName = page.locator(".bg-c-tooltip__target > .bg-c-text");
-        roomTitle = page.locator("//p[@class='mc-product-link-card__content-name bg-c-text bg-c-text--body-2']");
-        roomPrice = page.getByText("Rp780.000/bulan");
-        sisaKamarLabel = page.locator("//div[@class='mc-product-link-card__wrapper-left']");
+        roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
+        roomPrice = page.locator("//p[contains(.,'Rp780.000')]");
+        sisaKamarLabel = page.locator("//p[@class='bg-c-text bg-c-text--label-4 bg-c-text--italic mc-product-card__available-room bg-u-text-red-600']");
         FTUEBeforeChat = page.getByText("Kuota chat room akan berkurang Kini berlaku sistem kuota chat mingguan. Jika lan");
         backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
@@ -151,7 +151,7 @@ public class ChatOwnerPO {
      * @return
      */
     public String getNotPaidFirstRentText(){
-        playwright.hardWait(5000);
+        playwright.waitFor(notPaidFirstRent,10000.0);
         return playwright.getText(notPaidFirstRent);
     }
 
