@@ -250,6 +250,7 @@ public class MamikosListInvoicePO {
      * @return Integer data type of other price's price number
      */
     public Integer getOtherPriceNumber(String invoiceEl) {
+        playwright.hardWait(2000);
         getOtherPriceNumber = page.locator("//*[.='" + invoiceEl + "']/following-sibling::*[1]");
         return JavaHelpers.extractNumber(playwright.getText(getOtherPriceNumber));
     }
