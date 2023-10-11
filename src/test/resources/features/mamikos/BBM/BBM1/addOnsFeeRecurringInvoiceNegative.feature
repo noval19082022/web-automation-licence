@@ -1,5 +1,4 @@
 @regression @addons @TEST_BBM-1095 @BBM1
-
 Feature: Add Ons - Fee Recurring Invoice Negative Scenario
 
   Scenario: Admin Batalkan Contract
