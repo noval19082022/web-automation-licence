@@ -114,7 +114,7 @@ public class InvoicePO {
         txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
-        closeFilter = page.locator("i").nth(1);
+        closeFilter = page.locator("i");
         openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
@@ -435,6 +435,7 @@ public class InvoicePO {
         playwright.clickOn(filterKostName);
         selectKostName = page.locator("span").filter(new Locator.FilterOptions().setHasText(filter)).locator("div");
         playwright.clickOn(selectKostName);
+        page.pause();
         playwright.clickOn(closeFilter);
     }
 
@@ -509,7 +510,7 @@ public class InvoicePO {
         int totalPage = ActiveContext.getActiveBrowserContext().pages().size();
         if(totalPage > 1){
             page.waitForClose(() -> {
-                ActiveContext.getActiveBrowserContext().pages().get(1).close();
+                ActiveContext.getActivePage().close();
             });
         }
     }
