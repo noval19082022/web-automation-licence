@@ -478,7 +478,7 @@ public class InvoicePO {
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
-        playwright.clickOn(sudahBayarButton);
+       // playwright.clickOn(sudahBayarButton);
         do {
             page.reload();
             maxReload++;
