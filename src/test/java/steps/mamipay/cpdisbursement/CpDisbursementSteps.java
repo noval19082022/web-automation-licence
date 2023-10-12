@@ -157,4 +157,49 @@ public class CpDisbursementSteps {
         Assert.assertEquals(detailRekeningActual[2].trim(),detailRekeningExpected[2]);
         Assert.assertEquals(detailRekeningActual[4].trim(),detailRekeningExpected[3]);
     }
+    @When("admin search cp disbursement by {string} using keyword {string}")
+    public void admin_search_cp_disbursement_by_using_keyword(String searchBy, String keyword) {
+        cpdisbursement.searchDaftarTransfer(searchBy,keyword);
+    }
+    @Then("show {string} empty page")
+    public void show_empty_page(String tab) {
+        switch (tab){
+            case "Daftar Transfer":
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageTitle(),"Belum Ada Data Transfer");
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageDescription(),"Silakan tambah data transfer terlebih dahulu.");
+                break;
+            case "Transfer Diproses":
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageTitle(),"Silakan proses transfer pendapatan terlebih dahulu.");
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageDescription(),"Silakan proses transfer pendapatan terlebih dahulu.");
+                break;
+            case "Transfer Gagal":
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageTitle(),"Belum Ada Transfer Gagal");
+                Assert.assertEquals(cpdisbursement.getEmptyPageMessageDescription(),"Data transfer pendapatan yang gagal akan tampil di sini.");
+                break;
+            default:
+                System.out.println("Invalid Tab name");
+        }
+    }
+    @Then("show all disbursement from property name {string}")
+    public void show_all_disbursement_from_property_name(String property) {
+        for (int i=0;i<cpdisbursement.countPropertyName();i++) {
+            Assert.assertEquals(cpdisbursement.getPropertyNameList(i),property);
+        }
+    }
+    @Then("show all disbursement from account name {string}")
+    public void show_all_disbursement_from_account_name(String accountName) {
+        for (int i=0;i<cpdisbursement.countDetailRekening();i++) {
+            String[] detailRekeningActual = cpdisbursement.getDetailRekeningList(i).split("\\R ");
+
+            Assert.assertEquals(detailRekeningActual[0],accountName);
+        }
+    }
+    @Then("show all disbursement from account number {string}")
+    public void show_all_disbursement_from_account_number(String accountNo) {
+        for (int i=0;i<cpdisbursement.countDetailRekening();i++) {
+            String[] detailRekeningActual = cpdisbursement.getDetailRekeningList(i).split("\\R ");
+
+            Assert.assertEquals(detailRekeningActual[2].trim(),accountNo);
+        }
+    }
 }

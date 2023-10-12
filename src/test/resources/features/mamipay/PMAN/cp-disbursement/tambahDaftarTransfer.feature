@@ -1,4 +1,4 @@
-@tambah-daftar-transfer @pman @regression @test
+@tambah-daftar-transfer @pman @regression
 
 Feature: CP Disbursement - Tambah Daftar Transfer
 

@@ -44,6 +44,12 @@ public class CpDisbursementPO {
     private Locator tipeTransaksiTable;
     private Locator totalPendapatanTable;
     private Locator detailRekeningTable;
+    private Locator searchByDropdown;
+    private Locator searchByValue;
+    private Locator searchKeywordField;
+    private Locator searchButton;
+    private Locator emptyPageMessageTitle;
+    private Locator emptyPageMessageDescription;
     //List Daftar Transfer
 
     public CpDisbursementPO(Page page){
@@ -75,6 +81,12 @@ public class CpDisbursementPO {
         tipeTransaksiTable = page.locator("tr td:nth-of-type(4)");
         totalPendapatanTable = page.locator("tr td:nth-of-type(5)");
         detailRekeningTable = page.locator("tr td:nth-of-type(6)");
+        searchByDropdown = page.locator(".filter-option");
+        searchByValue = page.locator("a[role='option'] span");
+        searchKeywordField = page.locator("input[name='search_value']");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        emptyPageMessageTitle = page.locator(".pay-backoffice__table-empty h3");
+        emptyPageMessageDescription = page.locator(".pay-backoffice__table-empty p");
     }
 
     /**
@@ -308,6 +320,21 @@ public class CpDisbursementPO {
     }
 
     /**
+     * Get property name row i in Daftar Transfer List
+     * @param index
+     * @return String
+     */
+    public String getPropertyNameList(int index) {
+        String name = null;
+        if (playwright.getText(productTable.nth(index)).equalsIgnoreCase("APIK")){
+            name = playwright.getText(namaPropertyTable.nth(index)).substring(0,(playwright.getText(namaPropertyTable.first()).length()-5)).trim();
+        } else if (playwright.getText(productTable.nth(index)).equalsIgnoreCase("SinggahSini")) {
+            name = playwright.getText(namaPropertyTable.nth(index)).substring(0,playwright.getText(namaPropertyTable.first()).length()-12).trim();
+        }
+        return name;
+    }
+
+    /**
      * get first tipe transaksi in Daftar Transfer List
      * @return String
      */
@@ -324,10 +351,63 @@ public class CpDisbursementPO {
     }
 
     /**
-     * get first detail rekening list
+     * get first detail rekening list in Daftar Transfer List
      * @return String
      */
     public String getDetailRekeningList() {
         return playwright.getText(detailRekeningTable.first());
+    }
+
+    /**
+     * get detail rekening row i in Daftar Transfer List
+     * @param i index
+     * @return String
+     */
+    public String getDetailRekeningList(int i) {
+        return playwright.getText(detailRekeningTable.nth(i));
+    }
+
+    /**
+     * Search Daftar Transfer
+     * @param searchBy
+     * @param keyword
+     */
+    public void searchDaftarTransfer(String searchBy, String keyword) {
+        playwright.clickOn(searchByDropdown);
+        playwright.clickOn(searchByValue.filter(new Locator.FilterOptions().setHasText(searchBy)));
+        playwright.fill(searchKeywordField,keyword);
+        playwright.clickOn(searchButton);
+    }
+
+    /**
+     * get Empty page Message Title
+     * @return String
+     */
+    public String getEmptyPageMessageTitle() {
+        return playwright.getText(emptyPageMessageTitle);
+    }
+
+    /**
+     * get Empty page message description
+     * @return String
+     */
+    public String getEmptyPageMessageDescription() {
+        return playwright.getText(emptyPageMessageDescription);
+    }
+
+    /**
+     * Count Property Name in List Daftar Transfer
+     * @return int
+     */
+    public int countPropertyName() {
+        return namaPropertyTable.count();
+    }
+
+    /**
+     * count Detail Rekening in List Daftar Transfer
+     * @return
+     */
+    public int countDetailRekening() {
+        return detailRekeningTable.count();
     }
 }
