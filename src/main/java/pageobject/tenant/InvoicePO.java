@@ -435,7 +435,6 @@ public class InvoicePO {
         playwright.clickOn(filterKostName);
         selectKostName = page.locator("span").filter(new Locator.FilterOptions().setHasText(filter)).locator("div");
         playwright.clickOn(selectKostName);
-        page.pause();
         playwright.clickOn(closeFilter);
     }
 
