@@ -313,4 +313,9 @@ public class NavigatesSteps {
         playwright = new PlaywrightHelpers(page);
         playwright.navigateTo(Mamikos.KONTRAK_KERJA_SAMA, 30000.0, LoadState.LOAD);
     }
+
+    @Given("user navigate to SBMPTN page")
+    public void userNavigateToSBMPTNPage() {
+        playwright.navigateTo(Mamikos.URL + "/download-soal/download-soal-sbmptn-tkpa-saintek-soshum-dan-campuran-beserta-pembahasannya-gratis", 30000.0, LoadState.LOAD);
+    }
 }
