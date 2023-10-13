@@ -58,5 +58,3 @@ Feature: Gold Plus
       | phone stag   | phone prod | password  |
       | 086465400654 | 0          | qwerty123 |
     Then validate that owner have "Sedang Diproses"
-
-

@@ -507,4 +507,38 @@ public class GoldplusSteps {
     public void user_unchoose_saldo_on_gold_plus_section() throws InterruptedException {
         goldplus.unCheckedSaldo();
     }
+
+    @Then("owner wants to process gp crosseling")
+    public void owner_wants_to_process_gp_crosseling() {
+        gpSubmission.clicksOnBayarSekarangButton();
+    }
+
+    @Then("owner validate payment for {string} have {string} and have {string} before choose payment method")
+    public void owner_validate_payment_for_have_and_have_before_choose_payment_method(String product, String mamiads, String fee) throws InterruptedException {
+        goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
+        Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
+        Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"),product);
+        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"),"Belum dipilih");
+        Assert.assertEquals(goldplus.getRincianGP(), product, "GoldPlus  is not match");
+        Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
+        Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
+    }
+
+    @Then("owner wants to paid GP crosseling by click {string} on pop up {string}")
+    public void owner_wants_to_paid_gp_crosseling_by_click_on_pop_up(String action, String titlePopUp) {
+        goldplus.clickOnWidgetGP();
+        Assert.assertTrue(playwright.isTextDisplayed(titlePopUp, 1000));
+        playwright.clickOnTextButton(action);
+
+    }
+    //------ Terminated Contract GP ------//
+    @When("user wants to terminate Goldplus for owner with phone number {string}")
+    public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
+        goldplus.searchPhoneNumberGP(phoneNumber);
+        playwright.clickOnTextButton("Terminate");
+        playwright.clickOnTextButton("Yes, terminate it!");
+        Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
+    }
+
 }

@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import utilities.PlaywrightHelpers;
 
@@ -18,6 +19,7 @@ public class MamiAdsSteps {
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
+    GoldplusPO goldplus = new GoldplusPO(page);
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
@@ -110,5 +112,12 @@ public class MamiAdsSteps {
     @Then("user verify answer text {string}")
     public void user_verify_answer_text(String answerText) {
         Assert.assertEquals(mamiAdsPO.getAnswerText(answerText), answerText);
+    }
+
+    @And("validate status transaction mamiads is {string} with price {string} saldo {string}")
+    public void validate_status_transaction_mamiads_with_price(String status, String price, String saldo) {
+        Assert.assertEquals(mamiAdsPO.gettransactionList(1), saldo);
+        Assert.assertEquals(mamiAdsPO.gettransactionList(2), price);
+        Assert.assertEquals(mamiAdsPO.gettransactionList(3), status);
     }
 }
