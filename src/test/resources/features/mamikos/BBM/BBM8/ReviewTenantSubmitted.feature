@@ -2,7 +2,7 @@
 
 Feature: Kost Review Submitted Display
 
-  @TEST_BBM-70 @continue
+  @TEST_COOP-2552 @continue
   Scenario: Kost Review Submitted Display on Kos Saya Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -12,14 +12,14 @@ Feature: Kost Review Submitted Display
     Then there will be a Kost Review submitted with the title "Kamu memberikan nilai:"
     And there will be a Kost Review submitted with the stars amount "3.0"
 
-  @TEST_BBM-65 @continue
+  @TEST_COOP-2920 @continue
   Scenario: Kost Review Submitted Display on Berhenti Sewa Page
     When tenant navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
     Then there will be a Kost Review submitted with the title "Kamu memberikan nilai:"
     And there will be a Kost Review submitted with the stars amount "3.0"
 
-  @TEST_BBM-74
+  @TEST_COOP-2558
   Scenario: Kost Review Submitted Display on Riwayat Kos Page
     When tenant navigate to riwayat kos page
     Then user verify Kost Review entry point is not displayed

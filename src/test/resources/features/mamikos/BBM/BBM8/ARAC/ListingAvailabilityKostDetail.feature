@@ -1,7 +1,7 @@
 @regression @listingavailability @BBM8
 Feature: Listing Availability on Kost Detail
 
-  @TEST_BBM-3644
+  @TEST_COOP-968
   Scenario: Check "Ajukan Sewa" button if the room is available for today
     Given user go to mamikos homepage
     When user login as tenant via phone number:

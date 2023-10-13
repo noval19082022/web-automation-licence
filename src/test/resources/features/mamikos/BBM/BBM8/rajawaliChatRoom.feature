@@ -9,26 +9,26 @@ Feature: Rajawali Chat Room
     And user go to Rajawali Chat Room
     And user click on the Group Chat
 
-  @TEST_BBM-1496
+  @TEST_COOP-850
   Scenario: Check if User can click on Kost Name in Rajawali Chat Room
     And user click on Kos Name from chat list
     Then user able to see Kos Name
     When admin set active page to 1
     Then user will directed to Kos Detail in new tab
 
-  @TEST_BBM-4710 @rajawali-chat @toAutomate @web
+  @TEST_COOP-918 @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Kos/Tenant
     When admin select filter "kos/tenant"
     And admin fill search chat with "upik"
     Then admin can see result data
 
-  @TEST_BBM-4711 @rajawali-chat @toAutomate @web
+  @TEST_COOP-927 @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Kos
     When admin select filter "kos/tenant"
     And admin fill search chat with "Kos Emas Dua"
     Then admin can see result data
 
-  @TEST_BBM-4712 @rajawali-chat @toAutomate @web
+  @TEST_COOP-924 @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Tenant
     When admin select filter "tenant"
     And admin fill search chat with "upik"

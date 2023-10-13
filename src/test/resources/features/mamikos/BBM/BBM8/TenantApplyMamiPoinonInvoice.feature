@@ -2,7 +2,7 @@
 
 Feature: Tenant Apply MamiPoin on Invoice
 
-  @TEST_BBM-379 @TEST_BBM-383 @TEST_BBM-377 @TEST_BBM-375
+  @TEST_COOP-2520 @TEST_COOP-2522 @TEST_COOP-2519 @TEST_COOP-2904
   Scenario: Tenant Apply MamiPoin
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -16,7 +16,7 @@ Feature: Tenant Apply MamiPoin on Invoice
     When user clicks on mamipoin toggle button to OFF
     Then system display remaining payment "before" use mamipoin for payment monthly
 
-  @TEST_BBM-378
+  @TEST_COOP-2500
   Scenario: Point Estimate on Blackisted Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:

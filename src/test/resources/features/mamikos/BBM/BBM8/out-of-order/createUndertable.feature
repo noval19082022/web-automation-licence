@@ -1,4 +1,4 @@
-@arac @pms @TEST_BBM-3725 @BBM8
+@arac @pms @TEST_COOP-1077 @BBM8
 Feature: Create OOO "Undertable" Type
 
   @continue
@@ -16,7 +16,7 @@ Feature: Create OOO "Undertable" Type
       | room number | start date |
       | 1           | 11         |
 
-#  @TEST_BBM-3725
+#  @TEST_COOP-1077
   Scenario: Create OOO "Undertable"
     When admin set out of order on room "1"
     And admin fill OOO data with:

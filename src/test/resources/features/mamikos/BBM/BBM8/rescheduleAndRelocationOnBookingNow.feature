@@ -15,7 +15,7 @@ Feature: Reschedule and Relocation
     And admin click search button on booking now
     And admin click next button on booking now
 
-  @TEST_BBM-1155 @TEST_BBM-1154
+  @TEST_COOP-2901 @TEST_COOP-2899
   Scenario: Success Reschedule
     When admin fill duration booking form with:
       | booking type          | Reschedule  |
@@ -30,7 +30,7 @@ Feature: Reschedule and Relocation
     And admin reject booking with "Dokumen tidak lengkap" as the reason
     Then admin should see success message "Success! Booking ditolak" on data booking page
 
-  @TEST_BBM-1156
+  @TEST_COOP-2892
   Scenario: Success Relocation
     When admin fill duration booking form with:
       | booking type          | Relocation  |
@@ -45,12 +45,12 @@ Feature: Reschedule and Relocation
     And admin reject booking with "Dokumen tidak lengkap" as the reason
     Then admin should see success message "Success! Booking ditolak" on data booking page
 
-  @TEST_BBM-1153
+  @TEST_COOP-2898
   Scenario: Reschedule and Contract ID is invalid
     When admin fill booking type with "Reschedule" and contract id with "0"
     Then admin should see check contract id alert message is "Cannot continue : contract not valid"
 
-  @TEST_BBM-1152
+  @TEST_COOP-2897
   Scenario: Reschedule and Contract ID is still active
     When admin fill booking type with "Reschedule" and contract id with "37309"
     Then admin should see check contract id alert message is "Cannot continue : contract owned by other user"

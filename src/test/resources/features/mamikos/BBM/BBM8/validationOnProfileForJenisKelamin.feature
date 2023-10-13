@@ -1,7 +1,7 @@
 @BBM8 @update-profile
 Feature: Check field required on update profile form
 
-  @TEST_BBM-26
+  @TEST_COOP-2815
   Scenario: Check field required on update profile form
     Given user go to mamikos homepage
     When user login as tenant via phone number:

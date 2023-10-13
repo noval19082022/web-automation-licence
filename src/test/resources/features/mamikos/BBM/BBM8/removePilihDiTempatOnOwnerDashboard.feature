@@ -1,7 +1,7 @@
 @regression @booking @BBM8
 Feature: Owner Confirm Booking - Remove Pilih Di Tempat
 
-  @TEST_BBM-4124
+  @TEST_COOP-698
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

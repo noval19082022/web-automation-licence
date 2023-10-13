@@ -17,6 +17,7 @@ public class HomepageSteps {
     HomepagePO homepage = new HomepagePO(page);
 
     private List<Map<String, String>> informasiPembayaran;
+    private List<Map<String, String>> gender;
 
     private List<Map<String, String>> otherFee;
 
@@ -102,5 +103,33 @@ public class HomepageSteps {
     public void admin_click_on_save_button() {
             homepage.clickOnSaveButton();
         }
+
+    //--------------------dbet pms--------//
+    @And("admin create contract tenant dbet")
+    public void admin_create_contract_tenant_dbet() {
+        homepage.clickOnTambahPenyewa();
+        homepage.clickDbetButton();
     }
+
+    @Then("admin can see {string} on phone number")
+    public void admin_can_see_error_message_on_phone_number(String text) {
+        Assert.assertEquals(homepage.getPhoneNumberErrorMessage(),text, "not display error message");
+    }
+
+    @Then("admin can see {string} on tenant name")
+    public void admin_can_see_x_on_tenant_name(String text) {
+        Assert.assertEquals(homepage.getTenantNameErrorMessage(), text, "not display error message");
+    }
+
+    @And("admin fill email tenant {string}")
+    public void admin_fill_email_tenant(String email) {
+        homepage.fillEmailTenant(email);
+    }
+
+    @Then("admin can see {string} on email")
+    public void admin_can_see_x_on_email(String text) {
+        Assert.assertEquals(homepage.getEmailErrorMessage(), text, "not display error message");
+    }
+
+}
 
