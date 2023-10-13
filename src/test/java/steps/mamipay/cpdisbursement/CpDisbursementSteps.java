@@ -182,13 +182,13 @@ public class CpDisbursementSteps {
     }
     @Then("show all disbursement from property name {string}")
     public void show_all_disbursement_from_property_name(String property) {
-        for (int i=0;i<cpdisbursement.countPropertyName();i++) {
+        for (int i=0;i<cpdisbursement.countRow();i++) {
             Assert.assertEquals(cpdisbursement.getPropertyNameList(i),property);
         }
     }
     @Then("show all disbursement from account name {string}")
     public void show_all_disbursement_from_account_name(String accountName) {
-        for (int i=0;i<cpdisbursement.countDetailRekening();i++) {
+        for (int i=0;i<cpdisbursement.countRow();i++) {
             String[] detailRekeningActual = cpdisbursement.getDetailRekeningList(i).split("\\R ");
 
             Assert.assertEquals(detailRekeningActual[0],accountName);
@@ -196,10 +196,28 @@ public class CpDisbursementSteps {
     }
     @Then("show all disbursement from account number {string}")
     public void show_all_disbursement_from_account_number(String accountNo) {
-        for (int i=0;i<cpdisbursement.countDetailRekening();i++) {
+        for (int i=0;i<cpdisbursement.countRow();i++) {
             String[] detailRekeningActual = cpdisbursement.getDetailRekeningList(i).split("\\R ");
 
             Assert.assertEquals(detailRekeningActual[2].trim(),accountNo);
+        }
+    }
+    @When("admin open {string} tab")
+    public void admin_open_tab(String tab) {
+        cpdisbursement.openCPDisbursementTab(tab);
+    }
+    @When("admin reset filter cp disbursement")
+    public void admin_reset_filter_cp_disbursement() {
+        cpdisbursement.resetFilter();
+    }
+    @When("admin search cp dibursement by transfer status {string}")
+    public void admin_search_cp_dibursement_by_transfer_status(String status) {
+        cpdisbursement.filterCpDisbursementByStatusTransfer(status);
+    }
+    @Then("show all disbursement with status transfered {string}")
+    public void show_all_disbursement_with_status_transfered(String label) {
+        for (int i=0;i<cpdisbursement.countRow();i++) {
+            Assert.assertEquals(cpdisbursement.getStatusTransfer(i), label);
         }
     }
 }
