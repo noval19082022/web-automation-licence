@@ -174,4 +174,62 @@ public class LoginSteps {
     public void owner_should_successfully_log_out(){
         owner.logoutAsOwner();
     }
+
+    @And("user tenant profile picture is shown")
+    public void userTenantProfilePictureIsShown() {
+        Assert.assertTrue(tenantLogin.isTenantProfilePictureDisplayed(), "Tenant Profile Picture is not Displayed");
+    }
+
+    @When("user clicks on Enter button as tenant delete password fill")
+    public void userClicksOnEnterButtonAsTenantDeletePasswordFill(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+        login.clearTextPassword();
+    }
+
+    @Then("user verify login error messages {string}")
+    public void userVerifyLoginErrorMessages(String error) {
+        Assert.assertEquals(login.getLoginErrorMessagesText(error), error, "Login error messages is not equal to " + error);
+    }
+
+    @When("user clicks on Enter button as tenant delete phone number fill")
+    public void userClicksOnEnterButtonAsTenantDeletePhoneNumberFill(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+        login.clearTextPhoneNumber();
+    }
+
+    @When("user masuk sebagai")
+    public void userMasukSebagai() {
+        home.clickOnButtonMasuk();
+    }
+
+    @And("user click close on pop up login")
+    public void userClickCloseOnPopUpLogin() {
+        login.clickCloseOnPopUpLogin();
+    }
+
+    @Then("user verify pop up {string} {string}")
+    public void userVerifyPopUp(String title, String subtitle) {
+        Assert.assertEquals(login.getLoginTitlePopUpText(title), title, "Pop up login title is not equal to " + title);
+        Assert.assertEquals(login.getLoginSubtitleText(subtitle), subtitle, "Pop up login subtitle is not equal to " + subtitle);
+    }
+
+    @Then("user verify pop up {string} {string} are not appeared")
+    public void userVerifyPopUpAreNotAppeared(String title, String subtitle) {
+        Assert.assertFalse(login.isPopupTitleTextAppeared(title), "Pop up title text is appear");
+        Assert.assertFalse(login.isPopupSubtitleTextAppeared(subtitle), "Pop up subtitle text is appear");
+    }
 }

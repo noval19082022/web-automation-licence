@@ -1,5 +1,4 @@
 @regression @addons @TEST_BBM-1095 @BBM1
-
 Feature: Add Ons - Fee Recurring Invoice Negative Scenario
 
   Scenario: Admin Batalkan Contract
@@ -57,5 +56,6 @@ Feature: Add Ons - Fee Recurring Invoice Negative Scenario
     And tenant go to invoice page
     And tenant set active page to 2
     Then tenant can not sees add on price on payment page
-    When tenant pay booking to extended contract using ovo "0891111020198"
+    And tenant pay booking to extended contract using ovo "0891111020198" without close the page
+    And tenant set active page to 1
     Then tenant can not sees add on price on payment page

@@ -1890,4 +1890,19 @@ public class KostDetailsPO {
         tncRefundPoint = page.getByText(refundSubtile);
         assertThat(tncRefundPoint).isVisible();
     }
+
+    /**
+     * Check the visibility of ftue booking benefit
+     * @return boolean
+     */
+    public boolean isFTUEBookingBenefitIsNotVisible() {
+        for (int i = 0; i < 4; i++) {
+            playwright.pageScrollToDown(300);
+            if (ftueSlider.isVisible()) {
+                break;
+            }
+            playwright.hardWait(500);
+        }
+        return playwright.waitTillLocatorIsVisible(ftuePopUP);
+    }
 }

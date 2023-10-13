@@ -450,6 +450,12 @@ public class KostDetailSteps {
         kostDetail.clickOnShareKostButton();
     }
 
+    @And("user can favorite kost not login")
+    public void userCanFavoriteKostNotLogin() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+    }
+
     @And("user clicks on Chat pemilik menu")
     public void userClickOnChatPemilikMenu() {
         kostDetail.clickOnChatPemilikButton();

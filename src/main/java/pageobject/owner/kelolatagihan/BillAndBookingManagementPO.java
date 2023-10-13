@@ -97,6 +97,7 @@ public class BillAndBookingManagementPO {
      */
     public void clickOnSimpan() {
         simpanButton.click();
+        playwright.hardWait(5000);
     }
 
     /**

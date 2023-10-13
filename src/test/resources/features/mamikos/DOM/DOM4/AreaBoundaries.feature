@@ -68,8 +68,8 @@ Feature: Area Boundaries
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Bogor       |
-      | area result    |Bogor|
+      | search keyword | Padang   |
+      | area result    | Padang   |
     When user activate Dikelola Mamikos filter
     Then user can see kos tidak ditemukan state on kos landing area
 
