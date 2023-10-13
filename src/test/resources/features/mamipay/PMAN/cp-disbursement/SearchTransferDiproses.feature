@@ -30,6 +30,6 @@ Feature: Search Transfer Diproses CP Disbursement
     Then show all disbursement with status transfered "transferred"
 
   @TEST_PMAN-8524
-  Scenario: Filter by Transfer Status Transferred
+  Scenario: Filter by Transfer Status Transferred by System
     And admin search cp dibursement by transfer status "Transferred By System"
     Then show all disbursement with status transfered "auto transferred"
