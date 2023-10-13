@@ -1,5 +1,5 @@
 @skuyloginownerlewatapi
-Feature: Get Owner Profile
+Feature: Owner API
 
   Scenario: Create Owner DeviceId
     When playwright create register device id for owner with parameters:
@@ -15,8 +15,7 @@ Feature: Get Owner Profile
       | offset |   |
       | group  |   |
       | limit  | 1 |
-    And playwright get owner booking accept details
     And playwright get owner available room for kos with id:
-      | kos id | 1      |
-    And playwright set accept booking data for owner
-    And playwright create body accept booking for owner
+      | kos id | 58650684      |
+  And playwright get room allotment or available room for kos with id:
+      | kos id | 58650684      |

@@ -20,6 +20,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.it.Ma;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
+import utilities.JavaHelpers;
 import utilities.JsonHelpers;
 
 import javax.xml.crypto.Data;
@@ -34,6 +35,7 @@ public class OwnerApiSteps {
     private Map<String, String> listBookingParams;
     private List<Map<String, String>> question = new ArrayList<>();
     private Map<Object, Object> acceptBookingBody = new HashMap<>();
+    private Map<String, String> dataTable;
     private Map<Object, Object> roomId = new HashMap<>();
 
     @When("playwright get owner profile")
@@ -99,7 +101,6 @@ public class OwnerApiSteps {
         AcceptBooking.setDepositAmount(depositAmount);
 
         //get random id from designer id end point
-        AcceptBooking.setDesignerRoomId(309175);
         AcceptBooking.setDuration(JsonHelpers.getJsonObjectValueAsInt(ownerBookingAcceptDetailData, "duration"));
         AcceptBooking.setEmail(JsonHelpers.getJsonObjectValueAsString(ownerBookingAcceptDetailData, "email"));
         AcceptBooking.setFineAmount(fineAmount);
@@ -171,12 +172,13 @@ public class OwnerApiSteps {
         acceptBookingBody.put("save_cost_group", AcceptBooking.isSaveCostGroup());
         acceptBookingBody.put("start_date", AcceptBooking.getStartDate());
         var acceptBookingBodyJsonString = JsonHelpers.createJsonStringFromMap(acceptBookingBody);
-        JsonHelpers.createJsonFileFromJsonString(acceptBookingBodyJsonString, "target/acceptBookingBodyNamaSementara.json");
+        JsonHelpers.createJsonFileFromJsonString(acceptBookingBodyJsonString, "target/acceptBookingBody" + AcceptBooking.getBookingId() + ".json");
     }
 
     @When("playwright get owner booking accept details")
     public void playwrightGetOwnerBookingAcceptDetails() throws NoSuchAlgorithmException, InvalidKeyException {
-        var ownerBookingAcceptDetailsEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_ACCEPT + "77853";
+        var ownerBookingAcceptDetailsSafeFilePath = "target/ownerBookingAcceptDetails.json" + AcceptBooking.getBookingId();
+        var ownerBookingAcceptDetailsEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_ACCEPT + AcceptBooking.getBookingId();
         var signature = Requirement.createSignatureKey("GET", ownerBookingAcceptDetailsEndpoint, ApiEndpoints.X_GIT_TIME_APP);
         var headers = Requirement.mamikosAppHeaders(signature);
         var ownerBookingAcceptDetailsRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
@@ -187,12 +189,42 @@ public class OwnerApiSteps {
         System.out.println(ownerBookingAcceptDetailsResponse.text());
         Assert.assertEquals(ownerBookingAcceptDetailsResponse.status(), 200);
         Assert.assertTrue(ownerBookingAcceptDetailsResponse.ok());
-        JsonHelpers.createJsonFileFromJsonString(ownerBookingAcceptDetailsResponse.text(), "target/ownerBookingAcceptDetails.json");
+        JsonHelpers.createJsonFileFromJsonString(ownerBookingAcceptDetailsResponse.text(), ownerBookingAcceptDetailsSafeFilePath);
     }
 
     @When("playwright get owner available room for kos with id:")
-    public void playwrightGetOwnerAvailableRoomForKosWithId(DataTable table) {
-        var dataTable = table.asMaps(String.class, String.class);
-        var kosId = dataTable.get(0).get("kosId");
+    public void playwrightGetOwnerAvailableRoomForKosWithId(DataTable table) throws NoSuchAlgorithmException, InvalidKeyException {
+        dataTable = table.asMap(String.class, String.class);
+        var kosId = dataTable.get("kos id");
+        var roomAllotmentSaveFilePath = "target/ownerRoomAllotment" + kosId + ".json";
+        var startDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 0, 0);
+        var endDate = JavaHelpers.getCostumDateOrTime("yyyy-MM-dd", 0, 1, 0);
+        var ownerRoomAllotmentEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_ROOM_ALLOTMENT + kosId;
+        var signature = Requirement.createSignatureKey("GET", ownerRoomAllotmentEndpoint, ApiEndpoints.X_GIT_TIME_APP);
+        var ownerRoomAllotmentRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, Requirement.mamikosAppHeaders(signature));
+        var ownerRoomAllotmentResponse = ownerRoomAllotmentRequest.get(ownerRoomAllotmentEndpoint, RequestOptions.create()
+                .setQueryParam("start_date", startDate)
+                .setQueryParam("end_date", endDate)
+                .setQueryParam("access", ApiEndpoints.ACCESS)
+                .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        System.out.println("Playwriht hit endpoint: " + ownerRoomAllotmentResponse.url());
+        System.out.println(ownerRoomAllotmentResponse.text());
+        Assert.assertEquals(ownerRoomAllotmentResponse.status(), 200);
+        Assert.assertTrue(ownerRoomAllotmentResponse.ok());
+        JsonHelpers.createJsonFileFromJsonString(ownerRoomAllotmentResponse.text(), roomAllotmentSaveFilePath);
+    }
+
+    @And("playwright get room allotment or available room for kos with id:")
+    public void playwrightGetRoomAllotmentOrAvailableRoomForKosWithId(DataTable table) {
+        dataTable = table.asMap(String.class, String.class);
+        var kosId = dataTable.get("kos id");
+        var roomAllotmentSaveFilePath = "target/ownerRoomAllotment" + kosId + ".json";
+        JsonElement ownerRoomAllotmentJson = JsonHelpers.createJsonElementFromJsonFile(roomAllotmentSaveFilePath);
+        JsonObject ownerRoomAllotmentData = JsonHelpers.createJsonObject(ownerRoomAllotmentJson.getAsJsonObject().get("data"));
+        JsonArray ownerRoomAllotmentAvailableUnits = JsonHelpers.createJsonArray(ownerRoomAllotmentData.get("units"));
+        System.out.println("Available units: " + ownerRoomAllotmentAvailableUnits.size());
+        JsonObject ownerRoomAllotmentAvailableLastUnit = JsonHelpers.createJsonObject(ownerRoomAllotmentAvailableUnits.get(ownerRoomAllotmentAvailableUnits.size() - 1));
+        AcceptBooking.setDesignerRoomId(ownerRoomAllotmentAvailableLastUnit.get("id").getAsInt());
+        System.out.println("Designer room id: " + AcceptBooking.getDesignerRoomId());
     }
 }
