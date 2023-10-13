@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
@@ -21,6 +22,7 @@ public class OwnerAcceptBookingSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     PengajuanSewaPO pengajuanBooking = new PengajuanSewaPO(page);
+    LoadingPO loading = new LoadingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
@@ -46,6 +48,7 @@ public class OwnerAcceptBookingSteps {
         tenantNames = table.asMaps(String.class, String.class);
         var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
         var maxLoop = 0;
+        loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
         do {
             pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();

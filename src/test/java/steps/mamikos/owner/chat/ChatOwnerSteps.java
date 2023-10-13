@@ -60,7 +60,6 @@ public class ChatOwnerSteps {
         billBookingManage.clickOnTerapkanButton();
         billBookingManage.clickOnLanjutkanButton();
         billBookingManage.clickOnSimpan();
-      //  billBookingManage.clickOkButton();
     }
 
     @Then("system display title {string} after accept booking from chat room")

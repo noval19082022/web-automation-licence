@@ -26,12 +26,16 @@ public class LoadingPO {
     public void waitForLoadingIconDisappear() {
         var waitDelay = 1000.0;
         var maxLoop = 10;
-        List<Locator> loadingIconList = playwright.getLocators(loadingIcon);
-        if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {
-            for (Locator loadingIcon : loadingIconList) {
-                playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
+        if (playwright.waitTillLocatorIsVisible(loadingIcon.nth(0)) || playwright.waitTillLocatorIsVisible(loadingAnimation)) {
+            List<Locator> loadingIconList = playwright.getLocators(loadingIcon);
+            if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {
+                for (Locator loadingIcon : loadingIconList) {
+                    playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
+                }
+            }
+            if (playwright.waitTillLocatorIsVisible(loadingAnimation)) {
+                playwright.waitTillLocatorIsNotVisible(loadingAnimation, waitDelay, maxLoop);
             }
         }
-        playwright.waitTillLocatorIsNotVisible(loadingAnimation, waitDelay, maxLoop);
     }
 }

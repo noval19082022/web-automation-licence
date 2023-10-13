@@ -141,7 +141,7 @@ public class OwnerDashboardPO {
      */
     public void clickOnManagementKost() {
         playwright.waitFor(manajemenKost);
-        manajemenKost.click();
+        playwright.clickOn(manajemenKost);
     }
 
     /**

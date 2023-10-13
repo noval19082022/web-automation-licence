@@ -26,6 +26,7 @@ public class LoginPO {
     private Locator closeBtn;
     Locator profileTenantButton;
     Locator keluarButton;
+    Locator profilPictureTenant;
 
     public LoginPO(Page page) {
         this.page = page;
@@ -46,6 +47,7 @@ public class LoginPO {
         this.closeBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         profileTenantButton = page.getByAltText("User Photo");
         keluarButton = page.getByTestId("exitButton");
+        profilPictureTenant = page.locator("//img[@alt='User Photo']");
     }
 
     /**
@@ -150,5 +152,74 @@ public class LoginPO {
     public void logoutAsTenant() {
         profileTenantButton.click();
         keluarButton.click();
+    }
+
+    /**
+     * Tenant Profile Picture is  Displayed
+     *
+     * @return Tenant Profile Picture
+     */
+    public boolean isTenantProfilePictureDisplayed() {
+        return playwright.waitTillLocatorIsVisible(profilPictureTenant);
+    }
+
+    /**
+     * Tenant clear text password
+     */
+    public void clearTextPassword(){
+        playwright.clearText(passwordInput);
+    }
+
+    /**
+     * Tenant clear text phone number
+     */
+    public void clearTextPhoneNumber(){
+        playwright.clearText(phoneNumberInput);
+    }
+
+    /**
+     * Get login error messages text
+     * @return string
+     */
+    public String getLoginErrorMessagesText(String error){
+        playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + error + "')]"));
+        return playwright.getText(page.locator("//p[contains(., '" + error + "')]"));
+    }
+
+    /**
+     * Get Login Title Pop Up Text
+     * @param text text
+     * @return string
+     */
+    public String getLoginTitlePopUpText(String text){
+        return playwright.getText(page.locator("//p[contains(., '" + text + "')]"));
+    }
+
+    /**
+     * Get Login Subtitle Pop Up Text
+     * @param text text
+     * @return string
+     */
+    public String getLoginSubtitleText(String text){
+        return playwright.getText(page.locator("//p[contains(., '" + text + "')]"));
+    }
+
+    /**
+     * Is Pop up title text appeared?
+     * @param text text
+     * @return true or false
+     */
+    public boolean isPopupTitleTextAppeared(String text){
+        return playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + text + "')]"));
+
+    }
+
+    /**
+     * Is Pop up subtitle text appeared?
+     * @param text text
+     * @return true or false
+     */
+    public Boolean isPopupSubtitleTextAppeared(String text){
+        return playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + text + "')]"));
     }
 }
