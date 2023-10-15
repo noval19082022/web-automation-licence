@@ -31,7 +31,18 @@ public class SearchContractSteps {
 
     @When("admin search contract by kost level {string}")
     public void adminSearchContractByKostLevel(String kostLevel) {
+        if (!playwright.getActivePageURL().contains("/backoffice/contract/search")) {
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/contract/search");
+        }
+
         searchContract.selectKosLevel(kostLevel);
+        searchContract.clickOnSearchButton();
+    }
+
+    @And("admin search contract by Renter Phone Number and input field {string}")
+    public void adminSearchContractByRenterPhoneNumberAndInputField(String phoneNumber) {
+        admin.clickOnSearchContract();
+        searchContract.selectRenterPhoneNumber(phoneNumber);
         searchContract.clickOnSearchButton();
     }
 
