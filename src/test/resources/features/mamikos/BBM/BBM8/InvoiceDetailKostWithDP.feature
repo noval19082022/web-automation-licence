@@ -1,6 +1,6 @@
 @regression @BBM8
 
-@TEST_BBM-1323
+@TEST_COOP-1166
 Feature: Invoice Detail Kost With DP
 
   Scenario: Admin Batalkan Contract

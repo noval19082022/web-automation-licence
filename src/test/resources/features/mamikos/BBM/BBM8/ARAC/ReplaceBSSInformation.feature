@@ -2,7 +2,7 @@
 
 Feature: Replace BSS Information
 
-  @TEST_BBM-3638
+  @TEST_COOP-935
   Scenario: Check Calendar if there is any vacant rooms today
     Given user go to mamikos homepage
     When user login as tenant via phone number:

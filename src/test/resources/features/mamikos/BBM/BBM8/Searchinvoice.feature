@@ -1,7 +1,7 @@
 @regression @BBM8
 
 Feature: Search invoice
-  @TEST_BBM-859 @autoExtendTrue @continue
+  @TEST_COOP-2878 @autoExtendTrue @continue
   Scenario: Auto extend is true
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,14 +12,14 @@ Feature: Search invoice
     And user click search invoice button on search invoice admin page
     Then user verify search invoice results have auto extend "True", "success"
 
-  @TEST_BBM-858 @autoExtendFalse @continue
+  @TEST_COOP-2877 @autoExtendFalse @continue
   Scenario: Auto extend is false
     When admin clicks on Search Invoice Menu form left bar
     And user select "False" on auto extend selection
     And user click search invoice button on search invoice admin page
     Then user verify search invoice results have auto extend "False", "danger"
 
-  @TEST_BBM-861 @reminderStatusInformationH-5 @continue
+  @TEST_COOP-2629 @reminderStatusInformationH-5 @continue
   Scenario: Reminder status information H-5
     When admin clicks on Search Invoice Menu form left bar
     And admin search invoice:
@@ -30,22 +30,22 @@ Feature: Search invoice
     Then admin verify invoice log has "Billing Reminder H-5" as "Reminder Type"
     And user verify PN Template content with "Wah, 5 hari lagi sewa kos habis"
 
-  @TEST_BBM-861 @reminderStatusInformationH-1 @continue
+  @TEST_COOP-2629 @reminderStatusInformationH-1 @continue
   Scenario: Reminder status information H-1
     Then admin verify invoice log has "Billing Reminder H-1" as "Reminder Type"
     And user verify PN Template content with "Udah coba bayar kosan yang anti ribet?"
 
-  @TEST_BBM-862 @billingReminderDueDate @continue
+  @TEST_COOP-2632 @billingReminderDueDate @continue
   Scenario: Billing reminder due date
     Then user verify PN Template content with "Pake Mamikos, bayar kos bisa di mana aja"
 
-  @TEST_BBM-864 @pnReminderStatusInformation @continue
+  @TEST_COOP-2637 @pnReminderStatusInformation @continue
   Scenario: PN reminder status information
     Then admin verify PN reminder status information
       | Platform          | Content                                | Created At          | Reminder Type             | Status    |
       | Push Notification | Udah coba bayar kosan yang anti ribet? | 2021-09-07 09:05:06 | Billing Reminder Due Date | delivered |
 
-  @TEST_BBM-860 @whatsAppReminderStatusInformation
+  @TEST_COOP-2687 @whatsAppReminderStatusInformation
   Scenario: Whatsapp reminder status information
     Then admin verify WhatsApp reminder status information
       | Platform          | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status    |

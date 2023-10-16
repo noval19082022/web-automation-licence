@@ -2,7 +2,7 @@
 
 Feature: Admin Survey
 
-  @TEST_BBM-512
+  @TEST_COOP-2480
   @continue
   Scenario Outline: Change the survey status to waiting
     Given admin go to mamikos bangkrupux admin
@@ -16,7 +16,7 @@ Feature: Admin Survey
       | name           | kos             |
       | Aditenant ubah | Kos Lempuyangan |
 
-  @TEST_BBM-514
+  @TEST_COOP-2481
   @continue
   Scenario Outline: Change the survey status to on survey
     Given admin go to mamikos bangkrupux admin
@@ -27,7 +27,7 @@ Feature: Admin Survey
       | name           | kos             |
       | Aditenant ubah | Kos Lempuyangan |
 
-  @TEST_BBM-518
+  @TEST_COOP-2486
   @continue
   Scenario Outline: Change the survey status to cancelled
     Given admin go to mamikos bangkrupux admin
@@ -38,7 +38,7 @@ Feature: Admin Survey
       | name           | kos             |
       | Aditenant ubah | Kos Lempuyangan |
 
-  @TEST_BBM-519
+  @TEST_COOP-2487
   @continue
   Scenario Outline: Change the survey date
     Given admin go to mamikos bangkrupux admin
@@ -49,7 +49,7 @@ Feature: Admin Survey
       | name           | kos             |
       | Aditenant ubah | Kos Lempuyangan |
 
-  @TEST_BBM-515
+  @TEST_COOP-2485
   @continue
   Scenario Outline: Change the survey time
     Given admin go to mamikos bangkrupux admin
@@ -60,35 +60,35 @@ Feature: Admin Survey
       | name           | kos             |
       | Aditenant ubah | Kos Lempuyangan |
 
-  @TEST_BBM-517
+  @TEST_COOP-2850
   @continue
   Scenario: Filter by tenant name
     Given admin go to mamikos bangkrupux admin
     When user filter Tenant Survey using name on "Eremes Guile"
     Then user verify Tenant Name filter result with "Eremes Guile"
 
-  @TEST_BBM-516
+  @TEST_COOP-2848
   @continue
   Scenario: Filter by survey status
     Given admin go to mamikos bangkrupux admin
     And user filter Tenant Survey using Status on "On Survey"
     Then user verify Tenant Status filter result with "Datang Survei"
 
-  @TEST_BBM-510
+  @TEST_COOP-2844
   @continue
   Scenario: Filter by survey date
     Given admin go to mamikos bangkrupux admin
     And user filter Tenant Survey using survey date on "2022-01-24"
     Then user verify Tenant Survey Date filter result with "24 January 2022"
 
-  @TEST_BBM-511
+  @TEST_COOP-2845
   @continue
   Scenario: Filter by tenant phone number
     Given admin go to mamikos bangkrupux admin
     And user filter Tenant Survey using phone on "087739881010"
     Then user verify Tenant Phone filter result with "087739881010"
 
-  @TEST_BBM-509
+  @TEST_COOP-2843
   @continue
   Scenario: Filter by property name
     Given admin go to mamikos bangkrupux admin
