@@ -1,7 +1,7 @@
 @BBM8 @kelolaTagihan
 Feature: Check Detail Tagihan
 
-  @TEST_BBM-57
+  @TEST_COOP-2925
   Scenario: Check detail tagihan when money disbursed to owner’s bank account for first invoice
     Given user go to mamikos homepage
     When user login as owner:

@@ -1,7 +1,7 @@
 @riwayatKost @BBM8
 Feature: riwayat kost
 
-  @TEST_BBM-2321
+  @TEST_COOP-1130
   Scenario: check riwayat list and riwayat detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -19,7 +19,7 @@ Feature: riwayat kost
     And tenant set active page to 1
     Then user will open new tab and go to Booking form
 
-  @emptyRiwayatKos @TEST_BBM-2320
+  @emptyRiwayatKos @TEST_COOP-673
   Scenario: Check riwayat kos when empty condition
     Given user go to mamikos homepage
     When user login as tenant via phone number:

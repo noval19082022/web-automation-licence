@@ -53,6 +53,20 @@ public class HomepagePO {
     Locator saveButton;
     String date;
 
+    //-----------create dbet--------//
+    Locator dbetButton;
+
+    Locator phoneNumberErrorMessage;
+
+    Locator tenantNameErrorMessage;
+
+    Locator emailTenant;
+
+    Locator emailErrorMessage;
+
+    Locator tenantGender;
+
+    Locator tenantJobs;
 
     public HomepagePO(Page page) {
         this.page = page;
@@ -93,6 +107,13 @@ public class HomepagePO {
         inputPriceFee1 = page.locator("(//input[@id='additionalPriceValue1_txt'])[1]");
         addOnOtherFee = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        dbetButton = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("DBET"));
+        phoneNumberErrorMessage = page.locator("//div[@label=\"Nomor Handphone\"]//*[@class=\"bg-c-field__message\"]");
+        tenantNameErrorMessage = page.locator("//div[@label=\"Nama Penyewa\"]//*[@class=\"bg-c-field__message\"]");
+        emailTenant = page.locator("//input[@id=\"inputEmail_txt\"]");
+        emailErrorMessage = page.locator("//div[@label=\"Email\"]//*[@class=\"bg-c-field__message\"]");
+        tenantGender = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jenis kelamin dropdown-down"));
+        tenantJobs = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pekerjaan dropdown-down"));
     }
 
     /**
@@ -328,4 +349,44 @@ public class HomepagePO {
         String harga1 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='"+amountFee1+"'])[2]";
         return page.querySelector(listrik) != null && page.querySelector(parkir) != null && page.querySelector(harga0) != null && page.querySelector(harga1) != null;
     }
+
+    /**
+     * admin click on dbet button
+     */
+    public void clickDbetButton(){
+        playwright.clickOn(dbetButton);
+    }
+
+    /**
+     * admin see phone number error message
+     * @return
+     */
+    public String getPhoneNumberErrorMessage() {
+        return playwright.getText(phoneNumberErrorMessage);
+    }
+
+    /**
+     * admin see tenant name error message
+     * @return
+     */
+    public String getTenantNameErrorMessage() {
+        return playwright.getText(tenantNameErrorMessage);
+    }
+
+    /**
+     * admin fill email
+     * @param email
+     */
+    public void fillEmailTenant(String email) {
+        emailTenant.fill(email);
+    }
+
+    /**
+     * admin see email error message
+     * @return
+     */
+    public String getEmailErrorMessage() {
+        return playwright.getText(emailErrorMessage);
+    }
+
 }

@@ -23,7 +23,7 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
 
-  @TEST_BBM-3732
+  @TEST_COOP-1016
   Scenario: Edit OOO Status With Lainnya and Input Note
     When admin edit OOO on:
       | room number | start date |
@@ -37,7 +37,7 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
 
-  @TEST_BBM-3733
+  @TEST_COOP-1013
   Scenario: Edit OOO Status With Lainnya and Not Input Note
     When admin edit OOO on:
       | room number | start date |
@@ -48,7 +48,7 @@ Feature: Edit Out Of Order on PMS
       | end date    | 26         |
     Then admin can see that save button is disable
 
-  @TEST_BBM-3734
+  @TEST_COOP-1012
   Scenario: Edit OOO for update start-end date
     When admin edit OOO on:
       | room number | start date |
@@ -67,7 +67,7 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 16         |
 
-  @TEST_BBM-3735
+  @TEST_COOP-1007
   Scenario: Edit OOO when end date smaller than start date
     When admin edit OOO on:
       | room number | start date |
@@ -75,7 +75,7 @@ Feature: Edit Out Of Order on PMS
     And admin edit start date to "19"
     Then admin can see date 18 is disable
 
-  @TEST_BBM-3736
+  @TEST_COOP-997
   Scenario: Edit OOO when end date already used other OOO
     When admin delete OOO on:
       | room number | start date |
@@ -102,7 +102,7 @@ Feature: Edit Out Of Order on PMS
       | title     | Tidak dapat tandai “Out of Order”                               |
       | subtitle  | Mohon maaf, kamar terisi dan tidak dapat ditandai Out of Order. |
 
-  @TEST_BBM-3737
+  @TEST_COOP-996
   Scenario: Edit OOO when end date not used other OOO
     When admin edit OOO on:
       | room number | start date |

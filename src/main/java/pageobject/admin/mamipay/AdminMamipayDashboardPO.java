@@ -85,7 +85,7 @@ public class AdminMamipayDashboardPO {
      * @return SearchContractPO class
      */
     public SearchContractPO clickOnSearchContract() {
-        searchContract.click();
+        playwright.clickOn(searchContract);
         return new SearchContractPO(page);
     }
 

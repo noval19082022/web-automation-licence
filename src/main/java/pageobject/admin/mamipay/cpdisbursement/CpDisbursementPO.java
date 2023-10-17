@@ -16,6 +16,9 @@ public class CpDisbursementPO {
 
     private Locator cpDisbursementMenu;
     private Locator tambahDataTransferButton;
+    private Locator cpDisbursementTab;
+    private Locator resetFilterButton;
+    private Locator row;
 
     //Tambah Data Transfer
     private Locator namaPropertyField;
@@ -52,12 +55,21 @@ public class CpDisbursementPO {
     private Locator emptyPageMessageDescription;
     //List Daftar Transfer
 
+    //Transfer Diproses
+    private Locator statusTransferDropdown;
+    private Locator statusTransferValue;
+    private Locator statusTransferLabel;
+    //Transfer Diproses
+
     public CpDisbursementPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
+        row = page.locator("tbody tr");
+
         cpDisbursementMenu = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("CP Disbursement"));
         tambahDataTransferButton = page.locator(".open_modal");
+        resetFilterButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reset"));
         namaPropertyField = page.getByPlaceholder("Pilih Nama Property");
         namaPropertyErrorMessage = page.locator("#looking_for_kost_message-add-new");
         propertySuggestion = page.locator(".eac-item");
@@ -81,12 +93,15 @@ public class CpDisbursementPO {
         tipeTransaksiTable = page.locator("tr td:nth-of-type(4)");
         totalPendapatanTable = page.locator("tr td:nth-of-type(5)");
         detailRekeningTable = page.locator("tr td:nth-of-type(6)");
-        searchByDropdown = page.locator(".filter-option");
+        searchByDropdown = page.locator(".filter-option").first();
         searchByValue = page.locator("a[role='option'] span");
         searchKeywordField = page.locator("input[name='search_value']");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         emptyPageMessageTitle = page.locator(".pay-backoffice__table-empty h3");
         emptyPageMessageDescription = page.locator(".pay-backoffice__table-empty p");
+        statusTransferDropdown = page.locator(".filter-option").nth(1);
+        statusTransferValue = page.locator("a[role='option'] span");
+        statusTransferLabel = page.locator("tr td:nth-of-type(7)");
     }
 
     /**
@@ -396,18 +411,46 @@ public class CpDisbursementPO {
     }
 
     /**
-     * Count Property Name in List Daftar Transfer
-     * @return int
+     * Open cp disbursement tab
+     * @param tab
      */
-    public int countPropertyName() {
-        return namaPropertyTable.count();
+    public void openCPDisbursementTab(String tab) {
+        cpDisbursementTab = page.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(tab));
+
+        playwright.clickOn(cpDisbursementTab);
     }
 
     /**
-     * count Detail Rekening in List Daftar Transfer
+     * Click Reset filter button
+     */
+    public void resetFilter() {
+        playwright.clickOn(resetFilterButton);
+    }
+
+    /**
+     * Filter cp disbursement by status transfer
+     * @param status
+     */
+    public void filterCpDisbursementByStatusTransfer(String status) {
+        playwright.clickOn(statusTransferDropdown);
+        playwright.clickOn(statusTransferValue.getByText(status, new Locator.GetByTextOptions().setExact(true)));
+        playwright.clickOn(searchButton);
+    }
+
+    /**
+     * Count how many row available
      * @return
      */
-    public int countDetailRekening() {
-        return detailRekeningTable.count();
+    public int countRow() {
+        return row.count();
+    }
+
+    /**
+     * get status transfer label row i from Table Transfer Diproses
+     * @param i
+     * @return String
+     */
+    public String getStatusTransfer(int i) {
+        return playwright.getText(statusTransferLabel.nth(i));
     }
 }

@@ -14,6 +14,7 @@ public class SearchContractPO {
     Locator searchContract;
     Locator searchBy;
     Locator searchInput;
+    Locator searchKostLevel;
     Locator searchButton;
     Locator batalkanContractButton;
     Locator berhentikanContractButton;
@@ -41,6 +42,7 @@ public class SearchContractPO {
         searchBy = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search by"));
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         searchInput = page.getByPlaceholder("Search");
+        searchKostLevel = page.getByPlaceholder("Kos Level");
         batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
         berhentikanContractButton = page.locator(".tools-contract__btn-danger");
         berhentikanContractPopUpButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
@@ -64,9 +66,17 @@ public class SearchContractPO {
      * @param kostLevel option value String type
      */
     public void selectKosLevel(String kostLevel) {
-        page.locator(".select2-search").click();
-        page.keyboard().type(kostLevel);
-        page.keyboard().press("Enter");
+        playwright.clickLocatorAndTypeKeyboard(searchKostLevel, kostLevel);
+        playwright.pressKeyboardKey("Enter");
+    }
+
+    /**
+     *
+     * @param phoneNumber
+     */
+    public void selectRenterPhoneNumber(String phoneNumber) {
+        playwright.selectDropdownByValue(searchBy, "renter_phone_number");
+        playwright.clickLocatorAndTypeKeyboard(searchInput, phoneNumber);
     }
 
     /**
@@ -83,7 +93,7 @@ public class SearchContractPO {
      * Click on edit deposit button
      */
     public void clickOnEditDepositButton() {
-        editDepositBtn.click();
+        playwright.clickOn(editDepositBtn);
     }
 
     /**
@@ -92,8 +102,7 @@ public class SearchContractPO {
      * @param text
      */
     public void inputDetailKerusakan(String text) {
-        inputTextDetailKerusakan.click();
-        page.keyboard().type(text);
+        playwright.clickLocatorAndTypeKeyboard(inputTextDetailKerusakan, text);
     }
 
     /**
@@ -136,7 +145,7 @@ public class SearchContractPO {
      * @param search String type e.g (Phone Number Tenant or Phone Number Owner)
      */
     public void fillSearchByValue(String search) {
-        searchInput.fill(search);
+        playwright.clickLocatorAndTypeKeyboard(searchInput, search);
     }
 
     /**
