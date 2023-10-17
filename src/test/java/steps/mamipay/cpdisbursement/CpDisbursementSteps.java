@@ -220,4 +220,11 @@ public class CpDisbursementSteps {
             Assert.assertEquals(cpdisbursement.getStatusTransfer(i), label);
         }
     }
+    @Then("filter reset to default")
+    public void filter_reset_to_default() {
+        Assert.assertEquals(cpdisbursement.getSearchByValue(),"Search By");
+        Assert.assertEquals(cpdisbursement.getSearchFieldValue(),"");
+        Assert.assertEquals(cpdisbursement.getJadwalTransferValue(),"Jadwal Transfer");
+        Assert.assertEquals(cpdisbursement.getTransferFailedValue(),"Transfer Failed Date");
+    }
 }
