@@ -61,6 +61,11 @@ public class CpDisbursementPO {
     private Locator statusTransferLabel;
     //Transfer Diproses
 
+    //Transfer Gagal
+    private Locator jadwalTransferDropdown;
+    private Locator transferFailedDateDropdown;
+    //Transfer Gagal
+
     public CpDisbursementPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -93,7 +98,7 @@ public class CpDisbursementPO {
         tipeTransaksiTable = page.locator("tr td:nth-of-type(4)");
         totalPendapatanTable = page.locator("tr td:nth-of-type(5)");
         detailRekeningTable = page.locator("tr td:nth-of-type(6)");
-        searchByDropdown = page.locator(".filter-option").first();
+        searchByDropdown = page.locator(".dropdown button").first();
         searchByValue = page.locator("a[role='option'] span");
         searchKeywordField = page.locator("input[name='search_value']");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
@@ -102,6 +107,9 @@ public class CpDisbursementPO {
         statusTransferDropdown = page.locator(".filter-option").nth(1);
         statusTransferValue = page.locator("a[role='option'] span");
         statusTransferLabel = page.locator("tr td:nth-of-type(7)");
+
+        jadwalTransferDropdown = page.locator("#daterange-cp-disbursement");
+        transferFailedDateDropdown = page.locator("#daterange-cp-disbursement_failed");
     }
 
     /**
@@ -452,5 +460,37 @@ public class CpDisbursementPO {
      */
     public String getStatusTransfer(int i) {
         return playwright.getText(statusTransferLabel.nth(i));
+    }
+
+    /**
+     * Get value search by
+     * @return String
+     */
+    public String getSearchByValue() {
+        return playwright.getAttributeValue(searchByDropdown,"title");
+    }
+
+    /**
+     * Get value search keyword
+     * @return String
+     */
+    public String getSearchFieldValue() {
+        return playwright.getInputValue(searchKeywordField);
+    }
+
+    /**
+     * get text jadwal transfer
+     * @return String
+     */
+    public String getJadwalTransferValue() {
+        return playwright.getText(jadwalTransferDropdown);
+    }
+
+    /**
+     * get text jadwal transfer gagal
+     * @return String
+     */
+    public String getTransferFailedValue() {
+        return playwright.getText(transferFailedDateDropdown);
     }
 }
