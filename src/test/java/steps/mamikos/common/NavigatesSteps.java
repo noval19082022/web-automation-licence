@@ -323,8 +323,6 @@ public class NavigatesSteps {
 
     @And("user go to mailhog and login")
     public void userGoToMailhogAndLogin() {
-//        page = ActiveContext.getActivePage();
-//        verifikasiAkun = new VerifikasiAkunPO(page);
         verifikasiAkun.navigatesToMailHogAndLogin();
     }
 }

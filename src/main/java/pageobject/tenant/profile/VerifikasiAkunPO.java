@@ -36,7 +36,7 @@ public class VerifikasiAkunPO {
     /**
      * user click field nama lengkap
      */
-    public void changeEmail(String email) throws InterruptedException {
+    public void changeEmail(String email){
         playwright.clickOn(changeEmailButton);
         playwright.clickOn(emailField);
         playwright.fill(emailField, email);
@@ -56,8 +56,6 @@ public class VerifikasiAkunPO {
     public void confirmEmailFromMailHog(){
         playwright.clickOn(inboxVerifEmail);
         playwright.clickOn(mailhogEmailVerifButton);
-//        page.locator("(//*[contains(text(),'Verifikasi email')])[1]").click();
-//        page.frameLocator("#preview-html").locator(".button-container > div").click();
     }
 
 }
