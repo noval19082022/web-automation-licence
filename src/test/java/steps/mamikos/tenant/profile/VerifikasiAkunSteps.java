@@ -18,12 +18,12 @@ public class VerifikasiAkunSteps {
     }
 
     @And("user change email to {string}")
-    public void userChangeEmailTo(String email) throws InterruptedException {
+    public void userChangeEmailTo(String email){
         verifikasiakun.changeEmail(email);
     }
 
     @And("user confirm change email")
-    public void userConfirmChangeEmail() throws InterruptedException {
+    public void userConfirmChangeEmail(){
         verifikasiakun.confirmEmailFromMailHog();
     }
 }
