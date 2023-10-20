@@ -14,6 +14,7 @@ import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.pms.LoginPMSPO;
+import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class NavigatesSteps {
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
+    VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -317,5 +319,10 @@ public class NavigatesSteps {
     @Given("user navigate to SBMPTN page")
     public void userNavigateToSBMPTNPage() {
         playwright.navigateTo(Mamikos.URL + "/download-soal/download-soal-sbmptn-tkpa-saintek-soshum-dan-campuran-beserta-pembahasannya-gratis", 30000.0, LoadState.LOAD);
+    }
+
+    @And("user go to mailhog and login")
+    public void userGoToMailhogAndLogin() {
+        verifikasiAkun.navigatesToMailHogAndLogin();
     }
 }
