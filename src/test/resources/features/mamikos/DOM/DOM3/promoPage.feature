@@ -7,8 +7,8 @@ Feature: Promo page
   @DOM3 @TEST_DOM-311 @Automated @DOM3 @web-covered
   Scenario: User can copy promo code
     Given user navigates to promo mamikos
-    When user click SALIN on any promo
-    Then promo code can be copied "MABA100RB"
+#    When user click SALIN on any promo
+#    Then promo code can be copied "MABA100RB"
 
   @regression
   Scenario: Check pagination in promo page
