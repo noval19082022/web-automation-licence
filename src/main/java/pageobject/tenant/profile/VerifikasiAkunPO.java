@@ -10,20 +10,24 @@ public class VerifikasiAkunPO {
     PlaywrightHelpers playwright;
     Locator verifikasiAkunMenu;
     Locator changeEmailButton;
-    Locator emailField;
-    Locator confirmChangeButton;
+    Locator changePhoneNumberButton;
+    Locator textBoxField;
+    Locator confirmChangeEmailButton;
     Locator inboxVerifEmail;
     Locator mailhogEmailVerifButton;
+    Locator otpVerificationMessageText;
 
     public VerifikasiAkunPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.verifikasiAkunMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Verifikasi Akun"));
         this.changeEmailButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah")).first();
-        this.emailField = page.locator("#contentBox div.detail-text.edit-detail input");
-        this.confirmChangeButton = page.getByTestId("verificationEmail");
+        this.changePhoneNumberButton = page.getByTestId("verificationPhoneNumber");
+        this.textBoxField = page.locator("#contentBox div.detail-text.edit-detail input");
+        this.confirmChangeEmailButton = page.getByTestId("verificationEmail");
         this.inboxVerifEmail = page.locator("(//*[contains(text(),'Verifikasi email')])[1]");
-        this. mailhogEmailVerifButton = page.frameLocator("#preview-html").locator(".button-container > div");
+        this.mailhogEmailVerifButton = page.frameLocator("#preview-html").locator(".button-container > div");
+        this.otpVerificationMessageText = page.locator("  #contentBox .notif-phone-verification");
         }
 
     /**
@@ -34,13 +38,13 @@ public class VerifikasiAkunPO {
     }
 
     /**
-     * user click field nama lengkap
+     * user change email
      */
     public void changeEmail(String email){
         playwright.clickOn(changeEmailButton);
-        playwright.clickOn(emailField);
-        playwright.fill(emailField, email);
-        playwright.clickOn(confirmChangeButton);
+        playwright.clickOn(textBoxField);
+        playwright.fill(textBoxField, email);
+        playwright.clickOn(confirmChangeEmailButton);
     }
 
     /**
@@ -51,11 +55,29 @@ public class VerifikasiAkunPO {
     }
 
     /**
-     * verify error message phone number
+     * Click email verification button on mailhog
      */
     public void confirmEmailFromMailHog(){
         playwright.clickOn(inboxVerifEmail);
         playwright.clickOn(mailhogEmailVerifButton);
     }
 
+    /**
+     * user change phone number
+     */
+    public void changePhoneNumber(String phone){
+        playwright.clickOn(changePhoneNumberButton);
+        playwright.clickOn(textBoxField);
+        playwright.fill(textBoxField, phone);
+        playwright.clickOn(changePhoneNumberButton);
+    }
+
+    /**
+     * Get OTP Verification Message Text
+     * @return string
+     */
+    public String getOTPVerificationMessage() {
+        playwright.waitTillLocatorIsVisible(otpVerificationMessageText,5.0);
+        return playwright.getText(otpVerificationMessageText).replaceAll("\\s+"," ");
+    }
 }
