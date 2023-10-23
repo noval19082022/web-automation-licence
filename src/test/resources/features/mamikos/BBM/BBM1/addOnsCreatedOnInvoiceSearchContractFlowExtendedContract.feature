@@ -56,7 +56,7 @@ Feature: Add Ons - Extended Contract
     And playwright create booking for tenant:
       | songId     | 58650684 |
       | roomTypeId | 6194     |
-#
+
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
