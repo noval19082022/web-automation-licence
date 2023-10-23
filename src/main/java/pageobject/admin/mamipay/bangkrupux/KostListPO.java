@@ -30,12 +30,12 @@ public class KostListPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
-        uploadCSVBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Upload CSV"));
+        uploadCSVBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Upload CSV"));
         kostName = page.getByPlaceholder("Kost Name");
         ownerName = page.getByPlaceholder("Owner Name");
         ownerPhoneNumber = page.getByPlaceholder("Owner Phone Number");
         allLevelDropdown = page.locator("select[name=\"level-id\"]");
-        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         editKostLevelBtn = page.locator("//a[contains(text(),'Edit Kost Level')]");
         kosLevelDropdown = page.locator("//select[@id='level-id']");
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
@@ -57,7 +57,7 @@ public class KostListPO {
      * @return boolean element status
      */
     public boolean isKostNameSearchAppears() {
-        return playwright.isLocatorVisibleAfterLoad(kostName, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        return playwright.isLocatorVisibleAfterLoad(kostName, 10000.0);
     }
 
     /**
@@ -65,7 +65,7 @@ public class KostListPO {
      * @return boolean element status
      */
     public boolean isOwnerNameSearchAppears() {
-        return playwright.isLocatorVisibleAfterLoad(ownerName, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        return playwright.isLocatorVisibleAfterLoad(ownerName, 10000.0);
     }
 
     /**
@@ -73,7 +73,7 @@ public class KostListPO {
      * @return boolean element status
      */
     public boolean isOwnerPhoneNumberSearchAppears() {
-        return playwright.isLocatorVisibleAfterLoad(ownerPhoneNumber, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        return playwright.isLocatorVisibleAfterLoad(ownerPhoneNumber, 10000.0);
     }
 
     /**
@@ -81,7 +81,7 @@ public class KostListPO {
      * @return boolean element status
      */
     public boolean isAllLevelDropdownAppears() {
-        return playwright.isLocatorVisibleAfterLoad(allLevelDropdown, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        return playwright.isLocatorVisibleAfterLoad(allLevelDropdown, 10000.0);
     }
 
     /**
@@ -89,7 +89,7 @@ public class KostListPO {
      * @return boolean element status
      */
     public boolean isSearchButtonAppears() {
-        return playwright.isLocatorVisibleAfterLoad(searchBtn, GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        return playwright.isLocatorVisibleAfterLoad(searchBtn, 10000.0);
     }
 
     /**
