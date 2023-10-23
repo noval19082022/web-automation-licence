@@ -19,7 +19,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231112 | qamamikos123 |
+      | 083311231113 | 083311231113 | qamamikos123 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
