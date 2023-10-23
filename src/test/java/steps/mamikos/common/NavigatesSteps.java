@@ -328,6 +328,6 @@ public class NavigatesSteps {
 
     @Given("user navigates to promo mamikos")
     public void userNavigatesToPromoMamikos() {
-        playwright.navigateTo(Mamikos.Promo_Mamikos);
+        playwright.navigateTo(Mamikos.PROMO_MAMIKOS);
     }
 }
