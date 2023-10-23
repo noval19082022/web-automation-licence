@@ -17,7 +17,7 @@ public class PromoPage {
     PromoMamikosPO promo= new PromoMamikosPO(page);
 
     @When("user click next page button")
-    public void userClickNextPageButton()throws InterruptedException {
+    public void userClickNextPageButton() {
         promo.clickNextPage();
     }
 
@@ -30,7 +30,7 @@ public class PromoPage {
     }
 
     @And("user click previous page button")
-    public void userClickPreviousPageButton()throws InterruptedException {
+    public void userClickPreviousPageButton() {
         promo.clickPrevPage();
     }
 

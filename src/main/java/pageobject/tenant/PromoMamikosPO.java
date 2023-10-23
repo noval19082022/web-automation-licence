@@ -26,9 +26,8 @@ public class PromoMamikosPO {
     /**
      * Click On next page
      *
-     * @throws InterruptedException
      */
-    public void clickNextPage() throws InterruptedException {
+    public void clickNextPage() {
         if (playwright.waitTillLocatorIsVisible(nextPageButton)) {
             playwright.clickOn(nextPageButton);
         }
@@ -51,7 +50,6 @@ public class PromoMamikosPO {
     /**
      * Click On previous page
      *
-     * @throws InterruptedException
      */
     public void clickPrevPage() {
         if (playwright.waitTillLocatorIsVisible(previousPageButton)) {
@@ -62,7 +60,6 @@ public class PromoMamikosPO {
     /**
      * Click On certain page
      *
-     * @throws InterruptedException
      */
     public void clickPageIndex(String index) {
         String pageIndex = "//a[text()='" + index + "']";
@@ -72,7 +69,6 @@ public class PromoMamikosPO {
     }
     /**
      * Click On first copy promo button
-     * @throws InterruptedException
      */
     public void clickOnFirstCopyPromo() {
         playwright.clickOn(firstCopyButton);
