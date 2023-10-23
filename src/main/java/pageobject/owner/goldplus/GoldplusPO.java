@@ -10,6 +10,7 @@ import java.util.List;
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private static String saldoMamiads, totalPembayaran;
     Locator broadcastChatBtn;
     Locator warningBroadcastText;
     Locator closePopUpIcon;
@@ -43,6 +44,11 @@ public class GoldplusPO {
     Locator saldoMamiadsText;
     Locator changeGPButton;
     Locator listGPPage;
+    Locator rincianGp;
+    Locator rincianMA;
+    Locator rincianFee;
+    Locator searchPhoneNumber;
+    Locator buttonSearchContract;
 
 
     public GoldplusPO(Page page) {
@@ -79,6 +85,11 @@ public class GoldplusPO {
         saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
         changeGPButton = page.locator("//*[@class='bg-c-button bg-c-button--tertiary-naked bg-c-button--md']");
         listGPPage = page.locator("//h2[contains(.,'Paket GoldPlus')]");
+        rincianGp = page.getByTestId("invoiceBillingDetails-payment").getByText("GoldPlus 1");
+        rincianMA = page.locator(".collapse-content > div:nth-of-type(2) > .bg-c-text--body-2");
+        rincianFee = page.getByText("Biaya Transaksi");
+        searchPhoneNumber = page.getByPlaceholder("Keyword");
+        buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
 
     }
 
@@ -302,7 +313,6 @@ public class GoldplusPO {
     /**
      * Verify list tagihan GP is display
      * @return boolean (true if table displayed, false if table doesn't displayed)
-     *
      */
     public boolean isListDetailTagihanIsDisplayed() {
         return playwright.waitTillLocatorIsVisible(tableTagihanGP);
@@ -381,7 +391,18 @@ public class GoldplusPO {
      * @throws InterruptedException
      */
     public void chooseSaldo(String saldo) throws InterruptedException {
+        setSaldo(saldo);
         Locator element = page.locator("//p[contains(.,'" + saldo + "')]");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * user unchoose saldo
+     *
+     * @throws InterruptedException
+     */
+    public void unCheckedSaldo() throws InterruptedException {
+        Locator element = page.locator("//div[@class='goldplus-mamiads-detail__item bg-c-card bg-c-card--md bg-c-card--light active']");
         playwright.clickOn(element);
     }
 
@@ -440,4 +461,79 @@ public class GoldplusPO {
         playwright.pageScrollUntilElementIsVisible(listGPPage);
     }
 
+    /**
+     * Get pembayaran
+     *  <p> - No. Invoice
+     *  <p> - Jenis Pembayaran
+     *  <p> - Metode Pembayaran
+     * @return String
+     */
+    public String getPembayaranText(String text) throws InterruptedException {
+        if(text.contains("Status Transaksi")) {
+            return playwright.getText(page.locator(".bg-c-label"));
+
+        } else if (text.contains("Total Pembayaran")) {
+            return playwright.getText(page.locator(".invoice-total-amount"));
+
+        } else {
+            return playwright.getText(page.locator("//*[contains(text(),'"+text+"')]/../../following-sibling::div"));
+        }
+    }
+
+    public String getTotalPembayaran() {
+        return totalPembayaran;
+    }
+
+    public void setTotalPembayaran(String totalPembayaran) throws InterruptedException {
+        GoldplusPO.totalPembayaran = totalPembayaran;
+    }
+
+
+    /**
+     * user get saldo
+     * @return 27.000
+     */
+    public String getSaldo() {
+        return GoldplusPO.saldoMamiads.replaceAll("Rp","");
+    }
+
+    /**
+     * user set saldo from input
+     * @return Rp27.000
+     */
+    public void setSaldo(String saldo) {
+        GoldplusPO.saldoMamiads = saldo;
+    }
+
+    /**
+     * Get rincian text for Goldplus
+     * @return String paket goldplus
+     */
+    public String getRincianGP() {
+        return playwright.getText(rincianGp);
+    }
+
+    /**
+     * Get rincian text for Mamiads
+     * @return String paket mamiads
+     */
+    public String getRincianMA() {
+        return playwright.getText(rincianMA);
+    }
+
+    /**
+     * Get rincian text for MDR Fee
+     * @return String biaya transaksi
+     */
+    public String getRincianFee() {
+        return playwright.getText(rincianFee);
+    }
+
+    /**
+     * Input phone number to terminated Goldplus
+     */
+    public void searchPhoneNumberGP(String phoneNumberGP) {
+        playwright.fill(searchPhoneNumber,phoneNumberGP);
+        playwright.clickOn(buttonSearchContract);
+    }
 }
