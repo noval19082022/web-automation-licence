@@ -53,7 +53,7 @@ public class PromoMamikosPO {
      *
      * @throws InterruptedException
      */
-    public void clickPrevPage() throws InterruptedException {
+    public void clickPrevPage() {
         if (playwright.waitTillLocatorIsVisible(previousPageButton)) {
             playwright.clickOn(previousPageButton);
         }
@@ -64,7 +64,7 @@ public class PromoMamikosPO {
      *
      * @throws InterruptedException
      */
-    public void clickPageIndex(String index) throws InterruptedException {
+    public void clickPageIndex(String index) {
         String pageIndex = "//a[text()='" + index + "']";
         if (playwright.waitTillLocatorIsVisible(page.locator(pageIndex))) {
             playwright.clickOn(page.locator(pageIndex));
@@ -74,14 +74,14 @@ public class PromoMamikosPO {
      * Click On first copy promo button
      * @throws InterruptedException
      */
-    public void clickOnFirstCopyPromo() throws InterruptedException {
+    public void clickOnFirstCopyPromo() {
         playwright.clickOn(firstCopyButton);
     }
     /**
      * Get promo code
      * @return String promo code
      */
-    public String getClipboardText2() throws InterruptedException {
+    public String getClipboardText2() {
         return playwright.getText(firstPromoCode);
     }
 

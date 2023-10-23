@@ -43,7 +43,7 @@ public class PromoPage {
     }
 
     @When("user click page index {string}")
-    public void userClickPageIndex(String index)throws InterruptedException {
+    public void userClickPageIndex(String index){
         promo.clickPageIndex(index);
     }
 
@@ -56,12 +56,12 @@ public class PromoPage {
     }
 
     @When("user click SALIN on any promo")
-    public void userClickSALINOnAnyPromo()throws InterruptedException {
+    public void userClickSALINOnAnyPromo() {
         promo.clickOnFirstCopyPromo();
     }
 
     @Then("promo code can be copied {string}")
-    public void promoCodeCanBeCopied(String promoCode) throws InterruptedException {
+    public void promoCodeCanBeCopied(String promoCode) {
         if (promo.isGetClipboardText()) {
             Assert.assertEquals(promo.getClipboardText2(), promoCode, "ENAKNYANGEKOS18");
         }
