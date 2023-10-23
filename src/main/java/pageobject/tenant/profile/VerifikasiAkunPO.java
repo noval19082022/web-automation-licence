@@ -78,7 +78,6 @@ public class VerifikasiAkunPO {
      */
     public String getOTPVerificationMessage() {
         playwright.waitTillLocatorIsVisible(otpVerificationMessageText,5.0);
-        System.out.println("pesan otp yg muncul adalah "+ playwright.getText(otpVerificationMessageText));
-        return playwright.getText(otpVerificationMessageText);
+        return playwright.getText(otpVerificationMessageText).replaceAll("\\s+"," ");
     }
 }

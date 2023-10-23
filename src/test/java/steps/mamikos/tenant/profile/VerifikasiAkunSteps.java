@@ -36,8 +36,6 @@ public class VerifikasiAkunSteps {
 
     @Then("user verify OTP verification message was sent {string}")
     public void userVerifyOTPVerificationMessageWasSent(String message) {
-//        Assert.assertEquals(verifikasiakun.getOTPVerificationMessage().trim().replaceAll("\\s", "")
-//                .contains(message.replaceAll("\\s", "")), message);
         Assert.assertEquals(verifikasiakun.getOTPVerificationMessage(),message, "OTP verification messages is not equal to " + message);
     }
 }
