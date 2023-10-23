@@ -61,6 +61,7 @@ public class Mamikos {
     public static final String MAMIADS_GUIDE = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuide");
     public static final String MAMIADS_GUIDE_GP = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuideGP");
     public static final String KONTRAK_KERJA_SAMA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKerjaSama");
+    public static final String Promo_Mamikos = JavaHelpers.getPropertyValue(MAMIKOS, "promoMamikos");
 
     @Setter @Getter
     private static  String propertyKosName;

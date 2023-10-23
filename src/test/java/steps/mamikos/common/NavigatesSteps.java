@@ -325,4 +325,9 @@ public class NavigatesSteps {
     public void userGoToMailhogAndLogin() {
         verifikasiAkun.navigatesToMailHogAndLogin();
     }
+
+    @Given("user navigates to promo mamikos")
+    public void userNavigatesToPromoMamikos() {
+        playwright.navigateTo(Mamikos.Promo_Mamikos);
+    }
 }
