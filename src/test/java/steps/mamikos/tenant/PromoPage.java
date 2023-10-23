@@ -48,7 +48,7 @@ public class PromoPage {
     }
 
     @Then("promo page {string} will be opened")
-    public void promoPageWillBeOpened(String arg0) {
+    public void promoPageWillBeOpened(String page) {
         String pageIndex = promo.getPageIndex();
         if(pageIndex != null) {
             Assert.assertEquals(pageIndex, page, "Page index is not correct");
