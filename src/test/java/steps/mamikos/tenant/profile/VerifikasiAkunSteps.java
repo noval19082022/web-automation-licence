@@ -3,6 +3,8 @@ package steps.mamikos.tenant.profile;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
 
@@ -25,5 +27,16 @@ public class VerifikasiAkunSteps {
     @And("user confirm change email")
     public void userConfirmChangeEmail(){
         verifikasiakun.confirmEmailFromMailHog();
+    }
+
+    @And("user edit phone number with {string}")
+    public void userEditPhoneNumberWith(String phone) {
+        verifikasiakun.changePhoneNumber(phone);
+    }
+
+    @Then("user verify OTP verification message was sent {string}")
+    public void userVerifyOTPVerificationMessageWasSent(String message) {
+        Assert.assertEquals(verifikasiakun.getOTPVerificationMessage().trim().replaceAll("\\s", "")
+                .contains(message.replaceAll("\\s", "")), message);
     }
 }
