@@ -53,26 +53,22 @@ Feature: Check content Mamifoto
     #check at tab Panduan area dan fasilitas
     When owner click tab panduan area
     #Tampak Depan Kost
-    And owner will see that the text "Tampak Depan Kos" is displayed
-    And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
-    And owner will see that the text "Rapikan area tampak depan sebaik mungkin." is displayed
-    #Tampak Depan Kost
-    And owner will see that the text "Tampak Depan Kos" is displayed
-    And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
-    And owner will see that the text "Rapikan area tampak depan sebaik mungkin." is displayed
+    Then owner will see title and detail title "Tampak Depan Kos" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan area tampak depan sebaik mungkin." on panduan panduan persiapan foto or video
     #Lorong dan Taman
-    And owner will see that the text "Lorong dan Taman" is displayed
-    And owner will see that the text "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." is displayed
-    And owner will see that the text "Rapikan area taman." is displayed
-    And owner will see that the text "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." is displayed
+    And owner will see title and detail title "Lorong dan Taman" on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan area taman." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
     #Detail
-    And owner will see that the text "Bersihkan dan rapikan dapur umum." is displayed
-    And owner will see that the text "Rapikan parkiran kos sebaik mungkin." is displayed
-    And owner will see that the text "Rapikan ruang tunggu." is displayed
-    And owner will see that the text "Rapikan dan bersihkan ruang laundry." is displayed
-    And owner will see that the text "Rapikan dan bersihkan area lainnya." is displayed
-    And owner will see that the text "Lap kaca/jendela agar terlihat bersih." is displayed
-    And owner will see that the text " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." is displayed
+    And owner will see title and detail title "Bersihkan dan rapikan dapur umum." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan parkiran kos sebaik mungkin." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan ruang tunggu." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan dan bersihkan ruang laundry." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Rapikan dan bersihkan area lainnya." on panduan panduan persiapan foto or video
+    And owner will see title and detail title "Lap kaca/jendela agar terlihat bersih." on panduan panduan persiapan foto or video
+    And owner will see title and detail title " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
 
   @FAQMamifotoContent @TEST_LIMO-4656
   Scenario: [WEB][MamiFoto] Check content Mamifoto FAQ
@@ -91,21 +87,3 @@ Feature: Check content Mamifoto
     Then user verify answer text "Hasil foto dan video akan ditayangkan di listing Mamikos Anda serta dikirim ke email Anda setelah sesi foto dalam waktu maksimum 7 hari kerja untuk paket MamiFoto A dan maksimum 14 hari kerja untuk MamiFoto B."
     When user click question "Bisakah saya mengubah/menambah foto sendiri?"
     Then user verify answer text "Ya, Anda bisa mengubah maupun menambahkan foto sendiri meski Anda telah menggunakan MamiFoto. Klik di sini untuk lihat cara mengubah dan menambahkan foto kos."
-
-    #Tampak Depan Kost
-    Then owner will see title and detail title "Tampak Depan Kos" on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan area tampak depan sebaik mungkin." on panduan panduan persiapan foto or video
-    #Lorong dan Taman
-    And owner will see title and detail title "Lorong dan Taman" on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan area taman." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
-    #Detail
-    And owner will see title and detail title "Bersihkan dan rapikan dapur umum." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan parkiran kos sebaik mungkin." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan ruang tunggu." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan dan bersihkan ruang laundry." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Rapikan dan bersihkan area lainnya." on panduan panduan persiapan foto or video
-    And owner will see title and detail title "Lap kaca/jendela agar terlihat bersih." on panduan panduan persiapan foto or video
-    And owner will see title and detail title " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video

@@ -309,5 +309,23 @@ public class MamiAdsPO {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
+    /**
+     * Get detail tagihan
+     * @param validasi
+     *  <p> 1 = Nominal Saldo
+     *  <p> 2 = Total Pembayaran
+     *  <p> 3 = Status Transaksi
+     * @return String
+     */
+    public String gettransactionList(int validasi){
+        String element = "";
+        switch (validasi){
+            case 1 : element = "//*[@class='transaction-done'] //*[@class='left-side-saldo-status']"; break;
+            case 2 : element = "//*[@class='transaction-done'] //*[@class='right-side-saldo-status']"; break;
+            case 3 : element = "//*[@class='right-side-payment-status-paid']"; break;
+        }
+        playwright.waitTillLocatorIsVisible(page.locator(element).first());
+        return playwright.getText(page.locator(element).first());
+    }
 }
 
