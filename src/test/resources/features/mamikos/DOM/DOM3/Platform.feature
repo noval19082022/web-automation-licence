@@ -126,3 +126,18 @@ Feature: [Test-Execution][DOM] Web - Platform
       | email stag                              | email prod                              | password  |
       | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
     Then tenant can see profile dropdown option
+
+  @TEST_DOM-385 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Hubungi Pengelola
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on hubungi pengelola button
+    And user select question "Boleh tahu alamat lengkap apartemen ini?"
+    And user click send chat from popup
+    Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
+
