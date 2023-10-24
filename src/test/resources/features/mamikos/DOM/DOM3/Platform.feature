@@ -118,3 +118,11 @@ Feature: [Test-Execution][DOM] Web - Platform
 		#  Scenario: Positive case tenant search apartment filter by unit type "4 BR"
     When user filter apartment by unit type is "4 BR"
     Then user see apartment lists by unit type is "4 BR"
+
+  @TEST_DOM-388 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Login as Tenant Can View Profile Picture and Option Dropdown Menu Profile
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    Then tenant can see profile dropdown option
