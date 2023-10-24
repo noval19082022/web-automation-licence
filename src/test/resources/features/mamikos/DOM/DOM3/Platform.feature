@@ -161,3 +161,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user click mamikos logo on apartement list page
     Then user redirected to "/"
 
+  @TEST_DOM-381 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Verify Profile Dropdown
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    Then tenant can see profile dropdown option
+
