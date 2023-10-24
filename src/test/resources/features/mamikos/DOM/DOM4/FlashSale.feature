@@ -4,22 +4,26 @@ Feature: Flash Sale
   @TEST_DOM-161
   Scenario: Check Flash Sale Section On Homepage
     Given user go to mamikos homepage
-    Then user see flash sale section
+    When user scroll into promo kost section
+    Then user will see promo ngebut info on kost card
 
   @TEST_DOM-157
   Scenario: User can visit promo ngebut landing page
     Given user navigates to promo ngebut landing page
     Then user can see flash sale landing page
+    Then user will see promo ngebut info on kost card
 
   @TEST_DOM-159
   Scenario: User can visit promo ngebut landing area
     Given user navigates to promo ngebut landing area
     Then user can see flash sale landing area
+    Then user will see promo ngebut info on kost card
 
   @TEST_DOM-4048
   Scenario: User can use Cari Kos Promo Ngebut button
     Given user navigates to promo ngebut landing page
     When user go to promo landing area from Cari Kos Promo Ngebut button
+    Then user will see promo ngebut info on kost card
     Then user can see url link is for Cari Kos Promo Ngebut
 
   @TEST_DOM-5230
@@ -27,6 +31,7 @@ Feature: Flash Sale
     Given user navigates to promo ngebut landing page
     When user go to promo landing area from Cari Sekarang button
     Then user can see url link is for Cari Sekarang
+    Then user will see promo ngebut info on kost card
 
   @TEST_DOM-5231
   Scenario: User can see promo ngebut pop-up on kos details
