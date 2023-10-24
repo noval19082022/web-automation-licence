@@ -1,4 +1,4 @@
-@BBM7 @regression @TEST_BBM-759
+@BBM7 @regression @TEST_COOP-2666
 Feature: Invalid Voucher After Applied, Invalid Rules
 
   @continue

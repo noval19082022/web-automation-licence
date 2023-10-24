@@ -1,8 +1,8 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-681
+@TEST_COOP-2823
 Feature: Apply Voucher For Kost Type BBK
-#    BBM-681
+#    COOP-2823
   @continue
   Scenario: Invoice BBK and Voucher Applicable for Kost Type BBK
     Given user go to mamikos homepage

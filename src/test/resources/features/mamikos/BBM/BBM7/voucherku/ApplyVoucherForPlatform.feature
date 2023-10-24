@@ -1,4 +1,4 @@
-@BBM7 @regression @TEST_BBM-736 @TEST_BBM-737 @TEST_BBM-640 @TEST_BBM-633 @TEST_BBM-630
+@BBM7 @regression @TEST_COOP-2630 @TEST_COOP-2635 @TEST_COOP-2768 @TEST_COOP-2762 @TEST_COOP-2759
 Feature: Apply Voucher For Platform
 
   @continue

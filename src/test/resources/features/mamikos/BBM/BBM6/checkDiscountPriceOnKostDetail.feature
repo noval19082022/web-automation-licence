@@ -1,7 +1,7 @@
 @BBM6
 Feature: Check Harga Coret on Kost Detail
 
-  @BBM-1337
+  @TEST_COOP-869
   Scenario: Check harga coret on kost detail (BBM-1336)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
