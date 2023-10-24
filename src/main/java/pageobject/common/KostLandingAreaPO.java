@@ -41,6 +41,12 @@ public class KostLandingAreaPO {
     private Locator recommendationListTitle;
     private Locator mixGenderFilter;
 
+    //----- EnaknyaNgekost LandingPage---
+    private Locator openTheVideoThumbnail;
+    private Locator playVideoBtn;
+    private Locator videoIsOccur;
+    private Locator videoIsPlayed;
+
     public KostLandingAreaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -71,10 +77,15 @@ public class KostLandingAreaPO {
         this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.mixGenderFilter = page.getByText("Campur").first();
         this.sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya mengerti"));
+        this.openTheVideoThumbnail = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("video-glyph"));
+        this.playVideoBtn = page.locator("#youtube-video-container");
+        this.videoIsOccur = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator("video");
+        this.videoIsPlayed = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator(".ytp-timed-markers-container");
     }
 
     /**
      * Check visibility of result heading text
+     *
      * @return boolean
      */
     public String getResultHeadingText() {
@@ -84,6 +95,7 @@ public class KostLandingAreaPO {
 
     /**
      * Filter kost by price/harga
+     *
      * @param minimal minimal price
      * @param maximal maximal price
      */
@@ -96,6 +108,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get all kost list locators
+     *
      * @return List<Locator>
      */
     public List<Locator> getKostListLocator() {
@@ -105,6 +118,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of nominatim map
+     *
      * @return boolean
      */
     public boolean isNominatimMapVisible() {
@@ -113,6 +127,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of filter reset text
+     *
      * @return boolean
      */
     public boolean isFilterResetTextVisible() {
@@ -121,6 +136,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of reset filter button
+     *
      * @return boolean
      */
     public boolean isFilterResetButtonVisible() {
@@ -136,6 +152,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of image banner kos tidak ditemukan
+     *
      * @return boolean
      */
     public boolean isImageKosTidakDitemukanVisible() {
@@ -145,6 +162,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of wording "Belum Ada Kos di Area Ini".
+     *
      * @return boolean
      */
     public boolean isNoKostInAreaHeadingTextVisible() {
@@ -153,6 +171,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of wording "Cari di Area lain untuk meningkatkan hasil pencarian kos".
+     *
      * @return boolean
      */
     public boolean isNoKostInAreaSubtitleTextVisible() {
@@ -161,6 +180,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get text content of nominatim empty list
+     *
      * @return List<String>
      */
     public List<String> getAllContentNominatimEmptyList() {
@@ -170,6 +190,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of lihat lebih banyak lagi button visibility
+     *
      * @return boolean
      */
     public boolean isLihatLebihBanyakButtonVisible() {
@@ -179,6 +200,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility of back to top button
+     *
      * @return boolean
      */
     public boolean isBackToTopButtonVisible() {
@@ -194,6 +216,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check availability of back to top button
+     *
      * @return boolean
      */
     public boolean isBackToTopButtonEnabled() {
@@ -209,6 +232,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get kos area text based on it index
+     *
      * @param index desired index int data type
      * @return String
      */
@@ -219,6 +243,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get kos area size
+     *
      * @return int data type
      */
     public int getKosAreaSize() {
@@ -235,6 +260,7 @@ public class KostLandingAreaPO {
 
     /**
      * Click on filter
+     *
      * @param filter one of the available filter Dikelola Mamikos etc
      */
     public void clickOnFilter(String filter) {
@@ -247,6 +273,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility kos tidak ditemukan heading
+     *
      * @return boolean
      */
     public boolean isKosTidakDitemukanHeadingVisible() {
@@ -256,6 +283,7 @@ public class KostLandingAreaPO {
 
     /**
      * Check visibility hapus semua filter button
+     *
      * @return boolean
      */
     public boolean hapusSemuaFilterButtonVisible() {
@@ -265,6 +293,7 @@ public class KostLandingAreaPO {
 
     /**
      * Set price sorting from cheaper to expensive or vise versa, or recommended kos
+     *
      * @param sorting "Harga Termahal" or "Harga Termurah" or "Rekomendasi"
      */
     public void setPriceSortingFrom(String sorting) {
@@ -275,6 +304,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get kos price by index list
+     *
      * @param index index of list
      * @return
      */
@@ -286,6 +316,7 @@ public class KostLandingAreaPO {
 
     /**
      * Get kos price list size
+     *
      * @return int data type
      */
     public int getKosPriceListSize() {
@@ -341,5 +372,22 @@ public class KostLandingAreaPO {
      */
     public void clickOnSayaMengertiButton() {
         playwright.clickOn(sayaMengertiButton);
+    }
+
+    /**
+     * open video on EnaknyaNgekost landingpage
+     */
+    public void openVideoThumbnail() {
+        playwright.clickOn(openTheVideoThumbnail);
+    }
+
+    /**
+     * play video button on EnaknyaNgekost landingpage
+     */
+    public void playVideoOnEnaknyaNgekosPage() {
+        playwright.clickOn(playVideoBtn);
+        playwright.waitTillPageLoaded();
+        playwright.assertVisible(videoIsOccur);
+        playwright.assertVisible(videoIsPlayed);
     }
 }

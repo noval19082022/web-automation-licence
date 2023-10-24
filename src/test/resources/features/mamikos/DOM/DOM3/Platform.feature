@@ -89,3 +89,11 @@ Feature: [Test-Execution][DOM] Web - Platform
 		#  Scenario: Positive case tenant sort the list of apartments most expensive
     When user filter apartment by price direction is "Harga Termahal"
     Then user see displays apartment lists by price direction is "Harga Termahal"
+
+  @TEST_DOM-391 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - Play Video
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user want to play the video on LandingPage EnaknyaNgekos
+    Then user see pop up video player is shown on EnaknyaNgekos LP and can play video it
+
