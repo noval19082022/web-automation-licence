@@ -180,3 +180,16 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://apps.apple.com/"
 
+  @TEST_DOM-380 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Contact Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    And user click on hubungi pengelola button
+    Then user see phone number field and selectable question options :
+      | Bagaimana bisa menghubungi apartemen ini? |
+      | Boleh tahu alamat lengkap apartemen ini?  |
