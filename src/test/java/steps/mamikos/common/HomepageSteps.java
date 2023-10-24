@@ -188,4 +188,10 @@ public class HomepageSteps {
     public void userWillSeePromoNgebutInfoOnKostCard() {
         Assert.assertNotNull(home.promoNgebutInfo());
     }
+
+
+    @When("user want to visit apartment list page from homepage")
+    public void userWantToVisitApartementListPageFromHomepage() {
+        home.visitApartmentListPage();
+    }
 }

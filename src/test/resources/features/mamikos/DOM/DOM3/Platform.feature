@@ -141,3 +141,23 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user click send chat from popup
     Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
 
+  @TEST_DOM-383 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive case tenant search apartment by keyword
+    Given user go to mamikos homepage
+    When user want to visit apartment list page from homepage
+    Then user redirected to "/apartemen"
+		#  Scenario: Positive case tenant search by input keyword on field search apartment
+    And user search "Bandung" on landing apartment
+    Then user will see displays apartment lists by area and city
+      | Coblong       |
+      | Sumur Bandung |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Sumur Bandung |
+      | Bandung       |
+		#  Scenario: Positive case tenant click logo for redirect to home page
+    When user click mamikos logo on apartement list page
+    Then user redirected to "/"
+

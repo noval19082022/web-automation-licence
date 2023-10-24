@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class ApartmentLandingPO {
     Page page;
     PlaywrightHelpers playwright;
+    private Locator mamikosLogo;
     private Locator inputSearch;
     private Locator searchButton;
     private Locator apartemenTidakDitemukanText;
@@ -36,6 +37,7 @@ public class ApartmentLandingPO {
     public ApartmentLandingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        this.mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("logo_mamikos_white"));
         inputSearch = page.getByPlaceholder("Ketik yang Anda cari...");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
         apartemenTidakDitemukanText = page.getByText("Apartemen tidak ditemukan.");
@@ -260,5 +262,12 @@ public class ApartmentLandingPO {
      */
     public void filterByUnit(String unitType) {
         playwright.selectDropdownByValue(filteringUnitType, unitType);
+    }
+
+    /**
+     * click on mamikos logo on navbar
+     */
+    public void clickOnMamikosLogo() {
+        playwright.clickOn(mamikosLogo);
     }
 }

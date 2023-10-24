@@ -14,6 +14,7 @@ public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    private Locator cariApaDropDownMenu;
     private Locator btnMasuk;
     private Locator cariButton;
     private Locator mamikosLogo;
@@ -81,6 +82,7 @@ public class HomePO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        this.cariApaDropDownMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
@@ -678,7 +680,19 @@ public class HomePO {
         playwright.pageScrollUntilElementIsVisible(flashSaleSection);
     }
 
+    /**
+     * get promo ngebut info on kost card
+     * @return
+     */
     public List<String> promoNgebutInfo() {
         return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
+    }
+
+    /**
+     * visit apartment list page
+     */
+    public void visitApartmentListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(apartmentMenuDropdown);
     }
 }

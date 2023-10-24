@@ -183,4 +183,9 @@ public class SearchApartmentSteps {
                         Assert.assertTrue(UnitAndFurnitureInfo.trim().contains(unitType))
         );
     }
+
+    @When("user click mamikos logo on apartement list page")
+    public void userClickMamikosLogoOnApartementListPage() {
+        apartment.clickOnMamikosLogo();
+    }
 }
