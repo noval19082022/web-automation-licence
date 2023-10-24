@@ -23,7 +23,10 @@ public class HomePO {
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
     private Locator flashSaleKostListContainer;
+
+    private Locator flashSaleSection;
     private Locator flashSaleLihatSemuaButton;
+    private Locator flashSalePromoInfoList;
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
     private Locator kostPromo;
@@ -87,7 +90,9 @@ public class HomePO {
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
+        flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
+        flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
@@ -663,5 +668,17 @@ public class HomePO {
     public void clickLihatPengajuanLainBtn() {
         playwright.pageScrollToDown(500);
         lihatPengajuanLainBtn.click();
+    }
+
+
+    /**
+     * user scroll into promo ngebut section
+     */
+    public void scrollIntoPromoNgebut() {
+        playwright.pageScrollUntilElementIsVisible(flashSaleSection);
+    }
+
+    public List<String> promoNgebutInfo() {
+        return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
     }
 }

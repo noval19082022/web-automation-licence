@@ -60,7 +60,9 @@ public class Mamikos {
     public static final String MAMIADS_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsHistory");
     public static final String MAMIADS_GUIDE = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuide");
     public static final String MAMIADS_GUIDE_GP = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuideGP");
+    public static final String GOLDPLUS_CONTRACT = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusContract");
     public static final String KONTRAK_KERJA_SAMA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKerjaSama");
+    public static final String PROMO_MAMIKOS = JavaHelpers.getPropertyValue(MAMIKOS, "promoMamikosURL_prod");
 
     @Setter @Getter
     private static  String propertyKosName;

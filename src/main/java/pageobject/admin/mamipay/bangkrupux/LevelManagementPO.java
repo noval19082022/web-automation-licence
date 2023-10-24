@@ -20,6 +20,7 @@ public class LevelManagementPO {
     Locator deleteIcon;
     Locator successMessage;
     Locator chargingTypeField;
+    Locator kostListMenu;
 
     public LevelManagementPO(Page page){
         this.page = page;
@@ -158,5 +159,16 @@ public class LevelManagementPO {
      */
     public void selectChargingType(String chargingType) {
         playwright.selectDropdownByValue(chargingTypeField, chargingType);
+    }
+
+    /**
+     * Clicks Kost List menu
+     * @param submenu
+     */
+    public void clickOnSubMenuOfManagementLevel(String submenu){
+        playwright.waitTillPageLoaded();
+        kostListMenu = page.locator("//a[@id='kost-level']/following-sibling::ul//span[text()='" +submenu+ "']");
+        playwright.pageScrollInView(kostListMenu);
+        playwright.clickOn(kostListMenu);
     }
 }

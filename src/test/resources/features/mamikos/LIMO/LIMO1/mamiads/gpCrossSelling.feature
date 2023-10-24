@@ -39,3 +39,52 @@ Feature: GP Crosseling
     And user choose Goldplus package 2
     And user verify the "Saldo MamiAds 1.500.000" and the price is "Rp1.350.000" already "choosen" on Rincian Pembayaran
 
+  @TEST_LIMO-288
+  Scenario: Cancel select saldo mamiads
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password |
+      | 085720962105 | 0          | qwerty123 |
+    And user click "Daftar" button
+    And user choose Goldplus package 1
+    # scenario ubah package before select saldo mamiads (MA-4881)
+    When user click on ubah package gold plus button
+    And user choose Goldplus package 2
+    And user choose saldo "Rp27.000" on GoldPlus section
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
+    # scenario cancel saldo mamiads (MA-4885)
+    And user unchoose saldo on GoldPlus section
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
+
+  @TEST_LIMO-223 @continue @gpCrossPaid
+    Scenario: [Owner dashboard][Crosseling GP and MamiAds]To make sure saldo mamiads DIDN'T appear on Riwayat Saldo Mamiads while status GP = menunggu pembayaran
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password |
+      | 089966331122 | 0          | 12345678 |
+    And user click "Daftar" button
+    And user choose Goldplus package 1
+    And user choose saldo "Rp27.000" on GoldPlus section
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
+    And owner wants to process gp crosseling
+    Then owner validate payment for "GoldPlus 1 periode 4 Bulan" have "Saldo MamiAds 30.000" and have "Biaya Transaksi" before choose payment method
+    And user navigate to mamiads history page
+    And user will see title and message on Dalam Proses tab
+
+  @TEST_LIMO-226 @continue @gpCrossPaid
+  Scenario: [Goldplus ][Crosseling GP and MamiAds]Success buy cross-selling GP and mamiads
+    And owner navigates to owner dashboard
+    Then validate that owner have "Menunggu Pembayaran"
+    And owner wants to paid GP crosseling by click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
+    Then payment owner success using ovo as payment method
+    And user navigate to mamiads history page
+    And user click "Selesai"
+    And validate status transaction mamiads is "Lunas" with price "Rp27.000" saldo "30.000"
+
+    @terimanateGP @gpCrossPaid
+  Scenario: Terminate GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to terminate Goldplus for owner with phone number "089966331122"
