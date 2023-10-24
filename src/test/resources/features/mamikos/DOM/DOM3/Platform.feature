@@ -97,3 +97,24 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to play the video on LandingPage EnaknyaNgekos
     Then user see pop up video player is shown on EnaknyaNgekos LP and can play video it
 
+  @TEST_DOM-390 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Unit Type
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user filter apartment by unit type is "1-Room Studio"
+    Then user see apartment lists by unit type is "1-Room Studio"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "1 BR"
+    When user filter apartment by unit type is "1 BR"
+    Then user see apartment lists by unit type is "1 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "2 BR"
+    When user filter apartment by unit type is "2 BR"
+    Then user see apartment lists by unit type is "2 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "3 BR"
+    When user filter apartment by unit type is "3 BR"
+    Then user see apartment lists by unit type is "3 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "4 BR"
+    When user filter apartment by unit type is "4 BR"
+    Then user see apartment lists by unit type is "4 BR"
