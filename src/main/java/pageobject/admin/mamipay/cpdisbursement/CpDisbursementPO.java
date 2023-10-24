@@ -216,7 +216,7 @@ public class CpDisbursementPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             String hari = today.format(dates);
-            date = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(hari).setExact(true));
+            date = page.locator(".day:not(.old):not(.new)").getByText(hari);
             playwright.clickOn(tanggalTransferField);
             playwright.clickOn(date);
         } else {
