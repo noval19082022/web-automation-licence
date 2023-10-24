@@ -172,3 +172,11 @@ Feature: [Test-Execution][DOM] Web - Platform
       | rane 78        |                |
     Then tenant can see profile dropdown option
 
+  @TEST_DOM-382 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click App Store icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user want to click on App Store on the footer
+    And tenant set active page to 1
+    Then user redirected to "https://apps.apple.com/"
+

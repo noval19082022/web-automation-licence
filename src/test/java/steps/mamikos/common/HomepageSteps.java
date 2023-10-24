@@ -194,4 +194,9 @@ public class HomepageSteps {
     public void userWantToVisitApartementListPageFromHomepage() {
         home.visitApartmentListPage();
     }
+
+    @And("user want to click on App Store on the footer")
+    public void userWantToClickOnAppStoreOnTheFooter() {
+        home.clickOnAppStore();
+    }
 }
