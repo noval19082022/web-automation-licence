@@ -72,3 +72,4 @@ Feature: Example Of Create And Accept Booking Through API
     And playwright get owner booking accept details
     And playwright set accept booking data for owner
     And playwright create body accept booking for owner
+    And playwright accept booking for owner

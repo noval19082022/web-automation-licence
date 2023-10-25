@@ -77,13 +77,15 @@ public class OwnerApiSteps {
     @When("playwright set accept booking data for owner")
     public void playwrightSetAcceptBookingDataForOwner() {
         //accept booking details data
-        JsonObject ownerBookingAcceptDetailsJson = JsonHelpers.createJsonObject(JsonHelpers.createJsonElementFromJsonFile("target/ownerBookingAcceptDetails.json"));
+        var acceptBookingDetailsFilePath = "target/ownerBookingAcceptDetails" + AcceptBooking.getBookingId() + ".json";
+        JsonObject ownerBookingAcceptDetailsJson = JsonHelpers.createJsonObject(JsonHelpers.createJsonElementFromJsonFile(acceptBookingDetailsFilePath));
         JsonObject ownerBookingAcceptDetailData = JsonHelpers.createJsonObject(ownerBookingAcceptDetailsJson.get("data"));
         JsonElement roomAdditionalPriceElement = ownerBookingAcceptDetailData.get("room_additional_price");
         JsonArray roomAdditionalPrice = JsonHelpers.createJsonArray(roomAdditionalPriceElement);
         JsonObject additionalPriceList = JsonHelpers.createJsonObject(roomAdditionalPrice.get(0));
         JsonObject deposit = JsonHelpers.createJsonObject(roomAdditionalPrice.get(2));
         JsonArray depositData = JsonHelpers.createJsonArray(deposit.get("data"));
+        System.out.println(depositData);
         JsonObject depositDataObject = JsonHelpers.createJsonObject(depositData.get(0));
         JsonObject fine = JsonHelpers.createJsonObject(roomAdditionalPrice.get(1));
         JsonArray fineData = JsonHelpers.createJsonArray(fine.get("data"));
@@ -135,7 +137,7 @@ public class OwnerApiSteps {
         var headers = Requirement.mamikosAppHeaders(signature);
         var ownerRoomBookingDetailRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
         var ownerRoomBookingDetailResponse = ownerRoomBookingDetailRequest.get(ownerRoomBookingDetailEndpoint, RequestOptions.create()
-                .setQueryParam("booking_id", 77492)
+                .setQueryParam("booking_id", AcceptBooking.getBookingId())
                 .setQueryParam("access", ApiEndpoints.ACCESS)
                 .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
         System.out.println(ownerRoomBookingDetailResponse.url());
@@ -177,7 +179,7 @@ public class OwnerApiSteps {
 
     @When("playwright get owner booking accept details")
     public void playwrightGetOwnerBookingAcceptDetails() throws NoSuchAlgorithmException, InvalidKeyException {
-        var ownerBookingAcceptDetailsSafeFilePath = "target/ownerBookingAcceptDetails.json" + AcceptBooking.getBookingId();
+        var ownerBookingAcceptDetailsSafeFilePath = "target/ownerBookingAcceptDetails" + AcceptBooking.getBookingId() + ".json" ;
         var ownerBookingAcceptDetailsEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_ACCEPT + AcceptBooking.getBookingId();
         var signature = Requirement.createSignatureKey("GET", ownerBookingAcceptDetailsEndpoint, ApiEndpoints.X_GIT_TIME_APP);
         var headers = Requirement.mamikosAppHeaders(signature);
@@ -223,8 +225,23 @@ public class OwnerApiSteps {
         JsonObject ownerRoomAllotmentData = JsonHelpers.createJsonObject(ownerRoomAllotmentJson.getAsJsonObject().get("data"));
         JsonArray ownerRoomAllotmentAvailableUnits = JsonHelpers.createJsonArray(ownerRoomAllotmentData.get("units"));
         System.out.println("Available units: " + ownerRoomAllotmentAvailableUnits.size());
-        JsonObject ownerRoomAllotmentAvailableLastUnit = JsonHelpers.createJsonObject(ownerRoomAllotmentAvailableUnits.get(ownerRoomAllotmentAvailableUnits.size() - 1));
+        JsonObject ownerRoomAllotmentAvailableLastUnit = JsonHelpers.createJsonObject(ownerRoomAllotmentAvailableUnits.get(ownerRoomAllotmentAvailableUnits.size() - 3));
         AcceptBooking.setDesignerRoomId(ownerRoomAllotmentAvailableLastUnit.get("id").getAsInt());
         System.out.println("Designer room id: " + AcceptBooking.getDesignerRoomId());
+    }
+
+    @And("playwright accept booking for owner")
+    public void playwrightAcceptBookingForOwner() throws NoSuchAlgorithmException, InvalidKeyException {
+        var ownerBookingAcceptDetailsEndpoint = ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_BOOKING_ACCEPT + AcceptBooking.getBookingId();
+        var signature = Requirement.createSignatureKey("POST", ownerBookingAcceptDetailsEndpoint, ApiEndpoints.X_GIT_TIME_APP);
+        var headers = Requirement.mamikosAppHeaders(signature);
+        var ownerBookingAcceptDetailsRequest = ApiPlaywrightHelpers.setBaseUrl(ApiEndpoints.PAY_JAMBU, headers);
+        var ownerBookingAcceptDetailsResponse = ownerBookingAcceptDetailsRequest.post(ownerBookingAcceptDetailsEndpoint, RequestOptions.create().setData(acceptBookingBody)
+                .setQueryParam("access", ApiEndpoints.ACCESS)
+                .setQueryParam("devel_access_token", ApiEndpoints.DEVEL_ACCESS_TOKEN));
+        System.out.println(ownerBookingAcceptDetailsResponse.url());
+        System.out.println(ownerBookingAcceptDetailsResponse.text());
+        Assert.assertEquals(ownerBookingAcceptDetailsResponse.status(), 200);
+        Assert.assertTrue(ownerBookingAcceptDetailsResponse.ok());
     }
 }
