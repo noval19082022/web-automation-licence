@@ -5,7 +5,7 @@ Feature: Single voucher owner
   @TEST_LIMO-1216
   Scenario: admin check redirect menu action at single owner voucher
     Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
+    And admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     When admin want to see Single Voucher List owner for index "1"

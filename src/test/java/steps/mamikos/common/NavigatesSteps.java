@@ -330,4 +330,9 @@ public class NavigatesSteps {
     public void userNavigatesToPromoMamikos() {
         playwright.navigateTo(Mamikos.PROMO_MAMIKOS);
     }
+
+    @When("admin accsess menu boot LPL")
+    public void admin_accsess_menu_boot_lpl() {
+        playwright.navigateTo(Mamikos.URL + "/admin/lpl-boost", 30000.0, LoadState.LOAD);
+    }
 }
