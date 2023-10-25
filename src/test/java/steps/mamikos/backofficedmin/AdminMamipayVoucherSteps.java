@@ -1,6 +1,7 @@
 package steps.mamikos.backofficedmin;
 
 import com.microsoft.playwright.Page;
+import com.sun.source.tree.AssertTree;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.admin.mamipay.voucher.MamikosListMassVoucherPO;
+import pageobject.admin.mamipay.voucher.MamikosListVoucherOwnerPO;
 import pageobject.admin.mamipay.voucher.MamikosVoucherFormPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -28,6 +30,7 @@ public class AdminMamipayVoucherSteps {
     MamikosListMassVoucherPO massVoucherListVoucher = new MamikosListMassVoucherPO(page);
     MamikosVoucherFormPO massVoucherForm = new MamikosVoucherFormPO(page);
     MamikosVoucherFormPO voucherForm = new MamikosVoucherFormPO(page);
+    MamikosListVoucherOwnerPO ownerVoucher = new MamikosListVoucherOwnerPO(page);
     List<Map<String, String>> voucherAndKostName;
     List<Map<String, String>> voucherAndRules;
     List<Map<String, String>> voucherAndProfession;
@@ -597,4 +600,44 @@ public class AdminMamipayVoucherSteps {
     public void userAddBulkAddVoucherPartners() {
         massVoucherListVoucher.clickOnCreatePartnerVoucherButton();
     }
+
+    @When("admin want to see Single Voucher List owner for index {string}")
+    public void admin_want_to_see_single_voucher_list_owner_for_index(String index) throws InterruptedException {
+        ownerVoucher.goToOwnerVoucher();
+        ownerVoucher.clickVoucherListOwner(index);
+    }
+
+    @Then("admin redirected to View Usage page")
+    public void admin_redirected_to_view_usage_page() {
+        Assert.assertTrue(ownerVoucher.isHeaderUsagePageIsDisplayed(),"header usage voucher is not displayed");
+        Assert.assertTrue(ownerVoucher.isVoucherInformationIsDisplayed(),"voucher infromation is not displayed");
+        Assert.assertTrue(ownerVoucher.isTableUsageVoucherOwnerIsDisplayed(),"table is not displayed");
+       page.goBack();
+    }
+
+    @Then("admin redirected to Update page")
+    public void admin_redirected_to_update_page() {
+       Assert.assertTrue(ownerVoucher.isHeaderUpdateVoucherOwnerAppear(),"Header update voucher is not appear");
+       Assert.assertTrue(ownerVoucher.isCampaignHeaderAppear(),"Campaign header not appear");
+       ownerVoucher.clickOnCancelButtonOwnerVoucher();
+    }
+
+    @Then("admin redirected to Single Voucher List owner")
+    public void admin_redirected_to_single_voucher_list_owner() {
+        Assert.assertTrue(ownerVoucher.isVocherCodeListDisplayed(), "Voucher code list is not displayed");
+        Assert.assertTrue(ownerVoucher.isTableListVoucherDisplayed(),"Table list is not displayed");
+        ownerVoucher.clickOnBackButtonVoucher();
+    }
+
+    @When("admin want to see View Usage List owner for index {string}")
+    public void admin_want_to_see_view_usage_list_owner_for_index(String index) throws InterruptedException {
+       ownerVoucher.clickUsageListOwner(index);
+    }
+
+    @When("admin want to see update page for index {string}")
+    public void admin_want_to_see_update_page_for_index(String index) throws InterruptedException {
+        ownerVoucher.clickUpdateVoucherOwner(index);
+    }
+
+
 }
