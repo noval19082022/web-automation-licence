@@ -19,8 +19,19 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | qamamikos123 |
+      | 083311231113 | 083311231113 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
     Then user verify OTP verification message was sent "Kami telah mengirimkan Kode OTP ke nomor 08239231283"
+
+  @TEST_DOM-394
+  Scenario: [Tenant][Phone Number - verifikasi page]when Phone number is empty
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password     |
+      | 083311231113 | 083311231113 | asdf1234     |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    And user empty phone number field
+    Then user get error message "Nomor Handphone harus diisi."
