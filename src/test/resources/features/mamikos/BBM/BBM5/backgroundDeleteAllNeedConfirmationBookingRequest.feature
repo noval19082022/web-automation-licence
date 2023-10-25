@@ -9,7 +9,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 
-  @TEST_BBM-900 @Automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-1936 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Home Page][Kost Saya Section ]Check kost saya section when have Cancelled status and have Draft booking
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -36,7 +36,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user click Mau Coba Dong section at homepage
     Then tenant navigate to tagihan kost saya
 
-  @TEST_BBM-906 @Automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-2005 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Coba cara baru bayar kos]Check when tenant not have booked status (batalkan booking) and draft booking (delete draft)
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:

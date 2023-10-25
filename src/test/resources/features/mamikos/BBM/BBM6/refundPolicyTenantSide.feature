@@ -1,7 +1,7 @@
 @BBM6 @regression
 Feature: Update Refund Policy kost pilar 1 and reguler
 
-  @continue @BBM-872
+  @continue @COOP-1353
   Scenario: Check refund policy on Tenant side for kost Reguler
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -23,7 +23,7 @@ Feature: Update Refund Policy kost pilar 1 and reguler
     Then user can see "bagaimana-cara-mengajukan-refund" on mamihelp page
 
 
-  @TEST_BBM-1776 @BBM-1778
+  @TEST_COOP-1226 @COOP-1224
   Scenario: [Kost Detail][Bisa Refund] Tenant can see Refund Info for Kost Pillar 1 and check if Refund Policy redirect to correct page for Pillar1
     When user go to mamikos homepage
     And tenant search kost then go to kost details:

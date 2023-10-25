@@ -1,7 +1,7 @@
 @BBM5
 Feature: [TnC Booking][Detail Booking] Check Update TnC Booking on Pengajuan sewa page
 
-  @continue @TEST_BBM-1194 @TEST_BBM-1583
+  @continue @TEST_COOP-1242 @TEST_COOP-1247
   Scenario: [TnC Booking][Detail Booking] Check TnC Booking on Pengajuan sewa page for kost reguler (BBM-1194)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -19,7 +19,7 @@ Feature: [TnC Booking][Detail Booking] Check Update TnC Booking on Pengajuan sew
     When tenant click on TnC with "Syarat Ketentuan Umum"
     Then tenant can see TnC content with "Syarat dan Ketentuan Umum"
 
-  @TEST_BBM-1582
+  @TEST_COOP-1246
   Scenario: [Pengajuan Sewa][TnC Booking]Check TnC booking for kost Singgah sini, APIK and Kos Pilihan
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:

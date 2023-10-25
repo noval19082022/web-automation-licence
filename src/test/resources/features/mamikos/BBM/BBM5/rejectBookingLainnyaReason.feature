@@ -1,7 +1,7 @@
 @BBM5
 Feature: OB Reject Booking With Lainnya Reason
 
-  @TEST_BBM-2311 @continue
+  @TEST_COOP-823 @continue
   Scenario: Cancel and Create Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:

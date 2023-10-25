@@ -1,4 +1,4 @@
-@BBM7 @regression @TEST_BBM-758
+@BBM7 @regression @TEST_COOP-2664
 Feature: Invalid Voucher After Applied, Invalid Minimum Transaction
 
   @continue

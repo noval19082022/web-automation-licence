@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-749
+@TEST_COOP-2928
 Feature: Apply Voucher For Kost Type Garansi
 
   @continue
@@ -16,7 +16,7 @@ Feature: Apply Voucher For Kost Type Garansi
       | AUTOGARANSI       | AUTOGARANSI       |
     Then tenant can see voucher is applied
 
-#    BBM-749
+#    COOP-2928
   Scenario: Tenant Apply Voucher Not Applicable for Kost Type Garansi
     When tenant set active page to 1
     And tenant apply voucher:

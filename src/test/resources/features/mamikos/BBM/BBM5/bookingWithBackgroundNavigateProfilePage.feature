@@ -12,7 +12,7 @@ Feature: BnB feature with background navigate profile page
 
 
   @kost-saya-revamp-phase2
-  Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (BBM-912)
+  Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (COOP-1979)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
@@ -21,7 +21,7 @@ Feature: BnB feature with background navigate profile page
     And user click on chat button in top bar tenant home page
     Then user can see Chat list title
 
-  @TEST_BBM-911
+  @TEST_COOP-1978
   Scenario: [Kos Saya][Bantuan]Check Bantuan on kost saya page (BBM-911)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -35,7 +35,7 @@ Feature: BnB feature with background navigate profile page
     And user navigates to help page
     And user clicks on "Hubungi CS Mamikos (aktif 24 jam)"
 
-  @TEST_BBM-884
+  @TEST_COOP-1971
   Scenario: [Kost saya][Content] Content Kos Saya (BBM-884)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -47,7 +47,7 @@ Feature: BnB feature with background navigate profile page
     And user verify Kost Review entry point is not displayed
     Then user see activities in My Kos
 
-  @TEST_BBM-908
+  @TEST_COOP-1976
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
