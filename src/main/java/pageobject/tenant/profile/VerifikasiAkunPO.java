@@ -80,4 +80,13 @@ public class VerifikasiAkunPO {
         playwright.waitTillLocatorIsVisible(otpVerificationMessageText,5.0);
         return playwright.getText(otpVerificationMessageText).replaceAll("\\s+"," ");
     }
+
+    /**
+     * user clear phone number
+     */
+    public void emptyPhoneNumber(){
+        playwright.clickOn(changePhoneNumberButton);
+        playwright.clickOn(textBoxField);
+        playwright.clearText(textBoxField);
+    }
 }
