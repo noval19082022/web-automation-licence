@@ -20,7 +20,7 @@ Feature: OB Booking From Hubungi Kost
       | 0890000000314 | 0890000000314 | Bismillah@01 |
     And user cancel booking
 
-  @TEST_BBM-965
+  @TEST_COOP-1995
   Scenario: OB Booking Hubungi Kost From Detail Kost
     When user go to mamikos homepage
     And tenant search kost then go to kost details:

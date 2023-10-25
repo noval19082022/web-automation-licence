@@ -38,4 +38,9 @@ public class VerifikasiAkunSteps {
     public void userVerifyOTPVerificationMessageWasSent(String message) {
         Assert.assertEquals(verifikasiakun.getOTPVerificationMessage(),message, "OTP verification messages is not equal to " + message);
     }
+
+    @And("user empty phone number field")
+    public void userEmptyPhoneNumberField() {
+        verifikasiakun.emptyPhoneNumber();
+    }
 }

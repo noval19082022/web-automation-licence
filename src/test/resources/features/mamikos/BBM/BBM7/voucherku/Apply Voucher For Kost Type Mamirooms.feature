@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-679 @TEST_BBM-683
+@TEST_COOP-2822 @TEST_COOP-2825
 Feature: Apply Voucher For Kost Type Mamirooms
 
   @continue
@@ -16,7 +16,7 @@ Feature: Apply Voucher For Kost Type Mamirooms
       | AUTOMAMIROOM      | AUTOMAMIROOM      |
     Then tenant can see voucher is applied
 
-    #BBM-683
+    # COOP-2825
   Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms
     When tenant set active page to 1
     And tenant apply voucher:

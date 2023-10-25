@@ -1,4 +1,4 @@
-@BBM7 @voucher
+@BBM7 @voucher @ccop1 @TEST_COOP-3671 @TEST_COOP-3672 @TEST_COOP-3673
 
 Feature: Voucher Saya Page
 
@@ -80,6 +80,7 @@ Feature: Voucher Saya Page
     And user should redirect to link that contains "https://promo.mamikos.com/"
     And user should redirect to link "https://promo.mamikos.com/"
 
+    @TEST_COOP-3674
   Scenario: Empty State Landing Page displayed
     Given user go to mamikos homepage
     When user login as tenant via phone number:

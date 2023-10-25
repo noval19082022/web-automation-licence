@@ -1,7 +1,7 @@
 @regression @mauCobaDong @BBM5
 Feature: Revamp kos saya
 
-  @mauCobaDong @TEST_BBM-2322
+  @mauCobaDong @TEST_COOP-1068
   Scenario: click Mau Coba Dong at homepage
     Given user go to mamikos homepage
     When user login as tenant via phone number:

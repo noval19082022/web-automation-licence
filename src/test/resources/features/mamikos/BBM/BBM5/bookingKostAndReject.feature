@@ -16,7 +16,7 @@ Feature: BnB feature with background booking kost - reject booking
     And user go to mamikos homepage
     And user logs out as a Tenant user
 
-  @TEST_BBM-910 @automated @partial-regression @web @xray-update
+  @TEST_COOP-1966 @automated @partial-regression @web @xray-update
   Scenario: [Atur Booking][Reject Reason] Check reject booking reason Tanggal masuk/check-in kos terlalu dekat and have BSS varian
     Given user go to mamikos homepage
     When user login as owner:
