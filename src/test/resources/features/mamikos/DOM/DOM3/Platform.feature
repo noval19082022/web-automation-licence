@@ -199,3 +199,31 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user select the first apartment on the list apartment page
     And user want to visit cari kost list page from ads Dropdown
     Then user redirected to "/cari"
+
+  @TEST_DOM-377 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Favorite an Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on favorite btn on the apartment detail
+    Then user get success message "Sukses tersimpan"
+    And tenant navigate to favorite page
+    Then tenant will see that the text "rane 78" is displayed
+
+  @TEST_DOM-376 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] unFavorite an Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on favorite btn on the apartment detail
+    And tenant navigate to favorite page
+    Then tenant should not be able to see the text "rane 78"
+
