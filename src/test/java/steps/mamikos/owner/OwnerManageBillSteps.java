@@ -31,6 +31,7 @@ public class OwnerManageBillSteps {
         } else if(month.equalsIgnoreCase("current")) {
             month = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
         }
+        loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
         billManage.reloadOnEmptyKelolaTagihanPage();

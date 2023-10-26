@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-712 @TEST_BBM-702 @TEST_BBM-665 @TEST_BBM-666
+@TEST_COOP-2890 @TEST_COOP-2876 @TEST_COOP-2807 @TEST_COOP-2808
 Feature: Apply Voucher For Contract Created From Owner
 
 #  BBM-686
@@ -26,7 +26,7 @@ Feature: Apply Voucher For Contract Created From Owner
       | AUTOCONSULTANT    | AUTOCONSULTANT    |
     Then Voucher code has been used
 
-#  BBM-677
+#  COOP-2532
   @continue
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
     When tenant set active page to 1
@@ -59,7 +59,7 @@ Feature: Apply Voucher For Contract Created From Owner
       | AUTOCONSOWNER     | AUTOCONSOWNER     |
     Then tenant can see voucher is applied
 
-#  BBM-675
+#  COOP-2531
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
     When tenant set active page to 1
     And tenant apply voucher:

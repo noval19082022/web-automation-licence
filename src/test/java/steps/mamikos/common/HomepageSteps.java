@@ -178,4 +178,14 @@ public class HomepageSteps {
         home.clickLihatPengajuanLainBtn();
     }
 
+
+    @When("user scroll into promo kost section")
+    public void userScrollIntoPromoKostSection() {
+        home.scrollIntoPromoNgebut();
+    }
+
+    @Then("user will see promo ngebut info on kost card")
+    public void userWillSeePromoNgebutInfoOnKostCard() {
+        Assert.assertNotNull(home.promoNgebutInfo());
+    }
 }
