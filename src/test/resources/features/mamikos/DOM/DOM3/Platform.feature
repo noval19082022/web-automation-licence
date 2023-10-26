@@ -177,7 +177,6 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user want to click on App Store on the footer
-    And tenant set active page to 1
     Then user redirected to "https://apps.apple.com/"
 
   @TEST_DOM-380 @Automated @DOM3 @web-covered

@@ -197,7 +197,10 @@ public class HomepageSteps {
 
     @And("user want to click on App Store on the footer")
     public void userWantToClickOnAppStoreOnTheFooter() {
-        home.clickOnAppStore();
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            home.clickOnAppStore();
+        });
+        ActiveContext.setActivePage(page1);
     }
 
     @And("user want to visit cari kost list page from ads Dropdown")
