@@ -7,6 +7,7 @@ import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CpDisbursementPO {
@@ -19,6 +20,7 @@ public class CpDisbursementPO {
     private Locator cpDisbursementTab;
     private Locator resetFilterButton;
     private Locator row;
+    private Locator daftarTransferTab;
 
     //Tambah Data Transfer
     private Locator namaPropertyField;
@@ -59,12 +61,23 @@ public class CpDisbursementPO {
     private Locator statusTransferDropdown;
     private Locator statusTransferValue;
     private Locator statusTransferLabel;
+    private Locator tglTransferKePemilikTable;
     //Transfer Diproses
 
     //Transfer Gagal
     private Locator jadwalTransferDropdown;
     private Locator transferFailedDateDropdown;
     //Transfer Gagal
+
+    //Preview Data Transfer
+    private Locator transferActionButton1;
+    private Locator totalPendapatanFieldOnPreview;
+    private Locator tipeTransaksiSelectOnPreview;
+    private Locator propertyNamePreviewModal;
+    private Locator tglTransferKePemilikOnPreview;
+    private Locator transferSekarangBtn;
+    private Locator toastMessage;
+    //Preview Data Transfer
 
     public CpDisbursementPO(Page page){
         this.page = page;
@@ -91,6 +104,7 @@ public class CpDisbursementPO {
         closePopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
         lainnyaTipeTransaksiField = page.locator("#transaction_type_text-add-new");
         tambahkanDataTransferButton = page.locator("#transfer-submit-add-new");
+        daftarTransferTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Transfer"));
 
         tanggalTransferPemilikTable = page.locator("td b");
         namaPropertyTable = page.locator("tr td:nth-of-type(3)");
@@ -107,9 +121,19 @@ public class CpDisbursementPO {
         statusTransferDropdown = page.locator(".filter-option").nth(1);
         statusTransferValue = page.locator("a[role='option'] span");
         statusTransferLabel = page.locator("tr td:nth-of-type(7)");
+        tglTransferKePemilikTable = page.locator("tr td:nth-of-type(2) b").first();
+
 
         jadwalTransferDropdown = page.locator("#daterange-cp-disbursement");
         transferFailedDateDropdown = page.locator("#daterange-cp-disbursement_failed");
+
+        transferActionButton1 = page.locator("(//td)[7]/button");
+        propertyNamePreviewModal = page.locator("(//*[@class='easy-autocomplete'])[1]/input");
+        totalPendapatanFieldOnPreview = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan total pendapatan"));
+        tipeTransaksiSelectOnPreview = page.locator("//select[@name='transaction_type']");
+        tglTransferKePemilikOnPreview = page.locator("//*[@name='transfer_due_date']").first();
+        transferSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Transfer Sekarang"));
+        toastMessage = page.locator("//*[@class='callout callout-success']");
     }
 
     /**
@@ -216,7 +240,7 @@ public class CpDisbursementPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             String hari = today.format(dates);
-            date = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(hari).setExact(true));
+            date = page.locator(".day:not(.old):not(.new)").getByText(hari);
             playwright.clickOn(tanggalTransferField);
             playwright.clickOn(date);
         } else {
@@ -492,5 +516,80 @@ public class CpDisbursementPO {
      */
     public String getTransferFailedValue() {
         return playwright.getText(transferFailedDateDropdown);
+    }
+
+    public void clickActionTransfer() {
+        playwright.clickOn(transferActionButton1);
+    }
+
+    public void editNamaProperty(String name) {
+        playwright.clearText(propertyNamePreviewModal);
+        playwright.fillCharacterByCharacter(propertyNamePreviewModal, name);
+    }
+
+    public void clickFirstPropertySuggestion() {
+        playwright.waitTillPageLoaded(10000.0);
+        playwright.clickOn(propertySuggestion.first());
+    }
+
+    public void editTotalPendapatan(String s) {
+        playwright.clearText(totalPendapatanFieldOnPreview);
+        playwright.fill(totalPendapatanFieldOnPreview, s);
+    }
+
+    public void editTipeTransaksi(String type) {
+        playwright.selectDropdownByValue(tipeTransaksiSelectOnPreview.first(), type);
+    }
+
+    public void editTanggalTransfer(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+        Date dt = calendar.getTime();
+        String hari = tomorrow.format(dt);
+        playwright.clickOn(tglTransferKePemilikOnPreview);
+        date = page.locator("//td[@class='active day']/following-sibling::*[contains(text(),'" +hari+ "')]");
+        playwright.clickOn(date);
+    }
+
+    public void clicksTransferSekarang() {
+        playwright.clickOn(transferSekarangBtn);
+    }
+
+    public String getToastMessage() {
+        return playwright.getText(toastMessage);
+    }
+
+    public String getTglTransferCol() {
+        return playwright.getText(tglTransferKePemilikTable);
+    }
+
+    public String getNamaPropCol() {
+        System.out.println(namaPropertyTable.first());
+        return playwright.getText(namaPropertyTable.first()).substring(0, 45);
+    }
+
+    public String getTipeTransaksiCol() {
+        return playwright.getText(tipeTransaksiTable.first());
+    }
+
+    public String getTotalPndptnCol() {
+        return playwright.getText(totalPendapatanTable.first());
+    }
+
+    public String getStatusTransferAfterEdit() {
+        return playwright.getText(statusTransferLabel.first());
+    }
+
+    public void openDaftarTransferTab() {
+        playwright.clickOn(daftarTransferTab);
+    }
+
+    public String getDetailRekCol() {
+        return playwright.getText(detailRekeningTable);
+    }
+
+    public String getStatusTransferWithoutEdit() {
+        return playwright.getText(statusTransferLabel.first());
     }
 }
