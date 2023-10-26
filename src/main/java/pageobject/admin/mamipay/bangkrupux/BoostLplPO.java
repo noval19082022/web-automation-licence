@@ -17,6 +17,9 @@ public class BoostLplPO {
     Locator listingName;
     Locator idKost;
     Locator tableDataLpl;
+    Locator btnAddBoostLpl;
+    Locator inputKostName;
+    Locator resultKostLpl;
 
 
     public BoostLplPO(Page page) {
@@ -30,6 +33,8 @@ public class BoostLplPO {
         listingName = page.locator("td:nth-of-type(3)");
         idKost = page.locator("//td[contains(.,'ID: 1000034428')]");
         tableDataLpl = page.locator("//tbody[1]/tr[1]");
+        btnAddBoostLpl = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add LPL Boost"));
+        inputKostName = page.getByPlaceholder("Keyword");
     }
 
 
@@ -108,5 +113,38 @@ public class BoostLplPO {
      */
     public void clearTextKosName() {
         playwright.clearText(searchByKostName);
+    }
+
+    /**
+     * Search kos name by listing name
+     * @param kosName of Kos ID
+     */
+    public void searchKosNameToBoost(String kosName) {
+        playwright.fill(inputKostName,kosName);
+        page.keyboard().press("Enter");
+    }
+
+    /**
+     * Click button add lpl boost
+     */
+    public void clickOnButtonAddLpl() {
+        playwright.clickOn(btnAddBoostLpl);
+    }
+
+    /**
+     * Verify kost is present or not
+     * @param kost
+     * return kost true or false
+     */
+    public boolean isResultKostPresent(String kost) {
+         resultKostLpl = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(kost));
+        return playwright.waitTillLocatorIsVisible(resultKostLpl);
+    }
+
+    /**
+     * Clear text at kost name
+     */
+    public void clearTextKosNameAddLpl() {
+        playwright.clearText(inputKostName);
     }
 }
