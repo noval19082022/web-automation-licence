@@ -234,3 +234,9 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open e-mail in footer
     Then user will see that the text "Halo, ada yang bisa kami bantu? Mohon isi form di bawah ini dengan lengkap." is displayed
 
+  @TEST_DOM-374 @TESTSET_UG-6221 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Web][Login][Pop Up Login] Pop up Close
+    Given user go to mamikos homepage
+    When user masuk sebagai
+    And user click close on pop up login
+    Then user verify pop up "Masuk ke Mamikos" "Saya ingin masuk sebagai" are not appeared
