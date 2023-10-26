@@ -240,3 +240,11 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user masuk sebagai
     And user click close on pop up login
     Then user verify pop up "Masuk ke Mamikos" "Saya ingin masuk sebagai" are not appeared
+
+  @TEST_DOM-373 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Whatsapp number
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open whatsapp in footer
+    Then user redirected to "https://api.whatsapp.com/"
+
