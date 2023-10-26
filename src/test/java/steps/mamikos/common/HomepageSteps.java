@@ -190,13 +190,18 @@ public class HomepageSteps {
     }
 
 
-    @When("user want to visit apartment list page from homepage")
-    public void userWantToVisitApartementListPageFromHomepage() {
+    @When("user want to visit apartment list page from ads Dropdown")
+    public void userWantToVisitApartementListPageFromAdsDropdown() {
         home.visitApartmentListPage();
     }
 
     @And("user want to click on App Store on the footer")
     public void userWantToClickOnAppStoreOnTheFooter() {
         home.clickOnAppStore();
+    }
+
+    @And("user want to visit cari kost list page from ads Dropdown")
+    public void userWantToVisitCariKostListPageFromAdsDropdown() {
+        home.visitCariKosttListPage();
     }
 }

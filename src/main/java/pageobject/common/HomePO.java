@@ -705,4 +705,12 @@ public class HomePO {
     public void clickOnAppStore() {
         playwright.clickOn(appStoreFooterMenu);
     }
+
+    /**
+     * visit cari kost list page from ads dropdown
+     */
+    public void visitCariKosttListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(kostMenuDropdown);
+    }
 }

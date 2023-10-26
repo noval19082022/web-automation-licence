@@ -144,7 +144,7 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_DOM-383 @Automated @DOM3 @web-covered
   Scenario: [Web][Apartement] Positive case tenant search apartment by keyword
     Given user go to mamikos homepage
-    When user want to visit apartment list page from homepage
+    When user want to visit apartment list page from ads Dropdown
     Then user redirected to "/apartemen"
 		#  Scenario: Positive case tenant search by input keyword on field search apartment
     And user search "Bandung" on landing apartment
@@ -193,3 +193,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user see phone number field and selectable question options :
       | Bagaimana bisa menghubungi apartemen ini? |
       | Boleh tahu alamat lengkap apartemen ini?  |
+
+  @TEST_DOM-379 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Verify Search Ads Dropdown
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user select the first apartment on the list apartment page
+    And user want to visit cari kost list page from ads Dropdown
+    Then user redirected to "/cari"

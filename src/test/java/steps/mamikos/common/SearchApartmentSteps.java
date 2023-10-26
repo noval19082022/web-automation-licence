@@ -188,4 +188,12 @@ public class SearchApartmentSteps {
     public void userClickMamikosLogoOnApartementListPage() {
         apartment.clickOnMamikosLogo();
     }
+
+    @When("user select the first apartment on the list apartment page")
+    public void userPickTheFirstApartementOnTheListApartmentPage() {
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            apartment.clickOnApartmentListNumber(0);
+        });
+        ActiveContext.setActivePage(page1);
+    }
 }
