@@ -173,7 +173,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then tenant can see profile dropdown option
 
   @TEST_DOM-382 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
-  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click App Store icon
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click App Store icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user want to click on App Store on the footer
@@ -226,4 +226,11 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user click on favorite btn on the apartment detail
     And tenant navigate to favorite page
     Then tenant should not be able to see the text "rane 78"
+
+  @TEST_DOM-375 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Email Address
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open e-mail in footer
+    Then user will see that the text "Halo, ada yang bisa kami bantu? Mohon isi form di bawah ini dengan lengkap." is displayed
 
