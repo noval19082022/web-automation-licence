@@ -120,4 +120,31 @@ public class MamiAdsSteps {
         Assert.assertEquals(mamiAdsPO.gettransactionList(2), price);
         Assert.assertEquals(mamiAdsPO.gettransactionList(3), status);
     }
+
+    @When("user input {string} as kode voucher")
+    public void user_input_as_kode_voucher(String voucherCode) {
+       mamiAdsPO.inputVoucherCode(voucherCode);
+    }
+
+    @When("user click Pakai button")
+    public void user_click_pakai_button() throws InterruptedException {
+       mamiAdsPO.clickOnPakaiVoucherButton();
+    }
+
+    @Then("validate the warning {string}")
+    public void validate_the_warning(String warningText) {
+        Assert.assertEquals(mamiAdsPO.getMessageWarningVoucher(), warningText, "Warning message doesn't match!");
+    }
+
+    @When("user clear the voucher code")
+    public void user_clear_the_voucher_code() {
+        mamiAdsPO.clearVoucherCode();
+    }
+
+    @When("owner click masukkan voucher")
+    public void owner_click_masukkan_voucher() {
+        mamiAdsPO.clickOnInputVoucher();
+    }
+
+
 }

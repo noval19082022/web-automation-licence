@@ -27,6 +27,14 @@ public class MamiAdsPO {
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
+    //--- voucher ---//
+    private Locator inputVoucher;
+    private Locator inputVoucherPopUp;
+    private Locator voucherCodeField;
+    private Locator pakaiVoucherButton;
+    private Locator warningMessageVoucher;
+    private Locator icnButtonCLose;
+
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
     Locator gpOnboardingPopUpActiveTextHead;
@@ -56,6 +64,15 @@ public class MamiAdsPO {
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
+
+        //--- voucher owner ---//
+        this.inputVoucher = page.getByTestId("masukkan_link");
+        this.inputVoucherPopUp = page.locator("#wrapper-scroll").getByTestId("masukkan_link");
+        this.voucherCodeField = page.getByTestId("codeVoucher_txt");
+        this.pakaiVoucherButton =  page.getByTestId("pakaiVoucher_btn");
+        this.warningMessageVoucher = page.getByTestId("warning_txt");
+        this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
@@ -326,6 +343,50 @@ public class MamiAdsPO {
         }
         playwright.waitTillLocatorIsVisible(page.locator(element).first());
         return playwright.getText(page.locator(element).first());
+    }
+
+    /**
+     * Click on masukkan voucher mamiAds
+     */
+    public void clickOnInputVoucher() {
+       playwright.clickOn(inputVoucher);
+       playwright.clickOn(inputVoucherPopUp);
+    }
+
+
+    /**
+     * Input voucher code
+     * @param voucherCode
+     *
+     */
+    public void inputVoucherCode(String voucherCode) {
+       playwright.fill(voucherCodeField,voucherCode);
+    }
+
+    /**
+     * Click pakai voucher button
+     * @throws InterruptedException
+     *
+     */
+    public void clickOnPakaiVoucherButton() throws InterruptedException {
+       playwright.clickOn(pakaiVoucherButton);
+    }
+
+    /**
+     * Get message warning invalid input voucher
+     * @return warning message
+     *
+     */
+    public String getMessageWarningVoucher() {
+        return playwright.getText(warningMessageVoucher);
+    }
+
+    /**
+     * Clear voucher code text field
+     *
+     */
+    public void clearVoucherCode() {
+        playwright.clearText(voucherCodeField);
     }
 }
 
