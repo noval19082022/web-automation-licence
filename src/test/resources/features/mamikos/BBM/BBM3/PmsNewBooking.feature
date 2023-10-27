@@ -6,7 +6,7 @@ Feature: PMS - New booking
     When admin login pms :
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
-    And admin go to room allotment page "Kost Apik Apple Tree Tanjung Duren Jakarta Barat"
+    And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0892202105"
@@ -17,7 +17,7 @@ Feature: PMS - New booking
     When admin login pms :
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
-    And admin go to room allotment page "Kost Apik Apple Tree Tanjung Duren Jakarta Barat"
+    And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill nama tenant "Noval Abis Delete Aja"
@@ -28,7 +28,7 @@ Feature: PMS - New booking
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Apik Apple Tree Tanjung Duren Jakarta Barat"
+    And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0892202105"
