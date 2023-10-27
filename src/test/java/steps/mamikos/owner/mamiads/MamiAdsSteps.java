@@ -12,6 +12,9 @@ import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+import java.util.Map;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class MamiAdsSteps {
@@ -146,5 +149,52 @@ public class MamiAdsSteps {
         mamiAdsPO.clickOnInputVoucher();
     }
 
+    @And("owner back to list voucher")
+    public void owner_back_to_list_voucher() {
+       mamiAdsPO.clickOnCLosePopUpVoucher();
+    }
+
+    @Then("user verify {string} is present on list voucher")
+    public void user_verify_is_present_on_list_voucher(String voucherTitle) {
+        Assert.assertTrue(mamiAdsPO.isVoucherPresentOnList(voucherTitle), "Voucher doesn't present on list!");
+    }
+
+    @When("user click on {string} {string} voucher")
+    public void user_click_on_voucher(String button, String voucherTitle) throws InterruptedException {
+        String element = null;
+        switch (button){
+            case "Lihat Detail": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-detail')]"; break;
+            case "Pakai": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-apply')]"; break;
+        }
+        mamiAdsPO.clickOnVoucherOnList(element);
+    }
+
+    @Then("verify a detail voucher as expected")
+    public void verify_a_detail_voucher_as_expected(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(mamiAdsPO.detailVoucher("voucherTitle",i),content.get("voucherTitle"));
+            Assert.assertEquals(mamiAdsPO.detailVoucher("voucherCode",i),content.get("voucherCode"));
+            Assert.assertEquals(mamiAdsPO.detailVoucher("voucherExpired",i),content.get("voucherExpired"));
+            Assert.assertEquals(mamiAdsPO.detailVoucher("voucherTnC",i),content.get("voucherTnC"));
+            i++;
+        }
+    }
+
+    @Then("user verify the toast {string}")
+    public void user_verify_the_toast(String messageToastOffIklan) {
+        Assert.assertEquals(mamiAdsPO.getTextMessageToastVoucher(), messageToastOffIklan, "Message doesn't match!");
+    }
+
+    @When("user click hapus voucher")
+    public void user_click_hapus_voucher() throws InterruptedException {
+        mamiAdsPO.clickOnDeleteVoucher();
+    }
+
+    @Then("owner wants to accsess voucher list")
+    public void owner_wants_to_accsess_voucher_list() {
+       mamiAdsPO.clickOnInputVoucherList();
+    }
 
 }

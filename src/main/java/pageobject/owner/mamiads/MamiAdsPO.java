@@ -34,6 +34,12 @@ public class MamiAdsPO {
     private Locator pakaiVoucherButton;
     private Locator warningMessageVoucher;
     private Locator icnButtonCLose;
+    private Locator messageOnOffVoucher;
+    private Locator deleteVoucher;
+    private Locator listElement;
+    private Locator voucherTitleElement;
+
+
 
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
@@ -72,6 +78,9 @@ public class MamiAdsPO {
         this.pakaiVoucherButton =  page.getByTestId("pakaiVoucher_btn");
         this.warningMessageVoucher = page.getByTestId("warning_txt");
         this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
+        this.deleteVoucher = page.getByTestId("hapusVoucher_link");
+        this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
 
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
@@ -387,6 +396,72 @@ public class MamiAdsPO {
      */
     public void clearVoucherCode() {
         playwright.clearText(voucherCodeField);
+    }
+
+    /**
+     * Clear voucher code text field
+     *
+     */
+    public void clickOnCLosePopUpVoucher() {
+        playwright.clickOn(icnButtonCLose);
+    }
+
+    /**
+     * Verify Voucher is present on list
+     *
+     * @return true or false
+     */
+    public boolean isVoucherPresentOnList(String voucherTitle) {
+         voucherTitleElement = page.locator( "//div[.='" + voucherTitle + "']");
+        return playwright.waitTillLocatorIsVisible(voucherTitleElement,1000.0);
+    }
+    /**
+     * Click pakai or lihat detail voucher from suggestion list
+     *
+     */
+    public void clickOnVoucherOnList(String element) throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(page.locator(element));
+       playwright.clickOn(page.locator(element));
+    }
+
+    /**
+     * Verify detail voucher
+     *
+     * @return voucherTitle, voucherCode, voucherExpired, voucherTnC
+     */
+    public String detailVoucher(String detailVoucher, int index) {
+        String element = "";
+        switch (detailVoucher) {
+            case "voucherTitle"  : element = ".c-voucher__title"; break;
+            case "voucherCode"   : element = ".c-voucher__code"; break;
+            case "voucherExpired": element = ".c-voucher__expired"; break;
+            case "voucherTnC"    : element = ".tnc"; break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+    /**
+     * Get message on toast voucher dihapus or dipakai
+     *
+     * @return toast message
+     */
+    public String getTextMessageToastVoucher() {
+        playwright.waitTillLocatorIsVisible(messageOnOffVoucher,1000.0);
+        return playwright.getText(messageOnOffVoucher);
+    }
+
+    /**
+     * Click on delete voucher
+     *
+     */
+    public void clickOnDeleteVoucher() throws InterruptedException {
+        playwright.clickOn(deleteVoucher);
+    }
+
+    /**
+     * Click on masukkan voucher for accsess voucher list
+     */
+    public void clickOnInputVoucherList() {
+        playwright.clickOn(inputVoucher);
     }
 }
 
