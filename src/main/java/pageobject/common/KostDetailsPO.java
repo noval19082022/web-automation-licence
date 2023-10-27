@@ -678,7 +678,7 @@ public class KostDetailsPO {
      * this method will be click room facilty section and more facility list will be appear
      */
     public void clickFacilityRoomSeeAll() {
-        playwright.pageScrollUntilElementIsVisible(facilityRoomSeeAllBtn);
+        playwright.pageScrollInView(facilityRoomSeeAllBtn);
         playwright.waitTillLocatorIsVisible(facilityRoomSeeAllBtn);
         facilityRoomSeeAllBtn.click();
     }
@@ -700,7 +700,7 @@ public class KostDetailsPO {
      * @return 'boolean' bath facility is visible
      */
     public boolean isFacBathShow() {
-        playwright.pageScrollUntilElementIsVisible(facilityBathSection);
+        playwright.pageScrollInView(facilityBathSection);
         return facilityBathSection.isVisible();
     }
 
@@ -732,7 +732,7 @@ public class KostDetailsPO {
      * @return 'boolean' 'Catatan tambahan seputar fasilitas' is visible
      */
     public boolean isFacilityNotesSectionDisplayed() {
-        playwright.pageScrollUntilElementIsVisible(facilityNotesSection);
+        playwright.pageScrollInView(facilityNotesSection);
         return facilityNotesSection.isVisible();
     }
 
@@ -770,7 +770,7 @@ public class KostDetailsPO {
      * @return 'boolean' 'Cerita pemilik tentang kos ini' is visible
      */
     public boolean isOwnerStorySectionDisplayed() {
-        playwright.pageScrollUntilElementIsVisible(ownerStorySection);
+        playwright.pageScrollInView(ownerStorySection);
         return ownerStorySection.isVisible();
     }
 
@@ -809,7 +809,7 @@ public class KostDetailsPO {
      */
     public boolean isFacShareShow() {
         playwright.pageScrollToDown(2000);
-        playwright.pageScrollUntilElementIsVisible(facShareSection);
+        playwright.pageScrollInView(facShareSection);
         return facShareSection.isVisible();
     }
 
@@ -857,7 +857,7 @@ public class KostDetailsPO {
      */
     public boolean isFacParkingTitleDisplayed() {
         playwright.pageScrollToDown(2000);
-        playwright.pageScrollUntilElementIsVisible(facParkirTitle);
+        playwright.pageScrollInView(facParkirTitle);
         return facParkirTitle.isVisible();
     }
 
@@ -879,7 +879,7 @@ public class KostDetailsPO {
      */
     public boolean isKosRulePresent() {
         playwright.pageScrollToDown(2500);
-        playwright.pageScrollUntilElementIsVisible(kosRuleSection);
+        playwright.pageScrollInView(kosRuleSection);
         return kosRuleSection.isVisible();
     }
 
@@ -925,8 +925,8 @@ public class KostDetailsPO {
      * @return 'boolean' 'Lihat Peta' button on map section for non login condition visibility
      */
     public boolean isLihatPetaButtonPresent() {
-        playwright.pageScrollToDown(2500);
-        playwright.pageScrollUntilElementIsVisible(lihatPetaBtn);
+        playwright.pageScrollToDown(3000);
+        playwright.pageScrollInView(lihatPetaBtn);
         return playwright.waitTillLocatorIsVisible(lihatPetaBtn);
     }
 
@@ -964,8 +964,8 @@ public class KostDetailsPO {
      */
     public boolean isTanyaAlamatBtnPresent() {
         playwright.pageScrollToDown(2500);
-        playwright.pageScrollUntilElementIsVisible(tanyaAlamatLengkapBtn);
-        return tanyaAlamatLengkapBtn.isVisible();
+        playwright.pageScrollInView(tanyaAlamatLengkapBtn);
+        return playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn);
     }
 
     /**
@@ -974,7 +974,8 @@ public class KostDetailsPO {
      * @return 'boolean' that map is clear and user can see more detail kost location on map section for login condition visibility
      */
     public boolean isKostCurrentLocationPresent() {
-        return currentLocation.isVisible();
+        playwright.getText(currentLocation);
+        return playwright.waitTillLocatorIsVisible(currentLocation);
     }
 
     /**
@@ -1014,15 +1015,16 @@ public class KostDetailsPO {
      */
     public boolean isKosReportPresent() {
         playwright.pageScrollToDown(2000);
-        playwright.pageScrollUntilElementIsVisible(kosReportContainer);
-        return kosReportContainer.isVisible();
+        playwright.pageScrollInView(kosReportContainer);
+        return playwright.waitTillLocatorIsVisible(kosReportContainer);
     }
 
     /**
      * Click on kos report button
      */
     public void clickOnKosReportButton() {
-        kosReportButton.click();
+        playwright.pageScrollInView(kosReportContainer);
+        playwright.clickOn(kosReportButton);
     }
 
     /**
@@ -1076,7 +1078,7 @@ public class KostDetailsPO {
      */
     public boolean isOwnerSectionPresent() {
         playwright.pageScrollToDown(4800);
-        playwright.pageScrollUntilElementIsVisible(kostOwnerInformation);
+        playwright.pageScrollInView(kostOwnerInformation);
         return playwright.waitTillLocatorIsVisible(aboutStatisticsButton);
     }
 
@@ -1086,7 +1088,7 @@ public class KostDetailsPO {
      * @return status true / false
      */
     public boolean isOwnerNameDisplayed() {
-        playwright.pageScrollUntilElementIsVisible(ownerNameText);
+        playwright.pageScrollInView(ownerNameText);
         return playwright.waitTillLocatorIsVisible(ownerNameText);
     }
 
@@ -1246,7 +1248,7 @@ public class KostDetailsPO {
      */
     public boolean isLihatSemuaKosButtonPresent() {
         playwright.pageScrollHeightToBottom();
-        playwright.pageScrollUntilElementIsVisible(relatedCard);
+        playwright.pageScrollInView(relatedCard);
         return playwright.waitTillLocatorIsVisible(seeAllRecomendationButton);
     }
 
@@ -1346,7 +1348,7 @@ public class KostDetailsPO {
      * Click on booking date form
      */
     public void clickOnBookingDate() {
-        playwright.pageScrollUntilElementIsVisible(seeAllPhotoButton);
+        playwright.pageScrollInView(seeAllPhotoButton);
         playwright.waitTillLocatorIsVisible(bookingDateForm);
         playwright.clickOn(bookingDateForm);
     }
@@ -1358,7 +1360,7 @@ public class KostDetailsPO {
      */
     public String getDescBookingDateText(String desc) {
         Locator description = page.locator("#priceCard").getByText(desc).first();
-        playwright.pageScrollUntilElementIsVisible(description);
+        playwright.pageScrollInView(description);
         return playwright.getText(description).toLowerCase();
     }
 
@@ -1457,7 +1459,7 @@ public class KostDetailsPO {
      */
     public boolean ownerBadgesSectionAsPresent() {
         playwright.pageScrollToDown(4000);
-        playwright.pageScrollUntilElementIsVisible(ownerImageProfile);
+        playwright.pageScrollInView(ownerImageProfile);
         return playwright.waitTillLocatorIsVisible(ownerNameText);
     }
 
@@ -1476,7 +1478,7 @@ public class KostDetailsPO {
      * Check if Kos Benefit Title is present
      */
     public boolean isBenefitTitlePresent() {
-        playwright.pageScrollUntilElementIsVisible(kosBenefit);
+        playwright.pageScrollInView(kosBenefit);
         return playwright.waitTillLocatorIsVisible(benefitTitle);
     }
 
@@ -1494,7 +1496,7 @@ public class KostDetailsPO {
      */
     public void scrollToReviewSection() {
         playwright.pageScrollToDown(4000);
-        playwright.pageScrollUntilElementIsVisible(reviewSection);
+        playwright.pageScrollInView(reviewSection);
     }
 
     /**
@@ -1529,7 +1531,7 @@ public class KostDetailsPO {
      */
     public void clickSeeAllReviewBtn() {
         playwright.pageScrollToDown(4000);
-        playwright.pageScrollUntilElementIsVisible(seeAllReviewBtn);
+        playwright.pageScrollInView(seeAllReviewBtn);
         playwright.clickOn(seeAllReviewBtn);
     }
 
@@ -1686,7 +1688,7 @@ public class KostDetailsPO {
      * @return
      */
     public String getKosCheckedByOwner(){
-        playwright.pageScrollUntilElementIsVisible(kosCheckedByOwner);
+        playwright.pageScrollInView(kosCheckedByOwner);
         return playwright.getText(kosCheckedByOwner);
     }
 
@@ -1854,7 +1856,7 @@ public class KostDetailsPO {
      * click bagaimana ketentuannya? text on refund policy section
      */
     public void clickBagaimanaKetentuan() {
-        playwright.pageScrollUntilElementIsVisible(whatAreTheTermsText);
+        playwright.pageScrollInView(whatAreTheTermsText);
         whatAreTheTermsText.click();
     }
 
@@ -1870,7 +1872,7 @@ public class KostDetailsPO {
      * scroll until element and click "kebijakan refund mamikos"
      */
     public void clickRefundPolicyMamikos() {
-        playwright.pageScrollUntilElementIsVisible(refundPolicyMamikos);
+        playwright.pageScrollInView(refundPolicyMamikos);
         refundPolicyMamikos.click();
     }
 

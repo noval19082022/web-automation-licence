@@ -248,3 +248,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open whatsapp in footer
     Then user redirected to "https://api.whatsapp.com/"
 
+  @TEST_DOM-371 @Automated @DOM3 @web-covered
+  Scenario: [Web][Pop up login] Tenant - Click Maps
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to reached map section and see lihat peta button
+    When user want to see more detail kost location
+    And user click back button in login page
+    And user want to report this kos
+    Then user will see login pop up
