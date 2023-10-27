@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.cpdisbursement.CpDisbursementPO;
 import utilities.JavaHelpers;
-import utilities.PlaywrightHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +27,7 @@ public class CpDisbursementSteps {
     private String tipeTransaksi = JavaHelpers.getPropertyValue(CPDisbursement, "tipeTransaksi");
     private String totalPendapatanRp = JavaHelpers.getPropertyValue(CPDisbursement, "totalPendapatanRp");
     private String pemilikRekening = JavaHelpers.getPropertyValue(CPDisbursement, "pemilikRekening");
+    private String errorMessageNomorRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageNomorRekening");
 
     private List<Map<String, String>> transferInfo;
     private List<Map<String, String>> transferAmount;
@@ -270,10 +270,10 @@ public class CpDisbursementSteps {
             Assert.assertEquals(cpdisbursement.getStatusTransferAfterEdit(),"processing","Status Transfer does not match");
         } else if (disbursement.equalsIgnoreCase("without edit")) {
             Assert.assertEquals(cpdisbursement.getTglTransferCol(), "(Today)", "The data does not match");
-            Assert.assertEquals(cpdisbursement.getNamaPropCol(), propertyName, "The data does not match");
+            Assert.assertEquals(cpdisbursement.getNamaPropColWithoutEdit(), propertyName, "The data does not match");
             Assert.assertEquals(cpdisbursement.getTipeTransaksiCol(), tipeTransaksi, "The data does not match");
             Assert.assertEquals(cpdisbursement.getTotalPndptnCol(), totalPendapatanRp, "The data does not match");
-            Assert.assertEquals(cpdisbursement.getDetailRekCol(), pemilikRekening, "The data does not match");
+            Assert.assertEquals(cpdisbursement.getDetailRekColWithoutEdit(), pemilikRekening, "The data does not match");
             Assert.assertEquals(cpdisbursement.getStatusTransferWithoutEdit(),"processing","Status Transfer does not match");
         }
     }
@@ -298,33 +298,43 @@ public class CpDisbursementSteps {
         String total = transferInfo.get(0).get("Total Pendapatan");
         String tipe = transferInfo.get(0).get("Tipe Transaksi");
         String tanggal = transferInfo.get(0).get("Tanggal Transfer");
-        String pdf = transferInfo.get(0).get("Berkas Laporan");
         String disbursement = transferInfo.get(0).get("Tipe Disbursement");
 
-        Assert.assertEquals(cpdisbursement.getPropertyName(),property);
-        Assert.assertEquals(cpdisbursement.getProductType(),product);
-        Assert.assertEquals(cpdisbursement.getBank(),bank);
-        Assert.assertEquals(cpdisbursement.getNoRekening(),norek);
-        Assert.assertEquals(cpdisbursement.getNamaPemilikRekening(),name);
-        Assert.assertEquals(cpdisbursement.getNoTelponPemilik(),nohp);
-        Assert.assertEquals(cpdisbursement.getTotalPendapatan(),total);
-        Assert.assertEquals(cpdisbursement.getTipeTransaksi(),tipe);
+        Assert.assertEquals(cpdisbursement.getPropertyNameOnPreview(),property);
+        Assert.assertEquals(cpdisbursement.getProductTypeOnPreview(),product);
+        Assert.assertEquals(cpdisbursement.getBankOnPreview(),bank);
+        Assert.assertEquals(cpdisbursement.getNoRekeningOnPreview(),norek);
+        Assert.assertEquals(cpdisbursement.getNamaPemilikRekeningOnPreview(),name);
+        Assert.assertEquals(cpdisbursement.getNoTelponPemilikOnPreview(),nohp);
+        Assert.assertEquals(cpdisbursement.getTotalPendapatanOnPreview(),total);
+        Assert.assertEquals(cpdisbursement.getTipeTransaksiOnPreview(),tipe);
         if (tanggal.equalsIgnoreCase("today")){
-            Assert.assertEquals(cpdisbursement.getTanggalTransfer(),today.format(dates));
+            Assert.assertEquals(cpdisbursement.getTanggalTransferOnPreview(),today.format(dates));
         } else {
             Assert.assertEquals(cpdisbursement.getTanggalTransfer(),tanggal);
         }
-        Assert.assertEquals(cpdisbursement.getBerkasLaporan(),pdf);
+
         if (disbursement.equalsIgnoreCase("Disbursement utama")){
             disbursement = "main";
         } else if (disbursement.equalsIgnoreCase("Disbursement susulan")) {
             disbursement = "followup";
         }
-        Assert.assertEquals(cpdisbursement.getDisbursementType(),disbursement);
+        Assert.assertEquals(cpdisbursement.getDisbursementTypeOnPreview(),disbursement);
     }
 
     @When("admin clicks Transfer Sekarang on Preview Data Transfer")
     public void admin_clicks_Transfer_Sekarang_on_Preview_Data_Transfer(){
         cpdisbursement.clicksTransferSekarang();
+    }
+
+    @When("admin preview data transfer and edit Bank Account Number")
+    public void admin_preview_data_transfer_and_edit_Bank_Account_Number(){
+        cpdisbursement.clickActionTransfer();
+        cpdisbursement.editNoRekening("1234asds");
+    }
+
+    @Then("admin cannot input account number using char")
+    public void admin_cannot_input_account_number_using_char(){
+        Assert.assertEquals(cpdisbursement.getNoRekeningPreview(),"1234");
     }
 }
