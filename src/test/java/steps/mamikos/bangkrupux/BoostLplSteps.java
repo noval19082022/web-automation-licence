@@ -50,4 +50,16 @@ public class BoostLplSteps {
         boostLpl.clearTextKosName();
     }
 
+    @When("admin input kost name with {string} at form add boost lpl")
+    public void admin_input_kost_name_with_at_form_add_boost_lpl(String kosName) {
+        boostLpl.clickOnButtonAddLpl();
+      boostLpl.searchKosNameToBoost(kosName);
+
+    }
+
+    @Then("the result from kost {string} not show")
+    public void the_result_from_kost_not_show(String kost) {
+        Assert.assertFalse(boostLpl.isResultKostPresent(kost), "user id found");
+    }
+
 }
