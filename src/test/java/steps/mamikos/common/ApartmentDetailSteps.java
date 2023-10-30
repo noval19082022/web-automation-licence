@@ -3,6 +3,9 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageobject.common.apartment.ApartmentDetailPO;
 
 public class ApartmentDetailSteps {
@@ -12,5 +15,15 @@ public class ApartmentDetailSteps {
     @And("user click on hubungi pengelola button")
     public void userClickOnHubungiPengelolaButton() {
         apartment.clickContactApt();
+    }
+
+    @When("user click on favorite btn on the apartment detail")
+    public void userClickOnFavoriteBtnOnTheApartmentDetail() {
+        apartment.clickOnFavoriteBtn();
+    }
+
+    @Then("user get success message {string}")
+    public void userGetSuccessMessage(String msg) {
+        Assert.assertEquals(msg, apartment.getSuccessMessage());
     }
 }

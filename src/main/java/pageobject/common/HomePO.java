@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -14,6 +15,7 @@ public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    private Locator cariApaDropDownMenu;
     private Locator btnMasuk;
     private Locator cariButton;
     private Locator mamikosLogo;
@@ -74,6 +76,7 @@ public class HomePO {
     private Locator twitterButton;
     private Locator instagramButton;
     private Locator copyrightFooter;
+    private Locator appStoreFooterMenu;
 
 
 
@@ -81,6 +84,7 @@ public class HomePO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        this.cariApaDropDownMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
@@ -139,6 +143,7 @@ public class HomePO {
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
         this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
+        this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
     }
 
     /**
@@ -678,7 +683,34 @@ public class HomePO {
         playwright.pageScrollUntilElementIsVisible(flashSaleSection);
     }
 
+    /**
+     * get promo ngebut info on kost card
+     * @return
+     */
     public List<String> promoNgebutInfo() {
         return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
+    }
+
+    /**
+     * visit apartment list page
+     */
+    public void visitApartmentListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(apartmentMenuDropdown);
+    }
+
+    /**
+     * click on download app on the app store on the footer menu
+     */
+    public void clickOnAppStore() {
+        playwright.clickOn(appStoreFooterMenu);
+    }
+
+    /**
+     * visit cari kost list page from ads dropdown
+     */
+    public void visitCariKosttListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(kostMenuDropdown);
     }
 }

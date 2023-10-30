@@ -145,7 +145,7 @@ public class LoginSteps {
         Assert.assertTrue(login.popUpOwnerLogin(), "login owner not showing");
     }
 
-    @And("user click back button in login owner")
+    @And("user click back button in login page")
     public void clickBack() {
         login.clickBackOnPopUpLogin();
     }
