@@ -353,7 +353,7 @@ public class KostLandingAreaPO {
      */
     public String getRecommendationKosList() {
         playwright.waitTillLocatorIsVisible(recommendationListTitle, 5000.0);
-        playwright.pageScrollUntilElementIsVisible(recommendationListTitle);
+        playwright.pageScrollInView(recommendationListTitle);
         System.out.println(playwright.getText(recommendationListTitle));
         return playwright.getText(recommendationListTitle);
     }

@@ -552,6 +552,18 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Scroll Down Helper until locator is visible
+     * @param locator
+     * @param scrollPerPixel
+     */
+    public void pageScrollUntilElementIsVisibleWithPixel(Locator locator, int scrollPerPixel) {
+        for (int i = 0; i < 200; i++) {
+            page.evaluate("window.scrollBy(0,"+scrollPerPixel+")");
+            if (waitTillLocatorIsVisible(locator)) break;
+        }
+    }
+
+    /**
      * Scroll down to locator
      * @param locator
      */
