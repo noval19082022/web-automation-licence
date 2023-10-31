@@ -459,7 +459,7 @@ public class CpDisbursementPO {
      * @param tab
      */
     public void openCPDisbursementTab(String tab) {
-        cpDisbursementTab = page.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(tab));
+        cpDisbursementTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(tab));;
 
         playwright.clickOn(cpDisbursementTab);
     }
@@ -639,13 +639,6 @@ public class CpDisbursementPO {
      */
     public String getStatusTransferAfterEdit() {
         return playwright.getText(statusTransferLabel.first());
-    }
-
-    /**
-     * Clicks Daftar Transfer tab
-     */
-    public void openDaftarTransferTab() {
-        playwright.clickOn(daftarTransferTab);
     }
 
     /**

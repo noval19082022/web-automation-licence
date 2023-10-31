@@ -215,11 +215,7 @@ public class CpDisbursementSteps {
     }
     @When("admin open {string} tab")
     public void admin_open_tab(String tab) {
-        if (tab.equalsIgnoreCase("Daftar Transfer")){
-            cpdisbursement.openDaftarTransferTab();
-        } else if (tab.equalsIgnoreCase("Transfer Diproses")) {
-            cpdisbursement.openCPDisbursementTab(tab);
-        }
+        cpdisbursement.openCPDisbursementTab(tab);
     }
     @When("admin reset filter cp disbursement")
     public void admin_reset_filter_cp_disbursement() {
