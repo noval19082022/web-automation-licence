@@ -14,7 +14,7 @@ Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
     And admin navigates to Kontrak Kerja Sama
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 1 November 2021 | 31 October 2023   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
       #Admin edit detail kerja sama
     When admin edit detail kerja sama on Model, JP, and ADP
       | Model Kerja Sama  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  |
@@ -40,5 +40,5 @@ Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
     When admin turn off Hybrid
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 1 November 2021 | 31 October 2023   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
     And kontrak kerja sama should not contains hybrid rev share
