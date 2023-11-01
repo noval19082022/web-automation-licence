@@ -37,6 +37,7 @@ public class ChatOwnerPO {
     Locator lastFTUEMars;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
+    Locator Iunderstand;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -63,17 +64,17 @@ public class ChatOwnerPO {
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
         weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
-        weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
+        weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
-        gpPacakgeText =  page.getByTestId("popperReference");
+        gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
+        Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
     }
 
     /**
      * Click on owner chat button on header
-     *
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
@@ -82,6 +83,7 @@ public class ChatOwnerPO {
 
     /**
      * Check empty chat image is present
+     *
      * @return true if appear
      */
     public boolean isEmptyChatImagePresent() {
@@ -90,6 +92,7 @@ public class ChatOwnerPO {
 
     /**
      * Get empty chat description
+     *
      * @return empty chat description
      */
     public String getEmptyChatDescription() {
@@ -98,6 +101,7 @@ public class ChatOwnerPO {
 
     /**
      * Get empty chat indicator
+     *
      * @return empty chat indicator text
      */
     public String getEmptyChatIndicator() {
@@ -106,7 +110,6 @@ public class ChatOwnerPO {
 
     /**
      * Click on "Chat" in kos Detail
-     *
      */
     public void clickChatKos() {
         playwright.clickOn(chatKosButton);
@@ -117,9 +120,9 @@ public class ChatOwnerPO {
      */
     public void searchChatTenant(String inputText) {
         playwright.waitTillLocatorIsVisible(searchChat);
-        Locator chatOnList = page.locator("(//h6[contains(.,'"+inputText+"')])[1]");
+        Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
         searchChat.fill(inputText);
-        if (nantiSajaButton.isVisible()){
+        if (nantiSajaButton.isVisible()) {
             playwright.clickOn(nantiSajaButton);
         }
         page.keyboard().press("Space");
@@ -128,8 +131,9 @@ public class ChatOwnerPO {
 
     /**
      * owner Enter text to textbox
+     *
      * @param message is text we want to enter
-     * Hit send after enter message
+     *                Hit send after enter message
      */
     public void insertChatText(String message) {
         chatTextBox.fill(message);
@@ -138,7 +142,6 @@ public class ChatOwnerPO {
 
     /**
      * Click on accept chat button
-     *
      */
     public void clickAcceptFromChatOwner() {
         playwright.clickOn(acceptFromChatRoomButton);
@@ -148,12 +151,15 @@ public class ChatOwnerPO {
 
     /**
      * Get notPaidFirstRent value text
+     *
      * @return
      */
-    public String getNotPaidFirstRentText(){
-        playwright.waitFor(notPaidFirstRent,10000.0);
-        return playwright.getText(notPaidFirstRent);
-    }
+    public String getNotPaidFirstRentText() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
+            return playwright.getText(notPaidFirstRent);
+        }
 
     /**
      * Get Tenant Name from Booking Details Page
