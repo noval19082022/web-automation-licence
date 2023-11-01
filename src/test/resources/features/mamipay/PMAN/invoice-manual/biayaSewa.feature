@@ -67,15 +67,6 @@
       And Checks required fields "Perpanjang sewa harian", "today", "today", "1 Hari", "-"
       Then the error messages "-", "-", "-", "Jumlah biaya tidak boleh kosong." are displayed
 
-    @TEST_PMAN-5743 @pman-prod
-    Scenario: Periode is disabled when choose Jenis Biaya Kekurangan biaya sewa kamar
-      Given admin go to mamikos mamipay admin
-      When admin login to mamipay:
-        | email stag                   | email prod                   | password  |
-        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-      And the admin selects "Kekurangan biaya sewa kamar" in the "Biaya Sewa"
-      Then the Periode Awal and Periode Akhir are disable
-
     @TEST_PMAN-6039 @pman-prod
     Scenario: Edit Biaya Sewa
       Given admin go to mamikos mamipay admin
@@ -91,6 +82,15 @@
       And admin edits Invoice Manual "Biaya Sewa" into Lainnya and checks them on the table
         | Nama Biaya  | Lainnya     | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table |
         | Lainnya     | Kebersihan  | tomorrow          | day after tomorrow  | -             | 30000         | Kebersihan          | tomorrow      | day after tomorrow  | Rp30.000              |
+
+    @TEST_PMAN-5743 @pman-prod
+    Scenario: Periode is disabled when choose Jenis Biaya Kekurangan biaya sewa kamar
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      And the admin selects "Kekurangan biaya sewa kamar" in the "Biaya Sewa"
+      Then the Periode Awal and Periode Akhir are disable
 
     @TEST_PMAN-6575
     Scenario: Lainnya Validation Biaya Sewa
