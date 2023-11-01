@@ -190,6 +190,9 @@ public class ChatOwnerPO {
      * @return true if sisa kamar otherwise false
      */
     public boolean isSisaKamarDisplayed() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         return playwright.waitTillLocatorIsVisible(sisaKamarLabel);
     }
 
