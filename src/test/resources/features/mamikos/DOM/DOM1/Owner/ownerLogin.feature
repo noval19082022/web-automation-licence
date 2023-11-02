@@ -22,7 +22,7 @@ Feature: Owner - Login
     Given user go to mamikos homepage
     When user clicks on Enter button
     And user verify login form owner
-    And user click back button in login owner
+    And user click back button in login page
     And user click button close login form
     Then user verify login form close
 

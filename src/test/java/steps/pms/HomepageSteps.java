@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.pms.HomepagePO;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.Map;
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     HomepagePO homepage = new HomepagePO(page);
+
+    LoadingPO loading = new LoadingPO(page);
 
     private List<Map<String, String>> informasiPembayaran;
     private List<Map<String, String>> gender;
@@ -107,6 +110,7 @@ public class HomepageSteps {
     //--------------------dbet pms--------//
     @And("admin create contract tenant dbet")
     public void admin_create_contract_tenant_dbet() {
+        loading.waitForLoadingIconDisappear();
         homepage.clickOnTambahPenyewa();
         homepage.clickDbetButton();
     }

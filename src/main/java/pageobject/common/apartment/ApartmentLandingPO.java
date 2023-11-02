@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class ApartmentLandingPO {
     Page page;
     PlaywrightHelpers playwright;
+    private Locator mamikosLogo;
     private Locator inputSearch;
     private Locator searchButton;
     private Locator apartemenTidakDitemukanText;
@@ -25,8 +26,9 @@ public class ApartmentLandingPO {
     private Locator filteringPeriod;
     private Locator filteringFurniture;
     private Locator filteringPrice;
+    private Locator filteringUnitType;
     private Locator listTimePeriod;
-    private Locator listFurniture;
+    private Locator listUnitAndFurniture;
     private Locator listPrice;
     private Locator listApartementArea;
     private Locator fullyBookedOncard;
@@ -35,6 +37,7 @@ public class ApartmentLandingPO {
     public ApartmentLandingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        this.mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("logo_mamikos_white"));
         inputSearch = page.getByPlaceholder("Ketik yang Anda cari...");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
         apartemenTidakDitemukanText = page.getByText("Apartemen tidak ditemukan.");
@@ -47,8 +50,9 @@ public class ApartmentLandingPO {
         this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka Waktu Harian Mingguan Bulanan Tahunan$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Perabotan Semua Furnished Semi Furnished Not furnished$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Urutkan Acak Harga Termurah Harga Termahal$|^Urutkan Acak Harga Termurah Harga Termahal Kosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe Unit Semua 1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
-        this.listFurniture = page.locator("//div[@class='rc-price__additional-data']");
+        this.listUnitAndFurniture = page.locator("//div[@class='rc-price__additional-data']");
         this.listPrice = page.locator("//span[@class='rc-price__text bg-c-text bg-c-text--body-1']");
         this.listApartementArea = page.locator("//span[@class='rc-info__location bg-c-text bg-c-text--body-3']");
         this.fullyBookedOncard = page.locator("div:nth-child(2) > div > .apartment-rc > .apartment-rc__inner > .apartment-rc__full > .apartment-rc__full-label");
@@ -206,9 +210,9 @@ public class ApartmentLandingPO {
      *
      * @return
      */
-    public List<String> getApartmentListByFurniture() {
+    public List<String> getApartmentListByUnitOrFurniture() {
         playwright.waitTillPageLoaded();
-        return playwright.getListInnerTextFromListLocator(listFurniture);
+        return playwright.getListInnerTextFromListLocator(listUnitAndFurniture);
     }
 
     /**
@@ -250,5 +254,20 @@ public class ApartmentLandingPO {
     public boolean isFullyBooked() {
         playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(fullyBookedOncard);
+    }
+
+    /**
+     * sorting apartement list by unit type
+     * @param unitType
+     */
+    public void filterByUnit(String unitType) {
+        playwright.selectDropdownByValue(filteringUnitType, unitType);
+    }
+
+    /**
+     * click on mamikos logo on navbar
+     */
+    public void clickOnMamikosLogo() {
+        playwright.clickOn(mamikosLogo);
     }
 }

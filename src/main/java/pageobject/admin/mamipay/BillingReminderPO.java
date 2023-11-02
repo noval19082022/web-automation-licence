@@ -39,7 +39,7 @@ public class BillingReminderPO {
         contentTextField = page.locator("textarea[name=\"content\"]");
         createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
         templateCreatedText = page.getByText("Template created.");
-        templateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("-1 untuk automation").setExact(true));
+        templateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("-1").setExact(true));
         WATemplateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("recurringbooking_voucher_d_plus_1_update"));
         cannotCreateTemplateText = page.getByText("Cannot create template.");
         saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
