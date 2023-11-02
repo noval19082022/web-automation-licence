@@ -234,7 +234,6 @@ public class NavigatesSteps {
     public void userNavigateToHelpPage() {
         page.bringToFront();
         playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
-        playwright.hardWait(3);
     }
 
     @And("user navigate to penyewa page")
