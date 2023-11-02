@@ -10,8 +10,8 @@ import utilities.PlaywrightHelpers;
 import java.util.List;
 
 public class HomepagePO {
-    private Page page;
-    private PlaywrightHelpers playwright;
+    private final Page page;
+    private final PlaywrightHelpers playwright;
 
     Locator actionBtn;
     Locator seeDetailBtn;
@@ -68,6 +68,8 @@ public class HomepagePO {
 
     Locator tenantJobs;
 
+    Locator yaSimpanButton;
+
     public HomepagePO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -114,6 +116,7 @@ public class HomepagePO {
         emailErrorMessage = page.locator("//div[@label=\"Email\"]//*[@class=\"bg-c-field__message\"]");
         tenantGender = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jenis kelamin dropdown-down"));
         tenantJobs = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pekerjaan dropdown-down"));
+        yaSimpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Simpan"));
     }
 
     /**
@@ -338,27 +341,29 @@ public class HomepagePO {
     public void clickOnSaveButton() {
         playwright.clickOn(saveButton);
     }
+
     /**
      * admin see Informasi Biaya Lain Displayed
      */
 
-    public boolean isInformasiBiayaLainDisplayed(String nameFee0, String nameFee1, String amountFee0, String amountFee1){
-        String listrik = "//p[normalize-space()='"+nameFee0+"']";
-        String parkir = "//p[normalize-space()='"+nameFee1+"']";
-        String harga0 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='"+amountFee0+"'])[1]";
-        String harga1 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='"+amountFee1+"'])[2]";
+    public boolean isInformasiBiayaLainDisplayed(String nameFee0, String nameFee1, String amountFee0, String amountFee1) {
+        String listrik = "//p[normalize-space()='" + nameFee0 + "']";
+        String parkir = "//p[normalize-space()='" + nameFee1 + "']";
+        String harga0 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='" + amountFee0 + "'])[1]";
+        String harga1 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='" + amountFee1 + "'])[2]";
         return page.querySelector(listrik) != null && page.querySelector(parkir) != null && page.querySelector(harga0) != null && page.querySelector(harga1) != null;
     }
 
     /**
      * admin click on dbet button
      */
-    public void clickDbetButton(){
+    public void clickDbetButton() {
         playwright.clickOn(dbetButton);
     }
 
     /**
      * admin see phone number error message
+     *
      * @return
      */
     public String getPhoneNumberErrorMessage() {
@@ -367,6 +372,7 @@ public class HomepagePO {
 
     /**
      * admin see tenant name error message
+     *
      * @return
      */
     public String getTenantNameErrorMessage() {
@@ -375,6 +381,7 @@ public class HomepagePO {
 
     /**
      * admin fill email
+     *
      * @param email
      */
     public void fillEmailTenant(String email) {
@@ -383,10 +390,27 @@ public class HomepagePO {
 
     /**
      * admin see email error message
+     *
      * @return
      */
     public String getEmailErrorMessage() {
         return playwright.getText(emailErrorMessage);
     }
 
+    /**
+     * admin click on ya simpan button
+     */
+    public void clickOnYaSimpanButton() {
+        playwright.clickOn(yaSimpanButton);
+    }
+
+    /**
+     * admin see status booking waiting for payment
+     *
+     * @return
+     */
+    public String getStatusBooking(String text) {
+        Locator statusBooking = page.locator("//*[contains(text(),'" + text + "')]");
+        return playwright.getText(statusBooking);
+    }
 }
