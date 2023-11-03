@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.pms.HomepagePO;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.Map;
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     HomepagePO homepage = new HomepagePO(page);
+
+    LoadingPO loading = new LoadingPO(page);
 
     private List<Map<String, String>> informasiPembayaran;
     private List<Map<String, String>> gender;
@@ -99,14 +102,15 @@ public class HomepageSteps {
         Assert.assertTrue(homepage.isInformasiBiayaLainDisplayed(nameFee0, nameFee1, amountFee0, amountFee1), "is displayed");
     }
 
-        @Then("admin click on save button")
+    @Then("admin click on save button")
     public void admin_click_on_save_button() {
             homepage.clickOnSaveButton();
-        }
+    }
 
     //--------------------dbet pms--------//
     @And("admin create contract tenant dbet")
     public void admin_create_contract_tenant_dbet() {
+        loading.waitForLoadingIconDisappear();
         homepage.clickOnTambahPenyewa();
         homepage.clickDbetButton();
     }
@@ -129,6 +133,16 @@ public class HomepageSteps {
     @Then("admin can see {string} on email")
     public void admin_can_see_x_on_email(String text) {
         Assert.assertEquals(homepage.getEmailErrorMessage(), text, "not display error message");
+    }
+
+    @And("admin click on ya simpan button")
+    public void admin_click_on_ya_simpan_button() {
+        homepage.clickOnYaSimpanButton();
+    }
+
+    @And("admin see block line status {string}")
+    public void admin_see_block_line_status (String text) {
+        Assert.assertEquals(homepage.getStatusBooking(text), text, "not display error message");
     }
 
 }

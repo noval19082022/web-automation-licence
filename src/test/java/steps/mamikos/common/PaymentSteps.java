@@ -15,6 +15,7 @@ import pageobject.owner.OwnerDashboardPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
+import pageobject.xendit.XenditApiPO;
 import testdata.InvoiceTestData;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -30,6 +31,7 @@ public class PaymentSteps {
     InvoicePO invoice = new InvoicePO(page);
     RiwayatBookingPO riwayatBooking = new RiwayatBookingPO(page);
     MidtransPaymentPO midtrans = new MidtransPaymentPO(page);
+    XenditApiPO xenditAPI = new XenditApiPO(page);
     List<Map<String, String>> voucherName;
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
@@ -350,5 +352,15 @@ public class PaymentSteps {
     @Then("tenant display warning message {string}")
     public synchronized void systemDisplayWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
+    }
+
+    @And("owner/tenant/user select payment using alfamart xendit as payment method from invoice detail")
+    public void paymentOwnerSuccessUsingAlfamartXenditAsPaymentMethod() {
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnAlfamart();
+        invoice.clickOnBayarSekarang();
+        var kodePerusahaan = invoice.getCodePembayaran();
+        var nominal = invoice.getTotalPembayaran();
+        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
     }
 }

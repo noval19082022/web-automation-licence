@@ -127,14 +127,14 @@ public class LoginPO {
      * Click back Pop up Login
      */
     public void clickBackOnPopUpLogin() {
-        backButtonLogin.click();
+        playwright.clickOn(backButtonLogin);
     }
 
     /**
      * Click Close on Pop up Login
      */
     public void clickCloseOnPopUpLogin() {
-        closeBtn.click();
+        playwright.clickOn(closeBtn);
     }
 
     /**

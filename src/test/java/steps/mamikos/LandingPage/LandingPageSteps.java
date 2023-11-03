@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -39,5 +40,20 @@ public class LandingPageSteps {
     @Then("user see Dikelola Mamikos filter is deactivate")
     public void userSeeDikelolaMamikosFilterIsDeactivate() throws InterruptedException {
         Assert.assertTrue(landing.isDikelolaMamikosDisplayed(), "Dikelola Mamikos Label is not displayed");
+    }
+
+    @When("user is on the LandingPage EnaknyaNgekos")
+    public void userIsOnTheLandingPageEnaknyaNgekos() {
+        Assert.assertTrue(playwright.getActivePageTitle().contains("enaknyangekos"));
+    }
+
+    @And("user want to play the video on LandingPage EnaknyaNgekos")
+    public void userWantToPlayTheVideoOnLandingPageEnaknyaNgekos() {
+        landing.openVideoThumbnail();
+    }
+
+    @Then("user see pop up video player is shown on EnaknyaNgekos LP and can play video it")
+    public void userSeePopUpVideoPlayerIsShownOnEnaknyaNgekosLPAndCanPlayVideoIt() {
+        landing.playVideoOnEnaknyaNgekosPage();
     }
 }
