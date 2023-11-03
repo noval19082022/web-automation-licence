@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.tenant.kostSayaPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -20,6 +21,7 @@ public class kostSayaSteps {
 
     kostSayaPO kostSaya = new kostSayaPO(page);
 
+    LoadingPO loading = new LoadingPO(page);
 
     @And("user click on masukkan kode dari pemilik button")
     public void userClickOnInputCode() {
@@ -55,6 +57,7 @@ public class kostSayaSteps {
     }
     @Then("user will see kos saya is still empty")
     public void userWillSeeKosSayaIsStillEmpty() {
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(kostSaya.getTitleKosSayaStillEmpty(), "Kamu belum menyewa kos");
     }
 }
