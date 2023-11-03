@@ -102,10 +102,10 @@ public class HomepageSteps {
         Assert.assertTrue(homepage.isInformasiBiayaLainDisplayed(nameFee0, nameFee1, amountFee0, amountFee1), "is displayed");
     }
 
-        @Then("admin click on save button")
+    @Then("admin click on save button")
     public void admin_click_on_save_button() {
             homepage.clickOnSaveButton();
-        }
+    }
 
     //--------------------dbet pms--------//
     @And("admin create contract tenant dbet")
@@ -133,6 +133,16 @@ public class HomepageSteps {
     @Then("admin can see {string} on email")
     public void admin_can_see_x_on_email(String text) {
         Assert.assertEquals(homepage.getEmailErrorMessage(), text, "not display error message");
+    }
+
+    @And("admin click on ya simpan button")
+    public void admin_click_on_ya_simpan_button() {
+        homepage.clickOnYaSimpanButton();
+    }
+
+    @And("admin see block line status {string}")
+    public void admin_see_block_line_status (String text) {
+        Assert.assertEquals(homepage.getStatusBooking(text), text, "not display error message");
     }
 
 }
