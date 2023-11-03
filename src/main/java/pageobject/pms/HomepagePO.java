@@ -274,7 +274,7 @@ public class HomepagePO {
         }
         checkInDateDropdown.click();
         playwright.waitFor(datePicker, 5000.0);
-        datePick = page.locator("//div[@class='vdp-datepicker__calendar']").getByText(this.date);
+        datePick = page.locator("//div[@class='date-wrapper']").getByText(this.date);
         List<Locator> datePicks = playwright.getLocators(datePick);
         for (Locator pick : datePicks) {
             if (pick.isEnabled() && pick.isVisible()) {
