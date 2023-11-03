@@ -252,7 +252,7 @@ public class CpDisbursementPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             String hari = today.format(dates);
-            date = page.locator(".day:not(.old):not(.new)").getByText(hari);
+            date = page.locator(".day:not(.old):not(.new)").getByText(hari, new Locator.GetByTextOptions().setExact(true));
             playwright.clickOn(tanggalTransferField);
             playwright.clickOn(date);
         } else {
