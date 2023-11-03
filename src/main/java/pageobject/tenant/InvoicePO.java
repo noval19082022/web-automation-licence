@@ -560,17 +560,13 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
         clickOnPilihPembayaran();
-        kartuKredit.click();
-        inputKartuKreditNumber.click();
-        page.keyboard().type(ccNumber);
-        inputKartuKreditMonth.click();
-        page.keyboard().type(month);
-        inputKartuKreditYear.click();
-        page.keyboard().type(years);
-        inputKartuKreditCCV.click();
-        page.keyboard().type(ccv);
-        clickOnBayarSekarang();
-        return new PaymentPO(page);
+        playwright.clickOn(kartuKredit);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditNumber, ccNumber);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditMonth, month);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditYear, years);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditCCV, ccv);
+        playwright.clickOn(bayarSekarangButton);
+        return new PaymentPO(ActiveContext.getActivePage());
     }
 
     /**

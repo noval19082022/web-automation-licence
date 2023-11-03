@@ -321,7 +321,7 @@ Feature: Payment BackOffice Staging
       | phone stag | phone prod   | password  |
       | 0892202100 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method Credit Card with cc number is "4000 0000 0000 1091", expired date month "12" years "99", and ccv is "010"
+    And tenant select payment method Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
     And tenant close unused browser tab
     And tenant logs out
 
