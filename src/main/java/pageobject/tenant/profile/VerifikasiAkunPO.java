@@ -74,7 +74,7 @@ public class VerifikasiAkunPO {
     }
 
     /**
-     * user change phone number
+     * user confirm change phone number
      */
     public void confirmChangePhoneNumber(){
         playwright.clickOn(changePhoneNumberButton);
