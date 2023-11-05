@@ -1,4 +1,4 @@
-@arac @pms @TEST_COOP-1074 @BBM8
+@arac @pms @TEST_COOP-1074 @BBM8 @ooo
 Feature: Create OOO "Short Stay" Type
 
   @continue
@@ -7,8 +7,7 @@ Feature: Create OOO "Short Stay" Type
     When admin login pms :
       | email                 | password    |
       | dhiandra@mamikos.com  | dh14ndr4321 |
-    And admin go to room allotment page
-    And admin search "Kost Singgahsini Auto Listing"
+    And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
       | 1           | 16         |
