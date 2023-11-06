@@ -1,5 +1,6 @@
 package pageobject.tenant.payment;
 
+import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -35,8 +36,8 @@ public class PaymentPO {
         this.paymentAmount = page.getByLabel("Payment Amount");
         this.flagBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
         // CC
-        this.codeCCPlaceHolder = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here");
-        this.submitBtnForCC = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByText("SUBMIT");
+        this.codeCCPlaceHolder = page.frameLocator("iframe").getByPlaceholder("112233");
+        this.submitBtnForCC = page.frameLocator("iframe").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("OK"));
         // riwayat booking
         this.lihatSelengkapnya = page.getByText("Lihat selengkapnya").first();
         this.lihatInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice"));
@@ -62,15 +63,8 @@ public class PaymentPO {
      * Payment method using cc
      */
     public void paymentUsingCC() {
-        page.waitForLoadState();
-        playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
+        playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "112233");
         playwright.clickOn(submitBtnForCC);
-        page.waitForTimeout(3_000);
-        String urlPaymentSignature = playwright.getActivePageURL()
-                .replace("select-payment/", "success-payment/")
-                .replace("step=1", "step=3");
-        playwright.navigateTo(urlPaymentSignature);
-        page.reload();
     }
 
     /**
