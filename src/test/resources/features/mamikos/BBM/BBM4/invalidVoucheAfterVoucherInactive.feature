@@ -33,7 +33,7 @@ Feature: Invalid Voucher After Applied, Voucher Is Inactive
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigate to mamikos voucher menu
     And admin input voucher with value "AUTOVINVALID" and click search button:
-    And admin activate mass voucher
+    And admin deactivate mass voucher
     Then System display alert message on mamipay web
 
   Scenario: Tenant can't Input Voucher AUTOVINVALID

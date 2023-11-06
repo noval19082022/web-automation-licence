@@ -421,6 +421,11 @@ public class AdminMamipayVoucherSteps {
         massVoucherForm.activateMassVoucher();
     }
 
+    @And("admin deactivate mass voucher")
+    public void adminDeactivateMassVoucher() throws InterruptedException {
+        massVoucherForm.deactivateMassVoucher();
+    }
+
     @Then("System display alert message on mamipay web")
     public void admin_can_sees_callout_message_is() {
         Assert.assertTrue(massVoucherForm.isAlertMessageDisplayed(), "Voucher AUTOVINVALID updated");
