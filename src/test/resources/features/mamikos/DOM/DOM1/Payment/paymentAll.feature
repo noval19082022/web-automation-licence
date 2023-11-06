@@ -127,7 +127,7 @@ Feature: Payment All
     Then tenant will see payment is success
 
   @paymentAlfamart @COOP-4606
-  Scenario: Tenant pay kos alfamart
+  Scenario: Tenant pay kos BBK alfamart
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
