@@ -74,6 +74,7 @@ public class InvoicePO {
     Locator mamipoinToggleButtonOff;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
+    Locator sayaSudahBayar;
     protected Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
@@ -138,6 +139,7 @@ public class InvoicePO {
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
+        sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
     }
 
     /**
@@ -635,12 +637,16 @@ public class InvoicePO {
      * click saya sudah bayar on invoice
      */
     public void sayaSudahBayar(){
-        var maxReload = 0;
-        playwright.clickOnText("Saya Sudah Bayar");
+        int maxReload = 5;
+        int reloadCount = 0;
+
+        playwright.clickOn(sayaSudahBayar);
+
         do {
             page.reload();
-            maxReload++;
-            if (maxReload == 5) {
+            reloadCount++;
+            if (reloadCount >= maxReload) {
+                // Handle error or break the loop here
                 break;
             }
         } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
