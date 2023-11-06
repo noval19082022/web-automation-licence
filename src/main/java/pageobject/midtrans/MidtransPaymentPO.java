@@ -29,7 +29,7 @@ public class MidtransPaymentPO {
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        successTransaction = page.getByText("Success! Success Payment VA");
+        successTransaction = page.getByText("Simulated payment is successful");
     }
 
     /**

@@ -74,8 +74,7 @@ public class InvoicePO {
     Locator mamipoinToggleButtonOff;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
-    Locator sudahBayarButton;
-    protected Locator pembayaranBerhasilText;
+    Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -138,7 +137,6 @@ public class InvoicePO {
         mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
-        sudahBayarButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
     }
 
@@ -488,7 +486,6 @@ public class InvoicePO {
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
-       // playwright.clickOn(sudahBayarButton);
         do {
             page.reload();
             maxReload++;
@@ -509,7 +506,6 @@ public class InvoicePO {
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
-        playwright.clickOn(sudahBayarButton);
         do {
             page.reload();
             maxReload++;
