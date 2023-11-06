@@ -640,6 +640,22 @@ public class InvoicePO {
     }
 
     /**
+     * click saya sudah bayar on invoice
+     */
+    public void sayaSudahBayar(){
+        var maxReload = 0;
+        playwright.clickOnText("Saya Sudah Bayar");
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+
+    }
+
+    /**
      * Click MamiPoin Toggle Button to On
      */
     public void clickMamipoinToggleButtonToOn() {

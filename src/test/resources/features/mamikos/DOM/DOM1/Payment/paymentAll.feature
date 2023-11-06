@@ -125,3 +125,14 @@ Feature: Payment All
     And tenant select payment method using "PERMATA"
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
+  @paymentAlfamart @COOP-4606
+  Scenario: Tenant pay kos alfamart
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202100 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method using Alfamart
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
