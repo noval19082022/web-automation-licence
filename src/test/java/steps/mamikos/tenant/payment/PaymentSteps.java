@@ -9,6 +9,7 @@ import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
+import pageobject.xendit.XenditApiPO;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class PaymentSteps {
     InvoicePO invoicePO = new InvoicePO(page);
     PaymentPO paymentPO;
     MidtransPaymentPO midtransPaymentPO;
+    XenditApiPO xenditAPI = new XenditApiPO(page);
 
     @And("tenant select payment method BNI with VA number {string} and amount {string}")
     public void paymentBNI(String VA, String amount) {
@@ -27,16 +29,13 @@ public class PaymentSteps {
         paymentPO = invoicePO.paymentUsingBNI();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         paymentPO.paymentUsingBNI(VA, amount);
-
     }
 
     @And("tenant select payment method Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
     public void tenantSelectPaymentMethodCreditCard(String ccNumber, String month, String years, String ccv) {
-        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO = invoicePO.paymentUsingCC(ccNumber, month, years, ccv);
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO.paymentUsingCC();
+        riwayatBookingPO.clickOnBayarSekarangButton()
+                .paymentUsingCC(ccNumber, month, years, ccv)
+                .paymentUsingCC();
     }
 
     @And("tenant select payment method with DANA")
@@ -118,5 +117,18 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
+    }
+
+    @And("tenant select payment method using Alfamart")
+    public void tenantSelectPaymentMethodUsingAlfamart() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnAlfamart();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        invoicePO.sayaSudahBayar();
+
     }
 }

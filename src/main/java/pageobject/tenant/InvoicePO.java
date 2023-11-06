@@ -74,7 +74,8 @@ public class InvoicePO {
     Locator mamipoinToggleButtonOff;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
-    Locator pembayaranBerhasilText;
+    Locator sayaSudahBayar;
+    protected Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -138,6 +139,7 @@ public class InvoicePO {
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
+        sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
     }
 
     /**
@@ -556,17 +558,13 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
         clickOnPilihPembayaran();
-        kartuKredit.click();
-        inputKartuKreditNumber.click();
-        page.keyboard().type(ccNumber);
-        inputKartuKreditMonth.click();
-        page.keyboard().type(month);
-        inputKartuKreditYear.click();
-        page.keyboard().type(years);
-        inputKartuKreditCCV.click();
-        page.keyboard().type(ccv);
-        clickOnBayarSekarang();
-        return new PaymentPO(page);
+        playwright.clickOn(kartuKredit);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditNumber, ccNumber);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditMonth, month);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditYear, years);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditCCV, ccv);
+        playwright.clickOn(bayarSekarangButton);
+        return new PaymentPO(ActiveContext.getActivePage());
     }
 
     /**
@@ -633,6 +631,26 @@ public class InvoicePO {
      */
     public void clickTnCInvoice() {
         tncInvoiceText.click();
+    }
+
+    /**
+     * click saya sudah bayar on invoice
+     */
+    public void sayaSudahBayar(){
+        int maxReload = 5;
+        int reloadCount = 0;
+
+        playwright.clickOn(sayaSudahBayar);
+
+        do {
+            page.reload();
+            reloadCount++;
+            if (reloadCount >= maxReload) {
+                // Handle error or break the loop here
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+
     }
 
     /**
