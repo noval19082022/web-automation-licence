@@ -25,7 +25,7 @@ public class RiwayatBookingPO {
     public RiwayatBookingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
+        bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang")).first();
         checkinButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Check-in Kos"));
         chekcinOnPopUpButton = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("close Pastikan")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Check-in"));
         doneToKostSayaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai & ke Kos Saya"));

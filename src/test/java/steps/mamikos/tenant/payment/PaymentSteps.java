@@ -9,6 +9,7 @@ import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
+import pageobject.xendit.XenditApiPO;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class PaymentSteps {
     InvoicePO invoicePO = new InvoicePO(page);
     PaymentPO paymentPO;
     MidtransPaymentPO midtransPaymentPO;
+    XenditApiPO xenditAPI = new XenditApiPO(page);
 
     @And("tenant select payment method BNI with VA number {string} and amount {string}")
     public void paymentBNI(String VA, String amount) {
@@ -115,5 +117,18 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
+    }
+
+    @And("tenant select payment method using Alfamart")
+    public void tenantSelectPaymentMethodUsingAlfamart() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnAlfamart();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        invoicePO.sayaSudahBayar();
+
     }
 }
