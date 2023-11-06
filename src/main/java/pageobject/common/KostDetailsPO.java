@@ -1784,7 +1784,7 @@ public class KostDetailsPO {
      * Click on button text
      */
     public void clickOnBytextButton(String buttonText) {
-        String selector = "(//a[normalize-space()='"+ buttonText +"'])";
+        String selector = "//a[contains(.,'"+buttonText+"')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
     }
