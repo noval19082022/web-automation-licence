@@ -70,7 +70,7 @@ public class ChatOwnerPO {
         gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
-        Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        Iunderstand = page.locator("//button[@class=' shepherd-button ']");
     }
 
     /**
@@ -144,6 +144,9 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 5000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         playwright.clickOn(acceptFromChatRoomButton);
         playwright.waitFor(yaTerimaButton);
         playwright.clickOn(yaTerimaButton);

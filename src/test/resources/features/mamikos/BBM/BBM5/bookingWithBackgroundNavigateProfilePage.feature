@@ -1,32 +1,66 @@
 @BBM5
 Feature: BnB feature with background navigate profile page
 
-  @rejectReview
-  Scenario: Reject request review kos
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+
+  Scenario: Cancel and create booking
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
       | email stag                   | email prod                   | password  |
-      | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigates to "review"
-    And admin reject request review kos "Kost Cyllene Tipe A Tobelo Utara Halmahera Utara"
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag | phone prod |
+      | 0892202358 | 0892202358 |
+    And admin akhiri contract
+    Then admin should success terminate contract
 
+  Scenario: cancel booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0892202358 | 0892202358 | qwerty111 |
+    And user cancel booking
 
-  @kost-saya-revamp-phase2
+  #Scenario: create booking
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                             | kost name prod |
+      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+    And tenant booking kost for "today" and input rent duration equals to 0
+    Then tenant should success booking kost
+
+  Scenario: Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 089120220103 | 0890000000289 | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner accept booking via Homepage
+
+  @continue
+  Scenario: Tenant pay kos
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0892202358 | 0892202358 | qwerty111 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
+
+  Scenario: Tenant check-in kos
+    And tenant navigate to riwayat and draf booking
+    And tenant checkin kost from riwayat booking
+
+  @continue
   Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (COOP-1979)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221022 | 08100000622 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0892202358 | 08100000622 | qwerty111 |
     And tenant navigate to kost saya page
     And user click on chat button in top bar tenant home page
     Then user can see Chat list title
 
-  @TEST_COOP-1978
+  @continue
   Scenario: [Kos Saya][Bantuan]Check Bantuan on kost saya page (BBM-911)
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221022 | 08100000622 | qwerty123 |
     And tenant navigate to kost saya page
     And user clicks on Bantuan menu
     And user clicks on "Mengapa saya harus check-in?"
@@ -35,24 +69,19 @@ Feature: BnB feature with background navigate profile page
     And user navigates to help page
     And user clicks on "Hubungi CS Mamikos (aktif 24 jam)"
 
-  @TEST_COOP-1971
   Scenario: [Kost saya][Content] Content Kos Saya (BBM-884)
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221022 | 08100000622 | qwerty123 |
     And tenant navigate to kost saya page
     And user clicks on "Lihat informasi kos"
     Then user can see informasi kos page
     And user verify Kost Review entry point is not displayed
     Then user see activities in My Kos
 
-  @TEST_COOP-1976
+
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221022 | 08100000622 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0892202358 | 08100000622 | qwerty111 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
     And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
@@ -63,11 +92,20 @@ Feature: BnB feature with background navigate profile page
     And user click ajukan berhenti sewa on kontrak saya after review kos
     And user logs out as a Tenant user
     When user login as owner:
-      | phone stag  | phone prod  | password  |
-      | 0890000000382 | 08100000622 | Bismillah@01 |
+      | phone stag   | phone prod  | password  |
+      | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Cyllene Tipe A Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
     And user click on kontrak sewa button
     And user click on tolak button
     And user click on Ubah kontrak penyewa button
-    Then user check prices penyewa owner are same to contract at kos saya "Rp12.000.000 / tahun"
+    Then user check prices penyewa owner are same to contract at kos saya "Rp1.100.000 / bulan"
+
+  @rejectReview
+  Scenario: Reject request review kos
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin navigates to "review"
+    And admin reject request review kos "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
