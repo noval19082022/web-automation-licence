@@ -29,16 +29,13 @@ public class PaymentSteps {
         paymentPO = invoicePO.paymentUsingBNI();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         paymentPO.paymentUsingBNI(VA, amount);
-
     }
 
     @And("tenant select payment method Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
     public void tenantSelectPaymentMethodCreditCard(String ccNumber, String month, String years, String ccv) {
-        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO = invoicePO.paymentUsingCC(ccNumber, month, years, ccv);
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO.paymentUsingCC();
+        riwayatBookingPO.clickOnBayarSekarangButton()
+                .paymentUsingCC(ccNumber, month, years, ccv)
+                .paymentUsingCC();
     }
 
     @And("tenant select payment method with DANA")

@@ -321,7 +321,7 @@ Feature: Payment BackOffice Staging
       | phone stag | phone prod   | password  |
       | 0892202100 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method Credit Card with cc number is "4000 0000 0000 1091", expired date month "12" years "99", and ccv is "010"
+    And tenant select payment method Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
     And tenant close unused browser tab
     And tenant logs out
 
@@ -969,9 +969,9 @@ Feature: Payment BackOffice Staging
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
-      | invoice                    | shortlink                                                                                                                             |
-      | GP1/20230802/00012139/4597 | https://pay-jambu.kerupux.com/invoice/select-payment/96152?signature=88cf29ef9b9a01dc744213c9006a2417e153201de854e3be2e4ac65922972d9d |
-      | GP2/20230801/00012132/6676 | https://pay-jambu.kerupux.com/invoice/select-payment/96000?signature=32b4422fdf70734dc879f1af84df1d4a8eb81a1c7d3f3df115a706e6f67ffd43 |
+      | invoice                    | shortlink                                                                                                                              |
+      | GP1/20231027/00013487/9781 | https://pay-jambu.kerupux.com/invoice/select-payment/105542?signature=129b2a3a5865d121d8ffe62b6061a248b6aa1a3a05edc2b8b59fa6a7263a2980 |
+      | GP2/20231102/00013558/6962 | https://pay-jambu.kerupux.com/invoice/select-payment/106001?signature=3e8df9c95857f6db388a202e599da2e89dd94bac12074f307cc266eb8c1d560a |
 
   @TEST_DOM-660
   Scenario: [BackOffice][Refund] Set transaction refund Failed
