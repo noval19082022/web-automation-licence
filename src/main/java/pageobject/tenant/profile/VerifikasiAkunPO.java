@@ -16,6 +16,7 @@ public class VerifikasiAkunPO {
     Locator inboxVerifEmail;
     Locator mailhogEmailVerifButton;
     Locator otpVerificationMessageText;
+    Locator otpCountDownMessageText;
 
     public VerifikasiAkunPO(Page page) {
         this.page = page;
@@ -28,6 +29,7 @@ public class VerifikasiAkunPO {
         this.inboxVerifEmail = page.locator("(//*[contains(text(),'Verifikasi email')])[1]");
         this.mailhogEmailVerifButton = page.frameLocator("#preview-html").locator(".button-container > div");
         this.otpVerificationMessageText = page.locator("  #contentBox .notif-phone-verification");
+        this.otpCountDownMessageText = page.locator("#contentBox .patient-text");
         }
 
     /**
@@ -69,6 +71,12 @@ public class VerifikasiAkunPO {
         playwright.clickOn(changePhoneNumberButton);
         playwright.clickOn(textBoxField);
         playwright.fill(textBoxField, phone);
+    }
+
+    /**
+     * user confirm change phone number
+     */
+    public void confirmChangePhoneNumber(){
         playwright.clickOn(changePhoneNumberButton);
     }
 
@@ -88,5 +96,22 @@ public class VerifikasiAkunPO {
         playwright.clickOn(changePhoneNumberButton);
         playwright.clickOn(textBoxField);
         playwright.clearText(textBoxField);
+    }
+
+    /**
+     * user clear email address
+     */
+    public void emptyEmailAddress(){
+        playwright.clickOn(changeEmailButton);
+        playwright.clearText(textBoxField);
+    }
+
+    /**
+     * Get OTP Countdown Message Text
+     * @return string
+     */
+    public String getOTPCountDownMessage() {
+        playwright.waitTillLocatorIsVisible(otpCountDownMessageText,5.0);
+        return playwright.getText(otpCountDownMessageText).replaceAll("\\s+"," ");
     }
 }
