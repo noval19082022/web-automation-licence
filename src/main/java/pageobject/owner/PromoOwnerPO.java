@@ -125,8 +125,8 @@ public class PromoOwnerPO {
         playwright.pageScrollUntilElementIsVisible(startDatePicker);
         playwright.clickOn(startDatePicker);
         String locatorElement;
-        var tomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 1, 0, 0);
-        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 2, 0, 0);
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         try {
             switch (periodePromo){
                 case "tomorrow":
@@ -141,8 +141,7 @@ public class PromoOwnerPO {
         } catch (Exception e) {
             throw new IllegalStateException("Unexpected value: " + periodePromo);
         }
-        Locator startDatePromo = page.locator(".dropdown.is-active").getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(locatorElement));
-        playwright.hardWait(2000.0);
+        Locator startDatePromo = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(startDatePromo);
     }
 
@@ -155,8 +154,8 @@ public class PromoOwnerPO {
         endDatePicker = page.locator("//div[contains(@class, 'period2')]//input[@class='input']");
         playwright.clickOn(endDatePicker);
         String locatorElement;
-        var tomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 1, 0, 0);
-        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("dd", 2, 0, 0);
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         try {
             switch (periodePromo){
                 case "tomorrow":
@@ -171,8 +170,7 @@ public class PromoOwnerPO {
         } catch (Exception e) {
             throw new IllegalStateException("Unexpected value: " + periodePromo);
         }
-
-        Locator endDatePromo = page.locator(".dropdown.is-active").getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(locatorElement));
+        Locator endDatePromo = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(endDatePromo);
     }
 
