@@ -2,7 +2,7 @@
 
   Feature: Listing Availability on Chat Room
 
-    @TEST_COOP-782 @BBM8 @continue
+    @TEST_COOP-782 @BBM8
     Scenario: Check "Ajukan Sewa" button if the room is available for today
       Given user go to mamikos homepage
       When user login as tenant via phone number:

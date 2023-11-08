@@ -16,10 +16,7 @@ Feature: Survey Tenant
 
   @TEST_COOP-2570 @continue
   Scenario: Reschedule survei from chat room
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321216 | 08100000622 | mamikosqa123 |
+    When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini"
     And user change schedule survey if the survey already submitted
@@ -29,10 +26,7 @@ Feature: Survey Tenant
 
   @TEST_COOP-2517 @continue
   Scenario: cancel survei from chat template on Kost Detail
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321216 | 08100000622 | mamikosqa123 |
+    When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini"
     And user batalkan survey if the survey already submitted
@@ -42,10 +36,7 @@ Feature: Survey Tenant
 
   @TEST_COOP-2569 @continue
   Scenario: Submit Survey for Uncontrolled Property
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0890867321216 | 08100000622 | mamikosqa123 |
+    When user go to mamikos homepage
     And user search for Kost with name "Kos Loyal Kretek" and selects matching result
     And user click chat in kos detail
     Then question "Saya ingin survei dulu" is not displayed
@@ -60,12 +51,8 @@ Feature: Survey Tenant
     And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini" in the search field on main page
     Then user verify nama property on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
 
-  @TEST_COOP-2873 @continue
+  @TEST_COOP-2873
   Scenario: Survey Fase and Status for Uncontrolled Property
-    Given admin go to pms singgahsini
-    When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
-    And admin go to tenant communication menu
+    When admin go to tenant communication menu
     And user choose "Nama Properti" and input "Kos Loyal Kretek" in the search field on main page
     Then user verify nama property on main page filter is not "Kos Loyal Kretek"
