@@ -16,7 +16,7 @@ Feature: Profile Navbar
   @TEST_PMAN-4947 @pman-prod @continue
   Scenario: Check Profil Page
       #Information profil section
-    And user clicks Profil menu
+    When user clicks Profil menu
     Then the "Information Profil" is displayed
     #Scenario: Check Facility Section on Profil Page
     Then the "Facility Section" is displayed
@@ -31,5 +31,5 @@ Feature: Profile Navbar
 
   @TEST_PMAN-4936
   Scenario: Check Room Type
-    And user clicks Tipe Kamar menu
+    When user clicks Tipe Kamar menu
     Then the Room Type and Room Total section in Room Type is displayed
