@@ -13,6 +13,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -27,6 +28,7 @@ public class NavigatesSteps {
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
     VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -191,7 +193,8 @@ public class NavigatesSteps {
 
     @And("owner/user navigates to owner dashboard")
     public void userNavigatesToOwnerDashboard() {
-        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0);
+        loading.waitForLoadingIconDisappear();
     }
 
     @And("tenant navigate to riwayat kos page")
@@ -234,7 +237,6 @@ public class NavigatesSteps {
     public void userNavigateToHelpPage() {
         page.bringToFront();
         playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
-        playwright.hardWait(3);
     }
 
     @And("user navigate to penyewa page")

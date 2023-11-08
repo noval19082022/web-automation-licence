@@ -7,6 +7,7 @@ import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CpDisbursementPO {
@@ -19,6 +20,7 @@ public class CpDisbursementPO {
     private Locator cpDisbursementTab;
     private Locator resetFilterButton;
     private Locator row;
+    private Locator daftarTransferTab;
 
     //Tambah Data Transfer
     private Locator namaPropertyField;
@@ -59,12 +61,29 @@ public class CpDisbursementPO {
     private Locator statusTransferDropdown;
     private Locator statusTransferValue;
     private Locator statusTransferLabel;
+    private Locator tglTransferKePemilikTable;
     //Transfer Diproses
 
     //Transfer Gagal
     private Locator jadwalTransferDropdown;
     private Locator transferFailedDateDropdown;
     //Transfer Gagal
+
+    //Preview Data Transfer
+    private Locator transferActionButton1;
+    private Locator totalPendapatanFieldOnPreview;
+    private Locator tipeTransaksiSelectOnPreview;
+    private Locator propertyNamePreviewModal;
+    private Locator tglTransferKePemilikOnPreview;
+    private Locator transferSekarangBtn;
+    private Locator toastMessage;
+    private Locator productTypeTextOnPreviewModal;
+    private Locator bankTextOnPreviewModal;
+    private Locator nomorRekeningTextOnPreviewModal;
+    private Locator namaPemilikRekeningTextOnPreviewModal;
+    private Locator nomorTeleponPemilikTextOnPreviewModal;
+    private Locator tipeDisbursementOnPreview;
+    //Preview Data Transfer
 
     public CpDisbursementPO(Page page){
         this.page = page;
@@ -91,6 +110,7 @@ public class CpDisbursementPO {
         closePopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
         lainnyaTipeTransaksiField = page.locator("#transaction_type_text-add-new");
         tambahkanDataTransferButton = page.locator("#transfer-submit-add-new");
+        daftarTransferTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Transfer"));
 
         tanggalTransferPemilikTable = page.locator("td b");
         namaPropertyTable = page.locator("tr td:nth-of-type(3)");
@@ -107,9 +127,25 @@ public class CpDisbursementPO {
         statusTransferDropdown = page.locator(".filter-option").nth(1);
         statusTransferValue = page.locator("a[role='option'] span");
         statusTransferLabel = page.locator("tr td:nth-of-type(7)");
+        tglTransferKePemilikTable = page.locator("tr td:nth-of-type(2) b").first();
+
 
         jadwalTransferDropdown = page.locator("#daterange-cp-disbursement");
         transferFailedDateDropdown = page.locator("#daterange-cp-disbursement_failed");
+
+        transferActionButton1 = page.locator("(//td)[7]/button");
+        propertyNamePreviewModal = page.locator("(//*[@class='easy-autocomplete'])[1]/input");
+        totalPendapatanFieldOnPreview = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan total pendapatan"));
+        tipeTransaksiSelectOnPreview = page.locator("//select[@name='transaction_type']");
+        tglTransferKePemilikOnPreview = page.locator("//*[@name='transfer_due_date']").first();
+        transferSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Transfer Sekarang"));
+        toastMessage = page.locator("//*[@class='callout callout-success']");
+        productTypeTextOnPreviewModal = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Preview Data Transfer")).getByText("APIK");
+        bankTextOnPreviewModal = page.locator("//select[@class='form-control pay-backoffice__input']");
+        nomorRekeningTextOnPreviewModal = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Preview Data Transfer")).getByPlaceholder("Masukkan nomor rekening");
+        namaPemilikRekeningTextOnPreviewModal = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
+        nomorTeleponPemilikTextOnPreviewModal = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Preview Data Transfer")).getByPlaceholder("Masukkan nomor telepon pemilik");
+        tipeDisbursementOnPreview = page.locator("//select[@name='disbursement_type']");
     }
 
     /**
@@ -216,7 +252,7 @@ public class CpDisbursementPO {
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
             String hari = today.format(dates);
-            date = page.locator(".day:not(.old):not(.new)").getByText(hari);
+            date = page.locator(".day:not(.old):not(.new)").getByText(hari, new Locator.GetByTextOptions().setExact(true));
             playwright.clickOn(tanggalTransferField);
             playwright.clickOn(date);
         } else {
@@ -423,7 +459,7 @@ public class CpDisbursementPO {
      * @param tab
      */
     public void openCPDisbursementTab(String tab) {
-        cpDisbursementTab = page.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(tab));
+        cpDisbursementTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(tab));;
 
         playwright.clickOn(cpDisbursementTab);
     }
@@ -492,5 +528,237 @@ public class CpDisbursementPO {
      */
     public String getTransferFailedValue() {
         return playwright.getText(transferFailedDateDropdown);
+    }
+
+    /**
+     * Clicks Action Transfer on Daftar Transfer
+     */
+    public void clickActionTransfer() {
+        playwright.clickOn(transferActionButton1);
+    }
+
+    /**
+     * Edit Nama Property on Preview Data Transfer
+     * @param name
+     */
+    public void editNamaProperty(String name) {
+        playwright.clearText(propertyNamePreviewModal);
+        playwright.fillCharacterByCharacter(propertyNamePreviewModal, name);
+    }
+
+    /**
+     * Clicks First Property Suggestion
+     */
+    public void clickFirstPropertySuggestion() {
+        playwright.waitTillPageLoaded(10000.0);
+        playwright.clickOn(propertySuggestion.first());
+    }
+
+    /**
+     * Edit Total Pendapatan on Preview Data Transfer
+     * @param s
+     */
+    public void editTotalPendapatan(String s) {
+        playwright.clearText(totalPendapatanFieldOnPreview);
+        playwright.fill(totalPendapatanFieldOnPreview, s);
+    }
+
+    /**
+     * Edit Tipe Transaksi on Preview Data Transfer
+     * @param type
+     */
+    public void editTipeTransaksi(String type) {
+        playwright.selectDropdownByValue(tipeTransaksiSelectOnPreview.first(), type);
+    }
+
+    /**
+     * Edit Tanggal Transfer on Preview Data Transfer
+     */
+    public void editTanggalTransfer(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+        Date dt = calendar.getTime();
+        String hari = tomorrow.format(dt);
+        playwright.clickOn(tglTransferKePemilikOnPreview);
+        date = page.locator("//td[@class='active day']/following-sibling::*[contains(text(),'" +hari+ "')]");
+        playwright.clickOn(date);
+    }
+
+    /**
+     * Clicks Transfer Sekarang button on Preview Data Transfer
+     */
+    public void clicksTransferSekarang() {
+        playwright.clickOn(transferSekarangBtn);
+    }
+
+    /**
+     * Get string Toast Message when Edit Preview Data Transfer success
+     * @return String Toast Message
+     */
+    public String getToastMessage() {
+        return playwright.getText(toastMessage);
+    }
+
+    /**
+     * Get string Tanggal Transfer Coloumn on Daftar Transfer
+     * @return string Tanggal Transfer Coloum
+     */
+    public String getTglTransferCol() {
+        return playwright.getText(tglTransferKePemilikTable);
+    }
+
+    /**
+     * Get string Nama Property Coloumn on Daftar Transfer
+     * @return string Nama Property Coloumn
+     */
+    public String getNamaPropCol() {
+        System.out.println(namaPropertyTable.first());
+        return playwright.getText(namaPropertyTable.first()).substring(0, 45);
+    }
+
+    /**
+     * Get string Tipe Transaksi Coloumn on Daftar Transfer
+     * @return string Tipe Transaksi Coloumn
+     */
+    public String getTipeTransaksiCol() {
+        return playwright.getText(tipeTransaksiTable.first());
+    }
+
+    /**
+     * Get string Total Pendapatan Coloumn on Daftar Transfer
+     * @return string Total Pendapatan Coloumn
+     */
+    public String getTotalPndptnCol() {
+        return playwright.getText(totalPendapatanTable.first());
+    }
+
+    /**
+     * Get string Status Transfer After Edit on Preview Data Transfer
+     * @return string Status Transfer After Edit
+     */
+    public String getStatusTransferAfterEdit() {
+        return playwright.getText(statusTransferLabel.first());
+    }
+
+    /**
+     * Get string Status Transfer Without Edit
+     * @return string Status Transfer Without Edit
+     */
+    public String getStatusTransferWithoutEdit() {
+        return playwright.getText(statusTransferLabel.first());
+    }
+
+    /**
+     * Get string Property Name on Preview Data Transfer
+     * @return string Property Name
+     */
+    public String getPropertyNameOnPreview() {
+        return playwright.getInputValue(propertyNamePreviewModal);
+    }
+
+    /**
+     * Get string Product Type on Preview Data Transfer
+     * @return string Product Type
+     */
+    public String getProductTypeOnPreview() {
+        return playwright.getText(productTypeTextOnPreviewModal);
+    }
+
+    /**
+     * Get string Bank on Preview Data Transfer
+     * @return string Bank
+     */
+    public String getBankOnPreview() {
+        return playwright.getInputValue(bankTextOnPreviewModal.first());
+    }
+
+    /**
+     * Get string Nomor Rekening on Preview Data Transfer
+     * @return string Nomor Rekening
+     */
+    public String getNoRekeningOnPreview() {
+        return playwright.getInputValue(nomorRekeningTextOnPreviewModal);
+    }
+
+    /**
+     * Get string Nama Pemilik Rekening on Preview Data Transfer
+     * @return string Nama Pemilik Rekening
+     */
+    public String getNamaPemilikRekeningOnPreview() {
+        return playwright.getInputValue(namaPemilikRekeningTextOnPreviewModal);
+    }
+
+    /**
+     * Get string Nomor Telepon Pemilik on Preview Data Transfer
+     * @return string Nomor Telepon Pemilik
+     */
+    public String getNoTelponPemilikOnPreview() {
+        return playwright.getInputValue(nomorTeleponPemilikTextOnPreviewModal);
+    }
+
+    /**
+     * Get string Total Pendapatan on Preview Data Transfer
+     * @return string Total Pendapatan
+     */
+    public String getTotalPendapatanOnPreview() {
+        return playwright.getInputValue(totalPendapatanFieldOnPreview.first());
+    }
+
+    /**
+     * Get string Tipe Transaksi on Preview Data Transfer
+     * @return string Tipe Transaksi
+     */
+    public String getTipeTransaksiOnPreview() {
+        return playwright.getInputValue(tipeTransaksiSelectOnPreview.first());
+    }
+
+    /**
+     * Get string Tanggal Transfer on Preview Data Transfer
+     * @return string Tanggal Transfer
+     */
+    public String getTanggalTransferOnPreview() {
+        return playwright.getInputValue(tglTransferKePemilikOnPreview);
+    }
+
+    /**
+     * Get string Disbursement Type on Preview Data Transfer
+     * @return string Disbursement Type
+     */
+    public String getDisbursementTypeOnPreview() {
+        return playwright.getInputValue(tipeDisbursementOnPreview.first());
+    }
+
+    /**
+     * Get string Nama Property Coloumn
+     * @return string Nama Property Coloumn
+     */
+    public String getNamaPropColWithoutEdit() {
+        return playwright.getText(namaPropertyTable.first()).substring(0, 48);
+    }
+
+    /**
+     * Get string Detail Rekening Coloumn
+     * @return string Detail Rekening Coloumn
+     */
+    public String getDetailRekColWithoutEdit() {
+        return playwright.getText(detailRekeningTable.first()).substring(0, 13);
+    }
+
+    /**
+     * Edit Nomor Rekening on Preview Data Transfer
+     * @param rek
+     */
+    public void editNoRekening(String rek) {
+        playwright.clearText(nomorRekeningTextOnPreviewModal);
+        playwright.fillCharacterByCharacter(nomorRekeningTextOnPreviewModal, rek);
+    }
+
+    /**
+     * Get string Nomor Rekening on Preview Data Transfer
+     * @return string Nomor Rekening
+     */
+    public String getNoRekeningPreview() {
+        return playwright.getInputValue(nomorRekeningTextOnPreviewModal);
     }
 }

@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
@@ -17,6 +18,8 @@ public class OwnerRejectBookingSteps {
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     PengajuanSewaPO pengajuanBooking = new PengajuanSewaPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
+
+    LoadingPO loading = new LoadingPO(page);
 
     @When("owner reject booking")
     public void ownerRejectBooking() {
@@ -40,6 +43,7 @@ public class OwnerRejectBookingSteps {
 
     @And("owner select reason reject kos {string}")
     public void ownerSelectRejectBookingKos(String reason) {
+        loading.waitForLoadingIconDisappear();
         billBookingManage.ownerSelectRejectBookingKos(reason);
     }
 

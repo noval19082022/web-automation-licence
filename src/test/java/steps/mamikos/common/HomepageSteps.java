@@ -188,4 +188,23 @@ public class HomepageSteps {
     public void userWillSeePromoNgebutInfoOnKostCard() {
         Assert.assertNotNull(home.promoNgebutInfo());
     }
+
+
+    @When("user want to visit apartment list page from ads Dropdown")
+    public void userWantToVisitApartementListPageFromAdsDropdown() {
+        home.visitApartmentListPage();
+    }
+
+    @And("user want to click on App Store on the footer")
+    public void userWantToClickOnAppStoreOnTheFooter() {
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            home.clickOnAppStore();
+        });
+        ActiveContext.setActivePage(page1);
+    }
+
+    @And("user want to visit cari kost list page from ads Dropdown")
+    public void userWantToVisitCariKostListPageFromAdsDropdown() {
+        home.visitCariKosttListPage();
+    }
 }

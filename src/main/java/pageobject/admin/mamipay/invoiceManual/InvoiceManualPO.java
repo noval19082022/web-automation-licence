@@ -43,6 +43,7 @@ public class InvoiceManualPO {
     private Locator kebabBtn;
     private Locator ubahStatusBtn;
     private Locator statusInvCol;
+    private Locator lastInvoiceNumber;
     // Invoice List Page
 
     //Filter Invoice Manual
@@ -1523,6 +1524,11 @@ public class InvoiceManualPO {
             System.out.println(valueJenisBiaya.nth(i));
             assertThat(valueJenisBiaya.nth(i)).hasText(result);
         }
+    }
+
+    public String getLastInvoiceNumber() {
+        lastInvoiceNumber = page.locator("tr td>a:nth-of-type(1)").last();
+        return playwright.getText(lastInvoiceNumber);
     }
     //---End of Filter Invoice Manual---//
 }

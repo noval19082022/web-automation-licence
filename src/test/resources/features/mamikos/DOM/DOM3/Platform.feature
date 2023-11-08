@@ -89,3 +89,173 @@ Feature: [Test-Execution][DOM] Web - Platform
 		#  Scenario: Positive case tenant sort the list of apartments most expensive
     When user filter apartment by price direction is "Harga Termahal"
     Then user see displays apartment lists by price direction is "Harga Termahal"
+
+  @TEST_DOM-391 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - Play Video
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user want to play the video on LandingPage EnaknyaNgekos
+    Then user see pop up video player is shown on EnaknyaNgekos LP and can play video it
+
+  @TEST_DOM-390 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Unit Type
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user filter apartment by unit type is "1-Room Studio"
+    Then user see apartment lists by unit type is "1-Room Studio"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "1 BR"
+    When user filter apartment by unit type is "1 BR"
+    Then user see apartment lists by unit type is "1 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "2 BR"
+    When user filter apartment by unit type is "2 BR"
+    Then user see apartment lists by unit type is "2 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "3 BR"
+    When user filter apartment by unit type is "3 BR"
+    Then user see apartment lists by unit type is "3 BR"
+
+		#  Scenario: Positive case tenant search apartment filter by unit type "4 BR"
+    When user filter apartment by unit type is "4 BR"
+    Then user see apartment lists by unit type is "4 BR"
+
+  @TEST_DOM-388 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Login as Tenant Can View Profile Picture and Option Dropdown Menu Profile
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    Then tenant can see profile dropdown option
+
+  @TEST_DOM-385 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Hubungi Pengelola
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on hubungi pengelola button
+    And user select question "Boleh tahu alamat lengkap apartemen ini?"
+    And user click send chat from popup
+    Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
+
+  @TEST_DOM-383 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Positive case tenant search apartment by keyword
+    Given user go to mamikos homepage
+    When user want to visit apartment list page from ads Dropdown
+    Then user redirected to "/apartemen"
+		#  Scenario: Positive case tenant search by input keyword on field search apartment
+    And user search "Bandung" on landing apartment
+    Then user will see displays apartment lists by area and city
+      | Coblong       |
+      | Sumur Bandung |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Coblong       |
+      | Sumur Bandung |
+      | Bandung       |
+		#  Scenario: Positive case tenant click logo for redirect to home page
+    When user click mamikos logo on apartement list page
+    Then user redirected to "/"
+
+  @TEST_DOM-381 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Verify Profile Dropdown
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    Then tenant can see profile dropdown option
+
+  @TEST_DOM-382 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click App Store icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user want to click on App Store on the footer
+    Then user redirected to "https://apps.apple.com/"
+
+  @TEST_DOM-380 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Contact Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    And user click on hubungi pengelola button
+    Then user see phone number field and selectable question options :
+      | Bagaimana bisa menghubungi apartemen ini? |
+      | Boleh tahu alamat lengkap apartemen ini?  |
+
+  @TEST_DOM-379 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Tenant Verify Search Ads Dropdown
+    Given user visit page "/daftar/apartemen-di-jakarta"
+    When user select the first apartment on the list apartment page
+    And user want to visit cari kost list page from ads Dropdown
+    Then user redirected to "/cari"
+
+  @TEST_DOM-377 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] Favorite an Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on favorite btn on the apartment detail
+    Then user get success message "Sukses tersimpan"
+    And tenant navigate to favorite page
+    Then tenant will see that the text "rane 78" is displayed
+
+  @TEST_DOM-376 @Automated @DOM3 @web-covered
+  Scenario: [Web][Apartement] unFavorite an Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And tenant search kost then go to apartment details:
+      | kost name stag | kost name prod |
+      | rane 78        |                |
+    When user click on favorite btn on the apartment detail
+    And tenant navigate to favorite page
+    Then tenant should not be able to see the text "rane 78"
+
+  @TEST_DOM-375 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Email Address
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open e-mail in footer
+    Then user will see that the text "Halo, ada yang bisa kami bantu? Mohon isi form di bawah ini dengan lengkap." is displayed
+
+  @TEST_DOM-374 @TESTSET_UG-6221 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Web][Login][Pop Up Login] Pop up Close
+    Given user go to mamikos homepage
+    When user masuk sebagai
+    And user click close on pop up login
+    Then user verify pop up "Masuk ke Mamikos" "Saya ingin masuk sebagai" are not appeared
+
+  @TEST_DOM-373 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Whatsapp number
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open whatsapp in footer
+    Then user redirected to "https://api.whatsapp.com/"
+
+  @TEST_DOM-371 @Automated @DOM3 @web-covered
+  Scenario: [Web][Pop up login] Tenant - Click Maps
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+    Then user want to reached map section and see lihat peta button
+    When user want to see more detail kost location
+    And user click back button in login page
+    And user want to report this kos
+    Then user will see login pop up
