@@ -26,21 +26,25 @@ public class NaikkanIklanSteps {
 
     @Then("user cek status toggle iklan {string} is {string}")
     public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) throws InterruptedException {
-        if (posisiIklan.equals("naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName, posisiIklan), "Naik", "Posisi iklan doesn't available");
+        if (posisiIklan.equals("Naik")) {
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Naik", "Posisi iklan doesn't available");
+            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
         } else if (posisiIklan.equals("tidak-naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName, posisiIklan), "Tidak Naik", "Posisi iklan doesn't available");
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Tidak Naik", "Posisi iklan available");
+            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
         }
     }
 
     @Then("user verify the toggle iklan {string} is {string}")
-    public void user_verify_the_toggle_iklan_is(String adsName, String toggleStatus) {
-        Assert.assertTrue(naikkanIklanPO.getToggleStatus(adsName, toggleStatus), "toggle doesn't match!");
+    public void user_verify_the_toggle_iklan_is(String adsName, String toggleStatus) throws InterruptedException {
+        Assert.assertTrue(naikkanIklanPO.getToggleStatus(toggleStatus), "toggle doesn't match!");
+        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
     }
 
     @Then("user verify the wording iklan penuh {string} is {string}")
-    public void user_verify_the_wording_iklan_penuh_is(String adsName, String adsDesc) {
-        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds(adsName), adsDesc, "Kamar Penuh doesn't match!");
+    public void user_verify_the_wording_iklan_penuh_is(String adsName, String adsDesc) throws InterruptedException {
+        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds().replaceAll("\n", "").replaceAll("\\s+", " "), adsDesc, "Kamar Penuh doesn't match!");
+        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
     }
 
     @Then("user verify the alokasi title is {string}")
@@ -61,5 +65,11 @@ public class NaikkanIklanSteps {
                 break;
         }
     }
+
+    @When("owner select filter active mamiads")
+    public void owner_select_filter_active_mamiads() {
+       naikkanIklanPO.clickOnFilterActive();
+    }
+
 
 }
