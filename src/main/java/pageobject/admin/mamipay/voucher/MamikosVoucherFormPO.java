@@ -117,7 +117,7 @@ public class MamikosVoucherFormPO {
         campaignTnCInput = page.locator(".note-editable");
         campaignTitleInput = page.locator("input[name=\"public_campaign\\[title\\]\"]");
         updateMassVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
-        activeCheckbox = page.locator("//b[normalize-space()='Active']//preceding-sibling::input");
+        activeCheckbox = page.getByLabel("Active");
         alertMessageDisplayed = page.locator("//div[@class='callout callout-success']");
         dropdownContractPeriod = page.locator("select[name=\"min_contract_duration\"]");
         inputTartedEmail = page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Applicable For").setExact(true)).getByPlaceholder("e.g: sobirin@gmail.com,rodriguez@yahuu.com");
@@ -583,14 +583,33 @@ public class MamikosVoucherFormPO {
 
     /**
      * Click on edit Mass voucher button
+     * Activate mass voucher
      */
     public void activateMassVoucher() {
         playwright.clickOn(updateMassVoucherButton);
         playwright.waitTillLocatorIsVisible(activeCheckbox);
-        playwright.clickOn(activeCheckbox);
+        if (!activeCheckbox.isChecked()){
+            playwright.clickOn(activeCheckbox);
+        }
         playwright.clickOn(editMassVoucherButton);
         playwright.clickOn(yesDoItButton);
     }
+
+    /**
+     * Click on edit Mass voucher button
+     * Deactivate mass voucher
+     */
+    public void deactivateMassVoucher() {
+        playwright.clickOn(updateMassVoucherButton);
+        playwright.waitTillLocatorIsVisible(activeCheckbox);
+        if (activeCheckbox.isChecked()){
+            playwright.clickOn(activeCheckbox);
+        }
+        playwright.clickOn(editMassVoucherButton);
+        playwright.clickOn(yesDoItButton);
+    }
+
+
     /**
      * this method will be information activities update voucher
      */
