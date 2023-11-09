@@ -115,7 +115,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @continue @paymentPermata @TEST_DOM-486
+  @paymentPermata @TEST_DOM-486
   Scenario: Tenant pay kos permata
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -126,7 +126,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @continue @paymentAlfamart @COOP-4606
+  @paymentAlfamart @COOP-4606
   Scenario: Tenant pay kos BBK alfamart
     Given user go to mamikos homepage
     When user login as tenant via phone number:
