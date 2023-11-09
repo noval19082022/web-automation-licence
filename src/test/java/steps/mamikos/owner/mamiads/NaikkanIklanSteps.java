@@ -71,5 +71,11 @@ public class NaikkanIklanSteps {
        naikkanIklanPO.clickOnFilterActive();
     }
 
+    @Then("user verify the redirection to list mamiads balance")
+    public void user_verify_the_redirection_to_list_mamiads_balance() throws InterruptedException {
+        naikkanIklanPO.clickOnAllocationSection();
+        String actualUrl= playwright.getPageUrl();
+        Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads/balance?redirectionSource=properti%20saya", "Url doesn't match");
+    }
 
 }

@@ -12,6 +12,7 @@ public class NaikkanIklanPO {
     Locator selectFilter;
     Locator filterActive;
     Locator adsFullOccupied;
+    Locator quickAllocateTitle;
 
 
     public NaikkanIklanPO(Page page) {
@@ -21,7 +22,7 @@ public class NaikkanIklanPO {
         selectFilter = page.getByText("Semua Iklandropdown-down");
         filterActive =  page.locator("#filter-status-2");
         adsFullOccupied = page.locator(".ads-status__kamar-penuh");
-
+        quickAllocateTitle = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//div[@class='alokasi-ads__purchase-desc']");
 
     }
 
@@ -108,5 +109,14 @@ public class NaikkanIklanPO {
     public void clickOnFilterActive(){
         playwright.clickOn(selectFilter);
         playwright.clickOn(filterActive);
+    }
+
+    /**
+     * Click On Allocation Section
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnAllocationSection() throws InterruptedException {
+      playwright.clickOn(quickAllocateTitle);
     }
 }
