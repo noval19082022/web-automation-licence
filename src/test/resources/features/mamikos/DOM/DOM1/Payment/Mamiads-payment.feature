@@ -15,7 +15,7 @@ Feature: Payment mamiads staging
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod  | password  |
-      | 08988776655 | 08123450977 | qwerty123 |
+      | 08123450977 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp27.000"
     And owner select payment method using "PERMATA"
     Then owner verify invoice success paid mamiads
