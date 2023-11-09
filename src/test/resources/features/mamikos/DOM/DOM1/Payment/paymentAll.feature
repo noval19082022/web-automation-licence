@@ -136,4 +136,3 @@ Feature: Payment All
     And tenant select payment method using Alfamart
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
-
