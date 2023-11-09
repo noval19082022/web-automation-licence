@@ -10,7 +10,7 @@ Feature: Payment mamiads staging
     And owner select payment using alfamart xendit as payment method from invoice detail
     Then owner will see that the text "Pembayaran Berhasil" is displayed
 
-   @TEST_COOP_4641
+   @continue @TEST_COOP_4641
   Scenario: [Owner][Payment premium] Owner paid premium paket using Permata
     Given user go to mamikos homepage
     When user login as owner:
