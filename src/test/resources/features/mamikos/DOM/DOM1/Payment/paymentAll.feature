@@ -126,7 +126,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentAlfamart @COOP-4606
+  @continue @paymentAlfamart @COOP-4606
   Scenario: Tenant pay kos BBK alfamart
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -136,3 +136,4 @@ Feature: Payment All
     And tenant select payment method using Alfamart
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
