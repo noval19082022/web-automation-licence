@@ -197,4 +197,14 @@ public class MamiAdsSteps {
        mamiAdsPO.clickOnInputVoucherList();
     }
 
+    @Then("owner verify invoice success paid mamiads")
+    public void ownerVerifyInvoiceSuccessPaidMamiads() {
+        mamiAdsPO.navigatesToMamiadsHistory();
+        playwright.clickOnText("Selesai");
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            mamiAdsPO.clickOnInvoiceMamiads();
+        });
+        var pwHelper2 = new PlaywrightHelpers(page1);
+        Assert.assertTrue(pwHelper2.isTextDisplayed("Pembayaran Berhasil", 5000));
+    }
 }

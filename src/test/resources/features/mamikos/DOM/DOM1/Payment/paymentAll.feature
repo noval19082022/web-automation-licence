@@ -115,7 +115,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentPermata @TEST_DOM-486
+  @continue @paymentPermata @TEST_DOM-486
   Scenario: Tenant pay kos permata
     Given user go to mamikos homepage
     When user login as tenant via phone number:
