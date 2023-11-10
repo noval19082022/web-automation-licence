@@ -20,7 +20,8 @@ public class Codegen {
 //            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
 //            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
-//            loginOwner(page);
+            loginOwner(page);
+//            loginOwnersini(page);
 //            loginPMS(page);
 //            loginAdminBangkrupux(page);
             page.pause();
@@ -38,6 +39,16 @@ public class Codegen {
         page.getByTestId("pemilikKosButton").click();
         page.getByTestId("phoneNumberTextbox").click();
         page.getByTestId("phoneNumberTextbox").fill("089504402424");
+        page.getByTestId("passwordTextbox").click();
+        page.getByTestId("passwordTextbox").fill("qwerty123");
+        page.getByTestId("loginButton").click();
+    }
+
+    public static void loginOwnersini(Page page) {
+        page.getByTestId("entryButton").click();
+        page.getByTestId("pemilikKosButton").click();
+        page.getByTestId("phoneNumberTextbox").click();
+        page.getByTestId("phoneNumberTextbox").fill("089712123030");
         page.getByTestId("passwordTextbox").click();
         page.getByTestId("passwordTextbox").fill("qwerty123");
         page.getByTestId("loginButton").click();

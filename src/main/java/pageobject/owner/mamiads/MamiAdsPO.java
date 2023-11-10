@@ -14,6 +14,8 @@ public class MamiAdsPO {
     private LocatorHelpers locatorHelpers;
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
+    //--- history Mamiads ---//
+    private  Locator invoiceMamiads;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
@@ -57,6 +59,8 @@ public class MamiAdsPO {
         this.locatorHelpers = new LocatorHelpers(page);
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
+        //--- history Mamiads ---//
+        this.invoiceMamiads = page.locator("//div[@class='transaction-done']/div[@class='transaction-available']/div[1]//span[@class='right-side-saldo-status']");
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
@@ -462,6 +466,13 @@ public class MamiAdsPO {
      */
     public void clickOnInputVoucherList() {
         playwright.clickOn(inputVoucher);
+    }
+
+    /**
+     *Click on invoice mamiads on history mamiads
+     */
+    public void clickOnInvoiceMamiads(){
+        playwright.clickOn(invoiceMamiads);
     }
 }
 

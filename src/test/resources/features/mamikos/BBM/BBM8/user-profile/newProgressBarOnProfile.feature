@@ -144,4 +144,3 @@ Feature: New Progress bar on Profile
 		And user navigate to kost saya page
 		Then user can not see percentage user profile
 		And user logs out as a Tenant user
-		And user go to Rajawali Chat Room
