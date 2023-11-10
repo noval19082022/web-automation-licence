@@ -10,12 +10,18 @@ public class GoldPlusSubmissionPO {
 
     private Locator pilihPaketButton;
     private Locator bayarSekarangButton;
+    private Locator gpSatuFirstRadioButton;
+    private Locator selectedGpPackage;
+    private Locator selectedGpPeriode;
 
     public GoldPlusSubmissionPO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(this.page);
         pilihPaketButton = playwright.getButtonBySetName("Pilih");
         bayarSekarangButton = playwright.getButtonBySetName("Bayar Sekarang Rp");
+        gpSatuFirstRadioButton = page.locator(".bg-c-radio__icon").first();
+        selectedGpPackage = page.locator(".goldplus__package--selected");
+        selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
     }
 
     /**
@@ -29,7 +35,31 @@ public class GoldPlusSubmissionPO {
      * Click on bayar sekarang button and wait until page loaded
      */
     public void clicksOnBayarSekarangButton() {
+        playwright.waitFor(bayarSekarangButton, 30000.0);
         playwright.clickOn(bayarSekarangButton);
         playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Click on gp satu 3 bulan radio button
+     */
+    public void clickOnGpSatuFirstRadioButton() {
+        playwright.clickOn(gpSatuFirstRadioButton);
+    }
+
+    /**
+     * Check if gp radio selected
+     * @return boolean true if gp radio selected, otherwise false
+     */
+    public boolean isGpRadioSelected() {
+        return playwright.waitTillLocatorIsVisible(selectedGpPackage.first());
+    }
+
+    /**
+     * Check if gp periode selected
+     * @return boolean true if gp periode selected, otherwise false
+     */
+    public boolean isGpPeriodeSelected() {
+        return playwright.waitTillLocatorIsVisible(selectedGpPeriode.first());
     }
 }

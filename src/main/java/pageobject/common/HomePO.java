@@ -150,7 +150,7 @@ public class HomePO {
      * Navigates to homepage
      */
     public void navigatesToHomepage() {
-        playwright.navigateToAndWaitLocator(Mamikos.URL, getMamikosLogo());
+        playwright.navigateToAndWaitLocator(Mamikos.URL, getMamikosLogo(), 30000.0);
     }
 
     /**
@@ -185,7 +185,6 @@ public class HomePO {
 
     /**
      * Get mamikos logo
-     *
      * @return Locator data type of mamikos logo
      */
     public Locator getMamikosLogo() {
