@@ -337,4 +337,9 @@ public class NavigatesSteps {
     public void admin_accsess_menu_boot_lpl() {
         playwright.navigateTo(Mamikos.URL + "/admin/lpl-boost", 30000.0, LoadState.LOAD);
     }
+
+    @And("admin bangkrupux navigate to kost menu")
+    public void adminBangkrupuxNavigateToKostMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/room?#room", 30000.0, LoadState.LOAD);
+    }
 }
