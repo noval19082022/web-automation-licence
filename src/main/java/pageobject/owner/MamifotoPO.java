@@ -726,6 +726,9 @@ public class MamifotoPO {
         return playwright.getText(packageNameMamifoto);
     }
 
+    /**
+     * Navigates to mamifoto page
+     */
     public void navigatesToMamifotoPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0, LoadState.LOAD);
     }
