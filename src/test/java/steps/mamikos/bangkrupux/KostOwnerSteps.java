@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.KostOwnerPO;
 import pageobject.owner.PropertySayaPO;
+import testdata.BangKrupuxTestData;
 import utilities.PlaywrightHelpers;
 
 public class KostOwnerSteps {
@@ -44,14 +45,14 @@ public class KostOwnerSteps {
         kostOwner.clickOnFirstVerifyButton();
     }
 
-    @And("admin bangkrupux search kost name")
-    public void adminBangkrupuxSearchKostName() {
-        Mamikos.getPropertyKosName();
+    @And("admin bangkrupux search kost owner in admin kos owner page")
+    public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage() {
+        kostOwner.searchKosName(Mamikos.getPropertyKosName());
     }
 
-    @And("admin delete new kos")
-    public void adminDeleteNewKos() {
-        kostOwner.clickOnDropdownAction();
-//        kostOwner.clickOnFirstDeleteButton();
+    @And("admin delete kos")
+    public void adminDeleteKos() {
+        BangKrupuxTestData.hrefDeleteKosUrl(kostOwner.getKosListDeleteUrl());
+        kostOwner.navigateToDeleteUrl();
     }
 }

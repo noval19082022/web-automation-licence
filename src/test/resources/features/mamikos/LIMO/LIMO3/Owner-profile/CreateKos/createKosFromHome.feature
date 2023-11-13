@@ -93,7 +93,7 @@ Feature: Create Kos From Home
     When admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
-    And admin bangkrupux navigate to kost menu
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner in admin kos owner page
     And admin bangkrupux search kost owner "kos Automation TEST" in admin kos owner page
-#    And admin bangkrupux search kost name
-    And admin delete new kos
+    And admin delete kos

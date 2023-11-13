@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class KostOwnerPO {
@@ -35,11 +36,6 @@ public class KostOwnerPO {
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
 
         firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
-        firstDeleteButton = page.locator("//a[@title='Delete']");
-//        actionDropdown = page.locator("tbody > tr:nth-of-type(1) .btn-group");
-        actionDropdown = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(" kos Automation TEST KDI1HZ3Q Tipe A Tobelo Halmahera Utara 1000035611 kos Automation TEST KDI1HZ3Q Tipe A Tobelo Halmahera Utara Kabupaten Halmahera Utara  Phone Expired! Regular Kost 300.000 10 089673406382  Change Owner Updated from: Chrome Pemilik Kos 22 September 2023 / 22 September 2023 ")).getByRole(AriaRole.BUTTON);
-        deleteKost = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Delete Kost"));
-//        firstDeleteButton = page.getByTitle("Delete", new Page.GetByTitleOptions().setExact(true));
     }
 
     /**
@@ -111,19 +107,21 @@ public class KostOwnerPO {
         playwright.clickOn(firstVerifyButton);
     }
 
-    public void clickOnFirstDeleteButton() {
-//        if (playwright.waitTillLocatorIsVisible(firstDeleteButton)){
-            playwright.clickOn(firstDeleteButton);
-            playwright.acceptDialog(firstDeleteButton);
-//        }
+    /**
+     * Navigate to url delete kos on admin
+     *
+     */
+    public void navigateToDeleteUrl() {
+        playwright.navigateTo(this.getKosListDeleteUrl());
     }
 
-    public void clickOnDropdownAction() {
-        playwright.hardWait(3000.0);
-        playwright.clickOn(actionDropdown);
-
-        playwright.hardWait(3000.0);
-        playwright.clickOn(deleteKost);
-
+    /**
+     * Get url list kos delete
+     *
+     * @return attribute href from firstDeleteButton
+     */
+    public String getKosListDeleteUrl() {
+        firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
+        return playwright.getAttributeValue(firstDeleteButton, "href");
     }
 }
