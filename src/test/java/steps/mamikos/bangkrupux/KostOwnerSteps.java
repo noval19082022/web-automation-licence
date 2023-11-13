@@ -8,12 +8,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.KostOwnerPO;
+import pageobject.owner.PropertySayaPO;
+import testdata.BangKrupuxTestData;
 import utilities.PlaywrightHelpers;
 
 public class KostOwnerSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostOwnerPO kostOwner = new KostOwnerPO(page);
+    PropertySayaPO propertySaya = new PropertySayaPO(page);
 
     @And("admin bangkrupux search kost owner {string} in admin kos owner page")
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName) {
@@ -40,5 +43,16 @@ public class KostOwnerSteps {
     @And("user verify the kos in admin kos owner")
     public void userVerifyTheKosInAdminKosOwner() {
         kostOwner.clickOnFirstVerifyButton();
+    }
+
+    @And("admin bangkrupux search kost owner in admin kos owner page")
+    public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage() {
+        kostOwner.searchKosName(Mamikos.getPropertyKosName());
+    }
+
+    @And("admin delete kos")
+    public void adminDeleteKos() {
+        BangKrupuxTestData.hrefDeleteKosUrl(kostOwner.getKosListDeleteUrl());
+        kostOwner.navigateToDeleteUrl();
     }
 }

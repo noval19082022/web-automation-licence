@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class KostOwnerPO {
@@ -18,6 +19,9 @@ public class KostOwnerPO {
     Locator statusProperty;
     Locator alertMessage;
     Locator firstVerifyButton;
+    Locator firstDeleteButton;
+    Locator actionDropdown;
+    Locator deleteKost;
 
 
     public KostOwnerPO(Page page) {
@@ -101,5 +105,23 @@ public class KostOwnerPO {
      */
     public void clickOnFirstVerifyButton() {
         playwright.clickOn(firstVerifyButton);
+    }
+
+    /**
+     * Navigate to url delete kos on admin
+     *
+     */
+    public void navigateToDeleteUrl() {
+        playwright.navigateTo(this.getKosListDeleteUrl());
+    }
+
+    /**
+     * Get url list kos delete
+     *
+     * @return attribute href from firstDeleteButton
+     */
+    public String getKosListDeleteUrl() {
+        firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
+        return playwright.getAttributeValue(firstDeleteButton, "href");
     }
 }
