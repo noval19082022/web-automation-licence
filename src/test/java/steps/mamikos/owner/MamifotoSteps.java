@@ -294,5 +294,10 @@ public class MamifotoSteps {
         mamifoto.clickOnSeeFirstDetailTransaction();
     }
 
+    @And("owner wants to accsess mamifoto")
+    public void owner_wants_to_accsess_mamifoto() {
+        mamifoto.navigatesToMamifotoPage();
+    }
+
 
 }
