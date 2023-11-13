@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto
+@LIMO2 @Mamifoto @mamifotoAdmin
 Feature: Create invoice mamifoto from admin
 
   @TEST_LIMO-3393 @continue
@@ -18,8 +18,7 @@ Feature: Create invoice mamifoto from admin
       And user login as owner:
         | phone stag   | phone prod | password  |
         | 082233545509 | 0          | 12345678 |
-      * owner click menu sidebar Mamifoto
-      * owner can see mamifoto page
+      * owner wants to accsess mamifoto
       * owner click riwayat paket button
       When owner see Riwayat MamiFoto purchase page
       Then owner can verify transaction have status "Menunggu Pembayaran" from "MamiFoto A GP"

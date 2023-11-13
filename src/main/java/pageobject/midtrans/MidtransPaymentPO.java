@@ -19,17 +19,19 @@ public class MidtransPaymentPO {
     Locator bayarButtonOnMidtrans;
     Locator payButton;
     Locator successTransaction;
+    Locator targetBankSelection;
 
     public MidtransPaymentPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         billerCode = page.locator("#billerCode");
         paymentCode = page.locator("#billKey");
-        vaCodePlaceHolder = page.getByPlaceholder("Virtual Account Number");
+        vaCodePlaceHolder = page.locator("#inputMerchantId");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         successTransaction = page.getByText("Simulated payment is successful");
+        targetBankSelection = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target Bank selection"));
     }
 
     /**
@@ -56,7 +58,7 @@ public class MidtransPaymentPO {
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
-        playwright.selectDropdownByValue(page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target bank selection")), Bank);
+        playwright.selectDropdownByValue(targetBankSelection, Bank);
         playwright.clickOn(inquireButton);
         playwright.clickOn(bayarButtonOnMidtrans);
     }
