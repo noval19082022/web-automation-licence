@@ -47,6 +47,9 @@ public class GoldplusSteps {
         if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isGpRadioSelected() && !gpSubmission.isGpPeriodeSelected()) {
+            gpSubmission.clickOnGpSatuFirstRadioButton();
+        }
         gpSubmission.clicksOnPilihPaketButton();
         gpSubmission.clicksOnBayarSekarangButton();
     }
