@@ -211,6 +211,18 @@ public class LoginSteps {
         login.clearTextPhoneNumber();
     }
 
+    @When("user login with alfabet phone number")
+    public void userLoginWithAlfabetPhoneNumber(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+    }
+
     @When("user masuk sebagai")
     public void userMasukSebagai() {
         home.clickOnButtonMasuk();
@@ -231,5 +243,10 @@ public class LoginSteps {
     public void userVerifyPopUpAreNotAppeared(String title, String subtitle) {
         Assert.assertFalse(login.isPopupTitleTextAppeared(title), "Pop up title text is appear");
         Assert.assertFalse(login.isPopupSubtitleTextAppeared(subtitle), "Pop up subtitle text is appear");
+    }
+
+    @Then("user tenant verify profil picture is null")
+    public void userTenantVerifyProfilPictureIsNull() {
+        Assert.assertTrue(tenantLogin.isProfilePictureNotNull(), "Profile picture is not null");
     }
 }

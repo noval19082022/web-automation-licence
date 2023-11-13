@@ -26,7 +26,7 @@ public class MidtransPaymentPO {
         this.playwright = new PlaywrightHelpers(page);
         billerCode = page.locator("#billerCode");
         paymentCode = page.locator("#billKey");
-        vaCodePlaceHolder = page.getByLabel("Virtual Account Number");
+        vaCodePlaceHolder = page.locator("#inputMerchantId");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
