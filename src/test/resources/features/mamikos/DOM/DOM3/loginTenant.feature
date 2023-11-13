@@ -86,8 +86,8 @@ Feature: Tenant - Login
     When user want to see more detail kost location
     Then user see login pop up in favorite page
 
-
-  Scenario: [Setelan Akun][Profile Picture] Profile Picture is null
+    @TEST_COOP-4660 @DOM3
+  Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is null
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
@@ -95,8 +95,8 @@ Feature: Tenant - Login
     And user navigate to kost saya page
     Then user tenant verify profil picture is null
 
-
-  Scenario: [Setelan Akun][Profile Picture] Profile Picture is show
+      @TEST_COOP-4661 @DOM3
+  Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is show
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
@@ -104,8 +104,8 @@ Feature: Tenant - Login
     And user navigate to kost saya page
     Then user tenant profile picture is shown
 
-  @gizkara
-  Scenario: Login - Wrong number alfabet
+      @TEST_COOP-4662 @DOM3
+  Scenario: Login - using Wrong phone number alfabet
     Given user go to mamikos homepage
     When user login with alfabet phone number
       | phone stag  | phone prod  | password  |
