@@ -653,23 +653,30 @@ public class InvoicePO {
 
     }
 
+
+    /**
+     * Wait for an element to become visible
+     *
+     * @param locator The locator of the element to wait for.
+     */
+    private void waitForVisibility(Locator locator) {
+        playwright.waitTillLocatorIsVisible(locator, 3000.0);
+    }
+
     /**
      * Click MamiPoin Toggle Button to On
      */
     public void clickMamipoinToggleButtonToOn() {
-        playwright.hardWait(3000.0);
-        if (mamipoinToggleButtonOff.isVisible()) {
-            playwright.clickOn(mamipoinToggleButtonOn);
-        }
+        waitForVisibility(mamipoinToggleButtonOff);
+        playwright.clickOn(mamipoinToggleButtonOff);
     }
 
     /**
      * Click MamiPoin Toggle Button to Off
      */
     public void clickMamipoinToggleButtonToOff() {
-        if (mamipoinToggleButtonOn.isVisible()) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-        }
+        waitForVisibility(mamipoinToggleButtonOn);
+        playwright.clickOn(mamipoinToggleButtonOn);
     }
 
     /**
