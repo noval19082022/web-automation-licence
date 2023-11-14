@@ -1,12 +1,18 @@
 package utilities;
 
 import data.mamikos.Mamikos;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -141,7 +147,7 @@ public class JavaHelpers {
     /**
      * Access properties and return as Properties
      * @param propertyfile desired properties file
-     * @return
+     * @return Properties data type
      */
     public static Properties accessPropertiesFile(String propertyfile) {
         Properties prop = new Properties();
@@ -185,6 +191,17 @@ public class JavaHelpers {
     public static int extractNumber(String word) {
         String str = word.replaceAll("[A-Z a-z . / : , ' ; ( ) -]", "").trim();
         return Integer.parseInt(str);
+    }
+
+    /**
+     * extract number from string given
+     * @param baseString is the String that we want to extract
+     * @param targetString is the String that we want to replace
+     * @param replaceString is the String that we want to replace with
+     * @return
+     */
+    public static String formatString(String baseString, String targetString, String replaceString) {
+        return baseString.replace(targetString, replaceString);
     }
 
     /**
@@ -266,4 +283,154 @@ public class JavaHelpers {
         return dateFormat.format(date);
     }
 
+    /**
+     * Update time string to required timezone time string
+     *
+     * @param String actualTimeFormat Time Format for time input
+     * @param String time
+     * @param String expectedTimeFormat Time Format we want our result to be
+     * @param int    icrementDate number by what we need to increment date to
+     * @param int    increamentHour Amount of time we need to increment hour to
+     * @param int    increamentMinute Amount of time we need to increment minutes to
+     * @param int    increamentSeconds Amount of time we need to increment seconds
+     *               to
+     * @return String converted time
+     * @throws ParseException Example for date format are :
+     *                        <p>
+     *                        "yyyy MMM dd" for "2013 Nov 28"
+     *                        <p>
+     *                        "yyyyMMdd_HHmmss" for "20130131000000"
+     *                        <p>
+     *                        "yyyy MMM dd HH:mm:ss" for "2013 Jan 31 00:00:00"
+     *                        <p>
+     *                        "dd MMM yyyy" for "28 Nov 2017"
+     *                        <p>
+     *                        <p>
+     *                        <p>
+     *                        Example for time format:
+     *                        <p>
+     *                        "HH:mm:ss" for "16:00:00"(24 hr format)
+     *                        <p>
+     *                        "hh:mm:ss" for "4:00:00"(12 hr format)
+     */
+    public String updateTime(String actualTimeFormat,
+                             String time,
+                             String expectedTimeFormat,
+                             int increamentDate,
+                             int increamentHour,
+                             int increamentMinute,
+                             int increamentSeconds
+    ) throws ParseException {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        DateFormat resultDateFormat = new SimpleDateFormat(expectedTimeFormat);
+        Date date = new SimpleDateFormat(actualTimeFormat).parse(time + " " + year); // we're parsing current year
+        // incase year not passed
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, increamentDate);
+        calendar.add(Calendar.HOUR, increamentHour);
+        calendar.add(Calendar.MINUTE, increamentMinute);
+        calendar.add(Calendar.SECOND, increamentSeconds);
+        return resultDateFormat.format(calendar.getTime());
+    }
+
+    //--- String Manipulator ---//
+    /**
+     * Format string
+     * @param format String to format
+     * @param args format args
+     * @return String data type
+     */
+    public static String formatString(String format, Object... args)  {
+        return String.format(format, args);
+    }
+
+    /**
+     * Remove extra new line and trim
+     * @param removeLineString
+     * @return String data type
+     */
+    public static String removeExtraNewLine(String removeLineString) {
+        return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
+    }
+    //--- String Manipulator ---//
+
+    /**
+     * Generate random Alphanumeric String
+     *
+     * @param totalChar is total character of generated String
+     * @return String random alphanumeric
+     */
+    public String generateAlphanumeric(int totalChar) {
+        return RandomStringUtils.randomAlphanumeric(totalChar);
+    }
+
+    /**
+     * get string after char
+     * @param stringTarget
+     * @param character
+     * @return example, you have "aba - aka" and you want get string after "-"
+     * then use this method will return "aka"
+     */
+    public static String getStringAfterSpecificChar(String stringTarget, String character) {
+        // Find the index of the character
+        int indexOfDot = stringTarget.indexOf(character);
+        // Extract the substring after the character
+        String result = stringTarget.substring(indexOfDot + 1).trim();
+        return result;
+    }
+
+    /**
+     * remove specific char or word on string and also trim it
+     * @param stringTarget
+     * @param character
+     * @return
+     */
+    public static String removeCharAndWhiteSpaceFromString(String stringTarget, String character) {
+        return stringTarget.replace(character, "").trim();
+    }
+    //--- Encrypt Decrypt ---//
+
+    /**
+     * Generate Md5
+     * @param md5Target target string
+     * @return String data type
+     * @throws NoSuchAlgorithmException if md5 algorithm not found
+     */
+    public static String generateMd5(String md5Target) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(md5Target.getBytes());
+        byte[] digest = md.digest();
+        return bytesToHexString(digest);
+    }
+
+    /**
+     * Convert bytes to hex string
+     * @param bytes byte array
+     * @return
+     */
+    public static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Generate HmacSha256
+     * @param secretKey secret key
+     * @param message desired message
+     * @return byte array
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     */
+    public static byte[] generateHmacSha256(String secretKey, String message)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac hmacSha256 = Mac.getInstance("HmacSHA256");
+        SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "HmacSHA256");
+        hmacSha256.init(keySpec);
+        return hmacSha256.doFinal(message.getBytes());
+    }
+    //--- Encrypt Decrypt ---//
 }

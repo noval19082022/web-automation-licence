@@ -6,19 +6,20 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class SearchContractPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator searchContract;
     Locator searchBy;
     Locator searchInput;
+    Locator searchKostLevel;
     Locator searchButton;
     Locator batalkanContractButton;
     Locator berhentikanContractButton;
-    Locator inputTerminateDate;
     Locator berhentikanContractPopUpButton;
     Locator akhiriContractLink;
-    Locator selectTerminateDate;
     Locator successTerminateText;
     private Locator editDepositBtn;
     private Locator inputTextDetailKerusakan;
@@ -30,6 +31,9 @@ public class SearchContractPO {
     private Locator akhiriContractHead;
     private Locator callout;
     Locator searchTextBox;
+    Locator invoiceEl;
+    Locator detailInvoiceEl;
+    Locator tableHeader;
 
     public SearchContractPO(Page page) {
         this.page = page;
@@ -38,11 +42,10 @@ public class SearchContractPO {
         searchBy = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search by"));
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         searchInput = page.getByPlaceholder("Search");
+        searchKostLevel = page.getByPlaceholder("Kos Level");
         batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
         berhentikanContractButton = page.locator(".tools-contract__btn-danger");
-        inputTerminateDate = page.getByPlaceholder("Masukkan tanggal checkout");
-        berhentikanContractPopUpButton = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Akhiri Kontrak Sewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Akhiri Kontrak"));
-        selectTerminateDate = page.locator(".skin-green > div:nth-of-type(2) > .xdsoft_timepicker .xdsoft_current");
+        berhentikanContractPopUpButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         akhiriContractLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         akhiriContractButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         successTerminateText = page.getByText("Kontrak berhasil diakhiri.");
@@ -63,9 +66,17 @@ public class SearchContractPO {
      * @param kostLevel option value String type
      */
     public void selectKosLevel(String kostLevel) {
-        page.locator(".select2-search").click();
-        page.keyboard().type(kostLevel);
-        page.keyboard().press("Enter");
+        playwright.clickLocatorAndTypeKeyboard(searchKostLevel, kostLevel);
+        playwright.pressKeyboardKey("Enter");
+    }
+
+    /**
+     *
+     * @param phoneNumber
+     */
+    public void selectRenterPhoneNumber(String phoneNumber) {
+        playwright.selectDropdownByValue(searchBy, "renter_phone_number");
+        playwright.clickLocatorAndTypeKeyboard(searchInput, phoneNumber);
     }
 
     /**
@@ -82,7 +93,7 @@ public class SearchContractPO {
      * Click on edit deposit button
      */
     public void clickOnEditDepositButton() {
-        editDepositBtn.click();
+        playwright.clickOn(editDepositBtn);
     }
 
     /**
@@ -91,8 +102,7 @@ public class SearchContractPO {
      * @param text
      */
     public void inputDetailKerusakan(String text) {
-        inputTextDetailKerusakan.click();
-        page.keyboard().type(text);
+        playwright.clickLocatorAndTypeKeyboard(inputTextDetailKerusakan, text);
     }
 
     /**
@@ -135,7 +145,7 @@ public class SearchContractPO {
      * @param search String type e.g (Phone Number Tenant or Phone Number Owner)
      */
     public void fillSearchByValue(String search) {
-        searchInput.fill(search);
+        playwright.clickLocatorAndTypeKeyboard(searchInput, search);
     }
 
     /**
@@ -174,12 +184,7 @@ public class SearchContractPO {
     public void clickOnTerminateContractButton() {
         if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
             playwright.acceptDialog(berhentikanContractButton);
-
-            if (inputTerminateDate.isVisible()) {
-                inputTerminateDate.click();
-                selectTerminateDate.click();
-                berhentikanContractPopUpButton.click();
-            }
+            berhentikanContractPopUpButton.click();
             page.waitForSelector(".callout.callout-success");
         }
     }
@@ -350,5 +355,26 @@ public class SearchContractPO {
      */
     public int getAkhiriContractButtonSize() {
         return playwright.getLocators(akhiriContractButton).size();
+    }
+
+    /**
+     * click on invoice on contract first index
+     *
+     * @param index 1,2,3,4,5 etc
+     */
+    public void clicksOnInvoiceNumberOnFirstIndex(String index) {
+        invoiceEl = page.locator("(//tr[1]/following::ul/li/a[contains(text(), 'Pembayaran')])[" + index + "]");
+        playwright.clickOn(invoiceEl);
+        detailInvoiceEl = page.locator("//td[1]/a");
+        playwright.clickOn(detailInvoiceEl);
+    }
+
+    /**
+     * check table header is visible or not
+     * @param headerName refer to table header name
+     */
+    public void isTableHeaderVisible(String headerName) {
+        tableHeader = page.locator("//th[text()='" + headerName + "']");
+        assertThat(tableHeader).isVisible();
     }
 }

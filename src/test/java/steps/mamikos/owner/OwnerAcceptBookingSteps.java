@@ -8,9 +8,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
-import pageobject.owner.kelolatagihan.PengajuanBookingPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -20,13 +21,14 @@ public class OwnerAcceptBookingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
-    PengajuanBookingPO pengajuanBooking;
+    PengajuanSewaPO pengajuanBooking = new PengajuanSewaPO(page);
+    LoadingPO loading = new LoadingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
     @When("owner accept booking")
     public void ownerAcceptBooking() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking();
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnPilihDitempat();
@@ -45,8 +47,17 @@ public class OwnerAcceptBookingSteps {
     public void ownerAcceptBookingFromTenant(DataTable table) throws InterruptedException {
         tenantNames = table.asMaps(String.class, String.class);
         var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+        var maxLoop = 0;
+        loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        do {
+            pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+            maxLoop++;
+            if (maxLoop >= 10) {
+                break;
+            }
+        } while (!pengajuanBooking.terimaButtonWithNameVisible(tenantName));
+
         billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnPilihDitempat();
@@ -59,7 +70,7 @@ public class OwnerAcceptBookingSteps {
     @When("owner accept booking and select the room")
     public void ownerAcceptBookingAndSelectTheRoom() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanBooking();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking();
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnOneRooms();
@@ -72,5 +83,31 @@ public class OwnerAcceptBookingSteps {
     @And("user clicks on Booking Details button")
     public void userClicksOnBookingDetailsButton() {
         billBookingManage.clickOnLihatDetailButton();
+    }
+
+    @And("owner go to select the room page from tenant:")
+    public void ownerGoToSelectTheRoomPage(DataTable table) throws InterruptedException {
+        tenantNames = table.asMaps(String.class, String.class);
+        var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+        billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
+        billBookingManage.clickOnRoomNumberInput();
+    }
+
+    @Then("user can not see pilih di tempat as an option")
+    public void userCannotSeeUpdateRoomNumber() {
+        Assert.assertFalse(billBookingManage.isPilihKamarDiTempatVisible());
+    }
+
+    @And("owner accept booking via Homepage")
+    public void ownerAcceptBookingViaHomepage() throws InterruptedException {
+        ownerDashboard.clickOnTerimaViaHomepage();
+        pengajuanBooking.clickOnTerimaPopUp();
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnOneRooms();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
     }
 }

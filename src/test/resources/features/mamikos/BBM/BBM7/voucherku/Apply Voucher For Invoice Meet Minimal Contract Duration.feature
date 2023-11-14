@@ -1,6 +1,6 @@
 @regression @voucher @BBM7
 
-@TEST_BBM-609
+@TEST_COOP-2732
 Feature: Apply Voucher For Invoice Meet Minimal Contract Duration
 
   Scenario: Invoice Yearly and Voucher For Quarterly
@@ -12,5 +12,5 @@ Feature: Apply Voucher For Invoice Meet Minimal Contract Duration
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOQUARTERLY     | AUTOQUARTERLY     |
+      | AUTOSUGGESTION    | AUTOQUARTERLY     |
     Then tenant can see voucher is applied

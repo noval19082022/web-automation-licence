@@ -3,6 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -41,11 +42,6 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateTenant(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
@@ -60,11 +56,6 @@ public class LoginSteps {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateOwner(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
                 .clickOnPencariKostButton()
                 .clickOnSignInWithFacebookButton()
@@ -83,11 +74,6 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        if (!FlowControl.getStrictFlow()) {
-            ActiveContext.activateOwner(0);
-            home = new HomePO(ActiveContext.getActivePage());
-            ActiveContext.getActivePage().navigate("https://jambu.kerupux.com");
-        }
         home.clickOnButtonMasuk()
             .clickOnPemilikKostButton()
             .fillPhoneNumber(phone)
@@ -95,14 +81,27 @@ public class LoginSteps {
             .clickOnLoginButton();
     }
 
+    @When("user login as owner from mamiads landing page:")
+    public void userLoginsAsOwnerFromMamiAds(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        owner.fillPhoneNumber(phone)
+                .fillPassword(password)
+                .clickOnLoginButtonMA();
+    }
+
     @When("admin login to mamipay:")
     public void adminLoginToMamipay(DataTable table) {
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
-        loginAdmin.fillEmail(email);
-        loginAdmin.fillPassword(password);
-        loginAdmin.clickOnLoginButton();
+        loginAdmin = new LoginAdminMamipayPO(page);
+        if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
+            loginAdmin.fillEmail(email);
+            loginAdmin.fillPassword(password);
+            loginAdmin.clickOnLoginButton();
+        }
     }
 
     @When("admin login pms :")
@@ -110,7 +109,6 @@ public class LoginSteps {
         pmsCredential = tables.asMaps(String.class, String.class);
         String username = pmsCredential.get(0).get("email");
         String password = pmsCredential.get(0).get("password");
-
         loginPMS.fillUsername(username);
         loginPMS.fillPassword(password);
         loginPMS.clickLogin();
@@ -147,7 +145,7 @@ public class LoginSteps {
         Assert.assertTrue(login.popUpOwnerLogin(), "login owner not showing");
     }
 
-    @And("user click back button in login owner")
+    @And("user click back button in login page")
     public void clickBack() {
         login.clickBackOnPopUpLogin();
     }
@@ -163,7 +161,7 @@ public class LoginSteps {
     }
 
     @And("user logs out as a Tenant user")
-    public void userLogsOutAsTenant() throws InterruptedException {
+    public void userLogsOutAsTenant() {
         tenantLogin.logoutAsTenant();
     }
 
@@ -175,5 +173,80 @@ public class LoginSteps {
     @And("owner should successfully log out")
     public void owner_should_successfully_log_out(){
         owner.logoutAsOwner();
+    }
+
+    @And("user tenant profile picture is shown")
+    public void userTenantProfilePictureIsShown() {
+        Assert.assertTrue(tenantLogin.isTenantProfilePictureDisplayed(), "Tenant Profile Picture is not Displayed");
+    }
+
+    @When("user clicks on Enter button as tenant delete password fill")
+    public void userClicksOnEnterButtonAsTenantDeletePasswordFill(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+        login.clearTextPassword();
+    }
+
+    @Then("user verify login error messages {string}")
+    public void userVerifyLoginErrorMessages(String error) {
+        Assert.assertEquals(login.getLoginErrorMessagesText(error), error, "Login error messages is not equal to " + error);
+    }
+
+    @When("user clicks on Enter button as tenant delete phone number fill")
+    public void userClicksOnEnterButtonAsTenantDeletePhoneNumberFill(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+        login.clearTextPhoneNumber();
+    }
+
+    @When("user login with alfabet phone number")
+    public void userLoginWithAlfabetPhoneNumber(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+    }
+
+    @When("user masuk sebagai")
+    public void userMasukSebagai() {
+        home.clickOnButtonMasuk();
+    }
+
+    @And("user click close on pop up login")
+    public void userClickCloseOnPopUpLogin() {
+        login.clickCloseOnPopUpLogin();
+    }
+
+    @Then("user verify pop up {string} {string}")
+    public void userVerifyPopUp(String title, String subtitle) {
+        Assert.assertEquals(login.getLoginTitlePopUpText(title), title, "Pop up login title is not equal to " + title);
+        Assert.assertEquals(login.getLoginSubtitleText(subtitle), subtitle, "Pop up login subtitle is not equal to " + subtitle);
+    }
+
+    @Then("user verify pop up {string} {string} are not appeared")
+    public void userVerifyPopUpAreNotAppeared(String title, String subtitle) {
+        Assert.assertFalse(login.isPopupTitleTextAppeared(title), "Pop up title text is appear");
+        Assert.assertFalse(login.isPopupSubtitleTextAppeared(subtitle), "Pop up subtitle text is appear");
+    }
+
+    @Then("user tenant verify profil picture is null")
+    public void userTenantVerifyProfilPictureIsNull() {
+        Assert.assertTrue(tenantLogin.isProfilePictureNotNull(), "Profile picture is not null");
     }
 }

@@ -2,11 +2,16 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
@@ -32,4 +37,236 @@ public class OwnerDashboardSteps {
     public void user_click_mamipoin_in_owner_s_menu() {
         ownerDashboardPO.clickMamipoinButton();
     }
+
+    @Then("owner can see pengajuan sewa detail on dashboard")
+    public void ownerCanSeePengajuanSewaDetailOnDashboard() {
+        Assert.assertTrue(ownerDashboardPO.isPengajuanSewaSectionPresent(), "pengajuan sewa not appears");
+    }
+
+    @When("owner open notification icon")
+    public void owner_open_notification_icon() {
+       ownerDashboardPO.clickNotificationButton();
+
+    }
+
+    @And("owner wants to see all notification")
+    public void owner_wants_to_see_all_notification() {
+        ownerDashboardPO.clicOnSeeAllNotification();
+    }
+
+    @Then("validate that owner have {string}")
+    public void validate_that_owner_have(String gpStatus) {
+        Assert.assertEquals(ownerDashboardPO.getTextGPStatus(), gpStatus, "GP Level is not equal to " + gpStatus);
+
+    }
+
+    @When("owner click close icon pop up")
+    public void ownerClickCloseIconPopUp() {
+        plawright.clickOnTextButton("close");
+    }
+
+    @Then("user verify text {string} on section info untuk anda is appear")
+    public void user_verify_text_on_section_info_untuk_anda_is_appear(String textInfoUntukAnda) {
+       plawright.clickOnText(textInfoUntukAnda);
+    }
+
+    @And("user click menu {string} on feature waktunya mengelola property")
+    public void userClickOnFeatureWaktunyaMengelolaProperty(String menu) {
+        ownerDashboardPO.clickOnMenuKelolaProperty(menu);
+    }
+
+    @When("verify ftue {string}")
+    public void verify_ftue(String isDisplayed) {
+        if (isDisplayed.equals("displayed")) {
+            Assert.assertTrue(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE doesn't displayed!" );
+        }else {
+            Assert.assertFalse(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE displayed!");
+        }
+
+    }
+
+    @When("verify title ftue is {string} and description {string}")
+    public void verify_title_ftue_is_and_description(String titleFtue, String descFtue) {
+        Assert.assertEquals(ownerDashboardPO.getTitleFtue(titleFtue), titleFtue, "Title FTUE doesn't match!");
+        Assert.assertEquals(ownerDashboardPO.getDescFtue(descFtue), descFtue, "Description FTUE doesn't match!");
+    }
+
+    @When("user click close icon tooltip broadcast chat on chatlist")
+    public void user_click_close_icon_tooltip_broadcast_chat_on_chatlist() throws InterruptedException {
+        ownerDashboardPO.clickOnCloseIconBcTooltip();
+    }
+
+    @Then("verify label goldplus on chatlist")
+    public void verify_label_goldplus_on_chatlist() {
+        Assert.assertTrue(ownerDashboardPO.isGoldplusLabelDisplayed(), "Owner doesn't goldplus member!");
+    }
+
+    @Then("check the header menu display on homepage owner")
+    public void check_the_header_menu_display_on_homepage_owner() {
+        Assert.assertTrue(ownerDashboardPO.isHelpCenterOwnerDisplayed(), "Element Pusat Bantuan not present!");
+        Assert.assertTrue(ownerDashboardPO.isNotificationOwnerButtonDisplayed(), "Element Notifikasi Button not present!");
+    }
+
+    @Then("user see username in top right shows as {string}")
+    public void user_see_username_in_top_right_shows_as(String name) {
+        Assert.assertEquals(ownerDashboardPO.getOwnerUsername(), name, "Username label is wrong");
+    }
+
+    @When("user click mamikos.com logo")
+    public void userClickMamikosComLogo() {
+        ownerDashboardPO.clickOnMamikosLogo();
+    }
+
+    @And("user click booking kos button")
+    public void userClickBookingKosButton() {
+        ownerDashboardPO.clickOnBookingKos();
+    }
+
+    @And("user click promosi iklan anda button")
+    public void userClickPromosiIklanAndaButton() {
+        ownerDashboardPO.clickOnPromosiIklanAnda();
+    }
+
+    @And("user clicks pusat bantuan on nav bar owner")
+    public void userClicksPusatBantuanOnNavBarOwner() {
+        ownerDashboardPO.clickOnPusatBantuan();
+    }
+
+    @Then("user will be verify dropdown in property saya")
+    public void user_will_be_verify_dropdown_in_property_saya() {
+        Assert.assertTrue(ownerDashboardPO.isPropertyMenuDropdownShowing(), "Dropdown is not showing");
+    }
+
+    @When("user click profile on header")
+    public void user_click_profile_on_header() {
+        ownerDashboardPO.clickOnOwnerProfile();
+    }
+
+    @Then("user see dropdown with button owner page and exit")
+    public void user_see_dropdown_with_button_owner_page_and_exit() {
+        Assert.assertTrue(ownerDashboardPO.isOwnerPageDisplayed(), "Owner page menu is missing");
+        Assert.assertTrue(ownerDashboardPO.isExitButtonDisplayed(), "Exit menu is missing");
+    }
+
+    @When("user click owner page button")
+    public void user_click_owner_page_button() {
+        ownerDashboardPO.clickOnOwnerPage();
+    }
+
+    @When("user click Chat CS button")
+    public void user_click_Chat_CS_button() {
+        ownerDashboardPO.clickOnChatCS();
+    }
+
+    @Then("user see Contact us pop up is appear")
+    public void user_see_Contact_us_pop_up_is_appear() {
+        Assert.assertTrue(ownerDashboardPO.isContactUsPresent(), "Contact CS pop up is not appear");
+    }
+
+    @Then("user see user's name {string} in owner dashboard")
+    public void user_see_user_s_name_in_owner_dashboard(String userName) {
+        Assert.assertEquals(ownerDashboardPO.getUserGreeting().trim(), userName, "Username greeting is wrong");
+    }
+
+    @When("user click username in owner dashboard")
+    public void user_click_username_in_owner_dashboard() {
+        ownerDashboardPO.clickUserGreeting();
+    }
+
+    @When("user click owner username on header")
+    public void user_click_owner_username_on_header() {
+        ownerDashboardPO.clickOwnerUserName();
+    }
+
+    @Then("user see owner's name & phone number, text link {string} & {string}")
+    public void user_see_owner_s_name_phone_number_text_link(String settings, String logout) {
+        Assert.assertEquals(ownerDashboardPO.getSettingsLabel(), settings, "Settings label is wrong");
+        Assert.assertEquals(ownerDashboardPO.getLogoutLabel(), logout, "Logout label is wrong");
+    }
+
+    @And("user see widget waktunya mengelola properti is as expected")
+    public void user_see_widget_waktunya_mengelola_properti_is_as_expected(DataTable dataTable){
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 2;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to "+content.get("title"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"),"subtitle not equal to"+content.get("subtitle"));
+            i++;
+        }
+    }
+
+    @And("user click on rating card details")
+    public void user_click_on_rating_card_details() {
+        ownerDashboardPO.clickOnRatingCardDetails();
+    }
+
+    @Then("user validate review section with {string} and {string}")
+    public void user_validate(String noReview, String nonPrem) {
+        Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(noReview), "Message is not equal to " + noReview);
+        Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(nonPrem), "Message is not equal to " + nonPrem);
+    }
+
+    @Then("user verify there are only {int} review lists")
+    public void user_verify_there_are_only_review_lists(Integer number) {
+        Assert.assertEquals(ownerDashboardPO.getReviewListsCard(), number, "Kos review list should have " + number + " items");
+    }
+
+    @When("user click one of review lists")
+    public void user_click_one_of_review_lists() {
+        ownerDashboardPO.clickOnKosReviewListing();
+    }
+
+    @Then("user should see the review detail page")
+    public void user_should_see_the_review_detail_page() {
+        Assert.assertTrue(ownerDashboardPO.isDetailedReviewListsAppear(), "Detailed kos review lists is not appear");
+    }
+
+    @Then("user verify there are more than {int} review lists")
+    public void user_verify_there_are_more_than_int_review_lists(int number) {
+        Assert.assertTrue( ownerDashboardPO.getRatingCardWrapperSize() > number, "Kost review lists are not more than " + number);
+    }
+
+    @And("user verify there is no kos review section")
+    public void user_verify_there_is_no_kos_review_section() {
+        Assert.assertFalse(ownerDashboardPO.isSeeAllKostReviewTextAppear(), "See all kost review text is appeared");
+    }
+
+    @Then("user verify title {string} and message {string} in saldo MamiAds")
+    public void user_verify_message_x_in_saldo_mamiads(String titleText, String subtitle) {
+        Assert.assertEquals(ownerDashboardPO.getLihatDisiniMamiads(), titleText, "The text is not equal to " + titleText);
+        Assert.assertEquals(ownerDashboardPO.getSubtitleMamiads(), subtitle, "The text is not equal to " + subtitle);
+    }
+
+    @When("user click on Saldo MamiAds at owner dashboard")
+    public void user_click_on_saldo_mamiads_button() {
+        ownerDashboardPO.clickSaldoMamiAdsButton();
+    }
+
+    @And("owner click {string} on waktunya mengelola properti")
+    public void ownerClickOnWaktunyaMengelolaProperti(String action) {
+        ownerDashboardPO.clickOnWaktunyaMengelolaProperti(action);
+    }
+
+    @Then("verify that owner not yet have active kos")
+    public void verifyThatOwnerNotYetHaveActiveKos() {
+        Assert.assertTrue(ownerDashboardPO.isNoHaveActiveKos(), "Owner have active kos!");
+    }
+
+    @When("owner create new kos")
+    public void ownerCreateNewKos() {
+        ownerDashboardPO.clickOnTambahKos();
+        ownerDashboardPO.clickOnTambahKosBaru();
+    }
+
+    @And("verify tambah kos button displayed")
+    public void verifyTambahKosButtonDisplayed() {
+        Assert.assertTrue(ownerDashboardPO.isTambahKosVisible());
+    }
+
+    @When("owner accsess cek properti sekitar")
+    public void owner_accsess_cek_properti_sekitar() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickOnPropertySekitar();
+    }
 }
+

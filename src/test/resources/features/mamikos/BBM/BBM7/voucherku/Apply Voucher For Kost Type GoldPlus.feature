@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-604 @TEST_BBM-601
+@TEST_COOP-2726 @TEST_COOP-2723
 Feature: Apply Voucher For Kost Type GoldPlus
 
   @continue

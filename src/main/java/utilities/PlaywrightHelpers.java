@@ -1,17 +1,38 @@
 package utilities;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.ElementState;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.SelectOption;
 
 import java.util.List;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class PlaywrightHelpers {
     Page page;
 
     public PlaywrightHelpers(Page page) {
         this.page = page;
+    }
+
+    /**
+     * Reload page
+     */
+    public void reloadPage() {
+        page.reload();
+    }
+
+    /**
+     * Reload page with timeout
+     * @param timeout
+     */
+    public void reloadPage(Double timeout) {
+        page.reload(new Page.ReloadOptions().setTimeout(timeout));
     }
 
     /**
@@ -54,6 +75,17 @@ public class PlaywrightHelpers {
         locator.waitFor();
     }
 
+    /**
+     * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
+     * @param url     String data type of URL format
+     * @param locator The locator to wait for.
+     * @param timeout Double data type of specific timeout
+     */
+    public void navigateToAndWaitLocator(String url, Locator locator, Double timeout) {
+        page.navigate(url);
+        locator.waitFor(new Locator.WaitForOptions().setTimeout(timeout));
+    }
+
     //----- Action Part ----\\
 
     /**
@@ -63,6 +95,17 @@ public class PlaywrightHelpers {
      */
     public void clickOn(Locator locator) {
         locator.click();
+    }
+
+    /**
+     * click on locator and typing inside of placeholder like real keyboard
+     *
+     * @param element
+     * @param type
+     */
+    public void clickLocatorAndTypeKeyboard(Locator element, String type) {
+        clickOn(element);
+        realKeyboardType(type);
     }
 
     /**
@@ -107,23 +150,65 @@ public class PlaywrightHelpers {
     /**
      * Double-click on a desired locator
      *
-     * @param locator target locator
+     * @param locator   target locator
      * @param delayTime Delay time in millisecond Double data type
      */
     public void doubleClickAndDelay(Locator locator, Double delayTime) {
         locator.dblclick(new Locator.DblclickOptions().setDelay(delayTime));
     }
 
+    /**
+     * Wait till locator is visible then click on desired locator
+     *
+     * @param locator target locator
+     */
+    public void waitForLocatorVisibleAndClickOn(Locator locator) {
+        waitTillLocatorIsVisible(locator);
+        locator.click();
+    }
+
+    /**
+     * Scroll to coordinate
+     * @param deltaX
+     * @param deltaY
+     */
     public void scrollTo(double deltaX, double deltaY) {
         page.mouse().wheel(deltaX, deltaX);
     }
 
+    /**
+     * Simulate tap keyboard
+     * @param key
+     */
     public void tapKeyboard(String key) {
         page.keyboard().down(key);
     }
 
+    /**
+     * Force fill input to locator with disabled fill attribute
+     * @param locator targeted locator
+     * @param data String data type
+     */
     public void forceFill(Locator locator, String data) {
         locator.fill(data, new Locator.FillOptions().setForce(true));
+    }
+
+    /**
+     * Fill input to locator
+     * @param locator targeted locator
+     * @param data String data type
+     */
+    public void fill(Locator locator, String data) {
+        locator.fill(data);
+    }
+
+    /**
+     * Input to locator character by character
+     * @param locator locator targeted locator
+     * @param data data String data type
+     */
+    public void fillCharacterByCharacter(Locator locator, String data){
+        locator.type(data);
     }
 
     /**
@@ -137,11 +222,23 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Select dropdown by value
+     *
+     * @param locator Locator type
+     * @param object  SelectOption object type
+     */
+    public void selectDropdownBySelectOption(Locator locator, SelectOption object) {
+        locator.selectOption(object);
+    }
+
+    /**
      * By default, playwright will dismiss dialog/alert.
      * Set accept dialog then click element that trigger the dialog.
      */
     public void acceptDialog(Locator locator) {
-        page.onceDialog(Dialog::accept);
+        page.onDialog(dialog -> {
+            dialog.accept();
+        });
         locator.click();
     }
     //----- Action Part ----\\
@@ -160,8 +257,7 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Get text content of an locator
-     *
+     * Get text content of a locator
      * @param locator target locator
      * @return String data type
      */
@@ -170,12 +266,65 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * get list text from locator that represent list, for example kost name on listing
+     * @param locator
+     * @return list string
+     */
+    public List<String> getListInnerTextFromListLocator(Locator locator) {
+        waitTillLocatorIsVisible(locator.first());
+        return locator.allInnerTexts();
+    }
+
+    /**
      * Get value from input element
+     *
      * @param locator playwright locator
      * @return String data type
      */
     public String getInputValue(Locator locator) {
         return locator.inputValue();
+    }
+
+    /**
+     * check box
+     */
+    public void checkBox(Locator locator) {
+        locator.check();
+    }
+
+    /**
+     * uncheck box
+     */
+    public void uncheckBox(Locator locator) {
+        locator.uncheck();
+    }
+
+    /**
+     * Get button by aria role contain text
+     * @param buttonText text on button
+     * @return Locator playwright
+     */
+    public Locator getButtonByText(String buttonText) {
+        return page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(buttonText));
+    }
+
+    /**
+     * Get button by aria role with set name
+     * @param buttonText text on button
+     * @return Locator playwright
+     */
+    public Locator getButtonBySetName(String buttonText) {
+        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+    }
+
+    /**
+     * Get button by aria role with set name and exact
+     * @param buttonText text on button
+     * @param exact boolean
+     * @return Locator playwright
+     */
+    public Locator getButtonBySetName(String buttonText, boolean exact) {
+        return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText).setExact(exact));
     }
 
     //----- Get Part ----\\
@@ -253,6 +402,12 @@ public class PlaywrightHelpers {
         return locator.isVisible(new Locator.IsVisibleOptions().setTimeout(timeout));
     }
 
+    /**
+     * Wait for load state before and check visibility of target locator
+     * @param locator
+     * @param timeout
+     * @return
+     */
     public boolean isLocatorVisibleAfterLoad(Locator locator, Double timeout) {
         page.waitForLoadState(LoadState.LOAD);
         page.waitForTimeout(timeout);
@@ -261,13 +416,63 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator
-     *
+     * @param locator  Locator data type
+     */
+    public void waitFor(Locator locator) {
+        locator.waitFor();
+    }
+
+    /**
+     * Wait for a locator with timeout
      * @param locator  Locator data type
      * @param duration set duration in double
      */
     public void waitFor(Locator locator, Double duration) {
         locator.waitFor(new Locator.WaitForOptions().setTimeout(duration));
     }
+
+    /**
+     * Wait till page loaded
+     */
+    public void waitTillPageLoaded() {
+        page.waitForLoadState(LoadState.LOAD);
+    }
+
+    /**
+     * Wait till page loaded
+     * @param timeout double data type
+     */
+    public void waitTillPageLoaded(Double timeout) {
+        page.waitForLoadState(LoadState.LOAD, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    public void waitTillDomContentLoaded() {
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+    }
+
+    public void waitTillDomContentLoaded(Double timeout) {
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * Hard wait until a locator visibility is ended
+     * @param locator Locator data type
+     * @param waitTimeDelay Double data type
+     * @param maxLoop int data type
+     */
+    public void waitTillLocatorIsNotVisible(Locator locator, Double waitTimeDelay, int maxLoop) {
+        if (waitTillLocatorIsVisible(locator)) {
+            var loop = 0;
+            do {
+                hardWait(1000.0);
+                loop++;
+                if (loop >= maxLoop) {
+                    break;
+                }
+            } while (waitTillLocatorIsVisible(locator));
+        }
+    }
+
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
@@ -306,6 +511,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Clear text
+     *
+     * @param locator target locator
+     */
+    public void clearText(Locator locator){
+        locator.clear();
+    }
+
+    /**
      * Get locators as array list
      *
      * @param locator Locator type
@@ -339,15 +553,33 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Scroll Down Helper until locator is visible (per 100 pixel)
+     * Scroll Down Helper until locator is visible (per 200 pixel)
      */
     public void pageScrollUntilElementIsVisible(Locator locator) {
-        for (int i = 0; i < 100; i++) {
-            page.evaluate("window.scrollBy(0,100)");
-            if (locator.isVisible()) {
-                break;
-            }
+        for (int i = 0; i < 200; i++) {
+            page.evaluate("window.scrollBy(0,200)");
+            if (waitTillLocatorIsVisible(locator)) break;
         }
+    }
+
+    /**
+     * Scroll Down Helper until locator is visible
+     * @param locator
+     * @param scrollPerPixel
+     */
+    public void pageScrollUntilElementIsVisibleWithPixel(Locator locator, int scrollPerPixel) {
+        for (int i = 0; i < 200; i++) {
+            page.evaluate("window.scrollBy(0,"+scrollPerPixel+")");
+            if (waitTillLocatorIsVisible(locator)) break;
+        }
+    }
+
+    /**
+     * Scroll down to locator
+     * @param locator
+     */
+    public void pageScrollInView(Locator locator) {
+        locator.scrollIntoViewIfNeeded();
     }
 
     /**
@@ -358,15 +590,23 @@ public class PlaywrightHelpers {
      */
     public Page movePageByClickLocator(Page pageActive, Locator locatorTarget) {
         // move page
-        Page nextPage = pageActive.waitForPopup(() -> {
-            locatorTarget.click();
-        });
+        Page nextPage = pageActive.waitForPopup(new Page.WaitForPopupOptions().setTimeout(3000.0), locatorTarget::click);
         nextPage.bringToFront();
         return nextPage;
     }
 
     /**
+     * @param pageActive
+     * @return
+     */
+    public Page bringPageToView(Page pageActive) {
+        pageActive.bringToFront();
+        return pageActive;
+    }
+
+    /**
      * Hard wait before an action
+     *
      * @param time Double data type
      */
     public void hardWait(double time) {
@@ -384,6 +624,14 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get page URL
+     * @return string data type
+     */
+    public String getPageUrl() {
+        return page.url();
+    }
+
+    /**
      * Get Active Title page
      *
      * @return String Title Active page
@@ -397,10 +645,10 @@ public class PlaywrightHelpers {
      * Click on a desired locator based on text
      *
      * @param words target locator
-     * default timeout
+     *              default timeout
      */
     public void clickOnText(String words) {
-        clickOn(page.getByText(words));
+        clickOn(page.getByText(words).first());
     }
 
     /**
@@ -410,27 +658,27 @@ public class PlaywrightHelpers {
      * @param timeout Double data type of specific timeout
      */
     public void clickOnText(String words, Double timeout) {
-        delayAndClickOn(page.getByText(words),timeout);
+        delayAndClickOn(page.getByText(words), timeout);
     }
 
     /**
      * Click on a desired locator based on button text
      *
      * @param buttonText target locator
-     * default timeout
+     *                   default timeout
      */
     public void clickOnTextButton(String buttonText) {
-        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON, buttonText));
     }
 
     /**
      * Click on a desired locator based on button text
      *
      * @param buttonText target locator
-     * @param duration Double data type of specific timeout
+     * @param duration   Double data type of specific timeout
      */
     public void clickOnTextButton(String buttonText, double duration) {
-        clickOn(locatorByRoleSetName(AriaRole.BUTTON,buttonText));
+        clickOn(locatorByRoleSetName(AriaRole.BUTTON, buttonText));
         hardWait(duration);
     }
 
@@ -446,33 +694,88 @@ public class PlaywrightHelpers {
     /**
      * Wait until element locator is visible
      *
-     * @param text Locator type based on text
+     * @param text     Locator type based on text
      * @param duration Double type
      * @return boolean
      */
     public boolean isTextDisplayed(String text, double duration) {
-        return isLocatorVisibleAfterLoad(page.getByText(text), duration);
+        return isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
     }
 
     /**
      * Wait until element locator button based on text is visible
      *
      * @param button Locator type based on text
-     * default timeout
+     *               default timeout
      * @return boolean
      */
-    public boolean isButtonWithTextDisplayed(String button){
-        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON,button));
+    public boolean isButtonWithTextDisplayed(String button) {
+        return waitTillLocatorIsVisible(locatorByRoleSetName(AriaRole.BUTTON, button));
+    }
+
+    /**
+     * Helper to type like real keyboard
+     * note: this method need some action such as click locator
+     *
+     * @param text string
+     */
+    public void realKeyboardType(String text) {
+        page.keyboard().type(text);
+    }
+
+    /**
+     * press real keyboard, for ex 'Enter'
+     *
+     * @param keyboardKey
+     */
+    public void pressKeyboardKey(String keyboardKey) {
+        page.keyboard().press(keyboardKey);
     }
 
     /**
      * Wait until element locator button based on text is visible
      *
-     * @param button Locator type based on text
+     * @param button   Locator type based on text
      * @param duration Double type
      * @return boolean
      */
-    public boolean isButtonWithTextDisplayed(String button, double duration){
-        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON,button),duration);
+    public boolean isButtonWithTextDisplayed(String button, double duration) {
+        return isLocatorVisibleAfterLoad(locatorByRoleSetName(AriaRole.BUTTON, button), duration);
     }
+
+    public boolean isButtonDisable(Locator locator) {
+        return locator.isDisabled();
+    }
+
+    /**
+     * check if data is null or blank
+     * @param locator
+     * @return
+     */
+    public boolean isDataBlankorNull(Locator locator) {
+        return locator.textContent().isBlank();
+    }
+
+    //---- Assert Part ----\\
+
+    /**
+     * Playwright Assert locator is visible
+     *
+     * @param locator Locator type
+     */
+    public void assertVisible(Locator locator) {
+        assertThat(locator).isVisible();
+    }
+
+    /**
+     * Playwright Assert locator is disabled
+     *
+     * @param locator Locator type
+     */
+    public void assertDisable(Locator locator) {
+        assertThat(locator).isDisabled();
+    }
+
+    //---- Assert Part ----\\
+
 }

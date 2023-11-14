@@ -49,7 +49,7 @@ public class RewardManagementPO {
         addDescriptionTextBox = page.locator("textarea[name=\"description\"]");
         startDateReward = page.locator("//input[@name='start_date']");
         addTotalQuotaTextBox = page.locator("input[name=\"quota\\[total\\]\"]");
-        dateToday = page.locator("//*[@class=' ui-datepicker-days-cell-over  ui-datepicker-today']");
+        dateToday = page.locator("//*[contains(@class,' ui-datepicker-days-cell-over  ui-datepicker-today')]");
         endDateReward = page.locator("//input[@name='end_date']");
         addTotalEachTextBox = page.locator("input[name=\"quota\\[total_user\\]\"]");
         addRedemptionPointTextBox = page.locator("input[name=\"redeem_value\"]");
@@ -143,8 +143,10 @@ public class RewardManagementPO {
      */
     public void clickOnUpdateReward() {
         playwright.clickOn(updateRewardButton);
-//        playwright.hardWait(3000);
-//        playwright.clickOn(yesUpdateRewardButton);
+        playwright.hardWait(3000);
+        if (yesUpdateRewardButton.isVisible()) {
+            playwright.clickOn(yesUpdateRewardButton);
+        }
     }
 
     /**

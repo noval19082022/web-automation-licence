@@ -2,16 +2,22 @@ package steps.mamikos.owner.chat;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
+import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.BroadcastChatPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class BroadcastChatSteps {
     Page page = ActiveContext.getActivePage();
     BroadcastChatPO broadcast = new BroadcastChatPO(page);
+    LoadingPO loading = new LoadingPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
 
     @Then("user verify pop up message {string} is appear")
     public void user_verify_pop_up_message_is_appear(String message) {
@@ -48,8 +54,8 @@ public class BroadcastChatSteps {
         broadcast.clickOnCloseSearchBroadcastSearchIcon();
     }
 
-    @Then("the list of Kosts should be displayed")
-    public void the_list_of_Kosts_should_be_displayed() {
+    @Then("the list of Kos should be displayed")
+    public void the_list_of_Kos_should_be_displayed() {
         Assert.assertTrue(broadcast.isKosListDisplayed(), "kost list not displayed");
     }
 
@@ -78,8 +84,8 @@ public class BroadcastChatSteps {
         Assert.assertEquals(broadcast.getCountText(),countText);
     }
 
-    @Then("user should see the message {string} displayed under the broadcast text field")
-    public void user_should_see_warning_message_under_broadcast_textfield(String error) {
+    @Then("user should see the message {string} displayed under text field")
+    public void userShouldSeeTheMessageDisplayedUnderTextField(String error) {
         Assert.assertEquals(broadcast.getErrorInputBroadcastText().trim(), error, "Error message is wrong");
     }
 
@@ -117,5 +123,113 @@ public class BroadcastChatSteps {
     @Then ("Lihat penerima page is displayed")
     public void lihat_penerima_page_is_displayed(){
         Assert.assertTrue(broadcast.isLihatPenerimaPageDisplayed());
+    }
+
+    @When("owner goes to broadcast chat")
+    public void ownerGoesToBroadcastChat() {
+        ownerDashboard.clickToExpandFiturPromosi();
+        ownerDashboard.clickOnBroadcastChat();
+    }
+
+    @When("owner click on Tambah Kos button on no kos active pop-up broadcast chat owner")
+    public void ownerClickOnTambahKosButtonOnNoKosActivePopUpBroadcastChatOwner() {
+        broadcast.clickOnTambahKosButton();
+    }
+
+    @Then("owner should not be able to see anda belum memiliki kos aktif pop-up broadcast chat owner")
+    public void ownerShouldNotBeAbleToSeeAndaBelumMemilikiKosAktifPopUpBroadcastChatOwner() {
+        Assert.assertFalse(broadcast.isTambahKosButtonVisible(), "Anda belum memiliki kos aktif pop-up broadcast chat owner is visible");
+        Assert.assertFalse(broadcast.isAndaBelumMemilikiKosAktifTextDisplayed(), "Anda belum memiliki kos aktif pop-up broadcast chat owner is visible");
+    }
+
+    @Then("owner with active package should be able to see the broadcast chat page")
+    public void ownerWithActivePackageShouldBeAbleToSeeTheBroadcastChatPage() {
+        Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
+        loading.waitForLoadingIconDisappear();
+        Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");
+        Assert.assertTrue(broadcast.isAjukanGantiPaketVisible(), "Ajukan ganti paket button is not displayed");
+    }
+
+    @Then("owner non gp should be able to see the broadcast chat page for non gp owner")
+    public void ownerNonGpShouldBeAbleToSeeTheBroadcastChatPageForNonGpOwner() {
+        Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
+        loading.waitForLoadingIconDisappear();
+        Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");
+        Assert.assertTrue(broadcast.isBeliPaketButtonVisible(), "Beli paket button is not displayed");
+        Assert.assertEquals(broadcast.getGpPackageHeader(), "Fitur ini khusus pengguna GoldPlus 2");
+    }
+
+    @When("owner click on lihat rincian button broadcast chat")
+    public void ownerClickOnLihatRincianButtonBroadcastChat() {
+        broadcast.clickOnLihatRincianButton();
+    }
+
+    @When("owner clicks on Baca selengkapnya button")
+    public void ownerClicksOnBacaSelengkapnyaButton() {
+        broadcast.clicksOnLihatSelengkapnyaButton();
+    }
+
+    @When("owner add broadcast chat for kost {string}")
+    public void ownerAddBroadcastChatForKost(String kostName) {
+        broadcast.clickOnTambahBroadcastChatButton();
+        broadcast.searchKostBC(kostName);
+    }
+
+    @When("owner clicks Kos {string} and Pilih Kos button")
+    public void ownerClicksPilihKosButton(String kostName) {
+        broadcast.clickOnTambahBroadcastChatKostNameResult(kostName);
+        broadcast.clicksOnPilihKosButton();
+    }
+
+    @Then("owner can see toast with content text is {string}")
+    public void ownerCanSeeToastContentIs(String toastText) {
+        Assert.assertEquals(broadcast.getToastText(), toastText, "Toast doesn't match");
+    }
+
+    @When("owner goes to Tambah Broadcast Chat Bantuan & Tips Page")
+    public void ownerGoesToTambahBroadcastChatBantuanTipsPage() {
+        broadcast.clickOnTambahBroadcastChatButton();
+        broadcast.clicksOnBantuanTipsButton();
+    }
+
+    @Then("owner can sees displaying search result is {string}")
+    public void ownerCanSeesDisplayingSearchResultIs(String kosName) {
+        Assert.assertEquals(broadcast.getDisplayingSearchResultKosNameText(), kosName);
+    }
+
+    @Then("owner can see empty kos list condition")
+    public void ownerCanSeeEmptyKosListCondition() {
+        Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosHeaderText()), "Properti Tidak Ditemukan");
+        Assert.assertEquals(JavaHelpers.removeExtraNewLine(broadcast.getEmptyKosBodyText()), "Maaf, kami tidak menemukan properti yang Anda cari. Coba cari dengan nama lain.");
+    }
+
+    @And("owner Masukan Pesan and choose row number {int} from the broadcast chat dashboard")
+    public void ownerMasukanPesanAndChooseRowNumberFromTheBroadcastChatDashboard(int broadcastChatOptionNumber) {
+        broadcast.clicksOnMasukkanPesanButton();
+        broadcast.selectMessageOptionBC(broadcastChatOptionNumber);
+        broadcast.clicksOnPilihPesanButton();
+    }
+
+    @And("user clicks on Tidak Jadi button")
+    public void userClicksOnTidakJadiButton() {
+        broadcast.clicksOnPilihTidakJadiButton();
+    }
+
+    @And("owner clicks on Keluar button")
+    public void ownerClicksOnKeluarButton() {
+        broadcast.clicksOnKeluarButton();
+    }
+
+    @When("owner edit template message on Broadcast Chat to row number {int}")
+    public void ownerEditTemplateMessageOnBroadcastChatToRowNumber(int rowNumber) {
+        broadcast.clickUbahTemplateBroadcastText();
+        broadcast.selectMessageOptionBC(rowNumber);
+        broadcast.clicksOnPilihPesanButton();
+    }
+
+    @Then("owner can sees button {string} and button {string} is visible")
+    public void ownerCanSeesButtonAndButtonIsVisible(String buttonString, String buttonString1) {
+        Assert.assertEquals(broadcast.getButtonDetailText(), buttonString);
+        Assert.assertEquals(broadcast.getButtonSubmissionText(), buttonString1);
     }
 }

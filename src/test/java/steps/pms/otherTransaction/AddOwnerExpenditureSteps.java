@@ -5,8 +5,8 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageobject.pms.otherTransaction.AddOwnerExpenditurePO;
-import pageobject.pms.otherTransaction.listOwnerExpenditurePO;
+import pageobject.pms.othertransaction.AddOwnerExpenditurePO;
+import pageobject.pms.othertransaction.listOwnerExpenditurePO;
 
 import java.util.List;
 import java.util.Map;
@@ -54,11 +54,11 @@ public class AddOwnerExpenditureSteps {
     public void admin_upload_valid_attachment() {
         add.uploadAttachment("jpg");
     }
-    @When("admin input no invoice biaya {string}")
+    @When("admin input/edit no invoice biaya {string}")
     public void admin_input_no_invoice_biaya(String invoice) {
         add.setNoInvoiceBiaya(invoice);
     }
-    @When("admin choose tujuan transfer {string}")
+    @When("admin choose/edit tujuan transfer {string}")
     public void admin_choose_tujuan_transfer(String vendor) {
         add.setTujuanTransfer(vendor);
     }
@@ -271,5 +271,34 @@ public class AddOwnerExpenditureSteps {
     @Then("admin can't add more pengeluaran")
     public void admin_can_t_add_more_pengeluaran() {
         add.assertTambahPengeluaranButtonDisable();
+    }
+    @Then("total pengeluaran should be {string}")
+    public void total_pengeluaran_should_be(String total) {
+        add.assertTotalPengeluaran(total);
+    }
+    @When("admin add pengeluaran :")
+    public void admin_add_pengeluaran(DataTable tables) {
+        biayaPengeluaran = tables.asMaps(String.class, String.class);
+        for (Map<String,String> biaya : biayaPengeluaran){
+            String no = biaya.get("no");
+            String category = biaya.get("Kategori Pengeluaran");
+            String name = biaya.get("Nama Pengeluaran");
+            String quantity = biaya.get("Kuantitas");
+            String amount = biaya.get("Nominal Pengeluaran");
+            String status = biaya.get("Status Persediaan");
+            String product = biaya.get("Jenis Produk");
+
+            add.setKategoriPengeluaran(category,no);
+            add.setNamaPengeluaran(name,no);
+            add.setKuantitas(quantity,no);
+            add.setNominalPengeluaran(amount,no);
+            add.setStatusPersediaan(status,no);
+            add.setJenisProduk(product,no);
+        }
+        add.addMorePengeluaran();
+    }
+    @When("admin remove pengeluaran {string}")
+    public void admin_remove_pengeluaran(String index) {
+        add.deletePengeluaran(index);
     }
 }

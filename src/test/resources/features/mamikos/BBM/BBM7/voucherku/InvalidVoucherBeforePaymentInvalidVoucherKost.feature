@@ -1,4 +1,4 @@
-@voucher @BBM7 @saktirun1
+@BBM7 @regression @voucher @TEST_COOP-2658
 Feature: Tenant Apply Invalid Kost Voucher
 
   @continue
@@ -9,7 +9,7 @@ Feature: Tenant Apply Invalid Kost Voucher
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin edit voucher with id name and "apply" it to kost:
       | voucher name stag | voucher name prod | voucher id stag | voucher id prod | kost name stag            | kost name prod            |
-      | AUTOKOSTINV       | AUTOKOSTINV       | 74839           | 74839           | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | AUTOKOSTINV       | AUTOKOSTINV       | 74839           | 74839           | kost reykjavik            | Kost Adi Auto SinggahSini |
     Then admin can see message voucher is updated
 
   @continue
@@ -29,8 +29,8 @@ Feature: Tenant Apply Invalid Kost Voucher
   Scenario: Admin Deactivate Voucher AUTOKOSTINV
     Given admin go to mamikos mamipay admin
     And admin edit voucher with id name and "not apply" it to kost:
-      | voucher name stag | voucher name prod | voucher id stag | voucher id prod | kost name stag            | kost name prod            |
-      | AUTOKOSTINV       | AUTOKOSTINV       | 74839           | 74839           | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | voucher name stag | voucher name prod | voucher id stag | voucher id prod | kost name stag | kost name prod            |
+      | AUTOKOSTINV       | AUTOKOSTINV       | 74839           | 74839           | kost reykjavik | Kost Adi Auto SinggahSini |
     Then admin can see message voucher is updated
 
   @continue

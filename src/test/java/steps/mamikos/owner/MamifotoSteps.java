@@ -7,12 +7,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamifotoPO;
+import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamifotoPO mamifoto = new MamifotoPO (page);
+    InvoicePO invoice = new InvoicePO(page);
 
 
 
@@ -24,7 +26,7 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(3);
+        playwright.hardWait(3000);
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
@@ -52,7 +54,7 @@ public class MamifotoSteps {
 
     @And("owner select package mamifoto")
     public void owner_select_package_mamifoto() {
-       mamifoto.clickOnMamifotoPackageNonGPFirst();
+       mamifoto.clickOnMamifotoPackageFirst();
     }
 
     @Then("owner see pop up doesnt have property")
@@ -117,6 +119,7 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Detail Transaksi with status {string}")
     public void owner_click_lihat_detail_transaksi_with_status(String status)  {
+        playwright.hardWait(3000);
         Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
         mamifoto.clickOnSeeDetailTransactionMamifoto();
     }
@@ -178,5 +181,123 @@ public class MamifotoSteps {
         mamifoto = new MamifotoPO(ActiveContext.getActivePage());
         Assert.assertTrue(mamifoto.getURL().contains(loginProphoto), "URL doesn't match");
     }
+
+    @When("owner wants to select Mamifoto package")
+    public void owner_wants_to_select_mamifoto_package() {
+        mamifoto.clickOnFiturPromosi();
+        mamifoto.clickOnMamifotoSidebar();
+        mamifoto.clickOnLihatPaket();
+        Assert.assertTrue(mamifoto.mamifotoHeaderSelectPackageisAppear(),"Lihat Paket is not Appear");
+    }
+
+    @Then("verify discount price on the package list")
+    public void verify_discount_price_on_the_package_list() {
+        Assert.assertEquals(mamifoto.getTextHeaderDiscountMemberGP(),mamifoto.getTextHeaderDiscountMemberGP(),"text doesnt match");
+    }
+
+    @Then("verify  discount price on the detail tagihan")
+    public void verify_discount_price_on_the_detail_tagihan() {
+        Assert.assertEquals(mamifoto.getTextDiscountMemberGPDetailTagihan(),mamifoto.getTextDiscountMemberGPDetailTagihan(),"Text doesnt match");
+        Assert.assertEquals(mamifoto.getTextDiscountAmountGPDetailTagihan(),mamifoto.getTextDiscountAmountGPDetailTagihan(),"price doesnt match");
+    }
+
+    @When("owner paid MamiFoto")
+    public void owner_paid_mami_foto() {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(5000);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertEquals(mamifoto.getTextDiscountGPInvoiceMamifoto(),mamifoto.getTextDiscountGPInvoiceMamifoto(),"text doesnt match");
+    }
+
+    @Then("verify discount price GP doesnt appear on the package list")
+    public void verify_discount_price_gp_doesnt_appear_on_the_package_list() {
+        Assert.assertFalse(mamifoto.mamifotoHeaderDiscountGP(),"Header diskon is appear");
+    }
+
+    @Then("verify  discount price GP doesnt appear the detail tagihan")
+    public void verify_discount_price_gp_doesnt_appear_the_detail_tagihan() {
+        Assert.assertFalse(mamifoto.discountMemberGPDetailTagihan(),"Discount Member is appear");
+        Assert.assertFalse(mamifoto.discountAmountGPDetailTagihan(),"Discount Ammount is appear");
+    }
+
+    @When("owner paid MamiFoto Non GP")
+    public void owner_paid_mami_foto_non_gp()  {
+        mamifoto.clickOnButtonBayarSekarangMamifoto();
+        playwright.hardWait(10000.0);
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
+        Assert.assertFalse(mamifoto.discountGPInvoiceMamifoto(),"Discount GP is appear");
+    }
+
+    @Then("verify unpaid invoice mamifoto is {int}")
+    public void verify_unpaid_invoice_mamifoto_is(int unpaidInvoice) {
+        System.out.println(mamifoto.getCountMamifotoInvoiceUnpaid());
+        Assert.assertEquals(unpaidInvoice, mamifoto.getCountMamifotoInvoiceUnpaid());
+    }
+
+    @When("owner click back previous button")
+    public void owner_click_back_previous_button() {
+        page.goBack();
+        page.reload();
+    }
+
+    @When("owner click button lihat paket")
+    public void owner_click_button_lihat_paket() {
+        mamifoto.clickOnLihatPaket();
+    }
+
+    @Then("owner paid transaction unpaid")
+    public void owner_paid_transaction_unpaid() {
+        playwright.hardWait(5000.0);
+        while (mamifoto.checkUnpaidInvoiceMamifoto()){
+            mamifoto.clickOnSeeFirstDetailTransaction();
+            invoice.paymentOVO("081280003230");
+            page.goBack();
+            page.reload();
+        }
+    }
+
+    @When("owner click tab panduan area")
+    public void owner_click_tab_panduan_area() {
+        mamifoto.clickOnPanduanArea();
+    }
+
+    @When("owner close pop up panduan")
+    public void owner_close_pop_up_panduan() {
+        mamifoto.clickOnCloseBacaPanduan();
+    }
+
+    @And("owner will see title and detail title {string} on panduan panduan persiapan foto or video")
+    public void ownerWillSeeTitleAndDetailTitleOnPanduanPanduanPersiapanFotoVideo(String titleAndDetailText) {
+        Assert.assertTrue(mamifoto.titleOnPanduanAndAreaAppear(titleAndDetailText),"title doesnt appear");
+    }
+
+    @And("admin bangkrupux navigate to premium add on menu")
+    public void admin_bangkrupux_navigate_to_premium_add_on_menu() {
+        mamifoto.navigatesToPremiumAddOn();
+    }
+
+    @When("admin create invoice mamifoto from phone number {string}")
+    public void admin_create_invoice_mamifoto_from_phone_number(String phoneNumber) {
+       mamifoto.addTransactionMamifotoFromAdmin(phoneNumber);
+    }
+
+    @Then("invoice mamifoto succsess created with status {string} and for owner {string}")
+    public void invoice_mamifoto_succsess_created_with_status_and_for_owner(String status, String phone) {
+        Assert.assertEquals(mamifoto.getTextStatusInvoiceMamifoto(), status, "status is not match");
+        Assert.assertEquals(mamifoto.getTextOwnerPhoneNumber().replaceAll("[^0-9]", ""), phone,"phone number is not match");
+    }
+
+    @Then("owner can verify transaction have status {string} from {string}")
+    public void owner_can_verify_transaction_have_status_from(String status, String packageName) {
+        Assert.assertEquals(mamifoto.getTextInvoiceUnpaidMamifoto(), status, "status is not match");
+        Assert.assertEquals(mamifoto.getTextPackageMamifoto(), packageName, "package name is not match");
+        mamifoto.clickOnSeeFirstDetailTransaction();
+    }
+
+    @And("owner wants to accsess mamifoto")
+    public void owner_wants_to_accsess_mamifoto() {
+        mamifoto.navigatesToMamifotoPage();
+    }
+
 
 }

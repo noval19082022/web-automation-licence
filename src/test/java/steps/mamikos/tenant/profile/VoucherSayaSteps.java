@@ -196,4 +196,5 @@ public class VoucherSayaSteps {
     user_see_kedaluwarsa_empty_state_landing_page() {
         Assert.assertTrue(voucherSaya.isKedaluwarsaEmptyStateVisible(), "voucher is present");
     }
+
 }

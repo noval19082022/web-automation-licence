@@ -1,13 +1,13 @@
 package testdata;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class InvoiceTestData {
+    @Setter @Getter
     private static String invoiceNumber;
 
-    public static void setInvoiceNumber(String invoiceNumber) {
-        InvoiceTestData.invoiceNumber = invoiceNumber;
-    }
+    @Setter @Getter
+    private static String manualInvoiceNumber;
 
-    public static String getInvoiceNumber() {
-        return InvoiceTestData.invoiceNumber;
-    }
 }

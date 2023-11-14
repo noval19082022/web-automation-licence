@@ -17,6 +17,7 @@ public class BrowserOptions {
     public static Browser.NewContextOptions browserContextOptions() {
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions();
         contextOptions.setAcceptDownloads(GlobalConfig.SET_ACCEPT_DOWNLOAD);
+        contextOptions.setScreenSize(GlobalConfig.SCREEN_WIDTH, GlobalConfig.SCREEN_HEIGHT);
         contextOptions.setViewportSize(GlobalConfig.SCREEN_WIDTH, GlobalConfig.SCREEN_HEIGHT);
         if (GlobalConfig.SET_VIDEO_RECORD)
             contextOptions.setRecordVideoDir(Paths.get("target/videos/"));

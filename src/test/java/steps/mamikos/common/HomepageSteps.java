@@ -61,6 +61,8 @@ public class HomepageSteps {
     public void tenantCanSeeAdsDropdownOption() {
         home.clickOnAdsDropdown();
         Assert.assertTrue(home.isKostMenuDisplayed(), "Kost Menu Dropdown is not present");
+        Assert.assertTrue(home.isSinggahsiniApikMenuDisplayed(), "Singgahsini and Apik Menu Dropdown is not present");
+        Assert.assertTrue(home.isKosAndalanMenuDisplayed(), "Kos Andalan Menu Dropdown is not present");
         Assert.assertTrue(home.isApartmentMenuDisplayed(), "Apartment Menu Dropdown is not present");
     }
 
@@ -115,10 +117,12 @@ public class HomepageSteps {
     @When("user open e-mail in footer")
     public void userOpenEMailInFooter() {
         home.clickOnEmailFooterLink();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 
     @Then("user should redirect to Form Bantuan page")
     public void userShouldRedirectToFormBantuanPage() {
+        home = new HomePO(ActiveContext.getActivePage());
         Assert.assertTrue(home.isFormBantuanTitleDisplayed(), "Form Bantuan page is not present");
     }
 
@@ -162,5 +166,45 @@ public class HomepageSteps {
     @When("user open Around University in UGM")
     public void userOpenAroundUniversityInUGM() {
         home.clickAroundUGM();
+    }
+
+    @Then("user can see Lihat pengajuan sewa lainnya text")
+    public void user_can_see_lihat_pengajuan_sewa_text() {
+        Assert.assertTrue(home.isLihatPengajuanLainBtnVisible(), "lihat pengajuan sewa lainnya not visible");
+    }
+
+    @When("user click on Lihat pengajuan sewa lainnya button")
+    public void user_click_on_lihat_pengajuan_sewa_lainnya_button() {
+        home.clickLihatPengajuanLainBtn();
+    }
+
+
+    @When("user scroll into promo kost section")
+    public void userScrollIntoPromoKostSection() {
+        home.scrollIntoPromoNgebut();
+    }
+
+    @Then("user will see promo ngebut info on kost card")
+    public void userWillSeePromoNgebutInfoOnKostCard() {
+        Assert.assertNotNull(home.promoNgebutInfo());
+    }
+
+
+    @When("user want to visit apartment list page from ads Dropdown")
+    public void userWantToVisitApartementListPageFromAdsDropdown() {
+        home.visitApartmentListPage();
+    }
+
+    @And("user want to click on App Store on the footer")
+    public void userWantToClickOnAppStoreOnTheFooter() {
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            home.clickOnAppStore();
+        });
+        ActiveContext.setActivePage(page1);
+    }
+
+    @And("user want to visit cari kost list page from ads Dropdown")
+    public void userWantToVisitCariKostListPageFromAdsDropdown() {
+        home.visitCariKosttListPage();
     }
 }

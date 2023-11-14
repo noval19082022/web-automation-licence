@@ -250,6 +250,7 @@ public class MamikosListInvoicePO {
      * @return Integer data type of other price's price number
      */
     public Integer getOtherPriceNumber(String invoiceEl) {
+        playwright.hardWait(2000);
         getOtherPriceNumber = page.locator("//*[.='" + invoiceEl + "']/following-sibling::*[1]");
         return JavaHelpers.extractNumber(playwright.getText(getOtherPriceNumber));
     }
@@ -423,7 +424,7 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void selectDetailStatus(String statusTransaction) throws InterruptedException {
+    public void selectDetailStatus(String statusTransaction) {
         playwright.selectDropdownByValue(page.locator("select[name='status']"), statusTransaction);
     }
 
@@ -660,5 +661,13 @@ public class MamikosListInvoicePO {
      */
     public String getActionResultMessage() {
         return playwright.getText(actionResult);
+    }
+
+    /**
+     * search invoice by package, Goldplus 1 and 2
+     * @param value select package
+     */
+    public void selectPackageType(String value) {
+        playwright.selectDropdownByValue(page.locator("select[name='package_type']"), value);
     }
 }

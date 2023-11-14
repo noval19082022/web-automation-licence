@@ -25,7 +25,7 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
 
         PlaywrightSourceManager.setLocalPlaywright(Playwright.create());
         PlaywrightSourceManager.setLocalBrowser(browserInitialize.getBrowser(GlobalConfig.BROWSER_NAME, BrowserOptions.launchOptions()));
-        FlowControl.setStrictFlow(false);
+        FlowControl.setStrictFlow(true);
         FlowControl.setContinueFlow(false);
     }
     //

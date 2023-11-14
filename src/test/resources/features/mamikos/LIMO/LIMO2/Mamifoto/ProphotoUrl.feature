@@ -15,6 +15,7 @@ Feature: Check when accsess prophoto Landing Page
       | 082233545506 | 0          | qwerty123 |
     When owner navigates to old prophoto page
     Then owner can see mamifoto page
+    And owner should successfully log out
 
   @TEST_LIMO-3890 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: Tenant access MamiFoto Landing Page from Url
@@ -24,3 +25,4 @@ Feature: Check when accsess prophoto Landing Page
       | 081223344550 | 0          | qwerty123 |
     When tenant navigates to old prophoto page
     Then user go to mamikos homepage
+    And user logs out as a Tenant user

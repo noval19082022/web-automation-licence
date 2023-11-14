@@ -3,7 +3,9 @@ package pageobject.admin.mamipay.invoiceManual;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import utilities.PlaywrightHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,6 +16,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class InvoiceManualPO {
 
     private Page page;
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     // Invoice List Page
     private Locator buatInvoiceButton;
@@ -26,7 +29,55 @@ public class InvoiceManualPO {
     private Locator lastInvoiceData;
     private Locator namaBiayaHover;
     private Locator jumlahBiayaHover;
+    private Locator invoiceNumberLast;
+    private Locator searchBar;
+    private Locator searchBtn;
+    private Locator noInvoiceCol;
+    private Locator detailPenyewaCol;
+    private Locator namaListingCol;
+    private Locator searchDropDown;
+    private Locator selectSearchBy;
+    private Locator notFound;
+    private Locator clearSearchValue;
+    private Locator dibuatOlehCol;
+    private Locator kebabBtn;
+    private Locator ubahStatusBtn;
+    private Locator statusInvCol;
+    private Locator lastInvoiceNumber;
     // Invoice List Page
+
+    //Filter Invoice Manual
+    private Locator filter;
+    private Locator filterTitle;
+    private Locator filterSubtitle;
+    private Locator statusInvTitle;
+    private Locator jenisBiayaTitle;
+    private Locator tanggalInvDibuat;
+    private Locator tanggalMulaiTitle;
+    private Locator tanggalAkhirTitle;
+    private Locator closeFilterBtn;
+    private Locator terapkanBtn;
+    private Locator valueStatusInv;
+    private Locator resetBtn;
+    private Locator counterOnFilter;
+    private Locator mainResetBtn;
+    private Locator statusInvDropdown;
+    private Locator tickPaid;
+    private Locator calViewTglMulai;
+    private Locator calViewTglAkhir;
+    private Locator jenisBiayaDropdown;
+    private Locator tickJenisBiaya;
+    private Locator valueJenisBiaya;
+    //Filter Invoice Manual
+
+    // Invoice Detail Page
+    private Locator jenisPembayaran;
+    private Locator totalPembayaranOnLeftSide;
+    private Locator listingName;
+    private Locator jnsBiayaOnRincianPmbayaran;
+    private Locator namaBiayaOnRincianPmbayaran;
+    private Locator totalPembayaranOnRightSide;
+    // Invoice Detail Page
 
     // Buat Invoice Page
     private Locator propertyNameText;
@@ -57,6 +108,11 @@ public class InvoiceManualPO {
     private Locator cancelOnDelConfirmation;
     private Locator deleteOnDelConfirmation;
     private Locator editInvManBtn;
+    private Locator popUpChangeInvConfirmTitle;
+    private Locator popUpChangeInvConfirmSubtitle;
+    private Locator batalBtnOnChangeInvConfirmation;
+    private Locator lanjutkanBtnOnChangeInvConfirmation;
+    private Locator buatDanKirimBtnDisable;
     // Buat Invoice Page
 
     // Tambah Biaya Pop Up
@@ -75,6 +131,8 @@ public class InvoiceManualPO {
     private Locator jumlahBiayaErrMsg;
     private Locator lainnyaField;
     private Locator errMsgLainnya;
+    private Locator durasiBiayachar;
+    private Locator counterText;
     // Tambah Biaya Pop Up
 
     // Buat dan Kirim Pop Up
@@ -96,7 +154,17 @@ public class InvoiceManualPO {
     //---Edit Invoice Manual Pop Up---//
     private Locator namaBiayaDropdownEdit;
     //---Edit Invoice Manual Pop Up---//
-    
+
+    //---Ubah Status Invoice---//
+    private Locator kembaliBtnOnUbahStatus;
+    private Locator calViewOnUbahStatus;
+    private Locator timeOnUbahStatus;
+    private Locator timeField;
+    private Locator simpanBtnOnUbahStatus;
+    private Locator ubahBtnOnUbahStatus;
+    private Locator toastUbahStatus;
+    //---Ubah Status Invoice---//
+
     public InvoiceManualPO(Page page){
         this.page = page;
 
@@ -104,6 +172,38 @@ public class InvoiceManualPO {
         buatInvoiceButton = page.getByTestId("create-invoice-btn");
         paginationButton = page.locator("(//button[@class='bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm'])");
         rowInvoiceData = page.locator("//tbody/tr");
+        invoiceNumberLast = page.locator("td > .bg-c-link ").last();
+        searchBar = page.getByTestId("invoice-manual-filter-searchbar");
+        searchBtn = page.getByTestId("invoice-manual-filter-button-apply");
+        noInvoiceCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(0);
+        detailPenyewaCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(1);
+        namaListingCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(2);
+        searchDropDown = page.locator("//span[@class='bg-c-select__trigger-text']");
+        notFound = page.getByText("Data yang dicari tidak ditemukan");
+        clearSearchValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
+        dibuatOlehCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(6);
+        kebabBtn = page.getByTestId("invoice-manual-action-btn");
+        ubahStatusBtn = page.getByTestId("invoice-manual-change-status");
+        statusInvCol = page.locator("//tr").last().locator("td").nth(5);
+
+        //---Filter Invoice Manual---//
+        filter = page.getByTestId("invoice-manual-filter-button-filter");
+        filterTitle = page.getByTestId("invoice-manual-filter-modal").getByText("Filter");
+        filterSubtitle = page.getByText("Silakan pilih sesuai kebutuhan anda");
+        closeFilterBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        terapkanBtn = page.getByTestId("invoice-manual-filter-modal-apply");
+        resetBtn = page.getByTestId("invoice-manual-filter-modal-reset");
+        counterOnFilter = page.locator("//div[@class='mr-8 bg-c-badge-counter bg-c-badge-counter--black']");
+        mainResetBtn = page.getByTestId("invoice-manual-filter-button-reset");
+        statusInvDropdown = page.getByTestId("invoice-manual-filter-status").getByTestId("select-checkbox");
+        calViewTglMulai = page.getByTestId("invoice-manual-filter-startdate").getByPlaceholder("Pilih tanggal di sini");
+        calViewTglAkhir = page.getByTestId("invoice-manual-filter-enddate").getByPlaceholder("Pilih tanggal di sini");
+        jenisBiayaDropdown = page.getByTestId("invoice-manual-filter-type").getByTestId("select-checkbox");
+
+        //---Invoice Detail Page---//
+        listingName = page.getByText("Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara");
+        namaBiayaOnRincianPmbayaran = page.getByText("Parkir Mobil (3 hari)");
+        totalPembayaranOnRightSide = page.locator("//div[@class='invoice-detail-row-section']//p)[4]");
 
         //---Buat Invoice Page---//
         backButtonBuatInvoice = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("back"));
@@ -128,6 +228,11 @@ public class InvoiceManualPO {
         cancelOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
         deleteOnDelConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         editInvManBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("edit"));
+        popUpChangeInvConfirmTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Yakin ingin mengganti jenis invoice ini?"));
+        popUpChangeInvConfirmSubtitle = page.getByText("Anda hanya dapat memilih 1 jenis invoice. Perubahan jenis invoice akan menghapus");
+        batalBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        lanjutkanBtnOnChangeInvConfirmation = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        buatDanKirimBtnDisable = page.locator("//button[contains(., 'Buat dan Kirim')]");
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
@@ -158,12 +263,22 @@ public class InvoiceManualPO {
         descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
         yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+
+        //---Ubah Status Invoice---//
+        kembaliBtnOnUbahStatus = page.getByTestId("change-status-cancel");
+        calViewOnUbahStatus = page.getByPlaceholder("Pilih tanggal di sini");
+        timeOnUbahStatus = page.getByTestId("change-status-paid-time");
+        timeField = page.locator("//*[@data-testid='change-status-paid-time']");
+        simpanBtnOnUbahStatus = page.getByTestId("change-status-save");
+        ubahBtnOnUbahStatus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
+        toastUbahStatus = page.locator("//*[@class='global-toast bg-c-toast bg-c-toast--fixed']");
     }
 
     /**
      * Click buat invoice in Invoice Manual
      */
     public void clickBuatInvoice() {
+        playwright.waitTillLocatorIsVisible(buatInvoiceButton);
         buatInvoiceButton.click();
     }
 
@@ -261,6 +376,11 @@ public class InvoiceManualPO {
             Date dt = calendar.getTime();
             SimpleDateFormat tomorrow = new SimpleDateFormat("d");
             startDate = page.locator("(//span[@class='cell day selected today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+        } else if (periodeAwal.equalsIgnoreCase("selected today")) {
+            //get selected today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day selected today'][contains(., '" +today.format(dates)+ "')]").nth(0);
         } else {
             startDate = page.getByTestId("billing-modal-start-date").getByText(periodeAwal);
         }
@@ -278,7 +398,7 @@ public class InvoiceManualPO {
             //get today date
             SimpleDateFormat today = new SimpleDateFormat("d");
             Date dates = new Date();
-            endDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(1);
+            endDate = page.locator("//span[@class='cell day today'][contains(text(),'"+today.format(dates)+"')]");
         } else if (periodeAkhir.equalsIgnoreCase("tomorrow")) {
             //get tomorrow date
             Calendar calendar = Calendar.getInstance();
@@ -598,6 +718,243 @@ public class InvoiceManualPO {
         }
     }
 
+    /**
+     * Assert Change Invoice Confirmation Title
+     * @param title
+     */
+    public void assertChangeInvConfirmationTitle(String title) {
+        assertThat(popUpChangeInvConfirmTitle).hasText(title);
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Subtitle
+     * @param subtitle
+     */
+    public void assertChangeInvConfirmationSubtitle(String subtitle){
+        assertThat(popUpChangeInvConfirmSubtitle).hasText(subtitle);
+    }
+
+    /**
+     * Click Batal button on Change Invoice Confirmation
+     */
+    public void clickBatalOnChangeInvConfirmation(){
+        batalBtnOnChangeInvConfirmation.click();
+    }
+
+    /**
+     * Click Lanjutkan button on Change Invoice Confirmation
+     */
+    public void clickLanjutkanOnChangeInvConfirmation(){
+        lanjutkanBtnOnChangeInvConfirmation.click();
+    }
+
+    /**
+     * Assert Change Invoice Confirmation Pop Up
+     */
+    public void changeInvConfirmationPopUpIsNotDisplay(){
+        assertThat(popUpChangeInvConfirmTitle).isHidden();
+    }
+
+    /**
+     * Assert Buat dan Kirim button when disable
+     */
+    public void assertBuatDanKirimDisable(){
+        assertThat(buatDanKirimBtnDisable).isDisabled();
+    }
+
+    /**
+     * clicks Last Invoice Number
+     * @return invoice number
+     */
+    public Page clickInvoiceNumber(){
+        page = page.waitForPopup(() -> {invoiceNumberLast.click();});
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
+    }
+
+    /**
+     * assert Jenis Pembayaran on Detail Invoice Page
+     * @param invType
+     */
+    public void assertJenisPembayaran(String invType){
+        jenisPembayaran = page.locator("#invoiceBill").getByText(invType);
+        assertThat(jenisPembayaran);
+        System.out.println(jenisPembayaran);
+    }
+
+    /**
+     * assert Total Pembayaran on Left Side on Detail Invoice Page
+     */
+    public void assertTotalPembayaranOnLeftSide(){
+        totalPembayaranOnLeftSide = page.locator("#invoiceBill").getByText("Rp25.000");
+        assertThat(totalPembayaranOnLeftSide);
+        System.out.println(totalPembayaranOnLeftSide);
+    }
+
+    /**
+     * assert Listing Name on Detail Invoice Page
+     */
+    public void assertListingName(){
+        assertThat(listingName);
+        System.out.println(listingName);
+    }
+
+    /**
+     * assert Jenis Biaya on Rincian Pembayaran at Detail Invoice Page
+     * @param invType
+     */
+    public void assertJenisBiayaOnRincianPembayaran(String invType){
+        jnsBiayaOnRincianPmbayaran = page.getByTestId("invoiceBillingDetails-payment").getByText(invType);
+        assertThat(jnsBiayaOnRincianPmbayaran);
+        System.out.println(jnsBiayaOnRincianPmbayaran);
+    }
+
+    /**
+     * assert Nama Biaya on Rincian Pembayaran at Detail Invoice Page
+     */
+    public void assertNamaBiayaOnRincianPembayaran(){
+        assertThat(namaBiayaOnRincianPmbayaran);
+        System.out.println(namaBiayaOnRincianPmbayaran);
+    }
+
+    /**
+     * assert Total Pembayaran on Right Side at Detail Invoice Page
+     */
+    public void assertTotalPembayaranOnRightSide(){
+        assertThat(totalPembayaranOnRightSide);
+        System.out.println(totalPembayaranOnRightSide);
+    }
+
+    /**
+     * enter Search Value on the Search Bar
+     * @param value
+     */
+    public void enterSearchValue(String value){
+        searchBar.click();
+        searchBar.fill(value);
+        searchBtn.click();
+    }
+
+    /**
+     * assert Nomor Invoice on No Invoice coloumn
+     * @param result1
+     */
+    public void assertNoInvoice(String result1){assertThat(noInvoiceCol).hasText(result1);
+    }
+
+    /**
+     * assert Detail Penyewa on Detail Penyewa coloumn
+     * Split the detail penyewa value
+     * And get the nama penyewa only
+     * @param result2
+     * @return
+     */
+    public String assertDetailPenyewa(String result2){String full = playwright.getText(detailPenyewaCol);
+        String result = full.substring(0,24);
+        System.out.println(result);
+        return result2;
+    }
+
+    /**
+     * assert Nama Listing on Nama Listing coloumn
+     * @param result3
+     */
+    public void assertNamaListing(String result3){
+        assertThat(namaListingCol).hasText(result3);
+    }
+
+    /**
+     * clicks on Search By dropdown
+     * then selects Search By based on Value
+     * @param searchBy
+     */
+    public void selectSearchBy(String searchBy){
+        searchDropDown.click();
+        selectSearchBy = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchBy));
+        selectSearchBy.click();
+    }
+
+    /**
+     * assert if result is not found
+     * @param result
+     */
+    public void assertNotFound(String result){
+        assertThat(notFound).hasText(result);
+    }
+
+    /**
+     * click X on search bar
+     */
+    public void clearSearchValue(){
+        clearSearchValue.click();
+    }
+
+    /**
+     * clicks Kebab button on Action coloumn
+     */
+    public void clicksKebabBtn(){
+        playwright.clickOn(kebabBtn.last());
+    }
+
+    /**
+     * clicks Ubah Status button
+     */
+    public void clicksUbahStatus(){
+        playwright.clickOn(ubahStatusBtn.last());
+    }
+
+    /**
+     * clicks Kembali button on Ubah Status Invoice pop up
+     */
+    public void clicksKembaliOnUbahStatus(){
+        playwright.clickOn(kembaliBtnOnUbahStatus);
+    }
+
+    /**
+     * clicks Calendar View on Ubah Status Invoice pop up
+     */
+    public void clicksCalViewOnUbahStatus(){
+        playwright.clickOn(calViewOnUbahStatus);
+    }
+
+    /**
+     * set Time on Ubah Status Invoice
+     * @param time
+     */
+    public void setTimeOnUbahStatus(String time){
+        playwright.fillCharacterByCharacter(timeField, time);
+    }
+
+    /**
+     * clicks Simpan on Ubah Status Invoice
+     */
+    public void  clicksSimpanOnUbahStatus(){
+        playwright.clickOn(simpanBtnOnUbahStatus);
+    }
+
+    /**
+     * clicks Ubah on 'Yakin ubah status invoice ini?' pop up
+     */
+    public void clicksUbahOnUbahStatus(){
+        playwright.clickOn(ubahBtnOnUbahStatus);
+    }
+
+    /**
+     * Get toast success add biaya sewa / biaya tambahan
+     * @return String biaya sewa / biaya tambahan toast
+     */
+    public String getToastUbahStatus(){
+        return playwright.getText(toastUbahStatus);
+    }
+
+    /**
+     * get Paid Time on Status Invoice coloumn
+     * @return String Time
+     */
+    public String getPaidTime(){
+        return playwright.getText(statusInvCol);
+    }
+
     //---Biaya Tambahan---//
     /**
      * Click Jenis Invoice - Biaya Tambahan
@@ -848,5 +1205,330 @@ public class InvoiceManualPO {
     public void clearLainnyaField() {
         lainnyaField.clear();
     }
+
+    /**
+     * Assert Durasi Biaya
+     * @param char255
+     */
+    public void assertDurasiBiaya(String char255) {
+        durasiBiayachar = page.getByPlaceholder("Contoh: 2 hari ");
+        assertThat(durasiBiayachar).hasValue(char255);
+    }
+
+    /**
+     * Assert counter text
+     * @param counter
+     */
+    public void assertCounterTxt(String counter) {
+        counterText = page.getByText("255 / 255");
+        assertThat(counterText).hasText(counter);
+    }
     //---End of Biaya Tambahan---//
+
+    //---Filter Invoice Manual---//
+
+    /**
+     * click on Filter
+     */
+    public void clicksFilter(){
+        playwright.clickOn(filter);
+    }
+
+    /**
+     * assert Filter title
+     * assert Filter subtitle
+     */
+    public void assertFilterTitleNSubtitle(){
+        assertThat(filterTitle);
+        assertThat(filterSubtitle);
+    }
+
+    /**
+     * assert Status Invoice title
+     * @param statusInv
+     */
+    public void assertStatusInvTitle(String statusInv){
+        statusInvTitle = page.getByTestId("invoice-manual-filter-modal").getByText(statusInv, new Locator.GetByTextOptions().setExact(true));
+        assertThat(statusInvTitle).hasText(statusInv);
+    }
+
+    /**
+     * assert Jenis Biaya title
+     * @param jnsBiaya
+     */
+    public void assertJenisBiaya(String jnsBiaya){
+        jenisBiayaTitle = page.getByTestId("invoice-manual-filter-modal").getByText(jnsBiaya, new Locator.GetByTextOptions().setExact(true));
+        assertThat(jenisBiayaTitle).hasText(jnsBiaya);
+    }
+
+    /**
+     * assert Tanggal Invoice Dibuat
+     * @param tglInvDibuat
+     */
+    public void assertTanggalInvoiceDibuat(String tglInvDibuat){
+        tanggalInvDibuat = page.getByText(tglInvDibuat);
+        assertThat(tanggalInvDibuat).hasText(tglInvDibuat);
+    }
+
+    /**
+     * assert Tanggal Mulai title
+     * @param tglMulai
+     */
+    public void assertTanggalMulaiTitle(String tglMulai){
+        tanggalMulaiTitle = page.getByText(tglMulai);
+        assertThat(tanggalMulaiTitle).hasText(tglMulai);
+    }
+
+    /**
+     * assert Tanggal Akhir title
+     * @param tglAkhir
+     */
+    public void assertTanggalAkhirTitle(String tglAkhir){
+        tanggalAkhirTitle = page.getByText(tglAkhir);
+        assertThat(tanggalAkhirTitle).hasText(tglAkhir);
+    }
+
+    /**
+     * click Close (X) on Filter
+     */
+    public void clicksCloseOnFilter(){
+        playwright.clickOn(closeFilterBtn);
+        playwright.clickOn(filter);
+    }
+
+    /**
+     * click on Terapkan button
+     */
+    public void clicksTerapkan(){
+        playwright.clickOn(terapkanBtn);
+    }
+
+    /**
+     * assert Unpaid on Status Invoice coloumn
+     * @param result
+     */
+    public void assertValueStatusInv(String result){
+        valueStatusInv = page.getByTestId("invoice-manual-item-0").getByText(result);
+        assertThat(valueStatusInv).hasText(result);
+    }
+
+    /**
+     * get Value on Status Invoice coloumn
+     * @param statusInvoice
+     * @return String Status Invoice
+     */
+    public String getValueStatusInv(String statusInvoice){
+        valueStatusInv = page.locator("//tr/td/div[contains(., '" +statusInvoice+ "')]").last();
+        return playwright.getText(valueStatusInv);
+    }
+
+    /**
+     * click Reset button on Filter pop up
+     */
+    public void clicksReset(){
+        playwright.clickOn(resetBtn);
+    }
+
+    /**
+     * Counter on Filter is hidden
+     */
+    public void counterOnFilterIsHidden(){
+        counterOnFilter.isHidden();
+    }
+
+    /**
+     * clicks Main Reset button on Invoice Manual
+     */
+    public void clicksMainReset(){
+        playwright.clickOn(mainResetBtn);
+    }
+
+    /**
+     * ticks on Status Invoice dropdown
+     * @param statusInv
+     */
+    public void ticksStatusInvoice(String statusInv){
+        //clicks Status Invoice dropdown
+        playwright.clickOn(statusInvDropdown);
+
+        //ticks Paid/Unpaid/Expired
+        tickPaid = page.locator("//p[contains(., '" +statusInv+ "')]");
+        playwright.clickOn(tickPaid);
+
+        //clicks Terapkan button
+        playwright.clickOn(terapkanBtn);
+    }
+
+    /**
+     * ticks on Status Invoice dropdown
+     * and without clicks Terapkan
+     * @param statusInv
+     */
+    public void ticksStatusInvoiceWithoutClicksTerapkan(String statusInv){
+        //clicks Status Invoice dropdown
+        playwright.clickOn(statusInvDropdown);
+
+        //ticks Paid/Unpaid/Expired
+        tickPaid = page.locator("//p[contains(., '" +statusInv+ "')]");
+        playwright.clickOn(tickPaid);
+    }
+
+    /**
+     * ticks on Jenis Biaya Tambahan at Jenis Biaya dropdown
+     * and without clicks Terapkan
+     * @param value
+     */
+    public void tickJenisBiayaTambahanWithoutClicksTerapkan(String value){
+        //clicks Jenis Biaya dropdown
+        playwright.clickOn(jenisBiayaDropdown);
+
+        //biaya tambahan
+        tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
+        playwright.clickOn(tickJenisBiaya);
+    }
+
+    /**
+     * ticks on Jenis Biaya Sewa at Jenis Biaya dropdown
+     * and without clicks Terapkan
+     * @param value
+     */
+    public void tickJenisBiayaSewaWithoutClicksTerapkan(String value){
+        //clicks Jenis Biaya dropdown
+        playwright.clickOn(jenisBiayaDropdown);
+
+        //biaya sewa
+        tickJenisBiaya = page.locator("//div[@data-testid='select-checkbox-rent-1']//p[contains(text(),'" +value+ "')]");
+        playwright.clickOn(tickJenisBiaya);
+    }
+
+    /**
+     * refresh page on Invoice Manual
+     */
+    public void refreshPageInvoiceManual(){
+        page.reload();
+    }
+
+    /**
+     * clicks Calendar View on Tanggal Mulai
+     */
+    public void clickCalViewOnTglMulai(){
+        playwright.clickOn(calViewTglMulai);
+    }
+
+    /**
+     * clicks Calendar View on Tanggal Akhir
+     */
+    public void clickCalViewOnTglAkhir(){
+        playwright.clickOn(calViewTglAkhir);
+    }
+
+    /**
+     * clicks date on Calendar Tanggal Mulai
+     * @param date
+     */
+    public void setTanggalMulai(String date){
+        if (date.equalsIgnoreCase("today")){
+            //get today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(0);
+            playwright.clickOn(startDate);
+        } else if (date.equalsIgnoreCase("tomorrow")) {
+            //get tomorrow date
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 1);
+            Date dt = calendar.getTime();
+            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+            startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+            playwright.clickOn(startDate);
+        } else if (date.equalsIgnoreCase("selected today")) {
+            //get today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day selected today'][contains(., '" +today.format(dates)+ "')]").nth(0);
+            playwright.clickOn(startDate);
+        }
+    }
+
+    /**
+     * clicks date on Calendar Tanggal Akhir
+     * @param date
+     */
+    public void setTanggalAkhir(String date){
+        if (date.equalsIgnoreCase("today")){
+            //get today date
+            SimpleDateFormat today = new SimpleDateFormat("d");
+            Date dates = new Date();
+            startDate = page.locator("//span[@class='cell day today'][contains(., '" +today.format(dates)+ "')]").nth(0);
+            playwright.clickOn(startDate);
+        } else if (date.equalsIgnoreCase("tomorrow")) {
+            //get tomorrow date
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 1);
+            Date dt = calendar.getTime();
+            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
+            startDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
+            playwright.clickOn(startDate);
+        }
+    }
+
+    /**
+     * assert date on Dibuat Oleh coloumn
+     * @param expectedDate
+     */
+    public void assertDibuatOleh(String expectedDate){
+        assertThat(dibuatOlehCol).containsText(expectedDate);
+    }
+
+    /**
+     * ticks on Biaya Tambahan at Jenis Biaya dropdown
+     * and clicks Terapkan
+     * @param value
+     */
+    public void tickJenisBiayaTambahan(String value){
+        //clicks Jenis Biaya dropdown
+        playwright.clickOn(jenisBiayaDropdown);
+
+        //biaya tambahan
+        tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
+        playwright.clickOn(tickJenisBiaya);
+
+        //clicks Terapkan button
+        playwright.clickOn(terapkanBtn);
+    }
+
+    /**
+     * ticks on Biaya Sewa at Jenis Biaya dropdown
+     * and clicks Terapkan
+     * @param value
+     */
+    public void tickJenisBiayaSewa(String value){
+        //clicks Jenis Biaya dropdown
+        playwright.clickOn(jenisBiayaDropdown);
+
+        //biaya sewa
+        tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
+        playwright.clickOn(tickJenisBiaya);
+
+        //clicks Terapkan button
+        playwright.clickOn(terapkanBtn);
+    }
+
+    /**
+     * assert Value Jenis Biaya on Jenis Biaya coloumn
+     * @param result
+     */
+    public void assertValueJenisBiaya(String result){
+        valueJenisBiaya = page.locator("//a[@class='bg-c-link bg-c-link--high'][contains(., '" +result+ "')]");
+        for (int i=0; i<valueJenisBiaya.count(); i++){
+            System.out.println(valueJenisBiaya.nth(i));
+            assertThat(valueJenisBiaya.nth(i)).hasText(result);
+        }
+    }
+
+    public String getLastInvoiceNumber() {
+        lastInvoiceNumber = page.locator("tr td>a:nth-of-type(1)").last();
+        return playwright.getText(lastInvoiceNumber);
+    }
+    //---End of Filter Invoice Manual---//
 }

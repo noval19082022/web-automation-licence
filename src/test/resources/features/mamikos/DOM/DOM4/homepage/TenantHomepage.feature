@@ -20,7 +20,7 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection syarat dan ketentuan on homepage
 		Given user go to mamikos homepage
 		And user open syarat dan ketentuan in footer
-		Then user should redirect to link "https://help.mamikos.com/post/syarat-dan-ketentuan-umum"
+		Then user should redirect to link "https://help.mamikos.com/syarat-dan-ketentuan/?category=pemilik-dan-penghuni&subCategory=syarat-dan-ketentuan-umum&slug=syarat-dan-ketentuan-umum%22"
 	@TEST_DOM-4625 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection tentang kami on homepage
 		Given user go to mamikos homepage
@@ -45,7 +45,7 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection facebook on homepage
 		Given user go to mamikos homepage
 		When user open facebook in footer
-		Then user should redirect to link that contains "https://www.facebook.com/mamikosapp/"
+		Then user should redirect to link that contains "https://www.facebook.com/mamikosapp"
 	@TEST_DOM-4630 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection twitter on homepage
 		Given user go to mamikos homepage
@@ -65,11 +65,11 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection whatsapp on homepage
 		Given user go to mamikos homepage
 		When user open whatsapp in footer
-		Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=6281325111171"
+		Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=%2B6281325111171"
 	@TEST_DOM-4634 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check copyright on footer on homepage
 		Given user go to mamikos homepage
-		Then user can see copyright is "© 2023 Mamikos.com, All rights reserved"
+		Then user can see copyright is "© 2023 Mamikos.com. All rights reserved"
 	@TEST_DOM-4855 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Lihat semua on owner promo section
 		Given user go to mamikos homepage

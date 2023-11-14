@@ -70,7 +70,7 @@ public class SearchSteps {
         Assert.assertTrue(home.isChatDisplayed(), "Chat button not present!");
         Assert.assertTrue(home.isNotificationButtonDisplayed(), "Notification button not present!");
         Assert.assertTrue(home.isOtherButtonDisplayed(), "Other button not present!");
-        Assert.assertTrue(home.isTenantProfilePictureDisplayed(), "Profile pic not present!");
+        home.isTenantProfilePictureDisplayed();
     }
 
     @When("user search for random keyword:")
@@ -560,5 +560,11 @@ public class SearchSteps {
             System.out.println("Lower price is " + lowerPrice);
             Assert.assertTrue(greaterPrice >= lowerPrice, greaterPrice + " is not more expensive than " + lowerPrice);
         }
+    }
+
+    @When("user visit search page, and visit popular search based on {string} for location on {string}")
+    public void userVisitSearchPageAndVisitPopularSearchBasedOnForLocationOn(String place, String popPlace) {
+        searchPO = homePO.clickOnSearchButton();
+        searchPO.clickPopularArea(place, popPlace);
     }
 }

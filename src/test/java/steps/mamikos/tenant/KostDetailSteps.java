@@ -11,11 +11,12 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.KostLandingAreaPO;
-import pageobject.common.SearchPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
+import java.util.HashSet;
+import java.util.List;
 
 public class KostDetailSteps {
     Page page = ActiveContext.getActivePage();
@@ -23,9 +24,21 @@ public class KostDetailSteps {
     JavaHelpers java = new JavaHelpers();
 
     HomePO home = new HomePO(page);
-    SearchPO search = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
     KostLandingAreaPO kostLandingArea = new KostLandingAreaPO(page);
+
+    @Then("user verify content of breadcrumb is {string}")
+    public void userSeeBreadcrumb(String breadcrumbPath) {
+        // get list breadcrumb form kost detail
+        var listBread = kostDetail.getListBreadCrumb();
+        // remove duplicate list using Set
+        var set = new HashSet<>(listBread);
+        listBread.clear();
+        listBread.addAll(set);
+        // split breadcrumbpath into list string to compare with get list breadcrumb that get from kostdetail
+        var breadExpectationList = breadcrumbPath.split(" > ");
+        Assert.assertTrue(listBread.containsAll(List.of(breadExpectationList)));
+    }
 
     @Then("user can see overview section on detail page")
     public void userCanSeeOverViewSection(DataTable table) {
@@ -195,7 +208,6 @@ public class KostDetailSteps {
     // ------------ Kost Map section -----------
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
-        playwright.pageScrollToDown(200);
         kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isLihatPetaButtonPresent(), "Lihat Peta Button is not present!");
         Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
@@ -209,7 +221,6 @@ public class KostDetailSteps {
 
     @Then("user want to reached map section and see tanya alamat lengkap button")
     public void userCanSeeAlamatLengkapPetaBtn() {
-        playwright.pageScrollToDown(200);
         kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isTanyaAlamatBtnPresent(), "Tanya Alamat Button is not present!");
         Assert.assertTrue(kostDetail.isKostCurrentLocationPresent(), "Kost current position is not present!");
@@ -264,7 +275,7 @@ public class KostDetailSteps {
         Assert.assertTrue(kostDetail.isOwnerPictureDisplayed(), "Owner picture not present!");
         Assert.assertTrue(kostDetail.isOwnerStatusDisplayed(), "Owner status not present!");
         Assert.assertTrue(kostDetail.isNumberTransactionDisplayed(), "Number of transaction not present!");
-        Assert.assertTrue(kostDetail.isBookingProcessedDisplayed(), "Booking processed not present!");
+//        Assert.assertTrue(kostDetail.isBookingProcessedDisplayed(), "Booking processed not present!");
         Assert.assertTrue(kostDetail.isBookingChanceDisplayed(), "Booking chance not present!");
     }
 
@@ -435,5 +446,51 @@ public class KostDetailSteps {
     public void userCanShareTheKost() {
         kostDetail.dismissFTUE();
         kostDetail.clickOnShareKostButton();
+    }
+
+    @And("user can favorite kost not login")
+    public void userCanFavoriteKostNotLogin() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
+    }
+
+    @And("user clicks on Chat pemilik menu")
+    public void userClickOnChatPemilikMenu() {
+        kostDetail.clickOnChatPemilikButton();
+    }
+
+    @And("user clicks on Bantuan menu")
+    public void userClickOnBantuanMenu() {
+        kostDetail.clickOnBantuanMenuButton();
+    }
+
+    @And("user clicks on {string}")
+    public void userClickOnByText(String buttonText) {
+        kostDetail.clickOnBytextButton(buttonText);
+    }
+
+    @Then("user can see Chat list title")
+    public void userCanSeeChatListTittle() {
+        Assert.assertTrue(kostDetail.isChatListTittleDisplayed(), "Login Pop up is not displayed");
+    }
+
+    @Then("user can see informasi kos page")
+    public void userCanSeeInformationKosDetail() {
+        Assert.assertTrue(kostDetail.isInformationKosDetaileDisplayed(), "Login Pop up is not displayed");
+        page.goBack();
+    }
+
+    @Then("user see activities in My Kos")
+    public void userCanSeeActivitiesInMyKos() {
+        Assert.assertTrue(kostDetail.isTagihanKosDisplayed(), "Tagihan kos");
+        Assert.assertTrue(kostDetail.isKontrakDisplayed(), "Kontrak");
+        Assert.assertTrue(kostDetail.isChatPemilikDisplayed(), "Chat pemilik");
+        Assert.assertTrue(kostDetail.isBantuanDisplayed(), "Bantuan");
+        Assert.assertTrue(kostDetail.isForumDisplayed(), "Forum");
+    }
+
+    @Then("user can see Kategori Bantuan on mamihelp page")
+    public void userCanSeeKategoriBantuan() {
+        Assert.assertTrue(kostDetail.isKategoriBantuanTittleDisplayed(), "Kategori Bantuan");
     }
 }

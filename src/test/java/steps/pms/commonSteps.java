@@ -14,4 +14,19 @@ public class commonSteps {
     public void admin_go_to_other_transation_menu() {
         menu.clickOtherTransactionMenu();
     }
+
+    @When("admin go to tenant communication menu")
+    public void admin_go_to_tenant_communication_menu() {
+        menu.clickTenantCommunicationMenu();
+    }
+
+    @When("admin go to survey tracker menu")
+    public void admin_go_to_survey_tracker_menu() {
+        menu.clickSurveyTrackerMenu();
+    }
+
+    @When("admin go to role management menu")
+    public void admin_go_to_role_management_menu() {
+        menu.clickRoleManagementMenu();
+    }
 }

@@ -1,7 +1,9 @@
 package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
+import config.global.FlowControl;
 import config.playwright.context.ActiveContext;
+import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -29,7 +31,18 @@ public class SearchContractSteps {
 
     @When("admin search contract by kost level {string}")
     public void adminSearchContractByKostLevel(String kostLevel) {
+        if (!playwright.getActivePageURL().contains("/backoffice/contract/search")) {
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/contract/search");
+        }
+
         searchContract.selectKosLevel(kostLevel);
+        searchContract.clickOnSearchButton();
+    }
+
+    @And("admin search contract by Renter Phone Number and input field {string}")
+    public void adminSearchContractByRenterPhoneNumberAndInputField(String phoneNumber) {
+        admin.clickOnSearchContract();
+        searchContract.selectRenterPhoneNumber(phoneNumber);
         searchContract.clickOnSearchButton();
     }
 
@@ -189,22 +202,24 @@ public class SearchContractSteps {
         searchData = table.asMaps(String.class, String.class);
         var phoneNumber = searchData.get(0).get("phone " + Mamikos.ENV);
         var akhiriContractButtonSize = 0;
-        admin.clickOnSearchContract();
-        searchContract.selectSearchBy("renter_phone_number");
-        searchContract.fillSearchByValue(phoneNumber);
-        searchContract.clickOnSearchButton();
-        if (searchContract.isAkhiriContractButtonVisible()) {
-            akhiriContractButtonSize = searchContract.getAkhiriContractButtonSize();
-            for(int i = 0; i < akhiriContractButtonSize; i++) {
-                searchContract.clickOnAkhiriContractButton();
-                if (searchContract.waitForCalloutMessage()) {
-                    Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
-                }
-                if (akhiriContractButtonSize > 1) {
-                    //improvement should add break condition when iterate is equal to akhiriContractButtonSize
-                    searchContract.selectSearchBy("renter_phone_number");
-                    searchContract.fillSearchByValue(phoneNumber);
-                    searchContract.clickOnSearchButton();
+        if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
+            admin.clickOnSearchContract();
+            searchContract.selectSearchBy("renter_phone_number");
+            searchContract.fillSearchByValue(phoneNumber);
+            searchContract.clickOnSearchButton();
+            if (searchContract.isAkhiriContractButtonVisible()) {
+                akhiriContractButtonSize = searchContract.getAkhiriContractButtonSize();
+                for(int i = 0; i < akhiriContractButtonSize; i++) {
+                    searchContract.clickOnAkhiriContractButton();
+                    if (searchContract.waitForCalloutMessage()) {
+                        Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
+                    }
+                    if (akhiriContractButtonSize > 1) {
+                        //improvement should add break condition when iterate is equal to akhiriContractButtonSize
+                        searchContract.selectSearchBy("renter_phone_number");
+                        searchContract.fillSearchByValue(phoneNumber);
+                        searchContract.clickOnSearchButton();
+                    }
                 }
             }
         }
@@ -218,5 +233,17 @@ public class SearchContractSteps {
         searchContract.selectSearchBy("kost_name");
         searchContract.fillSearchByValue(kostName);
         searchContract.clickOnSearchButton();
+    }
+
+    @When("admin clicks on invoice number {string} on first index contract")
+    public void admin_clicks_on_invoice_number_on_first_index_contract(String index) {
+        searchContract.clicksOnInvoiceNumberOnFirstIndex(index);
+    }
+
+    @Then("admin verify table header row is displayed with name:")
+    public void admin_verify_table_header_row_is_displayed_with_name(List<String> tableHeader) {
+        for (String s : tableHeader) {
+            searchContract.isTableHeaderVisible(s);
+        }
     }
 }

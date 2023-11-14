@@ -27,6 +27,8 @@ public class BillAndBookingManagementPO {
     Locator confirmationPopup;
     Locator makeRuleButton;
     Locator makeRuleBookingPage;
+    Locator pilihKamarDitempatRadio;
+    Locator Iunderstand;
 
 
     public BillAndBookingManagementPO(Page page) {
@@ -49,6 +51,8 @@ public class BillAndBookingManagementPO {
         confirmationPopup = page.locator("//h3[@class='bg-c-modal__body-title']");
         makeRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat peraturan"));
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
+        pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
+        Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
     }
 
     /**
@@ -94,15 +98,19 @@ public class BillAndBookingManagementPO {
      * Click on simpan button
      */
     public void clickOnSimpan() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         simpanButton.click();
+        playwright.hardWait(5000);
     }
 
     /**
      * Click ok button after owner accepted new tenant
      */
-    public PengajuanBookingPO clickOkButton() {
+    public PengajuanSewaPO clickOkButton() {
         playwright.clickAndWaitNavigation(okButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -125,10 +133,10 @@ public class BillAndBookingManagementPO {
     /**
      * Click pilih button after owner reject  tenant
      */
-    public PengajuanBookingPO clickPilihButton() {
+    public PengajuanSewaPO clickPilihButton() {
         playwright.clickOn(pilihButton);
         playwright.clickOn(doneButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -142,14 +150,17 @@ public class BillAndBookingManagementPO {
     /**
      * Click on reason reject booking
      */
-    public PengajuanBookingPO ownerSelectRejectBookingKos(String reason) {
+    public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
         String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
+        if (IUnderstandBtn.isVisible()) {
+            playwright.clickOn(IUnderstandBtn);
+        }
         playwright.pageScrollUntilElementIsVisible(statusTandC);
         playwright.clickOn(statusTandC);
         playwright.clickOn(pilihButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
 
     /**
@@ -162,9 +173,9 @@ public class BillAndBookingManagementPO {
     /**
      * Click on reason reject booking
      */
-    public PengajuanBookingPO ownerClickOnMakeRulesBookingButton() {
+    public PengajuanSewaPO ownerClickOnMakeRulesBookingButton() {
         playwright.clickOn(makeRuleButton);
-        return new PengajuanBookingPO(page);
+        return new PengajuanSewaPO(page);
     }
     /**
      * Check direct make rule page
@@ -172,5 +183,14 @@ public class BillAndBookingManagementPO {
      */
     public boolean isAppearMakeRuleBookingPage() {
         return playwright.waitTillLocatorIsVisible(makeRuleBookingPage);
+    }
+
+    /**
+     * check is pilih di tempat is visible or not
+     * when choosing room number in owner dashboard
+     * @return boolean
+     */
+    public boolean isPilihKamarDiTempatVisible() {
+        return pilihKamarDitempatRadio.isVisible();
     }
 }

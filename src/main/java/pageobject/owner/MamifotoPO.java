@@ -3,8 +3,12 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
 
 public class MamifotoPO {
     private Page page;
@@ -32,15 +36,18 @@ public class MamifotoPO {
     Locator headerFAQ;
     Locator contentFAQfirstList;
     Locator riwayatPaketButton;
+    Locator panduanAreaClick;
+    Locator detailTitle;
 
 
     //Locator Mamifoto at Select Package
-    Locator packageFirstMamifotoNonGP;
+    Locator packageFirstMamifoto;
     Locator popUpDoesntHaveProperty;
     Locator addedNewKostPopUpButton;
     Locator nantiSajaButton;
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
+    Locator headerDiscountGP;
 
 
     //Locator Mamifoto at history transaction
@@ -55,7 +62,9 @@ public class MamifotoPO {
     Locator doesntHaveTransactionDescText;
     Locator seeDetailTransactionExpired;
     Locator expiredPaymentMamifotoText;
-
+    Locator lihatTagihanTableMamifoto;
+    Locator packageNameMamifoto;
+    Locator waitingPayment;
 
     //Locator Mamifoto at Status Pembelian Page
     Locator headerStatusPembelian;
@@ -72,6 +81,26 @@ public class MamifotoPO {
     //Locator CS Web Mamikos
     Locator titleCSMamikos;
 
+    //Locator Detail Tagihan Mamifoto
+    Locator textDiscountGP;
+    Locator priceDiscountGP;
+    Locator buttonBayarSekarang;
+
+    //Locator invoice mamifoto
+    Locator headerInvoiceMamifoto;
+    Locator textDiskonGPInvoiceMamifoto;
+    Locator invoiceUnpaid;
+
+    //Locator admin mamifoto
+    Locator buttonPremiumAddOn;
+    Locator inputPhoneNumber;
+    Locator selectPackageMamifoto;
+    Locator buttonSaveTransaction;
+    Locator alertSuccsess;
+    Locator ownerPhoneNumber;
+    Locator statusInvoice;
+
+
 
 
 
@@ -87,9 +116,9 @@ public class MamifotoPO {
         this.titleTingkatkanKinerja = page.getByText("Tingkatkan Kinerja Kos");
         this.subtitleTingkatkanKinerja = page.getByText("Lengkapi kos Anda dengan fitur berikut.");
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
-        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan"));
+        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosan Anda!"));
         this.lihatPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
-        this.packageFirstMamifotoNonGP = page.getByTestId("select-mamifoto-package").first();
+        this.packageFirstMamifoto = page.getByTestId("select-mamifoto-package").first();
         this.popUpDoesntHaveProperty = page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
         this.addedNewKostPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Kos"));
         this.nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
@@ -104,7 +133,7 @@ public class MamifotoPO {
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
         this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
-        this.tabSelesaiMamifoto = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
+        this.tabSelesaiMamifoto = page.locator("//a[contains(.,'Selesai')]");
         this.succsesPaymentTextMamifoto = page.getByText("MamiFoto A Non GP Pembayaran Berhasil");
         this.seeDetailTransactionMamifoto =  page.getByRole(AriaRole.BUTTON).nth(1);
         this.headerStatusPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Status Pembelian"));
@@ -122,6 +151,24 @@ public class MamifotoPO {
         this.buttonBackInvoiceExpired = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         this.buttonHubungiKami =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Kami"));
         this.titleCSMamikos =  page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos CS"));
+        this.headerDiscountGP = page.getByText("Diskon member GoldPlus");
+        this.textDiscountGP =  page.getByText("Diskon member GoldPlus Hanya berlaku untuk member GoldPlus");
+        this.priceDiscountGP = page.locator(".mamifoto-payment-detail__discount");
+        this.buttonBayarSekarang =  page.getByTestId("mamifoto-button-pay");
+        this.headerInvoiceMamifoto = page.locator("//div[@id='invoiceNameWrapperMamifoto']");
+        this.textDiskonGPInvoiceMamifoto =  page.getByText("Diskon member GoldPlus");
+        this.lihatTagihanTableMamifoto= page.locator("//div[.='MamiFoto A Non GP Menunggu Pembayaran']");
+        this.panduanAreaClick = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Panduan area & fasilitas"));
+        this.invoiceUnpaid = page.locator("//div[@id='mamifoto-history-on-progress']//button").first();
+        this.buttonPremiumAddOn =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Premium Add On Request"));
+        this.inputPhoneNumber =  page.locator("#phone_number");
+        this.selectPackageMamifoto =   page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Add On Package"));
+        this.buttonSaveTransaction = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
+        this.alertSuccsess = page.locator("//div[@class='alert alert-success alert-dismissable']");
+        this.ownerPhoneNumber = page.locator("//tbody[1]/tr[1]/td[1]");
+        this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
+        this.packageNameMamifoto = page.getByTestId("mamifoto-history-on-progress").getByText("MamiFoto A GP");
+        this.waitingPayment = page.getByText("Menunggu Pembayaran");
 
     }
 
@@ -130,7 +177,8 @@ public class MamifotoPO {
      * Click on Fitur Promosi Sidebar menu
      */
     public void clickOnFiturPromosi() {
-        fiturPromosiSidebar.click();
+        playwright.waitTillLocatorIsVisible(fiturPromosiSidebar);
+        playwright.clickOn(fiturPromosiSidebar);
     }
 
     /**
@@ -154,7 +202,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderLandingPageisAppear() {
-        return headerMamifoto.isVisible();
+        return playwright.isLocatorVisibleAfterLoad(headerMamifoto,2000.0);
     }
 
     /**
@@ -195,7 +243,7 @@ public class MamifotoPO {
      * Click on Mamifoto at section Info untuk Anda
      */
     public void clickOnMamifotoInfoUntukAnda() {
-        mamifotoInfoUntukAnda.click();
+        playwright.clickOn(mamifotoInfoUntukAnda);
     }
 
     /**
@@ -208,8 +256,8 @@ public class MamifotoPO {
     /**
      * Click on package mamifoto non GP first list
      */
-    public void clickOnMamifotoPackageNonGPFirst() {
-        packageFirstMamifotoNonGP.click();
+    public void clickOnMamifotoPackageFirst() {
+        packageFirstMamifoto.click();
     }
 
     /**
@@ -335,6 +383,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderHistoryisAppear() {
+        playwright.waitTillDomContentLoaded(5000.0);
         return headerRiwayatPembelian.isVisible();
     }
 
@@ -358,7 +407,9 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at riwayat page mamifoto
      */
     public void clickOnSeeDetailTransactionMamifoto() {
-        seeDetailTransactionMamifoto.click();
+        Locator element = page.locator("//div[@id='mamifoto-history-done']//button");
+        List<Locator> elements = playwright.getLocators(element);
+        elements.get(1).click();
     }
 
     /**
@@ -413,7 +464,9 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at riwayat page prophoto
      */
     public void clickOnSeeDetailTransactionProphoto() {
-        seeDetailTransactionProphoto.click();
+        this.seeDetailTransactionProphoto = page.locator("//div[@id='mamifoto-history-done']//button");
+        List<Locator> elements = playwright.getLocators(seeDetailTransactionProphoto);
+        elements.get(1).click();
     }
 
     /**
@@ -489,5 +542,195 @@ public class MamifotoPO {
         buttonBackInvoiceExpired.click();
     }
 
+    /**
+     * Get Text Header Discount Member GP
+     *
+     * @return string
+     */
+    public String getTextHeaderDiscountMemberGP() {
+        return playwright.getText(headerDiscountGP);
+    }
+
+    /**
+     * Get Text discount member Gp at detail tagihan page
+     *
+     * @return string
+     */
+    public String getTextDiscountMemberGPDetailTagihan() {
+        return playwright.getText(textDiscountGP);
+    }
+
+    /**
+     * Get Text discount amount Gp at detail tagihan page
+     *
+     * @return string
+     */
+    public String getTextDiscountAmountGPDetailTagihan() {
+        return playwright.getText(priceDiscountGP);
+    }
+
+    /**
+     * Click on button bayar sekarang
+     */
+    public void clickOnButtonBayarSekarangMamifoto() {
+        playwright.clickOn(buttonBayarSekarang);
+    }
+
+    /**
+     * Check Mamifoto Invoice Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderInvoiceisAppear() {
+        playwright.waitTillLocatorIsVisible(headerInvoiceMamifoto,3000.0);
+        return headerInvoiceMamifoto.isVisible();
+    }
+
+    /**
+     * Get Text discount Gp at invoice page
+     *
+     * @return string
+     */
+    public String getTextDiscountGPInvoiceMamifoto() {
+        return playwright.getText(textDiskonGPInvoiceMamifoto);
+    }
+
+    /**
+     * Check Diskon Mamifoto Header is appear
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean mamifotoHeaderDiscountGP() {
+        return headerDiscountGP.isVisible();
+    }
+
+    /**
+     * Check discount member Gp at detail tagihan page
+     *
+     *  @return boolean type, appear true otherwise false
+     */
+    public boolean discountMemberGPDetailTagihan() {
+        return textDiscountGP.isVisible();
+    }
+
+    /**
+     * check discount amount Gp at detail tagihan page
+     *
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean discountAmountGPDetailTagihan() {
+        return priceDiscountGP.isVisible();
+    }
+
+    /**
+     * check discount Gp at invoice page
+     *
+     * @return string
+     */
+    public boolean discountGPInvoiceMamifoto() {
+        playwright.waitTillLocatorIsVisible(textDiskonGPInvoiceMamifoto,3000.0);
+        return textDiskonGPInvoiceMamifoto.isVisible();
+    }
+
+    /**
+     * Get unpaid invoice Mamifoto
+     * @return int, count of unpaid invoice Mamifoto
+     *
+     */
+    public int getCountMamifotoInvoiceUnpaid() {
+        return playwright.getLocators(lihatTagihanTableMamifoto).size();
+    }
+
+    /**
+     * Click on Lihat detail transaksi at first riwayat page
+     */
+    public void clickOnSeeFirstDetailTransaction() {
+        invoiceUnpaid.click();
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Check unpaid Invoice Mamifoto
+     * return true or false
+     */
+    public boolean checkUnpaidInvoiceMamifoto(){
+        return playwright.waitTillLocatorIsVisible(invoiceUnpaid);
+    }
+    /**
+     * Click on button bayar sekarang
+     */
+    public void clickOnPanduanArea() {
+        playwright.clickOn(panduanAreaClick);
+    }
+
+    /**
+     * Check title and detail title On Panduan Persiapan Foto or Video
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean titleOnPanduanAndAreaAppear(String titleAndDetailText) {
+        detailTitle = page.getByText(titleAndDetailText);
+        playwright.waitTillLocatorIsVisible(detailTitle);
+        return playwright.waitTillLocatorIsVisible(detailTitle);
+    }
+
+    /**
+     * Navigates to Mamiads page
+     */
+    public void navigatesToPremiumAddOn() {
+        playwright.navigateTo(Mamikos.URL + "/admin/premium-add-on/", 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Added transaction mamifoto from menu premium add on
+     */
+    public void addTransactionMamifotoFromAdmin(String phoneNumber) {
+        playwright.clickOn(buttonPremiumAddOn);
+        playwright.fill(inputPhoneNumber,phoneNumber);
+        playwright.selectDropdownByValue(selectPackageMamifoto,"MamiFoto A GP");
+        playwright.clickOn(selectPackageMamifoto);
+        playwright.clickOn(buttonSaveTransaction);
+    }
+
+    /**
+     * Get Text owner phone number from table
+     *
+     * @return string
+     */
+    public String getTextOwnerPhoneNumber() {
+        return playwright.getText(ownerPhoneNumber);
+    }
+
+    /**
+     * Get Text status invoice mamifoto from table
+     *
+     * @return string
+     */
+    public String getTextStatusInvoiceMamifoto() {
+        return playwright.getText(statusInvoice);
+    }
+
+    /**
+     * Get Text invoice unpaid mamifoto
+     *
+     * @return string
+     */
+    public String getTextInvoiceUnpaidMamifoto()  {
+        return playwright.getText(waitingPayment);
+    }
+
+    /**
+     * Get Text package name mamifoto at history
+     * @return string
+     */
+    public String getTextPackageMamifoto()  {
+        return playwright.getText(packageNameMamifoto);
+    }
+
+    /**
+     * Navigates to mamifoto page
+     */
+    public void navigatesToMamifotoPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0, LoadState.LOAD);
+    }
 }
 

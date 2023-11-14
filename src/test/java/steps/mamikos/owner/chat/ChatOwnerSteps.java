@@ -60,7 +60,6 @@ public class ChatOwnerSteps {
         billBookingManage.clickOnTerapkanButton();
         billBookingManage.clickOnLanjutkanButton();
         billBookingManage.clickOnSimpan();
-      //  billBookingManage.clickOkButton();
     }
 
     @Then("system display title {string} after accept booking from chat room")
@@ -106,7 +105,7 @@ public class ChatOwnerSteps {
         Assert.assertTrue(chat.isAttachmentButtonDisabled(), "Button is enabled");
     }
 
-    @And("user dismiss FTUE goldplus")
+    @And("user/owner dismiss FTUE goldplus")
     public void userDismissFTUEGoldplus() {
         owner.dismissFTUEGoldplus();
     }
@@ -138,4 +137,5 @@ public class ChatOwnerSteps {
     public void user_click_broadcast_chat_entry_point() {
         chat.clickOnBCChatPage();
     }
+
 }

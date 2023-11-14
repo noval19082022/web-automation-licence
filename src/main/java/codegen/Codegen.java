@@ -15,11 +15,15 @@ public class Codegen {
             // Pause the page, and start recording manually.
             Page page = context.newPage();
             page.navigate("https://jambu.kerupux.com");
+//            page.navigate("https://business.flip.id/sandbox/overview");
+//            page.navigate("https://jambu.kerupux.com/admin");
 //            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
 //            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
-            //loginOwner(page);
+            loginOwner(page);
+//            loginOwnersini(page);
 //            loginPMS(page);
+//            loginAdminBangkrupux(page);
             page.pause();
         }
     }
@@ -40,6 +44,16 @@ public class Codegen {
         page.getByTestId("loginButton").click();
     }
 
+    public static void loginOwnersini(Page page) {
+        page.getByTestId("entryButton").click();
+        page.getByTestId("pemilikKosButton").click();
+        page.getByTestId("phoneNumberTextbox").click();
+        page.getByTestId("phoneNumberTextbox").fill("089712123030");
+        page.getByTestId("passwordTextbox").click();
+        page.getByTestId("passwordTextbox").fill("qwerty123");
+        page.getByTestId("loginButton").click();
+    }
+
     public static void loginAdminMamipay(Page page) {
         page.navigate("https://pay-jambu.kerupux.com/pin2blkang");
         page.getByPlaceholder("Email Address").click();
@@ -54,5 +68,12 @@ public class Codegen {
         page.getByPlaceholder("Email").fill("pman@mamiteam.com");
         page.getByPlaceholder("Password").fill("pmanM4m1t34m");
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login")).click();
+    }
+
+    public static void loginAdminBangkrupux(Page page){
+        page.navigate("https://jambu.kerupux.com/admin");
+        page.getByPlaceholder("Email / Phone Number").fill("admin.automation@mamiteam.com");
+        page.getByPlaceholder("Password").fill("4dm!nAutomat10n");
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign me in")).click();
     }
 }

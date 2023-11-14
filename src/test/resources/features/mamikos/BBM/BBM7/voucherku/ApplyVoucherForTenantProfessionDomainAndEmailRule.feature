@@ -1,4 +1,7 @@
-@BBM7
+@BBM7 @regression
+
+@TEST_COOP-2766 @TEST_COOP-2765 @TEST_COOP-2761 @TEST_COOP-2757 @TEST_COOP-2701 @TEST_COOP-2702 @TEST_COOP-2781 @TEST_COOP-2782
+@TEST_COOP-2755 @TEST_COOP-2752 @TEST_COOP-2750 @TEST_COOP-2758 @TEST_COOP-2785 @TEST_COOP-2786 @TEST_COOP-2773 @TEST_COOP-2774
 Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
 
   @continue
@@ -8,7 +11,9 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
     And tenant navigates to edit profile
-    And tenant choose profession as mahasiswa studying at "Universitas Bengkulu"
+    And user choose profession "Mahasiswa"
+    And user fills "Universitas Lampung" in search dropdown pillih universitas
+    And user click simpan button
     Then tenant success update profile
 
   @continue
@@ -80,7 +85,9 @@ Feature: Apply Voucher For Tenant Profession, Domain, and Email Rule
   Scenario: Tenant Edit Profession To Karyawan
     When tenant set active page to 1
     And tenant navigates to edit profile
-    And tenant choose profession as karyawan working at "Bukit Asam Tbk"
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "Bukit Asam Tbk"
+    And user click simpan button
     Then tenant success update profile
 
   @continue

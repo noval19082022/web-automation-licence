@@ -17,24 +17,26 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 0890867321212 | 0890867321212 | mamikosqa123  |
+      | phone stag    | phone prod    | password     |
+      | 0890867321212 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto DP AddFee Deposit       | Kost Adi Auto DP AddFee Deposit       |
+      | kost name stag                  | kost name prod                  |
+      | Kost Adi Auto DP AddFee Deposit | Kost Adi Auto DP AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod      | password      |
-      | 08900000000021  | 08900000000021  | mamikosqa123  |
-    And owner accept booking
+      | phone stag     | phone prod     | password     |
+      | 08900000000021 | 08900000000021 | mamikosqa123 |
+    And owner accept booking from tenant:
+      | tenant stag          | tenant prod          |
+      | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay Down Payment For Invoice Detail Check After DP And Settlement Are Paid
@@ -43,7 +45,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230"
+    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant set active page to 0
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page after pay DP
     And tenant get invoice number
@@ -54,9 +57,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search invoice by contact number and go to invoice detail fee:
-      | search by              | renter_phone_number      |
-      | search value           | 0890867321212            |
-      | invoice number         | default                  |
+      | search by      | renter_phone_number |
+      | search value   | 0890867321212       |
+      | invoice number | default             |
     Then admin can sees total cost is basic amount + deposit fee + biaya tetap + admin fee
 
   Scenario: Tenant get invoice number
@@ -75,9 +78,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search invoice by contact number and go to invoice detail fee:
-      | search by              | renter_phone_number      |
-      | search value           | 0890867321212            |
-      | invoice number         | default                  |
+      | search by      | renter_phone_number |
+      | search value   | 0890867321212       |
+      | invoice number | default             |
     Then admin can sees total cost is basic amount + deposit fee + biaya tetap + admin fee
 
 

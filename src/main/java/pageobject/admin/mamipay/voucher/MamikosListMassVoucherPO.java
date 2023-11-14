@@ -3,25 +3,35 @@ package pageobject.admin.mamipay.voucher;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 public class MamikosListMassVoucherPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private JavaHelpers java = new JavaHelpers();
     Locator singleVoucherButton;
     Locator campaignNameInput;
     Locator searchButton;
     Locator editButton;
     Locator callout;
     Locator editButtonWithNameId;
+    Locator addMassButton;
+    Locator updateEl;
+    Locator addSingleButton;
+    Locator addPartnerVoucherButton;
+
     public MamikosListMassVoucherPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        singleVoucherButton = page.locator("//*[.='Single Voucher']");
+        singleVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Single Voucher"));
         campaignNameInput = page.locator("input[name=\"campaign_voucher\"]");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         editButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+        addMassButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Mass Voucher"));
         callout = page.locator(".callout");
+        addSingleButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Single Voucher"));
+        addPartnerVoucherButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Bulk Add Vouchers Partner"));
     }
 
     /**
@@ -40,11 +50,20 @@ public class MamikosListMassVoucherPO {
     }
 
     /**
-     * Click on edit button
+     * Click on Add Mass button
      * @return MamikosVoucherFormPO class
      */
-    public MamikosVoucherFormPO clickOnEditButton() {
-        playwright.clickOn(editButton);
+    public MamikosVoucherFormPO clickOnCreateButton() {
+        playwright.clickOn(addMassButton);
+        return new MamikosVoucherFormPO(page);
+    }
+
+    /**
+     * Click on Add Mass button
+     * @return MamikosVoucherFormPO class
+     */
+    public MamikosVoucherFormPO clickOnCreatePartnerVoucherButton() {
+        playwright.clickOn(addPartnerVoucherButton);
         return new MamikosVoucherFormPO(page);
     }
 
@@ -87,4 +106,28 @@ public class MamikosListMassVoucherPO {
             this.playwright = new PlaywrightHelpers(page);
         }
     }
+
+    /**
+     * Click on edit button
+     * @return MamikosVoucherFormPO class
+     */
+    public MamikosVoucherFormPO clickOnEditButton() {
+        playwright.clickOn(editButton);
+        return new MamikosVoucherFormPO(page);
+    }
+
+    /**
+     * Click on add single button
+     */
+    public void clickOnAddSingleButton() {
+        playwright.clickOn(addSingleButton);
+    }
+
+    public void clickOnUpdateIconIndex(String index) throws InterruptedException {
+        updateEl = page.locator("(//i[@class='fa fa-pencil']/parent::a)["+index+"]");
+        playwright.clickOn(updateEl);
+    }
+
+
+
 }

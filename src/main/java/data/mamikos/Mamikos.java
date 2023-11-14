@@ -1,5 +1,7 @@
 package data.mamikos;
 
+import lombok.Getter;
+import lombok.Setter;
 import utilities.JavaHelpers;
 
 public class Mamikos {
@@ -39,5 +41,30 @@ public class Mamikos {
     public static final String ADMIN_GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS,"adminGoldplusPackage");
     public static final String PROPHOTO = JavaHelpers.getPropertyValue(MAMIKOS,"oldProPhoto");
     public static final String MAMIFOTO = JavaHelpers.getPropertyValue(MAMIKOS,"mamifoto");
+    public static final String KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kostSaya");
+    public static final String KONTRAK_KOST_SAYA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKostSaya");
+    public static final String MAMIPOIN_GUIDELINE = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinGuideline");
+    public static final String HELP_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "helpPage");
+    public static final String PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "penyewa");
+    public static final String MAMIPOIN_EXPIRED = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinExpired");
+    public static final String MAMIPOIN_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "mamipoinHistory");
+    public static final String MAMIKOS_VOUCHER = JavaHelpers.getPropertyValue(MAMIKOS, "mamikosVoucher");
+    public static final String OWNERPAGE_APARTEMEN = JavaHelpers.getPropertyValue(MAMIKOS, "mamikosApartemen");
+    public static final String BROADCAST_CHAT = JavaHelpers.getPropertyValue(MAMIKOS, "broadcastChat");
+    public static final String AKUN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerSetting") ;
+    public static final String PROPERTY_SAYA_APARTEMENT = JavaHelpers.getPropertyValue(MAMIKOS, "propertyApartement");
+    public static final String MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiads") ;
+    public static final String MAMIADS_FROM_OWNER_DASHBOARD = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsFromOwnerDashboard") ;
+    public static final String CEK_PROPERTY_SEKITAR = JavaHelpers.getPropertyValue(MAMIKOS, "cekPropertySekitar") ;
+    public static final String TOP_UP_MAMIADS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsBalance");
+    public static final String MAMIADS_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "mamiadsHistory");
+    public static final String MAMIADS_GUIDE = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuide");
+    public static final String MAMIADS_GUIDE_GP = JavaHelpers.getPropertyValue(MAMIKOS,"mamiadsGuideGP");
+    public static final String GOLDPLUS_CONTRACT = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusContract");
+    public static final String KONTRAK_KERJA_SAMA = JavaHelpers.getPropertyValue(MAMIKOS, "kontrakKerjaSama");
+    public static final String PROMO_MAMIKOS = JavaHelpers.getPropertyValue(MAMIKOS, "promoMamikosURL_prod");
+
+    @Setter @Getter
+    private static  String propertyKosName;
 
 }

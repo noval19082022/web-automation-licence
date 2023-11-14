@@ -4,6 +4,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -13,18 +15,24 @@ public class HomePO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    private Locator cariApaDropDownMenu;
     private Locator btnMasuk;
     private Locator cariButton;
     private Locator mamikosLogo;
     private Locator userPhoto;
+    private Locator noUserPhoto;
     private Locator promoNgebutHeading;
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
     private Locator flashSaleKostListContainer;
+
+    private Locator flashSaleSection;
     private Locator flashSaleLihatSemuaButton;
+    private Locator flashSalePromoInfoList;
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
     private Locator kostPromo;
+    private Locator lihatPengajuanLainBtn;
 
     //header
     Locator searchAdsButton;
@@ -40,8 +48,9 @@ public class HomePO {
     private Locator flashSaleIcon;
     Locator bookingKosButtonHeadBar;
     Locator kostMenuDropdown;
+    Locator singgahsiniApikMenuDropDown;
+    Locator kosAndalanMenuDropDown;
     Locator apartmentMenuDropdown;
-    Locator profileDropdown;
     Locator profileMenu;
     Locator riwayatTransaksiMenu;
     Locator logOutButton;
@@ -67,6 +76,7 @@ public class HomePO {
     private Locator twitterButton;
     private Locator instagramButton;
     private Locator copyrightFooter;
+    private Locator appStoreFooterMenu;
 
 
 
@@ -74,21 +84,26 @@ public class HomePO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        this.cariApaDropDownMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
         mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
-        userPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
+        userPhoto = page.locator("#globalNavbar .user-profile-dropdown.bg-c-dropdown .bg-c-dropdown__trigger");
+        noUserPhoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");
         flashSaleTimer = page.getByText("Akan Berakhir dalam waktu:");
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
+        flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
+        flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
+        this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
 
 
         //header
@@ -102,12 +117,13 @@ public class HomePO {
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya"));
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
-        this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Booking Kos Booking Kos"));
+        this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
         flashSaleIcon = page.getByText("flash");
         this.kostPromo = page.locator(".rc-photo__cover").first();
-        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos").setExact(true));
+        this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
+        this.singgahsiniApikMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Singgahsini & Apik"));
+        this.kosAndalanMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Andalan"));
         this.apartmentMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Apartemen"));
-        this.profileDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("User Photo"));
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
         this.logOutButton = page.getByTestId("exitButton");
@@ -122,11 +138,19 @@ public class HomePO {
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
-        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("0813-2511-1171"));
+        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp +6281325111171"));
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
-        this.copyrightFooter = page.getByText("© 2023 Mamikos.com, All rights reserved");
+        this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
+        this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
+    }
+
+    /**
+     * Navigates to homepage
+     */
+    public void navigatesToHomepage() {
+        playwright.navigateToAndWaitLocator(Mamikos.URL, getMamikosLogo(), 30000.0);
     }
 
     /**
@@ -156,12 +180,11 @@ public class HomePO {
     public void waitTillLogoIsVisible() {
         page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(mamikosLogo, 30000.0);
-        playwright.waitFor(userPhoto, 3000.0);
+        playwright.assertVisible(userPhoto.or(noUserPhoto));
     }
 
     /**
      * Get mamikos logo
-     *
      * @return Locator data type of mamikos logo
      */
     public Locator getMamikosLogo() {
@@ -317,8 +340,8 @@ public class HomePO {
      *
      * @return Tenant Profile Picture
      */
-    public boolean isTenantProfilePictureDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(userPhoto, 5.0);
+    public void isTenantProfilePictureDisplayed() {
+        playwright.assertVisible(userPhoto.or(noUserPhoto));
     }
 
     /**
@@ -415,6 +438,24 @@ public class HomePO {
         return kostMenuDropdown.isVisible();
     }
 
+    /**
+     * Check elementt Singgahsini and Apik Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isSinggahsiniApikMenuDisplayed() {
+        return singgahsiniApikMenuDropDown.isVisible();
+    }
+
+    /**
+     * Check elementt Kos Andalan Menu is displayed
+     *
+     * @return status true / false
+     */
+    public boolean isKosAndalanMenuDisplayed() {
+        return kosAndalanMenuDropDown.isVisible();
+    }
+
 
     /**
      * Check element Apartment Menu is displayed
@@ -430,7 +471,7 @@ public class HomePO {
      *
      */
     public void clickOnProfileDropdown() {
-        profileDropdown.click();
+        userPhoto.click();
     }
 
     /**
@@ -506,7 +547,7 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isFormBantuanTitleDisplayed() {
-        return formBantuanTitle.isVisible();
+        return playwright.waitTillLocatorIsVisible(formBantuanTitle, 10.0);
     }
 
     /**
@@ -615,5 +656,60 @@ public class HomePO {
     public void clickAroundUGM() {
         playwright.pageScrollToDown(3000);
         aroundUnivUGM.click();
+    }
+
+    /**
+     * Check visibility of lihat pengajuan lain button
+     * @return boolean
+     */
+    public boolean isLihatPengajuanLainBtnVisible() {
+        return lihatPengajuanLainBtn.isVisible();
+    }
+
+    /**
+     * Click lihat pengajuan lain button
+     */
+    public void clickLihatPengajuanLainBtn() {
+        playwright.pageScrollToDown(500);
+        lihatPengajuanLainBtn.click();
+    }
+
+
+    /**
+     * user scroll into promo ngebut section
+     */
+    public void scrollIntoPromoNgebut() {
+        playwright.pageScrollUntilElementIsVisible(flashSaleSection);
+    }
+
+    /**
+     * get promo ngebut info on kost card
+     * @return
+     */
+    public List<String> promoNgebutInfo() {
+        return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
+    }
+
+    /**
+     * visit apartment list page
+     */
+    public void visitApartmentListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(apartmentMenuDropdown);
+    }
+
+    /**
+     * click on download app on the app store on the footer menu
+     */
+    public void clickOnAppStore() {
+        playwright.clickOn(appStoreFooterMenu);
+    }
+
+    /**
+     * visit cari kost list page from ads dropdown
+     */
+    public void visitCariKosttListPage() {
+        playwright.clickOn(cariApaDropDownMenu);
+        playwright.clickOn(kostMenuDropdown);
     }
 }
