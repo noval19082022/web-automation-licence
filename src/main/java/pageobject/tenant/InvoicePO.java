@@ -653,16 +653,6 @@ public class InvoicePO {
 
     }
 
-
-    /**
-     * Wait for an element to become visible
-     *
-     * @param locator The locator of the element to wait for.
-     */
-    private void waitForVisibility(Locator locator) {
-        playwright.waitTillLocatorIsVisible(locator, 3000.0);
-    }
-
     /**
      * Click MamiPoin Toggle Button to On
      */
