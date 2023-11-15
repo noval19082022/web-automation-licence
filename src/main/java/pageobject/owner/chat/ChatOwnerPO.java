@@ -54,7 +54,7 @@ public class ChatOwnerPO {
         acceptFromChatRoomButton = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
         yaTerimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
         notPaidFirstRent = page.locator("div[class='mc-chat-room-header__content'] div[class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-blue']");
-        tenantName = page.locator(".bg-c-tooltip__target > .bg-c-text");
+        tenantName = page.locator(".bg-c-text--title-5");
         roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
         roomPrice = page.locator("//p[contains(.,'Rp780.000')]");
         sisaKamarLabel = page.locator("//p[@class='bg-c-text bg-c-text--label-4 bg-c-text--italic mc-product-card__available-room bg-u-text-red-600']");
@@ -78,6 +78,7 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
+        playwright.reloadPage();
         playwright.clickOn(ownerChatButton);
     }
 
