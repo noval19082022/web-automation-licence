@@ -667,7 +667,7 @@ public class InvoicePO {
      * Click MamiPoin Toggle Button to On
      */
     public void clickMamipoinToggleButtonToOn() {
-        waitForVisibility(mamipoinToggleButtonOff);
+        playwright.waitFor(mamipoinToggleButtonOff, 5000.0);
         playwright.clickOn(mamipoinToggleButtonOff);
     }
 
@@ -675,7 +675,7 @@ public class InvoicePO {
      * Click MamiPoin Toggle Button to Off
      */
     public void clickMamipoinToggleButtonToOff() {
-        waitForVisibility(mamipoinToggleButtonOn);
+        playwright.waitFor(mamipoinToggleButtonOn, 5000.0);
         playwright.clickOn(mamipoinToggleButtonOn);
     }
 
