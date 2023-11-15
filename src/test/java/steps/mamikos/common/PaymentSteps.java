@@ -321,14 +321,9 @@ public class PaymentSteps {
         }
     }
 
-    @When("user clicks on mamipoin toggle button to ON")
-    public void user_clicks_on_mamipoin_toggle_button_to_on() {
-        invoice.clickMamipoinToggleButtonToOn();
-    }
-
-    @When("user clicks on mamipoin toggle button to OFF")
+    @When("user clicks on mamipoin toggle button to On Off")
     public void user_clicks_on_mamipoin_toggle_button_to_off() {
-        invoice.clickMamipoinToggleButtonToOff();
+        invoice.clickMamipoinToggleButtonToOnOff();
     }
 
     @Then("tenant point estimate not displayed on invoice")
