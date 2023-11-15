@@ -657,28 +657,16 @@ public class InvoicePO {
      * Click MamiPoin Toggle Button to On
      */
     public void clickMamipoinToggleButtonToOn() {
-        playwright.hardWait(3000.0);
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-        }else if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-                playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOn);
-        }
+        playwright.waitFor(mamipoinToggleButtonOff, 5000.0);
+        playwright.clickOn(mamipoinToggleButtonOff);
     }
 
     /**
      * Click MamiPoin Toggle Button to Off
      */
     public void clickMamipoinToggleButtonToOff() {
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOn)) {
-            playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOff);
-        }
+        playwright.waitFor(mamipoinToggleButtonOn, 5000.0);
+        playwright.clickOn(mamipoinToggleButtonOn);
     }
 
     /**
