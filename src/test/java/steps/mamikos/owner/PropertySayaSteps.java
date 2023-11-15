@@ -567,7 +567,7 @@ public class PropertySayaSteps {
 
     @When("owner valid upload photo kos")
     public void ownerValidUploadPhotoKos() {
-        propertySaya.uploadValidPhotoKos();
+        propertySaya.ubahValidPhotoKos();
     }
 
     @And("owner select size room {string}")
@@ -622,5 +622,103 @@ public class PropertySayaSteps {
     @And("owner click {string} on Kebijakan BBK Baru Mamikos")
     public void ownerClickOnKebijakanBBKBaruMamikos(String text) {
         propertySaya.clickOnNewBBKPopUp(text);
+    }
+
+    @And("owner click add another type from kos {string}")
+    public void ownerClickAddAnotherTypeFromKos(String kosName) {
+        propertySaya.clickAddAnotherTypeFromKos(kosName);
+    }
+
+    @And("owner click {string} in add new room type pop up and click next")
+    public void ownerClickInAddNewRoomTypePopUpAndClickNext(String kosType) throws InterruptedException {
+        propertySaya.clickNewRoomType(kosType);
+    }
+
+    @Then("verify message {string} the room type")
+    public void verifyMessageTheRoomType(String roomTypeMessageText) {
+        Assert.assertEquals(propertySaya.getRoomTypeMessage(roomTypeMessageText), roomTypeMessageText, "Room type message doesn't match!");
+    }
+
+    @When("owner input room type with {string}")
+    public void ownerInputRoomTypeWith(String text) {
+        propertySaya.inputRoomTypeName(text);
+    }
+
+    @And("see next button disable")
+    public void seeNextButtonDisable() {
+        Assert.assertTrue(propertySaya.isLanjutkanDisable(), "Lanjutkan button is enable!");
+    }
+
+    @When("owner select the kost type {string}")
+    public void ownerSelectTheKostType(String kosType) {
+        propertySaya.selectKostType(kosType);
+    }
+
+    @When("owner input room type with {string} in pop up")
+    public void ownerInputRoomTypeWithInPopUp(String text) {
+        propertySaya.inputRoomTypeNameInPopUp(text);
+    }
+
+    @And("see next button disable in pop up")
+    public void seeNextButtonDisableInPopUp() {
+        propertySaya.isLanjutkanInPopUpDisable();
+    }
+
+    @When("owner input kos name {string}")
+    public void ownerInputKosName(String text) {
+        int length = 8;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        kosNamePrefix = text + " " + generatedString.toUpperCase();
+        propertySaya.inputKosName(kosNamePrefix);
+        Mamikos.setPropertyKosName(kosNamePrefix);
+    }
+
+    @Then("owner see pop up confirmation request attention")
+    public void ownerSeePopUpConfirmationRequestAttention() {
+        Assert.assertEquals(propertySaya.getTitleChangeInterceptPopUp(), "Mohon Perhatiannya Sebentar", "Title doesn't match!");
+        Assert.assertEquals(propertySaya.getMessageChangeInterceptPopUp(), "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan.", "Message doesn't match!");
+    }
+
+    @When("owner click {string} input data on pop up")
+    public void ownerClickInputDataOnPopUp(String actionText) {
+        propertySaya.clickOnActionInterceptInputData(actionText);
+    }
+
+    @And("user click back button in page input kos")
+    public void userClickBackButtonInPageInputKos() {
+        propertySaya.clickOnBackFromInputKos();
+        Assert.assertEquals(propertySaya.getTitleChangeInterceptPopUp(), "Mohon Perhatiannya Sebentar", "Title doesn't match!");
+        Assert.assertEquals(propertySaya.getMessageChangeInterceptPopUp(), "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan.", "Message doesn't match!");
+    }
+
+    @And("owner upload valid photo {string}")
+    public void ownerUploadValidPhoto(String photoName) {
+       propertySaya.uploadValidPhotoKos(photoName);
+    }
+
+    @And("owner input additional price")
+    public void ownerInputAdditionalPrice(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        propertySaya.inputAdditionalPriceName(table.get(0).get("price name"));
+        propertySaya.inputTotalAdditionalPrice(table.get(0).get("price total"));
+    }
+
+    @And("owner select additional price")
+    public void ownerSelectAdditionalPrice() {
+        propertySaya.selectAdditionalPrice();
+    }
+
+    @And("owner select down payment with {string} from rent price")
+    public void ownerSelectDownPaymentWithFromRentPrice(String downPaymentPercentage) {
+        propertySaya.selectDownPayment();
+        propertySaya.selectPercentageOfDownPayment(downPaymentPercentage);
+    }
+
+    @And("owner set penalty is {string}")
+    public void ownerSetPenaltyIs(String penaltyAmount) {
+        propertySaya.selectPenalty();
+        propertySaya.inputPenalty(penaltyAmount);
     }
 }
