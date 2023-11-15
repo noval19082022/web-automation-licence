@@ -62,4 +62,21 @@ public class BoostLplSteps {
         Assert.assertFalse(boostLpl.isResultKostPresent(kost), "user id found");
     }
 
+    @When("admin wants to add listing to boost lpl")
+    public void admin_wants_to_add_listing_to_boost_lpl() {
+        boostLpl.clickButtonBoostLpl();
+        Assert.assertTrue(boostLpl.isPopUpAddBoostLplAppear(),"pop up not appear");
+        boostLpl.clickButtonYesLpl();
+    }
+
+    @Then("admin can see {string} was added with lpl score is {string}")
+    public void admin_can_see_was_added_with_lpl_score_is(String listingName, String lplScore) {
+        Assert.assertEquals(boostLpl.getListingName(listingName),listingName,"listing name doesnt match");
+        Assert.assertEquals(boostLpl.getScoreLpl(lplScore),lplScore,"score doesnt match");
+    }
+
+    @Then("admin delete listing from boost lpl")
+    public void admin_delete_listing_from_boost_lpl() {
+       boostLpl.clickOnDeleteButton();
+    }
 }

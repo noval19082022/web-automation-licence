@@ -1190,7 +1190,7 @@ public class PropertySayaPO {
      * @return errorMessage
      */
     public String getErrorUpload() {
-        return playwright.getText(errorMessage).replaceAll("close  error-round-glyph \\s+", "");
+        return playwright.getText(errorMessage).replaceAll("closeerror-round-glyph", "");
     }
 
     /**

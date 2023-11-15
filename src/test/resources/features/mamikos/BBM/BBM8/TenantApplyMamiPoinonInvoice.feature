@@ -1,4 +1,4 @@
-@regression @mamipoinTenant @BBM8
+@regression @mamipoinTenant @BBM8 @BBM4
 
 Feature: Tenant Apply MamiPoin on Invoice
 
@@ -11,9 +11,9 @@ Feature: Tenant Apply MamiPoin on Invoice
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
-    And user clicks on mamipoin toggle button to ON
+    And user clicks on mamipoin toggle button to On Off
     Then system display remaining payment "after" use mamipoin for payment monthly
-    When user clicks on mamipoin toggle button to OFF
+    When user clicks on mamipoin toggle button to On Off
     Then system display remaining payment "before" use mamipoin for payment monthly
 
   @TEST_COOP-2500
