@@ -9,10 +9,18 @@ public class NaikkanIklanPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    private static String kostName;
     Locator selectFilter;
     Locator filterActive;
     Locator adsFullOccupied;
     Locator quickAllocateTitle;
+    Locator toggleAds;
+    Locator titlePopUpConfirmation;
+    Locator descPopUpConfirmation;
+    Locator keMamiAdsButton;
+    Locator nantiSaja;
+    Locator titlePopUp;
+    Locator nonAktifkanAdsButton;
 
 
     public NaikkanIklanPO(Page page) {
@@ -23,6 +31,13 @@ public class NaikkanIklanPO {
         filterActive =  page.locator("#filter-status-2");
         adsFullOccupied = page.locator(".ads-status__kamar-penuh");
         quickAllocateTitle = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//div[@class='alokasi-ads__purchase-desc']");
+        toggleAds = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//input[@class='bg-c-switch__input']");
+        titlePopUpConfirmation = page.locator("//h3[@class='bg-c-modal__body-title']");
+        descPopUpConfirmation = page.locator("description.bg-c-text.bg-c-text--body-2");
+        keMamiAdsButton = page.locator("//*[contains(text(),'Ke MamiAds')]");
+        nantiSaja = page.locator("//*[contains(text(),'Nanti Saja')]");
+        titlePopUp = page.locator(".bg-c-modal__body-title");
+        nonAktifkanAdsButton = page.locator("//*[contains(text(),'Ya, Nonaktifkan')]");
 
     }
 
@@ -118,5 +133,83 @@ public class NaikkanIklanPO {
      */
     public void clickOnAllocationSection() throws InterruptedException {
       playwright.clickOn(quickAllocateTitle);
+    }
+    /**
+     * Click on toggle ON OFF on property saya
+     * @throws InterruptedException
+     *
+     */
+    public void clickToggleTheAdsOnPropertySaya() throws InterruptedException {
+       playwright.clickOn(toggleAds);
+    }
+
+    /**
+     * Get message on pop up confirmation
+     *
+     * @return message on pop up confirmation
+     * @params action
+     */
+    public String getTextSwitchTogglePopUp(String action) {
+        if (action.equals("off")) {
+            playwright.waitTillLocatorIsVisible(titlePopUpConfirmation);
+            return playwright.getText(titlePopUpConfirmation);
+        } else {
+            playwright.waitTillLocatorIsVisible(descPopUpConfirmation);
+            return playwright.getText(descPopUpConfirmation);
+        }
+    }
+
+    /**
+     * Set kos name owner from input user
+     * @params nameKos
+     *
+     */
+    public void setKosOwner(String kostName) {
+        NaikkanIklanPO.kostName = kostName;
+    }
+
+    /**
+     * Get Name Kos from input user
+     * @return kosName
+     *
+     */
+    public String getNameKos() {
+        return kostName;
+    }
+
+    /**
+     * Click on Ke MamiAds button
+     * @throws InterruptedException
+     *
+     */
+    public void clickOnKeMamiAdsButton() throws InterruptedException {
+       playwright.clickOn(keMamiAdsButton);
+    }
+
+    /**
+     * Click on Nanti Saja button on confirmation pop up quick allocation
+     * @throws InterruptedException
+     *
+     */
+    public void clickOnNantiSaja() throws InterruptedException {
+        playwright.clickOn(nantiSaja);
+    }
+
+    /**
+     * Get text title in Toast Message
+     *
+     * @return text title in Toast Message
+     */
+    public String getTextTitlePopUp() {
+        return playwright.getText(titlePopUp);
+    }
+
+    /**
+     * Click on Ya, Nonaktifkan button on Non aktif confirmation pop up
+     * @throws InterruptedException
+     *
+     */
+    public void clickOnNonaktifkanAds() throws InterruptedException {
+       playwright.clickOn(nonAktifkanAdsButton);
     }
 }

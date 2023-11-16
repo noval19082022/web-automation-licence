@@ -24,7 +24,13 @@ public class GolplusContractPO {
     Locator periodeSelect;
     Locator gpPackage;
     Locator statusSelect;
-    Locator statusResult;
+    Locator showOrder;
+    Locator headerContractOrder;
+    Locator phoneNumberOrder;
+    Locator gpPackageOrder;
+    Locator statusGpOrder;
+    Locator invoiceGpStatus;
+
 
     public GolplusContractPO(Page page) {
         this.page = page;
@@ -35,6 +41,8 @@ public class GolplusContractPO {
         searchOwnerName =  page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search by"));
         periodePackageGP = page.getByPlaceholder("Packages");
         gpPackage = page.locator("//tbody[1]/tr[1]/td[3] ");
+        showOrder =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show Orders"));
+        headerContractOrder = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Contract's Orders"));
 
 
     }
@@ -153,6 +161,53 @@ public class GolplusContractPO {
         return playwright.getLocators(element);
     }
 
+
+    /**
+     * Click on show orders at gp contract
+     */
+    public void clickOnShowOrders() {
+        playwright.clickOn(showOrder);
+    }
+
+    /**
+     * user verify the alokasi ads title
+     * @return header locator
+     */
+    public boolean getHeaderContractOrder() {
+        return playwright.waitTillLocatorIsVisible(headerContractOrder);
+    }
+
+    /**
+     * get owner phone number from contract order
+     */
+    public String getPhoneNumberFromOrder(String phone) {
+        phoneNumberOrder =page.getByText(phone);
+        return playwright.getText(phoneNumberOrder);
+    }
+
+    /**
+     * get pembelian GP Package at contract order page
+     */
+    public String getGoldplusOrder(String gp) {
+        gpPackageOrder = page.locator("//td[2]");
+        return playwright.getText(gpPackageOrder);
+    }
+
+    /**
+     * get status godlplus at contract order page
+     */
+    public String getStatusGoldplusOrder(String status) {
+        statusGpOrder = page.locator(".invoice-status-label");
+        return playwright.getText(statusGpOrder);
+    }
+
+    /**
+     * get status godlplus
+     */
+    public String getStatusInvoiceGoldplusOrder(String invoiceStatus) {
+        invoiceGpStatus = page.locator(".order-status-label");
+        return playwright.getText(invoiceGpStatus);
+    }
 
 }
 

@@ -71,9 +71,27 @@ public class GolplusContractSteps {
         }
 
     }
-
     @Then("admin wants to reset form search")
     public void admin_wants_to_reset_form_search() {
         goldplusContractPO.clickOnButtonResetContract();
+    }
+
+    @When("admin wants to see detail contract")
+    public void admin_wants_to_see_detail_contract() {
+        goldplusContractPO.clickOnShowOrders();
+    }
+
+    @When("admin can see page contract order from phone number {string}")
+    public void admin_can_see_page_contract_order_from_phone_number(String phone) {
+        Assert.assertTrue(goldplusContractPO.getHeaderContractOrder(),"header not show");
+        Assert.assertEquals(goldplusContractPO.getPhoneNumberFromOrder(phone).replaceAll("[^0-9]", "").replace("[!@#$%^&*:]", ""),phone,"phone number doesnt match");
+
+    }
+
+    @When("admin can see list {string} with status {string} , invoice status is {string}")
+    public void admin_can_see_list_with_status_invoice_status_is(String gp, String status, String invoiceStatus) {
+       Assert.assertEquals(goldplusContractPO.getGoldplusOrder(gp).replaceAll("\n", "").replaceAll("\\s+", " "),gp,"pacakge doesnt match");
+        Assert.assertEquals(goldplusContractPO.getStatusGoldplusOrder(status),status,"status gp doesnt match");
+        Assert.assertEquals(goldplusContractPO.getStatusInvoiceGoldplusOrder(invoiceStatus),invoiceStatus,"invoice status doesnt match");
     }
 }
