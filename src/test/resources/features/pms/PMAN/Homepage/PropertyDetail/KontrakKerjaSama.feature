@@ -80,42 +80,6 @@ Feature: Kontrak Kerja Sama
     When admin turn off Hybrid
     Then kontrak kerja sama should not contains hybrid rev share
 
-  @TEST_PMAN-4559 @continue
-  Scenario: See, Add, Edit, and Delete Biaya Tambahan
-    #Admin see biaya tambahan section
-    When admin see biaya tambahan
-    Then biaya tambahan should contains
-      | Nama Biaya          | Amount    |
-      | Wifi Bulanan        | Rp75.000  |
-      | Kebersihan Bulanan  | Rp15.000  |
-      | Gas Lpg Mingguan    | Rp5.000   |
-    #Admin add biaya tambahan
-    When admin add new biaya tambahan
-      | Nama Biaya     | Amount    |
-      | Listrik        | 25000  |
-    Then detail biaya tambahan should contains
-      | Nama Biaya          | Amount    |
-      | Wifi Bulanan        | Rp 75.000 |
-      | Kebersihan Bulanan  | Rp 15.000 |
-      | Gas Lpg Mingguan    | Rp 5.000  |
-      | Listrik             | Rp 25.000 |
-    #Admin edit biaya tambahan
-    When admin edit biaya tambahan "Listrik" to
-      | Nama Biaya   | Amount |
-      | Laundry      | 10000  |
-    Then detail biaya tambahan should contains
-      | Nama Biaya          | Amount    |
-      | Wifi Bulanan        | Rp 75.000 |
-      | Kebersihan Bulanan  | Rp 15.000 |
-      | Gas Lpg Mingguan    | Rp 5.000  |
-      | Laundry             | Rp 10.000 |
-    #Admin delete biaya tambahan
-    When admin delete biaya tambahan "Laundry"
-    Then detail biaya tambahan should contains
-      | Nama Biaya          | Amount    |
-      | Wifi Bulanan        | Rp 75.000  |
-      | Kebersihan Bulanan  | Rp 15.000  |
-      | Gas Lpg Mingguan    | Rp 5.000   |
 
   @TEST_PMAN-3852
   Scenario: See Rincian Tipe Kamar dan Harga

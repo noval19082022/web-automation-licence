@@ -141,7 +141,8 @@ public class AdminMamipayDashboardPO {
      *
      */
     public void clickOnFilterTeamDropdown() {
-        filterTeamDropdown.click();
+        playwright.waitFor(filterTeamDropdown);
+        playwright.clickOn(filterTeamDropdown);
     }
 
     /**

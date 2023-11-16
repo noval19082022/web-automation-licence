@@ -117,7 +117,6 @@ Feature: Kost Review
     Then user verify success alert with "Success! Review added successfully."
 
   @TEST_BBM-545
-  @continue
   Scenario: Edit review with contract
     Given admin go to mamikos bangkrupux admin
     And user Edit Review wit contract data on "Just a test content that will match 25 characters of input":
@@ -137,6 +136,8 @@ Feature: Kost Review
   @TEST_BBM-550
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | qaeautomation3@mamikos.com   | qaeautomation3@mamikos.com   |qwerty123 |
     And user click Delete button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for deleted kost review with text "Success! Success, Review Deleted"
-

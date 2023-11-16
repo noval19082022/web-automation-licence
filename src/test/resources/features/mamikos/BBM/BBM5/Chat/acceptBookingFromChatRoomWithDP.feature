@@ -39,6 +39,8 @@ Feature: Accept Booking from Chat room with DP
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
+    And user click chat button in top bar owner home page
+    And search chat in chatlist "Tenant Automation Accept Chat"
     Then system display title "Belum bayar sewa pertama" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama
