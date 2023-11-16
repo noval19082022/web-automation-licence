@@ -342,4 +342,11 @@ public class NavigatesSteps {
     public void adminBangkrupuxNavigateToKostMenu() {
         playwright.navigateTo(Mamikos.URL + "/admin/room?#room", 30000.0, LoadState.LOAD);
     }
+
+    @When("admin accsess menu Goldplus Contract")
+    public void admin_accsess_menu_goldplus_contract() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
+    }
+
+
 }
