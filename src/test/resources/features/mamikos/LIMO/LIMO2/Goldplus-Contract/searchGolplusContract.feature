@@ -45,7 +45,5 @@ Scenario: [Admin][GP Contract]User want to Search GoldPlus Contract
  Scenario: [Admin][GP Contract]User want to see Order in GoldPlus Contract
     When admin search contract based on phone number "087662369014"
     And admin wants to see detail contract
-    And admin can see page contract order from phone number "087662369014"
+    Then admin can see page contract order from phone number "087662369014"
     And admin can see list "Pembayaran GoldPlus 1 Activation" with status "expired" , invoice status is "expired"
-
-
