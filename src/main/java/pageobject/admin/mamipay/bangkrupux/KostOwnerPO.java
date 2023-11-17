@@ -16,7 +16,6 @@ public class KostOwnerPO {
     Locator firstRejectReasonRadioButton;
     Locator rejectButton;
     Locator verifyIcon;
-    Locator statusProperty;
     Locator alertMessage;
     Locator firstVerifyButton;
     Locator firstDeleteButton;
@@ -32,10 +31,10 @@ public class KostOwnerPO {
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
         firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
-
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
-
         firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
+        firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
+        firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
     }
 
     /**
@@ -121,7 +120,6 @@ public class KostOwnerPO {
      * @return attribute href from firstDeleteButton
      */
     public String getKosListDeleteUrl() {
-        firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
         return playwright.getAttributeValue(firstDeleteButton, "href");
     }
 
@@ -131,7 +129,6 @@ public class KostOwnerPO {
      *
      */
     public String getKosListRejectUrl() {
-        firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
         return playwright.getAttributeValue(firstRejectKosButton, "href");
     }
 

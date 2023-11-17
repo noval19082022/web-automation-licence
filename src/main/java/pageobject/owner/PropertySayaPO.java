@@ -1097,7 +1097,7 @@ public class PropertySayaPO {
      */
     public void inputKosName(String kosName) {
         playwright.waitTillLocatorIsVisible(kostNameField, 3000.0);
-        playwright.waitFor(kostNameField, 1000.0);
+        playwright.waitFor(kostNameField, 10000.0);
         playwright.forceFill(kostNameField, kosName);
     }
 
