@@ -28,6 +28,7 @@ public class PropertySayaSteps {
     private String sixMonthlyPrice = null;
     private String yearlyPrice = null;
     private String kosNamePrefix;
+    private String roomTypePrefix;
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
@@ -46,6 +47,7 @@ public class PropertySayaSteps {
 
     @Then("user see kos with name {string}, status {string} and type {string}")
     public void userSeeKosWithNameStatusAndType(String name, String status, String type) {
+        System.out.println(status);
         Assert.assertTrue(propertySaya.getFirstKosName().contains(name), "Kos name is wrong");
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(type), type, "Kos type is wrong");
@@ -720,5 +722,124 @@ public class PropertySayaSteps {
     public void ownerSetPenaltyIs(String penaltyAmount) {
         propertySaya.selectPenalty();
         propertySaya.inputPenalty(penaltyAmount);
+    }
+
+    @When("owner input room type with random text in pop up")
+    public void ownerInputRoomTypeWithRandomTextInPopUp() {
+        int length = 3;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        roomTypePrefix = "Tipe " + generatedString.toUpperCase();
+        propertySaya.inputRoomTypeNameInPopUp(roomTypePrefix);
+        Mamikos.setPropertyKosName(roomTypePrefix);
+    }
+
+    @And("owner click lanjutkan button in bottom of add kos page")
+    public void ownerClickLanjutkanButtonInBottomOfAddKosPage() {
+        propertySaya.clickOnLanjutkanAfterInputTypeRoom();
+    }
+
+    @Then("verify kos description is disabled")
+    public void verifyKosDescriptionIsDisabled() {
+        Assert.assertTrue(propertySaya.isDescriptionKosDisable(), "Description kos is enable!");
+    }
+
+    @And("verify kos build year is disabled")
+    public void verifyKosBuildYearIsDisabled() {
+        Assert.assertFalse(propertySaya.isBuildKosDisable(), "Description kos is enable!");
+    }
+
+    @When("owner click {string} button in add kos page")
+    public void ownerClickButtonInAddKosPage(String text) {
+        propertySaya.clickOnLengkapiDataAddKos(text);
+    }
+
+    @Then("user see error message {string} under total room")
+    public void userSeeErrorMessageUnderTotalRoom(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @And("user see error message {string} under total room available")
+    public void userSeeErrorMessageUnderTotalRoomAvailable(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner click {string} ketersediaan kamar")
+    public void ownerClickKetersediaanKamar(String text) {
+        propertySaya.clickOnKetersediaanKamar(text);
+    }
+
+    @And("owner input room name or number in room allotment page with {string}")
+    public void ownerInputRoomNameOrNumberInRoomAllotmentPageWith(String text) {
+        propertySaya.inputKosName(text);
+    }
+
+    @Then("user see error message {string} under room type field")
+    public void userSeeErrorMessageUnderRoomTypeField(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner input room floor with {string}")
+    public void ownerInputRoomFloorWith(String text) {
+        propertySaya.inputRoomTypeName(text);
+    }
+
+    @Then("user see error message {string} under floor field")
+    public void userSeeErrorMessageUnderFloorField(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner click {string} in data ketersediaan kamar")
+    public void ownerClickInDataKetersediaanKamar(String text) {
+        propertySaya.clickOnSelesaiAturKamar(text);
+    }
+
+    @And("user select payment expired date after {string} {string}")
+    public void userSelectPaymentExpiredDateAfter(String number, String rangeTime) {
+        propertySaya.selectPaymentExpiredDate(number, rangeTime);
+    }
+
+    @And("user input monthly price with {string} in add kos page")
+    public void userInputMonthlyPriceWithInAddKosPage(String monthlyPrice) {
+        propertySaya.inputMonthyPrice(monthlyPrice);
+    }
+
+    @And("owner click {string} on kos draft")
+    public void ownerClickOnKosDraft(String text) {
+        propertySaya.clickOnLengkapiDataKosDraft();
+    }
+
+    @And("owner edit data harga kos as expected")
+    public void ownerEditDataHargaKosAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
+        propertySaya.inputOtherPrice("Hari", table.get(0).get("daily price"), 1);
+        propertySaya.inputOtherPrice("Minggu", table.get(0).get("weekly price"), 2);
+        propertySaya.inputOtherPrice("3 Bulan", table.get(0).get("three monthly price"), 3);
+        propertySaya.inputOtherPrice("6 Bulan", table.get(0).get("six monthly price"), 4);
+        propertySaya.inputOtherPrice("Tahun", table.get(0).get("yearly price"), 5);
+
+    }
+
+    @Then("user see warning price on add kos with:")
+    public void userSeeWarningPriceOnAddKosWith(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(propertySaya.getErrorPriceAddKos(i), content.get("warningMessage"), "title not equal to" + content.get("title"));
+            i++;
+        }
+    }
+
+    @And("owner search kos on property saya page")
+    public void ownerSearchKosOnPropertySayaPage() {
+        propertySaya.searchKostPropertySaya(Mamikos.getPropertyKosName());
+    }
+
+    @And("owner input kos name {string} for existing kost name")
+    public void ownerInputKosNameForExistingKostName(String existingKosName) {
+        propertySaya.inputKosName(existingKosName);
     }
 }

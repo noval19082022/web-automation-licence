@@ -20,8 +20,8 @@ public class KostOwnerPO {
     Locator alertMessage;
     Locator firstVerifyButton;
     Locator firstDeleteButton;
-    Locator actionDropdown;
-    Locator deleteKost;
+    Locator firstRejectKosButton;
+    Locator reasonRejectonCheckbox;
 
 
     public KostOwnerPO(Page page) {
@@ -123,5 +123,51 @@ public class KostOwnerPO {
     public String getKosListDeleteUrl() {
         firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
         return playwright.getAttributeValue(firstDeleteButton, "href");
+    }
+
+    /**
+     * Get url list kos reject
+     * @return attribute href from firstRejectKosButton
+     *
+     */
+    public String getKosListRejectUrl() {
+        firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
+        return playwright.getAttributeValue(firstRejectKosButton, "href");
+    }
+
+    /**
+     * Navigate to reject kos on admin
+     *
+     *
+     */
+    public void navigateToRejectUrl() {
+        playwright.navigateTo(this.getKosListRejectUrl());
+    }
+
+    /**
+     * Select the reject reason
+     * @param reason
+     *
+     */
+    public void selectRejectReason(String reason) {
+        reasonRejectonCheckbox = page.locator("label").filter(new Locator.FilterOptions().setHasText(reason)).locator("span");
+        playwright.clickOn(reasonRejectonCheckbox);
+    }
+
+    /**
+     * Click on reject button
+     * @param text
+     */
+    public void clickOnRejectKos(String text) {
+        playwright.clickOnTextButton(text);
+    }
+
+    /**
+     * Click on send button
+     * @param text
+     *
+     */
+    public void clickOnSendReject(String text) {
+        playwright.clickOnTextButton(text);
     }
 }

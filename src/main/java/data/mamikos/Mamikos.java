@@ -67,4 +67,10 @@ public class Mamikos {
     @Setter @Getter
     private static  String propertyKosName;
 
+    @Setter @Getter
+    private static String rejectReason;
+
+    @Setter @Getter
+    private static String rejectReasonTitle;
+
 }
