@@ -336,4 +336,9 @@ public class TenantBookingSteps {
         kostDetail.clickTimeConditionRefund();
     }
 
+    @When("Tenant see booking date according to BSS setting")
+    public void TenantSeeBookingDateAccordingToBssSetting() {
+        kostDetail.dismissFTUE();
+        kostDetail.selectBookingDate("today");
+    }
 }

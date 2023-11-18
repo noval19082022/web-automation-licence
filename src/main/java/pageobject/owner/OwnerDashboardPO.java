@@ -1,5 +1,6 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -63,6 +64,14 @@ public class OwnerDashboardPO {
     Locator saldoMamiAdsButton;
     Locator noProperty;
     Locator propertySekitar;
+    Locator dropdownKosName;
+    Locator toggleEntryTime;
+    Locator dropDownJumlahWaktu;
+    Locator dropDownUnitTime;
+    Locator saveInPopUpButton;
+    Locator nearestTimeSaveButton;
+    Locator saveBssButton;
+    Locator toggleEnable;
 
     private Locator fiturPromosiExpand;
 
@@ -118,6 +127,14 @@ public class OwnerDashboardPO {
         fiturPromosiExpand = page.getByText("Fitur Promosi");
         noProperty = page.locator(".no-property");
         propertySekitar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cek Properti Sekitar"));
+        dropdownKosName = page.locator("//div[@role='textbox']//*[name()='svg']");
+        toggleEntryTime = page.getByRole(AriaRole.CHECKBOX);
+        dropDownJumlahWaktu = page.getByTestId("min-checkin-amount").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("chevron-down"));
+        dropDownUnitTime = page.getByTestId("min-checkin-time-unit").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("chevron-down"));
+        nearestTimeSaveButton = page.getByTestId("checkin-option-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
+        saveInPopUpButton = page.getByTestId("checkin-save-btn");
+        saveBssButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
     }
 
     /**
@@ -634,5 +651,39 @@ public class OwnerDashboardPO {
      */
     public void clickOnPropertySekitar() {
         playwright.clickOn(propertySekitar);
+    }
+
+    /**
+     * Click on dropdown kos name
+     */
+    public void clickOnDropdownKosName() {
+        playwright.clickOn(dropdownKosName);
+    }
+
+    /**
+     * Click on toogle entry time kos
+     */
+    public void clickOnToggleEntryTime() {
+        if (toggleEnable.isVisible()) {
+            toggleEntryTime.click();
+        }
+    }
+
+    /**
+     * fill Nearest Amount Time
+     */
+    public void fillNearestAmountTime(String amount, String unitTime) {
+        dropDownJumlahWaktu.click();
+        String amountTime = "//p[normalize-space()='" + amount + "']";
+        ElementHandle elementJumlahWaktu = page.querySelector(amountTime);
+        elementJumlahWaktu.click();
+        nearestTimeSaveButton.click();
+        dropDownUnitTime.click();
+        String unitTimeNearest = "//p[normalize-space()='" + unitTime + "']";
+        ElementHandle elementUnitTime = page.querySelector(unitTimeNearest);
+        elementUnitTime.click();
+        nearestTimeSaveButton.click();
+        saveInPopUpButton.click();
+        saveBssButton.click();
     }
 }
