@@ -348,5 +348,9 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
     }
 
+    @When("admin access user point menu")
+    public void admin_access_user_point_menu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/point/user/index#point", 30000.0, LoadState.LOAD);
+    }
 
 }
