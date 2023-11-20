@@ -538,4 +538,14 @@ public class OwnersiniPO {
     public void clicksTampilkanLebihSedikit() {
         playwright.clickOn(tampilkanLebihSedikitBtn);
     }
+
+    /**
+     * Check if Dashboard Singgahsini button is visible
+     * True = visible
+     * False = invisible
+     * @return Dashboard Singgahsini button
+     */
+    public boolean isDashboardSinggahsiniBtnVisible(){
+        return playwright.isLocatorVisibleAfterLoad(dashboardSinggahsiniBtn, 10000.0);
+    }
 }
