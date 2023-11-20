@@ -41,7 +41,7 @@ Feature: Room avability calender
     And owner click on toggle entry time kos
     And owner edit Jarak waktu terdekat:
       | Jumlah  | Satuan Waktu |
-      | 7       | Hari         |
+      | 3       | Hari         |
     And owner logs out
     Given user go to mamikos homepage
     When user login as tenant via phone number:
