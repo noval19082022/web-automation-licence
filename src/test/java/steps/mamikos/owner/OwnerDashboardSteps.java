@@ -15,12 +15,14 @@ import java.util.Map;
 
 public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers plawright = new PlaywrightHelpers(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
 
+    private List<Map<String, String>> ownerDashboard;
+
     @When("Check if the button with label {string} is visible on the {string} page.")
-    public void check_if_button_with_label_is_visible_on_the_page(String button, String page){
-        Assert.assertTrue(plawright.isButtonWithTextDisplayed(button));
+    public void check_if_button_with_label_is_visible_on_the_page(String button, String page) {
+        Assert.assertTrue(playwright.isButtonWithTextDisplayed(button));
     }
 
     @When("user clicks on the close button")
@@ -45,7 +47,7 @@ public class OwnerDashboardSteps {
 
     @When("owner open notification icon")
     public void owner_open_notification_icon() {
-       ownerDashboardPO.clickNotificationButton();
+        ownerDashboardPO.clickNotificationButton();
 
     }
 
@@ -62,12 +64,12 @@ public class OwnerDashboardSteps {
 
     @When("owner click close icon pop up")
     public void ownerClickCloseIconPopUp() {
-        plawright.clickOnTextButton("close");
+        playwright.clickOnTextButton("close");
     }
 
     @Then("user verify text {string} on section info untuk anda is appear")
     public void user_verify_text_on_section_info_untuk_anda_is_appear(String textInfoUntukAnda) {
-       plawright.clickOnText(textInfoUntukAnda);
+        playwright.clickOnText(textInfoUntukAnda);
     }
 
     @And("user click menu {string} on feature waktunya mengelola property")
@@ -78,8 +80,8 @@ public class OwnerDashboardSteps {
     @When("verify ftue {string}")
     public void verify_ftue(String isDisplayed) {
         if (isDisplayed.equals("displayed")) {
-            Assert.assertTrue(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE doesn't displayed!" );
-        }else {
+            Assert.assertTrue(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE doesn't displayed!");
+        } else {
             Assert.assertFalse(ownerDashboardPO.isFTUEChatDisplayed(), "FTUE displayed!");
         }
 
@@ -185,12 +187,12 @@ public class OwnerDashboardSteps {
     }
 
     @And("user see widget waktunya mengelola properti is as expected")
-    public void user_see_widget_waktunya_mengelola_properti_is_as_expected(DataTable dataTable){
+    public void user_see_widget_waktunya_mengelola_properti_is_as_expected(DataTable dataTable) {
         List<Map<String, String>> table = dataTable.asMaps();
         int i = 2;
         for (Map<String, String> content : table) {
-            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to "+content.get("title"));
-            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"),"subtitle not equal to"+content.get("subtitle"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to " + content.get("title"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"), "subtitle not equal to" + content.get("subtitle"));
             i++;
         }
     }
@@ -223,7 +225,7 @@ public class OwnerDashboardSteps {
 
     @Then("user verify there are more than {int} review lists")
     public void user_verify_there_are_more_than_int_review_lists(int number) {
-        Assert.assertTrue( ownerDashboardPO.getRatingCardWrapperSize() > number, "Kost review lists are not more than " + number);
+        Assert.assertTrue(ownerDashboardPO.getRatingCardWrapperSize() > number, "Kost review lists are not more than " + number);
     }
 
     @And("user verify there is no kos review section")
@@ -267,6 +269,25 @@ public class OwnerDashboardSteps {
     public void owner_accsess_cek_properti_sekitar() {
         ownerDashboardPO.clickToExpandFiturPromosi();
         ownerDashboardPO.clickOnPropertySekitar();
+    }
+
+    @And("owner select kos {string}")
+    public void owner_select_kos(String kosName) {
+        ownerDashboardPO.clickOnDropdownKosName();
+        playwright.clickOnText(kosName);
+    }
+
+    @And("owner click on toggle entry time kos")
+    public void owner_click_on_toggle_entry_time_kos() {
+        ownerDashboardPO.clickOnToggleEntryTime();
+    }
+
+    @And("owner edit Jarak waktu terdekat:")
+    public void owner_edit_jarak_waktu_terdekat(DataTable tables) {
+        ownerDashboard = tables.asMaps(String.class, String.class);
+        String amount = ownerDashboard.get(0).get("Jumlah");
+        String unitTime = ownerDashboard.get(0).get("Satuan Waktu");
+        ownerDashboardPO.fillNearestAmountTime(amount, unitTime);
     }
 }
 
