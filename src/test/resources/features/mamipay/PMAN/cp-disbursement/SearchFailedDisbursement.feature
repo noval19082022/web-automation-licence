@@ -1,6 +1,6 @@
-@transfer-diproses @mamipay @cp-disbursement @regression @pman
+@transfer-gagal @mamipay @cp-disbursement @regression @pman
 
-Feature: Search Failed CP Disbursement
+Feature: CP Disbursement - Search Failed Disbursement
 
   @TEST_PMAN-3314 @continue
   Scenario: Search using invalid property name
