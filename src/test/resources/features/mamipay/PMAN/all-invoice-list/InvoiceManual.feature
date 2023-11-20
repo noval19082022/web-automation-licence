@@ -11,10 +11,10 @@
       When admin open menu all invoice list
       Then list contains invoice manual
 
-#    @TEST_PMAN-5875 @pman-prod
-#    Scenario: Filter Invoice Manual
-#      And admin filter by order type "Invoice Manual"
-#      Then system should display only invoice with type "Invoice Manual"
+    @TEST_PMAN-5875 @pman-prod
+    Scenario: Filter Invoice Manual
+      And admin filter by order type "Invoice Manual"
+      Then system should display only invoice with type "Invoice Manual"
 
     @TEST_PMAN-5876 @continue
     Scenario: Change status invoice manual

@@ -1,6 +1,6 @@
 @transfer-diproses @mamipay @cp-disbursement @regression @pman
 
-Feature: Search Transfer Diproses CP Disbursement
+Feature: CP Disbursement - Search Transfer Diproses Disbursement
 
   @TEST_PMAN-3302 @continue
   Scenario: Search valid property name

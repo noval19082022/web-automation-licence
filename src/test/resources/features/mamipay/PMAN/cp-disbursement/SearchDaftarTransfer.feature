@@ -1,6 +1,6 @@
 @daftar-transfer @mamipay @cp-disbursement @regression @pman
 
-  Feature: Search Daftar Transfer CP Disbursement
+  Feature: CP Disbursement - Search Daftar Transfer Disbursement
 
     @TEST_PMAN-3294 @continue
     Scenario: Search using invalid property name
