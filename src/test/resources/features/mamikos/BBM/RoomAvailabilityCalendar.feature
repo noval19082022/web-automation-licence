@@ -1,7 +1,7 @@
 @checkinKosBss
 Feature: Room avability calender
 
-
+@continue
   Scenario: BSS Waktu masuk kos booking is 1 days
     Given user go to mamikos homepage
     And user login as owner:
@@ -25,10 +25,11 @@ Feature: Room avability calender
     And tenant search kost then go to kost details:
       | kost name stag                      | kost name prod       |
       | Kost Singgahsini Noval Tipe Episode | kost payment desta 2 |
+    And tenant dismiss FTUE booking benefit
     Then Tenant see booking date according to BSS setting
+    And user logs out as a Tenant user
 
   Scenario: BSS Waktu masuk kos booking is 7 days
-    Given user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |

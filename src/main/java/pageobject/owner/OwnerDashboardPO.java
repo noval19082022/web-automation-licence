@@ -673,17 +673,15 @@ public class OwnerDashboardPO {
      * fill Nearest Amount Time
      */
     public void fillNearestAmountTime(String amount, String unitTime) {
-        dropDownJumlahWaktu.click();
-        String amountTime = "//p[normalize-space()='" + amount + "']";
-        ElementHandle elementJumlahWaktu = page.querySelector(amountTime);
-        elementJumlahWaktu.click();
-        nearestTimeSaveButton.click();
-        dropDownUnitTime.click();
-        String unitTimeNearest = "//p[normalize-space()='" + unitTime + "']";
-        ElementHandle elementUnitTime = page.querySelector(unitTimeNearest);
-        elementUnitTime.click();
-        nearestTimeSaveButton.click();
-        saveInPopUpButton.click();
-        saveBssButton.click();
+        playwright.clickOn(dropDownJumlahWaktu);
+        Locator amountTime = page.locator("//p[normalize-space()='" + amount + "']");
+        playwright.clickOn(amountTime);
+        playwright.clickOn(nearestTimeSaveButton);
+        playwright.clickOn(dropDownUnitTime);
+        Locator unitTimeNearest = page.locator("//p[normalize-space()='" + unitTime + "']");
+        playwright.clickOn(unitTimeNearest);
+        playwright.clickOn(nearestTimeSaveButton);
+        playwright.clickOn(saveInPopUpButton);
+        playwright.clickOn(saveBssButton);
     }
 }
