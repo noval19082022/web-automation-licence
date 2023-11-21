@@ -52,6 +52,8 @@ public class HomepagePO {
     Locator addOnOtherFee;
     Locator saveButton;
     String date;
+    Locator autoDisburseToggle;
+    Locator yesBtnInAutoDisburseToggle;
 
     //-----------create dbet--------//
     Locator dbetButton;
@@ -69,6 +71,19 @@ public class HomepagePO {
     Locator tenantJobs;
 
     Locator yaSimpanButton;
+
+    //---Kontrak Kerja Sama Tab---//
+    Locator kontrakKerjaSamaTab;
+    Locator riwayatPerubahanKontrakBtn;
+    Locator overviewTab;
+
+    //---Riwayat Perubahan Kontrak---//
+    Locator diubahOlehTable;
+    Locator roleTable;
+    Locator dataYangDiubahTable;
+    Locator inputLamaTable;
+    Locator inputBaruTable;
+    Locator waktuDiubahDate;
 
     public HomepagePO(Page page) {
         this.page = page;
@@ -117,6 +132,21 @@ public class HomepagePO {
         tenantGender = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jenis kelamin dropdown-down"));
         tenantJobs = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih pekerjaan dropdown-down"));
         yaSimpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Simpan"));
+        autoDisburseToggle = page.getByTestId("autoDisburse-switch");
+        yesBtnInAutoDisburseToggle = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+
+        //---Kontrak Kerja Sama Tab---//
+        kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
+        riwayatPerubahanKontrakBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("activity Riwayat Perubahan Kontrak"));
+        overviewTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Overview"));
+
+        //---Riwayat Perubahan Kontrak---//
+        diubahOlehTable = page.locator("td").first();
+        roleTable = page.locator("td:nth-child(2)").first();
+        dataYangDiubahTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Transfer Pendapatan Otomatis"));
+        inputLamaTable = page.locator("tr td:nth-of-type(4)");
+        inputBaruTable = page.locator("tr td:nth-of-type(5)");
+        waktuDiubahDate = page.locator("tr td:nth-of-type(6)");
     }
 
     /**
@@ -412,5 +442,85 @@ public class HomepagePO {
     public String getStatusBooking(String text) {
         Locator statusBooking = page.locator("//*[contains(text(),'" + text + "')]");
         return playwright.getText(statusBooking);
+    }
+
+    /**
+     * Set Auto Disbursement toggle
+     */
+    public void setToggleAutoDisbursement() {
+        playwright.clickOn(autoDisburseToggle);
+        playwright.clickOn(yesBtnInAutoDisburseToggle);
+    }
+
+    /**
+     * Get String Diubah oleh in Riwayat Perubahan Kontrak table
+     * @return String Diubah oleh
+     */
+    public String getDiubahOleh() {
+        return playwright.getText(diubahOlehTable);
+    }
+
+    /**
+     * Get String Role in Riwayat Perubahan Kontrak table
+     * @return String Role
+     */
+    public String getRole() {
+        return playwright.getText(roleTable);
+    }
+
+    /**
+     * Get String Data yang diubah in Riwayat Perubahan Kontrak table
+     * @return String Data yang diubah
+     */
+    public String getDataYangDiubah() {
+        return playwright.getText(dataYangDiubahTable.first());
+    }
+
+    /**
+     * Get String Input Lama in Riwayat Perubahan Kontrak table
+     * @return String Input Lama
+     */
+    public String getInputLama() {
+        return playwright.getText(inputLamaTable.first());
+    }
+
+    /**
+     * Get String Input Baru in Riwayat Perubahan Kontrak table
+     * @return String Input Baru
+     */
+    public String getInputBaru() {
+        return playwright.getText(inputBaruTable.first());
+    }
+
+    /**
+     * Get String Waktu Diubah in Riwayat Perubahan Kontrak table
+     * @return String Waktu Diubah
+     */
+    public String getWaktuDiubah() {
+        return playwright.getText(waktuDiubahDate.first()).substring(0, 10);
+    }
+
+    /**
+     * Clicks Kontrak Kerja Sama tab
+     */
+    public void goToKontrakKerjaSamaTab() {
+        playwright.clickOn(kontrakKerjaSamaTab);
+    }
+
+    /**
+     * Clicks Riwayat Perubahan Kontrak
+     */
+    public void clicksRiwayatPerubahanKontrak() {
+        playwright.clickOn(riwayatPerubahanKontrakBtn);
+    }
+
+    /**
+     * Clicks Overview tab
+     */
+    public void goToOverviewTab() {
+        //back to kontrak kerja sama page
+        playwright.backToPreviousPage();
+
+        playwright.clickOn(overviewTab);
     }
 }
