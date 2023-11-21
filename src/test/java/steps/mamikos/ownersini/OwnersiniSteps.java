@@ -184,4 +184,8 @@ public class OwnersiniSteps {
     public void Dashboard_Singgahsini_button_is_not_displayed(){
         Assert.assertFalse(ownersini.isDashboardSinggahsiniBtnVisible(), "Dashboard Singgahsini button is displayed on Pillar 2.");
     }
+    @When("owner logout from ownersini dashboard")
+    public void owner_logout_from_ownersini_dashboard() {
+        ownersini.logoutP1();
+    }
 }
