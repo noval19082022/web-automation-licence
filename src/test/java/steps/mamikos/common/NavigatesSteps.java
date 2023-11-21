@@ -342,7 +342,6 @@ public class NavigatesSteps {
     public void adminBangkrupuxNavigateToKostMenu() {
         playwright.navigateTo(Mamikos.URL + "/admin/room?#room", 30000.0, LoadState.LOAD);
     }
-
     @When("admin accsess menu Goldplus Contract")
     public void admin_accsess_menu_goldplus_contract() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
@@ -352,5 +351,10 @@ public class NavigatesSteps {
     public void admin_access_user_point_menu() {
         playwright.navigateTo(Mamikos.URL + "/admin/point/user/index#point", 30000.0, LoadState.LOAD);
     }
-
+    @When("user navigates to ownersini")
+    public void user_navigates_to_ownersini() {
+        playwright.navigateTo(Mamikos.Ownersini_URL,30000.0,LoadState.LOAD);
+        playwright.hardWait(3000);
+        playwright.waitTillPageLoaded();
+    }
 }
