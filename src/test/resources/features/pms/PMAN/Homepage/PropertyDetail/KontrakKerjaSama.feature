@@ -89,6 +89,6 @@ Feature: Kontrak Kerja Sama
     And admin see rincian tipe kamar dan harga
     Then rincian tipe kamar dan harga should match
       | Tipe Kamar  | Gender  | Jumlah Kamar  | Harga OTA | Harga Bulanan  | Harga 3 Bulan  | Harga 6 Bulan | Static Bulanan  | Static 3 Bulan  | Static 6 Bulan  | Publish Bulanan | Publish 3 Bulan | Publish 6 Bulan |
-      | Tipe A      | campur  | 3             | -         | Rp850.000      | Rp0            | Rp4.050.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
+      | Tipe A      | campur  | 3             | Rp110.000 | Rp850.000      | Rp0            | Rp4.050.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
       | Tipe B      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
       | Tipe C      | campur  | 3             | -         | Rp800.000      | Rp0            | Rp4.000.000   | Rp800.000       | -               | Rp4.000.000     | Rp1.000.000     | -               | Rp6.000.000     |
