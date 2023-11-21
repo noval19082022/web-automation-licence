@@ -10,6 +10,8 @@ import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.pms.HomepagePO;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,7 @@ public class HomepageSteps {
     private List<Map<String, String>> gender;
 
     private List<Map<String, String>> otherFee;
+    private List<Map<String, String>> changeLog;
 
     @And("admin go to room allotment page {string}")
     public void admin_go_to_room_allotment_page(String name) {
@@ -145,5 +148,63 @@ public class HomepageSteps {
         Assert.assertEquals(homepage.getStatusBooking(text), text, "not display error message");
     }
 
+    @When("admin change Transfer Pendapatan Otomatis to {string}")
+    public void admin_change_Transfer_Pendapatan_Otomatis_to(String toggle){
+        if (toggle.equalsIgnoreCase("ON")){
+            homepage.setToggleAutoDisbursement();
+        } else {
+            homepage.goToOverviewTab();
+            homepage.setToggleAutoDisbursement();
+        }
+    }
+
+    @Then("change log auto disbursement {string} is displayed")
+    public void change_log_auto_disbursement_is_displayed(String toggle, DataTable tables){
+        changeLog = tables.asMaps(String.class, String.class);
+        String diubahOleh = "", role = "", dataYangDiubah = "", inputLama = "", inputBaru = "", waktuDiubah = "";
+
+        //Clicks on Kontrak Kerja Sama tab
+        homepage.goToKontrakKerjaSamaTab();
+        homepage.clicksRiwayatPerubahanKontrak();
+
+        if (toggle.equalsIgnoreCase("ON")){
+            diubahOleh = changeLog.get(0).get("Diubah oleh");
+            role = changeLog.get(0).get("Role");
+            dataYangDiubah = changeLog.get(0).get("Data yang Diubah");
+            inputLama = changeLog.get(0).get("Input Lama");
+            inputBaru = changeLog.get(0).get("Input Baru");
+            waktuDiubah = changeLog.get(0).get("Waktu Diubah");
+
+            Assert.assertEquals(homepage.getDiubahOleh(), "PMAN Admin", "Value does not match.");
+            Assert.assertEquals(homepage.getRole(), "Super Admin", "Value does not match.");
+            Assert.assertEquals(homepage.getDataYangDiubah(), "Transfer Pendapatan Otomatis", "Value does not match.");
+            Assert.assertEquals(homepage.getInputLama(), "Nonaktif", "Value does not match.");
+            Assert.assertEquals(homepage.getInputBaru(), "Aktif", "Value does not match.");
+
+            //get today
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date dates = new Date();
+            Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
+            System.out.println(homepage.getWaktuDiubah());
+        } else {
+            diubahOleh = changeLog.get(0).get("Diubah oleh");
+            role = changeLog.get(0).get("Role");
+            dataYangDiubah = changeLog.get(0).get("Data yang Diubah");
+            inputLama = changeLog.get(0).get("Input Lama");
+            inputBaru = changeLog.get(0).get("Input Baru");
+            waktuDiubah = changeLog.get(0).get("Waktu Diubah");
+
+            Assert.assertEquals(homepage.getDiubahOleh(), "PMAN Admin", "Value does not match.");
+            Assert.assertEquals(homepage.getRole(), "Super Admin", "Value does not match.");
+            Assert.assertEquals(homepage.getDataYangDiubah(), "Transfer Pendapatan Otomatis", "Value does not match.");
+            Assert.assertEquals(homepage.getInputLama(), "Aktif", "Value does not match.");
+            Assert.assertEquals(homepage.getInputBaru(), "Nonaktif", "Value does not match.");
+
+            //get today
+            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+            Date dates = new Date();
+            Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
+        }
+    }
 }
 
