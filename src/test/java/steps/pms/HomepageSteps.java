@@ -167,44 +167,30 @@ public class HomepageSteps {
         homepage.goToKontrakKerjaSamaTab();
         homepage.clicksRiwayatPerubahanKontrak();
 
-        if (toggle.equalsIgnoreCase("ON")){
-            diubahOleh = changeLog.get(0).get("Diubah oleh");
-            role = changeLog.get(0).get("Role");
-            dataYangDiubah = changeLog.get(0).get("Data yang Diubah");
-            inputLama = changeLog.get(0).get("Input Lama");
-            inputBaru = changeLog.get(0).get("Input Baru");
-            waktuDiubah = changeLog.get(0).get("Waktu Diubah");
+        diubahOleh = changeLog.get(0).get("Diubah oleh");
+        role = changeLog.get(0).get("Role");
+        dataYangDiubah = changeLog.get(0).get("Data yang Diubah");
+        inputLama = changeLog.get(0).get("Input Lama");
+        inputBaru = changeLog.get(0).get("Input Baru");
+        waktuDiubah = changeLog.get(0).get("Waktu Diubah");
 
-            Assert.assertEquals(homepage.getDiubahOleh(), "PMAN Admin", "Value does not match.");
-            Assert.assertEquals(homepage.getRole(), "Super Admin", "Value does not match.");
-            Assert.assertEquals(homepage.getDataYangDiubah(), "Transfer Pendapatan Otomatis", "Value does not match.");
+        if (toggle.equalsIgnoreCase("ON")){
             Assert.assertEquals(homepage.getInputLama(), "Nonaktif", "Value does not match.");
             Assert.assertEquals(homepage.getInputBaru(), "Aktif", "Value does not match.");
-
-            //get today
-            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
-            Date dates = new Date();
-            Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
-            System.out.println(homepage.getWaktuDiubah());
-        } else {
-            diubahOleh = changeLog.get(0).get("Diubah oleh");
-            role = changeLog.get(0).get("Role");
-            dataYangDiubah = changeLog.get(0).get("Data yang Diubah");
-            inputLama = changeLog.get(0).get("Input Lama");
-            inputBaru = changeLog.get(0).get("Input Baru");
-            waktuDiubah = changeLog.get(0).get("Waktu Diubah");
-
-            Assert.assertEquals(homepage.getDiubahOleh(), "PMAN Admin", "Value does not match.");
-            Assert.assertEquals(homepage.getRole(), "Super Admin", "Value does not match.");
-            Assert.assertEquals(homepage.getDataYangDiubah(), "Transfer Pendapatan Otomatis", "Value does not match.");
+        } else if (toggle.equalsIgnoreCase("OFF")){
             Assert.assertEquals(homepage.getInputLama(), "Aktif", "Value does not match.");
             Assert.assertEquals(homepage.getInputBaru(), "Nonaktif", "Value does not match.");
-
-            //get today
-            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
-            Date dates = new Date();
-            Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
+        } else {
+            System.out.println("Toggle is not valid");
         }
+        Assert.assertEquals(homepage.getDiubahOleh(), "PMAN Admin", "Value does not match.");
+        Assert.assertEquals(homepage.getRole(), "Super Admin", "Value does not match.");
+        Assert.assertEquals(homepage.getDataYangDiubah(), "Transfer Pendapatan Otomatis", "Value does not match.");
+
+        //get today
+        SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
+        Date dates = new Date();
+        Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
     }
 }
 
