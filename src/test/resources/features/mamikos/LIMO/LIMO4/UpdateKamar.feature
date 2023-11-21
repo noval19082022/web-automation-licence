@@ -125,7 +125,6 @@ Feature: Update Kamar
     When user enter text "sela" on search bar in room allotment and hit enter
     Then user see room list is empty in room allotment page
 
-
   @TEST_LIMO-2908 @continue
   Scenario: [WEB][Update Room]  Text box "Nomor/Nama Kamar?" is edited with invalid value
     When owner navigates to property saya kos
@@ -141,7 +140,7 @@ Feature: Update Kamar
     When user fill room name in room allotment page with " "
     Then user see error message "Nomor/ nama masih kosong." under room name field in update room page
 
-  @TEST_LIMO-2896 @continue
+  @TEST_LIMO-2896
   Scenario: [WEB][Update Room] Text box Floor (Optional) is edited with invalid value
     When owner navigates to property saya kos
     And owner search kost "Kost Cooling Efect" on property saya page

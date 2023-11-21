@@ -106,7 +106,7 @@ public class OwnerDashboardPO {
         bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        propertySayaDropdownMenu = page.getByText("kos-marketing Properti Saya chevron-right Kos Apartemen");
+        propertySayaDropdownMenu = page.locator("//div[@class='form-control dropdown-toggle']");
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat CS"));
@@ -394,7 +394,7 @@ public class OwnerDashboardPO {
      * @return true if dropdown menu showing. Otherwise false
      */
     public boolean isPropertyMenuDropdownShowing(){
-        playwright.hardWait(2000.0);
+        playwright.waitFor(propertySayaDropdownMenu,2000.0);
         return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
     }
 
