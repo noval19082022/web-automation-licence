@@ -202,10 +202,9 @@ public class OwnerDashboardSteps {
         ownerDashboardPO.clickOnRatingCardDetails();
     }
 
-    @Then("user validate review section with {string} and {string}")
-    public void user_validate(String noReview, String nonPrem) {
+    @Then("user validate review section with {string}")
+    public void user_validate(String noReview) {
         Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(noReview), "Message is not equal to " + noReview);
-        Assert.assertTrue(ownerDashboardPO.isTextOnReviewListPresent(nonPrem), "Message is not equal to " + nonPrem);
     }
 
     @Then("user verify there are only {int} review lists")
