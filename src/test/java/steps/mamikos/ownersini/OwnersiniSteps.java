@@ -126,8 +126,6 @@ public class OwnersiniSteps {
         int totalRoomListing = ownersini.getTotalRoomListing();
         String[] roomType = {"Tipe A  campur", "Tipe C  campur", "Tipe D  campur"};
         for (int i=0; i<totalRoomListing; i++){
-            System.out.println(ownersini.getRoomType(i+1));
-            System.out.println(roomType[i]);
             Assert.assertEquals(ownersini.getRoomType(i+1), roomType[i], "The Room Type is not match");
             ownersini.clicksLihatSelengkapnya(i);
 
@@ -150,7 +148,6 @@ public class OwnersiniSteps {
             String[] price = {"price-tagRp0 / Hari", "price-tagRp600.000 / Bulan", "price-tagRp2.500.000 / 3 Bulan", "price-tagRp3.600.000 / 6 Bulan", "price-tagRp7.200.000 / 12 Bulan"};
             for (int k=0; k<5; k++){
                 Assert.assertEquals(ownersini.getPrice(1+i,1+k), price[k]);
-                System.out.println(ownersini.getPrice(1+i, 1+k));
             }
 
             //check Luas Kamar

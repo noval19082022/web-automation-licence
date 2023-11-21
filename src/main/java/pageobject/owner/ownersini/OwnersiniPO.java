@@ -380,7 +380,6 @@ public class OwnersiniPO {
     public String getRoomType(int i) {
         roomType = page.locator("(//p[@class='mb-16 bg-c-text bg-c-text--title-3'])[" +i+ "]");
         playwright.pageScrollInView(roomType);
-        System.out.println(roomType);
         return playwright.getText(roomType);
     }
 
