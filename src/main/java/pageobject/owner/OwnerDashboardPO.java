@@ -394,7 +394,7 @@ public class OwnerDashboardPO {
      * @return true if dropdown menu showing. Otherwise false
      */
     public boolean isPropertyMenuDropdownShowing(){
-        playwright.hardWait(3000.0);
+        playwright.waitFor(propertySayaDropdownMenu,2000.0);
         return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
     }
 
