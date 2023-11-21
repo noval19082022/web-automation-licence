@@ -144,6 +144,11 @@ public class PropertySayaPO {
     Locator penaltyField;
     Locator descFieldDisabled;
     Locator lengkapiDataKosDraft;
+    Locator toogleDenda;
+    Locator textBoxTotalDenda;
+    Locator textBoxLatePay;
+    Locator dropdownLatePay;
+    Locator dendaPrice;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -245,6 +250,11 @@ public class PropertySayaPO {
         penaltyField = page.locator("div:nth-child(7) > div > .bg-c-field > .input");
         descFieldDisabled = page.locator("//div[@class='content']//div[@class='bg-c-field']//textarea[contains(@class, 'disabled')]");
         lengkapiDataKosDraft = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lengkapi Data Kos")).first();
+        toogleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
+        textBoxTotalDenda = page.getByRole(AriaRole.TEXTBOX).nth(1);
+        textBoxLatePay = page.getByPlaceholder("0");
+        dropdownLatePay = page.locator("//select[@class='c-field-select__select']");
+        dendaPrice = page.locator("//div[@class='additional-price-item__info-price']");
     }
 
     /**
@@ -1775,4 +1785,35 @@ public class PropertySayaPO {
         warningPrice = page.locator(".bg-c-field__message");
         return playwright.getText(warningPrice.nth(i));
     }
+
+    /**
+     * click toogle denda
+     */
+
+    public void clickToogleDenda() {
+        playwright.clickOn(toogleDenda);
+    }
+
+    /**
+     * fill Denda Amount Time
+     */
+    public void fillDendaAmountTime(String amount, String unitTime) {
+        playwright.clickOn(textBoxTotalDenda);
+        Locator amountTime = page.locator("//input[@class='input field-amount']");
+        playwright.fill(amountTime, amount);
+        playwright.clickOn(textBoxLatePay);
+        Locator unitTimeNearest = page.locator("//input[@class='c-field-input__input bordered']");
+        playwright.fill(unitTimeNearest, unitTime);
+//        playwright.clickOn(dropdownLatePay);
+//        Locator latePay = page.locator("//*[@class='c-field-select__select']/option[2]");
+//        playwright.clickOn(latePay);
+    }
+    /**
+     * check denda list not appears
+     * @return true if not appears
+     */
+    public boolean isDendaListAppears(){
+        return dendaPrice.isEnabled();
+    }
+
 }

@@ -16,6 +16,8 @@ import utilities.JavaHelpers;
 import java.util.List;
 import java.util.Map;
 
+import static org.testng.Assert.assertTrue;
+
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PropertySayaPO propertySaya = new PropertySayaPO(page);
@@ -29,6 +31,8 @@ public class PropertySayaSteps {
     private String yearlyPrice = null;
     private String kosNamePrefix;
     private String roomTypePrefix;
+
+    private List<Map<String, String>> property;
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
@@ -697,7 +701,7 @@ public class PropertySayaSteps {
 
     @And("owner upload valid photo {string}")
     public void ownerUploadValidPhoto(String photoName) {
-       propertySaya.uploadValidPhotoKos(photoName);
+        propertySaya.uploadValidPhotoKos(photoName);
     }
 
     @And("owner input additional price")
@@ -841,5 +845,25 @@ public class PropertySayaSteps {
     @And("owner input kos name {string} for existing kost name")
     public void ownerInputKosNameForExistingKostName(String existingKosName) {
         propertySaya.inputKosName(existingKosName);
+    }
+
+    @And("owner click toogle denda")
+    public void ownerClickToogleDenda() {
+        propertySaya.clickToogleDenda();
+    }
+
+    @And("owner input denda ammount:")
+    public void ownerInputDendaAmount(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String totalDenda = property.get(0).get("Jumlah Denda");
+        String unitTime = property.get(0).get("late pay");
+        propertySaya.fillDendaAmountTime(totalDenda, unitTime);
+    }
+
+    @Then("user cannot see {string} on the list")
+    public void userCannotSeeDepositOnTheList(String additionalName) {
+        if (additionalName.equalsIgnoreCase("Rp50.000")) {
+            assertTrue(propertySaya.isDendaListAppears(), "List Denda is appears");
+        }
     }
 }
