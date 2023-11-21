@@ -14,8 +14,6 @@ public class OwnersiniSteps {
     OwnersiniPO ownersini = new OwnersiniPO(page);
 
     private String ownersiniPage ="src/test/resources/testdata/ownersini/ownersini.properties";
-    private String ownerDashboardPillar2 = JavaHelpers.getPropertyValue(ownersiniPage, "owner_home_P2_url");
-    private String ownerDashboardPillar1 = JavaHelpers.getPropertyValue(ownersiniPage, "owner_home_P1_url");
     private String namaProperti = JavaHelpers.getPropertyValue(ownersiniPage, "nama_properti");
     private String alamatProperti = JavaHelpers.getPropertyValue(ownersiniPage, "alamat_properti");
     private String tipeKamar = JavaHelpers.getPropertyValue(ownersiniPage, "tipe_kamar");
@@ -47,7 +45,7 @@ public class OwnersiniSteps {
 
     @Then("owner redirect to Owner Dashboard Pillar 2")
     public void owner_redirect_to_Owner_Dashboard_Pillar_2(){
-        Assert.assertEquals(ownersini.getURLPillar2(), ownerDashboardPillar2, "URL not equal with Owner Dashboard Pillar 2 URL");
+        Assert.assertEquals(ownersini.getURLPillar2(), Mamikos.OWNER_URL+"/", "URL not equal with Owner Dashboard Pillar 2 URL");
     }
 
     @When("owner clicks Dashboard Singgahsini on top right corner Profil")
@@ -58,7 +56,7 @@ public class OwnersiniSteps {
 
     @Then("owner redirect to Owner Dashboard Pillar 1")
     public void owner_redirect_to_Owner_Dashboard_Pillar_1(){
-        Assert.assertEquals(ownersini.getURLPillar1(), ownerDashboardPillar1, "URL not equal with Owner Dashboard Pillar 1 URL");
+        Assert.assertEquals(ownersini.getURLPillar1(), Mamikos.Ownersini_URL, "URL not equal with Owner Dashboard Pillar 1 URL");
     }
 
     @When("user clicks Profil menu")

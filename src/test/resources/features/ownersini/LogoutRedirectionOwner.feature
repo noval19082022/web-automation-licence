@@ -1,4 +1,4 @@
-@regression @pman @ownersini @logout-redirection
+@regression @pman @pman-prod @ownersini @logout-redirection
 
   Feature: Ownersini - Logout Redirection
 
@@ -31,7 +31,7 @@
     Scenario: Owner P2 log out
       Given user go to mamikos homepage
       When user login as owner:
-        | phone stag    |  phone prod    | password     |
-        | 081362464341  |  081362464341  | 1d0lt3stb4ru |
+        | phone stag     | phone prod     | password   |
+        | 083176408311   | 083132824758   | qwerty123  |
       And owner logs out
       Then owner redirect to homepage mamikos
