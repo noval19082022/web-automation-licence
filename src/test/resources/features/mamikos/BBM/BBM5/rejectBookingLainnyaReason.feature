@@ -1,6 +1,15 @@
 @BBM5
 Feature: OB Reject Booking With Lainnya Reason
 
+  Scenario: Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag    | phone prod    |
+      | 08100000618   | 08100000618 |
+
   @TEST_COOP-823 @continue
   Scenario: Cancel and Create Booking
     Given user go to mamikos homepage
