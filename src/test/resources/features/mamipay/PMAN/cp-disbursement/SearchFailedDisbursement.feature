@@ -2,6 +2,16 @@
 
 Feature: CP Disbursement - Search Failed Disbursement
 
+  @TEST_PMAN-8818
+  Scenario: Show disbursement ID Failed Disbursement
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And admin open menu CP Disbursement
+    And admin open "Transfer Gagal" tab
+    Then all disbursement have id
+
   @TEST_PMAN-3314 @continue
   Scenario: Search using invalid property name
     Given admin go to mamikos mamipay admin
