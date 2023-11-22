@@ -78,4 +78,80 @@ public class NaikkanIklanSteps {
         Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads/balance?redirectionSource=properti%20saya", "Url doesn't match");
     }
 
+    @Then("verify quick allocation section while never allocate")
+    public void verify_quick_allocation_section_while_never_allocate() {
+        Assert.assertEquals(naikkanIklanPO.getAlokasiTitleText("Aktifkan MamiAds"), "Aktifkan MamiAds", "Allocation title doesn't match!");
+        Assert.assertTrue(naikkanIklanPO.getToggleAdsStatus("off"), "Status toggle doesn't match");
+        Assert.assertEquals(naikkanIklanPO.getAdsDescText("Anggarkan saldo agar posisi iklan naik"), "Anggarkan saldo agar posisi iklan naik", "Allocation description doesn't match!");
+    }
+
+    @When("user cancel quick allocate the ads never allocate")
+    public void user_cancel_quick_allocate_the_ads_never_allocate() throws InterruptedException {
+       naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
+        Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Anggaran MamiAds untuk "+ naikkanIklanPO.getNameKos() +" akan diaktifkan.", "Title pop up doesn't match!");
+        naikkanIklanPO.clickOnKeMamiAdsButton();
+        playwright.hardWait(3000);
+        String actualUrl= playwright.getPageUrl();
+        Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
+    }
+
+    @Then("verify quick allocation section while ads last allocation {string}")
+    public void verifyQuickAllocationSectionWhileAdsLastAllocation(String tipeAllocation) throws InterruptedException {
+        String adsDescText = "Tipe anggaran: Rp10.000 per-hari";
+        String adsDescTextMax = "Tipe anggaran: Saldo Maksimal";
+
+        Assert.assertEquals(naikkanIklanPO.getAlokasiTitleText("Aktifkan MamiAds"), "Aktifkan MamiAds", "Allocation title doesn't match!");
+        Assert.assertTrue(naikkanIklanPO.getToggleAdsStatus("off"), "Status toggle doesn't match");
+
+        switch(tipeAllocation){
+            case "daily":
+                Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), adsDescText, "Allocation description doesn't match!"); break;
+            case "maksimal":
+                Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescTextMax), adsDescTextMax, "Allocation description doesn't match!"); break;
+        }
+    }
+
+    @When("user cancel quick allocate the ads ever allocate")
+    public void user_cancel_quick_allocate_the_ads_ever_allocate() throws InterruptedException {
+        naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
+        Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Apakah Anda ingin mengganti metode anggaran untuk iklan ini?", "Title pop up doesn't match!");
+        naikkanIklanPO.clickOnKeMamiAdsButton();
+    }
+
+    @Then("verify redirect to mamiads dashboard")
+    public void verify_redirect_to_mamiads_dashboard() throws InterruptedException {
+        playwright.hardWait(3000);
+        String actualUrl= playwright.getPageUrl();
+        Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
+    }
+
+    @When("user reactive the allocation of ads")
+    public void userReactiveTheAllocationOfAds() throws InterruptedException {
+        naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
+        Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Apakah Anda ingin mengganti metode anggaran untuk iklan ini?", "Title pop up doesn't match!");
+      naikkanIklanPO.clickOnNantiSaja();
+    }
+
+    @Then("verify the ads Aktif MamiAds with {string} allocation")
+    public void verify_the_ads_aktif_mamiAds_with_allocation(String tipeAllocation) {
+        String adsDescText = "Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000";
+        String adsDescTextMax = "Hari ini terpakai Rp0";
+
+        Assert.assertEquals(naikkanIklanPO.getAlokasiTitleText("MamiAds Aktif"), "MamiAds Aktif", "Allocation title doesn't match!");
+        Assert.assertTrue(naikkanIklanPO.getToggleAdsStatus("on"), "Status toggle doesn't match");
+
+        switch(tipeAllocation){
+            case "daily":
+                Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), adsDescText, "Allocation description doesn't match!"); break;
+            case "maksimal":
+                Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescTextMax), adsDescTextMax, "Allocation description doesn't match!"); break;
+        }
+    }
+
+    @When("user nonactive the allocation of ads")
+    public void user_nonactive_the_allocation_of_ads() throws InterruptedException {
+        naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
+        Assert.assertEquals(naikkanIklanPO.getTextTitlePopUp(), "Yakin ingin menonaktifkan MamiAds untuk iklan ini?", "Title pop up doesn't match!");
+        naikkanIklanPO.clickOnNonaktifkanAds();
+    }
 }
