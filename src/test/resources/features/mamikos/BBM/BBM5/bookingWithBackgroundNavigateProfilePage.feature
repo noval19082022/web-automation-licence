@@ -17,7 +17,7 @@ Feature: BnB feature with background navigate profile page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
-      | 0892202358 | 0892202358 | qwerty111 |
+      | 0892202358 | 0892202358 | qwerty123 |
     And user cancel booking
 
   #Scenario: create booking
@@ -41,7 +41,7 @@ Feature: BnB feature with background navigate profile page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
-      | 0892202358 | 0892202358 | qwerty111 |
+      | 0892202358 | 0892202358 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
 
@@ -54,7 +54,7 @@ Feature: BnB feature with background navigate profile page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod  | password  |
-      | 0892202358 | 08100000622 | qwerty111 |
+      | 0892202358 | 08100000622 | qwerty123 |
     And tenant navigate to kost saya page
     And user click on chat button in top bar tenant home page
     Then user can see Chat list title
@@ -81,7 +81,7 @@ Feature: BnB feature with background navigate profile page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod  | password  |
-      | 0892202358 | 08100000622 | qwerty111 |
+      | 0892202358 | 08100000622 | qwerty123 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
     And user stop rent kost with reason "Jarak Kos Terlalu Jauh"

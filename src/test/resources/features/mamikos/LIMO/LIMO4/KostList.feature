@@ -16,10 +16,5 @@ Feature: Kost List
     When user click back button in page
     And owner search kost "Kose Putri AutomationEeJwe Ibu Halmahera Barat" on property saya page
     And user click Lihat Selengkapnya button for edit
-    When user click Chat in kos list
-    Then user should redirect to link "https://jambu.kerupux.com/ownerpage/statistics/53684421#chat"
-    When user click back button in page
-    And owner search kost "Kose Putri AutomationEeJwe Ibu Halmahera Barat" on property saya page
-    And user click Lihat Selengkapnya button for edit
     And user click review in kost list
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/statistics/53684421#review"

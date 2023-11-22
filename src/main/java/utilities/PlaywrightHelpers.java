@@ -86,6 +86,15 @@ public class PlaywrightHelpers {
         locator.waitFor(new Locator.WaitForOptions().setTimeout(timeout));
     }
 
+    /**
+     * Back to previous page
+     *
+     *
+     */
+    public void backToPreviousPage() {
+        page.goBack();
+    }
+
     //----- Action Part ----\\
 
     /**

@@ -31,6 +31,8 @@ public class Mamikos {
     public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
     public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
     public static final String PMS_URL = JavaHelpers.getPropertyValue(MAMIKOS, "PMSUrl_" + ENV);
+    public static final String Ownersini_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownersiniUrl_" + ENV);
+    public static final String LoginPemilik_URL = JavaHelpers.getPropertyValue(MAMIKOS, "logiPemilikUrl_" + ENV);
     public static final String OWNERPAGE_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKos");
     public static final String LOGIN_MAMIPAY = JavaHelpers.getPropertyValue(MAMIKOS, "loginMamipay");
     public static final String GOLDPLUS_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusTestingTools");
@@ -66,5 +68,11 @@ public class Mamikos {
 
     @Setter @Getter
     private static  String propertyKosName;
+
+    @Setter @Getter
+    private static String rejectReason;
+
+    @Setter @Getter
+    private static String rejectReasonTitle;
 
 }

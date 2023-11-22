@@ -14,8 +14,6 @@ public class OwnersiniSteps {
     OwnersiniPO ownersini = new OwnersiniPO(page);
 
     private String ownersiniPage ="src/test/resources/testdata/ownersini/ownersini.properties";
-    private String ownerDashboardPillar2 = JavaHelpers.getPropertyValue(ownersiniPage, "owner_home_P2_url");
-    private String ownerDashboardPillar1 = JavaHelpers.getPropertyValue(ownersiniPage, "owner_home_P1_url");
     private String namaProperti = JavaHelpers.getPropertyValue(ownersiniPage, "nama_properti");
     private String alamatProperti = JavaHelpers.getPropertyValue(ownersiniPage, "alamat_properti");
     private String tipeKamar = JavaHelpers.getPropertyValue(ownersiniPage, "tipe_kamar");
@@ -47,7 +45,7 @@ public class OwnersiniSteps {
 
     @Then("owner redirect to Owner Dashboard Pillar 2")
     public void owner_redirect_to_Owner_Dashboard_Pillar_2(){
-        Assert.assertEquals(ownersini.getURLPillar2(), ownerDashboardPillar2, "URL not equal with Owner Dashboard Pillar 2 URL");
+        Assert.assertEquals(ownersini.getURLPillar2(), Mamikos.OWNER_URL+"/", "URL not equal with Owner Dashboard Pillar 2 URL");
     }
 
     @When("owner clicks Dashboard Singgahsini on top right corner Profil")
@@ -58,7 +56,7 @@ public class OwnersiniSteps {
 
     @Then("owner redirect to Owner Dashboard Pillar 1")
     public void owner_redirect_to_Owner_Dashboard_Pillar_1(){
-        Assert.assertEquals(ownersini.getURLPillar1(), ownerDashboardPillar1, "URL not equal with Owner Dashboard Pillar 1 URL");
+        Assert.assertEquals(ownersini.getURLPillar1(), Mamikos.Ownersini_URL, "URL not equal with Owner Dashboard Pillar 1 URL");
     }
 
     @When("user clicks Profil menu")
@@ -128,8 +126,6 @@ public class OwnersiniSteps {
         int totalRoomListing = ownersini.getTotalRoomListing();
         String[] roomType = {"Tipe A  campur", "Tipe C  campur", "Tipe D  campur"};
         for (int i=0; i<totalRoomListing; i++){
-            System.out.println(ownersini.getRoomType(i+1));
-            System.out.println(roomType[i]);
             Assert.assertEquals(ownersini.getRoomType(i+1), roomType[i], "The Room Type is not match");
             ownersini.clicksLihatSelengkapnya(i);
 
@@ -152,7 +148,6 @@ public class OwnersiniSteps {
             String[] price = {"price-tagRp0 / Hari", "price-tagRp600.000 / Bulan", "price-tagRp2.500.000 / 3 Bulan", "price-tagRp3.600.000 / 6 Bulan", "price-tagRp7.200.000 / 12 Bulan"};
             for (int k=0; k<5; k++){
                 Assert.assertEquals(ownersini.getPrice(1+i,1+k), price[k]);
-                System.out.println(ownersini.getPrice(1+i, 1+k));
             }
 
             //check Luas Kamar
@@ -173,5 +168,19 @@ public class OwnersiniSteps {
 
             ownersini.clicksTampilkanLebihSedikit();
         }
+    }
+
+    @When("owner clicks on top right corner Profil Pillar 2")
+    public void owner_clicks_on_top_right_corner_Profil_Pillar_2(){
+        ownersini.clicksTopRightCornerProfilP2();
+    }
+
+    @Then("Dashboard Singgahsini button is not displayed")
+    public void Dashboard_Singgahsini_button_is_not_displayed(){
+        Assert.assertFalse(ownersini.isDashboardSinggahsiniBtnVisible(), "Dashboard Singgahsini button is displayed on Pillar 2.");
+    }
+    @When("owner logout from ownersini dashboard")
+    public void owner_logout_from_ownersini_dashboard() {
+        ownersini.logoutP1();
     }
 }

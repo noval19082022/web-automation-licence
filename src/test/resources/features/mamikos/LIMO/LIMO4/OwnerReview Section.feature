@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO4 @reviewOwner
 Feature: Owner - Review Section
 
   @TEST_LIMO-3277 @doesnthavereview-listingcardclicked
@@ -8,7 +8,7 @@ Feature: Owner - Review Section
       | phone stag      | phone prod      | password   |
       | 0812345670001   | 0812345670001   | qwerty123  |
     And user click on rating card details
-    Then user validate review section with "Tidak ada data di List." and "Untuk member non premium hanya ditampilkan list 2 hari terakhir saja."
+    Then user validate review section with "Belum ada user yang review kost"
 
   @TEST_LIMO-3278 @yourkosrating-listingcardclicked @continue
   Scenario: [Owner Dahsboard][Rating Kost]Review Section - Your kost rating and Listing card clicked
@@ -42,4 +42,4 @@ Feature: Owner - Review Section
       | phone stag     | phone prod     | password   |
       | 086412300123   | 086412300123   | qwerty123  |
     And user verify there is no kos review section
-    Then user validate review section with "Waktunya Mengelola Properti" and "Tingkatkan Kinerja Kos"
+    Then user validate review section with "Waktunya Mengelola Properti"

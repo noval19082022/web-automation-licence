@@ -15,6 +15,7 @@ public class OwnersiniPO {
     private Locator profilTopRightCornerP1;
     private Locator kembaliKeMamikosBtn;
     private Locator laporanKeuanganPage;
+    private Locator logoutButton;
 
     //---Profil Top Right Corner P2---//
     private Locator profilTopRightCornerP2;
@@ -66,6 +67,7 @@ public class OwnersiniPO {
         profilTopRightCornerP1 = page.locator("#profile-trigger");
         kembaliKeMamikosBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kembali ke Mamikos"));
         laporanKeuanganPage = page.locator(".inner-container");
+        logoutButton = page.locator(".logout-btn");
 
         //---Profil Top Right Corner P2---//
         profilTopRightCornerP2 = page.locator("//a[@class='c-mk-header__menu-item-link user-menu']");
@@ -378,7 +380,6 @@ public class OwnersiniPO {
     public String getRoomType(int i) {
         roomType = page.locator("(//p[@class='mb-16 bg-c-text bg-c-text--title-3'])[" +i+ "]");
         playwright.pageScrollInView(roomType);
-        System.out.println(roomType);
         return playwright.getText(roomType);
     }
 
@@ -537,5 +538,24 @@ public class OwnersiniPO {
      */
     public void clicksTampilkanLebihSedikit() {
         playwright.clickOn(tampilkanLebihSedikitBtn);
+    }
+
+    /**
+     * Check if Dashboard Singgahsini button is visible
+     * True = visible
+     * False = invisible
+     * @return Dashboard Singgahsini button
+     */
+    public boolean isDashboardSinggahsiniBtnVisible(){
+        return playwright.isLocatorVisibleAfterLoad(dashboardSinggahsiniBtn, 10000.0);
+    }
+
+    /**
+     * Logout from Ownersini Dashboard
+     */
+    public void logoutP1() {
+        dismissFtueOwnersini();
+        playwright.clickOn(profilTopRightCornerP1);
+        playwright.clickOn(logoutButton);
     }
 }

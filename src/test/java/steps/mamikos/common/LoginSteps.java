@@ -17,6 +17,7 @@ import pageobject.common.LoginPO;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.TenantLoginPO;
+import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class LoginSteps {
     TenantLoginPO tenantLogin = new TenantLoginPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
     OwnerLoginPO owner = new OwnerLoginPO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
 
     private List<Map<String, String>> phoneNumberCredential;
@@ -248,5 +250,13 @@ public class LoginSteps {
     @Then("user tenant verify profil picture is null")
     public void userTenantVerifyProfilPictureIsNull() {
         Assert.assertTrue(tenantLogin.isProfilePictureNotNull(), "Profile picture is not null");
+    }
+    @Then("user/owner redirect to login pemilik page")
+    public void user_redirect_to_login_pemilik_page() {
+        Assert.assertEquals(playwright.getPageUrl(),Mamikos.LoginPemilik_URL);
+    }
+    @Then("owner redirect to homepage mamikos")
+    public void owner_redirect_to_homepage_mamikos() {
+        Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/");
     }
 }
