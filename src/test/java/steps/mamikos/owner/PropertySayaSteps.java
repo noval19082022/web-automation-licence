@@ -852,12 +852,13 @@ public class PropertySayaSteps {
         propertySaya.clickToogleDenda();
     }
 
-    @And("owner input denda ammount:")
+    @And("owner input denda amount:")
     public void ownerInputDendaAmount(DataTable tables) {
         property = tables.asMaps(String.class, String.class);
         String totalDenda = property.get(0).get("Jumlah Denda");
         String unitTime = property.get(0).get("late pay");
-        propertySaya.fillDendaAmountTime(totalDenda, unitTime);
+        String penalty = property.get(0).get("Penalty");
+        propertySaya.fillDendaAmountTime(totalDenda, unitTime, penalty);
     }
 
     @Then("user cannot see {string} on the list")
@@ -865,5 +866,64 @@ public class PropertySayaSteps {
         if (additionalName.equalsIgnoreCase("Rp50.000")) {
             assertTrue(propertySaya.isDendaListAppears(), "List Denda is appears");
         }
+    }
+    @And("owner click toogle deposit")
+    public void ownerClickToogleDeposit() {
+        propertySaya.clickToogleDeposit();
+    }
+
+    @And("owner input deposit amount:")
+    public void ownerInputDepositAmount(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String deposit = property.get(0).get("Deposit");
+        propertySaya.fillDepositAmountTime(deposit);
+    }
+
+    @And("owner click toogle other price")
+    public void ownerClickToogleOtherPrice() {
+        if (propertySaya.isOtherPriceListAppears()) {
+            propertySaya.deleteOtherPrice();
+        } else {
+            propertySaya.clickToogleOtherPrice();
+        }
+    }
+    @And("owner input other price amount:")
+    public void ownerInputOtherPrice(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String namePrice = property.get(0).get("Nama Biaya");
+        String amountPrice = property.get(0).get("Jumlah Biaya");
+        propertySaya.fillOtherPrice(namePrice, amountPrice);
+    }
+    @Then("owner can sees other price with name 1234567890abcdefjkl and price Rp100.000 show in the list")
+    public void user_can_sees_new_other_price_additional_price_show_in_the_list() {
+        assertTrue(propertySaya.getActiveOtherPricesName(), "List other price is appears");
+        assertTrue(propertySaya.getActiveOtherPriceNumber(), "List other price is appears");
+    }
+    @And("admin show filter data booking")
+    public void adminShowFilterDataBooking() {
+        propertySaya.showOrHideFilter();
+    }
+    @And("admin filter data booking by tenant phone number:")
+    public void adminFilterDataBooking(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String tenantPhone = property.get(0).get("Tenant Phone");
+        String kosType = property.get(0).get("Kos Type");
+        propertySaya.fillFilterDataBooking(tenantPhone, kosType);
+    }
+    @And("admin click actions button on booking list")
+    public void adminClickActionButton() {
+        propertySaya.clickActionButton();
+    }
+    @And("admin accept booking")
+    public void adminAcceptBooking() {
+        propertySaya.adminAcceptBooking();
+    }
+    @Then("admin sees other price with name {string} and price {string} show in detail booking")
+    public void user_can_sees_other_price_with_name_and_price_on_konfirmasi(String otherPriceName, String totalPrice) {
+        propertySaya = propertySaya.getTextOtherPrice(otherPriceName, totalPrice);
+    }
+    @And("admin click detail in actions button")
+    public void adminClickDetailButton() {
+        propertySaya.clickDetailButton();
     }
 }

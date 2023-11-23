@@ -108,7 +108,7 @@ public class SearchPO {
     public KostDetailsPO searchByText(String search) {
         setProperty(search);
         inputSearch.fill(search);
-        Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
+        Locator firstResultKostName = page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item");
         firstResultKostName.click();
         return new KostDetailsPO(page);
     }
