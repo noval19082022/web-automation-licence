@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.cucumber.java.sl.In;
 import pageobject.common.LoginPO;
 import utilities.PlaywrightHelpers;
 
@@ -28,6 +29,17 @@ public class PointManagementPO extends LoginPO {
     Locator deleteButton;
     Locator pagination;
     Locator fieldTable;
+    Locator keywordSearchField;
+    Locator searchButton;
+    Locator filterResultList;
+    Locator userDropdown;
+    Locator totalPointHeader;
+    Locator userList;
+    Locator statusList;
+    Locator totalPointList;
+    Locator blacklistStatus;
+    Locator popUpConfirmationChangeStatusTitle;
+    Locator popUpConfirmationChangeStatusBody;
 
     public PointManagementPO(Page page) {
         super(page);
@@ -44,6 +56,17 @@ public class PointManagementPO extends LoginPO {
         ownerSettingMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Owner Point Setting"));
         roomGroupList = page.locator("(//tbody[1]//td[2])");
         pagination = page.locator(".pagination");
+        keywordSearchField = page.locator("//input[@name='keyword']");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        filterResultList = page.locator("tbody > tr");
+        userList = page.locator("(//td[4])");
+        statusList = page.locator("(//td[6])");
+        totalPointHeader = page.locator("//a[contains(.,'Total Point')]");
+        totalPointList = page.locator("(//td[5])");
+        blacklistStatus = page.locator("//td[6]/a[contains(.,'Blacklist')]");
+        popUpConfirmationChangeStatusTitle = page.locator("//div[@class='modal-dialog']//h4[@class='modal-title']");
+        popUpConfirmationChangeStatusBody  = page.locator("//div[@class='modal-dialog']//div[@class='modal-body']");
+
     }
 
     /**
@@ -199,4 +222,166 @@ public class PointManagementPO extends LoginPO {
         return playwright.getText(fieldTable);
     }
 
+
+    /**
+     * Set Keyword on Search Field
+     *
+     * @param keyword Keyword
+     */
+    public void setKeywordSearchField(String keyword) {
+        playwright.fill(keywordSearchField, keyword);
+    }
+
+    /**
+     * Click on Search Button
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnSearchButton() throws InterruptedException {
+       playwright.clickOn(searchButton);
+    }
+
+    /**
+     * Get Number of Filter Result
+     *
+     * @return number of result
+     */
+    public int getFilterResultNumber() {
+        List<Locator> elements = playwright.getLocators(filterResultList);
+        return elements.size();
+    }
+
+    /**
+     * Get Text of Filter Result
+     *
+     * @param row    row data
+     * @param column column data
+     * @return Text of Filter Result
+     */
+    public String getFilterResultList(int row, int column) {
+        Locator element = page.locator("//tbody/tr[" + row + "]/td[" + column + "]");
+        return  playwright.getText(element);
+    }
+
+    /**
+     * Click on User Filter Dropdown
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnUserDropdown() throws InterruptedException {
+       playwright.clickOn(userDropdown);
+    }
+
+    /**
+     * Select User Filter
+     *
+     * @param userType Tenant or Owner
+     * @throws InterruptedException
+     */
+    public void selectUserFilter(String userType) throws InterruptedException {
+        userDropdown = page.locator("select[name=\"user\"]");
+        playwright.selectDropdownByValue(userDropdown,userType);
+    }
+
+    /**
+     * Get Text of User Column from User Point List
+     *
+     * @param index row data user point
+     * @return text of user column
+     */
+    public String getTextUserColumn(int index) {
+        List<Locator> elements = playwright.getLocators(userList);
+        return playwright.getText(elements.get(index));
+    }
+
+    /**
+     * Get Text of Status Column from User Point List
+     *
+     * @param index row data user point
+     * @return text of user column
+     */
+    public String getTextStatusColumn(int index) {
+        List<Locator> elements = playwright.getLocators(statusList);
+        return playwright.getText(elements.get(index));
+    }
+
+    /**
+     * Select Status Filter
+     *
+     * @param status Blacklist or Whitelist
+     * @throws InterruptedException
+     */
+    public void selectStatusFilter(String status) throws InterruptedException {
+        userDropdown = page.locator("select[name=\"status\"]");
+        playwright.selectDropdownByValue(userDropdown,status);
+    }
+
+    /**
+     * Click on Total Point Header
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnTotalPointHeader() throws InterruptedException {
+        playwright.clickOn(totalPointHeader);
+    }
+
+    /**
+     * Get Text of Total Point from User Point List
+     *
+     * @param index row data
+     * @return text of Total Point
+     */
+    public String getTextTotalPoint(int index) {
+        List<Locator> elements = playwright.getLocators(totalPointList);
+        return playwright.getText(elements.get(index));
+    }
+
+    /**
+     * Set default status to Whitelist
+     * @throws InterruptedException
+     */
+    public void setDefaultStatusToWhitelist() throws InterruptedException {
+        if (playwright.waitTillLocatorIsVisible(blacklistStatus)) {
+            playwright.clickOn(blacklistStatus);
+            playwright.clickOn(page.locator("//button[text()='Yes, Do It!']"));
+        }
+    }
+
+    /**
+     * Click on user point status
+     *
+     * @param initialStatus initial status of user point
+     * @throws InterruptedException
+     */
+    public void clickOnUserPointStatus(String initialStatus) throws InterruptedException {
+        playwright.clickOn(page.locator("//td/a[contains(.,'" + initialStatus + "')]"));
+    }
+
+    /**
+     * Get Text of Title from Pop Up Confirmation Change Status
+     *
+     * @return text of Pop Up Confirmation Change Status Title
+     */
+    public String getTitlePopUpConfirmationChangeStatus() {
+        return playwright.getText(popUpConfirmationChangeStatusTitle);
+    }
+
+    /**
+     * Get Text of Body from Pop Up Confirmation Change Status
+     *
+     * @return text of Pop Up COnfirmation Change Status Body
+     */
+    public String getBodyPopUpConfirmationChangeStatus() {
+        return playwright.getText(popUpConfirmationChangeStatusBody);
+    }
+
+    /**
+     * Click on Button in Pop Up Confirmation
+     *
+     * @param confirmation to Whitelist or Blacklist
+     * @throws InterruptedException
+     */
+    public void clickOnPopUpCOnfirmationButton(String confirmation) throws InterruptedException {
+       playwright.clickOn(page.locator("//button[text()='" + confirmation + "']"));
+    }
 }
