@@ -21,6 +21,7 @@ public class ChatTenantSteps {
 
     @Then("user see phone number field and selectable question options :")
     public void userSeePhoneNumberFieldAndSelectableQuestionOptions(List<String> questions) {
+        playwright.hardWait(5000);
         List<String> questionList = chat.listQuestions();
         for (int i=0; i<questions.size(); i++) {
             Assert.assertEquals(questionList.get(i), questions.get(i), "Question " + i + " not match");

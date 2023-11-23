@@ -555,7 +555,7 @@ public class HomePO {
      *
      */
     public void clickOnWhatsappNumber() {
-        whatsappButton.click();
+        playwright.clickOn(whatsappButton);
     }
 
     /**
@@ -579,7 +579,9 @@ public class HomePO {
      *
      */
     public void clickOnInstagramButton() {
-        instagramButton.click();
+        Page page1 = page.waitForPopup(() -> {
+            playwright.clickOn(instagramButton);
+        });
     }
 
     /**

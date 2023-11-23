@@ -1,4 +1,4 @@
-@DOM4 @areaboundaries
+@DOM40 @areaboundaries
 Feature: Area Boundaries
 
   @continue

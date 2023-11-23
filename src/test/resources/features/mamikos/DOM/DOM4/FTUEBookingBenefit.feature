@@ -1,4 +1,4 @@
-@DOM4
+@DOM40
 Feature: FTUE Booking Benefit
 
   @ftuebookingbenefit @continue @TEST_DOM-1715
@@ -8,8 +8,8 @@ Feature: FTUE Booking Benefit
       | phone stag   | phone prod   | password  |
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod               |
-      | Kose Full Automation | Kost Automation Putri Tobelo |
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -22,8 +22,8 @@ Feature: FTUE Booking Benefit
   Scenario: User Can Use Button On FTUE Booking Benefit
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod               |
-      | Kose Full Automation | Kost Automation Putri Tobelo |
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     When user dismiss FTUE booking benefit
     Then user can not see FTUE booking benefit
 
@@ -34,8 +34,8 @@ Feature: FTUE Booking Benefit
       | phone stag   | phone prod   | password  |
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag                       | kost name prod                             |
-      | Property Penuh Penuh 1 Kretek Bantul | Kost Automation Mix Tobelo Halmahera Utara |
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     And tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -45,8 +45,8 @@ Feature: FTUE Booking Benefit
       | Setelah pembayaran diterima pemilik, kamar kos sudah siap kamu huni.                       |
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod               |
-      | Kose Full Automation | Kost Automation Putri Tobelo |
+      | kost name stag                | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |

@@ -10,6 +10,7 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -199,6 +200,7 @@ public class KostDetailsPO {
 
     // ------------ Kost Review Section --------------
     private Locator reviewSection;
+    private Locator lihatSemuaReviewButton;
     private Locator overviewRatingReview;
     private Locator reviewCategory;
     private Locator userReview;
@@ -322,7 +324,7 @@ public class KostDetailsPO {
 
         // -------------------Kos rule ----------------------------
         this.kosRuleTitle = page.getByText("Peraturan di kos ini");
-        this.kosRuleSection = page.locator(" .detail-kost-rules__content");
+        this.kosRuleSection = page.getByTestId("detail-kost-special-rules__content");
         this.kosRuleImageElement = page.locator(".kost-rules-gallery");
         this.seeAllKosRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua peraturan"));
 
@@ -402,6 +404,7 @@ public class KostDetailsPO {
 
         // ------------ Kost Review Section -----------
         this.reviewSection = page.locator("#detailKostReview");
+        this.lihatSemuaReviewButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua review"));
         this.overviewRatingReview = page.locator(".kost-review__overview-rating");
         this.reviewCategory = page.locator(".kost-review__fac-rating");
         this.userReview = page.locator(".kost-review__users-feedback");
@@ -700,7 +703,7 @@ public class KostDetailsPO {
      * @return 'boolean' bath facility is visible
      */
     public boolean isFacBathShow() {
-        playwright.pageScrollInView(facilityBathSection);
+        playwright.pageScrollInView(facilityNotesSection);
         return facilityBathSection.isVisible();
     }
 
@@ -1078,7 +1081,7 @@ public class KostDetailsPO {
      */
     public boolean isOwnerSectionPresent() {
         playwright.pageScrollToDown(4800);
-        playwright.pageScrollInView(kostOwnerInformation);
+        playwright.pageScrollInView(aboutStatisticsButton);
         return playwright.waitTillLocatorIsVisible(aboutStatisticsButton);
     }
 
@@ -1496,7 +1499,7 @@ public class KostDetailsPO {
      */
     public void scrollToReviewSection() {
         playwright.pageScrollToDown(4000);
-        playwright.pageScrollInView(reviewSection);
+        playwright.pageScrollInView(lihatSemuaReviewButton);
     }
 
     /**

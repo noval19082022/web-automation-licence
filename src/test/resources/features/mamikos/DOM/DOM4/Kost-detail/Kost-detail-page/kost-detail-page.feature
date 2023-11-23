@@ -1,4 +1,5 @@
 #@local #@DOM4
+@DOM40
 Feature: Kost detail page
 
   @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
@@ -10,7 +11,7 @@ Feature: Kost detail page
     Then user can see overview section on detail page
       | kost stag                     | kost prod                                           |
       | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
-
+#
   @TEST_DOM-1701 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
   Scenario: [Dweb][Kost Detail] Check promo owner section login
     Given user go to mamikos homepage
@@ -118,7 +119,7 @@ Feature: Kost detail page
     #user want to see more detail facility share
     When user want to see all facility share
     Then user see all facility share section
-
+#
   @TEST_DOM-1699 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility parking section
     Given user go to mamikos homepage

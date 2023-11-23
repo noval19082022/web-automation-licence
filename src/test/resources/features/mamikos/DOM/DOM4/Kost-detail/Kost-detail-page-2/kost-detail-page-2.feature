@@ -1,4 +1,4 @@
-#@localhost
+@DOM40 #@localhost
 Feature: Kost detail page 2
 
   @TEST_DOM-1875 @Automated @DOM4 @Web @discovery-platform @kost-details @report-section
@@ -49,7 +49,8 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Property Pindahan PLM Depok   | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+#      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user want to see the other kost on recommendation section
     #explore kost recomendation
     When user see description recomendation kos "Kamu mungkin menyukainya"
