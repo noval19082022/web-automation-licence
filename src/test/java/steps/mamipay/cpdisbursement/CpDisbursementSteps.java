@@ -333,4 +333,9 @@ public class CpDisbursementSteps {
     public void admin_cannot_input_account_number_using_char(){
         Assert.assertEquals(cpdisbursement.getNoRekeningPreview(),"1234");
     }
+
+    @Then("disbursement data contains status {string}")
+    public void disbursement_data_contains_status(String status) {
+        Assert.assertTrue(cpdisbursement.isDisbursementContainsStatus(status),"Data not contains status :"+status);
+    }
 }

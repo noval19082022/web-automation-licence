@@ -350,7 +350,7 @@ public class KostDetailsPO {
         this.statisticModal = page.getByTestId("owner-rate-modal-content");
         this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
-        this.ownerStatement = page.locator(".detail-kost-owner-section__kost-keeper");
+        this.ownerStatement = page.locator("//div[@class='detail-kost-owner-section__owner-title']");
         this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
         this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
         this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");

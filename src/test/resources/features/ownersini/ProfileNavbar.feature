@@ -10,12 +10,12 @@ Feature: Profile Navbar
       | 089712123030  |  089712123030  | qwerty123    |
     And owner clicks Kembali ke Mamikos on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 2
-    When owner clicks Dashboard Singgahsini on top right corner Profil
-    Then owner redirect to Owner Dashboard Pillar 1
 
   @TEST_PMAN-4947 @pman-prod @continue
   Scenario: Check Profil Page
-      #Information profil section
+    When owner clicks Dashboard Singgahsini on top right corner Profil
+    Then owner redirect to Owner Dashboard Pillar 1
+    #Information profil section
     When user clicks Profil menu
     Then the "Information Profil" is displayed
     #Scenario: Check Facility Section on Profil Page

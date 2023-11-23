@@ -27,6 +27,7 @@ public class LoginPO {
     Locator profileTenantButton;
     Locator keluarButton;
     Locator profilPictureTenant;
+    Locator profilePictureNull;
 
     public LoginPO(Page page) {
         this.page = page;
@@ -48,6 +49,7 @@ public class LoginPO {
         profileTenantButton = page.getByAltText("User Photo");
         keluarButton = page.getByTestId("exitButton");
         profilPictureTenant = page.locator("//img[@alt='User Photo']");
+        profilePictureNull = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
     }
 
     /**
@@ -221,5 +223,12 @@ public class LoginPO {
      */
     public Boolean isPopupSubtitleTextAppeared(String text){
         return playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + text + "')]"));
+    }
+
+    /**
+     * Get Profile Picture Is Null
+     */
+    public Boolean isProfilePictureNotNull(){
+        return profilePictureNull.isVisible();
     }
 }

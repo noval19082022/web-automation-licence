@@ -20,6 +20,11 @@ public class BoostLplPO {
     Locator btnAddBoostLpl;
     Locator inputKostName;
     Locator resultKostLpl;
+    Locator btnBoostLpl;
+    Locator warningPopUpAddBoost;
+    Locator btnYesBoostLpl;
+    Locator deleteButtonlpl;
+    Locator btnOkDeletedLpl;
 
 
     public BoostLplPO(Page page) {
@@ -35,6 +40,12 @@ public class BoostLplPO {
         tableDataLpl = page.locator("//tbody[1]/tr[1]");
         btnAddBoostLpl = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add LPL Boost"));
         inputKostName = page.getByPlaceholder("Keyword");
+        btnBoostLpl =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Boost LPL"));
+        warningPopUpAddBoost = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Apakah sudah yakin untuk boost skor LPL listing ini?"));
+        btnYesBoostLpl = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Yes"));
+        deleteButtonlpl = page.locator("//tbody[1]/tr[1]//button[@class='btn btn-danger btn-sm']");
+        btnOkDeletedLpl = page.locator("//button[@class='btn btn-danger']");
+
     }
 
 
@@ -146,5 +157,55 @@ public class BoostLplPO {
      */
     public void clearTextKosNameAddLpl() {
         playwright.clearText(inputKostName);
+    }
+
+    /**
+     * Verify listing name
+     * @param listingName
+     * return listing name
+     */
+    public String getListingName (String listingName) {
+       Locator listingNameResult = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(listingName));
+        return playwright.getText(listingNameResult);
+    }
+
+    /**
+     * Verify score lpl
+     * @param lplScore
+     * return lpl Score
+     */
+    public String getScoreLpl(String lplScore) {
+      Locator lplScoreLocator =  page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(lplScore));
+        return playwright.getText(lplScoreLocator);
+    }
+
+    /**
+     * Click button boost lpl at page add boost lpl
+     */
+    public void clickButtonBoostLpl() {
+        playwright.clickOn(btnBoostLpl);
+    }
+
+    /**
+     * Check pop up add boost lpl is show
+     */
+    public boolean isPopUpAddBoostLplAppear() {
+        return playwright.waitTillLocatorIsVisible(warningPopUpAddBoost);
+    }
+
+
+    /**
+     * Click button yes at pop up warning
+     */
+    public void clickButtonYesLpl() {
+        playwright.clickOn(btnYesBoostLpl);
+    }
+
+    /**
+     * Click delete button
+     */
+    public void clickOnDeleteButton() {
+        playwright.clickOn(deleteButtonlpl);
+        playwright.clickOn(btnOkDeletedLpl);
     }
 }

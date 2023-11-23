@@ -62,6 +62,9 @@ public class CpDisbursementPO {
     private Locator statusTransferValue;
     private Locator statusTransferLabel;
     private Locator tglTransferKePemilikTable;
+    private Locator previousButton;
+    private Locator statusTransferList;
+    private Locator paginationButton;
     //Transfer Diproses
 
     //Transfer Gagal
@@ -132,6 +135,9 @@ public class CpDisbursementPO {
 
         jadwalTransferDropdown = page.locator("#daterange-cp-disbursement");
         transferFailedDateDropdown = page.locator("#daterange-cp-disbursement_failed");
+        previousButton = page.locator("a[rel='prev']");
+        statusTransferList = page.locator("td:nth-of-type(7) span");
+        paginationButton = page.locator(".pagination li a");
 
         transferActionButton1 = page.locator("(//td)[7]/button");
         propertyNamePreviewModal = page.locator("(//*[@class='easy-autocomplete'])[1]/input");
@@ -760,5 +766,39 @@ public class CpDisbursementPO {
      */
     public String getNoRekeningPreview() {
         return playwright.getInputValue(nomorRekeningTextOnPreviewModal);
+    }
+
+    /**
+     * Check status Disbursement in Transfer Diproses Tab
+     * @param status status transfered that want to be verified
+     * @return boolean
+     */
+    public boolean isDisbursementContainsStatus(String status) {
+        boolean result = false;
+        if (status.equalsIgnoreCase("processing")){
+            if (statusTransferList.nth(0).textContent().trim().equalsIgnoreCase(status)){
+                result = true;
+            }
+        } else {
+            //go to last page
+            playwright.pageScrollInView(paginationButton.first());
+            playwright.clickOn(paginationButton.nth((paginationButton.count()-2)));
+            //check every page until found {status}
+            while (previousButton.isEnabled()) {
+                //check in page n, if there is {status}
+                for (int i = 0; i < statusTransferList.count(); i++) {
+                    if (statusTransferList.nth(i).textContent().trim().equalsIgnoreCase(status)) {
+                        result = true;
+                        break;
+                    }
+                }
+                if (result == false) {
+                    playwright.clickOn(previousButton);
+                } else {
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }

@@ -85,3 +85,29 @@ Feature: Tenant - Login
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     Then user see login pop up in favorite page
+
+    @TEST_COOP-4660 @DOM3
+  Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is null
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089513193288  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    Then user tenant verify profil picture is null
+
+      @TEST_COOP-4661 @DOM3
+  Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is show
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0879864312548  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+      @TEST_COOP-4662 @DOM3
+  Scenario: Login - using Wrong phone number alfabet
+    Given user go to mamikos homepage
+    When user login with alfabet phone number
+      | phone stag  | phone prod  | password  |
+      | aaaaaaaaaa  | aaaaaaaaaaa | qwerty123 |
+    Then user verify login error messages "Format Nomor Handphone salah."

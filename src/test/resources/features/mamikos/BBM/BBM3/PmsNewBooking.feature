@@ -4,8 +4,8 @@ Feature: PMS - New booking
   Scenario: Phone number tenant verified
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
@@ -15,8 +15,8 @@ Feature: PMS - New booking
   Scenario: search by name tenant
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
@@ -57,9 +57,9 @@ Feature: PMS - New booking
       | Per Bulan     | today            | 1 Bulan     | Full Payment      |
     And admin click on save button
     Then admin see has fee Informasi Biaya Lain:
-      | Nama Biaya | Harga     |
-      | Listrik    | Rp50.000  |
-      | Parkir     | Rp50.000  |
+      | Nama Biaya | Harga    |
+      | Listrik    | Rp50.000 |
+      | Parkir     | Rp50.000 |
 
   Scenario: Add tenant when kost add additional price for kost 3 Bulanan
     Given admin go to pms singgahsini
@@ -73,9 +73,9 @@ Feature: PMS - New booking
     Then admin see informasi penyewa
     And admin fill informasi pembayaran:
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-      | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+      | Per 3 Bulan   | today            | 3 Bulan     | Full Payment      |
     And admin click on save button
     Then admin see has fee Informasi Biaya Lain:
-      | Nama Biaya | Harga      |
-      | Listrik    | Rp150.000  |
-      | Parkir     | Rp150.000  |
+      | Nama Biaya | Harga     |
+      | Listrik    | Rp150.000 |
+      | Parkir     | Rp150.000 |

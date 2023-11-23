@@ -75,6 +75,26 @@ public class PlaywrightHelpers {
         locator.waitFor();
     }
 
+    /**
+     * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
+     * @param url     String data type of URL format
+     * @param locator The locator to wait for.
+     * @param timeout Double data type of specific timeout
+     */
+    public void navigateToAndWaitLocator(String url, Locator locator, Double timeout) {
+        page.navigate(url);
+        locator.waitFor(new Locator.WaitForOptions().setTimeout(timeout));
+    }
+
+    /**
+     * Back to previous page
+     *
+     *
+     */
+    public void backToPreviousPage() {
+        page.goBack();
+    }
+
     //----- Action Part ----\\
 
     /**

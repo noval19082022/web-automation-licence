@@ -1,4 +1,4 @@
-@statusLineBookingPms @BBM1
+@statusLineBookingPms @BBM3
 
 Feature: PMS - status line booking
 

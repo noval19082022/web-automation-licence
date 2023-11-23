@@ -72,6 +72,7 @@ public class InvoicePO {
     Locator tncInvoiceText;
     Locator mamipoinToggleButtonOn;
     Locator mamipoinToggleButtonOff;
+    Locator mamipoinToggleButton;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
     Locator sayaSudahBayar;
@@ -118,7 +119,7 @@ public class InvoicePO {
         txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
-        closeFilter = page.locator("i");
+        closeFilter = page.locator("i").nth(1);
         openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
@@ -136,6 +137,7 @@ public class InvoicePO {
         tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
         mamipoinToggleButtonOn = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--off']");
         mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
+        mamipoinToggleButton = page.getByRole(AriaRole.CHECKBOX);
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
@@ -653,31 +655,26 @@ public class InvoicePO {
 
     }
 
-    /**
-     * Click MamiPoin Toggle Button to On
-     */
-    public void clickMamipoinToggleButtonToOn() {
-        playwright.hardWait(3000.0);
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-        }else if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-                playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOn);
-        }
-    }
 
     /**
-     * Click MamiPoin Toggle Button to Off
+     * Wait for an element to become visible
+     *
+     * @param locator The locator of the element to wait for.
      */
-    public void clickMamipoinToggleButtonToOff() {
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOn)) {
-            playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOff);
+    private void waitForVisibility(Locator locator) {
+        playwright.waitTillLocatorIsVisible(locator, 3000.0);
+    }
+
+
+    /**
+     * Click MamiPoin Toggle Button to On/Off
+     */
+    public void clickMamipoinToggleButtonToOnOff() {
+        if (mamipoinToggleButton.isChecked()){
+            mamipoinToggleButton.uncheck();
+        }
+        else {
+            mamipoinToggleButton.check();
         }
     }
 
