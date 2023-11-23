@@ -119,8 +119,7 @@ public class RoomAllotmentPO {
      */
     public void clickOutOfOrderFlag(String room, String startDate) {
         int r = Integer.parseInt(room)+1;
-        outOfOrderFlag = page.locator(".cv-daily__day-allotment:nth-of-type(" + r + ") > " +
-                                              ".cv-daily__day--occupied:nth-of-type(" + startDate + ") > .tenant-label");
+        outOfOrderFlag = page.locator(".cv-daily__group-by-tipe-wrapper > div:nth-child(" + r + ") > div:nth-child(" + startDate + ")");
         playwright.clickOn(outOfOrderFlag);
     }
 
