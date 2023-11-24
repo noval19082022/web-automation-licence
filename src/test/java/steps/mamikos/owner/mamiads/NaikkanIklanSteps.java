@@ -1,22 +1,13 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import pageobject.owner.mamiads.NaikkanIklanPO;
 import utilities.PlaywrightHelpers;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class NaikkanIklanSteps {
     Page page = ActiveContext.getActivePage();

@@ -1,9 +1,9 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,6 +23,7 @@ public class MamiAdsSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
     GoldplusPO goldplus = new GoldplusPO(page);
+    private Map<String, String> adsData;
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
@@ -206,5 +207,58 @@ public class MamiAdsSteps {
         });
         var pwHelper2 = new PlaywrightHelpers(page1);
         Assert.assertTrue(pwHelper2.isTextDisplayed("Pembayaran Berhasil", 5000));
+    }
+
+    @And("user click coba sekarang header")
+    public void user_click_coba_sekarang_header() {
+        mamiAdsPO.clickOnCobaSekarangHeader();
+    }
+
+    @And("user click ubah on {string}")
+    public void user_click_ubah_on_x(String adsName) {
+        mamiAdsPO.clickOnUbahbutton(adsName);
+    }
+
+    @And("user set anggaran harian to {string}")
+    public void user_set_anggaran_harian_to_x(String anggaran) {
+        mamiAdsPO.inputNominalAnggaran(anggaran);
+    }
+
+    @And("user set anggaran to saldo maksimal")
+    public void user_set_anggaran_to_saldo_maksimal() {
+        mamiAdsPO.clickOnSaldoMaksimal();
+    }
+
+    @And("user set anggaran to dibatasi harian")
+    public void user_set_anggaran_to_dibatasi_harian() {
+        mamiAdsPO.clickOnDibatasiHarian();
+    }
+
+    @And("user click Ya,Ganti button")
+    public void user_click_ya_ganti_button() {
+        mamiAdsPO.clickOnYaGantiButton();
+    }
+
+    @Then("user check ads status:")
+    public void user_check_ads_status(DataTable table) {
+        adsData = table.asMap(String.class, String.class);
+        var adsName = adsData.get("ads name");
+        var textStatus = adsData.get("text status");
+        var toggleStatus = adsData.get("toggle status");
+        var statusDesc = adsData.get("status desc");
+        var textAnggaran = adsData.get("text anggaran");
+        if (textStatus.equals("Naik")) {
+            Assert.assertEquals(mamiAdsPO.getPosisiIklan(adsName, "naik"), "Naik");
+        } else {
+            Assert.assertEquals(mamiAdsPO.getPosisiIklan(adsName, "tidak-naik"), "Tidak Naik");
+        }
+        mamiAdsPO.getToggleStaus(adsName,toggleStatus);
+        Assert.assertEquals(mamiAdsPO.getAdsStatusDesc(adsName), statusDesc, "Ads status description doesn't match!");
+        Assert.assertEquals(mamiAdsPO.getTextAnggaranDesc(adsName), textAnggaran, "Anggaran description doesn't match!");
+    }
+
+    @And("user click beli saldo on popup")
+    public void user_click_beli_saldo_on_popup() {
+        mamiAdsPO.clickOnBeliSaldoOnPopup();
     }
 }

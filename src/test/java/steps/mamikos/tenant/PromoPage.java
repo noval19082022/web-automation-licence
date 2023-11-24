@@ -9,8 +9,6 @@ import org.testng.Assert;
 import pageobject.tenant.PromoMamikosPO;
 import utilities.PlaywrightHelpers;
 
-import java.io.IOException;
-
 public class PromoPage {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
