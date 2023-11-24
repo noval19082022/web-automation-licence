@@ -1,5 +1,5 @@
 #@local #@DOM4
-@DOM40
+@DOM4
 Feature: Kost detail page
 
   @TEST_DOM-1703 @DOM4 @automated @discovery-platform @kost-details @overview-section @web

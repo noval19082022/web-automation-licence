@@ -1,4 +1,4 @@
-@DOM40
+@DOM4
 Feature: Homepage
 
 	@TEST_DOM-4621 @Automated @DOM4 @Web @discovery-platform @homepage

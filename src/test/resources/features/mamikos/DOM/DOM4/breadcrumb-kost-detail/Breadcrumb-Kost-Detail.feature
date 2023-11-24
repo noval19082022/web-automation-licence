@@ -1,4 +1,4 @@
-@DOM40
+@DOM4
 Feature: Breadcrumb Kost Detail
 
   @DOM4 @DOM-5273 @TEST_DOM-5275

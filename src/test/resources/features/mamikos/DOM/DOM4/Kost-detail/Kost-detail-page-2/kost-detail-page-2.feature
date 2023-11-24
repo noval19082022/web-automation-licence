@@ -1,4 +1,4 @@
-@DOM40 #@localhost
+@DOM4 #@localhost
 Feature: Kost detail page 2
 
   @TEST_DOM-1875 @Automated @DOM4 @Web @discovery-platform @kost-details @report-section
