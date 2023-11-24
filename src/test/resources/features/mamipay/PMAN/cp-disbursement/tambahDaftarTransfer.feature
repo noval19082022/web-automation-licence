@@ -7,7 +7,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
-      | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     And admin open menu CP Disbursement
     And admin tambah data transfer
     #search invalid property
