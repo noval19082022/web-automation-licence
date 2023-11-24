@@ -144,15 +144,15 @@ public class PropertySayaPO {
     Locator penaltyField;
     Locator descFieldDisabled;
     Locator lengkapiDataKosDraft;
-    Locator toogleDenda;
+    Locator toggleDenda;
     Locator textBoxTotalDenda;
     Locator textBoxLatePay;
     Locator dropdownLatePay;
     Locator dendaPrice;
 
-    Locator toogleDeposit;
+    Locator toggleDeposit;
     Locator textBoxDeposit;
-    Locator toogleOtherPrice;
+    Locator toggleOtherPrice;
     Locator otherPriceName;
     Locator otherPriceNumber;
     Locator expandFilterButton;
@@ -269,14 +269,14 @@ public class PropertySayaPO {
         penaltyField = page.locator("div:nth-child(7) > div > .bg-c-field > .input");
         descFieldDisabled = page.locator("//div[@class='content']//div[@class='bg-c-field']//textarea[contains(@class, 'disabled')]");
         lengkapiDataKosDraft = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lengkapi Data Kos")).first();
-        toogleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
+        toggleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
         textBoxTotalDenda = page.getByRole(AriaRole.TEXTBOX).nth(1);
         textBoxLatePay = page.getByPlaceholder("0");
         dropdownLatePay = page.locator("//select[@class='c-field-select__select']");
         dendaPrice = page.locator("//div[@class='additional-price-item__info-price']");
-        toogleDeposit = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Deposit")).locator("span").first();
+        toggleDeposit = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Deposit")).locator("span").first();
         textBoxDeposit = page.getByRole(AriaRole.TEXTBOX).nth(1);
-        toogleOtherPrice = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Lainnya Per Bulan")).locator("span").first();
+        toggleOtherPrice = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Lainnya Per Bulan")).locator("span").first();
         otherPriceName = page.getByText("1234567890abcdefjkl", new Page.GetByTextOptions().setExact(true));
         otherPriceNumber = page.getByText("Rp100.000");
         expandFilterButton = page.getByText("Tampilkan Filter");
@@ -1822,11 +1822,17 @@ public class PropertySayaPO {
     }
 
     /**
-     * click toogle denda
+     * click toggle denda
      */
 
-    public void clickToogleDenda() {
-        playwright.clickOn(toogleDenda);
+    public void clicktoggleDenda() {
+        if (toggleDenda.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleDenda);
+        } else {
+            playwright.clickOn(toggleDenda);
+        }
     }
 
     /**
@@ -1852,11 +1858,17 @@ public class PropertySayaPO {
     }
 
     /**
-     * click toogle deposit
+     * click toggle deposit
      */
 
-    public void clickToogleDeposit() {
-        playwright.clickOn(toogleDeposit);
+    public void clicktoggleDeposit() {
+        if (toggleDeposit.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleDeposit);
+        } else {
+            playwright.clickOn(toggleDeposit);
+        }
     }
     /**
      * fill Deposit Amount Time
@@ -1867,10 +1879,16 @@ public class PropertySayaPO {
         playwright.fill(deposit, amountDeposit);
     }
     /**
-     * click toogle other price
+     * click toggle other price
      */
-    public void clickToogleOtherPrice() {
-        playwright.clickOn(toogleOtherPrice);
+    public void clicktoggleOtherPrice() {
+        if (toggleOtherPrice.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleOtherPrice);
+        } else {
+            playwright.clickOn(toggleOtherPrice);
+        }
     }
 
     /**
@@ -1896,71 +1914,15 @@ public class PropertySayaPO {
     public boolean getActiveOtherPriceNumber() {
         return otherPriceNumber.isEnabled();
     }
-    /**
-     * click Tampilkan/Sembunyikan button to show/hide filter data booking
-     * @throws InterruptedException
-     */
-    public void showOrHideFilter() {
-        playwright.clickOn(expandFilterButton);
-    }
 
-    /**
-     * fill other price
-     */
-    public void fillFilterDataBooking(String tenantPhone,String kosType) {
-        playwright.clickOn(textBoxFilterDataPhone);
-        Locator dataFilterPhone = page.locator("//input[@placeholder='Ex: 081987654321']");
-        playwright.fill(dataFilterPhone,tenantPhone);
-        playwright.clickOn(dropdownFilterDataKosType);
-        Locator fillTextboxKosType = page.locator("//span[@class='select2-search select2-search--dropdown']//input[@role='textbox']");
-        playwright.fill(fillTextboxKosType,kosType);
-        Locator dataFilterkosType = page.locator("//li[@class='select2-results__option select2-results__option--highlighted']");
-        playwright.clickOn(dataFilterkosType);
-        playwright.clickOn(searchButton);
-    }
-    /**
-     * click action button in data booking
-     */
-    public void clickActionButton() {
-        playwright.clickOn(actionButton);
-    }
-    /**
-     * admin accept booking
-     */
-    public void adminAcceptBooking() {
-        playwright.clickOn(confirmButton);
-        for (int i = 0; i < 3; i++) {
-            playwright.clickOn(nextConfirmBooking);
-        }
-        playwright.clickOn(confirmBooking);
-    }
-    /**
-     * list other price
-     */
-    public boolean isOtherPriceListAppears() {
-        return playwright.isLocatorVisibleAfterLoad(deleteOtherPrice, 3000.0);
-    }
+
     /**
      * if other price list appears
      */
     public void deleteOtherPrice() {
         playwright.clickOn(deleteOtherPrice);
         playwright.clickOn(confirmDeleteOtherPrice);
-        playwright.clickOn(toogleOtherPrice);
+        playwright.clickOn(toggleOtherPrice);
     }
-    /**
-     * click detail button in action button
-     */
-    public void clickDetailButton() {
-        playwright.clickOn(detailButton);
-    }
-    /**
-     * Get text other price name on confirmation screen
-     * @return string data type "Biaya lainnya"
-     */
-    public PropertySayaPO getTextOtherPrice(String otherPriceName, String totalPrice) {
-        Locator priceName = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(totalPrice).setName(otherPriceName));
-        playwright.clickOn(priceName);
-        return new PropertySayaPO(page);
-    }
+
 }

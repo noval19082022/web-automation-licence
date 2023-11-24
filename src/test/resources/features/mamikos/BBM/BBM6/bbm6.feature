@@ -41,7 +41,7 @@ Feature: BnB feature
     And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
-    And owner click toogle denda
+    And owner click toggle denda
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
       | 50000        | 7        | Hari    |
@@ -65,7 +65,7 @@ Feature: BnB feature
     And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
-    And owner click toogle denda
+    And owner click toggle denda
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
       | 100000       | 31       | Hari    |
@@ -94,7 +94,7 @@ Feature: BnB feature
     And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
-    And owner click toogle deposit
+    And owner click toggle deposit
     And owner input deposit amount:
       | Deposit |
       | 100000  |
@@ -113,7 +113,7 @@ Feature: BnB feature
     And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
-    And owner click toogle other price
+    And owner click toggle other price
     And owner input other price amount:
       | Nama Biaya              | Jumlah Biaya |
       | 1234567890abcdefjkl     | 100000       |
@@ -122,7 +122,7 @@ Feature: BnB feature
     And owner click "Hapus"
     And owner click "Ya, Hapus"
 
-  @bookingWithOtherPrice @legacy
+  @bookingWithOtherPrice
   Scenario: Check Booking With Other Price On Admin Side
     #admin delete other price
     Given user go to mamikos homepage
@@ -133,7 +133,7 @@ Feature: BnB feature
     And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
-    And owner click toogle other price
+    And owner click toggle other price
     And owner input other price amount:
       | Nama Biaya              | Jumlah Biaya |
       | 1234567890abcdefjkl     | 100000       |
