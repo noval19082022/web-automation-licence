@@ -41,7 +41,7 @@ Feature: New Flow Register Owner
     And user clicks on Register button
     And user fills out registration form without click register "Rheza Haryo Hanggara", "0812345670001", "rheza@mamikos.com", "as"
     Then user verify error messages
-      | Password kurang dari 8 karakter |
+      | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
 
   @TEST_DOM-2257 @Automated @DOM @web-covered
   Scenario: [WEB][Register Owner] Input Email Not Surel
@@ -141,4 +141,11 @@ Feature: New Flow Register Owner
     Then user verify error messages
       | Nomor handphone ini sudah digunakan untuk verifikasi di akun lain. |
 
-
+    @TEST_COOP-4877 @Automated @DOM @web-covered
+  Scenario: [WEB][Register Owner] Fill password input using alfabet only
+    Given user go to mamikos homepage
+    When user clicks on Enter button
+    And user clicks on Register button
+    And user fills out registration form without click register "Rheza Haryo Hanggara", "0812345670001", "rheza@mamikos.com", "asqwertyqqq"
+    Then user verify error messages
+      | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |

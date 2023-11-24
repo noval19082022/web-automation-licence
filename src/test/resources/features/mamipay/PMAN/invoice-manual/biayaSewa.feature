@@ -1,8 +1,10 @@
-@regression @pman @mamipay @invoice-manual @biaya-sewa
+#Will be update using new biaya tambahan master data
+
+@mamipay @invoice-manual @biaya-sewa
 
   Feature: Invoice Manual - Biaya Sewa
 
-    @TEST_PMAN-5626 @pman-prod
+    @TEST_PMAN-5626
     Scenario Outline: Add Biaya Sewa in Invoice Manual
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -18,7 +20,7 @@
         | Pindah tipe kamar/kos (relokasi)  | -       | today | tomorrow  | 2A ke 1A        | 20000         | Pindah tipe kamar/kos (relokasi) (2A ke 1A) | today         | tomorrow        | Rp20.000              | automationpman03@mamikos.com  |
         | Lainnya                           | Sampah  | today | tomorrow  | Tambahan Kasur  | 100000        | Sampah (Tambahan Kasur)                     | today         | tomorrow        | Rp100.000             | automationpman01@mamikos.com  |
 
-    @continue @TEST_PMAN-5775 @pman-prod
+    @continue @TEST_PMAN-5775
     Scenario: Add multiple biaya sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -37,12 +39,12 @@
         | Pindah tipe kamar/kos (relokasi) (automation pman)  | 3   |
         | Ganti Lampu (automation pman)                       | 4   |
 
-    @TEST_PMAN-5966 @pman-prod
+    @TEST_PMAN-5966
     Scenario: delete multiple biaya sewa
       When admin deletes all "Biaya Sewa" or sewa on Invoice Manual
       Then the empty state of "Biaya Sewa" is displayed
 
-    @continue @TEST_PMAN-5784 @pman-prod
+    @continue @TEST_PMAN-5784
     Scenario: Check required fields Nama Biaya in the Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -52,22 +54,22 @@
       And Checks required fields "-", "today", "today", "1 Hari", "10000"
       Then the error messages "Nama biaya tidak boleh kosong.", "-", "-", "-" are displayed
 
-    @continue @TEST_PMAN-7574 @pman-prod
+    @continue @TEST_PMAN-7574
     Scenario: Check required fields Periode Awal in the Biaya Sewa
       And Checks required fields "Perpanjang sewa harian", "-", "-", "1 Hari", "10000"
       Then the error messages "-", "Periode awal tidak boleh kosong.", "-", "-" are displayed
 
-    @continue @TEST_PMAN-7575 @pman-prod
+    @continue @TEST_PMAN-7575
     Scenario: Check required fields Periode Akhir in the Biaya Sewa
       And Checks required fields "Perpanjang sewa harian", "today", "-", "1 Hari", "10000"
       Then the error messages "-", "-", "Periode akhir tidak boleh kosong.", "-" are displayed
 
-    @TEST_PMAN-7576 @pman-prod
+    @TEST_PMAN-7576
     Scenario: Check required fields Jumlah Biaya in the Biaya Sewa
       And Checks required fields "Perpanjang sewa harian", "today", "today", "1 Hari", "-"
       Then the error messages "-", "-", "-", "Jumlah biaya tidak boleh kosong." are displayed
 
-    @TEST_PMAN-6039 @pman-prod
+    @TEST_PMAN-6039
     Scenario: Edit Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -83,7 +85,7 @@
         | Nama Biaya  | Lainnya     | Periode Awal      | Periode Akhir       | Durasi Biaya  | Jumlah Biaya  | Nama Biaya on Table | Awal on Table | Akhir on Table      | Jumlah Biaya on Table |
         | Lainnya     | Kebersihan  | tomorrow          | day after tomorrow  | -             | 30000         | Kebersihan          | tomorrow      | day after tomorrow  | Rp30.000              |
 
-    @TEST_PMAN-5743 @pman-prod
+    @TEST_PMAN-5743
     Scenario: Periode is disabled when choose Jenis Biaya Kekurangan biaya sewa kamar
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -114,7 +116,7 @@
         | kehilangan            |
         | asuransi              |
 
-    @TEST_PMAN-5767 @pman-prod
+    @TEST_PMAN-5767
     Scenario Outline: <button> modal tambah biaya sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -132,7 +134,7 @@
         | close       | automationpman02@mamikos.com  |
         | kembali     | automationpman03@mamikos.com  |
 
-    @TEST_PMAN-5965 @pman-prod
+    @TEST_PMAN-5965
     Scenario: delete biaya sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:

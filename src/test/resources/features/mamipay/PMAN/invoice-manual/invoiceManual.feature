@@ -1,8 +1,10 @@
-@pman @mamipay @invoice-manual
+#Will be update using new biaya tambahan master data
+
+@mamipay @invoice-manual
 
   Feature: Invoice Manual
 
-    @TEST_PMAN-5684 @pman-prod
+    @TEST_PMAN-5684
     Scenario: Auto fill No HP and Nomor Kamar
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -75,7 +77,7 @@
       When admin clicks invoice number with unpaid status
       Then invoice detail for "Biaya Sewa" is displayed
 
-    @TEST_PMAN-5655 @pman-prod @continue
+    @TEST_PMAN-5655 @continue
     Scenario: Back from Create Invoice Manual Biaya Tambahan
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -100,7 +102,7 @@
       When admin check confirmation functionality and confirm exit
       Then admin redirect to invoice manual page
 
-    @TEST_PMAN-7961 @pman-prod
+    @TEST_PMAN-7961
     Scenario: Back from Create Invoice Manual Biaya Sewa
       When admin create invoice manual
         | property name                                                     | tenant name     |
@@ -120,7 +122,7 @@
       When admin check confirmation functionality and confirm exit
       Then admin redirect to invoice manual page
 
-    @TEST_PMAN-5744 @pman-prod
+    @TEST_PMAN-5744
     Scenario Outline: Durasi Biaya in <Jenis Invoice> max 255 characters
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -141,7 +143,7 @@
         | Biaya Tambahan  | automationpman01@mamikos.com  |
         | Biaya Sewa      | automationpman02@mamikos.com  |
 
-    @TEST_PMAN-5657 @pman-prod @continue
+    @TEST_PMAN-5657 @continue
     Scenario: Change Jenis Invoice to Biaya Tambahan When There Are Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -158,7 +160,7 @@
       When admin selects Jenis Invoice "Biaya Tambahan" when "There are Biaya Data"
       Then empty state on the biaya "Biaya Tambahan" table is displayed
 
-    @TEST_PMAN-7962 @pman-prod
+    @TEST_PMAN-7962
     Scenario: Change Jenis Invoice to Biaya Sewa When There Are Biaya Tambahan
       When admin go to invoice manual page
         | property name                                                     | tenant name     |
@@ -170,7 +172,7 @@
       When admin selects Jenis Invoice "Biaya Sewa" when "There are Biaya Data"
       Then empty state on the biaya "Biaya Sewa" table is displayed
 
-    @continue @TEST_PMAN-5745 @pman-prod
+    @continue @TEST_PMAN-5745
     Scenario: Change Jenis Invoice - When There Is No Biaya Tambahan & Biaya Sewa Data
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:

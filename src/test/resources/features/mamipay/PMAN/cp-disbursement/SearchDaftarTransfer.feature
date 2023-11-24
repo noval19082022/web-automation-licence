@@ -2,6 +2,15 @@
 
   Feature: CP Disbursement - Search Daftar Transfer Disbursement
 
+    @TEST_PMAN-7764
+    Scenario: Show disbursement ID Daftar Transfer
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+      And admin open menu CP Disbursement
+      Then all disbursement have id
+
     @TEST_PMAN-3294 @continue
     Scenario: Search using invalid property name
       Given admin go to mamikos mamipay admin
