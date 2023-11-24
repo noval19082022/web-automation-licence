@@ -30,6 +30,10 @@ public class GolplusContractPO {
     Locator gpPackageOrder;
     Locator statusGpOrder;
     Locator invoiceGpStatus;
+    Locator createNewContractButton;
+    Locator phoneNumberOwner;
+    Locator contractInvoiceButton;
+    Locator confirmContractButton;
 
 
     public GolplusContractPO(Page page) {
@@ -43,7 +47,10 @@ public class GolplusContractPO {
         gpPackage = page.locator("//tbody[1]/tr[1]/td[3] ");
         showOrder =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show Orders"));
         headerContractOrder = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Contract's Orders"));
-
+        createNewContractButton =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Create New Contract"));
+        phoneNumberOwner = page.getByPlaceholder("Phone Number");
+        contractInvoiceButton =   page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Contract and Invoice"));
+        confirmContractButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Yes, Create contract and invoice!"));
 
     }
 
@@ -208,6 +215,45 @@ public class GolplusContractPO {
         invoiceGpStatus = page.locator(".order-status-label");
         return playwright.getText(invoiceGpStatus);
     }
+
+    /**
+     * Click on create contract button
+     */
+    public void clickOnCreateContractButton() {
+        playwright.clickOn(createNewContractButton);
+    }
+
+    /**
+     * admin input phone number owner
+     */
+    public void inputPhoneNumberOwner(String phone) {
+        playwright.fill(phoneNumberOwner,phone);
+    }
+
+    /**
+     * Click on create contract and invoice
+     */
+    public void clickOnCreateContractInvoiceButton() {
+        playwright.clickOn(contractInvoiceButton);
+    }
+
+    /**
+     * get status godlplus
+     */
+    public String getWarningNotification(String warningNotification) {
+        Locator element =  page.getByText(warningNotification);
+        return playwright.getText(element);
+    }
+
+    /**
+     * Select package Goldplis
+     * @param packageGP of goldplus package
+     */
+    public void selectDropdownPackage(String packageGP) {
+        Locator element =  page.locator("//select[@name='package']");
+        playwright.selectDropdownByValue(element,packageGP);
+    }
+
 
 }
 
