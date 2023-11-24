@@ -89,7 +89,6 @@ public class OwnerRegisterPO {
      */
     public String getErrorMessages(String error){
         return playwright.getText(page.getByText(error));
-//        return playwright.getText(page.locator("//div[normalize-space()='" + error + "']"));
     }
 
     /**
