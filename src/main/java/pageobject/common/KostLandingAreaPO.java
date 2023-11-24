@@ -113,7 +113,8 @@ public class KostLandingAreaPO {
      * @return List<Locator>
      */
     public List<Locator> getKostListLocator() {
-        kostRoomCard.first().waitFor(new Locator.WaitForOptions().setTimeout(30000));
+        playwright.getLocators(kostRoomCard.first());
+        playwright.getLocators(kostRoomCard.last());
         playwright.hardWait(2000);
         return kostRoomCard.all();
     }

@@ -124,7 +124,7 @@ Feature: Chat and Chat Optimization
     And tenant booking kost
     Then tenant should success booking kost
 
-  @continue @cancelBooking
+  @cancelBooking
   Scenario: Cancel Booking if Tenant Have Booking
     When user cancel booking
 
