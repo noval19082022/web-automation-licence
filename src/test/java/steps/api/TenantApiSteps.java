@@ -29,11 +29,9 @@ public class TenantApiSteps {
     private Page page = ActiveContext.getActivePage();
     private List<Cookie> cookieList;
     private String cookieString;
-    private Map<String, String> headers = new HashMap<>();
     private APIRequestContext tenantProfileRequest;
     private APIResponse tenantProfileResponse;
     private ApiPlaywrightHelpers apiPwHelpers = new ApiPlaywrightHelpers(page);
-    private Map<Object, Object> createBookingBody = new HashMap<>();
     private Map<String, String> roomIdOrSongId = new HashMap<>();
 
     @When("playwright collect tenant cookies")

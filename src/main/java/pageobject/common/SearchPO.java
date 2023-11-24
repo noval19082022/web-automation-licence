@@ -149,6 +149,7 @@ public class SearchPO {
         searchKost.click();
         inputSearch.fill(search);
         suggestionAreaOnTheSearchList.click();
+        playwright.hardWait(2000);
     }
 
     /**

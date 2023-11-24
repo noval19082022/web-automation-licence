@@ -35,14 +35,15 @@ public class ChatTenantPO {
     public ChatTenantPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        questionsOption = page.locator("//p[@class='bg-c-radio__label bg-c-text bg-c-text--body-2']");
+        questionsOption = page.locator("//*[@class='wrapper-question']/child::div");
         ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
-        seeAdsButton = page.getByText("Lihat Iklan");
+        seeAdsButton = page.getByTestId("chatRoomHeaderWrapper");
+//                page.getByText("Lihat Iklan");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa")).nth(1);
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
