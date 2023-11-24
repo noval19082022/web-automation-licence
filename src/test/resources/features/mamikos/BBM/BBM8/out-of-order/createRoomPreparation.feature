@@ -1,15 +1,15 @@
-@arac @pms @TEST_BBM-3723 @BBM8
+@arac @pms @TEST_COOP-1093 @BBM8
 Feature: Create OOO "Room Preparation" Type
 
-  @TEST_BBM-3738
+  @TEST_COOP-1093
   @continue
   Scenario: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini
     When admin login pms :
       | email                 | password    |
       | dhiandra@mamikos.com  | dh14ndr4321 |
-    And admin go to room allotment page
-    And admin search "Kost Singgahsini Auto Listing"
+    And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
+#    And admin search "Kost Singgahsini Auto Listing"
     And admin delete OOO on:
       | room number | start date |
       | 1           | 2          |
@@ -17,7 +17,7 @@ Feature: Create OOO "Room Preparation" Type
       | room number | start date |
       | 1           | 2          |
 
-#  @TEST_BBM-3723
+#  @TEST_COOP-1093
   Scenario: Create OOO "Room Preparation"
     When admin set out of order on room "1"
     And admin fill OOO data with:

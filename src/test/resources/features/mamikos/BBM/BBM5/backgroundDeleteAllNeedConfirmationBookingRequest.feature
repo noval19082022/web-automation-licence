@@ -4,23 +4,23 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
   Background: cancel all
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 0892202150   | 0890867321212 | qwerty123     |
+      | phone stag | phone prod    | password  |
+      | 0892202150 | 0890867321212 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 
-  @TEST_BBM-900 @Automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-1936 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Home Page][Kost Saya Section ]Check kost saya section when have Cancelled status and have Draft booking
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara       | Kost Adi Auto FullPaid AddFee Deposit       |
+      | kost name stag                                                     | kost name prod                        |
+      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | kost cibinong bogor       | Kost Adi Auto FullPaid AddFee Deposit|
+      | kost name stag      | kost name prod                        |
+      | kost cibinong bogor | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "Tomorrow"
     And user click back button
     And user click Save Draft Button
@@ -36,18 +36,18 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     And user click Mau Coba Dong section at homepage
     Then tenant navigate to tagihan kost saya
 
-  @TEST_BBM-906 @Automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-2005 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Coba cara baru bayar kos]Check when tenant not have booked status (batalkan booking) and draft booking (delete draft)
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara       | Kost Adi Auto FullPaid AddFee Deposit|
+      | kost name stag                                                     | kost name prod                        |
+      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kos Papalova Rajeg Tangerang       | Kost Adi Auto FullPaid AddFee Deposit|
+      | kost name stag               | kost name prod                        |
+      | Kos Papalova Rajeg Tangerang | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "Tomorrow"
     And user click back button
     And user click Save Draft Button

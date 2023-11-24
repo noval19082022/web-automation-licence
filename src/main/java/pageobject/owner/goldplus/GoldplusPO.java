@@ -5,9 +5,12 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private static String saldoMamiads, totalPembayaran;
     Locator broadcastChatBtn;
     Locator warningBroadcastText;
     Locator closePopUpIcon;
@@ -36,6 +39,17 @@ public class GoldplusPO {
     Locator tabSelesaiRincianBayar;
     Locator gpPackageText;
     Locator infoUntukAndaOption;
+    Locator tutupListBalanceGP;
+    Locator rincianMamiadsText;
+    Locator saldoMamiadsText;
+    Locator changeGPButton;
+    Locator listGPPage;
+    Locator rincianGp;
+    Locator rincianMA;
+    Locator rincianFee;
+    Locator searchPhoneNumber;
+    Locator buttonSearchContract;
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -66,6 +80,17 @@ public class GoldplusPO {
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
         gpPackageText = page.getByText("GoldPlus 1 periode 4 Bulan").first();
+        tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
+        rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
+        saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
+        changeGPButton = page.locator("//*[@class='bg-c-button bg-c-button--tertiary-naked bg-c-button--md']");
+        listGPPage = page.locator("//h2[contains(.,'Paket GoldPlus')]");
+        rincianGp = page.getByTestId("invoiceBillingDetails-payment").getByText("GoldPlus 1");
+        rincianMA = page.locator(".collapse-content > div:nth-of-type(2) > .bg-c-text--body-2");
+        rincianFee = page.getByText("Biaya Transaksi");
+        searchPhoneNumber = page.getByPlaceholder("Keyword");
+        buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+
     }
 
     /**
@@ -288,7 +313,6 @@ public class GoldplusPO {
     /**
      * Verify list tagihan GP is display
      * @return boolean (true if table displayed, false if table doesn't displayed)
-     *
      */
     public boolean isListDetailTagihanIsDisplayed() {
         return playwright.waitTillLocatorIsVisible(tableTagihanGP);
@@ -326,5 +350,190 @@ public class GoldplusPO {
         playwright.hardWait(3000);
         playwright.waitTillLocatorIsVisible(gpPackageText);
         return gpPackageText.isVisible();
+    }
+
+    /**
+     * Get MamiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
+     *
+     * @param index input with mamiadsSaldo
+     * @return String MAmiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
+     */
+    public String mamiadsSaldo(String mamiadsSaldo, int index) {
+        String element = "";
+        switch (mamiadsSaldo) {
+            case "saldo":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-name')]";
+                break;
+            case "cashback":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-cashback')]";
+                break;
+            case "disc":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-discount bg-c-text bg-c-text--body-4')]";
+                break;
+            case "salePrice":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-sale-price')]";
+                break;
+            case "discPriceMamiAds":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-discount-price')]";
+                break;
+            case "saving":
+                element = "//*[contains(@class,'goldplus-mamiads-detail__item-saving')]";
+                break;
+        }
+        playwright.pageScrollUntilElementIsVisible(tutupListBalanceGP);
+        return  playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+
+    /**
+     * user choose saldo
+     *
+     * @param saldo type saldo
+     * @throws InterruptedException
+     */
+    public void chooseSaldo(String saldo) throws InterruptedException {
+        setSaldo(saldo);
+        Locator element = page.locator("//p[contains(.,'" + saldo + "')]");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * user unchoose saldo
+     *
+     * @throws InterruptedException
+     */
+    public void unCheckedSaldo() throws InterruptedException {
+        Locator element = page.locator("//div[@class='goldplus-mamiads-detail__item bg-c-card bg-c-card--md bg-c-card--light active']");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Get text rincian MamiAds
+     *
+     * @return String text rincian MamiAds
+     */
+    public String getTextRinicianMamiAds() {
+        return playwright.getText(rincianMamiadsText);
+    }
+
+    /**
+     * Get text saldo MamiAds
+     *
+     * @return String text saldo MamiAds
+     */
+    public String getTextSaldoMamiAds() {
+        return playwright.getText(saldoMamiadsText);
+    }
+
+    /**
+     * Verify the mamiads package not displayed from rincian pembayaran
+     *
+     * @return false
+     */
+    public boolean isRincianNotVisible() {
+        return playwright.waitTillLocatorIsVisible(rincianMamiadsText);
+    }
+
+    /**
+     * Verify the saldo mamiads not displayed from rincian pembayaran
+     *
+     * @return false
+     */
+    public boolean isSaldoNotVisible() {
+        return playwright.waitTillLocatorIsVisible(saldoMamiadsText);
+    }
+
+    /**
+     * Scroll to element Ubah Package GP
+     *
+     */
+    public void scrollToUbahPackage() {
+        playwright.pageScrollUntilElementIsVisible(changeGPButton);
+    }
+
+    /**
+     * Click on ubah gold plus
+     *
+     * @throws InterruptedException
+     */
+    public void clickOnUbahGoldPlus() throws InterruptedException {
+        playwright.pageScrollUntilElementIsVisible(changeGPButton);
+        playwright.clickOn(changeGPButton);
+        playwright.pageScrollUntilElementIsVisible(listGPPage);
+    }
+
+    /**
+     * Get pembayaran
+     *  <p> - No. Invoice
+     *  <p> - Jenis Pembayaran
+     *  <p> - Metode Pembayaran
+     * @return String
+     */
+    public String getPembayaranText(String text) throws InterruptedException {
+        if(text.contains("Status Transaksi")) {
+            return playwright.getText(page.locator(".bg-c-label"));
+
+        } else if (text.contains("Total Pembayaran")) {
+            return playwright.getText(page.locator(".invoice-total-amount"));
+
+        } else {
+            return playwright.getText(page.locator("//*[contains(text(),'"+text+"')]/../../following-sibling::div"));
+        }
+    }
+
+    public String getTotalPembayaran() {
+        return totalPembayaran;
+    }
+
+    public void setTotalPembayaran(String totalPembayaran) throws InterruptedException {
+        GoldplusPO.totalPembayaran = totalPembayaran;
+    }
+
+
+    /**
+     * user get saldo
+     * @return 27.000
+     */
+    public String getSaldo() {
+        return GoldplusPO.saldoMamiads.replaceAll("Rp","");
+    }
+
+    /**
+     * user set saldo from input
+     * @return Rp27.000
+     */
+    public void setSaldo(String saldo) {
+        GoldplusPO.saldoMamiads = saldo;
+    }
+
+    /**
+     * Get rincian text for Goldplus
+     * @return String paket goldplus
+     */
+    public String getRincianGP() {
+        return playwright.getText(rincianGp);
+    }
+
+    /**
+     * Get rincian text for Mamiads
+     * @return String paket mamiads
+     */
+    public String getRincianMA() {
+        return playwright.getText(rincianMA);
+    }
+
+    /**
+     * Get rincian text for MDR Fee
+     * @return String biaya transaksi
+     */
+    public String getRincianFee() {
+        return playwright.getText(rincianFee);
+    }
+
+    /**
+     * Input phone number to terminated Goldplus
+     */
+    public void searchPhoneNumberGP(String phoneNumberGP) {
+        playwright.fill(searchPhoneNumber,phoneNumberGP);
+        playwright.clickOn(buttonSearchContract);
     }
 }

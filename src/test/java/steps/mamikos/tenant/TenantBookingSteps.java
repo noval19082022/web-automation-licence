@@ -131,7 +131,6 @@ public class TenantBookingSteps {
 
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
-        page.reload();
         riwayatBooking.clickOnCheckinButton();
         riwayatBooking.clickOnCheckinPopUpButton();
         riwayatBooking.clickOnSelesaiAndKeKostSaya();
@@ -169,7 +168,7 @@ public class TenantBookingSteps {
 
     @Then("user can not see FTUE booking benefit")
     public void userCanNotSeeFTUEBookingBenefit() {
-        Assert.assertFalse(kostDetail.isFTUEBookingBenefitVisible(), "FTUE Slide booking benefit is still visible");
+        Assert.assertFalse(kostDetail.isFTUEBookingBenefitIsNotVisible(), "FTUE Slide booking benefit is still visible");
     }
 
     @And("user search for Kost with name {string} and selects matching result")
@@ -337,4 +336,8 @@ public class TenantBookingSteps {
         kostDetail.clickTimeConditionRefund();
     }
 
+    @When("Tenant see booking date according to BSS setting")
+    public void TenantSeeBookingDateAccordingToBssSetting() {
+        kostDetail.selectBookingDate("today");
+    }
 }

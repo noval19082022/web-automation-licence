@@ -28,7 +28,7 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_BBM-910
+  @TEST_COOP-1966
   Scenario: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat and have BSS varian
     Given user go to mamikos homepage
     When user login as owner:

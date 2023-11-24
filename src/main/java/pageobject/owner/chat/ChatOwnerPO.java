@@ -37,6 +37,7 @@ public class ChatOwnerPO {
     Locator lastFTUEMars;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
+    Locator Iunderstand;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -52,36 +53,38 @@ public class ChatOwnerPO {
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         acceptFromChatRoomButton = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
         yaTerimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
-        notPaidFirstRent = page.locator(".mc-chat-room__header-content > .bg-c-label");
-        tenantName = page.locator(".bg-c-tooltip__target > .bg-c-text");
-        roomTitle = page.locator("//p[@class='mc-product-link-card__content-name bg-c-text bg-c-text--body-2']");
-        roomPrice = page.getByText("Rp780.000/bulan");
-        sisaKamarLabel = page.locator("//div[@class='mc-product-link-card__wrapper-left']");
+        notPaidFirstRent = page.locator("div[class='mc-chat-room-header__content'] div[class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-blue']");
+        tenantName = page.locator(".bg-c-text--title-5");
+        roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
+        roomPrice = page.locator("//p[contains(.,'Rp780.000')]");
+        sisaKamarLabel = page.locator("//p[@class='bg-c-text bg-c-text--label-4 bg-c-text--italic mc-product-card__available-room bg-u-text-red-600']");
         FTUEBeforeChat = page.getByText("Kuota chat room akan berkurang Kini berlaku sistem kuota chat mingguan. Jika lan");
         backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
         weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
-        weeklyQuotaChatroomHeader =  page.locator(".mc-chat-room-quota-info__detail");
+        weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
-        gpPacakgeText =  page.getByTestId("popperReference");
+        gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
+        Iunderstand = page.locator("//button[@class=' shepherd-button ']");
     }
 
     /**
      * Click on owner chat button on header
-     *
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
+        playwright.reloadPage();
         playwright.clickOn(ownerChatButton);
     }
 
     /**
      * Check empty chat image is present
+     *
      * @return true if appear
      */
     public boolean isEmptyChatImagePresent() {
@@ -90,6 +93,7 @@ public class ChatOwnerPO {
 
     /**
      * Get empty chat description
+     *
      * @return empty chat description
      */
     public String getEmptyChatDescription() {
@@ -98,6 +102,7 @@ public class ChatOwnerPO {
 
     /**
      * Get empty chat indicator
+     *
      * @return empty chat indicator text
      */
     public String getEmptyChatIndicator() {
@@ -106,7 +111,6 @@ public class ChatOwnerPO {
 
     /**
      * Click on "Chat" in kos Detail
-     *
      */
     public void clickChatKos() {
         playwright.clickOn(chatKosButton);
@@ -117,9 +121,9 @@ public class ChatOwnerPO {
      */
     public void searchChatTenant(String inputText) {
         playwright.waitTillLocatorIsVisible(searchChat);
-        Locator chatOnList = page.locator("(//h6[contains(.,'"+inputText+"')])[1]");
+        Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
         searchChat.fill(inputText);
-        if (nantiSajaButton.isVisible()){
+        if (nantiSajaButton.isVisible()) {
             playwright.clickOn(nantiSajaButton);
         }
         page.keyboard().press("Space");
@@ -128,8 +132,9 @@ public class ChatOwnerPO {
 
     /**
      * owner Enter text to textbox
+     *
      * @param message is text we want to enter
-     * Hit send after enter message
+     *                Hit send after enter message
      */
     public void insertChatText(String message) {
         chatTextBox.fill(message);
@@ -138,9 +143,11 @@ public class ChatOwnerPO {
 
     /**
      * Click on accept chat button
-     *
      */
     public void clickAcceptFromChatOwner() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 5000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         playwright.clickOn(acceptFromChatRoomButton);
         playwright.waitFor(yaTerimaButton);
         playwright.clickOn(yaTerimaButton);
@@ -148,12 +155,15 @@ public class ChatOwnerPO {
 
     /**
      * Get notPaidFirstRent value text
+     *
      * @return
      */
-    public String getNotPaidFirstRentText(){
-        playwright.hardWait(5000);
-        return playwright.getText(notPaidFirstRent);
-    }
+    public String getNotPaidFirstRentText() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
+            return playwright.getText(notPaidFirstRent);
+        }
 
     /**
      * Get Tenant Name from Booking Details Page
@@ -184,6 +194,9 @@ public class ChatOwnerPO {
      * @return true if sisa kamar otherwise false
      */
     public boolean isSisaKamarDisplayed() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         return playwright.waitTillLocatorIsVisible(sisaKamarLabel);
     }
 

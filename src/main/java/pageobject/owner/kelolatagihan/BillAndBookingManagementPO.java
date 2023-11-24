@@ -28,6 +28,7 @@ public class BillAndBookingManagementPO {
     Locator makeRuleButton;
     Locator makeRuleBookingPage;
     Locator pilihKamarDitempatRadio;
+    Locator Iunderstand;
 
 
     public BillAndBookingManagementPO(Page page) {
@@ -51,6 +52,7 @@ public class BillAndBookingManagementPO {
         makeRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat peraturan"));
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
+        Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
     }
 
     /**
@@ -96,7 +98,11 @@ public class BillAndBookingManagementPO {
      * Click on simpan button
      */
     public void clickOnSimpan() {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
         simpanButton.click();
+        playwright.hardWait(5000);
     }
 
     /**

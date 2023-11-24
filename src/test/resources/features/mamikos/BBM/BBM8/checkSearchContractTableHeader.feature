@@ -1,7 +1,7 @@
 @BBM8
 Feature: Search Contract
 
-  @TEST_BBM-1395 @TEST_BBM-4039
+  @TEST_COOP-938 @TEST_COOP-1161
   Scenario: Check Display Table Header on Search Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

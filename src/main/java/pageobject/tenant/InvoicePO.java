@@ -31,6 +31,7 @@ public class InvoicePO {
     Locator closeVoucherPopUpButton;
     Locator voucherInputPopUpWarningText;
     Locator pilihPembayaranButton;
+    Locator alfamart;
     Locator bankMandiri;
     Locator bankPermata;
     Locator bankBNI;
@@ -44,6 +45,7 @@ public class InvoicePO {
     Locator bayarSekarangButton;
     Locator kodePerusahaanText;
     Locator virtualAccountText;
+    Locator kodePembayaran;
     Locator kodePembayaranPermata;
     Locator txtAdminCost;
     Locator txtRentPerPeriod;
@@ -70,10 +72,11 @@ public class InvoicePO {
     Locator tncInvoiceText;
     Locator mamipoinToggleButtonOn;
     Locator mamipoinToggleButtonOff;
+    Locator mamipoinToggleButton;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
-    Locator sudahBayarButton;
-    Locator pembayaranBerhasilText;
+    Locator sayaSudahBayar;
+    protected Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -83,7 +86,7 @@ public class InvoicePO {
         voucherAndaPopUp = page.getByText("Voucher Anda");
         voucherCodeInput = page.getByTestId("codeVoucher_txt");
         pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
-        totalPembayaran = page.locator("//*[.='Total Pembayaran']/following-sibling::*");
+        totalPembayaran = page.locator("//*[.='Total Pembayaran']/following-sibling::*").first();
         subTotal = page.locator("//*[.='Sub Total']/following-sibling::*").first();
         appliedVoucher = "//*[@class='invoice-detail-row-section']//*[contains(text(), '%s')]/following-sibling::*";
         toast = page.locator(".bg-c-toast__content");
@@ -95,6 +98,7 @@ public class InvoicePO {
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
         pilihPembayaranButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
+        alfamart = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Alfamart / Alfamidi")).nth(1);
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
@@ -106,6 +110,7 @@ public class InvoicePO {
         inputKartuKreditYear = page.getByPlaceholder("YY");
         inputKartuKreditCCV = page.getByPlaceholder("000", new Page.GetByPlaceholderOptions().setExact(true));
         bayarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang"));
+        kodePembayaran = page.locator(".column > .columns > .second-column").first();
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
@@ -132,10 +137,11 @@ public class InvoicePO {
         tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
         mamipoinToggleButtonOn = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--off']");
         mamipoinToggleButtonOff = page.locator("//div[@class='bg-c-switch invoice-point-switch bg-c-switch--on']");
+        mamipoinToggleButton = page.getByRole(AriaRole.CHECKBOX);
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
-        sudahBayarButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
+        sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
     }
 
     /**
@@ -292,10 +298,24 @@ public class InvoicePO {
     }
 
     /**
+     * Choose alfamart as payment
+     */
+    public void clickOnAlfamart() {
+        playwright.clickOn(alfamart);
+    }
+
+    /**
      * Choose permata as payment
      */
     public void clickOnPermata() {
         playwright.clickOn(bankPermata);
+    }
+
+    /**
+     * Choose permata as payment
+     */
+    public void clickOnBNI(){
+        playwright.clickOn(bankBNI);
     }
 
     /**
@@ -470,7 +490,6 @@ public class InvoicePO {
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
-        playwright.clickOn(sudahBayarButton);
         do {
             page.reload();
             maxReload++;
@@ -491,7 +510,6 @@ public class InvoicePO {
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
-        playwright.clickOn(sudahBayarButton);
         do {
             page.reload();
             maxReload++;
@@ -502,7 +520,7 @@ public class InvoicePO {
         int totalPage = ActiveContext.getActiveBrowserContext().pages().size();
         if(totalPage > 1){
             page.waitForClose(() -> {
-                ActiveContext.getActiveBrowserContext().pages().get(1).close();
+                ActiveContext.getActivePage().close();
             });
         }
     }
@@ -542,17 +560,13 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
         clickOnPilihPembayaran();
-        kartuKredit.click();
-        inputKartuKreditNumber.click();
-        page.keyboard().type(ccNumber);
-        inputKartuKreditMonth.click();
-        page.keyboard().type(month);
-        inputKartuKreditYear.click();
-        page.keyboard().type(years);
-        inputKartuKreditCCV.click();
-        page.keyboard().type(ccv);
-        clickOnBayarSekarang();
-        return new PaymentPO(page);
+        playwright.clickOn(kartuKredit);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditNumber, ccNumber);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditMonth, month);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditYear, years);
+        playwright.clickLocatorAndTypeKeyboard(inputKartuKreditCCV, ccv);
+        playwright.clickOn(bayarSekarangButton);
+        return new PaymentPO(ActiveContext.getActivePage());
     }
 
     /**
@@ -622,30 +636,45 @@ public class InvoicePO {
     }
 
     /**
-     * Click MamiPoin Toggle Button to On
+     * click saya sudah bayar on invoice
      */
-    public void clickMamipoinToggleButtonToOn() {
-        playwright.hardWait(3000.0);
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-        }else if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOff)) {
-            playwright.clickOn(mamipoinToggleButtonOff);
-                playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOn);
-        }
+    public void sayaSudahBayar(){
+        int maxReload = 5;
+        int reloadCount = 0;
+
+        playwright.clickOn(sayaSudahBayar);
+
+        do {
+            page.reload();
+            reloadCount++;
+            if (reloadCount >= maxReload) {
+                // Handle error or break the loop here
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+
     }
 
+
     /**
-     * Click MamiPoin Toggle Button to Off
+     * Wait for an element to become visible
+     *
+     * @param locator The locator of the element to wait for.
      */
-    public void clickMamipoinToggleButtonToOff() {
-        if (playwright.waitTillLocatorIsVisible(mamipoinToggleButtonOn)) {
-            playwright.clickOn(mamipoinToggleButtonOn);
-        } else {
-            playwright.hardWait(3000.0);
-            playwright.clickOn(mamipoinToggleButtonOff);
+    private void waitForVisibility(Locator locator) {
+        playwright.waitTillLocatorIsVisible(locator, 3000.0);
+    }
+
+
+    /**
+     * Click MamiPoin Toggle Button to On/Off
+     */
+    public void clickMamipoinToggleButtonToOnOff() {
+        if (mamipoinToggleButton.isChecked()){
+            mamipoinToggleButton.uncheck();
+        }
+        else {
+            mamipoinToggleButton.check();
         }
     }
 
@@ -673,5 +702,14 @@ public class InvoicePO {
     public boolean isVoucherSuggestionEmptyStateVisible() {
         String xpathLocator = "//div[@class='box-empty__title']";
         return page.querySelector(xpathLocator).isVisible();
+    }
+
+    /**
+     * get code pembayaran
+     * @return
+     */
+    public String getCodePembayaran() {
+        playwright.waitFor(kodePembayaran, 5000.0);
+        return playwright.getText(kodePembayaran);
     }
 }

@@ -46,7 +46,7 @@ Feature: Add Ons - Extended Contract
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0891111020198 | 0891111020198 |
-#
+
   @continue
   Scenario: Playwright Create Booking
     And playwright get tenant data profile
@@ -56,24 +56,6 @@ Feature: Add Ons - Extended Contract
     And playwright create booking for tenant:
       | songId     | 58650684 |
       | roomTypeId | 6194     |
-
-  @continue
-  Scenario: Owner Accept Booking
-    When playwright create register device id for owner with parameters:
-      | device_identifier | Mamitest08900000000021     |
-      | device_uuid       | Mamitest08900000000021uuid |
-      | device_platform   | Mamitest                   |
-      | phone_number      | 08900000000021             |
-      | password          | mamikosqa123               |
-    When owner login trough api
-    And playwright get owner available room for kos with id:
-      | kos id | 58650684      |
-    And playwright get room allotment or available room for kos with id:
-      | kos id | 58650684      |
-    And playwright get owner booking accept details
-    And playwright set accept booking data for owner
-    And playwright create body accept booking for owner
-    And playwright accept booking for owner
 
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage

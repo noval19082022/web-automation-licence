@@ -14,6 +14,8 @@ public class MamiAdsPO {
     private LocatorHelpers locatorHelpers;
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
+    //--- history Mamiads ---//
+    private  Locator invoiceMamiads;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
@@ -27,6 +29,20 @@ public class MamiAdsPO {
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
+    //--- voucher ---//
+    private Locator inputVoucher;
+    private Locator inputVoucherPopUp;
+    private Locator voucherCodeField;
+    private Locator pakaiVoucherButton;
+    private Locator warningMessageVoucher;
+    private Locator icnButtonCLose;
+    private Locator messageOnOffVoucher;
+    private Locator deleteVoucher;
+    private Locator listElement;
+    private Locator voucherTitleElement;
+
+
+
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
     Locator gpOnboardingPopUpActiveTextHead;
@@ -43,6 +59,8 @@ public class MamiAdsPO {
         this.locatorHelpers = new LocatorHelpers(page);
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
+        //--- history Mamiads ---//
+        this.invoiceMamiads = page.locator("//div[@class='transaction-done']/div[@class='transaction-available']/div[1]//span[@class='right-side-saldo-status']");
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo");
@@ -56,6 +74,18 @@ public class MamiAdsPO {
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
+
+        //--- voucher owner ---//
+        this.inputVoucher = page.getByTestId("masukkan_link");
+        this.inputVoucherPopUp = page.locator("#wrapper-scroll").getByTestId("masukkan_link");
+        this.voucherCodeField = page.getByTestId("codeVoucher_txt");
+        this.pakaiVoucherButton =  page.getByTestId("pakaiVoucher_btn");
+        this.warningMessageVoucher = page.getByTestId("warning_txt");
+        this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
+        this.deleteVoucher = page.getByTestId("hapusVoucher_link");
+        this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
+
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
         gpOnboardingPopUpActiveTextHead = page.locator(".swiper-slide-active .gp-swiper__slide-text p:nth-child(1)");
@@ -308,6 +338,141 @@ public class MamiAdsPO {
     public void navigatesToMamiads() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
+    }
+    /**
+     * Get detail tagihan
+     * @param validasi
+     *  <p> 1 = Nominal Saldo
+     *  <p> 2 = Total Pembayaran
+     *  <p> 3 = Status Transaksi
+     * @return String
+     */
+    public String gettransactionList(int validasi){
+        String element = "";
+        switch (validasi){
+            case 1 : element = "//*[@class='transaction-done'] //*[@class='left-side-saldo-status']"; break;
+            case 2 : element = "//*[@class='transaction-done'] //*[@class='right-side-saldo-status']"; break;
+            case 3 : element = "//*[@class='right-side-payment-status-paid']"; break;
+        }
+        playwright.waitTillLocatorIsVisible(page.locator(element).first());
+        return playwright.getText(page.locator(element).first());
+    }
+
+    /**
+     * Click on masukkan voucher mamiAds
+     */
+    public void clickOnInputVoucher() {
+       playwright.clickOn(inputVoucher);
+       playwright.clickOn(inputVoucherPopUp);
+    }
+
+
+    /**
+     * Input voucher code
+     * @param voucherCode
+     *
+     */
+    public void inputVoucherCode(String voucherCode) {
+       playwright.fill(voucherCodeField,voucherCode);
+    }
+
+    /**
+     * Click pakai voucher button
+     * @throws InterruptedException
+     *
+     */
+    public void clickOnPakaiVoucherButton() throws InterruptedException {
+       playwright.clickOn(pakaiVoucherButton);
+    }
+
+    /**
+     * Get message warning invalid input voucher
+     * @return warning message
+     *
+     */
+    public String getMessageWarningVoucher() {
+        return playwright.getText(warningMessageVoucher);
+    }
+
+    /**
+     * Clear voucher code text field
+     *
+     */
+    public void clearVoucherCode() {
+        playwright.clearText(voucherCodeField);
+    }
+
+    /**
+     * Clear voucher code text field
+     *
+     */
+    public void clickOnCLosePopUpVoucher() {
+        playwright.clickOn(icnButtonCLose);
+    }
+
+    /**
+     * Verify Voucher is present on list
+     *
+     * @return true or false
+     */
+    public boolean isVoucherPresentOnList(String voucherTitle) {
+         voucherTitleElement = page.locator( "//div[.='" + voucherTitle + "']");
+        return playwright.waitTillLocatorIsVisible(voucherTitleElement,1000.0);
+    }
+    /**
+     * Click pakai or lihat detail voucher from suggestion list
+     *
+     */
+    public void clickOnVoucherOnList(String element) throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(page.locator(element));
+       playwright.clickOn(page.locator(element));
+    }
+
+    /**
+     * Verify detail voucher
+     *
+     * @return voucherTitle, voucherCode, voucherExpired, voucherTnC
+     */
+    public String detailVoucher(String detailVoucher, int index) {
+        String element = "";
+        switch (detailVoucher) {
+            case "voucherTitle"  : element = ".c-voucher__title"; break;
+            case "voucherCode"   : element = ".c-voucher__code"; break;
+            case "voucherExpired": element = ".c-voucher__expired"; break;
+            case "voucherTnC"    : element = ".tnc"; break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+    /**
+     * Get message on toast voucher dihapus or dipakai
+     *
+     * @return toast message
+     */
+    public String getTextMessageToastVoucher() {
+        playwright.waitTillLocatorIsVisible(messageOnOffVoucher,1000.0);
+        return playwright.getText(messageOnOffVoucher);
+    }
+
+    /**
+     * Click on delete voucher
+     *
+     */
+    public void clickOnDeleteVoucher() throws InterruptedException {
+        playwright.clickOn(deleteVoucher);
+    }
+
+    /**
+     * Click on masukkan voucher for accsess voucher list
+     */
+    public void clickOnInputVoucherList() {
+        playwright.clickOn(inputVoucher);
+    }
+
+    /**
+     *Click on invoice mamiads on history mamiads
+     */
+    public void clickOnInvoiceMamiads(){
+        playwright.clickOn(invoiceMamiads);
     }
 }
 

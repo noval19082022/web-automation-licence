@@ -11,14 +11,18 @@ import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
+import pageobject.owner.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
 
 import java.util.List;
 import java.util.Map;
 
+import static org.testng.Assert.assertTrue;
+
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PropertySayaPO propertySaya = new PropertySayaPO(page);
+    NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
     private JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
@@ -28,10 +32,14 @@ public class PropertySayaSteps {
     private String sixMonthlyPrice = null;
     private String yearlyPrice = null;
     private String kosNamePrefix;
+    private String roomTypePrefix;
+
+    private List<Map<String, String>> property;
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
         propertySaya.searchKostPropertySaya(kostName);
+        naikkanIklanPO.setKosOwner(kostName);
     }
 
     @And("owner click update kamar kost")
@@ -46,6 +54,7 @@ public class PropertySayaSteps {
 
     @Then("user see kos with name {string}, status {string} and type {string}")
     public void userSeeKosWithNameStatusAndType(String name, String status, String type) {
+        System.out.println(status);
         Assert.assertTrue(propertySaya.getFirstKosName().contains(name), "Kos name is wrong");
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(type), type, "Kos type is wrong");
@@ -471,7 +480,7 @@ public class PropertySayaSteps {
 
     @Then("verify warning upload gagal")
     public void verifyWarningUploadGagal() {
-        Assert.assertEquals(propertySaya.getErrorUpload(), "Upload Gagal Format foto tidak didukung", "Error doesn't match!");
+        Assert.assertEquals(propertySaya.getErrorUpload(), "Upload GagalFormat foto tidak didukung", "Error doesn't match!");
     }
 
     @When("owner upload valid rule kos")
@@ -567,7 +576,7 @@ public class PropertySayaSteps {
 
     @When("owner valid upload photo kos")
     public void ownerValidUploadPhotoKos() {
-        propertySaya.uploadValidPhotoKos();
+        propertySaya.ubahValidPhotoKos();
     }
 
     @And("owner select size room {string}")
@@ -622,5 +631,242 @@ public class PropertySayaSteps {
     @And("owner click {string} on Kebijakan BBK Baru Mamikos")
     public void ownerClickOnKebijakanBBKBaruMamikos(String text) {
         propertySaya.clickOnNewBBKPopUp(text);
+    }
+
+    @And("owner click add another type from kos {string}")
+    public void ownerClickAddAnotherTypeFromKos(String kosName) {
+        propertySaya.clickAddAnotherTypeFromKos(kosName);
+    }
+
+    @And("owner click {string} in add new room type pop up and click next")
+    public void ownerClickInAddNewRoomTypePopUpAndClickNext(String kosType) throws InterruptedException {
+        propertySaya.clickNewRoomType(kosType);
+    }
+
+    @Then("verify message {string} the room type")
+    public void verifyMessageTheRoomType(String roomTypeMessageText) {
+        Assert.assertEquals(propertySaya.getRoomTypeMessage(roomTypeMessageText), roomTypeMessageText, "Room type message doesn't match!");
+    }
+
+    @When("owner input room type with {string}")
+    public void ownerInputRoomTypeWith(String text) {
+        propertySaya.inputRoomTypeName(text);
+    }
+
+    @And("see next button disable")
+    public void seeNextButtonDisable() {
+        Assert.assertTrue(propertySaya.isLanjutkanDisable(), "Lanjutkan button is enable!");
+    }
+
+    @When("owner select the kost type {string}")
+    public void ownerSelectTheKostType(String kosType) {
+        propertySaya.selectKostType(kosType);
+    }
+
+    @When("owner input room type with {string} in pop up")
+    public void ownerInputRoomTypeWithInPopUp(String text) {
+        propertySaya.inputRoomTypeNameInPopUp(text);
+    }
+
+    @And("see next button disable in pop up")
+    public void seeNextButtonDisableInPopUp() {
+        propertySaya.isLanjutkanInPopUpDisable();
+    }
+
+    @When("owner input kos name {string}")
+    public void ownerInputKosName(String text) {
+        int length = 8;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        kosNamePrefix = text + " " + generatedString.toUpperCase();
+        propertySaya.inputKosName(kosNamePrefix);
+        Mamikos.setPropertyKosName(kosNamePrefix);
+    }
+
+    @Then("owner see pop up confirmation request attention")
+    public void ownerSeePopUpConfirmationRequestAttention() {
+        Assert.assertEquals(propertySaya.getTitleChangeInterceptPopUp(), "Mohon Perhatiannya Sebentar", "Title doesn't match!");
+        Assert.assertEquals(propertySaya.getMessageChangeInterceptPopUp(), "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan.", "Message doesn't match!");
+    }
+
+    @When("owner click {string} input data on pop up")
+    public void ownerClickInputDataOnPopUp(String actionText) {
+        propertySaya.clickOnActionInterceptInputData(actionText);
+    }
+
+    @And("user click back button in page input kos")
+    public void userClickBackButtonInPageInputKos() {
+        propertySaya.clickOnBackFromInputKos();
+        Assert.assertEquals(propertySaya.getTitleChangeInterceptPopUp(), "Mohon Perhatiannya Sebentar", "Title doesn't match!");
+        Assert.assertEquals(propertySaya.getMessageChangeInterceptPopUp(), "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan.", "Message doesn't match!");
+    }
+
+    @And("owner upload valid photo {string}")
+    public void ownerUploadValidPhoto(String photoName) {
+        propertySaya.uploadValidPhotoKos(photoName);
+    }
+
+    @And("owner input additional price")
+    public void ownerInputAdditionalPrice(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        propertySaya.inputAdditionalPriceName(table.get(0).get("price name"));
+        propertySaya.inputTotalAdditionalPrice(table.get(0).get("price total"));
+    }
+
+    @And("owner select additional price")
+    public void ownerSelectAdditionalPrice() {
+        propertySaya.selectAdditionalPrice();
+    }
+
+    @And("owner select down payment with {string} from rent price")
+    public void ownerSelectDownPaymentWithFromRentPrice(String downPaymentPercentage) {
+        propertySaya.selectDownPayment();
+        propertySaya.selectPercentageOfDownPayment(downPaymentPercentage);
+    }
+
+    @And("owner set penalty is {string}")
+    public void ownerSetPenaltyIs(String penaltyAmount) {
+        propertySaya.selectPenalty();
+        propertySaya.inputPenalty(penaltyAmount);
+    }
+
+    @When("owner input room type with random text in pop up")
+    public void ownerInputRoomTypeWithRandomTextInPopUp() {
+        int length = 3;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+        roomTypePrefix = "Tipe " + generatedString.toUpperCase();
+        propertySaya.inputRoomTypeNameInPopUp(roomTypePrefix);
+        Mamikos.setPropertyKosName(roomTypePrefix);
+    }
+
+    @And("owner click lanjutkan button in bottom of add kos page")
+    public void ownerClickLanjutkanButtonInBottomOfAddKosPage() {
+        propertySaya.clickOnLanjutkanAfterInputTypeRoom();
+    }
+
+    @Then("verify kos description is disabled")
+    public void verifyKosDescriptionIsDisabled() {
+        Assert.assertTrue(propertySaya.isDescriptionKosDisable(), "Description kos is enable!");
+    }
+
+    @And("verify kos build year is disabled")
+    public void verifyKosBuildYearIsDisabled() {
+        Assert.assertFalse(propertySaya.isBuildKosDisable(), "Description kos is enable!");
+    }
+
+    @When("owner click {string} button in add kos page")
+    public void ownerClickButtonInAddKosPage(String text) {
+        propertySaya.clickOnLengkapiDataAddKos(text);
+    }
+
+    @Then("user see error message {string} under total room")
+    public void userSeeErrorMessageUnderTotalRoom(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @And("user see error message {string} under total room available")
+    public void userSeeErrorMessageUnderTotalRoomAvailable(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner click {string} ketersediaan kamar")
+    public void ownerClickKetersediaanKamar(String text) {
+        propertySaya.clickOnKetersediaanKamar(text);
+    }
+
+    @And("owner input room name or number in room allotment page with {string}")
+    public void ownerInputRoomNameOrNumberInRoomAllotmentPageWith(String text) {
+        propertySaya.inputKosName(text);
+    }
+
+    @Then("user see error message {string} under room type field")
+    public void userSeeErrorMessageUnderRoomTypeField(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner input room floor with {string}")
+    public void ownerInputRoomFloorWith(String text) {
+        propertySaya.inputRoomTypeName(text);
+    }
+
+    @Then("user see error message {string} under floor field")
+    public void userSeeErrorMessageUnderFloorField(String error) {
+        Assert.assertEquals(propertySaya.getErrorRoomName().trim(), error, "Error message floor is wrong");
+    }
+
+    @When("owner click {string} in data ketersediaan kamar")
+    public void ownerClickInDataKetersediaanKamar(String text) {
+        propertySaya.clickOnSelesaiAturKamar(text);
+    }
+
+    @And("user select payment expired date after {string} {string}")
+    public void userSelectPaymentExpiredDateAfter(String number, String rangeTime) {
+        propertySaya.selectPaymentExpiredDate(number, rangeTime);
+    }
+
+    @And("user input monthly price with {string} in add kos page")
+    public void userInputMonthlyPriceWithInAddKosPage(String monthlyPrice) {
+        propertySaya.inputMonthyPrice(monthlyPrice);
+    }
+
+    @And("owner click {string} on kos draft")
+    public void ownerClickOnKosDraft(String text) {
+        propertySaya.clickOnLengkapiDataKosDraft();
+    }
+
+    @And("owner edit data harga kos as expected")
+    public void ownerEditDataHargaKosAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
+        propertySaya.inputOtherPrice("Hari", table.get(0).get("daily price"), 1);
+        propertySaya.inputOtherPrice("Minggu", table.get(0).get("weekly price"), 2);
+        propertySaya.inputOtherPrice("3 Bulan", table.get(0).get("three monthly price"), 3);
+        propertySaya.inputOtherPrice("6 Bulan", table.get(0).get("six monthly price"), 4);
+        propertySaya.inputOtherPrice("Tahun", table.get(0).get("yearly price"), 5);
+
+    }
+
+    @Then("user see warning price on add kos with:")
+    public void userSeeWarningPriceOnAddKosWith(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(propertySaya.getErrorPriceAddKos(i), content.get("warningMessage"), "title not equal to" + content.get("title"));
+            i++;
+        }
+    }
+
+    @And("owner search kos on property saya page")
+    public void ownerSearchKosOnPropertySayaPage() {
+        propertySaya.searchKostPropertySaya(Mamikos.getPropertyKosName());
+    }
+
+    @And("owner input kos name {string} for existing kost name")
+    public void ownerInputKosNameForExistingKostName(String existingKosName) {
+        propertySaya.inputKosName(existingKosName);
+    }
+
+    @And("owner click toogle denda")
+    public void ownerClickToogleDenda() {
+        propertySaya.clickToogleDenda();
+    }
+
+    @And("owner input denda ammount:")
+    public void ownerInputDendaAmount(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String totalDenda = property.get(0).get("Jumlah Denda");
+        String unitTime = property.get(0).get("late pay");
+        propertySaya.fillDendaAmountTime(totalDenda, unitTime);
+    }
+
+    @Then("user cannot see {string} on the list")
+    public void userCannotSeeDepositOnTheList(String additionalName) {
+        if (additionalName.equalsIgnoreCase("Rp50.000")) {
+            assertTrue(propertySaya.isDendaListAppears(), "List Denda is appears");
+        }
     }
 }

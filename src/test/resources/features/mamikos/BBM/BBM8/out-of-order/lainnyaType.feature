@@ -6,8 +6,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
     When admin login pms :
       | email                 | password    |
       | dhiandra@mamikos.com  | dh14ndr4321 |
-    And admin go to room allotment page
-    And admin search "Kost Singgahsini Auto Listing"
+    And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
       | 1           | 21         |
@@ -15,7 +14,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
       | room number | start date |
       | 1           | 21         |
 
-  @TEST_BBM-3727
+  @TEST_COOP-1071
   Scenario: Create OOO "Lainnya" with note
     When admin set out of order on room "1"
     And admin fill OOO data with:
@@ -27,7 +26,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
       | room number | start date |
       | 1           | 21         |
 
-  @TEST_BBM-3728
+  @TEST_COOP-1070
   Scenario: Create OOO "Lainnya" without note
     When admin set out of order on room "1"
     And admin fill OOO data with:

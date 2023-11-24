@@ -1,5 +1,4 @@
 @regression @BBM2 @TEST_BBM-1421
-
 #  kost used: Kost Adi Auto SinggahSini
 #  (Kost SinggahSini FullPaid without Additional Fee and Deposit)
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
@@ -12,8 +11,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
-
-  @continue
+    
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -23,6 +21,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |

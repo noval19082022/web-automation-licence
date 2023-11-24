@@ -1,5 +1,6 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -63,6 +64,14 @@ public class OwnerDashboardPO {
     Locator saldoMamiAdsButton;
     Locator noProperty;
     Locator propertySekitar;
+    Locator dropdownKosName;
+    Locator toggleEntryTime;
+    Locator dropDownJumlahWaktu;
+    Locator dropDownUnitTime;
+    Locator saveInPopUpButton;
+    Locator nearestTimeSaveButton;
+    Locator saveBssButton;
+    Locator toggleEnable;
 
     private Locator fiturPromosiExpand;
 
@@ -97,7 +106,7 @@ public class OwnerDashboardPO {
         bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        propertySayaDropdownMenu = page.getByText("kos-marketing Properti Saya chevron-right Kos Apartemen");
+        propertySayaDropdownMenu = page.locator("//div[@class='form-control dropdown-toggle']");
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat CS"));
@@ -118,6 +127,14 @@ public class OwnerDashboardPO {
         fiturPromosiExpand = page.getByText("Fitur Promosi");
         noProperty = page.locator(".no-property");
         propertySekitar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cek Properti Sekitar"));
+        dropdownKosName = page.locator("//div[@role='textbox']//*[name()='svg']");
+        toggleEntryTime = page.getByRole(AriaRole.CHECKBOX);
+        dropDownJumlahWaktu = page.getByTestId("min-checkin-amount").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("chevron-down"));
+        dropDownUnitTime = page.getByTestId("min-checkin-time-unit").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("chevron-down"));
+        nearestTimeSaveButton = page.getByTestId("checkin-option-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
+        saveInPopUpButton = page.getByTestId("checkin-save-btn");
+        saveBssButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
     }
 
     /**
@@ -141,7 +158,7 @@ public class OwnerDashboardPO {
      */
     public void clickOnManagementKost() {
         playwright.waitFor(manajemenKost);
-        manajemenKost.click();
+        playwright.clickOn(manajemenKost);
     }
 
     /**
@@ -377,7 +394,7 @@ public class OwnerDashboardPO {
      * @return true if dropdown menu showing. Otherwise false
      */
     public boolean isPropertyMenuDropdownShowing(){
-        playwright.hardWait(2000.0);
+        playwright.waitFor(propertySayaDropdownMenu,2000.0);
         return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
     }
 
@@ -634,5 +651,37 @@ public class OwnerDashboardPO {
      */
     public void clickOnPropertySekitar() {
         playwright.clickOn(propertySekitar);
+    }
+
+    /**
+     * Click on dropdown kos name
+     */
+    public void clickOnDropdownKosName() {
+        playwright.clickOn(dropdownKosName);
+    }
+
+    /**
+     * Click on toogle entry time kos
+     */
+    public void clickOnToggleEntryTime() {
+        if (toggleEnable.isVisible()) {
+            toggleEntryTime.click();
+        }
+    }
+
+    /**
+     * fill Nearest Amount Time
+     */
+    public void fillNearestAmountTime(String amount, String unitTime) {
+        playwright.clickOn(dropDownJumlahWaktu);
+        Locator amountTime = page.locator("//p[normalize-space()='" + amount + "']");
+        playwright.clickOn(amountTime);
+        playwright.clickOn(nearestTimeSaveButton);
+        playwright.clickOn(dropDownUnitTime);
+        Locator unitTimeNearest = page.locator("//p[normalize-space()='" + unitTime + "']");
+        playwright.clickOn(unitTimeNearest);
+        playwright.clickOn(nearestTimeSaveButton);
+        playwright.clickOn(saveInPopUpButton);
+        playwright.clickOn(saveBssButton);
     }
 }

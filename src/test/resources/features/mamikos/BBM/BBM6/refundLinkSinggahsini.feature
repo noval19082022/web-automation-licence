@@ -1,7 +1,7 @@
 @BBM6
 Feature: Check TnC Refund for kost Singgah sini, apik and ELite
 
-  @TEST_BBM-1193 @TEST_BBM-874 @TEST_BBM-873 @TEST_BBM-1777
+  @TEST_COOP-990 @TEST_COOP-1355 @TEST_COOP-1354 @TEST_COOP-1223
   Scenario: [TnC Refund] [Detail Booking & Kost saya] Check TnC Refund for kost Singgah sini, apik and ELite
     Given user go to mamikos homepage
     When user login as tenant via phone number:

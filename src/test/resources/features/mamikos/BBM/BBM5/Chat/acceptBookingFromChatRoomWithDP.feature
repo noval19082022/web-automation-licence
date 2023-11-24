@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @BBM5 @BBM-3 @BBM-7 @acceptFromChat
+@occupancyAndBilling @OB @BBM5 @COOP-1986 @COOP-1992 @acceptFromChat
 Feature: Accept Booking from Chat room with DP
 
   @deleteContract
@@ -29,7 +29,7 @@ Feature: Accept Booking from Chat room with DP
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_BBM-5 @acceptBooking
+  @TEST_COOP-1992 @acceptBooking
   Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
     Given user go to mamikos homepage
     When user login as owner:
@@ -39,6 +39,8 @@ Feature: Accept Booking from Chat room with DP
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
+    And user click chat button in top bar owner home page
+    And search chat in chatlist "Tenant Automation Accept Chat"
     Then system display title "Belum bayar sewa pertama" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama

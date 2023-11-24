@@ -208,7 +208,6 @@ public class KostDetailSteps {
     // ------------ Kost Map section -----------
     @Then("user want to reached map section and see lihat peta button")
     public void userCanSeeLihatPetaBtn() {
-        playwright.pageScrollToDown(200);
         kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isLihatPetaButtonPresent(), "Lihat Peta Button is not present!");
         Assert.assertTrue(kostDetail.isStaticMapPresent(), "Static Map is not present!");
@@ -222,7 +221,6 @@ public class KostDetailSteps {
 
     @Then("user want to reached map section and see tanya alamat lengkap button")
     public void userCanSeeAlamatLengkapPetaBtn() {
-        playwright.pageScrollToDown(200);
         kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isTanyaAlamatBtnPresent(), "Tanya Alamat Button is not present!");
         Assert.assertTrue(kostDetail.isKostCurrentLocationPresent(), "Kost current position is not present!");
@@ -448,6 +446,12 @@ public class KostDetailSteps {
     public void userCanShareTheKost() {
         kostDetail.dismissFTUE();
         kostDetail.clickOnShareKostButton();
+    }
+
+    @And("user can favorite kost not login")
+    public void userCanFavoriteKostNotLogin() {
+        kostDetail.dismissFTUE();
+        kostDetail.clickOnFavoriteKostButton();
     }
 
     @And("user clicks on Chat pemilik menu")

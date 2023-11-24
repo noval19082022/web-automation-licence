@@ -1,4 +1,4 @@
-@regression @BBM8 @TEST_TENG-12 @TEST_TENG-9 @TEST_TENG-8
+@regression @BBM8 @TEST_COOP-3453 @TEST_COOP-3452 @TEST_COOP-3451
 Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Admin Batalkan Contract

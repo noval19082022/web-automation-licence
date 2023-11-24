@@ -53,46 +53,6 @@ Feature: Check content Mamifoto
     #check at tab Panduan area dan fasilitas
     When owner click tab panduan area
     #Tampak Depan Kost
-    And owner will see that the text "Tampak Depan Kos" is displayed
-    And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
-    And owner will see that the text "Rapikan area tampak depan sebaik mungkin." is displayed
-    #Tampak Depan Kost
-    And owner will see that the text "Tampak Depan Kos" is displayed
-    And owner will see that the text "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." is displayed
-    And owner will see that the text "Rapikan area tampak depan sebaik mungkin." is displayed
-    #Lorong dan Taman
-    And owner will see that the text "Lorong dan Taman" is displayed
-    And owner will see that the text "Rapikan lorong kos, seperti letak tong sampah, tas laundry, sepatu anak kos, dsb." is displayed
-    And owner will see that the text "Rapikan area taman." is displayed
-    And owner will see that the text "Pastikan tidak ada sampah, dan barang-barang lainnya yang menumpuk dan tidak diinginkan." is displayed
-    #Detail
-    And owner will see that the text "Bersihkan dan rapikan dapur umum." is displayed
-    And owner will see that the text "Rapikan parkiran kos sebaik mungkin." is displayed
-    And owner will see that the text "Rapikan ruang tunggu." is displayed
-    And owner will see that the text "Rapikan dan bersihkan ruang laundry." is displayed
-    And owner will see that the text "Rapikan dan bersihkan area lainnya." is displayed
-    And owner will see that the text "Lap kaca/jendela agar terlihat bersih." is displayed
-    And owner will see that the text " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." is displayed
-
-  @FAQMamifotoContent @TEST_LIMO-4656
-  Scenario: [WEB][MamiFoto] Check content Mamifoto FAQ
-    Given owner close pop up panduan
-    When user click question "Jenis foto apa saja yang akan saya dapat?"
-    Then user verify answer text "Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape fasilitas kamar dan bangunan properti Anda, video kos dan foto 360 derajat."
-    When user click question "Apa yang harus disiapkan sebelum sesi foto?"
-    Then user verify answer text "Rapikan kamar kos, kamar mandi dan fasilitas kos lainnya sehingga menarik dan enak dipandang. Anda bisa baca tipsnya di sini."
-    When user click question "Bisakah saya memilih fotografer?"
-    Then user verify answer text "Untuk saat ini Mamikos yang akan memilihkan fotografer untuk Anda sesuai ketersediaan dan kecocokan jadwal. Namun jangan khawatir, semua fotografer dari Mamikos memiliki standar kualitas yang setara bagusnya."
-    When user click question "Apakah foto dan video menampilkan semua tipe kamar di properti saya?"
-    Then user verify answer text "Pengiriman dan penayangan foto & video tergantung pada tipe kamar yang terdaftar di Mamikos. Untuk keterangan lebih lanjut, klik di sini."
-    When user click question "Di mana saja MamiFoto tersedia?"
-    Then user verify answer text "Untuk MamiFoto A: Jadetabek, Bogor Kota, Bandung, Jatinangor, Cimahi, Yogyakarta, Solo, Semarang, Surabaya, Sidoarjo, Denpasar, Makassar. Untuk MamiFoto B: Jadetabek, Bogor kota, Yogyakarta."
-    When user click question "Kapan hasil foto akan ditayangkan?"
-    Then user verify answer text "Hasil foto dan video akan ditayangkan di listing Mamikos Anda serta dikirim ke email Anda setelah sesi foto dalam waktu maksimum 7 hari kerja untuk paket MamiFoto A dan maksimum 14 hari kerja untuk MamiFoto B."
-    When user click question "Bisakah saya mengubah/menambah foto sendiri?"
-    Then user verify answer text "Ya, Anda bisa mengubah maupun menambahkan foto sendiri meski Anda telah menggunakan MamiFoto. Klik di sini untuk lihat cara mengubah dan menambahkan foto kos."
-
-    #Tampak Depan Kost
     Then owner will see title and detail title "Tampak Depan Kos" on panduan panduan persiapan foto or video
     And owner will see title and detail title "Pastikan tidak ada sampah atau barang lainnya yang tidak diinginkan di depan kos supaya terlihat rapi dan menarik." on panduan panduan persiapan foto or video
     And owner will see title and detail title "Rapikan area tampak depan sebaik mungkin." on panduan panduan persiapan foto or video
@@ -109,3 +69,21 @@ Feature: Check content Mamifoto
     And owner will see title and detail title "Rapikan dan bersihkan area lainnya." on panduan panduan persiapan foto or video
     And owner will see title and detail title "Lap kaca/jendela agar terlihat bersih." on panduan panduan persiapan foto or video
     And owner will see title and detail title " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
+
+  @FAQMamifotoContent @TEST_LIMO-4656
+  Scenario: [WEB][MamiFoto] Check content Mamifoto FAQ
+    Given owner close pop up panduan
+    When user click question "Jenis foto apa saja yang akan saya dapat?"
+    Then user verify answer text "Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape fasilitas kamar dan bangunan properti Anda, video kos dan foto 360 derajat."
+    When user click question "Apa yang harus disiapkan sebelum sesi foto?"
+    Then user verify answer text "Rapikan kamar kos, kamar mandi dan fasilitas kos lainnya sehingga menarik dan enak dipandang. Anda bisa baca tipsnya di sini."
+    When user click question "Bisakah saya memilih fotografer?"
+    Then user verify answer text "Untuk saat ini Mamikos yang akan memilihkan fotografer untuk Anda sesuai ketersediaan dan kecocokan jadwal. Namun jangan khawatir, semua fotografer dari Mamikos memiliki standar kualitas yang setara bagusnya."
+    When user click question "Apakah foto dan video menampilkan semua tipe kamar di properti saya?"
+    Then user verify answer text "Pengiriman dan penayangan foto & video tergantung pada tipe kamar yang terdaftar di Mamikos. Untuk keterangan lebih lanjut, klik di sini."
+    When user click question "Di mana saja MamiFoto tersedia?"
+    Then user verify answer text "Untuk MamiFoto A: Jadetabek, Bogor Kota, Bandung, Jatinangor, Cimahi, Yogyakarta, Solo, Semarang, Surabaya, Sidoarjo, Denpasar. Untuk MamiFoto B: Jadetabek, Bogor kota, Yogyakarta."
+    When user click question "Kapan hasil foto akan ditayangkan?"
+    Then user verify answer text "Hasil foto dan video akan ditayangkan di listing Mamikos Anda serta dikirim ke email Anda setelah Anda memilih hasil foto dalam waktu maksimum 7 hari kerja untuk paket MamiFoto A dan maksimum 14 hari kerja untuk MamiFoto B."
+    When user click question "Bisakah saya mengubah/menambah foto sendiri?"
+    Then user verify answer text "Ya, Anda bisa mengubah maupun menambahkan foto sendiri meski Anda telah menggunakan MamiFoto. Klik di sini untuk lihat cara mengubah dan menambahkan foto kos."

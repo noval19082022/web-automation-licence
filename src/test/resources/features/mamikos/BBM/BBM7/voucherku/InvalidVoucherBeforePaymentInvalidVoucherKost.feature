@@ -1,4 +1,4 @@
-@BBM7 @regression @voucher @TEST_BBM-755
+@BBM7 @regression @voucher @TEST_COOP-2658
 Feature: Tenant Apply Invalid Kost Voucher
 
   @continue

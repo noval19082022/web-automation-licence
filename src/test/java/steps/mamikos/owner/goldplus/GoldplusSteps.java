@@ -19,7 +19,6 @@ import pageobject.owner.goldplus.PanduanGoldplusPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
-
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +46,9 @@ public class GoldplusSteps {
 
         if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
+        }
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isGpRadioSelected() && !gpSubmission.isGpPeriodeSelected()) {
+            gpSubmission.clickOnGpSatuFirstRadioButton();
         }
         gpSubmission.clicksOnPilihPaketButton();
         gpSubmission.clicksOnBayarSekarangButton();
@@ -457,4 +459,89 @@ public class GoldplusSteps {
         playwright.waitTillPageLoaded();
         Assert.assertTrue(goldplus.gpPackageText());
     }
+    @And("user view detail list saldo MamiAds")
+    public void user_view_detail_list_saldo_mamiads( DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0;
+        int j = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(goldplus.mamiadsSaldo("saldo", i), content.get("saldo"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("cashback", i), content.get("cashback"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("salePrice", i), content.get("salePrice"));
+            Assert.assertEquals(goldplus.mamiadsSaldo("saving", i), content.get("saving"));
+            try {
+                if (!content.get("disc").isEmpty()) {
+                    Assert.assertEquals(goldplus.mamiadsSaldo("disc", j), content.get("disc"));
+                    Assert.assertEquals(goldplus.mamiadsSaldo("discPriceMamiAds", j), content.get("discPriceMamiAds"));
+                    j++;
+                }
+            } catch (java.lang.NullPointerException ignored) {
+            }
+            i++;
+        }
+    }
+
+    @And("user choose saldo {string} on GoldPlus section")
+    public void user_choose_saldo_on_goldplus_section(String saldo) throws InterruptedException {
+        goldplus.chooseSaldo(saldo);
+    }
+
+    @Then("user verify the {string} and the price is {string} already {string} on Rincian Pembayaran")
+    public void user_verify_the_and_the_price_is_already_on_rincian_pembayaran(String saldo, String rincian, String validation) {
+        switch (validation){
+            case "choosen":
+                Assert.assertEquals(goldplus.getTextSaldoMamiAds(), saldo, "saldo MamiAds  is not match");
+                Assert.assertEquals(goldplus.getTextRinicianMamiAds(), rincian, "rincian MamiAds  is not match");
+                break;
+            case "removed":
+                Assert.assertFalse(goldplus.isRincianNotVisible(), "rincian Mamiads doesn't removed");
+                Assert.assertFalse(goldplus.isSaldoNotVisible(), "saldo MamiAds doesn't removed");
+                break;
+        }
+        goldplus.scrollToUbahPackage();
+    }
+
+    @And("user click on ubah package gold plus button")
+    public void user_click_on_ubah_package_gold_plus_button() throws InterruptedException {
+        goldplus.clickOnUbahGoldPlus();
+    }
+
+    @Then("user unchoose saldo on GoldPlus section")
+    public void user_unchoose_saldo_on_gold_plus_section() throws InterruptedException {
+        goldplus.unCheckedSaldo();
+    }
+
+    @Then("owner wants to process gp crosseling")
+    public void owner_wants_to_process_gp_crosseling() {
+        gpSubmission.clicksOnBayarSekarangButton();
+    }
+
+    @Then("owner validate payment for {string} have {string} and have {string} before choose payment method")
+    public void owner_validate_payment_for_have_and_have_before_choose_payment_method(String product, String mamiads, String fee) throws InterruptedException {
+        goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
+        Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
+        Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"),product);
+        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"),"Belum dipilih");
+        Assert.assertEquals(goldplus.getRincianGP(), product, "GoldPlus  is not match");
+        Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
+        Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
+    }
+
+    @Then("owner wants to paid GP crosseling by click {string} on pop up {string}")
+    public void owner_wants_to_paid_gp_crosseling_by_click_on_pop_up(String action, String titlePopUp) {
+        goldplus.clickOnWidgetGP();
+        Assert.assertTrue(playwright.isTextDisplayed(titlePopUp, 1000));
+        playwright.clickOnTextButton(action);
+
+    }
+    //------ Terminated Contract GP ------//
+    @When("user wants to terminate Goldplus for owner with phone number {string}")
+    public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
+        goldplus.searchPhoneNumberGP(phoneNumber);
+        playwright.clickOnTextButton("Terminate");
+        playwright.clickOnTextButton("Yes, terminate it!");
+        Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
+    }
+
 }

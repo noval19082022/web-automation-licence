@@ -124,8 +124,8 @@
     Scenario Outline: Durasi Biaya in <Jenis Invoice> max 255 characters
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
-        | email stag                   | email prod                   | password  |
-        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+        | email stag  | email prod  | password  |
+        | <Account>   | <Account>   | qwerty123 |
       And admin input nama penyewa in buat invoice manual
         | property name                                                     | tenant name     |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
@@ -137,16 +137,16 @@
       Then durasi biaya should be only contains "max 255 characters" and counter show "255 / 255"
 
       Examples:
-        | Jenis Invoice   |
-        | Biaya Tambahan  |
-        | Biaya Sewa      |
+        | Jenis Invoice   | Account                       |
+        | Biaya Tambahan  | automationpman01@mamikos.com  |
+        | Biaya Sewa      | automationpman02@mamikos.com  |
 
     @TEST_PMAN-5657 @pman-prod @continue
     Scenario: Change Jenis Invoice to Biaya Tambahan When There Are Biaya Sewa
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
         | email stag                   | email prod                   | password  |
-        | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
       And admin input nama penyewa in buat invoice manual
         | property name                                                     | tenant name     |
         | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara           | Indah Trivena   |
@@ -234,13 +234,18 @@
       When admin search by "Nomor Invoice" with value "12345"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
 
-    @continue @TEST_PMAN-6046
+    @TEST_PMAN-6046
     Scenario: Search Nama Penyewa per word with value "asdf yoohoo"
       When admin search by "Nama Penyewa" with value "asdf yoohoo"
       Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
 
     @continue @TEST_PMAN-6213
     Scenario: Check Status Invoice "Paid" in filter
+      Given admin go to mamikos mamipay admin
+      And admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+      When click Invoice Manual menu
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
       And admin ticks "Paid" on the "Status Invoice" dropdown
@@ -260,7 +265,7 @@
       And admin ticks "Expired" on the "Status Invoice" dropdown
       Then "Expired" Status Invoice is displayed
 
-    @continue @TEST_PMAN-6215
+    @TEST_PMAN-6215
     Scenario: Filter Tanggal Mulai and Tanggal Akhir
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
@@ -268,8 +273,13 @@
       And admin selects the date for "tomorrow"
       Then the Tanggal Invoice Dibuat "today" is displayed according to the filter
 
-    @continue @TEST_PMAN-6214
+    @TEST_PMAN-6214 @continue
     Scenario: Check Jenis Biaya Tambahan in filter
+      Given admin go to mamikos mamipay admin
+      When admin login to mamipay:
+        | email stag                   | email prod                   | password  |
+        | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+      And click Invoice Manual menu
       When admin clicks "Main Reset" button on Filter
       And admin clicks Filter in Invoice Manual
       And admin ticks "Biaya Tambahan" on the "Jenis Biaya" dropdown

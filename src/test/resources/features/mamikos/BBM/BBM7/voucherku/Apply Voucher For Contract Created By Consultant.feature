@@ -1,9 +1,9 @@
 @regression @BBM7 @voucher
 
-@TEST_BBM-677 @TEST_BBM-684 @TEST_BBM-686 @TEST_BBM-675
+@TEST_COOP-2532 @TEST_COOP-2534 @TEST_COOP-2535 @TEST_COOP-2531
 Feature: Apply Voucher For Contract Created By Consultant
 
-#  BBM-686
+#  COOP-2535
   @continue
   Scenario: Tenant Apply Voucher with Contract Rules from from Consultant
     Given user go to mamikos homepage
@@ -17,7 +17,7 @@ Feature: Apply Voucher For Contract Created By Consultant
       | AUTOKOSTINV2      | AUTOKOSTINV2      |
     Then tenant can see voucher is applied
 
-#  BBM-684
+#  COOP-2534
   @continue
   Scenario: Tenant Apply Voucher with Contract Rules from Owner
     When tenant set active page to 1
@@ -26,7 +26,7 @@ Feature: Apply Voucher For Contract Created By Consultant
       | AUTOOWNER         | AUTOOWNER         |
     Then Voucher code has been used
 
-#  BBM-677
+#  COOP-2532
   @continue
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
     When tenant set active page to 1
@@ -59,7 +59,7 @@ Feature: Apply Voucher For Contract Created By Consultant
       | AUTOFUNNELOWNER   | AUTOFUNNELOWNER   |
     Then Voucher code has been used
 
-#  BBM-675
+#  COOP-2531
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
     When tenant set active page to 1
     And tenant apply voucher:

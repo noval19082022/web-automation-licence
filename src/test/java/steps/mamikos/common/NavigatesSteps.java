@@ -13,17 +13,22 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.pms.LoginPMSPO;
+import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
 
 public class NavigatesSteps {
     Page page = ActiveContext.getActivePage();
+    Page page1;
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     ForgotPasswordPO forgotPassword = new ForgotPasswordPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
+    VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -70,6 +75,7 @@ public class NavigatesSteps {
     public synchronized void tenantSetActivePageTo(int activePage) {
         List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
         ActiveContext.setActivePage(listPage.get(activePage));
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         playwright.bringPageToView(ActiveContext.getActivePage());
     }
 
@@ -78,6 +84,7 @@ public class NavigatesSteps {
         page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
             ActiveContext.getActiveBrowserContext().newPage();
         });
+        ActiveContext.setActivePage(page);
     }
 
     @When("tenant navigate to riwayat and draf booking")
@@ -186,7 +193,8 @@ public class NavigatesSteps {
 
     @And("owner/user navigates to owner dashboard")
     public void userNavigatesToOwnerDashboard() {
-        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0);
+        loading.waitForLoadingIconDisappear();
     }
 
     @And("tenant navigate to riwayat kos page")
@@ -229,7 +237,6 @@ public class NavigatesSteps {
     public void userNavigateToHelpPage() {
         page.bringToFront();
         playwright.navigateTo(Mamikos.URL + Mamikos.HELP_PAGE, 30000.0, LoadState.LOAD);
-        playwright.hardWait(3);
     }
 
     @And("user navigate to penyewa page")
@@ -303,5 +310,51 @@ public class NavigatesSteps {
     public void adminNavigateTo(String path) {
         playwright.navigateTo(Mamikos.ADMINBANGKRUPUX+path, 30000.0, LoadState.LOAD);
         playwright.waitTillUrlToBe(Mamikos.ADMINBANGKRUPUX+path, 30000.0);
+    }
+
+    @When("admin navigates to Kontrak Kerja Sama")
+    public void admin_navigates_to_Kontrak_Kerja_Sama(){
+        playwright = new PlaywrightHelpers(page);
+        playwright.navigateTo(Mamikos.KONTRAK_KERJA_SAMA, 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigate to SBMPTN page")
+    public void userNavigateToSBMPTNPage() {
+        playwright.navigateTo(Mamikos.URL + "/download-soal/download-soal-sbmptn-tkpa-saintek-soshum-dan-campuran-beserta-pembahasannya-gratis", 30000.0, LoadState.LOAD);
+    }
+
+    @And("user go to mailhog and login")
+    public void userGoToMailhogAndLogin() {
+        verifikasiAkun.navigatesToMailHogAndLogin();
+    }
+
+    @Given("user navigates to promo mamikos")
+    public void userNavigatesToPromoMamikos() {
+        playwright.navigateTo(Mamikos.PROMO_MAMIKOS);
+    }
+
+    @When("admin accsess menu boot LPL")
+    public void admin_accsess_menu_boot_lpl() {
+        playwright.navigateTo(Mamikos.URL + "/admin/lpl-boost", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin bangkrupux navigate to kost menu")
+    public void adminBangkrupuxNavigateToKostMenu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/room?#room", 30000.0, LoadState.LOAD);
+    }
+    @When("admin accsess menu Goldplus Contract")
+    public void admin_accsess_menu_goldplus_contract() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
+    }
+
+    @When("admin access user point menu")
+    public void admin_access_user_point_menu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/point/user/index#point", 30000.0, LoadState.LOAD);
+    }
+    @When("user navigates to ownersini")
+    public void user_navigates_to_ownersini() {
+        playwright.navigateTo(Mamikos.Ownersini_URL,30000.0,LoadState.LOAD);
+        playwright.hardWait(3000);
+        playwright.waitTillPageLoaded();
     }
 }

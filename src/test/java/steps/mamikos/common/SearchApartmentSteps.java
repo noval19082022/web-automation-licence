@@ -114,7 +114,7 @@ public class SearchApartmentSteps {
     @Then("user see displays apartment lists by furniture is {string}")
     public void userSeeDisplaysApartmentListsByFurnitureIs(String furniture) {
         Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
-        for (var listFurniturePeriod : apartment.getApartmentListByFurniture()) {
+        for (var listFurniturePeriod : apartment.getApartmentListByUnitOrFurniture()) {
             String result = JavaHelpers.getStringAfterSpecificChar(listFurniturePeriod, "·");
             Assert.assertEquals(result.trim(), furniture);
         }
@@ -168,5 +168,32 @@ public class SearchApartmentSteps {
             }
         }
         return true;
+    }
+
+    @When("user filter apartment by unit type is {string}")
+    public void userFilterApartmentByUnitTypeIs(String unitType) {
+        apartment.filterByUnit(unitType);
+    }
+
+    @Then("user see apartment lists by unit type is {string}")
+    public void userSeeApartmentListsByUnitTypeIs(String unitType) {
+        Assert.assertTrue(apartment.getApartmentListSize() > 1, "Apartment list is not visible");
+        apartment.getApartmentListByUnitOrFurniture().forEach(
+                UnitAndFurnitureInfo ->
+                        Assert.assertTrue(UnitAndFurnitureInfo.trim().contains(unitType))
+        );
+    }
+
+    @When("user click mamikos logo on apartement list page")
+    public void userClickMamikosLogoOnApartementListPage() {
+        apartment.clickOnMamikosLogo();
+    }
+
+    @When("user select the first apartment on the list apartment page")
+    public void userPickTheFirstApartementOnTheListApartmentPage() {
+        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            apartment.clickOnApartmentListNumber(0);
+        });
+        ActiveContext.setActivePage(page1);
     }
 }

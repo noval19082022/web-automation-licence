@@ -16,20 +16,22 @@ public class MidtransPaymentPO {
     Locator paymentCode;
     Locator vaCodePlaceHolder;
     Locator inquireButton;
-    Locator bayarButtonOnPermataMidtrans;
+    Locator bayarButtonOnMidtrans;
     Locator payButton;
     Locator successTransaction;
+    Locator targetBankSelection;
 
     public MidtransPaymentPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         billerCode = page.locator("#billerCode");
         paymentCode = page.locator("#billKey");
-        vaCodePlaceHolder = page.getByPlaceholder("Virtual Account Number");
+        vaCodePlaceHolder = page.locator("#inputMerchantId");
         inquireButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Inquire"));
         payButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        bayarButtonOnPermataMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
-        successTransaction = page.getByText("Success! Success Payment VA");
+        bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
+        successTransaction = page.getByText("Simulated payment is successful");
+        targetBankSelection = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target Bank selection"));
     }
 
     /**
@@ -56,9 +58,21 @@ public class MidtransPaymentPO {
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
-        playwright.selectDropdownByValue(page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target bank selection")), Bank);
+        playwright.selectDropdownByValue(targetBankSelection, Bank);
         playwright.clickOn(inquireButton);
-        playwright.clickOn(bayarButtonOnPermataMidtrans);
+        playwright.clickOn(bayarButtonOnMidtrans);
+    }
+
+    /**
+     * Payment process midtrans for BNI
+     * @param kodePembayaran payment virtual account
+     */
+    public void paymentForBNI(String kodePembayaran){
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
+        playwright.clickOn(inquireButton);
+        playwright.clickOn(bayarButtonOnMidtrans);
     }
 
     /**

@@ -58,7 +58,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
       | search by              | renter_phone_number    |
       | search value           | 087708777615           |
       | invoice number         | default                |
-      | additional price type  | fixed                   |
+      | additional price type  | fixed                  |
       | additional price title | Automation Biaya Tetap |
       | addtional price value  | 200000                 |
 

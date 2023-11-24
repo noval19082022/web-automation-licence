@@ -21,7 +21,7 @@ Feature: BnB feature with background create booking twice
     And user go to mamikos homepage
     And user logs out as a Tenant user
 
-  @TEST_BBM-891
+  @TEST_COOP-1994
   Scenario: Check Kost saya section when tenant have booking with Reject status but have Booking menunggu konfirmasi
     Given user go to mamikos homepage
     When user login as owner:

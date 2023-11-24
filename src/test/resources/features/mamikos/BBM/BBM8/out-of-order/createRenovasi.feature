@@ -1,4 +1,4 @@
-@arac @pms @TEST_BBM-3724 @BBM8
+@arac @pms @TEST_COOP-1088 @BBM8
 Feature: Create OOO "Renovasi" Type
 
   @continue
@@ -7,8 +7,7 @@ Feature: Create OOO "Renovasi" Type
     When admin login pms :
       | email                 | password    |
       | dhiandra@mamikos.com  | dh14ndr4321 |
-    And admin go to room allotment page
-    And admin search "Kost Singgahsini Auto Listing"
+    And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
       | 1           | 6          |
@@ -16,7 +15,7 @@ Feature: Create OOO "Renovasi" Type
       | room number | start date |
       | 1           | 6          |
 
-#  @TEST_BBM-3724
+#  @TEST_BBM-3724 @continue
   Scenario: Create OOO "Renovasi"
     When admin set out of order on room "1"
     And admin fill OOO data with:

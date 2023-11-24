@@ -1,7 +1,7 @@
 @BBM6
 Feature: [TnC Invoice][Detail Invoice] Check TnC Invoice on Invoice Page
 
-  @TEST_BBM-1197
+  @TEST_COOP-1239
   Scenario: Check TnC Invoice on Invoice Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:

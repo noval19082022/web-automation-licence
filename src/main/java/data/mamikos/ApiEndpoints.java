@@ -4,6 +4,7 @@ import utilities.JavaHelpers;
 
 public class ApiEndpoints {
     private static final String MAMI_API_ENDPOINTS_FILE = "src/main/resources/mamikos-endpoint.properties";
+    private static final String XENDIT_API = "src/main/resources/api-payment.properties";
 
     public static final String STAGING = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "jambu");
     public static final String BAKPAO = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "bakpao");
@@ -36,4 +37,9 @@ public class ApiEndpoints {
     public static final String OWNER_BOOKING_ACCEPT = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerAcceptBooking");
     public static final String OWNER_ROOM_ALLOTMENT = JavaHelpers.getPropertyValue(MAMI_API_ENDPOINTS_FILE, "ownerRoomAllotment");
     // ---- Owner Block ---- //
+
+    // --- XENDIT API ---- //
+    public static final String XENDIT_BASED_API = JavaHelpers.getPropertyValue(XENDIT_API, "xenditApiBasedUrl");
+    public static final String XENDIT_SANDBOX_PATH_URL = JavaHelpers.getPropertyValue(XENDIT_API, "xenditSandboxPathUrl");
+    public static final String XENDIT_TOKEN = JavaHelpers.getPropertyValue(XENDIT_API, "tokenXenditApi");
 }

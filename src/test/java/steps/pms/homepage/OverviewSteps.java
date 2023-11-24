@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.pms.homepage.KontrakKerjaSamaPO;
 import pageobject.pms.homepage.OverviewPO;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class OverviewSteps {
     Page page = ActiveContext.getActivePage();
     OverviewPO overview = new OverviewPO(page);
+    KontrakKerjaSamaPO contract = new KontrakKerjaSamaPO(page);
 
     private List<Map<String, String>> profil;
     private List<Map<String, String>> profilEdit;
@@ -79,5 +81,10 @@ public class OverviewSteps {
         String hospi = penanggungJawab.get(0).get("Hospitality");
 
         overview.editPenanggungJawab(bse,bd,as,hospi);
+    }
+
+    @When("admin go to Kontrak Kerja Sama tab")
+    public void admin_go_to_Kontrak_Kerja_Sama_tab(){
+        contract.clickKontrakKerjaSamaTab();
     }
 }

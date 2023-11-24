@@ -31,6 +31,7 @@ public class OwnerManageBillSteps {
         } else if(month.equalsIgnoreCase("current")) {
             month = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
         }
+        loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
         billManage = ownerDashboard.clickOnKelolaKos();
         billManage.reloadOnEmptyKelolaTagihanPage();
@@ -125,7 +126,7 @@ public class OwnerManageBillSteps {
     }
     @And("user check prices penyewa owner are same to contract at kos saya {string}")
     public void userCheckPricePenyewaOnOwner(String price) {
-        Assert.assertEquals(billManage.isPriceDisplayed(price), "Rp12.000.000 / tahun");
+        Assert.assertEquals(billManage.isPriceDisplayed(price), "Rp1.100.000 / bulan");
     }
 
     @Then("user can see {string} as tenant name, {string} as phone number, {string} status, and photo")

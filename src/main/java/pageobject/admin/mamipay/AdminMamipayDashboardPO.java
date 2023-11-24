@@ -85,7 +85,7 @@ public class AdminMamipayDashboardPO {
      * @return SearchContractPO class
      */
     public SearchContractPO clickOnSearchContract() {
-        searchContract.click();
+        playwright.clickOn(searchContract);
         return new SearchContractPO(page);
     }
 
@@ -141,7 +141,8 @@ public class AdminMamipayDashboardPO {
      *
      */
     public void clickOnFilterTeamDropdown() {
-        filterTeamDropdown.click();
+        playwright.waitFor(filterTeamDropdown);
+        playwright.clickOn(filterTeamDropdown);
     }
 
     /**

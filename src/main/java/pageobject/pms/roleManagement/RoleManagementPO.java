@@ -28,6 +28,7 @@ public class RoleManagementPO {
     Locator simpanButton;
     Locator toast;
     Locator roleNameErrorMessage;
+    Locator permissionChecked;
     //End Tambah Role
 
     //Assign Member
@@ -235,6 +236,16 @@ public class RoleManagementPO {
      */
     public void confirmDeleteMember() {
         playwright.clickOn(confirmHapusButton);
+    }
+
+    /**
+     * Untick permission
+     * @param permission
+     */
+    public void untickPermission(String permission){
+        permissionChecked = page.locator("//div[@class='checkbox bg-c-checkbox bg-c-checkbox--checked'][contains(., '" +permission+ "')]");
+
+        playwright.clickOn(permissionChecked);
     }
 }
 

@@ -92,4 +92,9 @@ public class LevelManagementSteps {
         levelManagementPO.searchLevelName(type);
         levelManagementPO.clickOnSearchButton();
     }
+
+    @When("admin access menu {string} sub menu of management level")
+    public void admin_access_menu_sub_menu_of_management_level(String submenu){
+        levelManagementPO.clickOnSubMenuOfManagementLevel(submenu);
+    }
 }
