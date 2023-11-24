@@ -36,3 +36,11 @@ Feature: Owner - Login
     #user want to see map more detail
     When user want to see more detail kost location
     Then user will see login pop up
+
+  @TEST_COOP-4875 @Automated @DOM @web-covered
+  Scenario: [WEB][Login Owner] using Wrong phone number alfabet
+    Given user go to mamikos homepage
+    When user login as owner with wrong phone number:
+      | phone stag   | phone prod   | password       |
+      | qwerty       | qwerty123    | 1d0lt3stb4ru99 |
+      Then user verify login error messages "Format Nomor Handphone salah."

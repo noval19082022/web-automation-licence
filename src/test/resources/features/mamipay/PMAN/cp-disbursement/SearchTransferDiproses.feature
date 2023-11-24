@@ -2,6 +2,16 @@
 
 Feature: CP Disbursement - Search Transfer Diproses Disbursement
 
+  @TEST_PMAN-8819
+  Scenario: Show disbursement ID Transfer Diproses
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman02@mamikos.com | automationpman02@mamikos.com | qwerty123 |
+    And admin open menu CP Disbursement
+    And admin open "Transfer Diproses" tab
+    Then all disbursement have id
+
   @TEST_PMAN-3302 @continue
   Scenario: Search valid property name
     Given admin go to mamikos mamipay admin
