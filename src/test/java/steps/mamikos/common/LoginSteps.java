@@ -259,4 +259,15 @@ public class LoginSteps {
     public void owner_redirect_to_homepage_mamikos() {
         Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/");
     }
+
+    @When("user login as owner with wrong phone number:")
+    public void userLoginAsOwnerWithWrongPhoneNumber(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasuk()
+                .clickOnPemilikKostButton()
+                .fillPhoneNumber(phone)
+                .fillPassword(password);
+    }
 }
