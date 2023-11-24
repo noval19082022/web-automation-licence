@@ -94,7 +94,7 @@ public class GolplusContractSteps {
         Assert.assertEquals(goldplusContractPO.getStatusInvoiceGoldplusOrder(invoiceStatus),invoiceStatus,"invoice status doesnt match");
     }
 
-    @And("user click create new contract button")
+    @When("user click create new contract button")
     public void user_click_create_new_contract_button() {
         goldplusContractPO.clickOnCreateContractButton();
     }
