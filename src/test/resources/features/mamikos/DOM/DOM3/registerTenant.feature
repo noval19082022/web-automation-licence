@@ -165,7 +165,7 @@ Feature: New Flow Register Tenant
       | rheza@mamikos.com |
       | rheza@rrr.com     |
 
-  @inputNumberRegistered @TEST_DOM-207  @Automated @DOM3 @web-covered
+  @inputNumberRegistered @TEST_DOM-207 @Automated @DOM3 @web-covered
   Scenario: [Web Tenant][Register]input tenant number registered
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -173,3 +173,12 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "Rheza", "08119787884", "at@test.com", "qwerty123"
     Then user verify error messages
       | Nomor handphone ini sudah digunakan untuk verifikasi di akun lain.|
+
+  @TEST_COOP-4876 @Automated @DOM3 @web-covered
+  Scenario: [Web Tenant][Register]Register Tenant - Input password using alfabet only
+    Given user go to mamikos homepage
+    When user clicks on Enter button Tenant
+    And user clicks on Register button
+    And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "at@test.com", "asdqwertyqqq"
+    Then user verify error messages
+      | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
