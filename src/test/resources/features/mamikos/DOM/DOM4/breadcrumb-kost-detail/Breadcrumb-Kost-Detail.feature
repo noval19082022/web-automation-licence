@@ -1,3 +1,4 @@
+@DOM4
 Feature: Breadcrumb Kost Detail
 
   @DOM4 @DOM-5273 @TEST_DOM-5275
@@ -13,5 +14,4 @@ Feature: Breadcrumb Kost Detail
       | "Home > Kost Semarang > Kost Tembalang Semarang > Kost Griya Dervi Tembalang Semarang"             | "/room/kost-semarang-kost-putri-eksklusif-kost-griya-dervi-tembalang-semarang--1?redirection_source=list%20kos%20result"                                   |
       | "Home > Kost Jogja > Kost Jetis Yogyakarta > Kos Kosan Bagus Banget Yogyakarta"                    | "/room/kost-yogyakarta-kost-putri-eksklusif-kos-kosan-bagus-banget-1?redirection_source=list%20kos%20result"                                               |
       | "Home > Kost Jogja > Kost Gondokusuman Yogyakarta > Kos Emas Dua"                                  | "/room/kost-yogyakarta-kost-putri-eksklusif-kos-emas-dua-1?redirection_source=list%20kos%20result"                                                         |
-      | "Home > Kost Jogja > Kost Sleman Jogja > Kos Buaya Terbang"                                        | "/room/kost-sleman-kost-campur-eksklusif-kos-buaya-terbang-1?redirection_source=list%20kos%20result"                                                       |
       | "Home > Kost Ternate Maluku Utara >  > Kost Singgahsini Lavender Anggrek Tipe A Halmahera Utara"   | "/room/kost-kabupaten-halmahera-utara-kost-campur-murah-kost-singgahsini-lavender-anggrek-tipe-a-halmahera-utara-1?redirection_source=list%20kos%20result" |

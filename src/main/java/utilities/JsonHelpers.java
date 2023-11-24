@@ -63,6 +63,10 @@ public class JsonHelpers {
         return jsonElement.getAsJsonObject();
     }
 
+    public static JsonObject createJsonObject(JsonElement jsonElement, String key) {
+        return jsonElement.getAsJsonObject().get(key).getAsJsonObject();
+    }
+
     /**
      * Create JSON Array from JSON Object
      * @param jsonObject JSON Object
@@ -71,5 +75,54 @@ public class JsonHelpers {
      */
     public static JsonArray createJsonArray(JsonObject jsonObject, String key) {
         return jsonObject.getAsJsonArray(key);
+    }
+
+    /**
+     * Create JSON Array from JSON Element
+     * @param jsonElement JSON Element
+     * @return JsonArray
+     */
+    public static JsonArray createJsonArray(JsonElement jsonElement) {
+        return jsonElement.getAsJsonArray();
+    }
+
+    /**
+     * Get JSON Object value as String
+     * @param jsonObject JSON Object
+     * @param key JSON key
+     * @return String
+     */
+    public static String getJsonObjectValueAsString(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsString();
+    }
+
+    /**
+     * Get JSON Object value as Integer
+     * @param jsonObject JSON Object
+     * @param key JSON key
+     * @return Integer
+     */
+    public static Integer getJsonObjectValueAsInt(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsInt();
+    }
+
+    /**
+     * Get JSON Object value as Boolean
+     * @param jsonObject JSON Object
+     * @param key JSON key
+     * @return Boolean
+     */
+    public static boolean getJsonObjectValueAsBoolean(JsonObject jsonObject, String key) {
+        return jsonObject.get(key).getAsBoolean();
+    }
+
+    /**
+     * Get JSON Object value as Object
+     * @param jsonObject JSON Object
+     * @param key JSON key
+     * @return Object
+     */
+    public static Object getJsonObjectValueAsObject(JsonObject jsonObject, String key) {
+        return jsonObject.get(key);
     }
 }

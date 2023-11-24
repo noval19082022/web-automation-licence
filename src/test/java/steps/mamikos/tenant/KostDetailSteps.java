@@ -362,8 +362,8 @@ public class KostDetailSteps {
         if (time.equalsIgnoreCase("tomorrow")) {
             dateTime = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", "en", 0, 1, 0, 0, 0);
         }
-        kostDetail.selectDateForStartBoarding(dateTime);
-        kostDetail.selectRentType(rentType);
+        kostDetail.selectBookingDate(dateTime);
+        kostDetail.selectBookingPeriod(rentType);
     }
 
     @And("user sees booking button")

@@ -25,7 +25,7 @@ public class CreateDeviceIdAndLogin {
     private Map<String, String> createDeviceIdTable;
     private Map<Object, Object> loginBody = new HashMap<>();
 
-    @When("playwright create register device id for tenant with parameters:")
+    @When("playwright create register device id for tenant/owner with parameters:")
     public void playwrightCreateRegisterDeviceIdForTenantWithParameters(DataTable table) {
         createDeviceIdTable = table.asMap(String.class, String.class);
         CreateDeviceId.setDeviceIdentifier(createDeviceIdTable.get("device_identifier"));
@@ -64,5 +64,18 @@ public class CreateDeviceIdAndLogin {
         System.out.println(apiResponse.url());
         Assert.assertEquals(apiResponse.status(), 200);
         System.out.println("Login response is: " + apiResponse.text());
+    }
+
+    @When("owner login trough api")
+    public void ownerLoginTroughApi() throws NoSuchAlgorithmException {
+        var md5Password = JavaHelpers.generateMd5(CreateDeviceId.getPassword());
+        loginBody.put("phone_number", CreateDeviceId.getPhoneNumber());
+        loginBody.put("device_identifier", CreateDeviceId.getDeviceIdentifier());
+        loginBody.put("device_uuid", CreateDeviceId.getDeviceUuid());
+        loginBody.put("device_platform", CreateDeviceId.getDevicePlatform());
+        apiResponse = request.post(ApiEndpoints.V1_PREFIX + ApiEndpoints.OWNER_LOGIN, RequestOptions.create().setData(loginBody).setQueryParam("password", md5Password));
+        System.out.println(apiResponse.url());
+        Assert.assertEquals(apiResponse.status(), 200);
+        System.out.println(apiResponse.text());
     }
 }

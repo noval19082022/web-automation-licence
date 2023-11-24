@@ -90,6 +90,7 @@ public class KostLandingAreaPO {
      */
     public String getResultHeadingText() {
         playwright.waitFor(headingResultText, 30000.0);
+        playwright.hardWait(2000);
         return playwright.getText(headingResultText);
     }
 
@@ -113,6 +114,7 @@ public class KostLandingAreaPO {
      */
     public List<Locator> getKostListLocator() {
         kostRoomCard.first().waitFor(new Locator.WaitForOptions().setTimeout(30000));
+        playwright.hardWait(2000);
         return kostRoomCard.all();
     }
 

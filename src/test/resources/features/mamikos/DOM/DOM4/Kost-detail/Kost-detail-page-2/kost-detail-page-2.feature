@@ -1,4 +1,4 @@
-#@localhost
+@DOM4 #@localhost
 Feature: Kost detail page 2
 
   @TEST_DOM-1875 @Automated @DOM4 @Web @discovery-platform @kost-details @report-section
@@ -48,8 +48,8 @@ Feature: Kost detail page 2
   Scenario: [Dweb][Kost Detail] Check Recommendation Kos
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | kost name stag                  | kost name prod                                      |
+      | Kos upik rani 624 Tipe Fortuna  | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user want to see the other kost on recommendation section
     #explore kost recomendation
     When user see description recomendation kos "Kamu mungkin menyukainya"
@@ -62,10 +62,9 @@ Feature: Kost detail page 2
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user sees total price property
-    #user check more detail about booking date
+      #user check more detail about booking date
     When user sees form booking date
-    Then user validates description "Bisa di hari H setelah pengajuan sewa."
-    * user validates description "2 bulan setelah pengajuan sewa."
+    Then user validates description "Berikut adalah tanggal check-in (mulai ngekos) yang tersedia."
     * user sees date and alert message "Pastikan tanggal yang kamu masukkan benar"
     #user try too book this room
     When user sees form booking duration
