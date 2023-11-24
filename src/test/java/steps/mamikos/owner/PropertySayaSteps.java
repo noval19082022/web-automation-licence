@@ -24,7 +24,7 @@ public class PropertySayaSteps {
     PropertySayaPO propertySaya = new PropertySayaPO(page);
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
-    private JavaHelpers javaHelpers = new JavaHelpers();
+    private final JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
     private String weeklyPrice = null;
     private String monthlyPrice = null;
@@ -850,17 +850,18 @@ public class PropertySayaSteps {
         propertySaya.inputKosName(existingKosName);
     }
 
-    @And("owner click toogle denda")
-    public void ownerClickToogleDenda() {
-        propertySaya.clickToogleDenda();
+    @And("owner click toggle denda")
+    public void ownerClicktoggleDenda() {
+        propertySaya.clicktoggleDenda();
     }
 
-    @And("owner input denda ammount:")
+    @And("owner input denda amount:")
     public void ownerInputDendaAmount(DataTable tables) {
         property = tables.asMaps(String.class, String.class);
         String totalDenda = property.get(0).get("Jumlah Denda");
         String unitTime = property.get(0).get("late pay");
-        propertySaya.fillDendaAmountTime(totalDenda, unitTime);
+        String penalty = property.get(0).get("Penalty");
+        propertySaya.fillDendaAmountTime(totalDenda, unitTime, penalty);
     }
 
     @Then("user cannot see {string} on the list")
@@ -869,4 +870,36 @@ public class PropertySayaSteps {
             assertTrue(propertySaya.isDendaListAppears(), "List Denda is appears");
         }
     }
+
+    @And("owner click toggle deposit")
+    public void ownerClicktoggleDeposit() {
+        propertySaya.clicktoggleDeposit();
+    }
+
+    @And("owner input deposit amount:")
+    public void ownerInputDepositAmount(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String deposit = property.get(0).get("Deposit");
+        propertySaya.fillDepositAmountTime(deposit);
+    }
+
+    @And("owner click toggle other price")
+    public void ownerClicktoggleOtherPrice() {
+        propertySaya.clicktoggleOtherPrice();
+    }
+
+    @And("owner input other price amount:")
+    public void ownerInputOtherPrice(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String namePrice = property.get(0).get("Nama Biaya");
+        String amountPrice = property.get(0).get("Jumlah Biaya");
+        propertySaya.fillOtherPrice(namePrice, amountPrice);
+    }
+
+    @Then("owner can sees other price with name 1234567890abcdefjkl and price Rp100.000 show in the list")
+    public void user_can_sees_new_other_price_additional_price_show_in_the_list() {
+        assertTrue(propertySaya.getActiveOtherPricesName(), "List other price is appears");
+        assertTrue(propertySaya.getActiveOtherPriceNumber(), "List other price is appears");
+    }
+
 }
