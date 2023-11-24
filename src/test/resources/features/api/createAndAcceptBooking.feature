@@ -1,3 +1,6 @@
+#### WARNING ####
+# Owner accept booking api will make your room always booked. Change cannot be undo in UI or API.
+# Need further inspect for accept booking api.
 @createandacceptbookingexample
 Feature: Example Of Create And Accept Booking Through API
 
