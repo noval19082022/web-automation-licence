@@ -1,4 +1,4 @@
-@DOM400
+@DOM40
 Feature: Chat and Chat Optimization
 
   @TEST_DOM-1737
@@ -35,6 +35,7 @@ Feature: Chat and Chat Optimization
     And user click chat in kos detail
     Then user see phone number field and selectable question options :
       | Saya butuh cepat nih. Bisa booking sekarang? |
+      | Apakah ini testing question?                 |
       | Ada diskon untuk kos ini?                    |
       | Masih ada kamar?                             |
       | Alamat kos di mana?                          |
@@ -42,6 +43,7 @@ Feature: Chat and Chat Optimization
       | Boleh tanya-tanya dulu?                      |
       | Bisa pasutri?                                |
       | Boleh bawa hewan?                            |
+      | Bisa sewa harian?                            |
 
   @continue @TEST_DOM-1735
   Scenario: [Dweb][Kost Detail][Chat] Redirect to booking form page when contact kos with instant booking
@@ -126,10 +128,13 @@ Feature: Chat and Chat Optimization
   Scenario: Cancel Booking if Tenant Have Booking
     When user cancel booking
 
-  @continue @TEST_DOM-1740
+  @TEST_DOM-1740
   Scenario Outline: [Dweb][Kost Detail][Chat] Check functionality Lihat detail button on BBK and Non BBK
     Given user go to mamikos homepage
-    When user search for Kost with name "<property>" and selects matching result
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081223344550  | 083176408442  | qwerty123    |
+    And user search for Kost with name "<property>" and selects matching result
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
@@ -142,8 +147,12 @@ Feature: Chat and Chat Optimization
 
   @TEST_DOM-1739
   Scenario: [Dweb][Apartemen Detail][Chat] Check roomcard on apartemen should not display
-    Given user go to apartment details from apartment landing list number 1
-    And tenant set active page to 3
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081223344550  | 083176408442  | qwerty123    |
+    And user go to apartment details from apartment landing list number 1
+    And tenant set active page to 1
     And user click on hubungi pengelola button
     And user select question "Boleh tahu alamat lengkap apartemen ini?"
     And user click send chat from popup

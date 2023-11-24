@@ -410,7 +410,8 @@ public class HomePO {
      *
      */
     public void clickOnSyaratKetentuanButton() {
-        syaratKetentuanButton.click();
+        playwright.clickOn(syaratKetentuanButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -522,7 +523,8 @@ public class HomePO {
      *
      */
     public void clickOnPromosikanIklanAndaButton() {
-        promosikanIklanAndaButton.click();
+        playwright.clickOn(promosikanIklanAndaButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -530,7 +532,8 @@ public class HomePO {
      *
      */
     public void clickOnPusatBantuanButton() {
-        pusatBantuanButton.click();
+        playwright.clickOn(pusatBantuanButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -538,7 +541,8 @@ public class HomePO {
      *
      */
     public void clickOnEmailFooterLink() {
-        emailFooter.click();
+        playwright.clickOn(emailFooter);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -556,6 +560,7 @@ public class HomePO {
      */
     public void clickOnWhatsappNumber() {
         playwright.clickOn(whatsappButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -563,7 +568,8 @@ public class HomePO {
      *
      */
     public void clickOnFacebookButton() {
-        facebookButton.click();
+        playwright.clickOn(facebookButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -571,7 +577,8 @@ public class HomePO {
      *
      */
     public void clickOnTwitterButton() {
-        twitterButton.click();
+        playwright.clickOn(twitterButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -579,9 +586,8 @@ public class HomePO {
      *
      */
     public void clickOnInstagramButton() {
-        Page page1 = page.waitForPopup(() -> {
-            playwright.clickOn(instagramButton);
-        });
+        playwright.clickOn(instagramButton);
+        playwright.hardWait(2000);
     }
 
     /**
