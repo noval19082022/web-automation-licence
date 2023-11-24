@@ -77,7 +77,9 @@ public class OwnerRegisterPO {
         phoneInputText.fill(phone);
         emailInputText.fill(email);
         passwordInputText.fill(password);
+        page.keyboard().press("Backspace");
         passwordConfirmationInputText.fill(password);
+        page.keyboard().press("Backspace");
     }
 
     /**
@@ -86,7 +88,25 @@ public class OwnerRegisterPO {
      * @return error message
      */
     public String getErrorMessages(String error){
-        return playwright.getText(page.locator("//div[normalize-space()='" + error + "']"));
+        return playwright.getText(page.getByText(error));
+    }
+
+    /**
+     * Get error message on form
+     *
+     * @return error message
+     */
+    public String getPasswordErrorMessages(String error){
+        return playwright.getText(page.getByText(error).first());
+    }
+
+    /**
+     * Get error message on form
+     * @param error error messages
+     * @return error message
+     */
+    public String getConfirmPasswordErrorMessages(String error){
+        return playwright.getText(page.getByText(error).nth(1));
     }
 
     /**

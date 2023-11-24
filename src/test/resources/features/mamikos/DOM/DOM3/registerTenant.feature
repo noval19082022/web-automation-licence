@@ -18,6 +18,9 @@ Feature: New Flow Register Tenant
       | Masukkan nama lengkap.    |
       | Masukkan nomor handphone. |
       | Masukkan alamat email.    |
+    Then user verify password error messages
+      | Masukkan password.        |
+    Then user verify confirm password error messages
       | Masukkan password.        |
 
   @blankNameTenant @TEST_DOM-372 @Automated @DOM3 @web-covered
@@ -93,8 +96,8 @@ Feature: New Flow Register Tenant
     When user clicks on Enter button Tenant
     And user clicks on Register button
     And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "at@test.com", " "
-    Then user verify error messages
-      | Masukkan password. |
+    Then user verify password error messages
+      | Masukkan password.        |
 
   @passwordLessThan8Char @TEST_DOM-275 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Input password less than 8 characters

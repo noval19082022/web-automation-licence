@@ -1343,8 +1343,6 @@ public class KostDetailsPO {
      * @return visible true, otherwise false
      */
     public boolean isFormBookingDatePresent() {
-//        playwright.pageScrollUsingCoordinate(0, 500);
-//        playwright.pageScrollInView(bookingDateForm);
         return playwright.waitTillLocatorIsVisible(bookingDateForm);
     }
 
@@ -1352,8 +1350,6 @@ public class KostDetailsPO {
      * Click on booking date form
      */
     public void clickOnBookingDate() {
-//        playwright.pageScrollInView(seeAllPhotoButton);
-//        playwright.waitTillLocatorIsVisible(bookingDateForm);
         playwright.waitFor(bookingDateForm, 5000.0);
         playwright.clickOn(bookingDateForm);
     }
@@ -1365,7 +1361,6 @@ public class KostDetailsPO {
      */
     public String getDescBookingDateText(String desc) {
         Locator description = page.locator("#priceCard").getByText(desc).first();
-//        playwright.pageScrollInView(description);
         return playwright.getText(description).toLowerCase();
     }
 
