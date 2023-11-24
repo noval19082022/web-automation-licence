@@ -45,7 +45,7 @@ Feature: Chat and Chat Optimization
       | Boleh bawa hewan?                            |
       | Bisa sewa harian?                            |
 
-  @continue @TEST_DOM-1735
+  @TEST_DOM-1735
   Scenario: [Dweb][Kost Detail][Chat] Redirect to booking form page when contact kos with instant booking
     When send button become "Ajukan Sewa"
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
