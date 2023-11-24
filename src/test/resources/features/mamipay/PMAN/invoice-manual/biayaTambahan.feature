@@ -1,8 +1,10 @@
-@pman @mamipay @invoice-manual @biayaTambahan
+#Will be update using new biaya tambahan master data
+
+@mamipay @invoice-manual @biayaTambahan
 
 Feature: Invoice Manual - Biaya Tambahan
 
-  @TEST_PMAN-5773 @pman-prod
+  @TEST_PMAN-5773
   Scenario: Periode is disabled when choose Deposit
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -11,7 +13,7 @@ Feature: Invoice Manual - Biaya Tambahan
     And the admin selects "Deposit" in the "Biaya Tambahan"
     Then the Periode Awal and Periode Akhir are disable
 
-  @continue @TEST_PMAN-5697 @pman-prod
+  @continue @TEST_PMAN-5697
   Scenario: Check required fields Nama Biaya in the biaya tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -21,22 +23,22 @@ Feature: Invoice Manual - Biaya Tambahan
     And Checks required fields "-", "today", "today", "1 Hari", "10000"
     Then the error messages "Nama biaya tidak boleh kosong.", "-", "-", "-" are displayed
 
-  @continue @TEST_PMAN-7583 @pman-prod
+  @continue @TEST_PMAN-7583
   Scenario: Check required fields Periode Awal in the Biaya Tambahan
     And Checks required fields "Parkir Mobil", "-", "-", "1 Hari", "10000"
     Then the error messages "-", "Periode awal tidak boleh kosong.", "-", "-" are displayed
 
-  @continue @TEST_PMAN-7584 @pman-prod
+  @continue @TEST_PMAN-7584
   Scenario: Check required fields Periode Akhir in the Biaya Tambahan
     And Checks required fields "Parkir Mobil", "today", "-", "1 Hari", "10000"
     Then the error messages "-", "-", "Periode akhir tidak boleh kosong.", "-" are displayed
 
-  @TEST_PMAN-7585 @pman-prod
+  @TEST_PMAN-7585
   Scenario: Check required fields Jumlah Biaya in the Biaya Tambahan
     And Checks required fields "Parkir Mobil", "today", "today", "1 Hari", "-"
     Then the error messages "-", "-", "-", "Jumlah biaya tidak boleh kosong." are displayed
 
-  @TEST_PMAN-5771 @pman-prod
+  @TEST_PMAN-5771
   Scenario Outline: <button> modal tambah biaya sewa
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -54,7 +56,7 @@ Feature: Invoice Manual - Biaya Tambahan
       | Close   | automationpman01@mamikos.com  |
       | Kembali | automationpman02@mamikos.com  |
 
-  @TEST_PMAN-5962 @pman-prod
+  @TEST_PMAN-5962
   Scenario: delete biaya tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -66,7 +68,7 @@ Feature: Invoice Manual - Biaya Tambahan
     And the admin deletes Invoice Manual
     Then the empty state is display in "Biaya Tambahan" table
 
-  @TEST_PMAN-5595 @pman-prod
+  @TEST_PMAN-5595
   Scenario Outline: Create Biaya Tambahan with Autofilled disburse to owner
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -89,7 +91,7 @@ Feature: Invoice Manual - Biaya Tambahan
       | Penggantian kerusakan/kehilangan fasilitas  | -       | today | tomorrow  | Kursi         | 50000         | Penggantian kerusakan/kehilangan fasilitas (Kursi)  | today         | tomorrow        | Rp50.000              | Tidak               | automationpman01@mamikos.com |
       | Lainnya                                     | sampah  | today | tomorrow  | 1 hari        | 7500          | sampah (1 hari)                                     | today         | tomorrow        | Rp7.500               | Ya                  | automationpman02@mamikos.com |
 
-  @continue @TEST_PMAN-5992 @pman-prod
+  @continue @TEST_PMAN-5992
   Scenario: add multiple biaya tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -108,12 +110,12 @@ Feature: Invoice Manual - Biaya Tambahan
       | Deposit (automation pman)       | 3   |
       | Sampah (automation pman)        | 4   |
 
-  @TEST_PMAN-5964 @pman-prod
+  @TEST_PMAN-5964
   Scenario: delete multiple biaya tambahan
     When admin deletes all "Biaya Tambahan" or sewa on Invoice Manual
     Then the empty state of "Biaya Tambahan" is displayed
 
-  @TEST_PMAN-6055 @pman-prod
+  @TEST_PMAN-6055
   Scenario: Edit Biaya Tambahan
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
