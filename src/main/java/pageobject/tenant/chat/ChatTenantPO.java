@@ -43,7 +43,6 @@ public class ChatTenantPO {
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button track_request_booking bg-c-button--primary bg-c-button--sm'][@disabled]");
         seeAdsButton = page.getByTestId("chatRoomHeaderWrapper");
-//                page.getByText("Lihat Iklan");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa")).nth(1);
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");

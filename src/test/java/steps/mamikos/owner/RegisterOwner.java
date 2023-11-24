@@ -46,6 +46,16 @@ public class RegisterOwner {
         }
     }
 
+    @Then("user verify password error messages")
+    public void userVerifyPasswordErrorMessages(String error) {
+        Assert.assertEquals(ownerRegister.getPasswordErrorMessages(error), error, "Error message is not equal to " + error);
+    }
+
+    @Then("user verify confirm password error messages")
+    public void userVerifyConfirmPasswordErrorMessages(String error) {
+        Assert.assertEquals(ownerRegister.getConfirmPasswordErrorMessages(error), error, "Error message is not equal to " + error);
+    }
+
     @And("user click on show password button")
     public void userClickOnShowPasswordButton() throws InterruptedException {
         ownerRegister.clickPasswordEyeButton();
