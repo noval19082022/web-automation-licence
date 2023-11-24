@@ -1,4 +1,4 @@
-@regression @BBM4 @voucher
+@regression @BBM4 @voucher @checkfailjumat
 Feature: Voucher cannot use invoice settlement
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin

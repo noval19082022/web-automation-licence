@@ -6,27 +6,24 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
-import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.RequestOptions;
-import config.playwright.context.ActiveContext;
 import data.api.AcceptBooking;
-import data.api.CreateBooking;
 import data.mamikos.ApiEndpoints;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
 import org.testng.Assert;
 import utilities.ApiPlaywrightHelpers;
 import utilities.JavaHelpers;
 import utilities.JsonHelpers;
 
-import javax.xml.crypto.Data;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OwnerApiSteps {
     private String listBookingJson = "";

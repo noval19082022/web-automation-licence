@@ -1,7 +1,6 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;

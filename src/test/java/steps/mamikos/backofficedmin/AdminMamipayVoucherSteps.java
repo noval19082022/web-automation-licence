@@ -1,7 +1,6 @@
 package steps.mamikos.backofficedmin;
 
 import com.microsoft.playwright.Page;
-import com.sun.source.tree.AssertTree;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
