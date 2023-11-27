@@ -1,4 +1,4 @@
-@DOM40
+@DOM4
 Feature: Homepage
 
 	@TEST_DOM-4621 @Automated @DOM4 @Web @discovery-platform @homepage
@@ -72,7 +72,7 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection e-mail on homepage
 		Given user go to mamikos homepage
 		When user open e-mail in footer
-		Then user should redirect to Form Bantuan page
+		Then user should redirect to link that contains "https://mamikos.com/tentang-kami?opencomplaintform=1"
 
 	@TEST_DOM-4633 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection whatsapp on homepage

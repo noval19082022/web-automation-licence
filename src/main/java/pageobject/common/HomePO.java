@@ -24,7 +24,6 @@ public class HomePO {
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
     private Locator flashSaleKostListContainer;
-
     private Locator flashSaleSection;
     private Locator flashSaleLihatSemuaButton;
     private Locator flashSalePromoInfoList;
@@ -32,6 +31,7 @@ public class HomePO {
     Locator dikelolaMamikosLabel;
     private Locator kostPromo;
     private Locator lihatPengajuanLainBtn;
+    Locator areaKosTerpopulerTitle;
 
     //header
     Locator helpCenterButton;
@@ -98,6 +98,7 @@ public class HomePO {
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
+        areaKosTerpopulerTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Area Kos Terpopuler"));
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
@@ -389,7 +390,8 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isKebijakanPrivasiTitleDisplayed() {
-        return kebijakanPrivasiTitle.isVisible();
+        return playwright.waitTillLocatorIsVisible(kebijakanPrivasiTitle, 50.0);
+//        return kebijakanPrivasiTitle.isVisible();
     }
 
     /**
@@ -538,7 +540,7 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isFormBantuanTitleDisplayed() {
-        return playwright.waitTillLocatorIsVisible(formBantuanTitle, 10.0);
+        return playwright.waitTillLocatorIsVisible(formBantuanTitle);
     }
 
     /**
@@ -606,8 +608,9 @@ public class HomePO {
      *
      */
     public void clickOnSeeAllPromoOwnerButton() {
-        playwright.pageScrollToDown(3000);
-        seeAllPromoOwner.click();
+        playwright.pageScrollUntilElementIsVisible(areaKosTerpopulerTitle);
+        playwright.clickOn(seeAllPromoOwner);
+        playwright.hardWait(2000);
     }
 
     /**

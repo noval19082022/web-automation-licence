@@ -726,6 +726,7 @@ public class SearchPO {
      * @return String data type list of suggestion result section
      */
     public List<String> getSuggestionText() {
+        playwright.hardWait(1000);
         return suggestionResult.allInnerTexts();
     }
 
