@@ -44,6 +44,8 @@ Feature: Tenant - Login
     And user clicks on pengaturan button
     And user fills password lama "qwerty111"
     And user fills password baru "qwerty123"
+    And user fills ketik ulang password "qwerty123"
+    And user clicks on simpan password button
     And tenant logs out
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
@@ -52,6 +54,8 @@ Feature: Tenant - Login
     And user clicks on pengaturan button
     And user fills password lama "qwerty123"
     And user fills password baru "qwerty111"
+    And user fills ketik ulang password "qwerty111"
+    And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
   @popUpClose @TEST_DOM-374 @Automated @DOM3 @web-covered
