@@ -34,7 +34,6 @@ public class HomePO {
     private Locator lihatPengajuanLainBtn;
 
     //header
-    Locator searchAdsButton;
     Locator helpCenterButton;
     Locator termAndConditionButton;
     Locator promoAdsButton;
@@ -106,10 +105,9 @@ public class HomePO {
 
 
         //header
-        this.searchAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
-        this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        this.promoAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
@@ -240,16 +238,6 @@ public class HomePO {
      */
     public boolean isFlashSaleLihatSemuaButtonVisible() {
         return flashSaleLihatSemuaButton.isVisible();
-    }
-
-
-    /**
-     * Check element search ads button header is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isSearchAdsDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(searchAdsButton, 50.0);
     }
 
     /**

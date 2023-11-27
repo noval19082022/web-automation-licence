@@ -1,4 +1,4 @@
-@DOM4
+@DOM40
 Feature: FTUE Booking Benefit
 
   @ftuebookingbenefit @continue @TEST_DOM-1715

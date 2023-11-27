@@ -44,7 +44,7 @@ public class SearchSteps {
     public void navbarBeforeLoginAppears() {
         Assert.assertTrue(home.isBookingKosDisplayed(), "Booking Kos button not present!");
         Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
-        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
         Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
         Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
         Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
@@ -56,7 +56,7 @@ public class SearchSteps {
 
         Assert.assertTrue(home.isBookingKosDisplayed(), "Booking Kos button not present!");
         Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
-        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
         Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
         Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
         Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");

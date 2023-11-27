@@ -1,4 +1,4 @@
-@DOM4
+@DOM40
 Feature: Navbar Tenant
 
   @TEST_DOM-1857 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-search

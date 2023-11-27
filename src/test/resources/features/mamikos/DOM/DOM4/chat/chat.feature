@@ -1,4 +1,4 @@
-@DOM4
+@DOM40
 Feature: Chat and Chat Optimization
 
   @TEST_DOM-1737
