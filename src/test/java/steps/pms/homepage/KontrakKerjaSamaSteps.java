@@ -325,77 +325,34 @@ public class KontrakKerjaSamaSteps {
         Assert.assertEquals(contract.getJumlahADP(adpAmount), adpAmount);
     }
 
-    @Then("OTA Price/Prices {string} displayed in Rincian Tipe Kamar dan Harga section")
-    public void OTA_Prices_displayed_in_Rincian_Tipe_Kamar_dan_Harga_section(String ota, DataTable tables){
-        String tipeKamar = "", gender = "", jmlKamar = "", otaPrice = "", bulananPrice = "", tigaBulanPrice = "", enamBulanPrice = "";;
+    @Then("OTA Prices are displayed in Rincian Tipe Kamar dan Harga section")
+    public void OTA_Prices_are_displayed_in_Rincian_Tipe_Kamar_dan_Harga_section(DataTable tables) {
+        String tipeKamar = "", gender = "", jmlKamar = "", otaPrice = "", bulananPrice = "", tigaBulanPrice = "", enamBulanPrice = "";
+
         otaTable = tables.asMaps(String.class, String.class);
 
-        if (ota.equalsIgnoreCase("are not")){
-            int i=0;
-            int totalRow = contract.getTotalRow();
-            while (i < totalRow) {
+        int i = 0;
+        int totalRow = contract.getTotalRow();
 
-                tipeKamar = otaTable.get(i).get("Tipe Kamar");
-//            gender = otaTable.get(i).get("Gender");
-//            jmlKamar = otaTable.get(i).get("Jumlah Kamar");
-//            otaPrice = otaTable.get(i).get("Harga Static Harian (OTA)");
-//            bulananPrice = otaTable.get(i).get("Harga Sewa Bulanan");
-//            tigaBulanPrice = otaTable.get(i).get("Harga Sewa 3 Bulan");
-//            enamBulanPrice = otaTable.get(i).get("Harga Sewa 6 Bulan");
+        while (i < totalRow) {
 
-                i++;
+            tipeKamar = otaTable.get(i).get("Tipe Kamar");
+            gender = otaTable.get(i).get("Gender");
+            jmlKamar = otaTable.get(i).get("Jumlah Kamar");
+            otaPrice = otaTable.get(i).get("Harga Static Harian (OTA)");
+            bulananPrice = otaTable.get(i).get("Harga Sewa Bulanan");
+            tigaBulanPrice = otaTable.get(i).get("Harga Sewa 3 Bulan");
+            enamBulanPrice = otaTable.get(i).get("Harga Sewa 6 Bulan");
 
-                Assert.assertEquals(contract.getTipeKamarTable(i+1), tipeKamar, "Tipe Kamar does not match.");
-                System.out.println(contract.getTipeKamarTable(i+1));
-//            Assert.assertEquals(contract.getGenderTable(i-1), gender, "Gender does not match.");
-//            Assert.assertEquals(contract.getJumlahKamarTable(i-1), jmlKamar, "Jumlah Kamar does not match.");
-//            Assert.assertEquals(contract.getOtaPriceTable(i-1), otaPrice, "OTA Price does not match.");
-//            Assert.assertEquals(contract.getBulananPriceTable(i-1), bulananPrice, "Harga Sewa Bulanan does not match.");
-//            Assert.assertEquals(contract.getTigaBulanPriceTable(i-1), tigaBulanPrice, "Harga Sewa 3 Bulan does not match.");
-//            Assert.assertEquals(contract.getEnamBulanPriceTable(i-1), enamBulanPrice, "Harga Sewa 6 Bulan");
-                break;
-            }
+            Assert.assertEquals(contract.getTipeKamarTable(i), tipeKamar, "Tipe Kamar does not match.");
+            Assert.assertEquals(contract.getOtaPriceTable(i), otaPrice, "OTA Price does not match.");
+            Assert.assertEquals(contract.getGenderTable(i), gender, "Gender does not match.");
+            Assert.assertEquals(contract.getJumlahKamarTable(i), jmlKamar, "Jumlah Kamar does not match.");
+            Assert.assertEquals(contract.getBulananPriceTable(i), bulananPrice, "Harga Sewa Bulanan does not match.");
+            Assert.assertEquals(contract.getTigaBulanPriceTable(i), tigaBulanPrice, "Harga Sewa 3 Bulan does not match.");
+            Assert.assertEquals(contract.getEnamBulanPriceTable(i), enamBulanPrice, "Harga Sewa 6 Bulan");
+
+            i++;
         }
-
-
-
-
-//        if (ota.equalsIgnoreCase("are not")){
-//            for (int i=0; i<2; i++){
-//                tipeKamar = otaTable.get(i).get("Tipe Kamar");
-//                gender = otaTable.get(i).get("Gender");
-//                jmlKamar = otaTable.get(i).get("Jumlah Kamar");
-//                otaPrice = otaTable.get(i).get("Harga Static Harian (OTA)");
-//                bulananPrice = otaTable.get(i).get("Harga Sewa Bulanan");
-//                tigaBulanPrice = otaTable.get(i).get("Harga Sewa 3 Bulan");
-//                enamBulanPrice = otaTable.get(i).get("Harga Sewa 6 Bulan");
-//
-//                Assert.assertEquals(contract.getTipeKamarTable(i), tipeKamar, "Tipe Kamar does not match.");
-//                Assert.assertEquals(contract.getGenderTable(i), gender, "Gender does not match.");
-//                Assert.assertEquals(contract.getJumlahKamarTable(i), jmlKamar, "Jumlah Kamar does not match.");
-//                Assert.assertEquals(contract.getOtaPriceTable(i), otaPrice, "OTA Price does not match.");
-//                Assert.assertEquals(contract.getBulananPriceTable(i), bulananPrice, "Harga Sewa Bulanan does not match.");
-//                Assert.assertEquals(contract.getTigaBulanPriceTable(i), tigaBulanPrice, "Harga Sewa 3 Bulan does not match.");
-//                Assert.assertEquals(contract.getEnamBulanPriceTable(i), enamBulanPrice, "Harga Sewa 6 Bulan");
-//            }
-//        } else if (ota.equalsIgnoreCase("is")) {
-//            for (int i=0; i<3; i++){
-//                tipeKamar = otaTable.get(i).get("Tipe Kamar");
-//                gender = otaTable.get(i).get("Gender");
-//                jmlKamar = otaTable.get(i).get("Jumlah Kamar");
-//                otaPrice = otaTable.get(i).get("Harga Static Harian (OTA)");
-//                bulananPrice = otaTable.get(i).get("Harga Sewa Bulanan");
-//                tigaBulanPrice = otaTable.get(i).get("Harga Sewa 3 Bulan");
-//                enamBulanPrice = otaTable.get(i).get("Harga Sewa 6 Bulan");
-//
-//                Assert.assertEquals(contract.getTipeKamarTable(i), tipeKamar, "Tipe Kamar does not match.");
-//                Assert.assertEquals(contract.getGenderTable(i), gender, "Gender does not match.");
-//                Assert.assertEquals(contract.getJumlahKamarTable(i), jmlKamar, "Jumlah Kamar does not match.");
-//                Assert.assertEquals(contract.getOtaPriceTable(i), otaPrice, "OTA Price does not match.");
-//                Assert.assertEquals(contract.getBulananPriceTable(i), bulananPrice, "Harga Sewa Bulanan does not match.");
-//                Assert.assertEquals(contract.getTigaBulanPriceTable(i), tigaBulanPrice, "Harga Sewa 3 Bulan does not match.");
-//                Assert.assertEquals(contract.getEnamBulanPriceTable(i), enamBulanPrice, "Harga Sewa 6 Bulan");
-//            }
-//        }
     }
 }

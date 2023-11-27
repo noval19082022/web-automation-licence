@@ -847,69 +847,143 @@ public class KontrakKerjaSamaPO {
 
     }
 
+    /**
+     * Get String Model Kerja Sama
+     * @param model
+     * @return String Model Kerja Sama
+     */
     public String getModelKerjaSama(String model){
         modelKerjaSamaTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Model Kerja Sama')]//following::div[contains(text(), '" +model+ "')]");
         return playwright.getText(modelKerjaSamaTxt);
     }
 
+    /**
+     * Get String Tipe JP
+     * @param jpType
+     * @return String Tipe JP
+     */
     public String getTipeJP(String jpType){
         tipeJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Tipe Add On JP')]//following::div[contains(text(), '" +jpType+ "')]");
         return playwright.getText(tipeJpTxt);
     }
 
+    /**
+     * Get String Persentase JP
+     * @param jpPrecentage
+     * @return String Persentase JP
+     */
     public String getPersentaseJP(String jpPrecentage) {
         persentaseJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Persentase Add On JP')]/following-sibling::div[contains(text(), '" +jpPrecentage+ "')]");
         return playwright.getText(persentaseJpTxt);
     }
 
+    /**
+     * Get String Jumlah JP
+     * @param jpAmount
+     * @return String Jumlah JP
+     */
     public String getJumlahJP(String jpAmount) {
         jumlahJpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Jumlah Add On JP')]/following-sibling::div[contains(text(), '" +jpAmount+ "')]");
         return playwright.getText(jumlahJpTxt);
     }
 
+    /**
+     * Get String Tipe ADP
+     * @param adpType
+     * @return String Tipe ADP
+     */
     public String getTipeADP(String adpType) {
         tipeAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Tipe Add On ADP')]/following-sibling::div[contains(text(), '" +adpType+ "')]");
         return playwright.getText(tipeAdpTxt);
     }
 
+    /**
+     * Get String Persentase ADP
+     * @param adpPrecentage
+     * @return String Persentase ADP
+     */
     public String getPersentaseADP(String adpPrecentage) {
         persentaseAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Persentase Add On ADP')]/following-sibling::div[contains(text(), '" +adpPrecentage+ "')]");
         return playwright.getText(persentaseAdpTxt);
     }
 
+    /**
+     * Get String Jumlah ADP
+     * @param adpAmount
+     * @return String Jumlah ADP
+     */
     public String getJumlahADP(String adpAmount) {
         jumlahAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Jumlah Add On ADP')]/following-sibling::div[contains(text(), '" +adpAmount+ "')]");
         return playwright.getText(jumlahAdpTxt);
     }
 
+    /**
+     * Get String Tipe Kamar Table
+     * @param indexKamar
+     * @return String Tipe Kamar Table
+     */
     public String getTipeKamarTable(int indexKamar) {
         return playwright.getText(tipeKamarTable.nth(indexKamar));
     }
 
+    /**
+     * Get String Gender Table
+     * @param indexGender
+     * @return String Gender Table
+     */
     public String getGenderTable(int indexGender) {
         return playwright.getText(genderTable.nth(indexGender));
     }
 
+    /**
+     * Get String Jumlah Kamar Table
+     * @param indexJumlahKamar
+     * @return String Jumlah Kamar Table
+     */
     public String getJumlahKamarTable(int indexJumlahKamar) {
         return playwright.getText(jumlahKamarTable.nth(indexJumlahKamar));
     }
 
+    /**
+     * Get String OTA Price Table
+     * @param indexOTA
+     * @return String OTA Price Table
+     */
     public String getOtaPriceTable(int indexOTA) {
         return playwright.getText(otaPriceTable.nth(indexOTA));
     }
 
+    /**
+     * Get String Bulanan Price Table
+     * @param indexBulananPrice
+     * @return String Bulanan Price Table
+     */
     public String getBulananPriceTable(int indexBulananPrice) {
         return playwright.getText(bulananPriceTable.nth(indexBulananPrice));
     }
 
+    /**
+     * Get String 3 Bulanan Price Table
+     * @param index3BulanPrice
+     * @return String 3 Bulanan Price Table
+     */
     public String getTigaBulanPriceTable(int index3BulanPrice) {
         return playwright.getText(tigaBulanPrice.nth(index3BulanPrice));
     }
 
+    /**
+     * Get String 6 Bulanan Price Table
+     * @param index6BulanPrice
+     * @return String 6 Bulanan Price Table
+     */
     public String getEnamBulanPriceTable(int index6BulanPrice) {
         return playwright.getText(enambulanPrice.nth(index6BulanPrice));
     }
 
+    /**
+     * Get Total Row in Rincian Tipe Kamar dan Harga Table
+     * @return Total Row in Rincian Tipe Kamar dan Harga Table
+     */
     public int getTotalRow(){
         return rowRincianTipeKamarDanHarga.count();
     }
