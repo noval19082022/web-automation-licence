@@ -276,6 +276,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isBroadcastChatPackageContentVisible() {
+        playwright.waitFor(broadcastChatPackageContent);
         return playwright.waitTillLocatorIsVisible(broadcastChatPackageContent);
     }
 

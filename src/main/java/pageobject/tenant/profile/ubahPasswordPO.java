@@ -49,7 +49,19 @@ public class ubahPasswordPO {
      */
     public void userFillsPasswordBaru (String password) {
         playwright.fill(passwordBaru, password);
+    }
+
+    /**
+     * Fills Ketik Ulang Password
+     */
+    public void userFillsKetikUlangPassword (String password) {
         playwright.fill(ketikUlangPassword, password);
+    }
+
+    /**
+     * Click on Simpan Button
+     */
+    public void clickSimpanButton () {
         playwright.clickOn(buttonSimpanPassword);
     }
 
@@ -60,6 +72,27 @@ public class ubahPasswordPO {
      */
     public String passwordBerhasilDiubahMessage()throws InterruptedException{
         return playwright.getText(passwordBerhasilDiubah);
+    }
+
+    /**
+     * Empty Old Password
+     */
+    public void userEmptyOldPassword(){
+        playwright.clearText(passwordLama);
+    }
+
+    /**
+     * Empty New Password
+     */
+    public void userEmptyNewPassword(){
+        playwright.clearText(passwordBaru);
+    }
+
+    /**
+     * Empty Ketik Ulang Password
+     */
+    public void userEmptyConfirmationPassword(){
+        playwright.clearText(ketikUlangPassword);
     }
 
 }

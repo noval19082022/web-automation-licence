@@ -21,6 +21,8 @@ public class CpDisbursementPO {
     private Locator resetFilterButton;
     private Locator row;
     private Locator daftarTransferTab;
+    private Locator idText;
+    private Locator headerColumnText;
 
     //Tambah Data Transfer
     private Locator namaPropertyField;
@@ -93,6 +95,8 @@ public class CpDisbursementPO {
         playwright = new PlaywrightHelpers(page);
 
         row = page.locator("tbody tr");
+        idText = page.locator("td:nth-of-type(1)");
+        headerColumnText = page.locator("tr th");
 
         cpDisbursementMenu = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("CP Disbursement"));
         tambahDataTransferButton = page.locator(".open_modal");
@@ -800,5 +804,33 @@ public class CpDisbursementPO {
             }
         }
         return result;
+    }
+
+    /**
+     * Check all id in disbursement list
+     * If there is disbursement that not have id, it will show in console which row it is
+     * @return boolean
+     */
+    public boolean allDisbursementHaveID() {
+        boolean result = true;
+        for (int i=0;i< idText.count();i++){
+            if (playwright.getText(idText.nth(i)).equalsIgnoreCase("")){
+                result = false;
+                //show error in which row, if any
+                System.out.println("Disbursement in row "+(i+1)+"doesn't have ID");
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Get Header Column Name
+     * @param i column number
+     * @return String
+     */
+    public String getHeaderColumnName(int i) {
+        int index = i-1;
+        return playwright.getText(headerColumnText.nth(index));
     }
 }

@@ -112,3 +112,23 @@ Feature: Verification Tenant
     And user open verifikasi akun menu
     And user edit phone number with "898765432166"
     Then user get error message "Maaf nomor sudah terdaftar"
+
+  Scenario: Verification - Email is not correct
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password     |
+      | 083311231113 | 083311231113 | asdf1234     |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    And user change email to "tenantmars@gmail.comm"
+    Then user get error message "Format email tidak sesuai"
+
+  Scenario: Verification - input using alphabet
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password     |
+      | 083311231113 | 083311231113 | asdf1234     |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    And user edit phone number with condition into "qwertyuiop"
+    Then user get error message "Nomor Handphone harus berupa angka."
