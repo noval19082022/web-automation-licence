@@ -62,7 +62,7 @@ public class TenantEditProfilePO {
     Locator reddotOnProfilePicture;
     Locator reddotOnProfileMenu;
     Locator profileMenuButton;
-    Locator deskripsiPekerjaan;
+    Locator pekerjaanDescription;
 
     public TenantEditProfilePO(Page page) {
         this.page = page;
@@ -116,7 +116,7 @@ public class TenantEditProfilePO {
         reddotOnProfilePicture = page.locator("//*[@data-testid=\"navbarRedDot-avatar\"]");
         reddotOnProfileMenu = page.locator("//*[@data-testid=\"navbarRedDot-avatar\"]");
         profileMenuButton = page.locator("//*[@class=\"bg-c-avatar bg-c-avatar--sm\"]");
-        deskripsiPekerjaan = page.getByTestId("jobDescription-input");
+        pekerjaanDescription = page.getByTestId("jobDescription-input");
     }
 
 
@@ -430,8 +430,8 @@ public class TenantEditProfilePO {
      * user fill deskripsi pekerjaan
      */
     public void userFillDeskripsiPekerjaan(String pekerjaan){
-        playwright.clickOn(deskripsiPekerjaan);
-        playwright.forceFill(deskripsiPekerjaan, pekerjaan);
+        playwright.clickOn(pekerjaanDescription);
+        playwright.forceFill(pekerjaanDescription, pekerjaan);
     }
 
     /**
