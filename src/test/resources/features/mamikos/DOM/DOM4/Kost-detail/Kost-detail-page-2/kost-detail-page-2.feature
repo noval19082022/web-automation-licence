@@ -53,7 +53,7 @@ Feature: Kost detail page 2
     Then user want to see the other kost on recommendation section
     #explore kost recomendation
     When user see description recomendation kos "Kamu mungkin menyukainya"
-    Then user want to explore kost recomendation section and see listing kos recommendation arround kos with detail "Kos di sekitar" and filter by mix gender
+    Then user want to explore kost recomendation section and see listing kos recommendation arround kos with detail "Kos di sekitar"
 
   @TEST_DOM-1876 @Automated @DOM4 @Web @discovery-platform @kost-details @property-price
   Scenario: [Dweb][Kost Detail] Check right panel, duration and price

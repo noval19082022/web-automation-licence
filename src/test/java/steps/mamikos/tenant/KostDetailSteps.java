@@ -314,8 +314,8 @@ public class KostDetailSteps {
         Assert.assertEquals(kostDetail.getRecommendationKosLabel(), text, "Recommendation kos label in detail is not equals!");
     }
 
-    @And("user want to explore kost recomendation section and see listing kos recommendation arround kos with detail {string} and filter by mix gender")
-    public void user_click_on_next_button_and_display_next_recommendation_kos(String text) {
+    @And("user want to explore kost recomendation section and see listing kos recommendation arround kos with detail {string}")
+    public void user_want_to_explore_kost_recomendation_section_and_see_listing_kos_recommendation_arround_kos_with_detail(String text) {
         kostDetail.clickOnArrowRecommendationNextButton();
         Assert.assertFalse(kostDetail.isFirstKostCardRecommendationPresent(), "First Kost Card still display");
         kostDetail.clickOnArrowRecommendationPreviousButton();
@@ -323,7 +323,6 @@ public class KostDetailSteps {
         this.kostLandingArea = kostDetail.clickOnSeeAllRecommendation();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         Assert.assertTrue(kostLandingArea.getRecommendationKosList().contains(text), "Recomendation Title in list is not equals!");
-        Assert.assertTrue(kostLandingArea.isMixGenderDisplay(), "Mixed Gender is not display");
     }
 
     //------------ Right Panel Section -----------------

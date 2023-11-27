@@ -123,7 +123,7 @@ public class HomepageSteps {
     @Then("user should redirect to Form Bantuan page")
     public void userShouldRedirectToFormBantuanPage() {
         home = new HomePO(ActiveContext.getActivePage());
-        Assert.assertTrue(home.isFormBantuanTitleDisplayed(), "Form Bantuan page is not present");
+        Assert.assertEquals(home.isFormBantuanTitleDisplayed(), "Form Bantuan page is not present");
     }
 
     @When("user open whatsapp in footer")

@@ -431,3 +431,41 @@ Feature: Edit Profile
     And user choose profession "Karyawan"
     And user click dropdown profession
     Then Dropdown will displayed list office name
+
+  Scenario: [Tenant][profesion - Edit Profile ]choose profesion Karyawan less than 50 character
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+        | phone stag  | phone prod  | password  |
+        | 089786127612  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Karyawan"
+    And user click dropdown pilih instansi "lainnya"
+    And user fills instansi "PT mencari cinta sejatiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii."
+    Then user verify error messages
+      | Maksimal 50 karakter. |
+
+  Scenario: [Tenant][profesion - Edit Profile ]choose profesion Mahasiswa less than 50 character
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089786127612  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Mahasiswa"
+    And user click dropdown pilih instansi "lainnya"
+    And user fill "universitas mencari cinta sejatiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii." on custom university input
+    Then user verify error messages
+      | Maksimal 50 karakter. |
+
+  Scenario: [Tenant][profesion - Edit Profile ]choose profesion Lainnya lessthan 50 character
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 089786127612  | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click on profile card
+    And user choose profession "Lainnya"
+    And user fills masukan deskripsi pekerjaan "PT mencari cinta sejatiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii."
+    Then user verify error messages
+      | Maksimal 50 karakter. |
