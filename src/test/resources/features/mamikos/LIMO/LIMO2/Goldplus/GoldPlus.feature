@@ -32,7 +32,7 @@ Feature: Gold Plus
   Scenario: Make sure detail Check Other Benefits on GP1/2
     Given user click "Ubah"
     When user click "Lihat Detail Manfaat"
-    Then user will see that the text "Manfaat GoldPlus 1" is displayed
+    Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
   @TEST_LIMO-2624
   Scenario: [WEB][Owner Dashboard][Widget GP] Check condition widget GP when waiting for payment
