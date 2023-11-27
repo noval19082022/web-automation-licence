@@ -117,7 +117,7 @@ public class NavigatesSteps {
     @Then("navbar kost before login appears")
     public void navbarKostBeforeLoginAppears() {
         Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
-        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
         Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
         Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
         Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");

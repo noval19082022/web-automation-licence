@@ -108,8 +108,8 @@ public class ChatTenantPO {
      */
     public String getLatestChatText() {
         playwright.pageScrollHeightToBottom();
+        playwright.hardWait(4000);
         playwright.waitFor(latestChat);
-        playwright.hardWait(2000);
         return playwright.getText(latestChat);
     }
 
