@@ -1,4 +1,4 @@
-@DOM3 @lord
+@DOM3
 Feature: New Flow Register Tenant
 
   @navigateToRegisterPageTenant @TEST_DOM-345 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
@@ -182,7 +182,6 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "at@test.com", "asdqwertyqqq", "confirmPassword"
     Then user verify error messages
       | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
-
 
   Scenario: Register Tenant - password confirmation not match
     Given user go to mamikos homepage

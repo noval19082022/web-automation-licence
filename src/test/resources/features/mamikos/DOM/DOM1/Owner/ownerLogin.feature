@@ -45,14 +45,12 @@ Feature: Owner - Login
       | qwerty       | qwerty123    | 1d0lt3stb4ru99 |
       Then user verify login error messages "Format Nomor Handphone salah."
 
-
   Scenario: New Flow Login Owner - Login From Homepage
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
     Then user want to reached map section and see lihat peta button
-    #user want to see map more detail
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
