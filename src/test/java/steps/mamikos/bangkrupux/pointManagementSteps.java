@@ -445,4 +445,20 @@ public class pointManagementSteps {
     public void user_click_button_submit_csv_bulk_adjust_point() {
         pointManagement.clickOnSubmitBulkAdjustPointButton();
     }
+
+    @And("user fill Owner Point Expiry in with {string}")
+    public void user_fill_Owner_Point_Expiry_in_with(String value){
+        pointManagement.fillOwnerPointExpiry(value);
+    }
+
+    @And("user fill Tenant Point Expiry in with {string}")
+    public void user_fill_Tenant_Point_Expiry_in_with(String value){
+        pointManagement.fillTenantPointExpiry(value);
+    }
+
+    @And("user click on Point Expiry Save button")
+    public void user_click_on_Point_Expiry_Save_button() throws InterruptedException{
+       pointManagement.clickOnPointExpirySaveButton();
+    }
+
 }
