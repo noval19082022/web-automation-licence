@@ -1,8 +1,8 @@
-@regression @pman @mamipay @all-invoice-list
+@regression @mamipay @all-invoice-list
 
   Feature: All Invoice List
 
-    @TEST_PMAN-5813 @continue
+    @TEST_PMAN-5813 @pman @continue
     Scenario: Invoice manual in All Invoice List Menu
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -11,12 +11,12 @@
       When admin open menu all invoice list
       Then list contains invoice manual
 
-    @TEST_PMAN-5875 @pman-prod
+    @TEST_PMAN-5875 @pman @pman-prod
     Scenario: Filter Invoice Manual
       And admin filter by order type "Invoice Manual"
       Then system should display only invoice with type "Invoice Manual"
 
-    @TEST_PMAN-5876 @continue
+    @TEST_PMAN-5876
     Scenario: Change status invoice manual
       #create invoice manual biaya sewa
       Given admin go to mamikos mamipay admin
