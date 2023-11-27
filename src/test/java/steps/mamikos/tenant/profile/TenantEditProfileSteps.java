@@ -266,4 +266,10 @@ public class TenantEditProfileSteps {
     public void userCanNotSeePercentageUserProfile() {
         Assert.assertFalse(tenantEditProfile.isPersentageVisible());
     }
+
+    @And("user fills masukan deskripsi pekerjaan {string}")
+    public void userFillsMasukanDeskripsiPekerjaan(String deskripsiPekerjaan) {
+        tenantEditProfile.userFillDeskripsiPekerjaan(deskripsiPekerjaan);
+
+    }
 }

@@ -34,9 +34,9 @@ public class RegisterOwner {
         Assert.assertTrue(ownerRegister.disableButtonRegister(), "Button is enable");
     }
 
-    @And("user fills out registration form without click register {string}, {string}, {string}, {string}")
-    public void userFillsOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password) throws InterruptedException {
-        ownerRegister.fillOutRegistrationFormWithoutClickRegister(name, phone, email, password);
+    @And("user fills out registration form without click register {string}, {string}, {string}, {string}, {string}")
+    public void userFillsOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password, String confrimPassword) throws InterruptedException {
+        ownerRegister.fillOutRegistrationFormWithoutClickRegister(name, phone, email, password, confrimPassword);
     }
 
     @Then("user verify error messages")

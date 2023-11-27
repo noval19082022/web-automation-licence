@@ -70,15 +70,16 @@ public class OwnerRegisterPO {
      * @param phone User Phone Number
      * @param email User Email
      * @param password User Password
+     * @param confrimPassword
      * @throws InterruptedException
      */
-    public void fillOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password) throws InterruptedException{
+    public void fillOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password, String confrimPassword) throws InterruptedException{
         nameInputText.fill(name);
         phoneInputText.fill(phone);
         emailInputText.fill(email);
         passwordInputText.fill(password);
         page.keyboard().press("Backspace");
-        passwordConfirmationInputText.fill(password);
+        passwordConfirmationInputText.fill(confrimPassword);
         page.keyboard().press("Backspace");
     }
 
