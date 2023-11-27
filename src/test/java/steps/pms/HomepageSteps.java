@@ -192,5 +192,10 @@ public class HomepageSteps {
         Date dates = new Date();
         Assert.assertEquals(homepage.getWaktuDiubah(), today.format(dates));
     }
+
+    @When("admin go to Homepage")
+    public void admin_go_to_Homepage(){
+        homepage.clicksHomepage();
+    }
 }
 

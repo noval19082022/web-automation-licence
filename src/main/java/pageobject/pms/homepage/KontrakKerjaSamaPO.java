@@ -148,6 +148,16 @@ public class KontrakKerjaSamaPO {
     Locator hargaPublish6Bulan;
     //End Rincian Tipe Kamar dan Harga
 
+    //---OTA Price---//
+    Locator tipeKamarTable;
+    Locator genderTable;
+    Locator jumlahKamarTable;
+    Locator otaPriceTable;
+    Locator bulananPriceTable;
+    Locator tigaBulanPrice;
+    Locator enambulanPrice;
+    Locator rowRincianTipeKamarDanHarga;
+
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
 
@@ -243,6 +253,16 @@ public class KontrakKerjaSamaPO {
         confirmHapusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
 
         rincianTipeKamarSection = page.locator(".organism-room-price");
+
+        //---OTA Price---//
+        tipeKamarTable = page.locator("tr td:nth-of-type(1)");
+        genderTable = page.locator("tr td:nth-of-type(2)");
+        jumlahKamarTable = page.locator("tr td:nth-of-type(3)");
+        otaPriceTable = page.locator("tr td:nth-of-type(4)");
+        bulananPriceTable = page.locator("tr td:nth-of-type(5)");
+        tigaBulanPrice = page.locator("tr td:nth-of-type(6)");
+        enambulanPrice = page.locator("tr td:nth-of-type(7)");
+        rowRincianTipeKamarDanHarga = page.locator("tbody tr");
     }
 
     /**
@@ -860,5 +880,37 @@ public class KontrakKerjaSamaPO {
     public String getJumlahADP(String adpAmount) {
         jumlahAdpTxt = page.locator("//section[@id='partnership-detail']//div[contains(text(), 'Jumlah Add On ADP')]/following-sibling::div[contains(text(), '" +adpAmount+ "')]");
         return playwright.getText(jumlahAdpTxt);
+    }
+
+    public String getTipeKamarTable(int indexKamar) {
+        return playwright.getText(tipeKamarTable.nth(indexKamar));
+    }
+
+    public String getGenderTable(int indexGender) {
+        return playwright.getText(genderTable.nth(indexGender));
+    }
+
+    public String getJumlahKamarTable(int indexJumlahKamar) {
+        return playwright.getText(jumlahKamarTable.nth(indexJumlahKamar));
+    }
+
+    public String getOtaPriceTable(int indexOTA) {
+        return playwright.getText(otaPriceTable.nth(indexOTA));
+    }
+
+    public String getBulananPriceTable(int indexBulananPrice) {
+        return playwright.getText(bulananPriceTable.nth(indexBulananPrice));
+    }
+
+    public String getTigaBulanPriceTable(int index3BulanPrice) {
+        return playwright.getText(tigaBulanPrice.nth(index3BulanPrice));
+    }
+
+    public String getEnamBulanPriceTable(int index6BulanPrice) {
+        return playwright.getText(enambulanPrice.nth(index6BulanPrice));
+    }
+
+    public int getTotalRow(){
+        return rowRincianTipeKamarDanHarga.count();
     }
 }
