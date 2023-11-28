@@ -798,7 +798,7 @@ Feature: Payment BackOffice Staging
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to package invoice list menu on premium invoice
     And admin bangkrupux search package invoice list premium by "Owner Phone Number" and input field "08119787884"
-    Then admin verify see text "Desta Owner"
+    Then admin verify see text "Desta"
 
   @TEST_DOM-679 @Automated @web-covered
   Scenario: [Owner][Payment premium] Filter invalid owner number premium
@@ -971,7 +971,7 @@ Feature: Payment BackOffice Staging
     Examples:
       | invoice                    | shortlink                                                                                                                              |
       | GP1/20231027/00013487/9781 | https://pay-jambu.kerupux.com/invoice/select-payment/105542?signature=129b2a3a5865d121d8ffe62b6061a248b6aa1a3a05edc2b8b59fa6a7263a2980 |
-      | GP2/20231102/00013558/6962 | https://pay-jambu.kerupux.com/invoice/select-payment/106001?signature=3e8df9c95857f6db388a202e599da2e89dd94bac12074f307cc266eb8c1d560a |
+      | GP2/20231128/00014167/0327 | https://pay-jambu.kerupux.com/invoice/select-payment/108709?signature=afff013fe01147293721330c179fb70c1b749a6301578b1b4054fd3381bd75fc |
 
   @TEST_DOM-660
   Scenario: [BackOffice][Refund] Set transaction refund Failed

@@ -90,7 +90,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user filter apartment by price direction is "Harga Termahal"
     Then user see displays apartment lists by price direction is "Harga Termahal"
 
-  @TEST_DOM-391 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_DOM-391 @TESTSET_UG-6228 @Automated @DOM3 @web-covered @DOM3
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - Play Video
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
