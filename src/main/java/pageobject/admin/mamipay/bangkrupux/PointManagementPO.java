@@ -126,9 +126,9 @@ public class PointManagementPO extends LoginPO {
         submitBulkUpdateButton = page.locator("//div[@id='popup-bulk-blacklist']//button[@class='btn btn-primary']");
         successSaveTnCLabel = page.locator("//div[@class='alert alert-success alert-dismissable']");
         submitBulkAdjustPointButton = page.locator("//div[@id='popup-bulk-adjust-point']//button[@class='btn btn-primary']");
-        ownerPointExpiryInputText = page.locator("//input[@id='owner-point-expiry']");
-        tenantPointExpiryInputText = page.locator("//input[@id='tenant-point-expiry']");
-        pointExpirySaveButton = page.locator("//button[@class='btn btn-primary']");
+        ownerPointExpiryInputText = page.getByLabel("Owner Point Expiry in");
+        tenantPointExpiryInputText = page.getByLabel("Tenant Point Expiry in");
+        pointExpirySaveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
     }
 
     /**

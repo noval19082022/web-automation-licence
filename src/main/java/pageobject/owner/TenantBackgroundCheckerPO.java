@@ -19,9 +19,9 @@ public class TenantBackgroundCheckerPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         lihatProfilTextButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Profil"));
-        coachmark = page.locator("//div[@class='shepherd-content']");
-        titleCoahmark = page.locator("//h3[@class='shepherd-title']");
-        descCochmark = page.locator("//div[@class='shepherd-text']");
+        coachmark = page.getByText("Baru: Lihat profil calon penyewa! Bagi pelanggan GoldPlus 2, Anda bisa cek info ");
+        titleCoahmark = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Baru: Lihat profil calon penyewa!"));
+        descCochmark = page.getByText("Bagi pelanggan GoldPlus 2, Anda bisa cek info dan riwayat pencari kos yang mengh");
 
     }
     public boolean isLihatProfilDisplayed() {
