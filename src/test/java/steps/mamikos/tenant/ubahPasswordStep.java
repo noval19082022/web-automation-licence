@@ -57,4 +57,24 @@ public class ubahPasswordStep {
     public void userEmptyTheConfirmationPasswordField() {
         ubahPasswordPO.userEmptyConfirmationPassword();
     }
+
+    @And("owner fills old password {string}")
+    public void ownerFillsOldPassword(String password) {
+        ubahPasswordPO.userFillsPasswordLama(password);
+    }
+
+    @And("owner fills new password {string}")
+    public void ownerFillsNewPassword(String password) {
+        ubahPasswordPO.ownerFillsPasswordBaru(password);
+    }
+
+    @And("owner empty old password field")
+    public void ownerEmptyOldPasswordField() {
+        ubahPasswordPO.userEmptyOldPassword();
+    }
+
+    @And("owner empty new password field")
+    public void ownerEmptyNewPasswordField() {
+        ubahPasswordPO.ownerEmptyNewPassword();
+    }
 }
