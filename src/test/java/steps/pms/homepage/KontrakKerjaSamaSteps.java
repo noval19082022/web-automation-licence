@@ -26,6 +26,8 @@ public class KontrakKerjaSamaSteps {
     private List<Map<String, String>> additionalFee;
     private List<Map<String, String>> detailListing;
 
+    private List<Map<String, String>> otaTable;
+
     @When("admin see profil pemilik")
     public void admin_see_profil_pemilik() {
         contract.clickKontrakKerjaSamaTab();
@@ -321,5 +323,36 @@ public class KontrakKerjaSamaSteps {
         Assert.assertEquals(contract.getTipeADP(adpType), adpType);
         Assert.assertEquals(contract.getPersentaseADP(adpPrecentage), adpPrecentage);
         Assert.assertEquals(contract.getJumlahADP(adpAmount), adpAmount);
+    }
+
+    @Then("OTA Prices are displayed in Rincian Tipe Kamar dan Harga section")
+    public void OTA_Prices_are_displayed_in_Rincian_Tipe_Kamar_dan_Harga_section(DataTable tables) {
+        String tipeKamar = "", gender = "", jmlKamar = "", otaPrice = "", bulananPrice = "", tigaBulanPrice = "", enamBulanPrice = "";
+
+        otaTable = tables.asMaps(String.class, String.class);
+
+        int i = 0;
+        int totalRow = contract.getTotalRow();
+
+        while (i < totalRow) {
+
+            tipeKamar = otaTable.get(i).get("Tipe Kamar");
+            gender = otaTable.get(i).get("Gender");
+            jmlKamar = otaTable.get(i).get("Jumlah Kamar");
+            otaPrice = otaTable.get(i).get("Harga Static Harian (OTA)");
+            bulananPrice = otaTable.get(i).get("Harga Sewa Bulanan");
+            tigaBulanPrice = otaTable.get(i).get("Harga Sewa 3 Bulan");
+            enamBulanPrice = otaTable.get(i).get("Harga Sewa 6 Bulan");
+
+            Assert.assertEquals(contract.getTipeKamarTable(i), tipeKamar, "Tipe Kamar does not match.");
+            Assert.assertEquals(contract.getOtaPriceTable(i), otaPrice, "OTA Price does not match.");
+            Assert.assertEquals(contract.getGenderTable(i), gender, "Gender does not match.");
+            Assert.assertEquals(contract.getJumlahKamarTable(i), jmlKamar, "Jumlah Kamar does not match.");
+            Assert.assertEquals(contract.getBulananPriceTable(i), bulananPrice, "Harga Sewa Bulanan does not match.");
+            Assert.assertEquals(contract.getTigaBulanPriceTable(i), tigaBulanPrice, "Harga Sewa 3 Bulan does not match.");
+            Assert.assertEquals(contract.getEnamBulanPriceTable(i), enamBulanPrice, "Harga Sewa 6 Bulan");
+
+            i++;
+        }
     }
 }
