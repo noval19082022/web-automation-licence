@@ -70,7 +70,6 @@ public class PointManagementPO extends LoginPO {
     Locator submitBulkAdjustPointButton;
     Locator ownerPointExpiryInputText;
     Locator tenantPointExpiryInputText;
-    Locator pointExpirySaveButton;
 
 
 
@@ -128,7 +127,6 @@ public class PointManagementPO extends LoginPO {
         submitBulkAdjustPointButton = page.locator("//div[@id='popup-bulk-adjust-point']//button[@class='btn btn-primary']");
         ownerPointExpiryInputText = page.getByLabel("Owner Point Expiry in");
         tenantPointExpiryInputText = page.getByLabel("Tenant Point Expiry in");
-        pointExpirySaveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
     }
 
     /**
@@ -783,14 +781,6 @@ public class PointManagementPO extends LoginPO {
      */
     public void fillTenantPointExpiry(String value){
         playwright.fill(tenantPointExpiryInputText, value);
-    }
-
-    /**
-     * Click On Point Expiry Save button
-     * @throws InterruptedException
-     */
-    public void clickOnPointExpirySaveButton() throws InterruptedException {
-        playwright.clickOn(pointExpirySaveButton);
     }
 
 }

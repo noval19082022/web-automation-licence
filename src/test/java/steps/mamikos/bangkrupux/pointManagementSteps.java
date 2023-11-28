@@ -458,7 +458,7 @@ public class pointManagementSteps {
 
     @And("user click on Point Expiry Save button")
     public void user_click_on_Point_Expiry_Save_button() throws InterruptedException{
-       pointManagement.clickOnPointExpirySaveButton();
+       pointManagement.clickOnSaveButton();
     }
 
 }
