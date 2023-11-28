@@ -20,7 +20,7 @@ Feature: Edit Profile
     And user choose verification by WA
     Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
-  @forgotPasswordTenantInvalidOtp @DOM3
+  @forgotPasswordTenantInvalidOtp
   Scenario: [Web Tenant][Forgot Password]Use Invalid OTP
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -30,7 +30,7 @@ Feature: Edit Profile
     And user input invalid code otp "1111"
     Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
 
-  @forgotPasswordTenantRegisterViaFacebook @DOM30
+  @forgotPasswordTenantRegisterViaFacebook
   Scenario: [Web Tenant][Forgot Password]Tenants (register via facebook) forget the password in tenant feature
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
