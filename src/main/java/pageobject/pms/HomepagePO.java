@@ -13,6 +13,7 @@ public class HomepagePO {
     private final Page page;
     private final PlaywrightHelpers playwright;
 
+    Locator homepageMenu;
     Locator actionBtn;
     Locator seeDetailBtn;
     Locator roomAllotmentBtn;
@@ -88,6 +89,8 @@ public class HomepagePO {
     public HomepagePO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
+
+        homepageMenu = page.getByTestId("homepageSidebarMenu");
         actionBtn = page.getByTestId("table-action-trigger").first();
         seeDetailBtn = page.locator("//*[contains(text(),'Lihat Detail')]").first();
         roomAllotmentBtn = page.locator("//*[contains(text(),'Ketersediaan Kamar')]").first();
@@ -522,5 +525,9 @@ public class HomepagePO {
         playwright.backToPreviousPage();
 
         playwright.clickOn(overviewTab);
+    }
+
+    public void clicksHomepage() {
+        playwright.clickOn(homepageMenu);
     }
 }
