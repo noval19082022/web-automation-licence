@@ -95,5 +95,4 @@ Feature: Create Kos From Home
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner in admin kos owner page
-    And admin bangkrupux search kost owner "kos Automation TEST" in admin kos owner page
     And admin delete kos

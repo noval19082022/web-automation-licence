@@ -785,6 +785,17 @@ public class PlaywrightHelpers {
         assertThat(locator).isDisabled();
     }
 
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param linkText target locator
+     *                   default timeout
+     */
+    public void clickOnLinkButton(String linkText) {
+        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText));
+    }
+
+
     //---- Assert Part ----\\
 
 }
