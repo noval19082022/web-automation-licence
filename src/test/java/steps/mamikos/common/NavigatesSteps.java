@@ -357,4 +357,9 @@ public class NavigatesSteps {
         playwright.hardWait(3000);
         playwright.waitTillPageLoaded();
     }
+
+    @When("admin access point expiry menu")
+    public void admin_access_point_expiry_menu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/point/expiry#point", 30000.0, LoadState.LOAD);
+    }
 }

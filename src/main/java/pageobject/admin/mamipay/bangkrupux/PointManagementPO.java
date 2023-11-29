@@ -68,6 +68,8 @@ public class PointManagementPO extends LoginPO {
     Locator successSaveTnCLabel;
     Locator chooseFileButton;
     Locator submitBulkAdjustPointButton;
+    Locator ownerPointExpiryInputText;
+    Locator tenantPointExpiryInputText;
 
 
 
@@ -123,6 +125,8 @@ public class PointManagementPO extends LoginPO {
         submitBulkUpdateButton = page.locator("//div[@id='popup-bulk-blacklist']//button[@class='btn btn-primary']");
         successSaveTnCLabel = page.locator("//div[@class='alert alert-success alert-dismissable']");
         submitBulkAdjustPointButton = page.locator("//div[@id='popup-bulk-adjust-point']//button[@class='btn btn-primary']");
+        ownerPointExpiryInputText = page.getByLabel("Owner Point Expiry in");
+        tenantPointExpiryInputText = page.getByLabel("Tenant Point Expiry in");
     }
 
     /**
@@ -761,4 +765,22 @@ public class PointManagementPO extends LoginPO {
     public void clickOnSubmitBulkAdjustPointButton(){
        playwright.clickOn(submitBulkAdjustPointButton);
     }
+
+
+    /**
+     * Fill Owner Point Expiry
+     * @param value input string that will be used to fill Owner Point Expiry
+     */
+    public void fillOwnerPointExpiry(String value){
+        playwright.fill(ownerPointExpiryInputText, value);
+    }
+
+    /**
+     * Fill Tenant Point Expiry
+     * @param value input string that will be used to fill Tenant Point Expiry
+     */
+    public void fillTenantPointExpiry(String value){
+        playwright.fill(tenantPointExpiryInputText, value);
+    }
+
 }

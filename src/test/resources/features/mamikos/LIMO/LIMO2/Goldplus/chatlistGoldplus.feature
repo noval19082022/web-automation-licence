@@ -7,7 +7,7 @@ Feature: Owner Experiment- GP Chat List
     When user login as owner:
       | phone stag     | phone prod | password  |
       | 08167382940591 | 0          | qwerty123 |
-    And owner click "Nanti Saja"
+    And owner click close icon pop up
     * user click chat button in top bar owner home page
     Then owner will see card box contains "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."
