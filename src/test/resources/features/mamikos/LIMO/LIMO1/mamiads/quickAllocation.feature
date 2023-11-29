@@ -11,7 +11,7 @@ Feature: Quick Allocation on Properti Saya
       | 083176408449 | 0          | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
-    When owner select filter active mamiads
+    And owner choose filter iklan saya to "Iklan Aktif"
     Then user cek status toggle iklan "Kos Jajajadooo Segun Sorong" is "Naik"
     * user verify the toggle iklan "Kos Jajajadooo Segun Sorong" is "on"
     * user verify the wording iklan penuh "Kos Jajajadooo Segun Sorong" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"

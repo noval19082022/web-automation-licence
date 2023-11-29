@@ -2,6 +2,7 @@ package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -16,20 +17,17 @@ public class NaikkanIklanSteps {
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
     @Then("user cek status toggle iklan {string} is {string}")
-    public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) throws InterruptedException {
-        if (posisiIklan.equals("Naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Naik", "Posisi iklan doesn't available");
-            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+    public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) {
+        if (posisiIklan.equals("naik")) {
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName,posisiIklan), "Naik", "Posisi iklan doesn't available");
         } else if (posisiIklan.equals("tidak-naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Tidak Naik", "Posisi iklan available");
-            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName,posisiIklan), "Tidak Naik", "Posisi iklan available");
         }
     }
 
     @Then("user verify the toggle iklan {string} is {string}")
     public void user_verify_the_toggle_iklan_is(String adsName, String toggleStatus) throws InterruptedException {
-        Assert.assertTrue(naikkanIklanPO.getToggleStatus(toggleStatus), "toggle doesn't match!");
-        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+        Assert.assertTrue(naikkanIklanPO.getToggleStatus(adsName,toggleStatus), "toggle doesn't match!");
     }
 
     @Then("user verify the wording iklan penuh {string} is {string}")
@@ -55,11 +53,6 @@ public class NaikkanIklanSteps {
                 Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), "Kamar penuh. Silakan nonaktifkan jika tidak ingin menaikkan posisi iklan ini.");
                 break;
         }
-    }
-
-    @When("owner select filter active mamiads")
-    public void owner_select_filter_active_mamiads() {
-       naikkanIklanPO.clickOnFilterActive();
     }
 
     @Then("user verify the redirection to list mamiads balance")
@@ -144,5 +137,47 @@ public class NaikkanIklanSteps {
         naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
         Assert.assertEquals(naikkanIklanPO.getTextTitlePopUp(), "Yakin ingin menonaktifkan MamiAds untuk iklan ini?", "Title pop up doesn't match!");
         naikkanIklanPO.clickOnNonaktifkanAds();
+    }
+
+    @And("user can see filter iklan saya is {string}")
+    public void user_can_see_filter_iklan_saya_is(String filterText) {
+        Assert.assertTrue(naikkanIklanPO.getTeksFilter().contains(filterText), "Filter doesn't match!");
+    }
+
+    @And("owner choose filter iklan saya to {string}")
+    public void ownerChooseFilterIklanSayaTo(String filter) {
+        naikkanIklanPO.clickOnFilterActive(filter);
+    }
+
+    @And("user verify the wording iklan {string} is {string}")
+    public void userVerifyTheWordingIklanIs(String adsName, String adsStatusDesc) {
+        Assert.assertEquals(naikkanIklanPO.getAdsStatusDesc(adsName), adsStatusDesc, "Ads status description doesn't match!");
+    }
+
+    @And("user verify the wording anggaran of iklan {string} is {string}")
+    public void user_verify_the_wording_anggaran_of_iklan_is(String adsName, String anggaranDesc) throws InterruptedException {
+        Assert.assertEquals(naikkanIklanPO.getTextAnggaranDesc(adsName), anggaranDesc, "Anggaran description doesn't match!");
+    }
+
+    @When("user click {string} toggle the {string}")
+    public void user_click_toggle_the(String toggleStatus, String adsName) {
+        naikkanIklanPO.clickToggleTheAds(toggleStatus, adsName);
+    }
+
+    @Then("user verify the pop up switch {string} toggle iklan {string} is displayed")
+    public void user_verify_the_pop_up_switch_toggle_iklan_is_displayed(String action, String adsName) {
+        int balanceMa = naikkanIklanPO.getSaldoMaText();
+        if (action.equals("on") && balanceMa >= 5000){
+            Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp(action), "Jika Anda menonaktifkannya, posisi iklan " + adsName + " tidak dinaikkan di hasil pencarian.");
+        } else if (action.equals("off") && balanceMa >= 5000) {
+            Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp(action), "Anggaran MamiAds untuk " + adsName + " akan diaktifkan");
+        } else{
+            Assert.assertEquals(naikkanIklanPO.getTitleBeliSaldoPopUp(),"Anda belum bisa menaikkan iklan.");
+        }
+    }
+
+    @When("user click {string} button on pop up switch toggle iklan")
+    public void userClickButtonOnPopUpSwitchToggleIklan(String actionButton) {
+        naikkanIklanPO.clickActionButtonInPopUp(actionButton);
     }
 }
