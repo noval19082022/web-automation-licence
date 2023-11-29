@@ -166,12 +166,16 @@ public class PropertySayaPO {
     Locator deleteOtherPrice;
     Locator confirmDeleteOtherPrice;
     Locator detailButton;
-
-
+    Locator selesaiButton;
+    Locator bbkDataButton;
+    Locator pengelolaCheckbox;
+    Locator pengelolaNameField;
+    Locator pengelolaPhoneField;
 
     public PropertySayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+
         kostDropdown = page.getByText("Cari kos Anda disini...");
         searchKostTextbox = page.getByPlaceholder("Search");
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
@@ -290,6 +294,11 @@ public class PropertySayaPO {
         deleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         confirmDeleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
+        selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
+        bbkDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
+        pengelolaCheckbox = page.locator("label").filter(new Locator.FilterOptions().setHasText("Anda ingin tambahkan data pengelola? checkmark")).locator("span");
+        pengelolaNameField = page.locator("input[type=text]").nth(2);
+        pengelolaPhoneField = page.locator("input[type=text]").nth(3);
     }
 
     /**
@@ -1925,4 +1934,41 @@ public class PropertySayaPO {
         playwright.clickOn(toggleOtherPrice);
     }
 
+    /**
+     * Click on Selesai button add kos when add kos from duplicate kos
+     *
+     *
+     */
+    public void clickOnSelesaiAddKos() {
+        playwright.clickOn(selesaiButton);
+    }
+
+    /**
+     * Click add pengelola checkbox
+     * @param addDataPengelola
+     *
+     */
+    public void selectPengelola(String addDataPengelola) {
+        if (addDataPengelola.equals("yes")){
+            playwright.clickOn(pengelolaCheckbox);
+        }
+    }
+
+    /**
+     * Input pengelola name
+     * @param pengelolaName
+     *
+     */
+    public void inputPengelolaName(String pengelolaName) {
+        playwright.forceFill(pengelolaNameField, pengelolaName);
+    }
+
+    /**
+     * Input pengelola phone
+     * @param pengelolaPhone
+     *
+     */
+    public void inputPengelolaPhone(String pengelolaPhone) {
+        playwright.forceFill(pengelolaPhoneField, pengelolaPhone);
+    }
 }

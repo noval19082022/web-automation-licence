@@ -81,6 +81,7 @@ public class LoginSteps {
             .fillPhoneNumber(phone)
             .fillPassword(password)
             .clickOnLoginButton();
+        Mamikos.setPhoneOwner(phone);
     }
 
     @When("user login as owner from mamiads landing page:")

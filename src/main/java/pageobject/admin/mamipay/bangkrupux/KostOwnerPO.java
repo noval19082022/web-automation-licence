@@ -21,7 +21,8 @@ public class KostOwnerPO {
     Locator firstDeleteButton;
     Locator firstRejectKosButton;
     Locator reasonRejectonCheckbox;
-
+    Locator phoneOwnerSearch;
+    Locator rejectBbkButton;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -29,12 +30,11 @@ public class KostOwnerPO {
         kosNameSearch = page.getByPlaceholder("Nama Kost", new Page.GetByPlaceholderOptions().setExact(true));
         firstBBKDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
-        firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
-        rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
         firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
         firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
         firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
+        phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
     }
 
     /**
@@ -66,8 +66,10 @@ public class KostOwnerPO {
 
     /**
      * Click on first radio button
+     *
      */
     public void clickOnFirstRadioButton() {
+        firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         playwright.pageScrollUntilElementIsVisible(firstRejectReasonRadioButton);
         playwright.clickOn(firstRejectReasonRadioButton);
     }
@@ -76,6 +78,7 @@ public class KostOwnerPO {
      * Click on Reject BBK button
      */
     public void clickOnRejectButton() {
+        rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
         playwright.clickOn(rejectButton);
     }
 
@@ -166,5 +169,38 @@ public class KostOwnerPO {
      */
     public void clickOnSendReject(String text) {
         playwright.clickOnTextButton(text);
+    }
+
+    /**
+     * Click Reject button on request BBK form
+     *
+     *
+     */
+    public void clickOnRejectBBK() {
+        rejectBbkButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reject").setExact(true));
+        playwright.clickOn(rejectBbkButton);
+    }
+
+    /**
+     * Click tombol BBK Data button and open new tab Data BBK owner
+     * @param textLink
+     * @return activePage
+     */
+    public Page clickOnBBKData(String textLink){
+        page = page.waitForPopup(() -> {
+            playwright.clickOnLinkButton(textLink);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
+    }
+
+    /**
+     * Input phone number owner and press enter
+     * @param phoneOwner
+     *
+     */
+    public void searchPhoneOwner(String phoneOwner) {
+        phoneOwnerSearch.fill(phoneOwner);
+        page.keyboard().press("Enter");
     }
 }

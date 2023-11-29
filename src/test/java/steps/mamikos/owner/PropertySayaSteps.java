@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
-    PropertySayaPO propertySaya = new PropertySayaPO(page);
+    PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
     private final JavaHelpers javaHelpers = new JavaHelpers();
@@ -636,6 +636,7 @@ public class PropertySayaSteps {
     @And("owner click add another type from kos {string}")
     public void ownerClickAddAnotherTypeFromKos(String kosName) {
         propertySaya.clickAddAnotherTypeFromKos(kosName);
+        Mamikos.setPropertyKosName(kosName);
     }
 
     @And("owner click {string} in add new room type pop up and click next")
@@ -650,7 +651,16 @@ public class PropertySayaSteps {
 
     @When("owner input room type with {string}")
     public void ownerInputRoomTypeWith(String text) {
-        propertySaya.inputRoomTypeName(text);
+        if (text.equals("{random_text}")){
+            int length = 3;
+            boolean useLetters = true;
+            boolean useNumbers = true;
+            String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+            roomTypePrefix = "Tipe " + generatedString.toUpperCase();
+            propertySaya.inputRoomTypeName(roomTypePrefix);
+        } else {
+            propertySaya.inputRoomTypeName(text);
+        }
     }
 
     @And("see next button disable")
@@ -739,7 +749,6 @@ public class PropertySayaSteps {
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
         roomTypePrefix = "Tipe " + generatedString.toUpperCase();
         propertySaya.inputRoomTypeNameInPopUp(roomTypePrefix);
-        Mamikos.setPropertyKosName(roomTypePrefix);
     }
 
     @And("owner click lanjutkan button in bottom of add kos page")
@@ -902,4 +911,19 @@ public class PropertySayaSteps {
         assertTrue(propertySaya.getActiveOtherPriceNumber(), "List other price is appears");
     }
 
+    @And("owner click Selesai in success page add kos")
+    public void ownerClickSelesaiInSuccessPageAddKos() {
+        propertySaya.clickOnSelesaiAddKos();
+    }
+
+    @And("owner input data pengelola as expected:")
+    public void ownerInputDataPengelolaAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.selectPengelola(table.get(0).get("add data pengelola"));
+        if (table.get(0).get("add data pengelola").equals("yes")) {
+            propertySaya.inputPengelolaName(table.get(0).get("pengelola name"));
+            propertySaya.inputPengelolaPhone(table.get(0).get("pengelola phone"));
+        }
+    }
 }
