@@ -25,6 +25,7 @@ public class MamiAdsPO {
     private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
+
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
     private Locator dibatasiHarianRadioButton;
