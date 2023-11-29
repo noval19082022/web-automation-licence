@@ -55,7 +55,7 @@ public class RefundPO {
         this.selectedBankForRefund = page.getByRole(AriaRole.COMBOBOX).getByRole(AriaRole.TEXTBOX).first();
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
         this.searchBankName = page.locator("input[type='search']");
-        this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp200 (Kesalahan Owner)");
+        this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp1000 (Kesalahan Owner)");
         this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
         this.inputRekeningNumber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));

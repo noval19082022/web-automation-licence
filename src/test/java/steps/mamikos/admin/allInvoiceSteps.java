@@ -144,7 +144,11 @@ public class allInvoiceSteps {
     @And("admin click checkbox not in mamipay")
     public void adminClickCheckboxNotInMamipay() throws InterruptedException {
         invoicePO.checklistNotInMamipay();
+    }
 
+    @And("admin change mamipay status to {string}")
+    public void adminChangeMamipayStatusTo(String status) throws InterruptedException {
+        invoicePO.setStatusPaidOrUnpaid(status);
     }
 
     @And("user click see log button")
