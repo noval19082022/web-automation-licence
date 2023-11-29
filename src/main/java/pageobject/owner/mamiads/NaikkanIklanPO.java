@@ -259,7 +259,12 @@ public class NaikkanIklanPO {
         } else {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
         }
-        playwright.clickOn(switchToggleLocator);
+        if (switchToggleLocator.isChecked()){
+            switchToggleLocator.uncheck();
+        }
+        else {
+            switchToggleLocator.check();
+        }
     }
 
     /**
