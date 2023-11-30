@@ -219,9 +219,20 @@ public class KostDetailsPO {
     private Locator timeConditionText;
     private Locator tncRefundPoint;
 
-
     String datePickXpath = "//span[not(contains(@class, 'disabled'))][contains(text(), '%s')]";
     Locator kosDetailPage;
+
+    //------------waiting list----------//
+    private Locator fullRoomText;
+    private Locator waitingListButton;
+    private Locator anotherTypeButton;
+    private Locator anotherKosButton;
+    private Locator anotherTypeSection;
+    private Locator anotherKosSection;
+
+    //-------------kost booking validation----------//
+    private Locator popupValidationText;
+    private Locator btnBukaProfil;
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -420,6 +431,18 @@ public class KostDetailsPO {
         this.tncRefundtitleText = page.locator("//p[contains(.,'Syarat dan Ketentuan Refund')]");
         this.refundPolicyMamikos = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan refund Mamikos"));
         this.timeConditionText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("ketentuan waktu berikut"));
+
+        //---------------------waiting list------------------------//
+        this.fullRoomText = page.locator("//p[@class=\"detail-kost-overview__availability-text bg-c-text bg-c-text--body-2\"]");
+        this.waitingListButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification Ikut Daftar Tunggu"));
+        this.anotherTypeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat tipe lain"));
+        this.anotherKosButton  = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat kos lain"));
+        this.anotherTypeSection = page.locator("//*[@class='detail-container__kost-types']");
+        this.anotherKosSection = page.locator("//*[@class='related-box__title']");
+
+        //-------------------kost booking validation---------------//
+        this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
+        this.btnBukaProfil = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buka profil saya"));
     }
 
     /**
@@ -1906,5 +1929,90 @@ public class KostDetailsPO {
             playwright.hardWait(500);
         }
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
+    }
+
+    /**
+     * Check the visibility of full room text
+     * @return boolean
+     */
+    public boolean isFullRoomVisible() {
+        return fullRoomText.isVisible();
+    }
+
+    /**
+     * Check the visibility of waiting list button
+     * @return boolean
+     */
+    public boolean isWaitingListButtonVisible(){
+        return waitingListButton.isVisible();
+    }
+
+    /**
+     * Check the visibility of lihat tipe lain button
+     * @return boolean
+     */
+    public boolean isAnotherTypeButtonVisible(){
+        return anotherTypeButton.isVisible();
+    }
+
+    /**
+     * Click lihat tipe lain button
+     */
+    public void clickAnotherTypeButton(){
+        playwright.clickOn(anotherTypeButton);
+    }
+
+    /**
+     * Check the visibility of lihat kost lain button
+     * @return boolean
+     */
+    public boolean isAnotherKosButtonVisible(){
+        return anotherKosButton.isVisible();
+    }
+
+    /**
+     * Click lihat kost lain button
+     */
+    public void clickAnotherKosButton(){
+        playwright.clickOn(anotherKosButton);
+    }
+
+    /**
+     * Check the visibility of tanya pemilik button
+     * @return boolean
+     */
+    public boolean isTanyaPemilikVisible(){
+        return tanyaPemilikKostLink.isVisible();
+    }
+
+    /**
+     * Check the visibility of tipe lain section
+     * @return boolean
+     */
+    public boolean isAnotherTypeSectionVisible() {
+        return anotherTypeSection.isVisible();
+    }
+
+    /**
+     * Check the visibility of kamu mungkin menyukainya section
+     * @return boolean
+     */
+    public boolean isAnotherKosSectionVisible(){
+        return anotherKosSection.isVisible();
+    }
+
+    /**
+     * Check the visibility of kost booking validation example : Kost ini khusus mahasiswa
+     * @return boolean
+     */
+    public boolean isPopupValidationVisible(){
+        return popupValidationText.isVisible();
+    }
+
+    /**
+     * Click on Buka profile button on popup validation
+     */
+    public void clickBukaProfile(){
+        playwright.clickOn(btnBukaProfil);
     }
 }

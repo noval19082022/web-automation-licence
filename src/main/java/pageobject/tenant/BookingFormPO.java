@@ -38,6 +38,7 @@ public class BookingFormPO {
     Locator seeCompleteBtn;
     Locator cancelBookingBtn;
     Locator yesCancelBookingBtn;
+    Locator pengajuanSewaText;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -69,6 +70,7 @@ public class BookingFormPO {
         this.seeCompleteBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnyachevron-down"));
         this.cancelBookingBtn = page.getByTestId("detailBookingCardCancel_btn");
         this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
+        this.pengajuanSewaText = page.locator("//*[@id='bookingContainer']");
     }
 
     /**
@@ -301,5 +303,13 @@ public class BookingFormPO {
      */
     public void clickOkPahamButton() {
         okPahamButton.click();
+    }
+
+    /**
+     * Check the visibility of booking form
+     * @return String
+     */
+    public boolean getPengajuanSewatext() {
+        return pengajuanSewaText.isVisible();
     }
 }
