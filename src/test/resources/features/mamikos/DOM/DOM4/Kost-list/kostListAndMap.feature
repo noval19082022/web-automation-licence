@@ -1,3 +1,4 @@
+@DOM4 @essentialTest
 Feature: Kost List and Map
 
   @TEST_DOM-1842 @Automated @DOM4 @Web @discovery-platform @filter @kos-card-top-fac @listing-kos

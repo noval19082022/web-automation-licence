@@ -1,4 +1,4 @@
-@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization
+@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization @essentialTest
 Feature: Subscribe GP from all entry point
 
   @TEST_LIMO-2501

@@ -1,4 +1,4 @@
-@BBM5
+@BBM5 @essentialTest
 Feature: BnB feature with background booking kost - reject booking
 
   Scenario: booking kost
