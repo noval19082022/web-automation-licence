@@ -79,3 +79,33 @@ Feature: Owner Dashboard GP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "088112233454"
+
+  @TEST_LIMO-2579 @TEST_LIMO-2580
+  Scenario Outline: Owner can't see widget GP and info untuk anda for GP at owner dashboard when doesnt have property active or apartment only
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | <ownerPhone> | <password> |
+    Then widget daftar GP is not appears
+    And info untuk anda section GP "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! " is not appears
+    And owner should successfully log out
+    Examples:
+    #owner doesnt have property
+    #owner only have 1 kost non active
+    #owner only have apartement
+    #owner only have kost draft
+      | ownerPhone   | password  |
+      | 0876623622   | qwerty123 |
+      | 08164225288  | 12345678  |
+      | 085687543611 | 12345678  |
+      | 085213497843 | 12345678  |
+
+
+
+
+
+
+
+
+
+

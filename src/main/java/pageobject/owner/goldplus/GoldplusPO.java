@@ -534,4 +534,23 @@ public class GoldplusPO {
         playwright.fill(searchPhoneNumber,phoneNumberGP);
         playwright.clickOn(buttonSearchContract);
     }
+
+    /**
+     * Check widget GP is appear or not
+     */
+    public boolean isWidgetGPAppear() {
+        playwright.hardWait(3000);
+        return  playwright.waitTillLocatorIsVisible(widgetGP);
+    }
+
+
+    /**
+     * Check Info Untuk Anda on owner dashboard
+     *
+     */
+    public boolean isInfoUntukAndaAppear(String infoUntukAndaMessage) {
+        playwright.waitTillPageLoaded(3000.0);
+        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+       return playwright.waitTillLocatorIsVisible(infoUntukAndaOption);
+    }
 }
