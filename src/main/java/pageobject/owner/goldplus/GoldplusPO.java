@@ -47,6 +47,9 @@ public class GoldplusPO {
     Locator rincianFee;
     Locator searchPhoneNumber;
     Locator buttonSearchContract;
+    Locator detailManfaatGP1;
+    Locator benefitGP;
+    Locator detailManfaatGP2;
 
 
     public GoldplusPO(Page page) {
@@ -88,7 +91,8 @@ public class GoldplusPO {
         rincianFee = page.getByText("Biaya Transaksi");
         searchPhoneNumber = page.getByPlaceholder("Keyword");
         buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
-
+        detailManfaatGP1 = page.getByText("Lihat Detail Manfaatchevron-right").nth(1);
+        detailManfaatGP2 = page.getByText("Lihat Detail Manfaatchevron-right").first();
     }
 
     /**
@@ -552,5 +556,30 @@ public class GoldplusPO {
         playwright.waitTillPageLoaded(3000.0);
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
        return playwright.waitTillLocatorIsVisible(infoUntukAndaOption);
+    }
+
+    /**
+     * Click on detail manfaat GP 1
+     */
+    public void clickOnDetailManfaatGP1() {
+        playwright.clickOn(detailManfaatGP1);
+    }
+
+    /**
+     * Get benefit GP
+     * @return String benefit GP
+     */
+    public boolean getTextManfaatGP(String benefit) {
+        benefitGP = page.getByText(benefit);
+        playwright.waitTillLocatorIsVisible(benefitGP);
+        return playwright.waitTillLocatorIsVisible(benefitGP);
+
+    }
+
+    /**
+     * Click on detail manfaat GP 2
+     */
+    public void clickOnDetailManfaatGP2() {
+        playwright.clickOn(detailManfaatGP2);
     }
 }
