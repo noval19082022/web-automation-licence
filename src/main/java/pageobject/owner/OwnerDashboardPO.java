@@ -1,6 +1,5 @@
 package pageobject.owner;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -104,7 +103,7 @@ public class OwnerDashboardPO {
         ownerUserName = page.locator(".c-mk-header__username");
         mamikosLogo = page.locator(".c-mk-header__logo");
         bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
-        promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        promoAdsButton = page.locator("//span[.='Promosikan Iklan Anda']");
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         propertySayaDropdownMenu = page.locator("//div[@class='form-control dropdown-toggle']");
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));

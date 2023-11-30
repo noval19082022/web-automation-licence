@@ -338,4 +338,10 @@ public class CpDisbursementSteps {
     public void disbursement_data_contains_status(String status) {
         Assert.assertTrue(cpdisbursement.isDisbursementContainsStatus(status),"Data not contains status :"+status);
     }
+
+    @Then("all disbursement have id")
+    public void all_disbursement_have_id() {
+        Assert.assertEquals(cpdisbursement.getHeaderColumnName(1),"Id");
+        Assert.assertTrue(cpdisbursement.allDisbursementHaveID());
+    }
 }

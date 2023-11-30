@@ -1,7 +1,6 @@
 package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
@@ -16,7 +15,7 @@ public class KostOwnerSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostOwnerPO kostOwner = new KostOwnerPO(page);
-    PropertySayaPO propertySaya = new PropertySayaPO(page);
+    Page page1;
 
     @And("admin bangkrupux search kost owner {string} in admin kos owner page")
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName) {
@@ -25,7 +24,8 @@ public class KostOwnerSteps {
 
     @And("admin reject BBK kos")
     public void adminRejectBBKKos() {
-        playwright.navigateTo(Mamikos.URL + "/admin/booking/owner/reject-reason/1000032089r", 30000.0, LoadState.LOAD);
+        playwright.hardWait(3000.0);
+        kostOwner.clickOnRejectBBK();
         kostOwner.clickOnFirstRadioButton();
         kostOwner.clickOnRejectButton();
     }
@@ -77,5 +77,15 @@ public class KostOwnerSteps {
     @And("user click {string} in send reject pop up")
     public void userClickInSendRejectPopUp(String text) {
         kostOwner.clickOnSendReject(text);
+    }
+
+    @And("admin click on {string} link button")
+    public void adminClickOnLinkButton(String textLink) {
+      page1 = kostOwner.clickOnBBKData(textLink);
+    }
+
+    @And("admin bangkrupux search phone owner in admin kos owner page")
+    public void adminBangkrupuxSearchPhoneOwnerInAdminKosOwnerPage() {
+        kostOwner.searchPhoneOwner(Mamikos.getPhoneOwner());
     }
 }

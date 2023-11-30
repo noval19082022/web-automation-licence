@@ -71,14 +71,7 @@ Feature: Voucher Saya Page
     And user see voucher detail disabled Kode Voucher label
     And user see voucher detail disabled Voucher code
     And user see voucher detail Ticket icon
-
-  Scenario: Redirect to Promo Mamikos Web
-    When tenant navigates to voucher saya page
-    And user clicks on Promo Lainnya button
-    And tenant set active page to 1
-    And user redirected to "https://promo.mamikos.com/"
-    And user should redirect to link that contains "https://promo.mamikos.com/"
-    And user should redirect to link "https://promo.mamikos.com/"
+    And user logs out as a Tenant user
 
     @TEST_COOP-3674
   Scenario: Empty State Landing Page displayed

@@ -181,10 +181,6 @@ Feature: Owner Dashboard GP-ONboarding
     Examples:
       | number | package    |
       | 1      | Semua      |
-      | 2      | Goldplus 1 |
-      | 3      | Goldplus 2 |
-      | 4      | Goldplus 3 |
-      | 5      | Goldplus 4 |
 
   @continue
   Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List

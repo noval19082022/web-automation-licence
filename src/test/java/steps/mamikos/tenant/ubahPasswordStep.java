@@ -32,4 +32,49 @@ public class ubahPasswordStep {
     public void userSeeSuccessfullyChangedPassword(String berhasilubahpassword) throws InterruptedException {
         Assert.assertEquals(ubahPasswordPO.passwordBerhasilDiubahMessage(), berhasilubahpassword, "Error message is not equal too " + berhasilubahpassword);
     }
+
+    @And("user fills ketik ulang password {string}")
+    public void userFillsKetikUlangPassword(String password) {
+        ubahPasswordPO.userFillsKetikUlangPassword(password);
+    }
+
+    @And("user clicks on simpan password button")
+    public void userClicksOnSimpanPasswordButton() {
+        ubahPasswordPO.clickSimpanButton();
+    }
+
+    @And("user empty the old password field")
+    public void userEmptyTheOldPasswordField() {
+        ubahPasswordPO.userEmptyOldPassword();
+    }
+
+    @And("user empty the new password field")
+    public void userEmptyTheNewPasswordField() {
+        ubahPasswordPO.userEmptyNewPassword();
+    }
+
+    @And("user empty the confirmation password field")
+    public void userEmptyTheConfirmationPasswordField() {
+        ubahPasswordPO.userEmptyConfirmationPassword();
+    }
+
+    @And("owner fills old password {string}")
+    public void ownerFillsOldPassword(String password) {
+        ubahPasswordPO.userFillsPasswordLama(password);
+    }
+
+    @And("owner fills new password {string}")
+    public void ownerFillsNewPassword(String password) {
+        ubahPasswordPO.ownerFillsPasswordBaru(password);
+    }
+
+    @And("owner empty old password field")
+    public void ownerEmptyOldPasswordField() {
+        ubahPasswordPO.userEmptyOldPassword();
+    }
+
+    @And("owner empty new password field")
+    public void ownerEmptyNewPasswordField() {
+        ubahPasswordPO.ownerEmptyNewPassword();
+    }
 }

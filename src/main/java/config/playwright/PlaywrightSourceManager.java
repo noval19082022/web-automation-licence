@@ -8,7 +8,6 @@ import lombok.Setter;
 public class PlaywrightSourceManager {
     @Getter @Setter
     private static Browser localBrowser;
-
     @Getter @Setter
     private static Playwright localPlaywright;
 }

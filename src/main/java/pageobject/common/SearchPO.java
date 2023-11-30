@@ -108,8 +108,9 @@ public class SearchPO {
     public KostDetailsPO searchByText(String search) {
         setProperty(search);
         inputSearch.fill(search);
-        Locator firstResultKostName = page.locator("label").filter(new Locator.FilterOptions().setHasText(search));
-        firstResultKostName.click();
+        Locator firstResultKostName = page.locator("[data-testid='suggestionBox-roomList'] > a:nth-of-type(1)");
+        playwright.waitFor(firstResultKostName);
+        playwright.clickOn(firstResultKostName);
         return new KostDetailsPO(page);
     }
 
@@ -149,6 +150,7 @@ public class SearchPO {
         searchKost.click();
         inputSearch.fill(search);
         suggestionAreaOnTheSearchList.click();
+        playwright.hardWait(2000);
     }
 
     /**
@@ -724,6 +726,7 @@ public class SearchPO {
      * @return String data type list of suggestion result section
      */
     public List<String> getSuggestionText() {
+        playwright.hardWait(1000);
         return suggestionResult.allInnerTexts();
     }
 

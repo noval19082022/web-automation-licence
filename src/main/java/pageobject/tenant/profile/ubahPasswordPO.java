@@ -15,6 +15,7 @@ public class ubahPasswordPO {
     Locator ketikUlangPassword;
     Locator buttonSimpanPassword;
     Locator passwordBerhasilDiubah;
+    Locator passwordBaruOwner;
 
     public ubahPasswordPO(Page page) {
         this.page = page;
@@ -26,6 +27,7 @@ public class ubahPasswordPO {
         ketikUlangPassword = page.getByPlaceholder("Ketik ulang password");
         buttonSimpanPassword = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         passwordBerhasilDiubah = page.locator("//*[contains(text(),'Password berhasil diubah')]");
+        passwordBaruOwner = page.getByPlaceholder("Password minimal 8 karakter");
     }
 
     /**
@@ -49,7 +51,26 @@ public class ubahPasswordPO {
      */
     public void userFillsPasswordBaru (String password) {
         playwright.fill(passwordBaru, password);
+    }
+
+    /**
+     * Fills Ketik Ulang Password
+     */
+    public void userFillsKetikUlangPassword (String password) {
         playwright.fill(ketikUlangPassword, password);
+    }
+
+    /**
+     * Owner Fills Password baru
+     */
+    public void ownerFillsPasswordBaru(String password) {
+        playwright.fill(passwordBaruOwner, password);
+    }
+
+    /**
+     * Click on Simpan Button
+     */
+    public void clickSimpanButton () {
         playwright.clickOn(buttonSimpanPassword);
     }
 
@@ -62,4 +83,31 @@ public class ubahPasswordPO {
         return playwright.getText(passwordBerhasilDiubah);
     }
 
+    /**
+     * Empty Old Password
+     */
+    public void userEmptyOldPassword(){
+        playwright.clearText(passwordLama);
+    }
+
+    /**
+     * Empty New Password
+     */
+    public void userEmptyNewPassword(){
+        playwright.clearText(passwordBaru);
+    }
+
+    /**
+     * Empty Ketik Ulang Password
+     */
+    public void userEmptyConfirmationPassword(){
+        playwright.clearText(ketikUlangPassword);
+    }
+
+    /**
+     * Owner empty New Password
+     */
+    public void ownerEmptyNewPassword(){
+        playwright.clearText(passwordBaruOwner);
+    }
 }

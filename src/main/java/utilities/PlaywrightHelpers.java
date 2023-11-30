@@ -785,6 +785,26 @@ public class PlaywrightHelpers {
         assertThat(locator).isDisabled();
     }
 
+    /**
+     * Click on a desired locator based on button text
+     *
+     * @param linkText target locator
+     *                   default timeout
+     */
+    public void clickOnLinkButton(String linkText) {
+        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText));
+    }
+
+    /**
+     * Verify radio button is check
+     * @param locator
+     */
+    public boolean isRadioButtonChecked(Locator locator){
+        return locator.isChecked();
+    }
+
+
+
     //---- Assert Part ----\\
 
 }

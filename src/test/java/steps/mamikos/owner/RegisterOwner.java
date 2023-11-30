@@ -34,9 +34,9 @@ public class RegisterOwner {
         Assert.assertTrue(ownerRegister.disableButtonRegister(), "Button is enable");
     }
 
-    @And("user fills out registration form without click register {string}, {string}, {string}, {string}")
-    public void userFillsOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password) throws InterruptedException {
-        ownerRegister.fillOutRegistrationFormWithoutClickRegister(name, phone, email, password);
+    @And("user fills out registration form without click register {string}, {string}, {string}, {string}, {string}")
+    public void userFillsOutRegistrationFormWithoutClickRegister(String name, String phone, String email, String password, String confrimPassword) throws InterruptedException {
+        ownerRegister.fillOutRegistrationFormWithoutClickRegister(name, phone, email, password, confrimPassword);
     }
 
     @Then("user verify error messages")
@@ -44,6 +44,16 @@ public class RegisterOwner {
         for (int i = 0; i < errorMessage.size(); i++) {
             Assert.assertEquals(ownerRegister.getErrorMessages(errorMessage.get(i)), errorMessage.get(i), "Error message is not equal to " + errorMessage.get(i));
         }
+    }
+
+    @Then("user verify password error messages")
+    public void userVerifyPasswordErrorMessages(String error) {
+        Assert.assertEquals(ownerRegister.getPasswordErrorMessages(error), error, "Error message is not equal to " + error);
+    }
+
+    @Then("user verify confirm password error messages")
+    public void userVerifyConfirmPasswordErrorMessages(String error) {
+        Assert.assertEquals(ownerRegister.getConfirmPasswordErrorMessages(error), error, "Error message is not equal to " + error);
     }
 
     @And("user click on show password button")

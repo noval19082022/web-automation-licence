@@ -26,6 +26,20 @@ public class Requirement {
     }
 
     /**
+     * Create signature key for mamikos api Authorization header
+     * @param method GET, POST, PUT, DELETE
+     * @param path api endpoint
+     * @param xGitTime X-GIT-Time header
+     * @return signature key
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     */
+    public static String createSignatureKey(String method, String path, String xGitTime) throws NoSuchAlgorithmException, InvalidKeyException {
+        var data = method.toUpperCase() + " " + path + " " +  xGitTime;
+        return JavaHelpers.bytesToHexString(JavaHelpers.generateHmacSha256(ApiEndpoints.SECRET_KEY, data));
+    }
+
+    /**
      * Create standard headers for mamikos api
      * @param signature signature key
      * @return headers map
@@ -34,6 +48,19 @@ public class Requirement {
         headers.put("Authorization", "GIT "+ signature + ":" + CreateDeviceId.getDeviceToken());
         headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME);
         headers.put("Content-Type", "application/json");
+        return headers;
+    }
+
+    /**
+     * Create standard headers for mamikos api
+     * @param signature signature key
+     * @return headers map
+     */
+    public static Map<String, String> mamikosAppHeaders(String signature) {
+        headers.put("Authorization", "GIT "+ signature + ":c27ef3e4cd0fcd6204cdf85ea30ac9ffda2a0606efb30ffb1d94956cece3e9bd");
+        headers.put("X-GIT-Time", ApiEndpoints.X_GIT_TIME_APP);
+        headers.put("Content-Type", "application/json");
+        headers.put("X-GIT-PF", "app");
         return headers;
     }
 }

@@ -3,7 +3,6 @@ package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -94,4 +93,34 @@ public class GolplusContractSteps {
         Assert.assertEquals(goldplusContractPO.getStatusGoldplusOrder(status),status,"status gp doesnt match");
         Assert.assertEquals(goldplusContractPO.getStatusInvoiceGoldplusOrder(invoiceStatus),invoiceStatus,"invoice status doesnt match");
     }
+
+    @When("user click create new contract button")
+    public void user_click_create_new_contract_button() {
+        goldplusContractPO.clickOnCreateContractButton();
+    }
+
+    @When("user input phone number with {string}")
+    public void user_input_phone_number_with(String phone) {
+        goldplusContractPO.inputPhoneNumberOwner(phone);
+    }
+
+    @Then("user confirmed to create GP Contract and invoice")
+    public void user_confirmed_to_create_gp_contract_and_invoice() {
+        goldplusContractPO.clickOnCreateContractInvoiceButton();
+        goldplusContractPO.clickOnCreateContractInvoiceButton();
+    }
+
+    @Then("user see warning notification {string}")
+    public void user_see_warning_notification(String warningMessage) {
+        Assert.assertEquals(goldplusContractPO.getWarningNotification(warningMessage),warningMessage,"warning message doesnt match");
+
+    }
+
+    @Then("user selected goldplus package with {string}")
+    public void user_selected_goldplus_package_with(String goldplus) {
+        goldplusContractPO.selectDropdownPackage(goldplus);
+
+    }
+
+
 }

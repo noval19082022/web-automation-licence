@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
-import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -25,7 +24,6 @@ public class HomePO {
     private Locator promoNgebutOptions;
     private Locator flashSaleTimer;
     private Locator flashSaleKostListContainer;
-
     private Locator flashSaleSection;
     private Locator flashSaleLihatSemuaButton;
     private Locator flashSalePromoInfoList;
@@ -33,9 +31,9 @@ public class HomePO {
     Locator dikelolaMamikosLabel;
     private Locator kostPromo;
     private Locator lihatPengajuanLainBtn;
+    Locator areaKosTerpopulerTitle;
 
     //header
-    Locator searchAdsButton;
     Locator helpCenterButton;
     Locator termAndConditionButton;
     Locator promoAdsButton;
@@ -100,6 +98,7 @@ public class HomePO {
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
+        areaKosTerpopulerTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Area Kos Terpopuler"));
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
@@ -107,10 +106,9 @@ public class HomePO {
 
 
         //header
-        this.searchAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
-        this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        this.promoAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
@@ -241,16 +239,6 @@ public class HomePO {
      */
     public boolean isFlashSaleLihatSemuaButtonVisible() {
         return flashSaleLihatSemuaButton.isVisible();
-    }
-
-
-    /**
-     * Check element search ads button header is displayed
-     *
-     * @return status true / false
-     */
-    public boolean isSearchAdsDisplayed() {
-        return playwright.isLocatorVisibleAfterLoad(searchAdsButton, 50.0);
     }
 
     /**
@@ -402,7 +390,8 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isKebijakanPrivasiTitleDisplayed() {
-        return kebijakanPrivasiTitle.isVisible();
+        return playwright.waitTillLocatorIsVisible(kebijakanPrivasiTitle, 50.0);
+//        return kebijakanPrivasiTitle.isVisible();
     }
 
     /**
@@ -410,7 +399,8 @@ public class HomePO {
      *
      */
     public void clickOnSyaratKetentuanButton() {
-        syaratKetentuanButton.click();
+        playwright.clickOn(syaratKetentuanButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -522,7 +512,8 @@ public class HomePO {
      *
      */
     public void clickOnPromosikanIklanAndaButton() {
-        promosikanIklanAndaButton.click();
+        playwright.clickOn(promosikanIklanAndaButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -530,7 +521,8 @@ public class HomePO {
      *
      */
     public void clickOnPusatBantuanButton() {
-        pusatBantuanButton.click();
+        playwright.clickOn(pusatBantuanButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -538,7 +530,8 @@ public class HomePO {
      *
      */
     public void clickOnEmailFooterLink() {
-        emailFooter.click();
+        playwright.clickOn(emailFooter);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -547,7 +540,7 @@ public class HomePO {
      * @return status true / false
      */
     public boolean isFormBantuanTitleDisplayed() {
-        return playwright.waitTillLocatorIsVisible(formBantuanTitle, 10.0);
+        return playwright.waitTillLocatorIsVisible(formBantuanTitle);
     }
 
     /**
@@ -555,7 +548,8 @@ public class HomePO {
      *
      */
     public void clickOnWhatsappNumber() {
-        whatsappButton.click();
+        playwright.clickOn(whatsappButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -563,7 +557,8 @@ public class HomePO {
      *
      */
     public void clickOnFacebookButton() {
-        facebookButton.click();
+        playwright.clickOn(facebookButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -571,7 +566,8 @@ public class HomePO {
      *
      */
     public void clickOnTwitterButton() {
-        twitterButton.click();
+        playwright.clickOn(twitterButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -579,7 +575,8 @@ public class HomePO {
      *
      */
     public void clickOnInstagramButton() {
-        instagramButton.click();
+        playwright.clickOn(instagramButton);
+        playwright.hardWait(2000);
     }
 
     /**
@@ -611,8 +608,9 @@ public class HomePO {
      *
      */
     public void clickOnSeeAllPromoOwnerButton() {
-        playwright.pageScrollToDown(3000);
-        seeAllPromoOwner.click();
+        playwright.pageScrollUntilElementIsVisible(areaKosTerpopulerTitle);
+        playwright.clickOn(seeAllPromoOwner);
+        playwright.hardWait(2000);
     }
 
     /**

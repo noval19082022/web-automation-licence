@@ -222,7 +222,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
 #    And admin search contract by "Renter Phone Number" and input field "081280003230"
-    And admin search contract by "Related Invoice Number" and input field "66972010/2024/02/71941"
+    And admin search contract by "Related Invoice Number" and input field "79304090/2023/12/40705"
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
@@ -237,7 +237,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
 #    And admin search contract by "Renter Phone Number" and input field "081280003230"
-    And admin search contract by "Related Invoice Number" and input field "66972010/2024/02/71941"
+    And admin search contract by "Related Invoice Number" and input field "79304090/2023/12/40705"
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
@@ -251,7 +251,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
 #    And admin search contract by "Renter Phone Number" and input field "081280003230"
-    And admin search contract by "Related Invoice Number" and input field "66972010/2024/02/71941"
+    And admin search contract by "Related Invoice Number" and input field "79304090/2023/12/40705"
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
@@ -265,7 +265,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
 #    And admin search contract by "Renter Phone Number" and input field "081280003230"
-    And admin search contract by "Related Invoice Number" and input field "66972010/2024/02/71941"
+    And admin search contract by "Related Invoice Number" and input field "79304090/2023/12/40705"
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden
@@ -278,7 +278,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
 #    And admin search contract by "Renter Phone Number" and input field "081280003230"
-    And admin search contract by "Related Invoice Number" and input field "66972010/2024/02/71941"
+    And admin search contract by "Related Invoice Number" and input field "79304090/2023/12/40705"
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see Konfirmasi Sisa Deposit button hidden

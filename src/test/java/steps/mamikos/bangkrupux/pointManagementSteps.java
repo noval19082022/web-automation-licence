@@ -2,20 +2,26 @@ package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.PointManagementPO;
+import testdata.BangKrupuxTestData;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 import testdata.BangKrupuxTestData;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-import java.sql.SQLOutput;
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class pointManagementSteps {
     Page page = ActiveContext.getActivePage();
@@ -29,6 +35,9 @@ public class pointManagementSteps {
     private String popUpConfirmationTitleWhitelist = JavaHelpers.getPropertyValue(pointAndReward, "popUpConfirmationTitleWhitelist");
     private String popUpConfirmationBodyBlacklist = JavaHelpers.getPropertyValue(pointAndReward,"popUpConfirmationBodyBlacklist");
     private String popUpConfirmationBodyWhitelist = JavaHelpers.getPropertyValue(pointAndReward,"popUpConfirmationBodyWhitelist");
+    private String pointAmount = JavaHelpers.getPropertyValue(pointAndReward,"pointAmount");
+    private String noteAdjustPointTopup =JavaHelpers.getPropertyValue(pointAndReward, "noteAdjustPointTopup");
+    private String noteAdjustPointTopdown = JavaHelpers.getPropertyValue(pointAndReward, "noteAdjustPointTopdown");
 
     @When("admin successfully {string} user named {string} with status {string}")
     public void admin_successfully_do_action_for_user_point(String action, String user, String status) {
@@ -230,4 +239,226 @@ public class pointManagementSteps {
         }
 
     }
+
+    @When("user clicks Adjust Point icon")
+    public void user_clicks_Adjust_Point_icon() throws InterruptedException {
+       pointManagement.clickOnAdjustPointIcon();
+    }
+
+    @When("user choose adjustment type {string}")
+    public void user_choose_adjustment_type(String adjustmentType) throws InterruptedException {
+        pointManagement.choosePointAdjustmentType(adjustmentType);
+    }
+
+    @When("user fills out point amount")
+    public void user_fills_out_point_amount() {
+        pointManagement.setPointAmount(pointAmount);
+    }
+
+    @When("user fills out note for {string}")
+    public void user_fills_out_note_for(String noteType) {
+        String type = "";
+        if (noteType.equals("topup")){
+            type = noteAdjustPointTopup;
+        }
+        else if (noteType.equals("topdown")){
+            type = noteAdjustPointTopdown;
+        }
+        pointManagement.setPointAdjusmentNote(type);
+    }
+
+    @When("user clicks on Submit button on Adjust Point form")
+    public void user_clicks_on_Submit_button_on_Adjust_Point_form() throws InterruptedException {
+        pointManagement.clickOnSubmitAdjustPointButton();
+    }
+
+    @Then("user see Bulk Adjust Point button")
+    public void user_see_Bulk_Adjust_Point_button() throws InterruptedException {
+        pointManagement.checkBulkAdjustPointButton();
+    }
+
+    @And("user see Bulk Update Blacklist button")
+    public void user_see_Bulk_Update_Blacklist_button() throws InterruptedException {
+        pointManagement.checkBulkUpdateBlacklistButton();
+    }
+
+    @And("user see Keyword Filter")
+    public void user_see_Keyword_Filter() throws InterruptedException {
+        pointManagement.checkKeywordFilter();
+    }
+
+    @And("user see User Filter")
+    public void user_see_User_Filter() throws InterruptedException {
+        pointManagement.checkUserFilter();
+    }
+
+    @And("user see Status Filter")
+    public void user_see_Status_Filter() throws InterruptedException {
+        pointManagement.checkStatusFilter();
+    }
+
+    @And("user see Search button")
+    public void user_see_Search_button() throws InterruptedException {
+        pointManagement.checkSearchButton();
+    }
+
+    @And("user see Name")
+    public void user_see_Name() throws InterruptedException {
+        pointManagement.checkName();
+    }
+
+    @And("user see Email")
+    public void user_see_Email() throws InterruptedException {
+        pointManagement.checkEmail();
+    }
+
+    @And("user see Phone Number")
+    public void user_see_Phone_Number() throws InterruptedException {
+        pointManagement.checkPhoneNumber();
+    }
+
+    @And("user see User")
+    public void user_see_User() throws InterruptedException {
+        pointManagement.checkUser();
+    }
+
+    @And("user see Total Point")
+    public void user_see_Total_Point() throws InterruptedException {
+        pointManagement.checkTotalPoint();
+    }
+
+    @And("user see Status")
+    public void user_see_Status() throws InterruptedException {
+        pointManagement.checkStatus();
+    }
+
+    @And("user see Adjust Point icon")
+    public void user_see_Adjust_Point_icon() throws InterruptedException {
+        pointManagement.checkAdjustPointIcon();
+    }
+
+    @And("user see History icon")
+    public void user_see_History_icon() throws InterruptedException {
+        pointManagement.checkHistoryIcon();
+    }
+
+    @And("user see Pagination")
+    public void user_see_Pagination() throws InterruptedException {
+        pointManagement.checkPagination();
+    }
+
+    @When("user click history icon on manage user point page")
+    public void user_click_history_icon_on_manage_user_point_page() throws InterruptedException {
+        pointManagement.clickHistoryIcon();
+    }
+
+    @Then("user see at manage user point history contains:")
+    public void user_see_at_manage_user_point_history_contain(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        for (Map<String, String> content : table) {
+            System.out.println(content);
+            Assert.assertTrue(pointManagement.getContentManagePointHistoryPage().contains(content.get("Content")),"Review page should contain" + content.get("Content"));
+        }
+    }
+
+    @When("user choose to filter all activity with value {string}")
+    public void user_choose_to_filter_all_activity_with_value(String value) throws InterruptedException {
+        pointManagement.chooseDropDownAllActivity(value);
+        pointManagement.clickOnSearchButton();
+    }
+
+    @Then("history with selected filter value {string} is displayed")
+    public void voucher_with_selected_filter_value_is_displayed(String value){
+        Assert.assertTrue(pointManagement.getContentManagePointHistoryPage().contains(value));
+    }
+
+    @When("user click next page button on manage user point")
+    public void user_click_next_page_button_on_manage_user_point() throws InterruptedException {
+       pointManagement.clickNextPage();
+    }
+
+    @Then("next manage user point page will be opened")
+    public void next_manage_user_point_page_will_be_opened() {
+        String pageIndex = pointManagement.getPageIndex();
+        if(pageIndex != null){
+            Assert.assertEquals(pageIndex, "2", "Page index is not correct");
+        }
+    }
+
+    @When("user click previous page button on manage user point")
+    public void user_click_previous_page_button_on_manage_user_point() throws InterruptedException {
+        pointManagement.clickPrevPage();
+    }
+
+    @Then("previous manage user point page will be opened")
+    public void previous_manage_user_point_page_will_be_opened() {
+        String pageIndex = pointManagement.getPageIndex();
+        if(pageIndex != null){
+            Assert.assertEquals(pageIndex, "1", "Page index is not correct");
+        }
+    }
+
+    @When("user click page index {string} at user point")
+    public void user_click_page_index_at_user_point(String index) throws InterruptedException {
+        pointManagement.clickPageIndex(index);
+    }
+
+    @Then("manage user point page {string} will be opened")
+    public void manage_user_point_page_will_be_opened(String page) {
+        String pageIndex = pointManagement.getPageIndex();
+        if(pageIndex != null) {
+            Assert.assertEquals(pageIndex, page, "Page index is not correct");
+        }
+    }
+
+    @And("admin click Bulk Update Blacklist")
+    public void admin_click_bulk_update_blacklist() throws InterruptedException {
+        pointManagement.clickOnBulkUpdateBlacklistButton();
+    }
+
+    @Then("admin see {string} pop-up appear")
+    public void admin_see_pop_up_appear(String popUp) throws InterruptedException {
+        Assert.assertTrue(pointManagement.checkBulkUpdateBlacklistPopUp(popUp), "bulk update blacklis popup is not present");
+    }
+
+    @And("user click button submit csv bulk blacklist")
+    public void user_click_button_submit_csv_bulk_blacklist() {
+       pointManagement.clickOnSubmitBulkUpdateButton();
+    }
+
+    @Then("success Update Blacklist using csv")
+    public void success_update_blacklist_using_csv() throws InterruptedException{
+        Assert.assertTrue(pointManagement.successSaveTnCIsDisplayed(), "succes upload csv is not present");
+    }
+
+    @When("admin upload csv file {string}")
+    public void admin_upload_csv_file(String file) {
+       pointManagement.uploadBulkAddCSVFileUserPoint(file);
+    }
+
+    @And("user click Bulk Adjust Point")
+    public void user_click_bulk_adjust_point() throws InterruptedException{
+        pointManagement.clickOnBulkAdjustPointButton();
+    }
+
+    @And("user click button submit csv bulk adjust point")
+    public void user_click_button_submit_csv_bulk_adjust_point() {
+        pointManagement.clickOnSubmitBulkAdjustPointButton();
+    }
+
+    @And("user fill Owner Point Expiry in with {string}")
+    public void user_fill_Owner_Point_Expiry_in_with(String value){
+        pointManagement.fillOwnerPointExpiry(value);
+    }
+
+    @And("user fill Tenant Point Expiry in with {string}")
+    public void user_fill_Tenant_Point_Expiry_in_with(String value){
+        pointManagement.fillTenantPointExpiry(value);
+    }
+
+    @And("user click on Point Expiry Save button")
+    public void user_click_on_Point_Expiry_Save_button() throws InterruptedException{
+       pointManagement.clickOnSaveButton();
+    }
+
 }

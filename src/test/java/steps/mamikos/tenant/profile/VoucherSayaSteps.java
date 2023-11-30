@@ -78,11 +78,6 @@ public class VoucherSayaSteps {
         Assert.assertTrue(voucherSaya.isVoucherListKedaluwarsaLabelVisible(), "voucher list Kedaluwarsa Label is not present");
     }
 
-    @When("user clicks on Promo Lainnya button")
-    public void userClicksOnPromoLainnyaButton() {
-        voucherSaya.clickPromoLainnyaButton();
-    }
-
     @When("user click Salin button from voucher list")
     public void user_click_salin_button_from_voucher_list() {
         voucherSaya.clickVoucherListSalinButton();

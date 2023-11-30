@@ -38,6 +38,7 @@ public class ChatOwnerPO {
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
     Locator Iunderstand;
+    Locator sayaMengertiChatRoom;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -71,6 +72,7 @@ public class ChatOwnerPO {
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
+        sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
     }
 
     /**
@@ -78,7 +80,7 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
-        playwright.reloadPage();
+        playwright.waitFor(ownerChatButton,2000.0);
         playwright.clickOn(ownerChatButton);
     }
 
@@ -208,6 +210,11 @@ public class ChatOwnerPO {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat cara kedua")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+    }
+
+    public void dismissFTUETBC() {
+        playwright.waitFor(sayaMengertiChatRoom);
+        playwright.clickOn(sayaMengertiChatRoom);
     }
 
     /**

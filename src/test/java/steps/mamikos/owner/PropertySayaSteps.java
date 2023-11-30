@@ -21,10 +21,10 @@ import static org.testng.Assert.assertTrue;
 
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
-    PropertySayaPO propertySaya = new PropertySayaPO(page);
+    PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
-    private JavaHelpers javaHelpers = new JavaHelpers();
+    private final JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
     private String weeklyPrice = null;
     private String monthlyPrice = null;
@@ -636,6 +636,7 @@ public class PropertySayaSteps {
     @And("owner click add another type from kos {string}")
     public void ownerClickAddAnotherTypeFromKos(String kosName) {
         propertySaya.clickAddAnotherTypeFromKos(kosName);
+        Mamikos.setPropertyKosName(kosName);
     }
 
     @And("owner click {string} in add new room type pop up and click next")
@@ -650,7 +651,16 @@ public class PropertySayaSteps {
 
     @When("owner input room type with {string}")
     public void ownerInputRoomTypeWith(String text) {
-        propertySaya.inputRoomTypeName(text);
+        if (text.equals("{random_text}")){
+            int length = 3;
+            boolean useLetters = true;
+            boolean useNumbers = true;
+            String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+            roomTypePrefix = "Tipe " + generatedString.toUpperCase();
+            propertySaya.inputRoomTypeName(roomTypePrefix);
+        } else {
+            propertySaya.inputRoomTypeName(text);
+        }
     }
 
     @And("see next button disable")
@@ -739,7 +749,6 @@ public class PropertySayaSteps {
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
         roomTypePrefix = "Tipe " + generatedString.toUpperCase();
         propertySaya.inputRoomTypeNameInPopUp(roomTypePrefix);
-        Mamikos.setPropertyKosName(roomTypePrefix);
     }
 
     @And("owner click lanjutkan button in bottom of add kos page")
@@ -850,23 +859,71 @@ public class PropertySayaSteps {
         propertySaya.inputKosName(existingKosName);
     }
 
-    @And("owner click toogle denda")
-    public void ownerClickToogleDenda() {
-        propertySaya.clickToogleDenda();
+    @And("owner click toggle denda")
+    public void ownerClicktoggleDenda() {
+        propertySaya.clicktoggleDenda();
     }
 
-    @And("owner input denda ammount:")
+    @And("owner input denda amount:")
     public void ownerInputDendaAmount(DataTable tables) {
         property = tables.asMaps(String.class, String.class);
         String totalDenda = property.get(0).get("Jumlah Denda");
         String unitTime = property.get(0).get("late pay");
-        propertySaya.fillDendaAmountTime(totalDenda, unitTime);
+        String penalty = property.get(0).get("Penalty");
+        propertySaya.fillDendaAmountTime(totalDenda, unitTime, penalty);
     }
 
     @Then("user cannot see {string} on the list")
     public void userCannotSeeDepositOnTheList(String additionalName) {
         if (additionalName.equalsIgnoreCase("Rp50.000")) {
             assertTrue(propertySaya.isDendaListAppears(), "List Denda is appears");
+        }
+    }
+
+    @And("owner click toggle deposit")
+    public void ownerClicktoggleDeposit() {
+        propertySaya.clicktoggleDeposit();
+    }
+
+    @And("owner input deposit amount:")
+    public void ownerInputDepositAmount(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String deposit = property.get(0).get("Deposit");
+        propertySaya.fillDepositAmountTime(deposit);
+    }
+
+    @And("owner click toggle other price")
+    public void ownerClicktoggleOtherPrice() {
+        propertySaya.clicktoggleOtherPrice();
+    }
+
+    @And("owner input other price amount:")
+    public void ownerInputOtherPrice(DataTable tables) {
+        property = tables.asMaps(String.class, String.class);
+        String namePrice = property.get(0).get("Nama Biaya");
+        String amountPrice = property.get(0).get("Jumlah Biaya");
+        propertySaya.fillOtherPrice(namePrice, amountPrice);
+    }
+
+    @Then("owner can sees other price with name 1234567890abcdefjkl and price Rp100.000 show in the list")
+    public void user_can_sees_new_other_price_additional_price_show_in_the_list() {
+        assertTrue(propertySaya.getActiveOtherPricesName(), "List other price is appears");
+        assertTrue(propertySaya.getActiveOtherPriceNumber(), "List other price is appears");
+    }
+
+    @And("owner click Selesai in success page add kos")
+    public void ownerClickSelesaiInSuccessPageAddKos() {
+        propertySaya.clickOnSelesaiAddKos();
+    }
+
+    @And("owner input data pengelola as expected:")
+    public void ownerInputDataPengelolaAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        propertySaya.selectPengelola(table.get(0).get("add data pengelola"));
+        if (table.get(0).get("add data pengelola").equals("yes")) {
+            propertySaya.inputPengelolaName(table.get(0).get("pengelola name"));
+            propertySaya.inputPengelolaPhone(table.get(0).get("pengelola phone"));
         }
     }
 }

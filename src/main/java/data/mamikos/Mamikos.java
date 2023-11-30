@@ -75,4 +75,7 @@ public class Mamikos {
     @Setter @Getter
     private static String rejectReasonTitle;
 
+    @Setter @Getter
+    private static String phoneOwner;
+
 }

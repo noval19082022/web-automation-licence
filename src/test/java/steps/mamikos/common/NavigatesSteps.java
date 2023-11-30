@@ -117,7 +117,7 @@ public class NavigatesSteps {
     @Then("navbar kost before login appears")
     public void navbarKostBeforeLoginAppears() {
         Assert.assertTrue(home.isDownloadAppDisplayed(), "Download App button not present!");
-        Assert.assertTrue(home.isSearchAdsDisplayed(), "Cari Iklan button not present!");
+        Assert.assertTrue(home.isSearchIklanDisplayed(), "Cari Iklan button not present!");
         Assert.assertTrue(home.isHelpCenterDisplayed(), "Pusat Bantuan button not present!");
         Assert.assertTrue(home.isTermConditionDisplayed(), "Syarat Ketentuan button not present!");
         Assert.assertTrue(home.isPromosiAdsDisplayed(), "Promosi Iklan button not present!");
@@ -356,5 +356,10 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.Ownersini_URL,30000.0,LoadState.LOAD);
         playwright.hardWait(3000);
         playwright.waitTillPageLoaded();
+    }
+
+    @When("admin access point expiry menu")
+    public void admin_access_point_expiry_menu() {
+        playwright.navigateTo(Mamikos.URL + "/admin/point/expiry#point", 30000.0, LoadState.LOAD);
     }
 }

@@ -144,15 +144,38 @@ public class PropertySayaPO {
     Locator penaltyField;
     Locator descFieldDisabled;
     Locator lengkapiDataKosDraft;
-    Locator toogleDenda;
+    Locator toggleDenda;
     Locator textBoxTotalDenda;
     Locator textBoxLatePay;
     Locator dropdownLatePay;
     Locator dendaPrice;
 
+    Locator toggleDeposit;
+    Locator textBoxDeposit;
+    Locator toggleOtherPrice;
+    Locator otherPriceName;
+    Locator otherPriceNumber;
+    Locator expandFilterButton;
+    Locator textBoxFilterDataPhone;
+    Locator dropdownFilterDataKosType;
+    Locator searchButton;
+    Locator actionButton;
+    Locator nextConfirmBooking;
+    Locator confirmButton;
+    Locator confirmBooking;
+    Locator deleteOtherPrice;
+    Locator confirmDeleteOtherPrice;
+    Locator detailButton;
+    Locator selesaiButton;
+    Locator bbkDataButton;
+    Locator pengelolaCheckbox;
+    Locator pengelolaNameField;
+    Locator pengelolaPhoneField;
+
     public PropertySayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+
         kostDropdown = page.getByText("Cari kos Anda disini...");
         searchKostTextbox = page.getByPlaceholder("Search");
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
@@ -250,11 +273,32 @@ public class PropertySayaPO {
         penaltyField = page.locator("div:nth-child(7) > div > .bg-c-field > .input");
         descFieldDisabled = page.locator("//div[@class='content']//div[@class='bg-c-field']//textarea[contains(@class, 'disabled')]");
         lengkapiDataKosDraft = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lengkapi Data Kos")).first();
-        toogleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
+        toggleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
         textBoxTotalDenda = page.getByRole(AriaRole.TEXTBOX).nth(1);
         textBoxLatePay = page.getByPlaceholder("0");
         dropdownLatePay = page.locator("//select[@class='c-field-select__select']");
         dendaPrice = page.locator("//div[@class='additional-price-item__info-price']");
+        toggleDeposit = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Deposit")).locator("span").first();
+        textBoxDeposit = page.getByRole(AriaRole.TEXTBOX).nth(1);
+        toggleOtherPrice = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Lainnya Per Bulan")).locator("span").first();
+        otherPriceName = page.getByText("1234567890abcdefjkl", new Page.GetByTextOptions().setExact(true));
+        otherPriceNumber = page.getByText("Rp100.000");
+        expandFilterButton = page.getByText("Tampilkan Filter");
+        textBoxFilterDataPhone = page.getByPlaceholder("Ex: 081987654321");
+        dropdownFilterDataKosType = page.locator("#select2-kost_type-container");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
+        actionButton = page.locator("(//button[@type='button'][normalize-space()='Actions'])[1]");
+        confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
+        nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
+        deleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        confirmDeleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
+        detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
+        selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
+        bbkDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
+        pengelolaCheckbox = page.locator("label").filter(new Locator.FilterOptions().setHasText("Anda ingin tambahkan data pengelola? checkmark")).locator("span");
+        pengelolaNameField = page.locator("input[type=text]").nth(2);
+        pengelolaPhoneField = page.locator("input[type=text]").nth(3);
     }
 
     /**
@@ -273,7 +317,6 @@ public class PropertySayaPO {
      * user as owner click update kamar button
      */
     public void clickUpdateKamarButton() {
-        playwright.clickOn(lihatSelengkapnyaButton);
         playwright.clickOn(updateKamarButton);
     }
 
@@ -1282,7 +1325,7 @@ public class PropertySayaPO {
     /**
      * Click on already inhabited checkbox
      */
-    public void clickAlreadyInhabitedCheckbox() throws InterruptedException {
+    public void clickAlreadyInhabitedCheckbox() {
         playwright.clickOn(alreadyInhabitedCheckbox);
     }
 
@@ -1787,26 +1830,32 @@ public class PropertySayaPO {
     }
 
     /**
-     * click toogle denda
+     * click toggle denda
      */
 
-    public void clickToogleDenda() {
-        playwright.clickOn(toogleDenda);
+    public void clicktoggleDenda() {
+        if (toggleDenda.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleDenda);
+        } else {
+            playwright.clickOn(toggleDenda);
+        }
     }
 
     /**
      * fill Denda Amount Time
      */
-    public void fillDendaAmountTime(String amount, String unitTime) {
+    public void fillDendaAmountTime(String amount, String unitTime, String penalty) {
         playwright.clickOn(textBoxTotalDenda);
         Locator amountTime = page.locator("//input[@class='input field-amount']");
         playwright.fill(amountTime, amount);
         playwright.clickOn(textBoxLatePay);
         Locator unitTimeNearest = page.locator("//input[@class='c-field-input__input bordered']");
         playwright.fill(unitTimeNearest, unitTime);
-//        playwright.clickOn(dropdownLatePay);
-//        Locator latePay = page.locator("//*[@class='c-field-select__select']/option[2]");
-//        playwright.clickOn(latePay);
+        playwright.clickOn(dropdownLatePay);
+        Locator penaltyRules = page.locator(".is-active .c-field-select__select");
+        playwright.selectDropdownByValue(penaltyRules, penalty);
     }
     /**
      * check denda list not appears
@@ -1816,4 +1865,104 @@ public class PropertySayaPO {
         return dendaPrice.isEnabled();
     }
 
+    /**
+     * click toggle deposit
+     */
+
+    public void clicktoggleDeposit() {
+        if (toggleDeposit.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleDeposit);
+        } else {
+            playwright.clickOn(toggleDeposit);
+        }
+    }
+    /**
+     * fill Deposit Amount Time
+     */
+    public void fillDepositAmountTime(String amountDeposit) {
+        playwright.clickOn(textBoxDeposit);
+        Locator deposit = page.locator("//input[@class='input field-amount']");
+        playwright.fill(deposit, amountDeposit);
+    }
+    /**
+     * click toggle other price
+     */
+    public void clicktoggleOtherPrice() {
+        if (toggleOtherPrice.isChecked()) {
+            playwright.clickOn(deleteOtherPrice);
+            playwright.clickOn(confirmDeleteOtherPrice);
+            playwright.clickOn(toggleOtherPrice);
+        } else {
+            playwright.clickOn(toggleOtherPrice);
+        }
+    }
+
+    /**
+     * fill other price
+     */
+    public void fillOtherPrice(String namePrice,String amountPrice) {
+        Locator nameOtherPrice = page.locator("//input[@placeholder='Contoh: Listrik, Parkir']");
+        playwright.fill(nameOtherPrice,namePrice);
+        Locator amountOtherPrice = page.locator("//input[@class='input']");
+        playwright.fill(amountOtherPrice,amountPrice);
+    }
+    /**
+     * Get other price active name
+     * @return String data type e.g "Biaya Parkir"
+     */
+    public boolean getActiveOtherPricesName() {
+        return otherPriceName.isEnabled();
+    }
+    /**
+     * Get other price active number
+     * @return String data type e.g "Rp100.000"
+     */
+    public boolean getActiveOtherPriceNumber() {
+        return otherPriceNumber.isEnabled();
+    }
+
+
+    /**
+     * if other price list appears
+     */
+    public void deleteOtherPrice() {
+        playwright.clickOn(deleteOtherPrice);
+        playwright.clickOn(confirmDeleteOtherPrice);
+        playwright.clickOn(toggleOtherPrice);
+    }
+
+    /**
+     * Click on Selesai button add kos when add kos from duplicate kos
+     */
+    public void clickOnSelesaiAddKos() {
+        playwright.clickOn(selesaiButton);
+    }
+
+    /**
+     * Click add pengelola checkbox
+     * @param addDataPengelola
+     */
+    public void selectPengelola(String addDataPengelola) {
+        if (addDataPengelola.equals("yes")){
+            playwright.clickOn(pengelolaCheckbox);
+        }
+    }
+
+    /**
+     * Input pengelola name
+     * @param pengelolaName
+     */
+    public void inputPengelolaName(String pengelolaName) {
+        playwright.forceFill(pengelolaNameField, pengelolaName);
+    }
+
+    /**
+     * Input pengelola phone
+     * @param pengelolaPhone
+     */
+    public void inputPengelolaPhone(String pengelolaPhone) {
+        playwright.forceFill(pengelolaPhoneField, pengelolaPhone);
+    }
 }

@@ -10,6 +10,7 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -199,6 +200,7 @@ public class KostDetailsPO {
 
     // ------------ Kost Review Section --------------
     private Locator reviewSection;
+    private Locator lihatSemuaReviewButton;
     private Locator overviewRatingReview;
     private Locator reviewCategory;
     private Locator userReview;
@@ -333,7 +335,7 @@ public class KostDetailsPO {
 
         // -------------------Kos rule ----------------------------
         this.kosRuleTitle = page.getByText("Peraturan di kos ini");
-        this.kosRuleSection = page.locator(" .detail-kost-rules__content");
+        this.kosRuleSection = page.getByTestId("detail-kost-special-rules__content");
         this.kosRuleImageElement = page.locator(".kost-rules-gallery");
         this.seeAllKosRuleButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua peraturan"));
 
@@ -391,9 +393,9 @@ public class KostDetailsPO {
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
         this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
-        this.bookingDateForm = page.locator(".booking-input-checkin__input-icon");
+        this.bookingDateForm = page.getByPlaceholder("Mulai kos");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
-        this.bookingDurationForm = page.locator("input[class='booking-rent-type__input']");
+        this.bookingDurationForm =  page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^dropdown-down$"))).first();
         this.bookingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         this.datePickToday = page.locator(".today");
         this.tomorrowDateLabel = page.locator("span[class='cell day']").first();
@@ -413,6 +415,7 @@ public class KostDetailsPO {
 
         // ------------ Kost Review Section -----------
         this.reviewSection = page.locator("#detailKostReview");
+        this.lihatSemuaReviewButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua review"));
         this.overviewRatingReview = page.locator(".kost-review__overview-rating");
         this.reviewCategory = page.locator(".kost-review__fac-rating");
         this.userReview = page.locator(".kost-review__users-feedback");
@@ -723,7 +726,7 @@ public class KostDetailsPO {
      * @return 'boolean' bath facility is visible
      */
     public boolean isFacBathShow() {
-        playwright.pageScrollInView(facilityBathSection);
+        playwright.pageScrollInView(facilityNotesSection);
         return facilityBathSection.isVisible();
     }
 
@@ -1015,7 +1018,7 @@ public class KostDetailsPO {
      * @return 'boolean' chat room is present for user with login condition visibility
      */
     public boolean isChatRoomPresent() {
-        playwright.waitTillLocatorIsVisible(chatRoom);
+        playwright.waitFor(chatRoom);
         return chatRoom.isVisible();
     }
 
@@ -1101,7 +1104,7 @@ public class KostDetailsPO {
      */
     public boolean isOwnerSectionPresent() {
         playwright.pageScrollToDown(4800);
-        playwright.pageScrollInView(kostOwnerInformation);
+        playwright.pageScrollInView(aboutStatisticsButton);
         return playwright.waitTillLocatorIsVisible(aboutStatisticsButton);
     }
 
@@ -1363,7 +1366,6 @@ public class KostDetailsPO {
      * @return visible true, otherwise false
      */
     public boolean isFormBookingDatePresent() {
-        playwright.pageScrollUsingCoordinate(0, 500);
         return playwright.waitTillLocatorIsVisible(bookingDateForm);
     }
 
@@ -1371,8 +1373,7 @@ public class KostDetailsPO {
      * Click on booking date form
      */
     public void clickOnBookingDate() {
-        playwright.pageScrollInView(seeAllPhotoButton);
-        playwright.waitTillLocatorIsVisible(bookingDateForm);
+        playwright.waitFor(bookingDateForm, 5000.0);
         playwright.clickOn(bookingDateForm);
     }
 
@@ -1383,7 +1384,6 @@ public class KostDetailsPO {
      */
     public String getDescBookingDateText(String desc) {
         Locator description = page.locator("#priceCard").getByText(desc).first();
-        playwright.pageScrollInView(description);
         return playwright.getText(description).toLowerCase();
     }
 
@@ -1519,7 +1519,7 @@ public class KostDetailsPO {
      */
     public void scrollToReviewSection() {
         playwright.pageScrollToDown(4000);
-        playwright.pageScrollInView(reviewSection);
+        playwright.pageScrollInView(lihatSemuaReviewButton);
     }
 
     /**

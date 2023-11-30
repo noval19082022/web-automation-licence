@@ -295,7 +295,7 @@ public class ManualPayoutPO {
      * @return boolean type, visible true otherwise false
      */
     public boolean isSuccessUpdateMessageVisible() {
-        return successUpdateMessage.isVisible();
+        return playwright.waitTillLocatorIsVisible(successUpdateMessage);
     }
 
     /**

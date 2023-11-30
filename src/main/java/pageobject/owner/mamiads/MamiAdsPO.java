@@ -25,6 +25,13 @@ public class MamiAdsPO {
     private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
+
+    //--- Mamiads popup ubah anggaran  ---//
+    private Locator saldoMaksimalRadioButton;
+    private Locator dibatasiHarianRadioButton;
+    private Locator ubahAnggaranInputText;
+    private Locator yaGantiButton;
+    private Locator beliSaldoBtnPopup;
     //--- Beli Saldo Mamiads Page ----//
     private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
@@ -63,13 +70,19 @@ public class MamiAdsPO {
         this.invoiceMamiads = page.locator("//div[@class='transaction-done']/div[@class='transaction-available']/div[1]//span[@class='right-side-saldo-status']");
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
-        this.beliSaldoBtn = page.getByText("Beli Saldo");
+        this.beliSaldoBtn = page.getByText("Beli Saldo", new Page.GetByTextOptions().setExact(true));
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
         this.titleSelesaiRiwayatSaldoText = page.locator("#my-ads-done").getByText("Belum Ada Transaksi");
         this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
+        //--- Mamiads popup ubah anggaran  ---//
+        this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
+        this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
+        this.dibatasiHarianRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Dibatasi Harian")).locator("span").nth(1);
+        this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
+        this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
         //--- Beli Saldo Mamiads Page ---//
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
@@ -473,6 +486,104 @@ public class MamiAdsPO {
      */
     public void clickOnInvoiceMamiads(){
         playwright.clickOn(invoiceMamiads);
+    }
+
+    /**
+     * click on ubah button on spesific listing
+     * @param adsName refres to listing name
+     */
+    public void clickOnUbahbutton(String adsName) {
+        String ubahButton = "//div[@class='mami-ads-widget']/div[contains(.,'" + adsName + "')]//a";
+        playwright.clickOn(page.locator(ubahButton));
+    }
+
+    /**
+     *  Click coba sekarang header on mamiads onboard page
+     */
+    public void clickOnCobaSekarangHeader() {
+        playwright.clickOn(cobaSekarangButtonHeader);
+    }
+
+    /**
+     * clear and type new daily anggaran MA
+     * @param anggaran refers to how much daily anggaran wanna spent
+     */
+    public void inputNominalAnggaran(String anggaran) {
+        playwright.clearText(ubahAnggaranInputText);
+        playwright.fill(ubahAnggaranInputText, anggaran);
+    }
+
+    /**
+     * get text posisi iklan on spesific listing
+     * @param adsName
+     * @param adsPosition
+     * @return ads position text
+     */
+    public String getPosisiIklan(String adsName, String adsPosition) {
+        String textPosisiIklan = "//*[.='" + adsName + "']/../..//following-sibling::*//div[@id='ads-position-" + adsPosition + "']";
+        playwright.waitTillLocatorIsVisible(page.locator(textPosisiIklan));
+        return playwright.getText(page.locator(textPosisiIklan));
+    }
+
+    /**
+     * check toggle ads based on listing name
+     * @param adsName
+     * @param toggleStatus
+     */
+    public void getToggleStaus(String adsName, String toggleStatus) {
+        String toggleStatusLocator = "//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']";
+        playwright.waitTillLocatorIsVisible(page.locator(toggleStatusLocator));
+        playwright.assertVisible(page.locator(toggleStatusLocator));
+    }
+
+    /**
+     * get text status description on spesific listing
+     * @param adsName
+     * @return status description text
+     */
+    public String getAdsStatusDesc(String adsName) {
+        String textStatusDesc= "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-status-description']";
+        playwright.waitTillLocatorIsVisible(page.locator(textStatusDesc));
+        return playwright.getText(page.locator(textStatusDesc));
+    }
+
+    /**
+     * get text anggaran description on spesific listing
+     * @param adsName
+     * @return anggaran desciption text
+     */
+    public String getTextAnggaranDesc(String adsName) {
+        String textAnggaranDesc= "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']";
+        playwright.waitTillLocatorIsVisible(page.locator(textAnggaranDesc));
+        return playwright.getText(page.locator(textAnggaranDesc));
+    }
+
+    /**
+     * click on saldo maksimal radio button
+     */
+    public void clickOnSaldoMaksimal() {
+        playwright.clickOn(saldoMaksimalRadioButton);
+    }
+
+    /**
+     * click on dibatasi harian radio button
+     */
+    public void clickOnDibatasiHarian() {
+        playwright.clickOn(dibatasiHarianRadioButton);
+    }
+
+    /**
+     * click on ya, ganti confirmation ubah anggaran button
+     */
+    public void clickOnYaGantiButton() {
+        playwright.clickOn(yaGantiButton);
+    }
+
+    /**
+     * click on Beli saldo on popup saldo < 5000
+     */
+    public void clickOnBeliSaldoOnPopup() {
+        playwright.clickOn(beliSaldoBtnPopup);
     }
 }
 
