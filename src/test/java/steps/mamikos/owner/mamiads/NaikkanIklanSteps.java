@@ -30,12 +30,6 @@ public class NaikkanIklanSteps {
         Assert.assertTrue(naikkanIklanPO.getToggleStatus(adsName,toggleStatus), "toggle doesn't match!");
     }
 
-    @Then("user verify the wording iklan penuh {string} is {string}")
-    public void user_verify_the_wording_iklan_penuh_is(String adsName, String adsDesc) throws InterruptedException {
-        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds().replaceAll("\n", "").replaceAll("\\s+", " "), adsDesc, "Kamar Penuh doesn't match!");
-        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
-    }
-
     @Then("user verify the alokasi title is {string}")
     public void user_verify_the_alokasi_title_is(String alokasiTitleText) {
         Assert.assertEquals(naikkanIklanPO.getAlokasiTitleText(alokasiTitleText), alokasiTitleText, "Alokasi title doesn't match!");
@@ -179,5 +173,10 @@ public class NaikkanIklanSteps {
     @When("user click {string} button on pop up switch toggle iklan")
     public void userClickButtonOnPopUpSwitchToggleIklan(String actionButton) {
         naikkanIklanPO.clickActionButtonInPopUp(actionButton);
+    }
+
+    @Then("user verify the wording iklan kamar penuh {string} is {string}")
+    public void user_verify_the_wording_iklan_kamar_penuh_is(String adsName, String adsDesc) {
+        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds(adsName), adsDesc, "Kamar Penuh doesn't match!");
     }
 }

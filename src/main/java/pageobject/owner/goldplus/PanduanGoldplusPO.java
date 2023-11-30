@@ -98,6 +98,7 @@ public class PanduanGoldplusPO {
      * Click on coba sekarang button
      */
     public void clickCobaSekarangButton() {
+        cobaSekarangButton.waitFor();
         playwright.clickOn(cobaSekarangButton);
     }
 
