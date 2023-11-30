@@ -1,4 +1,4 @@
-@regression @BBM2 @TEST_BBM-1329 @TEST_BBM-1330 @lawackrun1
+@regression @BBM2 @TEST_BBM-1329 @TEST_BBM-1330 @essentialTest
 
 #  kost used: Kost Adi Auto FullPaid AddFee Deposit
 #  (Kost Regular FullPaid with Additional Fee and Deposit)

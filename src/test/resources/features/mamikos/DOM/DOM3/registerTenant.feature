@@ -1,4 +1,4 @@
-@DOM3
+@DOM3 @essentialTest
 Feature: New Flow Register Tenant
 
   @navigateToRegisterPageTenant @TEST_DOM-345 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
