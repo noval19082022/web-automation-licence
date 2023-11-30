@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto
+@LIMO2 @Mamifoto @essentialTest
 Feature: Owner Purchase Mamifoto
 
   @TEST_LIMO-3164 @declarative @listing-monetization @reviewed @Automated @web @playWright

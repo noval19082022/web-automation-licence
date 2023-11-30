@@ -1,4 +1,4 @@
-@DOM4
+@DOM4 @essentialTest
 Feature: Favorite and Share kost
 
   @TEST_DOM-1732 @automated @discovery-platform @favorite @web

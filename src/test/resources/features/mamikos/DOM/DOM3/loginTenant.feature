@@ -1,4 +1,4 @@
-@regression @loginTenant @essentiaTest @DOM3
+@regression @loginTenant @DOM3 @essentialTest
 Feature: Tenant - Login
 
   @loginByFB
