@@ -171,6 +171,7 @@ public class PropertySayaPO {
     Locator pengelolaCheckbox;
     Locator pengelolaNameField;
     Locator pengelolaPhoneField;
+    Locator bbkPopUp;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -299,6 +300,7 @@ public class PropertySayaPO {
         pengelolaCheckbox = page.locator("label").filter(new Locator.FilterOptions().setHasText("Anda ingin tambahkan data pengelola? checkmark")).locator("span");
         pengelolaNameField = page.locator("input[type=text]").nth(2);
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
+        bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
     }
 
     /**
@@ -889,7 +891,7 @@ public class PropertySayaPO {
      * @param jenisProperti e.g Kost, Apartemen
      */
     public void clickTambahDataIklan(String jenisProperti) {
-        playwright.waitTillPageLoaded(10000.0);
+        playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
         playwright.clickOn(tambahDataIklan);
         playwright.clickOn(tambahIklanBaru);
         jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
@@ -1449,8 +1451,9 @@ public class PropertySayaPO {
      * @param roomSize
      */
     public void selectRoomSize(String roomSize) {
-        roomSizeProperty = page.locator("//span[.='" + roomSize + "']");
+        roomSizeProperty = page.getByText(roomSize);
         playwright.clickOn(roomSizeProperty);
+        playwright.waitFor(roomSizeProperty, 3000.0);
     }
 
     /**
@@ -1477,6 +1480,7 @@ public class PropertySayaPO {
      * @param monthlyPrice
      */
     public void inputMonthyPrice(String monthlyPrice) {
+        playwright.waitTillPageLoaded(3000.0);
         playwright.clickOn(priceMonthlyField);
         playwright.pressKeyboardKey("Control+KeyA");
         playwright.pressKeyboardKey("Delete");
@@ -1578,8 +1582,8 @@ public class PropertySayaPO {
      * @param kosName
      */
     public void clickAddAnotherTypeFromKos(String kosName) {
-        playwright.hardWait(5000.0);
         existingKosName = page.getByText(kosName + " chevron-right");
+        playwright.waitTillLocatorIsVisible(existingKosName, 5000.0);
         playwright.clickOn(existingKosName);
     }
 
@@ -1970,5 +1974,32 @@ public class PropertySayaPO {
      */
     public void inputPengelolaPhone(String pengelolaPhone) {
         playwright.forceFill(pengelolaPhoneField, pengelolaPhone);
+    }
+
+    /**
+     * Click on lewati bbk form button
+     * @param textButton
+     *
+     */
+    public void clickOnLewatiBBKForm(String textButton) {
+        playwright.clickOnTextButton(textButton);
+    }
+
+    /**
+     * Click on button in kebijakan baru mamikos pop up
+     * @param text
+     *
+     */
+    public void clickOnKebijakanBaruMamikosPopUp(String text) {
+        playwright.clickOnTextButton(text);
+    }
+
+    /**
+     * Verify the bbk pop up is visible or not
+     * @return true false
+     *
+     */
+    public boolean isBBKPopUpVisible() {
+        return playwright.isLocatorVisibleAfterLoad(bbkPopUp, 5000.0);
     }
 }

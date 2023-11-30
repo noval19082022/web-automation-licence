@@ -362,4 +362,9 @@ public class NavigatesSteps {
     public void admin_access_point_expiry_menu() {
         playwright.navigateTo(Mamikos.URL + "/admin/point/expiry#point", 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigate to Mamipay Owner List")
+    public void adminNavigateToMamipayOwnerList() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.MAMIPAY_OWNER_LIST);
+    }
 }
