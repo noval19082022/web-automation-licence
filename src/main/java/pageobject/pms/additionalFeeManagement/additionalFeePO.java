@@ -1,0 +1,127 @@
+package pageobject.pms.additionalFeeManagement;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import utilities.PlaywrightHelpers;
+
+public class additionalFeePO {
+    private Page page;
+    PlaywrightHelpers playwright;
+
+    private Locator namaBiaya;
+    private Locator tipePemabayaran;
+    private Locator satuanBiaya;
+    private Locator waktuPenentuanHarga;
+    private Locator penyewaBisaPilihMandiri;
+    private Locator actionButton;
+    private Locator hapusButton;
+    private Locator nextButton;
+    private Locator lastPageButton;
+
+    public additionalFeePO(Page page) {
+        this.page = page;
+        playwright = new PlaywrightHelpers(page);
+
+        namaBiaya = page.locator("tr td:nth-of-type(2)");
+        tipePemabayaran = page.locator("tr td:nth-of-type(3) div");
+        satuanBiaya = page.locator("tr td:nth-of-type(4) span:nth-child(2)");
+        waktuPenentuanHarga = page.locator("tr td:nth-of-type(5) div");
+        penyewaBisaPilihMandiri = page.locator("tr td:nth-of-type(6) div");
+        actionButton = page.locator("tr td:nth-of-type(7)");
+        hapusButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Hapus"));
+        nextButton = page.locator(".bg-c-button--icon-only-sm").last();
+        lastPageButton = page.getByTestId("additionalFeePagination").getByRole(AriaRole.BUTTON).nth(5);
+    }
+
+    /**
+     * Get nama biaya
+     * @param i index
+     * @return String
+     */
+    public String getNamaBiaya(int i) {
+        return playwright.getText(namaBiaya.nth(i));
+    }
+
+    /**
+     * Get tipe pembayaran biaya
+     * @param i index
+     * @return String
+     */
+    public String getTipePembayaranBiaya(int i) {
+        return playwright.getText(tipePemabayaran.nth(i));
+    }
+
+    /**
+     * Get satuan biaya
+     * @param i index
+     * @return String
+     */
+    public String getSatuanBiaya(int i) {
+        return playwright.getText(satuanBiaya.nth(i));
+    }
+
+    /**
+     * Get waktu penentuan harga
+     * @param i index
+     * @return String
+     */
+    public String getWaktuPenentuanHarga(int i) {
+        return playwright.getText(waktuPenentuanHarga.nth(i));
+    }
+
+    /**
+     * Get penyewa bisa pilih mandiri
+     * @param i index
+     * @return String
+     */
+    public String getPenyewaBisaPilihMandiri(int i) {
+        return playwright.getText(penyewaBisaPilihMandiri.nth(i));
+    }
+
+    /**
+     * Delete additional fee
+     * @param name biaya tambahan name
+     */
+    public void deleteAdditionalFee(String name) {
+        for (int i=0;i< namaBiaya.count();i++){
+            if (playwright.getText(namaBiaya.nth(i)).equalsIgnoreCase(name)){
+                playwright.clickOn(actionButton.nth(i));
+                playwright.clickOn(hapusButton);
+                playwright.clickOn(hapusButton);
+            }
+        }
+    }
+
+    /**
+     * Check tambahan biaya in list
+     * @param name biaya tambahan name
+     * @return boolean
+     */
+    public boolean isBiayaTambahanExist(String name) {
+        boolean result = false;
+        int page = 1;
+        int lastPage = Integer.parseInt(playwright.getText(lastPageButton));
+
+        do{
+            //check in page n, if there is biaya tambahan {name}
+            for (int i = 0; i < namaBiaya.count(); i++) {
+                if (namaBiaya.nth(i).textContent().trim().equalsIgnoreCase(name)) {
+                    result = true;
+                    System.out.println("Found biaya tambahan in page "+page+" row "+(i+1));
+                    break;
+                }
+            }
+            if (result == false) {
+                if (page<lastPage) {
+                    playwright.clickOn(nextButton);
+                }
+            } else {
+                break;
+            }
+            page++;
+        }while (page<=lastPage);
+
+        return result;
+    }
+}
