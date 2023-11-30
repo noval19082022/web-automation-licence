@@ -12,7 +12,6 @@ public class NaikkanIklanPO {
     private static String kostName;
     Locator selectFilter;
     Locator filterChoice;
-    Locator adsFullOccupied;
     Locator quickAllocateTitle;
     Locator toggleAds;
     Locator titlePopUpConfirmation;
@@ -28,6 +27,7 @@ public class NaikkanIklanPO {
     Locator switchToggleLocator;
     Locator saldoMamiAdsValue;
     Locator actionButtonLocator;
+    Locator kamarPenuhText;
 
 
 
@@ -36,7 +36,6 @@ public class NaikkanIklanPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         selectFilter = page.locator(".bg-c-dropdown__trigger");
-        adsFullOccupied = page.locator(".ads-status__kamar-penuh");
         quickAllocateTitle = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//div[@class='alokasi-ads__purchase-desc']");
         toggleAds = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//input[@class='bg-c-switch__input']");
         titlePopUpConfirmation = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -56,7 +55,7 @@ public class NaikkanIklanPO {
      * @return ads name or kost name
      * @params adsName
      */
-    public String getAdsName(String adsName) throws InterruptedException {
+    public String getAdsName(String adsName) {
         Locator adsNameLocator = page.getByText(adsName);
         return playwright.getText(adsNameLocator);
 
@@ -83,15 +82,6 @@ public class NaikkanIklanPO {
     public boolean getToggleStatus(String adsName, String toggleStatus) {
        toggleLocator = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//input[@id='room-toggle-switch-"+toggleStatus+"']");
         return playwright.waitTillLocatorIsVisible(toggleLocator);
-    }
-
-    /**
-     * Verify the description full occupancy active ads
-     *
-     * @return message full occupancy
-     */
-    public String isFullOcuppancyActiveAds() {
-        return playwright.getText(adsFullOccupied);
     }
 
     /**
@@ -292,5 +282,16 @@ public class NaikkanIklanPO {
     public void clickActionButtonInPopUp(String actionButton) {
         actionButtonLocator = page.locator("//button[contains(text(), '" + actionButton + "')]");
         playwright.clickOn(actionButtonLocator);
+    }
+
+    /**
+     * Verify the description full occupancy
+     * @return message full occupancy
+     * @params adsName
+     */
+    public String isFullOcuppancyActiveAds(String adsName) {
+        kamarPenuhText = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@class='ads-status__kamar-penuh']");
+        return playwright.getText(kamarPenuhText).replaceAll("[\\n\\s]+", " ");
+
     }
 }

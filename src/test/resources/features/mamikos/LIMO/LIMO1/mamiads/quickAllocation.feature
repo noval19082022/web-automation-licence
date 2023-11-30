@@ -14,7 +14,7 @@ Feature: Quick Allocation on Properti Saya
     And owner choose filter iklan saya to "Iklan Aktif"
     Then user cek status toggle iklan "Kos Jajajadooo Segun Sorong" is "Naik"
     * user verify the toggle iklan "Kos Jajajadooo Segun Sorong" is "on"
-    * user verify the wording iklan penuh "Kos Jajajadooo Segun Sorong" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
+    * user verify the wording iklan kamar penuh "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
     #quickAllocation from kos page
     When owner navigates to property saya kos
     And owner search kost "Kos Jajajadooo Segun Sorong" on property saya page
