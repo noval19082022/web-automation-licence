@@ -27,7 +27,7 @@ public class NaikkanIklanPO {
     Locator switchToggleLocator;
     Locator saldoMamiAdsValue;
     Locator actionButtonLocator;
-    Locator kamarPenuhText;
+    Locator currentStatusSaldo;
 
 
 
@@ -63,7 +63,6 @@ public class NaikkanIklanPO {
 
     /**
      * Get posisi iklan (naik / tidak naik)
-     *
      * @return posisi iklan
      * @params posisiIklan
      */
@@ -75,7 +74,6 @@ public class NaikkanIklanPO {
 
     /**
      * Verify the status toggle iklan
-     *
      * @return toggleStatus
      * @params  toggleStatus
      */
@@ -285,13 +283,35 @@ public class NaikkanIklanPO {
     }
 
     /**
-     * Verify the description full occupancy
-     * @return message full occupancy
-     * @params adsName
+     * Get list Ads on mamiAds dashboard page
+     * @return AdsName, posisiIklan, currentToggle, AvailableRoom, currentStatusDesc
+     * @params listAds, index
      */
-    public String isFullOcuppancyActiveAds(String adsName) {
-        kamarPenuhText = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@class='ads-status__kamar-penuh']");
-        return playwright.getText(kamarPenuhText).replaceAll("[\\n\\s]+", " ");
+    public String listAds(String listAds, int index) {
+        String element = "";
+        switch (listAds) {
+            case "adsName":
+                element = ".name";
+                break;
+            case "posisiIklan":
+                element = "//*[contains(@class, 'rainbow')]";
+                break;
+            case "availRoom":
+                element = ".ads-status__kamar-penuh";
+                break;
+            case "currentStatusDesc":
+                element = "//*[@class='ads-status__desc']";
+                break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index)).replaceAll("[\\n\\s]+", " ");
+    }
 
+    /**
+     * Verify the toggle on list ads
+     * @return status toggle (on/ off)
+     * @params toggle, index
+     */
+    public boolean listAdsToggle(String toggle, int index) {
+        return playwright.waitTillLocatorIsVisible(playwright.getLocators(page.locator("//*[contains(@class, 'switch--" + toggle +"')]")).get(index));
     }
 }

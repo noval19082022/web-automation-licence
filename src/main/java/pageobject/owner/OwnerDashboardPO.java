@@ -598,7 +598,6 @@ public class OwnerDashboardPO {
     }
 
     /**
-<<<<<<< HEAD
      * Click Waktunya Mengelola Properti
      * @param action
      *

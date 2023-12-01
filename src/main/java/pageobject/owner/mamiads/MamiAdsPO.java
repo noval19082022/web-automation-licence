@@ -25,6 +25,8 @@ public class MamiAdsPO {
     private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
+    Locator kamarPenuhText;
+    private Locator beliSaldoBtnPopupToggle;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -77,6 +79,7 @@ public class MamiAdsPO {
         this.titleDalamProsesRiwayatSaldoText = page.locator("#my-ads").getByText("Belum Ada Transaksi");
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
+        this.beliSaldoBtnPopupToggle = page.locator("#button-right-modal-toggle-confirm-beli-saldo");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -542,6 +545,7 @@ public class MamiAdsPO {
      * @return status description text
      */
     public String getAdsStatusDesc(String adsName) {
+        System.out.println("LUBIS");
         String textStatusDesc= "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-status-description']";
         playwright.waitTillLocatorIsVisible(page.locator(textStatusDesc));
         return playwright.getText(page.locator(textStatusDesc));
@@ -584,6 +588,25 @@ public class MamiAdsPO {
      */
     public void clickOnBeliSaldoOnPopup() {
         playwright.clickOn(beliSaldoBtnPopup);
+    }
+
+    /**
+     * Verify the description full occupancy
+     * @return message full occupancy
+     * @params adsName
+     */
+    public String isFullOcuppancyActiveAds(String adsName) {
+        System.out.println("RAMOSAN");
+        kamarPenuhText = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@class='ads-status__kamar-penuh']");
+        return playwright.getText(kamarPenuhText).replaceAll("[\\n\\s]+", " ");
+
+    }
+
+    /**
+     * click on Beli saldo on popup saldo toggle
+     */
+    public void clickOnBeliSaldoOnPopupToggle() {
+        playwright.clickOn(beliSaldoBtnPopupToggle);
     }
 }
 
