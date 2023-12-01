@@ -18,8 +18,8 @@ public class MamitourPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.pesanSekarangBtn = page.getByTestId("mamitour-landing-header-button");
-        this.titleBelumAdaPropertiPopup = page.locator("//div[@data-testid='popup-property-available']//h3");
-        this.subtitleBelumAdaPropertiPopup = page.locator("//div[@data-testid='popup-property-available']//p");
+        this.titleBelumAdaPropertiPopup = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Properti Aktif"));
+        this.subtitleBelumAdaPropertiPopup = page.getByText("Tambahkan kos/apartemen terlebih dahulu untuk bisa memesan MamiTour.");
         this.pusatBantuan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ke Pusat Bantuan"));
     }
 
@@ -51,5 +51,15 @@ public class MamitourPO {
      */
     public void clickOnPusatBantuan() {
         playwright.clickOn(pusatBantuan);
+    }
+
+    /**
+     * Check is it title content is visible
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean isContentOnMamitourVisible(String titleContent) {
+        Locator title = page.getByText(titleContent);
+        playwright.waitTillLocatorIsVisible(title);
+        return playwright.waitTillLocatorIsVisible(title);
     }
 }

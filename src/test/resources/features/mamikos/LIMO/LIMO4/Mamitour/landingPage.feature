@@ -1,4 +1,4 @@
-@regression @LIMO1 @TEST_LIMO-3650
+@regression @LIMO1 @mamitour @TEST_LIMO-3650
 Feature: Visit Landing Page Mamitour
 
   @continue
@@ -9,22 +9,22 @@ Feature: Visit Landing Page Mamitour
       | 0826666666633 | 0826666666633 | qwerty123    |
     And user access mamitour from owner dashboard
     Then user redirected to mamitour landing page
-    And user will see that the text "Simulasi keliling kos pakai MamiTour" is displayed
-    And user will see that the text "Nikmati Manfaat MamiTour untuk Kos Anda" is displayed
-    And user will see that the text "Lengkapi Kos dengan Virtual Tour" is displayed
-    And user will see that the text "Proses Menggunakan MamiTour" is displayed
-    And user will see that the text "Paket MamiTour" is displayed
-    And user will see that the text "Tanya Jawab" is displayed
-    And user will see that the text "Ingin tahu lebih jauh?" is displayed
+    And user will see title "Simulasi keliling kos pakai MamiTour" on landing page mamitour
+    And user will see title "Nikmati Manfaat MamiTour untuk Kos Anda" on landing page mamitour
+    And user will see title "Lengkapi Kos dengan Virtual Tour" on landing page mamitour
+    And user will see title "Proses Menggunakan MamiTour" on landing page mamitour
+    And user will see title "Paket MamiTour" on landing page mamitour
+    And user will see title "Tanya Jawab" on landing page mamitour
+    And user will see title "Ingin tahu lebih jauh?" on landing page mamitour
 
   Scenario: [Web][Mamitour] Visit landing page mamitour from fitur promosi
     When owner back to owner dashboard
     And user access mamitour from fitur promosi
     Then user redirected to mamitour landing page
-    And user will see that the text "Simulasi keliling kos pakai MamiTour" is displayed
-    And user will see that the text "Nikmati Manfaat MamiTour untuk Kos Anda" is displayed
-    And user will see that the text "Lengkapi Kos dengan Virtual Tour" is displayed
-    And user will see that the text "Proses Menggunakan MamiTour" is displayed
-    And user will see that the text "Paket MamiTour" is displayed
-    And user will see that the text "Tanya Jawab" is displayed
-    And user will see that the text "Ingin tahu lebih jauh?" is displayed
+    And user will see title "Simulasi keliling kos pakai MamiTour" on landing page mamitour
+    And user will see title "Nikmati Manfaat MamiTour untuk Kos Anda" on landing page mamitour
+    And user will see title "Lengkapi Kos dengan Virtual Tour" on landing page mamitour
+    And user will see title "Proses Menggunakan MamiTour" on landing page mamitour
+    And user will see title "Paket MamiTour" on landing page mamitour
+    And user will see title "Tanya Jawab" on landing page mamitour
+    And user will see title "Ingin tahu lebih jauh?" on landing page mamitour

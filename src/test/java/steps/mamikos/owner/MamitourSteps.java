@@ -28,4 +28,9 @@ public class MamitourSteps {
         mamitour.clickOnPusatBantuan();
     }
 
+    @And("user will see title {string} on landing page mamitour")
+    public void user_will_see_title_x_on_landing_page_mamitour(String title) {
+        mamitour.isContentOnMamitourVisible(title);
+    }
+
 }
