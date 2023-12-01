@@ -40,5 +40,6 @@ Feature: OB Owner Reject Booking Full Room
   Scenario: Owner set room kost Kosong
     When owner navigates to property saya kos
     And owner search kost "Dont Starve To Get Her" on property saya page
+    And user click Lihat Selengkapnya button for edit
     And owner click update kamar kost
     And owner set status kamar is kosong

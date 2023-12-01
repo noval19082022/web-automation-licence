@@ -12,7 +12,6 @@ public class NaikkanIklanPO {
     private static String kostName;
     Locator selectFilter;
     Locator filterChoice;
-    Locator adsFullOccupied;
     Locator quickAllocateTitle;
     Locator toggleAds;
     Locator titlePopUpConfirmation;
@@ -28,6 +27,7 @@ public class NaikkanIklanPO {
     Locator switchToggleLocator;
     Locator saldoMamiAdsValue;
     Locator actionButtonLocator;
+    Locator currentStatusSaldo;
 
 
 
@@ -36,7 +36,6 @@ public class NaikkanIklanPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         selectFilter = page.locator(".bg-c-dropdown__trigger");
-        adsFullOccupied = page.locator(".ads-status__kamar-penuh");
         quickAllocateTitle = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//div[@class='alokasi-ads__purchase-desc']");
         toggleAds = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//input[@class='bg-c-switch__input']");
         titlePopUpConfirmation = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -56,7 +55,7 @@ public class NaikkanIklanPO {
      * @return ads name or kost name
      * @params adsName
      */
-    public String getAdsName(String adsName) throws InterruptedException {
+    public String getAdsName(String adsName) {
         Locator adsNameLocator = page.getByText(adsName);
         return playwright.getText(adsNameLocator);
 
@@ -64,7 +63,6 @@ public class NaikkanIklanPO {
 
     /**
      * Get posisi iklan (naik / tidak naik)
-     *
      * @return posisi iklan
      * @params posisiIklan
      */
@@ -76,22 +74,12 @@ public class NaikkanIklanPO {
 
     /**
      * Verify the status toggle iklan
-     *
      * @return toggleStatus
      * @params  toggleStatus
      */
     public boolean getToggleStatus(String adsName, String toggleStatus) {
        toggleLocator = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//input[@id='room-toggle-switch-"+toggleStatus+"']");
         return playwright.waitTillLocatorIsVisible(toggleLocator);
-    }
-
-    /**
-     * Verify the description full occupancy active ads
-     *
-     * @return message full occupancy
-     */
-    public String isFullOcuppancyActiveAds() {
-        return playwright.getText(adsFullOccupied);
     }
 
     /**
@@ -292,5 +280,38 @@ public class NaikkanIklanPO {
     public void clickActionButtonInPopUp(String actionButton) {
         actionButtonLocator = page.locator("//button[contains(text(), '" + actionButton + "')]");
         playwright.clickOn(actionButtonLocator);
+    }
+
+    /**
+     * Get list Ads on mamiAds dashboard page
+     * @return AdsName, posisiIklan, currentToggle, AvailableRoom, currentStatusDesc
+     * @params listAds, index
+     */
+    public String listAds(String listAds, int index) {
+        String element = "";
+        switch (listAds) {
+            case "adsName":
+                element = ".name";
+                break;
+            case "posisiIklan":
+                element = "//*[contains(@class, 'rainbow')]";
+                break;
+            case "availRoom":
+                element = ".ads-status__kamar-penuh";
+                break;
+            case "currentStatusDesc":
+                element = "//*[@class='ads-status__desc']";
+                break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index)).replaceAll("[\\n\\s]+", " ");
+    }
+
+    /**
+     * Verify the toggle on list ads
+     * @return status toggle (on/ off)
+     * @params toggle, index
+     */
+    public boolean listAdsToggle(String toggle, int index) {
+        return playwright.waitTillLocatorIsVisible(playwright.getLocators(page.locator("//*[contains(@class, 'switch--" + toggle +"')]")).get(index));
     }
 }

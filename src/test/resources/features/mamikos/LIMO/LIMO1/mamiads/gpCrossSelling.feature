@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @essentialTest
 Feature: GP Crosseling
 
   @TEST_LIMO-287

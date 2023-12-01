@@ -29,4 +29,9 @@ public class commonSteps {
     public void admin_go_to_role_management_menu() {
         menu.clickRoleManagementMenu();
     }
+
+    @When("admin go to additional fee management menu")
+    public void admin_go_to_additional_fee_management_menu() {
+        menu.clickAdditionalFeeManagementMenu();
+    }
 }
