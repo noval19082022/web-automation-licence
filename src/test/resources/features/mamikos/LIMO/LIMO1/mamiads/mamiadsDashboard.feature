@@ -19,7 +19,7 @@ Feature: MamiAds Dashboard
     Then user will see that the text "Anda Belum Punya Properti" is displayed
     And user will see that the text " Daftarkan dulu properti Anda di Mamikos untuk bisa memakai MamiAds. " is displayed
 
-  @TEST_LIMO-320 @TEST_LIMO-313 @LIMO1-staging @continue
+  @TEST_LIMO-320 @TEST_LIMO-313 @LIMO1-staging
   Scenario Outline: Switch ON OFF ads while saldo burn = 0
     Given user go to mamikos homepage
     When user login as owner:
@@ -49,9 +49,14 @@ Feature: MamiAds Dashboard
       | kos jipyo           | naik               | on            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini terpakai Rp0                                          | Ya, Nonaktifkan | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Saldo Maksimal                                  |
       | Kos Upik 449 Tipe A | naik               | on            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp15.000 | Ya, Nonaktifkan | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                               |
 
-
   @TEST_LIMO-312 @LIMO1-staging @continue
   Scenario: Set full occupancy and make sure the wording if condition ON OFF
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 083176408449  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
     Then user cek status toggle iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Naik"
     And user verify the toggle iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "on"
     And user verify the wording iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Posisi iklan telah naik di hasil pencarian properti."
@@ -76,7 +81,7 @@ Feature: MamiAds Dashboard
   Scenario: To make sure wording if ads full occupancy
     Then user verify the wording iklan kamar penuh "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
 
-  @MA-5820 @continue
+  @MA-5820
   Scenario: Available room in property full occupancy
     When owner navigates to property saya kos
     And owner search kost "Kos Ranise Mamitest" on property saya page
@@ -90,4 +95,134 @@ Feature: MamiAds Dashboard
     When user click "off" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user click "Aktifkan" button on pop up switch toggle iklan
 
+  @TEST_LIMO-317 @LIMO1-staging
+  Scenario: See ads on filter nonaktif
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 085720962105  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
+    Then user can see filter iklan saya is "Semua Iklan"
+    And ads list rooms as expected
+      | adsName                                       | posisiIklan | currentToggle | availRoom                                                                     | currentStatusDesc                                    |
+      | Kos Khalif Automation                         | Tidak Naik  | off           | -                                                                             | Klik tombol untuk naikkan iklan                      |
+      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara | Tidak Naik  | off           | -                                                                             | Klik tombol untuk naikkan iklan                      |
+      | Kos Ayame Tipe Umo Tobelo Halmahera Utara     | Tidak Naik  | off           | -                                                                             | Klik tombol untuk naikkan iklan                      |
+      | Kos Ayame Tipe Mami Tobelo Halmahera Utara    | Naik        | on            | -                                                                             | Posisi iklan telah naik di hasil pencarian properti. |
+      | Raney Hambura                                 | Naik        | on            | -                                                                             | Posisi iklan telah naik di hasil pencarian properti. |
+      | MamiAds Ham                                   | Naik        | on            | Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini | -                                                    |
+      | MamiAds Bura                                  | Kamar Penuh | -             | -                                                                             | -                                                    |
+    When owner choose filter iklan saya to "Iklan Aktif"
+    Then ads list rooms as expected
+      | adsName                                     | posisiIklan | currentToggle | availRoom                                                                     | currentStatusDesc                                    |
+      | Kos Ayame Tipe Mami Tobelo Halmahera Utara | Naik        | on            | -                                                                             | Posisi iklan telah naik di hasil pencarian properti. |
+      | MamiAds Ham                                 | Naik        | on            | Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini | -                                                    |
+      | Raney Hambura                               | Naik        | on            | -                                                                             | Posisi iklan telah naik di hasil pencarian properti. |
+    When owner choose filter iklan saya to "Iklan Nonaktif"
+    Then ads list rooms as expected
+      | adsName                                        | posisiIklan | currentToggle | availRoom | currentStatusDesc               |
+      | Kos Khalif Automation                          | Tidak Naik  | off           | -         | Klik tombol untuk naikkan iklan |
+      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara  | Tidak Naik  | off           | -         | Klik tombol untuk naikkan iklan |
+      | Kos Ayame Tipe Umo Tobelo Halmahera Utara     | Tidak Naik  | off           | -         | Klik tombol untuk naikkan iklan |
+      | MamiAds Bura                                   | Kamar Penuh | -             | -         | -                               |
 
+  @TEST_LIMO-315 @continue
+  Scenario: Switch ON and ubah anggaran the ads never allocate if saldo mamiads sufficient
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 085951394565  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
+    Then user cek status toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is "tidak-naik"
+    #MA-5766 to make sure the ads never allocate
+    And user verify the toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is "off"
+    And user verify the wording iklan "Kos Never Allocate Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
+    And user verify the wording anggaran of iklan "Kos Never Allocate Tobelo Halmahera Utara" is "Tipe Anggaran: Rp10.000 per-hari"
+    When user click "off" toggle the "Kos Never Allocate Tobelo Halmahera Utara"
+    Then user verify the pop up switch "off" toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is displayed
+    When owner click "Batal"
+    Then user cek status toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is "tidak-naik"
+    And user verify the toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is "off"
+    And user verify the wording iklan "Kos Never Allocate Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
+    And user verify the wording anggaran of iklan "Kos Never Allocate Tobelo Halmahera Utara" is "Tipe Anggaran: Rp10.000 per-hari"
+
+  @MA-5882
+  Scenario: MA-5882 To make sure redirect to form anggaran while click ubah the ads never allocate
+    When user click ubah on "Kos Never Allocate Tobelo Halmahera Utara"
+    And owner click "Simpan Pengaturan"
+    Then user verify the toast "Tidak ada perubahan tipe anggaran"
+
+  @TEST_LIMO-319 @LIMO1-staging
+  Scenario: To make sure wording while iklan ON toggle and already reach daily budget
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 089504220900  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
+    Then user cek status toggle iklan "Kos raney chan mamitest" is "Tidak Naik"
+    And user verify the toggle iklan "Kos raney chan mamitest" is "on"
+    And user verify the wording iklan "Kos raney chan mamitest" is "Anggaran harian telah terpenuhi untuk hari ini dan akan naik kembali besok."
+
+  @TEST_LIMO-318 @LIMO1-staging @continue
+  Scenario: Switch ON and ubah anggaran the ads never allocate if saldo mamiads insufficient
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 083176408323  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
+    Then verify the saldo mamiads with condition lessThan 5000
+    And user check ads status:
+      | ads name      | Kos Never Allocate Tipe Insufficient Tobelo Halmahera Utara   |
+      | text status   | tidak-naik                                                    |
+      | toggle status | off                                                           |
+      | status desc   | Klik tombol untuk naikkan iklan                               |
+      | text anggaran | Tipe Anggaran: Rp10.000 per-hari                              |
+    When user click "off" toggle the "Kos Never Allocate Tipe Insufficient Tobelo Halmahera Utara"
+    Then user verify the pop up switch "off" toggle iklan "Kos Never Allocate Tobelo Halmahera Utara" is displayed
+    And user will see that the text "Anda belum bisa menaikkan iklan." is displayed
+    And user will see that the text "Silakan beli saldo terlebih dahulu untuk dapat menaikkan posisi iklan properti Anda." is displayed
+
+  @MA-5992 @continue
+  Scenario: ubah anggaran the ads never allocate when saldo insufficient
+    When user click beli saldo on popup on toggle iklan
+    And user navigates to mamiads dashboard
+    And user click ubah on "Kos Never Allocate Tipe Insufficient Tobelo Halmahera Utara"
+    Then user will see that the text "Anda belum bisa mengubah anggaran" is displayed
+    And user will see that the text "Minimum harus ada saldo 5.000 untuk mengubah anggaran. Silakan beli saldo terlebih dahulu." is displayed
+
+  @MA-6015
+  Scenario: Switch toggle ON, when saldo is < 5000 on property ever allocate saldo
+    When user click beli saldo on popup
+    And user navigates to mamiads dashboard
+    Then user check ads status:
+      | ads name      | Kos Raney Happyvirus Mamitest Tipe A Tobelo Halmahera Utara   |
+      | text status   | tidak-naik                                                    |
+      | toggle status | off                                                           |
+      | status desc   | Klik tombol untuk naikkan iklan                               |
+      | text anggaran | Tipe Anggaran: Saldo Maksimal                                |
+    When user click "off" toggle the "Kos Raney Happyvirus Mamitest Tipe A Tobelo Halmahera Utara"
+    Then user will see that the text "Anda belum bisa menaikkan iklan." is displayed
+    And user will see that the text "Silakan beli saldo terlebih dahulu untuk dapat menaikkan posisi iklan properti Anda." is displayed
+
+  @TEST_LIMO-316 @LIMO1-staging
+  Scenario: Owner want to see Semua Iklan and saldo mamiads insufficient
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 083176950241  | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
+    Then user can see filter iklan saya is "Semua Iklan"
+    And ads list rooms as expected
+      | adsName                                      | posisiIklan | currentToggle | currentStatusDesc                                 | currentStatusSaldo                                             |
+      | Kos Caye Raney Tipe A Tobelo Halmahera Utara | Tidak Naik  | off           | Saldo MamiAds tidak mencukupi. Silahkan beli lagi | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000 |
+      | Kos Caye Raney Tipe B Tobelo Halmahera Utara | Tidak Naik  | off           | Saldo MamiAds tidak mencukupi. Silahkan beli lagi | Tipe Anggaran: Saldo Maksimal                                  |
+      | Kos Caye Raney Tipe C Tobelo Halmahera Utara | Tidak Naik  | off           | Saldo MamiAds tidak mencukupi. Silahkan beli lagi | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp30.000 |
+      | Kos Caye Raney Tipe E Tobelo Halmahera Utara | Kamar Penuh | -             | -                                                 | -                                                              |
+    When owner choose filter iklan saya to "Iklan Aktif"
+    Then user will see that the text "Anda Belum Beriklan" is displayed
+    And user will see that the text " Pasang anggaran dan naikkan iklan properti untuk menjangkau lebih banyak penyewa. " is displayed
