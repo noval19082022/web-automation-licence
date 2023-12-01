@@ -36,7 +36,7 @@ public class BillAndBookingManagementPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         nomorKamarInput = page.getByPlaceholder("Silakan pilih nomor kamar");
-        pilihKamarRadio = page.locator(".mami-radio");
+        pilihKamarRadio = page.locator(".mami-radio-icon").first();
         terapkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Terapkan");
         lanjutkanButton = playwright.locatorByRoleSetName(locator.roleButton, "Lanjutkan");
         simpanButton = playwright.locatorByRoleSetName(locator.roleButton, "Simpan");
@@ -117,7 +117,7 @@ public class BillAndBookingManagementPO {
      * Click on one of the rooms radio
      */
     public void clickOnOneRooms() {
-        pilihKamarRadio.nth(1).click();
+        playwright.clickOn(pilihKamarRadio);
     }
 
     /**
