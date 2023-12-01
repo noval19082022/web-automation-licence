@@ -2,7 +2,6 @@ package pageobject.pms;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
 import utilities.PlaywrightHelpers;
 
 public class sidebarMenuPO {

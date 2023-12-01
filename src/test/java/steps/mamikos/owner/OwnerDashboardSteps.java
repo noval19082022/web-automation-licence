@@ -288,5 +288,16 @@ public class OwnerDashboardSteps {
         String unitTime = ownerDashboard.get(0).get("Satuan Waktu");
         ownerDashboardPO.fillNearestAmountTime(amount, unitTime);
     }
+
+    @And("user access mamitour from owner dashboard")
+    public void user_access_mamitour_from_owner_dashboard() {
+        ownerDashboardPO.clickMamitourOnDashboard();
+    }
+
+    @And("user access mamitour from fitur promosi")
+    public void user_access_mamitour_from_fitur_promosi() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickMamitourOnSidebar();
+    }
 }
 
