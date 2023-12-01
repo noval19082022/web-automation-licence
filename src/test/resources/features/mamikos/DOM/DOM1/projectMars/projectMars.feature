@@ -6,10 +6,11 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 0888881231     | 085697221868   | qamamikos    |
+      | 0888881241     | 0888881241     | qamamikos123    |
     And user click chat button in top bar owner home page
     And user dismiss FTUE MARS and FTUE Broadcast
     And search chat in chatlist "Tenant Mars"
+    And user dismiss FTUE TBC
     And owner enter text "Test FTUE Mars" in chat page
     And user cancel send chat on FTUE Before Chat
     And owner enter text "Test FTUE Mars" in chat page
@@ -18,11 +19,11 @@ Feature: Mars Project
   Scenario: [Web][Mars] Owner runs out of quota
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 0888881271     | 085697221869   | qamamikos    |
+      | phone stag     | phone prod     | password      |
+      | 0888881243     | 0888881243     | qamamikos123  |
     And user click chat button in top bar owner home page
     And user dismiss FTUE MARS and FTUE Broadcast
-    And search chat in chatlist "Muhammad Gorby"
+    And search chat in chatlist "Tenant Mars"
     Then user see attachment button is disabled
   @TEST_DOM-3540 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Owner registered as goldplus
@@ -40,7 +41,7 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 0888881231     | 085697221868   | qamamikos    |
+      | 0888881241     | 0888881241     | qamamikos123 |
     And user click chat button in top bar owner home page
     And user dismiss FTUE MARS and FTUE Broadcast
     And user see the appearence of Mars chatlist

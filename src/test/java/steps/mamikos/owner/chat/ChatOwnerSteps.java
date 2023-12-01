@@ -49,7 +49,6 @@ public class ChatOwnerSteps {
 
     @When("owner enter text {string} in chat page")
     public void ownerEnterTextInChatPage(String chatMsg) {
-        chat.dismissFTUETBC();
         chat.insertChatText(chatMsg);
     }
 
@@ -139,4 +138,8 @@ public class ChatOwnerSteps {
         chat.clickOnBCChatPage();
     }
 
+    @And("user dismiss FTUE TBC")
+    public void userDismissFTUETBC() {
+        chat.dismissFTUETBC();
+    }
 }
