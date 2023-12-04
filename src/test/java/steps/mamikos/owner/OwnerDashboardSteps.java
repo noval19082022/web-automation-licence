@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.goldplus.GoldplusPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
+    GoldplusPO goldplus = new GoldplusPO(page);
 
     private List<Map<String, String>> ownerDashboard;
 
@@ -287,6 +289,27 @@ public class OwnerDashboardSteps {
         String amount = ownerDashboard.get(0).get("Jumlah");
         String unitTime = ownerDashboard.get(0).get("Satuan Waktu");
         ownerDashboardPO.fillNearestAmountTime(amount, unitTime);
+    }
+
+    @Then("widget daftar GP is not appears")
+    public void widget_daftar_gp_is_not_appears() {
+       Assert.assertFalse(goldplus.isWidgetGPAppear(),"widget GP is appear");
+    }
+
+    @Then("info untuk anda section GP {string} is not appears")
+    public void info_untuk_anda_section_gp_is_not_appears(String infoUntukAnda) {
+       Assert.assertFalse(goldplus.isInfoUntukAndaAppear(infoUntukAnda),"info untuk anda section GP is appear");
+    }
+
+    @And("user access mamitour from owner dashboard")
+    public void user_access_mamitour_from_owner_dashboard() {
+        ownerDashboardPO.clickMamitourOnDashboard();
+    }
+
+    @And("user access mamitour from fitur promosi")
+    public void user_access_mamitour_from_fitur_promosi() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickMamitourOnSidebar();
     }
 }
 

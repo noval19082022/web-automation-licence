@@ -247,6 +247,7 @@ public class MamiAdsSteps {
         var toggleStatus = adsData.get("toggle status");
         var statusDesc = adsData.get("status desc");
         var textAnggaran = adsData.get("text anggaran");
+
         if (textStatus.equals("Naik")) {
             Assert.assertEquals(mamiAdsPO.getPosisiIklan(adsName, "naik"), "Naik");
         } else {
@@ -260,5 +261,10 @@ public class MamiAdsSteps {
     @And("user click beli saldo on popup")
     public void user_click_beli_saldo_on_popup() {
         mamiAdsPO.clickOnBeliSaldoOnPopup();
+    }
+
+    @And("user click beli saldo on popup on toggle iklan")
+    public void user_click_beli_saldo_on_popup_on_toggle() {
+        mamiAdsPO.clickOnBeliSaldoOnPopupToggle();
     }
 }

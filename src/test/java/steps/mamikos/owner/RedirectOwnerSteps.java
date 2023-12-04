@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import utilities.PlaywrightHelpers;
@@ -38,7 +39,18 @@ public class RedirectOwnerSteps {
 
     @When("redirected to cek properti sekitar page")
     public void redirected_to_cek_properti_sekitar_page() {
-
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.CEK_PROPERTY_SEKITAR);
+    }
+
+    @Then("user redirected to mamitour landing page")
+    public void user_redirected_to_mamitour_landing_page() {
+        playwright.waitTillPageLoaded();
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMITOUR);
+    }
+
+    @And("user redirected to pusat bantuan mamitour page")
+    public void userRedirectedToPusatBantuanMamitourPage() {
+        playwright.waitTillPageLoaded();
+        Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
     }
 }

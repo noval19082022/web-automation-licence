@@ -2,6 +2,7 @@ package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,6 +10,9 @@ import org.testng.Assert;
 import pageobject.owner.mamiads.MamiAdsPO;
 import pageobject.owner.mamiads.NaikkanIklanPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class NaikkanIklanSteps {
     Page page = ActiveContext.getActivePage();
@@ -177,6 +181,40 @@ public class NaikkanIklanSteps {
 
     @Then("user verify the wording iklan kamar penuh {string} is {string}")
     public void user_verify_the_wording_iklan_kamar_penuh_is(String adsName, String adsDesc) {
-        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds(adsName), adsDesc, "Kamar Penuh doesn't match!");
+        Assert.assertEquals(mamiAdsPO.isFullOcuppancyActiveAds(adsName), adsDesc, "Kamar Penuh doesn't match!");
+    }
+
+    @And("ads list rooms as expected")
+    public void ads_list_rooms_as_expected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0; int j = 0; int k = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(naikkanIklanPO.listAds("adsName", i), content.get("adsName"));
+            Assert.assertEquals(naikkanIklanPO.listAds("posisiIklan", i), content.get("posisiIklan"));
+            try {
+                if (!content.get("currentToggle").equals("-")) {
+                    Assert.assertTrue(naikkanIklanPO.listAdsToggle(content.get("currentToggle"), j), content.get("currentToggle"));
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            try {
+                if (!content.get("availRoom").equals("-")) {
+                    Assert.assertEquals(naikkanIklanPO.listAds("availRoom", j), content.get("availRoom"));
+                    j++;
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            try {
+                if (!content.get("currentStatusDesc").equals("-")) {
+                    Assert.assertEquals(naikkanIklanPO.listAds("currentStatusDesc", k), content.get("currentStatusDesc"));
+                    k++;
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            i++;
+        }
+    }
+
+    @Then("verify the saldo mamiads with condition lessThan {int}")
+    public void verify_the_saldo_mamiads_with_condition_lessThan(int minimalSaldo) {
+        int saldoMa = naikkanIklanPO.getSaldoMaText();
+        Assert.assertTrue(saldoMa < minimalSaldo, "Saldo MamiAds greatherThan Saldo Maksimal");
     }
 }
