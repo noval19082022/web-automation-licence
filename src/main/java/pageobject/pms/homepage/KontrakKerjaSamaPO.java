@@ -254,14 +254,14 @@ public class KontrakKerjaSamaPO {
         rincianTipeKamarSection = page.locator(".organism-room-price");
 
         //---OTA Price---//
-        tipeKamarTable = page.locator("tr td:nth-of-type(1)");
-        genderTable = page.locator("tr td:nth-of-type(2)");
-        jumlahKamarTable = page.locator("tr td:nth-of-type(3)");
-        otaPriceTable = page.locator("tr td:nth-of-type(4)");
-        bulananPriceTable = page.locator("tr td:nth-of-type(5)");
-        tigaBulanPrice = page.locator("tr td:nth-of-type(6)");
-        enambulanPrice = page.locator("tr td:nth-of-type(7)");
-        rowRincianTipeKamarDanHarga = page.locator("tbody tr");
+        tipeKamarTable = page.locator(".organism-room-price tr td:nth-of-type(1)");
+        genderTable = page.locator(".organism-room-price tr td:nth-of-type(2)");
+        jumlahKamarTable = page.locator(".organism-room-price tr td:nth-of-type(3)");
+        otaPriceTable = page.locator(".organism-room-price tr td:nth-of-type(4)");
+        bulananPriceTable = page.locator(".organism-room-price tr td:nth-of-type(5)");
+        tigaBulanPrice = page.locator(".organism-room-price tr td:nth-of-type(6)");
+        enambulanPrice = page.locator(".organism-room-price tr td:nth-of-type(7)");
+        rowRincianTipeKamarDanHarga = page.locator(".organism-room-price tbody tr");
     }
 
     /**
@@ -814,21 +814,21 @@ public class KontrakKerjaSamaPO {
      * @param publishSixMonth Harga Kerja Sama (Publish) 6 Bulan
      */
     public void assertTipeDanHargaKamar(int i, String type, String gender, String room, String ota, String monthly, String threeMonth, String sixMonth, String staticMonthly, String staticThreeMonth, String staticSixMonth, String publishMonthly, String publishThreeMonth, String publishSixMonth) {
-        String index = String.valueOf(i+2);
+        String index = String.valueOf(i);
 
-        tipeKamar = page.locator("((//tr)["+index+"]//td)[1]");
-        this.gender = page.locator("((//tr)["+index+"]//td)[2]");
-        jumlahKamar = page.locator("((//tr)["+index+"]//td)[3]");
-        hargaOTA = page.locator("((//tr)["+index+"]//td)[4]");
-        hargaBulanan = page.locator("((//tr)["+index+"]//td)[5]");
-        harga3bulan = page.locator("((//tr)["+index+"]//td)[6]");
-        harga6bulan = page.locator("((//tr)["+index+"]//td)[7]");
-        hargaStaticBulanan = page.locator("((//tr)["+index+"]//td)[8]");
-        hargaStatic3Bulan = page.locator("((//tr)["+index+"]//td)[9]");
-        hargaStatic6Bulan = page.locator("((//tr)["+index+"]//td)[10]");
-        hargaPublishBulanan = page.locator("((//tr)["+index+"]//td)[11]");
-        hargaPublish3Bulan = page.locator("((//tr)["+index+"]//td)[12]");
-        hargaPublish6Bulan = page.locator("((//tr)["+index+"]//td)[13]");
+        tipeKamar = page.locator(".ss-table tr td:nth-of-type(1)").nth(i);
+        this.gender = page.locator(".ss-table tr td:nth-of-type(2)").nth(i);
+        jumlahKamar = page.locator(".ss-table tr td:nth-of-type(3)").nth(i);
+        hargaOTA = page.locator(".ss-table tr td:nth-of-type(4)").nth(i);
+        hargaBulanan = page.locator(".ss-table tr td:nth-of-type(5)").nth(i);
+        harga3bulan = page.locator(".ss-table tr td:nth-of-type(6)").nth(i);
+        harga6bulan = page.locator(".ss-table tr td:nth-of-type(7)").nth(i);
+        hargaStaticBulanan = page.locator(".ss-table tr td:nth-of-type(8)").nth(i);
+        hargaStatic3Bulan = page.locator(".ss-table tr td:nth-of-type(9)").nth(i);
+        hargaStatic6Bulan = page.locator(".ss-table tr td:nth-of-type(10)").nth(i);
+        hargaPublishBulanan = page.locator(".ss-table tr td:nth-of-type(11)").nth(i);
+        hargaPublish3Bulan = page.locator(".ss-table tr td:nth-of-type(12)").nth(i);
+        hargaPublish6Bulan = page.locator(".ss-table tr td:nth-of-type(13)").nth(i);
 
         assertThat(tipeKamar).hasText(type);
         assertThat(this.gender).hasText(gender);
