@@ -535,6 +535,22 @@ public class GoldplusSteps {
         playwright.clickOnTextButton(action);
 
     }
+
+    @When("owner wants to see Lihat Detail Manfaat Goldplus Satu")
+    public void owner_wants_to_see_lihat_detail_manfaat_goldplus_satu() {
+       goldplus.clickOnDetailManfaatGP1();
+    }
+
+    @When("owner wants to see Lihat Detail Manfaat Goldplus Dua")
+    public void owner_wants_to_see_lihat_detail_manfaat_goldplus_dua() {
+        goldplus.clickOnDetailManfaatGP2();
+    }
+
+    @Then("owner see benefit {string} is displayed")
+    public void owner_see_benefit_is_displayed(String benefit) {
+        Assert.assertTrue(goldplus.getTextManfaatGP(benefit),"benefit GP doesnt match");
+    }
+
     //------ Terminated Contract GP ------//
     @When("user wants to terminate Goldplus for owner with phone number {string}")
     public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
