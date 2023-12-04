@@ -71,6 +71,8 @@ public class OwnerDashboardPO {
     Locator nearestTimeSaveButton;
     Locator saveBssButton;
     Locator toggleEnable;
+    Locator mamitourDashboard;
+    Locator mamitourMenu;
 
     private Locator fiturPromosiExpand;
 
@@ -134,6 +136,8 @@ public class OwnerDashboardPO {
         saveInPopUpButton = page.getByTestId("checkin-save-btn");
         saveBssButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
+        mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
+        mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
     }
 
     /**
@@ -681,5 +685,19 @@ public class OwnerDashboardPO {
         playwright.clickOn(nearestTimeSaveButton);
         playwright.clickOn(saveInPopUpButton);
         playwright.clickOn(saveBssButton);
+    }
+
+    /**
+     * click on mamitour entry point on owner dashboard
+     */
+    public void clickMamitourOnDashboard() {
+        playwright.clickOn(mamitourDashboard);
+    }
+
+    /**
+     * click on mamitour menu on sidebar
+     */
+    public void clickMamitourOnSidebar() {
+        playwright.clickOn(mamitourMenu);
     }
 }

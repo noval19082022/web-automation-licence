@@ -67,6 +67,8 @@ public class Mamikos {
     public static final String PROMO_MAMIKOS = JavaHelpers.getPropertyValue(MAMIKOS, "promoMamikosURL_prod");
     public static final String MAMIPAY_OWNER_LIST = JavaHelpers.getPropertyValue(MAMIKOS, "mamipayOwnerList");
     public static final String GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusPackage");
+    public static final String MAMITOUR = JavaHelpers.getPropertyValue(MAMIKOS, "mamitour");
+    public static final String HELP_MAMITOUR = JavaHelpers.getPropertyValue(MAMIKOS, "helpMamitour");
 
     @Setter @Getter
     private static  String propertyKosName;
