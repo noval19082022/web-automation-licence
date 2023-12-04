@@ -1,4 +1,4 @@
-@DOM4
+@DOM4 @essentialTest
 Feature: Chat and Chat Optimization
 
   @TEST_DOM-1737
@@ -77,6 +77,7 @@ Feature: Chat and Chat Optimization
     And user click chat button in top bar owner home page
     And search chat in chatlist "Raney Arora"
     Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
+    And user dismiss FTUE TBC
     When owner enter text "My phone is 00000000001" in chat page
     Then chat room appear with latest message "My phone is 00000000001"
 

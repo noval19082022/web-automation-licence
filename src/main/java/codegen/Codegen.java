@@ -20,7 +20,7 @@ public class Codegen {
 //            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
 //            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
-            loginOwner(page);
+//            loginOwner(page);
 //            loginOwnersini(page);
 //            loginPMS(page);
 //            loginAdminBangkrupux(page);

@@ -319,7 +319,6 @@ public class PropertySayaPO {
      * user as owner click update kamar button
      */
     public void clickUpdateKamarButton() {
-        playwright.clickOn(lihatSelengkapnyaButton);
         playwright.clickOn(updateKamarButton);
     }
 
@@ -1328,7 +1327,7 @@ public class PropertySayaPO {
     /**
      * Click on already inhabited checkbox
      */
-    public void clickAlreadyInhabitedCheckbox() throws InterruptedException {
+    public void clickAlreadyInhabitedCheckbox() {
         playwright.clickOn(alreadyInhabitedCheckbox);
     }
 
@@ -1940,8 +1939,6 @@ public class PropertySayaPO {
 
     /**
      * Click on Selesai button add kos when add kos from duplicate kos
-     *
-     *
      */
     public void clickOnSelesaiAddKos() {
         playwright.clickOn(selesaiButton);
@@ -1950,7 +1947,6 @@ public class PropertySayaPO {
     /**
      * Click add pengelola checkbox
      * @param addDataPengelola
-     *
      */
     public void selectPengelola(String addDataPengelola) {
         if (addDataPengelola.equals("yes")){
@@ -1961,7 +1957,6 @@ public class PropertySayaPO {
     /**
      * Input pengelola name
      * @param pengelolaName
-     *
      */
     public void inputPengelolaName(String pengelolaName) {
         playwright.forceFill(pengelolaNameField, pengelolaName);
@@ -1970,7 +1965,6 @@ public class PropertySayaPO {
     /**
      * Input pengelola phone
      * @param pengelolaPhone
-     *
      */
     public void inputPengelolaPhone(String pengelolaPhone) {
         playwright.forceFill(pengelolaPhoneField, pengelolaPhone);

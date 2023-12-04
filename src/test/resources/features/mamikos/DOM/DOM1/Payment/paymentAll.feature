@@ -1,4 +1,4 @@
-@DOM1
+@DOM1 @essentialTest
 Feature: Payment All
 
   Background: Delete and create contract
@@ -9,14 +9,14 @@ Feature: Payment All
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
       | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
+      | 0895124719 | 08119787884 |
     And admin want to batalkan contract if exist
 
     ##cancel booking if tenant have booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And user cancel booking
 
     ##create contract
@@ -41,7 +41,7 @@ Feature: Payment All
     Given admin go to mamikos mamipay admin
     When admin search contract by tenant phone number:
       | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
+      | 0895124719 | 08119787884 |
     And admin search contract by kost level "SinggahSini"
 #  this step is comment for whale because the button is hide after ARAC project phase 1 release
 #    And admin want to extend contract
@@ -54,7 +54,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method using BNI
     And tenant want to see invoice on riwayat booking after payment
@@ -65,7 +65,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
     And tenant want to see invoice on riwayat booking after payment
@@ -76,7 +76,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method with DANA
     And tenant want to see invoice on riwayat booking after payment
@@ -87,7 +87,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method using LinkAja
     And tenant want to see invoice on riwayat booking after payment
@@ -98,7 +98,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using mandiri without close the page
     And tenant want to see invoice on riwayat booking after payment
@@ -109,7 +109,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0892202100" without close the page
     And tenant want to see invoice on riwayat booking after payment
@@ -120,7 +120,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method using "PERMATA"
     And tenant want to see invoice on riwayat booking after payment
@@ -131,7 +131,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method using Alfamart
     And tenant want to see invoice on riwayat booking after payment

@@ -795,6 +795,15 @@ public class PlaywrightHelpers {
         clickOn(locatorByRoleSetName(AriaRole.LINK, linkText));
     }
 
+    /**
+     * Verify radio button is check
+     * @param locator
+     */
+    public boolean isRadioButtonChecked(Locator locator){
+        return locator.isChecked();
+    }
+
+
 
     //---- Assert Part ----\\
 

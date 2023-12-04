@@ -1,4 +1,4 @@
-@regression @kostReviewAdmin @BBM4
+@regression @kostReviewAdmin @BBM4 @essentialTest
 
 Feature: Kost Review
 

@@ -1,4 +1,4 @@
-@DOM1
+@DOM1 @essentialTest
 Feature: New Flow Register Owner
 
   @TEST_DOM-2244 @Automated @DOM @web-covered

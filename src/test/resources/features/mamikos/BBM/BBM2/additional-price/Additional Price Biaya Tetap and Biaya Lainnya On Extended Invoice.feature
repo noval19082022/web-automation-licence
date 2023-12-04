@@ -87,4 +87,4 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
     And owner set Kelola Tagihan filter month to "next" month
     And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is current month length
-    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
+    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

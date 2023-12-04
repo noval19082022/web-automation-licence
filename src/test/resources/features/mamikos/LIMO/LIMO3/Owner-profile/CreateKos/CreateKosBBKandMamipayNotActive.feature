@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @createKosBBKandMamipayNotActive
+@regression @LIMO3 @listing-monetization @createKosBBKandMamipayNotActive @essentialTest
 
 Feature: Create new kos with owner that doesn't activate mamipay and BBK
 

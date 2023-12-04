@@ -27,9 +27,6 @@
       And tenant search kost then go to kost details:
         | kost name stag                       | kost name prod                       |
         | Kost Singgahsini Full Ipi Automation | Kost Singgahsini Full Ipi Automation |
-      And user click chat in kos detail
-      And user select question "Masih ada kamar?"
-      And user click send chat from popup
-      And user want to dismiss FTUE
-      Then user sees the Booking button disable
+      And tenant can see kamar penuh
+      Then tenant can see "Ikut daftar tunggu" button
 

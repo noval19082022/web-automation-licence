@@ -1,4 +1,4 @@
-@regression @createNewBooking @BBM3
+@regression @createNewBooking @BBM3 @essentialTest
 Feature: PMS - New booking
 
   Scenario: Phone number tenant verified

@@ -66,6 +66,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | additional price title | Automation Biaya Lainnya |
       | addtional price value  | 200000                   |
 
+
   Scenario: Tenant Check Additional Price Biaya Tetap and Biaya Lainnya Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
