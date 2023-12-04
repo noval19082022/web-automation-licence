@@ -47,6 +47,7 @@ public class TenantBillManagementPO {
     Locator contractName;
     Locator clickSelengkapnyaContract;
 
+    //Locator for download biodata penyewa
     Locator filterDropdown;
     Locator downloadBiodataPenyewaButton;
     Locator checkbox;

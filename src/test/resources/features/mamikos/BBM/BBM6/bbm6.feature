@@ -186,7 +186,7 @@ Feature: BnB feature
     And admin search contract by Renter Phone Number and input field "0892202357"
     And admin cancel contract
 
-  @filterPenyewa
+  @filterPenyewa @continue
   Scenario: check contract status on all filter
     Given user go to mamikos homepage
     When user login as owner:
@@ -207,9 +207,6 @@ Feature: BnB feature
   @downloadBiodata
   Scenario: Download biodata fakedoor
     Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 089120220103 | 081328787342 | qwerty123 |
     And user navigate to penyewa page
     And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
     And user click download biodata penyewa button
@@ -311,7 +308,7 @@ Feature: BnB feature
     And user click "Pusat Bantuan"
     Then user can see help center page
 
-  @disbursementInfo
+  @disbursementInfo @continue
   Scenario: Check content and link on info untuk anda for disbursement
     Given user go to mamikos homepage
     When user login as owner:
@@ -326,9 +323,6 @@ Feature: BnB feature
   @checkContentLaporanKeuangan
   Scenario: Check content Laporan Keuangan
     Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod  | password  |
-      | 089120220103 | 08100000622 | qwerty123 |
     And owner navigates to financial report
     Then user can see "Buka Laporan Keuangan di Aplikasi" and "Untuk saat ini, fitur Laporan Keuangan hanya dapat"
 
