@@ -24,6 +24,8 @@ public class AdminMamipayDashboardPO {
     Locator filterTeamDropdown;
     Locator partnerVoucher;
     Locator searchButton;
+    Locator phoneOwnerTextbox;
+    Locator deleteMamipayButton;
 
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
@@ -39,6 +41,8 @@ public class AdminMamipayDashboardPO {
         filterRuleDropdown = page.locator(".select2-selection__arrow").first();
         filterTeamDropdown = page.locator("div:nth-child(5) > span > .selection > .select2-selection > .select2-selection__arrow");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        phoneOwnerTextbox = page.locator("//input[@name='search_value']");
+        deleteMamipayButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
     }
 
     /**
@@ -200,5 +204,34 @@ public class AdminMamipayDashboardPO {
         playwright.clickOn(voucherDiscount);
         playwright.clickOn(partnerVoucher);
         return new MamikosListMassVoucherPO(page);
+    }
+
+    /**
+     * Search phone owner and press Enter
+     * @param phoneOwner
+     *
+     */
+    public void searchPhoneOwner(String phoneOwner) {
+        playwright.forceFill(phoneOwnerTextbox, phoneOwner);
+        playwright.pressKeyboardKey("Enter");
+    }
+
+    /**
+     * Verify the first delete mamipay button is displayed
+     * @return boolean (true, false)
+     *
+     */
+    public boolean isFirstDeleteMamipayDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(deleteMamipayButton, 3000.0);
+    }
+
+    /**
+     * Click first delete mamipay button
+     *
+     *
+     */
+    public void clickOnFirstDeleteMamipay() {
+        playwright.clickOn(deleteMamipayButton);
+        playwright.acceptDialog(deleteMamipayButton);
     }
 }
