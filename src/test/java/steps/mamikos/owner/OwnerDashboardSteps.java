@@ -300,5 +300,16 @@ public class OwnerDashboardSteps {
     public void info_untuk_anda_section_gp_is_not_appears(String infoUntukAnda) {
        Assert.assertFalse(goldplus.isInfoUntukAndaAppear(infoUntukAnda),"info untuk anda section GP is appear");
     }
+
+    @And("user access mamitour from owner dashboard")
+    public void user_access_mamitour_from_owner_dashboard() {
+        ownerDashboardPO.clickMamitourOnDashboard();
+    }
+
+    @And("user access mamitour from fitur promosi")
+    public void user_access_mamitour_from_fitur_promosi() {
+        ownerDashboardPO.clickToExpandFiturPromosi();
+        ownerDashboardPO.clickMamitourOnSidebar();
+    }
 }
 

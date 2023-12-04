@@ -7,7 +7,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.KostOwnerPO;
-import pageobject.owner.PropertySayaPO;
 import testdata.BangKrupuxTestData;
 import utilities.PlaywrightHelpers;
 
