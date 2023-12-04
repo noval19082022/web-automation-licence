@@ -177,3 +177,166 @@ Feature: BnB feature
     And admin click detail in actions button
     Then admin sees other price with name "1234567890abcdefjkl" and price "Rp100.000" show in detail booking
 
+  @deleteContractOtherPrice
+  Scenario: Delete contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by Renter Phone Number and input field "0892202357"
+    And admin cancel contract
+
+  @filterPenyewa
+  Scenario: check contract status on all filter
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 089120220103 | 081328787342 | qwerty123 |
+    And user navigate to penyewa page
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user click on dropdown Filter box and select filter:
+      | Filter         |
+      | Sedang menyewa |
+    And user click on dropdown Filter box and select filter:
+      | Filter         |
+      | Akan masuk     |
+    Then user click on dropdown Filter box and select filter:
+      | Filter         |
+      | Menghentikan kontrak sewa |
+
+  @downloadBiodata
+  Scenario: Download biodata fakedoor
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 089120220103 | 081328787342 | qwerty123 |
+    And user navigate to penyewa page
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And user click download biodata penyewa button
+    And user tick on checkbox pop up
+    Then user will see information about upcoming feature
+
+  @waitingTerminateConfirmation
+  Scenario: Cancel and create booking
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag | phone prod |
+      | 0892202358 | 0892202358 |
+    And admin akhiri contract
+    Then admin should success terminate contract
+
+ # Scenario: cancel booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0892202358 | 0892202358 | qwerty123 |
+    And user cancel booking
+
+  #Scenario: create booking
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                             | kost name prod |
+      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+    And tenant booking kost for "today" and input rent duration equals to 0
+    Then tenant should success booking kost
+    And tenant logs out
+
+ # Scenario: Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 089120220103 | 0890000000289 | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner accept booking via Homepage
+    And owner logs out
+
+#  Scenario: Tenant pay kos
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0892202358 | 0892202358 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0890867321217"
+ # Scenario: Tenant check-in kos
+    And tenant navigate to riwayat and draf booking
+    And tenant checkin kost from riwayat booking
+
+  @waitingTerminateConfirmation
+  Scenario: check waiting terminated confirmation status
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod  | password  |
+      | 0892202358 | 08100000622 | qwerty123 |
+    And user navigate to kontrak kost saya
+    And user click ajukan berhenti sewa on kontrak saya page
+    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
+    And user click review kost
+    And user input review kost with rating 5:
+      | review stop rent stag       |
+      | Kost sangat aman dan bersih |
+    And user click ajukan berhenti sewa on kontrak saya after review kos
+    And user logs out as a Tenant user
+    When user login as owner:
+      | phone stag   | phone prod  | password  |
+      | 089120220103 | 08100000622 | qwerty123 |
+    And user navigate to penyewa page
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user click on lihat selengkapnya button
+    And user click on kontrak sewa button
+    Then user will see message request terminated contract
+
+  @checkContentOnWaktuMengelolaKos
+  Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod  | password  |
+      | 089604239090 | 08100000622 | widyarini1|
+    And owner navigates to owner dashboard
+    And owner dismiss FTUE goldplus
+    And user click "Atur Ketersediaan Kamar"
+    And owner back to owner dashboard
+    And owner dismiss FTUE goldplus
+    And user click "Atur Harga"
+    And owner back to owner dashboard
+    And owner dismiss FTUE goldplus
+    And user click "Daftar kontrak penyewa kos"
+    And owner back to owner dashboard
+    And owner dismiss FTUE goldplus
+    And user click "Tambah Penyewa"
+    And owner click back previous button
+    And owner dismiss FTUE goldplus
+    And user click "Pusat Bantuan"
+    Then user can see help center page
+
+  @disbursementInfo
+  Scenario: Check content and link on info untuk anda for disbursement
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod  | password  |
+      | 089120220103 | 08100000622 | qwerty123 |
+    And owner navigate to billing management
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And owner set Kelola Tagihan filter month to "Oktober" month
+    And user clicks Sudah bayar tab
+    And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
+
+  @checkContentLaporanKeuangan
+  Scenario: Check content Laporan Keuangan
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod  | password  |
+      | 089120220103 | 08100000622 | qwerty123 |
+    And owner navigates to financial report
+    Then user can see "Buka Laporan Keuangan di Aplikasi" and "Untuk saat ini, fitur Laporan Keuangan hanya dapat"
+
+  @checkOwnerHaveOneKosNotBbk
+  Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod  | password  |
+      | 089604239090 | 08100000622 | widyarini1|
+    And owner navigates to owner dashboard
+    And user click "Atur Ketersediaan Kamar"

@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,7 +14,9 @@ import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class OwnerManageBillSteps {
     Page page = ActiveContext.getActivePage();
@@ -23,6 +26,7 @@ public class OwnerManageBillSteps {
     BillDetailsPO billdetail = new BillDetailsPO(page);
     LoadingPO loading = new LoadingPO(page);
 
+    private List<Map<String, String>> property;
 
     @When("owner go to bill page of kost {string} on month of {string}")
     public void ownerGoToBillPageOfKostOnMonthOf(String kostName, String month) {
@@ -110,6 +114,11 @@ public class OwnerManageBillSteps {
         billManage.searchKostInPenyewaMenu(kostName);
     }
 
+    @And("user click on lihat selengkapnya button")
+    public void userClickOnLihatSelengkapnyaButton() {
+        billManage.clickOnLihatSelengkapnyaButton();
+    }
+
     @And("user click on kontrak sewa button")
     public void userClickOnKontrakSewaButton() {
         billManage.clickOnKontrakSewaButton();
@@ -190,5 +199,46 @@ public class OwnerManageBillSteps {
     public void user_can_see_disclaimer(String disclaimer) {
         Assert.assertTrue(billManage.getDisclaimerText().contains(disclaimer));
     }
+    @And("user click on dropdown Filter box and select filter:")
+    public void userClickOnDropdownFilterBoxAndSelectFilter(DataTable tables) {
+        billManage.clickOnFilterDropdown();
+        property = tables.asMaps(String.class, String.class);
+        String filter = property.get(0).get("Filter");
+        billManage = billManage.fillFilterStatusBooking(filter);
+    }
 
+    @And("user click download biodata penyewa button")
+    public void userClickDownloadBiodataPenyewaButton() {
+        billManage.clickDownloadBiodataPenyewa();
+    }
+    @And("user tick on checkbox pop up")
+    public void userTickCheckbox() {
+        billManage.tickCheckbox();
+    }
+    @And("user will see information about upcoming feature")
+    public void userWillSeeInformationAboutUpcomingFeature() {
+        Assert.assertTrue(billManage.isUpcomingFeatureDisplayed());
+    }
+
+    @Then("user will see message request terminated contract")
+    public void userWillSeeMessage() {
+        Assert.assertTrue(billManage.userWillSeeMessageTerminatedContract());
+    }
+    @Then("user can see help center page")
+    public void userWillSeeMessageForOwner() {
+        Assert.assertTrue(billManage.userCanSeeHelpCenterPage());
+    }
+    @And("owner search kost in billing management {string}")
+    public void ownerSearchKostInPenyewaMenu(String kostName) {
+        billManage.searchKostInBillingManagement(kostName);
+    }
+    @Then("user see Kapan uang masuk ke rekening saya? and clicks on disbursement link")
+    public void userClickOnDIsbursementLink() {
+        billManage.userClickOnDIsbursementLink();
+    }
+    @Then("user can see {string} and {string}")
+    public void user_can_sees_other_price_with_name_and_price_on_konfirmasi(String titleText, String contentText) {
+        Assert.assertEquals(billManage.getTextFinancialReport(titleText, contentText), "Buka Laporan Keuangan di AplikasiUntuk saat ini, fitur Laporan Keuangan hanya dapat digunakan di\n" +
+                "      aplikasi Mamikos di Android dan iOS.");
+    }
 }

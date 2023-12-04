@@ -362,4 +362,10 @@ public class NavigatesSteps {
     public void admin_access_point_expiry_menu() {
         playwright.navigateTo(Mamikos.URL + "/admin/point/expiry#point", 30000.0, LoadState.LOAD);
     }
+
+    @And("owner/user navigates to financial report")
+    public void userNavigatesToLaporanKeuangan() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.FINANCIAL_REPORT, 30000.0, LoadState.LOAD);
+        loading.waitForLoadingIconDisappear();
+    }
 }
