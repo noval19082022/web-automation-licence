@@ -56,7 +56,7 @@ Feature: Edit Kost
     And user click button edit finished
     And user click done in success page pop up of edit kos
     And owner search kost "Kos oke bebek BS9Bz" on property saya page
-    Then user see kos with name "Kos oke bebek BS9Bz", status "Diperiksa Admin" and type "Kos Putra"
+    Then user see kos with name "Kos oke bebek BS9Bz", status "Diperiksa Admin" and type "Kos Campur"
 
   Scenario: Verify kos in admin
     Given admin go to mamikos bangkrupux admin

@@ -31,7 +31,7 @@ Feature: Rekomendasi Listing
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    | password    |
-      | 0890000000265 | Bismillah01 |
+      | 082322233399  | 12345678    |
     When tenant search kost then go to kost details:
       | kost name stag         | kost name prod |
       | Kos Upik Merapi Tipe C |                |
