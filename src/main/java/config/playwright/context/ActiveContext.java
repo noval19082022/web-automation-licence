@@ -10,6 +10,4 @@ public class ActiveContext {
     private static BrowserContext activeBrowserContext;
     @Setter @Getter
     private static Page activePage;
-    @Setter @Getter
-    private static String contextName;
 }

@@ -10,6 +10,4 @@ public class MamikosBrowserContext {
     private static BrowserContext browserContextOne, browserContextTwo;
     @Setter @Getter
     private static Page contextOneActivePage, contextTwoActivePage;
-    @Setter @Getter
-    private static String contextName;
 }

@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @BBM5 @COOP-1988 @acceptFromChat @essentialTest
+@occupancyAndBilling @OB @BBM5 @COOP-1988 @acceptFromChat @essentialTest3
 Feature: Accept Booking from Chat room
 
   Scenario: Delete contract
