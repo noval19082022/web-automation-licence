@@ -43,7 +43,7 @@ public class SearchContractPO {
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         searchInput = page.getByPlaceholder("Search");
         searchKostLevel = page.getByPlaceholder("Kos Level");
-        batalkanContractButton = page.locator("//*[.='Batalkan Kontrak']");
+        batalkanContractButton = page.locator("li > .btn").first();
         berhentikanContractButton = page.locator(".tools-contract__btn-danger");
         berhentikanContractPopUpButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));
         akhiriContractLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Akhiri Kontrak"));

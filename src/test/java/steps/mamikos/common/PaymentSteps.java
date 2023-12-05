@@ -206,13 +206,16 @@ public class PaymentSteps {
 
     @And("owner set Kelola Tagihan filter month to {string} month")
     public void ownerSetKelolaTagihanFilterMonthToMonth(String monthNumber) throws ParseException, InterruptedException {
-        if(monthNumber.equalsIgnoreCase("current")) {
+        if (monthNumber.equalsIgnoreCase("current")) {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
-        }
-        else if (monthNumber.equalsIgnoreCase("next")){
+            invoice.selectManageNextBillsMonthFilter(monthNumber);
+        } else if (monthNumber.equalsIgnoreCase("next")) {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 1, 0, 0, 0);
+            invoice.selectManageNextBillsMonthFilter(monthNumber);
+        } else if (monthNumber.equalsIgnoreCase("Oktober")) {
+        monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
+        invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
         }
-        invoice.selectManageNextBillsMonthFilter(monthNumber);
     }
 
     @And("user open invoice details")

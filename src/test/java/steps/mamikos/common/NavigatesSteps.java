@@ -371,4 +371,9 @@ public class NavigatesSteps {
     public void owner_navigate_to_list_goldplus_package() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_PACKAGE, 30000.0, LoadState.LOAD);
     }
+    @And("owner/user navigates to financial report")
+    public void userNavigatesToLaporanKeuangan() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.FINANCIAL_REPORT, 30000.0, LoadState.LOAD);
+        loading.waitForLoadingIconDisappear();
+    }
 }
