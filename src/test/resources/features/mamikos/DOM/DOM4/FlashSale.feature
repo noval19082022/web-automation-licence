@@ -38,3 +38,9 @@ Feature: Flash Sale
     Given user navigates to promo ngebut landing area
     When user go to kost details from promo ngebut list
     Then user can see promo ngebut pop-up
+
+  @TEST_COOP-3290
+  Scenario: [Home Page][WEB]Promo ngebut Nominal discount and atribute (with section)
+    Given user go to mamikos homepage
+    When user will see promo ngebut info on kost card
+    Then user can see Promo Ngebut discount in nominal amount with normal price with strikethrough and "(Bulan pertama)" text on homepage

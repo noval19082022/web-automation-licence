@@ -6,12 +6,14 @@ import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.promongebut.PromoNgebutLandingAreaPO;
 import pageobject.common.promongebut.PromoNgebutLandingPO;
 
 public class PromoNgebutSteps {
     Page page = ActiveContext.getActivePage();
+    HomePO homePO = new HomePO(page);
     PromoNgebutLandingPO promo = new PromoNgebutLandingPO(page);
     PromoNgebutLandingAreaPO promoArea = new PromoNgebutLandingAreaPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
@@ -67,5 +69,12 @@ public class PromoNgebutSteps {
         Assert.assertTrue(kostDetail.isMamikosPromoNgebutButtonVisible(), "Mamikos Promo Ngebut Button Is Not Visible");
         Assert.assertTrue(kostDetail.isMauDongButtonVisible(), "Mau Dong Button Is Not Visible");
         Assert.assertTrue(kostDetail.isSayaMengertiButtonVisible(), "Saya Mengerti Button Is Not Visible");
+    }
+
+    @Then("user can see Promo Ngebut discount in nominal amount with normal price with strikethrough and {string} text on homepage")
+    public void userCanSeePromoNgebutDiscountInNominalAmountWithNormalPriceWithStrikethroughAndBulanPertamaTextOnHomePage(String rentType) {
+        Assert.assertTrue(homePO.priceStrikePromoNgebutIsVisible());
+        Assert.assertTrue(homePO.promoNgebutInfoIsVisible());
+        Assert.assertEquals(homePO.getPromoNgebutRenType(), rentType);
     }
 }

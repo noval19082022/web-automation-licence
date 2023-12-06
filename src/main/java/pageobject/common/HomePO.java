@@ -58,6 +58,9 @@ public class HomePO {
     private Locator seeAllPromoOwner;
     private Locator popularAreaJakarta;
     private Locator aroundUnivUGM;
+    private Locator promoNgebutPriceBeforePromo;
+    private Locator promoNgebutPriceInfo;
+    private Locator promoNgebutRentType;
 
     //footer
     private Locator tentangKamiButton;
@@ -95,6 +98,9 @@ public class HomePO {
         flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
+        promoNgebutPriceInfo = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutRentType = page.getByTestId("flashSaleHomePageRentType");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
@@ -709,5 +715,30 @@ public class HomePO {
     public void visitCariKosttListPage() {
         playwright.clickOn(cariApaDropDownMenu);
         playwright.clickOn(kostMenuDropdown);
+    }
+
+
+    /**
+     * get rent type on flash sale section
+     * @return
+     */
+    public String getPromoNgebutRenType() {
+        return playwright.getText(promoNgebutRentType.first());
+    }
+
+    /**
+     * price strike on kost card before promo
+     * @return
+     */
+    public boolean priceStrikePromoNgebutIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceBeforePromo.first(), 1.0);
+    }
+
+    /**
+     * promo ngebut info on kost card
+     * @return
+     */
+    public boolean promoNgebutInfoIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfo.first(), 1.0);
     }
 }
