@@ -1,4 +1,4 @@
-@BBM2 @regression @confirmBooking @TEST_COOP-1937
+@BBM2 @regression @confirmBooking @TEST_COOP-1937 @essentialTest2
 Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more than 1 waiting booking)
 
   Scenario Outline: Cancel and create booking

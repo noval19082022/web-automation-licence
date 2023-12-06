@@ -1,4 +1,4 @@
-@DOM1
+@DOM1 @essentialTest2
 Feature: Owner - Login
 
   @TEST_DOM-2241 @Automated @DOM @web-covered

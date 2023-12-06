@@ -340,4 +340,73 @@ public class TenantBookingSteps {
     public void TenantSeeBookingDateAccordingToBssSetting() {
         kostDetail.selectBookingDate("today");
     }
+
+    @Then("tenant can see kamar penuh")
+    public void tenantCanSeeKamarPenuh(){
+        Assert.assertTrue(kostDetail.isFullRoomVisible(), "Kamar penuh, lihat tipe kamar lainnya");
+    }
+
+    @When("tenant can see {string} button")
+    public void tenantCanSeexButton(String text){
+        if(text.equalsIgnoreCase("Lihat tipe lain")) {
+            Assert.assertTrue(kostDetail.isAnotherTypeButtonVisible(), "Lihat tipe lain");
+        }
+        else if (text.equalsIgnoreCase("Lihat kost lain")){
+            Assert.assertTrue(kostDetail.isAnotherKosButtonVisible(), "Lihat kos lain");
+        }
+        else if (text.equalsIgnoreCase("Ikut daftar Tunggu")){
+            Assert.assertTrue(kostDetail.isWaitingListButtonVisible(), "Ikut Daftar Tunggu");
+        }
+        else if (text.equalsIgnoreCase("Tanya pemilik")){
+            Assert.assertTrue(kostDetail.isTanyaPemilikVisible(), "Tanya Pemilik");
+        }
+    }
+
+    @And("tenant click on {string} button")
+    public void tenantClickOnXButton(String text) {
+        if (text.equalsIgnoreCase("Lihat tipe lain")){
+            kostDetail.clickAnotherTypeButton();
+        }
+        else if (text.equalsIgnoreCase("Lihat kos lain")){
+            kostDetail.clickAnotherKosButton();
+        }
+    }
+
+    @Then("tenant see {string} section")
+    public void tenantSeeXSection(String text) {
+        if (text.equalsIgnoreCase("lihat tipe lain")){
+            kostDetail.isAnotherTypeSectionVisible();
+        }
+        else if (text.equalsIgnoreCase("kamu mungkin menyukainya")){
+            kostDetail.isAnotherKosSectionVisible();
+        }
+    }
+
+    @Then("tenant/user can see {string}")
+    public void tenantCanSeeX(String text) {
+        if (text.equalsIgnoreCase("Kos ini khusus untuk karyawan")) {
+            Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Kos ini khusus untuk karyawan");
+        }
+        else if (text.equalsIgnoreCase("Kos ini khusus untuk mahasiswa")){
+            Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Kos ini khusus untuk mahasiswa");
+        }
+        else if (text.equalsIgnoreCase("Belum ada data jenis kelamin")){
+            Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Belum ada data jenis kelamin");
+        }
+    }
+
+    @And("teannt/user click button {string} on popup validation")
+    public void userClickButtonOnPopupValidation(String button) {
+        if(button.equalsIgnoreCase("Saya mengerti")){
+            kostDetail.clickOnSayaMengertiButton();
+        }
+        else if (button.equalsIgnoreCase("Buka profil saya")) {
+            kostDetail.clickBukaProfile();
+        }
+    }
+
+    @Then("tenant should reach booking form")
+    public void tenantShouldReachBookingForm(){
+        Assert.assertTrue(bookingForm.getPengajuanSewatext(), "Pengajuan Sewa");
+    }
 }

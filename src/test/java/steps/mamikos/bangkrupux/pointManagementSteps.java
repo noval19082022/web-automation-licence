@@ -2,7 +2,6 @@ package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,10 +12,6 @@ import testdata.BangKrupuxTestData;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
-import testdata.BangKrupuxTestData;
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
-
 
 import java.util.ArrayList;
 import java.util.Collections;

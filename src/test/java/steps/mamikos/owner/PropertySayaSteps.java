@@ -926,4 +926,21 @@ public class PropertySayaSteps {
             propertySaya.inputPengelolaPhone(table.get(0).get("pengelola phone"));
         }
     }
+
+    @And("owner waiting the page reload")
+    public void ownerWaitingThePageReload() {
+        propertySaya.waitPageLoaded();
+    }
+
+    @And("owner click {string} input BBK form request")
+    public void ownerClickInputBBKFormRequest(String textButton) {
+        propertySaya.clickOnLewatiBBKForm(textButton);
+    }
+
+    @And("owner click {string} in kebijakan baru mamikos pop up")
+    public void ownerClickInKebijakanBaruMamikosPopUp(String text) {
+        if (propertySaya.isBBKPopUpVisible()){
+            propertySaya.clickOnKebijakanBaruMamikosPopUp(text);
+        }
+    }
 }

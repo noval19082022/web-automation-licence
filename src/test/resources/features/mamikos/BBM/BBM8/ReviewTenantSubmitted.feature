@@ -2,7 +2,7 @@
 
 Feature: Kost Review Submitted Display
 
-  @TEST_COOP-2552 @continue
+  @TEST_COOP-2552
   Scenario: Kost Review Submitted Display on Kos Saya Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:

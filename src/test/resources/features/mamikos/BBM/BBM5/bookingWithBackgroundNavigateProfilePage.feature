@@ -96,6 +96,7 @@ Feature: BnB feature with background navigate profile page
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
     And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     And user click on tolak button
     And user click on Ubah kontrak penyewa button

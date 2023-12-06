@@ -2,12 +2,17 @@ package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.mamiads.MamiAdsPO;
 import pageobject.owner.mamiads.NaikkanIklanPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class NaikkanIklanSteps {
     Page page = ActiveContext.getActivePage();
@@ -16,26 +21,17 @@ public class NaikkanIklanSteps {
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
 
     @Then("user cek status toggle iklan {string} is {string}")
-    public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) throws InterruptedException {
-        if (posisiIklan.equals("Naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Naik", "Posisi iklan doesn't available");
-            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+    public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) {
+        if (posisiIklan.equals("naik")) {
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName,posisiIklan), "Naik", "Posisi iklan doesn't available");
         } else if (posisiIklan.equals("tidak-naik")) {
-            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(posisiIklan), "Tidak Naik", "Posisi iklan available");
-            Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+            Assert.assertEquals(naikkanIklanPO.getPosisiIklan(adsName,posisiIklan), "Tidak Naik", "Posisi iklan available");
         }
     }
 
     @Then("user verify the toggle iklan {string} is {string}")
     public void user_verify_the_toggle_iklan_is(String adsName, String toggleStatus) throws InterruptedException {
-        Assert.assertTrue(naikkanIklanPO.getToggleStatus(toggleStatus), "toggle doesn't match!");
-        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
-    }
-
-    @Then("user verify the wording iklan penuh {string} is {string}")
-    public void user_verify_the_wording_iklan_penuh_is(String adsName, String adsDesc) throws InterruptedException {
-        Assert.assertEquals(naikkanIklanPO.isFullOcuppancyActiveAds().replaceAll("\n", "").replaceAll("\\s+", " "), adsDesc, "Kamar Penuh doesn't match!");
-        Assert.assertEquals(naikkanIklanPO.getAdsName(adsName), adsName,"ads name doesnt match");
+        Assert.assertTrue(naikkanIklanPO.getToggleStatus(adsName,toggleStatus), "toggle doesn't match!");
     }
 
     @Then("user verify the alokasi title is {string}")
@@ -55,11 +51,6 @@ public class NaikkanIklanSteps {
                 Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), "Kamar penuh. Silakan nonaktifkan jika tidak ingin menaikkan posisi iklan ini.");
                 break;
         }
-    }
-
-    @When("owner select filter active mamiads")
-    public void owner_select_filter_active_mamiads() {
-       naikkanIklanPO.clickOnFilterActive();
     }
 
     @Then("user verify the redirection to list mamiads balance")
@@ -144,5 +135,86 @@ public class NaikkanIklanSteps {
         naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
         Assert.assertEquals(naikkanIklanPO.getTextTitlePopUp(), "Yakin ingin menonaktifkan MamiAds untuk iklan ini?", "Title pop up doesn't match!");
         naikkanIklanPO.clickOnNonaktifkanAds();
+    }
+
+    @And("user can see filter iklan saya is {string}")
+    public void user_can_see_filter_iklan_saya_is(String filterText) {
+        Assert.assertTrue(naikkanIklanPO.getTeksFilter().contains(filterText), "Filter doesn't match!");
+    }
+
+    @And("owner choose filter iklan saya to {string}")
+    public void ownerChooseFilterIklanSayaTo(String filter) {
+        naikkanIklanPO.clickOnFilterActive(filter);
+    }
+
+    @And("user verify the wording iklan {string} is {string}")
+    public void userVerifyTheWordingIklanIs(String adsName, String adsStatusDesc) {
+        Assert.assertEquals(naikkanIklanPO.getAdsStatusDesc(adsName), adsStatusDesc, "Ads status description doesn't match!");
+    }
+
+    @And("user verify the wording anggaran of iklan {string} is {string}")
+    public void user_verify_the_wording_anggaran_of_iklan_is(String adsName, String anggaranDesc) throws InterruptedException {
+        Assert.assertEquals(naikkanIklanPO.getTextAnggaranDesc(adsName), anggaranDesc, "Anggaran description doesn't match!");
+    }
+
+    @When("user click {string} toggle the {string}")
+    public void user_click_toggle_the(String toggleStatus, String adsName) {
+        naikkanIklanPO.clickToggleTheAds(toggleStatus, adsName);
+    }
+
+    @Then("user verify the pop up switch {string} toggle iklan {string} is displayed")
+    public void user_verify_the_pop_up_switch_toggle_iklan_is_displayed(String action, String adsName) {
+        int balanceMa = naikkanIklanPO.getSaldoMaText();
+        if (action.equals("on") && balanceMa >= 5000){
+            Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp(action), "Jika Anda menonaktifkannya, posisi iklan " + adsName + " tidak dinaikkan di hasil pencarian.");
+        } else if (action.equals("off") && balanceMa >= 5000) {
+            Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp(action), "Anggaran MamiAds untuk " + adsName + " akan diaktifkan");
+        } else{
+            Assert.assertEquals(naikkanIklanPO.getTitleBeliSaldoPopUp(),"Anda belum bisa menaikkan iklan.");
+        }
+    }
+
+    @When("user click {string} button on pop up switch toggle iklan")
+    public void userClickButtonOnPopUpSwitchToggleIklan(String actionButton) {
+        naikkanIklanPO.clickActionButtonInPopUp(actionButton);
+    }
+
+    @Then("user verify the wording iklan kamar penuh {string} is {string}")
+    public void user_verify_the_wording_iklan_kamar_penuh_is(String adsName, String adsDesc) {
+        Assert.assertEquals(mamiAdsPO.isFullOcuppancyActiveAds(adsName), adsDesc, "Kamar Penuh doesn't match!");
+    }
+
+    @And("ads list rooms as expected")
+    public void ads_list_rooms_as_expected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i = 0; int j = 0; int k = 0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(naikkanIklanPO.listAds("adsName", i), content.get("adsName"));
+            Assert.assertEquals(naikkanIklanPO.listAds("posisiIklan", i), content.get("posisiIklan"));
+            try {
+                if (!content.get("currentToggle").equals("-")) {
+                    Assert.assertTrue(naikkanIklanPO.listAdsToggle(content.get("currentToggle"), j), content.get("currentToggle"));
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            try {
+                if (!content.get("availRoom").equals("-")) {
+                    Assert.assertEquals(naikkanIklanPO.listAds("availRoom", j), content.get("availRoom"));
+                    j++;
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            try {
+                if (!content.get("currentStatusDesc").equals("-")) {
+                    Assert.assertEquals(naikkanIklanPO.listAds("currentStatusDesc", k), content.get("currentStatusDesc"));
+                    k++;
+                }
+            }catch (java.lang.NullPointerException ignored1) {}
+            i++;
+        }
+    }
+
+    @Then("verify the saldo mamiads with condition lessThan {int}")
+    public void verify_the_saldo_mamiads_with_condition_lessThan(int minimalSaldo) {
+        int saldoMa = naikkanIklanPO.getSaldoMaText();
+        Assert.assertTrue(saldoMa < minimalSaldo, "Saldo MamiAds greatherThan Saldo Maksimal");
     }
 }

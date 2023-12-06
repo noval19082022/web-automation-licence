@@ -479,6 +479,15 @@ public class InvoicePO {
     }
 
     /**
+     * Select month filter by month october
+     */
+    public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
+        playwright.clickOn(inputMonthFilter);
+        playwright.clickOn(page.getByText("Oktober"));
+    }
+
+
+    /**
      * payment using ovo as payment method
      *
      * @param number phone number ovo

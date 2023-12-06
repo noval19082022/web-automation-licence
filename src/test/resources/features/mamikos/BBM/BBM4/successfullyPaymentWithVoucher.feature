@@ -1,4 +1,4 @@
-@regression @BBM4 @voucher
+@regression @BBM4 @voucher @essentialTest
 
 Feature: Successfully Payment with Voucher
 
