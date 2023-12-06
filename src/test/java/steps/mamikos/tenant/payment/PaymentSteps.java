@@ -38,6 +38,12 @@ public class PaymentSteps {
                 .paymentUsingCC();
     }
 
+    @And("tenant select payment from invoice detail using Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
+    public void tenantSelectPaymentMamiadsCreditCard(String ccNumber, String month, String years, String ccv) {
+        invoicePO.paymentUsingCC(ccNumber, month, years, ccv)
+                .paymentUsingCC();
+    }
+
     @And("tenant select payment method with DANA")
     public void tenantSelectPaymentMethodWithDANA() {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
@@ -46,7 +52,7 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
-    @And("tenant select payment mamiads with DANA")
+    @And("tenant select payment from invoice detail with DANA")
     public void tenantSelectPaymentMamiadsWithDANA() {
         paymentPO = invoicePO.paymentUsingDANA();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
@@ -60,7 +66,7 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
-    @And("tenant select payment mamiads using LinkAja")
+    @And("tenant select payment from invoice detail using LinkAja")
     public void tenantSelectPaymentMamiadsUsingLinkAja() {
         paymentPO = invoicePO.paymentUsingLinkAja();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));

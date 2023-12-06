@@ -29,7 +29,7 @@ Feature: Payment mamiads staging
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp27.000"
-    And tenant select payment mamiads using LinkAja
+    And tenant select payment from invoice detail using LinkAja
     Then owner verify invoice success paid mamiads
 
   @TEST_COOP-4953
@@ -39,5 +39,15 @@ Feature: Payment mamiads staging
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp27.000"
-    And tenant select payment mamiads with DANA
+    And tenant select payment from invoice detail with DANA
+    Then owner verify invoice success paid mamiads
+
+  @TEST_COOP-4954
+  Scenario: [Owner][Payment premium] Owner paid premium paket using CC
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 08123450977 | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp27.000"
+    And tenant select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
     Then owner verify invoice success paid mamiads
