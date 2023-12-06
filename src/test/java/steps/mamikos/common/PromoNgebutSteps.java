@@ -3,6 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -82,5 +83,11 @@ public class PromoNgebutSteps {
     public void userCanSeePromoNgebutDiscountInNominalAmountWithoutNormalPriceWithStrikethroughAndTextOnHomepage(String promoInfo) {
         Assert.assertTrue(homePO.promoNgebutInfoOtherThanFirstMonthIsVisible());
         Assert.assertTrue(homePO.promoNgebutInfoOtherThanFirstMonthText().contains(promoInfo));
+    }
+
+    @And("user visit kost detail that has promo bulan pertama from homepage")
+    public void userVisitKostDetailThatHasPromoBulanPertamaFromHomepage() {
+        homePO.clickOnKostCardPromoNgebutBulanPertama();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 }

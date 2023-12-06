@@ -759,4 +759,11 @@ public class HomePO {
     public String promoNgebutInfoOtherThanFirstMonthText() {
         return playwright.getText(promoNgebutPriceInfoOtherThanFirstMonth.first());
     }
+
+    /**
+     * click on kost card promo ngebut that has bulan pertama
+     */
+    public void clickOnKostCardPromoNgebutBulanPertama() {
+        playwright.clickOn(promoNgebutPriceInfoForFirstMonth.first());
+    }
 }
