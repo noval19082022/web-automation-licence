@@ -766,4 +766,11 @@ public class HomePO {
     public void clickOnKostCardPromoNgebutBulanPertama() {
         playwright.clickOn(promoNgebutPriceInfoForFirstMonth.first());
     }
+
+    /**
+     * click on kost card promo ngebut that other than bulan pertama
+     */
+    public void clickOnKostCardPromoNgebutOtherThanBulanPertama() {
+        playwright.clickOn(promoNgebutPriceInfoOtherThanFirstMonth.first());
+    }
 }

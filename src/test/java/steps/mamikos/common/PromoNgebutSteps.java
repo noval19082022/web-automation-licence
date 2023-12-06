@@ -90,4 +90,10 @@ public class PromoNgebutSteps {
         homePO.clickOnKostCardPromoNgebutBulanPertama();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
+
+    @And("user visit kost detail that has promo other than bulan pertama from homepage")
+    public void userVisitKostDetailThatHasPromoOtherThanBulanPertamaFromHomepage() {
+        homePO.clickOnKostCardPromoNgebutOtherThanBulanPertama();
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+    }
 }
