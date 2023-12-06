@@ -38,7 +38,7 @@ public class PaymentSteps {
                 .paymentUsingCC();
     }
 
-    @And("tenant select payment from invoice detail using Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
+    @And("tenant/owner/user select payment from invoice detail using Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
     public void tenantSelectPaymentMamiadsCreditCard(String ccNumber, String month, String years, String ccv) {
         invoicePO.paymentUsingCC(ccNumber, month, years, ccv)
                 .paymentUsingCC();
@@ -52,7 +52,7 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
-    @And("tenant select payment from invoice detail with DANA")
+    @And("tenant/owner/user select payment from invoice detail with DANA")
     public void tenantSelectPaymentMamiadsWithDANA() {
         paymentPO = invoicePO.paymentUsingDANA();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
@@ -66,7 +66,7 @@ public class PaymentSteps {
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
-    @And("tenant select payment from invoice detail using LinkAja")
+    @And("tenant/owner/user select payment from invoice detail using LinkAja")
     public void tenantSelectPaymentMamiadsUsingLinkAja() {
         paymentPO = invoicePO.paymentUsingLinkAja();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
@@ -134,6 +134,17 @@ public class PaymentSteps {
         page = ActiveContext.getActiveBrowserContext().pages().get(1);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO.paymentForBNI(kodePembayaran);
+    }
+
+    @And("tenant/owner/user select payment method from invoice detail using BNI")
+    public void tenantSelectPaymentUsingBNI() {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnBNI();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
     }
 
