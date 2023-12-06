@@ -59,7 +59,8 @@ public class HomePO {
     private Locator popularAreaJakarta;
     private Locator aroundUnivUGM;
     private Locator promoNgebutPriceBeforePromo;
-    private Locator promoNgebutPriceInfo;
+    private Locator promoNgebutPriceInfoForFirstMonth;
+    private Locator promoNgebutPriceInfoOtherThanFirstMonth;
     private Locator promoNgebutRentType;
 
     //footer
@@ -99,7 +100,8 @@ public class HomePO {
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
         promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
-        promoNgebutPriceInfo = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutPriceInfoForFirstMonth = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutPriceInfoOtherThanFirstMonth = page.getByTestId("flashSaleHomePageOtherPromoInfo");
         promoNgebutRentType = page.getByTestId("flashSaleHomePageRentType");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
@@ -735,10 +737,26 @@ public class HomePO {
     }
 
     /**
-     * promo ngebut info on kost card
+     * promo ngebut info on kost card for first month
      * @return
      */
     public boolean promoNgebutInfoIsVisible() {
-        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfo.first(), 1.0);
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoForFirstMonth.first(), 1.0);
+    }
+
+    /**
+     * promo ngebut info on kost card other than first month
+     * @return
+     */
+    public boolean promoNgebutInfoOtherThanFirstMonthIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoOtherThanFirstMonth.first(), 1.0);
+    }
+
+    /**
+     * get text promo ngebut info on kost card other than first month
+     * @return
+     */
+    public String promoNgebutInfoOtherThanFirstMonthText() {
+        return playwright.getText(promoNgebutPriceInfoOtherThanFirstMonth.first());
     }
 }

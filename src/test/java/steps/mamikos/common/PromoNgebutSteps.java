@@ -77,4 +77,10 @@ public class PromoNgebutSteps {
         Assert.assertTrue(homePO.promoNgebutInfoIsVisible());
         Assert.assertEquals(homePO.getPromoNgebutRenType(), rentType);
     }
+
+    @Then("user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and {string} text on homepage")
+    public void userCanSeePromoNgebutDiscountInNominalAmountWithoutNormalPriceWithStrikethroughAndTextOnHomepage(String promoInfo) {
+        Assert.assertTrue(homePO.promoNgebutInfoOtherThanFirstMonthIsVisible());
+        Assert.assertTrue(homePO.promoNgebutInfoOtherThanFirstMonthText().contains(promoInfo));
+    }
 }
