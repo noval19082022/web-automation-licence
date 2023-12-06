@@ -46,8 +46,7 @@ public class TenantBillManagementPO {
     Locator contractPageEmpty;
     Locator contractName;
     Locator clickSelengkapnyaContract;
-
-
+    Locator arrowNextMonthFilterButton;
 
     public TenantBillManagementPO(Page page) {
         this.page = page;
@@ -74,6 +73,7 @@ public class TenantBillManagementPO {
         contractNumber1 = page.locator("(//div[@class='tenant-list__card'])[1]");
         contractList = page.locator("//div[@class='tenant-card-item__info']");
         disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
+        arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
     }
 
     /**
@@ -89,6 +89,22 @@ public class TenantBillManagementPO {
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);
         }
+    }
+
+    /**
+     * Click on filter month
+     */
+    public void clickOnFilterMonth() {
+        playwright.clickOn(filterMonth);
+    }
+
+    /**
+     * Click on month name on filter month
+     * @param month String type month name
+     */
+    public void clickOnMonthNameOnFilterMonth(String month) {
+        Locator monthName = page.getByTestId("billingManagementFilterDate-wrapper").getByText(month);
+        playwright.clickOn(monthName);
     }
 
     /**
@@ -440,4 +456,10 @@ public class TenantBillManagementPO {
         return playwright.getText(disclaimerCheckinTenant);
     }
 
+    /**
+     * Click arrow next month filter button
+     */
+    public void clickArrowNextMonthFilterButton() {
+        playwright.clickOn(arrowNextMonthFilterButton);
+    }
 }

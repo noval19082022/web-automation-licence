@@ -26,10 +26,12 @@ public class OwnerManageBillSteps {
 
     @When("owner go to bill page of kost {string} on month of {string}")
     public void ownerGoToBillPageOfKostOnMonthOf(String kostName, String month) {
+        var selectedMonthFilter = "";
+        var currentMonth = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
         if (month.equalsIgnoreCase("next")) {
-            month = JavaHelpers.getMonthName(new Locale("id", "ID"), 1);
+            selectedMonthFilter = JavaHelpers.getMonthName(new Locale("id", "ID"), 1);
         } else if(month.equalsIgnoreCase("current")) {
-            month = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
+            selectedMonthFilter = JavaHelpers.getMonthName(new Locale("id", "ID"), 0);
         }
         loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
@@ -37,7 +39,13 @@ public class OwnerManageBillSteps {
         billManage.reloadOnEmptyKelolaTagihanPage();
         loading.waitForLoadingIconDisappear();
         billManage.selectKosBillPageFilter(kostName);
-        billManage.selectMonthFilter(month);
+        if (month.equalsIgnoreCase("next") && currentMonth.equalsIgnoreCase("Desember")) {
+            billManage.clickOnFilterMonth();
+            billManage.clickArrowNextMonthFilterButton();
+            billManage.clickOnMonthNameOnFilterMonth(selectedMonthFilter);
+        } else {
+            billManage.selectMonthFilter(selectedMonthFilter);
+        }
     }
 
     @When("owner go to detail tagihan")
@@ -190,5 +198,4 @@ public class OwnerManageBillSteps {
     public void user_can_see_disclaimer(String disclaimer) {
         Assert.assertTrue(billManage.getDisclaimerText().contains(disclaimer));
     }
-
 }
