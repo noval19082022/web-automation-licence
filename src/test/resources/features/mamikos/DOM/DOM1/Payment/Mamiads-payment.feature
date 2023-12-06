@@ -31,3 +31,13 @@ Feature: Payment mamiads staging
     And owner want to buy mamiads saldo with nominal "Rp27.000"
     And tenant select payment mamiads using LinkAja
     Then owner verify invoice success paid mamiads
+
+  @TEST_COOP-4953
+  Scenario: [Owner][Payment premium] Owner paid premium paket using DANA
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 08123450977 | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp27.000"
+    And tenant select payment mamiads with DANA
+    Then owner verify invoice success paid mamiads
