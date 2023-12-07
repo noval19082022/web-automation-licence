@@ -94,6 +94,7 @@ Feature: MamiAds Dashboard
     Then user verify the wording iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
     When user click "off" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user click "Aktifkan" button on pop up switch toggle iklan
+    And user click "Aktifkan" button on pop up switch toggle iklan
 
   @TEST_LIMO-317 @LIMO1-staging
   Scenario: See ads on filter nonaktif

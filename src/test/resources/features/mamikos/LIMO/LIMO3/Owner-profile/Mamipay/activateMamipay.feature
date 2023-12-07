@@ -2,7 +2,7 @@
 
 Feature: Activate Mamipay
 
-  @invalidBankAccountNumber @continue
+  @invalidBankAccountNumber @continue @TEST_LIMO-5673
   Scenario: Invalid input bank account number
     Given user go to mamikos homepage
     When user login as owner:
@@ -20,7 +20,7 @@ Feature: Activate Mamipay
     Then user should see the message "Minimal 5 Karakter" displayed under text field
     When owner input on "nomor rekening Anda" "09182928329"
 
-  @invalidBankName @continue
+  @invalidBankName @continue @TEST_LIMO-5674
   Scenario: Invalid bank name
     And owner input on "nama bank" ""
     Then user should see the message "Nama bank harus dipilih" displayed under text field
@@ -50,7 +50,7 @@ Feature: Activate Mamipay
     """
    And verify kirim data button is disable
 
-  @submitInputFormDataDiri
+  @submitInputFormDataDiri @TEST_LIMO-5674
   Scenario: Valid input form data diri
     When owner input on "nama lengkap" "tiara"
     Then verify kirim data button is disable
