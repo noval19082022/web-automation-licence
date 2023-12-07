@@ -11,14 +11,14 @@ public class AdditionalKostPO {
 
     // locator for additional kost menu Change the room on Data Ketersedian Kamar
     Locator additionalKostMenuButton;
-    Locator searchTextField;
+    Locator searchBoxNamaKost;
     Locator searchButton;
     Locator aturKetersediaanButton;
     Locator roomStatusButton;
     Locator updateRoomStatusButton;
     Locator errorAlertInformationText;
     Locator successAlertInfromationText;
-    Locator floorTextField;
+    Locator inputFieldlantai;
     Locator searchRoomId;
     Locator deleteRoomButton;
     Locator deletePopupText;
@@ -28,14 +28,14 @@ public class AdditionalKostPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         additionalKostMenuButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Kost (Additional)"));
-        searchTextField = page.getByPlaceholder("Nama Kost");
+        searchBoxNamaKost = page.getByPlaceholder("Nama Kost");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         aturKetersediaanButton = page.locator("//a[contains(text(),'Atur Ketersediaan')]");
         roomStatusButton = page.locator("//*[@class='form-group'][3]/select");
         updateRoomStatusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
         errorAlertInformationText = page.getByText("Kamar dengan aktif tenant kontrak tidak bisa diubah.");
         successAlertInfromationText = page.locator("//*[@class='alert alert-success alert-dismissable']/b");
-        floorTextField = page.locator("#floor");
+        inputFieldlantai = page.locator("#floor");
         searchRoomId= page.getByLabel("Search:");
         deleteRoomButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Delete"));
         deletePopupText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Delete Confirmation"));
@@ -54,8 +54,7 @@ public class AdditionalKostPO {
      * @param keyword kos name
      */
     public void searchKosAdditional(String keyword){
-        playwright.clickOn(searchTextField);
-        playwright.fill(searchTextField, keyword);
+        playwright.clickLocatorAndTypeKeyboard(searchBoxNamaKost, keyword);
         playwright.clickOn(searchButton);
     }
 
@@ -80,7 +79,6 @@ public class AdditionalKostPO {
      *
      */
     public void updateRoomStatusToEmpty(String updateRoom) {
-       playwright.clickOn(roomStatusButton);
        playwright.selectDropdownByValue(roomStatusButton, updateRoom);
        playwright.clickOn(updateRoomStatusButton);
     }
@@ -103,8 +101,8 @@ public class AdditionalKostPO {
      * update floor text
      */
     public void updateFloorName(String keyword){
-      playwright.clearText(floorTextField);
-      playwright.clickLocatorAndTypeKeyboard(floorTextField, keyword);
+      playwright.clearText(inputFieldlantai);
+      playwright.clickLocatorAndTypeKeyboard(inputFieldlantai, keyword);
       playwright.clickOn(updateRoomStatusButton);
     }
 
