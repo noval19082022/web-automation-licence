@@ -8,7 +8,7 @@ import utilities.PlaywrightHelpers;
 public class AdditionalKostPO {
     private Page page;
     private PlaywrightHelpers playwright;
-    Locator additionalKostMenu;
+    Locator additionalKostMenuButton;
     Locator searchTextField;
     Locator searchButton;
     Locator aturKetersediaanButton;
@@ -25,7 +25,7 @@ public class AdditionalKostPO {
     public AdditionalKostPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        additionalKostMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Kost (Additional)"));
+        additionalKostMenuButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Kost (Additional)"));
         searchTextField = page.getByPlaceholder("Nama Kost");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         aturKetersediaanButton = page.locator("//a[contains(text(),'Atur Ketersediaan')]");
@@ -43,8 +43,8 @@ public class AdditionalKostPO {
      * click menu Additional Kost
      */
     public void clickAdditionalKostMenu(){
-        playwright.waitTillLocatorIsVisible(additionalKostMenu);
-        playwright.clickOn(additionalKostMenu);
+        playwright.waitTillLocatorIsVisible(additionalKostMenuButton);
+        playwright.clickOn(additionalKostMenuButton);
 
     }
 
