@@ -8,6 +8,8 @@ import utilities.PlaywrightHelpers;
 public class AdditionalKostPO {
     private Page page;
     private PlaywrightHelpers playwright;
+
+    // locator for additional kost menu Change the room on Data Ketersedian Kamar
     Locator additionalKostMenuButton;
     Locator searchTextField;
     Locator searchButton;
@@ -45,7 +47,6 @@ public class AdditionalKostPO {
     public void clickAdditionalKostMenu(){
         playwright.waitTillLocatorIsVisible(additionalKostMenuButton);
         playwright.clickOn(additionalKostMenuButton);
-
     }
 
     /**
