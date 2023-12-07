@@ -733,7 +733,7 @@ public class HomePO {
      * @return
      */
     public boolean priceStrikePromoNgebutIsVisible() {
-        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceBeforePromo.first(), 1.0);
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceBeforePromo.first(), 3.0);
     }
 
     /**
@@ -741,7 +741,7 @@ public class HomePO {
      * @return
      */
     public boolean promoNgebutInfoIsVisible() {
-        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoForFirstMonth.first(), 1.0);
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoForFirstMonth.first(), 3.0);
     }
 
     /**
@@ -749,7 +749,7 @@ public class HomePO {
      * @return
      */
     public boolean promoNgebutInfoOtherThanFirstMonthIsVisible() {
-        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoOtherThanFirstMonth.first(), 1.0);
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoOtherThanFirstMonth.first(), 3.0);
     }
 
     /**
@@ -757,6 +757,7 @@ public class HomePO {
      * @return
      */
     public String promoNgebutInfoOtherThanFirstMonthText() {
+        playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
         return playwright.getText(promoNgebutPriceInfoOtherThanFirstMonth.first());
     }
 
@@ -764,6 +765,7 @@ public class HomePO {
      * click on kost card promo ngebut that has bulan pertama
      */
     public void clickOnKostCardPromoNgebutBulanPertama() {
+        playwright.waitFor(promoNgebutPriceInfoForFirstMonth.first());
         playwright.clickOn(promoNgebutPriceInfoForFirstMonth.first());
     }
 
@@ -771,6 +773,7 @@ public class HomePO {
      * click on kost card promo ngebut that other than bulan pertama
      */
     public void clickOnKostCardPromoNgebutOtherThanBulanPertama() {
+        playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
         playwright.clickOn(promoNgebutPriceInfoOtherThanFirstMonth.first());
     }
 }
