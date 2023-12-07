@@ -33,4 +33,38 @@ public class MamitourSteps {
         mamitour.isContentOnMamitourVisible(title);
     }
 
+    @Then("user will {string} Lihat Riwayat button")
+    public void user_will_x_riwayat_button(String state) {
+        if (state.equals("see")) {
+            Assert.assertTrue(mamitour.isRiwayatButtonVisible(), "Riwayat button is not visible");
+        } else {
+            Assert.assertFalse(mamitour.isRiwayatButtonVisible(), "Riwayat button is visible");
+        }
+    }
+
+    @And("user click on Lihat Riwayat Button")
+    public void user_click_on_lihat_riwayat_button() {
+        mamitour.clickOnRiwayatButton();
+    }
+
+    @And("user click on tab dalam proses")
+    public void user_click_on_tab_dalam_proses() {
+        mamitour.clickOnDalamProsesTab();
+    }
+
+    @And("user click on tab selesai")
+    public void user_click_on_tab_selesai() {
+        mamitour.clickOnSelesaiTab();
+    }
+
+    @Then("user will see empty state text {string} as title and {string} as subtitle")
+    public void user_will_see_empty_state_text_x_as_title_and_x_as_subtitle(String title, String subtitle) {
+        Assert.assertEquals(mamitour.getEmptyStateTitleText(), title, "Title text is not match");
+        Assert.assertEquals(mamitour.getEmptyStateSubtitleText(), subtitle, "Subtitle text is not match");
+    }
+
+    @Then("user verify there is transaction")
+    public void user_verify_there_is_transaction() {
+        Assert.assertTrue(mamitour.isHistoryListVisible(), "List history is not visible");
+    }
 }
