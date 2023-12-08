@@ -161,13 +161,24 @@ public class OwnerSettingPO {
 
     /**
      * Click pengaturan akun
-     * Check and uncheck rekomendasi via email,notifikasi via chat,notifikasi kos via SMS
+     * Uncheck rekomendasi via email,notifikasi via chat,notifikasi kos via SMS
      * @param textDescription
      *
      */
     public void clickOnPengaturanAkun(String textDescription) {
-        String element = "//label[contains(.,'"+textDescription+"')]";
-        playwright.clickOn(page.locator(element));
+        playwright.waitTillPageLoaded();
+        Locator element = page.locator("label").filter(new Locator.FilterOptions().setHasText("checkmark" + textDescription)).locator("svg");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Click / check pengaturan akun
+     * @param textDescription
+     */
+    public void checkPengaturanAkun(String textDescription) {
+        playwright.waitTillPageLoaded();
+        Locator element = page.locator("label").filter(new Locator.FilterOptions().setHasText("checkmark" + textDescription)).locator("span");
+        playwright.clickOn(element);
     }
 
     /**

@@ -13,23 +13,23 @@ Feature: Owner Profile Picture - Owner Setting
   @TEST_LIMO-2852 @continue
   Scenario: [Setelan Akun] Email recommendation can be enabled and disabled
     When owner navigates to Akun menu
-    And owner click on "checkmark  Rekomendasi via email"
+    And owner uncheck on "Rekomendasi via email"
     Then toast message "Rekomendasi via email berhasil dinonaktifkan" should be appear
-    When owner click on "checkmark  Rekomendasi via email"
+    When owner check on "Rekomendasi via email"
     Then toast message "Rekomendasi via email berhasil diaktifkan" should be appear
 
   @TEST_LIMO-2846 @continue
   Scenario: [Setelan Akun] Chat notification can be enabled and disabled
     When owner navigates to Akun menu
-    And owner click on "checkmark  Notifikasi via chat"
+    And owner uncheck on "Notifikasi via chat"
     Then toast message "Notifikasi via chat berhasil dinonaktifkan" should be appear
-    When owner click on "checkmark  Notifikasi via chat"
+    When owner check on "Notifikasi via chat"
     Then toast message "Notifikasi via chat berhasil diaktifkan" should be appear
 
   @TEST_LIMO-2850
   Scenario: [Setelan Akun] SMS Update Kos can be enabled and disabled
     When owner navigates to Akun menu
-    And owner click on "checkmark  Notifikasi kos via SMS"
+    And owner uncheck on "Notifikasi kos via SMS"
     Then toast message "Notifikasi kos via SMS berhasil dinonaktifkan" should be appear
-    When owner click on "checkmark  Notifikasi kos via SMS"
+    When owner check on "Notifikasi kos via SMS"
     Then toast message "Notifikasi kos via SMS berhasil diaktifkan" should be appear
