@@ -1,4 +1,4 @@
-@regression @LIMO1 @mamitour
+@regression @LIMO4 @mamitour
 Feature: Purchase Mamitour
 
   @TEST_LIMO-3659

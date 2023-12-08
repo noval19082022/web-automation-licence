@@ -58,6 +58,10 @@ public class HomePO {
     private Locator seeAllPromoOwner;
     private Locator popularAreaJakarta;
     private Locator aroundUnivUGM;
+    private Locator promoNgebutPriceBeforePromo;
+    private Locator promoNgebutPriceInfoForFirstMonth;
+    private Locator promoNgebutPriceInfoOtherThanFirstMonth;
+    private Locator promoNgebutRentType;
 
     //footer
     private Locator tentangKamiButton;
@@ -95,6 +99,10 @@ public class HomePO {
         flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
         flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
+        promoNgebutPriceInfoForFirstMonth = page.getByTestId("flashSaleHomePagePromoInfo");
+        promoNgebutPriceInfoOtherThanFirstMonth = page.getByTestId("flashSaleHomePageOtherPromoInfo");
+        promoNgebutRentType = page.getByTestId("flashSaleHomePageRentType");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
@@ -709,5 +717,63 @@ public class HomePO {
     public void visitCariKosttListPage() {
         playwright.clickOn(cariApaDropDownMenu);
         playwright.clickOn(kostMenuDropdown);
+    }
+
+
+    /**
+     * get rent type on flash sale section
+     * @return
+     */
+    public String getPromoNgebutRenType() {
+        return playwright.getText(promoNgebutRentType.first());
+    }
+
+    /**
+     * price strike on kost card before promo
+     * @return
+     */
+    public boolean priceStrikePromoNgebutIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceBeforePromo.first(), 3.0);
+    }
+
+    /**
+     * promo ngebut info on kost card for first month
+     * @return
+     */
+    public boolean promoNgebutInfoIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoForFirstMonth.first(), 3.0);
+    }
+
+    /**
+     * promo ngebut info on kost card other than first month
+     * @return
+     */
+    public boolean promoNgebutInfoOtherThanFirstMonthIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoOtherThanFirstMonth.first(), 3.0);
+    }
+
+    /**
+     * get text promo ngebut info on kost card other than first month
+     * @return
+     */
+    public String promoNgebutInfoOtherThanFirstMonthText() {
+        playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
+        return playwright.getText(promoNgebutPriceInfoOtherThanFirstMonth.first());
+    }
+
+    /**
+     * click on kost card promo ngebut that has bulan pertama
+     */
+    public void clickOnKostCardPromoNgebutBulanPertama() {
+        playwright.waitFor(promoNgebutPriceInfoForFirstMonth.first());
+        playwright.clickOn(promoNgebutPriceInfoForFirstMonth.first());
+    }
+
+    /**
+     * click on kost card promo ngebut that other than bulan pertama
+     */
+    public void clickOnKostCardPromoNgebutOtherThanBulanPertama() {
+        playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
+        playwright.clickOn(promoNgebutPriceInfoOtherThanFirstMonth.first());
     }
 }
