@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
+    PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
 
     private List<Map<String, String>> ownerDashboard;
 
@@ -287,6 +289,16 @@ public class OwnerDashboardSteps {
         String amount = ownerDashboard.get(0).get("Jumlah");
         String unitTime = ownerDashboard.get(0).get("Satuan Waktu");
         ownerDashboardPO.fillNearestAmountTime(amount, unitTime);
+    }
+
+    @And("owner click ubah peraturan at {string}")
+    public void ownerClickUbahPeraturanAtDashboard(String text) {
+        if (text.equalsIgnoreCase("dashboard")){
+          ownerDashboardPO.clickUbahPeraturanButton();
+      }
+        else if (text.equalsIgnoreCase("pengajuan sewa")){
+            PengajuanSewaPO.clickUbahAturanButton();
+        }
     }
 }
 

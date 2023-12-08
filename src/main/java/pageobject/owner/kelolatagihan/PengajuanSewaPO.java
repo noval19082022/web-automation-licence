@@ -26,7 +26,23 @@ public class PengajuanSewaPO {
     private Locator tncCheckmarkRejectReason;
     private Locator pilihOnRejectButton;
 
-
+    //-------------peraturan kos----------//
+    private Locator ubahAturanButton;
+    private Locator peraturanKosText;
+    private Locator selectKosButton;
+    private Locator pilihKosUbahPeraturanButton;
+    private Locator simpanPeraturanButton;
+    private Locator toastPeraturanButton;
+    private Locator waktuMulaiNgekosButton;
+    private Locator ubahWaktu;
+    private Locator toogleTodayButton;
+    private Locator minCheckinButton;
+    private Locator satuanWaktu;
+    private Locator selectSatuanWaktu;
+    private Locator simpanButtonOnModalPopup;
+    private Locator minCheckinAmmountDropDown;
+    private Locator selectMinCheckinAmmount;
+    private Locator saveCheckinButton;
 
     public PengajuanSewaPO(Page page) {
         this.page = page;
@@ -46,6 +62,16 @@ public class PengajuanSewaPO {
         this.lainnyaRejectReasonInput = page.getByPlaceholder("Masukkan alasan lainnya di sini");
         this.tncCheckmarkRejectReason = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.pilihOnRejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+
+        //-------------------------peraturan kos---------------------//
+        this.ubahAturanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Ubah aturan"));
+        this.peraturanKosText = page.locator("//*[@id='BookingSettingDesktop']");
+        this.selectKosButton = page.getByPlaceholder("Pilih Kos");
+        this.simpanPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.waktuMulaiNgekosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Waktu mulai masuk kos chevron-down"));
+        this.toogleTodayButton = page.getByRole(AriaRole.CHECKBOX);
+        this.minCheckinButton = page.getByTestId("min-checkin-time-unit").getByPlaceholder("hari");
+        this.simpanButtonOnModalPopup = page.getByTestId("checkin-option-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
     }
 
     /**
@@ -140,5 +166,91 @@ public class PengajuanSewaPO {
         tncCheckmarkRejectReason.click();
         pilihOnRejectButton.click();
         playwright.hardWait(1000);
+    }
+
+    /**
+     * click Ubah Aturan button on pengajuan sewa page
+     */
+    public void clickUbahAturanButton(){
+        if (ubahAturanButton.isVisible()){
+            playwright.clickOn(ubahAturanButton);
+        }
+    }
+
+    /**
+     * Check if Peraturan kos is visible
+     * @return peraturan kos page
+     */
+    public boolean getPeraturanBookingText(){
+        playwright.hardWait(3);
+        return peraturanKosText.isVisible();
+    }
+
+    /**
+     * Select kost name on peraturan booking page
+     */
+    public void selectKostName(String kosName){
+        playwright.clickOn(selectKosButton);
+        searchKost = page.locator("label").filter(new Locator.FilterOptions().setHasText("" +kosName+ ""));
+        playwright.clickOn(searchKost);
+        pilihKosUbahPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama kos"));
+        playwright.clickOn(pilihKosUbahPeraturanButton);
+    }
+
+    /**
+     * Click Simpan button on peraturan waktu ngekos
+     */
+    public void simpanPeraturanButton(){
+        playwright.clickOn(simpanPeraturanButton);
+    }
+
+    /**
+     * Check if toast success update is visible
+     * @return toast
+     */
+    public boolean getToastText(String toast){
+        toastPeraturanButton = page.getByText("" +toast+ "");
+        toastPeraturanButton.isVisible();
+        return toastPeraturanButton.isVisible();
+    }
+
+    /**
+     * click on waktu mulai ngekos menu
+     */
+    public void clickWaktuMulaiNgekosButton(){
+        playwright.clickOn(waktuMulaiNgekosButton);
+        ubahWaktu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah waktu"));
+        playwright.clickOn(ubahWaktu);
+    }
+
+    /**
+     * edit jarak waktu terdekat
+     * @param waktu
+     * @param tanggal
+     */
+    public void editWaktuMulaiNgekos(String waktu, String tanggal){
+        if (toogleTodayButton.isChecked()) {
+            playwright.clickOn(toogleTodayButton);
+            playwright.hardWait(3);
+            playwright.clickOn(minCheckinButton);
+            selectSatuanWaktu = page.getByText("" + waktu + "");
+            playwright.clickOn(selectSatuanWaktu);
+            playwright.clickOn(simpanButtonOnModalPopup);
+            minCheckinAmmountDropDown = page.getByTestId("min-checkin-amount").getByRole(AriaRole.TEXTBOX);
+            playwright.clickOn(minCheckinAmmountDropDown);
+            selectMinCheckinAmmount = page.locator("div:nth-child(" + tanggal + ") > label > .bg-c-radio__icon > span").first();
+            playwright.clickOn(selectMinCheckinAmmount);
+            playwright.clickOn(simpanButtonOnModalPopup);
+            saveCheckinButton = page.getByTestId("checkin-save-btn");
+            playwright.clickOn(saveCheckinButton);
+        }
+    }
+
+    /**
+     * activated toogle button for today
+     */
+    public void clickToogleCheckin(){
+        playwright.clickOn(toogleTodayButton);
+        playwright.clickOn(saveCheckinButton);
     }
 }

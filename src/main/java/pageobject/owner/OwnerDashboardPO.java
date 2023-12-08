@@ -71,6 +71,7 @@ public class OwnerDashboardPO {
     Locator nearestTimeSaveButton;
     Locator saveBssButton;
     Locator toggleEnable;
+    Locator ubahPeraturan;
 
     private Locator fiturPromosiExpand;
 
@@ -134,6 +135,8 @@ public class OwnerDashboardPO {
         saveInPopUpButton = page.getByTestId("checkin-save-btn");
         saveBssButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
+        ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
+
     }
 
     /**
@@ -682,5 +685,12 @@ public class OwnerDashboardPO {
         playwright.clickOn(nearestTimeSaveButton);
         playwright.clickOn(saveInPopUpButton);
         playwright.clickOn(saveBssButton);
+    }
+
+    public void clickUbahPeraturanButton(){
+        playwright.pageScrollInView(ubahPeraturan);
+        if (ubahPeraturan.isVisible()) {
+            playwright.clickOn(ubahPeraturan);
+        }
     }
 }
