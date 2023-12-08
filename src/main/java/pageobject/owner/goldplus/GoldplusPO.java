@@ -593,8 +593,8 @@ public class GoldplusPO {
     }
 
     /**
-     * Get one of list benefit GP 2
-     * @return String benefit GP 2
+     * Get one of list benefit GP 1
+     * @return String benefit GP 1
      */
     public String getTextManfaatGP1(String benefitGP1) {
         benefitGP = page.getByText(benefitGP1).nth(1);
