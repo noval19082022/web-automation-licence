@@ -569,11 +569,10 @@ public class GoldplusPO {
      * Get benefit GP
      * @return String benefit GP
      */
-    public boolean getTextManfaatGP(String benefit) {
+    public String getTextManfaatGP(String benefit) {
         benefitGP = page.getByText(benefit);
         playwright.waitTillLocatorIsVisible(benefitGP);
-        return playwright.waitTillLocatorIsVisible(benefitGP);
-
+        return playwright.getText(benefitGP);
     }
 
     /**
@@ -581,5 +580,25 @@ public class GoldplusPO {
      */
     public void clickOnDetailManfaatGP2() {
         playwright.clickOn(detailManfaatGP2);
+    }
+
+    /**
+     * Get one of list benefit GP 2
+     * @return String benefit GP 2
+     */
+    public String getTextManfaatGP2(String benefitGP2) {
+        benefitGP = page.getByText(benefitGP2).first();
+        playwright.waitTillLocatorIsVisible(benefitGP);
+        return playwright.getText(benefitGP);
+    }
+
+    /**
+     * Get one of list benefit GP 2
+     * @return String benefit GP 2
+     */
+    public String getTextManfaatGP1(String benefitGP1) {
+        benefitGP = page.getByText(benefitGP1).nth(1);
+        playwright.waitTillLocatorIsVisible(benefitGP);
+        return playwright.getText(benefitGP);
     }
 }
