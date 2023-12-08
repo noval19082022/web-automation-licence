@@ -119,7 +119,7 @@ public class InvoicePO {
         txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
         filterKostName = page.locator(".column").first();
-        closeFilter = page.locator("i");
+        closeFilter = page.locator(".bm-filter-kost-modal.is-active .mdi-close");
         openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
@@ -477,6 +477,15 @@ public class InvoicePO {
             page.waitForTimeout(3000);
         }
     }
+
+    /**
+     * Select month filter by month october
+     */
+    public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
+        playwright.clickOn(inputMonthFilter);
+        playwright.clickOn(page.getByText("Oktober"));
+    }
+
 
     /**
      * payment using ovo as payment method

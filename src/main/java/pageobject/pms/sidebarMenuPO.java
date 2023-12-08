@@ -2,7 +2,6 @@ package pageobject.pms;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
 import utilities.PlaywrightHelpers;
 
 public class sidebarMenuPO {
@@ -41,14 +40,18 @@ public class sidebarMenuPO {
      * click Disbursement Sidebar Menu
      */
     public void clickDisbursementMenu(){
-        disbursementButton.click();
+        playwright.hardWait(2000.0);
+        playwright.waitTillLocatorIsVisible(disbursementButton);
+        playwright.clickOn(disbursementButton);
     }
 
     /**
      * click Role Management Sidebar Menu
      */
     public void clickRoleManagementMenu(){
-        roleManagementButton.click();
+        playwright.hardWait(2000.0);
+        playwright.waitTillLocatorIsVisible(roleManagementButton);
+        playwright.clickOn(roleManagementButton);
     }
 
     /**

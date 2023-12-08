@@ -22,7 +22,6 @@ public class TenantBillManagementPO {
     Locator updateRoomNumberButton;
     Locator saveButton;
     Locator kostDropdownInPenyewaMenu;
-    Locator selectKost;
     Locator kontrakSewaButton;
     Locator tolakButton;
     Locator ubahKontrakPenyewaButton;
@@ -46,8 +45,14 @@ public class TenantBillManagementPO {
     Locator contractPageEmpty;
     Locator contractName;
     Locator clickSelengkapnyaContract;
+    Locator arrowNextMonthFilterButton;
 
-
+    //Locator for download biodata penyewa
+    Locator filterDropdown;
+    Locator downloadBiodataPenyewaButton;
+    Locator checkbox;
+    Locator informationAboutUpcomingFeature;
+    Locator kostDropdownInBillingManagement;
 
     public TenantBillManagementPO(Page page) {
         this.page = page;
@@ -64,7 +69,6 @@ public class TenantBillManagementPO {
         updateRoomNumberButton = page.getByText("Ubah nomor kamar chevron-right");
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         kostDropdownInPenyewaMenu = page.locator("(//div[@class='bg-c-select__trigger bg-c-select__trigger--lg'])[1]");
-        selectKost = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"));
         kontrakSewaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak sewa"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         ubahKontrakPenyewaButton = page.getByTestId("btn-edit-contract");
@@ -74,6 +78,12 @@ public class TenantBillManagementPO {
         contractNumber1 = page.locator("(//div[@class='tenant-list__card'])[1]");
         contractList = page.locator("//div[@class='tenant-card-item__info']");
         disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
+        filterDropdown = page.locator("//div[@class='bg-c-select']//div[@class='bg-c-dropdown']");
+        downloadBiodataPenyewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download biodata penyewa"));
+        checkbox = page.getByTestId("modalDownload").locator("span");
+        informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
+        kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
+        arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
     }
 
     /**
@@ -89,6 +99,22 @@ public class TenantBillManagementPO {
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);
         }
+    }
+
+    /**
+     * Click on filter month
+     */
+    public void clickOnFilterMonth() {
+        playwright.clickOn(filterMonth);
+    }
+
+    /**
+     * Click on month name on filter month
+     * @param month String type month name
+     */
+    public void clickOnMonthNameOnFilterMonth(String month) {
+        Locator monthName = page.getByTestId("billingManagementFilterDate-wrapper").getByText(month);
+        playwright.clickOn(monthName);
     }
 
     /**
@@ -225,8 +251,15 @@ public class TenantBillManagementPO {
         playwright.waitTillLocatorIsVisible(kostDropdownInPenyewaMenu);
         kostDropdownInPenyewaMenu.click();
         searchKostTextbox.fill(kostName);
-        selectKost.click();
-        lihatSelengkapnyaButton.click();
+        Locator selectKost = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName));
+        playwright.clickOn(selectKost);
+    }
+
+    /**
+     * user as owner click lihat selengkapnya button
+     */
+    public void clickOnLihatSelengkapnyaButton() {
+        playwright.clickOn(lihatSelengkapnyaButton);
     }
 
     /**
@@ -439,5 +472,88 @@ public class TenantBillManagementPO {
     public String getDisclaimerText() {
         return playwright.getText(disclaimerCheckinTenant);
     }
+    /**
+     * click filter dropdown
+     */
+    public void clickOnFilterDropdown() {
+        playwright.clickOn(filterDropdown);
+    }
 
+    /**
+     * select filter status booking
+     */
+    public TenantBillManagementPO fillFilterStatusBooking(String filter) {
+        Locator filterStatusBooking = page.locator("a").filter(new Locator.FilterOptions().setHasText(filter));
+        playwright.clickOn(filterStatusBooking);
+        return new TenantBillManagementPO(page);
+    }
+
+    /**
+     * click download biodata penyewa button
+     */
+    public void clickDownloadBiodataPenyewa() {
+        playwright.clickOn(downloadBiodataPenyewaButton);
+    }
+
+    /**
+     * click checkbox
+     */
+    public void tickCheckbox() {
+        playwright.clickOn(checkbox);
+    }
+
+    /**
+     * check upcoming feature
+     */
+    public boolean isUpcomingFeatureDisplayed() {
+        playwright.waitFor(informationAboutUpcomingFeature);
+        return playwright.isTextDisplayed("Kami akan memberitahu Anda saat fitur ini sudah tersedia.");
+    }
+
+    /**
+     * Click arrow next month filter button
+     */
+    public void clickArrowNextMonthFilterButton() {
+        playwright.clickOn(arrowNextMonthFilterButton);
+    }
+    /**
+     * check upcoming feature
+     */
+    public boolean userWillSeeMessageTerminatedContract() {
+        return playwright.isTextDisplayed("Tenant Wl Eight Kamar 3 Lantai 1 menghentikan sewa kos. Mohon periksa tagihan penyewa.");
+    }
+
+    /**
+     * check help center page
+     */
+    public boolean userCanSeeHelpCenterPage() {
+        return playwright.isTextDisplayed("Pusat Bantuan");
+    }
+    /**
+     * user as owner click kost dropdown
+     * user enter kost name
+     * user choose kost name
+     */
+    public void searchKostInBillingManagement(String kostName) {
+        playwright.clickOn(kostDropdownInBillingManagement);
+        Locator selectKost = page.locator("//label[contains(.,'"+kostName+"')]");
+        playwright.clickOn(selectKost);
+    }
+
+    /**
+     * user click on disbursement link
+     */
+    public void userClickOnDIsbursementLink() {
+        playwright.clickOn(page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]"));
+    }
+    /**
+     * Get text financial report
+     *
+     * @return string data type "title and content"
+     */
+    public String getTextFinancialReport(String titleText, String contentText) {
+        Locator getTextTitle = page.locator("//p[contains(text(),'"+ titleText + "')]");
+        Locator getTextContent = page.locator("//p[contains(text(),'"+ contentText + "')]");
+        return playwright.getText(getTextTitle) + playwright.getText(getTextContent);
+    }
 }

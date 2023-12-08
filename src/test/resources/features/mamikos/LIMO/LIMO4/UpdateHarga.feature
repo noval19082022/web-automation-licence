@@ -1,7 +1,7 @@
 @regression @LIMO4 @EX-LG
 Feature: Update Harga
 
-  @TEST_LIMO-2798 @continue
+  @TEST_LIMO-2798 @continue @updatePrice
   Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Inactive with update price
     Given user go to mamikos homepage
     When user login as owner:
@@ -15,7 +15,7 @@ Feature: Update Harga
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
 
-  @continue
+  @continue @updatePrice
   Scenario: user refresh page with out update price
     When user click see other prices
     Then user see daily price is "50000"
@@ -28,7 +28,7 @@ Feature: Update Harga
     And owner search kost "Automation Kos" on property saya page
     Then user see kos with name "Automation Kos", status "Aktif" and type "Kos Putra"
 
-  @TEST_LIMO-2895 @continue
+  @TEST_LIMO-2895 @continue @updatePrice
   Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Active with update price
     When user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
@@ -42,7 +42,7 @@ Feature: Update Harga
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
 
-  @continue
+  @continue @updatePrice
   Scenario: user refresh page with update price
     Then user see daily price is "100001"
     And user see weekly price is "700000"

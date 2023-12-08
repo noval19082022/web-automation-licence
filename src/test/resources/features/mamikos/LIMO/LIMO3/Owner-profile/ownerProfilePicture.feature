@@ -2,15 +2,15 @@
 
 Feature: Owner Profile Picture - Owner Setting
 
-  @continue
-  Scenario: Profile Picture is null
+  @continue @TEST_LIMO-2855
+  Scenario: [Setelan Akun][Profile Picture] Profile Picture is null
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password   |
       | 083176408311 | qwerty123  |
     Then verify the profile picture is displayed
 
-  @TEST_DOM-2286 @continue
+  @TEST_LIMO-2852 @continue
   Scenario: [Setelan Akun] Email recommendation can be enabled and disabled
     When owner navigates to Akun menu
     And owner click on "checkmark  Rekomendasi via email"
@@ -18,7 +18,7 @@ Feature: Owner Profile Picture - Owner Setting
     When owner click on "checkmark  Rekomendasi via email"
     Then toast message "Rekomendasi via email berhasil diaktifkan" should be appear
 
-  @TEST_DOM-2287 @continue
+  @TEST_LIMO-2846 @continue
   Scenario: [Setelan Akun] Chat notification can be enabled and disabled
     When owner navigates to Akun menu
     And owner click on "checkmark  Notifikasi via chat"
@@ -26,7 +26,7 @@ Feature: Owner Profile Picture - Owner Setting
     When owner click on "checkmark  Notifikasi via chat"
     Then toast message "Notifikasi via chat berhasil diaktifkan" should be appear
 
-  @TEST_DOM-2288
+  @TEST_LIMO-2850
   Scenario: [Setelan Akun] SMS Update Kos can be enabled and disabled
     When owner navigates to Akun menu
     And owner click on "checkmark  Notifikasi kos via SMS"

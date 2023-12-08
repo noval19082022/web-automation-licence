@@ -14,7 +14,7 @@ Feature: Quick Allocation on Properti Saya
     And owner choose filter iklan saya to "Iklan Aktif"
     Then user cek status toggle iklan "Kos Jajajadooo Segun Sorong" is "Naik"
     * user verify the toggle iklan "Kos Jajajadooo Segun Sorong" is "on"
-    * user verify the wording iklan kamar penuh "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
+    * user verify the wording iklan kamar penuh "Kos Jajajadooo Segun Sorong" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
     #quickAllocation from kos page
     When owner navigates to property saya kos
     And owner search kost "Kos Jajajadooo Segun Sorong" on property saya page
@@ -47,9 +47,9 @@ Feature: Quick Allocation on Properti Saya
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod | password  |
-      | 085951394565 | 0          | qwerty123 |
+      | 082233545507 | 0          | 12345678 |
     And owner navigates to property saya kos
-    When owner search kost "Kos Never Allocate Tobelo Halmahera Utara" on property saya page
+    When owner search kost "Kost Automation GP 2 Depok Sleman" on property saya page
     Then verify quick allocation section while never allocate
     And user cancel quick allocate the ads never allocate
 
