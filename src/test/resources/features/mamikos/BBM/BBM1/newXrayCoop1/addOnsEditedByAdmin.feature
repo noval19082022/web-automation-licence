@@ -1,5 +1,5 @@
 @COOP-4943 @COOP1
-Feature: [Test Execution] AT Web Staging - COOP1
+Feature: addOns Edited By Admin
 
 	Background:
 		#@PRECOND_COOP-3422

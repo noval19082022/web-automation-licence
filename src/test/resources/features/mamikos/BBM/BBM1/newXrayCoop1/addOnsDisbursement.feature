@@ -1,5 +1,5 @@
 @COOP-4943 @COOP1
-Feature: [Test Execution] AT Web Staging - COOP1
+Feature: addOns Disbursement
 
 
 	@TEST_COOP-3459 @TESTSET_COOP-4944 @Automated @web

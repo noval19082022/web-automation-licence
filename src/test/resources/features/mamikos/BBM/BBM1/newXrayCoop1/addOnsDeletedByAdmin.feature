@@ -1,5 +1,5 @@
 @COOP-4943 @COOP1
-Feature: [Test Execution] AT Web Staging - COOP1
+Feature: addOns Deleted By Admin
 
 
 	@TEST_COOP-3436 @TESTSET_COOP-4944 @Automated @web

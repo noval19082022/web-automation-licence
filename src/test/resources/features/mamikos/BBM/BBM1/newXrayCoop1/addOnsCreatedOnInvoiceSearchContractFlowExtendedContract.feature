@@ -1,5 +1,5 @@
 @COOP-4943 @COOP1
-Feature: [Test Execution] AT Web Staging - COOP1
+Feature: addOns Created On Invoice Search Contract Flow Extended Contract
 
 
   @TEST_COOP-3425 @TESTSET_COOP-4944 @Automated @web
