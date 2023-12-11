@@ -61,7 +61,7 @@ Feature: Gold Plus
 
   @TEST_LIMO-5078
   Scenario: [WEB][Pilih Paket GP] Owner wants to check "Lihat Detail Manfaat" of GoldPlus 2 and GoldPlus 1
-    #detai manfaat GP 1
+    #detail manfaat GP 1
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
@@ -69,14 +69,14 @@ Feature: Gold Plus
     And owner navigate to list goldplus package
     When owner wants to see Lihat Detail Manfaat Goldplus Satu
     Then owner see benefit "Manfaat GoldPlus 1" is displayed
-    Then owner see benefit "Kos lebih diprioritaskan dari kos tanpa GoldPlus" is displayed
+    Then owner see benefit "Kos lebih diprioritaskan dari kos tanpa GoldPlus." is displayed
     Then owner see benefit "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar." is displayed
     Then owner see benefit "Pasang promo properti dengan fitur Promo Iklan." is displayed
     Then owner see benefit "Bonus 10% saat beli saldo MamiAds." is displayed
     Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
     Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
     And owner click close icon pop up
-    #detai manfaat GP 2
+    #detail manfaat GP 2
     When owner wants to see Lihat Detail Manfaat Goldplus Dua
     Then owner see benefit "Manfaat GoldPlus 2" is displayed
     Then owner see benefit "Kuota tanpa batas untuk membalas chat dari pencari kos." is displayed
@@ -88,3 +88,21 @@ Feature: Gold Plus
     Then owner see benefit "Bonus 15% saat beli saldo MamiAds." is displayed
     Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
     Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
+
+  @TEST_LIMO-5079
+  Scenario: [WEB][Pilih Paket GP] As a property owner, I would like to know the difference between GP 1 and GP 2 benefits
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password  |
+      | 0812345670001 | 0          | qwerty123 |
+    When owner navigate to list goldplus package
+    #list manfaat Goldplus 2
+    Then owner see benefit "Lihat profil calon penyewa yang menghubungi Anda" is displayed
+    And owner see benefit in "golplus 2" is "Balas chat tanpa batas dengan pencari kos" is displayed
+    And owner see benefit "Promosikan kos Anda dengan fitur Broadcast Chat" is displayed
+    And owner see benefit "Kos lebih diprioritaskan dari GoldPlus 1 dan kos tanpa GoldPlus" is displayed
+    And owner see benefit in "golplus 2" is "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar" is displayed
+    #list manfaat Goldplus 1
+    And owner see benefit "Cashback dan bonus Saldo Mamiads" is displayed
+    And owner see benefit in "golplus 1" is "Balas chat tanpa batas dengan pencari kos" is displayed
+    And owner see benefit in "golplus 1" is "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar" is displayed

@@ -3,7 +3,6 @@ package pageobject.owner.kelolatagihan;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.admin.mamipay.bangkrupux.AdminApproveBookingPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -46,6 +45,7 @@ public class TenantBillManagementPO {
     Locator contractPageEmpty;
     Locator contractName;
     Locator clickSelengkapnyaContract;
+    Locator arrowNextMonthFilterButton;
 
     //Locator for download biodata penyewa
     Locator filterDropdown;
@@ -83,6 +83,7 @@ public class TenantBillManagementPO {
         checkbox = page.getByTestId("modalDownload").locator("span");
         informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
+        arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
     }
 
     /**
@@ -98,6 +99,22 @@ public class TenantBillManagementPO {
             playwright.clickOn(filterKos);
             playwright.clickOn(kosNameFilter);
         }
+    }
+
+    /**
+     * Click on filter month
+     */
+    public void clickOnFilterMonth() {
+        playwright.clickOn(filterMonth);
+    }
+
+    /**
+     * Click on month name on filter month
+     * @param month String type month name
+     */
+    public void clickOnMonthNameOnFilterMonth(String month) {
+        Locator monthName = page.getByTestId("billingManagementFilterDate-wrapper").getByText(month);
+        playwright.clickOn(monthName);
     }
 
     /**
@@ -493,6 +510,12 @@ public class TenantBillManagementPO {
         return playwright.isTextDisplayed("Kami akan memberitahu Anda saat fitur ini sudah tersedia.");
     }
 
+    /**
+     * Click arrow next month filter button
+     */
+    public void clickArrowNextMonthFilterButton() {
+        playwright.clickOn(arrowNextMonthFilterButton);
+    }
     /**
      * check upcoming feature
      */

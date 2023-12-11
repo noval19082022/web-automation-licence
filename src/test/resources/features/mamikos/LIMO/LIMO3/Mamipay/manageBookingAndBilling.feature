@@ -2,7 +2,7 @@
 
 Feature: Manage Booking And Billing
 
-  @notregisteredmamipay
+  @notregisteredmamipay @TEST_LIMO-5669
   Scenario: Manage Booking And Bills Menu - Not Registered Mamipay
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,7 +13,7 @@ Feature: Manage Booking And Billing
     Then verify form "Lengkapi data diri Anda" for Auto BBK
     When owner go back to previous page
 
-  @donthavekos
+  @donthavekos @TEST_LIMO-5670
   Scenario: Manage Booking And Bills Menu - Registered Mamipay but don't have kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -25,7 +25,7 @@ Feature: Manage Booking And Billing
     When owner click "Batal" button
     Then owner will see that the text "Data iklan milik Anda belum ditemukan. Silakan cari atau tambahkan iklan baru." is displayed
 
-  @notactivatebooking
+  @notactivatebooking @TEST_LIMO-5671
   Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost but not yet activate booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: Manage Booking And Billing
     When owner click "Edit Data Pribadi"
     Then verify the title on mamipay owner onboarding displayed
 
-  @allactive
+  @allactive @TEST_LIMO-5672
   Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost and have activate booking
     Given user go to mamikos homepage
     When user login as owner:

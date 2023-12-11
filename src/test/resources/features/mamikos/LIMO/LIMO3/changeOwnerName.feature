@@ -1,7 +1,7 @@
 @regression @LIMO3 @listing-monetization @changeOwnerName
 Feature: Owner Setting - Change Owner Name
 
-  @TEST_DOM-3217 @continue
+  @TEST_LIMO-3217 @continue
   Scenario: Change Owner Name
     Given user go to mamikos homepage
     When user login as owner:
@@ -15,7 +15,7 @@ Feature: Owner Setting - Change Owner Name
     And owner fills nama lengkap owner "tiara"
     Then verify nama lengkap owner
 
-  @TEST_DOM-2289
+  @TEST_LIMO-2842
   Scenario: [Setelan Akun] Text box "Nama" is inputed with invalid value
     When owner click on Ubah "Nama Lengkap"
     And owner fills nama lengkap owner "7777 88"
@@ -25,9 +25,3 @@ Feature: Owner Setting - Change Owner Name
     When owner delete nama lengkap owner
     And owner fills nama lengkap owner "yu"
     Then verify pop up message "Minimal 3 karakter"
-
-
-
-
-
-

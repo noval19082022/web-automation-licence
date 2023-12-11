@@ -1,6 +1,6 @@
-@regression @BBM2 @TEST_BBM-1339
 #  kost used: Kost Adi Auto Fpaid
 #  (Kost Regular FullPaid without Additional Fee and Deposit)
+@regression @BBM2 @TEST_BBM-1339
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
 
   Scenario: Admin Batalkan Contract
