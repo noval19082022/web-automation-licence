@@ -548,7 +548,19 @@ public class GoldplusSteps {
 
     @Then("owner see benefit {string} is displayed")
     public void owner_see_benefit_is_displayed(String benefit) {
-        Assert.assertTrue(goldplus.getTextManfaatGP(benefit),"benefit GP doesnt match");
+        Assert.assertEquals(goldplus.getTextManfaatGP(benefit),benefit,"not match benefit");
+    }
+
+    @Then("owner see benefit in {string} is {string} is displayed")
+    public void owner_see_benefit_in_is_is_displayed(String packageGP, String benefitGP) {
+        switch (packageGP){
+            case "golplus 2":
+                Assert.assertEquals(goldplus.getTextManfaatGP2(benefitGP),benefitGP,"benefit doesnt match");
+                break;
+            case "golplus 1":
+                Assert.assertEquals(goldplus.getTextManfaatGP1(benefitGP),benefitGP,"benefit doesnt match");
+                break;
+        }
     }
 
     //------ Terminated Contract GP ------//
