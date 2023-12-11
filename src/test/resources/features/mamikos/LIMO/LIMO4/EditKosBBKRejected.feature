@@ -1,4 +1,4 @@
-@regression @LIMO4x @EX-LG
+@regression @LIMO4 @EX-LG
 
 Feature: Edit Kos BBK Rejected
 
