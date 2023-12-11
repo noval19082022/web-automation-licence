@@ -42,6 +42,7 @@ public class CpDisbursementPO {
     private Locator closePopUpButton;
     private Locator lainnyaTipeTransaksiField;
     private Locator tambahkanDataTransferButton;
+    private Locator errorMessageOnTotalPendapatan;
     //Tambah Data Transfer
 
     //List Daftar Transfer
@@ -88,6 +89,8 @@ public class CpDisbursementPO {
     private Locator namaPemilikRekeningTextOnPreviewModal;
     private Locator nomorTeleponPemilikTextOnPreviewModal;
     private Locator tipeDisbursementOnPreview;
+    private Locator errorMessageOnNomorRekening;
+    private Locator errorMessageOnNamaPemilikRekening;
     //Preview Data Transfer
 
     public CpDisbursementPO(Page page){
@@ -118,6 +121,7 @@ public class CpDisbursementPO {
         lainnyaTipeTransaksiField = page.locator("#transaction_type_text-add-new");
         tambahkanDataTransferButton = page.locator("#transfer-submit-add-new");
         daftarTransferTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Transfer"));
+        errorMessageOnTotalPendapatan = page.getByLabel("Tambah Data Transfer").getByText("Mohon masukkan angka");
 
         tanggalTransferPemilikTable = page.locator("td b");
         namaPropertyTable = page.locator("tr td:nth-of-type(3)");
@@ -156,6 +160,8 @@ public class CpDisbursementPO {
         namaPemilikRekeningTextOnPreviewModal = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
         nomorTeleponPemilikTextOnPreviewModal = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Preview Data Transfer")).getByPlaceholder("Masukkan nomor telepon pemilik");
         tipeDisbursementOnPreview = page.locator("//select[@name='disbursement_type']");
+        errorMessageOnNomorRekening = page.locator("//p[contains(., 'Mohon masukkan nomor rekening')]").first();
+        errorMessageOnNamaPemilikRekening = page.locator("//p[contains(., 'Mohon masukkan nama pemilik rekening')]").first();
     }
 
     /**
@@ -169,6 +175,7 @@ public class CpDisbursementPO {
      * Click Tambah Data Transfer Button
      */
     public void tambahDataTransfer() {
+        playwright.waitTillPageLoaded(30000.0);
         playwright.clickOn(tambahDataTransferButton);
     }
 
@@ -832,5 +839,67 @@ public class CpDisbursementPO {
     public String getHeaderColumnName(int i) {
         int index = i-1;
         return playwright.getText(headerColumnText.nth(index));
+    }
+
+    /**
+     * Get String Error Message on Total Pendapatan field
+     * @return String Error Message
+     */
+    public String getErrorMessageOnTotalPendapatan() {
+        return playwright.getText(errorMessageOnTotalPendapatan);
+    }
+
+    /**
+     * Check is Tambahkan button disable
+     * True = disable
+     * False = enable
+     * @return Tambahkan button is disable
+     */
+    public boolean isTambahkanBtnDisable() {
+        return playwright.isButtonDisable(tambahkanDataTransferButton);
+    }
+
+    /**
+     * Remove Total Pendapatan value in Tambah Data Transfer pop up
+     */
+    public void removeTotalPendapatanValue() {
+        playwright.clearText(totalPendapatanFieldOnPreview);
+    }
+
+    /**
+     * Remove Nomor Rekening value in Preview Data Transfer pop up
+     */
+    public void removeNomorRekeningValue() {
+        playwright.clearText(nomorRekeningTextOnPreviewModal);
+    }
+
+    /**
+     * Get String Error Message on Nomor Rekening in Preview Data Transfer pop up
+     * @return String Error Message
+     */
+    public String getErrorMessageOnNomorRekening() {
+        return playwright.getText(errorMessageOnNomorRekening);
+    }
+
+    /**
+     * Refresh page
+     */
+    public void refreshPage() {
+        playwright.reloadPage();
+    }
+
+    /**
+     * Remove Nama Pemilik Rekening value in Preview Data Transfer pop up
+     */
+    public void removeNamaPemilikRekening() {
+        playwright.clearText(namaPemilikRekeningTextOnPreviewModal);
+    }
+
+    /**
+     * Get String Error Message on Nama Pemilik Rekening in Preview Data Transfer pop up
+     * @return String Error Message
+     */
+    public String getErrorMessageOnNamaPemilikRekening() {
+        return playwright.getText(errorMessageOnNamaPemilikRekening);
     }
 }
