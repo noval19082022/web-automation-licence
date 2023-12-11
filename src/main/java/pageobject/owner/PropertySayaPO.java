@@ -890,6 +890,7 @@ public class PropertySayaPO {
      * @param jenisProperti e.g Kost, Apartemen
      */
     public void clickTambahDataIklan(String jenisProperti) {
+        playwright.waitTillPageLoaded();
         playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
         playwright.clickOn(tambahDataIklan);
         playwright.clickOn(tambahIklanBaru);
