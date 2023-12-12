@@ -1,4 +1,4 @@
-@regression @LIMO4x @EX-LG
+@regression @LIMO4 @EX-LG
 
 Feature: Edit Kos BBK Rejected
 
@@ -11,7 +11,7 @@ Feature: Edit Kos BBK Rejected
       | 0812345670008   | 0812345670008   | qwerty123   |
     And owner navigates to property saya kos
     And owner close pop up BBK at kos list page
-    And owner search kost "KosAuto NoBBK Test Kalasan Sleman" on property saya page
+    And owner search kost "KosAuto NoBBK Testing Kalasan Sleman" on property saya page
     And user click "Edit Data Pribadi"
     And user click "Lanjutkan"
     Then user see activate mamipay form with Full Name "<FullName1>"
@@ -26,17 +26,20 @@ Feature: Edit Kos BBK Rejected
     And user select bank account with "<BankName2>"
     And user clicks on Terms And Conditions checkbox in Mamipay form
     When user click submit data button to activate mamipay
-    And owner search kost "KosAuto NoBBK Test Kalasan Sleman" on property saya page
-    Then user see kos with name "KosAuto NoBBK Test Kalasan Sleman", status "Aktif" and type "Kos Putra"
+    And owner search kost "KosAuto NoBBK Testing Kalasan Sleman" on property saya page
+    Then user see kos with name "KosAuto NoBBK Testing Kalasan Sleman", status "Diperiksa Admin" and type "Kos Putra"
+    And owner back to owner dashboard
+    And owner should successfully log out
 
     #Scenario Reject BBK Kos
     Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+    And admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "KosAuto NoBBK Test Kalasan Sleman" in admin kos owner page
-    And admin reject BBK kos
+    And admin bangkrupux search kost owner "KosAuto NoBBK Testing Kalasan Sleman" in admin kos owner page
+    When admin click on "BBK Data" link button
+    Then admin reject BBK kos
 
     Examples:
       | FullName1                              | BankNo1    | BankOwner1   | BankName1                              | FullName2                              | BankNo2    | BankOwner2   | BankName2                              |

@@ -1,4 +1,4 @@
-@regression @LIMO4 @EX-LG
+@regression @LIMO4 @updatePrice
 Feature: Update Harga
 
   @TEST_LIMO-2798 @continue @updatePrice

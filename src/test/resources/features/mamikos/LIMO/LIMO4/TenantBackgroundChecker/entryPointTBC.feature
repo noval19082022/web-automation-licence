@@ -10,7 +10,7 @@ Feature: Entry point Tenant Background Checker
     * user click chat button in top bar owner home page
     Then owner can see entry point TBC Lihat Profil at chatroom "Rega Tenant Tiga"
 
-  @TEST_LIMO-4843 @entrypointTBC @continue
+  @TEST_LIMO-4843 @entrypointTBC
     Scenario: [WEB][Chat] Show Tenant Background Checker onboarding (coachmark) section upon accessing a chat room
     # first time
     And owner can see coachmark tenant background checker

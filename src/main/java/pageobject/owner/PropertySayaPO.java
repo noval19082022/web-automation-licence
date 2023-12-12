@@ -611,7 +611,7 @@ public class PropertySayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)) {
+        if (closePopupBBKIcon.isVisible()) {
             playwright.clickOn(closePopupBBKIcon);
         }
     }
