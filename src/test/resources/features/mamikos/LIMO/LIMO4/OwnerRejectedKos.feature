@@ -1,4 +1,4 @@
-@regression @LIM4
+@regression @LIMO4
 Feature: Owner - Rejected Kos
 
   @TEST_LIMO-3276

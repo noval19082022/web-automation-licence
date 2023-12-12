@@ -73,9 +73,14 @@ public class ownerSettingSteps {
         Assert.assertTrue(ownerSettingPO.isProfilePictureDisplayed(), "Profile picture doesn't match!");
     }
 
-    @And("owner click on {string}")
-    public void ownerClickOn(String textDescription) {
+    @And("owner uncheck on {string}")
+    public void ownerUncheckOn(String textDescription) {
         ownerSettingPO.clickOnPengaturanAkun(textDescription);
+    }
+
+    @When("owner check on {string}")
+    public void ownerCheckOn(String textDescription) {
+        ownerSettingPO.checkPengaturanAkun(textDescription);
     }
 
     @When("owner delete nama lengkap owner")
