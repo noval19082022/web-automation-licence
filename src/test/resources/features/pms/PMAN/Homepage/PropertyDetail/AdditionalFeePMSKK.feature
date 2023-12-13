@@ -1,4 +1,4 @@
-@regression @pman @pms @additionalFeePMSKK
+@pms @additionalFeePMSKK
 
 Feature: Additional Fee PMS KK
 

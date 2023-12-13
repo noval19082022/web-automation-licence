@@ -1,4 +1,4 @@
-@regression @pman @ownersini
+@regression @pman @ownersini @profilNavbar
 
 Feature: Profile Navbar
 
