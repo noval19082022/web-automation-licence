@@ -1,8 +1,9 @@
-@regression @addons @TEST_BBM-1180 @BBM1
+@COOP-4943 @COOP1
+Feature: addOns Fee On Auto Extend Invoice Booked Status
 
-Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
 
-  Scenario: Admin Batalkan Contract
+  @TEST_COOP-3480 @TESTSET_COOP-4944 @Automated @web @continue
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -13,48 +14,51 @@ Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @continue
-  Scenario: Cancel Booking if Tenant Have Booking
+  @TEST_COOP-3481 @TESTSET_COOP-4944 @Automated @web @continue
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  Scenario: Tenant Booking Kost
+  @TEST_COOP-3482 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag           | kost name prod           |
-      | Kost Adi Auto Add Ons    | Kost Adi Auto Add Ons    |
+      | kost name stag        | kost name prod        |
+      | Kost Adi Auto Add Ons | Kost Adi Auto Add Ons |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  Scenario: Owner Accept Booking
+  @TEST_COOP-3483 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag          | tenant prod          |
-      | Irvi Tenant Add Ons  | Irvi Tenant Add Ons  |
+      | tenant stag         | tenant prod         |
+      | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  Scenario: Admin Master Add, Add Ons Fee On Auto Extend Invoice With Booked Status
+  @TEST_COOP-3477 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Admin Master Add, Add Ons Fee To Full Payment Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin add additional price:
-      | search by              | renter_phone_number      |
-      | search value           | 0891111020198            |
-      | invoice number         | default                  |
-      | additional price type  | Add On                   |
-      | additional price title | adiautomation            |
-      | addtional price value  | 100000                   |
+      | search by              | renter_phone_number |
+      | search value           | 0891111020198       |
+      | invoice number         | default             |
+      | additional price type  | Add On              |
+      | additional price title | adiautomation       |
+      | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @continue
-  Scenario: Tenant Pay 1st Month Booking And Check Add Ons Fee On Auto Extend Invoice With Booked Status
+  @TEST_COOP-3484 @TESTSET_COOP-4944 @Automated @web @continue
+  Scenario: [Add Ons - Add Ons Fee On Auto Extend Invoice With Booked Status] Tenant Pay 1st Month Booking And Check Add Ons Fee On Auto Extend Invoice With Booked Status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -66,10 +70,10 @@ Feature: Add Ons Fee On Auto Extend Invoice With Booked Status
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-    Scenario: Add ons Fee On Auto Extend from add ons that added on first invoice with booked status
-      When tenant navigate to tagihan kost saya
-      And tenant go to invoice page
-      And tenant set active page to 2
-      Then tenant can see additional price "adiautomation" with price "Rp100.000"
-
-
+  @TEST_COOP-3485 @TESTSET_COOP-4944 @Automated @web
+  Scenario: Add ons Fee On Auto Extend from add ons that added on first invoice with booked status
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant set active page to 2
+    Then tenant can see additional price "adiautomation" with price "Rp100.000"
+		
