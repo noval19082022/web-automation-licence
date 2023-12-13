@@ -1,4 +1,4 @@
-@regression @pman @ownersini
+@regression @pman @ownersini @accessPointSSDashboard
 
 Feature: Access Point SS Dashboard From Pillar 2
 
