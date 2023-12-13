@@ -611,9 +611,8 @@ public class PropertySayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)) {
-            playwright.clickOn(closePopupBBKIcon);
-        }
+        playwright.waitFor(closePopupBBKIcon);
+        playwright.clickOn(closePopupBBKIcon);
     }
 
     /**
@@ -631,6 +630,7 @@ public class PropertySayaPO {
      * @return String Bank account number inputted text
      */
     public String getInputTextBankAcc() {
+        playwright.waitTillPageLoaded(3000.0);
         return playwright.getInputValue(bankAccountNumberTextbox);
     }
 
