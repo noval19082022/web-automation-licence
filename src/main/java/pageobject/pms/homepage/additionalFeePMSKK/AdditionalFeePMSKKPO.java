@@ -22,6 +22,7 @@ public class AdditionalFeePMSKKPO {
     private Locator listingName;
     private Locator expandBtn;
     private Locator hargaInListing;
+    private Locator kebabBtn;
 
     public AdditionalFeePMSKKPO(Page page){
         this.page = page;
@@ -31,6 +32,7 @@ public class AdditionalFeePMSKKPO {
         tambahBiayaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Biaya"));
         totalListingAdditionalFee = page.locator("tbody:first-of-type").nth(2).locator("td:nth-of-type(2)");
         expandBtn = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--sm']");
+        kebabBtn = page.locator("//div[@data-testid='additional-fee-action']");
     }
 
     /**
@@ -127,10 +129,9 @@ public class AdditionalFeePMSKKPO {
 
     /**
      * Clicks Expand button in Biaya Tambahan table
-     * @param indexExpand
      */
-    public void expandAddFee(int indexExpand) {
-        playwright.clickOn(expandBtn.nth(indexExpand));
+    public void expandAddFee() {
+        playwright.clickOn(expandBtn);
     }
 
     /**
@@ -159,5 +160,13 @@ public class AdditionalFeePMSKKPO {
      */
     public int getTotalRow() {
         return expandBtn.count();
+    }
+
+    /**
+     * Check if Kebab button is visible
+     * @return kebab button
+     */
+    public boolean isKebabBtnVisible() {
+        return playwright.isLocatorVisibleAfterLoad(kebabBtn, 10000.0);
     }
 }
