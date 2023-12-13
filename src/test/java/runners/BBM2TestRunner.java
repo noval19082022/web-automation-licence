@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"json:target/result/bbm2/cucumber-report.json", "html:target/result/bbm2/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@BBM2"
+        tags = "@COOP2"
 )
 public class BBM2TestRunner extends BaseTestRunner {
 }
