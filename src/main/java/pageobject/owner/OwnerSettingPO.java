@@ -21,6 +21,7 @@ public class OwnerSettingPO {
     Locator nameOwnerField;
     Locator username;
     Locator profilePicture;
+    Locator accountSettingsButton;
 
     public OwnerSettingPO(Page page) {
         this.page = page;
@@ -35,6 +36,7 @@ public class OwnerSettingPO {
         nameOwnerField = page.locator("[name='name']");
         username = page.locator("//p[@class='navbar-owner-dashboard__username bg-c-text bg-c-text--body-2']");
         profilePicture = page.locator("//i[@class='mdi mdi-account-circle mdi-48px']");
+        accountSettingsButton = page.getByText("Setelan Akun");
     }
 
     /**
@@ -177,5 +179,15 @@ public class OwnerSettingPO {
      */
     public void clearNamaLengkapOwner() {
         playwright.clearText(nameOwnerField);
+    }
+
+    /**
+     * Click profile picture and then click Setelan Akun
+     *
+     *
+     */
+    public void clickOnSettingAccount() {
+        playwright.clickOn(profilePicture);
+        playwright.clickOn(accountSettingsButton);
     }
 }
