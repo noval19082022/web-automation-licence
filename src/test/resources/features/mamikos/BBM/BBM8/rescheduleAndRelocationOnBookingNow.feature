@@ -8,7 +8,7 @@ Feature: Reschedule and Relocation
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   | qwerty123 |
     And admin go to data booking menu
     And admin click booking now button
-    And admin select room with kost name "Kost Adi Auto SinggahSini"
+    And admin select room with kost name "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And admin fill the input field on booking form with:
       | search by       | value          |
       | by Phone Number | 0890867321227  |

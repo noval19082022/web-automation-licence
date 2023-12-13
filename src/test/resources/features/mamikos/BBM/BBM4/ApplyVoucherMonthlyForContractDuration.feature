@@ -26,7 +26,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 
@@ -36,8 +36,8 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag          | tenant prod          |
-      | Adi Auto Voucher Dua | Adi Auto Voucher Dua |
+      | tenant stag           | tenant prod          |
+      | Adi Auto Voucher Dua  | Adi Auto Voucher Dua  |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Apply Voucher AUTOMONTHLY
@@ -75,7 +75,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
