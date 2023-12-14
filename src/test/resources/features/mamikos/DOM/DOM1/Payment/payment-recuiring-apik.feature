@@ -60,3 +60,15 @@ Feature: Payment Recurring kost APIK
     And tenant pay invoice from invoice detail using mandiri without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
+  @TEST_COOP-5060
+  Scenario: Tenant pay recurring kos Apik using Ovo
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878412 | 083176408442 | qwerty123 |
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And payment tenant success using ovo as payment method
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
