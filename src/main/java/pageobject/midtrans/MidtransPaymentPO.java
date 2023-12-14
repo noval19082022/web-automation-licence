@@ -75,6 +75,19 @@ public class MidtransPaymentPO {
         playwright.clickOn(bayarButtonOnMidtrans);
     }
 
+
+    /**
+     * Payment process midtrans for BRI
+     * @param kodePembayaran payment virtual account
+     */
+    public void paymentForBRI(String kodePembayaran) {
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.BRI_SIMULATOR, 30000.0, LoadState.LOAD);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
+        playwright.clickOn(inquireButton);
+        playwright.clickOn(bayarButtonOnMidtrans);
+    }
+
     /**
      * Click on inquire button
      */
