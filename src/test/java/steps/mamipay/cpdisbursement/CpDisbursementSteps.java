@@ -385,6 +385,6 @@ public class CpDisbursementSteps {
 
     @When("admin refresh page in CP Disbursement")
     public void admin_refresh_page_in_CP_Disbursement(){
-        cpdisbursement.refreshPage();
+        cpdisbursement.cpDisbursementRefreshPage();
     }
 }

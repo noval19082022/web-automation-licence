@@ -884,7 +884,7 @@ public class CpDisbursementPO {
     /**
      * Refresh page
      */
-    public void refreshPage() {
+    public void cpDisbursementRefreshPage() {
         playwright.reloadPage();
     }
 
