@@ -165,6 +165,24 @@ public class PaymentSteps {
         midtrans.waitForSuccessTransaction();
     }
 
+    @When("tenant/user/owner pay invoice from invoice detail using mandiri without close the page")
+    public void tenantPayInvoiceDetailWithoutCloseThePage() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnMandiri();
+        invoice.clickOnBayarSekarang();
+        var kodePerusahaan = invoice.getCompanyCodeText();
+        var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        midtrans = new MidtransPaymentPO(ActiveContext.getActivePage());
+        midtrans.inputBillerCode(kodePerusahaan);
+        midtrans.inputPaymentCode(nomorVirtualAccount);
+        midtrans.clickOnInquireButton();
+        midtrans.clickOnPayButton();
+        midtrans.waitForSuccessTransaction();
+    }
+
     @When("tenant get invoice number")
     public void tenantGetInvoiceNumber() {
         invoice = new InvoicePO(ActiveContext.getActivePage());
