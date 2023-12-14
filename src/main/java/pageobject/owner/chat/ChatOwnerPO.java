@@ -39,6 +39,7 @@ public class ChatOwnerPO {
     Locator buttonOnChatRoomList;
     Locator Iunderstand;
     Locator sayaMengertiChatRoom;
+    Locator bookingLabel;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -73,6 +74,7 @@ public class ChatOwnerPO {
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
     }
 
     /**
@@ -360,4 +362,11 @@ public class ChatOwnerPO {
         playwright.clickOn(buttonOnChatRoomList);
     }
 
+    /**
+     * Get booking status label
+     * @return booking status
+     */
+    public String getBookingStatusLabel() {
+        return playwright.getText(bookingLabel);
+    }
 }
