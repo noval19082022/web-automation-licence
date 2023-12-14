@@ -14,7 +14,7 @@ Feature: Payment Recurring kost APIK
     Then tenant will see payment is success
 
   @TEST_COOP-5056
-  Scenario: Tenant pay kos credit card
+  Scenario: Tenant pay recurring kos Apik using credit card
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
@@ -22,5 +22,17 @@ Feature: Payment Recurring kost APIK
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @TEST_COOP-5056
+  Scenario: Tenant pay recurring kos Apik using Dana
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878412 | 083176408442 | qwerty123 |
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment from invoice detail with DANA
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
