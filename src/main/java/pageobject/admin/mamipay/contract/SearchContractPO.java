@@ -145,6 +145,7 @@ public class SearchContractPO {
      * @param search String type e.g (Phone Number Tenant or Phone Number Owner)
      */
     public void fillSearchByValue(String search) {
+        playwright.clearText(searchInput);
         playwright.clickLocatorAndTypeKeyboard(searchInput, search);
     }
 
