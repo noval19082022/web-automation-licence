@@ -36,10 +36,49 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     When admin select tipe transaksi lainnya ">50 characters"
     Then admin only can input transaksi lainnya using only 50 characters
 
-  @TEST_PMAN-3340
+  @TEST_PMAN-3340 @continue
   Scenario: Submit with valid data
     When admin select tipe transaksi lainnya "Automation Testing PMAN"
     And admin submit tambah data transfer
     Then new cp disbursement data should add in daftar transfer
       | Tanggal Transfer ke Pemilik | Nama Property                                     | Tipe Transaksi          | Total Pendapatan  | Detail Rekening                   |
       | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara  | Automation Testing PMAN | Rp100.000         | Yudha Ferroza 10000245429 mandiri |
+
+  @TEST_PMAN-3355 @continue
+  Scenario: Delete Total Pendapatan and Check Error Message and Transfer Sekarang button
+    When admin clicks Transfer button in one of list data transaction
+    And admin remove "Total Pendapatan" value
+    Then error message on "Total Pendapatan" field is displayed
+    And Tambahkan button is disable
+
+  @TEST_PMAN-3354 @continue
+  Scenario: Delete Nomor Rekening and Check Error Message and Transfer Sekarang button
+    When admin refresh page in CP Disbursement
+    And admin clicks Transfer button in one of list data transaction
+    And admin remove "Nomor Rekening" value
+    Then error message on "Nomor Rekening" field is displayed
+    And Tambahkan button is disable
+
+  @TEST_PMAN-3353
+  Scenario: Delete Nama Pemilik Rekening and Check Error Message and Transfer Sekarang button
+    When admin refresh page in CP Disbursement
+    And admin clicks Transfer button in one of list data transaction
+    And admin remove "Nama Pemilik Rekening" value
+    Then error message on "Nama Pemilik Rekening" field is displayed
+    And Tambahkan button is disable
+
+  @TEST_PMAN-3357
+  Scenario: Input Total Pendapatan with Char
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+    And admin open menu CP Disbursement
+    And admin tambah data transfer
+    And admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 123abc            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
+    Then error message on "Total Pendapatan" field is displayed
+    And Tambahkan button is disable

@@ -9,6 +9,7 @@ import pageobject.pms.DisbursementPO;
 import pageobject.pms.HomepagePO;
 import pageobject.pms.roleManagement.RoleManagementPO;
 import pageobject.pms.sidebarMenuPO;
+import utilities.JavaHelpers;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class RoleManagementSteps {
     DisbursementPO disbursement = new DisbursementPO(page);
 
     private List<String> permissions;
+
+    private String roleManagementPage ="src/test/resources/testdata/pms/roleManagement.properties";
+    private String emptyStateCopy = JavaHelpers.getPropertyValue(roleManagementPage, "emptyStateCopy");
 
     @When("admin go to tambah role")
     public void admin_go_to_tambah_role(){
@@ -210,6 +214,11 @@ public class RoleManagementSteps {
         for (String listButton: button){
             Assert.assertFalse(disbursement.isButtonExistInDisbursement(listButton));
         }
+    }
+
+    @Then("empty state is displayed")
+    public void empty_state_is_displayed(){
+        Assert.assertEquals(role.getEmptyState(), emptyStateCopy, "Empty State Copy does not match!");
     }
 }
 

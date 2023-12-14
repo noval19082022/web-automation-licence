@@ -15,6 +15,8 @@ import utilities.PlaywrightHelpers;
 import java.util.List;
 import java.util.Map;
 
+import static org.testng.Assert.assertTrue;
+
 public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -312,6 +314,27 @@ public class OwnerDashboardSteps {
     public void user_access_mamitour_from_fitur_promosi() {
         ownerDashboardPO.clickToExpandFiturPromosi();
         ownerDashboardPO.clickMamitourOnSidebar();
+    }
+
+    @Then("user see screen {string}")
+    public void user_see_screen(String expectedPage) {
+        Assert.assertEquals(ownerDashboardPO.getPageHeader(), expectedPage, "Page header doesn't match!");
+    }
+
+    @Then("user can see manage booking pop up")
+    public void user_can_see_manage_booking_pop_up() {
+        assertTrue(ownerDashboardPO.isTotalNotBookingPopupPresent(), "not appear manage direct booking popup");
+        ownerDashboardPO.clickOnCloseOnPopupTotalNotBooking();
+    }
+
+    @And("user click menu Penyewa on feature waktunya mengelola property")
+    public void user_click_menu_penyewa_on_feature_waktunya_mengelola_property() {
+        ownerDashboardPO.clickOnPenyewaWaktunyaMengelolaProperti();
+    }
+
+    @And("user click menu Pusat Bantuan on feature waktunya mengelola property")
+    public void user_click_menu_pusat_bantuan_on_feature_waktunya_mengelola_property() {
+        ownerDashboardPO.clickOnPusatBantuanWaktunyaMengelolaProperti();
     }
 
     @And("owner click ubah peraturan at {string}")

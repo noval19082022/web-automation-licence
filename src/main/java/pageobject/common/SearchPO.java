@@ -109,6 +109,7 @@ public class SearchPO {
         setProperty(search);
         inputSearch.fill(search);
         Locator firstResultKostName = page.locator("[data-testid='suggestionBox-roomList'] > a:nth-of-type(1)");
+        playwright.waitTillPageLoaded();
         playwright.waitFor(firstResultKostName);
         playwright.clickOn(firstResultKostName);
         return new KostDetailsPO(page);

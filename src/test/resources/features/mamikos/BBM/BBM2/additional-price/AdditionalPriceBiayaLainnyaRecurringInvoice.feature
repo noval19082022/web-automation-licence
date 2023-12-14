@@ -23,7 +23,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                   | kost name prod      |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 

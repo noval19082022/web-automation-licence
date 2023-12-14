@@ -18,6 +18,7 @@ public class RoleManagementPO {
     Locator actionEditButton;
     Locator actionAssignMemberButton;
     Locator confirmHapusButton;
+    Locator emptyStateCopy;
 
     //Tambah Role
     Locator roleNameField;
@@ -63,6 +64,7 @@ public class RoleManagementPO {
         tambahMemberButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
         errorMember = page.locator(".bg-c-field__message");
         cancelHapusMemberButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Batal"));
+        emptyStateCopy = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Role tidak ditemukan di kata kunci yang Anda gunakan."));
     }
 
     /**
@@ -246,6 +248,14 @@ public class RoleManagementPO {
         permissionChecked = page.locator("//div[@class='checkbox bg-c-checkbox bg-c-checkbox--checked'][contains(., '" +permission+ "')]");
 
         playwright.clickOn(permissionChecked);
+    }
+
+    /**
+     * Get String Empty State in Role Management page
+     * @return String Empty State
+     */
+    public String getEmptyState() {
+        return playwright.getText(emptyStateCopy);
     }
 }
 

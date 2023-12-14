@@ -24,6 +24,7 @@ public class BoostLplPO {
     Locator btnYesBoostLpl;
     Locator deleteButtonlpl;
     Locator btnOkDeletedLpl;
+    Locator lplScoreLocator;
 
 
     public BoostLplPO(Page page) {
@@ -108,6 +109,7 @@ public class BoostLplPO {
     public void searchKosNameLPLbyListing(String kosName) {
         playwright.fill(searchByKostName,kosName);
         page.keyboard().press("Enter");
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -174,7 +176,7 @@ public class BoostLplPO {
      * return lpl Score
      */
     public String getScoreLpl(String lplScore) {
-      Locator lplScoreLocator =  page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(lplScore));
+        lplScoreLocator =  page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(lplScore));
         return playwright.getText(lplScoreLocator);
     }
 

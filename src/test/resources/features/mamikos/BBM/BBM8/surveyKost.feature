@@ -8,7 +8,7 @@ Feature: Survey Tenant
       | phone stag  | phone prod  | password  |
       | 0890867321216 | 08100000622 | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    And user click "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user batalkan survey if the survey already submitted
     And user input time survey "10:00"
     And user click on "Kirim form" button
@@ -18,7 +18,7 @@ Feature: Survey Tenant
   Scenario: Reschedule survei from chat room
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
-    And user click "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user change schedule survey if the survey already submitted
     And user input time survey "8:00"
     And user click on Ubah Jadwal button
@@ -28,7 +28,7 @@ Feature: Survey Tenant
   Scenario: cancel survei from chat template on Kost Detail
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
-    And user click "Kost Adi Auto SinggahSini"
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user batalkan survey if the survey already submitted
     Then chat room appear with latest message "Survei Kost Adi Auto SinggahSini Tobelo Halmahera Utara dibatalkan."
     When user go to mamikos homepage
@@ -48,7 +48,7 @@ Feature: Survey Tenant
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
     And admin go to tenant communication menu
-    And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini" in the search field on main page
+    And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
     Then user verify nama property on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
 
   @TEST_COOP-2873

@@ -943,4 +943,19 @@ public class PropertySayaSteps {
             propertySaya.clickOnKebijakanBaruMamikosPopUp(text);
         }
     }
+
+    @And("owner click simpan on add room pop up")
+    public void ownerClickSimpanOnAddRoomPopUp() {
+        propertySaya.saveAddRoomPopUp();
+    }
+
+    @And("user untick already inhabited checkbox")
+    public void userUntickAlreadyInhabitedCheckbox() {
+        propertySaya.UncheckAlreadyInhabitedCheckbox();
+    }
+
+    @Then("verify will be appears and the room is untick again")
+    public void verifyWillBeAppearsAndTheRoomIsUntickAgain() {
+        Assert.assertFalse(propertySaya.isInhabitedCheckboxCheck(), "InhabitedCheckbox is checked!");
+    }
 }

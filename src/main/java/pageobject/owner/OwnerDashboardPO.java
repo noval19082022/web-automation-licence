@@ -73,6 +73,10 @@ public class OwnerDashboardPO {
     Locator toggleEnable;
     Locator mamitourDashboard;
     Locator mamitourMenu;
+    Locator pageHeader;
+    Locator totalNotBookingPopup;
+    Locator closeIconOnNotBookingPopup;
+    Locator daftarPenyewMenu;
     Locator ubahPeraturan;
 
     private Locator fiturPromosiExpand;
@@ -139,6 +143,10 @@ public class OwnerDashboardPO {
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
         mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
+        pageHeader = page.locator(".room-page__header");
+        totalNotBookingPopup = page.locator(".suggestion-modal__title");
+        closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
+        daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
     }
 
@@ -701,6 +709,48 @@ public class OwnerDashboardPO {
      */
     public void clickMamitourOnSidebar() {
         playwright.clickOn(mamitourMenu);
+    }
+
+    /**
+     * Get text the page header
+     * @return page header text
+     *
+     */
+    public String getPageHeader() {
+        return playwright.getText(pageHeader);
+    }
+
+    /**
+     * Verify total not booking popup present
+     * @return true if present and false if not present
+     *
+     */
+    public boolean isTotalNotBookingPopupPresent() {
+        return playwright.waitTillLocatorIsVisible(totalNotBookingPopup, 5000.0);
+    }
+
+    /**
+     * Click close on pop up total not booking
+     *
+     */
+    public void clickOnCloseOnPopupTotalNotBooking() {
+        playwright.clickOn(closeIconOnNotBookingPopup);
+    }
+
+    /**
+     * Click penyewa on waktunya mengelola properti in owner dashboard
+     *
+     */
+    public void clickOnPenyewaWaktunyaMengelolaProperti() {
+        playwright.clickOn(daftarPenyewMenu);
+    }
+
+    /**
+     * Click pusat bantuan on waktunya mengelola properti in owner dashboard
+     *
+     */
+    public void clickOnPusatBantuanWaktunyaMengelolaProperti() {
+        playwright.clickOn(helpCenterOwnerButton);
     }
 
     public void clickUbahPeraturanButton(){
