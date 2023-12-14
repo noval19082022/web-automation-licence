@@ -172,4 +172,15 @@ public class PaymentSteps {
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBRI(kodePembayaran);
     }
+
+    @And("tenant/owner/user select payment method from invoice detail using BRI")
+    public void tenantSelectPaymentUsingBRI() {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnBRI();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
+        midtransPaymentPO.paymentForBRI(kodePembayaran);
+    }
 }

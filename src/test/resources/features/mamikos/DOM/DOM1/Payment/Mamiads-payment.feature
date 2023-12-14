@@ -61,3 +61,13 @@ Feature: Payment mamiads staging
     And owner want to buy mamiads saldo with nominal "Rp27.000"
     And owner select payment method from invoice detail using BNI
     Then owner verify invoice success paid mamiads
+
+  @TEST_COOP-5042
+  Scenario: [Owner][Payment premium] Owner paid premium paket using BRI
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 08123450977 | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp27.000"
+    And owner select payment method from invoice detail using BRI
+    Then owner verify invoice success paid mamiads
