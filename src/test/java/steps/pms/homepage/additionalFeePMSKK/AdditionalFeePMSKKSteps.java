@@ -49,29 +49,23 @@ public class AdditionalFeePMSKKSteps {
         addFeeInListing = tables.asMaps(String.class, String.class);
 
         int totalListing = additionalFeePMSKK.getTotalListing();
-        int totalRow = additionalFeePMSKK.getTotalRow();
-        System.out.println(totalRow);
+        additionalFeePMSKK.expandAddFee();
 
-        for (int i=0; i < totalRow; i++){
-            additionalFeePMSKK.expandAddFee(i);
+        int i=0;
+        while (i < totalListing){
+            listing = addFeeInListing.get(i).get("Listing");
+            harga = addFeeInListing.get(i).get("Harga");
 
-            int j=0;
-            while (j < totalListing){
-                listing = addFeeInListing.get(j).get("Listing");
-                harga = addFeeInListing.get(j).get("Harga");
+            Assert.assertEquals(additionalFeePMSKK.getListing(i), listing, "Listing does not match!");
 
-                Assert.assertEquals(additionalFeePMSKK.getListing(j), listing, "Listing does not match!");
-
-                if (harga.equalsIgnoreCase("Disesuaikan dengan tagihan")){
-                    Assert.assertEquals(additionalFeePMSKK.getHargaDisesuaikanDenganTagihan(j), harga, "Harga does not match!");
-                } else {
-                    Assert.assertEquals(additionalFeePMSKK.getHargaInListing(j), harga, "Harga does not match!");
-                }
-
-                j++;
+            if (harga.equalsIgnoreCase("Disesuaikan dengan tagihan")){
+                Assert.assertEquals(additionalFeePMSKK.getHargaDisesuaikanDenganTagihan(i), harga, "Harga does not match!");
+            } else {
+                Assert.assertEquals(additionalFeePMSKK.getHargaInListing(i), harga, "Harga does not match!");
             }
 
-            additionalFeePMSKK.expandAddFee(i);
+            i++;
+            additionalFeePMSKK.expandAddFee();
         }
     }
 }
