@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.goldplus.GoldplusPO;
+import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class OwnerDashboardSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
     GoldplusPO goldplus = new GoldplusPO(page);
+    PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
 
     private List<Map<String, String>> ownerDashboard;
 
@@ -333,6 +335,16 @@ public class OwnerDashboardSteps {
     @And("user click menu Pusat Bantuan on feature waktunya mengelola property")
     public void user_click_menu_pusat_bantuan_on_feature_waktunya_mengelola_property() {
         ownerDashboardPO.clickOnPusatBantuanWaktunyaMengelolaProperti();
+    }
+
+    @And("owner click ubah peraturan at {string}")
+    public void ownerClickUbahPeraturanAtDashboard(String text) {
+        if (text.equalsIgnoreCase("dashboard")){
+          ownerDashboardPO.clickUbahPeraturanButton();
+      }
+        else if (text.equalsIgnoreCase("pengajuan sewa")){
+            PengajuanSewaPO.clickUbahAturanButton();
+        }
     }
 }
 

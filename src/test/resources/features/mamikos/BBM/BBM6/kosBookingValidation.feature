@@ -1,5 +1,5 @@
 @BBM6 @bnbfeature
-Feature: BnB feature
+Feature: Kost Validation
 
   @TEST_COOP-1914 @automated @web @xray-update @validationBooking
   Scenario: [Kost Detail][Validation Pop Up]Check validation for booking when tenant not have Job (BBM-538)

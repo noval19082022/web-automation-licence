@@ -9,7 +9,7 @@ Feature: Waiting List - Kost Detail
 			| 0891111020199  |  0891111020199  | mamikosqa123 |
 		And tenant search kost then go to kost details:
 			| kost name stag            			| kost name prod                                           |
-			| Kost Apik Mars green Halmahera Utara  | Kost Singgahsini Arac Penuh |
+			| Kost Apik Mars pelangi Halmahera Utara  | Kost Singgahsini Arac Penuh |
 		Then tenant can see kamar penuh
 		When tenant can see "Ikut daftar tunggu" button
 		Then tenant can see "Lihat tipe lain" button
@@ -51,7 +51,7 @@ Feature: Waiting List - Kost Detail
 		When user go to mamikos homepage
 		And tenant search kost then go to kost details:
 			| kost name stag                        | kost name prod                       |
-			| Kost coba GP Tipe C Kretek Bantul		| Kost Singgahsini Full Ipi Automation |
+			| Rega Satu Parangtritis Type G		| Kost Singgahsini Full Ipi Automation |
 		Then tenant can see kamar penuh
 		When tenant can see "Tanya pemilik" button
 		Then tenant can see "Lihat tipe lain" button

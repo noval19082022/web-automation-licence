@@ -77,6 +77,7 @@ public class OwnerDashboardPO {
     Locator totalNotBookingPopup;
     Locator closeIconOnNotBookingPopup;
     Locator daftarPenyewMenu;
+    Locator ubahPeraturan;
 
     private Locator fiturPromosiExpand;
 
@@ -146,6 +147,7 @@ public class OwnerDashboardPO {
         totalNotBookingPopup = page.locator(".suggestion-modal__title");
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
+        ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
     }
 
     /**
@@ -749,5 +751,13 @@ public class OwnerDashboardPO {
      */
     public void clickOnPusatBantuanWaktunyaMengelolaProperti() {
         playwright.clickOn(helpCenterOwnerButton);
+    }
+
+    public void clickUbahPeraturanButton(){
+        playwright.waitFor(ubahPeraturan);
+        playwright.pageScrollInView(ubahPeraturan);
+        if (ubahPeraturan.isVisible()) {
+            playwright.clickOn(ubahPeraturan);
+        }
     }
 }
