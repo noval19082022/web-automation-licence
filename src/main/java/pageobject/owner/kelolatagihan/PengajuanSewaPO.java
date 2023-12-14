@@ -172,6 +172,7 @@ public class PengajuanSewaPO {
      * click Ubah Aturan button on pengajuan sewa page
      */
     public void clickUbahAturanButton(){
+        playwright.waitFor(ubahAturanButton);
         if (ubahAturanButton.isVisible()){
             playwright.clickOn(ubahAturanButton);
         }
@@ -182,7 +183,7 @@ public class PengajuanSewaPO {
      * @return peraturan kos page
      */
     public boolean getPeraturanBookingText(){
-        playwright.hardWait(3);
+        playwright.waitFor(peraturanKosText);
         return peraturanKosText.isVisible();
     }
 
@@ -250,7 +251,7 @@ public class PengajuanSewaPO {
      * activated toogle button for today
      */
     public void clickToogleCheckin(){
-        playwright.clickOn(toogleTodayButton);
+        toogleTodayButton.check();
         playwright.clickOn(saveCheckinButton);
     }
 }

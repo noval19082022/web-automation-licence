@@ -139,7 +139,7 @@ public class OwnerDashboardPO {
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
         mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
-
+        ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
     }
 
     /**
@@ -704,6 +704,7 @@ public class OwnerDashboardPO {
     }
 
     public void clickUbahPeraturanButton(){
+        playwright.waitFor(ubahPeraturan);
         playwright.pageScrollInView(ubahPeraturan);
         if (ubahPeraturan.isVisible()) {
             playwright.clickOn(ubahPeraturan);
