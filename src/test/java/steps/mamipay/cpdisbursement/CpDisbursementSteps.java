@@ -27,7 +27,9 @@ public class CpDisbursementSteps {
     private String tipeTransaksi = JavaHelpers.getPropertyValue(CPDisbursement, "tipeTransaksi");
     private String totalPendapatanRp = JavaHelpers.getPropertyValue(CPDisbursement, "totalPendapatanRp");
     private String pemilikRekening = JavaHelpers.getPropertyValue(CPDisbursement, "pemilikRekening");
-    private String errorMessageNomorRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageNomorRekening");
+    private String errorMessageOnNomorRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnNomorRekening");
+    private String errorMessageOnTotalPendapatan = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnTotalPendapatan");
+    private String errorMessageOnNamaPemilikRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnNamaPemilikRekening");
 
     private List<Map<String, String>> transferInfo;
     private List<Map<String, String>> transferAmount;
@@ -343,5 +345,46 @@ public class CpDisbursementSteps {
     public void all_disbursement_have_id() {
         Assert.assertEquals(cpdisbursement.getHeaderColumnName(1),"Id");
         Assert.assertTrue(cpdisbursement.allDisbursementHaveID());
+    }
+
+    @Then("error message on {string} field is displayed")
+    public void error_message_on_field_is_displayed(String field){
+        if (field.equalsIgnoreCase("Total Pendapatan")){
+            Assert.assertEquals(cpdisbursement.getErrorMessageOnTotalPendapatan(), errorMessageOnTotalPendapatan, "Error Message Copy does not match!");
+        } else if (field.equalsIgnoreCase("Nomor Rekening")) {
+            Assert.assertEquals(cpdisbursement.getErrorMessageOnNomorRekening(), errorMessageOnNomorRekening, "Error Message Copy does not match!");
+        } else if (field.equalsIgnoreCase("Nama Pemilik Rekening")) {
+            Assert.assertEquals(cpdisbursement.getErrorMessageOnNamaPemilikRekening(), errorMessageOnNamaPemilikRekening, "Error Message Copy does not match!");
+        } else {
+            System.out.println("Invalid input parameter");
+        }
+    }
+
+    @Then("Tambahkan button is disable")
+    public void Tambahkan_button_is_disable(){
+        Assert.assertTrue(cpdisbursement.isTambahkanBtnDisable(), "Tambahkan button is enable!");
+    }
+
+    @When("admin clicks Transfer button in one of list data transaction")
+    public void admin_clicks_Transfer_button_in_one_of_list_data_transaction(){
+        cpdisbursement.clickActionTransfer();
+    }
+
+    @When("admin remove {string} value")
+    public void admin_remove_value(String field){
+        if (field.equalsIgnoreCase("Total Pendapatan")){
+            cpdisbursement.removeTotalPendapatanValue();
+        } else if (field.equalsIgnoreCase("Nomor Rekening")) {
+            cpdisbursement.removeNomorRekeningValue();
+        } else if (field.equalsIgnoreCase("Nama Pemilik Rekening")) {
+            cpdisbursement.removeNamaPemilikRekening();
+        } else {
+            System.out.println("Invalid input parameter");
+        }
+    }
+
+    @When("admin refresh page in CP Disbursement")
+    public void admin_refresh_page_in_CP_Disbursement(){
+        cpdisbursement.cpDisbursementRefreshPage();
     }
 }
