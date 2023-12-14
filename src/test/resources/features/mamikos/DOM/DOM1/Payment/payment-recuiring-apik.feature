@@ -27,7 +27,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5057 @continue
   Scenario: Tenant pay recurring kos Apik using Dana
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment from invoice detail with DANA
     And tenant want to see invoice on riwayat booking after payment
@@ -35,7 +36,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5058 @continue
   Scenario: Tenant pay recurring kos Apik using LinkAja
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment from invoice detail using LinkAja
     And tenant want to see invoice on riwayat booking after payment
@@ -43,7 +45,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5059 @continue
   Scenario: Tenant pay recurring kos Apik using Mandiri
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant pay invoice from invoice detail using mandiri without close the page
     And tenant want to see invoice on riwayat booking after payment
@@ -51,7 +54,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5060 @continue
   Scenario: Tenant pay recurring kos Apik using Ovo
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And payment tenant success using ovo as payment method
     And tenant want to see invoice on riwayat booking after payment
@@ -59,7 +63,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5061 @continue
   Scenario: Tenant pay recurring kos Apik using Permata
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment method from invoice detail using Permata
     And tenant want to see invoice on riwayat booking after payment
@@ -67,7 +72,8 @@ Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5062 @continue
   Scenario: Tenant pay recurring kos Apik using Alfamart
-    Given tenant navigate to tagihan kost saya
+    Given tenant close unused browser tab
+    When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment using alfamart xendit as payment method from invoice detail
     And tenant want to see invoice on riwayat booking after payment
