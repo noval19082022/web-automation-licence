@@ -25,7 +25,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5056
+  @TEST_COOP-5057
   Scenario: Tenant pay recurring kos Apik using Dana
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -34,5 +34,17 @@ Feature: Payment Recurring kost APIK
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant select payment from invoice detail with DANA
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @TEST_COOP-5058
+  Scenario: Tenant pay recurring kos Apik using LinkAja
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878412 | 083176408442 | qwerty123 |
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment from invoice detail using LinkAja
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
