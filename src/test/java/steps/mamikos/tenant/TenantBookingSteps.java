@@ -409,4 +409,9 @@ public class TenantBookingSteps {
     public void tenantShouldReachBookingForm(){
         Assert.assertTrue(bookingForm.getPengajuanSewatext(), "Pengajuan Sewa");
     }
+
+    @Then("tenant can see peraturan kost with {string}")
+    public void tenantCanSeePeraturanKostWithX(String text){
+        Assert.assertTrue(kostDetail.getPeraturanKosDisinitext(text));
+    }
 }

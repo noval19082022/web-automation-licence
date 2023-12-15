@@ -43,6 +43,8 @@ public class PengajuanSewaPO {
     private Locator minCheckinAmmountDropDown;
     private Locator selectMinCheckinAmmount;
     private Locator saveCheckinButton;
+    private Locator kriteriaCalonPenyewaButton;
+    private Locator kriteriaPenyewa;
 
     public PengajuanSewaPO(Page page) {
         this.page = page;
@@ -72,6 +74,8 @@ public class PengajuanSewaPO {
         this.toogleTodayButton = page.getByRole(AriaRole.CHECKBOX);
         this.minCheckinButton = page.getByTestId("min-checkin-time-unit").getByPlaceholder("hari");
         this.simpanButtonOnModalPopup = page.getByTestId("checkin-option-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
+        this.kriteriaCalonPenyewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kriteria calon penyewa chevron-down"));
+
     }
 
     /**
@@ -193,6 +197,7 @@ public class PengajuanSewaPO {
     public void selectKostName(String kosName){
         playwright.clickOn(selectKosButton);
         searchKost = page.locator("label").filter(new Locator.FilterOptions().setHasText("" +kosName+ ""));
+        playwright.pageScrollInView(searchKost);
         playwright.clickOn(searchKost);
         pilihKosUbahPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama kos"));
         playwright.clickOn(pilihKosUbahPeraturanButton);
@@ -253,5 +258,39 @@ public class PengajuanSewaPO {
     public void clickToogleCheckin(){
         toogleTodayButton.check();
         playwright.clickOn(saveCheckinButton);
+    }
+
+    /**
+     * click kriteria calon penyewa button
+     */
+    public void clickKriteriaCalonPenyewaButton() {
+        playwright.clickOn(kriteriaCalonPenyewaButton);
+    }
+
+    /**
+     * click toogle jenis kriteria
+     * @param kriteria
+     */
+    public void clickToogleKriteria(String kriteria){
+        kriteriaPenyewa = page.getByLabel("" +kriteria+ "");
+        kriteriaPenyewa.check();
+    }
+
+    /**
+     * validate button will disable or not
+     * @param kriteria
+     * @return
+     */
+    public boolean validateDisableButton(String kriteria){
+       return kriteriaPenyewa.isDisabled();
+    }
+
+    /**
+     * uncheck toogle
+     * @param kriteria
+     */
+    public void unCheckToogle(String kriteria) {
+        kriteriaPenyewa = page.getByLabel("" +kriteria+ "");
+        kriteriaPenyewa.uncheck();
     }
 }

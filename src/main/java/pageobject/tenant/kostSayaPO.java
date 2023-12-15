@@ -22,6 +22,16 @@ public class kostSayaPO {
     Locator sendOtpButton;
     Locator verificationViaSms;
     Locator yaBatalkanButton;
+    Locator lihatInformasiKosButton;
+    Locator informasiKostText;
+    Locator kostNametext;
+    Locator lihatSemuaFasilitasButton;
+    Locator forumButton;
+    Locator titleForumText;
+    Locator checkBoxForum;
+    Locator okeButtonForum;
+    Locator upCommingText;
+
 
     public kostSayaPO(Page page) {
         this.page = page;
@@ -38,6 +48,13 @@ public class kostSayaPO {
         this.verificationViaSms = page.getByText("chat Kirim kode verifikasi via SMS ke 08*******714");
         this.yaBatalkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, batalkan"));
         this.kostSayaStillEmptyTittle = page.getByText("Kamu belum menyewa kos");
+        this.lihatInformasiKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat informasi kos"));
+        this.informasiKostText = page.getByText("Informasi Kos");
+        this.lihatSemuaFasilitasButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas"));
+        this.forumButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Forum"));
+        this.titleForumText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur ini sedang kami kembangkan"));
+        this.checkBoxForum = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        this.okeButtonForum = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke"));
     }
 
     /**
@@ -122,5 +139,78 @@ public class kostSayaPO {
         page.reload();
         return playwright.waitTillLocatorIsVisible(kostSayaStillEmptyTittle);
     }
+
+    //------------------ lihat informasi kost-------------//
+
+    /**
+     * click Lihat informasi kos button
+     */
+    public void clickLihatInformasiKosButton(){
+        playwright.clickOn(lihatInformasiKosButton);
+    }
+
+    /**
+     * this method will be information tittle Informasi kos displayed
+     */
+    public boolean getTitleInformasiKosText(){
+        return playwright.waitTillLocatorIsVisible(informasiKostText);
+    }
+
+    /**
+     * this method will be information title facility displayed
+     */
+    public boolean getFasilitas(String text){
+      kostNametext = page.getByText(""+text+"");
+      return playwright.waitTillLocatorIsVisible(kostNametext);
+    }
+
+    /**
+     * click Lihat semua fasilitas button
+     */
+    public void clickLihatSemuaFasilitasButton() {
+        playwright.pageScrollInView(lihatSemuaFasilitasButton);
+        playwright.clickOn(lihatSemuaFasilitasButton);
+    }
+
+    /**
+     * click on forum menu
+     */
+    public void clickForumMenuButton(){
+        playwright.clickOn(forumButton);
+    }
+
+    /**
+     * validated title popup is visible
+     * @return
+     */
+    public boolean getTitleCommingSoonPopup(){
+        playwright.waitTillLocatorIsVisible(titleForumText);
+        return titleForumText.isVisible();
+    }
+
+    /**
+     * click on checklist berlangganan
+     */
+    public void checklistBerlangganan(){
+        playwright.clickOn(checkBoxForum);
+    }
+
+    /**
+     * click on Oke button on popup comming soon
+     */
+    public void clickOkeButtonUpCoomingPopup(){
+        playwright.clickOn(okeButtonForum);
+    }
+
+    /**
+     * validated information upcommingsoon is visible
+     * @param text
+     * @return
+     */
+    public boolean getInformationUpComming(String text){
+        upCommingText =page.getByText(""+text+"");
+        return upCommingText.isVisible();
+    }
+
 }
 
