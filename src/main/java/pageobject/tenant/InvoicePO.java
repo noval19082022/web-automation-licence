@@ -34,6 +34,7 @@ public class InvoicePO {
     Locator alfamart;
     Locator bankMandiri;
     Locator bankPermata;
+    Locator bankBRI;
     Locator bankBNI;
     Locator kartuKredit;
     Locator dana;
@@ -101,6 +102,7 @@ public class InvoicePO {
         alfamart = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Alfamart / Alfamidi")).nth(1);
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
+        bankBRI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BRI")).nth(1);
         bankBNI = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Bank BNI")).nth(1);
         kartuKredit = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Kartu Kredit")).nth(1);
         dana = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("DANA")).nth(1);
@@ -302,6 +304,13 @@ public class InvoicePO {
      */
     public void clickOnAlfamart() {
         playwright.clickOn(alfamart);
+    }
+
+    /**
+     * Choose BRI as payment
+     */
+    public void clickOnBRI() {
+        playwright.clickOn(bankBRI);
     }
 
     /**
