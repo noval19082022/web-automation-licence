@@ -2020,16 +2020,15 @@ public class KostDetailsPO {
         playwright.clickOn(btnBukaProfil);
     }
 
+    /**
+     * validate peraturan kost disini
+     * @param text
+     * @return
+     */
     public boolean getPeraturanKosDisinitext(String text){
-        peraturanDisinitext = page.getByText(""+text+"");
-        playwright.pageScrollInView(peraturanDisinitext);
+        peraturanDisinitext = page.locator("//*[@class=\"bg-c-list-item detail-kost-rule-item detail-kost-rules__item\"]//p[contains(.,'"+text+"')]");
+        playwright.pageScrollUsingCoordinate(300, 2500);
+        playwright.waitFor(peraturanDisinitext);
         return peraturanDisinitext.isVisible();
-    }
-
-    public boolean getPeraturanBawaAnak(String text){
-        peraturanBawaAnak = page.getByText(""+text+"").nth(1);
-        playwright.pageScrollUsingCoordinate(500, 2000);
-        playwright.waitFor(peraturanBawaAnak);
-        return peraturanBawaAnak.isVisible();
     }
 }

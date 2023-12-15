@@ -412,11 +412,6 @@ public class TenantBookingSteps {
 
     @Then("tenant can see peraturan kost with {string}")
     public void tenantCanSeePeraturanKostWithX(String text){
-        if (text.equalsIgnoreCase("Boleh bawa anak")){
-            Assert.assertTrue(kostDetail.getPeraturanBawaAnak(text), "Boleh bawa anak");
-        }
-        else if (text.equalsIgnoreCase("Boleh pasutri")){
-            Assert.assertTrue(kostDetail.getPeraturanKosDisinitext(text), "Boleh pasutri");
-        }
+        Assert.assertTrue(kostDetail.getPeraturanKosDisinitext(text));
     }
 }
