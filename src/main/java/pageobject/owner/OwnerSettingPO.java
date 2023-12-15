@@ -21,6 +21,7 @@ public class OwnerSettingPO {
     Locator nameOwnerField;
     Locator username;
     Locator profilePicture;
+    Locator accountSettingsButton;
 
     public OwnerSettingPO(Page page) {
         this.page = page;
@@ -35,6 +36,7 @@ public class OwnerSettingPO {
         nameOwnerField = page.locator("[name='name']");
         username = page.locator("//p[@class='navbar-owner-dashboard__username bg-c-text bg-c-text--body-2']");
         profilePicture = page.locator("//i[@class='mdi mdi-account-circle mdi-48px']");
+        accountSettingsButton = page.getByText("Setelan Akun");
     }
 
     /**
@@ -161,13 +163,24 @@ public class OwnerSettingPO {
 
     /**
      * Click pengaturan akun
-     * Check and uncheck rekomendasi via email,notifikasi via chat,notifikasi kos via SMS
+     * Uncheck rekomendasi via email,notifikasi via chat,notifikasi kos via SMS
      * @param textDescription
      *
      */
     public void clickOnPengaturanAkun(String textDescription) {
-        String element = "//label[contains(.,'"+textDescription+"')]";
-        playwright.clickOn(page.locator(element));
+        playwright.waitTillPageLoaded();
+        Locator element = page.locator("label").filter(new Locator.FilterOptions().setHasText("checkmark" + textDescription)).locator("svg");
+        playwright.clickOn(element);
+    }
+
+    /**
+     * Click / check pengaturan akun
+     * @param textDescription
+     */
+    public void checkPengaturanAkun(String textDescription) {
+        playwright.waitTillPageLoaded();
+        Locator element = page.locator("label").filter(new Locator.FilterOptions().setHasText("checkmark" + textDescription)).locator("span");
+        playwright.clickOn(element);
     }
 
     /**
@@ -177,5 +190,15 @@ public class OwnerSettingPO {
      */
     public void clearNamaLengkapOwner() {
         playwright.clearText(nameOwnerField);
+    }
+
+    /**
+     * Click profile picture and then click Setelan Akun
+     *
+     *
+     */
+    public void clickOnSettingAccount() {
+        playwright.clickOn(profilePicture);
+        playwright.clickOn(accountSettingsButton);
     }
 }

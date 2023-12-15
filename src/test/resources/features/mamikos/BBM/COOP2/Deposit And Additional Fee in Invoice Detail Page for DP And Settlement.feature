@@ -1,0 +1,67 @@
+@COOP-4993 @COOP2
+Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
+
+
+  @TEST_COOP-4268 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag    | phone prod    |
+      | 0890867321212 | 0890867321212 |
+
+  @TEST_COOP-4269 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Cancel Booking if Tenant Have Booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod    | password     |
+      | 087708777618 | 0890867321212 | mamikosqa123 |
+    And user cancel booking
+
+  @TEST_COOP-4270 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Tenant Booking Kost
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod    | password     |
+      | 087708777618 | 0890867321212 | mamikosqa123 |
+    And tenant search kost then go to kost details:
+      | kost name stag            | kost name prod            |
+      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+    And tenant booking kost
+    Then tenant should success booking kost
+
+  @TEST_COOP-4271 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password     |
+      | 08900000000022 | 08900000000022 | mamikosqa123 |
+    And owner accept booking from tenant:
+      | tenant stag      | tenant prod          |
+      | Nunu And Willump | Adi Auto Addons Satu |
+    Then owner should redirect back to pengajuan booking page
+
+  @TEST_COOP-4272 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Deposit And Additional Fee in Invoice Detail Page for DP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on invoice details second index:
+      | search by    | renter_phone_number |
+      | search value | 0890867321212       |
+    Then admin can sees total cost is basic amount + admin fee
+
+  @TEST_COOP-4273 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Check Deposit And Additional Fee in Invoice Detail Page for Settlement
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on invoice details first index:
+      | search by    | renter_phone_number |
+      | search value | 0890867321212       |
+    Then admin can sees total cost is basic amount + deposit fee + biaya tetap
+		

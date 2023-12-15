@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import data.payment.Payment;
 import utilities.PlaywrightHelpers;
 
@@ -55,7 +56,7 @@ public class MidtransPaymentPO {
      * @param kodePembayaran payment virtual account
      */
     public void paymentForPermata(String kodePembayaran, String Bank) {
-        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(ActiveContext.getActivePage()));
         playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.selectDropdownByValue(targetBankSelection, Bank);
@@ -70,6 +71,19 @@ public class MidtransPaymentPO {
     public void paymentForBNI(String kodePembayaran){
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
+        playwright.clickOn(inquireButton);
+        playwright.clickOn(bayarButtonOnMidtrans);
+    }
+
+
+    /**
+     * Payment process midtrans for BRI
+     * @param kodePembayaran payment virtual account
+     */
+    public void paymentForBRI(String kodePembayaran) {
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.navigateTo(Payment.BRI_SIMULATOR, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.clickOn(inquireButton);
         playwright.clickOn(bayarButtonOnMidtrans);

@@ -25,8 +25,8 @@ Feature: Apply Voucher Annually For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag        | kost name prod        |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
@@ -36,7 +36,7 @@ Feature: Apply Voucher Annually For Contract Duration
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag           | tenant prod           |
+      | tenant stag           | tenant prod               |
       | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 

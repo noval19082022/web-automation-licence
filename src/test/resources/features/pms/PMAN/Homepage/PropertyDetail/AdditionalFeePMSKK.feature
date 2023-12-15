@@ -25,6 +25,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Disesuaikan dengan Tagihan  |
       | Tipe B  | Disesuaikan dengan Tagihan  |
       | Tipe C  | Disesuaikan dengan Tagihan  |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8918 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Waktu and Satuan Besaran
@@ -39,6 +43,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp19.000 / Bulan (Per kg)   |
       | Tipe B  | Rp19.000 / Bulan (Per kg)   |
       | Tipe C  | Rp19.000 / Bulan (Per kg)   |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8919 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Besaran only
@@ -53,6 +61,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp15.500 / kg   |
       | Tipe B  | Rp15.500 / kg   |
       | Tipe C  | Rp15.500 / kg   |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8920 @continue
   Scenario: Add Additional Fee Disesuaikan dengan Tagihan in PMS KK for Satuan Besaran only
@@ -67,6 +79,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Disesuaikan dengan Tagihan  |
       | Tipe B  | Disesuaikan dengan Tagihan  |
       | Tipe C  | Disesuaikan dengan Tagihan  |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8921 @continue
   Scenario: Add Additional Fee with 0 Amount in Satuan Waktu Only
@@ -81,6 +97,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp0 / Bulan |
       | Tipe B  | Rp0 / Bulan |
       | Tipe C  | Rp0 / Bulan |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8923 @continue
   Scenario: Add Additional Fee with Input Manual for Ketentuan Bagi Hasil
@@ -95,6 +115,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp11.000 / Hari (Per orang) |
       | Tipe B  | Rp11.000 / Hari (Per orang) |
       | Tipe C  | Rp11.000 / Hari (Per orang) |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8924 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Waktu only
@@ -109,6 +133,10 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp20.000 / Bulan |
       | Tipe B  | Rp20.000 / Bulan |
       | Tipe C  | Rp20.000 / Bulan |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_PMAN-8925
   Scenario: Add Additional Fee with 0 Amount in Input Manual Bagi Hasil and in Satuan Waktu & Besaran
@@ -123,3 +151,7 @@ Feature: Additional Fee PMS KK
       | Tipe A  | Rp0 / Bulan (Per item/pcs) |
       | Tipe B  | Rp0 / Bulan (Per item/pcs) |
       | Tipe C  | Rp0 / Bulan (Per item/pcs) |
+    #@TEST_PMAN-8663
+    #Scenario: Delete additional fee in General Level
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table

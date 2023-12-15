@@ -142,4 +142,9 @@ public class ChatOwnerSteps {
     public void userDismissFTUETBC() {
         chat.dismissFTUETBC();
     }
+
+    @Then("owner can see label with {string}")
+    public void owner_can_see_label_with(String labelText) {
+        Assert.assertEquals(chat.getBookingStatusLabel(), labelText,"Label doesn't match!");
+    }
 }

@@ -1,4 +1,4 @@
-@regression @LIMO4 @EX-LG @updateKamar
+@regression @LIMO4 @EX-LG @updateKamar @BNB-2245
 Feature: Update Kamar
 
   @TEST_LIMO-3017 @continue
@@ -7,7 +7,6 @@ Feature: Update Kamar
     When user login as owner:
       | phone stag     | phone prod     | password    |
       | 083176408311   | 083176408311   | qwerty123   |
-    And owner click "Nanti Saja"
     And owner navigates to property saya kos
     And owner search kost "Kos Testing 123 Tipe B Danurejan Yogyakarta" on property saya page
     And user click Lihat Selengkapnya button for edit
@@ -38,6 +37,7 @@ Feature: Update Kamar
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
     And owner add room with name or room number "26"
+    And owner click simpan on add room pop up
     Then user can sees toast on update room as "Kosong" "Total Kamar 25"
     And user see total room is "Total Kamar 25" in update room page
     When user enter text "26" on search bar in room allotment and hit enter

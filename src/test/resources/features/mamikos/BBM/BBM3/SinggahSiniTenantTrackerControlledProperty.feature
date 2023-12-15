@@ -23,7 +23,7 @@ Feature: SinggahSini - Tenant Tracker - Controlled Property
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod                |
-      | Kost Adi Auto SinggahSini    | Kost Adi Auto SinggahSini     |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara    | Kost Adi Auto SinggahSini Tobelo Halmahera Utara     |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -34,7 +34,7 @@ Feature: SinggahSini - Tenant Tracker - Controlled Property
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag               | tenant prod               |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking For Add Ons

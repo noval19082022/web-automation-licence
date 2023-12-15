@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.pms.HomepagePO;
+import utilities.JavaHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,10 @@ public class HomepageSteps {
     HomepagePO homepage = new HomepagePO(page);
 
     LoadingPO loading = new LoadingPO(page);
+
+    private String homepagePage ="src/test/resources/testdata/pms/homepage.properties";
+    private String emptyStateTitleInHomepage = JavaHelpers.getPropertyValue(homepagePage, "emptyStateTitleCopy");
+    private String emptyStateSubtitleInHomepage = JavaHelpers.getPropertyValue(homepagePage, "emptyStateSubtitleCopy");
 
     private List<Map<String, String>> informasiPembayaran;
     private List<Map<String, String>> gender;
@@ -196,6 +201,17 @@ public class HomepageSteps {
     @When("admin go to Homepage")
     public void admin_go_to_Homepage(){
         homepage.clicksHomepage();
+    }
+
+    @When("admin search property {string}")
+    public void admin_search_property(String property){
+        homepage.searchProperty(property);
+    }
+
+    @Then("empty state in Homepage menu is displayed")
+    public void empty_state_in_Homepage_menu_is_displayed(){
+        Assert.assertEquals(homepage.getEmptyStateTitleInHomepage(), emptyStateTitleInHomepage, "Empty State Copy does not match!");
+        Assert.assertEquals(homepage.getEmptyStateSubtitleInHomepage(), emptyStateSubtitleInHomepage, "Empty State Copy does not match!");
     }
 }
 

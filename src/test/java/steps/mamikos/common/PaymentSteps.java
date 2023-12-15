@@ -165,6 +165,24 @@ public class PaymentSteps {
         midtrans.waitForSuccessTransaction();
     }
 
+    @When("tenant/user/owner pay invoice from invoice detail using mandiri without close the page")
+    public void tenantPayInvoiceDetailWithoutCloseThePage() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnMandiri();
+        invoice.clickOnBayarSekarang();
+        var kodePerusahaan = invoice.getCompanyCodeText();
+        var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        midtrans = new MidtransPaymentPO(ActiveContext.getActivePage());
+        midtrans.inputBillerCode(kodePerusahaan);
+        midtrans.inputPaymentCode(nomorVirtualAccount);
+        midtrans.clickOnInquireButton();
+        midtrans.clickOnPayButton();
+        midtrans.waitForSuccessTransaction();
+    }
+
     @When("tenant get invoice number")
     public void tenantGetInvoiceNumber() {
         invoice = new InvoicePO(ActiveContext.getActivePage());
@@ -313,8 +331,8 @@ public class PaymentSteps {
 
     @When("system display remaining payment {string} use mamipoin for payment monthly")
     public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
-        String remainingPaymentBefore = "Rp10.001.000";
-        String remainingPaymentAfter = "Rp9.876.544";
+        String remainingPaymentBefore = "Rp10.006.000";
+        String remainingPaymentAfter = "Rp9.881.544";
 
         if(condition.equals("before")){
             Assert.assertEquals(invoice.getTotalCost(), remainingPaymentBefore, "Remaining payment before doesn't match");
@@ -363,7 +381,7 @@ public class PaymentSteps {
         xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
     }
 
-    @And("owner select payment method using {string}")
+    @And("owner/tenant/user select payment method using {string}")
     public void ownerSelectPaymentMethodUsing(String Bank) {
         invoice.clickOnPilihPembayaran();
         invoice.clickOnPermata();
@@ -373,5 +391,16 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtrans = Optional.ofNullable(midtrans).orElseGet(() -> new MidtransPaymentPO(page));
         midtrans.paymentForPermata(kodePembayaran, Bank);
+    }
+
+    @And("owner/tenant/user select payment method from invoice detail using Permata")
+    public void ownerSelectPaymentMethodUsingPermata() {
+        invoice.clickOnPilihPembayaran();
+        invoice.clickOnPermata();
+        invoice.clickOnBayarSekarang();
+        var kodePembayaran = invoice.getKodePembayaranNumberText();
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtrans = Optional.ofNullable(midtrans).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
+        midtrans.paymentForPermata(kodePembayaran, "PERMATA");
     }
 }

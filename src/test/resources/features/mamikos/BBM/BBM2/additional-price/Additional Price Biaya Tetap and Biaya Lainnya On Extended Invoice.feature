@@ -27,7 +27,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -85,7 +85,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner goes to bills details
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And owner set Kelola Tagihan filter month to "next" month
     And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
