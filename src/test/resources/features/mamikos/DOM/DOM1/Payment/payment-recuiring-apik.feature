@@ -67,7 +67,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5062 @continue
+  @TEST_COOP-5062
   Scenario: Tenant pay recurring kos Apik using Alfamart
     Given tenant close unused browser tab
     When tenant navigate to tagihan kost saya

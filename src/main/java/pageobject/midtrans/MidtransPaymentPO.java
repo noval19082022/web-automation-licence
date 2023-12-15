@@ -56,7 +56,7 @@ public class MidtransPaymentPO {
      * @param kodePembayaran payment virtual account
      */
     public void paymentForPermata(String kodePembayaran, String Bank) {
-        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(ActiveContext.getActivePage()));
         playwright.navigateTo(Payment.PERMATA_MIDTRANS, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.selectDropdownByValue(targetBankSelection, Bank);
