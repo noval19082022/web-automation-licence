@@ -14,6 +14,7 @@ public class MamitourPO {
     private Locator subtitleBelumAdaPropertiPopup;
     private Locator pusatBantuan;
     private Locator riwayatBtn;
+    private Locator pesanSkrgPaket3Bulan;
     // ---    Riwayat    --- //
     private Locator dalamProsesTab;
     private Locator selesaiTab;
@@ -21,6 +22,20 @@ public class MamitourPO {
     private Locator emptyStateDalamProsesSubtitleText;
     private Locator emptyStateSelesaiSubtitleText;
     private Locator firstHistoryList;
+    // ---   Detail Tagihan    --- //
+    private Locator choosePackageDropdown;
+    private Locator pesanSekarangDetailPemesanan;
+    private Locator bacaPanduanButton;
+    private Locator titleOrderAcceptedPopup;
+    private Locator subtitleOrderAcceptedPopup;
+    private Locator closePopupOrderMamitour;
+    private Locator titlePanduanMamitourPoup;
+    private Locator closePopupPanduan;
+    private Locator addExtraLantaiButton;
+    private Locator addExtraRuanganButton;
+    private Locator removeExtraLantaiButton;
+    private Locator removeExtraRuanganButton;
+    private Locator totalPriceText;
 
     public MamitourPO(Page page) {
         this.page = page;
@@ -30,12 +45,26 @@ public class MamitourPO {
         this.subtitleBelumAdaPropertiPopup = page.getByText("Tambahkan kos/apartemen terlebih dahulu untuk bisa memesan MamiTour.");
         this.pusatBantuan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ke Pusat Bantuan"));
         this.riwayatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Riwayat"));
+        this.pesanSkrgPaket3Bulan = page.getByTestId("mamitour-landing-package-button").first();
         this.dalamProsesTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Dalam Proses"));
         this.selesaiTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
         this.emptyStateTitleText = page.getByText("Belum Ada Transaksi");
         this.emptyStateDalamProsesSubtitleText = page.getByText("Transaksi yang masih dalam proses akan muncul di halaman ini.");
         this.emptyStateSelesaiSubtitleText = page.getByText("Transaksi yang telah selesai akan muncul di halaman ini.");
         this.firstHistoryList = page.getByTestId("mamitour-history-card").first();
+        this.choosePackageDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih paket Anda dropdown-down"));
+        this.pesanSekarangDetailPemesanan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pesan Sekarang"));
+        this.bacaPanduanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Baca Panduan"));
+        this.titleOrderAcceptedPopup = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pesanan MamiTour Telah Diterima"));
+        this.subtitleOrderAcceptedPopup = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi tim Mamikos untuk pembayaran dan pembuat");
+        this.closePopupOrderMamitour =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.titlePanduanMamitourPoup = page.getByText("Panduan persiapan foto/video");
+        this.closePopupPanduan = page.getByTestId("mamitour-guides-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("close"));
+        this.addExtraLantaiButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Lantai Jika ada tambahan lantai +Rp75.000 / lantai add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus"));
+        this.removeExtraLantaiButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Lantai Jika ada tambahan lantai +Rp75.000 / lantai add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-minus"));
+        this.addExtraRuanganButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Ruangan Jika ada tambahan ruangan +Rp30.000 / ruangan add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus"));
+        this.removeExtraRuanganButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Ruangan Jika ada tambahan ruangan +Rp30.000 / ruangan add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-minus"));
+        this.totalPriceText = page.getByTestId("mamitourTotalPayment");
     }
 
     /**
@@ -132,5 +161,134 @@ public class MamitourPO {
      */
     public boolean isHistoryListVisible() {
         return playwright.waitTillLocatorIsVisible(firstHistoryList);
+    }
+
+    /**
+     * check is package dropdown still in default state or not
+     * @return boolean
+     */
+    public boolean isChooseMamitourPackageDropdownVisible() {
+        return playwright.waitTillLocatorIsVisible(choosePackageDropdown);
+    }
+
+    /**
+     * check is pesan sekarang button enable or not
+     * @return boolean
+     */
+    public boolean isPesanSekarangDetailPemesananEnable() {
+        return pesanSekarangDetailPemesanan.isEnabled();
+    }
+
+    /**
+     * click on pesan sekarang button
+     */
+    public void clickOnPesanSekarangDetail() {
+        playwright.clickOn(pesanSekarangDetailPemesanan);
+    }
+
+    /**
+     * click and choose mamitour package
+     * @param packageName
+     */
+    public void clickAndChooseMamitourPackage(String packageName) {
+        Locator choosenPackage = page.locator("a").filter(new Locator.FilterOptions().setHasText(packageName));
+        playwright.clickOn(choosePackageDropdown);
+        playwright.clickOn(choosenPackage);
+    }
+
+    /**
+     * click on baca panduan button on pesanan dirima popup
+     */
+    public void clickOnBacaPanduan() {
+        playwright.clickOn(bacaPanduanButton);
+    }
+
+    /**
+     * check is it order accepted title is visible or not
+     * @return boolean
+     */
+    public boolean isTitleOrderAcceptedPopupVisible() {
+        return playwright.waitTillLocatorIsVisible(titleOrderAcceptedPopup);
+    }
+
+    /**
+     * check is it order accepted subtitle is visible or not
+     * @return boolean
+     */
+    public boolean isSubtitleOrderAcceptedPopupVisible() {
+        return playwright.waitTillLocatorIsVisible(subtitleOrderAcceptedPopup);
+    }
+
+    /**
+     * click on close button on popup after purchase mamitour
+     */
+    public void clickOnClosePopupOrderMamitour() {
+        playwright.clickOn(closePopupOrderMamitour);
+    }
+
+    /**
+     * check is popup panduan visible or not
+     * @return boolean
+     */
+    public boolean isPopupPanduanVisible() {
+        return playwright.waitTillLocatorIsVisible(titlePanduanMamitourPoup);
+    }
+
+    /**
+     * click on close button in panduan mamitour popup
+     */
+    public void clickOnClosePanduanPopup() {
+        playwright.clickOn(closePopupPanduan);
+    }
+
+    /**
+     * click on add extra lantai button
+     */
+    public void clickOnAddExtraLantai(int extra) {
+        for (int i = 1; i<=extra; i++) {
+            playwright.clickOn(addExtraLantaiButton);
+        }
+    }
+
+    /**
+     * click on add extra ruangan button
+     */
+    public void clickOnAddExtraRuangan(int extra) {
+        for (int i = 1; i<=extra; i++) {
+            playwright.clickOn(addExtraRuanganButton);
+        }
+    }
+
+    /**
+     * click on remove extra lantai button
+     */
+    public void clickOnRemoveExtraLantai(int extra) {
+        for (int i = 1; i<=extra; i++) {
+            playwright.clickOn(removeExtraLantaiButton);
+        }
+    }
+
+    /**
+     * click on remove extra ruangan button
+     */
+    public void clickOnRemoveExtraRuangan(int extra) {
+        for (int i = 1; i<=extra; i++) {
+            playwright.clickOn(removeExtraRuanganButton);
+        }
+    }
+
+    /**
+     * get total price text on detail tagihan mamitour
+     * @return String
+     */
+    public String getTotalPriceText() {
+        return playwright.getText(totalPriceText);
+    }
+
+    /**
+     * click on pesan sekarang paket 3 bulan on landing page
+     */
+    public void clickOnPesanSekarangPaket3Bulan() {
+        playwright.clickOn(pesanSkrgPaket3Bulan);
     }
 }
