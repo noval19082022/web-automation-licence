@@ -11,6 +11,7 @@ Feature: Change email owner
     And owner change email to "plmrega123@mailinator.com"
     Then user get error message "Email sudah digunakan oleh akun lain"
 
+  @continue
   Scenario: Change email owner
     Given user go to mamikos homepage
     When user login as owner:
@@ -22,11 +23,7 @@ Feature: Change email owner
     Then owner will see toast "Mohon cek email yang baru Anda masukkan untuk verifikasi."
 
   Scenario: Retry change email owner within 1 minute
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag    | password   |
-      | 0888881281    | qamamikos  |
-    And owner navigates to Akun menu
+    Given owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "coopowneraAT@mailinator.com"
     Then owner will see toast "Terjadi Galat. Silahkan coba lagi atau tunggu beberapa menit."

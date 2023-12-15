@@ -211,7 +211,6 @@ public class OwnerSettingPO {
      * owner change email
      */
     public void ownerChangeEmail(String email){
-        playwright.clickOn(emailTextBox);
         playwright.fill(emailTextBox, email);
         playwright.clickOn(simpanButton);
     }
