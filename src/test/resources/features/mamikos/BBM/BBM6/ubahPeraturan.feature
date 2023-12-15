@@ -38,3 +38,40 @@
     And owner activated toogle checkin button
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1897 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+    Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
+    When owner back to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    Then owner redirect to Peraturan Masuk Kos page
+    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Boleh bawa anak"
+    And owner click Simpan at Peraturan Masuk Kos page
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                    | kost name prod                                            |
+      | kost semarang promo ngebut Abepura Jayapura       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    Then tenant can see peraturan kost with "Boleh bawa anak"
+    When owner navigates to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Boleh bawa anak"
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1896 @automated @booking-and-billing @booking-stay-setting @web @xray-update
+    Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Wajib Buku Nikah (COOP-1896)
+    When owner back to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    Then owner redirect to Peraturan Masuk Kos page
+    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Wajib sertakan buku nikah saat pengajuan sewa"
+    Then owner can see "kamar hanya bagi penyewa" will disable
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+    And owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Boleh untuk pasutri"
+    Then owner click Simpan at Peraturan Masuk Kos page
