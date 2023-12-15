@@ -236,6 +236,10 @@ public class KostDetailsPO {
     private Locator popupValidationText;
     private Locator btnBukaProfil;
 
+    //-------------peraturan kos disini------------//
+    private Locator peraturanDisinitext;
+    private Locator peraturanBawaAnak;
+
     public KostDetailsPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -2014,5 +2018,18 @@ public class KostDetailsPO {
      */
     public void clickBukaProfile(){
         playwright.clickOn(btnBukaProfil);
+    }
+
+    public boolean getPeraturanKosDisinitext(String text){
+        peraturanDisinitext = page.getByText(""+text+"");
+        playwright.pageScrollInView(peraturanDisinitext);
+        return peraturanDisinitext.isVisible();
+    }
+
+    public boolean getPeraturanBawaAnak(String text){
+        peraturanBawaAnak = page.getByText(""+text+"").nth(1);
+        playwright.pageScrollUsingCoordinate(500, 2000);
+        playwright.waitFor(peraturanBawaAnak);
+        return peraturanBawaAnak.isVisible();
     }
 }
