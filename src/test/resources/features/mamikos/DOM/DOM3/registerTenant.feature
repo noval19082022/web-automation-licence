@@ -206,3 +206,11 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara", "gizkara", "at@test.com", "qwerty123", "qwerty123"
     Then user verify error messages
       | Nomor handphone hanya dapat diisi dengan angka. |
+
+  Scenario: [Web Tenant][Register]Register Tenant - Input tenant name more than 50 character
+    Given user go to mamikos homepage
+    When user clicks on Enter button Tenant
+    And user clicks on Register button
+    And user fills out registration form without click register "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "08210391239921", "at@test.com", "qwerty123", "qwerty123"
+    Then user verify error messages
+      | Maksimal 50 karakter. |
