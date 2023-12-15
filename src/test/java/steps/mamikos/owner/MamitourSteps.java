@@ -100,8 +100,7 @@ public class MamitourSteps {
 
     @Then("user will see also close pesanan diterima popup")
     public void user_will_see_also_close_pesanan_diterima_popup() {
-        Assert.assertTrue(mamitour.isTitleOrderAcceptedPopupVisible(), "Title pesanan diterima not visible");
-        Assert.assertTrue(mamitour.isSubtitleOrderAcceptedPopupVisible(), "Subtitle pesanan diterima not visible");
+        user_will_see_pesanan_diterima_popup();
         mamitour.clickOnClosePopupOrderMamitour();
     }
 
@@ -120,14 +119,14 @@ public class MamitourSteps {
 
     @And("user click on add extra {int} lantai and {int} ruangan")
     public void user_click_on_add_extra_lantai_x_and_ruangan_x(int lantai, int ruangan) {
-        mamitour.clickOnAddExtraLantai(lantai);
-        mamitour.clickOnAddExtraRuangan(ruangan);
+        mamitour.clickOnAddExtra(lantai, "Lantai");
+        mamitour.clickOnAddExtra(ruangan, "Ruangan");
     }
 
     @And("user click on remove extra {int} lantai and {int} ruangan")
     public void user_click_on_remove_extra_lantai_x_and_ruangan_x(int lantai, int ruangan) {
-        mamitour.clickOnRemoveExtraLantai(lantai);
-        mamitour.clickOnRemoveExtraRuangan(ruangan);
+        mamitour.clickOnRemoveExtra(lantai, "Lantai");
+        mamitour.clickOnRemoveExtra(ruangan, "Ruangan");
     }
 
     @Then("user verify total price is {string}")

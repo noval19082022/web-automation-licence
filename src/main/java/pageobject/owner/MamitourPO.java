@@ -31,10 +31,8 @@ public class MamitourPO {
     private Locator closePopupOrderMamitour;
     private Locator titlePanduanMamitourPoup;
     private Locator closePopupPanduan;
-    private Locator addExtraLantaiButton;
-    private Locator addExtraRuanganButton;
-    private Locator removeExtraLantaiButton;
-    private Locator removeExtraRuanganButton;
+    private Locator addExtraButton;
+    private Locator removeExtraButton;
     private Locator totalPriceText;
 
     public MamitourPO(Page page) {
@@ -55,15 +53,11 @@ public class MamitourPO {
         this.choosePackageDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih paket Anda dropdown-down"));
         this.pesanSekarangDetailPemesanan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pesan Sekarang"));
         this.bacaPanduanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Baca Panduan"));
-        this.titleOrderAcceptedPopup = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pesanan MamiTour Telah Diterima"));
+        this.titleOrderAcceptedPopup = page.getByText("Pesanan MamiTour Telah Diterima");
         this.subtitleOrderAcceptedPopup = page.getByText("Dalam 3 hari kerja, Anda akan dihubungi tim Mamikos untuk pembayaran dan pembuat");
         this.closePopupOrderMamitour =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         this.titlePanduanMamitourPoup = page.getByText("Panduan persiapan foto/video");
-        this.closePopupPanduan = page.getByTestId("mamitour-guides-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("close"));
-        this.addExtraLantaiButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Lantai Jika ada tambahan lantai +Rp75.000 / lantai add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus"));
-        this.removeExtraLantaiButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Lantai Jika ada tambahan lantai +Rp75.000 / lantai add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-minus"));
-        this.addExtraRuanganButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Ruangan Jika ada tambahan ruangan +Rp30.000 / ruangan add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus"));
-        this.removeExtraRuanganButton = page.getByTestId("mamitourPackagesAddOn").locator("div").filter(new Locator.FilterOptions().setHasText("Ekstra Ruangan Jika ada tambahan ruangan +Rp30.000 / ruangan add-minusadd-plus")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-minus"));
+        this.closePopupPanduan = page.locator("//div[@data-testid='mamitour-guides-modal']//button").nth(1);
         this.totalPriceText = page.getByTestId("mamitourTotalPayment");
     }
 
@@ -242,38 +236,22 @@ public class MamitourPO {
     }
 
     /**
-     * click on add extra lantai button
+     * click on add extra lantai/ruangan button
      */
-    public void clickOnAddExtraLantai(int extra) {
-        for (int i = 1; i<=extra; i++) {
-            playwright.clickOn(addExtraLantaiButton);
+    public void clickOnAddExtra(int number, String extra) {
+        addExtraButton = page.locator("//*[.='Ekstra "+ extra +"']/../../../following-sibling::*//button[.='add-plus']");
+        for (int i = 1; i<=number; i++) {
+            playwright.clickOn(addExtraButton);
         }
     }
 
     /**
-     * click on add extra ruangan button
+     * click on remove extra lantai/ruangan button
      */
-    public void clickOnAddExtraRuangan(int extra) {
-        for (int i = 1; i<=extra; i++) {
-            playwright.clickOn(addExtraRuanganButton);
-        }
-    }
-
-    /**
-     * click on remove extra lantai button
-     */
-    public void clickOnRemoveExtraLantai(int extra) {
-        for (int i = 1; i<=extra; i++) {
-            playwright.clickOn(removeExtraLantaiButton);
-        }
-    }
-
-    /**
-     * click on remove extra ruangan button
-     */
-    public void clickOnRemoveExtraRuangan(int extra) {
-        for (int i = 1; i<=extra; i++) {
-            playwright.clickOn(removeExtraRuanganButton);
+    public void clickOnRemoveExtra(int number, String extra) {
+        removeExtraButton = page.locator("//*[.='Ekstra "+ extra +"']/../../../following-sibling::*//button[.='add-minus']");
+        for (int i = 1; i<=number; i++) {
+            playwright.clickOn(removeExtraButton);
         }
     }
 
