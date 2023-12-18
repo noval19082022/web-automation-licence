@@ -63,4 +63,23 @@ public class OwnerPeraturanKosSteps {
         pengajuanBooking.clickToogleCheckin();
     }
 
+    @And("owner click on kriteria calon penyewa button")
+    public void ownerCLickOnKriteriaCalonPenyewaButton(){
+        pengajuanBooking.clickKriteriaCalonPenyewaButton();
+    }
+
+    @And("owner click kriteria penyewa with {string}")
+    public void ownerClickKriteriaPenyewaWithX(String kriteria){
+        pengajuanBooking.clickToogleKriteria(kriteria);
+    }
+
+    @Then("owner can see {string} will disable")
+    public void ownerCanSeeXWillDisable(String kriteria) {
+        pengajuanBooking.validateDisableButton(kriteria);
+    }
+
+    @And("owner uncheck toogle {string}")
+    public void ownerUncheckToogle(String kriteria) {
+        pengajuanBooking.unCheckToogle(kriteria);
+    }
 }

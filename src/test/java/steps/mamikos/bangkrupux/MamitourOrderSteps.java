@@ -17,7 +17,7 @@ public class MamitourOrderSteps {
 
     @And("admin paid all unpaid transaction for {string}")
     public void admin_paid_all_unpaid_transaction(String phoneNumber) {
-        playwright.navigateTo(Mamikos.URL + "/admin/mamitour", 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMITOUR_ORDER, 30000.0, LoadState.LOAD);
         mamitourOrder.searchPhoneNumber(phoneNumber);
         while (mamitourOrder.isFirstMarkAsPaidVisible()) {
             mamitourOrder.clickOnFirstMarkAsPaid();

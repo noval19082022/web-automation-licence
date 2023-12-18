@@ -2,8 +2,9 @@ package pageobject.pms.homepage.additionalFeePMSKK;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
+import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
+import com.microsoft.playwright.options.AriaRole;
 
 public class AddAdditionalFeePMSKKPO {
 
@@ -56,6 +57,7 @@ public class AddAdditionalFeePMSKKPO {
      * @param bagiHasil
      */
     public void selectsKetentuanBagiHasil(String bagiHasil) {
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         ketentuanBagiHasil = page.locator("//div[@class='bg-c-list-item__description']/p[contains(., '" +bagiHasil+ "')]");
         playwright.clickOn(ketentuanBagiHasil);
     }
@@ -146,6 +148,7 @@ public class AddAdditionalFeePMSKKPO {
      * @param amount
      */
     public void inputsManualBagiHasil(String amount) {
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         playwright.fill(fieldManualBagiHasil, amount);
     }
 }

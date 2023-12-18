@@ -126,7 +126,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentAlfamart @COOP-4606
+  @paymentAlfamart @TEST_COOP-4606
   Scenario: Tenant pay kos BBK alfamart
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -134,5 +134,16 @@ Feature: Payment All
       | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method using Alfamart
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @paymentBRIMidtrans @TEST_COOP-5041
+  Scenario: Tenant pay kos BBK using BRI
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0895124719 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant select payment method using BRI from riwayat booking
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success

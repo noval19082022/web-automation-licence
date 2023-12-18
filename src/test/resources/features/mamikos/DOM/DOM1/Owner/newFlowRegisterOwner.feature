@@ -174,3 +174,11 @@ Feature: New Flow Register Owner
     And user fills out registration form without click register "Rheza Haryo Hanggara", "@@@", "at@test.com", "qwerty123", "qwerty123"
     Then user verify error messages
       | Nomor handphone hanya dapat diisi dengan angka. |
+
+  Scenario: [WEB][Register Owner] Input name using special character
+    Given user go to mamikos homepage
+    When user clicks on Enter button
+    And user clicks on Register button
+    And user fills out registration form without click register "B@g4Z", "at@test.com", "at@test.com", "qwerty123", "qwerty123"
+    Then user verify error messages
+      | Masukkan karakter alfabet. |
