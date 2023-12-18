@@ -23,8 +23,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                   | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -33,7 +33,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000022 | mamikosqa123 |
+      | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -78,10 +78,10 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
+      | 08900000000022 | 08900000000021 | mamikosqa123 |
     And owner goes to bills details
       | kost name stag      | kost name prod      |
-      | Kost Adi Auto Fpaid | Kost Adi Auto Fpaid |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
     And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can sees total amount is basic amount plus other price
       | 50000 |

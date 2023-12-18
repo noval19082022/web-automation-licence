@@ -12,7 +12,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
 
-  @TEST_COOP-4277 @TESTSET_COOP-4944 @Automated @web
+  @TEST_COOP-4277 @TESTSET_COOP-4944 @Automated @web @continue
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -26,7 +26,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     And tenant search kost then go to kost details:
       | kost name stag                        | kost name prod                        |
       | Kost Adi Auto FullPaid AddFee Deposit | Kost Adi Auto FullPaid AddFee Deposit |
-    And tenant booking kost for "today"
+    And tenant booking kost
     Then tenant should success booking kost
 
   @TEST_COOP-4279 @TESTSET_COOP-4944 @Automated @web

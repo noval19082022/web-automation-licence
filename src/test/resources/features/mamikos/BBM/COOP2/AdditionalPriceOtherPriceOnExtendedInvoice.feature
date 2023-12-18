@@ -16,19 +16,19 @@ Feature: Additional Price Other Price On Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod    | password     |
-      | 087708777618 | 0890867321212 | mamikosqa123 |
+      | phone stag   | phone prod    | password  |
+      | 087708777618 | 0890867321212 | qwerty123 |
     And user cancel booking
 
   @TEST_COOP-4261 @TESTSET_COOP-4944 @Automated @web
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod    | password     |
-      | 087708777618 | 0890867321212 | mamikosqa123 |
+      | phone stag   | phone prod    | password  |
+      | 087708777618 | 0890867321212 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                   | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -89,7 +89,7 @@ Feature: Additional Price Other Price On Extended Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini" on month of "next"
+    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		

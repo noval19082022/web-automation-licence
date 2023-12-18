@@ -47,10 +47,10 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant pay kost from riwayat booking using ovo "08126000444" without close the page
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
@@ -75,11 +75,11 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
-    And tenant go to invoice page
-    And tenant set active page to 1
+    And tenant go to invoice page after pay DP
+    And tenant set active page to 0
     Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 
   @TEST_COOP-3625 @TESTSET_COOP-4944 @Automated @web
@@ -88,7 +88,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000021 | 08900000000021 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
-    And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
+    And owner go to bill page of kost "Kost Adi Auto DP Only" on month of "current"
+    And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		
