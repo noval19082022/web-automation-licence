@@ -30,6 +30,11 @@ public class MamiAdsSteps {
         mamiAdsPO.navigatesToMamiads();
     }
 
+    @When("user navigates to mamiads pembelian saldo")
+    public void user_navigates_to_mamiads_pembelian_saldo() {
+        mamiAdsPO.navigatesToMamiadsBalance();
+    }
+
     @And("user navigate to mamiads history page")
     public void userNavigateToMamiadsHistoryPage() {
         mamiAdsPO.navigatesToMamiadsHistory();
@@ -60,6 +65,17 @@ public class MamiAdsSteps {
     @And("user verify count of riwayat before beli saldo")
     public void userVerifyCountOfRiwayatBeforeBeliSaldo() {
         riwayatBeforeBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
+    }
+
+    @And("user click Beli Saldo on mamiads dashboard")
+    public void user_click_beli_saldo_on_mamiads_dashboard() {
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+    }
+
+    @And("favorit saldo is {string}")
+    public void favorit_saldo_is(String saldo){
+        Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
     }
 
     @And("user wants to buy saldo MamiAds {string}")

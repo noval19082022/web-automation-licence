@@ -205,6 +205,14 @@ public class MamiAdsPO {
     }
 
     /**
+     * Check if favorit saldo is displayed
+     * @return true if element present otherwise false
+     */
+    public boolean favoriteSaldo (String saldo){
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[contains(text(),'"+saldo+"')]/following-sibling::div"));
+    }
+
+    /**
      * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
      */
     public void clickOnBeliSaldoBtn() {
@@ -355,6 +363,15 @@ public class MamiAdsPO {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
+
+    /**
+     * Navigates to pembelian saldo Mamiads page
+     */
+    public void navigatesToMamiadsBalance() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.TOP_UP_MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
     /**
      * Get detail tagihan
      * @param validasi
