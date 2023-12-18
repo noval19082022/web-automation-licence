@@ -798,6 +798,15 @@ public class PlaywrightHelpers {
         return locator.isChecked();
     }
 
+    /**
+     * Assert CSS in locator
+     * @param locator
+     * @param css CSS property name.
+     * @param value CSS property value.
+     */
+    public void assertHaveCss(Locator locator, String css, String value){
+        assertThat(locator).hasCSS(css,value);
+    }
 
 
     //---- Assert Part ----\\
