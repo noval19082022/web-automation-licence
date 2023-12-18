@@ -278,3 +278,15 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
+
+  @TEST_DOM-363 @Automated @DOM3 @web-covered
+  Scenario: [Web][login]: Tenant - Can see maps
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag | kost name prod               |
+      | Desta tobello  | Kos DC BAR Automation Tipe A |
+    And user want to reached map section and see tanya alamat lengkap button
+    Then user want to ask kost address
