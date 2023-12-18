@@ -259,3 +259,13 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user click back button in login page
     And user want to report this kos
     Then user will see login pop up
+
+  @TEST_DOM-368 @TESTSET_UG-4895 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Pengaturan page  - Change password]hidden for login social
+    Given user go to mamikos homepage
+    When user login as tenant via facebook:
+      | email stag                              | email prod                              | password  |
+      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    And user visit page "/user"
+    Then user should not be able to see the text "Pengaturan"
+
