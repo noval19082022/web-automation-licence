@@ -252,8 +252,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Pop up login] Tenant - Click Maps
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | kost name stag | kost name prod               |
+      | Desta tobello  | Kos DC BAR Automation Tipe A |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     And user click back button in login page
@@ -269,3 +269,12 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user visit page "/user"
     Then user should not be able to see the text "Pengaturan"
 
+  @TEST_DOM-366 @Automated @DOM3 @web-covered
+  Scenario: [Login][Owner] Login From Detail Page
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag | kost name prod               |
+      | Desta tobello  | Kos DC BAR Automation Tipe A |
+    And user want to reached map section and see lihat peta button
+    And user want to see more detail kost location
+    Then user will see login pop up
