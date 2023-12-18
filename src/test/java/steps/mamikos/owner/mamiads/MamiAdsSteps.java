@@ -78,6 +78,24 @@ public class MamiAdsSteps {
         Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
     }
 
+    @And("detail list saldo as expected")
+    public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;int j=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(mamiAdsPO.listSaldo("price",i),content.get("price"));
+            Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
+            try{
+                if(!content.get("disc").isEmpty()){
+                    Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
+                    Assert.assertEquals(mamiAdsPO.listSaldo("discPrice",j),content.get("discPrice"));
+                    j++;
+                }
+            } catch (java.lang.NullPointerException ignored) { }
+            i++;
+        }
+    }
+
     @And("user wants to buy saldo MamiAds {string}")
     public void userWantsToBuySaldoMamiAds(String saldo) {
         mamiAdsPO.clickOnBeliSaldoBtn();

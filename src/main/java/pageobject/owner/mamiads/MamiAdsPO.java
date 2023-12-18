@@ -213,6 +213,22 @@ public class MamiAdsPO {
     }
 
     /**
+     * Get list saldo price, price in rupiah, discount, discount price
+     * @param index input with listSaldo
+     * @return String saldo price, price in rupiah, discount, discount price
+     */
+    public String listSaldo (String listSaldo, int index){
+        String element = "";
+        switch (listSaldo){
+            case "price"     : element = ".balance-list-item__name"; break;
+            case "priceInRp" : element = ".balance-list-item__price"; break;
+            case "disc"      : element = ".percentage"; break;
+            case "discPrice" : element = ".amount"; break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+
+    /**
      * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
      */
     public void clickOnBeliSaldoBtn() {
