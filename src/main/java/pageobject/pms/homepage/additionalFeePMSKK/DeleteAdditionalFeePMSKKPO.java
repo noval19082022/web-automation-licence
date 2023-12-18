@@ -27,6 +27,8 @@ public class DeleteAdditionalFeePMSKKPO {
      * Clicks Kebab button
      */
     public void clicksKebabBtn() {
+        playwright.waitTillPageLoaded(10000.0);
+        playwright.pageScrollInView(kebabBtn);
         playwright.clickOn(kebabBtn);
     }
 
@@ -47,7 +49,7 @@ public class DeleteAdditionalFeePMSKKPO {
     /**
      * Reload page in Kontrak Kerja Sama tab
      */
-    public void reloadPage() {
+    public void reloadKontrakKerjaSamaPage() {
         playwright.reloadPage();
     }
 
