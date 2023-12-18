@@ -15,19 +15,15 @@ public class DeleteAdditionalFeePMSKKSteps {
 
     @When("admin delete additional fee in General Level")
     public void admin_delete_additional_fee_in_General_Level(){
-        int totalRow = additionalFeePMSKK.getTotalRow();
-        System.out.println(totalRow);
-
-        int i=0;
-        //just in case after delete & reload, the data still visible
-        while (i < totalRow){
+        for (int i=0; i<3; i++){
             if (additionalFeePMSKK.isKebabBtnVisible()){
                 deleteAdditionalFeePMSKK.clicksKebabBtn();
                 deleteAdditionalFeePMSKK.clicksHapusBtn();
                 deleteAdditionalFeePMSKK.clicksHapusBtnInPopUp();
-                deleteAdditionalFeePMSKK.reloadPage();
+                deleteAdditionalFeePMSKK.reloadKontrakKerjaSamaPage();
+            } else {
+                break;
             }
-            i++;
         }
     }
 
