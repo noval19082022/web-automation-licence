@@ -15,7 +15,9 @@ public class DeleteAdditionalFeePMSKKSteps {
 
     @When("admin delete additional fee in General Level")
     public void admin_delete_additional_fee_in_General_Level(){
-        for (int i=0; i<3; i++){
+        int totalRow = additionalFeePMSKK.getTotalRow();
+
+        for (int i=0; i<totalRow; i++){
             if (additionalFeePMSKK.isKebabBtnVisible()){
                 deleteAdditionalFeePMSKK.clicksKebabBtn();
                 deleteAdditionalFeePMSKK.clicksHapusBtn();
