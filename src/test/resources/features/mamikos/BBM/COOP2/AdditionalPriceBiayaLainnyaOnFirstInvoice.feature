@@ -70,8 +70,8 @@ Feature: Additional Price Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On First Invoice] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice page from riwayat booking
     And tenant set active page to 1

@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Tetap On Recurring Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                   | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,11 +37,26 @@ Feature: Additional Price Biaya Tetap On Recurring Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000022 | mamikosqa123 |
+      | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
+
+  @TEST_COOP-3692 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Invoice Recurring] Tenant Pay 1st Month Booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "08126000444" without close the page
+    And tenant set active page to 0
+    And tenant navigate to riwayat and draf booking
+    And tenant checkin kost from riwayat booking
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant get invoice number
 
   @TEST_COOP-3689 @TESTSET_COOP-4944 @Automated @web
   Scenario: [Add Ons - Additional Price Biaya Tetap On Invoice Recurring] Admin Add Additional Price Biaya Tetap
@@ -58,11 +73,11 @@ Feature: Additional Price Biaya Tetap On Recurring Invoice
       | addtional price value  | 200000                 |
 
   @TEST_COOP-3690 @TESTSET_COOP-4944 @Automated @web
-  Scenario: [Add Ons - Additional Price Biaya Tetap On Invoice Recurring] enant Check Additional Price Biaya Tetap Added By Admin On First Invoice
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Invoice Recurring] tenant Check Additional Price Biaya Tetap Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
@@ -73,23 +88,8 @@ Feature: Additional Price Biaya Tetap On Recurring Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
+      | 08900000000022 | 08900000000021 | mamikosqa123 |
+    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 
-  @TEST_COOP-3692 @TESTSET_COOP-4944 @Automated @web
-  Scenario: [Add Ons - Additional Price Biaya Tetap On Invoice Recurring] Tenant Pay 1st Month Booking
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
-    And tenant set active page to 0
-    And tenant navigate to riwayat and draf booking
-    And tenant checkin kost from riwayat booking
-    And tenant navigate to tagihan kost saya
-    And tenant go to invoice page
-    And tenant get invoice number
-		
