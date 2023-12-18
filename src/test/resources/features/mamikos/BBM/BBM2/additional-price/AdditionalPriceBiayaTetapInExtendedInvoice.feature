@@ -22,7 +22,7 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
@@ -78,6 +78,6 @@ Feature: Additional Price Biaya Tetap On Extended Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini" on month of "next"
+    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"

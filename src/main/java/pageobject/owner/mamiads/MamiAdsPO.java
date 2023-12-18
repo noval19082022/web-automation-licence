@@ -205,6 +205,30 @@ public class MamiAdsPO {
     }
 
     /**
+     * Check if favorit saldo is displayed
+     * @return true if element present otherwise false
+     */
+    public boolean favoriteSaldo (String saldo){
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[contains(text(),'"+saldo+"')]/following-sibling::div"));
+    }
+
+    /**
+     * Get list saldo price, price in rupiah, discount, discount price
+     * @param index input with listSaldo
+     * @return String saldo price, price in rupiah, discount, discount price
+     */
+    public String listSaldo (String listSaldo, int index){
+        String element = "";
+        switch (listSaldo){
+            case "price"     : element = ".balance-list-item__name"; break;
+            case "priceInRp" : element = ".balance-list-item__price"; break;
+            case "disc"      : element = ".percentage"; break;
+            case "discPrice" : element = ".amount"; break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
+    }
+
+    /**
      * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
      */
     public void clickOnBeliSaldoBtn() {
@@ -355,6 +379,15 @@ public class MamiAdsPO {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
+
+    /**
+     * Navigates to pembelian saldo Mamiads page
+     */
+    public void navigatesToMamiadsBalance() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.TOP_UP_MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
     /**
      * Get detail tagihan
      * @param validasi

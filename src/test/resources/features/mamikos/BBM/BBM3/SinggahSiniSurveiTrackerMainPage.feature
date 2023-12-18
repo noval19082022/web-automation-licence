@@ -42,7 +42,7 @@ Feature: SinggahSini - Survei Tracker - Main Page
 
   @TEST_BBM-483 @continue
   Scenario: Filter By Nama Properti
-    When user choose "Nama Properti" and input "Kost Adi Auto SinggahSini" in the search field on main page
+    When user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
     And user click search button on main page filter
     Then user verify nama penyewa on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
 

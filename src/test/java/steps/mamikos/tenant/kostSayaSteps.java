@@ -10,6 +10,7 @@ import pageobject.common.LoadingPO;
 import pageobject.tenant.kostSayaPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+import io.cucumber.java.en.When;
 
 
 public class kostSayaSteps {
@@ -59,5 +60,50 @@ public class kostSayaSteps {
     public void userWillSeeKosSayaIsStillEmpty() {
         loading.waitForLoadingIconDisappear();
         Assert.assertTrue(kostSaya.getTitleKosSayaStillEmpty(), "Kamu belum menyewa kos");
+    }
+
+    @When("tenant/user click Lihat informasi kos")
+    public void tenantClickLihatInformasiKos() {
+        kostSaya.clickLihatInformasiKosButton();
+    }
+
+    @Then ("tenant/user will redirect to lihat informasi kos page")
+    public void tenantWillredirectToLihatInformasiKosPage() {
+        Assert.assertTrue(kostSaya.getTitleInformasiKosText(), "Informasi Kos");
+    }
+
+    @And("tenant/user will see {string} on informasi kos")
+    public void tenantWillSeeXOnInformasiKos(String text) {
+        kostSaya.getFasilitas(text);
+    }
+
+    @When("tenant/user click Lihat semua fasilitas button")
+    public void tenantClickLihatSemuaFasilitasButton(){
+        kostSaya.clickLihatSemuaFasilitasButton();
+    }
+
+    @And("tenant clicks on forum menu")
+    public void tenantClickOnForumMenu(){
+        kostSaya.clickForumMenuButton();
+    }
+
+    @Then("tenant will see pop up for upcoming forum")
+    public void tenantWillSeePopupForUpcommingForum(){
+        kostSaya.getTitleCommingSoonPopup();
+    }
+
+    @When("tenant clicks on Oke button")
+    public void tenantClicksOnOkeButton(){
+        kostSaya.clickOkeButtonUpCoomingPopup();
+    }
+
+    @And("tenant tick on checkbox popup upcoming")
+    public void tenantTickOnCheckBoxPopupUpcomming(){
+        kostSaya.checklistBerlangganan();
+    }
+
+    @Then("tenant will see information {string}")
+    public void tenantWillSeeInformation(String text){
+        kostSaya.getInformationUpComming(text);
     }
 }

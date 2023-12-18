@@ -26,7 +26,7 @@ Feature: Apply Voucher Weekly For Contract Duration
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost "tomorrow" "Per Minggu"
     Then tenant should success booking kost
 
@@ -76,7 +76,7 @@ Feature: Apply Voucher Weekly For Contract Duration
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 

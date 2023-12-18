@@ -88,4 +88,14 @@ public class ownerSettingSteps {
         ownerSettingPO.clearNamaLengkapOwner();
         Assert.assertTrue(ownerSettingPO.isSimpanDisable(), "Button is enable!");
     }
+
+    @When("user clicks on Owner Settings button")
+    public void userClicksOnOwnerSettingsButton() {
+        ownerSettingPO.clickOnSettingAccount();
+    }
+
+    @And("owner change email to {string}")
+    public void ownerChangeEmailTo(String email) {
+        ownerSettingPO.ownerChangeEmail(email);
+    }
 }

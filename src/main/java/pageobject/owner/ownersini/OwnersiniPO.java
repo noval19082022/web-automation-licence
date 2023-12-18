@@ -140,7 +140,7 @@ public class OwnersiniPO {
      * @return String URL Owner Dashboard Pillar 2
      */
     public String getURLPillar2() {
-        playwright.waitTillPageLoaded();
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
         return playwright.getPageUrl();
     }
 

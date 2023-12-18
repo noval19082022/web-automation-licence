@@ -23,7 +23,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                   | kost name prod      |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -43,7 +43,7 @@ Feature: Additional Price Biaya Lainnya On Invoice Recurring
       | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant pay kost from riwayat booking using ovo "08126000444" without close the page
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking

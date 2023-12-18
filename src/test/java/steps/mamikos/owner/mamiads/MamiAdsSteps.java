@@ -30,6 +30,11 @@ public class MamiAdsSteps {
         mamiAdsPO.navigatesToMamiads();
     }
 
+    @When("user navigates to mamiads pembelian saldo")
+    public void user_navigates_to_mamiads_pembelian_saldo() {
+        mamiAdsPO.navigatesToMamiadsBalance();
+    }
+
     @And("user navigate to mamiads history page")
     public void userNavigateToMamiadsHistoryPage() {
         mamiAdsPO.navigatesToMamiadsHistory();
@@ -60,6 +65,35 @@ public class MamiAdsSteps {
     @And("user verify count of riwayat before beli saldo")
     public void userVerifyCountOfRiwayatBeforeBeliSaldo() {
         riwayatBeforeBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
+    }
+
+    @And("user click Beli Saldo on mamiads dashboard")
+    public void user_click_beli_saldo_on_mamiads_dashboard() {
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+    }
+
+    @And("favorit saldo is {string}")
+    public void favorit_saldo_is(String saldo){
+        Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
+    }
+
+    @And("detail list saldo as expected")
+    public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;int j=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(mamiAdsPO.listSaldo("price",i),content.get("price"));
+            Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
+            try{
+                if(!content.get("disc").isEmpty()){
+                    Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
+                    Assert.assertEquals(mamiAdsPO.listSaldo("discPrice",j),content.get("discPrice"));
+                    j++;
+                }
+            } catch (java.lang.NullPointerException ignored) { }
+            i++;
+        }
     }
 
     @And("user wants to buy saldo MamiAds {string}")

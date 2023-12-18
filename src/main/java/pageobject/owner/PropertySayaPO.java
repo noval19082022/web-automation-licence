@@ -12,6 +12,7 @@ import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class PropertySayaPO {
     private Page page;
@@ -172,6 +173,7 @@ public class PropertySayaPO {
     Locator pengelolaNameField;
     Locator pengelolaPhoneField;
     Locator bbkPopUp;
+    Locator untickInhabitedCheckbox;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -301,6 +303,7 @@ public class PropertySayaPO {
         pengelolaNameField = page.locator("input[type=text]").nth(2);
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
         bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
+        untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
     }
 
     /**
@@ -562,7 +565,6 @@ public class PropertySayaPO {
     public void addRoom(String roomName) {
         playwright.clickOn(addRoomButton);
         roomNameField.fill(roomName);
-        playwright.clickOn(updateKamarButtonPopup);
     }
 
     /**
@@ -1996,5 +1998,30 @@ public class PropertySayaPO {
      */
     public boolean isBBKPopUpVisible() {
         return playwright.isLocatorVisibleAfterLoad(bbkPopUp, 5000.0);
+    }
+
+    /**
+     * Click save add room on pop up Add room
+     *
+     */
+    public void saveAddRoomPopUp() {
+        playwright.clickOn(updateKamarButtonPopup);
+    }
+
+    /**
+     * Uncheck already inhabited checkbox
+     *
+     */
+    public void UncheckAlreadyInhabitedCheckbox() {
+        playwright.clickOn(untickInhabitedCheckbox);
+    }
+
+    /**
+     * Verify the inhabitedcheckbox is checked
+     * @return true if checkbox is checked and false if checkbox unchecked
+     *
+     */
+    public boolean isInhabitedCheckboxCheck() {
+        return playwright.isRadioButtonChecked(alreadyInhabitedCheckbox);
     }
 }

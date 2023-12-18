@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO4 @BNB-2245
 Feature: Update Room from Dashboard
 
   @TEST_LIMO-2860 @continue @updateRoomDashboard
@@ -10,6 +10,7 @@ Feature: Update Room from Dashboard
     When user click menu "Atur Ketersediaan Kamar" on feature waktunya mengelola property
     And owner click "Kost Automate Dua Depok Sleman"
     And owner add room with name or room number "61"
+    And owner click simpan on add room pop up
     Then user see total room is "Total Kamar 61" in update room page
 
   @updateRoomDashboard

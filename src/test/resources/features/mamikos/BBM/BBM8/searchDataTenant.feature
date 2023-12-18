@@ -9,7 +9,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin go to data booking menu
     And admin click booking now button
-    And admin select room with kost name "Kost Adi Auto SinggahSini"
+    And admin select room with kost name "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And admin fill the input field on booking form with:
       | search by       | value         |
       | by Phone Number | 082245501000  |
@@ -21,7 +21,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
   Scenario: Search By Not Registered Phone Number
     When admin go to data booking menu
     And admin click booking now button
-    And admin select room with kost name "Kost Adi Auto SinggahSini"
+    And admin select room with kost name "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And admin fill the input field on booking form with:
       | search by       | value         |
       | by Phone Number | 087797740000  |
@@ -36,7 +36,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
     And admin go to data booking menu
     And admin click booking now button
-    And admin select room with kost name "Kost Adi Auto SinggahSini"
+    And admin select room with kost name "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And admin fill the input field on booking form with:
       | search by       | value          |
       | by Name         | adiSinggahSini |
@@ -48,7 +48,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
   Scenario: Search By Not Registered Name
     When admin go to data booking menu
     And admin click booking now button
-    And admin select room with kost name "Kost Adi Auto SinggahSini"
+    And admin select room with kost name "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And admin fill the input field on booking form with:
       | search by       | value           |
       | by Name         | DhiandraAdithya |

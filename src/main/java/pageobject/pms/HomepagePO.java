@@ -20,6 +20,8 @@ public class HomepagePO {
     Locator searchInput;
     Locator cariButton;
     Locator unduhCsvButton;
+    Locator emptyStateTitleInHomepage;
+    Locator emptyStateSubtitleInHomepage;
 
     Locator tambahPenyewaButton;
     Locator bookingButton;
@@ -137,6 +139,8 @@ public class HomepagePO {
         yaSimpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Simpan"));
         autoDisburseToggle = page.getByTestId("autoDisburse-switch");
         yesBtnInAutoDisburseToggle = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+        emptyStateTitleInHomepage = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
+        emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -527,7 +531,26 @@ public class HomepagePO {
         playwright.clickOn(overviewTab);
     }
 
+    /**
+     * Clicks Homepage menu
+     */
     public void clicksHomepage() {
         playwright.clickOn(homepageMenu);
+    }
+
+    /**
+     * Get String Empty State Title in Homepage menu
+     * @return String Empty State Title
+     */
+    public String getEmptyStateTitleInHomepage() {
+        return playwright.getText(emptyStateTitleInHomepage);
+    }
+
+    /**
+     * Get String Empty State Subtitle in Homepage menu
+     * @return String Empty State Subtitle
+     */
+    public String getEmptyStateSubtitleInHomepage() {
+        return playwright.getText(emptyStateSubtitleInHomepage);
     }
 }
