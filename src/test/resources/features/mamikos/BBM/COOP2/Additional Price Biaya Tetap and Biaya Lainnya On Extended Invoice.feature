@@ -24,8 +24,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                   | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     When tenant booking kost
     Then tenant should success booking kost
 

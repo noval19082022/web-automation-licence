@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Tetap In Extended Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                   | kost name prod            |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Additional Price Biaya Tetap In Extended Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000022 | mamikosqa123 |
+      | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -47,8 +47,8 @@ Feature: Additional Price Biaya Tetap In Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
     And tenant set active page to 0
@@ -76,8 +76,8 @@ Feature: Additional Price Biaya Tetap In Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Tenant Check Additional Price Biaya Tetap Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
@@ -89,7 +89,7 @@ Feature: Additional Price Biaya Tetap In Extended Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini" on month of "next"
+    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 		

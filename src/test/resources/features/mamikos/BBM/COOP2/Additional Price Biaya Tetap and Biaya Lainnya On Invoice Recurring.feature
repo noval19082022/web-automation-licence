@@ -28,7 +28,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 

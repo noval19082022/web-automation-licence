@@ -74,6 +74,6 @@ Feature: addOns Fee On Auto Extend Invoice Booked Status
   Scenario: Add ons Fee On Auto Extend from add ons that added on first invoice with booked status
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
-    And tenant set active page to 2
+    And tenant set active page to 1
     Then tenant can see additional price "adiautomation" with price "Rp100.000"
 		

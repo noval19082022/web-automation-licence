@@ -42,6 +42,21 @@ Feature: addOns Fee Recurring Invoice Positive
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
+  @TEST_COOP-3491 @TESTSET_COOP-4944 @Automated @web
+  Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Admin Master Add, Add Ons Fee
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin add additional price:
+      | search by              | renter_phone_number |
+      | search value           | 0891111020198       |
+      | invoice number         | default             |
+      | additional price type  | Add On              |
+      | additional price title | adiautomation       |
+      | addtional price value  | 100000              |
+    Then admin can sees total cost is basic amount + add ons fee + admin fee
+
   @TEST_COOP-3504 @TESTSET_COOP-4944 @Automated @web
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
@@ -80,4 +95,3 @@ Feature: addOns Fee Recurring Invoice Positive
     And tenant go to invoice page
     And tenant set active page to 1
     Then tenant can not sees price with name "adiautomation" on invoice page
-		
