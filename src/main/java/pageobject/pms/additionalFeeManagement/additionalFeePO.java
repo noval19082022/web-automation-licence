@@ -138,14 +138,6 @@ public class additionalFeePO {
         return result;
     }
 
-    public void assertPenyewaPilihMandiriColor(String css, String value) {
-        playwright.assertHaveCss(penyewaBisaPilihMandiri.first(),css,value);
-    }
-
-    public void assertPenyewaPilihMandiriBgColor(String css, String value) {
-        playwright.assertHaveCss(penyewaBisaPilihMandiri.first(),css,value);
-    }
-
     /**
      * Assert Tipe Pembayaran CSS
      * @param property css property
