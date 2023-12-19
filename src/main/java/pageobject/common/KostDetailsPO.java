@@ -231,6 +231,7 @@ public class KostDetailsPO {
     private Locator anotherKosButton;
     private Locator anotherTypeSection;
     private Locator anotherKosSection;
+    private Locator waitingListSubmitText;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -2030,5 +2031,15 @@ public class KostDetailsPO {
         playwright.pageScrollUsingCoordinate(300, 2500);
         playwright.waitFor(peraturanDisinitext);
         return peraturanDisinitext.isVisible();
+    }
+
+    /**
+     * validate information when success submit waiting list
+     * @param text
+     * @return
+     */
+    public boolean waitingListInformationText(String text){
+        waitingListSubmitText = page.locator("#priceCard").getByText(""+text+"");
+        return waitingListSubmitText.isVisible();
     }
 }
