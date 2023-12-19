@@ -27,6 +27,7 @@ public class MamifotoPO {
     Locator mamiFotoInfoUntukAndaNonProperty;
 
     //Locator Mamifoto Landing Page
+    private Locator mamiFotoLandingPageContent;
     Locator headerMamifoto;
     Locator lihatPaketButton;
     Locator bacaPanduan;
@@ -111,6 +112,7 @@ public class MamifotoPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         this.mamifotoMenuSidebar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiFoto").setExact(true));
+        this.mamiFotoLandingPageContent = page.getByTestId("mamifotoDesktop");
         this.headerMamifoto = page.getByTestId("mamifoto-landing-header").getByText("MamiFoto", new Locator.GetByTextOptions().setExact(true));
         this.fiturPromosiSidebar = page.getByText("Fitur Promosi");
         this.homeOwnerSidebar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -742,6 +744,14 @@ public class MamifotoPO {
      */
     public boolean isMamiFotoContentPackageVisible() {
         return playwright.waitTillLocatorIsVisible(mamiFotoContentPackage);
+    }
+
+    /**
+     * Check Mamifoto Landing Page is appear
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean isMamitFotoLandingPageVisible() {
+        return playwright.waitTillLocatorIsVisible(mamiFotoLandingPageContent);
     }
 }
 

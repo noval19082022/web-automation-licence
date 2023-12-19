@@ -26,7 +26,10 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(3000);
+        playwright.hardWait(2000);
+        if (!mamifoto.isMamitFotoLandingPageVisible()) {
+            playwright.reloadPage();
+        }
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
