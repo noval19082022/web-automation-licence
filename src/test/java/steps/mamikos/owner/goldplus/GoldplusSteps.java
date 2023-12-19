@@ -171,7 +171,6 @@ public class GoldplusSteps {
     @When("owner wants to extends Goldplus from notif center")
     public void owner_wants_to_extends_goldplus_from_notif_center() {
         owner.clickNotificationButton();
-        page.pause();
         owner.clickFirstNotificationText();
     }
 
