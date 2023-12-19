@@ -179,7 +179,7 @@ public class MamifotoPO {
      * Click on Fitur Promosi Sidebar menu
      */
     public void clickOnFiturPromosi() {
-        playwright.waitTillLocatorIsVisible(fiturPromosiSidebar);
+        playwright.waitFor(fiturPromosiSidebar);
         playwright.clickOn(fiturPromosiSidebar);
     }
 
@@ -194,7 +194,8 @@ public class MamifotoPO {
      * Click on Mamifoto Sidebar menu
      */
     public void clickOnMamifotoSidebar() {
-        mamifotoMenuSidebar.click();
+        playwright.waitFor(mamifotoMenuSidebar);
+        playwright.clickOn(mamifotoMenuSidebar);
     }
 
 

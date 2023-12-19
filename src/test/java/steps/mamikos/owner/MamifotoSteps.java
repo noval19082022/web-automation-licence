@@ -21,7 +21,7 @@ public class MamifotoSteps {
     @When("owner click menu sidebar Mamifoto")
     public void owner_click_menu_sidebar_mamifoto() {
         mamifoto.clickOnFiturPromosi();
-       mamifoto.clickOnMamifotoSidebar();
+        mamifoto.clickOnMamifotoSidebar();
     }
 
     @Then("owner can see mamifoto page")
