@@ -5,15 +5,18 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class additionalFeePO {
     private Page page;
     PlaywrightHelpers playwright;
 
     private Locator namaBiaya;
-    private Locator tipePemabayaran;
+    private Locator tipePembayaran;
     private Locator satuanBiaya;
     private Locator waktuPenentuanHarga;
     private Locator penyewaBisaPilihMandiri;
+    private Locator fasePenyewaPilihMandiri;
     private Locator actionButton;
     private Locator hapusButton;
     private Locator nextButton;
@@ -24,10 +27,11 @@ public class additionalFeePO {
         playwright = new PlaywrightHelpers(page);
 
         namaBiaya = page.locator("tr td:nth-of-type(2)");
-        tipePemabayaran = page.locator("tr td:nth-of-type(3) div");
+        tipePembayaran = page.locator("tr td:nth-of-type(3) div");
         satuanBiaya = page.locator("tr td:nth-of-type(4) span:nth-child(2)");
         waktuPenentuanHarga = page.locator("tr td:nth-of-type(5) div");
         penyewaBisaPilihMandiri = page.locator("tr td:nth-of-type(6) div");
+        fasePenyewaPilihMandiri = page.locator("tr td:nth-of-type(6) span");
         actionButton = page.locator("tr td:nth-of-type(7)");
         hapusButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Hapus"));
         nextButton = page.locator(".bg-c-button--icon-only-sm").last();
@@ -49,7 +53,7 @@ public class additionalFeePO {
      * @return String
      */
     public String getTipePembayaranBiaya(int i) {
-        return playwright.getText(tipePemabayaran.nth(i));
+        return playwright.getText(tipePembayaran.nth(i));
     }
 
     /**
@@ -77,6 +81,15 @@ public class additionalFeePO {
      */
     public String getPenyewaBisaPilihMandiri(int i) {
         return playwright.getText(penyewaBisaPilihMandiri.nth(i));
+    }
+
+    /**
+     * Get fase penyewa bisa pilih mandiri
+     * @param i index
+     * @return String
+     */
+    public String getFasePenyewaPilihMandiri(int i) {
+        return playwright.getText(fasePenyewaPilihMandiri.nth(i));
     }
 
     /**
@@ -123,5 +136,32 @@ public class additionalFeePO {
         }while (page<=lastPage);
 
         return result;
+    }
+
+    /**
+     * Assert Tipe Pembayaran CSS
+     * @param property css property
+     * @param value value css property
+     */
+    public void assertTipePembayaranCSS(String property, String value) {
+        playwright.assertHaveCss(tipePembayaran.first(),property,value);
+    }
+
+    /**
+     * Assert Waktu Penentuan Harga CSS
+     * @param property css property
+     * @param value value css property
+     */
+    public void assertWaktuPenentuanHargaCSS(String property, String value) {
+        playwright.assertHaveCss(waktuPenentuanHarga.first(),property,value);
+    }
+
+    /**
+     * Assert Penyewa Pilih Mandiri CSS
+     * @param property css property
+     * @param value value css property
+     */
+    public void assertPenyewaPilihMandiriCSS(String property, String value) {
+        playwright.assertHaveCss(penyewaBisaPilihMandiri.first(),property,value);
     }
 }
