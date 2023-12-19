@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
@@ -36,6 +37,7 @@ public class GoldplusSteps {
     MamiAdsPO mamiads = new MamiAdsPO(page);
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -390,6 +392,7 @@ public class GoldplusSteps {
     @When("owner wants to accses dashboard GP")
     public void owner_wants_to_accses_dashboard_gp() {
         owner.clickOnGpWidgetButton();
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("user see status goldplus is {string}")
