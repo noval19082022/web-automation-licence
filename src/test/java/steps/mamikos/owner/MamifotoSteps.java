@@ -50,6 +50,9 @@ public class MamifotoSteps {
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
         mamifoto.clickOnLihatPaket();
+        if (!mamifoto.isMamiFotoContentPackageVisible()) {
+            playwright.reloadPage();
+        }
     }
 
     @And("owner select package mamifoto")

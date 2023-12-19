@@ -48,6 +48,7 @@ public class MamifotoPO {
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
     Locator headerDiscountGP;
+    private Locator mamiFotoContentPackage;
 
 
     //Locator Mamifoto at history transaction
@@ -169,6 +170,7 @@ public class MamifotoPO {
         this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
         this.packageNameMamifoto = page.getByTestId("mamifoto-history-on-progress").getByText("MamiFoto A GP");
         this.waitingPayment = page.getByText("Menunggu Pembayaran");
+        this.mamiFotoContentPackage = page.getByTestId("mamifotoPackagesDesktop");
 
     }
 
@@ -250,7 +252,7 @@ public class MamifotoPO {
      * Click on button Lihat Paket
      */
     public void clickOnLihatPaket() {
-        lihatPaketButton.click();
+        playwright.clickOn(lihatPaketButton);
     }
 
     /**
@@ -300,7 +302,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderSelectPackageisAppear() {
-        return headerPilihPaket.isVisible();
+        return playwright.waitTillLocatorIsVisible(headerPilihPaket);
     }
 
     /**
@@ -731,6 +733,14 @@ public class MamifotoPO {
      */
     public void navigatesToMamifotoPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Check Mamifoto Content Package is appear
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean isMamiFotoContentPackageVisible() {
+        return playwright.waitTillLocatorIsVisible(mamiFotoContentPackage);
     }
 }
 

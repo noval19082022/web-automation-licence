@@ -208,7 +208,7 @@ Feature: Broadcast Chat Owner
 	"""
     Then user verify input broadcast message is not visible
 
-  @TEST_LIMO-1157 @Broadcast-chat @GP2 @automated @listing-monetization @web @checkfailedSelasa
+  @TEST_LIMO-1157 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario Outline: [Broadcast Chat][Create Broadcast chat]User want to input phone number/email/link on template message is editable
     Given user go to mamikos homepage
     Given user login as owner:
