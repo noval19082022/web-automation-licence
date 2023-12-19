@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
-import pageobject.owner.chat.BroadcastChatPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -128,7 +128,14 @@ public class BroadcastChatSteps {
     @When("owner goes to broadcast chat")
     public void ownerGoesToBroadcastChat() {
         ownerDashboard.clickToExpandFiturPromosi();
-        ownerDashboard.clickOnBroadcastChat();
+        var maxLoop = 0;
+        do {
+            ownerDashboard.clickOnBroadcastChat();
+            maxLoop++;
+            if (maxLoop > 5) {
+                break;
+            }
+        } while (!broadcast.isBroadcastChatPackageContentVisible());
     }
 
     @When("owner click on Tambah Kos button on no kos active pop-up broadcast chat owner")

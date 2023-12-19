@@ -7,8 +7,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.mamiads.MamiAdsPO;
-import pageobject.owner.mamiads.NaikkanIklanPO;
+import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
+import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;

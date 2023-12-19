@@ -6,7 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.owner.TenantBackgroundCheckerPO;
-import pageobject.owner.chat.BroadcastChatPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import utilities.PlaywrightHelpers;
 

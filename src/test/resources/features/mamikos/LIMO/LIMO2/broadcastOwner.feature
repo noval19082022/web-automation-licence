@@ -208,14 +208,13 @@ Feature: Broadcast Chat Owner
 	"""
     Then user verify input broadcast message is not visible
 
-  @TEST_LIMO-1157 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-1157 @Broadcast-chat @GP2 @automated @listing-monetization @web @checkfailedSelasa
   Scenario Outline: [Broadcast Chat][Create Broadcast chat]User want to input phone number/email/link on template message is editable
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-    When user click "Fitur Promosi"
-    And user click "Broadcast Chat"
+    When owner goes to broadcast chat
     And owner click "Tambah Broadcast Chat"
     And user enter text "Kos Fathul Khair Jetis Yogyakarta" on Broadcast list kos
     And user click "Kos Fathul Khair Jetis Yogyakarta"

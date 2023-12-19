@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.owner.PropertySayaPO;
-import pageobject.owner.mamiads.NaikkanIklanPO;
+import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
 
 import java.util.List;
