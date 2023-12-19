@@ -13,5 +13,5 @@ Feature: FAQ
     And admin search "level" in FAQ "Question"
     Then FAQ "Question" result "level" is displayed
     #Search Answer
-    And admin search "Upgrade" in FAQ "Answer"
+    When admin search "Upgrade" in FAQ "Answer"
     Then FAQ "Answer" result "Upgrade" is displayed
