@@ -83,4 +83,14 @@ public class OwnerPeraturanKosSteps {
     public void ownerUncheckToogle(String kriteria) {
         pengajuanBooking.unCheckToogle(kriteria);
     }
+
+    @Then("owner can see {string} will enable")
+    public void ownerCanSeeXWillEnable(String kriteria){
+        pengajuanBooking.validateEnableButton(kriteria);
+    }
+
+    @And("owner click kriteria kos khusus with {string}")
+    public void ownerCLickKriteriaKosKhususWithX(String text){
+        pengajuanBooking.clickKosKhususButton(text);
+    }
 }
