@@ -128,14 +128,10 @@ public class BroadcastChatSteps {
     @When("owner goes to broadcast chat")
     public void ownerGoesToBroadcastChat() {
         ownerDashboard.clickToExpandFiturPromosi();
-        var maxLoop = 0;
-        do {
-            ownerDashboard.clickOnBroadcastChat();
-            maxLoop++;
-            if (maxLoop > 5) {
-                break;
-            }
-        } while (!broadcast.isBroadcastChatPackageContentVisible());
+        ownerDashboard.clickOnBroadcastChat();
+        if (!broadcast.isBroadcastChatPackageContentVisible()) {
+            playwright.reloadPage();
+        }
     }
 
     @When("owner click on Tambah Kos button on no kos active pop-up broadcast chat owner")
