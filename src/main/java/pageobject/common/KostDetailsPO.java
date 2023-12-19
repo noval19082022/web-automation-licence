@@ -52,6 +52,7 @@ public class KostDetailsPO {
     Locator chatOwnerTittle;
     Locator forumTittle;
     Locator kategoriBantuanTittle;
+    Locator aktivitasKosSayaButton;
 
     //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
@@ -1812,9 +1813,8 @@ public class KostDetailsPO {
      * Click on button text
      */
     public void clickOnBytextButton(String buttonText) {
-        String selector = "//a[contains(.,'"+buttonText+"')]";
-        ElementHandle element = page.querySelector(selector);
-        element.click();
+        aktivitasKosSayaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.clickOn(aktivitasKosSayaButton);
     }
 
     /**

@@ -1,4 +1,4 @@
-@regression @BBM40 @voucher
+@regression @BBM4 @voucher
 
 @TEST_BBM-2353
 Feature: Apply Voucher Quarterly For Contract Duration

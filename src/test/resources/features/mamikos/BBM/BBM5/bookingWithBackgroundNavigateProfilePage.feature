@@ -1,4 +1,4 @@
-@BBM5
+@BBM50
 Feature: BnB feature with background navigate profile page
 
 
@@ -69,6 +69,7 @@ Feature: BnB feature with background navigate profile page
     And user navigates to help page
     And user clicks on "Hubungi CS Mamikos (aktif 24 jam)"
 
+  @continue
   Scenario: [Kost saya][Content] Content Kos Saya (BBM-884)
     And tenant navigate to kost saya page
     And user clicks on "Lihat informasi kos"
@@ -78,10 +79,6 @@ Feature: BnB feature with background navigate profile page
 
 
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod  | password  |
-      | 0892202358 | 08100000622 | qwerty123 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
     And user stop rent kost with reason "Jarak Kos Terlalu Jauh"

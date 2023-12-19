@@ -27,8 +27,8 @@ Feature: Update Refund Policy kost pilar 1 and reguler
   Scenario: [Kost Detail][Bisa Refund] Tenant can see Refund Info for Kost Pillar 1 and check if Refund Policy redirect to correct page for Pillar1
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod       |
-      | kost cibinong bogor  | kost cibinong bogor  |
+      | kost name stag            | kost name prod       |
+      | Kost Cibinong Bogor COOP  | kost cibinong bogor  |
     And user dismiss FTUE booking benefit
     Then tenant can see refund policy on kost detail
     When tenant click bagaimana ketentuannya

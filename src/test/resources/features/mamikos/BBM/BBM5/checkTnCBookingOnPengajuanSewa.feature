@@ -1,4 +1,4 @@
-@BBM5
+@BBM50
 Feature: [TnC Booking][Detail Booking] Check Update TnC Booking on Pengajuan sewa page
 
   @continue @TEST_COOP-1242 @TEST_COOP-1247
@@ -23,8 +23,8 @@ Feature: [TnC Booking][Detail Booking] Check Update TnC Booking on Pengajuan sew
   Scenario: [Pengajuan Sewa][TnC Booking]Check TnC booking for kost Singgah sini, APIK and Kos Pilihan
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod       |
-      | kost cibinong bogor  | kost cibinong bogor  |
+      | kost name stag            | kost name prod       |
+      | Kost Cibinong Bogor COOP  | kost cibinong bogor  |
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
     Then user will open new tab and go to Booking form
