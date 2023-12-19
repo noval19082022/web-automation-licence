@@ -50,7 +50,7 @@ public class GoldplusSteps {
         if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
-        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isGpRadioSelected() && !gpSubmission.isGpPeriodeSelected()) {
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
             gpSubmission.clickOnGpSatuFirstRadioButton();
         }
         gpSubmission.clicksOnPilihPaketButton();
@@ -171,6 +171,7 @@ public class GoldplusSteps {
     @When("owner wants to extends Goldplus from notif center")
     public void owner_wants_to_extends_goldplus_from_notif_center() {
         owner.clickNotificationButton();
+        page.pause();
         owner.clickFirstNotificationText();
     }
 

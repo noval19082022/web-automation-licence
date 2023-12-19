@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @TEST_LIMO-3020 @checkfailedSelasa
+@LIMO2 @Mamifoto @TEST_LIMO-3020
 Feature: Check Mamifoto Landing Page
   
   @continue @declarative @listing-monetization @reviewed @Automated @web @playWright

@@ -1,4 +1,4 @@
-@regression @goldPlus @LIMO2 @listing-monetization @checkfailedSelasaII
+@regression @goldPlus @LIMO2 @listing-monetization
 Feature: Dashboard GP
 
   @TEST_LIMO-36 @continue @checkAllFilter @dashboardGP

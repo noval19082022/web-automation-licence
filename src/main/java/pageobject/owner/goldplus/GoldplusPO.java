@@ -349,9 +349,8 @@ public class GoldplusPO {
      *
      */
     public Boolean gpPackageText(){
-        playwright.hardWait(3000);
-        playwright.waitTillLocatorIsVisible(gpPackageText);
-        return gpPackageText.isVisible();
+        playwright.waitFor(gpPackageText);
+        return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 
     /**
