@@ -1,4 +1,4 @@
-@BBM4 @filtervouchercheck
+@BBM40 @filtervouchercheck
 
 Feature: Filter Voucher
   Background: Open voucher menu

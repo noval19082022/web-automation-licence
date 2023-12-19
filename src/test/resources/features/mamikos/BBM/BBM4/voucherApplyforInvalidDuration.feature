@@ -1,4 +1,4 @@
-@regression @voucher @BBM4 @kamis
+@regression @voucher @BBM40 @kamis
 
 #@TEST_BBM-760
 Feature: Invalid Voucher After Applied, Invalid Contract Period
