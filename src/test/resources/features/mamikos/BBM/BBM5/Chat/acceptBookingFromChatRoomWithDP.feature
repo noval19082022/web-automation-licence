@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @BBM50 @COOP-1986 @COOP-1992 @acceptFromChat
+@occupancyAndBilling @OB @BBM5 @COOP-1986 @COOP-1992 @acceptFromChat
 Feature: Accept Booking from Chat room with DP
 
   @deleteContract

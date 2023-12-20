@@ -1,4 +1,4 @@
-@BBM50
+@BBM5
 Feature: BnB feature with background booking until rejected by owner
 
   Background: Tenant Booking And Reject By Owner

@@ -1,4 +1,4 @@
-@BBM50
+@BBM5
 Feature: BnB feature with background navigate profile page
 
 
