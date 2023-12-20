@@ -75,7 +75,7 @@ public class VoucherSayaPO {
         checkVoucherDetailDisabledKodeVoucherLabel = page.locator("//p[@class='copy-code-text__label text-disable']");
         voucherDetailKedaluwarsaLabel = page.getByText("Kedaluwarsa");
         checkVoucherListDisabledKodeVoucherKadaluwarsaLabel = page.locator("#expired").getByText("Kode Voucher").first();
-        checkVoucherListDisabledVoucherKadaluwarsaCode = page.getByText("VOCKAD");
+        checkVoucherListDisabledVoucherKadaluwarsaCode = page.getByText("TersediaAuto2");
         tersediaEmptyState = page.getByText("Voucher yang dapat kamu gunakan akan tersedia di halaman ini");
         terpakaiEmptyState = page.getByText("Voucher yang telah kamu gunakan akan tampil di halaman ini");
         kedaluwarsaEmptyState = page.getByText("Voucher yang habis masa berlakunya akan tampil di halaman ini");
