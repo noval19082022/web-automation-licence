@@ -68,7 +68,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe C | Kos BX Automation PLM Tipe C Tobelo Halmahera Utara |
     Then user can see facility notes on detail kos and button is not present
 
   @TEST_DOM-1710 @DOM4 @automated @discovery-platform @facility @kost-details @web
@@ -84,7 +84,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe C | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
     Then user can see owner story on detail kos and button is not present
 
   @TEST_DOM-1713 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
@@ -133,7 +133,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user can see kos rule list on detail kos
 
   @TEST_DOM-1709 @DOM4 @automated @discovery-platform @kost-details @map @web
@@ -141,7 +141,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user want to reached map section and see lihat peta button
     #user want to see map more detail
     When user want to see more detail kost location
@@ -155,8 +155,8 @@ Feature: Kost detail page
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos Dom Automation PLM Tipe C | Kos DC BAR Automation Tipe A |
     Then user want to reached map section and see tanya alamat lengkap button
     #user want to see map more detail
     When user want to ask kost address
-    Then chat room appear with latest message
+    Then chat room appear with latest message "beralamat di "
