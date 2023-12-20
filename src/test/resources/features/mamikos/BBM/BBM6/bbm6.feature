@@ -397,7 +397,7 @@ Feature: BnB feature
     And search chat in chatlist "Chat Butuh Respon Pengajuan Sewa Label"
     Then owner can see label with "Butuh respon pengajuan sewa"
 
-  @addAndMarkRoomKosGP @BNB-2245
+  @addAndMarkRoomKosGP @BNB-2245 @continue
   #addRoom.feature
   Scenario: check when owner add and mark room at kos GP
     Given user go to mamikos homepage
@@ -411,5 +411,80 @@ Feature: BnB feature
     And owner add room with name or room number "Jupiter"
     And user fill room floor in room allotment page with "11011"
     And user tick already inhabited checkbox
-    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
     Then verify will be appears and the room is untick again
+
+  @markRoomAsOccupied @markRoom @TEST_BBM-868
+  #markRoom.feature
+  Scenario: Mark BBK And Gold Plus Room As Occupied (BBM-868)
+    Given owner click "Kembali" on added room pop up
+    When user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees Pop-Up owner not add renter's data
+    When owner click on Add Renter button
+    Then owner redirected to Input Renter's Information form with valid kost name
+
+  @occupancyAndBilling @markRoom @TEST_BBM-867 @continue
+  #markRoom.feature
+  Scenario: Mark BBK And Non Gold Plus Room As Occupied (BBM-867)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password     |
+      | 081362464341 | 1d0lt3stb4ru |
+    And owner navigates to property saya kos
+    And owner search kost "Yamie Panda Kost Deposit Wirobrajan Yogyakarta" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Kamar"
+    When user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees room is on "Terisi" status
+    When user click edit button in first row of the table
+    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees room is on "Kosong" status
+
+  @updateRoomToast @markRoom @TEST_BBM-869
+  #updateRoom.feature
+  Scenario: Check Update Room's Toast (BBM-869)
+    Given owner navigates to property saya kos
+    And owner search kost "Dont Starve Together" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Kamar"
+    And user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees toast "Kamar Terisi Bertambah 1"
+    And user click edit button in first row of the table
+    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees toast "Kamar Kosong Bertambah 1"
+
+  @TEST_BBM-928 @continue
+  #addTenant.feature
+  Scenario: Add Tenant For Full Room (BBM-928)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password     |
+      | 0890000000289 | Bismillah@01 |
+    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
+    And user click "Lanjut" until start adding contract
+    And user choose "Saya yang menambah kontrak"
+    And user select kost "kost flores Tobelo Utara Halmahera Utara" for tenant
+    Then owner can sees full pop up restriction
+    When owner clicks on "Ubah Data Kamar" on full room pop up restriction
+    Then owner redirected to update room page
+    And owner can not sees full room pop up restriction
+
+  @TEST_BBM-927 @upikBnB
+  #addTenant.feature
+  Scenario: Add Tenant For Different Gender (BBM-927)
+    Given owner navigates to owner dashboard
+    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
+    And user choose "Saya yang menambah kontrak"
+    And user select kost "kost biak untuk add tenant automation" for tenant
+    And owner input phone number with "083176833355"
+    And owner choose first available room and clicks on add renter button
+    And owner click button "Tambah Penyewa" on form informasi penyewa
+    Then owner can sees different gender restriction pop-up
