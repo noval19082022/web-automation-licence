@@ -241,6 +241,7 @@ public class VoucherSayaPO {
      *
      */
     public boolean isVoucherDetailImageBannerVisible() {
+        playwright.waitFor(voucherDetailImageBanner);
         return voucherDetailImageBanner.isVisible();
     }
 
