@@ -2,7 +2,7 @@
 Feature: SinggahSini Survei Tracker Main Page
 
 
-  @TEST_COOP-5067 @Automated @web
+  @TEST_COOP-5067 @Automated @web @continue
   Scenario: Pagination Functionality
     Given admin go to pms singgahsini
     When admin login pms :
