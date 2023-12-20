@@ -69,7 +69,7 @@ public class OwnerPeraturanKosSteps {
     }
 
     @And("owner click kriteria penyewa with {string}")
-    public void ownerClickKriteriaPenyewaWithX(String kriteria){
+    public void ownerClickKriteriaPenyewaWith(String kriteria){
         pengajuanBooking.clickToogleKriteria(kriteria);
     }
 
@@ -81,5 +81,15 @@ public class OwnerPeraturanKosSteps {
     @And("owner uncheck toogle {string}")
     public void ownerUncheckToogle(String kriteria) {
         pengajuanBooking.unCheckToogle(kriteria);
+    }
+
+    @Then("owner can see {string} will enable")
+    public void ownerCanSeeWillEnable(String kriteria){
+        pengajuanBooking.validateEnableButton(kriteria);
+    }
+
+    @And("owner click kriteria kos khusus with {string}")
+    public void ownerCLickKriteriaKosKhususWith(String text){
+        pengajuanBooking.clickKosKhususButton(text);
     }
 }

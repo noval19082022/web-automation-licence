@@ -47,8 +47,8 @@
       When admin select satuan waktu biaya "Harian"
       And admin submit additional fee
       Then new additional fee "Automated Biaya PMAN" added
-        | Tipe Pembayaran | Satuan Biaya  | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
-        | Satu Kali       | Harian        | Disesuaikan dengan Tagihan  | Tidak                       |
+        | Tipe Pembayaran | Satuan Biaya Top  | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
+        | Satu Kali       | Harian            | -                   | Disesuaikan dengan Tagihan  | Tidak                       |
 
     @continue @TEST_PMAN-8667
     Scenario: Delete additional fee master data

@@ -5,7 +5,7 @@
   Scenario: Dashboard[Pengajuan Booking][Ubah peraturan masuk kos]check button name on dashboard and pengajuan booking page (BBM-536)
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    |  phone prod   | password    |
+      | phone stag     |  phone prod   | password       |
       | 0890000000289  | 082291900002  | Bismillah@01   |
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
@@ -30,8 +30,8 @@
     And owner select kost "kost flores Tobelo Utara Halmahera Utara"
     And owner clicks on ubah waktu button
     And owner choose minim checkin time with :
-      | waktu | tanggal |
-      | Minggu | 2 |
+      | waktu   | tanggal |
+      | Minggu  | 2       |
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
     And owner clicks on ubah waktu button
@@ -40,38 +40,133 @@
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
   @TEST_COOP-1897 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
-    Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
-    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Boleh bawa anak"
     And owner click Simpan at Peraturan Masuk Kos page
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                    | kost name prod                                            |
-      | kost semarang promo ngebut Abepura Jayapura       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+      | kost name stag                                                     | kost name prod                                            |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Boleh bawa anak"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
-    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Boleh bawa anak"
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1896 @automated @booking-and-billing @booking-stay-setting @web @xray-update
-    Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Wajib Buku Nikah (COOP-1896)
+  @TEST_COOP-1896 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Wajib Buku Nikah (COOP-1896)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
-    And owner select kost "kost semarang promo ngebut Abepura Jayapura"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Wajib sertakan buku nikah saat pengajuan sewa"
     Then owner can see "kamar hanya bagi penyewa" will disable
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1899 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Nonactived Buku Nikah (BBM-525)
+    When owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Wajib sertakan buku nikah saat pengajuan sewa"
+    And owner click Simpan at Peraturan Masuk Kos page
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Boleh untuk pasutri"
+    Then owner can see "kamar hanya bagi penyewa" will enable
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1900 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated KK (BBM-527)
+    When owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Wajib sertakan kartu keluarga saat pengajuan sewa"
+    Then owner can see "kamar hanya bagi penyewa" will disable
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1895 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Ktp KK And Buku Nikah
+    When owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Wajib sertakan KTP saat pengajuan sewa"
+    And owner click kriteria penyewa with "Wajib sertakan kartu keluarga saat pengajuan sewa"
+    And owner click kriteria penyewa with "Wajib sertakan buku nikah saat pengajuan sewa"
+    Then owner can see "kamar hanya bagi penyewa" will disable
+    When owner can see "Maks. 2 orang/kamar" will disable
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1898 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Nonactivated Ktp KK And Buku Nikah (BBM-523)
+    When owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Wajib sertakan KTP saat pengajuan sewa"
+    And owner uncheck toogle "Wajib sertakan kartu keluarga saat pengajuan sewa"
+    And owner uncheck toogle "Wajib sertakan buku nikah saat pengajuan sewa"
+    Then owner can see "kamar hanya bagi penyewa" will enable
+    When owner can see "Maks. 2 orang/kamar" will enable
+    And owner uncheck toogle "Boleh untuk pasutri"
+    And owner uncheck toogle "Boleh bawa anak"
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1911 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Owner set kriteria to able for Boleh pasutri (BBM-534)
+    When owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Boleh untuk pasutri"
+    And owner click Simpan at Peraturan Masuk Kos page
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                                    | kost name prod                                            |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    Then tenant can see peraturan kost with "Boleh pasutri"
+
+  @TEST_COOP-1909 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Nonactivated Pasutri (BBM-531)
+    When owner navigates to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Boleh untuk pasutri"
+    Then owner can see "kamar hanya bagi penyewa" will enable
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+
+  @TEST_COOP-1907 @TEST_COOP-1910 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Special Kos for Karyawan (BBM-524) (BBM-533)
+    When owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Kos dikhususkan untuk karyawan atau mahasiswa"
+    And owner click kriteria kos khusus with "Khusus mahasiswa"
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                                    | kost name prod                                            |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    Then tenant can see peraturan kost with "Khusus Mahasiswa"
+    When owner navigates to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner click on kriteria calon penyewa button
+    And owner click kriteria penyewa with "Kos dikhususkan untuk karyawan atau mahasiswa"
+#    activated kost khusus  karyawan @TEST_COOP-1910
+    And owner click kriteria kos khusus with "Khusus karyawan"
+    And owner click Simpan at Peraturan Masuk Kos page
+    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                                     | kost name prod                                            |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    Then tenant can see peraturan kost with "Khusus karyawan"
+    When owner navigates to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner click on kriteria calon penyewa button
+    And owner uncheck toogle "Kos dikhususkan untuk karyawan atau mahasiswa"
     Then owner click Simpan at Peraturan Masuk Kos page
