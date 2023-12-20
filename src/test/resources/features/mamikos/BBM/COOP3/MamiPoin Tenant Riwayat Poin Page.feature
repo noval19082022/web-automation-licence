@@ -2,7 +2,7 @@
 Feature: MamiPoin Tenant Riwayat Poin Page
 
 
-  @TEST_COOP-5035 @TESTSET_COOP-4944 @Automated @web
+  @TEST_COOP-5035 @TESTSET_COOP-4944 @Automated @web @continue
   Scenario: Tenant already on Riwayat Poin page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
