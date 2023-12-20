@@ -12,7 +12,6 @@ public class KostList {
 
     @When("user want to see more kost list")
     public void userWantToSeeMoreKostList() {
-        kostList.dismissProbutPopUpOnKostList();
         kostList.clickOnLihatLebihBanyakBtn();
     }
 
