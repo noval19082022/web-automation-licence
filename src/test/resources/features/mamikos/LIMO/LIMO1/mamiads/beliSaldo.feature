@@ -1,7 +1,6 @@
 @regression @LIMO1 @LIMO1-staging
 Feature: Beli Saldo
 
-
   @TEST_LIMO-274 @belisaldo @continue
   Scenario: Redirection Beli Saldo
     Given user go to mamikos homepage
@@ -16,8 +15,8 @@ Feature: Beli Saldo
   Scenario: Favorite Saldo
     Then favorit saldo is "Rp1.350.000"
 
-  @TEST_LIMO-4087
-  Scenario: List Promo Saldo Mamiads
+  @TEST_LIMO-4087 @continue
+  Scenario: List Promo Saldo
     Then detail list saldo as expected
       | price     | priceInRp   | disc | discPrice   |
       | 6.000     | Rp6.000     |      |             |
@@ -30,3 +29,14 @@ Feature: Beli Saldo
       | 1.000.000 | Rp925.000   | 7%   | Rp1.000.000 |
       | 1.500.000 | Rp1.350.000 | 10%  | Rp1.500.000 |
       | 5.000.000 | Rp4.500.000 | 10%  | Rp5.000.000 |
+
+  @TEST_LIMO-274 @continue
+   Scenario: Change Saldo
+    Given owner choose saldo "Rp27.000"
+    When owner ubah saldo to "Rp6.000"
+    Then validate detail tagihan saldo mamiads "6.000"
+
+  @TEST_LIMO-274
+   Scenario: Beli Saldo - Transaction Success
+    And owner click bayar sekarang in detail tagihan for saldo mamiads
+    Then payment owner success using ovo as payment method
