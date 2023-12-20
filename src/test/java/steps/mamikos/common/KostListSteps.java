@@ -7,7 +7,7 @@ import org.testng.Assert;
 import pageobject.common.KostListCommonPO;
 import utilities.PlaywrightHelpers;
 
-public class KostList {
+public class KostListSteps {
     KostListCommonPO kostList = new KostListCommonPO(ActiveContext.getActivePage());
 
     @When("user want to see more kost list")
