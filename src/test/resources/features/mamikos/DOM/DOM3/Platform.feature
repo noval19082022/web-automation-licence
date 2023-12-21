@@ -323,3 +323,11 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then admin bangkerupux will see last updated sanjunipero is current time
     And admin bangkerupux activate first sanjunipero on sanjunipero page
     Then admin bangkerupux will see last updated sanjunipero is current time
+
+  @TEST_DOM-359 @Automated @DOM3 @web-covered
+  Scenario: [Web][non login]: Login pop-up options appear
+    Given user go to mamikos homepage
+    When user visit page "/room/kost-kabupaten-halmahera-utara-kost-campur-eksklusif-desta-kost-tobello-tobelo-halmahera-utara"
+    And user want to reached map section and see lihat peta button
+    And user want to see more detail kost location
+    Then user will see login pop up
