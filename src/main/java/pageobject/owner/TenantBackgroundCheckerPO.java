@@ -76,14 +76,14 @@ public class TenantBackgroundCheckerPO {
      * Click on Lihat Profil text button
      */
     public void clickOnLihatProfil(){
-        lihatProfilTextButton.click();
+        playwright.clickOn(lihatProfilTextButton);
     }
 
     /**
      * Click on Back TBC page button
      */
     public void clickOnBack(){
-        backButton.click();
+        playwright.clickOn(backButton);
     }
 
     /**
@@ -99,7 +99,7 @@ public class TenantBackgroundCheckerPO {
      * Click on Beli Paket TBC page button
      */
     public void clickOnBeliPaket(){
-        beliPaketButton.click();
+        playwright.clickOn(beliPaketButton);
     }
 
     /**
