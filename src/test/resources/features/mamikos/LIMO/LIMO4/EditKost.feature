@@ -11,7 +11,7 @@ Feature: Edit Kost
     And owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
     And user click Lihat Selengkapnya button for edit
-    And user click "Edit Data Kos"
+    And user clicks on edit data kos button
     And user click button edit "Fasilitas" kos
     And user uncheck facilities under "Fasilitas Umum"
       | CCTV |

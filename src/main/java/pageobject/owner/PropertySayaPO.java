@@ -175,6 +175,8 @@ public class PropertySayaPO {
     Locator bbkPopUp;
     Locator untickInhabitedCheckbox;
 
+    private Locator editDataKosButton;
+
     public PropertySayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -304,6 +306,7 @@ public class PropertySayaPO {
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
         bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
         untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
+        editDataKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Edit Data Kos"));
     }
 
     /**
@@ -2023,5 +2026,12 @@ public class PropertySayaPO {
      */
     public boolean isInhabitedCheckboxCheck() {
         return playwright.isRadioButtonChecked(alreadyInhabitedCheckbox);
+    }
+
+    /**
+     * Click on edit data kos button
+     */
+    public void clickOnEditDataKosButton() {
+        playwright.clickOn(editDataKosButton);
     }
 }

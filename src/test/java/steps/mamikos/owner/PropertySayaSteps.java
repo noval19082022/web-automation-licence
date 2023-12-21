@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.PropertySayaPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
@@ -23,6 +24,7 @@ public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     private final JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
@@ -957,5 +959,11 @@ public class PropertySayaSteps {
     @Then("verify will be appears and the room is untick again")
     public void verifyWillBeAppearsAndTheRoomIsUntickAgain() {
         Assert.assertFalse(propertySaya.isInhabitedCheckboxCheck(), "InhabitedCheckbox is checked!");
+    }
+
+    @When("user clicks on edit data kos button")
+    public void userClicksOnEditDataKosButton() {
+        propertySaya.clickOnEditDataKosButton();
+        loading.waitForLoadingIconDisappear();
     }
 }
