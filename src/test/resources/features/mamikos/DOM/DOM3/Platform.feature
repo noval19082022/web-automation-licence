@@ -337,3 +337,16 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When user visit page "/room/kost-sleman-kost-campur-murah-kost-apik-desta-tipe-b-tamvan-2"
     Then user want to reached map section and see lihat peta button
+
+  @TEST_DOM-349 @Automated @DOM3 @web-covered
+  Scenario: [Test][Admin][SanJunipero] Slug name already exist
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/sanjunipero/parent"
+    And admin bangkerupux create new san junipero parent
+    And admin bangkrupux fills all field on create new san junipero parent already exist "Automation Slug", "All_goldplus", "weekly", "Automation Tittle Tag", "Automation Tittle Header", "Automation Subtittle Header", "Akses 24 jam", "Automation FAQ", "Automation FAQ Answer"
+    And admin bangkrupux check the checkbox Active on create new san junipero
+    And admin bangkrupux save Sanjunipero on create new san junipero
+    Then admin verify see text "The slug has already been taken."

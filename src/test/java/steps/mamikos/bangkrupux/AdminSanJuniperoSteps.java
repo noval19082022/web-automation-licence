@@ -33,6 +33,19 @@ public class AdminSanJuniperoSteps {
         adminSanJuniperoPO.setFaqAnswerOnCreateSanJunipero(faq_answer);
     }
 
+    @And("admin bangkrupux fills all field on create new san junipero parent already exist {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void adminBangkrupuxFillsAllFieldOnCreateNewSanJuniperoParentAlreayEXist(String slug, String kost_type, String biaya_sewa, String title_tag, String title_header, String sub_title_header, String facility, String faq, String faq_answer) {
+        adminSanJuniperoPO.setSlugOnCreateSanJunipero(slug);
+        adminSanJuniperoPO.setKostTypeOnCreateSanJunipero(kost_type);
+        adminSanJuniperoPO.setBiayaSewaOnCreateSanJunipero(biaya_sewa);
+        adminSanJuniperoPO.setTitleTagOnCreateSanJunipero(title_tag);
+        adminSanJuniperoPO.setTitleHeaderOnCreateSanJunipero(title_header);
+        adminSanJuniperoPO.setSubTitleOnCreateSanJunipero(sub_title_header);
+        adminSanJuniperoPO.setFacilityOnCreateSanJunipero(facility);
+        adminSanJuniperoPO.setFaqOnCreateSanJunipero(faq);
+        adminSanJuniperoPO.setFaqAnswerOnCreateSanJunipero(faq_answer);
+    }
+
     @And("admin bangkrupux check the checkbox Active on create new san junipero")
     public void adminBangkrupuxCheckTheCheckboxActiveOnCreateNewSanJunipero() {
         adminSanJuniperoPO.cekActiveOnCreateSanJunipero();
