@@ -1,4 +1,4 @@
-@regression @LIMO2 @LIMO2-staging @checkfailedSelasaII
+@regression @LIMO2 @LIMO2-staging
 # Recurring GPLT
 Feature: Goldplus Recurring
 
