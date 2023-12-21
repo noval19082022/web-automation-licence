@@ -22,6 +22,8 @@ public class AdminSanJuniperoPO {
     private Locator checkBoxActive;
     private Locator saveBtn;
     private Locator successMessageOnCreateSanJunipero;
+    private Locator previewBtn;
+
 
     public AdminSanJuniperoPO(Page page) {
         this.page = page;
@@ -39,6 +41,7 @@ public class AdminSanJuniperoPO {
         this.checkBoxActive = page.getByRole(AriaRole.INSERTION);
         this.saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         this.successMessageOnCreateSanJunipero = page.getByText("Success! Record success to saved.");
+        this.previewBtn = page.locator("//i[@class='fa fa-external-link']").first();
     }
 
     /**
@@ -156,5 +159,12 @@ public class AdminSanJuniperoPO {
                 removeCharAndWhiteSpaceFromString(
                         playwrightHelpers.getText(successMessageOnCreateSanJunipero),
                         "×");
+    }
+
+    /**
+     * click on preview action san junipero
+     */
+    public void clickOnPreviewAction() {
+        playwrightHelpers.clickOn(previewBtn);
     }
 }

@@ -46,4 +46,9 @@ public class AdminSanJuniperoSteps {
     public void adminBangkerupuxVerifySuccessCreateNewSanjunipero(String message) {
         Assert.assertEquals(adminSanJuniperoPO.getSuccessMessageOnCreateSanJunipero(), message);
     }
+
+    @And("admin bangkerupux preview action kost on sanjunipero page")
+    public void adminBangkerupuxPreviewActionKostOnSanjuniperoPage() {
+        adminSanJuniperoPO.clickOnPreviewAction();
+    }
 }

@@ -290,3 +290,13 @@ Feature: [Test-Execution][DOM] Web - Platform
       | Desta tobello  | Kos DC BAR Automation Tipe A |
     And user want to reached map section and see tanya alamat lengkap button
     Then user want to ask kost address
+
+  @TEST_DOM-362 @Automated @DOM3 @web-covered
+  Scenario: [Test][Landing Page][SanJunipero] Check room list
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/sanjunipero/parent"
+    And admin bangkerupux preview action kost on sanjunipero page
+    Then admin can see kost list is more than 0
