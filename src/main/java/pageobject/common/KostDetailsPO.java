@@ -1,6 +1,5 @@
 package pageobject.common;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -52,6 +51,7 @@ public class KostDetailsPO {
     Locator chatOwnerTittle;
     Locator forumTittle;
     Locator kategoriBantuanTittle;
+    Locator aktivitasKosSayaButton;
 
     //------------ Favorite and share kost section ----------------
     Locator favoriteKostButton;
@@ -231,6 +231,7 @@ public class KostDetailsPO {
     private Locator anotherKosButton;
     private Locator anotherTypeSection;
     private Locator anotherKosSection;
+    private Locator waitingListSubmitText;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -1811,9 +1812,8 @@ public class KostDetailsPO {
      * Click on button text
      */
     public void clickOnBytextButton(String buttonText) {
-        String selector = "//a[contains(.,'"+buttonText+"')]";
-        ElementHandle element = page.querySelector(selector);
-        element.click();
+        aktivitasKosSayaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.clickOn(aktivitasKosSayaButton);
     }
 
     /**
@@ -2030,5 +2030,15 @@ public class KostDetailsPO {
         playwright.pageScrollUsingCoordinate(300, 2500);
         playwright.waitFor(peraturanDisinitext);
         return peraturanDisinitext.isVisible();
+    }
+
+    /**
+     * validate information when success submit waiting list
+     * @param text
+     * @return
+     */
+    public boolean waitingListInformationText(String text){
+        waitingListSubmitText = page.locator("#priceCard").getByText(""+text+"");
+        return waitingListSubmitText.isVisible();
     }
 }

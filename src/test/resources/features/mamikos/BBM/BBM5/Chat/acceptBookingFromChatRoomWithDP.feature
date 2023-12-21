@@ -25,7 +25,7 @@ Feature: Accept Booking from Chat room with DP
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag      | kost name prod                        |
-      | Kost Automation new | Kost Adi Auto FullPaid AddFee Deposit |
+      | kost automation new coop kece | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
@@ -39,8 +39,6 @@ Feature: Accept Booking from Chat room with DP
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"
     And user clicks on Accept button from chat room
-    And user click chat button in top bar owner home page
-    And search chat in chatlist "Tenant Automation Accept Chat"
     Then system display title "Belum bayar sewa pertama" after accept booking from chat room
 
     #  Scenario: If label on owner’s chat is “Belum Bayar Sewa Pertama

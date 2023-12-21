@@ -38,6 +38,7 @@ public class KostSayaBillingPO {
      * It also waits for a popup before performing the click action.
      */
     public InvoicePO clickOnBayarDisiniButton() {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(bayarDisiniButton);
         return new InvoicePO(page);
     }

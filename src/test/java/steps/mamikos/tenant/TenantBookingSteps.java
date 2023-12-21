@@ -414,4 +414,9 @@ public class TenantBookingSteps {
     public void tenantCanSeePeraturanKostWithX(String text){
         Assert.assertTrue(kostDetail.getPeraturanKosDisinitext(text));
     }
+
+    @Then("tenant can succes waiting list submitted with {string}")
+    public void tenantCanSeeSuccessWaitingListSubmitedWithX(String text){
+        Assert.assertTrue(kostDetail.waitingListInformationText(text));
+    }
 }

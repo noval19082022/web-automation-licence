@@ -266,6 +266,7 @@ public class GoldplusPO {
      */
     public void clickOnPelajariCaranyaButton() {
         playwright.clickOn(pelajariCaranyaButton);
+        playwright.waitTillPageLoaded();
     }
 
     /**

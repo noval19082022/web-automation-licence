@@ -45,6 +45,8 @@ public class PengajuanSewaPO {
     private Locator saveCheckinButton;
     private Locator kriteriaCalonPenyewaButton;
     private Locator kriteriaPenyewa;
+    private Locator kriteriaCalonPenyewaText;
+    private Locator kriteriaKhususButton;
 
     public PengajuanSewaPO(Page page) {
         this.page = page;
@@ -292,5 +294,24 @@ public class PengajuanSewaPO {
     public void unCheckToogle(String kriteria) {
         kriteriaPenyewa = page.getByLabel("" +kriteria+ "");
         kriteriaPenyewa.uncheck();
+    }
+
+    /**
+     * validate button will disable or not
+     * @param kriteriaPenyewa
+     * @return
+     */
+    public boolean validateEnableButton(String kriteriaPenyewa){
+        kriteriaCalonPenyewaText = page.getByText(""+kriteriaPenyewa+"");
+        return kriteriaCalonPenyewaText.isDisabled();
+    }
+
+    /**
+     * click button Kost khusus mahasiswa or karyawan
+     * @param text
+     */
+    public void clickKosKhususButton(String text){
+        kriteriaKhususButton = page.getByText(""+text+"");
+        playwright.clickOn(kriteriaKhususButton);
     }
 }

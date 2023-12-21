@@ -5,8 +5,8 @@ Feature: Kost detail page 2
   Scenario: [Dweb][Kost Detail]Check report kos section tenant without login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe B | Kos DC BAR Automation Tipe B |
+      | kost name stag                | kost name prod               |
+      | Kos Dom Automation PLM Tipe C | Kos DC BAR Automation Tipe B |
     Then user can see kos report section
     #report action
     When user want to report this kos
@@ -20,7 +20,7 @@ Feature: Kost detail page 2
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user can see kos report section
     #report action
     When user want to report this kos
@@ -32,7 +32,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     And user can see owner information section
     Then user want to see more detail owner information section
 
@@ -41,7 +41,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user want to display detail gallery
 
   @TEST_DOM-1885 @Automated @DOM4 @Web @discovery-platform @kost-details @recommendation
@@ -60,7 +60,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user sees total price property
       #user check more detail about booking date
     When user sees form booking date
@@ -92,7 +92,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user reached owner badges section
 
   @TEST_DOM-1881 @Automated @DOM4 @Web @discovery-platform @kost-benefit @kost-details @localhost
@@ -100,7 +100,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user see benefit title, benefit description
 
   @TEST_DOM-3811 @Automated @DOM4 @Web @discovery-platform @review-kost @localhost
@@ -111,7 +111,7 @@ Feature: Kost detail page 2
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     Then user see review kos detail page section
 
   @TEST_DOM-3812 @Automated @DOM4 @Web @discovery-platform @review-kost @localhost
@@ -122,6 +122,6 @@ Feature: Kost detail page 2
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
     And user see review kos detail page section
     Then user want to see all review

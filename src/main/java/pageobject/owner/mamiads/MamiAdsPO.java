@@ -35,7 +35,6 @@ public class MamiAdsPO {
     private Locator yaGantiButton;
     private Locator beliSaldoBtnPopup;
     //--- Beli Saldo Mamiads Page ----//
-    private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
     //--- voucher ---//
@@ -87,7 +86,6 @@ public class MamiAdsPO {
         this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
         this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
         //--- Beli Saldo Mamiads Page ---//
-        this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
 
@@ -175,18 +173,8 @@ public class MamiAdsPO {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
 
-    /**
-     * owner buy mamiads saldo,
-     * This method is only valid for owners who have purchased saldo at Mamiads.
-     *
-     * @param saldo String
-     */
-    public void purchaseOwnerSaldoFromMamiads(String saldo) {
+    public void clickSaldoMamiadsCard(){
         playwright.clickOn(saldoMamiadsCard);
-        handlePopupMamiAds();
-        clickOnBeliSaldoBtn();
-        choosingSaldoToBuy(saldo);
-        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
     }
 
     /**
@@ -199,9 +187,33 @@ public class MamiAdsPO {
         // Check if the 'Coba Sekarang' button on the popup is visible
         // OR if the 'Beli Saldo' button is not visible
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
-            playwright.clickOn(cobaSekarangBtnOnPopUp);
+                || !playwright.waitTillLocatorIsVisible(icnButtonCLose)) {
+            playwright.clickOn(icnButtonCLose);
         }
+    }
+
+    /**
+     * Check if favorit saldo is displayed
+     * @return true if element present otherwise false
+     */
+    public boolean favoriteSaldo (String saldo){
+        return playwright.waitTillLocatorIsVisible(page.locator("//*[contains(text(),'"+saldo+"')]/following-sibling::div"));
+    }
+
+    /**
+     * Get list saldo price, price in rupiah, discount, discount price
+     * @param index input with listSaldo
+     * @return String saldo price, price in rupiah, discount, discount price
+     */
+    public String listSaldo (String listSaldo, int index){
+        String element = "";
+        switch (listSaldo){
+            case "price"     : element = ".balance-list-item__name"; break;
+            case "priceInRp" : element = ".balance-list-item__price"; break;
+            case "disc"      : element = ".percentage"; break;
+            case "discPrice" : element = ".amount"; break;
+        }
+        return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
     }
 
     /**
@@ -292,15 +304,6 @@ public class MamiAdsPO {
     }
 
     /**
-     * Click on bayar sekarang button and wait until page loaded
-     */
-    public void clicksOnBayarSekarangButton() {
-        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
-        playwright.waitTillPageLoaded();
-    }
-
-
-    /**
      * Click on Panduan MamiAds Back Button
      *
      */
@@ -355,6 +358,15 @@ public class MamiAdsPO {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
+
+    /**
+     * Navigates to pembelian saldo Mamiads page
+     */
+    public void navigatesToMamiadsBalance() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.TOP_UP_MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
     /**
      * Get detail tagihan
      * @param validasi

@@ -93,4 +93,9 @@ public class ownerSettingSteps {
     public void userClicksOnOwnerSettingsButton() {
         ownerSettingPO.clickOnSettingAccount();
     }
+
+    @And("owner change email to {string}")
+    public void ownerChangeEmailTo(String email) {
+        ownerSettingPO.ownerChangeEmail(email);
+    }
 }

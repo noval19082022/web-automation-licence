@@ -2,6 +2,7 @@ package pageobject.pms.homepage.additionalFeePMSKK;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
 public class DeleteAdditionalFeePMSKKPO {
@@ -12,11 +13,13 @@ public class DeleteAdditionalFeePMSKKPO {
     private Locator hapusBtn;
     private Locator hapusBtnInPopUp;
     private Locator expandBtn;
+    private Locator tambahBiayaBtn;
 
     public DeleteAdditionalFeePMSKKPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
+        tambahBiayaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Biaya"));
         kebabBtn = page.locator("//div[@data-testid='additional-fee-action']");
         hapusBtn = page.locator("//div[@class='bg-c-dropdown__menu-item-content'][contains(., 'Hapus')]");
         hapusBtnInPopUp = page.locator("//button[@class='bg-c-button bg-c-button--primary bg-c-button--lg'][contains(., 'Hapus')]");
@@ -27,6 +30,8 @@ public class DeleteAdditionalFeePMSKKPO {
      * Clicks Kebab button
      */
     public void clicksKebabBtn() {
+        playwright.waitTillPageLoaded(10000.0);
+        playwright.pageScrollInView(kebabBtn);
         playwright.clickOn(kebabBtn);
     }
 
@@ -47,8 +52,10 @@ public class DeleteAdditionalFeePMSKKPO {
     /**
      * Reload page in Kontrak Kerja Sama tab
      */
-    public void reloadPage() {
+    public void reloadKontrakKerjaSamaPage() {
+        playwright.hardWait(2000.0);
         playwright.reloadPage();
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -58,6 +65,7 @@ public class DeleteAdditionalFeePMSKKPO {
      * @return Additional Fee data
      */
     public boolean isAdditionalFeeVisible() {
+        playwright.pageScrollInView(tambahBiayaBtn);
         return playwright.isLocatorVisibleAfterLoad(expandBtn, 10000.0);
     }
 }

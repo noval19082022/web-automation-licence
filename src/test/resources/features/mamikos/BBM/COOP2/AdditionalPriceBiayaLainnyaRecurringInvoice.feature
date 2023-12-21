@@ -37,7 +37,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08900000000021 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -76,8 +76,8 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 087708777615 | 087708777615 | qwerty123 |
+      | phone stag   | phone prod   | password     |
+      | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
@@ -88,8 +88,8 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000021 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
+      | 08900000000021 | 08900000000021 | mamikosqa123 |
+    And owner go to bill page of kost "Kost Adi Auto Fpaid" on month of "next"
     And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		

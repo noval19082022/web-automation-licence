@@ -8,7 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.goldplus.GoldplusPO;
+import pageobject.owner.mamiads.DetailTagihanPO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import utilities.PlaywrightHelpers;
 
@@ -22,12 +22,17 @@ public class MamiAdsSteps {
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
-    GoldplusPO goldplus = new GoldplusPO(page);
+    DetailTagihanPO detailTagihanPO = new DetailTagihanPO(page);
     private Map<String, String> adsData;
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
         mamiAdsPO.navigatesToMamiads();
+    }
+
+    @When("user navigates to mamiads pembelian saldo")
+    public void user_navigates_to_mamiads_pembelian_saldo() {
+        mamiAdsPO.navigatesToMamiadsBalance();
     }
 
     @And("user navigate to mamiads history page")
@@ -37,7 +42,11 @@ public class MamiAdsSteps {
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
-        mamiAdsPO.purchaseOwnerSaldoFromMamiads(saldo);
+        mamiAdsPO.clickSaldoMamiadsCard();
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+        detailTagihanPO.clicksOnBayarSekarangButton();
     }
 
     @And("user filter iklan by iklan nonaktif")
@@ -62,12 +71,46 @@ public class MamiAdsSteps {
         riwayatBeforeBeliSaldo = mamiAdsPO.getCountRiwayatBeliSaldo();
     }
 
+    @And("user click Beli Saldo on mamiads dashboard")
+    public void user_click_beli_saldo_on_mamiads_dashboard() {
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+    }
+
+    @And("favorit saldo is {string}")
+    public void favorit_saldo_is(String saldo){
+        Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
+    }
+
+    @And("detail list saldo as expected")
+    public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;int j=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(mamiAdsPO.listSaldo("price",i),content.get("price"));
+            Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
+            try{
+                if(!content.get("disc").isEmpty()){
+                    Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
+                    Assert.assertEquals(mamiAdsPO.listSaldo("discPrice",j),content.get("discPrice"));
+                    j++;
+                }
+            } catch (java.lang.NullPointerException ignored) { }
+            i++;
+        }
+    }
+
+    @And("owner choose saldo {string}")
+    public void owner_choose_saldo(String saldo){
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+    }
+
     @And("user wants to buy saldo MamiAds {string}")
     public void userWantsToBuySaldoMamiAds(String saldo) {
         mamiAdsPO.clickOnBeliSaldoBtn();
         mamiAdsPO.choosingSaldoToBuy(saldo);
         mamiAdsPO.isDetailTagihanPresent();
-        mamiAdsPO.clicksOnBayarSekarangButton();
+        detailTagihanPO.clicksOnBayarSekarangButton();
     }
 
     @Then("user verify count of riwayat added {int}")
