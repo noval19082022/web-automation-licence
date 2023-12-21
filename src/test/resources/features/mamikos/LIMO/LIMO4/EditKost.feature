@@ -1,7 +1,7 @@
 @regression @LIMO4 @editKost
 Feature: Edit Kost
 
-  @TEST_LIMO-2877 @EditKosInvalidFacility @continue @checkfailedSelasaII
+  @TEST_LIMO-2877 @EditKosInvalidFacility @continue
   Scenario: [Web][Edit Kost] Edit kost fasilitas with invalid data
     Given user go to mamikos homepage
     When user login as owner:
