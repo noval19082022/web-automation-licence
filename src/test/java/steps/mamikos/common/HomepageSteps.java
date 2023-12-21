@@ -173,6 +173,11 @@ public class HomepageSteps {
         home.clickAroundUGM();
     }
 
+    @When("user open Around University in UNDIP")
+    public void userOpenAroundUniversityInUNDIP() {
+        home.clickAroundUNDIP();
+    }
+
     @Then("user can see Lihat pengajuan sewa lainnya text")
     public void user_can_see_lihat_pengajuan_sewa_text() {
         Assert.assertTrue(home.isLihatPengajuanLainBtnVisible(), "lihat pengajuan sewa lainnya not visible");

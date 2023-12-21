@@ -59,6 +59,7 @@ public class HomePO {
     private Locator popularAreaJakarta;
     private Locator popularAreaYogyakarta;
     private Locator aroundUnivUGM;
+    private Locator aroundUnivUNDIP;
     private Locator promoNgebutPriceBeforePromo;
     private Locator promoNgebutPriceInfoForFirstMonth;
     private Locator promoNgebutPriceInfoOtherThanFirstMonth;
@@ -112,6 +113,7 @@ public class HomePO {
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
         this.popularAreaYogyakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Yogyakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
+        this.aroundUnivUNDIP = page.getByTestId("link-UNDIP");
         this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
 
 
@@ -673,6 +675,15 @@ public class HomePO {
     public void clickAroundUGM() {
         playwright.pageScrollToDown(3000);
         aroundUnivUGM.click();
+    }
+
+    /**
+     * Click UNDIP on Around University
+     *
+     */
+    public void clickAroundUNDIP() {
+        playwright.pageScrollToDown(3000);
+        playwright.clickOn(aroundUnivUNDIP);
     }
 
     /**

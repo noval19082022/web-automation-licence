@@ -357,3 +357,8 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user open Popular Area in Yogyakarta
     Then user should redirect to link that contains "/kost/kost-jogja-murah"
 
+  @TEST_DOM-341 @Automated @DOM3 @web-covered
+  Scenario: [Web][Landing Kos][Popular campus] Search Kost Type
+    Given user go to mamikos homepage
+    When  user open Around University in UNDIP
+    Then user should redirect to link that contains "/kost/kost-dekat-undip-semarang-murah"
