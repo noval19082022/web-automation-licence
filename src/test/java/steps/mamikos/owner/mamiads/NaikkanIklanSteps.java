@@ -7,8 +7,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
 import pageobject.owner.mamiads.MamiAdsPO;
 import pageobject.owner.mamiads.NaikkanIklanPO;
+import pageobject.tenant.profile.RiwayatBookingPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class NaikkanIklanSteps {
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
+    HomePO home = new HomePO(page);
 
     @Then("user cek status toggle iklan {string} is {string}")
     public void user_cek_status_toggle_iklan_is(String adsName, String posisiIklan) {
@@ -102,8 +105,8 @@ public class NaikkanIklanSteps {
 
     @Then("verify redirect to mamiads dashboard")
     public void verify_redirect_to_mamiads_dashboard() throws InterruptedException {
-        playwright.hardWait(3000);
-        String actualUrl= playwright.getPageUrl();
+        home = new HomePO(ActiveContext.getActivePage());
+        String actualUrl= home.getURL();
         Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
     }
 
