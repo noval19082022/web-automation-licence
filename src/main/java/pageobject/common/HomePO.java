@@ -57,6 +57,7 @@ public class HomePO {
     private Locator seeAllPromoAds;
     private Locator seeAllPromoOwner;
     private Locator popularAreaJakarta;
+    private Locator popularAreaYogyakarta;
     private Locator aroundUnivUGM;
     private Locator promoNgebutPriceBeforePromo;
     private Locator promoNgebutPriceInfoForFirstMonth;
@@ -109,6 +110,7 @@ public class HomePO {
         areaKosTerpopulerTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Area Kos Terpopuler"));
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
+        this.popularAreaYogyakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Yogyakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
         this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
 
@@ -653,6 +655,15 @@ public class HomePO {
     public void clickPopularAreaOnJakarta() {
         playwright.pageScrollToDown(3000);
         popularAreaJakarta.click();
+    }
+
+    /**
+     * Click Yogyakarta on Popular Area
+     *
+     */
+    public void clickPopularAreaOnYogyakarta() {
+        playwright.pageScrollToDown(3000);
+        playwright.clickOn(popularAreaYogyakarta);
     }
 
     /**

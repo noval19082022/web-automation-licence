@@ -350,3 +350,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkrupux check the checkbox Active on create new san junipero
     And admin bangkrupux save Sanjunipero on create new san junipero
     Then admin verify see text "The slug has already been taken."
+
+  @TEST_DOM-342 @Automated @DOM3 @web-covered
+  Scenario: [Web][Landing Kos][Popular city] Search Time Period
+    Given user go to mamikos homepage
+    When user open Popular Area in Yogyakarta
+    Then user should redirect to link that contains "/kost/kost-jogja-murah"
+

@@ -163,6 +163,11 @@ public class HomepageSteps {
         home.clickPopularAreaOnJakarta();
     }
 
+    @When("user open Popular Area in Yogyakarta")
+    public void userOpenPopularAreaInYogyakarta() {
+        home.clickPopularAreaOnYogyakarta();
+    }
+
     @When("user open Around University in UGM")
     public void userOpenAroundUniversityInUGM() {
         home.clickAroundUGM();
