@@ -300,3 +300,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin visit page "/admin/sanjunipero/parent"
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
+
+  @TEST_DOM-360 @Automated @DOM3 @web-covered
+  Scenario: [Web][Owner] Choose Add New Kos
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | password  |
+      | 08119787884 | Perempuan |
+    And owner navigates to property saya kos
+    And owner click tambah data iklan "Kost"
+    And owner click "Tambah Kos Baru"
+    Then user redirected to "https://owner-jambu.kerupux.com/kos/create?step=1"
