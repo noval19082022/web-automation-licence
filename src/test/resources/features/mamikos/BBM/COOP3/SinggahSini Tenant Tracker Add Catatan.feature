@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP-5027 @COOP3 @legacy
 Feature: SinggahSini Tenant Tracker Add Catatan
 
 
-  @TEST_COOP-5069 @Automated @web
+  @TEST_COOP-5069 @Automated @web @continue
   Scenario: Add Catatan on Detail Penyewa
     Given admin go to pms singgahsini
     When admin login pms :

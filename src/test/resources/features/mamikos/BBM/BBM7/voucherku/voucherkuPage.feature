@@ -29,7 +29,6 @@ Feature: Voucher Saya Page
     And user see voucher list disabled Kode Voucher label on kadaluwarsa page
     And user see voucher list disabled Voucher code on kadaluwarsa page
 
-  @continue
   Scenario: Voucher Detail Display, Scrolling, and Salin Button Functionality
     When tenant navigates to voucher saya page
     And user click Salin button from voucher list
@@ -73,7 +72,7 @@ Feature: Voucher Saya Page
     And user see voucher detail Ticket icon
     And user logs out as a Tenant user
 
-    @TEST_COOP-3674
+  @TEST_COOP-3674
   Scenario: Empty State Landing Page displayed
     Given user go to mamikos homepage
     When user login as tenant via phone number:

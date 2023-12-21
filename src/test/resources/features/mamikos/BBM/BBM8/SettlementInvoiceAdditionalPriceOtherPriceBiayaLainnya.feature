@@ -43,6 +43,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | 087708777618 | 087708777618 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
+    And user logs out as a Tenant user
 
   Scenario: Admin Changed Basic Amount DP Settlement Invoice, Add Additional Price Biaya Lainnya And Biaya Tetap
     Given admin go to mamikos mamipay admin
