@@ -331,3 +331,9 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
+
+  @TEST_DOM-358 @TESTSET_UG-6221 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Web][Login][Pop Up Login] From Listing Detail Page
+    Given user go to mamikos homepage
+    When user visit page "/room/kost-sleman-kost-campur-murah-kost-apik-desta-tipe-b-tamvan-2"
+    Then user want to reached map section and see lihat peta button
