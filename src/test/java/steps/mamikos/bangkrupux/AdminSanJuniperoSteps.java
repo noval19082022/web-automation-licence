@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.AdminSanJuniperoPO;
+import utilities.JavaHelpers;
 
 import java.util.UUID;
 
@@ -50,5 +51,23 @@ public class AdminSanJuniperoSteps {
     @And("admin bangkerupux preview action kost on sanjunipero page")
     public void adminBangkerupuxPreviewActionKostOnSanjuniperoPage() {
         adminSanJuniperoPO.clickOnPreviewAction();
+    }
+
+    @And("admin bangkerupux deactive first sanjunipero on sanjunipero page")
+    public void adminBangkerupuxDeactiveFirstSanjuniperoOnSanjuniperoPage() {
+        adminSanJuniperoPO.clickOnDeactiveAction();
+    }
+
+    @Then("admin bangkerupux will see last updated sanjunipero is current time")
+    public void adminBangkerupuxWillSeeLastUpdatedSanjuniperoIsCurrentTime() {
+        Assert.assertTrue(adminSanJuniperoPO
+                .getCurrentTimeUpdate()
+                .contains(JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd HH:mm"))
+                , "Time is not up to date");
+    }
+
+    @And("admin bangkerupux activate first sanjunipero on sanjunipero page")
+    public void adminBangkerupuxActivateFirstSanjuniperoOnSanjuniperoPage() {
+        adminSanJuniperoPO.clickOnActiveAction();
     }
 }

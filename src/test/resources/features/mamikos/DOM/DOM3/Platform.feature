@@ -311,3 +311,15 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     Then user redirected to "https://owner-jambu.kerupux.com/kos/create?step=1"
+
+  @TEST_DOM-357 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  Scenario: [Test][Admin][SanJunipero] User able to activate or deactivate certain landing page
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/sanjunipero/parent"
+    And admin bangkerupux deactive first sanjunipero on sanjunipero page
+    Then admin bangkerupux will see last updated sanjunipero is current time
+    And admin bangkerupux activate first sanjunipero on sanjunipero page
+    Then admin bangkerupux will see last updated sanjunipero is current time
