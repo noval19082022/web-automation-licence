@@ -20,7 +20,7 @@ public class UniversalInvoiceSteps {
     }
 
     @And("owner click button selesai on universal invoice")
-    public void ownerAturPromoOwner() {
+    public void owner_click_button_selesai_on_universal_invoice() {
         page1 = universalInvoicePO.clickOnSelesaiButton();
     }
 
