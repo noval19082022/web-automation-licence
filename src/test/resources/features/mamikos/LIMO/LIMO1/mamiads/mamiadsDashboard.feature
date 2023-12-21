@@ -209,7 +209,7 @@ Feature: MamiAds Dashboard
     Then user will see that the text "Anda belum bisa menaikkan iklan." is displayed
     And user will see that the text "Silakan beli saldo terlebih dahulu untuk dapat menaikkan posisi iklan properti Anda." is displayed
 
-  @TEST_LIMO-316 @LIMO1-staging
+  @TEST_LIMO-316 @LIMO1-staging @TEST_LIMO-245
   Scenario: Owner want to see Semua Iklan and saldo mamiads insufficient
     Given user go to mamikos homepage
     When user login as owner:

@@ -77,7 +77,7 @@ Feature: Owner Dashboard GP-ONboarding
   Scenario: Swiper Left/Previous Button On Gold Plus Onboarding Pop-Up Should Be Disabled
     Then owner can see swiper left or previous button on gold plus onboarding pop-up is disabled
 
-  @continue
+  @continue @TEST_LIMO-233
   Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use MamiAds Onboarding Pop-Up Swiper From Right To Left
     Then owner can see gp onboarding swiper number <swiper number> is selected
     Then owner can see gp onboarding pop-up text head "<text head>" is selected
