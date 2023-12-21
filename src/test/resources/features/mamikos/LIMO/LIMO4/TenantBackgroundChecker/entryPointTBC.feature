@@ -22,3 +22,12 @@ Feature: Entry point Tenant Background Checker
     * user click chat button in top bar owner home page
     Then owner can see entry point TBC Lihat Profil second time at chatroom "Rega Tenant Tiga"
     And coachmark is closed
+
+  @TEST_LIMO-4883
+  Scenario: [Web][Chat Tenant] Entry point tenant background checker not show
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag      | phone prod  | password     |
+      | 0891111020199   | 0           | mamikosqa123 |
+    And user click on chat button in top bar tenant home page
+    Then tenant can't see entry point TBC Lihat Profil at chatroom "Kost General Irvi Automation"
