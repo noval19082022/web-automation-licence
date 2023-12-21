@@ -522,6 +522,7 @@ public class OwnerDashboardPO {
      */
     public boolean isTextOnReviewListPresent(String text) {
         playwright.hardWait(3000.0);
+        playwright.waitTillPageLoaded();
         textOnReviewList = page.locator("//p[contains(.,'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(textOnReviewList);
     }
@@ -532,6 +533,7 @@ public class OwnerDashboardPO {
      */
     public Integer getReviewListsCard() {
         playwright.hardWait(5000.0);
+        playwright.waitTillPageLoaded();
         List<Locator> listCities = playwright.getLocators(reviewLists);
         return listCities.size();
     }
@@ -701,6 +703,7 @@ public class OwnerDashboardPO {
      * click on mamitour entry point on owner dashboard
      */
     public void clickMamitourOnDashboard() {
+        playwright.waitFor(mamitourDashboard);
         playwright.clickOn(mamitourDashboard);
     }
 
