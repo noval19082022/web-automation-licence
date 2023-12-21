@@ -16,19 +16,6 @@ public class AddTenantSteps {
     AddTenantPO addTenantPO = new AddTenantPO(page);
     HomePO homePO = new HomePO(page);
 
-    @And("user click {string} until start adding contract")
-    public void userClickUntilStartAddingContract(String buttonText) {
-        int i;
-        for (i = 1; i<4; i++){
-            addTenantPO.clickOnOnboardingAddTenant(buttonText);
-        }
-        addTenantPO.clickOnOnboardingAddTenant("Mulai");
-    }
-
-    @And("user choose {string}")
-    public void userChoose(String stringText) {
-        addTenantPO.selectHowToAddTenant(stringText);
-    }
     @And("user select kost {string} for tenant")
     public void userSelectKostForTenant(String kosName) {
         addTenantPO.selectKosToAddContract(kosName);
@@ -76,5 +63,25 @@ public class AddTenantSteps {
     @And("owner click button {string} on form informasi penyewa")
     public void ownerClickButtonOnFormInformasiPenyewa(String buttonText) {
         addTenantPO.submitAddTenantForm(buttonText);
+    }
+
+    @And("user click continue until start adding contract")
+    public void userClickContinueUntilStartAddingContract() {
+        int i;
+        for (i = 1; i<4; i++){
+            addTenantPO.clickOnOnboardingAddTenant("Lanjut");
+        }
+        addTenantPO.clickOnOnboardingAddTenant("Mulai");
+        addTenantPO.selectHowToAddTenant("Saya yang menambah kontrak");
+    }
+
+    @When("owner clicks on change room's data on full room pop up restriction")
+    public void ownerClicksOnChangeRoomSDataOnFullRoomPopUpRestriction() {
+        addTenantPO.clickOnPopUpButton("Ubah Data Kamar");
+    }
+
+    @And("user choose owner added the contract")
+    public void userChooseOwnerAddedTheContract() {
+        addTenantPO.selectHowToAddTenant("Saya yang menambah kontrak");
     }
 }

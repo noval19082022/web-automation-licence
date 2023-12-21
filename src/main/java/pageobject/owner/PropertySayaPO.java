@@ -176,6 +176,7 @@ public class PropertySayaPO {
     Locator untickInhabitedCheckbox;
     Locator editRoomIcn;
     Locator toastMessage;
+    Locator updateRoom;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -308,6 +309,7 @@ public class PropertySayaPO {
         untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
         editRoomIcn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("1")).getByRole(AriaRole.LINK).first();
         toastMessage = page.locator(".wrapper__toast");
+        updateRoom = page.getByText("Update Kamar");
     }
 
     /**
@@ -2038,15 +2040,6 @@ public class PropertySayaPO {
     }
 
     /**
-     * Click on button (kembali, simpan) on add room pop up
-     *
-     * @param buttonText
-     */
-    public void clickOnButtonAddRoomPopUp(String buttonText) {
-        playwright.clickOnTextButton(buttonText, 3000.0);
-    }
-
-    /**
      * Verify text on not add renter pop up
      * @param text
      * @return boolean, true if text displayed and false if text not dispalyed
@@ -2080,5 +2073,21 @@ public class PropertySayaPO {
     public String getToastUpdateRoom() {
         playwright.waitTillLocatorIsVisible(toastMessage, 5000.0);
         return playwright.getText(toastMessage);
+    }
+
+    /**
+     * Click on update room on property saya kos -> selengkapnya
+     *
+     */
+    public void clickOnUpdateRoom() {
+        playwright.clickOn(updateRoom);
+    }
+
+    /**
+     * Click on kembali button on added room pop up
+     *
+     */
+    public void clickOnBackButton() {
+        playwright.clickOnTextButton("Kembali");
     }
 }

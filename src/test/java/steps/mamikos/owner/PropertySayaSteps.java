@@ -960,11 +960,6 @@ public class PropertySayaSteps {
         Assert.assertFalse(propertySaya.isInhabitedCheckboxCheck(), "InhabitedCheckbox is checked!");
     }
 
-    @Given("owner click {string} on added room pop up")
-    public void ownerClickOnAddedRoomPopUp(String buttonText) {
-        propertySaya.clickOnButtonAddRoomPopUp(buttonText);
-    }
-
     @Then("owner can sees Pop-Up owner not add renter's data")
     public void ownerCanSeesPopUpOwnerNotAddRenterSData() {
         Assert.assertTrue(propertySaya.getPopupNotAddRenter("Anda belum tambah data penyewa"), "Title on pop up doesn't match!");
@@ -992,5 +987,15 @@ public class PropertySayaSteps {
     @Then("owner can sees toast {string}")
     public void ownerCanSeesToast(String toastMessage) {
         Assert.assertEquals(propertySaya.getToastUpdateRoom(), toastMessage, "Incorrect message toast!");
+    }
+
+    @And("owner click on update room")
+    public void ownerClickOnUpdateRoom() {
+        propertySaya.clickOnUpdateRoom();
+    }
+
+    @Given("owner click back on added room pop up")
+    public void ownerClickBackOnAddedRoomPopUp() {
+        propertySaya.clickOnBackButton();
     }
 }
