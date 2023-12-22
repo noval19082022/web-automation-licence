@@ -177,6 +177,7 @@ public class PropertySayaPO {
     Locator editRoomIcn;
     Locator toastMessage;
     Locator updateRoom;
+    private Locator editDataKosButton;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -307,6 +308,7 @@ public class PropertySayaPO {
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
         bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
         untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
+        editDataKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Edit Data Kos"));
         editRoomIcn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("1")).getByRole(AriaRole.LINK).first();
         toastMessage = page.locator(".wrapper__toast");
         updateRoom = page.getByText("Update Kamar");
@@ -1801,7 +1803,6 @@ public class PropertySayaPO {
 
     /**
      * Click on selesai atur kamar button
-     *
      * @param text
      */
     public void clickOnSelesaiAturKamar(String text) {
@@ -1810,7 +1811,6 @@ public class PropertySayaPO {
 
     /**
      * Select payment expired date
-     *
      * @param number
      * @param rangeTime
      */
@@ -1834,7 +1834,6 @@ public class PropertySayaPO {
 
     /**
      * Get error price add kos
-     *
      * @param i
      * @return warningPrice
      */
@@ -1874,7 +1873,6 @@ public class PropertySayaPO {
 
     /**
      * check denda list not appears
-     *
      * @return true if not appears
      */
     public boolean isDendaListAppears() {
@@ -1928,7 +1926,6 @@ public class PropertySayaPO {
 
     /**
      * Get other price active name
-     *
      * @return String data type e.g "Biaya Parkir"
      */
     public boolean getActiveOtherPricesName() {
@@ -1937,7 +1934,6 @@ public class PropertySayaPO {
 
     /**
      * Get other price active number
-     *
      * @return String data type e.g "Rp100.000"
      */
     public boolean getActiveOtherPriceNumber() {
@@ -1962,7 +1958,6 @@ public class PropertySayaPO {
 
     /**
      * Click add pengelola checkbox
-     *
      * @param addDataPengelola
      */
     public void selectPengelola(String addDataPengelola) {
@@ -1973,7 +1968,6 @@ public class PropertySayaPO {
 
     /**
      * Input pengelola name
-     *
      * @param pengelolaName
      */
     public void inputPengelolaName(String pengelolaName) {
@@ -1982,7 +1976,6 @@ public class PropertySayaPO {
 
     /**
      * Input pengelola phone
-     *
      * @param pengelolaPhone
      */
     public void inputPengelolaPhone(String pengelolaPhone) {
@@ -1991,7 +1984,6 @@ public class PropertySayaPO {
 
     /**
      * Click on lewati bbk form button
-     *
      * @param textButton
      */
     public void clickOnLewatiBBKForm(String textButton) {
@@ -2000,7 +1992,6 @@ public class PropertySayaPO {
 
     /**
      * Click on button in kebijakan baru mamikos pop up
-     *
      * @param text
      */
     public void clickOnKebijakanBaruMamikosPopUp(String text) {
@@ -2009,7 +2000,6 @@ public class PropertySayaPO {
 
     /**
      * Verify the bbk pop up is visible or not
-     *
      * @return true false
      */
     public boolean isBBKPopUpVisible() {
@@ -2032,7 +2022,6 @@ public class PropertySayaPO {
 
     /**
      * Verify the inhabitedcheckbox is checked
-     *
      * @return true if checkbox is checked and false if checkbox unchecked
      */
     public boolean isInhabitedCheckboxCheck() {
@@ -2089,5 +2078,12 @@ public class PropertySayaPO {
      */
     public void clickOnBackButton() {
         playwright.clickOnTextButton("Kembali");
+    }
+
+    /**
+     * Click on edit data kos button
+     */
+    public void clickOnEditDataKosButton() {
+        playwright.clickOn(editDataKosButton);
     }
 }

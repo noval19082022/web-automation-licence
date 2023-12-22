@@ -9,14 +9,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
-import pageobject.owner.chat.BroadcastChatPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
+import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
-import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -36,6 +37,7 @@ public class GoldplusSteps {
     MamiAdsPO mamiads = new MamiAdsPO(page);
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -48,7 +50,7 @@ public class GoldplusSteps {
         if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
-        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isGpRadioSelected() && !gpSubmission.isGpPeriodeSelected()) {
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
             gpSubmission.clickOnGpSatuFirstRadioButton();
         }
         gpSubmission.clicksOnPilihPaketButton();
@@ -390,6 +392,7 @@ public class GoldplusSteps {
     @When("owner wants to accses dashboard GP")
     public void owner_wants_to_accses_dashboard_gp() {
         owner.clickOnGpWidgetButton();
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("user see status goldplus is {string}")

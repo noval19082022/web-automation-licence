@@ -1,4 +1,4 @@
-package pageobject.owner.mamiads;
+package pageobject.owner.fiturpromosi.mamiads;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;

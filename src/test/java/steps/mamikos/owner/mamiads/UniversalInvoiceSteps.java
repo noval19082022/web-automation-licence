@@ -3,7 +3,7 @@ package steps.mamikos.owner.mamiads;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
-import pageobject.owner.mamiads.UniversalInvoicePO;
+import pageobject.owner.fiturpromosi.mamiads.UniversalInvoicePO;
 
 public class UniversalInvoiceSteps {
 

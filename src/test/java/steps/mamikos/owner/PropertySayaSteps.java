@@ -10,8 +10,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.AddTenantPO;
 import pageobject.owner.PropertySayaPO;
+import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
 
 import java.util.List;
@@ -22,6 +24,8 @@ import static org.testng.Assert.assertTrue;
 public class PropertySayaSteps {
     Page page = ActiveContext.getActivePage();
     PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
+    NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
+    LoadingPO loading = new LoadingPO(page);
     AddTenantPO addTenantPO = new AddTenantPO(page);
 
 
@@ -997,5 +1001,11 @@ public class PropertySayaSteps {
     @Given("owner click back on added room pop up")
     public void ownerClickBackOnAddedRoomPopUp() {
         propertySaya.clickOnBackButton();
+    }
+
+    @When("user clicks on edit data kos button")
+    public void userClicksOnEditDataKosButton() {
+        propertySaya.clickOnEditDataKosButton();
+        loading.waitForLoadingIconDisappear();
     }
 }
