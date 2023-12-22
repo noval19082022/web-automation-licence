@@ -2,7 +2,7 @@
 Feature: SinggahSini Main Page Add Tracker Status WA
 
 
-  @TEST_COOP-5038 @Automated @web
+  @TEST_COOP-5038 @Automated @web @continue
   Scenario: Add Track Status Chat WA on existing user
     Given admin go to pms singgahsini
     When admin login pms :

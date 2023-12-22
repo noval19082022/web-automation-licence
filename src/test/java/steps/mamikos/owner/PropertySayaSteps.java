@@ -11,6 +11,7 @@ import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
+import pageobject.owner.AddTenantPO;
 import pageobject.owner.PropertySayaPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
@@ -25,6 +26,8 @@ public class PropertySayaSteps {
     PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
     LoadingPO loading = new LoadingPO(page);
+    AddTenantPO addTenantPO = new AddTenantPO(page);
+
 
     private final JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
@@ -41,7 +44,7 @@ public class PropertySayaSteps {
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
         propertySaya.searchKostPropertySaya(kostName);
-        naikkanIklanPO.setKosOwner(kostName);
+        Mamikos.setPropertyKosName(kostName);
     }
 
     @And("owner click update kamar kost")
@@ -959,6 +962,45 @@ public class PropertySayaSteps {
     @Then("verify will be appears and the room is untick again")
     public void verifyWillBeAppearsAndTheRoomIsUntickAgain() {
         Assert.assertFalse(propertySaya.isInhabitedCheckboxCheck(), "InhabitedCheckbox is checked!");
+    }
+
+    @Then("owner can sees Pop-Up owner not add renter's data")
+    public void ownerCanSeesPopUpOwnerNotAddRenterSData() {
+        Assert.assertTrue(propertySaya.getPopupNotAddRenter("Anda belum tambah data penyewa"), "Title on pop up doesn't match!");
+        Assert.assertTrue(propertySaya.getPopupNotAddRenter("Sebelum menandai kamar menjadi \"sudah berpenghuni\", mohon tambahkan data penyewa"), "Description on pop up doesn't match!");
+        Assert.assertTrue(propertySaya.getPopUpButton("Tambah Penyewa"), "Button on pop up doesn't match!");
+    }
+
+    @When("owner click on Add Renter button")
+    public void ownerClickOnAddRenterButton() {
+       propertySaya.clickOnAddRenterButton();
+    }
+
+    @Then("owner redirected to Input Renter's Information form with valid kost name")
+    public void ownerRedirectedToInputRenterSInformationFormWithValidKostName() {
+        Assert.assertTrue(addTenantPO.getFormTitle("Masukkan Informasi Penyewa"), "Form title doesn't match!");
+        Assert.assertEquals(addTenantPO.getSelectedKostName().replaceAll("×  ×   \n+\t\t\t\t",""), Mamikos.getPropertyKosName(), "Kos name doesn't match!");
+        Assert.assertTrue(addTenantPO.getFullRoomName().contains("kamar"));
+    }
+
+    @Then("owner can sees room is on {string} status")
+    public void ownerCanSeesRoomIsOnStatus(String statusRoom) {
+        Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "Status room doesn't macth!");
+    }
+
+    @Then("owner can sees toast {string}")
+    public void ownerCanSeesToast(String toastMessage) {
+        Assert.assertEquals(propertySaya.getToastUpdateRoom(), toastMessage, "Incorrect message toast!");
+    }
+
+    @And("owner click on update room")
+    public void ownerClickOnUpdateRoom() {
+        propertySaya.clickOnUpdateRoom();
+    }
+
+    @Given("owner click back on added room pop up")
+    public void ownerClickBackOnAddedRoomPopUp() {
+        propertySaya.clickOnBackButton();
     }
 
     @When("user clicks on edit data kos button")

@@ -7,7 +7,6 @@ Feature: Homepage
     When user login as owner:
       | phone stag     | phone prod     | password   |
       | 083176408311   | 083132824758   | qwerty123  |
-    And owner click "Nanti Saja"
     Then check the header menu display on homepage owner
     And user see username in top right shows as "abcdefghijklmnopqrst"
 
@@ -28,7 +27,6 @@ Feature: Homepage
   @ownerPage @listingGP @continue
   Scenario: Click "halaman pemilik" will redirect to Owner page
     When user navigates to owner dashboard
-    And owner click "Nanti Saja"
     And user click mamikos.com logo
     And user click profile on header
     Then user see dropdown with button owner page and exit
@@ -49,14 +47,12 @@ Feature: Homepage
     When owner navigates to property saya apartemen
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/apartment"
     When user navigates to owner dashboard
-    And owner click "Nanti Saja"
     And user click mamipoin in owner's menu
     Then user should redirect to link "https://owner-jambu.kerupux.com/mamipoin"
 
   @OwnerGreeting @listingGP @continue
   Scenario: Click username direct to setelan akun
     When user navigates to owner dashboard
-    And owner click "Nanti Saja"
     Then user see user's name "Halo, abcdefghijklmnopqrst" in owner dashboard
     When user click username in owner dashboard
     Then user redirected to "/ownerpage/settings"
@@ -64,7 +60,6 @@ Feature: Homepage
   @OwnerProfileHeader @listingGP
   Scenario: Click profile name in top right will open dropdown menu
     When user click back button in page
-    And owner click "Nanti Saja"
     And user click owner username on header
     Then user see owner's name & phone number, text link "Setelan Akun" & "Logout"
 

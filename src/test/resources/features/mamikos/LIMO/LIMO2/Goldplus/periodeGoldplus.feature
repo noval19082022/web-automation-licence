@@ -45,7 +45,8 @@ Feature: Check Period Goldplus Page
     And user should not be able to see the text "Favorit"
     And owner should successfully log out
 
-    #Scenario: Setting label favorite change to yes
+    #scenario change label favorite
+    Scenario: Setting label favorite change to yes
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -53,7 +54,7 @@ Feature: Check Period Goldplus Page
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to active
 
-  @TEST_LIMO-3146
+  @TEST_LIMO-3146 @continue
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
     #Scenario: Setting label favorite more than 1
     Then admin successfully adds additional favorite labels
@@ -74,7 +75,8 @@ Feature: Check Period Goldplus Page
       | 12 Bulan        | Gratis MamiAds 708.000 | Rp862.680   | Rp948.000 |
     And owner should successfully log out
 
-#Scenario: Remove favorite more than 1
+    #scenario change label favorite
+    Scenario: Remove favorite more than 1
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |

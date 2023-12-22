@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
+import pageobject.owner.mamiads.DetailTagihanPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class MamiAdsSteps {
     MamiAdsPO mamiAdsPO = new MamiAdsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
-    GoldplusPO goldplus = new GoldplusPO(page);
+    DetailTagihanPO detailTagihanPO = new DetailTagihanPO(page);
     private Map<String, String> adsData;
 
     @When("user navigates to mamiads dashboard")
@@ -42,7 +43,11 @@ public class MamiAdsSteps {
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
-        mamiAdsPO.purchaseOwnerSaldoFromMamiads(saldo);
+        mamiAdsPO.clickSaldoMamiadsCard();
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+        detailTagihanPO.clicksOnBayarSekarangButton();
     }
 
     @And("user filter iklan by iklan nonaktif")
@@ -96,12 +101,17 @@ public class MamiAdsSteps {
         }
     }
 
+    @And("owner choose saldo {string}")
+    public void owner_choose_saldo(String saldo){
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+    }
+
     @And("user wants to buy saldo MamiAds {string}")
     public void userWantsToBuySaldoMamiAds(String saldo) {
         mamiAdsPO.clickOnBeliSaldoBtn();
         mamiAdsPO.choosingSaldoToBuy(saldo);
         mamiAdsPO.isDetailTagihanPresent();
-        mamiAdsPO.clicksOnBayarSekarangButton();
+        detailTagihanPO.clicksOnBayarSekarangButton();
     }
 
     @Then("user verify count of riwayat added {int}")

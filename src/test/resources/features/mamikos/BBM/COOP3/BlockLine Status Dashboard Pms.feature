@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3 @legacy
+@COOP-5027 @COOP3
 Feature: BlockLine Status Dashboard Pms
 
   @TEST_COOP-5029 @TESTSET_COOP-4944 @Automated @web

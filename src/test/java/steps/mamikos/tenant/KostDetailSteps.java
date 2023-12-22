@@ -232,14 +232,6 @@ public class KostDetailSteps {
         kostDetail.clickOnTanyaAlamatBtn();
     }
 
-    @Then("chat room appear with latest message")
-    public void msgChatRoom() {
-        Assert.assertTrue(kostDetail.isChatRoomPresent(), "Chat room is not present!");
-        var message = "Kos DC BAR Automation Tipe A beralamat di: ";
-        Assert.assertTrue(kostDetail.getLatestChatText().trim().replaceAll("\\s", "")
-                .contains(message.replaceAll("\\s", "")), "Kos address in title is wrong");
-    }
-
     // ------------ Kos Report Section -----------
     @Then("user can see kos report section")
     public void i_should_reached_kos_report_section() {
