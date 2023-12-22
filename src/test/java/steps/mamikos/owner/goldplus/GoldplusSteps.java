@@ -572,5 +572,8 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Yes, terminate it!");
         Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
     }
-
+   @And("owner click filter {string} in Pembayaran Tagihan Goldplus page")
+    public void ownerClickFilterInPembayaranTagihanGoldplusPage(String filter) {
+        goldplus.clickFilterInPaymentBillingGp(filter);
+    }
 }
