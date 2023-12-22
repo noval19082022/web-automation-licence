@@ -32,8 +32,8 @@ public class TenantBackgroundCheckerPO {
         sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         backButton = page.getByTestId("back-button");
         beliPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Paket"));
-        kostNotActiveInformation = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda belum memiliki kos aktif"));
-        gp2TBCInformation = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur ini khusus pengguna GoldPlus 2"));
+        kostNotActiveInformation = page.locator("//*[@class='bg-c-modal__body-title']");
+        gp2TBCInformation = page.locator("//*[@class='bg-c-empty-state__title']");
     }
 
     /**
