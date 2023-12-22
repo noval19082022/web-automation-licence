@@ -174,6 +174,9 @@ public class PropertySayaPO {
     Locator pengelolaPhoneField;
     Locator bbkPopUp;
     Locator untickInhabitedCheckbox;
+    Locator editRoomIcn;
+    Locator toastMessage;
+    Locator updateRoom;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -294,8 +297,8 @@ public class PropertySayaPO {
         confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
         nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
         confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
-        deleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
-        confirmDeleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
+        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        confirmDeleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
         selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
         bbkDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
@@ -304,6 +307,9 @@ public class PropertySayaPO {
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
         bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
         untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
+        editRoomIcn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("1")).getByRole(AriaRole.LINK).first();
+        toastMessage = page.locator(".wrapper__toast");
+        updateRoom = page.getByText("Update Kamar");
     }
 
     /**
@@ -312,6 +318,7 @@ public class PropertySayaPO {
      * user choose kost name
      */
     public void searchKostPropertySaya(String kostName) {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
@@ -1794,8 +1801,8 @@ public class PropertySayaPO {
 
     /**
      * Click on selesai atur kamar button
-     * @param text
      *
+     * @param text
      */
     public void clickOnSelesaiAturKamar(String text) {
         playwright.clickOnTextButton(text, 3000.0);
@@ -1803,13 +1810,13 @@ public class PropertySayaPO {
 
     /**
      * Select payment expired date
+     *
      * @param number
      * @param rangeTime
-     *
      */
     public void selectPaymentExpiredDate(String number, String rangeTime) {
         playwright.clickOnTextButton("1 dropdown-down");
-        Locator numberSelected = page.locator("//div[contains(@class,'bg-c-dropdown__menu bg-c-dropdown__menu--open bg-c-dropdown__menu--scrollable bg-c-dropdown__menu--fit-to-trigger bg-c-dropdown__menu--text-lg')]//li["+number+"]/a");
+        Locator numberSelected = page.locator("//div[contains(@class,'bg-c-dropdown__menu bg-c-dropdown__menu--open bg-c-dropdown__menu--scrollable bg-c-dropdown__menu--fit-to-trigger bg-c-dropdown__menu--text-lg')]//li[" + number + "]/a");
         playwright.clickOn(numberSelected);
         Locator rangeTimeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hari dropdown-down").setExact(true));
         playwright.clickOn(rangeTimeDropdown);
@@ -1819,7 +1826,6 @@ public class PropertySayaPO {
 
     /**
      * Click on lengkapi button
-     *
      */
     public void clickOnLengkapiDataKosDraft() {
         playwright.clickOn(lengkapiDataKosDraft);
@@ -1828,6 +1834,7 @@ public class PropertySayaPO {
 
     /**
      * Get error price add kos
+     *
      * @param i
      * @return warningPrice
      */
@@ -1864,18 +1871,19 @@ public class PropertySayaPO {
         Locator penaltyRules = page.locator(".is-active .c-field-select__select");
         playwright.selectDropdownByValue(penaltyRules, penalty);
     }
+
     /**
      * check denda list not appears
+     *
      * @return true if not appears
      */
-    public boolean isDendaListAppears(){
+    public boolean isDendaListAppears() {
         return dendaPrice.isEnabled();
     }
 
     /**
      * click toggle deposit
      */
-
     public void clicktoggleDeposit() {
         if (toggleDeposit.isChecked()) {
             playwright.clickOn(deleteOtherPrice);
@@ -1885,6 +1893,7 @@ public class PropertySayaPO {
             playwright.clickOn(toggleDeposit);
         }
     }
+
     /**
      * fill Deposit Amount Time
      */
@@ -1893,6 +1902,7 @@ public class PropertySayaPO {
         Locator deposit = page.locator("//input[@class='input field-amount']");
         playwright.fill(deposit, amountDeposit);
     }
+
     /**
      * click toggle other price
      */
@@ -1909,27 +1919,30 @@ public class PropertySayaPO {
     /**
      * fill other price
      */
-    public void fillOtherPrice(String namePrice,String amountPrice) {
+    public void fillOtherPrice(String namePrice, String amountPrice) {
         Locator nameOtherPrice = page.locator("//input[@placeholder='Contoh: Listrik, Parkir']");
-        playwright.fill(nameOtherPrice,namePrice);
+        playwright.fill(nameOtherPrice, namePrice);
         Locator amountOtherPrice = page.locator("//input[@class='input']");
-        playwright.fill(amountOtherPrice,amountPrice);
+        playwright.fill(amountOtherPrice, amountPrice);
     }
+
     /**
      * Get other price active name
+     *
      * @return String data type e.g "Biaya Parkir"
      */
     public boolean getActiveOtherPricesName() {
         return otherPriceName.isEnabled();
     }
+
     /**
      * Get other price active number
+     *
      * @return String data type e.g "Rp100.000"
      */
     public boolean getActiveOtherPriceNumber() {
         return otherPriceNumber.isEnabled();
     }
-
 
     /**
      * if other price list appears
@@ -1949,16 +1962,18 @@ public class PropertySayaPO {
 
     /**
      * Click add pengelola checkbox
+     *
      * @param addDataPengelola
      */
     public void selectPengelola(String addDataPengelola) {
-        if (addDataPengelola.equals("yes")){
+        if (addDataPengelola.equals("yes")) {
             playwright.clickOn(pengelolaCheckbox);
         }
     }
 
     /**
      * Input pengelola name
+     *
      * @param pengelolaName
      */
     public void inputPengelolaName(String pengelolaName) {
@@ -1967,6 +1982,7 @@ public class PropertySayaPO {
 
     /**
      * Input pengelola phone
+     *
      * @param pengelolaPhone
      */
     public void inputPengelolaPhone(String pengelolaPhone) {
@@ -1975,8 +1991,8 @@ public class PropertySayaPO {
 
     /**
      * Click on lewati bbk form button
-     * @param textButton
      *
+     * @param textButton
      */
     public void clickOnLewatiBBKForm(String textButton) {
         playwright.clickOnTextButton(textButton);
@@ -1984,8 +2000,8 @@ public class PropertySayaPO {
 
     /**
      * Click on button in kebijakan baru mamikos pop up
-     * @param text
      *
+     * @param text
      */
     public void clickOnKebijakanBaruMamikosPopUp(String text) {
         playwright.clickOnTextButton(text);
@@ -1993,8 +2009,8 @@ public class PropertySayaPO {
 
     /**
      * Verify the bbk pop up is visible or not
-     * @return true false
      *
+     * @return true false
      */
     public boolean isBBKPopUpVisible() {
         return playwright.isLocatorVisibleAfterLoad(bbkPopUp, 5000.0);
@@ -2002,7 +2018,6 @@ public class PropertySayaPO {
 
     /**
      * Click save add room on pop up Add room
-     *
      */
     public void saveAddRoomPopUp() {
         playwright.clickOn(updateKamarButtonPopup);
@@ -2010,7 +2025,6 @@ public class PropertySayaPO {
 
     /**
      * Uncheck already inhabited checkbox
-     *
      */
     public void UncheckAlreadyInhabitedCheckbox() {
         playwright.clickOn(untickInhabitedCheckbox);
@@ -2018,10 +2032,62 @@ public class PropertySayaPO {
 
     /**
      * Verify the inhabitedcheckbox is checked
-     * @return true if checkbox is checked and false if checkbox unchecked
      *
+     * @return true if checkbox is checked and false if checkbox unchecked
      */
     public boolean isInhabitedCheckboxCheck() {
         return playwright.isRadioButtonChecked(alreadyInhabitedCheckbox);
+    }
+
+    /**
+     * Verify text on not add renter pop up
+     * @param text
+     * @return boolean, true if text displayed and false if text not dispalyed
+     */
+    public boolean getPopupNotAddRenter(String text) {
+        return playwright.isTextDisplayed(text);
+    }
+
+    /**
+     * Verify the button on pop up
+     * @param buttonText
+     * @return boolean, true if button displayed, and false if button not displayed
+     */
+    public boolean getPopUpButton(String buttonText) {
+        return playwright.isButtonWithTextDisplayed(buttonText);
+    }
+
+    /**
+     * Click on add renter button
+     *
+     */
+    public void clickOnAddRenterButton() {
+        playwright.clickOnTextButton("Tambah Penyewa", 3000.0);
+    }
+
+    /**
+     * Verify the toast message when update room
+     * @return toastMessage
+     *
+     */
+    public String getToastUpdateRoom() {
+        playwright.waitTillLocatorIsVisible(toastMessage, 5000.0);
+        return playwright.getText(toastMessage);
+    }
+
+    /**
+     * Click on update room on property saya kos -> selengkapnya
+     *
+     */
+    public void clickOnUpdateRoom() {
+        playwright.clickOn(updateRoom);
+    }
+
+    /**
+     * Click on kembali button on added room pop up
+     *
+     */
+    public void clickOnBackButton() {
+        playwright.clickOnTextButton("Kembali");
     }
 }
