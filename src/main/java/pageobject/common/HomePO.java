@@ -81,6 +81,7 @@ public class HomePO {
     private Locator instagramButton;
     private Locator copyrightFooter;
     private Locator appStoreFooterMenu;
+    private Locator googlePlayBtn;
 
 
 
@@ -154,6 +155,7 @@ public class HomePO {
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
         this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
+        this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
     }
 
     /**
@@ -797,5 +799,12 @@ public class HomePO {
     public void clickOnKostCardPromoNgebutOtherThanBulanPertama() {
         playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
         playwright.clickOn(promoNgebutPriceInfoOtherThanFirstMonth.first());
+    }
+
+    /**
+     * clickOn Google Play on the footer
+     */
+    public void clickOnGooglePlayFooterLink() {
+        playwright.clickOn(googlePlayBtn);
     }
 }

@@ -362,3 +362,11 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When  user open Around University in UNDIP
     Then user should redirect to link that contains "/kost/kost-dekat-undip-semarang-murah"
+
+  @TEST_DOM-337 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Google Play icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user click on Google play on the footer
+    And tenant set active page to 1
+    Then user redirected to "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"

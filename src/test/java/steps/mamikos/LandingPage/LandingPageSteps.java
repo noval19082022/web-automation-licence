@@ -56,4 +56,10 @@ public class LandingPageSteps {
     public void userSeePopUpVideoPlayerIsShownOnEnaknyaNgekosLPAndCanPlayVideoIt() {
         landing.playVideoOnEnaknyaNgekosPage();
     }
+
+
+    @And("user click on Google play on the footer")
+    public void userClickOnGooglePlayOnTheFooter() {
+        home.clickOnGooglePlayFooterLink();
+    }
 }
