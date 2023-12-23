@@ -370,3 +370,13 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user click on Google play on the footer
     And tenant set active page to 1
     Then user redirected to "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
+
+  @TEST_DOM-331 @TESTSET_UG-4894 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Bell Notification] Bell icon - lihat semua clicked
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081328787342 | Perempuan |
+    And owner open notification icon
+    And owner wants to see all notification
+    Then user redirected to "/ownerpage/notification"
