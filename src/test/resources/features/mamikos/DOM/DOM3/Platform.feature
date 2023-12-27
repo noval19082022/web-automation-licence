@@ -510,3 +510,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open singgahsini in footer
     And tenant set active page to 1
     Then user redirected to "https://singgahsini.id/"
+
+  @TEST_DOM-298 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
+  Scenario Outline: [WEB Tenant][Register] error message "Penulisan alamat email salah"
+    Given user go to mamikos homepage
+    When user want to register as tenant
+    And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "<Email>", "Password123", " "
+    Then user will see that the text "<Error Message>" is displayed
+    Examples:
+      | Email             | Error Message                                  |
+      | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
+      | draft@xyz.com.net | Mohon masukkan email yang valid                |
