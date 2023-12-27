@@ -608,3 +608,13 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user fills ketik ulang password "qwerty123"
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
+
+  @TEST_DOM-282 @Automated @DOM3 @web-covered
+  Scenario: [OD Revamp][Event Banner] Event banner redirection
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081328787342 | Perempuan |
+    And owner go to event banner section
+    And owner click on banner on dari mamikos section
+    Then user redirected to "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/viewform"
