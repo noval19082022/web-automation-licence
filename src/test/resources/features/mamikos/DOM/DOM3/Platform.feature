@@ -594,3 +594,17 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user fills ketik ulang password "qwerty111"
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
+
+  @TEST_DOM-384 @Automated @web-covered
+  Scenario: [Tenant][Pengaturan page ] Restore Ubah password valid
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878412 | 083311231113 | qwerty111 |
+    And user navigate to kost saya page
+    And user clicks on pengaturan button
+    And user fills password lama "qwerty111"
+    And user fills password baru "qwerty123"
+    And user fills ketik ulang password "qwerty123"
+    And user clicks on simpan password button
+    Then user see successfully changed password "Password berhasil diubah"
