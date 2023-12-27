@@ -637,3 +637,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
+
+  @TEST_DOM-276 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  Scenario Outline: [Tenant][Password - Reg tenant]passowrd with symbol&numeric
+    Given user go to mamikos homepage
+    When user want to register as tenant
+    And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "maman@gmail.com", "<Password>", " "
+    Then user verify password more than 8 characters
+    Examples:
+      | Password   |
+      | 12345!@#$% |
+      | Perempuan1 |
