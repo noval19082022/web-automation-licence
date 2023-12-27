@@ -217,4 +217,14 @@ public class HomepageSteps {
     public void userWantToVisitCariKostListPageFromAdsDropdown() {
         home.visitCariKosttListPage();
     }
+
+    @And("user open blog mamikos in footer")
+    public void userOpenBlogMamikosInFooter() {
+        home.clickOnBlogMamikos();
+    }
+
+    @And("user open sewa kost untuk perusahaan in footer")
+    public void userOpenSewaKostUntukPerusahaanInFooter() {
+        home.clickOnSewaKostUntukPerusahaan();
+    }
 }

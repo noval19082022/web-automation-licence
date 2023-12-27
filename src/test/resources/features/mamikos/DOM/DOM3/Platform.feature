@@ -404,3 +404,67 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open facebook in footer
     And tenant set active page to 1
     Then user redirected to "https://www.facebook.com/mamikosapp"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open tentang kami in footer
+    And tenant set active page to 1
+    Then user redirected to "https://mamikos.com/tentang-kami"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open job mamikos in footer
+    And tenant set active page to 1
+    Then user redirected to "https://mamikos.com/career"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open promosikan kost anda in footer
+    And tenant set active page to 1
+    Then user redirected to "https://mamikos.com/mamiads"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open pusat bantuan in footer
+    And tenant set active page to 1
+    Then user redirected to "https://help.mamikos.com/"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open blog mamikos in footer
+    And tenant set active page to 1
+    Then user redirected to "https://mamikos.com/info/"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open sewa kost untuk perusahaan in footer
+    And tenant set active page to 1
+    Then user redirected to "https://mamikos.com/info/mamikos-corporate-accommodation/"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open kebijakan privasi in footer
+    And tenant set active page to 1
+    Then user redirected to "https://help.mamikos.com/post/kebijakan-privasi-mamikos"
+
+  @TEST_DOM-318 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open syarat dan ketentuan in footer
+    And tenant set active page to 1
+    Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
