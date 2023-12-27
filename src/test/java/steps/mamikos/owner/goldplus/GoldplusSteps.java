@@ -1,6 +1,7 @@
 package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -573,4 +574,15 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
     }
 
+    @When("owner navigate to list package goldplus 2")
+    public void owner_navigate_to_list_package_goldplus_2(){
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_2, 30000.0, LoadState.LOAD);
+        System.out.println(playwright.getPageUrl());
+    }
+
+    @When("owner navigate to list package goldplus 1")
+    public void owner_navigate_to_list_package_goldplus_1(){
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
+        System.out.println(playwright.getPageUrl());
+    }
 }
