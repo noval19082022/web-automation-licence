@@ -73,4 +73,9 @@ public class LandingPageSteps {
     public void adminOpenGenderFilterOnLanding() {
         landing.clickOnGenderFilter();
     }
+
+    @And("user clicks on Fitur Unggulan on the header on enaknyangekos page")
+    public void userClicksOnFiturUnggulanOnTheHeaderOnEnaknyangekosPage() {
+        landing.clickOnFiturUnggulan();
+    }
 }

@@ -43,6 +43,7 @@ public class KostLandingAreaPO {
     private Locator mixGenderFilter;
 
     //----- EnaknyaNgekost LandingPage---
+    private Locator fiturUnggulanBtn;
     private Locator mulaiCariKostBtn;
     private Locator openTheVideoThumbnail;
     private Locator playVideoBtn;
@@ -81,6 +82,7 @@ public class KostLandingAreaPO {
         this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.mixGenderFilter = page.getByText("Campur").first();
         this.sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya mengerti"));
+        this.fiturUnggulanBtn = page.getByText("Fitur Unggulan");
         this.mulaiCariKostBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mulai cari kos").setExact(true));
         this.openTheVideoThumbnail = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("video-glyph"));
         this.playVideoBtn = page.locator("#youtube-video-container");
@@ -422,5 +424,12 @@ public class KostLandingAreaPO {
      */
     public void clickOnGenderFilter() {
         playwright.clickOn(filterGender);
+    }
+
+    /**
+     * click on fitur unggulan on the header on enaknya ngekos page
+     */
+    public void clickOnFiturUnggulan() {
+        playwright.clickOn(fiturUnggulanBtn);
     }
 }

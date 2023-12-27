@@ -559,3 +559,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user click booking kos button
     Then user redirected to "/booking"
+
+  @TEST_DOM-293 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Fitur Unggulan
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user clicks on Fitur Unggulan on the header on enaknyangekos page
+    Then user will see that the text "Fitur-fitur yang kamu pakai buat #EnaknyaNgekos" is displayed
