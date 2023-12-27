@@ -388,3 +388,12 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open instagram in footer
     And tenant set active page to 1
     Then user redirected to "https://www.instagram.com/mamikosapp"
+
+  @TEST_DOM-321 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open twitter in footer
+    And tenant set active page to 1
+    Then user redirected to "https://twitter.com/mamikosapp"
+
