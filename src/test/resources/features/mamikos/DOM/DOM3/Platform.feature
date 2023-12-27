@@ -573,3 +573,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user want to register as tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara", "666", "email@gmail.com", "Password123", " "
     Then user will see that the text "Nomor handphone harus diawali dengan 08." is displayed
+
+  @TEST_DOM-290 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Produk dan Layanan
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user clicks on Product dan layanan on the header on enaknyangekos page
+    Then user will see that the text "Kenapa #EnaknyaNgekos?" is displayed

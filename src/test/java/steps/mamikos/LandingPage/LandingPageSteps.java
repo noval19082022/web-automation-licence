@@ -78,4 +78,9 @@ public class LandingPageSteps {
     public void userClicksOnFiturUnggulanOnTheHeaderOnEnaknyangekosPage() {
         landing.clickOnFiturUnggulan();
     }
+
+    @And("user clicks on Product dan layanan on the header on enaknyangekos page")
+    public void userClicksOnProductDanLayananOnTheHeaderOnEnaknyangekosPage() {
+        landing.clickOnProductDanLayanan();
+    }
 }

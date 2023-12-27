@@ -432,4 +432,11 @@ public class KostLandingAreaPO {
     public void clickOnFiturUnggulan() {
         playwright.clickOn(fiturUnggulanBtn);
     }
+
+    /**
+     * click on product dan layanan on the header on enaknya ngekos page
+     */
+    public void clickOnProductDanLayanan() {
+        playwright.clickOnText("Produk dan Layanan ");
+    }
 }
