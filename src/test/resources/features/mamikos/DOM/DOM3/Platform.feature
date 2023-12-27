@@ -477,3 +477,17 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    When user click see detail on first promo
 #    Then detail promo page opened with correct title
 #    And user see button booking now
+
+  @TEST_DOM-312 @Automated @DOM3 @web-covered
+  Scenario: [Test][Admin][SanJunipero] User able to enable certain landing page
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/sanjunipero/parent"
+    And admin bangkerupux deactive first sanjunipero on sanjunipero page
+    Then admin bangkerupux will see last updated sanjunipero is current time
+    And admin bangkerupux activate first sanjunipero on sanjunipero page
+    Then admin bangkerupux will see last updated sanjunipero is current time
+    And admin bangkerupux preview action kost on sanjunipero page
+    Then admin can see kost list is more than 0
