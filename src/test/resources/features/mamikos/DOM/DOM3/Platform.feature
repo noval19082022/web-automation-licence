@@ -552,3 +552,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user will see that the text "Semua Tipe Kos" is displayed
     Then user will see that the text "Semua Area" is displayed
     Then user will see that the text "Paling direkomendasikan" is displayed
+
+  @TEST_DOM-292 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Booking Kos
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user click booking kos button
+    Then user redirected to "/booking"
