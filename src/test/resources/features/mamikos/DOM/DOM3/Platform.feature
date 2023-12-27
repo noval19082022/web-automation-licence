@@ -656,3 +656,17 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user clicks on Mulai Cari Kos Button on enaknyangekos page
     And tenant set active page to 1
     Then user redirected to "/kos/andalan"
+
+  @TEST_DOM-273 @TESTSET_UG-6249 @TESTSET_PF-1400 @TESTSET_PF-1956 @Automated @DOM3 @web-covered
+  Scenario: [OD Revamp][Event Banner] Event banner same order priority
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/event"
+    And admin bangkerupux set event banner "1" to order "19"
+    And admin bangkerupux updated the event banner
+    Then user will see that the text "Success! Event Updated" is displayed
+    And admin bangkerupux set event banner "2" to order "19"
+    And admin bangkerupux updated the event banner
+    Then user will see that the text "Success! Event Updated" is displayed
