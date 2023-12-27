@@ -12,6 +12,7 @@ public class KostLandingAreaPO {
     Page page;
     PlaywrightHelpers playwright;
     private Locator headingResultText;
+    private Locator filterGender;
     private Locator filterHarga;
     private Locator filterInputMinimalPrice;
     private Locator filterInputMaximumPrice;
@@ -53,6 +54,7 @@ public class KostLandingAreaPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         headingResultText = page.getByRole(AriaRole.HEADING).first();
+        filterGender = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Semua Tipe Kos"));
         filterHarga = page.getByTestId("filter-price").getByText("Harga");
         filterInputMinimalPrice = page.getByRole(AriaRole.TEXTBOX).first();
         filterInputMaximumPrice = page.getByRole(AriaRole.TEXTBOX).nth(1);
@@ -413,5 +415,12 @@ public class KostLandingAreaPO {
      */
     public void mulaiCariKostBtnIsDisplayed() {
         playwright.assertVisible(mulaiCariKostBtn);
+    }
+
+    /**
+     * open gender filter
+     */
+    public void clickOnGenderFilter() {
+        playwright.clickOn(filterGender);
     }
 }

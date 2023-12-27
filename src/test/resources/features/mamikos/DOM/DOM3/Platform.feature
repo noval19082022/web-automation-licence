@@ -527,3 +527,16 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     Then user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos
+
+  @TEST_DOM-296 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  Scenario: [Test][Filter][Landing Page][SanJunipero] Check on Gender filter data kost in the landing page
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin visit page "/admin/sanjunipero/parent"
+    And admin bangkerupux preview action kost on sanjunipero page
+    And admin open gender filter on landing
+    Then user will see that the text "Campur" is displayed
+    Then user will see that the text "Putra" is displayed
+    Then user will see that the text "Putri" is displayed

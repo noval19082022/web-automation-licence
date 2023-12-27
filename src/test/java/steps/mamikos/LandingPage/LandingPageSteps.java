@@ -68,4 +68,9 @@ public class LandingPageSteps {
         landing.scroolIntoSectionKenapaEnaknyaNgekos();
         landing.mulaiCariKostBtnIsDisplayed();
     }
+
+    @And("user/tenant/admin open gender filter on landing")
+    public void adminOpenGenderFilterOnLanding() {
+        landing.clickOnGenderFilter();
+    }
 }
