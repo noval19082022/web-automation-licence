@@ -429,7 +429,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/mamiads"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_DOM-318 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -502,3 +502,4 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    Then previous promo page will be opened
 #    When user click page index "2"
 #    Then promo page "2" will be opened
+
