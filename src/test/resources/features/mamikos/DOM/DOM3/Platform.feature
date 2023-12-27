@@ -566,3 +566,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Fitur Unggulan on the header on enaknyangekos page
     Then user will see that the text "Fitur-fitur yang kamu pakai buat #EnaknyaNgekos" is displayed
+
+  @TEST_DOM-291 @TESTSET_PF-1393 @TESTSET_PF-1951 @Automated @DOM3 @web-covered
+  Scenario: [WEB Tenant][Register] error message "Nomor handphone harus diawali dengan 08."
+    Given user go to mamikos homepage
+    When user want to register as tenant
+    And user fills out registration form without click register "Rheza Haryo Hanggara", "666", "email@gmail.com", "Password123", " "
+    Then user will see that the text "Nomor handphone harus diawali dengan 08." is displayed
