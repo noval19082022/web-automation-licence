@@ -491,3 +491,14 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then admin bangkerupux will see last updated sanjunipero is current time
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
+
+  @TEST_DOM-314 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Promo page] Check pagination in promo page
+    Given user navigates to promo mamikos
+  ## this step is comment because page https://promo.mamikos.com/ is empty
+#    When user click next page button
+#    Then next promo page will be opened
+#    When user click previous page button
+#    Then previous promo page will be opened
+#    When user click page index "2"
+#    Then promo page "2" will be opened
