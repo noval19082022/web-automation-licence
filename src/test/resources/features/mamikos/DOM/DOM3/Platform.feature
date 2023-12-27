@@ -503,3 +503,10 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    When user click page index "2"
 #    Then promo page "2" will be opened
 
+  @TEST_DOM-302 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: View Content - click Cari kos Singgahsini
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open singgahsini in footer
+    And tenant set active page to 1
+    Then user redirected to "https://singgahsini.id/"

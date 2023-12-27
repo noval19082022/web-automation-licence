@@ -74,6 +74,7 @@ public class HomePO {
     private Locator promosikanIklanAndaButton;
     private Locator blogMamikosBtn;
     private Locator sewaKostUntukPerusahaan;
+    private Locator singgahSiniFooter;
     private Locator pusatBantuanButton;
     private Locator emailFooter;
     private Locator formBantuanTitle;
@@ -150,6 +151,7 @@ public class HomePO {
         this.promosikanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Promosikan Kost Anda"));
         this.blogMamikosBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Blog Mamikos"));
         this.sewaKostUntukPerusahaan = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Sewa Kos untuk Perusahaan"));
+        this.singgahSiniFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Singgahsini").setExact(true));
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
@@ -824,5 +826,12 @@ public class HomePO {
      */
     public void clickOnSewaKostUntukPerusahaan() {
         playwright.clickOn(sewaKostUntukPerusahaan);
+    }
+
+    /**
+     * clickOn Singgahsini on the footer
+     */
+    public void clickOnSinggahSiniOnFooter() {
+        playwright.clickOn(singgahSiniFooter);
     }
 }

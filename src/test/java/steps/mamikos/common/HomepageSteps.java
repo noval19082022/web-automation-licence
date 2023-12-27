@@ -227,4 +227,9 @@ public class HomepageSteps {
     public void userOpenSewaKostUntukPerusahaanInFooter() {
         home.clickOnSewaKostUntukPerusahaan();
     }
+
+    @And("user open singgahsini in footer")
+    public void userOpenSinggahsiniInFooter() {
+        home.clickOnSinggahSiniOnFooter();
+    }
 }
