@@ -42,10 +42,12 @@ public class KostLandingAreaPO {
     private Locator mixGenderFilter;
 
     //----- EnaknyaNgekost LandingPage---
+    private Locator mulaiCariKostBtn;
     private Locator openTheVideoThumbnail;
     private Locator playVideoBtn;
     private Locator videoIsOccur;
     private Locator videoIsPlayed;
+    private Locator enaknyaNgekostBenefitsSection;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -77,10 +79,12 @@ public class KostLandingAreaPO {
         this.recommendationListTitle = page.locator("//*[@id='app']/div/h1");
         this.mixGenderFilter = page.getByText("Campur").first();
         this.sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya mengerti"));
+        this.mulaiCariKostBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mulai cari kos").setExact(true));
         this.openTheVideoThumbnail = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("video-glyph"));
         this.playVideoBtn = page.locator("#youtube-video-container");
         this.videoIsOccur = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator("video");
         this.videoIsPlayed = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator(".ytp-timed-markers-container");
+        this.enaknyaNgekostBenefitsSection = page.locator("#enaknyangekosBenefits");
     }
 
     /**
@@ -394,5 +398,20 @@ public class KostLandingAreaPO {
         playwright.waitTillPageLoaded();
         playwright.assertVisible(videoIsOccur);
         playwright.assertVisible(videoIsPlayed);
+    }
+
+    /**
+     * scrool into Kenapa #EnaknyaNgekos? section on https://jambu.kerupux.com/enaknyangekos
+     */
+    public void scroolIntoSectionKenapaEnaknyaNgekos() {
+        playwright.pageScrollInView(enaknyaNgekostBenefitsSection);
+    }
+
+    /**
+     * check if Mulai Cari Kost Btn on the header is displayed
+     * @return
+     */
+    public void mulaiCariKostBtnIsDisplayed() {
+        playwright.assertVisible(mulaiCariKostBtn);
     }
 }

@@ -62,4 +62,10 @@ public class LandingPageSteps {
     public void userClickOnGooglePlayOnTheFooter() {
         home.clickOnGooglePlayFooterLink();
     }
+
+    @Then("user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos")
+    public void userVerifySeeButtonMulaiCariKosWhenScrollIntoKenapaEnaknyaNgekos() {
+        landing.scroolIntoSectionKenapaEnaknyaNgekos();
+        landing.mulaiCariKostBtnIsDisplayed();
+    }
 }

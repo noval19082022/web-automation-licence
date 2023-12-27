@@ -521,3 +521,9 @@ Feature: [Test-Execution][DOM] Web - Platform
       | Email             | Error Message                                  |
       | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
       | draft@xyz.com.net | Mohon masukkan email yang valid                |
+
+  @TEST_DOM-297 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - Scroll Page
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    Then user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos
