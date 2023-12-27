@@ -627,3 +627,13 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 081328787342 | Perempuan |
     And owner go to event banner section
     Then user will see that the text "Dari Mamikos" is displayed
+
+  @TEST_DOM-277 @Automated @DOM3 @web-covered
+  Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag | kost name prod               |
+      | Desta tobello  | Kos DC BAR Automation Tipe A |
+    And user want to reached map section and see lihat peta button
+    And user want to see more detail kost location
+    Then user will see login pop up
