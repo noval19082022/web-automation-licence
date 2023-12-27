@@ -380,3 +380,11 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner open notification icon
     And owner wants to see all notification
     Then user redirected to "/ownerpage/notification"
+
+  @TEST_DOM-322 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open instagram in footer
+    And tenant set active page to 1
+    Then user redirected to "https://www.instagram.com/mamikosapp"
