@@ -492,7 +492,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
 
-  @TEST_DOM-314 @Automated @DOM3 @web-covered
+  @TEST_DOM-314 @TEST_DOM-313 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Promo page] Check pagination in promo page
     Given user navigates to promo mamikos
   ## this step is comment because page https://promo.mamikos.com/ is empty
