@@ -618,3 +618,12 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner go to event banner section
     And owner click on banner on dari mamikos section
     Then user redirected to "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/viewform"
+
+  @TEST_DOM-279 @Automated @DOM3 @web-covered
+  Scenario: [OD Revamp][Event Banner] Event banner check content
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081328787342 | Perempuan |
+    And owner go to event banner section
+    Then user will see that the text "Dari Mamikos" is displayed
