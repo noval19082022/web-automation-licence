@@ -580,3 +580,17 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Product dan layanan on the header on enaknyangekos page
     Then user will see that the text "Kenapa #EnaknyaNgekos?" is displayed
+
+  @TEST_DOM-271 @TESTSET_UG-4895 @TESTSET_PF-1792 @Automated @web-covered
+  Scenario: [Tenant][Pengaturan page ]Ubah password valid
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878412 | 083311231113 | qwerty123 |
+    And user navigate to kost saya page
+    And user clicks on pengaturan button
+    And user fills password lama "qwerty123"
+    And user fills password baru "qwerty111"
+    And user fills ketik ulang password "qwerty111"
+    And user clicks on simpan password button
+    Then user see successfully changed password "Password berhasil diubah"
