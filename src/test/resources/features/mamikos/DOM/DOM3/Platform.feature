@@ -397,3 +397,10 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://twitter.com/mamikosapp"
 
+  @TEST_DOM-319 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user open facebook in footer
+    And tenant set active page to 1
+    Then user redirected to "https://www.facebook.com/mamikosapp"
