@@ -648,3 +648,11 @@ Feature: [Test-Execution][DOM] Web - Platform
       | Password   |
       | 12345!@#$% |
       | Perempuan1 |
+
+  @TEST_DOM-274 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - click Mulai Cari Kos
+    Given user visit page "/enaknyangekos"
+    When user is on the LandingPage EnaknyaNgekos
+    And user clicks on Mulai Cari Kos Button on enaknyangekos page
+    And tenant set active page to 1
+    Then user redirected to "/kos/andalan"

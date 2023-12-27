@@ -439,4 +439,11 @@ public class KostLandingAreaPO {
     public void clickOnProductDanLayanan() {
         playwright.clickOnText("Produk dan Layanan ");
     }
+
+    /**
+     * click on mulai cari kost on enaknya ngekos page
+     */
+    public void cickOnMulaiCariKosBtn() {
+        playwright.clickOn(mulaiCariKostBtn);
+    }
 }
