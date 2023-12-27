@@ -468,3 +468,12 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user open syarat dan ketentuan in footer
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
+
+  @TEST_DOM-316 @Automated @DOM3 @web-covered
+  Scenario: [Tenant][Promo page] User can open promo detail
+    Given user navigates to promo mamikos
+  ## this step is comment because page https://promo.mamikos.com/ is empty
+#    And user see the promo title in first promo
+#    When user click see detail on first promo
+#    Then detail promo page opened with correct title
+#    And user see button booking now
