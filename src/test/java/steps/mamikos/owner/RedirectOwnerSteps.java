@@ -53,4 +53,10 @@ public class RedirectOwnerSteps {
         playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
     }
+
+    @Then("owner redirect to select package GP2 page")
+    public void owner_redirect_to_select_package_gp2_page() {
+        playwright.waitTillPageLoaded();
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_PACKAGE2);
+    }
 }
