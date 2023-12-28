@@ -18,6 +18,8 @@ import pageobject.tenant.profile.RiwayatBookingPO;
 import java.util.List;
 import java.util.Map;
 
+import static org.testng.Assert.assertFalse;
+
 public class TenantBookingSteps {
     Page page = ActiveContext.getActivePage();
     HomePO homePO = new HomePO(page);
@@ -53,7 +55,9 @@ public class TenantBookingSteps {
 
     @When("tenant booking kost {string} {string}")
     public void tenantBookingKost(String boardingDate, String paymentPeriod){
-        kostDetail.dismissFTUE();
+        if (kostDetail.isBookingFtueVisible()) {
+            kostDetail.dismissFTUE();
+        }
         kostDetail.selectBookingDate(boardingDate);
         kostDetail.selectBookingPeriod(paymentPeriod);
         bookingForm = kostDetail.clickOnAjukanSewaButton();
@@ -418,5 +422,16 @@ public class TenantBookingSteps {
     @Then("tenant can succes waiting list submitted with {string}")
     public void tenantCanSeeSuccessWaitingListSubmitedWithX(String text){
         Assert.assertTrue(kostDetail.waitingListInformationText(text));
+    }
+
+    @Then("tenant cannot see {string} as kost name and kost location")
+    public void tenantCannotSeeAsKostNameAndKostLocation(String kosName) {
+        assertFalse(kostDetail.isKostNameAndLocationAbsence(kosName), "Kost is present!");
+    }
+
+    @Then("tenant verify the confirmation cancel booking pop up")
+    public void tenantVerifyTheConfirmationCancelBookingPopUp() {
+        Assert.assertTrue(kostDetail.getTextOnPopUp("Pengajuan sewa belum terkirim"));
+        Assert.assertTrue(kostDetail.getTextOnPopUp("Jika tidak lanjut, kamu tetap bisa cek pengajuan kos ini di Draft"));
     }
 }

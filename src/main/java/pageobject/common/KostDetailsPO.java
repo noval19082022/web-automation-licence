@@ -1,6 +1,5 @@
 package pageobject.common;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -66,6 +65,8 @@ public class KostDetailsPO {
     Locator cancelBookingBtn;
     Locator reasonOption;
     Locator yesCancelBookingBtn;
+    Locator nextSlideFtue;
+
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -241,6 +242,7 @@ public class KostDetailsPO {
     //-------------peraturan kos disini------------//
     private Locator peraturanDisinitext;
     private Locator peraturanBawaAnak;
+
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -1731,9 +1733,25 @@ public class KostDetailsPO {
      * Click on delete draft button
      */
     public void clickDeleteButtonOnTabOneDraftBooking() {
-        deleteButtonOnTabOneDraftBooking.click();
-        hapusDraft.click();
+        playwright.waitTillPageLoaded();
+        int i;
+        for (i=0; i<=10; i++){
+            if (isDeleteDraftBtnVisible()){
+                playwright.clickOn(deleteButtonOnTabOneDraftBooking);
+                playwright.clickOn(hapusDraft);
+            }
+        }
     }
+
+    /**
+     * Verify the delete draft button is visible or not
+     * @return boolean, true if button visible and false if button not visible
+     *
+     */
+    private boolean isDeleteDraftBtnVisible() {
+        return playwright.waitTillLocatorIsVisible(deleteButtonOnTabOneDraftBooking, 3000.0);
+    }
+
     /**
      * Click on mau coba dong section button
      */
@@ -2041,5 +2059,33 @@ public class KostDetailsPO {
     public boolean waitingListInformationText(String text){
         waitingListSubmitText = page.locator("#priceCard").getByText(""+text+"");
         return waitingListSubmitText.isVisible();
+    }
+
+    /**
+     * Verify the kos name and location
+     * @param kosName
+     * @return true if kos name displayed and false if kos name not displayed
+     */
+    public boolean isKostNameAndLocationAbsence(String kosName) {
+        playwright.hardWait(2000.0);
+        return playwright.isTextDisplayed(kosName, 3000.0);
+    }
+
+    /**
+     * Verify text on pop up
+     * @param text
+     * @return true if text displayed and false if text not displayed
+     */
+    public boolean getTextOnPopUp(String text) {
+        return playwright.isTextDisplayed(text);
+    }
+
+    /**
+     * Verify the FTUE booking on kos detail visible or not
+     * @return true if ftue displayed and false if ftue not displayed
+     */
+    public boolean isBookingFtueVisible() {
+        playwright.pageScrollToDown(300);
+        return playwright.isLocatorVisibleAfterLoad(ftueSlider, 3000.0);
     }
 }

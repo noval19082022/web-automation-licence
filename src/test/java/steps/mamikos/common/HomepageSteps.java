@@ -207,4 +207,9 @@ public class HomepageSteps {
     public void userWantToVisitCariKostListPageFromAdsDropdown() {
         home.visitCariKosttListPage();
     }
+
+    @And("user check promo ngebut label")
+    public void userCheckPromoNgebutLabel() {
+        Assert.assertTrue(home.promoNgebutHeadingIsVisible(), "Promo ngebut heading is not visible");
+    }
 }

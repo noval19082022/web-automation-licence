@@ -397,7 +397,7 @@ Feature: BnB feature
     And search chat in chatlist "Chat Butuh Respon Pengajuan Sewa Label"
     Then owner can see label with "Butuh respon pengajuan sewa"
 
-  @addAndMarkRoomKosGP @BNB-2245 @continue @upikBnB
+  @addAndMarkRoomKosGP @BNB-2245 @continue
   #addRoom.feature
   Scenario: check when owner add and mark room at kos GP
     Given user go to mamikos homepage
@@ -414,7 +414,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then verify will be appears and the room is untick again
 
-  @markRoomAsOccupied @markRoom @TEST_BBM-868 @upikBnB
+  @markRoomAsOccupied @markRoom @TEST_BBM-868
   #markRoom.feature
   Scenario: Mark BBK And Gold Plus Room As Occupied (BBM-868)
     Given owner click back on added room pop up
@@ -425,7 +425,7 @@ Feature: BnB feature
     When owner click on Add Renter button
     Then owner redirected to Input Renter's Information form with valid kost name
 
-  @occupancyAndBilling @markRoom @TEST_BBM-867 @continue @upikBnB
+  @occupancyAndBilling @markRoom @TEST_BBM-867 @continue
   #markRoom.feature
   Scenario: Mark BBK And Non Gold Plus Room As Occupied (BBM-867)
     Given user go to mamikos homepage
@@ -445,7 +445,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_BBM-869 @upikBnB
+  @updateRoomToast @markRoom @TEST_BBM-869
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -461,7 +461,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
 
-  @TEST_BBM-928 @continue @upikBnB
+  @TEST_BBM-928 @continue
   #addTenant.feature
   Scenario: Add Tenant For Full Room (BBM-928)
     Given user go to mamikos homepage
@@ -476,7 +476,7 @@ Feature: BnB feature
     Then owner redirected to update room page
     And owner can not sees full room pop up restriction
 
-  @TEST_BBM-927 @upikBnB
+  @TEST_BBM-927
   #addTenant.feature
   Scenario: Add Tenant For Different Gender (BBM-927)
     Given owner navigates to owner dashboard
@@ -487,3 +487,51 @@ Feature: BnB feature
     And owner choose first available room and clicks on add renter button
     And owner click button "Tambah Penyewa" on form informasi penyewa
     Then owner can sees different gender restriction pop-up
+
+  @TEST_BBM-905 @automated @kost-saya-revamp-phase1 @web @xray-update
+  Scenario: [Homepage ][Kost Saya Section ]Check Draft booking on homepage when have 1 draft for kost Promo Ngebut (BBM-905)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000340 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag      |
+      | Kost Garden Abepura |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "tomorrow"
+    And user click back button
+    Then tenant verify the confirmation cancel booking pop up
+    And user click Save Draft Button
+    When user go to mamikos homepage
+    And user check promo ngebut label
+    Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
+
+  @TEST_BBM-887 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  Scenario: [Homepage ][Kost Saya Section ]Check Kos saya section when Menunggu konfirmasi Total booking = 1 show section for Kost Promo Ngebut
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000341 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag      |
+      | Kost Garden Abepura |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost "today" "Per Bulan"
+    Then tenant should success booking kost
+    When user go to mamikos homepage
+    Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
+    And tenant navigate to riwayat and draf booking
+    And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
+    Then tenant navigate to riwayat and draf booking
