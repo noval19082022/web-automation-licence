@@ -163,9 +163,19 @@ public class HomepageSteps {
         home.clickPopularAreaOnJakarta();
     }
 
+    @When("user open Popular Area in Yogyakarta")
+    public void userOpenPopularAreaInYogyakarta() {
+        home.clickPopularAreaOnYogyakarta();
+    }
+
     @When("user open Around University in UGM")
     public void userOpenAroundUniversityInUGM() {
         home.clickAroundUGM();
+    }
+
+    @When("user open Around University in UNDIP")
+    public void userOpenAroundUniversityInUNDIP() {
+        home.clickAroundUNDIP();
     }
 
     @Then("user can see Lihat pengajuan sewa lainnya text")
@@ -206,5 +216,20 @@ public class HomepageSteps {
     @And("user want to visit cari kost list page from ads Dropdown")
     public void userWantToVisitCariKostListPageFromAdsDropdown() {
         home.visitCariKosttListPage();
+    }
+
+    @And("user open blog mamikos in footer")
+    public void userOpenBlogMamikosInFooter() {
+        home.clickOnBlogMamikos();
+    }
+
+    @And("user open sewa kost untuk perusahaan in footer")
+    public void userOpenSewaKostUntukPerusahaanInFooter() {
+        home.clickOnSewaKostUntukPerusahaan();
+    }
+
+    @And("user open singgahsini in footer")
+    public void userOpenSinggahsiniInFooter() {
+        home.clickOnSinggahSiniOnFooter();
     }
 }

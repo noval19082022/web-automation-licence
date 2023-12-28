@@ -78,6 +78,8 @@ public class OwnerDashboardPO {
     Locator closeIconOnNotBookingPopup;
     Locator daftarPenyewMenu;
     Locator ubahPeraturan;
+    Locator dariMamikosSection;
+    Locator dariMamikosBanner;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -149,6 +151,8 @@ public class OwnerDashboardPO {
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
+        dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
+        dariMamikosBanner = page.locator(".image > a").first();
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
     }
 
@@ -767,5 +771,13 @@ public class OwnerDashboardPO {
         if (ubahPeraturan.isVisible()) {
             playwright.clickOn(ubahPeraturan);
         }
+    }
+
+    public void scrollIntoDariMamikosSection() {
+        playwright.pageScrollInView(dariMamikosSection);
+    }
+
+    public void clickOnBannerDariMamikosSection() {
+        playwright.clickOn(dariMamikosBanner);
     }
 }
