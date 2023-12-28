@@ -1734,13 +1734,14 @@ public class KostDetailsPO {
      */
     public void clickDeleteButtonOnTabOneDraftBooking() {
         playwright.waitTillPageLoaded();
-        int i;
-        for (i=0; i<=10; i++){
-            if (isDeleteDraftBtnVisible()){
+
+            int i = 0;
+            while (isDeleteDraftBtnVisible()) {
                 playwright.clickOn(deleteButtonOnTabOneDraftBooking);
                 playwright.clickOn(hapusDraft);
+                page.waitForTimeout(3000);
+                i++;
             }
-        }
     }
 
     /**

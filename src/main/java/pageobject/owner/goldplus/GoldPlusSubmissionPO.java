@@ -11,7 +11,7 @@ public class GoldPlusSubmissionPO {
     private Locator pilihPaketButton;
     private Locator bayarSekarangButton;
     private Locator gpSatuFirstRadioButton;
-    private Locator selectedGpPackage;
+    private Locator selectedFavoritGpPackage;
     private Locator selectedGpPeriode;
 
     public GoldPlusSubmissionPO(Page page) {
@@ -20,7 +20,7 @@ public class GoldPlusSubmissionPO {
         pilihPaketButton = playwright.getButtonBySetName("Pilih");
         bayarSekarangButton = playwright.getButtonBySetName("Bayar Sekarang Rp");
         gpSatuFirstRadioButton = page.locator(".bg-c-radio__icon").first();
-        selectedGpPackage = page.locator(".goldplus__package--selected");
+        selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");
         selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
     }
 
@@ -48,11 +48,11 @@ public class GoldPlusSubmissionPO {
     }
 
     /**
-     * Check if gp radio selected
-     * @return boolean true if gp radio selected, otherwise false
+     * Check if favorit gp radio selected
+     * @return boolean true if favorit gp radio selected, otherwise false
      */
-    public boolean isGpRadioSelected() {
-        return playwright.waitTillLocatorIsVisible(selectedGpPackage.first());
+    public boolean isFavoritGpRadioSelected() {
+        return playwright.waitTillLocatorIsVisible(selectedFavoritGpPackage);
     }
 
     /**

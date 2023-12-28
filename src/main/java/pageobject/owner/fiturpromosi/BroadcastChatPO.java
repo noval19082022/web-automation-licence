@@ -1,4 +1,4 @@
-package pageobject.owner.chat;
+package pageobject.owner.fiturpromosi;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -276,7 +276,6 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isBroadcastChatPackageContentVisible() {
-        playwright.waitFor(broadcastChatPackageContent);
         return playwright.waitTillLocatorIsVisible(broadcastChatPackageContent);
     }
 

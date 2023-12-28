@@ -14,8 +14,8 @@ Scenario: [Admin][GP Contract]User want to Search GoldPlus Contract
    And admin wants to reset form search
 
    #Owner Want To Search GP Contract Search by owner name
-   When admin search contract based on "Owner Name" is "Rega cek owner baru"
-   Then admin verify owner name is "Rega cek owner baru " with goldplus package "GoldPlus 1 4 Bulan" and status contract is "terminated"
+   When admin search contract based on "Owner Name" is "Automation Limo GP Contract "
+   Then admin verify owner name is "Automation Limo GP Contract " with goldplus package "GoldPlus 1 4 Bulan" and status contract is "terminated"
    And admin wants to reset form search
 
   #Owner Want To Search GP Contract Filter by GP Packages
@@ -46,4 +46,4 @@ Scenario: [Admin][GP Contract]User want to Search GoldPlus Contract
     When admin search contract based on phone number "087662369014"
     And admin wants to see detail contract
     Then admin can see page contract order from phone number "087662369014"
-    And admin can see list "Pembayaran GoldPlus 1 Activation" with status "expired" , invoice status is "expired"
+    And admin can see list "Pembayaran GoldPlus 1 Activation" with status "paid" , invoice status is "processed"
