@@ -102,6 +102,18 @@ public class GoldplusSteps {
         }
     }
 
+    @Then("user verify list of Weekly Goldplus is appear")
+    public void user_verify_list_of_weekly_goldplus_is_appear(DataTable dataTable) {
+        playwright.hardWait(2000);
+        List<Map<String, String>> table = dataTable.asMaps();
+        int i=0;
+        for (Map<String, String> content : table) {
+            Assert.assertEquals(goldplus.listPeriod("periodGP",i).replaceAll("\\s", ""),content.get("periodGP").replaceAll("\\s", ""));
+            Assert.assertEquals(goldplus.listPeriod("actualPrice",i),content.get("price"));
+            i++;
+        }
+    }
+
     @Then("admin successfully sets favorite label to none")
     public void admin_successfully_sets_favorite_label_to_none() {
         goldplus.clickOnEditGP1Button();
@@ -580,12 +592,11 @@ public class GoldplusSteps {
     @When("owner navigate to list package goldplus 2")
     public void owner_navigate_to_list_package_goldplus_2(){
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_2, 30000.0, LoadState.LOAD);
-        System.out.println(playwright.getPageUrl());
     }
 
     @When("owner navigate to list package goldplus 1")
     public void owner_navigate_to_list_package_goldplus_1(){
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
         System.out.println(playwright.getPageUrl());
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
     }
 }
