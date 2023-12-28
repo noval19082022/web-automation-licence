@@ -596,7 +596,6 @@ public class GoldplusSteps {
 
     @When("owner navigate to list package goldplus 1")
     public void owner_navigate_to_list_package_goldplus_1(){
-        System.out.println(playwright.getPageUrl());
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
     }
 }
