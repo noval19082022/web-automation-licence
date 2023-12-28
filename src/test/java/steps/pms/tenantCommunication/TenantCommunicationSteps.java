@@ -179,5 +179,4 @@ public class TenantCommunicationSteps {
     public void user_click_track_status_chat_wa() {
         tenantCommunication.clickTrackStatusWAButton();
     }
-
 }
