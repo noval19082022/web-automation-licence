@@ -13,6 +13,7 @@ import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
+import pageobject.owner.TenantBackgroundCheckerPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
@@ -223,6 +224,7 @@ public class GoldplusSteps {
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
         chat.searchChatTenant(tenantName);
+        chat.dismissFTUETBC();
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 

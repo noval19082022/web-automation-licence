@@ -49,7 +49,7 @@ Feature: MamiAds Dashboard
       | kos jipyo           | naik               | on            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini terpakai Rp0                                          | Ya, Nonaktifkan | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Saldo Maksimal                                  |
       | Kos Upik 449 Tipe A | naik               | on            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp15.000 | Ya, Nonaktifkan | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                               |
 
-  @TEST_LIMO-312 @LIMO1-staging @continue
+  @TEST_LIMO-312 @LIMO1-staging @maDashboard @continue
   Scenario: Set full occupancy and make sure the wording if condition ON OFF
     Given user go to mamikos homepage
     When user login as owner:
@@ -72,16 +72,16 @@ Feature: MamiAds Dashboard
     And user verify the toggle iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "on"
     And user verify the wording iklan kamar penuh "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
 
-  @MA-5817 @continue
+  @MA-5817 @continue @maDashboard
   Scenario: OFF ads full occupancy
     When user click "on" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user click "Ya, Nonaktifkan" button on pop up switch toggle iklan
 
-  @MA-5819 @continue
+  @MA-5819 @continue @maDashboard
   Scenario: To make sure wording if ads full occupancy
     Then user verify the wording iklan kamar penuh "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
 
-  @MA-5820
+  @MA-5820 @maDashboard
   Scenario: Available room in property full occupancy
     When owner navigates to property saya kos
     And owner search kost "Kos Ranise Mamitest" on property saya page
@@ -93,7 +93,6 @@ Feature: MamiAds Dashboard
     And user navigates to mamiads dashboard
     Then user verify the wording iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
     When user click "off" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
-    And user click "Aktifkan" button on pop up switch toggle iklan
     And user click "Aktifkan" button on pop up switch toggle iklan
 
   @TEST_LIMO-317 @LIMO1-staging

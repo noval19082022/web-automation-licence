@@ -95,7 +95,7 @@ public class pointManagementSteps {
     public void userClickEditOnRoomGroup() {
         int roomGroupNumber = pointManagement.getRoomGroupNumber();
         for(int i=0;i<roomGroupNumber;i++){
-            if (pointManagement.getGroupText(i).contains("1002")) {
+            if (pointManagement.getGroupText(i).contains("1001")) {
                 pointManagement.clickOnEditRoomGroup(i + 1);
                 break;
             }

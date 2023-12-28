@@ -9,7 +9,7 @@ public class NaikkanIklanPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
-    private static String kostName;
+
     Locator selectFilter;
     Locator filterChoice;
     Locator quickAllocateTitle;
@@ -155,23 +155,6 @@ public class NaikkanIklanPO {
         }
     }
 
-    /**
-     * Set kos name owner from input user
-     * @params nameKos
-     *
-     */
-    public void setKosOwner(String kostName) {
-        NaikkanIklanPO.kostName = kostName;
-    }
-
-    /**
-     * Get Name Kos from input user
-     * @return kosName
-     *
-     */
-    public String getNameKos() {
-        return kostName;
-    }
 
     /**
      * Click on Ke MamiAds button

@@ -2,6 +2,7 @@ package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -72,7 +73,7 @@ public class NaikkanIklanSteps {
     @When("user cancel quick allocate the ads never allocate")
     public void user_cancel_quick_allocate_the_ads_never_allocate() throws InterruptedException {
        naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
-        Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Anggaran MamiAds untuk "+ naikkanIklanPO.getNameKos() +" akan diaktifkan.", "Title pop up doesn't match!");
+        Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Anggaran MamiAds untuk "+ Mamikos.getPropertyKosName() +" akan diaktifkan.", "Title pop up doesn't match!");
         naikkanIklanPO.clickOnKeMamiAdsButton();
         playwright.hardWait(3000);
         String actualUrl= playwright.getPageUrl();
@@ -104,6 +105,7 @@ public class NaikkanIklanSteps {
 
     @Then("verify redirect to mamiads dashboard")
     public void verify_redirect_to_mamiads_dashboard() throws InterruptedException {
+        playwright.hardWait(3000.0);
         home = new HomePO(ActiveContext.getActivePage());
         String actualUrl= home.getURL();
         Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
