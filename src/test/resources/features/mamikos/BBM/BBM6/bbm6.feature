@@ -535,3 +535,53 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
     Then tenant navigate to riwayat and draf booking
+
+  @TEST_BBM-968 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  Scenario: [Homepage ][Kost Saya Section ]Check Kos Saya on Homepage when have Draft booking = 1 (BBM-968)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 08100000616 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+    When user go to mamikos homepage
+    And user click Mau Coba Dong section at homepage
+    Then user will see kos saya is still empty
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                               |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "tomorrow"
+    And user click back button
+    Then tenant verify the confirmation cancel booking pop up
+    And user click Save Draft Button
+    And user go to mamikos homepage
+    And user check promo ngebut label
+    Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+
+  @TEST_BBM-882 @automated @kost-saya-revamp-phase1 @web @xray-update
+  Scenario: [Homepage ][Kost Saya Section ]Check homepage when have total waiting confirmation booking = 1 (BBM-882)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000339 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                               |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+    And tenant booking kost "today" "Per Bulan"
+    Then tenant should success booking kost
+    When user go to mamikos homepage
+    Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
+    And tenant navigate to riwayat and draf booking
+    And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
+    Then tenant navigate to riwayat and draf booking
