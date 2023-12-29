@@ -1,12 +1,18 @@
 @regression @LIMO2 @listing-monetization @LIMO2-staging
 Feature: GP Weekly
 
-  @TEST_LIMO-3907 @continue
-  Scenario: List period GP Weekly
+  @TEST_LIMO-3914 @continue
+  Scenario: Goldplus Weekly Package
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
       | 081905128517 | qwerty123 |
+    And owner navigate to list goldplus package
+    Then owner will see that the text "Mulai Dari" is displayed
+    And owner should not be able to see the text "per bulan"
+
+  @TEST_LIMO-3907 @continue
+  Scenario: List period GP Weekly
     When owner navigate to list package goldplus 2
     Then user verify list of Goldplus Weekly is appear
       | periodGP | price    |
