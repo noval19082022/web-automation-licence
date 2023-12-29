@@ -31,4 +31,19 @@ public class MamitourOrderSteps {
     public void admin_verify_all_unpaid_invoice_already_paid() {
         Assert.assertEquals(mamitourOrder.getCountMarkAsPaidOnMamitourOrder(), 0, "There is unpaid invoice");
     }
+
+    @And("admin create request package {string} mamitour for {string}")
+    public void admin_create_request_mamitour_for_x(String paket, String phoneNumber) {
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMITOUR_ORDER, 30000.0, LoadState.LOAD);
+        mamitourOrder.clickOnCreateRequestMamitourBtn();
+        mamitourOrder.fillOwnerPhoneNumber(phoneNumber);
+        mamitourOrder.choosePackage(paket);
+        mamitourOrder.clickOnSave();
+    }
+
+    @Then("admin verify {string} transaction for {string}")
+    public void admin_verify_unpaid_transaction_for_x(String status, String phoneNumber) {
+        mamitourOrder.searchPhoneNumber(phoneNumber);
+        Assert.assertEquals(mamitourOrder.getStatusPaymentText(), status, "The payment status is " + status);
+    }
 }
