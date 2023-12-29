@@ -83,6 +83,7 @@ public class OwnerDashboardPO {
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
+    private Locator widgetDaftarGoldplus;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -154,6 +155,7 @@ public class OwnerDashboardPO {
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
         dariMamikosBanner = page.locator(".image > a").first();
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
     }
 
     /**
@@ -779,5 +781,14 @@ public class OwnerDashboardPO {
 
     public void clickOnBannerDariMamikosSection() {
         playwright.clickOn(dariMamikosBanner);
+    }
+
+    /**
+     * Verify widget Dafter Goldplus
+     * @return true if present and false if not present
+     *
+     */
+    public boolean isWidgetDaftarGoldplusDisplayed(){
+        return playwright.waitTillLocatorIsVisible(widgetDaftarGoldplus, 5000.0);
     }
 }
