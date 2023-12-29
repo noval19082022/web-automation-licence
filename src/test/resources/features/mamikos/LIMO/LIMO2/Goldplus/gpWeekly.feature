@@ -67,3 +67,11 @@ Feature: GP Weekly
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "081905128517"
+
+  @TEST_LIMO-3919
+  Scenario: GoldPlus Weekly - Checking Widget After Terminated
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081905128517 | qwerty123 |
+    Then widget daftar goldplus is displayed

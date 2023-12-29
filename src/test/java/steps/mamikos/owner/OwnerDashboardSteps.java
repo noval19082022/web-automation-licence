@@ -356,5 +356,10 @@ public class OwnerDashboardSteps {
     public void ownerClickOnBannerOnDariMamikosSection() {
         ownerDashboardPO.clickOnBannerDariMamikosSection();
     }
+
+    @And("widget daftar goldplus is displayed")
+    public void widget_daftar_goldplus_is_displayed(){
+        ownerDashboardPO.isWidgetDaftarGoldplusDisplayed();
+    }
 }
 
