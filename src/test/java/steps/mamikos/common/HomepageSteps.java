@@ -218,6 +218,11 @@ public class HomepageSteps {
         home.visitCariKosttListPage();
     }
 
+    @And("user check promo ngebut label")
+    public void userCheckPromoNgebutLabel() {
+        Assert.assertTrue(home.promoNgebutHeadingIsVisible(), "Promo ngebut heading is not visible");
+    }
+
     @And("user open blog mamikos in footer")
     public void userOpenBlogMamikosInFooter() {
         home.clickOnBlogMamikos();
