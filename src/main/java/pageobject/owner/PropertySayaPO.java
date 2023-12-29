@@ -2007,6 +2007,15 @@ public class PropertySayaPO {
     }
 
     /**
+     * Verify the bbk pop up is visible for condition close pop up
+     * @return true false
+     */
+    public boolean BBKPopUpVisible() {
+        Locator popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
+        return playwright.isLocatorVisibleAfterLoad(popUpBBK,2000.0);
+    }
+
+    /**
      * Click save add room on pop up Add room
      */
     public void saveAddRoomPopUp() {

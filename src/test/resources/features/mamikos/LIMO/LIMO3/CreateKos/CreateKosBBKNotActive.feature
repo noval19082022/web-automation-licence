@@ -12,7 +12,7 @@ Feature: Create new kos with owner not active BBK
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected BBK Automation"
+    And owner click add another type from kos "Kost Rejected Data BBK Automation"
     And owner click "Tipe New BBK Rejected" in add new room type pop up and click next
     And owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
@@ -48,7 +48,7 @@ Feature: Create new kos with owner not active BBK
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected BBK Automation"
+    And owner click add another type from kos "Kost Rejected Data BBK Automation"
     And owner click "Buat Baru" in add new room type pop up and click next
     Then verify message "Anda belum mengisi nama tipe kamar ini." the room type
     When owner input room type with "{random_text}"

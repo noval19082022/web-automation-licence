@@ -207,7 +207,9 @@ public class PropertySayaSteps {
 
     @And("owner close pop up BBK at kos list page")
     public void ownerClosePopUpBBKAtKosListPage() {
-        propertySaya.clickClosePopUpBBK();
+        if (propertySaya.BBKPopUpVisible()) {
+            propertySaya.clickClosePopUpBBK();
+        }
     }
 
     @Then("user see activate mamipay form with Full Name {string}")
