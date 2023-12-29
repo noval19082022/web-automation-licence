@@ -601,4 +601,11 @@ public class GoldplusPO {
         playwright.waitTillLocatorIsVisible(benefitGP);
         return playwright.getText(benefitGP);
     }
+
+    /**
+     * Click on radio button on Pilih Periode Berlangganan page
+     */
+    public void clickOnPeriodGoldPlus(String period){
+        playwright.clickOn(page.locator("//*[contains(@class, 'goldplus-periode-select__list')][contains(.,'"+period+"')] //label"));
+    }
 }
