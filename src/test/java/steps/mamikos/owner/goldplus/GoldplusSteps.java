@@ -504,8 +504,8 @@ public class GoldplusSteps {
         goldplus.unCheckedSaldo();
     }
 
-    @Then("owner wants to process gp crosseling")
-    public void owner_wants_to_process_gp_crosseling() {
+    @Then("owner click bayar sekarang on detail tagihan page goldplus")
+    public void owner_wants_to_process_goldplus() {
         gpSubmission.clicksOnBayarSekarangButton();
     }
 
