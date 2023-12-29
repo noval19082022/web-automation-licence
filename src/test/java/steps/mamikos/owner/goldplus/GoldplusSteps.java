@@ -574,4 +574,10 @@ public class GoldplusSteps {
     public void owner_navigate_to_list_package_goldplus_1(){
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
     }
+
+    @When("owner click nanti saja for recurring GoldPlus")
+    public void owner_click_nanti_saja_for_recurring_goldplus(){
+        playwright.clickOnTextButton("Nanti Saja");
+    }
+
 }

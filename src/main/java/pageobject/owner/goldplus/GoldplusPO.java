@@ -80,7 +80,7 @@ public class GoldplusPO {
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
-        gpPackageText = page.getByText("GoldPlus 1 periode 4 Bulan").first();
+        gpPackageText = page.locator(".goldplus-billing-detail");
         tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
         rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
         saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
