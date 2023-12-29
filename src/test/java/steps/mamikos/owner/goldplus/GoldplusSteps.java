@@ -89,32 +89,6 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
     }
 
-    @Then("user verify list of Periode Berlangganan is appear")
-    public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.hardWait(2000);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i=0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(goldplus.listPeriod("periodGP",i).replaceAll("\\s", ""),content.get("periodGP").replaceAll("\\s", ""));
-            Assert.assertEquals(goldplus.listPeriod("freeMamiAds",i),content.get("freeMamiAds"));
-            Assert.assertEquals(goldplus.listPeriod("actualPrice",i),content.get("actualPrice"));
-            Assert.assertEquals(goldplus.listPeriod("discPrice",i),content.get("discPrice"));
-            i++;
-        }
-    }
-
-    @Then("user verify list of Weekly Goldplus is appear")
-    public void user_verify_list_of_weekly_goldplus_is_appear(DataTable dataTable) {
-        playwright.hardWait(2000);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i=0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(goldplus.listPeriod("periodGP",i).replaceAll("\\s", ""),content.get("periodGP").replaceAll("\\s", ""));
-            Assert.assertEquals(goldplus.listPeriod("actualPrice",i),content.get("price"));
-            i++;
-        }
-    }
-
     @Then("admin successfully sets favorite label to none")
     public void admin_successfully_sets_favorite_label_to_none() {
         goldplus.clickOnEditGP1Button();
