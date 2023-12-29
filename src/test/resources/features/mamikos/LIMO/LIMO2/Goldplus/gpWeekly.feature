@@ -24,6 +24,12 @@ Feature: GP Weekly
     Then user will see that the text "GoldPlus 2 periode 1 Minggu" is displayed
     And payment owner success using ovo as payment method
 
+  @TEST_LIMO-3914
+  Scenario: GoldPlus Weekly Paid - Checking Widget
+    Given owner navigates to owner dashboard
+    When owner click close icon pop up
+    Then validate that owner have "GoldPlus 2"
+
    #reset GP
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
@@ -31,5 +37,3 @@ Feature: GP Weekly
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "081905128517"
-
-
