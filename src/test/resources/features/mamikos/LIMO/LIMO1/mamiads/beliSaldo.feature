@@ -1,7 +1,6 @@
 @regression @LIMO1 @LIMO1-staging
 Feature: Beli Saldo
 
-
   @TEST_LIMO-274 @belisaldo @continue
   Scenario: Redirection Beli Saldo
     Given user go to mamikos homepage
@@ -16,8 +15,8 @@ Feature: Beli Saldo
   Scenario: Favorite Saldo
     Then favorit saldo is "Rp1.350.000"
 
-  @TEST_LIMO-4087
-  Scenario: List Promo Saldo Mamiads
+  @TEST_LIMO-4087 @continue
+  Scenario: List Promo Saldo
     Then detail list saldo as expected
       | price     | priceInRp   | disc | discPrice   |
       | 6.000     | Rp6.000     |      |             |
@@ -30,3 +29,50 @@ Feature: Beli Saldo
       | 1.000.000 | Rp925.000   | 7%   | Rp1.000.000 |
       | 1.500.000 | Rp1.350.000 | 10%  | Rp1.500.000 |
       | 5.000.000 | Rp4.500.000 | 10%  | Rp5.000.000 |
+
+  @TEST_LIMO-274 @continue
+   Scenario: Change Saldo
+    Given owner choose saldo "Rp27.000"
+    When owner ubah saldo to "Rp6.000"
+    Then validate detail tagihan saldo mamiads "6.000"
+
+  @TEST_LIMO-274 @continue
+   Scenario: Beli Saldo - Transaction Success
+    Given owner click bayar sekarang in detail tagihan for saldo mamiads
+    Then payment owner success using ovo as payment method
+
+  @TEST_LIMO-274
+   Scenario: Beli Saldo - Click Selesai Button To make sure redirect to mamiads dashboard if tab Selesai button
+    Given owner click button selesai on universal invoice
+    Then verify redirect to mamiads dashboard
+
+  @TEST_LIMO-275 @continue
+  Scenario: Beli Saldo (2nd Transaction)
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password |
+      | 083176408449 | 0          | qwerty123 |
+    And user navigates to mamiads dashboard
+    And user close mamiads onboarding popup
+    And user wants to buy saldo MamiAds "Rp6.000"
+
+  @TEST_LIMO-191 @continue
+  Scenario: Buy saldo mamiAds using voucher
+    Given user using voucher "MAMASSPERCENT" to pay mamiads
+    Then payment owner success using ovo as payment method
+
+  Scenario: Checking history success transaction of mamiads using voucher
+    Then owner verify invoice success paid mamiads
+
+  @TEST_LIMO-273
+  Scenario: Cancel Buy Saldo
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password |
+      | 085720962106 | 0          | qwerty123 |
+    And user navigates to mamiads pembelian saldo
+    And owner choose saldo "Rp27.000"
+    And user navigate to mamiads history page
+    And user will see title and message on Dalam Proses tab
+    And user click "Selesai"
+    Then user will see title and message on Selesai tab

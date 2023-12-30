@@ -397,7 +397,7 @@ Feature: BnB feature
     And search chat in chatlist "Chat Butuh Respon Pengajuan Sewa Label"
     Then owner can see label with "Butuh respon pengajuan sewa"
 
-  @addAndMarkRoomKosGP @BNB-2245
+  @addAndMarkRoomKosGP @BNB-2245 @continue
   #addRoom.feature
   Scenario: check when owner add and mark room at kos GP
     Given user go to mamikos homepage
@@ -407,9 +407,181 @@ Feature: BnB feature
     And owner navigates to property saya kos
     And owner search kost "Kos Automation BnB Tipe A Tobelo Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
-    And owner click "Update Kamar"
+    And owner click on update room
     And owner add room with name or room number "Jupiter"
     And user fill room floor in room allotment page with "11011"
     And user tick already inhabited checkbox
-    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
     Then verify will be appears and the room is untick again
+
+  @markRoomAsOccupied @markRoom @TEST_BBM-868
+  #markRoom.feature
+  Scenario: Mark BBK And Gold Plus Room As Occupied (BBM-868)
+    Given owner click back on added room pop up
+    When user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees Pop-Up owner not add renter's data
+    When owner click on Add Renter button
+    Then owner redirected to Input Renter's Information form with valid kost name
+
+  @occupancyAndBilling @markRoom @TEST_BBM-867 @continue
+  #markRoom.feature
+  Scenario: Mark BBK And Non Gold Plus Room As Occupied (BBM-867)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password     |
+      | 081362464341 | 1d0lt3stb4ru |
+    And owner navigates to property saya kos
+    And owner search kost "Yamie Panda Kost Deposit Wirobrajan Yogyakarta" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click on update room
+    When user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees room is on "Terisi" status
+    When user click edit button in first row of the table
+    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees room is on "Kosong" status
+
+  @updateRoomToast @markRoom @TEST_BBM-869
+  #updateRoom.feature
+  Scenario: Check Update Room's Toast (BBM-869)
+    Given owner navigates to property saya kos
+    And owner search kost "Dont Starve Together" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click on update room
+    And user click edit button in first row of the table
+    And user tick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees toast "Kamar Terisi Bertambah 1"
+    And user click edit button in first row of the table
+    And user untick already inhabited checkbox
+    And owner click simpan on add room pop up
+    Then owner can sees toast "Kamar Kosong Bertambah 1"
+
+  @TEST_BBM-928 @continue
+  #addTenant.feature
+  Scenario: Add Tenant For Full Room (BBM-928)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password     |
+      | 0890000000289 | Bismillah@01 |
+    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
+    And user click continue until start adding contract
+    And user select kost "kost flores Tobelo Utara Halmahera Utara" for tenant
+    Then owner can sees full pop up restriction
+    When owner clicks on change room's data on full room pop up restriction
+    Then owner redirected to update room page
+    And owner can not sees full room pop up restriction
+
+  @TEST_BBM-927
+  #addTenant.feature
+  Scenario: Add Tenant For Different Gender (BBM-927)
+    Given owner navigates to owner dashboard
+    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
+    And user choose owner added the contract
+    And user select kost "kost biak untuk add tenant automation" for tenant
+    And owner input phone number with "083176833355"
+    And owner choose first available room and clicks on add renter button
+    And owner click button "Tambah Penyewa" on form informasi penyewa
+    Then owner can sees different gender restriction pop-up
+
+  @TEST_BBM-905 @automated @kost-saya-revamp-phase1 @web @xray-update
+  Scenario: [Homepage ][Kost Saya Section ]Check Draft booking on homepage when have 1 draft for kost Promo Ngebut (BBM-905)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000340 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag      |
+      | Kost Garden Abepura |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "tomorrow"
+    And user click back button
+    Then tenant verify the confirmation cancel booking pop up
+    And user click Save Draft Button
+    When user go to mamikos homepage
+    And user check promo ngebut label
+    Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
+
+  @TEST_BBM-887 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  Scenario: [Homepage ][Kost Saya Section ]Check Kos saya section when Menunggu konfirmasi Total booking = 1 show section for Kost Promo Ngebut
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000341 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag      |
+      | Kost Garden Abepura |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost "today" "Per Bulan"
+    Then tenant should success booking kost
+    When user go to mamikos homepage
+    Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
+    And tenant navigate to riwayat and draf booking
+    And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
+    Then tenant navigate to riwayat and draf booking
+
+  @TEST_BBM-968 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  Scenario: [Homepage ][Kost Saya Section ]Check Kos Saya on Homepage when have Draft booking = 1 (BBM-968)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 08100000616 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+    When user go to mamikos homepage
+    And user click Mau Coba Dong section at homepage
+    Then user will see kos saya is still empty
+    When user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                               |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "tomorrow"
+    And user click back button
+    Then tenant verify the confirmation cancel booking pop up
+    And user click Save Draft Button
+    And user go to mamikos homepage
+    And user check promo ngebut label
+    Then user can see shortcut homepage with "Mau lanjut ajukan sewa di kos ini?"
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And user click delete button on tab one draft booking
+    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+
+  @TEST_BBM-882 @automated @kost-saya-revamp-phase1 @web @xray-update
+  Scenario: [Homepage ][Kost Saya Section ]Check homepage when have total waiting confirmation booking = 1 (BBM-882)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 0890000000339 | Bismillah@01 |
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                               |
+      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+    And tenant booking kost "today" "Per Bulan"
+    Then tenant should success booking kost
+    When user go to mamikos homepage
+    Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
+    And tenant navigate to riwayat and draf booking
+    And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
+    Then tenant navigate to riwayat and draf booking

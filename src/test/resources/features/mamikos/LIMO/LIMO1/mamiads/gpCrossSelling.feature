@@ -66,7 +66,7 @@ Feature: GP Crosseling
     And user choose Goldplus package 1
     And user choose saldo "Rp27.000" on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
-    And owner wants to process gp crosseling
+    And owner click bayar sekarang on detail tagihan page goldplus
     Then owner validate payment for "GoldPlus 1 periode 4 Bulan" have "Saldo MamiAds 30.000" and have "Biaya Transaksi" before choose payment method
     And user navigate to mamiads history page
     And user will see title and message on Dalam Proses tab

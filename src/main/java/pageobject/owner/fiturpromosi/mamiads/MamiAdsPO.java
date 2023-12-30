@@ -1,4 +1,4 @@
-package pageobject.owner.mamiads;
+package pageobject.owner.fiturpromosi.mamiads;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -35,7 +35,6 @@ public class MamiAdsPO {
     private Locator yaGantiButton;
     private Locator beliSaldoBtnPopup;
     //--- Beli Saldo Mamiads Page ----//
-    private Locator bayarSekarangBtnOnDetailTagihan;
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
     //--- voucher ---//
@@ -87,7 +86,6 @@ public class MamiAdsPO {
         this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
         this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
         //--- Beli Saldo Mamiads Page ---//
-        this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
 
@@ -175,18 +173,8 @@ public class MamiAdsPO {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
 
-    /**
-     * owner buy mamiads saldo,
-     * This method is only valid for owners who have purchased saldo at Mamiads.
-     *
-     * @param saldo String
-     */
-    public void purchaseOwnerSaldoFromMamiads(String saldo) {
+    public void clickSaldoMamiadsCard(){
         playwright.clickOn(saldoMamiadsCard);
-        handlePopupMamiAds();
-        clickOnBeliSaldoBtn();
-        choosingSaldoToBuy(saldo);
-        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
     }
 
     /**
@@ -199,8 +187,8 @@ public class MamiAdsPO {
         // Check if the 'Coba Sekarang' button on the popup is visible
         // OR if the 'Beli Saldo' button is not visible
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn)) {
-            playwright.clickOn(cobaSekarangBtnOnPopUp);
+                || !playwright.waitTillLocatorIsVisible(icnButtonCLose)) {
+            playwright.clickOn(icnButtonCLose);
         }
     }
 
@@ -314,15 +302,6 @@ public class MamiAdsPO {
         detailTagihanSection.waitFor();
         return playwright.waitTillLocatorIsVisible(detailTagihanSection);
     }
-
-    /**
-     * Click on bayar sekarang button and wait until page loaded
-     */
-    public void clicksOnBayarSekarangButton() {
-        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
-        playwright.waitTillPageLoaded();
-    }
-
 
     /**
      * Click on Panduan MamiAds Back Button
