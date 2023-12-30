@@ -117,3 +117,60 @@ Feature: Waiting List - Kost Detail
     And user want to dismiss FTUE
     Then tenant should see ajukan sewa button is "enable"
     And user logs out as a Tenant user
+
+  Scenario: Check waiting list button when tennat have active contract and that kost have available room
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 081000006116 | 08100000622 | qwerty123 |
+    And tenant navigate to kost saya page
+    And tenant will see that the text "Tenant Satu Enam" is displayed
+    And tenant search kost then go to kost details:
+      | kost name stag                                     | kost name prod  |
+      | Kost Singgahsini Kedai Kopi Tipe B Halmahera Utara | Kost Arac Penuh |
+    Then tenant can see "Ajukan sewa button" button
+    And tenant can see "Tanya pemilik" button
+
+  Scenario: Check waiting list button when tenant have active contract and that kost fully occupied listing
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 081000006116 | 08100000622 | qwerty123 |
+    And tenant navigate to kost saya page
+    And tenant will see that the text "Tenant Satu Enam" is displayed
+    And tenant search kost then go to kost details:
+      | kost name stag                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+    Then tenant can see "Lihat kost lain" button
+    And tenant can see "Ikut daftar tunggu" button
+
+  Scenario: Check waiting list button when have active contract and room not fully for another tenant
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 081000006116 | 08100000622 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    And tenant click "Secepatnya"
+    And tenant search kost then go to kost details:
+      | kost name stag  | kost name prod  |
+      | Kost Arac Penuh | Kost Arac Penuh |
+    Then tenant can see "Ajukan sewa button" button
+    And tenant can see "Tanya pemilik" button
+
+  Scenario: Submit waiting list when tennat not login user
+    Given user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    Then tenant will see that the text "Login Pencari Kos" is displayed
+
+  Scenario:Check popup on boarding on kost detail when available room - first time open kost detail
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag                                             | kost name prod  |
+      | Kost Apik Chrysant Elok Tipe A Kelapa Gading Jakarta Utara | Kost Arac Penuh |
+    Then user want to dismiss FTUE

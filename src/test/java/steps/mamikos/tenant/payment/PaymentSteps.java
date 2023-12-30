@@ -10,6 +10,7 @@ import pageobject.tenant.InvoicePO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 import pageobject.xendit.XenditApiPO;
+import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Optional;
@@ -182,5 +183,14 @@ public class PaymentSteps {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBRI(kodePembayaran);
+    }
+    @Then("user/tenant/admin refresh invoice page and see payment success")
+    public void refreshInvoiceAndSeePaymentSucess() {
+        var pw = new PlaywrightHelpers(ActiveContext.getActivePage());
+        for (int i = 0; i < 3; i++) {
+            pw.reloadPage();
+        }
+        var payment = new PaymentPO(ActiveContext.getActivePage());
+        Assert.assertEquals(payment.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
 }

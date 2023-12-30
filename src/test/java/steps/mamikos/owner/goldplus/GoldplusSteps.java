@@ -579,5 +579,8 @@ public class GoldplusSteps {
     public void owner_click_nanti_saja_for_recurring_goldplus(){
         playwright.clickOnTextButton("Nanti Saja");
     }
-
+    @And("owner click filter {string} in Pembayaran Tagihan Goldplus page")
+    public void ownerClickFilterInPembayaranTagihanGoldplusPage(String filter) {
+        goldplus.clickFilterInPaymentBillingGp(filter);
+    }
 }

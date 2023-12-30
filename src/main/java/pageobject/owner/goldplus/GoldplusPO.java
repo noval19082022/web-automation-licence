@@ -1,5 +1,6 @@
 package pageobject.owner.goldplus;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -607,5 +608,20 @@ public class GoldplusPO {
      */
     public void clickOnPeriodGoldPlus(String period){
         playwright.clickOn(page.locator("//*[contains(@class, 'goldplus-periode-select__list')][contains(.,'"+period+"')] //label"));
+    }
+    /**
+     * Click on filter in payment billing GP
+     */
+    public void clickFilterInPaymentBillingGp(String filter) {
+        playwright.hardWait(3000);
+        String filterBilling = "//h4[normalize-space()='"+filter+"']";
+        ElementHandle element = page.querySelector(filterBilling);
+        element.click();
+        if (playwright.isTextDisplayed("Belum Ada Tagihan yang Selesai")) {
+            playwright.reloadPage();
+            filterBilling = "//h4[normalize-space()='" + filter + "']";
+            element = page.querySelector(filterBilling);
+            element.click();
+        }
     }
 }
