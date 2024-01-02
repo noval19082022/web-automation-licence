@@ -151,7 +151,6 @@ Feature: New Flow Register Owner
       | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
 
   @TEST_COOP-5160 @Automated @DOM @web-covered
-  @TEST_COOP-4877
   Scenario: [WEB][Register Owner] password confirmation not match
     Given user go to mamikos homepage
     When user clicks on Enter button
