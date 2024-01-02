@@ -1,4 +1,4 @@
-@DOM1
+@DOM3
 Feature: Edit Profile
 #//edit profil tenant will cover in dom 1
 
