@@ -9,7 +9,7 @@ Feature: Blacklist User
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
 
   @continue @TEST_COOP-5158
-  Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by Phone Number
+  Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
     Given admin go to mamikos bangkrupux admin
     When user access menu blacklist user
     Then user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
