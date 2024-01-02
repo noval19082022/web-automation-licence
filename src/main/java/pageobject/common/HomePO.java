@@ -124,7 +124,7 @@ public class HomePO {
         //header
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
-        this.promoAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
@@ -723,6 +723,7 @@ public class HomePO {
      * @return
      */
     public List<String> promoNgebutInfo() {
+        playwright.pageScrollUntilElementIsVisible(flashSalePromoInfoList);
         return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
     }
 
