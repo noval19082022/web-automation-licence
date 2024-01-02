@@ -7,10 +7,10 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see overview section on detail page
       | kost stag                     | kost prod                                           |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
 #
   @TEST_DOM-1701 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
   Scenario: [Dweb][Kost Detail] Check promo owner section login
@@ -39,7 +39,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user want to see more detail room facility section on the kost detail page
     Then user will see login pop up
 
@@ -51,7 +51,7 @@ Feature: Kost detail page
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user want to see more detail room facility section on the kost detail page
     Then user see all facility room section
 
@@ -76,7 +76,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility notes on detail kos and button is present
 
   @TEST_DOM-1700 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
@@ -114,7 +114,7 @@ Feature: Kost detail page
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | Kos Dom Automation PLM Tipe G | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility share section on detail page
     #user want to see more detail facility share
     When user want to see all facility share
