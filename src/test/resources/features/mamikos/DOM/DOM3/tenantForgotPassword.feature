@@ -1,6 +1,6 @@
 @DOM3 @forgotPasswordTenant
 
-Feature: Edit Profile
+Feature: Tenant Forgot Password
 
   @forgotPasswordTenantViaSms
   Scenario: [Web Tenant][Forgot Password]Send OTP via SMS
