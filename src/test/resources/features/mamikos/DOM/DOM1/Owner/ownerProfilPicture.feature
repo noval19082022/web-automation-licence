@@ -1,4 +1,4 @@
-@DOM1
+#@DOM1 this feature move to LIMO
 Feature: Owner - Profile Picture
 
   @TEST_DOM-2284 @Automated @DOM @web-covered

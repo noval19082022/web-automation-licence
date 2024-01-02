@@ -1,6 +1,6 @@
 Feature: Login Owner
 
-  @user @saktiloginowner
+  @TEST_COOP-5183 @user @saktiloginowner
   Scenario: Login Owner Success
     Given user go to mamikos homepage
     When user login as owner:
