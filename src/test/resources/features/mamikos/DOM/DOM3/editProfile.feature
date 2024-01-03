@@ -71,7 +71,7 @@ Feature: Edit Profile
     And user fills "Universitas Indonesia" in search dropdown pillih universitas
     Then user see button simpan edit profile disable
 
-  @TEST_DOM-180 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web  @web-covered @TEST_COOP-5210
+  @TEST_DOM-180 @TESTSET_UG-4895 @TESTSET_UG-6226 @AUTOMATED @web  @web-covered @TEST_COOP-5210 @TEST_COOP-5216
   Scenario: [Web Tenant][Pekerjaan - Mahasiswa - Edit Profile]see university
     Given user go to mamikos homepage
     When user login as tenant via phone number:
