@@ -8,7 +8,7 @@ Feature: Blacklist User
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
 
-  @continue @TEST_COOP-5158
+  @continue @TEST_COOP-5158 @TEST_COOP-5157
   Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
     Given admin go to mamikos bangkrupux admin
     When user access menu blacklist user
@@ -30,7 +30,7 @@ Feature: Blacklist User
     And user click button submit
     Then user see blacklist updated success message
 
-  @TEST_COOP-5155
+  @TEST_COOP-5155 @TEST_COOP-5151 @TEST_COOP-5153
   Scenario: [WEB][Blacklist] After blacklist user try to login via homepage
     Given user go to mamikos homepage
     And user click on button masuk pencari kos
@@ -107,7 +107,7 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
 
-  @TEST_DOM-2639 @TEST_COOP-5149
+  @TEST_DOM-2639 @TEST_COOP-5149 @TEST_COOP-5144
   Scenario: User try login via Facebook
     Given user go to mamikos homepage
     When user login as tenant via facebook:
