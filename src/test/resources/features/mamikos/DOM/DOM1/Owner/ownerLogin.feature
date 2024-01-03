@@ -1,7 +1,7 @@
 @DOM1 @essentialTest2
 Feature: Owner - Login
 
-  @TEST_COOP-5276 @Automated @DOM @web-covered
+  @TEST_COOP-5276 @Automated @DOM @web-covered @TEST_COOP-5183
   Scenario: [WEB][Login Owner] Login with valid credentials
     Given user go to mamikos homepage
     When user login as owner:
