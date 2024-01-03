@@ -79,6 +79,7 @@ Feature: BnB feature with background navigate profile page
 
 
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
+    And tenant set active page to 0
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
     And user stop rent kost with reason "Jarak Kos Terlalu Jauh"

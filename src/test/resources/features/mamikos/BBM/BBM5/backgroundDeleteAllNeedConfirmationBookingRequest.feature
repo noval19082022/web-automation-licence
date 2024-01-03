@@ -19,7 +19,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     Then tenant should success booking kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                        |
+      | kost name stag           | kost name prod                        |
       | Kost Cibinong Bogor COOP | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "Tomorrow"
     And user click back button

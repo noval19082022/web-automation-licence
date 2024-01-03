@@ -1664,7 +1664,7 @@ public class KostDetailsPO {
             }
             playwright.hardWait(500);
         }
-        playwright.waitFor(ftuePopUP);
+        playwright.waitTillLocatorIsVisible(ftuePopUP,3000.0);
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
     }
 
