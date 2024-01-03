@@ -202,6 +202,7 @@ public class RiwayatKostPO {
      *
      */
     public void clickAjukanBerhentiSewaText() {
+        playwright.pageScrollInView(ajukanBerhentiSewaButton);
         playwright.clickOn(ajukanBerhentiSewaButton);
     }
 

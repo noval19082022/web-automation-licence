@@ -31,6 +31,13 @@ public class RewardManagementPO {
     Locator sequenceReward;
     Locator addRewardType;
     Locator addRewardSubmit;
+    Locator rewardTypeMenu;
+    Locator createRewardType;
+    Locator keyRewardType;
+    Locator nameRewardType;
+    Locator saveRewardTypeButton;
+    Locator errorMessageText;
+    Locator editTypeButton;
 
     public RewardManagementPO(Page page) {
         this.page = page;
@@ -56,7 +63,11 @@ public class RewardManagementPO {
         sequenceReward = page.locator("input[name=\"sequence\"]");
         addRewardType = page.locator("select[name=\"type_id\"]");
         addRewardSubmit = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Reward"));
-
+        //---------------------reward type---------------//
+        rewardTypeMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Reward Type"));
+        createRewardType =page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Reward Type"));
+        keyRewardType = page.getByLabel("Key");
+        nameRewardType = page.getByLabel("Name");
     }
 
     /**
@@ -191,5 +202,51 @@ public class RewardManagementPO {
      */
     public void clickOnSubmmitReward() {
         playwright.clickOn(addRewardSubmit);
+    }
+
+    /**
+     * click on reward type menu
+     */
+    public void clickOnRewardTypeMenu(){
+        playwright.pageScrollInView(rewardTypeMenu);
+        playwright.clickOn(rewardTypeMenu);
+    }
+
+    /**
+     * click add reward type button
+     */
+    public void createRewardTypeButton(){
+        playwright.clickOn(createRewardType);
+    }
+
+    /**
+     * input rewara type
+     * @param key
+     * @param name
+     */
+    public void inputRewardType(String key, String name){
+        keyRewardType.fill(key);
+        nameRewardType.fill(name);
+        saveRewardTypeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
+        playwright.clickOn(saveRewardTypeButton);
+    }
+
+    /**
+     * verify error message
+     * @param text
+     * @return text example : Key already exist.
+     */
+    public String getErrorMessage(String text) {
+        errorMessageText = page.getByText("" +text+ "");
+        return playwright.getText(errorMessageText);
+    }
+
+    /**
+     * click edit button
+     * @param text
+     */
+    public void editButton(String text){
+       editTypeButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(" "+text+"  ")).getByTitle("Edit");
+       playwright.clickOn(editTypeButton);
     }
 }
