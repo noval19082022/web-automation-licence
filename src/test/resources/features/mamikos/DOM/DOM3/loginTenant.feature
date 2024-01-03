@@ -1,7 +1,7 @@
 @regression @loginTenant @DOM3 @essentialTest
 Feature: Tenant - Login
 
-  @loginByFB
+  @loginByFB @TEST_COOP-5363
   Scenario: Login - By Facebook
     Given user go to mamikos homepage
     And user login as tenant via facebook:
@@ -10,7 +10,7 @@ Feature: Tenant - Login
     Then user redirected to "/#_=_"
     Then user tenant profile picture is shown
 
-  @TEST_DOM-370 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @TESTSET_PF-1960 @Automated @DOM3 @web-covered @noFillPassword
+  @TEST_COOP-5352 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @TESTSET_PF-1960 @Automated @DOM3 @web-covered @noFillPassword
   Scenario: Login - No fill password
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete password fill
@@ -18,7 +18,7 @@ Feature: Tenant - Login
       | 089220221220  | 08100000622 | qwerty123 |
     Then user verify login error messages "Password harus diisi."
 
-  @TEST_DOM-378 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @Automated @DOM3 @web-covered @wrongNumber
+  @TEST_COOP-5353 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @Automated @DOM3 @web-covered @wrongNumber
   Scenario: Login - Wrong number
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete phone number fill
@@ -26,7 +26,7 @@ Feature: Tenant - Login
       | 089220221220  | 08100000622 | qwerty123 |
     Then user verify login error messages "Nomor Handphone harus diisi."
 
-  @fromSBMPTNPage @TEST_DOM-267
+  @fromSBMPTNPage @TEST_COOP-5354
   Scenario: Login - From SBMPTN Page
     Given user navigate to SBMPTN page
     When user login as tenant via phone number:
@@ -34,7 +34,7 @@ Feature: Tenant - Login
       | 089220221220  | 08100000622 | qwerty123 |
     Then user tenant profile picture is shown
 
-  @TEST_DOM-288 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @TESTSET_PF-1960 @Automated @web-covered @loginTenantWithNewPassword
+  @TEST_COOP-5355 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @TESTSET_PF-1960 @Automated @web-covered @loginTenantWithNewPassword
   Scenario: login tenant with new password
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -58,20 +58,20 @@ Feature: Tenant - Login
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
-  @popUpClose @TEST_DOM-374 @Automated @DOM3 @web-covered
+  @popUpClose @TEST_COOP-5356 @Automated @DOM3 @web-covered
   Scenario: Pop up login - Pop up close
     Given user go to mamikos homepage
     When user masuk sebagai
     Then user verify pop up "Masuk ke Mamikos" "Saya ingin masuk sebagai"
 
-  @popUpClose @TEST_DOM-374 @Automated @DOM3 @web-covered
+  @popUpClose @TEST_COOP-5356 @Automated @DOM3 @web-covered
   Scenario: Pop up login - Pop up close
     Given user go to mamikos homepage
     When user masuk sebagai
     And user click close on pop up login
     Then user verify pop up "Masuk ke Mamikos" "Saya ingin masuk sebagai" are not appeared
 
-  @fromListingDetailPageClickFavorite
+  @fromListingDetailPageClickFavorite @TEST_COOP-5357
   Scenario: Pop up login - Click Favorite
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -80,7 +80,7 @@ Feature: Tenant - Login
     And user can favorite kost not login
     Then user see login pop up in favorite page
 
-  @fromListingDetailPageClickMaps
+  @fromListingDetailPageClickMaps @TEST_COOP-5358
   Scenario: Pop up login - Click Maps
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:

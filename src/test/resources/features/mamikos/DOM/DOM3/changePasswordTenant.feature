@@ -2,7 +2,7 @@
 Feature: Change password tenant
 
 
-  @TEST_DOM-287
+  @TEST_COOP-5339
   Scenario: Change password more than 25 characters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,7 +14,7 @@ Feature: Change password tenant
     And user fills password baru "qwerty12345678901234567890123"
     Then user get error message "Password lebih dari 25 karakter."
 
-  @TEST_DOM-280
+  @TEST_COOP-5340
   Scenario: Change password with special character
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -26,6 +26,7 @@ Feature: Change password tenant
     And user fills password baru "!@#$%^&*"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
+  @TEST_COOP-5341
   Scenario: Change password less than 8 chracters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -37,6 +38,7 @@ Feature: Change password tenant
     And user fills password baru "abc17"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
+  @TEST_COOP-5342
   Scenario: Change password only using alphabet
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -48,6 +50,7 @@ Feature: Change password tenant
     And user fills password baru "qwertyuiop"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
+  @TEST_COOP-5343
   Scenario: Change password only using number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -59,6 +62,7 @@ Feature: Change password tenant
     And user fills password baru "1234567891"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
+  @TEST_COOP-5344
   Scenario: New password same with old password
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -70,6 +74,7 @@ Feature: Change password tenant
     And user fills password baru "asdf1234"
     Then user get error message "Password tidak boleh sama"
 
+  @TEST_COOP-5345
   Scenario: New password and confirm password not match
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -82,6 +87,7 @@ Feature: Change password tenant
     And user fills ketik ulang password "abcde1234"
     Then user get error message "Password tidak sama"
 
+  @TEST_COOP-5346
   Scenario: Change password with wrong old password
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -95,6 +101,7 @@ Feature: Change password tenant
     And user clicks on simpan password button
     Then user get error message "Password lama tidak valid"
 
+  @TEST_COOP-5347
   Scenario: Empty old password field
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -108,6 +115,7 @@ Feature: Change password tenant
     And user empty the old password field
     Then user get error message "Masukkan password."
 
+  @TEST_COOP-5348
   Scenario: Empty new password field
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -121,6 +129,7 @@ Feature: Change password tenant
     And user empty the new password field
     Then user get error message "Masukkan password."
 
+  @TEST_COOP-5349
   Scenario: Empty confirmation password field
     Given user go to mamikos homepage
     When user login as tenant via phone number:
