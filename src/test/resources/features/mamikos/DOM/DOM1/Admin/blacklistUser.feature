@@ -8,8 +8,8 @@ Feature: Blacklist User
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
 
-  @TEST_COOP-5158 @continue
-  Scenario Outline:: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
+  @continue @TEST_COOP-5158
+  Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
     Given admin go to mamikos bangkrupux admin
     When user access menu blacklist user
     Then user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
@@ -18,7 +18,7 @@ Feature: Blacklist User
       | phone_number | 089536519944                            |
       | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
 
-  @TEST_COOP-5156 @continue
+  @continue @TEST_COOP-5156
   Scenario: [WEB][Blacklist] Display User overview before Admin add blacklist user
     When user click blacklist a user button
     And user add with phone number "089536519944"
@@ -30,7 +30,7 @@ Feature: Blacklist User
     And user click button submit
     Then user see blacklist updated success message
 
-  @TEST_DOM-3835 @TEST_COOP-5155
+  @TEST_COOP-5155
   Scenario: [WEB][Blacklist] After blacklist user try to login via homepage
     Given user go to mamikos homepage
     And user click on button masuk pencari kos
@@ -39,7 +39,7 @@ Feature: Blacklist User
       | 089536519944  | 089536519944  | qwerty123    |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
-  @TEST_DOM-2632 @TEST_COOP-5145
+  @TEST_COOP-5145
   Scenario: [WEB][Blacklist] After blacklist user try login via detail kost
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -52,7 +52,7 @@ Feature: Blacklist User
       | 089536519944  | 089536519944  | qwerty123    |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
-  @TEST_DOM-2626 @TEST_COOP-5148
+  @TEST_COOP-5148
   Scenario Outline: [WEB][Blacklist] Admin Unblacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -75,7 +75,7 @@ Feature: Blacklist User
       | phone stag   | phone prod   | password  |
       | 089536519944 | 089536519944 | qwerty123 |
 
-  @continue @TEST_DOM-2627 @TEST_COOP-5146
+  @continue @TEST_COOP-5146
   Scenario Outline: [WEB][Blacklist] Admin Add blacklist user from homepage blacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

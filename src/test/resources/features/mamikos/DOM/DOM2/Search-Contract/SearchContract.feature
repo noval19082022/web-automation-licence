@@ -3,7 +3,7 @@ Feature: Search Contract
 
 	#popup terminate non kost selection
 	#(after tenant paid the order contract)
-  @TEST_DOM-431 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @kostAPIK @seePopupTerminateAkhiriContract @web @web-covered
+  @TEST_COOP-5302 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @kostAPIK @seePopupTerminateAkhiriContract @web @web-covered
   Scenario: [BackOffice][popup terminate][kost APIK] Admin See detail pop up
     # aktivasi kontrak apik
     Given admin go to mamikos mamipay admin
@@ -20,7 +20,7 @@ Feature: Search Contract
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_DOM-432 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @kostSinggaSini @seeLihatAkhiriKontrakDisable @web @web-covered
+  @TEST_COOP-5303 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @kostSinggaSini @seeLihatAkhiriKontrakDisable @web @web-covered
   Scenario: [BackOffice][popup terminate][kost singgahsini] Admin See detail pop up
     # aktivasi kontrak singgahsini
     Given admin go to mamikos mamipay admin
@@ -37,7 +37,7 @@ Feature: Search Contract
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_DOM-433 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
+  @TEST_COOP-5304 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @mamiroom @seeDetailPopupForMamirooms @web @web-covered
   Scenario: [BackOffice][popup terminate][mamirooms] Admin See detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -50,7 +50,7 @@ Feature: Search Contract
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
 
-  @TEST_DOM-430 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchValidInput @web @web-covered
+  @TEST_COOP-5305 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchValidInput @web @web-covered
   Scenario: [BackOffice][search contract] Admin search data tenant with valid input
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -60,7 +60,7 @@ Feature: Search Contract
     And admin want to see log contract
     Then admin will see detail pop up "Data Contract"
 
-  @TEST_DOM-402 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5306 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][search contract] Admin see sisa deposit
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -73,7 +73,7 @@ Feature: Search Contract
     Then admin will see additional notes menu deposit
 
 	#admin search data tenant with invalid Renter number
-  @TEST_DOM-403 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @InputDamageDetails @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5307 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @InputDamageDetails @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][search contract] Search data tenant with input Damage Details more than 200 characters
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -84,7 +84,7 @@ Feature: Search Contract
     And admin input detail kerusakan "characters more than 200" on edit deposit page
     Then admin see maximal length "200/200"
 
-  @TEST_DOM-411 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchInvalidInput @web @web-covered
+  @TEST_COOP-5308 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchInvalidInput @web @web-covered
   Scenario Outline: [BackOffice][search contract] Search by invalid input
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -101,7 +101,7 @@ Feature: Search Contract
       | Related Invoice Number | 83900841/2021/12/00 |
       | Related Invoice Code   | 83900841            |
 
-  @TEST_DOM-415 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
+  @TEST_COOP-5309 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @searchBasedOnPeriod @web @web-covered
   Scenario: [BackOffice][search contract] Search data tenant based on period
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -112,7 +112,7 @@ Feature: Search Contract
     And admin search contract by kost level "SinggahSini"
     Then admin redirect to search contract menu detail
 
-  @TEST_DOM-416 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnKostLevel @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5310 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnKostLevel @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][search contract] Search data tenant  based on kost level
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -123,7 +123,7 @@ Feature: Search Contract
     Then admin verify see text "Mamikos Goldplus 2"
 
 	#admin search data tenant based on period custome range
-  @TEST_DOM-419 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnPeriod @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5311 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @SearchDataTenantBasedOnPeriod @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][search contract] Search data tenant based on period with custom range
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -137,7 +137,7 @@ Feature: Search Contract
     Then admin redirect to search contract menu detail
 
 	#invoice not paid yet and admin batalkan contract
-  @TEST_DOM-421 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @adminBatalkanContract @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5312 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @adminBatalkanContract @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][search contract] batalkan kontrak
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -177,7 +177,7 @@ Feature: Search Contract
     Then admin cancel contract
 
         #admin cancel extend invoice
-  @TEST_DOM-413 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @cancelExtendContract @discovery-platform @web @web-covered
+  @TEST_COOP-5313 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @cancelExtendContract @discovery-platform @web @web-covered
   Scenario: [Backoffice][search contract] Cancel extend contract
 	#	aktivasi kontrak singgahsini
     Given admin go to mamikos mamipay admin
@@ -194,7 +194,7 @@ Feature: Search Contract
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_DOM-401 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @seeDataContract @web @web-covered
+  @TEST_COOP-5314 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @seeDataContract @web @web-covered
   Scenario: [Backoffice][search contract] see log detail data contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -204,7 +204,7 @@ Feature: Search Contract
     And admin want to see log contract
     Then admin will see detail pop up "Data Contract"
 
-  @TEST_DOM-429 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
+  @TEST_COOP-5315 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @editDeposit @seeDetailPopupApik @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit][kost APIK] See detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -215,7 +215,7 @@ Feature: Search Contract
     Then admin will see detail pop up "Edit Deposit for Confirm to Finance"
 
 	#input bank name in  pop up "Deposit for confirm to finance"
-  @TEST_DOM-417 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
+  @TEST_COOP-5316 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputBankEditDeposit @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit] Input Bank in name detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -230,7 +230,7 @@ Feature: Search Contract
     Then admin see dropdown close and see bank "Bank Aceh Syariah"
 
 	#input nomer rekening in  pop up "Deposit for confirm to finance"
-  @TEST_DOM-418 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNomorRekeningDetailEditDeposit @web @web-covered
+  @TEST_COOP-5317 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNomorRekeningDetailEditDeposit @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit] Input nomer rekening detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -244,7 +244,7 @@ Feature: Search Contract
     And admin input nomor rekening on edit deposit page "1550000036"
 
 	#input nama rekening in  pop up "Deposit for confirm to finance"
-  @TEST_DOM-420 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNameRekeningDetailEditDeposit @web @web-covered
+  @TEST_COOP-5318 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @inputNameRekeningDetailEditDeposit @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit] Input nama rekening detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -258,7 +258,7 @@ Feature: Search Contract
     And admin input nama pemilik rekening on edit deposit page "Noval"
 
 	#input detail kerusakan in  pop up "Deposit for confirm to finance"
-  @TEST_DOM-412 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5319 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @DOM2 @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit Deposit][kost SinggahSini] Admin See detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -271,7 +271,7 @@ Feature: Search Contract
     Then admin will see Konfirmasi Sisa Deposit button hidden
 
 #	click button simpan draf detail pop up "Deposit for confirm to finance"
-  @TEST_DOM-735 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
+  @TEST_COOP-5320 @TESTSET_PAY-3276 @TESTSET_PAY-5269 @AdminSimpanDraft @DOM2 @automated @discovery-platform @web @web-covered
   Scenario: [BackOffice][Search Contract][Edit deposit] click button simpan draf detail pop up
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
