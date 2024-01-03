@@ -118,6 +118,7 @@ Feature: Waiting List - Kost Detail
     Then tenant should see ajukan sewa button is "enable"
     And user logs out as a Tenant user
 
+  @TEST_COOP-4307 @waiting-list @web
   Scenario: Check waiting list button when tennat have active contract and that kost have available room
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -131,6 +132,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Ajukan sewa button" button
     And tenant can see "Tanya pemilik" button
 
+  @TEST_COOP-4308 @waiting-list @web
   Scenario: Check waiting list button when tenant have active contract and that kost fully occupied listing
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -144,6 +146,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Lihat kost lain" button
     And tenant can see "Ikut daftar tunggu" button
 
+  @TEST_COOP-4309 @waiting-list @web
   Scenario: Check waiting list button when have active contract and room not fully for another tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -154,12 +157,14 @@ Feature: Waiting List - Kost Detail
       | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
     And tenant click "Ikut Daftar Tunggu"
     And tenant click "Secepatnya"
+    And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag  | kost name prod  |
       | Kost Arac Penuh | Kost Arac Penuh |
     Then tenant can see "Ajukan sewa button" button
     And tenant can see "Tanya pemilik" button
 
+  @TEST_COOP-4314 @waiting-list @web
   Scenario: Submit waiting list when tennat not login user
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -168,6 +173,7 @@ Feature: Waiting List - Kost Detail
     And tenant click "Ikut Daftar Tunggu"
     Then tenant will see that the text "Login Pencari Kos" is displayed
 
+  @TEST_COOP-4316 @waiting-list @web
   Scenario:Check popup on boarding on kost detail when available room - first time open kost detail
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:

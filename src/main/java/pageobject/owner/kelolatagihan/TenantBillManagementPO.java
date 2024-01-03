@@ -53,6 +53,7 @@ public class TenantBillManagementPO {
     Locator checkbox;
     Locator informationAboutUpcomingFeature;
     Locator kostDropdownInBillingManagement;
+    Locator lihatStatusTagihanBtn;
 
     public TenantBillManagementPO(Page page) {
         this.page = page;
@@ -84,6 +85,7 @@ public class TenantBillManagementPO {
         informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
         arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
+        lihatStatusTagihanBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Status Tagihan"));
     }
 
     /**
@@ -555,5 +557,22 @@ public class TenantBillManagementPO {
         Locator getTextTitle = page.locator("//p[contains(text(),'"+ titleText + "')]");
         Locator getTextContent = page.locator("//p[contains(text(),'"+ contentText + "')]");
         return playwright.getText(getTextTitle) + playwright.getText(getTextContent);
+    }
+
+    /**
+     * click Lihat status tagihan on detail penyewa
+     */
+    public void clickLihatStatusTagihan(){
+        playwright.clickOn(lihatStatusTagihanBtn);
+    }
+
+    /**
+     * verify status tagihan text
+     * @param text
+     * @return text
+     */
+    public String getTextStatusTagihan(String text){
+        Locator getStatusTagihan = page.getByText(" "+ text +" ");
+        return playwright.getText(getStatusTagihan);
     }
 }
