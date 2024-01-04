@@ -1,5 +1,5 @@
 @BBM5
-Feature: [TnC Booking][Detail Booking] Check Update TnC Booking on Pengajuan sewa page
+Feature: Check Update TnC Booking on Pengajuan sewa page
 
   @continue @TEST_COOP-1242 @TEST_COOP-1247
   Scenario: [TnC Booking][Detail Booking] Check TnC Booking on Pengajuan sewa page for kost reguler (BBM-1194)

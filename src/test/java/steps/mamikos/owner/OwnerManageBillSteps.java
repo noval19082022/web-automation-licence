@@ -43,7 +43,7 @@ public class OwnerManageBillSteps {
         billManage.reloadOnEmptyKelolaTagihanPage();
         loading.waitForLoadingIconDisappear();
         billManage.selectKosBillPageFilter(kostName);
-        if (month.equalsIgnoreCase("next") && currentMonth.equalsIgnoreCase("Desember")) {
+        if (month.equalsIgnoreCase("next") && currentMonth.equalsIgnoreCase("Januari")) {
             billManage.clickOnFilterMonth();
             billManage.clickArrowNextMonthFilterButton();
             billManage.clickOnMonthNameOnFilterMonth(selectedMonthFilter);
@@ -248,5 +248,15 @@ public class OwnerManageBillSteps {
     public void user_can_sees_other_price_with_name_and_price_on_konfirmasi(String titleText, String contentText) {
         Assert.assertEquals(billManage.getTextFinancialReport(titleText, contentText), "Buka Laporan Keuangan di AplikasiUntuk saat ini, fitur Laporan Keuangan hanya dapat digunakan di\n" +
                 "      aplikasi Mamikos di Android dan iOS.");
+    }
+
+    @And("owner clicks on lihat status tagihan")
+    public void ownerCLicksOnLihatStatusTagihan(){
+        billManage.clickLihatStatusTagihan();
+    }
+
+    @Then("owner can see status tagihan {string}")
+    public void ownerCanSeeStatusTagihan(String text){
+        billManage.getTextStatusTagihan(text);
     }
 }

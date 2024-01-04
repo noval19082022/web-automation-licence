@@ -1,7 +1,7 @@
 @DOM4
 Feature: FTUE Booking Benefit
 
-  @ftuebookingbenefit @continue @TEST_DOM-1715
+  @ftuebookingbenefit @continue @TEST_COOP-5659
   Scenario: User Can See FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -18,7 +18,7 @@ Feature: FTUE Booking Benefit
       | Hore! Pemilik kos siap menerimamu! Segera lakukan pembayaran sebelum kedaluwarsa ya.       |
       | Setelah pembayaran diterima pemilik, kamar kos sudah siap kamu huni.                       |
 
-  @ftuebookingbenefit @TEST_DOM-1718
+  @ftuebookingbenefit @TEST_COOP-5662
   Scenario: User Can Use Button On FTUE Booking Benefit
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -27,7 +27,7 @@ Feature: FTUE Booking Benefit
     When user dismiss FTUE booking benefit
     Then user can not see FTUE booking benefit
 
-  @ftuebookingbenefit1 @TEST_DOM-1716
+  @ftuebookingbenefit1 @TEST_COOP-5660
   Scenario: User Can Still See FTUE For The Second Time Visit To Other Kost Without Dismissing FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -55,7 +55,7 @@ Feature: FTUE Booking Benefit
       | Hore! Pemilik kos siap menerimamu! Segera lakukan pembayaran sebelum kedaluwarsa ya.       |
       | Setelah pembayaran diterima pemilik, kamar kos sudah siap kamu huni.                       |
 
-  @ftuebookingbenefit @TEST_DOM-1719
+  @ftuebookingbenefit @TEST_COOP-5663
   Scenario: User Can Not See FTUE For The Second Time Visit To Other Kost After Dismissing FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -71,7 +71,7 @@ Feature: FTUE Booking Benefit
       | Kose Full Automation | Kost Automation Putri Tobelo |
     Then user can not see FTUE booking benefit
 
-  @ftuebookingbenefit @TEST_DOM-1717
+  @ftuebookingbenefit @TEST_COOP-5661
   Scenario: User Can Not See FTUE For Non BBK Kos
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -82,7 +82,7 @@ Feature: FTUE Booking Benefit
       | Kost BG Automation | Kost Dumbledore Automation |
     Then user can not see FTUE booking benefit
 
-  @ftuebookingbenefit @TEST_DOM-1714
+  @ftuebookingbenefit @TEST_COOP-1714
   Scenario: User Can Not See FTUE Booking Benefit On Apartment Details
     Given user go to mamikos homepage
     When user login as tenant via phone number:

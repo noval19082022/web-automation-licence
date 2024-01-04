@@ -149,7 +149,7 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 5000.0)) {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
         playwright.clickOn(acceptFromChatRoomButton);

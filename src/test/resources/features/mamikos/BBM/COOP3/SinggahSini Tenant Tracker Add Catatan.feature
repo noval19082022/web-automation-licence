@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3 @legacy
+@COOP-5027 @COOP3
 Feature: SinggahSini Tenant Tracker Add Catatan
 
 

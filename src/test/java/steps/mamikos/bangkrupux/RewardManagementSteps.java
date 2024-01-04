@@ -2,6 +2,7 @@ package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,10 +11,15 @@ import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.RewardManagementPO;
 import pageobject.common.HomePO;
 
+import java.util.List;
+import java.util.Map;
+
 public class RewardManagementSteps {
     Page page = ActiveContext.getActivePage();
     RewardManagementPO rewardManagement = new RewardManagementPO(page);
     HomePO home = new HomePO(page);
+
+    private List<Map<String , String>> rewardTypeData;
 
     @When("user access to Reward List menu")
     public void userAccessToRewardListMenu() {
@@ -73,5 +79,33 @@ public class RewardManagementSteps {
     @And("user submit Reward")
     public void user_submit_reward() {
         rewardManagement.clickOnSubmmitReward();
+    }
+
+    @When("admin access to Reward Type menu")
+    public void adminAccessToRewardTypeMenu(){
+        rewardManagement.clickOnRewardTypeMenu();
+    }
+
+    @And("admin click button add reward type")
+    public void adminClickButtonAddRewardType(){
+        rewardManagement.createRewardTypeButton();
+    }
+
+    @And("admin input reward type with :")
+    public void adminInputRewardTypeWith(DataTable table){
+        rewardTypeData = table.asMaps(String.class, String.class);
+        var key = rewardTypeData.get(0).get("key");
+        var name = rewardTypeData.get(0).get("name");
+        rewardManagement.inputRewardType(key, name);
+    }
+
+    @And("admin can see error message type with {string}")
+    public void adminCanSeeErrorMessageTypeWith(String text){
+        Assert.assertEquals(rewardManagement.getErrorMessage(text), text, "doesn't appears error message");
+    }
+
+    @And("admin click edit button on {string}")
+    public void adminClickEditButtonOn(String text){
+        rewardManagement.editButton(text);
     }
 }
