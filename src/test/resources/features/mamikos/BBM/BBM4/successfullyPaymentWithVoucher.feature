@@ -35,13 +35,14 @@ Scenario: Admin Batalkan Contract
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password     |
-      | 0890000000289 | 0890000000289 | Bismillah@01 |
-    And owner accept booking via Homepage
-    And owner back to owner dashboard
+      | phone stag     | phone prod     | password     |
+      | 0890000000289  | 08900000000021 | Bismillah@01 |
+    And owner accept booking from tenant:
+      | tenant stag                 | tenant prod         |
+      | Budi Tromol Coop Automation | Irvi Tenant Add Ons |
+    Then owner should redirect back to pengajuan booking page
 
-  @tenantInputVoucher
-  @continue
+  @tenantInputVoucher @continue
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
     When user login as tenant via phone number:
