@@ -74,3 +74,11 @@ Feature: Tenant Forgot Password
     And user fill their registered phone number "0892202305"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
+
+  @TEST_COOP-5680 @Automated @DOM3 @web-covered
+  Scenario: [Web Tenant][Forgot Password - Phone Number]Error Message - Phone number is registered
+    Given user go to mamikos homepage
+    When user click on button masuk pencari kos
+    And user click on lupa password?
+    And user fill their registered phone number "086476512341"
+    Then user verify on tenant page "Pilih Metode Verifikasi"

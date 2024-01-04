@@ -128,4 +128,10 @@ public class ForgotPasswordSteps {
     public void click_on_lupa_password() {
         forgotPassword.clickOnLupaPassword();
     }
+
+    @Then("user verify on tenant page {string}")
+    public void userVerifyOntenantPage(String title) {
+        Assert.assertEquals(playwright.getActivePageTitle(), "Lupa Password Pencari - Mamikos", "Active page title is not equal to Lupa Password Pemilik - Mamikos");
+        Assert.assertTrue(forgotPassword.getTitleVerifikasiPage().contains(title), "Title is not equal to " + title);
+    }
 }
