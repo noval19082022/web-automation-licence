@@ -1,7 +1,7 @@
 @essentialTest @DOM4
 Feature: Main Search
 
-  @TEST_DOM-1844 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
+  @TEST_COOP-5498 @Automated @DOM4 @Web @discovery-platform @search @search-suggest
   Scenario: [Dweb][Search]5 Suggestion List should appear
     Given user go to mamikos homepage
     When user search for random keyword:
@@ -9,7 +9,7 @@ Feature: Main Search
       | semarang    | semarang   |
     Then should display the result list of keyword "Semarang"
 
-  @TEST_DOM-1853 @Automated @DOM4 @Web @discovery-platform @search @search-except-suggest
+  @TEST_COOP-5504 @Automated @DOM4 @Web @discovery-platform @search @search-except-suggest
   Scenario: [Dweb][Search] Typing exception character
     Given user go to mamikos homepage
     When user search for random keyword:
@@ -17,7 +17,7 @@ Feature: Main Search
       | asdfadjsade    | asdfadjsade   |
     Then should display the result exception "Tidak menemukan nama tempat / nama kost yang sesuai."
 
- @TEST_DOM-1849 @Automated @DOM4 @Web @discovery-platform @search @search-clear-text
+ @TEST_COOP-5503 @Automated @DOM4 @Web @discovery-platform @search @search-clear-text
   Scenario: [Dweb][Search] Reset text on searchbar
     Given user go to mamikos homepage
     When user search for random keyword:
@@ -25,7 +25,7 @@ Feature: Main Search
       | jakarta    | jakarta   |
     Then user see searchbar is empty
 
-  @TEST_DOM-1848 @Automated @DOM4 @Web @discovery-platform @search @search-auto-area
+  @TEST_COOP-5501 @Automated @DOM4 @Web @discovery-platform @search @search-auto-area
   Scenario: [Dweb][Search] Select Autocomplete for "Area"
     Given user go to mamikos homepage
     When user search for random keyword:
@@ -33,7 +33,7 @@ Feature: Main Search
       | sindu    | sindu   |
     Then user click the search result based on area
 
-  @TEST_DOM-1846 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
+  @TEST_COOP-5500 @Automated @DOM4 @Web @discovery-platform @search @search-auto-nama
   Scenario: [Dweb][Search] Select Autocomplete for "Nama"
     Given user go to mamikos homepage
     When user search property by name Autocomplete
@@ -41,7 +41,7 @@ Feature: Main Search
       | Ran        | Ran         |
     Then user see the search result based on name
 
-  @TEST_DOM-1871 @Automated @DOM4 @Web @discovery-platform @search @search-area-list
+  @TEST_COOP-5517 @Automated @DOM4 @Web @discovery-platform @search @search-area-list
   Scenario: [Dweb][Search] Search Kos - Area List have correct dropdown
     Given user go to mamikos homepage
     When user clicks Search
@@ -52,7 +52,7 @@ Feature: Main Search
       | Seminyak          | Balikpapan Tengah               | Purwokerto Selatan | Grogol     | Mangkubumi  |
       | Jimbaran          | Balikpapan Selatan              | Purwokerto Utara   | Citangkil  | Cihideung   |
 
-  @TEST_DOM-1869 @Automated @DOM4 @Web @discovery-platform @search @search-pupular-list
+  @TEST_COOP-5516 @Automated @DOM4 @Web @discovery-platform @search @search-pupular-list
   Scenario: [Dweb][Search] Search Kos - Popular area have correct city
     Given user go to mamikos homepage
     When user clicks Search
@@ -68,7 +68,7 @@ Feature: Main Search
       | Makassar        | Makassar       |
       | Medan           | Medan          |
 
-  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @TEST_COOP-5511 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
@@ -78,7 +78,7 @@ Feature: Main Search
     Then title listing that appear have location in "Malang"
 
 
-  @TEST_DOM-1862 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
+  @TEST_COOP-5518 @Automated @DOM4 @Web @discovery-platform @search @search-popular-city
   Scenario: [Dweb][Search] Search Kos in popular area have correct search result
     Given user go to mamikos homepage
     When user clicks Search
@@ -90,7 +90,7 @@ Feature: Main Search
       | Bogor Selatan  | Bogor Selatan       |
     Then title listing that appear have location campus in "Bogor"
 
-  @TEST_DOM-1860 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
+  @TEST_COOP-5509 @Automated @DOM4 @Web @discovery-platform @search @search-check-appearance-apartment
   Scenario Outline: [Dweb][Search] Check appearance of Apartment property on listing with keyword city
     Given user go to mamikos homepage
     When user search for random keyword:"<city>"
@@ -102,13 +102,13 @@ Feature: Main Search
       | Bandung         |
       | Yogyakarta      |
 
-  @TEST_DOM-1858 @Automated @DOM4 @Web @discovery-platform @search @search-result
+  @TEST_COOP-5508 @Automated @DOM4 @Web @discovery-platform @search @search-result
   Scenario: [Dweb][Search] Check search result
     Given user go to mamikos homepage
     When user clicks Search
     Then title listing that appear have location in "Malang"
 
-  @TEST_DOM-1864 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-list
+  @TEST_COOP-5513 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-list
   Scenario: [Dweb][Search] Search Kos - Popular campus
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -125,7 +125,7 @@ Feature: Main Search
       | ITB              |ITB              |
       | UMY              |UMY              |
 
-  @TEST_DOM-1863 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city
+  @TEST_COOP-5512 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city
   Scenario: [Dweb][Search]Search Kos - Campus Lists By City
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -136,7 +136,7 @@ Feature: Main Search
       | Universitas Telkom	 | UNTAR	            | UKI Paulus	             | UNDIP	               | UNY                      |
       | UNISBA	             | trisakti     	    | Universitas Fajar          | UDINUS                  | UAJY                     |
 
-  @TEST_DOM-1856 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-result
+  @TEST_COOP-5507 @Automated @DOM4 @Web @discovery-platform @search @search-popular-campus-result
   Scenario: [Dweb][Search]Search Kos - Popular campus result
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -145,7 +145,7 @@ Feature: Main Search
       | UNDIP            | UNDIP           |
     Then title listing that appear have location campus in "Semarang"
 
-  @TEST_DOM-1855 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city-result
+  @TEST_COOP-5506 @Automated @DOM4 @Web @discovery-platform @search @search-campus-city-result
   Scenario: [Dweb][Search]Search Kos - Popular campus based on city list
     Given user go to mamikos homepage
     When user click search area based on campus
@@ -157,7 +157,7 @@ Feature: Main Search
       | IPB            | IPB          |
     Then title listing that appear have location campus in "Bogor"
 
-  @TEST_DOM-1854 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
+  @TEST_COOP-5505 @Automated @DOM4 @Web @discovery-platform @search @search-popular-station
   Scenario: [Dweb][Search]Search Kos - Popular station and stop
     Given user go to mamikos homepage
     When user click stasiun&halte
@@ -174,7 +174,7 @@ Feature: Main Search
       | Halte Monas                |Halte Monas              |
       | Stasiun MRT Blok M         |Stasiun MRT Blok M       |
 
-  @TEST_DOM-1845 @Automated @DOM4 @Web @discovery-platform @search @search-stasiiun-list
+  @TEST_COOP-5499 @Automated @DOM4 @Web @discovery-platform @search @search-stasiiun-list
   Scenario: [Dweb][Search] Search Kos - Station Lists By City
     Given user go to mamikos homepage
     When user click stasiun&halte
@@ -185,7 +185,7 @@ Feature: Main Search
       | Stasiun Andir	     | Halte Monas	                 | Stasiun Malang Kotabaru	| Stasiun Alastua	      | Stasiun Rewulu           |
       | Stasiun Cimindi	     | Stasiun MRT Bendungan Hilir	 | Stasiun Pakisaji         | Stasiun Semarang Gudang | Stasiun Patukan          |
 
-  @TEST_DOM-1851 @Automated @DOM4 @Web @discovery-platform @search @search-result-halte
+  @TEST_COOP-5502 @Automated @DOM4 @Web @discovery-platform @search @search-result-halte
   Scenario: [Dweb][Search] Search Kos based on Stasiun and stop
     Given user go to mamikos homepage
     When user click stasiun&halte
@@ -194,7 +194,7 @@ Feature: Main Search
       | Halte Halimun    | Halte Halimun   |
     Then title listing that appear have location campus in "Jakarta"
 
-  @TEST_DOM-1867 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
+  @TEST_COOP-5515 @Automated @DOM4 @Web @discovery-platform @search @search-result-station-city
   Scenario: [Dweb][Search] Search Kos - Station based on city list
     Given user go to mamikos homepage
     When user click stasiun&halte
@@ -205,3 +205,15 @@ Feature: Main Search
       | city stag               | city prod            |
       | Stasiun Cimekar         | Stasiun Cimekar      |
    Then title listing that appear have location campus in "Bandung"
+
+  @TEST_COOP-5510
+  Scenario: [Dweb][Search] Search Kos - Area based on city list
+    Given user go to mamikos homepage
+    When user clicks Search
+    And user click area city
+      | city stag                | city prod                  |
+      | Yogyakarta chevron-down  | Yogyakarta chevron-down    |
+    Then under area city click
+      | city stag      | city prod    |
+      | Sleman         | Sleman       |
+    Then title listing that appear have location campus in "Sleman"

@@ -1,12 +1,12 @@
 @DOM4
 Feature: Room card on Kost List
 
-  @continue
+  @continue @TEST_COOP-5599
   Scenario: pre-condition dismiss probut pop up on list
     Given user visit page "/cari/halte-harmoni-central/all/bulanan/0-15000000"
     Then user dismiss probut pop up on kost list
 
-  @continue @TEST_COOP-1550
+  @continue @TEST_COOP-5600
   Scenario Outline: Checking element on room card /cari /kost
     Given user visit page "<url>"
     When user want to see more kost list
