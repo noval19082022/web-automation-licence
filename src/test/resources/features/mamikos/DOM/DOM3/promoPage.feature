@@ -4,7 +4,7 @@ Feature: Promo page
 
 #  this promo cant be applicable because on promo.mamikos.com There are no promotions available yet
 
-  @DOM3 @TEST_DOM-311 @Automated @DOM3 @web-covered
+  @DOM3 @TEST_COOP-5427 @Automated @DOM3 @web-covered
   Scenario: User can copy promo code
     Given user navigates to promo mamikos
 #    When user click SALIN on any promo

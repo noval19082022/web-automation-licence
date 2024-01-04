@@ -332,13 +332,13 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to see more detail kost location
     Then user will see login pop up
 
-  @TEST_DOM-358 @TESTSET_UG-6221 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @TEST_COOP-5392 @TESTSET_UG-6221 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: [Web][Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When user visit page "/room/kost-sleman-kost-campur-murah-kost-apik-desta-tipe-b-tamvan-2"
     Then user want to reached map section and see lihat peta button
 
-  @TEST_DOM-349 @Automated @DOM3 @web-covered
+  @TEST_COOP-5392 @Automated @DOM3 @web-covered
   Scenario: [Test][Admin][SanJunipero] Slug name already exist
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -351,19 +351,19 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkrupux save Sanjunipero on create new san junipero
     Then admin verify see text "The slug has already been taken."
 
-  @TEST_DOM-342 @Automated @DOM3 @web-covered
+  @TEST_COOP-5393 @Automated @DOM3 @web-covered
   Scenario: [Web][Landing Kos][Popular city] Search Time Period
     Given user go to mamikos homepage
     When user open Popular Area in Yogyakarta
     Then user should redirect to link that contains "/kost/kost-jogja-murah"
 
-  @TEST_DOM-341 @Automated @DOM3 @web-covered
+  @TEST_COOP-5394 @Automated @DOM3 @web-covered
   Scenario: [Web][Landing Kos][Popular campus] Search Kost Type
     Given user go to mamikos homepage
     When  user open Around University in UNDIP
     Then user should redirect to link that contains "/kost/kost-dekat-undip-semarang-murah"
 
-  @TEST_DOM-337 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5398 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Google Play icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -371,7 +371,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
 
-  @TEST_DOM-331 @TESTSET_UG-4894 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @TEST_COOP-5399 @TESTSET_UG-4894 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Bell Notification] Bell icon - lihat semua clicked
     Given user go to mamikos homepage
     When user login as owner:
@@ -381,7 +381,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner wants to see all notification
     Then user redirected to "/ownerpage/notification"
 
-  @TEST_DOM-322 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5400 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -389,7 +389,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://www.instagram.com/mamikosapp"
 
-  @TEST_DOM-321 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5401@TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -397,7 +397,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://twitter.com/mamikosapp"
 
-  @TEST_DOM-319 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5402 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -405,7 +405,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://www.facebook.com/mamikosapp"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -413,7 +413,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/tentang-kami"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -421,7 +421,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/career"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -429,7 +429,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/mamiads"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -437,7 +437,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -445,7 +445,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/info/"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -453,7 +453,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/info/mamikos-corporate-accommodation/"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -461,7 +461,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/post/kebijakan-privasi-mamikos"
 
-  @TEST_DOM-318 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -469,7 +469,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
 
-  @TEST_DOM-316 @Automated @DOM3 @web-covered
+  @TEST_COOP-5405 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Promo page] User can open promo detail
     Given user navigates to promo mamikos
   ## this step is comment because page https://promo.mamikos.com/ is empty
@@ -478,7 +478,7 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    Then detail promo page opened with correct title
 #    And user see button booking now
 
-  @TEST_DOM-312 @Automated @DOM3 @web-covered
+  @TEST_COOP-5407 @Automated @DOM3 @web-covered
   Scenario: [Test][Admin][SanJunipero] User able to enable certain landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -492,7 +492,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
 
-  @TEST_DOM-314 @TEST_DOM-313 @Automated @DOM3 @web-covered
+  @TEST_COOP-5408 @TEST_DOM-313 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Promo page] Check pagination in promo page
     Given user navigates to promo mamikos
   ## this step is comment because page https://promo.mamikos.com/ is empty
@@ -503,7 +503,7 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    When user click page index "2"
 #    Then promo page "2" will be opened
 
-  @TEST_DOM-302 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5409 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: View Content - click Cari kos Singgahsini
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -511,7 +511,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://singgahsini.id/"
 
-  @TEST_DOM-298 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
+  @TEST_COOP-5410 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
   Scenario Outline: [WEB Tenant][Register] error message "Penulisan alamat email salah"
     Given user go to mamikos homepage
     When user want to register as tenant
@@ -522,13 +522,13 @@ Feature: [Test-Execution][DOM] Web - Platform
       | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
       | draft@xyz.com.net | Mohon masukkan email yang valid                |
 
-  @TEST_DOM-297 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5411 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - Scroll Page
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     Then user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos
 
-  @TEST_DOM-296 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  @TEST_COOP-5412 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
   Scenario: [Test][Filter][Landing Page][SanJunipero] Check on Gender filter data kost in the landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -541,7 +541,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user will see that the text "Putra" is displayed
     Then user will see that the text "Putri" is displayed
 
-  @TEST_DOM-295 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  @TEST_COOP-5413 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
   Scenario: [Test][Filter][Landing Page][SanJunipero] Check on filter data kost in the landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -553,35 +553,35 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user will see that the text "Semua Area" is displayed
     Then user will see that the text "Paling direkomendasikan" is displayed
 
-  @TEST_DOM-292 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5414 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Booking Kos
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user click booking kos button
     Then user redirected to "/booking"
 
-  @TEST_DOM-293 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5415 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Fitur Unggulan
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Fitur Unggulan on the header on enaknyangekos page
     Then user will see that the text "Fitur-fitur yang kamu pakai buat #EnaknyaNgekos" is displayed
 
-  @TEST_DOM-291 @TESTSET_PF-1393 @TESTSET_PF-1951 @Automated @DOM3 @web-covered
+  @TEST_COOP-5416 @TESTSET_PF-1393 @TESTSET_PF-1951 @Automated @DOM3 @web-covered
   Scenario: [WEB Tenant][Register] error message "Nomor handphone harus diawali dengan 08."
     Given user go to mamikos homepage
     When user want to register as tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara", "666", "email@gmail.com", "Password123", " "
     Then user will see that the text "Nomor handphone harus diawali dengan 08." is displayed
 
-  @TEST_DOM-290 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_COOP-5417 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Produk dan Layanan
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Product dan layanan on the header on enaknyangekos page
     Then user will see that the text "Kenapa #EnaknyaNgekos?" is displayed
 
-  @TEST_DOM-271 @TESTSET_UG-4895 @TESTSET_PF-1792 @Automated @web-covered
+  @TEST_COOP-5418 @TESTSET_UG-4895 @TESTSET_PF-1792 @Automated @web-covered
   Scenario: [Tenant][Pengaturan page ]Ubah password valid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -595,7 +595,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
-  @TEST_DOM-384 @Automated @web-covered
+  @TEST_COOP-5419 @Automated @web-covered
   Scenario: [Tenant][Pengaturan page ] Restore Ubah password valid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -609,7 +609,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
-  @TEST_DOM-282 @Automated @DOM3 @web-covered
+  @TEST_COOP-5420 @Automated @DOM3 @web-covered
   Scenario: [OD Revamp][Event Banner] Event banner redirection
     Given user go to mamikos homepage
     When user login as owner:
@@ -619,7 +619,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner click on banner on dari mamikos section
     Then user redirected to "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/viewform"
 
-  @TEST_DOM-279 @Automated @DOM3 @web-covered
+  @TEST_COOP-5421 @Automated @DOM3 @web-covered
   Scenario: [OD Revamp][Event Banner] Event banner check content
     Given user go to mamikos homepage
     When user login as owner:
@@ -628,7 +628,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner go to event banner section
     Then user will see that the text "Dari Mamikos" is displayed
 
-  @TEST_DOM-277 @Automated @DOM3 @web-covered
+  @TEST_COOP-5422 @Automated @DOM3 @web-covered
   Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -638,7 +638,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to see more detail kost location
     Then user will see login pop up
 
-  @TEST_DOM-276 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @TEST_COOP-5423 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario Outline: [Tenant][Password - Reg tenant]passowrd with symbol&numeric
     Given user go to mamikos homepage
     When user want to register as tenant
@@ -649,7 +649,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 12345!@#$% |
       | Perempuan1 |
 
-  @TEST_DOM-274 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_COOP-5424 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - click Mulai Cari Kos
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -657,7 +657,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "/kos/andalan"
 
-  @TEST_DOM-273 @TESTSET_UG-6249 @TESTSET_PF-1400 @TESTSET_PF-1956 @Automated @DOM3 @web-covered
+  @TEST_COOP-5425 @TESTSET_UG-6249 @TESTSET_PF-1400 @TESTSET_PF-1956 @Automated @DOM3 @web-covered
   Scenario: [OD Revamp][Event Banner] Event banner same order priority
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -671,7 +671,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkerupux updated the event banner
     Then user will see that the text "Success! Event Updated" is displayed
 
-  @TEST_DOM-272 @TESTSET_UG-6249 @TESTSET_PF-1400 @TESTSET_PF-1956 @Automated @DOM3 @web-covered
+  @TEST_COOP-5426 @TESTSET_UG-6249 @TESTSET_PF-1400 @TESTSET_PF-1956 @Automated @DOM3 @web-covered
   Scenario: [OD Revamp][Event Banner] Event banner different order priority
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
