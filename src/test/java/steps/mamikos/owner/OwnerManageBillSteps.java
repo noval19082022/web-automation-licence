@@ -259,4 +259,34 @@ public class OwnerManageBillSteps {
     public void ownerCanSeeStatusTagihan(String text){
         billManage.getTextStatusTagihan(text);
     }
+
+    @And("user click Kirim ulang kode hyperlink")
+    public void userClickKirimUlangKodeHyperlink() {
+        billManage.clickKirimUlangKode();
+    }
+
+    @Then("user will redirect to Kirim kode unik ke penyewa page")
+    public void user_will_redirect_to_kirim_kode_unik_ke_penyewa_page(){
+        Assert.assertTrue(billManage.isKrmKodeUnikPageDisplayed(), "You are not Kirim kode unik page");
+    }
+
+    @And("user will see phone number of owner {string}")
+    public void user_will_see_phone_number_of_owner(String oldNumber){
+        Assert.assertEquals(billManage.getPhoneNumberPenyewa(), oldNumber, "The number phone is not match");
+    }
+
+    @When("user click Ubah nomor HP hyperlink")
+    public void user_click_ubah_nomor_hp_hyperlink() {
+        billManage.clickUbahNmrHp();
+    }
+
+    @And("user change owner's phone number into {string} and click Gunakan")
+    public void user_change_owners_phone_number_into_and_click_gunakan(String ubhPhoneNumber) {
+        billManage.clickPhoneNmbField(ubhPhoneNumber);
+    }
+
+    @Then("user will see wording of warning tenant who don't have kos saya at Semua filter")
+    public void user_will_see_wording_of_warning_tenant_who_dont_have_kos_saya_at_semua_filter(){
+        Assert.assertTrue(billManage.isWarningAtSemuaFltrDisplayed(), "The wording is not match");
+    }
 }

@@ -461,6 +461,33 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
 
+  @TEST_BBM-913 @continue
+  #changeOwnersPhoneNumber.feature
+  Scenario: change owner's number phone at unique code
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password     |
+      | 0890000000289 | Bismillah@01 |
+    And user navigate to penyewa page
+    And user search kost in penyewa menu "kost bandung owner change phone number unique code Tobelo Utara Halmahera Utara"
+    And user click Selengkapnya button on "Tenant Unique Code Jangan Diubah" contract
+    And user click Kirim ulang kode hyperlink
+    Then user will redirect to Kirim kode unik ke penyewa page
+    And user will see phone number of owner "0890000001003"
+    When user click Ubah nomor HP hyperlink
+    And user change owner's phone number into "0890000001004" and click Gunakan
+    Then user will see phone number of owner "0890000001004"
+    When user click Ubah nomor HP hyperlink
+    And user change owner's phone number into "0890000001003" and click Gunakan
+    Then user will see phone number of owner "0890000001003"
+
+  @TEST_BBM-895
+  #warningDontHaveKosSayaAtSemuaFilter.feature
+  Scenario: check warning who don't have kos saya at Semua filter (BBM-895)
+    When user navigate to penyewa page
+    And user search kost in penyewa menu "kost banda who dont have kos saya Tobelo Utara Halmahera Utara"
+    Then user will see wording of warning tenant who don't have kos saya at Semua filter
+
   @TEST_BBM-928 @continue
   #addTenant.feature
   Scenario: Add Tenant For Full Room (BBM-928)
