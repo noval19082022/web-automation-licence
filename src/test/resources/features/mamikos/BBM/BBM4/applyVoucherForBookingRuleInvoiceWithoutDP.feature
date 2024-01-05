@@ -1,4 +1,4 @@
-@regression @regressProd @BBM4 @voucher
+@regression @regressProd @BBM4 @voucher @COOP-2733
 
 Feature: Apply Voucher For Booking Rule, Invoice Without DP
 
