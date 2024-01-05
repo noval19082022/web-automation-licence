@@ -445,7 +445,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_BBM-869
+  @updateRoomToast @markRoom @TEST_BBM-869 @continue
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -460,6 +460,15 @@ Feature: BnB feature
     And user untick already inhabited checkbox
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
+
+  @BNB-3131 @TEST_BBM-947 @booking1
+  #otherPrice.feature
+  Scenario: Delete Active Other Additional Price (BBM-947)
+    When user redirected to owner dashboard
+    And user click menu "Atur Harga" on feature waktunya mengelola property
+    And user click kos "Ancient Fuelweaver Automation" in update price list
+    And user delete active other additional price
+    Then tenant can not sees active other price
 
   @TEST_BBM-913 @continue
   #changeOwnersPhoneNumber.feature
