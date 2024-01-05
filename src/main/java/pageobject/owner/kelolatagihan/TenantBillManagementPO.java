@@ -46,6 +46,13 @@ public class TenantBillManagementPO {
     Locator contractName;
     Locator clickSelengkapnyaContract;
     Locator arrowNextMonthFilterButton;
+    Locator krmUlangKodeBtn;
+    Locator krmKodeUnikPage;
+    Locator phoneNumberPenyewaText;
+    Locator ubahNmrHpBtn;
+    Locator phoneNumberField;
+    Locator gunakanBtn;
+    Locator  dontHaveKosWarning;
 
     //Locator for download biodata penyewa
     Locator filterDropdown;
@@ -86,6 +93,13 @@ public class TenantBillManagementPO {
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
         arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         lihatStatusTagihanBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Status Tagihan"));
+        krmUlangKodeBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kirim ulang kode"));
+        krmKodeUnikPage = page.getByText("Kirim kode unik ke penyewa");
+        ubahNmrHpBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah nomor HP"));
+        phoneNumberField = page.getByPlaceholder("Masukkan nomor HP");
+        gunakanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Gunakan"));
+        dontHaveKosWarning = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Penyewa Kos"));
+        phoneNumberPenyewaText = page.locator(".bg-c-text--title-3");
     }
 
     /**
@@ -436,7 +450,7 @@ public class TenantBillManagementPO {
      * @throws InterruptedException
      * @return number of elements
      */
-    public int getNumberListOfContract() throws InterruptedException {
+    public int getNumberListOfContract() {
         playwright.hardWait(2);
         int numberOfElements = 0;
         if (contractNumber1.isVisible()){
@@ -574,5 +588,53 @@ public class TenantBillManagementPO {
     public String getTextStatusTagihan(String text){
         Locator getStatusTagihan = page.getByText(" "+ text +" ");
         return playwright.getText(getStatusTagihan);
+    }
+
+    /**
+     * click Kirim ulang kode hyperlink
+     */
+    public void clickKirimUlangKode() {
+        playwright.clickOn(krmUlangKodeBtn);
+    }
+
+    /**
+     * see Kirim kode unik ke penyewa page
+     * @return true or false
+     */
+    public boolean isKrmKodeUnikPageDisplayed(){
+        return playwright.waitTillLocatorIsVisible(krmKodeUnikPage);
+    }
+
+    /**
+     * get old owner's phone number
+     * @return phone number
+     */
+    public String getPhoneNumberPenyewa(){
+        return playwright.getText(phoneNumberPenyewaText);
+    }
+
+    /**
+     * click Ubah nomor HP hyperlink
+     */
+    public void clickUbahNmrHp() {
+        playwright.clickOn(ubahNmrHpBtn);
+    }
+
+    /**
+     * click phone number field
+     * and change into the new number
+     */
+    public void clickPhoneNmbField(String ubhPhoneNumber) {
+        playwright.fill(phoneNumberField, ubhPhoneNumber);
+        playwright.clickOn(gunakanBtn);
+    }
+
+    /**
+     * get wording of warning tenant who don't have kos saya at Semua filter
+     * @return wording of warning at Semua filter
+     */
+    public boolean isWarningAtSemuaFltrDisplayed(){
+        playwright.waitFor(dontHaveKosWarning);
+        return playwright.waitTillLocatorIsVisible(dontHaveKosWarning);
     }
 }
