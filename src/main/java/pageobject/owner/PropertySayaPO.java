@@ -178,6 +178,10 @@ public class PropertySayaPO {
     Locator toastMessage;
     Locator updateRoom;
     private Locator editDataKosButton;
+    Locator btnDeleteActiveOtherPrice;
+    Locator hapusConfirmation;
+    Locator textOtherPriceActiveName;
+    Locator textOtherPriceActiveNumber;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -312,6 +316,10 @@ public class PropertySayaPO {
         editRoomIcn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("1")).getByRole(AriaRole.LINK).first();
         toastMessage = page.locator(".wrapper__toast");
         updateRoom = page.getByText("Update Kamar");
+        btnDeleteActiveOtherPrice = page.locator(".additional-price-item .additional-price-item__action button:last-child");
+        hapusConfirmation = page.locator("//*[@class='c-mk-card__body']//button[contains(.,'Ya, Hapus')]");
+        textOtherPriceActiveName = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-title");
+        textOtherPriceActiveNumber = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-price");
     }
 
     /**
@@ -2094,5 +2102,38 @@ public class PropertySayaPO {
      */
     public void clickOnEditDataKosButton() {
         playwright.clickOn(editDataKosButton);
+    }
+
+    /**
+     * click delete on delete confirmation pop up deposit
+     */
+    public void clickHapusOnDeleteConfirmation() {
+        playwright.clickOn(hapusConfirmation);
+    }
+
+    /**
+     * Click on update price button
+     */
+    public void deleteActiveAdditionalPrice() {
+        if(playwright.waitTillLocatorIsVisible(btnDeleteActiveOtherPrice)){
+            playwright.clickOn(btnDeleteActiveOtherPrice);
+            clickHapusOnDeleteConfirmation();
+        }
+    }
+
+    /**
+     * check if other price name on index number 1 is visible
+     * @return true if other price visible, otherwise false
+     */
+    public boolean isOtherPriceNamePresent() {
+        return playwright.waitTillLocatorIsVisible(textOtherPriceActiveName);
+    }
+
+    /**
+     * check if other price number on index number 1 is visible
+     * @return true if number price visible, otherwise false
+     */
+    public boolean isOtherPriceNumberPresent() {
+        return playwright.waitTillLocatorIsVisible(textOtherPriceActiveNumber);
     }
 }

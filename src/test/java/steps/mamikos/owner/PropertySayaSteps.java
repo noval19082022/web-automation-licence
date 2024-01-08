@@ -1010,4 +1010,15 @@ public class PropertySayaSteps {
         propertySaya.clickOnEditDataKosButton();
         loading.waitForLoadingIconDisappear();
     }
+
+    @When("user delete active other additional price")
+    public void user_delete_active_other_additional_price() {
+        propertySaya.deleteActiveAdditionalPrice();
+    }
+
+    @Then("tenant can not sees active other price")
+    public void tenant_can_not_sees_active_other_price() {
+        Assert.assertFalse(propertySaya.isOtherPriceNamePresent());
+        Assert.assertFalse(propertySaya.isOtherPriceNumberPresent());
+    }
 }
