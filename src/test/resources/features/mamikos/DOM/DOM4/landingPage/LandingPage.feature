@@ -1,20 +1,30 @@
 Feature: Landing Page
 
-	@TEST_DOM-4168 @Automated @DOM4 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
-	Scenario: [Dweb][Listing Kos][Filter] Check dikelola mamikos filter
+	@TEST_COOP-5601 @Automated @DOM4 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
+	Scenario: [Dweb][Landing Page][Filter] Check dikelola mamikos filter
 		Given user navigates to mamikos kost kost jogja murah
 		When user activate Dikelola Mamikos filter
 		Then user validate the result kos have Dikelola Mamikos label
 
-	@TEST_DOM-4171 @Automated @DOM4 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
-	Scenario: [Dweb][Listing Kos][Filter] Deactivate dikelola mamikos filter
+	@TEST_COOP-5604 @Automated @DOM4 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
+	Scenario: [Dweb][Landing Page][Filter] Deactivate dikelola mamikos filter
 		Given user navigates to mamikos kost kost jogja murah
 		When user activate Dikelola Mamikos filter
 		And user activate Dikelola Mamikos filter
 		Then user see Dikelola Mamikos filter is deactivate
 
-	@TEST_DOM-4263 @Automated @DOM4 @discovery-platform @landing-page @promo-ngebut-filter
-	Scenario: [DWeb][Listing Kos][Filter] Check promo ngebut filter
+	@TEST_COOP-5602 @Automated @DOM4 @discovery-platform @landing-page @promo-ngebut-filter
+	Scenario: [DWeb][Landing Page][Filter] Check promo ngebut filter
 		Given user navigates to mamikos kost kost jogja murah
 		And user sets Promo Ngebut filter
 		Then user validated the result kos have Promo Ngebut label
+
+	@TEST_COOP-5603 @Automated
+	Scenario Outline: [Dweb][Landing Page][Filter]Check description of <filter>
+		Given user navigates to mamikos kost kost jogja murah
+		Then user clicks the "<filter>" button and the description will appears "<desc>"
+		Examples:
+			| filter           | desc                                                                                                       |
+			| Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
+			| Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
+			| Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |

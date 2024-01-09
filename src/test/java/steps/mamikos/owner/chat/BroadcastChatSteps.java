@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
-import pageobject.owner.chat.BroadcastChatPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -129,6 +129,9 @@ public class BroadcastChatSteps {
     public void ownerGoesToBroadcastChat() {
         ownerDashboard.clickToExpandFiturPromosi();
         ownerDashboard.clickOnBroadcastChat();
+        if (!broadcast.isBroadcastChatPackageContentVisible()) {
+            playwright.reloadPage();
+        }
     }
 
     @When("owner click on Tambah Kos button on no kos active pop-up broadcast chat owner")

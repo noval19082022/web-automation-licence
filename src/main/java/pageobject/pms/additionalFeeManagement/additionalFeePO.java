@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-
 public class additionalFeePO {
     private Page page;
     PlaywrightHelpers playwright;

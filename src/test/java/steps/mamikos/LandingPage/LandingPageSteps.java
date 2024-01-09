@@ -56,4 +56,36 @@ public class LandingPageSteps {
     public void userSeePopUpVideoPlayerIsShownOnEnaknyaNgekosLPAndCanPlayVideoIt() {
         landing.playVideoOnEnaknyaNgekosPage();
     }
+
+
+    @And("user click on Google play on the footer")
+    public void userClickOnGooglePlayOnTheFooter() {
+        home.clickOnGooglePlayFooterLink();
+    }
+
+    @Then("user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos")
+    public void userVerifySeeButtonMulaiCariKosWhenScrollIntoKenapaEnaknyaNgekos() {
+        landing.scroolIntoSectionKenapaEnaknyaNgekos();
+        landing.mulaiCariKostBtnIsDisplayed();
+    }
+
+    @And("user/tenant/admin open gender filter on landing")
+    public void adminOpenGenderFilterOnLanding() {
+        landing.clickOnGenderFilter();
+    }
+
+    @And("user clicks on Fitur Unggulan on the header on enaknyangekos page")
+    public void userClicksOnFiturUnggulanOnTheHeaderOnEnaknyangekosPage() {
+        landing.clickOnFiturUnggulan();
+    }
+
+    @And("user clicks on Product dan layanan on the header on enaknyangekos page")
+    public void userClicksOnProductDanLayananOnTheHeaderOnEnaknyangekosPage() {
+        landing.clickOnProductDanLayanan();
+    }
+
+    @And("user clicks on Mulai Cari Kos Button on enaknyangekos page")
+    public void userClicksOnMulaiCariKosButtonOnEnaknyangekosPage() {
+        landing.cickOnMulaiCariKosBtn();
+    }
 }

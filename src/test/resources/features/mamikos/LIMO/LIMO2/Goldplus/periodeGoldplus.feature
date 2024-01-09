@@ -1,13 +1,13 @@
 @regression @LIMO2 @listing-monetization @periodeGP
 Feature: Check Period Goldplus Page
 
-  @TEST_LIMO-2326
-  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT
+  @TEST_LIMO-2326 @TEST_LIMO-3918
+  Scenario: [WEB][Owner][Period GP][Non Weekly]Check List Period at GPLT
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp2"
+    When owner navigate to list package goldplus 2
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice   |
       | 1 Bulan         | Gratis MamiAds 100.000 | Rp129.000   | Rp150.000   |
@@ -18,23 +18,21 @@ Feature: Check Period Goldplus Page
       | 9 Bulan         | Gratis MamiAds 80.000  | Rp100.000   | Rp120.000   |
       | 12 Bulan        | Gratis MamiAds 120.000 | Rp1.583.400 | Rp1.740.000 |
 
-  @TEST_LIMO-3147 @continue
-    #Scenario: Setting label favorite change to no
-  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
+  Scenario: Setting label favorite change to no
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to none
-    And mamikos bangkrupux admin should be successfully logged out
 
-    #Scenario: check list periode
+  @TEST_LIMO-3147
+  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
     When user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp1"
+    When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
       | periodGP | freeMamiAds            | actualPrice | discPrice |
       | 1 Bulan  | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
@@ -45,7 +43,8 @@ Feature: Check Period Goldplus Page
     And user should not be able to see the text "Favorit"
     And owner should successfully log out
 
-    #Scenario: Setting label favorite change to yes
+    #scenario change label favorite
+    Scenario: Setting label favorite change to yes
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -53,7 +52,7 @@ Feature: Check Period Goldplus Page
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to active
 
-  @TEST_LIMO-3146
+  @TEST_LIMO-3146 @continue
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
     #Scenario: Setting label favorite more than 1
     Then admin successfully adds additional favorite labels
@@ -64,7 +63,7 @@ Feature: Check Period Goldplus Page
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp1"
+    When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |
       | 1 Bulan         | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
@@ -74,7 +73,8 @@ Feature: Check Period Goldplus Page
       | 12 Bulan        | Gratis MamiAds 708.000 | Rp862.680   | Rp948.000 |
     And owner should successfully log out
 
-#Scenario: Remove favorite more than 1
+    #scenario change label favorite
+    Scenario: Remove favorite more than 1
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |

@@ -57,7 +57,9 @@ public class HomePO {
     private Locator seeAllPromoAds;
     private Locator seeAllPromoOwner;
     private Locator popularAreaJakarta;
+    private Locator popularAreaYogyakarta;
     private Locator aroundUnivUGM;
+    private Locator aroundUnivUNDIP;
     private Locator promoNgebutPriceBeforePromo;
     private Locator promoNgebutPriceInfoForFirstMonth;
     private Locator promoNgebutPriceInfoOtherThanFirstMonth;
@@ -70,6 +72,9 @@ public class HomePO {
     private Locator syaratKetentuanButton;
     private Locator jobMamikosButton;
     private Locator promosikanIklanAndaButton;
+    private Locator blogMamikosBtn;
+    private Locator sewaKostUntukPerusahaan;
+    private Locator singgahSiniFooter;
     private Locator pusatBantuanButton;
     private Locator emailFooter;
     private Locator formBantuanTitle;
@@ -79,6 +84,7 @@ public class HomePO {
     private Locator instagramButton;
     private Locator copyrightFooter;
     private Locator appStoreFooterMenu;
+    private Locator googlePlayBtn;
 
 
 
@@ -109,14 +115,16 @@ public class HomePO {
         areaKosTerpopulerTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Area Kos Terpopuler"));
         this.seeAllPromoOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua").setExact(true));
         this.popularAreaJakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Jakarta"));
+        this.popularAreaYogyakarta = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Yogyakarta"));
         this.aroundUnivUGM = page.getByTestId("link-UGM");
+        this.aroundUnivUNDIP = page.getByTestId("link-UNDIP");
         this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
 
 
         //header
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
-        this.promoAdsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
+        this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
@@ -141,6 +149,9 @@ public class HomePO {
         this.syaratKetentuanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Umum"));
         this.jobMamikosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Job Mamikos"));
         this.promosikanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Promosikan Kost Anda"));
+        this.blogMamikosBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Blog Mamikos"));
+        this.sewaKostUntukPerusahaan = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Sewa Kos untuk Perusahaan"));
+        this.singgahSiniFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Singgahsini").setExact(true));
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
@@ -150,6 +161,7 @@ public class HomePO {
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
         this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
+        this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
     }
 
     /**
@@ -656,12 +668,30 @@ public class HomePO {
     }
 
     /**
+     * Click Yogyakarta on Popular Area
+     *
+     */
+    public void clickPopularAreaOnYogyakarta() {
+        playwright.pageScrollToDown(3000);
+        playwright.clickOn(popularAreaYogyakarta);
+    }
+
+    /**
      * Click UGM on Around University
      *
      */
     public void clickAroundUGM() {
         playwright.pageScrollToDown(3000);
         aroundUnivUGM.click();
+    }
+
+    /**
+     * Click UNDIP on Around University
+     *
+     */
+    public void clickAroundUNDIP() {
+        playwright.pageScrollToDown(3000);
+        playwright.clickOn(aroundUnivUNDIP);
     }
 
     /**
@@ -693,6 +723,7 @@ public class HomePO {
      * @return
      */
     public List<String> promoNgebutInfo() {
+        playwright.pageScrollUntilElementIsVisible(flashSalePromoInfoList);
         return playwright.getListInnerTextFromListLocator(flashSalePromoInfoList);
     }
 
@@ -775,5 +806,33 @@ public class HomePO {
     public void clickOnKostCardPromoNgebutOtherThanBulanPertama() {
         playwright.waitFor(promoNgebutPriceInfoOtherThanFirstMonth.first());
         playwright.clickOn(promoNgebutPriceInfoOtherThanFirstMonth.first());
+    }
+
+    /**
+     * clickOn Google Play on the footer
+     */
+    public void clickOnGooglePlayFooterLink() {
+        playwright.clickOn(googlePlayBtn);
+    }
+
+    /**
+     * clickOn Blog Mamikos on the footer
+     */
+    public void clickOnBlogMamikos() {
+        playwright.clickOn(blogMamikosBtn);
+    }
+
+    /**
+     * clickOn Sewa Kost Untuk Perusahaan on the footer
+     */
+    public void clickOnSewaKostUntukPerusahaan() {
+        playwright.clickOn(sewaKostUntukPerusahaan);
+    }
+
+    /**
+     * clickOn Singgahsini on the footer
+     */
+    public void clickOnSinggahSiniOnFooter() {
+        playwright.clickOn(singgahSiniFooter);
     }
 }

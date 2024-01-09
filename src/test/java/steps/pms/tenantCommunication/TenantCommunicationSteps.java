@@ -157,7 +157,7 @@ public class TenantCommunicationSteps {
 
     @Then("user verify search result on main page bse contains Tambah Catatan")
     public void user_verify_search_result_on_main_page_bse_contains_Tambah_Catatan() {
-        Assert.assertFalse(tenantCommunication.isFieldNoteClear(), "note is appear");
+        Assert.assertTrue(tenantCommunication.isFieldNoteClear(), "note is appear");
     }
 
     @And("user filled {string} in note field tracker WA status")
@@ -179,5 +179,4 @@ public class TenantCommunicationSteps {
     public void user_click_track_status_chat_wa() {
         tenantCommunication.clickTrackStatusWAButton();
     }
-
 }

@@ -346,5 +346,20 @@ public class OwnerDashboardSteps {
             PengajuanSewaPO.clickUbahAturanButton();
         }
     }
+
+    @And("owner go to event banner section")
+    public void onwerGoToEventBannerSection() {
+        ownerDashboardPO.scrollIntoDariMamikosSection();
+    }
+
+    @And("owner click on banner on dari mamikos section")
+    public void ownerClickOnBannerOnDariMamikosSection() {
+        ownerDashboardPO.clickOnBannerDariMamikosSection();
+    }
+
+    @And("widget daftar goldplus is displayed")
+    public void widget_daftar_goldplus_is_displayed(){
+        ownerDashboardPO.isWidgetDaftarGoldplusDisplayed();
+    }
 }
 

@@ -1,0 +1,123 @@
+@DOM3
+Feature: Payment Goldplus staging
+
+
+  Background: Owner Purchase GP using alfamart
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Goldplus for owner with phone number "089145645609"
+
+  @payWithAlfamart @TEST_COOP-5281
+  Scenario: Owner Purchase GP using alfamart
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment using alfamart xendit as payment method from invoice detail
+    Then owner will see that the text "Pembayaran Berhasil" is displayed
+
+  @payWithPermata @TEST_COOP-5282
+  Scenario: Owner Purchase GP using permata
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment method using "PERMATA"
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+
+  @payWithLinkAja @TEST_COOP-5283
+  Scenario: Owner Purchase GP using linkaja
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment from invoice detail using LinkAja
+    And owner set active page to 0
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @payWithDana @TEST_COOP-5284
+  Scenario: Owner Purchase GP using dana
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment from invoice detail with DANA
+    And owner set active page to 0
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @payWithCreditCard @TEST_COOP-5285
+  Scenario: Owner Purchase GP using credit card
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @payWithBni @TEST_COOP-5286
+  Scenario: Owner Purchase GP using bni
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment method from invoice detail using BNI
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @payWithBri @TEST_COOP-5287
+  Scenario: Owner Purchase GP using bri
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner select payment method from invoice detail using BRI
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @payWithMandiri @TEST_COOP-5288
+  Scenario: Owner Purchase GP using mandiri
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click "Daftar" button
+    And user wants to subscribe Goldplus 1
+    And owner pay invoice from invoice detail using mandiri without close the page
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed

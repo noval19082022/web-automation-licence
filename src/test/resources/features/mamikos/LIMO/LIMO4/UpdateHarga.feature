@@ -7,7 +7,6 @@ Feature: Update Harga
     When user login as owner:
       | phone stag     | phone prod     | password    |
       | 083176408311   | 083176408311   | qwerty123   |
-    And owner click "Nanti Saja"
     And owner navigates to property saya kos
     And owner search kost "Mamites Kos coba baru" on property saya page
     And user click Lihat Selengkapnya button for edit
@@ -137,7 +136,6 @@ Feature: Update Harga
     When user login as owner:
       | phone stag     | phone prod     | password    |
       | 083176408311   | 083176408311   | qwerty123   |
-    And owner click "Nanti Saja"
     And owner navigates to property saya kos
     And owner search kost "Kost Tester" on property saya page
     And user click Lihat Selengkapnya button for edit

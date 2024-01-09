@@ -1,14 +1,14 @@
 @DOM3 @essentialTest
 Feature: New Flow Register Tenant
 
-  @navigateToRegisterPageTenant @TEST_DOM-345 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @navigateToRegisterPageTenant @TEST_COOP-5612 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Navigate To Register Page
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
     And user clicks on Register button
     Then user redirected to "/register-pencari?source=homepage"
 
-  @noInputDataTenant @TEST_DOM-367 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @noInputDataTenant @TEST_COOP-5613 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - No Input Data
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -23,7 +23,7 @@ Feature: New Flow Register Tenant
     Then user verify confirm password error messages
       | Masukkan password.        |
 
-  @blankNameTenant @TEST_DOM-372 @Automated @DOM3 @web-covered
+  @blankNameTenant @TEST_COOP-5614 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Blank name
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -32,7 +32,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Masukkan nama lengkap. |
 
-  @wrongNameTenant @TEST_DOM-301 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @wrongNameTenant @TEST_COOP-5615 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario Outline: Register Tenant - Input name with symbol/number & Input name less than 3 char
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -46,7 +46,7 @@ Feature: New Flow Register Tenant
       | !@#$%3212  | Masukkan karakter alfabet. |
       | rh         | Minimal 3 karakter.        |
 
-  @noInputPhone @TEST_DOM-315 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @noInputPhone @TEST_COOP-5616 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - No input phone number
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -55,7 +55,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Masukkan nomor handphone. |
 
-  @phoneNumberNotUsing08AsPrefix @DOM3
+  @phoneNumberNotUsing08AsPrefix @DOM3 @TEST_COOP-5617
   Scenario: Register Tenant - Input phone number not using 08 as prefix
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -64,7 +64,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone harus diawali dengan 08. |
 
-  @nameMoreThan20Characters @TEST_DOM-325 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @nameMoreThan20Characters @TEST_COOP-5618 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Name more than 20 characters
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -72,7 +72,7 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara Aye Aye", "08210391239921", "at@test.com", "qwerty123", "qwerty123"
     Then user verify name is equal or more than 20 characters
 
-  @phoneLessThan8Char @TEST_DOM-310 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @phoneLessThan8Char @TEST_COOP-5619 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Phone less than 8 characters
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -81,7 +81,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone kurang dari 8 karakter. |
 
-  @phoneMoreThan14Char @TEST_DOM-309 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @phoneMoreThan14Char @TEST_COOP-5620 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Phone more than 14 characters
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -90,7 +90,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone lebih dari 14 karakter. |
 
-  @noInputPassword @TEST_DOM-317 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @noInputPassword @TEST_COOP-5621 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - No input password
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -99,7 +99,7 @@ Feature: New Flow Register Tenant
     Then user verify password error messages
       | Masukkan password.        |
 
-  @passwordLessThan8Char @TEST_DOM-275 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @passwordLessThan8Char @TEST_COOP-5622 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Input password less than 8 characters
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -108,7 +108,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
 
-  @passwordMoreThan8 @TEST_DOM-269 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @passwordMoreThan8 @TEST_COOP-5623 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario Outline: Register Tenant - Input password more than 8 characters & Input password not using numeric and symbols
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -120,7 +120,7 @@ Feature: New Flow Register Tenant
       | qwerty1233  |
       | 12345!@#$%  |
 
-  @showPasswordInputTenant @TEST_DOM-268 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @showPasswordInputTenant @TEST_COOP-5624 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Check eye icon
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -129,7 +129,7 @@ Feature: New Flow Register Tenant
     And user click on show password button
     Then user verify password is equal or more than 8 characters
 
-  @noInputEmail @TEST_DOM-270 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @noInputEmail @TEST_COOP-5626 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - No input email
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -138,7 +138,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Masukkan alamat email. |
 
-  @wrongFormatEmail @TEST_DOM-294 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
+  @wrongFormatEmail @TEST_COOP-5631 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
   Scenario Outline: Register Tenant - Input email with wrong format
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -152,7 +152,7 @@ Feature: New Flow Register Tenant
       | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
       | draft@xyz.com.net | Mohon masukkan email yang valid                |
 
-  @inputRegisteredEmail @TEST_DOM-266 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @inputRegisteredEmail @TEST_COOP-5632 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario Outline: Register Tenant - Input registered email (Owner & Tenant)
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -165,7 +165,7 @@ Feature: New Flow Register Tenant
       | rheza@mamikos.com |
       | rheza@rrr.com     |
 
-  @inputNumberRegistered @TEST_DOM-207 @Automated @DOM3 @web-covered
+  @inputNumberRegistered @TEST_COOP-5633 @Automated @DOM3 @web-covered
   Scenario: [Web Tenant][Register]input tenant number registered
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -183,6 +183,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z). |
 
+  @TEST_COOP-5634
   Scenario: Register Tenant - password confirmation not match
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -191,6 +192,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Masukkan password yang sama dengan password baru. |
 
+  @TEST_COOP-5635
   Scenario: [Web Tenant][Register]Register Tenant - Input phone number using special character
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -199,6 +201,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone hanya dapat diisi dengan angka. |
 
+  @TEST_COOP-5636
   Scenario: [Web Tenant][Register]Register Tenant - Input phone number using alfabet
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant
@@ -207,6 +210,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone hanya dapat diisi dengan angka. |
 
+  @TEST_COOP-5637
   Scenario: [Web Tenant][Register]Register Tenant - Input tenant name more than 50 character
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant

@@ -1,13 +1,13 @@
 @DOM4 @essentialTest
 Feature: Kost List and Map
 
-  @TEST_DOM-1842 @Automated @DOM4 @Web @discovery-platform @filter @kos-card-top-fac @listing-kos
+  @TEST_COOP-5596 @Automated @DOM4 @Web @discovery-platform @filter @kos-card-top-fac @listing-kos
   Scenario: [Dweb][Listing Kos][Kost Listing]Check top facilities in kos card
     Given user go to mamikos homepage
     When user want to search kost list by place on "Pogung lor" from homepage
     Then user sees the facilities on kos card are "K. Mandi Dalam" or "WiFi" or "Akses 24 Jam"
 
-  @TEST_DOM-1835 @Automated @DOM4 @Web @desc-map-cluster @discovery-platform @filter @listing-kos @map-cluster
+  @TEST_COOP-5595 @Automated @DOM4 @Web @desc-map-cluster @discovery-platform @filter @listing-kos @map-cluster
   Scenario: [Dweb][Listing Kos][Map]Check description or legend of map cluster
     Given user go to mamikos homepage
     When user want to search kost list by place on "UGM" from homepage
@@ -30,7 +30,7 @@ Feature: Kost List and Map
     When user want to close the legend map
     Then user will see the pop up closed
 
-  @DOM4
+  @TEST_COOP-5598
   Scenario Outline: [Main Search][Search Popular Area] Check result of search on popular area
     Given user go to mamikos homepage
     And user type for keyword "<city>"

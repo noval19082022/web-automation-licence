@@ -11,7 +11,8 @@ Feature: Edit profile for jobs as Lainnya
       | kost name stag                               | kost name prod                         |
       | kost jawa Tobelo Utara Halmahera Utara       | kost jawa Tobelo Utara Halmahera Utara |
     And user want to dismiss FTUE
-    And tenant booking kost for "Tomorrow"
+    And tenant fill booking data for "tomorrow" and "Per Bulan"
+    And tenant click ajukan sewa button on kost detail page
     Then user can see validation on jobs with "Masukkan nama pekerjaan untuk memproses pengajuan sewa."
 
   @TEST_COOP-797 @continue
@@ -24,7 +25,8 @@ Feature: Edit profile for jobs as Lainnya
       | kost name stag                                                  | kost name prod                                            |
       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     And user want to dismiss FTUE
-    And tenant booking kost for "Tomorrow"
+    And tenant fill booking data for "tomorrow" and "Per Bulan"
+    And tenant click ajukan sewa button on kost detail page
     And user click on ubah button on informasi penyewa
     And user choose profession "Lainnya" on ubah informasi penyewa
     Then red hint "Nama pekerjaan wajib diisi." text will show up

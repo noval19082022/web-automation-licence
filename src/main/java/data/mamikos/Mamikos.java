@@ -67,10 +67,13 @@ public class Mamikos {
     public static final String PROMO_MAMIKOS = JavaHelpers.getPropertyValue(MAMIKOS, "promoMamikosURL_prod");
     public static final String MAMIPAY_OWNER_LIST = JavaHelpers.getPropertyValue(MAMIKOS, "mamipayOwnerList");
     public static final String GOLDPLUS_PACKAGE = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusPackage");
+    public static final String GOLDPLUS_SUBMISSION_2 = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusPackage2");
+    public static final String GOLDPLUS_SUBMISSION_1 = JavaHelpers.getPropertyValue(MAMIKOS, "goldplusPackage1");
     public static final String MAMITOUR = JavaHelpers.getPropertyValue(MAMIKOS, "mamitour");
     public static final String HELP_MAMITOUR = JavaHelpers.getPropertyValue(MAMIKOS, "helpMamitour");
     public static final String FINANCIAL_REPORT = JavaHelpers.getPropertyValue(MAMIKOS, "financialReport");
     public static final String MAMITOUR_ORDER = JavaHelpers.getPropertyValue(MAMIKOS, "mamitourOrder");
+    public static final String GOLDPLUS_PACKAGE2 = JavaHelpers.getPropertyValue(MAMIKOS, "goldplus2Package");
 
     @Setter @Getter
     private static  String propertyKosName;

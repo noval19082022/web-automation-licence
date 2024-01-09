@@ -1,7 +1,7 @@
 @DOM4 @essentialTest
 Feature: Chat and Chat Optimization
 
-  @TEST_DOM-1737
+  @TEST_COOP-5436
   Scenario: [Dweb][Kost Detail][Chat] Chat details when chat room not exists
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,7 +12,7 @@ Feature: Chat and Chat Optimization
     And user see text "Tidak ada percakapan saat ini." in empty chat description
     And user see indicator "Chat kosong" in bottom of empty chat page
 
-  @TEST_DOM-1738
+  @TEST_COOP-5437
   Scenario: [Dweb][Kost Detail][Chat] Show login pop up when click chat button without login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -23,7 +23,7 @@ Feature: Chat and Chat Optimization
       | phone stag    | phone prod    | password     |
       | 081223344550  | 083176408442  | qwerty123    |
 
-  @continue @TEST_DOM-1736
+  @continue @TEST_COOP-5435
   Scenario: [Dweb][Kost Detail][Chat] Show all selectable questions before chat
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -45,14 +45,14 @@ Feature: Chat and Chat Optimization
       | Boleh bawa hewan?                            |
       | Bisa sewa harian?                            |
 
-  @TEST_DOM-1735
+  @TEST_COOP-5434
   Scenario: [Dweb][Kost Detail][Chat] Redirect to booking form page when contact kos with instant booking
     When send button become "Ajukan Sewa"
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
     And tenant click button ajukan sewa from chat popup
     Then it will redirect to Booking page
 
-  @TEST_DOM-1734
+  @TEST_COOP-5433
   Scenario: [Dweb][Kost Detail][Chat] Tenant can send message to Owner
     When user go to mamikos homepage
     And user login as tenant via phone number:
@@ -68,7 +68,7 @@ Feature: Chat and Chat Optimization
     And tenant enter text "Boleh minta nomor yang bisa dihubungi?" in chat page
     Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
 
-  @TEST_DOM-1734
+  @TEST_COOP-5439
   Scenario: [Dweb][Kost Detail][Chat] Owner can send message to Tenant
     Given user go to mamikos homepage
     When user login as owner:
@@ -81,7 +81,7 @@ Feature: Chat and Chat Optimization
     When owner enter text "My phone is 00000000001" in chat page
     Then chat room appear with latest message "My phone is 00000000001"
 
-  @continue @TEST_DOM-1742
+  @continue @TEST_COOP-5438
   Scenario: [Dweb][Kost Detail][Chat]Check functionality of booking button disable
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -96,7 +96,7 @@ Feature: Chat and Chat Optimization
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
     And user sees the Booking button disable
 
-  @continue @TEST_DOM-1733
+  @continue @TEST_COOP-5431
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
     When user search for Kost with name "<property>" and selects matching result
@@ -116,7 +116,7 @@ Feature: Chat and Chat Optimization
       | Boleh bawa hewan         | Kost BG Automation                          | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
       | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
 
-  @continue @TEST_DOM-1741
+  @continue @TEST_COOP-5432
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -125,11 +125,11 @@ Feature: Chat and Chat Optimization
     And tenant booking kost
     Then tenant should success booking kost
 
-  @cancelBooking
+  @cancelBooking @TEST_COOP-5440
   Scenario: Cancel Booking if Tenant Have Booking
     When user cancel booking
 
-  @TEST_DOM-1740
+  @TEST_COOP-5430
   Scenario Outline: [Dweb][Kost Detail][Chat] Check functionality Lihat detail button on BBK and Non BBK
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -146,7 +146,7 @@ Feature: Chat and Chat Optimization
       | Kos BX Automation Non BBK Cilacap Selatan Cilacap          |
       | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap |
 
-  @TEST_DOM-1739
+  @TEST_COOP-5429
   Scenario: [Dweb][Apartemen Detail][Chat] Check roomcard on apartemen should not display
     Given user go to mamikos homepage
     When user login as tenant via phone number:

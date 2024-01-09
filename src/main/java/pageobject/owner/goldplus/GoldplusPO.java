@@ -1,5 +1,6 @@
 package pageobject.owner.goldplus;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -80,7 +81,7 @@ public class GoldplusPO {
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
-        gpPackageText = page.getByText("GoldPlus 1 periode 4 Bulan").first();
+        gpPackageText = page.locator(".goldplus-billing-detail");
         tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
         rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
         saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
@@ -266,6 +267,7 @@ public class GoldplusPO {
      */
     public void clickOnPelajariCaranyaButton() {
         playwright.clickOn(pelajariCaranyaButton);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -349,9 +351,8 @@ public class GoldplusPO {
      *
      */
     public Boolean gpPackageText(){
-        playwright.hardWait(3000);
-        playwright.waitTillLocatorIsVisible(gpPackageText);
-        return gpPackageText.isVisible();
+        playwright.waitFor(gpPackageText);
+        return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 
     /**
@@ -600,5 +601,27 @@ public class GoldplusPO {
         benefitGP = page.getByText(benefitGP1).nth(1);
         playwright.waitTillLocatorIsVisible(benefitGP);
         return playwright.getText(benefitGP);
+    }
+
+    /**
+     * Click on radio button on Pilih Periode Berlangganan page
+     */
+    public void clickOnPeriodGoldPlus(String period){
+        playwright.clickOn(page.locator("//*[contains(@class, 'goldplus-periode-select__list')][contains(.,'"+period+"')] //label"));
+    }
+    /**
+     * Click on filter in payment billing GP
+     */
+    public void clickFilterInPaymentBillingGp(String filter) {
+        playwright.hardWait(3000);
+        String filterBilling = "//h4[normalize-space()='"+filter+"']";
+        ElementHandle element = page.querySelector(filterBilling);
+        element.click();
+        if (playwright.isTextDisplayed("Belum Ada Tagihan yang Selesai")) {
+            playwright.reloadPage();
+            filterBilling = "//h4[normalize-space()='" + filter + "']";
+            element = page.querySelector(filterBilling);
+            element.click();
+        }
     }
 }

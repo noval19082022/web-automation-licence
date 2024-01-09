@@ -78,8 +78,12 @@ public class OwnerDashboardPO {
     Locator closeIconOnNotBookingPopup;
     Locator daftarPenyewMenu;
     Locator ubahPeraturan;
+    Locator dariMamikosSection;
+    Locator dariMamikosBanner;
 
     private Locator fiturPromosiExpand;
+    private Locator nantiSajaButton;
+    private Locator widgetDaftarGoldplus;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -148,6 +152,10 @@ public class OwnerDashboardPO {
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
+        dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
+        dariMamikosBanner = page.locator(".image > a").first();
+        nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
     }
 
     /**
@@ -198,7 +206,10 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja")).click();
+        playwright.hardWait(2000);
+        if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
+            playwright.clickOn(nantiSajaButton);
+        }
     }
 
     /**
@@ -522,6 +533,7 @@ public class OwnerDashboardPO {
      */
     public boolean isTextOnReviewListPresent(String text) {
         playwright.hardWait(3000.0);
+        playwright.waitTillPageLoaded();
         textOnReviewList = page.locator("//p[contains(.,'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(textOnReviewList);
     }
@@ -532,6 +544,7 @@ public class OwnerDashboardPO {
      */
     public Integer getReviewListsCard() {
         playwright.hardWait(5000.0);
+        playwright.waitTillPageLoaded();
         List<Locator> listCities = playwright.getLocators(reviewLists);
         return listCities.size();
     }
@@ -701,6 +714,7 @@ public class OwnerDashboardPO {
      * click on mamitour entry point on owner dashboard
      */
     public void clickMamitourOnDashboard() {
+        playwright.waitFor(mamitourDashboard);
         playwright.clickOn(mamitourDashboard);
     }
 
@@ -759,5 +773,22 @@ public class OwnerDashboardPO {
         if (ubahPeraturan.isVisible()) {
             playwright.clickOn(ubahPeraturan);
         }
+    }
+
+    public void scrollIntoDariMamikosSection() {
+        playwright.pageScrollInView(dariMamikosSection);
+    }
+
+    public void clickOnBannerDariMamikosSection() {
+        playwright.clickOn(dariMamikosBanner);
+    }
+
+    /**
+     * Verify widget Dafter Goldplus
+     * @return true if present and false if not present
+     *
+     */
+    public boolean isWidgetDaftarGoldplusDisplayed(){
+        return playwright.waitTillLocatorIsVisible(widgetDaftarGoldplus, 5000.0);
     }
 }

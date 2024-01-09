@@ -17,6 +17,15 @@ Feature: Subscribe GP from all entry point
       | 08167382940592 | qwerty123 | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
       | 088112233453   | qwerty123 | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
 
+  @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromChatrooms
+  Scenario: Check subscribe GP from entry point chatrooms
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | password  |
+      | 0812345670001 | qwerty123 |
+    When owner click "Daftar GoldPlus" button on chatrooms "Raney Upik Bertiga"
+    Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
+
   @TEST_LIMO-2502 @otherEntryPointExceptInfoUntukAnda @continue
   Scenario: Check subscribe GP from entry point chatlist
     Given user go to mamikos homepage
@@ -25,12 +34,6 @@ Feature: Subscribe GP from all entry point
       | 081905128517 | qwerty123 |
     And owner click "Daftar GoldPlus" button on chatlist
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatlist"
-
-  @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromChatrooms @continue
-  Scenario: Check subscribe GP from entry point chatrooms
-    Given owner navigates to owner dashboard
-    When owner click "Daftar GoldPlus" button on chatrooms "Raney Upik Bertiga"
-    Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
 
   @TEST_LIMO-2504 @otherEntryPointExceptInfoUntukAnda @subscribeFromAturPromo @continue
   Scenario: Check subscribe GP from entry point Atur Promo

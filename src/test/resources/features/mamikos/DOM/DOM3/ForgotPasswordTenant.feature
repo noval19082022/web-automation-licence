@@ -1,8 +1,8 @@
 @DOM3 @forgotPasswordTenant
 
-Feature: Edit Profile
+Feature: Tenant Forgot Password
 
-  @forgotPasswordTenantViaSms
+  @forgotPasswordTenantViaSms @TEST_COOP-5645
   Scenario: [Web Tenant][Forgot Password]Send OTP via SMS
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -11,7 +11,7 @@ Feature: Edit Profile
     And user choose verification by sms
     Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
-  @forgotPasswordTenantViaWhatsapp
+  @forgotPasswordTenantViaWhatsapp @TEST_COOP-5646
   Scenario: [Web Tenant][Forgot Password]Send OTP via Whatsapp
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -20,7 +20,7 @@ Feature: Edit Profile
     And user choose verification by WA
     Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
-  @forgotPasswordTenantInvalidOtp
+  @forgotPasswordTenantInvalidOtp @TEST_COOP-5647
   Scenario: [Web Tenant][Forgot Password]Use Invalid OTP
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -30,7 +30,7 @@ Feature: Edit Profile
     And user input invalid code otp "1111"
     Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
 
-  @forgotPasswordTenantRegisterViaFacebook
+  @forgotPasswordTenantRegisterViaFacebook @TEST_COOP-5648
   Scenario: [Web Tenant][Forgot Password]Tenants (register via facebook) forget the password in tenant feature
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -39,7 +39,7 @@ Feature: Edit Profile
     And user choose verification by WA
     Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
-  @forgotPasswordTenantUnregistered
+  @forgotPasswordTenantUnregistered @TEST_COOP-5649
   Scenario Outline: [Web Tenant][Forgot Password - Phone Number] Phone Number Error Compilation
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -57,7 +57,7 @@ Feature: Edit Profile
       | 081abc212           | Nomor handphone hanya dapat diisi dengan angka |
       | 085697344170        | Nomor HP tidak terdaftar sebagai pencari kos. |
 
-  @resendOtpViaWhatsapp
+  @resendOtpViaWhatsapp @TEST_COOP-5651
   Scenario: [WEB][Tenant Forgot Password]Resend OTP via whatsapp
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
@@ -66,11 +66,19 @@ Feature: Edit Profile
     And user choose verification by WA
     Then user verify "Kirim ulang kode" and click button resend OTP
 
-  @resendOtpViaSms
-  Scenario: [WEB][Tenant Forgot Password]Resend OTP via whatsapp
+  @resendOtpViaSms @TEST_COOP-5652
+  Scenario: [WEB][Tenant Forgot Password]Resend OTP via SMS
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
     And user click on lupa password?
     And user fill their registered phone number "0892202305"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
+
+  @TEST_COOP-5680 @Automated @DOM3 @web-covered
+  Scenario: [Web Tenant][Forgot Password - Phone Number]Error Message - Phone number is registered
+    Given user go to mamikos homepage
+    When user click on button masuk pencari kos
+    And user click on lupa password?
+    And user fill their registered phone number "086476512341"
+    Then user verify on tenant page "Pilih Metode Verifikasi"
