@@ -36,7 +36,7 @@ public class DetailKosPO {
         confirmDeleteButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Hapus"));
         lokasiStrategisExpandButton = page.getByText("Lokasi Strategis");
         deleteLokasiStrategisButton = page.locator(".bg-c-button--icon-only-md");
-        emptyLokasiStrategisText = page.locator("//*[@id='property-accordion-2-collapsible']/div");
+        emptyLokasiStrategisText = page.locator(".bg-c-accordion--open .bg-c-accordion__content-slide div");
         errorMessageLokasiStrategis = page.locator(".bg-c-field__message");
     }
 
@@ -112,7 +112,7 @@ public class DetailKosPO {
      * @return String
      */
     public String getLokasiStrategis(int i) {
-        lokasiStrategisList = page.locator("//*[@id='property-accordion-2-collapsible']/div["+(i+1)+"]//p");
+        lokasiStrategisList = page.locator(".bg-c-accordion--open p").nth(i);
         return playwright.getText(lokasiStrategisList);
     }
 
