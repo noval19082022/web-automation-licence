@@ -100,6 +100,7 @@ Feature: Chat and Chat Optimization
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
     When user search for Kost with name "<property>" and selects matching result
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "<question>"
     And user click send chat from popup
@@ -107,13 +108,13 @@ Feature: Chat and Chat Optimization
     Examples:
       | name                     | property                                    | question                  | autoreply text                                                                                                                                          |
       | Ada diskon               | Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
-      | Masih ada kamar          | Kos Dom Automation PLM Tipe A Kretek Bantul | Masih ada kamar?          | Ada. Di kos ini masih ada 6 kamar kosong, sesuai update dari pemilik pada                                                                               |
+      | Masih ada kamar          | Kos Dom Automation PLM Tipe E Kretek Bantul | Masih ada kamar?          | Ada. Di kos ini masih ada 10 kamar kosong, sesuai update dari pemilik pada                                                                               |
       | Tanya-tanya dulu         | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
       | Cara menghubungi pemilik | Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
       | Alamat kos di mana       | Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                               											 |
-      | Bisa pasutri             | Kost BG Automation                          | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
+      | Bisa pasutri             | Kos Dom Automation PLM Tipe C Kretek Bantul | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
       | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe A Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
-      | Boleh bawa hewan         | Kost BG Automation                          | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
+      | Boleh bawa hewan         | Kos Dom Automation PLM Tipe C Kretek Bantul | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
       | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
 
   @continue @TEST_COOP-5432
