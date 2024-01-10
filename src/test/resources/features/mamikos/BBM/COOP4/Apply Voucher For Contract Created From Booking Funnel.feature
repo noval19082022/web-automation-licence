@@ -1,8 +1,7 @@
-@regression @BBM4 @voucher
-
-
+@COOP-5836 @COOP4
 Feature: Apply Voucher For Contract Created From Booking Funnel
 
+  @TEST_COOP-5811 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -25,19 +24,19 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag    | kost name prod        |
-      | Kos Loyal Kretek  | Kos Loyal Kretek |
+      | kost name stag   | kost name prod   |
+      | Kos Loyal Kretek | Kos Loyal Kretek |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod      | password |
-      | 0895359416718   | 0895359416718   | P@ssw0rd |
+      | phone stag    | phone prod    | password |
+      | 0895359416718 | 0895359416718 | P@ssw0rd |
     And owner accept booking from tenant:
-      | tenant stag       | tenant prod         |
-      | Kos Loyal Kretek  | Kos Loyal Kretek    |
+      | tenant stag      | tenant prod      |
+      | Kos Loyal Kretek | Kos Loyal Kretek |
     Then owner should redirect back to pengajuan booking page
 
   @continue
@@ -50,7 +49,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMBF1       | VCTRFROMBF1   |
+      | VCTRFROMBF1       | VCTRFROMBF1       |
     Then tenant can see voucher is applied
 
   @continue
@@ -58,7 +57,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMCONS1     | VCTRFROMCONS1      |
+      | VCTRFROMCONS1     | VCTRFROMCONS1     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
   @continue
@@ -66,7 +65,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMOWNER1    | VCTRFROMOWNER1      |
+      | VCTRFROMOWNER1    | VCTRFROMOWNER1    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
   @continue
@@ -74,7 +73,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMBFC1       | VCTRFROMBFC1       |
+      | VCTRFROMBFC1      | VCTRFROMBFC1      |
     Then tenant can see voucher is applied
 
   @continue
@@ -82,7 +81,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMBFO1      | VCTRFROMBFO1       |
+      | VCTRFROMBFO1      | VCTRFROMBFO1      |
     Then tenant can see voucher is applied
 
   @continue
@@ -90,7 +89,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMCO1       | VCTRFROMCO1      |
+      | VCTRFROMCO1       | VCTRFROMCO1       |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
   @continue
@@ -98,7 +97,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | VCTRFROMBFCO1     | VCTRFROMBFCO1       |
+      | VCTRFROMBFCO1     | VCTRFROMBFCO1     |
     Then tenant can see voucher is applied
 
   @BBM-781
@@ -106,11 +105,6 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOFUNNEL        | AUTOFUNNEL      |
+      | AUTOFUNNEL        | AUTOFUNNEL        |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
-
-
-
-
-
-
+		
