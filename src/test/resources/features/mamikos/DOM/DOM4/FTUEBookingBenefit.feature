@@ -9,7 +9,7 @@ Feature: FTUE Booking Benefit
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -23,7 +23,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     When user dismiss FTUE booking benefit
     Then user can not see FTUE booking benefit
 
@@ -35,7 +35,7 @@ Feature: FTUE Booking Benefit
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     And tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |

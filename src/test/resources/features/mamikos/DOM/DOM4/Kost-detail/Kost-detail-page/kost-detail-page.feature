@@ -133,7 +133,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user can see kos rule list on detail kos
 
   @TEST_COOP-5476 @DOM4 @automated @discovery-platform @kost-details @map @web
@@ -141,7 +141,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     #user want to see map more detail
     When user want to see more detail kost location
@@ -155,7 +155,7 @@ Feature: Kost detail page
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos Dom Automation PLM Tipe C | Kos DC BAR Automation Tipe A |
+      | Kos Dom Automation PLM Tipe G | Kos DC BAR Automation Tipe A |
     Then user want to reached map section and see tanya alamat lengkap button
     #user want to see map more detail
     When user want to ask kost address

@@ -31,6 +31,7 @@ public class InvoicePO {
     Locator closeVoucherPopUpButton;
     Locator voucherInputPopUpWarningText;
     Locator pilihPembayaranButton;
+    Locator pilihUbahMetodePembayaranButton;
     Locator alfamart;
     Locator bankMandiri;
     Locator bankPermata;
@@ -77,6 +78,7 @@ public class InvoicePO {
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
     Locator sayaSudahBayar;
+    Locator ubahButton;
     protected Locator pembayaranBerhasilText;
 
     public InvoicePO(Page page) {
@@ -98,7 +100,7 @@ public class InvoicePO {
         voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         voucherInputPopUpWarningText = page.getByTestId("warning_txt");
-        pilihPembayaranButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
+        pilihPembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Metode Pembayaran"));
         alfamart = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Alfamart / Alfamidi")).nth(1);
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
         bankPermata = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Permata - MamiPAY"));
@@ -144,6 +146,8 @@ public class InvoicePO {
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
         sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
+        pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
+        ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
     }
 
     /**
@@ -289,13 +293,21 @@ public class InvoicePO {
      * Click on pilih pembayaran to choose what method to the payment.
      */
     public void clickOnPilihPembayaran() {
-        playwright.forceClickOn(pilihPembayaranButton);
+        playwright.pageScrollInView(page.getByTestId("invoiceBillingDetails-payment").getByText("Total Pembayaran"));
+        if (pilihUbahMetodePembayaranButton.isVisible()) {
+            playwright.forceClickOn(pilihUbahMetodePembayaranButton);
+            playwright.clickOn(ubahButton);
+            playwright.hardWait(2000.0);
+        } else {
+            playwright.forceClickOn(pilihPembayaranButton);
+        }
     }
 
     /**
      * Choose mandiri as payment
      */
     public void clickOnMandiri() {
+        playwright.waitFor(bankMandiri);
         playwright.clickOn(bankMandiri);
     }
 
@@ -303,6 +315,7 @@ public class InvoicePO {
      * Choose alfamart as payment
      */
     public void clickOnAlfamart() {
+        playwright.waitFor(alfamart);
         playwright.clickOn(alfamart);
     }
 
@@ -317,6 +330,7 @@ public class InvoicePO {
      * Choose permata as payment
      */
     public void clickOnPermata() {
+        playwright.waitFor(bankPermata);
         playwright.clickOn(bankPermata);
     }
 
@@ -324,6 +338,7 @@ public class InvoicePO {
      * Choose permata as payment
      */
     public void clickOnBNI(){
+        playwright.waitFor(bankBNI);
         playwright.clickOn(bankBNI);
     }
 
@@ -331,6 +346,7 @@ public class InvoicePO {
      * Click on bayar sekarang button
      */
     public void clickOnBayarSekarang() {
+        playwright.pageScrollInView(page.getByText("Sembunyikan"));
         playwright.clickOn(bayarSekarangButton);
     }
 
@@ -504,6 +520,7 @@ public class InvoicePO {
     public void paymentOVO(String number) {
         var maxReload = 0;
         clickOnPilihPembayaran();
+        playwright.waitFor(txtOVO);
         playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
@@ -578,6 +595,7 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
         clickOnPilihPembayaran();
+        playwright.waitFor(kartuKredit);
         playwright.clickOn(kartuKredit);
         playwright.clickLocatorAndTypeKeyboard(inputKartuKreditNumber, ccNumber);
         playwright.clickLocatorAndTypeKeyboard(inputKartuKreditMonth, month);
@@ -594,6 +612,7 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingDANA() {
         clickOnPilihPembayaran();
+        playwright.waitFor(dana);
         dana.click();
         clickOnBayarSekarang();
         page = page.waitForPopup(() -> {
@@ -610,6 +629,7 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingLinkAja() {
         clickOnPilihPembayaran();
+        playwright.waitFor(linkAja);
         linkAja.click();
         clickOnBayarSekarang();
         page = page.waitForPopup(() -> {
