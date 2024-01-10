@@ -370,37 +370,4 @@ public class PaymentSteps {
     public synchronized void systemDisplayWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
     }
-
-    @And("owner/tenant/user select payment using alfamart xendit as payment method from invoice detail")
-    public void paymentOwnerSuccessUsingAlfamartXenditAsPaymentMethod() {
-        invoice.clickOnPilihPembayaran();
-        invoice.clickOnAlfamart();
-        invoice.clickOnBayarSekarang();
-        var kodePerusahaan = invoice.getCodePembayaran();
-        var nominal = invoice.getTotalPembayaran();
-        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
-    }
-
-    @And("owner/tenant/user select payment method using {string}")
-    public void ownerSelectPaymentMethodUsing(String Bank) {
-        invoice.clickOnPilihPembayaran();
-        invoice.clickOnPermata();
-        invoice.clickOnBayarSekarang();
-        var kodePembayaran = invoice.getKodePembayaranNumberText();
-        page = ActiveContext.getActiveBrowserContext().pages().get(0);
-        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        midtrans = Optional.ofNullable(midtrans).orElseGet(() -> new MidtransPaymentPO(page));
-        midtrans.paymentForPermata(kodePembayaran, Bank);
-    }
-
-    @And("owner/tenant/user select payment method from invoice detail using Permata")
-    public void ownerSelectPaymentMethodUsingPermata() {
-        invoice.clickOnPilihPembayaran();
-        invoice.clickOnPermata();
-        invoice.clickOnBayarSekarang();
-        var kodePembayaran = invoice.getKodePembayaranNumberText();
-        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        midtrans = Optional.ofNullable(midtrans).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
-        midtrans.paymentForPermata(kodePembayaran, "PERMATA");
-    }
 }

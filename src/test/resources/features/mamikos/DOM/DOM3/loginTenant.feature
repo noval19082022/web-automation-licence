@@ -14,24 +14,24 @@ Feature: Tenant - Login
   Scenario: Login - No fill password
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete password fill
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     Then user verify login error messages "Password harus diisi."
 
   @TEST_COOP-5353 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @Automated @DOM3 @web-covered @wrongNumber
   Scenario: Login - Wrong number
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete phone number fill
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     Then user verify login error messages "Nomor Handphone harus diisi."
 
   @fromSBMPTNPage @TEST_COOP-5354
   Scenario: Login - From SBMPTN Page
     Given user navigate to SBMPTN page
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     Then user tenant profile picture is shown
 
   @TEST_COOP-5355 @TESTSET_UG-4895 @TESTSET_UG-6221 @TESTSET_PF-1393 @TESTSET_PF-1960 @Automated @web-covered @loginTenantWithNewPassword
@@ -39,7 +39,7 @@ Feature: Tenant - Login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 08917287122  | 08100000622 | qwerty111 |
+      | 08917287122 | 08100000622 | qwerty111 |
     And user navigate to kost saya page
     And user clicks on pengaturan button
     And user fills password lama "qwerty111"
@@ -49,7 +49,7 @@ Feature: Tenant - Login
     And tenant logs out
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 08917287122  | 08100000622 | qwerty123 |
+      | 08917287122 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user clicks on pengaturan button
     And user fills password lama "qwerty123"
@@ -90,28 +90,28 @@ Feature: Tenant - Login
     When user want to see more detail kost location
     Then user see login pop up in favorite page
 
-    @TEST_COOP-4660 @DOM3
+  @TEST_COOP-4660 @DOM3
   Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is null
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089513193288  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089513193288 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     Then user tenant verify profil picture is null
 
-      @TEST_COOP-4661 @DOM3
+  @TEST_COOP-4661 @DOM3
   Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is show
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0879864312548  | 08100000622 | qwerty123 |
+      | phone stag    | phone prod  | password  |
+      | 0879864312548 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     Then user tenant profile picture is shown
 
-      @TEST_COOP-4662 @DOM3
+  @TEST_COOP-4662 @DOM3
   Scenario: Login - using Wrong phone number alfabet
     Given user go to mamikos homepage
     When user login with alfabet phone number
-      | phone stag  | phone prod  | password  |
-      | aaaaaaaaaa  | aaaaaaaaaaa | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | aaaaaaaaaa | aaaaaaaaaaa | qwerty123 |
     Then user verify login error messages "Format Nomor Handphone salah."

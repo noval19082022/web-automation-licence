@@ -107,16 +107,26 @@ public class PaymentSteps {
         invoicePO.clickOnDeleteVoucher();
     }
 
-    @And("tenant select payment method using {string}")
+    @And("tenant/owner/user select payment method using {string}")
     public void tenantSelectPaymentMethodUsing(String Bank) {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnPermata();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
-        page = ActiveContext.getActiveBrowserContext().pages().get(1);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
+        midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
+    }
+
+    @And("owner/tenant/user select payment method from invoice detail using {string}")
+    public void ownerSelectPaymentMethodUsing(String Bank) {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
     }
 
@@ -192,6 +202,27 @@ public class PaymentSteps {
         }
         var payment = new PaymentPO(ActiveContext.getActivePage());
         Assert.assertEquals(payment.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
+    }
+
+    @And("owner/tenant/user select payment using alfamart xendit as payment method from invoice detail")
+    public void paymentOwnerSuccessUsingAlfamartXenditAsPaymentMethod() {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnAlfamart();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+    }
+
+    @And("owner/tenant/user select payment method from invoice detail using Permata")
+    public void ownerSelectPaymentMethodUsingPermata() {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
+        midtransPaymentPO.paymentForPermata(kodePembayaran, "PERMATA");
     }
 
 }

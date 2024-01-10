@@ -82,7 +82,7 @@ Feature: Search Invoice
     And admin input amount from and to "50000" and "50000"
     Then appeared data with amount "50000"
 
-  @TEST_DOM-691 @TEST_DOM-709 @TEST_COOP-5263 @searchInvoiceGlobal @continue
+  @TEST_COOP-5263 @searchInvoiceGlobal @continue
   Scenario Outline: [Mamipay][Search Invoice]Search transaction based on status
     Given admin go to mamikos mamipay admin
     And user click "All Invoice"
