@@ -20,12 +20,21 @@ Feature: Tenant Forgot Password
     And user choose verification by WA
     Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
+  @TEST_COOP-5680 @Automated @DOM3 @web-covered
+  Scenario: [Web Tenant][Forgot Password - Phone Number]Error Message - Phone number is registered
+    Given user go to mamikos homepage
+    When user click on button masuk pencari kos
+    And user click on lupa password?
+    And user fill their registered phone number "086476512341"
+    Then user verify on tenant page "Pilih Metode Verifikasi"
+
   @forgotPasswordTenantInvalidOtp @TEST_COOP-5647
   Scenario: [Web Tenant][Forgot Password]Use Invalid OTP
     Given user go to mamikos homepage
     When user click on button masuk pencari kos
     And user click on lupa password?
-    And user fill their registered phone number "0892202305"
+    And user fill their registered phone number "081197878846"
+    And user waiting for "30" seconds for next step
     And user choose verification by WA
     And user input invalid code otp "1111"
     Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
@@ -48,14 +57,14 @@ Feature: Tenant Forgot Password
     Then user get error message "<error message>"
 
     Examples:
-      | tenant phone number | error message   |
-      | 08922023100         | Masukkan nomor handphone yang terdaftar. |
+      | tenant phone number | error message                                               |
+      | 089220231001        | Masukkan nomor handphone yang terdaftar.                    |
       | 089212312304        | Nomor HP ini sudah digunakan untuk verifikasi di akun lain. |
-      | 089876543217671     | Nomor handphone lebih dari 14 karakter. |
-      | 081234              | Nomor handphone kurang dari 8 karakter. |
-      | 1234567             | Nomor handphone harus diawali dengan 08 |
-      | 081abc212           | Nomor handphone hanya dapat diisi dengan angka |
-      | 085697344170        | Nomor HP tidak terdaftar sebagai pencari kos. |
+      | 089876543217671     | Nomor handphone lebih dari 14 karakter.                     |
+      | 081234              | Nomor handphone kurang dari 8 karakter.                     |
+      | 1234567             | Nomor handphone harus diawali dengan 08                     |
+      | 081abc212           | Nomor handphone hanya dapat diisi dengan angka              |
+      | 085697344170        | Nomor HP tidak terdaftar sebagai pencari kos.               |
 
   @resendOtpViaWhatsapp @TEST_COOP-5651
   Scenario: [WEB][Tenant Forgot Password]Resend OTP via whatsapp
@@ -74,11 +83,3 @@ Feature: Tenant Forgot Password
     And user fill their registered phone number "0892202305"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
-
-  @TEST_COOP-5680 @Automated @DOM3 @web-covered
-  Scenario: [Web Tenant][Forgot Password - Phone Number]Error Message - Phone number is registered
-    Given user go to mamikos homepage
-    When user click on button masuk pencari kos
-    And user click on lupa password?
-    And user fill their registered phone number "086476512341"
-    Then user verify on tenant page "Pilih Metode Verifikasi"

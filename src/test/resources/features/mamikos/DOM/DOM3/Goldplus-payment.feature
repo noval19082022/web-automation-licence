@@ -21,7 +21,7 @@ Feature: Payment Goldplus staging
     And owner select payment using alfamart xendit as payment method from invoice detail
     Then owner will see that the text "Pembayaran Berhasil" is displayed
 
-  @payWithPermata @TEST_COOP-5282
+  @paymentPermata @TEST_COOP-5282
   Scenario: Owner Purchase GP using permata
     Given user go to mamikos homepage
     When user login as owner:
@@ -30,7 +30,7 @@ Feature: Payment Goldplus staging
     And owner waiting the page reload
     And user click "Daftar" button
     And user wants to subscribe Goldplus 1
-    And owner select payment method using "PERMATA"
+    And owner select payment method from invoice detail using "PERMATA"
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed

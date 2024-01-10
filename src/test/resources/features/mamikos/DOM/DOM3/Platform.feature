@@ -320,9 +320,9 @@ Feature: [Test-Execution][DOM] Web - Platform
       | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin visit page "/admin/sanjunipero/parent"
     And admin bangkerupux deactive first sanjunipero on sanjunipero page
-    Then admin bangkerupux will see last updated sanjunipero is current time
+    Then admin bangkerupux will see last updated sanjunipero is current date
     And admin bangkerupux activate first sanjunipero on sanjunipero page
-    Then admin bangkerupux will see last updated sanjunipero is current time
+    Then admin bangkerupux will see last updated sanjunipero is current date
 
   @TEST_COOP-5390 @Automated @DOM3 @web-covered
   Scenario: [Web][non login]: Login pop-up options appear
@@ -387,7 +387,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user open instagram in footer
     And tenant set active page to 1
-    Then user redirected to "https://www.instagram.com/mamikosapp"
+    Then user redirected to "instagram.com/mamikosapp"
 
   @TEST_COOP-5401@TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
@@ -486,9 +486,9 @@ Feature: [Test-Execution][DOM] Web - Platform
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin visit page "/admin/sanjunipero/parent"
     And admin bangkerupux deactive first sanjunipero on sanjunipero page
-    Then admin bangkerupux will see last updated sanjunipero is current time
+    Then admin bangkerupux will see last updated sanjunipero is current date
     And admin bangkerupux activate first sanjunipero on sanjunipero page
-    Then admin bangkerupux will see last updated sanjunipero is current time
+    Then admin bangkerupux will see last updated sanjunipero is current date
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
 
@@ -664,10 +664,10 @@ Feature: [Test-Execution][DOM] Web - Platform
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin visit page "/admin/event"
-    And admin bangkerupux set event banner "1" to order "19"
+    And admin bangkerupux set event banner "1" to order "1"
     And admin bangkerupux updated the event banner
     Then user will see that the text "Success! Event Updated" is displayed
-    And admin bangkerupux set event banner "2" to order "19"
+    And admin bangkerupux set event banner "2" to order "1"
     And admin bangkerupux updated the event banner
     Then user will see that the text "Success! Event Updated" is displayed
 
