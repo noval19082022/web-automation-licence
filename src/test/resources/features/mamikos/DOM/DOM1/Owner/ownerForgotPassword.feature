@@ -1,4 +1,4 @@
-@DOM1
+@DOM10
 Feature: Owner - Forgot Password
 
   @TEST_COOP-5180 @Automated @DOM @web-covered
@@ -103,7 +103,7 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "08912an"
     Then user get error message "Nomor handphone hanya dapat diisi dengan angka"
 
-  @TEST_COOP-5242 @Automated @DOM @web-covered
+  @TEST_COOP-5242 @Automated @web-covered
   Scenario: [WEB][Forgot Password][Owner] Send OTP via WA
     Given user go to mamikos homepage
     When user want to change the owner password

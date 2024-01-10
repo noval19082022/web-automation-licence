@@ -85,7 +85,7 @@ Feature: Tenant - Login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     Then user see login pop up in favorite page

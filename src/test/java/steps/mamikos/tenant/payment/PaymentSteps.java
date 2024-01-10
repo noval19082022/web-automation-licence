@@ -193,4 +193,5 @@ public class PaymentSteps {
         var payment = new PaymentPO(ActiveContext.getActivePage());
         Assert.assertEquals(payment.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
+
 }
