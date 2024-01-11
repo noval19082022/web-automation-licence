@@ -1,7 +1,7 @@
-@regression @regressProd @BBM4 @voucher @COOP-2733
-
+@COOP-5836 @COOP4
 Feature: Apply Voucher For Booking Rule, Invoice Without DP
 
+  @TEST_COOP-5810 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -332,3 +332,4 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | voucher name stag | voucher name prod |
       | AUTOOTHEREMAIL    | AUTOOTHEREMAIL    |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
+		
