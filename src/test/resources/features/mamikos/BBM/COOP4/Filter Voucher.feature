@@ -1,7 +1,7 @@
-@COOP-5841 @COOP4
+@COOP-5841 @COOP4 @TEST_COOP-5822 @Automated @COOP @Web
 Feature: Filter Voucher
 
-  @TEST_COOP-5822 @Automated @COOP @Web
+
   Background: Open voucher menu
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -62,4 +62,4 @@ Feature: Filter Voucher
       | 81750 | BBMLHFA      | bbm-test-mass-voucher-automation |
       | 80521 | VANONPREMIUM | playwrightAutomation             |
       | 81165 | TESTARIF     | testcampaign                     |
-		
+
