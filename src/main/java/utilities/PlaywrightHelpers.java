@@ -270,6 +270,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get text content of a locator and normalize all (enter) in it
+     * @param locator target locator
+     * @return String
+     */
+    public String getNormalizeText(Locator locator){
+        return locator.textContent().trim().replaceAll("[\\t\\n\\r]+"," ");
+    }
+
+    /**
      * get list text from locator that represent list, for example kost name on listing
      * @param locator
      * @return list string
