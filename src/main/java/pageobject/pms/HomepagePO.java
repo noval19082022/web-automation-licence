@@ -186,6 +186,7 @@ public class HomepagePO {
     public void searchProperty(String name) {
         searchInput.fill(name);
         cariButton.click();
+        playwright.isTextDisplayed("Kost Singgahsini Ersa Tobelo Halmahera Utara");
     }
 
     /**

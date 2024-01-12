@@ -53,7 +53,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And admin clicks on invoice details first index:
       | search by    | renter_phone_number |
       | search value | 087708777618        |
-    Then admin changes DP basic amount and verify total amount change on settlement invoice for tenant 900000:
+    Then admin changes DP basic amount and verify total amount change on settlement invoice for tenant 907000:
       | search by    | renter_phone_number |
       | search value | 087708777618        |
 
