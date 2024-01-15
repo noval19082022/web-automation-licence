@@ -6,7 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
-public class joinSinggahsiniPO {
+public class JoinSinggahsiniPO {
     private Page page;
     PlaywrightHelpers playwright;
 
@@ -39,7 +39,7 @@ public class joinSinggahsiniPO {
     private Locator subtitleSuccessPopUpText;
     private Locator okeSuccessPopUpButton;
 
-    public joinSinggahsiniPO(Page page){
+    public JoinSinggahsiniPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
