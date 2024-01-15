@@ -131,7 +131,7 @@ public class MamifotoPO {
         this.headerBacaPanduan = page.getByText("Panduan persiapan foto/video");
         this.closePopUpBacaPanduanIcon = page.getByTestId("mamifoto-landing-guides-modal").getByRole(AriaRole.BUTTON);
         this.headerFAQ = page.getByText("Tanya Jawab");
-        this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
+        this.faqFirstList = page.getByText("Jenis foto apa saja yang akan saya dapat?");
         this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));

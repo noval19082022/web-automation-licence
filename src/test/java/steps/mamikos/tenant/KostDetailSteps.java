@@ -484,4 +484,14 @@ public class KostDetailSteps {
     public void userCanSeeKategoriBantuan() {
         Assert.assertTrue(kostDetail.isKategoriBantuanTittleDisplayed(), "Kategori Bantuan");
     }
+
+    @Then("user can favorite the kost for recomendation listing")
+    public void user_can_favorite_the_kost_for_recomendation_listing() {
+        kostDetail.clickOnFavoriteKostButton();
+    }
+
+    @Then("user can unfavorite the kost for recomendation listing")
+    public void user_can_unfavorite_the_kost_for_recomendation_listing() {
+        kostDetail.clickOnUnfavoriteKostButton();
+    }
 }
