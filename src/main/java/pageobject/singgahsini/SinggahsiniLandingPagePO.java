@@ -4,7 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
-public class singgahsiniLandingPagePO {
+public class SinggahsiniLandingPagePO {
     private Page page;
     PlaywrightHelpers playwright;
 
@@ -31,7 +31,7 @@ public class singgahsiniLandingPagePO {
     private Locator tanyaJawabAnswerListText;
 
 
-    public singgahsiniLandingPagePO(Page page){
+    public SinggahsiniLandingPagePO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 

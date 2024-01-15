@@ -6,14 +6,14 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.singgahsini.singgahsiniLandingPagePO;
+import pageobject.singgahsini.SinggahsiniLandingPagePO;
 
 import java.util.List;
 import java.util.Map;
 
-public class singgahsiniLandingPageSteps {
+public class SinggahsiniLandingPageSteps {
     Page page = ActiveContext.getActivePage();
-    singgahsiniLandingPagePO singgahsini = new singgahsiniLandingPagePO(page);
+    SinggahsiniLandingPagePO singgahsini = new SinggahsiniLandingPagePO(page);
 
     private List<Map<String, String>> keuntungan;
     private List<Map<String, String>> testimoni;
