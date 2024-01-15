@@ -22,6 +22,7 @@ public class RekomendasiListingPO {
     Locator paginationNumberAct;
     Locator rekomendasiListingActual;
     Locator firstPropertyRekomendasiKosSaya;
+    Locator propertyFavorit;
 
     public RekomendasiListingPO(Page page) {
         this.page = page;
@@ -200,15 +201,27 @@ public class RekomendasiListingPO {
         String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
         return playwright.isLocatorVisibleAfterLoad(page.locator(propertyFavorit),3000.0);
     }
+
     /**
-     * Click property on favorit section
+     * Click property on favorit recomendation section
      * @param favoritPropertyRekomendasi
      * @throws InterruptedException
      */
-    public void clickOnPropertyFavorit(String favoritPropertyRekomendasi) throws InterruptedException {
-        String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
-        playwright.waitTillLocatorIsVisible(page.locator(propertyFavorit),1000.0);
-        playwright.clickOn(page.locator(propertyFavorit));
+    public void clickOnPropertyFavoritRecomendation(String favoritPropertyRekomendasi) throws InterruptedException {
+        String propertyFavoritRecommendation = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
+        playwright.waitTillLocatorIsVisible(page.locator(propertyFavoritRecommendation),1000.0);
+        playwright.clickOn(page.locator(propertyFavoritRecommendation));
+    }
+
+    /**
+     * Click property on favorit section
+     * @param favoritProperty
+     * @throws InterruptedException
+     */
+    public void clickOnPropertyFavorit(String favoritProperty) throws InterruptedException {
+        propertyFavorit = page.getByText(favoritProperty);
+        playwright.waitTillLocatorIsVisible(propertyFavorit,1000.0);
+        playwright.clickOn(propertyFavorit);
     }
 
 }

@@ -17,6 +17,7 @@ public class RekomendasiListingSteps {
     RekomendasiListingPO rekomendasiListing = new RekomendasiListingPO(page);
     SearchPO searchListing = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    Page page1;
 
 
     @Then("verify message {string} di Favorit page")
@@ -92,15 +93,18 @@ public class RekomendasiListingSteps {
         page.reload();
         Assert.assertFalse(rekomendasiListing.isRekomendasiAfterFavoritVisible(rekomendasiListing.getFavoritPropertyRekomendasi()), "Property already display!");
         rekomendasiListing.clickOnFavoriteHeader();
-        rekomendasiListing.clickOnPropertyFavorit(rekomendasiListing.getFavoritPropertyRekomendasi());
+        rekomendasiListing.clickOnPropertyFavoritRecomendation(rekomendasiListing.getFavoritPropertyRekomendasi());
     }
 
     @Then("user can verify kost after unfavorite the kost")
     public void user_can_verify_kost_after_unfavorite_the_kost() {
-        kostDetail.clickOnUnfavoriteKostButton();
         rekomendasiListing.clickOnFavoriteHeader();
         Assert.assertFalse(rekomendasiListing.isRekomendasiAfterFavoritVisible(rekomendasiListing.getFavoritPropertyRekomendasi()),"Property not display!");
+    }
 
+    @When("tenant wants to open detail kost {string} from favorite page")
+    public void tenant_wants_to_open_detail_kost_from_favorite_page(String kostName) throws InterruptedException {
+        rekomendasiListing.clickOnPropertyFavorit(kostName);
     }
 
 }
