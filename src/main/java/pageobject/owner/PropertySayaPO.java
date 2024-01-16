@@ -288,7 +288,7 @@ public class PropertySayaPO {
         textBoxTotalDenda = page.getByRole(AriaRole.TEXTBOX).nth(1);
         textBoxLatePay = page.getByPlaceholder("0");
         dropdownLatePay = page.locator("//select[@class='c-field-select__select']");
-        dendaPrice = page.locator("//div[@class='additional-price-item__info-price']");
+        dendaPrice = page.getByText("Rp50.000");
         toggleDeposit = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Deposit")).locator("span").first();
         textBoxDeposit = page.getByRole(AriaRole.TEXTBOX).nth(1);
         toggleOtherPrice = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Lainnya Per Bulan")).locator("span").first();
@@ -302,7 +302,7 @@ public class PropertySayaPO {
         confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
         nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
         confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
-        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus")).nth(1);
+        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         confirmDeleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
         selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
@@ -1886,6 +1886,7 @@ public class PropertySayaPO {
      * @return true if not appears
      */
     public boolean isDendaListAppears() {
+        playwright.waitFor(dendaPrice);
         return dendaPrice.isEnabled();
     }
 
@@ -1893,6 +1894,8 @@ public class PropertySayaPO {
      * click toggle deposit
      */
     public void clicktoggleDeposit() {
+        playwright.pageScrollInView(toggleDeposit);
+        playwright.waitTillLocatorIsVisible(toggleDenda);
         if (toggleDeposit.isChecked()) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
@@ -1915,6 +1918,8 @@ public class PropertySayaPO {
      * click toggle other price
      */
     public void clicktoggleOtherPrice() {
+        playwright.pageScrollInView(toggleOtherPrice);
+        playwright.waitTillLocatorIsVisible(toggleOtherPrice);
         if (toggleOtherPrice.isChecked()) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
