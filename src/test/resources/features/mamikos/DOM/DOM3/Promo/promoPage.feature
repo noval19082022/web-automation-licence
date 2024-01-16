@@ -18,7 +18,7 @@ Feature: Promo page
 #    And user click page index "2"
 #    Then promo page "2" will be opened
 #
-  @regression
+  @regression @TEST_COOP-5405 @DOM3 @web-covered
   Scenario: User can open promo detail
     Given user navigates to promo mamikos
     When user see the promo title in first promo
