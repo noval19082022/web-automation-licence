@@ -5,8 +5,8 @@ Feature: Create OOO "Short Stay" Type
   Scenario: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini
     When admin login pms :
-      | email                 | password    |
-      | dhiandra@mamikos.com  | dh14ndr4321 |
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
@@ -19,9 +19,9 @@ Feature: Create OOO "Short Stay" Type
   Scenario: Create OOO "Short Stay"
     When admin set out of order on room "1"
     And admin fill OOO data with:
-      | type        | Short Stay |
-      | start date  | 16         |
-      | end date    | 20         |
+      | type       | Short Stay |
+      | start date | 16         |
+      | end date   | 20         |
     Then admin can see out of order on:
       | room number | start date |
       | 1           | 16         |
