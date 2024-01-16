@@ -7,15 +7,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.singgahsini.joinSinggahsiniPO;
+import pageobject.singgahsini.JoinSinggahsiniPO;
 import utilities.JavaHelpers;
 
 import java.util.List;
 import java.util.Map;
 
-public class joinSinggahsiniSteps {
+public class JoinSinggahsiniSteps {
     Page page = ActiveContext.getActivePage();
-    joinSinggahsiniPO joinSinggahsini = new joinSinggahsiniPO(page);
+    JoinSinggahsiniPO joinSinggahsini = new JoinSinggahsiniPO(page);
 
     private List<Map<String, String>> dataProperty;
 
