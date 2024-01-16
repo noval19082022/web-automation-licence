@@ -1,8 +1,7 @@
-@regression @BBM4 @voucher @voucher-admin
+@COOP-5836 @COOP4
+Feature: Admin - Update Single Voucher
 
-Feature: Admin - Single Voucher
-
-  @continue
+  @TEST_COOP-5830 @Automated @COOP @Web @continue
   Scenario: Create Single Voucher Prefix Without Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -60,3 +59,4 @@ Feature: Admin - Single Voucher
       | Active |
     And admin master clicks on edit single voucher button in voucher form
     Then admin can sees callout message contains "Voucher bbm-test-automation updated"
+		

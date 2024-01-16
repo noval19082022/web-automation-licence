@@ -71,7 +71,7 @@ Feature: Rekomendasi Listing
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    | password  |
-      | 0827777777776 | qwerty123 |
+      | 082322233311 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod |
       | Kos Khalif Automation |                |
@@ -81,14 +81,16 @@ Feature: Rekomendasi Listing
     Then verify last seen property doesn't display on rekomendasi section
     When tenant see first kost rekomendasi at kos saya page
     And tenant set active page to 1
-    Then user can favorite the kost
+    Then user can favorite the kost for recomendation listing
     And tenant set active page to 0
     Then tenant can not see kos after favorited that kos at recomendation section
 
   @favRekomendasi
   Scenario: Verify kost is show at rekomendation section after unfavorite kost
-    When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod |
-      | kos Sarane Automation |                |
+    #unfavorite kost
+    Given user go to mamikos homepage
+    When tenant open menu favorite
+    And tenant wants to open detail kost "Kos rane rane 1 mamitest" from favorite page
+    And tenant set active page to 1
+    And user can unfavorite the kost for recomendation listing
     Then user can verify kost after unfavorite the kost

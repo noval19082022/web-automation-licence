@@ -1,5 +1,6 @@
-@COOP-5841 @COOP4
+@COOP-5841 @COOP4 @TEST_COOP-5822 @Automated @COOP @Web
 Feature: Filter Voucher
+
 
   Background: Open voucher menu
     Given admin go to mamikos mamipay admin

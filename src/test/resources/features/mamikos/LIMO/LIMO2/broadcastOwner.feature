@@ -27,7 +27,7 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag | phone prod | password |
       | 0866000011 | 0          | 12345678 |
-    When owner goes to broadcast chat
+    When owner navigates to broadcast chat page
     Then user verify pop up message "Anda belum memiliki kos aktif" is appear
     When owner click on Tambah Kos button on no kos active pop-up broadcast chat owner
     Then user redirected to "kos/create"
