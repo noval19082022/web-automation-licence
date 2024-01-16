@@ -25,7 +25,7 @@ Feature: BnB feature
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 089120220103 | 083176408442 | qwerty123 |
+      | 0892202351 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
       | Kost andalusia spanyol eropa timur | kost payment desta 2 |
