@@ -61,7 +61,27 @@ public class PromoPage {
     @Then("promo code can be copied {string}")
     public void promoCodeCanBeCopied(String promoCode) {
         if (promo.isGetClipboardText()) {
-            Assert.assertEquals(promo.getClipboardText2(), promoCode, "ENAKNYANGEKOS18");
+            Assert.assertEquals(promo.getClipboardText2(), promoCode, "SEWASINGGAHSINI");
         }
+    }
+
+    @When("user see the promo title in first promo")
+    public void userSeeThePromoTitleInFirstPromo() {
+        promo.getFirstPromoTitle();
+    }
+
+    @And("user click see detail on first promo")
+    public void userClickSeeDetailOnFirstPromo() {
+        promo.clickFirstSeeDetail();
+    }
+
+    @And("detail promo page opened with correct title {string}")
+    public void detailPromoPageOpenedWithCorrectTitle(String Promo) {
+        Assert.assertEquals(promo.getPromoTitle(Promo), Promo,"wrong title");
+    }
+
+    @Then("user see button booking now")
+    public void userSeeButtonBookingNow() {
+        Assert.assertTrue(promo.bookingNowButtonDisplayed(), "Use Now button is not appear");
     }
 }
