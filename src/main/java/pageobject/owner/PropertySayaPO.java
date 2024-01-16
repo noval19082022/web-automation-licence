@@ -302,7 +302,7 @@ public class PropertySayaPO {
         confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
         nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
         confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
-        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus")).nth(1);
         confirmDeleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
         selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
@@ -1855,6 +1855,8 @@ public class PropertySayaPO {
      */
 
     public void clicktoggleDenda() {
+        playwright.pageScrollInView(toggleDenda);
+        playwright.waitTillLocatorIsVisible(toggleDenda);
         if (toggleDenda.isChecked()) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
