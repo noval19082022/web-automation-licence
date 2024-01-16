@@ -104,7 +104,7 @@ public class HomePO {
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
         flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
-        flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
+        flashSalePromoInfoList = page.locator(".rc-price__discount-icon").first();
         promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
         promoNgebutPriceInfoForFirstMonth = page.getByTestId("flashSaleHomePagePromoInfo");
         promoNgebutPriceInfoOtherThanFirstMonth = page.getByTestId("flashSaleHomePageOtherPromoInfo");
