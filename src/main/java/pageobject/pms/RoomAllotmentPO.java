@@ -61,6 +61,7 @@ public class RoomAllotmentPO {
      * @param number refer to room name (ex: 1 or A10)
      */
     public void setRoomOutOfOrder(String number) {
+        playwright.waitTillPageLoaded();
         Locator roomNumber = page.locator("//span[@class='cv-sidebar__room-number' and text()=' "+ number +" ']");
         playwright.clickOn(roomNumber);
         playwright.clickOn(createOutOfOrderStatusBtn);
@@ -118,6 +119,7 @@ public class RoomAllotmentPO {
      * @param startDate refers to the start date of ooo
      */
     public void clickOutOfOrderFlag(String room, String startDate) {
+        playwright.waitFor(outOfOrderFlag);
         int r = Integer.parseInt(room)+1;
         outOfOrderFlag = page.locator(".cv-daily__group-by-tipe-wrapper > div:nth-child(" + r + ") > div:nth-child(" + startDate + ")");
         playwright.clickOn(outOfOrderFlag);
@@ -180,10 +182,11 @@ public class RoomAllotmentPO {
      * @return boolean
      */
     public boolean isOutOfOrderOnRoomVisible(String room, String startDate) {
+        playwright.waitTillPageLoaded();
         int r = Integer.parseInt(room)+1;
         outOfOrderFlag = page.locator(".cv-daily__day-allotment:nth-of-type(" + r + ") > " +
                                               ".cv-daily__day--occupied:nth-of-type(" + startDate + ") > .tenant-label");
-        return playwright.isLocatorVisibleAfterLoad(outOfOrderFlag,3000.0);
+        return playwright.isLocatorVisibleAfterLoad(outOfOrderFlag,2000.0);
     }
 
     /**
