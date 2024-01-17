@@ -400,7 +400,7 @@ public class KostDetailsPO {
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
-        this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
+        this.discountPriceKostDetailText = page.getByTestId("kostDetailPriceBeforePromo");
         this.bookingDateForm = page.getByPlaceholder("Mulai kos");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
         this.bookingDurationForm =  page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^dropdown-down$"))).first();
