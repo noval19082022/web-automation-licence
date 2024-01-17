@@ -1868,6 +1868,9 @@ public class PropertySayaPO {
         }
     }
 
+    /**
+     * click Ubah Denda Text
+     */
     public void clickUbahDendaText(){
         playwright.clickOn(ubahDendaText);
     }
