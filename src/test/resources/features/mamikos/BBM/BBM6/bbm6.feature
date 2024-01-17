@@ -47,7 +47,7 @@ Feature: BnB feature
       | 50000        | 7        | Hari    |
     And owner click "Simpan"
     Then user cannot see "Rp50.000" on the list
-    And owner click "Ubah"
+    And owner click ubah denda
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
       | 100000       | 5        | Hari    |
@@ -445,7 +445,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_BBM-869 @continue
+  @updateRoomToast @markRoom @TEST_BBM-869
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -464,7 +464,10 @@ Feature: BnB feature
   @BNB-3131 @TEST_BBM-947 @booking1
   #otherPrice.feature
   Scenario: Delete Active Other Additional Price (BBM-947)
-    When user redirected to owner dashboard
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password     |
+      | 081362464341 | 1d0lt3stb4ru |
     And user click menu "Atur Harga" on feature waktunya mengelola property
     And user click kos "Ancient Fuelweaver Automation" in update price list
     And user delete active other additional price
