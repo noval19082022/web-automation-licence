@@ -1,4 +1,4 @@
-@BBM6
+@BBM6 @legend
 Feature: BnB feature
 
   @OwnerBadgesNotLogin @OwnerBadges
@@ -73,12 +73,12 @@ Feature: BnB feature
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 150000       | 4        | Minggu  |
+      | 100000       | 4        | Minggu  |
     And owner click "Simpan"
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 200000       | 12       | Bulan   |
+      | 100000       | 12       | Bulan   |
     And owner click "Simpan"
     Then user cannot see "Rp200.000" on the list
     And owner click "Hapus"
@@ -96,8 +96,8 @@ Feature: BnB feature
     And owner click "Update Harga"
     And owner click toggle deposit
     And owner input deposit amount:
-      | Deposit |
-      | 100000  |
+      | Deposit  |
+      | 100000   |
     And owner click "Simpan"
     Then user cannot see "Rp100.000" on the list
     And owner click "Hapus"
@@ -225,7 +225,7 @@ Feature: BnB feature
     And admin akhiri contract
     Then admin should success terminate contract
 
- # Scenario: cancel booking
+  #Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
@@ -261,7 +261,7 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @waitingTerminateConfirmation
+  @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:

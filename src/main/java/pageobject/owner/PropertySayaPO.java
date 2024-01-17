@@ -1,5 +1,6 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -182,6 +183,7 @@ public class PropertySayaPO {
     Locator hapusConfirmation;
     Locator textOtherPriceActiveName;
     Locator textOtherPriceActiveNumber;
+    Locator nameOtherPrice;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -320,6 +322,7 @@ public class PropertySayaPO {
         hapusConfirmation = page.locator("//*[@class='c-mk-card__body']//button[contains(.,'Ya, Hapus')]");
         textOtherPriceActiveName = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-title");
         textOtherPriceActiveNumber = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-price");
+        nameOtherPrice = page.locator("//div[@class='additional-price-item__info-title']");
     }
 
     /**
@@ -1811,6 +1814,7 @@ public class PropertySayaPO {
 
     /**
      * Click on selesai atur kamar button
+     *
      * @param text
      */
     public void clickOnSelesaiAturKamar(String text) {
@@ -1819,6 +1823,7 @@ public class PropertySayaPO {
 
     /**
      * Select payment expired date
+     *
      * @param number
      * @param rangeTime
      */
@@ -1842,6 +1847,7 @@ public class PropertySayaPO {
 
     /**
      * Get error price add kos
+     *
      * @param i
      * @return warningPrice
      */
@@ -1857,14 +1863,14 @@ public class PropertySayaPO {
     public void clicktoggleDenda() {
         playwright.pageScrollInView(toggleDenda);
         playwright.waitTillLocatorIsVisible(toggleDenda);
-        if (toggleDenda.isChecked()) {
+        if (playwright.isTextDisplayed("1234567890abcdefjkl") || playwright.isTextDisplayed("Rp100.000") || playwright.isTextDisplayed("Rp50.000")) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
             playwright.clickOn(toggleDenda);
         } else {
             playwright.clickOn(toggleDenda);
+            }
         }
-    }
 
     /**
      * fill Denda Amount Time
@@ -1895,8 +1901,8 @@ public class PropertySayaPO {
      */
     public void clicktoggleDeposit() {
         playwright.pageScrollInView(toggleDeposit);
-        playwright.waitTillLocatorIsVisible(toggleDenda);
-        if (toggleDeposit.isChecked()) {
+        playwright.waitTillLocatorIsVisible(toggleDeposit);
+        if (playwright.isTextDisplayed("Rp100.000") || playwright.isTextDisplayed("Rp50.000")) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
             playwright.clickOn(toggleDeposit);
