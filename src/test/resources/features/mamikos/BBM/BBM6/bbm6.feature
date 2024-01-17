@@ -1,4 +1,4 @@
-@BBM6 @legend
+@BBM6 @COOP6 @COOP
 Feature: BnB feature
 
   @OwnerBadgesNotLogin @OwnerBadges
