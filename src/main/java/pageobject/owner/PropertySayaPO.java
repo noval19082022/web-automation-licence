@@ -1863,12 +1863,17 @@ public class PropertySayaPO {
     public void clicktoggleDenda() {
         playwright.pageScrollInView(toggleDenda);
         playwright.waitTillLocatorIsVisible(toggleDenda);
-        if (playwright.isTextDisplayed("1234567890abcdefjkl") || playwright.isTextDisplayed("Rp100.000") || playwright.isTextDisplayed("Rp50.000")) {
+        if (playwright.isTextDisplayed("Hapus")) {
             playwright.clickOn(deleteOtherPrice);
             playwright.clickOn(confirmDeleteOtherPrice);
             playwright.clickOn(toggleDenda);
         } else {
             playwright.clickOn(toggleDenda);
+             if (playwright.isTextDisplayed("Hapus")) {
+                 playwright.clickOn(deleteOtherPrice);
+                 playwright.clickOn(confirmDeleteOtherPrice);
+                 playwright.clickOn(toggleDenda);
+             }
             }
         }
 

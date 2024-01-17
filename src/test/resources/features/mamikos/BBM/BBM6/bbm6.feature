@@ -236,7 +236,7 @@ Feature: BnB feature
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -280,7 +280,7 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
     And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     Then user will see message request terminated contract
@@ -315,8 +315,8 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
-    And owner set Kelola Tagihan filter month to "Oktober" month
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And owner set Kelola Tagihan filter month to "Januari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
