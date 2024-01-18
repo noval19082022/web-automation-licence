@@ -59,7 +59,7 @@ Feature: Flash Sale
     And user visit kost detail that has promo bulan pertama from homepage
     Then user will see that the text "(Bulan pertama)" is displayed
 
-  @TEST_COOP-4949 @continue
+  @TEST_COOP-4949
   Scenario: [Home Page][WEB]Visit Detail Kost that has Promo ngebut From Homepage (other than first month)
     Given user go to mamikos homepage
     When user will see promo ngebut info on kost card

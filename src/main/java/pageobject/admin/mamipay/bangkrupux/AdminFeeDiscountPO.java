@@ -21,7 +21,7 @@ public class AdminFeeDiscountPO {
     public AdminFeeDiscountPO(Page page) {
         this.page = page;
         this.playwrightHelpers = new PlaywrightHelpers(page);
-        this.adminFeeMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Invoice Admin Fee Discount"));
+        this.adminFeeMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Invoice Admin Fee Discount"));
         this.editBtnFirstAdminOnList = page.getByRole(AriaRole.LINK).getByText("Edit").first();
         this.createAdminFeeBtnOnList = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Discount Settings"));
         this.inputAmountPlaceHolderOnEditPage = page.getByRole(AriaRole.SPINBUTTON);
