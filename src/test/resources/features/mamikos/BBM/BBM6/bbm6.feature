@@ -1,4 +1,4 @@
-@BBM6
+@BBM6 @COOP6 @COOP
 Feature: BnB feature
 
   @OwnerBadgesNotLogin @OwnerBadges
@@ -73,12 +73,12 @@ Feature: BnB feature
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 150000       | 4        | Minggu  |
+      | 100000       | 4        | Minggu  |
     And owner click "Simpan"
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 200000       | 12       | Bulan   |
+      | 100000       | 12       | Bulan   |
     And owner click "Simpan"
     Then user cannot see "Rp200.000" on the list
     And owner click "Hapus"
@@ -96,8 +96,8 @@ Feature: BnB feature
     And owner click "Update Harga"
     And owner click toggle deposit
     And owner input deposit amount:
-      | Deposit |
-      | 100000  |
+      | Deposit  |
+      | 100000   |
     And owner click "Simpan"
     Then user cannot see "Rp100.000" on the list
     And owner click "Hapus"
@@ -225,7 +225,7 @@ Feature: BnB feature
     And admin akhiri contract
     Then admin should success terminate contract
 
- # Scenario: cancel booking
+  #Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
@@ -236,7 +236,7 @@ Feature: BnB feature
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -261,7 +261,7 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @waitingTerminateConfirmation
+  @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -280,7 +280,7 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
     And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     Then user will see message request terminated contract
@@ -315,8 +315,8 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
-    And owner set Kelola Tagihan filter month to "Oktober" month
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And owner set Kelola Tagihan filter month to "Januari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
