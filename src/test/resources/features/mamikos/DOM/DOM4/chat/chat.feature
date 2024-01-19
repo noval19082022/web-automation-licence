@@ -112,9 +112,9 @@ Feature: Chat and Chat Optimization
       | Cara menghubungi pemilik | Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
       | Alamat kos di mana       | Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                               											 |
       | Bisa pasutri             | Kos Dom Automation PLM Tipe C Kretek Bantul | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
-      | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe A Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
+      | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe E Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
       | Boleh bawa hewan         | Kos Dom Automation PLM Tipe C Kretek Bantul | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
-      | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
+      | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe E Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
 
   @TEST_COOP-5432
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
@@ -127,6 +127,8 @@ Feature: Chat and Chat Optimization
       | Kos BX Automation BBK Available Cilacap Selatan Cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |
     And tenant booking kost
     Then tenant should success booking kost
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
 
   @cancelBooking @TEST_COOP-5440
   Scenario: Cancel Booking if Tenant Have Booking
