@@ -21,7 +21,7 @@ Feature: Kost detail page
     And user want to select kost on promo section
     And tenant set active page to 1
     Then user see promo owner section
-    # user want to ask to owner for more detail kost promo
+    #user want to ask to owner for more detail kost promo
     When user want to get more information about kost promo
     Then user will get "Hubungi Kost" pop up
 
