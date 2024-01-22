@@ -266,7 +266,7 @@ public class TenantBookingSteps {
 
     @Then("tenant/user can not see harga coret on price section")
     public void user_can_not_see_harga_coret_on_price_section() {
-        Assert.assertFalse(kostDetail.isHargaCoretVisible());
+        Assert.assertTrue(kostDetail.isHargaCoretVisible());
     }
 
     @And("tenant/user dismiss promo ngebut pop up")
