@@ -67,6 +67,7 @@ public class NaikkanIklanPO {
      * @params posisiIklan
      */
     public String getPosisiIklan(String kostName, String posisiIklan) {
+        playwright.waitTillPageLoaded(5000.0);
         posisiIklanLocator =  page.locator("//*[.='"+kostName+"']/../../following-sibling::*//div[@id='ads-position-" + posisiIklan + "']");
         return playwright.getText(posisiIklanLocator);
 

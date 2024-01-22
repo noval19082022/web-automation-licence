@@ -33,7 +33,7 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to pembelian saldo mamiads page")
     public void userRedirectedToTopUpMamiadsPage() {
-        playwright.waitTillPageLoaded();
+        playwright.waitTillPageLoaded(5000.0);
         Assert.assertTrue(playwright.getPageUrl().contains(Mamikos.TOP_UP_MAMIADS));
     }
 

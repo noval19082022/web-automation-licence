@@ -102,6 +102,7 @@ public class GoldplusPO {
      * @param goldplus input goldplus package 1 or 2
      */
     public void clickOnGoldplusPackageButton(int goldplus){
+        playwright.waitTillPageLoaded();
         playwright.clickOn(page.getByTestId("beliGP"+goldplus+"_btn"));
 
     }

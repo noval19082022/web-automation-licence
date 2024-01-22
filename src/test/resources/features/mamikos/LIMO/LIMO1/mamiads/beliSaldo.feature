@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @beliSaldo
 Feature: Beli Saldo
 
   @TEST_LIMO-274 @belisaldo @continue
@@ -64,7 +64,7 @@ Feature: Beli Saldo
   Scenario: Checking history success transaction of mamiads using voucher
     Then owner verify invoice success paid mamiads
 
-  @TEST_LIMO-273
+  @TEST_LIMO-273 @upikMaint
   Scenario: Cancel Buy Saldo
     Given user go to mamikos homepage
     When user login as owner:
