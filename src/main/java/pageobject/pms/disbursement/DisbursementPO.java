@@ -1,10 +1,12 @@
-package pageobject.pms;
+package pageobject.pms.disbursement;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
 
 public class DisbursementPO {
     private Page page;
@@ -23,6 +25,7 @@ public class DisbursementPO {
     Locator terapkanBtn;
     Locator cariBtn;
     Locator searchProperty;
+    private Locator konfirmasiYaButton;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -37,6 +40,21 @@ public class DisbursementPO {
     Locator modelKerjaSamaDBET;
     Locator addOnJP;
     Locator addOnADP;
+    private Locator tambahanPendapatanNameField;
+    private Locator tambahanPendapatanKuantitasField;
+    private Locator tambahanPendapatanHargaSatuanField;
+    private Locator tambahanPendapatanSimpanButton;
+    private Locator tambahanPendapatanTable;
+    private Locator tambahanPendapatanActionButton;
+    private Locator tambahanPendapatanActionUbahButton;
+    private Locator tambahanPendapatanActionHapusButton;
+    private Locator tambahPendapatanConfirmHapusButton;
+    private Locator tambahPendapatanEmptyMessageText;
+    private Locator riwayatTransferPendapatanButton;
+    private Locator transferPendapatanTitleText;
+    private Locator refreshDisbursementButton;
+    private Locator konfirmasiDetailButton;
+    private Locator batalkanKonfirmasiDetailButton;
 
     public DisbursementPO(Page page) {
         this.page = page;
@@ -54,6 +72,7 @@ public class DisbursementPO {
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari"));
         searchProperty = page.getByPlaceholder("Cari Nama Properti");
+        konfirmasiYaButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Ya").setExact(true));
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -64,6 +83,16 @@ public class DisbursementPO {
         tambahanPendapatanSection = page.locator("//div[@class='flex align-center justify-space-between mb-24']").nth(1);
         riwayatTransferPendapatanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("calendar Riwayat Transfer Pendapatan"));
         refreshHalamanIniBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("reload Refresh Halaman ini"));
+        tambahanPendapatanNameField = page.getByTestId("cost-name");
+        tambahanPendapatanKuantitasField = page.getByTestId("cost-qty");
+        tambahanPendapatanHargaSatuanField = page.getByTestId("cost-amount");
+        tambahanPendapatanSimpanButton = page.getByTestId("simpan-btn");
+        tambahPendapatanEmptyMessageText = page.locator(".ta-c").nth(3);
+        riwayatTransferPendapatanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Transfer Pendapatan"));
+        transferPendapatanTitleText = page.locator("#transfer-pendapatan-history");
+        refreshDisbursementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refresh Halaman ini"));
+        konfirmasiDetailButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Konfirmasi").setExact(true));
+        batalkanKonfirmasiDetailButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Batalkan Konfirmasi").setExact(true));
     }
 
     /**
@@ -229,4 +258,166 @@ public class DisbursementPO {
         addOnADP = page.locator("//div[@class='bg-c-list-item__description']//li").nth(3);
         return playwright.getText(addOnADP);
     }
+
+    /**
+     * add tambahan pendapatan in disbursement detail
+     * @param fee array contains fee name, qty, price
+     */
+    public void addTambahanPendapatan(List<String> fee) {
+        playwright.clickOn(tambahkanBtnTambahanPendapatan);
+        playwright.fill(tambahanPendapatanNameField,fee.get(0));
+        playwright.fill(tambahanPendapatanKuantitasField, fee.get(1));
+        playwright.fill(tambahanPendapatanHargaSatuanField, fee.get(2));
+        playwright.clickOn(tambahanPendapatanSimpanButton);
+    }
+
+    /**
+     * Get tambahan pendapatan name in row i
+     * @param i index
+     * @return String
+     */
+    public String getTambahanPendapatanName(int i) {
+        tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+i+2+"]/td");
+        return playwright.getText(tambahanPendapatanTable.nth(0));
+    }
+
+    /**
+     * Get tambahan pendapatan price in row i
+     * @param i index
+     * @return String
+     */
+    public String getTambahanPendapatanPrice(int i) {
+        tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+i+2+"]/td");
+        return playwright.getText(tambahanPendapatanTable.nth(1));
+    }
+
+    /**
+     * Get tambahan pendapatan quantity in row i
+     * @param i index
+     * @return String
+     */
+    public String getTambahanPendapatanQty(int i) {
+        tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+i+2+"]/td");
+        return playwright.getText(tambahanPendapatanTable.nth(2));
+    }
+
+    /**
+     * Get tambahan pendapatan total in row i
+     * @param i index
+     * @return String
+     */
+    public String getTambahanPendapatanTotal(int i) {
+        tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+(i+2)+"]/td");
+        return playwright.getText(tambahanPendapatanTable.nth(3));
+    }
+
+    /**
+     * Get total of all tambahan pendapatan
+     * @return String
+     */
+    public String getTambahanPendapatanTotalPendapatan() {
+        Locator row = page.locator("(//*[@class='detail-transfer-page-table-list__table'])[4]//tr");
+        int totalRow = row.count();
+        tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+totalRow+"]/td");
+        return playwright.getText(tambahanPendapatanTable.nth(2));
+    }
+
+    /**
+     * Edit tambahan pendapatan row i
+     * @param fee array contains fee name, qty, price
+     * @param row index
+     */
+    public void editTambahanPendapatan(List<String> fee, Integer row) {
+        tambahanPendapatanActionButton = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+(row+1)+"]/td").last();
+        tambahanPendapatanActionUbahButton = page.getByRole(AriaRole.MENU).getByText("Ubah");
+
+        playwright.clickOn(tambahanPendapatanActionButton);
+        playwright.clickOn(tambahanPendapatanActionUbahButton);
+        playwright.fill(tambahanPendapatanNameField,fee.get(0));
+        playwright.fill(tambahanPendapatanKuantitasField, fee.get(1));
+        playwright.fill(tambahanPendapatanHargaSatuanField, fee.get(2));
+        playwright.clickOn(tambahanPendapatanSimpanButton);
+    }
+
+    /**
+     * Delete tambahan pendapatan row i
+     * @param row index
+     */
+    public void deleteTambahanPendapatan(Integer row) {
+        tambahanPendapatanActionButton = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+(row+1)+"]/td").last();
+        tambahanPendapatanActionHapusButton = page.getByText("Hapus", new Page.GetByTextOptions().setExact(true));
+        tambahPendapatanConfirmHapusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
+
+        playwright.clickOn(tambahanPendapatanActionButton);
+        playwright.clickOn(tambahanPendapatanActionHapusButton);
+        playwright.clickOn(tambahPendapatanConfirmHapusButton);
+    }
+
+    /**
+     * Get tambahan pendapatan empty page message
+     * @return String
+     */
+    public String getEmptyTambahanPendapatanMessage() {
+        return playwright.getText(tambahPendapatanEmptyMessageText);
+    }
+
+    /**
+     * Click riwayat transfer pendapatan button in detail disbursement
+     */
+    public void clickRiwayatTransferPendapatan() {
+        playwright.clickOn(riwayatTransferPendapatanButton);
+    }
+
+    /**
+     * Check is riwayat transfer pendapatan title visible
+     * @return Boolean
+     */
+    public boolean isRiwayatTransferPendapatanVisible() {
+        return playwright.isLocatorVisibleAfterLoad(transferPendapatanTitleText,10000.0);
+    }
+
+    /**
+     * Check is refresh button visible
+     * @return Boolean
+     */
+    public boolean isRefreshButtonVisible() {
+        return playwright.isLocatorVisibleAfterLoad(refreshDisbursementButton,10000.0);
+    }
+
+    /**
+     * Approve disbursement from list
+     */
+    public void approveFromList() {
+        playwright.clickOn(actionBtn);
+        playwright.clickOn(konfirmasiBtn);
+        playwright.clickOn(konfirmasiYaButton);
+    }
+
+    /**
+     * Unapprove disbursement from List
+     */
+    public void unapproveFromList() {
+        playwright.clickOn(actionBtn);
+        playwright.clickOn(batalkanKonfirmasiBtn);
+        playwright.clickOn(konfirmasiYaButton);
+    }
+
+    /**
+     * Approve disbursement from detail disbursement
+     */
+    public void approveFromdDetail() {
+        playwright.pageScrollInView(konfirmasiDetailButton);
+        playwright.clickOn(konfirmasiDetailButton);
+        playwright.clickOn(konfirmasiYaButton);
+    }
+
+    /**
+     * Unapprove disbursement from detail disbursement
+     */
+    public void unapproveFromDetail() {
+        playwright.pageScrollInView(batalkanKonfirmasiDetailButton);
+        playwright.clickOn(batalkanKonfirmasiDetailButton);
+        playwright.clickOn(konfirmasiYaButton);
+    }
+
 }
