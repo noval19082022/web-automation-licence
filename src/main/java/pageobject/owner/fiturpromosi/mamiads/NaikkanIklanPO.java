@@ -30,7 +30,6 @@ public class NaikkanIklanPO {
     Locator currentStatusSaldo;
 
 
-
     public NaikkanIklanPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -63,64 +62,70 @@ public class NaikkanIklanPO {
 
     /**
      * Get posisi iklan (naik / tidak naik)
+     *
      * @return posisi iklan
      * @params posisiIklan
      */
     public String getPosisiIklan(String kostName, String posisiIklan) {
         playwright.waitTillPageLoaded(5000.0);
-        posisiIklanLocator =  page.locator("//*[.='"+kostName+"']/../../following-sibling::*//div[@id='ads-position-" + posisiIklan + "']");
+        posisiIklanLocator = page.locator("//*[.='" + kostName + "']/../../following-sibling::*//div[@id='ads-position-" + posisiIklan + "']");
         return playwright.getText(posisiIklanLocator);
 
     }
 
     /**
      * Verify the status toggle iklan
+     *
      * @return toggleStatus
-     * @params  toggleStatus
+     * @params toggleStatus
      */
     public boolean getToggleStatus(String adsName, String toggleStatus) {
-       toggleLocator = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//input[@id='room-toggle-switch-"+toggleStatus+"']");
+        playwright.waitTillPageLoaded(5000.0);
+        toggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']");
         return playwright.waitTillLocatorIsVisible(toggleLocator);
     }
 
     /**
      * user verify the alokasi ads title
-     * @return alokasi title
+     *
      * @param alokasiTitleText
+     * @return alokasi title
      */
     public String getAlokasiTitleText(String alokasiTitleText) {
-        String alokasiTitleElement = "//div[@class='kos-card'][1]//div[contains(@class,'alokasi-ads')]//div[contains(text(), '"+ alokasiTitleText+ "')]";
-       playwright.waitTillLocatorIsVisible(page.locator(alokasiTitleElement));
-       return playwright.getText(page.locator(alokasiTitleElement));
+        String alokasiTitleElement = "//div[@class='kos-card'][1]//div[contains(@class,'alokasi-ads')]//div[contains(text(), '" + alokasiTitleText + "')]";
+        playwright.waitTillLocatorIsVisible(page.locator(alokasiTitleElement));
+        return playwright.getText(page.locator(alokasiTitleElement));
     }
 
     /**
      * user verify the alokasi ads title
-     * @return alokasi title
+     *
      * @param toggleAdsStatus
+     * @return alokasi title
      */
     public boolean getToggleAdsStatus(String toggleAdsStatus) {
-        String toggleAdsElement = "//div[@class='kos-card'][1]//div[contains(@class,'alokasi-ads')]//div[@class='bg-c-switch alokasi-ads__toggle bg-c-switch--"+ toggleAdsStatus +"']";
-        return playwright.waitTillLocatorIsVisible(page.locator(toggleAdsElement),1000.0);
+        String toggleAdsElement = "//div[@class='kos-card'][1]//div[contains(@class,'alokasi-ads')]//div[@class='bg-c-switch alokasi-ads__toggle bg-c-switch--" + toggleAdsStatus + "']";
+        return playwright.waitTillLocatorIsVisible(page.locator(toggleAdsElement), 1000.0);
     }
 
     /**
      * user verify the alokasi ads title
-     * @return alokasi title
+     *
      * @param adsDescText
+     * @return alokasi title
      */
     public String getAdsDescText(String adsDescText) {
         String adsDescElement = "//div[@class='kos-card'][1]//div[contains(@class,'ads__des')]";
         playwright.waitTillLocatorIsVisible(page.locator(adsDescElement));
-        return  playwright.getText(page.locator(adsDescElement));
+        return playwright.getText(page.locator(adsDescElement));
     }
 
     /**
      * owner click filter aktif at mamiads dashboard
      */
-    public void clickOnFilterActive(String filter){
+    public void clickOnFilterActive(String filter) {
         playwright.clickOn(selectFilter);
-        filterChoice = page.locator("//*[@class='bg-c-dropdown__menu-item-content'][contains(text(), '"+filter+"')]");
+        filterChoice = page.locator("//*[@class='bg-c-dropdown__menu-item-content'][contains(text(), '" + filter + "')]");
         playwright.clickOn(filterChoice);
     }
 
@@ -130,19 +135,21 @@ public class NaikkanIklanPO {
      * @throws InterruptedException
      */
     public void clickOnAllocationSection() throws InterruptedException {
-      playwright.clickOn(quickAllocateTitle);
+        playwright.clickOn(quickAllocateTitle);
     }
+
     /**
      * Click on toggle ON OFF on property saya
-     * @throws InterruptedException
      *
+     * @throws InterruptedException
      */
     public void clickToggleTheAdsOnPropertySaya() throws InterruptedException {
-       playwright.clickOn(toggleAds);
+        playwright.clickOn(toggleAds);
     }
 
     /**
      * Get message on pop up confirmation
+     *
      * @return message on pop up confirmation
      * @params action
      */
@@ -159,17 +166,17 @@ public class NaikkanIklanPO {
 
     /**
      * Click on Ke MamiAds button
-     * @throws InterruptedException
      *
+     * @throws InterruptedException
      */
     public void clickOnKeMamiAdsButton() throws InterruptedException {
-       playwright.clickOn(keMamiAdsButton);
+        playwright.clickOn(keMamiAdsButton);
     }
 
     /**
      * Click on Nanti Saja button on confirmation pop up quick allocation
-     * @throws InterruptedException
      *
+     * @throws InterruptedException
      */
     public void clickOnNantiSaja() throws InterruptedException {
         playwright.clickOn(nantiSaja);
@@ -186,11 +193,11 @@ public class NaikkanIklanPO {
 
     /**
      * Click on Ya, Nonaktifkan button on Non aktif confirmation pop up
-     * @throws InterruptedException
      *
+     * @throws InterruptedException
      */
     public void clickOnNonaktifkanAds() {
-       playwright.clickOn(nonAktifkanAdsButton);
+        playwright.clickOn(nonAktifkanAdsButton);
     }
 
     /**
@@ -202,39 +209,42 @@ public class NaikkanIklanPO {
 
     /**
      * Get message of ads status
+     *
      * @return adsStatus message
      * @params adsName
      */
     public String getAdsStatusDesc(String adsName) {
-        adsStatusLocator = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@id='ads-status-description']");
+        adsStatusLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-status-description']");
         return playwright.getText(adsStatusLocator);
     }
 
     /**
      * Get message of anggaran description
+     *
      * @return anggaranDesc message
      * @params adsName
      */
     public String getTextAnggaranDesc(String adsName) {
         playwright.hardWait(4000.0);
-        anggaranDescLocator = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@id='ads-allocation-description']");
+        anggaranDescLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']");
         return playwright.getText(anggaranDescLocator);
     }
 
     /**
      * Click toggle ads
+     *
      * @params toggleStatus, adsName
      */
     public void clickToggleTheAds(String toggleStatus, String adsName) {
         if (toggleStatus.equals("off")) {
-            switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");;
+            switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");
+            ;
         } else {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
         }
-        if (switchToggleLocator.isChecked()){
+        if (switchToggleLocator.isChecked()) {
             switchToggleLocator.uncheck();
-        }
-        else {
+        } else {
             switchToggleLocator.check();
         }
     }
@@ -242,6 +252,7 @@ public class NaikkanIklanPO {
     /**
      * get saldo mamiads text
      * convert from String (Rp1.000) to int (1000)
+     *
      * @return int saldo mamiads
      */
     public int getSaldoMaText() {
@@ -251,6 +262,7 @@ public class NaikkanIklanPO {
 
     /**
      * Get Title Pop up while appear beli saldo pop up
+     *
      * @return title pop up confirmation
      */
     public String getTitleBeliSaldoPopUp() {
@@ -259,6 +271,7 @@ public class NaikkanIklanPO {
 
     /**
      * Click Aktifkan button
+     *
      * @params actionButton
      */
     public void clickActionButtonInPopUp(String actionButton) {
@@ -268,6 +281,7 @@ public class NaikkanIklanPO {
 
     /**
      * Get list Ads on mamiAds dashboard page
+     *
      * @return AdsName, posisiIklan, currentToggle, AvailableRoom, currentStatusDesc
      * @params listAds, index
      */
@@ -292,10 +306,11 @@ public class NaikkanIklanPO {
 
     /**
      * Verify the toggle on list ads
+     *
      * @return status toggle (on/ off)
      * @params toggle, index
      */
     public boolean listAdsToggle(String toggle, int index) {
-        return playwright.waitTillLocatorIsVisible(playwright.getLocators(page.locator("//*[contains(@class, 'switch--" + toggle +"')]")).get(index));
+        return playwright.waitTillLocatorIsVisible(playwright.getLocators(page.locator("//*[contains(@class, 'switch--" + toggle + "')]")).get(index));
     }
 }

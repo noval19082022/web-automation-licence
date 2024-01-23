@@ -10,7 +10,6 @@ Feature: Voucher
       | 0895365624343 | 0          | 12345678 |
     When user navigates to mamiads dashboard
     And user click "Coba Sekarang"
-    And user close mamiads onboarding popup
     And user wants to buy saldo MamiAds "Rp6.000"
   #Voucher doesn't active (LIMO-193)
     And owner click masukkan voucher

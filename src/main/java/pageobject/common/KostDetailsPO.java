@@ -304,7 +304,6 @@ public class KostDetailsPO {
 
         //------------ Favorite and share kost section ----------------
         this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         this.successFavoritePopUp = page.getByText("Berhasil ditambahkan ke favorit.");
         this.successUnfavoritePopUp = page.getByText("Berhasil dihapus dari favorit.");
         this.shareKostButton = page.getByText("share Bagikan");
@@ -1615,6 +1614,7 @@ public class KostDetailsPO {
      * Click on favorite kost button
      */
     public void clickOnFavoriteKostButton() {
+        this.favoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         favoriteKostButton.click();
     }
 
@@ -1632,6 +1632,7 @@ public class KostDetailsPO {
      * Click on unfavorite kost button
      */
     public void clickOnUnfavoriteKostButton() {
+        this.unFavoriteKostButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         unFavoriteKostButton.click();
     }
 
