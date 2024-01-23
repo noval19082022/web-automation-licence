@@ -14,6 +14,9 @@ import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -43,7 +46,11 @@ public class OwnerManageBillSteps {
         billManage.reloadOnEmptyKelolaTagihanPage();
         loading.waitForLoadingIconDisappear();
         billManage.selectKosBillPageFilter(kostName);
-        if (month.equalsIgnoreCase("next") && currentMonth.equalsIgnoreCase("Januari")) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonthDate = currentDate.plus(1, ChronoUnit.MONTHS);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM", java.util.Locale.ENGLISH);
+        String nextMonthString = nextMonthDate.format(formatter);
+        if (month.equalsIgnoreCase("next") && month.equalsIgnoreCase(nextMonthString)) {
             billManage.clickOnFilterMonth();
             billManage.clickArrowNextMonthFilterButton();
             billManage.clickOnMonthNameOnFilterMonth(selectedMonthFilter);

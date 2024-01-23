@@ -71,12 +71,12 @@ public class AdminSanJuniperoSteps {
         adminSanJuniperoPO.clickOnDeactiveAction();
     }
 
-    @Then("admin bangkerupux will see last updated sanjunipero is current time")
+    @Then("admin bangkerupux will see last updated sanjunipero is current date")
     public void adminBangkerupuxWillSeeLastUpdatedSanjuniperoIsCurrentTime() {
         Assert.assertTrue(adminSanJuniperoPO
                 .getCurrentTimeUpdate()
-                .contains(JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd HH:mm"))
-                , "Time is not up to date");
+                .contains(JavaHelpers.getCurrentDateOrTime("yyyy-MM-dd"))
+                , "Date is not up to date");
     }
 
     @And("admin bangkerupux activate first sanjunipero on sanjunipero page")

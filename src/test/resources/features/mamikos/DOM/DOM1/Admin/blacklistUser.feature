@@ -44,7 +44,7 @@ Feature: Blacklist User
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe C | Kos DC BAR Automation Tipe C |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     And user login from kost detail via phone number:
@@ -96,7 +96,7 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | phone_number | 089536519944                            |
 
-  @TEST_DOM-2639 @TEST_COOP-5154 @continue
+  @TEST_DOM-2639 @TEST_COOP-5154
   Scenario Outline: [WEB][Blacklist] After blacklist email user try login via Facebook
     When user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     And user click blacklist on homepage blacklist

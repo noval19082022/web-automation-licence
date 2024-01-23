@@ -62,6 +62,8 @@ public class TenantBillManagementPO {
     Locator kostDropdownInBillingManagement;
     Locator lihatStatusTagihanBtn;
 
+    Locator disbursementLink;
+
     public TenantBillManagementPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -100,6 +102,7 @@ public class TenantBillManagementPO {
         gunakanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Gunakan"));
         dontHaveKosWarning = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Penyewa Kos"));
         phoneNumberPenyewaText = page.locator(".bg-c-text--title-3");
+        disbursementLink = page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]");
     }
 
     /**
@@ -551,6 +554,7 @@ public class TenantBillManagementPO {
      * user choose kost name
      */
     public void searchKostInBillingManagement(String kostName) {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(kostDropdownInBillingManagement);
         Locator selectKost = page.locator("//label[contains(.,'"+kostName+"')]");
         playwright.clickOn(selectKost);
@@ -560,7 +564,9 @@ public class TenantBillManagementPO {
      * user click on disbursement link
      */
     public void userClickOnDIsbursementLink() {
-        playwright.clickOn(page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]"));
+        playwright.waitTillLocatorIsVisible(disbursementLink,2000.0);
+        playwright.clickOn(disbursementLink);
+        //playwright.clickOn(page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]"));
     }
     /**
      * Get text financial report

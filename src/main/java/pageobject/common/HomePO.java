@@ -64,6 +64,7 @@ public class HomePO {
     private Locator promoNgebutPriceInfoForFirstMonth;
     private Locator promoNgebutPriceInfoOtherThanFirstMonth;
     private Locator promoNgebutRentType;
+    private Locator nextListProbut;
 
     //footer
     private Locator tentangKamiButton;
@@ -104,11 +105,12 @@ public class HomePO {
         flashSaleKostListContainer = page.locator(".flashsale-wrapper > .swiper-container");
         flashSaleSection = page.locator("#flashsale");
         flashSaleLihatSemuaButton = page.locator("#flashsale").getByText("Lihat semua");
-        flashSalePromoInfoList = page.getByTestId("flashSaleHomePagePromoInfo");
+        flashSalePromoInfoList = page.locator(".rc-price__discount-icon").first();
         promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
         promoNgebutPriceInfoForFirstMonth = page.getByTestId("flashSaleHomePagePromoInfo");
         promoNgebutPriceInfoOtherThanFirstMonth = page.getByTestId("flashSaleHomePageOtherPromoInfo");
         promoNgebutRentType = page.getByTestId("flashSaleHomePageRentType");
+        nextListProbut = page.locator("#flashsale").getByLabel("Next slide");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
         this.seeAllPromoAds = page.locator(".promo-banner__navigation-link");
@@ -159,7 +161,7 @@ public class HomePO {
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
-        this.copyrightFooter = page.getByText("© 2023 Mamikos.com. All rights reserved");
+        this.copyrightFooter = page.getByText("© 2024 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
         this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
     }
@@ -780,6 +782,17 @@ public class HomePO {
      * @return
      */
     public boolean promoNgebutInfoOtherThanFirstMonthIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(
+                promoNgebutPriceInfoOtherThanFirstMonth.first(),
+                3.0) ? true : promoNgebutInfoOtherThanFirstMonthIsVisibleOnTheNextList();
+    }
+
+    /**
+     * promo ngebut info on kost card other than first month is visible on the next list
+     * @return
+     */
+    public boolean promoNgebutInfoOtherThanFirstMonthIsVisibleOnTheNextList() {
+        playwright.clickOn(nextListProbut);
         return playwright.isLocatorVisibleAfterLoad(promoNgebutPriceInfoOtherThanFirstMonth.first(), 3.0);
     }
 

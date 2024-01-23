@@ -83,7 +83,7 @@ Feature: Homepage
 	@TEST_COOP-5450 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check copyright on footer on homepage
 		Given user go to mamikos homepage
-		Then user can see copyright is "© 2023 Mamikos.com. All rights reserved"
+		Then user can see copyright is "© 2024 Mamikos.com. All rights reserved"
 
 	@TEST_COOP-5458 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Lihat semua on owner promo section

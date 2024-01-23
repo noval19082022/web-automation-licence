@@ -1,4 +1,4 @@
-@DOM1 @essentialTest2
+@DOM10 @essentialTest2
 Feature: Owner - Login
 
   @TEST_COOP-5276 @Automated @DOM @web-covered @TEST_COOP-5183
@@ -31,7 +31,7 @@ Feature: Owner - Login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     #user want to see map more detail
     When user want to see more detail kost location
@@ -50,7 +50,7 @@ Feature: Owner - Login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe A | Kos DC BAR Automation Tipe A |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     When user login as owner:
       | phone stag   | phone prod   | password     |
