@@ -56,6 +56,15 @@ public class DisbursementPO {
     private Locator konfirmasiDetailButton;
     private Locator batalkanKonfirmasiDetailButton;
 
+    //---Keterangan Tambahan untuk Owner Section---//
+    private Locator ubahBtnInKeteranganTambahan;
+    private Locator keteranganTambahanField;
+    private Locator simpanBtnInKeteranganTambahan;
+    private Locator keteranganTambahanValue;
+    private Locator toastKeteranganTambahan;
+    private Locator keteranganTambahanErrorMessage;
+    private Locator errorMessageMoreThan1500Characters;
+
     public DisbursementPO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -93,6 +102,11 @@ public class DisbursementPO {
         refreshDisbursementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refresh Halaman ini"));
         konfirmasiDetailButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Konfirmasi").setExact(true));
         batalkanKonfirmasiDetailButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Batalkan Konfirmasi").setExact(true));
+
+        //---Keterangan Tambahan untuk Owner Section---//
+        ubahBtnInKeteranganTambahan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
+        keteranganTambahanField = page.locator("//*[@class='bg-c-textarea']/textarea");
+        simpanBtnInKeteranganTambahan = page.getByTestId("simpan-btn");
     }
 
     /**
@@ -420,4 +434,85 @@ public class DisbursementPO {
         playwright.clickOn(konfirmasiYaButton);
     }
 
+    /**
+     * Clicks Ubah button in Keterangan Tambahan untuk Owner section
+     */
+    public void clicksUbahInKeteranganTambahan() {
+        playwright.clickOn(ubahBtnInKeteranganTambahan);
+    }
+
+    /**
+     * Inputs Character Less Than 1500 Characters
+     * @param note
+     */
+    public void inputsCharactersLessInKeteranganTambahan(String note) {
+        playwright.fill(keteranganTambahanField, note);
+        playwright.clickOn(simpanBtnInKeteranganTambahan);
+    }
+
+    /**
+     * Get String Value in Keterangan Tambahan untuk Owner section
+     * @param note
+     * @return String Value in Keterangan Tambahan untuk Owner section
+     */
+    public String getKeteranganTambahanValue(String note) {
+        keteranganTambahanValue = page.getByText(note);
+        return playwright.getText(keteranganTambahanValue);
+    }
+
+    /**
+     * Get String Toast in Keterangan Tambahan untuk Owner section
+     * @param toast
+     * @return String Toast in Keterangan Tambahan untuk Owner section
+     */
+    public String getKeteranganTambahanToast(String toast) {
+        toastKeteranganTambahan = page.getByText(toast);
+        return playwright.getText(toastKeteranganTambahan);
+    }
+
+    /**
+     * Remove Value in Keterangan Tambahan untuk Owner
+     */
+    public void clearKeteranganTambahanValue() {
+        playwright.clickOn(ubahBtnInKeteranganTambahan);
+        playwright.clearText(keteranganTambahanField);
+    }
+
+    /**
+     * Get String Error Message for Empty State in Keterangan Tambahan untuk Owner section
+     * @param errorMessage
+     * @return String Error Message for Empty State in Keterangan Tambahan untuk Owner section
+     */
+    public String errorMessageEmptyStateInKeteranganTambahan(String errorMessage) {
+        keteranganTambahanErrorMessage = page.getByText(errorMessage);
+        return playwright.getText(keteranganTambahanErrorMessage);
+    }
+
+    /**
+     * Check if Simpan button in Keterangan Tambahan untuk Owner is disable
+     * True = disable
+     * False = enable
+     * @return Simpan button in Keterangan Tambahan untuk Owner is disable
+     */
+    public boolean isSimpanButtonInKeteranganTambahanDisable() {
+        return playwright.isButtonDisable(simpanBtnInKeteranganTambahan);
+    }
+
+    /**
+     * Get String Error Message for More Than 1500 characters
+     * @param errorMessage
+     * @return String Error Message for More Than 1500 characters
+     */
+    public String errorMessageMoreThan1500Chars(String errorMessage) {
+        errorMessageMoreThan1500Characters = page.getByText(errorMessage);
+        return playwright.getText(errorMessageMoreThan1500Characters);
+    }
+
+    /**
+     * Inputs Characters More Than 1500 in Keterangan Tambahan untuk Owner section
+     * @param noteMoreThan
+     */
+    public void inputsCharactersMoreInKeteranganTambahan(String noteMoreThan) {
+        playwright.fill(keteranganTambahanField, noteMoreThan);
+    }
 }
