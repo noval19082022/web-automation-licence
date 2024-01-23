@@ -91,6 +91,7 @@ public class HomepagePO {
     String date;
     Locator autoDisburseToggle;
     Locator yesBtnInAutoDisburseToggle;
+    Locator totalPropertyText;
 
     //-----------create dbet--------//
     Locator dbetButton;
@@ -189,6 +190,7 @@ public class HomepagePO {
         pilihHospitalityDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Hospitality dropdown-down"));
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
+        totalPropertyText = page.locator(".total-data");
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -898,5 +900,13 @@ public class HomepagePO {
     public String getHospitality(String hospitality) {
         hospitalityInTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(hospitality));
         return playwright.getText(hospitalityInTable);
+    }
+
+    /**
+     * Check is total property visible
+     * @return boolean
+     */
+    public boolean isTotalPropertyVisible() {
+        return playwright.isLocatorVisibleAfterLoad(totalPropertyText,10000.0);
     }
 }
