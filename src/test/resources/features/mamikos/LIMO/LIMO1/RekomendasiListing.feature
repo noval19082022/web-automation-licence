@@ -90,5 +90,4 @@ Feature: Rekomendasi Listing
     #unfavorite kost
     And tenant set active page to 2
     And user can unfavorite the kost for recomendation listing
-    And tenant set active page to 2
     Then user can verify kost after unfavorite the kost

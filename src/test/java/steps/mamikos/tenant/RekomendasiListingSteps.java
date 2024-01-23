@@ -85,7 +85,7 @@ public class RekomendasiListingSteps {
     @When("tenant see first kost rekomendasi at kos saya page")
     public void tenant_see_first_kost_rekomendasi_at_kos_saya_page() throws InterruptedException {
         rekomendasiListing.getFirstProperty("Kos Saya");
-        page1 = rekomendasiListing.clickOnFirstRekomendasi();
+        page = rekomendasiListing.clickOnFirstRekomendasi();
 
     }
     @Then("tenant can not see kos after favorited that kos at recomendation section")

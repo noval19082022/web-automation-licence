@@ -238,7 +238,6 @@ public class NaikkanIklanPO {
     public void clickToggleTheAds(String toggleStatus, String adsName) {
         if (toggleStatus.equals("off")) {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");
-            ;
         } else {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
         }
