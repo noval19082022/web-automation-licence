@@ -1,4 +1,4 @@
-@regression @LIMO1
+@regression @LIMO1 @ubahAnggaran
 Feature: Ubah Anggaran
 
   @TEST_LIMO-306
