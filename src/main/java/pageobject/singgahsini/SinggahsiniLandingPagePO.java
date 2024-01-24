@@ -2,6 +2,8 @@ package pageobject.singgahsini;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
 public class SinggahsiniLandingPagePO {
@@ -29,6 +31,7 @@ public class SinggahsiniLandingPagePO {
     private Locator tanyaJawabQuestionText;
     private Locator tanyaJawabAnswerParagraphText;
     private Locator tanyaJawabAnswerListText;
+    private Locator footerMenuButton;
 
 
     public SinggahsiniLandingPagePO(Page page){
@@ -256,5 +259,33 @@ public class SinggahsiniLandingPagePO {
      */
     public void expandFaq(int i) {
         playwright.clickOn(tanyaJawabQuestionText.nth(i));
+    }
+
+    /**
+     * Click Footer Menu
+     * @param menu
+     */
+    public void clickFooterMenu(String menu) {
+        if (menu.equalsIgnoreCase("tiktok")){
+            footerMenuButton = page.getByText("@singgahsini_idn").first();
+        } else if (menu.equalsIgnoreCase("ig")) {
+            footerMenuButton = page.getByText("@singgahsini_idn").nth(1);
+        }else {
+            footerMenuButton = page.getByTestId("footerTopSection").getByText(menu);
+        }
+
+        playwright.clickOn(footerMenuButton);
+    }
+
+    /**
+     * Get URL in new tab
+     * @return String
+     */
+    public String getNewTabURL() {
+        playwright.hardWait(5000.0);
+        String url = page.context().pages().get(1).url();
+        page.context().pages().get(1).close();
+
+        return url;
     }
 }
