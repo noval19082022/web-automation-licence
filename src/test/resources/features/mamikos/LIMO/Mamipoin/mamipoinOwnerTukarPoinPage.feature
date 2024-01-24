@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @mamipoinOwnerEntryPoint @mamipoinOwner
+@listing-monetization @mamipoinOwnerEntryPoint @mamipoinOwner
 Feature: [Owner Dashboard]MamiPoin Owner Tukar Poin Page
 
   @TEST_LIMO-2012 @Automated @Web @listing-monetization @mamipoin-owner
