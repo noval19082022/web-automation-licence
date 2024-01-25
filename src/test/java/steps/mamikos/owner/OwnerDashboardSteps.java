@@ -361,5 +361,11 @@ public class OwnerDashboardSteps {
     public void widget_daftar_goldplus_is_displayed(){
         ownerDashboardPO.isWidgetDaftarGoldplusDisplayed();
     }
+
+    @And("user click daftar GP button")
+    public void userClickDaftarGPButton() {
+        ownerDashboardPO.clickOnDaftarGP();
+    }
+
 }
 

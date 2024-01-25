@@ -19,16 +19,16 @@ public class SinggahsiniLandingPageSteps {
     private List<Map<String, String>> testimoni;
     private List<Map<String, String>> faqQuestion;
 
-    @When("user click menu {string}")
-    public void user_click_menu(String menu) {
+    @When("user click header menu {string}")
+    public void user_click_header_menu(String menu) {
         singgahsini.clickNavbarMenu(menu);
     }
     @When("user scroll to section {string}")
     public void user_scroll_to_section(String section) {
         singgahsini.scrollToSection(section);
     }
-    @Then("page should be scroll to section {string}")
-    public void page_should_be_scroll_to_section(String section) {
+    @Then("page auto scroll to section {string}")
+    public void page_auto_scroll_to_section(String section) {
         switch (section){
             case "Tentang Kami":
                 Assert.assertTrue(singgahsini.isTentangKamiVisible());
@@ -142,5 +142,34 @@ public class SinggahsiniLandingPageSteps {
             default:
                 System.out.println("Index out of bounds");
         }
+    }
+    @When("user click footer menu {string}")
+    public void user_click_footer_menu(String menu) {
+        singgahsini.clickFooterMenu(menu);
+    }
+    @When("user click social media link {string}")
+    public void user_click_social_media_link(String link) {
+        if (link.equalsIgnoreCase("Tiktok")){
+            singgahsini.clickFooterMenu("tiktok");
+        } else if (link.equalsIgnoreCase("Instagram")) {
+            singgahsini.clickFooterMenu("ig");
+        } else if (link.equalsIgnoreCase("Youtube")) {
+            singgahsini.clickFooterMenu("Singgahsini by Mamikos");
+        }else {
+            System.out.println("Invalid social media");
+        }
+    }
+    @Then("new tab open redirect to {string}")
+    public void new_tab_open_redirect_to(String link) {
+        String URL = "";
+        if (link.equalsIgnoreCase("Tiktok")){
+            URL = "https://www.tiktok.com/@singgahsini_idn";
+        } else if (link.equalsIgnoreCase("Instagram")) {
+            URL = "https://www.instagram.com/singgahsini_idn/";
+        } else if (link.equalsIgnoreCase("Youtube")) {
+            URL = "https://www.youtube.com/channel/UCDH3m6FZPy0X8D13h4GQz-A";
+        }
+
+        Assert.assertEquals(singgahsini.getNewTabURL(),URL);
     }
 }

@@ -3,6 +3,7 @@ package pageobject.tenant;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -146,6 +147,7 @@ public class RekomendasiListingPO {
      * Click on menu favorite at header homepage
      */
     public void clickOnFavoriteHeader(){
+        favoritHeader =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         playwright.clickOn(favoritHeader);
     }
 
@@ -164,8 +166,12 @@ public class RekomendasiListingPO {
      * @return active page
      * @throws InterruptedException
      */
-    public void clickOnFirstRekomendasi(){
-       playwright.clickOn(firstPropertyRekomendasiKosSaya);
+    public Page clickOnFirstRekomendasi(){
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(firstPropertyRekomendasiKosSaya);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
     }
 
     /**
@@ -218,10 +224,14 @@ public class RekomendasiListingPO {
      * @param favoritProperty
      * @throws InterruptedException
      */
-    public void clickOnPropertyFavorit(String favoritProperty) throws InterruptedException {
+    public Page clickOnPropertyFavorit(String favoritProperty) throws InterruptedException {
         propertyFavorit = page.getByText(favoritProperty);
         playwright.waitTillLocatorIsVisible(propertyFavorit,1000.0);
-        playwright.clickOn(propertyFavorit);
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(propertyFavorit);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
     }
 
 }

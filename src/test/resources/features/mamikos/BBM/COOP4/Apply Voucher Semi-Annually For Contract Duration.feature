@@ -1,4 +1,4 @@
-@COOP-5842 @COOP4
+@COOP-5842 @COOP40 @COOP400
 Feature: Apply Voucher Semi-Annually For Contract Duration
 
   @TEST_COOP-5820 @Automated @COOP @Web
@@ -24,8 +24,8 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | kost name stag           | kost name prod           |
+      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
     And tenant booking kost "tomorrow" "Per 6 Bulan"
     Then tenant should success booking kost
 
@@ -73,8 +73,8 @@ Feature: Apply Voucher Semi-Annually For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | kost name stag           | kost name prod           |
+      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 

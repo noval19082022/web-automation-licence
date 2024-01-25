@@ -24,8 +24,8 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | kost name stag        | kost name prod        |
+      | Kost Adi Auto Regular | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 
@@ -73,8 +73,8 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | kost name stag        | kost name prod        |
+      | Kost Adi Auto Regular | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 

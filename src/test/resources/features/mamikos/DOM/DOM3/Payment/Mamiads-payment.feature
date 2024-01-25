@@ -49,7 +49,7 @@ Feature: Payment mamiads staging
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp27.000"
-    And owner select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And owner select payment from invoice detail using Credit Card
     Then owner verify invoice success paid mamiads
 
   @TEST_COOP-4955

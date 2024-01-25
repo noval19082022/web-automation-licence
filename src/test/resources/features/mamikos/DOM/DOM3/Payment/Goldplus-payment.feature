@@ -75,7 +75,7 @@ Feature: Payment Goldplus staging
     And owner waiting the page reload
     And user click "Daftar" button
     And user wants to subscribe Goldplus 1
-    And owner select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And owner select payment from invoice detail using Credit Card
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed

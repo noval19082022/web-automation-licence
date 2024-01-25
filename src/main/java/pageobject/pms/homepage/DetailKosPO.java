@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import utilities.PlaywrightHelpers;
 
+import java.util.regex.Pattern;
+
 public class DetailKosPO {
     private Page page;
     PlaywrightHelpers playwright;
@@ -32,11 +34,11 @@ public class DetailKosPO {
         lokasiStrategisField = page.getByPlaceholder("Lokasi Strategis");
         tambahLokasiStrategisButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("+ Tambah Lokasi Strategis").setExact(true));
         simpanButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Simpan").setExact(true));
-        confirmSimpanButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
-        confirmDeleteButton = page.getByRole(AriaRole.DIALOG).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Hapus"));
+        confirmSimpanButton = page.locator("button").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Simpan$")));
+        confirmDeleteButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Hapus").setExact(true));
         lokasiStrategisExpandButton = page.getByText("Lokasi Strategis");
         deleteLokasiStrategisButton = page.locator(".bg-c-button--icon-only-md");
-        emptyLokasiStrategisText = page.locator(".bg-c-accordion--open .bg-c-accordion__content-slide div");
+        emptyLokasiStrategisText = page.locator("details[open='open'] div").last();
         errorMessageLokasiStrategis = page.locator(".bg-c-field__message");
     }
 
@@ -112,7 +114,7 @@ public class DetailKosPO {
      * @return String
      */
     public String getLokasiStrategis(int i) {
-        lokasiStrategisList = page.locator(".bg-c-accordion--open p").nth(i);
+        lokasiStrategisList = page.locator("details[open='open'] p").nth(i);
         return playwright.getText(lokasiStrategisList);
     }
 

@@ -34,4 +34,9 @@ public class commonSteps {
     public void admin_go_to_additional_fee_management_menu() {
         menu.clickAdditionalFeeManagementMenu();
     }
+
+    @When("admin go to Disbursement menu")
+    public void admin_go_to_Disbursement_menu(){
+        menu.clickDisbursementMenu();
+    }
 }

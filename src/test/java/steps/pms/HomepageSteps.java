@@ -76,9 +76,9 @@ public class HomepageSteps {
         homepage.clickOnSelanjutnyaButton();
     }
 
-    @And("admin selected type room")
-    public void admin_selected_type_room() {
-        homepage.clickOnTypeRoom();
+    @And("admin selected type room {string}")
+    public void admin_selected_type_room(String text) {
+        homepage.clickOnTypeRoom(text);
     }
 
     @And("admin fill phone number tenant {string}")
@@ -224,9 +224,10 @@ public class HomepageSteps {
         homepage.clicksHomepage();
     }
 
-    @When("admin search property {string}")
-    public void admin_search_property(String property){
+    @When("admin search property by name {string}")
+    public void admin_search_property_by_name(String property){
         homepage.searchProperty(property);
+        Assert.assertEquals(homepage.getKeyword(), property, "Keyword does not match!");
     }
 
     @Then("empty state in Homepage menu is displayed")
@@ -240,6 +241,7 @@ public class HomepageSteps {
     @When("admin search property using ID {string}")
     public void admin_search_property_using_ID(String id){
         homepage.searchPropertyId(id);
+        Assert.assertEquals(homepage.getKeyword(), id, "Keyword does not match!");
     }
 
     @Then("admin redirect to detail property page")
@@ -288,6 +290,21 @@ public class HomepageSteps {
         Assert.assertEquals(homepage.getBDInTable(BD), BD, "BD does not match!");
         Assert.assertEquals(homepage.getASInTable(AS), AS, "AS does not match!");
         Assert.assertEquals(homepage.getHospitality(hospitality), hospitality, "Hospitality does not match!");
+    }
+
+    @When("admin reset filter in Homepage")
+    public void admin_reset_filter_in_Homepage(){
+        homepage.clicksReset();
+    }
+
+    @When("admin clear keyword in Homepage")
+    public void admin_clear_keyword_in_Homepage(){
+        homepage.clearKeyword();
+    }
+
+    @Then("search bar is empty")
+    public void search_bar_is_empty(){
+        Assert.assertTrue(homepage.isKeywordVisible(), "Keyword is still visible!");
     }
 }
 
