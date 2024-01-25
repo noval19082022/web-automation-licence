@@ -56,6 +56,7 @@ public class HomepagePO {
     Locator BDInTable;
     Locator ASInTable;
     Locator hospitalityInTable;
+    Locator resetBtn;
 
     Locator tambahPenyewaButton;
     Locator bookingButton;
@@ -192,6 +193,7 @@ public class HomepagePO {
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         totalPropertyText = page.locator(".total-data");
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -911,5 +913,30 @@ public class HomepagePO {
      */
     public boolean isTotalPropertyVisible() {
         return playwright.isLocatorVisibleAfterLoad(totalPropertyText,10000.0);
+    }
+
+    /**
+     * Clicks Reset button
+     */
+    public void clicksReset() {
+        playwright.clickOn(resetBtn);
+    }
+
+    /**
+     * Check if Keyword is still visible after clear keyword
+     * True = blank / not visible
+     * False = not blank / visible
+     * @return Keyword is still visible
+     */
+    public boolean isKeywordVisible() {
+        return playwright.isDataBlankorNull(searchInput);
+    }
+
+    /**
+     * Get String Keyword in search bar
+     * @return String Keyword
+     */
+    public String getKeyword() {
+        return playwright.getInputValue(searchInput);
     }
 }
