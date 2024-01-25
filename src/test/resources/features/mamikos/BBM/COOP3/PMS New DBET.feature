@@ -1,4 +1,4 @@
-@COOP3 @dbetpms @bill1
+@COOP3
 Feature: PMS New DBET
 
   @TEST_COOP-5037  @Automated @web

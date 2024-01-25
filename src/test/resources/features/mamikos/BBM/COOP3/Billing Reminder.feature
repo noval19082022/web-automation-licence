@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3 @bill
+@COOP-5027 @COOP3
 Feature: Billing Reminder
 
   @TEST_COOP-5023 @TESTSET_COOP-4944 @Automated @web
@@ -9,7 +9,6 @@ Feature: Billing Reminder
       | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user open " PN Template" submenu of Billing Reminder Template
 
-		
 		#  Scenario: Add Template With Existing Day Period
     Given user create new PN template:
       | day | title            | content                  |
