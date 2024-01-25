@@ -67,7 +67,7 @@ Feature: Payment All
       | phone stag | phone prod   | password  |
       | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And tenant select payment method Credit Card
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
