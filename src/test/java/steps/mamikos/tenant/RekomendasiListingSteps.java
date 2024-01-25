@@ -17,6 +17,7 @@ public class RekomendasiListingSteps {
     RekomendasiListingPO rekomendasiListing = new RekomendasiListingPO(page);
     SearchPO searchListing = new SearchPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    Page page1;
 
 
     @Then("verify message {string} di Favorit page")
@@ -84,23 +85,25 @@ public class RekomendasiListingSteps {
     @When("tenant see first kost rekomendasi at kos saya page")
     public void tenant_see_first_kost_rekomendasi_at_kos_saya_page() throws InterruptedException {
         rekomendasiListing.getFirstProperty("Kos Saya");
-        rekomendasiListing.clickOnFirstRekomendasi();
+        page = rekomendasiListing.clickOnFirstRekomendasi();
 
     }
     @Then("tenant can not see kos after favorited that kos at recomendation section")
     public void tenant_can_not_see_kos_after_favorited_that_kos_at_recomendation_section() throws InterruptedException {
-        page.reload();
         Assert.assertFalse(rekomendasiListing.isRekomendasiAfterFavoritVisible(rekomendasiListing.getFavoritPropertyRekomendasi()), "Property already display!");
         rekomendasiListing.clickOnFavoriteHeader();
-        rekomendasiListing.clickOnPropertyFavorit(rekomendasiListing.getFavoritPropertyRekomendasi());
+        rekomendasiListing.clickOnPropertyFavoritRecomendation(rekomendasiListing.getFavoritPropertyRekomendasi());
     }
 
     @Then("user can verify kost after unfavorite the kost")
     public void user_can_verify_kost_after_unfavorite_the_kost() {
-        kostDetail.clickOnUnfavoriteKostButton();
         rekomendasiListing.clickOnFavoriteHeader();
         Assert.assertFalse(rekomendasiListing.isRekomendasiAfterFavoritVisible(rekomendasiListing.getFavoritPropertyRekomendasi()),"Property not display!");
+    }
 
+    @When("tenant wants to open detail kost {string} from favorite page")
+    public void tenant_wants_to_open_detail_kost_from_favorite_page(String kostName) throws InterruptedException {
+        page1 = rekomendasiListing.clickOnPropertyFavorit(kostName);
     }
 
 }

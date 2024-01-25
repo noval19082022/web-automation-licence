@@ -1,4 +1,4 @@
-@BBM6
+@BBM6 @COOP6 @COOP
 Feature: BnB feature
 
   @OwnerBadgesNotLogin @OwnerBadges
@@ -25,7 +25,7 @@ Feature: BnB feature
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 089120220103 | 083176408442 | qwerty123 |
+      | 0892202351 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
       | Kost andalusia spanyol eropa timur | kost payment desta 2 |
@@ -47,7 +47,7 @@ Feature: BnB feature
       | 50000        | 7        | Hari    |
     And owner click "Simpan"
     Then user cannot see "Rp50.000" on the list
-    And owner click "Ubah"
+    And owner click ubah denda
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
       | 100000       | 5        | Hari    |
@@ -73,12 +73,12 @@ Feature: BnB feature
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 150000       | 4        | Minggu  |
+      | 100000       | 4        | Minggu  |
     And owner click "Simpan"
     And owner click "Ubah"
     And owner input denda amount:
       | Jumlah Denda | late pay | Penalty |
-      | 200000       | 12       | Bulan   |
+      | 100000       | 12       | Bulan   |
     And owner click "Simpan"
     Then user cannot see "Rp200.000" on the list
     And owner click "Hapus"
@@ -96,8 +96,8 @@ Feature: BnB feature
     And owner click "Update Harga"
     And owner click toggle deposit
     And owner input deposit amount:
-      | Deposit |
-      | 100000  |
+      | Deposit  |
+      | 100000   |
     And owner click "Simpan"
     Then user cannot see "Rp100.000" on the list
     And owner click "Hapus"
@@ -225,7 +225,7 @@ Feature: BnB feature
     And admin akhiri contract
     Then admin should success terminate contract
 
- # Scenario: cancel booking
+  #Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
@@ -236,7 +236,7 @@ Feature: BnB feature
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -261,7 +261,7 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @waitingTerminateConfirmation
+  @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -280,7 +280,7 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
     And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     Then user will see message request terminated contract
@@ -315,8 +315,8 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
-    And owner set Kelola Tagihan filter month to "Oktober" month
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And owner set Kelola Tagihan filter month to "Januari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
@@ -445,7 +445,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_BBM-869 @continue
+  @updateRoomToast @markRoom @TEST_BBM-869
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -464,7 +464,10 @@ Feature: BnB feature
   @BNB-3131 @TEST_BBM-947 @booking1
   #otherPrice.feature
   Scenario: Delete Active Other Additional Price (BBM-947)
-    When user redirected to owner dashboard
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password     |
+      | 081362464341 | 1d0lt3stb4ru |
     And user click menu "Atur Harga" on feature waktunya mengelola property
     And user click kos "Ancient Fuelweaver Automation" in update price list
     And user delete active other additional price

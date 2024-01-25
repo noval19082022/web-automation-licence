@@ -230,7 +230,7 @@ public class PaymentSteps {
         } else if (monthNumber.equalsIgnoreCase("next")) {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 1, 0, 0, 0);
             invoice.selectManageNextBillsMonthFilter(monthNumber);
-        } else if (monthNumber.equalsIgnoreCase("Oktober")) {
+        } else if (monthNumber.equalsIgnoreCase("Januari")) {
         monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
         invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
         }

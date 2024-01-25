@@ -4,8 +4,8 @@ Feature: Edit Out Of Order on PMS
   Background: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini
     When admin login pms :
-      | email                 | password    |
-      | dhiandra@mamikos.com  | dh14ndr4321 |
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
@@ -15,9 +15,9 @@ Feature: Edit Out Of Order on PMS
       | 2           | 18         |
     When admin set out of order on room "2"
     And admin fill OOO data with:
-      | type        | Renovasi   |
-      | start date  | 18         |
-      | end date    | 26         |
+      | type       | Renovasi |
+      | start date | 18       |
+      | end date   | 26       |
     Then admin can see out of order on:
       | room number | start date |
       | 2           | 18         |
@@ -28,10 +28,10 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
     And admin fill OOO data with:
-      | type        | Lainnya     |
-      | note        | Jadi Gudang |
-      | start date  | 18          |
-      | end date    | 26          |
+      | type       | Lainnya     |
+      | note       | Jadi Gudang |
+      | start date | 18          |
+      | end date   | 26          |
     Then admin can see out of order on:
       | room number | start date |
       | 2           | 18         |
@@ -42,9 +42,9 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
     And admin fill OOO data with:
-      | type        | Lainnya    |
-      | start date  | 18         |
-      | end date    | 26         |
+      | type       | Lainnya |
+      | start date | 18      |
+      | end date   | 26      |
     Then admin can see that save button is disable
 
   @TEST_COOP-1012
@@ -53,9 +53,9 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
     And admin fill OOO data with:
-      | type        | Undertable |
-      | start date  | 16         |
-      | end date    | 27         |
+      | type       | Undertable |
+      | start date | 16         |
+      | end date   | 27         |
     Then admin can see out of order on:
       | room number | start date |
       | 2           | 16         |
@@ -84,9 +84,9 @@ Feature: Edit Out Of Order on PMS
       | 2           | 28         |
     When admin set out of order on room "2"
     And admin fill OOO data with:
-      | type        | Renovasi   |
-      | start date  | 28         |
-      | end date    | 28         |
+      | type       | Renovasi |
+      | start date | 28       |
+      | end date   | 28       |
     Then admin can see out of order on:
       | room number | start date |
       | 2           | 28         |
@@ -94,12 +94,12 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 28         |
     And admin fill OOO data with:
-      | type        | Undertable |
-      | start date  | 18         |
-      | end date    | 18         |
+      | type       | Undertable |
+      | start date | 18         |
+      | end date   | 18         |
     Then admin can see popup with:
-      | title     | Tidak dapat tandai “Out of Order”                               |
-      | subtitle  | Mohon maaf, kamar terisi dan tidak dapat ditandai Out of Order. |
+      | title    | Tidak dapat tandai “Out of Order”                               |
+      | subtitle | Mohon maaf, kamar terisi dan tidak dapat ditandai Out of Order. |
 
   @TEST_COOP-996
   Scenario: Edit OOO when end date not used other OOO
@@ -107,9 +107,9 @@ Feature: Edit Out Of Order on PMS
       | room number | start date |
       | 2           | 18         |
     And admin fill OOO data with:
-      | type        | Undertable |
-      | start date  | 18         |
-      | end date    | 28         |
+      | type       | Undertable |
+      | start date | 18         |
+      | end date   | 28         |
     Then admin can see out of order on:
       | room number | start date |
       | 2           | 18         |

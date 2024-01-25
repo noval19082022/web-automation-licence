@@ -5,7 +5,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.pms.DisbursementPO;
+import pageobject.pms.disbursement.DisbursementPO;
 import pageobject.pms.HomepagePO;
 import pageobject.pms.roleManagement.RoleManagementPO;
 import pageobject.pms.sidebarMenuPO;
@@ -144,11 +144,6 @@ public class RoleManagementSteps {
         for (String button: Button) {
             Assert.assertFalse(homepage.isButtonExist(button));
         }
-    }
-
-    @When("admin go to Disbursement menu")
-    public void admin_go_to_Disbursement_menu(){
-        sidebarmenu.clickDisbursementMenu();
     }
 
     @Then("admin automation has permission on Disbursement for button")

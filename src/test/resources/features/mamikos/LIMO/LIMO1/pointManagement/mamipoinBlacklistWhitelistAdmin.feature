@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @mamipoinOwnerEntryPoint @mamipoinOwner
+@listing-monetization @regression @LIMO1 @mamipoinOwnerEntryPoint @mamipoinOwner
 Feature: Mamipoint Blacklist and Whitelist Admin
 
   Background:

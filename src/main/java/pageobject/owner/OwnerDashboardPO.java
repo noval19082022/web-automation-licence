@@ -80,6 +80,7 @@ public class OwnerDashboardPO {
     Locator ubahPeraturan;
     Locator dariMamikosSection;
     Locator dariMamikosBanner;
+    Locator daftarGpButton;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -156,6 +157,7 @@ public class OwnerDashboardPO {
         dariMamikosBanner = page.locator(".image > a").first();
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
+        daftarGpButton = page.getByTestId("registerGP_btn");
     }
 
     /**
@@ -206,7 +208,7 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        playwright.hardWait(2000);
+        playwright.waitTillLocatorIsVisible(nantiSajaButton,2000.0);
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
         }
@@ -790,5 +792,14 @@ public class OwnerDashboardPO {
      */
     public boolean isWidgetDaftarGoldplusDisplayed(){
         return playwright.waitTillLocatorIsVisible(widgetDaftarGoldplus, 5000.0);
+    }
+
+    /**
+     * Click daftar GP on owner dashboard
+     *
+     *
+     */
+    public void clickOnDaftarGP() {
+        playwright.clickOn(daftarGpButton);
     }
 }

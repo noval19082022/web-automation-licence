@@ -7,8 +7,8 @@ Feature: [WEB][Mamipay][GP Invoice List] Check search function GP Invoice
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search invoice Goldplus based on "Invoice Number" and value "GP2/20210225/00002146/8312"
-    Then user will see that the text "GP2/20210225/00002146/8312" is displayed
+    And admin search invoice Goldplus based on "Invoice Number" and value "GP2/20210623/00003949/2149"
+    Then user will see that the text "GP2/20210623/00003949/2149" is displayed
 
   @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Invalid Invoice Number
