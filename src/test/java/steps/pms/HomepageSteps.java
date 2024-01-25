@@ -55,9 +55,9 @@ public class HomepageSteps {
         homepage.clickOnSelanjutnyaButton();
     }
 
-    @And("admin selected type room")
-    public void admin_selected_type_room() {
-        homepage.clickOnTypeRoom();
+    @And("admin selected type room {string}")
+    public void admin_selected_type_room(String text) {
+        homepage.clickOnTypeRoom(text);
     }
 
     @And("admin fill phone number tenant {string}")

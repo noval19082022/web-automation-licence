@@ -30,6 +30,7 @@ public class HomepagePO {
     Locator selanjutnyaButton;
     Locator dropdownTypeRoom;
     Locator selectedTypeRoom;
+    Locator kostSelectedType;
     Locator numberHandphoneTenant;
     Locator informasiPenyewa;
     Locator informasiPenyewaLabel;
@@ -258,9 +259,11 @@ public class HomepagePO {
     /**
      * Click on type room dropdown and selected type room
      */
-    public void clickOnTypeRoom() {
+    public void clickOnTypeRoom(String text) {
+        playwright.waitTillLocatorIsVisible(dropdownTypeRoom, 4000.0);
         dropdownTypeRoom.click();
-        selectedTypeRoom.click();
+        kostSelectedType = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+text+""));
+        kostSelectedType.click();
     }
 
     /**
