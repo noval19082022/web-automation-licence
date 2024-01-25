@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3 @singgahSiniSurvey
+@COOP-5027 @COOP3
 Feature: SinggahSini Survei Tracker Main Page
 
 
