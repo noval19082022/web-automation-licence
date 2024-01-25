@@ -289,7 +289,7 @@ public class PropertySayaPO {
         lengkapiDataKosDraft = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lengkapi Data Kos")).first();
         toggleDenda = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Denda")).locator("span").first();
         textBoxTotalDenda = page.getByRole(AriaRole.TEXTBOX).nth(1);
-        ubahDendaText = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah")).nth(1);
+        ubahDendaText = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         textBoxLatePay = page.getByPlaceholder("0");
         dropdownLatePay = page.locator("//select[@class='c-field-select__select']");
         dendaPrice = page.getByText("Rp50.000");
@@ -306,7 +306,7 @@ public class PropertySayaPO {
         confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
         nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
         confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
-        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus")).nth(1);
+        deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         confirmDeleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
         selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));

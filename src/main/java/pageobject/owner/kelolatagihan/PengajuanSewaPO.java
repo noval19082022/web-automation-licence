@@ -245,7 +245,7 @@ public class PengajuanSewaPO {
             playwright.clickOn(simpanButtonOnModalPopup);
             minCheckinAmmountDropDown = page.getByTestId("min-checkin-amount").getByRole(AriaRole.TEXTBOX);
             playwright.clickOn(minCheckinAmmountDropDown);
-            selectMinCheckinAmmount = page.locator("div:nth-child(" + tanggal + ") > label > .bg-c-radio__icon > span").first();
+            selectMinCheckinAmmount = page.locator("//p[normalize-space()='"+tanggal+"']");
             playwright.clickOn(selectMinCheckinAmmount);
             playwright.clickOn(simpanButtonOnModalPopup);
             saveCheckinButton = page.getByTestId("checkin-save-btn");

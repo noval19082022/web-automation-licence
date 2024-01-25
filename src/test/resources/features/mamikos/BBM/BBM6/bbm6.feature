@@ -299,12 +299,14 @@ Feature: BnB feature
     And user click "Atur Harga"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Daftar kontrak penyewa kos"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
     And user click "Tambah Penyewa"
     And owner click back previous button
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Pusat Bantuan"
     Then user can see help center page
 
