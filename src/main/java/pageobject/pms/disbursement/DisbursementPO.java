@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DisbursementPO {
@@ -26,6 +28,13 @@ public class DisbursementPO {
     Locator cariBtn;
     Locator searchProperty;
     private Locator konfirmasiYaButton;
+    private Locator calendarView;
+    private Locator calendarDropdown;
+    private Locator arrowRightButton;
+    private Locator monthJanuari;
+    private Locator nextMonth;
+    private Locator emptyStateTitle;
+    private Locator emptyStateSubtitle;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -82,6 +91,13 @@ public class DisbursementPO {
         cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari"));
         searchProperty = page.getByPlaceholder("Cari Nama Properti");
         konfirmasiYaButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Ya").setExact(true));
+        calendarView = page.getByRole(AriaRole.TEXTBOX).first();
+        calendarDropdown = page.locator(".vdp-datepicker__calendar");
+        arrowRightButton = page.locator("span").filter(new Locator.FilterOptions().setHasText("arrow-right")).first();
+        monthJanuari = page.getByText("Januari", new Page.GetByTextOptions().setExact(true));
+        nextMonth = page.locator("//*[@class='cell month selected']//following-sibling::*");
+        emptyStateTitle = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
+        emptyStateSubtitle = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan tidak sesuai.");
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -514,5 +530,40 @@ public class DisbursementPO {
      */
     public void inputsCharactersMoreInKeteranganTambahan(String noteMoreThan) {
         playwright.fill(keteranganTambahanField, noteMoreThan);
+    }
+
+    /**
+     * Get This Month
+     * And clicks Calendar Box in Disbursement Page
+     * And if this month is Desember, it will clicks arrow right and clicks Month Januari
+     * And if this month is not Desember, it will clicks next month
+     */
+    public void clicksCalendar() {
+        SimpleDateFormat today = new SimpleDateFormat("MMMM");
+        Date dates = new Date();
+        System.out.println(today.format(dates));
+        playwright.clickOn(calendarView);
+        if (today.format(dates).equalsIgnoreCase("Desember")){
+            playwright.waitForLocatorVisibleAndClickOn(arrowRightButton);
+            playwright.clickOn(monthJanuari);
+        } else {
+            playwright.waitForLocatorVisibleAndClickOn(nextMonth.first());
+        }
+    }
+
+    /**
+     * Get String Empty State Title in Disbursement Page
+     * @return String Empty State Title
+     */
+    public String getEmptyStateTitleInDisbursement() {
+        return playwright.getText(emptyStateTitle);
+    }
+
+    /**
+     * Get String Empty State Subtitle in Disbursement Page
+     * @return String Empty State Subtitle
+     */
+    public String getEmptyStateSubtitleInDisbursement() {
+        return playwright.getText(emptyStateSubtitle);
     }
 }

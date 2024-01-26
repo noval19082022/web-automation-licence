@@ -66,3 +66,14 @@
       And admin "unapprove" disbursement from list
       And admin go to detail transfer
       Then button refresh should be visible
+
+    @TEST_PMAN-5447 @pman-prod
+    Scenario: Check empty state in the transfer pendapatan pemilik table
+      Given admin go to pms singgahsini
+      When admin login pms :
+        | email             | password      |
+        | pman@mamiteam.com | pmanM4m1t34m  |
+      And admin go to Disbursement menu
+      And admin clicks on next month in calendar
+      And admin search disbursement "Khusus Automation"
+      Then empty state in Disbursement menu is displayed
