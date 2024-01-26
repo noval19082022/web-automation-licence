@@ -1,4 +1,4 @@
-@BBM6 @bnbfeature
+@BBM6 @bnbfeature @kostBookingValidation
 Feature: Kost Validation
 
   @TEST_COOP-1914 @automated @web @xray-update @validationBooking

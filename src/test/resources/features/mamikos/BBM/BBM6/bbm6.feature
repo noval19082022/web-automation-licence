@@ -1,4 +1,4 @@
-@BBM6 @COOP6 @COOP
+@BBM6 @COOP6 @COOP @hamas
 Feature: BnB feature
 
   @OwnerBadgesNotLogin @OwnerBadges
@@ -208,7 +208,7 @@ Feature: BnB feature
   Scenario: Download biodata fakedoor
     Given user go to mamikos homepage
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And user search kost in penyewa menu "ARAC"
     And user click download biodata penyewa button
     And user tick on checkbox pop up
     Then user will see information about upcoming feature
@@ -235,8 +235,8 @@ Feature: BnB feature
   #Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
+      | kost name stag                     | kost name prod |
+      | Kost Singgahsini Noval Tipe C arac | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -280,7 +280,7 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And user search kost in penyewa menu "ARAC"
     And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     Then user will see message request terminated contract
@@ -299,12 +299,14 @@ Feature: BnB feature
     And user click "Atur Harga"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Daftar kontrak penyewa kos"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
     And user click "Tambah Penyewa"
     And owner click back previous button
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Pusat Bantuan"
     Then user can see help center page
 
@@ -461,7 +463,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
 
-  @BNB-3131 @TEST_BBM-947 @booking1
+  @BNB-3131 @TEST_BBM-947
   #otherPrice.feature
   Scenario: Delete Active Other Additional Price (BBM-947)
     Given user go to mamikos homepage
@@ -481,7 +483,7 @@ Feature: BnB feature
       | phone stag    | password     |
       | 0890000000289 | Bismillah@01 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "kost bandung owner change phone number unique code Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "unique code"
     And user click Selengkapnya button on "Tenant Unique Code Jangan Diubah" contract
     And user click Kirim ulang kode hyperlink
     Then user will redirect to Kirim kode unik ke penyewa page
