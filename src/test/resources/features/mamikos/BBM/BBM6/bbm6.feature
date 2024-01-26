@@ -261,7 +261,7 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @messageRequestTerminatedContract @tcl1
+  @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -285,7 +285,7 @@ Feature: BnB feature
     And user click on kontrak sewa button
     Then user will see message request terminated contract
 
-  @checkContentOnWaktuMengelolaKos @tcl
+  @checkContentOnWaktuMengelolaKos
   Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
     Given user go to mamikos homepage
     When user login as owner:
