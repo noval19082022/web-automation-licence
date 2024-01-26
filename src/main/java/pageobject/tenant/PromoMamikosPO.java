@@ -118,7 +118,7 @@ public class PromoMamikosPO {
      * @return String promo title
      */
     public String getPromoTitle(String promo) {
-        Locator title = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(promo));
+        Locator title = playwright.locatorByRoleSetName(AriaRole.HEADING, promo);
         return playwright.getText(title);
     }
 

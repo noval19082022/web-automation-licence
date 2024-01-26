@@ -58,8 +58,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Tenant][FB - Tennat login page]Login with FB
     Given user go to mamikos homepage
     When user login as tenant via facebook:
-      | email stag                          | email prod                          | password    |
-      | lingga_ccabvrn_marqansyah@tfbnw.net | lingga_ccabvrn_marqansyah@tfbnw.net | joinmamikos |
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     Then navbar after login appears
 
   @TEST_COOP-5364 @Automated @web-covered
@@ -122,17 +122,17 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5368 @Automated @web-covered
   Scenario: [Web][Apartement] Login as Tenant Can View Profile Picture and Option Dropdown Menu Profile
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     Then tenant can see profile dropdown option
 
   @TEST_COOP-5369 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Hubungi Pengelola
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | rane 78        |                |
@@ -164,9 +164,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5372 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Verify Profile Dropdown
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | rane 78        |                |
@@ -182,9 +182,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5374 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Contact Apartment
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | rane 78        |                |
@@ -203,9 +203,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5376 @Automated @web-covered
   Scenario: [Web][Apartement] Favorite an Apartment
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | rane 78        |                |
@@ -217,9 +217,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5377 @Automated @web-covered
   Scenario: [Web][Apartement] unFavorite an Apartment
     Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | rane 78        |                |
@@ -264,8 +264,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Tenant][Pengaturan page  - Change password]hidden for login social
     Given user go to mamikos homepage
     When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     And user visit page "/user"
     Then user should not be able to see the text "Pengaturan"
 
@@ -472,11 +472,10 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_COOP-5405 @Automated @DOM3 @web-covered
   Scenario: [Tenant][Promo page] User can open promo detail
     Given user navigates to promo mamikos
-  ## this step is comment because page https://promo.mamikos.com/ is empty
-#    And user see the promo title in first promo
-#    When user click see detail on first promo
-#    Then detail promo page opened with correct title
-#    And user see button booking now
+    When user see the promo title in first promo
+    And user click see detail on first promo
+    And detail promo page opened with correct title "Lebih Hemat sewa pertama di Kos Singgahisini!"
+    Then user see button booking now
 
   @TEST_COOP-5407 @Automated @DOM3 @web-covered
   Scenario: [Test][Admin][SanJunipero] User able to enable certain landing page

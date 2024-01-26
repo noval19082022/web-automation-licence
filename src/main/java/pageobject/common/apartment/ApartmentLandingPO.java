@@ -193,6 +193,7 @@ public class ApartmentLandingPO {
      * @return
      */
     public List<String> getCityAndAreaValidationOnList() {
+        playwright.waitTillPageLoaded();
         return playwright.getListInnerTextFromListLocator(listApartementArea);
     }
 
