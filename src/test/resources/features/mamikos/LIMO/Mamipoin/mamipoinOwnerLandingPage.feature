@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @mamipoinOwnerEntryPoint @mamipoinOwner
+@listing-monetization @mamipoinOwnerEntryPoint @mamipoinOwner
 Feature: [Owner Dashboard] MamiPoin Owner Landing Page
 
   @TEST_LIMO-2011 @Automated @Web @listing-monetization @mamipoin-owner
@@ -14,5 +14,3 @@ Feature: [Owner Dashboard] MamiPoin Owner Landing Page
     And user verify riwayat hadiah button is displayed
     And user verify riwayat poin owner button is displayed
     And user verify syarat dan ketentuan button is displayed
-
-

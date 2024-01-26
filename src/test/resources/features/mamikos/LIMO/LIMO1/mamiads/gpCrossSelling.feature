@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @essentialTest3
+@regression @LIMO1 @LIMO1-staging @essentialTest3 @gpCrosselling
 Feature: GP Crosseling
 
   @TEST_LIMO-287
@@ -7,7 +7,7 @@ Feature: GP Crosseling
     And user login as owner:
       | phone stag   | phone prod | password |
       | 085951394565 | 0          | qwerty123 |
-    And user click "Daftar" button
+    And user click daftar GP button
     And user choose Goldplus package 1
     #Scenario: detail list saldo MamiAds 4887
     Then user view detail list saldo MamiAds
@@ -45,7 +45,7 @@ Feature: GP Crosseling
     And user login as owner:
       | phone stag   | phone prod | password |
       | 085720962105 | 0          | qwerty123 |
-    And user click "Daftar" button
+    And user click daftar GP button
     And user choose Goldplus package 1
     # scenario ubah package before select saldo mamiads (MA-4881)
     When user click on ubah package gold plus button
@@ -62,7 +62,7 @@ Feature: GP Crosseling
     And user login as owner:
       | phone stag   | phone prod | password |
       | 089966331122 | 0          | 12345678 |
-    And user click "Daftar" button
+    And user click daftar GP button
     And user choose Goldplus package 1
     And user choose saldo "Rp27.000" on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran

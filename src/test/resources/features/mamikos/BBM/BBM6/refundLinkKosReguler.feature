@@ -14,4 +14,5 @@ Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar
     Then user can see "bagaimana-cara-mengajukan-refund" on mamihelp page
     When tenant navigate to tagihan kost saya
     And user click on link refund
+    And tenant set active page to 2
     Then user can see "bagaimana-cara-mengajukan-refund" on mamihelp page

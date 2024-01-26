@@ -8,14 +8,7 @@ Feature: Billing Reminder
       | email stag                   | email prod                   | password  |
       | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user open " PN Template" submenu of Billing Reminder Template
-		
-		 # Scenario: user set the initial state to display Billing template Day -1
-    When user set the initial state to display Billing template Day "-1"
-		
-		#  Scenario: Delete Template
-    When user delete billing Template with content "untuk automation"
-    Then user verify delete billing Template with content "untuk automation"
-		
+
 		#  Scenario: Add Template With Existing Day Period
     Given user create new PN template:
       | day | title            | content                  |
@@ -39,6 +32,13 @@ Feature: Billing Reminder
       | -1  | untuk automation | untuk automation content |
     Then user verify Template subject with "untuk automation"
     Then user verify Template content with "untuk automation content"
+
+     # Scenario: user set the initial state to display Billing template Day -1
+    When user set the initial state to display Billing template Day "-1"
+
+		#  Scenario: Delete Template
+    When user delete billing Template with content "untuk automation"
+    Then user verify delete billing Template with content "untuk automation"
 
   @TEST_COOP-5024 @TESTSET_COOP-4944 @Automated @web
   Scenario: [Billing Reminder] Billing Reminder Email Template

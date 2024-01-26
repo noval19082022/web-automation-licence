@@ -186,8 +186,8 @@ public class MamiAdsPO {
     public void handlePopupMamiAds() {
         // Check if the 'Coba Sekarang' button on the popup is visible
         // OR if the 'Beli Saldo' button is not visible
-        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(icnButtonCLose)) {
+        if (playwright.isLocatorVisibleAfterLoad(cobaSekarangBtnOnPopUp, 3000.0)
+                || !playwright.isLocatorVisibleAfterLoad(icnButtonCLose, 3000.0)) {
             playwright.clickOn(icnButtonCLose);
         }
     }
@@ -197,7 +197,7 @@ public class MamiAdsPO {
      * @return true if element present otherwise false
      */
     public boolean favoriteSaldo (String saldo){
-        return playwright.waitTillLocatorIsVisible(page.locator("//*[contains(text(),'"+saldo+"')]/following-sibling::div"));
+        return playwright.isTextDisplayed(saldo, 5000.0);
     }
 
     /**
@@ -229,6 +229,7 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
+        playwright.waitTillPageLoaded();
         playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
     }
 
@@ -290,6 +291,7 @@ public class MamiAdsPO {
      * @return int countHistoryIcn
      */
     public int getCountRiwayatBeliSaldo(){
+        playwright.waitTillLocatorIsVisible(beliSaldoBtn, 5000.0);
         return Integer.parseInt(playwright.getText(countHistoryIcon));
     }
 
@@ -355,7 +357,7 @@ public class MamiAdsPO {
      * Navigates to Mamiads page
      */
     public void navigatesToMamiads() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 50000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
 

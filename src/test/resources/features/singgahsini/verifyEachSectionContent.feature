@@ -5,16 +5,16 @@
     @TEST_PMAN-3184
     Scenario: Verify Content of Introduction Sections
       Given user navigates to singgahsini.id
-      When user click menu "Tentang Kami"
-      Then page should be scroll to section "Tentang Kami"
+      When user click header menu "Tentang Kami"
+      Then page auto scroll to section "Tentang Kami"
       And tentang kami section title is "Solusi Profesional Tepercaya"
       And tentang kami section subtitle is "Singgahsini & APIK telah dipercayakan untuk mengelola lebih dari 20.000 kamar kos di Jabodetabek, Jawa, dan Bali, menjadikan kami manajemen kos profesional terbesar di Indonesia."
 
     @TEST_PMAN-3175
     Scenario: Verify Content of Benefits Sections
       Given user navigates to singgahsini.id
-      When user click menu "Keuntungan"
-      Then page should be scroll to section "Keuntungan"
+      When user click header menu "Keuntungan"
+      Then page auto scroll to section "Keuntungan"
       And keuntungan section title is "Keuntungan Bergabung dengan Singgahsini & APIK"
       And keuntungan section contains 3 items
         | Title                   | Subtitle                                                                                          |
@@ -36,8 +36,8 @@
     @TEST_PMAN-3176
     Scenario: Verify Content of FAQ
       Given user navigates to singgahsini.id
-      When user click menu "Tanya Jawab"
-      Then page should be scroll to section "Tanya Jawab"
+      When user click header menu "Tanya Jawab"
+      Then page auto scroll to section "Tanya Jawab"
       And tanya jawab section title is "Tanya Jawab Seputar Singgahsini dan APIK"
       And tanya jawab section contains 4 question
         | Apa bedanya Singgahsini dengan APIK?                            |

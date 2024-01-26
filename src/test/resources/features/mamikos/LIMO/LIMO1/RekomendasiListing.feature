@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @upikMaint @rekomendasiListing
 Feature: Rekomendasi Listing
 
   @TEST_LIMO-305
@@ -80,17 +80,14 @@ Feature: Rekomendasi Listing
     And tenant open menu kost saya
     Then verify last seen property doesn't display on rekomendasi section
     When tenant see first kost rekomendasi at kos saya page
-    And tenant set active page to 1
     Then user can favorite the kost for recomendation listing
-    And tenant set active page to 0
+    And tenant set active page to 1
+    When tenant navigate to kost saya page
     Then tenant can not see kos after favorited that kos at recomendation section
 
   @favRekomendasi
   Scenario: Verify kost is show at rekomendation section after unfavorite kost
     #unfavorite kost
-    Given user go to mamikos homepage
-    When tenant open menu favorite
-    And tenant wants to open detail kost "Kos rane rane 1 mamitest" from favorite page
-    And tenant set active page to 1
+    And tenant set active page to 2
     And user can unfavorite the kost for recomendation listing
     Then user can verify kost after unfavorite the kost

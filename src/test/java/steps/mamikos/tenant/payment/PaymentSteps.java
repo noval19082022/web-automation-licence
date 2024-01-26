@@ -32,16 +32,16 @@ public class PaymentSteps {
         paymentPO.paymentUsingBNI(VA, amount);
     }
 
-    @And("tenant select payment method Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
-    public void tenantSelectPaymentMethodCreditCard(String ccNumber, String month, String years, String ccv) {
+    @And("tenant select payment method Credit Card")
+    public void tenantSelectPaymentMethodCreditCard() {
         riwayatBookingPO.clickOnBayarSekarangButton()
-                .paymentUsingCC(ccNumber, month, years, ccv)
+                .paymentUsingCC("4000000000001091", "12", "30", "123")
                 .paymentUsingCC();
     }
 
-    @And("tenant/owner/user select payment from invoice detail using Credit Card with cc number is {string}, expired date month {string} years {string}, and ccv is {string}")
-    public void tenantSelectPaymentMamiadsCreditCard(String ccNumber, String month, String years, String ccv) {
-        invoicePO.paymentUsingCC(ccNumber, month, years, ccv)
+    @And("tenant/owner/user select payment from invoice detail using Credit Card")
+    public void tenantSelectPaymentMamiadsCreditCard() {
+        invoicePO.paymentUsingCC("4000000000001091", "12", "30", "123")
                 .paymentUsingCC();
     }
 
@@ -76,14 +76,14 @@ public class PaymentSteps {
     @And("tenant want to see invoice on riwayat booking after payment")
     public void seeInvoice() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
+        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(ActiveContext.getActivePage()));
         paymentPO.seeInvoiceAfterPayment();
     }
 
     @Then("tenant will see payment is success")
     public void paymentSuccess() {
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(page));
+        paymentPO = Optional.ofNullable(paymentPO).orElseGet(() -> new PaymentPO(ActiveContext.getActivePage()));
         Assert.assertEquals(paymentPO.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
 
@@ -144,7 +144,7 @@ public class PaymentSteps {
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
         page = ActiveContext.getActiveBrowserContext().pages().get(1);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
-        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(page));
+        midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
     }
 

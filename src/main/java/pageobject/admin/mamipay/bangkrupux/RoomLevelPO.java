@@ -25,6 +25,11 @@ public class RoomLevelPO {
     private Locator roomLevelRow;
     private Locator editBtn;
     private Locator keyInTable;
+    private Locator errorMessage;
+    private Locator menuTitleText;
+    private Locator columnNameText;
+    private Locator paginationPageText;
+    private Locator activePaginationPageText;
 
     public RoomLevelPO(Page page){
         this.page = page;
@@ -45,6 +50,10 @@ public class RoomLevelPO {
         roomLevelRow = page.locator("tr td:nth-of-type(2)").first();
         editBtn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions()).getByTitle("Edit");
         keyInTable = page.locator("td:nth-child(3)").first();
+        errorMessage = page.locator(".alert li");
+        menuTitleText = page.locator(".box-header h3");
+        columnNameText = page.locator("th");
+        activePaginationPageText = page.locator(".page-item.active span");
     }
 
     /**
@@ -134,7 +143,7 @@ public class RoomLevelPO {
      * Clicks Edit button
      */
     public void editRoomLevel() {
-        playwright.clickOn(editBtn);
+        playwright.clickOn(editBtn.first());
     }
 
     /**
@@ -143,5 +152,73 @@ public class RoomLevelPO {
      */
     public String getKeyAfterEdit() {
         return playwright.getText(keyInTable);
+    }
+
+    /**
+     * Get Error Message
+     * @return
+     */
+    public String getErrorMessage() {
+        return playwright.getText(errorMessage);
+    }
+
+    /**
+     * Get menu title
+     * @return String
+     */
+    public String getMenuTitle() {
+        return playwright.getText(menuTitleText);
+    }
+
+    /**
+     * Check Add Room level button visible
+     * @return Boolean
+     */
+    public boolean isButtonAddRoomLevelVisible() {
+        return playwright.isLocatorVisibleAfterLoad(addRoomLevel,5000.0);
+    }
+
+    /**
+     * Check search field visible
+     * @return Boolean
+     */
+    public boolean isSearchFieldVisible() {
+        return playwright.isLocatorVisibleAfterLoad(searchBar,5000.0);
+    }
+
+    /**
+     * Check Search button visible
+     * @return Boolean
+     */
+    public boolean isButtonSearchVisible() {
+        return playwright.isLocatorVisibleAfterLoad(searchBtn, 5000.0);
+    }
+
+    /**
+     * Get Column Name index i
+     * @param i index
+     * @return String
+     */
+    public String getColumnName(int i) {
+        return playwright.getText(columnNameText.nth(i));
+    }
+
+    /**
+     * Click page number
+     * @param no page number
+     */
+    public void clickPaginationNumber(String no) {
+        paginationPageText = page.locator(".page-item a").getByText(no);
+
+        playwright.clickOn(paginationPageText);
+    }
+
+    /**
+     * Get active pagination page
+     * @return String
+     */
+    public String getActivePaginationPage() {
+        playwright.pageScrollInView(activePaginationPageText);
+        return playwright.getText(activePaginationPageText);
     }
 }

@@ -100,7 +100,6 @@ Feature: Chat and Chat Optimization
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
     When user search for Kost with name "<property>" and selects matching result
-    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "<question>"
     And user click send chat from popup
@@ -113,18 +112,23 @@ Feature: Chat and Chat Optimization
       | Cara menghubungi pemilik | Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
       | Alamat kos di mana       | Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                               											 |
       | Bisa pasutri             | Kos Dom Automation PLM Tipe C Kretek Bantul | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
-      | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe A Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
+      | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe E Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
       | Boleh bawa hewan         | Kos Dom Automation PLM Tipe C Kretek Bantul | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
-      | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
+      | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe E Kretek Bantul | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
 
-  @continue @TEST_COOP-5432
+  @TEST_COOP-5432
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
     Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 08999222999   | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                                          | kost name prod                                         |
       | Kos BX Automation BBK Available Cilacap Selatan Cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |
     And tenant booking kost
     Then tenant should success booking kost
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
 
   @cancelBooking @TEST_COOP-5440
   Scenario: Cancel Booking if Tenant Have Booking
@@ -135,7 +139,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 081223344550  | 083176408442  | qwerty123    |
+      | 08999222999   | 083176408442  | qwerty123    |
     And user search for Kost with name "<property>" and selects matching result
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
@@ -152,7 +156,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 081223344550  | 083176408442  | qwerty123    |
+      | 08999111912   | 083176408442  | qwerty123    |
     And user go to apartment details from apartment landing list number 1
     And tenant set active page to 1
     And user click on hubungi pengelola button

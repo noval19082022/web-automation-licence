@@ -96,7 +96,7 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | phone_number | 089536519944                            |
 
-  @TEST_DOM-2639 @TEST_COOP-5154 @continue
+  @TEST_DOM-2639 @TEST_COOP-5154
   Scenario Outline: [WEB][Blacklist] After blacklist email user try login via Facebook
     When user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     And user click blacklist on homepage blacklist

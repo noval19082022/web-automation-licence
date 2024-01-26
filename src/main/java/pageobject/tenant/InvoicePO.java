@@ -508,7 +508,7 @@ public class InvoicePO {
      */
     public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
         playwright.clickOn(inputMonthFilter);
-        playwright.clickOn(page.getByText("Oktober"));
+        playwright.clickOn(page.getByText("Januari"));
     }
 
 

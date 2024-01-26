@@ -1021,4 +1021,9 @@ public class PropertySayaSteps {
         Assert.assertFalse(propertySaya.isOtherPriceNamePresent());
         Assert.assertFalse(propertySaya.isOtherPriceNumberPresent());
     }
+
+    @And("owner click ubah denda")
+    public void ownerClicUbahkDenda() {
+        propertySaya.clickUbahDendaText();
+    }
 }
