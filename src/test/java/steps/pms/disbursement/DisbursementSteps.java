@@ -21,12 +21,14 @@ public class DisbursementSteps {
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
     public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
 
-    private String disbursementNote = "src/test/resources/testdata/pms/disbursement.properties";
-    private String keteranganTambahanToast = JavaHelpers.getPropertyValue(disbursementNote, "keteranganTambahanToast");
-    private String noteLessThan = JavaHelpers.getPropertyValue(disbursementNote, "disbursementNoteLessThan1500");
-    private String keteranganTambahanErrorMessage = JavaHelpers.getPropertyValue(disbursementNote, "keteranganTambahanErrorMessage");
-    private String noteMoreThan = JavaHelpers.getPropertyValue(disbursementNote, "noteMoreThan");
-    private String errorMessageMoreThan1500Chars = JavaHelpers.getPropertyValue(disbursementNote, "errorMessageMoreThan1500Chars");
+    private String disbursementPage = "src/test/resources/testdata/pms/disbursement.properties";
+    private String keteranganTambahanToast = JavaHelpers.getPropertyValue(disbursementPage, "keteranganTambahanToast");
+    private String noteLessThan = JavaHelpers.getPropertyValue(disbursementPage, "disbursementNoteLessThan1500");
+    private String keteranganTambahanErrorMessage = JavaHelpers.getPropertyValue(disbursementPage, "keteranganTambahanErrorMessage");
+    private String noteMoreThan = JavaHelpers.getPropertyValue(disbursementPage, "noteMoreThan");
+    private String errorMessageMoreThan1500Chars = JavaHelpers.getPropertyValue(disbursementPage, "errorMessageMoreThan1500Chars");
+    private String emptyStateTitleInDisbursement = JavaHelpers.getPropertyValue(disbursementPage, "emptyStateTitleInDisbursement");
+    private String emptyStateSubtitleInDisbursement = JavaHelpers.getPropertyValue(disbursementPage, "emptyStateSubtitleInDisbursement");
 
     private List<Map<String, String>> modelKerjaSama;
     private List<Map<String, String>> tambahanPendapatan;
@@ -172,5 +174,16 @@ public class DisbursementSteps {
     @Then("error message is displayed")
     public void error_message_is_displayed(){
         Assert.assertEquals(disbursement.errorMessageMoreThan1500Chars(errorMessageMoreThan1500Chars), errorMessageMoreThan1500Chars, "Error Message for More Than 1500 Characters does not match!");
+    }
+
+    @When("admin clicks on next month in calendar")
+    public void admin_clicks_on_next_month_in_calendar(){
+        disbursement.clicksCalendar();
+    }
+
+    @Then("empty state in Disbursement menu is displayed")
+    public void empty_state_in_Disbursement_menu_is_displayed(){
+        Assert.assertEquals(disbursement.getEmptyStateTitleInDisbursement(), emptyStateTitleInDisbursement, "Empty State Title does not match!");
+        Assert.assertEquals(disbursement.getEmptyStateSubtitleInDisbursement(), emptyStateSubtitleInDisbursement, "Empty State Subtitle does not match!");
     }
 }
