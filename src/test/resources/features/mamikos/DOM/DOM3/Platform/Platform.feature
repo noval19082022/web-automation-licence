@@ -58,8 +58,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Tenant][FB - Tennat login page]Login with FB
     Given user go to mamikos homepage
     When user login as tenant via facebook:
-      | email stag                          | email prod                          | password    |
-      | lingga_ccabvrn_marqansyah@tfbnw.net | lingga_ccabvrn_marqansyah@tfbnw.net | joinmamikos |
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     Then navbar after login appears
 
   @TEST_COOP-5364 @Automated @web-covered
@@ -264,8 +264,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Tenant][Pengaturan page  - Change password]hidden for login social
     Given user go to mamikos homepage
     When user login as tenant via facebook:
-      | email stag                              | email prod                              | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | lisagor_jiuogfi_rosenthalwitz@tfbnw.net | mamikosqa |
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     And user visit page "/user"
     Then user should not be able to see the text "Pengaturan"
 
