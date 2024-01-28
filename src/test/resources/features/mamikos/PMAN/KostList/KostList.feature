@@ -12,17 +12,17 @@ Feature: Kost List
 
   @TEST_PMAN-3268 @continue
   Scenario: Edit Kost Level
-    When admin search kost pman "Kost Tobelo Asri Village"
+    When admin search kost by name "Kost Tobelo Asri Village"
     And admin change level to "Mamikos Goldplus 1 PROMO" on Edit Kost Level
     Then the Level is displaying "Mamikos Goldplus 1 PROMO"
     #Scenario: revert back to Regular
-    When admin search kost pman "Kost Tobelo Asri Village"
+    When admin search kost by name "Kost Tobelo Asri Village"
     And admin change level to "Reguler" on Edit Kost Level
     Then the Level is displaying "Reguler"
 
   @TEST_PMAN-3263 @continue
   Scenario: Charge by in Kost List
-    When admin search kost pman "Kost Tobelo Asri Village"
+    When admin search kost by name "Kost Tobelo Asri Village"
     And admin clicks on Edit Kost Level
     And admin change charge by to "Room" on Edit Kost Level
     Then charge by "Room" is selected
@@ -33,7 +33,7 @@ Feature: Kost List
   @TEST_PMAN-3276 @continue
   Scenario: Edit Room Level
     When admin access menu "Kost List" sub menu of management level
-    And admin search kost pman "Kost Tobelo Asri Village"
+    And admin search kost by name "Kost Tobelo Asri Village"
     And admin clicks on Room List
     And admin search room by room name "RoomAutomate"
     And admin change room level to "Mamikos Goldplus 1 PROMO" on Room List
@@ -73,3 +73,36 @@ Feature: Kost List
       | 2      |
       | 3      |
       | 4      |
+
+  @TEST_PMAN-3288
+  Scenario: Search Kost List by Name
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                    | password        |
+      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+    And admin access menu "Kost List" sub menu of management level
+    #serch by kost name
+    When admin search kost by name "Tobelo Asri"
+    Then show result kost "Tobelo Asri"
+
+  @TEST_PMAN-9338
+  Scenario: Search Kost List by Owner Name
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                    | password        |
+      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+    And admin access menu "Kost List" sub menu of management level
+    #serach by owner name
+    When admin search kost by owner name "Yudha Chandra"
+    Then show all kost belongs to owner "Yudha Chandra"
+
+  @TEST_PMAN-9339
+  Scenario: Search Kost List by Owner Phone Number
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                    | password        |
+      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+    And admin access menu "Kost List" sub menu of management level
+    #search by owner phone number
+    When admin search kost by owner phone number "085947715987"
+    Then show all kost belongs to owner phone number "085947715987"
