@@ -10,6 +10,8 @@ public class FAQPO {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     private Locator faqMenu;
+    private Locator menuTitleFaqText;
+    private Locator columnNameText;
 
     //---Search FAQ---//
     private Locator searchFaq;
@@ -31,6 +33,8 @@ public class FAQPO {
         playwright = new PlaywrightHelpers(page);
 
         faqMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("FAQ"));
+        menuTitleFaqText = page.locator("h3");
+        columnNameText = page.locator("th");
 
         //---Search FAQ---//
         searchFaq = page.getByPlaceholder("Search");
@@ -149,5 +153,46 @@ public class FAQPO {
     public boolean isLevelFaqDisplayed() {
         searchResult = page.locator("tr td:nth-of-type(2)");
         return playwright.isLocatorVisibleAfterLoad(searchResult, 5000.0);
+    }
+
+    /**
+     * Get menu title FAQ
+     * @return String
+     */
+    public String getMenuTitleFAQ() {
+        return playwright.getText(menuTitleFaqText);
+    }
+
+    /**
+     * Check button add level faq
+     * @return Boolean
+     */
+    public boolean isAddLevelFaqButtonVisible() {
+        return playwright.isLocatorVisibleAfterLoad(addLevelFaq,5000.0);
+    }
+
+    /**
+     * Check search field
+     * @return Boolean
+     */
+    public boolean isSearchFieldFaqVisible() {
+        return playwright.isLocatorVisibleAfterLoad(searchFaq,5000.0);
+    }
+
+    /**
+     * Check button search faq
+     * @return Boolean
+     */
+    public boolean isSearchFaqButtonVisible() {
+        return playwright.isLocatorVisibleAfterLoad(searchBtn, 5000.0);
+    }
+
+    /**
+     * Get column name
+     * @param i index
+     * @return Boolean
+     */
+    public String getColumnName(int i) {
+        return playwright.getText(columnNameText.nth(i));
     }
 }

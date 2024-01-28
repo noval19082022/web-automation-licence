@@ -32,3 +32,12 @@ Feature: FAQ
     Then alert message is displayed
     When admin search "PMAN AT" in FAQ "Question"
     Then new Level FAQ is not displayed
+
+  @TEST_PMAN-3290
+  Scenario: Verify FAQ Content
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+    And admin go to FAQ menu
+    Then show manage level FAQ content
