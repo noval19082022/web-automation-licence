@@ -75,4 +75,18 @@ public class FAQSteps {
     public void new_Level_FAQ_is_not_displayed(){
         Assert.assertFalse(faq.isLevelFaqDisplayed(), "Level FAQ is still displayed!");
     }
+    @Then("show manage level FAQ content")
+    public void show_manage_level_faq_content() {
+        Assert.assertEquals(faq.getMenuTitleFAQ(),"Manage Level FAQ");
+        Assert.assertTrue(faq.isAddLevelFaqButtonVisible());
+        Assert.assertTrue(faq.isSearchFieldFaqVisible());
+        Assert.assertTrue(faq.isSearchFaqButtonVisible());
+
+        String[] column = {"Question" , "Answer", "Action"};
+
+        for (int i=0; i<column.length; i++){
+            Assert.assertEquals(faq.getColumnName(i), column[i], "Column name not match");
+            System.out.println(faq.getColumnName(i));
+        }
+    }
 }
