@@ -1,4 +1,4 @@
-@regression @pman @pms @detailpropertypms
+@regression @pman2 @pms @detailpropertypms
 
 Feature: Overview
 

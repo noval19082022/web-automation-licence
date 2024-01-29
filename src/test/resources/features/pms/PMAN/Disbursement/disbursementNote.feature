@@ -1,4 +1,4 @@
-@regression @pman @pman-prod @pms @disbursement @disbursementNote
+@regression @pman2 @pman2-prod @pms @disbursement @disbursementNote
 
   Feature: Disbursement note PMS
 

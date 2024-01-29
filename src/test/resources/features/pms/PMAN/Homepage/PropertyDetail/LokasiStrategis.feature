@@ -1,4 +1,4 @@
-@pman @pms @detail-kos @lokasi-strategis
+@pman2 @pms @detail-kos @lokasi-strategis
 
   Feature: Lokasi Strategis
 

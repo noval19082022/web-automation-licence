@@ -1,4 +1,4 @@
-@pman @pms @otaPrice
+@pman2 @pms @otaPrice
 
 Feature: Check OTA Price in Detail Kontrak PMS
 
