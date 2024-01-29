@@ -7,7 +7,7 @@ Feature: Mamitour History
     When user login as owner:
       | phone stag     | phone prod     | password  |
       | <phone number> | <phone number> | qwerty123 |
-    And user access mamitour from owner dashboard
+    And user navigate to mamitour landing page
     Then user will "<status>" Lihat Riwayat button
     Examples:
       | phone number   | status   |

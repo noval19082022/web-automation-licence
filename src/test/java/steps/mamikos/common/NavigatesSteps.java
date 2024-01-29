@@ -378,4 +378,10 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.FINANCIAL_REPORT, 30000.0, LoadState.LOAD);
         loading.waitForLoadingIconDisappear();
     }
+
+    @When("user navigate to mamitour landing page")
+    public void user_navigate_to_mamitour_landing_page() {
+        playwright.waitTillPageLoaded();
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMITOUR, 30000.0, LoadState.LOAD);
+    }
 }
