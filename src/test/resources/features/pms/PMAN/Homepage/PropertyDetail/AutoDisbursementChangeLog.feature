@@ -1,4 +1,4 @@
-@pman @pms @autoDisbursementChangeLog
+@pman2 @pms @autoDisbursementChangeLog
 
 Feature: Auto Disbursement Change Log
 

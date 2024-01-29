@@ -1,4 +1,4 @@
-@regression @pman @pms @disbursement
+@regression @pman2 @pms @disbursement
 
   Feature: Disbursement PMS
 
@@ -30,7 +30,7 @@
       When admin delete tambahan pendapatan 1
       Then tambahan pendapatan should be empty
 
-    @TEST_PMAN-5040 @pman-prod
+    @TEST_PMAN-5040 @pman2-prod
     Scenario: Check Riwayat Transfer Pendapatan
       Given admin go to pms singgahsini
       When admin login pms :
@@ -67,7 +67,7 @@
       And admin go to detail transfer
       Then button refresh should be visible
 
-    @TEST_PMAN-5447 @pman-prod
+    @TEST_PMAN-5447 @pman2-prod
     Scenario: Check empty state in the transfer pendapatan pemilik table
       Given admin go to pms singgahsini
       When admin login pms :
