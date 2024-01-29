@@ -17,7 +17,7 @@ Feature: Purchase Mamitour
     When user login as owner:
       | phone stag   | phone prod    | password  |
       | 087133998156 | 0             | qwerty123 |
-    And user access mamitour from owner dashboard
+    And user navigate to mamitour landing page
     And user wants to buy mamitour "Paket 3 Bulan"
     Then user will see pesanan diterima popup
 
@@ -41,7 +41,7 @@ Feature: Purchase Mamitour
     When user login as owner:
       | phone stag   | phone prod    | password  |
       | 087133998156 | 0             | qwerty123 |
-    And user access mamitour from owner dashboard
+    And user redirected to mamitour landing page
     #first purchase
     And user wants to buy mamitour "Paket 6 Bulan"
     Then user will see also close pesanan diterima popup
@@ -64,7 +64,7 @@ Feature: Purchase Mamitour
     When user login as owner:
       | phone stag   | phone prod    | password  |
       | 087133998156 | 0             | qwerty123 |
-    And user access mamitour from owner dashboard
+    And user redirected to mamitour landing page
     And user want to buy Paket 3 Bulan from mamitour landing page
     Then user will see also close pesanan diterima popup
     And owner should successfully log out
