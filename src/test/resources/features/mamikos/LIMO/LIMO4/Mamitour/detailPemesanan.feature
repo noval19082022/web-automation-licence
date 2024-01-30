@@ -7,7 +7,7 @@ Feature: Detail Pemesanan
     When user login as owner:
       | phone stag   | phone prod    | password  |
       | 087133998156 | 0             | qwerty123 |
-    And user access mamitour from owner dashboard
+    And user navigate to mamitour landing page
     And user click on pesan sekarang button
     Then user verify default state of detail pemesanan
 

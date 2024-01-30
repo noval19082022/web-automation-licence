@@ -75,6 +75,7 @@ Feature: Homepage
       | phone stag      | phone prod     | password    |
       | 082233545506   | 0812345670008  | qwerty123   |
     Then user see username in top right shows as "Rega Automate Dua Nama Panjang..."
+    And owner should successfully log out
 
   @widgetWaktunyaMengelolaPropertiKosNonActive
   Scenario: Widget Waktunya Mengelola Properti - Kos non active 1 & Apartemen 0
