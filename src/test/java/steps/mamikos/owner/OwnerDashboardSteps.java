@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
@@ -23,6 +24,7 @@ public class OwnerDashboardSteps {
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     private List<Map<String, String>> ownerDashboard;
 
@@ -111,6 +113,7 @@ public class OwnerDashboardSteps {
 
     @Then("check the header menu display on homepage owner")
     public void check_the_header_menu_display_on_homepage_owner() {
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(ownerDashboardPO.isHelpCenterOwnerDisplayed(), "Element Pusat Bantuan not present!");
         Assert.assertTrue(ownerDashboardPO.isNotificationOwnerButtonDisplayed(), "Element Notifikasi Button not present!");
     }
