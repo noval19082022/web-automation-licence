@@ -303,6 +303,7 @@ public class OwnerDashboardPO {
      */
     public void clickOnMenuKelolaProperty(String menu){
         menuKelolaProperty = page.locator("//p[contains(.,'"+menu+"')]");
+        playwright.waitFor(menuKelolaProperty);
         playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);
         playwright.clickOn(menuKelolaProperty);
     }
@@ -365,6 +366,7 @@ public class OwnerDashboardPO {
      * @return status true / false
      */
     public Boolean isHelpCenterOwnerDisplayed() {
+        playwright.waitFor(helpCenterOwnerButton);
         return playwright.waitTillLocatorIsVisible(helpCenterOwnerButton);
     }
 
@@ -374,6 +376,7 @@ public class OwnerDashboardPO {
      * @return status true / false
      */
     public boolean isNotificationOwnerButtonDisplayed() {
+        playwright.waitFor(notificationOwnerButton);
         return playwright.waitTillLocatorIsVisible(notificationOwnerButton);
     }
 
