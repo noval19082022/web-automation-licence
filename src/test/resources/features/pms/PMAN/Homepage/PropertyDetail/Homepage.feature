@@ -1,4 +1,4 @@
-@pman @pms @homepagePMS
+@pman2 @pms @homepagePMS
 
 Feature: Homepage menu
 

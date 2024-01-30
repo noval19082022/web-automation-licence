@@ -1,4 +1,4 @@
-@regression @pman @pms @owner-expenditure
+@regression @pman2 @pms @owner-expenditure
 
 Feature: Add Owner Expenditure
   Background: Open Other Transaction Menu
@@ -65,7 +65,7 @@ Feature: Add Owner Expenditure
     When admin edit and choose property "Asgard"
     Then system should be auto fill kota and sisa kontrak kerja sama
 
-  @TEST_PMAN-6313 @pman-prod
+  @TEST_PMAN-6313 @pman2-prod
   Scenario: Verify Kategori Pengeluaran List
     When admin tambah data owner expenditure
     Then admin verify kategori pengeluaran list should contains :
@@ -86,7 +86,7 @@ Feature: Add Owner Expenditure
       | Perlengkapan Kebersihan Kos                 |
       | Lainnya                                     |
 
-  @TEST_PMAN-6314 @pman-prod
+  @TEST_PMAN-6314 @pman2-prod
   Scenario: Nama Pengeluaran Validation
     When admin tambah data owner expenditure
     #empty nama pengeluaran
@@ -100,7 +100,7 @@ Feature: Add Owner Expenditure
     Then nama pengeluaran should be only contains 50 characters
     And tambah pengeluaran button should be enable
 
-  @TEST_PMAN-6315 @pman-prod
+  @TEST_PMAN-6315 @pman2-prod
   Scenario: Kuantitas Validation
     When admin tambah data owner expenditure
     #empty kuantitas
@@ -119,7 +119,7 @@ Feature: Add Owner Expenditure
     Then kuantitas field value should be "50"
     And tambah pengeluaran button should be enable
 
-  @TEST_PMAN-6316 @pman-prod
+  @TEST_PMAN-6316 @pman2-prod
   Scenario: Nominal Pengeluaran Validation
     When admin tambah data owner expenditure
     #empty nominal
@@ -132,7 +132,7 @@ Feature: Add Owner Expenditure
     When admin fill biaya pengeluaran "10000"
     Then biaya pengeluaran value should be "10.000"
 
-  @TEST_PMAN-6035 @pman-prod
+  @TEST_PMAN-6035 @pman2-prod
   Scenario: Upload Valid Format Attachment
     When admin tambah data owner expenditure
     #upload valid jpg
@@ -159,19 +159,19 @@ Feature: Add Owner Expenditure
     And admin upload "pdf 8MB" attachment
     Then show upload attachment error message
 
-  @TEST_PMAN-6036 @pman-prod
+  @TEST_PMAN-6036 @pman2-prod
   Scenario: Upload Invalid Format Attachment
     When admin tambah data owner expenditure
     And admin upload invalid attachment
     Then show upload attachment error message
 
-  @TEST_PMAN-6538 @pman-prod
+  @TEST_PMAN-6538 @pman2-prod
   Scenario: Max 30 pengeluaran each Owner Expenditure
     When admin tambah data owner expenditure
     And admin add 30 pengeluaran
     Then admin can't add more pengeluaran
 
-  @TEST_PMAN-6537 @pman-prod
+  @TEST_PMAN-6537 @pman2-prod
   Scenario: Total Pengeluaran Calculation
     When admin tambah data owner expenditure
     #there is no pengeluaran yet
