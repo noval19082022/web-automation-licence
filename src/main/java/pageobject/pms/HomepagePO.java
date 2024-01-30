@@ -277,6 +277,7 @@ public class HomepagePO {
      * Click on tambah penyewa menu in homepage
      */
     public void clickOnTambahPenyewa() {
+        playwright.waitTillLocatorIsVisible(tambahPenyewaButton,2000.0);
         tambahPenyewaButton.click();
     }
 
@@ -311,11 +312,10 @@ public class HomepagePO {
     /**
      * Click on type room dropdown and selected type room
      */
-    public void clickOnTypeRoom(String text) {
-        playwright.waitTillLocatorIsVisible(dropdownTypeRoom, 4000.0);
+    public void clickOnTypeRoom() {
+        playwright.waitTillLocatorIsVisible(dropdownTypeRoom, 5000.0);
         dropdownTypeRoom.click();
-        kostSelectedType = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+text+""));
-        kostSelectedType.click();
+        selectedTypeRoom.click();
     }
 
     /**

@@ -1,4 +1,4 @@
-@COOP3
+@COOP3 @dbetpms
 Feature: PMS New DBET
 
   @TEST_COOP-5037  @Automated @web
@@ -9,7 +9,7 @@ Feature: PMS New DBET
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
-    And admin selected type room "Naraya Badas Kediri"
+    And admin selected type room
     And admin click on save button
     Then admin can see "Data wajib diisi" on phone number
 
@@ -21,7 +21,7 @@ Feature: PMS New DBET
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
-    And admin selected type room "Naraya Badas Kediri"
+    And admin selected type room
     And admin fill phone number tenant "011"
     Then admin can see "Nomor handphone harus diawali dengan 08" on phone number
     When admin fill phone number tenant "081"
@@ -37,7 +37,7 @@ Feature: PMS New DBET
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
-    And admin selected type room "Naraya Badas Kediri"
+    And admin selected type room
     And admin click on save button
     Then admin can see "Data wajib diisi" on tenant name
     And admin fill nama tenant "Maya 12"
@@ -51,7 +51,7 @@ Feature: PMS New DBET
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
-    And admin selected type room "Naraya Badas Kediri"
+    And admin selected type room
     And admin fill email tenant "tenanttujuh"
     And admin click on save button
     Then admin can see "Penulisan alamat email salah" on email
