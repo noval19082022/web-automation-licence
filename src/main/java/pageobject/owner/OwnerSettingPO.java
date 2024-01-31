@@ -162,7 +162,7 @@ public class OwnerSettingPO {
      *
      */
     public boolean isProfilePictureDisplayed() {
-        playwright.waitTillLocatorIsVisible(profilePicture, 3000.0);
+        playwright.waitFor(profilePicture);
         return playwright.isLocatorVisibleAfterLoad(profilePicture, 3000.0);
     }
 

@@ -217,6 +217,7 @@ public class GoldplusSteps {
     //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
+        loading.waitForLoadingIconDisappear();
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnNaikkanIklanAndaButton();

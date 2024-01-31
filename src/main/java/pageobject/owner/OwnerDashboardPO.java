@@ -276,7 +276,6 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
-        playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(gpWidgetButton);
     }
 
@@ -308,7 +307,7 @@ public class OwnerDashboardPO {
         playwright.clickOn(menuKelolaProperty);
     }
 
-    /**     * check FTUE at chat list is present
+    /** check FTUE at chat list is present
      *
      * @return true if appears FTUE Chat List section
      */
