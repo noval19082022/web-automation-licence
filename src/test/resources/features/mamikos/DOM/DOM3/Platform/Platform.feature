@@ -135,7 +135,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on hubungi pengelola button
     And user select question "Boleh tahu alamat lengkap apartemen ini?"
     And user click send chat from popup
@@ -169,7 +169,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     Then tenant can see profile dropdown option
 
   @TEST_COOP-5373 @TESTSET_UG-6228 @AUTOMATED @web-covered
@@ -187,7 +187,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     And user click on hubungi pengelola button
     Then user see phone number field and selectable question options :
       | Bagaimana bisa menghubungi apartemen ini? |
@@ -208,11 +208,11 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on favorite btn on the apartment detail
     Then user get success message "Sukses tersimpan"
     And tenant navigate to favorite page
-    Then tenant will see that the text "rane 78" is displayed
+    Then tenant will see that the text "Rane 78" is displayed
 
   @TEST_COOP-5377 @Automated @web-covered
   Scenario: [Web][Apartement] unFavorite an Apartment
@@ -222,10 +222,10 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on favorite btn on the apartment detail
     And tenant navigate to favorite page
-    Then tenant should not be able to see the text "rane 78"
+    Then tenant should not be able to see the text "Rane 78"
 
   @TEST_COOP-5378 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Email Address
