@@ -1,4 +1,4 @@
-@DOM3
+@DOM3 @platfrom
 Feature: [Test-Execution][DOM] Web - Platform
 
   @TEST_COOP-5359 @Automated @web-covered
@@ -403,7 +403,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user open facebook in footer
     And tenant set active page to 1
-    Then user redirected to "https://www.facebook.com/mamikosapp"
+    Then user redirected to "https://web.facebook.com/mamikosapp?_rdc=1&_rdr"
 
   @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
