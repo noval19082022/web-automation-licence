@@ -1,4 +1,4 @@
-@DOM3
+@DOM3 @platfrom
 Feature: [Test-Execution][DOM] Web - Platform
 
   @TEST_COOP-5359 @Automated @web-covered
@@ -135,7 +135,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on hubungi pengelola button
     And user select question "Boleh tahu alamat lengkap apartemen ini?"
     And user click send chat from popup
@@ -169,7 +169,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     Then tenant can see profile dropdown option
 
   @TEST_COOP-5373 @TESTSET_UG-6228 @AUTOMATED @web-covered
@@ -187,7 +187,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     And user click on hubungi pengelola button
     Then user see phone number field and selectable question options :
       | Bagaimana bisa menghubungi apartemen ini? |
@@ -208,11 +208,11 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on favorite btn on the apartment detail
     Then user get success message "Sukses tersimpan"
     And tenant navigate to favorite page
-    Then tenant will see that the text "rane 78" is displayed
+    Then tenant will see that the text "Rane 78" is displayed
 
   @TEST_COOP-5377 @Automated @web-covered
   Scenario: [Web][Apartement] unFavorite an Apartment
@@ -222,10 +222,10 @@ Feature: [Test-Execution][DOM] Web - Platform
       | 0891234567897  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
-      | rane 78        |                |
+      | Rane 78        |                |
     When user click on favorite btn on the apartment detail
     And tenant navigate to favorite page
-    Then tenant should not be able to see the text "rane 78"
+    Then tenant should not be able to see the text "Rane 78"
 
   @TEST_COOP-5378 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Email Address
@@ -252,8 +252,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Pop up login] Tenant - Click Maps
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     And user click back button in login page
@@ -273,8 +273,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Login][Owner] Login From Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
@@ -286,8 +286,8 @@ Feature: [Test-Execution][DOM] Web - Platform
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see tanya alamat lengkap button
     Then user want to ask kost address
 
@@ -403,7 +403,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user open facebook in footer
     And tenant set active page to 1
-    Then user redirected to "https://www.facebook.com/mamikosapp"
+    Then user redirected to "https://web.facebook.com/mamikosapp?_rdc=1&_rdr"
 
   @TEST_COOP-5403 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan - kebijakan privasi - corporate - blog - help - mamiads - career - tentang kami
@@ -631,8 +631,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
