@@ -252,8 +252,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Pop up login] Tenant - Click Maps
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                                      | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     And user click back button in login page
@@ -273,8 +273,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Login][Owner] Login From Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
@@ -286,8 +286,8 @@ Feature: [Test-Execution][DOM] Web - Platform
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see tanya alamat lengkap button
     Then user want to ask kost address
 
@@ -631,8 +631,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag | kost name prod               |
-      | Desta tobello  | Kos DC BAR Automation Tipe G |
+      | kost name stag                             | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
