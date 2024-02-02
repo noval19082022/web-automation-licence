@@ -22,6 +22,11 @@ public class AdminSanJuniperoPO {
     private Locator checkBoxActive;
     private Locator saveBtn;
     private Locator successMessageOnCreateSanJunipero;
+    private Locator previewBtn;
+    private Locator deactivateBtn;
+    private Locator activateBtn;
+    private Locator lastUpdateRow;
+
 
     public AdminSanJuniperoPO(Page page) {
         this.page = page;
@@ -39,6 +44,10 @@ public class AdminSanJuniperoPO {
         this.checkBoxActive = page.getByRole(AriaRole.INSERTION);
         this.saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         this.successMessageOnCreateSanJunipero = page.getByText("Success! Record success to saved.");
+        this.previewBtn = page.locator("//i[@class='fa fa-external-link']").first();
+        this.deactivateBtn = page.locator("//a[@title='Deactivate']").first();
+        this.activateBtn = page.locator("//a[@title='Activate']").first();
+        this.lastUpdateRow = page.locator("(//tr/td)[5]");
     }
 
     /**
@@ -156,5 +165,35 @@ public class AdminSanJuniperoPO {
                 removeCharAndWhiteSpaceFromString(
                         playwrightHelpers.getText(successMessageOnCreateSanJunipero),
                         "×");
+    }
+
+    /**
+     * click on preview action san junipero
+     */
+    public void clickOnPreviewAction() {
+        playwrightHelpers.clickOn(previewBtn);
+    }
+
+    /**
+     * click on deactivate action san junipero
+     */
+    public void clickOnDeactiveAction() {
+        playwrightHelpers.clickOn(deactivateBtn);
+    }
+
+    /**
+     * get current updated time
+     * @return
+     */
+    public String getCurrentTimeUpdate() {
+        playwrightHelpers.waitTillPageLoaded();
+        return playwrightHelpers.getText(lastUpdateRow);
+    }
+
+    /**
+     * click on activate action san junipero
+     */
+    public void clickOnActiveAction() {
+        playwrightHelpers.clickOn(activateBtn);
     }
 }

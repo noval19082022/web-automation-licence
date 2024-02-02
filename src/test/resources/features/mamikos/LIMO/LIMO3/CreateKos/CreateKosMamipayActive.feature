@@ -66,7 +66,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Atur Ketersediaan Kamar" ketersediaan kamar
     And owner input room name or number in room allotment page with "  "
     Then user see error message "Nomor/nama masih kosong." under room type field
-    When owner input room name or number in room allotment page with "8"
+    When owner input room name or number in room allotment page with "24"
     Then user see error message "Nomor/nama sudah dipakai kamar lain." under room type field
     When owner input room name or number in room allotment page with "123456789012345678901234567890123456789012345678901"
     Then user see error message "Maksimal 50 karakter." under room type field

@@ -1,4 +1,4 @@
-@regression @pman @pms @additonal-fee-management @add-master-data
+@regression @pman2 @pms @additonal-fee-management @add-master-data
 
   Feature: Add Additional Fee Master Data
 

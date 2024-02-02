@@ -61,6 +61,7 @@ public class MidtransPaymentPO {
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.selectDropdownByValue(targetBankSelection, Bank);
         playwright.clickOn(inquireButton);
+        playwright.waitFor(bayarButtonOnMidtrans);
         playwright.clickOn(bayarButtonOnMidtrans);
     }
 
@@ -100,6 +101,7 @@ public class MidtransPaymentPO {
      * Click on pay button
      */
     public void clickOnPayButton() {
+        playwright.waitFor(payButton);
         playwright.clickOn(payButton);
     }
 

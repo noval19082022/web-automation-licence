@@ -1,4 +1,4 @@
-@pman @pms @owner-expenditure
+@pman2 @pms @owner-expenditure
 
   Feature: Table Transaction Owner Expenditure List
     Background: Open Other Transaction Menu

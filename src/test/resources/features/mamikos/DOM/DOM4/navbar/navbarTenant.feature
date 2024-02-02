@@ -9,23 +9,23 @@ Feature: Navbar Tenant
       | UGM         | UGM         |
     Then navbar before login appears
 
-  @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
-  Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 1
+  @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other @TEST_COOP-5676
+  Scenario: [Dweb][Navbar]Check Navbar in url mamikos-kost Page Before login
     Given user navigates to mamikos-kost
     Then navbar kost before login appears
 
-  @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
-  Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 1
+  @TEST_DOM-1868 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other @TEST_COOP-5677
+  Scenario: [Dweb][Navbar]Check Navbar in url mamikos-booking Page Before login
     Given user navigates to mamikos-booking
     Then navbar kost before login appears
 
-  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
-  Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 2
+  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other @TEST_COOP-5678
+  Scenario: [Dweb][Navbar]Check Navbar in url mamikos-promo-kost Page Before login
     Given user navigates to mamikos-promo-kost
     Then navbar before login appears
 
-  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other
-  Scenario: [Dweb][Navbar]Check Navbar in url Page Before login 2
+  @TEST_DOM-1859 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other @TEST_COOP-5679
+  Scenario: [Dweb][Navbar]Check Navbar in url mamikos-history Page Before login
     Given user navigates to mamikos-history
     Then navbar before login appears
 
@@ -33,8 +33,8 @@ Feature: Navbar Tenant
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | kost name stag                              | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user in kost detail navbar before login appears
 
   @TEST_DOM-1852 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-search
@@ -91,7 +91,7 @@ Feature: Navbar Tenant
       | phone stag   | phone prod   | password  |
       | 089988776655 | 089988776655 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | kost name stag                              | kost name prod                                      |
+      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then navbar after login appears
 

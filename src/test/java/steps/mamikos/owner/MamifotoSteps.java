@@ -21,12 +21,15 @@ public class MamifotoSteps {
     @When("owner click menu sidebar Mamifoto")
     public void owner_click_menu_sidebar_mamifoto() {
         mamifoto.clickOnFiturPromosi();
-       mamifoto.clickOnMamifotoSidebar();
+        mamifoto.clickOnMamifotoSidebar();
     }
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(3000);
+        playwright.hardWait(2000);
+        if (!mamifoto.isMamitFotoLandingPageVisible()) {
+            playwright.reloadPage();
+        }
         Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
@@ -50,6 +53,9 @@ public class MamifotoSteps {
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
         mamifoto.clickOnLihatPaket();
+        if (!mamifoto.isMamiFotoContentPackageVisible()) {
+            playwright.reloadPage();
+        }
     }
 
     @And("owner select package mamifoto")

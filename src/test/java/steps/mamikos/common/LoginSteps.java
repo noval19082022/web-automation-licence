@@ -15,6 +15,7 @@ import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoginPO;
 import pageobject.owner.OwnerLoginPO;
+import pageobject.pms.HomepagePO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
@@ -31,6 +32,7 @@ public class LoginSteps {
     AdminBangkrupuxLoginPO loginAdminBangkrupux = new AdminBangkrupuxLoginPO(page);
     TenantLoginPO tenantLogin = new TenantLoginPO(page);
     LoginPMSPO loginPMS = new LoginPMSPO(page);
+    HomepagePO homepage = new HomepagePO(page);
     OwnerLoginPO owner = new OwnerLoginPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
@@ -115,6 +117,7 @@ public class LoginSteps {
         loginPMS.fillUsername(username);
         loginPMS.fillPassword(password);
         loginPMS.clickLogin();
+        Assert.assertTrue(homepage.isTotalPropertyVisible());
     }
 
     @Then("user see login pop up in favorite page")

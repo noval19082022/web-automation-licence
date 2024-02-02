@@ -61,7 +61,7 @@ public class TenantCommunicationPO {
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
-        displayDataRow = page.locator("//p[@class='secondary-bar__result-text bg-c-text bg-c-text--input-lg']");
+        displayDataRow = page.locator("//*[@class=\"tenant-tracker__result-text bg-c-text bg-c-text--input-lg\"]");
         buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
         fieldNote = page.getByPlaceholder("Tulis di sini...");
         simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));

@@ -1,0 +1,86 @@
+@COOP-5842 @COOP4
+Feature: Invalid Voucher After Applied, Invalid Contract Period
+
+  @TEST_COOP-5832 @Automated @COOP @Web
+  Scenario: Admin Edit Voucher AUTOCHNGEPERIOD and Change Contract Period to Monthly
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin navigate to mamikos voucher menu
+    And admin input voucher with value "ATCHANGEPERIOD" and click search button:
+    And admin master clicks on edit pencil icon
+    And admin select minimum type of contract period "Monthly"
+    And admin master clicks on edit mass voucher button in voucher form
+    Then System display alert message on mamipay web
+
+  Scenario: Admin Batalkan Contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin search contract by tenant phone number:
+      | phone stag    | phone prod  |
+      | 0888123321888 | 08100000622 |
+    And admin akhiri contract
+    Then admin should success terminate contract
+
+  @tenantBookingKos
+  Scenario: Tenant Booking Kost
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod  | password     |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
+    And tenant search kost then go to kost details:
+      | kost name stag | kost name prod |
+      | Kost Reykjavik | Kost Reykjavik |
+    And tenant booking kost for "today" and input rent duration equals to 4
+    Then tenant should success booking kost
+
+  @ownerAcceptKos
+  Scenario: Owner Accept Booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod    | password     |
+      | 0890000000289 | 0890000000289 | Bismillah@01 |
+    And owner accept booking via Homepage
+    And owner back to owner dashboard
+
+  @tenantInputVoucher
+  Scenario: Tenant Input Voucher ATCHANGEPERIOD
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod  | password     |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant click button bayar sekarang
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | ATCHANGEPERIOD    | AUTOCHNGEPERIOD   |
+    Then tenant can see voucher is applied
+
+  Scenario: Admin Edit Voucher AUTOCHNGEPERIOD and Change Contract Period to Annually
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin navigate to mamikos voucher menu
+    And admin input voucher with value "ATCHANGEPERIOD" and click search button:
+    And admin master clicks on edit pencil icon
+    And admin select minimum type of contract period "Annually"
+    And admin master clicks on edit mass voucher button in voucher form
+    Then System display alert message on mamipay web
+
+  @tenantInputVoucherAfterUpdate
+  Scenario: Tenant Input Voucher ATCHANGEPERIOD
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod  | password     |
+      | 0888123321888 | 08100000622 | mamikosqa123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant click button bayar sekarang
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | ATCHANGEPERIOD    | AUTOCHNGEPERIOD   |
+    Then Voucher code has been used
+		

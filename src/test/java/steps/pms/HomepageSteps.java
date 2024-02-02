@@ -10,6 +10,7 @@ import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.pms.HomepagePO;
 import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,12 +20,32 @@ import java.util.Map;
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
     HomepagePO homepage = new HomepagePO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     LoadingPO loading = new LoadingPO(page);
 
     private String homepagePage ="src/test/resources/testdata/pms/homepage.properties";
     private String emptyStateTitleInHomepage = JavaHelpers.getPropertyValue(homepagePage, "emptyStateTitleCopy");
     private String emptyStateSubtitleInHomepage = JavaHelpers.getPropertyValue(homepagePage, "emptyStateSubtitleCopy");
+    private String urlDetailProperty = JavaHelpers.getPropertyValue(homepagePage, "urlDetailProperty");
+    private String urlRoomAllotmentPage = JavaHelpers.getPropertyValue(homepagePage, "urlRoomAllotmentPage");
+    private String tanggalLiveMulai = JavaHelpers.getPropertyValue(homepagePage, "tanggalLiveMulai");
+    private String tanggalLiveAkhir = JavaHelpers.getPropertyValue(homepagePage, "tanggalLiveAkhir");
+    private String tanggalExpiredMulai = JavaHelpers.getPropertyValue(homepagePage, "tanggalExpiredMulai");
+    private String tanggalExpiredAkhir = JavaHelpers.getPropertyValue(homepagePage, "tanggalExpiredAkhir");
+    private String pilihProduk = JavaHelpers.getPropertyValue(homepagePage, "pilihProduk");
+    private String pilihBSE = JavaHelpers.getPropertyValue(homepagePage, "pilihBSE");
+    private String pilihBD = JavaHelpers.getPropertyValue(homepagePage, "pilihBD");
+    private String pilihAS = JavaHelpers.getPropertyValue(homepagePage, "pilihAS");
+    private String pilihHospitality = JavaHelpers.getPropertyValue(homepagePage, "pilihHospitality");
+    private String pilihKota = JavaHelpers.getPropertyValue(homepagePage, "pilihKota");
+    private String namaProperti = JavaHelpers.getPropertyValue(homepagePage, "namaProperti");
+    private String kota = JavaHelpers.getPropertyValue(homepagePage, "kota");
+    private String produk = JavaHelpers.getPropertyValue(homepagePage, "produk");
+    private String BSE = JavaHelpers.getPropertyValue(homepagePage, "BSE");
+    private String BD = JavaHelpers.getPropertyValue(homepagePage, "BD");
+    private String AS = JavaHelpers.getPropertyValue(homepagePage, "AS");
+    private String hospitality = JavaHelpers.getPropertyValue(homepagePage, "hospitality");
 
     private List<Map<String, String>> informasiPembayaran;
     private List<Map<String, String>> gender;
@@ -35,14 +56,14 @@ public class HomepageSteps {
     @And("admin go to room allotment page {string}")
     public void admin_go_to_room_allotment_page(String name) {
         homepage.searchProperty(name);
-        homepage.clickActionButton();
+        homepage.clicksActionButton();
         homepage.clickRoomAllotment();
     }
 
     @When("admin go to detail property {string}")
     public void admin_go_to_detail_property(String name) {
         homepage.searchProperty(name);
-        homepage.clickActionButton();
+        homepage.clicksActionButton();
         homepage.clickSeeDetail();
     }
 
@@ -203,15 +224,87 @@ public class HomepageSteps {
         homepage.clicksHomepage();
     }
 
-    @When("admin search property {string}")
-    public void admin_search_property(String property){
+    @When("admin search property by name {string}")
+    public void admin_search_property_by_name(String property){
         homepage.searchProperty(property);
+        Assert.assertEquals(homepage.getKeyword(), property, "Keyword does not match!");
     }
 
     @Then("empty state in Homepage menu is displayed")
     public void empty_state_in_Homepage_menu_is_displayed(){
         Assert.assertEquals(homepage.getEmptyStateTitleInHomepage(), emptyStateTitleInHomepage, "Empty State Copy does not match!");
         Assert.assertEquals(homepage.getEmptyStateSubtitleInHomepage(), emptyStateSubtitleInHomepage, "Empty State Copy does not match!");
+
+        homepage.clearKeyword();
+    }
+
+    @When("admin search property using ID {string}")
+    public void admin_search_property_using_ID(String id){
+        homepage.searchPropertyId(id);
+        Assert.assertEquals(homepage.getKeyword(), id, "Keyword does not match!");
+    }
+
+    @Then("admin redirect to detail property page")
+    public void admin_redirect_to_detail_property_page(){
+        playwright.waitTillPageLoaded();
+        Assert.assertEquals(homepage.getURLDetailProperty(), urlDetailProperty);
+    }
+
+    @When("admin go to Ketersediaan Kamar in Homepage action button")
+    public void admin_go_to_Ketersediaan_Kamar_in_Homepage_action_button(){
+        homepage.clicksActionButton();
+        homepage.clicksKetersediaanKamarButton();
+    }
+
+    @Then("admin redirect to room allotment page")
+    public void admin_redirect_to_room_allotment_page(){
+        playwright.waitTillPageLoaded();
+        Assert.assertEquals(homepage.getURLRoomAllotmentPage(), urlRoomAllotmentPage);
+    }
+
+    @When("admin Filter data in Homepage")
+    public void admin_Filter_data_in_Homepage(){
+        playwright.waitTillPageLoaded();
+        homepage.clicksFilter();
+
+        playwright.waitTillPageLoaded();
+        homepage.inputsTanggalMulaiLiveDate(tanggalLiveMulai);
+        homepage.inputsTanggalAkhirLiveDate(tanggalLiveAkhir);
+        homepage.inputsTanggalMulaiExpiredDate(tanggalExpiredMulai);
+        homepage.inputsTanggalAkhirExpiredDate(tanggalExpiredAkhir);
+        homepage.ticksProduk(pilihProduk);
+        homepage.ticksBSE(pilihBSE);
+        homepage.ticksBD(pilihBD);
+        homepage.ticksAS(pilihAS);
+        homepage.ticksHospitality(pilihHospitality);
+        homepage.selectsKota(pilihKota);
+    }
+
+    @Then("property is displayed")
+    public void property_is_displayed(){
+        playwright.waitTillPageLoaded();
+        Assert.assertEquals(homepage.getNamaPropertiInTable(namaProperti), namaProperti, "Nama Properti does not match!");
+        Assert.assertEquals(homepage.getKotaInTable(kota), kota, "Kota does not match!");
+        Assert.assertEquals(homepage.getProdukInTable(produk), produk, "Produk does not match!");
+        Assert.assertEquals(homepage.getBSEInTable(BSE), BSE, "BSE does not match!");
+        Assert.assertEquals(homepage.getBDInTable(BD), BD, "BD does not match!");
+        Assert.assertEquals(homepage.getASInTable(AS), AS, "AS does not match!");
+        Assert.assertEquals(homepage.getHospitality(hospitality), hospitality, "Hospitality does not match!");
+    }
+
+    @When("admin reset filter in Homepage")
+    public void admin_reset_filter_in_Homepage(){
+        homepage.clicksReset();
+    }
+
+    @When("admin clear keyword in Homepage")
+    public void admin_clear_keyword_in_Homepage(){
+        homepage.clearKeyword();
+    }
+
+    @Then("search bar is empty")
+    public void search_bar_is_empty(){
+        Assert.assertTrue(homepage.isKeywordVisible(), "Keyword is still visible!");
     }
 }
 

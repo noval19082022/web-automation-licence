@@ -36,7 +36,7 @@ Feature: Payment All
     Then owner should redirect back to pengajuan booking page
     And owner logs out
 
-  @extendContract @TEST_DOM-730
+  @extendContract @TEST_COOP-5181
   Scenario: extend contract from admin
     Given admin go to mamikos mamipay admin
     When admin search contract by tenant phone number:
@@ -49,7 +49,7 @@ Feature: Payment All
 #    And admin fills duration "8" month
 #    And admin click extend button
 
-  @paymentBni @TEST_DOM-536
+  @paymentBni @TEST_COOP-5184
   Scenario: Tenant pay kos BNI
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -60,18 +60,18 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentCreditCard @TEST_DOM-573
+  @paymentCreditCard @TEST_COOP-5185
   Scenario: Tenant pay kos credit card
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
       | 0895124719 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And tenant select payment method Credit Card
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentDana @TEST_DOM-577
+  @paymentDana @TEST_COOP-5186
   Scenario: Tenant pay kos Dana
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -82,7 +82,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentLinkAja @TEST_DOM-574
+  @paymentLinkAja @TEST_COOP-5188
   Scenario: Tenant pay kos LinkAja
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -93,7 +93,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentMandiri @TEST_DOM-487
+  @paymentMandiri @TEST_COOP-5189
   Scenario: Tenant pay kos mandiri
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -104,7 +104,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentOvo @TEST_DOM-484
+  @paymentOvo @TEST_COOP-5190
   Scenario: Tenant pay kos ovo
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -115,7 +115,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @paymentPermata @TEST_DOM-486
+  @paymentPermata @TEST_COOP-5191
   Scenario: Tenant pay kos permata
     Given user go to mamikos homepage
     When user login as tenant via phone number:

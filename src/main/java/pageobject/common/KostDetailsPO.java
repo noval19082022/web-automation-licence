@@ -65,6 +65,8 @@ public class KostDetailsPO {
     Locator cancelBookingBtn;
     Locator reasonOption;
     Locator yesCancelBookingBtn;
+    Locator nextSlideFtue;
+
     private Locator kostTitle;
     private Locator propertyGender;
     private Locator propertyLocation;
@@ -241,6 +243,7 @@ public class KostDetailsPO {
     private Locator peraturanDisinitext;
     private Locator peraturanBawaAnak;
 
+
     public KostDetailsPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -397,7 +400,7 @@ public class KostDetailsPO {
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
-        this.discountPriceKostDetailText = page.locator("div.rc-price__additional-data");
+        this.discountPriceKostDetailText = page.getByTestId("kostDetailPriceBeforePromo");
         this.bookingDateForm = page.getByPlaceholder("Mulai kos");
         this.bookingDate = page.locator("div[class='vdp-datepicker__calendar inline']");
         this.bookingDurationForm =  page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^dropdown-down$"))).first();
@@ -1661,7 +1664,7 @@ public class KostDetailsPO {
             }
             playwright.hardWait(500);
         }
-        playwright.waitFor(ftuePopUP);
+        playwright.waitTillLocatorIsVisible(ftuePopUP,3000.0);
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
     }
 
@@ -1730,9 +1733,26 @@ public class KostDetailsPO {
      * Click on delete draft button
      */
     public void clickDeleteButtonOnTabOneDraftBooking() {
-        deleteButtonOnTabOneDraftBooking.click();
-        hapusDraft.click();
+        playwright.waitTillPageLoaded();
+
+            int i = 0;
+            while (isDeleteDraftBtnVisible()) {
+                playwright.clickOn(deleteButtonOnTabOneDraftBooking);
+                playwright.clickOn(hapusDraft);
+                page.waitForTimeout(3000);
+                i++;
+            }
     }
+
+    /**
+     * Verify the delete draft button is visible or not
+     * @return boolean, true if button visible and false if button not visible
+     *
+     */
+    private boolean isDeleteDraftBtnVisible() {
+        return playwright.waitTillLocatorIsVisible(deleteButtonOnTabOneDraftBooking, 3000.0);
+    }
+
     /**
      * Click on mau coba dong section button
      */
@@ -2040,5 +2060,33 @@ public class KostDetailsPO {
     public boolean waitingListInformationText(String text){
         waitingListSubmitText = page.locator("#priceCard").getByText(""+text+"");
         return waitingListSubmitText.isVisible();
+    }
+
+    /**
+     * Verify the kos name and location
+     * @param kosName
+     * @return true if kos name displayed and false if kos name not displayed
+     */
+    public boolean isKostNameAndLocationAbsence(String kosName) {
+        playwright.hardWait(2000.0);
+        return playwright.isTextDisplayed(kosName, 3000.0);
+    }
+
+    /**
+     * Verify text on pop up
+     * @param text
+     * @return true if text displayed and false if text not displayed
+     */
+    public boolean getTextOnPopUp(String text) {
+        return playwright.isTextDisplayed(text);
+    }
+
+    /**
+     * Verify the FTUE booking on kos detail visible or not
+     * @return true if ftue displayed and false if ftue not displayed
+     */
+    public boolean isBookingFtueVisible() {
+        playwright.pageScrollToDown(300);
+        return playwright.isLocatorVisibleAfterLoad(ftueSlider, 3000.0);
     }
 }

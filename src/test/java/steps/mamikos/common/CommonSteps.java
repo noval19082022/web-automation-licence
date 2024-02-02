@@ -88,4 +88,10 @@ public class CommonSteps {
     public void bringPageToFront() {
         page.bringToFront();
     }
+
+    @And("user/admin/tenant waiting for {string} seconds for next step")
+    public void userWaitingForSecondsForNextStep(String time) {
+        new PlaywrightHelpers(ActiveContext.getActivePage())
+                .hardWait(Double.parseDouble(time) * 1000);
+    }
 }

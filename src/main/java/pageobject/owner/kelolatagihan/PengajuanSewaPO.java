@@ -72,12 +72,11 @@ public class PengajuanSewaPO {
         this.peraturanKosText = page.locator("//*[@id='BookingSettingDesktop']");
         this.selectKosButton = page.getByPlaceholder("Pilih Kos");
         this.simpanPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        this.waktuMulaiNgekosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Waktu mulai masuk kos chevron-down"));
+        this.waktuMulaiNgekosButton = page.getByText("Waktu mulai masuk kos");
         this.toogleTodayButton = page.getByRole(AriaRole.CHECKBOX);
         this.minCheckinButton = page.getByTestId("min-checkin-time-unit").getByPlaceholder("hari");
         this.simpanButtonOnModalPopup = page.getByTestId("checkin-option-modal").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Simpan"));
-        this.kriteriaCalonPenyewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kriteria calon penyewa chevron-down"));
-
+        this.kriteriaCalonPenyewaButton = page.getByText("Kriteria calon penyewa chevron-down");
     }
 
     /**
@@ -246,7 +245,7 @@ public class PengajuanSewaPO {
             playwright.clickOn(simpanButtonOnModalPopup);
             minCheckinAmmountDropDown = page.getByTestId("min-checkin-amount").getByRole(AriaRole.TEXTBOX);
             playwright.clickOn(minCheckinAmmountDropDown);
-            selectMinCheckinAmmount = page.locator("div:nth-child(" + tanggal + ") > label > .bg-c-radio__icon > span").first();
+            selectMinCheckinAmmount = page.locator("//p[normalize-space()='"+tanggal+"']");
             playwright.clickOn(selectMinCheckinAmmount);
             playwright.clickOn(simpanButtonOnModalPopup);
             saveCheckinButton = page.getByTestId("checkin-save-btn");

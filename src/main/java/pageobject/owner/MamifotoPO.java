@@ -27,6 +27,7 @@ public class MamifotoPO {
     Locator mamiFotoInfoUntukAndaNonProperty;
 
     //Locator Mamifoto Landing Page
+    private Locator mamiFotoLandingPageContent;
     Locator headerMamifoto;
     Locator lihatPaketButton;
     Locator bacaPanduan;
@@ -48,6 +49,7 @@ public class MamifotoPO {
     Locator headerPilihPaket;
     Locator backPilihPaketIcon;
     Locator headerDiscountGP;
+    private Locator mamiFotoContentPackage;
 
 
     //Locator Mamifoto at history transaction
@@ -110,6 +112,7 @@ public class MamifotoPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         this.mamifotoMenuSidebar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiFoto").setExact(true));
+        this.mamiFotoLandingPageContent = page.getByTestId("mamifotoDesktop");
         this.headerMamifoto = page.getByTestId("mamifoto-landing-header").getByText("MamiFoto", new Locator.GetByTextOptions().setExact(true));
         this.fiturPromosiSidebar = page.getByText("Fitur Promosi");
         this.homeOwnerSidebar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -128,7 +131,7 @@ public class MamifotoPO {
         this.headerBacaPanduan = page.getByText("Panduan persiapan foto/video");
         this.closePopUpBacaPanduanIcon = page.getByTestId("mamifoto-landing-guides-modal").getByRole(AriaRole.BUTTON);
         this.headerFAQ = page.getByText("Tanya Jawab");
-        this.faqFirstList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis foto apa saja yang akan saya dapat?"));
+        this.faqFirstList = page.getByText("Jenis foto apa saja yang akan saya dapat?");
         this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
         this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
@@ -169,6 +172,7 @@ public class MamifotoPO {
         this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
         this.packageNameMamifoto = page.getByTestId("mamifoto-history-on-progress").getByText("MamiFoto A GP");
         this.waitingPayment = page.getByText("Menunggu Pembayaran");
+        this.mamiFotoContentPackage = page.getByTestId("mamifotoPackagesDesktop");
 
     }
 
@@ -177,7 +181,7 @@ public class MamifotoPO {
      * Click on Fitur Promosi Sidebar menu
      */
     public void clickOnFiturPromosi() {
-        playwright.waitTillLocatorIsVisible(fiturPromosiSidebar);
+        playwright.waitFor(fiturPromosiSidebar);
         playwright.clickOn(fiturPromosiSidebar);
     }
 
@@ -192,7 +196,8 @@ public class MamifotoPO {
      * Click on Mamifoto Sidebar menu
      */
     public void clickOnMamifotoSidebar() {
-        mamifotoMenuSidebar.click();
+        playwright.waitFor(mamifotoMenuSidebar);
+        playwright.clickOn(mamifotoMenuSidebar);
     }
 
 
@@ -250,7 +255,7 @@ public class MamifotoPO {
      * Click on button Lihat Paket
      */
     public void clickOnLihatPaket() {
-        lihatPaketButton.click();
+        playwright.clickOn(lihatPaketButton);
     }
 
     /**
@@ -300,7 +305,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderSelectPackageisAppear() {
-        return headerPilihPaket.isVisible();
+        return playwright.waitTillLocatorIsVisible(headerPilihPaket);
     }
 
     /**
@@ -731,6 +736,22 @@ public class MamifotoPO {
      */
     public void navigatesToMamifotoPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0, LoadState.LOAD);
+    }
+
+    /**
+     * Check Mamifoto Content Package is appear
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean isMamiFotoContentPackageVisible() {
+        return playwright.waitTillLocatorIsVisible(mamiFotoContentPackage);
+    }
+
+    /**
+     * Check Mamifoto Landing Page is appear
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean isMamitFotoLandingPageVisible() {
+        return playwright.waitTillLocatorIsVisible(mamiFotoLandingPageContent);
     }
 }
 

@@ -8,8 +8,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobject.owner.mamiads.DetailTagihanPO;
-import pageobject.owner.mamiads.MamiAdsPO;
+import pageobject.owner.fiturpromosi.mamiads.DetailTagihanPO;
+import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -84,6 +84,7 @@ public class MamiAdsSteps {
 
     @And("detail list saldo as expected")
     public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
+        playwright.waitTillPageLoaded(5000.0);
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;int j=0;
         for (Map<String, String> content : table) {

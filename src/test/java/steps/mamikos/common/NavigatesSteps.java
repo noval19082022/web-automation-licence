@@ -173,7 +173,8 @@ public class NavigatesSteps {
     @When("owner navigates to property saya kos")
     public void userNavigateToPropertySayaKos() {
         playwright.waitTillPageLoaded();
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS);
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("owner navigates to {string}")
@@ -376,5 +377,11 @@ public class NavigatesSteps {
     public void userNavigatesToLaporanKeuangan() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.FINANCIAL_REPORT, 30000.0, LoadState.LOAD);
         loading.waitForLoadingIconDisappear();
+    }
+
+    @When("user navigate to mamitour landing page")
+    public void user_navigate_to_mamitour_landing_page() {
+        playwright.waitTillPageLoaded();
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMITOUR, 30000.0, LoadState.LOAD);
     }
 }

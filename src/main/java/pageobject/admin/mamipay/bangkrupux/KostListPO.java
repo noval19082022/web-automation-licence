@@ -25,6 +25,10 @@ public class KostListPO {
     Locator levelNameText;
     Locator chargeBy;
     Locator chargeByDropdowntText;
+    private Locator kostNameText;
+    private Locator row;
+    private Locator ownerNameText;
+    private Locator ownerPhoneNumberText;
 
     public KostListPO(Page page){
         this.page = page;
@@ -42,6 +46,7 @@ public class KostListPO {
         levelNameText = page.locator("(//tbody/tr/td)[5]");
         chargeBy = page.locator("//select[@id='is-charge-by-room']");
         chargeByDropdowntText = page.locator("//select[@id='is-charge-by-room']/option[@selected='true']");
+        row = page.locator("tbody tr");
     }
 
     /**
@@ -177,5 +182,61 @@ public class KostListPO {
      */
     public String getChargeBy() {
         return playwright.getText(chargeByDropdowntText);
+    }
+
+    /**
+     * Get first kost name in table kost list
+     * @return String
+     */
+    public String getKostName(int i) {
+        kostNameText = page.locator("(//tr["+(i+1)+"])/td[2]");
+        return playwright.getText(kostNameText);
+    }
+
+    /**
+     * Search by Owner Name
+     * @param name
+     */
+    public void searchOwnerName(String name) {
+        playwright.fill(ownerName,name);
+        page.context().setDefaultTimeout(30000.0);
+        playwright.clickOn(searchBtn);
+    }
+
+    /**
+     * Search by Owner Phone Number
+     * @param phone
+     */
+    public void searchPhoneNumber(String phone) {
+        playwright.fill(ownerPhoneNumber,phone);
+        playwright.clickOn(searchBtn);
+    }
+
+    /**
+     * Count Row
+     * @return Integer
+     */
+    public int countRow() {
+        return row.count();
+    }
+
+    /**
+     * Get owner name row i
+     * @param i
+     * @return String
+     */
+    public String getOwnerName(int i) {
+        ownerNameText = page.locator("(//tr["+(i+1)+"])/td[3]");
+        return playwright.getText(ownerNameText);
+    }
+
+    /**
+     * Get owner phone number row i
+     * @param i
+     * @return String
+     */
+    public String getOwnerPhoneNumber(int i) {
+        ownerPhoneNumberText = page.locator("(//tr["+(i+1)+"])/td[4]");
+        return playwright.getText(ownerPhoneNumberText);
     }
 }

@@ -50,11 +50,12 @@ public class ChatTenantSteps {
     @And("user click send chat from popup")
     public void userClickSendChatFromPopup() {
         chat.clickSend();
+        chat.reopenChatroom();
     }
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Kos address in title is wrong");
+        Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
     }
 
     @And("tenant enter text {string} in chat page")
