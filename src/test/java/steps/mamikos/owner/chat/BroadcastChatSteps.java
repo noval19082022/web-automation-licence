@@ -147,6 +147,7 @@ public class BroadcastChatSteps {
 
     @Then("owner with active package should be able to see the broadcast chat page")
     public void ownerWithActivePackageShouldBeAbleToSeeTheBroadcastChatPage() {
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
         loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");
@@ -155,6 +156,7 @@ public class BroadcastChatSteps {
 
     @Then("owner non gp should be able to see the broadcast chat page for non gp owner")
     public void ownerNonGpShouldBeAbleToSeeTheBroadcastChatPageForNonGpOwner() {
+        loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
         loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");

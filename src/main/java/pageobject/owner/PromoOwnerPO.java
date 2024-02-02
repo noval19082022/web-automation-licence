@@ -6,6 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import lombok.Getter;
 import lombok.Setter;
+import pageobject.common.LoadingPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -13,6 +14,7 @@ import utilities.PlaywrightHelpers;
 public class PromoOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private LoadingPO loading;
     @Setter @Getter private String judulPromoOwner;
 
     Locator lihatSelengkapnyaButton;
@@ -31,6 +33,7 @@ public class PromoOwnerPO {
     Locator unverificationPromoButton;
     Locator warningMessagePromo;
     Locator deletePromoButton;
+    Locator theNextMonthButton;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
@@ -125,7 +128,12 @@ public class PromoOwnerPO {
         playwright.pageScrollUntilElementIsVisible(startDatePicker);
         playwright.clickOn(startDatePicker);
         String locatorElement;
+        var todayDate = JavaHelpers.getCurrentDateOrTime("d");
         var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
+        if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
+            playwright.forceClickOn(theNextMonthButton);
+        }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         try {
             switch (periodePromo){
@@ -153,9 +161,17 @@ public class PromoOwnerPO {
     public void selectEndDatePromo(String periodePromo) {
         endDatePicker = page.locator("//div[contains(@class, 'period2')]//input[@class='input']");
         playwright.clickOn(endDatePicker);
+        var todayDate = JavaHelpers.getCurrentDateOrTime("d");
+        theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
+
         String locatorElement;
         var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
+            playwright.forceClickOn(theNextMonthButton);
+        }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
+        var theNextMonthDate = page.locator("//i[@class='mdi mdi-chevron-right mdi-24px']/following::*//div[@class='dropdown-menu']");
+
         try {
             switch (periodePromo){
                 case "tomorrow":
