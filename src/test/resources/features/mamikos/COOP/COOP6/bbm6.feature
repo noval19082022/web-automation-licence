@@ -6,7 +6,7 @@ Feature: BnB feature
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
-      | Kost andalusia spanyol eropa timur | kost payment desta 2 |
+      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
     Then user reached owner badges section
 
   @OwnerBadgesWithTenantLogin @OwnerBadges @TEST_COOP-1356
@@ -17,7 +17,7 @@ Feature: BnB feature
       | 0812345667788 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
-      | Kost andalusia spanyol eropa timur | kost payment desta 2 |
+      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
     Then user reached owner badges section
 
   @OwnerBadgesWithOwnerLogin @TEST_COOP-1357
@@ -28,7 +28,7 @@ Feature: BnB feature
       | 0892202351 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
-      | Kost andalusia spanyol eropa timur | kost payment desta 2 |
+      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
     Then user reached owner badges section
 
   @activatedDenda
@@ -38,7 +38,7 @@ Feature: BnB feature
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
+    And owner search kost "Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
     And owner click toggle denda
@@ -62,7 +62,7 @@ Feature: BnB feature
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
+    And owner search kost "Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
     And owner click toggle denda
@@ -91,7 +91,7 @@ Feature: BnB feature
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
+    And owner search kost "Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
     And owner click toggle deposit
@@ -110,7 +110,7 @@ Feature: BnB feature
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
+    And owner search kost "Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
     And owner click toggle other price
@@ -130,7 +130,7 @@ Feature: BnB feature
       | phone stag   | phone prod   | password  |
       | 089120220103 | 081328787342 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara" on property saya page
+    And owner search kost "Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Harga"
     And owner click toggle other price
@@ -157,7 +157,7 @@ Feature: BnB feature
     And user cancel booking
     And tenant search kost then go to kost details:
       | kost name stag                                                | kost name prod           |
-      | Kost Singgah Sini B Inter millan Tobelo Utara Halmahera Utara | Kost Adi Auto Voucher DP |
+      | Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara | Kost Adi Auto Voucher DP |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
     And tenant logs out
@@ -177,7 +177,7 @@ Feature: BnB feature
     And admin click detail in actions button
     Then admin sees other price with name "1234567890abcdefjkl" and price "Rp100.000" show in detail booking
 
-  @deleteContractOtherPrice
+  @deleteContractOtherPrice @COOP60
   Scenario: Delete contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -232,11 +232,11 @@ Feature: BnB feature
       | 0892202358 | 0892202358 | qwerty123 |
     And user cancel booking
 
-  #Scenario: create booking
+#  Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod |
-      | Kost Singgahsini Noval Tipe C arac | kost reykjavik |
+      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -333,7 +333,7 @@ Feature: BnB feature
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod  | password   |
-      | 089604239090 | 08100000622 | widyarini1 |
+      | 081227019399 | 081227019399 | qwerty123 |
     And owner navigates to owner dashboard
     And user click "Atur Ketersediaan Kamar"
 
@@ -385,7 +385,7 @@ Feature: BnB feature
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                              |
-      | kost bima booking dp biaya lain dan denda automation Tobelo |
+      | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     # Scenario: Owner accept booking from tenant
@@ -586,14 +586,14 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And user click on Draft menu
     And user click delete button on tab one draft booking
-    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+    Then tenant cannot see "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara" as kost name and kost location
     When user go to mamikos homepage
     And user click Mau Coba Dong section at homepage
     Then user will see kos saya is still empty
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                               |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "tomorrow"
     And user click back button
@@ -605,7 +605,7 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And user click on Draft menu
     And user click delete button on tab one draft booking
-    Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
+    Then tenant cannot see "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara" as kost name and kost location
 
   @TEST_COOP-1985 @automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Kost Saya Section ]Check homepage when have total waiting confirmation booking = 1 (BBM-882)
@@ -618,7 +618,7 @@ Feature: BnB feature
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                               |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara |
     And tenant booking kost "today" "Per Bulan"
     Then tenant should success booking kost
     When user go to mamikos homepage
