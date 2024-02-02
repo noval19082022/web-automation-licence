@@ -1,7 +1,7 @@
 @LIMO4 @regression @landingpageowner
 Feature: Landing Page Owner
 
-  @TEST_LIMO-5535
+  @TEST_LIMO-5535 @continue
     Scenario: [Landing Page Owner][Header] Owner can see header when open landing page owner
       Given user go to mamikos homepage
       When user click "Pelajari Lebih Lanjut"
@@ -11,12 +11,12 @@ Feature: Landing Page Owner
       When user click "Daftarkan Kos" on Landing Page Owner
       And owner set active page to 1
       Then user will see "Daftar Akun Pemilik Kos" on Register Owner page
+      And owner close page number 1
+      And owner set active page to 0
 
-  @TEST_LIMO-5536
+  @TEST_LIMO-5536 @continue
     Scenario: [Landing Page Owner][USP] Owner can see USP section when open landing page owner
-      Given user go to mamikos homepage
-      When user click "Pelajari Lebih Lanjut"
-      And user scroll to section USP
+      When user scroll to section USP
       Then user can see title "Mudahnya kelola kos di mamikos.com" on Landing Page Owner
       And user can see information "Berbagai keunggulan kelola properti di Mamikos untuk kemajuan bisnis kos Anda." on Landing Page Owner
       #pict 1
@@ -34,9 +34,7 @@ Feature: Landing Page Owner
 
   @TEST_LIMO-5540
     Scenario: [Landing Page Owner] Owner can see "Maju Bersama" section when open landing page owner
-      Given user go to mamikos homepage
-      When user click "Pelajari Lebih Lanjut"
-      And user scroll and see section "Maju Bersama Layanan Mamikos"
+      When user scroll and see section "Maju Bersama Layanan Mamikos"
       Then user can see information "Dengan berbagai produk dan layanan, Anda bisa kelola kos secara mandiri atau menyerahkan pengelolaannya ke Mamikos." on Landing Page Owner
       #tab 1
       When user click "Kelola kos mandiri"
