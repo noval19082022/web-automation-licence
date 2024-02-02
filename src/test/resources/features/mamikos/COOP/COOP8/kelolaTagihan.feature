@@ -8,7 +8,7 @@ Feature: Check Detail Tagihan
       | phone stag      | phone prod     | password        |
       | 0890000000289   | 0890000000289  | Bismillah@01    |
     And owner navigate to billing management
-    And owner search kost in billing management "kost bima booking dp biaya lain dan denda automation Tobelo Utara Halmahera Utara"
+    And owner search kost in billing management "Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara"
     And owner set Kelola Tagihan filter month to "Januari" month
     And user clicks Sudah bayar tab
     And owner go to detail tagihan

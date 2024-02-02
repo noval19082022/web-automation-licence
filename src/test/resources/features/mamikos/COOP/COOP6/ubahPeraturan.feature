@@ -44,18 +44,18 @@
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Boleh bawa anak"
     And owner click Simpan at Peraturan Masuk Kos page
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                     | kost name prod                                            |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Boleh bawa anak"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Boleh bawa anak"
     And owner click Simpan at Peraturan Masuk Kos page
@@ -66,7 +66,7 @@
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Wajib sertakan buku nikah saat pengajuan sewa"
     Then owner can see "kamar hanya bagi penyewa" will disable
@@ -124,14 +124,14 @@
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                    | kost name prod                                            |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Boleh pasutri"
 
   @TEST_COOP-1909 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Nonactivated Pasutri (BBM-531)
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Boleh untuk pasutri"
     Then owner can see "kamar hanya bagi penyewa" will enable
@@ -148,11 +148,11 @@
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                    | kost name prod                                            |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Khusus Mahasiswa"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Kos dikhususkan untuk karyawan atau mahasiswa"
 #    activated kost khusus  karyawan @TEST_COOP-1910
@@ -162,11 +162,11 @@
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                     | kost name prod                                            |
-      | kost madiun buat draft homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Khusus karyawan"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
-    And owner select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Kos dikhususkan untuk karyawan atau mahasiswa"
     Then owner click Simpan at Peraturan Masuk Kos page

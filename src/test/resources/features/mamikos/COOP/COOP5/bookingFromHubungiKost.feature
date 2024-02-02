@@ -25,7 +25,7 @@ Feature: OB Booking From Hubungi Kost
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                              | kost name prod                                              |
-      | kost bima booking dp biaya lain dan denda automation Tobelo | kost bima booking dp biaya lain dan denda automation Tobelo |
+      | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
     And user click chat in kos detail
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
     And tenant click button ajukan sewa from chat popup
