@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
@@ -17,6 +18,7 @@ public class CommonSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     TenantLoginPO users = new TenantLoginPO(page);
     HomePO home = new HomePO(page);
+    LoadingPO loadingPO = new LoadingPO(page);
 
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
@@ -71,6 +73,7 @@ public class CommonSteps {
 
     @Then("user redirected to {string}")
     public void user_redirect_link(String link) {
+        loadingPO.waitForLoadingIconDisappear();
         Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
     }
 

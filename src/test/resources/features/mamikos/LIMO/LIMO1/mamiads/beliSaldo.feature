@@ -64,7 +64,7 @@ Feature: Beli Saldo
   Scenario: Checking history success transaction of mamiads using voucher
     Then owner verify invoice success paid mamiads
 
-  @TEST_LIMO-273 @upikMaint
+  @TEST_LIMO-273
   Scenario: Cancel Buy Saldo
     Given user go to mamikos homepage
     When user login as owner:

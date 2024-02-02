@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @upikMaint @rekomendasiListing
+@regression @LIMO1 @LIMO1-staging @rekomendasiListing
 Feature: Rekomendasi Listing
 
   @TEST_LIMO-305

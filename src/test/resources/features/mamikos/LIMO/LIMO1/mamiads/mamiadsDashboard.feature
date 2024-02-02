@@ -1,4 +1,4 @@
-@regression @LIMO1 @upikMaint @mamiadsDashboard
+@regression @LIMO1 @mamiadsDashboard
 Feature: MamiAds Dashboard
 
   @TEST_LIMO-314

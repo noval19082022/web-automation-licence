@@ -170,8 +170,8 @@ public class MamifotoPO {
         this.alertSuccsess = page.locator("//div[@class='alert alert-success alert-dismissable']");
         this.ownerPhoneNumber = page.locator("//tbody[1]/tr[1]/td[1]");
         this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
-        this.packageNameMamifoto = page.getByTestId("mamifoto-history-on-progress").getByText("MamiFoto A GP");
-        this.waitingPayment = page.getByText("Menunggu Pembayaran");
+        this.packageNameMamifoto = page.locator(".mamifoto-history-card__title-card > .bg-c-text").first();
+        this.waitingPayment = page.locator(".bg-c-label").first();
         this.mamiFotoContentPackage = page.getByTestId("mamifotoPackagesDesktop");
 
     }
