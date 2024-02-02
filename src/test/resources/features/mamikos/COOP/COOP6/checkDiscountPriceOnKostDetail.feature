@@ -8,16 +8,16 @@ Feature: Check Harga Coret on Kost Detail
       | phone stag    | phone prod    | password     |
       | 0890000000314 | 0890000000314 | Bismillah@01 |
     And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod       |
-      | Kost Garden Abepura  | Kost Garden Abepura  |
+      | kost name stag                   | kost name prod       |
+      | Kost Banana White Kretek Bantul  | Kost Garden Abepura  |
     And tenant dismiss promo ngebut pop up
     And tenant fill booking data for "tomorrow" and "Per Minggu"
     Then user can see harga coret on price section
     When tenant fill booking data for "tomorrow" and "Per Bulan"
     Then user can see harga coret on price section
     When tenant fill booking data for "tomorrow" and "Per 3 Bulan"
-    Then user can not see harga coret on price section
+    Then user can see harga coret on price section
     When tenant fill booking data for "tomorrow" and "Per 6 Bulan"
     Then user can see harga coret on price section
     When tenant fill booking data for "tomorrow" and "Per Tahun"
-    Then user can not see harga coret on price section
+    Then user can see harga coret on price section
