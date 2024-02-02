@@ -33,7 +33,7 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
       | 0888123321888 | 08100000622 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag | kost name prod |
-      | kost reykjavik | kost reykjavik |
+      | Kost Reykjavik | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 

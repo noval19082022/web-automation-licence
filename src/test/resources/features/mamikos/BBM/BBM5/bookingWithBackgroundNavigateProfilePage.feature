@@ -24,7 +24,7 @@ Feature: BnB feature with background navigate profile page
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | kost reykjavik |
+      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
 
