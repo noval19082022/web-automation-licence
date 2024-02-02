@@ -16,6 +16,12 @@ public class RegisterOwner {
     HomePO home = new HomePO(page);
     OwnerRegisterPO ownerRegister = new OwnerRegisterPO(page);
 
+    @Then("user will see {string} on Register Owner page")
+    public void userWillSeeOnRegisterOwnerPage(String text) {
+        page = ActiveContext.getActivePage();
+        Assert.assertEquals(ownerRegister.getTitleRegisterOwner(), text, "title doesn't match");
+    }
+
     @When("user clicks on Enter button")
     public void userClicksOnEnterButton() {
         home.EnterButton();

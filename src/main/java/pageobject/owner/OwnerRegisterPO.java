@@ -22,6 +22,7 @@ public class OwnerRegisterPO {
     Locator emailTittle;
     Locator profilePictureNull;
     Locator profilPictureNotNull;
+    Locator titleRegisterOwner;
 
     public OwnerRegisterPO(Page page){
         this.page = page;
@@ -39,7 +40,7 @@ public class OwnerRegisterPO {
         this.emailInputText =  page.getByTestId("emailTextbox");
         this.profilePictureNull = page.locator("//i[@class='mdi mdi-account-circle mdi-48px']");
         this.profilPictureNotNull = page.locator("//img[@class='c-mk-header__avatar']");
-
+        this.titleRegisterOwner = page.getByText("Daftar Akun Pemilik Kos");
     }
 
     /**
@@ -164,5 +165,14 @@ public class OwnerRegisterPO {
     public Boolean isProfilePictureNotNull(){
         playwright.clickOn( page.locator("//a[@class='c-mk-header__menu-item-link user-menu']"));
         return profilPictureNotNull.isVisible();
+    }
+
+    /**
+     * Get text on Title Register Owner
+     *
+     * @return text title
+     */
+    public String getTitleRegisterOwner(){
+        return playwright.getText(titleRegisterOwner);
     }
 }
