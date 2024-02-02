@@ -5,8 +5,8 @@ Feature: Kost detail page 2
   Scenario: [Dweb][Kost Detail]Check report kos section tenant without login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag                | kost name prod               |
-      | Kos Dom Automation PLM Tipe C | Kos DC BAR Automation Tipe B |
+      | kost name stag                              | kost name prod               |
+      | Kos Dom Automation PLM Tipe C Kretek Bantul | Kos DC BAR Automation Tipe B |
     Then user can see kos report section
     #report action
     When user want to report this kos
@@ -48,8 +48,8 @@ Feature: Kost detail page 2
   Scenario: [Dweb][Kost Detail] Check Recommendation Kos
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag                  | kost name prod                                      |
-      | Kos upik rani 624 Tipe Fortuna  | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | kost name stag                                | kost name prod                                      |
+      | Kos Upik Rani 624 Tipe Fortuna Kretek Bantul  | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user want to see the other kost on recommendation section
     #explore kost recomendation
     When user see description recomendation kos "Kamu mungkin menyukainya"
