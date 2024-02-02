@@ -5,8 +5,9 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
-import pageobject.owner.mamiads.DetailTagihanPO;
-import pageobject.owner.mamiads.MamiAdsPO;
+import pageobject.owner.fiturpromosi.mamiads.DetailTagihanPO;
+import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
+
 
 public class DetailTagihanSteps {
 

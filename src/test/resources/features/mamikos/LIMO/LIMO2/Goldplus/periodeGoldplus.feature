@@ -1,13 +1,13 @@
 @regression @LIMO2 @listing-monetization @periodeGP
 Feature: Check Period Goldplus Page
 
-  @TEST_LIMO-2326
-  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT
+  @TEST_LIMO-2326 @TEST_LIMO-3918
+  Scenario: [WEB][Owner][Period GP][Non Weekly]Check List Period at GPLT
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp2"
+    When owner navigate to list package goldplus 2
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice   |
       | 1 Bulan         | Gratis MamiAds 100.000 | Rp129.000   | Rp150.000   |
@@ -18,23 +18,21 @@ Feature: Check Period Goldplus Page
       | 9 Bulan         | Gratis MamiAds 80.000  | Rp100.000   | Rp120.000   |
       | 12 Bulan        | Gratis MamiAds 120.000 | Rp1.583.400 | Rp1.740.000 |
 
-  @TEST_LIMO-3147 @continue
-    #Scenario: Setting label favorite change to no
-  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
+  Scenario: Setting label favorite change to no
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to none
-    And mamikos bangkrupux admin should be successfully logged out
 
-    #Scenario: check list periode
+  @TEST_LIMO-3147
+  Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
     When user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp1"
+    When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
       | periodGP | freeMamiAds            | actualPrice | discPrice |
       | 1 Bulan  | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
@@ -65,7 +63,7 @@ Feature: Check Period Goldplus Page
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    When owner navigates to "/goldplus/submission/periode/gp1"
+    When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice |
       | 1 Bulan         | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |

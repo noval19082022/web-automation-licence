@@ -18,7 +18,7 @@ Feature: Payment Recurring kost APIK
     Given tenant close unused browser tab
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
-    And tenant select payment from invoice detail using Credit Card with cc number is "4811 1111 1111 1114", expired date month "01" years "25", and ccv is "123"
+    And tenant select payment from invoice detail using Credit Card
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 

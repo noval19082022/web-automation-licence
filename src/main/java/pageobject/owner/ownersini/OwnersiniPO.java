@@ -63,8 +63,8 @@ public class OwnersiniPO {
         playwright = new PlaywrightHelpers(page);
 
         //---Profil Top Right Corner P1---//
-        skipFtueBtn = page.getByTestId("ss-ftue-button-0");
-        profilTopRightCornerP1 = page.locator("#profile-trigger");
+        skipFtueBtn = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Lewati").setExact(true));
+        profilTopRightCornerP1 = page.getByTestId("profile-dropdown");
         kembaliKeMamikosBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kembali ke Mamikos"));
         laporanKeuanganPage = page.locator(".inner-container");
         logoutButton = page.locator(".logout-btn");

@@ -1,6 +1,7 @@
 package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -9,14 +10,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
-import pageobject.owner.chat.BroadcastChatPO;
+import pageobject.owner.TenantBackgroundCheckerPO;
 import pageobject.owner.chat.ChatOwnerPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
+import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.PanduanGoldplusPO;
-import pageobject.owner.mamiads.MamiAdsPO;
 import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
@@ -36,6 +39,7 @@ public class GoldplusSteps {
     MamiAdsPO mamiads = new MamiAdsPO(page);
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -48,7 +52,7 @@ public class GoldplusSteps {
         if (playwright.isTextDisplayed("1 Minggu")) {
             goldplus.clickOnPeriodeWeekly();
         }
-        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isGpRadioSelected() && !gpSubmission.isGpPeriodeSelected()) {
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
             gpSubmission.clickOnGpSatuFirstRadioButton();
         }
         gpSubmission.clicksOnPilihPaketButton();
@@ -83,20 +87,6 @@ public class GoldplusSteps {
         goldplus.selectRecurringPeriod(period);
         playwright.clickOnTextButton("Create Recurring");
         Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
-    }
-
-    @Then("user verify list of Periode Berlangganan is appear")
-    public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.hardWait(2000);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i=0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(goldplus.listPeriod("periodGP",i).replaceAll("\\s", ""),content.get("periodGP").replaceAll("\\s", ""));
-            Assert.assertEquals(goldplus.listPeriod("freeMamiAds",i),content.get("freeMamiAds"));
-            Assert.assertEquals(goldplus.listPeriod("actualPrice",i),content.get("actualPrice"));
-            Assert.assertEquals(goldplus.listPeriod("discPrice",i),content.get("discPrice"));
-            i++;
-        }
     }
 
     @Then("admin successfully sets favorite label to none")
@@ -220,12 +210,14 @@ public class GoldplusSteps {
         chat.dismissFTUEMarsKuotaNol();
         broadcast.clickOnCloseTooltip();
         chat.searchChatTenant(tenantName);
+        chat.dismissFTUETBC();
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
     //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
+        loading.waitForLoadingIconDisappear();
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnNaikkanIklanAndaButton();
@@ -390,6 +382,7 @@ public class GoldplusSteps {
     @When("owner wants to accses dashboard GP")
     public void owner_wants_to_accses_dashboard_gp() {
         owner.clickOnGpWidgetButton();
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("user see status goldplus is {string}")
@@ -462,6 +455,8 @@ public class GoldplusSteps {
     }
     @And("user view detail list saldo MamiAds")
     public void user_view_detail_list_saldo_mamiads( DataTable dataTable) {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000.0);
         List<Map<String, String>> table = dataTable.asMaps();
         int i = 0;
         int j = 0;
@@ -512,8 +507,8 @@ public class GoldplusSteps {
         goldplus.unCheckedSaldo();
     }
 
-    @Then("owner wants to process gp crosseling")
-    public void owner_wants_to_process_gp_crosseling() {
+    @Then("owner click bayar sekarang on detail tagihan page goldplus")
+    public void owner_wants_to_process_goldplus() {
         gpSubmission.clicksOnBayarSekarangButton();
     }
 
@@ -571,6 +566,25 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Terminate");
         playwright.clickOnTextButton("Yes, terminate it!");
         Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
+    }
+
+    @When("owner navigate to list package goldplus 2")
+    public void owner_navigate_to_list_package_goldplus_2(){
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_2, 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner navigate to list package goldplus 1")
+    public void owner_navigate_to_list_package_goldplus_1(){
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
+    }
+
+    @When("owner click nanti saja for recurring GoldPlus")
+    public void owner_click_nanti_saja_for_recurring_goldplus(){
+        playwright.clickOnTextButton("Nanti Saja");
+    }
+    @And("owner click filter {string} in Pembayaran Tagihan Goldplus page")
+    public void ownerClickFilterInPembayaranTagihanGoldplusPage(String filter) {
+        goldplus.clickFilterInPaymentBillingGp(filter);
     }
 
 }

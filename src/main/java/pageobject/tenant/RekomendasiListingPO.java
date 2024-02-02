@@ -3,6 +3,7 @@ package pageobject.tenant;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -22,6 +23,7 @@ public class RekomendasiListingPO {
     Locator paginationNumberAct;
     Locator rekomendasiListingActual;
     Locator firstPropertyRekomendasiKosSaya;
+    Locator propertyFavorit;
 
     public RekomendasiListingPO(Page page) {
         this.page = page;
@@ -145,6 +147,7 @@ public class RekomendasiListingPO {
      * Click on menu favorite at header homepage
      */
     public void clickOnFavoriteHeader(){
+        favoritHeader =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         playwright.clickOn(favoritHeader);
     }
 
@@ -163,8 +166,12 @@ public class RekomendasiListingPO {
      * @return active page
      * @throws InterruptedException
      */
-    public void clickOnFirstRekomendasi(){
-       playwright.clickOn(firstPropertyRekomendasiKosSaya);
+    public Page clickOnFirstRekomendasi(){
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(firstPropertyRekomendasiKosSaya);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
     }
 
     /**
@@ -200,15 +207,31 @@ public class RekomendasiListingPO {
         String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
         return playwright.isLocatorVisibleAfterLoad(page.locator(propertyFavorit),3000.0);
     }
+
     /**
-     * Click property on favorit section
+     * Click property on favorit recomendation section
      * @param favoritPropertyRekomendasi
      * @throws InterruptedException
      */
-    public void clickOnPropertyFavorit(String favoritPropertyRekomendasi) throws InterruptedException {
-        String propertyFavorit = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
-        playwright.waitTillLocatorIsVisible(page.locator(propertyFavorit),1000.0);
-        playwright.clickOn(page.locator(propertyFavorit));
+    public void clickOnPropertyFavoritRecomendation(String favoritPropertyRekomendasi) throws InterruptedException {
+        String propertyFavoritRecommendation = "//span[contains(.,'"+favoritPropertyRekomendasi+"')]";
+        playwright.waitTillLocatorIsVisible(page.locator(propertyFavoritRecommendation),1000.0);
+        playwright.clickOn(page.locator(propertyFavoritRecommendation));
+    }
+
+    /**
+     * Click property on favorit section
+     * @param favoritProperty
+     * @throws InterruptedException
+     */
+    public Page clickOnPropertyFavorit(String favoritProperty) throws InterruptedException {
+        propertyFavorit = page.getByText(favoritProperty);
+        playwright.waitTillLocatorIsVisible(propertyFavorit,1000.0);
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(propertyFavorit);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
     }
 
 }

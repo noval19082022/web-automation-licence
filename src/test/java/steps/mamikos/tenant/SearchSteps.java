@@ -403,7 +403,7 @@ public class SearchSteps {
         kostLanding.clickOnResetFilterButton();
     }
 
-    @Then("user can see kost list is more than {int}")
+    @Then("user/admin/tenant can see kost list is more than {int}")
     public void userCanSeeKostListIsMoreThan(int kostList) {
         Assert.assertTrue(kostLanding.getKostListLocator().size() > kostList, "Kost list is not greater than " + kostList);
         Assert.assertFalse(kostLanding.isFilterResetTextVisible(), "Reset filter text is visible");

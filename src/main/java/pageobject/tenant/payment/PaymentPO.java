@@ -36,8 +36,8 @@ public class PaymentPO {
         this.paymentAmount = page.getByLabel("Payment Amount");
         this.flagBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
         // CC
-        this.codeCCPlaceHolder = page.frameLocator("iframe").getByPlaceholder("112233");
-        this.submitBtnForCC = page.frameLocator("iframe").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("OK"));
+        this.codeCCPlaceHolder = page.frameLocator("iframe").frameLocator("iframe[title='Bank Authentication']").getByPlaceholder(" Enter Code Here");
+        this.submitBtnForCC = page.frameLocator("iframe").frameLocator("iframe[title='Bank Authentication']").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("SUBMIT"));
         // riwayat booking
         this.lihatSelengkapnya = page.getByText("Lihat selengkapnya").first();
         this.lihatInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice"));
@@ -63,8 +63,10 @@ public class PaymentPO {
      * Payment method using cc
      */
     public void paymentUsingCC() {
-        playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "112233");
+        playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
         playwright.clickOn(submitBtnForCC);
+        playwright.hardWait(3_000.00);
+        playwright.reloadPage();
     }
 
     /**

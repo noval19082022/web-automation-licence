@@ -94,7 +94,7 @@ public class CpDisbursementSteps {
     @Then("all information should be keep")
     public void all_information_should_be_keep(DataTable tables) {
         transferInfo = tables.asMaps(String.class, String.class);
-        SimpleDateFormat today = new SimpleDateFormat("yyyy-M-dd");
+        SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
         Date dates = new Date();
 
         String property = transferInfo.get(0).get("Nama Property");
@@ -284,7 +284,7 @@ public class CpDisbursementSteps {
     @Then("Data Transfer that has been inputted is displayed on Preview Data Transfer")
     public void Data_Transfer_that_has_been_inputted_is_displayed_on_Preview_Data_Transfer(DataTable tables){
         transferInfo = tables.asMaps(String.class, String.class);
-        SimpleDateFormat today = new SimpleDateFormat("yyyy-M-dd");
+        SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
         Date dates = new Date();
 
         String property = transferInfo.get(0).get("Nama Property");
