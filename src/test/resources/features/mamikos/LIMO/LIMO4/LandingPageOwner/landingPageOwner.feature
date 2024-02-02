@@ -50,5 +50,5 @@ Feature: Landing Page Owner
       And user can see information "Layanan Singgahsini dan Apik mencakup standarisasi properti dan operasional, pemasaran, hingga penyewaan." on Landing Page Owner
       And user can see information "Anda tinggal menikmati keuntungannya setiap bulan dan pantau melalui Laporan Performa." on Landing Page Owner
       When user scroll and click "Lihat Singgahsini" button
-#      And tenant set active page to 1
-      Then user redirected to "https://singgahsini.id/"
+      And tenant set active page to 1
+      Then user should redirect to link "https://singgahsini.id/"
