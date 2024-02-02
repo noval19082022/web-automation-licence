@@ -66,10 +66,10 @@ public class OverviewPO {
         religionActive = page.locator("(//*[@data-testid='search-checkbox-dropdown'])[2]//*[@class='search-checkbox__checkbox bg-c-checkbox bg-c-checkbox--checked']");
 
         penanggungJawabSection = page.locator("#singgahsini-info");
-        bseName = page.locator(".bg-c-list-item__description").nth(7);
-        bdName = page.locator(".bg-c-list-item__description").nth(8);
-        asName = page.locator(".bg-c-list-item__description").nth(9);
-        hospiName = page.locator(".bg-c-list-item__description").nth(10);
+        bseName = page.locator(".bg-c-list-item__description").nth(6);
+        bdName = page.locator(".bg-c-list-item__description").nth(7);
+        asName = page.locator(".bg-c-list-item__description").nth(8);
+        hospiName = page.locator(".bg-c-list-item__description").nth(9);
         editButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit"));
 
         bseDropdown = page.locator(".bg-c-select__trigger").nth(0);
@@ -232,6 +232,7 @@ public class OverviewPO {
      * @return BSE name
      */
     public String getBseName() {
+        playwright.waitTillPageLoaded();
         return playwright.getText(bseName);
     }
 

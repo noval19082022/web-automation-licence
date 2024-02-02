@@ -1,4 +1,4 @@
-@regression @pman @pms @owner-expenditure
+@regression @pman2 @pms @owner-expenditure
 
   Feature: Edit Owner Expenditure
 

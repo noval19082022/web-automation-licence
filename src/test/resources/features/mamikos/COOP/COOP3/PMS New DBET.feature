@@ -1,14 +1,13 @@
-@COOP-5027 @COOP3
+@COOP3 @dbetpms
 Feature: PMS New DBET
 
-
-  @TEST_COOP-5037 @TESTSET_COOP-4944 @Automated @web
+  @TEST_COOP-5037  @Automated @web
   Scenario: [PMS-DBET][DBET Form]Check validation on on all field
     Given admin go to pms singgahsini
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Apik Addams Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
     And admin selected type room
     And admin click on save button
@@ -20,7 +19,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Apik Addams Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
     And admin selected type room
     And admin fill phone number tenant "011"
@@ -36,7 +35,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Apik Addams Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
     And admin selected type room
     And admin click on save button
@@ -50,7 +49,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Apik Addams Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Naraya"
     And admin create contract tenant dbet
     And admin selected type room
     And admin fill email tenant "tenanttujuh"

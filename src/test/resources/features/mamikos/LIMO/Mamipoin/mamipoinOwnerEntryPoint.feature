@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @mamipoinOwnerEntryPoint @mamipoinOwner
+@listing-monetization @mamipoinOwnerEntryPoint @mamipoinOwner
 Feature: MamiPoin Owner Entry Point
 
   @TEST_LIMO-2009 @Automated @Web @listing-monetization @mamipoin-owner

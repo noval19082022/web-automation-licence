@@ -1,7 +1,7 @@
 @BBM6 @COOP6 @COOP
 Feature: BnB feature
 
-  @OwnerBadgesNotLogin @OwnerBadges
+  @OwnerBadgesNotLogin @OwnerBadges @TEST_COOP-1358
   Scenario: Check Owner Badges on Kos Detail when not login tenant (BBM-500)
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -9,7 +9,7 @@ Feature: BnB feature
       | Kost andalusia spanyol eropa timur | kost payment desta 2 |
     Then user reached owner badges section
 
-  @OwnerBadgesWithTenantLogin @OwnerBadges
+  @OwnerBadgesWithTenantLogin @OwnerBadges @TEST_COOP-1356
   Scenario: Check Owner Badges on Kos Detail when login tenant (BBM-498)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: BnB feature
       | Kost andalusia spanyol eropa timur | kost payment desta 2 |
     Then user reached owner badges section
 
-  @OwnerBadgesWithOwnerLogin @TEST_BBM-499
+  @OwnerBadgesWithOwnerLogin @TEST_COOP-1357
   Scenario: Check Owner Badges on Kos Detail when login owner (BBM-499)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -208,7 +208,7 @@ Feature: BnB feature
   Scenario: Download biodata fakedoor
     Given user go to mamikos homepage
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And user search kost in penyewa menu "ARAC"
     And user click download biodata penyewa button
     And user tick on checkbox pop up
     Then user will see information about upcoming feature
@@ -235,8 +235,8 @@ Feature: BnB feature
   #Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | Kost Reykjavik |
+      | kost name stag                     | kost name prod |
+      | Kost Singgahsini Noval Tipe C arac | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -280,7 +280,7 @@ Feature: BnB feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara"
+    And user search kost in penyewa menu "ARAC"
     And user click on lihat selengkapnya button
     And user click on kontrak sewa button
     Then user will see message request terminated contract
@@ -299,12 +299,14 @@ Feature: BnB feature
     And user click "Atur Harga"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Daftar kontrak penyewa kos"
     And owner back to owner dashboard
     And owner dismiss FTUE goldplus
     And user click "Tambah Penyewa"
     And owner click back previous button
     And owner dismiss FTUE goldplus
+    And owner waiting the page reload
     And user click "Pusat Bantuan"
     Then user can see help center page
 
@@ -320,13 +322,13 @@ Feature: BnB feature
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
-  @checkContentLaporanKeuangan
+  @checkContentLaporanKeuangan @TEST_COOP-1942
   Scenario: Check content Laporan Keuangan
     Given user go to mamikos homepage
     And owner navigates to financial report
     Then user can see "Buka Laporan Keuangan di Aplikasi" and "Untuk saat ini, fitur Laporan Keuangan hanya dapat"
 
-  @checkOwnerHaveOneKosNotBbk
+  @checkOwnerHaveOneKosNotBbk @TEST_COOP-1921
   Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
     Given user go to mamikos homepage
     When user login as owner:
@@ -335,13 +337,13 @@ Feature: BnB feature
     And owner navigates to owner dashboard
     And user click "Atur Ketersediaan Kamar"
 
-  @checkWaktuMengelolaWhenOwnerNotHaveBbkKos @TEST_BBM-973
+  @checkWaktuMengelolaWhenOwnerNotHaveBbkKos @TEST_COOP-1927
   #ownerNotHaveBbkKos.feature
   Scenario: Check Waktu Mengelola section when owner not have BBK kos (BBM-973)
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
-      | 081227019392 | qwerty123 |
+      | 081227019399 | qwerty123 |
     And owner navigates to owner dashboard
     And user click menu "Atur Ketersediaan Kamar" on feature waktunya mengelola property
     Then user see screen "Update Kamar"
@@ -363,7 +365,7 @@ Feature: BnB feature
     And user click menu Pusat Bantuan on feature waktunya mengelola property
     Then user should redirect to link "https://help.mamikos.com/pemilik"
 
-  @TEST_BBM-883
+  @TEST_COOP-1984
   #chatButuhResponPengajuanSewaLabel.feature
   Scenario: Delete All Need Confirmation Booking Request
     Given admin go to mamikos mamipay admin
@@ -397,7 +399,7 @@ Feature: BnB feature
     And search chat in chatlist "Chat Butuh Respon Pengajuan Sewa Label"
     Then owner can see label with "Butuh respon pengajuan sewa"
 
-  @addAndMarkRoomKosGP @BNB-2245 @continue
+  @addAndMarkRoomKosGP @COOP-1918 @continue
   #addRoom.feature
   Scenario: check when owner add and mark room at kos GP
     Given user go to mamikos homepage
@@ -414,7 +416,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then verify will be appears and the room is untick again
 
-  @markRoomAsOccupied @markRoom @TEST_BBM-868
+  @markRoomAsOccupied @markRoom @TEST_COOP-1918
   #markRoom.feature
   Scenario: Mark BBK And Gold Plus Room As Occupied (BBM-868)
     Given owner click back on added room pop up
@@ -425,7 +427,7 @@ Feature: BnB feature
     When owner click on Add Renter button
     Then owner redirected to Input Renter's Information form with valid kost name
 
-  @occupancyAndBilling @markRoom @TEST_BBM-867 @continue
+  @occupancyAndBilling @markRoom @TEST_COOP-1917 @continue
   #markRoom.feature
   Scenario: Mark BBK And Non Gold Plus Room As Occupied (BBM-867)
     Given user go to mamikos homepage
@@ -445,7 +447,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_BBM-869
+  @updateRoomToast @markRoom @TEST_COOP-1916
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -461,7 +463,7 @@ Feature: BnB feature
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
 
-  @BNB-3131 @TEST_BBM-947 @booking1
+  @BNB-3131 @TEST_COOP-1947
   #otherPrice.feature
   Scenario: Delete Active Other Additional Price (BBM-947)
     Given user go to mamikos homepage
@@ -473,7 +475,7 @@ Feature: BnB feature
     And user delete active other additional price
     Then tenant can not sees active other price
 
-  @TEST_BBM-913 @continue
+  @TEST_COOP-1967 @continue
   #changeOwnersPhoneNumber.feature
   Scenario: change owner's number phone at unique code
     Given user go to mamikos homepage
@@ -481,7 +483,7 @@ Feature: BnB feature
       | phone stag    | password     |
       | 0890000000289 | Bismillah@01 |
     And user navigate to penyewa page
-    And user search kost in penyewa menu "kost bandung owner change phone number unique code Tobelo Utara Halmahera Utara"
+    And user search kost in penyewa menu "unique code"
     And user click Selengkapnya button on "Tenant Unique Code Jangan Diubah" contract
     And user click Kirim ulang kode hyperlink
     Then user will redirect to Kirim kode unik ke penyewa page
@@ -493,14 +495,14 @@ Feature: BnB feature
     And user change owner's phone number into "0890000001003" and click Gunakan
     Then user will see phone number of owner "0890000001003"
 
-  @TEST_BBM-895
+  @TEST_COOP-1932
   #warningDontHaveKosSayaAtSemuaFilter.feature
   Scenario: check warning who don't have kos saya at Semua filter (BBM-895)
     When user navigate to penyewa page
     And user search kost in penyewa menu "kost banda who dont have kos saya Tobelo Utara Halmahera Utara"
     Then user will see wording of warning tenant who don't have kos saya at Semua filter
 
-  @TEST_BBM-928 @continue
+  @TEST_COOP-1993 @continue
   #addTenant.feature
   Scenario: Add Tenant For Full Room (BBM-928)
     Given user go to mamikos homepage
@@ -515,7 +517,7 @@ Feature: BnB feature
     Then owner redirected to update room page
     And owner can not sees full room pop up restriction
 
-  @TEST_BBM-927
+  @TEST_COOP-1991
   #addTenant.feature
   Scenario: Add Tenant For Different Gender (BBM-927)
     Given owner navigates to owner dashboard
@@ -527,7 +529,7 @@ Feature: BnB feature
     And owner click button "Tambah Penyewa" on form informasi penyewa
     Then owner can sees different gender restriction pop-up
 
-  @TEST_BBM-905 @automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-2004 @automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Kost Saya Section ]Check Draft booking on homepage when have 1 draft for kost Promo Ngebut (BBM-905)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -554,7 +556,7 @@ Feature: BnB feature
     And user click delete button on tab one draft booking
     Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
 
-  @TEST_BBM-887 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  @TEST_COOP-1990 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
   Scenario: [Homepage ][Kost Saya Section ]Check Kos saya section when Menunggu konfirmasi Total booking = 1 show section for Kost Promo Ngebut
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -575,7 +577,7 @@ Feature: BnB feature
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
     Then tenant navigate to riwayat and draf booking
 
-  @TEST_BBM-968 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  @TEST_COOP-1361 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
   Scenario: [Homepage ][Kost Saya Section ]Check Kos Saya on Homepage when have Draft booking = 1 (BBM-968)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -605,7 +607,7 @@ Feature: BnB feature
     And user click delete button on tab one draft booking
     Then tenant cannot see "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" as kost name and kost location
 
-  @TEST_BBM-882 @automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_COOP-1985 @automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Kost Saya Section ]Check homepage when have total waiting confirmation booking = 1 (BBM-882)
     Given user go to mamikos homepage
     When user login as tenant via phone number:

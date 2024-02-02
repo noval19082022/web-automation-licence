@@ -31,7 +31,7 @@ public class KostListSteps {
 
         String[] column = {"ID" , "Kost Name", "Owner Name", "Owner Phone Number", "Level", "Flag", "Last Update", "Actions"};
 
-        for (int i=0; i<8; i++){
+        for (int i=0; i<column.length; i++){
             Assert.assertEquals(kostList.getColumnName(i+1), column[i], "Column name not match");
             System.out.println(kostList.getColumnName(i+1));
         }
@@ -47,8 +47,8 @@ public class KostListSteps {
         Assert.assertTrue(kostList.pageNumberButtonIsActive(pageNumber).contains("active"), "Button is not active");
     }
 
-    @When("admin search kost pman {string}")
-    public void admin_search_kost_pman(String kostName){
+    @When("admin search kost by name {string}")
+    public void admin_search_kost_by_name(String kostName){
         kostList.searchKostName(kostName);
     }
 
@@ -93,5 +93,37 @@ public class KostListSteps {
     @When("admin clicks on Edit Kost Level")
     public void admin_clicks_on_Edit_Kost_Level(){
         kostList.clicksEditKostLevel();
+    }
+    @Then("show result kost {string}")
+    public void show_result_kost(String name) {
+        int row = kostList.countRow();
+
+        for (int i = 0; i < row; i++) {
+            Assert.assertTrue(kostList.getKostName(i).contains(name));
+        }
+    }
+    @When("admin search kost by owner name {string}")
+    public void admin_search_kost_by_owner_name(String name) {
+        kostList.searchOwnerName(name);
+    }
+    @When("admin search kost by owner phone number {string}")
+    public void admin_search_kost_by_owner_phone_number(String phone) {
+        kostList.searchPhoneNumber(phone);
+    }
+    @Then("show all kost belongs to owner {string}")
+    public void show_all_kost_belongs_to_owner(String name) {
+        int row = kostList.countRow();
+
+        for (int i = 0; i < row; i++) {
+            Assert.assertEquals(kostList.getOwnerName(i),name);
+        }
+    }
+    @Then("show all kost belongs to owner phone number {string}")
+    public void show_all_kost_belongs_to_owner_phone_number(String phone) {
+        int row = kostList.countRow();
+
+        for (int i = 0; i < row; i++) {
+            Assert.assertEquals(kostList.getOwnerPhoneNumber(i), phone);
+        }
     }
 }

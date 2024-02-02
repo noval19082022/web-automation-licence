@@ -5,8 +5,8 @@ Feature: Tenant - Login
   Scenario: Login - By Facebook
     Given user go to mamikos homepage
     And user login as tenant via facebook:
-      | email stag                          | email prod                          | password    |
-      | lingga_ccabvrn_marqansyah@tfbnw.net | lingga_ccabvrn_marqansyah@tfbnw.net | joinmamikos |
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     Then user redirected to "/#_=_"
     Then user tenant profile picture is shown
 

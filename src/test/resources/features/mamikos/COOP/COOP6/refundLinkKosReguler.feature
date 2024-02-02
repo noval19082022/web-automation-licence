@@ -1,4 +1,4 @@
-@BBM6
+@BBM6 @refundLinkKosReguler
 Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar 2)
 
   @TEST_COOP-2770

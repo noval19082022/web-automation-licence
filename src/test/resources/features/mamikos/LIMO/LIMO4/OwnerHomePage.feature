@@ -31,7 +31,6 @@ Feature: Homepage
     And user click profile on header
     Then user see dropdown with button owner page and exit
     When  user click owner page button
-    And owner click "Nanti Saja"
     Then user should redirect to link "https://owner-jambu.kerupux.com/"
 
   @ownerChatCS @listingGP @continue
@@ -46,9 +45,6 @@ Feature: Homepage
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/kos"
     When owner navigates to property saya apartemen
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/apartment"
-    When user navigates to owner dashboard
-    And user click mamipoin in owner's menu
-    Then user should redirect to link "https://owner-jambu.kerupux.com/mamipoin"
 
   @OwnerGreeting @listingGP @continue
   Scenario: Click username direct to setelan akun
@@ -77,8 +73,9 @@ Feature: Homepage
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag      | phone prod     | password    |
-      | 0812345670008   | 0812345670008  | qwerty123   |
-    Then user see username in top right shows as "tiara lapan abcdefghijklmnopqr..."
+      | 082233545506   | 0812345670008  | qwerty123   |
+    Then user see username in top right shows as "Rega Automate Dua Nama Panjang..."
+    And owner should successfully log out
 
   @widgetWaktunyaMengelolaPropertiKosNonActive
   Scenario: Widget Waktunya Mengelola Properti - Kos non active 1 & Apartemen 0

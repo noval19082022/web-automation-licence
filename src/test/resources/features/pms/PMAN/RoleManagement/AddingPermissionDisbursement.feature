@@ -1,4 +1,4 @@
-@pman @role-management @add-permission
+@pman2 @role-management @add-permission
 
 Feature: Adding Permission on Disbursement Management
 

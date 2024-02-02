@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @visibility
 Feature: Visibility
 
   @TEST_LIMO-291 @continue

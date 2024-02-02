@@ -60,4 +60,38 @@ public class RoomLevelSteps {
     public void the_key_is_not_changed(){
         Assert.assertEquals(roomLevel.getKeyAfterEdit(), keyForEdit, "The Key is Changed!");
     }
+    @When("admin search room level {string}")
+    public void admin_search_room_level(String name) {
+        roomLevel.searchLevelName(name);
+    }
+    @When("admin edit room level with empty level name")
+    public void admin_edit_room_level_with_empty_level_name() {
+        roomLevel.editRoomLevel();
+        roomLevel.inputsLevelName("");
+        roomLevel.clicksSave();
+    }
+    @Then("show error message {string}")
+    public void show_error_message(String error) {
+        Assert.assertEquals(roomLevel.getErrorMessage(),error);
+    }
+    @Then("should show room level menu content")
+    public void should_show_room_level_menu_content() {
+        String[] expectedColumn = {"ID" , "Level Name", "Key", "Status", "Charging Name", "Charging Fee", "Charging Type", "Charge for Booking Contract", "Charge for Consultant Contract", "Charge for Owner Contract", "Invoice Type", "Notes", "Actions"};
+
+        Assert.assertEquals(roomLevel.getMenuTitle(),"Manage Room Level");
+        Assert.assertTrue(roomLevel.isButtonAddRoomLevelVisible());
+        Assert.assertTrue(roomLevel.isSearchFieldVisible());
+        Assert.assertTrue(roomLevel.isButtonSearchVisible());
+        for (int i = 0; i < expectedColumn.length; i++) {
+            Assert.assertEquals(roomLevel.getColumnName(i),expectedColumn[i]);
+        }
+    }
+    @When("admin go to page {string}")
+    public void admin_go_to_page(String page) {
+        roomLevel.clickPaginationNumber(page);
+    }
+    @Then("page number {string} is active")
+    public void page_number_is_active(String no) {
+        Assert.assertEquals(roomLevel.getActivePaginationPage(),no);
+    }
 }

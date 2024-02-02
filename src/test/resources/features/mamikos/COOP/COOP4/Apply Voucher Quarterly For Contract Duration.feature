@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
-Feature: Apply Voucher Weekly For Contract Duration
+@COOP-5841 @COOP4
+Feature: Apply Voucher Quarterly For Contract Duration
 
-  @TEST_COOP-5821 @Automated @COOP @Web
+  @TEST_COOP-5819 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -24,9 +24,9 @@ Feature: Apply Voucher Weekly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
-    And tenant booking kost "tomorrow" "Per Minggu"
+      | kost name stag           | kost name prod           |
+      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
+    And tenant booking kost "tomorrow" "Per 3 Bulan"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -39,7 +39,7 @@ Feature: Apply Voucher Weekly For Contract Duration
       | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
-  Scenario: Tenant Apply Voucher AUTOWEEKLY
+  Scenario: Tenant Apply Voucher AUTOQUARTERLY
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -48,7 +48,7 @@ Feature: Apply Voucher Weekly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOWEEKLY        | AUTOWEEKLY        |
+      | AUTOQUARTERLY     | AUTOQUARTERLY     |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract
@@ -73,8 +73,8 @@ Feature: Apply Voucher Weekly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | kost name stag           | kost name prod           |
+      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
@@ -88,7 +88,7 @@ Feature: Apply Voucher Weekly For Contract Duration
       | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
-  Scenario: Tenant Apply Voucher AUTOWEEKLY
+  Scenario: Tenant Apply Voucher AUTOQUARTERLY
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -97,6 +97,6 @@ Feature: Apply Voucher Weekly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOWEEKLY        | AUTOWEEKLY        |
+      | AUTOQUARTERLY     | AUTOQUARTERLY     |
     Then tenant can see voucher is applied
 		

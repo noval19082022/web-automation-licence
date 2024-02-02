@@ -98,8 +98,14 @@ public class PanduanGoldplusPO {
      * Click on coba sekarang button
      */
     public void clickCobaSekarangButton() {
-        cobaSekarangButton.waitFor();
-        playwright.clickOn(cobaSekarangButton);
+        while (isCobaSekarangMamiadsVisible()) {
+            playwright.clickOn(cobaSekarangButton);
+            page.waitForTimeout(3000);
+        }
+    }
+
+    private boolean isCobaSekarangMamiadsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(cobaSekarangButton, 5000.0);
     }
 
     /**

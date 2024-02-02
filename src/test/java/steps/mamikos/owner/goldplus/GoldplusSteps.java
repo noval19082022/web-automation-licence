@@ -217,6 +217,7 @@ public class GoldplusSteps {
     //------ GP Onboarding ------//
     @When("owner go to panduan gold plus page")
     public void ownerGoToPanduanGoldPlusPage() {
+        loading.waitForLoadingIconDisappear();
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnNaikkanIklanAndaButton();
@@ -454,6 +455,8 @@ public class GoldplusSteps {
     }
     @And("user view detail list saldo MamiAds")
     public void user_view_detail_list_saldo_mamiads( DataTable dataTable) {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000.0);
         List<Map<String, String>> table = dataTable.asMaps();
         int i = 0;
         int j = 0;
@@ -583,4 +586,5 @@ public class GoldplusSteps {
     public void ownerClickFilterInPembayaranTagihanGoldplusPage(String filter) {
         goldplus.clickFilterInPaymentBillingGp(filter);
     }
+
 }

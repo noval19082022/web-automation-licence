@@ -1,4 +1,4 @@
-@pman @pms @homepage
+@pman2 @pms @homepagePMS
 
 Feature: Homepage menu
 
@@ -8,8 +8,19 @@ Feature: Homepage menu
     When admin login pms :
       | email             | password      |
       | pman@mamiteam.com | pmanM4m1t34m  |
-    And admin search property "Lalala"
+    And admin search property by name "Lalala"
     Then empty state in Homepage menu is displayed
+
+  @TEST_PMAN-5251 @continue
+  Scenario: Reset / Clear Keyword in Search Bar
+    #clear keyword using property ID
+    When admin search property using ID "3143"
+    And admin clear keyword in Homepage
+    Then search bar is empty
+    #clear keyword using property name
+    When admin search property by name "khusus automation"
+    And admin clear keyword in Homepage
+    Then search bar is empty
 
   @TEST_PMAN-3597 @continue
   Scenario: View Detail Property Page
@@ -23,8 +34,33 @@ Feature: Homepage menu
     And admin go to Ketersediaan Kamar in Homepage action button
     Then admin redirect to room allotment page
 
-  @TEST_PMAN-3583
+  @TEST_PMAN-3583 @continue
   Scenario: Apply Some Filters
     When admin go to Homepage
     And admin Filter data in Homepage
     Then property is displayed
+
+  @TEST_PMAN-3587 @continue
+  Scenario: Search using property ID
+    #Search property using valid property ID
+    When admin reset filter in Homepage
+    And admin search property using ID "3143"
+    Then property is displayed
+    #Search property using invalid property ID
+    When admin clear keyword in Homepage
+    And admin search property using ID "0101"
+    Then empty state in Homepage menu is displayed
+
+  @TEST_PMAN-5250
+  Scenario: Search using property name
+    #Search property with full name
+    When admin search property by name "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    Then property is displayed
+    #Search property with third word in title
+    When admin clear keyword in Homepage
+    And admin search property by name "khusus"
+    Then property is displayed
+    #Search property with fourth word in title
+    When admin clear keyword in Homepage
+    And admin search property by name "Automation"
+    Then empty state in Homepage menu is displayed

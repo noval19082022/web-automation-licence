@@ -21,6 +21,15 @@ public class DisbursementSteps {
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
     public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
 
+    private String disbursementPage = "src/test/resources/testdata/pms/disbursement.properties";
+    private String keteranganTambahanToast = JavaHelpers.getPropertyValue(disbursementPage, "keteranganTambahanToast");
+    private String noteLessThan = JavaHelpers.getPropertyValue(disbursementPage, "disbursementNoteLessThan1500");
+    private String keteranganTambahanErrorMessage = JavaHelpers.getPropertyValue(disbursementPage, "keteranganTambahanErrorMessage");
+    private String noteMoreThan = JavaHelpers.getPropertyValue(disbursementPage, "noteMoreThan");
+    private String errorMessageMoreThan1500Chars = JavaHelpers.getPropertyValue(disbursementPage, "errorMessageMoreThan1500Chars");
+    private String emptyStateTitleInDisbursement = JavaHelpers.getPropertyValue(disbursementPage, "emptyStateTitleInDisbursement");
+    private String emptyStateSubtitleInDisbursement = JavaHelpers.getPropertyValue(disbursementPage, "emptyStateSubtitleInDisbursement");
+
     private List<Map<String, String>> modelKerjaSama;
     private List<Map<String, String>> tambahanPendapatan;
 
@@ -130,5 +139,51 @@ public class DisbursementSteps {
     @When("admin search disbursement {string}")
     public void admin_search_disbursement(String keyword) {
         disbursement.searchProperty(keyword);
+    }
+
+    @When("admin inputs characters {string}")
+    public void admin_inputs_characters(String chars){
+        if (chars.equalsIgnoreCase("note <= 1500")){
+            disbursement.clicksUbahInKeteranganTambahan();
+            disbursement.inputsCharactersLessInKeteranganTambahan(noteLessThan);
+        } else if (chars.equalsIgnoreCase("note > 1500")) {
+            disbursement.inputsCharactersMoreInKeteranganTambahan(noteMoreThan);
+        } else {
+            System.out.println("Invalid Inputs Characters");
+        }
+    }
+
+    @Then("Keterangan Tambahan value {string} is displayed")
+    public void Keterangan_Tambahan_value_is_displayed(String keteranganTambahanValue){
+        if (keteranganTambahanValue.equalsIgnoreCase("note <= 1500")){
+            Assert.assertEquals(disbursement.getKeteranganTambahanToast(keteranganTambahanToast), keteranganTambahanToast, "Toast after add Keterangan Tambahan untuk Owner does not match!");
+            Assert.assertEquals(disbursement.getKeteranganTambahanValue(noteLessThan), noteLessThan, "Value in Keterangan Tambahan untuk Owner does not match!");
+        }
+    }
+
+    @When("admin does not input charaters")
+    public void admin_does_note_input_character(){
+        disbursement.clearKeteranganTambahanValue();
+    }
+    @Then("the Simpan button is disable")
+    public void the_Simpan_button_is_disable(){
+        Assert.assertEquals(disbursement.errorMessageEmptyStateInKeteranganTambahan(keteranganTambahanErrorMessage), keteranganTambahanErrorMessage, "Error Message in Keterangan Tambahan untuk Owner does not match!");
+        Assert.assertTrue(disbursement.isSimpanButtonInKeteranganTambahanDisable(), "Simpan button in Keterangan Tambahan untuk Owner is Enable!");
+    }
+
+    @Then("error message is displayed")
+    public void error_message_is_displayed(){
+        Assert.assertEquals(disbursement.errorMessageMoreThan1500Chars(errorMessageMoreThan1500Chars), errorMessageMoreThan1500Chars, "Error Message for More Than 1500 Characters does not match!");
+    }
+
+    @When("admin clicks on next month in calendar")
+    public void admin_clicks_on_next_month_in_calendar(){
+        disbursement.clicksCalendar();
+    }
+
+    @Then("empty state in Disbursement menu is displayed")
+    public void empty_state_in_Disbursement_menu_is_displayed(){
+        Assert.assertEquals(disbursement.getEmptyStateTitleInDisbursement(), emptyStateTitleInDisbursement, "Empty State Title does not match!");
+        Assert.assertEquals(disbursement.getEmptyStateSubtitleInDisbursement(), emptyStateSubtitleInDisbursement, "Empty State Subtitle does not match!");
     }
 }

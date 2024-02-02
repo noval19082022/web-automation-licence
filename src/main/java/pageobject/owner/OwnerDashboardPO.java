@@ -80,6 +80,7 @@ public class OwnerDashboardPO {
     Locator ubahPeraturan;
     Locator dariMamikosSection;
     Locator dariMamikosBanner;
+    Locator daftarGpButton;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -156,6 +157,7 @@ public class OwnerDashboardPO {
         dariMamikosBanner = page.locator(".image > a").first();
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
+        daftarGpButton = page.getByTestId("registerGP_btn");
     }
 
     /**
@@ -274,7 +276,6 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
-        playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(gpWidgetButton);
     }
 
@@ -300,13 +301,13 @@ public class OwnerDashboardPO {
      * @param menu is menu on feature kelola property
      */
     public void clickOnMenuKelolaProperty(String menu){
-        page.reload();
         menuKelolaProperty = page.locator("//p[contains(.,'"+menu+"')]");
+        playwright.waitFor(menuKelolaProperty);
         playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);
         playwright.clickOn(menuKelolaProperty);
     }
 
-    /**     * check FTUE at chat list is present
+    /** check FTUE at chat list is present
      *
      * @return true if appears FTUE Chat List section
      */
@@ -364,6 +365,7 @@ public class OwnerDashboardPO {
      * @return status true / false
      */
     public Boolean isHelpCenterOwnerDisplayed() {
+        playwright.waitFor(helpCenterOwnerButton);
         return playwright.waitTillLocatorIsVisible(helpCenterOwnerButton);
     }
 
@@ -373,6 +375,7 @@ public class OwnerDashboardPO {
      * @return status true / false
      */
     public boolean isNotificationOwnerButtonDisplayed() {
+        playwright.waitFor(notificationOwnerButton);
         return playwright.waitTillLocatorIsVisible(notificationOwnerButton);
     }
 
@@ -790,5 +793,14 @@ public class OwnerDashboardPO {
      */
     public boolean isWidgetDaftarGoldplusDisplayed(){
         return playwright.waitTillLocatorIsVisible(widgetDaftarGoldplus, 5000.0);
+    }
+
+    /**
+     * Click daftar GP on owner dashboard
+     *
+     *
+     */
+    public void clickOnDaftarGP() {
+        playwright.clickOn(daftarGpButton);
     }
 }

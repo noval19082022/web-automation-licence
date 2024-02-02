@@ -1,4 +1,4 @@
-@regression @LIMO1
+@regression @LIMO1 @upikMaint @mamiadsDashboard
 Feature: MamiAds Dashboard
 
   @TEST_LIMO-314
@@ -91,6 +91,7 @@ Feature: MamiAds Dashboard
     And user tick already inhabited checkbox
     And owner click "Simpan"
     And user navigates to mamiads dashboard
+    And owner clicks on coba sekarang button
     Then user verify the wording iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
     When user click "off" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user click "Aktifkan" button on pop up switch toggle iklan
