@@ -16,7 +16,7 @@ Feature: BnB feature with background create booking twice
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag    | kost name prod    |
-      | kost reykjavik    | kost reykjavik    |
+      | Kost Reykjavik    | Kost Reykjavik    |
     And tenant booking kost for "Tomorrow"
     And user go to mamikos homepage
     And user logs out as a Tenant user
