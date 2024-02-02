@@ -17,7 +17,6 @@ public class LandingPageOwnerPO {
     Locator daftarkanKosbutton;
     Locator USPsection;
     Locator mblmSection;
-    Locator singgahsiniText;
 
     public LandingPageOwnerPO(Page page) {
         this.page = page;
@@ -29,7 +28,6 @@ public class LandingPageOwnerPO {
         daftarkanKosbutton = page.locator("//*[@class='bg-c-button header-section__cta bg-c-button--primary bg-c-button--lg']");
         USPsection = page.locator(".benefit-section-desktop");
         mblmSection = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Maju Bersama Layanan Mamikos"));
-        singgahsiniText = page.locator("//*[@class='landing-banner__title bg-c-text bg-c-text--heading-1']");
     }
 
     /**
@@ -134,18 +132,14 @@ public class LandingPageOwnerPO {
         playwright.clickOnText(text);
     }
 
+    /**
+     * Click on Landing Page button
+     *
+     * @return
+     */
     public void clickOnButtonLPOwner(String text){
         Locator buttonONLPOwner = page.getByText(text);
         playwright.pageScrollUntilElementIsVisible(buttonONLPOwner);
         playwright.clickOnText(text);
-    }
-
-    /**
-     * Get text on Information Landing Page Owner
-     *
-     * @return text title
-     */
-    public String getTextSinggahsini(){
-        return playwright.getText(singgahsiniText);
     }
 }
