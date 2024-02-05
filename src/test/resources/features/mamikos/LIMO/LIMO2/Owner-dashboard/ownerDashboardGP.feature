@@ -80,7 +80,7 @@ Feature: Owner Dashboard GP
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "088112233454"
 
-  @TEST_LIMO-2579 @TEST_LIMO-2580
+  @TEST_LIMO-2579 @TEST_LIMO-2580 @TEST_LIMO-4026
   Scenario Outline: Owner can't see widget GP and info untuk anda for GP at owner dashboard when doesnt have property active or apartment only
     Given user go to mamikos homepage
     When user login as owner:
