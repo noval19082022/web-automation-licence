@@ -1,4 +1,4 @@
-@COOP-5842 @COOP40 @COOP400
+@COOP-5842 @COOP40 @COOP4
 Feature: Apply Voucher Semi-Annually For Contract Duration
 
   @TEST_COOP-5820 @Automated @COOP @Web

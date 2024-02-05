@@ -538,8 +538,8 @@ public class TenantBillManagementPO {
     /**
      * check upcoming feature
      */
-    public boolean userWillSeeMessageTerminatedContract() {
-        return playwright.isTextDisplayed("Tenant Wl Eight Kamar 3 Lantai 1 menghentikan sewa kos. Mohon periksa tagihan penyewa.");
+    public String userWillSeeMessageTerminatedContract() {
+        return playwright.getText(page.getByTestId("contractTerminateConfirmation").getByRole(AriaRole.PARAGRAPH));
     }
 
     /**
@@ -601,6 +601,7 @@ public class TenantBillManagementPO {
      */
     public void clickKirimUlangKode() {
         playwright.clickOn(krmUlangKodeBtn);
+        playwright.hardWait(2000);
     }
 
     /**
