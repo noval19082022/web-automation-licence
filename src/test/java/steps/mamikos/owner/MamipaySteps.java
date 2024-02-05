@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.MamipayPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PropertySayaPO;
@@ -17,6 +18,7 @@ public class MamipaySteps {
     MamipayPO mamipayPO = new MamipayPO(ActiveContext.getActivePage());
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(ActiveContext.getActivePage());
     PropertySayaPO propertySaya = new PropertySayaPO (ActiveContext.getActivePage());
+    LoadingPO loadingPO = new LoadingPO(ActiveContext.getActivePage());
     Page page1;
 
 
@@ -63,6 +65,8 @@ public class MamipaySteps {
 
     @And("owner check term and condition")
     public void ownerCheckTermAndCondition() {
+        playwright.waitTillPageLoaded(10000.0);
+        loadingPO.waitForLoadingIconDisappear();
         page1 = mamipayPO.clickOnTermAndCondition();
         Assert.assertTrue(mamipayPO.getTitlePusatBantuan(), "Title pusat bantuan doesn't match!");
     }
@@ -79,6 +83,7 @@ public class MamipaySteps {
 
     @Then("verify form {string} for Auto BBK")
     public void verifyFormForAutoBBK(String title) {
+        loadingPO.waitForLoadingIconDisappear();
         Assert.assertEquals(mamipayPO.getTitleForm(), title, "Title doesn't match!");
     }
 

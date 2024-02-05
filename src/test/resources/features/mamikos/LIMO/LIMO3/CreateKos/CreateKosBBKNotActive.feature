@@ -6,13 +6,13 @@ Feature: Create new kos with owner not active BBK
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password |
-      | 082233545516 | 12345678 |
+      | phone stag    | password  |
+      | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected Data BBK Automation"
+    And owner click add another type from kos "Kost Rejected bbk automation"
     And owner click "Tipe New BBK Rejected" in add new room type pop up and click next
     And owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
@@ -20,7 +20,7 @@ Feature: Create new kos with owner not active BBK
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     And user see activate mamipay form with Bank Account Number "977689900"
-    And user see active mamipay form with Bank Owner Name "Rega Test"
+    And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
@@ -32,7 +32,7 @@ Feature: Create new kos with owner not active BBK
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner in admin kos owner page
+    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
     When admin click on "BBK Data" link button
@@ -42,13 +42,13 @@ Feature: Create new kos with owner not active BBK
   Scenario: [Add new kost][Kos]Create new room type from "Buat baru" when user already active mamipay && all bbk kos not active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password |
-      | 082233545516 | 12345678 |
+      | phone stag    | password  |
+      | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected Data BBK Automation"
+    And owner click add another type from kos "Kost Rejected bbk automation"
     And owner click "Buat Baru" in add new room type pop up and click next
     Then verify message "Anda belum mengisi nama tipe kamar ini." the room type
     When owner input room type with "{random_text}"
@@ -73,7 +73,7 @@ Feature: Create new kos with owner not active BBK
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     And user see activate mamipay form with Bank Account Number "977689900"
-    And user see active mamipay form with Bank Owner Name "Rega Test"
+    And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
@@ -85,18 +85,18 @@ Feature: Create new kos with owner not active BBK
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner in admin kos owner page
+    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
     When admin click on "BBK Data" link button
     And admin reject BBK kos
 
-  @TEST_LIMO-2804 @CreateNewKosBBKNotActv @continue
+  @TEST_LIMO-2804 @CreateNewKosBBKNotActv @continue @upikMaint
   Scenario: [Add new kost][Kos]Create new kost when user already active mamipay && all bbk kos not active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password |
-      | 082233545516 | 12345678 |
+      | phone stag    | password  |
+      | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
@@ -158,7 +158,7 @@ Feature: Create new kos with owner not active BBK
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     And user see activate mamipay form with Bank Account Number "977689900"
-    And user see active mamipay form with Bank Owner Name "Rega Test"
+    And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
@@ -170,7 +170,7 @@ Feature: Create new kos with owner not active BBK
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search phone owner in admin kos owner page
+    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
     And admin click on "BBK Data" link button

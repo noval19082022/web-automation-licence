@@ -15,6 +15,7 @@ import pageobject.owner.AddTenantPO;
 import pageobject.owner.PropertySayaPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class PropertySayaSteps {
     LoadingPO loading = new LoadingPO(page);
     AddTenantPO addTenantPO = new AddTenantPO(page);
 
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     private final JavaHelpers javaHelpers = new JavaHelpers();
     private String dailyPrice = null;
@@ -574,6 +576,7 @@ public class PropertySayaSteps {
     @And("owner click lanjutkan button for next steps")
     public void ownerClickLanjutkanButtonForNextSteps() {
         propertySaya.clickOnLanjutkan();
+        loading.waitForLoadingIconDisappear();
     }
 
     @And("owner invalid upload photo {string}")
@@ -601,6 +604,8 @@ public class PropertySayaSteps {
 
     @And("owner input the price room as expected")
     public void ownerInputThePriceRoomAsExpected(DataTable dataTable) {
+        playwright.waitTillPageLoaded(10000.0);
+        loading.waitForLoadingIconDisappear();
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
 
         propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
@@ -642,6 +647,8 @@ public class PropertySayaSteps {
 
     @And("owner click add another type from kos {string}")
     public void ownerClickAddAnotherTypeFromKos(String kosName) {
+        playwright.waitTillPageLoaded(10000.0);
+        loading.waitForLoadingIconDisappear();
         propertySaya.clickAddAnotherTypeFromKos(kosName);
         Mamikos.setPropertyKosName(kosName);
     }
@@ -653,6 +660,7 @@ public class PropertySayaSteps {
 
     @Then("verify message {string} the room type")
     public void verifyMessageTheRoomType(String roomTypeMessageText) {
+        loading.waitForLoadingIconDisappear();
         Assert.assertEquals(propertySaya.getRoomTypeMessage(roomTypeMessageText), roomTypeMessageText, "Room type message doesn't match!");
     }
 
@@ -677,6 +685,7 @@ public class PropertySayaSteps {
 
     @When("owner select the kost type {string}")
     public void ownerSelectTheKostType(String kosType) {
+        loading.waitForLoadingIconDisappear();
         propertySaya.selectKostType(kosType);
     }
 
@@ -790,6 +799,8 @@ public class PropertySayaSteps {
 
     @When("owner click {string} ketersediaan kamar")
     public void ownerClickKetersediaanKamar(String text) {
+        playwright.waitTillPageLoaded(10000.0);
+        loading.waitForLoadingIconDisappear();
         propertySaya.clickOnKetersediaanKamar(text);
     }
 
