@@ -39,10 +39,10 @@ Feature: Kost Validation
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
-      | 08100000616  |  0891111020199  | qwerty123 |
+      | 08100000616    |  0891111020199  | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag            			    | kost name prod              |
-      | Kost Singgahsini Rocket Tipe A Kediri   | Kost Singgahsini Arac Ipi   |
+      | kost name stag            			                 | kost name prod              |
+      | Kost Singgahsini Rocket Kediri Tipe A Badas Kediri   | Kost Singgahsini Arac Ipi   |
     And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Kos ini khusus untuk mahasiswa"
