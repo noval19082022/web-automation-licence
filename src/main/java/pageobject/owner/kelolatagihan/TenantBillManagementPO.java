@@ -538,8 +538,8 @@ public class TenantBillManagementPO {
     /**
      * check upcoming feature
      */
-    public boolean userWillSeeMessageTerminatedContract() {
-        return playwright.waitTillLocatorIsVisible(page.getByTestId("statusContractLabel-req_terminate"));
+    public String userWillSeeMessageTerminatedContract() {
+        return playwright.getText(page.getByTestId("contractTerminateConfirmation").getByRole(AriaRole.PARAGRAPH));
     }
 
     /**

@@ -237,8 +237,9 @@ public class OwnerManageBillSteps {
 
     @Then("user will see message request terminated contract")
     public void userWillSeeMessage() {
-        Assert.assertTrue(billManage.userWillSeeMessageTerminatedContract());
+        Assert.assertTrue(billManage.userWillSeeMessageTerminatedContract().contains("menghentikan sewa kos"), "Terminate text is not displayed");
     }
+
     @Then("user can see help center page")
     public void userWillSeeMessageForOwner() {
         Assert.assertTrue(billManage.userCanSeeHelpCenterPage());
