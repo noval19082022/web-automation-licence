@@ -36,6 +36,7 @@ public class HomepagePO {
     Locator year2023;
     Locator tglExpiredAkhir;
     Locator year2024;
+    Locator year2025;
     Locator pilihProdukDropdown;
     Locator produkValue;
     Locator pilihBSEDropdown;
@@ -747,9 +748,9 @@ public class HomepagePO {
         year = page.locator("//span[@class='month__year_btn up']");
         playwright.clickOn(year);
 
-        //clicks Year 2024
-        year2024 = page.locator("//span[9]");
-        playwright.clickOn(year2024);
+        //clicks Year 2025
+        year2025 = page.locator("//span[10]");
+        playwright.clickOn(year2025);
 
         //clicks Month December
         monthDecember = page.locator("//span[12]");
@@ -778,7 +779,8 @@ public class HomepagePO {
     public void ticksBSE(String pilihBSE) {
         playwright.clickOn(pilihBSEDropdown);
 
-        BSEValue = page.getByText(pilihBSE);
+        BSEValue = page.locator("label[for='search-checkbox-bse-30']");
+        playwright.pageScrollInView(BSEValue);
         playwright.clickOn(BSEValue);
     }
 

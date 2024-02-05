@@ -1,8 +1,8 @@
-@regression @pman2 @pms @detailpropertypms
+@regression @pms @detailpropertypms
 
 Feature: Kontrak Kerja Sama
 
-  @continue @TEST_PMAN-3950
+  @continue @TEST_PMAN-3950 @pman2
   Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
@@ -28,7 +28,7 @@ Feature: Kontrak Kerja Sama
       | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
 
-  @continue @TEST_PMAN-3948
+  @continue @TEST_PMAN-3948 @pman2
   Scenario: See and Edit Informasi Transfer Pendapatan
     Then informasi transfer pendapatan should be match with data
       | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
@@ -81,7 +81,7 @@ Feature: Kontrak Kerja Sama
     Then kontrak kerja sama should not contains hybrid rev share
 
 
-  @TEST_PMAN-3852
+  @TEST_PMAN-3852 @pman2
   Scenario: See Rincian Tipe Kamar dan Harga
     When admin go to pms singgahsini
     And admin go to detail property "Khusus Automation"
