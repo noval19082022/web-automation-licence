@@ -331,8 +331,8 @@ public class PaymentSteps {
 
     @When("system display remaining payment {string} use mamipoin for payment monthly")
     public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
-        String remainingPaymentBefore = "Rp10.006.000";
-        String remainingPaymentAfter = "Rp9.881.544";
+        String remainingPaymentBefore = "Rp958.000";
+        String remainingPaymentAfter = "Rp957.050";
 
         if(condition.equals("before")){
             Assert.assertEquals(invoice.getTotalCost(), remainingPaymentBefore, "Remaining payment before doesn't match");

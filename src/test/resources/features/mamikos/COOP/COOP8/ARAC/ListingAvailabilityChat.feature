@@ -10,7 +10,7 @@
         | 0891111020199  |  0891111020199  | mamikosqa123 |
       And tenant search kost then go to kost details:
         | kost name stag               | kost name prod               |
-        | Kost General Irvi Automation | Kost General Irvi Automation |
+        | Kost General Irvi Automation Abiansemal Badung | Kost General Irvi Automation |
       And user click chat in kos detail
       And user select question "Halo, ada kos yang masih kosong?"
       And user click send chat from popup
