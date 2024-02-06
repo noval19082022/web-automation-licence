@@ -62,8 +62,8 @@ Feature: Kost List
   Scenario Outline: Verify pagination in Kost List
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | password        |
-      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin access menu "Kost List" sub menu of management level
     And admin clicks on page number "<number>" of kost list
     Then system display kost list page number "<number>" is active
@@ -78,8 +78,8 @@ Feature: Kost List
   Scenario: Search Kost List by Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | password        |
-      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin access menu "Kost List" sub menu of management level
     #serch by kost name
     When admin search kost by name "Tobelo Asri"
@@ -89,8 +89,8 @@ Feature: Kost List
   Scenario: Search Kost List by Owner Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | password        |
-      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin access menu "Kost List" sub menu of management level
     #serach by owner name
     When admin search kost by owner name "Yudha Chandra"
@@ -100,8 +100,8 @@ Feature: Kost List
   Scenario: Search Kost List by Owner Phone Number
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | password        |
-      | admin.automation@mamiteam.com | 4dm!nAutomat10n |
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin access menu "Kost List" sub menu of management level
     #search by owner phone number
     When admin search kost by owner phone number "085947715987"

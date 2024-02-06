@@ -39,7 +39,7 @@ public class KostListPO {
         ownerName = page.getByPlaceholder("Owner Name");
         ownerPhoneNumber = page.getByPlaceholder("Owner Phone Number");
         allLevelDropdown = page.locator("select[name=\"level-id\"]");
-        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        searchBtn = page.locator("#buttonSearch");
         editKostLevelBtn = page.locator("//a[contains(text(),'Edit Kost Level')]");
         kosLevelDropdown = page.locator("//select[@id='level-id']");
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
