@@ -1,5 +1,5 @@
-@BBM8 @riwayatHadiah
-Feature: Owner - Riwayat Hadiah
+@BBM @riwayatHadiah
+Feature: Owner - Riwayat Hadiah [Dropped - revamp]
 
   Scenario: Reward List Status Success
     Given user go to mamikos homepage

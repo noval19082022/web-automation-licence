@@ -63,7 +63,7 @@ Feature: FTUE Booking Benefit
       | 081223344550 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     When user dismiss FTUE booking benefit
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:

@@ -11,7 +11,7 @@ Feature: Owner Confirm Booking - Remove Pilih Di Tempat
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag             | kost name prod             |
-      | Kos Dhiandra Auto Listing  | Kos Dhiandra Auto Listing  |
+      | Kos Dhiandra Auto Listing Balik Bukit Lampung Barat     | Kos Dhiandra Auto Listing  |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 

@@ -9,7 +9,7 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
       | 0890000000313 | 0890000000313 | Bismillah@01 |
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod                          |
-      | kost jawa Tobelo Utara Halmahera Utara  | kost jawa Tobelo Utara Halmahera Utara  |
+      | kost Jawa Tobelo Utara Halmahera Utara  | kost Jawa Tobelo Utara Halmahera Utara  |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
