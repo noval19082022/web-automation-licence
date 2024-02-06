@@ -87,4 +87,9 @@ public class KostOwnerSteps {
     public void adminBangkrupuxSearchPhoneOwnerInAdminKosOwnerPage() {
         kostOwner.searchPhoneOwner(Mamikos.getPhoneOwner());
     }
+
+    @And("admin bangkrupux search phone owner {string} in admin kos owner page")
+    public void adminBangkrupuxSearchPhoneOwnerInAdminKosOwnerPage(String phoneOwner) {
+        kostOwner.searchPhoneOwner(phoneOwner);
+    }
 }
