@@ -26,7 +26,7 @@
         | 0891111020199  |  0891111020199  | mamikosqa123 |
       And tenant search kost then go to kost details:
         | kost name stag                       | kost name prod                       |
-        | Kost Singgahsini Full Ipi Automation | Kost Singgahsini Full Ipi Automation |
+        | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar | Kost Singgahsini Full Ipi Automation |
       And tenant can see kamar penuh
       Then tenant can see "Ikut daftar tunggu" button
 
