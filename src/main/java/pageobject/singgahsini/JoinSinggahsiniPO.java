@@ -3,6 +3,7 @@ package pageobject.singgahsini;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -73,11 +74,7 @@ public class JoinSinggahsiniPO {
      * Navigate to singgahsini.id
      */
     public void navigateToSinggahsiniId() {
-        if (ENV.equalsIgnoreCase("stag")){
-            playwright.navigateTo("https://jambu.kerupux.com/singgahsini",30000.0);
-        } else if (ENV.equalsIgnoreCase("prod")) {
-            playwright.navigateTo("https://singgahsini.id/",30000.0);
-        }
+        playwright.navigateTo(Mamikos.Singgahsini_URL,30000.0);
     }
 
     /**
