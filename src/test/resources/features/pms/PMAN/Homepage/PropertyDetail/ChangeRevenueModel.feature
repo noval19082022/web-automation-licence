@@ -1,4 +1,4 @@
-@pman2 @pms @disbursement @changeRevenueModel
+@pms @disbursement @changeRevenueModel
 
 Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
 
