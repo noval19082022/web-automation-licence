@@ -76,7 +76,7 @@ Feature: Tenant - Login
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user can favorite kost not login
     Then user see login pop up in favorite page
 

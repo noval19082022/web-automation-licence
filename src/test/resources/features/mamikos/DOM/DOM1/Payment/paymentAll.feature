@@ -23,7 +23,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
-      | Desta Automation tobelo | kost payment desta 2 |
+      | Desta Automation Tobelo | kost payment desta 2 |
     And tenant booking kost for "today"
     And tenant logs out
 
