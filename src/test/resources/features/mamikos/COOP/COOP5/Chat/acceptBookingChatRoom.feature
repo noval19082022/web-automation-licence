@@ -29,7 +29,7 @@ Feature: Accept Booking from Chat room
         | 08100000622   | 0890867321212 | qwerty123     |
       And tenant search kost then go to kost details:
         | kost name stag            | kost name prod            |
-        | kost automation new coop kece | Kost Adi Auto FullPaid AddFee Deposit       |
+        | Kost Automation New Coop Kece | Kost Adi Auto FullPaid AddFee Deposit       |
       And tenant booking kost for "today"
       Then tenant should success booking kost
 

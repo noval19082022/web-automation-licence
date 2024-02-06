@@ -14,7 +14,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                     | kost name prod                        |
-      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
+      | Kost Surabaya Cancel Booking Homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     Given user go to mamikos homepage
@@ -41,7 +41,7 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                     | kost name prod                        |
-      | kost surabaya cancel booking homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
+      | Kost Surabaya Cancel Booking Homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     And user go to mamikos homepage

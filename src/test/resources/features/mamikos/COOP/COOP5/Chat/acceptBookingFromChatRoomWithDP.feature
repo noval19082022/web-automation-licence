@@ -25,7 +25,7 @@ Feature: Accept Booking from Chat room with DP
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag      | kost name prod                        |
-      | kost automation new coop kece | Kost Adi Auto FullPaid AddFee Deposit |
+      | Kost Automation New Coop Kece | Kost Adi Auto FullPaid AddFee Deposit |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
