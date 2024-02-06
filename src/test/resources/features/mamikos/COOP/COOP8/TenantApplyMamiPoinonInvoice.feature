@@ -7,7 +7,7 @@ Feature: Tenant Apply MamiPoin on Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0890867321215 | 0890867321215 | mamikosqa123 |
+      | 08999444999   | 0890867321215 | qwerty123    |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1

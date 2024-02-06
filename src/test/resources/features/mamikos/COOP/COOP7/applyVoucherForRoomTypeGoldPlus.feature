@@ -25,7 +25,7 @@ Feature: Apply Voucher For Room Type Gold Plus
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod        |
-      | adi automate gp1        | Kos Rampak Gasim      |
+      | Adi Automate Gp1        | Kos Rampak Gasim      |
     And tenant booking kost
     Then tenant should success booking kost
 
