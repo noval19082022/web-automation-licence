@@ -17,7 +17,7 @@
     And tenant will see "Fasilitas kamar mandi" on informasi kos
     Then tenant will see "Fasilitas umum" on informasi kos
 
-  @TEST_COOP-1996 @forum @kost-saya @continue
+  @TEST_COOP-1996 @forum @kost-saya
     Scenario: [Kost Saya][Forum ]When tenant click Forum and not interested (BBM-893)
     When tenant navigate to kost saya page
     And tenant clicks on forum menu
