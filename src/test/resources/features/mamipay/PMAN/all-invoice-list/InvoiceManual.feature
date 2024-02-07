@@ -2,7 +2,7 @@
 
   Feature: All Invoice List
 
-    @TEST_PMAN-5813 @pman @continue
+    @TEST_PMAN-5813 @pman @continue @pman-prod
     Scenario: Invoice manual in All Invoice List Menu
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:

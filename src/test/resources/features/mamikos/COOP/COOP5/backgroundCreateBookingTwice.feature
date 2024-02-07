@@ -11,7 +11,7 @@ Feature: BnB feature with background create booking twice
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                        | kost name prod            |
-      | Kost Purwokerto Reject n Waiting Feature Tobelo Utara Halmahera Utara | Kost Purwokerto Reject n Waiting Feature Tobelo Utara Halmahera Utara|
+      | Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara | Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara|
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -28,7 +28,7 @@ Feature: BnB feature with background create booking twice
       | phone stag     | phone prod    | password     |
       | 0890000000289  | 0890000000289 | Bismillah@01 |
     And owner navigate to pengajuan booking page
-    And owner choose filter kost for "Kost Purwokerto Reject n Waiting Feature Tobelo Utara Halmahera Utara"
+    And owner choose filter kost for "Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara"
     And user clicks on Booking Details button
     And owner reject booking from view detail
     And owner select reason reject kos "Dokumen tidak lengkap"

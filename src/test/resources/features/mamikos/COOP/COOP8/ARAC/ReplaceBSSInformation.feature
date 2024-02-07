@@ -10,7 +10,7 @@ Feature: Replace BSS Information
       | 0891111020198  |  0891111020198  | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
-      | Kost General Irvi Automation | Kost General Irvi Automation |
+      | Kost General Irvi Automation Abiansemal Badung | Kost General Irvi Automation |
     And tenant open calendar from kost detail
     Then tenant will see BSS Information "Berikut adalah tanggal check-in (mulai ngekos) yang tersedia."
 

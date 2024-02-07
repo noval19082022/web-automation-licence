@@ -2006,6 +2006,7 @@ public class KostDetailsPO {
      * @return boolean
      */
     public boolean isTanyaPemilikVisible(){
+        playwright.waitFor(tanyaPemilikKostLink);
         return tanyaPemilikKostLink.isVisible();
     }
 

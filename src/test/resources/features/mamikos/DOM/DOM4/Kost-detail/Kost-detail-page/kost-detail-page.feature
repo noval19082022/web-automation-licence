@@ -60,7 +60,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility bath section on detail page
 
   @TEST_COOP-5477 @DOM4 @automated @discovery-platform @facility @kost-details @web
@@ -100,7 +100,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility share section on detail page
     #user want to see more detail facility share
     When user want to see all facility share
@@ -125,7 +125,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility parking section on detail page
 
   @TEST_COOP-5473 @DOM4 @automated @discovery-platform @kost-details @kost-rule @web

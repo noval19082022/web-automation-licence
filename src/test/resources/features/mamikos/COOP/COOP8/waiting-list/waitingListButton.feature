@@ -9,7 +9,7 @@ Feature: Waiting List - Kost Detail
       | 0891111020199 | 0891111020199 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag                         | kost name prod              |
-      | Kost Apik Mars pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
+      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can see kamar penuh
     When tenant can see "Ikut daftar tunggu" button
     Then tenant can see "Lihat tipe lain" button
@@ -21,7 +21,7 @@ Feature: Waiting List - Kost Detail
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                | kost name prod              |
-      | Kost Singgahsini Yosua Tipe A Halmahera utara | Kost Singgahsini Arac Penuh |
+      | Kost Singgahsini Yosua Tipe A Halmahera Utara | Kost Singgahsini Arac Penuh |
     And tenant can see kamar penuh
     Then tenant can see "Ikut daftar tunggu" button
 
@@ -30,19 +30,19 @@ Feature: Waiting List - Kost Detail
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod              |
-      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Singgahsini Arac Penuh |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Singgahsini Arac Penuh |
     Then tenant can see kamar penuh
     Then tenant can see "Ikut daftar tunggu" button
     When tenant can see "Lihat kost lain" button
     And tenant click on "Lihat kos lain" button
     Then tenant see "kamu mungkin menyukainya" section
 
-  @TEST_COOP-4303  @waiting-list @web @continue
+  @TEST_COOP-4303 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when doesn't have room type and recomendation kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                       | kost name prod                       |
-      | Kost Singgahsini Full Ipi Automation | Kost Singgahsini Full Ipi Automation |
+      | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar | Kost Singgahsini Full Ipi Automation |
     And tenant can see kamar penuh
     Then tenant can see "Ikut daftar tunggu" button
 
@@ -51,30 +51,30 @@ Feature: Waiting List - Kost Detail
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                       |
-      | Rega Satu Parangtritis Type G | Kost Singgahsini Full Ipi Automation |
+      | Rega Satu Parangtritis Type G | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar |
     Then tenant can see kamar penuh
     When tenant can see "Tanya pemilik" button
     Then tenant can see "Lihat tipe lain" button
     And tenant click on "Lihat tipe lain" button
     Then tenant see "lihat tipe" section
 
-  @TEST_COOP-4305    @waiting-list @web @continue
+  @TEST_COOP-4305 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P2 when have recomendation kost
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                      | kost name prod                       |
-      | Kost Putra Pak Sunarto Sewon Bantul | Kost Singgahsini Full Ipi Automation |
+      | Kost Putra Pak Sunarto Sewon Bantul | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar |
     When tenant can see "Tanya pemilik" button
     When tenant can see "Lihat kost lain" button
     And tenant click on "Lihat kos lain" button
     Then tenant see "kamu mungkin menyukainya" section
 
-  @TEST_COOP-4306    @waiting-list @web
+  @TEST_COOP-4306 @waiting-list @web @BBM8
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list for kost P2 when doesn't room type and kost recomendation
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag             | kost name prod                       |
-      | Kost Rini Dua Menou Nabire | Kost Singgahsini Full Ipi Automation |
+      | Kost Rini Dua Menou Nabire | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar |
     And tenant can see kamar penuh
     Then tenant can see "Tanya pemilik" button
 
@@ -86,12 +86,12 @@ Feature: Waiting List - Kost Detail
       | 0810000235 | 0891111020199 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                         | kost name prod              |
-      | Kost Apik Mars pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
+      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can succes waiting list submitted with "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
     When tenant can see "Lihat tipe lain" button
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod              |
-      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Singgahsini Arac Penuh |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Singgahsini Arac Penuh |
     Then tenant can see kamar penuh
     When tenant can see "Ikut daftar tunggu" button
     Then tenant can see "Lihat kost lain" button
@@ -100,7 +100,7 @@ Feature: Waiting List - Kost Detail
   Scenario: [Web][Waiting List ][Kost detail]Check kost detail when already submit waiting list and acces another kost with available room
     When tenant search kost then go to kost details:
       | kost name stag                      | kost name prod              |
-      | Kost Apik Mars ungu Halmahera Utara | Kost Singgahsini Arac Penuh |
+      | Kost Apik Mars Ungu Halmahera Utara | Kost Singgahsini Arac Penuh |
     And user want to dismiss FTUE
     Then tenant should see ajukan sewa button is "enable"
     And user logs out as a Tenant user
@@ -142,11 +142,11 @@ Feature: Waiting List - Kost Detail
     And tenant will see that the text "Tenant Satu Enam" is displayed
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod  |
-      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
     Then tenant can see "Lihat kost lain" button
     And tenant can see "Ikut daftar tunggu" button
 
-  @TEST_COOP-4309 @waiting-list @web
+  @TEST_COOP-4309 @waiting-list @web @BBM8
   Scenario: Check waiting list button when have active contract and room not fully for another tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -154,13 +154,13 @@ Feature: Waiting List - Kost Detail
       | 081000006116 | 08100000622 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod  |
-      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
     And tenant click "Ikut Daftar Tunggu"
     And tenant click "Secepatnya"
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag  | kost name prod  |
-      | Kost Arac Penuh | Kost Arac Penuh |
+      | Kost Airlangga Berdikari 1 | Kost Arac Penuh |
     Then tenant can see "Ajukan sewa button" button
     And tenant can see "Tanya pemilik" button
 
@@ -169,7 +169,7 @@ Feature: Waiting List - Kost Detail
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod  |
-      | Kost Fahmi Singgahsini Ketiga Indralaya | Kost Arac Penuh |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
     And tenant click "Ikut Daftar Tunggu"
     Then tenant will see that the text "Login Pencari Kos" is displayed
 

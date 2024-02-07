@@ -17,7 +17,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user click chat in kos detail
     Then user login from kost detail via phone number:
       | phone stag    | phone prod    | password     |
@@ -31,7 +31,7 @@ Feature: Chat and Chat Optimization
       | 081223344550  | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user click chat in kos detail
     Then user see phone number field and selectable question options :
       | Saya butuh cepat nih. Bisa booking sekarang? |
@@ -106,11 +106,11 @@ Feature: Chat and Chat Optimization
     Then chat room appear with latest message "<autoreply text>"
     Examples:
       | name                     | property                                    | question                  | autoreply text                                                                                                                                          |
-      | Ada diskon               | Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
+      | Ada diskon               | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
       | Masih ada kamar          | Kos Dom Automation PLM Tipe E Kretek Bantul | Masih ada kamar?          | Ada. Di kos ini masih ada 10 kamar kosong, sesuai update dari pemilik pada                                                                               |
-      | Tanya-tanya dulu         | Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
-      | Cara menghubungi pemilik | Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
-      | Alamat kos di mana       | Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                               											 |
+      | Tanya-tanya dulu         | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
+      | Cara menghubungi pemilik | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
+      | Alamat kos di mana       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                               											 |
       | Bisa pasutri             | Kos Dom Automation PLM Tipe C Kretek Bantul | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
       | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe E Kretek Bantul | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
       | Boleh bawa hewan         | Kos Dom Automation PLM Tipe C Kretek Bantul | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |

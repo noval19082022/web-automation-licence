@@ -13,7 +13,7 @@ Feature: Gold Plus
 
   @TEST_LIMO-146 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
-    Given user click "Ubah"
+    When user click on ubah package gold plus button
     When user choose Goldplus package 2
     Then user will see that the text "Goldplus 2 (4 bulan) Rp320.000" is displayed
 
@@ -30,7 +30,8 @@ Feature: Gold Plus
 
   @TEST_LIMO-150 @checkBenefit @continue
   Scenario: Make sure detail Check Other Benefits on GP1/2
-    Given user click "Ubah"
+#    Given user click "Ubah"
+    When user click on ubah package gold plus button
     When user click "Lihat Detail Manfaat"
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 

@@ -157,7 +157,7 @@ Feature: Search Contract
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
-      | Desta Automation tobelo | kost payment desta 2 |
+      | Desta Automation Tobelo Halmahera Utara | kost payment desta 2 |
     And tenant booking kost for "today"
 
 		#  Scenario: Owner accept booking from tenant

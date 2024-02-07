@@ -82,6 +82,7 @@ public class GoldplusPO {
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
         gpPackageText = page.locator("//p[.='Jenis Pembayaran']/../../following-sibling::div");
+        gpPackageText = page.getByText("Rincian Pembayaran");
         tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
         rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
         saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
@@ -627,5 +628,13 @@ public class GoldplusPO {
             element = page.querySelector(filterBilling);
             element.click();
         }
+    }
+
+    /**
+     * Click 'Perpanjang' button on chat room
+     */
+    public void clickOnPerpanjangBtnOnChatRoom(){
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+        playwright.clickOnTextButton("Perpanjang");
     }
 }

@@ -298,7 +298,7 @@ public class NavigatesSteps {
 
     @And("admin go to room level menu")
     public void adminGoToRoomLevelMenu() {
-        playwright.navigateTo(Mamikos.URL + "/admin/kost-level/room-level", 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX + "/kost-level/room-level", 30000.0, LoadState.LOAD);
     }
 
     @When("owner navigates to broadcast chat page")

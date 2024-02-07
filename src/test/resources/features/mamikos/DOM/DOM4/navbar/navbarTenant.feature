@@ -34,7 +34,7 @@ Feature: Navbar Tenant
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user in kost detail navbar before login appears
 
   @TEST_DOM-1852 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-search
@@ -92,6 +92,6 @@ Feature: Navbar Tenant
       | 089988776655 | 089988776655 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then navbar after login appears
 

@@ -14,10 +14,13 @@ public class KostListSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     KostListPO kostList = new KostListPO(page);
 
+    private static final String MAMIKOS = "src/main/resources/mamikos.properties";
+    public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
+
     //---test data---//
     private String kostLevel = "src/test/resources/testdata/bangkerupuxAdmin/kostLevel.properties";
     private String kostPMANList = "src/test/resources/testdata/bangkerupuxAdmin/kostList.properties";
-    private String regularLevel = JavaHelpers.getPropertyValue(kostLevel, "kosLevelRegular");
+    private String regularLevel = JavaHelpers.getPropertyValue(kostLevel, "kosLevelRegular_" + ENV);
     private String kostPMAN = JavaHelpers.getPropertyValue(kostPMANList, "kostPMAN");
 
     @Then("system displaying content of page kost list")
@@ -70,7 +73,7 @@ public class KostListSteps {
         kostList.searchKostName(kostPMAN);
 
         if (level.equalsIgnoreCase("Reguler")){
-            Assert.assertEquals(kostList.getLevelName(), "Reguler", "The Level Name is not Equal");
+            Assert.assertEquals(kostList.getLevelName(), regularLevel, "The Level Name is not Equal");
         } else {
             Assert.assertEquals(kostList.getLevelName(), level,"The Level Name is not Equal");
         }

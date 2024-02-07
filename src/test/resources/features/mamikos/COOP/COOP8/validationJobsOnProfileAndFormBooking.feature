@@ -9,7 +9,7 @@ Feature: Edit profile for jobs as Lainnya
       | 08100000630   | 08100000630   | qwerty123     |
     And tenant search kost then go to kost details:
       | kost name stag                               | kost name prod                         |
-      | kost jawa Tobelo Utara Halmahera Utara       | kost jawa Tobelo Utara Halmahera Utara |
+      | Kost Jawa Tobelo Utara Halmahera Utara       | kost Jawa Tobelo Utara Halmahera Utara |
     And user want to dismiss FTUE
     And tenant fill booking data for "tomorrow" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page

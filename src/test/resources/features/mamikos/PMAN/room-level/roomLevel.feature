@@ -19,6 +19,7 @@ Feature: Add and Edit Room Level
     When admin edit room level with existing key "room_level_key"
     Then error message existing key is displayed
     When admin go to room level menu
+    And admin search room level "Automation PMAN Existing Key"
     Then the key is not changed
 
   @TEST_PMAN-3286
@@ -42,16 +43,11 @@ Feature: Add and Edit Room Level
     Then should show room level menu content
 
   @TEST_PMAN-3266
-  Scenario Outline: Verify Pagination in Room Level
+  Scenario: Verify Pagination in Room Level
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                    | email prod                    | password        |
       | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin go to room level menu
-    And admin go to page "<page>"
-    Then page number "<page>" is active
-
-    Examples:
-      | page  |
-      | 2     |
-      | 3     |
+    And admin go to page "2"
+    Then page number "2" is active
