@@ -44,7 +44,8 @@ Feature: Check Period Goldplus Page
     And owner should successfully log out
 
     #scenario change label favorite
-    Scenario: Setting label favorite change to yes
+  @continue
+  Scenario: Setting label favorite change to yes
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -52,7 +53,7 @@ Feature: Check Period Goldplus Page
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to active
 
-  @TEST_LIMO-3146 @continue
+  @TEST_LIMO-3146
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
     #Scenario: Setting label favorite more than 1
     Then admin successfully adds additional favorite labels

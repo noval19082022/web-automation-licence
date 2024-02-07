@@ -43,6 +43,7 @@ public class GoldplusSteps {
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
+        playwright.waitTillPageLoaded();
         if (home.getURL().equals(Mamikos.URL+"/goldplus/submission/packages")){
             goldplus.clickOnGPPackage(paket);
         } else{
@@ -153,7 +154,7 @@ public class GoldplusSteps {
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
         playwright.clickOnTextButton("Irvi Tenant Add Ons");
-        goldplus.clickOnPerpanjangBtn();
+        goldplus.clickOnPerpanjangBtnOnChatRoom();
     }
 
     @When("owner wants to extends Goldplus from notif center")

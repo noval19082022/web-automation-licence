@@ -214,14 +214,11 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-    When owner goes to broadcast chat
-    And owner click "Tambah Broadcast Chat"
-    And user enter text "Kos Fathul Khair Jetis Yogyakarta" on Broadcast list kos
-    And user click "Kos Fathul Khair Jetis Yogyakarta"
-    And user click "Pilih Kos" button
-    And user click "Masukan Pesan"
-    And user selects message row number 1 on the broadcast chat dashboard
-    And user click "Pilih Pesan"
+
+    When owner navigates to broadcast chat page
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     And user input message on Broadcast Chat "<Messages>"
     And user click "Preview Pesan" button
     Then user should see the message "Mohon untuk tidak mengisi nomor handphone/email/link" displayed under text field
@@ -237,14 +234,11 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-    When owner navigates to "/broadcast-chat"
-    And owner click "Tambah Broadcast Chat"
-    And user enter text "Kos Fathul Khair Jetis Yogyakarta" on Broadcast list kos
-    And user click "Kos Fathul Khair Jetis Yogyakarta"
-    And user click "Pilih Kos" button
-    And user click "Masukan Pesan"
-    And user selects message row number 1 on the broadcast chat dashboard
-    And user click "Pilih Pesan"
+
+    When owner navigates to broadcast chat page
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     And user input multiple lanes message on Broadcast Chat:
     """
     Mamikos memanfaatkan teknologi untuk berkembang dari aplikasi cari kos menjadi aplikasi yang memudahkan calon anak kos untuk booking properti kos
@@ -258,18 +252,13 @@ Feature: Broadcast Chat Owner
   @TEST_LIMO-1145 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Create Broadcast chat]user want to back from preview message menu
     Given user go to mamikos homepage
-    Given user login as owner:
+    And user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-    When user click "Fitur Promosi"
-    And user click "Broadcast Chat"
-    And owner click "Tambah Broadcast Chat"
-    And user enter text "Kos Fathul Khair Jetis Yogyakarta" on Broadcast list kos
-    And user click "Kos Fathul Khair Jetis Yogyakarta"
-    And user click "Pilih Kos" button
-    And user click "Masukan Pesan"
-    And user selects message row number 1 on the broadcast chat dashboard
-    And user click "Pilih Pesan"
+    When owner navigates to broadcast chat page
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     And user input message on Broadcast Chat "Kopi Kapal Api dan Udud Jarcok Filter"
     And user click "Preview Pesan" button
     Then user see "Kopi Kapal Api dan Udud Jarcok Filter" on Preview Broadcast Message
