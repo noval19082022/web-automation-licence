@@ -35,4 +35,11 @@ public class PlaywrightBrowserContextHelpers {
     public void addCookies(List<Cookie> cookies) {
         context.addCookies(cookies);
     }
+
+    /**
+     * Clear all cookies from the current context
+     */
+    public void clearCookies() {
+        context.clearCookies();
+    }
 }

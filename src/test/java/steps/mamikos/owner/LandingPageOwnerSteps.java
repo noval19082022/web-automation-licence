@@ -9,8 +9,6 @@ import org.testng.Assert;
 import pageobject.owner.LandingPageOwnerPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class LandingPageOwnerSteps {
     Page page = ActiveContext.getActivePage();
     LandingPageOwnerPO landingPageOwnerPO = new LandingPageOwnerPO(page);
