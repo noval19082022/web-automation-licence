@@ -9,7 +9,7 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
       | 0890000000313 | 0890000000313 | Bismillah@01 |
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod                          |
-      | kost Jawa Tobelo Utara Halmahera Utara  | kost Jawa Tobelo Utara Halmahera Utara  |
+      | Kost Jawa Tobelo Utara Halmahera Utara  | kost Jawa Tobelo Utara Halmahera Utara  |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
@@ -24,7 +24,7 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod       |
-      | Kost Cibinong Bogor COOP  | kost cibinong bogor  |
+      | Kost Cibinong Bogor COOP Kece | kost cibinong bogor  |
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
     Then user will open new tab and go to Booking form
