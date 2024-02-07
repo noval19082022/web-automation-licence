@@ -1,5 +1,6 @@
 package utilities;
 
+import com.microsoft.playwright.options.Cookie;
 import data.mamikos.Mamikos;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,10 +21,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Properties;
+import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -433,4 +432,18 @@ public class JavaHelpers {
         return hmacSha256.doFinal(message.getBytes());
     }
     //--- Encrypt Decrypt ---//
+
+    //--- To String ---//
+    /**
+     * Convert List of Object Cookie to List of String
+     * @param list List of Object
+     * @return List of String
+     */
+    public static List<String> convertFormatListToString(List<Cookie> list) {
+        List<String> stringList = new ArrayList<>();
+        for (Object object : list) {
+            stringList.add(object.toString());
+        }
+        return stringList;
+    }
 }
