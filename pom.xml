@@ -12,6 +12,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <Env>stag</Env>
     </properties>
 
     <dependencies>
@@ -114,6 +115,9 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <suiteXmlFile>${testng}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemProperties>
+                        <env>${Env}</env>
+                    </systemProperties>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
