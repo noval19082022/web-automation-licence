@@ -6,11 +6,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.MamitourPO;
 
 public class MamitourSteps {
     Page page = ActiveContext.getActivePage();
     MamitourPO mamitour = new MamitourPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @And("user click on pesan sekarang button")
     public void user_click_on_pesan_sekarang_button() {
@@ -35,6 +37,7 @@ public class MamitourSteps {
 
     @Then("user will {string} Lihat Riwayat button")
     public void user_will_x_riwayat_button(String state) {
+        loading.waitForLoadingIconDisappear();
         if (state.equals("see")) {
             Assert.assertTrue(mamitour.isRiwayatButtonVisible(), "Riwayat button is not visible");
         } else {

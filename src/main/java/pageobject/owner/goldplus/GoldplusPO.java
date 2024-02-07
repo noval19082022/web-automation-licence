@@ -81,7 +81,7 @@ public class GoldplusPO {
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
-        gpPackageText = page.locator(".goldplus-billing-detail");
+        gpPackageText = page.locator("//p[.='Jenis Pembayaran']/../../following-sibling::div");
         tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
         rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
         saldoMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-list-item__description");
@@ -352,7 +352,10 @@ public class GoldplusPO {
      *
      */
     public Boolean gpPackageText(){
-        playwright.waitFor(gpPackageText);
+        playwright.waitTillPageLoaded(10000.0);
+//        var goldplusPackage = playwright.getText(gpPackageText);
+//        Mamikos.setGpPackage(goldplusPackage);
+//        System.out.println(Mamikos.getGpPackage());
         return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 

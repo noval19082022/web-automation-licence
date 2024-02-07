@@ -7,7 +7,7 @@ Feature: Gold Plus
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 082233545506 | 0          | qwerty123 |
-    And user click "Daftar" button
+    And user click daftar GP button
     And user choose Goldplus package 1
     Then user will see that the text "GoldPlus 1 periode 4 Bulan" is displayed
 

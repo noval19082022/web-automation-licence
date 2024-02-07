@@ -43,6 +43,7 @@ public class GoldplusSteps {
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
+        loading.waitForLoadingIconDisappear();
         if (home.getURL().equals(Mamikos.URL+"/goldplus/submission/packages")){
             goldplus.clickOnGPPackage(paket);
         } else{
@@ -53,6 +54,7 @@ public class GoldplusSteps {
             goldplus.clickOnPeriodeWeekly();
         }
         if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
+            playwright.reloadPage();
             gpSubmission.clickOnGpSatuFirstRadioButton();
         }
         gpSubmission.clicksOnPilihPaketButton();
@@ -101,6 +103,7 @@ public class GoldplusSteps {
         goldplus.clickOnEditGP1Button();
         goldplus.clickYesRadioButton();
         playwright.clickOnText("Save");
+        playwright.waitTillPageLoaded(10000.0);
     }
 
     @When("admin successfully adds additional favorite labels")
@@ -150,6 +153,7 @@ public class GoldplusSteps {
 
     @When("owner wants to extends Goldplus from chatroom")
     public void owner_wants_to_extends_goldplus_from_chatroom() {
+        loading.waitForLoadingIconDisappear();
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
         playwright.clickOnTextButton("Irvi Tenant Add Ons");
@@ -438,6 +442,7 @@ public class GoldplusSteps {
 
     @Then("owner will see pop up reminder recurring is displayed")
     public void owner_will_see_pop_up_reminder_recurring_is_displayed(){
+        playwright.waitTillPageLoaded(10000.0);
         Assert.assertTrue(playwright.isButtonWithTextDisplayed("Perpanjang"));
         Assert.assertTrue(playwright.isTextDisplayed("Masa aktif GoldPlus akan habis."));
         Assert.assertTrue(playwright.isTextDisplayed("Ayo, segera perpanjang paket GoldPlus Anda sekarang."));
@@ -445,12 +450,14 @@ public class GoldplusSteps {
 
     @When("owner wants to proccess recurring GP")
     public void owner_wants_to_proccess_recurring_GP(){
+        loading.waitForLoadingIconDisappear();
         goldplus.clickOnPerpanjangBtn();
     }
 
     @When("owner will be redirected to invoice recurring")
     public void owner_will_be_redirected_to_invoice_recurring(){
-        playwright.waitTillPageLoaded();
+        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded(10000.0);
         Assert.assertTrue(goldplus.gpPackageText());
     }
     @And("user view detail list saldo MamiAds")
@@ -570,12 +577,14 @@ public class GoldplusSteps {
 
     @When("owner navigate to list package goldplus 2")
     public void owner_navigate_to_list_package_goldplus_2(){
+        playwright.waitTillPageLoaded(10000.0);
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_2, 30000.0, LoadState.LOAD);
     }
 
     @When("owner navigate to list package goldplus 1")
     public void owner_navigate_to_list_package_goldplus_1(){
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("owner click nanti saja for recurring GoldPlus")
