@@ -199,8 +199,9 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded(10000.0);
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.pageScrollUntilElementIsVisible(infoUntukAndaOption);
         playwright.clickOn(infoUntukAndaOption);
     }
 

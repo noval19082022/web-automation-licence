@@ -204,6 +204,7 @@ public class GoldplusSteps {
 
     @When("owner click {string} button on chatlist")
     public void ownerClickButtonOnChatlist(String buttonTxt) {
+        loading.waitForLoadingIconDisappear();
         chat.clickChatOwner();
         chat.clickButtonOnChatRoomList(buttonTxt);
     }

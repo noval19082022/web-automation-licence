@@ -45,6 +45,7 @@ public class PropertySayaSteps {
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
+        loading.waitForLoadingIconDisappear();
         propertySaya.searchKostPropertySaya(kostName);
         Mamikos.setPropertyKosName(kostName);
     }
