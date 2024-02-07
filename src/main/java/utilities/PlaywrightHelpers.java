@@ -816,8 +816,5 @@ public class PlaywrightHelpers {
     public void assertHaveCss(Locator locator, String css, String value){
         assertThat(locator).hasCSS(css,value);
     }
-
-
     //---- Assert Part ----\\
-
 }
