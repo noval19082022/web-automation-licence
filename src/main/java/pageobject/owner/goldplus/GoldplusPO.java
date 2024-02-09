@@ -355,9 +355,6 @@ public class GoldplusPO {
      */
     public Boolean gpPackageText(){
         playwright.waitTillPageLoaded(10000.0);
-//        var goldplusPackage = playwright.getText(gpPackageText);
-//        Mamikos.setGpPackage(goldplusPackage);
-//        System.out.println(Mamikos.getGpPackage());
         return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 
