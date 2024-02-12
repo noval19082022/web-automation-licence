@@ -90,4 +90,7 @@ public class Mamikos {
     @Setter @Getter
     private static String phoneOwner;
 
+    @Setter @Getter
+    private static String gpPackage;
+
 }

@@ -45,6 +45,7 @@ public class PropertySayaSteps {
 
     @And("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
+        loading.waitForLoadingIconDisappear();
         propertySaya.searchKostPropertySaya(kostName);
         Mamikos.setPropertyKosName(kostName);
     }
@@ -164,6 +165,7 @@ public class PropertySayaSteps {
 
     @When("user click Lihat Selengkapnya button for edit")
     public void user_click_Lihat_Selengkapnya_button_for_edit() {
+        loading.waitForLoadingIconDisappear();
         propertySaya.clickOnLihatSelengkapnyaButton();
     }
 
@@ -266,6 +268,7 @@ public class PropertySayaSteps {
 
     @And("user click button edit {string} kos")
     public void userClickButtonEditKos(String updateData) {
+        loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDataKos(updateData);
     }
 
@@ -289,6 +292,7 @@ public class PropertySayaSteps {
 
     @Then("user click button edit finished")
     public void userClickButtonEditFinished() {
+        loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDoneButton();
     }
 

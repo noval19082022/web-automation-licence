@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import utilities.PlaywrightHelpers;
@@ -18,11 +19,13 @@ public class GoldplusPeriodSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     GoldplusPO goldplus = new GoldplusPO(page);
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
+    LoadingPO loading = new LoadingPO(page);
 
 
     @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.hardWait(2000);
+        playwright.waitTillPageLoaded(10000.0);
+        loading.waitForLoadingIconDisappear();
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;
         for (Map<String, String> content : table) {

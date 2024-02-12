@@ -81,6 +81,7 @@ public class GoldplusPO {
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
         tabSelesaiRincianBayar = page.locator("//h4[.='Selesai']");
+        gpPackageText = page.locator("//p[.='Jenis Pembayaran']/../../following-sibling::div");
         gpPackageText = page.getByText("Rincian Pembayaran");
         tutupListBalanceGP = page.locator(".goldplus-mamiads-detail__expand");
         rincianMamiadsText = page.locator(".bg-u-mb-md.bg-c-list-item .bg-c-text");
@@ -198,8 +199,9 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded(10000.0);
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.pageScrollUntilElementIsVisible(infoUntukAndaOption);
         playwright.clickOn(infoUntukAndaOption);
     }
 
@@ -352,7 +354,7 @@ public class GoldplusPO {
      *
      */
     public Boolean gpPackageText(){
-        playwright.waitFor(gpPackageText);
+        playwright.waitTillPageLoaded(10000.0);
         return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 

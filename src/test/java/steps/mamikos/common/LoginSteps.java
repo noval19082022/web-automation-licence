@@ -13,6 +13,7 @@ import org.testng.Assert;
 import pageobject.admin.mamipay.LoginAdminMamipayPO;
 import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
+import pageobject.common.LoadingPO;
 import pageobject.common.LoginPO;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.HomepagePO;
@@ -36,6 +37,7 @@ public class LoginSteps {
     OwnerLoginPO owner = new OwnerLoginPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
+    LoadingPO loading = new LoadingPO(page);
 
     private List<Map<String, String>> phoneNumberCredential;
     private List<Map<String, String>> emailCredential;
@@ -84,6 +86,7 @@ public class LoginSteps {
             .fillPassword(password)
             .clickOnLoginButton();
         Mamikos.setPhoneOwner(phone);
+        loading.waitForLoadingIconDisappear();
     }
 
     @When("user login as owner from mamiads landing page:")
