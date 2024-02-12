@@ -25,5 +25,6 @@ Feature: Agent App
 
   @TEST_PMAN-9422
   Scenario: Check is_active No Value When User in Edit Page
-    When admin checks is active "No" status in Edit page for "Automation PMAN No" agent
+    When admin goes to Agent App menu
+    And admin checks is active "No" status in Edit page for "Automation PMAN No" agent
     Then is active status in Edit page is "No"

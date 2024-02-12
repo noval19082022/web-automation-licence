@@ -92,11 +92,4 @@ public class AgentAppPO {
         System.out.println(isActiveStatusInEdit.getAttribute(isActive));
         return playwright.isLocatorVisibleAfterLoad(isActiveStatusInEdit, 5000.0);
     }
-
-    /**
-     * Go back to previous page
-     */
-    public void goBackToPreviousPage() {
-        playwright.backToPreviousPage();
-    }
 }

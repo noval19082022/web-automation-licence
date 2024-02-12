@@ -37,7 +37,6 @@ public class AgentAppSteps {
 
             agentApp.clicksEdit(agent);
         } else if (isActive.equalsIgnoreCase("No") && agent.equalsIgnoreCase("Automation PMAN No")) {
-            agentApp.goBackToPreviousPage();
             Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(isActive), "Is Active Status in Table is not No!");
             System.out.println(agentApp.isActiveStatusInTableEqualYes(isActive));
             Assert.assertTrue(agentApp.isAgentEqual(agent), "Agent in Table does not Equal!");
