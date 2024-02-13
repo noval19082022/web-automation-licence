@@ -113,7 +113,7 @@ Feature: Blacklist User
     When user login as tenant via facebook:
       | email stag                               |  email prod                               | password  |
       | lisagor_jiuogfi_rosenthalwitz@tfbnw.net  |  lisagor_jiuogfi_rosenthalwitz@tfbnw.net  | mamikosqa |
-    Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
+    Then user will see that the text "User is not allowed to see the application." is displayed
 
   @TEST_DOM-2639 @TEST_COOP-5148
   Scenario Outline: [WEB][Blacklist] Admin Unblacklist user
@@ -130,3 +130,12 @@ Feature: Blacklist User
     Examples:
       | dropDown     | value                                   |
       | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
+
+  @TEST_COOP-5150
+  Scenario: [WEB][Blacklist][Filter] Admin search filter by userID
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   |password  |
+      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+    And user access menu blacklist user
+    Then user choose dropdown "user_id" enter value "99452482" and validate filter result "Gorby Mamiteam"
