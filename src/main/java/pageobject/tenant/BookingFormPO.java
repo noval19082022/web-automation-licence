@@ -39,7 +39,6 @@ public class BookingFormPO {
     Locator cancelBookingBtn;
     Locator yesCancelBookingBtn;
     Locator pengajuanSewaText;
-    Locator descriptionJobtext;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -312,15 +311,5 @@ public class BookingFormPO {
      */
     public boolean getPengajuanSewatext() {
         return pengajuanSewaText.isVisible();
-    }
-
-    /**
-     * Check the visibility of description of jobs
-     * @param text
-     * @return text
-     */
-    public boolean getDescriptionOfJob(String text) {
-        descriptionJobtext = page.getByText(""+text+"");
-        return descriptionJobtext.isVisible();
     }
 }

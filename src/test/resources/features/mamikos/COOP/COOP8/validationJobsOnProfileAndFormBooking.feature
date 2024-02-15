@@ -89,8 +89,8 @@ Feature: Edit profile for jobs as Lainnya
     And user want to dismiss FTUE
     And tenant fill booking data for "tomorrow" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
-    Then tenant can see validation on jobs description with "Nama perguruan tinggi"
+    Then user see validation message "Nama perguruan tinggi"
     When user click on ubah button on informasi penyewa
     Then user choose profession "Karyawan" on ubah informasi penyewa
     And user click simpan button
-    Then tenant can see validation on jobs description with "Nama instansi/ perusahaan"
+    Then user see validation message "Nama instansi/ perusahaan"

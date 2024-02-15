@@ -433,9 +433,4 @@ public class TenantBookingSteps {
         Assert.assertTrue(kostDetail.getTextOnPopUp("Pengajuan sewa belum terkirim"));
         Assert.assertTrue(kostDetail.getTextOnPopUp("Jika tidak lanjut, kamu tetap bisa cek pengajuan kos ini di Draft"));
     }
-
-    @Then("tenant can see validation on jobs description with {string}")
-    public void tenantCanSeeValidationOnJobsDescriptionWith(String text){
-        Assert.assertTrue(bookingForm.getDescriptionOfJob(text), "not appears jobs description");
-    }
 }
