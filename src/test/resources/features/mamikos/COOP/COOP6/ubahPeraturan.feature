@@ -170,3 +170,12 @@
     And owner click on kriteria calon penyewa button
     And owner uncheck toogle "Kos dikhususkan untuk karyawan atau mahasiswa"
     Then owner click Simpan at Peraturan Masuk Kos page
+
+  @TEST_COOP-486 @booking-stay-setting @web
+  Scenario: [Web][UX Improvement][Booking stay setting][waktu ngekos]Update wording on Booking stay setting
+    When owner navigates to owner dashboard
+    And owner click ubah peraturan at "dashboard"
+    And owner select kost "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara"
+    Then owner can see "Anda bisa membuat ketentuan dan syarat untuk calon penyewa." on ubah peraturan
+    And owner clicks on ubah waktu button
+    Then owner can see "Jarak waktu terdekat (pengajuan dan tanggal masuk kos)" on ubah peraturan

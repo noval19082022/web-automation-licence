@@ -134,3 +134,23 @@ Feature: Verification Tenant
     And user open verifikasi akun menu
     And user edit phone number with condition into "qwertyuiop"
     Then user get error message "Nomor Handphone harus berupa angka."
+
+  @TEST_COOP-482 @automated @uxImprovement
+  Scenario: [Web][UX Improvement][Tenant Verification account]Update booking microcopy at User page verification description before verified
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0810000097320 | 0890000000314 | qwerty123 |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    Then user can see "Kami melindungi informasi dan penggunaan data diri para pengguna kami." on verifikasi identitas
+
+    @TEST_COOP-483 @automated @uxImprovement
+    Scenario: [Web][UX Improvement][Tenant Verification account]Update booking microcopy at User page verification description after verified
+      Given user go to mamikos homepage
+      When user login as tenant via phone number:
+        | phone stag    | phone prod    | password  |
+        | 0810000091    | 0890000000314 | qwerty123 |
+      And user navigate to kost saya page
+      And user open verifikasi akun menu
+      Then user can see "Terima kasih, kini kamu dapat menikmati proses Sewa Langsung via Mamikos lebih mudah." on verifikasi identitas
