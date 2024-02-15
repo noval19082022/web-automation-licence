@@ -11,7 +11,7 @@ public class AdminFeeDiscountSteps {
 
     @And("admin bangkrupux navigate to discount admin fee discount menu")
     public void adminFeeDiscountMenu() {
-        adminFeeDiscountPO.clickOnAdminFeeMenu();
+        adminFeeDiscountPO.navigatesIntoInvoiceAdminFeeDiscountMenu();
     }
 
     @And("admin bangkrupux want to edit discount admin fee")

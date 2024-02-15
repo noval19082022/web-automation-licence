@@ -20,6 +20,7 @@ Feature: Atur promo owner
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
+    And owner set active page to 1
     Then verify status promo is "Belum Ada"
     When owner create new promo owner with title "Update promo owner AT" for periode promo "tomorrow"
     Then verify judul promo "Update promo owner AT"
@@ -55,6 +56,7 @@ Feature: Atur promo owner
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
+    And owner set active page to 1
     And verify status promo is "Aktif"
 
   @TEST-LIMO-4245 @unvefiedPromoOwner
@@ -76,6 +78,7 @@ Feature: Atur promo owner
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
+    And owner set active page to 1
     And verify status promo is "Menunggu Verifikasi"
 
   @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo

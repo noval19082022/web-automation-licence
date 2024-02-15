@@ -91,7 +91,7 @@ Feature: Create new kos with owner not active BBK
     When admin click on "BBK Data" link button
     And admin reject BBK kos
 
-  @TEST_LIMO-2804 @CreateNewKosBBKNotActv @continue @upikMaint
+  @TEST_LIMO-2804 @CreateNewKosBBKNotActv @continue
   Scenario: [Add new kost][Kos]Create new kost when user already active mamipay && all bbk kos not active
     Given user go to mamikos homepage
     When user login as owner:
