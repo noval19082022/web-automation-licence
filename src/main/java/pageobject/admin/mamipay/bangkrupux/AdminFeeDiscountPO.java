@@ -3,6 +3,7 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class AdminFeeDiscountPO {
@@ -107,5 +108,9 @@ public class AdminFeeDiscountPO {
     public void deleteAdminFeeName(String adminFeeName) {
         Locator adminFee = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(adminFeeName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete"));
         playwrightHelpers.acceptDialog(adminFee);
+    }
+
+    public void navigatesIntoInvoiceAdminFeeDiscountMenu() {
+        playwrightHelpers.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice-admin-fee/discount");
     }
 }
