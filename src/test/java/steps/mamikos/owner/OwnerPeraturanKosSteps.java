@@ -92,4 +92,9 @@ public class OwnerPeraturanKosSteps {
     public void ownerCLickKriteriaKosKhususWith(String text){
         pengajuanBooking.clickKosKhususButton(text);
     }
+
+    @Then("owner can see {string} on ubah peraturan")
+    public void ownerCanSeeOnUbahPeraturan(String text){
+        pengajuanBooking.validateWordingOnUbahPeraturan(text);
+    }
 }

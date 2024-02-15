@@ -47,6 +47,7 @@ public class PengajuanSewaPO {
     private Locator kriteriaPenyewa;
     private Locator kriteriaCalonPenyewaText;
     private Locator kriteriaKhususButton;
+    private Locator newWordingUbahPeraturan;
 
     public PengajuanSewaPO(Page page) {
         this.page = page;
@@ -312,5 +313,15 @@ public class PengajuanSewaPO {
     public void clickKosKhususButton(String text){
         kriteriaKhususButton = page.getByText(""+text+"");
         playwright.clickOn(kriteriaKhususButton);
+    }
+
+    /**
+     * get validate wording on ubah peraturan page
+     * @param text
+     * @return text
+     */
+    public boolean validateWordingOnUbahPeraturan(String text){
+        newWordingUbahPeraturan =  page.getByText(""+text+"");
+        return newWordingUbahPeraturan.isVisible();
     }
 }

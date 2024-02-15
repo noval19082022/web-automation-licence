@@ -77,3 +77,20 @@ Feature: Edit profile for jobs as Lainnya
     And user fills "abcd" in pilih universitas
     Then user can see information "There is no data"
 
+  @TEST_COOP-144 @uxImprovement
+  Scenario: [Web][UX Booking] When update jobs in profile page, must update jobs in campus/institution from booking form
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password      |
+      | 08100000627   | 08100000630   | qwerty123     |
+    And tenant search kost then go to kost details:
+      | kost name stag                                              | kost name prod                         |
+      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara   | kost Jawa Tobelo Utara Halmahera Utara |
+    And user want to dismiss FTUE
+    And tenant fill booking data for "tomorrow" and "Per Bulan"
+    And tenant click ajukan sewa button on kost detail page
+    Then tenant can see validation on jobs description with "Nama perguruan tinggi"
+    When user click on ubah button on informasi penyewa
+    Then user choose profession "Karyawan" on ubah informasi penyewa
+    And user click simpan button
+    Then tenant can see validation on jobs description with "Nama instansi/ perusahaan"

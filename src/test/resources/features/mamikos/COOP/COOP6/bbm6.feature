@@ -626,3 +626,17 @@ Feature: BnB feature
     And tenant navigate to riwayat and draf booking
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
     Then tenant navigate to riwayat and draf booking
+
+  @TEST_COOP-481 @uxImprovement
+  Scenario: [Web][UX Improvement][Pengajuan sewa][Draft]Update wording when save to draft
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password     |
+      | 083311231113  | asdf1234     |
+    And tenant search kost then go to kost details:
+      | kost name stag                                  |
+      | Kos Raya Raney Tipe Raya 3 Danurejan Yogyakarta |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "Tomorrow"
+    And user click back button
+    Then tenant verify the confirmation cancel booking pop up

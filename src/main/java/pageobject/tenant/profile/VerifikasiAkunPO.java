@@ -17,6 +17,7 @@ public class VerifikasiAkunPO {
     Locator mailhogEmailVerifButton;
     Locator otpVerificationMessageText;
     Locator otpCountDownMessageText;
+    Locator verifikasiIdentitasText;
 
     public VerifikasiAkunPO(Page page) {
         this.page = page;
@@ -113,5 +114,14 @@ public class VerifikasiAkunPO {
     public String getOTPCountDownMessage() {
         playwright.waitTillLocatorIsVisible(otpCountDownMessageText,5.0);
         return playwright.getText(otpCountDownMessageText).replaceAll("\\s+"," ");
+    }
+
+    /**
+     * Get verifikasi identitas Message Text
+     * @return string
+     */
+    public String getVerifyIdentitasText(String text){
+        verifikasiIdentitasText = page.getByText(""+text+"");
+        return playwright.getText(verifikasiIdentitasText).replaceAll("\\s+", " ");
     }
 }
