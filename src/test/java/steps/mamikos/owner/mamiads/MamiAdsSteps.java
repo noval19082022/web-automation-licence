@@ -311,4 +311,24 @@ public class MamiAdsSteps {
     public void user_click_beli_saldo_on_popup_on_toggle() {
         mamiAdsPO.clickOnBeliSaldoOnPopupToggle();
     }
+
+    @Then("user will see entry point jemput bola")
+    public void user_will_see_entry_point_jemput_bola() {
+        mamiAdsPO.isTitleJemputBolaVisible();
+        mamiAdsPO.isSubtitleJemputBolaVisible();
+    }
+
+    @Then("user will see label baru on JB entry point is {string}")
+    public void user_will_see_label_baru_on_JB_entry_point_is_x(String state) {
+        if (state.equals("visible")) {
+            Assert.assertTrue(mamiAdsPO.isLabelNewJBVisible(), "The label is not visible");
+        } else {
+            Assert.assertFalse(mamiAdsPO.isLabelNewJBVisible(), "The label is visible");
+        }
+    }
+
+    @And("user click on jemput bola entry point")
+    public void user_click_on_jemput_bola_entry_point() {
+        mamiAdsPO.clickOnEntryPointJB();
+    }
 }
