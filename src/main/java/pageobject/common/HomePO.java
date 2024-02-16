@@ -64,6 +64,8 @@ public class HomePO {
     private Locator promoNgebutPriceInfoOtherThanFirstMonth;
     private Locator promoNgebutRentType;
     private Locator nextListProbut;
+    private Locator lihatSemuaSekitarKampus;
+    private Locator lihatSemuaAreaKostTerpopuler;
 
     //footer
     private Locator tentangKamiButton;
@@ -119,6 +121,8 @@ public class HomePO {
         this.aroundUnivUGM = page.getByTestId("link-UGM");
         this.aroundUnivUNDIP = page.getByTestId("link-UNDIP");
         this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
+        lihatSemuaSekitarKampus = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua →")).nth(1);
+        lihatSemuaAreaKostTerpopuler = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua →")).first();
 
 
         //header
@@ -845,5 +849,30 @@ public class HomePO {
      */
     public void clickOnSinggahSiniOnFooter() {
         playwright.clickOn(singgahSiniFooter);
+    }
+
+    /**
+     * clickOn Lihat semua sekitar kampus
+     */
+    public void clickOnLihatSemuaSekitarKampus() {
+        playwright.pageScrollUntilElementIsVisible(lihatSemuaSekitarKampus);
+        playwright.clickOn(lihatSemuaSekitarKampus);
+    }
+    /**
+     * List all popular sekitar kampus/kos populer
+     *
+     * @return popular area
+     */
+    public boolean listKostDekatKampus(String area) {
+        Locator listKostDekatKampus = playwright.locatorByRoleSetName(AriaRole.HEADING, area);;
+        return playwright.waitTillLocatorIsVisible(listKostDekatKampus);
+    }
+
+    /**
+     * clickOn Lihat semua Area kos terpopuler
+     */
+    public void clickonLihatSemuaAreaKosTerpopuler(){
+        playwright.pageScrollUntilElementIsVisible(lihatSemuaAreaKostTerpopuler);
+        playwright.clickOn(lihatSemuaAreaKostTerpopuler);
     }
 }
