@@ -7,7 +7,7 @@ Feature: Entry Point Jemput Bola
     When user login as owner:
       | phone stag     | phone prod      | password     |
       | <phone number> | <phone number>  | qwerty123    |
-    And user click on Saldo MamiAds at owner dashboard
+    And owner navigate to mamiads dashboard
     And user close mamiads onboarding popup
     Then user will see entry point jemput bola
     Examples:
@@ -22,7 +22,7 @@ Feature: Entry Point Jemput Bola
       When user login as owner:
         | phone stag   | phone prod    | password     |
         | 082180680001 | 082180680001  | qwerty123    |
-      And user click on Saldo MamiAds at owner dashboard
+      And owner navigate to mamiads dashboard
       And user close mamiads onboarding popup
       Then user will see label baru on JB entry point is "visible"
       When user click on jemput bola entry point
