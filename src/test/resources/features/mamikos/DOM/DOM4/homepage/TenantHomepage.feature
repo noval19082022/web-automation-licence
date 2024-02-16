@@ -120,3 +120,29 @@ Feature: Homepage
 		Given user go to mamikos homepage
 		When user open Around University in UGM
 		Then user should redirect to link that contains "/kost/kost-dekat-ugm-murah"
+
+	Scenario: Hompage-Lihat semua kost sekitar kampus
+		Given user go to mamikos homepage
+		When user go to lihat semua Sekitar Kampus
+		Then Lihat semua kost sekitar kampus , there's this city :
+			| city stag              | city prod              |
+			| Jogja                  | Jogja                  |
+			| Jakarta                | Jakarta                |
+			| Bandung                | Bandung                |
+			| Surabaya               | Surabaya               |
+			| Kampus Favorit Lainnya | Kampus Favorit Lainnya |
+			| Malang                 | Malang                 |
+			| Semarang               | Semarang               |
+
+	Scenario: Homepage - Lihat semua area kost populer
+		Given user go to mamikos homepage
+		When user go to lihat semua Area kost terpopuler
+		Then Lihat semua kost sekitar kampus , there's this city :
+			| city stag               | city prod           |
+			| Kosan di Yogyakarta     | Kosan di Yogyakarta |
+			| Kosan di Surabaya       | Kosan di Surabaya   |
+			| Kosan di Jakarta        | Kosan di Jakarta    |
+			| Kosan di Bali           | Kosan di Bali       |
+			| Kosan di Bandung        | Kosan di Bandung    |
+			| Kosan di Malang         | Kosan di Malang     |
+		    | Kosan di Semarang       | Kosan di Semarang   |
