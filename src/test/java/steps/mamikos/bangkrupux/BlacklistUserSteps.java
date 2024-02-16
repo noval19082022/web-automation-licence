@@ -79,4 +79,9 @@ public class BlacklistUserSteps {
     public void userClickBlacklistOnHomepageBlacklist() {
         blacklistUser.clickBlacklistButtonOnHomepage();
     }
+
+    @And("user add with user ID {string}")
+    public void userAddWithUserID(String userID) {
+        blacklistUser.insertUserIDBlacklistAUser(userID);
+    }
 }

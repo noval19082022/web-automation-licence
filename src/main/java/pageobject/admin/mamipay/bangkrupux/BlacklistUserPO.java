@@ -87,7 +87,7 @@ public class BlacklistUserPO {
      */
     public void insertPhoneNumberBlacklistAUser(String phoneNumber) {
         page.getByRole(AriaRole.COMBOBOX).selectOption("phone_number");
-        valueTextBox.fill(phoneNumber);
+        playwright.fill(valueTextBox, phoneNumber);
         playwright.clickOn(continueButton);
     }
 
@@ -166,5 +166,15 @@ public class BlacklistUserPO {
      */
     public void clickBlacklistButtonOnHomepage() {
         playwright.clickOn(blacklistBtn);
+    }
+
+    /**
+     * user input user ID
+     * user fill user ID
+     * user click continue button
+     */
+    public void insertUserIDBlacklistAUser(String userID) {
+        playwright.fill(valueTextBox, userID);
+        playwright.clickOn(continueButton);
     }
 }
