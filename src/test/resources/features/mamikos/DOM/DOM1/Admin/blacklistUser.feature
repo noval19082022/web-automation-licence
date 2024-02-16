@@ -24,9 +24,17 @@ Feature: Blacklist User
     And user add with phone number "089536519944"
     Then user see overview blacklist user data
 
-  @TEST_COOP-5152
+  @continue @TEST_COOP-5152
   Scenario: [WEB][Blacklist] Admin Add blacklist user
     When user fill note "Blacklist by Automation"
+    And user click button submit
+    Then user see blacklist updated success message
+
+  @TEST_COOP-6435
+  Scenario: [WEB][Blacklist] Admin blacklist user by UserID
+    When user click blacklist a user button
+    And user add with user ID "99451922"
+    And user fill note "Blacklist by Automation"
     And user click button submit
     Then user see blacklist updated success message
 
@@ -130,6 +138,7 @@ Feature: Blacklist User
     Examples:
       | dropDown     | value                                   |
       | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
+      | user_id      | 99451922                                |
 
   @TEST_COOP-5150
   Scenario: [WEB][Blacklist][Filter] Admin search filter by userID

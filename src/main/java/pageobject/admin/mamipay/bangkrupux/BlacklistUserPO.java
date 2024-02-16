@@ -167,4 +167,14 @@ public class BlacklistUserPO {
     public void clickBlacklistButtonOnHomepage() {
         playwright.clickOn(blacklistBtn);
     }
+
+    /**
+     * user input user ID
+     * user fill iser ID
+     * user click continue button
+     */
+    public void insertUserIDBlacklistAUser(String userID) {
+        valueTextBox.fill(userID);
+        playwright.clickOn(continueButton);
+    }
 }
