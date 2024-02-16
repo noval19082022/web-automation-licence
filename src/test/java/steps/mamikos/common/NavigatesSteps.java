@@ -389,4 +389,9 @@ public class NavigatesSteps {
     public void adminMamipayGoToGoldPlusInvoiceListMenu() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice/property-contracts/invoices");
     }
+
+    @When("owner navigate to mamiads dashboard")
+    public void ownerNavigateToMamiadsDashboard() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 60000.0, LoadState.LOAD);
+    }
 }
