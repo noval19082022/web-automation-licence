@@ -21,10 +21,12 @@ public class JoinSinggahsiniPO {
     private Locator namaLengkapErrorMessage;
     private Locator noHandphoneErrorMessage;
     private Locator namaKosErrorMessage;
+    private Locator totalKamarErrorMessage;
     private Locator kotaErrorMessage;
     private Locator alamatErrorMessage;
     private Locator namaLengkapField;
     private Locator noHandphoneField;
+    private Locator totalKamarField;
     private Locator namaKosField;
     private Locator alamatField;
     private Locator kotaDropdown;
@@ -48,13 +50,15 @@ public class JoinSinggahsiniPO {
         daftarPageTitleText = page.locator("h1.title");
         daftarPageSubtitleText = page.locator("p.subtitle");
         daftarButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Daftar").setExact(true));
-        namaLengkapErrorMessage = page.locator("(//*[@class='input-field'])[1]//div[@class='bg-c-field__message']");
-        noHandphoneErrorMessage = page.locator("//*[@class='input-field phone-number']//div[@class='bg-c-field__message']");
-        namaKosErrorMessage = page.locator("(//*[@class='input-field'])[2]//div[@class='bg-c-field__message']");
-        kotaErrorMessage = page.locator("//*[@class='select-field']//div[@class='bg-c-field__message']");
-        alamatErrorMessage = page.locator("//*[@class='text-field']//div[@class='bg-c-field__message']");
+        namaLengkapErrorMessage = page.locator("//div[@class='bg-c-field__message']").first();
+        noHandphoneErrorMessage = page.locator("(//div[@class='input-field number-input'])[1]//div[@class='bg-c-field__message']");
+        namaKosErrorMessage = page.locator("(//div[@class='input-field'])[2]//div[@class='bg-c-field__message']");
+        totalKamarErrorMessage = page.locator("//div[@class='bg-c-field__message']").nth(3);
+        kotaErrorMessage = page.locator("//div[@class='bg-c-field__message']").nth(4);
+        alamatErrorMessage = page.locator("(//div[@class='text-field'])//div[@class='bg-c-field__message']");
         namaLengkapField = page.locator("#nameInput_txt");
         noHandphoneField = page.locator("#phoneInput_txt");
+        totalKamarField = page.locator("#kosTotalRoom_input");
         namaKosField = page.locator("#kosNameInput_txt");
         alamatField = page.locator("#addressInput_txt");
         kotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kabupaten / kota kos Anda"));
@@ -143,6 +147,15 @@ public class JoinSinggahsiniPO {
     }
 
     /**
+     * Get String error message Total Kamar
+     * @return String error message Total Kamar
+     */
+    public String getTotalKamarErrorMessage(){
+        playwright.waitTillLocatorIsVisible(totalKamarErrorMessage);
+        return playwright.getText(totalKamarErrorMessage);
+    }
+
+    /**
      * Get error message Kabupaten/Kota field
      * @return String
      */
@@ -194,6 +207,14 @@ public class JoinSinggahsiniPO {
         }
 
         playwright.fill(namaKosField,kosName);
+    }
+
+    /**
+     * Fill Total Kamar field
+     * @param kamar
+     */
+    public void fillTotalKamar(String kamar){
+        playwright.fill(totalKamarField, kamar);
     }
 
     /**

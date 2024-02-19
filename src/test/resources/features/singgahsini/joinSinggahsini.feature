@@ -16,6 +16,7 @@
       Then nama lengkap field should show error validation "Masukkan nama lengkap Anda terlebih dahulu."
       And no handphone field should show error validation "Masukkan no. HP Anda terlebih dahulu."
       And nama kos field should show error validation "Masukkan nama kos Anda terlebih dahulu."
+      And total kamar field should show error validation "Masukkan total kamar kos Anda terlebih dahulu."
       And kabupaten kota field should show error validation "Anda belum memasukkan kabupaten / kota kos Anda."
       And alamat lengkap field should show error validation "Anda belum memasukkan alamat kos Anda."
 
@@ -88,8 +89,8 @@
       Given user navigates to singgahsini.id
       When user open register form
       And user submit daftar singgahsini
-        | Nama Lengkap        | No Handphone  | Kos Name            | Kota   | Kecamatan  | Kelurahan     | Alamat                |
-        | Automation Testing  | 088820203113  | Kost Tes Automation | Bantul | Kretek     | Parangtritis  | Jl Jembatan Kretek 1  |
+        | Nama Lengkap        | No Handphone  | Kos Name            | Total Kamar | Kota   | Kecamatan  | Kelurahan     | Alamat                |
+        | Automation Testing  | 088820203113  | Kost Tes Automation | 5           | Bantul | Kretek     | Parangtritis  | Jl Jembatan Kretek 1  |
       Then system show pop up success register
       When user confirm pop up
       Then user should be redirect to singgahsini.id
