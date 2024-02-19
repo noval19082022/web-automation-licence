@@ -65,6 +65,12 @@ public class JoinSinggahsiniSteps {
         Assert.assertEquals(joinSinggahsini.getNamaKosErrorMessage(),message);
 
     }
+
+    @Then("total kamar field should show error validation {string}")
+    public void total_kamar_field_should_show_error_validation(String message){
+        Assert.assertEquals(joinSinggahsini.getTotalKamarErrorMessage(),message);
+    }
+
     @Then("kabupaten kota field should show error validation {string}")
     public void kabupaten_kota_field_should_show_error_validation(String message) {
         Assert.assertEquals(joinSinggahsini.getKabupatenKotaErrorMessage(),message);
@@ -127,6 +133,7 @@ public class JoinSinggahsiniSteps {
         String name = dataProperty.get(0).get("Nama Lengkap");
         String phone = dataProperty.get(0).get("No Handphone");
         String kos = dataProperty.get(0).get("Kos Name");
+        String kamar = dataProperty.get(0).get("Total Kamar");
         String kota = dataProperty.get(0).get("Kota");
         String kecamatan = dataProperty.get(0).get("Kecamatan");
         String kelurahan = dataProperty.get(0).get("Kelurahan");
@@ -135,6 +142,7 @@ public class JoinSinggahsiniSteps {
         joinSinggahsini.fillNamaLengkapField(name);
         joinSinggahsini.fillNoHandphoneField(phone);
         joinSinggahsini.fillKosNameField(kos);
+        joinSinggahsini.fillTotalKamar(kamar);
         joinSinggahsini.selectKota(kota);
         joinSinggahsini.selectKecamatan(kecamatan);
         joinSinggahsini.selectKelurahan(kelurahan);
