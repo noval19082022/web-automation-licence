@@ -394,4 +394,9 @@ public class NavigatesSteps {
     public void ownerNavigateToMamiadsDashboard() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 60000.0, LoadState.LOAD);
     }
+
+    @And("user go to formulir data penyewa")
+    public void ownerNavigateToFormulirDataPenyewa() {
+        playwright.navigateTo(Mamikos.URL + Mamikos.FORMULIR_DATA_PENYEWA, 30000.0, LoadState.LOAD);
+    }
 }
