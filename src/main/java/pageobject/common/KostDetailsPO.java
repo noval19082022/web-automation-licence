@@ -2096,9 +2096,20 @@ public class KostDetailsPO {
      */
     public void clickOnPilihInformasiPenyewa(String indexToClick) {
         ElementHandle[] buttons = page.querySelectorAll("(//a[@role='button'])").toArray(new ElementHandle[0]);
-        int index = Integer.parseInt(indexToClick);;
+        int index = Integer.parseInt(indexToClick);
+        ;
         if (index >= 0 && index < buttons.length) {
             buttons[index].click();
         }
+
     }
-}
+
+    /**
+     * verify name instansi, universitas dan karyawan
+     */
+    public void userWillSeeHaveJobName() {
+        playwright.pageScrollHeightToBottom();
+        Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
+        playwright.getText(job);
+        }
+    }
