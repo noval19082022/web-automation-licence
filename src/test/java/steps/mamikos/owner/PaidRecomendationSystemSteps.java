@@ -1,0 +1,32 @@
+package steps.mamikos.owner;
+
+import com.microsoft.playwright.Page;
+import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobject.owner.PaidRecomendationSystemPO;
+
+
+
+    public class PaidRecomendationSystemSteps {
+        Page page = ActiveContext.getActivePage();
+        PaidRecomendationSystemPO pprs = new PaidRecomendationSystemPO(page);
+
+        @Then("owner can see section Laporan Statistik when doesnt have property active")
+        public void owner_can_see_section_laporan_statistik_when_doesnt_have_property_active() {
+            Assert.assertTrue(pprs.isStatisticSectionVisible(),"statistic is not show");
+        }
+
+        @Then("owner can see title {string} at section statistic")
+        public void owner_can_see_title_at_section_statistic(String text) {
+           Assert.assertEquals(pprs.getTitleStatisticDoesntHavePropertyActive(),text,"title doesnt match");
+           Assert.assertTrue(pprs.isImagePropertyNotActiveShow(),"image not show");
+        }
+
+        @Then("owner can see desc {string} at section statistic")
+        public void owner_can_see_desc_at_section_statistic(String text) {
+            Assert.assertTrue(pprs.getDescDoesntHavePropertyActive().contains(text),"description doesnt match");
+        }
+    }

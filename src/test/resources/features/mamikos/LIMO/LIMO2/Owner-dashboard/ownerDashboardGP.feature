@@ -21,7 +21,7 @@ Feature: Owner Dashboard GP
     When owner navigates to owner dashboard
     Then owner should successfully log out
 
-  @TEST_LIMO-1725 @continue
+  @TEST_LIMO-1725 @continue @kuotaChatRedirection
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
     Given user go to mamikos homepage
     When user login as owner:
@@ -29,13 +29,13 @@ Feature: Owner Dashboard GP
       | 088112233452 | 0          | qwerty123 |
     Then user will see that the text "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat." is displayed
 
-  @checkRedirectionInfoUntukAndaDoesntHaveQuota
+  @kuotaChatRedirection
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
     And user click info untuk anda "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat."
-    Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages"
+    Then owner navigate to list goldplus package
     And owner should successfully log out
 
-  @TEST_LIMO-1724 @continue
+  @TEST_LIMO-1724 @continue @nonExperimentRedirection
   Scenario: See info untuk anda while MARS NON GP with doesnt have unreplied chat and doesnt have quota
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Owner Dashboard GP
       | 088112233453 | 0          | qwerty123 |
     Then user will see that the text "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! " is displayed
 
-  @checkRedirectionInfoUntukAndaDoesntHaveQuota
+  @nonExperimentRedirection
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
     And user click info untuk anda "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!"
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages?redirection_source=infountukanda"
@@ -96,6 +96,6 @@ Feature: Owner Dashboard GP
     #owner only have kost draft
       | ownerPhone   | password  |
       | 0876623622   | qwerty123 |
-      | 08164225288  | 12345678  |
+      | 0876623687  | 12345678  |
       | 085687543611 | 12345678  |
       | 085213497843 | 12345678  |
