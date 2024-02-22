@@ -69,12 +69,12 @@ public class RiwayatKostPO {
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
         titleKostReviewSubmitted = page.locator("//p[@class=\"user-review-card--reviewed__text bg-c-text bg-c-text--label-2\"]");
         starsKostReviewSubmitted = page.locator("p.bg-c-text--body-1:nth-child(2)");
-        reviewKebersihan = page.locator("span:nth-child(5) > .bg-c-icon > use").first();
-        reviewKeamanan = page.locator("div:nth-child(2) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
-        reviewKenyamanan = page.locator("div:nth-child(3) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
-        reviewFasilitasKamar = page.locator("div:nth-child(4) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
-        reviewFasilitasUmum = page.locator("div:nth-child(5) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
-        reviewKesesuaianHarga = page.locator("div:nth-child(6) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon > use");
+        reviewKebersihan = page.locator("span:nth-child(5) > .bg-c-icon").first();
+        reviewKeamanan = page.locator("div:nth-child(2) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
+        reviewKenyamanan = page.locator("div:nth-child(3) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
+        reviewFasilitasKamar = page.locator("div:nth-child(4) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
+        reviewFasilitasUmum = page.locator("div:nth-child(5) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
+        reviewKesesuaianHarga = page.locator("div:nth-child(6) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
         kirimButton = page.locator(".bg-c-button--primary");
         fillReviewKost = page.getByPlaceholder("Ceritakan pengalamanmu di sini");
         closePopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).nth(1);
