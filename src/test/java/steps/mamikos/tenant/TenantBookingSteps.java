@@ -437,4 +437,9 @@ public class TenantBookingSteps {
     public void userClickOnPilihInformasiPenyewa(String indexToClick) {
         kostDetail.clickOnPilihInformasiPenyewa(indexToClick);
     }
+
+    @Then("user will see it has job name")
+    public void userWillSeeHaveJobName() {
+        kostDetail.userWillSeeHaveJobName();
+    }
 }
