@@ -759,7 +759,7 @@ public class InvoicePO {
      */
     public void sayaSudahBayarBeforePaid(){
         playwright.clickOn(sayaSudahBayar);
-        playwright.waitTillLocatorIsVisible(sudahBayar);
+        playwright.waitTillLocatorIsVisible(sudahBayar,2000.0);
         playwright.clickOn(sudahBayar);
     }
 }
