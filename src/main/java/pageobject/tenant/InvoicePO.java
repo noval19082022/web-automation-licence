@@ -80,6 +80,7 @@ public class InvoicePO {
     Locator sayaSudahBayar;
     Locator ubahButton;
     protected Locator pembayaranBerhasilText;
+    Locator sudahBayar;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -148,6 +149,7 @@ public class InvoicePO {
         sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
+        sudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
     }
 
     /**
@@ -533,7 +535,6 @@ public class InvoicePO {
             }
         } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
     }
-
     /**
      * Pay with ovo close page
      * @param number phone number
@@ -749,5 +750,15 @@ public class InvoicePO {
     public String getCodePembayaran() {
         playwright.waitFor(kodePembayaran, 5000.0);
         return playwright.getText(kodePembayaran);
+    }
+
+    /**
+     * Click on the "saya sudah bayar" button
+     * Click on the "sudah bayar" button
+     */
+    public void sayaSudahBayarBeforePaid(){
+        playwright.clickOn(sayaSudahBayar);
+        playwright.waitTillLocatorIsVisible(sudahBayar);
+        playwright.clickOn(sudahBayar);
     }
 }
