@@ -306,5 +306,10 @@ public class HomepageSteps {
     public void search_bar_is_empty(){
         Assert.assertTrue(homepage.isKeywordVisible(), "Keyword is still visible!");
     }
+
+    @And("admin go to billing tracker")
+    public void admin_go_to_billing_tracker(){
+        homepage.clickBillingTrackerMenu();
+    }
 }
 
