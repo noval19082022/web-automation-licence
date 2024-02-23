@@ -57,6 +57,7 @@ Feature: Owner - Login
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     Then user redirected to "owner"
 
+  @TEST_COOP-6663
   Scenario: Owner Login - using Wrong phone number
     Given user go to mamikos homepage
     When user login as owner:
@@ -64,6 +65,7 @@ Feature: Owner - Login
       | 1111111111 | 11111111111 | qwerty123 |
     Then user verify login error messages "Format Nomor Handphone salah."
 
+  @TEST_COOP-6664
   Scenario: Login owner - From SBMPTN Page
     Given user navigate to SBMPTN page
     When user login as owner:
@@ -71,6 +73,7 @@ Feature: Owner - Login
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     Then user redirected to "owner"
 
+  @TEST_COOP-6665
   Scenario: Owner Login - owner login in landing page
     Given user go to mamikos homepage
     When user search keyword:
