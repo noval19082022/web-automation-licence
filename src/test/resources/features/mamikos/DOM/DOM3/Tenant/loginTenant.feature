@@ -115,3 +115,14 @@ Feature: Tenant - Login
       | phone stag | phone prod  | password  |
       | aaaaaaaaaa | aaaaaaaaaaa | qwerty123 |
     Then user verify login error messages "Format Nomor Handphone salah."
+
+  @TEST_COOP-6666
+  Scenario: Login - tenant login in landing page
+    Given user go to mamikos homepage
+    When user search keyword:
+      | search stag | search prod |
+      | UGM         | UGM         |
+    And user login as tenant via phone number:
+      | phone stag    | phone prod  | password  |
+      | 0879864312548 | 08100000622 | qwerty123 |
+    Then user tenant profile picture is shown
