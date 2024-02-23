@@ -535,7 +535,7 @@ public class InvoicePO {
             }
         } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
     }
-    
+
     /**
      * Pay with ovo close page
      * @param number phone number

@@ -148,6 +148,7 @@ Feature: Payment All
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
+  @TEST_COOP-5711
   Scenario: Tenant click bayar saya sudah bayar before paid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
