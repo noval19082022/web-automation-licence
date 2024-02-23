@@ -225,4 +225,12 @@ public class PaymentSteps {
         midtransPaymentPO.paymentForPermata(kodePembayaran, "PERMATA");
     }
 
+    @And("tenant click bayar sekarang before paid")
+    public void tenantClickBayarSekarangBeforePaid() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnPermata();
+        invoicePO.clickOnBayarSekarang();
+        invoicePO.sayaSudahBayarBeforePaid();
+    }
 }

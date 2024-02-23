@@ -53,7 +53,7 @@ public class RefundSteps {
 
     @And("admin uncheck admin fee for refund")
     public void adminUncheckAdminFeeForRefund() {
-        refundPO.unCheckAdminFee();
+        refundPO.clickOnCheckAdminFee();
     }
 
     @And("admin edit paid amount credit card {string} for refund")

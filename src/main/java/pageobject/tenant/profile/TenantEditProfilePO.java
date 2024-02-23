@@ -64,6 +64,10 @@ public class TenantEditProfilePO {
     Locator profileMenuButton;
     Locator pekerjaanDescription;
 
+    Locator clickOndropdownProfessionRequestDbetTenant;
+    Locator fillNamaKampusRequestDbetTenant;
+    Locator userFillPekerjaanLainnyaPenyewaRequestDbetTenant;
+
     public TenantEditProfilePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -117,6 +121,9 @@ public class TenantEditProfilePO {
         reddotOnProfileMenu = page.locator("//*[@data-testid=\"navbarRedDot-avatar\"]");
         profileMenuButton = page.locator("//*[@class=\"bg-c-avatar bg-c-avatar--sm\"]");
         pekerjaanDescription = page.getByTestId("jobDescription-input");
+        clickOndropdownProfessionRequestDbetTenant = page.locator("//div[@class='bg-c-dropdown']");
+        fillNamaKampusRequestDbetTenant = page.locator("//input[@placeholder='Search']");
+        userFillPekerjaanLainnyaPenyewaRequestDbetTenant = page.locator("//input[@placeholder='Contoh: Wiraswasta']");
     }
 
 
@@ -582,5 +589,26 @@ public class TenantEditProfilePO {
      */
     public boolean isPersentageVisible() {
         return profilePresentageInformation.isVisible();
+    }
+
+    /**
+     * user click on dropdown Profession Request Dbet Tenant
+     */
+    public void userClickOndropdownProfessionRequestDbetTenant() {
+        playwright.clickOn(clickOndropdownProfessionRequestDbetTenant);
+    }
+    /**
+     * fills data universitas
+     *
+     */
+    public void userFillsInPilihUniversitasPenyewaRequestDbetTenant(String universitas) throws InterruptedException {
+        playwright.forceFill(fillNamaKampusRequestDbetTenant, universitas);
+    }
+    /**
+     * fills data lainnya
+     *
+     */
+    public void userFillPekerjaanLainnyaPenyewaRequestDbetTenant(String lainnya) throws InterruptedException {
+        playwright.forceFill(userFillPekerjaanLainnyaPenyewaRequestDbetTenant, lainnya);
     }
 }
