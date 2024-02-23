@@ -2,6 +2,7 @@ package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -21,6 +22,11 @@ public class SearchInvoiceSteps {
     private AdminMamipayDashboardPO admin = new AdminMamipayDashboardPO(page);
     private MamikosListInvoicePO invoicePO = new MamikosListInvoicePO(page);
     private SearchInvoicePO searchInvoice = new SearchInvoicePO(page);
+
+    @And("admin go to Search Invoice menu")
+    public void adminGoToSearchInvoiceMenu() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice/search");
+    }
 
     @When("admin want to reactivate invoice by invoice number {string}")
     public void reactivateInvoice(String invoiceNumber) {

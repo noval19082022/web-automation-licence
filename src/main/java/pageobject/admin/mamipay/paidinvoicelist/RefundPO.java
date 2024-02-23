@@ -55,7 +55,7 @@ public class RefundPO {
         this.selectedBankForRefund = page.getByRole(AriaRole.COMBOBOX).getByRole(AriaRole.TEXTBOX).first();
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
         this.searchBankName = page.locator("input[type='search']");
-        this.checkMarkAdminFee = page.getByLabel("Biaya admin dikembalikan Rp1000 (Kesalahan Owner)");
+        this.checkMarkAdminFee = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya admin dikembalikan")).first();
         this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
         this.inputRekeningNumber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
@@ -80,7 +80,7 @@ public class RefundPO {
         this.downloadXlsReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX"));
         //-- data booking menu on bank kerupux ---
         this.actionBtnOnInvoiceList = page.getByRole(AriaRole.BUTTON).getByText("Actions").first();
-        this.actionTransferredPermission = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(" Actions  Detail  Cancel  Check In  Show Booking Remarks  Edit Listing Note  Transfer Permission")).getByText("Transfer Permission");
+        this.actionTransferredPermission = page.locator("//a[@title='Set Transfer Permission']").first();
         this.allowRefundBox = page.getByRole(AriaRole.COMBOBOX);
         this.refundReasons = page.locator("select[name='refund_reason']");
         this.sendBtnRefund = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send"));
@@ -168,10 +168,10 @@ public class RefundPO {
     }
 
     /**
-     * uncheck the admin fee on refund process
+     * clickOn the admin fee on refund process
      */
-    public void unCheckAdminFee() {
-        playwrightHelpers.uncheckBox(checkMarkAdminFee);
+    public void clickOnCheckAdminFee() {
+        playwrightHelpers.clickOn(checkMarkAdminFee);
     }
 
     /**

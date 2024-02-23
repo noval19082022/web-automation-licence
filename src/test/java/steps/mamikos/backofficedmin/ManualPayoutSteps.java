@@ -2,6 +2,7 @@ package steps.mamikos.backofficedmin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -18,7 +19,7 @@ public class ManualPayoutSteps {
     private ManualPayoutPO manualPayout = new ManualPayoutPO(page);
 
     @And("admin want to search invoice number in manual payout menu {string}")
-    public void adminWantToSearchInvoiceNumberInManualPayoutMenu(String invoiceNumber){
+    public void adminWantToSearchInvoiceNumberInManualPayoutMenu(String invoiceNumber) {
         admin.clickOnTextHyperlink("Manual Payout");
         invoicePO.selectSearchInvoiceBy("Invoice Number");
         invoicePO.fillInputSearchValue(invoiceNumber);
@@ -26,7 +27,7 @@ public class ManualPayoutSteps {
     }
 
     @Then("admin will see the search result in manual payout menu is {string}")
-    public void adminWillSeeTheSearchResultInManualPayoutMenuIs(String searchResult) throws InterruptedException {
+    public void adminWillSeeTheSearchResultInManualPayoutMenuIs(String searchResult) {
         manualPayout.getSearchResult(searchResult);
     }
 
@@ -99,7 +100,10 @@ public class ManualPayoutSteps {
 
     @And("admin want to create payout with amount less than 10000")
     public void adminWantToCreatePayoutWithAmountLessThan10000() {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
+        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+            playwright.reloadPage();
+        }
         manualPayout.clickOnCreatePayoutButton();
         manualPayout.selectPayoutType("Disbursement");
         manualPayout.fillAccountNumber("test AT");
@@ -118,7 +122,10 @@ public class ManualPayoutSteps {
 
     @And("admin want to create payout with type {string}")
     public void adminWantToCreatePayoutWithType(String type) {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
+        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+            playwright.reloadPage();
+        }
         manualPayout.clickOnCreatePayoutButton();
         manualPayout.selectPayoutType(type);
         manualPayout.fillAccountNumber("test AT");
@@ -138,6 +145,9 @@ public class ManualPayoutSteps {
     @And("admin cancel payout transaction")
     public void adminCancelPayoutTransaction() {
         manualPayout.clickCancelButtonOnMainPage();
+        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+            playwright.reloadPage();
+        }
     }
 
     @And("admin see payout canceled message")
@@ -147,7 +157,10 @@ public class ManualPayoutSteps {
 
     @And("admin want to change payout type into {string}")
     public void adminWantToChangePayoutTypeInto(String type) {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
+        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+            playwright.reloadPage();
+        }
         manualPayout.clickOnChangeTypeButton();
         manualPayout.changePayoutType(type);
         manualPayout.clickOnSubmitChangeButton();
@@ -160,7 +173,7 @@ public class ManualPayoutSteps {
 
     @And("admin want to change invoice number into {string}")
     public void adminWantToChangeInvoiceNumberInto(String invoice) {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
         manualPayout.clickOnChangeInvoiceButton();
         manualPayout.fillInvoice(invoice);
         manualPayout.clickOnSubmitChangeButton();
@@ -168,7 +181,7 @@ public class ManualPayoutSteps {
 
     @And("admin want to edit bank name, account, amount, and reason payout")
     public void adminWantToEditBankNameAccountAmountAndReasonPayout() {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
         manualPayout.clickEditButtonOnMainPage();
         manualPayout.fillAccountNumber("111111111111");
         manualPayout.fillAccountName("111111111111");
@@ -181,7 +194,7 @@ public class ManualPayoutSteps {
 
     @And("admin want to transfer on manual payout menu")
     public void adminWantToTransferOnManualPayoutMenu() {
-        admin.clickOnTextHyperlink("Manual Payout");
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
         manualPayout.clickOnTransferButtonOnMainPage();
     }
 

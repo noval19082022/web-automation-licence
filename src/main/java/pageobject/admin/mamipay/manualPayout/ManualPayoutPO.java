@@ -62,14 +62,14 @@ public class ManualPayoutPO {
         reasonField = page.locator("textarea[name=\"reason\"]");
         invoiceNumberField = page.locator("input[name=\"invoice_number\"]");
         confirmButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Payout"));
-        cancelOnMainPageButton = page.locator("(//a[text()='Cancel'])[1]");
-        changeTypeButton = page.locator("(//a[text()='Change Type'])[1]");
+        cancelOnMainPageButton = page.locator("//a[text()='Cancel']").first();
+        changeTypeButton = page.locator("//a[text()='Change Type']").first();
         changeTypeDropdown = page.getByRole(AriaRole.COMBOBOX);
-        changeInvoiceButton = page.locator("(//a[text()='Change Invoice'])[1]");
+        changeInvoiceButton = page.locator("//a[text()='Change Invoice']").first();
         submitChangeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit Change"));
-        editButton = page.locator("(//a[text()='Edit'])[1]");
+        editButton = page.locator("//a[text()='Edit']").first();
         updatePayoutButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Payout"));
-        transferButton = page.locator("(//a[text()='Transfer'])[1]");
+        transferButton = page.locator("//a[text()='Transfer']").first();
         amountWarning = page.getByText("Amount required.");
         reasonWaring = page.getByText("Reason required.");
         notAllowedWarning = page.getByText("Not allowed to create transfer.");
@@ -92,7 +92,7 @@ public class ManualPayoutPO {
      *
      * @throws InterruptedException
      */
-    public void getSearchResult(String searchResult){
+    public void getSearchResult(String searchResult) {
         playwright.waitTillLocatorIsVisible(page.locator("(//td[.='" + searchResult + "'])[1]"));
     }
 
@@ -106,7 +106,6 @@ public class ManualPayoutPO {
     }
 
 
-
     /**
      * Search invoice by Type
      *
@@ -118,6 +117,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Start Date value
+     *
      * @param start String data type
      */
     public void fillStartDateValue(String start) {
@@ -126,6 +126,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill End Date value
+     *
      * @param end String data type
      */
     public void fillEndDateValue(String end) {
@@ -135,11 +136,11 @@ public class ManualPayoutPO {
     /**
      * User verify data transaction that has been searched by create date
      */
-    public void vefirytTransactionbyCreateDate(String createFrom, String createTo){
+    public void vefirytTransactionbyCreateDate(String createFrom, String createTo) {
         Page page = ActiveContext.getActivePage();
-        createDateFrom = page.locator("//td[contains(text(), '"+createFrom+"')]");
+        createDateFrom = page.locator("//td[contains(text(), '" + createFrom + "')]");
         createDateFrom.isVisible();
-        createDateTo = page.locator("//td[contains(text(), '"+createTo+"')]");
+        createDateTo = page.locator("//td[contains(text(), '" + createTo + "')]");
         createDateTo.isVisible();
     }
 
@@ -152,6 +153,7 @@ public class ManualPayoutPO {
 
     /**
      * Check if amount warning visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isAmountWarningVisible() {
@@ -160,6 +162,7 @@ public class ManualPayoutPO {
 
     /**
      * Check if reason warning visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isReasonWarningVisible() {
@@ -168,6 +171,7 @@ public class ManualPayoutPO {
 
     /**
      * Select Payout type
+     *
      * @param type String data type
      */
     public void selectPayoutType(String type) {
@@ -176,6 +180,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Account number
+     *
      * @param acount String data type
      */
     public void fillAccountNumber(String acount) {
@@ -184,6 +189,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Account name
+     *
      * @param name String data type
      */
     public void fillAccountName(String name) {
@@ -192,6 +198,7 @@ public class ManualPayoutPO {
 
     /**
      * Select Bank Account
+     *
      * @param bank String data type
      */
     public void selectBankAccount(String bank) {
@@ -200,6 +207,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Amount
+     *
      * @param amount String data type
      */
     public void fillAmount(String amount) {
@@ -208,6 +216,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Reason
+     *
      * @param reason String data type
      */
     public void fillReason(String reason) {
@@ -216,6 +225,7 @@ public class ManualPayoutPO {
 
     /**
      * Fill Invoice Number
+     *
      * @param invoice String data type
      */
     public void fillInvoice(String invoice) {
@@ -226,11 +236,15 @@ public class ManualPayoutPO {
      * Click on confirm create payout button
      */
     public void clickOnConfirmButton() {
-        confirmButton.click();
+        playwright.clickOn(confirmButton);
+        if (playwright.isTextDisplayed("429")) {
+            playwright.reloadPage();
+        }
     }
 
     /**
      * Check if Not allowed error message visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isNotAllowedErrorMessageVisible() {
@@ -239,14 +253,16 @@ public class ManualPayoutPO {
 
     /**
      * Check if minimal amount warning visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isMinimalAmountWarningVisible() {
-        return minimalAmountWarning .isVisible();
+        return minimalAmountWarning.isVisible();
     }
 
     /**
      * Check if Payout ready to precessed message visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isPayoutReadyToPrecessedMessageVisible() {
@@ -262,6 +278,7 @@ public class ManualPayoutPO {
 
     /**
      * Check if Payout canceled message visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isPayoutCanceledMessageVisible() {
@@ -272,15 +289,20 @@ public class ManualPayoutPO {
      * Click on Change Type button
      */
     public void clickOnChangeTypeButton() {
-        changeTypeButton.click();
+        playwright.clickOn(changeTypeButton);
     }
 
     /**
      * Change Payout type
+     *
      * @param type String data type
      */
     public void changePayoutType(String type) {
-        playwright.selectDropdownByValue(changeTypeDropdown, type);
+        var typeInput = type.trim();
+        type = typeInput.equals("Refund Outside MamiPAY") ? "refund_outside" : type;
+        type = typeInput.equals("Payout to Tenant") ? "payout_tenant" : type;
+        type = typeInput.equals("Additional Payout to Owner") ? "payout_tenant" : type;
+        playwright.selectDropdownByValue(changeTypeDropdown, type.trim().toLowerCase().replaceAll(" ", "_"));
     }
 
     /**
@@ -292,6 +314,7 @@ public class ManualPayoutPO {
 
     /**
      * Check if Success Update Payout type message visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isSuccessUpdateMessageVisible() {
@@ -309,7 +332,7 @@ public class ManualPayoutPO {
      * Click on Edit button on main page
      */
     public void clickEditButtonOnMainPage() {
-        editButton.click();
+        playwright.clickOn(editButton);
     }
 
     /**
@@ -328,6 +351,7 @@ public class ManualPayoutPO {
 
     /**
      * Check if Processing Payout message visible
+     *
      * @return boolean type, visible true otherwise false
      */
     public boolean isProcessingPayoutMessageVisible() {
