@@ -110,6 +110,11 @@ public class LoginSteps {
             loginAdmin.fillPassword(password);
             loginAdmin.clickOnLoginButton();
         }
+
+        // handling 429, 502, 504
+        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+            playwright.reloadPage();
+        }
     }
 
     @When("admin login pms :")

@@ -47,7 +47,7 @@ public class PremiumInvoicePO {
      * @param inputField
      */
     public void searchPackageInvoiceBy(String searchBy, String inputField) {
-        playwrightHelpers.selectDropdownByValue(searchByOption, searchBy);
+        playwrightHelpers.selectDropdownByValue(searchByOption, searchBy.toLowerCase().replaceAll(" ", "_"));
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputSearchBy, inputField);
     }
 
@@ -71,7 +71,7 @@ public class PremiumInvoicePO {
      * @param status
      */
     public void filterTransactionStatus(String status) {
-        playwrightHelpers.selectDropdownByValue(statusOption, status);
+        playwrightHelpers.selectDropdownByValue(statusOption, status.toLowerCase());
     }
 
     /**
