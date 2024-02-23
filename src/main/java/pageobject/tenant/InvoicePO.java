@@ -80,7 +80,7 @@ public class InvoicePO {
     Locator sayaSudahBayar;
     Locator ubahButton;
     protected Locator pembayaranBerhasilText;
-    Locator sudahBayarButton;
+    Locator sudahBayarBtn;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -149,7 +149,7 @@ public class InvoicePO {
         sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
-        sudahBayarButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
+        sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
     }
 
     /**
@@ -759,7 +759,7 @@ public class InvoicePO {
      */
     public void sayaSudahBayarBeforePaid(){
         playwright.clickOn(sayaSudahBayar);
-        playwright.waitTillLocatorIsVisible(sudahBayarButton,2000.0);
-        playwright.clickOn(sudahBayarButton);
+        playwright.waitTillLocatorIsVisible(sudahBayarBtn,2000.0);
+        playwright.clickOn(sudahBayarBtn);
     }
 }
