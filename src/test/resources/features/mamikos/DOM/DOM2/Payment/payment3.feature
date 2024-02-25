@@ -17,7 +17,7 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin go to "Search Invoice" menu
+    And admin go to Search Invoice menu
     And user search by "Renter Phone Number" and input field "089220220201"
     And user click on detail fee button
     Then admin verify see text "GP2 Staging"
@@ -278,7 +278,7 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     When admin login to mamipay:
       | email stag | email prod | password  |
       | <email>    | <email>    | qwerty123 |
-    And admin go to "Search Invoice" menu
+    And admin go to Search Invoice menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
@@ -306,7 +306,7 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     When admin login to mamipay:
       | email stag | email prod | password  |
       | <email>    | <email>    | qwerty123 |
-    And admin go to "All Invoice List" menu
+    And admin open menu all invoice list
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:
@@ -342,7 +342,7 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     When admin login to mamipay:
       | email stag              | email prod              | password  |
       | uncle.coop2@mamikos.com | uncle.coop2@mamikos.com | qwerty123 |
-    And admin go to "GoldPlus Invoice List" menu
+    And admin mamipay go to goldplus invoice list menu
     And admin bangkerupux want to search invoice by "Invoice Number" and input field "<invoice>"
     Then admin bangkerupux click on shorlink invoice on invoice list "<shortlink>"
     Examples:

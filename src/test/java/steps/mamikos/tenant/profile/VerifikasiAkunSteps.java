@@ -59,4 +59,9 @@ public class VerifikasiAkunSteps {
     public void userEmptyEmailAddressField() {
         verifikasiakun.emptyEmailAddress();
     }
+
+    @Then("user can see {string} on verifikasi identitas")
+    public void userCanSeeOnVerifikasiIdentitas(String text){
+        Assert.assertEquals(verifikasiakun.getVerifyIdentitasText(text), ""+text +"");
+    }
 }

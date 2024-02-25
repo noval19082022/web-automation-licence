@@ -48,8 +48,10 @@ public class MamiAdsPO {
     private Locator deleteVoucher;
     private Locator listElement;
     private Locator voucherTitleElement;
-
-
+    //--- Jemput Bola Entry Point ---//
+    private Locator titleJemputBola;
+    private Locator subtitleJemputBola;
+    private Locator labelNewJemputBola;
 
     //--- GP Onboarding Pop - Up ---//
     Locator gpOnboardingPopUpActiveCounter;
@@ -60,6 +62,8 @@ public class MamiAdsPO {
     Locator gpOnboardingPopUpSwipperBullet;
     Locator gpOnboardingPopUpPreviousButton;
     //--- GP Onboarding Pop - Up ---//
+
+
 
     public MamiAdsPO(Page page) {
         this.page = page;
@@ -99,6 +103,10 @@ public class MamiAdsPO {
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
+        //--- voucher owner ---//
+        this.titleJemputBola = page.getByText("Laporan Klik");
+        this.subtitleJemputBola = page.locator("//*[@class='mami-ads-statistic-container']/following-sibling::p");
+        this.labelNewJemputBola = page.getByText("Baru");
 
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");
@@ -621,6 +629,35 @@ public class MamiAdsPO {
      */
     public void clickOnBeliSaldoOnPopupToggle() {
         playwright.clickOn(beliSaldoBtnPopupToggle);
+    }
+
+    /**
+     * check entry point on jemput bola title
+     */
+    public void isTitleJemputBolaVisible() {
+        playwright.assertVisible(titleJemputBola);
+    }
+
+    /**
+     * check entry point on jemput bola subtitle
+     */
+    public void isSubtitleJemputBolaVisible() {
+        playwright.assertVisible(subtitleJemputBola);
+    }
+
+    /**
+     * check is it label visible or not
+     * @return boolean
+     */
+    public boolean isLabelNewJBVisible() {
+        return playwright.waitTillLocatorIsVisible(labelNewJemputBola);
+    }
+
+    /**
+     * click on entry point jemput bola
+     */
+    public void clickOnEntryPointJB() {
+        playwright.clickOn(titleJemputBola);
     }
 }
 

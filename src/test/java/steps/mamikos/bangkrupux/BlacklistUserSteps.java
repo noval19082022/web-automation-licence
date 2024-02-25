@@ -12,7 +12,7 @@ import pageobject.common.HomePO;
 public class BlacklistUserSteps {
     Page page = ActiveContext.getActivePage();
 
-     BlacklistUserPO blacklistUser = new BlacklistUserPO(page);
+    BlacklistUserPO blacklistUser = new BlacklistUserPO(page);
     HomePO home = new HomePO(page);
 
     @When("user access menu blacklist user")
@@ -22,13 +22,8 @@ public class BlacklistUserSteps {
 
     @Then("user choose dropdown {string} enter value {string} and validate filter result {string}")
     public void userChooseDropdownEnterValueAndValidateFilterResult(String dropDown, String value, String result) {
-        if (dropDown.equalsIgnoreCase("phone_number")){
-            blacklistUser.selectBlacklistSearchBy(dropDown, value);
-            Assert.assertEquals(blacklistUser.getResultSearchBy(value), value, "result don't match");
-        } else if (dropDown.equalsIgnoreCase("email")) {
-            blacklistUser.selectBlacklistSearchBy(dropDown, value);
-            Assert.assertEquals(blacklistUser.getResultSearchBy(value), value, "result don't match");
-        }
+        blacklistUser.selectBlacklistSearchBy(dropDown, value);
+        Assert.assertEquals(blacklistUser.getResultSearchBy(result), result, "result don't match");
     }
 
     @And("user click blacklist a user button")
@@ -83,5 +78,10 @@ public class BlacklistUserSteps {
     @And("user click blacklist on homepage blacklist")
     public void userClickBlacklistOnHomepageBlacklist() {
         blacklistUser.clickBlacklistButtonOnHomepage();
+    }
+
+    @And("user add with user ID {string}")
+    public void userAddWithUserID(String userID) {
+        blacklistUser.insertUserIDBlacklistAUser(userID);
     }
 }

@@ -2,12 +2,16 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import utilities.PlaywrightHelpers;
+
+import java.util.Map;
 
 public class HomepageSteps {
     Page page = ActiveContext.getActivePage();
@@ -236,5 +240,23 @@ public class HomepageSteps {
     @And("user open singgahsini in footer")
     public void userOpenSinggahsiniInFooter() {
         home.clickOnSinggahSiniOnFooter();
+    }
+
+    @When("user go to lihat semua Sekitar Kampus")
+    public void userGoToLihatSemuaSekitarKampus() {
+        home.clickOnLihatSemuaSekitarKampus();
+    }
+
+    @Then("Lihat semua kost sekitar kampus , there's this city :")
+    public void lihatSemuaKostSekitarKampusThereSThisCity(DataTable table) {
+        var cities = table.asMaps(String.class, String.class);
+        for (Map<String, String> city : cities) {
+            Assert.assertTrue(home.listKostDekatKampus(city.get("city " + Mamikos.ENV)), city.get("city " + Mamikos.ENV) + " is not displayed");
+        }
+    }
+
+    @When("user go to lihat semua Area kost terpopuler")
+    public void userGoToLihatSemuaAreaKostTerpopuler() {
+        home.clickonLihatSemuaAreaKosTerpopuler();
     }
 }

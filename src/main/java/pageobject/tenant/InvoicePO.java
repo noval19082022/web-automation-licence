@@ -77,9 +77,10 @@ public class InvoicePO {
     Locator mamipoinToggleButton;
     Locator tenantPointEstimate;
     Locator discountMamipoinText;
-    Locator sayaSudahBayar;
+    Locator sayaSudahBayarBtn;
     Locator ubahButton;
     protected Locator pembayaranBerhasilText;
+    Locator sudahBayarBtn;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -145,9 +146,10 @@ public class InvoicePO {
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
         pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
-        sayaSudahBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
+        sayaSudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
+        sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
     }
 
     /**
@@ -680,7 +682,7 @@ public class InvoicePO {
         int maxReload = 5;
         int reloadCount = 0;
 
-        playwright.clickOn(sayaSudahBayar);
+        playwright.clickOn(sayaSudahBayarBtn);
 
         do {
             page.reload();
@@ -749,5 +751,15 @@ public class InvoicePO {
     public String getCodePembayaran() {
         playwright.waitFor(kodePembayaran, 5000.0);
         return playwright.getText(kodePembayaran);
+    }
+
+    /**
+     * Click on the "saya sudah bayar" button
+     * Click on the "sudah bayar" button
+     */
+    public void sayaSudahBayarBeforePaid(){
+        playwright.clickOn(sayaSudahBayarBtn);
+        playwright.waitTillLocatorIsVisible(sudahBayarBtn,2000.0);
+        playwright.clickOn(sudahBayarBtn);
     }
 }

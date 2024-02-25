@@ -272,4 +272,16 @@ public class TenantEditProfileSteps {
         tenantEditProfile.userFillDeskripsiPekerjaan(deskripsiPekerjaan);
 
     }
+    @And("user click on dropdown profession in informasi penyewa request DBET tenant")
+    public void userClickOndropdownProfessionRequestDbetTenant() {
+        tenantEditProfile.userClickOndropdownProfessionRequestDbetTenant();
+    }
+    @And("user fills {string} in pilih universitas penyewa request DBET tenant")
+    public void userFillsInPilihUniversitasPenyewaRequestDbetTenant(String universitas)throws InterruptedException {
+        tenantEditProfile.userFillsInPilihUniversitasPenyewaRequestDbetTenant(universitas);
+    }
+    @And("user fills pekerjaan lainnya {string} in informasi penyewa request DBET tenant")
+    public void userFillsPekerjaanLainnyaPenyewaRequestDbetTenant(String lainnya) throws InterruptedException {
+        tenantEditProfile.userFillPekerjaanLainnyaPenyewaRequestDbetTenant(lainnya);
+    }
 }

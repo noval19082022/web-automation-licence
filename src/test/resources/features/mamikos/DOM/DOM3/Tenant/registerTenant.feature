@@ -218,3 +218,13 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "08210391239921", "at@test.com", "qwerty123", "qwerty123"
     Then user verify error messages
       | Maksimal 50 karakter. |
+
+  @TEST_COOP-6667
+  Scenario: Register Tenant - user register in landing page
+    Given user go to mamikos homepage
+    When user search keyword:
+      | search stag | search prod |
+      | UGM         | UGM         |
+    And user clicks on Enter button Tenant
+    And user clicks on Register button
+    Then user redirected to "/register-pencari?source=list%20kos%20result"

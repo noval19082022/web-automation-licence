@@ -15,7 +15,7 @@ Feature: Booking with upload docs
       | 0812345667788 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
-      | Desta Automation Tobelo | kost payment desta 2 |
+      | Desta Automation Tobelo Halmahera Utara | kost payment desta 2 |
     And user want to dismiss FTUE
     Then user will see rule "Maks. 4"
     * user will see rule "Boleh pasutri"

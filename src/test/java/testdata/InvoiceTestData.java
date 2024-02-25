@@ -9,5 +9,4 @@ public class InvoiceTestData {
 
     @Setter @Getter
     private static String manualInvoiceNumber;
-
 }

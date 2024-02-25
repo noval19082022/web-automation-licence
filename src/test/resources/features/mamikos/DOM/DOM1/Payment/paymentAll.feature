@@ -23,7 +23,7 @@ Feature: Payment All
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod       |
-      | Desta Automation Tobelo | kost payment desta 2 |
+      | Desta Automation Tobelo Halmahera Utara | kost payment desta 2 |
     And tenant booking kost for "today"
     And tenant logs out
 
@@ -147,3 +147,14 @@ Feature: Payment All
     And tenant select payment method using BRI from riwayat booking
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+
+  @TEST_COOP-5711
+  Scenario: Tenant click bayar saya sudah bayar before paid
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0895124719 | 083176408442 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant click bayar sekarang before paid
+    Then user verify error messages
+      | Pembayaran Belum Terverifikasi |

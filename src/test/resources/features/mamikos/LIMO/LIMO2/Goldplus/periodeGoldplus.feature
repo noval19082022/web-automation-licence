@@ -7,6 +7,7 @@ Feature: Check Period Goldplus Page
     Given user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
+    And owner navigates to owner dashboard
     When owner navigate to list package goldplus 2
     Then user verify list of Periode Berlangganan is appear
       | periodGP        | freeMamiAds            | actualPrice | discPrice   |
@@ -43,8 +44,8 @@ Feature: Check Period Goldplus Page
     And user should not be able to see the text "Favorit"
     And owner should successfully log out
 
-    #scenario change label favorite
   @continue
+    #scenario change label favorite
   Scenario: Setting label favorite change to yes
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -75,7 +76,7 @@ Feature: Check Period Goldplus Page
     And owner should successfully log out
 
     #scenario change label favorite
-    Scenario: Remove favorite more than 1
+  Scenario: Remove favorite more than 1
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |

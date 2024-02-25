@@ -127,6 +127,7 @@ public class BroadcastChatSteps {
 
     @When("owner goes to broadcast chat")
     public void ownerGoesToBroadcastChat() {
+        loading.waitForLoadingIconDisappear();
         ownerDashboard.clickToExpandFiturPromosi();
         ownerDashboard.clickOnBroadcastChat();
         if (!broadcast.isBroadcastChatPackageContentVisible()) {
@@ -171,11 +172,13 @@ public class BroadcastChatSteps {
 
     @When("owner clicks on Baca selengkapnya button")
     public void ownerClicksOnBacaSelengkapnyaButton() {
+        loading.waitForLoadingIconDisappear();
         broadcast.clicksOnLihatSelengkapnyaButton();
     }
 
     @When("owner add broadcast chat for kost {string}")
     public void ownerAddBroadcastChatForKost(String kostName) {
+        loading.waitForLoadingIconDisappear();
         broadcast.clickOnTambahBroadcastChatButton();
         broadcast.searchKostBC(kostName);
     }

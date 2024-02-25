@@ -126,6 +126,9 @@ public class HomepagePO {
     Locator inputBaruTable;
     Locator waktuDiubahDate;
 
+    //-------Billing tracker--------//
+    Locator billingTrackerMenu;
+
     public HomepagePO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -208,6 +211,9 @@ public class HomepagePO {
         inputLamaTable = page.locator("tr td:nth-of-type(4)");
         inputBaruTable = page.locator("tr td:nth-of-type(5)");
         waktuDiubahDate = page.locator("tr td:nth-of-type(6)");
+
+        //-------------Billing Tracker------------//
+        billingTrackerMenu = page.getByTestId("billingTrackerSideMenu");
     }
 
     /**
@@ -940,5 +946,14 @@ public class HomepagePO {
      */
     public String getKeyword() {
         return playwright.getInputValue(searchInput);
+    }
+
+    //---------------billing tracker---------//
+
+    /**
+     * click on Billing tracker menu
+     */
+    public void clickBillingTrackerMenu(){
+        playwright.clickOn(billingTrackerMenu);
     }
 }

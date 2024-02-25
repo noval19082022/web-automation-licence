@@ -433,4 +433,13 @@ public class TenantBookingSteps {
         Assert.assertTrue(kostDetail.getTextOnPopUp("Pengajuan sewa belum terkirim"));
         Assert.assertTrue(kostDetail.getTextOnPopUp("Jika tidak lanjut, kamu tetap bisa cek pengajuan kos ini di Draft"));
     }
+    @And("user click on pilih {string} informasi penyewa")
+    public void userClickOnPilihInformasiPenyewa(String indexToClick) {
+        kostDetail.clickOnPilihInformasiPenyewa(indexToClick);
+    }
+
+    @Then("user will see it has job name")
+    public void userWillSeeHaveJobName() {
+        kostDetail.userWillSeeHaveJobName();
+    }
 }

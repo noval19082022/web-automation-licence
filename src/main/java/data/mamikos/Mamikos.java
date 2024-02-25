@@ -7,7 +7,9 @@ import utilities.JavaHelpers;
 public class Mamikos {
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
 
-    public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
+    public static final String ENV = System.getProperty("env")!=null
+        ?System.getProperty("env")
+        :JavaHelpers.getPropertyValue(MAMIKOS, "env");
     public static final String URL = JavaHelpers.getPropertyValue(MAMIKOS, "mainUrl_" + ENV);
     public static final String OWNER_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownerUrl_" + ENV);
     public static final String GENERALPASSWORD = JavaHelpers.getPropertyValue(MAMIKOS, "generalPassword");
@@ -75,6 +77,7 @@ public class Mamikos {
     public static final String FINANCIAL_REPORT = JavaHelpers.getPropertyValue(MAMIKOS, "financialReport");
     public static final String MAMITOUR_ORDER = JavaHelpers.getPropertyValue(MAMIKOS, "mamitourOrder");
     public static final String GOLDPLUS_PACKAGE2 = JavaHelpers.getPropertyValue(MAMIKOS, "goldplus2Package");
+    public static final String FORMULIR_DATA_PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "formulirDataPenyewa");
 
     @Setter @Getter
     private static  String propertyKosName;
@@ -87,5 +90,8 @@ public class Mamikos {
 
     @Setter @Getter
     private static String phoneOwner;
+
+    @Setter @Getter
+    private static String gpPackage;
 
 }

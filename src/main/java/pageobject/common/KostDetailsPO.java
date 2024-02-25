@@ -1,5 +1,6 @@
 package pageobject.common;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -2090,4 +2091,24 @@ public class KostDetailsPO {
         playwright.pageScrollToDown(300);
         return playwright.isLocatorVisibleAfterLoad(ftueSlider, 3000.0);
     }
-}
+    /**
+     * Click on text pilih button
+     */
+    public void clickOnPilihInformasiPenyewa(String indexToClick) {
+        ElementHandle[] buttons = page.querySelectorAll("(//a[@role='button'])").toArray(new ElementHandle[0]);
+        int index = Integer.parseInt(indexToClick);
+        if (index >= 0 && index < buttons.length) {
+            buttons[index].click();
+        }
+
+    }
+
+    /**
+     * verify name instansi, universitas dan karyawan
+     */
+    public void userWillSeeHaveJobName() {
+        playwright.pageScrollHeightToBottom();
+        Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
+        playwright.getText(job);
+        }
+    }
