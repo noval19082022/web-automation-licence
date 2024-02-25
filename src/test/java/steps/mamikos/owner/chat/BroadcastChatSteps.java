@@ -237,4 +237,9 @@ public class BroadcastChatSteps {
         Assert.assertEquals(broadcast.getButtonDetailText(), buttonString);
         Assert.assertEquals(broadcast.getButtonSubmissionText(), buttonString1);
     }
+
+    @When("user click on lihat invoice button")
+    public void userClickOnLihatInvoiceButton() {
+        broadcast.clickOnLihatInvoiceButton();
+    }
 }

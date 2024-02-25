@@ -17,12 +17,12 @@ Feature: Dashboard GP
 
   @checkAllFilter @continue @dashboardGP
   Scenario: Check all Filter Page Paket GoldPlus Anda (Semua, Aktif, Menunggu Pembayaran Sedan Diproses)
-    When user click "Aktif"
+    When user choose filter "Aktif" on paket goldplus anda page
     Then user see status goldplus is "Goldplus 1"
-    When user click "Menunggu Pembayaran"
+    When user choose filter "Menunggu pembayaran" on paket goldplus anda page
     Then user will see that the text "Kos GoldPlus Tidak Ditemukan" is displayed
     * user will see that the text "Saat ini belum ada kos GoldPlus Anda yang Menunggu pembayaran." is displayed
-    When user click "Sedang Diproses"
+    When user choose filter "Sedang Diproses" on paket goldplus anda page
     Then user will see that the text "Kos GoldPlus Tidak Ditemukan" is displayed
     * user will see that the text "Saat ini belum ada kos GoldPlus Anda yang Sedang Diproses." is displayed
 

@@ -588,4 +588,8 @@ public class GoldplusSteps {
         goldplus.clickFilterInPaymentBillingGp(filter);
     }
 
+    @When("user choose filter {string} on paket goldplus anda page")
+    public void userChooseFilterOnPaketGoldplusAndaPage(String filter) {
+        goldplus.clickFilterPaketGoldplusAnda(filter);
+    }
 }
