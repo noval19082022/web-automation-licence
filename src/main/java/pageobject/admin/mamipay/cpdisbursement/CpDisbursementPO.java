@@ -561,6 +561,7 @@ public class CpDisbursementPO {
     public void editNamaProperty(String name) {
         playwright.clearText(propertyNamePreviewModal);
         playwright.fillCharacterByCharacter(propertyNamePreviewModal, name);
+        playwright.hardWait(1000.0);
     }
 
     /**
@@ -607,6 +608,7 @@ public class CpDisbursementPO {
      */
     public void clicksTransferSekarang() {
         playwright.clickOn(transferSekarangBtn);
+        playwright.hardWait(3000.0);
     }
 
     /**
