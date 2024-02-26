@@ -48,6 +48,7 @@ public class BroadcastChatPO {
     private Locator pilihPesanButton;
     private Locator tidakJadiButtonPopUp;
     private Locator keluarButton;
+    private Locator lihatInvoiceButton;
     public BroadcastChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -91,6 +92,7 @@ public class BroadcastChatPO {
         pilihPesanButton = playwright.getButtonBySetName("Pilih Pesan");
         tidakJadiButtonPopUp = playwright.getButtonBySetName("Tidak Jadi");
         keluarButton = playwright.getButtonBySetName("Keluar");
+        lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
     }
 
     /**
@@ -431,5 +433,12 @@ public class BroadcastChatPO {
      */
     public String getButtonSubmissionText() {
         return playwright.getText(ajukanGantiPaketButton);
+    }
+
+    /**
+     * Click on lihat invoice button
+     */
+    public void clickOnLihatInvoiceButton() {
+        playwright.clickOn(lihatInvoiceButton);
     }
 }

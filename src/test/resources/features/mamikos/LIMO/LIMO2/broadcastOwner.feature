@@ -288,7 +288,7 @@ Feature: Broadcast Chat Owner
     And user click chat button in top bar owner home page
     And user click on the broadcast message icon in the chat page
     Then user will see that the text "Anda bisa menggunakan Fitur Broadcast Chat setelah proses pembelian paket selesai." is displayed
-    When user click "Lihat Invoice"
+    When user click on lihat invoice button
     Then user will see that the text "Detail Tagihan" is displayed
 
   @continue

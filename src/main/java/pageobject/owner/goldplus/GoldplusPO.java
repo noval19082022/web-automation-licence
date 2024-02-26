@@ -51,6 +51,7 @@ public class GoldplusPO {
     Locator detailManfaatGP1;
     Locator benefitGP;
     Locator detailManfaatGP2;
+    Locator filterPaketGoldplusAnda;
 
 
     public GoldplusPO(Page page) {
@@ -634,5 +635,13 @@ public class GoldplusPO {
     public void clickOnPerpanjangBtnOnChatRoom(){
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
         playwright.clickOnTextButton("Perpanjang");
+    }
+
+    /**
+     * Choose filter paket goldplus anda
+     */
+    public void clickFilterPaketGoldplusAnda(String filter){
+        filterPaketGoldplusAnda = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter));
+        playwright.clickOn(filterPaketGoldplusAnda);
     }
 }
