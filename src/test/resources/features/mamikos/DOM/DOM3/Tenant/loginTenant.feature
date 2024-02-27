@@ -126,3 +126,53 @@ Feature: Tenant - Login
       | phone stag    | phone prod  | password  |
       | 0879864312548 | 08100000622 | qwerty123 |
     Then user tenant profile picture is shown
+
+  @TEST_COOP-6711
+  Scenario: tenant login - tenant login by click lihat fasilitas kamar
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And user want to see more detail room facility section on the kost detail page
+    And user login from kost detail via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0879864312548 | 08100000622   | qwerty123    |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+  @TEST_COOP-6712
+  Scenario: tenant login - tenant login by click lihat fasilitas umum
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    And user want to see more detail facility umum
+    And user login from kost detail via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0879864312548 | 08100000622   | qwerty123    |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+  @TEST_COOP-6713
+  Scenario: tenant login - tenant login with facebook in landing page
+    Given user go to mamikos homepage
+      When user search keyword:
+        | search stag | search prod |
+        | UGM         | UGM         |
+      And user login as tenant via facebook:
+        | email stag          | email prod          | password           |
+        | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+      And user navigate to kost saya page
+      Then user tenant profile picture is shown
+
+  @TEST_COOP-6715
+  Scenario: tenant login - tenant login with facebook in detail kos
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    And user login as tenant via facebook:
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
