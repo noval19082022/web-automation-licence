@@ -494,4 +494,11 @@ public class KostDetailSteps {
     public void user_can_unfavorite_the_kost_for_recomendation_listing() {
         kostDetail.clickOnUnfavoriteKostButton();
     }
+
+    @And("user want to see more detail facility umum")
+    public void userWantToSeeMoreDetailFacilityUmum() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        kostDetail.clickFasilitasUmumSeeAll();
+    }
 }

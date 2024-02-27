@@ -228,3 +228,13 @@ Feature: New Flow Register Tenant
     And user clicks on Enter button Tenant
     And user clicks on Register button
     Then user redirected to "/register-pencari?source=list%20kos%20result"
+
+  @TEST_COOP-6716
+  Scenario: Register Tenant - tenant register from kost detail
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When user clicks on Enter button
+    And user clicks on Register button
+    Then user redirected to "/register-pencari?source=list%20kos%20result"

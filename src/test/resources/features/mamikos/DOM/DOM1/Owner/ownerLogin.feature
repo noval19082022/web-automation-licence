@@ -83,4 +83,3 @@ Feature: Owner - Login
       | phone stag   | phone prod   | password     |
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     Then user redirected to "owner"
-

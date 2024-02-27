@@ -185,3 +185,23 @@ Feature: New Flow Register Owner
     And user fills out registration form without click register "B@g4Z", "at@test.com", "at@test.com", "qwerty123", "qwerty123"
     Then user verify error messages
       | Masukkan karakter alfabet. |
+
+  @TEST_COOP-6717
+  Scenario: Register Owner - user register in landing page
+    Given user go to mamikos homepage
+    When user search keyword:
+      | search stag | search prod |
+      | UGM         | UGM         |
+    When user clicks on Enter button
+    And user clicks on Register button
+    Then user redirected to "/register-pemilik?source=list%20kos%20result"
+
+  @TEST_COOP-6718
+  Scenario: Register Owner - Owner register from kost detail
+    Given user go to mamikos homepage
+    When tenant search kost then go to kost details:
+      | kost name stag               | kost name prod               |
+      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When user clicks on Enter button
+    And user clicks on Register button
+    Then user redirected to "/register-pemilik?source=list%20kos%20result"

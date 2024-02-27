@@ -95,6 +95,7 @@ public class KostDetailsPO {
     //---------------Facility Room Section----------------------
     private Locator facilityRoomSeeAllBtn;
     private Locator facilityRoomPopUp;
+    private Locator facilityUmum;
 
     //--------------Facility Bath Section----------------------
     private Locator facilityBathSection;
@@ -316,6 +317,7 @@ public class KostDetailsPO {
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
         this.facilityRoomPopUp = page.locator("div[class='detail-kost-facilities-modal__body']");
+        this.facilityUmum = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kos ini"));
 
         //--------------Facility Bath Section----------------------
         this.facilityBathSection = page.getByText("Fasilitas kamar mandi");
@@ -716,6 +718,12 @@ public class KostDetailsPO {
         playwright.pageScrollInView(facilityRoomSeeAllBtn);
         playwright.waitTillLocatorIsVisible(facilityRoomSeeAllBtn);
         facilityRoomSeeAllBtn.click();
+    }
+
+    public void clickFasilitasUmumSeeAll(){
+        playwright.pageScrollUntilElementIsVisible(facilityUmum);
+        playwright.waitTillLocatorIsVisible(facilityUmum);
+        playwright.clickOn(facilityUmum);
     }
 
     /**
@@ -2111,4 +2119,4 @@ public class KostDetailsPO {
         Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         playwright.getText(job);
         }
-    }
+}
