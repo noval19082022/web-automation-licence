@@ -670,4 +670,13 @@ public class MamikosListInvoicePO {
     public void selectPackageType(String value) {
         playwright.selectDropdownByValue(page.locator("select[name='package_type']"), value);
     }
+
+    /**
+     * choose invoice type
+     *
+     * @throws InterruptedException
+     */
+    public void selectInvoiceType(String invoiceType) {
+        playwright.selectDropdownByValue(page.locator("select[name='invoice_type']"), invoiceType);
+    }
 }

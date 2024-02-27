@@ -216,4 +216,10 @@ public class allInvoiceSteps {
     public void adminGoToPaidInvoicrList(String InvoiceList) {
         invoicePO.clickPaidInvoiceList(InvoiceList);
     }
+
+    @And("admin choose invoice type {string}")
+    public void adminChooseInvoiceType(String type) {
+        invoicePO.selectInvoiceType(type);
+        invoicePO.clickOnCariInvoice();
+    }
 }

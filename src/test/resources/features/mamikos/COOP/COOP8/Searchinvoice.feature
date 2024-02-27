@@ -50,3 +50,35 @@ Feature: Search invoice
     Then admin verify WhatsApp reminder status information
       | Platform          | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status    |
       | WhatsApp          | Hai  Laksana Adi, Udah coba bayar kosan yang anti ribet? Cuma beberapa klik, uang sewa langsung diterima pemilik.Yuk, cobain langsung di https://mamikos.com/user/kost-saya?tagihan=true&ch=08 | 2021-09-06 05:12:10 | Billing Reminder Without Voucher Today | pending   |
+
+  @TEST_COOP-1397
+  Scenario Outline: [Search invoice]Find <status> data invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on Search Invoice Menu form left bar
+    And admin choose method Status "<status>"
+    Then admin will get data Status with method "<output>"
+    Examples:
+      | status  | output  |
+      | Unpaid  | Unpaid  |
+      | Paid    | Paid    |
+      | Expired | Expired |
+
+  @TEST_COOP-1399 @continue
+  Scenario: [Search invoice]Find recurring data invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on Search Invoice Menu form left bar
+    And admin clicks on Search Invoice Menu form left bar
+    And admin choose invoice type "recurring_invoice"
+    Then admin should be able to see the text "Pembayaran bulan ke-2"
+
+ @TEST_COOP-6707
+  Scenario: [Search invoice]Find first invoice data invoice
+    And admin clicks on Search Invoice Menu form left bar
+    And admin choose invoice type "first_invoice"
+    Then admin should not be able to see the text "Pembayaran bulan ke-2"
