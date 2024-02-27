@@ -235,6 +235,6 @@ Feature: New Flow Register Tenant
     When tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
-    When user clicks on Enter button
+    And user clicks on Enter button Tenant
     And user clicks on Register button
-    Then user redirected to "/register-pencari?source=list%20kos%20result"
+    Then user redirected to "/register-pencari?source=property%20detail%20page"

@@ -204,4 +204,4 @@ Feature: New Flow Register Owner
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     When user clicks on Enter button
     And user clicks on Register button
-    Then user redirected to "/register-pemilik?source=list%20kos%20result"
+    Then user redirected to "register-pemilik?source=property%20detail%20page"

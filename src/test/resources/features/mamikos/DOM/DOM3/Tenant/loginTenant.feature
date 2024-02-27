@@ -162,6 +162,7 @@ Feature: Tenant - Login
       And user login as tenant via facebook:
         | email stag          | email prod          | password           |
         | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+      And user navigate to kost saya page
       Then user tenant profile picture is shown
 
   @TEST_COOP-6715
