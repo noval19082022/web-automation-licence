@@ -97,4 +97,14 @@ public class CommonSteps {
         new PlaywrightHelpers(ActiveContext.getActivePage())
                 .hardWait(Double.parseDouble(time) * 1000);
     }
+
+    @Then("admin should be able to see the text {string}")
+    public void adminShouldBeAbleToSeeTheText(String info) {
+        Assert.assertTrue(playwright.isTextDisplayed(info, 1000));
+    }
+
+    @Then("admin should not be able to see the text {string}")
+    public void adminShouldNotBeAbleToSeeTheText(String info) {
+        Assert.assertFalse(playwright.isTextDisplayed(info));
+    }
 }
