@@ -95,7 +95,9 @@ public class KostDetailsPO {
     //---------------Facility Room Section----------------------
     private Locator facilityRoomSeeAllBtn;
     private Locator facilityRoomPopUp;
-    private Locator facilityUmum;
+
+    //---------------Facility Umum Section----------------------
+    private Locator facilityUmumBtn;
 
     //--------------Facility Bath Section----------------------
     private Locator facilityBathSection;
@@ -317,7 +319,9 @@ public class KostDetailsPO {
         //---------------Facility Room Section----------------------
         this.facilityRoomSeeAllBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kamar tipe ini"));
         this.facilityRoomPopUp = page.locator("div[class='detail-kost-facilities-modal__body']");
-        this.facilityUmum = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kos ini"));
+
+        //---------------Facility Umum Section----------------------
+        this.facilityUmumBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat semua fasilitas kos ini"));
 
         //--------------Facility Bath Section----------------------
         this.facilityBathSection = page.getByText("Fasilitas kamar mandi");
@@ -720,10 +724,13 @@ public class KostDetailsPO {
         facilityRoomSeeAllBtn.click();
     }
 
+    /**
+     * this method will be click facilty umum section and more facility list will be appear
+     */
     public void clickFasilitasUmumSeeAll(){
-        playwright.pageScrollUntilElementIsVisible(facilityUmum);
-        playwright.waitTillLocatorIsVisible(facilityUmum);
-        playwright.clickOn(facilityUmum);
+        playwright.pageScrollUntilElementIsVisible(facilityUmumBtn);
+        playwright.waitTillLocatorIsVisible(facilityUmumBtn);
+        playwright.clickOn(facilityUmumBtn);
     }
 
     /**
