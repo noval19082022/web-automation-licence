@@ -31,37 +31,37 @@ Feature: Billing Tracker
     And admin click on "Tandai Sudah Follow-up"
     Then admin can see bulk "Tandai Belum Follow-up"
 
-  @TEST_COOP-3251 @TEST_COOP-3250
+  @TEST_COOP-3251 @TEST_COOP-3250 @continue
   Scenario: [Billing Tracker][Not follow up]Mark not follow up when data is follow up
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "081197878412"
     Then admin click on "Tandai Belum Follow-up"
 
-  @TEST_COOP-3213 @TEST_COOP-3280 @continue
+  @TEST_COOP-3213 @TEST_COOP-3280 @continue @notes
   Scenario: [Billing Tracker][Notes]Create notes on invoice
     When admin click on reset button
-    And admin search billing tracker by "No. HP Penyewa" and "085246224444"
+    And admin search billing tracker by "No. HP Penyewa" and "081246667080"
     Then admin can see tambah catatan button
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "085246224444"
     And admin fill notes tracker with:
       | type  | Pindah tipe kamar |
       | notes | pindah kamar 5    |
     Then admin can see notes with "Pindah tipe kamar"
 
-  @TEST_COOP-3254
+  @TEST_COOP-3254 @continue  @notes
   Scenario: [Billing Tracker][Notes]Create notes for tag = Blast
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832828484"
-    Then admin can see tambah catatan button
     And admin fill notes tracker with:
       | type  | Blast          |
       | notes | Tutup jam 9 malam |
     Then admin can see notes with "Blast"
 
-  @TEST-COOP-3252
+  @TEST-COOP-3252  @notes
   Scenario: [Billing Tracker][Notes]Check the display when invoice have many notes > 2 noted
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832828484"
-    Then admin can see tambah catatan button
     And admin fill notes tracker with:
       | type  | Blast          |
       | notes | Tutup jam 9 malam |
