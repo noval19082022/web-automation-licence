@@ -78,6 +78,7 @@ public class Mamikos {
     public static final String MAMITOUR_ORDER = JavaHelpers.getPropertyValue(MAMIKOS, "mamitourOrder");
     public static final String GOLDPLUS_PACKAGE2 = JavaHelpers.getPropertyValue(MAMIKOS, "goldplus2Package");
     public static final String FORMULIR_DATA_PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "formulirDataPenyewa");
+    public static final String STATISTIC_PPRS = JavaHelpers.getPropertyValue(MAMIKOS, "statisticPPRS") ;
 
     @Setter @Getter
     private static  String propertyKosName;

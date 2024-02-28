@@ -3,6 +3,8 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class PaidRecomendationSystemPO {
@@ -14,6 +16,7 @@ public class PaidRecomendationSystemPO {
     private Locator titlePropertyNotActive;
     private Locator descPropertyNotActive;
     private Locator imagePropertyNotActive;
+    private Locator statisticPage;
 
 
 
@@ -24,6 +27,7 @@ public class PaidRecomendationSystemPO {
         this.titlePropertyNotActive = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Properti Belum Ada"));
         this.descPropertyNotActive = page.getByText("Anda belum punya properti yang terverifikasi. Data properti terverifikasi akan m");
         this.imagePropertyNotActive = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos-not-found"));
+        this.statisticPage = page.locator(".statistic-menu");
     }
 
     /**
@@ -55,7 +59,23 @@ public class PaidRecomendationSystemPO {
      * @return boolean
      */
     public boolean isImagePropertyNotActiveShow() {
-        playwright.waitTillPageLoaded();
+        playwright.waitForElementStateToBe(imagePropertyNotActive, "visible");
         return playwright.waitTillLocatorIsVisible(imagePropertyNotActive);
+    }
+
+    /**
+     * Navigates to Statistic page
+     */
+    public void navigatesToStatisticPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.STATISTIC_PPRS, 50000.0, LoadState.LOAD);
+        playwright.bringPageToView(page);
+    }
+
+    /**
+     * check statistic page visible or not
+     */
+    public boolean isStatisticPageVisible() {
+        playwright.waitForElementStateToBe(statisticPage, "visible");
+        return playwright.waitTillLocatorIsVisible(statisticPage);
     }
 }
