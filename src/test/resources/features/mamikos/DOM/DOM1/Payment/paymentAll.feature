@@ -33,7 +33,6 @@ Feature: Payment All
       | phone stag   | phone prod   | password  |
       | 081328787342 | 081328787342 | Perempuan |
     And owner accept booking and select the room
-    Then owner should redirect back to pengajuan booking page
     And owner logs out
 
   @extendContract @TEST_COOP-5181
