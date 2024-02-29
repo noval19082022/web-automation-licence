@@ -24,6 +24,10 @@ public class BillingTrackePO {
     Locator typeNotesButton;
     Locator selectTypeNoted;
     Locator inputNotesCatatan;
+    Locator lihatLebihBanyakDropdown;
+    Locator adminEditNote;
+    Locator tagDropdown;
+    Locator saveButtonNotes;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -42,11 +46,15 @@ public class BillingTrackePO {
         createNotesButtonOnAction = page.locator("//p[@class=\"bg-c-text bg-c-text--body-2\"]").first();
         typeNotesButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tag dropdown-down"));
         inputNotesCatatan = page.getByPlaceholder("Tulis catatan di sini");
+        lihatLebihBanyakDropdown = page.locator(".billing-tracker-note-list__expand-toggle");
+        adminEditNote = page.locator("//div[@class='billing-tracker-note-list__item-tag bg-c-label bg-c-label--rainbow bg-c-label--rainbow-white']");
+        saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        tagDropdown = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
     }
 
-    public void searchType(String type, String text){
+    public void searchType(String type, String text) {
         playwright.clickOn(searchTypeButton);
-        searchTypeText = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+type+""));
+        searchTypeText = page.locator("a").filter(new Locator.FilterOptions().setHasText(type));
         playwright.clickOn(searchTypeText);
         playwright.fill(searchInputField, text);
         playwright.clickOn(searchButton);
@@ -54,37 +62,40 @@ public class BillingTrackePO {
 
     /**
      * get validation on search
+     *
      * @param text
      * @return text
      */
-    public boolean getValidationBillingTrackertext(String text){
+    public boolean getValidationBillingTrackertext(String text) {
         Locator tenantName = page.getByText(text);
         return playwright.waitTillLocatorIsVisible(tenantName);
     }
 
     /**
      * get result data after search
+     *
      * @return data list
      */
-    public boolean getResutlDataTable(){
-        return playwright.waitTillLocatorIsVisible(resultDataTable,3000.0);
+    public boolean getResutlDataTable() {
+        return playwright.waitTillLocatorIsVisible(resultDataTable, 3000.0);
     }
 
     /**
      * click on reset button
      */
-    public void clickResetButton(){
+    public void clickResetButton() {
         playwright.clickOn(resetButton);
     }
 
     /**
      * click on filter button
+     *
      * @param text example : bse name
      */
-    public void clickFilterButton(String text){
+    public void clickFilterButton(String text) {
         playwright.clickOn(filterButton);
         playwright.clickOn(filterBseButton);
-        Locator bseFilter = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+text+""));
+        Locator bseFilter = page.locator("a").filter(new Locator.FilterOptions().setHasText(text));
         playwright.clickOn(bseFilter);
         playwright.clickOn(applyButton);
         playwright.clickOn(searchButton);
@@ -92,75 +103,111 @@ public class BillingTrackePO {
 
     /**
      * click on bulk follow up
+     *
      * @param text example "Tandai sudah follow-up
      */
-    public void clickBulkFollowUp(String text){
+    public void clickBulkFollowUp(String text) {
         playwright.clickOn(iconActionButton);
         playwright.hardWait(100);
-        Locator bulkFollow = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("file-booking "+text+""));
+        Locator bulkFollow = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("file-booking " + text));
         playwright.clickOn(bulkFollow);
     }
 
     /**
      * validate bulk will visible
+     *
      * @param text example: Tandai sudah follow-up
      * @return text Tandai sudah follow-up
      */
-    public String getBulkText(String text){
+    public String getBulkText(String text) {
         playwright.clickOn(iconActionButton);
-        Locator bulkText = page.locator("//p[contains(., '"+text+"')]");
+        Locator bulkText = page.locator("//p[contains(., '" + text + "')]");
         return playwright.getText(bulkText);
     }
 
     /**
      * validate Tambah catatan button on main page
+     *
      * @return
      */
-    public boolean getCreateNotesButtonVisible(){
-        return playwright.waitTillLocatorIsVisible(createNotesButton,3000.0);
+    public boolean getCreateNotesButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(createNotesButton, 3000.0);
     }
 
     /**
      * Click tambah catatan
      */
-    public void clickCreateNotesAction(){
+    public void clickCreateNotesAction() {
         playwright.clickOn(iconActionButton);
         playwright.clickOn(createNotesButtonOnAction);
     }
 
     /**
      * set notes type on popup
+     *
      * @param type example : Pindah tipe kamar
      */
-    public void setAndInputNotesType(String type){
+    public void setAndInputNotesType(String type) {
         playwright.clickOn(typeNotesButton);
-        selectTypeNoted = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+type+""));
+        selectTypeNoted = page.locator("a").filter(new Locator.FilterOptions().setHasText(type));
         playwright.clickOn(selectTypeNoted);
     }
 
     /**
      * fill catatan on notes popup
+     *
      * @param notes
      */
-    public void fillNotesCatatan(String notes){
+    public void fillNotesCatatan(String notes) {
         inputNotesCatatan.fill(notes);
     }
 
     /**
      * Click save button on noted popup
      */
-    public void clickSaveButton(){
-       Locator saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-       playwright.clickOn(saveButtonNotes);
+    public void clickSaveButton() {
+        //   Locator saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        playwright.clickOn(saveButtonNotes);
     }
 
     /**
      * validate noted on main page
+     *
      * @param text
      * @return text
      */
-    public boolean getNotedOnMainPage(String text){
-        Locator getNotedOnMainPage = page.locator("//div[contains(text(),'"+text+"')]").first();
+    public boolean getNotedOnMainPage(String text) {
+        Locator getNotedOnMainPage = page.locator("//div[contains(text(),'" + text + "')]").first();
         return playwright.waitTillLocatorIsVisible(getNotedOnMainPage, 3000.0);
     }
+
+    /**
+     * validate for jatuh tempo
+     *
+     * @param jatuhTempo
+     * @return text
+     */
+    public boolean getResutlDataTableReccuring(String jatuhTempo, String namaBiaya) {
+        Locator getResutlDataTableReccuring = page.locator("(//td[normalize-space()='" + jatuhTempo + "'])");
+        return playwright.waitTillLocatorIsVisible(getResutlDataTableReccuring, 3000.0);
+    }
+
+    /**
+     * click on text
+     */
+    public void clickOnLihatLebihBanyakDropdown() {
+        playwright.clickOn(lihatLebihBanyakDropdown);
+    }
+
+    /**
+     * Admin edit note
+     */
+    public void adminEditNote(String text) {
+        playwright.clickOn(adminEditNote);
+        playwright.clickOn(tagDropdown);
+        Locator textButton = page.locator("//div[@class='bg-c-dropdown__menu-item-content'][normalize-space()='" + text + "']");
+        playwright.clickOn(textButton);
+        playwright.clickOn(saveButtonNotes);
+    }
 }
+
