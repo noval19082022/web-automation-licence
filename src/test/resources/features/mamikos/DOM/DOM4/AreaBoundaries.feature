@@ -77,12 +77,16 @@ Feature: Area Boundaries
   Scenario: User Can Use Price Sorting From Lower To Greater
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Depok      |
-      | area result    | Depok City |
+      | search keyword | Padang   |
+      | area result    | Padang   |
     When user set price sorting from lower to greater
     Then user can see kos list rearrange from cheaper to expensive
 
   @areaboundaries @TEST_COOP-5638
   Scenario: User Can Use Price Sorting From Greater To Lower
-    When user set price sorting from greater to lower
+    Given user go to mamikos homepage
+    When user search and go to kost landing based on area:
+      | search keyword | Padang   |
+      | area result    | Padang   |
+    And user set price sorting from greater to lower
     Then user can see kos list rearrange from expensive to cheaper
