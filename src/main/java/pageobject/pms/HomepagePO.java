@@ -284,7 +284,7 @@ public class HomepagePO {
      * Click on tambah penyewa menu in homepage
      */
     public void clickOnTambahPenyewa() {
-        playwright.waitTillLocatorIsVisible(tambahPenyewaButton,2000.0);
+        playwright.hardWait(8000.0);
         tambahPenyewaButton.click();
     }
 

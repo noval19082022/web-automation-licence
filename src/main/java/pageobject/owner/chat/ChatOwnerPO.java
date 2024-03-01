@@ -254,7 +254,8 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isAttachmentButtonDisabled() {
-        return attachmentButton.isDisabled();
+        playwright.waitTillLocatorIsVisible(attachmentButton, 2_000.0);
+        return playwright.isButtonDisable(attachmentButton);
     }
 
     /**

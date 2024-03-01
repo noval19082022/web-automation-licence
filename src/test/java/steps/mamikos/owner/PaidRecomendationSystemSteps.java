@@ -29,4 +29,14 @@ import pageobject.owner.PaidRecomendationSystemPO;
         public void owner_can_see_desc_at_section_statistic(String text) {
             Assert.assertTrue(pprs.getDescDoesntHavePropertyActive().contains(text),"description doesnt match");
         }
+
+        @When("owner accsess statistic page")
+        public void owner_accsess_statistic_page() {
+           pprs.navigatesToStatisticPage();
+        }
+
+        @Then("owner can see Laporan Statistik page when doesnt have property active")
+        public void owner_can_see_laporan_statistik_page_when_doesnt_have_property_active() {
+            Assert.assertTrue(pprs.isStatisticPageVisible(),"statistic page is not show");
+        }
     }

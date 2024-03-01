@@ -264,7 +264,7 @@ public class RiwayatKostPO {
      * @return boolean
      */
     public Boolean isKostReviewEntryPointNotDisplayed() {
-        return playwright.waitTillLocatorIsVisible(kostReviewEntryPointNotDisplayed);
+        return playwright.waitTillLocatorIsVisible(kostReviewEntryPointNotDisplayed, 2000.0);
     }
 
     /**

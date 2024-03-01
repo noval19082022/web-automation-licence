@@ -517,4 +517,11 @@ public class KostDetailSteps {
     public void tenantCanSelectRangeDateToJoinWaitingList() {
         kostDetail.clickCalViewOnRentangTglMasukKos();
     }
+
+    @And("user want to see more detail facility umum")
+    public void userWantToSeeMoreDetailFacilityUmum() {
+        playwright.pageScrollToDown(200);
+        kostDetail.dismissFTUE();
+        kostDetail.clickFasilitasUmumSeeAll();
+    }
 }

@@ -6,7 +6,7 @@ Feature: Edit profile for jobs as Lainnya
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
-      | 08100000630   | 08100000630   | qwerty123     |
+      | 0812000007   | 08100000630   | qwerty123     |
     And tenant search kost then go to kost details:
       | kost name stag                               | kost name prod                         |
       | Kost Jawa Tobelo Utara Halmahera Utara       | kost Jawa Tobelo Utara Halmahera Utara |

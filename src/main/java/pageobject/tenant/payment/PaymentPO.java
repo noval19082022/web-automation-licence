@@ -74,6 +74,9 @@ public class PaymentPO {
      */
     public void seeInvoiceAfterPayment() {
         playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_BOOKING);
+        if (!playwright.waitTillLocatorIsVisible(lihatSelengkapnya, 5_000.0)) {
+            playwright.reloadPage();
+        }
         playwright.clickOn(lihatSelengkapnya);
         playwright.clickOn(lihatInvoice);
     }

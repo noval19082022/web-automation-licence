@@ -19,6 +19,11 @@ public class BillingTrackePO {
     Locator filterBseButton;
     Locator applyButton;
     Locator iconActionButton;
+    Locator createNotesButton;
+    Locator createNotesButtonOnAction;
+    Locator typeNotesButton;
+    Locator selectTypeNoted;
+    Locator inputNotesCatatan;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -33,6 +38,10 @@ public class BillingTrackePO {
         filterBseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih akun BSE dropdown-down"));
         applyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         iconActionButton = page.locator("div.table-action-menu__activator").first();
+        createNotesButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus Tambah Catatan")).first();
+        createNotesButtonOnAction = page.locator("//p[@class=\"bg-c-text bg-c-text--body-2\"]").first();
+        typeNotesButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tag dropdown-down"));
+        inputNotesCatatan = page.getByPlaceholder("Tulis catatan di sini");
     }
 
     public void searchType(String type, String text){
@@ -101,5 +110,57 @@ public class BillingTrackePO {
         playwright.clickOn(iconActionButton);
         Locator bulkText = page.locator("//p[contains(., '"+text+"')]");
         return playwright.getText(bulkText);
+    }
+
+    /**
+     * validate Tambah catatan button on main page
+     * @return
+     */
+    public boolean getCreateNotesButtonVisible(){
+        return playwright.waitTillLocatorIsVisible(createNotesButton,3000.0);
+    }
+
+    /**
+     * Click tambah catatan
+     */
+    public void clickCreateNotesAction(){
+        playwright.clickOn(iconActionButton);
+        playwright.clickOn(createNotesButtonOnAction);
+    }
+
+    /**
+     * set notes type on popup
+     * @param type example : Pindah tipe kamar
+     */
+    public void setAndInputNotesType(String type){
+        playwright.clickOn(typeNotesButton);
+        selectTypeNoted = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+type+""));
+        playwright.clickOn(selectTypeNoted);
+    }
+
+    /**
+     * fill catatan on notes popup
+     * @param notes
+     */
+    public void fillNotesCatatan(String notes){
+        inputNotesCatatan.fill(notes);
+    }
+
+    /**
+     * Click save button on noted popup
+     */
+    public void clickSaveButton(){
+       Locator saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+       playwright.clickOn(saveButtonNotes);
+    }
+
+    /**
+     * validate noted on main page
+     * @param text
+     * @return text
+     */
+    public boolean getNotedOnMainPage(String text){
+        Locator getNotedOnMainPage = page.locator("//div[contains(text(),'"+text+"')]").first();
+        return playwright.waitTillLocatorIsVisible(getNotedOnMainPage, 3000.0);
     }
 }
