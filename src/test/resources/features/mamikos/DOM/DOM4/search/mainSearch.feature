@@ -217,3 +217,29 @@ Feature: Main Search
       | city stag      | city prod    |
       | Sleman         | Sleman       |
     Then title listing that appear have location campus in "Sleman"
+
+  @continue @TEST_COOP-1552
+  Scenario: [DWeb][Kost listing][Sorting] User Can Use Price Sorting From Lower To Greater
+    Given user go to mamikos homepage
+    When user clicks Search
+    And user click area city
+      | city stag                | city prod                  |
+      | Yogyakarta chevron-down  | Yogyakarta chevron-down    |
+    And under area city click
+      | city stag      | city prod    |
+      | Sleman         | Sleman       |
+    And user set price sorting from lower to greater
+    Then user can see kos list rearrange from cheaper to expensive
+
+  @TEST_COOP-6725
+  Scenario: [DWeb][Kost listing][Sorting] User Can Use Price Sorting From Greater To Lower
+    Given user go to mamikos homepage
+    When user clicks Search
+    And user click area city
+      | city stag                | city prod                  |
+      | Yogyakarta chevron-down  | Yogyakarta chevron-down    |
+    And under area city click
+      | city stag      | city prod    |
+      | Sleman         | Sleman       |
+    And user set price sorting from greater to lower
+    Then user can see kos list rearrange from expensive to cheaper

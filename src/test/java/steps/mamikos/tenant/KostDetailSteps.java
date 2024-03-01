@@ -494,4 +494,27 @@ public class KostDetailSteps {
     public void user_can_unfavorite_the_kost_for_recomendation_listing() {
         kostDetail.clickOnUnfavoriteKostButton();
     }
+
+    @Then("tenant see waiting list form")
+    public void tenantSeeWaitingListForm() {
+        Assert.assertTrue(kostDetail.isKostNameWLFromDisplayed(), "Kos Name in Waiting list form is not displayed");
+        Assert.assertTrue(kostDetail.isKostTypeWLFormDisplayed(), "Kos Type in Waiting list form is not displayed");
+        Assert.assertTrue(kostDetail.isTenantNameWLFormDisplayed(), "Tenant Name in Waiting list form is not displayed");
+        Assert.assertTrue(kostDetail.isTenantPhoneWLFOrmDisplayed(), "Tenant Phone in Waiting list form is not displayed");
+        Assert.assertTrue(kostDetail.isSudahAdaTglPastiOptionDisplayed(), "Sudah ada tanggal pasti option is not displayed");
+        Assert.assertTrue(kostDetail.isSecepatnyaOptionDisplayed(), "Secepatnya option is not displayed");
+        Assert.assertTrue(kostDetail.isBaruPerkiraanOptionDisplayed(), "Baru perkiraan option is not displayed");
+        Assert.assertTrue(kostDetail.isBelumAdaTglOptionDisplayed(), "Belum ada tanggal atau perkiraan option is not displayed");
+        Assert.assertTrue(kostDetail.isKirimButtonDisplayed(), "Kirim button is not displayed");
+    }
+
+    @Then("tenant can select date to join waiting list")
+    public void tenantCanSelectDateToJoinWaitingList() {
+        kostDetail.clickCalViewOnTglMasukKos();
+    }
+
+    @Then("tenant can select range date to join waiting list")
+    public void tenantCanSelectRangeDateToJoinWaitingList() {
+        kostDetail.clickCalViewOnRentangTglMasukKos();
+    }
 }
