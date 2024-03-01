@@ -524,8 +524,7 @@ public class SearchSteps {
 
     @When("user set price sorting from lower to greater")
     public void userSetPriceSortingFromLowerToGreater() {
-        playwright.clickOnText("Paling direkomendasikan");
-        playwright.clickOnText("Harga termurah");
+        kostLanding.setSortingFromLowerToGreater();
     }
 
     @Then("user can see kos list rearrange from cheaper to expensive")
@@ -545,8 +544,7 @@ public class SearchSteps {
 
     @When("user set price sorting from greater to lower")
     public void userSetPriceSortingFromGreaterToLower() {
-        playwright.clickOnText("Paling direkomendasikan");
-        playwright.clickOnText("Harga termahal");
+        kostLanding.setSortingFromGreaterToLower();
     }
 
     @Then("user/tenant/owner can see kos list rearrange from expensive to cheaper")
