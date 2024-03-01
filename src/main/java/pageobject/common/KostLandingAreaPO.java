@@ -446,4 +446,20 @@ public class KostLandingAreaPO {
     public void cickOnMulaiCariKosBtn() {
         playwright.clickOn(mulaiCariKostBtn);
     }
+
+    /**
+     * Set Harga termahal sorting
+     */
+    public void setSortingFromGreaterToLower(){
+        playwright.clickOnText("Paling direkomendasikan");
+        playwright.clickOnText("Harga termahal");
+    }
+
+    /**
+     * Set Harga termurah sorting
+     */
+    public void setSortingFromLowerToGreater(){
+        playwright.clickOnText("Paling direkomendasikan");
+        playwright.clickOnText("Harga termurah");
+    }
 }
