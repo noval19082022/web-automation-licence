@@ -112,7 +112,7 @@ public class DisbursementPO {
         tambahanPendapatanKuantitasField = page.getByTestId("cost-qty");
         tambahanPendapatanHargaSatuanField = page.getByTestId("cost-amount");
         tambahanPendapatanSimpanButton = page.getByTestId("simpan-btn");
-        tambahPendapatanEmptyMessageText = page.locator(".ta-c").nth(3);
+        tambahPendapatanEmptyMessageText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Belum Ada Biaya Tambahan Pendapatan"));
         riwayatTransferPendapatanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Transfer Pendapatan"));
         transferPendapatanTitleText = page.locator("#transfer-pendapatan-history");
         refreshDisbursementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refresh Halaman ini"));
