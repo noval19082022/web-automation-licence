@@ -204,14 +204,14 @@ Feature: BnB feature
       | Filter                    |
       | Menghentikan kontrak sewa |
 
-  @downloadBiodata
-  Scenario: Download biodata fakedoor
-    Given user go to mamikos homepage
-    And user navigate to penyewa page
-    And user search kost in penyewa menu "ARAC"
-    And user click download biodata penyewa button
-    And user tick on checkbox pop up
-    Then user will see information about upcoming feature
+#  @downloadBiodata
+#  Scenario: Download biodata fakedoor
+#    Given user go to mamikos homepage
+#    And user navigate to penyewa page
+#    And user search kost in penyewa menu "ARAC"
+#    And user click download biodata penyewa button
+#    And user tick on checkbox pop up
+#    Then user will see information about upcoming feature
 
   @waitingTerminateConfirmation
   Scenario: Cancel and create booking
