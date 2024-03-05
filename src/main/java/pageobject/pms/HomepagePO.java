@@ -187,7 +187,6 @@ public class HomepagePO {
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
 
         //---Filter---//
-//        filterBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("1 Filter"));
         filterBtn = page.locator("//span[contains(., 'Filter')]");
         tglLiveMulai = page.getByTestId("homeFilterModalDate-datePickerStart").getByPlaceholder("Pilih tanggal mulai");
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
@@ -838,8 +837,6 @@ public class HomepagePO {
 
         kotaValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(pilihKota));
         playwright.clickOn(kotaValue);
-
-//        playwright.clickOn(terapkanBtn);
     }
 
     /**
@@ -963,34 +960,64 @@ public class HomepagePO {
     }
 
     //---BSE Filter---//
+
+    /**
+     * Clicks Dropdown BSE
+     * And scroll down to BSE value
+     * Then clicks BSE value
+     * @param filter
+     */
     public void filterBSE(String filter) {
-//        playwright.clickOn(filterBtn);
         playwright.clickOn(pilihBSEDropdown);
         BSEValue = page.locator("(//div[@data-testid='search-checkbox-dropdown'])[3]//p[contains(., '" +filter+ "')]");
         playwright.pageScrollInView(BSEValue);
         playwright.clickOn(BSEValue);
-
-//        playwright.clickOn(terapkanBtn);
     }
 
-    public String getAllBSEValueInTable(int i) {
-//        BSEInTable = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(filter));
-        BSEInTable = page.locator("tr td:nth-of-type(5)").nth(i);
+    /**
+     * Get String All BSE Value in Table
+     * @param indexBSE ke-i
+     * @return String All BSE Value
+     */
+    public String getAllBSEValueInTable(int indexBSE) {
+        BSEInTable = page.locator("tr td:nth-of-type(5)").nth(indexBSE);
         return playwright.getText(BSEInTable);
     }
 
+    /**
+     * Clicks Terapkan button in Filter
+     */
     public void clicksTerapkanBtn() {
         playwright.clickOn(terapkanBtn);
     }
 
-    public String getAllKotaValueInTable(int i) {
-        kotaInTable = page.locator("tr td:nth-of-type(3)").nth(i);
+    /**
+     * Get String All Kota Value in Table
+     * @param indexKota ke-i
+     * @return String All Kota Value
+     */
+    public String getAllKotaValueInTable(int indexKota) {
+        kotaInTable = page.locator("tr td:nth-of-type(3)").nth(indexKota);
         return playwright.getText(kotaInTable);
     }
 
-    public String getAllProdukValueInTable(int i) {
-        produkInTable = page.locator("tr td:nth-of-type(4)").nth(i);
+    /**
+     * Get String All Produk Value in Table
+     * @param indexProduk value ke-i
+     * @return String All Produk Value
+     */
+    public String getAllProdukValueInTable(int indexProduk) {
+        produkInTable = page.locator("tr td:nth-of-type(4)").nth(indexProduk);
         return playwright.getText(produkInTable);
+    }
+
+    /**
+     * Get Total Row in Daftar Properti page
+     * @return Total Row
+     */
+    public int getTotalRow(){
+        BSEInTable = page.locator("tr td:nth-of-type(5)");
+        return BSEInTable.count();
     }
     //---End of BSE Filter---//
 }

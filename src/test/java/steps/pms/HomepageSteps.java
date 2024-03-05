@@ -321,7 +321,11 @@ public class HomepageSteps {
 
     @Then("the system is displaying property with BSE {string}")
     public void the_system_is_displaying_property_with_BSE(String filter){
-        for (int i=0; i<8; i++){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
+            playwright.waitTillPageLoaded();
             Assert.assertEquals(homepage.getAllBSEValueInTable(i), filter, "BSE does not match!");
             System.out.println(homepage.getAllBSEValueInTable(i));
         }
@@ -340,15 +344,21 @@ public class HomepageSteps {
 
     @Then("the system is displaying kota {string}")
     public void the_system_is_displaying_kota(String kota){
-        for (int i=0; i<8; i++){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
             Assert.assertEquals(homepage.getAllKotaValueInTable(i), kota, "Kota does not match!");
             System.out.println(homepage.getAllKotaValueInTable(i));
         }
     }
 
     @Then("the system is displaying produk {string}")
-    public void the_system_is_displaying_produk(){
-        for (int i=0; i<8; i++){
+    public void the_system_is_displaying_produk(String produk){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
             Assert.assertEquals(homepage.getAllProdukValueInTable(i), produk, "Produk does not match!");
             System.out.println(homepage.getAllProdukValueInTable(i));
         }
