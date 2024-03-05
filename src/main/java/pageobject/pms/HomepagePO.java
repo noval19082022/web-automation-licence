@@ -23,6 +23,8 @@ public class HomepagePO {
     Locator emptyStateTitleInHomepage;
     Locator emptyStateSubtitleInHomepage;
     Locator ketersediaanKamarBtn;
+
+    //---Filter---//
     Locator filterBtn;
     Locator tglLiveMulai;
     Locator monthYear;
@@ -183,7 +185,9 @@ public class HomepagePO {
         emptyStateTitleInHomepage = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
-        filterBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("1 Filter"));
+
+        //---Filter---//
+        filterBtn = page.locator("//span[contains(., 'Filter')]");
         tglLiveMulai = page.getByTestId("homeFilterModalDate-datePickerStart").getByPlaceholder("Pilih tanggal mulai");
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         tglLiveAkhir = page.getByTestId("homeFilterModalDate-datePickerEnd").getByPlaceholder("Pilih tanggal akhir");
@@ -833,8 +837,6 @@ public class HomepagePO {
 
         kotaValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(pilihKota));
         playwright.clickOn(kotaValue);
-
-        playwright.clickOn(terapkanBtn);
     }
 
     /**
@@ -956,4 +958,66 @@ public class HomepagePO {
     public void clickBillingTrackerMenu(){
         playwright.clickOn(billingTrackerMenu);
     }
+
+    //---BSE Filter---//
+
+    /**
+     * Clicks Dropdown BSE
+     * And scroll down to BSE value
+     * Then clicks BSE value
+     * @param filter
+     */
+    public void filterBSE(String filter) {
+        playwright.clickOn(pilihBSEDropdown);
+        BSEValue = page.locator("(//div[@data-testid='search-checkbox-dropdown'])[3]//p[contains(., '" +filter+ "')]");
+        playwright.pageScrollInView(BSEValue);
+        playwright.clickOn(BSEValue);
+    }
+
+    /**
+     * Get String All BSE Value in Table
+     * @param indexBSE ke-i
+     * @return String All BSE Value
+     */
+    public String getAllBSEValueInTable(int indexBSE) {
+        BSEInTable = page.locator("tr td:nth-of-type(5)").nth(indexBSE);
+        return playwright.getText(BSEInTable);
+    }
+
+    /**
+     * Clicks Terapkan button in Filter
+     */
+    public void clicksTerapkanBtn() {
+        playwright.clickOn(terapkanBtn);
+    }
+
+    /**
+     * Get String All Kota Value in Table
+     * @param indexKota ke-i
+     * @return String All Kota Value
+     */
+    public String getAllKotaValueInTable(int indexKota) {
+        kotaInTable = page.locator("tr td:nth-of-type(3)").nth(indexKota);
+        return playwright.getText(kotaInTable);
+    }
+
+    /**
+     * Get String All Produk Value in Table
+     * @param indexProduk value ke-i
+     * @return String All Produk Value
+     */
+    public String getAllProdukValueInTable(int indexProduk) {
+        produkInTable = page.locator("tr td:nth-of-type(4)").nth(indexProduk);
+        return playwright.getText(produkInTable);
+    }
+
+    /**
+     * Get Total Row in Daftar Properti page
+     * @return Total Row
+     */
+    public int getTotalRow(){
+        BSEInTable = page.locator("tr td:nth-of-type(5)");
+        return BSEInTable.count();
+    }
+    //---End of BSE Filter---//
 }

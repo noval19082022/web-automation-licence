@@ -278,6 +278,7 @@ public class HomepageSteps {
         homepage.ticksAS(pilihAS);
         homepage.ticksHospitality(pilihHospitality);
         homepage.selectsKota(pilihKota);
+        homepage.clicksTerapkanBtn();
     }
 
     @Then("property is displayed")
@@ -311,5 +312,67 @@ public class HomepageSteps {
     public void admin_go_to_billing_tracker(){
         homepage.clickBillingTrackerMenu();
     }
+
+    //---BSE Filter---//
+    @When("admin filter by BSE {string}")
+    public void admin_filter_by_BSE(String filter){
+        homepage.filterBSE(filter);
+    }
+
+    @Then("the system is displaying property with BSE {string}")
+    public void the_system_is_displaying_property_with_BSE(String filter){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
+            playwright.waitTillPageLoaded();
+            Assert.assertEquals(homepage.getAllBSEValueInTable(i), filter, "BSE does not match!");
+            System.out.println(homepage.getAllBSEValueInTable(i));
+        }
+    }
+
+    @When("admin selects Kota {string}")
+    public void admin_selects_Kota(String kota){
+        homepage.selectsKota(kota);
+    }
+
+    @When("admin selects Produk {string}")
+    public void admin_selects_Produk(String produk){
+        homepage.ticksProduk(produk);
+//        homepage.clicksTerapkanBtn();
+    }
+
+    @Then("the system is displaying kota {string}")
+    public void the_system_is_displaying_kota(String kota){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
+            Assert.assertEquals(homepage.getAllKotaValueInTable(i), kota, "Kota does not match!");
+            System.out.println(homepage.getAllKotaValueInTable(i));
+        }
+    }
+
+    @Then("the system is displaying produk {string}")
+    public void the_system_is_displaying_produk(String produk){
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
+            Assert.assertEquals(homepage.getAllProdukValueInTable(i), produk, "Produk does not match!");
+            System.out.println(homepage.getAllProdukValueInTable(i));
+        }
+    }
+
+    @When("admin clicks on Filter button")
+    public void admin_clicks_on_Filter_button(){
+        homepage.clicksFilter();
+    }
+
+    @When("admin clicks Terapkan button")
+    public void admin_clicks_Terapkan_button(){
+        homepage.clicksTerapkanBtn();
+    }
+    //---End of BSE Filter---//
 }
 
