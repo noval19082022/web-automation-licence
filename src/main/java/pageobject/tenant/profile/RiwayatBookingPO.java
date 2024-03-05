@@ -81,7 +81,7 @@ public class RiwayatBookingPO {
      */
     public void clickOnSelesaiAndKeKostSaya() {
         playwright.clickOn(doneToKostSayaButton);
-        page.waitForLoadState(LoadState.LOAD);
+        playwright.waitTillPageLoaded();
     }
 
     /**

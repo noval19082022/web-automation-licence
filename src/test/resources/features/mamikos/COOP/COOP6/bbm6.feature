@@ -186,7 +186,7 @@ Feature: BnB feature
     And admin search contract by Renter Phone Number and input field "0892202357"
     And admin cancel contract
 
-  @filterPenyewa
+  @filterPenyewa @continue
   Scenario: check contract status on all filter
     Given user go to mamikos homepage
     When user login as owner:
@@ -207,9 +207,6 @@ Feature: BnB feature
   @downloadBiodata
   Scenario: Download biodata fakedoor
     Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 089120220103 | 081328787342 | qwerty123 |
     And user navigate to penyewa page
     And user search kost in penyewa menu "ARAC"
     And user click download biodata penyewa button
