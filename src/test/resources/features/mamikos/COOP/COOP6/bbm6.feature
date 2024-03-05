@@ -186,7 +186,7 @@ Feature: BnB feature
     And admin search contract by Renter Phone Number and input field "0892202357"
     And admin cancel contract
 
-  @filterPenyewa @continue
+  @filterPenyewa
   Scenario: check contract status on all filter
     Given user go to mamikos homepage
     When user login as owner:
