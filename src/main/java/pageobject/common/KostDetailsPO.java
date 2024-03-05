@@ -9,6 +9,8 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -67,6 +69,7 @@ public class KostDetailsPO {
     Locator reasonOption;
     Locator yesCancelBookingBtn;
     Locator nextSlideFtue;
+    Locator uploadImage;
 
     private Locator kostTitle;
     private Locator propertyGender;
@@ -246,6 +249,11 @@ public class KostDetailsPO {
     //-------------peraturan kos disini------------//
     private Locator peraturanDisinitext;
     private Locator peraturanBawaAnak;
+
+    //-------------------request booking DBET tenant---------------//
+    Locator notificationOnHeader;
+    Locator toggleFotoKartuIdentitas;
+    Locator toggleJatuhTempo;
 
 
     public KostDetailsPO(Page page) {
@@ -461,6 +469,13 @@ public class KostDetailsPO {
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
         this.btnBukaProfil = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buka profil saya"));
+    uploadImage = page.locator("//img[@alt='id photo']");
+
+        //-------------------request booking DBET tenant---------------//
+        notificationOnHeader = page.locator("//a[@aria-label='notification']");
+        toggleFotoKartuIdentitas = page.locator("(//input[@type='checkbox'])[1]");
+        toggleJatuhTempo = page.locator("(//input[@type='checkbox'])[2]");
+
     }
 
     /**
@@ -2126,4 +2141,37 @@ public class KostDetailsPO {
         Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         playwright.getText(job);
         }
+
+    /**
+     * click on camera shutter
+     */
+    public void uploadIdVerification() {
+        playwright.pageScrollHeightToBottom();
+        playwright.clickOn(page.locator("//div[@class='dbet-tenant-input-id__input']"));
+        playwright.clickOnText("Lanjutkan");
+        playwright.clickOnText("Lanjutkan");
+        page.evaluate("navigator.mediaDevices.getUserMedia({ video: true })");
+        playwright.hardWait(3000);
+        playwright.clickOn(page.locator("//div[@class='camera-shutter']"));
+        playwright.waitFor(uploadImage);
+        playwright.clickOnText("Simpan");
+    }
+    /**
+     * click on notification header
+     */
+    public void clickNotifikasiOnHeader()  {
+        playwright.clickOn(notificationOnHeader);
+    }
+    /**
+     * click on Toggle Foto Kartu Identitas
+     */
+    public void clickOnToggleFotoKartuIdentitas()  {
+        playwright.clickOn(toggleFotoKartuIdentitas);
+    }
+    /**
+     * click on Toggle Jatuh Tempo
+     */
+    public void clickOnToggleJatuhTempo()  {
+        playwright.clickOn(toggleJatuhTempo);
+    }
 }

@@ -442,4 +442,20 @@ public class TenantBookingSteps {
     public void userWillSeeHaveJobName() {
         kostDetail.userWillSeeHaveJobName();
     }
+    @And("user want to upload ID verification")
+    public void user_want_to_upload_id_verification() throws InterruptedException {
+        kostDetail.uploadIdVerification();
+    }
+    @When("user click Notifikasi on header")
+    public void userClickNotifikasiOnHeader() {
+        kostDetail.clickNotifikasiOnHeader();
+    }
+    @When("user click on toggle foto kartu identitas")
+    public void user_click_on_toggle_foto_kartu_identitas() {
+       kostDetail.clickOnToggleFotoKartuIdentitas();
+    }
+    @When("user click on toggle jatuh tempo")
+    public void user_click_on_toggle_jatuh_tempo() {
+        kostDetail.clickOnToggleJatuhTempo();
+    }
 }
