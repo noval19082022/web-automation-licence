@@ -28,3 +28,15 @@ Feature: Landing Page
 			| Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
 			| Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
 			| Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
+
+	@TEST_COOP-6779 @continue
+	Scenario: [DWeb][Landing Page][Sorting] User Can Use Price Sorting From Lower To Greater
+		Given user navigates to mamikos kost kost jogja murah
+		When user set price sorting from lower to greater
+		Then user can see kos list rearrange from cheaper to expensive
+
+    @TEST_COOP-6727
+	Scenario: [DWeb][Landing Page][Sorting] User Can Use Price Sorting From Greater To Lower
+		Given user navigates to mamikos kost kost jogja murah
+		When user set price sorting from greater to lower
+		Then user can see kos list rearrange from expensive to cheaper

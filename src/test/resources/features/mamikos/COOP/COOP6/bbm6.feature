@@ -24,7 +24,7 @@ Feature: BnB feature
   Scenario: Check Owner Badges on Kos Detail when login owner (BBM-499)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
+      | phone stag | phone prod   | password  |
       | 0892202351 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                     | kost name prod       |
@@ -96,8 +96,8 @@ Feature: BnB feature
     And owner click "Update Harga"
     And owner click toggle deposit
     And owner input deposit amount:
-      | Deposit  |
-      | 100000   |
+      | Deposit |
+      | 100000  |
     And owner click "Simpan"
     Then user cannot see "Rp100.000" on the list
     And owner click "Hapus"
@@ -235,7 +235,7 @@ Feature: BnB feature
 #  Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                     | kost name prod |
+      | kost name stag                                                                                 | kost name prod |
       | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
@@ -259,7 +259,7 @@ Feature: BnB feature
     And tenant pay kost from riwayat booking using ovo "0890867321217"
  # Scenario: Tenant check-in kos
     And tenant navigate to riwayat and draf booking
-    And tenant checkin kost from riwayat booking
+#    And tenant checkin kost from riwayat booking
 
   @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
@@ -332,7 +332,7 @@ Feature: BnB feature
   Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod  | password   |
+      | phone stag   | phone prod   | password  |
       | 081227019399 | 081227019399 | qwerty123 |
     And owner navigates to owner dashboard
     And user click "Atur Ketersediaan Kamar"
@@ -384,7 +384,7 @@ Feature: BnB feature
     # Scenario: tenant booking kost
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                              |
+      | kost name stag                                                                    |
       | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
     And tenant booking kost for "today"
     Then tenant should success booking kost
@@ -631,8 +631,8 @@ Feature: BnB feature
   Scenario: [Web][UX Improvement][Pengajuan sewa][Draft]Update wording when save to draft
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | password     |
-      | 083311231113  | asdf1234     |
+      | phone stag   | password |
+      | 083311231113 | asdf1234 |
     And tenant search kost then go to kost details:
       | kost name stag                                  |
       | Kos Raya Raney Tipe Raya 3 Danurejan Yogyakarta |
