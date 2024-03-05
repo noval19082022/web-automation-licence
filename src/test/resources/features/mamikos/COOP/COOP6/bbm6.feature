@@ -186,7 +186,7 @@ Feature: BnB feature
     And admin search contract by Renter Phone Number and input field "0892202357"
     And admin cancel contract
 
-  @filterPenyewa
+  @filterPenyewa @continue
   Scenario: check contract status on all filter
     Given user go to mamikos homepage
     When user login as owner:
@@ -204,14 +204,14 @@ Feature: BnB feature
       | Filter                    |
       | Menghentikan kontrak sewa |
 
-#  @downloadBiodata
-#  Scenario: Download biodata fakedoor
-#    Given user go to mamikos homepage
-#    And user navigate to penyewa page
-#    And user search kost in penyewa menu "ARAC"
-#    And user click download biodata penyewa button
-#    And user tick on checkbox pop up
-#    Then user will see information about upcoming feature
+  @downloadBiodata
+  Scenario: Download biodata fakedoor
+    Given user go to mamikos homepage
+    And user navigate to penyewa page
+    And user search kost in penyewa menu "ARAC"
+    And user click download biodata penyewa button
+    And user tick on checkbox pop up
+    Then user will see information about upcoming feature
 
   @waitingTerminateConfirmation
   Scenario: Cancel and create booking
@@ -259,7 +259,7 @@ Feature: BnB feature
     And tenant pay kost from riwayat booking using ovo "0890867321217"
  # Scenario: Tenant check-in kos
     And tenant navigate to riwayat and draf booking
-    And tenant checkin kost from riwayat booking
+#    And tenant checkin kost from riwayat booking
 
   @messageRequestTerminatedContract
   Scenario: check waiting terminated confirmation status
