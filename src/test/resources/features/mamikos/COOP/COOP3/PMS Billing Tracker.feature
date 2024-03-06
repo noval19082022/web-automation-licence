@@ -54,15 +54,40 @@ Feature: Billing Tracker
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832828484"
     And admin fill notes tracker with:
-      | type  | Blast          |
+      | type  | Blast             |
       | notes | Tutup jam 9 malam |
     Then admin can see notes with "Blast"
 
-  @TEST-COOP-3252
+  @TEST-COOP-3252 @continue
   Scenario: [Billing Tracker][Notes]Check the display when invoice have many notes > 2 noted
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832828484"
     And admin fill notes tracker with:
-      | type  | Blast          |
+      | type  | Blast             |
       | notes | Tutup jam 9 malam |
+    Then admin can see notes with "Blast"
+
+  @continue
+  Scenario: [Billing Tracker][View Data]Check invoice billing when tenant have many recurring invoice
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "081280003230"
+    Then Admin can see all invoice recurring from mamipay :
+      | Jatuh Tempo | Nama Biaya |
+      | 01 Feb      | Recurring  |
+      | 11 Feb      | Recurring  |
+      | 22 Feb      | Recurring  |
+
+  @continue
+  Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "085832828484"
+    And admin click on Lihat lebih banyak catatan note dropdown
+    Then admin can see notes with "Blast"
+
+  Scenario: [Billing Tracker][Notes]Edit notes
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "085832626262"
+    And admin edit note "Pindah tipe kamar"
+    Then admin can see notes with "Pindah tipe kamar"
+    And admin edit note "Blast"
     Then admin can see notes with "Blast"

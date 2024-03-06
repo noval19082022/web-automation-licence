@@ -184,6 +184,10 @@ public class PropertySayaPO {
     Locator textOtherPriceActiveName;
     Locator textOtherPriceActiveNumber;
     Locator nameOtherPrice;
+    Locator declineAddProperty;
+    Locator imageHistoryZero;
+    Locator rejectApartementText;
+    Locator updateKamarButtonApart;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -324,6 +328,10 @@ public class PropertySayaPO {
         textOtherPriceActiveName = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-title");
         textOtherPriceActiveNumber = page.locator(".additional-price-item:nth-child(1) .additional-price-item__info-price");
         nameOtherPrice = page.locator("//div[@class='additional-price-item__info-title']");
+        declineAddProperty = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batal"));
+        imageHistoryZero = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("history_zero"));
+        rejectApartementText = page.getByText("Alasan ditolak :");
+        updateKamarButtonApart = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Kamar & Harga"));
     }
 
     /**
@@ -1121,14 +1129,35 @@ public class PropertySayaPO {
     }
 
     /**
-     * Get status property
+     * Get status property apartment diperiksa admin
      *
      * @param searchPropertyName
-     * @return statusApartement
-     * e.g Aktif, Diperiksa Admin
+     * @return statusApartement Diperiksa Admin
      */
     public String getStatusProperty(String searchPropertyName) {
         statusApartement = page.locator("//p[contains(., '" + searchPropertyName + "')]/parent::*/preceding::span[@class='status unverified-waiting']");
+        return playwright.getText(statusApartement);
+    }
+
+    /**
+     * Get status property apartment ditolak
+     *
+     * @param searchPropertyName
+     * @return statusApartement ditolak
+     */
+    public String getStatusPropertyReject(String searchPropertyName) {
+        statusApartement = page.locator("//p[contains(., '" + searchPropertyName + "')]/parent::*/preceding::span[@class='status unverified-rejected']");
+        return playwright.getText(statusApartement);
+    }
+
+    /**
+     * Get status property apartment aktif
+     *
+     * @param searchPropertyName
+     * @return statusApartement aktif
+     */
+    public String getStatusPropertyVerified(String searchPropertyName) {
+        statusApartement = page.locator("//p[contains(., '" + searchPropertyName + "')]/parent::*/preceding::span[@class='status verified']");
         return playwright.getText(statusApartement);
     }
 
@@ -2163,5 +2192,31 @@ public class PropertySayaPO {
      */
     public boolean isOtherPriceNumberPresent() {
         return playwright.waitTillLocatorIsVisible(textOtherPriceActiveNumber);
+    }
+
+    /**
+     * check image zero is visible
+     * @return image
+     */
+    public boolean isImageZeroPresent() {
+        playwright.clickOn(declineAddProperty);
+        playwright.waitForElementStateToBe(imageHistoryZero, "visible");
+        return playwright.waitTillLocatorIsVisible(imageHistoryZero);
+    }
+
+    /**
+     * Get text rejected apartment
+     * @return string
+     */
+    public String getRejectTextApartment() {
+        return playwright.getText(rejectApartementText);
+    }
+
+    /**
+     * check button update kamar is visible
+     * @return button
+     */
+    public boolean isButtonUpdateVisible() {
+        return playwright.waitTillLocatorIsVisible(updateKamarButtonApart);
     }
 }

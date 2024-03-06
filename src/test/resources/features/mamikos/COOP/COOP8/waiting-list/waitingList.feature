@@ -8,8 +8,8 @@ Feature: Waiting List - Kost Detail
       | phone stag    | phone prod    | password     |
       | 0891111020199 | 0891111020199 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag                 | kost name prod              |
-      | Kost Apik Rimbun Tipe D Bantul | Kost Singgahsini Arac Penuh |
+      | kost name stag                         | kost name prod              |
+      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can see kamar penuh
     When tenant can see "Ikut daftar tunggu" button
     Then tenant can see "Lihat tipe lain" button
@@ -85,8 +85,8 @@ Feature: Waiting List - Kost Detail
       | phone stag | phone prod    | password  |
       | 0810000235 | 0891111020199 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag                 | kost name prod              |
-      | Kost Apik Rimbun Tipe D Bantul | Kost Singgahsini Arac Penuh |
+      | kost name stag                         | kost name prod              |
+      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can succes waiting list submitted with "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
     When tenant can see "Lihat tipe lain" button
     And tenant search kost then go to kost details:
@@ -180,6 +180,36 @@ Feature: Waiting List - Kost Detail
       | kost name stag                                             | kost name prod  |
       | Kost Apik Chrysant Elok Tipe A Kelapa Gading Jakarta Utara | Kost Arac Penuh |
     Then user want to dismiss FTUE
+
+  @TEST_COOP-4317
+  Scenario: [Web][Waiting List][Waiting List Form]Check daftar tunggu form when tenant verified phone number and have room type
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 08999222999   | 083176408442  | qwerty123    |
+    And tenant search kost then go to kost details:
+      | kost name stag                                                 | kost name prod                                                 |
+      | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap |
+    And tenant click "Ikut Daftar Tunggu"
+    Then tenant see waiting list form
+
+  @TEST_COOP-6781 @continue
+  Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Sudah ada tanggal pasti option
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 08999222999   | 083176408442  | qwerty123    |
+    And tenant search kost then go to kost details:
+      | kost name stag                                                 | kost name prod                                                 |
+      | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap |
+    And tenant click "Ikut Daftar Tunggu"
+    And tenant click "Iya, sudah ada tanggal pasti"
+    Then tenant can select date to join waiting list
+
+  @TEST_COOP-6782
+  Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Baru perkiraan option
+    And tenant click "Baru perkiraan"
+    Then tenant can select range date to join waiting list
 
   @TEST-COOP-4327 @waiting-list
   Scenario: [Web][Waiting List ][Waiting List Form]Cancel submit waiting list - Kembali ke iklan

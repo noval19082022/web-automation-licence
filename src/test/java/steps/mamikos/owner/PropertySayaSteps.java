@@ -444,7 +444,14 @@ public class PropertySayaSteps {
 
     @Then("verify status apartemen {string}")
     public void verifyStatusApartemen(String status) {
-        Assert.assertEquals(propertySaya.getStatusProperty(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+        if (status.equals("Diperiksa Admin")) {
+            Assert.assertEquals(propertySaya.getStatusProperty(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+        } else if (status.equals("Ditolak")) {
+            Assert.assertEquals(propertySaya.getStatusPropertyReject(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+        }
+        else if (status.equals("Aktif")) {
+            Assert.assertEquals(propertySaya.getStatusPropertyVerified(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
+        }
     }
 
     @And("owner search apart {string} on property saya page")
@@ -1040,5 +1047,20 @@ public class PropertySayaSteps {
     @And("owner click ubah denda")
     public void ownerClicUbahkDenda() {
         propertySaya.clickUbahDendaText();
+    }
+
+    @Then("owner can see emphty property")
+    public void owner_can_see_emphty_property() {
+        Assert.assertTrue(propertySaya.isImageZeroPresent(),"image not visible");
+    }
+
+    @Then("owner can see {string} at apartment card")
+    public void owner_can_see_at_apartment_card(String text) {
+       Assert.assertEquals(propertySaya.getRejectTextApartment(),text,"text reject doesnt equals");
+    }
+
+    @Then("owner can see button update kamar")
+    public void owner_can_see_button_update_kamar() {
+        Assert.assertTrue(propertySaya.isButtonUpdateVisible(), "button not visible");
     }
 }

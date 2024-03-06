@@ -53,6 +53,12 @@ public class GoldplusPO {
     Locator detailManfaatGP2;
     Locator filterPaketGoldplusAnda;
 
+    //==== Popup Recurring ===//
+    Locator imagePopupRecurring;
+    Locator textTitlePopupRecurring;
+    Locator textSubtitlePopUpRecurring;
+    Locator buttonExtendGPpopUp;
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -96,6 +102,10 @@ public class GoldplusPO {
         buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         detailManfaatGP1 = page.getByText("Lihat Detail Manfaatchevron-right").nth(1);
         detailManfaatGP2 = page.getByText("Lihat Detail Manfaatchevron-right").first();
+        imagePopupRecurring = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("business-with-goldplus"));
+        textTitlePopupRecurring = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Masa aktif GoldPlus akan habis."));
+        textSubtitlePopUpRecurring = page.getByText("Ayo, segera perpanjang paket GoldPlus Anda sekarang.");
+        buttonExtendGPpopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
     }
 
     /**
@@ -356,6 +366,7 @@ public class GoldplusPO {
      */
     public Boolean gpPackageText(){
         playwright.waitTillPageLoaded(10000.0);
+        playwright.waitForElementStateToBe(gpPackageText, "visible");
         return playwright.waitTillLocatorIsVisible(gpPackageText);
     }
 
@@ -643,5 +654,41 @@ public class GoldplusPO {
     public void clickFilterPaketGoldplusAnda(String filter){
         filterPaketGoldplusAnda = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(filter));
         playwright.clickOn(filterPaketGoldplusAnda);
+    }
+
+    /**
+     * check is image recurring visible or not
+     * @return boolean
+     */
+    public boolean isImageRecurringPopupVisible() {
+        playwright.waitForElementStateToBe(imagePopupRecurring, "visible");
+        return playwright.waitTillLocatorIsVisible(imagePopupRecurring);
+    }
+
+    /**
+     * check is title pop up recurring visible
+     * @return boolean
+     */
+    public boolean isTitlePopUpRecurringVisible() {
+        playwright.waitForElementStateToBe(textTitlePopupRecurring, "visible");
+        return playwright.waitTillLocatorIsVisible(textTitlePopupRecurring);
+    }
+
+    /**
+     * check is title pop up recurring visible
+     * @return boolean
+     */
+    public boolean isSubtitlePopUpRecurringVisible() {
+        playwright.waitForElementStateToBe(textSubtitlePopUpRecurring, "visible");
+        return playwright.waitTillLocatorIsVisible(textSubtitlePopUpRecurring);
+    }
+
+    /**
+     * check is title pop up recurring visible
+     * @return boolean
+     */
+    public boolean isButtonRecurringPopUpVisible() {
+        playwright.waitForElementStateToBe(buttonExtendGPpopUp, "visible");
+        return playwright.waitTillLocatorIsVisible(buttonExtendGPpopUp);
     }
 }

@@ -238,6 +238,17 @@ public class KostDetailsPO {
     private Locator anotherTypeSection;
     private Locator anotherKosSection;
     private Locator waitingListSubmitText;
+    private Locator kostNameWLForm;
+    private Locator kostTypeWLForm;
+    private Locator tenantNameWLForm;
+    private Locator tenantPhoneWLForm;
+    private Locator sudahAdaTglPastiOption;
+    private Locator secepatnyaOption;
+    private Locator baruPerkiraanOption;
+    private Locator belumAdaTglOption;
+    private Locator submitWLButton;
+    private Locator selectDateForSudahAdaTgl;
+    private Locator selectDateForBaruPerkiraan;
     private Locator closeWaitingListButton;
 
     //-------------kost booking validation----------//
@@ -458,7 +469,6 @@ public class KostDetailsPO {
         this.anotherKosButton  = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat kos lain"));
         this.anotherTypeSection = page.locator("//*[@class='detail-container__kost-types']");
         this.anotherKosSection = page.locator("//*[@class='related-box__title']");
-        this.closeWaitingListButton = page.locator("//*[@class=\"bg-c-modal__action-closable\"]");
 
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -2127,6 +2137,84 @@ public class KostDetailsPO {
         playwright.pageScrollHeightToBottom();
         Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         playwright.getText(job);
+    }
+
+    /**
+     * Check the visibility of Kost Name in waiting list form
+     */
+    public Boolean isKostNameWLFromDisplayed(){
+        return playwright.waitTillLocatorIsVisible(kostNameWLForm);
+    }
+
+    /**
+     * Check the visibility of Kost Type in waiting list form
+     */
+    public Boolean isKostTypeWLFormDisplayed(){
+        return playwright.waitTillLocatorIsVisible(kostTypeWLForm);
+    }
+
+    /**
+     * Check the visibility of Tenant Name in waiting list form
+     */
+    public Boolean isTenantNameWLFormDisplayed(){
+        return playwright.waitTillLocatorIsVisible(tenantNameWLForm);
+    }
+
+    /**
+     * Check the visibility of Tenant Phone Number in waiting list form
+     */
+    public Boolean isTenantPhoneWLFOrmDisplayed(){
+        return playwright.waitTillLocatorIsVisible(tenantPhoneWLForm);
+    }
+
+    /**
+     * Check the visibility of Sudah ada tanggal pasti option in waiting list form
+     */
+    public Boolean isSudahAdaTglPastiOptionDisplayed(){
+        return playwright.waitTillLocatorIsVisible(sudahAdaTglPastiOption);
+    }
+
+    /**
+     * Check the visibility of Secepatnya option in waiting list form
+     */
+    public Boolean isSecepatnyaOptionDisplayed(){
+        return playwright.waitTillLocatorIsVisible(secepatnyaOption);
+    }
+
+    /**
+     * Check the visibility of Baru perkiraan option in waiting list form
+     */
+    public Boolean isBaruPerkiraanOptionDisplayed(){
+        return playwright.waitTillLocatorIsVisible(baruPerkiraanOption);
+    }
+
+    /**
+     * Check the visibility of Belum ada tanggal option in waiting list form
+     */
+    public Boolean isBelumAdaTglOptionDisplayed(){
+        return playwright.waitTillLocatorIsVisible(belumAdaTglOption);
+    }
+
+    /**
+     * Check the visibility of Kirim button in waiting list form
+     */
+    public Boolean isKirimButtonDisplayed(){
+        return playwright.waitTillLocatorIsVisible(submitWLButton);
+    }
+
+    /**
+     * clicks Calendar View for Sudah ada tanggal pasti
+     */
+    public void clickCalViewOnTglMasukKos(){
+        playwright.clickOn(selectDateForSudahAdaTgl);
+    }
+
+    /**
+     * clicks Calendar View for Perkiraan
+     */
+    public void clickCalViewOnRentangTglMasukKos(){
+        playwright.clickOn(selectDateForBaruPerkiraan);
+    }
         }
 
     /**

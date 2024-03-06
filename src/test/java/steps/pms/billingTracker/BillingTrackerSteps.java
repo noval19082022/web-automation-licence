@@ -19,49 +19,50 @@ public class BillingTrackerSteps {
     BillingTrackePO billingTracker = new BillingTrackePO(page);
 
     private Map<String, String> notedData;
+    private List<Map<String, String>> pmsCredential;
 
     @And("admin search billing tracker by {string} and {string}")
-    public void admin_search_billing_tracker_by(String type, String text){
+    public void admin_search_billing_tracker_by(String type, String text) {
         billingTracker.searchType(type, text);
     }
 
     @Then("admin can see validation {string}")
-    public void admin_can_see_validation(String text){
+    public void admin_can_see_validation(String text) {
         Assert.assertTrue(billingTracker.getValidationBillingTrackertext(text), "element is displayed");
     }
 
     @Then("admin can see data search")
-    public void admin_can_see_data_search(){
+    public void admin_can_see_data_search() {
         Assert.assertTrue(billingTracker.getResutlDataTable(), "element is not displayed");
     }
 
     @And("admin click on reset button")
-    public void admin_click_on_reset_button(){
+    public void admin_click_on_reset_button() {
         billingTracker.clickResetButton();
     }
 
     @And("admin filter for {string}")
-    public void admin_filter_for(String text){
+    public void admin_filter_for(String text) {
         billingTracker.clickFilterButton(text);
     }
 
     @And("admin click on {string}")
-    public void admin_click_on(String text){
+    public void admin_click_on(String text) {
         billingTracker.clickBulkFollowUp(text);
     }
 
     @Then("admin can see bulk {string}")
-    public void admin_can_see_bulk(String text){
+    public void admin_can_see_bulk(String text) {
         billingTracker.getBulkText(text);
     }
 
     @Then("admin can see tambah catatan button")
-    public void admin_can_see_tambah_catatan_button(){
+    public void admin_can_see_tambah_catatan_button() {
         Assert.assertTrue(billingTracker.getCreateNotesButtonVisible(), "tambah catatan not displayed");
     }
 
     @And("admin fill notes tracker with:")
-    public void admin_fill_notes_tracker_with(DataTable table){
+    public void admin_fill_notes_tracker_with(DataTable table) {
         notedData = table.asMap(String.class, String.class);
         var type = notedData.get("type");
         var notes = notedData.get("catatan");
@@ -74,7 +75,28 @@ public class BillingTrackerSteps {
     }
 
     @Then("admin can see notes with {string}")
-    public void admin_can_see_notes_with(String text){
-        Assert.assertTrue(billingTracker.getNotedOnMainPage(text),  "noted not visible");
+    public void admin_can_see_notes_with(String text) {
+        Assert.assertTrue(billingTracker.getNotedOnMainPage(text), "noted not visible");
+    }
+
+    @Then("Admin can see all invoice recurring from mamipay :")
+    public void admin_can_see_all_invoice_reccuring(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String jatuhTempo = row.get("Jatuh Tempo");
+            String namaBiaya = row.get("Nama Biaya");
+            Assert.assertTrue(billingTracker.getResutlDataTableReccuring(jatuhTempo, namaBiaya), "Element is not displayed for " + jatuhTempo + " and " + namaBiaya);
+        }
+    }
+
+    @And("admin click on Lihat lebih banyak catatan note dropdown")
+    public void admin_click_on_lihat_lebih_banyak_catatan_note_dropdown() {
+        billingTracker.clickOnLihatLebihBanyakDropdown();
+    }
+
+    @And("admin edit note {string}")
+    public void admin_edit_note(String text) {
+        billingTracker.adminEditNote(text);
+
     }
 }
+
