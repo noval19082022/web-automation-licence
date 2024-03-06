@@ -15,6 +15,7 @@ Feature: Goldplus Recurring
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545514 | 0          | 12345678 |
+    And user wants to subscribe Goldplus 1
     Then payment owner success using ovo as payment method
 
   @continue @TEST_LIMO-2664
