@@ -1,4 +1,4 @@
-@regression @goldPlus @goldplusRegister @LIMO21 @listing-monetization
+@regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization
 Feature: Gold Plus
 
   @TEST_LIMO-1661 @chooseGP @continue
