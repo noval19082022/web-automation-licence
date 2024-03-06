@@ -335,6 +335,7 @@ public class BroadcastChatPO {
      */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
+            playwright.waitFor(tambahBroadcastChatButton);
             playwright.clickOn(tambahBroadcastChatButton);
         }
     }
@@ -435,6 +436,7 @@ public class BroadcastChatPO {
      * @return String data type
      */
     public String getButtonSubmissionText() {
+        playwright.waitFor(ajukanGantiPaketButton);
         return playwright.getText(ajukanGantiPaketButton);
     }
 

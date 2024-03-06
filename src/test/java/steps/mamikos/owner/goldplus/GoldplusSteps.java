@@ -115,7 +115,7 @@ public class GoldplusSteps {
 
     @When("admin successfully remove additional favorite labels")
     public void admin_successfully_remove_additional_favorite_labels() {
-        goldplus.clickOnEditGP2Button();
+        goldplus.clickOnEditGP1Button();
         goldplus.clickNoRadioButton();
         playwright.clickOnTextButton("Save");
     }

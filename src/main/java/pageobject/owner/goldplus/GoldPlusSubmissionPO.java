@@ -28,6 +28,7 @@ public class GoldPlusSubmissionPO {
      * Clicks on pilih paket button
      */
     public void clicksOnPilihPaketButton() {
+        playwright.waitFor(pilihPaketButton);
         playwright.clickOn(pilihPaketButton);
     }
 
@@ -44,6 +45,7 @@ public class GoldPlusSubmissionPO {
      * Click on gp satu 3 bulan radio button
      */
     public void clickOnGpSatuFirstRadioButton() {
+        playwright.waitFor(gpSatuFirstRadioButton);
         playwright.clickOn(gpSatuFirstRadioButton);
     }
 

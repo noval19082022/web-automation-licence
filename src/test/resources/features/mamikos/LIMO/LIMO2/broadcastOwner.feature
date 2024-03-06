@@ -214,7 +214,6 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-
     When owner navigates to broadcast chat page
     And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
     And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button

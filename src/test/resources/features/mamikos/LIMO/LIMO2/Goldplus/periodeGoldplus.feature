@@ -76,6 +76,7 @@ Feature: Check Period Goldplus Page
     And owner should successfully log out
 
     #scenario change label favorite
+  @unfavorite
   Scenario: Remove favorite more than 1
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
