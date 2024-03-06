@@ -146,4 +146,61 @@ Feature: DBET request from Tenant
     And user click on pilih "0" informasi penyewa
     Then user will see it has job name
 
+  @TEST_COOP-3031
+  Scenario: Tenant add Booking request for Kost Putra and tenant upload ID verification when gender tenant as Perempuan
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202359 | 083176408442 | qwerty123 |
+    And user go to formulir data penyewa
+    And user click on "Selanjutnya" button
+    And user click on "Selanjutnya" button
+    And user click on "Mulai isi data" button
+    And user click on pilih "0" informasi penyewa
+    #And user want to upload ID verification
+    And user click on "Simpan" button
+    And user click on pilih "1" informasi penyewa
+    And user click on "Kamar 3" button
+    And user click on "Simpan" button
+    And user click on pilih "2" informasi penyewa
+    And user click on "Per Bulan" button
+    And user click on "Simpan" button
+    And user click on "Kirim Data" button
+    And user click on "Saya Mengerti" button
+    And owner logs out
 
+  @TEST_COOP-3032
+  Scenario: Check notification and information on homepage when owner accept booking
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 085697344170 | 081362464341 | qwerty123 |
+    And owner open notification icon
+    And owner will see that the text "Konfirmasikan data penyewa ini Kost Mars September Rajeg Tangerang" is displayed
+    And user click on "Kontrak Sewa Menunggu" button
+    And user click on "Tolak" button
+    And user click on "Ya" button
+
+  @TEST_COOP-3034
+  Scenario: Check notification and information on homepage when owner Reject booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod   | password  |
+      | 0892202359 | 081362464341 | qwerty123 |
+    And user click Notifikasi on header
+    Then user will see that the text "Pemilik menolak data Anda" is displayed
+
+  @TEST_COOP-3019
+  Scenario: Owner send form to tenant when Kartu Identitas and Jatuh Tempo ON
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 085697344170 | 081362464341 | qwerty123 |
+    And user navigate to add contract tenant page
+    And user click on "Minta penyewa untuk mengisi" button
+    And user click on "Kost Mars September Rajeg Tangerang" button
+    And user click on toggle foto kartu identitas
+    And user click on toggle jatuh tempo
+    And user click on "Selanjutnya" button
+    And user click on "Selesai" button
+    Then user see user's name "Halo, Owner" in owner dashboard
