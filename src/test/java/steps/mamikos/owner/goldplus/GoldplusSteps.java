@@ -444,9 +444,10 @@ public class GoldplusSteps {
     @Then("owner will see pop up reminder recurring is displayed")
     public void owner_will_see_pop_up_reminder_recurring_is_displayed(){
         playwright.waitTillPageLoaded(10000.0);
-        Assert.assertTrue(playwright.isButtonWithTextDisplayed("Perpanjang"));
-        Assert.assertTrue(playwright.isTextDisplayed("Masa aktif GoldPlus akan habis."));
-        Assert.assertTrue(playwright.isTextDisplayed("Ayo, segera perpanjang paket GoldPlus Anda sekarang."));
+        Assert.assertTrue(goldplus.isButtonRecurringPopUpVisible(),"Button not visible");
+        Assert.assertTrue(goldplus.isTitlePopUpRecurringVisible(),"title recurring is not visible");
+        Assert.assertTrue(goldplus.isSubtitlePopUpRecurringVisible(),"subtitle recurring is not visible");
+        Assert.assertTrue(goldplus.isImageRecurringPopupVisible(),"image is not visible");
     }
 
     @When("owner wants to proccess recurring GP")
