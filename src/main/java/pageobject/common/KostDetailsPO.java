@@ -238,6 +238,7 @@ public class KostDetailsPO {
     private Locator anotherTypeSection;
     private Locator anotherKosSection;
     private Locator waitingListSubmitText;
+    private Locator closeWaitingListButton;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -457,6 +458,7 @@ public class KostDetailsPO {
         this.anotherKosButton  = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat kos lain"));
         this.anotherTypeSection = page.locator("//*[@class='detail-container__kost-types']");
         this.anotherKosSection = page.locator("//*[@class='related-box__title']");
+        this.closeWaitingListButton = page.locator("//*[@class=\"bg-c-modal__action-closable\"]");
 
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -2126,4 +2128,11 @@ public class KostDetailsPO {
         Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         playwright.getText(job);
         }
+
+    /**
+     * click on Close waiting list button
+      */
+    public void clickCloseWaitingListButton(){
+        playwright.clickOn(closeWaitingListButton);
+    }
 }

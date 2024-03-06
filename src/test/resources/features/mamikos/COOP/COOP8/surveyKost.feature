@@ -12,6 +12,9 @@ Feature: Survey Tenant
     And user batalkan survey if the survey already submitted
     And user input time survey "10:00"
     And user click on "Kirim form" button
+    And user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     Then chat room appear with latest message "Terima Kasih, Kak. :) Form survei kakak sudah kami terima. Tim kami akan segera menghubungi kakak melalui WhatsApp."
 
   @TEST_COOP-2570 @continue

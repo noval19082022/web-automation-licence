@@ -111,8 +111,7 @@ public class ChatTenantPO {
      * @return String latest chat (most bottom chat)
      */
     public String getLatestChatText() {
-        playwright.pageScrollHeightToBottom();
-        playwright.waitFor(latestChat);
+        playwright.pageScrollUntilElementIsVisible(latestChat);
         return playwright.getText(latestChat);
     }
 
@@ -226,7 +225,6 @@ public class ChatTenantPO {
      *
      */
     public void clickOnSendFormButton(String send) {
-        playwright.hardWait(3000);
         String inputTextbox = "//*[normalize-space()='"+send+"']";
         ElementHandle element = page.querySelector(inputTextbox);
         element.click();

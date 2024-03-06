@@ -442,4 +442,9 @@ public class TenantBookingSteps {
     public void userWillSeeHaveJobName() {
         kostDetail.userWillSeeHaveJobName();
     }
+
+    @And("tenant click on close waiting list button")
+    public void tenantClickOnCloseWaitingListButton(){
+        kostDetail.clickCloseWaitingListButton();
+    }
 }
