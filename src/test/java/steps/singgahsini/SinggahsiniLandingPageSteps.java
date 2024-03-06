@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.singgahsini.SinggahsiniLandingPagePO;
+import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class SinggahsiniLandingPageSteps {
     Page page = ActiveContext.getActivePage();
     SinggahsiniLandingPagePO singgahsini = new SinggahsiniLandingPagePO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     private List<Map<String, String>> keuntungan;
     private List<Map<String, String>> testimoni;
@@ -165,6 +167,7 @@ public class SinggahsiniLandingPageSteps {
         if (link.equalsIgnoreCase("Tiktok")){
             URL = "https://www.tiktok.com/@singgahsini_idn";
         } else if (link.equalsIgnoreCase("Instagram")) {
+            playwright.waitTillPageLoaded();
             URL = "https://www.instagram.com/singgahsini_idn/";
         } else if (link.equalsIgnoreCase("Youtube")) {
             URL = "https://www.youtube.com/channel/UCDH3m6FZPy0X8D13h4GQz-A";
