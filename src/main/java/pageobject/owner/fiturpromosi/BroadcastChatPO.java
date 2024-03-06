@@ -327,6 +327,7 @@ public class BroadcastChatPO {
      * Click on lihat selengkapnya button
      */
     public void clicksOnLihatSelengkapnyaButton() {
+        playwright.waitFor(bacaSelengkapnyaButton);
         playwright.clickOn(bacaSelengkapnyaButton);
     }
 

@@ -69,8 +69,8 @@ public class GoldplusPO {
         goldplusPhoneNumberInput = page.locator("form").filter(new Locator.FilterOptions().setHasText("Reset")).getByPlaceholder("Phone Number");
         recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
         selectRecurringPeriod = page.locator("[name='h']");
-        editPackageAdminGP1Button = page.locator("//tr[5]//div[@class='btn-group']");
-        editPackageAdminGP2Button = page.locator("//tr[4]//div[@class='btn-group']");
+        editPackageAdminGP1Button = page.locator("//tr[4]//div[@class='btn-group']");
+        editPackageAdminGP2Button = page.locator("//tr[5]//div[@class='btn-group']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
