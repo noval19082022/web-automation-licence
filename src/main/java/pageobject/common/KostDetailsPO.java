@@ -469,6 +469,18 @@ public class KostDetailsPO {
         this.anotherKosButton  = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat kos lain"));
         this.anotherTypeSection = page.locator("//*[@class='detail-container__kost-types']");
         this.anotherKosSection = page.locator("//*[@class='related-box__title']");
+        this.kostNameWLForm = page.getByLabel("Nama Kos");
+        this.kostTypeWLForm = page.getByLabel("Tipe Kamar");
+        this.tenantNameWLForm = page.getByPlaceholder("Contoh: Reza Febrian");
+        this.tenantPhoneWLForm = page.getByPlaceholder("Contoh: 081244335566");
+        this.sudahAdaTglPastiOption = page.getByText("Iya, sudah ada tanggal pasti");
+        this.secepatnyaOption = page.getByText("Secepatnya");
+        this.baruPerkiraanOption = page.getByText("Baru perkiraan");
+        this.belumAdaTglOption = page.getByText("Belum ada tanggal atau perkiraan");
+        this.submitWLButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
+        this.selectDateForSudahAdaTgl = page.getByPlaceholder("Isi dengan tanggal masuk kos");
+        this.selectDateForBaruPerkiraan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih rentang tanggal calendar"));
+
 
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -2215,7 +2227,6 @@ public class KostDetailsPO {
     public void clickCalViewOnRentangTglMasukKos(){
         playwright.clickOn(selectDateForBaruPerkiraan);
     }
-        }
 
     /**
      * click on Close waiting list button
