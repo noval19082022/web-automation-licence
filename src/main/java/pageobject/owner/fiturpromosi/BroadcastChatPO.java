@@ -278,6 +278,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isBroadcastChatPackageContentVisible() {
+        playwright.waitFor(broadcastChatPackageContent);
         return playwright.waitTillLocatorIsVisible(broadcastChatPackageContent);
     }
 
@@ -286,6 +287,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isLihatDetailButtonVisible() {
+        playwright.waitFor(lihatDetailButton);
         return playwright.waitTillLocatorIsVisible(lihatDetailButton);
     }
 
@@ -294,6 +296,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isAjukanGantiPaketVisible() {
+        playwright.waitFor(ajukanGantiPaketButton);
         return playwright.waitTillLocatorIsVisible(ajukanGantiPaketButton);
     }
 

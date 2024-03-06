@@ -64,7 +64,7 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag   | phone prod | password  |
       | 087133998156 | 0          | qwerty123 |
-    When owner goes to broadcast chat
+    When owner navigates to broadcast chat page
     Then owner with active package should be able to see the broadcast chat page
 
 	#User reguler click Broadcast Chat Entry Point From Fitur Promosi page

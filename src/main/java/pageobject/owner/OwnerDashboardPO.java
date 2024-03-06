@@ -591,7 +591,7 @@ public class OwnerDashboardPO {
      * Click in order to expand promotion feature
      */
     public void clickToExpandFiturPromosi() {
-        playwright.waitTillPageLoaded();
+        playwright.waitFor(fiturPromosiExpand);
         playwright.clickOn(fiturPromosiExpand);
     }
 
