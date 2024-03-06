@@ -801,6 +801,7 @@ public class OwnerDashboardPO {
      *
      */
     public void clickOnDaftarGP() {
+        playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
     }
 }
