@@ -23,6 +23,7 @@ public class HomepagePO {
     Locator emptyStateTitleInHomepage;
     Locator emptyStateSubtitleInHomepage;
     Locator ketersediaanKamarBtn;
+    Locator propertyListings;
 
     //---Filter---//
     Locator filterBtn;
@@ -185,6 +186,7 @@ public class HomepagePO {
         emptyStateTitleInHomepage = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
+        propertyListings = page.locator("tbody tr").first();
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -1018,6 +1020,23 @@ public class HomepagePO {
     public int getTotalRow(){
         BSEInTable = page.locator("tr td:nth-of-type(5)");
         return BSEInTable.count();
+    }
+
+    /**
+     * Clicks Cari Button
+     */
+    public void clicksCariButton() {
+        playwright.clickOn(cariButton);
+    }
+
+    /**
+     * Check if Property Displayed
+     * True = displayed
+     * False = not displayed
+     * @return Property Displayed
+     */
+    public boolean isPropertyDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(propertyListings, 50000.0);
     }
     //---End of BSE Filter---//
 }
