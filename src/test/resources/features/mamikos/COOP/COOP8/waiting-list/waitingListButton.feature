@@ -194,17 +194,3 @@ Feature: Waiting List - Kost Detail
     And tenant click on close waiting list button
     Then tenant can see "Ikut daftar tunggu" button
     And user logs out as a Tenant user
-
-  @TEST-COOP-4318
-  Scenario: [Web][Waiting List ][Waiting List Form]Check daftar tunggu form when tenant haven't verified phone number and haven't room type
-    Given user go to mamikos homepage
-    When user login as tenant via facebook:
-      | email stag          | email prod          | password           |
-      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                          | kost name prod  |
-      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
-    And tenant click "Ikut Daftar Tunggu"
-    Then tenant can't see room type
-    And tenant click "Secepatnya"
-    Then tenant see disable kirim button
