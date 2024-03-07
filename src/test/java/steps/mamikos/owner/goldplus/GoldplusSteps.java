@@ -113,9 +113,16 @@ public class GoldplusSteps {
         playwright.clickOnText("Save");
     }
 
-    @When("admin successfully remove additional favorite labels")
+    @When("admin successfully remove additional favorite labels 4 Month")
     public void admin_successfully_remove_additional_favorite_labels() {
         goldplus.clickOnEditGP1Button();
+        goldplus.clickNoRadioButton();
+        playwright.clickOnTextButton("Save");
+    }
+
+    @When("admin successfully remove additional favorite labels 3 Month")
+    public void admin_successfully_remove_additional_favorite_labels_3_month() {
+        goldplus.clickOnEditGP2Button();
         goldplus.clickNoRadioButton();
         playwright.clickOnTextButton("Save");
     }

@@ -25,7 +25,8 @@ Feature: Check Period Goldplus Page
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigates to Admin Goldplus Package
-    Then admin successfully sets favorite label to none
+    Then admin successfully remove additional favorite labels 4 Month
+    And admin successfully remove additional favorite labels 3 Month
 
   @TEST_LIMO-3147
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
@@ -83,4 +84,5 @@ Feature: Check Period Goldplus Page
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigates to Admin Goldplus Package
-    Then admin successfully remove additional favorite labels
+    Then admin successfully remove additional favorite labels 4 Month
+    And admin successfully remove additional favorite labels 3 Month
