@@ -465,4 +465,9 @@ public class TenantBookingSteps {
     public void user_click_on_toggle_jatuh_tempo() {
         kostDetail.clickOnToggleJatuhTempo();
     }
+
+    @And("tenant click on close waiting list button")
+    public void tenantClickOnCloseWaitingListButton(){
+        kostDetail.clickCloseWaitingListButton();
+    }
 }

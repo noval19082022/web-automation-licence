@@ -252,6 +252,7 @@ public class KostDetailsPO {
     private Locator submitWLButton;
     private Locator selectDateForSudahAdaTgl;
     private Locator selectDateForBaruPerkiraan;
+    private Locator closeWaitingListButton;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -2271,5 +2272,12 @@ public class KostDetailsPO {
      */
     public void clickOnToggleJatuhTempo() {
         playwright.clickOn(toggleJatuhTempo);
+    }
+
+    /**
+     * click on Close waiting list button
+      */
+    public void clickCloseWaitingListButton(){
+        playwright.clickOn(closeWaitingListButton);
     }
 }
