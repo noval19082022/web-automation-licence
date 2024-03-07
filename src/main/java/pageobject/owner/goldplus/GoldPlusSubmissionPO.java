@@ -28,7 +28,7 @@ public class GoldPlusSubmissionPO {
      * Clicks on pilih paket button
      */
     public void clicksOnPilihPaketButton() {
-        playwright.waitFor(pilihPaketButton);
+        playwright.waitFor(pilihPaketButton,30000.0);
         playwright.clickOn(pilihPaketButton);
     }
 
