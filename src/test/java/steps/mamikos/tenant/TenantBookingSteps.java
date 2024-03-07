@@ -1,6 +1,7 @@
 package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -134,9 +135,15 @@ public class TenantBookingSteps {
 
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
-        riwayatBooking.clickOnCheckinButton();
-        riwayatBooking.clickOnCheckinPopUpButton();
-        riwayatBooking.clickOnSelesaiAndKeKostSaya();
+        try {
+            riwayatBooking.clickOnCheckinButton();
+            riwayatBooking.clickOnCheckinPopUpButton();
+            riwayatBooking.clickOnSelesaiAndKeKostSaya();
+        } catch (TimeoutError e) {
+            ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
+            Assert.assertNull(e.getMessage(), "failed on step => tenant checkin kost from riwayat booking");
+            e.printStackTrace();
+        }
     }
 
 
