@@ -320,6 +320,7 @@ public class BroadcastChatPO {
      * Click on lihat rincian button
      */
     public void clickOnLihatRincianButton() {
+        playwright.waitFor(lihatRincianButton);
         playwright.clickOn(lihatRincianButton);
     }
 

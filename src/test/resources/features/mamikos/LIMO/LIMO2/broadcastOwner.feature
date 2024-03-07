@@ -95,6 +95,7 @@ Feature: Broadcast Chat Owner
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
+    And owner refresh page 0
     And owner click on lihat rincian button broadcast chat
     Then owner will see that the text "Pesan Terkirim" is displayed
 
