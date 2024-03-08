@@ -55,6 +55,9 @@ public class NaikkanIklanSteps {
             case "Kamar penuh":
                 Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), "Kamar penuh. Silakan nonaktifkan jika tidak ingin menaikkan posisi iklan ini.");
                 break;
+            case "Kamar sudah penuh":
+                Assert.assertEquals(naikkanIklanPO.getAdsDescText(adsDescText), "Kamar Sudah Penuh. Update kamar kosong jika ingin memakai MamiAds kembali..");
+                break;
         }
     }
 
