@@ -149,6 +149,7 @@ public class BroadcastChatSteps {
     @Then("owner with active package should be able to see the broadcast chat page")
     public void ownerWithActivePackageShouldBeAbleToSeeTheBroadcastChatPage() {
         loading.waitForLoadingIconDisappear();
+        ActiveContext.getActiveBrowserContext().pages().get(0).reload();
         Assert.assertTrue(broadcast.isBroadcastChatPackageContentVisible(), "Broadcast chat package content is not displayed");
         loading.waitForLoadingIconDisappear();
         Assert.assertTrue(broadcast.isLihatDetailButtonVisible(), "Lihat detail button is not displayed");

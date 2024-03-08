@@ -399,4 +399,8 @@ public class NavigatesSteps {
     public void ownerNavigateToFormulirDataPenyewa() {
         playwright.navigateTo(Mamikos.URL + Mamikos.FORMULIR_DATA_PENYEWA, 30000.0, LoadState.LOAD);
     }
+    @And("user navigate to add contract tenant page")
+    public void userNavigateToAddContractTenantPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.ADD_CONTRACT_TENANT, 30000.0, LoadState.LOAD);
+    }
 }

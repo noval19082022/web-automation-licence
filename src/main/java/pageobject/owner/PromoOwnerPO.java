@@ -102,6 +102,7 @@ public class PromoOwnerPO {
      */
     public void clickOnBuatPromo() {
         Locator buatPromoButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Buat Promo"));
+        playwright.waitFor(buatPromoButton);
         playwright.clickOn(buatPromoButton);
     }
 
@@ -216,6 +217,7 @@ public class PromoOwnerPO {
      */
     public void editPromoOwner(String titleText) {
         judulPromoField = page.locator("(//*[@class='input'])[1]");
+        playwright.waitFor(judulPromoField);
         playwright.forceFill(judulPromoField, titleText);
         setJudulPromoOwner(titleText);
 

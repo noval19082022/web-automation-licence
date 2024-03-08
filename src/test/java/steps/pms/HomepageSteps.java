@@ -339,7 +339,6 @@ public class HomepageSteps {
     @When("admin selects Produk {string}")
     public void admin_selects_Produk(String produk){
         homepage.ticksProduk(produk);
-//        homepage.clicksTerapkanBtn();
     }
 
     @Then("the system is displaying kota {string}")
@@ -374,5 +373,45 @@ public class HomepageSteps {
         homepage.clicksTerapkanBtn();
     }
     //---End of BSE Filter---//
+
+    //---Search Function---//
+    @When("admin search property by one name {string}")
+    public void admin_search_property_by_one_name(String keyword){
+        homepage.searchProperty(keyword);
+        Assert.assertEquals(homepage.getKeyword(), keyword, "Keyword does not match!");
+        System.out.println(homepage.getKeyword());
+    }
+
+    @When("admin search property by two name {string}")
+    public void admin_search_property_by_two_name(String keyword){
+        homepage.searchProperty(keyword);
+        Assert.assertEquals(homepage.getKeyword(), keyword, "Keyword does not match!");
+        System.out.println(homepage.getKeyword());
+    }
+
+    @When("admin search property by prefix name {string}")
+    public void admin_search_property_by_prefix_name(String prefix){
+        homepage.searchProperty(prefix);
+        Assert.assertEquals(homepage.getKeyword(), prefix, "Keyword does not match!");
+        System.out.println(homepage.getKeyword());
+    }
+
+    @When("admin search property by property full name {string}")
+    public void admin_search_property_by_property_full_name(String keyword){
+        homepage.searchProperty(keyword);
+        Assert.assertEquals(homepage.getKeyword(), keyword, "Keyword does not match!");
+        System.out.println(homepage.getKeyword());
+    }
+
+    @When("admin does not input the keyword")
+    public void admin_does_not_input_the_keyword(){
+        homepage.clicksCariButton();
+    }
+
+    @Then("all property is displayed")
+    public void all_property_is_displayed(){
+        Assert.assertTrue(homepage.isPropertyDisplayed(), "Property does not displayed!");
+    }
+    //---End of Search Function---//
 }
 

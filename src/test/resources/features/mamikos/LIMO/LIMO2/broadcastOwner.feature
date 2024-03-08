@@ -64,7 +64,7 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag   | phone prod | password  |
       | 087133998156 | 0          | qwerty123 |
-    When owner goes to broadcast chat
+    When owner navigates to broadcast chat page
     Then owner with active package should be able to see the broadcast chat page
 
 	#User reguler click Broadcast Chat Entry Point From Fitur Promosi page
@@ -95,6 +95,7 @@ Feature: Broadcast Chat Owner
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
+    And owner refresh page 0
     And owner click on lihat rincian button broadcast chat
     Then owner will see that the text "Pesan Terkirim" is displayed
 
@@ -214,7 +215,6 @@ Feature: Broadcast Chat Owner
     Given user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-
     When owner navigates to broadcast chat page
     And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
     And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button

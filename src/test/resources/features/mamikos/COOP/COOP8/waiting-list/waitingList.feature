@@ -9,7 +9,7 @@ Feature: Waiting List - Kost Detail
       | 0891111020199 | 0891111020199 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag                         | kost name prod              |
-      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
+      | Kost Singgahsini Ika Purnamasari Tipe B Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can see kamar penuh
     When tenant can see "Ikut daftar tunggu" button
     Then tenant can see "Lihat tipe lain" button
@@ -86,7 +86,7 @@ Feature: Waiting List - Kost Detail
       | 0810000235 | 0891111020199 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                         | kost name prod              |
-      | Kost Apik Mars Pelangi Halmahera Utara | Kost Singgahsini Arac Penuh |
+      | Kost Singgahsini Ika Purnamasari Tipe B Halmahera Utara | Kost Singgahsini Arac Penuh |
     Then tenant can succes waiting list submitted with "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
     When tenant can see "Lihat tipe lain" button
     And tenant search kost then go to kost details:
@@ -210,3 +210,17 @@ Feature: Waiting List - Kost Detail
   Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Baru perkiraan option
     And tenant click "Baru perkiraan"
     Then tenant can select range date to join waiting list
+
+  @TEST-COOP-4327 @waiting-list
+  Scenario: [Web][Waiting List ][Waiting List Form]Cancel submit waiting list - Kembali ke iklan
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 08100000610 | 08100000622 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    And tenant click on close waiting list button
+    Then tenant can see "Ikut daftar tunggu" button
+    And user logs out as a Tenant user

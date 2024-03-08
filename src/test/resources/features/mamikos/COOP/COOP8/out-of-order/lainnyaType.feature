@@ -9,7 +9,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
-      | 3           | 22         |
+      | 3           | 21         |
     Then admin can not see out of order on:
       | room number | start date |
       | 3           | 21         |

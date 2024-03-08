@@ -1,6 +1,7 @@
 package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -134,9 +135,15 @@ public class TenantBookingSteps {
 
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
-        riwayatBooking.clickOnCheckinButton();
-        riwayatBooking.clickOnCheckinPopUpButton();
-        riwayatBooking.clickOnSelesaiAndKeKostSaya();
+        try {
+            riwayatBooking.clickOnCheckinButton();
+            riwayatBooking.clickOnCheckinPopUpButton();
+            riwayatBooking.clickOnSelesaiAndKeKostSaya();
+        } catch (TimeoutError e) {
+            ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
+            Assert.assertNull(e.getMessage(), "failed on step => tenant checkin kost from riwayat booking");
+            e.printStackTrace();
+        }
     }
 
 
@@ -441,5 +448,26 @@ public class TenantBookingSteps {
     @Then("user will see it has job name")
     public void userWillSeeHaveJobName() {
         kostDetail.userWillSeeHaveJobName();
+    }
+    @And("user want to upload ID verification")
+    public void user_want_to_upload_id_verification() throws InterruptedException {
+        kostDetail.uploadIdVerification();
+    }
+    @When("user click Notifikasi on header")
+    public void userClickNotifikasiOnHeader() {
+        kostDetail.clickNotifikasiOnHeader();
+    }
+    @When("user click on toggle foto kartu identitas")
+    public void user_click_on_toggle_foto_kartu_identitas() {
+       kostDetail.clickOnToggleFotoKartuIdentitas();
+    }
+    @When("user click on toggle jatuh tempo")
+    public void user_click_on_toggle_jatuh_tempo() {
+        kostDetail.clickOnToggleJatuhTempo();
+    }
+
+    @And("tenant click on close waiting list button")
+    public void tenantClickOnCloseWaitingListButton(){
+        kostDetail.clickCloseWaitingListButton();
     }
 }
