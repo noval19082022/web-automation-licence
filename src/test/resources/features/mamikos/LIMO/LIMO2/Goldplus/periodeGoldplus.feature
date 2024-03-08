@@ -1,4 +1,4 @@
-@regression @LIMO21 @listing-monetization @periodeGP
+@regression @LIMO2 @listing-monetization @periodeGP
 Feature: Check Period Goldplus Page
 
   @TEST_LIMO-2326 @TEST_LIMO-3918

@@ -52,6 +52,7 @@ public class PanduanGoldplusPO {
      * Click on next button on gp swipper to slide to right item
      */
     public void clickOnNextButton() {
+        playwright.waitFor(swipperNextButton);
         playwright.clickOn(swipperNextButton);
     }
 
@@ -98,10 +99,7 @@ public class PanduanGoldplusPO {
      * Click on coba sekarang button
      */
     public void clickCobaSekarangButton() {
-        while (isCobaSekarangMamiadsVisible()) {
-            playwright.clickOn(cobaSekarangButton);
-            page.waitForTimeout(3000);
-        }
+        playwright.clickOn(cobaSekarangButton);
     }
 
     private boolean isCobaSekarangMamiadsVisible() {
@@ -136,6 +134,7 @@ public class PanduanGoldplusPO {
      * @return int data type
      */
     public int getSelectedOnboardingNumber() {
+        playwright.waitFor(selectedOnboardingNumber);
         return Integer.parseInt(playwright.getText(selectedOnboardingNumber));
     }
 

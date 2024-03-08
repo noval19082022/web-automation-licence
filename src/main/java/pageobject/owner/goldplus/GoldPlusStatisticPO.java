@@ -39,6 +39,7 @@ public class GoldPlusStatisticPO {
      * @return String data type
      */
     public String getGoldplusStatisticHeaderText(){
+        playwright.waitFor(goldplusStatisticHeaderText);
         return playwright.getText(goldplusStatisticHeaderText);
     }
 

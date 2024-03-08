@@ -693,4 +693,15 @@ public class GoldplusPO {
         playwright.waitForElementStateToBe(buttonExtendGPpopUp, "visible");
         return playwright.waitTillLocatorIsVisible(buttonExtendGPpopUp);
     }
+
+
+    /**
+     * Verify the visibility of text on page
+     * @return text on page
+     */
+    public String getTextOnPageVisible(String textOnPage) {
+        Locator textOnPageNaikkanIklan = page.getByText(textOnPage);
+        playwright.waitFor(textOnPageNaikkanIklan);
+        return playwright.getText(textOnPageNaikkanIklan);
+    }
 }

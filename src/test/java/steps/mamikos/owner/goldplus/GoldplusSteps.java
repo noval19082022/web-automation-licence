@@ -609,4 +609,13 @@ public class GoldplusSteps {
     public void userChooseFilterOnPaketGoldplusAndaPage(String filter) {
         goldplus.clickFilterPaketGoldplusAnda(filter);
     }
+
+
+    @Then("owner will see that detail text on goldplus guides page:")
+    public void ownerWillSeeThatDetailTextOnGoldplusGuidesPage(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        for (Map<String, String> content : table) {
+            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")),"Text doesn't match");
+        }
+    }
 }
