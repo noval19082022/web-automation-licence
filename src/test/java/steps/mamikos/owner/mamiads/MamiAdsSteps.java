@@ -331,4 +331,12 @@ public class MamiAdsSteps {
     public void user_click_on_jemput_bola_entry_point() {
         mamiAdsPO.clickOnEntryPointJB();
     }
+
+    @Then("owner will see that detail text on popup mamiads:")
+    public void ownerWillSeeThatDetailTextOnPopupMamiads(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        for (Map<String, String> content : table) {
+            Assert.assertTrue(mamiAdsPO.getTextOnPoUpVisible(content.get("TextPopUp")).contains(content.get("TextPopUp")),"Text doesn't match");
+        }
+    }
 }

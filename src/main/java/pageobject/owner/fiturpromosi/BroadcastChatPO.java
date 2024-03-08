@@ -278,6 +278,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isBroadcastChatPackageContentVisible() {
+        playwright.waitFor(broadcastChatPackageContent);
         return playwright.waitTillLocatorIsVisible(broadcastChatPackageContent);
     }
 
@@ -286,6 +287,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isLihatDetailButtonVisible() {
+        playwright.waitFor(lihatDetailButton);
         return playwright.waitTillLocatorIsVisible(lihatDetailButton);
     }
 
@@ -294,6 +296,7 @@ public class BroadcastChatPO {
      * @return boolean visible true, otherwise false
      */
     public boolean isAjukanGantiPaketVisible() {
+        playwright.waitFor(ajukanGantiPaketButton);
         return playwright.waitTillLocatorIsVisible(ajukanGantiPaketButton);
     }
 
@@ -317,6 +320,7 @@ public class BroadcastChatPO {
      * Click on lihat rincian button
      */
     public void clickOnLihatRincianButton() {
+        playwright.waitFor(lihatRincianButton);
         playwright.clickOn(lihatRincianButton);
     }
 
@@ -324,6 +328,7 @@ public class BroadcastChatPO {
      * Click on lihat selengkapnya button
      */
     public void clicksOnLihatSelengkapnyaButton() {
+        playwright.waitFor(bacaSelengkapnyaButton);
         playwright.clickOn(bacaSelengkapnyaButton);
     }
 
@@ -332,6 +337,7 @@ public class BroadcastChatPO {
      */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
+            playwright.waitFor(tambahBroadcastChatButton);
             playwright.clickOn(tambahBroadcastChatButton);
         }
     }
@@ -432,6 +438,7 @@ public class BroadcastChatPO {
      * @return String data type
      */
     public String getButtonSubmissionText() {
+        playwright.waitFor(ajukanGantiPaketButton);
         return playwright.getText(ajukanGantiPaketButton);
     }
 
