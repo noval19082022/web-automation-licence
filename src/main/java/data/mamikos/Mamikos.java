@@ -80,6 +80,7 @@ public class Mamikos {
     public static final String FORMULIR_DATA_PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "formulirDataPenyewa");
     public static final String STATISTIC_PPRS = JavaHelpers.getPropertyValue(MAMIKOS, "statisticPPRS") ;
     public static final String ADD_CONTRACT_TENANT = JavaHelpers.getPropertyValue(MAMIKOS, "addContractTenant");
+    public static final String HOMEPAGE_LCT = JavaHelpers.getPropertyValue(MAMIKOS, "lctUrl_"+ENV);
 
     @Setter @Getter
     private static  String propertyKosName;
