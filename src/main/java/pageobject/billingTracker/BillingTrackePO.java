@@ -47,7 +47,7 @@ public class BillingTrackePO {
         typeNotesButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tag dropdown-down"));
         inputNotesCatatan = page.getByPlaceholder("Tulis catatan di sini");
         lihatLebihBanyakDropdown = page.locator(".billing-tracker-note-list__expand-toggle");
-        adminEditNote = page.locator("//div[@class='billing-tracker-note-list__item-tag bg-c-label bg-c-label--rainbow bg-c-label--rainbow-white']");
+        adminEditNote = page.locator(".billing-tracker-note-list__item-tag").first();
         saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         tagDropdown = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
     }
@@ -205,7 +205,7 @@ public class BillingTrackePO {
     public void adminEditNote(String text) {
         playwright.clickOn(adminEditNote);
         playwright.clickOn(tagDropdown);
-        Locator textButton = page.locator("//div[@class='bg-c-dropdown__menu-item-content'][normalize-space()='" + text + "']");
+        Locator textButton = page.locator("a").filter(new Locator.FilterOptions().setHasText(text));
         playwright.clickOn(textButton);
         playwright.clickOn(saveButtonNotes);
     }
