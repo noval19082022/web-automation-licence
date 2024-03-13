@@ -70,3 +70,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "update_same_kost_id_with_multiple_price_type.csv"
     Then admin should be able to see the text "Success! File processed successfully."
+
+  @TEST_COOP-6476
+  Scenario: [Web][Probut][Discount Management] Upload Discount bulk csv
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin upload csv discount management with file names "update_success_bulk.csv"
+    Then admin should be able to see the text "Success! File processed successfully."
