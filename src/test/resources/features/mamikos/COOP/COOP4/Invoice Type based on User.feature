@@ -49,4 +49,3 @@ Feature: Invoice Type based on User
       | voucher name stag | voucher name prod |
       | VBUSERFORFIRST    | VBUSERFORFIRST    |
     Then tenant can see voucher is applied
-		

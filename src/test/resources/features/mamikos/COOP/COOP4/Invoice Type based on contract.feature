@@ -49,4 +49,3 @@ Feature: Invoice Type based on contract
       | voucher name stag | voucher name prod |
       | VBCONTFORFIRST    | VBCONTFORFIRST    |
     Then tenant can see voucher is applied
-		
