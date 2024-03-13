@@ -18,7 +18,7 @@ Feature: Invalid Voucher After Applied, Voucher Is Inactive
       | phone stag    | phone prod  | password     |
       | 0890867321217 | 08100000622 | mamikosqa123 |
     And user navigate to tagihan kost saya
-    And user click on "Bayar" button
+    And tenant go to invoice page
     And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
@@ -41,7 +41,7 @@ Feature: Invalid Voucher After Applied, Voucher Is Inactive
       | phone stag    | phone prod  | password     |
       | 0890867321217 | 08100000622 | mamikosqa123 |
     And user navigate to tagihan kost saya
-    And user click on "Bayar" button
+    And tenant go to invoice page
     And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |

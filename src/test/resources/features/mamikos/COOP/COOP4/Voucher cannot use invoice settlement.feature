@@ -67,4 +67,3 @@ Feature: Voucher cannot use invoice settlement
       | voucher name stag | voucher name prod |
       | VTOTALUSAGE       | VTOTALUSAGE       |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
-		
