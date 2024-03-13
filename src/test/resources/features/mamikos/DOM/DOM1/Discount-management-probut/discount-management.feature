@@ -1,4 +1,4 @@
-@DOM111
+@DOM1
 Feature: Probut Discount Management
 
   @TEST_COOP-6469
