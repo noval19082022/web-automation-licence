@@ -214,7 +214,7 @@ public class PlaywrightHelpers {
      * @param data data String data type
      */
     public void fillCharacterByCharacter(Locator locator, String data){
-        locator.type(data);
+        locator.pressSequentially(data,new Locator.PressSequentiallyOptions().setDelay(1000.0));
     }
 
     /**
