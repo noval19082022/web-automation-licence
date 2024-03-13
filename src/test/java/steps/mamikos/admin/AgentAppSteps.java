@@ -29,6 +29,16 @@ public class AgentAppSteps {
 
     @When("admin checks is active {string} status in Edit page for {string} agent")
     public void admin_checks_is_active_status_in_Edit_page(String isActive, String agent){
+        //check agent in list, if not found then go to next page
+        while(!agentApp.isAgentFound(agent)){
+            if (!agentApp.isNextButtonDisabled()){
+                agentApp.clickNextPageAgent();
+            } else {
+                //if on the last page mean next button disable, but the agent still not found. show agent not found
+                System.out.println("Agent "+ agent + " Not Found");
+                break;
+            }
+        }
         if (isActive.equalsIgnoreCase("Yes") && agent.equalsIgnoreCase("Automation PMAN Yes")){
             Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(isActive), "Is Active Status in Table is not Yes!");
             System.out.println(agentApp.isActiveStatusInTableEqualYes(isActive));
