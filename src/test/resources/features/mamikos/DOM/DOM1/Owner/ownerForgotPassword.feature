@@ -149,3 +149,9 @@ Feature: Owner - Forgot Password
     And user get error message "Nomor HP ini sudah digunakan untuk verifikasi di akun lain."
     When user click text "Mohon hubungi CS Mamikos."
     Then user directed to wa and verify pretext "Halo, nomor handphone/email saya 085742883683 sudah pernah digunakan untuk verifikasi di akun lain. Mohon bantuannya."
+
+
+  Scenario: forgot password Tenant - Navigate To forgot password Page
+    Given user go to mamikos homepage
+    When user want to change the owner password
+    Then user redirected to "lupa-password-pemilik"

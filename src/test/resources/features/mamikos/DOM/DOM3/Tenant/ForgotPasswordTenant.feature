@@ -83,3 +83,10 @@ Feature: Tenant Forgot Password
     And user fill their registered phone number "0892202305"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
+
+
+  Scenario: forgot password Tenant - Navigate To forgot password Page
+    Given user go to mamikos homepage
+    When user click on button masuk pencari kos
+    And user click on lupa password?
+    Then user redirected to "lupa-password-pencari"
