@@ -3,6 +3,7 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import pageobject.lct.homepageLctPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
@@ -85,6 +86,7 @@ public class OwnerDashboardPO {
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
     private Locator widgetDaftarGoldplus;
+    private Locator leadsMenu;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -158,6 +160,7 @@ public class OwnerDashboardPO {
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
         daftarGpButton = page.getByTestId("registerGP_btn");
+        leadsMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Leads"));
     }
 
     /**
@@ -812,5 +815,24 @@ public class OwnerDashboardPO {
     public void clickOnButtonFTUE(String buttonText) {
         Locator buttonTextFtue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
         playwright.clickOn(buttonTextFtue);
+    }
+
+    /** Check is leads menu visible
+     * @return boolean
+     */
+    public boolean isLeadsMenuVisible() {
+        return playwright.isLocatorVisibleAfterLoad(leadsMenu,5000.0);
+    }
+
+    /**
+     * Click leads menu
+     */
+    public homepageLctPO clickLeadsMenu() {
+        Page newTab = page.waitForPopup(() -> {
+            playwright.clickOn(leadsMenu);
+        });
+        newTab.waitForLoadState();
+        System.out.println(newTab.title());
+        return new homepageLctPO(newTab);
     }
 }
