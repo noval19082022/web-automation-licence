@@ -645,7 +645,6 @@ public class PointManagementPO extends LoginPO {
     /**
      * Click on dropdown filter all activity
      * @value to choose which value we want to filter
-     * @throws InterruptedException
      */
     public void chooseDropDownAllActivity(String value){
         playwright.selectDropdownByValue(allActivityDropdown,value);

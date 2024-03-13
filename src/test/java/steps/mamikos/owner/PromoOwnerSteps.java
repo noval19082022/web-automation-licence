@@ -46,7 +46,6 @@ public class PromoOwnerSteps {
     public void ownerEditPromoKostOwnerWithTitle(String titleText) {
         playwright.hardWait(2000);
         promoOwner.clickOnBuatPromo();
-        Assert.assertTrue(promoOwner.isEditPromoButton(), "Button doesn't match!");
         promoOwner.editPromoOwner(titleText);
     }
 

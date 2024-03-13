@@ -113,8 +113,15 @@ public class GoldplusSteps {
         playwright.clickOnText("Save");
     }
 
-    @When("admin successfully remove additional favorite labels")
+    @When("admin successfully remove additional favorite labels 4 Month")
     public void admin_successfully_remove_additional_favorite_labels() {
+        goldplus.clickOnEditGP1Button();
+        goldplus.clickNoRadioButton();
+        playwright.clickOnTextButton("Save");
+    }
+
+    @When("admin successfully remove additional favorite labels 3 Month")
+    public void admin_successfully_remove_additional_favorite_labels_3_month() {
         goldplus.clickOnEditGP2Button();
         goldplus.clickNoRadioButton();
         playwright.clickOnTextButton("Save");
@@ -601,5 +608,14 @@ public class GoldplusSteps {
     @When("user choose filter {string} on paket goldplus anda page")
     public void userChooseFilterOnPaketGoldplusAndaPage(String filter) {
         goldplus.clickFilterPaketGoldplusAnda(filter);
+    }
+
+
+    @Then("owner will see that detail text on goldplus guides page:")
+    public void ownerWillSeeThatDetailTextOnGoldplusGuidesPage(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        for (Map<String, String> content : table) {
+            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")),"Text doesn't match");
+        }
     }
 }

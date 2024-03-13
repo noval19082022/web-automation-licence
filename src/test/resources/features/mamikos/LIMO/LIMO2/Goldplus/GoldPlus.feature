@@ -9,7 +9,7 @@ Feature: Gold Plus
       | 082233545506 | 0          | qwerty123 |
     And user click daftar GP button
     And user choose Goldplus package 1
-    Then user will see that the text "GoldPlus 1 periode 4 Bulan" is displayed
+    Then user will see that the text "GoldPlus 1 periode 3 Bulan" is displayed
 
   @TEST_LIMO-146 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package

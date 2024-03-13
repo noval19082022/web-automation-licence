@@ -21,7 +21,7 @@ Feature: Apply Voucher For Kost City
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
     And user navigate to tagihan kost saya
-    And user click on "Bayar" button
+    And tenant go to invoice page
     And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
@@ -47,10 +47,9 @@ Feature: Apply Voucher For Kost City
       | phone stag    | phone prod    | password     |
       | 0890867321217 | 0890867321217 | mamikosqa123 |
     And user navigate to tagihan kost saya
-    And user click on "Bayar" button
+    And tenant go to invoice page
     And tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOCITY          | AUTOCITY          |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
-		

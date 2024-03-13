@@ -659,5 +659,15 @@ public class MamiAdsPO {
     public void clickOnEntryPointJB() {
         playwright.clickOn(titleJemputBola);
     }
+
+    /**
+     * Verify the visibility of text on the popup
+     * @return text on popup
+     */
+    public String getTextOnPoUpVisible(String textOnPopUp) {
+        Locator textOnPopUpMamiads = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(textOnPopUp));
+        playwright.waitFor(textOnPopUpMamiads);
+        return playwright.getText(textOnPopUpMamiads);
+    }
 }
 

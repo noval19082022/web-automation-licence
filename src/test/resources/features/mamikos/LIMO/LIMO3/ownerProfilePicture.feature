@@ -2,8 +2,8 @@
 
 Feature: Owner Profile Picture - Owner Setting
 
-  @continue @TEST_LIMO-2855
-  Scenario: [Setelan Akun][Profile Picture] Profile Picture is null
+  @continue @TEST_LIMO-2772
+  Scenario: [Setelan Akun][Profile Picture] Profile Picture is displayed
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password   |
