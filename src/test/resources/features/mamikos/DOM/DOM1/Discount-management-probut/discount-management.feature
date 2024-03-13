@@ -50,3 +50,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "update_price_type_is_nominal_but_discont_type_is_percentage.csv"
     Then admin should be able to see the text "Success! File processed successfully."
+
+  @TEST_COOP-6474
+  Scenario: [Web][Probut][Discount Management] Upload Discount Same Discount with Different Price
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin upload csv discount management with file names "update_same_discount_with_different_price.csv"
+    Then admin should be able to see the text "Success! File processed successfully."
