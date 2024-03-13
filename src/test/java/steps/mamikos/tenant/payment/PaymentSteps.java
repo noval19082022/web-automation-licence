@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
+import pageobject.tenant.kostSayaPO;
 import pageobject.tenant.payment.PaymentPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
 import pageobject.xendit.XenditApiPO;
@@ -22,6 +23,7 @@ public class PaymentSteps {
     PaymentPO paymentPO;
     MidtransPaymentPO midtransPaymentPO;
     XenditApiPO xenditAPI = new XenditApiPO(page);
+    kostSayaPO kostSaya = new kostSayaPO(page);
 
     @And("tenant select payment method BNI with VA number {string} and amount {string}")
     public void paymentBNI(String VA, String amount) {
@@ -232,5 +234,15 @@ public class PaymentSteps {
         invoicePO.clickOnPermata();
         invoicePO.clickOnBayarSekarang();
         invoicePO.sayaSudahBayarBeforePaid();
+    }
+
+    @And("tenant click sudah di bayar")
+    public void tenantClickSudahDiBayar() {
+        kostSaya.clickSudahDiBayar();
+    }
+
+    @Then("tenant will see invoice {string}")
+    public void tenantWillSeeInvoice(String statusInvoice) {
+        Assert.assertEquals(kostSaya.isPaymentSuccessText(statusInvoice),""+statusInvoice +"");
     }
 }

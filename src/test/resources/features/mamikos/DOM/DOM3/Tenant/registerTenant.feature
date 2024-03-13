@@ -239,7 +239,7 @@ Feature: New Flow Register Tenant
     And user clicks on Register button
     Then user redirected to "/register-pencari?source=property%20detail%20page"
 
-
+  @TEST_COOP-6903
   Scenario: Register Tenant - From SBMPTN Page
     Given user navigate to SBMPTN page
     And user clicks on Enter button Tenant

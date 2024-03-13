@@ -31,6 +31,8 @@ public class kostSayaPO {
     Locator checkBoxForum;
     Locator okeButtonForum;
     Locator upCommingText;
+    Locator sudahDiBayarBtn;
+    Locator invoiceSudahdiBayar;
 
 
     public kostSayaPO(Page page) {
@@ -55,6 +57,8 @@ public class kostSayaPO {
         this.titleForumText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur ini sedang kami kembangkan"));
         this.checkBoxForum = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         this.okeButtonForum = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke"));
+        this.sudahDiBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Dibayar"));
+        this.invoiceSudahdiBayar = page.getByText("Jatuh tempo 26 Desember Rp96.000.200");
     }
 
     /**
@@ -211,6 +215,25 @@ public class kostSayaPO {
         upCommingText =page.getByText(""+text+"");
         return upCommingText.isVisible();
     }
+
+    /**
+     * click on sudah Bayar on kost saya
+     */
+    public void clickSudahDiBayar(){
+        playwright.clickOn(sudahDiBayarBtn);
+        playwright.clickOn(invoiceSudahdiBayar);
+    }
+
+    /**
+     * check if payment is success
+     *
+     * @return String "sudah di bayar"
+     */
+    public String isPaymentSuccessText(String dibayar) {
+        Locator statusInvoice = page.getByText(dibayar);
+        return playwright.getText(statusInvoice);
+    }
+
 
 }
 

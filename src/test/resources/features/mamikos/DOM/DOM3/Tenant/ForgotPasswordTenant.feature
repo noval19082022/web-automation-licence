@@ -84,7 +84,7 @@ Feature: Tenant Forgot Password
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
 
-
+  @TEST_COOP-6904
   Scenario: forgot password Tenant - Navigate To forgot password Page
     Given user go to mamikos homepage
     When user click on button masuk pencari kos

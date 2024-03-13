@@ -206,7 +206,7 @@ Feature: New Flow Register Owner
     And user clicks on Register button
     Then user redirected to "register-pemilik?source=property%20detail%20page"
 
-
+  @TEST_COOP-6901
   Scenario: Register owner - From SBMPTN Page
     Given user navigate to SBMPTN page
     When user clicks on Enter button
