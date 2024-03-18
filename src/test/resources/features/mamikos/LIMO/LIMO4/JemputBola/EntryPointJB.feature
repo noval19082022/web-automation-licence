@@ -17,8 +17,8 @@ Feature: Entry Point Jemput Bola
       | Kost Test Mamiads Off Agung Tanggamus   |
       | Kost Test Full Occupied Agung Tanggamus |
 
-    @TEST_LIMO-4982
-    Scenario: Show label "baru" when owner visit this section for the first time
+    @TEST_LIMO-6555
+    Scenario:Show label "baru" for this section when owner haven't visit laporan klik
       Given user go to mamikos homepage
       When user login as owner:
         | phone stag   | phone prod    | password     |
