@@ -804,4 +804,13 @@ public class OwnerDashboardPO {
         playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
     }
+
+    /**
+     * Click on FTUE on button
+     * @param buttonText
+     */
+    public void clickOnButtonFTUE(String buttonText) {
+        Locator buttonTextFtue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.clickOn(buttonTextFtue);
+    }
 }

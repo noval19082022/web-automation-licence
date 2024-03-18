@@ -81,6 +81,7 @@ public class ChatOwnerSteps {
     @And("user dismiss FTUE MARS and FTUE Broadcast")
     public void userDismissFTUEMARSAndFTUEBroadcast() {
         chat.dismissFTUEMars();
+        chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEBroadcast();
     }
 

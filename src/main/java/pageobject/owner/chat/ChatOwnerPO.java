@@ -210,7 +210,7 @@ public class ChatOwnerPO {
     public void dismissFTUEMars() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota")).click();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat cara kedua")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
     }
 
@@ -223,8 +223,8 @@ public class ChatOwnerPO {
      * Dismiss FTUE Broadcast
      */
     public void dismissFTUEBroadcast() {
-        page.getByTestId("ftueTooltipStandard").click();
-        page.getByTestId("ftueTooltipComponent").getByRole(AriaRole.BUTTON).click();
+//        page.getByTestId("ftueTooltipStandard").click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
     }
 
     /**

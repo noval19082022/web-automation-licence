@@ -366,7 +366,6 @@ public class MamiAdsPO {
      */
     public void navigatesToMamiads() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 50000.0, LoadState.LOAD);
-        playwright.bringPageToView(page);
     }
 
     /**
