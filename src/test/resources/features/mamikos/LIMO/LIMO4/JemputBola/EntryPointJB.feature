@@ -2,19 +2,20 @@
 Feature: Entry Point Jemput Bola
 
   @TEST_LIMO-4960 @TEST_LIMO-4953 @TEST_LIMO-4954
-  Scenario Outline: Check entry point jemput bola apartment and kost mamiads on & off
+  Scenario Outline: Check entry point jemput bola apartment and kost mamiads on, off & full
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod      | password     |
-      | <phone number> | <phone number>  | qwerty123    |
+      | phone stag | phone prod  | password   |
+      | 0890910001 | 0890910001  | qwerty123  |
     And owner navigate to mamiads dashboard
     And user close mamiads onboarding popup
-    Then user will see entry point jemput bola
+    Then user will see entry point jemput bola for "<ads name>"
     Examples:
-      | phone number   |
-      | 0822977400004  |
-      | 082180680001   |
-      | 081280680002   |
+      | ads name                                |
+      | Apart Exfo Mask                         |
+      | Kost Test Mamiads On Agung Tanggamus    |
+      | Kost Test Mamiads Off Agung Tanggamus   |
+      | Kost Test Full Occupied Agung Tanggamus |
 
     @TEST_LIMO-4982
     Scenario: Show label "baru" when owner visit this section for the first time
