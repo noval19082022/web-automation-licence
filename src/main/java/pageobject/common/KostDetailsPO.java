@@ -9,9 +9,11 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -253,6 +255,9 @@ public class KostDetailsPO {
     private Locator selectDateForSudahAdaTgl;
     private Locator selectDateForBaruPerkiraan;
     private Locator closeWaitingListButton;
+    Locator dateCannotBooking;
+    Locator calendarView;
+    Locator nextMonthButton;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -493,6 +498,9 @@ public class KostDetailsPO {
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
         this.btnBukaProfil = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buka profil saya"));
     uploadImage = page.locator("//img[@alt='id photo']");
+        dateCannotBooking = page.locator("//span[@class='cell day disabled today weekend sun']");
+        calendarView = page.getByRole(AriaRole.TEXTBOX).first();
+        nextMonthButton = page.locator("//span[@class='next']");
 
         //-------------------request booking DBET tenant---------------//
         notificationOnHeader = page.locator("//a[@aria-label='notification']");
@@ -2279,5 +2287,27 @@ public class KostDetailsPO {
       */
     public void clickCloseWaitingListButton(){
         playwright.clickOn(closeWaitingListButton);
+    }
+    /**
+     * checking date today cannot booking
+     */
+    public void dateCannotBooking() {
+        mulaiKosInput.click();
+        playwright.getLocators(dateCannotBooking);
+    }
+
+    /**
+     * checking date next month
+     */
+    public void tenantCanCheckInNext5Month(String month) {
+        playwright.clickOn(calendarView);
+        int numberOfMonths = Integer.parseInt(month);
+        for (int i = 0; i < numberOfMonths; i++) {
+            playwright.clickOn(nextMonthButton);
+        }
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusMonths(5);
+        String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
+        page.click("//span[@class='cell day'][normalize-space()='"+formattedDate+"']");
     }
 }

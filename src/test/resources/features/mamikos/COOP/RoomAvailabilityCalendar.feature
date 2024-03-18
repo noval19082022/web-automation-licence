@@ -1,7 +1,7 @@
 @checkinKosBss
 Feature: Room avability calender
 
-@continue
+  @continue
   Scenario: BSS Waktu masuk kos booking is 1 days
     Given user go to mamikos homepage
     And user login as owner:
@@ -15,8 +15,8 @@ Feature: Room avability calender
     And owner click "Ubah waktu"
     And owner click on toggle entry time kos
     And owner edit Jarak waktu terdekat:
-      | Jumlah  | Satuan Waktu |
-      | 1       | Hari         |
+      | Jumlah | Satuan Waktu |
+      | 1      | Hari         |
     And owner logs out
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -41,8 +41,8 @@ Feature: Room avability calender
     And owner click "Ubah waktu"
     And owner click on toggle entry time kos
     And owner edit Jarak waktu terdekat:
-      | Jumlah  | Satuan Waktu |
-      | 3       | Hari         |
+      | Jumlah | Satuan Waktu |
+      | 3      | Hari         |
     And owner logs out
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -8,9 +8,9 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 public class BillAndBookingManagementPO {
-    private Page page;
-    private PlaywrightHelpers playwright;
-    private LocatorHelpers locator;
+    private final Page page;
+    private final PlaywrightHelpers playwright;
+    private final LocatorHelpers locator;
     Locator nomorKamarInput;
     Locator pilihKamarRadio;
     Locator terapkanButton;
@@ -29,6 +29,19 @@ public class BillAndBookingManagementPO {
     Locator makeRuleBookingPage;
     Locator pilihKamarDitempatRadio;
     Locator Iunderstand;
+
+    //---------------------Rules enter kos---------------------//
+    Locator dropdownRulesEnterKos;
+    Locator toggleCheckInKos;
+    Locator toggleCheckInKosDisable;
+    Locator dropdownTotalDay;
+    Locator simpanPopupTotalDay;
+    Locator dropdownTotalDayDisable;
+    Locator dropdownTotalDayEnable;
+    Locator closePopup;
+    Locator dropdownLongDistance;
+    Locator dropdownUnitTime;
+    Locator simpanPopupUnitTime;
 
 
     public BillAndBookingManagementPO(Page page) {
@@ -53,6 +66,17 @@ public class BillAndBookingManagementPO {
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
         Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        dropdownRulesEnterKos = page.locator("//div[@title='Waktu mulai masuk kos']");
+        dropdownTotalDay = page.locator("//input[@id='min-checkin-amount']");
+        simpanPopupTotalDay = page.locator("//button[@class='bg-c-button booking-checkin-select-option-modal__save-button bg-c-button--primary bg-c-button--lg']");
+        dropdownTotalDayDisable = page.locator("bg-c-input input-modal-trigger__trigger bg-c-input--disabled bg-c-input--lg");
+        dropdownTotalDayEnable = page.locator("bg-c-input input-modal-trigger__trigger bg-c-input--lg");
+        toggleCheckInKosDisable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--off bg-c-switch--hover']");
+        toggleCheckInKos = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
+        closePopup = page.locator("//button[@class='bg-c-modal__action-closable']//*[name()='svg']");
+        dropdownLongDistance = page.locator("//input[@id='max-checkin-amount']");
+        dropdownUnitTime = page.locator("//input[@id='max-checkin-time-unit']");
+        simpanPopupUnitTime = page.locator("//button[@class='bg-c-button booking-checkin-select-option-modal__save-button bg-c-button--secondary bg-c-button--lg']");
     }
 
     /**
@@ -123,7 +147,7 @@ public class BillAndBookingManagementPO {
     /**
      * choose reason to reject booking
      */
-    public void ownerChooseReasonReject () {
+    public void ownerChooseReasonReject() {
         playwright.clickOn(reasonChoice);
         playwright.waitTillLocatorIsVisible(IUnderstandBtn);
         playwright.clickOn(IUnderstandBtn);
@@ -151,7 +175,7 @@ public class BillAndBookingManagementPO {
      * Click on reason reject booking
      */
     public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
-        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
+        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'" + reason + "')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
         if (IUnderstandBtn.isVisible()) {
@@ -165,11 +189,13 @@ public class BillAndBookingManagementPO {
 
     /**
      * Check confirmation Atur Booking popup
+     *
      * @return confirmation Atur Booking popup
      */
     public boolean isAppearConfirmationPopup() {
         return playwright.waitTillLocatorIsVisible(confirmationPopup);
     }
+
     /**
      * Click on reason reject booking
      */
@@ -177,8 +203,10 @@ public class BillAndBookingManagementPO {
         playwright.clickOn(makeRuleButton);
         return new PengajuanSewaPO(page);
     }
+
     /**
      * Check direct make rule page
+     *
      * @return make rule page
      */
     public boolean isAppearMakeRuleBookingPage() {
@@ -188,9 +216,71 @@ public class BillAndBookingManagementPO {
     /**
      * check is pilih di tempat is visible or not
      * when choosing room number in owner dashboard
+     *
      * @return boolean
      */
     public boolean isPilihKamarDiTempatVisible() {
         return pilihKamarDitempatRadio.isVisible();
+    }
+
+    /**
+     * Click on dropdown rules enter kos
+     */
+    public void ownerClickDropdownRulesEnterKos() {
+        playwright.hardWait(3000);
+        playwright.clickOn(dropdownRulesEnterKos);
+    }
+
+    /**
+     * Click on toggle check in kos
+     */
+    public void ownerClickOnToggleCheckInKos() {
+        if (toggleCheckInKosDisable.isVisible()) {
+            playwright.clickOn(toggleCheckInKosDisable);
+        } else {
+            playwright.clickOn(closePopup);
+        }
+    }
+    /**
+     * Click on toggle check in kos if active
+     */
+    public void ownerClickOnToggleCheckInKosIfActive() {
+        if (toggleCheckInKos.isVisible()) {
+            playwright.clickOn(toggleCheckInKos);
+        } else if (toggleCheckInKosDisable.isVisible()){
+            playwright.isTextDisplayed("Jarak waktu terdekat (pengajuan dan tanggal masuk kos)");
+        }
+    }
+
+    /**
+     * Click on dropdown total day
+     */
+    public void ownerClickOnDropdownTotalDay() {
+        playwright.clickOn(dropdownTotalDay);
+    }
+
+    /**
+     * Click on simpan on popup total day
+     */
+    public void ownerClickOnSimpanPopupTotalDay() {
+        playwright.clickOn(simpanPopupTotalDay);
+    }
+    /**
+     * Click on simpan on popup unit time
+     */
+    public void ownerClickOnSimpanPopupUnitTime() {
+        playwright.clickOn(simpanPopupUnitTime);
+    }
+    /**
+     * Click on dropdown long distance
+     */
+    public void ownerClickOnDropdownLongDistance() {
+        playwright.clickOn(dropdownLongDistance);
+    }
+    /**
+     * Click on dropdown unit time
+     */
+    public void ownerClickOnDropdownUnitTime() {
+        playwright.clickOn(dropdownUnitTime);
     }
 }
