@@ -2299,7 +2299,7 @@ public class KostDetailsPO {
     /**
      * checking date next month
      */
-    public void tenantCanCheckInNext5Month(String month) {
+    public void tenantCanCheckInNextMonth(String month) {
         playwright.clickOn(calendarView);
         int numberOfMonths = Integer.parseInt(month);
         for (int i = 0; i < numberOfMonths; i++) {

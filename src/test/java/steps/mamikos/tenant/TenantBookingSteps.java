@@ -476,8 +476,8 @@ public class TenantBookingSteps {
         kostDetail.dateCannotBooking();
     }
     @Then("tenant can choose checkin date in the next {string} month")
-    public void tenantCanCheckInNext5Month(String month){
+    public void tenantCanCheckInNextMonth(String month){
         kostDetail.dismissFTUE();
-        kostDetail.tenantCanCheckInNext5Month(month);
+        kostDetail.tenantCanCheckInNextMonth(month);
     }
 }
