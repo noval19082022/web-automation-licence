@@ -121,7 +121,7 @@ public class CpDisbursementPO {
         lainnyaTipeTransaksiField = page.locator("#transaction_type_text-add-new");
         tambahkanDataTransferButton = page.locator("#transfer-submit-add-new");
         daftarTransferTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Transfer"));
-        errorMessageOnTotalPendapatan = page.getByLabel("Tambah Data Transfer").getByText("Mohon masukkan angka");
+        errorMessageOnTotalPendapatan = page.locator("#transfer_amount_message-add-new");
 
         tanggalTransferPemilikTable = page.locator("td b");
         namaPropertyTable = page.locator("tr td:nth-of-type(3)");
@@ -149,7 +149,7 @@ public class CpDisbursementPO {
 
         transferActionButton1 = page.locator("(//td)[7]/button");
         propertyNamePreviewModal = page.locator("(//*[@class='easy-autocomplete'])[1]/input");
-        totalPendapatanFieldOnPreview = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan total pendapatan"));
+        totalPendapatanFieldOnPreview = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan total pendapatan").setExact(true));
         tipeTransaksiSelectOnPreview = page.locator("//select[@name='transaction_type']");
         tglTransferKePemilikOnPreview = page.locator("//*[@name='transfer_due_date']").first();
         transferSekarangBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Transfer Sekarang"));
