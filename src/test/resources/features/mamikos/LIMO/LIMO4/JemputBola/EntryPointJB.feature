@@ -1,7 +1,7 @@
 @regression @LIMO4
 Feature: Entry Point Jemput Bola
 
-  @TEST_LIMO-4960 @TEST_LIMO-4953 @TEST_LIMO-4954
+  @TEST_LIMO-4960 @TEST_LIMO-4953 @TEST_LIMO-4954 @TEST_LIMO-4959
   Scenario Outline: Check entry point jemput bola apartment and kost mamiads on, off & full
     Given user go to mamikos homepage
     When user login as owner:
