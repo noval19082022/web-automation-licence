@@ -2316,9 +2316,6 @@ public class KostDetailsPO {
     public void tenantCanCheckInNextWeek(String week) {
         playwright.clickOn(calendarView);
         int numberOfWeeks = Integer.parseInt(week);
-        for (int i = 0; i < numberOfWeeks; i++) {
-            playwright.clickOn(nextMonthButton);
-        }
         LocalDate currentDate = LocalDate.now();
         LocalDate futureDate = currentDate.plusWeeks(numberOfWeeks);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
