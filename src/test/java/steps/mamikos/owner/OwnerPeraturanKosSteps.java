@@ -97,4 +97,33 @@ public class OwnerPeraturanKosSteps {
     public void ownerCanSeeOnUbahPeraturan(String text){
         pengajuanBooking.validateWordingOnUbahPeraturan(text);
     }
+    @And("owner click on toggle pengajuan dan waktu masuk kos")
+    public void ownerClickOnToggleCheckInKos() {
+        pengajuanBooking.ownerClickOnToggleCheckInKos();
+    }
+    @And("owner click on toggle pengajuan dan waktu masuk kos if active")
+    public void ownerClickOnToggleCheckInKosIfActive() {
+        pengajuanBooking.ownerClickOnToggleCheckInKosIfActive();
+    }
+    @And("owner click on dropdown waktu masuk kos")
+    public void ownerClickOnDropdownTotalDay() {
+        pengajuanBooking.ownerClickOnDropdownTotalDay();
+    }
+    @And("owner click on simpan button on popup total day")
+    public void ownerClickOnSimpanPopupTotalDay() {
+        pengajuanBooking.ownerClickOnSimpanPopupTotalDay();
+    }
+    @And("owner click on dropdown jumlah jarak waktu terjauh")
+    public void ownerClickOnDropdownLongDistance() {
+        pengajuanBooking.ownerClickOnDropdownLongDistance();
+    }
+    @And("owner click on dropdown satuan waktu jarak waktu terjauh")
+    public void ownerClickOnDropdownUnitTime() {
+        pengajuanBooking.ownerClickOnDropdownUnitTime();
+    }
+    @And("owner click on simpan button on popup satuan waktu")
+    public void ownerClickOnSimpanPopupUnitTime() {
+        pengajuanBooking.ownerClickOnSimpanPopupUnitTime();
+    }
 }
+

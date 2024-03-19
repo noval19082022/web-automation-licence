@@ -30,19 +30,6 @@ public class BillAndBookingManagementPO {
     Locator pilihKamarDitempatRadio;
     Locator Iunderstand;
 
-    //---------------------Rules enter kos---------------------//
-    Locator dropdownRulesEnterKos;
-    Locator toggleCheckInKos;
-    Locator toggleCheckInKosDisable;
-    Locator dropdownTotalDay;
-    Locator simpanPopupTotalDay;
-    Locator dropdownTotalDayDisable;
-    Locator dropdownTotalDayEnable;
-    Locator closePopup;
-    Locator dropdownLongDistance;
-    Locator dropdownUnitTime;
-    Locator simpanPopupUnitTime;
-
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -66,19 +53,7 @@ public class BillAndBookingManagementPO {
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
         Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
-        dropdownRulesEnterKos = page.locator("//div[@title='Waktu mulai masuk kos']");
-        dropdownTotalDay = page.locator("//input[@id='min-checkin-amount']");
-        simpanPopupTotalDay = page.locator("//button[@class='bg-c-button booking-checkin-select-option-modal__save-button bg-c-button--primary bg-c-button--lg']");
-        dropdownTotalDayDisable = page.locator("bg-c-input input-modal-trigger__trigger bg-c-input--disabled bg-c-input--lg");
-        dropdownTotalDayEnable = page.locator("bg-c-input input-modal-trigger__trigger bg-c-input--lg");
-        toggleCheckInKosDisable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--off bg-c-switch--hover']");
-        toggleCheckInKos = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
-        closePopup = page.locator("//button[@class='bg-c-modal__action-closable']//*[name()='svg']");
-        dropdownLongDistance = page.locator("//input[@id='max-checkin-amount']");
-        dropdownUnitTime = page.locator("//input[@id='max-checkin-time-unit']");
-        simpanPopupUnitTime = page.locator("//button[@class='bg-c-button booking-checkin-select-option-modal__save-button bg-c-button--secondary bg-c-button--lg']");
     }
-
     /**
      * Click on room number input
      */
@@ -221,66 +196,5 @@ public class BillAndBookingManagementPO {
      */
     public boolean isPilihKamarDiTempatVisible() {
         return pilihKamarDitempatRadio.isVisible();
-    }
-
-    /**
-     * Click on dropdown rules enter kos
-     */
-    public void ownerClickDropdownRulesEnterKos() {
-        playwright.hardWait(3000);
-        playwright.clickOn(dropdownRulesEnterKos);
-    }
-
-    /**
-     * Click on toggle check in kos
-     */
-    public void ownerClickOnToggleCheckInKos() {
-        if (toggleCheckInKosDisable.isVisible()) {
-            playwright.clickOn(toggleCheckInKosDisable);
-        } else {
-            playwright.clickOn(closePopup);
-        }
-    }
-    /**
-     * Click on toggle check in kos if active
-     */
-    public void ownerClickOnToggleCheckInKosIfActive() {
-        if (toggleCheckInKos.isVisible()) {
-            playwright.clickOn(toggleCheckInKos);
-        } else if (toggleCheckInKosDisable.isVisible()){
-            playwright.isTextDisplayed("Jarak waktu terdekat (pengajuan dan tanggal masuk kos)");
-        }
-    }
-
-    /**
-     * Click on dropdown total day
-     */
-    public void ownerClickOnDropdownTotalDay() {
-        playwright.clickOn(dropdownTotalDay);
-    }
-
-    /**
-     * Click on simpan on popup total day
-     */
-    public void ownerClickOnSimpanPopupTotalDay() {
-        playwright.clickOn(simpanPopupTotalDay);
-    }
-    /**
-     * Click on simpan on popup unit time
-     */
-    public void ownerClickOnSimpanPopupUnitTime() {
-        playwright.clickOn(simpanPopupUnitTime);
-    }
-    /**
-     * Click on dropdown long distance
-     */
-    public void ownerClickOnDropdownLongDistance() {
-        playwright.clickOn(dropdownLongDistance);
-    }
-    /**
-     * Click on dropdown unit time
-     */
-    public void ownerClickOnDropdownUnitTime() {
-        playwright.clickOn(dropdownUnitTime);
     }
 }

@@ -25,6 +25,7 @@ public class OwnerAcceptBookingSteps {
     LoadingPO loading = new LoadingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
+
     @When("owner accept booking")
     public void ownerAcceptBooking() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
@@ -109,37 +110,5 @@ public class OwnerAcceptBookingSteps {
         billBookingManage.clickOnTerapkanButton();
         billBookingManage.clickOnLanjutkanButton();
         billBookingManage.clickOnSimpan();
-    }
-    @And("owner click on dropdown rules enter kos button")
-    public void ownerClickOnDropdownRulesEnterKos() {
-        billBookingManage.ownerClickDropdownRulesEnterKos();
-    }
-    @And("owner click on toggle pengajuan dan waktu masuk kos")
-    public void ownerClickOnToggleCheckInKos() {
-        billBookingManage.ownerClickOnToggleCheckInKos();
-    }
-    @And("owner click on toggle pengajuan dan waktu masuk kos if active")
-    public void ownerClickOnToggleCheckInKosIfActive() {
-        billBookingManage.ownerClickOnToggleCheckInKosIfActive();
-    }
-    @And("owner click on dropdown waktu masuk kos")
-    public void ownerClickOnDropdownTotalDay() {
-        billBookingManage.ownerClickOnDropdownTotalDay();
-    }
-    @And("owner click on simpan button on popup total day")
-    public void ownerClickOnSimpanPopupTotalDay() {
-        billBookingManage.ownerClickOnSimpanPopupTotalDay();
-    }
-    @And("owner click on dropdown jarak waktu terjauh")
-    public void ownerClickOnDropdownLongDistance() {
-        billBookingManage.ownerClickOnDropdownLongDistance();
-    }
-    @And("owner click on dropdown satuan waktu")
-    public void ownerClickOnDropdownUnitTime() {
-        billBookingManage.ownerClickOnDropdownUnitTime();
-    }
-    @And("owner click on simpan button on popup satuan waktu")
-    public void ownerClickOnSimpanPopupUnitTime() {
-        billBookingManage.ownerClickOnSimpanPopupUnitTime();
     }
 }

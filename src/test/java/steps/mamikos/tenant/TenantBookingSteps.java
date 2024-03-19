@@ -480,4 +480,9 @@ public class TenantBookingSteps {
         kostDetail.dismissFTUE();
         kostDetail.tenantCanCheckInNextMonth(month);
     }
+    @Then("tenant can choose checkin date in the next {string} week")
+    public void tenantCanCheckInNextWeek(String week){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextWeek(week);
+    }
 }
