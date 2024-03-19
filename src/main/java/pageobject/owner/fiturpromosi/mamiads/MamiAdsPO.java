@@ -633,7 +633,8 @@ public class MamiAdsPO {
      * check entry point on jemput bola title
      */
     public void isTitleJemputBolaVisible(String adsName) {
-        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/../../..//*[@class='mami-ads-statistic-main']//p[contains(@class,'title')]");
+        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
+                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'title')]");
         playwright.assertVisible(titleJemputBola);
     }
 
@@ -641,7 +642,8 @@ public class MamiAdsPO {
      * check entry point on jemput bola subtitle
      */
     public void isSubtitleJemputBolaVisible(String adsName) {
-        Locator subtitleJemputBola = page.locator("//*[text()='"+ adsName +"']/../../..//*[@class='mami-ads-statistic-main']//p[contains(@class,'desc')]");
+        Locator subtitleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
+                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'desc')]");
         playwright.assertVisible(subtitleJemputBola);
     }
 
