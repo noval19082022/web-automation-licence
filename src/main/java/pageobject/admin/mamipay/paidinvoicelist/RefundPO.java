@@ -9,7 +9,8 @@ import utilities.PlaywrightHelpers;
 public class RefundPO {
     private Page page;
     private PlaywrightHelpers playwrightHelpers;
-    private Locator refundBtn;
+    private Locator refundBtnNotCC;
+    private Locator refundBtnForCC;
     //--- refund detail ----
     private Locator selectedBankForRefund;
     private Locator selectBank;
@@ -50,7 +51,8 @@ public class RefundPO {
     public RefundPO(Page page) {
         this.page = page;
         this.playwrightHelpers = new PlaywrightHelpers(page);
-        this.refundBtn = page.getByRole(AriaRole.BUTTON).getByText("Refund").first();
+        this.refundBtnNotCC = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(" - MAMI")).getByRole(AriaRole.BUTTON).first();
+        this.refundBtnForCC = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(" ( from Credit Card ) MAMI")).getByRole(AriaRole.BUTTON).first();
         //--- refund detail ----
         this.selectedBankForRefund = page.getByRole(AriaRole.COMBOBOX).getByRole(AriaRole.TEXTBOX).first();
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
@@ -90,10 +92,17 @@ public class RefundPO {
     }
 
     /**
-     * admin click refund btn for the first invoice list
+     * admin click refund btn for the first invoice list non cc
      */
     public void clickOnRefundBtn() {
-        playwrightHelpers.clickOn(refundBtn);
+        playwrightHelpers.clickOn(refundBtnNotCC);
+    }
+
+    /**
+     * admin click refund btn for the first invoice list for cc payment
+     */
+    public void clickOnRefundBtnForCCPayment() {
+        playwrightHelpers.clickOn(refundBtnForCC);
     }
 
     /**

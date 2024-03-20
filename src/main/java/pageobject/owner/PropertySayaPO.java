@@ -1603,7 +1603,7 @@ public class PropertySayaPO {
      * Waiting the page loaded
      */
     public void waitPageLoaded() {
-        playwright.waitTillPageLoaded(10000.0);
+        playwright.waitTillPageLoaded(30000.0);
     }
 
     /**

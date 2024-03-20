@@ -312,10 +312,10 @@ public class MamiAdsSteps {
         mamiAdsPO.clickOnBeliSaldoOnPopupToggle();
     }
 
-    @Then("user will see entry point jemput bola")
-    public void user_will_see_entry_point_jemput_bola() {
-        mamiAdsPO.isTitleJemputBolaVisible();
-        mamiAdsPO.isSubtitleJemputBolaVisible();
+    @Then("user will see entry point jemput bola for {string}")
+    public void user_will_see_entry_point_jemput_bola(String adsName) {
+        mamiAdsPO.isTitleJemputBolaVisible(adsName);
+        mamiAdsPO.isSubtitleJemputBolaVisible(adsName);
     }
 
     @Then("user will see label baru on JB entry point is {string}")

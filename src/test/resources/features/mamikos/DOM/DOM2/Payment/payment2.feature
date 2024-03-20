@@ -78,7 +78,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     #  Scenario: Admin edit paid amount & uncheck admin fee
     Given admin go to mamikos mamipay admin
     When admin navigate to mamipay refund page
-    And admin pick one invoice on list to refund
+    And admin pick one invoice on list to refund from cc payment
     And admin uncheck admin fee for refund
     And admin edit paid amount credit card "20000" for refund
     And admin change of reason list to pemilik membatalkan for refund

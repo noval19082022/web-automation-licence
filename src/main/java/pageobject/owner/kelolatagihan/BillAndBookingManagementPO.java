@@ -8,9 +8,9 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 public class BillAndBookingManagementPO {
-    private Page page;
-    private PlaywrightHelpers playwright;
-    private LocatorHelpers locator;
+    private final Page page;
+    private final PlaywrightHelpers playwright;
+    private final LocatorHelpers locator;
     Locator nomorKamarInput;
     Locator pilihKamarRadio;
     Locator terapkanButton;
@@ -54,7 +54,6 @@ public class BillAndBookingManagementPO {
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
         Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
     }
-
     /**
      * Click on room number input
      */
@@ -123,7 +122,7 @@ public class BillAndBookingManagementPO {
     /**
      * choose reason to reject booking
      */
-    public void ownerChooseReasonReject () {
+    public void ownerChooseReasonReject() {
         playwright.clickOn(reasonChoice);
         playwright.waitTillLocatorIsVisible(IUnderstandBtn);
         playwright.clickOn(IUnderstandBtn);
@@ -151,7 +150,7 @@ public class BillAndBookingManagementPO {
      * Click on reason reject booking
      */
     public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
-        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'"+reason+"')]";
+        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'" + reason + "')]";
         ElementHandle element = page.querySelector(selector);
         element.click();
         if (IUnderstandBtn.isVisible()) {
@@ -165,11 +164,13 @@ public class BillAndBookingManagementPO {
 
     /**
      * Check confirmation Atur Booking popup
+     *
      * @return confirmation Atur Booking popup
      */
     public boolean isAppearConfirmationPopup() {
         return playwright.waitTillLocatorIsVisible(confirmationPopup);
     }
+
     /**
      * Click on reason reject booking
      */
@@ -177,8 +178,10 @@ public class BillAndBookingManagementPO {
         playwright.clickOn(makeRuleButton);
         return new PengajuanSewaPO(page);
     }
+
     /**
      * Check direct make rule page
+     *
      * @return make rule page
      */
     public boolean isAppearMakeRuleBookingPage() {
@@ -188,6 +191,7 @@ public class BillAndBookingManagementPO {
     /**
      * check is pilih di tempat is visible or not
      * when choosing room number in owner dashboard
+     *
      * @return boolean
      */
     public boolean isPilihKamarDiTempatVisible() {
