@@ -95,6 +95,9 @@ public class Mamikos {
     private static String phoneOwner;
 
     @Setter @Getter
-    private static String gpPackage;
+    private static String gpPackageChoosed;
+
+    @Setter @Getter
+    private static String gpPeriodeChoosed;
 
 }

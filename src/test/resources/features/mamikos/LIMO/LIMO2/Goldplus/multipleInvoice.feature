@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization @LIMO2-staging
+@regression @LIMO2 @listing-monetization @LIMO2-staging @multipleInvoice
 Feature: Multiple Invoice
 
   @TEST_LIMO-2338 @buyGP  @multiple-invoice @continue

@@ -40,6 +40,7 @@ public class ChatOwnerPO {
     Locator Iunderstand;
     Locator sayaMengertiChatRoom;
     Locator bookingLabel;
+    Locator closeIcon;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -75,6 +76,7 @@ public class ChatOwnerPO {
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
+        closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
     }
 
     /**
@@ -210,7 +212,7 @@ public class ChatOwnerPO {
     public void dismissFTUEMars() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota")).click();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat cara kedua")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
     }
 
@@ -223,8 +225,7 @@ public class ChatOwnerPO {
      * Dismiss FTUE Broadcast
      */
     public void dismissFTUEBroadcast() {
-        page.getByTestId("ftueTooltipStandard").click();
-        page.getByTestId("ftueTooltipComponent").getByRole(AriaRole.BUTTON).click();
+        playwright.clickOn(closeIcon);
     }
 
     /**
@@ -327,7 +328,7 @@ public class ChatOwnerPO {
      *
      */
     public void dismissFTUEMarsKuotaNol() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
+        playwright.clickOn(closeIcon);
     }
 
     /**

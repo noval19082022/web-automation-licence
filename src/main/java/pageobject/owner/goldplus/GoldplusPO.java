@@ -4,6 +4,7 @@ import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class GoldplusPO {
@@ -58,7 +59,10 @@ public class GoldplusPO {
     Locator textTitlePopupRecurring;
     Locator textSubtitlePopUpRecurring;
     Locator buttonExtendGPpopUp;
-
+    Locator gpPackageChoosed;
+    Locator gpPackageRincianPembayaranDetailTagihan;
+    Locator gpPeriodeChoosed;
+    Locator favoritLabel;
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -106,6 +110,10 @@ public class GoldplusPO {
         textTitlePopupRecurring = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Masa aktif GoldPlus akan habis."));
         textSubtitlePopUpRecurring = page.getByText("Ayo, segera perpanjang paket GoldPlus Anda sekarang.");
         buttonExtendGPpopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
+        gpPackageChoosed = page.locator(".goldplus-package-detail__item-title");
+        gpPackageRincianPembayaranDetailTagihan = page.locator(".bg-c-list-item__description");
+        gpPeriodeChoosed = page.locator("//div[contains(@class,'-radio--checked')]/following-sibling::*//p[contains(@class,'bg-c-text--body-2')]");
+        favoritLabel = page.getByText("Favorit");
     }
 
     /**
@@ -703,5 +711,37 @@ public class GoldplusPO {
         Locator textOnPageNaikkanIklan = page.getByText(textOnPage);
         playwright.waitFor(textOnPageNaikkanIklan);
         return playwright.getText(textOnPageNaikkanIklan);
+    }
+
+    /**
+     * Get gp package when owner choose on detail tagihan
+     * @return gpPackageChoosed
+     * e.g. GoldPlus 1 periode 1 Bulan
+     */
+    public String getTextGpPackageChoosed() {
+        return playwright.getText(gpPackageChoosed);
+    }
+
+    /**
+     * Get GP package on detail tagihan page section rincian pembayaran
+     * @return GpPackageRincianPembayaran
+     * e.g. Goldplus 1 (4 Bulan)
+     */
+    public String getGpPackageRincianPembaranDetailTagihan() {
+        return playwright.getText(gpPackageRincianPembayaranDetailTagihan);
+    }
+
+    /**
+     * Get periode owner choose on page Pilih periode
+     * e.g 1 Bulan, 1 minggu, etc
+     * if periode contains Favorit, remove text favorit
+     */
+    public void getTextPeriodeChoosed() {
+       if (playwright.getText(gpPeriodeChoosed).contains("Favorit")){
+           Mamikos.setGpPeriodeChoosed(playwright.getText(gpPeriodeChoosed).replaceAll("\\s+", " ").replaceAll(" Favorit",""));
+       }else{
+           Mamikos.setGpPeriodeChoosed(playwright.getText(gpPeriodeChoosed));
+       }
+
     }
 }
