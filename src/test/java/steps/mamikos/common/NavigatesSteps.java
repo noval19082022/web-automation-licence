@@ -14,6 +14,7 @@ import org.testng.Assert;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
+import pageobject.harvest.CheckPropertyPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -29,6 +30,7 @@ public class NavigatesSteps {
     LoginPMSPO loginPMS = new LoginPMSPO(page);
     VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
     LoadingPO loading = new LoadingPO(page);
+    CheckPropertyPO checkProperty = new CheckPropertyPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -168,6 +170,11 @@ public class NavigatesSteps {
     @Given("admin go to pms singgahsini")
     public void admin_go_to_pms_singgahsini() {
         loginPMS.navigateToPmsLoginPage();
+    }
+
+    @Given("admin go to mamikos cek properti")
+    public void admin_go_to_mamikos_cek_properti(){
+        checkProperty.navigateToCheckPropertyPage();
     }
 
     @When("owner navigates to property saya kos")
