@@ -57,8 +57,4 @@ public class RiwayatBookingSteps {
         Assert.assertTrue(riwayatBooking.getAjukanSewatext(), "not appears ajukan sewa text button");
     }
 
-    @When("user click on Last seen menu")
-    public void user_click_on_last_seen_menu(){
-        riwayatBooking.clickLastSeenMenu();
-    }
 }

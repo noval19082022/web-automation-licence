@@ -138,10 +138,4 @@ public class RiwayatBookingPO {
         return ajukanSewaText.isVisible();
     }
 
-    /**
-     * click on Baru dilihat on riwayat booking page
-     */
-    public void clickLastSeenMenu(){
-        playwright.clickOn(lastSeenMenu);
-    }
 }
