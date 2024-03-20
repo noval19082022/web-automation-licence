@@ -403,4 +403,8 @@ public class NavigatesSteps {
     public void userNavigateToAddContractTenantPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.ADD_CONTRACT_TENANT, 30000.0, LoadState.LOAD);
     }
+    @And("owner navigate to rules enter kos")
+    public void ownerNavigateToRulesEnterKosPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.RULE_ENTER_KOS, 30000.0, LoadState.LOAD);
+    }
 }

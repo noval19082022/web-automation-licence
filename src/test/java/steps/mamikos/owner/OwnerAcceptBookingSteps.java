@@ -25,6 +25,7 @@ public class OwnerAcceptBookingSteps {
     LoadingPO loading = new LoadingPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     List<Map<String, String>> tenantNames;
+
     @When("owner accept booking")
     public void ownerAcceptBooking() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();

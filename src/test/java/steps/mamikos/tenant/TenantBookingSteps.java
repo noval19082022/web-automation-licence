@@ -470,4 +470,19 @@ public class TenantBookingSteps {
     public void tenantClickOnCloseWaitingListButton(){
         kostDetail.clickCloseWaitingListButton();
     }
+    @Then("tenant see today's date and cannot make booking")
+    public void tenantCannotBookingToday(){
+        kostDetail.dismissFTUE();
+        kostDetail.dateCannotBooking();
+    }
+    @Then("tenant can choose checkin date in the next {string} month")
+    public void tenantCanCheckInNextMonth(String month){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextMonth(month);
+    }
+    @Then("tenant can choose checkin date in the next {string} week")
+    public void tenantCanCheckInNextWeek(String week){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextWeek(week);
+    }
 }
