@@ -33,6 +33,7 @@ public class Mamikos {
     public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
     public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
     public static final String PMS_URL = JavaHelpers.getPropertyValue(MAMIKOS, "PMSUrl_" + ENV);
+    public static final String CHECKPROPERTY_URL = JavaHelpers.getPropertyValue(MAMIKOS, "checkPropertyUrl_" + ENV);
     public static final String Ownersini_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownersiniUrl_" + ENV);
     public static final String Singgahsini_URL = JavaHelpers.getPropertyValue(MAMIKOS, "singgahsiniUrl_" + ENV);
     public static final String LoginPemilik_URL = JavaHelpers.getPropertyValue(MAMIKOS, "logiPemilikUrl_" + ENV);
