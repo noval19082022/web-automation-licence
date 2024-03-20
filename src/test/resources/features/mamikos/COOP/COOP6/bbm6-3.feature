@@ -166,3 +166,24 @@ Feature: BnB feature - 3
     And tenant booking kost for "Tomorrow"
     And user click back button
     Then tenant verify the confirmation cancel booking pop up
+
+    @TEST_COOP-140 @TEST_COOP-149 @uxImprovement @continue
+    Scenario: [Web][UX Booking] Update wording content Belum bisa mengajukan sewa
+      Given user go to mamikos homepage
+      When user login as tenant via phone number:
+        | phone stag   | password |
+        | 08100000211 | qwerty123 |
+      And tenant search kost then go to kost details:
+        | kost name stag                                        |
+        | Kost Singgahsini Mertua Idaman Tipe A Halmahera Utara |
+      And tenant dismiss promo ngebut pop up
+      And tenant booking kost for "Tomorrow"
+      Then tenant can see "Lihat riwayat pengajuan sewa" button
+
+    @TEST_COOP-484
+    Scenario: [Web][UX Improvement][Pengajuan sewa][Draft]Update wording on Draft and Last seen
+      When tenant navigate to riwayat and draf booking
+      And user click on Draft menu
+      Then tenant can see ajukan sewa text button
+      When user click on Last seen menu
+      Then tenant can see ajukan sewa text button

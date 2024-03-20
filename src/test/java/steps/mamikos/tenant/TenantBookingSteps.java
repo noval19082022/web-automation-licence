@@ -55,7 +55,7 @@ public class TenantBookingSteps {
     }
 
     @When("tenant booking kost {string} {string}")
-    public void tenantBookingKost(String boardingDate, String paymentPeriod){
+    public void tenantBookingKost(String boardingDate, String paymentPeriod) {
         if (kostDetail.isBookingFtueVisible()) {
             kostDetail.dismissFTUE();
         }
@@ -104,7 +104,7 @@ public class TenantBookingSteps {
     }
 
     @And("user cancel booking with reason {string}")
-    public void user_cancel_booking_with_reason(String reason) throws InterruptedException{
+    public void user_cancel_booking_with_reason(String reason) throws InterruptedException {
         page.navigate(Mamikos.URL + "/user/booking/");
         bookingForm = new BookingFormPO(page);
         bookingForm.cancelBookingWithReason(reason);
@@ -120,13 +120,13 @@ public class TenantBookingSteps {
             kostDetail.dismissFTUE();
         }
         if (bookingTime.equalsIgnoreCase("today")) {
-                kostDetail.selectBookingDate(bookingTime);
-                kostDetail.selectBookingPeriod("Per Bulan");
-                bookingForm = kostDetail.clickOnAjukanSewaButton();
-                bookingForm.clickOnAjukanSewaButton();
-                bookingForm.clickOnBookingConfirmationCheckmark();
-                successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
-        } else if (bookingTime.equalsIgnoreCase("Tomorrow")){
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+            bookingForm.clickOnAjukanSewaButton();
+            bookingForm.clickOnBookingConfirmationCheckmark();
+            successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        } else if (bookingTime.equalsIgnoreCase("Tomorrow")) {
             kostDetail.selectBookingDate(bookingTime);
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
@@ -187,6 +187,7 @@ public class TenantBookingSteps {
         kostDetail = searchPO.searchByText(kosName);
         kostDetail.waitTillKostDetailPageVisible();
     }
+
     @And("tenant cancel all need confirmation booking request")
     public void tenantCancelAllNeedConfirmationBookingRequest() {
         kostDetail.cancelAllBookingWithDefaultReason();
@@ -196,6 +197,7 @@ public class TenantBookingSteps {
     public void userClickSaveDraftButton() {
         kostDetail.clickSaveDraftButton();
     }
+
     @And("user click back button")
     public void userClickBackButton() {
         kostDetail.clickBackButton();
@@ -298,7 +300,7 @@ public class TenantBookingSteps {
     public void user_can_see_tnc_with_x(String text) {
         if (text.equalsIgnoreCase("Syarat Ketentuan Umum") || text.equalsIgnoreCase("Syarat dan Ketentuan Umum")) {
             Assert.assertEquals(bookingForm.getTnCBookingTextReguler(), text, "text not same with tnc booking");
-        } else if(text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
+        } else if (text.equalsIgnoreCase("Syarat dan Ketentuan Tinggal di Singgahsini, Apik, & Kos Pilihan")) {
             Assert.assertEquals(bookingForm.getTnCBookingTextSinggahsini(), text, "text not same with tnc booking");
         }
     }
@@ -352,42 +354,39 @@ public class TenantBookingSteps {
     }
 
     @Then("tenant can see kamar penuh")
-    public void tenantCanSeeKamarPenuh(){
+    public void tenantCanSeeKamarPenuh() {
         Assert.assertTrue(kostDetail.isFullRoomVisible(), "Kamar penuh, lihat tipe kamar lainnya");
     }
 
     @When("tenant can see {string} button")
-    public void tenantCanSeexButton(String text){
-        if(text.equalsIgnoreCase("Lihat tipe lain")) {
+    public void tenantCanSeexButton(String text) {
+        if (text.equalsIgnoreCase("Lihat tipe lain")) {
             Assert.assertTrue(kostDetail.isAnotherTypeButtonVisible(), "Lihat tipe lain");
-        }
-        else if (text.equalsIgnoreCase("Lihat kost lain")){
+        } else if (text.equalsIgnoreCase("Lihat kost lain")) {
             Assert.assertTrue(kostDetail.isAnotherKosButtonVisible(), "Lihat kos lain");
-        }
-        else if (text.equalsIgnoreCase("Ikut daftar Tunggu")){
+        } else if (text.equalsIgnoreCase("Ikut daftar Tunggu")) {
             Assert.assertTrue(kostDetail.isWaitingListButtonVisible(), "Ikut Daftar Tunggu");
-        }
-        else if (text.equalsIgnoreCase("Tanya pemilik")){
+        } else if (text.equalsIgnoreCase("Tanya pemilik")) {
             Assert.assertTrue(kostDetail.isTanyaPemilikVisible(), "Tanya Pemilik");
+        } else if (text.equalsIgnoreCase("Lihat riwayat pengajuan sewa")) {
+            Assert.assertTrue(kostDetail.isSeeRiwayatBookingVisible(), "Lihat riwayat pengajuan sewa");
         }
     }
 
     @And("tenant click on {string} button")
     public void tenantClickOnXButton(String text) {
-        if (text.equalsIgnoreCase("Lihat tipe lain")){
+        if (text.equalsIgnoreCase("Lihat tipe lain")) {
             kostDetail.clickAnotherTypeButton();
-        }
-        else if (text.equalsIgnoreCase("Lihat kos lain")){
+        } else if (text.equalsIgnoreCase("Lihat kos lain")) {
             kostDetail.clickAnotherKosButton();
         }
     }
 
     @Then("tenant see {string} section")
     public void tenantSeeXSection(String text) {
-        if (text.equalsIgnoreCase("lihat tipe lain")){
+        if (text.equalsIgnoreCase("lihat tipe lain")) {
             kostDetail.isAnotherTypeSectionVisible();
-        }
-        else if (text.equalsIgnoreCase("kamu mungkin menyukainya")){
+        } else if (text.equalsIgnoreCase("kamu mungkin menyukainya")) {
             kostDetail.isAnotherKosSectionVisible();
         }
     }
@@ -396,37 +395,34 @@ public class TenantBookingSteps {
     public void tenantCanSeeX(String text) {
         if (text.equalsIgnoreCase("Kos ini khusus untuk karyawan")) {
             Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Kos ini khusus untuk karyawan");
-        }
-        else if (text.equalsIgnoreCase("Kos ini khusus untuk mahasiswa")){
+        } else if (text.equalsIgnoreCase("Kos ini khusus untuk mahasiswa")) {
             Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Kos ini khusus untuk mahasiswa");
-        }
-        else if (text.equalsIgnoreCase("Belum ada data jenis kelamin")){
+        } else if (text.equalsIgnoreCase("Belum ada data jenis kelamin")) {
             Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Belum ada data jenis kelamin");
         }
     }
 
     @And("teannt/user click button {string} on popup validation")
     public void userClickButtonOnPopupValidation(String button) {
-        if(button.equalsIgnoreCase("Saya mengerti")){
+        if (button.equalsIgnoreCase("Saya mengerti")) {
             kostDetail.clickOnSayaMengertiButton();
-        }
-        else if (button.equalsIgnoreCase("Buka profil saya")) {
+        } else if (button.equalsIgnoreCase("Buka profil saya")) {
             kostDetail.clickBukaProfile();
         }
     }
 
     @Then("tenant should reach booking form")
-    public void tenantShouldReachBookingForm(){
+    public void tenantShouldReachBookingForm() {
         Assert.assertTrue(bookingForm.getPengajuanSewatext(), "Pengajuan Sewa");
     }
 
     @Then("tenant can see peraturan kost with {string}")
-    public void tenantCanSeePeraturanKostWithX(String text){
+    public void tenantCanSeePeraturanKostWithX(String text) {
         Assert.assertTrue(kostDetail.getPeraturanKosDisinitext(text));
     }
 
     @Then("tenant can succes waiting list submitted with {string}")
-    public void tenantCanSeeSuccessWaitingListSubmitedWithX(String text){
+    public void tenantCanSeeSuccessWaitingListSubmitedWithX(String text) {
         Assert.assertTrue(kostDetail.waitingListInformationText(text));
     }
 
@@ -440,6 +436,7 @@ public class TenantBookingSteps {
         Assert.assertTrue(kostDetail.getTextOnPopUp("Pengajuan sewa belum terkirim"));
         Assert.assertTrue(kostDetail.getTextOnPopUp("Jika tidak lanjut, kamu tetap bisa cek pengajuan kos ini di Draft"));
     }
+
     @And("user click on pilih {string} informasi penyewa")
     public void userClickOnPilihInformasiPenyewa(String indexToClick) {
         kostDetail.clickOnPilihInformasiPenyewa(indexToClick);
@@ -449,25 +446,50 @@ public class TenantBookingSteps {
     public void userWillSeeHaveJobName() {
         kostDetail.userWillSeeHaveJobName();
     }
+
     @And("user want to upload ID verification")
     public void user_want_to_upload_id_verification() throws InterruptedException {
         kostDetail.uploadIdVerification();
     }
+
     @When("user click Notifikasi on header")
     public void userClickNotifikasiOnHeader() {
         kostDetail.clickNotifikasiOnHeader();
     }
+
     @When("user click on toggle foto kartu identitas")
     public void user_click_on_toggle_foto_kartu_identitas() {
-       kostDetail.clickOnToggleFotoKartuIdentitas();
+        kostDetail.clickOnToggleFotoKartuIdentitas();
     }
+
     @When("user click on toggle jatuh tempo")
     public void user_click_on_toggle_jatuh_tempo() {
         kostDetail.clickOnToggleJatuhTempo();
     }
 
     @And("tenant click on close waiting list button")
-    public void tenantClickOnCloseWaitingListButton(){
+    public void tenantClickOnCloseWaitingListButton() {
         kostDetail.clickCloseWaitingListButton();
     }
+
+    @Then("tenant cant see {string} on booking form")
+    public void tenant_cant_see_on_booking_form(String text){
+        Assert.assertFalse(bookingForm.getCatatanTambahan(text), "appears fasilitas tambahan");
+    }
+    @Then("tenant can see {string} on booking form")
+    public void tenant_can_see_on_booking_form(String text) {
+        bookingForm.getCatatanTambahan(text);
+    }
+
+    @And("tenant input catatan tambahan with {string}")
+    public void tenant_input_catatan_tambahan_with(String text) {
+        bookingForm.inputCatatanTambahan(text);
+    }
+
+    @Then("tenant can see allert addfee")
+    public void tenant_can_see_allert_addfee(){
+        Assert.assertTrue(bookingForm.getSummaryBookingForm(), "not appears allert addfee");
+    }
+
+
 }

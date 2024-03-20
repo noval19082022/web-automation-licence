@@ -3,10 +3,11 @@ package pageobject.billingTracker;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
 public class BillingTrackePO {
-    private final Page page;
+    private Page page;
     private final PlaywrightHelpers playwright;
 
     Locator searchTypeButton;
@@ -166,7 +167,6 @@ public class BillingTrackePO {
      * Click save button on noted popup
      */
     public void clickSaveButton() {
-        //   Locator saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         playwright.clickOn(saveButtonNotes);
     }
 
@@ -209,5 +209,16 @@ public class BillingTrackePO {
         playwright.clickOn(textButton);
         playwright.clickOn(saveButtonNotes);
     }
+
+    public void clickOnPhoneNumber(String text){
+        Locator phoneNumberText =page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(text)).first();
+        playwright.clickOn(phoneNumberText);
+    }
+
+    public String getWhatsappPage(){
+        Locator whatsappsText = page.locator("//*[@id=\"action-button\"]");
+        return playwright.getText(whatsappsText);
+    }
+
 }
 

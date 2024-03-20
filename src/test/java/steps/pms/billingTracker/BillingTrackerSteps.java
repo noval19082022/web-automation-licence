@@ -96,7 +96,16 @@ public class BillingTrackerSteps {
     @And("admin edit note {string}")
     public void admin_edit_note(String text) {
         billingTracker.adminEditNote(text);
+    }
 
+    @And("admin can click on text {string}")
+    public void admin_can_click_on_text(String text){
+        billingTracker.clickOnPhoneNumber(text);
+    }
+
+    @Then("admin can see whattsapp page")
+    public void admin_can_see_whattsapp_page(){
+        billingTracker.getWhatsappPage();
     }
 }
 

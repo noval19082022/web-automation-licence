@@ -84,6 +84,7 @@ Feature: Billing Tracker
     And admin click on Lihat lebih banyak catatan note dropdown
     Then admin can see notes with "Blast"
 
+    @continue
   Scenario: [Billing Tracker][Notes]Edit notes
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832626262"
@@ -91,3 +92,9 @@ Feature: Billing Tracker
     Then admin can see notes with "Pindah tipe kamar"
     And admin edit note "Blast"
     Then admin can see notes with "Blast"
+
+  @TEST_COOP-3257 @TEST_COOP-3259
+  Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "085832626262"
+    Then admin click on "085832626262" link button

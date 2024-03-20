@@ -257,10 +257,10 @@ public class KostDetailsPO {
     //-------------kost booking validation----------//
     private Locator popupValidationText;
     private Locator btnBukaProfil;
+    Locator validateLihatPengajuan;
 
     //-------------peraturan kos disini------------//
     private Locator peraturanDisinitext;
-    private Locator peraturanBawaAnak;
 
     //-------------------request booking DBET tenant---------------//
     Locator notificationOnHeader;
@@ -492,7 +492,8 @@ public class KostDetailsPO {
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
         this.btnBukaProfil = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buka profil saya"));
-    uploadImage = page.locator("//img[@alt='id photo']");
+        uploadImage = page.locator("//img[@alt='id photo']");
+        validateLihatPengajuan = playwright.locatorByRoleSetName(locator.roleButton, "Lihat riwayat pengajuan sewa");
 
         //-------------------request booking DBET tenant---------------//
         notificationOnHeader = page.locator("//a[@aria-label='notification']");
@@ -2279,5 +2280,13 @@ public class KostDetailsPO {
       */
     public void clickCloseWaitingListButton(){
         playwright.clickOn(closeWaitingListButton);
+    }
+
+    /**
+     * check visibility riwayat booking button
+     * @return Lihat riwayat pengajuan sewa
+     */
+    public Boolean isSeeRiwayatBookingVisible(){
+        return playwright.waitTillLocatorIsVisible(validateLihatPengajuan);
     }
 }

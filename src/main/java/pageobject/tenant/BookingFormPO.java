@@ -312,4 +312,33 @@ public class BookingFormPO {
     public boolean getPengajuanSewatext() {
         return pengajuanSewaText.isVisible();
     }
+
+    /**
+     * Check visibility catatan tambahan section
+     * @param text
+     * @return Catatan Tambahan
+     */
+    public Boolean getCatatanTambahan(String text){
+        Locator catatanTambahanText = page.getByText(""+text+"");
+        return catatanTambahanText.isVisible();
+    }
+
+    /**
+     * input Catatan tambahan with text
+     * @param text
+     */
+    public void inputCatatanTambahan(String text){
+        Locator inputCatatanTambahan = page.getByPlaceholder("Misal: saya membawa barang elektronik berupa TV");
+        playwright.fill(inputCatatanTambahan, text);
+    }
+
+    /**
+     * Check visibility allert summary booking
+     * @return Text
+     */
+    public Boolean getSummaryBookingForm(){
+        Locator summaryBookingForm = page.getByTestId("booking-request-form__summary").getByText("Total pembayaran pertama belum termasuk biaya yang mungkin pemilik akan terapkan");
+        playwright.pageScrollInView(summaryBookingForm);
+        return summaryBookingForm.isVisible();
+    }
 }

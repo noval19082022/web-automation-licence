@@ -20,6 +20,7 @@ public class RiwayatBookingPO {
     Locator userBookingSection;
     Locator textBookingStatusFirstList;
     Locator textRejectReasonFirstList;
+    Locator lastSeenMenu;
 
     public RiwayatBookingPO(Page page) {
         this.page = page;
@@ -34,6 +35,7 @@ public class RiwayatBookingPO {
         userBookingSection = page.locator("#userBookingSection");
         textBookingStatusFirstList = page.locator(".booking-list-card:nth-child(1) .card-header label");
         textRejectReasonFirstList = page.locator(".header-reject-reason:nth-child(1) span");
+        lastSeenMenu = page.locator("//a[normalize-space()='Baru Dilihat']");
     }
 
     /**
@@ -125,5 +127,21 @@ public class RiwayatBookingPO {
     public String getRejectReasonOnDetailsFirstKostList() {
         lihatSelengkapnyaButton.click();
         return playwright.getText(textRejectReasonFirstList);
+    }
+
+    /**
+     * check if ajukan sewa text button is visible
+     * @return Ajukan Sewa text button
+     */
+    public Boolean getAjukanSewatext(){
+        Locator ajukanSewaText = page.locator("//*[contains(text(), 'Ajukan Sewa')]").first();
+        return ajukanSewaText.isVisible();
+    }
+
+    /**
+     * click on Baru dilihat on riwayat booking page
+     */
+    public void clickLastSeenMenu(){
+        playwright.clickOn(lastSeenMenu);
     }
 }
