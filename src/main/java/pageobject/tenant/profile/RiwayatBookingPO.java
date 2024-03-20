@@ -126,4 +126,14 @@ public class RiwayatBookingPO {
         lihatSelengkapnyaButton.click();
         return playwright.getText(textRejectReasonFirstList);
     }
+
+    /**
+     * check if ajukan sewa text button is visible
+     * @return Ajukan Sewa text button
+     */
+    public Boolean getAjukanSewatext(){
+        Locator ajukanSewaText = page.locator("//*[contains(text(), 'Ajukan Sewa')]").first();
+        return ajukanSewaText.isVisible();
+    }
+
 }

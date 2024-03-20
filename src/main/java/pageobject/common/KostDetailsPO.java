@@ -262,6 +262,7 @@ public class KostDetailsPO {
     //-------------kost booking validation----------//
     private Locator popupValidationText;
     private Locator btnBukaProfil;
+    Locator validateLihatPengajuan;
 
     //-------------peraturan kos disini------------//
     private Locator peraturanDisinitext;
@@ -501,6 +502,7 @@ public class KostDetailsPO {
         dateCannotBooking = page.locator("//span[@class='cell day disabled today weekend sun']");
         calendarView = page.getByRole(AriaRole.TEXTBOX).first();
         nextMonthButton = page.locator("//span[@class='next']");
+        validateLihatPengajuan = playwright.locatorByRoleSetName(locator.roleButton, "Lihat riwayat pengajuan sewa");
 
         //-------------------request booking DBET tenant---------------//
         notificationOnHeader = page.locator("//a[@aria-label='notification']");
@@ -2320,5 +2322,13 @@ public class KostDetailsPO {
         LocalDate futureDate = currentDate.plusWeeks(numberOfWeeks);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
         page.click("//span[@class='cell day'][normalize-space()='"+formattedDate+"']");
+    }
+
+    /**
+     * check visibility riwayat booking button
+     * @return Lihat riwayat pengajuan sewa
+     */
+    public Boolean isSeeRiwayatBookingVisible(){
+        return playwright.waitTillLocatorIsVisible(validateLihatPengajuan);
     }
 }
