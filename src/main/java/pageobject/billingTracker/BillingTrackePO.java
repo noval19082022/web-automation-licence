@@ -210,15 +210,5 @@ public class BillingTrackePO {
         playwright.clickOn(saveButtonNotes);
     }
 
-    public void clickOnPhoneNumber(String text){
-        Locator phoneNumberText =page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(text)).first();
-        playwright.clickOn(phoneNumberText);
-    }
-
-    public String getWhatsappPage(){
-        Locator whatsappsText = page.locator("//*[@id=\"action-button\"]");
-        return playwright.getText(whatsappsText);
-    }
-
 }
 

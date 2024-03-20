@@ -164,7 +164,6 @@ Feature: Create new kos with owner not active BBK
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
 
-    @a
   Scenario: Delete and reject kos from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
