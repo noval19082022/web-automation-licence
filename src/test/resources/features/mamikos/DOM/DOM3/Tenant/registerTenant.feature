@@ -245,3 +245,17 @@ Feature: New Flow Register Tenant
     And user clicks on Enter button Tenant
     And user clicks on Register button
     Then user redirected to "register-pencari?source="
+
+  @TEST_COOP-7101
+  Scenario: Register Tenant - From Popular Area Page
+    Given user navigate to popular area page
+    When user click on enter button tenant in popular area page
+    And user clicks on Register button
+    Then user redirected to "register-pencari?source="
+
+  @TEST_COOP-6903
+  Scenario: Register Tenant - From Near Campus Page
+    Given user navigate to near campus page
+    When user click on enter button tenant in popular area page
+    And user clicks on Register button
+    Then user redirected to "register-pencari?source="

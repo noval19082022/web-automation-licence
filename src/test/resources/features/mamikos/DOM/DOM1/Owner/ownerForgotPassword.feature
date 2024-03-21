@@ -155,3 +155,19 @@ Feature: Owner - Forgot Password
     Given user go to mamikos homepage
     When user want to change the owner password
     Then user redirected to "lupa-password-pemilik"
+
+  @TEST_COOP-7105
+  Scenario: Forgot Password Owner - From Popular Area Page
+    Given user navigate to popular area page
+    When user click on enter button owner in popular area page
+    And user click on lupa password?
+    And user fill their registered phone number "083843666868"
+    Then user verify on page "Pilih Metode Verifikasi"
+
+  @TEST_COOP-7106
+  Scenario: Forgot Password Owner - From Near Campus Page
+    Given user navigate to near campus page
+    When user click on enter button owner in popular area page
+    And user click on lupa password?
+    And user fill their registered phone number "083843666868"
+    Then user verify on page "Pilih Metode Verifikasi"

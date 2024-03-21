@@ -176,3 +176,39 @@ Feature: Tenant - Login
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     And user navigate to kost saya page
     Then user tenant profile picture is shown
+
+  @TEST_COOP-7090
+  Scenario: Login Tenant - From Popular Area Page
+    Given user navigate to popular area page
+    When user login as tenant via phone number in popular area page
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+  @TEST_COOP-7091
+  Scenario: Login Tenant - From Near Campus Page
+    Given user navigate to near campus page
+    When user login as tenant via phone number in popular area page
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+  @TEST_COOP-7097
+  Scenario: Login Facebook Tenant - From Popular Area Page
+    Given user navigate to popular area page
+    When user login as tenant via facebook from popular area page:
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
+
+  @TEST_COOP-7098
+  Scenario: Login Facebook Tenant - From Near Campus Page
+    Given user navigate to near campus page
+    When user login as tenant via facebook from popular area page:
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
