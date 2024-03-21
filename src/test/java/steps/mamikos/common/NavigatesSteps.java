@@ -414,4 +414,14 @@ public class NavigatesSteps {
     public void ownerNavigateToRulesEnterKosPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.RULE_ENTER_KOS, 30000.0, LoadState.LOAD);
     }
+
+    @Given("user navigate to popular area page")
+    public void userNavigateToPopularAreaPage() {
+        playwright.navigateTo(Mamikos.URL + "/area", 30000.0, LoadState.LOAD);
+    }
+
+    @Given("user navigate to near campus page")
+    public void userNavigateToNearCampusPage() {
+        playwright.navigateTo(Mamikos.URL + "/kampus", 30000.0, LoadState.LOAD);
+    }
 }
