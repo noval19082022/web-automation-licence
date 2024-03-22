@@ -84,7 +84,6 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded(5000.0);
-        playwright.waitFor(ownerChatButton);
         playwright.clickOn(ownerChatButton);
     }
 
@@ -151,6 +150,7 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
+        playwright.hardWait(3000);
         if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
@@ -168,9 +168,18 @@ public class ChatOwnerPO {
         if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
-            return playwright.getText(notPaidFirstRent);
+        playwright.reloadPage();
+        playwright.clickOn(ownerChatButton);
+        String inputText = "Tenant Automation Accept Chat";
+        Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
+        searchChat.fill(inputText);
+        if (nantiSajaButton.isVisible()) {
+            playwright.clickOn(nantiSajaButton);
         }
-
+        page.keyboard().press("Space");
+        playwright.clickOn(chatOnList);
+        return playwright.getText(notPaidFirstRent);
+    }
     /**
      * Get Tenant Name from Booking Details Page
      * @return Tenant Name
