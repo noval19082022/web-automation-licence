@@ -27,6 +27,7 @@ public class HomepagePO {
 
     //---Filter---//
     Locator filterBtn;
+    Locator totalFilter;
     Locator tglLiveMulai;
     Locator monthYear;
     Locator year;
@@ -190,6 +191,7 @@ public class HomepagePO {
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
+        totalFilter = page.locator(".bg-c-badge-counter");
         tglLiveMulai = page.getByTestId("homeFilterModalDate-datePickerStart").getByPlaceholder("Pilih tanggal mulai");
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         tglLiveAkhir = page.getByTestId("homeFilterModalDate-datePickerEnd").getByPlaceholder("Pilih tanggal akhir");
@@ -1039,4 +1041,13 @@ public class HomepagePO {
         return playwright.isLocatorVisibleAfterLoad(propertyListings, 50000.0);
     }
     //---End of BSE Filter---//
+
+    /**
+     * Retrieves the total filter value from the totalFilter element and returns it as an integer.
+     *
+     * @return the total filter value as an integer
+     */
+    public int getTotalFilter() {
+        return Integer.parseInt(totalFilter.textContent().trim());
+    }
 }

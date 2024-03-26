@@ -413,5 +413,10 @@ public class HomepageSteps {
         Assert.assertTrue(homepage.isPropertyDisplayed(), "Property does not displayed!");
     }
     //---End of Search Function---//
+
+    @Then("the system is displaying reset filter")
+    public void the_system_is_displaying_reset_filter(){
+        Assert.assertEquals(homepage.getTotalFilter(), 1, "Total filter does not match!");
+    }
 }
 
