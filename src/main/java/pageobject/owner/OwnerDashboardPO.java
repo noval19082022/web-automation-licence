@@ -3,6 +3,7 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import pageobject.lct.homepageLctPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
@@ -827,12 +828,12 @@ public class OwnerDashboardPO {
     /**
      * Click leads menu
      */
-    public homepageLctPO clickLeadsMenu() {
+    public void clickLeadsMenu() {
         Page newTab = page.waitForPopup(() -> {
             playwright.clickOn(leadsMenu);
         });
         newTab.waitForLoadState();
         System.out.println(newTab.title());
-        return new homepageLctPO(newTab);
+        ActiveContext.setActivePage(newTab);
     }
 }
