@@ -16,6 +16,9 @@ public class AgentAppPO {
     private Locator isActiveStatus;
     private Locator agentInTable;
     private Locator editBtn;
+    private Locator agentNameText;
+    private Locator nextPageButton;
+    private Locator nextPageDisableButton;
 
     //---Edit Agent Page---//
     private Locator isActiveStatusInEdit;
@@ -27,6 +30,8 @@ public class AgentAppPO {
         //---Agent List Page---//
         agentAppMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Agent App"));
         agentsBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Agents").setExact(true));
+        nextPageButton = page.locator("[rel='next']");
+        nextPageDisableButton = page.locator(".page-item").last();
     }
 
     /**
@@ -91,5 +96,34 @@ public class AgentAppPO {
         isActiveStatusInEdit = page.locator("//select[@name='is_active']/option[@selected='true'][contains(., '" +isActive+ "')]");
         System.out.println(isActiveStatusInEdit.getAttribute(isActive));
         return playwright.isLocatorVisibleAfterLoad(isActiveStatusInEdit, 5000.0);
+    }
+
+    /**
+     * Check is agent found in the list
+     * @param agentName
+     * @return boolean
+     */
+    public boolean isAgentFound(String agentName) {
+        agentNameText = page.locator("(//tr)/td[4]").filter(new Locator.FilterOptions().setHasText(agentName));
+        return playwright.isLocatorVisibleAfterLoad(agentNameText,5000.0);
+    }
+
+    /**
+     * Click next page button in Agent list
+     */
+    public void clickNextPageAgent() {
+        playwright.clickOn(nextPageButton);
+    }
+
+    /**
+     * Check is pagination next button disable
+     * @return boolean
+     */
+    public boolean isNextButtonDisabled() {
+        boolean result = false;
+        if (playwright.getAttributeValue(nextPageDisableButton,"class").contains("disabled")){
+            result = true;
+        }
+        return result;
     }
 }

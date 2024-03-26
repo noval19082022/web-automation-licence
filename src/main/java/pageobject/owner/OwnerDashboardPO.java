@@ -595,7 +595,7 @@ public class OwnerDashboardPO {
      * Click in order to expand promotion feature
      */
     public void clickToExpandFiturPromosi() {
-        playwright.waitTillPageLoaded();
+        playwright.waitFor(fiturPromosiExpand);
         playwright.clickOn(fiturPromosiExpand);
     }
 
@@ -805,6 +805,7 @@ public class OwnerDashboardPO {
      *
      */
     public void clickOnDaftarGP() {
+        playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
     }
 
@@ -826,5 +827,13 @@ public class OwnerDashboardPO {
         newTab.waitForLoadState();
         System.out.println(newTab.title());
         ActiveContext.setActivePage(newTab);
+    }
+
+    /** Click on FTUE on button
+     * @param buttonText
+     */
+    public void clickOnButtonFTUE(String buttonText) {
+        Locator buttonTextFtue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+        playwright.clickOn(buttonTextFtue);
     }
 }

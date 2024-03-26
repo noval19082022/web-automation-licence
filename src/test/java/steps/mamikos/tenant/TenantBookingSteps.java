@@ -196,6 +196,7 @@ public class TenantBookingSteps {
     public void userClickSaveDraftButton() {
         kostDetail.clickSaveDraftButton();
     }
+
     @And("user click back button")
     public void userClickBackButton() {
         kostDetail.clickBackButton();
@@ -470,4 +471,40 @@ public class TenantBookingSteps {
     public void tenantClickOnCloseWaitingListButton(){
         kostDetail.clickCloseWaitingListButton();
     }
+    @Then("tenant see today's date and cannot make booking")
+    public void tenantCannotBookingToday(){
+        kostDetail.dismissFTUE();
+        kostDetail.dateCannotBooking();
+    }
+    @Then("tenant can choose checkin date in the next {string} month")
+    public void tenantCanCheckInNextMonth(String month){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextMonth(month);
+    }
+    @Then("tenant can choose checkin date in the next {string} week")
+    public void tenantCanCheckInNextWeek(String week){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextWeek(week);
+    }
+
+    @Then("tenant cant see {string} on booking form")
+    public void tenant_cant_see_on_booking_form(String text){
+        Assert.assertFalse(bookingForm.getCatatanTambahan(text), "appears fasilitas tambahan");
+    }
+    @Then("tenant can see {string} on booking form")
+    public void tenant_can_see_on_booking_form(String text) {
+        bookingForm.getCatatanTambahan(text);
+    }
+
+    @And("tenant input catatan tambahan with {string}")
+    public void tenant_input_catatan_tambahan_with(String text) {
+        bookingForm.inputCatatanTambahan(text);
+    }
+
+    @Then("tenant can see allert addfee")
+    public void tenant_can_see_allert_addfee(){
+        Assert.assertTrue(bookingForm.getSummaryBookingForm(), "not appears allert addfee");
+    }
+
+
 }

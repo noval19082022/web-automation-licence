@@ -9,9 +9,11 @@ import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -253,10 +255,15 @@ public class KostDetailsPO {
     private Locator selectDateForSudahAdaTgl;
     private Locator selectDateForBaruPerkiraan;
     private Locator closeWaitingListButton;
+    Locator dateCannotBooking;
+    Locator calendarView;
+    Locator nextMonthButton;
+    Locator nextMonthaDisableButton;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
     private Locator btnBukaProfil;
+    Locator validateLihatPengajuan;
 
     //-------------peraturan kos disini------------//
     private Locator peraturanDisinitext;
@@ -492,7 +499,12 @@ public class KostDetailsPO {
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
         this.btnBukaProfil = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buka profil saya"));
-    uploadImage = page.locator("//img[@alt='id photo']");
+        uploadImage = page.locator("//img[@alt='id photo']");
+        dateCannotBooking = page.locator("//span[@class='cell day disabled today weekend sun']");
+        calendarView = page.getByRole(AriaRole.TEXTBOX).first();
+        nextMonthButton = page.locator("//span[@class='next']");
+        validateLihatPengajuan = playwright.locatorByRoleSetName(locator.roleButton, "Lihat riwayat pengajuan sewa");
+        nextMonthaDisableButton = page.locator("//span[@class='next disabled']");
 
         //-------------------request booking DBET tenant---------------//
         notificationOnHeader = page.locator("//a[@aria-label='notification']");
@@ -2279,5 +2291,42 @@ public class KostDetailsPO {
       */
     public void clickCloseWaitingListButton(){
         playwright.clickOn(closeWaitingListButton);
+    }
+    /**
+     * checking date today cannot booking
+     */
+    public void dateCannotBooking() {
+        mulaiKosInput.click();
+        playwright.getLocators(dateCannotBooking);
+    }
+
+    /**
+     * checking date next month
+     */
+    public void tenantCanCheckInNextMonth(String month) {
+        playwright.clickOn(calendarView);
+        int numberOfMonths = Integer.parseInt(month);
+        for (int i = 0; i < numberOfMonths; i++) {
+            playwright.clickOn(nextMonthButton);
+        }
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusMonths(numberOfMonths);
+        String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
+        page.click("//span[@class='cell day'][normalize-space()='"+formattedDate+"']");
+    }
+    /**
+     * checking date next month
+     */
+    public void tenantCanCheckInNextWeek(String week) {
+        playwright.clickOn(calendarView);
+        int numberOfWeeks = Integer.parseInt(week);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusWeeks(numberOfWeeks);
+        String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
+        if (page.isVisible("//span[@class='cell day'][normalize-space()='" + formattedDate + "']")) {
+            page.click("//span[@class='cell day'][normalize-space()='" + formattedDate + "']");
+        } else {
+            playwright.getLocators(nextMonthaDisableButton);
+        }
     }
 }

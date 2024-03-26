@@ -154,3 +154,13 @@ Feature: Verification Tenant
       And user navigate to kost saya page
       And user open verifikasi akun menu
       Then user can see "Terima kasih, kini kamu dapat menikmati proses Sewa Langsung via Mamikos lebih mudah." on verifikasi identitas
+
+  @TEST_COOP-6907
+  Scenario: [Web Tenant][email validation] User has not verified their identity
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 083311231113  | 083311231113 | asdf1234 |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    Then user can see "Kamu belum mengunggah foto kartu identitas" on verifikasi identitas

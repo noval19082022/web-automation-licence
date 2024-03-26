@@ -383,5 +383,9 @@ public class OwnerDashboardSteps {
         ownerDashboardPO.clickLeadsMenu();
     }
 
+    @When("user click {string} on ftue")
+    public void userClickOnFtue(String buttonText) {
+        ownerDashboardPO.clickOnButtonFTUE(buttonText);
+    }
 }
 

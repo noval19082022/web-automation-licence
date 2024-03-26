@@ -83,3 +83,19 @@ Feature: Owner - Login
       | phone stag   | phone prod   | password     |
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     Then user redirected to "owner"
+
+  @TEST_COOP-7095
+  Scenario: Login Owner - From Popular Area Page
+    Given user navigate to popular area page
+    When user login as owner in popular area page:
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+    Then user redirected to "owner"
+
+  @TEST_COOP-7096
+  Scenario: Login Owner - From Near Campus Page
+    Given user navigate to near campus page
+    When user login as owner in popular area page:
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+    Then user redirected to "owner"

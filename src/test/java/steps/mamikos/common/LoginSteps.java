@@ -7,6 +7,7 @@ import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -281,5 +282,58 @@ public class LoginSteps {
                 .clickOnPemilikKostButton()
                 .fillPhoneNumber(phone)
                 .fillPassword(password);
+    }
+
+    @When("user login as tenant via phone number in popular area page")
+    public void userLoginAsTenantViaPhoneNumberInPopularAreaPage(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasukOnPopularArea()
+                .clickOnPencariKostButton()
+                .waitForPasswordInput()
+                .fillPhoneNumber(phone)
+                .fillPassword(password)
+                .clickOnLoginButton()
+                .waitTillLogoIsVisible();
+    }
+
+    @When("user login as owner in popular area page:")
+    public void userLoginAsOwnerInPopularAreaPage(DataTable table) {
+        phoneNumberCredential = table.asMaps(String.class, String.class);
+        var phone = phoneNumberCredential.get(0).get("phone " + Mamikos.ENV);
+        var password = phoneNumberCredential.get(0).get("password");
+        home.clickOnButtonMasukOnPopularArea()
+                .clickOnPemilikKostButton()
+                .fillPhoneNumber(phone)
+                .fillPassword(password)
+                .clickOnLoginButton();
+        Mamikos.setPhoneOwner(phone);
+        loading.waitForLoadingIconDisappear();
+    }
+
+    @When("user login as tenant via facebook from popular area page:")
+    public void userLoginAsTenantViaFacebookFromPopularAreaPage(DataTable table) {
+        emailCredential = table.asMaps(String.class, String.class);
+        var email = emailCredential.get(0).get("email " + Mamikos.ENV);
+        var password = emailCredential.get(0).get("password");
+        home.clickOnButtonMasukOnPopularArea()
+                .clickOnPencariKostButton()
+                .clickOnSignInWithFacebookButton()
+                .fillEmailAddress(email)
+                .fillPasswordFacebook(password)
+                .clickOnLoginFacebookButton();
+    }
+
+    @When("user click on enter button tenant in popular area page")
+    public void userClickOnEnterButtonTenantInPopularAreaPage() {
+        home.clickOnButtonMasukOnPopularArea()
+                .clickOnPencariKostButton();
+    }
+
+    @And("user click on enter button owner in popular area page")
+    public void userClickOnEnterButtonOwnerInPopularAreaPage() {
+        home.clickOnButtonMasukOnPopularArea()
+                .clickOnPemilikKostButton();
     }
 }

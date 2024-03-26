@@ -92,3 +92,29 @@ Feature: Quick Allocation on Properti Saya
       | kosName                                                 | allocationType |
       | Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara    | daily          |
       | Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utara | maksimal       |
+
+  @TEST_LIMO-258
+  Scenario: [Property Saya][MamiAds][Saldo > 5000]: If full occupancy update room available
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password  |
+      | 085951394565 | 0          | qwerty123 |
+    And owner navigates to property saya kos
+    And owner search kost "Kos Quick Allocate Tipe Full Occupancy Tobelo Halmahera Utara" on property saya page
+    When user click Lihat Selengkapnya button for edit
+    * user verify the wording ads is "Kamar Sudah Penuh."
+
+  @TEST_LIMO-262
+  Scenario: [Property Saya Kos][MamiAds][Saldo mamiads 0]: Owner ever allocate and ever paid mamiads
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password  |
+      | 082233545511 | 0          | 12345678 |
+    And owner navigates to property saya kos
+    When owner search kost "Kost A 123 Depok Sleman" on property saya page
+    Then user verify the alokasi title is "Beli Saldo MamiAds"
+    * user verify the wording ads is "Pakai MamiAds, bisa naikkan posisi iklan Anda lho. Beli sekarang!"
+    When user click Lihat Selengkapnya button for edit
+    Then user verify the alokasi title is "Beli Saldo MamiAds"
+    * user verify the wording ads is "Pakai MamiAds, bisa naikkan posisi iklan Anda lho. Beli sekarang!"
+    * user verify the redirection to list mamiads balance

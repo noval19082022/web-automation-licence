@@ -24,13 +24,15 @@ Feature: Atur promo owner
     Then verify status promo is "Belum Ada"
     When owner create new promo owner with title "Update promo owner AT" for periode promo "tomorrow"
     Then verify judul promo "Update promo owner AT"
-    And verify status promo is "Menunggu Verifikasi"
+    When owner refresh page 1
+    Then verify status promo is "Menunggu Verifikasi"
 
   @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
   Scenario: Edit promo while status promo menunggu verifikasi
     Given owner edit promo kost owner with title "Update promo owner AT"
     Then verify judul promo "Update promo owner AT"
-    And verify status promo is "Menunggu Verifikasi"
+    When owner refresh page 1
+    Then verify status promo is "Menunggu Verifikasi"
 
   @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
   Scenario: Edit start date promo more than end date promo

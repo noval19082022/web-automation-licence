@@ -10,7 +10,7 @@ Feature: Billing Tracker
     And admin go to billing tracker
     And admin search billing tracker by "Nama Penyewa" and "ed"
     Then admin can see validation "Minimal 3 karakter"
-    And admin search billing tracker by "Nama Penyewa" and "edi"
+    And admin search billing tracker by "Nama Penyewa" and "viv"
     Then admin can see data search
 
   @TEST_COOP-3208 @continue
@@ -40,7 +40,7 @@ Feature: Billing Tracker
   @TEST_COOP-3213 @TEST_COOP-3280 @continue
   Scenario: [Billing Tracker][Notes]Create notes on invoice
     When admin click on reset button
-    And admin search billing tracker by "No. HP Penyewa" and "081246667080"
+    And admin search billing tracker by "No. HP Penyewa" and "085832828287"
     Then admin can see tambah catatan button
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085246224444"
@@ -73,9 +73,9 @@ Feature: Billing Tracker
     And admin search billing tracker by "No. HP Penyewa" and "081280003230"
     Then Admin can see all invoice recurring from mamipay :
       | Jatuh Tempo | Nama Biaya |
-      | 01 Feb      | Recurring  |
-      | 11 Feb      | Recurring  |
-      | 22 Feb      | Recurring  |
+      | 01 Mar      | Recurring  |
+      | 07 Mar      | Recurring  |
+      | 15 Mar      | Recurring  |
 
   @continue
   Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
@@ -84,6 +84,7 @@ Feature: Billing Tracker
     And admin click on Lihat lebih banyak catatan note dropdown
     Then admin can see notes with "Blast"
 
+    @continue
   Scenario: [Billing Tracker][Notes]Edit notes
     When admin click on reset button
     And admin search billing tracker by "No. HP Penyewa" and "085832626262"
@@ -91,3 +92,9 @@ Feature: Billing Tracker
     Then admin can see notes with "Pindah tipe kamar"
     And admin edit note "Blast"
     Then admin can see notes with "Blast"
+
+  @TEST_COOP-3257 @TEST_COOP-3259
+  Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
+    When admin click on reset button
+    And admin search billing tracker by "No. HP Penyewa" and "085832626262"
+    Then admin click on "085832626262" link button

@@ -9,13 +9,13 @@ Feature: Gold Plus
       | 082233545506 | 0          | qwerty123 |
     And user click daftar GP button
     And user choose Goldplus package 1
-    Then user will see that the text "GoldPlus 1 periode 4 Bulan" is displayed
+    Then user will see that the goldplus package choosed is displayed
 
   @TEST_LIMO-146 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
     When user choose Goldplus package 2
-    Then user will see that the text "Goldplus 2 (4 bulan) Rp320.000" is displayed
+    Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
   @TEST_LIMO-148 @TEST_LIMO-149 @uncheckT&C @continue
   Scenario: Owner Cek warning toast and button bayar sekarang disable if uncheck the checkbox

@@ -157,3 +157,22 @@ Feature: Payment All
     And tenant click bayar sekarang before paid
     Then user verify error messages
       | Pembayaran Belum Terverifikasi |
+
+  @TEST_COOP-6905
+  Scenario: [Invoice] Check Invoice From Kost saya dibayar
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0891112020198 | 0891112020198 | mamikosqa123 |
+    And tenant navigate to tagihan kost saya
+    And tenant click sudah di bayar
+    Then tenant will see invoice "Dibayar"
+
+  @TEST_COOP-6906
+  Scenario: [Invoice] Check Invoice From Kost saya Belum Dibayar
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0891112020198 | 0891112020198 | mamikosqa123 |
+    And tenant navigate to tagihan kost saya
+    Then tenant will see invoice "Belum Dibayar"

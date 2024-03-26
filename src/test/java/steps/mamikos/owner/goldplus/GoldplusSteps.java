@@ -62,9 +62,15 @@ public class GoldplusSteps {
     }
 
     @When("user choose Goldplus package {int}")
-    public void user_choose_goldplus_package(int packages) {
+    public void xuser_choose_goldplus_package(int packages) {
         goldplus.clickOnGoldplusPackageButton(packages);
-        playwright.clickOnTextButton("Pilih");
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp"+packages) && !gpSubmission.isFavoritGpRadioSelected()) {
+            playwright.reloadPage();
+            gpSubmission.clickOnGpSatuFirstRadioButton();
+        }
+        Mamikos.setGpPackageChoosed("GoldPlus "+packages);
+        goldplus.getTextPeriodeChoosed();
+        gpSubmission.clicksOnPilihPaketButton();
     }
 
     @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
@@ -113,8 +119,15 @@ public class GoldplusSteps {
         playwright.clickOnText("Save");
     }
 
-    @When("admin successfully remove additional favorite labels")
+    @When("admin successfully remove additional favorite labels 4 Month")
     public void admin_successfully_remove_additional_favorite_labels() {
+        goldplus.clickOnEditGP1Button();
+        goldplus.clickNoRadioButton();
+        playwright.clickOnTextButton("Save");
+    }
+
+    @When("admin successfully remove additional favorite labels 3 Month")
+    public void admin_successfully_remove_additional_favorite_labels_3_month() {
         goldplus.clickOnEditGP2Button();
         goldplus.clickNoRadioButton();
         playwright.clickOnTextButton("Save");
@@ -348,8 +361,8 @@ public class GoldplusSteps {
             case "Daftar GoldPlus":
                 chat.dismissFTUEMars();
                 chat.dismissFTUEMarsKuotaNol();
-                Assert.assertTrue(playwright.isTextDisplayed("Sisa kuota mingguan", 2000.0), "Daftar GoldPlus doesn't displayed!");
-                Assert.assertTrue(playwright.isTextDisplayed("1 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
+                Assert.assertTrue(playwright.isTextDisplayed("2 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
                 playwright.clickOnTextButton(textMessage);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
@@ -493,6 +506,8 @@ public class GoldplusSteps {
 
     @Then("user verify the {string} and the price is {string} already {string} on Rincian Pembayaran")
     public void user_verify_the_and_the_price_is_already_on_rincian_pembayaran(String saldo, String rincian, String validation) {
+        Mamikos.setGpPackageChoosed(goldplus.getTextGpPackageChoosed());
+        System.out.println("Paket yang dipilih: "+ Mamikos.getGpPackageChoosed());
         switch (validation){
             case "choosen":
                 Assert.assertEquals(goldplus.getTextSaldoMamiAds(), saldo, "saldo MamiAds  is not match");
@@ -519,17 +534,6 @@ public class GoldplusSteps {
     @Then("owner click bayar sekarang on detail tagihan page goldplus")
     public void owner_wants_to_process_goldplus() {
         gpSubmission.clicksOnBayarSekarangButton();
-    }
-
-    @Then("owner validate payment for {string} have {string} and have {string} before choose payment method")
-    public void owner_validate_payment_for_have_and_have_before_choose_payment_method(String product, String mamiads, String fee) throws InterruptedException {
-        goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
-        Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
-        Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"),product);
-        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"),"Belum dipilih");
-        Assert.assertEquals(goldplus.getRincianGP(), product, "GoldPlus  is not match");
-        Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
-        Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
     }
 
     @Then("owner wants to paid GP crosseling by click {string} on pop up {string}")
@@ -601,5 +605,35 @@ public class GoldplusSteps {
     @When("user choose filter {string} on paket goldplus anda page")
     public void userChooseFilterOnPaketGoldplusAndaPage(String filter) {
         goldplus.clickFilterPaketGoldplusAnda(filter);
+    }
+
+
+    @Then("owner will see that detail text on goldplus guides page:")
+    public void ownerWillSeeThatDetailTextOnGoldplusGuidesPage(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        for (Map<String, String> content : table) {
+            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")),"Text doesn't match");
+        }
+    }
+
+    @Then("owner validate payment for goldplus package have {string} and have {string} before choose payment method")
+    public void ownerValidatePaymentForGoldplusPackageHaveAndHaveBeforeChoosePaymentMethod(String mamiads, String fee) throws InterruptedException {
+        goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
+        Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
+        Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"), Mamikos.getGpPackageChoosed());
+        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"),"Belum dipilih");
+        Assert.assertEquals(goldplus.getRincianGP(), Mamikos.getGpPackageChoosed(), "GoldPlus  is not match");
+        Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
+        Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
+    }
+
+    @Then("user will see that the goldplus package choosed is displayed")
+    public void userWillSeeThatTheGoldplusPackageChoosedIsDisplayed() {
+        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed()+" periode "+ Mamikos.getGpPeriodeChoosed());
+    }
+
+    @Then("user will see that the goldplus package on rincian pembayaran detail tagihan")
+    public void userWillSeeThatTheGoldplusPackageOnRincianPembayaranDetailTagihan() {
+        Assert.assertEquals(goldplus.getGpPackageRincianPembaranDetailTagihan(), Mamikos.getGpPackageChoosed() + " (" + Mamikos.getGpPeriodeChoosed() + ")");
     }
 }

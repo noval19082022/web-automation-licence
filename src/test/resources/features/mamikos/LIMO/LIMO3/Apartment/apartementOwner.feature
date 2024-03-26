@@ -35,9 +35,3 @@ Feature: Apartment - Owner Page
     And owner search apart "Apartemen Automations 01 Web" on property saya page
     Then verify status apartemen "Aktif"
     And owner can see button update kamar
-
-
-
-
-
-

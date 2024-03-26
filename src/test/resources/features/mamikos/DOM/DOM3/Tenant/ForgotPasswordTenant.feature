@@ -83,3 +83,26 @@ Feature: Tenant Forgot Password
     And user fill their registered phone number "0892202305"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
+
+  @TEST_COOP-6904
+  Scenario: forgot password Tenant - Navigate To forgot password Page
+    Given user go to mamikos homepage
+    When user click on button masuk pencari kos
+    And user click on lupa password?
+    Then user redirected to "lupa-password-pencari"
+
+  @TEST_COOP-7103
+  Scenario: Forgot Password Tenant - From Popular Area Page
+    Given user navigate to popular area page
+    When user click on enter button tenant in popular area page
+    And user click on lupa password?
+    And user fill their registered phone number "086476512341"
+    Then user verify on tenant page "Pilih Metode Verifikasi"
+
+  @TEST_COOP-7104
+  Scenario: Forgot Password Tenant - From Near Campus Page
+    Given user navigate to near campus page
+    When user click on enter button tenant in popular area page
+    And user click on lupa password?
+    And user fill their registered phone number "086476512341"
+    Then user verify on tenant page "Pilih Metode Verifikasi"

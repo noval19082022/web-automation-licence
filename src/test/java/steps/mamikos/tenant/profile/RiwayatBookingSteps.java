@@ -5,6 +5,7 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -50,4 +51,10 @@ public class RiwayatBookingSteps {
         page.navigate(Mamikos.URL + "/user/booking/");
         Assert.assertEquals(riwayatBooking.getFirstListBookingStatusText(), status);
     }
+
+    @Then("tenant can see ajukan sewa text button")
+    public void tenant_can_see_ajukan_sewa_text_button(){
+        Assert.assertTrue(riwayatBooking.getAjukanSewatext(), "not appears ajukan sewa text button");
+    }
+
 }

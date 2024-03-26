@@ -16,6 +16,11 @@ public class RefundSteps {
         refundPO.clickOnRefundBtn();
     }
 
+    @And("admin pick one invoice on list to refund from cc payment")
+    public void adminRefundCC() {
+        refundPO.clickOnRefundBtnForCCPayment();
+    }
+
     @And("admin fill bank name {string} on refund detail")
     public void adminFillBankNameOnRefundDetail(String bankName) {
         refundPO.fillBankName(bankName);
