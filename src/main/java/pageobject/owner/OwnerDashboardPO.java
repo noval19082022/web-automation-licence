@@ -810,7 +810,26 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on FTUE on button
+     * Check is leads menu visible
+     * @return boolean
+     */
+    public boolean isLeadsMenuVisible() {
+        return playwright.isLocatorVisibleAfterLoad(leadsMenu,5000.0);
+    }
+
+    /**
+     * Click leads menu
+     */
+    public void clickLeadsMenu() {
+        Page newTab = page.waitForPopup(() -> {
+            playwright.clickOn(leadsMenu);
+        });
+        newTab.waitForLoadState();
+        System.out.println(newTab.title());
+        ActiveContext.setActivePage(newTab);
+    }
+
+    /** Click on FTUE on button
      * @param buttonText
      */
     public void clickOnButtonFTUE(String buttonText) {
