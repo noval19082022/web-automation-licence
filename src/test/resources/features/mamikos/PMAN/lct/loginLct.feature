@@ -1,4 +1,4 @@
-@regression @pman @lct
+@regression @essentialTest2 @pman @pman-prod @lct
 
   Feature: Login LCT
 
@@ -6,8 +6,8 @@
     Scenario: Login as BD
       Given user go to mamikos homepage
       When user login as owner:
-        | phone stag    | password  |
-        | 089966561211  | qwerty123 |
+        | phone stag    | phone prod    | password      |
+        | 089966561211  | 0890000003480 | Bismillah@01  |
       Then owner should have menu "Leads"
       When owner click leads menu
       Then owner should redirect to lct
@@ -17,8 +17,8 @@
     Scenario: Login as MDR
       Given user go to mamikos homepage
       When user login as owner:
-        | phone stag    | password  |
-        | 089966561212  | qwerty123 |
+        | phone stag    | phone prod    | password      |
+        | 089966561212  | 0890000003481 | Bismillah@01  |
       Then owner should have menu "Leads"
       When owner click leads menu
       Then owner should redirect to lct
@@ -28,8 +28,8 @@
     Scenario: Login as AO
       Given user go to mamikos homepage
       When user login as owner:
-        | phone stag    | password  |
-        | 089966561213  | qwerty123 |
+        | phone stag    | phone prod    | password     |
+        | 089966561213  | 0890000003479 | Bismillah@01 |
       Then owner should have menu "Leads"
       When owner click leads menu
       Then owner should redirect to lct
