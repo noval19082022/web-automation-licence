@@ -836,23 +836,4 @@ public class OwnerDashboardPO {
         Locator buttonTextFtue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
         playwright.clickOn(buttonTextFtue);
     }
-
-    /** Check is leads menu visible
-     * @return boolean
-     */
-    public boolean isLeadsMenuVisible() {
-        return playwright.isLocatorVisibleAfterLoad(leadsMenu,5000.0);
-    }
-
-    /**
-     * Click leads menu
-     */
-    public void clickLeadsMenu() {
-        Page newTab = page.waitForPopup(() -> {
-            playwright.clickOn(leadsMenu);
-        });
-        newTab.waitForLoadState();
-        System.out.println(newTab.title());
-        ActiveContext.setActivePage(newTab);
-    }
 }

@@ -83,7 +83,6 @@ public class Mamikos {
     public static final String ADD_CONTRACT_TENANT = JavaHelpers.getPropertyValue(MAMIKOS, "addContractTenant");
     public static final String HOMEPAGE_LCT = JavaHelpers.getPropertyValue(MAMIKOS, "lctUrl_"+ENV);
     public static final String RULE_ENTER_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "rulesEnterKos");
-    public static final String HOMEPAGE_LCT = JavaHelpers.getPropertyValue(MAMIKOS, "lctUrl_"+ENV);
 
     @Setter @Getter
     private static  String propertyKosName;
