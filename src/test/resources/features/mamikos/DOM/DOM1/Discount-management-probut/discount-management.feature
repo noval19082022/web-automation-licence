@@ -170,3 +170,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "update_price_type_is_not_in_enumared.csv"
     Then admin should be able to see the text "Error! Row 2: The selected price_type is invalid. Row 3: The selected price_type is invalid."
+
+  @TEST_COOP-6489
+  Scenario: [Web][Probut][Discount Management] Upload Discount Fill dicount_type_owner filled by nominal but discount_type_mamikos is null
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin upload csv discount management with file names "update_discount_fill_dicount_type_owner_fill_by_nominal_but_discount_type_mamikos_is_null.csv"
+    Then admin should be able to see the text "Success! File processed successfully."
