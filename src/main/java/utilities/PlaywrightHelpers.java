@@ -452,6 +452,13 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Wait until no network activity
+     */
+    public void waitTillNetworkIdle(){
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+    }
+
+    /**
      * Wait till page loaded
      * @param timeout double data type
      */
