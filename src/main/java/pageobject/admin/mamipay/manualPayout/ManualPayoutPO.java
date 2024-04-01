@@ -371,7 +371,7 @@ public class ManualPayoutPO {
                 .map(String::toLowerCase)
                 .filter(s -> s.equals("newest") || s.equals("oldest"))
                 .map(s -> s.equals("newest") ? "desc" : "asc")
-                .orElse("desc");
+                .orElse("");
         playwright.selectDropdownByValue(sortingOption, direction);
     }
 }
