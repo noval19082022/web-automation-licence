@@ -767,6 +767,10 @@ public class PlaywrightHelpers {
         return locator.isDisabled();
     }
 
+    public boolean isButtonEnable(Locator locator) {
+        return locator.isEnabled();
+    }
+
     /**
      * check if data is null or blank
      * @param locator

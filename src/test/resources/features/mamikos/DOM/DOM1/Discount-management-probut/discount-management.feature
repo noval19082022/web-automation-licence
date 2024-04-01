@@ -110,3 +110,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin remove using csv discount management with file names "delete_kost_discount_not_exist.csv"
     Then admin should be able to see the text "Error! Unable to remove kost ID: 1000036261"
+
+  @TEST_COOP-6480
+  Scenario: [Web][Probut][Discount Management] Delete Discount kost id Not Exist (Negative Case)
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin remove using csv discount management with file names "delete_kost_id_not_found.csv"
+    Then admin should be able to see the text "Invalid kost ID found: 9000036259"

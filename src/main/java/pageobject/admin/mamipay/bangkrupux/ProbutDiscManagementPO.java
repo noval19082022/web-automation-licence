@@ -43,6 +43,8 @@ public class ProbutDiscManagementPO {
         choosenFileCsvInputForRemove.setInputFiles(
                 Paths.get("src/main/resources/file/bulk-probut-discount-management/remove/" + fileName));
         playwrightHelpers.hardWait(500.0);
-        playwrightHelpers.clickOn(removeBulkBtn);
+        if (playwrightHelpers.isButtonEnable(removeBulkBtn)) {
+            playwrightHelpers.clickOn(removeBulkBtn);
+        }
     }
 }
