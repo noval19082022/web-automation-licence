@@ -34,7 +34,9 @@ public class ProbutDiscManagementPO {
         choosenFileCsvInputForUpload.setInputFiles(
                 Paths.get("src/main/resources/file/bulk-probut-discount-management/upload/" + fileName));
         playwrightHelpers.hardWait(500.0);
-        playwrightHelpers.clickOn(uploadBulkBtn);
+        if (playwrightHelpers.isButtonEnable(uploadBulkBtn)) {
+            playwrightHelpers.clickOn(uploadBulkBtn);
+        }
     }
 
     public void removeBulkDiscountCsv(String fileName) {
