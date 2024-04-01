@@ -1,0 +1,3 @@
+kost_id,price_type,markup_type,markup_price,discount_type_mamikos,discount_price_mamikos,discount_type_owner,discount_price_owner
+1000036260,two years,nominal,500000,percentage,10,percentage,10
+1000036259,twice a years,percentage,20,nominal,100000,nominal,100000

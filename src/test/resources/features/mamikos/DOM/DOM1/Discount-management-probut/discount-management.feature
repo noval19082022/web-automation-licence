@@ -160,3 +160,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "upload_only_kost_id_and_price_type.csv"
     Then admin should be able to see the text "Error! Row 2: The markup_type field is required. Row 2: The markup_price field is required."
+
+  @TEST_COOP-6486
+  Scenario: [Web][Probut][Discount Management] Upload Discount price_type is not in Daily, Weekly, Monthly, Quarterly, Semiannually, Yearly (Negative Case)
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin upload csv discount management with file names "update_price_type_is_not_in_enumared.csv"
+    Then admin should be able to see the text "Error! Row 2: The selected price_type is invalid. Row 3: The selected price_type is invalid."
