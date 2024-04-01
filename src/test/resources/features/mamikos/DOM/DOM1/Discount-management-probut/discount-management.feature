@@ -150,3 +150,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "upload_kost_id_not_found.csv"
     Then admin should be able to see the text "Invalid kost ID found: 9000036260"
+
+  @TEST_COOP-6485
+  Scenario: [Web][Probut][Discount Management] Upload Discount Only Filled kost_id and price_type (Negative Case)
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin upload csv discount management with file names "upload_only_kost_id_and_price_type.csv"
+    Then admin should be able to see the text "Error! Row 2: The markup_type field is required. Row 2: The markup_price field is required."
