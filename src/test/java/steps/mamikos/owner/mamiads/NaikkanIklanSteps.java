@@ -163,6 +163,7 @@ public class NaikkanIklanSteps {
 
     @And("user verify the wording anggaran of iklan {string} is {string}")
     public void user_verify_the_wording_anggaran_of_iklan_is(String adsName, String anggaranDesc) throws InterruptedException {
+        playwright.waitTillPageLoaded(5000.0);
         Assert.assertEquals(naikkanIklanPO.getTextAnggaranDesc(adsName), anggaranDesc, "Anggaran description doesn't match!");
     }
 
