@@ -15,6 +15,7 @@ public class ProbutDiscManagementPO {
     private Locator choosenFileCsvInputForUpload;
     private Locator choosenFileCsvInputForRemove;
     private Locator uploadBulkBtn;
+    private Locator removeBulkBtn;
 
     public ProbutDiscManagementPO(Page page) {
         this.playwrightHelpers = new PlaywrightHelpers(page);
@@ -24,6 +25,7 @@ public class ProbutDiscManagementPO {
         this.choosenFileCsvInputForUpload = page.locator("#bulkUploadInput");
         this.choosenFileCsvInputForRemove = page.locator("#bulkRemoveInput");
         this.uploadBulkBtn = page.locator("#bulkUploadButton");
+        this.removeBulkBtn = page.locator("#bulkRemoveButton");
     }
 
     public void uploadBulkDiscountCsv(String fileName) {
@@ -41,6 +43,6 @@ public class ProbutDiscManagementPO {
         choosenFileCsvInputForRemove.setInputFiles(
                 Paths.get("src/main/resources/file/bulk-probut-discount-management/remove/" + fileName));
         playwrightHelpers.hardWait(500.0);
-        playwrightHelpers.clickOn(uploadBulkBtn);
+        playwrightHelpers.clickOn(removeBulkBtn);
     }
 }
