@@ -90,3 +90,13 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin remove using csv discount management with file names "delete_bulk.csv"
     Then admin should be able to see the text "Success! File processed successfully."
+
+  @TEST_COOP-6478
+  Scenario: [Web][Probut][Discount Management] Delete Discount Single Discount Using csv
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin remove using csv discount management with file names "delete_success.csv"
+    Then admin should be able to see the text "Success! File processed successfully."
