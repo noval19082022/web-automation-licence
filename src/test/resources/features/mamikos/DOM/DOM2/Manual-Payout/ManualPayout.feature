@@ -27,7 +27,7 @@ Feature: Inquiry and Create Manual Payout
       | Refund                 |
       | Refund Outside MamiPAY |
 
-  @TEST_COOP-5292 @TEST_COOP-1377 @Automated @web-covered @continue
+  @TEST_COOP-5292 @TEST_COOP-1377 @TEST_COOP-1377 @Automated @web-covered @continue
   Scenario Outline: [Mamipay][Manual Payout] Filter payout list by status <status>
     Given admin go to mamikos mamipay admin
     And admin want to search invoice in manual payout menu with select status "<status>"
