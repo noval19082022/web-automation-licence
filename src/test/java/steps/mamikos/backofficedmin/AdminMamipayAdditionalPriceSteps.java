@@ -224,4 +224,14 @@ public class AdminMamipayAdditionalPriceSteps {
         invoiceAdmin.fillAdditionalPriceCostValue(additionalPriceValue);
         invoiceAdmin.clickOnUpdateFeeInAdditionalPrice();
     }
+
+    @And("admin fills transaction date {string}")
+    public void adminFillsTransactionDate(String date) {
+        invoiceAdmin.adminFillsTransactionDate(date);
+    }
+
+    @And("admin see edit basic amount button disable")
+    public void adminSeeEditBasicAmountButtonDisable (){
+        invoiceAdmin.adminSeeEditBasicAmountButtonDisable();
+    }
 }
