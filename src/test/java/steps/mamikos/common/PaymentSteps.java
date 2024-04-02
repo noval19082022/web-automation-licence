@@ -318,6 +318,15 @@ public class PaymentSteps {
         Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
     }
 
+    @Then("tenant can not sees add on price on payment page after pay")
+    public void tenantCanNotSeesAddOnPriceOnPaymentPageAfterPay() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
+        int basicAmount = invoice.getBasicPrice();
+        int adminFee = invoice.getAdminPriceFinal();
+        int totalAmount = invoice.getSubTotal();
+        Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
+    }
+
     @Then("tenant can see TnC {string} on invoice")
     public void tenant_can_see_tnc_x_on_invoice(String tnc) {
         Assert.assertEquals(invoice.getTnCInvoiceFullText(), tnc, "not the same text");

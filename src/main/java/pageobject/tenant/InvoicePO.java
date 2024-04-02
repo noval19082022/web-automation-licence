@@ -70,6 +70,7 @@ public class InvoicePO {
     Locator voucherDivSection;
     Locator perDurationPriceText;
     Locator biayaLayananMamikosText;
+    Locator biayaLayananMamikosTextFinal;
     Locator tncInvoiceFullText;
     Locator tncInvoiceText;
     Locator mamipoinToggleButtonOn;
@@ -136,7 +137,8 @@ public class InvoicePO {
         noOvoTextBox = page.getByPlaceholder("08...");
         additionalPriceDivAddOn = page.locator(".collapse.details-collapsible").last();
         voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
-        biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
+        biayaLayananMamikosText = page.getByTestId("invoiceBillingRoomContent-admin");
+        biayaLayananMamikosTextFinal = page.getByTestId("invoiceBillingRoomContent-admin").nth(1);
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
         tncInvoiceFullText = page.locator(".first-column.column");
         tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
@@ -657,6 +659,15 @@ public class InvoicePO {
      */
     public int getAdminPrice() {
         return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosText));
+    }
+
+    /**
+     * Get admin fee after pay
+     *
+     * @return integer data type of biaya Layanan Mamikos in Rincian Pembayaran
+     */
+    public int getAdminPriceFinal() {
+        return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosTextFinal));
     }
 
     /**

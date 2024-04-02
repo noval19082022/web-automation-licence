@@ -63,4 +63,4 @@ Feature: addOns Fee Recurring Invoice Negative
     Then tenant can not sees add on price on payment page
     And tenant pay booking to extended contract using ovo "0891111020198" without close the page
     And tenant set active page to 1
-    Then tenant can not sees add on price on payment page
+    Then tenant can not sees add on price on payment page after pay
