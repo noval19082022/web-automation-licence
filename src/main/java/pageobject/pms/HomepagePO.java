@@ -333,7 +333,6 @@ public class HomepagePO {
      * Click on type room dropdown and selected type room
      */
     public void clickOnTypeRoom() {
-//        playwright.waitTillLocatorIsVisible(dropdownTypeRoom, 5000.0);
         playwright.waitFor(dropdownTypeRoom);
         playwright.clickOn(dropdownTypeRoom);
         playwright.clickOn(selectedTypeRoom);
