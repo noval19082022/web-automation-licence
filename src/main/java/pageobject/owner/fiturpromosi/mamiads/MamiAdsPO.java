@@ -34,6 +34,8 @@ public class MamiAdsPO {
     private Locator ubahAnggaranInputText;
     private Locator yaGantiButton;
     private Locator beliSaldoBtnPopup;
+    Locator simpanPengaturanButton;
+
     //--- Beli Saldo Mamiads Page ----//
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
@@ -88,6 +90,7 @@ public class MamiAdsPO {
         this.dibatasiHarianRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Dibatasi Harian")).locator("span").nth(1);
         this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
         this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
+        simpanPengaturanButton = page.getByText("Simpan Pengaturan");
         //--- Beli Saldo Mamiads Page ---//
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
@@ -669,6 +672,14 @@ public class MamiAdsPO {
         Locator textOnPopUpMamiads = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(textOnPopUp));
         playwright.waitFor(textOnPopUpMamiads);
         return playwright.getText(textOnPopUpMamiads);
+    }
+
+    /**
+     * Click on Simpan Pengaturan button on pop up ubah anggaran
+     *
+     */
+    public void clickOnSimpanPengaturanUbahAnggaran() {
+        playwright.clickOn(simpanPengaturanButton);
     }
 }
 
