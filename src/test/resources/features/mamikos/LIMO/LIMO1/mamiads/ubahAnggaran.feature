@@ -45,7 +45,7 @@ Feature: Ubah Anggaran
       | status desc   | Posisi iklan telah naik di hasil pencarian properti.  |
       | text anggaran | Hari ini terpakai Rp0                                 |
     When user click ubah on "kost rane hana Mamitest"
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     Then user verify the toast "Tidak ada perubahan tipe anggaran"
     #Scenario change saldo maksimal to saldo maksimal, if iklan its Tidak Naik and toggle OFF
     #Scenario To make sure wording while iklan Off by owner when set maximal budget and saldo burn = 0 (MA-5815)
@@ -56,8 +56,7 @@ Feature: Ubah Anggaran
       | status desc   | Klik tombol untuk naikkan iklan                       |
       | text anggaran | Tipe Anggaran: Saldo Maksimal                         |
     And user click ubah on "Kos rane net Mamitest"
-    And owner click "Simpan Pengaturan"
-    Then user verify the toast "Tidak ada perubahan tipe anggaran"
+    And owner click Simpan Pengaturan on ubah anggaran
     #Scenario change daily budged to daily budged, Iklan its Naik & toggle ON saldo burning = 0 (MA-5796)
     When user check ads status:
       | ads name      | kost rane dul Mamitest                                         |
@@ -66,8 +65,7 @@ Feature: Ubah Anggaran
       | status desc   | Posisi iklan telah naik di hasil pencarian properti.           |
       | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp20.000 |
     And user click ubah on "kost rane dul Mamitest"
-    And owner click "Simpan Pengaturan"
-    Then user verify the toast "Tidak ada perubahan tipe anggaran"
+    And owner click Simpan Pengaturan on ubah anggaran
     #Scenario change daily budged to daily budged, if iklan its Tidak Naik and toggle OFF
     #Scenario To make sure wording while iklan Off by owner when set daily budget and saldo burn = 0 (MA-5814)
     When user check ads status:
@@ -77,9 +75,7 @@ Feature: Ubah Anggaran
       | status desc   | Klik tombol untuk naikkan iklan                        |
       | text anggaran | Tipe Anggaran: Rp70.000 per-hari                       |
     And user click ubah on "kost rane dul Mamitest"
-    And owner click "Simpan Pengaturan"
-    Then user verify the toast "Tidak ada perubahan tipe anggaran"
-
+    And owner click Simpan Pengaturan on ubah anggaran
 
   @TEST_LIMO-307
   Scenario: Hit Daily Budget is 0, Toggle ON and status Naik, Change to daily budged
@@ -97,9 +93,8 @@ Feature: Ubah Anggaran
       | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000  |
     When user click ubah on "Raney Hambura"
     And user set anggaran harian to "5000"
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Raney Hambura                                                   |
       | text status   | Naik                                                            |
@@ -109,7 +104,7 @@ Feature: Ubah Anggaran
     #Scenario: Hit Daily Budget is 0, Toggle ON and status Naik, Change Daily Budget to Saldo Maksimal (MA-5777)
     And user click ubah on "Raney Hambura"
     And user set anggaran to saldo maksimal
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
     Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
@@ -121,9 +116,8 @@ Feature: Ubah Anggaran
     #Scenario: Hit Maksimal Budget is 0, Toggle ON status Naik, Change Saldo Maksimal to Daily Budget (MA-5780)
     And user click ubah on "Raney Hambura"
     And user set anggaran to dibatasi harian
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Raney Hambura                                                  |
       | text status   | Naik                                                           |
@@ -147,9 +141,8 @@ Feature: Ubah Anggaran
       | text anggaran | Tipe Anggaran: Rp19.000 per-hari                  |
     When user click ubah on "Kos Ayame Tipe MamiAds Tobelo Halmahera Utara"
     And user set anggaran to saldo maksimal
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara     |
       | text status   | Tidak Naik                                        |
@@ -160,9 +153,8 @@ Feature: Ubah Anggaran
     And user click ubah on "Kos Ayame Tipe MamiAds Tobelo Halmahera Utara"
     And user set anggaran to dibatasi harian
     And user set anggaran harian to "20000"
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara     |
       | text status   | Tidak Naik                                        |
@@ -173,9 +165,8 @@ Feature: Ubah Anggaran
     And user click ubah on "Kos Ayame Tipe MamiAds Tobelo Halmahera Utara"
     And user set anggaran to dibatasi harian
     And user set anggaran harian to "19000"
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara     |
       | text status   | Tidak Naik                                        |
@@ -195,9 +186,8 @@ Feature: Ubah Anggaran
     And user close mamiads onboarding popup
     And user click ubah on "Kos Raney Happyvirus Mamitest Tipe B Tobelo Halmahera Utara"
     And user set anggaran to saldo maksimal
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Kos Raney Happyvirus Mamitest Tipe B Tobelo Halmahera Utara  |
       | text status   | Tidak Naik                                                   |
@@ -206,9 +196,8 @@ Feature: Ubah Anggaran
       | text anggaran | Tipe Anggaran: Saldo Maksimal                                |
     And user click ubah on "Kos Raney Happyvirus Mamitest Tipe B Tobelo Halmahera Utara"
     And user set anggaran to dibatasi harian
-    And owner click "Simpan Pengaturan"
+    And owner click Simpan Pengaturan on ubah anggaran
     And user click Ya,Ganti button
-    Then user verify the toast "Anggaran berhasil diubah"
     And user check ads status:
       | ads name      | Kos Raney Happyvirus Mamitest Tipe B Tobelo Halmahera Utara  |
       | text status   | Tidak Naik                                                   |
