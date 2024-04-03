@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.fiturpromosi.mamiads.DetailTagihanPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
+import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -23,7 +24,10 @@ public class MamiAdsSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private Integer riwayatBeforeBeliSaldo;
     DetailTagihanPO detailTagihanPO = new DetailTagihanPO(page);
+
+    NavigatesSteps navigatesSteps = new NavigatesSteps();
     private Map<String, String> adsData;
+    Page page1;
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
@@ -108,7 +112,9 @@ public class MamiAdsSteps {
 
     @And("user wants to buy saldo MamiAds {string}")
     public void userWantsToBuySaldoMamiAds(String saldo) {
+        System.out.println("SUDAH DIPAGE SALDO MA");
         mamiAdsPO.clickOnBeliSaldoBtn();
+        System.out.println("SUDAH DIPAGE LIST SALDO");
         mamiAdsPO.choosingSaldoToBuy(saldo);
         mamiAdsPO.isDetailTagihanPresent();
         detailTagihanPO.clicksOnBayarSekarangButton();
@@ -338,5 +344,18 @@ public class MamiAdsSteps {
         for (Map<String, String> content : table) {
             Assert.assertTrue(mamiAdsPO.getTextOnPoUpVisible(content.get("TextPopUp")).contains(content.get("TextPopUp")),"Text doesn't match");
         }
+    }
+
+    @And("user open the invoice mamiads if invoice already maximal on riwayat")
+    public void userOpenTheInvoiceMamiadsIfInvoiceAlreadyMaximalOnRiwayat() {
+        if (riwayatBeforeBeliSaldo == 12){
+            mamiAdsPO.clickRiwayatMamiAds();
+            page1 = mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
+        }
+    }
+
+    @And("user click back to mamiads dashboard")
+    public void userClickBackToMamiadsDashboard() {
+        mamiAdsPO.clickBackIconOnRiwayatMamiads();
     }
 }

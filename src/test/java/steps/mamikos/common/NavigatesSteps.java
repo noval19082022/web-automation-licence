@@ -424,4 +424,9 @@ public class NavigatesSteps {
     public void userNavigateToNearCampusPage() {
         playwright.navigateTo(Mamikos.URL + "/kampus", 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigate to premium package invoice list")
+    public void adminNavigateToPremiumPackageInvoiceList() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice/premium/package");
+    }
 }

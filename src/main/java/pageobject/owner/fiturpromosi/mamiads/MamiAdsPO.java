@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -15,6 +16,9 @@ public class MamiAdsPO {
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
     //--- history Mamiads ---//
+    Locator lastInvoiceOnRiwayat;
+    Locator riwayatSaldoMamiads;
+    Locator backIconRiwayatMamiads;
     private  Locator invoiceMamiads;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
@@ -72,6 +76,9 @@ public class MamiAdsPO {
         this.saldoMamiadsCard = page.locator(".mamiads-card");
         //--- history Mamiads ---//
         this.invoiceMamiads = page.locator("//div[@class='transaction-done']/div[@class='transaction-available']/div[1]//span[@class='right-side-saldo-status']");
+        lastInvoiceOnRiwayat = page.locator("//div[@class='transaction-on-process']//div[12]/a[1]");
+        riwayatSaldoMamiads = page.getByText("Riwayat");
+        backIconRiwayatMamiads = page.locator("a").filter(new Locator.FilterOptions().setHasText("back"));
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo", new Page.GetByTextOptions().setExact(true));
@@ -235,8 +242,10 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
-        playwright.waitTillPageLoaded();
-        playwright.clickOn(page.locator("//*[contains(text(),'" + saldo + "')]/following-sibling::button"));
+        Locator saldoButton = page.locator(".bg-c-grid > div:nth-of-type(1) .bg-c-button");
+//        playwright.wait(saldoButton);
+        playwright.hardWait(5000.0);
+        playwright.clickOn(saldoButton);
     }
 
     /**
@@ -669,6 +678,28 @@ public class MamiAdsPO {
         Locator textOnPopUpMamiads = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(textOnPopUp));
         playwright.waitFor(textOnPopUpMamiads);
         return playwright.getText(textOnPopUpMamiads);
+    }
+
+//    public void clickInvoiceMamiadsOnRiwayat() {
+//        playwright.clickOn(lastInvoiceOnRiwayat);
+//    }
+    public Page clickInvoiceMamiadsOnRiwayat(){
+        page = page.waitForPopup(() -> {
+            playwright.clickOn(lastInvoiceOnRiwayat);
+            playwright.waitTillPageLoaded(50000.0);
+        });
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
+    }
+
+    public void clickRiwayatMamiAds() {
+        playwright.clickOn(riwayatSaldoMamiads);
+    }
+
+    public Page clickBackIconOnRiwayatMamiads() {
+        playwright.clickOn(backIconRiwayatMamiads);
+        ActiveContext.setActivePage(page);
+        return ActiveContext.getActivePage();
     }
 }
 
