@@ -506,5 +506,28 @@ public class TenantBookingSteps {
         Assert.assertTrue(bookingForm.getSummaryBookingForm(), "not appears allert addfee");
     }
 
+    @And("tenant click on {string} on booking form")
+    public void tenant_click_on_booking_form(String text){
+        bookingForm.clickTambahBarangButton(text);
+    }
 
+    @When("tenant choose biaya tambahan {string} on booking form")
+    public void tenant_choo_biaya_tambahan_on_booking_form(String text){
+        bookingForm.clickTambahBarangButton(text);
+    }
+
+    @And("tenant click on save button")
+    public void tenant_click_on_save_button(){
+        bookingForm.clickSimpanButton();
+    }
+
+    @And("tenant click on chat pemilik")
+    public void tenant_click_on_vhat_pemilik(){
+        bookingForm.clickChatPemilikButton();
+    }
+
+    @Then("tenant can see tenant description with {string}")
+    public void tenant_can_see_description_with(String text){
+        Assert.assertEquals(bookingForm.getDeskriptionDiri(),text, "description diri is different");
+    }
 }
