@@ -67,6 +67,7 @@ public class MamikosListInvoicePO {
     Locator editAddOns;
     Locator updateFeeAdditionalPriceButton;
     Locator actionResult;
+    Locator editBasicAmountButton;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -122,6 +123,7 @@ public class MamikosListInvoicePO {
         editAddOns = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("adiautomation Add Ons 100000  ")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(""));
         updateFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Fee"));
         actionResult = page.getByText("The cost value must be an integer.");
+        editBasicAmountButton = page.locator("//i[@class='fa fa-edit']");
     }
 
     /**
@@ -424,10 +426,9 @@ public class MamikosListInvoicePO {
      *
      * @throws InterruptedException
      */
-    public void selectDetailStatus(String statusTransaction) {
-        playwright.selectDropdownByValue(page.locator("select[name='status']"), statusTransaction);
+    public void selectDetailStatus(String method) {
+         playwright.selectDropdownByValue(page.locator("select[name='status']"), method);
     }
-
     /**
      * verify data transaction based on status
      */
@@ -679,4 +680,45 @@ public class MamikosListInvoicePO {
     public void selectInvoiceType(String invoiceType) {
         playwright.selectDropdownByValue(page.locator("select[name='invoice_type']"), invoiceType);
     }
+    /**
+     * selsect status filter invoice
+     *
+     * @throws InterruptedException
+     */
+    public void selectFilterStatus(String method, String filter) {
+        String element = filter;
+
+        switch (element) {
+            case "status":
+                playwright.selectDropdownByValue(page.locator("select[name='status']"), method);
+                break;
+            case "sort_by":
+                playwright.selectDropdownByValue(page.locator("select[name='sort_by']"), method);
+                break;
+            default:
+                System.out.println("choose not valid");
+                break;
+        }
+    }
+    /**
+     * input transaction date
+     *
+     * @throws InterruptedException
+     */
+    public void adminFillsTransactionDate(String date) {
+        playwright.fill(page.locator("//input[@name='transaction_date']"),date);
+    }
+    /**
+     * validate edit basic amount button
+     *
+     * @throws InterruptedException
+     */
+    public void adminSeeEditBasicAmountButtonDisable() {
+        if (playwright.waitTillLocatorIsVisible(editBasicAmountButton)) {
+            playwright.assertVisible(editBasicAmountButton);
+        } else {
+            playwright.isTextDisplayed("Invoice Detail Fee");
+        }
+    }
+
 }

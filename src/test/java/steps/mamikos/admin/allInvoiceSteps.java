@@ -104,6 +104,11 @@ public class allInvoiceSteps {
         invoicePO.selectDetailStatus(method);
         invoicePO.clickOnCariInvoice();
     }
+    @And("admin choose filter Status {string} {string}")
+    public void adminSelectFilterStatus(String method, String filter) {
+        invoicePO.selectFilterStatus(method, filter);
+        invoicePO.clickOnCariInvoice();
+    }
 
     @Then("admin will get data Status with method {string}")
     public void adminWillGetDataStatusWithMethod(String output) {
