@@ -33,6 +33,7 @@ public class Mamikos {
     public static final String ADMINBANGKRUPUX = JavaHelpers.getPropertyValue(MAMIKOS, "bangkrupux_" + ENV);
     public static final String APARTMENT = JavaHelpers.getPropertyValue(MAMIKOS, "apartment");
     public static final String PMS_URL = JavaHelpers.getPropertyValue(MAMIKOS, "PMSUrl_" + ENV);
+    public static final String CHECKPROPERTY_URL = JavaHelpers.getPropertyValue(MAMIKOS, "checkPropertyUrl_" + ENV);
     public static final String Ownersini_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownersiniUrl_" + ENV);
     public static final String Singgahsini_URL = JavaHelpers.getPropertyValue(MAMIKOS, "singgahsiniUrl_" + ENV);
     public static final String LoginPemilik_URL = JavaHelpers.getPropertyValue(MAMIKOS, "logiPemilikUrl_" + ENV);
@@ -80,6 +81,7 @@ public class Mamikos {
     public static final String FORMULIR_DATA_PENYEWA = JavaHelpers.getPropertyValue(MAMIKOS, "formulirDataPenyewa");
     public static final String STATISTIC_PPRS = JavaHelpers.getPropertyValue(MAMIKOS, "statisticPPRS") ;
     public static final String ADD_CONTRACT_TENANT = JavaHelpers.getPropertyValue(MAMIKOS, "addContractTenant");
+    public static final String HOMEPAGE_LCT = JavaHelpers.getPropertyValue(MAMIKOS, "lctUrl_"+ENV);
     public static final String RULE_ENTER_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "rulesEnterKos");
 
     @Setter @Getter

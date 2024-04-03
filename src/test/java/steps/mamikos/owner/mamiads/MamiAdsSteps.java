@@ -339,4 +339,9 @@ public class MamiAdsSteps {
             Assert.assertTrue(mamiAdsPO.getTextOnPoUpVisible(content.get("TextPopUp")).contains(content.get("TextPopUp")),"Text doesn't match");
         }
     }
+
+    @And("owner click Simpan Pengaturan on ubah anggaran")
+    public void ownerClickSimpanPengaturanOnUbahAnggaran() {
+        mamiAdsPO.clickOnSimpanPengaturanUbahAnggaran();
+    }
 }

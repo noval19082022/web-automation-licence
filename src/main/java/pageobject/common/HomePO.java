@@ -51,6 +51,7 @@ public class HomePO {
     Locator profileMenu;
     Locator riwayatTransaksiMenu;
     Locator logOutButton;
+    private Locator logInButtonPopularAreaPage;
 
     //Content
     private Locator seeAllPromoAds;
@@ -145,6 +146,7 @@ public class HomePO {
         this.profileMenu = page.getByTestId("profileButton");
         this.riwayatTransaksiMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Riwayat Transaksi"));
         this.logOutButton = page.getByTestId("exitButton");
+        this.logInButtonPopularAreaPage = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Masuk"));
 
         //footer
         this.tentangKamiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Tentang Kami"));
@@ -874,5 +876,15 @@ public class HomePO {
     public void clickonLihatSemuaAreaKosTerpopuler(){
         playwright.pageScrollUntilElementIsVisible(lihatSemuaAreaKostTerpopuler);
         playwright.clickOn(lihatSemuaAreaKostTerpopuler);
+    }
+
+    /**
+     * Click on button masuk on popular area page
+     *
+     * @return LoginPO class
+     */
+    public LoginPO clickOnButtonMasukOnPopularArea() {
+        logInButtonPopularAreaPage.click();
+        return new LoginPO(page);
     }
 }

@@ -212,3 +212,17 @@ Feature: New Flow Register Owner
     When user clicks on Enter button
     And user clicks on Register button
     Then user redirected to "register-pemilik?source="
+
+  @TEST_COOP-7099
+  Scenario: Register owner - From Popular Area Page
+    Given user navigate to popular area page
+    When user click on enter button owner in popular area page
+    And user clicks on Register button
+    Then user redirected to "register-pemilik?source="
+
+  @TEST_COOP-7100
+  Scenario: Register owner - From Near Campus Page
+    Given user navigate to near campus page
+    When user click on enter button owner in popular area page
+    And user clicks on Register button
+    Then user redirected to "register-pemilik?source="

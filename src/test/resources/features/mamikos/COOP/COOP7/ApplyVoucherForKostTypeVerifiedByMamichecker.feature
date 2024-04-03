@@ -12,7 +12,7 @@ Feature: Apply Voucher For Kost Type Verified By Mamichecker
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOMAMICHECK     | AUTOMAMICHECK     |
-    Then tenant can see voucher is applied
+    Then tenant can see mamirooms voucher is applied
 
   Scenario: Invoice Verified By Mamichecker and Voucher Not Applicable for Verified By Mamichecker
     And tenant apply voucher:

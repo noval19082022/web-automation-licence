@@ -105,11 +105,11 @@ Feature: Additional Fee PMS KK
   @TEST_PMAN-8923 @continue
   Scenario: Add Additional Fee with Input Manual for Ketentuan Bagi Hasil
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu and Satuan Besaran"
-      | Nama Biaya  | Ketentuan Bagi Hasil  | Amount  | Jenis Biaya | Biaya Termasuk Harga Sewa | Pengaturan di Rincian Sewa        | Satuan Waktu  | Harga Satuan Waktu |  Satuan Besaran  |
-      | Extend      | Masukkan Manual       | 11      | Wajib       | Ya                        | Hanya nama biaya yang ditampilkan | Harian        | 11000              |  Per orang       |
+      | Nama Biaya  | Ketentuan Bagi Hasil  | Amount  | Jenis Biaya | Satuan Waktu  | Harga Satuan Waktu |  Satuan Besaran  |
+      | Extend      | Masukkan Manual       | 11      | Opsional    | Harian        | 11000              |  Per orang       |
     Then additional fee is created in PMS KK
-      | Nama Biaya  | Penyewa Bisa Pilih Mandiri  | Jenis Biaya | Termasuk di Dalam Harga Sewa                          | Tipe Pembayaran Biaya | Ketentuan Bagi Hasil  |
-      | Extend      | Tidak                       | Wajib       | Ya  Hanya nama biaya yang ditampilkan di rincian sewa | Satu Kali             | 11% ke Pemilik        |
+      | Nama Biaya  | Penyewa Bisa Pilih Mandiri  | Jenis Biaya | Termasuk di Dalam Harga Sewa  | Tipe Pembayaran Biaya | Ketentuan Bagi Hasil  |
+      | Extend      | Tidak                       | Opsional    | Tidak                         | Satu Kali             | 11% ke Pemilik        |
     And additional fee is created in every listing
       | Listing | Harga                       |
       | Tipe A  | Rp11.000 / Hari (Per orang) |
