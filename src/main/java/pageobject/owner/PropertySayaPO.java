@@ -188,7 +188,7 @@ public class PropertySayaPO {
     Locator imageHistoryZero;
     Locator rejectApartementText;
     Locator updateKamarButtonApart;
-
+    Locator favoritedSection;
     public PropertySayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -332,6 +332,7 @@ public class PropertySayaPO {
         imageHistoryZero = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("history_zero"));
         rejectApartementText = page.getByText("Alasan ditolak :");
         updateKamarButtonApart = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Kamar & Harga"));
+        favoritedSection= page.getByText("Difavoritkan 0");
     }
 
     /**
@@ -2218,5 +2219,13 @@ public class PropertySayaPO {
      */
     public boolean isButtonUpdateVisible() {
         return playwright.waitTillLocatorIsVisible(updateKamarButtonApart);
+    }
+
+    /**
+     * check section Difavoritkan is visible
+     * @return locator
+     */
+    public boolean isFavoritedSectionVisible() {
+        return playwright.waitTillLocatorIsVisible(favoritedSection);
     }
 }
