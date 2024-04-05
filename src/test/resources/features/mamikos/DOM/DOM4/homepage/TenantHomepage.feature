@@ -121,6 +121,7 @@ Feature: Homepage
 		When user open Around University in UGM
 		Then user should redirect to link that contains "/kost/kost-dekat-ugm-murah"
 
+	@TEST_COOP-6937
 	Scenario: Hompage-Lihat semua kost sekitar kampus
 		Given user go to mamikos homepage
 		When user go to lihat semua Sekitar Kampus
@@ -134,6 +135,7 @@ Feature: Homepage
 			| Malang                 | Malang                 |
 			| Semarang               | Semarang               |
 
+	@TEST_COOP-6942
 	Scenario: Homepage - Lihat semua area kost populer
 		Given user go to mamikos homepage
 		When user go to lihat semua Area kost terpopuler
