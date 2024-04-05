@@ -1,35 +1,5 @@
-@BBM6 @COOP6 @BnBFeature @BnBFeature1
-Feature: BnB feature - 1
-
-  @OwnerBadgesNotLogin @OwnerBadges @TEST_COOP-1358
-  Scenario: Check Owner Badges on Kos Detail when not login tenant (BBM-500)
-    Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                     | kost name prod       |
-      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
-    Then user reached owner badges section
-
-  @OwnerBadgesWithTenantLogin @OwnerBadges @TEST_COOP-1356
-  Scenario: Check Owner Badges on Kos Detail when login tenant (BBM-498)
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod   | password  |
-      | 0812345667788 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                     | kost name prod       |
-      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
-    Then user reached owner badges section
-
-  @OwnerBadgesWithOwnerLogin @TEST_COOP-1357
-  Scenario: Check Owner Badges on Kos Detail when login owner (BBM-499)
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0892202351 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                     | kost name prod       |
-      | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
-    Then user reached owner badges section
+@COOP6 @BBM6
+Feature: Additional price for kos owner
 
   @activatedDenda
   Scenario: Activated denda and input price, update denda, then delete denda
@@ -176,39 +146,3 @@ Feature: BnB feature - 1
     And admin click actions button on booking list
     And admin click detail in actions button
     Then admin sees other price with name "1234567890abcdefjkl" and price "Rp100.000" show in detail booking
-
-  @deleteContractOtherPrice @COOP60
-  Scenario: Delete contract
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin search contract by Renter Phone Number and input field "0892202357"
-    And admin cancel contract
-
-  @filterPenyewa @continue
-  Scenario: check contract status on all filter
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 089120220103 | 081328787342 | qwerty123 |
-    And user navigate to penyewa page
-    And user search kost in penyewa menu "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
-    And user click on dropdown Filter box and select filter:
-      | Filter         |
-      | Sedang menyewa |
-    And user click on dropdown Filter box and select filter:
-      | Filter     |
-      | Akan masuk |
-    Then user click on dropdown Filter box and select filter:
-      | Filter                    |
-      | Menghentikan kontrak sewa |
-
-  @downloadBiodata
-  Scenario: Download biodata fakedoor
-    Given user go to mamikos homepage
-    And user navigate to penyewa page
-    And user search kost in penyewa menu "ARAC"
-    And user click download biodata penyewa button
-    And user tick on checkbox pop up
-    Then user will see information about upcoming feature

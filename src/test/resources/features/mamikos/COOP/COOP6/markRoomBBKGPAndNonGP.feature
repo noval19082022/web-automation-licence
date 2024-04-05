@@ -1,5 +1,5 @@
-@BBM6 @COOP6 @BnBFeature @BnBFeature2
-Feature: BnB feature - 2
+@BBM6 @COOP6
+Feature: Mark room bbk, kos GP and non GP
 
   @waitingTerminateConfirmation
   Scenario: Cancel and create booking
@@ -73,31 +73,6 @@ Feature: BnB feature - 2
     And user click on kontrak sewa button
     Then user will see message request terminated contract
 
-  @checkContentOnWaktuMengelolaKos
-  Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod  | password   |
-      | 089604239090 | 08100000622 | widyarini1 |
-    And owner navigates to owner dashboard
-    And owner dismiss FTUE goldplus
-    And user click "Atur Ketersediaan Kamar"
-    And owner back to owner dashboard
-    And owner dismiss FTUE goldplus
-    And user click "Atur Harga"
-    And owner back to owner dashboard
-    And owner dismiss FTUE goldplus
-    And owner waiting the page reload
-    And user click "Daftar kontrak penyewa kos"
-    And owner back to owner dashboard
-    And owner dismiss FTUE goldplus
-    And user click "Tambah Penyewa"
-    And owner click back previous button
-    And owner dismiss FTUE goldplus
-    And owner waiting the page reload
-    And user click "Pusat Bantuan"
-    Then user can see help center page
-
   @disbursementInfo @continue
   Scenario: Check content and link on info untuk anda for disbursement
     Given user go to mamikos homepage
@@ -116,45 +91,7 @@ Feature: BnB feature - 2
     And owner navigates to financial report
     Then user can see "Buka Laporan Keuangan di Aplikasi" and "Untuk saat ini, fitur Laporan Keuangan hanya dapat"
 
-  @checkOwnerHaveOneKosNotBbk @TEST_COOP-1921
-  Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 081227019399 | 081227019399 | qwerty123 |
-    And owner navigates to owner dashboard
-    And user click "Atur Ketersediaan Kamar"
-
-  @checkWaktuMengelolaWhenOwnerNotHaveBbkKos @TEST_COOP-1927
-  #ownerNotHaveBbkKos.feature
-  Scenario: Check Waktu Mengelola section when owner not have BBK kos (BBM-973)
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | password  |
-      | 081227019399 | qwerty123 |
-    And owner navigates to owner dashboard
-    And user click menu "Atur Ketersediaan Kamar" on feature waktunya mengelola property
-    Then user see screen "Update Kamar"
-    When owner back to owner dashboard
-    And user click menu "Atur Harga" on feature waktunya mengelola property
-    Then user see screen "Update Harga"
-    When owner back to owner dashboard
-    And user click menu "Daftar ke Booking Langsung" on feature waktunya mengelola property
-    Then user can see manage booking pop up
-    When owner back to owner dashboard
-    And user click menu Penyewa on feature waktunya mengelola property
-    Then verify the title on mamipay owner onboarding displayed
-    When user clicks on Owner Settings button
-    And owner back to owner dashboard
-    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
-    Then verify the title on mamipay owner onboarding displayed
-    When user clicks on Owner Settings button
-    And owner back to owner dashboard
-    And user click menu Pusat Bantuan on feature waktunya mengelola property
-    Then user should redirect to link "https://help.mamikos.com/pemilik"
-
   @TEST_COOP-1984
-  #chatButuhResponPengajuanSewaLabel.feature
   Scenario: Delete All Need Confirmation Booking Request
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -169,6 +106,7 @@ Feature: BnB feature - 2
       | 0890000000332 | Bismillah@01 |
     And owner navigates to owner dashboard
     And user cancel booking
+
     # Scenario: tenant booking kost
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -176,6 +114,7 @@ Feature: BnB feature - 2
       | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
     And tenant booking kost for "today"
     Then tenant should success booking kost
+
     # Scenario: Owner accept booking from tenant
     And user go to mamikos homepage
     And user logs out as a Tenant user
@@ -189,7 +128,7 @@ Feature: BnB feature - 2
 
   @addAndMarkRoomKosGP @COOP-1918 @continue
   #addRoom.feature
-  Scenario: check when owner add and mark room at kos GP
+  Scenario: check when owner add mark room at kos GP
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password  |
