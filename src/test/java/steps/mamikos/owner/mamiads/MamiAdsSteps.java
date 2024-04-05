@@ -214,8 +214,8 @@ public class MamiAdsSteps {
     public void user_click_on_voucher(String button, String voucherTitle) throws InterruptedException {
         String element = null;
         switch (button){
-            case "Lihat Detail": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-detail')]"; break;
-            case "Pakai": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-apply')]"; break;
+            case "Lihat Detail": element = "//*[.='"+ voucherTitle +"']/../following-sibling::*//button[@data-testid='lihatDetailvoucher_btn']"; break;
+            case "Pakai": element = "//*[.='"+ voucherTitle +"']/../following-sibling::*//button[@data-testid='pakaiVoucher_btn']"; break;
         }
         mamiAdsPO.clickOnVoucherOnList(element);
     }
