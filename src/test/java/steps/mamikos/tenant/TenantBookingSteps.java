@@ -196,6 +196,7 @@ public class TenantBookingSteps {
     public void userClickSaveDraftButton() {
         kostDetail.clickSaveDraftButton();
     }
+
     @And("user click back button")
     public void userClickBackButton() {
         kostDetail.clickBackButton();
@@ -469,5 +470,64 @@ public class TenantBookingSteps {
     @And("tenant click on close waiting list button")
     public void tenantClickOnCloseWaitingListButton(){
         kostDetail.clickCloseWaitingListButton();
+    }
+    @Then("tenant see today's date and cannot make booking")
+    public void tenantCannotBookingToday(){
+        kostDetail.dismissFTUE();
+        kostDetail.dateCannotBooking();
+    }
+    @Then("tenant can choose checkin date in the next {string} month")
+    public void tenantCanCheckInNextMonth(String month){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextMonth(month);
+    }
+    @Then("tenant can choose checkin date in the next {string} week")
+    public void tenantCanCheckInNextWeek(String week){
+        kostDetail.dismissFTUE();
+        kostDetail.tenantCanCheckInNextWeek(week);
+    }
+
+    @Then("tenant cant see {string} on booking form")
+    public void tenant_cant_see_on_booking_form(String text){
+        Assert.assertFalse(bookingForm.getCatatanTambahan(text), "appears fasilitas tambahan");
+    }
+    @Then("tenant can see {string} on booking form")
+    public void tenant_can_see_on_booking_form(String text) {
+        bookingForm.getCatatanTambahan(text);
+    }
+
+    @And("tenant input catatan tambahan with {string}")
+    public void tenant_input_catatan_tambahan_with(String text) {
+        bookingForm.inputCatatanTambahan(text);
+    }
+
+    @Then("tenant can see allert addfee")
+    public void tenant_can_see_allert_addfee(){
+        Assert.assertTrue(bookingForm.getSummaryBookingForm(), "not appears allert addfee");
+    }
+
+    @And("tenant click on {string} on booking form")
+    public void tenant_click_on_booking_form(String text){
+        bookingForm.clickTambahBarangButton(text);
+    }
+
+    @When("tenant choose biaya tambahan {string} on booking form")
+    public void tenant_choo_biaya_tambahan_on_booking_form(String text){
+        bookingForm.clickTambahBarangButton(text);
+    }
+
+    @And("tenant click on save button")
+    public void tenant_click_on_save_button(){
+        bookingForm.clickSimpanButton();
+    }
+
+    @And("tenant click on chat pemilik")
+    public void tenant_click_on_vhat_pemilik(){
+        bookingForm.clickChatPemilikButton();
+    }
+
+    @Then("tenant can see tenant description with {string}")
+    public void tenant_can_see_description_with(String text){
+        Assert.assertEquals(bookingForm.getDeskriptionDiri(),text, "description diri is different");
     }
 }

@@ -40,6 +40,7 @@ public class ChatOwnerPO {
     Locator Iunderstand;
     Locator sayaMengertiChatRoom;
     Locator bookingLabel;
+    Locator closeIcon;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -75,6 +76,7 @@ public class ChatOwnerPO {
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
+        closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
     }
 
     /**
@@ -82,7 +84,6 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded(5000.0);
-        playwright.waitFor(ownerChatButton);
         playwright.clickOn(ownerChatButton);
     }
 
@@ -149,6 +150,7 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
+        playwright.hardWait(3000);
         if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
@@ -166,9 +168,18 @@ public class ChatOwnerPO {
         if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
-            return playwright.getText(notPaidFirstRent);
+        playwright.reloadPage();
+        playwright.clickOn(ownerChatButton);
+        String inputText = "Tenant Automation Accept Chat";
+        Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
+        searchChat.fill(inputText);
+        if (nantiSajaButton.isVisible()) {
+            playwright.clickOn(nantiSajaButton);
         }
-
+        page.keyboard().press("Space");
+        playwright.clickOn(chatOnList);
+        return playwright.getText(notPaidFirstRent);
+    }
     /**
      * Get Tenant Name from Booking Details Page
      * @return Tenant Name
@@ -210,7 +221,7 @@ public class ChatOwnerPO {
     public void dismissFTUEMars() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota")).click();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat cara kedua")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
     }
 
@@ -223,8 +234,7 @@ public class ChatOwnerPO {
      * Dismiss FTUE Broadcast
      */
     public void dismissFTUEBroadcast() {
-        page.getByTestId("ftueTooltipStandard").click();
-        page.getByTestId("ftueTooltipComponent").getByRole(AriaRole.BUTTON).click();
+        playwright.clickOn(closeIcon);
     }
 
     /**
@@ -327,7 +337,7 @@ public class ChatOwnerPO {
      *
      */
     public void dismissFTUEMarsKuotaNol() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).click();
+        playwright.clickOn(closeIcon);
     }
 
     /**

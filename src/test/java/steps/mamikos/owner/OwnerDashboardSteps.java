@@ -372,5 +372,20 @@ public class OwnerDashboardSteps {
         ownerDashboardPO.clickOnDaftarGP();
     }
 
+    @Then("owner should have menu {string}")
+    public void owner_should_have_menu(String menu) {
+        if (menu.equalsIgnoreCase("Leads")){
+            Assert.assertTrue(ownerDashboardPO.isLeadsMenuVisible());
+        }
+    }
+    @When("owner click leads menu")
+    public void owner_click_leads_menu() {
+        ownerDashboardPO.clickLeadsMenu();
+    }
+
+    @When("user click {string} on ftue")
+    public void userClickOnFtue(String buttonText) {
+        ownerDashboardPO.clickOnButtonFTUE(buttonText);
+    }
 }
 

@@ -7,9 +7,10 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import data.mamikos.Mamikos;
 import data.payment.Payment;
+import pageobject.tenant.InvoicePO;
 import utilities.PlaywrightHelpers;
 
-public class PaymentPO {
+public class PaymentPO extends InvoicePO {
     Page page;
     private PlaywrightHelpers playwright;
     private Locator paymentSuccessText;
@@ -27,6 +28,7 @@ public class PaymentPO {
 
 
     public PaymentPO(Page page) {
+        super(page);
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.paymentSuccessText = page.getByText("Pembayaran Berhasil").first();
@@ -67,6 +69,14 @@ public class PaymentPO {
         playwright.clickOn(submitBtnForCC);
         playwright.hardWait(3_000.00);
         playwright.reloadPage();
+        var maxReload = 0;
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
     }
 
     /**

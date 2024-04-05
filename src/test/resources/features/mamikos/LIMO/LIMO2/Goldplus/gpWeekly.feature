@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization @LIMO2-staging
+@regression @LIMO2 @listing-monetization @LIMO2-staging @gpWeekly
 Feature: GP Weekly
 
   @TEST_LIMO-3914 @continue

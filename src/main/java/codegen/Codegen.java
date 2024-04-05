@@ -24,6 +24,7 @@ public class Codegen {
 //            loginOwnersini(page);
 //            loginPMS(page);
 //            loginAdminBangkrupux(page);
+//            page.navigate("https://jambu.kerupux.com/cek-properti");
             page.pause();
         }
     }
@@ -75,5 +76,9 @@ public class Codegen {
         page.getByPlaceholder("Email / Phone Number").fill("admin.automation@mamiteam.com");
         page.getByPlaceholder("Password").fill("4dm!nAutomat10n");
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign me in")).click();
+    }
+
+    public static void checkProperty(Page page){
+        page.navigate("https://jambu.kerupux.com/cek-properti");
     }
 }

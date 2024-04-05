@@ -96,7 +96,7 @@ public class BillingTrackerSteps {
     @And("admin edit note {string}")
     public void admin_edit_note(String text) {
         billingTracker.adminEditNote(text);
-
     }
+
 }
 

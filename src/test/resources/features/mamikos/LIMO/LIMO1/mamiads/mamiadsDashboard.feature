@@ -41,7 +41,6 @@ Feature: MamiAds Dashboard
     And user verify the toggle iklan "<adsName>" is "<expectedToggle>"
     And user verify the wording iklan "<adsName>" is "<expectedStatusDesc>"
     And user verify the wording anggaran of iklan "<adsName>" is "<expectedAnggaranDesc>"
-
     Examples:
       | adsName             | currentPosisiIklan | currentToggle | currentStatusDesc                                    | currentAnggaranDesc                                            | actionButton    | messageToast              | expectedPosisiIklan | expectedToggle | expectedStatusDesc                                   | expectedAnggaranDesc                                           |
       | kos jipyo           | tidak-naik         | off           | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Saldo Maksimal                                  | Aktifkan        | Iklan berhasil dinaikkan  | naik                | on             | Posisi iklan telah naik di hasil pencarian properti. | Hari ini terpakai Rp0                                          |
@@ -91,7 +90,6 @@ Feature: MamiAds Dashboard
     And user tick already inhabited checkbox
     And owner click "Simpan"
     And user navigates to mamiads dashboard
-    And owner clicks on coba sekarang button
     Then user verify the wording iklan "Kos Ranise Mamitest Tobelo Halmahera Utara" is "Klik tombol untuk naikkan iklan"
     When user click "off" toggle the "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user click "Aktifkan" button on pop up switch toggle iklan

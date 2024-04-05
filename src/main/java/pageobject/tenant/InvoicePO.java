@@ -22,6 +22,7 @@ public class InvoicePO {
     Locator pakaiVoucherButton;
     Locator totalPembayaran;
     Locator subTotal;
+    Locator biayaLayanan;
     String appliedVoucher;
     Locator toast;
     Locator invoiceSection;
@@ -70,6 +71,7 @@ public class InvoicePO {
     Locator voucherDivSection;
     Locator perDurationPriceText;
     Locator biayaLayananMamikosText;
+    Locator biayaLayananMamikosTextFinal;
     Locator tncInvoiceFullText;
     Locator tncInvoiceText;
     Locator mamipoinToggleButtonOn;
@@ -92,6 +94,7 @@ public class InvoicePO {
         pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         totalPembayaran = page.locator("//*[.='Total Pembayaran']/following-sibling::*").first();
         subTotal = page.locator("//*[.='Sub Total']/following-sibling::*").first();
+        biayaLayanan = page.locator(".collapse-content div:nth-of-type(1) > .discount-text");
         appliedVoucher = "//*[@class='invoice-detail-row-section']//*[contains(text(), '%s')]/following-sibling::*";
         toast = page.locator(".bg-c-toast__content");
         deleteVoucher = page.locator("#invoiceContent .invoice-voucher-switch");
@@ -136,7 +139,8 @@ public class InvoicePO {
         noOvoTextBox = page.getByPlaceholder("08...");
         additionalPriceDivAddOn = page.locator(".collapse.details-collapsible").last();
         voucherDivSection = page.locator("#invoiceVoucherInput #invoiceContent");
-        biayaLayananMamikosText = page.locator("//*[contains(text(), 'Biaya layanan mamikos')]/following-sibling::*").first();
+        biayaLayananMamikosText = page.getByTestId("invoiceBillingRoomContent-admin");
+        biayaLayananMamikosTextFinal = page.getByTestId("invoiceBillingRoomContent-admin").nth(1);
         perDurationPriceText = page.locator("//*[contains(text(), 'Harga Sewa')]/parent::*/following-sibling::*").first();
         tncInvoiceFullText = page.locator(".first-column.column");
         tncInvoiceText = page.getByText("Syarat dan Ketentuan Umum");
@@ -213,6 +217,15 @@ public class InvoicePO {
      */
     public int getSubTotal() {
         return JavaHelpers.extractNumber(playwright.getText(subTotal));
+    }
+
+    /**
+     * Extract the numerical value of the "Biaya Layanan mamirooms" text and return it
+     *
+     * @return int data type
+     */
+    public int getBiayaLayananMamirooms() {
+        return JavaHelpers.extractNumber(playwright.getText(biayaLayanan));
     }
 
     /**
@@ -657,6 +670,15 @@ public class InvoicePO {
      */
     public int getAdminPrice() {
         return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosText));
+    }
+
+    /**
+     * Get admin fee after pay
+     *
+     * @return integer data type of biaya Layanan Mamikos in Rincian Pembayaran
+     */
+    public int getAdminPriceFinal() {
+        return JavaHelpers.extractNumber(playwright.getText(biayaLayananMamikosTextFinal));
     }
 
     /**

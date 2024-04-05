@@ -34,6 +34,8 @@ public class MamiAdsPO {
     private Locator ubahAnggaranInputText;
     private Locator yaGantiButton;
     private Locator beliSaldoBtnPopup;
+    Locator simpanPengaturanButton;
+
     //--- Beli Saldo Mamiads Page ----//
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
@@ -49,8 +51,7 @@ public class MamiAdsPO {
     private Locator listElement;
     private Locator voucherTitleElement;
     //--- Jemput Bola Entry Point ---//
-    private Locator titleJemputBola;
-    private Locator subtitleJemputBola;
+    private Locator entryPointJBSection;
     private Locator labelNewJemputBola;
 
     //--- GP Onboarding Pop - Up ---//
@@ -89,6 +90,7 @@ public class MamiAdsPO {
         this.dibatasiHarianRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Dibatasi Harian")).locator("span").nth(1);
         this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
         this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
+        simpanPengaturanButton = page.getByText("Simpan Pengaturan");
         //--- Beli Saldo Mamiads Page ---//
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
@@ -103,9 +105,8 @@ public class MamiAdsPO {
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
-        //--- voucher owner ---//
-        this.titleJemputBola = page.getByText("Laporan Klik");
-        this.subtitleJemputBola = page.locator("//*[@class='mami-ads-statistic-container']/following-sibling::p");
+        //--- Jemput Bola Entry Point ---//
+        this.entryPointJBSection = page.locator("(//div[@class='mami-ads-statistic-main'])[1]");
         this.labelNewJemputBola = page.getByText("Baru");
 
         //--- GP Onboarding Pop - Up ---//
@@ -366,7 +367,6 @@ public class MamiAdsPO {
      */
     public void navigatesToMamiads() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS, 50000.0, LoadState.LOAD);
-        playwright.bringPageToView(page);
     }
 
     /**
@@ -634,14 +634,18 @@ public class MamiAdsPO {
     /**
      * check entry point on jemput bola title
      */
-    public void isTitleJemputBolaVisible() {
+    public void isTitleJemputBolaVisible(String adsName) {
+        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
+                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'title')]");
         playwright.assertVisible(titleJemputBola);
     }
 
     /**
      * check entry point on jemput bola subtitle
      */
-    public void isSubtitleJemputBolaVisible() {
+    public void isSubtitleJemputBolaVisible(String adsName) {
+        Locator subtitleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
+                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'desc')]");
         playwright.assertVisible(subtitleJemputBola);
     }
 
@@ -657,7 +661,7 @@ public class MamiAdsPO {
      * click on entry point jemput bola
      */
     public void clickOnEntryPointJB() {
-        playwright.clickOn(titleJemputBola);
+        playwright.clickOn(entryPointJBSection);
     }
 
     /**
@@ -668,6 +672,14 @@ public class MamiAdsPO {
         Locator textOnPopUpMamiads = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(textOnPopUp));
         playwright.waitFor(textOnPopUpMamiads);
         return playwright.getText(textOnPopUpMamiads);
+    }
+
+    /**
+     * Click on Simpan Pengaturan button on pop up ubah anggaran
+     *
+     */
+    public void clickOnSimpanPengaturanUbahAnggaran() {
+        playwright.clickOn(simpanPengaturanButton);
     }
 }
 

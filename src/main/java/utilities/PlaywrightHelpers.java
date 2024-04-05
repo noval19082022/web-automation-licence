@@ -452,6 +452,13 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Wait until no network activity
+     */
+    public void waitTillNetworkIdle(){
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+    }
+
+    /**
      * Wait till page loaded
      * @param timeout double data type
      */
@@ -758,6 +765,10 @@ public class PlaywrightHelpers {
 
     public boolean isButtonDisable(Locator locator) {
         return locator.isDisabled();
+    }
+
+    public boolean isButtonEnable(Locator locator) {
+        return locator.isEnabled();
     }
 
     /**

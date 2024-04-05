@@ -18,6 +18,11 @@ public class ManualPayoutSteps {
     private MamikosListInvoicePO invoicePO = new MamikosListInvoicePO(page);
     private ManualPayoutPO manualPayout = new ManualPayoutPO(page);
 
+    @And("admin mamipay visit manual payout page")
+    public void adminMamipayVisitManualPayoutPage() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
+    }
+
     @And("admin want to search invoice number in manual payout menu {string}")
     public void adminWantToSearchInvoiceNumberInManualPayoutMenu(String invoiceNumber) {
         admin.clickOnTextHyperlink("Manual Payout");
@@ -201,5 +206,10 @@ public class ManualPayoutSteps {
     @Then("admin see processing payout message")
     public void adminSeeProcessingPayoutMessage() {
         Assert.assertTrue(manualPayout.isProcessingPayoutMessageVisible(), "Processing Payout message is not display!");
+    }
+
+    @And("admin mamipay want to sort manual payout by {string}")
+    public void adminMamipayWantToSortManualPayoutBy(String sortDirection) {
+        manualPayout.sortPayoutList(sortDirection);
     }
 }

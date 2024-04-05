@@ -121,3 +121,16 @@ Feature: Inquiry and Create Manual Payout
       | uncle.coop1@mamikos.com    | Refund Outside MamiPAY     |
       | uncle.coop2@mamikos.com    | Payout to Tenant           |
       | Automation.pw1@mamikos.com | Additional Payout to Owner |
+
+  @TEST_COOP-1375 @TEST_COOP-1376 @Automated @web-covered
+  Scenario Outline: [Mamipay][Manual Payout] Sort payout list by <sorting direction> data
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag              | email prod              | password  |
+      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
+    And admin mamipay visit manual payout page
+    And admin mamipay want to sort manual payout by "<sorting direction>"
+    Examples:
+      | sorting direction |
+      | newest            |
+      | oldest            |
