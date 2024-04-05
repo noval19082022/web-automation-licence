@@ -635,8 +635,8 @@ public class MamiAdsPO {
      * check entry point on jemput bola title
      */
     public void isTitleJemputBolaVisible(String adsName) {
-        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
-                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'title')]");
+        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@data-testid='mamiadsWidget']" +
+                "//*[@data-testid='mamiadsStatistic']//p[contains(@class,'title')]");
         playwright.assertVisible(titleJemputBola);
     }
 
