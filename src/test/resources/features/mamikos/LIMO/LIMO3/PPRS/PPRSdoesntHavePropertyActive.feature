@@ -40,3 +40,20 @@ Feature: PPRS - Check statistic section when doesnt have property active
       | 0876623622   | qwerty123 |
       | 0876623687   | 12345678  |
       | 081333333335 | 12345678  |
+
+  @TEST_LIMO-4557 @apartementonlyPPRS @continue
+  Scenario: [WEB][Owner Dashboard]Statistic Section on Owner Dashboard when Owner only have apartment and no kost
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password |
+      | 085687543611 | 12345678 |
+    Then owner can see section Laporan Statistik when doesnt have property active
+    And owner can see title for apartement  "Statistik Apartemen Belum Ada" at section statistic
+    And owner can see desc for apartment "Mohon maaf, saat ini data performa untuk apartemen belum dapat ditampilkan. Tunggu update dari kami selanjutnya, ya." at section statistic
+
+  @TEST_LIMO-4731 @apartementonlyPPRS
+  Scenario: [WEB][Laporan Statistic]Statistic Section when Owner only have apartment and no kost
+    When owner accsess statistic page
+    And owner can see Laporan Statistik page when doesnt have property active
+    Then owner can see title for apartement  "Statistik Apartemen Belum Ada" at section statistic
+    And owner can see desc for apartment "Mohon maaf, saat ini data performa untuk apartemen belum dapat ditampilkan. Tunggu update dari kami selanjutnya, ya." at section statistic
