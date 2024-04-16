@@ -88,6 +88,7 @@ public class OwnerDashboardPO {
     private Locator nantiSajaButton;
     private Locator widgetDaftarGoldplus;
     private Locator leadsMenu;
+    private Locator mamiprimeWidget;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -162,6 +163,7 @@ public class OwnerDashboardPO {
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
         daftarGpButton = page.getByTestId("registerGP_btn");
         leadsMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Leads"));
+        mamiprimeWidget = page.getByTestId("membership-prime-card");
     }
 
     /**
@@ -835,5 +837,13 @@ public class OwnerDashboardPO {
     public void clickOnButtonFTUE(String buttonText) {
         Locator buttonTextFtue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
         playwright.clickOn(buttonTextFtue);
+    }
+
+    /**
+     * Wait till locator is visible and click
+     * on mamiprime widget on owner dashboard
+     */
+    public void clickMamiprimeWidget() {
+        playwright.waitForLocatorVisibleAndClickOn(mamiprimeWidget);
     }
 }

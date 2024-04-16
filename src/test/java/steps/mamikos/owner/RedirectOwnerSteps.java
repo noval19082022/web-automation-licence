@@ -59,4 +59,16 @@ public class RedirectOwnerSteps {
         playwright.waitTillPageLoaded();
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_PACKAGE2);
     }
+
+    @Then("user redirected to mamiprime landing page")
+    public void userRedirectedToMamiprimeLandingPage() {
+        playwright.waitTillPageLoaded();
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIPRIME);
+    }
+
+    @Then("user redirected to mamiprime history page")
+    public void userRedirectedToMamiprimeHistoryPage() {
+        playwright.waitTillPageLoaded();
+        assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_HISTORY);
+    }
 }
