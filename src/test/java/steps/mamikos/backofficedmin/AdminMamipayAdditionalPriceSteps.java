@@ -234,4 +234,14 @@ public class AdminMamipayAdditionalPriceSteps {
     public void adminSeeEditBasicAmountButtonDisable (){
         invoiceAdmin.adminSeeEditBasicAmountButtonDisable();
     }
+
+    @And("admin click on add fee button")
+    public void admin_click_on_add_fee_button(){
+        adminMamipay.clickOnAddFee();
+    }
+
+    @Then("admin cant see {string}")
+    public void admin_cant_see(String text){
+        Assert.assertFalse(adminMamipay.isOptionalAddFeeVisible(text), "appears add fee optional title");
+    }
 }

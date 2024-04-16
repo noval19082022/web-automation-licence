@@ -234,4 +234,23 @@ public class AdminMamipayDashboardPO {
         playwright.clickOn(deleteMamipayButton);
         playwright.acceptDialog(deleteMamipayButton);
     }
+
+    //-------------addFee MVP-------------//
+    /**
+     * click on Add fee button on detail fee page
+     */
+    public void clickOnAddFee(){
+        Locator addFeeButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Fee"));
+        playwright.clickOn(addFeeButton);
+    }
+
+    /**
+     * validate Biaya Tambahan Opsional di Kos
+     * @param text
+     * @return text
+     */
+    public Boolean isOptionalAddFeeVisible(String text){
+        Locator optionalAddFee = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(""+text+""));
+        return playwright.waitTillLocatorIsVisible(optionalAddFee, 2000.0);
+    }
 }
