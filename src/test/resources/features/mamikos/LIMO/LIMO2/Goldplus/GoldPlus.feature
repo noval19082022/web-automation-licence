@@ -14,7 +14,7 @@ Feature: Gold Plus
   @TEST_LIMO-146 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
-    When user choose Goldplus package 2
+    And user choose Goldplus package 2
     Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
   @TEST_LIMO-148 @TEST_LIMO-149 @uncheckT&C @continue
