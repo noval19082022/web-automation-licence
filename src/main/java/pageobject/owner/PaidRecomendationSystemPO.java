@@ -17,6 +17,8 @@ public class PaidRecomendationSystemPO {
     private Locator descPropertyNotActive;
     private Locator imagePropertyNotActive;
     private Locator statisticPage;
+    private Locator apartementTitle;
+    private Locator apartementDesc;
 
 
 
@@ -28,6 +30,8 @@ public class PaidRecomendationSystemPO {
         this.descPropertyNotActive = page.getByText("Anda belum punya properti yang terverifikasi. Data properti terverifikasi akan m");
         this.imagePropertyNotActive = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos-not-found"));
         this.statisticPage = page.locator(".statistic-menu");
+        this.apartementTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Statistik Apartemen Belum Ada"));
+        this.apartementDesc = page.getByText("Mohon maaf, saat ini data performa untuk apartemen belum dapat ditampilkan. Tung");
     }
 
     /**
@@ -77,5 +81,21 @@ public class PaidRecomendationSystemPO {
     public boolean isStatisticPageVisible() {
         playwright.waitForElementStateToBe(statisticPage, "visible");
         return playwright.waitTillLocatorIsVisible(statisticPage);
+    }
+
+    /**
+     * get text title for condition apartement only on section laporan statistic owner dashboard
+     * @return String
+     */
+    public String getTitleStatisticApartement() {
+        return playwright.getText(apartementTitle);
+    }
+
+    /**
+     * get text title for condition apartement only on section laporan statistic page
+     * @return String
+     */
+    public String getTitleStatisticDescApartement() {
+        return playwright.getText(apartementDesc);
     }
 }
