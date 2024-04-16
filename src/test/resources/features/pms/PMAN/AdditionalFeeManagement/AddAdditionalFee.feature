@@ -108,3 +108,38 @@
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah enable
+
+    @TEST_PMAN-8882
+      Scenario: Delete master data that are being used in Biaya Tambahan
+      Given admin go to pms singgahsini
+      And admin login pms :
+        | email             | password      |
+        | pman@mamiteam.com | pmanM4m1t34m  |
+      And admin go to additional fee management menu
+      #create master data
+      When admin add new additional fee
+      And admin input nama biaya "Automated Biaya PMAN Deleted"
+      And admin select tipe pembayaran biaya "Tetap"
+      And admin select satuan waktu biaya "Harian"
+      And admin select penyewa bisa pilih mandiri "Ya"
+      And admin select fase penyewa pilih biaya "Booking"
+      And admin submit additional fee
+      #apply in kontrak kerja sama
+      When admin go to Homepage
+      And admin go to detail property "Khusus Automation"
+      And admin see detail kerja sama
+      When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu"
+        | Nama Biaya                   | Ketentuan Bagi Hasil     | Jenis Biaya | Satuan Waktu  | Harga Satuan Waktu |
+        | Automated Biaya PMAN Deleted | Sesuai Basic Commission  | Opsional    | Harian        | 100000             |
+      Then additional fee is created in PMS KK
+        | Nama Biaya                   | Penyewa Bisa Pilih Mandiri | Jenis Biaya | Termasuk di Dalam Harga Sewa  | Tipe Pembayaran Biaya | Ketentuan Bagi Hasil    |
+        | Automated Biaya PMAN Deleted | Ya  Booking                | Opsional    | Tidak                         | Tetap                 | Sesuai Basic Commission |
+      #delete master data
+      When admin go to additional fee management menu
+      And admin delete additional fee "Automated Biaya PMAN Deleted"
+      Then no additional fee master data with name "Automated Biaya PMAN Deleted"
+      #check in kontrak kerja sama
+      When admin go to Homepage
+      And admin go to detail property "Khusus Automation"
+      And admin see detail kerja sama
+      Then additional fee is deleted from Biaya Tambahan table
