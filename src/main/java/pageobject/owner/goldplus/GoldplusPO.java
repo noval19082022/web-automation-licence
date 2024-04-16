@@ -64,6 +64,18 @@ public class GoldplusPO {
     Locator gpPeriodeChoosed;
     Locator favoritLabel;
 
+    //==== Riwayat Goldplus ===//
+    Locator selectTransactionUnpaid;
+    Locator statusDetailTagihan;
+    Locator sectionPackageSelected;
+    Locator sectionDetailBilling;
+    Locator buttonPaidDetailTagihan;
+    Locator selectTranscationPaid;
+    Locator selectTransactionExpired;
+    Locator tabSelesaiRiwayatGP;
+    Locator titleStatusPaid;
+
+
     public GoldplusPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -114,6 +126,14 @@ public class GoldplusPO {
         gpPackageRincianPembayaranDetailTagihan = page.locator(".bg-c-list-item__description");
         gpPeriodeChoosed = page.locator("//div[contains(@class,'-radio--checked')]/following-sibling::*//p[contains(@class,'bg-c-text--body-2')]");
         favoritLabel = page.getByText("Favorit");
+        selectTransactionUnpaid = page.getByTestId("goldplusPaymentUnpaid-0").getByText("Lihat Tagihan");
+        sectionPackageSelected = page.locator(".goldplus-package-detail");
+        sectionDetailBilling = page.locator("//div[@class='goldplus-billing-detail']/div[3]");
+        buttonPaidDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang Rp13.500"));
+        selectTranscationPaid =  page.locator("td").filter(new Locator.FilterOptions().setHasText("Lunas"));
+        selectTransactionExpired = page.locator("td").filter(new Locator.FilterOptions().setHasText("Dibatalkan"));
+        tabSelesaiRiwayatGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
+        titleStatusPaid = page.locator(".bg-c-label");
     }
 
     /**
@@ -742,6 +762,86 @@ public class GoldplusPO {
        }else{
            Mamikos.setGpPeriodeChoosed(playwright.getText(gpPeriodeChoosed));
        }
+    }
 
+
+    /**
+     * Click on transaction with status Unpaid at riwayat goldplus page
+     */
+    public void clickOnTransactionGPUnpaid() {
+        playwright.clickOn(selectTransactionUnpaid);
+    }
+
+    /**
+     * Click on transaction with status paid at riwayat goldplus page
+     */
+    public void clickOnTransactionGPPaid() {
+        playwright.clickOn(selectTranscationPaid);
+    }
+
+    /**
+     * Click on transaction with status expired at riwayat goldplus page
+     */
+    public void clickOnTransactionGPExpired() {
+        playwright.clickOn(selectTransactionExpired);
+    }
+
+    /**
+     * Get text transaction goldplus at detail tagihan page
+     * @return text 'Dibatalkan' and 'Menunggu Pembayaran'
+     */
+    public String statusTransactionGP(String status) {
+        statusDetailTagihan = page.getByText(status);
+        playwright.waitFor(statusDetailTagihan);
+        return playwright.getText(statusDetailTagihan);
+    }
+
+    /**
+     * Get text transaction paid goldplus at detail tagihan page
+     * @return text 'Lunas'
+     */
+    public String statusTransactionPaidGP() {
+        playwright.waitFor(titleStatusPaid);
+        return playwright.getText(titleStatusPaid);
+    }
+
+    /**
+     * Check section paket yang anda pilih is visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean sectionPackageSelectedIsVisible() {
+        return playwright.waitTillLocatorIsVisible(sectionPackageSelected);
+    }
+
+    /**
+     * Check package goldplus at detail tagihan page
+     * @return boolean type, appear true otherwise false
+     */
+    public boolean packageGP(String packageGP) {
+        Locator packageGPDetailTagihan = page.getByText(packageGP);
+        playwright.waitTillLocatorIsVisible(packageGPDetailTagihan);
+        return playwright.waitTillLocatorIsVisible(packageGPDetailTagihan);
+    }
+
+    /**
+     * Check rincian pembayaran is visible at detail tagihan page
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean sectionDetailBillingdIsVisible() {
+        return playwright.waitTillLocatorIsVisible(sectionDetailBilling);
+    }
+
+    /**
+     * Click on button bayar sekarang at detail tagihan page
+     */
+    public void clicOnButtonPaid() {
+        playwright.clickOn(buttonPaidDetailTagihan);
+    }
+
+    /**
+     * Click on tab selesai at riwayat tagihan goldplus
+     */
+    public void clickOnTabSelesaiRiwayatGP() {
+        playwright.clickOn(tabSelesaiRiwayatGP);
     }
 }
