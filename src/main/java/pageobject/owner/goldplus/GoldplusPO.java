@@ -75,6 +75,14 @@ public class GoldplusPO {
     Locator tabSelesaiRiwayatGP;
     Locator titleStatusPaid;
 
+    //==== Pop Up after buy GP weekly ===//
+    Locator imageGPWeeklyPopup;
+    Locator titlePopUpGpWeekly;
+    Locator descPopUpGpWeekyly;
+    Locator buttonNantiWeekly;
+    Locator buttonLihatFiturWeekly;
+
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -134,6 +142,10 @@ public class GoldplusPO {
         selectTransactionExpired = page.locator("td").filter(new Locator.FilterOptions().setHasText("Dibatalkan"));
         tabSelesaiRiwayatGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
         titleStatusPaid = page.locator(".bg-c-label");
+        imageGPWeeklyPopup = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("gp illustration"));
+        titlePopUpGpWeekly = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Selamat bergabung di GoldPlus 1!"));
+        buttonNantiWeekly = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        buttonLihatFiturWeekly = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
     }
 
     /**
@@ -843,5 +855,50 @@ public class GoldplusPO {
      */
     public void clickOnTabSelesaiRiwayatGP() {
         playwright.clickOn(tabSelesaiRiwayatGP);
+    }
+
+    /**
+     * Check image pop weekly is visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean imagePopUpWeeklyIsVisible() {
+        playwright.waitFor(imageGPWeeklyPopup);
+        return playwright.waitTillLocatorIsVisible(imageGPWeeklyPopup);
+    }
+
+    /**
+     * Check button 'Nanti Saja' is visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean buttonNantiSajaWeeklyIsVisible() {
+        return playwright.waitTillLocatorIsVisible(buttonNantiWeekly);
+    }
+
+    /**
+     * Check button 'Lihat Fitur' is visible
+     * @return boolean type, visible true otherwise false
+     */
+    public boolean buttonLihatFiturWeeklyIsVisible() {
+        return playwright.waitTillLocatorIsVisible(buttonLihatFiturWeekly);
+    }
+
+    /**
+     * Get text title pop up weekly
+     * @return text title
+     */
+    public String getTitlePopUpWeekly(String title) {
+        titlePopUpGpWeekly = page.getByText(title);
+        playwright.waitFor(titlePopUpGpWeekly);
+        return playwright.getText(titlePopUpGpWeekly);
+    }
+
+    /**
+     * Get text desc pop up weekly
+     * @return text description
+     */
+    public String getDescPopUpWeekly(String desc) {
+        descPopUpGpWeekyly= page.getByText(desc);
+        playwright.waitFor(descPopUpGpWeekyly);
+        return playwright.getText(descPopUpGpWeekyly);
     }
 }

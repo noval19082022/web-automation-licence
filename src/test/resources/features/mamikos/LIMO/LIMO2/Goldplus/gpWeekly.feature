@@ -33,7 +33,7 @@ Feature: GP Weekly
   @TEST_LIMO-3914 @continue
   Scenario: GoldPlus Weekly Paid - Checking Widget
     Given owner navigates to owner dashboard
-    When owner click close icon pop up
+    And owner click close icon pop up
     Then validate that owner have "GoldPlus 2"
 
  @continue
@@ -60,7 +60,7 @@ Feature: GP Weekly
     And owner navigates to owner dashboard
     And owner should not be able to see the text "Perpanjang paket Goldplus yuk!"
 
-   #reset GP
+    #reset GP
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
@@ -95,10 +95,18 @@ Feature: GP Weekly
     Then owner can see detail tagihan goldplus page with title "Menunggu Pembayaran"
     And owner can see "GoldPlus 1 periode 1 Minggu" at section Paket yang Anda pilih
     And owner can see "GoldPlus 1 (1 Minggu)" at section rincian pembayaran goldplus
-
-    #detail tagihan paid
+    #paid GP from page detail tagihan
     Given owner paid transaction from detail tagihan page
     And payment owner success using ovo as payment method
+
+  @TEST_LIMO-4016 @continue @detailTagihanGoldplus
+  Scenario: [WEB][GP Shorter][Owner Dashboard] Check pop up intercept when buy GP shorter periode
+    Given owner navigates to owner dashboard
+    Then owner can see pop up goldplus with title "Selamat bergabung di GoldPlus 1!"
+    And owner can see pop up golplus with desc "Anda mendapatkan kuota chat tanpa batas dan akses ke fitur-fitur khusus GoldPlus yang berguna untuk pemasaran kos Anda."
+
+  @continue @detailTagihanGoldplus
+  Scenario: check wording at page detail tagihan after paid
     * owner navigates to "/goldplus/payment"
     * owner select transaction paid from history transaction goldplus
     Then owner can see detail tagihan paid goldplus page with title "Lunas"
