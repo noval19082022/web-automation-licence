@@ -19,6 +19,8 @@ public class RoleManagementPO {
     Locator actionAssignMemberButton;
     Locator confirmHapusButton;
     Locator emptyStateCopy;
+    Locator columnNameText;
+    Locator listRole;
 
     //Tambah Role
     Locator roleNameField;
@@ -49,6 +51,8 @@ public class RoleManagementPO {
         backButton = page.locator(".back-button");
         searchField = page.getByPlaceholder("Cari berdasarkan nama role");
         cariButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari"));
+        columnNameText = page.locator("th p");
+        listRole = page.locator("tbody tr");
         resetPermissionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         simpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         checkedPermission = page.locator(".bg-c-checkbox--checked");
@@ -256,6 +260,57 @@ public class RoleManagementPO {
      */
     public String getEmptyState() {
         return playwright.getText(emptyStateCopy);
+    }
+
+    /**
+     * Get Column Name ke-i
+     * @param i index
+     * @return String
+     */
+    public String getColumnName(int i) {
+        return playwright.getText(columnNameText.nth(i));
+    }
+
+    /**
+     * Count total row in list
+     * @return Int
+     */
+    public int countTotalRow() {
+        return playwright.countLocator(listRole);
+    }
+
+    /**
+     * Check is button exist in page
+     * @param buttonName
+     * @return boolean
+     */
+    public boolean isButtonExist(String buttonName) {
+        Locator button = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonName).setExact(true));
+        return playwright.isLocatorVisibleAfterLoad(button,10000.0);
+    }
+
+    /**
+     * Get Action Button Name
+     * @param name
+     * @return String
+     */
+    public String getActionButtonName(String name) {
+        String result = null;
+        if (name.equalsIgnoreCase("Edit")){
+            result = playwright.getText(actionEditButton.first());
+        } else if (name.equalsIgnoreCase("Atur Member")) {
+            result = playwright.getText(actionAssignMemberButton.first());
+        } else if (name.equalsIgnoreCase("Hapus")) {
+            result = playwright.getText(actionHapusButton.first());
+        }
+        return result;
+    }
+
+    /**
+     * Click Action Button
+     */
+    public void clickActionButton() {
+        playwright.clickOn(actionButton.first());
     }
 }
 
