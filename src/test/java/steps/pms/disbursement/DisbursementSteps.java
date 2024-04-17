@@ -186,4 +186,16 @@ public class DisbursementSteps {
         Assert.assertEquals(disbursement.getEmptyStateTitleInDisbursement(), emptyStateTitleInDisbursement, "Empty State Title does not match!");
         Assert.assertEquals(disbursement.getEmptyStateSubtitleInDisbursement(), emptyStateSubtitleInDisbursement, "Empty State Subtitle does not match!");
     }
+    @Then("show all disbursement list")
+    public void show_all_disbursement_list() {
+        Assert.assertFalse(disbursement.isEmptyStateDisbursementListAppear(),"empty list disbursement");
+    }
+    @Then("show empty list disbursmement")
+    public void show_empty_list_disbursmement() {
+        Assert.assertTrue(disbursement.isEmptyStateDisbursementListAppear(),"There are disbursement in list");
+    }
+    @Then("show only disbursment for {string}")
+    public void show_only_disbursment_for(String name) {
+        Assert.assertEquals(disbursement.getPropertyNameinList(),name);
+    }
 }
