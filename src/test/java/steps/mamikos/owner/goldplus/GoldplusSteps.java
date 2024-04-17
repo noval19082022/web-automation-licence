@@ -684,4 +684,19 @@ public class GoldplusSteps {
         goldplus.clickOnTabSelesaiRiwayatGP();
         goldplus.clickOnTransactionGPExpired();
     }
+
+    @Then("owner can see pop up goldplus with title {string}")
+    public void owner_can_see_pop_up_goldplus_with_title(String title) {
+        Assert.assertTrue(goldplus.imagePopUpWeeklyIsVisible(),"image not show");
+        Assert.assertEquals(goldplus.getTitlePopUpWeekly(title),title,"title not equals");
+
+    }
+
+    @Then("owner can see pop up golplus with desc {string}")
+    public void owner_can_see_pop_up_golplus_with_desc(String desc) {
+        Assert.assertTrue(goldplus.buttonLihatFiturWeeklyIsVisible(),"button not visible");
+        Assert.assertTrue(goldplus.buttonNantiSajaWeeklyIsVisible(),"button nanti saja not visible");
+        Assert.assertEquals(goldplus.getDescPopUpWeekly(desc),desc,"description not equals");
+    }
+
 }
