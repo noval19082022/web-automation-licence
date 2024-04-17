@@ -40,8 +40,8 @@ public class MamiprimeSteps {
        mamiprime.clickOnBeliPaketDesc();
     }
 
-    @When("owner accsess mamiprime landing page")
-    public void owner_accsess_mamiprime_landing_page() {
+    @When("owner access mamiprime landing page")
+    public void owner_access_mamiprime_landing_page() {
         mamiprime.navigatesToMamiprime();
     }
 

@@ -8,7 +8,7 @@
       * user login as owner:
         | phone stag | phone prod  | password   |
         | 0890910001 | 0890910001  | qwerty123  |
-      * owner accsess mamiprime landing page
+      * owner access mamiprime landing page
       * owner can see FAQ section
       When user click question "Apa itu layanan MamiPrime?"
       Then user verify answer text "MamiPrime adalah layanan di mana Anda dapat menayangkan iklan kos tempat-tempat strategis dalam platform Mamikos, contohnya di paling atas pada hasil pencarian dengan kata kunci daerah Anda. Iklan kos Anda menjadi semakin mudah ditemukan dan dilihat oleh banyak orang."

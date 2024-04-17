@@ -17,11 +17,11 @@ Feature: Mamiprime Landing Page
     Then owner can see page "Pendaftaran MamiPrime"
 
     #entry point at product description
-    Given owner accsess mamiprime landing page
+    Given owner access mamiprime landing page
     When owner wants to buy mamiprime from product description
     Then owner can see page "Pendaftaran MamiPrime"
 
   @TEST_LIMO-5701 @continue
     Scenario: [WEB][Mamikos Prime][FAQ] FAQ Mamikos Prime Landing Page
-    Given owner accsess mamiprime landing page
+    Given owner access mamiprime landing page
     Then owner can see FAQ section
