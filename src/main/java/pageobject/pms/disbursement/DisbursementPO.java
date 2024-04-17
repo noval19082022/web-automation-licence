@@ -35,6 +35,7 @@ public class DisbursementPO {
     private Locator nextMonth;
     private Locator emptyStateTitle;
     private Locator emptyStateSubtitle;
+    private Locator propertyNameText;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -98,6 +99,7 @@ public class DisbursementPO {
         nextMonth = page.locator("//*[@class='cell month selected']//following-sibling::*");
         emptyStateTitle = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
         emptyStateSubtitle = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan tidak sesuai.");
+        propertyNameText = page.locator(".ss-table tbody tr td:nth-of-type(2)");
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -565,5 +567,21 @@ public class DisbursementPO {
      */
     public String getEmptyStateSubtitleInDisbursement() {
         return playwright.getText(emptyStateSubtitle);
+    }
+
+    /**
+     * Check empty state list disbursement appear?
+     * @return boolean
+     */
+    public boolean isEmptyStateDisbursementListAppear() {
+        return playwright.isLocatorVisibleAfterLoad(emptyStateTitle,5000.0);
+    }
+
+    /**
+     * Get property name in first row
+     * @return String
+     */
+    public String getPropertyNameinList() {
+        return playwright.getText(propertyNameText);
     }
 }
