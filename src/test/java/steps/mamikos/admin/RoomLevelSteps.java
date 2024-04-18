@@ -94,4 +94,23 @@ public class RoomLevelSteps {
     public void page_number_is_active(String no) {
         Assert.assertEquals(roomLevel.getActivePaginationPage(),no);
     }
+    @When("admin add room level {string}")
+    public void admin_add_room_level(String name) {
+        roomLevel.clicksAddRoomLevel();
+        roomLevel.inputsLevelName(name);
+    }
+    @When("set charging fee {string}")
+    public void set_charging_fee(String fee) {
+        roomLevel.inputsChargingFee(fee);
+        roomLevel.clicksSave();
+    }
+    @Then("show charging fee error message {string}")
+    public void show_charging_fee_error_message(String message) {
+        Assert.assertEquals(roomLevel.getErrorMessage(),message);
+    }
+    @When("admin edit room level {string}")
+    public void admin_edit_room_level(String name) {
+        roomLevel.searchLevelName(name);
+        roomLevel.editRoomLevel();
+    }
 }
