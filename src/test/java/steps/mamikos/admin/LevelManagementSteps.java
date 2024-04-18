@@ -97,4 +97,30 @@ public class LevelManagementSteps {
     public void admin_access_menu_sub_menu_of_management_level(String submenu){
         levelManagementPO.clickOnSubMenuOfManagementLevel(submenu);
     }
+    @When("admin add new kost level {string} with charging fee {string}")
+    public void admin_add_new_kost_level_with_charging_fee(String name, String fee) {
+        levelManagementPO.clickAddKostLevel("Kost");
+        levelManagementPO.inputFormKostLevel("level-name", name);
+        levelManagementPO.setKostLevelName(name);
+        levelManagementPO.setChargingFee(fee);
+        levelManagementPO.clickOnSaveButton();
+        levelManagementPO.clickOnButtonPopUpConfirmation("confirm");
+
+    }
+    @Then("show error message pop up {string}")
+    public void show_error_message_pop_up(String message) {
+        Assert.assertEquals(levelManagementPO.getErrorMessagePopUp(),message);
+    }
+    @When("admin edit charging fee to {string}")
+    public void admin_edit_charging_fee_to(String fee) {
+        levelManagementPO.clickEditKostLevel();
+        levelManagementPO.setChargingFee(fee);
+        levelManagementPO.clickOnSaveButton();
+        levelManagementPO.clickOnButtonPopUpConfirmation("confirm");
+    }
+    @When("admin search kost level {string}")
+    public void admin_search_kost_level(String name) {
+        levelManagementPO.searchLevelName(name);
+        levelManagementPO.clickOnSearchButton();
+    }
 }
