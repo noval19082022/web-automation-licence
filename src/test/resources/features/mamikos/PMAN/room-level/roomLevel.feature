@@ -14,13 +14,30 @@ Feature: Add and Edit Room Level
     When admin go to room level menu
     Then room level is not created
 
-  @PMAN-9047
+  @TEST_PMAN-9047
   Scenario: Edit Room Level with Existing Key
     When admin edit room level with existing key "room_level_key"
     Then error message existing key is displayed
     When admin go to room level menu
     And admin search room level "Automation PMAN Existing Key"
     Then the key is not changed
+
+  @TEST_PMAN-3284
+  Scenario: Charging fee can't more than 100%
+    #Add charging fee > 100%
+    Given admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+    When admin go to room level menu
+    And admin add room level "Test Charging Fee"
+    And set charging fee "200"
+    Then show charging fee error message "The charging fee cannot be greater than 100"
+    #Edit charging fee > 100%
+    When admin go to room level menu
+    And admin edit room level "Automation PMAN Existing Key"
+    And set charging fee "200"
+    Then show charging fee error message "The charging fee cannot be greater than 100"
 
   @TEST_PMAN-3286
   Scenario: Update Room Level Without Fill Level Name
