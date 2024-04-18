@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -51,4 +52,40 @@ public class MamiprimeSteps {
         Assert.assertTrue(mamiprime.isPusatBantuansectionisVisible(),"Pusat bantuan section is not visible");
     }
 
+    @Then("owner can see benefit section")
+    public void owner_can_see_benefit_section() {
+        Assert.assertTrue(mamiprime.isBenefitSectionisVisible(), "Benefit section is not visible");
+    }
+
+    @Then("owner can see testimonial section")
+    public void owner_can_see_testimonial_section() {
+        Assert.assertTrue(mamiprime.isTestimonialSectionisVisible(), "Testimonial section is not visible");
+    }
+
+    @Then("owner can see contact section")
+    public void owner_can_see_contact_section() {
+        Assert.assertTrue(mamiprime.isContactSectionisVisible(), "Contact section is not visible");
+    }
+
+    @And("user will see text {string} on landing page mamiprime")
+    public void user_will_see_text_x_on_landing_page_mamiprime(String title) {
+        Assert.assertTrue(mamiprime.textOnLandingPageMamiprime(title), "text does not appear");
+    }
+
+    @And("user will see image on benefit section")
+    public void user_will_see_image_on_benefit_section() {
+        Assert.assertTrue(mamiprime.isFirstBenefitImageVisible(), "first benefit image does not appear");
+        Assert.assertTrue(mamiprime.isSecondBenefitImageVisible(), "second benefit image does not appear");
+        Assert.assertTrue(mamiprime.isThirdBenefitImageVisible(), "third benefit image does not appear");
+    }
+
+    @And("user will see image on product description section")
+    public void user_will_see_image_on_product_description_section() {
+        Assert.assertTrue(mamiprime.isProductDescImageVisible(), "product description image does not appear");
+    }
+
+    @And("user will see CS Button on contact section")
+    public void user_will_see_cs_buton_on_contact_section() {
+        Assert.assertTrue(mamiprime.isCSButtonVisible(), "CS Button does not appear");
+    }
 }

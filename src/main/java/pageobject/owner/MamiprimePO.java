@@ -14,9 +14,18 @@ public class MamiprimePO {
     // Landing Page
     Locator lihatRiwayatButton;
     Locator beliPaketButtonHeader;
+    Locator sectionBenefitPrime;
     Locator beliPaketButtonDesc;
+    Locator sectionTestimonialPrime;
     Locator sectionFAQPrime;
     Locator pusatBantuanPrime;
+    Locator sectionContactPrime;
+    Locator textOnLandingPage;
+    Locator firstBenefitImage;
+    Locator secondBenefitImage;
+    Locator thirdBenefitImage;
+    Locator productDescImage;
+    Locator CSButton;
 
     // Pendaftaran Mamiprime page
     Locator titlePagePendaftaranPrime;
@@ -26,9 +35,17 @@ public class MamiprimePO {
         this.playwright = new PlaywrightHelpers(page);
         lihatRiwayatButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Riwayat"));
         beliPaketButtonHeader = page.getByTestId("prime-landing-page-banner").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Beli Paket"));
+        sectionBenefitPrime = page.getByTestId("prime-landing-page-benefit");
         beliPaketButtonDesc =  page.getByTestId("prime-landing-page-ad-serving").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Beli Paket"));
+        sectionTestimonialPrime = page.getByTestId("prime-landing-page-testimonial");
         sectionFAQPrime = page.locator(".prime-landing-faq");
         pusatBantuanPrime = page.locator(".prime-landing-faq__cta");
+        sectionContactPrime = page.getByTestId("prime-landing-contact");
+        firstBenefitImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("benefit-1"));
+        secondBenefitImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("benefit-2"));
+        thirdBenefitImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("benefit-3"));
+        productDescImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("ad-serving"));
+        CSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi CS Mamikos"));
     }
 
     /**
@@ -114,5 +131,84 @@ public class MamiprimePO {
     public boolean isPusatBantuansectionisVisible() {
         playwright.pageScrollUntilElementIsVisible(pusatBantuanPrime);
         return playwright.waitTillLocatorIsVisible(pusatBantuanPrime);
+    }
+
+    /**
+     * Check is benefit section is visible or not
+     *
+     * @return boolean, true if visible
+     */
+    public boolean isBenefitSectionisVisible() {
+        playwright.pageScrollUntilElementIsVisible(sectionBenefitPrime);
+        return playwright.waitTillLocatorIsVisible(sectionBenefitPrime);
+    }
+
+    /**
+     * Check is testimonial section is visible or not
+     *
+     * @return boolean, true if visible
+     */
+    public boolean isTestimonialSectionisVisible() {
+        playwright.pageScrollUntilElementIsVisible(sectionTestimonialPrime);
+        return playwright.waitTillLocatorIsVisible(sectionTestimonialPrime);
+    }
+
+    /**
+     * Check is hubungi cs mamikos section is visible or not
+     *
+     * @return boolean, true if visible
+     */
+    public boolean isContactSectionisVisible() {
+        playwright.pageScrollUntilElementIsVisible(sectionContactPrime);
+        return playwright.waitTillLocatorIsVisible(sectionContactPrime);
+    }
+
+    /**
+     * Check title and subtitle on mamiprime
+     * @return boolean, true if visible
+     */
+    public boolean textOnLandingPageMamiprime(String subtitleText) {
+        textOnLandingPage = page.getByText(subtitleText).first();
+        return playwright.waitTillLocatorIsVisible(textOnLandingPage);
+    }
+
+    /**
+     * Check first benefit image on mamiprime
+     * @return boolean, true if visible
+     */
+    public boolean isFirstBenefitImageVisible() {
+        return playwright.waitTillLocatorIsVisible(firstBenefitImage);
+    }
+
+    /**
+     * Check second benefit image on mamiprime
+     * @return boolean, true if visible
+     */
+    public boolean isSecondBenefitImageVisible() {
+        return playwright.waitTillLocatorIsVisible(secondBenefitImage);
+    }
+
+    /**
+     * Check third benefit image on mamiprime
+     * @return boolean, true if visible
+     */
+    public boolean isThirdBenefitImageVisible() {
+        return playwright.waitTillLocatorIsVisible(thirdBenefitImage);
+    }
+
+    /**
+     * Check product description image on mamiprime
+     * @return boolean, true if visible
+     */
+    public boolean isProductDescImageVisible() {
+        return playwright.waitTillLocatorIsVisible(productDescImage);
+    }
+
+    /**
+     * Check Hubungi CS Button visible
+     * @return boolean, true if visible
+     */
+    public boolean isCSButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(CSButton);
     }
 }

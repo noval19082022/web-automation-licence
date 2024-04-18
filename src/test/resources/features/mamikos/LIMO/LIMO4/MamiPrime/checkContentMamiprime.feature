@@ -2,15 +2,45 @@
 
   Feature: check content mamiprime at landing page
 
-    @FAQMamiprimecontent
-    Scenario: Check content FAQ at mamiprime
+    @continue @TEST_LIMO-5730
+    Scenario: Check content at mamiprime landing page
       Given user go to mamikos homepage
-      * user login as owner:
+      When user login as owner:
         | phone stag | phone prod  | password   |
         | 0890910001 | 0890910001  | qwerty123  |
-      * owner access mamiprime landing page
-      * owner can see FAQ section
-      When user click question "Apa itu layanan MamiPrime?"
+      And owner access mamiprime landing page
+      Then user will see text "Buat Kos Makin Populer dengan MamiPrime" on landing page mamiprime
+      And user will see text "Layanan yang memaksimalkan jangkauan iklan kos di MAmikos agar bisnis Anda makin optimal." on landing page mamiprime
+      #benefit section
+      And user will see text "Manfaat MamiPrime" on landing page mamiprime
+      And user will see image on benefit section
+      And user will see text "Tampil Menonjol di Tempat Pilihan" on landing page mamiprime
+      And user will see text "Dapat Badge Khusus" on landing page mamiprime
+      And user will see text "Iklan kos Anda makin mencolok dengan ditambahkan badge ketika tayang." on landing page mamiprime
+      And user will see text "Atur Penayangan Kos" on landing page mamiprime
+      And user will see text "Tentukan periode dan tempat tayang yang sesuai dengan kebutuhan Anda." on landing page mamiprime
+      #product section
+      And user will see text "Beragam Tempat Penayangan Iklan" on landing page mamiprime
+      And user will see image on product description section
+      And user will see text "Kata Kunci" on landing page mamiprime
+      And user will see text "Kos Anda tampil di bagian teratas pada hasil pencarian dengan kata kunci terkait daerah kos tersebut. Pendaftaran terbatas!" on landing page mamiprime
+      #testimoni section
+      And user will see text "Kata Pemakai MamiPrime" on landing page mamiprime
+      And user will see text "Totok Untung Tugasto" on landing page mamiprime
+      And user will see text "Kost Wisma Torina Cikarang Pusat" on landing page mamiprime
+      And user will see text "“1 Bulan Pakai Mamikos Prime, 30 Kamar Langsung Terisi!”" on landing page mamiprime
+      And user will see text "Kevin Antonio Ketaren" on landing page mamiprime
+      And user will see text "Kost Daloka Tipe A Kukusan Beji" on landing page mamiprime
+      And user will see text "“Sering Tampil di Daftar Pencarian, Jadi Lebih Banyak yang Menghubungi & Survey”" on landing page mamiprime
+      #contact section
+      And user will see text "Ingin tahu lebih jauh?" on landing page mamiprime
+      And user will see text "Silakan hubungi kami via WhatsApp." on landing page mamiprime
+      And user will see CS Button on contact section
+
+    @FAQMamiprimecontent
+    Scenario: Check content FAQ at mamiprime
+      When owner can see FAQ section
+      And user click question "Apa itu layanan MamiPrime?"
       Then user verify answer text "MamiPrime adalah layanan di mana Anda dapat menayangkan iklan kos tempat-tempat strategis dalam platform Mamikos, contohnya di paling atas pada hasil pencarian dengan kata kunci daerah Anda. Iklan kos Anda menjadi semakin mudah ditemukan dan dilihat oleh banyak orang."
       When user click question "Apakah harga dan promo MamiPrime yang ditawarkan berlaku selamanya?"
       Then user verify answer text "Tidak. Harga dan promo bisa berubah kapanpun tanpa pemberitahuan. Oleh sebab itu, Anda sangat dianjurkan untuk segera bertransaksi sebelum terjadi kenaikan harga maupun perubahan promo."
