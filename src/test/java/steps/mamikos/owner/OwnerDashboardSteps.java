@@ -387,5 +387,10 @@ public class OwnerDashboardSteps {
     public void userClickOnFtue(String buttonText) {
         ownerDashboardPO.clickOnButtonFTUE(buttonText);
     }
+
+    @And("user click on mamiprime widget at owner dashboard")
+    public void user_click_on_mamiprime_widget_at_owner_dashboard() {
+        ownerDashboardPO.clickMamiprimeWidget();
+    }
 }
 

@@ -98,4 +98,23 @@ public class AdminApproveBookingPO {
         playwright.clickOn(priceName);
         return new AdminApproveBookingPO(page);
     }
+
+    /**
+     * click on confirm booking until next button after input room number
+     */
+    public void clickNextOnConfirmBooking(){
+        playwright.clickOn(confirmButton);
+        playwright.clickOn(nextConfirmBooking);
+    }
+
+    /**
+     * click next button after validate pms kk section and batalkan for DP section
+     */
+    public void clickOnNextButonConfirmBooking(){
+        playwright.clickOn(nextConfirmBooking);
+        Locator cancelDPButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Batalkan"));
+        playwright.clickOn(cancelDPButton);
+        playwright.clickOn(nextConfirmBooking);
+        playwright.clickOn(confirmBooking);
+    }
 }

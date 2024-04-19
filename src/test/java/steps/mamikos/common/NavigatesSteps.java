@@ -424,4 +424,10 @@ public class NavigatesSteps {
     public void userNavigateToNearCampusPage() {
         playwright.navigateTo(Mamikos.URL + "/kampus", 30000.0, LoadState.LOAD);
     }
+
+    @When("admin accsess menu whitelist feature")
+    public void admin_accsess_menu_whitelist_feature() {
+        playwright.navigateTo(Mamikos.URL + "/admin/whitelist-features", 30000.0, LoadState.LOAD);
+    }
+
 }

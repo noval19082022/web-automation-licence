@@ -65,8 +65,10 @@ public class AddAdditionalFeePMSKKSteps {
                 satuanWaktu = addFee.get(0).get("Satuan Waktu");
 
                 addAdditionalFeePMSKK.selectsJenisBiaya(jenisBiaya);
-                addAdditionalFeePMSKK.isAutoSelectsBiayaTermasukHargaSewaChecked(biayaTermasukHargaSewa);
-                addAdditionalFeePMSKK.isAutoSelectsPengaturanRincianSewa(pengaturanDiRincianSewa);
+                if (jenisBiaya.equalsIgnoreCase("Wajib")){
+                    addAdditionalFeePMSKK.isAutoSelectsBiayaTermasukHargaSewaChecked(biayaTermasukHargaSewa);
+                    addAdditionalFeePMSKK.isAutoSelectsPengaturanRincianSewa(pengaturanDiRincianSewa);
+                }
                 addAdditionalFeePMSKK.selectsSatuanWaktu(satuanWaktu);
                 addAdditionalFeePMSKK.inputsHarga(hargaSatuanWaktu);
             } else if (data.equalsIgnoreCase("Satuan Besaran")) {

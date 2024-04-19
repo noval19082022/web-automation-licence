@@ -8,6 +8,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Given;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
@@ -636,4 +637,66 @@ public class GoldplusSteps {
     public void userWillSeeThatTheGoldplusPackageOnRincianPembayaranDetailTagihan() {
         Assert.assertEquals(goldplus.getGpPackageRincianPembaranDetailTagihan(), Mamikos.getGpPackageChoosed() + " (" + Mamikos.getGpPeriodeChoosed() + ")");
     }
+
+    //------ GP Weekly------//
+    @When("owner select transaction unpaid from history transaction goldplus")
+    public void owner_select_transaction_unpaid_from_history_transaction_goldplus() {
+        goldplus.clickOnTransactionGPUnpaid();
+    }
+
+    @Then("owner can see detail tagihan goldplus page with title {string}")
+    public void owner_can_see_detail_tagihan_goldplus_page_with_title(String status) {
+        Assert.assertEquals(goldplus.statusTransactionGP(status),status,"status not equals");
+    }
+
+
+    @Then("owner can see detail tagihan paid goldplus page with title {string}")
+    public void owner_can_see_detail_tagihan_paid_goldplus_page_with_title(String status) {
+       Assert.assertEquals(goldplus.statusTransactionPaidGP(),status,"status paid not show");
+    }
+
+    @Then("owner can see {string} at section Paket yang Anda pilih")
+    public void owner_can_see_at_section_paket_yang_anda_pilih(String packageGP) {
+       Assert.assertTrue(goldplus.sectionPackageSelectedIsVisible(),"section not visible");
+       Assert.assertTrue(goldplus.packageGP(packageGP),"package GP not show");
+
+    }
+
+    @Then("owner can see {string} at section rincian pembayaran goldplus")
+    public void owner_can_see_at_section_rincian_pembayaran_goldplus(String packageGP) {
+        Assert.assertTrue(goldplus.sectionDetailBillingdIsVisible(),"section not visible");
+        Assert.assertTrue(goldplus.packageGP(packageGP),"package GP not show");
+    }
+
+    @Given("owner paid transaction from detail tagihan page")
+    public void owner_paid_transaction_from_detail_tagihan_page() {
+        goldplus.clicOnButtonPaid();
+    }
+
+    @Given("owner select transaction paid from history transaction goldplus")
+    public void owner_select_transaction_paid_from_history_transaction_goldplus() {
+       goldplus.clickOnTabSelesaiRiwayatGP();
+       goldplus.clickOnTransactionGPPaid();
+    }
+
+    @Then("owner select transaction expired from history transaction goldplus")
+    public void owner_select_transaction_expired_from_history_transaction_goldplus() {
+        goldplus.clickOnTabSelesaiRiwayatGP();
+        goldplus.clickOnTransactionGPExpired();
+    }
+
+    @Then("owner can see pop up goldplus with title {string}")
+    public void owner_can_see_pop_up_goldplus_with_title(String title) {
+        Assert.assertTrue(goldplus.imagePopUpWeeklyIsVisible(),"image not show");
+        Assert.assertEquals(goldplus.getTitlePopUpWeekly(title),title,"title not equals");
+
+    }
+
+    @Then("owner can see pop up golplus with desc {string}")
+    public void owner_can_see_pop_up_golplus_with_desc(String desc) {
+        Assert.assertTrue(goldplus.buttonLihatFiturWeeklyIsVisible(),"button not visible");
+        Assert.assertTrue(goldplus.buttonNantiSajaWeeklyIsVisible(),"button nanti saja not visible");
+        Assert.assertEquals(goldplus.getDescPopUpWeekly(desc),desc,"description not equals");
+    }
+
 }

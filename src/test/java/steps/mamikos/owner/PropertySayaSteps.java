@@ -1063,4 +1063,10 @@ public class PropertySayaSteps {
     public void owner_can_see_button_update_kamar() {
         Assert.assertTrue(propertySaya.isButtonUpdateVisible(), "button not visible");
     }
+
+    @When("owner can see favorited section")
+    public void owner_can_see_favorited_section() {
+        Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
+
+    }
 }
