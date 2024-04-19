@@ -30,6 +30,12 @@ public class MamiprimePO {
     // Pendaftaran Mamiprime page
     Locator titlePagePendaftaranPrime;
 
+    // Popup Beli Paket
+    Locator titleBelumAdaPropertiPopup;
+    Locator subtitleBelumAdaPropertiPopup;
+    Locator tambahKosButton;
+    Locator nantiSajaButton;
+
     public MamiprimePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -46,6 +52,10 @@ public class MamiprimePO {
         thirdBenefitImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("benefit-3"));
         productDescImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("ad-serving"));
         CSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi CS Mamikos"));
+        titleBelumAdaPropertiPopup = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda Belum Dapat Mendaftar MamiPrime"));
+        subtitleBelumAdaPropertiPopup = page.getByText("Tambahkan properti kos aktif dahulu agar dapat bergabung dengan MamiPrime.");
+        tambahKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Kos"));
+        nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
     }
 
     /**
@@ -210,5 +220,37 @@ public class MamiprimePO {
      */
     public boolean isCSButtonVisible() {
         return playwright.waitTillLocatorIsVisible(CSButton);
+    }
+
+    /**
+     * get text title on popup belum ada properti aktif
+     * @return boolean, true if visible
+     */
+    public boolean getTitleBelumAdaProperti() {
+        return playwright.waitTillLocatorIsVisible(titleBelumAdaPropertiPopup);
+    }
+
+    /**
+     * get text subtitle on popup belum ada properti aktif
+     * @return boolean, true if visible
+     */
+    public boolean getSubtitleBelumAdaProperti() {
+        return playwright.waitTillLocatorIsVisible(subtitleBelumAdaPropertiPopup);
+    }
+
+    /**
+     * check nanti saja button visible on popup
+     * @return boolean, true if visible
+     */
+    public boolean isNantiSajaBtnVisible() {
+        return playwright.waitTillLocatorIsVisible(nantiSajaButton);
+    }
+
+    /**
+     * check tambah kos button visible on popup
+     * @return boolean, true if visible
+     */
+    public boolean isTambahKosBtnVisible() {
+        return playwright.waitTillLocatorIsVisible(tambahKosButton);
     }
 }
