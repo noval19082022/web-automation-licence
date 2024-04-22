@@ -2,6 +2,7 @@ package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -22,6 +23,8 @@ public class KostListSteps {
     private String kostPMANList = "src/test/resources/testdata/bangkerupuxAdmin/kostList.properties";
     private String regularLevel = JavaHelpers.getPropertyValue(kostLevel, "kosLevelRegular_" + ENV);
     private String kostPMAN = JavaHelpers.getPropertyValue(kostPMANList, "kostPMAN");
+    private String roomListStaging = JavaHelpers.getPropertyValue(kostPMANList, "roomListStaging");
+    private String roomListProd = JavaHelpers.getPropertyValue(kostPMANList, "roomListProd");
 
     @Then("system displaying content of page kost list")
     public void system_displaying_content_of_page_kost_list(){
@@ -50,9 +53,13 @@ public class KostListSteps {
         Assert.assertTrue(kostList.pageNumberButtonIsActive(pageNumber).contains("active"), "Button is not active");
     }
 
-    @When("admin search kost by name {string}")
-    public void admin_search_kost_by_name(String kostName){
-        kostList.searchKostName(kostName);
+    @When("admin search kost by name")
+    public void admin_search_kost_by_name(){
+        if (Mamikos.ENV.equalsIgnoreCase("prod")){
+            kostList.searchKostName(roomListProd);
+        } else {
+            kostList.searchKostName(roomListStaging);
+        }
     }
 
     @When("admin change level to {string} on Edit Kost Level")
