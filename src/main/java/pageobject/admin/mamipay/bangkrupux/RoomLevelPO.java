@@ -30,6 +30,7 @@ public class RoomLevelPO {
     private Locator columnNameText;
     private Locator paginationPageText;
     private Locator activePaginationPageText;
+    private Locator levelNameData;
 
     public RoomLevelPO(Page page){
         this.page = page;
@@ -54,6 +55,7 @@ public class RoomLevelPO {
         menuTitleText = page.locator(".box-header h3");
         columnNameText = page.locator("th");
         activePaginationPageText = page.locator(".page-item.active span");
+        levelNameData = page.locator("tr td:nth-of-type(2)");
     }
 
     /**
@@ -220,5 +222,44 @@ public class RoomLevelPO {
     public String getActivePaginationPage() {
         playwright.pageScrollInView(activePaginationPageText);
         return playwright.getText(activePaginationPageText);
+    }
+
+    /**
+     * Get String Level Name Data
+     * @return String Level Name Data
+     */
+    public String getLevelName() {
+        return playwright.getText(roomLevelRow);
+    }
+
+    /**
+     * Clicks Search Button
+     */
+    public void clicksSearchButton() {
+        playwright.clickOn(searchBtn);
+    }
+
+    /**
+     * Get Total Data in Level Name Coloumn
+     * @return int Total
+     */
+    public int getTotalLevelNameData(){
+        return playwright.getLocators(levelNameData).size();
+    }
+
+    /**
+     * Get String All Data in Level Name Coloumn
+     * @param levelName
+     * @return String All Data
+     */
+    public String getAllLevelNameData(int levelName) {
+        return playwright.getText(levelNameData.nth(levelName));
+    }
+
+    /**
+     * Clear Keyword in Room Level Search Bar
+     */
+    public void clearKeywordInSearchBar() {
+        playwright.clearText(searchBar);
     }
 }

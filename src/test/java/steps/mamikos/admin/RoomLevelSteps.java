@@ -64,6 +64,33 @@ public class RoomLevelSteps {
     public void admin_search_room_level(String name) {
         roomLevel.searchLevelName(name);
     }
+
+    @Then("search result {string} is displayed")
+    public void search_result_is_displayed(String result){
+        Assert.assertEquals(roomLevel.getLevelName(), result, "The Result does not Match!");
+        System.out.println(roomLevel.getLevelName());
+    }
+
+    @When("admin clear keyword in Room Level search bar")
+    public void admin_clear_keyword_in_Room_Level_search_bar(){
+        roomLevel.clearKeywordInSearchBar();
+    }
+
+    @When("admin clicks search button")
+    public void admin_clicks_search_button(){
+        roomLevel.clicksSearchButton();
+    }
+
+    @Then("all data in Room Level is displayed")
+    public void all_data_in_Room_level_is_displayed(){
+        int totalLevelNameData = roomLevel.getTotalLevelNameData();
+
+        for (int i=0; i<totalLevelNameData; i++){
+            Assert.assertEquals(roomLevel.getAllLevelNameData(i), roomLevel.getAllLevelNameData(i), "All Data is Empty!");
+            System.out.println(roomLevel.getAllLevelNameData(i));
+        }
+    }
+
     @When("admin edit room level with empty level name")
     public void admin_edit_room_level_with_empty_level_name() {
         roomLevel.editRoomLevel();
@@ -93,5 +120,24 @@ public class RoomLevelSteps {
     @Then("page number {string} is active")
     public void page_number_is_active(String no) {
         Assert.assertEquals(roomLevel.getActivePaginationPage(),no);
+    }
+    @When("admin add room level {string}")
+    public void admin_add_room_level(String name) {
+        roomLevel.clicksAddRoomLevel();
+        roomLevel.inputsLevelName(name);
+    }
+    @When("set charging fee {string}")
+    public void set_charging_fee(String fee) {
+        roomLevel.inputsChargingFee(fee);
+        roomLevel.clicksSave();
+    }
+    @Then("show charging fee error message {string}")
+    public void show_charging_fee_error_message(String message) {
+        Assert.assertEquals(roomLevel.getErrorMessage(),message);
+    }
+    @When("admin edit room level {string}")
+    public void admin_edit_room_level(String name) {
+        roomLevel.searchLevelName(name);
+        roomLevel.editRoomLevel();
     }
 }

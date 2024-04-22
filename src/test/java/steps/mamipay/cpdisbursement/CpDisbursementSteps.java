@@ -364,6 +364,10 @@ public class CpDisbursementSteps {
     public void Tambahkan_button_is_disable(){
         Assert.assertTrue(cpdisbursement.isTambahkanBtnDisable(), "Tambahkan button is enable!");
     }
+    @Then("Tambahkan button is enable")
+    public void tambahkan_button_is_enable() {
+        Assert.assertFalse(cpdisbursement.isTambahkanBtnDisable(),"Tambahkan Button is disable!");
+    }
 
     @When("admin clicks Transfer button in one of list data transaction")
     public void admin_clicks_Transfer_button_in_one_of_list_data_transaction(){

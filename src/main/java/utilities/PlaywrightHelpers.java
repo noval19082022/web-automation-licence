@@ -340,6 +340,14 @@ public class PlaywrightHelpers {
         return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText).setExact(exact));
     }
 
+    /**
+     * Get total locator found
+     * @param locator
+     */
+    public int countLocator(Locator locator){
+        return locator.count();
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\

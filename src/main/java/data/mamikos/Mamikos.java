@@ -84,6 +84,8 @@ public class Mamikos {
     public static final String HOMEPAGE_LCT = JavaHelpers.getPropertyValue(MAMIKOS, "lctUrl_"+ENV);
     public static final String RULE_ENTER_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "rulesEnterKos");
     public static final String MAMIPRIME_PENDAFTARAN = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimePendaftaran");
+    public static final String MAMIPRIME = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprime");
+    public static final String MAMIPRIME_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "historyMamiprime");
 
     @Setter @Getter
     private static  String propertyKosName;
