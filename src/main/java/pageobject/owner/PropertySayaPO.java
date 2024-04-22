@@ -188,6 +188,20 @@ public class PropertySayaPO {
     Locator imageHistoryZero;
     Locator rejectApartementText;
     Locator updateKamarButtonApart;
+    Locator backgroundImageHover;
+    Locator ubahFotoHover;
+    Locator viewPhotoHover;
+    Locator closePhotoHover;
+    Locator hoverButtonsOnPhoto;
+    Locator deletePhotoHover;
+    Locator movePhotoHover;
+    Locator lanjutkanButtonMovePhoto;
+    Locator toastMessageNotSelectedPhoto;
+    Locator selectPhotoToMoved;
+    Locator pindahkanPhotoButton;
+    Locator toastMessageNotSelectDestinationPhoto;
+    Locator destinationPhotoMoved;
+    Locator destinationPhotoRoomMoved;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -332,6 +346,20 @@ public class PropertySayaPO {
         imageHistoryZero = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("history_zero"));
         rejectApartementText = page.getByText("Alasan ditolak :");
         updateKamarButtonApart = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Kamar & Harga"));
+        backgroundImageHover = page.locator(".preview__menu-background");
+        ubahFotoHover = page.getByText("camera Ubah Foto");
+        viewPhotoHover = page.getByText("visible Lihat Foto");
+        closePhotoHover = page.locator(".mdi-close");
+        hoverButtonsOnPhoto = page.locator(".preview__menu");
+        deletePhotoHover = page.getByText("delete Hapus Foto");
+        movePhotoHover = page.getByText("sorting Pindahkan Foto");
+        lanjutkanButtonMovePhoto = page.locator("button").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Lanjutkan$")));
+        selectPhotoToMoved = page.locator("label span").first();
+        pindahkanPhotoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pindahkan"));
+        toastMessageNotSelectedPhoto = page.getByText("Pilih foto terlebih dahulu");
+        toastMessageNotSelectDestinationPhoto = page.locator("div").filter(new Locator.FilterOptions().setHasText("Pilih section tujuan terlebih dahulu")).nth(3);
+        destinationPhotoMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto tampilan dalam bangunan")).locator("span").nth(1);
+        destinationPhotoRoomMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto dalam kamar")).locator("span").nth(1);
     }
 
     /**
@@ -2218,5 +2246,117 @@ public class PropertySayaPO {
      */
     public boolean isButtonUpdateVisible() {
         return playwright.waitTillLocatorIsVisible(updateKamarButtonApart);
+    }
+
+    /**
+     * Ubah foto from hover text
+     *
+     */
+    public void ubahFotoKosFromHover() {
+        String imagePath = "src/main/resources/images/kos tampak depan.jpg";
+        FileChooser fileChooser = page.waitForFileChooser(() -> ubahFotoHover.click());
+        fileChooser.setFiles(Paths.get(imagePath));
+        playwright.waitTillLocatorIsVisible(ubahFotoHover);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Lihat photo from hover text
+     *
+     */
+    public void viewPhotoFromHover() {
+        playwright.clickOn(viewPhotoHover);
+        playwright.clickOn(closePhotoHover);
+    }
+
+    /**
+     * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     *
+     */
+    public void hoverPhoto() {
+        backgroundImageHover.hover();
+    }
+
+    /**
+     * Verify the button hover is visible
+     * @return boolean
+     */
+    public boolean isButtonHoverOnPhotoVisible() {
+        return playwright.isLocatorVisibleAfterLoad(hoverButtonsOnPhoto, 3000.0);
+    }
+
+    /**
+     * Click Delete Photo from hover
+     *
+     */
+    public void clickOnDeletePhotoFromHover() {
+        playwright.clickOn(deletePhotoHover);
+        playwright.hardWait(2000.0);
+    }
+
+    /**
+     * Click pindahkan photo from hover
+     *
+     */
+    public void clickOnMovePhotoHover() {
+        playwright.clickOn(movePhotoHover);
+    }
+
+    /**
+     * Click lanjutkan button while pindahkan photo
+     *
+     */
+    public void clickOnLanjutkanMovePhoto() {
+        playwright.clickOn(lanjutkanButtonMovePhoto);
+    }
+
+    /**
+     * Verify the toast message when photo not selected if will be moved
+     * @return boolean
+     *
+     */
+    public boolean getToastNotSelectedPhoto() {
+        return playwright.waitTillLocatorIsVisible(toastMessageNotSelectedPhoto, 3000.0);
+    }
+
+    /**
+     * Select the photo will be moved
+     *
+     */
+    public void selectPhotoToMoved() {
+        playwright.clickOn(selectPhotoToMoved);
+    }
+
+    /**
+     * Click on pindahkan button
+     *
+     */
+    public void clickOnPindahkanPhoto() {
+        playwright.clickOn(pindahkanPhotoButton);
+    }
+
+    /**
+     * Get toast message while not selected the destinaion photo on pindahkan photo steps
+     * @return boolean
+     *
+     */
+    public boolean getToastNotSelectDestinationPhoto() {
+        return playwright.waitTillLocatorIsVisible(toastMessageNotSelectDestinationPhoto, 3000.0);
+    }
+
+    /**
+     * Select the destinaion photo kos on pindahkan photo steps
+     *
+     */
+    public void selectDestinationPhoto() {
+        playwright.clickOn(destinationPhotoMoved);
+    }
+
+    /**
+     * Select the destination room photo on pindahkan photo step
+     *
+     */
+    public void selectDestinationPhotoRoom() {
+        playwright.clickOn(destinationPhotoRoomMoved);
     }
 }
