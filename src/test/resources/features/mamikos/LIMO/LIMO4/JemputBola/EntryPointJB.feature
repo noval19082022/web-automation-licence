@@ -1,8 +1,8 @@
 @regression @LIMO4
 Feature: Entry Point Jemput Bola
 
-  @TEST_LIMO-4960 @TEST_LIMO-4953 @TEST_LIMO-4954 @TEST_LIMO-4959
-  Scenario Outline: Check entry point jemput bola apartment and kost mamiads on, off & full
+  @TEST_LIMO-4960 @TEST_LIMO-4953 @TEST_LIMO-4954 @TEST_LIMO-4958 @TEST_LIMO-4959
+  Scenario Outline: Check entry point jemput bola apartment and kost mamiads on, off, full & reach daily limit
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod  | password   |
@@ -11,11 +11,33 @@ Feature: Entry Point Jemput Bola
     And user close mamiads onboarding popup
     Then user will see entry point jemput bola for "<ads name>"
     Examples:
-      | ads name                                |
-      | Apart Exfo Mask                         |
-      | Kost Test Mamiads On Agung Tanggamus    |
-      | Kost Test Mamiads Off Agung Tanggamus   |
-      | Kost Test Full Occupied Agung Tanggamus |
+      | ads name                                      |
+      | Apart Exfo Mask                               |
+      | Kost Test Mamiads On Agung Tanggamus          |
+      | Kost Test Mamiads Off Agung Tanggamus         |
+      | Kost Test Full Occupied Agung Tanggamus       |
+      | Kost Test Reach Daliy Budget Agung Tanggamus  |
+
+  @TEST_LIMO-4955
+  Scenario: Check entry point when mamiAds saldo < 5000
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password     |
+      | 082320240417 | 082320240417  | qwerty123    |
+    And owner navigate to mamiads dashboard
+    And user close mamiads onboarding popup
+    Then verify the saldo mamiads with condition lessThan 5000
+    And user will see entry point jemput bola for "Kost AT Mamiads Insufficient Getasan Semarang"
+
+  @TEST_LIMO-5067
+  Scenario: Check entry point if listing never active ads
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password     |
+      | 082220240417 | 082220240417  | qwerty123    |
+    And owner navigate to mamiads dashboard
+    And user close mamiads onboarding popup
+    Then user will see entry point jemput bola for "Kost AT Never Active Ads Kedungjati Grobogan"
 
     @TEST_LIMO-6555
     Scenario:Show label "baru" for this section when owner haven't visit laporan klik

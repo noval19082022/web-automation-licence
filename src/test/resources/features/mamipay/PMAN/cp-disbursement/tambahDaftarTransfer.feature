@@ -2,6 +2,30 @@
 
 Feature: CP Disbursement - Tambah Daftar Transfer
 
+  @TEST_PMAN-3326 @continue
+  Scenario: Input Invalid property
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+    And admin open menu CP Disbursement
+    And admin tambah data transfer
+    And admin search property "ABC" in tambah data transfer
+    Then error message "Mohon periksa kembali nama/level kos" should occur in nama property field
+    Then Tambahkan button is disable
+
+  @TEST_PMAN-3325
+  Scenario: Input Valid property
+    When admin search property "khu" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    Then transfer information should auto fill
+      | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik |
+      | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          |
+    When admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
+    Then Tambahkan button is enable
+
   @TEST_PMAN-3328 @continue
   Scenario: Change invalid to valid property
     Given admin go to mamikos mamipay admin

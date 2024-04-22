@@ -188,6 +188,7 @@ public class PropertySayaPO {
     Locator imageHistoryZero;
     Locator rejectApartementText;
     Locator updateKamarButtonApart;
+
     Locator backgroundImageHover;
     Locator ubahFotoHover;
     Locator viewPhotoHover;
@@ -202,6 +203,8 @@ public class PropertySayaPO {
     Locator toastMessageNotSelectDestinationPhoto;
     Locator destinationPhotoMoved;
     Locator destinationPhotoRoomMoved;
+
+    Locator favoritedSection;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -360,6 +363,7 @@ public class PropertySayaPO {
         toastMessageNotSelectDestinationPhoto = page.locator("div").filter(new Locator.FilterOptions().setHasText("Pilih section tujuan terlebih dahulu")).nth(3);
         destinationPhotoMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto tampilan dalam bangunan")).locator("span").nth(1);
         destinationPhotoRoomMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto dalam kamar")).locator("span").nth(1);
+        favoritedSection= page.getByText("Difavoritkan 0");
     }
 
     /**
@@ -2358,5 +2362,13 @@ public class PropertySayaPO {
      */
     public void selectDestinationPhotoRoom() {
         playwright.clickOn(destinationPhotoRoomMoved);
+    }
+
+     /**
+     * check section Difavoritkan is visible
+     * @return locator
+     */
+    public boolean isFavoritedSectionVisible() {
+        return playwright.waitTillLocatorIsVisible(favoritedSection);
     }
 }

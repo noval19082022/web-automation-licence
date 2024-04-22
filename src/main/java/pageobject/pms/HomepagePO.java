@@ -516,6 +516,7 @@ public class HomepagePO {
      * admin click on ya simpan button
      */
     public void clickOnYaSimpanButton() {
+        playwright.hardWait(100);
         playwright.clickOn(yaSimpanButton);
     }
 
@@ -1057,5 +1058,17 @@ public class HomepagePO {
      */
     public int getTotalFilter() {
         return Integer.parseInt(totalFilter.textContent().trim());
+    }
+
+    //-----------add fee MVP----------//
+    /**
+     * get empty state text on pms
+     * @param text
+     * @return text example : Tidak ada biaya tambahan yang tersedia di kos ini.
+     */
+    public Boolean getEmptyState(String text){
+        Locator emptyPmsKKText = page.locator("//p[normalize-space()='" +text+ "']");
+        playwright.pageScrollInView(emptyPmsKKText);
+        return playwright.waitTillLocatorIsVisible(emptyPmsKKText,2000.0);
     }
 }

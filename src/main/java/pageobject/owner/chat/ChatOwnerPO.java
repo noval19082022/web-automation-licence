@@ -41,6 +41,7 @@ public class ChatOwnerPO {
     Locator sayaMengertiChatRoom;
     Locator bookingLabel;
     Locator closeIcon;
+    Locator lihatFiturFTUEJB;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -77,6 +78,7 @@ public class ChatOwnerPO {
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
         closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        lihatFiturFTUEJB = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
     }
 
     /**
@@ -282,7 +284,6 @@ public class ChatOwnerPO {
     public void dismissFTUEMarsGPAndBroadCast() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?")).click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
-        page.getByRole(AriaRole.TOOLTIP, new Page.GetByRoleOptions().setName("Baru! Anda bisa menawarkan kos ke banyak orang lewat Broadcast Chat.")).getByRole(AriaRole.BUTTON).click();
     }
 
     /**
@@ -379,5 +380,14 @@ public class ChatOwnerPO {
      */
     public String getBookingStatusLabel() {
         return playwright.getText(bookingLabel);
+    }
+
+    /**
+     * click on lihat button on JB coachmark
+     */
+    public void dismissFTUEJemputBola() {
+        playwright.clickOn(lihatFiturFTUEJB);
+        page.goBack();
+        clickChatOwner();
     }
 }

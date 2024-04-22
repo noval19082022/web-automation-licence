@@ -418,5 +418,11 @@ public class HomepageSteps {
     public void the_system_is_displaying_reset_filter(){
         Assert.assertEquals(homepage.getTotalFilter(), 1, "Total filter does not match!");
     }
+
+    //-------addfee mvp--------//
+    @Then("admin can see {string}")
+    public void admin_can_see_(String text){
+        homepage.getEmptyState(text);
+    }
 }
 

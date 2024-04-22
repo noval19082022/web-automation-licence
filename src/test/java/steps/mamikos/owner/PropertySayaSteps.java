@@ -1106,4 +1106,9 @@ public class PropertySayaSteps {
         propertySaya.selectDestinationPhotoRoom();
         propertySaya.clickOnPindahkanPhoto();
     }
+
+    @When("owner can see favorited section")
+    public void owner_can_see_favorited_section() {
+        Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
+    }
 }
