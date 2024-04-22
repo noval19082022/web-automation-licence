@@ -1,4 +1,4 @@
-@regression @pman @roomList
+@regression @pman @roomList @pman-prod
 
   Feature: Room List Feature
 
