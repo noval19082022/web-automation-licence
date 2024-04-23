@@ -16,3 +16,13 @@ Feature: Purchase Mamiprime
       | 082120240419  |
       | 082020240419  |
       | 082220240419  |
+
+  @TEST_LIMO-5769
+  Scenario: [WEB][Mamikos Prime][Beli Paket] Owner only have apartment active
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password   |
+      | 082320240418 | 082320240418 | qwerty123  |
+    And user click on mamiprime widget at owner dashboard
+    And owner wants to buy mamiprime from header
+    Then user will see pop up doesnt have property on mamiprime
