@@ -24,6 +24,9 @@ public class RoomListPO {
     Locator roomLevelTable;
     Locator roomNameTable;
     Locator roomListPage;
+    Locator floorTable;
+    Locator occupiedTable;
+    Locator levelTable;
 
     public RoomListPO(Page page){
         this.page = page;
@@ -150,5 +153,54 @@ public class RoomListPO {
             }
         }
         return result;
+    }
+
+    /**
+     * Get Integer Total Room Name data in Table
+     * @return Integer Total Room Name data
+     */
+    public int getTotalRoomName(){
+        roomNameTable = page.locator("tr td:nth-of-type(2)");
+        return playwright.getLocators(roomNameTable).size();
+    }
+
+    /**
+     * Get String Room Name in Table
+     * @param indexRoomName
+     * @return String Room Name
+     */
+    public String getRoomNameInTable(int indexRoomName) {
+        roomNameTable = page.locator("tr td:nth-of-type(2)").nth(indexRoomName);
+        return playwright.getText(roomNameTable);
+    }
+
+    /**
+     * Get String Floor in Table
+     * @param indexFloor
+     * @return String Floor
+     */
+    public String getFloorInTable(int indexFloor) {
+        floorTable = page.locator("tr td:nth-of-type(3)").nth(indexFloor);
+        return playwright.getText(floorTable);
+    }
+
+    /**
+     * Get String Occupied in Table
+     * @param indexOccupied
+     * @return String Occupied
+     */
+    public String getOccupiedInTable(int indexOccupied) {
+        occupiedTable = page.locator("tr td:nth-of-type(4)").nth(indexOccupied);
+        return playwright.getText(occupiedTable);
+    }
+
+    /**
+     * Get String Level in Table
+     * @param indexLevel
+     * @return String Level
+     */
+    public String getLevelInTable(int indexLevel) {
+        levelTable = page.locator("tr td:nth-of-type(5)").nth(indexLevel);
+        return playwright.getText(levelTable);
     }
 }
