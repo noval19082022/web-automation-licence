@@ -106,3 +106,19 @@ Feature: Kost List
     #search by owner phone number
     When admin search kost by owner phone number "085947715987"
     Then show all kost belongs to owner phone number "085947715987"
+
+  @TEST_PMAN-3265
+  Scenario: Search Kost List by Multiple Filter
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                    | email prod                    | password        |
+      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+    When admin access menu "Kost List" sub menu of management level
+    And admin search kost by name "Kost Singgahsini Kedai Kopi Tipe B Halmahera Utara"
+    And admin search kost by owner name "Okta BSE"
+    And admin search kost by owner phone number "081390799096"
+    And admin search kost by level "SinggahSini" on Kost List Table
+    Then show result kost "Kost Singgahsini Kedai Kopi Tipe B Halmahera Utara"
+    And show all kost belongs to owner "Okta BSE"
+    And show all kost belongs to owner phone number "081390799096"
+    And show all kost belongs to level "SinggahSini"

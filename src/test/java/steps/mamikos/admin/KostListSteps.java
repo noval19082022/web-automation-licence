@@ -136,4 +136,18 @@ public class KostListSteps {
             Assert.assertEquals(kostList.getOwnerPhoneNumber(i), phone);
         }
     }
+
+    @When("admin search kost by level {string} on Kost List Table")
+    public void admin_search_kost_by_level_on_kost_list_table(String level){
+        kostList.selectKostLevelFilter(level);
+    }
+
+    @Then("show all kost belongs to level {string}")
+    public void show_all_kost_belongs_to_level(String level) {
+        int row = kostList.countRow();
+
+        for (int i = 0; i < row; i++) {
+            Assert.assertEquals(kostList.getLevel(i), level);
+        }
+    }
 }
