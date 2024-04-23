@@ -14,7 +14,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message "Mohon periksa kembali nama/level kos" should occur in nama property field
     Then Tambahkan button is disable
 
-  @TEST_PMAN-3325
+  @TEST_PMAN-3325 @continue
   Scenario: Input Valid property
     When admin search property "khu" in tambah data transfer
     And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
@@ -25,6 +25,12 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
       | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
     Then Tambahkan button is enable
+
+  @TEST_PMAN-3327
+  Scenario: Change valid to invalid property
+    When admin search property "ABC" in tambah data transfer
+    Then error message "Mohon periksa kembali nama/level kos" should occur in nama property field
+    And Tambahkan button is disable
 
   @TEST_PMAN-3328 @continue
   Scenario: Change invalid to valid property
@@ -49,7 +55,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     When admin fill remaining field
       | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
       | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
-    And admin close pop up tambah data transfer
+    And admin "close" pop up tambah data transfer
     And admin tambah data transfer
     Then all information should be keep
       | Nama Property                                     | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
@@ -106,3 +112,98 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | 123abc            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
     Then error message on "Total Pendapatan" field is displayed
     And Tambahkan button is disable
+
+  @TEST_PMAN-3324 @continue
+  Scenario: Add without fill any field
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+    And admin open menu CP Disbursement
+    And admin tambah data transfer
+    Then Tambahkan button is disable
+
+  @TEST_PMAN-3336 @continue
+  Scenario: Tambah Data Transfer pop up display
+    When admin refresh page in CP Disbursement
+    And admin tambah data transfer
+    Then tambah data transfer pop up contains field
+      | Nama Property                                       |
+      | Product Type                                        |
+      | Nomor Rekening                                      |
+      | Nama Pemilik Rekening                               |
+      | Nomor Telepon Pemilik                               |
+      | Total Pendapatan                                    |
+      | Total Pendapatan Sebelum Komisi + Add On (jika ada) |
+      | Tipe Transaksi                                      |
+      | Tanggal Transfer ke Pemilik                         |
+      | Berkas Laporan Pendapatan                           |
+      | Tipe Disbursement                                   |
+    And tambah data transfer pop up title is "Tambah Data Transfer"
+    And tambah data transfer pop up have button
+      | Kembali     |
+      | Tambahkan   |
+
+  @TEST_PMAN-3334 @continue
+  Scenario: Empty tipe transaksi lainnya
+    When admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 123abc            | Lainnya         | today             | pdf example.pdf | Disbursement susulan  |
+    Then error message on "Tipe Transaksi" field is displayed
+    And Tambahkan button is disable
+
+  @TEST_PMAN-3338 @continue
+  Scenario: Kembali from pop up tambah data transfer
+    When admin "kembali" pop up tambah data transfer
+    Then tambah data transfer pop up closed
+
+  @TEST_PMAN-3337 @continue
+  Scenario: Close pop up tambah data transfer
+    When admin tambah data transfer
+    And admin "close" pop up tambah data transfer
+    Then tambah data transfer pop up closed
+
+  @TEST_PMAN-3329 @continue
+  Scenario: Input Invalid Bank Account
+    When admin refresh page in CP Disbursement
+    And admin tambah data transfer
+    And admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
+    And admin fill nomor rekening "lorem ipsum"
+    Then error message on "Nomor Rekening" field is displayed
+
+  @TEST_PMAN-3330 @continue
+  Scenario: Add without fill bank account name
+    When admin refresh page in CP Disbursement
+    And admin tambah data transfer
+    And admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill nama pemilik rekening "-"
+    Then error message on "Nama Pemilik Rekening" field is displayed
+
+  @TEST_PMAN-3332 @continue
+  Scenario: Add without fill tipe transaksi
+    When admin refresh page in CP Disbursement
+    And admin tambah data transfer
+    And admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 100000            | -               | today             | pdf example.pdf | Disbursement susulan  |
+    Then error message on "Tipe Transaksi" field is displayed
+
+  @TEST_PMAN-3335
+  Scenario: Add without select schedule transfer
+    When admin refresh page in CP Disbursement
+    And admin tambah data transfer
+    And admin search property "khusus" in tambah data transfer
+    And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
+    And admin fill remaining field
+      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
+      | 100000            | Commission      | -                 | pdf example.pdf | Disbursement susulan  |
+    Then error message on "Tanggal Transfer" field is displayed

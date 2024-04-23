@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CpDisbursementPO {
 
@@ -23,6 +24,7 @@ public class CpDisbursementPO {
     private Locator daftarTransferTab;
     private Locator idText;
     private Locator headerColumnText;
+    private Locator tambahDataTransferPopUp;
 
     //Tambah Data Transfer
     private Locator namaPropertyField;
@@ -40,9 +42,14 @@ public class CpDisbursementPO {
     private Locator berkasLaporanFile;
     private Locator tipeDisbursementSelect;
     private Locator closePopUpButton;
+    private Locator kembaliPopUpButton;
     private Locator lainnyaTipeTransaksiField;
     private Locator tambahkanDataTransferButton;
     private Locator errorMessageOnTotalPendapatan;
+    private Locator errorMessageTipeTransaksiLainnya;
+    private Locator errorMessageTanggalTransfer;
+    private Locator tambahDataTransferField;
+    private Locator popupTambahDataTransferTitle;
     //Tambah Data Transfer
 
     //List Daftar Transfer
@@ -118,10 +125,15 @@ public class CpDisbursementPO {
         berkasLaporanFile = page.locator("#owner_report_file-add-new");
         tipeDisbursementSelect = page.locator("#disbursement_type-add-new");
         closePopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close"));
+        kembaliPopUpButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         lainnyaTipeTransaksiField = page.locator("#transaction_type_text-add-new");
         tambahkanDataTransferButton = page.locator("#transfer-submit-add-new");
         daftarTransferTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Transfer"));
         errorMessageOnTotalPendapatan = page.locator("#transfer_amount_message-add-new");
+        errorMessageTipeTransaksiLainnya = page.locator("#transaction_type_text_message-add-new");
+        tambahDataTransferPopUp = page.locator(".cp-add-modal-transfer");
+        errorMessageTanggalTransfer = page.locator("#transfer_due_date_message-add-new");
+        popupTambahDataTransferTitle = page.locator(".modal-title").last();
 
         tanggalTransferPemilikTable = page.locator("td b");
         namaPropertyTable = page.locator("tr td:nth-of-type(3)");
@@ -299,6 +311,13 @@ public class CpDisbursementPO {
      */
     public void closeTambahDataTransferPopUp() {
         playwright.clickOn(closePopUpButton);
+    }
+
+    /**
+     * Click kembali button in tambah data transfer pop up
+     */
+    public void clickKembaliTambahDataTransferPopUp() {
+        playwright.clickOn(kembaliPopUpButton);
     }
 
     /**
@@ -903,5 +922,82 @@ public class CpDisbursementPO {
      */
     public String getErrorMessageOnNamaPemilikRekening() {
         return playwright.getText(errorMessageOnNamaPemilikRekening);
+    }
+
+    /**
+     * Get error message tipe transaksi lainnya
+     * @return String
+     */
+    public String getErrorMessageTipeTransaksi() {
+        return playwright.getText(errorMessageTipeTransaksiLainnya);
+    }
+
+    /**
+     * Check is error message tipe transaksi lainnya visible
+     * @return Boolean
+     */
+    public boolean isErrorMessageTipeTransaksiVisible() {
+        return playwright.isLocatorVisibleAfterLoad(errorMessageTipeTransaksiLainnya,10000.0);
+    }
+
+    /**
+     * Check is tambah data transfer pop up appear
+     * @return Boolean
+     */
+    public boolean isTambahDataTransferPopUpAppear() {
+        return playwright.isLocatorVisibleAfterLoad(tambahDataTransferPopUp,10000.0);
+    }
+
+    /**
+     * Fill Nomor Rekening in Tambah Data Transfer
+     * @param accountNumber
+     */
+    public void fillNomorRekening(String accountNumber) {
+        playwright.clearText(nomorRekeningField);
+        playwright.fillCharacterByCharacter(nomorRekeningField,accountNumber);
+    }
+
+    /**
+     * Fill Nama Pemilik Rekening in Tambah Data Transfer
+     * @param accountName
+     */
+    public void fillNamaPemilikRekening(String accountName) {
+        playwright.clearText(nomorRekeningField);
+        playwright.fillCharacterByCharacter(nomorRekeningField,accountName);
+    }
+
+    /**
+     * Get Error Tanggal Transfer
+     * @return String
+     */
+    public String getErrorTanggalTransfer() {
+        return playwright.getText(errorMessageTanggalTransfer);
+    }
+
+    /**
+     * Get Tambah Data Transfer Field Name
+     * @param field
+     * @return String
+     */
+    public String getTambahDataTransferField(String field) {
+        tambahDataTransferField = page.getByLabel("Tambah Data Transfer").getByText(field, new Locator.GetByTextOptions().setExact(true));
+        return playwright.getText(tambahDataTransferField);
+    }
+
+    /**
+     * Get Title in Pop Up Tambah Data Transfer
+     * @return
+     */
+    public String getPopUpTambahDataTransferTitle() {
+        playwright.waitTillLocatorIsVisible(popupTambahDataTransferTitle);
+        return playwright.getText(popupTambahDataTransferTitle);
+    }
+
+    /**
+     * Verify button visible or not
+     * @param button
+     */
+    public void isButtonVisible(String button) {
+        playwright.isButtonWithTextDisplayed(button,10000.0);
     }
 }

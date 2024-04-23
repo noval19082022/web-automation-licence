@@ -30,6 +30,8 @@ public class CpDisbursementSteps {
     private String errorMessageOnNomorRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnNomorRekening");
     private String errorMessageOnTotalPendapatan = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnTotalPendapatan");
     private String errorMessageOnNamaPemilikRekening = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageOnNamaPemilikRekening");
+    private String errorMessageTipeTransaksiLainnya = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageTipeTransaksiLainnya");
+    private String errorMessageTanggalTransfer = JavaHelpers.getPropertyValue(CPDisbursement, "errorMessageTanggalTransfer");
 
     private List<Map<String, String>> transferInfo;
     private List<Map<String, String>> transferAmount;
@@ -81,15 +83,29 @@ public class CpDisbursementSteps {
         String pdf = transferAmount.get(0).get("Berkas Laporan");
         String disbursement = transferAmount.get(0).get("Tipe Disbursement");
 
-        cpdisbursement.setTotalPendapatan(total);
-        cpdisbursement.setTipeTransaksi(tipe);
-        cpdisbursement.setTanggalTransferPemilik(tanggal);
-        cpdisbursement.uploadBerkasLaporan(pdf);
-        cpdisbursement.setTipeDisbursement(disbursement);
+        if (!total.equalsIgnoreCase("-")) {
+            cpdisbursement.setTotalPendapatan(total);
+        }
+        if (!tipe.equalsIgnoreCase("-")) {
+            cpdisbursement.setTipeTransaksi(tipe);
+        }
+        if (!tanggal.equalsIgnoreCase("-")) {
+            cpdisbursement.setTanggalTransferPemilik(tanggal);
+        }
+        if (!pdf.equalsIgnoreCase("-")) {
+            cpdisbursement.uploadBerkasLaporan(pdf);
+        }
+        if (!disbursement.equalsIgnoreCase("-")) {
+            cpdisbursement.setTipeDisbursement(disbursement);
+        }
     }
-    @When("admin close pop up tambah data transfer")
-    public void admin_close_pop_up_tambah_data_transfer() {
-        cpdisbursement.closeTambahDataTransferPopUp();
+    @When("admin {string} pop up tambah data transfer")
+    public void admin_pop_up_tambah_data_transfer(String action) {
+        if (action.equalsIgnoreCase("Kembali")){
+            cpdisbursement.clickKembaliTambahDataTransferPopUp();
+        }else if (action.equalsIgnoreCase("Close")) {
+            cpdisbursement.closeTambahDataTransferPopUp();
+        }
     }
     @Then("all information should be keep")
     public void all_information_should_be_keep(DataTable tables) {
@@ -355,8 +371,13 @@ public class CpDisbursementSteps {
             Assert.assertEquals(cpdisbursement.getErrorMessageOnNomorRekening(), errorMessageOnNomorRekening, "Error Message Copy does not match!");
         } else if (field.equalsIgnoreCase("Nama Pemilik Rekening")) {
             Assert.assertEquals(cpdisbursement.getErrorMessageOnNamaPemilikRekening(), errorMessageOnNamaPemilikRekening, "Error Message Copy does not match!");
+        } else if (field.equalsIgnoreCase("Tipe Transaksi")) {
+            Assert.assertTrue(cpdisbursement.isErrorMessageTipeTransaksiVisible(),"Error Message Tipe Transaksi not visible");
+            Assert.assertEquals(cpdisbursement.getErrorMessageTipeTransaksi(),errorMessageTipeTransaksiLainnya);
+        } else if (field.equalsIgnoreCase("Tanggal Transfer")) {
+            Assert.assertEquals(cpdisbursement.getErrorTanggalTransfer(), errorMessageTanggalTransfer,"Error Tanggal Transfer not visible");
         } else {
-            System.out.println("Invalid input parameter");
+            System.out.println("Invalid type error message");
         }
     }
 
@@ -390,5 +411,37 @@ public class CpDisbursementSteps {
     @When("admin refresh page in CP Disbursement")
     public void admin_refresh_page_in_CP_Disbursement(){
         cpdisbursement.cpDisbursementRefreshPage();
+    }
+    @Then("tambah data transfer pop up closed")
+    public void tambah_data_transfer_pop_up_closed() {
+        Assert.assertFalse(cpdisbursement.isTambahDataTransferPopUpAppear());
+    }
+    @When("admin fill nomor rekening {string}")
+    public void admin_fill_nomor_rekening(String accountNumber) {
+        if (!accountNumber.equalsIgnoreCase("-")) {
+            cpdisbursement.fillNomorRekening(accountNumber);
+        }
+    }
+    @When("admin fill nama pemilik rekening {string}")
+    public void admin_fill_nama_pemilik_rekening(String accountName) {
+        if (!accountName.equalsIgnoreCase("-")){
+            cpdisbursement.fillNamaPemilikRekening(accountName);
+        }
+    }
+    @Then("tambah data transfer pop up contains field")
+    public void tambah_data_transfer_pop_up_contains_field(List<String> fieldName) {
+        for (String field:fieldName){
+            Assert.assertEquals(cpdisbursement.getTambahDataTransferField(field),field);
+        }
+    }
+    @Then("tambah data transfer pop up title is {string}")
+    public void tambah_data_transfer_pop_up_title_is(String title) {
+        Assert.assertEquals(cpdisbursement.getPopUpTambahDataTransferTitle(),title);
+    }
+    @Then("tambah data transfer pop up have button")
+    public void tambah_data_transfer_pop_up_have_button(List<String> button) {
+        for (String buttonName:button){
+            cpdisbursement.isButtonVisible(buttonName);
+        }
     }
 }
