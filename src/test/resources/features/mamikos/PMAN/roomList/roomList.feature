@@ -9,7 +9,7 @@
         | email stag                    | email prod                    | password        |
         | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
       And admin access menu "Kost List" sub menu of management level
-      And admin search kost by name
+      And admin search kost by name for check Room List
       And admin clicks on Room List
       Then data in Room List is displayed
         | Room Name Stag  | Floor Stag  | Occupied Stag   | Level Stag  | Room Name Prod  | Floor Prod  | Occupied Prod | Level Prod  |
