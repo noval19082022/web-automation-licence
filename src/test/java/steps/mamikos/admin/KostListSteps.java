@@ -53,8 +53,13 @@ public class KostListSteps {
         Assert.assertTrue(kostList.pageNumberButtonIsActive(pageNumber).contains("active"), "Button is not active");
     }
 
-    @When("admin search kost by name")
-    public void admin_search_kost_by_name(){
+    @When("admin search kost by name {string}")
+    public void admin_search_kost_by_name(String kost){
+        kostList.searchKostName(kost);
+    }
+
+    @When("admin search kost by name for check Room List")
+    public void admin_search_kost_by_name_for_check_Room_List(){
         if (Mamikos.ENV.equalsIgnoreCase("prod")){
             kostList.searchKostName(roomListProd);
         } else {
