@@ -1071,4 +1071,14 @@ public class HomepagePO {
         playwright.pageScrollInView(emptyPmsKKText);
         return playwright.waitTillLocatorIsVisible(emptyPmsKKText,2000.0);
     }
+
+    /**
+     * Check is Disesuaikan dengan Tagihan is displayed
+     * @param text
+     * @return text "Disesuaikan dengan Tagihan"
+     */
+    public boolean getPriceTextNewRules(String text){
+        Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(priceTextAddFee);
+    }
 }

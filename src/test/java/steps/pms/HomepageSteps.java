@@ -49,6 +49,7 @@ public class HomepageSteps {
 
     private List<Map<String, String>> informasiPembayaran;
     private List<Map<String, String>> gender;
+    private List<Map<String, String>> addFee;
 
     private List<Map<String, String>> otherFee;
     private List<Map<String, String>> changeLog;
@@ -423,6 +424,11 @@ public class HomepageSteps {
     @Then("admin can see {string}")
     public void admin_can_see_(String text){
         homepage.getEmptyState(text);
+    }
+
+    @Then("admin can see add fee with price {string}")
+    public void admin_can_see_add_fee_with_price(String text){
+        homepage.getPriceTextNewRules(text);
     }
 }
 
