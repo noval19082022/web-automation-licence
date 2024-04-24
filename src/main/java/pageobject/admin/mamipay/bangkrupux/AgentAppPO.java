@@ -59,8 +59,8 @@ public class AgentAppPO {
      * @param isActive
      * @return Is Active Status
      */
-    public boolean isActiveStatusInTableEqualYes(String isActive) {
-        isActiveStatus = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(isActive).setName("Automation PMAN Yes")).locator("label");
+    public boolean isActiveStatusInTableEqualYes(String agent, String isActive) {
+        isActiveStatus = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(isActive).setName(agent)).locator("label");
         return playwright.isLocatorVisibleAfterLoad(isActiveStatus, 5000.0);
     }
 
