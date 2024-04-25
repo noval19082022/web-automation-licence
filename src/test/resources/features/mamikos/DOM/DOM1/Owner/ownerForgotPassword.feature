@@ -1,4 +1,4 @@
-@DOM10
+@DOM1
 Feature: Owner - Forgot Password
 
   @TEST_COOP-5180 @Automated @DOM @web-covered

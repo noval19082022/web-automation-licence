@@ -82,7 +82,6 @@ public class ChatOwnerSteps {
     public void userDismissFTUEMARSAndFTUEBroadcast() {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
-        chat.dismissFTUEBroadcast();
     }
 
     @And("user open chatroom from {string}")
@@ -147,5 +146,10 @@ public class ChatOwnerSteps {
     @Then("owner can see label with {string}")
     public void owner_can_see_label_with(String labelText) {
         Assert.assertEquals(chat.getBookingStatusLabel(), labelText,"Label doesn't match!");
+    }
+
+    @And("user dismiss Laporan klik FTUE")
+    public void userDismissLaporanKlikFTUE() {
+        chat.dismissFTUEJemputBola();
     }
 }

@@ -1,4 +1,4 @@
-@DOM1 @essentialTest
+@DOM10 @essentialTest
 Feature: Payment All
 
   Background: Delete and create contract
