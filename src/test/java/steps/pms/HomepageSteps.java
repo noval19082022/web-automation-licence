@@ -299,6 +299,11 @@ public class HomepageSteps {
         homepage.clicksReset();
     }
 
+    @When("admin reset filter in Homepage filter modal")
+    public void admin_reset_filter_in_Homepage_Filter_Modal(){
+        homepage.clicksResetFilterModal();
+    }
+
     @When("admin clear keyword in Homepage")
     public void admin_clear_keyword_in_Homepage(){
         homepage.clearKeyword();
@@ -415,9 +420,9 @@ public class HomepageSteps {
     }
     //---End of Search Function---//
 
-    @Then("the system is displaying reset filter")
-    public void the_system_is_displaying_reset_filter(){
-        Assert.assertEquals(homepage.getTotalFilter(), 1, "Total filter does not match!");
+    @Then("the system is displaying total active filter number is {string}")
+    public void the_system_is_displaying_total_active_filter(String total){
+        Assert.assertEquals(homepage.getTotalFilter(), Integer.parseInt(total), "Total filter does not match!");
     }
 
     //-------addfee mvp--------//
