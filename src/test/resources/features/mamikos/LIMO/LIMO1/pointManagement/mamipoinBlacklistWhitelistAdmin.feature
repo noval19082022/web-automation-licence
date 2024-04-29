@@ -9,8 +9,8 @@ Feature: Mamipoint Blacklist and Whitelist Admin
 
   @TEST_LIMO-2014 @Automated @Web @listing-monetization @mamipoin-owner
   Scenario: [Admin] Change Whitelist to Blacklist
-    Then admin successfully "blacklisted" user named "Ramos Pembina Komsel" with status "Whitelist"
+    Then admin successfully "blacklisted" user named "Rega Dian Watts" with status "Whitelist"
 
   @TEST_LIMO-2013 @Automated @Web @listing-monetization @mamipoin-owner
   Scenario: [Admin] Change Blacklist to Whitelist
-    Then admin successfully "whitelisted" user named "Ramos Pembina Komsel" with status "Blacklist"
+    Then admin successfully "whitelisted" user named "Rega Dian Watts" with status "Blacklist"
