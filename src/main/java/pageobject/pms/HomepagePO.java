@@ -209,7 +209,6 @@ public class HomepagePO {
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         totalPropertyText = page.locator(".total-data");
-        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -942,6 +941,15 @@ public class HomepagePO {
      * Clicks Reset button
      */
     public void clicksReset() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
+        playwright.clickOn(resetBtn);
+    }
+
+    /**
+     * Clicks Reset button inside filter modal
+     */
+    public void clicksResetFilterModal() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
         playwright.clickOn(resetBtn);
     }
 
