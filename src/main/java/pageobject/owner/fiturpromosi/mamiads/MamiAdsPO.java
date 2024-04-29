@@ -50,6 +50,7 @@ public class MamiAdsPO {
     private Locator deleteVoucher;
     private Locator listElement;
     private Locator voucherTitleElement;
+    private Locator lihatDetailVoucher;
     //--- Jemput Bola Entry Point ---//
     private Locator entryPointJBSection;
     private Locator labelNewJemputBola;
@@ -105,6 +106,8 @@ public class MamiAdsPO {
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
+        this.lihatDetailVoucher = page.getByTestId("lihatDetailvoucher_btn");
+
         //--- Jemput Bola Entry Point ---//
         this.entryPointJBSection = page.locator("(//div[@class='mami-ads-statistic-main'])[1]");
         this.labelNewJemputBola = page.getByText("Baru");
@@ -458,12 +461,12 @@ public class MamiAdsPO {
         return playwright.waitTillLocatorIsVisible(voucherTitleElement,1000.0);
     }
     /**
-     * Click pakai or lihat detail voucher from suggestion list
+     * Click lihat detail voucher from suggestion list
      *
      */
-    public void clickOnVoucherOnList(String element) throws InterruptedException {
-        playwright.waitTillLocatorIsVisible(page.locator(element));
-       playwright.clickOn(page.locator(element));
+    public void clickLihatDetailOnVoucherOnList() throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(lihatDetailVoucher);
+       playwright.clickOn(lihatDetailVoucher);
     }
 
     /**

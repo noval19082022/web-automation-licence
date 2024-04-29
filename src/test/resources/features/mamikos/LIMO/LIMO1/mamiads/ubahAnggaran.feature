@@ -20,7 +20,7 @@ Feature: Ubah Anggaran
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 083176408449 | 083176408449 | qwerty123    |
-    And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user click ubah on "Kos Ranise Mamitest Tobelo Halmahera Utara"
     And user set anggaran harian to "4999"
@@ -36,7 +36,7 @@ Feature: Ubah Anggaran
       | phone stag   | phone prod   | password     |
       | 089504220900 | 089504220900 | qwerty123    |
     And owner click "Nanti Saja"
-    And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     Then user check ads status:
       | ads name      | kost rane hana Mamitest                               |
@@ -83,7 +83,7 @@ Feature: Ubah Anggaran
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 085720962105 | 085720962105 | qwerty123    |
-    And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     Then user check ads status:
       | ads name      | Raney Hambura                                                   |
@@ -131,7 +131,7 @@ Feature: Ubah Anggaran
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 085720962105 | 085720962105 | qwerty123    |
-    And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     Then user check ads status:
       | ads name      | Kos Ayame Tipe MamiAds Tobelo Halmahera Utara     |
@@ -180,9 +180,7 @@ Feature: Ubah Anggaran
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 083176408323 | 083176408323 | qwerty123    |
-    And user click on Saldo MamiAds at owner dashboard
-    And user go back to previous page
-    And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user click ubah on "Kos Raney Happyvirus Mamitest Tipe B Tobelo Halmahera Utara"
     And user set anggaran to saldo maksimal

@@ -204,14 +204,9 @@ public class MamiAdsSteps {
         Assert.assertTrue(mamiAdsPO.isVoucherPresentOnList(voucherTitle), "Voucher doesn't present on list!");
     }
 
-    @When("user click on {string} {string} voucher")
-    public void user_click_on_voucher(String button, String voucherTitle) throws InterruptedException {
-        String element = null;
-        switch (button){
-            case "Lihat Detail": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-detail')]"; break;
-            case "Pakai": element = "//*[.='"+ voucherTitle +"']/parent::*/following-sibling::*/button[contains(@class, 'b-apply')]"; break;
-        }
-        mamiAdsPO.clickOnVoucherOnList(element);
+    @When("user click on lihat detail voucher")
+    public void user_click_on_lihat_detail_voucher() throws InterruptedException {
+        mamiAdsPO.clickLihatDetailOnVoucherOnList();
     }
 
     @Then("verify a detail voucher as expected")
