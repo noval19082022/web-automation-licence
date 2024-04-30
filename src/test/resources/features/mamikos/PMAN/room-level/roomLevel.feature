@@ -9,8 +9,8 @@ Feature: Add and Edit Room Level
       | email stag                    | email prod                    | password        |
       | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     And admin go to room level menu
-    And admin search room level "Rani"
-    Then search result "Rani" is displayed
+    And admin search room level "SinggahSini"
+    Then search result "SinggahSini" is displayed
 
   @TEST_PMAN-9742 @continue
   Scenario: Search Empty Keyword in Room Level
