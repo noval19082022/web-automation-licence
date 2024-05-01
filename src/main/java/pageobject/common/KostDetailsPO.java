@@ -542,7 +542,8 @@ public class KostDetailsPO {
     }
 
     public void dismissFTUEIfExist() {
-        if (playwright.waitTillLocatorIsVisible(ftueSlider, 1000.0)) {
+        playwright.pageScrollToDown(200);
+        if (playwright.waitTillLocatorIsVisible(ftueSlider, 5000.0)) {
             this.dismissFTUE();
         }
     }

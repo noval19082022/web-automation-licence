@@ -43,6 +43,7 @@ public class ChatOwnerSteps {
     @And("user click chat in kos detail")
     public void userClickChatInKosDetail() {
         chat.clickChatKos();
+        kostDetail.dismissFTUEIfExist();
     }
 
     @And("search chat in chatlist {string}")
