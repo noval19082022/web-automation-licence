@@ -541,6 +541,12 @@ public class KostDetailsPO {
         } while (playwright.waitTillLocatorIsVisible(ftueSlider));
     }
 
+    public void dismissFTUEIfExist() {
+        if (playwright.waitTillLocatorIsVisible(ftueSlider, 1000.0)) {
+            this.dismissFTUE();
+        }
+    }
+
     /**
      * Select booking date
      *

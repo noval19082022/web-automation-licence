@@ -6,12 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.KostDetailsPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.kelolatagihan.BillAndBookingManagementPO;
 
 public class ChatOwnerSteps {
     Page page = ActiveContext.getActivePage();
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
     ChatOwnerPO chat = new ChatOwnerPO(page);
     BillAndBookingManagementPO billBookingManage = new BillAndBookingManagementPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
@@ -19,6 +21,8 @@ public class ChatOwnerSteps {
     @And("user click chat button in top bar owner home page")
     public void userClickChatButtonInTopBarOwnerHomePage() {
         chat.clickChatOwner();
+        chat.dismissFTUEMarsGPAndBroadCastIfExist();
+        chat.dismissFTUEJemputBolaIfExist();
     }
 
     @Then("user see chat empty image")
