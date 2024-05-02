@@ -1,5 +1,6 @@
 package pageobject.owner.chat;
 
+import com.microsoft.playwright.Keyboard;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -127,13 +128,10 @@ public class ChatOwnerPO {
      * Search Chat
      */
     public void searchChatTenant(String inputText) {
+        page.keyboard().press("Escape");
         playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
         searchChat.fill(inputText);
-        if (nantiSajaButton.isVisible()) {
-            playwright.clickOn(nantiSajaButton);
-        }
-        page.keyboard().press("Space");
         playwright.clickOn(chatOnList);
     }
 
@@ -152,10 +150,8 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
-        playwright.hardWait(3000);
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
-            playwright.clickOn(Iunderstand);
-        }
+        page.keyboard().press("Escape");
+        page.keyboard().press("Escape");
         playwright.clickOn(acceptFromChatRoomButton);
         playwright.waitFor(yaTerimaButton);
         playwright.clickOn(yaTerimaButton);
