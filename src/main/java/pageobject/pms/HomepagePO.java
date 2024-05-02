@@ -86,6 +86,8 @@ public class HomepagePO {
     Locator metodePembayaranDropDown;
     Locator addOtherFee;
     Locator fieldNameFee0;
+    Locator listItemName;
+    Locator listItemName1;
     Locator inputNameFee0;
     Locator fieldPriceFee0;
     Locator inputPriceFee0;
@@ -165,13 +167,15 @@ public class HomepagePO {
         metodePembayaranDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih metode pembayaran dropdown-down"));
         addOtherFee = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         fieldNameFee0 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
-        inputNameFee0 = page.locator("(//input[@id='additionalPriceName0_txt'])[1]");
+        inputNameFee0 = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
+        listItemName = page.getByTestId("additionalFeeInput_listItem").locator("a");
+        listItemName1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Parkir Mobil"));
         fieldPriceFee0 = page.getByTestId("additionalPriceValue0_txt").getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Rp"));
-        inputPriceFee0 = page.locator("(//input[@id='additionalPriceValue0_txt'])[1]");
+        inputPriceFee0 = page.locator("#additionalFeeInput_price0_txt");
         fieldNameFee1 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
-        inputNameFee1 = page.locator("(//input[@id='additionalPriceName1_txt'])[1]");
+        inputNameFee1 = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
         fieldPriceFee1 = page.getByTestId("additionalPriceValue1_txt").getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Rp"));
-        inputPriceFee1 = page.locator("(//input[@id='additionalPriceValue1_txt'])[1]");
+        inputPriceFee1 = page.locator("#additionalFeeInput_price1_txt");
         addOnOtherFee = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         dbetButton = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("DBET"));
@@ -205,7 +209,6 @@ public class HomepagePO {
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         totalPropertyText = page.locator(".total-data");
-        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -321,16 +324,17 @@ public class HomepagePO {
      * Click on selanjutnya button in popup
      */
     public void clickOnSelanjutnyaButton() {
-        selanjutnyaButton.click();
+        playwright.clickOn(selanjutnyaButton);
+        playwright.hardWait(2000);
     }
 
     /**
      * Click on type room dropdown and selected type room
      */
     public void clickOnTypeRoom() {
-        playwright.waitTillLocatorIsVisible(dropdownTypeRoom, 5000.0);
-        dropdownTypeRoom.click();
-        selectedTypeRoom.click();
+        playwright.waitFor(dropdownTypeRoom);
+        playwright.clickOn(dropdownTypeRoom);
+        playwright.clickOn(selectedTypeRoom);
     }
 
     /**
@@ -424,22 +428,24 @@ public class HomepagePO {
 
     public void fillOtherFeeName(String nameFee0, String nameFee1) {
         playwright.pageScrollUntilElementIsVisible(addOtherFee);
-        playwright.clickOn(addOnOtherFee);
-        playwright.clickOn(fieldNameFee0);
+        playwright.clickOn(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih biaya tambahan dropdown-down")));
         playwright.fill(inputNameFee0, nameFee0);
-        playwright.clickOn(fieldNameFee1);
+        playwright.clickOn(listItemName);
+        playwright.clickOn(addOnOtherFee);
+        playwright.clickOn(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih biaya tambahan dropdown-down")));
         playwright.fill(inputNameFee1, nameFee1);
+        playwright.clickOn(listItemName1);
     }
 
     /**
      * admin fill other fee amount
      */
 
-    public void fillOtherFeeAmount(String priceFee0, String priceFee1) {
-        playwright.clickOn(fieldPriceFee0);
-        playwright.fill(inputPriceFee0, priceFee0);
-        playwright.clickOn(fieldPriceFee1);
-        playwright.fill(inputPriceFee1, priceFee1);
+    public void fillOtherFeeAmount(String amountFee0, String amountFee1) {
+        playwright.clickOn(inputPriceFee0);
+        playwright.fill(inputPriceFee0, amountFee0);
+        playwright.clickOn(inputPriceFee1);
+        playwright.fill(inputPriceFee1, amountFee1);
     }
 
     /**
@@ -456,10 +462,11 @@ public class HomepagePO {
     public boolean isInformasiBiayaLainDisplayed(String nameFee0, String nameFee1, String amountFee0, String amountFee1) {
         String listrik = "//p[normalize-space()='" + nameFee0 + "']";
         String parkir = "//p[normalize-space()='" + nameFee1 + "']";
-        String harga0 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='" + amountFee0 + "'])[1]";
-        String harga1 = "(//p[@class='bg-c-text bg-c-text--body-1 price-list-item__price-label'][normalize-space()='" + amountFee1 + "'])[2]";
+        String harga0 = "//p['" + amountFee0 + "']";
+        String harga1 = "//p['" + amountFee1 + "']";
         return page.querySelector(listrik) != null && page.querySelector(parkir) != null && page.querySelector(harga0) != null && page.querySelector(harga1) != null;
     }
+
 
     /**
      * admin click on dbet button
@@ -508,6 +515,7 @@ public class HomepagePO {
      * admin click on ya simpan button
      */
     public void clickOnYaSimpanButton() {
+        playwright.hardWait(100);
         playwright.clickOn(yaSimpanButton);
     }
 
@@ -933,6 +941,15 @@ public class HomepagePO {
      * Clicks Reset button
      */
     public void clicksReset() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
+        playwright.clickOn(resetBtn);
+    }
+
+    /**
+     * Clicks Reset button inside filter modal
+     */
+    public void clicksResetFilterModal() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
         playwright.clickOn(resetBtn);
     }
 
@@ -1049,5 +1066,27 @@ public class HomepagePO {
      */
     public int getTotalFilter() {
         return Integer.parseInt(totalFilter.textContent().trim());
+    }
+
+    //-----------add fee MVP----------//
+    /**
+     * get empty state text on pms
+     * @param text
+     * @return text example : Tidak ada biaya tambahan yang tersedia di kos ini.
+     */
+    public Boolean getEmptyState(String text){
+        Locator emptyPmsKKText = page.locator("//p[normalize-space()='" +text+ "']");
+        playwright.pageScrollInView(emptyPmsKKText);
+        return playwright.waitTillLocatorIsVisible(emptyPmsKKText,2000.0);
+    }
+
+    /**
+     * Check is Disesuaikan dengan Tagihan is displayed
+     * @param text
+     * @return text "Disesuaikan dengan Tagihan"
+     */
+    public boolean getPriceTextNewRules(String text){
+        Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
 }

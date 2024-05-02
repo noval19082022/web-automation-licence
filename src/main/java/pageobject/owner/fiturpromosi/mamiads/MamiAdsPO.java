@@ -13,6 +13,7 @@ public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
     //--- history Mamiads ---//
@@ -38,6 +39,8 @@ public class MamiAdsPO {
     private Locator ubahAnggaranInputText;
     private Locator yaGantiButton;
     private Locator beliSaldoBtnPopup;
+    Locator simpanPengaturanButton;
+
     //--- Beli Saldo Mamiads Page ----//
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
@@ -52,6 +55,7 @@ public class MamiAdsPO {
     private Locator deleteVoucher;
     private Locator listElement;
     private Locator voucherTitleElement;
+    private Locator lihatDetailVoucher;
     //--- Jemput Bola Entry Point ---//
     private Locator entryPointJBSection;
     private Locator labelNewJemputBola;
@@ -65,8 +69,6 @@ public class MamiAdsPO {
     Locator gpOnboardingPopUpSwipperBullet;
     Locator gpOnboardingPopUpPreviousButton;
     //--- GP Onboarding Pop - Up ---//
-
-
 
     public MamiAdsPO(Page page) {
         this.page = page;
@@ -95,6 +97,7 @@ public class MamiAdsPO {
         this.dibatasiHarianRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Dibatasi Harian")).locator("span").nth(1);
         this.yaGantiButton = page.getByText("Ya, Ganti", new Page.GetByTextOptions().setExact(true));
         this.beliSaldoBtnPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Saldo"));
+        simpanPengaturanButton = page.getByText("Simpan Pengaturan");
         //--- Beli Saldo Mamiads Page ---//
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
@@ -109,6 +112,8 @@ public class MamiAdsPO {
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
+        this.lihatDetailVoucher = page.getByTestId("lihatDetailvoucher_btn");
+
         //--- Jemput Bola Entry Point ---//
         this.entryPointJBSection = page.locator("(//div[@class='mami-ads-statistic-main'])[1]");
         this.labelNewJemputBola = page.getByText("Baru");
@@ -464,12 +469,12 @@ public class MamiAdsPO {
         return playwright.waitTillLocatorIsVisible(voucherTitleElement,1000.0);
     }
     /**
-     * Click pakai or lihat detail voucher from suggestion list
+     * Click lihat detail voucher from suggestion list
      *
      */
-    public void clickOnVoucherOnList(String element) throws InterruptedException {
-        playwright.waitTillLocatorIsVisible(page.locator(element));
-       playwright.clickOn(page.locator(element));
+    public void clickLihatDetailOnVoucherOnList() throws InterruptedException {
+        playwright.waitTillLocatorIsVisible(lihatDetailVoucher);
+        playwright.clickOn(lihatDetailVoucher);
     }
 
     /**
@@ -641,8 +646,8 @@ public class MamiAdsPO {
      * check entry point on jemput bola title
      */
     public void isTitleJemputBolaVisible(String adsName) {
-        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
-                "//*[@class='mami-ads-statistic-main']//p[contains(@class,'title')]");
+        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@data-testid='mamiadsWidget']" +
+                "//*[@data-testid='mamiadsStatistic']//p[contains(@class,'title')]");
         playwright.assertVisible(titleJemputBola);
     }
 
@@ -680,9 +685,6 @@ public class MamiAdsPO {
         return playwright.getText(textOnPopUpMamiads);
     }
 
-//    public void clickInvoiceMamiadsOnRiwayat() {
-//        playwright.clickOn(lastInvoiceOnRiwayat);
-//    }
     public Page clickInvoiceMamiadsOnRiwayat(){
         page = page.waitForPopup(() -> {
             playwright.clickOn(lastInvoiceOnRiwayat);
@@ -700,6 +702,14 @@ public class MamiAdsPO {
         playwright.clickOn(backIconRiwayatMamiads);
         ActiveContext.setActivePage(page);
         return ActiveContext.getActivePage();
+    }
+
+    /**
+     * Click on Simpan Pengaturan button on pop up ubah anggaran
+     *
+     */
+    public void clickOnSimpanPengaturanUbahAnggaran() {
+        playwright.clickOn(simpanPengaturanButton);
     }
 }
 

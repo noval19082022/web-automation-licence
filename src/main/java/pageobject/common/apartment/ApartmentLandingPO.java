@@ -27,6 +27,8 @@ public class ApartmentLandingPO {
     private Locator filteringFurniture;
     private Locator filteringPrice;
     private Locator filteringUnitType;
+    private Locator filteringAreaDropDown;
+    private Locator filteringArea;
     private Locator listTimePeriod;
     private Locator listUnitAndFurniture;
     private Locator listPrice;
@@ -51,6 +53,8 @@ public class ApartmentLandingPO {
         this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Perabotan Semua Furnished Semi Furnished Not furnished$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Urutkan Acak Harga Termurah Harga Termahal$|^Urutkan Acak Harga Termurah Harga Termahal Kosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe Unit Semua 1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringAreaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("dropdown-down"));
+        this.filteringArea = page.locator("a");
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
         this.listUnitAndFurniture = page.locator("//div[@class='rc-price__additional-data']");
         this.listPrice = page.locator("//span[@class='rc-price__text bg-c-text bg-c-text--body-1']");
@@ -270,5 +274,16 @@ public class ApartmentLandingPO {
      */
     public void clickOnMamikosLogo() {
         playwright.clickOn(mamikosLogo);
+    }
+
+    /**
+     * filtering apartment list by area
+     * @param area
+     */
+    public void searchByArea(String area) {
+        playwright.clickOn(filteringAreaDropDown);
+        playwright.clickOn(
+                playwright.filterLocatorHasText(filteringArea, area)
+        );
     }
 }

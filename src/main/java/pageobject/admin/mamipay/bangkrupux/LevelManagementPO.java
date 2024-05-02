@@ -16,11 +16,13 @@ public class LevelManagementPO {
     Locator searchField;
     Locator searchButton;
     Locator messagePopUp;
+    Locator errorMessagePopUp;
     Locator editIcon;
     Locator deleteIcon;
     Locator successMessage;
     Locator chargingTypeField;
     Locator kostListMenu;
+    Locator chargingFeeField;
 
     public LevelManagementPO(Page page){
         this.page = page;
@@ -30,10 +32,12 @@ public class LevelManagementPO {
         searchField = page.locator("//input[@placeholder='Level Name']");
         searchButton = page.locator("//button[@id='buttonSearch']");
         messagePopUp = page.locator("//h2[@id='swal2-title']");
+        errorMessagePopUp = page.locator(".swal2-content h5");
         editIcon = page.locator("//i[@class='fa fa-pencil']");
         deleteIcon = page.locator("//i[@class='fa fa-trash']");
         successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
         chargingTypeField = page.locator("//select[@name='charging_type']");
+        chargingFeeField = page.locator("input[type='number']").first();
     }
 
     /**
@@ -100,6 +104,8 @@ public class LevelManagementPO {
             playwright.forceFill(searchField, getKostLevelName());
         } else if (type.equals("room")){
             playwright.forceFill(searchField, getRoomLevelName());
+        }else {
+            playwright.fill(searchField,type);
         }
     }
 
@@ -170,5 +176,22 @@ public class LevelManagementPO {
         kostListMenu = page.locator("//a[@id='kost-level']/following-sibling::ul//span[text()='" +submenu+ "']");
         playwright.pageScrollInView(kostListMenu);
         playwright.clickOn(kostListMenu);
+    }
+
+    /**
+     * Fill charging fee amount
+     * @param fee
+     */
+    public void setChargingFee(String fee) {
+        playwright.clearText(chargingFeeField);
+        playwright.fill(chargingFeeField,fee);
+    }
+
+    /**
+     * Get Error message in pop up
+     * @return String
+     */
+    public String getErrorMessagePopUp() {
+        return playwright.getText(errorMessagePopUp);
     }
 }

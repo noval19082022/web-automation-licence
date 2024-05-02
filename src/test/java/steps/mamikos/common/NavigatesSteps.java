@@ -429,4 +429,8 @@ public class NavigatesSteps {
     public void adminNavigateToPremiumPackageInvoiceList() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice/premium/package");
     }
+    @When("admin accsess menu whitelist feature")
+    public void admin_accsess_menu_whitelist_feature() {
+        playwright.navigateTo(Mamikos.URL + "/admin/whitelist-features", 30000.0, LoadState.LOAD);
+    }
 }

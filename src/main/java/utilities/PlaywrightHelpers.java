@@ -340,6 +340,14 @@ public class PlaywrightHelpers {
         return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText).setExact(exact));
     }
 
+    /**
+     * Get total locator found
+     * @param locator
+     */
+    public int countLocator(Locator locator){
+        return locator.count();
+    }
+
     //----- Get Part ----\\
 
     //---- Wait Part ----\\
@@ -449,6 +457,13 @@ public class PlaywrightHelpers {
      */
     public void waitTillPageLoaded() {
         page.waitForLoadState(LoadState.LOAD);
+    }
+
+    /**
+     * Wait until no network activity
+     */
+    public void waitTillNetworkIdle(){
+        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     /**
@@ -758,6 +773,10 @@ public class PlaywrightHelpers {
 
     public boolean isButtonDisable(Locator locator) {
         return locator.isDisabled();
+    }
+
+    public boolean isButtonEnable(Locator locator) {
+        return locator.isEnabled();
     }
 
     /**

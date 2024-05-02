@@ -52,4 +52,13 @@ public class AdminApproveBookingStep {
         adminApproveBooking.clickDetailButton();
     }
 
+    @And("admin accept booking for kost add fee")
+    public void admin_accept_booking_for_kost_add_fee(){
+        adminApproveBooking.clickNextOnConfirmBooking();
+    }
+
+    @And("admin click on next button accept booking for kost add fee")
+    public void admin_click_on_next_button_accept_booking_for_kost_add_fee(){
+        adminApproveBooking.clickOnNextButonConfirmBooking();
+    }
 }

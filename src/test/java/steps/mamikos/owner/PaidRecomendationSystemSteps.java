@@ -39,4 +39,15 @@ import pageobject.owner.PaidRecomendationSystemPO;
         public void owner_can_see_laporan_statistik_page_when_doesnt_have_property_active() {
             Assert.assertTrue(pprs.isStatisticPageVisible(),"statistic page is not show");
         }
+
+
+        @Then("owner can see title for apartement  {string} at section statistic")
+        public void owner_can_see_title_for_apartement_at_section_statistic(String text) {
+            Assert.assertEquals(pprs.getTitleStatisticApartement(),text,"title doesnt match");
+        }
+
+        @Then("owner can see desc for apartment {string} at section statistic")
+        public void owner_can_see_desc_for_apartment_at_section_statistic(String text) {
+            Assert.assertTrue(pprs.getTitleStatisticDescApartement().contains(text),"description doesnt match");
+        }
     }

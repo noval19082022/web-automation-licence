@@ -2,6 +2,7 @@ package steps.pms.roleManagement;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -214,6 +215,27 @@ public class RoleManagementSteps {
     @Then("empty state is displayed")
     public void empty_state_is_displayed(){
         Assert.assertEquals(role.getEmptyState(), emptyStateCopy, "Empty State Copy does not match!");
+    }
+    @Then("role list should contains column")
+    public void role_list_should_contains_column(List<String> columnName) {
+        for (int i=0;i<columnName.size();i++) {
+            Assert.assertEquals(role.getColumnName(i),columnName.get(i));
+        }
+    }
+    @Then("list contains max {int} role per page")
+    public void list_contains_max_role_per_page(Integer total) {
+        Assert.assertEquals(role.countTotalRow(),total);
+    }
+    @Then("contains button {string}")
+    public void contains_button(String buttonName) {
+        Assert.assertTrue(role.isButtonExist(buttonName));
+    }
+    @Then("action button contains action to")
+    public void action_button_contains_action_to(List<String> button) {
+        role.clickActionButton();
+        for (int i=0;i< button.size();i++){
+            Assert.assertEquals(role.getActionButtonName(button.get(i)),button.get(i));
+        }
     }
 }
 

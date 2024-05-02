@@ -42,7 +42,7 @@ public class CheckPropertyPO {
      */
     public void searchNamaProperti(String keyword) {
         playwright.fill(searchBar, keyword);
-        playwright.waitTillPageLoaded();
+        playwright.waitTillNetworkIdle();
     }
 
     /**

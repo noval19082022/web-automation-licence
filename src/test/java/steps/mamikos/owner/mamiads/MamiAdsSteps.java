@@ -210,14 +210,9 @@ public class MamiAdsSteps {
         Assert.assertTrue(mamiAdsPO.isVoucherPresentOnList(voucherTitle), "Voucher doesn't present on list!");
     }
 
-    @When("user click on {string} {string} voucher")
-    public void user_click_on_voucher(String button, String voucherTitle) throws InterruptedException {
-        String element = null;
-        switch (button){
-            case "Lihat Detail": element = "//*[.='"+ voucherTitle +"']/../following-sibling::*//button[@data-testid='lihatDetailvoucher_btn']"; break;
-            case "Pakai": element = "//*[.='"+ voucherTitle +"']/../following-sibling::*//button[@data-testid='pakaiVoucher_btn']"; break;
-        }
-        mamiAdsPO.clickOnVoucherOnList(element);
+    @When("user click on lihat detail voucher")
+    public void user_click_on_lihat_detail_voucher() throws InterruptedException {
+        mamiAdsPO.clickLihatDetailOnVoucherOnList();
     }
 
     @Then("verify a detail voucher as expected")
@@ -364,5 +359,10 @@ public class MamiAdsSteps {
     @And("user click back to mamiads dashboard")
     public void userClickBackToMamiadsDashboard() {
         mamiAdsPO.clickBackIconOnRiwayatMamiads();
+    }
+
+    @And("owner click Simpan Pengaturan on ubah anggaran")
+    public void ownerClickSimpanPengaturanOnUbahAnggaran() {
+        mamiAdsPO.clickOnSimpanPengaturanUbahAnggaran();
     }
 }

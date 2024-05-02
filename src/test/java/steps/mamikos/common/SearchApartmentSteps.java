@@ -196,4 +196,9 @@ public class SearchApartmentSteps {
         });
         ActiveContext.setActivePage(page1);
     }
+
+    @When("user select apartement by area on {string}")
+    public void userSelectApartementByAreaOn(String area) {
+        apartment.searchByArea(area);
+    }
 }

@@ -1,6 +1,7 @@
 @regression @BBM8
 
 Feature: Search invoice
+
   @TEST_COOP-2878 @autoExtendTrue @continue
   Scenario: Auto extend is true
     Given admin go to mamikos mamipay admin
@@ -23,8 +24,8 @@ Feature: Search invoice
   Scenario: Reminder status information H-5
     When admin clicks on Search Invoice Menu form left bar
     And admin search invoice:
-      | search by              | invoice_number          |
-      | search value           | 15906136/2021/11/0015   |
+      | search by    | invoice_number        |
+      | search value | 15906136/2021/11/0015 |
     And admin clicks on see log button with link value "/52856"
     And admin set active page to 1
     Then admin verify invoice log has "Billing Reminder H-5" as "Reminder Type"
@@ -48,8 +49,8 @@ Feature: Search invoice
   @TEST_COOP-2687 @whatsAppReminderStatusInformation
   Scenario: Whatsapp reminder status information
     Then admin verify WhatsApp reminder status information
-      | Platform          | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status    |
-      | WhatsApp          | Hai  Laksana Adi, Udah coba bayar kosan yang anti ribet? Cuma beberapa klik, uang sewa langsung diterima pemilik.Yuk, cobain langsung di https://mamikos.com/user/kost-saya?tagihan=true&ch=08 | 2021-09-06 05:12:10 | Billing Reminder Without Voucher Today | pending   |
+      | Platform | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status  |
+      | WhatsApp | Hai  Laksana Adi, Udah coba bayar kosan yang anti ribet? Cuma beberapa klik, uang sewa langsung diterima pemilik.Yuk, cobain langsung di https://mamikos.com/user/kost-saya?tagihan=true&ch=08 | 2021-09-06 05:12:10 | Billing Reminder Without Voucher Today | pending |
 
   @TEST_COOP-1397
   Scenario Outline: [Search invoice]Find <status> data invoice
@@ -58,7 +59,7 @@ Feature: Search invoice
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin clicks on Search Invoice Menu form left bar
-    And admin choose method Status "<status>"
+    And admin choose filter Status "<status>" "status"
     Then admin will get data Status with method "<output>"
     Examples:
       | status  | output  |
@@ -77,8 +78,85 @@ Feature: Search invoice
     And admin choose invoice type "recurring_invoice"
     Then admin should be able to see the text "Pembayaran bulan ke-2"
 
- @TEST_COOP-6707
+  @TEST_COOP-6707
   Scenario: [Search invoice]Find first invoice data invoice
     And admin clicks on Search Invoice Menu form left bar
     And admin choose invoice type "first_invoice"
     Then admin should not be able to see the text "Pembayaran bulan ke-2"
+
+  @TEST_COOP-1395 @TEST_COOP-1388
+  Scenario Outline: [Search invoice]Find sort by data invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin clicks on Search Invoice Menu form left bar
+    And admin choose filter Status "<sort_by>" "sort_by"
+    Then admin will get data Status with method "<output>"
+    Examples:
+      | sort_by                   | output |
+      | Scheduled Date Descending | Unpaid |
+      | Scheduled Date Ascending  | paid   |
+
+  @TEST_COOP-1391
+  Scenario: change status invoice to paid
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    When admin clicks on Search Invoice Menu form left bar
+    And admin search invoice:
+      | search by    | invoice_number        |
+      | search value | 91938181/2018/10/0001 |
+    And user click on "Change Status" button
+    And admin change mamipay status to "Paid"
+    And admin fills transaction date "2024-01-01 10:00:00"
+    And admin click submit button
+    And user click on "Change Status" button
+    And admin change mamipay status to "Unpaid"
+    And admin click submit button
+    Then admin verify see text "Data telah berhasil diupdate."
+
+  @TEST_COOP-1389
+  Scenario: change status invoice to no in mamipay
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    When admin clicks on Search Invoice Menu form left bar
+    And admin search invoice:
+      | search by    | invoice_number        |
+      | search value | 91938181/2018/10/0001 |
+    And user click on "Change Status" button
+    And admin change mamipay status to "Not In Mamipay"
+    And admin fills transaction date "2024-01-01 10:00:00"
+    And admin click submit button
+    Then admin verify see text "Data telah berhasil diupdate."
+
+  @TEST_COOP-1384
+  Scenario: change status invoice to paid or not in mamipay withount input date
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    When admin clicks on Search Invoice Menu form left bar
+    And admin search invoice:
+      | search by    | invoice_number        |
+      | search value | 68468805/2018/12/0001 |
+    And user click on "Change Status" button
+    And admin change mamipay status to "Not In Mamipay"
+    And admin click submit button
+    Then admin verify see text "The transaction date field is required when status is not_in_mamipay."
+
+  @TEST_COOP-1390
+  Scenario: change original price for paid invoice
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    When admin clicks on Search Invoice Menu form left bar
+    And admin search invoice:
+      | search by    | invoice_number        |
+      | search value | DP/38443528/2024/03/90665 |
+    And user click on detail fee button
+    Then admin see edit basic amount button disable

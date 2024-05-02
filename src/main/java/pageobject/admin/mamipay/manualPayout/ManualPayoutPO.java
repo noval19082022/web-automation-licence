@@ -7,6 +7,8 @@ import config.playwright.context.ActiveContext;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.Optional;
+
 public class ManualPayoutPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -43,6 +45,7 @@ public class ManualPayoutPO {
     private Locator payoutCanceledMessage;
     private Locator successUpdateMessage;
     private Locator processingPayoutMessage;
+    private Locator sortingOption;
 
     public ManualPayoutPO(Page page) {
         this.page = page;
@@ -78,6 +81,7 @@ public class ManualPayoutPO {
         payoutCanceledMessage = page.getByText("Payout cancelled.");
         successUpdateMessage = page.getByText("Data telah berhasil diupdate.");
         processingPayoutMessage = page.getByText("Payout is processing.");
+        sortingOption = page.locator("select[name='sort']");
     }
 
     /**
@@ -356,5 +360,18 @@ public class ManualPayoutPO {
      */
     public boolean isProcessingPayoutMessageVisible() {
         return processingPayoutMessage.isVisible();
+    }
+
+    /**
+     * sorting payout list
+     * @param sortDirection
+     */
+    public void sortPayoutList(String sortDirection) {
+        String direction = Optional.ofNullable(sortDirection)
+                .map(String::toLowerCase)
+                .filter(s -> s.equals("newest") || s.equals("oldest"))
+                .map(s -> s.equals("newest") ? "desc" : "asc")
+                .orElse("");
+        playwright.selectDropdownByValue(sortingOption, direction);
     }
 }

@@ -70,6 +70,19 @@ public class PaymentSteps {
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue);
     }
 
+    @Then("tenant can see mamirooms voucher is applied")
+    public void tenantCanSeeMamiroomsVoucherIsApplied() {
+        Assert.assertEquals(invoice.getToastText(), "Voucher Dipakai");
+        var voucher = voucherName.get(0).get("voucher name " + Mamikos.ENV);
+        var subTotal = invoice.getSubTotal();
+        var biayaLayanan = invoice.getBiayaLayananMamirooms();
+        var voucherDeductionValue = invoice.getVoucherReductionPrice(voucher);
+        var totalPayment = invoice.getTotalPembayaran();
+        var totalAfterDeduction = subTotal - voucherDeductionValue - biayaLayanan;
+        Assert.assertEquals(totalPayment, totalAfterDeduction,
+                "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue + ", biaya layanan mamirooms: " + biayaLayanan);
+    }
+
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
         var voucherInvalidWording = "Kode voucher tidak bisa digunakan. Silakan hapus voucher.";
@@ -314,6 +327,15 @@ public class PaymentSteps {
         invoice = new InvoicePO(ActiveContext.getActivePage());
         int basicAmount = invoice.getBasicPrice();
         int adminFee = invoice.getAdminPrice();
+        int totalAmount = invoice.getSubTotal();
+        Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
+    }
+
+    @Then("tenant can not sees add on price on payment page after pay")
+    public void tenantCanNotSeesAddOnPriceOnPaymentPageAfterPay() {
+        invoice = new InvoicePO(ActiveContext.getActivePage());
+        int basicAmount = invoice.getBasicPrice();
+        int adminFee = invoice.getAdminPriceFinal();
         int totalAmount = invoice.getSubTotal();
         Assert.assertEquals(basicAmount + adminFee, totalAmount, "Basic amount + admin fee is not equal with total amount");
     }

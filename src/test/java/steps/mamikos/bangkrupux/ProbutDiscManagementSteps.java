@@ -20,4 +20,9 @@ public class ProbutDiscManagementSteps {
     public void adminUploadCsvDiscountManagementWithFileNames(String fileName) {
         probutDiscManagementPO.uploadBulkDiscountCsv(fileName);
     }
+
+    @And("Admin remove using csv discount management with file names {string}")
+    public void adminRemoveUsingCsvDiscountManagementWithFileNames(String fileName) {
+        probutDiscManagementPO.removeBulkDiscountCsv(fileName);
+    }
 }

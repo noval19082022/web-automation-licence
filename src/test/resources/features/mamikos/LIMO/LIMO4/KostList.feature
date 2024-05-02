@@ -2,7 +2,7 @@
 
 Feature: Kost List
 
-  @ComponentActiveKos
+  @ComponentActiveKos @TEST_LIMO-5813
   Scenario: Check components of active kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -16,5 +16,6 @@ Feature: Kost List
     When user click back button in page
     And owner search kost "Kose Putri AutomationEeJwe Ibu Halmahera Barat" on property saya page
     And user click Lihat Selengkapnya button for edit
+    And owner can see favorited section
     And user click review in kost list
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/statistics/53684421#review"

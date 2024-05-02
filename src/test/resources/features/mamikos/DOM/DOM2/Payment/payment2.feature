@@ -75,11 +75,15 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin filter booking transaction using tenant phone "0892202100"
     And admin set allow refund the transaction
 
-    #  Scenario: Admin edit paid amount & uncheck admin fee
+     # Scenario: Admin edit paid amount more than refund amount
     Given admin go to mamikos mamipay admin
     When admin navigate to mamipay refund page
     And admin pick one invoice on list to refund from cc payment
     And admin uncheck admin fee for refund
+    And admin edit paid amount credit card "2000000" for refund
+    Then admin verify see text "Paid amount must be less than refund amount"
+
+    #  Scenario: Admin edit paid amount & uncheck admin fee
     And admin edit paid amount credit card "20000" for refund
     And admin change of reason list to pemilik membatalkan for refund
     And admin set to refund the paid invoice
@@ -446,3 +450,16 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    And admin pick one invoice on failed list
 #    And admin set to refund the paid invoice
 #    Then admin verify see text "Refund transaction created."
+
+
+  @TEST_COOP-1431 @Automated @web-covered
+  Scenario: [BackOffice][Refund] no Input Bank Account
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin pick one invoice on list to refund
+    And admin set rekening number "ABCDEFG" and rekening owner "testing automation refund" for refund
+    And admin set to refund the paid invoice
+    Then admin verify see text "Account number can only contain number"

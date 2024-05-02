@@ -14,7 +14,7 @@ Feature: Apply Voucher For Kost Type Mamirooms
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOMAMIROOM      | AUTOMAMIROOM      |
-    Then tenant can see voucher is applied
+    Then tenant can see mamirooms voucher is applied
 
     # COOP-2825
   Scenario: Invoice Mamirooms and Voucher Not Applicable for Mamirooms

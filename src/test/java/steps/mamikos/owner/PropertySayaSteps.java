@@ -1063,4 +1063,52 @@ public class PropertySayaSteps {
     public void owner_can_see_button_update_kamar() {
         Assert.assertTrue(propertySaya.isButtonUpdateVisible(), "button not visible");
     }
+
+    @And("owner clicks button change photo")
+    public void ownerClicksButtonChangePhoto() {
+        propertySaya.hoverPhoto();
+        propertySaya.ubahFotoKosFromHover();
+    }
+
+    @And("owner clicks button view photo")
+    public void ownerClicksButtonViewPhoto() {
+        propertySaya.hoverPhoto();
+        propertySaya.viewPhotoFromHover();
+    }
+
+    @And("owner clicks button delete photo")
+    public void ownerClicksButtonDeletePhoto() {
+        propertySaya.hoverPhoto();
+        propertySaya.clickOnDeletePhotoFromHover();
+    }
+
+    @And("owner clicks button move photo")
+    public void ownerClicksButtonMovePhoto() {
+        propertySaya.hoverPhoto();
+        propertySaya.clickOnMovePhotoHover();
+        propertySaya.clickOnLanjutkanMovePhoto();
+        Assert.assertTrue(propertySaya.getToastNotSelectedPhoto(), "Toast message doesnt match!");
+
+        propertySaya.selectPhotoToMoved();
+        propertySaya.clickOnLanjutkanMovePhoto();
+        propertySaya.clickOnPindahkanPhoto();
+        Assert.assertTrue(propertySaya.getToastNotSelectDestinationPhoto(), "Toast message doesnt match!");
+    }
+
+    @And("owner select destination move photo kos")
+    public void ownerSelectDestinationMovePhotoKos() {
+        propertySaya.selectDestinationPhoto();
+        propertySaya.clickOnPindahkanPhoto();
+    }
+
+    @And("owner select destination move photo room")
+    public void ownerSelectDestinationMovePhotoRoom() {
+        propertySaya.selectDestinationPhotoRoom();
+        propertySaya.clickOnPindahkanPhoto();
+    }
+
+    @When("owner can see favorited section")
+    public void owner_can_see_favorited_section() {
+        Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
+    }
 }

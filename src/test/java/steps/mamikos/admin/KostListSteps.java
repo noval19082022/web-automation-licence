@@ -2,6 +2,7 @@ package steps.mamikos.admin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -22,6 +23,8 @@ public class KostListSteps {
     private String kostPMANList = "src/test/resources/testdata/bangkerupuxAdmin/kostList.properties";
     private String regularLevel = JavaHelpers.getPropertyValue(kostLevel, "kosLevelRegular_" + ENV);
     private String kostPMAN = JavaHelpers.getPropertyValue(kostPMANList, "kostPMAN");
+    private String roomListStaging = JavaHelpers.getPropertyValue(kostPMANList, "roomListStaging");
+    private String roomListProd = JavaHelpers.getPropertyValue(kostPMANList, "roomListProd");
 
     @Then("system displaying content of page kost list")
     public void system_displaying_content_of_page_kost_list(){
@@ -51,8 +54,17 @@ public class KostListSteps {
     }
 
     @When("admin search kost by name {string}")
-    public void admin_search_kost_by_name(String kostName){
-        kostList.searchKostName(kostName);
+    public void admin_search_kost_by_name(String kost){
+        kostList.searchKostName(kost);
+    }
+
+    @When("admin search kost by name for check Room List")
+    public void admin_search_kost_by_name_for_check_Room_List(){
+        if (Mamikos.ENV.equalsIgnoreCase("prod")){
+            kostList.searchKostName(roomListProd);
+        } else {
+            kostList.searchKostName(roomListStaging);
+        }
     }
 
     @When("admin change level to {string} on Edit Kost Level")
@@ -127,6 +139,20 @@ public class KostListSteps {
 
         for (int i = 0; i < row; i++) {
             Assert.assertEquals(kostList.getOwnerPhoneNumber(i), phone);
+        }
+    }
+
+    @When("admin search kost by level {string} on Kost List Table")
+    public void admin_search_kost_by_level_on_kost_list_table(String level){
+        kostList.selectKostLevelFilter(level);
+    }
+
+    @Then("show all kost belongs to level {string}")
+    public void show_all_kost_belongs_to_level(String level) {
+        int row = kostList.countRow();
+
+        for (int i = 0; i < row; i++) {
+            Assert.assertEquals(kostList.getLevel(i), level);
         }
     }
 }
