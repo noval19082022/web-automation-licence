@@ -21,6 +21,7 @@ Feature: List Riwayat Transaction Account
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user verify count of riwayat before beli saldo
-    And user wants to buy saldo MamiAds "Rp6.000"
+    And user open the invoice mamiads if invoice already maximal on riwayat
+    And user wants to buy saldo MamiAds "6.000"
     And user navigates to mamiads dashboard
     Then user verify count of riwayat added 1

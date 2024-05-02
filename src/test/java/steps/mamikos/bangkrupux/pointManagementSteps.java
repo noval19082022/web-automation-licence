@@ -42,6 +42,7 @@ public class pointManagementSteps {
         playwright.clickOnText("Search");
         pointManagement.statusUser(status).click();
         playwright.clickOnTextButton("Yes, Do It!");
+        Assert.assertEquals(pointManagement.getMessageSuccess(), "Success! " + user + " successfully "+action, "Message doesn't match!");
         Assert.assertTrue(playwright.isTextDisplayed("Success! " + user + " successfully "+action));
     }
 
