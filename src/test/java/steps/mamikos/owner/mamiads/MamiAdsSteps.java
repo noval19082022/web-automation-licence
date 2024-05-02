@@ -351,6 +351,13 @@ public class MamiAdsSteps {
         if (riwayatBeforeBeliSaldo == 12){
             mamiAdsPO.clickRiwayatMamiAds();
             page1 = mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
+
+            List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
+            ActiveContext.setActivePage(listPage.get(0));
+            playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+            playwright.bringPageToView(ActiveContext.getActivePage());
+
+            mamiAdsPO.clickBackIconOnRiwayatMamiads();
         }
     }
 
