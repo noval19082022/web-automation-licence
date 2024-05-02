@@ -4,6 +4,7 @@ import com.microsoft.playwright.Keyboard;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class ChatOwnerPO {
@@ -36,6 +37,7 @@ public class ChatOwnerPO {
     Locator broadcastChatBtn;
     Locator gpPacakgeText;
     Locator lastFTUEMars;
+    Locator ftueMarsBroadcast;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
     Locator Iunderstand;
@@ -74,6 +76,7 @@ public class ChatOwnerPO {
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
         gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
+        ftueMarsBroadcast = page.getByTestId("ftueTooltipCarousel");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
@@ -88,6 +91,18 @@ public class ChatOwnerPO {
     public void clickChatOwner() {
         playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(ownerChatButton);
+    }
+
+    public void dismissFTUEMarsGPAndBroadCastIfExist() {
+        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 3000.0)) {
+            this.dismissFTUEMarsGPAndBroadCast();
+        }
+    }
+
+    public void dismissFTUEJemputBolaIfExist() {
+        if (playwright.waitTillLocatorIsVisible(lihatFiturFTUEJB, 2000.0)) {
+            this.dismissFTUEJemputBola();
+        }
     }
 
     /**
@@ -383,7 +398,7 @@ public class ChatOwnerPO {
      */
     public void dismissFTUEJemputBola() {
         playwright.clickOn(lihatFiturFTUEJB);
-        page.goBack();
-        clickChatOwner();
+        playwright.navigateTo(Mamikos.OWNER_URL);
+        this.clickChatOwner();
     }
 }
