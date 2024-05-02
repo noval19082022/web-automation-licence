@@ -12,6 +12,7 @@ import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class PropertySayaPO {
@@ -1280,6 +1281,7 @@ public class PropertySayaPO {
      * @param descKos
      */
     public void inputDescKos(String descKos) {
+        descKos = descKos.toLowerCase().contains("random") ? descKos + UUID.randomUUID() : descKos;
         playwright.forceFill(descKosField, Objects.requireNonNullElse(descKos, ""));
     }
 
