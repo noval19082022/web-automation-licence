@@ -1,4 +1,4 @@
-@DOM1000
+@DOM1
 Feature: Mars Project
 
   @TEST_COOP-5248 @Automated @MARS-DOM @Web @discovery-platform

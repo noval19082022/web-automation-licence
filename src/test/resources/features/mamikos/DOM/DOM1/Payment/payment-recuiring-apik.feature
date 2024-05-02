@@ -1,4 +1,4 @@
-@DOM10
+@DOM1
 Feature: Payment Recurring kost APIK
 
   @TEST_COOP-5055 @continue
