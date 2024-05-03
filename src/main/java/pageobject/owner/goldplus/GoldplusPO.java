@@ -82,6 +82,11 @@ public class GoldplusPO {
     Locator buttonNantiWeekly;
     Locator buttonLihatFiturWeekly;
 
+    // === Admin Goldplus Package === //
+    Locator priceField;
+    Locator saveButton;
+    Locator warningMessage;
+    Locator successMessage;
 
 
     public GoldplusPO(Page page) {
@@ -146,6 +151,10 @@ public class GoldplusPO {
         titlePopUpGpWeekly = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Selamat bergabung di GoldPlus 1!"));
         buttonNantiWeekly = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         buttonLihatFiturWeekly = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
+        priceField = page.locator("//input[@id='price']");
+        saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
+        warningMessage = page.locator("//div[@class='alert alert-danger alert-dismissable']");
+        successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
     }
 
     /**
@@ -900,5 +909,41 @@ public class GoldplusPO {
         descPopUpGpWeekyly= page.getByText(desc);
         playwright.waitFor(descPopUpGpWeekyly);
         return playwright.getText(descPopUpGpWeekyly);
+    }
+
+    /**
+     * Edit field price on goldplus package edit
+     * @param price
+     *
+     */
+    public void editPriceGp(int price) {
+        playwright.forceFill(priceField, String.valueOf(price));
+    }
+
+    /**
+     * Click save button
+     *
+     *
+     */
+    public void clickSaveButton() {
+        playwright.clickOn(saveButton);
+    }
+
+    /**
+     * Verify the warning message
+     * @return warningMessage
+     *
+     */
+    public String getWarningMessageEditGp() {
+        return playwright.getText(warningMessage).replaceAll("×\\s+", "");
+    }
+
+    /**
+     * Verify the success message
+     * @return successMessage
+     *
+     */
+    public String getSuccessMessage() {
+        return playwright.getText(successMessage).replaceAll("×\\s+", "");
     }
 }
