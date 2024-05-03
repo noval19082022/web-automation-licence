@@ -11,10 +11,10 @@ Feature: Admin goldplus package
     And admin navigates to Admin Goldplus Package
     And admin navigate to goldplus package edit form
     And admin edit the price to 110000
-    And admin submit and get warning "Markup Price must greather than or equal to price"
+    Then admin submit and get warning "Markup Price must greather than or equal to price"
 
   @TEST_LIMO-2185
   Scenario: [Admin][Edit GP Package] User want to Edit GP Package at Bangkerupux with Valid Value
     And admin edit the price to 79000
-    And admin submit and get success message "Success! GoldPlus package updated."
+    Then admin submit and get success message "Success! GoldPlus package updated."
     
