@@ -5,8 +5,8 @@ Feature: Edit Kost
   Scenario: [Web][Edit Kost] Edit kost fasilitas with invalid data
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
     And owner dismiss FTUE goldplus
     And owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
@@ -16,8 +16,8 @@ Feature: Edit Kost
     And user uncheck facilities under "Fasilitas Umum"
       | CCTV |
     And user uncheck facilities under "Fasilitas Kamar"
-      | Kasur     |
-      | Sofa      |
+      | Kasur |
+      | Sofa  |
     And user uncheck facilities under "Fasilitas Kamar Mandi"
       | Air panas |
       | Bak mandi |
@@ -61,8 +61,40 @@ Feature: Edit Kost
   Scenario: Verify kos in admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "Kos oke bebek Tipe Mamitest Not Change" in admin kos owner page
     And user verify the kos in admin kos owner
+
+  @TEST_LIMO-2719
+  Scenario Outline: Status kos is active or reject and owner edit description kos
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "<kost name>" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Data Kos" kos
+    And owner fills valid data kos as expected
+      | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | <kost name> | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+    And user click button edit finished
+    Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
+    And user click done in success page pop up of edit kos
+    Then user see kos with name "<kost name>", status "Diperiksa Admin" and type "Kos Campur"
+    And user logs out
+#  Scenario: Verify kos in admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner "<kost name>" in admin kos owner page
+    And user verify the kos in admin kos owner
+    Examples:
+      | kost name     |
+      | MAMAHMUDALIMO |
