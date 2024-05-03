@@ -1,5 +1,14 @@
-@COOP8 @addFeeMvp
+@BBM8 @addFeeMvp
 Feature: Add fee Mvp - Tenant
+
+  Scenario: Teminated contract
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag     | phone prod     |
+      | 08100000213    | 08100000213    |
 
   @TEST-COOP-6954 @continue
   Scenario: [Tenant][Detail booking]  for P2 in the kos details there is no order form
@@ -41,21 +50,21 @@ Feature: Add fee Mvp - Tenant
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Tambahan barang dan fasilitas" on booking form
-    And tenant click on "Pilih tambahan" on booking form
+    And tenant click on pilih tambahan on booking form
     Then tenant can see "Bawa Televisi" on booking form
     When tenant can see "Parkir Motor" on booking form
     Then tenant cant see "Benefit Asuransi & Biaya Admin" on booking form
     And tenant click on save button
 
 #  @TEST_COOP-6956
-    And tenant click on "Pilih tambahan" on booking form
+    And tenant click on pilih tambahan on booking form
     When tenant choose biaya tambahan "Bawa Televisi" on booking form
     Then tenant choose biaya tambahan "Parkir Motor" on booking form
     And tenant click on save button
     Then tenant can see "Bawa Televisi, Parkir Motor" on booking form
 
 #  @TEST_COOP-6957
-    When tenant click on "Ubah tambahan" on booking form
+    When tenant click on ubah tambahan barang on booking form
     And tenant choose biaya tambahan "Bawa Kulkas" on booking form
     And tenant click on save button
     Then tenant can see "Bawa Televisi, Parkir Motor, Bawa Kulkas" on booking form
@@ -74,3 +83,26 @@ Feature: Add fee Mvp - Tenant
      Then tenant should success booking kost
      And tenant click on chat pemilik
      Then tenant can see tenant description with "-"
+
+  @TEST_COOP-6961
+  Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if choose additional fee but don't have note
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | password |
+      | 08100000213 | qwerty123 |
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                |
+      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "Tomorrow"
+    Then tenant can see "Tambahan barang dan fasilitas" on booking form
+    And tenant click on pilih tambahan on booking form
+    When tenant choose biaya tambahan "Parkir Motor" on booking form
+    And tenant click on save button
+    Then tenant can see "Parkir Motor" on booking form
+    And user can set Ajukan Sewa
+    Then tenant should success booking kost
+    And tenant click on chat pemilik
+    Then tenant can see tenant description with "Parkir Motor"

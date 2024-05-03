@@ -6,7 +6,7 @@ Feature: Survey Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 0890867321216 | 08100000622 | mamikosqa123 |
+      | 0812000005 | 0812000005 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user batalkan survey if the survey already submitted
