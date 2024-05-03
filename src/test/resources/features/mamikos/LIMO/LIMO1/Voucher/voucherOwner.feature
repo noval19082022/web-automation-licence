@@ -58,7 +58,7 @@ Feature: Voucher
   Scenario: Apply voucher from detail voucher and deleted apply voucher
     And owner back to list voucher
     * user verify "MA AUTOMATION SINGLE VOUCHER" is present on list voucher
-    When user click on "Lihat Detail" "MA AUTOMATION SINGLE VOUCHER" voucher
+    When user click on lihat detail voucher
     Then verify a detail voucher as expected
       | voucherTitle                 | voucherCode                         | voucherExpired                 | voucherTnC                                                                                                    |
       | MA AUTOMATION SINGLE VOUCHER | Kode Voucher: MAATSINGLEVOUCHERNEW1 | Berlaku hingga 27 Oktober 2027 | Voucher hanya digunakan untuk keperluan automation akun 0895365624343Pembelian saldo minimal 5.000Diskon 100% |
@@ -71,7 +71,7 @@ Feature: Voucher
 #   scenario: apply from list
     And owner wants to accsess voucher list
     * user verify "MA AUTOMATION SINGLE VOUCHER" is present on list voucher
-    When user click on "Pakai" "MA AUTOMATION SINGLE VOUCHER" voucher
+    When user click Pakai button
     Then user verify the toast "Voucher Dipakai"
     When user click hapus voucher
     Then user verify the toast "Voucher Dihapus"

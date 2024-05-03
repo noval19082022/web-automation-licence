@@ -1,4 +1,4 @@
-@regression @manageBooking @hubungiKostDetail @OB @booking @BBM2
+@regression @manageBooking @hubungiKostDetail @OB @booking @BBM2 @noval5
 Feature: OB Booking From Hubungi Kost
 
   Scenario: Admin Batalkan Contract
@@ -7,8 +7,8 @@ Feature: OB Booking From Hubungi Kost
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
-      | phone stag    | phone prod    |
-      | 0890000000314 | 0890000000314 |
+      | phone stag  | phone prod    |
+      | 08922024500 | 0890000000314 |
     And admin akhiri contract
     Then admin should success terminate contract
 
@@ -16,15 +16,15 @@ Feature: OB Booking From Hubungi Kost
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0890000000314 | 0890000000314 | Bismillah@01 |
+      | phone stag  | phone prod    | password  |
+      | 08922024500 | 0890000000314 | qwerty123 |
     And user cancel booking
 
   @TEST_COOP-1995
   Scenario: OB Booking Hubungi Kost From Detail Kost
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                              | kost name prod                                              |
+      | kost name stag                                                                    | kost name prod                                                                    |
       | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
     And user click chat in kos detail
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
