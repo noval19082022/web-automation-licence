@@ -23,7 +23,7 @@ Feature: Mamiprime Landing Page
 
   @continue
   Scenario: Benefit Mamiprime Landing Page
-    When user redirected to mamiprime landing page
+    When owner access mamiprime landing page
     Then owner can see benefit section
 
   @continue

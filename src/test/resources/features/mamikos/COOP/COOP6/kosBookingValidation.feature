@@ -19,7 +19,7 @@ Feature: Kost Validation
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
-      | 0891111020199  |  0891111020199  | mamikosqa123 |
+      | 0812000009     |  0812000009     | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag            			    | kost name prod              |
       | Kost Singgahsini Rocket Tipe F Kediri   | Kost Singgahsini Arac Ipi   |

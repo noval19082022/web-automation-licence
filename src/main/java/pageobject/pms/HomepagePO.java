@@ -209,7 +209,6 @@ public class HomepagePO {
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
         totalPropertyText = page.locator(".total-data");
-        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -942,6 +941,15 @@ public class HomepagePO {
      * Clicks Reset button
      */
     public void clicksReset() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
+        playwright.clickOn(resetBtn);
+    }
+
+    /**
+     * Clicks Reset button inside filter modal
+     */
+    public void clicksResetFilterModal() {
+        resetBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
         playwright.clickOn(resetBtn);
     }
 
@@ -1070,5 +1078,15 @@ public class HomepagePO {
         Locator emptyPmsKKText = page.locator("//p[normalize-space()='" +text+ "']");
         playwright.pageScrollInView(emptyPmsKKText);
         return playwright.waitTillLocatorIsVisible(emptyPmsKKText,2000.0);
+    }
+
+    /**
+     * Check is Disesuaikan dengan Tagihan is displayed
+     * @param text
+     * @return text "Disesuaikan dengan Tagihan"
+     */
+    public boolean getPriceTextNewRules(String text){
+        Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
 }

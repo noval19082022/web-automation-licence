@@ -88,4 +88,13 @@ public class MamiprimeSteps {
     public void user_will_see_cs_buton_on_contact_section() {
         Assert.assertTrue(mamiprime.isCSButtonVisible(), "CS Button does not appear");
     }
+
+    @Then("user will see pop up doesnt have property on mamiprime")
+    public void user_will_see_pop_up_doesnt_have_property_on_mamiprime() {
+        Assert.assertTrue(mamiprime.getTitleBelumAdaProperti());
+        Assert.assertTrue(mamiprime.getSubtitleBelumAdaProperti());
+        Assert.assertTrue(mamiprime.isTambahKosBtnVisible());
+        Assert.assertTrue(mamiprime.isNantiSajaBtnVisible());
+    }
+
 }

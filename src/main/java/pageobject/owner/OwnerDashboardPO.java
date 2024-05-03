@@ -282,6 +282,7 @@ public class OwnerDashboardPO {
      * Click on gold plus widget button
      */
     public void clickOnGpWidgetButton() {
+        playwright.waitTillLocatorIsVisible(gpWidgetButton);
         playwright.clickOn(gpWidgetButton);
     }
 

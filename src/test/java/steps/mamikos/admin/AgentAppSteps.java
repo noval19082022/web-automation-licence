@@ -40,17 +40,13 @@ public class AgentAppSteps {
             }
         }
         if (isActive.equalsIgnoreCase("Yes") && agent.equalsIgnoreCase("Automation PMAN Yes")){
-            Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(isActive), "Is Active Status in Table is not Yes!");
-            System.out.println(agentApp.isActiveStatusInTableEqualYes(isActive));
+            Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(agent,isActive), "Is Active Status in Table is not Yes!");
             Assert.assertTrue(agentApp.isAgentEqual(agent), "Agent in Table does not Equal!");
-            System.out.println(agentApp.isAgentEqual(agent));
 
             agentApp.clicksEdit(agent);
         } else if (isActive.equalsIgnoreCase("No") && agent.equalsIgnoreCase("Automation PMAN No")) {
-            Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(isActive), "Is Active Status in Table is not No!");
-            System.out.println(agentApp.isActiveStatusInTableEqualYes(isActive));
+            Assert.assertTrue(agentApp.isActiveStatusInTableEqualYes(agent,isActive), "Is Active Status in Table is not No!");
             Assert.assertTrue(agentApp.isAgentEqual(agent), "Agent in Table does not Equal!");
-            System.out.println(agentApp.isAgentEqual(agent));
 
             agentApp.clicksEdit(agent);
         } else {

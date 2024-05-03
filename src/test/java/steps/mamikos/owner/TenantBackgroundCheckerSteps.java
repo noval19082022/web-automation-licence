@@ -23,7 +23,7 @@ public class TenantBackgroundCheckerSteps {
     public void owner_can_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt){
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
-        broadcast.clickOnCloseTooltip();
+        chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
         Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(),"entry point not displayed");
     }
@@ -56,6 +56,7 @@ public class TenantBackgroundCheckerSteps {
     @And("owner open TBC Lihat Profil at chatroom {string}")
     public void owner_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.dismissFTUEMarsGPAndBroadCast();
+        chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
@@ -70,6 +71,7 @@ public class TenantBackgroundCheckerSteps {
     public void owner_non_gp_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
+        chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
@@ -83,6 +85,7 @@ public class TenantBackgroundCheckerSteps {
 
     @And("owner doesn't have GP open TBC Lihat Profil at chatroom {string}")
     public void owner_doesnt_have_gp_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
+        chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();

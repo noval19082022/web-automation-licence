@@ -25,10 +25,12 @@ public class KostListPO {
     Locator levelNameText;
     Locator chargeBy;
     Locator chargeByDropdowntText;
+    Locator kosLevelFilterDropdown;
     private Locator kostNameText;
     private Locator row;
     private Locator ownerNameText;
     private Locator ownerPhoneNumberText;
+    private Locator levelText;
 
     public KostListPO(Page page){
         this.page = page;
@@ -47,6 +49,7 @@ public class KostListPO {
         chargeBy = page.locator("//select[@id='is-charge-by-room']");
         chargeByDropdowntText = page.locator("//select[@id='is-charge-by-room']/option[@selected='true']");
         row = page.locator("tbody tr");
+        kosLevelFilterDropdown = page.locator("//select[@name='level-id']");
     }
 
     /**
@@ -238,5 +241,23 @@ public class KostListPO {
     public String getOwnerPhoneNumber(int i) {
         ownerPhoneNumberText = page.locator("(//tr["+(i+1)+"])/td[4]");
         return playwright.getText(ownerPhoneNumberText);
+    }
+
+    /**
+     * Select Kost Level on Kost Level Filter
+     * @param level
+     */
+    public void selectKostLevelFilter(String level) {
+        playwright.selectDropdownByValue(kosLevelFilterDropdown, level);
+    }
+
+    /**
+     * Get kost level row i
+     * @param i
+     * @return String
+     */
+    public String getLevel(int i) {
+        levelText = page.locator("(//tr["+(i+1)+"])/td[5]");
+        return playwright.getText(levelText);
     }
 }

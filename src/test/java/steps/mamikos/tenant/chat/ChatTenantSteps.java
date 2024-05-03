@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import pageobject.common.KostDetailsPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.tenant.chat.ChatTenantPO;
 import utilities.PlaywrightHelpers;
@@ -17,6 +18,7 @@ public class ChatTenantSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     ChatTenantPO chat = new ChatTenantPO(page);
     ChatOwnerPO chatOwner = new ChatOwnerPO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
 
 
     @Then("user see phone number field and selectable question options :")
@@ -55,6 +57,7 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
+        kostDetail.dismissFTUEIfExist();
         Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
     }
 

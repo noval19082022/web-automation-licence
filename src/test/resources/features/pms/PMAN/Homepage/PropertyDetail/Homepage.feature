@@ -38,7 +38,20 @@ Feature: Homepage menu
   Scenario: Apply Some Filters
     When admin go to Homepage
     And admin Filter data in Homepage
-    Then property is displayed
+    Then the system is displaying total active filter number is "11"
+    And property is displayed
+
+  @TEST_PMAN-3584 @continue
+  Scenario: Reset filter
+    When admin reset filter in Homepage
+    Then the system is displaying total active filter number is "1"
+
+  @TEST_PMAN-3585 @continue
+  Scenario: Reset filter using the reset button inside filter modal
+    When admin Filter data in Homepage
+    Then the system is displaying total active filter number is "11"
+    And admin reset filter in Homepage filter modal
+    Then the system is displaying total active filter number is "1"
 
   @TEST_PMAN-3587 @continue
   Scenario: Search using property ID
