@@ -66,7 +66,15 @@ public class AddTenantPO {
      *
      */
     public void selectHowToAddTenant(String stringText) {
-        playwright.clickOnText(stringText, 3000.0);
+        if (playwright.isTextDisplayed("Lanjut")) {
+            for (int i = 0; i < 2; i++) {
+                playwright.clickOnText("Lanjut");
+            }
+            playwright.clickOnText("Mulai");
+            playwright.clickOnText(stringText, 3000.0);
+        } else {
+            playwright.clickOnText(stringText, 3000.0);
+        }
     }
 
     /**
@@ -75,7 +83,7 @@ public class AddTenantPO {
      *
      */
     public void selectKosToAddContract(String kosName) {
-        playwright.clickOnText(kosName, 3000.0);
+        playwright.clickOnText(kosName);
     }
 
     /**
