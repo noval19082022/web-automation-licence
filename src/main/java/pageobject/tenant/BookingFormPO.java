@@ -346,11 +346,10 @@ public class BookingFormPO {
 
     /**
      * click addfee button
-     * @param text example Bawa Mesin Cuci
      */
-    public void clickTambahBarangButton(String text){
+    public void clickTambahBarangButton(){
         playwright.hardWait(100);
-        Locator tambahBarangButton = page.locator("//*[contains(text(), '"+text+"')]");
+        Locator tambahBarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus Pilih tambahan barang/fasilitas"));
         if (tambahBarangButton.isVisible()){
             playwright.clickOn(tambahBarangButton);
         }
@@ -358,6 +357,24 @@ public class BookingFormPO {
             playwright.pageScrollInView(tambahBarangButton);
             playwright.clickOn(tambahBarangButton);
         }
+    }
+
+    /**
+     * click on ubah fasilitas button
+     */
+    public void clickUbahFasilitas(){
+        Locator ubahFasilitasButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("edit Ubah tambahan barang/fasilitas"));
+        playwright.clickOn(ubahFasilitasButton);
+    }
+
+    /**
+     * click on Addfee List on Biaya tambahan popup
+     * @param text example : Parkir Motor
+     */
+    public void clickAddfeeList(String text){
+        playwright.hardWait(100);
+        Locator addFeeList = page.locator("//div[@class=\"bg-c-modal__body\"]//p[contains(text(), '"+text+"')]");
+        playwright.clickOn(addFeeList);
     }
 
     /**
