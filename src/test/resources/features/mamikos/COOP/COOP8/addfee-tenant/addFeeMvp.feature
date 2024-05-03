@@ -69,7 +69,7 @@ Feature: Add fee Mvp - Tenant
     And tenant click on save button
     Then tenant can see "Bawa Televisi, Parkir Motor, Bawa Kulkas" on booking form
 
-   @TEST_COOP-6962
+   @TEST_COOP-6962 @continue
    Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra fee and don't write a note
      When user go to mamikos homepage
      And user cancel booking
@@ -86,10 +86,7 @@ Feature: Add fee Mvp - Tenant
 
   @TEST_COOP-6961
   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if choose additional fee but don't have note
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag   | password |
-      | 08100000213 | qwerty123 |
+    When user go to mamikos homepage
     And user cancel booking
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
