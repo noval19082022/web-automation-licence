@@ -85,9 +85,10 @@ public class ChatOwnerSteps {
     }
     @And("user dismiss FTUE MARS and FTUE Broadcast")
     public void userDismissFTUEMARSAndFTUEBroadcast() {
+        chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
-        chat.dismissFTUEBroadcast();
+        chat.dismissFTUEJemputBolaIfExist();
     }
 
     @And("user open chatroom from {string}")
@@ -118,7 +119,7 @@ public class ChatOwnerSteps {
 
     @And("user dismiss FTUE MARS Goldplus and FTUE Broadcast")
     public void userDismissFTUEMARSGoldplusAndFTUEBroadcast() {
-        chat.dismissFTUEMarsGPAndBroadCast();
+        chat.dismissFTUEMarsGPAndBroadCastIfExist();
     }
 
     @Then("user see attachment button is enabled")

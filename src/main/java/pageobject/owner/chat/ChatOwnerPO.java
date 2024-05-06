@@ -65,12 +65,12 @@ public class ChatOwnerPO {
         roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
         roomPrice = page.locator("//p[contains(.,'Rp780.000')]");
         sisaKamarLabel = page.locator("//p[@class='bg-c-text bg-c-text--label-4 bg-c-text--italic mc-product-card__available-room bg-u-text-red-600']");
-        FTUEBeforeChat = page.getByText("Kuota chat room akan berkurang Kini berlaku sistem kuota chat mingguan. Jika lan");
+        FTUEBeforeChat = page.getByText("Kini berlaku sistem kuota chat. Jika lanjut kirim chat dengan calon penyewa ini,");
         backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
-        weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
+        weeklyQuotaChatlistHeader = page.getByText("Sisa Kuota: information-round");
         weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
