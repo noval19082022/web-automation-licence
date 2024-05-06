@@ -699,4 +699,20 @@ public class GoldplusSteps {
         Assert.assertEquals(goldplus.getDescPopUpWeekly(desc),desc,"description not equals");
     }
 
+    @And("admin edit the price to {int}")
+    public void adminEditThePriceTo(int price) {
+        goldplus.editPriceGp(price);
+    }
+
+    @And("admin submit and get warning {string}")
+    public void adminSubmitAndGetWarning(String warningMessage) {
+        goldplus.clickSaveButton();
+        Assert.assertEquals(goldplus.getWarningMessageEditGp(), warningMessage, "Warning message doesn't match!");
+    }
+
+    @And("admin submit and get success message {string}")
+    public void adminSubmitAndGetSuccessMessage(String successMessage) {
+        goldplus.clickSaveButton();
+        Assert.assertEquals(goldplus.getSuccessMessage(), successMessage, "Success message doesn't match!");
+    }
 }

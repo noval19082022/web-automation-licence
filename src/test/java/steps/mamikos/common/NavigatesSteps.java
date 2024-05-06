@@ -433,4 +433,10 @@ public class NavigatesSteps {
     public void admin_accsess_menu_whitelist_feature() {
         playwright.navigateTo(Mamikos.URL + "/admin/whitelist-features", 30000.0, LoadState.LOAD);
     }
+
+    @And("admin navigate to goldplus package edit form")
+    public void adminNavigateToGoldplusPackageEditForm() {
+        playwright.navigateTo(Mamikos.URL + "/admin/gold-plus/package/346/edit", 30000.0, LoadState.LOAD);
+    }
+
 }

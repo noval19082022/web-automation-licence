@@ -10,7 +10,7 @@ Feature: Update Refund Policy kost pilar 1 and reguler
     And tenant search kost then go to kost details:
       | kost name stag       | kost name prod       |
       | Kost Garden Abepura  | Kost Garden Abepura  |
-    And tenant dismiss promo ngebut pop up
+    And user want to dismiss FTUE
     Then tenant can see refund policy on kost detail
     When tenant click bagaimana ketentuannya
     Then tenant can see refund policy information with:
@@ -37,5 +37,5 @@ Feature: Update Refund Policy kost pilar 1 and reguler
       | DP tidak dapat di-refund              |
       | Bayar langsung lunas dapat di-refund  |
     When user click on ketentuan waktu berikut
-    And tenant set active page to 2
+    And tenant set active page to 1
     Then user can see "refund-policy/refund-policy-controlled-property" on mamihelp page
