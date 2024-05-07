@@ -817,6 +817,7 @@ public class OwnerDashboardPO {
      * @return boolean
      */
     public boolean isLeadsMenuVisible() {
+        playwright.waitTillLocatorIsVisible(leadsMenu, 30000.0);
         return playwright.isLocatorVisibleAfterLoad(leadsMenu,5000.0);
     }
 

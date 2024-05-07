@@ -101,6 +101,7 @@ public class OwnersiniPO {
      * Clicks Lewati on FTUE Ownersini
      */
     public void dismissFtueOwnersini(){
+        playwright.waitTillLocatorIsVisible(skipFtueBtn);
         playwright.clickOn(skipFtueBtn);
     }
 
@@ -115,6 +116,7 @@ public class OwnersiniPO {
      * Clicks on Kembali ke Mamikos on Profil
      */
     public void clicksKembaliKeMamikos() {
+        playwright.waitTillLocatorIsVisible(kembaliKeMamikosBtn, 30000.0);
         playwright.clickOn(kembaliKeMamikosBtn);
     }
 
