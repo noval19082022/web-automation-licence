@@ -1,4 +1,4 @@
-@arac @pms @BBM8 @edit
+@arac @pms @BBM8
 Feature: Edit Out Of Order on PMS
 
   Background: Delete OOO From Room Allotment Page

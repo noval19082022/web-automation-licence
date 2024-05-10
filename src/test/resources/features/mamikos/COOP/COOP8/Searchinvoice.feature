@@ -1,8 +1,8 @@
-@regression
+@regression @BBM8
 
 Feature: Search invoice
 
-  @TEST_COOP-2878 @autoExtendTrue @continue @BBM8
+  @TEST_COOP-2878 @autoExtendTrue @continue
   Scenario: Auto extend is true
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -13,7 +13,7 @@ Feature: Search invoice
     And user click search invoice button on search invoice admin page
     Then user verify search invoice results have auto extend "True", "success"
 
-  @TEST_COOP-2877 @autoExtendFalse @continue @BBM8
+  @TEST_COOP-2877 @autoExtendFalse @continue
   Scenario: Auto extend is false
     When admin clicks on Search Invoice Menu form left bar
     And user select "False" on auto extend selection
@@ -52,7 +52,7 @@ Feature: Search invoice
       | Platform | Content                                                                                                                                                                                        | Created At          | Reminder Type                          | Status  |
       | WhatsApp | Hai  Laksana Adi, Udah coba bayar kosan yang anti ribet? Cuma beberapa klik, uang sewa langsung diterima pemilik.Yuk, cobain langsung di https://mamikos.com/user/kost-saya?tagihan=true&ch=08 | 2021-09-06 05:12:10 | Billing Reminder Without Voucher Today | pending |
 
-  @TEST_COOP-1397 @BBM8
+  @TEST_COOP-1397
   Scenario Outline: [Search invoice]Find <status> data invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -67,7 +67,7 @@ Feature: Search invoice
       | Paid    | Paid    |
       | Expired | Expired |
 
-  @TEST_COOP-1399 @continue @BBM8
+  @TEST_COOP-1399 @continue
   Scenario: [Search invoice]Find recurring data invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -78,13 +78,13 @@ Feature: Search invoice
     And admin choose invoice type "recurring_invoice"
     Then admin should be able to see the text "Pembayaran bulan ke-2"
 
-  @TEST_COOP-6707 @BBM8
+  @TEST_COOP-6707
   Scenario: [Search invoice]Find first invoice data invoice
     And admin clicks on Search Invoice Menu form left bar
     And admin choose invoice type "first_invoice"
     Then admin should not be able to see the text "Pembayaran bulan ke-2"
 
-  @TEST_COOP-1395 @TEST_COOP-1388 @BBM8
+  @TEST_COOP-1395 @TEST_COOP-1388
   Scenario Outline: [Search invoice]Find sort by data invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -98,7 +98,7 @@ Feature: Search invoice
       | Scheduled Date Descending | Unpaid |
       | Scheduled Date Ascending  | paid   |
 
-  @TEST_COOP-1391 @BBM8
+  @TEST_COOP-1391
   Scenario: change status invoice to paid
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -117,7 +117,7 @@ Feature: Search invoice
     And admin click submit button
     Then admin verify see text "Data telah berhasil diupdate."
 
-  @TEST_COOP-1389 @BBM8
+  @TEST_COOP-1389
   Scenario: change status invoice to no in mamipay
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -133,7 +133,7 @@ Feature: Search invoice
     And admin click submit button
     Then admin verify see text "Data telah berhasil diupdate."
 
-  @TEST_COOP-1384 @BBM8
+  @TEST_COOP-1384
   Scenario: change status invoice to paid or not in mamipay withount input date
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -148,7 +148,7 @@ Feature: Search invoice
     And admin click submit button
     Then admin verify see text "The transaction date field is required when status is not_in_mamipay."
 
-  @TEST_COOP-1390 @BBM8
+  @TEST_COOP-1390
   Scenario: change original price for paid invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
