@@ -495,6 +495,7 @@ public class KostDetailsPO {
         this.submitWLButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         this.selectDateForSudahAdaTgl = page.getByPlaceholder("Isi dengan tanggal masuk kos");
         this.selectDateForBaruPerkiraan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih rentang tanggal calendar"));
+        this.closeWaitingListButton = page.locator("//button[@class=\"bg-c-modal__action-closable\"]");
 
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
