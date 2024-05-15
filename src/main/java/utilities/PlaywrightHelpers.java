@@ -24,6 +24,15 @@ public class PlaywrightHelpers {
         page.reload();
     }
 
+    public void reloadPageIfLocatorNotVisible(int times, Locator locator) {
+        if(this.isLocatorVisibleAfterLoad(locator, 1000.0)){
+            for (int i = 0; i < times; i++) {
+                page.reload();
+                if (locator.isVisible()) break;
+            }
+        }
+    }
+
     /**
      * Reload page with timeout
      * @param timeout

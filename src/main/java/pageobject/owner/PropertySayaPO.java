@@ -1272,6 +1272,7 @@ public class PropertySayaPO {
      */
     public void selectKostType(String kosType) {
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
+        playwright.reloadPageIfLocatorNotVisible(3, kostTypeImage);
         playwright.clickOn(kostTypeImage);
     }
 
