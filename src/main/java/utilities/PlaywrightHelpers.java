@@ -24,6 +24,11 @@ public class PlaywrightHelpers {
         page.reload();
     }
 
+    /**
+     * this method will be reload the active page if element is not visible after loading
+     * @param times how many you would to reload
+     * @param locator the expected locator that you want to visible
+     */
     public void reloadPageIfLocatorNotVisible(int times, Locator locator) {
         if(this.isLocatorVisibleAfterLoad(locator, 1000.0)){
             for (int i = 0; i < times; i++) {
