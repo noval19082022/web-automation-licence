@@ -2,14 +2,19 @@ package steps.mamikos.backofficedmin;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.paidinvoicelist.RefundPO;
 
+import java.util.List;
+import java.util.Map;
+
 public class RefundSteps {
     Page page = ActiveContext.getActivePage();
     RefundPO refundPO = new RefundPO(page);
+    private List<Map<String, String>> searchBy;
 
     @And("admin pick one invoice on list to refund")
     public void adminRefund() {
@@ -120,5 +125,15 @@ public class RefundSteps {
     @And("admin pick one invoice on failed list")
     public void adminPickOneInvoiceOnFailedList() {
         refundPO.clickOnDetailFailedInvoiceList();
+    }
+
+    @And("admin search data refund by using:")
+    public void adminSearchDataRefund(DataTable tables) {
+        searchBy = tables.asMaps(String.class, String.class);
+        for (Map<String, String> searchData : searchBy) {
+            String name = searchData.get("Search by");
+            String value = searchData.get("Value");
+            refundPO.adminSearchDataRefund(name, value);
+        }
     }
 }

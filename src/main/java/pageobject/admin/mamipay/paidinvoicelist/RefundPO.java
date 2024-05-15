@@ -283,4 +283,17 @@ public class RefundPO {
     public void clickOnDetailFailedInvoiceList() {
         playwrightHelpers.clickOn(detailBtn);
     }
+
+    /**
+     * Input data refund
+     * click on search button
+     */
+    public void adminSearchDataRefund(String name, String value) {
+        playwrightHelpers.clickOn(searchBy);
+        Locator searchBy = page.locator("//span[normalize-space()='"+name+"']");
+        playwrightHelpers.clickOn(searchBy);
+        Locator valueBy = page.locator("input[placeholder='Search']");
+        playwrightHelpers.fill(valueBy, value);
+        playwrightHelpers.clickOn(searchBtnAction);
+    }
 }
