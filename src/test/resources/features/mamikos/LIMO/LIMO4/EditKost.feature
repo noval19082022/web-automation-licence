@@ -98,3 +98,19 @@ Feature: Edit Kost
     Examples:
       | kost name     |
       | MAMAHMUDALIMO |
+
+    @TEST_LIMO-2710 @updatefotokost
+    Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
+      Given user go to mamikos homepage
+      When user login as owner:
+        | phone stag   | phone prod   | password  |
+        | 081328787342 | 081328787342 | Perempuan |
+      And owner dismiss FTUE goldplus
+      And owner navigates to property saya kos
+      And owner search kost "MAMAHMUDALIMO" on property saya page
+      And user click Lihat Selengkapnya button for edit
+      And user clicks on edit data kos button
+      And user click button edit "Foto Kamar" kos
+      And user clicks button move photo on "Foto dalam kamar"
+      And user select destination move photo room on "Foto depan kamar"
+      Then user will see that the text "Anda harus melengkapi foto ini" is displayed
