@@ -112,6 +112,7 @@ public class ChatTenantPO {
      */
     public String getLatestChatText() {
         playwright.pageScrollUntilElementIsVisible(latestChat);
+        playwright.waitTillLocatorIsVisible(latestChat);
         return playwright.getText(latestChat);
     }
 

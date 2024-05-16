@@ -463,3 +463,24 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set rekening number "ABCDEFG" and rekening owner "testing automation refund" for refund
     And admin set to refund the paid invoice
     Then admin verify see text "Account number can only contain number"
+
+
+  @TEST_COOP-5542 @Automated @web-covered
+  Scenario Outline: [BackOffice][Refund] Check list of data transaction on tab paid Search by Nama Penyewa
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin navigate to mamipay refund page
+    And admin visit transferred list on refund page
+    And admin search data refund by using:
+      | Search by            | Value     |
+      | <Dropdown>           | <Search>  |
+    Then admin verify see text "Daftar Invoice Refund"
+    Examples:
+      | Dropdown             | Search                 |
+      | Tenant Name          | Noval Abis Delete Aja  |
+      | Tenant Phone Number  | 081280003230           |
+      | Owner Phone Number   | 089120220103           |
+      | Owner Name           | Coba delete akun owner |
+      | Invoice Number       | 24873147/2023/01/66689 |
