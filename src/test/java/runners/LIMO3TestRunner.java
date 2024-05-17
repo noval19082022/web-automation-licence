@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"json:target/result/limo3/cucumber-report.json", "html:target/result/limo3/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@createKosBBKNotActive"
+        tags = "@LIMO3"
 )
 
 public class LIMO3TestRunner extends BaseTestRunner {
