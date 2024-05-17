@@ -9,6 +9,7 @@ Feature: Create new kos with owner not active BBK
       | phone stag    | password  |
       | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
+    When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click add another type from kos "Kost Rejected bbk automation new banget nih"
     And owner click "Tipe New BBK Rejected" in add new room type pop up and click next
@@ -44,6 +45,7 @@ Feature: Create new kos with owner not active BBK
       | phone stag    | password  |
       | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
+    When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click add another type from kos "Kost Rejected bbk automation new banget nih"
     And owner click "Buat Baru" in add new room type pop up and click next
@@ -96,6 +98,7 @@ Feature: Create new kos with owner not active BBK
       | phone stag    | password  |
       | 0823333333330 | qwerty123 |
     And owner navigates to property saya kos
+    When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
