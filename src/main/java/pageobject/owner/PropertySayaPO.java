@@ -2284,6 +2284,16 @@ public class PropertySayaPO {
     }
 
     /**
+     * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     * @param photoLocation
+     */
+    public void hoverPhoto(String photoLocation) {
+        Locator backgroundImage = page
+                .locator("//h4[.='"+photoLocation+"']/following-sibling::*//div[@class='image-uploader__preview']");
+        backgroundImage.hover();
+    }
+
+    /**
      * Verify the button hover is visible
      * @return boolean
      */
@@ -2306,6 +2316,16 @@ public class PropertySayaPO {
      */
     public void clickOnMovePhotoHover() {
         playwright.clickOn(movePhotoHover);
+    }
+
+    /**
+     * Click pindahkan photo from hover
+     * @param destination
+     */
+    public void clickOnMovePhotoHover(String destination) {
+        var destinationLocator = page
+                .locator("//h4[.='"+destination+"']/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]");
+        playwright.clickOn(destinationLocator);
     }
 
     /**
@@ -2364,6 +2384,16 @@ public class PropertySayaPO {
      */
     public void selectDestinationPhotoRoom() {
         playwright.clickOn(destinationPhotoRoomMoved);
+    }
+
+    /**
+     * Select the destination room photo on pindahkan photo step
+     * @param destination
+     */
+    public void selectDestinationPhotoRoom(String destination) {
+        Locator destinationPhotoRoomMovedLocator = page
+                .locator("//label/child::*/*[contains(.,'"+destination+"')]");
+        playwright.clickOn(destinationPhotoRoomMovedLocator);
     }
 
      /**
