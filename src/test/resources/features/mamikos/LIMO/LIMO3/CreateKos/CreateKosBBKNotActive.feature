@@ -2,7 +2,7 @@
 
 Feature: Create new kos with owner not active BBK
 
-  @TEST_LIMO-2825 @CreateKosExistTypeBBKNotActv
+  @TEST_LIMO-2825 @CreateKosExistTypeBBKNotActv @continue
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,7 +12,7 @@ Feature: Create new kos with owner not active BBK
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected bbk automation"
+    And owner click add another type from kos "Kost Rejected bbk automation new banget nih"
     And owner click "Tipe New BBK Rejected" in add new room type pop up and click next
     And owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
@@ -25,6 +25,7 @@ Feature: Create new kos with owner not active BBK
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Campur"
+    And user logs out
 
   Scenario: Delete and reject kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -38,7 +39,7 @@ Feature: Create new kos with owner not active BBK
     When admin click on "BBK Data" link button
     And admin reject BBK kos
 
-  @TEST_LIMO-3660 @CreateNewRoomTypeBBKNotActv
+  @TEST_LIMO-3660 @CreateNewRoomTypeBBKNotActv @continue
   Scenario: [Add new kost][Kos]Create new room type from "Buat baru" when user already active mamipay && all bbk kos not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -48,7 +49,7 @@ Feature: Create new kos with owner not active BBK
     Then owner verify Auto BBK pop up is displayed
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click add another type from kos "Kost Rejected bbk automation"
+    And owner click add another type from kos "Kost Rejected bbk automation new banget nih"
     And owner click "Buat Baru" in add new room type pop up and click next
     Then verify message "Anda belum mengisi nama tipe kamar ini." the room type
     When owner input room type with "{random_text}"
@@ -78,6 +79,7 @@ Feature: Create new kos with owner not active BBK
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Campur"
+    And user logs out
 
   Scenario: Delete and reject kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -142,7 +144,7 @@ Feature: Create new kos with owner not active BBK
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putri"
 
-  @TEST_LIMO-3661 @CreateKosFromDraftBBKInactv
+  @TEST_LIMO-3661 @CreateKosFromDraftBBKInactv @continue
   Scenario: Create from kos with status draft && mamipay active && all bbk kos not active
     Given owner search kos on property saya page
     When owner click "Lengkapi Data Kos" on kos draft
@@ -163,6 +165,7 @@ Feature: Create new kos with owner not active BBK
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
+    And user logs out
 
   Scenario: Delete and reject kos from admin
     Given admin go to mamikos bangkrupux admin

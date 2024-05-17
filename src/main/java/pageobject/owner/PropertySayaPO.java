@@ -680,6 +680,16 @@ public class PropertySayaPO {
     }
 
     /**
+     * Click on close at pop up BBK if exist
+     */
+    public void clickClosePopUpBBKIfExist() {
+        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon, 1000.0)) {
+            playwright.waitFor(closePopupBBKIcon);
+            playwright.clickOn(closePopupBBKIcon);
+        }
+    }
+
+    /**
      * Get Full Name inputted text in Mamipay Form
      *
      * @return String Full Name inputted text
