@@ -829,7 +829,7 @@ public class PlaywrightHelpers {
      *                   default timeout
      */
     public void clickOnLinkButton(String linkText) {
-        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText));
+        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText).first());
     }
 
     /**
