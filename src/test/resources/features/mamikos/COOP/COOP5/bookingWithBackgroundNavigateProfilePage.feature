@@ -1,7 +1,8 @@
 @BBM5
-Feature: BnB feature with background navigate profile page
 
+Feature: [Web][Profile page] feature with background navigate profile page
 
+  @TEST_COOP-7717 @Automated @Web
   Scenario: Cancel and create booking
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -19,8 +20,8 @@ Feature: BnB feature with background navigate profile page
       | phone stag | phone prod | password  |
       | 0892202358 | 0892202358 | qwerty123 |
     And user cancel booking
-
-  #Scenario: create booking
+		
+		  #Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod |
@@ -108,3 +109,4 @@ Feature: BnB feature with background navigate profile page
       | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigates to "/review"
     And admin reject request review kos "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+		
