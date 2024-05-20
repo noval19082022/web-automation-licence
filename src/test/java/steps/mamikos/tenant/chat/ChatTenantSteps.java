@@ -52,7 +52,6 @@ public class ChatTenantSteps {
     @And("user click send chat from popup")
     public void userClickSendChatFromPopup() {
         chat.clickSend();
-        chat.reopenChatroom();
     }
 
     @And("chat room appear with latest message {string}")
