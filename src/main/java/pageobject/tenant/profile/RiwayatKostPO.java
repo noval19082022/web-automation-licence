@@ -44,6 +44,11 @@ public class RiwayatKostPO {
     Locator closePopUpButton;
     Locator kostReviewEntryPointNotDisplayed;
 
+    //----------tiki taka----------//
+    Locator bankNameButton;
+    Locator accountNumber;
+    Locator accountOwnerName;
+
 
     public RiwayatKostPO(Page page) {
         this.page = page;
@@ -79,6 +84,10 @@ public class RiwayatKostPO {
         fillReviewKost = page.getByPlaceholder("Ceritakan pengalamanmu di sini");
         closePopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).nth(1);
         kostReviewEntryPointNotDisplayed = page.locator("//div[@id='contentBox']");
+        bankNameButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih bank dropdown-down"));
+        accountNumber = page.getByPlaceholder("Masukkan nomor rekening");
+        accountOwnerName = page.getByPlaceholder("Masukkan nama pemilik rekening");
+
     }
 
     /**
@@ -350,5 +359,34 @@ public class RiwayatKostPO {
     public void clickAjukanBerhentiSewaTextAfterReviewKos() {
         playwright.pageScrollUntilElementIsVisible(ajukanBerhentiSewaButtonAfterReviewKos);
         playwright.clickOn(ajukanBerhentiSewaButtonAfterReviewKos);
+    }
+
+    /**
+     * verify bank account field
+     * @param text
+     * @return text example: Nama bank
+     */
+    public boolean validateBankAccount(String text){
+        Locator getBankAccountText = page.getByText(""+text+"");
+        return getBankAccountText.isVisible();
+    }
+
+    /**
+     * validate data on confirmation popup terminated contdact
+     * @param text
+     * @return text example BCA
+     */
+    public boolean validateConfirmationPopupAccount(String text){
+        Locator popupAccountText = page.getByTestId("userKostModalStopRent-confirmationModal").getByText(""+text+"");
+        return popupAccountText.isVisible();
+    }
+
+    /**
+     * click button on popup confirmation
+     * @param text example Kembali ke form
+     */
+    public void clickButtonOnPopup(String text){
+        Locator popupAccountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+""));
+        playwright.clickOn(popupAccountButton);
     }
 }

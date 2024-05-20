@@ -21,6 +21,8 @@ public class RiwayatKostSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     HomePO home = new HomePO(page);
     RiwayatKostPO riwayatKost = new RiwayatKostPO(page);
+    private List<Map<String, String>> bankAccount;
+
 
     @And("user click review kost")
     public void user_click_review_kost() {
@@ -141,6 +143,27 @@ public class RiwayatKostSteps {
     @When("user click ajukan berhenti sewa on kontrak saya after review kos")
     public void user_click_ajukan_berhenti_sewa_on_kos_saya_page_after_review_kos () {
         riwayatKost.clickAjukanBerhentiSewaTextAfterReviewKos();
+    }
+
+    @Then("tenant can see {string} on bank account section")
+    public void tenant_can_see_on_bank_account_section(String text){
+        riwayatKost.validateBankAccount(text);
+    }
+
+    @Then("tenant can see popup with:")
+    public void tenant_can_see_popup_with(DataTable table){
+        bankAccount = table.asMaps(String.class, String.class);
+        String bankName = bankAccount.get(0).get("Nama bank");
+        String number = bankAccount.get(0).get("Nomor rekening");
+        String name = bankAccount.get(0).get("Nama pemilik rekening");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(bankName), "nama bank not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(number), "number not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(name), "name not displayed");
+    }
+
+    @And("tenant click on {string} button on popup confirmation")
+    public void tenant_click_on_button_on_popup_confirmation(String text){
+        riwayatKost.clickButtonOnPopup(text);
     }
 }
 
