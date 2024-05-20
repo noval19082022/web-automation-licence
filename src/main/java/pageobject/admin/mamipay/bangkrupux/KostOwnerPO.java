@@ -83,6 +83,14 @@ public class KostOwnerPO {
     }
 
     /**
+     * Click on Reject bulk BBK button
+     */
+    public void clickOnRejectBulkButton() {
+        var rejectBulkButton = ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject Bulk"));
+        playwright.clickOn(rejectBulkButton);
+    }
+
+    /**
      * Click verify icon
      * @param property
      *

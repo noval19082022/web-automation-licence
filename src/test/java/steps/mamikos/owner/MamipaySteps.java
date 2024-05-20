@@ -96,7 +96,7 @@ public class MamipaySteps {
 
     @And("owner verify Auto BBK pop up is displayed")
     public void ownerVerifyAutoBBKPopUpIsDisplayed() {
-        Assert.assertTrue(propertySaya.isPopUpModalVisible(), "Auto BBK pop up doesn't displayed!");
+        Assert.assertTrue(propertySaya.BBKPopUpVisible(), "Auto BBK pop up doesn't displayed!");
         Assert.assertEquals(mamipayPO.getTitleAutoBbkPopUp(), "Ingin Kamar Kosong Anda Cepat Terisi?", "Title pop up doesn't match!");
     }
 

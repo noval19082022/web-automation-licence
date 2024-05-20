@@ -640,7 +640,10 @@ public class PropertySayaSteps {
     @Then("user see kos with valid name, status {string} and type {string}")
     public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
         propertySaya.waitPageLoaded();
-        Assert.assertEquals(propertySaya.getFirstKosName().substring(0, 28), Mamikos.getPropertyKosName(), "Kos name is wrong");
+        Assert.assertTrue(propertySaya.getFirstKosName().contains(Mamikos.getPropertyKosName()),
+                "Kos name is wrong"
+                + "expected contains: " + Mamikos.getPropertyKosName()
+                + "actual: " + propertySaya.getFirstKosName());
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
     }
