@@ -25,6 +25,10 @@ public class HomepagePO {
     Locator ketersediaanKamarBtn;
     Locator propertyListings;
 
+    Locator RoomNotAvailable;
+    Locator selectMethodPayment;
+    Locator selectMethodPaymentFullPayment;
+
     //---Filter---//
     Locator filterBtn;
     Locator totalFilter;
@@ -169,7 +173,6 @@ public class HomepagePO {
         fieldNameFee0 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
         inputNameFee0 = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
         listItemName = page.getByTestId("additionalFeeInput_listItem").locator("a");
-        listItemName1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Parkir Mobil"));
         fieldPriceFee0 = page.getByTestId("additionalPriceValue0_txt").getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Rp"));
         inputPriceFee0 = page.locator("#additionalFeeInput_price0_txt");
         fieldNameFee1 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
@@ -192,6 +195,9 @@ public class HomepagePO {
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
         propertyListings = page.locator("tbody tr").first();
+        RoomNotAvailable = page.locator("//div[contains(text(),'Kamar tidak tersedia')]");
+        selectMethodPayment = page.locator("//span[normalize-space()='Pilih metode pembayaran']");
+        selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -409,7 +415,11 @@ public class HomepagePO {
      */
     public void fillNomorKamar() {
         nomorKamarDropDown.click();
-        nomorKamar.click();
+        if (playwright.waitTillLocatorIsVisible(RoomNotAvailable)) {
+            playwright.assertVisible(RoomNotAvailable);
+        } else {
+            nomorKamar.click();
+        }
     }
 
     /**
@@ -417,11 +427,14 @@ public class HomepagePO {
      */
     public void fillMetodePembayaran(String fullPayment) {
         metodePembayaranDropDown.click();
-        String metodePembayaran = "//p[normalize-space()='" + fullPayment + "']";
+        if (playwright.waitTillLocatorIsVisible(selectMethodPaymentFullPayment)) {
+            String metodePembayaran = "//p[normalize-space()='" + fullPayment + "']";
         ElementHandle element = page.querySelector(metodePembayaran);
         element.click();
+        } else {
+            playwright.assertVisible(selectMethodPayment);
+        }
     }
-
     /**
      * admin fill other fee
      */
@@ -434,7 +447,9 @@ public class HomepagePO {
         playwright.clickOn(addOnOtherFee);
         playwright.clickOn(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih biaya tambahan dropdown-down")));
         playwright.fill(inputNameFee1, nameFee1);
-        playwright.clickOn(listItemName1);
+        String listItemName1 = "//div[normalize-space()='"+nameFee1+"']";
+        ElementHandle element = page.querySelector(listItemName1);
+        element.click();
     }
 
     /**
