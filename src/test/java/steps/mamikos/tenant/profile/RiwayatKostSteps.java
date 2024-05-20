@@ -156,9 +156,7 @@ public class RiwayatKostSteps {
         String bankName = bankAccount.get(0).get("Nama bank");
         String number = bankAccount.get(0).get("Nomor rekening");
         String name = bankAccount.get(0).get("Nama pemilik rekening");
-        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(bankName), "nama bank not displayed");
-        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(number), "number not displayed");
-        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(name), "name not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(bankName, number, name), "nama bank or number or name not displayed");
     }
 
     @And("tenant click on {string} button on popup confirmation")

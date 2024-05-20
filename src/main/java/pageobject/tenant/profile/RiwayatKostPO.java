@@ -376,7 +376,7 @@ public class RiwayatKostPO {
      * @param text
      * @return text example BCA
      */
-    public boolean validateConfirmationPopupAccount(String text){
+    public boolean validateConfirmationPopupAccount(String text, String number, String name){
         Locator popupAccountText = page.getByTestId("userKostModalStopRent-confirmationModal").getByText(""+text+"");
         return popupAccountText.isVisible();
     }
