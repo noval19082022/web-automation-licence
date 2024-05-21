@@ -447,9 +447,8 @@ public class HomepagePO {
         playwright.clickOn(addOnOtherFee);
         playwright.clickOn(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih biaya tambahan dropdown-down")));
         playwright.fill(inputNameFee1, nameFee1);
-        String listItemName1 = "//div[normalize-space()='"+nameFee1+"']";
-        ElementHandle element = page.querySelector(listItemName1);
-        element.click();
+        Locator invoiceList = page.locator("a").filter(new Locator.FilterOptions().setHasText(nameFee1));
+        playwright.clickOn(invoiceList);
     }
 
     /**
