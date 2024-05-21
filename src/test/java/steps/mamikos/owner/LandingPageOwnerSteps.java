@@ -73,4 +73,38 @@ public class LandingPageOwnerSteps {
     public void user_scroll_and_click_button(String buttontext) {
         landingPageOwnerPO.clickOnButtonLPOwner(buttontext);
     }
+
+
+    @When("user see question {string} on Landing Page Owner")
+    public void user_see_question_on_landing_page_owner(String question) {
+       landingPageOwnerPO.clickOnQuestionSection(question);
+
+    }
+
+    @Then("user verify answer text at LP owner {string}")
+    public void user_verify_answer_text_at_lp_owner(String answer) {
+        Assert.assertTrue(landingPageOwnerPO.answerFAQisApppear(answer).contains(answer),"title doesnt appear");
+
+    }
+
+    @When("user scroll to pusat bantuan")
+    public void user_scroll_to_pusat_bantuan() {
+       landingPageOwnerPO.scrollIntoPusatBantuanSection();
+    }
+
+    @Then("user want to accsess Pusat Bantuan")
+    public void user_want_to_accsess_pusat_bantuan() {
+       landingPageOwnerPO.clickOnButtonHelpCenter();
+    }
+
+    @When("user can see title {string} and sub title {string} at section pusat bantuan")
+    public void user_can_see_title_and_sub_title_at_section_pusat_bantuan(String title, String subTitle) {
+        Assert.assertEquals(landingPageOwnerPO.getTextTitlePusatBantuan(),title,"title doesnt match");
+        Assert.assertEquals(landingPageOwnerPO.getTextSubTitlePusatBantuan(),subTitle,"sub title doesnt match");
+    }
+
+    @Then("user can see footer mamikos")
+    public void user_can_see_footer_mamikos() {
+       Assert.assertTrue(landingPageOwnerPO.isFooterMamikosAppear(),"footer doesnt appear");
+    }
 }
