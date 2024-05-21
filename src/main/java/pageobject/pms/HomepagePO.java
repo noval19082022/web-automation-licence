@@ -1102,7 +1102,7 @@ public class HomepagePO {
      * False = not displayed
      * @return if Lihat Detail button is displayed
      */
-    public boolean isLihatDetailButton(){
+    public boolean isLihatDetailButtonVisible(){
         playwright.waitTillLocatorIsVisible(seeDetailBtn);
         return playwright.isLocatorVisibleAfterLoad(seeDetailBtn, 50000.0);
     }
@@ -1113,7 +1113,7 @@ public class HomepagePO {
      * False = not displayed
      * @return if Ketersediaan Kamar button is displayed
      */
-    public boolean isKetersediaanKamarButton(){
+    public boolean isKetersediaanKamarButtonVisible(){
         return playwright.isLocatorVisibleAfterLoad(roomAllotmentBtn, 30000.0);
     }
 
