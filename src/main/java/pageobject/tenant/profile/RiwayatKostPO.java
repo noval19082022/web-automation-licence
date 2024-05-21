@@ -27,6 +27,8 @@ public class RiwayatKostPO {
     Locator ajukanBerhentiSewaButton;
 
     Locator ajukanBerhentiSewaButtonAfterReviewKos;
+    Locator kirimFormButton;
+    Locator sayaMengertiButton;
     Locator ajukanSewaTitle;
     Locator reviewPage;
     Locator konfirmAjukanBerhentiSewaButton;
@@ -70,6 +72,8 @@ public class RiwayatKostPO {
         titleReview = page.getByText("Yuk, kasih review untuk kos yang kamu sewa");
         ajukanBerhentiSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan berhenti sewa"));
         ajukanBerhentiSewaButtonAfterReviewKos = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Berhenti Sewa").setExact(true));
+        kirimFormButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim form ke pemilik"));
+        sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
         titleKostReviewSubmitted = page.locator("//p[@class=\"user-review-card--reviewed__text bg-c-text bg-c-text--label-2\"]");
@@ -359,6 +363,8 @@ public class RiwayatKostPO {
     public void clickAjukanBerhentiSewaTextAfterReviewKos() {
         playwright.pageScrollUntilElementIsVisible(ajukanBerhentiSewaButtonAfterReviewKos);
         playwright.clickOn(ajukanBerhentiSewaButtonAfterReviewKos);
+        playwright.clickOn(kirimFormButton);
+        playwright.clickOn(sayaMengertiButton);
     }
 
     /**
