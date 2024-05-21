@@ -444,8 +444,8 @@ public class HomepageSteps {
 
     @Then("Action button is displayed in Daftar Property page")
     public void Action_button_is_displayed_in_Daftar_Property_page(){
-        Assert.assertTrue(homepage.getLihatDetailButton(), "Lihat Detail button does not displayed!");
-        Assert.assertTrue(homepage.getKetersediaanKamarButton(), "Ketersediaan Kamar button does not displayed!");
+        Assert.assertTrue(homepage.isLihatDetailButton(), "Lihat Detail button does not displayed!");
+        Assert.assertTrue(homepage.isKetersediaanKamarButton(), "Ketersediaan Kamar button does not displayed!");
     }
 
     @When("admin clicks outside Action Button")
@@ -455,7 +455,7 @@ public class HomepageSteps {
 
     @Then("Action button is dismiss")
     public void Action_button_is_dismiss(){
-        Assert.assertFalse(homepage.getLihatDetailButton(), "Lihat Detail button still displayed!");
+        Assert.assertFalse(homepage.isLihatDetailButton(), "Lihat Detail button still displayed!");
     }
 
     @Then("10 Properties are displayed")
