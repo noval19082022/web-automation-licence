@@ -24,6 +24,8 @@ public class HomepagePO {
     Locator emptyStateSubtitleInHomepage;
     Locator ketersediaanKamarBtn;
     Locator propertyListings;
+    Locator outsideActionButton;
+    Locator propertyRow;
 
     //---Filter---//
     Locator filterBtn;
@@ -192,6 +194,8 @@ public class HomepagePO {
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
         propertyListings = page.locator("tbody tr").first();
+        outsideActionButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Hospitality"));
+        propertyRow = page.locator("tbody tr");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -1089,4 +1093,53 @@ public class HomepagePO {
         Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
+
+    //---Daftar Properti---//
+
+    /**
+     * Check if Lihat Detail button is displayed
+     * True = displayed
+     * False = not displayed
+     * @return if Lihat Detail button is displayed
+     */
+    public boolean getLihatDetailButton(){
+        playwright.waitTillLocatorIsVisible(seeDetailBtn);
+        return playwright.isLocatorVisibleAfterLoad(seeDetailBtn, 50000.0);
+    }
+
+    /**
+     * Check if Ketersediaan Kamar button is displayed
+     * True = displayed
+     * False = not displayed
+     * @return if Ketersediaan Kamar button is displayed
+     */
+    public boolean getKetersediaanKamarButton(){
+        return playwright.isLocatorVisibleAfterLoad(roomAllotmentBtn, 30000.0);
+    }
+
+    /**
+     * Clicks Outside Action Button
+     */
+    public void clicksOutsideActionButton() {
+        playwright.clickOn(outsideActionButton);
+    }
+
+    /**
+     * Get Total Properties
+     * @return Total Properties
+     */
+    public int getTotalProperties(){
+        return propertyRow.count();
+    }
+
+    /**
+     * Get String All Nama Properti
+     * @param indexNamaProperti
+     * @return String All Nama Properti
+     */
+    public String getAllNamaProperti(int indexNamaProperti){
+        namaPropertiInTable = page.locator("tr td:nth-of-type(2)").nth(indexNamaProperti);
+        return playwright.getText(namaPropertiInTable);
+    }
+    //---End of Daftar Properti---//
 }
