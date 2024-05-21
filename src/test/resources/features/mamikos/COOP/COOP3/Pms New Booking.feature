@@ -1,4 +1,4 @@
-@COOP3 @noval123
+@COOP3
 Feature: Pms New Booking
 
 
