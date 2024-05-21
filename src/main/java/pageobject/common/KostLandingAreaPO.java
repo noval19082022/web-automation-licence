@@ -452,7 +452,7 @@ public class KostLandingAreaPO {
      */
     public void setSortingFromGreaterToLower(){
         playwright.clickOnText("Paling direkomendasikan");
-        playwright.clickOnText("Harga termahal");
+        playwright.clickOnText("Harga tertinggi");
     }
 
     /**
@@ -460,6 +460,6 @@ public class KostLandingAreaPO {
      */
     public void setSortingFromLowerToGreater(){
         playwright.clickOnText("Paling direkomendasikan");
-        playwright.clickOnText("Harga termurah");
+        playwright.clickOnText("Harga terendah");
     }
 }

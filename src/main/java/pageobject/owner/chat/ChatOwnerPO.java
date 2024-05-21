@@ -1,8 +1,10 @@
 package pageobject.owner.chat;
 
+import com.microsoft.playwright.Keyboard;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class ChatOwnerPO {
@@ -35,6 +37,7 @@ public class ChatOwnerPO {
     Locator broadcastChatBtn;
     Locator gpPacakgeText;
     Locator lastFTUEMars;
+    Locator ftueMarsBroadcast;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
     Locator Iunderstand;
@@ -62,17 +65,18 @@ public class ChatOwnerPO {
         roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
         roomPrice = page.locator("//p[contains(.,'Rp780.000')]");
         sisaKamarLabel = page.locator("//p[@class='bg-c-text bg-c-text--label-4 bg-c-text--italic mc-product-card__available-room bg-u-text-red-600']");
-        FTUEBeforeChat = page.getByText("Kuota chat room akan berkurang Kini berlaku sistem kuota chat mingguan. Jika lan");
+        FTUEBeforeChat = page.getByText("Kini berlaku sistem kuota chat. Jika lanjut kirim chat dengan calon penyewa ini,");
         backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
-        weeklyQuotaChatlistHeader = page.getByText("Sisa kuota mingguan information-round");
+        weeklyQuotaChatlistHeader = page.getByText("Sisa Kuota: information-round");
         weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
         gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
+        ftueMarsBroadcast = page.getByTestId("ftueTooltipCarousel");
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
@@ -87,6 +91,18 @@ public class ChatOwnerPO {
     public void clickChatOwner() {
         playwright.waitTillPageLoaded(5000.0);
         playwright.clickOn(ownerChatButton);
+    }
+
+    public void dismissFTUEMarsGPAndBroadCastIfExist() {
+        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 3000.0)) {
+            this.dismissFTUEMarsGPAndBroadCast();
+        }
+    }
+
+    public void dismissFTUEJemputBolaIfExist() {
+        if (playwright.waitTillLocatorIsVisible(lihatFiturFTUEJB, 2000.0)) {
+            this.dismissFTUEJemputBola();
+        }
     }
 
     /**
@@ -127,13 +143,10 @@ public class ChatOwnerPO {
      * Search Chat
      */
     public void searchChatTenant(String inputText) {
+        page.keyboard().press("Escape");
         playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
         searchChat.fill(inputText);
-        if (nantiSajaButton.isVisible()) {
-            playwright.clickOn(nantiSajaButton);
-        }
-        page.keyboard().press("Space");
         playwright.clickOn(chatOnList);
     }
 
@@ -152,10 +165,8 @@ public class ChatOwnerPO {
      * Click on accept chat button
      */
     public void clickAcceptFromChatOwner() {
-        playwright.hardWait(3000);
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
-            playwright.clickOn(Iunderstand);
-        }
+        page.keyboard().press("Escape");
+        page.keyboard().press("Escape");
         playwright.clickOn(acceptFromChatRoomButton);
         playwright.waitFor(yaTerimaButton);
         playwright.clickOn(yaTerimaButton);
@@ -387,7 +398,7 @@ public class ChatOwnerPO {
      */
     public void dismissFTUEJemputBola() {
         playwright.clickOn(lihatFiturFTUEJB);
-        page.goBack();
-        clickChatOwner();
+        playwright.navigateTo(Mamikos.OWNER_URL);
+        this.clickChatOwner();
     }
 }

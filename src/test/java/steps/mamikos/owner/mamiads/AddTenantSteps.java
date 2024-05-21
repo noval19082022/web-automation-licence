@@ -83,5 +83,5 @@ public class AddTenantSteps {
     @And("user choose owner added the contract")
     public void userChooseOwnerAddedTheContract() {
         addTenantPO.selectHowToAddTenant("Saya yang menambah kontrak");
+        }
     }
-}

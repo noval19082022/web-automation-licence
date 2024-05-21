@@ -27,6 +27,8 @@ public class RiwayatKostPO {
     Locator ajukanBerhentiSewaButton;
 
     Locator ajukanBerhentiSewaButtonAfterReviewKos;
+    Locator kirimFormButton;
+    Locator sayaMengertiButton;
     Locator ajukanSewaTitle;
     Locator reviewPage;
     Locator konfirmAjukanBerhentiSewaButton;
@@ -43,6 +45,11 @@ public class RiwayatKostPO {
     Locator fillReviewKost;
     Locator closePopUpButton;
     Locator kostReviewEntryPointNotDisplayed;
+
+    //----------tiki taka----------//
+    Locator bankNameButton;
+    Locator accountNumber;
+    Locator accountOwnerName;
 
 
     public RiwayatKostPO(Page page) {
@@ -65,6 +72,8 @@ public class RiwayatKostPO {
         titleReview = page.getByText("Yuk, kasih review untuk kos yang kamu sewa");
         ajukanBerhentiSewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan berhenti sewa"));
         ajukanBerhentiSewaButtonAfterReviewKos = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Berhenti Sewa").setExact(true));
+        kirimFormButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim form ke pemilik"));
+        sayaMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
         titleKostReviewSubmitted = page.locator("//p[@class=\"user-review-card--reviewed__text bg-c-text bg-c-text--label-2\"]");
@@ -79,6 +88,10 @@ public class RiwayatKostPO {
         fillReviewKost = page.getByPlaceholder("Ceritakan pengalamanmu di sini");
         closePopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close")).nth(1);
         kostReviewEntryPointNotDisplayed = page.locator("//div[@id='contentBox']");
+        bankNameButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih bank dropdown-down"));
+        accountNumber = page.getByPlaceholder("Masukkan nomor rekening");
+        accountOwnerName = page.getByPlaceholder("Masukkan nama pemilik rekening");
+
     }
 
     /**
@@ -350,5 +363,36 @@ public class RiwayatKostPO {
     public void clickAjukanBerhentiSewaTextAfterReviewKos() {
         playwright.pageScrollUntilElementIsVisible(ajukanBerhentiSewaButtonAfterReviewKos);
         playwright.clickOn(ajukanBerhentiSewaButtonAfterReviewKos);
+        playwright.clickOn(kirimFormButton);
+        playwright.clickOn(sayaMengertiButton);
+    }
+
+    /**
+     * verify bank account field
+     * @param text
+     * @return text example: Nama bank
+     */
+    public boolean validateBankAccount(String text){
+        Locator getBankAccountText = page.getByText(""+text+"");
+        return getBankAccountText.isVisible();
+    }
+
+    /**
+     * validate data on confirmation popup terminated contdact
+     * @param text
+     * @return text example BCA
+     */
+    public boolean validateConfirmationPopupAccount(String text, String number, String name){
+        Locator popupAccountText = page.getByTestId("userKostModalStopRent-confirmationModal").getByText(""+text+"");
+        return popupAccountText.isVisible();
+    }
+
+    /**
+     * click button on popup confirmation
+     * @param text example Kembali ke form
+     */
+    public void clickButtonOnPopup(String text){
+        Locator popupAccountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+""));
+        playwright.clickOn(popupAccountButton);
     }
 }

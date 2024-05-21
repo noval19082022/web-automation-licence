@@ -10,16 +10,16 @@ Feature: Homepage - Kost Saya Section
       | 0890000000289 | Bismillah@01 |
     And user navigate to penyewa page
     And user search kost in penyewa menu "unique code"
-    And user click Selengkapnya button on "Tenant Unique Code Jangan Diubah" contract
+    And user click Selengkapnya button on "Podcast" contract
     And user click Kirim ulang kode hyperlink
     Then user will redirect to Kirim kode unik ke penyewa page
-    And user will see phone number of owner "0890000001003"
+    And user will see phone number of owner "0892202411"
     When user click Ubah nomor HP hyperlink
     And user change owner's phone number into "0890000001004" and click Gunakan
     Then user will see phone number of owner "0890000001004"
     When user click Ubah nomor HP hyperlink
-    And user change owner's phone number into "0890000001003" and click Gunakan
-    Then user will see phone number of owner "0890000001003"
+    And user change owner's phone number into "0892202411" and click Gunakan
+    Then user will see phone number of owner "0892202411"
 
   @TEST_COOP-1932
   #warningDontHaveKosSayaAtSemuaFilter.feature
@@ -49,7 +49,7 @@ Feature: Homepage - Kost Saya Section
     Given owner navigates to owner dashboard
     And user click menu "Tambah Penyewa" on feature waktunya mengelola property
     And user choose owner added the contract
-    And user select kost "kost biak untuk add tenant automation" for tenant
+    And user select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" for tenant
     And owner input phone number with "083176833355"
     And owner choose first available room and clicks on add renter button
     And owner click button "Tambah Penyewa" on form informasi penyewa

@@ -640,7 +640,10 @@ public class PropertySayaSteps {
     @Then("user see kos with valid name, status {string} and type {string}")
     public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
         propertySaya.waitPageLoaded();
-        Assert.assertEquals(propertySaya.getFirstKosName().substring(0, 28), Mamikos.getPropertyKosName(), "Kos name is wrong");
+        Assert.assertTrue(propertySaya.getFirstKosName().contains(Mamikos.getPropertyKosName()),
+                "Kos name is wrong"
+                + "expected contains: " + Mamikos.getPropertyKosName()
+                + "actual: " + propertySaya.getFirstKosName());
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
     }
@@ -1086,13 +1089,14 @@ public class PropertySayaSteps {
     public void ownerClicksButtonMovePhoto() {
         propertySaya.hoverPhoto();
         propertySaya.clickOnMovePhotoHover();
-        propertySaya.clickOnLanjutkanMovePhoto();
-        Assert.assertTrue(propertySaya.getToastNotSelectedPhoto(), "Toast message doesnt match!");
+        this.movePhotoSteps();
+    }
 
-        propertySaya.selectPhotoToMoved();
-        propertySaya.clickOnLanjutkanMovePhoto();
-        propertySaya.clickOnPindahkanPhoto();
-        Assert.assertTrue(propertySaya.getToastNotSelectDestinationPhoto(), "Toast message doesnt match!");
+    @And("user/owner clicks button move photo on {string}")
+    public void userClicksButtonMovePhoto(String photoLocation) {
+        propertySaya.hoverPhoto(photoLocation);
+        propertySaya.clickOnMovePhotoHover(photoLocation);
+        this.movePhotoSteps();
     }
 
     @And("owner select destination move photo kos")
@@ -1107,8 +1111,24 @@ public class PropertySayaSteps {
         propertySaya.clickOnPindahkanPhoto();
     }
 
+    @And("owner/user select destination move photo room on {string}")
+    public void ownerSelectDestinationToMovePhotoRoom(String destination) {
+        propertySaya.selectDestinationPhotoRoom(destination);
+        propertySaya.clickOnPindahkanPhoto();
+    }
+
     @When("owner can see favorited section")
     public void owner_can_see_favorited_section() {
         Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
+    }
+
+    private void movePhotoSteps() {
+        propertySaya.clickOnLanjutkanMovePhoto();
+        Assert.assertTrue(propertySaya.getToastNotSelectedPhoto(), "Toast message doesnt match!");
+
+        propertySaya.selectPhotoToMoved();
+        propertySaya.clickOnLanjutkanMovePhoto();
+        propertySaya.clickOnPindahkanPhoto();
+        Assert.assertTrue(propertySaya.getToastNotSelectDestinationPhoto(), "Toast message doesnt match!");
     }
 }

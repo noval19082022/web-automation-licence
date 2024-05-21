@@ -15,6 +15,7 @@ import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
+import pageobject.owner.PropertySayaPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -31,6 +32,7 @@ public class NavigatesSteps {
     VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
     LoadingPO loading = new LoadingPO(page);
     CheckPropertyPO checkProperty = new CheckPropertyPO(page);
+    PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -182,6 +184,7 @@ public class NavigatesSteps {
         playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS);
         loading.waitForLoadingIconDisappear();
+        propertySaya.clickClosePopUpBBKIfExist();
     }
 
     @When("owner navigates to {string}")
@@ -425,9 +428,23 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + "/kampus", 30000.0, LoadState.LOAD);
     }
 
+    @And("admin navigate to premium package invoice list")
+    public void adminNavigateToPremiumPackageInvoiceList() {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/invoice/premium/package");
+    }
     @When("admin accsess menu whitelist feature")
     public void admin_accsess_menu_whitelist_feature() {
         playwright.navigateTo(Mamikos.URL + "/admin/whitelist-features", 30000.0, LoadState.LOAD);
+    }
+
+    @And("admin navigate to goldplus package edit form")
+    public void adminNavigateToGoldplusPackageEditForm() {
+        playwright.navigateTo(Mamikos.URL + "/admin/gold-plus/package/346/edit", 30000.0, LoadState.LOAD);
+    }
+
+    @Given("admin navigate to mantool")
+    public void admin_navigate_to_mantool() {
+        playwright.navigateTo(Mamikos.URL+"/agen");
     }
 
 }

@@ -70,6 +70,7 @@ public class PointManagementPO extends LoginPO {
     Locator submitBulkAdjustPointButton;
     Locator ownerPointExpiryInputText;
     Locator tenantPointExpiryInputText;
+    Locator messageAlertAdmin;
 
 
 
@@ -127,6 +128,7 @@ public class PointManagementPO extends LoginPO {
         submitBulkAdjustPointButton = page.locator("//div[@id='popup-bulk-adjust-point']//button[@class='btn btn-primary']");
         ownerPointExpiryInputText = page.getByLabel("Owner Point Expiry in");
         tenantPointExpiryInputText = page.getByLabel("Tenant Point Expiry in");
+        messageAlertAdmin = page.locator("//div[@class='alert alert-success alert-dismissable']");
     }
 
     /**
@@ -782,4 +784,7 @@ public class PointManagementPO extends LoginPO {
         playwright.fill(tenantPointExpiryInputText, value);
     }
 
+    public String getMessageSuccess() {
+        return playwright.getText(messageAlertAdmin).replaceAll("×\\s+", "");
+    }
 }

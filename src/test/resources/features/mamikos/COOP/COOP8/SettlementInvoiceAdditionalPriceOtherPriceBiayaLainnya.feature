@@ -8,14 +8,14 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag   | phone prod   |
-      | 087708777618 | 087708777618 |
+      | 0812000005    | 0812000005    |
 
   @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 087708777618 | 087708777618 | qwerty123 |
+      | 0812000005    | 0812000005    | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -40,7 +40,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 087708777618 | 087708777618 | qwerty123 |
+      | 0812000005 | 0812000005 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
     And user logs out as a Tenant user
@@ -52,16 +52,16 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin clicks on invoice details first index:
       | search by    | renter_phone_number |
-      | search value | 087708777618        |
+      | search value | 0812000005        |
     Then admin changes DP basic amount and verify total amount change on settlement invoice for tenant 907000:
       | search by    | renter_phone_number |
-      | search value | 087708777618        |
+      | search value | 0812000005        |
 
   Scenario: Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 087708777618 | 087708777618 | qwerty123 |
+      | 0812000005 | 0812000005 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "087708777618"
     And tenant set active page to 0
@@ -77,7 +77,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin add additional price:
       | search by              | renter_phone_number      |
-      | search value           | 087708777618             |
+      | search value           | 0812000005               |
       | invoice number         | default                  |
       | additional price type  | default                  |
       | additional price title | Automation Biaya Lainnya |
@@ -87,7 +87,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 087708777618 | 087708777618 | qwerty123 |
+      | 0812000005   | 0812000005   | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
     And tenant set active page to 1
@@ -97,7 +97,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password     |
-      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+      | 0812000005   | 0812000005   | 1d0lt3stb4ru |
     And owner go to bill page of kost "Kost Wild Rift Settlement" on month of "current"
     And owner go to detail tagihan with tenant name is "Nunu And Willump" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"

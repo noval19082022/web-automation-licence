@@ -32,7 +32,6 @@ public class ChatTenantPO {
     Locator tenantChatButton;
     Locator confirmationUbahJadwalButton;
     Locator backButtonChatroom;
-    Locator firstChatlist;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -55,7 +54,6 @@ public class ChatTenantPO {
         tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
         confirmationUbahJadwalButton = page.locator("//button[normalize-space()='Batalkan Survei']//following-sibling::button");
         backButtonChatroom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
-        firstChatlist = page.locator("//*[@class='mc-channel-list-card'][1]");
     }
 
     /**
@@ -112,6 +110,7 @@ public class ChatTenantPO {
      */
     public String getLatestChatText() {
         playwright.pageScrollUntilElementIsVisible(latestChat);
+        playwright.waitTillLocatorIsVisible(latestChat);
         return playwright.getText(latestChat);
     }
 
@@ -245,13 +244,5 @@ public class ChatTenantPO {
     public boolean isQuestionDisplayed(String question) {
         String xpathLocator = "//p[contains(.,'" + question + "')]";
         return page.querySelector(xpathLocator) != null;
-    }
-
-    /**
-     * Reopen newest chatroom
-     */
-    public void reopenChatroom() {
-        playwright.clickOn(backButtonChatroom);
-        playwright.clickOn(firstChatlist);
     }
 }

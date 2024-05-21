@@ -29,6 +29,14 @@ public class KostOwnerSteps {
         kostOwner.clickOnRejectButton();
     }
 
+    @And("admin reject bulk BBK kos")
+    public void adminRejectBulkBBKKos() {
+        playwright.hardWait(3000.0);
+        kostOwner.clickOnRejectBBK();
+        kostOwner.clickOnFirstRadioButton();
+        kostOwner.clickOnRejectBulkButton();
+    }
+
     @And("admin verify the property {string}")
     public void adminVerifyTheProperty(String property) {
         kostOwner.clickOnVerifyIcon(property);

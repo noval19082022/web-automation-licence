@@ -230,10 +230,8 @@ public class kostSayaPO {
      * @return String "sudah di bayar"
      */
     public String isPaymentSuccessText(String dibayar) {
-        Locator statusInvoice = page.getByText(dibayar);
+        Locator statusInvoice = page.getByText(dibayar).nth(1);
         return playwright.getText(statusInvoice);
     }
-
-
 }
 

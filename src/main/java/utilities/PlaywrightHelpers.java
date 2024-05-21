@@ -25,6 +25,20 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * this method will be reload the active page if element is not visible after loading
+     * @param times how many you would to reload
+     * @param locator the expected locator that you want to visible
+     */
+    public void reloadPageIfLocatorNotVisible(int times, Locator locator) {
+        if(this.isLocatorVisibleAfterLoad(locator, 1000.0)){
+            for (int i = 0; i < times; i++) {
+                page.reload();
+                if (locator.isVisible()) break;
+            }
+        }
+    }
+
+    /**
      * Reload page with timeout
      * @param timeout
      */
@@ -815,7 +829,7 @@ public class PlaywrightHelpers {
      *                   default timeout
      */
     public void clickOnLinkButton(String linkText) {
-        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText));
+        clickOn(locatorByRoleSetName(AriaRole.LINK, linkText).first());
     }
 
     /**

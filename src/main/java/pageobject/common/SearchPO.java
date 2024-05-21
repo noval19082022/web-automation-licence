@@ -108,7 +108,7 @@ public class SearchPO {
     public KostDetailsPO searchByText(String search) {
         setProperty(search);
         inputSearch.fill(search);
-        Locator firstResultKostName = page.locator("//label[@title='"+search+"']");
+        Locator firstResultKostName = page.locator("//label[contains(@title, '"+ search +"')]");
         playwright.waitTillPageLoaded();
         playwright.waitFor(firstResultKostName);
         playwright.clickOn(firstResultKostName);

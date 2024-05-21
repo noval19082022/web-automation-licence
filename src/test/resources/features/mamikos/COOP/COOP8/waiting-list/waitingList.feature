@@ -186,7 +186,7 @@ Feature: Waiting List - Kost Detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 08999222999   | 083176408442  | qwerty123    |
+      | 081000006116   | 081000006116  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                                                 | kost name prod                                                 |
       | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap |
@@ -198,7 +198,7 @@ Feature: Waiting List - Kost Detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 08999222999   | 083176408442  | qwerty123    |
+      | 081000006116   | 081000006116  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                                                 | kost name prod                                                 |
       | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap |

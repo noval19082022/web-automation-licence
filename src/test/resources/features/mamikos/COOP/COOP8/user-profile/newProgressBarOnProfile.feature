@@ -82,8 +82,7 @@ Feature: New Progress bar on Profile
 		When user navigate to kost saya page
 		Then user logs out as a Tenant user
 
-	@TEST_COOP-756 @reddot
-	@continue
+	@TEST_COOP-756 @reddot @continue
 	Scenario: [Profile Page][User Profile]Check ret dot when tenant hasn’t verified the account and completed the profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
