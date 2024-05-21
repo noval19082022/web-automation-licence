@@ -25,6 +25,10 @@ public class HomepagePO {
     Locator ketersediaanKamarBtn;
     Locator propertyListings;
 
+    Locator RoomNotAvailable;
+    Locator selectMethodPayment;
+    Locator selectMethodPaymentFullPayment;
+
     //---Filter---//
     Locator filterBtn;
     Locator totalFilter;
@@ -169,7 +173,6 @@ public class HomepagePO {
         fieldNameFee0 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
         inputNameFee0 = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
         listItemName = page.getByTestId("additionalFeeInput_listItem").locator("a");
-        listItemName1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Parkir Mobil"));
         fieldPriceFee0 = page.getByTestId("additionalPriceValue0_txt").getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Rp"));
         inputPriceFee0 = page.locator("#additionalFeeInput_price0_txt");
         fieldNameFee1 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
@@ -192,6 +195,9 @@ public class HomepagePO {
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
         propertyListings = page.locator("tbody tr").first();
+        RoomNotAvailable = page.locator("//div[contains(text(),'Kamar tidak tersedia')]");
+        selectMethodPayment = page.locator("//span[normalize-space()='Pilih metode pembayaran']");
+        selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -231,15 +237,15 @@ public class HomepagePO {
      * Click action button in homepage
      */
     public void clicksActionButton() {
-        actionBtn.waitFor();
-        actionBtn.click();
+        playwright.waitFor(actionBtn);
+        playwright.clickOn(actionBtn);
     }
 
     /**
      * Click lihat detail menu in homepage
      */
     public void clickSeeDetail() {
-        seeDetailBtn.click();
+        playwright.clickOn(seeDetailBtn);
     }
 
     /**
@@ -255,7 +261,7 @@ public class HomepagePO {
      */
     public void searchProperty(String name) {
         searchInput.fill(name);
-        cariButton.click();
+        playwright.clickOn(cariButton);
         playwright.isTextDisplayed("Kost Singgahsini Ersa Tobelo Halmahera Utara");
     }
 
@@ -296,28 +302,28 @@ public class HomepagePO {
      */
     public void clickOnTambahPenyewa() {
         playwright.hardWait(8000.0);
-        tambahPenyewaButton.click();
+        playwright.clickOn(tambahPenyewaButton);
     }
 
     /**
      * Click on booking menu in homepage
      */
     public void clickOnBooking() {
-        bookingButton.click();
+        playwright.clickOn(bookingButton);
     }
 
     /**
      * Click on tipe booking menu in popup
      */
     public void clickOnDropdownTipeBooking() {
-        dropdownTipeBooking.click();
+        playwright.clickOn(dropdownTipeBooking);
     }
 
     /**
      * Click on new booking in dropdown
      */
     public void clickOnNewBooking() {
-        newBooking.click();
+        playwright.clickOn(newBooking);
     }
 
     /**
@@ -356,7 +362,7 @@ public class HomepagePO {
      */
     public boolean isInformasiPenyewaDisplayed() {
         playwright.waitFor(informasiPenyewa);
-        informasiPenyewa.click();
+        playwright.clickOn(informasiPenyewa);
         return informasiPenyewaLabel.isEnabled();
     }
 
@@ -365,7 +371,7 @@ public class HomepagePO {
      */
     public void fillHitunganSewa(String hitunganSewaKos) {
         playwright.pageScrollUntilElementIsVisible(ScrollToHitunganSewaDropdown);
-        periodHitunganSewa.click();
+        playwright.clickOn(periodHitunganSewa);
         String periodHitunganSewa = "//a[contains(.,'" + hitunganSewaKos + "')]";
         ElementHandle element = page.querySelector(periodHitunganSewa);
         element.click();
@@ -398,7 +404,7 @@ public class HomepagePO {
      * admin fill durasi sewa
      */
     public void fillDurasiSewa(String durasiSewa) {
-        durasiSewaDropdown.click();
+        playwright.clickOn(durasiSewaDropdown);
         String durasiSewaKos = "//div[normalize-space()='" + durasiSewa + "']";
         ElementHandle element = page.querySelector(durasiSewaKos);
         element.click();
@@ -408,20 +414,27 @@ public class HomepagePO {
      * admin fill nomor kamar
      */
     public void fillNomorKamar() {
-        nomorKamarDropDown.click();
-        nomorKamar.click();
+        playwright.clickOn(nomorKamarDropDown);
+        if (playwright.waitTillLocatorIsVisible(RoomNotAvailable)) {
+            playwright.assertVisible(RoomNotAvailable);
+        } else {
+            playwright.clickOn(nomorKamar);
+        }
     }
 
     /**
      * admin fill metode pembayaran
      */
     public void fillMetodePembayaran(String fullPayment) {
-        metodePembayaranDropDown.click();
-        String metodePembayaran = "//p[normalize-space()='" + fullPayment + "']";
+        playwright.clickOn(metodePembayaranDropDown);
+        if (playwright.waitTillLocatorIsVisible(selectMethodPaymentFullPayment)) {
+            String metodePembayaran = "//p[normalize-space()='" + fullPayment + "']";
         ElementHandle element = page.querySelector(metodePembayaran);
         element.click();
+        } else {
+            playwright.assertVisible(selectMethodPayment);
+        }
     }
-
     /**
      * admin fill other fee
      */
@@ -434,7 +447,8 @@ public class HomepagePO {
         playwright.clickOn(addOnOtherFee);
         playwright.clickOn(page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih biaya tambahan dropdown-down")));
         playwright.fill(inputNameFee1, nameFee1);
-        playwright.clickOn(listItemName1);
+        Locator addFeeList = page.locator("a").filter(new Locator.FilterOptions().setHasText(nameFee1));
+        playwright.clickOn(addFeeList);
     }
 
     /**
@@ -603,9 +617,7 @@ public class HomepagePO {
      * Clicks Overview tab
      */
     public void goToOverviewTab() {
-        //back to kontrak kerja sama page
         playwright.backToPreviousPage();
-
         playwright.clickOn(overviewTab);
     }
 
@@ -800,7 +812,6 @@ public class HomepagePO {
      */
     public void ticksBSE(String pilihBSE) {
         playwright.clickOn(pilihBSEDropdown);
-
         BSEValue = page.locator("label[for='search-checkbox-bse-30']");
         playwright.pageScrollInView(BSEValue);
         playwright.clickOn(BSEValue);
@@ -812,7 +823,6 @@ public class HomepagePO {
      */
     public void ticksBD(String pilihBD) {
         playwright.clickOn(pilihBDDropdown);
-
         BDValue = page.getByText(pilihBD);
         playwright.clickOn(BDValue);
     }
@@ -823,7 +833,6 @@ public class HomepagePO {
      */
     public void ticksAS(String pilihAS) {
         playwright.clickOn(pilihASDropdown);
-
         ASValue = page.getByRole(AriaRole.LIST).getByText(pilihAS);
         playwright.clickOn(ASValue);
     }
@@ -834,7 +843,6 @@ public class HomepagePO {
      */
     public void ticksHospitality(String pilihHospitality) {
         playwright.clickOn(pilihHospitalityDropdown);
-
         hospitalityValue = page.getByText(pilihHospitality);
         playwright.clickOn(hospitalityValue);
     }
@@ -846,7 +854,6 @@ public class HomepagePO {
     public void selectsKota(String pilihKota) {
         playwright.pageScrollInView(pilihKotaDropdown);
         playwright.clickOn(pilihKotaDropdown);
-
         kotaValue = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(pilihKota));
         playwright.clickOn(kotaValue);
     }
