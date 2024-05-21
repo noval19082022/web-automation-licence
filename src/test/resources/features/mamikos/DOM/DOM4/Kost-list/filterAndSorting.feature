@@ -63,10 +63,10 @@ Feature: Filter and Sorting
   @TEST_COOP-5587 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termahal"
     Given user navigates to ugm kost listing
-    When user selects sorting "Harga termahal" in kost listing
+    When user selects sorting "Harga tertinggi" in kost listing
     Then user can see kos list rearrange from expensive to cheaper
   @TEST_COOP-5583 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termurah"
     Given user navigates to ugm kost listing
-    When user selects sorting "Harga termurah" in kost listing
+    When user selects sorting "Harga terendah" in kost listing
     Then user can see kos list rearrange from cheaper to expensive

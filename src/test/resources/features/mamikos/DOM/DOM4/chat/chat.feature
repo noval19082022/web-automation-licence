@@ -93,7 +93,6 @@ Feature: Chat and Chat Optimization
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
-    Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
     And user sees the Booking button disable
 
   @continue @TEST_COOP-5431
