@@ -17,6 +17,13 @@ public class LandingPageOwnerPO {
     Locator daftarkanKosbutton;
     Locator USPsection;
     Locator mblmSection;
+    Locator questionFAQ;
+    Locator answerFAQ;
+    Locator helpCenterSection;
+    Locator pusatBantuanButton;
+    Locator footerMamikos;
+    Locator titleOnPusatBantuanPageForOwner;
+    Locator subTitleOnPusatBantuan;
 
     public LandingPageOwnerPO(Page page) {
         this.page = page;
@@ -28,6 +35,11 @@ public class LandingPageOwnerPO {
         daftarkanKosbutton = page.locator("//*[@class='bg-c-button header-section__cta bg-c-button--primary bg-c-button--lg']");
         USPsection = page.locator(".benefit-section-desktop");
         mblmSection = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Maju Bersama Layanan Mamikos"));
+        helpCenterSection = page.locator(".help-section__container");
+        pusatBantuanButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pusat Bantuan pusat-bantuan"));
+        footerMamikos =  page.getByTestId("bg-l-footer-general");
+        titleOnPusatBantuanPageForOwner = page.getByText("Kami siap membantu Anda");
+        subTitleOnPusatBantuan = page.getByText("Mari gabung bersama puluhan ribu pemilik kos lain, kelola kos online di Mamikos.");
     }
 
     /**
@@ -141,5 +153,62 @@ public class LandingPageOwnerPO {
         Locator buttonONLPOwner = page.getByText(text);
         playwright.pageScrollUntilElementIsVisible(buttonONLPOwner);
         playwright.clickOnText(text);
+    }
+
+    /**
+     * Click on text FAQ at landing page owner
+     * @return boolean type, appear true otherwise false
+     */
+    public void clickOnQuestionSection(String questionText) {
+         questionFAQ = page.locator("//h4[contains(.,'" + questionText + "')]");
+         playwright.waitTillLocatorIsVisible(questionFAQ);
+         playwright.clickOn(questionFAQ);
+        playwright.waitForLocatorVisibleAndClickOn(questionFAQ);
+    }
+
+    /**
+     * Get text answer at FAQ landing page owner
+     * @return Text of Content of answer text
+     */
+    public String answerFAQisApppear(String answerText) {
+        answerFAQ = page.getByText(answerText);
+        playwright.waitTillLocatorIsVisible(answerFAQ);
+        return playwright.getText(answerFAQ);
+    }
+
+    /**
+     * Scroll down to pusat bantuan section
+     */
+    public void scrollIntoPusatBantuanSection() {
+        playwright.pageScrollInView(helpCenterSection);
+    }
+
+    /**
+     * Click on pusat bantuan button
+     */
+    public void clickOnButtonHelpCenter() {
+        playwright.clickOn(pusatBantuanButton);
+    }
+
+    /**
+     * assert footer mamikos is appear
+     */
+    public boolean isFooterMamikosAppear(){
+        playwright.pageScrollHeightToBottom();
+        return playwright.waitTillLocatorIsVisible(footerMamikos);
+    }
+
+    /**
+     * Get text title for pusat bantuan section
+     */
+    public String getTextTitlePusatBantuan(){
+        return playwright.getText(titleOnPusatBantuanPageForOwner);
+    }
+
+    /**
+     * Get text sub title for pusat bantuan section
+     */
+    public String getTextSubTitlePusatBantuan(){
+        return playwright.getText(subTitleOnPusatBantuan);
     }
 }
