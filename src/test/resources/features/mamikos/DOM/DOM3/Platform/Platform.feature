@@ -305,8 +305,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Owner] Choose Add New Kos
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag  | password  |
-      | 08119787884 | Perempuan |
+      | phone stag   | password  |
+      | 081328787343 | qwerty123 |
     And owner navigates to property saya kos
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"

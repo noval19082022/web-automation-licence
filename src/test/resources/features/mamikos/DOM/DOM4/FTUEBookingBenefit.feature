@@ -6,7 +6,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos Dom Automation PLM Tipe E Kretek Bantul | Kos DC BAR Automation Tipe A |
@@ -32,7 +32,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod               |
       | Kos Dom Automation PLM Tipe E Kretek Bantul | Kos DC BAR Automation Tipe A |
@@ -60,7 +60,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
@@ -76,7 +76,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag     | kost name prod             |
       | Kost BG Automation | Kost Dumbledore Automation |
@@ -87,7 +87,7 @@ Feature: FTUE Booking Benefit
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And user go to apartment details from apartment landing list number 1
     And tenant set active page to 0
     Then user can not see FTUE booking benefit

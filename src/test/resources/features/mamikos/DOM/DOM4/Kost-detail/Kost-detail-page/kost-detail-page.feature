@@ -17,7 +17,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And user want to select kost on promo section
     And tenant set active page to 1
     Then user see promo owner section
@@ -48,7 +48,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
@@ -111,7 +111,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
@@ -152,7 +152,7 @@ Feature: Kost detail page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                              | kost name prod               |
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos DC BAR Automation Tipe A |

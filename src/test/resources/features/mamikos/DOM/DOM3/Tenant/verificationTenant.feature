@@ -7,7 +7,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 083311231113  | 083311231113 | asdf1234 |
+      | 083311231115  | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "aiueoo@gmail.com"
@@ -19,7 +19,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
@@ -30,7 +30,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user empty phone number field
@@ -41,7 +41,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "tenantmars@gmail.com"
@@ -52,7 +52,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "qaautomation@mamikos"
@@ -63,7 +63,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
@@ -74,7 +74,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user empty email address field
@@ -85,7 +85,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with condition into "8112069"
@@ -96,7 +96,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "81120699900000"
@@ -107,7 +107,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "898765432166"
@@ -118,7 +118,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "tenantmars@gmail.comm"
@@ -129,7 +129,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
-      | 083311231113 | 083311231113 | asdf1234     |
+      | 083311231115 | 083311231115 | asdf1234     |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with condition into "qwertyuiop"
@@ -160,7 +160,7 @@ Feature: Verification Tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 083311231113  | 083311231113 | asdf1234 |
+      | 083311231115  | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     Then user can see "Kamu belum mengunggah foto kartu identitas" on verifikasi identitas

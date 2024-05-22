@@ -35,7 +35,7 @@ Feature: Change email owner
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password      |
-      | 082255251018  | qwerty123     |
+      | 081328787343  | qwerty123     |
     And owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "coop124@mailinator"

@@ -83,7 +83,7 @@ Feature: Owner - Forgot Password
   Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to SMS
     Given user go to mamikos homepage
     When user want to change the owner password
-    And user fill their registered phone number "081328787342"
+    And user fill their registered phone number "081328787343"
     And user choose verification by sms
     And user click back button, batalkan
     And user choose verification by sms
@@ -135,7 +135,7 @@ Feature: Owner - Forgot Password
   Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to WA
     Given user go to mamikos homepage
     When user want to change the owner password
-    And user fill their registered phone number "081328787342"
+    And user fill their registered phone number "081328787343"
     And user choose verification by sms
     And user click back button, batalkan
     And user choose verification by WA

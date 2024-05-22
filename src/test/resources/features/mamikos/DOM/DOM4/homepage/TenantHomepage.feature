@@ -11,7 +11,7 @@ Feature: Homepage
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
 		  | phone stag   | phone prod   | password  |
-		  | 081223344550 | 083176408442 | qwerty123 |
+		  | 081223344570 | 083176408442 | qwerty123 |
 		Then tenant can see profile dropdown option
 
 	@TEST_COOP-5462 @Automated @DOM4 @Web @discovery-platform @homepage

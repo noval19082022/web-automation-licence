@@ -17,7 +17,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
@@ -108,7 +108,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
@@ -119,7 +119,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag               | kost name prod               |
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe A |
