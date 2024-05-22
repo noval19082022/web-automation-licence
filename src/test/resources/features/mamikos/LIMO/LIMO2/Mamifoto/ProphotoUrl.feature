@@ -22,7 +22,7 @@ Feature: Check when accsess prophoto Landing Page
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag   | phone prod | password  |
-      | 081223344550 | 0          | qwerty123 |
+      | 081223344570 | 0          | qwerty123 |
     When tenant navigates to old prophoto page
     Then user go to mamikos homepage
     And user logs out as a Tenant user

@@ -21,14 +21,14 @@ Feature: Chat and Chat Optimization
     And user click chat in kos detail
     Then user login from kost detail via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
 
   @continue @TEST_COOP-5435
   Scenario: [Dweb][Kost Detail][Chat] Show all selectable questions before chat
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                      | kost name prod                                      |
       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
@@ -57,7 +57,7 @@ Feature: Chat and Chat Optimization
     When user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod                             |
       | Kose Mamiset Automation | Kost Automation Mix Tobelo Halmahera Utara |
@@ -75,7 +75,7 @@ Feature: Chat and Chat Optimization
       | phone stag   | phone prod   | password  |
       | 083176408311 | 083132824758 | qwerty123 |
     And user click chat button in top bar owner home page
-    And search chat in chatlist "Raney Arora"
+    And search chat in chatlist "Coop Chat Automation"
     Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
     And user dismiss FTUE TBC
     When owner enter text "My phone is 00000000001" in chat page
@@ -86,7 +86,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344550 | 083176408442 | qwerty123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod                                             |
       | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |

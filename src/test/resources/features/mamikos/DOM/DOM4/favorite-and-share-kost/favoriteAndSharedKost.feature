@@ -5,22 +5,22 @@ Feature: Favorite and Share kost
   Scenario: [Dweb][Favorite] Tenant - Check Redirection without login
     Given tenant navigate to favorite page
     Then user see login pop up in favorite page
-  @TEST_COOP-5441 @automated @discovery-platform @favorite @web
+  @TEST_COOP-5441 @automated @discovery-platform @favorite @web @gorby
   Scenario: [Dweb][Kost Detail][FavoriteKost] Tenant Favourite a kos
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 081223344550  | 083176408442  | qwerty123    |
+      | 081223344570  | 083176408442  | qwerty123    |
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
       | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can favorite the kost
-  @TEST_COOP-5444 @automated @discovery-platform @favorite @web
+  @TEST_COOP-5444 @automated @discovery-platform @favorite @web @gorby
   Scenario: [Dweb][Kost Detail][FavoriteKost] Tenant Unfavourite a kos
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 081223344550  | 083176408442  | qwerty123    |
+      | 081223344570  | 083176408442  | qwerty123    |
     When tenant search kost then go to kost details:
       | kost name stag                              | kost name prod                                      |
       | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantull | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
