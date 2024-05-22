@@ -10,14 +10,14 @@ Feature: SinggahSini Tenant Tracker Controlled Property
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
-      | 0890867321205 | 0890867321205 |
+      | 0895131932292 | 0895131932292 |
 
   @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0890867321205 | 0890867321205 | mamikosqa123 |
+      | 0895131932292 | 0895131932292 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -42,7 +42,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0890867321205 | 0890867321205 | mamikosqa123 |
+      | 0895131932292 | 0895131932292 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
 
@@ -53,7 +53,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to tenant communication menu
-    And user choose "No. HP Penyewa" and input "0890867321205" in the search field on main page
+    And user choose "No. HP Penyewa" and input "0895131932292" in the search field on main page
     And user click search button on main page filter
     And user choose "Booking" on filter tahapan and "Terbayar Lunas" on filter status
     And user click on terapkan button
@@ -63,8 +63,8 @@ Feature: SinggahSini Tenant Tracker Controlled Property
   Scenario: Tenant Check-in Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0890867321205 | 0890867321205 | mamikosqa123 |
+      | phone stag    | phone prod    | password  |
+      | 0895131932292 | 0895131932292 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
@@ -76,7 +76,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to tenant communication menu
-    And user choose "No. HP Penyewa" and input "0890867321205" in the search field on main page
+    And user choose "No. HP Penyewa" and input "0895131932292" in the search field on main page
     And user click search button on main page filter
     And user choose "Check-in" on filter tahapan and "Sudah Check-in" on filter status
     And user click on terapkan button
