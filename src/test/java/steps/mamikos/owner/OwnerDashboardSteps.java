@@ -374,6 +374,9 @@ public class OwnerDashboardSteps {
 
     @Then("owner should have menu {string}")
     public void owner_should_have_menu(String menu) {
+        if (ownerDashboardPO.isMamiprimeBannerAppear()){
+            ownerDashboardPO.closeMamiprimeBanner();
+        }
         if (menu.equalsIgnoreCase("Leads")){
             Assert.assertTrue(ownerDashboardPO.isLeadsMenuVisible());
         }
