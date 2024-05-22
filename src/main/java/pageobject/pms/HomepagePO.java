@@ -24,6 +24,8 @@ public class HomepagePO {
     Locator emptyStateSubtitleInHomepage;
     Locator ketersediaanKamarBtn;
     Locator propertyListings;
+    Locator outsideActionButton;
+    Locator propertyRow;
 
     Locator RoomNotAvailable;
     Locator selectMethodPayment;
@@ -173,6 +175,7 @@ public class HomepagePO {
         fieldNameFee0 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
         inputNameFee0 = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
         listItemName = page.getByTestId("additionalFeeInput_listItem").locator("a");
+        listItemName1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Parkir Mobil"));
         fieldPriceFee0 = page.getByTestId("additionalPriceValue0_txt").getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Rp"));
         inputPriceFee0 = page.locator("#additionalFeeInput_price0_txt");
         fieldNameFee1 = page.getByTestId("additionalPriceName0_txt").getByRole(AriaRole.TEXTBOX).first();
@@ -195,6 +198,8 @@ public class HomepagePO {
         emptyStateSubtitleInHomepage = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan.");
         ketersediaanKamarBtn = page.getByText("Ketersediaan Kamar");
         propertyListings = page.locator("tbody tr").first();
+        outsideActionButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("Hospitality"));
+        propertyRow = page.locator("tbody tr");
         RoomNotAvailable = page.locator("//div[contains(text(),'Kamar tidak tersedia')]");
         selectMethodPayment = page.locator("//span[normalize-space()='Pilih metode pembayaran']");
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
@@ -435,6 +440,7 @@ public class HomepagePO {
             playwright.assertVisible(selectMethodPayment);
         }
     }
+
     /**
      * admin fill other fee
      */
@@ -1096,4 +1102,53 @@ public class HomepagePO {
         Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
+
+    //---Daftar Properti---//
+
+    /**
+     * Check if Lihat Detail button is displayed
+     * True = displayed
+     * False = not displayed
+     * @return if Lihat Detail button is displayed
+     */
+    public boolean isLihatDetailButtonVisible(){
+        playwright.waitTillLocatorIsVisible(seeDetailBtn);
+        return playwright.isLocatorVisibleAfterLoad(seeDetailBtn, 50000.0);
+    }
+
+    /**
+     * Check if Ketersediaan Kamar button is displayed
+     * True = displayed
+     * False = not displayed
+     * @return if Ketersediaan Kamar button is displayed
+     */
+    public boolean isKetersediaanKamarButtonVisible(){
+        return playwright.isLocatorVisibleAfterLoad(roomAllotmentBtn, 30000.0);
+    }
+
+    /**
+     * Clicks Outside Action Button
+     */
+    public void clicksOutsideActionButton() {
+        playwright.clickOn(outsideActionButton);
+    }
+
+    /**
+     * Get Total Properties
+     * @return Total Properties
+     */
+    public int getTotalProperties(){
+        return propertyRow.count();
+    }
+
+    /**
+     * Get String All Nama Properti
+     * @param indexNamaProperti
+     * @return String All Nama Properti
+     */
+    public String getAllNamaProperti(int indexNamaProperti){
+        namaPropertiInTable = page.locator("tr td:nth-of-type(2)").nth(indexNamaProperti);
+        return playwright.getText(namaPropertiInTable);
+    }
+    //---End of Daftar Properti---//
 }

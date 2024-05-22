@@ -435,5 +435,38 @@ public class HomepageSteps {
     public void admin_can_see_add_fee_with_price(String text){
         homepage.getPriceTextNewRules(text);
     }
+
+    //---Daftar Properti---//
+    @When("admin clicks kebab button")
+    public void admin_clicks_kebab_button(){
+        homepage.clicksActionButton();
+    }
+
+    @Then("Action button is displayed in Daftar Property page")
+    public void Action_button_is_displayed_in_Daftar_Property_page(){
+        Assert.assertTrue(homepage.isLihatDetailButton(), "Lihat Detail button does not displayed!");
+        Assert.assertTrue(homepage.isKetersediaanKamarButton(), "Ketersediaan Kamar button does not displayed!");
+    }
+
+    @When("admin clicks outside Action Button")
+    public void admin_clicks_outside_Action_Button(){
+        homepage.clicksOutsideActionButton();
+    }
+
+    @Then("Action button is dismiss")
+    public void Action_button_is_dismiss(){
+        Assert.assertFalse(homepage.isLihatDetailButton(), "Lihat Detail button still displayed!");
+    }
+
+    @Then("10 Properties are displayed")
+    public void ten_Properties_are_displayed(){
+        int totalProperties = homepage.getTotalProperties();
+
+        for (int i=0; i<totalProperties; i++){
+            Assert.assertEquals(homepage.getAllNamaProperti(i), homepage.getAllNamaProperti(i), "Total Properties are 10");
+            System.out.println(homepage.getAllNamaProperti(i) +"\n");
+        }
+    }
+    //---End of Daftar Properti---//
 }
 
