@@ -20,6 +20,7 @@ public class RiwayatBookingPO {
     Locator userBookingSection;
     Locator textBookingStatusFirstList;
     Locator textRejectReasonFirstList;
+    Locator ajukanSewaText;
 
     public RiwayatBookingPO(Page page) {
         this.page = page;
@@ -34,6 +35,7 @@ public class RiwayatBookingPO {
         userBookingSection = page.locator("#userBookingSection");
         textBookingStatusFirstList = page.locator(".booking-list-card:nth-child(1) .card-header label");
         textRejectReasonFirstList = page.locator(".header-reject-reason:nth-child(1) span");
+        ajukanSewaText = page.locator("//*[contains(text(), 'Ajukan Sewa')]").first();
     }
 
     /**
@@ -132,7 +134,6 @@ public class RiwayatBookingPO {
      * @return Ajukan Sewa text button
      */
     public Boolean getAjukanSewatext(){
-        Locator ajukanSewaText = page.locator("//*[contains(text(), 'Ajukan Sewa')]").first();
         return ajukanSewaText.isVisible();
     }
 

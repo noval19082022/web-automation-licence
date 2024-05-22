@@ -330,7 +330,9 @@ public class BookingFormPO {
      * @param text
      */
     public void inputCatatanTambahan(String text){
-        Locator inputCatatanTambahan = page.getByPlaceholder("Misal: saya membawa barang elektronik berupa TV");
+       playwright.pageScrollUsingCoordinate(10000, 1500);
+        Locator inputCatatanTambahan = page.locator("//*[@id='bookingFormTenantNote-textArea']");
+        playwright.clearText(inputCatatanTambahan);
         playwright.fill(inputCatatanTambahan, text);
     }
 
