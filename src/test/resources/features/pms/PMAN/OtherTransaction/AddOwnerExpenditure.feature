@@ -42,9 +42,9 @@ Feature: Add Owner Expenditure
     Then system should show property suggestion "<property name>"
 
     Examples:
-      | keyword | property name                                             |
-      | Asgard  | Kost Singgahsini Asgard Halmahera Utara                   |
-      | Beruang | Kost Singgahsini Beruang Terbang Mamitest Halmahera Utara |
+      | keyword         | property name                                             |
+      | Asgard          | Kost Singgahsini Asgard Halmahera Utara                   |
+      | Beruang Terbang | Kost Singgahsini Beruang Terbang Mamitest Halmahera Utara |
 
   @TEST_PMAN-6439
   Scenario Outline: Search terminated and auto_terminated property
