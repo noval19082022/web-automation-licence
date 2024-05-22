@@ -89,6 +89,8 @@ public class OwnerDashboardPO {
     private Locator widgetDaftarGoldplus;
     private Locator leadsMenu;
     private Locator mamiprimeWidget;
+    private Locator mamiprimeBannerPopUp;
+    private Locator mamiprimeBannerCloseButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -164,6 +166,8 @@ public class OwnerDashboardPO {
         daftarGpButton = page.getByTestId("registerGP_btn");
         leadsMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Leads"));
         mamiprimeWidget = page.getByTestId("membership-prime-card");
+        mamiprimeBannerPopUp = page.frameLocator("iframe >> nth=0").getByRole(AriaRole.LINK);
+        mamiprimeBannerCloseButton = page.frameLocator("iframe >> nth=0").getByLabel("Close");
     }
 
     /**
@@ -847,5 +851,20 @@ public class OwnerDashboardPO {
      */
     public void clickMamiprimeWidget() {
         playwright.waitForLocatorVisibleAndClickOn(mamiprimeWidget);
+    }
+
+    /**
+     * Check banner mamiprime pop up visible or not
+     * @return
+     */
+    public boolean isMamiprimeBannerAppear() {
+        return playwright.isLocatorVisibleAfterLoad(mamiprimeBannerPopUp,7000.0);
+    }
+
+    /**
+     * click close button in mamiprime banner pop up
+     */
+    public void closeMamiprimeBanner() {
+        playwright.clickOn(mamiprimeBannerCloseButton);
     }
 }
