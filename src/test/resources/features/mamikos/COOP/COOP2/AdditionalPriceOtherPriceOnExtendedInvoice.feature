@@ -27,8 +27,8 @@ Feature: Additional Price Other Price On Extended Invoice
       | phone stag   | phone prod    | password  |
       | 087708777618 | 0890867321212 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod            |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+      | kost name stag                                        | kost name prod            |
+      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Additional Price Other Price On Extended Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08916727111 | 08916727111       | qwerty123    |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod          |
       | Nunu And Willump | Adi Auto Addons Satu |
@@ -88,8 +88,8 @@ Feature: Additional Price Other Price On Extended Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" on month of "next"
+      | 08916727111    | 08916727111    | qwerty123    |
+    And owner go to bill page of kost "Kost Bagas Automation HahaHehe Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		

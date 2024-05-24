@@ -9,8 +9,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0890867321212 | 0890867321212 |
+      | phone stag    | phone prod     |
+      | 0890867321212 | 0890867321212  |
 
   @TEST_COOP-3579 @TESTSET_COOP-4944 @Automated @web @continue
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice] Cancel Booking if Tenant Have Booking
@@ -24,8 +24,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod            |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+      | kost name stag                                        | kost name prod                                        |
+      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |
     When tenant booking kost
     Then tenant should success booking kost
 
@@ -34,7 +34,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08916727111    | 08916727111    | qwerty123    |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -85,10 +85,10 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08916727111    | 08916727111    | qwerty123    |
     And owner goes to bills details
-      | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini | Kost Adi Auto SinggahSini |
+      | kost name stag                                        | kost name prod                                        |
+      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |
     And owner set Kelola Tagihan filter month to "next" month
     And owner go to detail tagihan with tenant name is "Adi Auto Addons Satu" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
