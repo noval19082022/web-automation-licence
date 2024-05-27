@@ -21,6 +21,10 @@ public class MidtransPaymentPO {
     Locator payButton;
     Locator successTransaction;
     Locator targetBankSelection;
+    Locator paymentAmountBNINew;
+    Locator flagButtonBNI;
+    Locator searchPaymentBNI;
+    Locator vaCodePlaceHolderBNINew;
 
     public MidtransPaymentPO(Page page) {
         this.page = page;
@@ -33,6 +37,10 @@ public class MidtransPaymentPO {
         bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         successTransaction = page.getByText("Simulated payment is successful");
         targetBankSelection = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target Bank selection"));
+        paymentAmountBNINew = page.getByLabel("Payment Amount");
+        flagButtonBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
+        searchPaymentBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
+        vaCodePlaceHolderBNINew = page.getByLabel("VA Number");
     }
 
     /**
@@ -72,11 +80,19 @@ public class MidtransPaymentPO {
     public void paymentForBNI(String kodePembayaran){
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
-        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
-        playwright.clickOn(inquireButton);
-        playwright.clickOn(bayarButtonOnMidtrans);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolderBNINew, kodePembayaran);
+        playwright.clickOn(searchPaymentBNI);
     }
 
+    /**
+     * payment process BNI simulator fro BNI
+     * @param amountBNI
+     */
+    public void amountBNI(String amountBNI){
+        playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
+        playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINew,amountBNI);
+        playwright.clickOn(flagButtonBNI);
+    }
 
     /**
      * Payment process midtrans for BRI
