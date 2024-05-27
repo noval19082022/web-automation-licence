@@ -362,6 +362,7 @@ public class GoldplusSteps {
             case "Daftar GoldPlus":
                 chat.dismissFTUEMars();
                 chat.dismissFTUEMarsKuotaNol();
+                chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
                 Assert.assertTrue(playwright.isTextDisplayed("2 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
                 playwright.clickOnTextButton(textMessage);
