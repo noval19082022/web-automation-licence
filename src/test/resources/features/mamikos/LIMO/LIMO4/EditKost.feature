@@ -114,3 +114,33 @@ Feature: Edit Kost
       And user clicks button move photo on "Foto dalam kamar"
       And user select destination move photo room on "Foto depan kamar"
       Then user will see that the text "Anda harus melengkapi foto ini" is displayed
+
+  @TEST_LIMO-2709 @updatefotokost
+  Scenario: [Edit kos][Foto Kos]Edit foto kos with move or merge foto
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "MAMAHMUDALIMO" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Foto Kos" kos
+    And user clicks button move photo on "Foto bangunan tampak depan"
+    And user select destination move photo room on "Foto tampilan dalam bangunan"
+    Then user will see that the text "Anda harus melengkapi foto ini" is displayed
+
+#    When user already at page preview edit kos
+#    And user click link text "Edit" at Foto Kos
+#    And user show FTUE "pindahkan foto" && click button "Coba Pindahkan"
+#    And user click on foto at segment "Foto Dalam Kamar"
+#    And user see menu footer and click "Pindahkan"
+#    And user click button "Lanjutkan"
+#    And user show toast message "Pilih foto terlebih dahulu"
+#    And user select one of foto then click button "Lanjutkan"
+#    And user redirect to menu "Pindahkan Foto Ke Section"
+#    And user click button "Pindahkan"
+#    And user show toast message "Pilih section tujuan terlebih dahulu"
+#    And user select radio button "Foto Tampilan Dalam Bangunan" then click button "Pindahkan"
+#    And user redirect to page Foto Kos and succsess moved foto
