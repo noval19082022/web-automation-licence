@@ -130,17 +130,3 @@ Feature: Edit Kost
     And user clicks button move photo on "Foto bangunan tampak depan"
     And user select destination move photo room on "Foto tampilan dalam bangunan"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
-
-#    When user already at page preview edit kos
-#    And user click link text "Edit" at Foto Kos
-#    And user show FTUE "pindahkan foto" && click button "Coba Pindahkan"
-#    And user click on foto at segment "Foto Dalam Kamar"
-#    And user see menu footer and click "Pindahkan"
-#    And user click button "Lanjutkan"
-#    And user show toast message "Pilih foto terlebih dahulu"
-#    And user select one of foto then click button "Lanjutkan"
-#    And user redirect to menu "Pindahkan Foto Ke Section"
-#    And user click button "Pindahkan"
-#    And user show toast message "Pilih section tujuan terlebih dahulu"
-#    And user select radio button "Foto Tampilan Dalam Bangunan" then click button "Pindahkan"
-#    And user redirect to page Foto Kos and succsess moved foto
