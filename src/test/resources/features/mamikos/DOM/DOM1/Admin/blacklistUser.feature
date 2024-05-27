@@ -16,7 +16,7 @@ Feature: Blacklist User
     Examples:
       | dropDown     | value                                   |
       | phone_number | 089536519944                            |
-      | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
+      | email        | coop.blacklist@gmail.com                |
 
   @continue @TEST_COOP-5156
   Scenario: [WEB][Blacklist] Display User overview before Admin add blacklist user
@@ -112,16 +112,16 @@ Feature: Blacklist User
     And user click button submit
     Then user see blacklist updated success message
     Examples:
-      | dropDown     | value                                   |
-      | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
+      | dropDown     | value                        |
+      | email        | coop.blacklist@gmail.com     |
 
   @TEST_DOM-2639 @TEST_COOP-5149 @TEST_COOP-5144
   Scenario: User try login via Facebook
     Given user go to mamikos homepage
     When user login as tenant via facebook:
       | email stag                               |  email prod                               | password  |
-      | lisagor_jiuogfi_rosenthalwitz@tfbnw.net  |  lisagor_jiuogfi_rosenthalwitz@tfbnw.net  | mamikosqa |
-    Then user will see that the text "User is not allowed to see the application." is displayed
+      | coop.blacklist@gmail.com  |  coop.blacklist@gmail.com  | mamikosqa |
+    Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
   @TEST_DOM-2639 @TEST_COOP-5148
   Scenario Outline: [WEB][Blacklist] Admin Unblacklist user
@@ -136,9 +136,9 @@ Feature: Blacklist User
     And user click button submit
     Then user see blacklist updated success message
     Examples:
-      | dropDown     | value                                   |
-      | email        | lisagor_jiuogfi_rosenthalwitz@tfbnw.net |
-      | user_id      | 99451922                                |
+      | dropDown      | value                                  |
+      | email         | coop.blacklist@gmail.com               |
+      | user_id       | 99451922                               |
 
   @TEST_COOP-5150
   Scenario: [WEB][Blacklist][Filter] Admin search filter by userID
