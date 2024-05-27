@@ -1,5 +1,5 @@
- @COOP4
-Feature: Successfully Payment with Voucher
+@COOP4 @noval123
+Feature: Click Button Ubah Metode Pembayaran After Paid
 
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
@@ -40,8 +40,8 @@ Feature: Successfully Payment with Voucher
       | Budi Tromol Coop Automation | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @tenantPayWithVoucher
-  Scenario: Tenant pay kos with voucher
+  @tenantPayWithVoucher @continue
+  Scenario: click "Ubah Metode Pembayaran" After Paid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod  | password     |
@@ -51,13 +51,11 @@ Feature: Successfully Payment with Voucher
     And tenant click on ubah metode pembayaran
     Then tenant will see that the text "Pastikan Anda belum melakukan pembayaran" is displayed
 
-  @noval123
-  Scenario: Tenant pay kos with voucher
+  Scenario: Check Invoice From Kost Saya
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod  | password     |
-      | 0888123321888 | 08100000622 | mamikosqa123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant checkin kost from riwayat booking
     And tenant navigate to tagihan kost saya
-    And tenant click sudah di bayar
-    And invoice
+    And tenant click item card billing has been paid
+    Then tenant will see that the text "Rincian Tagihan" is displayed
 
