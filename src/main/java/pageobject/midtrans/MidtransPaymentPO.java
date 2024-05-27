@@ -21,10 +21,10 @@ public class MidtransPaymentPO {
     Locator payButton;
     Locator successTransaction;
     Locator targetBankSelection;
-    Locator paymentAmountBNINew;
+    Locator paymentAmountBNINewText;
     Locator flagButtonBNI;
-    Locator searchPaymentBNI;
-    Locator vaCodePlaceHolderBNINew;
+    Locator searchButtonPaymentBNI;
+    Locator vaCodePlaceHolderButtonBNINew;
 
     public MidtransPaymentPO(Page page) {
         this.page = page;
@@ -37,10 +37,10 @@ public class MidtransPaymentPO {
         bayarButtonOnMidtrans = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pay"));
         successTransaction = page.getByText("Simulated payment is successful");
         targetBankSelection = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Target Bank selection"));
-        paymentAmountBNINew = page.getByLabel("Payment Amount");
+        paymentAmountBNINewText = page.getByLabel("Payment Amount");
         flagButtonBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
-        searchPaymentBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
-        vaCodePlaceHolderBNINew = page.getByLabel("VA Number");
+        searchButtonPaymentBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
+        vaCodePlaceHolderButtonBNINew = page.getByLabel("VA Number");
     }
 
     /**
@@ -80,8 +80,8 @@ public class MidtransPaymentPO {
     public void paymentForBNI(String kodePembayaran){
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
-        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolderBNINew, kodePembayaran);
-        playwright.clickOn(searchPaymentBNI);
+        playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolderButtonBNINew, kodePembayaran);
+        playwright.clickOn(searchButtonPaymentBNI);
     }
 
     /**
@@ -90,7 +90,7 @@ public class MidtransPaymentPO {
      */
     public void amountBNI(String amountBNI){
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
-        playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINew,amountBNI);
+        playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINewText,amountBNI);
         playwright.clickOn(flagButtonBNI);
     }
 
