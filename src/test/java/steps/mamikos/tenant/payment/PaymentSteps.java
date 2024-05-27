@@ -116,9 +116,11 @@ public class PaymentSteps {
         invoicePO.clickOnPermata();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        var amountPembayaranBNI =invoicePO.getAmountPembayaranBNINumberText();
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
+        midtransPaymentPO.amountBNI(amountPembayaranBNI);
     }
 
     @And("owner/tenant/user select payment method from invoice detail using {string}")
