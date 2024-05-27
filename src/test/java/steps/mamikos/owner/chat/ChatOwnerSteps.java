@@ -154,4 +154,9 @@ public class ChatOwnerSteps {
     public void owner_can_see_label_with(String labelText) {
         Assert.assertEquals(chat.getBookingStatusLabel(), labelText,"Label doesn't match!");
     }
+
+    @When("owner wants to accsess chatroom")
+    public void owner_wants_to_accsess_chatroom() {
+        chat.clickChatOwner();
+    }
 }
