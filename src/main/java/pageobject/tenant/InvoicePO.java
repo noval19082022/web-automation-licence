@@ -795,4 +795,15 @@ public class InvoicePO {
         playwright.waitTillLocatorIsVisible(sudahBayarBtn,2000.0);
         playwright.clickOn(sudahBayarBtn);
     }
+
+    public void ubahMetodePembayaran() {
+        playwright.forceClickOn(pilihUbahMetodePembayaranButton);
+    }
+    public void paymentOVOBeforeVerification(String number) {
+        clickOnPilihPembayaran();
+        playwright.waitFor(txtOVO);
+        playwright.clickOn(txtOVO);
+        noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
+    }
 }
