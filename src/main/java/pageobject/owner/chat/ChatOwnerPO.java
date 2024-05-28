@@ -45,7 +45,7 @@ public class ChatOwnerPO {
     Locator bookingLabel;
     Locator closeIcon;
     Locator lihatFiturFTUEJB;
-    Locator labelLihatProfilPenyewaJB;
+    Locator lihatProfilPenyewaLabelOnChatroom;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -84,7 +84,7 @@ public class ChatOwnerPO {
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
         closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         lihatFiturFTUEJB = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
-        labelLihatProfilPenyewaJB = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
+        lihatProfilPenyewaLabelOnChatroom = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
     }
 
     /**
@@ -408,7 +408,7 @@ public class ChatOwnerPO {
      * dismiss FTUE lihat profil penyewa on detail chatroom
      */
     public void dismissFTUELihatProfilPenyewaOnChatroomIfExist() {
-        if (playwright.waitTillLocatorIsVisible(labelLihatProfilPenyewaJB, 7_000.0)) {
+        if (playwright.waitTillLocatorIsVisible(lihatProfilPenyewaLabelOnChatroom, 7_000.0)) {
             playwright.clickOn(sayaMengertiChatRoom);
         }
     }
