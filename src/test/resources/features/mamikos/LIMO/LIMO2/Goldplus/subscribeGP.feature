@@ -11,11 +11,11 @@ Feature: Subscribe GP from all entry point
     Then user verify "<expectedDisplay>" is appear
     And owner should successfully log out
     Examples:
-      | ownerPhone     | password  | infoUntukAnda                                                                          | expectedDisplay            |
-      | 082233545518   | qwerty123 | Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat. | list of Goldplus package   |
-      | 088112233451   | qwerty123 | 1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking.                | Daftar GoldPlus            |
-      | 08167382940592 | qwerty123 | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
-      | 088112233453   | qwerty123 | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
+      | ownerPhone     | password    | infoUntukAnda                                                                          | expectedDisplay            |
+      | 0892092027     | digantilagi | Kuota chat habis. 2 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat. | list of Goldplus package   |
+      | 088112233451   | qwerty123   | 1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking.                | Daftar GoldPlus            |
+      | 08167382940592 | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
+      | 088112233453   | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
 
   @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromChatrooms
   Scenario: Check subscribe GP from entry point chatrooms
