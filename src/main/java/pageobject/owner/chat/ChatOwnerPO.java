@@ -45,6 +45,7 @@ public class ChatOwnerPO {
     Locator bookingLabel;
     Locator closeIcon;
     Locator lihatFiturFTUEJB;
+    Locator lihatProfilPenyewaJB;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -83,6 +84,7 @@ public class ChatOwnerPO {
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
         closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         lihatFiturFTUEJB = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
+        lihatProfilPenyewaJB = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
     }
 
     /**
@@ -100,7 +102,7 @@ public class ChatOwnerPO {
     }
 
     public void dismissFTUEJemputBolaIfExist() {
-        if (playwright.waitTillLocatorIsVisible(lihatFiturFTUEJB, 2000.0)) {
+        if (playwright.waitTillLocatorIsVisible(lihatFiturFTUEJB, 3000.0)) {
             this.dismissFTUEJemputBola();
         }
     }
@@ -317,7 +319,7 @@ public class ChatOwnerPO {
      * Click close button on FTUE Before chat FTUE Mars
      */
     public void clickHeaderMarsChatroom() {
-        weeklyQuotaChatroomHeader.click();
+        playwright.clickOn(weeklyQuotaChatroomHeader);
     }
 
     /**
@@ -400,5 +402,14 @@ public class ChatOwnerPO {
         playwright.clickOn(lihatFiturFTUEJB);
         playwright.navigateTo(Mamikos.OWNER_URL);
         this.clickChatOwner();
+    }
+
+    /**
+     * dismiss FTUE lihat profil penyewa on detail chatroom
+     */
+    public void dismissFTUELihatProfilPenyewaOnChatroomIfExist() {
+        if (playwright.waitTillLocatorIsVisible(lihatProfilPenyewaJB, 7_000.0)) {
+            playwright.clickOn(sayaMengertiChatRoom);
+        }
     }
 }
