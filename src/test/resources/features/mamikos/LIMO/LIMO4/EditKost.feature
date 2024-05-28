@@ -99,21 +99,21 @@ Feature: Edit Kost
       | kost name     |
       | MAMAHMUDALIMO |
 
-    @TEST_LIMO-2710 @updatefotokost
-    Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod   | password  |
-        | 081328787342 | 081328787342 | Perempuan |
-      And owner dismiss FTUE goldplus
-      And owner navigates to property saya kos
-      And owner search kost "MAMAHMUDALIMO" on property saya page
-      And user click Lihat Selengkapnya button for edit
-      And user clicks on edit data kos button
-      And user click button edit "Foto Kamar" kos
-      And user clicks button move photo on "Foto dalam kamar"
-      And user select destination move photo room on "Foto depan kamar"
-      Then user will see that the text "Anda harus melengkapi foto ini" is displayed
+  @TEST_LIMO-2710 @updatefotokost
+  Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081328787342 | 081328787342 | Perempuan |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "MAMAHMUDALIMO" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Foto Kamar" kos
+    And user clicks button move photo on "Foto dalam kamar"
+    And user select destination move photo room on "Foto depan kamar"
+    Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
   @TEST_LIMO-2709 @updatefotokost
   Scenario: [Edit kos][Foto Kos]Edit foto kos with move or merge foto
@@ -130,3 +130,18 @@ Feature: Edit Kost
     And user clicks button move photo on "Foto bangunan tampak depan"
     And user select destination move photo room on "Foto tampilan dalam bangunan"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
+
+  @TEST_LIMO-2713
+  Scenario: [Edit kos][Foto Kos]Edit kost with condition user with old kost && wants to edit foto && user alreadey have photo booking active
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password    |
+      | 081292039331 | 085714531241 | digantilagi |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "Kost cece 4 edit" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Foto Kos" kos
+    Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
+    And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
