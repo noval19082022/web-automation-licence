@@ -136,6 +136,7 @@ public class ChatOwnerSteps {
     @Then("user see the appearence of Mars chatroom")
     public void userSeeTheAppearenceOfMarsChatroom() {
         chat.clickHeaderMarsChatroom();
+        chat.dismissFTUELihatProfilPenyewaOnChatroomIfExist();
         Assert.assertTrue(chat.isWeeklyQuotaChatroomPresent(), "Weekly Quota Information in chatroom is not present");
         Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
     }
