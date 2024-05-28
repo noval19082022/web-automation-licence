@@ -132,7 +132,7 @@ Feature: Edit Kost
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
   @TEST_LIMO-2713
-  Scenario: [Edit kos][Foto Kos]Edit foto kos with move or merge foto
+  Scenario: [Edit kos][Foto Kos]Edit kost with condition user with old kost && wants to edit foto && user alreadey have photo booking active
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password    |
