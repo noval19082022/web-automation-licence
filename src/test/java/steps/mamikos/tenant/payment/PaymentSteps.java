@@ -159,9 +159,11 @@ public class PaymentSteps {
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        var amountPembayaranBNI =invoicePO.getAmountPembayaranBNINumberText();
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
+        midtransPaymentPO.amountBNI(amountPembayaranBNI);
     }
 
     @And("tenant select payment method using Alfamart")
