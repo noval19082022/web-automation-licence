@@ -57,4 +57,9 @@ public class RiwayatBookingSteps {
         Assert.assertTrue(riwayatBooking.getAjukanSewatext(), "not appears ajukan sewa text button");
     }
 
+    @And("tenant click ajukan sewa text button on draft")
+    public void tenant_click_ajukan_sewa_text_button_on_draft(){
+        riwayatBooking.clickAjukanSewaButtonDraft();
+    }
+
 }
