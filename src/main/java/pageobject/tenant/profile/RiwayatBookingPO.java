@@ -137,4 +137,11 @@ public class RiwayatBookingPO {
         return ajukanSewaText.isVisible();
     }
 
+    /**
+     * click on Ajukan sewa button on draft or baru dilihat section
+     */
+    public void clickAjukanSewaButtonDraft(){
+        playwright.clickOn(ajukanSewaText);
+    }
+
 }

@@ -123,7 +123,7 @@ Feature: Add fee Mvp - Tenant
     And tenant click on chat pemilik
     Then tenant can see tenant description with "Parkir Motor dan Saya bawa kucing meongmeong"
 
-   @TEST_COOP-6960
+   @TEST_COOP-6960 @continue
    Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra charge but have note
      When user go to mamikos homepage
      And user cancel booking
@@ -138,3 +138,24 @@ Feature: Add fee Mvp - Tenant
      Then tenant should success booking kost
      And tenant click on chat pemilik
      Then tenant can see tenant description with "Saya bawa kucing meongmeong"
+
+  @TEST_COOP-6988
+  Scenario: [Booking form][Autofill Note] Simpan draft when select catatan tambahan and input permintaan ke pemilik text
+    When user go to mamikos homepage
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                        |
+      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "Tomorrow"
+    And tenant click on pilih tambahan on booking form
+    When tenant choose biaya tambahan "Parkir Motor" on booking form
+    And tenant click on save button
+    And tenant input catatan tambahan with "Saya bawa kucing meong-meong"
+    And user click back button
+    And user click Save Draft Button
+    And tenant navigate to riwayat and draf booking
+    And user click on Draft menu
+    And tenant click ajukan sewa text button on draft
+    Then tenant can see "Tambahan barang dan fasilitas" on booking form
