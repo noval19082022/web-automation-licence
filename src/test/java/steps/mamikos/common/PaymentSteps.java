@@ -293,7 +293,7 @@ public class PaymentSteps {
     @And("tenant pay kost from riwayat booking using ovo {string} without close the page")
     public void tenantPayKostFromRiwayatBookingUsingOvoWithoutCloseThePage(String phoneNumber) {
         invoice = riwayatBooking.clickOnBayarSekarangButton();
-        invoice.paymentOVO(phoneNumber);
+        invoice.paymentOVOBeforeVerification(phoneNumber);
     }
 
     @And("tenant click button bayar sekarang")
@@ -390,5 +390,9 @@ public class PaymentSteps {
     @Then("tenant display warning message {string}")
     public synchronized void systemDisplayWarningMessage(String warningMessage) {
         Assert.assertEquals(invoice.voucherInputPopUpWarningText(), warningMessage);
+    }
+    @And("tenant click on ubah metode pembayaran")
+    public void tenantClickOnUbahMetodePembayaran() {
+        invoice.ubahMetodePembayaran();
     }
 }

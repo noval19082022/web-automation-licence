@@ -24,8 +24,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag                        | kost name prod                        |
-      | Kost Adi Auto FullPaid AddFee Deposit | Kost Adi Auto FullPaid AddFee Deposit |
+      | kost name stag                                                  | kost name prod                                                  |
+      | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -34,7 +34,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
+      | 08716267788    | 08716267788    | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |

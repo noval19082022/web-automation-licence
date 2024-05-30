@@ -7,8 +7,7 @@ Feature: Owner Experiment- GP Chat List
     When user login as owner:
       | phone stag     | phone prod | password  |
       | 08167382940591 | 0          | qwerty123 |
-    And owner click close icon pop up
-    * user click chat button in top bar owner home page
+    * owner wants to accsess chatroom
     Then owner will see card box contains "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."
     When user click "Apa itu kuota chat room?"
@@ -21,7 +20,7 @@ Feature: Owner Experiment- GP Chat List
     When user login as owner:
       | phone stag     | phone prod | password  |
       | 08167382940592 | 0          | qwerty123 |
-    * user click chat button in top bar owner home page
+    * owner wants to accsess chatroom
     Then owner will see card box contains "Sisa Kuota"
     * owner will see card box contains "Daftar GoldPlus"
     * verify title ftue is "Apa itu fitur Chat" and description "Di fitur chat Anda dapat mengobrol dengan calon penghuni kos Anda"

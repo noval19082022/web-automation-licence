@@ -792,7 +792,7 @@ public class PropertySayaPO {
     public void clickEditDataKos(String dataKos) {
         page.waitForLoadState(LoadState.LOAD);
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
-        playwright.waitFor(editDataKos);
+        playwright.waitTillLocatorIsVisible(editDataKos, 5_000.0);
         playwright.clickOn(editDataKos);
     }
 

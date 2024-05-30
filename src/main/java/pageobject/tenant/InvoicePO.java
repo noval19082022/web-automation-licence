@@ -83,6 +83,7 @@ public class InvoicePO {
     Locator ubahButton;
     protected Locator pembayaranBerhasilText;
     Locator sudahBayarBtn;
+    Locator amountBNILabel;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -154,6 +155,7 @@ public class InvoicePO {
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
+        amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
     }
 
     /**
@@ -390,6 +392,15 @@ public class InvoicePO {
      */
     public String getKodePembayaranNumberText() {
         return kodePembayaranPermata.textContent().trim();
+    }
+
+    /**
+     * get amount pembayaran to use on BNI simulator
+     * @return
+     */
+    public String getAmountPembayaranBNINumberText(){
+        // Remove "Rp" and trim whitespace
+        return amountBNILabel.textContent().replaceAll("[^0-9]", "").trim();
     }
 
     /**
@@ -783,5 +794,16 @@ public class InvoicePO {
         playwright.clickOn(sayaSudahBayarBtn);
         playwright.waitTillLocatorIsVisible(sudahBayarBtn,2000.0);
         playwright.clickOn(sudahBayarBtn);
+    }
+
+    public void ubahMetodePembayaran() {
+        playwright.forceClickOn(pilihUbahMetodePembayaranButton);
+    }
+    public void paymentOVOBeforeVerification(String number) {
+        clickOnPilihPembayaran();
+        playwright.waitFor(txtOVO);
+        playwright.clickOn(txtOVO);
+        noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
     }
 }

@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod            |
-      | Kost Adi Auto DP Only | Kost Adi Auto SinggahSini |
+      | kost name stag                                 | kost name prod                                 |
+      | Kost Bagas Dp Only Automation Tobelo Halmahera | Kost Bagas Dp Only Automation Tobelo Halmahera |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000022 | mamikosqa123 |
+      | 08916727111    | 08916727111    | qwerty123    |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -87,8 +87,8 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000021 | 08900000000021 | mamikosqa123 |
-    And owner go to bill page of kost "Kost Adi Auto DP Only" on month of "current"
+      | 08916727111    | 08916727111    | qwerty123 |
+    And owner go to bill page of kost "Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 		

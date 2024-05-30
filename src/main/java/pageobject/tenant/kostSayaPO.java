@@ -33,6 +33,7 @@ public class kostSayaPO {
     Locator upCommingText;
     Locator sudahDiBayarBtn;
     Locator invoiceSudahdiBayar;
+    Locator itemCardBillingHasBeenPaid;
 
 
     public kostSayaPO(Page page) {
@@ -59,6 +60,7 @@ public class kostSayaPO {
         this.okeButtonForum = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke"));
         this.sudahDiBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Dibayar"));
         this.invoiceSudahdiBayar = page.getByText("Jatuh tempo 26 Desember Rp96.000.200");
+        this.itemCardBillingHasBeenPaid = page.locator("//div[@class='claim-header']");
     }
 
     /**
@@ -232,6 +234,13 @@ public class kostSayaPO {
     public String isPaymentSuccessText(String dibayar) {
         Locator statusInvoice = page.getByText(dibayar).nth(1);
         return playwright.getText(statusInvoice);
+    }
+    /**
+     * click on item card sudah Bayar on kost saya
+     */
+    public void clickItemCardBillingHasBeenPaid(){
+        playwright.clickOn(sudahDiBayarBtn);
+        playwright.clickOn(itemCardBillingHasBeenPaid);
     }
 }
 

@@ -28,7 +28,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08916727111    | 08916727111    | qwerty123    |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -88,10 +88,10 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000021 | mamikosqa123 |
+      | 08916727111    | 08916727111    | qwerty123    |
     And owner goes to bills details
-      | kost name stag                                   | kost name prod      |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
+      | kost name stag                                        | kost name prod      |
+      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto Fpaid |
     And owner set Kelola Tagihan filter month to "next" month
     And user open invoice details
     Then owner can sees total amount is basic amount plus other price

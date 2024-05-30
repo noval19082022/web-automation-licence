@@ -136,6 +136,7 @@ public class ChatOwnerSteps {
     @Then("user see the appearence of Mars chatroom")
     public void userSeeTheAppearenceOfMarsChatroom() {
         chat.clickHeaderMarsChatroom();
+        chat.dismissFTUELihatProfilPenyewaOnChatroomIfExist();
         Assert.assertTrue(chat.isWeeklyQuotaChatroomPresent(), "Weekly Quota Information in chatroom is not present");
         Assert.assertTrue(chat.isRegisterGPButtonChatroomPresent(), "Register GP Button in chatroom is not present");
     }
@@ -153,5 +154,10 @@ public class ChatOwnerSteps {
     @Then("owner can see label with {string}")
     public void owner_can_see_label_with(String labelText) {
         Assert.assertEquals(chat.getBookingStatusLabel(), labelText,"Label doesn't match!");
+    }
+
+    @When("owner wants to accsess chatroom")
+    public void owner_wants_to_accsess_chatroom() {
+        chat.clickChatOwner();
     }
 }

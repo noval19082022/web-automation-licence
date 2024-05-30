@@ -28,7 +28,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | 087708777618 | 0890867321212 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod            |
-      | Kost Adi Auto Regular | Kost Adi Auto SinggahSini |
+      | Kost Bagas Automation Add Tobelo Halmahera Utara  | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -37,7 +37,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
-      | 08900000000022 | 08900000000022 | mamikosqa123 |
+      | 08716267788    | 08716267788    | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod          |
       | Nunu And Willump | Adi Auto Addons Satu |
@@ -64,4 +64,3 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | search by    | renter_phone_number |
       | search value | 087708777618        |
     Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
-		
