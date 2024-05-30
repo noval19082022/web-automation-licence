@@ -20,6 +20,7 @@ Feature: Search invoice
     And user click search invoice button on search invoice admin page
     Then user verify search invoice results have auto extend "False", "danger"
 
+#  Temporary Commenting the scenarios for the future unexpected usage
 #  @TEST_COOP-2629 @reminderStatusInformationH-5 @continue
 #  Scenario: Reminder status information H-5
 #    When admin clicks on Search Invoice Menu form left bar
