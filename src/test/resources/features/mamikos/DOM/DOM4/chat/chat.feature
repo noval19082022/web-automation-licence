@@ -18,6 +18,7 @@ Feature: Chat and Chat Optimization
     When tenant search kost then go to kost details:
       | kost name stag                                      | kost name prod                                      |
       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then user login from kost detail via phone number:
       | phone stag   | phone prod   | password  |
@@ -32,6 +33,7 @@ Feature: Chat and Chat Optimization
     And tenant search kost then go to kost details:
       | kost name stag                                      | kost name prod                                      |
       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then user see phone number field and selectable question options :
       | Saya butuh cepat nih. Bisa booking sekarang? |
@@ -81,12 +83,12 @@ Feature: Chat and Chat Optimization
     When owner enter text "My phone is 00000000001" in chat page
     Then chat room appear with latest message "My phone is 00000000001"
 
-  @continue @TEST_COOP-5438
+  @TEST_COOP-5438
   Scenario: [Dweb][Kost Detail][Chat]Check functionality of booking button disable
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 081223344570 | 083176408442 | qwerty123 |
+      | 0888881472 | 083176408442 | qamamikos123 |
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod                                             |
       | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
@@ -98,7 +100,10 @@ Feature: Chat and Chat Optimization
   @continue @TEST_COOP-5431
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
-    When user search for Kost with name "<property>" and selects matching result
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 0888881477   | 083176408442 | qwerty123 |
+    And user search for Kost with name "<property>" and selects matching result
     And user click chat in kos detail
     And user select question "<question>"
     And user click send chat from popup
@@ -118,9 +123,6 @@ Feature: Chat and Chat Optimization
   @TEST_COOP-5432
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag  | phone prod   | password  |
-      | 08999222999 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                          | kost name prod                                         |
       | Kos BX Automation BBK Available Cilacap Selatan Cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |

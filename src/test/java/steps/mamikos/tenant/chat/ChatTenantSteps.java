@@ -67,7 +67,7 @@ public class ChatTenantSteps {
 
     @Then("user sees the Booking button disable")
     public void userSeesTheBookingButtonDisable() {
-        Assert.assertTrue(chat.isBookingButtonDisablePresent(), "booking button is not disable!");
+        Assert.assertTrue(chat.isBookingButtonDisablePresent(), "booking button is not disabled!");
     }
 
     @And("user clicks the Lihat Iklan button and redirect to detail property")

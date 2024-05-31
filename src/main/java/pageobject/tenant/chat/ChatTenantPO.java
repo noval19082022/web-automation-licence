@@ -129,7 +129,7 @@ public class ChatTenantPO {
      * @return boolean
      */
     public boolean isBookingButtonDisablePresent() {
-        return playwright.waitTillLocatorIsVisible(disabledRoomCardBookingButton);
+        return playwright.isButtonDisable(disabledRoomCardBookingButton);
     }
 
     /**
