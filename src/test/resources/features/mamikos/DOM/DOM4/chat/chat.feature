@@ -88,7 +88,7 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
-      | 0888881472 | 083176408442 | qamamikos123 |
+      | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                             | kost name prod                                             |
       | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
