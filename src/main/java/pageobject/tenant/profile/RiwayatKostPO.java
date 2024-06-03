@@ -368,6 +368,13 @@ public class RiwayatKostPO {
     }
 
     /**
+     * click Ajukan berhenti sewa button only
+     */
+    public void clickAjukanBerhentiSewaButton(){
+        playwright.clickOn(ajukanBerhentiSewaButtonAfterReviewKos);
+    }
+
+    /**
      * verify bank account field
      * @param text
      * @return text example: Nama bank
@@ -382,8 +389,8 @@ public class RiwayatKostPO {
      * @param text
      * @return text example BCA
      */
-    public boolean validateConfirmationPopupAccount(String text, String number, String name){
-        Locator popupAccountText = page.getByTestId("userKostModalStopRent-confirmationModal").getByText(""+text+"");
+    public boolean validateConfirmationPopupAccount(String text){
+        Locator popupAccountText = page.locator("//*[@class=\"bg-u-mt-sm bg-u-radius-lg bg-c-card bg-c-card--lined bg-c-card--sm bg-c-card--light\"]//p[contains(text(), '"+text+"')]");
         return popupAccountText.isVisible();
     }
 
