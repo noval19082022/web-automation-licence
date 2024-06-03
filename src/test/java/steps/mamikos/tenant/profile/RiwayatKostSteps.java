@@ -145,6 +145,11 @@ public class RiwayatKostSteps {
         riwayatKost.clickAjukanBerhentiSewaTextAfterReviewKos();
     }
 
+    @And("user click ajukan berhenti sewa on kontrak saya after input data diri")
+    public void user_click_ajukan_berhenti_sewa_on_kontrak_saya_after_input_data_diri(){
+        riwayatKost.clickAjukanBerhentiSewaButton();
+    }
+
     @Then("tenant can see {string} on bank account section")
     public void tenant_can_see_on_bank_account_section(String text){
         riwayatKost.validateBankAccount(text);
@@ -156,7 +161,9 @@ public class RiwayatKostSteps {
         String bankName = bankAccount.get(0).get("Nama bank");
         String number = bankAccount.get(0).get("Nomor rekening");
         String name = bankAccount.get(0).get("Nama pemilik rekening");
-        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(bankName, number, name), "nama bank or number or name not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(bankName), "nama bank or number or name not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(number), "nama bank or number or name not displayed");
+        Assert.assertTrue(riwayatKost.validateConfirmationPopupAccount(name), "nama bank or number or name not displayed");
     }
 
     @And("tenant click on {string} button on popup confirmation")

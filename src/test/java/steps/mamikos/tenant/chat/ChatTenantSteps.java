@@ -56,9 +56,14 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        kostDetail.dismissFTUEIfExist();
-        Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-    }
+        if (playwright.isButtonWithTextDisplayed("Ajukan Sewa",20)){
+            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+      }
+        else{
+            kostDetail.dismissFTUEIfExist();
+            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+         }
+        }
 
     @And("tenant enter text {string} in chat page")
     public void tenantEnterTextInChatPage(String chatMsg) {

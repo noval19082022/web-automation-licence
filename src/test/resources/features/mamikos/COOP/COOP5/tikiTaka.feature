@@ -55,7 +55,7 @@ Feature: Tiki Taka - Bank Account
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
     And user stop rent kost with reason "Sudah Selesai Studi"
-    And user click ajukan berhenti sewa on kontrak saya after review kos
+    And user click ajukan berhenti sewa on kontrak saya after input data diri
 
 #  @TEST_COOP-7648
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Confirmation Pop Up - Confirm
@@ -69,7 +69,7 @@ Feature: Tiki Taka - Bank Account
     Then tenant can see "Nama bank*" on bank account section
     When tenant can see "Nomor rekening*" on bank account section
     Then tenant can see "Nama pemilik rekening*" on bank account section
-    And user click ajukan berhenti sewa on kontrak saya after review kos
+    And user click ajukan berhenti sewa on kontrak saya after input data diri
     And tenant click on "Kirim form ke pemilik" button on popup confirmation
     When tenant navigate to kontrak kost saya
     Then tenant can see "Diajukan pada 20 Mei 2024. Deposit akan ditransfer maksimal H+7 setelah pemilik " on bank account section
