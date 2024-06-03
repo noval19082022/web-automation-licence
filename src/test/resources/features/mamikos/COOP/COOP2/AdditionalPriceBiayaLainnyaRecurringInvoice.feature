@@ -50,7 +50,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0890867321212" without close the page
+    And tenant pay kost from riwayat booking using ovo "0890867321212"
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
