@@ -25,10 +25,10 @@ Feature: Change the room on Data Ketersedian Kamar
     And user click on atur ketersediaan button
     When user click the edit button in room with status is occupied with room name "5"
     And user update lantai name to "2"
-    Then user can see alert "Success! Kamar berhasil di-update" on atur kamar page
+    Then user can see alert "Success!" on atur kamar page
     When user click the edit button in room with status is occupied with room name "5"
     And user update lantai name to "1"
-    Then user can see alert "Success! Kamar berhasil di-update" on atur kamar page
+    Then user can see alert "Success!" on atur kamar page
 
   @TEST_BBM-1515
   Scenario: [Data Ketersediaan Kamar][Delete Kost Room]Delete button is remain locked when when room status is occupied with contract

@@ -1968,7 +1968,9 @@ public class KostDetailsPO {
      * @return boolean, true if visible
      */
     public boolean isRefundPolicySectionVisible() {
+        playwright.waitTillLocatorIsVisible(canRefundText);
         canRefundText.isVisible();
+        playwright.waitTillLocatorIsVisible(accordingToTnCRefundText);
         accordingToTnCRefundText.isVisible();
         return refundPolicySection.isVisible();
     }
