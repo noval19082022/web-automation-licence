@@ -150,7 +150,7 @@ Feature: Search Contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod  | password  |
-      | 081197878841 | 08119787884 | Perempuan |
+      | 081197878841 | 08119787884 | qwerty123 |
     And user cancel booking
 
 		#  Scenario: Tenant booking and payment for weekly period
