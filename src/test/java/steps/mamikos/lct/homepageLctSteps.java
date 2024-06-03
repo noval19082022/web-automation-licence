@@ -13,13 +13,8 @@ public class homepageLctSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     homepageLctPO lct = new homepageLctPO(page);
 
-    @Then("owner should redirect to lct")
-    public void owner_should_redirect_to_lct() {
-        playwright.hardWait(3000.0);
-        Assert.assertEquals(lct.getLctUrl(),Mamikos.HOMEPAGE_LCT+"?activeTab=submitted");
-    }
-    @Then("owner role should be {string}")
-    public void owner_role_should_be(String role) {
+    @Then("agen role should be {string}")
+    public void agen_role_should_be(String role) {
         Assert.assertEquals(lct.getUserRole(),role);
     }
 }

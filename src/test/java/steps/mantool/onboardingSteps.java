@@ -121,7 +121,12 @@ public class onboardingSteps {
     @Then("agen should redirect to {string} in new tab")
     public void agen_should_redirect_to_in_new_tab(String url) {
         playwright = new PlaywrightHelpers(page1);
-        Assert.assertEquals(playwright.getPageUrl(),url,"URL tidak sesuai");
+        if (url.equalsIgnoreCase("LCT")){
+            String lctUrl = Mamikos.HOMEPAGE_LCT+"?activeTab=submitted";
+            Assert.assertEquals(playwright.getPageUrl(), lctUrl, "URL tidak sesuai");
+        } else {
+            Assert.assertEquals(playwright.getPageUrl(), url, "URL tidak sesuai");
+        }
     }
     @When("admin click in breadcrumb {string}")
     public void admin_click_in_breadcrumb(String menu) {
