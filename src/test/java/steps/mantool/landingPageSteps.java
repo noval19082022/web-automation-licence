@@ -2,6 +2,7 @@ package steps.mantool;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,7 +24,7 @@ public class landingPageSteps {
     public void admin_login_agen_mantool(DataTable table) {
         mantoolCredential = table.asMaps(String.class, String.class);
 
-        String phoneNumber = mantoolCredential.get(0).get("No Handphone");
+        String phoneNumber = mantoolCredential.get(0).get("No Handphone "+ Mamikos.ENV);
         String password = mantoolCredential.get(0).get("password");
 
         landingPage.loginAgenMantool(phoneNumber,password);

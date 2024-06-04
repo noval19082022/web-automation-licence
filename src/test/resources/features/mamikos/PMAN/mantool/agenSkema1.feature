@@ -6,8 +6,8 @@
     Scenario: Login using Agen Skema 1
       Given admin navigate to mantool
       When admin login agen mantool
-        | No Handphone  | password  |
-        | 083214140880  | qwerty123 |
+        | No Handphone stag | password  |
+        | 083214140880      | qwerty123 |
       Then should redirect to onboarding page
       And agen name is "Akun Skema Satu"
       #check profile
@@ -126,6 +126,6 @@
       Then steps show progress "3 / 5"
       When admin logout mantool
       And admin login agen mantool
-        | No Handphone  | password  |
-        | 083214140880  | qwerty123 |
+        | No Handphone stag | password  |
+        | 083214140880      | qwerty123 |
       Then steps show progress "0 / 5"
