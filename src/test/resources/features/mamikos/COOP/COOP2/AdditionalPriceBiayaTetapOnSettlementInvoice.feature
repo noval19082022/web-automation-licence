@@ -50,11 +50,11 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
       | phone stag   | phone prod   | password  |
       | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
-    And tenant set active page to 2
+    And tenant set active page to 1
     And tenant get invoice number
 
   @TEST_COOP-4255 @TESTSET_COOP-4944 @Automated @web
