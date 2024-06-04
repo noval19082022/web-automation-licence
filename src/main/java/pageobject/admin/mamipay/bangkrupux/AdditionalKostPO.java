@@ -34,7 +34,7 @@ public class AdditionalKostPO {
         roomStatusButton = page.locator("//*[@class='form-group'][3]/select");
         updateRoomStatusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update"));
         errorAlertInformationText = page.getByText("Kamar dengan aktif tenant kontrak tidak bisa diubah.");
-        successAlertInfromationText = page.locator("//*[@class='alert alert-success alert-dismissable']/b");
+        successAlertInfromationText = page.locator("//b[normalize-space()='Success!']");
         inputFieldlantai = page.locator("#floor");
         searchRoomId= page.getByLabel("Search:");
         deleteRoomButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Delete"));

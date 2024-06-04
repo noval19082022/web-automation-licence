@@ -8,6 +8,7 @@ Feature: Homepage - Kost Saya Section
     When user login as owner:
       | phone stag    | password     |
       | 0890000000289 | Bismillah@01 |
+    And user redirected to owner dashboard
     And user navigate to penyewa page
     And user search kost in penyewa menu "unique code"
     And user click Selengkapnya button on "Podcast" contract
