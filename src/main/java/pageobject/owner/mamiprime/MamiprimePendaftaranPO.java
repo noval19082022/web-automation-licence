@@ -11,11 +11,16 @@ public class MamiprimePendaftaranPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator nonGPInformationText;
+    Locator labelPropertyFull;
+    Locator propertyNamePrime;
 
     public MamiprimePendaftaranPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.nonGPInformationText = page.locator(".bg-c-alert__content-description");
+        this.labelPropertyFull = page.locator("//div[@class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-grey']");
+        this.propertyNamePrime = page.locator(".prime-property-list__list-item-name");
+
     }
 
     /**
@@ -33,5 +38,24 @@ public class MamiprimePendaftaranPO {
     public String getNonGPInformationText()  {
         return playwright.getText(nonGPInformationText).replaceAll("\\s", "");
     }
+
+    /**
+     * Get Text property name from list property
+     *
+     * @return string
+     */
+    public String getPropertyNamePrime()  {
+        return playwright.getText(propertyNamePrime);
+    }
+
+    /**
+     * Get Text at label property prime
+     *
+     * @return string
+     */
+    public String getLabelTextFull()  {
+        return playwright.getText(labelPropertyFull);
+    }
+
 
 }
