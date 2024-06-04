@@ -134,7 +134,7 @@ public class ApartmentLandingPO {
     public String getLastSeenDetailProperti(String propertyName) {
         String propertyNameLocator = "//*[contains(text(),'" + propertyName + "')]";
         playwright.waitTillLocatorIsVisible(page.locator(propertyNameLocator));
-        return playwright.getText(page.locator(propertyNameLocator));
+        return playwright.getText(page.locator(propertyNameLocator)).replaceAll("\\[([^]]+)]", "").replaceAll("[0-9]", "").trim();
     }
 
     /**

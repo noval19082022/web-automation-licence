@@ -20,7 +20,7 @@ Feature: Rekomendasi Listing
       | kost name stag | kost name prod |
       | Silalay 123    |                |
     Then tenant open tab pernah dilihat at menu favorite
-    And tenant verify the property with name "Silalay 123" is appear
+    And tenant verify the property with name "Silalay" is appear
     And tenant verify the Hapus History button is appear
     When tenant open tab difavoritkan at menu favorite
     Then user verify rekomendasi listing section didn't display
@@ -29,15 +29,17 @@ Feature: Rekomendasi Listing
   @TEST_LIMO-301
   Scenario: There is no rekomendasi booking cancel
     Given user go to mamikos homepage
-    And user login as tenant via phone number:
+    When user login as tenant via phone number:
       | phone stag    | password    |
       | 082322233399  | 12345678    |
-    When tenant search kost then go to kost details:
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
       | kost name stag         | kost name prod |
       | Kos Upik Merapi Tipe C |                |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
-    And user cancel booking
+    When user cancel booking
     Then tenant check status booking is "Dibatalkan"
 
   @TEST_LIMO-304 @TEST_LIMO-303
@@ -48,9 +50,9 @@ Feature: Rekomendasi Listing
       | <tenantPhone> | <password> |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod |
-      | Kos Raney Momogi Tipe A |                |
+      | <kostName>              |                |
     When tenant open tab pernah dilihat at menu favorite
-    And tenant verify the property with name "Kos Raney Momogi Tipe A Danurejan Yogyakarta" is appear
+    And tenant verify the property with name "<kostName>" is appear
     And tenant verify the Hapus History button is appear
     When tenant open tab difavoritkan at menu favorite
     #And do validation rekomendasi "<validation>" with maximal <countPerPage> per page and maximal page is <countPage>
@@ -62,9 +64,9 @@ Feature: Rekomendasi Listing
     And user verify the rekomendasi listing max is <countPerPage> page
     And user verify the max <maxPage> rekomendasi listing
     Examples:
-      | tenantPhone   | password     | validation    | countPerPage | maxPage |
-      | 0828888888880 | qwerty123    | displayed     | 4            | 2       |
-      | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       |
+      | tenantPhone   | password     | validation    | countPerPage | maxPage | kostName                                     |
+      | 0828888888880 | qwerty123    | displayed     | 4            | 2       | Kos Raney Momogi Tipe A Danurejan Yogyakarta |
+      | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       | Marta Kost High Tobelo Halmahera Utara       |
 
   @TEST_LIMO-1339 @continue @favRekomendasi
   Scenario: Check property recomendation section after favorite
