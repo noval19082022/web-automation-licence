@@ -47,7 +47,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
+    And tenant pay kost from riwayat booking using ovo "081280003230"
     And tenant set active page to 0
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page after pay DP

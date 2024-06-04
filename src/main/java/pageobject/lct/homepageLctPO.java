@@ -22,6 +22,7 @@ public class homepageLctPO {
      * @return String
      */
     public String getUserRole() {
+        playwright.waitTillLocatorIsVisible(userRoleText);
         return playwright.getText(userRoleText);
     }
 

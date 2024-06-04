@@ -24,7 +24,7 @@ public class landingPagePO {
 
         loginAgenButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Login Agen").setExact(true));
         loginButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Login").setExact(true));
-        noHandphoneField = page.getByPlaceholder("Nomor Handphone");
+        noHandphoneField = page.getByPlaceholder("08xxxxxxxxxx");
         passwordField = page.getByPlaceholder("Masukkan Password");
         profileButton = page.locator(".bg-c-avatar");
         profileMenuText = page.locator("li p");
