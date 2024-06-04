@@ -1,4 +1,4 @@
-@BBM6 @regression @refundPolishTenantSide @novalinter
+@BBM6 @regression @refundPolishTenantSide
 Feature: Update Refund Policy kost pilar 1 and reguler
 
   @COOP-1353
