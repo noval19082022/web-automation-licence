@@ -99,6 +99,7 @@ Feature: Add fee Mvp - Tenant
     When tenant choose biaya tambahan "Parkir Motor" on booking form
     And tenant click on save button
     Then tenant can see "Parkir Motor" on booking form
+    And tenant input catatan tambahan with ""
     And user can set Ajukan Sewa
     Then tenant should success booking kost
     And tenant click on chat pemilik

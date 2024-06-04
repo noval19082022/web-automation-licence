@@ -100,8 +100,10 @@ public class BillAndBookingManagementPO {
         if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
             playwright.clickOn(Iunderstand);
         }
-        simpanButton.click();
-        playwright.hardWait(5000);
+        else {
+            simpanButton.click();
+            playwright.hardWait(5000);
+        }
     }
 
     /**

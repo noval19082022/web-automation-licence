@@ -23,6 +23,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And tenant search kost then go to kost details:
       | kost name stag            | kost name prod            |
       | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
+    And user want to dismiss FTUE
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
@@ -33,7 +34,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod      |
-      | Nunu And Willump | Nunu And Willump |
+      | Tenant Complementary Lima | Nunu And Willump |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Check Invoice number
@@ -97,9 +98,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password     |
-      | 0812000005   | 0812000005   | 1d0lt3stb4ru |
+      | 081362464341   | 081362464341   | 1d0lt3stb4ru |
     And owner go to bill page of kost "Kost Wild Rift Settlement" on month of "current"
-    And owner go to detail tagihan with tenant name is "Nunu And Willump" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
+    And owner go to detail tagihan with tenant name is "Tenant Complementary Lima" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp50.000"
-
-
