@@ -227,7 +227,9 @@ public class GoldplusSteps {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
-        broadcast.clickOnCloseTooltip();
+        chat.dismissFTUEJemputBolaIfExist();
+        playwright.backToPreviousPage();
+        chat.clickChatOwner();
         chat.searchChatTenant(tenantName);
         chat.dismissFTUETBC();
         chat.clickButtonOnChatRoomList(buttonTxt);
