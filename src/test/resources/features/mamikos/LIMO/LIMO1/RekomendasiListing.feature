@@ -50,9 +50,9 @@ Feature: Rekomendasi Listing
       | <tenantPhone> | <password> |
     And tenant search kost then go to kost details:
       | kost name stag          | kost name prod |
-      | <kostName>              |                |
+      | Kos Raney Momogi Tipe A |                |
     When tenant open tab pernah dilihat at menu favorite
-    And tenant verify the property with name "<kostName>" is appear
+    And tenant verify the property with name "Kos Raney Momogi Tipe A Danurejan Yogyakarta" is appear
     And tenant verify the Hapus History button is appear
     When tenant open tab difavoritkan at menu favorite
     #And do validation rekomendasi "<validation>" with maximal <countPerPage> per page and maximal page is <countPage>
@@ -64,9 +64,9 @@ Feature: Rekomendasi Listing
     And user verify the rekomendasi listing max is <countPerPage> page
     And user verify the max <maxPage> rekomendasi listing
     Examples:
-      | tenantPhone   | password     | validation    | countPerPage | maxPage | kostName                                     |
-      | 0828888888880 | qwerty123    | displayed     | 4            | 2       | Kos Raney Momogi Tipe A Danurejan Yogyakarta |
-      | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       | Marta Kost High Tobelo Halmahera Utara       |
+      | tenantPhone   | password     | validation    | countPerPage | maxPage |
+      | 0828888888880 | qwerty123    | displayed     | 4            | 2       |
+      | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       |
 
   @TEST_LIMO-1339 @continue @favRekomendasi
   Scenario: Check property recomendation section after favorite
