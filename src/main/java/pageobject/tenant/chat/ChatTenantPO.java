@@ -32,6 +32,7 @@ public class ChatTenantPO {
     Locator tenantChatButton;
     Locator confirmationUbahJadwalButton;
     Locator backButtonChatroom;
+    Locator charoomCardList;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -54,6 +55,7 @@ public class ChatTenantPO {
         tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
         confirmationUbahJadwalButton = page.locator("//button[normalize-space()='Batalkan Survei']//following-sibling::button");
         backButtonChatroom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
+        charoomCardList = page.locator(".mc-channel-list-card");
     }
 
     /**
@@ -244,5 +246,13 @@ public class ChatTenantPO {
     public boolean isQuestionDisplayed(String question) {
         String xpathLocator = "//p[contains(.,'" + question + "')]";
         return page.querySelector(xpathLocator) != null;
+    }
+
+    /**
+     * open chat room by order on chat list
+     * @param orderNumber (first order is 0, second order is 1, so on)
+     */
+    public void openChatroomByOrder(int orderNumber) {
+        playwright.clickOn(charoomCardList.nth(orderNumber));
     }
 }
