@@ -204,7 +204,7 @@
       Given user go to mamikos homepage
       And tenant search kost then go to kost details:
         | kost name stag                               | kost name prod         |
-        | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
+        | Kost Mars September Rajeg Tangerang          | Dont Starve To Get Her |
       And tenant booking kost
       Then tenant should success booking kost
 

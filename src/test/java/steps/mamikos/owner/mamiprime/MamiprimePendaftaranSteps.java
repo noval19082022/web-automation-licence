@@ -22,4 +22,21 @@ public class MamiprimePendaftaranSteps {
         Assert.assertEquals(mamiprimePendaftaran.getNonGPInformationText(), expected.replaceAll("\\s", ""));
     }
 
+    @Then("owner can see {string} has label {string} at section select property")
+    public void owner_can_see_has_label_at_section_select_property(String kost, String label) {
+       Assert.assertEquals(mamiprimePendaftaran.getPropertyNamePrime(),kost,"Name property doesnt equals");
+       Assert.assertEquals(mamiprimePendaftaran.getLabelTextFull(),label,"Label name doesnt equal");
+    }
+
+    @Then("owner can see information {string} at section select periode")
+    public void owner_can_see_information_at_section_select_periode(String information) {
+        Assert.assertTrue(mamiprimePendaftaran.checkImageFullisShow(),"image not show");
+        Assert.assertEquals(mamiprimePendaftaran.getInformationTextPrimeFull(),information,"Information doesnt equal");
+
+    }
+
+    @Then("owner can see description information {string} at section select periode")
+    public void owner_can_see_description_information_at_section_select_periode(String desc) {
+        Assert.assertEquals(mamiprimePendaftaran.getDescInformationTextPrimeFull(),desc,"Description doesnt equal");
+    }
 }

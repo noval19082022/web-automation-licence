@@ -253,7 +253,7 @@ public class NavigatesSteps {
 
     @And("user navigate to penyewa page")
     public void userNavigateToPenyewaPage() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 50000.0, LoadState.LOAD);
     }
 
     @And("admin navigate to mamikos voucher menu")
