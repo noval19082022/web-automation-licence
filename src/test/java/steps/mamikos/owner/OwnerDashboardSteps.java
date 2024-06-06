@@ -305,9 +305,14 @@ public class OwnerDashboardSteps {
        Assert.assertFalse(goldplus.isWidgetGPAppear(),"widget GP is appear");
     }
 
+    @Then("owner see info untuk anda section GP {string} appears")
+    public void info_untuk_anda_section_gp_appears(String infoUntukAnda) {
+       Assert.assertTrue(goldplus.isInfoUntukAndaAppear(infoUntukAnda),"info untuk anda section GP is not appear");
+    }
+
     @Then("info untuk anda section GP {string} is not appears")
     public void info_untuk_anda_section_gp_is_not_appears(String infoUntukAnda) {
-       Assert.assertFalse(goldplus.isInfoUntukAndaAppear(infoUntukAnda),"info untuk anda section GP is appear");
+        Assert.assertFalse(goldplus.isInfoUntukAndaIsNotAppear(infoUntukAnda),"info untuk anda section GP is appear");
     }
 
     @And("user access mamitour from owner dashboard")

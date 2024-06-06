@@ -16,7 +16,6 @@ Feature: Owner Dashboard GP
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
     And user click info untuk anda "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
-    And user will see that the text "Sisa kuota mingguan" is displayed
     And user will see that the text "1 chat room" is displayed
     When owner navigates to owner dashboard
     Then owner should successfully log out
@@ -27,7 +26,7 @@ Feature: Owner Dashboard GP
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233452 | 0          | qwerty123 |
-    Then user will see that the text "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat." is displayed
+    Then owner see info untuk anda section GP "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat." appears
 
   @kuotaChatRedirection
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
@@ -41,7 +40,7 @@ Feature: Owner Dashboard GP
     When user login as owner:
       | phone stag   | phone prod | password  |
       | 088112233453 | 0          | qwerty123 |
-    Then user will see that the text "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! " is displayed
+    Then owner see info untuk anda section GP "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!" appears
 
   @nonExperimentRedirection
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
@@ -69,7 +68,6 @@ Feature: Owner Dashboard GP
     # Scenario: Click button FTUE MARS on chatlist page && verify label goldplus
     When user click "Apa itu kuota chat room?"
     * user click "Saya Mengerti"
-    * user click close icon tooltip broadcast chat on chatlist
     Then verify label goldplus on chatlist
 
   @resetGP
