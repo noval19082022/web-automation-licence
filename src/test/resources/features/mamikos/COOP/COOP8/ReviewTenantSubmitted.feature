@@ -1,4 +1,4 @@
-@regression @kostReviewTenantSubmitted @BBM8
+@regression @kostReviewTenantSubmitted @BBM8 @kostReview
 
 Feature: Kost Review Submitted Display
 
