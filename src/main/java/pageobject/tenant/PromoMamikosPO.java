@@ -116,7 +116,7 @@ public class PromoMamikosPO {
     }
 
     /**
-     * Check button use now exist
+     * Check promo title exist
      * @return boolean true if button exist
      */
     public boolean promoTitleDisplayed() {
