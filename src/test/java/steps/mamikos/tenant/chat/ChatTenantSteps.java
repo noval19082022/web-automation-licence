@@ -134,4 +134,9 @@ public class ChatTenantSteps {
     public void question_is_not_displayed(String question){
         Assert.assertFalse(chat.isQuestionDisplayed(question), "Question is not displayed");
     }
+
+    @Then("user see autoreply message {string}")
+    public void userSeeAutoreplyMessage(String chatText) {
+        Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+    }
 }

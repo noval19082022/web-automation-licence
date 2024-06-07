@@ -48,7 +48,7 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0888881473    | 083176408442  | qwerty123    |
+      | 0888881476    | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                                    | kost name prod                         |
       | Kost Doraemon The Explorer Cilacap Tengah Cilacap | Kos Dom Automation Distrik Misool Raja |
@@ -61,7 +61,7 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0888881473    | 083176408442  | qwerty123    |
+      | 0888881476    | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag                                    | kost name prod                         |
       | Kost Doraemon The Explorer Cilacap Tengah Cilacap | Kos Dom Automation Distrik Misool Raja |
@@ -74,10 +74,11 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0888881473    | 083176408442  | qwerty123    |
+      | 0888881476    | 083176408442  | qwerty123    |
     And tenant search kost then go to kost details:
       | kost name stag   | kost name prod   |
       | Kos Laris Kretek | Kos Laris Kretek |
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup

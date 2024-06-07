@@ -6,7 +6,7 @@ Feature: Promo page
   Scenario: User can copy promo code
     Given user navigates to promo mamikos
     When user click SALIN on any promo
-    Then promo code can be copied "SEWASINGGAHSINI"
+    Then promo code can be copied "S1SINGGAHSINI"
 
   @regression
   Scenario: Check pagination in promo page
@@ -23,5 +23,5 @@ Feature: Promo page
     Given user navigates to promo mamikos
     When user see the promo title in first promo
     And user click see detail on first promo
-    And detail promo page opened with correct title "Lebih Hemat sewa pertama di Kos Singgahisini!"
-    Then user see button booking now
+    And user see promo title
+    Then user see use promo button

@@ -61,8 +61,8 @@ Feature: Chat and Chat Optimization
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod                             |
-      | Kose Mamiset Automation | Kost Automation Mix Tobelo Halmahera Utara |
+      | kost name stag                                      | kost name prod                             |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kost Automation Mix Tobelo Halmahera Utara |
     And user click chat in kos detail
     And user select question "Cara menghubungi pemilik?"
     And user click send chat from popup
@@ -97,17 +97,18 @@ Feature: Chat and Chat Optimization
     And user click send chat from popup
     And user sees the Booking button disable
 
-  @continue @TEST_COOP-5431
+  @TEST_COOP-5431
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 0888881477   | 083176408442 | qwerty123 |
     And user search for Kost with name "<property>" and selects matching result
+    And tenant dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "<question>"
     And user click send chat from popup
-    Then chat room appear with latest message "<autoreply text>"
+    Then user see autoreply message "<autoreply text>"
     Examples:
       | name                     | property                                            | question                  | autoreply text                                                                                                                                          |
       | Ada diskon               | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
@@ -123,6 +124,9 @@ Feature: Chat and Chat Optimization
   @TEST_COOP-5432
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
     Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 0888881477   | 083176408442 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                          | kost name prod                                         |
       | Kos BX Automation BBK Available Cilacap Selatan Cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |

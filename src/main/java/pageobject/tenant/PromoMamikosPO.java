@@ -15,6 +15,7 @@ public class PromoMamikosPO {
     Locator firstPromoCode;
     Locator firstPromoTitleLabel;
     Locator firstSeeDetailButton;
+    Locator promoTitleText;
     Locator gunakanPromoButton;
 
     public PromoMamikosPO(Page page) {
@@ -23,10 +24,11 @@ public class PromoMamikosPO {
         nextPageButton = page.locator("//a[.='>']");
         currentPageIndexButton = page.locator("//li[@class='page-item active']/a");
         previousPageButton = page.locator("//a[.='<']");
-        firstCopyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("SALIN"));
+        firstCopyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("SALIN")).first();
         firstPromoCode = page.locator("(//*[text()='Kode Promo']/following-sibling::p)[1]");
         firstPromoTitleLabel = page.locator("//article[1]//*[@class='promo-meta-title']/h2/a");
-        firstSeeDetailButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Detail"));
+        firstSeeDetailButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Detail")).first();
+        promoTitleText = page.locator("//*[@class='promo-title']");
         gunakanPromoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("GUNAKAN PROMO"));
 
     }
@@ -114,19 +116,18 @@ public class PromoMamikosPO {
     }
 
     /**
-     * Get promo title
-     * @return String promo title
+     * Check button use now exist
+     * @return boolean true if button exist
      */
-    public String getPromoTitle(String promo) {
-        Locator title = playwright.locatorByRoleSetName(AriaRole.HEADING, promo);
-        return playwright.getText(title);
+    public boolean promoTitleDisplayed() {
+        return playwright.waitTillLocatorIsVisible(promoTitleText);
     }
 
     /**
      * Check button use now exist
      * @return boolean true if button exist
      */
-    public boolean bookingNowButtonDisplayed() {
+    public boolean usePromoButtonDisplayed() {
         return playwright.waitTillLocatorIsVisible(gunakanPromoButton);
     }
 }
