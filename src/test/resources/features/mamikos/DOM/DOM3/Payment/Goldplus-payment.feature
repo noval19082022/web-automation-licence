@@ -2,7 +2,7 @@
 Feature: Payment Goldplus staging
 
 
-  Background: Owner Purchase GP using alfamart
+  Background: Admin reset GP owner
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |

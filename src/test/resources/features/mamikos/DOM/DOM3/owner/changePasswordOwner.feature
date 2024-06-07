@@ -77,7 +77,7 @@ Feature: Change password owner
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password   |
-      | 082255251018  | qwerty123  |
+      | 0888881291    | qwerty123  |
     And owner navigates to Akun menu
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"

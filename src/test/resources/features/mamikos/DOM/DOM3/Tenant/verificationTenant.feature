@@ -10,7 +10,7 @@ Feature: Verification Tenant
       | 083311231115  | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
-    And user change email to "aiueoo@gmail.com"
+    And user change email to "aiueooo@gmail.com"
     And user go to mailhog and login
     Then user confirm change email
 
