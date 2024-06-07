@@ -336,4 +336,9 @@ public class LoginSteps {
         home.clickOnButtonMasukOnPopularArea()
                 .clickOnPemilikKostButton();
     }
+
+    @Then("user/owner redirect to login page")
+    public void user_redirect_to_login_page() {
+        Assert.assertEquals(playwright.getPageUrl(),Mamikos.LOGIN_USER);
+    }
 }
