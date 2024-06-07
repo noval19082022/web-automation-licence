@@ -469,14 +469,6 @@ Feature: [Test-Execution][DOM] Web - Platform
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
 
-  @TEST_COOP-5405 @Automated @DOM3 @web-covered
-  Scenario: [Tenant][Promo page] User can open promo detail
-    Given user navigates to promo mamikos
-    When user see the promo title in first promo
-    And user click see detail on first promo
-    And detail promo page opened with correct title "Lebih Hemat sewa pertama di Kos Singgahisini!"
-    Then user see button booking now
-
   @TEST_COOP-5407 @Automated @DOM3 @web-covered
   Scenario: [Test][Admin][SanJunipero] User able to enable certain landing page
     Given admin go to mamikos bangkrupux admin

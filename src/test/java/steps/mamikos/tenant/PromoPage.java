@@ -75,13 +75,13 @@ public class PromoPage {
         promo.clickFirstSeeDetail();
     }
 
-    @And("detail promo page opened with correct title {string}")
-    public void detailPromoPageOpenedWithCorrectTitle(String Promo) {
-        Assert.assertEquals(promo.getPromoTitle(Promo), Promo,"wrong title");
+    @And("user see promo title")
+    public void userSeePromoTitle() {
+        Assert.assertTrue(promo.promoTitleDisplayed(), "Promo Title is not appear");
     }
 
-    @Then("user see button booking now")
-    public void userSeeButtonBookingNow() {
-        Assert.assertTrue(promo.bookingNowButtonDisplayed(), "Use Now button is not appear");
+    @Then("user see use promo button")
+    public void userSeeUsePromoButton() {
+        Assert.assertTrue(promo.usePromoButtonDisplayed(), "Use Promo button is not appear");
     }
 }

@@ -104,6 +104,7 @@ public class ChatTenantPO {
      */
     public void clickSend() {
         playwright.clickOn(sendQuestionButton);
+        playwright.waitFor(latestChat);
     }
 
     /**
