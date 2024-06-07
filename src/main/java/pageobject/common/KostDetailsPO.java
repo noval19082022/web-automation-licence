@@ -2339,4 +2339,14 @@ public class KostDetailsPO {
             playwright.getLocators(nextMonthaDisableButton);
         }
     }
+
+    /**
+     * Verify the promo owner is displayed on kost detail page
+     * @param promoOwner
+     * @return true, false
+     * true if promo owner displayed, false if promo owner not displayed
+     */
+    public boolean isPromoOwnerDisplayed(String promoOwner) {
+        return playwright.isTextDisplayed(promoOwner);
+    }
 }

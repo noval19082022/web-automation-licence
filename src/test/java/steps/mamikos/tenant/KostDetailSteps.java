@@ -524,4 +524,9 @@ public class KostDetailSteps {
         kostDetail.dismissFTUE();
         kostDetail.clickFasilitasUmumSeeAll();
     }
+
+    @Then("tenant verify the promo displayed is {string}")
+    public void tenantVerifyThePromoDisplayedIs(String promoOwner) {
+        Assert.assertTrue(kostDetail.isPromoOwnerDisplayed(promoOwner), "Promo owner invalid!");
+    }
 }

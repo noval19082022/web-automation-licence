@@ -34,6 +34,13 @@ public class PromoOwnerPO {
     Locator warningMessagePromo;
     Locator deletePromoButton;
     Locator theNextMonthButton;
+    Locator timeOfPromoAdmin;
+    Locator createPromoButtonAdmin;
+    Locator keywordCreatePromoField;
+    Locator buatkanPromosiButton;
+    Locator createAndVerifyPromotionButton;
+    Locator searchButtonCreatePromo;
+    Locator inputField;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
@@ -48,6 +55,12 @@ public class PromoOwnerPO {
         alertSuccessAdmin = page.locator("//div[@class='alert alert-success alert-dismissable']");
         unverificationPromoButton = page.locator("td:nth-of-type(7) .fa-times");
         deletePromoButton = page.locator("//i[@class='fa fa-trash-o']");
+        timeOfPromoAdmin = page.locator("td:nth-of-type(5)");
+        createPromoButtonAdmin = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add New Promo"));
+        keywordCreatePromoField = page.getByPlaceholder("Keyword");
+        buatkanPromosiButton = page.locator("//a[contains(.,'Buatkan Promosi')]");
+        createAndVerifyPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create and Verify Promotion"));
+        searchButtonCreatePromo = page.locator(".btn-primary");
     }
 
     /**
@@ -239,7 +252,7 @@ public class PromoOwnerPO {
      *
      */
     public void clickOnSeachPromo(String promoTitle) {
-        playwright.forceFill(searchPromoBox, "Update promo owner AT");
+        playwright.forceFill(searchPromoBox, promoTitle);
         playwright.clickOn(searchButton);
     }
 
@@ -310,5 +323,123 @@ public class PromoOwnerPO {
     public void clickOnPromoNonGP() {
        playwright.clickOn(lihatSelengkapnyaButton);
        playwright.clickOn(aturPromo);
+    }
+
+    /**
+     * click create promo owner button on menu promo owner admin
+     *
+     */
+    public void adminClickCreatePromoOwnerButton() {
+        playwright.clickOn(createPromoButtonAdmin);
+    }
+
+    /**
+     * Fill the kos name will be added the promo owner from admin
+     * @param kosName
+     *
+     */
+    public void fillKosNameForPromo(String kosName) {
+        playwright.forceFill(keywordCreatePromoField, kosName);
+    }
+
+    /**
+     * Click on buatkan promosi button
+     *
+     */
+    public void clickOnBuatkanPromosi() {
+        playwright.clickOn(buatkanPromosiButton);
+    }
+
+    /**
+     * Input promo owner from admin menu promo owner
+     * @param text
+     * @param placeholder
+     */
+    public void inputPromoOwnerFromAdmin(String text, String placeholder) {
+        inputField = page.getByPlaceholder(placeholder);
+        playwright.forceFill(inputField, text);
+    }
+
+    /**
+     * Input start date promo when create promo from admin
+     *
+     */
+    public void selectStartDatePromoFromAdmin(String startDate) {
+        startDatePicker = page.getByPlaceholder("From");
+        playwright.clickOn(startDatePicker);
+        String locatorElement;
+        var todayDate = JavaHelpers.getCurrentDateOrTime("d");
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
+        if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
+            playwright.forceClickOn(theNextMonthButton);
+        }
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
+        try {
+            switch (startDate){
+                case "tomorrow":
+                    locatorElement = tomorrowDate;
+                    break;
+                case "the day after tomorrow":
+                    locatorElement = theDayAfterTomorrowDate;
+                    break;
+                default:
+                    locatorElement = startDate;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unexpected value: " + startDate);
+        }
+        Locator startDatePromo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
+        playwright.clickOn(startDatePromo);
+    }
+
+    /**
+     * Input end date promo when create promo from admin
+     * @param endDate
+     */
+    public void selectEndDatePromoFromAdmin(String endDate) {
+        endDatePicker = page.getByPlaceholder("Until");
+//        playwright.pageScrollUntilElementIsVisible(startDatePicker);
+        playwright.clickOn(endDatePicker);
+        String locatorElement;
+        var todayDate = JavaHelpers.getCurrentDateOrTime("d");
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
+        if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
+            playwright.forceClickOn(theNextMonthButton);
+        }
+        var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
+        try {
+            switch (endDate){
+                case "tomorrow":
+                    locatorElement = tomorrowDate;
+                    break;
+                case "the day after tomorrow":
+                    locatorElement = theDayAfterTomorrowDate;
+                    break;
+                default:
+                    locatorElement = endDate;
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unexpected value: " + endDate);
+        }
+        Locator startDatePromo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
+        playwright.clickOn(startDatePromo);
+    }
+
+    /**
+     * Click on create and verify promotion button
+     *
+     */
+    public void clickOnClickAndVerifyPromotion() {
+        playwright.clickOn(createAndVerifyPromotionButton);
+    }
+
+    /**
+     * Click on search button will be create promo from admin
+     *
+     */
+    public void clickOnSearchKosCreatePromo() {
+        playwright.clickOn(searchButtonCreatePromo);
     }
 }
