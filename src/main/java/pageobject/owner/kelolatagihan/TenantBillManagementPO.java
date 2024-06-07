@@ -600,6 +600,7 @@ public class TenantBillManagementPO {
      * click Kirim ulang kode hyperlink
      */
     public void clickKirimUlangKode() {
+        playwright.waitTillLocatorIsVisible(krmUlangKodeBtn);
         playwright.clickOn(krmUlangKodeBtn);
         playwright.hardWait(2000);
     }
@@ -617,6 +618,7 @@ public class TenantBillManagementPO {
      * @return phone number
      */
     public String getPhoneNumberPenyewa(){
+        playwright.waitTillLocatorIsVisible(phoneNumberPenyewaText);
         return playwright.getText(phoneNumberPenyewaText);
     }
 

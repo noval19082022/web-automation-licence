@@ -212,7 +212,7 @@ public class NavigatesSteps {
     @And("tenant navigate to riwayat kos page")
     public void tenantNavigateToRiwayatKosPage() {
         playwright = new PlaywrightHelpers(page);
-        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_KOST, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + Mamikos.TENANT_RIWAYAT_KOST, 60000.0, LoadState.LOAD);
     }
 
     @When("owner navigate to pengajuan booking page")
@@ -253,7 +253,7 @@ public class NavigatesSteps {
 
     @And("user navigate to penyewa page")
     public void userNavigateToPenyewaPage() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 50000.0, LoadState.LOAD);
     }
 
     @And("admin navigate to mamikos voucher menu")

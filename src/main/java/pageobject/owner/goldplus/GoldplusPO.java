@@ -263,7 +263,7 @@ public class GoldplusPO {
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
         playwright.waitTillPageLoaded(10000.0);
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
-        playwright.pageScrollUntilElementIsVisible(infoUntukAndaOption);
+        playwright.pageScrollToDown(5000);
         playwright.clickOn(infoUntukAndaOption);
     }
 
@@ -620,9 +620,19 @@ public class GoldplusPO {
      *
      */
     public boolean isInfoUntukAndaAppear(String infoUntukAndaMessage) {
-        playwright.waitTillPageLoaded(3000.0);
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        playwright.waitFor(infoUntukAndaOption);
        return playwright.waitTillLocatorIsVisible(infoUntukAndaOption);
+    }
+
+    /**
+     * Check Info Untuk Anda on owner dashboard
+     *
+     */
+    public boolean isInfoUntukAndaIsNotAppear(String infoUntukAndaMessage) {
+        playwright.waitTillPageLoaded(10000.0);
+        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+        return playwright.waitTillLocatorIsVisible(infoUntukAndaOption);
     }
 
     /**

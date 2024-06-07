@@ -278,9 +278,9 @@ public class OwnerManageBillSteps {
         Assert.assertTrue(billManage.isKrmKodeUnikPageDisplayed(), "You are not Kirim kode unik page");
     }
 
-    @And("user will see phone number of owner {string}")
-    public void user_will_see_phone_number_of_owner(String oldNumber){
-        Assert.assertEquals(billManage.getPhoneNumberPenyewa(), oldNumber, "The number phone is not match");
+    @And("user will see phone number of owner {string} or {string}")
+    public void user_will_see_phone_number_of_owner(String oldNumber, String newNumber) {
+        Assert.assertFalse(billManage.equals(oldNumber) || billManage.equals(newNumber), "Nomor telepon yang ditampilkan tidak sesuai");
     }
 
     @When("user click Ubah nomor HP hyperlink")

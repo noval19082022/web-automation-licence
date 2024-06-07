@@ -139,8 +139,8 @@ Feature: Additional price for kos owner
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone | Kos Type |
-      | 0892202357   | All      |
+      | Tenant Phone | Kos Type    |
+      | 0892202357   | All Testing |
     And admin click actions button on booking list
     And admin accept booking
     And admin click actions button on booking list

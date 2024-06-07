@@ -1,4 +1,4 @@
-@regression @kostReviewTenantNotSubmitted @BBM8
+@regression @kostReviewTenantNotSubmitted @BBM8 @kostReview
 
 Feature: Kost Review Not Submitted Display
 
@@ -52,6 +52,6 @@ Feature: Kost Review Not Submitted Display
       | Fasilitas Umum*    |
       | Kesesuaian Harga*  |
 
-  @TEST_COOP-2922 @continue
+  @TEST_COOP-2922
   Scenario: Kos Saya (Ajukan Berhenti Sewa) - Ajukan Berhenti Sewa button is disabled if the tenant hasn't submitted a review yet
     Then user see ajukan berhenti sewa button is disabled

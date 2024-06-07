@@ -304,6 +304,7 @@ public class OwnerDashboardPO {
      * @return text gpStatus
      */
     public String getTextGPStatus() {
+        playwright.waitFor(gpStatus);
         return playwright.getText(gpStatus);
     }
 
