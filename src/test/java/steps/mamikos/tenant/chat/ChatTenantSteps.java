@@ -134,4 +134,10 @@ public class ChatTenantSteps {
     public void question_is_not_displayed(String question){
         Assert.assertFalse(chat.isQuestionDisplayed(question), "Question is not displayed");
     }
+
+    @And("user opens the chatroom in the {string} order on chat list")
+    public void userOpensTheChatroomInTheOrderOnChatList(String order) {
+        var orderNumber = Integer.parseInt(order) - 1;
+        chat.openChatroomByOrder(orderNumber);
+    }
 }
