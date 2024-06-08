@@ -545,7 +545,7 @@ public class HomepagePO {
      */
     public String getStatusBooking(String text) {
         Locator statusBooking = page.locator("//*[contains(text(),'" + text + "')]");
-        playwright.waitTillLocatorIsVisible(statusBooking);
+        playwright.waitTillPageLoaded();
         return playwright.getText(statusBooking);
     }
 

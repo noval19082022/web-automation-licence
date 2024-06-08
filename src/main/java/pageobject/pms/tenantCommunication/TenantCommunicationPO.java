@@ -61,7 +61,7 @@ public class TenantCommunicationPO {
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
-        displayDataRow = page.locator(".tenant-tracker__result-text");
+        displayDataRow = page.locator(".secondary-bar__result-text");
         buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
         fieldNote = page.getByPlaceholder("Tulis di sini...");
         simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
@@ -272,6 +272,7 @@ public class TenantCommunicationPO {
      * @return true if actions column is visible
      */
     public boolean verifyDisplayDataRow(){
+        playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(displayDataRow);
     }
 
