@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Main Page
 
 
@@ -13,7 +13,7 @@ Feature: SinggahSini Tenant Tracker Main Page
     When user click pagination number "2"
     Then user see display data row from 20 riwayat
 
-  @TEST_BBM-554
+  @TEST_COOP-2913
   Scenario: Column Name Complete
     When admin go to tenant communication menu
     Then user see at Tenant Main Page Column contains

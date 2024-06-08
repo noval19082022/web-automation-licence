@@ -46,7 +46,7 @@ Feature: PMS - Add fee MVP
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
       | Tenant Phone | Kos Type |
-      | 0812000008   | All      |
+      | 0812000008   | All Testing |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
     When admin can see "Tidak ada biaya tambahan yang tersedia di kos ini. Silakan buka PMS KK untuk menambahkan biaya tambahan opsional"

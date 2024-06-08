@@ -48,7 +48,6 @@ public class TenantBillManagementPO {
     Locator arrowNextMonthFilterButton;
     Locator krmUlangKodeBtn;
     Locator krmKodeUnikPage;
-    Locator phoneNumberPenyewaText;
     Locator ubahNmrHpBtn;
     Locator phoneNumberField;
     Locator gunakanBtn;
@@ -101,7 +100,6 @@ public class TenantBillManagementPO {
         phoneNumberField = page.getByPlaceholder("Masukkan nomor HP");
         gunakanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Gunakan"));
         dontHaveKosWarning = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Penyewa Kos"));
-        phoneNumberPenyewaText = page.locator(".bg-c-text--title-3");
         disbursementLink = page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]");
     }
 
@@ -613,14 +611,6 @@ public class TenantBillManagementPO {
         return playwright.waitTillLocatorIsVisible(krmKodeUnikPage);
     }
 
-    /**
-     * get old owner's phone number
-     * @return phone number
-     */
-    public String getPhoneNumberPenyewa(){
-        playwright.waitTillLocatorIsVisible(phoneNumberPenyewaText);
-        return playwright.getText(phoneNumberPenyewaText);
-    }
 
     /**
      * click Ubah nomor HP hyperlink

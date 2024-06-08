@@ -29,6 +29,7 @@ public class BillingTrackePO {
     Locator adminEditNote;
     Locator tagDropdown;
     Locator saveButtonNotes;
+    Locator adminChooseCalender;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -51,6 +52,7 @@ public class BillingTrackePO {
         adminEditNote = page.locator(".billing-tracker-note-list__item-tag").first();
         saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         tagDropdown = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
+        adminChooseCalender = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--md']");
     }
 
     public void searchType(String type, String text) {
@@ -208,6 +210,14 @@ public class BillingTrackePO {
         Locator textButton = page.locator("a").filter(new Locator.FilterOptions().setHasText(text));
         playwright.clickOn(textButton);
         playwright.clickOn(saveButtonNotes);
+    }
+    /**
+     * Admin choose date
+     */
+    public void adminChooseMonth(String month) {
+        playwright.clickOn(adminChooseCalender);
+        String monthButton = "//span[normalize-space()='"+month+"']";
+        playwright.clickOn(page.locator(monthButton));
     }
 
 }
