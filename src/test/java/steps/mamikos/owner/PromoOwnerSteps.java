@@ -2,17 +2,24 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.PromoOwnerPO;
 import utilities.PlaywrightHelpers;
+
+import java.util.List;
+import java.util.Map;
 
 public class PromoOwnerSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
+    LoadingPO loading = new LoadingPO(page);
+
     Page page1;
 
     @And("owner atur promo owner")
@@ -92,5 +99,38 @@ public class PromoOwnerSteps {
     @And("admin delete the promo admin")
     public void adminDeleteThePromoAdmin() {
         promoOwner.clickOnDeletePromo();
+    }
+
+    @And("admin accsess menu promo owner to create promo owner")
+    public void adminAccsessMenuPromoOwnerToCreatePromoOwner() {
+        promoOwner.adminClickCreatePromoOwnerButton();
+    }
+
+    @And("admin fill {string} at search kost form")
+    public void adminFillAtSearchKostForm(String kosName) {
+        promoOwner.fillKosNameForPromo(kosName);
+        promoOwner.clickOnSearchKosCreatePromo();
+        promoOwner.clickOnBuatkanPromosi();
+    }
+
+    @And("admin fills valid data promo owner as expected")
+    public void adminFillsValidDataPromoOwnerAsExpected(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        promoOwner.inputPromoOwnerFromAdmin(table.get(0).get("title"), "Title");
+        promoOwner.inputPromoOwnerFromAdmin(table.get(0).get("content"), "Content...");
+
+        promoOwner.selectStartDatePromoFromAdmin(table.get(0).get("start-date"));
+        promoOwner.selectEndDatePromoFromAdmin(table.get(0).get("end-date"));
+    }
+
+    @And("admin clicks on ceate and verify promotion")
+    public void adminClicksOnCeateAndVerifyPromotion() {
+        promoOwner.clickOnClickAndVerifyPromotion();
+    }
+
+    @Then("admin successfully add promo owner")
+    public void adminSuccessfullyAddPromoOwner() {
+        Assert.assertEquals(promoOwner.getAlertSuccessUpdate(), "Success! Promo created successfully", "Alert doesn't match!");
     }
 }
