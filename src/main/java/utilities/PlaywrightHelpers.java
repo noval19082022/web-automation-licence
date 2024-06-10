@@ -8,6 +8,7 @@ import com.microsoft.playwright.options.SelectOption;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -196,9 +197,9 @@ public class PlaywrightHelpers {
     public void tryClickingIfElementExist(Locator locatorCLick) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
             clickOn(locatorCLick);
-            return;
+        } else {
+            logElementNotClickable(locatorCLick);
         }
-        log.info("locator is not clicked {}", locatorCLick);
     }
 
     /**
@@ -209,9 +210,9 @@ public class PlaywrightHelpers {
     public void tryClickingIfElementExist(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
             clickOn(locatorCLick);
-            return;
+        } else {
+            logElementNotClickable(locatorCLick);
         }
-        log.info("locator is not clicked {}", locatorCLick);
     }
 
     /**
@@ -223,9 +224,9 @@ public class PlaywrightHelpers {
     public void tryClickingIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
         if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
-            return;
+        } else {
+            logElementNotClickable(locatorCLick);
         }
-        log.info("locator is not clicked {}", locatorCLick);
     }
 
     /**
@@ -891,4 +892,9 @@ public class PlaywrightHelpers {
         assertThat(locator).hasCSS(css,value);
     }
     //---- Assert Part ----\\
+
+    // private method part
+    private void logElementNotClickable(Locator locator) {
+        log.info("locator is not clicked {}", locator);
+    }
 }
