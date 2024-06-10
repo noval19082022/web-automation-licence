@@ -194,7 +194,7 @@ public class PlaywrightHelpers {
      * click locator if some locator exist
      * @param locatorCLick target click locator
      */
-    public void tryClickingIfElementExist(Locator locatorCLick) {
+    public void tryClickingIfElementVisible(Locator locatorCLick) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
             clickOn(locatorCLick);
         } else {
@@ -207,7 +207,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout
      */
-    public void tryClickingIfElementExist(Locator locatorCLick, double timeout) {
+    public void tryClickingIfElementVisible(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
             clickOn(locatorCLick);
         } else {
@@ -221,7 +221,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout time waiting
      */
-    public void tryClickingIfElementExistAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
+    public void tryClickingIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
         if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
         } else {

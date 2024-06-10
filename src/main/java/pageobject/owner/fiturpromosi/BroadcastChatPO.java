@@ -346,8 +346,8 @@ public class BroadcastChatPO {
      */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
-            playwright.tryClickingIfElementExist(tambahBroadcastChatButton, 5_000.0);
-            playwright.tryClickingIfElementExist(buatBroadcastChatButton);
+            playwright.tryClickingIfElementVisible(tambahBroadcastChatButton, 5_000.0);
+            playwright.tryClickingIfElementVisible(buatBroadcastChatButton);
         }
     }
 
