@@ -462,7 +462,7 @@ public class BroadcastChatPO {
      * dismiss FTUE broadcast
      */
     public void dismisFtuebroadcastIfExist() {
-        playwright.tryClickingIfElementExistAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
+        playwright.tryClickingIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
     }
 
     /**
