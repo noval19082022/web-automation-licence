@@ -381,6 +381,7 @@ public class NavigatesSteps {
 
     @When("owner navigate to list goldplus package")
     public void owner_navigate_to_list_goldplus_package() {
+        playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_PACKAGE, 30000.0, LoadState.LOAD);
     }
     @And("owner/user navigates to financial report")

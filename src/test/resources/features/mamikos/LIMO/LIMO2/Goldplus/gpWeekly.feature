@@ -1,6 +1,15 @@
 @regression @LIMO2 @listing-monetization @LIMO2-staging @gpWeekly
 Feature: GP Weekly
 
+
+  @detailTagihanGoldplus
+  Scenario: delete or reset data GP
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then user wants to reset Goldplus for owner with phone number "082233545519"
+
   @TEST_LIMO-3914 @continue
   Scenario: Goldplus Weekly Package
     Given user go to mamikos homepage
@@ -8,7 +17,7 @@ Feature: GP Weekly
       | phone stag   | password  |
       | 081905128517 | qwerty123 |
     And owner navigate to list goldplus package
-    Then owner will see that the text "Mulai Dari" is displayed
+    Then owner see that the text "Mulai Dari" is displayed on goldplus page
     And owner should not be able to see the text "per bulan"
 
   @TEST_LIMO-3907 @continue
@@ -22,12 +31,13 @@ Feature: GP Weekly
   @TEST_LIMO-3907 @continue
   Scenario: Select GP Weekly
     Given owner choose periode goldplus "1 Minggu"
-    Then user will see that the text "GoldPlus 2 periode 1 Minggu" is displayed
+    Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
+
 
   @TEST_LIMO-3914 @continue
   Scenario: GoldPlus Weekly Paid
     Given owner click bayar sekarang on detail tagihan page goldplus
-    Then user will see that the text "GoldPlus 2 periode 1 Minggu" is displayed
+    Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
     And payment owner success using ovo as payment method
 
   @TEST_LIMO-3914 @continue

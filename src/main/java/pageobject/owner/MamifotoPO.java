@@ -305,6 +305,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderSelectPackageisAppear() {
+        playwright.waitFor(headerPilihPaket);
         return playwright.waitTillLocatorIsVisible(headerPilihPaket);
     }
 
