@@ -52,6 +52,7 @@ public class BroadcastChatPO {
     private Locator lihatInvoiceButton;
     private Locator ftueBroadcast;
     private Locator closeBtn;
+    private Locator ubahHyperlink;
 
     public BroadcastChatPO(Page page) {
         this.page = page;
@@ -100,6 +101,7 @@ public class BroadcastChatPO {
         lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
         ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus: Broadcast Chat"));
         closeBtn = page.getByTestId("close-button");
+        ubahHyperlink = page.getByText("ubah").first();
     }
 
     /**
@@ -460,13 +462,13 @@ public class BroadcastChatPO {
      * dismiss FTUE broadcast
      */
     public void dismisFtuebroadcastIfExist() {
-        playwright.tryClickingIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
+        playwright.tryClickingIfElementExistAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
     }
 
     /**
      * click on ubah in detail kost broadcast page
      */
     public void clickOnUbahKostBroadcast() {
-        playwright.clickOnText("ubah");
+        playwright.clickOn(ubahHyperlink);
     }
 }

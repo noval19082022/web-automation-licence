@@ -221,7 +221,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout time waiting
      */
-    public void tryClickingIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
+    public void tryClickingIfElementExistAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
         if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
         } else {
@@ -894,6 +894,11 @@ public class PlaywrightHelpers {
     //---- Assert Part ----\\
 
     // private method part
+
+    /**
+     * logging into console if element is clicked or not
+     * @param locator clickable
+     */
     private void logElementNotClickable(Locator locator) {
         log.info("locator is not clicked {}", locator);
     }
