@@ -1,4 +1,4 @@
-@COOP4 @noval123
+@COOP4
 Feature: Click Button Ubah Metode Pembayaran After Paid
 
   Scenario: Admin Batalkan Contract

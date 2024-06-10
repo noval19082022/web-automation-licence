@@ -1,4 +1,4 @@
-@COOP-5843 @COOP4
+@COOP4
 Feature: Successfully Payment with Voucher
 
   @TEST_COOP-5818 @Automated @COOP @Web

@@ -1,4 +1,4 @@
-@COOP-5842 @COOP4
+@COOP4
 Feature: Invalid Voucher After Applied, Invalid Contract Period
 
   @TEST_COOP-5832 @Automated @COOP @Web
