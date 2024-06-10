@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Uncontrolled Property
 
 
@@ -12,7 +12,7 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
       | phone stag    | phone prod    |
       | 089612561233 | 089612561233 |
 
-  @continue
+    @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:

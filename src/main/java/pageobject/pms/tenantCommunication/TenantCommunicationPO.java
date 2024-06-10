@@ -272,6 +272,7 @@ public class TenantCommunicationPO {
      * @return true if actions column is visible
      */
     public boolean verifyDisplayDataRow(){
+        playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(displayDataRow);
     }
 

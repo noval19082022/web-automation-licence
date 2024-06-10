@@ -267,7 +267,6 @@ public class HomepagePO {
     public void searchProperty(String name) {
         searchInput.fill(name);
         playwright.clickOn(cariButton);
-        playwright.isTextDisplayed("Kost Singgahsini Ersa Tobelo Halmahera Utara");
     }
 
     /**
@@ -546,6 +545,7 @@ public class HomepagePO {
      */
     public String getStatusBooking(String text) {
         Locator statusBooking = page.locator("//*[contains(text(),'" + text + "')]");
+        playwright.waitTillPageLoaded();
         return playwright.getText(statusBooking);
     }
 

@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Main Page Add Tracker Status WA
 
 
@@ -29,7 +29,7 @@ Feature: SinggahSini Main Page Add Tracker Status WA
 
   @TEST_BBM-463
   Scenario: Tanya Alamat via map is tracked on BSE Tenant Tracker
-    When user choose "Nama Penyewa" and input "Irvi Tenant Add Ons" in the search field on main page
+    When user choose "Nama Penyewa" and input "Noval" in the search field on main page
     And user click search button on main page filter
     Then user verify search result on main page bse contains "Terbayar Lunas"
 		

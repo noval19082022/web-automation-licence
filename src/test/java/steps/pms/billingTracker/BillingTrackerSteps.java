@@ -98,5 +98,10 @@ public class BillingTrackerSteps {
         billingTracker.adminEditNote(text);
     }
 
+    @And ("admin choose month {string}")
+    public void admin_choose_month(String month) {
+        billingTracker.adminChooseMonth(month);
+    }
+
 }
 
