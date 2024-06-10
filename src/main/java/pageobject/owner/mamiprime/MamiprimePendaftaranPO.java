@@ -97,5 +97,4 @@ public class MamiprimePendaftaranPO {
         playwright.waitFor(descInformationPrime);
         return playwright.getText(descInformationPrime);
     }
-
 }
