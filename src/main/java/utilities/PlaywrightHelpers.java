@@ -207,7 +207,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout
      */
-    public void tryClickingIfElementVisible(Locator locatorCLick, double timeout) {
+    public void tryClickingIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
             clickOn(locatorCLick);
         } else {
