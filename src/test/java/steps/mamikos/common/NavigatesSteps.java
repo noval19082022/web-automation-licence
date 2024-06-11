@@ -16,6 +16,7 @@ import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
 import pageobject.owner.PropertySayaPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;

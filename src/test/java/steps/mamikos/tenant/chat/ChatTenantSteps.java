@@ -139,4 +139,10 @@ public class ChatTenantSteps {
     public void userSeeAutoreplyMessage(String chatText) {
         Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
     }
+
+    @And("user opens the chatroom in the {string} order on chat list")
+    public void userOpensTheChatroomInTheOrderOnChatList(String order) {
+        var orderNumber = Integer.parseInt(order) - 1;
+        chat.openChatroomByOrder(orderNumber);
+    }
 }
