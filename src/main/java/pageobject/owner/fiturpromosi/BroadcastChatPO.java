@@ -213,7 +213,7 @@ public class BroadcastChatPO {
      * click on back Button BC
      */
     public void clickOnBackButtonBC() {
-        playwright.tryClickingIfElementVisibleAfterLoad(backButtonBC, 3_000.0);
+        playwright.clickOn(backButtonBC);
     }
 
     /**
