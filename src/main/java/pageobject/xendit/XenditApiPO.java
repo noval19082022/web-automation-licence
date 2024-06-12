@@ -38,6 +38,20 @@ public class XenditApiPO extends InvoicePO {
         verifyPaymentSuccess();
     }
 
+    /**
+     * Processes a payment via Indomaret using Xendit API.
+     * This method builds the request body with payment details, sends it to the Xendit API,
+     * and verifies successful payment on the Invoice Page.
+     *
+     * @param paymentCode The unique payment code for this transaction.
+     * @param amount      The transfer amount for the payment.
+     */
+    public void  processPaymentIndomaretViaPostman(String paymentCode, String amount) {
+        Map<String, Object> requestBody = buildRequestBody("INDOMARET", paymentCode, amount);
+        sendPaymentRequest(requestBody);
+        verifyPaymentSuccess();
+    }
+
     // private method part
     // follow this order https://google.github.io/styleguide/javaguide.html#s4.8.7-modifiers
     // for readability and maintainable
