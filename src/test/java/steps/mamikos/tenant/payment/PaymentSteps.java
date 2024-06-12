@@ -174,7 +174,7 @@ public class PaymentSteps {
         invoicePO.clickOnBayarSekarang();
         var kodePerusahaan = invoicePO.getCodePembayaran();
         var nominal = invoicePO.getTotalPembayaran();
-        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
         invoicePO.sayaSudahBayar();
 
     }
@@ -218,7 +218,7 @@ public class PaymentSteps {
         invoicePO.clickOnBayarSekarang();
         var kodePerusahaan = invoicePO.getCodePembayaran();
         var nominal = invoicePO.getTotalPembayaran();
-        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
     }
 
     @And("owner/tenant/user select payment method from invoice detail using Permata")
