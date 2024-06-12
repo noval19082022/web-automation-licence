@@ -25,3 +25,18 @@ Feature: Broadcast Chat Owner 2
     And owner clicks Kos "kost automation DOM boleh refund Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "kost automation DOM boleh refund Patikraja Banyumas" is displayed
     And owner will see that the text "Calon Penyewa yang mendapatkan pesan" is displayed
+
+  @TEST_LIMO-1156
+  Scenario:[Broadcast Chat][Create Broadcast chat]User want to save template without add message on tempalate is editable
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 081197878842 | 0          | qwerty123 |
+    And owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast if exist
+    And user click "Buat Broadcast Chat"
+    And owner add broadcast chat for kost "kost GP 2 Automation Depok Sleman"
+    And owner clicks Kos "kost GP 2 Automation Depok Sleman" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
+    And owner click "Preview Pesan" button
+    Then owner will see that the text "Isi pesan terlebih dahulu." is displayed
