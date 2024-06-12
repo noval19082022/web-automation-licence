@@ -19,8 +19,8 @@ Feature: Broadcast Chat Owner 2
       | 081328787342 | 0          | Perempuan |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast if exist
-    And owner add broadcast chat for kost "desta automation Tobelo Halmahera Utara"
-    And owner clicks Kos "desta automation Tobelo Halmahera Utara" and Pilih Kos button
+    And owner add broadcast chat for kost "kost lpl staging Patikraja Kabupatn Banyumas"
+    And owner clicks Kos "kost lpl staging Patikraja Kabupatn Banyumas" and Pilih Kos button
     And owner click button ubah to change kos broadcast
     And owner clicks Kos "kost automation DOM boleh refund Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "kost automation DOM boleh refund Patikraja Banyumas" is displayed
@@ -40,3 +40,18 @@ Feature: Broadcast Chat Owner 2
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     And owner click "Preview Pesan" button
     Then owner will see that the text "Isi pesan terlebih dahulu." is displayed
+
+  @TEST_LIMO-1146 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat][Select Kost]User Search kost with condition full room not yet have a chat
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 081328787342 | 0          | Perempuan |
+    And owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast if exist
+    And owner add broadcast chat for kost "kost lpl staging Patikraja Kabupatn Banyumas"
+    Then owner will see that the text "Penuh" is displayed
+    And owner click back arrow button on BC page
+    And owner add broadcast chat for kost "kost jambu jambu lpl Patikraja Banyumas"
+    And owner clicks Kos "kost jambu jambu lpl Patikraja Banyumas" and Pilih Kos button
+    Then owner will see that the text "Kos belum memiliki calon penerima" is displayed

@@ -39,7 +39,7 @@ public class BroadcastChatSteps {
         broadcast.selectMessageOptionBC(option);
     }
 
-    @When("user click back arrow button on BC page")
+    @When("user/owner click back arrow button on BC page")
     public void user_click_back_arrow_button_on_BC_page() {
         broadcast.clickOnBackButtonBC();
     }
