@@ -345,8 +345,8 @@ public class BroadcastChatPO {
      */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
-            playwright.tryClickingIfElementVisibleAfterLoad(tambahBroadcastChatButton, 5_000.0);
-            playwright.tryClickingIfElementVisible(buatBroadcastChatButton);
+            playwright.clickingIfElementVisibleAfterLoad(tambahBroadcastChatButton, 5_000.0);
+            playwright.clickingIfElementVisible(buatBroadcastChatButton);
         }
     }
 
@@ -461,7 +461,7 @@ public class BroadcastChatPO {
      * dismiss FTUE broadcast
      */
     public void dismisFtuebroadcastIfExist() {
-        playwright.tryClickingIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
+        playwright.clickingIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
     }
 
     /**
