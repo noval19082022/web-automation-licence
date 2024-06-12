@@ -213,7 +213,7 @@ public class BroadcastChatPO {
      * click on back Button BC
      */
     public void clickOnBackButtonBC() {
-        playwright.clickOn(backButtonBC);
+        playwright.delayAndClickOn(backButtonBC, 3_000.0);
     }
 
     /**
