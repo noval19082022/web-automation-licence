@@ -19,8 +19,8 @@ Feature: Broadcast Chat Owner 2
       | 081328787342 | 0          | Perempuan |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast if exist
-    And owner add broadcast chat for kost "kost lpl staging Patikraja Kabupatn Banyumas"
-    And owner clicks Kos "kost lpl staging Patikraja Kabupatn Banyumas" and Pilih Kos button
+    And owner add broadcast chat for kost "desta automation Tobelo Halmahera Utara"
+    And owner clicks Kos "desta automation Tobelo Halmahera Utara" and Pilih Kos button
     And owner click button ubah to change kos broadcast
     And owner clicks Kos "kost automation DOM boleh refund Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "kost automation DOM boleh refund Patikraja Banyumas" is displayed
