@@ -39,7 +39,7 @@ public class BroadcastChatSteps {
         broadcast.selectMessageOptionBC(option);
     }
 
-    @When("user click back arrow button on BC page")
+    @When("user/owner click back arrow button on BC page")
     public void user_click_back_arrow_button_on_BC_page() {
         broadcast.clickOnBackButtonBC();
     }
@@ -74,7 +74,7 @@ public class BroadcastChatSteps {
         broadcast.inputBroadcastMessage(message);
     }
 
-    @When("user input multiple lanes message on Broadcast Chat:")
+    @When("user/owner input multiple lanes message on Broadcast Chat:")
     public void user_input_multiple_lanes_message_on_broadcast_chat(String message) {
         broadcast.inputBroadcastMessage(message);
     }
