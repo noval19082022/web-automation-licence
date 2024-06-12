@@ -179,6 +179,19 @@ public class PaymentSteps {
 
     }
 
+
+    @And("tenant select payment method using Indomaret")
+    public void tenantSelectPaymentMethodUsingIndomaret() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnIndomaret();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.processPaymentIndomaretViaPostman(kodePerusahaan, String.valueOf(nominal));
+        invoicePO.sayaSudahBayar();
+    }
+
     @And("tenant select payment method using BRI from riwayat booking")
     public void tenantSelectPaymentMethodUsingBRIFromRiwayatBooking() {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
