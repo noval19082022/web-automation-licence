@@ -170,5 +170,10 @@ public class RiwayatKostSteps {
     public void tenant_click_on_button_on_popup_confirmation(String text){
         riwayatKost.clickButtonOnPopup(text);
     }
+
+    @Then("tenant cannot see {string} on bank account section")
+    public void tenant_cannot_see_on_bank_account_section(String text){
+        Assert.assertFalse(riwayatKost.validateBankAccount(text), "bank account is visible");
+    }
 }
 
