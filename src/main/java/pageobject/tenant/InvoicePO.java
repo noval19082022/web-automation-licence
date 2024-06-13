@@ -84,6 +84,7 @@ public class InvoicePO {
     protected Locator pembayaranBerhasilText;
     Locator sudahBayarBtn;
     Locator amountBNILabel;
+    Locator IndomaretLabel;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -156,6 +157,7 @@ public class InvoicePO {
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
+        IndomaretLabel = page.locator("#invoicePayment").getByText("Indomaret");
     }
 
     /**
@@ -334,6 +336,14 @@ public class InvoicePO {
     public void clickOnAlfamart() {
         playwright.waitFor(alfamart);
         playwright.clickOn(alfamart);
+    }
+
+    /**
+     * Choose indomaret as payment
+     */
+    public void clickOnIndomaret(){
+        playwright.waitFor(IndomaretLabel);
+        playwright.clickOn(IndomaretLabel);
     }
 
     /**

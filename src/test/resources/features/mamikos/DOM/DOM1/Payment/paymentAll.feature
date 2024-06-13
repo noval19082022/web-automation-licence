@@ -176,3 +176,14 @@ Feature: Payment All
       | 0891112020198 | 0891112020198 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     Then tenant will see invoice "Belum Dibayar"
+
+    @TEST_COOP-2438
+    Scenario: Tenant pay kos using indomaret
+      Given user go to mamikos homepage
+      When user login as tenant via phone number:
+        | phone stag | phone prod   | password  |
+        | 0895124719 | 083176408442 | qwerty123 |
+      And tenant navigate to riwayat and draf booking
+      And tenant select payment method using Indomaret
+      And tenant want to see invoice on riwayat booking after payment
+      Then tenant will see payment is success

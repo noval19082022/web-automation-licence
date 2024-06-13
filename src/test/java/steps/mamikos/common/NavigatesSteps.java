@@ -16,6 +16,7 @@ import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
 import pageobject.owner.PropertySayaPO;
+import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -448,4 +449,8 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL+"/agen");
     }
 
+    @Given("admin wants to accsess prime setting")
+    public void admin_wants_to_accsess_prime_setting() {
+        playwright.navigateTo(Mamikos.URL + "/admin/prime", 30000.0, LoadState.LOAD);
+    }
 }

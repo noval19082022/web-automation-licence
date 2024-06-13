@@ -38,6 +38,7 @@ public class BroadcastChatPO {
     private Locator lihatRincianButton;
     private Locator bacaSelengkapnyaButton;
     private Locator tambahBroadcastChatButton;
+    private Locator buatBroadcastChatButton;
     private Locator pilihKosButton;
     private Locator toastContentText;
     private Locator bantuanDanTipsButton;
@@ -49,6 +50,10 @@ public class BroadcastChatPO {
     private Locator tidakJadiButtonPopUp;
     private Locator keluarButton;
     private Locator lihatInvoiceButton;
+    private Locator ftueBroadcast;
+    private Locator closeBtn;
+    private Locator ubahHyperlink;
+
     public BroadcastChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -82,6 +87,7 @@ public class BroadcastChatPO {
         lihatRincianButton = playwright.getButtonByText("Lihat Rincian");
         bacaSelengkapnyaButton = page.getByTestId("broadcastChatDesktop").locator("a");
         tambahBroadcastChatButton = playwright.getButtonBySetName("Tambah Broadcast Chat");
+        buatBroadcastChatButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Broadcast Chat"));
         toastContentText = page.locator(".bg-c-toast__content");
         bantuanDanTipsButton = playwright.getButtonBySetName("Bantuan & Tips");
         displayingSearchResultKosNameText = page.getByTestId("broadcastChat-listKos").getByRole(AriaRole.PARAGRAPH).first();
@@ -93,6 +99,9 @@ public class BroadcastChatPO {
         tidakJadiButtonPopUp = playwright.getButtonBySetName("Tidak Jadi");
         keluarButton = playwright.getButtonBySetName("Keluar");
         lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
+        ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus: Broadcast Chat"));
+        closeBtn = page.getByTestId("close-button");
+        ubahHyperlink = page.getByText("ubah").first();
     }
 
     /**
@@ -204,8 +213,7 @@ public class BroadcastChatPO {
      * click on back Button BC
      */
     public void clickOnBackButtonBC() {
-        playwright.hardWait(3000);
-        playwright.clickOn(backButtonBC);
+        playwright.delayAndClickOn(backButtonBC, 3_000.0);
     }
 
     /**
@@ -337,8 +345,8 @@ public class BroadcastChatPO {
      */
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
-            playwright.waitFor(tambahBroadcastChatButton);
-            playwright.clickOn(tambahBroadcastChatButton);
+            playwright.tryClickingIfElementVisibleAfterLoad(tambahBroadcastChatButton, 5_000.0);
+            playwright.tryClickingIfElementVisible(buatBroadcastChatButton);
         }
     }
 
@@ -447,5 +455,19 @@ public class BroadcastChatPO {
      */
     public void clickOnLihatInvoiceButton() {
         playwright.clickOn(lihatInvoiceButton);
+    }
+
+    /**
+     * dismiss FTUE broadcast
+     */
+    public void dismisFtuebroadcastIfExist() {
+        playwright.tryClickingIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
+    }
+
+    /**
+     * click on ubah in detail kost broadcast page
+     */
+    public void clickOnUbahKostBroadcast() {
+        playwright.clickOn(ubahHyperlink);
     }
 }
