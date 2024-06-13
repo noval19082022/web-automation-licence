@@ -210,7 +210,7 @@ public class PlaywrightHelpers {
      * example usage src/main/java/pageobject/owner/fiturpromosi/BroadcastChatPO.java on method clickOnTambahBroadcastChatButton()
      * @param locatorCLick target click locator
      */
-    public void clickingIfElementVisible(Locator locatorCLick) {
+    public void clickIfElementVisible(Locator locatorCLick) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
             clickOn(locatorCLick);
         } else {
@@ -224,7 +224,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout
      */
-    public void clickingIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
+    public void clickIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
             clickOn(locatorCLick);
         } else {
@@ -239,7 +239,7 @@ public class PlaywrightHelpers {
      * @param locatorCLick target click locator
      * @param timeout timeout time waiting
      */
-    public void clickingIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
+    public void clickIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
         if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
         } else {
