@@ -26,3 +26,20 @@ Feature: Purchase Mamiprime
     And user click on mamiprime widget at owner dashboard
     And owner wants to buy mamiprime from header
     Then user will see pop up doesnt have property on mamiprime
+
+  @TEST_LIMO-5798 @continue
+  Scenario: [WEB][Mamikos Prime][Detail Tagihan] Ubah Periode
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password   |
+      | 082233545512 | 0            | 12345678  |
+    And owner click close icon pop up
+    And user click on mamiprime widget at owner dashboard
+    And owner wants to buy mamiprime from header
+    And owner already choose period "7 Hari" with price "Rp237.500"
+    When owner wants to change "MamiPrime - Kata Kunci (7 Hari)" at detail tagihan page
+    Then owner will back to pendafatarn mamiprime page
+
+  Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
+    When owner already choose period "14 Hari" with price "Rp475.500"
+    Then owner can see package prime selected is "MamiPrime - Kata Kunci (14 Hari)"

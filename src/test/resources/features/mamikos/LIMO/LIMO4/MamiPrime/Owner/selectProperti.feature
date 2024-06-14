@@ -24,3 +24,14 @@ Feature: Select property section
     And owner can see information "Kuota Daerah Kos Penuh" at section select periode
     And owner can see description information "Saat ini, kuota MamiPrime untuk daerah Kost Sparkle Experiment Non GP Wonokromo Surabaya sudah penuh. Silakan kembali dalam beberapa waktu lagi." at section select periode
     And owner should successfully log out
+
+  @TEST_LIMO-5761
+  Scenario: [WEB][Mamikos Prime][Section Pilih Properti] Owner see select periode section if first listing is not full
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 082233545517 |              | qwerty123 |
+    And user click on mamiprime widget at owner dashboard
+    And owner wants to buy mamiprime from header
+    Then owner can see "Kost AT Snow Jetis Yogyakarta" doesnt have label "Kuota Daerah Penuh" at section select property
+    And owner will see Pilih Periode section will display package prices
