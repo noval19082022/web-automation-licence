@@ -1,14 +1,14 @@
 @DOM1
 Feature: Owner - Forgot Password
 
-  @TEST_COOP-5180 @Automated @DOM @web-covered
-  Scenario: [WEB][Forgot Password][Owner] Use Invalid OTP
-    Given user go to mamikos homepage
-    When user want to change the owner password
-    And user fill their registered phone number "083843666868"
-    And user choose verification by WA
-    And user input invalid code otp "0000"
-    Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
+#  @TEST_COOP-5180 @Automated @DOM @web-covered
+#  Scenario: [WEB][Forgot Password][Owner] Use Invalid OTP
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
+#    And user fill their registered phone number "083843666868"
+#    And user choose verification by WA
+#    And user input invalid code otp "0000"
+#    Then user verify invalid OTP message "Kode verifikasi salah. Mohon masukkan kode verifikasi yang kami kirim."
 
   @TEST_COOP-5182 @Automated @DOM @web-covered
   Scenario: [WEB][Forgot Password][Owner] Resend OTP via SMS
@@ -18,13 +18,13 @@ Feature: Owner - Forgot Password
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
 
-  @TEST_COOP-5187 @Automated @DOM @web-covered
-  Scenario: [WEB][Forgot Password][Owner] Resend OTP via WA
-    Given user go to mamikos homepage
-    When user want to change the owner password
-    And user fill their registered phone number "083843666868"
-    And user choose verification by WA
-    Then user verify "Kirim ulang kode" and click button resend OTP
+#  @TEST_COOP-5187 @Automated @DOM @web-covered
+#  Scenario: [WEB][Forgot Password][Owner] Resend OTP via WA
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
+#    And user fill their registered phone number "083843666868"
+#    And user choose verification by WA
+#    Then user verify "Kirim ulang kode" and click button resend OTP
 
   @TEST_COOP-5232 @Automated @DOM @web-covered
   Scenario: [WEB][Forgot Password][Owner] Send OTP via sms

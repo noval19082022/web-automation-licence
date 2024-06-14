@@ -174,9 +174,22 @@ public class PaymentSteps {
         invoicePO.clickOnBayarSekarang();
         var kodePerusahaan = invoicePO.getCodePembayaran();
         var nominal = invoicePO.getTotalPembayaran();
-        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
         invoicePO.sayaSudahBayar();
 
+    }
+
+
+    @And("tenant select payment method using Indomaret")
+    public void tenantSelectPaymentMethodUsingIndomaret() {
+        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnIndomaret();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.processPaymentIndomaretViaPostman(kodePerusahaan, String.valueOf(nominal));
+        invoicePO.sayaSudahBayar();
     }
 
     @And("tenant select payment method using BRI from riwayat booking")
@@ -218,7 +231,7 @@ public class PaymentSteps {
         invoicePO.clickOnBayarSekarang();
         var kodePerusahaan = invoicePO.getCodePembayaran();
         var nominal = invoicePO.getTotalPembayaran();
-        xenditAPI.BayarAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
+        xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
     }
 
     @And("owner/tenant/user select payment method from invoice detail using Permata")

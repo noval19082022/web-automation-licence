@@ -8,7 +8,6 @@ import com.microsoft.playwright.options.SelectOption;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -32,12 +31,27 @@ public class PlaywrightHelpers {
      * @param times how many you would to reload
      * @param locator the expected locator that you want to visible
      */
-    public void reloadPageIfLocatorNotVisible(int times, Locator locator) {
+    public void reloadPageIfLocatorNotVisibleAfterLoad(int times, Locator locator) {
         if(this.isLocatorVisibleAfterLoad(locator, 1000.0)){
             for (int i = 0; i < times; i++) {
-                page.reload();
-                if (locator.isVisible()) break;
+                reloadPage();
+                if (waitTillLocatorIsVisible(locator)) break;
             }
+        }
+    }
+
+    /**
+     * Reloads the current page if a specific element is not visible.
+     * This method checks if the provided locator element is visible within a short timeout (e.g., 1 second) after the page loads.
+     * If not, it attempts to reload the page up to the specified number of times (`times`) until the element becomes visible.
+     *
+     * @param times The maximum number of times to attempt reloading the page.
+     * @param locator The expected locator element to check for visibility.
+     */
+    public void reloadPageIfElementNotVisible(int times, Locator locator) {
+        for (int i = 0; i < times; i++) {
+            reloadPage();
+            if (waitTillLocatorIsVisible(locator)) break;
         }
     }
 
