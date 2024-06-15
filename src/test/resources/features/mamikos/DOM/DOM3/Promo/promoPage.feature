@@ -18,7 +18,6 @@ Feature: Promo page
 #    And user click page index "2"
 #    Then promo page "2" will be opened
 #  test commit
-#  test
 #
   @regression @TEST_COOP-5405 @DOM3 @web-covered
   Scenario: User can open promo detail
