@@ -1,4 +1,4 @@
-@BBM5 @novalinter
+@BBM5
 Feature: BnB feature with background go to kos saya page
   
 
