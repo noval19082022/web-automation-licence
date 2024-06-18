@@ -31,6 +31,10 @@ public class BillingTrackePO {
     Locator saveButtonNotes;
     Locator adminChooseCalender;
 
+    //-----billing announcement------//
+    Locator announcementExpand;
+
+
     public BillingTrackePO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -53,6 +57,9 @@ public class BillingTrackePO {
         saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         tagDropdown = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         adminChooseCalender = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--md']");
+
+        //-----------billing announcement----------//
+        announcementExpand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("promote Billing Team Announcement chevron-down"));
     }
 
     public void searchType(String type, String text) {
@@ -220,5 +227,65 @@ public class BillingTrackePO {
         playwright.clickOn(page.locator(monthButton));
     }
 
+    /**
+     * click on announcement title
+     */
+    public void clickAnnouncementTitle(){
+        playwright.clickOn(announcementExpand);
+    }
+
+    /**
+     * click on BSE name
+     * @param bseName
+     */
+    public void clickBseName(String bseName){
+        Locator bseNameText = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""+bseName+""));
+        playwright.clickOn(bseNameText);
+    }
+
+    /**
+     * Click on Tambah announcement
+     */
+    public void clickTambahAnnouncement(){
+        Locator tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
+        playwright.clickOn(tambahAnnouncementButton);
+    }
+
+    /**
+     * Click on Ubah announcement
+     */
+    public void clickEditAnnouncement(){
+        Locator editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
+        playwright.clickOn(editAnnouncementButton);
+    }
+
+    /**
+     * input announcement on modals
+     * @param text
+     */
+    public void inputAnnouncemenet(String text){
+        Locator inputAnnouncement = page.getByTestId("billingAnnoucementForm-content");
+        playwright.forceFill(inputAnnouncement, text);
+    }
+
+    /**
+     * get toast after submit button
+     * @param text
+     * @return text
+     */
+    public String getSuccessToast(String text) {
+        Locator getToastText = page.getByText(""+text+"");
+        return playwright.getText(getToastText);
+    }
+
+    /**
+     * get blank annnouncement
+     * @param text
+     * @return Belum ada announcement untuk akun BSE ini
+     */
+    public String getBlankAnnouncement(String text){
+        Locator getBlanktext = page.locator("#announcement-2").getByText(""+text+"");
+        return playwright.getText(getBlanktext);
+    }
 }
 
