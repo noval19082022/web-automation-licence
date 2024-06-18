@@ -62,7 +62,7 @@
         | Masukkan koordinat titik dari aplikasi ini saat mendaftarkan kos di aplikasi Mamidata.  |
       And step 2 have button "Download Geotag"
       When agen click button "Download Geotag"
-      Then agen should redirect to "https://play.google.com/store/apps/details?id=travel.minskguide.geotag&hl=en_US" in new tab
+      Then agen should redirect to "https://play.google.com/store/apps/details?id=com.gpsmapcamera.geotagginglocationonphoto" in new tab
       And admin close unused browser tab
       #Verify step 3
       Then step 3 title is "Download Buku Panduan"
@@ -71,7 +71,7 @@
         | Pelajari info lebih lanjut tentang alur kerja, pemberian komisi, dan lainnya. |
       And step 3 have button "Download PDF"
       When agen click button "Download PDF"
-      Then agen should redirect to "https://drive.google.com/file/d/1mZqwVd11_NT-aoi6ADzsBSQia7wxKwcf/view" in new tab
+      Then agen should redirect to "https://drive.google.com/file/d/1RIexX_PxpLSGC7FQfGsVvfAiTn9J4CfH/view" in new tab
       And admin close unused browser tab
       #Verify step 4
       Then step 4 title is "Gabung ke Chat Group"
