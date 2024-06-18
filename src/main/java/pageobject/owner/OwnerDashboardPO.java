@@ -1,5 +1,6 @@
 package pageobject.owner;
 
+import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -127,7 +128,7 @@ public class OwnerDashboardPO {
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat CS"));
-        contactUsPopUp = page.frameLocator("iframe[title=\"Find more information here\"]").getByTestId("widget-header-view");
+        contactUsPopUp = page.frameLocator("iframe[name=\"Messaging window\"]").getByRole(AriaRole.HEADING, new FrameLocator.GetByRoleOptions().setName("Mami Support"));
         greetingUserLabel = page.locator(".greeting-section__name");
         accountSettingsButton = page.getByText("Setelan Akun");
         logoutOwnerPageButton = page.getByText("Logout");
