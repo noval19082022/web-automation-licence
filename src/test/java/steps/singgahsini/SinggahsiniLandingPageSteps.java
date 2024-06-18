@@ -171,6 +171,9 @@ public class SinggahsiniLandingPageSteps {
             URL = "https://www.instagram.com/singgahsini_idn/";
         } else if (link.equalsIgnoreCase("Youtube")) {
             URL = "https://www.youtube.com/channel/UCDH3m6FZPy0X8D13h4GQz-A";
+        } else if (link.equalsIgnoreCase("Antifraud")) {
+            URL = "https://help.mamikos.com/post/bagaimana-agar-transaksi-saya-aman-di-mamikos";
+
         }
 
         Assert.assertEquals(singgahsini.getNewTabURL(),URL);

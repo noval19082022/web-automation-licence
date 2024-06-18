@@ -206,9 +206,11 @@ public class PlaywrightHelpers {
 
     /**
      * click locator if some locator exist
+     * this method is suitable for dynamic element
+     * example usage src/main/java/pageobject/owner/fiturpromosi/BroadcastChatPO.java on method clickOnTambahBroadcastChatButton()
      * @param locatorCLick target click locator
      */
-    public void tryClickingIfElementVisible(Locator locatorCLick) {
+    public void clickIfElementVisible(Locator locatorCLick) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
             clickOn(locatorCLick);
         } else {
@@ -217,11 +219,12 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * click locator if some locator exist
+     * click locator if some locator exist after load
+     * this method is suitable for dynamic pop up
      * @param locatorCLick target click locator
      * @param timeout timeout
      */
-    public void tryClickingIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
+    public void clickIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
             clickOn(locatorCLick);
         } else {
@@ -231,11 +234,12 @@ public class PlaywrightHelpers {
 
     /**
      * click locator if some locator exist after load
+     * this method is suitable for dynamic pop up
      * @param locatorExist seen locator
      * @param locatorCLick target click locator
      * @param timeout timeout time waiting
      */
-    public void tryClickingIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
+    public void clickIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
         if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
         } else {
@@ -914,6 +918,6 @@ public class PlaywrightHelpers {
      * @param locator clickable
      */
     private void logElementNotClickable(Locator locator) {
-        log.info("locator is not clicked {}", locator);
+        log.info("locator is not clicked or visible {}", locator);
     }
 }
