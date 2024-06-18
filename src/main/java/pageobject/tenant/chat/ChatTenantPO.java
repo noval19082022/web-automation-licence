@@ -256,4 +256,11 @@ public class ChatTenantPO {
     public void openChatroomByOrder(int orderNumber) {
         playwright.clickOn(charoomCardList.nth(orderNumber));
     }
+
+    /**
+     * click back button in chatroom
+     */
+    public void clickBackButtonChatroom() {
+        playwright.clickOn(backButtonChatroom);
+    }
 }
