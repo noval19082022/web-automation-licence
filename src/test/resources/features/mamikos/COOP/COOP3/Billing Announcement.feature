@@ -11,7 +11,7 @@ Feature: Billing Announcement
     And admin click on expand billing announcement
     And admin choose bse name with "Maya"
     And admin click on "Tambah" button
-    And admin input announcement with "Hallo Maya jangan sampai lupa untuk bikin announcement"
+    And admin input announcement
     And admin can see announcement toast "Announcement berhasil tersimpan."
     Then admin can see announcement toast "Hallo Maya jangan sampai lupa untuk bikin announcement"
 

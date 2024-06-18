@@ -1,5 +1,6 @@
 package steps.pms.billingTracker;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
@@ -123,11 +124,11 @@ public class BillingTrackerSteps {
         }
     }
 
-    @And("admin input announcement with {string}")
-    public void admin_input_announcement_with(String text){
-        billingTracker.inputAnnouncemenet(text);
+    @And("admin input announcement")
+    public void admin_input_announcement(){
+        billingTracker.inputAnnouncemenet();
         billingTracker.clickSaveButton();
-    }
+        }
 
     @And("admin can see announcement toast {string}")
     public void admin_can_see_announcement_toast(String text){
