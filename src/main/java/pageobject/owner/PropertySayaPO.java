@@ -1271,6 +1271,7 @@ public class PropertySayaPO {
      */
     public void inputRoomTypeName(String roomTypeName) {
         if (roomTypeCheckbox.isChecked()) {
+            playwright.clearText(roomTypeField);
             playwright.clickLocatorAndTypeKeyboard(roomTypeField, roomTypeName);
         }
     }
@@ -1580,8 +1581,7 @@ public class PropertySayaPO {
     public void inputMonthyPrice(String monthlyPrice) {
         playwright.waitTillPageLoaded(3000.0);
         playwright.clickOn(priceMonthlyField);
-        playwright.pressKeyboardKey("Control+KeyA");
-        playwright.pressKeyboardKey("Delete");
+        playwright.clearText(priceMonthlyField);
         playwright.realKeyboardType(monthlyPrice);
         playwright.pressKeyboardKey("Tab");
     }
@@ -1624,8 +1624,7 @@ public class PropertySayaPO {
         otherKostPriceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div[" + index + "]/div[@class='bg-c-field']/input[@class='input step-seven__input']");
         if (otherKostPriceMonthlyCheckbox.isChecked()) {
             playwright.clickOn(otherKostPriceMonthlyField);
-            playwright.pressKeyboardKey("Control+KeyA");
-            playwright.pressKeyboardKey("Delete");
+            playwright.clearText(otherKostPriceMonthlyField);
             playwright.realKeyboardType(otherPrice);
             playwright.pressKeyboardKey("Tab");
         } else {
