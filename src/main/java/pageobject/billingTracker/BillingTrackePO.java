@@ -33,7 +33,9 @@ public class BillingTrackePO {
 
     //-----billing announcement------//
     Locator announcementExpand;
-
+    Locator tambahAnnouncementButton;
+    Locator editAnnouncementButton;
+    Locator inputAnnouncement;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -60,6 +62,9 @@ public class BillingTrackePO {
 
         //-----------billing announcement----------//
         announcementExpand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("promote Billing Team Announcement chevron-down"));
+        tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
+        editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
+        inputAnnouncement = page.getByTestId("billingAnnoucementForm-content");
     }
 
     public void searchType(String type, String text) {
@@ -247,7 +252,6 @@ public class BillingTrackePO {
      * Click on Tambah announcement
      */
     public void clickTambahAnnouncement(){
-        Locator tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
         playwright.clickOn(tambahAnnouncementButton);
     }
 
@@ -255,7 +259,6 @@ public class BillingTrackePO {
      * Click on Ubah announcement
      */
     public void clickEditAnnouncement(){
-        Locator editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         playwright.clickOn(editAnnouncementButton);
     }
 
@@ -263,7 +266,6 @@ public class BillingTrackePO {
      * input announcement on modals
      */
     public void inputAnnouncemenet(String text){
-        Locator inputAnnouncement = page.getByTestId("billingAnnoucementForm-content");
         playwright.forceFill(inputAnnouncement, text);
     }
 
