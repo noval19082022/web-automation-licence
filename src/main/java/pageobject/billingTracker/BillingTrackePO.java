@@ -265,7 +265,7 @@ public class BillingTrackePO {
     /**
      * input announcement on modals
      */
-    public void inputAnnouncemenet(String text){
+    public void inputAnnouncement(String text){
         playwright.forceFill(inputAnnouncement, text);
     }
 
