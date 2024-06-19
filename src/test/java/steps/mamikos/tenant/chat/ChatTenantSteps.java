@@ -145,4 +145,9 @@ public class ChatTenantSteps {
         var orderNumber = Integer.parseInt(order) - 1;
         chat.openChatroomByOrder(orderNumber);
     }
+
+    @And("user click back button chatroom")
+    public void userClickBackButtonChatroom() {
+        chat.clickBackButtonChatroom();
+    }
 }
