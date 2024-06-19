@@ -35,8 +35,7 @@ public class MamipayPO {
         autoBbkCard = page.locator("//*[@class='auto-bbk-info-bar']");
         titleForm = page.locator(".title");
         titleAutoBbkPopUp = page.locator(".owner-intercept-booking-modal__body-title");
-//        lewatiButton = page.locator(".booking-register-wrapper");
-        kirimData = page.locator(".bg-c-button");
+        kirimData = page.locator(".bg-c-button--primary");
     }
 
     /**
@@ -196,6 +195,7 @@ public class MamipayPO {
      *
      */
     public void kirimDataDisable() {
+        playwright.waitFor(kirimData);
         playwright.isButtonDisable(kirimData);
     }
 }
