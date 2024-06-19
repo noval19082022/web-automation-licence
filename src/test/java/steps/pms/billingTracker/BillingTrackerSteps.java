@@ -124,9 +124,9 @@ public class BillingTrackerSteps {
         }
     }
 
-    @And("admin input announcement")
-    public void admin_input_announcement(){
-        billingTracker.inputAnnouncemenet();
+    @And("admin input announcement with {string}")
+    public void admin_input_announcement_with(String text){
+        billingTracker.inputAnnouncemenet(text);
         billingTracker.clickSaveButton();
         }
 

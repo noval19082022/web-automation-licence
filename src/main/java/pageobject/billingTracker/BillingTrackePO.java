@@ -262,12 +262,9 @@ public class BillingTrackePO {
     /**
      * input announcement on modals
      */
-    public void inputAnnouncemenet(){
-//        Locator inputAnnouncement = page.getByTestId("billingAnnoucementForm-content");
-//        playwright.forceFill(inputAnnouncement, text);
-        String inputText = "1. Input 1\n2. Input 2\n3. Input 3";
+    public void inputAnnouncemenet(String text){
         Locator inputAnnouncement = page.getByTestId("billingAnnoucementForm-content");
-        playwright.fill(inputAnnouncement, inputText);
+        playwright.forceFill(inputAnnouncement, text);
     }
 
     /**
