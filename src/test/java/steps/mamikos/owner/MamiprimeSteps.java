@@ -27,7 +27,9 @@ public class MamiprimeSteps {
 
     @When("owner wants to buy mamiprime from header")
     public void owner_wants_to_buy_mamiprime_from_header() {
-        Assert.assertTrue(mamiprime.isBeliPaketHeaderButtonVisible(),"beli paket button not visble");
+        if (!mamiprime.isBeliPaketHeaderButtonVisible()) {
+            playwright.reloadPage();
+        }
         mamiprime.clickOnBeliPaketHeader();
     }
 

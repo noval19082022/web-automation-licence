@@ -7,7 +7,7 @@ Feature: Entry point Tenant Background Checker
     When user login as owner:
       | phone stag     | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
-    * user click chat button in top bar owner home page
+    And owner wants to accsess chatroom
     Then owner can see entry point TBC Lihat Profil at chatroom "Rega Tenant Tiga"
 
   @TEST_LIMO-4843 @entrypointTBC

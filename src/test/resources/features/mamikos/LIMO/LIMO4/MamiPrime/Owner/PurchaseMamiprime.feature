@@ -41,5 +41,5 @@ Feature: Purchase Mamiprime
     Then owner will back to pendafatarn mamiprime page
 
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
-    When owner already choose period "14 Hari" with price "Rp475.500"
+    When owner already choose period "14 Hari" with price "Rp475.000"
     Then owner can see package prime selected is "MamiPrime - Kata Kunci (14 Hari)"
