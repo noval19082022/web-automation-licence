@@ -1,5 +1,6 @@
 package steps.pms.billingTracker;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
@@ -101,6 +102,42 @@ public class BillingTrackerSteps {
     @And ("admin choose month {string}")
     public void admin_choose_month(String month) {
         billingTracker.adminChooseMonth(month);
+    }
+
+    @And("admin click on expand billing announcement")
+    public void admin_click_on_expand_billing_announcement(){
+        billingTracker.clickAnnouncementTitle();
+    }
+
+    @And("admin choose bse name with {string}")
+    public void admin_choose_bse_name_with(String bseName){
+        billingTracker.clickBseName(bseName);
+    }
+
+    @And("admin click on {string} button")
+    public void admin_click_on_button(String text){
+        if (text.equalsIgnoreCase("Tambah")){
+            billingTracker.clickTambahAnnouncement();
+        }
+        else if(text.equalsIgnoreCase("Ubah")){
+            billingTracker.clickEditAnnouncement();
+        }
+    }
+
+    @And("admin input announcement with {string}")
+    public void admin_input_announcement_with(String text){
+        billingTracker.inputAnnouncement(text);
+        billingTracker.clickSaveButton();
+        }
+
+    @And("admin can see announcement toast {string}")
+    public void admin_can_see_announcement_toast(String text){
+        billingTracker.getSuccessToast(text);
+    }
+
+    @And("admin can see blank announcement with {string}")
+    public void admin_can_see_blank_announcement_with(String text){
+        billingTracker.getBlankAnnouncement(text);
     }
 
 }
