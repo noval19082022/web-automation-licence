@@ -32,8 +32,8 @@ Feature: Area Boundaries
   Scenario: User Can See Area Boundaries With Result Are 20
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Bogor |
-      | area result    | Bogor |
+      | search keyword | Cilacap Tengah |
+      | area result    | Cilacap Tengah |
     Then user can see kost list is more than 16
 
 #  @areaboundaries @continue

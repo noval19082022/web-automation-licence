@@ -56,7 +56,7 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        if (playwright.isButtonWithTextDisplayed("Ajukan Sewa",20)){
+        if (playwright.isTextDisplayed("Ajukan Sewa", 20)){
             Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
       }
         else{
