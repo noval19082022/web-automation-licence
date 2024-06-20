@@ -133,7 +133,7 @@ public class LevelManagementPO {
      *
      */
     public void clickEditKostLevel() {
-        playwright.clickOn(editIcon);
+        playwright.clickOn(editIcon.first());
     }
 
     /**
@@ -142,7 +142,7 @@ public class LevelManagementPO {
      *
      */
     public void clickDeleteKostLevel() {
-        playwright.clickOn(deleteIcon);
+        playwright.clickOn(deleteIcon.first());
         playwright.acceptDialog(deleteIcon);
     }
 

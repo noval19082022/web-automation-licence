@@ -30,7 +30,7 @@ Feature: Manage Booking And Billing
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password    |
-      | 0812345670003| qwerty123 |
+      | 085275574592 | qwerty123 |
     Then verify info untuk anda Auto BBK not displayed
     When owner navigates to property saya kos
     Then owner verify Auto BBK pop up is displayed
