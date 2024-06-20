@@ -10,14 +10,14 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
       | phone stag    | phone prod    |
-      | 089612561233 | 089612561233 |
+      | 0895131932292 | 089612561233 |
 
     @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password  |
-      | 089612561233  | 089612561233  | qwerty123 |
+      | 0895131932292  | 089612561233  | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -42,7 +42,7 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password  |
-      | 089612561233  | 089612561233  | qwerty123 |
+      | 0895131932292  | 089612561233  | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
     And tenant set active page to 0
