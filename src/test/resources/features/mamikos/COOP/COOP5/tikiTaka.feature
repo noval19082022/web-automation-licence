@@ -42,8 +42,8 @@ Feature: Tiki Taka - Bank Account
       | 0816000001 | 0890867321212 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0816000001" without close the page
+    And tenant close unused browser tab
     When user go to mamikos homepage
-    And tenant navigate to kost saya page
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to kontrak kost saya
@@ -108,8 +108,8 @@ Feature: Tiki Taka - Bank Account
       | 0816000001 | 0890867321212 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0816000001" without close the page
+    And tenant close unused browser tab
     When user go to mamikos homepage
-    And tenant navigate to kost saya page
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to kontrak kost saya

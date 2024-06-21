@@ -160,4 +160,9 @@ public class ChatOwnerSteps {
     public void owner_wants_to_accsess_chatroom() {
         chat.clickChatOwner();
     }
+
+    @And("user dismiss Laporan klik FTUE")
+    public void userDismissLaporanKlikFTUE() {
+        chat.dismissFTUEJemputBola();
+    }
 }

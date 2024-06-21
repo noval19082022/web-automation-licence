@@ -815,7 +815,6 @@ public class InvoicePO {
         playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
-        playwright.hardWait(5000.0);
-       // playwright.reloadPage();
+        playwright.hardWait(5000);
     }
 }
