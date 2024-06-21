@@ -60,7 +60,7 @@ Feature: Homepage
 	Scenario: [Dweb][Homepage]Check redirection twitter on homepage
 		Given user go to mamikos homepage
 		When user open twitter in footer
-		Then user should redirect to link that contains "https://twitter.com/mamikosapp"
+		Then user should redirect to link that contains "https://x.com/mamikosapp"
 
 	@TEST_COOP-5449 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection instagram on homepage
