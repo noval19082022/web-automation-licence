@@ -26,7 +26,8 @@ Feature: Reschedule and Relocation
     And admin click next button on booking now
     And admin click submit button
     Then admin should see success message "Success! Successfully created booking" on data booking page
-    When admin process to reject booking
+    When admin search kost all testing and tenant phone number "0890867321227"
+    And admin process to reject booking
     And admin reject booking with "Dokumen tidak lengkap" as the reason
     Then admin should see success message "Success! Booking ditolak" on data booking page
 
@@ -41,7 +42,8 @@ Feature: Reschedule and Relocation
     And admin click next button on booking now
     And admin click submit button
     Then admin should see success message "Success! Successfully created booking" on data booking page
-    When admin process to reject booking
+    When admin search kost all testing and tenant phone number "0890867321227"
+    And admin process to reject booking
     And admin reject booking with "Dokumen tidak lengkap" as the reason
     Then admin should see success message "Success! Booking ditolak" on data booking page
 
