@@ -25,7 +25,7 @@ public class ChatTenantSteps {
     public void userSeePhoneNumberFieldAndSelectableQuestionOptions(List<String> questions) {
         playwright.hardWait(5000);
         List<String> questionList = chat.listQuestions();
-        for (int i=0; i<questions.size(); i++) {
+        for (int i = 0; i < questions.size(); i++) {
             Assert.assertEquals(questionList.get(i), questions.get(i), "Question " + i + " not match");
         }
     }
@@ -37,7 +37,7 @@ public class ChatTenantSteps {
 
     @Given("send button become {string}")
     public void sendButtonBecome(String textButton) {
-        Assert.assertEquals(chat.verifySendLabel(),textButton, "Button text is wrong");
+        Assert.assertEquals(chat.verifySendLabel(), textButton, "Button text is wrong");
     }
 
     @And("user select question {string}")
@@ -56,14 +56,8 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        if (playwright.isButtonWithTextDisplayed("Ajukan Sewa",20)){
-            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-      }
-        else{
-            kostDetail.dismissFTUEIfExist();
-            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-         }
-        }
+        Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+    }
 
     @And("tenant enter text {string} in chat page")
     public void tenantEnterTextInChatPage(String chatMsg) {
@@ -92,19 +86,20 @@ public class ChatTenantSteps {
 
     @And("user batalkan survey if the survey already submitted")
     public void user_cancel_survey() {
-        if (playwright.isButtonWithTextDisplayed("Ubah Jadwal",20)) {
+        if (playwright.isButtonWithTextDisplayed("Ubah Jadwal", 20)) {
             chat.clickOnUbahJadwalOnHeaderChatRoomButton();
             chat.clickOnBatalkanSurveiButton();
             chat.clickOnSurveyKosButton();
-        }else {
+        } else {
             chat.clickOnSurveyKosButton();
         }
     }
 
     @And("user change schedule survey if the survey already submitted")
     public void user_change_schedule_survey() {
-            chat.clickOnUbahJadwalOnHeaderChatRoomButton();
-        }
+        chat.clickOnUbahJadwalOnHeaderChatRoomButton();
+    }
+
     @And("user click on survey kos button")
     public void user_click_on_survey_kos_button() {
         chat.clickOnSurveyKosButton();
@@ -131,7 +126,7 @@ public class ChatTenantSteps {
     }
 
     @Then("question {string} is not displayed")
-    public void question_is_not_displayed(String question){
+    public void question_is_not_displayed(String question) {
         Assert.assertFalse(chat.isQuestionDisplayed(question), "Question is not displayed");
     }
 

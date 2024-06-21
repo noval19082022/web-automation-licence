@@ -166,7 +166,7 @@ Feature: Payment All
       | 0891112020198 | 0891112020198 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant click sudah di bayar
-    Then tenant will see invoice "Dibayar"
+    Then tenant will see that the text "Dibayar" is displayed
 
   @TEST_COOP-6906
   Scenario: [Invoice] Check Invoice From Kost saya Belum Dibayar

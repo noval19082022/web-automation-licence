@@ -261,7 +261,7 @@ public class PaymentSteps {
 
     @Then("tenant will see invoice {string}")
     public void tenantWillSeeInvoice(String statusInvoice) {
-        Assert.assertEquals(kostSaya.isPaymentSuccessText(statusInvoice),""+statusInvoice +"");
+        Assert.assertEquals(kostSaya.isPaymentSuccessText(statusInvoice),"'+statusInvoice +'");
     }
     @And("user/tenant click item card billing has been paid")
     public void tenantClickBillingHasBeenPaid() {
