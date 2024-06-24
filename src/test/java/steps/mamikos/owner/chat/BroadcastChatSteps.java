@@ -44,9 +44,14 @@ public class BroadcastChatSteps {
         broadcast.clickOnBackButtonBC();
     }
 
+    @Then("user verify input broadcast message is visible")
+    public void user_verify_input_broadcast_message_is_visible() {
+        Assert.assertTrue(broadcast.isTextFieldBCMessageDisplayed());
+    }
+
     @Then("user verify input broadcast message is not visible")
     public void user_verify_input_broadcast_message_is_not_visible() {
-        broadcast.isTextFieldBCMessageDisplayed();
+        Assert.assertFalse(broadcast.isTextFieldBCMessageDisplayed());
     }
 
     @When("user clicks on the close icon next to the search bar to reset it")
