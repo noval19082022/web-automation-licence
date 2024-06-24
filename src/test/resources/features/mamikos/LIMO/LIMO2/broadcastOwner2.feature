@@ -55,3 +55,16 @@ Feature: Broadcast Chat Owner 2
     And owner add broadcast chat for kost "kost jambu jambu lpl Patikraja Banyumas"
     And owner clicks Kos "kost jambu jambu lpl Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "Kos belum memiliki calon penerima" is displayed
+
+  @TEST_LIMO-1140 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat][Select Kost]User validate list kost is showed all
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 081328787342 | 0          | Perempuan |
+    And owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast if exist
+    And owner tap on add broadcast chat
+    Then owner will see that the text "kost automation DOM boleh refund Patikraja Banyumas" is displayed
+    * owner will see that the text "desta automation Tobelo Halmahera Utara" is displayed
+    * owner will see that the text "Kost LPL P2 01 Patikraja Banyumas" is displayed

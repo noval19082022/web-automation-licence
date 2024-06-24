@@ -184,6 +184,12 @@ public class BroadcastChatSteps {
         broadcast.searchKostBC(kostName);
     }
 
+    @When("user/owner tap on add broadcast chat")
+    public void addBroadcastChat() {
+        loading.waitForLoadingIconDisappear();
+        broadcast.clickOnTambahBroadcastChatButton();
+    }
+
     @When("owner clicks Kos {string} and Pilih Kos button")
     public void ownerClicksPilihKosButton(String kostName) {
         broadcast.clickOnTambahBroadcastChatKostNameResult(kostName);
