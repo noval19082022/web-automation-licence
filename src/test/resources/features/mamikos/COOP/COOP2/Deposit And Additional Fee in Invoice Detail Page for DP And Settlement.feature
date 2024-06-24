@@ -28,7 +28,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | 087708777618 | 0890867321212 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                                                    | kost name prod            |
-      | Test Automation Kost Bagas Automation Add Tobelo Halmahera Utara  | Kost Adi Auto SinggahSini |
+      | Test Regression Kost Bagas Automation Add Tobelo Halmahera Utara  | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 

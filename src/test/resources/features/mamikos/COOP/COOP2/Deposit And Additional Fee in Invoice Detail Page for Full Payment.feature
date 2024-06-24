@@ -25,7 +25,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                                                                  | kost name prod                                                  |
-      | Test Automation Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
+      | Test Regression Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
     And tenant booking kost
     Then tenant should success booking kost
 
