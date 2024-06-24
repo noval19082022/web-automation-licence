@@ -15,6 +15,7 @@ import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
+import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
 import pageobject.owner.PropertySayaPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
@@ -33,6 +34,7 @@ public class NavigatesSteps {
     LoadingPO loading = new LoadingPO(page);
     CheckPropertyPO checkProperty = new CheckPropertyPO(page);
     PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
+    LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -448,4 +450,8 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL+"/agen");
     }
 
+    @Given("admin navigates to Harvest Dashboard")
+    public void admin_navigates_to_Harvest_Dashboard(){
+        loginHarvestDashboard.navigateToHarvestDashboardLoginPage();
+    }
 }
