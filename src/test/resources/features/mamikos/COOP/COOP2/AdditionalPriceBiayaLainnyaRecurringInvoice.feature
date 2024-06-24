@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag      | kost name prod            |
-      | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+      | kost name stag                                                        | kost name prod            |
+      | Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -89,7 +89,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08916727111    | 08916727111    | qwerty123    |
-    And owner go to bill page of kost "Kost Bagas Automation HahaHehe Tobelo Halmahera Utara" on month of "next"
+    And owner go to bill page of kost "Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is current month length
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		
