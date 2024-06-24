@@ -89,3 +89,13 @@ Feature: Broadcast Chat Owner 2
 	, nikmati promo Mamikos untuk booking kos! Cek kosnya dan langsung booking. Jangan sampai terlewatkan, ya.
 	"""
     Then user verify input broadcast message is not visible
+
+  @TEST_LIMO-1130 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat][Update GP]user update status GP
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 081328787342 | 0          | Perempuan |
+    And owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast if exist
+    Then owner will see that the text "Broadcast Chat" is displayed
