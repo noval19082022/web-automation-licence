@@ -10,7 +10,14 @@ Feature: Detail Pemesanan
     And owner navigate to pendaftaran mamiprime page
     Then owner will see additional information related to GP
 
-  @TEST_LIMO-5682
+  @TEST_LIMO-5682 @continue
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Doesn't select any periode
     Then Validate Lanjut Bayar button on periode mamiprime is disable
+
+  @TEST_LIMO-5682
+  Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Selected property and selected periode
+    When owner only choose period "7 Hari" with price "Rp356.250"
+    Then Validate Lanjut Bayar button on periode mamiprime is enable
+
+
 
