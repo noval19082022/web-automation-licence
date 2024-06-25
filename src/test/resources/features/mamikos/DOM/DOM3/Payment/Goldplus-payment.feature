@@ -16,7 +16,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment using alfamart xendit as payment method from invoice detail
     Then owner will see that the text "Pembayaran Berhasil" is displayed
@@ -28,7 +28,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using "PERMATA"
     And owner navigates to "/goldplus/payment"
@@ -43,7 +43,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment from invoice detail using LinkAja
     And owner set active page to 0
@@ -58,7 +58,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment from invoice detail with DANA
     And owner set active page to 0
@@ -73,7 +73,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment from invoice detail using Credit Card
     And owner navigates to "/goldplus/payment"
@@ -87,7 +87,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using BNI
     And owner navigates to "/goldplus/payment"
@@ -101,7 +101,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using BRI
     And owner navigates to "/goldplus/payment"
@@ -115,7 +115,7 @@ Feature: Payment Goldplus staging
       | phone stag   | phone prod | password  |
       | 089145645609 | 0          | qwerty123 |
     And owner waiting the page reload
-    And user click "Daftar" button
+    And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner pay invoice from invoice detail using mandiri without close the page
     And owner navigates to "/goldplus/payment"

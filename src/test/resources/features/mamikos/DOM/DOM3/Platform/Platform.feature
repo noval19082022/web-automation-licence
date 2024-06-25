@@ -40,13 +40,13 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user search "Bandung" on landing apartment
     Then user will see displays apartment lists by area and city
       | Coblong       |
+      | Buah batu     |
+      | Pasteur       |
       | Sumur Bandung |
       | Coblong       |
       | Coblong       |
       | Coblong       |
-      | Coblong       |
-      | Sumur Bandung |
-      | Bandung       |
+      | Cicendo       |
 
   @TEST_COOP-5362 @Automated @web-covered
   Scenario: [Web][Landing Kos][Popular city] Search Another Category
@@ -132,7 +132,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
-      | 0891234567897  | 08100000622 | qwerty123 |
+      | 0888881478  | 08100000622 | qwerty123 |
     And tenant search kost then go to apartment details:
       | kost name stag | kost name prod |
       | Rane 78        |                |
