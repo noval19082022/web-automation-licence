@@ -141,7 +141,7 @@ public class MamiprimePendaftaranPO {
      */
     public boolean isLanjutBayarButtonDisable()  {
         playwright.waitFor(btnLanjutBayar);
-        return playwright.waitTillLocatorIsVisible(btnLanjutBayar);
+        return playwright.isButtonDisable(btnLanjutBayar);
     }
 
     /**
