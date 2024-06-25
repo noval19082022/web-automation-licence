@@ -21,7 +21,7 @@ public class MamiprimePeriodeSteps {
     }
 
     @When("Validate Lanjut Bayar button on periode mamiprime is disable")
-    public void owner_navigate_to_pendaftaran_mamiprime_page(){
+    public void validate_lanjut_bayar_button_on_periode_mamiprime_is_disable(){
         Assert.assertTrue(mamiprimePendaftaranPO.isLanjutBayarButtonDisable());
     }
 
