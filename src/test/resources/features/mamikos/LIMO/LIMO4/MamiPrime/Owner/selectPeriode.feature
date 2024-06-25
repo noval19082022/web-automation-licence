@@ -28,3 +28,8 @@ Feature: Detail Pemesanan
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Select periode 30 Days
     When owner only choose period "30 Hari" with price "Rp1.275.000"
     Then Validate Lanjut Bayar button on periode mamiprime is enable
+
+  @TEST_LIMO-5682
+  Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Select periode 60 Days
+    When owner only choose period "60 Hari" with price "Rp3.000.000"
+    Then Validate Lanjut Bayar button on periode mamiprime is enable
