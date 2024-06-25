@@ -1,7 +1,7 @@
 @BBM5 @tikiTaka
 Feature: Tiki Taka - Bank Account
 
-  Scenario: Terminated contract
+  Background: Terminated contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -31,17 +31,19 @@ Feature: Tiki Taka - Bank Account
       | tenant stag     | tenant prod        |
       | Akun Tiki taka | Hagaromo Otsutsuki  |
     Then owner should redirect back to pengajuan booking page
+    And owner navigates to owner dashboard
+    Then owner logs out
 
-  @TEST_COOP-7638
-  Scenario: [WEB][Ajukan Berhenti Sewa] Check Bank account form for Kost P1 have Deposit
+#  @TEST_COOP-7638
+#  Scenario: [WEB][Ajukan Berhenti Sewa] Check Bank account form for Kost P1 have Deposit
     When user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag | phone prod    | password  |
       | 0816000001 | 0890867321212 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0816000001" without close the page
+    And tenant close unused browser tab
     When user go to mamikos homepage
-    And tenant navigate to kost saya page
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
     Then tenant navigate to kontrak kost saya
@@ -73,3 +75,52 @@ Feature: Tiki Taka - Bank Account
     And tenant click on "Kirim form ke pemilik" button on popup confirmation
     When tenant navigate to kontrak kost saya
     Then tenant can see "Diajukan pada 20 Mei 2024. Deposit akan ditransfer maksimal H+7 setelah pemilik " on bank account section
+
+  @TEST_COOP-7639
+  Scenario: Booking and confirm booking
+    Given user go to mamikos homepage
+    Then user login as tenant via phone number:
+      | phone stag  | phone prod  | password  |
+      | 0816000001  | 0816000001  | qwerty123 |
+    And user cancel booking
+    When tenant search kost then go to kost details:
+      | kost name stag                                           | kost name prod                                           |
+      | Kost Scenario Tujuh Balik Bukit Lampung Barat | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    And tenant booking kost for "today"
+    And user go to mamikos homepage
+    And user logs out as a Tenant user
+    Then user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 087800001007 | 087800001007 | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner accept booking from tenant:
+      | tenant stag     | tenant prod        |
+      | Akun Tiki taka | Hagaromo Otsutsuki  |
+    Then owner should redirect back to pengajuan booking page
+    And owner navigates to owner dashboard
+    Then owner logs out
+
+#  @TEST_COOP-7639
+#  Scenario: Tenant paid invoice
+    When user go to mamikos homepage
+    And user login as tenant via phone number:
+      | phone stag | phone prod    | password  |
+      | 0816000001 | 0890867321212 | qwerty123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant pay kost from riwayat booking using ovo "0816000001" without close the page
+    And tenant close unused browser tab
+    When user go to mamikos homepage
+    And tenant navigate to riwayat and draf booking
+    And tenant checkin kost from riwayat booking
+    Then tenant navigate to kontrak kost saya
+    And user click ajukan berhenti sewa on kontrak saya page
+    Then tenant cannot see "Pastikan data rekening diisi dengan benar, agar tidak terjadi salah transfer." on bank account section
+    And user click review kost
+    And user input review kost with rating 5:
+      | review stop rent stag       |
+      | Kost sangat aman dan bersih |
+    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user click ajukan berhenti sewa on kontrak saya after input data diri
+    Then tenant can see "Pastikan form sudah diisi dengan benar untuk memudahkan pemilik melakukan konfirmasi." on bank account section
+    And tenant click on "Kirim form ke pemilik" button on popup confirmation
+    And tenant navigate to kontrak kost saya

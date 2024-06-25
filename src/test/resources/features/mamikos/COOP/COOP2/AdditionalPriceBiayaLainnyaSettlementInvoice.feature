@@ -28,7 +28,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod            |
-      | Kost Bagas Dp Only Automation Tobelo Halmahera | Kost Adi Auto SinggahSini |
+      | Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -88,7 +88,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 08916727111    | 08916727111    | qwerty123    |
-    And owner go to bill page of kost "Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
+    And owner go to bill page of kost "Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 		

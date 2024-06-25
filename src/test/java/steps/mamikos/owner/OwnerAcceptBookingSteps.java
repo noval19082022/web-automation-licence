@@ -51,6 +51,7 @@ public class OwnerAcceptBookingSteps {
         var maxLoop = 0;
         loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
+        ownerDashboard.dismissFTUEGoldplus();
         do {
             pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
             maxLoop++;
@@ -71,6 +72,7 @@ public class OwnerAcceptBookingSteps {
     @When("owner accept booking and select the room")
     public void ownerAcceptBookingAndSelectTheRoom() throws InterruptedException {
         ownerDashboard.clickOnManagementKost();
+        ownerDashboard.dismissFTUEGoldplus();
         pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage = pengajuanBooking.ownerAcceptBooking();
         billBookingManage.clickOnRoomNumberInput();

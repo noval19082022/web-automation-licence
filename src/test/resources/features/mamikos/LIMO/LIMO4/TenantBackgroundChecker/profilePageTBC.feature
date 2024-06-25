@@ -29,7 +29,7 @@ Feature: Profile Tenant Background Checker
       When user login as owner:
         | phone stag   | phone prod   | password  |
         | 083355251030 | 083355251030 | qwerty123 |
-      And user click chat button in top bar owner home page
-      And owner Non GP open TBC Lihat Profil at chatroom "Narendra Putra"
+      And owner wants to accsess chatroom
+      And owner Non GP open TBC Lihat Profil at chatroom "Rega Tenant Tiga"
       When owner click button "Beli Paket" on TBC page
       Then owner redirect to select package GP2 page

@@ -119,4 +119,8 @@ public class DataBookingSteps {
         dataBooking.clickOnSendRejectBookingButton();
     }
 
+    @And("admin search kost all testing and tenant phone number {string}")
+    public void admin_search_kost_all_testing_and_tenant_phone_number(String text){
+    dataBooking.searchAllTestingKost(text);
+    }
 }

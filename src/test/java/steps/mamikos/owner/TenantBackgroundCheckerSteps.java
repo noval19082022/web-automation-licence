@@ -55,7 +55,7 @@ public class TenantBackgroundCheckerSteps {
 
     @And("owner open TBC Lihat Profil at chatroom {string}")
     public void owner_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
-        chat.dismissFTUEMarsGPAndBroadCast();
+        chat.dismissFTUEMarsGPAndBroadCastIfExist();
         chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();

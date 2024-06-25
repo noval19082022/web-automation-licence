@@ -39,14 +39,19 @@ public class BroadcastChatSteps {
         broadcast.selectMessageOptionBC(option);
     }
 
-    @When("user click back arrow button on BC page")
+    @When("user/owner click back arrow button on BC page")
     public void user_click_back_arrow_button_on_BC_page() {
         broadcast.clickOnBackButtonBC();
     }
 
+    @Then("user verify input broadcast message is visible")
+    public void user_verify_input_broadcast_message_is_visible() {
+        Assert.assertTrue(broadcast.isTextFieldBCMessageDisplayed());
+    }
+
     @Then("user verify input broadcast message is not visible")
     public void user_verify_input_broadcast_message_is_not_visible() {
-        broadcast.isTextFieldBCMessageDisplayed();
+        Assert.assertFalse(broadcast.isTextFieldBCMessageDisplayed());
     }
 
     @When("user clicks on the close icon next to the search bar to reset it")
@@ -74,7 +79,7 @@ public class BroadcastChatSteps {
         broadcast.inputBroadcastMessage(message);
     }
 
-    @When("user input multiple lanes message on Broadcast Chat:")
+    @When("user/owner input multiple lanes message on Broadcast Chat:")
     public void user_input_multiple_lanes_message_on_broadcast_chat(String message) {
         broadcast.inputBroadcastMessage(message);
     }
@@ -184,6 +189,12 @@ public class BroadcastChatSteps {
         broadcast.searchKostBC(kostName);
     }
 
+    @When("user/owner tap on add broadcast chat")
+    public void addBroadcastChat() {
+        loading.waitForLoadingIconDisappear();
+        broadcast.clickOnTambahBroadcastChatButton();
+    }
+
     @When("owner clicks Kos {string} and Pilih Kos button")
     public void ownerClicksPilihKosButton(String kostName) {
         broadcast.clickOnTambahBroadcastChatKostNameResult(kostName);
@@ -245,5 +256,15 @@ public class BroadcastChatSteps {
     @When("user click on lihat invoice button")
     public void userClickOnLihatInvoiceButton() {
         broadcast.clickOnLihatInvoiceButton();
+    }
+
+    @And("user/owner dismiss FTUE Broadcast if exist")
+    public void userOwnerDismissFTUEBroadcastIfExist() {
+        broadcast.dismisFtuebroadcastIfExist();
+    }
+
+    @And("owner click button ubah to change kos broadcast")
+    public void ownerClickButtonUbahToChangeKosBroadcast() {
+        broadcast.clickOnUbahKostBroadcast();
     }
 }
