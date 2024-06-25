@@ -52,14 +52,6 @@ public class MamiprimePendaftaranSteps {
         Assert.assertTrue(mamiprimePendaftaran.isListPeriodeAppear(),"List periode not appear");
     }
 
-    @When("owner already choose period {string} with price {string}")
-    public void owner_already_choose_period_with_price(String periode, String price) {
-        Assert.assertEquals(mamiprimePendaftaran.getPeriodPrime(periode),periode,"Periode not equals");
-        Assert.assertEquals(mamiprimePendaftaran.getPricePeriod(price),price,"Price prime not equals");
-        mamiprimePendaftaran.clickOnPeriodePrime(periode);
-        mamiprimePendaftaran.clickOnlanjutBayarPrime();
-    }
-
     @When("owner wants to change {string} at detail tagihan page")
     public void owner_wants_to_change_at_detail_tagihan_page(String packgaePrime) {
         Assert.assertTrue(mamiprimePendaftaran.isDetailTagihanAppear(),"detail tagihan page doesnt appear");
