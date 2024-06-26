@@ -28,7 +28,7 @@ public class HomePO {
     private Locator flashSalePromoInfoList;
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
-    private Locator firstKostPromo;
+    private Locator firstKostPromoIcon;
     private Locator lihatPengajuanLainBtn;
     Locator areaKosTerpopulerTitle;
 
@@ -138,7 +138,7 @@ public class HomePO {
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
         this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
         flashSaleIcon = page.getByText("flash");
-        this.firstKostPromo = page.locator(".rc-price__other-promo-icon").first();
+        this.firstKostPromoIcon = page.locator(".rc-price__other-promo-icon").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
         this.singgahsiniApikMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Singgahsini & Apik"));
         this.kosAndalanMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Andalan"));
@@ -385,11 +385,11 @@ public class HomePO {
         Page nextPage;
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(1000);
-            if (firstKostPromo.isVisible()) {
+            if (firstKostPromoIcon.isVisible()) {
                 break;
             }
         }
-        nextPage = playwright.movePageByClickLocator(page, firstKostPromo);
+        nextPage = playwright.movePageByClickLocator(page, firstKostPromoIcon);
         return new KostDetailsPO(nextPage);
     }
 
