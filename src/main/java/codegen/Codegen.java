@@ -25,6 +25,7 @@ public class Codegen {
 //            loginPMS(page);
 //            loginAdminBangkrupux(page);
 //            page.navigate("https://jambu.kerupux.com/cek-properti");
+//            loginHarvestDashboard(page);
             page.pause();
         }
     }
@@ -80,5 +81,12 @@ public class Codegen {
 
     public static void checkProperty(Page page){
         page.navigate("https://jambu.kerupux.com/cek-properti");
+    }
+
+    public static void loginHarvestDashboard(Page page){
+        page.navigate("https://jambu.kerupux.com/leads/harvest/auth");
+        page.getByPlaceholder("Masukkan email Mamikos").fill("pman@mamiteam.com");
+        page.getByPlaceholder("Masukkan Password").fill("pmanM4m1t34m");
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login")).click();
     }
 }
