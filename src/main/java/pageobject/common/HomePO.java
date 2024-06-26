@@ -28,7 +28,7 @@ public class HomePO {
     private Locator flashSalePromoInfoList;
     Locator dikelolaMamikosToggle;
     Locator dikelolaMamikosLabel;
-    private Locator kostPromo;
+    private Locator firstKostPromoIcon;
     private Locator lihatPengajuanLainBtn;
     Locator areaKosTerpopulerTitle;
 
@@ -138,7 +138,7 @@ public class HomePO {
         this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
         this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
         flashSaleIcon = page.getByText("flash");
-        this.kostPromo = page.locator(".rc-photo__cover").first();
+        this.firstKostPromoIcon = page.locator(".rc-price__other-promo-icon").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
         this.singgahsiniApikMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Singgahsini & Apik"));
         this.kosAndalanMenuDropDown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kos Andalan"));
@@ -151,7 +151,7 @@ public class HomePO {
         //footer
         this.tentangKamiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Tentang Kami"));
         this.kebijakanPrivasiButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kebijakan Privasi"));
-        this.kebijakanPrivasiTitle = page.locator("#__layout h1");
+        this.kebijakanPrivasiTitle = page.locator("#__nuxt h1");
         this.syaratKetentuanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan Umum"));
         this.jobMamikosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Job Mamikos"));
         this.promosikanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Promosikan Kost Anda"));
@@ -164,7 +164,7 @@ public class HomePO {
         this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp +6281325111171"));
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
-        this.instagramButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("instagram"));
+        this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
         this.copyrightFooter = page.getByText("© 2024 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
         this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
@@ -385,11 +385,11 @@ public class HomePO {
         Page nextPage;
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(1000);
-            if (kostPromo.isVisible()) {
+            if (firstKostPromoIcon.isVisible()) {
                 break;
             }
         }
-        nextPage = playwright.movePageByClickLocator(page, kostPromo);
+        nextPage = playwright.movePageByClickLocator(page, firstKostPromoIcon);
         return new KostDetailsPO(nextPage);
     }
 
