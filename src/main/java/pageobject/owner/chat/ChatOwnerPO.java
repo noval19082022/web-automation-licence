@@ -72,7 +72,7 @@ public class ChatOwnerPO {
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md']");
         weeklyQuotaChatlistHeader = page.getByText("Sisa Kuota: information-round");
-        weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
+        weeklyQuotaChatroomHeader = page.locator("//div[@class='mc-chat-room-quota-info__detail']");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
         gpPacakgeText = page.getByTestId("popperReference");
