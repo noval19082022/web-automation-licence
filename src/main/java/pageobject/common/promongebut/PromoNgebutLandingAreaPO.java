@@ -14,6 +14,7 @@ public class PromoNgebutLandingAreaPO {
     private Locator promoNgebutBanner;
     private Locator filterContainer;
     private Locator discountIcon;
+    private Locator firstKostPhoto;
 
     public PromoNgebutLandingAreaPO(Page page) {
         this.page = page;
@@ -22,6 +23,7 @@ public class PromoNgebutLandingAreaPO {
         promoNgebutBanner = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.HEADING, new Locator.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
         filterContainer = page.locator(".filter-wrapper-container");
         discountIcon = page.locator(".rc-price__discount-icon > use");
+        firstKostPhoto = page.locator(".bg-c-picture__img").first();
     }
 
     /**
@@ -57,11 +59,9 @@ public class PromoNgebutLandingAreaPO {
     }
 
     /**
-     * Click on promo icon to go to kost details
-     * @param index int type
-     * @return Page playwright
+     * Click on kost photo to go to kost details
      */
-    public Page clickOnPromoIconIndex(int index) {
-       return playwright.movePageByClickLocator(page, getDiscountIconLocators().get(index));
+    public void clickOnFirstKostPhoto() {
+        playwright.clickOn(firstKostPhoto);
     }
 }
