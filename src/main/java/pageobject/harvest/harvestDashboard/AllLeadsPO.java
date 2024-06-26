@@ -311,8 +311,8 @@ public class AllLeadsPO {
      */
     public String subtitleConfirmationPerubahanBelumTersimpanPopUp() {
         String full = playwright.getText(subtitleConfirmationPerubahanBelumTersimpan);
-        String result = full.replace("Terdapat perubahan yang belum disimpan.\n" +
-                "         Simpan perubahan sebelum melanjutkan?", "Terdapat perubahan yang belum disimpan." + " Simpan perubahan sebelum melanjutkan?");
+        String[] resultSplit = full.split("\\n");
+        String result = resultSplit[0].concat(" "+resultSplit[1].trim());
         System.out.println(result);
         return result;
     }
