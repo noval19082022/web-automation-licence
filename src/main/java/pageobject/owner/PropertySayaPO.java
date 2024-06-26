@@ -62,6 +62,7 @@ public class PropertySayaPO {
     Locator editDataKos;
     Locator fasilitasFeature;
     Locator editSelesaiButton;
+    Locator editDataLainBtn;
     Locator titleSuccessEditPopUpText;
     Locator doneButtonEditKosPopUp;
     Locator locationTextBox;
@@ -103,6 +104,10 @@ public class PropertySayaPO {
     Locator errorMessage;
     Locator yearDropdown;
     Locator ubahFoto;
+    Locator hapusFotoPeraturan;
+    Locator aturPeraturanBtn;
+    Locator tambahFotoBtn;
+    Locator fotoPeraturan;
     Locator lanjutkanButton;
     Locator inputLocation;
     Locator firstLocationSuggestion;
@@ -197,6 +202,7 @@ public class PropertySayaPO {
     Locator hoverButtonsOnPhoto;
     Locator deletePhotoHover;
     Locator movePhotoHover;
+    Locator photoPreview;
     Locator lanjutkanButtonMovePhoto;
     Locator toastMessageNotSelectedPhoto;
     Locator selectPhotoToMoved;
@@ -245,6 +251,7 @@ public class PropertySayaPO {
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
+        editDataLainBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Data Lain"));
         titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
         locationTextBox = page.getByTestId("mamikosInput");
@@ -276,6 +283,10 @@ public class PropertySayaPO {
         uploadPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload Peraturan"));
         errorMessage = page.locator(".images__error");
         ubahFoto = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Foto"));
+        hapusFotoPeraturan = page.getByText("delete Hapus Foto");
+        aturPeraturanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Atur Peraturan"));
+        tambahFotoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Foto"));
+        fotoPeraturan = page.locator(".image-uploader__preview").first();
         lanjutkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
         inputLocation = page.locator("//*[@data-testid='mamikosInput']");
         firstLocationSuggestion = page.locator("//*[@data-testid='suggestionItem']").first();
@@ -357,6 +368,7 @@ public class PropertySayaPO {
         hoverButtonsOnPhoto = page.locator(".preview__menu");
         deletePhotoHover = page.getByText("delete Hapus Foto");
         movePhotoHover = page.getByText("sorting Pindahkan Foto");
+        photoPreview = page.locator(".image-uploader__preview");
         lanjutkanButtonMovePhoto = page.locator("button").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Lanjutkan$")));
         selectPhotoToMoved = page.locator("label span").first();
         pindahkanPhotoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pindahkan"));
@@ -790,9 +802,9 @@ public class PropertySayaPO {
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        page.waitForLoadState(LoadState.LOAD);
+        playwright.waitTillPageLoaded();
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
-        playwright.waitTillLocatorIsVisible(editDataKos, 5_000.0);
+        playwright.waitTillLocatorIsVisible(editDataKos, 9_000.0);
         playwright.clickOn(editDataKos);
     }
 
@@ -1360,6 +1372,9 @@ public class PropertySayaPO {
      */
     public void uploadValidAturanKos() {
         String imagePath = "src/main/resources/images/aturan-kos.png";
+        if (playwright.waitTillLocatorIsVisible(aturPeraturanBtn)) playwright.clickOn(aturPeraturanBtn);
+        deleteFotoAturanKostIfVisible();
+
         if (ubahFoto.isVisible()) {
             FileChooser fileChooser = page.waitForFileChooser(() -> ubahFoto.click());
             fileChooser.setFiles(Paths.get(imagePath));
@@ -1372,6 +1387,17 @@ public class PropertySayaPO {
             playwright.hardWait(3000);
         }
 
+    }
+
+    /**
+     * delete foto aturan kos if exist on edit kos page
+     *
+     */
+    public void deleteFotoAturanKostIfVisible() {
+        if (playwright.waitTillLocatorIsVisible(fotoPeraturan)) {
+            fotoPeraturan.hover();
+            playwright.clickOn(hapusFotoPeraturan);
+        }
     }
 
     /**
@@ -2295,6 +2321,18 @@ public class PropertySayaPO {
 
     /**
      * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     *
+     */
+    public void hoverPhoto(int order) {
+        if (order <= 0) {
+            order = 1;
+        }
+        var photo = photoPreview.nth(order-1);
+        photo.hover();
+    }
+
+    /**
+     * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
      * @param photoLocation
      */
     public void hoverPhoto(String photoLocation) {
@@ -2412,5 +2450,26 @@ public class PropertySayaPO {
      */
     public boolean isFavoritedSectionVisible() {
         return playwright.waitTillLocatorIsVisible(favoritedSection);
+    }
+
+    public void clickOnEditDataLainButton() {
+        playwright.clickOn(editDataLainBtn);
+    }
+
+    /**
+     * delete photo kost on property management
+     */
+    public void deleteFotoKostIfVisible(int order) {
+        if (order <= 0) {
+            order = 1;
+        }
+        playwright.clickOn(deletePhotoHover.nth(order-1));
+    }
+
+    /**
+     * tap on update harga if button exist
+     */
+    public void clickOnUpdateHargaIfExist() {
+        if (playwright.waitTillLocatorIsVisible(updatePriceButton)) playwright.clickOn(updatePriceButton);
     }
 }

@@ -145,3 +145,56 @@ Feature: Edit Kost
     And user click button edit "Foto Kos" kos
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
+
+  @TEST_LIMO-2726 @continue
+  Scenario: [Edit kos][Edit data needs verification process]Status kos == active or reject && owner edit data needs verification process
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787881 |            | qwerty123 |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "PAPASUKA GENIT" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Data Kos" kos
+    And owner fills valid data kos as expected
+      | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+    And owner upload valid rule kos
+    And owner click button edit finished
+    Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
+    And owner click button edit data lain
+    And user click button edit "Alamat Kos" kos
+    And owner input address is "Tobelo"
+    And owner input address note "depan rumah jokowi" and random text
+    And owner click button edit finished
+    Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
+    And owner click button edit data lain
+    And user click button edit "Foto Kos" kos
+    And owner remove photo for the order "1"
+    And owner upload valid photo "bangunan tampak depan"
+    And owner click button edit finished
+    Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
+    And owner click button edit data lain
+    And user click button edit "Foto Kamar" kos
+    And owner remove photo for the order "1"
+    And owner upload valid photo "depan kamar"
+    And owner click button edit finished
+    Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
+    And user click done in success page pop up of edit kos
+    Then user see kos with name "PAPASUKA GENIT", status "Diperiksa Admin" and type "Kos Campur"
+#    Examples:
+#      | kost nama      |
+#      | PAPASUKA GENIT |
+
+  @TEST_LIMO-2726
+  Scenario: Verify kos in admin
+    Given user logs out
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
+    And user verify the kos in admin kos owner
