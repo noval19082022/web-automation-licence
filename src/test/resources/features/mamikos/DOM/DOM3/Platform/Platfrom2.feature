@@ -43,7 +43,7 @@ Feature: [Test-Execution][DOM] Web - Platform\
     And owner wants to see all notification
     Then user redirected to "/ownerpage/notification"
 
-  @TEST_COOP-5400 @TESTSET_UG-6228 @Automated @DOM3 @web-covered @gizkara
+  @TEST_COOP-5400 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -51,7 +51,7 @@ Feature: [Test-Execution][DOM] Web - Platform\
     And tenant set active page to 1
     Then user redirected to "https://www.instagram.com/mamikosapp/"
 
-  @TEST_COOP-5401@TESTSET_UG-6228 @Automated @DOM3 @web-covered @gizkara
+  @TEST_COOP-5401@TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -59,7 +59,7 @@ Feature: [Test-Execution][DOM] Web - Platform\
     And tenant set active page to 1
     Then user redirected to "https://x.com/mamikosapp"
 
-  @TEST_COOP-5402 @TESTSET_UG-6228 @Automated @DOM3 @web-covered @gizkara
+  @TEST_COOP-5402 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
