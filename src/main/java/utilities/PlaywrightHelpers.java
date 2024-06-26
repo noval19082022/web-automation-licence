@@ -580,6 +580,14 @@ public class PlaywrightHelpers {
     //---- Locator Part ----\\
 
     /**
+     * hover specific locator
+     * @param locator
+     */
+    public void hover(Locator locator) {
+        locator.hover();
+    }
+
+    /**
      * Filter html tag locator that contains target text
      *
      * @param locator Locator data type

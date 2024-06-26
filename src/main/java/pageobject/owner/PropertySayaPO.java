@@ -1395,7 +1395,7 @@ public class PropertySayaPO {
      */
     public void deleteFotoAturanKostIfVisible() {
         if (playwright.waitTillLocatorIsVisible(fotoPeraturan)) {
-            fotoPeraturan.hover();
+            playwright.hover(fotoPeraturan);
             playwright.clickOn(hapusFotoPeraturan);
         }
     }
@@ -2328,7 +2328,7 @@ public class PropertySayaPO {
             order = 1;
         }
         var photo = photoPreview.nth(order-1);
-        photo.hover();
+        playwright.hover(photo);
     }
 
     /**
