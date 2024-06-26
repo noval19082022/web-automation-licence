@@ -1,5 +1,6 @@
 @DOM3 @platfrom
-Feature: [Test-Execution][DOM] Web - Platform\
+Feature: [Test-Execution][DOM] Web - Platform
+  
   @TEST_COOP-5392 @Automated @DOM3 @web-covered
   Scenario: [Test][Admin][SanJunipero] Slug name already exist
     Given admin go to mamikos bangkrupux admin
