@@ -244,7 +244,8 @@ public class OwnerDashboardPO {
      *
      */
     public void clickNotificationButton() {
-        playwright.clickOn(notificationButton);
+        playwright.delayAndClickOn(notificationButton, 3_000.0);
+//        playwright.clickOn(notificationButton);
     }
 
     /**
