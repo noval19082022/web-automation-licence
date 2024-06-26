@@ -279,8 +279,7 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isAttachmentButtonDisabled() {
-        playwright.hardWait(3000);
-        playwright.clickOn(sayaMengertiChatRoom);
+        playwright.delayAndClickOn(sayaMengertiChatRoom, 3000.0);
         playwright.waitTillLocatorIsVisible(attachmentButton);
         return playwright.isButtonEnable(attachmentButton);
     }
@@ -404,10 +403,14 @@ public class ChatOwnerPO {
      * click on lihat button on JB coachmark
      */
     public void dismissFTUEJemputBola() {
-        playwright.clickOn(lihatFiturFTUEJB);
+        if (playwright.isTextDisplayed("Lihat Fitur")) {
+            playwright.clickOn(lihatFiturFTUEJB);
+        }
+       // playwright.clickOn(lihatFiturFTUEJB);
         playwright.navigateTo(Mamikos.OWNER_URL);
         this.clickChatOwner();
     }
+
 
     /**
      * dismiss FTUE lihat profil penyewa on detail chatroom

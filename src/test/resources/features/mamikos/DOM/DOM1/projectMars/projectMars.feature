@@ -25,7 +25,7 @@ Feature: Mars Project
       | 0888881241     | 0888881243     | qamamikos123  |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Tenant Mars"
+    And search chat in chatlist "Vu Zet"
     Then user see attachment button is disabled
 
   @TEST_COOP-5250 @Automated @MARS-DOM @Web @discovery-platform
