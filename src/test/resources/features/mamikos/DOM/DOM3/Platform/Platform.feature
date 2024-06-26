@@ -387,7 +387,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user open instagram in footer
     And tenant set active page to 1
-    Then user redirected to "instagram.com/mamikosapp"
+    Then user redirected to "https://www.instagram.com/accounts/login/?hl=en"
 
   @TEST_COOP-5401@TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
@@ -395,7 +395,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user is on the LandingPage EnaknyaNgekos
     And user open twitter in footer
     And tenant set active page to 1
-    Then user redirected to "https://twitter.com/mamikosapp"
+    Then user redirected to "https://x.com/mamikosapp"
 
   @TEST_COOP-5402 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
