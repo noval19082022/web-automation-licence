@@ -51,6 +51,7 @@ public class OwnerAcceptBookingSteps {
         var maxLoop = 0;
         loading.waitForLoadingIconDisappear();
         ownerDashboard.clickOnManagementKost();
+        ownerDashboard.dismissFTUEGoldplus();
         do {
             pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
             maxLoop++;

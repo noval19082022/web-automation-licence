@@ -42,6 +42,13 @@ public class DataBookingPO {
     Locator rejectReasonDropdown;
     Locator sendRejectButton;
 
+    //------------search data---------//
+    Locator showAllButton;
+    Locator allKostDropdown;
+    Locator allKostTestingDropdown;
+    Locator filterButton;
+    Locator phoneNumberTextField;
+
     public DataBookingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -62,10 +69,15 @@ public class DataBookingPO {
         this.rentCountDropdown = page.locator("#inputRentCount");
         this.checkinDate = page.locator("#inputCheckin");
         this.rentDurationDropdown = page.locator("#inputDuration");
-        this.firstActionButton = page.locator("//button[@class='btn btn-default btn-sm dropdown-toggle']").first();
-        this.rejectActionButton = page.getByTitle("Tolak Booking").first();
+        this.firstActionButton = page.locator("//button[@class=\"btn btn-default btn-sm dropdown-toggle\"]").first();
+        this.rejectActionButton = page.locator("//*[@title=\"Tolak Booking\"]").first();
         this.rejectReasonDropdown = page.getByRole(AriaRole.COMBOBOX);
         this.sendRejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send"));
+        this.showAllButton = page.getByText("Tampilkan Filter");
+        this.allKostDropdown = page.locator("#select2-kost_type-container");
+        this.allKostTestingDropdown = page.getByRole(AriaRole.TREEITEM, new Page.GetByRoleOptions().setName("All Testing"));
+        this.filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
+        this.phoneNumberTextField = page.getByPlaceholder("Ex: 081987654321");
     }
 
     /**
@@ -256,5 +268,16 @@ public class DataBookingPO {
     public void clickOnSendRejectBookingButton() {
         sendRejectButton.click();
         playwright.hardWait(3000);
+    }
+
+    /**
+     * search phone number and all testing kost
+     */
+    public void searchAllTestingKost(String text){
+        playwright.clickOn(showAllButton);
+        playwright.forceFill(phoneNumberTextField, text);
+        playwright.clickOn(allKostDropdown);
+        playwright.clickOn(allKostTestingDropdown);
+        playwright.clickOn(filterButton);
     }
 }

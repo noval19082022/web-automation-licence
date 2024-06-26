@@ -280,7 +280,7 @@ public class ChatOwnerPO {
      */
     public boolean isAttachmentButtonDisabled() {
         playwright.hardWait(3000);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+        playwright.clickOn(sayaMengertiChatRoom);
         playwright.waitTillLocatorIsVisible(attachmentButton);
         return playwright.isButtonEnable(attachmentButton);
     }

@@ -80,8 +80,8 @@ public class PromoPage {
         Assert.assertTrue(promo.promoTitleDisplayed(), "Promo Title is not appear");
     }
 
-    @Then("user see use promo button")
-    public void userSeeUsePromoButton() {
-        Assert.assertTrue(promo.usePromoButtonDisplayed(), "Use Promo button is not appear");
+    @And("user see promo description")
+    public void userSeePromoDescription() {
+        Assert.assertTrue(promo.promoDescriptionDisplayed(), "Promo description is not appear");
     }
 }

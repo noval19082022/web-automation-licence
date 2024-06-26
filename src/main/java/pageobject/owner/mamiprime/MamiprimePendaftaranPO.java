@@ -18,10 +18,10 @@ public class MamiprimePendaftaranPO {
     Locator informationFullforPrime;
     Locator descInformationPrime;
     Locator listAllPeriode;
-    Locator btnLanjutBayar;
     Locator ubahTagihanPrime;
     Locator ubahTagihanPrimeHeader;
     Locator registerPrimeHeader;
+    Locator btnLanjutBayar;
 
 
     public MamiprimePendaftaranPO(Page page) {
@@ -34,12 +34,10 @@ public class MamiprimePendaftaranPO {
         this.informationFullforPrime = page.locator("//h4[@class='bg-c-empty-state__title']");
         this.descInformationPrime = page.locator(".bg-c-empty-state__description");
         this.listAllPeriode = page.locator(".prime-period__grid");
-        this.btnLanjutBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Bayar"));
         this.ubahTagihanPrime = page.locator(".prime-payment-detail__change-package");
         this.ubahTagihanPrimeHeader = page.locator(".bg-c-text--heading-4");
         this.registerPrimeHeader = page.locator(".prime-package__title");
-
-
+        this.btnLanjutBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Bayar"));
 
     }
 
@@ -130,39 +128,20 @@ public class MamiprimePendaftaranPO {
     }
 
     /**
-     * Verify periode prime
-     * @param periode
-     * return periode
-     */
-    public String getPeriodPrime(String periode) {
-        Locator periodeResult = page.getByText(periode);
-        return playwright.getText(periodeResult);
-    }
-
-    /**
-     * Verify price at periode prime
-     * @param pricePrime
-     * return price peride
-     */
-    public String getPricePeriod(String pricePrime) {
-        Locator pricePrimeResult = page.getByText(pricePrime);
-        return playwright.getText(pricePrimeResult);
-    }
-
-    /**
-     * Click on periode selected
-     */
-    public void clickOnPeriodePrime(String pricePrime) {
-        Locator pricePrimeResult = page.getByText(pricePrime);
-        playwright.waitFor(pricePrimeResult);
-        playwright.clickOn(pricePrimeResult);
-    }
-
-    /**
      * Click on button lanjut bayar prime
      */
     public void clickOnlanjutBayarPrime() {
         playwright.clickOn(btnLanjutBayar);
+    }
+
+    /**
+     * Verified button lanjut bayar on periode mamiprime is disable or enable
+     *
+     * @return true or false
+     */
+    public boolean isLanjutBayarButtonDisable()  {
+        playwright.waitFor(btnLanjutBayar);
+        return playwright.isButtonDisable(btnLanjutBayar);
     }
 
     /**
