@@ -56,14 +56,14 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        if (playwright.isTextDisplayed("Ajukan Sewa", 20)){
+        if (playwright.isTextDisplayed("Saya Mengerti", 5)) {
+            kostDetail.dismissFTUE();
             Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-      }
-        else{
-            kostDetail.dismissFTUEIfExist();
-            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-         }
         }
+        else{
+            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+        }
+    }
 
     @And("tenant enter text {string} in chat page")
     public void tenantEnterTextInChatPage(String chatMsg) {
@@ -92,7 +92,7 @@ public class ChatTenantSteps {
 
     @And("user batalkan survey if the survey already submitted")
     public void user_cancel_survey() {
-        if (playwright.isButtonWithTextDisplayed("Ubah Jadwal",20)) {
+        if (playwright.isTextDisplayed("Ubah Jadwal", 5)) {
             chat.clickOnUbahJadwalOnHeaderChatRoomButton();
             chat.clickOnBatalkanSurveiButton();
             chat.clickOnSurveyKosButton();
