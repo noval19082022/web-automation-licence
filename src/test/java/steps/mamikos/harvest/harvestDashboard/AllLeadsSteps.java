@@ -2,16 +2,21 @@ package steps.mamikos.harvest.harvestDashboard;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.harvest.harvestDashboard.AllLeadsPO;
+import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
 import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
 
 public class AllLeadsSteps {
 
     Page page = ActiveContext.getActivePage();
     AllLeadsPO allLeads = new AllLeadsPO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
 
     private String harvestDashboard = "src/test/resources/testdata/harvest/harvestDashboard.properties";
     private String titleConfirmationBatalkanPopUp = JavaHelpers.getPropertyValue(harvestDashboard, "titleConfirmationBatalkanPopUp");
@@ -132,4 +137,32 @@ public class AllLeadsSteps {
         allLeads.clicksOnPage(page);
     }
     //--- End of Pagination ---//
+
+    @Then("admin should redirect to Harvest Dashboard")
+    public void admin_should_redirect_to_harvest_dashboard() {
+        Assert.assertTrue(allLeads.isAllLeadsTableVisible());
+        Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/all-leads");
+        Assert.assertEquals(allLeads.getProfileName(),"Automation Pman");
+        Assert.assertEquals(playwright.getPageTitle(),"Mamikos Harvest");
+    }
+    @Then("admin stay in login harvest page")
+    public void admin_stay_in_login_harvest_page() {
+        Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/leads/harvest/auth");
+    }
+    @Then("show login harvest error message {string}")
+    public void show_login_harvest_error_message(String errorMessage) {
+        Assert.assertEquals(loginHarvestDashboard.getLoginHarvestErrorMessage(),errorMessage);
+    }
+    @Then("login button is disabled")
+    public void login_button_is_disabled() {
+        Assert.assertFalse(loginHarvestDashboard.isLoginButtonEnable());
+    }
+    @When("admin logout harvest")
+    public void admin_logout_harvest() {
+        allLeads.logoutHarvest();
+    }
+    @Then("admin redirect to login harvest page")
+    public void admin_redirect_to_login_harvest_page() {
+        Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/leads/harvest/auth");
+    }
 }

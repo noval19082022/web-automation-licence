@@ -941,4 +941,12 @@ public class PlaywrightHelpers {
                 "document.documentElement.scrollTop = 0; " +
                 "}");
     }
+
+    /**
+     * Get page title
+     * @return String
+     */
+    public String getPageTitle() {
+        return page.title();
+    }
 }

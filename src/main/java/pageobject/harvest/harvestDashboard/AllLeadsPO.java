@@ -11,6 +11,8 @@ public class AllLeadsPO {
     private PlaywrightHelpers playwright;
 
     Locator allLeadsTitlePage;
+    Locator profileNameText;
+    Locator logoutButton;
 
     //--- Edit Table ---//
     Locator editTableButton;
@@ -50,6 +52,8 @@ public class AllLeadsPO {
         playwright = new PlaywrightHelpers(page);
 
         allLeadsTitlePage = page.getByText("All Leads Table");
+        profileNameText = page.locator(".user-data-profile p").first();
+        logoutButton = page.getByText("Logout", new Page.GetByTextOptions().setExact(true));
 
         //--- Edit Table ---//
         editTableButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("editEdit Table"));
@@ -315,6 +319,21 @@ public class AllLeadsPO {
         String result = resultSplit[0].concat(" "+resultSplit[1].trim());
         System.out.println(result);
         return result;
+    }
+
+    /**
+     * Get profile name
+     * @return String
+     */
+    public String getProfileName() {
+        return playwright.getText(profileNameText);
+    }
+
+    /**
+     * Logout harvest
+     */
+    public void logoutHarvest() {
+        playwright.clickOn(logoutButton);
     }
     //--- End of Confirmation Perubahan Belum Tersimpan ---//
 }

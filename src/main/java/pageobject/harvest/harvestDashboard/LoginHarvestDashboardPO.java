@@ -15,6 +15,7 @@ public class LoginHarvestDashboardPO {
     Locator emailField;
     Locator passwordField;
     Locator loginButton;
+    Locator errorMessageText;
 
     public LoginHarvestDashboardPO(Page page){
         this.page = page;
@@ -23,6 +24,7 @@ public class LoginHarvestDashboardPO {
         emailField = page.getByPlaceholder("Masukkan email Mamikos");
         passwordField = page.getByPlaceholder("Masukkan Password");
         loginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
+        errorMessageText = page.locator(".bg-c-field__message");
     }
 
     /**
@@ -54,5 +56,28 @@ public class LoginHarvestDashboardPO {
     public void clicksLogin() {
         playwright.clickOn(loginButton);
         page.waitForLoadState();
+    }
+
+    /**
+     * Get error message in Login Harvest
+     * @return String
+     */
+    public String getLoginHarvestErrorMessage() {
+        return playwright.getText(errorMessageText);
+    }
+
+    /**
+     * Verify login button enable
+     * @return Boolean
+     */
+    public boolean isLoginButtonEnable() {
+        return playwright.isButtonEnable(loginButton);
+    }
+
+    /**
+     * Navigate to Harvest Dashboard
+     */
+    public void navigateToHarvestDashboard() {
+        playwright.navigateTo(Mamikos.URL+"/leads/harvest/all-leads",10000.0,LoadState.LOAD);
     }
 }
