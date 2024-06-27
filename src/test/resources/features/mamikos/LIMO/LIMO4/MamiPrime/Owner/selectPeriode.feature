@@ -10,6 +10,11 @@ Feature: Detail Pemesanan
     And owner navigate to pendaftaran mamiprime page
     Then owner will see additional information related to GP
 
+  @TEST_LIMO-5681 @continue
+  Scenario: [WEB][Mamikos Prime][Select Period] Check content at section select periode of prime
+    Then owner will see that the text "Kos yang terverifikasi akan muncul di sini." is displayed
+    Then owner will see that the text "Lama tayang kos di layanan MamiPrime." is displayed
+
   @TEST_LIMO-5682 @continue
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Doesn't select any periode
     Then Validate Lanjut Bayar button on periode mamiprime is disable
