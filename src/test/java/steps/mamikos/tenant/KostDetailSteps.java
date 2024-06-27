@@ -75,7 +75,7 @@ public class KostDetailSteps {
     @Then("user see promo owner section")
     public void userSeePromoOwnerSection() {
         playwright.pageScrollToDown(200);
-        kostDetail.clickOnSayaMengertiButton();
+        kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isPromoOwnerSectionDisplayed(), "Promo Owner Section is not displayed");
     }
 

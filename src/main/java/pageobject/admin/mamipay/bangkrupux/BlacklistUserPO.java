@@ -150,7 +150,7 @@ public class BlacklistUserPO {
      * get message after account blacklist
      */
     public String getMessageAcoountBlacklist() {
-        playwright.waitTillLocatorIsVisible(accountBlacklistMessage,2000.0);
+        playwright.waitTillLocatorIsVisible(accountBlacklistMessage);
         return playwright.getText(accountBlacklistMessage);
     }
 

@@ -15,8 +15,8 @@ import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
+import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
 import pageobject.owner.PropertySayaPO;
-import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -34,6 +34,7 @@ public class NavigatesSteps {
     LoadingPO loading = new LoadingPO(page);
     CheckPropertyPO checkProperty = new CheckPropertyPO(page);
     PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
+    LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -452,5 +453,13 @@ public class NavigatesSteps {
     @Given("admin wants to accsess prime setting")
     public void admin_wants_to_accsess_prime_setting() {
         playwright.navigateTo(Mamikos.URL + "/admin/prime", 30000.0, LoadState.LOAD);
+    }
+    @Given("admin navigates to Harvest Dashboard Login")
+    public void admin_navigates_to_Harvest_Dashboard_login(){
+        loginHarvestDashboard.navigateToHarvestDashboardLoginPage();
+    }
+    @When("admin navigates to Harvest Dashboard")
+    public void admin_navigates_to_harvest_dashboard() {
+        loginHarvestDashboard.navigateToHarvestDashboard();
     }
 }

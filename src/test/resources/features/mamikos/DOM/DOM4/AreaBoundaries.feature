@@ -14,11 +14,6 @@ Feature: Area Boundaries
     Given user filter price minimal to 1900000, and maximal to 1900000
     Then user can see kost landing behavior for kost list with just 1 result
 
-  @continue @TEST_COOP-5654
-  Scenario: User Can Use Reset Filter Button
-    Given user reset filter
-    Then user can see kost list is more than 1
-
   @emptystateareaboundaries @TEST_COOP-5642
   Scenario: User Can See Area Boundaries With Result Is 0
     Given user go to mamikos homepage

@@ -45,11 +45,12 @@ Feature: Flash Sale
     When user will see promo ngebut info on kost card
     Then user can see Promo Ngebut discount in nominal amount with normal price with strikethrough and "(Bulan pertama)" text on homepage
 
-  @TEST_COOP-3292 @continue
-  Scenario: [Home Page][WEB]Promo ngebut Nominal discount and atribute (other than first month)
-    Given user go to mamikos homepage
-    When user will see promo ngebut info on kost card
-    Then user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and "sewa 3 bulan" text on homepage
+#  No discount other than first month at this time
+#  @TEST_COOP-3292 @continue
+#  Scenario: [Home Page][WEB]Promo ngebut Nominal discount and atribute (other than first month)
+#    Given user go to mamikos homepage
+#    When user will see promo ngebut info on kost card
+#    Then user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and "sewa 3 bulan" text on homepage
 
   @TEST_COOP-4948
   Scenario: [Home Page][WEB]Visit Detail Kost that has Promo ngebut From Homepage (first month)
@@ -59,10 +60,11 @@ Feature: Flash Sale
     And user visit kost detail that has promo bulan pertama from homepage
     Then user will see that the text "(Bulan pertama)" is displayed
 
-  @TEST_COOP-4949
-  Scenario: [Home Page][WEB]Visit Detail Kost that has Promo ngebut From Homepage (other than first month)
-    Given user go to mamikos homepage
-    When user will see promo ngebut info on kost card
-    Then user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and "sewa 3 bulan" text on homepage
-    And user visit kost detail that has promo other than bulan pertama from homepage
-    Then user will see that the text "sewa 3 bulan" is displayed
+#  No discount other than first month at this time
+#  @TEST_COOP-4949
+#  Scenario: [Home Page][WEB]Visit Detail Kost that has Promo ngebut From Homepage (other than first month)
+#    Given user go to mamikos homepage
+#    When user will see promo ngebut info on kost card
+#    Then user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and "sewa 3 bulan" text on homepage
+#    And user visit kost detail that has promo other than bulan pertama from homepage
+#    Then user will see that the text "sewa 3 bulan" is displayed

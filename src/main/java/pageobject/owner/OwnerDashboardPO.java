@@ -191,7 +191,10 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
-        playwright.waitFor(manajemenKost);
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+            playwright.clickOnText("Nanti Saja");
+        }
+        playwright.waitTillLocatorIsVisible(manajemenKost);
         playwright.clickOn(manajemenKost);
     }
 
@@ -241,7 +244,7 @@ public class OwnerDashboardPO {
      *
      */
     public void clickNotificationButton() {
-        playwright.clickOn(notificationButton);
+        playwright.delayAndClickOn(notificationButton, 3_000.0);
     }
 
     /**

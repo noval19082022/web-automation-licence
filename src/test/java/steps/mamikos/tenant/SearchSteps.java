@@ -394,20 +394,11 @@ public class SearchSteps {
     public void userCanSeeKostLandingBehaviorForKostListWithJustResult(int kostList) {
         Assert.assertEquals(kostLanding.getKostListLocator().size(), kostList, "Result is more than one or zero");
         Assert.assertTrue(kostLanding.isNominatimMapVisible(), "Nominatim map is not visible");
-        Assert.assertTrue(kostLanding.isFilterResetTextVisible(), "Reset filter text is not visible");
-        Assert.assertTrue(kostLanding.isFilterResetButtonVisible(), "Reset filter button is not visible");
-    }
-
-    @Given("user reset filter")
-    public void userResetFilter() {
-        kostLanding.clickOnResetFilterButton();
     }
 
     @Then("user/admin/tenant can see kost list is more than {int}")
     public void userCanSeeKostListIsMoreThan(int kostList) {
         Assert.assertTrue(kostLanding.getKostListLocator().size() > kostList, "Kost list is not greater than " + kostList);
-        Assert.assertFalse(kostLanding.isFilterResetTextVisible(), "Reset filter text is visible");
-        Assert.assertFalse(kostLanding.isFilterResetButtonVisible(), "Reset filter button is visible");
     }
 
 

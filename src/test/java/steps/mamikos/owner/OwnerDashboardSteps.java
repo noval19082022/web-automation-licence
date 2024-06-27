@@ -22,6 +22,7 @@ public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
+    OwnerDashboardPO ownerDashboardGP = new OwnerDashboardPO(page);
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
     LoadingPO loading = new LoadingPO(page);
@@ -56,7 +57,8 @@ public class OwnerDashboardSteps {
     @When("owner open notification icon")
     public void owner_open_notification_icon() {
         ownerDashboardPO.clickNotificationButton();
-
+        ownerDashboardGP.dismissFTUEGoldplus();
+        ownerDashboardPO.clickNotificationButton();
     }
 
     @And("owner wants to see all notification")
@@ -360,6 +362,7 @@ public class OwnerDashboardSteps {
     @And("owner go to event banner section")
     public void onwerGoToEventBannerSection() {
         ownerDashboardPO.scrollIntoDariMamikosSection();
+        ownerDashboardGP.dismissFTUEGoldplus();
     }
 
     @And("owner click on banner on dari mamikos section")

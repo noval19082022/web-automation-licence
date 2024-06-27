@@ -11,15 +11,16 @@ Feature: Kost detail page
     Then user can see overview section on detail page
       | kost stag                                   | kost prod                                           |
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
-#
+
   @TEST_COOP-5469 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
   Scenario: [Dweb][Kost Detail] Check promo owner section login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And user want to select kost on promo section
-    And tenant set active page to 1
+    When tenant search kost then go to kost details:
+      | kost name stag                              | kost name prod                                      |
+      | Kost Rumah Jepang A CCC Depok Sleman        | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user see promo owner section
     #user want to ask to owner for more detail kost promo
     When user want to get more information about kost promo
@@ -28,7 +29,9 @@ Feature: Kost detail page
   @TEST_COOP-5470 @DOM4 @automated @discovery-platform @kost-details @web
   Scenario: [Dweb][Kost Detail] Check promo owner section non login
     Given user go to mamikos homepage
-    When user want to select kost on promo section
+    When tenant search kost then go to kost details:
+      | kost name stag                              | kost name prod                                      |
+      | Kost Rumah Jepang A CCC Depok Sleman        | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user see promo owner section
     # user want to ask to owner for more detail kost promo
     When user want to get more information about kost promo

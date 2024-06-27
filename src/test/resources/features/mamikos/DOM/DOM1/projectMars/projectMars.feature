@@ -22,10 +22,10 @@ Feature: Mars Project
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password      |
-      | 0888881243     | 0888881243     | qamamikos123  |
+      | 0888881241     | 0888881243     | qamamikos123  |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Tenant Mars"
+    And search chat in chatlist "Vu Zet"
     Then user see attachment button is disabled
 
   @TEST_COOP-5250 @Automated @MARS-DOM @Web @discovery-platform

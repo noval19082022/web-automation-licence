@@ -13,6 +13,8 @@ import pageobject.common.LoadingPO;
 import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class CommonSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -48,12 +50,14 @@ public class CommonSteps {
 
     @And("user/tenant/admin close unused browser tab")
     public void userCloseUnusedTab() {
-        var tabTotal = ActiveContext.getActiveBrowserContext().pages().size();
-        for (int i = tabTotal; i >= 0; i--) {
-            if (i == 1) break;
-            ActiveContext.getActiveBrowserContext().pages().get(i - 1).close();
+        List<Page> pages = ActiveContext.getActiveBrowserContext().pages();
+        int numberOfTabsToClose = Math.min(pages.size() - 1, 3);
+        for (int i = pages.size() - 1; i > 0 && numberOfTabsToClose > 0; i--) {
+            Page page = pages.get(i);
+            page.close();
+            numberOfTabsToClose--;
         }
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
+        ActiveContext.setActivePage(pages.get(0));
     }
 
     @Then("user/owner/tenant go back to previous page")

@@ -7,7 +7,6 @@ import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -16,6 +15,8 @@ import pageobject.admin.mamipay.bangkrupux.AdminBangkrupuxLoginPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.common.LoginPO;
+import pageobject.harvest.harvestDashboard.AllLeadsPO;
+import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.HomepagePO;
 import pageobject.pms.LoginPMSPO;
@@ -36,6 +37,8 @@ public class LoginSteps {
     LoginPMSPO loginPMS = new LoginPMSPO(page);
     HomepagePO homepage = new HomepagePO(page);
     OwnerLoginPO owner = new OwnerLoginPO(page);
+    LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
+    AllLeadsPO allLeads = new AllLeadsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     LoadingPO loading = new LoadingPO(page);
@@ -340,5 +343,15 @@ public class LoginSteps {
     @Then("user/owner redirect to login page")
     public void user_redirect_to_login_page() {
         Assert.assertEquals(playwright.getPageUrl(),Mamikos.LOGIN_USER);
+    }
+
+    @When("admin login Harvest Dashboard:")
+    public void admin_login_Harvest_Dashboard(DataTable tables){
+        pmsCredential = tables.asMaps(String.class, String.class);
+        String username = pmsCredential.get(0).get("email");
+        String password = pmsCredential.get(0).get("password");
+        loginHarvestDashboard.fillsUsername(username);
+        loginHarvestDashboard.fillsPassword(password);
+        loginHarvestDashboard.clicksLogin();
     }
 }

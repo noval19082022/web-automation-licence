@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Tetap On First Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
-      | kost name stag      | kost name prod            |
-      | Kost Bagas Auto Paid Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+      | kost name stag                                              | kost name prod            |
+      | Test Automation Kost Bagas Auto Paid Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -83,7 +83,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
     When user login as owner:
       | phone stag     | phone prod     | password     |
       | 089172812122 | 089172812122     | qwerty123    |
-    And owner go to bill page of kost "kost Bagas Auto Paid Tobelo Halmahera Utara" on month of "current"
+    And owner go to bill page of kost "Test Automation kost Bagas Auto Paid Tobelo Halmahera Utara" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 		

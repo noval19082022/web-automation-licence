@@ -119,8 +119,8 @@ Feature: Blacklist User
   Scenario: User try login via Facebook
     Given user go to mamikos homepage
     When user login as tenant via facebook:
-      | email stag                               |  email prod                               | password  |
-      | coop.blacklist@gmail.com  |  coop.blacklist@gmail.com  | mamikosqa |
+      | email stag                |  email prod                  | password  |
+      | febiregression21@gmail.com  |  coop.blacklist@gmail.com  | F3b1qwerty |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
   @TEST_DOM-2639 @TEST_COOP-5148

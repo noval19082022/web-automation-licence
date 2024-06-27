@@ -324,7 +324,7 @@ public class KostDetailsPO {
         this.loginByAppleIdBtn = page.getByTestId("loginAppleButton");
 
         //---------promo section-------------
-        this.promoOwnerSection = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("flash")).locator("use");
+        this.promoOwnerSection = page.getByTestId("detailKostOwnerPromo");
         this.lihatSelengkapnyaPromoOwnerBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat selengkapnya"));
         this.tanyaPemilikKostLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya Pemilik"));
         this.chatKostPopUp = page.locator(".modal-chat__body");
