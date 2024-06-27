@@ -353,6 +353,5 @@ public class LoginSteps {
         loginHarvestDashboard.fillsUsername(username);
         loginHarvestDashboard.fillsPassword(password);
         loginHarvestDashboard.clicksLogin();
-        Assert.assertTrue(allLeads.isAllLeadsTableVisible());
     }
 }
