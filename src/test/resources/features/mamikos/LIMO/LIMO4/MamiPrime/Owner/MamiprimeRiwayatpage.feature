@@ -17,6 +17,6 @@ Feature: Riwayat Mamiprime Page
     Then Owner will see empty state at tab dalam proses in halaman riwayat mamiprime
 
   @TEST_LIMO-6065
-  Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at selesai  proses
+  Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at tab selesai
     When Owner click tab Selesai at riwayat pembelian mamiprime
     Then Owner will see empty state at tab selesai in halaman riwayat mamiprime
