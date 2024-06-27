@@ -6,7 +6,7 @@
     Scenario: Check Edit Table button in All Leads menu
       Given admin set browser context to "context1"
       And bring page to front
-      And admin navigates to Harvest Dashboard
+      And admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |

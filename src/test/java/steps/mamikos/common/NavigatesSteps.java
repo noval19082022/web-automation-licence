@@ -454,8 +454,12 @@ public class NavigatesSteps {
     public void admin_wants_to_accsess_prime_setting() {
         playwright.navigateTo(Mamikos.URL + "/admin/prime", 30000.0, LoadState.LOAD);
     }
-    @Given("admin navigates to Harvest Dashboard")
-    public void admin_navigates_to_Harvest_Dashboard(){
+    @Given("admin navigates to Harvest Dashboard Login")
+    public void admin_navigates_to_Harvest_Dashboard_login(){
         loginHarvestDashboard.navigateToHarvestDashboardLoginPage();
+    }
+    @When("admin navigates to Harvest Dashboard")
+    public void admin_navigates_to_harvest_dashboard() {
+        loginHarvestDashboard.navigateToHarvestDashboard();
     }
 }

@@ -4,7 +4,7 @@
 
     @TEST_PMAN-982
     Scenario: Login using valid account
-      When admin navigates to Harvest Dashboard
+      When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
         | email                         | password   |
         | automationpman01@mamikos.com  | qwerty123  |
@@ -12,7 +12,7 @@
 
     @TEST_PMAN-983
     Scenario: Login using invalid account
-      When admin navigates to Harvest Dashboard
+      When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
         | email                        | password      |
         | automationpman10@mamikos.com | pmanM4m1t34m  |
@@ -22,7 +22,7 @@
     @TEST_PMAN-980
     Scenario: Login validation
       #empty
-      When admin navigates to Harvest Dashboard
+      When admin navigates to Harvest Dashboard Login
       Then login button is disabled
       #wrong username
       And admin login Harvest Dashboard:
@@ -37,12 +37,13 @@
       Then admin stay in login harvest page
       And show login harvest error message "Terjadi kesalahan, silakan coba lagi."
 
-    @TEST_PMAN-981
+    @TEST_PMAN-981 @test
     Scenario: Logout
-      When admin navigates to Harvest Dashboard
+      When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
         | email                         | password   |
         | automationpman01@mamikos.com  | qwerty123  |
       And admin logout harvest
       Then admin redirect to login harvest page
       When admin navigates to Harvest Dashboard
+      Then admin stay in login harvest page
