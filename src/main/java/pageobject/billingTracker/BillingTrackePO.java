@@ -61,7 +61,7 @@ public class BillingTrackePO {
         adminChooseCalender = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--md']");
 
         //-----------billing announcement----------//
-        announcementExpand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("promote Billing Team Announcement chevron-down"));
+        announcementExpand = page.locator("//*[@class=\"bg-c-text bg-c-text--title-3\"]");
         tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
         editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         inputAnnouncementTextField = page.getByTestId("billingAnnoucementForm-content");
