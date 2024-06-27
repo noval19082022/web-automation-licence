@@ -321,10 +321,17 @@ public class AllLeadsPO {
         return result;
     }
 
+    /**
+     * Get profile name
+     * @return String
+     */
     public String getProfileName() {
         return playwright.getText(profileNameText);
     }
 
+    /**
+     * Logout harvest
+     */
     public void logoutHarvest() {
         playwright.clickOn(logoutButton);
     }

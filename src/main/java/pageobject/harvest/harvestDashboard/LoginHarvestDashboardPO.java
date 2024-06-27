@@ -66,7 +66,18 @@ public class LoginHarvestDashboardPO {
         return playwright.getText(errorMessageText);
     }
 
+    /**
+     * Verify login button enable
+     * @return Boolean
+     */
     public boolean isLoginButtonEnable() {
         return playwright.isButtonEnable(loginButton);
+    }
+
+    /**
+     * Navigate to Harvest Dashboard
+     */
+    public void navigateToHarvestDashboard() {
+        playwright.navigateTo(Mamikos.URL+"/leads/harvest/all-leads",10000.0,LoadState.LOAD);
     }
 }

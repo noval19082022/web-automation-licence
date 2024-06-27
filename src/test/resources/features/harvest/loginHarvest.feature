@@ -37,7 +37,7 @@
       Then admin stay in login harvest page
       And show login harvest error message "Terjadi kesalahan, silakan coba lagi."
 
-    @TEST_PMAN-981 @test
+    @TEST_PMAN-981
     Scenario: Logout
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
