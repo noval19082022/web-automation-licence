@@ -920,4 +920,17 @@ public class PlaywrightHelpers {
     private void logElementNotClickable(Locator locator) {
         log.info("locator is not clicked or visible {}", locator);
     }
+
+    /**
+     *  This method will be used to scroll to up
+     */
+    public void scrollToUp(Page page) {
+        page.evaluate("async () => { " +
+                "while (document.documentElement.scrollTop > 0) { " +
+                "  document.documentElement.scrollTop -= 100; " +
+                "  await new Promise(resolve => requestAnimationFrame(resolve)); " +
+                "} " +
+                "document.documentElement.scrollTop = 0; " +
+                "}");
+    }
 }
