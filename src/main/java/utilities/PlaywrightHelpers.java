@@ -566,9 +566,9 @@ public class PlaywrightHelpers {
         if (waitTillLocatorIsVisible(locator)) {
             var loop = 0;
             do {
-                hardWait(1000.0);
+                hardWait(waitTimeDelay);
                 loop++;
-                if (loop >= maxLoop) {
+                if (loop >= maxLoop || !waitTillLocatorIsVisible(locator)) {
                     break;
                 }
             } while (waitTillLocatorIsVisible(locator));
@@ -578,6 +578,14 @@ public class PlaywrightHelpers {
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
+
+    /**
+     * hover specific locator
+     * @param locator
+     */
+    public void hover(Locator locator) {
+        locator.hover();
+    }
 
     /**
      * Filter html tag locator that contains target text
