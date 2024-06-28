@@ -46,7 +46,7 @@ Feature: Edit Kost
     And owner search kost "Kos oke bebek Tipe Mamitest Not Change" on property saya page
     Then user see kos with name "Kos oke bebek Tipe Mamitest Not Change", status "Aktif" and type "Kos Campur"
 #
-  @TEST_LIMO-2878 @EditKosAddress
+  @TEST_LIMO-2878 @TEST_LIMO-2878-required @EditKosAddress @continue
   Scenario: [Web][Edit Kost] Edit kost address with valid data
     When user click Lihat Selengkapnya button for edit
     And user click "Edit Data Kos"
@@ -58,9 +58,11 @@ Feature: Edit Kost
     And owner search kost "Kos oke bebek Tipe Mamitest Not Change" on property saya page
     Then user see kos with name "Kos oke bebek Tipe Mamitest Not Change", status "Diperiksa Admin" and type "Kos Campur"
 
-  Scenario: Verify kos in admin
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+  @TEST_LIMO-2878-required
+  Scenario: Verify kos Kos oke bebek Tipe Mamitest Not Change in admin
+    Given user try to logout from mamikos
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
