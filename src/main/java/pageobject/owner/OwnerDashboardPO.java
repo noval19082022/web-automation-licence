@@ -192,7 +192,7 @@ public class OwnerDashboardPO {
      */
     public void clickOnManagementKost() {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
-            playwright.clickOnText("Nanti Saja");
+            playwright.clickOnText("Nanti Saja", 5000.0);
         }
         playwright.waitTillLocatorIsVisible(manajemenKost);
         playwright.clickOn(manajemenKost);

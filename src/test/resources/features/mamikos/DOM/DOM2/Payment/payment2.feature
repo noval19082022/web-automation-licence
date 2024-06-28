@@ -19,7 +19,7 @@ Feature: Payment Backoffice Staging 2 - Refund
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigate to mamipay refund page
-    And admin visit transferred list on refund pagez
+    And admin visit transferred list on refund page
     And admin want to export the refund report
     And admin choose export report for today
 #    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
