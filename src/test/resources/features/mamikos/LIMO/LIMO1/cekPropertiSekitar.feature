@@ -1,7 +1,7 @@
 @LIMO1 @regression @mamiads
 Feature: Cek Properti Sekitar
 
-  @LIMO-1558 @LIMO-1564  @LIMO-1562 @LIMO-1561
+  @TEST_LIMO-375
   Scenario: [Fitur Promosi][Cek Properti Sekitar] Make sure owner will redirect to Cek Properti Sekitar page
     Given user go to mamikos homepage
     And user login as owner:

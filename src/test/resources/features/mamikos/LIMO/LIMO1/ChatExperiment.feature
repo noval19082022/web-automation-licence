@@ -1,7 +1,7 @@
 @regression @LIMO1 @LIMO1-staging
 Feature: Chat Experiment
 
-  @TEST_LIMO-1633 @continue
+  @TEST_LIMO-1339 @continue
   Scenario: CRUD owner chat experiment
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
