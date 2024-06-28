@@ -81,7 +81,7 @@ public class RefundPO {
         this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
         this.downloadXlsReport = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download .XLSX"));
         //-- data booking menu on bank kerupux ---
-        this.actionBtnOnInvoiceList = page.getByRole(AriaRole.BUTTON).getByText("Actions").first();
+        this.actionBtnOnInvoiceList = page.locator("(//button[@type='button'][normalize-space()='Actions'])[1]");
         this.actionTransferredPermission = page.locator("//a[@title='Set Transfer Permission']").first();
         this.allowRefundBox = page.getByRole(AriaRole.COMBOBOX);
         this.refundReasons = page.locator("select[name='refund_reason']");

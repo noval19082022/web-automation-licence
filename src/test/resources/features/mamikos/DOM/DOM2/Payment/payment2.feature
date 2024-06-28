@@ -19,7 +19,7 @@ Feature: Payment Backoffice Staging 2 - Refund
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin navigate to mamipay refund page
-    And admin visit transferred list on refund page
+    And admin visit transferred list on refund pagez
     And admin want to export the refund report
     And admin choose export report for today
 #    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
@@ -34,14 +34,14 @@ Feature: Payment Backoffice Staging 2 - Refund
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
       | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
+      | 08922024103 | 08119787884 |
     And admin want to batalkan contract if exist
 
     ## cancel booking if tenant have booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 08922024103 | 083176408442 | qwerty123 |
     And user cancel booking
 
     ## create contract
@@ -57,26 +57,34 @@ Feature: Payment Backoffice Staging 2 - Refund
     Then owner should redirect back to pengajuan booking page
     And owner logs out
 
-    ## Scenario: Tenant pay boarding house for weekly rent
+    # Scenario: Tenant pay boarding house for weekly rent
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 08922024103 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method Credit Card
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
     And tenant close unused browser tab
     And tenant logs out
 
-    #  Scenario: data booking
+     # Scenario: data booking
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to data booking menu
-    And admin filter booking transaction using tenant phone "0892202100"
+    And admin show filter data booking
+    And admin filter data booking by tenant phone number:
+      | Tenant Phone  | Kos Type |
+      | 08922024103   | All Testing |
     And admin set allow refund the transaction
 
-     # Scenario: Admin edit paid amount more than refund amount
+    # Scenario: Admin edit paid amount more than refund amount
     Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     When admin navigate to mamipay refund page
     And admin pick one invoice on list to refund from cc payment
     And admin uncheck admin fee for refund
@@ -90,7 +98,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     Then admin verify see text "Refund transaction created."
 
   @TEST_COOP-5541 @Automated @web-covered
-  Scenario: [BackOffice][Refund] see Transaction Flip Success
+  Scenario: [BackOffice][Refund] refund payment OVO
     ## delete contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -98,14 +106,14 @@ Feature: Payment Backoffice Staging 2 - Refund
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
       | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
+      | 08922024103 | 08119787884 |
     And admin want to batalkan contract if exist
 
     ## cancel booking if tenant have booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 08922024103 | 083176408442 | qwerty123 |
     And user cancel booking
 
     ## create contract
@@ -124,9 +132,9 @@ Feature: Payment Backoffice Staging 2 - Refund
     ## Scenario: Tenant pay boarding house
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
+      | 08922024103 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0892202100"
+    And tenant pay kost from riwayat booking using ovo "08922024103"
     And tenant close unused browser tab
     And tenant logs out
 
@@ -136,7 +144,10 @@ Feature: Payment Backoffice Staging 2 - Refund
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to data booking menu
-    And admin filter booking transaction using tenant phone "0892202100"
+    And admin show filter data booking
+    And admin filter data booking by tenant phone number:
+      | Tenant Phone  | Kos Type |
+      | 08922024103   | All Testing |
     And admin set allow refund the transaction
 
     #  Scenario: Admin edit paid amount & uncheck admin fee
@@ -227,80 +238,6 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin want to download receipt transferred invoice
 		#    Then user successed download receipt - (need improvement for popup success from FE)
 
-  @TEST_COOP-5547 @Automated @web-covered
-  Scenario: [BackOffice][Refund] Refund Payment Ovo
-    ## delete contract
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
-      | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
-    And admin want to batalkan contract if exist
-
-    ## cancel booking if tenant have booking
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
-    And user cancel booking
-
-    ## create contract
-    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
-    And tenant booking kost for "today"
-    And tenant logs out
-
-    ## owner accept
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
-    And owner accept booking and select the room
-    Then owner should redirect back to pengajuan booking page
-    And owner logs out
-
-    ## Scenario: Tenant pay boarding house
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0892202100"
-    And tenant close unused browser tab
-    And tenant logs out
-
-    #  Scenario: data booking
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin bangkrupux navigate to data booking menu
-    And admin filter booking transaction using tenant phone "0892202100"
-    And admin set allow refund the transaction
-
-    #  Scenario: Admin edit paid amount & uncheck admin fee
-    Given admin go to mamikos mamipay admin
-    When admin navigate to mamipay refund page
-    And admin pick one invoice on list to refund
-    And admin uncheck admin fee for refund
-    And admin edit paid amount credit card "20000" for refund
-    And admin change of reason list to pemilik membatalkan for refund
-    And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
-    And admin set to refund the paid invoice
-    Then admin verify see text "Refund transaction created."
-
-        ## flip step is comment impacted otp login on bigflip
-#    #  Scenario: Admin payment from bigflip
-#    Given admin go to big flip bussiness and login for test mode
-#    * admin verify on flip test mode
-#    When admin navigate to riwayat transaksi domestic page on big flip test mode
-#    Then admin set force success transaction on flip
-#
-#    #  Scenario: Admin see that refund transaction in success
-#    Given admin go to mamikos mamipay admin
-#    When admin navigate to mamipay refund page
-#    And admin visit transferred list on refund page
-#    Then admin verify transferred transaction for user "testing automation refund" is visible
-
   @TEST_COOP-5548 @Automated @web-covered
   Scenario: [BackOffice][Refund] direction Tab To Transferred Tab
     Given admin go to mamikos mamipay admin
@@ -369,73 +306,6 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin close the refund detail
     Then admin verify see text "Daftar Invoice Refund"
 
-  @TEST_COOP-1447
-  Scenario: [BackOffice][Refund] Set transaction refund Failed
-        ## delete contract
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin search contract by tenant phone number:
-      | phone stag | phone prod  |
-      | 0892202100 | 08119787884 |
-    And admin want to batalkan contract if exist
-
-    ## cancel booking if tenant have booking
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
-    And user cancel booking
-
-    ## create contract
-    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
-    And tenant booking kost for "today"
-    And tenant logs out
-
-    ## owner accept
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
-    And owner accept booking and select the room
-    Then owner should redirect back to pengajuan booking page
-    And owner logs out
-
-    ## Scenario: Tenant pay boarding house
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0892202100 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0892202100"
-    And tenant close unused browser tab
-    And tenant logs out
-
-    #  Scenario: data booking
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin bangkrupux navigate to data booking menu
-    And admin filter booking transaction using tenant phone "0892202100"
-    And admin set allow refund the transaction
-
-    #  Scenario: Admin edit paid amount & uncheck admin fee
-    Given admin go to mamikos mamipay admin
-    When admin navigate to mamipay refund page
-    And admin pick one invoice on list to refund
-    And admin uncheck admin fee for refund
-    And admin edit paid amount credit card "20000" for refund
-    And admin change of reason list to pemilik membatalkan for refund
-    And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
-    And admin set to refund the paid invoice
-    Then admin verify see text "Refund transaction created."
-
-        ## flip step is comment impacted otp login on bigflip
-#    #  Scenario: Admin payment from bigflip
-#    Given admin go to big flip bussiness and login for test mode
-#    * admin verify on flip test mode
-#    When admin navigate to riwayat transaksi domestic page on big flip test mode
-#    Then admin set failed transaction on flip
 
   @TEST_COOP-5578
   Scenario: [BackOffice][Refund Menu][Failed Tab] resend from failed tab
@@ -464,7 +334,6 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set to refund the paid invoice
     Then admin verify see text "Account number can only contain number"
 
-
   @TEST_COOP-5542 @Automated @web-covered
   Scenario Outline: [BackOffice][Refund] Check list of data transaction on tab paid Search by Nama Penyewa
     Given admin go to mamikos mamipay admin
@@ -484,3 +353,24 @@ Feature: Payment Backoffice Staging 2 - Refund
       | Owner Phone Number   | 089120220103           |
       | Owner Name           | Coba delete akun owner |
       | Invoice Number       | 24873147/2023/01/66689 |
+
+        ## flip step is comment impacted otp login on bigflip
+#    #  Scenario: Admin payment from bigflip
+#    Given admin go to big flip bussiness and login for test mode
+#    * admin verify on flip test mode
+#    When admin navigate to riwayat transaksi domestic page on big flip test mode
+#    Then admin set force success transaction on flip
+#
+#    #  Scenario: Admin see that refund transaction in success
+#    Given admin go to mamikos mamipay admin
+#    When admin navigate to mamipay refund page
+#    And admin visit transferred list on refund page
+#    Then admin verify transferred transaction for user "testing automation refund" is visible
+
+
+        ## flip step is comment impacted otp login on bigflip
+#    #  Scenario: Admin payment from bigflip
+#    Given admin go to big flip bussiness and login for test mode
+#    * admin verify on flip test mode
+#    When admin navigate to riwayat transaksi domestic page on big flip test mode
+#    Then admin set failed transaction on flip
