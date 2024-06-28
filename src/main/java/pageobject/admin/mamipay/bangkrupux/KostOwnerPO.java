@@ -42,8 +42,10 @@ public class KostOwnerPO {
      * @param kosName of Kos Name
      */
     public void searchKosName(String kosName) {
-        kosNameSearch.fill(kosName);
-        page.keyboard().press("Enter");
+        playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
+        playwright.pressKeyboardKey("Enter");
+        playwright.hardWait(1_000.0);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -115,6 +117,7 @@ public class KostOwnerPO {
      */
     public void clickOnFirstVerifyButton() {
         playwright.clickOn(firstVerifyButton);
+        playwright.waitTillPageLoaded();
     }
 
     /**
