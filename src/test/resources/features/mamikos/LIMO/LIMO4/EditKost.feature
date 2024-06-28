@@ -67,7 +67,7 @@ Feature: Edit Kost
     And admin bangkrupux search kost owner "Kos oke bebek Tipe Mamitest Not Change" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-2719
+  @TEST_LIMO-2719 @TEST_LIMO-2719-required @continue
   Scenario Outline: Status kos is active or reject and owner edit description kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -86,18 +86,22 @@ Feature: Edit Kost
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And user click done in success page pop up of edit kos
     Then user see kos with name "<kost name>", status "Diperiksa Admin" and type "Kos Campur"
-    And user logs out
-#  Scenario: Verify kos in admin
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "<kost name>" in admin kos owner page
-    And user verify the kos in admin kos owner
     Examples:
       | kost name     |
       | MAMAHMUDALIMO |
+
+    ## this step is required to excecute to avoid next step failed
+  @TEST_LIMO-2719-required
+  Scenario: Verify kos MAMAHMUDALIMO in admin
+    Given user try to logout from mamikos
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
+    And user verify the kos in admin kos owner
+
 
   @TEST_LIMO-2710 @updatefotokost
   Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
