@@ -27,35 +27,35 @@ Feature: Survey Tenant
     And user click on Ubah Jadwal button
     Then chat room appear with latest message "Terima Kasih, Kak. :) Form survei kakak sudah kami terima. Tim kami akan segera menghubungi kakak melalui WhatsApp."
 
-#  @TEST_COOP-2517 @continue
-#  Scenario: cancel survei from chat template on Kost Detail
-#    When user go to mamikos homepage
-#    And user click on chat button in top bar tenant home page
-#    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-#    And user batalkan survey if the survey already submitted
-#    Then chat room appear with latest message "Survei Kost Adi Auto SinggahSini Tobelo Halmahera Utara dibatalkan."
-#    When user go to mamikos homepage
-#    Then user logs out as a Tenant user
-#
-#  @TEST_COOP-2569 @continue
-#  Scenario: Submit Survey for Uncontrolled Property
-#    When user go to mamikos homepage
-#    And user search for Kost with name "Kos Loyal Kretek" and selects matching result
-#    And user click chat in kos detail
-#    Then question "Saya ingin survei dulu" is not displayed
-#
-#  @TEST_COOP-2909 @continue
-#  Scenario: Survey Fase and Status for Controlled Property
-#    Given admin go to pms singgahsini
-#    When admin login pms :
-#      | email             | password      |
-#      | pman@mamiteam.com | pmanM4m1t34m  |
-#    And admin go to tenant communication menu
-#    And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
-#    Then user verify nama property on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-#
-#  @TEST_COOP-2873
-#  Scenario: Survey Fase and Status for Uncontrolled Property
-#    When admin go to tenant communication menu
-#    And user choose "Nama Properti" and input "Kos Loyal Kretek" in the search field on main page
-#    Then user verify nama property on main page filter is not "Kos Loyal Kretek"
+  @TEST_COOP-2517 @continue
+  Scenario: cancel survei from chat template on Kost Detail
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
+    And user batalkan survey if the survey already submitted
+    Then chat room appear with latest message "Survei Kost Adi Auto SinggahSini Tobelo Halmahera Utara dibatalkan."
+    When user go to mamikos homepage
+    Then user logs out as a Tenant user
+
+  @TEST_COOP-2569 @continue
+  Scenario: Submit Survey for Uncontrolled Property
+    When user go to mamikos homepage
+    And user search for Kost with name "Kos Loyal Kretek" and selects matching result
+    And user click chat in kos detail
+    Then question "Saya ingin survei dulu" is not displayed
+
+  @TEST_COOP-2909 @continue
+  Scenario: Survey Fase and Status for Controlled Property
+    Given admin go to pms singgahsini
+    When admin login pms :
+      | email             | password      |
+      | pman@mamiteam.com | pmanM4m1t34m  |
+    And admin go to tenant communication menu
+    And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
+    Then user verify nama property on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
+
+  @TEST_COOP-2873
+  Scenario: Survey Fase and Status for Uncontrolled Property
+    When admin go to tenant communication menu
+    And user choose "Nama Properti" and input "Kos Loyal Kretek" in the search field on main page
+    Then user verify nama property on main page filter is not "Kos Loyal Kretek"
