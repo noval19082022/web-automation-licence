@@ -10,9 +10,11 @@ import pageobject.owner.mamiprime.MamiprimePendaftaranPO;
 public class MamiprimePendaftaranSteps {
     Page page = ActiveContext.getActivePage();
     MamiprimePendaftaranPO mamiprimePendaftaran = new MamiprimePendaftaranPO(page);
+    MamiprimePeriodeSteps mamiprimePeriodeSteps = new MamiprimePeriodeSteps();
+    MamiprimeDetailTagihanSteps mamiprimeDetailTagihanSteps = new MamiprimeDetailTagihanSteps();
 
     @When("owner navigate to pendaftaran mamiprime page")
-    public void owner_navigate_to_pendaftaran_mamiprime_page(){
+    public void  owner_navigate_to_pendaftaran_mamiprime_page(){
         mamiprimePendaftaran.navigatesToPendaftaranMamiprime();
     }
 
@@ -69,6 +71,13 @@ public class MamiprimePendaftaranSteps {
     public void owner_can_see_package_prime_selected_is(String packgaePrime) {
         Assert.assertTrue(mamiprimePendaftaran.isDetailTagihanAppear(),"detail tagihan page doesnt appear");
         Assert.assertEquals(mamiprimePendaftaran.getPackagePrimeDetailTagihan(packgaePrime),packgaePrime,"package prime doesnt equal");
+    }
+
+    @When("Owner purchase mamiprime periode {string}")
+    public void owner_purchase_mamiprime_periode(String periode){
+        mamiprimePeriodeSteps.owner_choose_periode(periode);
+        mamiprimePendaftaran.clickOnlanjutBayarPrime();
+        mamiprimeDetailTagihanSteps.owner_click_bayar_sekarang_at_detail_tagihan_mamiprime();
     }
 
 }

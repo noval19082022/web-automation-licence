@@ -2,6 +2,8 @@ package pageobject.owner.mamiprime;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class MamiprimeRiwayatPembelianPO {
@@ -12,6 +14,7 @@ public class MamiprimeRiwayatPembelianPO {
     Locator noTransactionSelesaiText;
     Locator noTransactionSelesaiDescText;
     Locator mamiprimeSelesaiTab;
+    Locator unpaidTransactionMamiprimeList;
 
     public MamiprimeRiwayatPembelianPO(Page page) {
         this.page = page;
@@ -21,6 +24,14 @@ public class MamiprimeRiwayatPembelianPO {
         this.noTransactionSelesaiText = page.getByTestId("prime-history-done").getByText("Belum Ada Transaksi");
         this.noTransactionSelesaiDescText = page.getByTestId("prime-history-done").getByText("Transaksi yang telah selesai akan muncul di halaman ini.");
         this.mamiprimeSelesaiTab = page.locator("//a[contains(.,'Selesai')]");
+        this.unpaidTransactionMamiprimeList = page.getByTestId("PrimeHistoryList").first();
+    }
+
+    /**
+     * Navigates to Riwayat Pembelian Mamiprime
+     */
+    public void navigatesToRiwayatPembelianMamiprime() {
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_HISTORY, 30000.0, LoadState.LOAD);
     }
 
     /**
@@ -40,7 +51,6 @@ public class MamiprimeRiwayatPembelianPO {
     public boolean isNoTransactionDalamProsesDescTextDisplayed(){
         return noTransactionDalamProsesDescText.isVisible();
     }
-
 
     /**
      * Get Text doesnt have transaction mamiprime at tab selesai
@@ -66,6 +76,15 @@ public class MamiprimeRiwayatPembelianPO {
      */
     public void clickOnMamiprimeSelesaiTab() {
         playwright.clickOn(mamiprimeSelesaiTab);
+    }
+
+    /**
+     * Unpaid list of transaction mamiprime
+     *
+     * @return True if there is transaction
+     */
+    public boolean isUnpaidTransactionMamiprimeListDisplayed(){
+        return unpaidTransactionMamiprimeList.isVisible();
     }
 
 }

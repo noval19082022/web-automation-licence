@@ -11,6 +11,11 @@ public class MamiprimeRiwayatPembelianSteps {
     Page page = ActiveContext.getActivePage();
     MamiprimeRiwayatPembelianPO mamiprimeRiwayatPembelianPO = new MamiprimeRiwayatPembelianPO(page);
 
+    @When("Owner navigate to riwayat pembelian mamiprime")
+    public void owner_navigate_to_riwayat_pembelian_mamiprime(){
+        mamiprimeRiwayatPembelianPO.navigatesToRiwayatPembelianMamiprime();
+    }
+
     @Then("Owner will see empty state at tab dalam proses in halaman riwayat mamiprime")
     public void owner_will_see_empty_state_at_tab_dalam_proses_in_halaman_riwayat_mamiprime() {
         Assert.assertTrue(mamiprimeRiwayatPembelianPO.isNoTransactionDalamProsesTextDisplayed());
@@ -28,4 +33,8 @@ public class MamiprimeRiwayatPembelianSteps {
         mamiprimeRiwayatPembelianPO.clickOnMamiprimeSelesaiTab();
     }
 
+    @Then("Owner will see transaction unpaid mamiprime")
+    public void owner_will_see_transaction_unpaid_mamiprime(){
+        Assert.assertTrue(mamiprimeRiwayatPembelianPO.isUnpaidTransactionMamiprimeListDisplayed());
+    }
 }
