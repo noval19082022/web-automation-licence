@@ -146,7 +146,7 @@ Feature: Edit Kost
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
 
-  @TEST_LIMO-2726 @continue
+  @TEST_LIMO-2726 @TEST_LIMO-2711 @continue
   Scenario: [Edit kos][Edit data needs verification process]Status kos == active or reject && owner edit data needs verification process
     Given user go to mamikos homepage
     When user login as owner:
