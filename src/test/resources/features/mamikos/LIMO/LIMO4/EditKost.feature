@@ -146,7 +146,7 @@ Feature: Edit Kost
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
 
-  @TEST_LIMO-2726 @TEST_LIMO-2711 @continue
+  @TEST_LIMO-2726 @TEST_LIMO-2711 @continue @editKost123
   Scenario: [Edit kos][Edit data needs verification process]Status kos == active or reject && owner edit data needs verification process
     Given user go to mamikos homepage
     When user login as owner:
@@ -188,9 +188,9 @@ Feature: Edit Kost
 #      | kost nama      |
 #      | PAPASUKA GENIT |
 
-  @TEST_LIMO-2726
-  Scenario: Verify kos in admin
-    Given user logs out
+  @TEST_LIMO-2716 @editKost123
+  Scenario: [Edit kos][Harga]Intercept confirmation on screen "Harga"
+    Given user try to logout from mamikos
     When admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -198,3 +198,22 @@ Feature: Edit Kost
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
     And user verify the kos in admin kos owner
+    And admin try to logout from mamikos
+#  @TEST_LIMO-2716
+#  Scenario: Verify kos in admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787881 |            | qwerty123 |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "PAPASUKA GENIT" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Ketersediaan Kamar" kos
+    Then owner will see that the text "Atur Ketersediaan Kamar" is displayed
+    And user click button edit "Harga" kos
+    Then owner will see that the text "Update Harga Sewa" is displayed
+    And owner tap on update harga if exist
+    And user clicks update price button
+    Then user see pop up success update price "Harga berhasil diupdate"
