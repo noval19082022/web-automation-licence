@@ -26,4 +26,11 @@ public class MamiprimeDetailTagihanPO {
         return playwright.getText(propertyNameText);
     }
 
+    /**
+     * Click on bayar sekarang button and wait until page loaded
+     */
+    public void clicksOnBayarSekarangButton() {
+        playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
+        playwright.waitTillPageLoaded();
+    }
 }
