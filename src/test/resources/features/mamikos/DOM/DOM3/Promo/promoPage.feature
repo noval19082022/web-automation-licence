@@ -6,7 +6,7 @@ Feature: Promo page
   Scenario: User can copy promo code
     Given user navigates to promo mamikos
     When user click SALIN on any promo
-    Then promo code can be copied "S1SINGGAHSINI"
+    Then promo code can be copied "SINGGAHEXPRESS"
 
   @regression
   Scenario: Check pagination in promo page
@@ -17,12 +17,11 @@ Feature: Promo page
 #    And previous promo page will be opened
 #    And user click page index "2"
 #    Then promo page "2" will be opened
-#  test commit
-#
+
   @regression @TEST_COOP-5405 @DOM3 @web-covered
   Scenario: User can open promo detail
     Given user navigates to promo mamikos
     When user see the promo title in first promo
     And user click see detail on first promo
-    And user see promo title
-    Then user see use promo button
+    Then user see promo title
+    And user see promo description

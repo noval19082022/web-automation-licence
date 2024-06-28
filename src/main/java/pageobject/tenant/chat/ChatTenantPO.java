@@ -4,6 +4,7 @@ import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import pageobject.common.KostDetailsPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -33,6 +34,7 @@ public class ChatTenantPO {
     Locator confirmationUbahJadwalButton;
     Locator backButtonChatroom;
     Locator charoomCardList;
+    Locator ftueSlider;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -56,6 +58,7 @@ public class ChatTenantPO {
         confirmationUbahJadwalButton = page.locator("//button[normalize-space()='Batalkan Survei']//following-sibling::button");
         backButtonChatroom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
         charoomCardList = page.locator(".mc-channel-list-card");
+        this.ftueSlider = page.getByText("Lanjut");
     }
 
     /**
@@ -88,6 +91,11 @@ public class ChatTenantPO {
     public void clickQuestion(String text) {
         Locator questionOption = page.getByText(""+text+"");
         playwright.clickOn(questionOption);
+        playwright.hardWait(5000);
+        KostDetailsPO ChatTenantPO = new KostDetailsPO(page);
+        if (playwright.waitTillLocatorIsVisible(ftueSlider, 5000.0)) {
+            ChatTenantPO.dismissFTUE();
+        }
     }
 
     /**

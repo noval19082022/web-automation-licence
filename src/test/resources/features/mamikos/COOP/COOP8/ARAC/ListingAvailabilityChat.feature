@@ -14,7 +14,6 @@
       And user click chat in kos detail
       And user select question "Halo, ada kos yang masih kosong?"
       And user click send chat from popup
-      And user want to dismiss FTUE
       And user click Ajukan Sewa "today" from chat room
       Then user will open new tab and go to Booking form
 

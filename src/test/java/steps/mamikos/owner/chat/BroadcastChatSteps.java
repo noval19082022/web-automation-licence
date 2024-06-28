@@ -44,9 +44,14 @@ public class BroadcastChatSteps {
         broadcast.clickOnBackButtonBC();
     }
 
+    @Then("user verify input broadcast message is visible")
+    public void user_verify_input_broadcast_message_is_visible() {
+        Assert.assertTrue(broadcast.isTextFieldBCMessageDisplayed());
+    }
+
     @Then("user verify input broadcast message is not visible")
     public void user_verify_input_broadcast_message_is_not_visible() {
-        broadcast.isTextFieldBCMessageDisplayed();
+        Assert.assertFalse(broadcast.isTextFieldBCMessageDisplayed());
     }
 
     @When("user clicks on the close icon next to the search bar to reset it")
@@ -182,6 +187,12 @@ public class BroadcastChatSteps {
         loading.waitForLoadingIconDisappear();
         broadcast.clickOnTambahBroadcastChatButton();
         broadcast.searchKostBC(kostName);
+    }
+
+    @When("user/owner tap on add broadcast chat")
+    public void addBroadcastChat() {
+        loading.waitForLoadingIconDisappear();
+        broadcast.clickOnTambahBroadcastChatButton();
     }
 
     @When("owner clicks Kos {string} and Pilih Kos button")

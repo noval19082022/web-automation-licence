@@ -58,7 +58,7 @@ public class PromoNgebutSteps {
 
     @When("user go to kost details from promo ngebut list")
     public void userGoToKostDetailsFromPromoNgebutList() {
-        page = promoArea.clickOnPromoIconIndex(0);
+        promoArea.clickOnFirstKostPhoto();
     }
 
     @Then("user can see promo ngebut pop-up")

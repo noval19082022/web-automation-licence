@@ -10,9 +10,11 @@ import pageobject.owner.mamiprime.MamiprimePendaftaranPO;
 public class MamiprimePendaftaranSteps {
     Page page = ActiveContext.getActivePage();
     MamiprimePendaftaranPO mamiprimePendaftaran = new MamiprimePendaftaranPO(page);
+    MamiprimePeriodeSteps mamiprimePeriodeSteps = new MamiprimePeriodeSteps();
+    MamiprimeDetailTagihanSteps mamiprimeDetailTagihanSteps = new MamiprimeDetailTagihanSteps();
 
     @When("owner navigate to pendaftaran mamiprime page")
-    public void owner_navigate_to_pendaftaran_mamiprime_page(){
+    public void  owner_navigate_to_pendaftaran_mamiprime_page(){
         mamiprimePendaftaran.navigatesToPendaftaranMamiprime();
     }
 
@@ -52,14 +54,6 @@ public class MamiprimePendaftaranSteps {
         Assert.assertTrue(mamiprimePendaftaran.isListPeriodeAppear(),"List periode not appear");
     }
 
-    @When("owner already choose period {string} with price {string}")
-    public void owner_already_choose_period_with_price(String periode, String price) {
-        Assert.assertEquals(mamiprimePendaftaran.getPeriodPrime(periode),periode,"Periode not equals");
-        Assert.assertEquals(mamiprimePendaftaran.getPricePeriod(price),price,"Price prime not equals");
-        mamiprimePendaftaran.clickOnPeriodePrime(periode);
-        mamiprimePendaftaran.clickOnlanjutBayarPrime();
-    }
-
     @When("owner wants to change {string} at detail tagihan page")
     public void owner_wants_to_change_at_detail_tagihan_page(String packgaePrime) {
         Assert.assertTrue(mamiprimePendaftaran.isDetailTagihanAppear(),"detail tagihan page doesnt appear");
@@ -77,6 +71,13 @@ public class MamiprimePendaftaranSteps {
     public void owner_can_see_package_prime_selected_is(String packgaePrime) {
         Assert.assertTrue(mamiprimePendaftaran.isDetailTagihanAppear(),"detail tagihan page doesnt appear");
         Assert.assertEquals(mamiprimePendaftaran.getPackagePrimeDetailTagihan(packgaePrime),packgaePrime,"package prime doesnt equal");
+    }
+
+    @When("Owner purchase mamiprime periode {string}")
+    public void owner_purchase_mamiprime_periode(String periode){
+        mamiprimePeriodeSteps.owner_choose_periode(periode);
+        mamiprimePendaftaran.clickOnlanjutBayarPrime();
+        mamiprimeDetailTagihanSteps.owner_click_bayar_sekarang_at_detail_tagihan_mamiprime();
     }
 
 }

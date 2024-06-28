@@ -16,7 +16,7 @@ public class LoadingPO {
     public LoadingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(this.page);
-        loadingIcon = page.locator("span.c-loader");
+        loadingIcon = page.locator(".c-loader");
         loadingAnimation = page.getByTestId("loading-animation");
     }
 

@@ -70,9 +70,9 @@ public class ChatOwnerPO {
         backFTUEBeforeChat = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         closeFTUEBeforeChat = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
-        attachmentButton = page.locator(".mc-file-picker.mc-chat-room__file-picker button");
+        attachmentButton = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md']");
         weeklyQuotaChatlistHeader = page.getByText("Sisa Kuota: information-round");
-        weeklyQuotaChatroomHeader = page.locator(".mc-chat-room-quota-info__detail");
+        weeklyQuotaChatroomHeader = page.locator("//div[@class='mc-chat-room-quota-info__detail']");
         registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
         gpPacakgeText = page.getByTestId("popperReference");
@@ -279,8 +279,9 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isAttachmentButtonDisabled() {
-        playwright.waitTillLocatorIsVisible(attachmentButton, 2_000.0);
-        return playwright.isButtonDisable(attachmentButton);
+        playwright.delayAndClickOn(sayaMengertiChatRoom, 3000.0);
+        playwright.waitTillLocatorIsVisible(attachmentButton);
+        return playwright.isButtonEnable(attachmentButton);
     }
 
     /**
@@ -351,8 +352,11 @@ public class ChatOwnerPO {
      *
      */
     public void dismissFTUEMarsKuotaNol() {
-        playwright.clickOn(closeIcon);
+        if (playwright.waitTillLocatorIsVisible(closeIcon)) {
+            playwright.clickOn(closeIcon);
+        }
     }
+
 
     /**
      * Get Gp Package text on chat menu
@@ -399,10 +403,14 @@ public class ChatOwnerPO {
      * click on lihat button on JB coachmark
      */
     public void dismissFTUEJemputBola() {
-        playwright.clickOn(lihatFiturFTUEJB);
+        if (playwright.isTextDisplayed("Lihat Fitur")) {
+            playwright.clickOn(lihatFiturFTUEJB);
+        }
+       // playwright.clickOn(lihatFiturFTUEJB);
         playwright.navigateTo(Mamikos.OWNER_URL);
         this.clickChatOwner();
     }
+
 
     /**
      * dismiss FTUE lihat profil penyewa on detail chatroom

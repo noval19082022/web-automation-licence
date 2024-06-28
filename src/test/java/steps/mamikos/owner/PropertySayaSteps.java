@@ -268,6 +268,7 @@ public class PropertySayaSteps {
 
     @And("user click button edit {string} kos")
     public void userClickButtonEditKos(String updateData) {
+        playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDataKos(updateData);
     }
@@ -290,7 +291,7 @@ public class PropertySayaSteps {
         Assert.assertEquals(propertySaya.getWarningDescFacility(facility), desc, "Warning description in " + facility + " is wrong");
     }
 
-    @Then("user click button edit finished")
+    @Then("owner/user click button edit finished")
     public void userClickButtonEditFinished() {
         loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDoneButton();
@@ -312,7 +313,7 @@ public class PropertySayaSteps {
 //        propertySaya.clickOnFirstResult(location);
     }
 
-    @Given("user input address note {string} and random text")
+    @Given("owner/user input address note {string} and random text")
     public void user_input_address_note_and_random_text(String note) {
         String random = javaHelpers.generateAlphanumeric(6);
         propertySaya.enterAddressNotes(note + random);
@@ -1130,5 +1131,23 @@ public class PropertySayaSteps {
         propertySaya.clickOnLanjutkanMovePhoto();
         propertySaya.clickOnPindahkanPhoto();
         Assert.assertTrue(propertySaya.getToastNotSelectDestinationPhoto(), "Toast message doesnt match!");
+    }
+
+    @And("owner click button edit data lain")
+    public void ownerClickButtonEditDataLain() {
+        loading.waitForLoadingIconDisappear();
+        propertySaya.clickOnEditDataLainButton();
+    }
+
+    @And("owner remove photo for the order {string}")
+    public void ownerClicksButtonChangePhotoForTheOrder(String order) {
+        var orderInt = Integer.parseInt(order);
+        propertySaya.hoverPhoto(orderInt);
+        propertySaya.deleteFotoKostIfVisible(orderInt);
+    }
+
+    @And("owner tap on update harga if exist")
+    public void ownerTapOnUpdateHargaIfExist() {
+        propertySaya.clickOnUpdateHargaIfExist();
     }
 }

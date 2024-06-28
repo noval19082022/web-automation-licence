@@ -19,8 +19,6 @@ public class KostLandingAreaPO {
     private Locator filterPriceSimpanButton;
     private Locator kostRoomCard;
     private Locator nominatimMap;
-    private Locator filterResetText;
-    private Locator filterResetButton;
     private Locator imgKosTidakDitemukan;
     private Locator headingNoKosInAreaText;
     private Locator subtitleNoKosInAreaText;
@@ -62,8 +60,6 @@ public class KostLandingAreaPO {
         filterPriceSimpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         kostRoomCard = page.getByTestId("kostRoomCard");
         nominatimMap = page.getByText("map Cari berdasarkan Peta Leaflet | © OpenStreetMap, Mamikos");
-        filterResetText = page.getByText("Coba kurangi atau hapus filter untuk hasil pencarian yang lebih banyak.");
-        filterResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset filter"));
         imgKosTidakDitemukan = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("kos tidak ditemukan"));
         headingNoKosInAreaText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos di Area Ini"));
         subtitleNoKosInAreaText = page.getByText("Cari di Area lain untuk meningkatkan hasil pencarian kos.");
@@ -136,31 +132,6 @@ public class KostLandingAreaPO {
      */
     public boolean isNominatimMapVisible() {
         return playwright.waitTillLocatorIsVisible(nominatimMap);
-    }
-
-    /**
-     * Check visibility of filter reset text
-     *
-     * @return boolean
-     */
-    public boolean isFilterResetTextVisible() {
-        return playwright.waitTillLocatorIsVisible(filterResetText);
-    }
-
-    /**
-     * Check visibility of reset filter button
-     *
-     * @return boolean
-     */
-    public boolean isFilterResetButtonVisible() {
-        return playwright.waitTillLocatorIsVisible(filterResetButton);
-    }
-
-    /**
-     * Click on reset filter button
-     */
-    public void clickOnResetFilterButton() {
-        playwright.clickOn(filterResetButton);
     }
 
     /**

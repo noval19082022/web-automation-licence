@@ -566,9 +566,9 @@ public class PlaywrightHelpers {
         if (waitTillLocatorIsVisible(locator)) {
             var loop = 0;
             do {
-                hardWait(1000.0);
+                hardWait(waitTimeDelay);
                 loop++;
-                if (loop >= maxLoop) {
+                if (loop >= maxLoop || !waitTillLocatorIsVisible(locator)) {
                     break;
                 }
             } while (waitTillLocatorIsVisible(locator));
@@ -578,6 +578,14 @@ public class PlaywrightHelpers {
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
+
+    /**
+     * hover specific locator
+     * @param locator
+     */
+    public void hover(Locator locator) {
+        locator.hover();
+    }
 
     /**
      * Filter html tag locator that contains target text
@@ -919,5 +927,26 @@ public class PlaywrightHelpers {
      */
     private void logElementNotClickable(Locator locator) {
         log.info("locator is not clicked or visible {}", locator);
+    }
+
+    /**
+     *  This method will be used to scroll to up
+     */
+    public void scrollToUp(Page page) {
+        page.evaluate("async () => { " +
+                "while (document.documentElement.scrollTop > 0) { " +
+                "  document.documentElement.scrollTop -= 100; " +
+                "  await new Promise(resolve => requestAnimationFrame(resolve)); " +
+                "} " +
+                "document.documentElement.scrollTop = 0; " +
+                "}");
+    }
+
+    /**
+     * Get page title
+     * @return String
+     */
+    public String getPageTitle() {
+        return page.title();
     }
 }

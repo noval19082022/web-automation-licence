@@ -6,11 +6,9 @@ Feature: Create new kos with owner that doesn't activate mamipay and BBK
   Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password    |
-      | 0895332021435 | digantilagi |
+      | phone stag   | password    |
+      | 085275574591 | qwerty123 |
     And owner navigates to property saya kos
-    And owner click "Nanti Saja" on Kebijakan BBK Baru Mamikos
-    And owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected

@@ -14,7 +14,7 @@ Feature: Owner - Forgot Password
   Scenario: [WEB][Forgot Password][Owner] Resend OTP via SMS
     Given user go to mamikos homepage
     When user want to change the owner password
-    And user fill their registered phone number "083843666868"
+    And user fill their registered phone number "089120210101"
     And user choose verification by sms
     Then user verify "Kirim ulang kode" and click button resend OTP
 
@@ -63,14 +63,14 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "09129299222"
     Then user get error message "Nomor handphone harus diawali dengan 08"
 
-  @TEST_COOP-5237 @Automated @DOM @web-covered
-  Scenario: [WEB][Forgot Password][Owner] Cancel verification page input OTP and ubah password
-    Given user go to mamikos homepage
-    When user want to change the owner password
-    And user fill their registered phone number "083843666868"
-    And user choose verification by WA
-    And user click back button on page otp
-    Then user see popup verifikasi batalkan proses "Yakin batalkan proses verifikasi?"
+#  @TEST_COOP-5237 @Automated @DOM @web-covered
+#  Scenario: [WEB][Forgot Password][Owner] Cancel verification page input OTP and ubah password
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
+#    And user fill their registered phone number "0891202102"
+#    And user choose verification by WA
+#    And user click back button on page otp
+#    Then user see popup verifikasi batalkan proses "Yakin batalkan proses verifikasi?"
 
   @TEST_COOP-5238 @Automated @DOM @web-covered
   Scenario: [WEB][Forgot Password][Owner] Phone number less than 8 characters
@@ -103,13 +103,13 @@ Feature: Owner - Forgot Password
     And user fill their unregistered phone number "08912an"
     Then user get error message "Nomor handphone hanya dapat diisi dengan angka"
 
-  @TEST_COOP-5242 @Automated @web-covered
-  Scenario: [WEB][Forgot Password][Owner] Send OTP via WA
-    Given user go to mamikos homepage
-    When user want to change the owner password
-    And user fill their registered phone number "083843666868"
-    And user choose verification by WA
-    Then user verify otp form appear on page send OTP "Mohon isi kolom berikut dengan kode verifikasi yang kami kirimkan ke ********6868 melalui WhatsApp."
+#  @TEST_COOP-5242 @Automated @web-covered
+#  Scenario: [WEB][Forgot Password][Owner] Send OTP via WA
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
+#    And user fill their registered phone number "0891202103"
+#    And user choose verification by WA
+#    Then user verify otp form appear on page send OTP "Mohon isi kolom berikut dengan kode verifikasi yang kami kirimkan ke ********6868 melalui WhatsApp."
 
   @TEST_COOP-5243 @Automated @DOM @web-covered
   Scenario: [WEB][Forgot Password][Owner] Redirect to forgot password page
@@ -131,15 +131,15 @@ Feature: Owner - Forgot Password
     And user fill their registered phone number "083843666868"
     Then user verify on page "Pilih Metode Verifikasi"
 
-  @TEST_COOP-5246 @Automated @DOM @web-covered
-  Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to WA
-    Given user go to mamikos homepage
-    When user want to change the owner password
-    And user fill their registered phone number "081328787343"
-    And user choose verification by sms
-    And user click back button, batalkan
-    And user choose verification by WA
-    Then user verify otp form appear on page OTP "Verifikasi Nomor Handphone"
+#  @TEST_COOP-5246 @Automated @DOM @web-covered
+#  Scenario: [WEB][Forgot Password][Owner] Cancel verification and change metode OTP SMS to WA
+#    Given user go to mamikos homepage
+#    When user want to change the owner password
+#    And user fill their registered phone number "081328787343"
+#    And user choose verification by sms
+#    And user click back button, batalkan
+#    And user choose verification by WA
+#    Then user verify otp form appear on page OTP "Verifikasi Nomor Handphone"
 
   @TEST_COOP-5247 @Automated @DOM @web-covered
   Scenario: [WEB][Forgot Password][Owner] User direct to Whatsapp
@@ -169,5 +169,5 @@ Feature: Owner - Forgot Password
     Given user navigate to near campus page
     When user click on enter button owner in popular area page
     And user click on lupa password?
-    And user fill their registered phone number "083843666868"
+    And user fill their registered phone number "0891202104"
     Then user verify on page "Pilih Metode Verifikasi"

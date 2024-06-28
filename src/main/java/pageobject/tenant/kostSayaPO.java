@@ -223,7 +223,6 @@ public class kostSayaPO {
      */
     public void clickSudahDiBayar(){
         playwright.clickOn(sudahDiBayarBtn);
-        playwright.clickOn(invoiceSudahdiBayar);
     }
 
     /**

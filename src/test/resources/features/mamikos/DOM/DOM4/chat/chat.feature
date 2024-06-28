@@ -63,6 +63,7 @@ Feature: Chat and Chat Optimization
     And tenant search kost then go to kost details:
       | kost name stag                                      | kost name prod                             |
       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kost Automation Mix Tobelo Halmahera Utara |
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "Cara menghubungi pemilik?"
     And user click send chat from popup
@@ -75,11 +76,11 @@ Feature: Chat and Chat Optimization
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 083176408311 | 083132824758 | qwerty123 |
+      | 08888812912  | 083132824758 | qwerty123 |
     And user click chat button in top bar owner home page
     And search chat in chatlist "Coop Chat Automation"
-    Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
     And user dismiss FTUE TBC
+    Then chat room appear with latest message "Boleh minta nomor yang bisa dihubungi?"
     When owner enter text "My phone is 00000000001" in chat page
     Then chat room appear with latest message "My phone is 00000000001"
 

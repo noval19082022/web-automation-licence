@@ -93,10 +93,7 @@ public class ForgotPasswordPO {
      * Choose SMS to send OTP
      */
     public void selectOTPBySMS() {
-        if (pilihMethodeVerifikasiBtn.isVisible()) {
-            pilihMethodeVerifikasiBtn.click();
-        }
-        sendOtpBySMSBtn.click();
+        playwright.doubleClick(sendOtpBySMSBtn);
     }
 
     /**
@@ -115,7 +112,7 @@ public class ForgotPasswordPO {
      * @return String text
      */
     public String getResendOTPButton() {
-        playwright.waitTillLocatorIsVisible(kirimUlangOtpBtn);
+        playwright.hardWait(65000);
         return kirimUlangOtpBtn.textContent();
     }
 

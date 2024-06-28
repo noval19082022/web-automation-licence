@@ -1,8 +1,9 @@
 @DOM1 @essentialTest
 Feature: Payment All
-
-  Background: Delete and create contract
-    ##delete contract
+  
+@continue
+  Scenario: Delete and create contract
+    #delete contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
@@ -35,33 +36,8 @@ Feature: Payment All
     And owner accept booking and select the room
     And owner logs out
 
-  @extendContract @TEST_COOP-5181
-  Scenario: extend contract from admin
-    Given admin go to mamikos mamipay admin
-    When admin search contract by tenant phone number:
-      | phone stag | phone prod  |
-      | 0895124719 | 08119787884 |
-    And admin search contract by kost level "SinggahSini"
-#  this step is comment for whale because the button is hide after ARAC project phase 1 release
-#    And admin want to extend contract
-#    Then admin will see detail pop up "Custom Extend Contract"
-#    And admin fills duration "8" month
-#    And admin click extend button
-
-  @paymentBni @TEST_COOP-5184
-  Scenario: Tenant pay kos BNI
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant select payment method using BNI
-    And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see payment is success
-
-  @paymentCreditCard @TEST_COOP-5185
+  @paymentCreditCard @TEST_COOP-5185 @continue
   Scenario: Tenant pay kos credit card
-    Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
       | 0895124719 | 083176408442 | qwerty123 |
@@ -69,121 +45,129 @@ Feature: Payment All
     And tenant select payment method Credit Card
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
-
-  @paymentDana @TEST_COOP-5186
-  Scenario: Tenant pay kos Dana
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
+    And tenant close unused browser tab
     And tenant navigate to riwayat and draf booking
-    And tenant select payment method with DANA
+    And tenant checkin kost from riwayat booking
+
+  @TEST_COOP-6905 @continue
+  Scenario: [Invoice] Check Invoice From Kost saya dibayar
+    Given user go to mamikos homepage
+    And tenant navigate to tagihan kost saya
+    And tenant click sudah di bayar
+    Then tenant will see that the text "Dibayar" is displayed
+
+  @paymentBni @TEST_COOP-5184 @continue
+  Scenario: Tenant pay kos BNI
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment method using BNI
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+    And tenant close unused browser tab
 
-  @paymentLinkAja @TEST_COOP-5188
-  Scenario: Tenant pay kos LinkAja
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant select payment method using LinkAja
-    And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see payment is success
-
-  @paymentMandiri @TEST_COOP-5189
+  @paymentMandiri @TEST_COOP-5189 @continue
   Scenario: Tenant pay kos mandiri
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using mandiri without close the page
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant pay invoice from invoice detail using mandiri without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+    And tenant close unused browser tab
 
-  @paymentOvo @TEST_COOP-5190
-  Scenario: Tenant pay kos ovo
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "0892202100" without close the page
-    And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see payment is success
-
-  @paymentPermata @TEST_COOP-5191
+  @paymentPermata @TEST_COOP-5191 @continue
   Scenario: Tenant pay kos permata
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant select payment method using "PERMATA"
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment method from invoice detail using Permata
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+    And tenant close unused browser tab
 
-  @paymentAlfamart @TEST_COOP-4606
-  Scenario: Tenant pay kos BBK alfamart
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant select payment method using Alfamart
-    And tenant want to see invoice on riwayat booking after payment
-    Then tenant will see payment is success
-
-  @paymentBRIMidtrans @TEST_COOP-5041
+  @paymentBRIMidtrans @TEST_COOP-5041 @continue
   Scenario: Tenant pay kos BBK using BRI
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant select payment method using BRI from riwayat booking
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment method from invoice detail using BRI
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
+    And tenant close unused browser tab
+
+  @paymentDana @TEST_COOP-5186 @continue
+  Scenario: Tenant pay kos Dana
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment from invoice detail with DANA
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+    And tenant close unused browser tab
+
+  @paymentLinkAja @TEST_COOP-5188 @continue
+  Scenario: Tenant pay kos LinkAja
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment from invoice detail using LinkAja
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+    And tenant close unused browser tab
+
+  @paymentOvo @TEST_COOP-5190 @continue
+  Scenario: Tenant pay kos ovo
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant pay booking to extended contract using ovo "0892202100"
+    And tenant close unused browser tab
+
+  @paymentAlfamart @TEST_COOP-4606 @continue
+  Scenario: Tenant pay kos BBK alfamart
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment using alfamart xendit as payment method from invoice detail
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+    And tenant close unused browser tab
+
+  @TEST_COOP-2438 @continue
+  Scenario: Tenant pay kos using indomaret
+    Given user go to mamikos homepage
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
+    And tenant select payment using indomaret xendit as payment method from invoice detail
+    And tenant want to see invoice on riwayat booking after payment
+    Then tenant will see payment is success
+
+  @TEST_COOP-6906 @continue
+  Scenario: [Invoice] Check Invoice From Kost saya Belum Dibayar
+    Given user go to mamikos homepage
+    And tenant navigate to tagihan kost saya
+    Then tenant will see invoice "Belum Dibayar"
 
   @TEST_COOP-5711
   Scenario: Tenant click bayar saya sudah bayar before paid
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
-      | 0895124719 | 083176408442 | qwerty123 |
-    And tenant navigate to riwayat and draf booking
+    When tenant navigate to tagihan kost saya
+    And tenant go to invoice page
     And tenant click bayar sekarang before paid
     Then user verify error messages
       | Pembayaran Belum Terverifikasi |
+    And tenant close unused browser tab
 
-  @TEST_COOP-6905
-  Scenario: [Invoice] Check Invoice From Kost saya dibayar
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0891112020198 | 0891112020198 | mamikosqa123 |
-    And tenant navigate to tagihan kost saya
-    And tenant click sudah di bayar
-    Then tenant will see invoice "Dibayar"
-
-  @TEST_COOP-6906
-  Scenario: [Invoice] Check Invoice From Kost saya Belum Dibayar
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0891112020198 | 0891112020198 | mamikosqa123 |
-    And tenant navigate to tagihan kost saya
-    Then tenant will see invoice "Belum Dibayar"
-
-    @TEST_COOP-2438
-    Scenario: Tenant pay kos using indomaret
-      Given user go to mamikos homepage
-      When user login as tenant via phone number:
-        | phone stag | phone prod   | password  |
-        | 0895124719 | 083176408442 | qwerty123 |
-      And tenant navigate to riwayat and draf booking
-      And tenant select payment method using Indomaret
-      And tenant want to see invoice on riwayat booking after payment
-      Then tenant will see payment is success
+#    @extendContract @TEST_COOP-5181
+#  Scenario: extend contract from admin
+#    Given admin go to mamikos mamipay admin
+#    When admin search contract by tenant phone number:
+#      | phone stag | phone prod  |
+#      | 0895124719 | 08119787884 |
+#    And admin search contract by kost level "SinggahSini"
+#    And this step is comment for whale because the button is hide after ARAC project phase 1 release
+#    And admin want to extend contract
+#    Then admin will see detail pop up "Custom Extend Contract"
+#    And admin fills duration "8" month
+#    And admin click extend button

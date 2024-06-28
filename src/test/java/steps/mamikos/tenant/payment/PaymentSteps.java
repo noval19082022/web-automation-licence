@@ -139,7 +139,7 @@ public class PaymentSteps {
 
     @And("tenant select payment method using BNI")
     public void tenantSelectPaymentMethodUsingBNI() {
-        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+     //   invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
@@ -234,6 +234,16 @@ public class PaymentSteps {
         xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
     }
 
+    @And("owner/tenant/user select payment using indomaret xendit as payment method from invoice detail")
+    public void paymentOwnerSuccessUsingIndomaretXenditAsPaymentMethod() {
+        invoicePO.clickOnPilihPembayaran();
+        invoicePO.clickOnIndomaret();
+        invoicePO.clickOnBayarSekarang();
+        var kodePerusahaan = invoicePO.getCodePembayaran();
+        var nominal = invoicePO.getTotalPembayaran();
+        xenditAPI.processPaymentIndomaretViaPostman(kodePerusahaan, String.valueOf(nominal));
+    }
+
     @And("owner/tenant/user select payment method from invoice detail using Permata")
     public void ownerSelectPaymentMethodUsingPermata() {
         invoicePO.clickOnPilihPembayaran();
@@ -247,7 +257,6 @@ public class PaymentSteps {
 
     @And("tenant click bayar sekarang before paid")
     public void tenantClickBayarSekarangBeforePaid() {
-        invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnPermata();
         invoicePO.clickOnBayarSekarang();
