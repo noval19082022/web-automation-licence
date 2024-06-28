@@ -117,7 +117,7 @@ public class KostOwnerPO {
      */
     public void clickOnFirstVerifyButton() {
         playwright.clickOn(firstVerifyButton);
-        playwright.waitTillPageLoaded();
+        playwright.waitTillPageLoaded(3_000.0);
     }
 
     /**
