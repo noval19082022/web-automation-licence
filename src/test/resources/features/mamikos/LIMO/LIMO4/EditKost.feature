@@ -1,4 +1,4 @@
-@regression @LIMO4 @editKost
+@regression @LIMO4 @editKost123
 Feature: Edit Kost
 
   @TEST_LIMO-2877 @EditKosInvalidFacility @continue
@@ -33,7 +33,7 @@ Feature: Edit Kost
   @TEST_LIMO-2879 @EditKos1to5NoChanges @continue
   Scenario: [Web][Edit Kost] Edit kost with condition user wants to edit step 1-5 without change anything
     When owner navigates to property saya kos
-    And owner search kost "Kos oke bebek Tipe Mamitest Not Change" on property saya page
+    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
     And user click Lihat Selengkapnya button for edit
     And user click "Edit Data Kos"
     And user click button edit finished
@@ -43,11 +43,13 @@ Feature: Edit Kost
     And user click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     When user click done in success page pop up of edit kos
-    And owner search kost "Kos oke bebek Tipe Mamitest Not Change" on property saya page
-    Then user see kos with name "Kos oke bebek Tipe Mamitest Not Change", status "Aktif" and type "Kos Campur"
-#
-  @TEST_LIMO-2878 @EditKosAddress
+    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
+    Then user see kos with name "Kos oke bebek Vviop Depok Sleman", status "Aktif" and type "Kos Putra"
+
+  @TEST_LIMO-2878 @TEST_LIMO-2878-required @EditKosAddress @continue
   Scenario: [Web][Edit Kost] Edit kost address with valid data
+    And owner navigates to property saya kos
+    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
     When user click Lihat Selengkapnya button for edit
     And user click "Edit Data Kos"
     And user click button edit "Alamat Kos" kos
@@ -55,19 +57,21 @@ Feature: Edit Kost
     And user input address note "Perubahan agar diperiksa admin " and random text
     And user click button edit finished
     And user click done in success page pop up of edit kos
-    And owner search kost "Kos oke bebek Tipe Mamitest Not Change" on property saya page
-    Then user see kos with name "Kos oke bebek Tipe Mamitest Not Change", status "Diperiksa Admin" and type "Kos Campur"
+    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
+    Then user see kos with name "Kos oke bebek Vviop Depok Sleman", status "Diperiksa Admin" and type "Kos Putra"
 
-  Scenario: Verify kos in admin
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+  @TEST_LIMO-2878-required
+  Scenario: Verify kos Kos oke bebek Vviop Depok Sleman in admin
+    Given user try to logout from mamikos
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "Kos oke bebek Tipe Mamitest Not Change" in admin kos owner page
+    And admin bangkrupux search kost owner "Kos oke bebek Vviop Depok Sleman" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-2719
+  @TEST_LIMO-2719 @TEST_LIMO-2719-required @continue
   Scenario Outline: Status kos is active or reject and owner edit description kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -86,18 +90,21 @@ Feature: Edit Kost
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And user click done in success page pop up of edit kos
     Then user see kos with name "<kost name>", status "Diperiksa Admin" and type "Kos Campur"
-    And user logs out
-#  Scenario: Verify kos in admin
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "<kost name>" in admin kos owner page
-    And user verify the kos in admin kos owner
     Examples:
       | kost name     |
       | MAMAHMUDALIMO |
+
+    ## this step is required to excecute to avoid next step failed
+  @TEST_LIMO-2719-required
+  Scenario: Verify kos MAMAHMUDALIMO in admin
+    Given user try to logout from mamikos
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
+    And user verify the kos in admin kos owner
 
   @TEST_LIMO-2710 @updatefotokost
   Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
@@ -146,7 +153,7 @@ Feature: Edit Kost
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
 
-  @TEST_LIMO-2726 @continue
+  @TEST_LIMO-2726 @TEST_LIMO-2711 @continue @editKost123
   Scenario: [Edit kos][Edit data needs verification process]Status kos == active or reject && owner edit data needs verification process
     Given user go to mamikos homepage
     When user login as owner:
@@ -188,9 +195,9 @@ Feature: Edit Kost
 #      | kost nama      |
 #      | PAPASUKA GENIT |
 
-  @TEST_LIMO-2726
-  Scenario: Verify kos in admin
-    Given user logs out
+  @TEST_LIMO-2716 @editKost123
+  Scenario: [Edit kos][Harga]Intercept confirmation on screen "Harga"
+    Given user try to logout from mamikos
     When admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -198,3 +205,22 @@ Feature: Edit Kost
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
     And user verify the kos in admin kos owner
+    And admin try to logout from mamikos
+#  @TEST_LIMO-2716
+#  Scenario: Verify kos in admin
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787881 |            | qwerty123 |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "PAPASUKA GENIT" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Ketersediaan Kamar" kos
+    Then owner will see that the text "Atur Ketersediaan Kamar" is displayed
+    And user click button edit "Harga" kos
+    Then owner will see that the text "Update Harga Sewa" is displayed
+    And owner tap on update harga if exist
+    And user clicks update price button
+    Then user see pop up success update price "Harga berhasil diupdate"
