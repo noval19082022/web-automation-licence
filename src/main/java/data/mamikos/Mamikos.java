@@ -87,6 +87,8 @@ public class Mamikos {
     public static final String MAMIPRIME = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprime");
     public static final String MAMIPRIME_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "historyMamiprime");
     public static final String LOGIN_USER = JavaHelpers.getPropertyValue(MAMIKOS, "loginUSer");
+    public static final String MAMIPRIME_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeTestingTools");
+
 
     @Setter @Getter
     private static  String propertyKosName;
