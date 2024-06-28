@@ -2,8 +2,8 @@
 
 Feature: Manage User Point
 
-  @TEST_LIMO-1588 @continue @userPoint
-  Scenario: Filter User Point By Keyword
+  @TEST_LIMO-63 @continue @userPoint
+  Scenario: [Point Management][User Point] Filter User Point By Keyword
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
@@ -13,8 +13,8 @@ Feature: Manage User Point
     * user clicks on Search button
     Then system display list user point contains "Amanda"
 
-  @TEST_LIMO-1619 @userPoint @continue
-  Scenario: Filter User Point By User
+  @TEST_LIMO-61 @userPoint @continue
+  Scenario: [Point Management][User Point] Filter User Point By User
     When admin access user point menu
     * user select filter User "owner"
     * user clicks on Search button
@@ -23,8 +23,8 @@ Feature: Manage User Point
     * user clicks on Search button
     Then system display list user point as "Tenant"
 
-  @TEST_LIMO-1620 @userPoint @continue
-  Scenario: Filter User Point By Status
+  @TEST_LIMO-60 @userPoint @continue
+  Scenario: [Point Management][User Point] Filter User Point By Status
     When admin access user point menu
     * user select filter Status "Blacklist"
     * user clicks on Search button
@@ -33,8 +33,8 @@ Feature: Manage User Point
     * user clicks on Search button
     Then system display list user point as "Whitelist"
 
-  @TEST_LIMO-1590 @userPoint @continue
-  Scenario: Sorting Total Point
+  @TEST_LIMO-62 @userPoint @continue
+  Scenario: [Point Management][User Point] Sorting Total Point
     When admin access user point menu
     * user clicks Total Point header
     Then user verify total point sorted "ascending"
@@ -42,8 +42,8 @@ Feature: Manage User Point
     Then user verify total point sorted "descending"
     And mamikos bangkrupux admin should be successfully logged out
 
-  @TEST_LIMO-1585
-  Scenario: Blacklist and Whitelist User Point
+  @TEST_LIMO-65
+  Scenario: [Point Management][User Point] Blacklist and Whitelist User Point
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
@@ -68,8 +68,8 @@ Feature: Manage User Point
     Then system display list user point as "Whitelist"
 
 
-  @TEST_LIMO-1587 @continue @topUp
-  Scenario: Adjust Point Topup
+  @TEST_LIMO-64 @continue @topUp
+  Scenario: [Point Management][User Point]Adjust Point Topup
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
@@ -84,8 +84,8 @@ Feature: Manage User Point
     * user clicks on Submit button on Adjust Point form
     Then user verify allert success "Success!" and "successfully updated."
 
-  @TEST_LIMO-1583 @topUp
-  Scenario: Adjust Point Topdown
+  @TEST_LIMO-66 @topUp
+  Scenario: [Point Management][User Point]Adjust Point Topdown
     * admin access user point menu
     When user filter user point by keyword "phone number" is "0895359416718"
     * user clicks on Search button
@@ -97,8 +97,8 @@ Feature: Manage User Point
     Then user verify allert success "Success!" and "successfully updated."
     And mamikos bangkrupux admin should be successfully logged out
 
-  @TEST_LIMO-1582 @continue @bulkUserPoint
-  Scenario: Manage User Point Display
+  @TEST_LIMO-67 @continue @bulkUserPoint
+  Scenario: [Point Management][User Point] Manage User Point Display
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
@@ -156,8 +156,8 @@ Feature: Manage User Point
     When user click page index "2" at user point
     Then manage user point page "2" will be opened
 
-  @TEST_LIMO-1621 @continue @bulkUserPoint
-  Scenario: Bulk Update Blacklist
+  @TEST_LIMO-59 @continue @bulkUserPoint
+  Scenario: [Point Management][User Point]Bulk Update Blacklist
     * admin access user point menu
     * admin click Bulk Update Blacklist
     Then admin see "Bulk Update Blacklist User" pop-up appear
@@ -165,8 +165,8 @@ Feature: Manage User Point
     * user click button submit csv bulk blacklist
     Then success Update Blacklist using csv
 
-  @TEST_LIMO-1622 @bulkUserPoint
-  Scenario: Bulk Adjust Point
+  @TEST_LIMO-58 @bulkUserPoint
+  Scenario: [Point Management][User Point]Bulk Adjust Point
     * admin access user point menu
     * user click Bulk Adjust Point
     Then admin see "Bulk Adjust Point" pop-up appear

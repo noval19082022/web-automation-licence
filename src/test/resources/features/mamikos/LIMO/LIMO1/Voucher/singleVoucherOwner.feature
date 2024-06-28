@@ -2,8 +2,8 @@
 
 Feature: Single voucher owner
 
-  @TEST_LIMO-1216
-  Scenario: admin check redirect menu action at single owner voucher
+  @TEST_LIMO-233
+  Scenario: [GP Voucher Admin][Single Voucher]User click Voucher List Tooltip
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
       | email stag                   | email prod                   | password  |

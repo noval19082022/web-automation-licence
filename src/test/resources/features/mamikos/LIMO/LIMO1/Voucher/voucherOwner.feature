@@ -2,8 +2,8 @@
 Feature: Voucher
 
 
-  @TEST_LIMO-193 @continue @invalidVoucher
-  Scenario: Apply voucher doesnt active
+  @TEST_LIMO-1394 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher doesnt active
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag    | phone prod | password |
@@ -18,43 +18,43 @@ Feature: Voucher
     Then validate the warning "Kode voucher tidak bisa digunakan."
     And user clear the voucher code
 
-  @TEST_LIMO-177 @continue @invalidVoucher
-  Scenario: Input invalid voucher code
+  @TEST_LIMO-1396 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Input invalid voucher code
     When user input "MAATNOTACTIVEVOUCHER1" as kode voucher
     * user click Pakai button
     Then validate the warning "Kode voucher tidak ditemukan."
     And user clear the voucher code
 
-  @TEST_LIMO-175 @continue @invalidVoucher
-  Scenario: Input empty voucher
+  @TEST_LIMO-1397 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Input empty voucher
     When user input "" as kode voucher
     * user click Pakai button
     Then validate the warning "Masukkan kode voucher."
     And user clear the voucher code
 
-  @TEST_LIMO-187 @continue @invalidVoucher
-  Scenario: Apply voucher with condition Doens't buy minimal saldo the voucher
+  @TEST_LIMO-1398 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition Doens't buy minimal saldo the voucher
     When user input "MAATMINTRXVOUCHERMASS" as kode voucher
     * user click Pakai button
     Then validate the warning "Belum mencapai minimal transaksi."
     And user clear the voucher code
 
-  @TEST_LIMO-181 @continue @invalidVoucher
-  Scenario: Apply voucher with condition voucher expired
+  @TEST_LIMO-1399 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition voucher expired
     When user input "KIPUMASSEXPIREDINV" as kode voucher
     * user click Pakai button
     Then validate the warning "Kode voucher tidak bisa digunakan."
     And user clear the voucher code
 
-  @TEST_LIMO-178 @continue @invalidVoucher
-  Scenario: Apply voucher with condition quota voucher 0
+  @TEST_LIMO-1400 @continue @invalidVoucher
+  Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition quota voucher 0
     When user input "SANITYAPRIL" as kode voucher
     * user click Pakai button
     Then validate the warning "Kuota voucher ini sudah habis."
     And user clear the voucher code
 
 
-  @TEST_LIMO-173 @TEST_LIMO-183 @TEST_LIMO-188
+  @TEST_LIMO-1424 @TEST_LIMO-1425
   Scenario: Apply voucher from detail voucher and deleted apply voucher
     And owner back to list voucher
     * user verify "MA AUTOMATION SINGLE VOUCHER" is present on list voucher
