@@ -7,7 +7,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Naraya"
+    And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
     And admin click on save button
@@ -19,7 +19,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Naraya"
+    And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
     And admin fill phone number tenant "011"
@@ -35,7 +35,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Naraya"
+    And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
     And admin click on save button
@@ -49,7 +49,7 @@ Feature: PMS New DBET
     When admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Naraya"
+    And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
     And admin fill email tenant "tenanttujuh"
