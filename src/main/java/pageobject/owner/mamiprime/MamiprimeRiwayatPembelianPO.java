@@ -24,7 +24,7 @@ public class MamiprimeRiwayatPembelianPO {
         this.noTransactionSelesaiText = page.getByTestId("prime-history-done").getByText("Belum Ada Transaksi");
         this.noTransactionSelesaiDescText = page.getByTestId("prime-history-done").getByText("Transaksi yang telah selesai akan muncul di halaman ini.");
         this.mamiprimeSelesaiTab = page.locator("//a[contains(.,'Selesai')]");
-        this.unpaidTransactionMamiprimeList = page.getByTestId("PrimeHistoryList").first();
+        this.unpaidTransactionMamiprimeList = page.getByText("Lihat Detail").first();
     }
 
     /**
@@ -85,6 +85,14 @@ public class MamiprimeRiwayatPembelianPO {
      */
     public boolean isUnpaidTransactionMamiprimeListDisplayed(){
         return unpaidTransactionMamiprimeList.isVisible();
+    }
+
+    /**
+     * Click on latest unpaid transaction mamiprime
+     *
+     */
+    public void clickOnLatestUnpaidTransactionMamiprime() {
+        playwright.clickOn(unpaidTransactionMamiprimeList);
     }
 
 }

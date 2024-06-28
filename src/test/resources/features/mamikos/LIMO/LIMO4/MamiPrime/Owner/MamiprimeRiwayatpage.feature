@@ -21,7 +21,7 @@ Feature: Riwayat Mamiprime Page
     When Owner click tab Selesai at riwayat pembelian mamiprime
     Then Owner will see empty state at tab selesai in halaman riwayat mamiprime
 
-  @TEST_LIMO-6066
+  @TEST_LIMO-6066 @continue
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner only have transaction unpaid at tab dalam proses
     Given user go to mamikos homepage
     When user login as owner:
@@ -31,6 +31,11 @@ Feature: Riwayat Mamiprime Page
     And Owner purchase mamiprime periode "7 Hari"
     And Owner navigate to riwayat pembelian mamiprime
     Then Owner will see transaction unpaid mamiprime
+
+  @TEST_LIMO-6066
+  Scenario: [WEB][Mamiprime][Riwayat Page]Redirection invoice unpaid mamiprime
+    When Owner click the latest unpaid invoice mamiprime
+    Then owner see jenis pembayaran "MamiPrime - Kata Kunci (7 Hari)"
 
   Scenario: Reset Mamiprime
     Given admin go to mamikos mamipay admin

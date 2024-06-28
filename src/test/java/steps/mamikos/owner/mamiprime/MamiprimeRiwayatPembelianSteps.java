@@ -35,6 +35,12 @@ public class MamiprimeRiwayatPembelianSteps {
 
     @Then("Owner will see transaction unpaid mamiprime")
     public void owner_will_see_transaction_unpaid_mamiprime(){
-        Assert.assertTrue(mamiprimeRiwayatPembelianPO.isUnpaidTransactionMamiprimeListDisplayed());
+        Assert.assertFalse(mamiprimeRiwayatPembelianPO.isNoTransactionDalamProsesTextDisplayed());
+        Assert.assertFalse(mamiprimeRiwayatPembelianPO.isNoTransactionDalamProsesDescTextDisplayed());
+    }
+
+    @When("Owner click the latest unpaid invoice mamiprime")
+    public void owner_click_the_latest_unpaid_invoice_mamiprime(){
+        mamiprimeRiwayatPembelianPO.clickOnLatestUnpaidTransactionMamiprime();
     }
 }
