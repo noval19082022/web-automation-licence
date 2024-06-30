@@ -43,3 +43,22 @@ Feature: Riwayat Mamiprime Page
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin wants to reset mamiprime for owner with property ID "1000030951"
+
+  @TEST_LIMO-6073
+  Scenario: [WEB][Mamiprime][Riwayat Page]Owner have transaction paid and active prime at tab selesai
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password |
+      | 082233545512 | 0          | 12345678 |
+    And owner navigate to pendaftaran mamiprime page
+    And Owner purchase mamiprime periode "7 Hari"
+    Then payment owner success using ovo as payment method
+    When Owner navigate to riwayat pembelian mamiprime
+    Then Owner will see transaction paid mamiprime
+
+  Scenario: Reset Mamiprime
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin wants to reset mamiprime for owner with property ID "1000030951"
