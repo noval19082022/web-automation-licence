@@ -43,8 +43,8 @@ Feature: Select property section
     Then owner can see "Kost AT Snow Jetis Yogyakarta" doesnt have label "Kuota Daerah Penuh" at section select property
     And owner will see Pilih Periode section will display package prices
 
-  @TEST_LIMO-5756
-  Scenario: [WEB][Mamikos Prime][Section Pilih Properti] Check listing who have unpaid invoice and active prime is not show
+  @TEST_LIMO-5756 @continue
+  Scenario: [WEB][Mamikos Prime][Section Pilih Properti] Check listing who have unpaid invoice is not show
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password |
@@ -52,6 +52,14 @@ Feature: Select property section
     And owner navigate to pendaftaran mamiprime page
     And Owner purchase mamiprime periode "7 Hari"
     And owner navigate to pendaftaran mamiprime page
+    Then owner should not be able to see the text "Kost AT lagi Gedang Sari Gunung Kidul"
+
+  @TEST_LIMO-5756
+  Scenario: [WEB][Mamikos Prime][Section Pilih Properti] Check listing who have active prime is not show
+    And Owner navigate to riwayat pembelian mamiprime
+    When Owner click the latest unpaid invoice mamiprime
+    Then payment owner success using ovo as payment method
+    When owner navigate to pendaftaran mamiprime page
     Then owner should not be able to see the text "Kost AT lagi Gedang Sari Gunung Kidul"
 
   Scenario: Reset Mamiprime
