@@ -42,3 +42,21 @@ Feature: Select property section
     And owner navigate to pendaftaran mamiprime page
     Then owner can see "Kost AT Snow Jetis Yogyakarta" doesnt have label "Kuota Daerah Penuh" at section select property
     And owner will see Pilih Periode section will display package prices
+
+  @TEST_LIMO-5756
+  Scenario: [WEB][Mamikos Prime][Section Pilih Properti] Check listing who have unpaid invoice and active prime is not show
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password |
+      | 082233545512 | 0          | 12345678 |
+    And owner navigate to pendaftaran mamiprime page
+    And Owner purchase mamiprime periode "7 Hari"
+    And owner navigate to pendaftaran mamiprime page
+    Then owner should not be able to see the text "Kost AT lagi Gedang Sari Gunung Kidul"
+
+  Scenario: Reset Mamiprime
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin wants to reset mamiprime for owner with property ID "1000030951"

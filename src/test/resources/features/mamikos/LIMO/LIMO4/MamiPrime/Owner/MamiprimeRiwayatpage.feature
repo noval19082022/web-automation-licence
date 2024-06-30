@@ -5,8 +5,8 @@ Feature: Riwayat Mamiprime Page
   Scenario: Entry point riwayat mamiprime
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod  | password   |
-      | 0890910001 | 0890910001  | qwerty123  |
+      | phone stag   | phone prod | password |
+      | 082233545512 | 0          | 12345678 |
     And user click on mamiprime widget at owner dashboard
     Then user see lihat riwayat button
     When user click lihat riwayat mamiprime button
@@ -16,18 +16,14 @@ Feature: Riwayat Mamiprime Page
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at tab dalam proses
     Then Owner will see empty state at tab dalam proses in halaman riwayat mamiprime
 
-  @TEST_LIMO-6065
+  @TEST_LIMO-6065 @continue
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at tab selesai
     When Owner click tab Selesai at riwayat pembelian mamiprime
     Then Owner will see empty state at tab selesai in halaman riwayat mamiprime
 
   @TEST_LIMO-6066 @continue
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner only have transaction unpaid at tab dalam proses
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545512 | 0          | 12345678 |
-    And owner navigate to pendaftaran mamiprime page
+    When owner navigate to pendaftaran mamiprime page
     And Owner purchase mamiprime periode "7 Hari"
     And Owner navigate to riwayat pembelian mamiprime
     Then Owner will see transaction unpaid mamiprime
