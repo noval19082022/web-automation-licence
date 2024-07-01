@@ -166,7 +166,7 @@ Feature: Edit Kost
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
-      | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
     And owner upload valid rule kos
     And owner click button edit finished
