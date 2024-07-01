@@ -60,21 +60,27 @@ Feature: Inquiry and Create Manual Payout
     Then admin see warning minimal amount
 
   @TEST_COOP-5297 @Automated @web-covered @continue
-  Scenario Outline: [Mamipay][Manual Payout] Create manual payout with <type> type
+  Scenario: [Mamipay][Manual Payout] Create manual payout with <type> type
     Given admin go to mamikos mamipay admin
-    And admin want to create payout with type "<type>"
+    When admin login to mamipay:
+      | email stag              | email prod              | password  |
+      | uncle.coop2@mamikos.com | uncle.coop2@mamikos.com | qwerty123 |
+    And admin want to create payout with type "Disbursement"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Deposit Return"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Refund"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Refund Outside MamiPAY"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Refund Charging"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Payout to Tenant"
+    Then admin see payout ready to processed message
+    And admin want to create payout with type "Additional Payout to Owner"
     Then admin see payout ready to processed message
     And admin cancel payout transaction
     And admin see payout canceled message
-    Examples:
-      | type                       |
-      | Disbursement               |
-      | Deposit Return             |
-      | Refund                     |
-      | Refund Outside MamiPAY     |
-      | Refund Charging            |
-      | Payout to Tenant           |
-      | Additional Payout to Owner |
 
   @TEST_COOP-5295 @Automated @web-covered
   Scenario: [Mamipay][Manual Payout]Create payout with invoice still not allow transfer
@@ -106,42 +112,30 @@ Feature: Inquiry and Create Manual Payout
     Then admin see processing payout message
 
   @TEST_COOP-5298 @Automated @web-covered @createAndChangeManualPayout
-  Scenario Outline: [Mamipay][Manual Payout] Change payout type to <type>
+  Scenario: [Mamipay][Manual Payout] Change payout type to owner
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
-      | email stag | email prod | password  |
-      | <email>    | <email>    | qwerty123 |
-    And admin want to change payout type into "<type>"
+      | email stag              | email prod | password  |
+      | uncle.coop1@mamikos.com | <email>    | qwerty123 |
+    And admin want to change payout type into "Refund Outside MamiPAY"
     Then admin see payout data successfully updated message
-    Examples:
-      | email                      | type                       |
-      | uncle.coop1@mamikos.com    | Refund Outside MamiPAY     |
-      | uncle.coop2@mamikos.com    | Payout to Tenant           |
-      | Automation.pw1@mamikos.com | Additional Payout to Owner |
-
-  @createAndChangeManualPayout
-  Scenario Outline: [Mamipay][Manual Payout] Change payout type to <type>
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag | email prod | password  |
-      | <email>    | <email>    | qwerty123 |
-    And admin want to change payout type into "<type>"
+    And admin want to change payout type into "Payout to Tenant"
     Then admin see payout data successfully updated message
-    Examples:
-      | email                      | type                       |
-      | uncle.coop1@mamikos.com    | Refund Charging            |
-      | uncle.coop2@mamikos.com    | Disbursement               |
-      | Automation.pw1@mamikos.com | Refund                     |
+    And admin want to change payout type into "Additional Payout to Owner"
+    Then admin see payout data successfully updated message
+    And admin want to change payout type into "Refund Charging"
+    Then admin see payout data successfully updated message
+    And admin want to change payout type into "Disbursement"
+    Then admin see payout data successfully updated message
+    And admin want to change payout type into "Refund"
+    Then admin see payout data successfully updated message
 
   @TEST_COOP-1375 @TEST_COOP-1376 @Automated @web-covered
-  Scenario Outline: [Mamipay][Manual Payout] Sort payout list by <sorting direction> data
+  Scenario: [Mamipay][Manual Payout] Sort payout list by <sorting direction> data
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag              | email prod              | password  |
       | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin mamipay visit manual payout page
-    And admin mamipay want to sort manual payout by "<sorting direction>"
-    Examples:
-      | sorting direction |
-      | newest            |
-      | oldest            |
+    And admin mamipay want to sort manual payout by "newest"
+    And admin mamipay want to sort manual payout by "oldest"
