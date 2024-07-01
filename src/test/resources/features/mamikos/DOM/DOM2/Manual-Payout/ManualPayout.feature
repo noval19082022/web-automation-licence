@@ -62,9 +62,6 @@ Feature: Inquiry and Create Manual Payout
   @TEST_COOP-5297 @Automated @web-covered @continue
   Scenario: [Mamipay][Manual Payout] Create manual payout with <type> type
     Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag              | email prod              | password  |
-      | uncle.coop2@mamikos.com | uncle.coop2@mamikos.com | qwerty123 |
     And admin want to create payout with type "Disbursement"
     Then admin see payout ready to processed message
     And admin want to create payout with type "Deposit Return"

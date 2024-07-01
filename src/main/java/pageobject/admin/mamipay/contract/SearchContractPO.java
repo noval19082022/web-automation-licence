@@ -304,6 +304,9 @@ public class SearchContractPO {
      * @return boolean
      */
     public boolean isSisaDepositBtnDisable() {
+        if (playwright.isButtonEnable(konfirmasiSisaDepoBtn)){
+            return konfirmasiSisaDepoBtn.isEnabled();
+         }
         return konfirmasiSisaDepoBtn.isDisabled();
     }
 
