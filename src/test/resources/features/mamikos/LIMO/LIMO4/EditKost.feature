@@ -168,7 +168,7 @@ Feature: Edit Kost
     And owner fills valid data kos as expected
       | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
-    And owner upload valid rule kos
+#    And owner upload valid rule kos
     And owner click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And owner click button edit data lain
@@ -241,7 +241,8 @@ Feature: Edit Kost
     And owner fills valid data kos as expected
       | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
-    And owner upload valid rule kos
+#    And owner upload valid rule kos
+    And owner re-upload valid kos rule
     And user click button edit "Ketersediaan Kamar" kos
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
