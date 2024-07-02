@@ -169,6 +169,7 @@ Feature: Edit Kost
       | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
 #    And owner upload valid rule kos
+    And owner re-upload valid kos rule
     And owner click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And owner click button edit data lain
