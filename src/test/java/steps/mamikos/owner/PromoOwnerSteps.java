@@ -133,4 +133,29 @@ public class PromoOwnerSteps {
     public void adminSuccessfullyAddPromoOwner() {
         Assert.assertEquals(promoOwner.getAlertSuccessUpdate(), "Success! Promo created successfully", "Alert doesn't match!");
     }
+
+    @And("admin clicks on ceate promotion")
+    public void adminClicksOnCeatePromotion() {
+        promoOwner.clickOnCreatePromotion();
+    }
+
+    @Then("admin verify the status promo is No verification admin")
+    public void adminVerifyTheStatusPromoIsNoVerificationAdmin() {
+        Assert.assertTrue(promoOwner.isUnverifiedStatus(), "Verification admin is verified!");
+    }
+
+    @When("admin click on action show and edit promo owner")
+    public void adminClickOnActionShowAndEditPromoOwner() {
+        promoOwner.clickOnShowAndEditPromo();
+    }
+
+    @Then("admin verify the confirmation is {string}")
+    public void adminVerifyTheConfirmationIs(String status) {
+        Assert.assertFalse(promoOwner.isConfirmationTrue(status), "Confirmation status doesn't match!");
+    }
+
+    @Then("user not see promo owner on {string} detail")
+    public void userNotSeePromoOwnerOnDetail(String propertyType) {
+        Assert.assertFalse(promoOwner.isDetailKostPromoOwnerVisible(propertyType), "Detail promo owner not visible!");
+    }
 }

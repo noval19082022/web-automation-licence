@@ -41,6 +41,9 @@ public class PromoOwnerPO {
     Locator createAndVerifyPromotionButton;
     Locator searchButtonCreatePromo;
     Locator inputField;
+    Locator createPromotionButton;
+    Locator showAndEditPromoLink;
+    Locator detailPromoOwner;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
@@ -61,6 +64,8 @@ public class PromoOwnerPO {
         buatkanPromosiButton = page.locator("//a[contains(.,'Buatkan Promosi')]");
         createAndVerifyPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create and Verify Promotion"));
         searchButtonCreatePromo = page.locator(".btn-primary");
+        createPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Promotion"));
+        showAndEditPromoLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show or Edit"));
     }
 
     /**
@@ -441,5 +446,44 @@ public class PromoOwnerPO {
      */
     public void clickOnSearchKosCreatePromo() {
         playwright.clickOn(searchButtonCreatePromo);
+    }
+
+    /**
+     * Click create promotion button on create promo owner form on admin
+     *
+     */
+    public void clickOnCreatePromotion() {
+        playwright.clickOn(createPromotionButton);
+    }
+
+    /**
+     * Click show and edit promo on admin
+     *
+     */
+    public void clickOnShowAndEditPromo() {
+        playwright.clickOn(showAndEditPromoLink);
+    }
+
+    /**
+     * Verify the dropdown confirmation
+     *
+     */
+    public boolean isConfirmationTrue(String status) {
+        return playwright.isTextDisplayed(status);
+    }
+
+    /**
+     * Verify the promo owner is visible or not on detail property
+     * @param propertyType (kost, apartemen)
+     * @return boolean, true if promo is visible, and false if promo not visible
+     *
+     */
+    public boolean isDetailKostPromoOwnerVisible(String propertyType) {
+        if (propertyType.equals("kost")){
+            detailPromoOwner = page.getByTestId("detailKostOwnerPromo");
+        } else if (propertyType.equals("apartemen")) {
+            detailPromoOwner = page.locator("//div[@class='card-info__payment --apt-promo']");
+        }
+        return playwright.waitTillLocatorIsVisible(detailPromoOwner, 3000.0);
     }
 }
