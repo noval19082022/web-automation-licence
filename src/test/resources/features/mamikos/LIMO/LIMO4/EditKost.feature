@@ -166,9 +166,9 @@ Feature: Edit Kost
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
-      | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
-    And owner upload valid rule kos
+    And owner re-upload valid kos rule
     And owner click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And owner click button edit data lain
@@ -224,3 +224,24 @@ Feature: Edit Kost
     And owner tap on update harga if exist
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
+
+  @TEST_LIMO-2706 @TEST_LIMO-2707 @editKost
+  Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Rejected Kost
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787884 |            | Perempuan |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "Desta Paris Test coba Banguntapan Bantul" on property saya page
+    Then owner will see that the text "Data Kos Ditolak" is displayed
+    And user clicks on edit data kos button
+    Then owner will see that the text "Update kos anda" is displayed
+    And user click button edit "Data Kos" kos
+    And owner fills valid data kos as expected
+      | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+    And owner re-upload valid kos rule
+    And user click button edit "Ketersediaan Kamar" kos
+    Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
+    * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed

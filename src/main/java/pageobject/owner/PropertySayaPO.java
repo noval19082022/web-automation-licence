@@ -1372,8 +1372,6 @@ public class PropertySayaPO {
      */
     public void uploadValidAturanKos() {
         String imagePath = "src/main/resources/images/aturan-kos.png";
-        if (playwright.waitTillLocatorIsVisible(aturPeraturanBtn)) playwright.clickOn(aturPeraturanBtn);
-        deleteFotoAturanKostIfVisible();
 
         if (ubahFoto.isVisible()) {
             FileChooser fileChooser = page.waitForFileChooser(() -> ubahFoto.click());
@@ -1387,6 +1385,18 @@ public class PropertySayaPO {
             playwright.hardWait(3000);
         }
 
+    }
+
+    /**
+     * Re-Upload valid aturan kos
+     * it will delete existing photo
+     * If ubah foto visible using element ubah foto
+     * If ubah foto invisible using element upload peraturan button
+     */
+    public void reUploadValidAturanKost() {
+        if (playwright.waitTillLocatorIsVisible(aturPeraturanBtn)) playwright.clickOn(aturPeraturanBtn);
+        deleteFotoAturanKostIfVisible();
+        uploadValidAturanKos();
     }
 
     /**
