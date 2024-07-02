@@ -2,7 +2,7 @@
 
 Feature: CP Disbursement - Tambah Daftar Transfer
 
-  @TEST_PMAN-3326 @continue
+  @TEST_PMAN-687 @continue
   Scenario: Input Invalid property
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message "Mohon periksa kembali nama/level kos" should occur in nama property field
     Then Tambahkan button is disable
 
-  @TEST_PMAN-3325 @continue
+  @TEST_PMAN-689 @continue
   Scenario: Input Valid property
     When admin search property "khu" in tambah data transfer
     And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
@@ -26,13 +26,13 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
     Then Tambahkan button is enable
 
-  @TEST_PMAN-3327
+  @TEST_PMAN-698
   Scenario: Change valid to invalid property
     When admin search property "ABC" in tambah data transfer
     Then error message "Mohon periksa kembali nama/level kos" should occur in nama property field
     And Tambahkan button is disable
 
-  @TEST_PMAN-3328 @continue
+  @TEST_PMAN-670 @continue
   Scenario: Change invalid to valid property
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -50,7 +50,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik |
       | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          |
 
-  @TEST_PMAN-3339 @continue
+  @TEST_PMAN-659 @continue
   Scenario: Ensure data not deleted when popup closed
     When admin fill remaining field
       | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
@@ -61,12 +61,12 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Nama Property                                     | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
       | Kost Apik Khusus Automation PMAN Halmahera Utara  | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
 
-  @TEST_PMAN-3333 @continue
+  @TEST_PMAN-678 @continue
   Scenario: input > 50 characters in tipe transaksi lainnya
     When admin select tipe transaksi lainnya ">50 characters"
     Then admin only can input transaksi lainnya using only 50 characters
 
-  @TEST_PMAN-3340 @continue
+  @TEST_PMAN-661 @continue
   Scenario: Submit with valid data
     When admin select tipe transaksi lainnya "Automation Testing PMAN"
     And admin submit tambah data transfer
@@ -74,14 +74,14 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Tanggal Transfer ke Pemilik | Nama Property                                     | Tipe Transaksi          | Total Pendapatan  | Detail Rekening                   |
       | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara  | Automation Testing PMAN | Rp100.000         | Yudha Ferroza 10000245429 mandiri |
 
-  @TEST_PMAN-3355 @continue
+  @TEST_PMAN-668 @continue
   Scenario: Delete Total Pendapatan and Check Error Message and Transfer Sekarang button
     When admin clicks Transfer button in one of list data transaction
     And admin remove "Total Pendapatan" value
     Then error message on "Total Pendapatan" field is displayed
     And Tambahkan button is disable
 
-  @TEST_PMAN-3354 @continue
+  @TEST_PMAN-665 @continue
   Scenario: Delete Nomor Rekening and Check Error Message and Transfer Sekarang button
     When admin refresh page in CP Disbursement
     And admin clicks Transfer button in one of list data transaction
@@ -89,7 +89,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message on "Nomor Rekening" field is displayed
     And Tambahkan button is disable
 
-  @TEST_PMAN-3353
+  @TEST_PMAN-666
   Scenario: Delete Nama Pemilik Rekening and Check Error Message and Transfer Sekarang button
     When admin refresh page in CP Disbursement
     And admin clicks Transfer button in one of list data transaction
@@ -97,7 +97,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message on "Nama Pemilik Rekening" field is displayed
     And Tambahkan button is disable
 
-  @TEST_PMAN-3357
+  @TEST_PMAN-663
   Scenario: Input Total Pendapatan with Char
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -113,7 +113,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message on "Total Pendapatan" field is displayed
     And Tambahkan button is disable
 
-  @TEST_PMAN-3324 @continue
+  @TEST_PMAN-683 @continue
   Scenario: Add without fill any field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -123,7 +123,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     And admin tambah data transfer
     Then Tambahkan button is disable
 
-  @TEST_PMAN-3336 @continue
+  @TEST_PMAN-671 @continue
   Scenario: Tambah Data Transfer pop up display
     When admin refresh page in CP Disbursement
     And admin tambah data transfer
@@ -144,7 +144,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | Kembali     |
       | Tambahkan   |
 
-  @TEST_PMAN-3334 @continue
+  @TEST_PMAN-677 @continue
   Scenario: Empty tipe transaksi lainnya
     When admin search property "khusus" in tambah data transfer
     And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
@@ -154,18 +154,18 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     Then error message on "Tipe Transaksi" field is displayed
     And Tambahkan button is disable
 
-  @TEST_PMAN-3338 @continue
+  @TEST_PMAN-673 @continue
   Scenario: Kembali from pop up tambah data transfer
     When admin "kembali" pop up tambah data transfer
     Then tambah data transfer pop up closed
 
-  @TEST_PMAN-3337 @continue
+  @TEST_PMAN-674 @continue
   Scenario: Close pop up tambah data transfer
     When admin tambah data transfer
     And admin "close" pop up tambah data transfer
     Then tambah data transfer pop up closed
 
-  @TEST_PMAN-3329 @continue
+  @TEST_PMAN-669 @continue
   Scenario: Input Invalid Bank Account
     When admin refresh page in CP Disbursement
     And admin tambah data transfer
@@ -177,7 +177,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     And admin fill nomor rekening "lorem ipsum"
     Then error message on "Nomor Rekening" field is displayed
 
-  @TEST_PMAN-3330 @continue
+  @TEST_PMAN-676 @continue
   Scenario: Add without fill bank account name
     When admin refresh page in CP Disbursement
     And admin tambah data transfer
@@ -186,7 +186,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
     And admin fill nama pemilik rekening "-"
     Then error message on "Nama Pemilik Rekening" field is displayed
 
-  @TEST_PMAN-3332 @continue
+  @TEST_PMAN-675 @continue
   Scenario: Add without fill tipe transaksi
     When admin refresh page in CP Disbursement
     And admin tambah data transfer
@@ -197,7 +197,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
       | 100000            | -               | today             | pdf example.pdf | Disbursement susulan  |
     Then error message on "Tipe Transaksi" field is displayed
 
-  @TEST_PMAN-3335
+  @TEST_PMAN-672
   Scenario: Add without select schedule transfer
     When admin refresh page in CP Disbursement
     And admin tambah data transfer

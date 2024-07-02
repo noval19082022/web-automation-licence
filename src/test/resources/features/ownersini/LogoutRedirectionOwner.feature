@@ -2,12 +2,12 @@
 
   Feature: Ownersini - Logout Redirection
 
-    @TEST_PMAN-8797
+    @TEST_PMAN-812
     Scenario: Owner not login yet but access ownersini
       When user navigates to ownersini
       Then user redirect to login pemilik page
 
-    @TEST_PMAN-7762
+    @TEST_PMAN-722
     Scenario: Owner P1 log out from Ownersini Dashboard
       Given user go to mamikos homepage
       When user login as owner:
@@ -16,7 +16,7 @@
       And owner logout from ownersini dashboard
       Then owner redirect to login pemilik page
 
-    @TEST_PMAN-8798
+    @TEST_PMAN-810
     Scenario: Owner P1 log out from Owner Dashboard P2
       Given user go to mamikos homepage
       When user login as owner:
@@ -27,7 +27,7 @@
       When owner logs out
       Then owner redirect to login pemilik page
 
-    @TEST_PMAN-8799
+    @TEST_PMAN-828
     Scenario: Owner P2 log out
       Given user go to mamikos homepage
       When user login as owner:

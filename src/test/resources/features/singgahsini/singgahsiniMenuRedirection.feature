@@ -2,7 +2,7 @@
 
   Feature: Singgahsini Menu Redirection
 
-    @TEST_PMAN-3185
+    @TEST_PMAN-638
     Scenario: Header Menu Redirection
       Given user navigates to singgahsini.id
       #Navbar Menu Tentang Kami
@@ -15,7 +15,7 @@
       When user click header menu "Tanya Jawab"
       Then page auto scroll to section "Tanya Jawab"
 
-    @TEST_PMAN-3177
+    @TEST_PMAN-759
     Scenario: Footer Menu Redirection
       Given user navigates to singgahsini.id
       #Footer Menu Tentang Kami
@@ -28,7 +28,7 @@
       When user click footer menu "Tanya Jawab"
       Then page auto scroll to section "Tanya Jawab"
 
-    @TEST_PMAN-3178
+    @TEST_PMAN-763
     Scenario: Footer Social Media Redirection
       Given user navigates to singgahsini.id
       #Tiktok

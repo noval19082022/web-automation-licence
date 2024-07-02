@@ -2,7 +2,7 @@
 
   Feature: Room List Feature
 
-    @TEST_PMAN-3273
+    @TEST_PMAN-597
     Scenario: Checks Room List Display
       Given admin go to mamikos bangkrupux admin
       When admin login to bangkrupux:
