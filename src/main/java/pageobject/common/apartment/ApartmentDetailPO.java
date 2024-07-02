@@ -11,6 +11,7 @@ public class ApartmentDetailPO {
     private Locator contactApartmentButton;
     private Locator favoriteBtn;
     private Locator successMsgPopUp;
+    private Locator apartDetailContainer;
 
     public ApartmentDetailPO(Page page) {
         this.page = page;
@@ -18,6 +19,7 @@ public class ApartmentDetailPO {
         contactApartmentButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Pengelola"));
         this.favoriteBtn = page.getByTestId("btn-love");
         this.successMsgPopUp = page.getByText("Sukses tersimpan");
+        this.apartDetailContainer = page.locator("//div[@class='detail']");
     }
 
     /**
@@ -40,5 +42,12 @@ public class ApartmentDetailPO {
      */
     public String getSuccessMessage() {
         return playwright.getText(successMsgPopUp);
+    }
+
+    /**
+     * Verify the detal apartement is visible after load
+     */
+    public void waitTillApartDetailPageVisible() {
+        playwright.waitForElementStateToBe(apartDetailContainer, "visible");
     }
 }
