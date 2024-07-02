@@ -2,7 +2,7 @@
 
 Feature: Overview
 
-  @TEST_PMAN-4621 @continue
+  @TEST_PMAN-792 @continue
   Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
@@ -27,7 +27,7 @@ Feature: Overview
       | ID    | Nama Property                                     | Jenis Produk  | Tipe                    | Syarat Pekerjaan Penyewa      | Syarat Agama Penyewa            | Alamat                          | Peta Lokasi                                             |
       | 3143  | Kost Apik Khusus Automation PMAN Halmahera Utara  | Apik          | Tipe A, Tipe B, Tipe C  | Mahasiswa, Karyawan, Pelajar  | Hindu, Islam, Katolik, Kristen  | Jl Poros Halmahera No 28 RT 02  | https://www.google.com/maps/place/1.7213294,127.9733685 |
 
-  @TEST_PMAN-4620
+  @TEST_PMAN-790
   Scenario: See and Edit Penanggung Jawab
     When admin see penanggung jawab section
     Then penanggung jawab should be match

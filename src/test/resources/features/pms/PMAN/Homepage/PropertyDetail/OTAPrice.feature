@@ -2,7 +2,7 @@
 
 Feature: Check OTA Price in Detail Kontrak PMS
 
-  @TEST_PMAN-7086 @continue
+  @TEST_PMAN-741 @continue
   Scenario: Check All listings that Does Not Have OTA Price
     Given admin go to pms singgahsini
     When admin login pms :
@@ -15,7 +15,7 @@ Feature: Check OTA Price in Detail Kontrak PMS
       | Red         | campur  | 7             | -                         | Rp1.200.000         | Rp0                 | Rp7.200.000         |
       | Yellow      | campur  | 3	          | -                         | Rp2.000.000         | Rp0                 | Rp12.000.000	    |
 
-  @TEST_PMAN-8865 @continue
+  @TEST_PMAN-830 @continue
   Scenario: Check OTA Price in One of the Listing
     When admin go to Homepage
     And admin go to detail property "Khusus Automation"
@@ -26,7 +26,7 @@ Feature: Check OTA Price in Detail Kontrak PMS
       | Tipe B      | campur  | 3	          | -                         | Rp800.000           | Rp0                 | Rp4.000.000 	    |
       | Tipe C	    | campur  | 3             | -                         | Rp800.000	        | Rp0                 | Rp4.000.000	        |
 
-  @TEST_PMAN-8866
+  @TEST_PMAN-821
   Scenario: Check All listings that Have OTA Prices
     When admin go to Homepage
     And admin go to detail property "Pangeran Kumbang"
