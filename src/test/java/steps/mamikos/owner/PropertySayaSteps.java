@@ -486,6 +486,11 @@ public class PropertySayaSteps {
 
     }
 
+    @And("owner clear description kost on edit page")
+    public void clearDesc() {
+        propertySaya.clearDescKost();
+    }
+
     @And("owner set rules kos:")
     public void ownerSetRulesKos(List<String> rules) {
         propertySaya.clickOnAturPeraturanKos();
@@ -1154,5 +1159,10 @@ public class PropertySayaSteps {
     @And("owner re-upload valid kos rule")
     public void ownerReUploadValidKosRule() {
         propertySaya.reUploadValidAturanKost();
+    }
+
+    @When("owner close pop up in edit kost")
+    public void ownerClosePopUpInEditKost() {
+        propertySaya.clickCloseBtnIfExist();
     }
 }

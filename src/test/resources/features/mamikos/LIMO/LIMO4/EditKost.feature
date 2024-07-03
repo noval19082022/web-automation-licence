@@ -246,7 +246,7 @@ Feature: Edit Kost
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
 
-  @TEST_LIMO-2727
+  @TEST_LIMO-2727 @continue
   Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Data Tahun Kos Dibangun OR Deskripsi Kos OR Fasilitas Kamar Mandi OR Fasilitas Umum tidak ada
     Given user go to mamikos homepage
     When user login as owner:
@@ -263,5 +263,18 @@ Feature: Edit Kost
       | kos name    | room type check | room type name | kos type | description kos               | build kos | other note     |
       | <kost name> | no              | -              | mix      | Kos automation random ya guys | 1999      | Akan edit nama |
     And user click button edit "Ketersediaan Kamar" kos
+    Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
+    * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
+
+  @TEST_LIMO-2728
+  Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Foto Kos OR Foto Kamar belum di mapping ke yg baru (dari data lama) OR Provinsi field kosong
+#    When user click on "close" button
+    When owner close pop up in edit kost
+    And owner clear description kost on edit page
+    Then owner will see that the text "Anda belum mengisi deskripsi kos." is displayed
+    And owner fills valid data kos as expected
+      | kos name    | room type check | room type name | kos type | description kos | build kos | other note     |
+      | <kost name> | no              | -              | mix      | okokokok        | 1999      | Akan edit nama |
+    And user click button edit "Alamat Kos" kos
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
