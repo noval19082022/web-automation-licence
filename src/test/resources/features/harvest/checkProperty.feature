@@ -1,4 +1,4 @@
-@regression @pman @harvest @checkProperty
+@regression @pman3 @harvest @checkProperty
 
   Feature: Check Property Mamikos
 
