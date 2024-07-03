@@ -4,7 +4,6 @@ import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.JavaHelpers;
@@ -2238,7 +2237,7 @@ public class PropertySayaPO {
      * Click on edit data kos button
      */
     public void clickOnEditDataKosButton() {
-        playwright.clickOn(editDataKosButton);
+        playwright.clickOn(editDataKosButton.first());
     }
 
     /**

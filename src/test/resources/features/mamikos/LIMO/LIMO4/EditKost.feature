@@ -245,3 +245,23 @@ Feature: Edit Kost
     And user click button edit "Ketersediaan Kamar" kos
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
+
+  @TEST_LIMO-2727
+  Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Data Tahun Kos Dibangun OR Deskripsi Kos OR Fasilitas Kamar Mandi OR Fasilitas Umum tidak ada
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787884 |            | Perempuan |
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    And owner search kost "automation limo LIMO 2727 Depok Sleman" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And user clicks on edit data kos button
+    And user click button edit "Data Kos" kos
+    Then owner will see that the text "Apa nama kos ini?" is displayed
+    And owner fills valid data kos as expected
+      | kos name    | room type check | room type name | kos type | description kos               | build kos | other note     |
+      | <kost name> | no              | -              | mix      | Kos automation random ya guys | 1999      | Akan edit nama |
+    And user click button edit "Ketersediaan Kamar" kos
+    Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
+    * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
