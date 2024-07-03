@@ -107,6 +107,7 @@ public class AdminFeeDiscountPO {
      */
     public void deleteAdminFeeName(String adminFeeName) {
         Locator adminFee = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(adminFeeName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete"));
+        playwrightHelpers.waitTillLocatorIsVisible(adminFee, 1000.0);
         playwrightHelpers.acceptDialog(adminFee);
     }
 

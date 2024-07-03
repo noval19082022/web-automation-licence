@@ -8,7 +8,7 @@ Feature: Add Owner Expenditure
       | pman@mamiteam.com | pmanM4m1t34m  |
     And admin go to other transation menu
 
-  @TEST_PMAN-6038
+  @TEST_PMAN-554
   Scenario: Add valid owner expenditure
     When admin add new owner expenditure "Reimbursement" in property "Khusus Automation"
     And admin add multiple biaya pengeluaran :
@@ -36,7 +36,7 @@ Feature: Add Owner Expenditure
       | Sabun Mandi |
       | Wipol       |
 
-  @TEST_PMAN-6311
+  @TEST_PMAN-701
   Scenario Outline: Search active and expired property
     When admin add new owner expenditure and search property "<keyword>"
     Then system should show property suggestion "<property name>"
@@ -46,7 +46,7 @@ Feature: Add Owner Expenditure
       | Asgard          | Kost Singgahsini Asgard Halmahera Utara                   |
       | Beruang Terbang | Kost Singgahsini Beruang Terbang Mamitest Halmahera Utara |
 
-  @TEST_PMAN-6439
+  @TEST_PMAN-691
   Scenario Outline: Search terminated and auto_terminated property
     When admin add new owner expenditure and search property "<keyword>"
     Then property suggestion not appear
@@ -56,7 +56,7 @@ Feature: Add Owner Expenditure
       | Jotunheim   |
       | Woodchuck   |
 
-  @TEST_PMAN-6312
+  @TEST_PMAN-706
   Scenario: Auto Fill Kota and Sisa Kontrak Kerja Sama
     #terminated property
     When admin add new owner expenditure and search property "Jotunheim"
@@ -65,7 +65,7 @@ Feature: Add Owner Expenditure
     When admin edit and choose property "Asgard"
     Then system should be auto fill kota and sisa kontrak kerja sama
 
-  @TEST_PMAN-6313 @pman2-prod
+  @TEST_PMAN-705 @pman2-prod
   Scenario: Verify Kategori Pengeluaran List
     When admin tambah data owner expenditure
     Then admin verify kategori pengeluaran list should contains :
@@ -86,7 +86,7 @@ Feature: Add Owner Expenditure
       | Perlengkapan Kebersihan Kos                 |
       | Lainnya                                     |
 
-  @TEST_PMAN-6314 @pman2-prod
+  @TEST_PMAN-717 @pman2-prod
   Scenario: Nama Pengeluaran Validation
     When admin tambah data owner expenditure
     #empty nama pengeluaran
@@ -100,7 +100,7 @@ Feature: Add Owner Expenditure
     Then nama pengeluaran should be only contains 50 characters
     And tambah pengeluaran button should be enable
 
-  @TEST_PMAN-6315 @pman2-prod
+  @TEST_PMAN-681 @pman2-prod
   Scenario: Kuantitas Validation
     When admin tambah data owner expenditure
     #empty kuantitas
@@ -119,7 +119,7 @@ Feature: Add Owner Expenditure
     Then kuantitas field value should be "50"
     And tambah pengeluaran button should be enable
 
-  @TEST_PMAN-6316 @pman2-prod
+  @TEST_PMAN-679 @pman2-prod
   Scenario: Nominal Pengeluaran Validation
     When admin tambah data owner expenditure
     #empty nominal
@@ -132,7 +132,7 @@ Feature: Add Owner Expenditure
     When admin fill biaya pengeluaran "10000"
     Then biaya pengeluaran value should be "10.000"
 
-  @TEST_PMAN-6035 @pman2-prod
+  @TEST_PMAN-566 @pman2-prod
   Scenario: Upload Valid Format Attachment
     When admin tambah data owner expenditure
     #upload valid jpg
@@ -159,19 +159,19 @@ Feature: Add Owner Expenditure
     And admin upload "pdf 8MB" attachment
     Then show upload attachment error message
 
-  @TEST_PMAN-6036 @pman2-prod
+  @TEST_PMAN-563 @pman2-prod
   Scenario: Upload Invalid Format Attachment
     When admin tambah data owner expenditure
     And admin upload invalid attachment
     Then show upload attachment error message
 
-  @TEST_PMAN-6538 @pman2-prod
+  @TEST_PMAN-682 @pman2-prod
   Scenario: Max 30 pengeluaran each Owner Expenditure
     When admin tambah data owner expenditure
     And admin add 30 pengeluaran
     Then admin can't add more pengeluaran
 
-  @TEST_PMAN-6537 @pman2-prod
+  @TEST_PMAN-684 @pman2-prod
   Scenario: Total Pengeluaran Calculation
     When admin tambah data owner expenditure
     #there is no pengeluaran yet

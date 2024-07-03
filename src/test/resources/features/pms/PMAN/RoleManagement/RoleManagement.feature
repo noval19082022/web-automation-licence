@@ -2,7 +2,7 @@
 
 Feature: Role Management
 
-  @TEST_PMAN-3690 @continue @context1 @context2
+  @TEST_PMAN-829 @continue @context1 @context2
   Scenario: Add Role
     Given owner set browser context to "context1"
     And bring page to front
@@ -38,12 +38,12 @@ Feature: Role Management
     And admin submit add new role
     Then system should show toast message "Role berhasil disimpan."
 
-  @TEST_PMAN-3684 @continue
+  @TEST_PMAN-857 @continue
   Scenario: Search Role
     When admin search role "Automation Test"
     Then role "Automation Test" should exist
 
-  @TEST_PMAN-5189 @continue
+  @TEST_PMAN-753 @continue
   Scenario: Add existing Role
     When admin go to tambah role
     And admin set new role "Automation Test"
@@ -53,7 +53,7 @@ Feature: Role Management
     And admin submit add new role
     Then system show nama role error message "Nama role sudah digunakan. Masukkan nama role yang lain."
 
-  @TEST_PMAN-3687 @continue
+  @TEST_PMAN-811 @continue
   Scenario: Edit Role
     When admin go to role management menu
       #change using existing role name
@@ -68,7 +68,7 @@ Feature: Role Management
     And admin submit add new role
     Then system should show toast message "Perubahan berhasil disimpan."
 
-  @TEST_PMAN-3685 @continue
+  @TEST_PMAN-872 @continue
   Scenario: Assign Member to Role
       #add invalid member
     When admin assign member "giska@mamiteam.com" to role "Automation Test PMAN"
@@ -78,8 +78,8 @@ Feature: Role Management
     When admin assign member "automationpman01@mamikos.com" to role "Automation Test PMAN"
     Then member "automationpman01@mamikos.com" should registered
 
-  @TEST_PMAN-3689 @continue
-  Scenario: Check Button Available
+  @TEST_PMAN-809 @continue
+  Scenario: User can access PMS according to their role
     Given owner set browser context to "context2"
     And bring page to front
     When admin go to pms singgahsini
@@ -92,7 +92,7 @@ Feature: Role Management
       | Ketersediaan Kamar  |
       | Unduh CSV           |
 
-  @TEST_PMAN-3695 @continue
+  @TEST_PMAN-832 @continue
   Scenario: Delete Member
     Given owner set browser context to "context1"
     And bring page to front
@@ -105,8 +105,8 @@ Feature: Role Management
     But admin confirm to delete member
     Then member "automationpman01@mamikos.com" not registered
 
-  @TEST_PMAN-5322 @continue
-  Scenario: Check Button Not Available
+  @TEST_PMAN-771 @continue
+  Scenario: User can't access some Menu in PMS according to their role
     Given owner set browser context to "context2"
     And bring page to front
     When admin refresh page 0
@@ -115,7 +115,7 @@ Feature: Role Management
       | Ketersediaan Kamar  |
       | Unduh CSV           |
 
-  @TEST_PMAN-3692
+  @TEST_PMAN-826
   Scenario: Delete Role
     Given owner set browser context to "context1"
     And bring page to front

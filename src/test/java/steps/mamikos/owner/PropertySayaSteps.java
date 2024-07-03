@@ -1150,4 +1150,9 @@ public class PropertySayaSteps {
     public void ownerTapOnUpdateHargaIfExist() {
         propertySaya.clickOnUpdateHargaIfExist();
     }
+
+    @And("owner re-upload valid kos rule")
+    public void ownerReUploadValidKosRule() {
+        propertySaya.reUploadValidAturanKost();
+    }
 }

@@ -48,6 +48,12 @@ public class CommonSteps {
         users.logoutAsTenant();
     }
 
+    @And("user/owner/tenant/adminbangker/admin try to logout from mamikos")
+    public void userLogout() {
+        playwright.navigateToAndWaitLocator(Mamikos.URL, home.getMamikosLogo());
+        users.tryToLogoutFromMamikos();
+    }
+
     @And("user/tenant/admin close unused browser tab")
     public void userCloseUnusedTab() {
         List<Page> pages = ActiveContext.getActiveBrowserContext().pages();

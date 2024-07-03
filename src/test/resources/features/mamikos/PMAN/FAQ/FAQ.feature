@@ -2,7 +2,7 @@
 
 Feature: FAQ
 
-  @TEST_PMAN-3252 @continue
+  @TEST_PMAN-628 @continue
   Scenario: Search Question and Answer in FAQ
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -16,7 +16,7 @@ Feature: FAQ
     When admin search "keuntungan" in FAQ "Answer"
     Then FAQ "Answer" result is displayed
 
-  @TEST_PMAN-3283 @continue
+  @TEST_PMAN-553 @continue
   Scenario: Add FAQ
     #Delete FAQ PMAN AT if any
     When admin search "PMAN AT" in FAQ "Question"
@@ -26,14 +26,14 @@ Feature: FAQ
     And admin search "PMAN AT" in FAQ "Question"
     Then new Level FAQ is displayed
 
-  @TEST_PMAN-3253
+  @TEST_PMAN-625
   Scenario: Delete FAQ
     When admin deletes level faq
     Then alert message is displayed
     When admin search "PMAN AT" in FAQ "Question"
     Then new Level FAQ is not displayed
 
-  @TEST_PMAN-3290
+  @TEST_PMAN-761
   Scenario: Verify FAQ Content
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

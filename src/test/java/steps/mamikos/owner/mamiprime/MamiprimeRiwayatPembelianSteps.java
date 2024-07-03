@@ -43,4 +43,11 @@ public class MamiprimeRiwayatPembelianSteps {
     public void owner_click_the_latest_unpaid_invoice_mamiprime(){
         mamiprimeRiwayatPembelianPO.clickOnLatestUnpaidTransactionMamiprime();
     }
+
+    @Then("Owner will see transaction paid mamiprime")
+    public void owner_will_see_transaction_paid_mamiprime(){
+        Assert.assertFalse(mamiprimeRiwayatPembelianPO.isNoTransactionSelesaiTextDisplayed());
+        Assert.assertFalse(mamiprimeRiwayatPembelianPO.isNoTransactionSelesaiDescTextDisplayed());
+    }
+
 }

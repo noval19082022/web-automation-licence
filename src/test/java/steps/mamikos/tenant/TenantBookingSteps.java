@@ -12,6 +12,7 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
+import pageobject.common.apartment.ApartmentDetailPO;
 import pageobject.tenant.BookingFormPO;
 import pageobject.tenant.SuccessBookingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -26,6 +27,7 @@ public class TenantBookingSteps {
     HomePO homePO = new HomePO(page);
     SearchPO searchPO;
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    ApartmentDetailPO apartDetail = new ApartmentDetailPO(page);
     BookingFormPO bookingForm;
     SuccessBookingPO successBooking;
 
@@ -33,6 +35,7 @@ public class TenantBookingSteps {
 
     private List<Map<String, String>> searchKost;
     private List<String> ftueBookingBenefitTextList;
+    private List<Map<String, String>> searchApart;
 
     @When("tenant search kost then go to kost details:")
     public void tenantSearchKostThenGoToKostDetails(DataTable table) {
@@ -534,5 +537,14 @@ public class TenantBookingSteps {
     @Then("tenant can see tenant description with {string}")
     public void tenant_can_see_description_with(String text){
         Assert.assertEquals(bookingForm.getDeskriptionDiri(),text, "description diri is different");
+    }
+
+    @And("tenant search apart then go to apartemen details:")
+    public void tenantSearchApartThenGoToApartemenDetails(DataTable table) {
+        searchApart = table.asMaps(String.class, String.class);
+        var apartName = searchApart.get(0).get("apart name " + Mamikos.ENV);
+        searchPO = homePO.clickOnSearchButton();
+        kostDetail = searchPO.searchByText(apartName);
+        apartDetail.waitTillApartDetailPageVisible();
     }
 }

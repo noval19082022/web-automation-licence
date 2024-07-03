@@ -2,7 +2,7 @@
 
 Feature: Access Point SS Dashboard From Pillar 2
 
-  @TEST_PMAN-7678
+  @TEST_PMAN-723
   Scenario: Check Access Point SS Dashboard which Owner has Pillar 1
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,7 +13,7 @@ Feature: Access Point SS Dashboard From Pillar 2
     When owner clicks Dashboard Singgahsini on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 1
 
-  @TEST_PMAN-8795
+  @TEST_PMAN-806
   Scenario: Check Access Point SS Dashboard which Owner does not have Pillar 1
     Given user go to mamikos homepage
     When user login as owner:

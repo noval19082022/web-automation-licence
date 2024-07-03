@@ -2,7 +2,7 @@
 
   Feature: Add Additional Fee Master Data
 
-    @continue @TEST_PMAN-8877
+    @continue @TEST_PMAN-820
     Scenario: Additional fee name max 60 char validation
       Given admin go to pms singgahsini
       And admin login pms :
@@ -20,7 +20,7 @@
       When admin input nama biaya "Automated Biaya PMAN"
       Then nama biaya error message not appear
 
-    @continue @TEST_PMAN-8878
+    @continue @TEST_PMAN-825
     Scenario: Existing additional fee name validation
       #input existing nama biaya
       When admin input nama biaya "Parkir Mobil"
@@ -29,20 +29,20 @@
       When admin input nama biaya "Automated Biaya PMAN"
       Then nama biaya error message not appear
 
-    @continue @TEST_PMAN-8879
+    @continue @TEST_PMAN-780
     Scenario: Auto select Ditentukan di Awal if choose Tipe Pembayaran Biaya Tetap
       When admin select tipe pembayaran biaya "Tetap"
       Then waktu penentuan harga biaya ditentukan di awal auto selected
       And waktu penentuan harga biaya disesuaikan dengan tagihan is not visible
 
-    @continue @TEST_PMAN-8880
+    @continue @TEST_PMAN-777
     Scenario: Auto select Penyewa Bisa Pilih Mandiri Tidak if choose Disesuaikan dengan tagihan
       When admin select tipe pembayaran biaya "Satu Kali"
       And admin select waktu penentuan harga biaya "Disesuaikan dengan Tagihan"
       Then penyewa bisa pilih mandiri is auto select Tidak
       And penyewa bisa pilih mandiri are disabled
 
-    @continue @TEST_PMAN-8433
+    @continue @TEST_PMAN-853
     Scenario: Add new Additional Fee
       When admin select satuan waktu biaya "Harian"
       And admin submit additional fee
@@ -50,12 +50,12 @@
         | Tipe Pembayaran | Satuan Biaya Top  | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
         | Satu Kali       | Harian            | -                   | Disesuaikan dengan Tagihan  | Tidak                       |
 
-    @continue @TEST_PMAN-8667
+    @continue @TEST_PMAN-856
     Scenario: Delete additional fee master data
       When admin delete additional fee "Automated Biaya PMAN"
       Then no additional fee master data with name "Automated Biaya PMAN"
 
-    @TEST_PMAN-8881
+    @TEST_PMAN-785
     Scenario: Button tambah validation
       When admin add new additional fee
       #All field empty
@@ -109,7 +109,7 @@
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah enable
 
-    @TEST_PMAN-8882
+    @TEST_PMAN-783
       Scenario: Delete master data that are being used in Biaya Tambahan
       Given admin go to pms singgahsini
       And admin login pms :

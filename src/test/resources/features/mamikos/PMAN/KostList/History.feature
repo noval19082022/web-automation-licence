@@ -1,7 +1,8 @@
 @singgahsini @regression @pman @pman-prod
 
 Feature: Kost List History
-  @TEST_PMAN-3262
+
+  @TEST_PMAN-588
   Scenario: Admin - Verify Component of Page Kost List
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

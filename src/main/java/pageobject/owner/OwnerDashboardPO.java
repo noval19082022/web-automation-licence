@@ -191,8 +191,8 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
-            playwright.clickOnText("Nanti Saja");
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
+            playwright.clickOnText("Nanti Saja", 5000.0);
         }
         playwright.waitTillLocatorIsVisible(manajemenKost);
         playwright.clickOn(manajemenKost);
