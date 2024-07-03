@@ -2,7 +2,7 @@
 
 Feature: Homepage menu
 
-  @TEST_PMAN-3594 @continue
+  @TEST_PMAN-868 @continue
   Scenario: Check empty state in Homepage menu
     Given admin go to pms singgahsini
     When admin login pms :
@@ -11,7 +11,7 @@ Feature: Homepage menu
     And admin search property by name "Lalala"
     Then empty state in Homepage menu is displayed
 
-  @TEST_PMAN-5251 @continue
+  @TEST_PMAN-765 @continue
   Scenario: Reset / Clear Keyword in Search Bar
     #clear keyword using property ID
     When admin search property using ID "3143"
@@ -22,38 +22,38 @@ Feature: Homepage menu
     And admin clear keyword in Homepage
     Then search bar is empty
 
-  @TEST_PMAN-3597 @continue
+  @TEST_PMAN-854 @continue
   Scenario: View Detail Property Page
     When admin go to detail property "3143"
     Then admin redirect to detail property page
 
-  @TEST_PMAN-3598 @continue
+  @TEST_PMAN-851 @continue
   Scenario: View Room Allotment Page
     When admin go to Homepage
     And admin search property using ID "3143"
     And admin go to Ketersediaan Kamar in Homepage action button
     Then admin redirect to room allotment page
 
-  @TEST_PMAN-3583 @continue
+  @TEST_PMAN-842 @continue
   Scenario: Apply Some Filters
     When admin go to Homepage
     And admin Filter data in Homepage
     Then the system is displaying total active filter number is "11"
     And property is displayed
 
-  @TEST_PMAN-3584 @continue
+  @TEST_PMAN-864 @continue
   Scenario: Reset filter
     When admin reset filter in Homepage
     Then the system is displaying total active filter number is "1"
 
-  @TEST_PMAN-3585 @continue
+  @TEST_PMAN-862 @continue
   Scenario: Reset filter using the reset button inside filter modal
     When admin Filter data in Homepage
     Then the system is displaying total active filter number is "11"
     And admin reset filter in Homepage filter modal
     Then the system is displaying total active filter number is "1"
 
-  @TEST_PMAN-3587 @continue
+  @TEST_PMAN-869 @continue
   Scenario: Search using property ID
     #Search property using valid property ID
     When admin reset filter in Homepage
@@ -64,7 +64,7 @@ Feature: Homepage menu
     And admin search property using ID "0101"
     Then empty state in Homepage menu is displayed
 
-  @TEST_PMAN-5250
+  @TEST_PMAN-767
   Scenario: Search using property name
     #Search property with full name
     When admin search property by name "Kost Apik Khusus Automation PMAN Halmahera Utara"

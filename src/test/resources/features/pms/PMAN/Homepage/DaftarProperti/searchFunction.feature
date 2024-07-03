@@ -2,7 +2,7 @@
 
   Feature: Search Function in Property List Homepage
 
-    @TEST_PMAN-4480 @continue
+    @TEST_PMAN-801 @continue
     Scenario: Admin Search Property by Property Name
       Given admin go to pms singgahsini
       When admin login pms :
@@ -14,13 +14,13 @@
       And admin search property by two name "Khusus Automation"
       And property is displayed
 
-    @TEST_PMAN-9570 @continue
+    @TEST_PMAN-654 @continue
     Scenario: Admin Search Property by Property Id
       When admin clear keyword in Homepage
       And admin search property using ID "3143"
       Then property is displayed
 
-    @TEST_PMAN-9571 @continue
+    @TEST_PMAN-611 @continue
     Scenario: Admin Search Property by Prefix Name
       When admin clear keyword in Homepage
       And admin search property by prefix name "Singgahsini"
@@ -28,17 +28,17 @@
       And admin search property by prefix name "Apik"
       Then empty state in Homepage menu is displayed
 
-    @TEST_PMAN-9572 @continue
+    @TEST_PMAN-615 @continue
     Scenario: Admin Search Property by Property Full Name (prefix + property)
       When admin search property by property full name "Kost Apik Khusus Automation PMAN Halmahera Utara"
       Then property is displayed
 
-    @TEST_PMAN-9573 @continue
+    @TEST_PMAN-614 @continue
     Scenario: Admin Search Property by Wrong Keyword
       And admin search property by name "Khususu"
       Then empty state in Homepage menu is displayed
 
-    @TEST_PMAN-9574
+    @TEST_PMAN-604
     Scenario: Admin does not Input the Keyword
       And admin does not input the keyword
       Then all property is displayed

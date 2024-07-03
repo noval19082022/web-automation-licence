@@ -2,7 +2,7 @@
 
 Feature: Additional Fee PMS KK
 
-  @TEST_PMAN-8916 @continue
+  @TEST_PMAN-797 @continue
   Scenario: Check Empty State in Biaya Tambahan PMS KK
     Given admin go to pms singgahsini
     And admin login pms :
@@ -12,7 +12,7 @@ Feature: Additional Fee PMS KK
     And admin see detail kerja sama
     Then empty state in Biaya Tambahan is displayed
 
-  @TEST_PMAN-8917 @continue
+  @TEST_PMAN-796 @continue
   Scenario: Add Additional Fee Disesuaikan dengan Tagihan in PMS KK for Satuan Waktu only
     When admin add additional fee in PMS KK with data "Disesuaikan dengan Tagihan" for "Satuan Waktu"
       | Nama Biaya        | Ketentuan Bagi Hasil    | Jenis Biaya | Satuan Waktu  |
@@ -30,7 +30,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8918 @continue
+  @TEST_PMAN-802 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Waktu and Satuan Besaran
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu and Satuan Besaran"
       | Nama Biaya  | Ketentuan Bagi Hasil  | Jenis Biaya | Satuan Waktu  | Harga Satuan Waktu | Satuan Besaran  |
@@ -48,7 +48,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8919 @continue
+  @TEST_PMAN-799 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Besaran only
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Besaran"
       | Nama Biaya  | Ketentuan Bagi Hasil  | Jenis Biaya | Satuan Besaran  | Harga Kilogram (kg) |
@@ -66,7 +66,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8920 @continue
+  @TEST_PMAN-793 @continue
   Scenario: Add Additional Fee Disesuaikan dengan Tagihan in PMS KK for Satuan Besaran only
     When admin add additional fee in PMS KK with data "Disesuaikan dengan Tagihan" for "Satuan Besaran"
       | Nama Biaya            | Ketentuan Bagi Hasil  | Jenis Biaya | Satuan Besaran  |
@@ -84,7 +84,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8921 @continue
+  @TEST_PMAN-791 @continue
   Scenario: Add Additional Fee with 0 Amount in Satuan Waktu Only
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu"
       | Nama Biaya        | Ketentuan Bagi Hasil  | Jenis Biaya | Biaya Termasuk Harga Sewa | Pengaturan di Rincian Sewa        | Satuan Waktu  | Harga Satuan Waktu |
@@ -102,7 +102,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8923 @continue
+  @TEST_PMAN-757 @continue
   Scenario: Add Additional Fee with Input Manual for Ketentuan Bagi Hasil
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu and Satuan Besaran"
       | Nama Biaya  | Ketentuan Bagi Hasil  | Amount  | Jenis Biaya | Satuan Waktu  | Harga Satuan Waktu |  Satuan Besaran  |
@@ -120,7 +120,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8924 @continue
+  @TEST_PMAN-751 @continue
   Scenario: Add Additional Fee Ditentukan di Awal in PMS KK for Satuan Waktu only
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu"
       | Nama Biaya                     | Ketentuan Bagi Hasil     | Jenis Biaya | Biaya Termasuk Harga Sewa | Pengaturan di Rincian Sewa        | Satuan Waktu  | Harga Satuan Waktu |
@@ -138,7 +138,7 @@ Feature: Additional Fee PMS KK
     When admin delete additional fee in General Level
     Then additional fee is deleted from Biaya Tambahan table
 
-  @TEST_PMAN-8925
+  @TEST_PMAN-749
   Scenario: Add Additional Fee with 0 Amount in Input Manual Bagi Hasil and in Satuan Waktu & Besaran
     When admin add additional fee in PMS KK with data "Ditentukan di Awal" for "Satuan Waktu and Satuan Besaran"
       | Nama Biaya      | Ketentuan Bagi Hasil  | Amount  | Jenis Biaya | Satuan Waktu  | Harga Satuan Waktu |  Satuan Besaran  |
