@@ -7,7 +7,7 @@ Feature: Create new kos with owner that doesn't activate mamipay and BBK
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password    |
-      | 085275574591 | qwerty123 |
+      | 085275574593 | qwerty123 |
     And owner navigates to property saya kos
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
