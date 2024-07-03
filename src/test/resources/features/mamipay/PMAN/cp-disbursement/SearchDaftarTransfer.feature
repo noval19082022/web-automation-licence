@@ -2,7 +2,7 @@
 
   Feature: CP Disbursement - Search Daftar Transfer Disbursement
 
-    @TEST_PMAN-7764
+    @TEST_PMAN-844
     Scenario: Show disbursement ID Daftar Transfer
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -11,7 +11,7 @@
       And admin open menu CP Disbursement
       Then all disbursement have id
 
-    @TEST_PMAN-3294 @continue
+    @TEST_PMAN-708 @continue
     Scenario: Search using invalid property name
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -21,27 +21,27 @@
       And admin search cp disbursement by "Nama Property" using keyword "abc123"
       Then show "Daftar Transfer" empty page
 
-    @TEST_PMAN-3293 @continue
+    @TEST_PMAN-710 @continue
     Scenario: Search using valid property name
       When admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
       Then show all disbursement from property name "Kost Apik Khusus Automation PMAN Halmahera Utara"
 
-    @TEST_PMAN-3298 @continue
+    @TEST_PMAN-700 @continue
     Scenario: Search using invalid account name
       When admin search cp disbursement by "Nama Pemilik Rekening" using keyword "abc123"
       Then show "Daftar Transfer" empty page
 
-    @TEST_PMAN-3297 @continue
+    @TEST_PMAN-702 @continue
     Scenario: Search using valid account name
       When admin search cp disbursement by "Nama Pemilik Rekening" using keyword "Yudha Ferroza"
       Then show all disbursement from account name "Yudha Ferroza"
 
-    @TEST_PMAN-3296 @continue
+    @TEST_PMAN-712 @continue
     Scenario: Search using invalid account number
       When admin search cp disbursement by "Nomor Rekening" using keyword "abc123"
       Then show "Daftar Transfer" empty page
 
-    @TEST_PMAN-3295
+    @TEST_PMAN-715
     Scenario: Search using valid account number
       When admin search cp disbursement by "Nomor Rekening" using keyword "10000245429"
       Then show all disbursement from account number "10000245429"

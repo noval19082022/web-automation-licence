@@ -2,7 +2,7 @@
 
   Feature: Login LCT
 
-    @TEST_PMAN-9689
+    @TEST_PMAN-621
     Scenario: Login as BD
       Given admin navigate to mantool
       When admin login agen mantool
@@ -13,7 +13,7 @@
       Then agen should redirect to "LCT" in new tab
       And agen role should be "business development"
 
-    @TEST_PMAN-9690
+    @TEST_PMAN-619
     Scenario: Login as MDR
       Given admin navigate to mantool
       When admin login agen mantool
@@ -24,7 +24,7 @@
       Then agen should redirect to "LCT" in new tab
       And agen role should be "market development representative"
 
-    @TEST_PMAN-9691
+    @TEST_PMAN-626
     Scenario: Login as AO
       Given admin navigate to mantool
       When admin login agen mantool

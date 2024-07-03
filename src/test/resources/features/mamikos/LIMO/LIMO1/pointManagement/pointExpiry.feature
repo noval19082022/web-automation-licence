@@ -2,8 +2,8 @@
 
 Feature: Manage Point Expiry
 
-  @TEST_LIMO-1617
-  Scenario: Update Point Expiry
+  @TEST_LIMO-86
+  Scenario: [Point Management][Expiry]Update Point Expiry
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |

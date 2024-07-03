@@ -143,31 +143,36 @@ Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
     Then admin input nama pemilik rekening on edit deposit page "Noval"
 
   @TEST_COOP-5533 @Automated @web-covered @continue
-  Scenario Outline: [BackOffice][Search Contract][Edit Deposit] search Valid Input
+  Scenario: [BackOffice][Search Contract][Edit Deposit] search Valid Input
     Given admin go to mamikos mamipay admin
-    When admin search contract by "<searchBy>" and input field "<input>"
+    When admin search contract by "Kost Name" and input field "Kost Princess"
     Then admin redirect to search contract menu detail
-    Examples:
-      | searchBy               | input                 |
-      | Kost Name              | Kost Princess         |
-      | Owner Phone Number     | 083843666900          |
-      | Renter Phone Number    | 083139263046          |
-      | Renter Name            | Ullrich               |
-      | Related Invoice Number | 83900841/2021/12/0043 |
+    When admin search contract by "Owner Phone Number" and input field "083843666900"
+    Then admin redirect to search contract menu detail
+    When admin search contract by "Owner Phone Number" and input field "083843666900"
+    Then admin redirect to search contract menu detail
+    When admin search contract by "Renter Phone Number" and input field "083139263046"
+    Then admin redirect to search contract menu detail
+    When admin search contract by "Renter Name" and input field "Ullrich"
+    Then admin redirect to search contract menu detail
+    When admin search contract by "Related Invoice Number" and input field "83900841/2021/12/0043"
+    Then admin redirect to search contract menu detail
 
   @TEST_COOP-5534 @Automated @web-covered @continue
-  Scenario Outline: [BackOffice][Search Contract][Edit Deposit] search invalid Input
+  Scenario: [BackOffice][Search Contract][Edit Deposit] search invalid Input
     Given admin go to mamikos mamipay admin
-    When admin search contract by "<searchBy>" and input field "<input>"
+    When admin search contract by "Kost Name" and input field "kost anggun"
     Then admin will get blank data detail
-    Examples:
-      | searchBy               | input               |
-      | Kost Name              | kost anggun         |
-      | Owner Phone Number     | 0856220211208       |
-      | Renter Phone Number    | 0856220211208       |
-      | Renter Name            | embul owner         |
-      | Related Invoice Number | 83900841/2021/12/00 |
-      | Related Invoice Code   | 83900841            |
+    When admin search contract by "Owner Phone Number" and input field "0856220211208"
+    Then admin will get blank data detail
+    When admin search contract by "Renter Phone Number" and input field "0856220211208"
+    Then admin will get blank data detail
+    When admin search contract by "Renter Name" and input field "embul owner"
+    Then admin will get blank data detail
+    When admin search contract by "Related Invoice Number" and input field "83900841/2021/12/00"
+    Then admin will get blank data detail
+    When admin search contract by "Related Invoice Code" and input field "83900841"
+    Then admin will get blank data detail
 
   @TEST_COOP-5535 @Automated @web-covered @continue
   Scenario: [BackOffice][Search Contract][Edit Deposit]input Nomor Rekening Detail Edit Deposit

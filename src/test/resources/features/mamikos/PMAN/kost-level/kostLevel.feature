@@ -2,7 +2,7 @@
 
   Feature: Kost Level
 
-    @TEST_PMAN-3277 @continue
+    @TEST_PMAN-565 @continue
     Scenario: Charging fee can't more than 100%
       Given admin go to mamikos bangkrupux admin
       And admin login to bangkrupux:
@@ -18,7 +18,7 @@
       And admin edit charging fee to "200"
       Then show error message pop up "The charging fee cannot be greater than 100"
 
-    @TEST_PMAN-3264
+    @TEST_PMAN-597
     Scenario: Checks Kost Level Display
       When admin go to kost level menu
       Then kost level column contains

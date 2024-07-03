@@ -156,6 +156,17 @@ public class LoginPO {
         keluarButton.click();
     }
 
+
+    /**
+     * Try to Logout from mamikos
+     */
+    public void tryToLogoutFromMamikos() {
+        if (playwright.waitTillLocatorIsVisible(profileTenantButton, 5_000.0)) {
+            playwright.clickOn(profileTenantButton);
+            playwright.clickOn(keluarButton);
+        }
+    }
+
     /**
      * Tenant Profile Picture is  Displayed
      *

@@ -2,7 +2,7 @@
 
   Feature: [PMAN] Essential Test Mamipay
 
-    @TEST_PMAN-3359
+    @TEST_PMAN-662
     Scenario: Transfer Disbursement Without Edit Data
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:

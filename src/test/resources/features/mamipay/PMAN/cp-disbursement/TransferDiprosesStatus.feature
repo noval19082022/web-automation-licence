@@ -2,7 +2,7 @@
 
   Feature: CP Disbursement - Transfer Diproses Status
 
-    @TEST_PMAN-7763
+    @TEST_PMAN-729
     Scenario: Disbursement data contains all status transfer
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:

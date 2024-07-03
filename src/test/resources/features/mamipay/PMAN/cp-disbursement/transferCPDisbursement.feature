@@ -2,7 +2,7 @@
 
 Feature: CP Disbursement - Transfer CP Disbursement
 
-  @TEST_PMAN-3360 @continue
+  @TEST_PMAN-664 @continue
   Scenario: Edit and Transfer CP Disbursement
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -20,7 +20,7 @@ Feature: CP Disbursement - Transfer CP Disbursement
     When admin search cp disbursement by "Nama Property" using keyword "Harapan"
     Then disbursement "edit" is displayed in Process tab
 
-  @TEST_PMAN-3359 @continue
+  @TEST_PMAN-662 @continue
   Scenario: Transfer Disbursement Without Edit Data
     #create new cp disbursement
     When admin open "Daftar Transfer" tab
@@ -50,7 +50,7 @@ Feature: CP Disbursement - Transfer CP Disbursement
     And admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
     Then disbursement "without edit" is displayed in Process tab
 
-  @TEST_PMAN-3356
+  @TEST_PMAN-667
   Scenario: Edit Bank Account Number using char
     When admin open "Daftar Transfer" tab
     And admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
