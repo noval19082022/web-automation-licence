@@ -242,7 +242,7 @@ public class PropertySayaPO {
         icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
         addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
         addNewKosButton = page.getByText("+ Tambah Kos Baru");
-        closePopupBBKIcon = page.locator(".owner-intercept-booking-modal__close-button");
+        closePopupBBKIcon = page.locator(".bg-c-modal__action-closable");
         fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
         bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
         bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
