@@ -1,7 +1,7 @@
 @regression @LIMO1
 Feature: List Riwayat Transaction Account
 
-  @TEST_LIMO-276
+  @TEST_LIMO-1380
   Scenario: List Riwayat Transaction Account - Empty
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,7 +12,7 @@ Feature: List Riwayat Transaction Account
     And user click "Selesai"
     Then user will see title and message on Selesai tab
 
-  @TEST_LIMO-59
+  @TEST_LIMO-1401
   Scenario: To make sure red counter badge if owner have on going transaction
     Given user go to mamikos homepage
     When user login as owner:

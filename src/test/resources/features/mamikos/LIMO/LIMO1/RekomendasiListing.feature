@@ -1,7 +1,7 @@
 @regression @LIMO1 @LIMO1-staging @rekomendasiListing
 Feature: Rekomendasi Listing
 
-  @TEST_LIMO-305
+  @TEST_LIMO-1355
   Scenario: Tenant never lihat detail properti
     Given user go to mamikos homepage
     And user login as tenant via phone number:
@@ -10,8 +10,8 @@ Feature: Rekomendasi Listing
     Then verify message "Belum ada kos yang di favorit." di Favorit page
     And verify no rekomendasi on kos saya page
 
-  @TEST_LIMO-302
-  Scenario: There is no rekomendasi
+  @TEST_LIMO-1358
+  Scenario: [Favorit][Mungkin cocok untuk Anda]: there is no "rekomendasi"
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    | password  |
@@ -26,8 +26,8 @@ Feature: Rekomendasi Listing
     Then user verify rekomendasi listing section didn't display
     And verify no rekomendasi on kos saya page
 
-  @TEST_LIMO-301
-  Scenario: There is no rekomendasi booking cancel
+  @TEST_LIMO-1359
+  Scenario: [Booking Canceled][Lihat Rekomendasi Kos] There is no rekomendasi booking cancel
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | password    |
@@ -42,7 +42,7 @@ Feature: Rekomendasi Listing
     When user cancel booking
     Then tenant check status booking is "Dibatalkan"
 
-  @TEST_LIMO-304 @TEST_LIMO-303
+  @TEST_LIMO-1356 @TEST_LIMO-1357
   Scenario Outline: Check rekomendasi section at favorite page and kos saya page
     Given user go to mamikos homepage
     And user login as tenant via phone number:
@@ -68,8 +68,8 @@ Feature: Rekomendasi Listing
       | 0828888888880 | qwerty123    | displayed     | 4            | 2       |
       | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       |
 
-  @TEST_LIMO-1339 @continue @favRekomendasi
-  Scenario: Check property recomendation section after favorite
+  @TEST_LIMO-1200 @continue @favRekomendasi
+  Scenario: [WEB][Kos Saya][Mungkin Cocok Untuk Anda]: Tap favorit on rekomendasi section with open detail kos
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    | password  |

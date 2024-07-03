@@ -2,7 +2,7 @@
 Feature: MamiAds Landing Page
 
 
-  @TEST_LIMO-282
+  @TEST_LIMO-1377
   Scenario: [Web][MamiAds][Landing Page] Check landing page mamiAds
     Given user go to mamikos homepage
     And user login as owner:
