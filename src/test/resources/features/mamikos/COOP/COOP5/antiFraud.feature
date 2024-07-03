@@ -15,6 +15,9 @@ Feature: AntiFraud
 
   @TEST_COOP-2605 @continue
   Scenario: [Web][Chat room] Click "cara pembayaran yang lebih aman." Redirection to Mamihelp (warning box)
+    Given user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user opens the chatroom in the "2" order on chat list
     And user click text "cara pembayaran yang lebih aman."
     Then new tab open redirect to "Antifraud"
     And tenant close unused browser tab
@@ -30,16 +33,16 @@ Feature: AntiFraud
   Scenario: [Web][Chat room] Reopen chat room tenant
     Given user go to mamikos homepage
     And user click on chat button in top bar tenant home page
-    And user opens the chatroom in the "1" order on chat list
+    And user opens the chatroom in the "2" order on chat list
     And user click back button chatroom
-    And user opens the chatroom in the "1" order on chat list
+    And user opens the chatroom in the "2" order on chat list
     Then user will see that the text "Ada pembayaran di luar Mamikos? Untuk keamanan bersama, mohon gunakan" is displayed
 
   @TEST_COOP-2610
   Scenario: [Web][Chat room] Reopen chat room tenant
     Given user go to mamikos homepage
     And user click on chat button in top bar tenant home page
-    And user opens the chatroom in the "1" order on chat list
+    And user opens the chatroom in the "2" order on chat list
     Then user will see that the text "Ada pembayaran di luar Mamikos? Untuk keamanan bersama, mohon gunakan" is displayed
     And user can click close button on popup
 
