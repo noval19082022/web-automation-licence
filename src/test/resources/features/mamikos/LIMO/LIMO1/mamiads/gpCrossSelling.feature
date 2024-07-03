@@ -1,7 +1,7 @@
 @regression @LIMO1 @LIMO1-staging @essentialTest3 @gpCrosselling
 Feature: GP Crosseling
 
-  @TEST_LIMO-287
+  @TEST_LIMO-1373
   Scenario: Ubah package GP after select saldo mamiads
     Given user go to mamikos homepage
     And user login as owner:
@@ -39,7 +39,7 @@ Feature: GP Crosseling
     And user choose Goldplus package 2
     And user verify the "Saldo MamiAds 1.500.000" and the price is "Rp1.350.000" already "choosen" on Rincian Pembayaran
 
-  @TEST_LIMO-288
+  @TEST_LIMO-1372
   Scenario: Cancel select saldo mamiads
     Given user go to mamikos homepage
     And user login as owner:
@@ -56,7 +56,7 @@ Feature: GP Crosseling
     And user unchoose saldo on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
 
-  @TEST_LIMO-223 @continue @gpCrossPaid
+  @TEST_LIMO-1393 @continue @gpCrossPaid
     Scenario: [Owner dashboard][Crosseling GP and MamiAds]To make sure saldo mamiads DIDN'T appear on Riwayat Saldo Mamiads while status GP = menunggu pembayaran
     Given user go to mamikos homepage
     And user login as owner:
@@ -71,7 +71,7 @@ Feature: GP Crosseling
     And user navigate to mamiads history page
     And user will see title and message on Dalam Proses tab
 
-  @TEST_LIMO-226 @continue @gpCrossPaid
+  @TEST_LIMO-1392 @continue @gpCrossPaid
   Scenario: [Goldplus ][Crosseling GP and MamiAds]Success buy cross-selling GP and mamiads
     And owner navigates to owner dashboard
     Then validate that owner have "Menunggu Pembayaran"
