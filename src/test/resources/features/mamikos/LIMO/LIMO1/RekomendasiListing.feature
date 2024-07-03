@@ -2,7 +2,7 @@
 Feature: Rekomendasi Listing
 
   @TEST_LIMO-1355
-  Scenario: [Favorit][Mungkin cocok untuk Anda]: Tenant never Lihat Detail Properti
+  Scenario: Tenant never lihat detail properti
     Given user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag    | password  |
