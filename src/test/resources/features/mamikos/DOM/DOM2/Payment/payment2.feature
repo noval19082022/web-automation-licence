@@ -80,7 +80,7 @@ Feature: Payment Backoffice Staging 2 - Refund
       | 08922024103   | All Testing |
     And admin set allow refund the transaction
 
-    # Scenario: Admin edit paid amount more than refund amount
+  Scenario: Admin edit paid amount more than refund amount
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
