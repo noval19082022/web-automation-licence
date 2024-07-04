@@ -4,7 +4,6 @@ import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.JavaHelpers;
@@ -37,6 +36,7 @@ public class PropertySayaPO {
     Locator priceKostTextBox;
     Locator continueInputDataButton;
     Locator updatePriceButton;
+    Locator closeBtn;
     Locator messageSuccessUpdatePrice;
     Locator firstSeeKosButton;
     Locator statisticChoiceSelection;
@@ -230,6 +230,7 @@ public class PropertySayaPO {
         continueInputDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Isi Data"));
         updatePriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Harga"));
         messageSuccessUpdatePrice = page.getByText("Harga berhasil diupdate");
+        closeBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("close"));
         firstSeeKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Kos"));
         statisticChoiceSelection = page.locator(".statistic__choice");
         chatButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat 0"));
@@ -376,7 +377,7 @@ public class PropertySayaPO {
         toastMessageNotSelectDestinationPhoto = page.locator("div").filter(new Locator.FilterOptions().setHasText("Pilih section tujuan terlebih dahulu")).nth(3);
         destinationPhotoMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto tampilan dalam bangunan")).locator("span").nth(1);
         destinationPhotoRoomMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto dalam kamar")).locator("span").nth(1);
-        favoritedSection= page.getByText("Difavoritkan 0");
+        favoritedSection = page.getByText("Difavoritkan 0");
     }
 
     /**
@@ -1309,6 +1310,13 @@ public class PropertySayaPO {
     }
 
     /**
+     * clear text on description kost edit kost page
+     */
+    public void clearDescKost() {
+        playwright.clearText(descKosField);
+    }
+
+    /**
      * Select the year of build kos
      *
      * @param buildKos
@@ -1401,7 +1409,6 @@ public class PropertySayaPO {
 
     /**
      * delete foto aturan kos if exist on edit kos page
-     *
      */
     public void deleteFotoAturanKostIfVisible() {
         if (playwright.waitTillLocatorIsVisible(fotoPeraturan)) {
@@ -1981,17 +1988,17 @@ public class PropertySayaPO {
         } else {
             playwright.clickOn(toggleDenda);
             if (deleteOtherPrice.isVisible()) {
-                 playwright.clickOn(deleteOtherPrice);
-                 playwright.clickOn(confirmDeleteOtherPrice);
-                 playwright.clickOn(toggleDenda);
-             }
+                playwright.clickOn(deleteOtherPrice);
+                playwright.clickOn(confirmDeleteOtherPrice);
+                playwright.clickOn(toggleDenda);
             }
         }
+    }
 
     /**
      * click Ubah Denda Text
      */
-    public void clickUbahDendaText(){
+    public void clickUbahDendaText() {
         playwright.clickOn(ubahDendaText);
     }
 
@@ -2013,6 +2020,7 @@ public class PropertySayaPO {
 
     /**
      * check denda list not appears
+     *
      * @return true if not appears
      */
     public boolean isDendaListAppears() {
@@ -2071,6 +2079,7 @@ public class PropertySayaPO {
 
     /**
      * Get other price active name
+     *
      * @return String data type e.g "Biaya Parkir"
      */
     public boolean getActiveOtherPricesName() {
@@ -2079,6 +2088,7 @@ public class PropertySayaPO {
 
     /**
      * Get other price active number
+     *
      * @return String data type e.g "Rp100.000"
      */
     public boolean getActiveOtherPriceNumber() {
@@ -2103,6 +2113,7 @@ public class PropertySayaPO {
 
     /**
      * Click add pengelola checkbox
+     *
      * @param addDataPengelola
      */
     public void selectPengelola(String addDataPengelola) {
@@ -2113,6 +2124,7 @@ public class PropertySayaPO {
 
     /**
      * Input pengelola name
+     *
      * @param pengelolaName
      */
     public void inputPengelolaName(String pengelolaName) {
@@ -2121,6 +2133,7 @@ public class PropertySayaPO {
 
     /**
      * Input pengelola phone
+     *
      * @param pengelolaPhone
      */
     public void inputPengelolaPhone(String pengelolaPhone) {
@@ -2129,6 +2142,7 @@ public class PropertySayaPO {
 
     /**
      * Click on lewati bbk form button
+     *
      * @param textButton
      */
     public void clickOnLewatiBBKForm(String textButton) {
@@ -2137,6 +2151,7 @@ public class PropertySayaPO {
 
     /**
      * Click on button in kebijakan baru mamikos pop up
+     *
      * @param text
      */
     public void clickOnKebijakanBaruMamikosPopUp(String text) {
@@ -2145,6 +2160,7 @@ public class PropertySayaPO {
 
     /**
      * Verify the bbk pop up is visible or not
+     *
      * @return true false
      */
     public boolean isBBKPopUpVisible() {
@@ -2153,11 +2169,12 @@ public class PropertySayaPO {
 
     /**
      * Verify the bbk pop up is visible for condition close pop up
+     *
      * @return true false
      */
     public boolean BBKPopUpVisible() {
         Locator popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
-        return playwright.isLocatorVisibleAfterLoad(popUpBBK,2000.0);
+        return playwright.isLocatorVisibleAfterLoad(popUpBBK, 2000.0);
     }
 
     /**
@@ -2176,6 +2193,7 @@ public class PropertySayaPO {
 
     /**
      * Verify the inhabitedcheckbox is checked
+     *
      * @return true if checkbox is checked and false if checkbox unchecked
      */
     public boolean isInhabitedCheckboxCheck() {
@@ -2184,6 +2202,7 @@ public class PropertySayaPO {
 
     /**
      * Verify text on not add renter pop up
+     *
      * @param text
      * @return boolean, true if text displayed and false if text not dispalyed
      */
@@ -2193,6 +2212,7 @@ public class PropertySayaPO {
 
     /**
      * Verify the button on pop up
+     *
      * @param buttonText
      * @return boolean, true if button displayed, and false if button not displayed
      */
@@ -2202,7 +2222,6 @@ public class PropertySayaPO {
 
     /**
      * Click on add renter button
-     *
      */
     public void clickOnAddRenterButton() {
         playwright.clickOnTextButton("Tambah Penyewa", 3000.0);
@@ -2210,8 +2229,8 @@ public class PropertySayaPO {
 
     /**
      * Verify the toast message when update room
-     * @return toastMessage
      *
+     * @return toastMessage
      */
     public String getToastUpdateRoom() {
         playwright.waitTillLocatorIsVisible(toastMessage, 5000.0);
@@ -2220,7 +2239,6 @@ public class PropertySayaPO {
 
     /**
      * Click on update room on property saya kos -> selengkapnya
-     *
      */
     public void clickOnUpdateRoom() {
         playwright.clickOn(updateRoom);
@@ -2228,7 +2246,6 @@ public class PropertySayaPO {
 
     /**
      * Click on kembali button on added room pop up
-     *
      */
     public void clickOnBackButton() {
         playwright.clickOnTextButton("Kembali");
@@ -2238,7 +2255,7 @@ public class PropertySayaPO {
      * Click on edit data kos button
      */
     public void clickOnEditDataKosButton() {
-        playwright.clickOn(editDataKosButton);
+        playwright.clickOn(editDataKosButton.first());
     }
 
     /**
@@ -2252,7 +2269,7 @@ public class PropertySayaPO {
      * Click on update price button
      */
     public void deleteActiveAdditionalPrice() {
-        if(playwright.waitTillLocatorIsVisible(btnDeleteActiveOtherPrice)){
+        if (playwright.waitTillLocatorIsVisible(btnDeleteActiveOtherPrice)) {
             playwright.clickOn(btnDeleteActiveOtherPrice);
             clickHapusOnDeleteConfirmation();
         }
@@ -2260,6 +2277,7 @@ public class PropertySayaPO {
 
     /**
      * check if other price name on index number 1 is visible
+     *
      * @return true if other price visible, otherwise false
      */
     public boolean isOtherPriceNamePresent() {
@@ -2268,6 +2286,7 @@ public class PropertySayaPO {
 
     /**
      * check if other price number on index number 1 is visible
+     *
      * @return true if number price visible, otherwise false
      */
     public boolean isOtherPriceNumberPresent() {
@@ -2276,6 +2295,7 @@ public class PropertySayaPO {
 
     /**
      * check image zero is visible
+     *
      * @return image
      */
     public boolean isImageZeroPresent() {
@@ -2286,6 +2306,7 @@ public class PropertySayaPO {
 
     /**
      * Get text rejected apartment
+     *
      * @return string
      */
     public String getRejectTextApartment() {
@@ -2294,6 +2315,7 @@ public class PropertySayaPO {
 
     /**
      * check button update kamar is visible
+     *
      * @return button
      */
     public boolean isButtonUpdateVisible() {
@@ -2302,7 +2324,6 @@ public class PropertySayaPO {
 
     /**
      * Ubah foto from hover text
-     *
      */
     public void ubahFotoKosFromHover() {
         String imagePath = "src/main/resources/images/kos tampak depan.jpg";
@@ -2314,7 +2335,6 @@ public class PropertySayaPO {
 
     /**
      * Lihat photo from hover text
-     *
      */
     public void viewPhotoFromHover() {
         playwright.clickOn(viewPhotoHover);
@@ -2323,7 +2343,6 @@ public class PropertySayaPO {
 
     /**
      * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
-     *
      */
     public void hoverPhoto() {
         backgroundImageHover.hover();
@@ -2331,28 +2350,29 @@ public class PropertySayaPO {
 
     /**
      * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
-     *
      */
     public void hoverPhoto(int order) {
         if (order <= 0) {
             order = 1;
         }
-        var photo = photoPreview.nth(order-1);
+        var photo = photoPreview.nth(order - 1);
         playwright.hover(photo);
     }
 
     /**
      * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     *
      * @param photoLocation
      */
     public void hoverPhoto(String photoLocation) {
         Locator backgroundImage = page
-                .locator("//h4[.='"+photoLocation+"']/following-sibling::*//div[@class='image-uploader__preview']");
+                .locator("//h4[.='" + photoLocation + "']/following-sibling::*//div[@class='image-uploader__preview']");
         backgroundImage.hover();
     }
 
     /**
      * Verify the button hover is visible
+     *
      * @return boolean
      */
     public boolean isButtonHoverOnPhotoVisible() {
@@ -2361,7 +2381,6 @@ public class PropertySayaPO {
 
     /**
      * Click Delete Photo from hover
-     *
      */
     public void clickOnDeletePhotoFromHover() {
         playwright.clickOn(deletePhotoHover);
@@ -2370,7 +2389,6 @@ public class PropertySayaPO {
 
     /**
      * Click pindahkan photo from hover
-     *
      */
     public void clickOnMovePhotoHover() {
         playwright.clickOn(movePhotoHover);
@@ -2378,17 +2396,17 @@ public class PropertySayaPO {
 
     /**
      * Click pindahkan photo from hover
+     *
      * @param destination
      */
     public void clickOnMovePhotoHover(String destination) {
         var destinationLocator = page
-                .locator("//h4[.='"+destination+"']/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]");
+                .locator("//h4[.='" + destination + "']/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]");
         playwright.clickOn(destinationLocator);
     }
 
     /**
      * Click lanjutkan button while pindahkan photo
-     *
      */
     public void clickOnLanjutkanMovePhoto() {
         playwright.clickOn(lanjutkanButtonMovePhoto);
@@ -2396,8 +2414,8 @@ public class PropertySayaPO {
 
     /**
      * Verify the toast message when photo not selected if will be moved
-     * @return boolean
      *
+     * @return boolean
      */
     public boolean getToastNotSelectedPhoto() {
         return playwright.waitTillLocatorIsVisible(toastMessageNotSelectedPhoto, 3000.0);
@@ -2405,7 +2423,6 @@ public class PropertySayaPO {
 
     /**
      * Select the photo will be moved
-     *
      */
     public void selectPhotoToMoved() {
         playwright.clickOn(selectPhotoToMoved);
@@ -2413,7 +2430,6 @@ public class PropertySayaPO {
 
     /**
      * Click on pindahkan button
-     *
      */
     public void clickOnPindahkanPhoto() {
         playwright.clickOn(pindahkanPhotoButton);
@@ -2421,8 +2437,8 @@ public class PropertySayaPO {
 
     /**
      * Get toast message while not selected the destinaion photo on pindahkan photo steps
-     * @return boolean
      *
+     * @return boolean
      */
     public boolean getToastNotSelectDestinationPhoto() {
         return playwright.waitTillLocatorIsVisible(toastMessageNotSelectDestinationPhoto, 3000.0);
@@ -2430,7 +2446,6 @@ public class PropertySayaPO {
 
     /**
      * Select the destinaion photo kos on pindahkan photo steps
-     *
      */
     public void selectDestinationPhoto() {
         playwright.clickOn(destinationPhotoMoved);
@@ -2438,7 +2453,6 @@ public class PropertySayaPO {
 
     /**
      * Select the destination room photo on pindahkan photo step
-     *
      */
     public void selectDestinationPhotoRoom() {
         playwright.clickOn(destinationPhotoRoomMoved);
@@ -2446,16 +2460,18 @@ public class PropertySayaPO {
 
     /**
      * Select the destination room photo on pindahkan photo step
+     *
      * @param destination
      */
     public void selectDestinationPhotoRoom(String destination) {
         Locator destinationPhotoRoomMovedLocator = page
-                .locator("//label/child::*/*[contains(.,'"+destination+"')]");
+                .locator("//label/child::*/*[contains(.,'" + destination + "')]");
         playwright.clickOn(destinationPhotoRoomMovedLocator);
     }
 
-     /**
+    /**
      * check section Difavoritkan is visible
+     *
      * @return locator
      */
     public boolean isFavoritedSectionVisible() {
@@ -2473,7 +2489,7 @@ public class PropertySayaPO {
         if (order <= 0) {
             order = 1;
         }
-        playwright.clickOn(deletePhotoHover.nth(order-1));
+        playwright.clickOn(deletePhotoHover.nth(order - 1));
     }
 
     /**
@@ -2481,5 +2497,12 @@ public class PropertySayaPO {
      */
     public void clickOnUpdateHargaIfExist() {
         if (playwright.waitTillLocatorIsVisible(updatePriceButton)) playwright.clickOn(updatePriceButton);
+    }
+
+    /**
+     * clickon close btn if exist
+     */
+    public void clickCloseBtnIfExist() {
+        if (playwright.waitTillLocatorIsVisible(closeBtn, 1_000.0)) playwright.clickOn(closeBtn);
     }
 }
