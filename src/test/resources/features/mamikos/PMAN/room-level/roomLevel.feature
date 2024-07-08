@@ -66,7 +66,7 @@ Feature: Add and Edit Room Level
     When admin go to room level menu
     Then should show room level menu content
 
-  @TEST_PMAN-3266
+  @TEST_PMAN-578
   Scenario: Verify Pagination in Room Level
     When admin go to room level menu
     And admin go to page "2"
