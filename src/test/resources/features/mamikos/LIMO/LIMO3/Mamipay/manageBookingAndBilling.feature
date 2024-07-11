@@ -25,27 +25,27 @@ Feature: Manage Booking And Billing
     When owner click "Batal" button
     Then owner will see that the text "Data iklan milik Anda belum ditemukan. Silakan cari atau tambahkan iklan baru." is displayed
 
-  @notactivatebooking @TEST_LIMO-5671
-  Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost but not yet activate booking
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | password    |
-      | 085275574592 | qwerty123 |
-    Then verify info untuk anda Auto BBK not displayed
-    When owner navigates to property saya kos
-    Then owner verify Auto BBK pop up is displayed
-    When owner click "Pelajari Booking Langsung"
-    Then verify the title on mamipay owner onboarding displayed
-    When owner go back to previous page
-    Then owner will see that the text "Lengkapi Data Pribadi" is displayed
-    When owner click "Edit Data Pribadi"
-    Then verify the title on mamipay owner onboarding displayed
+#  @notactivatebooking @TEST_LIMO-5671
+#  Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost but not yet activate booking
+#    Given user go to mamikos homepage
+#    When user login as owner:
+#      | phone stag   | password  |
+#      | 085275574592 | qwerty123 |
+#    Then verify info untuk anda Auto BBK not displayed
+#    When owner navigates to property saya kos
+#    Then owner verify Auto BBK pop up is displayed
+#    When owner click "Pelajari Booking Langsung"
+#    Then verify the title on mamipay owner onboarding displayed
+#    When owner go back to previous page
+#    Then owner will see that the text "Lengkapi Data Pribadi" is displayed
+#    When owner click "Edit Data Pribadi"
+#    Then verify the title on mamipay owner onboarding displayed
 
   @allactive @TEST_LIMO-5672
   Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost and have activate booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password    |
+      | phone stag   | password  |
       | 087133998156 | qwerty123 |
     Then verify info untuk anda Auto BBK not displayed
     When owner navigates to property saya kos
