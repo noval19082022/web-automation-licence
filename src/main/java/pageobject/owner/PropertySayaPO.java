@@ -979,14 +979,21 @@ public class PropertySayaPO {
      */
     public void clickTambahDataIklan(String jenisProperti) {
         playwright.waitTillPageLoaded();
-        playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
-        playwright.clickOn(tambahDataIklan);
+        if (playwright.isTextDisplayed("Saya ingin menambahkan data:")) {
+            jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
+            playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
+            playwright.clickOn(jenisPropertiRadioButton);
+            playwright.clickOnTextButton("Tambahkan Data", 3000.0);
+        } else {
+            playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
+            playwright.clickOn(tambahDataIklan);
         playwright.clickOn(tambahIklanBaru);
         jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
         playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
         playwright.clickOn(jenisPropertiRadioButton);
         playwright.clickOnTextButton("Tambahkan Data", 3000.0);
     }
+        }
 
     /**
      * Input property name
@@ -1296,6 +1303,7 @@ public class PropertySayaPO {
      */
     public void selectKostType(String kosType) {
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
+        playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
     }
 

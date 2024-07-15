@@ -18,6 +18,7 @@ Feature: Kost Level Management
 
   @TEST_LIMO-3652 @continue @kostLevelManagement
   Scenario: Edit Kost Level
+    And admin search kost level "Kost Level Testing"
     When admin click "edit" on kost level
     And admin fill out form "edit kost" level "Kost Level Testing Edited"
     And admin "confirm" save kost level data pop up confirmation
