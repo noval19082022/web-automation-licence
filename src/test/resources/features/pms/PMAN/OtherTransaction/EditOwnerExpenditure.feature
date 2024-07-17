@@ -9,7 +9,7 @@
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to other transation menu
 
-    @TEST_PMAN-699
+    @TEST_SS-699
     Scenario: Edit Owner Expenditure with valid value
       When admin filter status konfirmasi manager "Menunggu Konfirmasi"
       And admin edit type pengajuan cash out to "Petty Cash" at property "Harapan Bunda"

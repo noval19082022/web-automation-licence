@@ -2,7 +2,7 @@
 
   Feature: Lokasi Strategis
 
-    @continue @TEST_PMAN-861
+    @continue @TEST_SS-861
     Scenario: Add New Lokasi Strategis
       Given admin go to pms singgahsini
       When admin login pms :
@@ -21,19 +21,19 @@
         | 200 meter ke pom bensin         |
         | 300 meter ke pusat perbelanjaan |
 
-    @continue @TEST_PMAN-643
+    @continue @TEST_SS-643
     Scenario: Max 10 lokasi strategis can be add
       When admin ubah data property
       And add 10 lokasi strategis
       Then tambah lokasi strategis button should be disabled
 
-    @continue @TEST_PMAN-641
+    @continue @TEST_SS-641
     Scenario: Lokasi strategis max char 255
       When admin edit "4" lokasi strategis ">255 char"
       Then error message max character lokasi strategis appear
       And admin delete lokasi strategis "4"
 
-    @continue @TEST_PMAN-870
+    @continue @TEST_SS-870
     Scenario: Edit Lokasi Strategis
       When admin edit "1" lokasi strategis "150 meter ke jalan utama"
       And admin back to detail kos "3143"
@@ -42,7 +42,7 @@
         | 200 meter ke pom bensin         |
         | 300 meter ke pusat perbelanjaan |
 
-    @continue @TEST_PMAN-866
+    @continue @TEST_SS-866
     Scenario: Delete Lokasi Strategis
       When admin ubah data property
       And admin delete lokasi strategis "2"
@@ -51,7 +51,7 @@
         | 150 meter ke jalan utama        |
         | 300 meter ke pusat perbelanjaan |
 
-    @TEST_PMAN-634
+    @TEST_SS-634
     Scenario: Empty Lokasi Strategis
       When admin ubah data property
       And admin delete lokasi strategis "1"
