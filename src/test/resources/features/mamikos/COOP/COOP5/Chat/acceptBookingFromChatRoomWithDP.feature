@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @BBM5 @COOP-1986 @COOP-1992 @acceptFromChat
+@occupancyAndBilling @OB @BBM5 @acceptFromChat
 Feature: Accept Booking from Chat room with DP
 
   @deleteContract
@@ -29,7 +29,7 @@ Feature: Accept Booking from Chat room with DP
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_COOP-1992 @acceptBooking
+  @TEST_SS-3306 @acceptBooking
   Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
     Given user go to mamikos homepage
     When user login as owner:

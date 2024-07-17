@@ -50,7 +50,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @continue
+  @continue @TEST_SS-3523
   Scenario: [Kos Saya][Chat Pemilik]Check Chat Pemilik on kost saya page (COOP-1979)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -60,7 +60,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And user click on chat button in top bar tenant home page
     Then user can see Chat list title
 
-  @continue
+  @continue @TEST_SS-3522
   Scenario: [Kos Saya][Bantuan]Check Bantuan on kost saya page (BBM-911)
     And tenant navigate to kost saya page
     And user clicks on Bantuan menu
@@ -70,7 +70,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And user navigates to help page
     And user clicks on "Hubungi CS Mamikos (aktif 24 jam)"
 
-  @continue
+  @continue @TEST_SS-3515
   Scenario: [Kost saya][Content] Content Kos Saya (BBM-884)
     And tenant navigate to kost saya page
     And user clicks on "Lihat informasi kos"
@@ -78,7 +78,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And user verify Kost Review entry point is not displayed
     Then user see activities in My Kos
 
-
+@TEST_SS-3520
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
     And tenant set active page to 0
     And user navigate to kontrak kost saya

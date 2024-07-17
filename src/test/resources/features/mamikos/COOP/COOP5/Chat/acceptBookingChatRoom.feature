@@ -1,5 +1,6 @@
-@occupancyAndBilling @OB @BBM5 @COOP-1988 @acceptFromChat @essentialTest3
+@occupancyAndBilling @OB @BBM5 @acceptFromChat @essentialTest3
 Feature: Accept Booking from Chat room
+
 
   Scenario: Delete contract
     Given admin go to mamikos mamipay admin
@@ -33,7 +34,7 @@ Feature: Accept Booking from Chat room
       And tenant booking kost for "today"
       Then tenant should success booking kost
 
-  @TEST_COOP-1988 @acceptBooking
+  @TEST_SS-3307 @acceptBooking
   Scenario: Owner accept booking from Chat and see label on owner’s chat is “Belum Bayar Sewa Pertama (BBM-5)
     Given user go to mamikos homepage
     When user login as owner:
