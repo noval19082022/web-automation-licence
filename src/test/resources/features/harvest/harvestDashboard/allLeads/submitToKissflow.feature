@@ -2,7 +2,7 @@
 
   Feature: Submit to Kissflow in All Leads Menu
 
-    @TEST_PMAN-957 @context1 @context2 @continue
+    @TEST_SS-957 @context1 @context2 @continue
     Scenario: Check Edit Table button in All Leads menu
       Given admin set browser context to "context1"
       And bring page to front
@@ -27,7 +27,7 @@
       When user confirm pop up
       Then user should be redirect to singgahsini.id
 
-    @TEST_PMAN-951 @continue
+    @TEST_SS-951 @continue
     Scenario: Check Batalkan Edit button in All Leads Menu without Selects Radio Button
       Given admin set browser context to "context1"
       And bring page to front
@@ -36,7 +36,7 @@
       And admin clicks on Batalkan Edit button
       Then all Yes and No buttons in every row are dismiss
 
-    @TEST_PMAN-1127 @continue
+    @TEST_SS-1127 @continue
     Scenario: Check Batalkan Edit button in All Leads Menu with Selects Radio Button
       Given admin set browser context to "context1"
       And bring page to front
@@ -51,7 +51,7 @@
       And admin clicks on Batalkan Edit button
       Then confirmation pop up "Batalkan" is displayed
 
-    @TEST_PMAN-1128 @continue
+    @TEST_SS-1128 @continue
     Scenario: Check Actions Buttons in Confirmation Batalkan Pop Up
       Given admin set browser context to "context1"
       And bring page to front
@@ -72,7 +72,7 @@
       And admin clicks "Tidak" button on confirmation Batalkan pop up
       Then the confirmation "Batalkan" pop up is dismissed
 
-    @TEST_PMAN-943 @continue
+    @TEST_SS-943 @continue
     Scenario: Check Confirmation Perubahan Belum Tersimpan Pop Up When User Clicks on Next Page
       Given admin set browser context to "context1"
       And bring page to front
@@ -81,7 +81,7 @@
       And admin clicks on next page "2"
       Then confirmation pop up "Perubahan Belum Tersimpan" is displayed
 
-    @TEST_PMAN-1129
+    @TEST_SS-1129
     Scenario: Check Confirmation Perubahan Belum Tersimpan Pop Up When User Clicks on Filter
       Given admin set browser context to "context1"
       And bring page to front
