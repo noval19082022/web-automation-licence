@@ -2,7 +2,7 @@
 
   Feature: All Invoice List
 
-    @TEST_PMAN-584 @pman @continue @pman-prod
+    @TEST_SS-584 @pman @continue @pman-prod
     Scenario: Invoice manual in All Invoice List Menu
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -11,12 +11,12 @@
       When admin open menu all invoice list
       Then list contains invoice manual
 
-    @TEST_PMAN-711 @pman @pman-prod
+    @TEST_SS-711 @pman @pman-prod
     Scenario: Filter Invoice Manual
       And admin filter by order type "Invoice Manual"
       Then system should display only invoice with type "Invoice Manual"
 
-    @TEST_PMAN-576
+    @TEST_SS-576
     Scenario: Change status invoice manual
       #create invoice manual biaya sewa
       Given admin go to mamikos mamipay admin
@@ -48,7 +48,7 @@
       When admin change status invoice to "unpaid" "today"
       Then invoice status should be "unpaid"
 
-    @TEST_PMAN-574
+    @TEST_SS-574
     Scenario: View log Invoice manual
       #pay using bank
       When admin open tenant invoice
