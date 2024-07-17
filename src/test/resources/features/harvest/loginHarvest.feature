@@ -2,7 +2,7 @@
 
   Feature: Login Harvest
 
-    @TEST_PMAN-982
+    @TEST_SS-982
     Scenario: Login using valid account
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
@@ -10,7 +10,7 @@
         | automationpman01@mamikos.com  | qwerty123  |
       Then admin should redirect to Harvest Dashboard
 
-    @TEST_PMAN-983
+    @TEST_SS-983
     Scenario: Login using invalid account
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
@@ -19,7 +19,7 @@
       Then admin stay in login harvest page
       And show login harvest error message "Terjadi kesalahan, silakan coba lagi."
 
-    @TEST_PMAN-980
+    @TEST_SS-980
     Scenario: Login validation
       #empty
       When admin navigates to Harvest Dashboard Login
@@ -37,7 +37,7 @@
       Then admin stay in login harvest page
       And show login harvest error message "Terjadi kesalahan, silakan coba lagi."
 
-    @TEST_PMAN-981
+    @TEST_SS-981
     Scenario: Logout
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:

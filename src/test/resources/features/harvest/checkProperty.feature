@@ -2,7 +2,7 @@
 
   Feature: Check Property Mamikos
 
-    @TEST_PMAN-9008 @continue
+    @TEST_SS-754 @continue
     Scenario: Admin Check Property in "Kost Pillar 1 & 2" by "Nama Properti" keyword
       #Search Property in Pillar 1
       Given admin go to mamikos cek properti
@@ -15,7 +15,7 @@
       Then property is displayed with name "Kost Jaguar Tipe A Tobelo Utara Halmahera Utara"
       And the address is displayed "Kecamatan Tobelo Utara, Kabupaten Halmahera Utara, Maluku Utara, Kecamatan Tobelo Utara, Kabupaten Halmahera Utara, Maluku Utara"
 
-    @TEST_PMAN-9664 @continue
+    @TEST_SS-600 @continue
     Scenario: Admin Check Property in "Kost Pillar 1 & 2" by "Nomor HP Pemilik" keyword
       #Search Property in Pillar 1
       When admin clear keyword in search bar
@@ -28,7 +28,7 @@
       Then property is displayed with name "Kost Jaguar Tipe A Tobelo Utara Halmahera Utara"
       And the address is displayed "Kecamatan Tobelo Utara, Kabupaten Halmahera Utara, Maluku Utara, Kecamatan Tobelo Utara, Kabupaten Halmahera Utara, Maluku Utara"
 
-    @TEST_PMAN-9665
+    @TEST_SS-610
     Scenario: Admin Open Property and Check Property
       When admin opens property
       And admin clicks on next image
