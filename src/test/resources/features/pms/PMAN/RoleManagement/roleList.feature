@@ -2,7 +2,7 @@
 
   Feature: Role List
 
-    @TEST_PMAN-858
+    @TEST_SS-858
     Scenario: Role list display
       Given admin go to pms singgahsini
       And admin login pms :

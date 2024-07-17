@@ -2,7 +2,7 @@
 
 Feature: Agent App
 
-  @TEST_PMAN-639 @pman-prod @continue
+  @TEST_SS-639 @pman-prod @continue
   Scenario: Table Agent Contains Role Column
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -18,12 +18,12 @@ Feature: Agent App
       | Is active |
       | Action    |
 
-  @TEST_PMAN-649 @continue
+  @TEST_SS-649 @continue
   Scenario: Check is_active Yes Value When User in Edit Page
     When admin checks is active "Yes" status in Edit page for "Automation PMAN Yes" agent
     Then is active status in Edit page is "Yes"
 
-  @TEST_PMAN-736
+  @TEST_SS-736
   Scenario: Check is_active No Value When User in Edit Page
     When admin goes to Agent App menu
     And admin checks is active "No" status in Edit page for "Automation PMAN No" agent

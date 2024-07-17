@@ -2,7 +2,7 @@
 
   Feature: Disbursement List
 
-    @TEST_PMAN-798
+    @TEST_SS-798
     Scenario: Search functionality
       #search empty keyword
       Given admin go to pms singgahsini

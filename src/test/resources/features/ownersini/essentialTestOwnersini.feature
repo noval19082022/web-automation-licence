@@ -2,7 +2,7 @@
 
   Feature: [PMAN] Essential Test Ownersini
 
-    @TEST_PMAN-723
+    @TEST_SS-723
     Scenario: Check Access Point SS Dashboard which Owner has Pillar 1
       Given user go to mamikos homepage
       When user login as owner:
@@ -13,7 +13,7 @@
       When owner clicks Dashboard Singgahsini on top right corner Profil
       Then owner redirect to Owner Dashboard Pillar 1
 
-    @TEST_PMAN-806
+    @TEST_SS-806
     Scenario: Check Access Point SS Dashboard which Owner does not have Pillar 1
       Given user go to mamikos homepage
       When user login as owner:
@@ -22,7 +22,7 @@
       And owner clicks on top right corner Profil Pillar 2
       Then Dashboard Singgahsini button is not displayed
 
-    @TEST_PMAN-762
+    @TEST_SS-762
     Scenario: Check Redirection to Owner Pillar 2
       Given user go to mamikos homepage
       When user login as owner:
@@ -31,7 +31,7 @@
       And owner clicks Kembali ke Mamikos on top right corner Profil
       Then owner redirect to Owner Dashboard Pillar 2
 
-    @TEST_PMAN-722
+    @TEST_SS-722
     Scenario: Owner P1 log out from Ownersini Dashboard
       Given user go to mamikos homepage
       When user login as owner:
@@ -40,7 +40,7 @@
       And owner logout from ownersini dashboard
       Then owner redirect to login pemilik page
 
-    @TEST_PMAN-810
+    @TEST_SS-810
     Scenario: Owner P1 log out from Owner Dashboard P2
       Given user go to mamikos homepage
       When user login as owner:

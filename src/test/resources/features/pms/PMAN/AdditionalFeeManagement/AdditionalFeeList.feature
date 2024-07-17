@@ -2,7 +2,7 @@
 
 Feature: Additional Fee Master Data List
 
-  @TEST_PMAN-752 @continue
+  @TEST_SS-752 @continue
   Scenario: Check Biaya Tambahan Tetap, Satuan Waktu only, Ditentukan di Awal, Penyewa Tidak bisa pilih mandiri
     Given admin go to pms singgahsini
     And admin login pms :
@@ -25,7 +25,7 @@ Feature: Additional Fee Master Data List
     When admin delete additional fee "Tetap waktu only"
     Then no additional fee master data with name "Tetap waktu only"
 
-  @TEST_PMAN-766 @continue
+  @TEST_SS-766 @continue
   Scenario: Check Biaya Tambahan Satu Kali, Satuan Waktu, Disesuaikan Tagihan, Penyewa tidak bisa pilih mandiri
     When admin add new additional fee
     When admin input nama biaya "Disesuaikan Tagihan"
@@ -42,7 +42,7 @@ Feature: Additional Fee Master Data List
     When admin delete additional fee "Disesuaikan Tagihan"
     Then no additional fee master data with name "Disesuaikan Tagihan"
 
-  @TEST_PMAN-764 @continue
+  @TEST_SS-764 @continue
   Scenario: Check Biaya Tambahan Tetap, Satuan Besaran only, Ditentukan di Awal, Penyewa Booking bisa pilih mandiri
     When admin add new additional fee
     When admin input nama biaya "Tetap besaran only"
@@ -61,7 +61,7 @@ Feature: Additional Fee Master Data List
     When admin delete additional fee "Tetap besaran only"
     Then no additional fee master data with name "Tetap besaran only"
 
-  @TEST_PMAN-772 @continue
+  @TEST_SS-772 @continue
   Scenario: Check Biaya Tambahan Satu Kali, Satuan Besaran dan Waktu, Ditentukan di Awal, Penyewa Stay bisa pilih mandiri
     When admin add new additional fee
     When admin input nama biaya "Satu Kali waktu dan besaran"
@@ -83,7 +83,7 @@ Feature: Additional Fee Master Data List
     When admin delete additional fee "Satu Kali waktu dan besaran"
     Then no additional fee master data with name "Satu Kali waktu dan besaran"
 
-  @TEST_PMAN-768
+  @TEST_SS-768
   Scenario: Check Biaya Tambahan Satu Kali, Satuan Besaran dan Waktu, Ditentukan di Awal, Penyewa Stay dan Booking bisa pilih mandiri
     When admin add new additional fee
     When admin input nama biaya "Penyewa Stay dan Booking"

@@ -2,7 +2,7 @@
 
 Feature: Adding Permission on Disbursement Management
 
-  @TEST_PMAN-800 @continue @context1 @context2
+  @TEST_SS-800 @continue @context1 @context2
   Scenario: User add Lihat Detail Disbursement permission
     Given owner set browser context to "context1"
     And bring page to front
@@ -23,7 +23,7 @@ Feature: Adding Permission on Disbursement Management
     When admin assign member "automationpman02@mamikos.com" to role "Automation Test Add Permission"
     Then member "automationpman02@mamikos.com" should registered
 
-  @TEST_PMAN-800 @continue
+  @TEST_SS-800 @continue
   Scenario: User add Lihat Detail Disbursement permission
     #check Lihat Detail button availability
     ##login on different browser using assigned member
@@ -38,7 +38,7 @@ Feature: Adding Permission on Disbursement Management
     Then admin automation has permission on Disbursement for button
       | Lihat Detail  |
 
-  @TEST_PMAN-731 @continue
+  @TEST_SS-731 @continue
   Scenario: User add Approve Disbursement permission
     Given owner set browser context to "context1"
     And bring page to front
@@ -50,7 +50,7 @@ Feature: Adding Permission on Disbursement Management
     And admin submit add new role
     Then system should show toast message "Perubahan berhasil disimpan."
 
-  @TEST_PMAN-731 @continue
+  @TEST_SS-731 @continue
   Scenario: User add Approve Disbursement permission
     #check Konfirmasi & Lihat Detail button availability
     ##login on different browser using assigned member
@@ -62,7 +62,7 @@ Feature: Adding Permission on Disbursement Management
       | Konfirmasi    |
       | Lihat Detail  |
 
-  @TEST_PMAN-734 @continue
+  @TEST_SS-734 @continue
   Scenario: User add Edit Transaction Disbursement permission
     Given owner set browser context to "context1"
     And bring page to front
@@ -73,7 +73,7 @@ Feature: Adding Permission on Disbursement Management
     And admin submit add new role
     Then system should show toast message "Perubahan berhasil disimpan."
 
-  @TEST_PMAN-734 @continue
+  @TEST_SS-734 @continue
   Scenario: User add Edit Transaction Disbursement permission
     #check Tambahkan Transaksi & Tambahkan button availability
     ##login on different browser using assigned member
@@ -86,7 +86,7 @@ Feature: Adding Permission on Disbursement Management
       | Tambahkan in Biaya Lainnya        |
       | Tambahkan in Tambahan Pendapatan  |
 
-  @TEST_PMAN-733 @continue
+  @TEST_SS-733 @continue
   Scenario: Remove Edit Transaction Disbursement permission
     Given owner set browser context to "context1"
     And bring page to front
@@ -97,7 +97,7 @@ Feature: Adding Permission on Disbursement Management
     And admin submit add new role
     Then system should show toast message "Perubahan berhasil disimpan."
 
-  @TEST_PMAN-733 @continue
+  @TEST_SS-733 @continue
   Scenario: Remove Edit Transaction Disbursement permission
       #check Tambahkan Transaksi & Tambahkan button availability
       ##login on different browser using assigned member
@@ -110,7 +110,7 @@ Feature: Adding Permission on Disbursement Management
       | Tambahkan in Biaya Lainnya        |
       | Tambahkan in Tambahan Pendapatan  |
 
-  @TEST_PMAN-742 @continue
+  @TEST_SS-742 @continue
   Scenario: Remove Lihat Detail and Approve Disbursement permission
     Given owner set browser context to "context1"
     And bring page to front
@@ -122,7 +122,7 @@ Feature: Adding Permission on Disbursement Management
     And admin submit add new role
     Then system should show toast message "Perubahan berhasil disimpan."
 
-  @TEST_PMAN-742 @continue
+  @TEST_SS-742 @continue
   Scenario: Remove Lihat Detail and Approve Disbursement permission
     #check Konfirmasi & Lihat Detail button availability
     ##login on different browser using assigned member
@@ -134,7 +134,7 @@ Feature: Adding Permission on Disbursement Management
       | Lihat Detail  |
       | Konfirmasi    |
 
-  @TEST_PMAN-742
+  @TEST_SS-742
   Scenario: Delete Role
     #delete role for set default data
     Given owner set browser context to "context1"

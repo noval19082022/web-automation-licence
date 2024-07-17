@@ -1,7 +1,7 @@
 @singgahsini @regression @pman @pman-prod
 
 Feature: Kost List
-  @TEST_PMAN-592 @continue
+  @TEST_SS-592 @continue
   Scenario: Admin - Verify Component of Page Kost List
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -10,7 +10,7 @@ Feature: Kost List
     And admin access menu "Kost List" sub menu of management level
     Then system displaying content of page kost list
 
-  @TEST_PMAN-595 @continue
+  @TEST_SS-595 @continue
   Scenario: Edit Kost Level
     When admin search kost by name "Kost Tobelo Asri Village"
     And admin change level to "Mamikos Goldplus 1 PROMO" on Edit Kost Level
@@ -20,7 +20,7 @@ Feature: Kost List
     And admin change level to "Reguler" on Edit Kost Level
     Then the Level is displaying "Reguler"
 
-  @TEST_PMAN-577 @continue
+  @TEST_SS-577 @continue
   Scenario: Charge by in Kost List
     When admin search kost by name "Kost Tobelo Asri Village"
     And admin clicks on Edit Kost Level
@@ -30,7 +30,7 @@ Feature: Kost List
     When admin change charge by to "Kost" on Edit Kost Level
     Then charge by "Kost" is selected
 
-  @TEST_PMAN-561 @continue
+  @TEST_SS-561 @continue
   Scenario: Edit Room Level
     When admin access menu "Kost List" sub menu of management level
     And admin search kost by name "Kost Tobelo Asri Village"
@@ -43,7 +43,7 @@ Feature: Kost List
     And admin change room level to "Regular" on Room List
     Then the room Level is displaying "Regular"
 
-  @TEST_PMAN-564 @continue
+  @TEST_SS-564 @continue
   Scenario: Assign All Rooms
     When admin clicks Assign All button
     And admin change room level to "Mamikos Goldplus 1 PROMO" on Assign All Rooms
@@ -53,12 +53,12 @@ Feature: Kost List
     And admin change room level to "Regular" on Assign All Rooms
     Then all room level is changed to "Regular"
 
-  @TEST_PMAN-569
+  @TEST_SS-569
   Scenario: Verify pagination in Room List
     And admin click page number "2" on Room List
     Then system display Room List page number "2" is active
 
-  @TEST_PMAN-596
+  @TEST_SS-596
   Scenario Outline: Verify pagination in Kost List
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -74,7 +74,7 @@ Feature: Kost List
       | 3      |
       | 4      |
 
-  @TEST_PMAN-568
+  @TEST_SS-568
   Scenario: Search Kost List by Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -85,7 +85,7 @@ Feature: Kost List
     When admin search kost by name "Tobelo Asri"
     Then show result kost "Tobelo Asri"
 
-  @TEST_PMAN-636
+  @TEST_SS-636
   Scenario: Search Kost List by Owner Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -96,7 +96,7 @@ Feature: Kost List
     When admin search kost by owner name "Yudha Chandra"
     Then show all kost belongs to owner "Yudha Chandra"
 
-  @TEST_PMAN-650
+  @TEST_SS-650
   Scenario: Search Kost List by Owner Phone Number
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -107,7 +107,7 @@ Feature: Kost List
     When admin search kost by owner phone number "085947715987"
     Then show all kost belongs to owner phone number "085947715987"
 
-  @TEST_PMAN-580
+  @TEST_SS-580
   Scenario: Search Kost List by Multiple Filter
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

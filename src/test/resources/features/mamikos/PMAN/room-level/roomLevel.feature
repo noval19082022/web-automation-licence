@@ -2,7 +2,7 @@
 
 Feature: Add and Edit Room Level
 
-  @TEST_PMAN-590 @continue
+  @TEST_SS-590 @continue
   Scenario: Search Room Level Function
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -12,28 +12,28 @@ Feature: Add and Edit Room Level
     And admin search room level "SinggahSini"
     Then search result "SinggahSini" is displayed
 
-  @TEST_PMAN-585 @continue
+  @TEST_SS-585 @continue
   Scenario: Search Empty Keyword in Room Level
     When admin clear keyword in Room Level search bar
     And admin clicks search button
     Then all data in Room Level is displayed
 
-  @TEST_PMAN-617 @continue
+  @TEST_SS-617 @continue
   Scenario: Add Room Level with Existing Key
     And admin add room level with existing key "room_level_key"
     Then error message existing key is displayed
     When admin go to room level menu
     Then room level is not created
 
-  @TEST_PMAN-760
+  @TEST_SS-760
   Scenario: Edit Room Level with Existing Key
     When admin edit room level with existing key "room_level_key"
     Then error message existing key is displayed
     When admin go to room level menu
-    And admin search room level "Automation PMAN Existing Key"
+    And admin search room level "Automation SS Existing Key"
     Then the key is not changed
 
-  @TEST_PMAN-565
+  @TEST_SS-565
   Scenario: Charging fee can't more than 100%
     #Add charging fee > 100%
     Given admin go to mamikos bangkrupux admin
@@ -46,7 +46,7 @@ Feature: Add and Edit Room Level
     Then show charging fee error message "The charging fee cannot be greater than 100"
     #Edit charging fee > 100%
     When admin go to room level menu
-    And admin edit room level "Automation PMAN Existing Key"
+    And admin edit room level "Automation SS Existing Key"
     And set charging fee "200"
     Then show charging fee error message "The charging fee cannot be greater than 100"
 
@@ -61,12 +61,12 @@ Feature: Add and Edit Room Level
     And admin edit room level with empty level name
     Then show error message "The name field is required."
 
-  @TEST_PMAN-555 @continue
+  @TEST_SS-555 @continue
   Scenario: Verify Component of Page List Room Level
     When admin go to room level menu
     Then should show room level menu content
 
-  @TEST_PMAN-578
+  @TEST_SS-578
   Scenario: Verify Pagination in Room Level
     When admin go to room level menu
     And admin go to page "2"

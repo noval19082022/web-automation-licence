@@ -2,7 +2,7 @@
 
 Feature: Kontrak Kerja Sama
 
-  @continue @TEST_PMAN-779 @pman2
+  @continue @TEST_SS-779 @pman2
   Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
@@ -28,7 +28,7 @@ Feature: Kontrak Kerja Sama
       | Nama          | Nomor HP      | Alamat          | Provinsi      | kota/Kabupaten    | Kecamatan | Kelurahan   |
       | Yudha Ferroza | 083342344565  | Jl Sudirman no1 | DI Yogyakarta | Kabupaten Bantul  | Sanden    | Srigading   |
 
-  @continue @TEST_PMAN-824 @pman2
+  @continue @TEST_SS-824 @pman2
   Scenario: See and Edit Informasi Transfer Pendapatan
     Then informasi transfer pendapatan should be match with data
       | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
@@ -48,7 +48,7 @@ Feature: Kontrak Kerja Sama
       | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
       | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
 
-  @continue @TEST_PMAN-823
+  @continue @TEST_SS-823
   Scenario: See and Edit Detail Kerja Sama
     When admin see detail kerja sama
     Then detail kerja sama should be match with data
@@ -69,7 +69,7 @@ Feature: Kontrak Kerja Sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
       | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
 
-  @TEST_PMAN-784 @continue
+  @TEST_SS-784 @continue
   Scenario: See and Edit Detail Kerja Sama Hybrid
     #Admin edit detail kerja sama Hybrid
     When admin turn on Hybrid and set mamikos precentage to "10" percent
@@ -81,7 +81,7 @@ Feature: Kontrak Kerja Sama
     Then kontrak kerja sama should not contains hybrid rev share
 
 
-  @TEST_PMAN-819 @pman2
+  @TEST_SS-819 @pman2
   Scenario: See Rincian Tipe Kamar dan Harga
     When admin go to pms singgahsini
     And admin go to detail property "Khusus Automation"

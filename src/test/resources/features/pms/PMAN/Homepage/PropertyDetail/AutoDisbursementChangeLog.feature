@@ -2,7 +2,7 @@
 
 Feature: Auto Disbursement Change Log
 
-  @TEST_PMAN-720
+  @TEST_SS-720
   Scenario: Check Auto Disbursement Change Log When Auto Disbursement turn into "ON/OFF"
     Given admin go to pms singgahsini
     When admin login pms :
