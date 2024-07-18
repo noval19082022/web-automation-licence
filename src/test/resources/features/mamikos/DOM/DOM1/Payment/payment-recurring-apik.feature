@@ -1,7 +1,7 @@
 @DOM1
 Feature: Payment Recurring kost APIK
 
-  @TEST_COOP-5060
+  @TEST_SS-2741
   Scenario: Tenant pay recurring kos Apik using Ovo
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -13,7 +13,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5056
+  @TEST_SS-2737
   Scenario: Tenant pay recurring kos Apik using credit card
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -25,7 +25,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5057
+  @TEST_SS-2738
   Scenario: Tenant pay recurring kos Apik using Dana
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -37,7 +37,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5058
+  @TEST_SS-2739
   Scenario: Tenant pay recurring kos Apik using LinkAja
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -49,7 +49,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5059
+  @TEST_SS-2740
   Scenario: Tenant pay recurring kos Apik using Mandiri
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -61,7 +61,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5061
+  @TEST_SS-2742
   Scenario: Tenant pay recurring kos Apik using Permata
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -73,7 +73,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5062
+  @TEST_SS-2743
   Scenario: Tenant pay recurring kos Apik using Alfamart
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -85,7 +85,7 @@ Feature: Payment Recurring kost APIK
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @TEST_COOP-5055
+  @TEST_SS-2737
   Scenario: Tenant pay recurring kos Apik using BNI
     Given user go to mamikos homepage
     When user login as tenant via phone number:

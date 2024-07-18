@@ -1,7 +1,7 @@
 @DOM2 @BackofficeStagging2
 Feature: Payment Backoffice Staging 2 - Refund
 
-  @TEST_COOP-5538 @Automated @web-covered
+  @TEST_SS-2892 @Automated @web-covered
   Scenario: [BackOffice][Refund] Input invalid bank name
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin fill bank name "Bank Noval" on refund detail
     Then admin verify see text "No results found"
 
-  @TEST_COOP-5539 @Automated @web-covered
+  @TEST_SS-2893 @Automated @web-covered
   Scenario: [BackOffice][Refund] export Report
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -25,7 +25,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    And admin download the transferred refund report (this step is comment to reduce log on BE side caused by bug)
 #    Then user will get message success download and file exported send email (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
 
-  @TEST_COOP-5540 @Automated @web-covered
+  @TEST_SS-2894 @Automated @web-covered
   Scenario: [BackOffice][Refund] Refund Payment Credit Card
     ## delete contract
     Given admin go to mamikos mamipay admin
@@ -97,7 +97,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set to refund the paid invoice
     Then admin verify see text "Refund transaction created."
 
-  @TEST_COOP-5541 @Automated @web-covered
+  @TEST_SS-2901 @Automated @web-covered
   Scenario: [BackOffice][Refund] refund payment OVO
     ## delete contract
     Given admin go to mamikos mamipay admin
@@ -174,8 +174,8 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    And admin visit transferred list on refund page
 #    Then admin verify transferred transaction for user "testing automation refund" is visible
 
-  @TEST_COOP-5542 @Automated @web-covered
-  Scenario: [BackOffice][Refund] export Report
+  @TEST_SS-2896 @Automated @web-covered
+  Scenario: [BackOffice][Refund] export Report for today
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
@@ -189,7 +189,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    And user click button download
 #    Then user will get message success download and file exported send email
 
-  @TEST_COOP-5543 @Automated @web-covered
+  @TEST_SS-2897 @Automated @web-covered
   Scenario: [BackOffice][Refund] export Report Before 1 Hour
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -204,7 +204,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 #  (Bug report on ticket https://mamikos.atlassian.net/browse/DOM-4848)
 #    Then user will get error message
 
-  @TEST_COOP-5544 @Automated @web-covered
+  @TEST_SS-2898 @Automated @web-covered
   Scenario: [BackOffice][Refund] transaction CreditCard On Transferred Tab
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -215,7 +215,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin search transferred refund by tenant Phone Number and input field "083829167577"
     Then admin verify see text "( from Credit Card )"
 
-  @TEST_COOP-5545 @Automated @web-covered
+  @TEST_SS-2899 @Automated @web-covered
   Scenario: [BackOffice][Refund] click Close Button Popup Refund
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -226,7 +226,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin close the refund detail
     Then admin verify see text "Daftar Invoice Refund"
 
-  @TEST_COOP-5546 @Automated @web-covered
+  @TEST_SS-2900 @Automated @web-covered
   Scenario: [BackOffice][Refund] download Receipt Flip On Transferred Tab
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -238,7 +238,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin want to download receipt transferred invoice
 		#    Then user successed download receipt - (need improvement for popup success from FE)
 
-  @TEST_COOP-5548 @Automated @web-covered
+  @TEST_SS-2902 @Automated @web-covered
   Scenario: [BackOffice][Refund] direction Tab To Transferred Tab
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -248,7 +248,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin visit transferred list on refund page
     Then admin verify see text "Receipt"
 
-  @TEST_COOP-5549 @Automated @web-covered
+  @TEST_SS-2903 @Automated @web-covered
   Scenario: [BackOffice][Refund] popup refund section bank
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -259,7 +259,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin fill bank name "BANK MANTAP (Mandiri Taspen)" on refund detail
     Then admin verify bank name for refund is "BANK MANTAP (Mandiri Taspen)"
 
-  @TEST_COOP-5550 @Automated @web-covered
+  @TEST_SS-2904 @Automated @web-covered
   Scenario: [BackOffice][Refund] transaction Flip On Transferred Tab
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -270,7 +270,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin search transferred refund by tenant Phone Number and input field "083829167577"
     Then admin verify see text "Flip"
 
-  @TEST_COOP-5551 @Automated @web-covered
+  @TEST_SS-2905 @Automated @web-covered
   Scenario: [BackOffice][Refund] no Input Bank Account
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -282,7 +282,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set to refund the paid invoice
     Then admin verify see text "The refund account field is required when cc transaction id is not present."
 
-  @TEST_COOP-5552 @Automated @web-covered
+  @TEST_SS-2906 @Automated @web-covered
   Scenario: [BackOffice][Refund] no Input Account Name
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -294,7 +294,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set to refund the paid invoice
     Then admin verify see text "The refund account name field is required when cc transaction id is not present."
 
-  @TEST_COOP-5553 @Automated @web-covered
+  @TEST_SS-2907 @Automated @web-covered
   Scenario: [BackOffice][Refund] click Back Button Popup Refund
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -307,7 +307,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     Then admin verify see text "Daftar Invoice Refund"
 
 
-  @TEST_COOP-5578
+  @TEST_SS-2931
   Scenario: [BackOffice][Refund Menu][Failed Tab] resend from failed tab
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -322,8 +322,8 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    Then admin verify see text "Refund transaction created."
 
 
-  @TEST_COOP-1431 @Automated @web-covered
-  Scenario: [BackOffice][Refund] no Input Bank Account
+  @TEST_SS-2679 @Automated @web-covered
+  Scenario: [BackOffice][Refund][PopUp Refund] no Input Bank Account
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
@@ -334,7 +334,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin set to refund the paid invoice
     Then admin verify see text "Account number can only contain number"
 
-  @TEST_COOP-5542 @Automated @web-covered
+  @TEST_SS-2687 @Automated @web-covered
   Scenario Outline: [BackOffice][Refund] Check list of data transaction on tab paid Search by Nama Penyewa
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
