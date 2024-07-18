@@ -36,8 +36,8 @@ Feature: Payment All
     And owner accept booking and select the room
     And owner logs out
 
-  @paymentCreditCard @TEST_COOP-5185 @continue
-  Scenario: Tenant pay kos credit card
+  @paymentCreditCard @TEST_SS-2745 @continue
+  Scenario: [Booking][Invoice] Tenant pay kos credit card
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
       | 0895124719 | 083176408442 | qwerty123 |
@@ -49,15 +49,15 @@ Feature: Payment All
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @TEST_COOP-6905 @continue
+  @TEST_SS-2752 @continue
   Scenario: [Invoice] Check Invoice From Kost saya dibayar
     Given user go to mamikos homepage
     And tenant navigate to tagihan kost saya
     And tenant click sudah di bayar
     Then tenant will see that the text "Dibayar" is displayed
 
-  @paymentBni @TEST_COOP-5184 @continue
-  Scenario: Tenant pay kos BNI
+  @paymentBni @TEST_SS-2744 @continue
+  Scenario: [Invoice] Tenant pay kos BNI
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -66,8 +66,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentMandiri @TEST_COOP-5189 @continue
-  Scenario: Tenant pay kos mandiri
+  @paymentMandiri @TEST_SS-2748 @continue
+  Scenario: [Invoice] Tenant pay kos mandiri
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -76,8 +76,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentPermata @TEST_COOP-5191 @continue
-  Scenario: Tenant pay kos permata
+  @paymentPermata @TEST_SS-2750 @continue
+  Scenario: [Invoice] Tenant pay kos permata
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -86,8 +86,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentBRIMidtrans @TEST_COOP-5041 @continue
-  Scenario: Tenant pay kos BBK using BRI
+  @paymentBRIMidtrans @TEST_SS-2735 @continue
+  Scenario: [Invoice] Tenant pay kos BBK using BRI
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -96,8 +96,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentDana @TEST_COOP-5186 @continue
-  Scenario: Tenant pay kos Dana
+  @paymentDana @TEST_SS-2746 @continue
+  Scenario: [Invoice] Tenant pay kos Dana
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -106,8 +106,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentLinkAja @TEST_COOP-5188 @continue
-  Scenario: Tenant pay kos LinkAja
+  @paymentLinkAja @TEST_SS-2747 @continue
+  Scenario: [Invoice] Tenant pay kos LinkAja
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -116,16 +116,16 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @paymentOvo @TEST_COOP-5190 @continue
-  Scenario: Tenant pay kos ovo
+  @paymentOvo @TEST_SS-2749 @continue
+  Scenario: [Invoice] Tenant pay kos ovo
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant pay booking to extended contract using ovo "0892202100"
     And tenant close unused browser tab
 
-  @paymentAlfamart @TEST_COOP-4606 @continue
-  Scenario: Tenant pay kos BBK alfamart
+  @paymentAlfamart @TEST_SS-3098 @continue
+  Scenario: [Invoice] Tenant pay kos BBK alfamart
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -134,8 +134,8 @@ Feature: Payment All
     Then tenant will see payment is success
     And tenant close unused browser tab
 
-  @TEST_COOP-2438 @continue
-  Scenario: Tenant pay kos using indomaret
+  @TEST_SS-2870 @continue
+  Scenario: [Invoice] Tenant pay kos using indomaret
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
@@ -149,8 +149,8 @@ Feature: Payment All
     And tenant navigate to tagihan kost saya
     Then tenant will see invoice "Belum Dibayar"
 
-  @TEST_COOP-5711
-  Scenario: Tenant click bayar saya sudah bayar before paid
+  @TEST_SS-2753
+  Scenario: [Invoice] Tenant click bayar saya sudah bayar before paid
     Given user go to mamikos homepage
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
