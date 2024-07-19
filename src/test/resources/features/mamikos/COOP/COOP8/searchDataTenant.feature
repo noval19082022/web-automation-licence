@@ -1,7 +1,7 @@
 @BBM8 @regression
 Feature: Search Data Tenant on Bangkerupux Admin
 
-  @continue @TEST_COOP-2893
+  @continue @TEST_SS-3968
   Scenario: Search by Registered Phone Number
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -17,7 +17,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin click next button on booking now
     Then admin should be in "Duration" form step
 
-  @TEST_COOP-2895
+  @TEST_SS-3970
   Scenario: Search By Not Registered Phone Number
     When admin go to data booking menu
     And admin click booking now button
@@ -28,7 +28,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin click search button on booking now
     Then admin verify dialog alert text on form booking is "User not found"
 
-  @continue @TEST_COOP-2817
+  @continue @TEST_SS-3892
   Scenario: Search By Registered Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -44,7 +44,7 @@ Feature: Search Data Tenant on Bangkerupux Admin
     And admin click next button on booking now
     Then admin should be in "Duration" form step
 
-  @TEST_COOP-2816
+  @TEST_SS-3891
   Scenario: Search By Not Registered Name
     When admin go to data booking menu
     And admin click booking now button

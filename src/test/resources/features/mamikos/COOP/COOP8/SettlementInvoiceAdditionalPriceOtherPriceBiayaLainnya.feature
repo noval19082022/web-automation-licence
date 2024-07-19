@@ -1,4 +1,4 @@
-@regression @BBM8 @TEST_COOP-3453 @TEST_COOP-3452 @TEST_COOP-3451
+@regression @BBM8
 Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Admin Batalkan Contract
@@ -46,6 +46,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And tenant get invoice number from riwayat booking
     And user logs out as a Tenant user
 
+  @TEST_SS-4042
   Scenario: Admin Changed Basic Amount DP Settlement Invoice, Add Additional Price Biaya Lainnya And Biaya Tetap
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -71,6 +72,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
     And tenant set active page to 1
     And tenant get invoice number
 
+  @TEST_SS-4043
   Scenario: Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -84,6 +86,7 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
       | additional price title | Automation Biaya Lainnya |
       | addtional price value  | 50000                    |
 
+  @TEST_SS-4041
   Scenario: Tenant Check Additional Price Biaya Lainnya Added By Admin On Settlement Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -1,4 +1,4 @@
-@arac @pms @TEST_COOP-1074 @BBM8
+@arac @pms @TEST_SS-3378 @BBM8
 Feature: Create OOO "Short Stay" Type
 
   @continue

@@ -1,5 +1,5 @@
 @BBM6 @COOP6
-Feature: Mark room bbk, kos GP and non GP
+Feature: Owner - Penyewa Feature
 
   @waitingTerminateConfirmation
   Scenario: Cancel and create booking
@@ -49,7 +49,7 @@ Feature: Mark room bbk, kos GP and non GP
     And tenant navigate to riwayat and draf booking
     Then tenant checkin kost from riwayat booking
 
-  @messageRequestTerminatedContract
+  @messageRequestTerminatedContract @TEST_SS-3539
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -73,7 +73,7 @@ Feature: Mark room bbk, kos GP and non GP
     And user click on kontrak sewa button
     Then user will see message request terminated contract
 
-  @disbursementInfo @continue
+  @disbursementInfo @continue @TEST_SS-3538
   Scenario: Check content and link on info untuk anda for disbursement
     Given user go to mamikos homepage
     When user login as owner:
@@ -85,13 +85,13 @@ Feature: Mark room bbk, kos GP and non GP
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
-  @checkContentLaporanKeuangan @TEST_COOP-1942
+  @checkContentLaporanKeuangan @TEST_SS-3487
   Scenario: Check content Laporan Keuangan
     Given user go to mamikos homepage
     And owner navigates to financial report
     Then user can see "Buka Laporan Keuangan di Aplikasi" and "Untuk saat ini, fitur Laporan Keuangan hanya dapat"
 
-  @TEST_COOP-1984
+  @TEST_SS-3304
   Scenario: Delete All Need Confirmation Booking Request
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -143,7 +143,7 @@ Feature: Mark room bbk, kos GP and non GP
     And owner click simpan on add room pop up
     Then verify will be appears and the room is untick again
 
-  @markRoomAsOccupied @markRoom @TEST_COOP-1918
+  @markRoomAsOccupied @markRoom @TEST_SS-3463
   #markRoom.feature
   Scenario: Mark BBK And Gold Plus Room As Occupied (BBM-868)
     Given owner click back on added room pop up
@@ -154,7 +154,7 @@ Feature: Mark room bbk, kos GP and non GP
     When owner click on Add Renter button
     Then owner redirected to Input Renter's Information form with valid kost name
 
-  @occupancyAndBilling @markRoom @TEST_COOP-1917 @continue
+  @occupancyAndBilling @markRoom @TEST_SS-3462 @continue
   #markRoom.feature
   Scenario: Mark BBK And Non Gold Plus Room As Occupied (BBM-867)
     Given user go to mamikos homepage
@@ -174,7 +174,7 @@ Feature: Mark room bbk, kos GP and non GP
     And owner click simpan on add room pop up
     Then owner can sees room is on "Kosong" status
 
-  @updateRoomToast @markRoom @TEST_COOP-1916
+  @updateRoomToast @markRoom @TEST_SS-3461
   #updateRoom.feature
   Scenario: Check Update Room's Toast (BBM-869)
     Given owner navigates to property saya kos
@@ -190,7 +190,7 @@ Feature: Mark room bbk, kos GP and non GP
     And owner click simpan on add room pop up
     Then owner can sees toast "Kamar Kosong Bertambah 1"
 
-  @BNB-3131 @TEST_COOP-1947
+  @deteleOtherPrice
   #otherPrice.feature
   Scenario: Delete Active Other Additional Price (BBM-947)
     Given user go to mamikos homepage

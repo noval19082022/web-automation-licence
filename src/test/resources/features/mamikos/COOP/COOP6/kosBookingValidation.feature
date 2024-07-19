@@ -1,7 +1,7 @@
 @BBM6 @bnbfeature @kostBookingValidation
 Feature: Kost Validation
 
-  @TEST_COOP-1914 @automated @web @xray-update @validationBooking
+  @TEST_SS-3459 @automated @web @xray-update @validationBooking
   Scenario: [Kost Detail][Validation Pop Up]Check validation for booking when tenant not have Job (BBM-538)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,7 +14,7 @@ Feature: Kost Validation
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Belum ada data jenis kelamin"
 
-  @TEST_COOP-1905 @automated @web @xray-update @mahasiswaValidation @validationBooking
+  @TEST_SS-3450 @automated @web @xray-update @mahasiswaValidation @validationBooking
   Scenario: [Kost Detail][Validation Pop Up]Check validation for Booking kost khusus Karyawan when tenant profile as Mahasiswa
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -34,7 +34,7 @@ Feature: Kost Validation
     And user go to mamikos homepage
     Then user logs out as a Tenant user
 
-  @TEST_COOP-1902 @automated @web @xray-update @validationBooking @karyawanValidation
+  @TEST_SS-3447 @automated @web @xray-update @validationBooking @karyawanValidation
   Scenario: [Kost Detail][Validation Pop Up]Check validation for Booking kost khusus Mahasiswa when tenant profile as Karyawan (BBM-529)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -54,7 +54,7 @@ Feature: Kost Validation
     And user go to mamikos homepage
     Then user logs out as a Tenant user
 
-  @TEST_COOP-1903 @automated @web @xray-update @kosMahasiswaTenantLainnya @validationBooking
+  @TEST_SS-3448 @automated @web @xray-update @kosMahasiswaTenantLainnya @validationBooking
   Scenario: [Kost Detail][Validation Pop Up]Check validation for Booking kost khusus Mahasiswa / Karyawan when tenant profile as Lainnya (BBM-530)
     Given user go to mamikos homepage
     When user login as tenant via phone number:

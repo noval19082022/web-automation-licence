@@ -1,7 +1,7 @@
 @BBM8 @validationJobs
 Feature: Edit profile for jobs as Lainnya
 
-  @TEST_COOP-798
+  @TEST_SS-3340
   Scenario: Click Ajukan Sewa Button if user has not fill Deskripsi when user choose Lainnya as Pekerjaan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -15,7 +15,7 @@ Feature: Edit profile for jobs as Lainnya
     And tenant click ajukan sewa button on kost detail page
     Then user can see validation on jobs with "Masukkan nama pekerjaan untuk memproses pengajuan sewa."
 
-  @TEST_COOP-797 @continue
+  @TEST_SS-3339 @continue
   Scenario: Change pekerjaan to Karyawan and fill with invalid data from booking detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -31,14 +31,14 @@ Feature: Edit profile for jobs as Lainnya
     And user choose profession "Lainnya" on ubah informasi penyewa
     Then red hint "Nama pekerjaan wajib diisi." text will show up
 
-  @TEST_COOP-797 @continue
+  @TEST_SS-3339 @continue
   Scenario: Change pekerjaan to Karyawan and fill with invalid data from booking detail
     When user click on ubah button on informasi penyewa
     And user choose profession "Karyawan" on ubah informasi penyewa
     And user click dropdown and fills "aaa" on edit profile
     Then user can see information "There is no data"
 
-  @TEST_COOP-771 @continue
+  @TEST_SS-3329 @continue
   Scenario: Change pekerjaan to Karyawan from booking detail
     Given user click on ubah button on informasi penyewa
     When user choose profession "Karyawan" on ubah informasi penyewa
@@ -46,7 +46,7 @@ Feature: Edit profile for jobs as Lainnya
     And user choose pekerjaan "Bukit Asam Tbk" from dropdown
     Then user can see information "Karyawan"
 
-  @TEST_COOP-855 @TEST_COOP-767 @TEST_COOP-769 @continue
+  @TEST_SS-3352 @TEST_SS-3325 @TEST_SS-3327 @continue
   Scenario: User able to change Profesi to Mahasiswa, Karyawan and Lainnya from edit profile page
     When tenant navigates to edit profile
     And user choose profession "Lainnya"
@@ -64,20 +64,20 @@ Feature: Edit profile for jobs as Lainnya
     And user click simpan button
     Then tenant success update profile
 
-  @TEST_COOP-854 @continue
+  @TEST_SS-3351 @continue
   Scenario: Change pekerjaan to Mahasiswa and Karyawan with invalid data instantion from edit profile page
     When tenant navigates to edit profile
     And user choose profession "Karyawan"
     And user click dropdown pilih instansi "abcd"
     Then user can see information "There is no data"
 
-  @TEST_COOP-766
+  @TEST_SS-3324
   Scenario: Change pekerjaan to Mahasiswa and Karyawan with invalid data instantion from edit profile page
     When user choose profession "Mahasiswa"
     And user fills "abcd" in pilih universitas
     Then user can see information "There is no data"
 
-  @TEST_COOP-144 @uxImprovement
+  @TEST_SS-2666 @uxImprovement
   Scenario: [Web][UX Booking] When update jobs in profile page, must update jobs in campus/institution from booking form
     Given user go to mamikos homepage
     When user login as tenant via phone number:

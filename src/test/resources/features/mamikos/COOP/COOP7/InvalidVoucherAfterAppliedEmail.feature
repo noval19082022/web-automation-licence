@@ -1,4 +1,4 @@
-@BBM7 @regression @TEST_COOP-2670
+@BBM7 @regression @TEST_SS-3745
 Feature: Invalid Voucher After Applied, Invalid Email Target
 
   @continue

@@ -2,7 +2,7 @@
 
   Feature: Listing Availability on Chat Room
 
-    @TEST_COOP-782 @BBM8
+    @TEST_SS-3333 @BBM8
     Scenario: Check "Ajukan Sewa" button if the room is available for today
       Given user go to mamikos homepage
       When user login as tenant via phone number:
@@ -17,7 +17,7 @@
       And user click Ajukan Sewa "today" from chat room
       Then user will open new tab and go to Booking form
 
-    @TEST_COOP-784 @waitingList @commingSoon
+    @TEST_SS-3335 @waitingList @commingSoon
     Scenario: Check "Ajukan Sewa" button if the room is not available for today and in the future
       Given user go to mamikos homepage
       When user login as tenant via phone number:

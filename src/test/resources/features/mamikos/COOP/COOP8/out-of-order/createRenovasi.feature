@@ -1,4 +1,4 @@
-@arac @pms @TEST_COOP-1088 @BBM8
+@arac @pms @TEST_SS-3381 @BBM8
 Feature: Create OOO "Renovasi" Type
 
   @continue

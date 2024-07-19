@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_COOP-2823
+@TEST_SS-3784 @TEST_SS-3898
 Feature: Apply Voucher For Kost Type BBK
 #    COOP-2823
   @continue

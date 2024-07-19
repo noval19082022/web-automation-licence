@@ -1,6 +1,7 @@
 @BBM @riwayatHadiah
 Feature: Owner - Riwayat Hadiah [Dropped - revamp]
 
+  @TEST_SS-3880
   Scenario: Reward List Status Success
     Given user go to mamikos homepage
     And user login as owner:

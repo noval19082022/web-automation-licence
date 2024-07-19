@@ -1,7 +1,7 @@
 @riwayatKost @BBM8
 Feature: riwayat kost
 
-  @TEST_COOP-1130 @continue
+  @TEST_SS-3385 @continue
   Scenario: check riwayat list and riwayat detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -21,7 +21,7 @@ Feature: riwayat kost
     When user go to mamikos homepage
     Then user logs out as a Tenant user
 
-  @emptyRiwayatKos @TEST_COOP-673
+  @emptyRiwayatKos @TEST_SS-3309
   Scenario: Check riwayat kos when empty condition
     Given user go to mamikos homepage
     When user login as tenant via phone number:

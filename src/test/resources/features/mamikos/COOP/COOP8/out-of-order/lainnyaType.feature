@@ -14,7 +14,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
       | room number | start date |
       | 3           | 21         |
 
-  @TEST_COOP-1071
+  @TEST_SS-3377
   Scenario: Create OOO "Lainnya" with note
     When admin set out of order on room "3"
     And admin fill OOO data with:
@@ -26,7 +26,7 @@ Feature: Create OOO "Lainnya" Type With/Without Note
       | room number | start date |
       | 3           | 21         |
 
-  @TEST_COOP-1070
+  @TEST_SS-3376
   Scenario: Create OOO "Lainnya" without note
     When admin set out of order on room "3"
     And admin fill OOO data with:

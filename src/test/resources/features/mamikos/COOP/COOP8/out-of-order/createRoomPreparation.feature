@@ -1,7 +1,7 @@
-@arac @pms @TEST_COOP-1093 @BBM8
+@arac @pms @TEST_SS-3382 @BBM8
 Feature: Create OOO "Room Preparation" Type
 
-  @TEST_COOP-1093
+  @TEST_SS-3382
   @continue
   Scenario: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini

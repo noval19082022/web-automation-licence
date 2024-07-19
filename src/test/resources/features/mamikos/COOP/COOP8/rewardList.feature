@@ -1,7 +1,7 @@
 @BBM8
 Feature: [Loyalty Reward Management][Reward List]Reward List Management page display
 
-  @TEST_COOP-1969 @continue
+  @TEST_SS-3513 @continue
   Scenario: Reward List Management page display
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -16,7 +16,7 @@ Feature: [Loyalty Reward Management][Reward List]Reward List Management page dis
     Then user click button update reward on page detail reward
     And system display success add reward type
 
-  @TEST_COOP-1948
+  @TEST_SS-3492
   Scenario: Reward status Active
     Given user click Add Reward button
     When user fill required field with correct value

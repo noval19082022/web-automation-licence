@@ -1,7 +1,7 @@
 @BBM6 @kostSaya
   Feature: Kost Saya
 
-  @TEST_COOP-1980 @fasilitasKost @kost-saya @continue
+  @TEST_SS-3524 @fasilitasKost @kost-saya @continue
     Scenario: [Kos Saya][Fasilitas]Check Lihat semua fasilitas
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -17,7 +17,7 @@
     And tenant will see "Fasilitas kamar mandi" on informasi kos
     Then tenant will see "Fasilitas umum" on informasi kos
 
-  @TEST_COOP-1996 @forum @kost-saya
+  @TEST_SS-3536 @forum @kost-saya
     Scenario: [Kost Saya][Forum ]When tenant click Forum and not interested (BBM-893)
     When tenant navigate to kost saya page
     And tenant clicks on forum menu

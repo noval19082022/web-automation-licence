@@ -1,7 +1,7 @@
 @updateRoom @BBM8
 Feature: Update Room number
 
-  @TEST_COOP-686
+  @TEST_SS-3310
   Scenario: Remove Update Room Number on Detail Penyewa Page
     Given user go to mamikos homepage
     When user login as owner:

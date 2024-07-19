@@ -1,7 +1,7 @@
 @regression @booking @BBM8
 Feature: Owner Confirm Booking - Remove Pilih Di Tempat
 
-   @TEST_COOP-698
+   @TEST_SS-3311
   Scenario: Cancel and Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -15,7 +15,7 @@ Feature: Owner Confirm Booking - Remove Pilih Di Tempat
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_COOP-698
+  @TEST_SS-3311
   Scenario: Owner Check Pilih Di Tempat Option
     Given user go to mamikos homepage
     When user login as owner:

@@ -1,7 +1,7 @@
 @BBM8 @waitingList
 Feature: Waiting List - Kost Detail
 
-  @TEST_COOP-4300 @waiting-list @web
+  @TEST_SS-4210 @waiting-list @web
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when have tipe Lain(tipe lain available)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -16,7 +16,7 @@ Feature: Waiting List - Kost Detail
     And tenant click on "Lihat tipe lain" button
     Then tenant see "lihat tipe" section
 
-  @TEST_COOP-4301 @waiting-list @web @continue
+  @TEST_SS-4210 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when have tipe Lain(tipe lain not available)
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -25,7 +25,7 @@ Feature: Waiting List - Kost Detail
     And tenant can see kamar penuh
     Then tenant can see "Ikut daftar tunggu" button
 
-  @TEST_COOP-4302 @waiting-list @web @continue
+  @TEST_SS-4211 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when have kost recomendation
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -37,7 +37,7 @@ Feature: Waiting List - Kost Detail
     And tenant click on "Lihat kos lain" button
     Then tenant see "kamu mungkin menyukainya" section
 
-  @TEST_COOP-4303 @waiting-list @web @continue
+  @TEST_SS-4213 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when doesn't have room type and recomendation kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -46,7 +46,7 @@ Feature: Waiting List - Kost Detail
     And tenant can see kamar penuh
     Then tenant can see "Ikut daftar tunggu" button
 
-  @TEST_COOP-4304 @waiting-list @web @continue
+  @TEST_SS-4214 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P2 when have tipe Lain
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -58,7 +58,7 @@ Feature: Waiting List - Kost Detail
     And tenant click on "Lihat tipe lain" button
     Then tenant see "lihat tipe" section
 
-  @TEST_COOP-4305 @waiting-list @web @continue
+  @TEST_SS-4215 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P2 when have recomendation kost
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -69,7 +69,7 @@ Feature: Waiting List - Kost Detail
     And tenant click on "Lihat kos lain" button
     Then tenant see "kamu mungkin menyukainya" section
 
-  @TEST_COOP-4306 @waiting-list @web @BBM8
+  @TEST_SS-4216 @waiting-list @web @BBM8
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list for kost P2 when doesn't room type and kost recomendation
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -78,7 +78,7 @@ Feature: Waiting List - Kost Detail
     And tenant can see kamar penuh
     Then tenant can see "Tanya pemilik" button
 
-  @TEST_COOP-4311 @waiting-list @web @continue
+  @TEST_SS_4219  @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check kost detail when already submit waiting list and acces another kost with fully room
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -96,7 +96,7 @@ Feature: Waiting List - Kost Detail
     When tenant can see "Ikut daftar tunggu" button
     Then tenant can see "Lihat kost lain" button
 
-  @TEST_COOP-4312 @waiting-list @web
+  @TEST_SS_4220 @waiting-list @web
   Scenario: [Web][Waiting List ][Kost detail]Check kost detail when already submit waiting list and acces another kost with available room
     When tenant search kost then go to kost details:
       | kost name stag                      | kost name prod              |
@@ -105,7 +105,7 @@ Feature: Waiting List - Kost Detail
     Then tenant should see ajukan sewa button is "enable"
     And user logs out as a Tenant user
 
-  @TEST_COOP-4313 @waiting-list @web
+  @TEST_SS-4221 @waiting-list @web
   Scenario: [Web][Waiting List ][Kost detail]Check kost detail when already submit waiting list and property as vacant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -118,7 +118,7 @@ Feature: Waiting List - Kost Detail
     Then tenant should see ajukan sewa button is "enable"
     And user logs out as a Tenant user
 
-  @TEST_COOP-4307 @waiting-list @web
+  @TEST_SS-4217 @waiting-list @web
   Scenario: Check waiting list button when tennat have active contract and that kost have available room
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -132,7 +132,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Ajukan sewa button" button
     And tenant can see "Tanya pemilik" button
 
-  @TEST_COOP-4308 @waiting-list @web
+  @TEST_SS-4218 @waiting-list @web
   Scenario: Check waiting list button when tenant have active contract and that kost fully occupied listing
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -164,7 +164,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Ajukan sewa button" button
     And tenant can see "Tanya pemilik" button
 
-  @TEST_COOP-4314 @waiting-list @web
+  @TEST_SS-4222 @waiting-list @web
   Scenario: Submit waiting list when tennat not login user
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -173,7 +173,7 @@ Feature: Waiting List - Kost Detail
     And tenant click "Ikut Daftar Tunggu"
     Then tenant will see that the text "Login Pencari Kos" is displayed
 
-  @TEST_COOP-4316 @waiting-list @web
+  @TEST_SS-4224 @TEST_SS-4223 @waiting-list @web
   Scenario:Check popup on boarding on kost detail when available room - first time open kost detail
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -181,7 +181,7 @@ Feature: Waiting List - Kost Detail
       | Kost Apik Chrysant Elok Tipe A Kelapa Gading Jakarta Utara | Kost Arac Penuh |
     Then user want to dismiss FTUE
 
-  @TEST_COOP-4317
+  @TEST_SS-4224
   Scenario: [Web][Waiting List][Waiting List Form]Check daftar tunggu form when tenant verified phone number and have room type
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -193,7 +193,7 @@ Feature: Waiting List - Kost Detail
     And tenant click "Ikut Daftar Tunggu"
     Then tenant see waiting list form
 
-  @TEST_COOP-6781 @continue
+  @TEST_SS-4282 @continue
   Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Sudah ada tanggal pasti option
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -206,12 +206,12 @@ Feature: Waiting List - Kost Detail
     And tenant click "Iya, sudah ada tanggal pasti"
     Then tenant can select date to join waiting list
 
-  @TEST_COOP-6782
+  @TEST_SS-4283
   Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Baru perkiraan option
     And tenant click "Baru perkiraan"
     Then tenant can select range date to join waiting list
 
-  @TEST-COOP-4327 @waiting-list
+  @TEST-SS-4226 @waiting-list
   Scenario: [Web][Waiting List ][Waiting List Form]Cancel submit waiting list - Kembali ke iklan
     Given user go to mamikos homepage
     When user login as tenant via phone number:

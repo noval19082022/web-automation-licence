@@ -2,7 +2,7 @@
 Feature: Check Owner Badges
 
 
-  @OwnerBadgesNotLogin @OwnerBadges @TEST_COOP-1358
+  @OwnerBadgesNotLogin @OwnerBadges @TEST_SS-3424
   Scenario: Check Owner Badges on Kos Detail when not login tenant (BBM-500)
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -10,7 +10,7 @@ Feature: Check Owner Badges
       | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
     Then user reached owner badges section
 
-  @OwnerBadgesWithTenantLogin @OwnerBadges @TEST_COOP-1356
+  @OwnerBadgesWithTenantLogin @OwnerBadges @TEST_SS-3422
   Scenario: Check Owner Badges on Kos Detail when login tenant (BBM-498)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -21,7 +21,7 @@ Feature: Check Owner Badges
       | Kost Andalusia Spanyol Eropa Timur | kost payment desta 2 |
     Then user reached owner badges section
 
-  @OwnerBadgesWithOwnerLogin @TEST_COOP-1357
+  @OwnerBadgesWithOwnerLogin @TEST_SS-3423
   Scenario: Check Owner Badges on Kos Detail when login owner (BBM-499)
     Given user go to mamikos homepage
     When user login as tenant via phone number:

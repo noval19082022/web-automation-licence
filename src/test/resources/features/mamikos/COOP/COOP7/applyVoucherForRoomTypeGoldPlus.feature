@@ -1,5 +1,6 @@
 @regression @voucher @BBM7
 
+@TEST-SS-3721 @TEST_SS-3723 @TEST_SS-
 Feature: Apply Voucher For Room Type Gold Plus
 
   Scenario: Admin Batalkan Contract

@@ -1,7 +1,7 @@
 @COOP6 @BBM6
 Feature: Additional price for kos owner
 
-  @activatedDenda
+  @activatedDenda @TEST_SS-3478
   Scenario: Activated denda and input price, update denda, then delete denda
     Given user go to mamikos homepage
     When user login as owner:
@@ -25,7 +25,7 @@ Feature: Additional price for kos owner
     And owner click "Hapus"
     And owner click "Ya, Hapus"
 
-  @denda
+  @denda @TEST_SS-3488
   Scenario: Check Penalty's Rules On Daily, Weekly, and Monthly (BBM-909)
     Given user go to mamikos homepage
     When user login as owner:
@@ -54,7 +54,7 @@ Feature: Additional price for kos owner
     And owner click "Hapus"
     And owner click "Ya, Hapus"
 
-  @additionalPriceDeposit
+  @additionalPriceDeposit @TEST_SS-3476 @TEST_SS-3475 @TEST_SS-3474
   Scenario: Activated deposit and input deposit price and save, then delete deposit
     Given user go to mamikos homepage
     When user login as owner:
@@ -73,7 +73,7 @@ Feature: Additional price for kos owner
     And owner click "Hapus"
     And owner click "Ya, Hapus"
 
-  @otherPrice
+  @otherPrice @TEST_SS-3496 @TEST_SS-3491
   Scenario: Owner Add Additional Price With 20 Character And Price With Correct Data
     Given user go to mamikos homepage
     When user login as owner:
@@ -92,7 +92,7 @@ Feature: Additional price for kos owner
     And owner click "Hapus"
     And owner click "Ya, Hapus"
 
-  @bookingWithOtherPrice
+  @bookingWithOtherPrice @TEST_SS-3543
   Scenario: Check Booking With Other Price On Admin Side
     #admin delete other price
     Given user go to mamikos homepage

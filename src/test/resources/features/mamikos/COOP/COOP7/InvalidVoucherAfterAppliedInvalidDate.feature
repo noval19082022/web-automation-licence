@@ -1,4 +1,4 @@
-@BBM7 @regression @TEST_COOP-2674
+@BBM7 @regression @TEST_SS-3749
 Feature: Invalid Voucher After Applied, Invalid Date
 
   @continue

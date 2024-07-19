@@ -1,6 +1,5 @@
 @regression @BBM8
 
-@TEST_COOP-1166
 Feature: Invoice Detail Kost With DP
 
   Scenario: Admin Batalkan Contract
@@ -46,6 +45,7 @@ Feature: Invoice Detail Kost With DP
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
+    @TEST_SS-3392
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
