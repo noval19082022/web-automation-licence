@@ -2,7 +2,7 @@
 Feature: Additional Price Biaya Lainnya Recurring Invoice
 
 
-  @TEST_COOP-3610 @TESTSET_COOP-4944 @Automated @web
+  @SS-4992
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | phone stag   | phone prod    |
       | 087708777615 | 0890867321212 |
 
-  @TEST_COOP-3611 @TESTSET_COOP-4944 @Automated @web
+  @SS-4993
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3612 @TESTSET_COOP-4944 @Automated @web
+  @SS-5012
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -32,7 +32,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-3613 @TESTSET_COOP-4944 @Automated @web
+  @SS-4995
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3614 @TESTSET_COOP-4944 @Automated @web
+  @SS-5000
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -58,7 +58,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     And tenant go to invoice page
     And tenant get invoice number
 
-  @TEST_COOP-3615 @TESTSET_COOP-4944 @Automated @web
+  @SS-4997
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -72,7 +72,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
       | additional price title | Automation Biaya Lainnya |
       | addtional price value  | 200000                   |
 
-  @TEST_COOP-3616 @TESTSET_COOP-4944 @Automated @web
+  @SS-4998
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -83,7 +83,7 @@ Feature: Additional Price Biaya Lainnya Recurring Invoice
     And tenant set active page to 1
     Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 
-  @TEST_COOP-3617 @TESTSET_COOP-4944 @Automated @web
+  @SS-5001
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Invoice Recurring] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:

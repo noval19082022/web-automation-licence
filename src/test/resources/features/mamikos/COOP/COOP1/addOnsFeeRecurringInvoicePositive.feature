@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Fee Recurring Invoice Positive
 
 
-  @TEST_COOP-3503 @TESTSET_COOP-4944 @Automated @web
+  @SS-4951
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Fee Recurring Invoice Positive
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3502 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4952 @continue
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Fee Recurring Invoice Positive
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3501 @TESTSET_COOP-4944 @Automated @web
+  @SS-4953
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Fee Recurring Invoice Positive
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3500 @TESTSET_COOP-4944 @Automated @web
+  @SS-4954
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Fee Recurring Invoice Positive
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3491 @TESTSET_COOP-4944 @Automated @web
+  @SS-4955
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Admin Master Add, Add Ons Fee
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -57,7 +57,7 @@ Feature: addOns Fee Recurring Invoice Positive
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @TEST_COOP-3504 @TESTSET_COOP-4944 @Automated @web
+  @SS-4956
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -70,7 +70,7 @@ Feature: addOns Fee Recurring Invoice Positive
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-  @TEST_COOP-3505 @TESTSET_COOP-4944 @Automated @web
+  @SS-4957
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Check On Add Ons Fee That Already Delete By Admin For Recurring/Auto Extend Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -85,7 +85,7 @@ Feature: addOns Fee Recurring Invoice Positive
     Then user can not see additional price with name below :
       | adiautomation |
 
-  @TEST_COOP-3506 @TESTSET_COOP-4944 @Automated @web
+  @SS-4958
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Add Ons Recurring Invoice Positive Scenario
     Given user go to mamikos homepage
     When user login as tenant via phone number:

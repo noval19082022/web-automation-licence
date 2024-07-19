@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Additional Price Other Price On Extended Invoice
 
 
-  @TEST_COOP-4259 @TESTSET_COOP-4944 @Automated @web
+  @SS-5019
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Additional Price Other Price On Extended Invoice
       | phone stag   | phone prod    |
       | 087708777618 | 0890867321212 |
 
-  @TEST_COOP-4260 @TESTSET_COOP-4944 @Automated @web
+  @SS-5020
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Additional Price Other Price On Extended Invoice
       | 087708777618 | 0890867321212 | qwerty123 |
     And user cancel booking
 
-  @TEST_COOP-4261 @TESTSET_COOP-4944 @Automated @web
+  @SS-5021
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -32,7 +32,7 @@ Feature: Additional Price Other Price On Extended Invoice
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-4262 @TESTSET_COOP-4944 @Automated @web
+  @SS-5022
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Additional Price Other Price On Extended Invoice
       | Nunu And Willump | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-4263 @TESTSET_COOP-4944 @Automated @web
+  @SS-5023
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -58,7 +58,7 @@ Feature: Additional Price Other Price On Extended Invoice
     And tenant go to invoice page
     And tenant get invoice number
 
-  @TEST_COOP-4264 @TESTSET_COOP-4944 @Automated @web
+  @SS-5024
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -72,7 +72,7 @@ Feature: Additional Price Other Price On Extended Invoice
       | additional price title | Automation Biaya Lainnya |
       | addtional price value  | 200000                   |
 
-  @TEST_COOP-4265 @TESTSET_COOP-4944 @Automated @web
+  @SS-5025
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Tenant Check Additional Price Biaya Lainnya Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -83,7 +83,7 @@ Feature: Additional Price Other Price On Extended Invoice
     And tenant set active page to 1
     Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 
-  @TEST_COOP-4266 @TESTSET_COOP-4944 @Automated @web
+  @SS-5026
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:

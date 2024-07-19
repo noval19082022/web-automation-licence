@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Additional Price Biaya Tetap On First Invoice
 
 
-  @TEST_COOP-3676 @TESTSET_COOP-4944 @Automated @web
+  @SS-4992
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
       | phone stag   | phone prod    |
       | 087708777615 | 0890867321212 |
 
-  @TEST_COOP-3677 @TESTSET_COOP-4944 @Automated @web
+  @SS-4993
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3678 @TESTSET_COOP-4944 @Automated @web
+  @SS-4994
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -32,7 +32,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-3679 @TESTSET_COOP-4944 @Automated @web
+  @SS-4995
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3680 @TESTSET_COOP-4944 @Automated @web
+  @SS-4996
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Tenant Get Invoice Number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -52,7 +52,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
-  @TEST_COOP-3681 @TESTSET_COOP-4944 @Automated @web
+  @SS-4997
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Admin Add Additional Price Biaya Tetap To First Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -66,7 +66,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
       | additional price title | Automation Biaya Tetap |
       | addtional price value  | 200000                 |
 
-  @TEST_COOP-3682 @TESTSET_COOP-4944 @Automated @web
+  @SS-5009
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Tenant Check Additional Price Biaya Tetap Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -77,7 +77,7 @@ Feature: Additional Price Biaya Tetap On First Invoice
     And tenant set active page to 1
     Then tenant can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 
-  @TEST_COOP-3683 @TESTSET_COOP-4944 @Automated @web
+  @SS-5011
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:

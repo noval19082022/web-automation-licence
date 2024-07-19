@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
 
 
-  @TEST_COOP-4276 @TESTSET_COOP-4944 @Automated @web
+  @SS-4973
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
 
-  @TEST_COOP-4277 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4974 @continue
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-4278 @TESTSET_COOP-4944 @Automated @web
+  @SS-5031
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -29,7 +29,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-4279 @TESTSET_COOP-4944 @Automated @web
+  @SS-5032
   Scenario: [Invoice admin - eposit And Additional Fee in Invoice Detail Page for Full Payment] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -40,7 +40,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-4280 @TESTSET_COOP-4944 @Automated @web
+  @SS-5033
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Tenant Get Invoice Number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -49,7 +49,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
-  @TEST_COOP-4281 @TESTSET_COOP-4944 @Automated @web
+  @SS-5034
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] admin can sees total cost
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

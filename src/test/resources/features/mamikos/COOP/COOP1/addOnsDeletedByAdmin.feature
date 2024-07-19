@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Deleted By Admin
 
 
-  @TEST_COOP-3436 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3784
   Scenario: [Add Ons - Deleted by Admin] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Deleted By Admin
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3437 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3785
   Scenario: [Add Ons - Deleted by Admin] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Deleted By Admin
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3438 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3786
   Scenario: [Add Ons - Deleted by Admin] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -34,7 +34,7 @@ Feature: addOns Deleted By Admin
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3439 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3787
   Scenario: [Add Ons - Deleted by Admin] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -45,7 +45,7 @@ Feature: addOns Deleted By Admin
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3440 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3788
   Scenario: [Add Ons - Deleted by Admin] Check Add Ons Delete By Admin Master
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

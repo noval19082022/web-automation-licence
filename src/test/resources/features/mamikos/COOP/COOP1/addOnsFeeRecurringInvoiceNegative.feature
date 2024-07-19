@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Fee Recurring Invoice Negative
 
 
-  @TEST_COOP-3497 @TESTSET_COOP-4944 @Automated @web
+  @SS-4945
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Fee Recurring Invoice Negative
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3496 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4946 @continue
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Fee Recurring Invoice Negative
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3495 @TESTSET_COOP-4944 @Automated @web
+  @SS-4947
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Fee Recurring Invoice Negative
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3494 @TESTSET_COOP-4944 @Automated @web
+  @SS-4948
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Fee Recurring Invoice Negative
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3498 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4949 @continue
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -55,7 +55,7 @@ Feature: addOns Fee Recurring Invoice Negative
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-  @TEST_COOP-3499 @TESTSET_COOP-4944 @Automated @web
+  @SS-4950
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Tenant Check-in To Kost For Add Ons Fee Recurring Auto Extend Invoice And Check Add Ons Requirement
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page

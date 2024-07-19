@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Fee Full Payment Invoice
 
 
-  @TEST_COOP-3473 @TESTSET_COOP-4944 @Automated @web
+  @SS-4890
   Scenario: [Add Ons - Fee Full Payment Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Fee Full Payment Invoice
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3474 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4891 @continue
   Scenario: [Add Ons - Fee Full Payment Invoice] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Fee Full Payment Invoice
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3475 @TESTSET_COOP-4944 @Automated @web
+  @SS-4892
   Scenario: [Add Ons - Fee Full Payment Invoice] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Fee Full Payment Invoice
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3476 @TESTSET_COOP-4944 @Automated @web
+  @SS-4894
   Scenario: [Add Ons - Fee Full Payment Invoice] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Fee Full Payment Invoice
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3479 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4895 @continue
   Scenario: [Add Ons - Fee Full Payment Invoice] Admin Master Add, Add Ons Fee To Full Payment Invoice & Edit Add Ons Free Amount With Char Through Detail Fee
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -57,6 +57,7 @@ Feature: addOns Fee Full Payment Invoice
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
+  @SS-4896
   Scenario: Edit Add Ons Free Amount With Char Through Detail Fee
     When admin edit additional fee price amount to "20011rrr"
     Then admins can sees error message

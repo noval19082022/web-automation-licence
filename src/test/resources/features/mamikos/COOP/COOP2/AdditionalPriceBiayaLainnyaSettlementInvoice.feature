@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Additional Price Biaya Lainnya Settlement Invoice
 
 
-  @TEST_COOP-3618 @TESTSET_COOP-4944 @Automated @web
+  @SS-4992
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | phone stag   | phone prod    |
       | 087708777615 | 0890867321212 |
 
-  @TEST_COOP-3619 @TESTSET_COOP-4944 @Automated @web
+  @SS-4993
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3620 @TESTSET_COOP-4944 @Automated @web
+  @SS-5003
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -32,7 +32,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-3621 @TESTSET_COOP-4944 @Automated @web
+  @SS-4995
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3622 @TESTSET_COOP-4944 @Automated @web
+  @SS-5004
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -57,7 +57,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
     And tenant set active page to 1
     And tenant get invoice number
 
-  @TEST_COOP-3623 @TESTSET_COOP-4944 @Automated @web
+  @SS-4997
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Admin Add Additional Price Biaya Lainnya
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -71,7 +71,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | additional price title | Automation Biaya Lainnya |
       | addtional price value  | 200000                   |
 
-  @TEST_COOP-3624 @TESTSET_COOP-4944 @Automated @web
+  @SS-5005
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -82,7 +82,7 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
     And tenant set active page to 0
     Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
 
-  @TEST_COOP-3625 @TESTSET_COOP-4944 @Automated @web
+  @SS-5006
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:

@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Disbursement
 
 
-  @TEST_COOP-3459 @TESTSET_COOP-4944 @Automated @web
+  @@SS-4877
   Scenario: [Add Ons - Disbursement] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Disbursement
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3460 @TESTSET_COOP-4944 @Automated @web @continue
+  @SSCOOP-3785 @continue
   Scenario: [Add Ons - Disbursement] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Disbursement
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3461 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3786
   Scenario: [Add Ons - Disbursement] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Disbursement
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3462 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3787
   Scenario: [Add Ons - Disbursement] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Disbursement
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3463 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3789
   Scenario: [Add Ons - Disbursement] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -53,7 +53,7 @@ Feature: addOns Disbursement
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
 
-  @TEST_COOP-3464 @TESTSET_COOP-4944 @Automated @web
+  @SSCOOP-3789
   Scenario: [Add Ons - Disbursement] Admin Master Add, Add Ons Fee To Full Payment Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

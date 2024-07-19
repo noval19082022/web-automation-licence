@@ -1,17 +1,17 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
 
-  @TEST_COOP-3586 @TESTSET_COOP-4944 @Automated @web
+  @SS-4981
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
+      | phone stag    | phone prod  |
       | 08912887122   | 08912887122 |
 
-  @TEST_COOP-3587 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4982 @continue
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -19,7 +19,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
       | 08912887122 | 08912887122     | qwerty123    |
     And user cancel booking
 
-  @TEST_COOP-3588 @TESTSET_COOP-4944 @Automated @web
+  @SS-4983
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -28,7 +28,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-3589 @TESTSET_COOP-4944 @Automated @web
+  @SS-4984
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -39,7 +39,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
       | Bagas First Invoice At | Bagas First Invoice At |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3590 @TESTSET_COOP-4944 @Automated @web
+  @SS-4985
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Get Invoice Number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -48,7 +48,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
-  @TEST_COOP-3591 @TESTSET_COOP-4944 @Automated @web
+  @SS-4986
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Add Biaya Tetap + Biaya Lainnya On First Invoice From Mamipay
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -62,7 +62,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
       | additional price title | Automation          |
       | addtional price value  | 50000               |
 
-  @TEST_COOP-3592 @TESTSET_COOP-4944 @Automated @web
+  @SS-4987
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Check Additional Price Biaya Tetap and Lainnya Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -73,8 +73,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
     Then tenant can sees total cost is equal to basic amount, admin fee plus additional price below
       | 50000 |
 
-  @TEST_COOP-3593 @TESTSET_COOP-4944 @Automated @web
-  Scenario: [Add Ons - Owner Check Additional Price Biaya Tetap and Biaya Lainnya Added By Admin On Manage Bills] Owner Accept Booking
+  @SS-4988
+  Scenario: Owner can sees total amount is basic amount plus other price
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |

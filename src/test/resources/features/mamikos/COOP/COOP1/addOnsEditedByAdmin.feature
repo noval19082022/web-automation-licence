@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Edited By Admin
 
 
-  @TEST_COOP-3465 @TESTSET_COOP-4944 @Automated @web
+  @SS-4877
   Scenario: [Add Ons - Edited By Admin] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Edited By Admin
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3466 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4883 @continue
   Scenario: [Add Ons - Edited By Admin] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Edited By Admin
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3467 @TESTSET_COOP-4944 @Automated @web
+  @SS-4882
   Scenario: [Add Ons - Edited By Admin] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Edited By Admin
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3468 @TESTSET_COOP-4944 @Automated @web
+  @SS-4881
   Scenario: [Add Ons - Edited By Admin] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Edited By Admin
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3469 @TESTSET_COOP-4944 @Automated @web
+  @SS-4887
   Scenario: [Add Ons - Edited By Admin] Admin Master Add, Add Ons Fee
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -57,7 +57,7 @@ Feature: addOns Edited By Admin
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @TEST_COOP-3470 @TESTSET_COOP-4944 @Automated @web
+  @SS-4874
   Scenario: [Add Ons - Edited By Admin] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -70,7 +70,7 @@ Feature: addOns Edited By Admin
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-  @TEST_COOP-3471 @TESTSET_COOP-4944 @Automated @web
+  @SS-4888
   Scenario: [Add Ons - Edited By Admin] Check Add Ons Edited By Admin Master For Recurring/Auto Extend Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -85,7 +85,7 @@ Feature: addOns Edited By Admin
       | addtional price value  | 150000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @TEST_COOP-3472 @TESTSET_COOP-4944 @Automated @web
+  @SS-4889
   Scenario: [Add Ons - Edited By Admin] Check Tenant Side After Add Ons Edited By Admin Master For Recurring/Auto Extend Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:

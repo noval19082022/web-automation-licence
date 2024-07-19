@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
 
 
-  @TEST_COOP-3594 @TESTSET_COOP-4944 @Automated @web
+  @SS-4973
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
 
-  @TEST_COOP-3595 @TESTSET_COOP-4944 @Automated @web
+  @SS-4974 @continue
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,19 +20,16 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | 0890867321212 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3596 @TESTSET_COOP-4944 @Automated @web
+  @SS-4975
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Tenant Booking Kost
     Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0890867321212 | 0890867321212 | mamikosqa123 |
     And tenant search kost then go to kost details:
       | kost name stag                                                        | kost name prod            |
       | Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-3597 @TESTSET_COOP-4944 @Automated @web
+  @SS-4976
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +40,7 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3598 @TESTSET_COOP-4944 @Automated @web
+  @SS-4977
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:

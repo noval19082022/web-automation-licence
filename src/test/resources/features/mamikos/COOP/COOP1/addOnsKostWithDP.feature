@@ -1,8 +1,8 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Kost With DP
 
 
-  @TEST_COOP-3510 @TESTSET_COOP-4944 @Automated @web
+  @SS-4951
   Scenario: [Add Ons - Kost With DP] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -14,7 +14,7 @@ Feature: addOns Kost With DP
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3509 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4952 @continue
   Scenario: [Add Ons - Kost With DP] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: addOns Kost With DP
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3508 @TESTSET_COOP-4944 @Automated @web
+  @SS-4953
   Scenario: [Add Ons - Kost With DP] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -31,7 +31,7 @@ Feature: addOns Kost With DP
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3507 @TESTSET_COOP-4944 @Automated @web
+  @SS-4954
   Scenario: [Add Ons - Kost With DP] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: addOns Kost With DP
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3511 @TESTSET_COOP-4944 @Automated @web
+  @SS-4961
   Scenario: [Add Ons - Kost With DP] Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -57,7 +57,7 @@ Feature: addOns Kost With DP
     And tenant get invoice number
 
 
-  @TEST_COOP-3513 @TESTSET_COOP-4944 @Automated @web
+  @SS-4962
   Scenario: [Add Ons - Kost With DP] Admin Master Add, Add Ons Kost With DP To Settlement Invoice
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -73,7 +73,7 @@ Feature: addOns Kost With DP
     Then admin deletes additional other price with name below :
       | adiautomation |
 
-  @TEST_COOP-3512 @TESTSET_COOP-4944 @Automated @web
+  @SS-4963
   Scenario: [Add Ons - Kost With DP] Check Add Ons Fee That Already Deleted For Unpaid ST/Booked Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -1,8 +1,8 @@
-@COOP-4993 @COOP2
+@COOP2
 Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
 
 
-  @TEST_COOP-4268 @TESTSET_COOP-4944 @Automated @web
+  @SS-5019
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -12,7 +12,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | phone stag   | phone prod    |
       | 087708777618 | 0890867321212 |
 
-  @TEST_COOP-4269 @TESTSET_COOP-4944 @Automated @web
+  @SS-5020
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -20,7 +20,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | 087708777618 | 0890867321212 | qwerty123 |
     And user cancel booking
 
-  @TEST_COOP-4270 @TESTSET_COOP-4944 @Automated @web
+  @SS-5027
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -32,7 +32,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
     And tenant booking kost
     Then tenant should success booking kost
 
-  @TEST_COOP-4271 @TESTSET_COOP-4944 @Automated @web
+  @SS-5028
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -43,7 +43,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | Nunu And Willump | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-4272 @TESTSET_COOP-4944 @Automated @web
+  @SS-5029
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Deposit And Additional Fee in Invoice Detail Page for DP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -54,7 +54,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | search value | 0890867321212       |
     Then admin can sees total cost is basic amount + admin fee
 
-  @TEST_COOP-4273 @TESTSET_COOP-4944 @Automated @web
+  @SS-5030
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Check Deposit And Additional Fee in Invoice Detail Page for Settlement
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

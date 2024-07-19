@@ -1,7 +1,7 @@
-@COOP-4943 @COOP1
+@COOP1
 Feature: addOns Fee On Recurring Invoice Booked Status
 
-  @TEST_COOP-3487 @TESTSET_COOP-4944 @Automated @web
+  @SS-4937
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -13,7 +13,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @TEST_COOP-3488 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4938 @continue
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -21,7 +21,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @TEST_COOP-3489 @TESTSET_COOP-4944 @Automated @web
+  @SS-4939
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Tenant booking kos
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -30,7 +30,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @TEST_COOP-3490 @TESTSET_COOP-4944 @Automated @web
+  @SS-4940
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @TEST_COOP-3491 @TESTSET_COOP-4944 @Automated @web
+  @SS-4941
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Admin Master Add, Add Ons Fee
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -56,7 +56,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @TEST_COOP-3492 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-4942 @continue
   Scenario: [Add Ons - Add Ons Fee On Recurring Invoice With Booked Status] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -69,7 +69,7 @@ Feature: addOns Fee On Recurring Invoice Booked Status
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-  @TEST_COOP-3493 @TESTSET_COOP-4944 @Automated @web
+  @SS-4943
   Scenario: Add ons Fee On Auto Extend from add ons that added on first invoice with booked status
     When tenant navigate to tagihan kost saya
     And tenant go to invoice page
