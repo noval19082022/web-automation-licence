@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Profile Page Filter
 
 
-  @TEST_COOP-5076 @Automated @web
+  @SS-4248 @Automated @web
   Scenario: Filter By Nama Properti
     Given admin go to pms singgahsini
     When admin login pms :

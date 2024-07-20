@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Profile Page
 
 
-  @TEST_COOP-5075 @Automated @web @continue
+  @SS-4247 @Automated @web @continue
   Scenario: Profile Page Display
     Given admin go to pms singgahsini
     When admin login pms :
@@ -14,7 +14,6 @@ Feature: SinggahSini Tenant Tracker Profile Page
     And user clicks on the tenant name on the first row
     Then user verify search result on profile page bse contains "Adisinggahsini"
 
-  @TEST_BBM-562
   Scenario: Pagination Functionality
     Then user see pagination menu on Detail Tenant is displayed
     When user click pagination number "2"

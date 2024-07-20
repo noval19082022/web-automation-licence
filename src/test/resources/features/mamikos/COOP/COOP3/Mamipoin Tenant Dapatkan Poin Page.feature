@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: Mamipoin Tenant Dapatkan Poin Page
 
 
-  @TEST_COOP-5030 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-5053 @continue
   Scenario: Tenant already on Dapatkan Poin page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,25 +14,24 @@ Feature: Mamipoin Tenant Dapatkan Poin Page
     And user verify tab syarat dan ketentuan in the dapatkan poin page is displayed
     And user verify link pusat bantuan in the dapatkan poin page is displayed
 
-  @BBM-422 @continue
+  @continue
   Scenario: Headline on Dapatkan Poin Page
     Then user verify dapatkan poin headline "Cara Mudah Mendapatkan MamiPoin"
     And user verify dapatkan poin subtitle "Kamu bisa mengumpulkan MamiPoin dengan melakukan aktivitas-aktivitas		berikut."
 
-  @BBM-423 @continue
+  @continue
   Scenario: Content on Dapatkan Poin Page
     Then user verify content on dapatkan poin page
 
-  @BBM-425 @continue
+  @continue
   Scenario: Scroll down behavior
     Then user verify only the header that is sticky or "fixed"
 
-  @BBM-419 @BBM-421 @continue
+  @continue
   Scenario: Syarat dan ketentuan link redirection
     When user click on tab Syarat dan Ketentuan
     Then user verify "Syarat dan Ketentuan" has "active" attribute
 
-  @BBM-417
   Scenario: Pusat Bantuan redirection
     When tenant navigate to mamipoint guideline page
     Then user verify title in the dapatkan poin page is displayed

@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Main Page Button FollowUp
 
 
-  @TEST_COOP-5072 @Automated @web
+  @SS-4244 @Automated @web
   Scenario: Action Button Tandai Belum Follow Up
     Given admin go to pms singgahsini
     When admin login pms :

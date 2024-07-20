@@ -1,7 +1,7 @@
 @COOP3
 Feature: BlockLine Status Dashboard Pms
 
-  @TEST_COOP-5029 @TESTSET_COOP-4944 @Automated @web
+  @SS-5052
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

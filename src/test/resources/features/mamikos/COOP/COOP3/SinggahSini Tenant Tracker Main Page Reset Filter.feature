@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Main Page Reset Filter
 
 
-  @TEST_COOP-5074 @Automated @web @continue
+  @SS-4246 @continue
   Scenario: Reset button On filter Page
     Given admin go to pms singgahsini
     When admin login pms :
@@ -15,7 +15,6 @@ Feature: SinggahSini Tenant Tracker Main Page Reset Filter
     And user click reset button in PMS Admin
     Then user has reset the filter
 
-  @TEST_BBM-568
   Scenario: Reset Filter on Filter Menu
     When user choose "Nama Properti" and input "Kost Adi Auto Regular" in the search field on main page
     And user click search button on main page filter

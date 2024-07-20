@@ -1,7 +1,7 @@
 @COOP-5027 @COOP3
 Feature: Mamipoin Tenant Entry Point
 
-  @TEST_COOP-5031 @TESTSET_COOP-4944 @Automated @web
+  @SS-5054
   Scenario: MamiPoin Tenant Entry Point When the User is Blacklisted
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -10,7 +10,7 @@ Feature: Mamipoin Tenant Entry Point
     And user navigate to kost saya page
     Then user verify mamipoin tenant entry point is not displayed
 
-  @TEST_BBM-470
+  @SS-5055
   Scenario: MamiPoin Tenant Entry Point When the User is Whitelisted
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -21,7 +21,7 @@ Feature: Mamipoin Tenant Entry Point
     And user clicks on mamipoin tenant entry point button
     Then user verify title in the mamipoin tenant landing page is displayed
 
-  @TEST_BBM-424
+  @SS-5056
   Scenario: MamiPoin Tenant Entry Point When the User Poin is Empty
     Given user go to mamikos homepage
     When user login as tenant via phone number:

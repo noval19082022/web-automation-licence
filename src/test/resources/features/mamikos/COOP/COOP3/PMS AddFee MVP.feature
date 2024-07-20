@@ -1,6 +1,7 @@
 @COOP3 @AddfeeMvp
 Feature: PMS - Add fee MVP
 
+  @SS-5069
   Scenario: Terminated contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -10,6 +11,7 @@ Feature: PMS - Add fee MVP
       | phone stag    | phone prod    |
       | 0812000008    | 0812000008    |
 
+  @SS-5070
   Scenario: Tenant cancel Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -17,7 +19,7 @@ Feature: PMS - Add fee MVP
       | 0812000008 | 0812000008 | qwerty123 |
     And user cancel booking
 
-  @TEST_COOP-6967
+  @SS-5071
   Scenario: [PMS] Create new booking or DBET when kost doesn't have PMS KK Add fee
     Given admin go to pms singgahsini
     When admin login pms :
@@ -36,7 +38,7 @@ Feature: PMS - Add fee MVP
     And admin click on save button
     And admin click on ya simpan button
 
-  @TEST_COOP-6968
+  @SS-5072
   Scenario: [BangKerupux][Data Booking] Admin confirm booking when kost doesnt have Add fee
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -53,7 +55,7 @@ Feature: PMS - Add fee MVP
     Then admin can see "Untuk menambahkan biaya yang akan ditagihkan ke tenant, harap tambahkan biaya kos ke PMS KK terlebih dahulu"
     And admin click on next button accept booking for kost add fee
 
-  @TEST_COOP-6945
+  @SS-5073
   Scenario: [Mamipay][Detail fee] Admin check addfee for kost p1 doesn't have pms KK
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -66,8 +68,10 @@ Feature: PMS - Add fee MVP
     And admin click on add fee button
     Then admin cant see "Biaya Tambahan Opsional di Kos"
 
-  @TEST_COOP-7343
-  Scenario: Terminated contract
+
+  @SS-5074
+  Scenario: [AddFee][PMS] Check Biaya tambahan on New booking when setting KK with tipe pembayaran satu kali
+ # Scenario: Terminated contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -76,16 +80,13 @@ Feature: PMS - Add fee MVP
       | phone stag    | phone prod    |
       | 0812000007    | 0812000007    |
 
-  @TEST_COOP-7343
-  Scenario: Tenant cancel Booking
+ # Scenario: Tenant cancel Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod | password  |
       | 0812000007 | 0812000007 | qwerty123 |
     And user cancel booking
 
-  @TEST_COOP-7343
-  Scenario: [AddFee][PMS] Check Biaya tambahan on New booking when setting KK with tipe pembayaran satu kali
     Given admin go to pms singgahsini
     When admin login pms :
       | email             | password     |
@@ -102,7 +103,7 @@ Feature: PMS - Add fee MVP
     And admin click on save button
     Then admin click on ya simpan button
 
-  @TEST_COOP-7344
+  @SS-5075
   Scenario: [AddFee][BangKerupux] Check Biaya tambahan on confirm booking when booking for kost KK with tipe pembayaran satu kali
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -118,7 +119,7 @@ Feature: PMS - Add fee MVP
     Then admin can see add fee with price "Disesuaikan dengan Tagihan"
     And admin click on next button accept booking for kost add fee
 
-  @TEST_COOP-2336 @TEST_COOP-2331
+  @SS-5076
   Scenario: [PMS][New booking/DBET] Admin create biaya tambahan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
