@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher For Invoice Settlement
 
-  @TEST_COOP-5812 @Automated @COOP @Web
+  @TEST_SS-4259 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

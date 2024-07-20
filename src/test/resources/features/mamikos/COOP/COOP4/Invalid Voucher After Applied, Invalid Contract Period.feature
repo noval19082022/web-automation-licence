@@ -1,7 +1,7 @@
 @COOP4
 Feature: Invalid Voucher After Applied, Invalid Contract Period
 
-  @TEST_COOP-5832 @Automated @COOP @Web
+  @TEST_SS-4279
   Scenario: Admin Edit Voucher AUTOCHNGEPERIOD and Change Contract Period to Monthly
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

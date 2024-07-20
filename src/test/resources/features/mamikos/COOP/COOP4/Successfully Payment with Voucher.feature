@@ -1,7 +1,7 @@
 @COOP4
 Feature: Successfully Payment with Voucher
 
-  @TEST_COOP-5818 @Automated @COOP @Web
+  @TEST_SS-4265
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

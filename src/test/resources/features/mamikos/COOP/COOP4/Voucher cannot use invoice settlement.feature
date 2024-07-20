@@ -1,7 +1,7 @@
-@COOP-5841 @COOP4
+@COOP4
 Feature: Voucher cannot use invoice settlement
 
-  @TEST_COOP-5831 @Automated @COOP @Web
+  @TEST_SS-4278
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

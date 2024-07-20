@@ -1,7 +1,7 @@
 @COOP-5843 @COOP4
 Feature: Voucher Suggestion
 
-  @TEST_COOP-5833 @Automated @COOP @Web
+  @TEST_SS-4280
   Scenario: Tenant have any eligible voucher
     Given user go to mamikos homepage
     When user login as tenant via phone number:

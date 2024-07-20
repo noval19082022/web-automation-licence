@@ -1,7 +1,7 @@
-@COOP-5842 @COOP4
-Feature: Admin - Single Voucher
+@COOP4
+Feature: [Web][Voucher]Admin - Single Voucher
 
-  @TEST_COOP-5828 @Automated @COOP @Web
+  @TEST_SS-4275
   Scenario: Create Targeted Voucher Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

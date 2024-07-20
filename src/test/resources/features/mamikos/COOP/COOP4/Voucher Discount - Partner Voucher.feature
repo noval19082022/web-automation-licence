@@ -1,7 +1,7 @@
-@COOP-5841 @COOP4
+@COOP4
 Feature: Voucher Discount - Partner Voucher
 
-  @TEST_COOP-5827 @Automated @COOP @Web @continue
+  @TEST_SS-4274 @Automated @COOP @Web @continue
   Scenario: Delete existing voucher code
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

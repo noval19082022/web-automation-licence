@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher For Booking Rule, Invoice With DP
 
-  @TEST_COOP-5809 @Automated @COOP @Web
+  @TEST_SS-4256
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

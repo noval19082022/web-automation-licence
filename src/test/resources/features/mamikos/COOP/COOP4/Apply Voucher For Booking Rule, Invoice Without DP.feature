@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher For Booking Rule, Invoice Without DP
 
-  @TEST_COOP-5810 @Automated @COOP @Web
+  @TEST_SS-4257 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -40,7 +40,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then owner should redirect back to pengajuan booking page
 
 
-  @BBM-610 @continue
+  @@continue
   Scenario: Tenant Apply Voucher for First Paid and Total Usage Limit > 0
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -53,7 +53,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | VTOTALUSAGE       | VTOTALUSAGE       |
     Then tenant can see voucher is applied
 
-  @BBM-613 @continue
+  @continue
   Scenario: Tenant Apply Voucher for First Paid and Daily Usage Limit > 0
     When tenant set active page to 1
     And tenant apply voucher:
@@ -62,7 +62,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see voucher is applied
 
 
-  @BBM-685 @continue
+  @continue
   Scenario: Tenant Apply Voucher Date Not Started Yet
     When tenant set active page to 1
     And tenant apply voucher:
@@ -71,7 +71,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-685 @continue
+  @continue
   Scenario: Tenant Apply Voucher Date Not Started Yet
     When tenant set active page to 1
     And tenant input voucher:
@@ -80,7 +80,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-688 @continue
+  @continue
   Scenario: Tenant Apply Voucher Already Expired
     When tenant set active page to 1
     And tenant input voucher:
@@ -89,7 +89,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-687 @continue
+  @continue
   Scenario: Tenant Apply Voucher Not Meet Minimum Amount Required
     When tenant set active page to 1
     And tenant input voucher:
@@ -98,7 +98,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Belum mencapai minimal transaksi."
 
 
-  @BBM-607 @continue
+  @continue
   Scenario: Tenant Apply Voucher not Meet Min. Contract Duration
     When tenant set active page to 1
     And tenant input voucher:
@@ -107,7 +107,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-608 @continue
+  @continue
   Scenario: Tenant Apply Inactive Voucher
     When tenant set active page to 1
     And tenant input voucher:
@@ -116,7 +116,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak ditemukan."
 
 
-  @BBM-622 @continue
+  @continue
   Scenario: Tenant Apply Voucher For First Paid and Reccuring Rule
     When tenant set active page to 1
     And tenant input voucher:
@@ -125,7 +125,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see voucher is applied
 
 
-  @BBM-624 @continue
+  @continue
   Scenario: Tenant Apply Voucher For First Paid and Settlement Rule
     When tenant set active page to 1
     And tenant apply voucher:
@@ -134,7 +134,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see voucher is applied
 
 
-  @BBM-636 @continue
+  @continue
   Scenario: Tenant Apply Voucher For Reccuring Rule
     When tenant set active page to 1
     And tenant apply voucher:
@@ -143,7 +143,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-632 @continue
+  @continue
   Scenario: Tenant Apply Voucher For Settlement Rule
     When tenant set active page to 1
     And tenant input voucher:
@@ -152,7 +152,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-635 @continue
+  @continue
   Scenario: Tenant Apply Voucher For Reccuring and Settlement Rule
     When tenant set active page to 1
     And tenant input voucher:
@@ -161,7 +161,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-627 @continue
+  @continue
   Scenario: Tenant Apply Voucher For First Paid, Reccuring and Settlement Rule
     When tenant set active page to 1
     And tenant input voucher:
@@ -178,7 +178,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
 
-  @BBM-678 @continue
+  @continue
   Scenario: Tenant Apply Voucher For First Paid and DP
     When tenant set active page to 1
     And tenant input voucher:
@@ -234,8 +234,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTOALLPAYRULES   | AUTOALLPAYRULES   |
     Then tenant can see voucher is applied
 
-
-  @BBM-621 @continue
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Other Kost City
     When tenant set active page to 1
     And tenant apply voucher:
@@ -243,8 +242,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTOOTHERCITY     | AUTOOTHERCITY     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
-
-  @BBM-639 @continue
+  @continue
   Scenario: Tenant Apply Voucher Not Applicable for Other Kost City
     When tenant set active page to 1
     And tenant input voucher:
@@ -252,8 +250,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTONOOTHERCITY   | AUTONOOTHERCITY   |
     Then tenant can see voucher is applied
 
-
-  @BBM-595 @continue
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Kost Name
     When tenant set active page to 1
     And tenant apply voucher:
@@ -262,7 +259,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     Then tenant can see voucher is applied
 
 
-  @BBM-590 @continue
+  @continue
   Scenario: Tenant Apply Voucher Not Applicable for Kost Name
     When tenant set active page to 1
     And tenant apply voucher:
@@ -270,8 +267,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTONONAME        | AUTONONAME        |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
-
-  @BBM-591 @continue
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Other Kost Name
     When tenant set active page to 1
     And tenant input voucher:
@@ -279,8 +275,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTOOTHERNAME     | AUTOOTHERNAME     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
-
-  @BBM-589 @continue
+  @continue
   Scenario: Tenant Apply Voucher Not Applicable for Other Kost Name
     When tenant set active page to 1
     And tenant input voucher:
@@ -288,8 +283,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTONOOTHERNAME   | AUTONOOTHERNAME   |
     Then tenant can see voucher is applied
 
-
-  @BBM-644 @continue
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Tenant Email Domain
     When tenant set active page to 1
     And tenant apply voucher:
@@ -297,8 +291,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTODOMAIN        | AUTODOMAIN        |
     Then tenant can see voucher is applied
 
-
-  @BBM-645 @continue
+  @continue
   Scenario: Tenant Apply Voucher Not Applicable for Tenant Email Domain
     When tenant set active page to 1
     And tenant apply voucher:
@@ -306,15 +299,13 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTONODOMAIN      | AUTONODOMAIN      |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
-
-  @BBM-596 @continue
+  @continue
   Scenario: Tenant Apply Voucher Applicable for Other Tenant Email Domain
     When tenant set active page to 1
     And tenant input voucher:
       | voucher name stag | voucher name prod |
       | AUTOOTHERDOM      | AUTOOTHERDOM      |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
-
 
   @continue
   Scenario: Tenant Apply Voucher Applicable for Tenant Email
@@ -324,8 +315,6 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
       | AUTOEMAIL         | AUTOEMAIL         |
     Then tenant can see voucher is applied
 
-
-  @BBM-614
   Scenario: Tenant Apply Voucher Applicable for Other Tenant Email
     When tenant set active page to 1
     And tenant apply voucher:
