@@ -8,7 +8,7 @@ Feature: Blacklist User
       | email stag                   | email prod                   |password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
 
-  @continue @TEST_COOP-5158 @TEST_COOP-5157
+  @continue @TEST_SS-2827 @TEST_SS-2828
   Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
     Given admin go to mamikos bangkrupux admin
     When user access menu blacklist user
@@ -18,19 +18,19 @@ Feature: Blacklist User
       | phone_number | 089536519944                            |
       | email        | coop.blacklist@gmail.com                |
 
-  @continue @TEST_COOP-5156
+  @continue @TEST_SS-2826
   Scenario: [WEB][Blacklist] Display User overview before Admin add blacklist user
     When user click blacklist a user button
     And user add with phone number "089536519944"
     Then user see overview blacklist user data
 
-  @continue @TEST_COOP-5152
+  @continue @TEST_SS-2822
   Scenario: [WEB][Blacklist] Admin Add blacklist user
     When user fill note "Blacklist by Automation"
     And user click button submit
     Then user see blacklist updated success message
 
-  @TEST_COOP-6435
+  @TEST_SS-2830
   Scenario: [WEB][Blacklist] Admin blacklist user by UserID
     When user click blacklist a user button
     And user add with user ID "99451922"
@@ -38,7 +38,7 @@ Feature: Blacklist User
     And user click button submit
     Then user see blacklist updated success message
 
-  @TEST_COOP-5155 @TEST_COOP-5151 @TEST_COOP-5153
+  @TEST_SS-2825 @TEST_SS-2821 @TEST_SS-2823
   Scenario: [WEB][Blacklist] After blacklist user try to login via homepage
     Given user go to mamikos homepage
     And user click on button masuk pencari kos
@@ -47,7 +47,7 @@ Feature: Blacklist User
       | 089536519944  | 089536519944  | qwerty123    |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
-  @TEST_COOP-5145
+  @TEST_SS-2816
   Scenario: [WEB][Blacklist] After blacklist user try login via detail kost
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -60,7 +60,7 @@ Feature: Blacklist User
       | 089536519944  | 089536519944  | qwerty123    |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
-  @TEST_COOP-5148
+  @TEST_SS-2818
   Scenario Outline: [WEB][Blacklist] Admin Unblacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -76,14 +76,14 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | phone_number | 089536519944                            |
 
-  @TEST_DOM-3836 @TEST_COOP-5159
+  @TEST_DOM-3836 @TEST_SS-2829
   Scenario: [WEB][Blacklist] After unblacklist user try to login
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 089536519944 | 089536519944 | qwerty123 |
 
-  @continue @TEST_COOP-5146
+  @continue @TEST_SS-2817
   Scenario Outline: [WEB][Blacklist] Admin Add blacklist user from homepage blacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -104,7 +104,7 @@ Feature: Blacklist User
       | dropDown     | value                                   |
       | phone_number | 089536519944                            |
 
-  @TEST_DOM-2639 @TEST_COOP-5154
+  @TEST_DOM-2639 @TEST_SS-2824
   Scenario Outline: [WEB][Blacklist] After blacklist email user try login via Facebook
     When user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     And user click blacklist on homepage blacklist
@@ -115,7 +115,7 @@ Feature: Blacklist User
       | dropDown     | value                        |
       | email        | coop.blacklist@gmail.com     |
 
-  @TEST_DOM-2639 @TEST_COOP-5149 @TEST_COOP-5144
+  @TEST_DOM-2639 @TEST_SS-2819
   Scenario: User try login via Facebook
     Given user go to mamikos homepage
     When user login as tenant via facebook:
@@ -123,7 +123,7 @@ Feature: Blacklist User
       | febiregression21@gmail.com  |  coop.blacklist@gmail.com  | F3b1qwerty |
     Then user see message error validation "Ada kendala pada akun Anda. Harap hubungi customer service Mamikos."
 
-  @TEST_DOM-2639 @TEST_COOP-5148
+  @TEST_DOM-2639 @TEST_SS-2818
   Scenario Outline: [WEB][Blacklist] Admin Unblacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -140,7 +140,7 @@ Feature: Blacklist User
       | email         | coop.blacklist@gmail.com               |
       | user_id       | 99451922                               |
 
-  @TEST_COOP-5150
+  @TEST_SS-2820
   Scenario: [WEB][Blacklist][Filter] Admin search filter by userID
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

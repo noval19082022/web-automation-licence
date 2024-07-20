@@ -2,7 +2,7 @@
 
 Feature: Profile Navbar
 
-  @TEST_PMAN-762 @pman-prod @continue
+  @TEST_SS-762 @pman-prod @continue
   Scenario: Check Redirection to Owner Pillar 2
     Given user go to mamikos homepage
     When user login as owner:
@@ -11,7 +11,7 @@ Feature: Profile Navbar
     And owner clicks Kembali ke Mamikos on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 2
 
-  @TEST_PMAN-750 @pman-prod @continue
+  @TEST_SS-750 @pman-prod @continue
   Scenario: Check Profil Page
     When owner clicks Dashboard Singgahsini on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 1
@@ -29,7 +29,7 @@ Feature: Profile Navbar
     #Scenario: Check Property Photo Section on Profil Page
     Then the "Property Photo section" is displayed
 
-  @TEST_PMAN-794
+  @TEST_SS-794
   Scenario: Check Room Type
     When user clicks Tipe Kamar menu
     Then the Room Type and Room Total section in Room Type is displayed

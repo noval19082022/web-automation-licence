@@ -8,7 +8,7 @@
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to other transation menu
 
-    @TEST_PMAN-562
+    @TEST_SS-562
     Scenario: Click Expand to See the Table Detail
       When admin expand first owner expenditure list
       Then first owner expenditure detail should be visible
@@ -17,7 +17,7 @@
       And admin set active page to 1
       Then lampiran opened in new tab
 
-    @TEST_PMAN-696
+    @TEST_SS-696
     Scenario: Check value in each filter
       When admin open filter owner expenditure
       Then status konfirmasi manager filter should contains option:
@@ -58,7 +58,7 @@
         | Carsim (Internal Mamikos)                           |
         | Other (Internal Mamikos)                            |
 
-    @TEST_PMAN-688
+    @TEST_SS-688
     Scenario Outline: Single Filter Status Konfirmasi Manager
       When admin filter status konfirmasi manager "<status>"
       Then system only display owner expenditure with status konfirmasi manager "<status>"
@@ -69,7 +69,7 @@
       | Dikonfirmasi        |
       | Ditolak             |
 
-    @TEST_PMAN-686
+    @TEST_SS-686
     Scenario Outline: Single Filter Status Konfirmasi Finance
       When admin filter status konfirmasi finance "<status>"
       Then system only display owner expenditure with status konfirmasi finance "<status>"
@@ -80,7 +80,7 @@
         | Dikonfirmasi        |
         | Ditolak             |
 
-    @TEST_PMAN-737
+    @TEST_SS-737
     Scenario Outline: Single Filter Kategori Biaya
       When admin filter kategori biaya "<kategori>"
       Then system only display owner expenditure contains biaya "<kategori>"
@@ -92,7 +92,7 @@
         | Pembayaran Wifi                 |
         | Lainnya                         |
 
-    @TEST_PMAN-735
+    @TEST_SS-735
     Scenario Outline: Single Filter Tujuan Transfer Pengeluaran
       When admin filter tujuan transfer "<vendor>"
       Then system only display owner expenditure transfered to "<Vendor Name>" "<Nama Pemilik Rekening>" "<No Rekening>" "<Nama Bank>"
@@ -105,7 +105,7 @@
         | Febrian (Internal Mamikos)    | Febrian                 | Febrian                       | 662969867        | BCA           |
         | Other (Internal Mamikos)      | Other                   | MAMA TEKNOLOGI PROPERTI PT    | 1262407777       | BCA           |
 
-    @TEST_PMAN-739
+    @TEST_SS-739
     Scenario: Multiple Filter Owner Expenditure
       When admin filter status konfirmasi manager "Dikonfirmasi"
       And admin filter status konfirmasi finance "Menunggu Konfirmasi"
@@ -118,7 +118,7 @@
       And system only display owner expenditure contains biaya "Perbaikan AC"
       And system only display owner expenditure transfered to "Clean and Cool Indonesia" "Lina Wardana" "1821208756" "BCA"
 
-    @TEST_PMAN-693
+    @TEST_SS-693
     Scenario: Reset Filter Owner Expenditure
       When admin choose some filter
       And admin reset filter from pop up

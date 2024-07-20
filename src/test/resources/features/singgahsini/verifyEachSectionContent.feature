@@ -2,7 +2,7 @@
 
   Feature: Verify Each Section Content
 
-    @TEST_PMAN-629
+    @TEST_SS-629
     Scenario: Verify Content of Introduction Sections
       Given user navigates to singgahsini.id
       When user click header menu "Tentang Kami"
@@ -10,7 +10,7 @@
       And tentang kami section title is "Solusi Profesional Tepercaya"
       And tentang kami section subtitle is "Singgahsini & APIK telah dipercayakan untuk mengelola lebih dari 20.000 kamar kos di Jabodetabek, Jawa, dan Bali, menjadikan kami manajemen kos profesional terbesar di Indonesia."
 
-    @TEST_PMAN-770
+    @TEST_SS-770
     Scenario: Verify Content of Benefits Sections
       Given user navigates to singgahsini.id
       When user click header menu "Keuntungan"
@@ -22,7 +22,7 @@
         | Pendapatan Lebih Tinggi | Optimalkan potensi pendapatan kos melalui program sewa harian dengan Online Travel Agent (OTA).   |
         | Pemangkasan Operasional | Manajemen kos profesional termasuk pengelolaan, pengecekan, dan perbaikan kos yang lebih efisien. |
 
-    @TEST_PMAN-632
+    @TEST_SS-632
     Scenario: Verify Content of Owner Testimonial
       Given user navigates to singgahsini.id
       When user scroll to section "Testimonial"
@@ -33,7 +33,7 @@
         | “Urusan melatih staff operator, membuat peraturan kos, melakukan pemasaran, menangani komplain dan kerusakan, menagih sewa kamar bulanan, hingga pengawasan rutin kos Singgahsini Infinite Residence seluruhnya ditangani secara professional oleh Singgahsini”.                                                              | Tje Lie Ellie     | Pemilik Kost Singgahsini Infinite Residence Mampang Prapatan Jakarta Selatan  |
         | “Saya memilih kerja sama dengan Mamikos karena saya sering mendengar mamikos dari internet dan saya merasa branding nya bagus. Saya merasa cukup puas setelah bergabung dengan singgah sini, karena saya tidak perlu repot untuk menghandle kost saya”.                                                                       | Erni              | Pemilik Kost Singgahsini Wisma KS23 Setiabudi Jakarta Selatan                 |
 
-    @TEST_PMAN-761
+    @TEST_SS-761
     Scenario: Verify Content of FAQ
       Given user navigates to singgahsini.id
       When user click header menu "Tanya Jawab"

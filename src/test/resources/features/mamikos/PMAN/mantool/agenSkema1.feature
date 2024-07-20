@@ -2,7 +2,7 @@
 
   Feature: Agen Skema 1
 
-    @TEST_PMAN-583 @continue
+    @TEST_SS-583 @continue
     Scenario: Login using Agen Skema 1
       Given admin navigate to mantool
       When admin login agen mantool
@@ -16,7 +16,7 @@
         | Onboarding  |
         | Keluar      |
 
-    @TEST_PMAN-591 @continue
+    @TEST_SS-591 @continue
     Scenario: Breadcrumb agen Skema 1
       Then onboarding page breadcrumb title is "Onboarding Agen Akuisisi"
       When admin click in breadcrumb "Mitra Agen"
@@ -25,7 +25,7 @@
       When admin click in breadcrumb "Mamikos"
       Then admin should redirect to mamikos
 
-    @TEST_PMAN-605 @continue
+    @TEST_SS-605 @continue
     Scenario: Onboarding Section Skema 1
       When admin navigate to mantool
       And admin go to onboarding page
@@ -35,13 +35,13 @@
         | Silakan tunjukkan  Surat Keterangan  ini ketika mengunjungi pemilik kos.                                     |
         | Semoga sukses!                                                                                               |
 
-    @TEST_PMAN-587 @continue
+    @TEST_SS-587 @continue
     Scenario: View Surat Keterangan
       When agen open surat keterangan
       Then surat keterangan pdf open in new tab
       And admin close unused browser tab
 
-    @TEST_PMAN-575 @continue
+    @TEST_SS-575 @continue
     Scenario: Agen Steps Skema 1
       Then progress title is "Langkah Awal Agen Akuisisi"
       #Verify step 1
@@ -92,7 +92,7 @@
       Then agen should redirect to "https://sites.google.com/mamiteam.com/onboardingagenakuisisi/home" in new tab
       And admin close unused browser tab
 
-    @TEST_PMAN-573 @continue
+    @TEST_SS-573 @continue
     Scenario: Progress agen skema 1
       #step 1
       When admin tick step 1
@@ -118,7 +118,7 @@
       When admin refresh page 0
       Then steps show progress "0 / 5"
 
-    @TEST_PMAN-582
+    @TEST_SS-582
     Scenario: Reset step progress onboarding after relogin
       When admin tick step 1
       And admin tick step 2

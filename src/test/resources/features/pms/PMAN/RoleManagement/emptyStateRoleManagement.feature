@@ -2,7 +2,7 @@
 
 Feature: Empty State Role Management
 
-  @TEST_PMAN-755
+  @TEST_SS-755
   Scenario: Empty State Role Management
     Given admin go to pms singgahsini
     And admin login pms :

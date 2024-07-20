@@ -2,7 +2,7 @@
 
   Feature: Disbursement PMS
 
-    @TEST_PMAN-782
+    @TEST_SS-782
     Scenario: Tambahan Pendapatan for Owner
       Given admin go to pms singgahsini
       When admin login pms :
@@ -30,7 +30,7 @@
       When admin delete tambahan pendapatan 1
       Then tambahan pendapatan should be empty
 
-    @TEST_PMAN-748 @pman2-prod
+    @TEST_SS-748 @pman2-prod
     Scenario: Check Riwayat Transfer Pendapatan
       Given admin go to pms singgahsini
       When admin login pms :
@@ -41,7 +41,7 @@
       When admin click riwayat transfer pendapatan
       Then admin should redirect to riwayat transfer pendapatan section
 
-    @TEST_PMAN-631
+    @TEST_SS-631
     Scenario: Button Refresh Availablity
       Given admin go to pms singgahsini
       When admin login pms :
@@ -67,7 +67,7 @@
       And admin go to detail transfer
       Then button refresh should be visible
 
-    @TEST_PMAN-769 @pman2-prod
+    @TEST_SS-769 @pman2-prod
     Scenario: Check empty state in the transfer pendapatan pemilik table
       Given admin go to pms singgahsini
       When admin login pms :

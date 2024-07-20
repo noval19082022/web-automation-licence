@@ -1,7 +1,7 @@
 @DOM1
 Feature: Mars Project
 
-  @TEST_COOP-5248 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check functionality FTUE Pop Up Before Send Chat
     Given user go to mamikos homepage
     When user login as owner:
@@ -17,7 +17,7 @@ Feature: Mars Project
     And owner enter text "Test FTUE Mars" in chat page
     Then user still see FTUE before send chat
 
-  @TEST_COOP-5249 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2809 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Owner runs out of quota
     Given user go to mamikos homepage
     When user login as owner:
@@ -28,7 +28,7 @@ Feature: Mars Project
     And search chat in chatlist "Vu Zet"
     Then user see attachment button is disabled
 
-  @TEST_COOP-5250 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2810 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Owner registered as goldplus
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: Mars Project
     And search chat in chatlist "Tenant Mars"
     Then user see attachment button is enabled
 
-  @TEST_COOP-5251 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2811 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check the appearence of Mars
     Given user go to mamikos homepage
     When user login as owner:
@@ -54,7 +54,7 @@ Feature: Mars Project
     And search chat in chatlist "Gorby A"
     Then user see the appearence of Mars chatroom
 
-  @TEST_COOP-5252 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2812 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Hide owner last seen on kost chatroom
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -68,7 +68,7 @@ Feature: Mars Project
     And user click send chat from popup
     Then user cant see last owner seen
 
-  @TEST_COOP-5253 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2813 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check autoreply of chat on P2 Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -82,7 +82,7 @@ Feature: Mars Project
     And user click send chat from popup
     Then chat room appear with latest message "Mohon tunggu balasan dari pemilik kos ini."
 
-  @TEST_COOP-5254 @Automated @MARS-DOM @Web @discovery-platform
+  @TEST_SS-2814 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check autoreply of chat on P1 Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:

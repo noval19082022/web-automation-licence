@@ -2,7 +2,7 @@
 
   Feature: Disbursement note PMS
 
-    @TEST_PMAN-758 @continue
+    @TEST_SS-758 @continue
     Scenario: Valid notes when character NOT NULL & <=1500
       Given admin go to pms singgahsini
       When admin login pms :
@@ -14,12 +14,12 @@
       And admin inputs characters "note <= 1500"
       Then Keterangan Tambahan value "note <= 1500" is displayed
 
-    @TEST_PMAN-640 @continue
+    @TEST_SS-640 @continue
     Scenario: Invalid notes when character NULL
       When admin does not input charaters
       Then the Simpan button is disable
 
-    @TEST_PMAN-633
+    @TEST_SS-633
     Scenario: Invalid notes when character > 1500
       When admin inputs characters "note > 1500"
       Then error message is displayed

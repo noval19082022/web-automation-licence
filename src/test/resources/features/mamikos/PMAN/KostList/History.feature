@@ -2,7 +2,7 @@
 
 Feature: Kost List History
 
-  @TEST_PMAN-588
+  @TEST_SS-588
   Scenario: Admin - Verify Component of Page Kost List
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

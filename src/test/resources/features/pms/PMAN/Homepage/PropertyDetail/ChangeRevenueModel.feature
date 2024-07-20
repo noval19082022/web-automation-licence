@@ -2,7 +2,7 @@
 
 Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
 
-  @TEST_PMAN-642
+  @TEST_SS-642
   Scenario: Get Correct Informasi Transfer Pendapatan Properti for Hybrid Revenue Model
     Given admin go to pms singgahsini
     When admin login pms :
