@@ -1,8 +1,7 @@
-#@regression @LIMO1
+@regression @LIMO1
+Feature: Single voucher owner
 
-Feature: Single voucher owner (Already migrate)
-
-#  @TEST_LIMO-233 https://mamiteam-qa3.atlassian.net/browse/LIMO-3290
+  @TEST_LIMO-3290
   Scenario: [GP Voucher Admin][Single Voucher]User click Voucher List Tooltip
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
