@@ -1,11 +1,10 @@
-#@regression @LIMO1 @LIMO1-staging @voucher-owner
-Feature: Voucher (Already migrate)
+@regression @LIMO1 @LIMO1-staging @voucher-owner
+Feature: Voucher
 
-
-#  @TEST_LIMO-1394 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3291
+  @TEST_LIMO-3291 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher doesnt active
     Given user go to mamikos homepage
-    And user login as owner:
+    When user login as owner:
       | phone stag    | phone prod | password |
       | 0895365624343 | 0          | 12345678 |
     When user navigates to mamiads dashboard
@@ -18,43 +17,42 @@ Feature: Voucher (Already migrate)
     Then validate the warning "Kode voucher tidak bisa digunakan."
     And user clear the voucher code
 
-#  @TEST_LIMO-1396 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3292
+  @TEST_LIMO-3292 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Input invalid voucher code
     When user input "MAATNOTACTIVEVOUCHER1" as kode voucher
     * user click Pakai button
     Then validate the warning "Kode voucher tidak ditemukan."
     And user clear the voucher code
 
-#  @TEST_LIMO-1397 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3293
+  @TEST_LIMO-3293 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Input empty voucher
     When user input "" as kode voucher
     * user click Pakai button
     Then validate the warning "Masukkan kode voucher."
     And user clear the voucher code
 
-#  @TEST_LIMO-1398 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3294
+  @TEST_LIMO-3294 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition Doens't buy minimal saldo the voucher
     When user input "MAATMINTRXVOUCHERMASS" as kode voucher
     * user click Pakai button
     Then validate the warning "Belum mencapai minimal transaksi."
     And user clear the voucher code
 
-#  @TEST_LIMO-1399 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3295
+  @TEST_LIMO-3295 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition voucher expired
     When user input "KIPUMASSEXPIREDINV" as kode voucher
     * user click Pakai button
     Then validate the warning "Kode voucher tidak bisa digunakan."
     And user clear the voucher code
 
-#  @TEST_LIMO-1400 @continue @invalidVoucher https://mamiteam-qa3.atlassian.net/browse/LIMO-3296
+  @TEST_LIMO-3296 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher with condition quota voucher 0
     When user input "SANITYAPRIL" as kode voucher
     * user click Pakai button
     Then validate the warning "Kuota voucher ini sudah habis."
     And user clear the voucher code
 
-
-#  @TEST_LIMO-1424 @TEST_LIMO-1425 https://mamiteam-qa3.atlassian.net/browse/LIMO-3297
+  @TEST_LIMO-3297 @TEST_LIMO-1425
   Scenario: Apply voucher from detail voucher and deleted apply voucher
     And owner back to list voucher
     * user verify "MA AUTOMATION SINGLE VOUCHER" is present on list voucher
