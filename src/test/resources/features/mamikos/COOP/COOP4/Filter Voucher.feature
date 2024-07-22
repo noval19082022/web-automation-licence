@@ -1,7 +1,6 @@
 @COOP4
 Feature: Filter Voucher
 
-  @TEST_SS-4269
   Background: Open voucher menu
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -9,6 +8,7 @@ Feature: Filter Voucher
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigate to mamikos voucher menu
 
+  @TEST_SS-4269
   Scenario Outline: Filter Mass Voucher - Status
     And admin click on dropdown filter status
     Then admin see "<filter>" filter list option on voucher menu:
