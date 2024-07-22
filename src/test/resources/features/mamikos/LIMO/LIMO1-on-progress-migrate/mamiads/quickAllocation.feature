@@ -1,10 +1,8 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD
 Feature: Quick Allocation on Properti Saya
 
-
-  @TEST_LIMO-261
+  @TEST_LIMO-3379
   Scenario: Verify ads ON but full occupancy
-    #quickAllocation from mamiAds dashboard
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod | password  |
@@ -15,7 +13,6 @@ Feature: Quick Allocation on Properti Saya
     Then user cek status toggle iklan "Kos Jajajadooo Segun Sorong" is "Naik"
     * user verify the toggle iklan "Kos Jajajadooo Segun Sorong" is "on"
     * user verify the wording iklan kamar penuh "Kos Jajajadooo Segun Sorong" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
-    #quickAllocation from kos page
     When owner navigates to property saya kos
     And owner search kost "Kos Jajajadooo Segun Sorong" on property saya page
     And user click Lihat Selengkapnya button for edit
@@ -27,7 +24,7 @@ Feature: Quick Allocation on Properti Saya
     * user verify the toggle is "on"
     * user verify the wording ads is "Kamar penuh."
 
-  @TEST_LIMO-254
+  @TEST_LIMO-1340
   Scenario: [Property Saya Kos][MamiAds][Saldo<5000]: Owner ever allocate and ever paid mamiads
     Given user go to mamikos homepage
     And user login as owner:
@@ -42,7 +39,7 @@ Feature: Quick Allocation on Properti Saya
     * user verify the wording ads is "Pakai MamiAds, bisa naikkan posisi iklan Anda lho. Beli sekarang!"
     * user verify the redirection to list mamiads balance
 
-  @TEST_LIMO-256
+  @TEST_LIMO-1340
   Scenario: Cancel Quick Allocation on Listing has never been promoted before
     Given user go to mamikos homepage
     And user login as owner:
@@ -53,7 +50,7 @@ Feature: Quick Allocation on Properti Saya
     Then verify quick allocation section while never allocate
     And user cancel quick allocate the ads never allocate
 
-  @TEST_LIMO-265
+  @TEST_LIMO-1385
   Scenario: Owner cancel reactivates ads for a listing that was previously toggled on (status off by owner)
     Given user go to mamikos homepage
     And user login as owner:
@@ -75,7 +72,7 @@ Feature: Quick Allocation on Properti Saya
     Then verify redirect to mamiads dashboard
     * user cek status toggle iklan "Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utara" is "Tidak Naik"
 
-  @TEST_LIMO-263 @TEST_LIMO-266
+  @TEST_LIMO-1386
   Scenario Outline: Reactive allocation and nonaktif allocation ads while ever allocation
     Given user go to mamikos homepage
     And user login as owner:
@@ -93,7 +90,7 @@ Feature: Quick Allocation on Properti Saya
       | Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara    | daily          |
       | Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utara | maksimal       |
 
-  @TEST_LIMO-258
+  @TEST_LIMO-1505
   Scenario: [Property Saya][MamiAds][Saldo > 5000]: If full occupancy update room available
     Given user go to mamikos homepage
     And user login as owner:
@@ -104,7 +101,7 @@ Feature: Quick Allocation on Properti Saya
     When user click Lihat Selengkapnya button for edit
     * user verify the wording ads is "Kamar Sudah Penuh."
 
-  @TEST_LIMO-262
+  @TEST_LIMO-1503
   Scenario: [Property Saya Kos][MamiAds][Saldo mamiads 0]: Owner ever allocate and ever paid mamiads
     Given user go to mamikos homepage
     And user login as owner:

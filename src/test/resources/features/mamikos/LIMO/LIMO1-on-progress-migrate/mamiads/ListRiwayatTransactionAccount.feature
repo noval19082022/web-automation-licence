@@ -1,4 +1,4 @@
-@regression @LIMO1
+@regression @LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: List Riwayat Transaction Account
 
   @TEST_LIMO-1380

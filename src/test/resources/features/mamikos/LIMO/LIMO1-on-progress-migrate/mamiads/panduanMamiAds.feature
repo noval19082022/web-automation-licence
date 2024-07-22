@@ -1,8 +1,7 @@
-@regression @LIMO1
+@regression @LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: Panduan MamiAds
 
-
-  @TEST_LIMO-286
+  @TEST_LIMO-3377 @continue
   Scenario: Open Owner Non GP learn about MamiAds from "MamiAds" screen
     Given user go to mamikos homepage
     When user login as owner:
@@ -23,10 +22,12 @@ Feature: Panduan MamiAds
     And user close mamiads onboarding popup
     And user click "Pelajari di Sini"
     Then user redirected to guides page mamiAds
-#  Scenario: [Mamiads dashboard][Panduan Mamiads]: View "Panduan Mamiads" screen 4637
+
+  @TEST_LIMO-3373
+  Scenario: [Mamiads dashboard][Panduan Mamiads]: View "Panduan Mamiads" screen
     And user will see that the text "Naikkan Posisi Iklan Properti dengan MamiAds" is displayed
 
-  @TEST_LIMO-284
+  @TEST_LIMO-3375 @continue
   Scenario: Open Owner GP learn about MamiAds from "GP onboard" screen
     Given user go to mamikos homepage
     When user login as owner:
@@ -36,11 +37,13 @@ Feature: Panduan MamiAds
     Then user redirected to guides page mamiAds from GP
     And user will see that the text "Naikkan Posisi Iklan Properti dengan MamiAds" is displayed
 
-#  Scenario:  Back to "MamiAds" screen by tap the "Coba Sekarang" button MA-4689
+  @TEST_LIMO-3374 @continue
+  Scenario:  Back to "MamiAds" screen by tap the "Coba Sekarang" button MA-4689
     And user click "Coba Sekarang"
     Then user redirected to mamiads page
 
-#  Scenario: Back to "MamiAds" screen by tap the back button 4690
+  @TEST_LIMO-3376
+  Scenario: Back to "MamiAds" screen by tap the back button 4690
     And user close mamiads onboarding popup
     And user click "Pelajari di Sini"
     And tap back button on panduan Mamiads.
