@@ -71,7 +71,7 @@
         | Pelajari info lebih lanjut tentang alur kerja, pemberian komisi, dan lainnya. |
       And step 3 have button "Download PDF"
       When agen click button "Download PDF"
-      Then agen should redirect to "https://drive.google.com/file/d/1RIexX_PxpLSGC7FQfGsVvfAiTn9J4CfH/view" in new tab
+      Then agen should redirect to "https://drive.google.com/file/d/17IvDIcgTIrEoVwAzhmccGAmSpTqRI-1m/view" in new tab
       And admin close unused browser tab
       #Verify step 4
       Then step 4 title is "Gabung ke Chat Group"
