@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Controlled Property
 
 
-  @TEST_COOP-5070 @Automated @web
+  @SS-4242 @Automated @web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -46,7 +46,6 @@ Feature: SinggahSini Tenant Tracker Controlled Property
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
 
-  @TEST_BBM-553
   Scenario: Booking Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :
@@ -69,7 +68,6 @@ Feature: SinggahSini Tenant Tracker Controlled Property
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
-  @TEST_BBM-552 @TEST_BBM-556
   Scenario: Check-in Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :

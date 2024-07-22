@@ -1,7 +1,7 @@
-@COOP-5844 @COOP4
+@COOP4
 Feature: Tenant use MamiPoin in Invoice
 
-  @TEST_COOP-5829 @Automated @COOP @Web @continue
+  @TEST_SS-4276 @continue
   Scenario: Tenant use MamiPoin and Pay Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,7 +14,6 @@ Feature: Tenant use MamiPoin in Invoice
     And user remove voucher
     Then user should see potongan mamipoin is 2000 and total payment is 10006000
 
-  @TEST_BBM-380
   Scenario: Tenant use MamiPoin and Voucher at the same time
     Given user go to mamikos homepage
     And tenant navigate to tagihan kost saya

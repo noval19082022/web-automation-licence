@@ -1,7 +1,7 @@
-@COOP-5842 @COOP4
+@COOP4
 Feature: Invalid Voucher After Applied, Voucher Is Inactive
 
-  @TEST_COOP-5823 @Automated @COOP @Web
+  @TEST_SS-4270
   Scenario: Activate Voucher AUTOVINVALID
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

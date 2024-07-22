@@ -2,7 +2,7 @@
 Feature: MamiPoin Tenant Riwayat Poin Page
 
 
-  @TEST_COOP-5035 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-5063 @continue
   Scenario: Tenant already on Riwayat Poin page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -17,27 +17,27 @@ Feature: MamiPoin Tenant Riwayat Poin Page
       | Poin Kedaluwarsa |
     And user verify "b-tab__box-active" class on selected filter "Semua"
 
-  @BBM-398 @continue
+  @SS-5064 @continue
   Scenario: MamiPoin Grouped by Month
     Then user verify point history grouped by months
       | Juli 2023 |
 
-  @BBM-403 @continue
+  @SS-5065 @continue
   Scenario: Filter Poin Diterima
     When user click "Poin Diterima" filter
     Then user verify "b-tab__box-active" class on selected filter "Poin Diterima"
 
-  @BBM-404 @continue
+  @SS-5066 @continue
   Scenario: Filter Poin Ditukar
     When user click "Poin Ditukar" filter
     Then user verify "b-tab__box-active" class on selected filter "Poin Ditukar"
 
-  @BBM-397
+  @SS-5067
   Scenario: Filter Poin Kedaluwarsa
     When user click "Poin Kedaluwarsa" filter
     Then user verify "b-tab__box-active" class on selected filter "Poin Kedaluwarsa"
 
-  @TEST_BBM-399
+  @SS-5068
   Scenario: MamiPoin Tenant Riwayat Poin Page When the User Poin is Empty
     Given user go to mamikos homepage
     When user login as tenant via phone number:

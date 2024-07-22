@@ -1,8 +1,8 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: SinggahSini Tenant Tracker Add Catatan
 
 
-  @TEST_COOP-5069 @Automated @web @continue
+  @SS-4241 @Automated @web @continue
   Scenario: Add Catatan on Detail Penyewa
     Given admin go to pms singgahsini
     When admin login pms :
@@ -14,7 +14,6 @@ Feature: SinggahSini Tenant Tracker Add Catatan
     And user fill "prioritaskan" in note field
     Then user verify search result on main page bse contains Prioritaskan
 
-  @TEST_BBM-563
   Scenario: Delete Note
     When user click note prioritaskan
     And user clear note field

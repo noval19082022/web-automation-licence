@@ -2,7 +2,7 @@
 Feature: MamiPoin Tenant Informasi Poin Page
 
 
-  @TEST_COOP-5032 @TESTSET_COOP-4944 @Automated @web @continue
+  @SS-5057 @continue
   Scenario: MamiPoin Tenant Informasi Poin Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -14,12 +14,12 @@ Feature: MamiPoin Tenant Informasi Poin Page
     And user verify table title tanggal kedaluwarsa is displayed
     And user verify table title jumlah mamipoin is displayed
 
-  @TENG-187
+  @SS-5058
   Scenario: Description on Tanggal Kedaluwarsa
     Then user verify expired point on information point page
       | 31 Agt 2024 |
 
-  @TEST_TENG-200 @TEST_BBM-413 @TEST_TENG-201 @TEST_BBM-405
+  @SS-5059
   Scenario: MamiPoin Tenant Informasi Poin Page When the User Poin is Empty
     Given user go to mamikos homepage
     When user login as tenant via phone number:

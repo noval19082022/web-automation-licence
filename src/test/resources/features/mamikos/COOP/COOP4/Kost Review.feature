@@ -1,7 +1,7 @@
-@COOP-5843 @COOP4
+@COOP4
 Feature: Kost Review
 
-  @TEST_COOP-5824 @Automated @COOP @Web @continue
+  @TEST_SS-4271 @continue
   Scenario: Cancel create review
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

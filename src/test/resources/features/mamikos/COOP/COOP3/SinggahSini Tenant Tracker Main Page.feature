@@ -2,7 +2,7 @@
 Feature: SinggahSini Tenant Tracker Main Page
 
 
-  @TEST_COOP-5071 @Automated @web @continue
+  @SS-4243 @continue
   Scenario: Pagination Functionality
     Given admin go to pms singgahsini
     When admin login pms :
@@ -13,7 +13,6 @@ Feature: SinggahSini Tenant Tracker Main Page
     When user click pagination number "2"
     Then user see display data row from 20 riwayat
 
-  @TEST_COOP-2913
   Scenario: Column Name Complete
     When admin go to tenant communication menu
     Then user see at Tenant Main Page Column contains

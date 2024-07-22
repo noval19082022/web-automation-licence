@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher For Kost City
 
-  @TEST_COOP-5813 @Automated @COOP @Web
+  @TEST_SS-4260
   Scenario: Activate Voucher AUTOCITY
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher Monthly For Contract Duration
 
-  @TEST_COOP-5817 @Automated @COOP @Web
+  @TEST_SS-4264 @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

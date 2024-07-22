@@ -2,7 +2,7 @@
 Feature: SinggahSini Survei Tracker Main Page
 
 
-  @TEST_COOP-5067 @Automated @web @continue
+  @SS-4240 @Automated @web @continue
   Scenario: Pagination Functionality
     Given admin go to pms singgahsini
     When admin login pms :
@@ -13,7 +13,7 @@ Feature: SinggahSini Survei Tracker Main Page
     When user click pagination number "2"
     Then user see display data row from 20 riwayat
 
-  @TEST_BBM-481 @continue
+  @continue
   Scenario: Main Page Display
     When admin go to survey tracker menu
     Then user see at Tenant Main Page Column contains
@@ -28,25 +28,24 @@ Feature: SinggahSini Survei Tracker Main Page
       | Update Oleh        |
       | Action             |
 
-  @TEST_BBM-482 @continue
+  @continue
   Scenario: Filter By Nama Pencari Kos
     When user choose "Nama Pencari Kos" and input "Adisinggahsini" in the search field on main page
     And user click search button on main page filter
     Then user verify nama penyewa on main page filter is "Adisinggahsini"
 
-  @TEST_BBM-484 @continue
+  @continue
   Scenario: Filter By No. HP Pencari Kos
     When user choose "No. HP Pencari Kos" and input "0890867321213" in the search field on main page
     And user click search button on main page filter
     Then user verify nama penyewa on main page filter is "Adisinggahsini"
 
-  @TEST_BBM-483 @continue
+  @continue
   Scenario: Filter By Nama Properti
     When user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
     And user click search button on main page filter
     Then user verify nama penyewa on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
 
-  @TEST_BBM-485
   Scenario: Filter by Status Tidak Ada Konfirmasi
     When user click reset button in PMS Admin
     And user choose "Form Aplikasi" on filter Platform and "Tidak Ada Konfirmasi" on filter status

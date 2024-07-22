@@ -1,7 +1,7 @@
-@COOP-5841 @COOP4 @TEST_COOP-5822 @Automated @COOP @Web
+@COOP4
 Feature: Filter Voucher
 
-
+  @TEST_SS-4269
   Background: Open voucher menu
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -9,7 +9,6 @@ Feature: Filter Voucher
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigate to mamikos voucher menu
 
-  @TEST_BBM-841 @TEST_BBM-843
   Scenario Outline: Filter Mass Voucher - Status
     And admin click on dropdown filter status
     Then admin see "<filter>" filter list option on voucher menu:
@@ -21,7 +20,6 @@ Feature: Filter Voucher
       | Active     |
       | Not Active |
 
-  @TEST_BBM-839
   Scenario Outline: Filter Mass Voucher - Rule
     And admin click on dropdown filter rules
     Then admin see "<filter>" filter list option on voucher menu:
@@ -35,7 +33,6 @@ Feature: Filter Voucher
       | Recurring      |
       | Pelunasan      |
 
-  @TEST_BBM-840
   Scenario Outline: Filter Mass Voucher - Team
     And admin click on dropdown filter team
     Then admin see "<filter>" filter list option on voucher menu:
@@ -49,7 +46,6 @@ Feature: Filter Voucher
       | Marketing |
       | Other     |
 
-  @TEST_BBM-829 @TEST_BBM-831
   Scenario Outline: Filter Mass Voucher - Voucher ID / Code / Campaign Name Filter
     And admin input voucher with value "<ID>" and click search button:
     Then admin see voucher with selected filter "<ID>" is displayed:

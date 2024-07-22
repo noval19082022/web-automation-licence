@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Admin - Update Single Voucher
 
-  @TEST_COOP-5830 @Automated @COOP @Web @continue
+  @TEST_SS-4277 @continue
   Scenario: Create Single Voucher Prefix Without Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -34,7 +34,7 @@ Feature: Admin - Update Single Voucher
     And admin master clicks on add single voucher button in voucher form
     Then admin can sees callout message is "New targeted voucher added!"
 
-  @TEST_BBM-836 @TEST_BBM-844 @TEST_BBM-842 @continue
+  @continue
   Scenario: Update Single Voucher
     Given admin go to mamikos mamipay admin
     And admin search single voucher with name and edit index "1":
@@ -49,7 +49,6 @@ Feature: Admin - Update Single Voucher
     And admin master clicks on edit single voucher button in voucher form
     Then admin can sees callout message contains "Voucher bbm-test-automation updated"
 
-  @TEST_BBM-837
   Scenario: Voucher Status Inactive
     Given admin go to mamikos mamipay admin
     And admin search single voucher with name and edit index "1":

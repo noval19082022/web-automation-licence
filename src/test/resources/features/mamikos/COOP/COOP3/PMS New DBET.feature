@@ -1,7 +1,7 @@
 @COOP3 @dbetpms
 Feature: PMS New DBET
 
-  @TEST_COOP-5037  @Automated @web
+  @SS-5099
   Scenario: [PMS-DBET][DBET Form]Check validation on on all field
     Given admin go to pms singgahsini
     When admin login pms :
@@ -13,7 +13,7 @@ Feature: PMS New DBET
     And admin click on save button
     Then admin can see "Data wajib diisi" on phone number
 
-  @TEST_COOP-1185
+  @SS-5100
   Scenario: [PMS-DBET][Phone number]Check validation on Phone number
     Given admin go to pms singgahsini
     When admin login pms :
@@ -29,7 +29,7 @@ Feature: PMS New DBET
     When admin fill phone number tenant "081h"
     Then admin can see "Hanya dapat diisi dengan angka" on phone number
 
-  @TEST_COOP-1191
+  @SS-5101
   Scenario: [PMS-DBET][Phone number]Check validation on Tenant Name
     Given admin go to pms singgahsini
     When admin login pms :
@@ -43,7 +43,7 @@ Feature: PMS New DBET
     And admin fill nama tenant "Maya 12"
     Then admin can see "Masukkan karakter alfabet" on tenant name
 
-  @TEST_COOP-1192
+  @SS-5102
   Scenario: [PMS-DBET][Phone number]Check validation on Email
     Given admin go to pms singgahsini
     When admin login pms :

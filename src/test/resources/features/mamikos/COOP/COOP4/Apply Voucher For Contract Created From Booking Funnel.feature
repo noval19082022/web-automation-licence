@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Apply Voucher For Contract Created From Booking Funnel
 
-  @TEST_COOP-5811 @Automated @COOP @Web
+  @TEST_SS-4258
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

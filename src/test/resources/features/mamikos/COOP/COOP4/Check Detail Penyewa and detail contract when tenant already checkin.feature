@@ -1,7 +1,7 @@
-@COOP-5836 @COOP4
+@COOP4
 Feature: Check Detail Penyewa and detail contract when tenant already checkin
 
-  @TEST_COOP-5826 @Automated @COOP @Web
+  @TEST_SS-4273
   Scenario: Check Detail Penyewa and detail contract when tenant already checkin
     Given user go to mamikos homepage
     When user login as owner:

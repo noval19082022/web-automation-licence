@@ -1,7 +1,7 @@
-@COOP-5841 @COOP4
+@COOP4
 Feature: Invoice Type based on Kost
 
-  @TEST_COOP-5815 @Automated @COOP @Web
+  @TEST_SS-4262
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -37,7 +37,6 @@ Feature: Invoice Type based on Kost
       | Adi Auto Voucher Base On User | Adi Auto Voucher Base On User |
     Then owner should redirect back to pengajuan booking page
 
-  @BBM-599
   Scenario: Tenant Apply Voucher Invoice Type based on kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:

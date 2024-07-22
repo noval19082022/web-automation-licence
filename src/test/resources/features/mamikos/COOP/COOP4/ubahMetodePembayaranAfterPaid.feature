@@ -1,6 +1,7 @@
 @COOP4
 Feature: Click Button Ubah Metode Pembayaran After Paid
 
+  @TEST_SS-4391
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

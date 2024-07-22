@@ -1,7 +1,7 @@
-@COOP-5027 @COOP3
+@COOP3
 Feature: Billing Reminder
 
-  @TEST_COOP-5023 @TESTSET_COOP-4944 @Automated @web
+  @SS-5044 @TESTSET_COOP-4944 @Automated @web
   Scenario: User arrived on PN Template page
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -40,10 +40,7 @@ Feature: Billing Reminder
     When user delete billing Template with content "untuk automation"
     Then user verify delete billing Template with content "untuk automation"
 
-  @TEST_COOP-5024 @TESTSET_COOP-4944 @Automated @web
-  Scenario: [Billing Reminder] Billing Reminder Email Template
-
-  @continue
+  @SS-5045 @continue
   Scenario: User arrived on Email Template page
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -54,14 +51,14 @@ Feature: Billing Reminder
 		 # Scenario: user set the initial state to display Billing template Day -1
     When user set the initial state to display Billing template Day "-1"
 
-  @continue
+  @SS-5046 @continue
   Scenario: Delete Template
     Given admin go to mamikos mamipay admin
     Then user open " Email Template" submenu of Billing Reminder Template
     When user delete billing Template with content "-1 untuk automation"
     Then user verify delete billing Template with content "-1 untuk automation"
 
-  @continue
+  @SS-5047 @continue
   Scenario: Add Template With Existing Day Period
     Given admin go to mamikos mamipay admin
     Then user open " Email Template" submenu of Billing Reminder Template
@@ -70,7 +67,7 @@ Feature: Billing Reminder
       | 0   | 0 untuk automation | 0 untuk automation content |
     Then user verify cannot create billing reminder template
 
-  @continue
+  @SS-5048 @continue
   Scenario: Add Template
     Given admin go to mamikos mamipay admin
     Then user open " Email Template" submenu of Billing Reminder Template
@@ -80,6 +77,7 @@ Feature: Billing Reminder
     Then user verify Template subject with "-1 untuk automation"
     Then user verify Template content with "-1 untuk automation content"
 
+  @SS-5049
   Scenario: Edit Template
     Given admin go to mamikos mamipay admin
     Then user open " Email Template" submenu of Billing Reminder Template
@@ -89,7 +87,7 @@ Feature: Billing Reminder
     Then user verify Template subject with "0 untuk automation"
     Then user verify Template content with "0 untuk automation content"
 
-  @TEST_COOP-5025 @TESTSET_COOP-4944 @Automated @web
+  @SS-5050
   Scenario: [Billing Reminder] Billing Reminder SMS Template
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -122,9 +120,7 @@ Feature: Billing Reminder
       | -5  | untuk automation |
     Then user verify Template subject with "untuk automation"
 
-  @TEST_COOP-5026 @TESTSET_COOP-4944 @Automated @web
-  Scenario: [Billing Reminder] Billing Reminder Whatsapp Template
-
+  @SS-5051
   Scenario: User arrived on WhatsApp Template page
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
