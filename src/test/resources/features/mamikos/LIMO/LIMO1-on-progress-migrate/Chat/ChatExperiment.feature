@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging
+@regression @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD
 Feature: Chat Experiment
 
   @TEST_LIMO-3289 @continue

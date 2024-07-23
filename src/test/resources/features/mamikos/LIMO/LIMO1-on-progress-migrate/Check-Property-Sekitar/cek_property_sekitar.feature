@@ -1,4 +1,4 @@
-@LIMO1
+@LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: Cek Properti Sekitar
 
   @LIMO-2717

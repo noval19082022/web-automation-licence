@@ -1,4 +1,4 @@
-@LIMO1
+@LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: Recommendation Listing
 
   @TEST_LIMO-2711
