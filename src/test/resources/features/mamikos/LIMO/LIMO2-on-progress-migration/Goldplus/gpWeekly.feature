@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization @LIMO2-staging @gpWeekly
+@regression @LIMO2 @listing-monetization @LIMO2-staging @gpWeekly @DONEMIGRATINGTONEWBOARD
 Feature: GP Weekly
 
 
