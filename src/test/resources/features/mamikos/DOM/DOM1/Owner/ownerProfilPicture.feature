@@ -10,7 +10,7 @@ Feature: Owner - Profile Picture
     Then user verify profile picture is null
 
   @TEST_SS-3050 @Automated @DOM @web-covered
-  Scenario: [Setelan Akun][Profile Picture] Profile Picture is show
+  Scenario: [Setelan Akun][Profile Picture]Login Owner - Profile Picture is show
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |

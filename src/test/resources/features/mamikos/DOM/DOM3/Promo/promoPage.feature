@@ -2,13 +2,13 @@
 
 Feature: Promo page
 
-  @DOM3 @TEST_COOP-5427 @Automated @DOM3 @web-covered
+  @DOM3 @TEST_SS-3027 @Automated @DOM3 @web-covered
   Scenario: User can copy promo code
     Given user navigates to promo mamikos
     When user click SALIN on any promo
     Then promo code can be copied "SINGGAHEXPRESS"
 
-  @regression
+  @regression @TEST_SS-3008
   Scenario: Check pagination in promo page
     Given user navigates to promo mamikos
 #    When user click next page button
@@ -18,7 +18,7 @@ Feature: Promo page
 #    And user click page index "2"
 #    Then promo page "2" will be opened
 
-  @regression @TEST_COOP-5405 @DOM3 @web-covered
+  @regression @TEST_SS-3006 @DOM3 @web-covered
   Scenario: User can open promo detail
     Given user navigates to promo mamikos
     When user see the promo title in first promo
