@@ -146,8 +146,8 @@ Feature: DBET request from Tenant
     And user click on pilih "0" informasi penyewa
     Then user will see it has job name
 
-  @TEST_COOP-3031
-  Scenario: Tenant add Booking request for Kost Putra and tenant upload ID verification when gender tenant as Perempuan
+  @TEST_SS-4009
+  Scenario: [Dbet Tenant] Tenant add Booking request for Kost Putra and tenant upload ID verification when gender tenant as Perempuan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |

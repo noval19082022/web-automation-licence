@@ -1,7 +1,7 @@
 @BBM6 @COOP6
 Feature: UX improvment booking
 
-  @TEST_COOP-481 @uxImprovement
+  @TEST_SS-2668 @uxImprovement
   Scenario: [Web][UX Improvement][Pengajuan sewa][Draft]Update wording when save to draft
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -15,7 +15,7 @@ Feature: UX improvment booking
     And user click back button
     Then tenant verify the confirmation cancel booking pop up
 
-  @TEST_COOP-140 @TEST_COOP-149 @uxImprovement @continue
+  @TEST_SS-2665 @TEST_SS-2667 @uxImprovement @continue
   Scenario: [Web][UX Booking] Update wording content Belum bisa mengajukan sewa
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -28,7 +28,7 @@ Feature: UX improvment booking
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Lihat riwayat pengajuan sewa" button
 
-  @TEST_COOP-484
+  @TEST_SS-2671
   Scenario: [Web][UX Improvement][Pengajuan sewa][Draft]Update wording on Draft and Last seen
     When tenant navigate to riwayat and draf booking
     And user click on Draft menu

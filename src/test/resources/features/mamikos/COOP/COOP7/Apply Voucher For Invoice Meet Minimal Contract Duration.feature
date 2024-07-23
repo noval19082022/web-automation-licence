@@ -1,6 +1,6 @@
 @regression @voucher @BBM7
 
-@TEST_COOP-2732
+@TEST_SS-3807
 Feature: Apply Voucher For Invoice Meet Minimal Contract Duration
 
   Scenario: Invoice Yearly and Voucher For Quarterly

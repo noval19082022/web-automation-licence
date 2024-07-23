@@ -1,7 +1,7 @@
 @BBM6 @refundLinkKosReguler
 Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar 2)
 
-  @TEST_COOP-2770
+  @TEST_SS-3845
   Scenario: Tenant see refund policy on Detail Booking (Pilar 2)
     Given user go to mamikos homepage
     When user login as tenant via phone number:

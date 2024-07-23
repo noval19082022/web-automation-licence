@@ -28,7 +28,7 @@ Feature: OB Owner Reject Booking Full Room
     And tenant booking kost
     Then tenant should success booking kost
 
-  @continue
+  @continue @TEST_SS-3506
   Scenario: Owner Reject Booking Full Room
     Given user go to mamikos homepage
     When user login as owner:

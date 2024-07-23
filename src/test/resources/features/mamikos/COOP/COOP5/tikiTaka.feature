@@ -10,8 +10,8 @@ Feature: Tiki Taka - Bank Account
       | phone stag    | phone prod    |
       | 0816000001    | 0816000001    |
 
-  @TEST_COOP-7638
-  Scenario: Booking and confirm booking
+  @TEST_SS-4300 @TEST_SS-4302 @TEST_SS-4301
+  Scenario: [WEB][Ajukan Berhenti Sewa] Check Bank account form for Kost P1 have Deposit
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
@@ -34,7 +34,7 @@ Feature: Tiki Taka - Bank Account
     And owner navigates to owner dashboard
     Then owner logs out
 
-#  @TEST_COOP-7638
+#  @TEST_SS-4300
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Check Bank account form for Kost P1 have Deposit
     When user go to mamikos homepage
     And user login as tenant via phone number:
@@ -59,13 +59,13 @@ Feature: Tiki Taka - Bank Account
     And user stop rent kost with reason "Sudah Selesai Studi"
     And user click ajukan berhenti sewa on kontrak saya after input data diri
 
-#  @TEST_COOP-7648
+#  @TEST_SS-4302
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Confirmation Pop Up - Confirm
     Then tenant can see popup with:
     | Nama bank | Nomor rekening | Nama pemilik rekening |
     | BCA       | 9900090900   | Akun Tiki Taka          |
 
-#  @TEST_COOP-7643
+#  @TEST_SS-4301
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Cancel ajukan berhenti sewa submitted
     And tenant click on "Kembali ke form" button on popup confirmation
     Then tenant can see "Nama bank*" on bank account section
@@ -76,7 +76,7 @@ Feature: Tiki Taka - Bank Account
     When tenant navigate to kontrak kost saya
     Then tenant can see "Diajukan pada 20 Mei 2024. Deposit akan ditransfer maksimal H+7 setelah pemilik " on bank account section
 
-  @TEST_COOP-7639
+  @TEST_SS-4858 @TEST_SS-4864
   Scenario: Booking and confirm booking
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
@@ -100,7 +100,7 @@ Feature: Tiki Taka - Bank Account
     And owner navigates to owner dashboard
     Then owner logs out
 
-#  @TEST_COOP-7639
+#  @TEST_SS-4858
 #  Scenario: Tenant paid invoice
     When user go to mamikos homepage
     And user login as tenant via phone number:

@@ -31,7 +31,7 @@ Feature: Reject Booking From Owner Dashboard
       | 083894304420        |
       | 0822660001          |
 
-  @TEST_COOP-1938
+  @TEST_SS-3483
   Scenario: [Owner dashboard][Ada yang menunggu]Reject Booking via Homepage (more than 1 waiting booking)
     Given user go to mamikos homepage
     When user login as owner:

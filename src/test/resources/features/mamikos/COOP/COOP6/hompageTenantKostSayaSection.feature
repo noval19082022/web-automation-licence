@@ -1,7 +1,7 @@
 @BBM6 @COOP6 @BnBFeature @BnBFeature3
 Feature: Homepage - Kost Saya Section
 
-  @TEST_COOP-1967 @continue
+  @TEST_SS-3511 @continue
   #changeOwnersPhoneNumber.feature
   Scenario: change owner's number phone at unique code
     Given user go to mamikos homepage
@@ -22,14 +22,14 @@ Feature: Homepage - Kost Saya Section
     And user change owner's phone number into "0892202411" and click Gunakan
     Then user will see phone number of owner "0892202411" or "0892202411"
 
-  @TEST_COOP-1932
+  @TEST_SS-3477
   #warningDontHaveKosSayaAtSemuaFilter.feature
   Scenario: check warning who don't have kos saya at Semua filter (BBM-895)
     When user navigate to penyewa page
     And user search kost in penyewa menu "kost banda who dont have kos saya Tobelo Utara Halmahera Utara"
     Then user will see wording of warning tenant who don't have kos saya at Semua filter
 
-  @TEST_COOP-1993 @continue
+  @TEST_SS-3534 @continue
   #addTenant.feature
   Scenario: Add Tenant For Full Room (BBM-928)
     Given user go to mamikos homepage
@@ -44,7 +44,7 @@ Feature: Homepage - Kost Saya Section
     Then owner redirected to update room page
     And owner can not sees full room pop up restriction
 
-  @TEST_COOP-1991
+  @TEST_SS-3532
   #addTenant.feature
   Scenario: Add Tenant For Different Gender (BBM-927)
     Given owner navigates to owner dashboard
@@ -56,7 +56,7 @@ Feature: Homepage - Kost Saya Section
     And owner click button "Tambah Penyewa" on form informasi penyewa
     Then owner can sees different gender restriction pop-up
 
-  @TEST_COOP-2004 @automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_SS-3544 @automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Kost Saya Section ]Check Draft booking on homepage when have 1 draft for kost Promo Ngebut (BBM-905)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -83,7 +83,7 @@ Feature: Homepage - Kost Saya Section
     And user click delete button on tab one draft booking
     Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
 
-  @TEST_COOP-1990 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  @TEST_SS-3531 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
   Scenario: [Homepage][Kost Saya Section] Check Kos saya section when Menunggu konfirmasi Total booking = 1 show section for Kost Promo Ngebut
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -104,7 +104,7 @@ Feature: Homepage - Kost Saya Section
     And user cancel booking with reason "Merasa tidak cocok/tidak sesuai kriteria"
     Then tenant navigate to riwayat and draf booking
 
-  @TEST_COOP-1361 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
+  @TEST_SS-3427 @automated @kost-saya-revamp-phase1 @web @xray-update @bookingerror
   Scenario: [Homepage ][Kost Saya Section ]Check Kos Saya on Homepage when have Draft booking = 1 (BBM-968)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -134,7 +134,7 @@ Feature: Homepage - Kost Saya Section
     And user click delete button on tab one draft booking
     Then tenant cannot see "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara" as kost name and kost location
 
-  @TEST_COOP-1985 @automated @kost-saya-revamp-phase1 @web @xray-update
+  @TEST_SS-3528 @automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Kost Saya Section ]Check homepage when have total waiting confirmation booking = 1 (BBM-882)
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -1,7 +1,7 @@
 @BBM6 @COOP6
 Feature: Time manage owner
 
-  @checkContentOnWaktuMengelolaKos
+  @checkContentOnWaktuMengelolaKos @TEST_SS-3466
   Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
     Given user go to mamikos homepage
     When user login as owner:
@@ -26,7 +26,7 @@ Feature: Time manage owner
     And user click "Pusat Bantuan"
     Then user can see help center page
 
-  @checkOwnerHaveOneKosNotBbk @TEST_COOP-1921
+  @checkOwnerHaveOneKosNotBbk @TEST_SS-3472
   Scenario: Check Waktu Mengelola section when owner have one kost not Bbk
     Given user go to mamikos homepage
     When user login as owner:
@@ -35,7 +35,7 @@ Feature: Time manage owner
     And owner navigates to owner dashboard
     And user click "Atur Ketersediaan Kamar"
 
-  @checkWaktuMengelolaWhenOwnerNotHaveBbkKos @TEST_COOP-1927
+  @checkWaktuMengelolaWhenOwnerNotHaveBbkKos @TEST_SS-3469
   #ownerNotHaveBbkKos.feature
   Scenario: Check Waktu Mengelola section when owner not have BBK kos (BBM-973)
     Given user go to mamikos homepage

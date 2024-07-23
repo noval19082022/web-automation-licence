@@ -1,7 +1,7 @@
 @BBM6 @ubahPeraturan
   Feature: Owner - Ubah Peraturan
 
-  @TEST_COOP-1913 @automated @booking-stay-setting @continue
+  @TEST_SS-3458 @automated @booking-stay-setting @continue
   Scenario: Dashboard[Pengajuan Booking][Ubah peraturan masuk kos]check button name on dashboard and pengajuan booking page (BBM-536)
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,7 +13,7 @@
     And owner click ubah peraturan at "pengajuan sewa"
     Then owner redirect to Peraturan Masuk Kos page
 
-  @TEST_COOP-1908 @automated @booking-stay-setting @continue
+  @TEST_SS-3453 @automated @booking-stay-setting @continue
   Scenario: Ubah peraturan masuk kos [Filter] Change kos setting on kost GP type (BBM-526)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -22,7 +22,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Untuk mengubah aturan, mohon hubungi tim Mamikos yang mengelola kos Anda."
 
-  @TEST_COOP-1915 @automated @booking-and-billing @booking-stay-setting @continue
+  @TEST_SS-3460 @automated @booking-and-billing @booking-stay-setting @continue
   Scenario: Atur Booking [Kost Detail][Booking section] Change booking terdekat = 2 Minggu and Booking waktu terjauh 2 bulan (BBM-541)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -39,7 +39,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1897 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3442 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -61,7 +61,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1896 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3441 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Wajib Buku Nikah (COOP-1896)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -73,7 +73,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1899 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3444 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Nonactived Buku Nikah (BBM-525)
     When owner click on kriteria calon penyewa button
     And owner uncheck toogle "Wajib sertakan buku nikah saat pengajuan sewa"
@@ -84,7 +84,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1900 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3445 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated KK (BBM-527)
     When owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Wajib sertakan kartu keluarga saat pengajuan sewa"
@@ -92,7 +92,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1895 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3440 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Ktp KK And Buku Nikah
     When owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Wajib sertakan KTP saat pengajuan sewa"
@@ -103,7 +103,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1898 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3451 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Nonactivated Ktp KK And Buku Nikah (BBM-523)
     When owner click on kriteria calon penyewa button
     And owner uncheck toogle "Wajib sertakan KTP saat pengajuan sewa"
@@ -116,7 +116,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1911 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3456 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Owner set kriteria to able for Boleh pasutri (BBM-534)
     When owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Boleh untuk pasutri"
@@ -127,7 +127,7 @@
       | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
     Then tenant can see peraturan kost with "Boleh pasutri"
 
-  @TEST_COOP-1909 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3454 @TEST_SS-3446 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Nonactivated Pasutri (BBM-531)
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -138,7 +138,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
-  @TEST_COOP-1907 @TEST_COOP-1910 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
+  @TEST_SS-3452 @TEST_SS-3455 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa]Activated Special Kos for Karyawan (BBM-524) (BBM-533)
     When owner click on kriteria calon penyewa button
     And owner click kriteria penyewa with "Kos dikhususkan untuk karyawan atau mahasiswa"
@@ -171,7 +171,7 @@
     And owner uncheck toogle "Kos dikhususkan untuk karyawan atau mahasiswa"
     Then owner click Simpan at Peraturan Masuk Kos page
 
-  @TEST_COOP-486 @booking-stay-setting @web
+  @TEST_SS-4929 @booking-stay-setting @web
   Scenario: [Web][UX Improvement][Booking stay setting][waktu ngekos]Update wording on Booking stay setting
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -180,7 +180,7 @@
     And owner clicks on ubah waktu button
     Then owner can see "Jarak waktu terdekat (pengajuan dan tanggal masuk kos)" on ubah peraturan
 
-    @TEST_COOP-783
+    @TEST_SS-3334
     Scenario: Check the earliest availability kost if the earliest available room to sell is today and BSS Waktu masuk kos terdekat setelah booking is 0 days
       Given user go to mamikos homepage
       When user login as owner:
@@ -238,7 +238,7 @@
         | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
       Then tenant see today's date and cannot make booking
 
-    @TEST_COOP-795
+    @TEST_SS-3337
     Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 days
       Given user go to mamikos homepage
       When user login as owner:
@@ -268,7 +268,7 @@
         | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
       Then tenant see today's date and cannot make booking
 
-    @TEST_COOP-792
+    @TEST_SS-3336
     Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 weeks
       Given user go to mamikos homepage
       When user login as owner:

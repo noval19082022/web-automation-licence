@@ -11,7 +11,7 @@ Feature: check contract status on all filter and download biodata fakedoor
     And admin search contract by Renter Phone Number and input field "0892202357"
     And admin cancel contract
 
-  @filterPenyewa @continue
+  @filterPenyewa @continue @TEST_SS-3540
   Scenario: check contract status on all filter
     Given user go to mamikos homepage
     When user login as owner:
@@ -29,7 +29,7 @@ Feature: check contract status on all filter and download biodata fakedoor
       | Filter                    |
       | Menghentikan kontrak sewa |
 
-  @downloadBiodata
+  @downloadBiodata @TEST_SS-3529 @TEST_SS-3530
   Scenario: Download biodata fakedoor
     Given user go to mamikos homepage
     And user navigate to penyewa page

@@ -10,7 +10,7 @@ Feature: OB Reject Booking With Lainnya Reason
       | phone stag    | phone prod    |
       | 08100000618   | 08100000618 |
 
-  @TEST_COOP-823 @continue
+   @continue
   Scenario: Cancel and Create Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -27,6 +27,7 @@ Feature: OB Reject Booking With Lainnya Reason
     And tenant booking kost
     Then tenant should success booking kost
 
+  @TEST_SS-3344
   Scenario: Owner Reject Booking With Lainnya Reason
     Given user go to mamikos homepage
     When user login as owner:

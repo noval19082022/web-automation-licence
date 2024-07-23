@@ -1,6 +1,6 @@
 @regression @BBM7 @voucher
 
-@TEST_COOP-2890 @TEST_COOP-2876 @TEST_COOP-2807 @TEST_COOP-2808
+@TEST_SS-3883 @TEST_SS-3757 @TEST_SS-3964 @TEST_SS-3759
 Feature: Apply Voucher For Contract Created From Owner
 
 #  BBM-686

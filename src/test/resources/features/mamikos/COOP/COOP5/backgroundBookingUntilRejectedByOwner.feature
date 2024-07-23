@@ -26,7 +26,7 @@ Feature: BnB feature with background booking until rejected by owner
     And user navigates to owner dashboard
     And owner should successfully log out
 
-  @TEST_COOP-1360
+  @TEST_SS-3426
   Scenario: [Home Page][Kost Saya Section ]Check Kost saya section when tenant have booking with Reject status (BBM-967)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -34,7 +34,7 @@ Feature: BnB feature with background booking until rejected by owner
       | 08922024500 | 08100000618 | qwerty123 |
     Then user can see shortcut homepage with "Yah, pengajuan sewamu ditolak"
 
-  @TEST_COOP-1940
+  @TEST_SS-3485
   Scenario: [Home Page][Kost Saya Section ]Check kost saya section on homepage when tenant have booking with reject status (BBM-903)  > 1 booking request
     Given user go to mamikos homepage
     When user login as tenant via phone number:

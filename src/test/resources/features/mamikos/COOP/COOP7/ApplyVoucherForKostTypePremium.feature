@@ -1,6 +1,6 @@
 @regression @voucher @BBM7
 
-@TEST_COOP-2788 @TEST_COOP-2789
+@TEST_SS_3863 @TEST_SS-3864 @TEST_SS-3823 @TEST_SS-3822
 Feature: Apply Voucher For Kost Type Premium
 
   Scenario: Admin Batalkan Contract

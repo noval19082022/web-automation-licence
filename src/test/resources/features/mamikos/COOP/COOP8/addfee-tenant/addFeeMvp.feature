@@ -10,7 +10,7 @@ Feature: Add fee Mvp - Tenant
       | phone stag     | phone prod     |
       | 08100000213    | 08100000213    |
 
-  @TEST-COOP-6954 @continue
+  @TEST-SS-2709 @continue
   Scenario: [Tenant][Detail booking]  for P2 in the kos details there is no order form
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -26,7 +26,7 @@ Feature: Add fee Mvp - Tenant
     And tenant input catatan tambahan with "hallo saya automation dan bawa kucing meong meong"
     Then tenant can see allert addfee
 
-  @TEST-COOP-6953 @continue
+  @TEST-SS-2708 @continue
   Scenario: [Tenant][Detail booking]  Check for kost p1 doesnt have addfee kk
     Given user go to mamikos homepage
     When user cancel booking
@@ -41,7 +41,7 @@ Feature: Add fee Mvp - Tenant
     And tenant input catatan tambahan with "hallo saya automation dan bawa kucing meong meong"
     Then tenant can see allert addfee
 
-  @TEST-COOP-6955 @continue @TEST_COOP-6956 @TEST_COOP-6957
+  @TEST-SS-2710 @continue @TEST_SS-2711 @TEST_SS-2712
   Scenario: [Tenant][Detail booking]  Tenant see optional biaya tambahan from PMS-KK
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -69,7 +69,7 @@ Feature: Add fee Mvp - Tenant
     And tenant click on save button
     Then tenant can see "Bawa Televisi, Parkir Motor, Bawa Kulkas" on booking form
 
-   @TEST_COOP-6962 @continue
+   @TEST_SS-2714 @continue
    Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra fee and don't write a note
      When user go to mamikos homepage
      And user cancel booking
@@ -84,7 +84,7 @@ Feature: Add fee Mvp - Tenant
      And tenant click on chat pemilik
      Then tenant can see tenant description with "-"
 
-  @TEST_COOP-6961 @TEST_COOP-6958 @continue
+  @TEST_SS-2713 @continue
   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if choose additional fee but don't have note
     When user go to mamikos homepage
     And user cancel booking
@@ -105,7 +105,7 @@ Feature: Add fee Mvp - Tenant
     And tenant click on chat pemilik
     Then tenant can see tenant description with "Parkir Motor"
 
-  @TEST_COOP-6959 @continue
+  @TEST_SS-4286 @continue
   Scenario:  [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if you choose add the cost and write
     When user go to mamikos homepage
     And user cancel booking
@@ -124,7 +124,7 @@ Feature: Add fee Mvp - Tenant
     And tenant click on chat pemilik
     Then tenant can see tenant description with "Parkir Motor dan Saya bawa kucing meongmeong"
 
-   @TEST_COOP-6960 @continue
+   @TEST_SS-4286 @continue
    Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra charge but have note
      When user go to mamikos homepage
      And user cancel booking
@@ -140,7 +140,7 @@ Feature: Add fee Mvp - Tenant
      And tenant click on chat pemilik
      Then tenant can see tenant description with "Saya bawa kucing meongmeong"
 
-  @TEST_COOP-6988
+  @TEST_SS-4287
   Scenario: [Booking form][Autofill Note] Simpan draft when select catatan tambahan and input permintaan ke pemilik text
     When user go to mamikos homepage
     And user cancel booking

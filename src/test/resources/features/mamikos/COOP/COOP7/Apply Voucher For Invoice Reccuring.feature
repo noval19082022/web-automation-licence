@@ -1,8 +1,9 @@
 @regression @voucher @BBM7
 
+
 Feature: Apply Voucher For Invoice Reccuring
 
-  @continue
+  @continue @TEST_SS-3694
   Scenario: Invoice Reccuring and Voucher For First Full Paid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -23,7 +24,7 @@ Feature: Apply Voucher For Invoice Reccuring
       | VBOOKINGANDRECC1  | VBOOKINGANDRECC1  |
     Then tenant can see voucher is applied
 
-  @continue
+  @continue @TEST_3695
   Scenario: Invoice Reccuring and Voucher For First Full Paid and Settlement
     When tenant set active page to 1
     And tenant apply voucher:
@@ -31,7 +32,7 @@ Feature: Apply Voucher For Invoice Reccuring
       | VBOOKINGANDSETT1  | VBOOKINGANDSETT1  |
     Then Voucher code has been used
 
-  @continue
+  @continue @TEST_SS-3697
   Scenario: Invoice Reccuring and Voucher For Recurring
     When tenant set active page to 1
     And tenant apply voucher:
@@ -39,7 +40,7 @@ Feature: Apply Voucher For Invoice Reccuring
       | VRECONLY1         | VRECONLY1         |
     Then tenant can see voucher is applied
 
-  @continue
+  @continue @TEST_SS-3698
   Scenario: Invoice Reccuring and Voucher For Settlement
     When tenant set active page to 1
     And tenant apply voucher:
@@ -119,6 +120,7 @@ Feature: Apply Voucher For Invoice Reccuring
       | VDPSETTANDREC1    | VDPSETTANDREC1    |
     Then tenant can see voucher is applied
 
+  @TEST_SS-3669
   Scenario: Invoice Reccuring and Voucher For First Full Paid, For First DP, Settlement, and Recurring
     When tenant set active page to 1
     And tenant apply voucher:
