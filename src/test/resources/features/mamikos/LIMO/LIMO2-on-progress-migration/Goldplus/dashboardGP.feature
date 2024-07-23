@@ -1,7 +1,7 @@
-@regression @goldPlus @LIMO2 @listing-monetization @dashboardGP
+@regression @goldPlus @LIMO2 @listing-monetization @dashboardGP @DONEMIGRATINGTONEWBOARD
 Feature: Dashboard GP
 
-  @TEST_LIMO-36 @continue @checkAllFilter @dashboardGP
+  @TEST_LIMO-3393 @continue @checkAllFilter @dashboardGP
   Scenario: Check section Kos GoldPlus Anda at dashboard GP
     Given user go to mamikos homepage
     When user login as owner:
@@ -15,7 +15,7 @@ Feature: Dashboard GP
     * user will see that the text "Paket GoldPlus Anda" is displayed
     * user see status goldplus is "Goldplus 1"
 
-  @checkAllFilter @continue @dashboardGP
+  @TEST_LIMO-3394 @checkAllFilter @continue @dashboardGP
   Scenario: Check all Filter Page Paket GoldPlus Anda (Semua, Aktif, Menunggu Pembayaran Sedan Diproses)
     When user choose filter "Aktif" on paket goldplus anda page
     Then user see status goldplus is "Goldplus 1"
@@ -26,7 +26,7 @@ Feature: Dashboard GP
     Then user will see that the text "Kos GoldPlus Tidak Ditemukan" is displayed
     * user will see that the text "Saat ini belum ada kos GoldPlus Anda yang Sedang Diproses." is displayed
 
-  @TEST_LIMO-49 @dashboardGP @listTagihanGP
+  @TEST_LIMO-3395 @dashboardGP @listTagihanGP
   Scenario: Check list tagihan GP from dashboard GP
     When owner click back to dashboard GP
     And user scroll to section pembayaran tagihan goldplus

@@ -1,7 +1,7 @@
-@regression @LIMO2 @listing-monetization @GpChatListOwnerExperiment
+@regression @LIMO2 @listing-monetization @GpChatListOwnerExperiment @DONEMIGRATINGTONEWBOARD
 Feature: Owner Experiment- GP Chat List
 
-  @TEST_LIMO-1814 @MARS @MARS-LIMO @listing-monetization @web @automated
+  @TEST_LIMO-3391 @MARS @MARS-LIMO @listing-monetization @web @automated
   Scenario: [Owner Experiment][GP Chat List] Owner GP open chat list for the first time
     Given user go to mamikos homepage
     When user login as owner:
@@ -14,7 +14,7 @@ Feature: Owner Experiment- GP Chat List
     Then verify title ftue is "Kuota chat room di Mamikos" and description "Kini berlaku sistem kuota chat. Kuota bisa dipakai untuk saling berbalas chat dengan penyewa di chat room"
     * user click "Saya Mengerti"
 
-  @TEST_LIMO-1815 @TEST_LIMO-2612 @MARS @MARS-LIMO @listing-monetization @web @automated
+  @TEST_LIMO-3392 @MARS @MARS-LIMO @listing-monetization @web @automated
   Scenario: [Owner Experiment][GP Chat List] Non GP with an empty chat list
     Given user go to mamikos homepage
     When user login as owner:
