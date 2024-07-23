@@ -30,7 +30,7 @@ Feature: Add and Edit Room Level
     When admin edit room level with existing key "room_level_key"
     Then error message existing key is displayed
     When admin go to room level menu
-    And admin search room level "Automation SS Existing Key"
+    And admin search room level "Automation PMAN Existing Key"
     Then the key is not changed
 
   @TEST_SS-565
@@ -46,7 +46,7 @@ Feature: Add and Edit Room Level
     Then show charging fee error message "The charging fee cannot be greater than 100"
     #Edit charging fee > 100%
     When admin go to room level menu
-    And admin edit room level "Automation SS Existing Key"
+    And admin edit room level "Automation PMAN Existing Key"
     And set charging fee "200"
     Then show charging fee error message "The charging fee cannot be greater than 100"
 
