@@ -1,7 +1,7 @@
-@regression @LIMO1 @LIMO1-staging @visibility
+@regression @LIMO1 @LIMO1-staging @visibility @DONEMIGRATINGTONEWBOARD
 Feature: Visibility
 
-  @TEST_LIMO-291 @continue
+  @TEST_LIMO-1369 @continue
   Scenario: Check redirection mamiads Owner have condition Saldo mamiAds = 0, Never purchase mamiAds, Never Allocated then click entry point MA first time
     Given user go to mamikos homepage
     When user login as owner:
@@ -17,7 +17,7 @@ Feature: Visibility
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 
-  @TEST_LIMO-289
+  @TEST_LIMO-1371
   Scenario: Check redirection mamiads when all listing full occupied
     Given user go to mamikos homepage
     When user login as owner:
@@ -27,7 +27,7 @@ Feature: Visibility
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 
-  @TEST_LIMO-295 @TEST_LIMO-296
+  @TEST_LIMO-1365
   Scenario Outline: Never Purchase MamiAds and all listing is allocated and Ever Purchase MamiAds and all listing is allocated
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: Visibility
       | 089145645624  | qwerty123 |
       | 082233545514  | 12345678  |
 
-  @TEST_LIMO-292 @TEST_LIMO-298
+  @TEST_LIMO-1370 @TEST_LIMO-1368
   Scenario Outline: Never Purchase MamiAds And Ever Purchase MamiAds, Saldo < 5000 and have active ads the first click will redirect to MamiAds Purchase
     Given user go to mamikos homepage
     When user login as owner:
@@ -55,7 +55,7 @@ Feature: Visibility
       | 083832357442  |
       | 083176408323  |
 
-  @TEST_LIMO-297
+  @TEST_LIMO-1363
   Scenario: Never Purchase MamiAds, Saldo < 5000 and have not active ads the first click will redirect to MamiAds Purchase
     Given user go to mamikos homepage
     When user login as owner:
