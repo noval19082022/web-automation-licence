@@ -1,7 +1,6 @@
 @DOM3
 Feature: Payment Goldplus staging
 
-
   Background: Admin reset GP owner
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -9,7 +8,7 @@ Feature: Payment Goldplus staging
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number "089145645609"
 
-  @payWithAlfamart @TEST_COOP-5281
+  @payWithAlfamart @TEST_SS-3089
   Scenario: Owner Purchase GP using alfamart
     Given user go to mamikos homepage
     When user login as owner:
@@ -21,7 +20,7 @@ Feature: Payment Goldplus staging
     And owner select payment using alfamart xendit as payment method from invoice detail
     Then owner will see that the text "Pembayaran Berhasil" is displayed
 
-  @paymentPermata @TEST_COOP-5282
+  @paymentPermata @TEST_SS-3090
   Scenario: Owner Purchase GP using permata
     Given user go to mamikos homepage
     When user login as owner:
@@ -36,7 +35,7 @@ Feature: Payment Goldplus staging
     Then owner will see that the text "Lunas" is displayed
 
 
-  @payWithLinkAja @TEST_COOP-5283
+  @payWithLinkAja @TEST_SS-3091
   Scenario: Owner Purchase GP using linkaja
     Given user go to mamikos homepage
     When user login as owner:
@@ -51,7 +50,7 @@ Feature: Payment Goldplus staging
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
-  @payWithDana @TEST_COOP-5284
+  @payWithDana @TEST_SS-3092
   Scenario: Owner Purchase GP using dana
     Given user go to mamikos homepage
     When user login as owner:
@@ -66,7 +65,7 @@ Feature: Payment Goldplus staging
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
-  @payWithCreditCard @TEST_COOP-5285
+  @payWithCreditCard @TEST_SS-3093
   Scenario: Owner Purchase GP using credit card
     Given user go to mamikos homepage
     When user login as owner:
@@ -80,7 +79,7 @@ Feature: Payment Goldplus staging
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
-  @payWithBni @TEST_COOP-5286
+  @payWithBni @TEST_SS-3094
   Scenario: Owner Purchase GP using bni
     Given user go to mamikos homepage
     When user login as owner:
@@ -94,7 +93,7 @@ Feature: Payment Goldplus staging
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
-  @payWithBri @TEST_COOP-5287
+  @payWithBri @TEST_SS-3095
   Scenario: Owner Purchase GP using bri
     Given user go to mamikos homepage
     When user login as owner:
@@ -108,7 +107,7 @@ Feature: Payment Goldplus staging
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
-  @payWithMandiri @TEST_COOP-5288
+  @payWithMandiri @TEST_SS-3096
   Scenario: Owner Purchase GP using mandiri
     Given user go to mamikos homepage
     When user login as owner:
