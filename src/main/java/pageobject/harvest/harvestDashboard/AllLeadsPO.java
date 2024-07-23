@@ -120,7 +120,7 @@ public class AllLeadsPO {
      */
     public boolean isYesButtonsVisible(int indexYesButton) {
         yesButton = page.locator("(//tr)").nth(indexYesButton).locator("(//td)[1]//child::p[contains(., 'Yes')]");
-        return playwright.isLocatorVisibleAfterLoad(yesButton, 5000.0);
+        return playwright.isLocatorVisibleAfterLoad(yesButton, 2000.0);
     }
 
     /**
@@ -142,7 +142,7 @@ public class AllLeadsPO {
      */
     public boolean isNoButtonsVisible(int indexNoButton) {
         noButton = page.locator("(//tr)").nth(indexNoButton).locator("(//td)[2]//child::p[contains(., 'No')]");
-        return playwright.isLocatorVisibleAfterLoad(noButton, 5000.0);
+        return playwright.isLocatorVisibleAfterLoad(noButton, 2000.0);
     }
 
     /**
@@ -295,7 +295,7 @@ public class AllLeadsPO {
      * @param nextPage
      */
     public void clicksOnPage(String nextPage) {
-        nextPageButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(nextPage));
+        nextPageButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(nextPage).setExact(true));
         playwright.clickOn(nextPageButton);
     }
     //--- End of Pagination ---//
