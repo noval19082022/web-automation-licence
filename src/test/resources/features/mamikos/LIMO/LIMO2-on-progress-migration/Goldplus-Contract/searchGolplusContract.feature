@@ -1,7 +1,7 @@
-@listing-monetization @regression @LIMO2
+@listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD
 Feature: Search Contract Goldplus at Mamipay
 
- @searchContractGP @TEST_LIMO-2449 @continue
+ @searchContractGP @TEST_LIMO-3558 @continue
 Scenario: [Admin][GP Contract]User want to Search GoldPlus Contract
   #Owner Want To Search GP Contract Search by owner phone
   Given admin go to mamikos mamipay admin
@@ -41,7 +41,7 @@ Scenario: [Admin][GP Contract]User want to Search GoldPlus Contract
    Then admin verify owner phone is "087662369014" with goldplus package "GoldPlus 1 4 Bulan" and status contract is "terminated"
    And admin wants to reset form search
 
-  @TEST_LIMO-2451 @searchContractGP
+  @TEST_LIMO-3559 @searchContractGP
  Scenario: [Admin][GP Contract]User want to see Order in GoldPlus Contract
     When admin search contract based on phone number "087662369014"
     And admin wants to see detail contract
