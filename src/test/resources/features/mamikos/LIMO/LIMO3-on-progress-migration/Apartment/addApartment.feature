@@ -1,8 +1,8 @@
-@regression @LIMO-3 @listing-monetization @addApartement
+@regression @LIMO-3 @listing-monetization @addApartement @DONEMIGRATINGTONEWBOARD
 
 Feature: Owner - Add Apartment
 
-  @addapart
+  @addapart @TEST_LIMO-3660
   Scenario: Owner - Add apartment with valid data
     Given user go to mamikos homepage
     When user login as owner:
