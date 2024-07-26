@@ -1,12 +1,12 @@
 @DOM4
 Feature: Homepage
 
-	@TEST_COOP-5455 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3299 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check cari iklan dropdown items
 		Given user go to mamikos homepage
 		Then tenant can see ads dropdown option
 
-	@TEST_COOP-5457 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3298 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check profile dropdown items after login
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -14,78 +14,78 @@ Feature: Homepage
 		  | 081223344570 | 083176408442 | qwerty123 |
 		Then tenant can see profile dropdown option
 
-	@TEST_COOP-5462 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3295 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection kebijakan privasi on homepage
 		Given user go to mamikos homepage
 		And user open kebijakan privasi in footer
 		Then user should redirect to kebijakan privasi page
 
-	@TEST_COOP-5464 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3294 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection syarat dan ketentuan on homepage
 		Given user go to mamikos homepage
 		And user open syarat dan ketentuan in footer
 		Then user should redirect to link "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
 
-	@TEST_COOP-5459 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3303 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection tentang kami on homepage
 		Given user go to mamikos homepage
 		When user open tentang kami in footer
 		Then user should redirect to link that contains "/tentang-kami"
 
-	@TEST_COOP-5460 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3300 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection job mamikos on homepage
 		Given user go to mamikos homepage
 		When user open job mamikos in footer
 		Then user should redirect to link that contains "/career"
 
-	@TEST_COOP-5453 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3274 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection promosikan kost anda on homepage
 		Given user go to mamikos homepage
 		When user open promosikan kost anda in footer
 		Then user should redirect to link that contains "/mamiads"
 
-	@TEST_COOP-5451 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3276 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection pusat bantuan on homepage
 		Given user go to mamikos homepage
 		When user open pusat bantuan in footer
 		Then user should redirect to link "https://help.mamikos.com/"
 
-	@TEST_COOP-5452 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3277 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection facebook on homepage
 		Given user go to mamikos homepage
 		When user open facebook in footer
 		Then user should redirect to link that contains "https://www.facebook.com/mamikosapp"
 
-	@TEST_COOP-5448 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3288 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection twitter on homepage
 		Given user go to mamikos homepage
 		When user open twitter in footer
 		Then user should redirect to link that contains "https://x.com/mamikosapp"
 
-	@TEST_COOP-5449 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3284 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection instagram on homepage
 		Given user go to mamikos homepage
 		When user open instagram in footer
 		Then user should redirect to link that contains "https://www.instagram.com"
 
-	@TEST_COOP-5446 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3280 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection e-mail on homepage
 		Given user go to mamikos homepage
 		When user open e-mail in footer
 		Then user should redirect to link that contains "https://mamikos.com/tentang-kami?opencomplaintform=1"
 
-	@TEST_COOP-5447 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3287 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection whatsapp on homepage
 		Given user go to mamikos homepage
 		When user open whatsapp in footer
 		Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=%2B6281325111171"
 
-	@TEST_COOP-5450 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3285 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check copyright on footer on homepage
 		Given user go to mamikos homepage
 		Then user can see copyright is "© 2024 Mamikos.com. All rights reserved"
 
-	@TEST_COOP-5458 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3302 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Lihat semua on owner promo section
 		Given user go to mamikos homepage
 		When user see all owner promo
@@ -97,31 +97,31 @@ Feature: Homepage
 #		When user see all promo ads
 #		Then user should redirect to link "https://promo.mamikos.com/"
 
-	@TEST_COOP-5454 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3275 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Download App menu on header
 		Given user go to mamikos homepage
 		When user open Download App menu
 		Then user should redirect to link "https://play.google.com/store/apps/details?id=com.git.mami.kos"
 
-	@TEST_COOP-5465 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3151 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Booking Kos menu on header
 		Given user go to mamikos homepage
 		When user open Booking Kos menu
 		Then user should redirect to link that contains "/booking"
 
-	@TEST_COOP-5463 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3296 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Popular Area - Jakarta
 		Given user go to mamikos homepage
 		When user open Popular Area in Jakarta
 		Then user should redirect to link that contains "/kost/kost-jakarta-murah"
 
-	@TEST_COOP-5461 @Automated @DOM4 @Web @discovery-platform @homepage
+	@TEST_SS-3301 @Automated @DOM4 @Web @discovery-platform @homepage
 	Scenario: [Dweb][Homepage]Check redirection Around University - UGM
 		Given user go to mamikos homepage
 		When user open Around University in UGM
 		Then user should redirect to link that contains "/kost/kost-dekat-ugm-murah"
 
-	@TEST_COOP-6937
+	@TEST_SS-3152
 	Scenario: Hompage-Lihat semua kost sekitar kampus
 		Given user go to mamikos homepage
 		When user go to lihat semua Sekitar Kampus
@@ -135,7 +135,7 @@ Feature: Homepage
 			| Malang                 | Malang                 |
 			| Semarang               | Semarang               |
 
-	@TEST_COOP-6942
+	@TEST_SS-3149
 	Scenario: Homepage - Lihat semua area kost populer
 		Given user go to mamikos homepage
 		When user go to lihat semua Area kost terpopuler

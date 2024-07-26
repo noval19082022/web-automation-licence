@@ -1,58 +1,58 @@
 @DOM4 @flashsale
 Feature: Flash Sale
 
-  @TEST_COOP-5387
+  @TEST_SS-3267
   Scenario: Check Flash Sale Section On Homepage
     Given user go to mamikos homepage
     When user scroll into promo kost section
     Then user will see promo ngebut info on kost card
 
-  @TEST_COOP-5388
+  @TEST_SS-3268
   Scenario: User can visit promo ngebut landing page
     Given user navigates to promo ngebut landing page
     Then user can see flash sale landing page
     Then user will see promo ngebut info on kost card
 
-  @TEST_COOP-5386
+  @TEST_SS-3261
   Scenario: User can visit promo ngebut landing area
     Given user navigates to promo ngebut landing area
     Then user can see flash sale landing area
     Then user will see promo ngebut info on kost card
 
-  @TEST_COOP-5385
+  @TEST_SS-3230
   Scenario: User can use Cari Kos Promo Ngebut button
     Given user navigates to promo ngebut landing page
     When user go to promo landing area from Cari Kos Promo Ngebut button
     Then user will see promo ngebut info on kost card
     Then user can see url link is for Cari Kos Promo Ngebut
 
-  @TEST_COOP-5404
+  @TEST_SS-3264
   Scenario: User can use Cari Sekarang button
     Given user navigates to promo ngebut landing page
     When user go to promo landing area from Cari Sekarang button
     Then user can see url link is for Cari Sekarang
     Then user will see promo ngebut info on kost card
 
-  @TEST_COOP-5406
+  @TEST_SS-3265
   Scenario: User can see promo ngebut pop-up on kos details
     Given user navigates to promo ngebut landing area
     When user go to kost details from promo ngebut list
     Then user can see promo ngebut pop-up
 
-  @TEST_COOP-3290
+  @TEST_SS-3228
   Scenario: [Home Page][WEB]Promo ngebut Nominal discount and atribute (first month)
     Given user go to mamikos homepage
     When user will see promo ngebut info on kost card
     Then user can see Promo Ngebut discount in nominal amount with normal price with strikethrough and "(Bulan pertama)" text on homepage
 
 #  No discount other than first month at this time
-#  @TEST_COOP-3292 @continue
+#  @TEST_SS-5173 @continue
 #  Scenario: [Home Page][WEB]Promo ngebut Nominal discount and atribute (other than first month)
 #    Given user go to mamikos homepage
 #    When user will see promo ngebut info on kost card
 #    Then user can see Promo Ngebut discount in nominal amount without normal price with strikethrough and "sewa 3 bulan" text on homepage
 
-  @TEST_COOP-4948
+  @TEST_SS-3225
   Scenario: [Home Page][WEB]Visit Detail Kost that has Promo ngebut From Homepage (first month)
     Given user go to mamikos homepage
     When user will see promo ngebut info on kost card
