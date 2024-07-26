@@ -1,7 +1,7 @@
-@LIMO2 @Mamifoto @TEST_LIMO-3020
+@LIMO2 @Mamifoto @DONEMIGRATINGTONEWBOARD
 Feature: Check Mamifoto Landing Page
-  
-  @continue @declarative @listing-monetization @reviewed @Automated @web @playWright
+
+  @TEST_LIMO-3587 @continue @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner visits Landing Page of MamiFoto
     Given user go to mamikos homepage
     And user login as owner:
@@ -10,30 +10,30 @@ Feature: Check Mamifoto Landing Page
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
 
-  @continue
+  @continue @TEST_LIMO-3588
   Scenario: Owner visits Landing Page of MamiFoto from Info Untuk Anda Card
     When owner back to owner dashboard
     And owner click info untuk anda for mamifoto
     Then owner can see mamifoto page
 
-  @continue
+  @continue @TEST_LIMO-3589
   Scenario: Owner visits Landing Page of MamiFoto from Tingkatkan Kinerja Kos Section
     When owner back to owner dashboard
     And owner click section Tingkatkan Kinerja Kost
     Then owner can see mamifoto page
 
-  @continue
+  @continue @TEST_LIMO-3590
   Scenario: Owner click "lihat paket" button MamiFoto
     And owner click Lihat Paket button
     Then owner see pilih paket page
 
-  @continue
+  @continue @TEST_LIMO-3591
   Scenario: Owner click "Baca Panduan" button MamiFoto
     When owner back to Mamifoto Landing Page
     And owner click Baca Panduan button
     Then owner see detail panduan pop up
 
-  @FAQMamifoto
+  @FAQMamifoto @TEST_LIMO-3592
   Scenario: Owner click FAQ
     And owner click any faq button
     Then owner see detail FAQ
