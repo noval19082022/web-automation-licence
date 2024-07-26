@@ -1,7 +1,7 @@
 @listing-monetization @regression @LIMO2 @broadcastChat
 Feature: Broadcast Chat Owner 2
 
-  @TEST_LIMO-1143
+  @TEST_LIMO-3639
   Scenario: [Broadcast Chat][Chat]user want to received broadcast chat and see the broadcast chat
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -11,7 +11,7 @@ Feature: Broadcast Chat Owner 2
     And user opens the chatroom in the "1" order on chat list
     Then chat room appear with latest message "automation broadcast, nikmati promo Mamikos untuk booking kos! Cek kosnya dan langsung booking. Jangan sampai terlewatkan, ya."
 
-  @TEST_LIMO-1171 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3640 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Create Broadcast chat]User want to change kost after input message chat
     Given user go to mamikos homepage
     When user login as owner:
@@ -26,7 +26,7 @@ Feature: Broadcast Chat Owner 2
     Then owner will see that the text "kost automation DOM boleh refund Patikraja Banyumas" is displayed
     And owner will see that the text "Calon Penyewa yang mendapatkan pesan" is displayed
 
-  @TEST_LIMO-1156
+  @TEST_LIMO-3641
   Scenario:[Broadcast Chat][Create Broadcast chat]User want to save template without add message on tempalate is editable
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: Broadcast Chat Owner 2
     And owner click "Preview Pesan" button
     Then owner will see that the text "Isi pesan terlebih dahulu." is displayed
 
-  @TEST_LIMO-1146 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3642 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Select Kost]User Search kost with condition full room not yet have a chat
     Given user go to mamikos homepage
     When user login as owner:
@@ -56,7 +56,7 @@ Feature: Broadcast Chat Owner 2
     And owner clicks Kos "kost jambu jambu lpl Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "Kos belum memiliki calon penerima" is displayed
 
-  @TEST_LIMO-1140 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3643 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Select Kost]User validate list kost is showed all
     Given user go to mamikos homepage
     When user login as owner:
@@ -69,7 +69,7 @@ Feature: Broadcast Chat Owner 2
     * owner will see that the text "desta automation Tobelo Halmahera Utara" is displayed
     * owner will see that the text "Kost LPL P2 01 Patikraja Banyumas" is displayed
 
-  @TEST_LIMO-1138 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3644 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
     Given user go to mamikos homepage
     When user login as owner:
@@ -90,7 +90,7 @@ Feature: Broadcast Chat Owner 2
 	"""
     Then user verify input broadcast message is not visible
 
-  @TEST_LIMO-1130 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3645 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Update GP]user update status GP
     Given user go to mamikos homepage
     When user login as owner:
