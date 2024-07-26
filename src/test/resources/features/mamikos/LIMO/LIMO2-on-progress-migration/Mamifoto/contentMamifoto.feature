@@ -1,8 +1,8 @@
-@LIMO2 @Mamifoto @ContentMamifoto
+@LIMO2 @Mamifoto @ContentMamifoto @DONEMIGRATINGTONEWBOARD
 
 Feature: Check content Mamifoto
 
-  @continue @TEST_LIMO-4632 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @continue @TEST_LIMO-3565 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Check content Mamifoto at landing page
     Given user go to mamikos homepage
     And user login as owner:
@@ -29,7 +29,7 @@ Feature: Check content Mamifoto
     And owner will see title and detail title "Persiapan Kos Sebelum Difoto" on panduan panduan persiapan foto or video
     And owner will see title and detail title "Sembari menunggu fotografer datang, yuk simak apa saja yang harus Anda persiapkan sebelum sesi foto dimulai." on panduan panduan persiapan foto or video
 
-  @panduanMamifotoContent @continue
+  @panduanMamifotoContent @continue @TEST_LIMO-3566
   Scenario: [WEB][MamiFoto] Check content Mamifoto at panduan page
     When owner click Baca Panduan button
     #point Kamar Tidur
@@ -70,7 +70,7 @@ Feature: Check content Mamifoto
     And owner will see title and detail title "Lap kaca/jendela agar terlihat bersih." on panduan panduan persiapan foto or video
     And owner will see title and detail title " Pastikan tidak ada sampah dan barang-barang lainnya yang menumpuk dan tidak diinginkan." on panduan panduan persiapan foto or video
 
-  @FAQMamifotoContent @TEST_LIMO-4656
+  @FAQMamifotoContent @TEST_LIMO-3567
   Scenario: [WEB][MamiFoto] Check content Mamifoto FAQ
     Given owner close pop up panduan
     When user click question "Jenis foto apa saja yang akan saya dapat?"
