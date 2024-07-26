@@ -1,7 +1,7 @@
-@regression @promoOwner @LIMO2 @listing-monetization @checkfailedSelasaII
+@regression @promoOwner @LIMO2 @listing-monetization @checkfailedSelasaII @DONEMIGRATINGTONEWBOARD
 Feature: Atur promo owner
 
-  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
+  @TEST_LIMO-3646 @deletePromoFromAdmin @editPeriodeValidPromo
   Scenario: Delete promo owner
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -11,7 +11,7 @@ Feature: Atur promo owner
     And admin search the title promo "Update promo owner AT" on search box
     And admin delete the promo admin
 
-  @TEST_LIMO-2442 @createNewPromo @promoAktif @continue
+  @TEST_LIMO-3647 @createNewPromo @promoAktif @continue
   Scenario: Create new promo owner
     Given user go to mamikos homepage
     When user login as owner:
@@ -27,19 +27,19 @@ Feature: Atur promo owner
     When owner refresh page 1
     Then verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-4242 @editPromoMenungguVerifikasi @promoAktif @continue
+  @TEST_LIMO-3648 @editPromoMenungguVerifikasi @promoAktif @continue
   Scenario: Edit promo while status promo menunggu verifikasi
     Given owner edit promo kost owner with title "Update promo owner AT"
     Then verify judul promo "Update promo owner AT"
     When owner refresh page 1
     Then verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-1711 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
+  @TEST_LIMO-3649 @editPeriodePromo @startDateMoreThanEndDate @promoAktif
   Scenario: Edit start date promo more than end date promo
     And owner edit promo kost owner with start date "the day after tomorrow" and end date "tomorrow"
     Then verify warning "Tanggal berakhir tidak boleh sebelum tanggal mulai." is displayed
 
-  @TEST_LIMO-4244 @verifiedPromoOwner @promoAktif
+  @TEST_LIMO-3650 @verifiedPromoOwner @promoAktif
   Scenario: Verifikasi Promo Owner from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -49,7 +49,7 @@ Feature: Atur promo owner
     And admin search the title promo "Update promo owner AT" on search box
     Then admin verified the promo owner "Update promo owner AT"
 
-  @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner
+  @TEST_LIMO-3651 @checkPromoAfterVerifiedAdmin @unvefiedPromoOwner
   Scenario: Check Promo Owner after verified by admin
     Given user go to mamikos homepage
     When user login as owner:
@@ -61,7 +61,7 @@ Feature: Atur promo owner
     And owner set active page to 1
     And verify status promo is "Aktif"
 
-  @TEST-LIMO-4245 @unvefiedPromoOwner
+  @TEST-LIMO-3652 @unvefiedPromoOwner
   Scenario: Admin unverified promo
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -71,7 +71,7 @@ Feature: Atur promo owner
     And admin search the title promo "Update promo owner AT" on search box
     Then admin unverified the promo owner
 
-  @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
+  @TEST-LIMO-3653 @checkPromoAfterUnverifiedAdmin @editPeriodeValidPromo @continue
   Scenario: Check Promo Owner after unverified by admin
     Given user go to mamikos homepage
     When user login as owner:
@@ -83,13 +83,13 @@ Feature: Atur promo owner
     And owner set active page to 1
     And verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-1710 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo
+  @TEST_LIMO-3654 @editPeriodePromo @validPeriodePromo @editPeriodeValidPromo
   Scenario: Edit valid periode promo
     And owner edit promo kost owner with start date "the day after tomorrow" and end date "the day after tomorrow"
     When owner click edit promo button
     And verify status promo is "Menunggu Verifikasi"
 
-  @TEST_LIMO-4246 @deletePromoFromAdmin @editPeriodeValidPromo
+  @TEST_LIMO-3655 @deletePromoFromAdmin @editPeriodeValidPromo
   Scenario: Delete promo owner
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
