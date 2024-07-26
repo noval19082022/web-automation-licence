@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @createKosBBKandMamipayNotActive @essentialTest3
+@regression @LIMO3 @listing-monetization @createKosBBKandMamipayNotActive @essentialTest3 @DONEMIGRATINGTONEWBOARD
 
 Feature: Create new kos with owner that doesn't activate mamipay and BBK
 
-  @TEST_LIMO-2840 @CreateKosWithRemoteTrue
+  @TEST_LIMO-3669 @CreateKosWithRemoteTrue
   Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
     Given user go to mamikos homepage
     When user login as owner:
