@@ -1,9 +1,9 @@
-@regression @LIMO-3 @listing-monetization
+@regression @LIMO-3 @listing-monetization @DONEMIGRATINGTONEWBOARD
 
 
 Feature: Apartment - Owner Page
 
-  @TEST_LIMO-2720 @apartementOwner
+  @TEST_LIMO-3661 @apartementOwner
   Scenario: Check apartement owner page
     #doesnt have apartment
     Given user go to mamikos homepage
@@ -13,7 +13,7 @@ Feature: Apartment - Owner Page
     When owner navigates to property saya apartemen
     Then owner can see emphty property
 
-  @apartementOwner
+  @TEST_LIMO-3662 @apartementOwner
   Scenario: Check seacrh apartement at owner page
     #diperiksa Admin
     Given user go to mamikos homepage
