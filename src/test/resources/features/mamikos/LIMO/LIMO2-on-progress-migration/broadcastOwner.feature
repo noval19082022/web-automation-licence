@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @broadcastChat
+@listing-monetization @regression @LIMO2 @broadcastChat @DONEMIGRATINGTONEWBOARD
 Feature: Broadcast Chat Owner
 
     #Pre-condition: *
