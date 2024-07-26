@@ -1,10 +1,10 @@
-@regression @LIMO2 @listing-monetization @periodeGP
+@regression @LIMO2 @listing-monetization @periodeGP @DONEMIGRATINGTONEWBOARD
 Feature: Check Period Goldplus Page
 
-  @TEST_LIMO-2326 @TEST_LIMO-3918
+  @TEST_LIMO-3520
   Scenario: [WEB][Owner][Period GP][Non Weekly]Check List Period at GPLT
     Given user go to mamikos homepage
-    Given user login as owner:
+    When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
     And owner navigates to owner dashboard
@@ -19,6 +19,7 @@ Feature: Check Period Goldplus Page
       | 9 Bulan         | Gratis MamiAds 80.000  | Rp100.000   | Rp120.000   |
       | 12 Bulan        | Gratis MamiAds 120.000 | Rp1.583.400 | Rp1.740.000 |
 
+  @TEST_LIMO-3521
   Scenario: Setting label favorite change to no
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -28,7 +29,7 @@ Feature: Check Period Goldplus Page
     Then admin successfully remove additional favorite labels 4 Month
     And admin successfully remove additional favorite labels 3 Month
 
-  @TEST_LIMO-3147
+  @TEST_LIMO-3522
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
     When user go to mamikos homepage
     And user login as owner:
@@ -45,7 +46,7 @@ Feature: Check Period Goldplus Page
     And user should not be able to see the text "Favorit"
     And owner should successfully log out
 
-  @continue
+  @continue @TEST_LIMO-3523
     #scenario change label favorite
   Scenario: Setting label favorite change to yes
     Given admin go to mamikos bangkrupux admin
@@ -55,7 +56,7 @@ Feature: Check Period Goldplus Page
     And admin navigates to Admin Goldplus Package
     Then admin successfully sets favorite label to active
 
-  @TEST_LIMO-3146
+  @TEST_LIMO-3524
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
     #Scenario: Setting label favorite more than 1
     Then admin successfully adds additional favorite labels
@@ -77,7 +78,7 @@ Feature: Check Period Goldplus Page
     And owner should successfully log out
 
     #scenario change label favorite
-  @unfavorite
+  @unfavorite @TEST_LIMO-3525
   Scenario: Remove favorite more than 1
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
