@@ -1,8 +1,8 @@
-@regression @LIMO3 @createKosBBKNotActive
+@regression @LIMO3 @createKosBBKNotActive @DONEMIGRATINGTONEWBOARD
 
 Feature: Create new kos with owner not active BBK
 
-  @TEST_LIMO-2825 @CreateKosExistTypeBBKNotActv
+  @TEST_LIMO-3670 @CreateKosExistTypeBBKNotActv
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -145,7 +145,7 @@ Feature: Create new kos with owner not active BBK
 #    When admin click on "BBK Data" link button
 #    And admin reject bulk BBK kos
 
-  @TEST_LIMO-2804 @CreateNewKosBBKNotActv @continue
+  @TEST_LIMO-3671 @CreateNewKosBBKNotActv @continue
   Scenario: [Add new kost][Kos]Create new kost when user already active mamipay && all bbk kos not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -195,7 +195,7 @@ Feature: Create new kos with owner not active BBK
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putri"
 
-  @TEST_LIMO-3661 @CreateKosFromDraftBBKInactv
+  @TEST_LIMO-3672 @CreateKosFromDraftBBKInactv
   Scenario: Create from kos with status draft && mamipay active && all bbk kos not active
     Given owner search kos on property saya page
     When owner click "Lengkapi Data Kos" on kos draft
