@@ -1,8 +1,8 @@
-@regression @bellnotification @LIMO2
+@regression @bellnotification @LIMO2 @DONEMIGRATINGTONEWBOARD
 
-Feature: [Owner Dashboard][Notification] See all notification from owner
+Feature: See all notification from owner
 	#Scenario: Bell Notification - See all notification clicked
-  @TEST_LIMO-1734 @Automated @Web @listing-monetization @notifikasi-owner
+  @TEST_LIMO-3600 @Automated @Web @listing-monetization @notifikasi-owner
   Scenario: [Owner Dashboard][Notification] See all notification from owner
     Given user go to mamikos homepage
     And user login as owner:
