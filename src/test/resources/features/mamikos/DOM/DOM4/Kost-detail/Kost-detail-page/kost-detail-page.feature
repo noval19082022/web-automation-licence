@@ -2,7 +2,7 @@
 @DOM4
 Feature: Kost detail page
 
-  @TEST_COOP-5471 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
+  @TEST_SS-3148 @DOM4 @automated @discovery-platform @kost-details @overview-section @web
   Scenario: [Dweb][Kost Detail]Check property overview section
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -12,7 +12,7 @@ Feature: Kost detail page
       | kost stag                                   | kost prod                                           |
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
 
-  @TEST_COOP-5469 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
+  @TEST_SS-3154 @DOM4 @automated @discovery-platform @kost-details @promo-owner @web
   Scenario: [Dweb][Kost Detail] Check promo owner section login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -26,7 +26,7 @@ Feature: Kost detail page
     When user want to get more information about kost promo
     Then user will get "Hubungi Kost" pop up
 
-  @TEST_COOP-5470 @DOM4 @automated @discovery-platform @kost-details @web
+  @TEST_SS-3147 @DOM4 @automated @discovery-platform @kost-details @web
   Scenario: [Dweb][Kost Detail] Check promo owner section non login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -37,7 +37,7 @@ Feature: Kost detail page
     When user want to get more information about kost promo
     Then user will see login pop up
 
-  @TEST_COOP-5472 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3176 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility room section without login condition
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -46,7 +46,7 @@ Feature: Kost detail page
     And user want to see more detail room facility section on the kost detail page
     Then user will see login pop up
 
-  @TEST_COOP-5475 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3166 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility room section with login condition
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -58,7 +58,7 @@ Feature: Kost detail page
     And user want to see more detail room facility section on the kost detail page
     Then user see all facility room section
 
-  @TEST_COOP-5474 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3169 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility bath section
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -66,7 +66,7 @@ Feature: Kost detail page
       | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility bath section on detail page
 
-  @TEST_COOP-5477 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3174 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail]Check facility notes section on kost that has 3 rows of facility notes
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -74,7 +74,7 @@ Feature: Kost detail page
       | Kos Dom Automation PLM Tipe C Kretek Bantul | Kos BX Automation PLM Tipe C Tobelo Halmahera Utara |
     Then user can see facility notes on detail kos and button is not present
 
-  @TEST_COOP-5479 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3170 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility notes section on kost that has 4 rows of facility notes
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -82,7 +82,7 @@ Feature: Kost detail page
       | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility notes on detail kos and button is present
 
-  @TEST_COOP-5466 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
+  @TEST_SS-3155 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
   Scenario: [Dweb][Kost Detail]Check owner story section on kost that has 3 rows of owner story
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -90,7 +90,7 @@ Feature: Kost detail page
       | Kos Dom Automation PLM Tipe C Kretek Bantul | Kos BX Automation PLM Tipe B Tobelo Halmahera Utara |
     Then user can see owner story on detail kos and button is not present
 
-  @TEST_COOP-5481 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
+  @TEST_SS-3159 @DOM4 @automated @discovery-platform @kost-details @owner-story @web
   Scenario: [Dweb][Kost Detail]Check owner story section on kost that has 4 rows of owner story
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -98,7 +98,7 @@ Feature: Kost detail page
       | Kos Dom Automation PLM Tipe H Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see owner story on detail kos and button is present
 
-  @TEST_COOP-5480 @DOM4 @automated @discovery-platform @facility @kost-details @web @flakyDOM
+  @TEST_SS-3172 @DOM4 @automated @discovery-platform @facility @kost-details @web @flakyDOM
   Scenario: [Dweb][Kost Detail] Check facility share section without login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -109,7 +109,7 @@ Feature: Kost detail page
     When user want to see all facility share
     Then user will see login pop up
 
-  @TEST_COOP-5467 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3156 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility share section with login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -123,7 +123,7 @@ Feature: Kost detail page
     When user want to see all facility share
     Then user see all facility share section
 #
-  @TEST_COOP-5468 @DOM4 @automated @discovery-platform @facility @kost-details @web
+  @TEST_SS-3153 @DOM4 @automated @discovery-platform @facility @kost-details @web
   Scenario: [Dweb][Kost Detail] Check facility parking section
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -131,7 +131,7 @@ Feature: Kost detail page
       | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user can see facility parking section on detail page
 
-  @TEST_COOP-5473 @DOM4 @automated @discovery-platform @kost-details @kost-rule @web
+  @TEST_SS-3168 @DOM4 @automated @discovery-platform @kost-details @kost-rule @web
   Scenario: [Dweb][Kost Detail] Validate Kos rule element on kos detail
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -139,7 +139,7 @@ Feature: Kost detail page
       | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
     Then user can see kos rule list on detail kos
 
-  @TEST_COOP-5476 @DOM4 @automated @discovery-platform @kost-details @map @web
+  @TEST_SS-3167 @DOM4 @automated @discovery-platform @kost-details @map @web
   Scenario: [Dweb][Kost Detail] Check Map section tenant without login
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -150,7 +150,7 @@ Feature: Kost detail page
     When user want to see more detail kost location
     Then user will see login pop up
 
-  @TEST_COOP-5478 @DOM4 @automated @discovery-platform @kost-details @map @web
+  @TEST_SS-3175 @DOM4 @automated @discovery-platform @kost-details @map @web
   Scenario: [Dweb][Kost Detail] Check Map section when tenant login
     Given user go to mamikos homepage
     When user login as tenant via phone number:
