@@ -1,8 +1,8 @@
 @regression @LIMO2 @listing-monetization @LIMO2-staging @multipleInvoice @DONEMIGRATINGTONEWBOARD
 Feature: Multiple Invoice
 
-  @TEST_LIMO-3515 @buyGP  @multiple-invoice @continue  @resetGP  @multiple-invoice
-  Scenario: Buy GP until 2 unpaid invoice
+  @TEST_LIMO-3515
+  Scenario: scenario reset gp
     ## scenario reset gp
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -11,6 +11,9 @@ Feature: Multiple Invoice
     And user wants to reset Goldplus for owner with phone number "081905128517"
 
     ## scenario buy until unpaid invoice
+
+  @TEST_LIMO-3515 @buyGP  @multiple-invoice @continue  @resetGP  @multiple-invoice
+  Scenario: Buy GP until 2 unpaid invoice
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
