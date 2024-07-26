@@ -2,7 +2,7 @@
 Feature: GP Weekly
 
 
-  @detailTagihanGoldplus
+  @detailTagihanGoldplus @TEST_LIMO-3488
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
@@ -10,7 +10,7 @@ Feature: GP Weekly
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "082233545519"
 
-  @TEST_LIMO-3914 @continue
+  @TEST_LIMO-3489 @continue
   Scenario: Goldplus Weekly Package
     Given user go to mamikos homepage
     When user login as owner:
@@ -20,7 +20,7 @@ Feature: GP Weekly
     Then owner see that the text "Mulai Dari" is displayed on goldplus page
     And owner should not be able to see the text "per bulan"
 
-  @TEST_LIMO-3907 @continue
+  @TEST_LIMO-3490 @continue
   Scenario: List period GP Weekly
     When owner navigate to list package goldplus 2
     Then user verify list of Goldplus Weekly is appear
@@ -28,25 +28,25 @@ Feature: GP Weekly
       | 1 Minggu | Rp25.000 |
       | 2 Minggu | Rp17.500 |
 
-  @TEST_LIMO-3907 @continue
+  @TEST_LIMO-3491 @continue
   Scenario: Select GP Weekly
     Given owner choose periode goldplus "1 Minggu"
     Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
 
 
-  @TEST_LIMO-3914 @continue
+  @TEST_LIMO-3492 @continue
   Scenario: GoldPlus Weekly Paid
     Given owner click bayar sekarang on detail tagihan page goldplus
     Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
     And payment owner success using ovo as payment method
 
-  @TEST_LIMO-3914 @continue
+  @TEST_LIMO-3493 @continue
   Scenario: GoldPlus Weekly Paid - Checking Widget
     Given owner navigates to owner dashboard
     And owner click close icon pop up
     Then validate that owner have "GoldPlus 2"
 
- @continue
+  @TEST_LIMO-3494 @continue
   Scenario: [Owner][GP Recurring] Owner want to cancel GP Recurring via pop up reminder
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
@@ -54,14 +54,14 @@ Feature: GP Weekly
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     When user sets recurring "H3" for number "081905128517"
 
-  @TEST_LIMO-4015 @continue
+  @TEST_LIMO-3495 @continue
   Scenario: GoldPlus Weekly Recurring - Cancel Recurring
     Given owner navigates to owner dashboard
     And owner click nanti saja for recurring GoldPlus
     When owner wants to access goldplus dashboard
     Then owner will be redirected to invoice recurring
 
-  @TEST_LIMO-4015
+  @TEST_LIMO-3496
   Scenario: [Owner][GP Recurring] Owner want to extend GP via pop up reminder
     When user sets recurring "H1" for number "081905128517"
     And owner navigates to owner dashboard
@@ -78,7 +78,7 @@ Feature: GP Weekly
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "081905128517"
 
-  @TEST_LIMO-3919
+  @TEST_LIMO-3497
   Scenario: GoldPlus Weekly - Checking Widget After Terminated
     Given user go to mamikos homepage
     When user login as owner:
@@ -86,7 +86,7 @@ Feature: GP Weekly
       | 081905128517 | qwerty123 |
     Then widget daftar goldplus is displayed
 
-  @TEST_LIMO-6998 @continue @detailTagihanGoldplus
+  @TEST_LIMO-3498 @continue @detailTagihanGoldplus
   Scenario: [WEB][Detail Tagihan GP] Check wording for GP Shorter period at detail tagihan GP
     Given user go to mamikos homepage
     When user login as owner:
@@ -109,24 +109,24 @@ Feature: GP Weekly
     Given owner paid transaction from detail tagihan page
     And payment owner success using ovo as payment method
 
-  @TEST_LIMO-4016 @continue @detailTagihanGoldplus
+  @TEST_LIMO-3499 @continue @detailTagihanGoldplus
   Scenario: [WEB][GP Shorter][Owner Dashboard] Check pop up intercept when buy GP shorter periode
     Given owner navigates to owner dashboard
     Then owner can see pop up goldplus with title "Selamat bergabung di GoldPlus 1!"
     And owner can see pop up golplus with desc "Anda mendapatkan kuota chat tanpa batas dan akses ke fitur-fitur khusus GoldPlus yang berguna untuk pemasaran kos Anda."
 
-  @continue @detailTagihanGoldplus
+  @TEST_LIMO-3500 @continue @detailTagihanGoldplus
   Scenario: check wording at page detail tagihan after paid
-    * owner navigates to "/goldplus/payment"
+    Given owner navigates to "/goldplus/payment"
     * owner select transaction paid from history transaction goldplus
     Then owner can see detail tagihan paid goldplus page with title "Lunas"
     And owner can see "GoldPlus 1 periode 1 Minggu" at section Paket yang Anda pilih
     And owner can see "GoldPlus 1 (1 Minggu)" at section rincian pembayaran goldplus
 
-  @TEST_LIMO-3911 @detailTagihanGoldplus
+  @TEST_LIMO-3501 @detailTagihanGoldplus
     Scenario: [WEB][Detail Tagihan GP] Check wording for GP Shorter period at detail tagihan GP expired
      #detail tagihan expired
-    * owner navigates to "/goldplus/payment"
+    Given owner navigates to "/goldplus/payment"
     * owner select transaction expired from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Dibatalkan"
     And owner can see "GoldPlus 2 periode 1 Minggu" at section Paket yang Anda pilih
