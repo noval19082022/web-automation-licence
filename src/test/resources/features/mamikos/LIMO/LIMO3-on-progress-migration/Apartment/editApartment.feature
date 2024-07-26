@@ -1,7 +1,8 @@
-@regression @LIMO-3 @listing-monetization @editApartement
+@regression @LIMO-3 @listing-monetization @editApartement @DONEMIGRATINGTONEWBOARD
 
 Feature: Owner - Edit Apartment
 
+  @TEST_LIMO-3665
   Scenario: Edit Apartment without edit data and then submit data
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,7 +14,7 @@ Feature: Owner - Edit Apartment
     And owner submit edit data apartemen
     Then verify status apartemen "Diperiksa Admin"
 
-  @verifikasiProperti
+  @TEST_LIMO-3666 @verifikasiProperti
   Scenario: Admin verified data apartemen
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -24,7 +25,7 @@ Feature: Owner - Edit Apartment
     And admin verify the property "Automation testing"
     Then verify "Success! Room has been successfully updated" displayed
 
-  @editApartWithChanges
+  @TEST_LIMO-3667 @editApartWithChanges
   Scenario: Edit Apartment with edit valid data
     Given user go to mamikos homepage
     When user login as owner:
@@ -39,7 +40,7 @@ Feature: Owner - Edit Apartment
     And owner submit edit data apartemen
     Then verify status apartemen "Diperiksa Admin"
 
-  @verifikasiProperti
+  @TEST_LIMO-3668 @verifikasiProperti
   Scenario: Admin verified data apartemen
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
