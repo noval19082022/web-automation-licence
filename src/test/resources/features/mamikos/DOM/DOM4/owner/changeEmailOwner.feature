@@ -1,7 +1,7 @@
 @DOM4 @changeEmailOwner
 Feature: Change email owner
 
-  @TEST_COOP-5625
+  @TEST_SS-3273
   Scenario: Change email owner using registered email
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,7 +12,7 @@ Feature: Change email owner
     And owner change email to "plmrega123@mailinator.com"
     Then user get error message "Email sudah digunakan oleh akun lain"
 
-  @continue @TEST_COOP-5627
+  @continue @TEST_SS-3270
   Scenario: Change email owner
     Given user go to mamikos homepage
     When user login as owner:
@@ -23,14 +23,14 @@ Feature: Change email owner
     And owner change email to "coopowneraAT@mailinator.com"
     Then owner will see toast "Mohon cek email yang baru Anda masukkan untuk verifikasi."
 
-  @TEST_COOP-5628
+  @TEST_SS-3271
   Scenario: Retry change email owner within 1 minute
     Given owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "coopowneraAT@mailinator.com"
     Then owner will see toast "Terjadi Galat. Silahkan coba lagi atau tunggu beberapa menit."
 
-  @TEST_COOP-5629
+  @TEST_SS-3262
   Scenario: Change email owner using wrong format
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: Change email owner
     And owner change email to "coop124@mailinator"
     Then user get error message "Format email tidak sesuai"
 
-  @TEST_COOP-5630
+  @TEST_SS-3263
   Scenario: Change email owner using invalid email
     Given user go to mamikos homepage
     When user login as owner:

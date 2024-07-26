@@ -1,7 +1,7 @@
 @DOM4 @areaboundaries
 Feature: Area Boundaries
 
-  @continue @TEST_COOP-5653
+  @continue @TEST_SS-3246
   Scenario: User Can Search Kost Based On Landing Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -9,12 +9,12 @@ Feature: Area Boundaries
       | area result    | Bogor       |
     Then user can see the kost list are from "Bogor"
 
-  @continue @TEST_COOP-5643
+  @continue @TEST_SS-3234
   Scenario: User Can See Kost List Is Only 1
     Given user filter price minimal to 1900000, and maximal to 1900000
     Then user can see kost landing behavior for kost list with just 1 result
 
-  @emptystateareaboundaries @TEST_COOP-5642
+  @emptystateareaboundaries @TEST_SS-3232
   Scenario: User Can See Area Boundaries With Result Is 0
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -23,7 +23,7 @@ Feature: Area Boundaries
     Given user filter price minimal to 10000000, and maximal to 10000000
     Then user can see empty state kost landing area
 
-  @areaboundaries @continue @TEST_COOP-5644
+  @areaboundaries @continue @TEST_SS-3242
   Scenario: User Can See Area Boundaries With Result Are 20
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -35,7 +35,7 @@ Feature: Area Boundaries
 #  Scenario: User Can See Lihat Lebih Banyak And Back To Top Button
 #    Then user can see Lihat Lebih Banyak And Back To Top Button
 
-  @areaboundaries @continue @TEST_COOP-5656
+  @areaboundaries @continue @TEST_SS-3272
   Scenario: User Can See Use Lihat Lebih Banyak
     Given user click on Lihat Lebih Banyak button
     Then user can see kos lists are expanded
@@ -45,7 +45,7 @@ Feature: Area Boundaries
 #  Scenario: User Can Use Back To Top Button
 #    Then user can use Back To Top Button
 
-  @areaboundaries @TEST_COOP-5641
+  @areaboundaries @TEST_SS-3237
   Scenario: User Can Use Cari Berdasarkan Peta Button And Result Are Related To The Predefine Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -59,7 +59,7 @@ Feature: Area Boundaries
       | Sukaraja     |
       | Jasinga      |
 
-  @areaboundaries @TEST_COOP-5640
+  @areaboundaries @TEST_SS-3235
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -68,8 +68,8 @@ Feature: Area Boundaries
     When user activate Dikelola Mamikos filter
     Then user can see kos tidak ditemukan state on kos landing area
 
-  @areaboundaries @continue @TEST_COOP-5639
-  Scenario: User Can Use Price Sorting From Lower To Greater
+  @areaboundaries @continue @TEST_SS-3250
+  Scenario: [Dweb][Listing Kos][Area Boundaries] User Can Use Price Sorting From Lower To Greater
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
       | search keyword | Padang   |
@@ -78,7 +78,7 @@ Feature: Area Boundaries
     Then user can see kos list rearrange from cheaper to expensive
 
   @areaboundaries @TEST_COOP-5638
-  Scenario: User Can Use Price Sorting From Greater To Lower
+  Scenario: [Dweb][Listing Kos][Area Boundaries] User Can Use Price Sorting From Greater To Lower
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
       | search keyword | Padang   |

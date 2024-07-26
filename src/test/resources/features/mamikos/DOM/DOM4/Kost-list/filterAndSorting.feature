@@ -1,7 +1,7 @@
 @DOM4
 Feature: Filter and Sorting
 
-  @TEST_COOP-5580 @Automated @Web @discovery-platform @filter
+  @TEST_SS-3202 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check description of filter
     Given user navigates to ugm kost listing
     Then user clicks the "<filter>" button and the description will appears "<desc>"
@@ -10,7 +10,8 @@ Feature: Filter and Sorting
       | Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
       | Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
       | Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
-  @TEST_COOP-5582 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3199 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check filter gender and verify the result
     Given user navigates to ugm kost listing
     When user sets gender filter "<gender>"
@@ -20,7 +21,8 @@ Feature: Filter and Sorting
       | Putra  |
       | Putri  |
       | Campur |
-  @TEST_COOP-5584 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3206 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter] Check filter facilityShare and verify the result
     Given user navigates to ugm kost listing
     When user sets facility filter "<facilityShare>"
@@ -28,7 +30,8 @@ Feature: Filter and Sorting
     Examples:
       | facilityShare |
       | WiFi          |
-  @TEST_COOP-5585 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3204 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter] Check filter kos rule and verify the result
     Given user navigates to ugm kost listing
     And user sets top kos rule filter "<kos rule>"
@@ -36,22 +39,26 @@ Feature: Filter and Sorting
     Examples:
       | kos rule     |
       | Akses 24 Jam |
-  @TEST_COOP-5581 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3197 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Kos Andalan filter
     Given user navigates to ugm kost listing
     And user sets Kos Andalan filter
     Then user validated the result kos have Kos Andalan label
-  @TEST_COOP-5588 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3245 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter functionality
     Given user navigates to mamikos kost kost jogja murah
     When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
-  @TEST_COOP-5592 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3241 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Promo Ngebut filter
     Given user navigates to ugm kost listing
     And user sets Promo Ngebut filter
     Then user validated the result kos have Promo Ngebut label
-  @TEST_COOP-5589 @Automated @Web @discovery-platform @filter
+
+  @TEST_SS-3240 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check time range filter functionality
     Given user navigates to ugm kost listing
     When user set range time filter "<timeFilter>"
@@ -60,12 +67,14 @@ Feature: Filter and Sorting
       | timeFilter     | time    |
       | Mingguan       | minggu  |
       | Per 3 Bulan    | 3 bulan |
-  @TEST_COOP-5587 @Automated @Web @discovery-platform @sorting
+
+  @TEST_SS-3244 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termahal"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga tertinggi" in kost listing
     Then user can see kos list rearrange from expensive to cheaper
-  @TEST_COOP-5583 @Automated @Web @discovery-platform @sorting
+
+  @TEST_SS-3205 @Automated @Web @discovery-platform @sorting
   Scenario: [Dweb][Listing Kos][Sorting] check sorting function "Harga Termurah"
     Given user navigates to ugm kost listing
     When user selects sorting "Harga terendah" in kost listing
