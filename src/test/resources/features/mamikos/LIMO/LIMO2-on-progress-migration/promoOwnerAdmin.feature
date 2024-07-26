@@ -1,8 +1,8 @@
-@regression @promoOwnerAdmin @LIMO2 @listing-monetization
+@regression @promoOwnerAdmin @LIMO2 @listing-monetization @DONEMIGRATINGTONEWBOARD
 
 Feature: Promo Owner Admin BangKerupux
 
-  @TEST_LIMO-3255
+  @TEST_LIMO-3656
   Scenario: As Admin, wants to create promo iklan for owner at admin page when owner already have promo ongoing
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -19,6 +19,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin clicks on ceate and verify promotion
     Then admin successfully add promo owner
 
+  @TEST_LIMO-3657
   Scenario:Check promo owner on tenant page
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
@@ -35,7 +36,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin search the title promo "Title Promo Owner" on search box
     And admin delete the promo admin
 
-  @TEST_LIMO-3210
+  @TEST_LIMO-3658
   Scenario: As Admin, wants to create promo iklan for owner at admin page with confirmation false
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -70,7 +71,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin search the title promo "Kost Beth Harmon Tipe A Kretek Bantul" on search box
     And admin delete the promo admin
 
-  @TEST_LIMO-3211
+  @TEST_LIMO-3659
   Scenario Outline: As Admin, wants to create promo iklan for owner at admin page with confirmation true
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
