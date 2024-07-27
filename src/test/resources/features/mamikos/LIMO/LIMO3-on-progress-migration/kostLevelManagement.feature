@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @levelManagement
+@regression @LIMO3 @listing-monetization @levelManagement @DONEMIGRATINGTONEWBOARD
 
 Feature: Kost Level Management
 
-  @TEST_LIMO-3651 @continue @kostLevelManagement
+  @TEST_LIMO-102 @continue @kostLevelManagement
   Scenario: [Admin][Kost Level Management] Add Kost Level
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -16,7 +16,7 @@ Feature: Kost Level Management
     When admin search "kost" level
     Then verify the "kost" level "Kost Level Testing" already displayed
 
-  @TEST_LIMO-3652 @continue @kostLevelManagement
+  @TEST_LIMO-101 @continue @kostLevelManagement
   Scenario: Edit Kost Level
     And admin search kost level "Kost Level Testing"
     When admin click "edit" on kost level
@@ -26,7 +26,7 @@ Feature: Kost Level Management
     When admin search "kost" level
     Then verify the "kost" level "Kost Level Testing Edited" already displayed
 
-  @TEST_LIMO-3652 @kostLevelManagement
+  @TEST_LIMO-100 @kostLevelManagement
   Scenario: Delete Kost Level
     When admin click "delete" on kost level
     Then verify success "delete" message is displayed
