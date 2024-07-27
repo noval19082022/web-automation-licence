@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @createKosFotoKamar @essentialTest3
+@regression @LIMO3 @listing-monetization @createKosFotoKamar @essentialTest3 @DONEMIGRATINGTONEWBOARD
 
 Feature: Form Add New Kos
 
-  @TEST_LIMO-2722 @continue
+  @TEST_LIMO-849 @continue
   Scenario: [Form add New Kost][Foto Kos]Update, delete, and moved photo kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -25,7 +25,7 @@ Feature: Form Add New Kos
     And owner clicks button move photo
     And owner select destination move photo kos
 
-  @TEST_LIMO-2712
+  @TEST_LIMO-856
   Scenario: [Form add New Kost][Foto Kamar]Update, delete, and moved room photo
     And owner upload valid photo "bangunan tampak depan"
     And owner upload valid photo "tampak dari jalan"
