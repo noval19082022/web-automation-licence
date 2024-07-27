@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @manageBookingAndBilling
+@regression @LIMO3 @listing-monetization @manageBookingAndBilling @DONEMIGRATINGTONEWBOARD
 
 Feature: Manage Booking And Billing
 
-  @notregisteredmamipay @TEST_LIMO-5669
+  @notregisteredmamipay @TEST_LIMO-867
   Scenario: Manage Booking And Bills Menu - Not Registered Mamipay
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,7 +13,7 @@ Feature: Manage Booking And Billing
     Then verify form "Lengkapi data diri Anda" for Auto BBK
     When owner go back to previous page
 
-  @donthavekos @TEST_LIMO-5670
+  @donthavekos @TEST_LIMO-866
   Scenario: Manage Booking And Bills Menu - Registered Mamipay but don't have kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: Manage Booking And Billing
 #    When owner click "Edit Data Pribadi"
 #    Then verify the title on mamipay owner onboarding displayed
 
-  @allactive @TEST_LIMO-5672
+  @allactive @TEST_LIMO-864
   Scenario: Manage Booking And Bills Menu - Registered Mamipay, have kost and have activate booking
     Given user go to mamikos homepage
     When user login as owner:
