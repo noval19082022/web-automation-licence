@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @createKosFromHome
+@regression @LIMO3 @listing-monetization @createKosFromHome @DONEMIGRATINGTONEWBOARD
 
 Feature: Create Kos From Home
 
-  @TEST_LIMO-3655 @addKosFromUpdatePrice
+  @TEST_LIMO-913 @addKosFromUpdatePrice
   Scenario: [WEB][Owner Dashboard][Update Price] Add new kost from Dashboard (status property kos diperiksa admin/reject && status apartment diperiksa admin/reject )
     Given user go to mamikos homepage
     When user login as owner:
@@ -14,7 +14,7 @@ Feature: Create Kos From Home
     When owner create new kos
     Then user should redirect to link "https://owner-jambu.kerupux.com/kos/create?step=1"
 
-  @TEST_LIMO-2768 @continue @createNewKos
+  @TEST_LIMO-967 @continue @createNewKos
   Scenario: [Form add New Kost][Data Kos]Check checkbox regulations kos and uploaded regulations kos with invalid value
     Given user go to mamikos homepage
     When user login as owner:
@@ -34,7 +34,7 @@ Feature: Create Kos From Home
     When owner upload valid rule kos
     Then verify warning upload gagal disappear
 
-  @TEST_LIMO-2765 @TEST_LIMO-2746 @createNewKos @continue
+  @TEST_LIMO-970 @createNewKos @continue
   Scenario: [Form add New Kost][Foto Kos]Upload photo with invalid photos
     When owner click Lanjutkan for input kos address
     And owner input address is "Tobelo"
@@ -50,7 +50,7 @@ Feature: Create Kos From Home
     Then verify warning upload gagal
     When owner valid upload photo kos
 
-  @TEST_LIMO-2746 @createNewKos @continue
+  @TEST_LIMO-998 @createNewKos @continue
   Scenario:[Form add New Kost][Foto Kamar]Upload photo with invalid photos
     And owner click lanjutkan button for next steps
     And owner invalid upload photo "depan kamar"
@@ -63,7 +63,7 @@ Feature: Create Kos From Home
     Then verify warning upload gagal
     When owner valid upload photo kos
 
-  @TEST_LIMO-2792 @createNewKos
+  @TEST_LIMO-954 @createNewKos
   Scenario:[Add New Kost][Dashboard]Add new kost from Dashboard (status property kos diperiksa admin/reject && status apartment diperiksa admin/reject )
     And owner click lanjutkan button for next steps
     And user check facilities under "Fasilitas Umum"
