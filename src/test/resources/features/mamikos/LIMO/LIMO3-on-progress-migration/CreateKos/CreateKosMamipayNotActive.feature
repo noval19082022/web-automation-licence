@@ -1,4 +1,4 @@
-@regression @LIMO3 @EX-LG @createKosMamipayNotActive
+@regression @LIMO3 @EX-LG @createKosMamipayNotActive @DONEMIGRATINGTONEWBOARD
 
 Feature: Create new kos with owner that hasn't activate mamipay
 
@@ -12,7 +12,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosExistTypeMamipayNotActv
+  @CreateKosExistTypeMamipayNotActv  @TEST_LIMO-3670
   Scenario: Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -58,7 +58,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosNewTypeMamipayNotActv
+  @CreateKosNewTypeMamipayNotActv @TEST_LIMO-995
   Scenario: Create new room type from "Buat baru" && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -118,7 +118,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosDraft @continue
+  @CreateKosDraft @continue @TEST_LIMO-3681
   Scenario: Create new room type from "Buat baru" until draft
     Given user go to mamikos homepage
     When user login as owner:
@@ -167,7 +167,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putri"
 
-  @CreateKosFromDraft
+  @CreateKosFromDraft @TEST_LIMO-917
   Scenario: Owner wants to continue create kost with status "Draft" and skip mamipay
     Given owner search kos on property saya page
     When owner click "Lengkapi Data Kos" on kos draft
@@ -207,7 +207,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateNewKosMamipayNotActv
+  @CreateNewKosMamipayNotActv @TEST_LIMO-975
   Scenario: Create new kost when user doesnt active mamipay
     Given user go to mamikos homepage
     When user login as owner:
@@ -291,7 +291,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosNewTypeSkipMamipay
+  @CreateKosNewTypeSkipMamipay @TEST_LIMO-916
   Scenario: Owner create new kos but skip fill mamipay data at form Lengkapi Data Diri && skip at page "Tanya Jawab"
     Given user go to mamikos homepage
     When user login as owner:
@@ -371,7 +371,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosFromDraftActivMamipay
+  @CreateKosFromDraftActivMamipay @TEST_LIMO-981
   Scenario: Create kos from kos with status draft && user doesn't active mamipay
     Given user go to mamikos homepage
     When user login as owner:
