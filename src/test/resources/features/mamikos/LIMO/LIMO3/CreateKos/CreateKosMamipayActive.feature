@@ -1,7 +1,7 @@
-@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2
+@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @DONEMIGRATINGTONEWBOARD
 Feature: Create Kos Mamipay Active
 
-  @TEST_LIMO-2913 @Automated @web-covered
+  @TEST_LIMO-776 @Automated @web-covered
   Scenario: [Form add New Kost][Harga] Create new kos with PLM and select room type "Buat Baru" from list room type && input invalid value room type
     Given user go to mamikos homepage
     When user login as owner:
@@ -25,7 +25,7 @@ Feature: Create Kos Mamipay Active
     Then verify message "Tipe kamar tidak boleh sama." the room type
     When owner select the kost type "girl"
 
-  @TEST_LIMO-2909 @TEST_LIMO-2904 @TEST_LIMO-2862 @TEST_LIMO-2854 @TEST_LIMO-2867 @Automated @web-covered
+  @TEST_LIMO-768 @Automated @web-covered
   Scenario: [Form add New Kost][Harga] Create new kos with PLM and select room type "Tipe A" from list room type && input invalid value room type
     Given user go to mamikos homepage
     When user login as owner:
@@ -76,7 +76,7 @@ Feature: Create Kos Mamipay Active
     When owner click "Selesai Ketersediaan Kamar" in data ketersediaan kamar
     And owner click lanjutkan button for next steps
 
-  @deleteKosFromAdmin @TEST_LIMO-2909
+  @deleteKosFromAdmin
   Scenario: Delete kos from admin
     When admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -86,7 +86,7 @@ Feature: Create Kos Mamipay Active
     And admin bangkrupux search kost owner in admin kos owner page
     And admin delete kos
 
-  @TEST_LIMO-2914 @Automated @web-covered
+  @TEST_LIMO-765 @Automated @web-covered
   Scenario: [Form add New Kost][Harga] Check function pop up confirmation on screen form create kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -102,7 +102,7 @@ Feature: Create Kos Mamipay Active
     And user click back button in page
     Then owner click "Keluar" input data on pop up
 
-  @TEST_LIMO-2915 @TEST_LIMO-2864 @Automated @web-covered
+  @TEST_LIMO-3678 @Automated @web-covered
   Scenario: [Form add New Kost][Harga] Create new kos from Add New and reject kos and deleted
     Given user go to mamikos homepage
     When user login as owner:
@@ -175,7 +175,7 @@ Feature: Create Kos Mamipay Active
     And owner click done in success page
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
 
-  @rejectKos @TEST_LIMO-2915
+  @rejectKos @TEST_LIMO-3679
   Scenario: Reject kos from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -188,7 +188,7 @@ Feature: Create Kos Mamipay Active
     And user click "Reject" button in kos owner reject reason
     And user click "Send" in send reject pop up
 
-  @deleteKosRejected @TEST_LIMO-2915
+  @deleteKosRejected @TEST_LIMO-3680
   Scenario: Delete kos with status di tolak from ownerpage
     Given user go to mamikos homepage
     When user login as owner:
@@ -199,7 +199,7 @@ Feature: Create Kos Mamipay Active
     Then user see kos with valid name, status "Data Kos Ditolak" and type "Kos Putri"
     And user delete first kos on the list
 
-  @TEST_LIMO-2887
+  @TEST_LIMO-782
   Scenario: [Form add New Kost][Harga]Add new kos and without input mandatory field in some entity on screen harga
     Given user go to mamikos homepage
     When user login as owner:
@@ -221,7 +221,7 @@ Feature: Create Kos Mamipay Active
       | Harga per 6 bulan min. Rp100.000 dan maks. Rp100.000.000. |
       | Harga per tahun min. Rp100.000 dan maks. Rp100.000.000.   |
 
-    @TEST_LIMO-2868 @TEST_LIMO-2856
+    @TEST_LIMO-3669
     Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
       Given user go to mamikos homepage
       When user login as owner:

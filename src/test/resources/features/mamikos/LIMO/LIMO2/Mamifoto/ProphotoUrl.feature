@@ -1,13 +1,13 @@
-@LIMO2 @Mamifoto
+@LIMO2 @Mamifoto @DONEMIGRATINGTONEWBOARD
 Feature: Check when accsess prophoto Landing Page
 
-  @TEST_LIMO-3163 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3597 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: User Non Login access MamiFoto Landing Page from Url
     Given user go to mamikos homepage
     When user navigates to old prophoto page
     Then user should redirect to login page "/login-pemilik?redirection_source=prophoto"
 
-  @TEST_LIMO-3889 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3598 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: Owner access MamiFoto Landing Page from Url
     Given user go to mamikos homepage
     And user login as owner:
@@ -17,7 +17,7 @@ Feature: Check when accsess prophoto Landing Page
     Then owner can see mamifoto page
     And owner should successfully log out
 
-  @TEST_LIMO-3890 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3599 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: Tenant access MamiFoto Landing Page from Url
     Given user go to mamikos homepage
     And user login as tenant via phone number:

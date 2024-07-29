@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @broadcastChat
+@listing-monetization @regression @LIMO2 @broadcastChat @DONEMIGRATINGTONEWBOARD
 Feature: Broadcast Chat Owner
 
     #Pre-condition: *
@@ -6,13 +6,13 @@ Feature: Broadcast Chat Owner
 	#* User login with owner already activated list
 	#* User already finish onboarding slide Broadcast Chat
 	#{{ User GP2 click Broadcast Chat Entry Point From Fitur Promosi Page}}
-  @TEST_LIMO-1211 @TEST_LIMO-1209 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3614 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario Outline: [Broadcast Chat Owner][Chat][Fitur Promosi Page][User GP 2]click Broadcast Chat entry point in Kelola Page
     Given user go to mamikos homepage
-    Given user login as owner:
+    When user login as owner:
       | phone stag  | phone prod  | password |
       | <phoneStag> | <phoneProd> | <pass>   |
-    When owner goes to broadcast chat
+    And owner goes to broadcast chat
     Then user redirected to "/broadcast-chat"
     Examples:
       | phoneStag   | phoneProd | pass      |
@@ -21,7 +21,7 @@ Feature: Broadcast Chat Owner
       | 08335004143 | 0         | qwerty123 |
 
 	#User No Kost Active click Broadcast Chat Entry Point From Fitur Promosi Page
-  @TEST_LIMO-1530 @TEST_LIMO-1198 @Broadcast-chat @automated @listing-monetization @web @continue
+  @TEST_LIMO-3615 @Broadcast-chat @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat Owner][Chat][Fitur Promosi Page] User doesnt have kost active then accsess menu broadcast chat
     Given user go to mamikos homepage
     Given user login as owner:
@@ -32,14 +32,14 @@ Feature: Broadcast Chat Owner
     When owner click on Tambah Kos button on no kos active pop-up broadcast chat owner
     Then user redirected to "kos/create"
 
-  @TEST_LIMO-1198
+  @TEST_LIMO-3616
   Scenario: [Broadcast Chat Owner][Chat]User non GP without active kost, click Broadcast Chat entry point in Kelola Page
     When owner navigates to broadcast chat page
     Then user verify pop up message "Anda belum memiliki kos aktif" is appear
     When user clicks on the close button
     Then owner should not be able to see anda belum memiliki kos aktif pop-up broadcast chat owner
 
-  @TEST_LIMO-1195 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3617 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat]User non GP without active kost;click Broadcast Chat entry point in Chat Page
     Given user go to mamikos homepage
     Given user login as owner:
@@ -58,7 +58,7 @@ Feature: Broadcast Chat Owner
     Then owner should not be able to see anda belum memiliki kos aktif pop-up broadcast chat owner
 
 	#{{User GP1 click Broadcast Chat Entry Point From Fitur Promosi Page}}
-  @TEST_LIMO-1212 @Broadcast-chat @GP1 @automated @listing-monetization @web
+  @TEST_LIMO-3618 @Broadcast-chat @GP1 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat][Fitur Promosi Page] User GP 1 click menu Broadcast Chat
     Given user go to mamikos homepage
     Given user login as owner:
@@ -68,7 +68,7 @@ Feature: Broadcast Chat Owner
     Then owner with active package should be able to see the broadcast chat page
 
 	#User reguler click Broadcast Chat Entry Point From Fitur Promosi page
-  @TEST_LIMO-1210 @TEST_LIMO-1172 @Broadcast-chat @automated @listing-monetization @web
+  @TEST_LIMO-3619 @Broadcast-chat @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Fitur Promosi] User non GP with active kos, click menu Broadcast Chat
     Given user go to mamikos homepage
     Given user login as owner:
@@ -78,7 +78,7 @@ Feature: Broadcast Chat Owner
     Then owner non gp should be able to see the broadcast chat page for non gp owner
 
     #{{User click Broadcast Chat Entry Point From Chat Page}}
-  @TEST_LIMO-1208 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3620 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat][User GP 2]click Broadcast Chat entry point in Chat Page
     Given user go to mamikos homepage
     Given user login as owner:
@@ -88,7 +88,7 @@ Feature: Broadcast Chat Owner
     And user click broadcast chat entry point
     Then user redirected to "/broadcast-chat?redirection_source=Halaman%20Chat"
 
-  @TEST_LIMO-1207 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3621 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Rincian Pesan]user want to see detail of status terkirim
     Given user go to mamikos homepage
     Given user login as owner:
@@ -99,7 +99,7 @@ Feature: Broadcast Chat Owner
     And owner click on lihat rincian button broadcast chat
     Then owner will see that the text "Pesan Terkirim" is displayed
 
-  @TEST_LIMO-1205 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  @TEST_LIMO-3622 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][Rincian Pesan]user want to click button baca selengkapnya && user can see alert kost don't have recipient
     Given user go to mamikos homepage
     Given user login as owner:
@@ -110,13 +110,14 @@ Feature: Broadcast Chat Owner
     And owner set active page to 1
     Then user redirected to "berapa-kali-saya-bisa-mengirimkan-broadcast-chat"
 
+  @TEST_LIMO-3623
   Scenario:[Broadcast Chat][Create Broadcast chat]User want to send broadcast chat for kost without have a recipient
     When owner set active page to 0
     And owner add broadcast chat for kost "Kos Fathul Khair Mamitest Jangan Diboking Dichat Difav Gondomanan Yogyakarta"
     And owner clicks Kos "Kos Fathul Khair Mamitest Jangan Diboking Dichat Difav Gondomanan Yogyakarta" and Pilih Kos button
     Then owner can see toast with content text is "Kos belum memiliki calon penerima"
 
-  @TEST_LIMO-1202  @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3624  @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Fitur Promosi][Bantuan & Tips]User click Bantuan & Tips at Chat Page
     Given user go to mamikos homepage
     Given user login as owner:
@@ -127,7 +128,7 @@ Feature: Broadcast Chat Owner
     And owner set active page to 1
     Then user redirected to "/fitur-dan-layanan-lain/broadcast-chat"
 
-  @TEST_LIMO-1203 @TEST_LIMO-1192 @TEST_LIMO-1191 @TEST_LIMO-1187 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  @TEST_LIMO-3625 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][Select Kost]User Search kost
     Given user go to mamikos homepage
     Given user login as owner:
@@ -136,22 +137,22 @@ Feature: Broadcast Chat Owner
     When owner navigates to broadcast chat page
     And owner add broadcast chat for kost "Kos Fathul Khair Mamitest Jangan Diboking Dichat Difav Gondomanan Yogyakarta"
 
-  @TEST_LIMO-1191 @continue
+  @TEST_LIMO-3626 @continue
   Scenario: [Broadcast Chat][Select Kost]User search kost name with valid name
     Then owner can sees displaying search result is "Kos Fathul Khair Mamitest Jangan Diboking Dichat Difav Gondomanan Yogyakarta"
 #
-  @TEST_LIMO-1203 @continue
+  @TEST_LIMO-3627 @continue
   Scenario: [Broadcast Chat][Select Kost]User Search kost with condition full room
     And owner add broadcast chat for kost "Kos Fathul Khair Tipe Gehu Jetis Yogyakarta"
     When user enter text "Kos Fathul Khair Tipe Gehu Jetis Yogyakarta" on Broadcast list kos
     Then user verify kost card is disable
 
-  @TEST_LIMO-1192
+  @TEST_LIMO-3628
   Scenario: [Broadcast Chat][Select Kost]User search kost name with invalid name
     When owner add broadcast chat for kost "kost asal ga nemu"
     Then owner can see empty kos list condition
 
-  @TEST_LIMO-1187 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3629 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Select Kost] User clear search bar after result tidak ditemukan
     Given user go to mamikos homepage
     Given user login as owner:
@@ -162,7 +163,7 @@ Feature: Broadcast Chat Owner
     And user clicks on the close icon next to the search bar to reset it
     Then the list of Kos should be displayed
 
-  @TEST_LIMO-1201 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
     Given user go to mamikos homepage
     Given user login as owner:
@@ -178,7 +179,7 @@ Feature: Broadcast Chat Owner
     And owner clicks on Keluar button
     Then user redirected to "/broadcast-chat/kos"
 
-  @TEST_LIMO-1189 @TEST_LIMO-1185 @TEST_LIMO-1186 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  @TEST_LIMO-3631 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][Select Message] User change message template on the list
     Given user go to mamikos homepage
     Given user login as owner:
@@ -189,7 +190,7 @@ Feature: Broadcast Chat Owner
     And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
 
-  @TEST_LIMO-1185 @continue
+  @TEST_LIMO-3632 @continue
   Scenario: [Broadcast Chat][Select Message]User select 1st message template on the list
     Then the selected message should be visible on the details page of the broadcast:
 	 """
@@ -198,7 +199,7 @@ Feature: Broadcast Chat Owner
         , ada kos bagus nih untuk kamu. Yuk lihat dan booking! Banyak keunggulannya seperti:
 	 """
 
-  @TEST_LIMO-1186
+  @TEST_LIMO-3633
   Scenario: [Broadcast Chat][Select Message]User select 2nd message template on the list
     When owner edit template message on Broadcast Chat to row number 2
     Then the selected message should be visible on the details page of the broadcast:
@@ -209,7 +210,7 @@ Feature: Broadcast Chat Owner
 	"""
     Then user verify input broadcast message is not visible
 
-  @TEST_LIMO-1157 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3634 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario Outline: [Broadcast Chat][Create Broadcast chat]User want to input phone number/email/link on template message is editable
     Given user go to mamikos homepage
     Given user login as owner:
@@ -228,7 +229,7 @@ Feature: Broadcast Chat Owner
       | save no wa 08335005252                       |
       | foto kamar dan layanan ada di bit.ly/33xyYVH |
 
-  @TEST_LIMO-1164 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3635 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Create Broadcast chat]User want to edit template message more than 320 char
     Given user go to mamikos homepage
     Given user login as owner:
@@ -249,7 +250,7 @@ Feature: Broadcast Chat Owner
     """
     Then counter text area message show "320 / 320"
 
-  @TEST_LIMO-1145 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3636 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Create Broadcast chat]user want to back from preview message menu
     Given user go to mamikos homepage
     And user login as owner:
@@ -266,7 +267,7 @@ Feature: Broadcast Chat Owner
     #Pre-condition: *
 	#
 	#* User login with owner total chat = 0
-  @TEST_LIMO-1197 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
     Given user go to mamikos homepage
     Given user login as owner:
@@ -277,7 +278,7 @@ Feature: Broadcast Chat Owner
     When user click icon close at tooltip
     Then broadcast chat tooltip should not be visible
 
-  @TEST_LIMO-1182 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet;click Broadcast Chat entry point in Chat Page
     Given user go to mamikos homepage
     Given user login as owner:

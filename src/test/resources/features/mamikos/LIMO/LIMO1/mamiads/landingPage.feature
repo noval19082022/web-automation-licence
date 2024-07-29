@@ -1,6 +1,5 @@
-@regression @LIMO1
+@regression @LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: MamiAds Landing Page
-
 
   @TEST_LIMO-1377
   Scenario: [Web][MamiAds][Landing Page] Check landing page mamiAds

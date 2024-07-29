@@ -1,8 +1,7 @@
-@regression @pointExpiry @LIMO1 @LIMO1-staging
-
+@regression @pointExpiry @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD
 Feature: Manage Point Expiry
 
-  @TEST_LIMO-86
+  @TEST_LIMO-3311
   Scenario: [Point Management][Expiry]Update Point Expiry
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:

@@ -1,7 +1,7 @@
-@LIMO2
+@LIMO2 @DONEMIGRATINGTONEWBOARD
 Feature: Whitelist feature for Goldplus Owner
 
-  @TEST_LIMO-3906
+  @TEST_LIMO-3552
   Scenario: [WEB][Admin]As a admin, I want to be able to set the owner who will get GP weekly package options in Bangkerupux with invalid value
     Given admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:

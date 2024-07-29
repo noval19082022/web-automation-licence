@@ -1,7 +1,7 @@
-@LIMO1 @regression @mamiads
+@LIMO1 @DONEMIGRATINGTONEWBOARD
 Feature: Cek Properti Sekitar
 
-  @TEST_LIMO-375
+  @LIMO-2717
   Scenario: [Fitur Promosi][Cek Properti Sekitar] Make sure owner will redirect to Cek Properti Sekitar page
     Given user go to mamikos homepage
     And user login as owner:

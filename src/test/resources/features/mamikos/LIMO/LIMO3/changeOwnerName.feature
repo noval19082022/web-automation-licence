@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @changeOwnerName
+@regression @LIMO3 @listing-monetization @changeOwnerName @DONEMIGRATINGTONEWBOARD
 Feature: Owner Setting - Change Owner Name
 
-  @TEST_LIMO-3217 @continue
-  Scenario: Change Owner Name
+  @TEST_LIMO-873 @continue
+  Scenario: [Setelan Akun][Change Name] Change Owner Name
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password   |
@@ -15,7 +15,7 @@ Feature: Owner Setting - Change Owner Name
     And owner fills nama lengkap owner "tiara"
     Then verify nama lengkap owner
 
-  @TEST_LIMO-2842
+  @TEST_LIMO-804
   Scenario: [Setelan Akun] Text box "Nama" is inputed with invalid value
     When owner click on Ubah "Nama Lengkap"
     And owner fills nama lengkap owner "7777 88"

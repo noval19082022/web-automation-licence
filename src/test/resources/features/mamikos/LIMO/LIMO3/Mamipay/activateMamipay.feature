@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @activateMamipay
+@regression @LIMO3 @listing-monetization @activateMamipay @DONEMIGRATINGTONEWBOARD
 
 Feature: Activate Mamipay
 
-  @invalidBankAccountNumber @continue @TEST_LIMO-5673
+  @invalidBankAccountNumber @continue @TEST_LIMO-3682
   Scenario: Invalid input bank account number
     Given user go to mamikos homepage
     When user login as owner:
@@ -20,7 +20,7 @@ Feature: Activate Mamipay
     Then user should see the message "Minimal 5 Karakter" displayed under text field
     When owner input on "nomor rekening Anda" "09182928329"
 
-  @invalidBankName @continue @TEST_LIMO-5674
+  @invalidBankName @continue @TEST_LIMO-3683
   Scenario: Invalid bank name
     And owner input on "nama bank" ""
     Then user should see the message "Nama bank harus dipilih" displayed under text field
@@ -29,7 +29,7 @@ Feature: Activate Mamipay
     When owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
 
-  @invalidBankAccountName @continue
+  @invalidBankAccountName @continue @TEST_LIMO-3684
   Scenario: Invalid bank account name
     And owner input on "nama pemilik rekening" ""
     Then user should see the message "Nama pemilik rekening tidak boleh kosong." displayed under text field
@@ -37,7 +37,7 @@ Feature: Activate Mamipay
     Then user should see the message "Minimal 3 Karakter" displayed under text field
     When owner input on "nama pemilik rekening" "tiara"
 
-  @invalidName @continue
+  @invalidName @continue @TEST_LIMO-3685
   Scenario: Invalid name
     And owner input on "nama lengkap" ""
     Then user should see the message "Nama lengkap tidak boleh kosong." displayed under text field
@@ -50,7 +50,7 @@ Feature: Activate Mamipay
     """
    And verify kirim data button is disable
 
-  @submitInputFormDataDiri @TEST_LIMO-5674
+  @submitInputFormDataDiri @TEST_LIMO-3686
   Scenario: Valid input form data diri
     When owner input on "nama lengkap" "tiara"
     Then verify kirim data button is disable

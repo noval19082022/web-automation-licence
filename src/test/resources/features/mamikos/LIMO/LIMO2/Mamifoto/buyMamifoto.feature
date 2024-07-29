@@ -1,7 +1,7 @@
-@LIMO2 @Mamifoto @essentialTest2
+@LIMO2 @Mamifoto @essentialTest2 @DONEMIGRATINGTONEWBOARD
 Feature: Owner Purchase Mamifoto
 
-  @TEST_LIMO-3164 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3560 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner GP purchase MamiFoto package
     Given user go to mamikos homepage
     And user login as owner:
@@ -16,7 +16,7 @@ Feature: Owner Purchase Mamifoto
     When owner paid MamiFoto
     Then payment owner success using ovo as payment method
 
-  @TEST_LIMO-3021 @continue
+  @TEST_LIMO-3561 @continue
   Scenario: [WEB][MamiFoto] Owner Non GP purchase MamiFoto package
     Given user go to mamikos homepage
     And user login as owner:
@@ -31,7 +31,7 @@ Feature: Owner Purchase Mamifoto
     When owner paid MamiFoto Non GP
     Then payment owner success using ovo as payment method
 
-  @TEST_LIMO-3028
+  @TEST_LIMO-3562
   Scenario: [Web][Mamifoto] Owner purchase multiple invoice MamiFoto package
     #paid invoice unpaid
     When owner navigates to owner dashboard

@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization @roomLevelManagement @levelManagement
+@regression @LIMO3 @listing-monetization @roomLevelManagement @levelManagement @DONEMIGRATINGTONEWBOARD
 
 Feature: Room Level Management
 
-  @TEST_LIMO-3260 @continue
+  @TEST_LIMO-99 @continue
   Scenario: [Admin] Add Room Level
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -15,7 +15,7 @@ Feature: Room Level Management
     When admin search "room" level
     Then verify the "room" level "Room Level Testing" already displayed
 
-  @TEST_LIMO-3261 @continue
+  @TEST_LIMO-98 @continue
   Scenario: [Admin] Edit Room Level
     When admin click "edit" on kost level
     And admin fill out form "edit room" level "Room Level Testing Edited"
@@ -23,7 +23,7 @@ Feature: Room Level Management
     When admin search "room" level
     Then verify the "room" level "Room Level Testing Edited" already displayed
 
-  @TEST_LIMO-3262
+  @TEST_LIMO-97
   Scenario: [Admin] Delete Room Level
     When admin click "delete" on kost level
     Then verify success "delete room" message is displayed

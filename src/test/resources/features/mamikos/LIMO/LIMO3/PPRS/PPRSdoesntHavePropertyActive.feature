@@ -1,8 +1,8 @@
-@regression @LIMO3 @listing-monetization
+@regression @LIMO3 @listing-monetization @DONEMIGRATINGTONEWBOARD
 Feature: PPRS - Check statistic section when doesnt have property active
 
 
-  @TEST_LIMO-4700
+  @TEST_LIMO-281
   Scenario Outline: [WEB][Owner Dashboard] Statistic Section on Owner Dashboard when Owner doesn’t have an active property
     Given user go to mamikos homepage
     When user login as owner:
@@ -21,7 +21,7 @@ Feature: PPRS - Check statistic section when doesnt have property active
       | 0876623687   | 12345678  |
       | 081333333335 | 12345678  |
 
-  @TEST_LIMO-4728
+  @TEST_LIMO-280
   Scenario Outline: [WEB][Statistic Page] Statistic Section when Owner doesn’t have an active property
     Given user go to mamikos homepage
     When user login as owner:
@@ -41,7 +41,7 @@ Feature: PPRS - Check statistic section when doesnt have property active
       | 0876623687   | 12345678  |
       | 081333333335 | 12345678  |
 
-  @TEST_LIMO-4557 @apartementonlyPPRS @continue
+  @TEST_LIMO-296 @apartementonlyPPRS @continue
   Scenario: [WEB][Owner Dashboard]Statistic Section on Owner Dashboard when Owner only have apartment and no kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -51,7 +51,7 @@ Feature: PPRS - Check statistic section when doesnt have property active
     And owner can see title for apartement  "Statistik Apartemen Belum Ada" at section statistic
     And owner can see desc for apartment "Mohon maaf, saat ini data performa untuk apartemen belum dapat ditampilkan. Tunggu update dari kami selanjutnya, ya." at section statistic
 
-  @TEST_LIMO-4731 @apartementonlyPPRS
+  @TEST_LIMO-279 @apartementonlyPPRS
   Scenario: [WEB][Laporan Statistic]Statistic Section when Owner only have apartment and no kost
     When owner accsess statistic page
     And owner can see Laporan Statistik page when doesnt have property active

@@ -1,7 +1,7 @@
-@listing-monetization @regression @LIMO2
+@listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD
 Feature: Create Contract Goldplus at Mamipay
 
-  @createContractGP @continue @TEST_LIMO-2453
+  @createContractGP @continue @TEST_LIMO-3553
   Scenario: [Admin][GP Contract]User want to Create GoldPlus Contract  with Invalid Value
     #Admin Want To Create GP Contract with Empty value
     Given admin go to mamikos mamipay admin
@@ -15,27 +15,27 @@ Feature: Create Contract Goldplus at Mamipay
     Then user see warning notification "The phone number field is required."
     And user see warning notification "The package field is required."
 
-  @createContractGP @continue
+  @createContractGP @continue @TEST_LIMO-3554
     Scenario: Owner Want To Create GP Contract with Invalid value
     When user input phone number with "asdfgh"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "The selected phone number is invalid."
     And user see warning notification "The package field is required."
 
-  @createContractGP @continue
+  @createContractGP @continue @TEST_LIMO-3555
     Scenario: Owner Want To Create GP Contract without selecting goldplus package
     When user input phone number with "082233545511"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "The package field is required."
 
-  @createContractGP @continue
+  @createContractGP @continue @TEST_LIMO-3556
     Scenario: Owner Want To Create GP Contract with owner already have goldplus contract
     When user input phone number with "082233545512"
     And user selected goldplus package with "GoldPlus 1 periode 1 Bulan"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "User 082233545512 already has active goldplus contract."
 
-   @TEST_LIMO-2452  @createContractGP
+   @TEST_LIMO-2452  @createContractGP @TEST_LIMO-3557
     Scenario: [Admin][GP Contract]User want to Create GoldPlus Contract with Valid Value
      When user input phone number with "082233545517"
      And user selected goldplus package with "GoldPlus 1 periode 1 Bulan"

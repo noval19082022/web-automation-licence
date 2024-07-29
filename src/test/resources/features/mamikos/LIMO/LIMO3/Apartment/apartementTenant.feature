@@ -1,7 +1,7 @@
-@LIMO4
+@LIMO4 @DONEMIGRATINGTONEWBOARD
 Feature: Apartement Tenant
 
-  @TEST_LIMO-228 @continue
+  @TEST_LIMO-3663 @continue
   Scenario: [Favorit][Mungkin cocok untuk Anda]: Lihat detail properti of apartemen and there is show "rekomendasi"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -16,7 +16,7 @@ Feature: Apartement Tenant
     Then tenant will see that the text "Silalay 123" is displayed
     And tenant should not be able to see the text "Mungkin cocok dengan kamu"
 
-  @TEST_LIMO-230
+  @TEST_LIMO-3664
   Scenario: [Favorit][Mungkin cocok untuk Anda]: Show "Rekomendasi" based on terakhir dilihat tenant while tenant NEVER favorit properti
     Given user go to mamikos homepage
     And tenant search kost then go to apartment details:

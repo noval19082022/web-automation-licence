@@ -1,7 +1,7 @@
-@regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization
+@regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization @DONEMIGRATINGTONEWBOARD
 Feature: Gold Plus
 
-  @TEST_LIMO-1661 @chooseGP @continue
+  @TEST_LIMO-3396 @chooseGP @continue
   Scenario: [Goldplus][Owner Dashboard][Widget GP] Check owner can select package GP
     Given user go to mamikos homepage
     When user login as owner:
@@ -11,31 +11,31 @@ Feature: Gold Plus
     And user choose Goldplus package 1
     Then user will see that the goldplus package choosed is displayed
 
-  @TEST_LIMO-146 @changeGP @continue
+  @TEST_LIMO-3397 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
     And user choose Goldplus package 2
     Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
-  @TEST_LIMO-148 @TEST_LIMO-149 @uncheckT&C @continue
+  @TEST_LIMO-3398 @TEST_LIMO-149 @uncheckT&C @continue
   Scenario: Owner Cek warning toast and button bayar sekarang disable if uncheck the checkbox
     Given user click checkbox Syarat dan Ketentuan Umum GoldPlus
     Then owner can see toast with content text is "Mohon untuk menyetujui Syarat dan Ketentuan yang berlaku"
     And The system should display "Bayar Sekarang" button as disabled
 
-  @checkAndUncheckT&C @continue
+  @TEST_LIMO-3399 @checkAndUncheckT&C @continue
   Scenario: Owner Cek syarat dan ketentuan before uncheck and check warning toast and button bayar sekarang disable if uncheck the checkbox
     Given user click checkbox Syarat dan Ketentuan Umum GoldPlus
     Then The system should display "Bayar Sekarang" button as enabled
 
-  @TEST_LIMO-150 @checkBenefit @continue
+  @TEST_LIMO-3400 @checkBenefit @continue
   Scenario: Make sure detail Check Other Benefits on GP1/2
 #    Given user click "Ubah"
     When user click on ubah package gold plus button
     When user click "Lihat Detail Manfaat"
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
-  @TEST_LIMO-2624
+  @TEST_LIMO-3401
   Scenario: [WEB][Owner Dashboard][Widget GP] Check condition widget GP when waiting for payment
     When owner close pop up detail manfaat
     And user wants to subscribe Goldplus 1
@@ -52,7 +52,7 @@ Feature: Gold Plus
         | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
       Then user wants to reset Goldplus for owner with phone number "082233545506"
 
-  @TEST_LIMO-1662 @GP @automated @listing-monetization @web @web-covered
+  @TEST_LIMO-3402 @GP @automated @listing-monetization @web @web-covered
   Scenario: [Owner][GP Widget]Check GP Widget "Sedang Diproses"
     Given user go to mamikos homepage
     When user login as owner:
@@ -60,7 +60,7 @@ Feature: Gold Plus
       | 086465400654 | 0          | qwerty123 |
     Then validate that owner have "Sedang Diproses"
 
-  @TEST_LIMO-5078
+  @TEST_LIMO-3403
   Scenario: [WEB][Pilih Paket GP] Owner wants to check "Lihat Detail Manfaat" of GoldPlus 2 and GoldPlus 1
     #detail manfaat GP 1
     Given user go to mamikos homepage
@@ -90,7 +90,7 @@ Feature: Gold Plus
     Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
     Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
 
-  @TEST_LIMO-5079
+  @TEST_LIMO-3404
   Scenario: [WEB][Pilih Paket GP] As a property owner, I would like to know the difference between GP 1 and GP 2 benefits
     Given user go to mamikos homepage
     And user login as owner:

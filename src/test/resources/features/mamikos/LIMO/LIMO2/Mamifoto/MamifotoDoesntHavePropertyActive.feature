@@ -1,8 +1,8 @@
-@LIMO2 @Mamifoto @MamifotoDoesntHavePropertyActive
+@LIMO2 @Mamifoto @MamifotoDoesntHavePropertyActive @DONEMIGRATINGTONEWBOARD
 
 Feature: Entry Point Mamifoto when doesnt have property active
 
-  @continue @TEST_LIMO-3201 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @continue @TEST_LIMO-3570 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner dont have property active visits Landing Page of MamiFoto
     Given user go to mamikos homepage
     And user login as owner:
@@ -11,19 +11,19 @@ Feature: Entry Point Mamifoto when doesnt have property active
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
 
-  @continue
+  @continue @TEST_LIMO-3571
   Scenario: check section Tingkatkan Konerja kost is appear
     When owner back to owner dashboard
     Then owner click section Tingkatkan Kinerja Kost
     And owner can see mamifoto page
 
-  @continue
+  @continue @TEST_LIMO-3572
   Scenario: check section Info Untuk Anda for Mamifoto is appear
     When owner back to owner dashboard
     Then owner click info untuk anda for mamifoto non property
     And owner can see mamifoto page
 
-  @TEST_LIMO-3161 @declarative @listing-monetization @reviewed @Automated @web @playWright
+  @TEST_LIMO-3579 @declarative @listing-monetization @reviewed @Automated @web @playWright
   Scenario: [WEB][MamiFoto] Owner dont have property active purchase MamiFoto package
     When owner click Lihat Paket button
     And owner select package mamifoto

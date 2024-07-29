@@ -1,5 +1,4 @@
-@regression @userPoint @LIMO1 @LIMO1-staging
-
+@regression @userPoint @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD
 Feature: Manage User Point
 
   @TEST_LIMO-63 @continue @userPoint
@@ -67,9 +66,8 @@ Feature: Manage User Point
     * user clicks on Search button
     Then system display list user point as "Whitelist"
 
-
   @TEST_LIMO-64 @continue @topUp
-  Scenario: [Point Management][User Point]Adjust Point Topup
+  Scenario: [Point Management][User Point] Adjust Point Topup
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
       | email stag                   | email prod                   |password  |
@@ -84,7 +82,7 @@ Feature: Manage User Point
     * user clicks on Submit button on Adjust Point form
     Then user verify allert success "Success!" and "successfully updated."
 
-  @TEST_LIMO-66 @topUp
+  @TEST_LIMO-66 @topUp @continue
   Scenario: [Point Management][User Point]Adjust Point Topdown
     * admin access user point menu
     When user filter user point by keyword "phone number" is "0895359416718"
@@ -97,7 +95,7 @@ Feature: Manage User Point
     Then user verify allert success "Success!" and "successfully updated."
     And mamikos bangkrupux admin should be successfully logged out
 
-  @TEST_LIMO-67 @continue @bulkUserPoint
+  @TEST_LIMO-67 @continue @bulkUserPoint @continue
   Scenario: [Point Management][User Point] Manage User Point Display
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
@@ -120,7 +118,8 @@ Feature: Manage User Point
     * user see History icon
     * user see Pagination
 
-     #Scenario: Manage Point History display TENG-1445
+  @pointManagement @mamiads @continue @TEST_LIMO-3363
+  Scenario: Manage Point History display
     When user clicks Total Point header
     * user clicks Total Point header
     * user click history icon on manage user point page
@@ -135,11 +134,13 @@ Feature: Manage User Point
       | Point                       |
       | Total                       |
 
-     #Scenario: Pagination manage user point filter TENG-1449
+  @pointManagement @mamiads @continue @TEST_LIMO-3364
+  Scenario: Pagination manage user point filter
     When user choose to filter all activity with value "Admin Adjustment"
     Then history with selected filter value "Admin Adjustment" is displayed
 
-    #Scenario: Pagination manage user point history TENG-1446
+  @pointManagement @mamiads @continue @TEST_LIMO-3361
+  Scenario: Pagination manage user point history
     When user click next page button on manage user point
     Then next manage user point page will be opened
     When user click previous page button on manage user point
@@ -147,7 +148,8 @@ Feature: Manage User Point
     When user click page index "2" at user point
     Then manage user point page "2" will be opened
 
-   #Scenario: Pagination manage user point TENG-1442
+  @pointManagement @mamiads @continue @TEST_LIMO-3362
+  Scenario: Pagination manage user point
     * admin access user point menu
     When user click next page button on manage user point
     Then next manage user point page will be opened

@@ -1,7 +1,7 @@
-@LIMO2 @Mamifoto @mamifotoAdmin
+@LIMO2 @Mamifoto @mamifotoAdmin @DONEMIGRATINGTONEWBOARD
 Feature: Create invoice mamifoto from admin
 
-  @TEST_LIMO-3393 @continue
+  @TEST_LIMO-3568 @continue
   Scenario: [WEB][Admin] As Admin wants to create invoice mamifoto at menu premium add on
     Given admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -12,7 +12,7 @@ Feature: Create invoice mamifoto from admin
     Then invoice mamifoto succsess created with status "unpaid" and for owner "082233545509"
     And mamikos bangkrupux admin should be successfully logged out
 
-  @TEST_LIMO-3394
+  @TEST_LIMO-3569
     Scenario: [WEB] Owner wants to paid Mamifoto Invoice from admin
       Given user go to mamikos homepage
       And user login as owner:

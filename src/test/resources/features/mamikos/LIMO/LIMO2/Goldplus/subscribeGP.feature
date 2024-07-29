@@ -1,7 +1,7 @@
-@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization @essentialTest3
+@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization @essentialTest3 @DONEMIGRATINGTONEWBOARD
 Feature: Subscribe GP from all entry point
 
-  @TEST_LIMO-2501
+  @TEST_LIMO-3543
   Scenario Outline: Check subscribe GP from entry point info untuk anda
     Given user go to mamikos homepage
     When user login as owner:
@@ -17,7 +17,7 @@ Feature: Subscribe GP from all entry point
       | 08167382940592 | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
       | 088112233453   | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
 
-  @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromChatrooms
+  @TEST_LIMO-3544 @otherEntryPointExceptInfoUntukAnda @subscribeFromChatrooms
   Scenario: Check subscribe GP from entry point chatrooms
     Given user go to mamikos homepage
     And user login as owner:
@@ -26,7 +26,7 @@ Feature: Subscribe GP from all entry point
     When owner click "Daftar GoldPlus" button on chatrooms "Raney Upik Bertiga"
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
 
-  @TEST_LIMO-2502 @otherEntryPointExceptInfoUntukAnda @continue
+  @TEST_LIMO-3549 @otherEntryPointExceptInfoUntukAnda @continue
   Scenario: Check subscribe GP from entry point chatlist
     Given user go to mamikos homepage
     When user login as owner:
@@ -35,14 +35,14 @@ Feature: Subscribe GP from all entry point
     And owner click "Daftar GoldPlus" button on chatlist
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatlist"
 
-  @TEST_LIMO-2504 @otherEntryPointExceptInfoUntukAnda @subscribeFromAturPromo @continue
+  @TEST_LIMO-3550 @otherEntryPointExceptInfoUntukAnda @subscribeFromAturPromo @continue
   Scenario: Check subscribe GP from entry point Atur Promo
     Given owner navigates to property saya kos
     When owner search kost "Kos Premium Automation 517" on property saya page
     And owner cek promo owner when not GP
     Then user verify "list of Goldplus package" is appear
 
-  @TEST_LIMO-2354 @otherEntryPointExceptInfoUntukAnda @subscribeFromBC @continue
+  @TEST_LIMO-3551 @otherEntryPointExceptInfoUntukAnda @subscribeFromBC @continue
   Scenario: Check subscibe GP from entry point BC
     Given owner navigates to "/broadcast-chat"
     Then verify button on broadcast page
