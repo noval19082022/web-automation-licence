@@ -1,7 +1,7 @@
 @regression @LIMO4
 Feature: Owner - Rejected Kos
 
-  @TEST_LIMO-3276
+  @WEB @AUTOMATED
   Scenario: Owner - Rejected Kos
     Given user go to mamikos homepage
     When user login as owner:

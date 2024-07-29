@@ -1,7 +1,7 @@
-@regression @LIMO4 @EX-LG @updateKamar @BNB-2245
+@regression @LIMO4 @updateKamar
 Feature: Update Kamar
 
-  @TEST_LIMO-3017 @continue
+  @TEST_LIMO-3463 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update rooms become unavailable
     Given user go to mamikos homepage
     When user login as owner:
@@ -30,7 +30,7 @@ Feature: Update Kamar
     When user filter the room with "Kamar Terisi" in update room page
     Then user see total room is "Total Kamar 0" in update room page
 
-  @TEST_LIMO-3018 @continue
+  @TEST_LIMO-876 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by add new rooms and delete it
     When owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
@@ -44,7 +44,7 @@ Feature: Update Kamar
     And user delete room name or number in room allotment
     Then user see total room is "Total Kamar 24" in update room page
 
-  @TEST_LIMO-3215 @continue
+  @TEST_LIMO-874 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update text box "Lantai (Opsional)"
     When owner navigates to property saya kos
     And owner search kost "Kos Testing 123 Tipe B Danurejan Yogyakarta" on property saya page
@@ -60,7 +60,7 @@ Feature: Update Kamar
     And owner click "Simpan"
     Then user can sees toast on update room as "Kosong" "Total Kamar 1"
 
-  @TEST_LIMO-3019 @continue
+  @TEST_LIMO-3462 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kost list when kost status == Active by update text box "Nomor/ Nama Kamar?"
     When user enter text "1" on search bar in room allotment and hit enter
     And user click edit button in first row of the table
@@ -72,7 +72,7 @@ Feature: Update Kamar
     And owner click "Simpan"
     Then user can sees toast on update room as "Kosong" "Total Kamar 1"
 
-  @TEST_LIMO-2859 @continue
+  @TEST_LIMO-900 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Filter on room allotments is always shown when total rooms == 0 or != 0
     When user enter text "" on search bar in room allotment and hit enter
     Then user see total room is "Total Kamar 7" in update room page
@@ -87,7 +87,7 @@ Feature: Update Kamar
     And user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 0" in update room page
 
-  @TEST_LIMO-2911 @continue
+  @TEST_LIMO-879 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Check box "Sudah Berpenghuni" is set to define room status when kost not in Goldplus Level
     When owner navigates to property saya kos
     And owner search kost "Property Automation x94Om" on property saya page
@@ -107,7 +107,7 @@ Feature: Update Kamar
     And owner click "Simpan"
     Then user see total room is "Total Kamar 0" in update room page
 
-  @TEST_LIMO-2912 @continue
+  @TEST_LIMO-878 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Show label goldplus if rooms set as goldplus from room list
     When owner navigates to property saya kos
     And owner search kost "Kose Mamiset Automation" on property saya page
@@ -116,7 +116,7 @@ Feature: Update Kamar
     And user enter text "GoldPlus" on search bar in room allotment and hit enter
     Then user see label "Goldplus" in room name
 
-  @TEST_LIMO-2897 @continue
+  @TEST_LIMO-884 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Search function on page room allotments
     When user enter text "33" on search bar in room allotment and hit enter
     Then user see label "33" in room name
@@ -125,7 +125,7 @@ Feature: Update Kamar
     When user enter text "sela" on search bar in room allotment and hit enter
     Then user see room list is empty in room allotment page
 
-  @TEST_LIMO-2908 @continue
+  @TEST_LIMO-880 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Text box "Nomor/Nama Kamar?" is edited with invalid value
     When owner navigates to property saya kos
     And owner search kost "Kos oke bebek AA Batre Depok Sleman" on property saya page
@@ -140,7 +140,7 @@ Feature: Update Kamar
     When user fill room name in room allotment page with " "
     Then user see error message "Nomor/ nama masih kosong." under room name field in update room page
 
-  @TEST_LIMO-2896
+  @TEST_LIMO-885 @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Text box Floor (Optional) is edited with invalid value
     When owner navigates to property saya kos
     And owner search kost "Kost Cooling Efect" on property saya page

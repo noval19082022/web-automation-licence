@@ -1,7 +1,7 @@
-@regression @LIMO4 @EX-LG
+@regression @LIMO4
 Feature: Update Price from Dashboard
 
-  @TEST_LIMO-2813
+  @TEST_LIMO-907 @WEB @AUTOMATED
   Scenario Outline: [Update Harga][Dashboard]Access page "Update Harga" from entry point dashboard when kost status == Active with update price
     Given user go to mamikos homepage
     When user login as owner:

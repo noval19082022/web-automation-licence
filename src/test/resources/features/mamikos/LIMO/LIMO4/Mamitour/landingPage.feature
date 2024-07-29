@@ -1,7 +1,7 @@
-@regression @LIMO4 @mamitour @TEST_LIMO-3650
+@regression @LIMO4 @mamitour
 Feature: Visit Landing Page Mamitour
 
-  @continue
+  @TEST_LIMO-3693 @continue @WEB @AUTOMATED @MAMITOUR
   Scenario: [Web][Mamitour] Visit landing page mamitour from owner dashboard
     Given user go to mamikos homepage
     When user login as owner:
@@ -17,6 +17,7 @@ Feature: Visit Landing Page Mamitour
     And user will see title "Tanya Jawab" on landing page mamitour
     And user will see title "Ingin tahu lebih jauh?" on landing page mamitour
 
+  @TEST_LIMO-3694 @WEB @AUTOMATED @MAMITOUR
   Scenario: [Web][Mamitour] Visit landing page mamitour from fitur promosi
     When owner back to owner dashboard
     And user access mamitour from fitur promosi

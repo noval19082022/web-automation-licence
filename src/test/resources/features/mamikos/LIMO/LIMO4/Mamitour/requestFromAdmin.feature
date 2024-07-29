@@ -1,7 +1,7 @@
 @regression @LIMO4
 Feature: Admin Mamitour Requested
 
-  @TEST_LIMO-3673 @mamitourAdmin @continue
+  @TEST_LIMO-3700 @WEB @AUTOMATED @MAMITOUR @mamitourAdmin @continue
   Scenario: Request Mamitour
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -10,12 +10,12 @@ Feature: Admin Mamitour Requested
     And admin create request package "3 Bulan" mamitour for "087133998156"
     Then admin verify "UNPAID" transaction for "087133998156"
 
-  @mamitourAdmin @continue
+  @TEST_LIMO-3702 @mamitourAdmin @continue @WEB @AUTOMATED
   Scenario: Verifed Mamitour
     When admin paid all unpaid transaction for "087133998156"
     Then admin verify "PAID" transaction for "087133998156"
 
-  @mamitourAdmin
+  @TEST_LIMO-3701 @mamitourAdmin @WEB @AUTOMATED
   Scenario: List Tabel Mamitour
     Then admin verify table header row is displayed with name:
       | Id                 |

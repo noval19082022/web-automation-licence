@@ -2,7 +2,7 @@
 
 Feature: Kost List
 
-  @ComponentActiveKos @TEST_LIMO-5813
+  @ComponentActiveKos @TEST_LIMO-978
   Scenario: Check components of active kost
     Given user go to mamikos homepage
     When user login as owner:

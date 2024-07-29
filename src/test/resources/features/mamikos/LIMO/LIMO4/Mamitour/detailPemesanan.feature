@@ -1,7 +1,7 @@
-@regression @LIMO4 @mamitour @TEST_LIMO-5768
+@regression @LIMO4 @mamitour
 Feature: Detail Pemesanan
 
-  @continue
+  @TEST_LIMO-3689 @continue
   Scenario: [Web][Mamitour] Check default state of detail pemesanan
     Given user go to mamikos homepage
     When user login as owner:
@@ -11,6 +11,7 @@ Feature: Detail Pemesanan
     And user click on pesan sekarang button
     Then user verify default state of detail pemesanan
 
+  @TEST_LIMO-1114
   Scenario: [Web][Mamitour] Check total price when add extra lantai and ruangan
     When user choose "Paket 3 Bulan" mamitour
     And user click on add extra 2 lantai and 0 ruangan

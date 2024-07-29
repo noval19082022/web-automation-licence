@@ -1,7 +1,7 @@
-@regression @LIMO4 @BNB-2245
+@regression @LIMO4
 Feature: Update Room from Dashboard
 
-  @TEST_LIMO-2860 @continue @updateRoomDashboard
+  @TEST_LIMO-899 @WEB @AUTOMATED @continue @updateRoomDashboard
   Scenario: [Web][Owner Dashboard][Update Room]"Update Kamar" add new rooms and delete from entry point owner dashboard when kost status == Active
     Given user go to mamikos homepage
     When user login as owner:
@@ -13,13 +13,13 @@ Feature: Update Room from Dashboard
     And owner click simpan on add room pop up
     Then user see total room is "Total Kamar 61" in update room page
 
-  @updateRoomDashboard
+  @TEST_LIMO-3464 @WEB @AUTOMATED @updateRoomDashboard
   Scenario: Delete room
     When user delete room name or number in room allotment
     Then user see total room is "Total Kamar 60" in update room page
 
-  @TEST_LIMO-2725 @updateRoomDashboard
-  Scenario: [Web][Owner Dashboard][Update Room]"Update Kamar" add new rooms and delete from entry point owner dashboard when kost status == Active
+  @TEST_LIMO-3465 @WEB @AUTOMATED @updateRoomDashboard
+  Scenario: [Web][Owner Dashboard][Update Room]"Update Kamar" search for invalid room number, add new rooms and delete from entry point owner dashboard when kost status == Active
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
