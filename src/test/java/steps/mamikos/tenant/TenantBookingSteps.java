@@ -407,6 +407,10 @@ public class TenantBookingSteps {
         else if (text.equalsIgnoreCase("Belum ada data jenis kelamin")){
             Assert.assertTrue(kostDetail.isPopupValidationVisible(), "Belum ada data jenis kelamin");
         }
+        else if (text.equalsIgnoreCase("Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong.")){
+            Assert.assertTrue(kostDetail.isSucceSubmitWLTextDisplayed(), "room is available");
+        }
+
     }
 
     @And("teannt/user click button {string} on popup validation")

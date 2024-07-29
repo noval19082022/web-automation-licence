@@ -529,4 +529,9 @@ public class KostDetailSteps {
     public void tenantVerifyThePromoDisplayedIs(String promoOwner) {
         Assert.assertTrue(kostDetail.isPromoOwnerDisplayed(promoOwner), "Promo owner invalid!");
     }
+
+    @Then("tenant can see enable send button")
+    public void tenant_can_see_enable_send_button(){
+        Assert.assertTrue(kostDetail.isKirimButtonDisplayed(), "not see Kirim button");
+    }
 }

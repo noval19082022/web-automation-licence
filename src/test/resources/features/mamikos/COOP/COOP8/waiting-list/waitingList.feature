@@ -137,9 +137,9 @@ Feature: Waiting List - Kost Detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod  | password  |
-      | 081000006116 | 08100000622 | qwerty123 |
+      | 08100000614 | 08100000622 | qwerty123 |
     And tenant navigate to kost saya page
-    And tenant will see that the text "Tenant Satu Enam" is displayed
+    And tenant will see that the text "Penguji Rini Tenant Empat Belas" is displayed
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod  |
       | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
@@ -154,7 +154,7 @@ Feature: Waiting List - Kost Detail
       | 081000006116 | 08100000622 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag                          | kost name prod  |
-      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+      | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Arac Penuh |
     And tenant click "Ikut Daftar Tunggu"
     And tenant click "Secepatnya"
     And user go to mamikos homepage
@@ -206,12 +206,35 @@ Feature: Waiting List - Kost Detail
     And tenant click "Iya, sudah ada tanggal pasti"
     Then tenant can select date to join waiting list
 
-  @TEST_SS-4283
+  @TEST_SS-4315 @continue
+    Scenario: [Web][Waiting List ][Waiting List Form]Submit waiting list with Sudah ada tanggal pasti
+    When tenant can see enable send button
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+    Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
+
+  @TEST_SS-4283 @continue
   Scenario: [Web][Waiting List][Waiting List Form]Check datepicker when tenant select Baru perkiraan option
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                                 | kost name prod                                                 |
+      | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap |
+    And tenant click "Ikut Daftar Tunggu"
     And tenant click "Baru perkiraan"
     Then tenant can select range date to join waiting list
 
-  @TEST-SS-4226 @waiting-list
+  @TEST_SS-4317
+   Scenario: [Web][Waiting List ][Waiting List Form]Submit waiting list with Baru perkiraan
+    When tenant can see enable send button
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi SinggahSini Tipe A Danurejan Yogyakarta      | Kost Arac Penuh |
+    Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
+
+  @TEST-SS-4226 @waiting-list @continue
   Scenario: [Web][Waiting List ][Waiting List Form]Cancel submit waiting list - Kembali ke iklan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -223,4 +246,33 @@ Feature: Waiting List - Kost Detail
     And tenant click "Ikut Daftar Tunggu"
     And tenant click on close waiting list button
     Then tenant can see "Ikut daftar tunggu" button
-    And user logs out as a Tenant user
+
+  @TEST_SS-4316 @continue
+  Scenario: [Web][Waiting List ][Waiting List Form]Submit waiting list with "Secepatnya"
+    Given user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    And tenant click "Secepatnya"
+    Then tenant can see enable send button
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi SinggahSini Tipe A Danurejan Yogyakarta      | Kost Arac Penuh |
+    Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
+
+  @TEST_SS-4319
+  Scenario: [Web][Waiting List ][Waiting List Form]Submit waiting list with "Belum ada tanggal atau perkiraan"
+    Given user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                          | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    And tenant click "Belum ada tanggal atau perkiraan"
+    Then tenant can see enable send button
+    And user go to mamikos homepage
+    And tenant search kost then go to kost details:
+      | kost name stag                                                 | kost name prod  |
+      | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Arac Penuh |
+    Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."

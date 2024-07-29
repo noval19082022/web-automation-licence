@@ -259,6 +259,7 @@ public class KostDetailsPO {
     Locator calendarView;
     Locator nextMonthButton;
     Locator nextMonthaDisableButton;
+    private Locator succesSubmitWLText;
 
     //-------------kost booking validation----------//
     private Locator popupValidationText;
@@ -496,6 +497,7 @@ public class KostDetailsPO {
         this.selectDateForSudahAdaTgl = page.getByPlaceholder("Isi dengan tanggal masuk kos");
         this.selectDateForBaruPerkiraan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih rentang tanggal calendar"));
         this.closeWaitingListButton = page.locator("//button[@class=\"bg-c-modal__action-closable\"]");
+        this.succesSubmitWLText = page.locator("//div[@class=\"bg-c-alert__content\"]");
 
         //-------------------kost booking validation---------------//
         this.popupValidationText = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -2263,6 +2265,15 @@ public class KostDetailsPO {
     public void clickCalViewOnRentangTglMasukKos(){
         playwright.clickOn(selectDateForBaruPerkiraan);
     }
+
+    /**
+     * check text success submit waiting list
+     * @return text
+     */
+    public boolean isSucceSubmitWLTextDisplayed(){
+        return playwright.waitTillLocatorIsVisible(succesSubmitWLText);
+    }
+
     /**
      * click on camera shutter
      */
