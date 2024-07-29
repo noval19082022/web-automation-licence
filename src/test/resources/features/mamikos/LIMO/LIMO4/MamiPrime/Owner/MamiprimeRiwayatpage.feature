@@ -1,7 +1,7 @@
 @regression @LIMO4
 Feature: Riwayat Mamiprime Page
 
-  @TEST_LIMO-6063 @continue
+  @TEST_LIMO-3540 @continue @WEB @AUTOMATED
   Scenario: Entry point riwayat mamiprime
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,27 +12,28 @@ Feature: Riwayat Mamiprime Page
     When user click lihat riwayat mamiprime button
     Then user redirected to mamiprime history page
 
-  @TEST_LIMO-6064 @continue
+  @TEST_LIMO-3538 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at tab dalam proses
     Then Owner will see empty state at tab dalam proses in halaman riwayat mamiprime
 
-  @TEST_LIMO-6065 @continue
+  @TEST_LIMO-3542 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner doesn't have any transaction at tab selesai
     When Owner click tab Selesai at riwayat pembelian mamiprime
     Then Owner will see empty state at tab selesai in halaman riwayat mamiprime
 
-  @TEST_LIMO-6066 @continue
+  @TEST_LIMO-605 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner only have transaction unpaid at tab dalam proses
     When owner navigate to pendaftaran mamiprime page
     And Owner purchase mamiprime periode "7 Hari"
     And Owner navigate to riwayat pembelian mamiprime
     Then Owner will see transaction unpaid mamiprime
 
-  @TEST_LIMO-6066
+  @TEST_LIMO-3536 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Redirection invoice unpaid mamiprime
     When Owner click the latest unpaid invoice mamiprime
     Then owner see jenis pembayaran "MamiPrime - Kata Kunci (7 Hari)"
 
+  @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -40,7 +41,7 @@ Feature: Riwayat Mamiprime Page
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin wants to reset mamiprime for owner with property ID "1000030951"
 
-  @TEST_LIMO-6073
+  @TEST_LIMO-3537 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner have transaction paid and active prime at tab selesai
     Given user go to mamikos homepage
     When user login as owner:
@@ -52,6 +53,7 @@ Feature: Riwayat Mamiprime Page
     When Owner navigate to riwayat pembelian mamiprime
     Then Owner will see transaction paid mamiprime
 
+  @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

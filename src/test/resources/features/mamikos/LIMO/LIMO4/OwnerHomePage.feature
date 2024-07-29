@@ -1,7 +1,7 @@
-@regression @LIMO4 @EX-LG
+@regression @LIMO4
 Feature: Homepage
 
-  @navbarAfter @continue
+  @TEST_LIMO-3445 @navbarAfter @continue @WEB @AUTOMATED
   Scenario: Positive case Check Navbar login as owner
     Given user go to mamikos homepage
     When user login as owner:
@@ -10,7 +10,7 @@ Feature: Homepage
     Then check the header menu display on homepage owner
     And user see username in top right shows as "abcdefghijklmnopqrst"
 
-  @redirectionElementNavbar @continue
+  @TEST_LIMO-3453 @redirectionElementNavbar @continue @WEB @AUTOMATED
   Scenario: Redirection element header after login
     When user click mamikos.com logo
     And user click booking kos button
@@ -24,7 +24,7 @@ Feature: Homepage
     When owner navigates to property saya kos
     Then user will be verify dropdown in property saya
 
-  @ownerPage @listingGP @continue
+  @TEST_LIMO-3451 @ownerPage @listingGP @continue @WEB @AUTOMATED
   Scenario: Click "halaman pemilik" will redirect to Owner page
     When user navigates to owner dashboard
     And user click mamikos.com logo
@@ -33,33 +33,33 @@ Feature: Homepage
     When  user click owner page button
     Then user should redirect to link "https://owner-jambu.kerupux.com/"
 
-  @ownerChatCS @listingGP @continue
+  @TEST_LIMO-3456 @ownerChatCS @listingGP @continue @WEB @AUTOMATED
   Scenario: Click "Chat CS" should open Contact Us Pop Up
     When owner navigates to property saya kos
     And user click Chat CS button
     Then user see Contact us pop up is appear
 
-  @ownerSubMenu @continue
+  @TEST_LIMO-3446 @ownerSubMenu @continue @WEB @AUTOMATED
   Scenario: Sub menu on owner page redirect to the right page
     When owner navigates to property saya kos
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/kos"
     When owner navigates to property saya apartemen
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/apartment"
 
-  @OwnerGreeting @listingGP @continue
+  @TEST_LIMO-3443 @OwnerGreeting @listingGP @continue @WEB @AUTOMATED
   Scenario: Click username direct to setelan akun
     When user navigates to owner dashboard
     Then user see user's name "Halo, abcdefghijklmnopqrst" in owner dashboard
     When user click username in owner dashboard
     Then user redirected to "/ownerpage/settings"
 
-  @OwnerProfileHeader @listingGP
+  @TEST_LIMO-3454 @OwnerProfileHeader @listingGP @WEB @AUTOMATED
   Scenario: Click profile name in top right will open dropdown menu
     When user click back button in page
     And user click owner username on header
     Then user see owner's name & phone number, text link "Setelan Akun" & "Logout"
 
-  @OwnerDoesntHaveKost @listingGP
+  @TEST_LIMO-3444 @OwnerDoesntHaveKost @listingGP @WEB @AUTOMATED
   Scenario: Check Add Kost button when owner doesn't have kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -68,7 +68,7 @@ Feature: Homepage
     And user click menu "Tambah Properti" on feature waktunya mengelola property
     Then user should redirect to link "https://owner-jambu.kerupux.com/choose-property-type"
 
-  @OwnerNameMoreThan30 @listingGP
+  @TEST_LIMO-3452 @OwnerNameMoreThan30 @listingGP @WEB @AUTOMATED
   Scenario: If profile name more than 30 char show ellipsis
     Given user go to mamikos homepage
     When user login as owner:
@@ -77,7 +77,7 @@ Feature: Homepage
     Then user see username in top right shows as "Rega Automate Dua Nama Panjang..."
     And owner should successfully log out
 
-  @widgetWaktunyaMengelolaPropertiKosNonActive
+  @TEST_LIMO-3449 @widgetWaktunyaMengelolaPropertiKosNonActive @WEB @AUTOMATED
   Scenario: Widget Waktunya Mengelola Properti - Kos non active 1 & Apartemen 0
     Given user go to mamikos homepage
     When user login as owner:
@@ -92,7 +92,7 @@ Feature: Homepage
       | Tambah Penyewa             | Menambah kontrak penyewa       |
       | Pusat Bantuan              | Info bantuan seputar Mamikos   |
 
-  @widgetWaktunyaMengelolaPropertiKosActive
+  @TEST_LIMO-3447 @widgetWaktunyaMengelolaPropertiKosActive @WEB @AUTOMATED
   Scenario: Widget Waktunya Mengelola Properti - Kos active 1 & Apartemen 0
     Given user go to mamikos homepage
     When user login as owner:
@@ -107,7 +107,7 @@ Feature: Homepage
       | Tambah Penyewa          | Menambah kontrak penyewa       |
       | Pusat Bantuan           | Info bantuan seputar Mamikos   |
 
-  @functionBackatHomeSetprice @continue
+  @TEST_LIMO-3450 @functionBackatHomeSetprice @continue @WEB @AUTOMATED
   Scenario: Check function back at home widget (Set Price)
     Given user go to mamikos homepage
     When user login as owner:
@@ -117,13 +117,13 @@ Feature: Homepage
     When user click back button in page
     Then user should redirect to link "https://owner-jambu.kerupux.com/"
 
-  @functionBackatHomeSetAvailableRoom
+  @TEST_LIMO-3455 @functionBackatHomeSetAvailableRoom @WEB @AUTOMATED
   Scenario: Check function back at home widget (Set Set Available Room)
     When user click menu "Atur Ketersediaan Kamar" on feature waktunya mengelola property
     And user click back button in page
     Then user should redirect to link "https://owner-jambu.kerupux.com/"
 
-  @widgetWaktunyaMengelolaPropertiKos0orVerification
+  @TEST_LIMO-3448 @widgetWaktunyaMengelolaPropertiKos0orVerification @WEB @AUTOMATED
   Scenario Outline: Widget Waktunya Mengelola Properti - Kos active 0/verification & Apartemen 0/1
     Given user go to mamikos homepage
     When user login as owner:

@@ -1,7 +1,7 @@
 @regression @LIMO4 @editKost123
 Feature: Edit Kost
 
-  @TEST_LIMO-2877 @EditKosInvalidFacility @continue
+  @TEST_LIMO-938 @EditKosInvalidFacility @continue
   Scenario: [Web][Edit Kost] Edit kost fasilitas with invalid data
     Given user go to mamikos homepage
     When user login as owner:
@@ -30,7 +30,7 @@ Feature: Edit Kost
     And user see "Fasilitas Kamar" has warning title "Pilih Fasilitas" and description "Pilih minimal 1 fasilitas"
     And user see "Fasilitas Kamar Mandi" has warning title "Pilih Fasilitas" and description "Pilih minimal 1 fasilitas"
 
-  @TEST_LIMO-2879 @EditKos1to5NoChanges @continue
+  @TEST_LIMO-963 @EditKos1to5NoChanges @continue
   Scenario: [Web][Edit Kost] Edit kost with condition user wants to edit step 1-5 without change anything
     When owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
@@ -46,7 +46,7 @@ Feature: Edit Kost
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
     Then user see kos with name "Kos oke bebek Vviop Depok Sleman", status "Aktif" and type "Kos Putra"
 
-  @TEST_LIMO-2878 @TEST_LIMO-2878-required @EditKosAddress @continue
+  @TEST_LIMO-890 @EditKosAddress @continue
   Scenario: [Web][Edit Kost] Edit kost address with valid data
     And owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
@@ -60,8 +60,8 @@ Feature: Edit Kost
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
     Then user see kos with name "Kos oke bebek Vviop Depok Sleman", status "Diperiksa Admin" and type "Kos Putra"
 
-  @TEST_LIMO-2878-required
-  Scenario: Verify kos Kos oke bebek Vviop Depok Sleman in admin
+  @TEST_LIMO-3436 @WEB @AUTOMATED
+  Scenario: Verify Edited Kos In Admin Kos oke bebek Vviop Depok Sleman
     Given user try to logout from mamikos
     When admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -71,7 +71,7 @@ Feature: Edit Kost
     And admin bangkrupux search kost owner "Kos oke bebek Vviop Depok Sleman" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-2719 @TEST_LIMO-2719-required @continue
+  @TEST_LIMO-850 @continue
   Scenario Outline: Status kos is active or reject and owner edit description kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -94,9 +94,8 @@ Feature: Edit Kost
       | kost name     |
       | MAMAHMUDALIMO |
 
-    ## this step is required to excecute to avoid next step failed
-  @TEST_LIMO-2719-required
-  Scenario: Verify kos MAMAHMUDALIMO in admin
+  @TEST_LIMO-3435 @WEB @AUTOMATED
+  Scenario: Verify Edited Kos In Admin MAMAHMUDALIMO
     Given user try to logout from mamikos
     When admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -106,8 +105,8 @@ Feature: Edit Kost
     And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-2710 @updatefotokost
-  Scenario: [Edit kos][Foto Kamar]Edit foto kamar with move or merge foto
+  @TEST_LIMO-858 @updatefotokost
+  Scenario: [Edit kos][Foto Kamar] Edit foto kamar with move or merge foto
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
@@ -122,7 +121,7 @@ Feature: Edit Kost
     And user select destination move photo room on "Foto depan kamar"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
-  @TEST_LIMO-2709 @updatefotokost
+  @TEST_LIMO-859 @updatefotokost
   Scenario: [Edit kos][Foto Kos]Edit foto kos with move or merge foto
     Given user go to mamikos homepage
     When user login as owner:
@@ -138,8 +137,8 @@ Feature: Edit Kost
     And user select destination move photo room on "Foto tampilan dalam bangunan"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
-  @TEST_LIMO-2713
-  Scenario: [Edit kos][Foto Kos]Edit kost with condition user with old kost && wants to edit foto && user alreadey have photo booking active
+
+  Scenario: [Edit kos][Foto Kos]Edit kost with condition user with old kost && wants to edit foto && user already have photo booking active
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password    |
@@ -153,8 +152,8 @@ Feature: Edit Kost
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
 
-  @TEST_LIMO-2726 @TEST_LIMO-2711 @continue @editKost123
-  Scenario: [Edit kos][Edit data needs verification process]Status kos == active or reject && owner edit data needs verification process
+  @TEST_LIMO-3434 @continue @editKost123 @WEB @AUTOMATED
+  Scenario: [Edit kos][Edit data needs verification process] Status kos == active or reject && owner edit data needs verification process
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
@@ -205,9 +204,9 @@ Feature: Edit Kost
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
     And user verify the kos in admin kos owner
-    And admin try to logout from mamikos
-#  @TEST_LIMO-2716
-#  Scenario: Verify kos in admin
+
+  @TEST_LIMO-3437 @WEB @AUTOMATED
+  Scenario: Verify Kos In Admin After Intercept Confirmation On Screen "Harga"
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
@@ -225,7 +224,7 @@ Feature: Edit Kost
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
 
-  @TEST_LIMO-2706 @TEST_LIMO-2707 @editKost
+  @TEST_LIMO-861 @WEB @AUTOMATED @editKost
   Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Rejected Kost
     Given user go to mamikos homepage
     When user login as owner:
@@ -246,7 +245,7 @@ Feature: Edit Kost
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
 
-  @TEST_LIMO-2727 @continue
+  @TEST_LIMO-846 @WEB @AUTOMATED @continue
   Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Data Tahun Kos Dibangun OR Deskripsi Kos OR Fasilitas Kamar Mandi OR Fasilitas Umum tidak ada
     Given user go to mamikos homepage
     When user login as owner:
@@ -266,7 +265,7 @@ Feature: Edit Kost
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
 
-  @TEST_LIMO-2728
+  @TEST_LIMO-855 @WEB @AUTOMATED
   Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Foto Kos OR Foto Kamar belum di mapping ke yg baru (dari data lama) OR Provinsi field kosong
 #    When user click on "close" button
     When owner close pop up in edit kost

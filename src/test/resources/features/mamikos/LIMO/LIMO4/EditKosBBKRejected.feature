@@ -1,7 +1,7 @@
-@regression @LIMO4 @EX-LG @DONEMIGRATINGTONEWBOARD
+@regression @LIMO4
 Feature: Edit Kos BBK Rejected
 
-  @TEST_LIMO-1377 @EditKosBBKRejected
+  @TEST_LIMO-980 @EditKosBBKRejected
   Scenario Outline: Edit kost when kost is BBK Rejected
     #scenario cek before edit BBK
     Given user go to mamikos homepage

@@ -1,7 +1,7 @@
 @LIMO4 @regression
 Feature: Admin Boost LPL
 
-  @TEST_LIMO-4334 @continue @boostLpl
+  @TEST_LIMO-259 @continue @boostLpl @WEB @AUTOMATED
   Scenario: [WEB][Admin] As an admin, I would like to read all the listings that are currently being LPL score boosted
     Given admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -10,7 +10,7 @@ Feature: Admin Boost LPL
     When admin accsess menu boot LPL
     Then admin can see data kost already boosted with list view
 
-  @TEST_LIMO-4335 @boostLpl @continue
+  @TEST_LIMO-258 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin]As an admin, I would like to search for a listing that is currently being LPL score boosted
       #search by kost ID
     When admin wants to search kost with kost id "1000034428"
@@ -24,13 +24,13 @@ Feature: Admin Boost LPL
     When admin wants to search kost with kost name "Property xxx123"
     Then admin see information not found
 
-  @TEST_LIMO-4573 @boostLpl @continue
+  @TEST_LIMO-255 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin][Boost LPL] As Admin I would like to input kost full occupied
   #admin input kost status verified but full occupied
     When admin input kost name with "Create ios full occupied Tipe C Depok Sleman" at form add boost lpl
     Then the result from kost "Create ios full occupied Tipe C Depok Sleman" not show
 
-  @TEST_LIMO-4572 @boostLpl @continue
+  @TEST_LIMO-256 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin][Boost LPL] As Admin I would like to input kost not active
   #admin input kost status diperiksa admin
     When admin accsess menu boot LPL
@@ -47,7 +47,7 @@ Feature: Admin Boost LPL
     * admin input kost name with "Kost Alamat Required Tipe A Arjasari Bandung" at form add boost lpl
     Then the result from kost "Kost Alamat Required Tipe A Arjasari Bandung" not show
 
-  @TEST_LIMO-4574 @boostLpl @continue
+  @TEST_LIMO-254 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin][Boost LPL] As Admin I would like to input apartment for boost score lpl
     When admin accsess menu boot LPL
     * admin input kost name with "Watson 554" at form add boost lpl
@@ -55,14 +55,14 @@ Feature: Admin Boost LPL
     * admin wants to search kost with kost name "Watson 554"
     Then admin can see "Watson 554" was added with lpl score is "524287"
 
-  @TEST_LIMO-4336 @boostLpl @continue
+  @TEST_LIMO-257 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin]  As an admin, I would like to take a listing out from being LPL score boosted
   #deleted listing from boost lpl
     When admin delete listing from boost lpl
     * admin wants to search kost with kost name "Watson 554"
     Then admin see information not found
 
-  @TEST_LIMO-4332 @boostLpl
+  @TEST_LIMO-260 @boostLpl @WEB @AUTOMATED
   Scenario: [WEB][Admin] As an admin, I would like to input a listing for its score to be boosted in LPL
     When admin accsess menu boot LPL
     * admin input kost name with "Kost Twister Konro Depok Sleman" at form add boost lpl

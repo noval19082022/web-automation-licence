@@ -1,7 +1,7 @@
 @regression @LIMO4 @landingPagePrime
 Feature: Mamiprime Landing Page
 
-  @TEST_LIMO-5699 @continue
+  @TEST_LIMO-3547 @continue @WEB @AUTOMATED
   Scenario: Visit landing page
     Given user go to mamikos homepage
     When user login as owner:
@@ -10,7 +10,7 @@ Feature: Mamiprime Landing Page
     And user click on mamiprime widget at owner dashboard
     Then user redirected to mamiprime landing page
 
-  @TEST_LIMO-5715 @continue
+  @TEST_LIMO-643 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Landing Page] Entry point purchase mamiprime
     #entry point at header landing page
     When owner wants to buy mamiprime from header
@@ -21,26 +21,27 @@ Feature: Mamiprime Landing Page
     When owner wants to buy mamiprime from product description
     Then owner can see page "Pendaftaran MamiPrime"
 
-  @continue
+  @TEST_LIMO-3546 @continue @WEB @AUTOMATED
   Scenario: Benefit Mamiprime Landing Page
     When owner access mamiprime landing page
     Then owner can see benefit section
 
-  @continue
+  @TEST_LIMO-3545 @continue @WEB @AUTOMATED
   Scenario: Testimonial Mamiprime Landing Page
     When user redirected to mamiprime landing page
     Then owner can see testimonial section
 
-  @TEST_LIMO-5701 @continue
-    Scenario: [WEB][Mamikos Prime][FAQ] FAQ Mamikos Prime Landing Page
+  @TEST_LIMO-645 @continue @WEB @AUTOMATED
+  Scenario: [WEB][Mamikos Prime][FAQ] FAQ Mamikos Prime Landing Page
     Given owner access mamiprime landing page
     Then owner can see FAQ section
 
+  @TEST_LIMO-3548 @WEB @AUTOMATED
   Scenario: Contact Mamiprime Landing Page
     When user redirected to mamiprime landing page
     Then owner can see contact section
 
-  @TEST_LIMO-5770
+  @TEST_627 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Deeplink] Visit landing page
     #non lpgin
     Given user go to mamikos homepage
@@ -63,7 +64,7 @@ Feature: Mamiprime Landing Page
       | 0890910001 | 0890910001  | qwerty123  |
     Then owner access mamiprime landing page
 
-  @TEST_LIMO-5772
+  @TEST_LIMO-626 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Deeplink] Pendaftaran Mamiprime
      #non lpgin
     Given user go to mamikos homepage

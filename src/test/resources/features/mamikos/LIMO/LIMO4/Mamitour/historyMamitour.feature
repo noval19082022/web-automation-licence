@@ -1,7 +1,7 @@
 @regression @LIMO4 @mamitour
 Feature: Mamitour History
 
-  @TEST_LIMO-3666
+  @TEST_LIMO-1121 @WEB @AUTOMATED @MAMITOUR
   Scenario Outline: [Web][Mamitour] Riwayat MamiTour
     Given user go to mamikos homepage
     When user login as owner:
@@ -14,7 +14,7 @@ Feature: Mamitour History
       | 0826666666633  | see      |
       | 0895365623388  | not see  |
 
-  @TEST_LIMO-3667
+  @TEST_LIMO-3692 @WEB @AUTOMATED @MAMITOUR
   Scenario: [Web][Mamitour] See have transaction dalam proses tab and do not have transaction on selesai tab
     Given user go to mamikos homepage
     When user login as owner:
@@ -27,7 +27,7 @@ Feature: Mamitour History
     When user click on tab dalam proses
     Then user verify there is transaction
 
-  @TEST_LIMO-5685
+  @TEST_LIMO-3691 @WEB @AUTOMATED @MAMITOUR
   Scenario: [Web][Mamitour] See do not have transaction dalam proses tab and have transaction on selesai tab
     Given user go to mamikos homepage
     When user login as owner:
