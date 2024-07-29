@@ -17,6 +17,7 @@ public class landingPagePO {
     private Locator profileMenuText;
     private Locator keluarButton;
     private Locator onboardingButton;
+    private Locator daftarAgenButton;
 
     public landingPagePO(Page page){
         this.page = page;
@@ -30,6 +31,7 @@ public class landingPagePO {
         profileMenuText = page.locator("li p");
         keluarButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Keluar"));
         onboardingButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Onboarding"));
+        daftarAgenButton = page.locator("#introSection").getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Daftar Sekarang"));
     }
 
     /**
@@ -74,5 +76,12 @@ public class landingPagePO {
     public void goToOnboarding() {
         playwright.clickOn(profileButton);
         playwright.clickOn(onboardingButton);
+    }
+
+    /**
+     * Click on daftar agen button on top
+     */
+    public void daftarAgen() {
+        playwright.clickOn(daftarAgenButton);
     }
 }
