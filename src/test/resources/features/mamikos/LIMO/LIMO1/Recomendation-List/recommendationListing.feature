@@ -76,7 +76,7 @@ Feature: Recommendation Listing
       | 082322233311 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag        | kost name prod |
-      | Kos Khalif Automation |                |
+      | Kos Raney Momogi Tipe A |                |
     When tenant open menu favorite
     Then verify last seen property doesn't display on rekomendasi section
     And tenant open menu kost saya
