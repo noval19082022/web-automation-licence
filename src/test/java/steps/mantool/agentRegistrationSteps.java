@@ -25,7 +25,6 @@ public class agentRegistrationSteps {
         registration.fillKonfirmasiPassword("qwerty123");
         registration.clickBerikutnya();
     }
-
     @When("agen upload KTP using file {string}")
     public void agen_upload_ktp_using_file(String file) {
         if (file.equalsIgnoreCase("more than 2MB")){
@@ -34,12 +33,10 @@ public class agentRegistrationSteps {
             registration.uploadPhotoKTP("src/main/resources/images/kos tampak depan.jpg");
         }
     }
-
     @Then("no agen registration error message foto ktp")
     public void no_agen_registration_error_message_foto_ktp() {
         Assert.assertFalse(registration.isFotoKTPErrorMessageVisible());
     }
-
     @When("agen input age {string}")
     public void agen_input_age(String age) {
         registration.fillUsia(age);
@@ -48,12 +45,10 @@ public class agentRegistrationSteps {
     public void show_agen_registration_error_message(String message) {
         Assert.assertEquals(registration.getErrorMessage(),message);
     }
-
     @Then("show agen registration error message upload ktp {string}")
     public void show_agen_registration_error_message_upload_ktp(String message) {
         Assert.assertEquals(registration.getUploadPhotoErrorMessage(), message);
     }
-
     @Then("no agen registration error message")
     public void no_agen_registration_error_message() {
         Assert.assertFalse(registration.isErrorMessageVisible());
@@ -65,5 +60,13 @@ public class agentRegistrationSteps {
     @Then("show agen registration error message ktp {string}")
     public void show_agen_registration_error_message_ktp(String message) {
         Assert.assertEquals(registration.getErrorMessage(),message);
+    }
+    @When("agen input password {string}")
+    public void agen_input_password(String password) {
+        registration.fillPassword(password);
+    }
+    @When("agen input confirmation password {string}")
+    public void agen_input_confirmation_password(String password) {
+        registration.fillKonfirmasiPassword(password);
     }
 }

@@ -115,7 +115,7 @@ public class agentRegistrationPO {
      * @return String
      */
     public String getErrorMessage() {
-        return playwright.getText(errorMessage);
+        return playwright.getText(errorMessage.first());
     }
 
     /**
