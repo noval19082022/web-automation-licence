@@ -81,7 +81,7 @@ public class NaikkanIklanPO {
      * @params toggleStatus
      */
     public boolean getToggleStatus(String adsName, String toggleStatus) {
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded();
         toggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']");
         return playwright.waitTillLocatorIsVisible(toggleLocator);
     }

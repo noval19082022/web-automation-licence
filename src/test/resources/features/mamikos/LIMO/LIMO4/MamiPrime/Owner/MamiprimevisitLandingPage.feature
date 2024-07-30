@@ -41,7 +41,7 @@ Feature: Mamiprime Landing Page
     When user redirected to mamiprime landing page
     Then owner can see contact section
 
-  @TEST_627 @WEB @AUTOMATED
+  @TEST_LIMO-627 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Deeplink] Visit landing page
     #non lpgin
     Given user go to mamikos homepage
