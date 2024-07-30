@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
 import lombok.extern.slf4j.Slf4j;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -948,5 +949,16 @@ public class PlaywrightHelpers {
      */
     public String getPageTitle() {
         return page.title();
+    }
+
+    /**
+     * Uplaod file using file from resources folder
+     * @param locator
+     * @param path
+     */
+    public void uploadFile(Locator locator, String path) {
+        String projectpath = System.getProperty("user.dir");
+
+        locator.setInputFiles(Paths.get(projectpath+"/"+path));
     }
 }

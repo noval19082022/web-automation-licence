@@ -21,9 +21,11 @@ public class agentRegistrationPO {
     private Locator uploadKTPFile;
     private Locator passwordText;
     private Locator konfirmasiPasswordText;
+    private Locator deleteFotoKtpButton;
 
     private Locator berikutnyaButton;
 
+    private Locator errorMessage;
     private Locator uploadKTPErrorMessage;
     //Informasi Pribadi
 
@@ -31,8 +33,8 @@ public class agentRegistrationPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
-        skemaAgenAkuisisiRadioButton = page.locator("input#acquisition");
-        skemaAgenInputDataRadioButton = page.locator("input#data_input");
+        skemaAgenAkuisisiRadioButton = page.getByText("Agen Akuisisi");
+        skemaAgenInputDataRadioButton = page.getByText("Agen Input Data");
         namaLengkapText = page.getByPlaceholder("Masukkan nama lengkap Anda");
         nomorHandphoneText = page.getByPlaceholder("08xxxxxxxxxx");
         emailText = page.locator(".bg-c-input__field").nth(2);
@@ -41,8 +43,11 @@ public class agentRegistrationPO {
         berikutnyaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya"));
         passwordText = page.getByPlaceholder("Minimal 8 karakter angka dan huruf").first();
         konfirmasiPasswordText = page.getByPlaceholder("Minimal 8 karakter angka dan huruf").nth(1);
+        uploadKTPFile = page.locator(".bg-c-image-uploader input");
+        deleteFotoKtpButton = page.getByTestId("imageDelete_btn");
 
-        uploadKTPErrorMessage = page.locator(".bg-c-field__message");
+        errorMessage = page.locator(".bg-c-field__message");
+        uploadKTPErrorMessage = page.locator(".bg-c-image-uploader__error-message");
     }
 
     /**
@@ -50,7 +55,7 @@ public class agentRegistrationPO {
      * @param skema
      */
     public void chooseSkemaAgen(String skema) {
-        if (skema.equalsIgnoreCase("Agen Akuisi")){
+        if (skema.equalsIgnoreCase("Agen Akuisisi")){
             playwright.clickOn(skemaAgenAkuisisiRadioButton);
         } else if (skema.equalsIgnoreCase("Agen Input Data")) {
             playwright.clickOn(skemaAgenInputDataRadioButton);
@@ -86,6 +91,7 @@ public class agentRegistrationPO {
      * @param age
      */
     public void fillUsia(String age) {
+        playwright.scrollToUp(page);
         playwright.fill(usiaText,age);
     }
 
@@ -105,7 +111,15 @@ public class agentRegistrationPO {
     }
 
     /**
-     * get upload ktp error message
+     * get error message
+     * @return String
+     */
+    public String getErrorMessage() {
+        return playwright.getText(errorMessage);
+    }
+
+    /**
+     * get foto ktp error message
      * @return String
      */
     public String getUploadPhotoErrorMessage() {
@@ -126,5 +140,35 @@ public class agentRegistrationPO {
      */
     public void fillKonfirmasiPassword(String password) {
         playwright.fill(konfirmasiPasswordText,password);
+    }
+
+    /**
+     * Upload foto ktp file
+     * @param path file url path
+     */
+    public void uploadPhotoKTP(String path) {
+        if (playwright.isLocatorVisibleAfterLoad(deleteFotoKtpButton,2000.0)){
+            playwright.clickOn(deleteFotoKtpButton);
+        }
+
+        playwright.uploadFile(uploadKTPFile,path);
+        playwright.hardWait(1000.0);
+    }
+
+
+    /**
+     * Assert upload ktp error message visible or not
+     * @return boolean
+     */
+    public boolean isFotoKTPErrorMessageVisible() {
+        return playwright.isLocatorVisibleAfterLoad(uploadKTPErrorMessage,3000.0);
+    }
+
+    /**
+     * Assert error message visible or not
+     * @return boolean
+     */
+    public boolean isErrorMessageVisible() {
+        return playwright.isLocatorVisibleAfterLoad(errorMessage,3000.0);
     }
 }
