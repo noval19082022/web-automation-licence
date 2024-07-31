@@ -32,7 +32,7 @@ public class CommonSteps {
         playwright.clickOnTextButton(text);
     }
 
-    @Then("user/owner/tenant will see that the text {string} is displayed")
+    @Then("user/owner/tenant/admin will see that the text {string} is displayed")
     public void user_will_see_that_the_text_is_displayed(String text) {
         Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
     }

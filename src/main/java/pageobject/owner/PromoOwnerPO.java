@@ -44,6 +44,7 @@ public class PromoOwnerPO {
     Locator createPromotionButton;
     Locator showAndEditPromoLink;
     Locator detailPromoOwner;
+    Locator nextBtnCalendarAdmin;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
@@ -57,7 +58,7 @@ public class PromoOwnerPO {
         verificationAdminStatus = page.locator("//label[@class='label label-danger']");
         alertSuccessAdmin = page.locator("//div[@class='alert alert-success alert-dismissable']");
         unverificationPromoButton = page.locator("td:nth-of-type(7) .fa-times");
-        deletePromoButton = page.locator("//i[@class='fa fa-trash-o']");
+        deletePromoButton = page.locator("//i[@class='fa fa-trash-o']").first();
         timeOfPromoAdmin = page.locator("td:nth-of-type(5)");
         createPromoButtonAdmin = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add New Promo"));
         keywordCreatePromoField = page.getByPlaceholder("Keyword");
@@ -66,6 +67,7 @@ public class PromoOwnerPO {
         searchButtonCreatePromo = page.locator(".btn-primary");
         createPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Promotion"));
         showAndEditPromoLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show or Edit"));
+        nextBtnCalendarAdmin = page.getByTitle("Next");
     }
 
     /**
@@ -375,9 +377,13 @@ public class PromoOwnerPO {
         String locatorElement;
         var todayDate = JavaHelpers.getCurrentDateOrTime("d");
         var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+//        if (tomorrowDate.equals("32")) {
+//            playwright.clickOn(nextBtnCalendarAdmin);
+//            tomorrowDate = "1";
+//        }
         theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
         if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
-            playwright.forceClickOn(theNextMonthButton);
+            playwright.forceClickOn(nextBtnCalendarAdmin);
         }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         try {
@@ -411,7 +417,7 @@ public class PromoOwnerPO {
         var tomorrowDate = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
         theNextMonthButton = page.getByTestId("premiumPromo").getByRole(AriaRole.BANNER).locator("i").nth(1);
         if (!(Integer.parseInt(todayDate) < Integer.parseInt(tomorrowDate))){
-            playwright.forceClickOn(theNextMonthButton);
+            playwright.forceClickOn(nextBtnCalendarAdmin);
         }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         try {
