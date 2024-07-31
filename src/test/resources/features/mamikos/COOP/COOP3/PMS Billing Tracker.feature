@@ -133,4 +133,3 @@ Feature: Billing Tracker
     When admin choose month "Agustus"
     And admin filter contract status with "Aktif"
     Then admin can see contract status with "Aktif"
-
