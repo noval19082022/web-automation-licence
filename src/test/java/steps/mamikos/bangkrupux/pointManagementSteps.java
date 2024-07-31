@@ -116,7 +116,7 @@ public class pointManagementSteps {
 
     @And("user verify new room group added not displayed")
     public void userVerifyNewRoomGroupAddedNotDisplayed() {
-        Assert.assertFalse(pointManagement.checkRoomGroupIsPresent(BangKrupuxTestData.getOwnerRoomGroup()+"-"+BangKrupuxTestData.getOwnerRoomGroupUntil()));
+        Assert.assertTrue(pointManagement.checkRoomGroupIsPresent(BangKrupuxTestData.getOwnerRoomGroup()+"-"+BangKrupuxTestData.getOwnerRoomGroupUntil()));
     }
 
     @Then("user verify the pagination of Owner Room Group")

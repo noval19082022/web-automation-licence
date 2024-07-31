@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -48,5 +49,10 @@ public class landingPageSteps {
     @When("admin logout mantool")
     public void admin_logout_mantool() {
        landingPage.logoutMantool();
+    }
+
+    @Given("user daftar agen")
+    public void user_daftar_agen() {
+        landingPage.daftarAgen();
     }
 }
