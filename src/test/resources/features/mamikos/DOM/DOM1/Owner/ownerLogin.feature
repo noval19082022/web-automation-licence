@@ -65,7 +65,7 @@ Feature: Owner - Login
       | 1111111111 | 11111111111 | qwerty123 |
     Then user verify login error messages "Format Nomor Handphone salah."
 
-  @TEST_COOP-6664
+  @TEST_SS-2762
   Scenario: [WEB][Login Owner] - From SBMPTN Page
     Given user navigate to SBMPTN page
     When user login as owner:
