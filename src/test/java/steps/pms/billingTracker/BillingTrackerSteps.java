@@ -140,5 +140,19 @@ public class BillingTrackerSteps {
         billingTracker.getBlankAnnouncement(text);
     }
 
+    @Then("admin can see bse tab list")
+    public void admin_can_see_bse_tab_list(){
+        Assert.assertTrue(billingTracker.getBseNametext(), "bse tab list not appears");
+    }
+
+    @And("admin filter contract status with {string}")
+    public void admin_filter_contract_status_with(String text){
+        billingTracker.chooseContractStatus(text);
+    }
+
+    @Then("admin can see contract status with {string}")
+    public void admin_can_see_contract_status_with(String text){
+        Assert.assertTrue(billingTracker.getContractStatusOnListText(text), "status doesnt match");
+    }
 }
 

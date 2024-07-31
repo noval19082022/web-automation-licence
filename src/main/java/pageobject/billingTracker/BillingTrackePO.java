@@ -36,6 +36,7 @@ public class BillingTrackePO {
     Locator tambahAnnouncementButton;
     Locator editAnnouncementButton;
     Locator inputAnnouncementTextField;
+    Locator bseTabListtext;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -65,6 +66,7 @@ public class BillingTrackePO {
         tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
         editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         inputAnnouncementTextField = page.getByTestId("billingAnnoucementForm-content");
+        bseTabListtext = page.locator("//*[@class=\"bg-c-tabs__list\"]");
     }
 
     public void searchType(String type, String text) {
@@ -287,6 +289,36 @@ public class BillingTrackePO {
     public String getBlankAnnouncement(String text){
         Locator getBlanktext = page.locator("#announcement-2").getByText(""+text+"");
         return playwright.getText(getBlanktext);
+    }
+
+    /**
+     * Assert bse name on billing announcement
+     * return Bella, Okta, maya, Dida, Shintia
+     */
+    public boolean getBseNametext(){
+       return playwright.waitTillLocatorIsVisible(bseTabListtext,2000.0);
+    }
+
+    /**
+     * click filter button and filter contract status
+     * @param text example : Sudah Check-out
+     */
+    public void chooseContractStatus(String text){
+        playwright.clickOn(filterButton);
+        Locator contractStatusText = page.getByTestId("billingTrackerFilterContractStatus-col-1").getByText(""+text+"");
+        playwright.clickOn(contractStatusText);
+        playwright.clickOn(applyButton);
+        playwright.clickOn(searchButton);
+    }
+
+    /**
+     * validate contract status on list will appears or not
+     * @param text example Sudah Check-out
+     * @return text Sudah Check-out
+     */
+    public boolean getContractStatusOnListText(String text){
+        Locator contractStatusLabelText = page.locator("//div[contains(., '"+text+"')]").first();
+        return playwright.waitTillLocatorIsVisible(contractStatusLabelText, 10000.0);
     }
 }
 
