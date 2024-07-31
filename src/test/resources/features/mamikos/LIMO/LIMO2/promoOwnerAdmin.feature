@@ -3,7 +3,7 @@
 Feature: Promo Owner Admin BangKerupux
 
   @TEST_LIMO-3656
-  Scenario: As Admin, wants to create promo iklan for owner at admin page when owner already have promo ongoing
+  Scenario: As Admin, wants to create promo iklan for owner at admin page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -37,7 +37,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin delete the promo admin
 
   @TEST_LIMO-3658
-  Scenario: As Admin, wants to create promo iklan for owner at admin page with confirmation false
+  Scenario: As Admin, wants to create promo iklan for owner at admin page with confirmation false not visible on tenant
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -72,7 +72,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin delete the promo admin
 
   @TEST_LIMO-3659
-  Scenario Outline: As Admin, wants to create promo iklan for owner at admin page with confirmation true
+  Scenario Outline: As Admin, wants to create promo iklan for owner at admin page with confirmation true and not visible on tenant
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -145,7 +145,7 @@ Feature: Promo Owner Admin BangKerupux
     And admin delete the promo admin
 
   @TEST_LIMO-93 @RunPromoOwnerSameday @continue
-  Scenario: As Admin, wants to create promo iklan for owner at admin page when owner already have promo ongoing
+  Scenario: As Admin, wants to create promo iklan for owner at admin page with start date == end date and have another promo
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -166,4 +166,30 @@ Feature: Promo Owner Admin BangKerupux
     Given admin go to mamikos bangkrupux admin
     And admin bangkrupux navigates to Promo Owner
     And admin search the title promo "Title Promo Owner LIMO 93 sameday" on search box
+    And admin delete the promo admin
+
+  @TEST_LIMO-94 @RunPromoOwnerConfirmTrue @continue
+  Scenario: As Admin, wants to create promo iklan for owner at admin page with confirmation true but have another promo
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
+    And admin bangkrupux navigates to Promo Owner
+    And admin accsess menu promo owner to create promo owner
+    And admin fill "Kost komplit desta Tobelo Halmahera Utara" at search kost form
+    And admin fills valid data promo owner as expected
+      | title                             | content                                             | start-date | end-date |
+      | Title Promo Owner LIMO 94 confirm | Ini adalah promo owner yang disi dari halaman admin | today      | tomorrow |
+    And admin clicks on ceate and verify promotion
+    Then admin successfully add promo owner
+    When admin search the title promo "Kost komplit desta Tobelo Halmahera Utara" on search box
+    And admin will see that the text "Title Promo Owner LIMO 94 confirm" is displayed
+    And admin click on action show and edit promo owner
+    Then admin verify the confirmation is "true"
+
+  @RunPromoOwnerConfirmTrue
+  Scenario: Delete promo owner
+    Given admin go to mamikos bangkrupux admin
+    And admin bangkrupux navigates to Promo Owner
+    And admin search the title promo "Title Promo Owner LIMO 94 confirm" on search box
     And admin delete the promo admin

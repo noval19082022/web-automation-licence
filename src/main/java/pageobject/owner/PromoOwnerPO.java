@@ -66,7 +66,7 @@ public class PromoOwnerPO {
         createAndVerifyPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create and Verify Promotion"));
         searchButtonCreatePromo = page.locator(".btn-primary");
         createPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Promotion"));
-        showAndEditPromoLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show or Edit"));
+        showAndEditPromoLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show or Edit")).first();
         nextBtnCalendarAdmin = page.getByTitle("Next");
     }
 
