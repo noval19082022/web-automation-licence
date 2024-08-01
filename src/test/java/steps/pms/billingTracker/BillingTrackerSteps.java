@@ -57,16 +57,21 @@ public class BillingTrackerSteps {
         billingTracker.getBulkText(text);
     }
 
-    @Then("admin can see tambah catatan button")
-    public void admin_can_see_tambah_catatan_button() {
-        Assert.assertTrue(billingTracker.getCreateNotesButtonVisible(), "tambah catatan not displayed");
+    @Then("admin can see {string} button")
+    public void admin_can_see_button(String text) {
+        if (text.equalsIgnoreCase("Tambah Catatan")) {
+            Assert.assertTrue(billingTracker.getCreateNotesButtonVisible(), "tambah catatan not displayed");
+        }
+        else if (text.equalsIgnoreCase("Sembunyikan")){
+            Assert.assertTrue(billingTracker.getSembunyikantextButton(), "not appears sembunyikan button");
+        }
     }
 
     @And("admin fill notes tracker with:")
     public void admin_fill_notes_tracker_with(DataTable table) {
         notedData = table.asMap(String.class, String.class);
         var type = notedData.get("type");
-        var notes = notedData.get("catatan");
+        var notes = notedData.get("notes");
         billingTracker.clickCreateNotesAction();
         billingTracker.setAndInputNotesType(type);
         if (notes != null) {
@@ -153,6 +158,16 @@ public class BillingTrackerSteps {
     @Then("admin can see contract status with {string}")
     public void admin_can_see_contract_status_with(String text){
         Assert.assertTrue(billingTracker.getContractStatusOnListText(text), "status doesnt match");
+    }
+
+    @And("admin can see phone number with {string}")
+    public void admin_can_see_phone_number_with(String text){
+        Assert.assertTrue(billingTracker.getTenantPhoneNumbertext(text), "admin can't see phone number");
+    }
+
+    @And("admin click on pagination")
+    public void admin_click_on_pagination(){
+        billingTracker.clickOnPagination();
     }
 }
 
