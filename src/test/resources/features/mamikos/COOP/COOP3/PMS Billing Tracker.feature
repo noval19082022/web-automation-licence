@@ -60,24 +60,3 @@ Feature: Billing Tracker
     When admin go to billing tracker
     And admin click on expand billing announcement
     Then admin can see bse tab list
-
-#  @SS-4378 @continue
-#  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Sudah Checkout
-#    And admin click on reset button
-#    When admin choose month "Agustus"
-#    And admin filter contract status with "Sudah Check-out"
-#    Then admin can see contract status with "Sudah Check-out"
-#
-#  @SS-4376 @continue
-#  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Checkout
-#    When admin click on reset button
-#    When admin choose month "Juni"
-#    And admin filter contract status with "Ajukan Check-out"
-#    Then admin can see contract status with "Ajukan Check-out"
-#
-#  @SS-4375 @continue
-#  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Aktif
-#    When admin click on reset button
-#    When admin choose month "Agustus"
-#    And admin filter contract status with "Aktif"
-#    Then admin can see contract status with "Aktif"
