@@ -28,6 +28,8 @@ public class LoginPO {
     Locator keluarButton;
     Locator profilPictureTenant;
     Locator profilePictureNull;
+    Locator continueFBLogin;
+
 
     public LoginPO(Page page) {
         this.page = page;
@@ -50,6 +52,7 @@ public class LoginPO {
         keluarButton = page.getByTestId("exitButton");
         profilPictureTenant = page.locator("//img[@alt='User Photo']");
         profilePictureNull = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
+        continueFBLogin = page.locator(".x78zum5 > div > div > div > div:nth-child(3) > div > div > div > div > div").first();
     }
 
     /**
@@ -115,6 +118,8 @@ public class LoginPO {
     protected Object clickOnLoginFacebookButton() {
         return new Object();
     }
+
+
 
     /**
      * verify that login owner pop up is appear
@@ -241,5 +246,13 @@ public class LoginPO {
      */
     public Boolean isProfilePictureNotNull(){
         return profilePictureNull.isVisible();
+    }
+
+    /**
+     * Click on continue button on facebook login
+     */
+    public void clickOnContinueFBButton() {
+        playwright.clickOn(continueFBLogin);
+        playwright.hardWait(5000);
     }
 }

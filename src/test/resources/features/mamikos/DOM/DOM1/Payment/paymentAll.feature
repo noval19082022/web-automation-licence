@@ -1,7 +1,6 @@
 @DOM1 @essentialTest
 Feature: Payment All
-  
-@continue
+
   Scenario: Delete and create contract
     #delete contract
     Given admin go to mamikos mamipay admin
@@ -33,11 +32,13 @@ Feature: Payment All
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 081328787342 | 081328787342 | Perempuan |
+    And owner click nanti saja for recurring GoldPlus
     And owner accept booking and select the room
     And owner logs out
 
   @paymentCreditCard @TEST_SS-2745 @continue
   Scenario: [Booking][Invoice] Tenant pay kos credit card
+    Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
       | 0895124719 | 083176408442 | qwerty123 |
@@ -48,7 +49,7 @@ Feature: Payment All
     And tenant close unused browser tab
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
-
+#
   @TEST_SS-2752 @continue
   Scenario: [Invoice] Check Invoice From Kost saya dibayar
     Given user go to mamikos homepage
