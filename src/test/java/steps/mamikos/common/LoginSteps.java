@@ -72,6 +72,7 @@ public class LoginSteps {
                 .fillEmailAddress(email)
                 .fillPasswordFacebook(password)
                 .clickOnLoginFacebookButton();
+        login.clickOnContinueFBButton();
     }
 
     @When("user login as tenant via google")

@@ -281,7 +281,7 @@ public class ChatOwnerPO {
     public boolean isAttachmentButtonDisabled() {
         playwright.delayAndClickOn(sayaMengertiChatRoom, 3000.0);
         playwright.waitTillLocatorIsVisible(attachmentButton);
-        return playwright.isButtonEnable(attachmentButton);
+        return playwright.isButtonDisable(attachmentButton);
     }
 
     /**
