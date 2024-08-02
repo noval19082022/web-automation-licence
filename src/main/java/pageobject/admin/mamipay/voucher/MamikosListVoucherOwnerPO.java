@@ -22,6 +22,7 @@ public class MamikosListVoucherOwnerPO {
     Locator containerInfoVocher;
     Locator tableUsageVoucher;
     Locator tooltipUpdateOwnerVoucher;
+    Locator tooltipVoucherHistory;
     Locator headerUpdateVoucher;
     Locator headerCampaign;
     Locator btnCanceUpdateOwnerVoucher;
@@ -32,8 +33,9 @@ public class MamikosListVoucherOwnerPO {
         this.playwright = new PlaywrightHelpers(page);
 
         voucherDiscount = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Voucher Discount "));
-        ownerVoucher =page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Owner Voucher"));
+        ownerVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Owner Voucher"));
         headerVoucherCodeListOwner = page.locator("//h1[.='Voucher Code List']");
+        tooltipVoucherHistory = page.locator("//tbody/tr/td[9]/a[1]");
         buttonBackVoucher = page.locator("//a[.='Back to Voucher']");
         tableListVoucher = page.locator("//table[@class='table table-hover']");
         headerUsageVoucherOwner = page.locator("//h1[.='Voucher Usages']");
@@ -58,11 +60,12 @@ public class MamikosListVoucherOwnerPO {
 
     /**
      * click Voucher List tooltip in Owner Voucher menu
+     *
      * @throws InterruptedException
      */
     public void clickVoucherListOwner(String index) throws InterruptedException {
-            tooltipOwnerList = page.locator("(//i[@class='fa fa-list']/parent::a)["+index+"]");
-            playwright.clickOn(tooltipOwnerList);
+        tooltipOwnerList = page.locator("(//i[@class='fa fa-list']/parent::a)[" + index + "]");
+        playwright.clickOn(tooltipOwnerList);
     }
 
     /**
@@ -70,96 +73,103 @@ public class MamikosListVoucherOwnerPO {
      *
      * @return
      */
-    public boolean isVocherCodeListDisplayed(){
+    public boolean isVocherCodeListDisplayed() {
         return playwright.waitTillLocatorIsVisible(headerVoucherCodeListOwner, 2000.0);
 
     }
 
     /**
      * Click back button voucher
-     *
      */
-    public void clickOnBackButtonVoucher(){
-       playwright.clickOn(buttonBackVoucher);
+    public void clickOnBackButtonVoucher() {
+        playwright.clickOn(buttonBackVoucher);
     }
 
     /**
      * Check table voucher list is appear
-     *
      */
-    public boolean isTableListVoucherDisplayed(){
+    public boolean isTableListVoucherDisplayed() {
         return playwright.waitTillLocatorIsVisible(tableListVoucher, 1000.0);
     }
 
     /**
      * click Usage list tooltip in Owner Voucher menu
+     *
      * @throws InterruptedException
      */
     public void clickUsageListOwner(String index) throws InterruptedException {
-        tooltipUsageList = page.locator("(//i[@class='fa fa-eye']/parent::a)["+index+"]");
+        tooltipUsageList = page.locator("(//i[@class='fa fa-eye']/parent::a)[" + index + "]");
         playwright.clickOn(tooltipUsageList);
     }
 
     /**
      * Check table voucher list is appear
-     *
      */
-    public boolean isHeaderUsagePageIsDisplayed(){
+    public boolean isHeaderUsagePageIsDisplayed() {
         return playwright.waitTillLocatorIsVisible(headerUsageVoucherOwner, 1000.0);
 
     }
 
     /**
      * Check box of information voucher is appear
-     *
      */
-    public boolean isVoucherInformationIsDisplayed(){
+    public boolean isVoucherInformationIsDisplayed() {
         return playwright.waitTillLocatorIsVisible(containerInfoVocher, 1000.0);
 
     }
 
     /**
      * Check table usgae voucher owner is appear
-     *
      */
-    public boolean isTableUsageVoucherOwnerIsDisplayed(){
+    public boolean isTableUsageVoucherOwnerIsDisplayed() {
         return playwright.waitTillLocatorIsVisible(tableUsageVoucher, 1000.0);
 
     }
 
     /**
      * click Update tooltip in Owner Voucher menu
+     *
      * @throws InterruptedException
      */
     public void clickUpdateVoucherOwner(String index) throws InterruptedException {
-       tooltipUpdateOwnerVoucher = page.locator("(//i[@class='fa fa-edit']/parent::a)["+index+"]");
+        tooltipUpdateOwnerVoucher = page.locator("(//i[@class='fa fa-edit']/parent::a)[" + index + "]");
         playwright.clickOn(tooltipUpdateOwnerVoucher);
     }
 
     /**
      * Check header update voucher owner is appear
-     *
      */
-    public boolean isHeaderUpdateVoucherOwnerAppear(){
+    public boolean isHeaderUpdateVoucherOwnerAppear() {
         return playwright.waitTillLocatorIsVisible(headerUpdateVoucher, 1000.0);
 
     }
 
     /**
      * Check campaign header voucher owner is appear
-     *
      */
-    public boolean isCampaignHeaderAppear(){
+    public boolean isCampaignHeaderAppear() {
         return playwright.waitTillLocatorIsVisible(headerCampaign, 1000.0);
 
     }
 
     /**
      * Click cancel update button voucher
-     *
      */
-    public void clickOnCancelButtonOwnerVoucher(){
+    public void clickOnCancelButtonOwnerVoucher() {
         playwright.pageScrollUntilElementIsVisible(btnCanceUpdateOwnerVoucher);
         playwright.clickOn(btnCanceUpdateOwnerVoucher);
+    }
+
+    /**
+     * click voucher history on list
+     *
+     * @param index
+     */
+    public void clickHistoryVoucherOwner(String index) {
+        var indexInt = Integer.parseInt(index) - 1;
+        if (indexInt < 0) {
+            indexInt = 0;
+        }
+        playwright.clickOn(tooltipVoucherHistory.nth(indexInt));
     }
 }

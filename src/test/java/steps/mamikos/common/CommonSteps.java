@@ -117,4 +117,9 @@ public class CommonSteps {
     public void adminShouldNotBeAbleToSeeTheText(String info) {
         Assert.assertFalse(playwright.isTextDisplayed(info));
     }
+
+    @And("admin/user/tenant/owner go back to previous page")
+    public void adminGoBackToPreviousPage() {
+        ActiveContext.getActivePage().goBack();
+    }
 }

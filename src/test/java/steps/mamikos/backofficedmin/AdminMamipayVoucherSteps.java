@@ -613,29 +613,28 @@ public class AdminMamipayVoucherSteps {
 
     @Then("admin redirected to View Usage page")
     public void admin_redirected_to_view_usage_page() {
-        Assert.assertTrue(ownerVoucher.isHeaderUsagePageIsDisplayed(),"header usage voucher is not displayed");
-        Assert.assertTrue(ownerVoucher.isVoucherInformationIsDisplayed(),"voucher infromation is not displayed");
-        Assert.assertTrue(ownerVoucher.isTableUsageVoucherOwnerIsDisplayed(),"table is not displayed");
-       page.goBack();
+        Assert.assertTrue(ownerVoucher.isHeaderUsagePageIsDisplayed(), "header usage voucher is not displayed");
+        Assert.assertTrue(ownerVoucher.isVoucherInformationIsDisplayed(), "voucher infromation is not displayed");
+        Assert.assertTrue(ownerVoucher.isTableUsageVoucherOwnerIsDisplayed(), "table is not displayed");
     }
 
     @Then("admin redirected to Update page")
     public void admin_redirected_to_update_page() {
-       Assert.assertTrue(ownerVoucher.isHeaderUpdateVoucherOwnerAppear(),"Header update voucher is not appear");
-       Assert.assertTrue(ownerVoucher.isCampaignHeaderAppear(),"Campaign header not appear");
-       ownerVoucher.clickOnCancelButtonOwnerVoucher();
+        Assert.assertTrue(ownerVoucher.isHeaderUpdateVoucherOwnerAppear(), "Header update voucher is not appear");
+        Assert.assertTrue(ownerVoucher.isCampaignHeaderAppear(), "Campaign header not appear");
+        ownerVoucher.clickOnCancelButtonOwnerVoucher();
     }
 
     @Then("admin redirected to Single Voucher List owner")
     public void admin_redirected_to_single_voucher_list_owner() {
         Assert.assertTrue(ownerVoucher.isVocherCodeListDisplayed(), "Voucher code list is not displayed");
-        Assert.assertTrue(ownerVoucher.isTableListVoucherDisplayed(),"Table list is not displayed");
+        Assert.assertTrue(ownerVoucher.isTableListVoucherDisplayed(), "Table list is not displayed");
         ownerVoucher.clickOnBackButtonVoucher();
     }
 
     @When("admin want to see View Usage List owner for index {string}")
     public void admin_want_to_see_view_usage_list_owner_for_index(String index) throws InterruptedException {
-       ownerVoucher.clickUsageListOwner(index);
+        ownerVoucher.clickUsageListOwner(index);
     }
 
     @When("admin want to see update page for index {string}")
@@ -644,4 +643,13 @@ public class AdminMamipayVoucherSteps {
     }
 
 
+    @When("admin want to see Voucher History page for index {string}")
+    public void adminWantToSeeHistoryPageForIndex(String index) {
+        ownerVoucher.clickHistoryVoucherOwner(index);
+    }
+
+    @And("Admin go to Single Voucher List Owner")
+    public void adminGoToSingleVoucherListOwner() {
+        ownerVoucher.goToOwnerVoucher();
+    }
 }
