@@ -191,20 +191,22 @@ public class BillingTrackePO {
     }
 
     /**
-     * validate noted on main page
-     *
-     * @param text
+     * validate noted type on main page
+     * @param  type
      * @return text
      */
-    public boolean getNotedOnMainPage( String text) {
-//        int r = Integer.parseInt(list)+1;
-        Locator getNotedOnMainPage = page.locator("//tr[1]//div[normalize-space()='"+text+"']");
-        return playwright.waitTillLocatorIsVisible(getNotedOnMainPage, 3000.0);
+    public boolean getResutlDataTableType(String type){
+        Locator getResutlDataTable = page.locator("(//tr[1]//div[normalize-space()='" + type + "'])");
+        return playwright.waitTillLocatorIsVisible(getResutlDataTable, 3000.0);
     }
-
-    public boolean getNotedDescription(){
-        Locator getNotedDescription = page.locator(" tr:nth-of-type(1) li:nth-of-type(1) p:nth-of-type(1)");
-        return playwright.waitTillLocatorIsVisible(getNotedDescription, 3000.0);
+    /**
+     * validate noted on main page
+     * @param notes
+     * @return text
+     */
+    public boolean getResultDataTableNote(String notes){
+        Locator getResultDataTableNoteText = page.locator("//p[contains(.,'"+notes+"')]");
+        return playwright.waitTillLocatorIsVisible(getResultDataTableNoteText,3000.0);
     }
 
     /**

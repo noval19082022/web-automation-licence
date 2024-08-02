@@ -80,12 +80,6 @@ public class BillingTrackerSteps {
         billingTracker.clickSaveButton();
     }
 
-    @Then("admin can see notes with {string} and {string}")
-    public void admin_can_see_notes_with(String noteType, String noteDes) {
-        Assert.assertTrue(billingTracker.getNotedOnMainPage(noteType), "noted not visible");
-        Assert.assertTrue(billingTracker.getNotedDescription(), "not appears description");
-    }
-
     @Then("Admin can see all invoice recurring from mamipay :")
     public void admin_can_see_all_invoice_reccuring(DataTable tables) {
         for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
@@ -169,6 +163,16 @@ public class BillingTrackerSteps {
     @And("admin click on pagination")
     public void admin_click_on_pagination(){
         billingTracker.clickOnPagination();
+    }
+
+    @Then("admin can see notes with:")
+    public void admin_can_see_notes_with(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String type = row.get("type");
+            String notes = row.get("notes");
+            Assert.assertTrue(billingTracker.getResutlDataTableType(type), "Element is not displayed for ");
+            Assert.assertTrue(billingTracker.getResultDataTableNote(notes), "Element is not displayed for");
+        }
     }
 }
 
