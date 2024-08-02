@@ -19,7 +19,7 @@ public class BillingTrackerSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     BillingTrackePO billingTracker = new BillingTrackePO(page);
 
-    private Map<String, String> notedData;
+    private List<Map<String, String>> notedData;
     private List<Map<String, String>> pmsCredential;
 
     @And("admin search billing tracker by {string} and {string}")
@@ -57,27 +57,27 @@ public class BillingTrackerSteps {
         billingTracker.getBulkText(text);
     }
 
-    @Then("admin can see tambah catatan button")
-    public void admin_can_see_tambah_catatan_button() {
-        Assert.assertTrue(billingTracker.getCreateNotesButtonVisible(), "tambah catatan not displayed");
+    @Then("admin can see {string} button")
+    public void admin_can_see_button(String text) {
+        if (text.equalsIgnoreCase("Tambah Catatan")) {
+            Assert.assertTrue(billingTracker.getCreateNotesButtonVisible(), "tambah catatan not displayed");
+        }
+        else if (text.equalsIgnoreCase("Sembunyikan")){
+            Assert.assertTrue(billingTracker.getSembunyikantextButton(), "not appears sembunyikan button");
+        }
     }
 
     @And("admin fill notes tracker with:")
-    public void admin_fill_notes_tracker_with(DataTable table) {
-        notedData = table.asMap(String.class, String.class);
-        var type = notedData.get("type");
-        var notes = notedData.get("catatan");
+    public void admin_fill_notes_tracker_with(DataTable tables) {
+        notedData = tables.asMaps(String.class, String.class);
+        String type = notedData.get(0).get("type");
+        String notes = notedData.get(0).get("notes");
         billingTracker.clickCreateNotesAction();
         billingTracker.setAndInputNotesType(type);
         if (notes != null) {
             billingTracker.fillNotesCatatan(notes);
         }
         billingTracker.clickSaveButton();
-    }
-
-    @Then("admin can see notes with {string}")
-    public void admin_can_see_notes_with(String text) {
-        Assert.assertTrue(billingTracker.getNotedOnMainPage(text), "noted not visible");
     }
 
     @Then("Admin can see all invoice recurring from mamipay :")
@@ -153,6 +153,26 @@ public class BillingTrackerSteps {
     @Then("admin can see contract status with {string}")
     public void admin_can_see_contract_status_with(String text){
         Assert.assertTrue(billingTracker.getContractStatusOnListText(text), "status doesnt match");
+    }
+
+    @And("admin can see phone number with {string}")
+    public void admin_can_see_phone_number_with(String text){
+        Assert.assertTrue(billingTracker.getTenantPhoneNumbertext(text), "admin can't see phone number");
+    }
+
+    @And("admin click on pagination")
+    public void admin_click_on_pagination(){
+        billingTracker.clickOnPagination();
+    }
+
+    @Then("admin can see notes with:")
+    public void admin_can_see_notes_with(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String type = row.get("type");
+            String notes = row.get("notes");
+            Assert.assertTrue(billingTracker.getResutlDataTableType(type), "Element is not displayed for ");
+            Assert.assertTrue(billingTracker.getResultDataTableNote(notes), "Element is not displayed for");
+        }
     }
 }
 

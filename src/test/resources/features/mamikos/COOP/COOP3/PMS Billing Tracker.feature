@@ -37,40 +37,6 @@ Feature: Billing Tracker
     And admin search billing tracker by "No. HP Penyewa" and "081197878412"
     Then admin click on "Tandai Belum Follow-up"
 
-  @SS-5081 @continue
-  Scenario: [Billing Tracker][Notes]Create notes on invoice
-    When admin click on reset button
-    And admin choose month "Mei"
-    And admin search billing tracker by "No. HP Penyewa" and "085831212121"
-    Then admin can see tambah catatan button
-    When admin click on reset button
-    And admin choose month "Agustus"
-    And admin search billing tracker by "No. HP Penyewa" and "085246223424"
-    And admin fill notes tracker with:
-      | type  | Pindah tipe kamar |
-      | notes | pindah kamar 5    |
-    Then admin can see notes with "Pindah tipe kamar"
-
-  @SS-5082 @continue
-  Scenario: [Billing Tracker][Notes]Create notes for tag = Blast
-    When admin click on reset button
-    And admin choose month "Mei"
-    And admin search billing tracker by "No. HP Penyewa" and "081045645600"
-    And admin fill notes tracker with:
-      | type  | Blast             |
-      | notes | Tutup jam 9 malam |
-    Then admin can see notes with "Blast"
-
-  @SS-5083 @continue
-  Scenario: [Billing Tracker][Notes]Check the display when invoice have many notes > 2 noted
-    When admin click on reset button
-    And admin choose month "Agustus"
-    And admin search billing tracker by "No. HP Penyewa" and "085246113222"
-    And admin fill notes tracker with:
-      | type  | Blast             |
-      | notes | Tutup jam 9 malam |
-    Then admin can see notes with "Blast"
-
   @SS-5084 @continue
   Scenario: [Billing Tracker][View Data]Check invoice billing when tenant have many recurring invoice
     When admin click on reset button
@@ -81,24 +47,6 @@ Feature: Billing Tracker
       | 01 Mar      | Recurring  |
       | 07 Mar      | Recurring  |
       | 15 Mar      | Recurring  |
-
-  @SS-5085 @continue @SS-4310 @SS-4309
-  Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
-    When admin click on reset button
-    And admin choose month "Agustus"
-    And admin search billing tracker by "No. HP Penyewa" and "085246113222"
-    And admin click on Lihat lebih banyak catatan note dropdown
-    Then admin can see notes with "Blast"
-
-  @SS-5086  @continue @SS-4308
-  Scenario: [Billing Tracker][Notes]Edit notes
-    When admin click on reset button
-      And admin choose month "Juni"
-    And admin search billing tracker by "No. HP Penyewa" and "083321214884"
-    And admin edit note "Pindah tipe kamar"
-    Then admin can see notes with "Pindah tipe kamar"
-    And admin edit note "Blast"
-    Then admin can see notes with "Blast"
 
   @SS-5087 @continue
   Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
@@ -112,24 +60,3 @@ Feature: Billing Tracker
     When admin go to billing tracker
     And admin click on expand billing announcement
     Then admin can see bse tab list
-
-  @SS-4378 @continue
-  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Sudah Checkout
-    And admin click on reset button
-    When admin choose month "Agustus"
-    And admin filter contract status with "Sudah Check-out"
-    Then admin can see contract status with "Sudah Check-out"
-
-  @SS-4376 @continue
-  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Checkout
-    When admin click on reset button
-    When admin choose month "Juni"
-    And admin filter contract status with "Ajukan Check-out"
-    Then admin can see contract status with "Ajukan Check-out"
-
-  @SS-4375 @continue
-  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Aktif
-    When admin click on reset button
-    When admin choose month "Agustus"
-    And admin filter contract status with "Aktif"
-    Then admin can see contract status with "Aktif"

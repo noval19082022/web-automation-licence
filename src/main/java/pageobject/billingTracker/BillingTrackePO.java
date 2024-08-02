@@ -30,6 +30,8 @@ public class BillingTrackePO {
     Locator tagDropdown;
     Locator saveButtonNotes;
     Locator adminChooseCalender;
+    Locator sembunyikanButton;
+    Locator nextPaginationButton;
 
     //-----billing announcement------//
     Locator announcementExpand;
@@ -47,7 +49,7 @@ public class BillingTrackePO {
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("search Cari"));
         resultDataTable = page.locator("tbody > tr:nth-child(1)").first();
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
-        filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filterFilter"));
+        filterButton = page.locator("//button[@class=\"bg-c-button bg-u-mr-md bg-c-button--tertiary bg-c-button--md\"]");
         filterBseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih akun BSE dropdown-down"));
         applyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         iconActionButton = page.locator("div.table-action-menu__activator").first();
@@ -55,11 +57,13 @@ public class BillingTrackePO {
         createNotesButtonOnAction = page.locator("//p[@class=\"bg-c-text bg-c-text--body-2\"]").first();
         typeNotesButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih tag dropdown-down"));
         inputNotesCatatan = page.getByPlaceholder("Tulis catatan di sini");
-        lihatLebihBanyakDropdown = page.locator(".billing-tracker-note-list__expand-toggle");
+        lihatLebihBanyakDropdown = page.locator(".billing-tracker-note-list__expand-toggle").last();
         adminEditNote = page.locator(".billing-tracker-note-list__item-tag").first();
         saveButtonNotes = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         tagDropdown = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
         adminChooseCalender = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--md']");
+        sembunyikanButton = page.locator("//button[contains(., 'Sembunyikan')]");
+        nextPaginationButton = page.locator("//button[@class=\"bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm bg-c-button--icon-only-sm\"][2]");
 
         //-----------billing announcement----------//
         announcementExpand = page.locator("//*[@class=\"bg-c-text bg-c-text--title-3\"]");
@@ -187,14 +191,22 @@ public class BillingTrackePO {
     }
 
     /**
-     * validate noted on main page
-     *
-     * @param text
+     * validate noted type on main page
+     * @param  type
      * @return text
      */
-    public boolean getNotedOnMainPage(String text) {
-        Locator getNotedOnMainPage = page.locator("//div[contains(text(),'" + text + "')]").first();
-        return playwright.waitTillLocatorIsVisible(getNotedOnMainPage, 3000.0);
+    public boolean getResutlDataTableType(String type){
+        Locator getResutlDataTable = page.locator("(//tr[1]//div[normalize-space()='" + type + "'])");
+        return playwright.waitTillLocatorIsVisible(getResutlDataTable, 3000.0);
+    }
+    /**
+     * validate noted on main page
+     * @param notes
+     * @return text
+     */
+    public boolean getResultDataTableNote(String notes){
+        Locator getResultDataTableNoteText = page.locator("//p[contains(.,'"+notes+"')]");
+        return playwright.waitTillLocatorIsVisible(getResultDataTableNoteText,3000.0);
     }
 
     /**
@@ -317,8 +329,35 @@ public class BillingTrackePO {
      * @return text Sudah Check-out
      */
     public boolean getContractStatusOnListText(String text){
-        Locator contractStatusLabelText = page.locator("//div[contains(., '"+text+"')]").first();
+        Locator contractStatusLabelText = page.locator("//div[contains(., '"+text+"')]").last();
         return playwright.waitTillLocatorIsVisible(contractStatusLabelText, 10000.0);
     }
+
+    /**
+     * validate text sembunyikan
+     * @return text sembunyikan
+     */
+    public boolean getSembunyikantextButton(){
+        return playwright.waitTillLocatorIsVisible(sembunyikanButton);
+    }
+
+    /**
+     * validate phone number appears on result list
+     * @param text
+     * @return phonenumber example = 08100000021
+     */
+    public boolean getTenantPhoneNumbertext(String text){
+        Locator tenantPhoneNumberText = page.locator("//a[contains(., '"+text+"')]").first();
+        return playwright.waitTillLocatorIsVisible(tenantPhoneNumberText);
+    }
+
+    /**
+     * click next on pagination
+     */
+    public void clickOnPagination(){
+        playwright.clickOn(nextPaginationButton);
+    }
+
+
 }
 
