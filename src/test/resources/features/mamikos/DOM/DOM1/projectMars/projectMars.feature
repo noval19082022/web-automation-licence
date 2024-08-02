@@ -1,7 +1,7 @@
 @DOM1
 Feature: Mars Project
 
-  @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform @DOM11
+  @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check functionality FTUE Pop Up Before Send Chat
     Given user go to mamikos homepage
     When user login as owner:

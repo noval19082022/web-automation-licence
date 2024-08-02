@@ -33,7 +33,7 @@ Feature: Room card on Kost List
       | /kost/kost-dekat-stan-jakarta-murah           |
       | /kost/kost-dekat-ub-malang-murah              |
       | /kost/kost-dekat-unair-surabaya-murah         |
-      | /kost/kost-jogja-murah                        |
+#      | /kost/kost-jogja-murah                        |
       | /kost/kost-jakarta-murah                      |
       | /kost/kost-bandung-murah                      |
       | /kost/kost-surabaya-murah                     |

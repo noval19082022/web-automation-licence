@@ -46,7 +46,7 @@ Feature: FTUE Booking Benefit
     And user go to mamikos homepage
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                                      |
-      | Kos Dom Automation PLM Tipe A | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
