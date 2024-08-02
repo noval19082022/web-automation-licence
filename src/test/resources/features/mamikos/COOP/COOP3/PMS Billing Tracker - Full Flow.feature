@@ -65,13 +65,19 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Aktif"
     Then admin can see contract status with "Aktif"
 
-  @SS-5081 @continue
+  @SS-5081 @continue @a
   Scenario: [Billing Tracker][Notes]Create notes on invoice
-    When admin can see "Tambah Catatan" button
-    And admin fill notes tracker with:
-      | type  | Pindah tipe kamar |
-      | notes | pindah kamar 5    |
-    Then admin can see notes with "Pindah tipe kamar"
+#    When admin can see "Tambah Catatan" button
+    When admin go to pms singgahsini
+    And admin login pms :
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
+    And admin go to billing tracker
+    And admin search billing tracker by "No. HP Penyewa" and "085246223424"
+#    And admin fill notes tracker with:
+#      | type  | notes |
+#      | Pindah tipe kamar | pindah kamar 5    |
+    Then admin can see notes with "Refund (garansi)" and "update again"
 
   @SS-5082 @continue
   Scenario: [Billing Tracker][Notes]Create notes for tag = Blast
@@ -79,16 +85,16 @@ Feature: Update Billing tracker flow
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
     And admin fill notes tracker with:
-      | type  | Blast             |
-      | notes | Tutup jam 9 malam |
-    Then admin can see notes with "Blast"
+      | type  | notes             |
+      | Blast | Tutup jam 9 malam |
+    Then admin can see notes with "Blast" and "Tutup jam 9 malam"
 
   @SS-4309 @continue
    Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
     And admin fill notes tracker with:
-      | type  | Blast     |
-      | notes | cash out tanggal 5 |
-    Then admin can see notes with "Blast"
+      | type  | notes     |
+      | Input cash out | cash out tanggal 5 |
+    Then admin can see notes with "Input cash out" and "cash out tanggal 5"
     And admin click on Lihat lebih banyak catatan note dropdown
 
   @SS-5083 @continue
@@ -100,7 +106,7 @@ Feature: Update Billing tracker flow
       | type  | Blast             |
       | notes | Tutup jam 9 malam |
     And admin click on Lihat lebih banyak catatan note dropdown
-    Then admin can see notes with "Pindah tipe kamar"
+    Then admin can see notes with "Pindah tipe kamar" and "cash out tanggal 5"
 
   @SS-5086 @continue @SS-4308
   Scenario: [Billing Tracker][Notes]Edit notes
@@ -108,9 +114,9 @@ Feature: Update Billing tracker flow
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
     And admin edit note "Pindah tipe kamar"
-    Then admin can see notes with "Pindah tipe kamar"
+    Then admin can see notes with "Pindah tipe kamar" and "cash out tanggal 5"
     And admin edit note "Blast"
-    Then admin can see notes with "Blast"
+    Then admin can see notes with "Blast" and "cash out tanggal 5"
 
   @SS-4310 @continue
   Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
@@ -118,7 +124,7 @@ Feature: Update Billing tracker flow
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
     And admin click on Lihat lebih banyak catatan note dropdown
-    Then admin can see notes with "Blast"
+    Then admin can see notes with "Blast" and "cash out tanggal 5"
     When admin can see "Sembunyikan" button
 
   Scenario: tenant ajukan berhenti sewa

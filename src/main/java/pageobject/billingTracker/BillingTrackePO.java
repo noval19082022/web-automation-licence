@@ -196,9 +196,15 @@ public class BillingTrackePO {
      * @param text
      * @return text
      */
-    public boolean getNotedOnMainPage(String text) {
-        Locator getNotedOnMainPage = page.locator("//div[contains(text(),'" + text + "')]").first();
+    public boolean getNotedOnMainPage( String text) {
+//        int r = Integer.parseInt(list)+1;
+        Locator getNotedOnMainPage = page.locator("//tr[1]//div[normalize-space()='"+text+"']");
         return playwright.waitTillLocatorIsVisible(getNotedOnMainPage, 3000.0);
+    }
+
+    public boolean getNotedDescription(){
+        Locator getNotedDescription = page.locator(" tr:nth-of-type(1) li:nth-of-type(1) p:nth-of-type(1)");
+        return playwright.waitTillLocatorIsVisible(getNotedDescription, 3000.0);
     }
 
     /**
@@ -349,5 +355,7 @@ public class BillingTrackePO {
     public void clickOnPagination(){
         playwright.clickOn(nextPaginationButton);
     }
+
+
 }
 

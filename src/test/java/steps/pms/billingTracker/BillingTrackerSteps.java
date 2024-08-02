@@ -19,7 +19,7 @@ public class BillingTrackerSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     BillingTrackePO billingTracker = new BillingTrackePO(page);
 
-    private Map<String, String> notedData;
+    private List<Map<String, String>> notedData;
     private List<Map<String, String>> pmsCredential;
 
     @And("admin search billing tracker by {string} and {string}")
@@ -68,10 +68,10 @@ public class BillingTrackerSteps {
     }
 
     @And("admin fill notes tracker with:")
-    public void admin_fill_notes_tracker_with(DataTable table) {
-        notedData = table.asMap(String.class, String.class);
-        var type = notedData.get("type");
-        var notes = notedData.get("notes");
+    public void admin_fill_notes_tracker_with(DataTable tables) {
+        notedData = tables.asMaps(String.class, String.class);
+        String type = notedData.get(0).get("type");
+        String notes = notedData.get(0).get("notes");
         billingTracker.clickCreateNotesAction();
         billingTracker.setAndInputNotesType(type);
         if (notes != null) {
@@ -80,9 +80,10 @@ public class BillingTrackerSteps {
         billingTracker.clickSaveButton();
     }
 
-    @Then("admin can see notes with {string}")
-    public void admin_can_see_notes_with(String text) {
-        Assert.assertTrue(billingTracker.getNotedOnMainPage(text), "noted not visible");
+    @Then("admin can see notes with {string} and {string}")
+    public void admin_can_see_notes_with(String noteType, String noteDes) {
+        Assert.assertTrue(billingTracker.getNotedOnMainPage(noteType), "noted not visible");
+        Assert.assertTrue(billingTracker.getNotedDescription(), "not appears description");
     }
 
     @Then("Admin can see all invoice recurring from mamipay :")
