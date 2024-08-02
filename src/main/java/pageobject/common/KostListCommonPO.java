@@ -48,6 +48,7 @@ public class KostListCommonPO {
      */
     public void clickOnLihatLebihBanyakBtn() {
         playwright.waitTillPageLoaded();
+        playwright.hardWait(2000.0);
         if (playwright.isLocatorVisibleAfterLoad(lihatLebihBanyakBtn, 2.0)) {
             playwright.pageScrollInView(lihatLebihBanyakBtn);
             playwright.clickOn(lihatLebihBanyakBtn);
