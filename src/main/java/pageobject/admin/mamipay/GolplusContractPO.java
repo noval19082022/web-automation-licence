@@ -3,6 +3,7 @@ package pageobject.admin.mamipay;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.SelectOption;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -250,7 +251,10 @@ public class GolplusContractPO {
      */
     public void selectDropdownPackage(String packageGP) {
         Locator element =  page.locator("//select[@name='package']");
-        playwright.selectDropdownByValue(element,packageGP);
+        playwright.clickOn(element);
+        Locator elementValue = page.locator("//option[contains(.,'"+packageGP+"')]");
+        playwright.clickOn(elementValue);
+
     }
 
 

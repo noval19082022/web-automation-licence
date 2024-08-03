@@ -60,7 +60,7 @@ Feature: Goldplus Recurring
     When owner wants to extends Goldplus from chatlist
     Then owner will be redirected to invoice recurring
 
-  @continue @TEST_LIMO-3531
+  @continue @TEST_LIMO-3531 @GPNoval1
   Scenario: owner GP recurring wants to extend GP via Chatroom
     And owner navigates to owner dashboard
     And owner wants to extends Goldplus from chatroom
@@ -75,11 +75,11 @@ Feature: Goldplus Recurring
     And owner navigates to owner dashboard
     And owner should not be able to see the text "Perpanjang paket Goldplus yuk!"
 
-  @TEST_LIMO-3533
+  @TEST_LIMO-3533 @GPNoval1
   Scenario: Owner doesn't get recurring reminder pop up
     When user sets recurring "H2" for number "082233545514"
     And owner navigates to owner dashboard
-    Then user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
+#    Then user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
 
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin

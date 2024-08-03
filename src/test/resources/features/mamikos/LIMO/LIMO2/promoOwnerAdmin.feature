@@ -25,7 +25,7 @@ Feature: Promo Owner Admin BangKerupux
     And tenant search kost then go to kost details:
       | kost name stag                                           |
       | Kos Promo Owner Automation Tipe Promo Satu Kretek Bantul |
-    Then tenant verify the promo displayed is "Promo Teruss"
+    Then tenant verify the promo displayed is "Title Promo Owner"
 
   Scenario: Delete promo owner
     Given admin go to mamikos bangkrupux admin

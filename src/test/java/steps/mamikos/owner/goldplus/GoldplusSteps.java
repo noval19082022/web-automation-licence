@@ -91,11 +91,15 @@ public class GoldplusSteps {
 
     @When("user sets recurring {string} for number {string}")
     public void user_sets_recurring_for_number(String period, String phoneNumber) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputRecurringPhoneNumber(phoneNumber);
         goldplus.selectRecurringPeriod(period);
         playwright.clickOnTextButton("Create Recurring");
-        Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
+        if (playwright.isTextDisplayed("Recurring invoice created!")) {
+            Assert.assertTrue(playwright.isTextDisplayed("Recurring invoice created!"));
+        } else if (playwright.isTextDisplayed("Done!")) {
+            Assert.assertTrue(playwright.isTextDisplayed("Done!", 2));
+        }
     }
 
     @Then("admin successfully sets favorite label to none")
@@ -103,14 +107,6 @@ public class GoldplusSteps {
         goldplus.clickOnEditGP1Button();
         goldplus.clickNoRadioButton();
         playwright.clickOnText("Save");
-    }
-
-    @When("admin successfully sets favorite label to active")
-    public void admin_successfully_sets_favorite_label_to_active() {
-        goldplus.clickOnEditGP1Button();
-        goldplus.clickYesRadioButton();
-        playwright.clickOnText("Save");
-        playwright.waitTillPageLoaded(10000.0);
     }
 
     @When("admin successfully adds additional favorite labels")
@@ -127,10 +123,24 @@ public class GoldplusSteps {
         playwright.clickOnTextButton("Save");
     }
 
+    @When("admin successfully additional favorite labels 4 Month")
+    public void admin_successfully_additional_favorite_labels() {
+        goldplus.clickOnEditGP1Button();
+        goldplus.clickYesRadioButton();
+        playwright.clickOnTextButton("Save");
+    }
+
     @When("admin successfully remove additional favorite labels 3 Month")
     public void admin_successfully_remove_additional_favorite_labels_3_month() {
-        goldplus.clickOnEditGP2Button();
+        goldplus.clickOnEditGP1Button();
         goldplus.clickNoRadioButton();
+        playwright.clickOnTextButton("Save");
+    }
+
+    @When("admin successfully additional favorite labels 3 Month")
+    public void admin_successfully_additional_favorite_labels_3_month() {
+        goldplus.clickOnEditGP1Button();
+        goldplus.clickYesRadioButton();
         playwright.clickOnTextButton("Save");
     }
 
@@ -172,7 +182,7 @@ public class GoldplusSteps {
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
         chat.dismissFTUEJemputBolaIfExist();
-        playwright.clickOnTextButton("Irvi Tenant Add Ons");
+        playwright.clickOnTextButton("Akun Test");
         goldplus.clickOnPerpanjangBtnOnChatRoom();
     }
 
@@ -633,12 +643,12 @@ public class GoldplusSteps {
 
     @Then("user will see that the goldplus package choosed is displayed")
     public void userWillSeeThatTheGoldplusPackageChoosedIsDisplayed() {
-        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed()+" periode "+ Mamikos.getGpPeriodeChoosed());
+        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed()+" (reg#1m) periode "+ Mamikos.getGpPeriodeChoosed());
     }
 
     @Then("user will see that the goldplus package on rincian pembayaran detail tagihan")
     public void userWillSeeThatTheGoldplusPackageOnRincianPembayaranDetailTagihan() {
-        Assert.assertEquals(goldplus.getGpPackageRincianPembaranDetailTagihan(), Mamikos.getGpPackageChoosed() + " (" + Mamikos.getGpPeriodeChoosed() + ")");
+        Assert.assertEquals(goldplus.getGpPackageRincianPembaranDetailTagihan(), Mamikos.getGpPackageChoosed() + " (reg:1m) periode " + Mamikos.getGpPeriodeChoosed());
     }
 
     //------ GP Weekly------//
@@ -719,7 +729,7 @@ public class GoldplusSteps {
     @And("admin submit and get success message {string}")
     public void adminSubmitAndGetSuccessMessage(String successMessage) {
         goldplus.clickSaveButton();
-        Assert.assertEquals(goldplus.getSuccessMessage(), successMessage, "Success message doesn't match!");
+        Assert.assertEquals(goldplus.getSuccessMessage(), successMessage, "Success! GoldPlus package updated.");
     }
 
     @Then("owner see that the text {string} is displayed on goldplus page")

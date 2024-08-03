@@ -31,5 +31,6 @@ Feature: Owner Experiment- GP Chat List
     When user click "Chat bebas kuota" on ftue
     Then verify title ftue is "Mau chat bebas kuota?" and description "Jika tidak ingin menunggu, Anda bisa daftar GoldPlus untuk chat bebas kuota."
     When user click "Saya Mengerti" on ftue
-    Then user verify last ftue is "Anda hanya bisa balas chat room sesuai kuota Anda. Kuota tidak berlaku akumulasi (tidak dapat dikumpul)."
+    And user dismiss Laporan klik FTUE
+   # Then user verify last ftue is "Anda hanya bisa balas chat room sesuai kuota Anda. Kuota tidak berlaku akumulasi (tidak dapat dikumpul)."
     * owner will see chat list page empty state

@@ -298,7 +298,6 @@ public class OwnerDashboardPO {
      * Click on see all notification
      */
     public void clicOnSeeAllNotification() {
-        playwright.waitTillLocatorIsVisible(seeAllNotification);
         playwright.clickOn(seeAllNotification);
     }
 

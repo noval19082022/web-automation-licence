@@ -58,7 +58,6 @@ public class OwnerDashboardSteps {
     public void owner_open_notification_icon() {
         ownerDashboardPO.clickNotificationButton();
         ownerDashboardGP.dismissFTUEGoldplus();
-        ownerDashboardPO.clickNotificationButton();
     }
 
     @And("owner wants to see all notification")
