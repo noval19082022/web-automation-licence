@@ -124,7 +124,6 @@ Feature: GP Weekly
 
   @TEST_LIMO-3501 @detailTagihanGoldplus
     Scenario: [WEB][Detail Tagihan GP] Check wording for GP Shorter period at detail tagihan GP expired
-     detail tagihan expired
     Given owner navigates to "/goldplus/payment"
     * owner select transaction expired from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Dibatalkan"

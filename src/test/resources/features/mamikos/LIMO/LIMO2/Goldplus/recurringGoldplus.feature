@@ -60,7 +60,7 @@ Feature: Goldplus Recurring
     When owner wants to extends Goldplus from chatlist
     Then owner will be redirected to invoice recurring
 
-  @continue @TEST_LIMO-3531 @GPNoval1
+  @continue @TEST_LIMO-3531
   Scenario: owner GP recurring wants to extend GP via Chatroom
     And owner navigates to owner dashboard
     And owner wants to extends Goldplus from chatroom
