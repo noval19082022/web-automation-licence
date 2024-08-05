@@ -652,4 +652,39 @@ public class AdminMamipayVoucherSteps {
     public void adminGoToSingleVoucherListOwner() {
         ownerVoucher.goToOwnerVoucher();
     }
+
+    @And("Admin want to create single voucher owner")
+    public void adminWantToCreateSingleVoucherOwner() {
+        ownerVoucher.clickOnAddSingleVoucher();
+    }
+
+    @And("Admin select Goldplus on product field create single voucher")
+    public void adminSelectGoldplusOnProductFieldCreateSingleVoucher() {
+        ownerVoucher.selectOptionProductGP();
+    }
+
+    @And("Admin fill all required campaign field on create single voucher")
+    public void adminFillAllRequiredCampaignFieldOnCreateSingleVoucher(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps();
+        ownerVoucher.inputCampaignName(table.get(0).get("Campaign Name"));
+        ownerVoucher.inputStartDateCampaign(table.get(0).get("Start Date"));
+        ownerVoucher.inputEndDateCampaign(table.get(0).get("End Date"));
+    }
+
+    @And("Admin fill all required voucher field on create single voucher")
+    public void adminFillAllRequiredVoucherFieldOnCreateSingleVoucher(DataTable tables) {
+        List<Map<String, String>> table = tables.asMaps();
+        ownerVoucher.inputVoucherPrefix(table.get(0).get("Voucher PrefixCode"));
+        ownerVoucher.inputTotalVoucher(table.get(0).get("Total Voucher"));
+        ownerVoucher.inputDiscountType(table.get(0).get("Discount Type"));
+        ownerVoucher.inputDiscountAmount(table.get(0).get("Discount Amount"));
+        ownerVoucher.uploadOwnerList(table.get(0).get("Upload Owner List"));
+        ownerVoucher.inputInvoiceType(table.get(0).get("Invoice Type"));
+        ownerVoucher.inputDoubleRedeemWithMamiPoin(table.get(0).get("Double Redeem With MamiPoin"));
+    }
+
+    @And("Admin click Create Voucher Single list button")
+    public void adminClickCreateVoucherSingleListButton() {
+        ownerVoucher.clickOnCreateVoucherBtn();
+    }
 }

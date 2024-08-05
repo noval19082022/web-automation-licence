@@ -1,10 +1,14 @@
 package pageobject.admin.mamipay.voucher;
 
+import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
+
+import java.nio.file.Paths;
+import java.util.UUID;
 
 public class MamikosListVoucherOwnerPO {
     private Page page;
@@ -26,6 +30,19 @@ public class MamikosListVoucherOwnerPO {
     Locator headerUpdateVoucher;
     Locator headerCampaign;
     Locator btnCanceUpdateOwnerVoucher;
+    Locator btnAddSingleVoucher;
+    Locator optionProduct;
+    Locator campaignNamePlacHolder;
+    Locator startDateCampaign;
+    Locator endDateCampaign;
+    Locator inputPrefixVoucherCodeCampaign;
+    Locator inputTotalVoucherCampaign;
+    Locator selectDiscountTypeCampaign;
+    Locator inputDiscountAmountCampaign;
+    Locator uploadOwnerList;
+    Locator selectInvoiceType;
+    Locator selectOptionDoubleRedeem;
+    Locator createBtnSingleListVoucher;
 
 
     public MamikosListVoucherOwnerPO(Page page) {
@@ -44,7 +61,19 @@ public class MamikosListVoucherOwnerPO {
         headerUpdateVoucher = page.locator("//h1[.='Edit Single Voucher']");
         headerCampaign = page.locator("//h3[contains(.,'CAMPAIGN')]");
         btnCanceUpdateOwnerVoucher = page.locator("//a[.='Cancel']");
-
+        btnAddSingleVoucher = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Single Voucher"));
+        optionProduct = page.locator("select[name='product_type']");
+        campaignNamePlacHolder = page.locator("input[name='campaign[name]']");
+        startDateCampaign = page.getByLabel("Start Date");
+        endDateCampaign = page.getByLabel("End Date");
+        inputPrefixVoucherCodeCampaign = page.locator("input[name='voucher_code_prefix']");
+        inputTotalVoucherCampaign = page.locator("input[name='voucher_code_total']");
+        selectDiscountTypeCampaign = page.locator("#discount-type");
+        inputDiscountAmountCampaign = page.locator("input[name='discount_amount']");
+        uploadOwnerList = page.locator("input[name='voucher_targeted_users_file']");
+        selectInvoiceType = page.locator("#invoice-type");
+        selectOptionDoubleRedeem = page.locator("#mamipoin-redeem-supported");
+        createBtnSingleListVoucher = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Voucher"));
     }
 
     /**
@@ -171,5 +200,140 @@ public class MamikosListVoucherOwnerPO {
             indexInt = 0;
         }
         playwright.clickOn(tooltipVoucherHistory.nth(indexInt));
+    }
+
+    /**
+     * click on add single voucher
+     */
+    public void clickOnAddSingleVoucher() {
+        playwright.clickOn(btnAddSingleVoucher);
+    }
+
+    /**
+     * select option GP
+     */
+    public void selectOptionProductGP() {
+        playwright.selectDropdownByValue(optionProduct, "goldplus");
+    }
+
+    /**
+     * input campaign name
+     *
+     * @param campaignName
+     */
+    public void inputCampaignName(String campaignName) {
+        playwright.clickLocatorAndTypeKeyboard(campaignNamePlacHolder, campaignName);
+    }
+
+    /**
+     * input start date campaign
+     *
+     * @param startDate
+     */
+    public void inputStartDateCampaign(String startDate) {
+        var todayDate = JavaHelpers.getCurrentDateOrTime("yyyy/MM/dd HH:mm");
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("yyyy/MM/dd HH:mm", 1, 0, 0);
+
+        var date = startDate.trim().toLowerCase().contains("today") ? todayDate : tomorrowDate;
+        playwright.clickLocatorAndTypeKeyboard(startDateCampaign, date);
+        playwright.pressKeyboardKey("Enter");
+        playwright.clickOn(campaignNamePlacHolder);
+    }
+
+    /**
+     * input End date campaign
+     *
+     * @param endDate
+     */
+    public void inputEndDateCampaign(String endDate) {
+        var todayDate = JavaHelpers.getCurrentDateOrTime("yyyy/MM/dd HH:mm");
+        var tomorrowDate = JavaHelpers.getCostumDateOrTime("yyyy/MM/dd HH:mm", 1, 0, 0);
+        var nextWeek = JavaHelpers.getCostumDateOrTime("yyyy/MM/dd HH:mm", 7, 0, 0);
+
+        var date = endDate.trim().toLowerCase().contains("today") ? todayDate : tomorrowDate;
+        date = endDate.trim().toLowerCase().contains("tomorrow") ? tomorrowDate : nextWeek;
+        playwright.clickLocatorAndTypeKeyboard(endDateCampaign, date);
+        playwright.pressKeyboardKey("Enter");
+        playwright.clickOn(campaignNamePlacHolder);
+    }
+
+    /**
+     * input voucher code on single voucher list
+     *
+     * @param voucherPrefixCode
+     */
+    public void inputVoucherPrefix(String voucherPrefixCode) {
+        voucherPrefixCode = voucherPrefixCode.toLowerCase().contains("random") ? UUID.randomUUID().toString() : voucherPrefixCode;
+        playwright.clickLocatorAndTypeKeyboard(inputPrefixVoucherCodeCampaign, voucherPrefixCode);
+    }
+
+    /**
+     * input total voucher on single voucher list
+     *
+     * @param totalVoucher
+     */
+    public void inputTotalVoucher(String totalVoucher) {
+        playwright.clickLocatorAndTypeKeyboard(inputTotalVoucherCampaign, totalVoucher);
+    }
+
+    /**
+     * input dicsount type on single voucher
+     *
+     * @param discountType
+     */
+    public void inputDiscountType(String discountType) {
+        playwright.selectDropdownByValue(selectDiscountTypeCampaign, discountType);
+    }
+
+    /**
+     * input discount amount
+     *
+     * @param discountAmount
+     */
+    public void inputDiscountAmount(String discountAmount) {
+        playwright.clickLocatorAndTypeKeyboard(inputDiscountAmountCampaign, discountAmount);
+    }
+
+    /**
+     * upload discount owner list
+     *
+     * @param ownersList
+     */
+    public void uploadOwnerList(String ownersList) {
+        var invalidPath = "src/main/resources/file/owner-list/ownerListInvalid.csv";
+        var validaPath = "";
+
+        var path = ownersList.toLowerCase().contains("invalid")? invalidPath : validaPath;
+        FileChooser fileChooser = page.waitForFileChooser(() -> uploadOwnerList.click());
+        fileChooser.setFiles(Paths.get(path));
+        playwright.waitTillLocatorIsVisible(uploadOwnerList);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * input invoice type campaign
+     *
+     * @param invoiceType
+     */
+    public void inputInvoiceType(String invoiceType) {
+        playwright.selectDropdownByValue(selectInvoiceType, invoiceType);
+    }
+
+    /**
+     * checklist doube redem campaign
+     *
+     * @param doubleRedeemWithMamiPoin
+     */
+    public void inputDoubleRedeemWithMamiPoin(String doubleRedeemWithMamiPoin) {
+        var option = doubleRedeemWithMamiPoin.toLowerCase().contains("yes") ? "1" : "0";
+        playwright.selectDropdownByValue(selectOptionDoubleRedeem, option);
+
+    }
+
+    /**
+     * clickOn create Btn when create voucher single list
+     */
+    public void clickOnCreateVoucherBtn() {
+        playwright.clickOn(createBtnSingleListVoucher);
     }
 }
