@@ -251,10 +251,7 @@ public class GolplusContractPO {
      */
     public void selectDropdownPackage(String packageGP) {
         Locator element =  page.locator("//select[@name='package']");
-        playwright.clickOn(element);
-        Locator elementValue = page.locator("//option[contains(.,'"+packageGP+"')]");
-        playwright.clickOn(elementValue);
-
+        playwright.selectDropdownByValue(element,packageGP);
     }
 
 
