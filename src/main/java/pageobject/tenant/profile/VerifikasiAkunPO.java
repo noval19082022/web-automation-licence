@@ -54,7 +54,7 @@ public class VerifikasiAkunPO {
      * Navigates to mailhog and login
      */
     public void navigatesToMailHogAndLogin() {
-        playwright.navigateTo("https://mamiteam:M4!Lcatcher2020!@mailhog.kerupux.com/#");
+        playwright.navigateTo("https://mamiteam:Rq3Rv1idC5h73AB4@mailhog.kerupux.com/#");
     }
 
     /**

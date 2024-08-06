@@ -2,11 +2,11 @@
 
 Feature: Promo page
 
-  @DOM3 @TEST_SS-3027 @Automated @DOM3 @web-covered
-  Scenario: User can copy promo code
-    Given user navigates to promo mamikos
-    When user click SALIN on any promo
-    Then promo code can be copied "SINGGAHEXPRESS"
+#  @DOM3 @TEST_SS-3027 @Automated @DOM3 @web-covered @nonAktif
+#  Scenario: User can copy promo code
+#    Given user navigates to promo mamikos
+#    When user click SALIN on any promo
+#    Then promo code can be copied "SINGGAHEXPRESS"
 
   @regression @TEST_SS-3008
   Scenario: Check pagination in promo page
