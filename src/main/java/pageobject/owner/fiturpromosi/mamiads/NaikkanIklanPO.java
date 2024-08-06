@@ -275,6 +275,7 @@ public class NaikkanIklanPO {
      * @params actionButton
      */
     public void clickActionButtonInPopUp(String actionButton) {
+        playwright.hardWait(3000.0);
         actionButtonLocator = page.locator("//button[contains(text(), '" + actionButton + "')]");
         playwright.clickOn(actionButtonLocator);
     }
