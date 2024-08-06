@@ -350,7 +350,7 @@ public class MamiAdsPO {
     public void clickOnQuestionText(String questionText) throws InterruptedException {
         playwright.pageScrollUsingCoordinate(5,5);
         String questionTextLocator = "//p[contains(.,'" + questionText + "')]";
-     //   playwright.waitTillLocatorIsVisible(page.locator(questionTextLocator),1000.0);
+        playwright.waitTillLocatorIsVisible(page.locator(questionTextLocator),1000.0);
         playwright.clickOn(page.locator(questionTextLocator));
 
     }
