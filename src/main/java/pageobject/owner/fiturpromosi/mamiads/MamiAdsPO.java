@@ -9,6 +9,9 @@ import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -20,7 +23,9 @@ public class MamiAdsPO {
     Locator lastInvoiceOnRiwayat;
     Locator riwayatSaldoMamiads;
     Locator backIconRiwayatMamiads;
-    private  Locator invoiceMamiads;
+    private Locator invoiceMamiads;
+    //--- Mamiads Webview Page ---//
+    private Locator cobaSekarangBtnOnWebview;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
     private Locator beliSaldoBtn;
@@ -30,6 +35,10 @@ public class MamiAdsPO {
     private Locator titleDalamProsesRiwayatSaldoText;
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
+    private Locator saldoTitleName;
+    private Locator saldoTitleList;
+    private Locator buySaldoBtnList;
+    private Locator saldoAmount6000;
     Locator kamarPenuhText;
     private Locator beliSaldoBtnPopupToggle;
 
@@ -81,6 +90,8 @@ public class MamiAdsPO {
         lastInvoiceOnRiwayat = page.locator("//div[@class='transaction-on-process']//div[12]/a[1]");
         riwayatSaldoMamiads = page.getByText("Riwayat");
         backIconRiwayatMamiads = page.locator("a").filter(new Locator.FilterOptions().setHasText("back"));
+        //--- Mamiads Webview Page ---//
+        this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").first();
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
         this.beliSaldoBtn = page.getByText("Beli Saldo", new Page.GetByTextOptions().setExact(true));
@@ -91,6 +102,10 @@ public class MamiAdsPO {
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
         this.beliSaldoBtnPopupToggle = page.locator("#button-right-modal-toggle-confirm-beli-saldo");
+        this.saldoTitleName = page.locator("//div[@class='balance-list-item__name']");
+        this.saldoTitleList = page.locator(".balance-list-item__price");
+        this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
+        this.saldoAmount6000 = page.locator(".bg-c-grid > div:nth-of-type(1) .bg-c-button");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -106,7 +121,7 @@ public class MamiAdsPO {
         this.inputVoucher = page.getByTestId("masukkan_link");
         this.inputVoucherPopUp = page.locator("#wrapper-scroll").getByTestId("masukkan_link");
         this.voucherCodeField = page.getByTestId("codeVoucher_txt");
-        this.pakaiVoucherButton =  page.getByTestId("pakaiVoucher_btn");
+        this.pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         this.warningMessageVoucher = page.getByTestId("warning_txt");
         this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
@@ -139,6 +154,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up text head
+     *
      * @return String data type
      */
     public String getGpOnboardingpopUpTextHead() {
@@ -147,6 +163,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up text body
+     *
      * @return String data type
      */
     public String getGpOnboardingpopUpTextBody() {
@@ -155,6 +172,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up image alt attribute value
+     *
      * @return String data type
      */
     public String getGpOnboardingpopUpImageAltAttributeValue() {
@@ -170,6 +188,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up swiper bullet count
+     *
      * @return Integer data type
      */
     public boolean isGpOnboardingpopUpPreviousButtonDisabled() {
@@ -178,6 +197,7 @@ public class MamiAdsPO {
 
     /**
      * Get gp onboarding pop up swiper bullet count
+     *
      * @return Integer data type
      */
     public boolean isGpOnboardingpopUpNextButtonDisabled() {
@@ -191,7 +211,7 @@ public class MamiAdsPO {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
 
-    public void clickSaldoMamiadsCard(){
+    public void clickSaldoMamiadsCard() {
         playwright.clickOn(saldoMamiadsCard);
     }
 
@@ -212,32 +232,47 @@ public class MamiAdsPO {
 
     /**
      * Check if favorit saldo is displayed
+     *
      * @return true if element present otherwise false
      */
-    public boolean favoriteSaldo (String saldo){
+    public boolean favoriteSaldo(String saldo) {
         return playwright.isTextDisplayed(saldo, 5000.0);
     }
 
     /**
      * Get list saldo price, price in rupiah, discount, discount price
+     *
      * @param index input with listSaldo
      * @return String saldo price, price in rupiah, discount, discount price
      */
-    public String listSaldo (String listSaldo, int index){
+    public String listSaldo(String listSaldo, int index) {
         String element = "";
-        switch (listSaldo){
-            case "price"     : element = ".balance-list-item__name"; break;
-            case "priceInRp" : element = ".balance-list-item__price"; break;
-            case "disc"      : element = ".percentage"; break;
-            case "discPrice" : element = ".amount"; break;
+        switch (listSaldo) {
+            case "price":
+                element = ".balance-list-item__name";
+                break;
+            case "priceInRp":
+                element = ".balance-list-item__price";
+                break;
+            case "disc":
+                element = ".percentage";
+                break;
+            case "discPrice":
+                element = ".amount";
+                break;
         }
         return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
     }
 
     /**
      * this method will be clickOn beli saldo btn on the mamiads page 'https://owner-jambu.kerupux.com/mamiads'
+     * and this method also handle if pop up is appear on mamiads page
      */
     public void clickOnBeliSaldoBtn() {
+        // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
+                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
+            playwright.clickOn(cobaSekarangBtnOnPopUp);
         playwright.clickOn(beliSaldoBtn);
     }
 
@@ -247,10 +282,22 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
-        Locator saldoButton = page.locator(".bg-c-grid > div:nth-of-type(1) .bg-c-button");
-//        playwright.wait(saldoButton);
-        playwright.hardWait(5000.0);
-        playwright.clickOn(saldoButton);
+        playwright.waitTillLocatorIsVisible(saldoTitleList.first());
+        var found = choosingSaldo(saldo);
+        if (!found) {
+            // default saldo is 6000
+            playwright.clickOn(saldoAmount6000);
+        }
+    }
+
+    /**
+     * this method is use for if owner redirect to mamiads webview
+     * example page is 'https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard'
+     */
+    public void handleRedirectToMamiadsWebview() {
+        // this condition will handle if owner redirect to the https://jambu.kerupux.com/mamiads?redirectionSource=Owner%20Dashboard
+        if (playwright.getActivePageURL().equals(Mamikos.URL + "/mamiads?redirectionSource=Owner%20Dashboard"))
+            playwright.clickOn(cobaSekarangBtnOnWebview);
     }
 
     /**
@@ -270,9 +317,10 @@ public class MamiAdsPO {
     /**
      * Get title text
      * ex: Semua Iklan Anda Sudah Naik
+     *
      * @return String title
      */
-    public String getTitleText(){
+    public String getTitleText() {
         playwright.waitFor(titleEmptyFilterText);
         return playwright.getText(titleEmptyFilterText);
     }
@@ -280,6 +328,7 @@ public class MamiAdsPO {
     /**
      * Get message empty filter text
      * ex: Iklan properti Anda akan naik ke posisi yang lebih tinggi pada hasil pencarian.
+     *
      * @return String title
      */
     public String getMessageText() {
@@ -289,6 +338,7 @@ public class MamiAdsPO {
 
     /**
      * Get Title text on Selesai Tab on Riwayat Saldo
+     *
      * @return String title
      */
     public String getTitleSelesaiText() {
@@ -301,16 +351,17 @@ public class MamiAdsPO {
      *
      * @return String title
      */
-    public String getTitleDalamProsesText(){
+    public String getTitleDalamProsesText() {
         playwright.waitFor(titleDalamProsesRiwayatSaldoText);
         return playwright.getText(titleDalamProsesRiwayatSaldoText);
     }
 
     /**
      * Get count riwayat beli saldo
+     *
      * @return int countHistoryIcn
      */
-    public int getCountRiwayatBeliSaldo(){
+    public int getCountRiwayatBeliSaldo() {
         playwright.waitTillLocatorIsVisible(beliSaldoBtn, 5000.0);
         return Integer.parseInt(playwright.getText(countHistoryIcon));
     }
@@ -327,7 +378,6 @@ public class MamiAdsPO {
 
     /**
      * Click on Panduan MamiAds Back Button
-     *
      */
     public void clickOnPanduanMamiAdsBackButton() {
         playwright.clickOn(paduanMamiadsBackButton);
@@ -335,22 +385,21 @@ public class MamiAdsPO {
 
     /**
      * Get coba sekarang button at header
-     *
      */
     public boolean isCobaSekarangButtonHeaderisDisplayed() {
-        return playwright.waitTillLocatorIsVisible(cobaSekarangButtonHeader,1000.0);
+        return playwright.waitTillLocatorIsVisible(cobaSekarangButtonHeader, 1000.0);
     }
 
     /**
      * Click On Text Question
      *
-     * @return
      * @param
+     * @return
      */
     public void clickOnQuestionText(String questionText) throws InterruptedException {
-        playwright.pageScrollUsingCoordinate(5,5);
+        playwright.pageScrollUsingCoordinate(5, 5);
         String questionTextLocator = "//p[contains(.,'" + questionText + "')]";
-        playwright.waitTillLocatorIsVisible(page.locator(questionTextLocator),1000.0);
+        playwright.waitTillLocatorIsVisible(page.locator(questionTextLocator), 1000.0);
         playwright.clickOn(page.locator(questionTextLocator));
 
     }
@@ -358,8 +407,8 @@ public class MamiAdsPO {
     /**
      * Get Text Answer
      *
-     * @return answerText
      * @param answerText
+     * @return answerText
      */
     public String getAnswerText(String answerText) {
         String answerTextLocator = "//p[contains(.,'" + answerText + "')]";
@@ -390,18 +439,24 @@ public class MamiAdsPO {
 
     /**
      * Get detail tagihan
-     * @param validasi
-     *  <p> 1 = Nominal Saldo
-     *  <p> 2 = Total Pembayaran
-     *  <p> 3 = Status Transaksi
+     *
+     * @param validasi <p> 1 = Nominal Saldo
+     *                 <p> 2 = Total Pembayaran
+     *                 <p> 3 = Status Transaksi
      * @return String
      */
-    public String gettransactionList(int validasi){
+    public String gettransactionList(int validasi) {
         String element = "";
-        switch (validasi){
-            case 1 : element = "//*[@class='transaction-done'] //*[@class='left-side-saldo-status']"; break;
-            case 2 : element = "//*[@class='transaction-done'] //*[@class='right-side-saldo-status']"; break;
-            case 3 : element = "//*[@class='right-side-payment-status-paid']"; break;
+        switch (validasi) {
+            case 1:
+                element = "//*[@class='transaction-done'] //*[@class='left-side-saldo-status']";
+                break;
+            case 2:
+                element = "//*[@class='transaction-done'] //*[@class='right-side-saldo-status']";
+                break;
+            case 3:
+                element = "//*[@class='right-side-payment-status-paid']";
+                break;
         }
         playwright.waitTillLocatorIsVisible(page.locator(element).first());
         return playwright.getText(page.locator(element).first());
@@ -411,33 +466,33 @@ public class MamiAdsPO {
      * Click on masukkan voucher mamiAds
      */
     public void clickOnInputVoucher() {
-       playwright.clickOn(inputVoucher);
-       playwright.clickOn(inputVoucherPopUp);
+        playwright.clickOn(inputVoucher);
+        playwright.clickOn(inputVoucherPopUp);
     }
 
 
     /**
      * Input voucher code
-     * @param voucherCode
      *
+     * @param voucherCode
      */
     public void inputVoucherCode(String voucherCode) {
-       playwright.fill(voucherCodeField,voucherCode);
+        playwright.fill(voucherCodeField, voucherCode);
     }
 
     /**
      * Click pakai voucher button
-     * @throws InterruptedException
      *
+     * @throws InterruptedException
      */
     public void clickOnPakaiVoucherButton() throws InterruptedException {
-       playwright.clickOn(pakaiVoucherButton);
+        playwright.clickOn(pakaiVoucherButton);
     }
 
     /**
      * Get message warning invalid input voucher
-     * @return warning message
      *
+     * @return warning message
      */
     public String getMessageWarningVoucher() {
         return playwright.getText(warningMessageVoucher);
@@ -445,7 +500,6 @@ public class MamiAdsPO {
 
     /**
      * Clear voucher code text field
-     *
      */
     public void clearVoucherCode() {
         playwright.clearText(voucherCodeField);
@@ -453,7 +507,6 @@ public class MamiAdsPO {
 
     /**
      * Clear voucher code text field
-     *
      */
     public void clickOnCLosePopUpVoucher() {
         playwright.clickOn(icnButtonCLose);
@@ -465,12 +518,12 @@ public class MamiAdsPO {
      * @return true or false
      */
     public boolean isVoucherPresentOnList(String voucherTitle) {
-         voucherTitleElement = page.locator( "//div[.='" + voucherTitle + "']");
-        return playwright.waitTillLocatorIsVisible(voucherTitleElement,1000.0);
+        voucherTitleElement = page.locator("//div[.='" + voucherTitle + "']");
+        return playwright.waitTillLocatorIsVisible(voucherTitleElement, 1000.0);
     }
+
     /**
      * Click lihat detail voucher from suggestion list
-     *
      */
     public void clickLihatDetailOnVoucherOnList() throws InterruptedException {
         playwright.waitTillLocatorIsVisible(lihatDetailVoucher);
@@ -485,26 +538,34 @@ public class MamiAdsPO {
     public String detailVoucher(String detailVoucher, int index) {
         String element = "";
         switch (detailVoucher) {
-            case "voucherTitle"  : element = ".c-voucher__title"; break;
-            case "voucherCode"   : element = ".c-voucher__code"; break;
-            case "voucherExpired": element = ".c-voucher__expired"; break;
-            case "voucherTnC"    : element = ".tnc"; break;
+            case "voucherTitle":
+                element = ".c-voucher__title";
+                break;
+            case "voucherCode":
+                element = ".c-voucher__code";
+                break;
+            case "voucherExpired":
+                element = ".c-voucher__expired";
+                break;
+            case "voucherTnC":
+                element = ".tnc";
+                break;
         }
         return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
     }
+
     /**
      * Get message on toast voucher dihapus or dipakai
      *
      * @return toast message
      */
     public String getTextMessageToastVoucher() {
-        playwright.waitTillLocatorIsVisible(messageOnOffVoucher,1000.0);
+        playwright.waitTillLocatorIsVisible(messageOnOffVoucher, 1000.0);
         return playwright.getText(messageOnOffVoucher);
     }
 
     /**
      * Click on delete voucher
-     *
      */
     public void clickOnDeleteVoucher() throws InterruptedException {
         playwright.clickOn(deleteVoucher);
@@ -518,14 +579,15 @@ public class MamiAdsPO {
     }
 
     /**
-     *Click on invoice mamiads on history mamiads
+     * Click on invoice mamiads on history mamiads
      */
-    public void clickOnInvoiceMamiads(){
+    public void clickOnInvoiceMamiads() {
         playwright.clickOn(invoiceMamiads);
     }
 
     /**
      * click on ubah button on spesific listing
+     *
      * @param adsName refres to listing name
      */
     public void clickOnUbahbutton(String adsName) {
@@ -534,7 +596,7 @@ public class MamiAdsPO {
     }
 
     /**
-     *  Click coba sekarang header on mamiads onboard page
+     * Click coba sekarang header on mamiads onboard page
      */
     public void clickOnCobaSekarangHeader() {
         playwright.clickOn(cobaSekarangButtonHeader);
@@ -542,6 +604,7 @@ public class MamiAdsPO {
 
     /**
      * clear and type new daily anggaran MA
+     *
      * @param anggaran refers to how much daily anggaran wanna spent
      */
     public void inputNominalAnggaran(String anggaran) {
@@ -551,6 +614,7 @@ public class MamiAdsPO {
 
     /**
      * get text posisi iklan on spesific listing
+     *
      * @param adsName
      * @param adsPosition
      * @return ads position text
@@ -563,6 +627,7 @@ public class MamiAdsPO {
 
     /**
      * check toggle ads based on listing name
+     *
      * @param adsName
      * @param toggleStatus
      */
@@ -574,23 +639,25 @@ public class MamiAdsPO {
 
     /**
      * get text status description on spesific listing
+     *
      * @param adsName
      * @return status description text
      */
     public String getAdsStatusDesc(String adsName) {
         System.out.println("LUBIS");
-        String textStatusDesc= "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-status-description']";
+        String textStatusDesc = "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-status-description']";
         playwright.waitTillLocatorIsVisible(page.locator(textStatusDesc));
         return playwright.getText(page.locator(textStatusDesc));
     }
 
     /**
      * get text anggaran description on spesific listing
+     *
      * @param adsName
      * @return anggaran desciption text
      */
     public String getTextAnggaranDesc(String adsName) {
-        String textAnggaranDesc= "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']";
+        String textAnggaranDesc = "//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']";
         playwright.waitTillLocatorIsVisible(page.locator(textAnggaranDesc));
         return playwright.getText(page.locator(textAnggaranDesc));
     }
@@ -625,12 +692,13 @@ public class MamiAdsPO {
 
     /**
      * Verify the description full occupancy
+     *
      * @return message full occupancy
      * @params adsName
      */
     public String isFullOcuppancyActiveAds(String adsName) {
         System.out.println("RAMOSAN");
-        kamarPenuhText = page.locator("//*[.='"+adsName+"']/../../following-sibling::*//div[@class='ads-status__kamar-penuh']");
+        kamarPenuhText = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//div[@class='ads-status__kamar-penuh']");
         return playwright.getText(kamarPenuhText).replaceAll("[\\n\\s]+", " ");
 
     }
@@ -646,7 +714,7 @@ public class MamiAdsPO {
      * check entry point on jemput bola title
      */
     public void isTitleJemputBolaVisible(String adsName) {
-        Locator titleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@data-testid='mamiadsWidget']" +
+        Locator titleJemputBola = page.locator("//*[text()='" + adsName + "']/ancestor::div[@data-testid='mamiadsWidget']" +
                 "//*[@data-testid='mamiadsStatistic']//p[contains(@class,'title')]");
         playwright.assertVisible(titleJemputBola);
     }
@@ -655,13 +723,14 @@ public class MamiAdsPO {
      * check entry point on jemput bola subtitle
      */
     public void isSubtitleJemputBolaVisible(String adsName) {
-        Locator subtitleJemputBola = page.locator("//*[text()='"+ adsName +"']/ancestor::div[@class='mami-ads-widget']" +
+        Locator subtitleJemputBola = page.locator("//*[text()='" + adsName + "']/ancestor::div[@class='mami-ads-widget']" +
                 "//*[@class='mami-ads-statistic-main']//p[contains(@class,'desc')]");
         playwright.assertVisible(subtitleJemputBola);
     }
 
     /**
      * check is it label visible or not
+     *
      * @return boolean
      */
     public boolean isLabelNewJBVisible() {
@@ -677,6 +746,7 @@ public class MamiAdsPO {
 
     /**
      * Verify the visibility of text on the popup
+     *
      * @return text on popup
      */
     public String getTextOnPoUpVisible(String textOnPopUp) {
@@ -685,7 +755,7 @@ public class MamiAdsPO {
         return playwright.getText(textOnPopUpMamiads);
     }
 
-    public Page clickInvoiceMamiadsOnRiwayat(){
+    public Page clickInvoiceMamiadsOnRiwayat() {
         page = page.waitForPopup(() -> {
             playwright.clickOn(lastInvoiceOnRiwayat);
             playwright.waitTillPageLoaded(50000.0);
@@ -706,10 +776,49 @@ public class MamiAdsPO {
 
     /**
      * Click on Simpan Pengaturan button on pop up ubah anggaran
-     *
      */
     public void clickOnSimpanPengaturanUbahAnggaran() {
         playwright.clickOn(simpanPengaturanButton);
+    }
+
+
+
+    // ----------------- PART OF PRIVATE METHOD -----------------
+
+    /**
+     * private method for logic buy saldo on mamiads saldo page
+     *
+     * @param saldo you can use ex. '6000' or '6.000'
+     */
+    private boolean choosingSaldo(String saldo) {
+        boolean found = true;
+        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleList);
+        if (!listSaldoTitles.contains(saldo)) {
+            listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleName);
+        }
+
+        List<String> finalListSaldoTitles = listSaldoTitles;
+        var saldoRequestFormat = formatCurrencyForProcessing(saldo);
+        int indexToClick = IntStream.range(0, finalListSaldoTitles.size())
+                .filter(i -> {
+                    var saldoTitle = formatCurrencyForProcessing(finalListSaldoTitles.get(i));
+                    return saldoTitle.equals(saldoRequestFormat);
+                })
+                .findFirst()
+                .orElse(-1);
+
+        if (indexToClick != -1) {
+            playwright.clickOn(buySaldoBtnList.nth(indexToClick));
+            return found;
+        } else {
+            return !found;
+        }
+    }
+
+    private String formatCurrencyForProcessing(String saldo) {
+        return saldo
+                .replace("Rp", "")
+                .replace(".", "");
     }
 }
 
