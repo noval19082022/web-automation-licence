@@ -506,7 +506,7 @@ public class PropertySayaSteps {
 
     @Then("verify warning upload gagal")
     public void verifyWarningUploadGagal() {
-        Assert.assertEquals(propertySaya.getErrorUpload(), "Upload GagalFormat foto tidak didukung", "Error doesn't match!");
+        Assert.assertEquals(propertySaya.getErrorUpload(), "Upload GagalFormat foto tidak didukung. Pastikan format foto JPEG/PNG.", "Error doesn't match!");
     }
 
     @When("owner upload valid rule kos")
