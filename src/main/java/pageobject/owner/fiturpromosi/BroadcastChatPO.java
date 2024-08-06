@@ -355,6 +355,7 @@ public class BroadcastChatPO {
      * @param kosName kost name
      */
     public void clickOnTambahBroadcastChatKostNameResult(String kosName) {
+        playwright.hardWait(2000.0);
         Locator kosNameResult = page.getByTestId("broadcastChat-listKos").getByText(kosName);
         playwright.clickOn(kosNameResult);
     }

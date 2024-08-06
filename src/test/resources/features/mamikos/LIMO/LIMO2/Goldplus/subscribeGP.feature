@@ -23,7 +23,7 @@ Feature: Subscribe GP from all entry point
     And user login as owner:
       | phone stag   | password  |
       | 0812345670001 | qwerty123 |
-    When owner click "Daftar GoldPlus" button on chatrooms "Raney Upik Bertiga"
+    When owner click "Daftar GoldPlus" button on chatrooms "Rega Tenant Tiga"
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
 
   @TEST_LIMO-3549 @otherEntryPointExceptInfoUntukAnda @continue

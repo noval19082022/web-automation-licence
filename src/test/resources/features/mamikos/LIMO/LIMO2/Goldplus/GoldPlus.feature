@@ -3,6 +3,12 @@ Feature: Gold Plus
 
   @TEST_LIMO-3396 @chooseGP @continue
   Scenario: [Goldplus][Owner Dashboard][Widget GP] Check owner can select package GP
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then user wants to reset Goldplus for owner with phone number "082233545506"
+
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |

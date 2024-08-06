@@ -412,6 +412,7 @@ public class MamiAdsPO {
      */
     public String getAnswerText(String answerText) {
         String answerTextLocator = "//p[contains(.,'" + answerText + "')]";
+        playwright.waitTillLocatorIsVisible(page.locator(answerTextLocator));
         return playwright.getText(page.locator(answerTextLocator));
     }
 

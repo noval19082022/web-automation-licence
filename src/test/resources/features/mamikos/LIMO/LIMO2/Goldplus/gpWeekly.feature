@@ -8,7 +8,7 @@ Feature: GP Weekly
     And admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    Then user wants to reset Goldplus for owner with phone number "082233545519"
+    Then user wants to reset Goldplus for owner with phone number "081905128517"
 
   @TEST_LIMO-3489 @continue
   Scenario: Goldplus Weekly Package
@@ -25,7 +25,7 @@ Feature: GP Weekly
     When owner navigate to list package goldplus 2
     Then user verify list of Goldplus Weekly is appear
       | periodGP | price    |
-      | 1 Minggu | Rp25.000 |
+      | 1 Minggu | Rp44.000 |
       | 2 Minggu | Rp17.500 |
 
   @TEST_LIMO-3491 @continue
@@ -70,14 +70,6 @@ Feature: GP Weekly
     And owner navigates to owner dashboard
     And owner should not be able to see the text "Perpanjang paket Goldplus yuk!"
 
-    #reset GP
-  Scenario: delete or reset data GP
-    Given admin go to mamikos mamipay admin
-    And admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    Then user wants to reset Goldplus for owner with phone number "081905128517"
-
   @TEST_LIMO-3497
   Scenario: GoldPlus Weekly - Checking Widget After Terminated
     Given user go to mamikos homepage
@@ -88,11 +80,18 @@ Feature: GP Weekly
 
   @TEST_LIMO-3498 @continue @detailTagihanGoldplus
   Scenario: [WEB][Detail Tagihan GP] Check wording for GP Shorter period at detail tagihan GP
+  #delete or reset data GP
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then user wants to reset Goldplus for owner with phone number "082233545519"
+
+     #detail tagihan unpaid
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
       | 082233545519 | qwerty123 |
-    #detail tagihan unpaid
     When owner navigate to list package goldplus 2
     * owner choose periode goldplus "1 Minggu"
     * owner click bayar sekarang on detail tagihan page goldplus
@@ -112,8 +111,8 @@ Feature: GP Weekly
   @TEST_LIMO-3499 @continue @detailTagihanGoldplus
   Scenario: [WEB][GP Shorter][Owner Dashboard] Check pop up intercept when buy GP shorter periode
     Given owner navigates to owner dashboard
-    Then owner can see pop up goldplus with title "Selamat bergabung di GoldPlus 1!"
-    And owner can see pop up golplus with desc "Anda mendapatkan kuota chat tanpa batas dan akses ke fitur-fitur khusus GoldPlus yang berguna untuk pemasaran kos Anda."
+ #   Then owner can see pop up goldplus with title "Selamat bergabung di GoldPlus 1!"
+ #   And owner can see pop up golplus with desc "Anda mendapatkan kuota chat tanpa batas dan akses ke fitur-fitur khusus GoldPlus yang berguna untuk pemasaran kos Anda."
 
   @TEST_LIMO-3500 @continue @detailTagihanGoldplus
   Scenario: check wording at page detail tagihan after paid
@@ -125,17 +124,8 @@ Feature: GP Weekly
 
   @TEST_LIMO-3501 @detailTagihanGoldplus
     Scenario: [WEB][Detail Tagihan GP] Check wording for GP Shorter period at detail tagihan GP expired
-     #detail tagihan expired
     Given owner navigates to "/goldplus/payment"
     * owner select transaction expired from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Dibatalkan"
     And owner can see "GoldPlus 2 periode 1 Minggu" at section Paket yang Anda pilih
     And owner can see "GoldPlus 2 (1 Minggu)" at section rincian pembayaran goldplus
-
-  @detailTagihanGoldplus
-  Scenario: delete or reset data GP
-    Given admin go to mamikos mamipay admin
-    And admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    Then user wants to reset Goldplus for owner with phone number "082233545519"

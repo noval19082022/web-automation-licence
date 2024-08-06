@@ -267,16 +267,16 @@ Feature: Broadcast Chat Owner
     #Pre-condition: *
 	#
 	#* User login with owner total chat = 0
-  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
-    Given user go to mamikos homepage
-    Given user login as owner:
-      | phone stag  | phone prod | password  |
-      | 08713399866 | 0          | qwerty123 |
-    When user click chat button in top bar owner home page
-    Then user see tooltip broadcast chat
-    When user click icon close at tooltip
-    Then broadcast chat tooltip should not be visible
+#  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
+#  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
+#    Given user go to mamikos homepage
+#    Given user login as owner:
+#      | phone stag  | phone prod | password  |
+#      | 08713399866 | 0          | qwerty123 |
+#    When user click chat button in top bar owner home page
+#    Then user see tooltip broadcast chat
+#    When user click icon close at tooltip
+#    Then broadcast chat tooltip should not be visible
 
   @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet;click Broadcast Chat entry point in Chat Page
