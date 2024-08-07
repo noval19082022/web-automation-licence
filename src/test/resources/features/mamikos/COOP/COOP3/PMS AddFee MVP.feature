@@ -132,7 +132,7 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Saturn Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"

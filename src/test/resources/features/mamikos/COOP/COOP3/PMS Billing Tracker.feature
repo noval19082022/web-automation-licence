@@ -10,7 +10,7 @@ Feature: Billing Tracker
     And admin go to billing tracker
     And admin search billing tracker by "Nama Penyewa" and "ed"
     Then admin can see validation "Minimal 3 karakter"
-    And admin search billing tracker by "Nama Penyewa" and "bag"
+    And admin search billing tracker by "Nama Penyewa" and "Hen"
     Then admin can see data search
 
   @SS-5078 @continue
@@ -48,15 +48,16 @@ Feature: Billing Tracker
       | 07 Mar      | Recurring  |
       | 15 Mar      | Recurring  |
 
-  @SS-5087 @continue
-  Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
-    When admin click on reset button
-    And admin choose month "Agustus"
-    And admin search billing tracker by "No. HP Penyewa" and "085246113222"
-    Then admin click on "081045645600" link button
-
   @SS-4307 @continue
   Scenario: [Billing Tracker][Title billing tracker]Check expands for Billing team announcement title
     When admin go to billing tracker
     And admin click on expand billing announcement
     Then admin can see bse tab list
+
+  @SS-5087 @continue
+  Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
+    When admin click on reset button
+    And admin choose month "Agustus"
+    And admin search billing tracker by "No. HP Penyewa" and "085246113222"
+    Then admin click on "085246113222" link button
+
