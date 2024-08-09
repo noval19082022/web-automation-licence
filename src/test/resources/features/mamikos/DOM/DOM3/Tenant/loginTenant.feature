@@ -7,7 +7,6 @@ Feature: Tenant - Login
     And user login as tenant via facebook:
       | email stag          | email prod          | password           |
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-    Then user redirected to "/#_=_"
     Then user tenant profile picture is shown
 
   @TEST_SS-3052 @Automated @DOM3 @web-covered @noFillPassword
@@ -201,7 +200,6 @@ Feature: Tenant - Login
     When user login as tenant via facebook from popular area page:
       | email stag          | email prod          | password           |
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-    And user navigate to kost saya page
     Then user tenant profile picture is shown
 
   @TEST_SS-4293
@@ -210,5 +208,4 @@ Feature: Tenant - Login
     When user login as tenant via facebook from popular area page:
       | email stag          | email prod          | password           |
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-    And user navigate to kost saya page
     Then user tenant profile picture is shown

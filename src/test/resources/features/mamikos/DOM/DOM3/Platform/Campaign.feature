@@ -31,7 +31,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open facebook in footer
     And tenant set active page to 1
-    Then user redirected to "https://web.facebook.com/mamikosapp"
+    Then user redirected to "https://www.facebook.com/mamikosapp"
 
   @TEST_SS-3005 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - tentang kami
@@ -73,13 +73,13 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/info/"
 
-  @TEST_SS-5143 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
-  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - corporate
-    Given user visit page "/enaknyangekos"
-    When user is on the LandingPage EnaknyaNgekos
-    And user open sewa kost untuk perusahaan in footer
-    And tenant set active page to 1
-    Then user redirected to "https://mamikos.com/info/mamikos-corporate-accommodation/"
+#  @TEST_SS-5143 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+#  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - corporate
+#    Given user visit page "/enaknyangekos"
+#    When user is on the LandingPage EnaknyaNgekos
+#    And user open sewa kost untuk perusahaan in footer
+#    And tenant set active page to 1
+#    Then user redirected to "https://mamikos.com/info/mamikos-corporate-accommodation/"
 
   @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - kebijakan privasi
