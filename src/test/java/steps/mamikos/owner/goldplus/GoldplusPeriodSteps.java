@@ -24,7 +24,7 @@ public class GoldplusPeriodSteps {
 
     @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(DataTable dataTable) {
-        playwright.waitTillPageLoaded(10000.0);
+        playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;

@@ -21,6 +21,7 @@ Feature: Owner Dashboard GP-Onboarding
     |Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.|
     |Pantau Performa Iklan|
     |Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.|
+    Then owner see pop up doesnt have property
 
   @continue @TEST_LIMO-3406
   Scenario: [Web Owner][GP-Onboarding] Swiper Left/Previous Button Should Be Disabled

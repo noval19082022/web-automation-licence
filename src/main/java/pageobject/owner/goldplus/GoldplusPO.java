@@ -98,8 +98,8 @@ public class GoldplusPO {
         goldplusPhoneNumberInput = page.locator("form").filter(new Locator.FilterOptions().setHasText("Reset")).getByPlaceholder("Phone Number");
         recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
         selectRecurringPeriod = page.locator("[name='h']");
-        editPackageAdminGP1Button = page.locator("//tr[5]//div[@class='btn-group']");
-        editPackageAdminGP2Button = page.locator("//tr[4]//div[@class='btn-group']");
+        editPackageAdminGP1Button = page.locator("//a[@href='https://jambu.kerupux.com/admin/gold-plus/package/148/edit#gold-plus']");
+        editPackageAdminGP2Button = page.locator("//a[@href='https://jambu.kerupux.com/admin/gold-plus/package/159/edit#gold-plus']");
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
@@ -136,13 +136,13 @@ public class GoldplusPO {
         textSubtitlePopUpRecurring = page.getByText("Ayo, segera perpanjang paket GoldPlus Anda sekarang.");
         buttonExtendGPpopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         gpPackageChoosed = page.locator(".goldplus-package-detail__item-title");
-        gpPackageRincianPembayaranDetailTagihan = page.locator(".bg-c-list-item__description");
+        gpPackageRincianPembayaranDetailTagihan = page.locator("//p[@class='goldplus-package-detail__item-title bg-c-text bg-c-text--body-1']");
         gpPeriodeChoosed = page.locator("//div[contains(@class,'-radio--checked')]/following-sibling::*//p[contains(@class,'bg-c-text--body-2')]");
         favoritLabel = page.getByText("Favorit");
         selectTransactionUnpaid = page.getByTestId("goldplusPaymentUnpaid-0").getByText("Lihat Tagihan");
         sectionPackageSelected = page.locator(".goldplus-package-detail");
         sectionDetailBilling = page.locator("//div[@class='goldplus-billing-detail']/div[3]");
-        buttonPaidDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang Rp13.500"));
+        buttonPaidDetailTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar Sekarang Rp28.500"));
         selectTranscationPaid =  page.locator("td").filter(new Locator.FilterOptions().setHasText("Lunas"));
         selectTransactionExpired = page.locator("td").filter(new Locator.FilterOptions().setHasText("Dibatalkan"));
         tabSelesaiRiwayatGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
@@ -954,6 +954,6 @@ public class GoldplusPO {
      *
      */
     public String getSuccessMessage() {
-        return playwright.getText(successMessage).replaceAll("×\\s+", "");
+        return playwright.getText(successMessage).replaceAll(" ID \\d+ ", "").replaceAll("×\\s+", "");
     }
 }

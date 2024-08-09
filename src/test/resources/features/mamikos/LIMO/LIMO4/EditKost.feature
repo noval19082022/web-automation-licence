@@ -1,4 +1,4 @@
-@regression @LIMO4 @editKost123
+@regression @LIMO4 @editKost123456
 Feature: Edit Kost
 
   @TEST_LIMO-938 @EditKosInvalidFacility @continue
@@ -6,7 +6,7 @@ Feature: Edit Kost
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 083176408311 | 083176408311 | qwerty123 |
+      | 083176408319 | 083176408319 | qwerty123 |
     And owner dismiss FTUE goldplus
     And owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
@@ -21,8 +21,6 @@ Feature: Edit Kost
     And user uncheck facilities under "Fasilitas Kamar Mandi"
       | Air panas |
       | Bak mandi |
-      | Bathup    |
-      | Gayung    |
     And user uncheck facilities under "Parkir"
       | Parkir Mobil |
     Then user see edit finished button is disabled
@@ -70,6 +68,8 @@ Feature: Edit Kost
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "Kos oke bebek Vviop Depok Sleman" in admin kos owner page
     And user verify the kos in admin kos owner
+
+  ####### END OF ERA KOST BEBEKKKKKK
 
   @TEST_LIMO-850 @continue
   Scenario Outline: Status kos is active or reject and owner edit description kos
