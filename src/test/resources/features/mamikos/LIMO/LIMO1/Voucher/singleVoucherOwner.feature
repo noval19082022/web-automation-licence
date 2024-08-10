@@ -63,3 +63,22 @@ Feature: Single voucher owner
     And Admin click Create Voucher Single list button
     Then admin will see that the text "Invalid targeted users csv file format" is displayed
     Then admin will see that the text "Total targeted users must equal with total vouchers" is displayed
+
+  @TEST_LIMO-228 @SingleVoucherList
+  Scenario: [GP Voucher Admin][Single Voucher]User add Single Voucher with invoice type is activation and invalid csv
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And Admin go to Single Voucher List Owner
+    And Admin want to create single voucher owner
+    And Admin select Goldplus on product field create single voucher
+    And Admin fill all required campaign field on create single voucher
+      | Campaign Name | Start Date | End Date |
+      | hehehe        | today      | tomorrow |
+    And Admin fill all required voucher field on create single voucher
+      | Voucher PrefixCode | Total Voucher | Discount Type | Discount Amount | Upload Owner List | Invoice Type | Double Redeem With MamiPoin |
+      | heheheeh           | 1             | fix           | 6666666         | invalid           | activation   | yes                         |
+    And Admin click Create Voucher Single list button
+    Then admin will see that the text "Invalid targeted users csv file format" is displayed
+    Then admin will see that the text "Total targeted users must equal with total vouchers" is displayed

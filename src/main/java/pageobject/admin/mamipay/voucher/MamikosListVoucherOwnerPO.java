@@ -301,7 +301,7 @@ public class MamikosListVoucherOwnerPO {
      */
     public void uploadOwnerList(String ownersList) {
         var invalidPath = "src/main/resources/file/owner-list/ownerListInvalid.csv";
-        var validaPath = "";
+        var validaPath = ""; // todo: add valid csv
 
         var path = ownersList.toLowerCase().contains("invalid")? invalidPath : validaPath;
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadOwnerList.click());
