@@ -9,7 +9,6 @@ Feature: Edit Kos BBK Rejected
       | phone stag      | phone prod      | password    |
       | 0812345670008   | 0812345670008   | qwerty123   |
     And owner navigates to property saya kos
-    And owner close pop up BBK at kos list page
     And owner search kost "KosAuto NoBBK Testing Kalasan Sleman" on property saya page
     And user click "Edit Data Pribadi"
     And user click "Lanjutkan"

@@ -62,6 +62,12 @@ public class GoldplusSteps {
         gpSubmission.clicksOnBayarSekarangButton();
     }
 
+    @When("owner close gp onboarding if exist")
+    public void ownerCloseGpOnBoardingIfExist() {
+        loading.waitForLoadingIconDisappear();
+        goldplus.closeGpOnBoardingIfExist();
+    }
+
     @When("user choose Goldplus package {int}")
     public void xuser_choose_goldplus_package(int packages) {
         goldplus.clickOnGoldplusPackageButton(packages);

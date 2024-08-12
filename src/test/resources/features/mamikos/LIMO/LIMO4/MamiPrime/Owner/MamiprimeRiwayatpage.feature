@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO4 @MamiprimeRiwayatPage
 Feature: Riwayat Mamiprime Page
 
   @TEST_LIMO-3540 @continue @WEB @AUTOMATED
@@ -7,6 +7,7 @@ Feature: Riwayat Mamiprime Page
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545512 | 0          | 12345678 |
+    And owner close gp onboarding if exist
     And user click on mamiprime widget at owner dashboard
     Then user see lihat riwayat button
     When user click lihat riwayat mamiprime button
