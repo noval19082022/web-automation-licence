@@ -631,7 +631,7 @@ public class InvoicePO {
      */
     public PaymentPO paymentUsingCC(String ccNumber, String month, String years, String ccv) {
         clickOnPilihPembayaran();
-        playwright.waitFor(kartuKredit);
+        playwright.hardWait(5000.0);
         playwright.clickOn(kartuKredit);
         playwright.clickLocatorAndTypeKeyboard(inputKartuKreditNumber, ccNumber);
         playwright.clickLocatorAndTypeKeyboard(inputKartuKreditMonth, month);
