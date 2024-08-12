@@ -32,6 +32,8 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user login as owner:
       | phone stag   | password  |
       | 081328787342 | Perempuan |
+    And owner navigates to owner dashboard
+    And owner dismiss FTUE goldplus
     And owner open notification icon
     And owner wants to see all notification
     Then user redirected to "/ownerpage/notification"
