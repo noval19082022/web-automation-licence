@@ -100,3 +100,16 @@ Feature: Broadcast Chat Owner 2
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast if exist
     Then owner will see that the text "Broadcast Chat" is displayed
+
+  @TEST_LIMO-185 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat Owner][Chat]User visit broadcast chat page for the first time
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089696109343 | 0          | qwerty123 |
+    And owner navigates to broadcast chat page
+    Then owner will see that the text "Fitur gratis khusus pengguna GoldPlus 2 untuk memasarkan kos Anda lebih luas melalui chat Mamikos." is displayed
+    And owner dismiss FTUE Broadcast if exist
+    Then owner should not be able to see the text "Yuk, berlangganan paket Mamikos GoldPlus 2 untuk memakai Broadcast Chat."
+    Then owner will see that the text "Belum Ada Chat" is displayed
+    Then owner will see that the text "Broadcast chat yang telah Anda kirim akan terekam di halaman ini." is displayed

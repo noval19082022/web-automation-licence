@@ -18,7 +18,7 @@ public class Codegen {
 //            page.navigate("https://business.flip.id/sandbox/overview");
 //            page.navigate("https://jambu.kerupux.com/admin");
 //            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
-//            loginAdminMamipay(page);
+            loginAdminMamipay(page);
             //goToKostDetail(page, "Kos Wild Rift DOTF Tegalrejo Yogyakarta");
 //            loginOwner(page);
 //            loginOwnersini(page);
