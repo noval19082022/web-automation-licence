@@ -119,6 +119,7 @@ public class BroadcastChatPO {
      * Insert text to search kost BroadcastChat
      */
     public void searchKostBC(String text) {
+        playwright.waitTillPageLoaded();
         playwright.forceFill(searchKostInputBC, text);
     }
 
@@ -387,6 +388,7 @@ public class BroadcastChatPO {
      * @return String data type
      */
     public String getDisplayingSearchResultKosNameText() {
+        playwright.waitTillPageLoaded();
         return playwright.getText(displayingSearchResultKosNameText);
     }
 

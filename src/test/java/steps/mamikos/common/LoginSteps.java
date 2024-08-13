@@ -327,6 +327,7 @@ public class LoginSteps {
                 .fillEmailAddress(email)
                 .fillPasswordFacebook(password)
                 .clickOnLoginFacebookButton();
+        login.clickOnContinueFBButton();
     }
 
     @When("user click on enter button tenant in popular area page")

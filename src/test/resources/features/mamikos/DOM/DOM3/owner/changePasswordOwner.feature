@@ -54,7 +54,7 @@ Feature: Change password owner
     And owner fills new password "!@#$%^&*()"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
-  @TEST_SS-3045 @continue
+  @TEST_SS-3045
   Scenario: Owner empty old password field
     Given owner navigates to Akun menu
     And owner click on Ubah "Password"
