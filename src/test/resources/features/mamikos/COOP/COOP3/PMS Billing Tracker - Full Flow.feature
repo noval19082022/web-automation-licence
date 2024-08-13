@@ -171,6 +171,25 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Ajukan Check-out"
     Then admin can see contract status with "Ajukan Check-out"
 
+  @SS-4372 @continue
+  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Check-out + Sudah Check-out
+    When admin can see contract status with "Ajukan Check-out"
+    And admin filter contract status with "Sudah Check-out"
+    Then admin can see contract status with "Sudah Check-out"
+
+  @SS-4368 @continue
+  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Check-out + Aktif + Sudah Check-out
+    And admin click on reset button
+    And admin clicks on next month in calendar
+    And admin filter contract status with "Ajukan Check-out"
+    When admin can see contract status with "Ajukan Check-out"
+    And admin filter contract status with "Sudah Check-out"
+    And admin click on pagination
+    Then admin can see contract status with "Sudah Check-out"
+    And admin filter contract status with "Aktif"
+    And admin click on pagination
+    Then admin can see contract status with "Aktif"
+
   @SS-4378 @continue
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Sudah Checkout
     When admin go to mamikos mamipay admin
@@ -187,7 +206,7 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Sudah Check-out"
     Then admin can see contract status with "Sudah Check-out"
 
-  @SS-4367
+  @SS-4367 @continue
   Scenario: Billing Tracker][Productivity] Check filter combination contract status Sudah Check-out + phone number
     And admin click on reset button
     And admin clicks on next month in calendar
@@ -195,3 +214,13 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Sudah Check-out"
     Then admin can see contract status with "Sudah Check-out"
     And admin can see phone number with "08100000214"
+
+  @SS-4373
+  Scenario: [Billing Tracker][Productivity] Check filter combination contract status Aktif + Sudah checkout
+    When admin click on reset button
+    And admin clicks on next month in calendar
+    And admin filter contract status with "Aktif"
+    And admin filter contract status with "Sudah Check-out"
+    Then admin can see contract status with "Aktif"
+    And admin click on pagination
+    Then admin can see contract status with "Sudah Check-out"
