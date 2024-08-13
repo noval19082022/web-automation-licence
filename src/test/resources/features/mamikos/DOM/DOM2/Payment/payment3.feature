@@ -161,7 +161,6 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     Given admin go to mamikos mamipay admin
     And admin bangkrupux navigate to discount admin fee discount menu
     And admin bangkerupux create admin fee discount with name discount "create invoice discount hapus langsung" amount "999"
-    And admin bangkerupux want to delete admin fee discount that has name "create invoice discount hapus langsung"
     Then admin verify see text "Success."
 
   @TEST_SS-2926 @Automated @web-covered @continue
