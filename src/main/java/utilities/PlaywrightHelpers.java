@@ -293,6 +293,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Input to locator character by character with delay
+     * @param locator input
+     * @param data text
+     * @param delay delay
+     */
+    public void fillCharacterByCharacter(Locator locator, String data, Double delay){
+        locator.pressSequentially(data,new Locator.PressSequentiallyOptions().setDelay(delay));
+    }
+
+    /**
      * Select dropdown by value
      *
      * @param locator Locator type
