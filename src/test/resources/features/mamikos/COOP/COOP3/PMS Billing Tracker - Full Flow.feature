@@ -65,7 +65,7 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Aktif"
     Then admin can see contract status with "Aktif"
 
-  @SS-5081 @continue @a
+  @SS-5081 @continue
   Scenario: [Billing Tracker][Notes]Create notes on invoice
     When admin can see "Tambah Catatan" button
     And admin fill notes tracker with:
