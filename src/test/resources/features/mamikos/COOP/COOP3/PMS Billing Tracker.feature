@@ -54,7 +54,7 @@ Feature: Billing Tracker
     And admin click on expand billing announcement
     Then admin can see bse tab list
 
-  @SS-5087 @continue
+  @SS-5087
   Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
     When admin click on reset button
     And admin choose month "Agustus"
