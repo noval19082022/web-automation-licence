@@ -108,7 +108,7 @@ Feature: Inquiry and Create Manual Payout
     And admin want to transfer on manual payout menu
     Then admin see processing payout message
 
-  @TEST_SS-2945 @Automated @web-covered @createAndChangeManualPayout
+  @TEST_SS-2945 @Automated @web-covered @createAndChangeManualPayout @continue
   Scenario: [Mamipay][Manual Payout] Change payout type to owner
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -130,9 +130,6 @@ Feature: Inquiry and Create Manual Payout
   @TEST_SS-2933 @TEST_SS-2934 @Automated @web-covered
   Scenario: [Mamipay][Manual Payout] Sort payout list by <sorting direction> data
     Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag              | email prod              | password  |
-      | uncle.coop1@mamikos.com | uncle.coop1@mamikos.com | qwerty123 |
     And admin mamipay visit manual payout page
     And admin mamipay want to sort manual payout by "newest"
     And admin mamipay want to sort manual payout by "oldest"
