@@ -5,7 +5,6 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -61,5 +60,4 @@ public class RiwayatBookingSteps {
     public void tenant_click_ajukan_sewa_text_button_on_draft(){
         riwayatBooking.clickAjukanSewaButtonDraft();
     }
-
 }

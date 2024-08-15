@@ -743,4 +743,9 @@ public class GoldplusSteps {
         playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
     }
+
+    @And("owner GP-1 upgrade paket to GP-2 from TBC detail page")
+    public void ownerGPUpgradePaketToGPFromTBCDetailPage() {
+        goldplus.upgradePaketGp1ToGp2();
+    }
 }

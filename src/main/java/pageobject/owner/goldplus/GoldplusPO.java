@@ -88,6 +88,10 @@ public class GoldplusPO {
     Locator warningMessage;
     Locator successMessage;
 
+    //====== TBC Detail page =======//
+    Locator upgradePaketBtnOnTbc;
+    Locator upgradePaketBtnPopUpOnTbc;
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -156,6 +160,8 @@ public class GoldplusPO {
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         warningMessage = page.locator("//div[@class='alert alert-danger alert-dismissable']");
         successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
+        upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
+        upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
     }
 
     /**
@@ -962,5 +968,13 @@ public class GoldplusPO {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
             playwright.clickOn(closeBtn);
         }
+    }
+
+    /**
+     * upgrade paket Gp1 to Gp 2 from TBC detail page
+     */
+    public void upgradePaketGp1ToGp2() {
+        playwright.clickOn(upgradePaketBtnOnTbc);
+        playwright.clickOn(upgradePaketBtnPopUpOnTbc);
     }
 }

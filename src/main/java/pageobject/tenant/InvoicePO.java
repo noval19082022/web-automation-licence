@@ -85,6 +85,7 @@ public class InvoicePO {
     Locator sudahBayarBtn;
     Locator amountBNILabel;
     Locator IndomaretLabel;
+    Locator invoiceBillingDetail;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -158,6 +159,7 @@ public class InvoicePO {
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
         IndomaretLabel = page.locator("#invoicePayment").getByText("Indomaret");
+        invoiceBillingDetail = page.getByTestId("invoiceBillingDetails-payment");
     }
 
     /**
@@ -817,4 +819,19 @@ public class InvoicePO {
         clickOnBayarSekarang();
         playwright.hardWait(5000);
     }
+
+
+    /**
+     * get invoice billing details
+     * @return
+     */
+    public String getInvoiceBillingDetail() {
+        var billingDetails = playwright.getListInnerTextFromListLocator(invoiceBillingDetail);
+        var billingDeyailText = new StringBuilder();
+        billingDetails.forEach(
+                billingDeyailText::append
+        );
+        return billingDeyailText.toString();
+    }
+
 }

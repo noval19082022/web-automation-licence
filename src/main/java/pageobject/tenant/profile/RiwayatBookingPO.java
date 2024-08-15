@@ -40,6 +40,7 @@ public class RiwayatBookingPO {
 
     /**
      * Click on bayar sekarang button
+     *
      * @return InvoicePO class
      */
     public InvoicePO clickOnBayarSekarangButton() {
@@ -52,6 +53,7 @@ public class RiwayatBookingPO {
 
     /**
      * go to invoice after tenant dp
+     *
      * @return InvoicePO class
      */
     public InvoicePO goToSettlementInvoice() {
@@ -87,7 +89,6 @@ public class RiwayatBookingPO {
 
     /**
      * click on Lihat selengkapnya urutan pertama
-     *
      */
     public void clickFirstSelengkapnyaButton() {
         playwright.clickOn(lihatSelengkapnyaButton);
@@ -95,7 +96,6 @@ public class RiwayatBookingPO {
 
     /**
      * click on Apakah uang saya bisa dikembalikan link
-     *
      */
     public void clickOnRefundLink() {
         page.waitForPopup(() -> {
@@ -105,6 +105,7 @@ public class RiwayatBookingPO {
 
     /**
      * Check if history booking section id is visible in the viewport
+     *
      * @return true if booking section id is visible
      */
     public boolean isInHistoryBookingSection() {
@@ -114,6 +115,7 @@ public class RiwayatBookingPO {
 
     /**
      * get first booking status on riwayat and draft booking page
+     *
      * @return String booking status e.g Pemilik menolak
      */
     public String getFirstListBookingStatusText() {
@@ -122,6 +124,7 @@ public class RiwayatBookingPO {
 
     /**
      * click lihat selengkapnya and get reject reason
+     *
      * @return String reason e.g Saya sudah ada yang punya
      */
     public String getRejectReasonOnDetailsFirstKostList() {
@@ -131,17 +134,17 @@ public class RiwayatBookingPO {
 
     /**
      * check if ajukan sewa text button is visible
+     *
      * @return Ajukan Sewa text button
      */
-    public Boolean getAjukanSewatext(){
+    public Boolean getAjukanSewatext() {
         return ajukanSewaText.isVisible();
     }
 
     /**
      * click on Ajukan sewa button on draft or baru dilihat section
      */
-    public void clickAjukanSewaButtonDraft(){
+    public void clickAjukanSewaButtonDraft() {
         playwright.clickOn(ajukanSewaText);
     }
-
 }
