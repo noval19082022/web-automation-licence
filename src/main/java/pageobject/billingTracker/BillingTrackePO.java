@@ -32,13 +32,13 @@ public class BillingTrackePO {
     Locator adminChooseCalender;
     Locator sembunyikanButton;
     Locator nextPaginationButton;
+    Locator propertyNameText;
 
     //-----billing announcement------//
     Locator announcementExpand;
     Locator tambahAnnouncementButton;
     Locator editAnnouncementButton;
     Locator inputAnnouncementTextField;
-    Locator bseTabListtext;
 
     public BillingTrackePO(Page page) {
         this.page = page;
@@ -64,13 +64,13 @@ public class BillingTrackePO {
         adminChooseCalender = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--md']");
         sembunyikanButton = page.locator("//button[contains(., 'Sembunyikan')]");
         nextPaginationButton = page.locator("//button[@class=\"bg-c-button bg-c-pagination__item bg-c-button--tertiary bg-c-button--sm bg-c-button--icon-only-sm\"][2]");
+        propertyNameText = page.locator("//a[@class=\"bg-c-link bg-c-link--high\"]");
 
         //-----------billing announcement----------//
         announcementExpand = page.locator("//*[@class=\"bg-c-text bg-c-text--title-3\"]");
         tambahAnnouncementButton = page.getByTestId("announcementBoard").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("add-plus Tambah"));
         editAnnouncementButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah"));
         inputAnnouncementTextField = page.getByTestId("billingAnnoucementForm-content");
-        bseTabListtext = page.locator("//*[@class=\"bg-c-tabs__list\"]");
     }
 
     public void searchType(String type, String text) {
@@ -307,8 +307,9 @@ public class BillingTrackePO {
      * Assert bse name on billing announcement
      * return Bella, Okta, maya, Dida, Shintia
      */
-    public boolean getBseNametext(){
-       return playwright.waitTillLocatorIsVisible(bseTabListtext,2000.0);
+    public boolean getBseNametext(String text){
+        Locator bseNametext = page.locator("//h4[contains(., '"+text+"')]");
+       return playwright.waitTillLocatorIsVisible(bseNametext,2000.0);
     }
 
     /**
@@ -358,6 +359,31 @@ public class BillingTrackePO {
         playwright.clickOn(nextPaginationButton);
     }
 
+    /**
+     * click on property name
+     */
+    public void clickOnPropertyNametext(){
+        playwright.clickOn(propertyNameText);
+    }
+
+    /**
+     * verify status on filter popup
+     * @param text
+     * @return text example : Aktif, Ajukan Check-out
+     */
+    public boolean checkFilteringContractStatusText(String text) {
+        Locator contractStatusText = page.locator("//p[@class=\"bg-c-text bg-c-text--body-2\"][contains(., '"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(contractStatusText);
+    }
+
+    /**
+     * click on status pembayaran filtering
+     * @param text
+     */
+    public void clickFilterPaidStatus(String text){
+        Locator paidStatusText = page.locator("//p[contains(., '"+text+"')]");
+        playwright.clickOn(paidStatusText);
+    }
 
 }
 

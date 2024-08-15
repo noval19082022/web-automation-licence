@@ -1,4 +1,4 @@
-@COOP3 @billingTracker
+@COOP3 @billingTracker @a
 Feature: Billing Tracker
 
   @SS-5077 @continue
@@ -52,12 +52,34 @@ Feature: Billing Tracker
   Scenario: [Billing Tracker][Title billing tracker]Check expands for Billing team announcement title
     When admin go to billing tracker
     And admin click on expand billing announcement
-    Then admin can see bse tab list
+    Then admin can see bse name with:
+      | bse     |
+      | Bella   |
+      | Okta    |
+      | Maya    |
+      | Dida    |
+      | Sintia  |
 
-  @SS-5087
+  @SS-5087 @continue
   Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
     When admin click on reset button
     And admin choose month "Agustus"
     And admin search billing tracker by "No. HP Penyewa" and "085246113222"
     Then admin click on "085246113222" link button
+    And admin close unused browser tab
 
+  @SS-4306 @continue
+  Scenario: [Billing Tracker][View Data]Check property penyewa clickable
+    When admin click on property name
+    Then new tab open redirect to "Property page"
+    And admin close unused browser tab
+
+  @SS-4366
+  Scenario: [Billing Tracker][Productivity] Check filter combination contract status active & unpaid
+    When admin click on reset button
+    And admin choose month "Agustus"
+    And admin filter contract status with "Aktif"
+    Then admin can see contract status with "Aktif"
+    And admin clicks on Filter button
+    And admin filter paid status with "Unpaid"
+    Then admin can see contract status with "unpaid"

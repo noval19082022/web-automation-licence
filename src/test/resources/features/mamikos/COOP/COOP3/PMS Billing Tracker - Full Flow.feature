@@ -215,7 +215,7 @@ Feature: Update Billing tracker flow
     Then admin can see contract status with "Sudah Check-out"
     And admin can see phone number with "08100000214"
 
-  @SS-4373
+  @SS-4373 @continue
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Aktif + Sudah checkout
     When admin click on reset button
     And admin clicks on next month in calendar
@@ -224,3 +224,31 @@ Feature: Update Billing tracker flow
     Then admin can see contract status with "Aktif"
     And admin click on pagination
     Then admin can see contract status with "Sudah Check-out"
+
+  @SS-4363 @continue
+  Scenario: [Billing Tracker][Productivity] Check filter result for contract status
+    When admin click on reset button
+    And admin filter contract status with "Aktif"
+    Then admin can see contract status with "Aktif"
+
+  @SS-4360 @continue
+  Scenario:[Billing Tracker][Productivity] Check contract status active for next month on billing tracker
+    When admin click on reset button
+    And admin clicks on next month in calendar
+    And admin filter contract status with "Aktif"
+    Then admin can see contract status with "Aktif"
+
+  @SS-4359 @continue
+  Scenario: [Billing Tracker][Productivity] Check contract status column on billing tracker page
+    Then admin can see contract status with "Aktif"
+
+  @SS-4362
+  Scenario: [Billing Tracker][Productivity] Check filter contract status
+    When admin click on reset button
+    And admin clicks on Filter button
+    And admin can see contract status filtering with:
+    | status            |
+    | Aktif             |
+    | Ajukan Check-out  |
+    | Akan Check-out    |
+    | Sudah Check-out   |

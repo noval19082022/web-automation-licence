@@ -7,6 +7,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.billingTracker.BillingTrackePO;
 import utilities.PlaywrightHelpers;
@@ -140,10 +141,6 @@ public class BillingTrackerSteps {
         billingTracker.getBlankAnnouncement(text);
     }
 
-    @Then("admin can see bse tab list")
-    public void admin_can_see_bse_tab_list(){
-        Assert.assertTrue(billingTracker.getBseNametext(), "bse tab list not appears");
-    }
 
     @And("admin filter contract status with {string}")
     public void admin_filter_contract_status_with(String text){
@@ -172,6 +169,32 @@ public class BillingTrackerSteps {
             String notes = row.get("notes");
             Assert.assertTrue(billingTracker.getResutlDataTableType(type), "Element is not displayed for ");
             Assert.assertTrue(billingTracker.getResultDataTableNote(notes), "Element is not displayed for");
+        }
+    }
+
+    @When("admin click on property name")
+    public void admin_click_on_property_name(){
+        billingTracker.clickOnPropertyNametext();
+    }
+
+    @And("admin can see contract status filtering with:")
+    public void admin_can_see_contract_status_filtering_with(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String status = row.get("status");
+            Assert.assertTrue(billingTracker.checkFilteringContractStatusText(status), "Element not appears");
+        }
+    }
+
+    @And("admin filter paid status with {string}")
+    public void admin_filter_paid_status_with(String text){
+        billingTracker.clickFilterPaidStatus(text);
+    }
+
+    @When("admin can see bse name with:")
+    public void admin_can_see_bse_name_with(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String status = row.get("bse");
+            Assert.assertTrue(billingTracker.getBseNametext(status), "elemet not appears");
         }
     }
 }
