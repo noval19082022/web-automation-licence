@@ -14,7 +14,7 @@ public class Codegen {
             context.route("**/*", route -> route.resume());
             // Pause the page, and start recording manually.
             Page page = context.newPage();
-            page.navigate("https://jambu.kerupux.com");
+//            page.navigate("https://jambu.kerupux.com");
 //            page.navigate("https://business.flip.id/sandbox/overview");
 //            page.navigate("https://jambu.kerupux.com/admin");
 //            page.navigate("https://pay-jambu.kerupux.com/pin2blkang/login");
