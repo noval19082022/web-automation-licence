@@ -93,6 +93,15 @@ public class GoldplusSteps {
         Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
     }
 
+    @When("user wants to reset Goldplus for owner with phone number")
+    public void user_wants_to_reset_Goldplus_for_owner_with_phone_numbers(List<String> phoneNumbers) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+        for (var phoneNumber: phoneNumbers) {
+            goldplus.inputGoldplusPhoneNumber(phoneNumber);
+            playwright.clickOnTextButton("Reset");
+        }
+    }
+
     //------ Recurring Mamipay ------//
 
     @When("user sets recurring {string} for number {string}")
@@ -174,6 +183,11 @@ public class GoldplusSteps {
     @Then("verify unpaid invoice is {int}")
     public void verifyUnpaidInvoiceIs(int unpaidInvoice) {
         Assert.assertTrue(unpaidInvoice == goldplus.getCountInvoiceUnpaid());
+    }
+
+    @Then("verify unpaid invoice more than {int}")
+    public void verifyUnpaidInvoiceMoreThan(int unpaidInvoice) {
+        Assert.assertTrue(unpaidInvoice < goldplus.getCountInvoiceUnpaid());
     }
 
     @When("owner wants to extends Goldplus from chatlist")

@@ -829,7 +829,9 @@ public class InvoicePO {
         var billingDetails = playwright.getListInnerTextFromListLocator(invoiceBillingDetail);
         var billingDeyailText = new StringBuilder();
         billingDetails.forEach(
-                billingDeyailText::append
+                text -> billingDeyailText.append(text.
+                        replaceAll("\n", " ").
+                        replaceAll(" {2}", " "))
         );
         return billingDeyailText.toString();
     }
