@@ -1,4 +1,4 @@
-@COOP3 @billingTracker @a
+@COOP3 @billingTracker
 Feature: Billing Tracker
 
   @SS-5077 @continue

@@ -1,4 +1,4 @@
-@COOP3 @billingAnnouncement @a
+@COOP3 @billingAnnouncement
 Feature: Billing Announcement
 
   @SS-5002 @continue
