@@ -27,9 +27,29 @@ Feature: Billing Announcement
     And admin can see announcement toast "Announcement berhasil tersimpan."
     Then admin can see announcement toast "Edit Maya jangan sampai lupa untuk bikin announcement"
 
-  @SS-5043
+  @SS-5043 @continue
   Scenario: [Billing tracker][Announcement]Delete announcement
     When admin click on "Ubah" button
     And admin input announcement with " "
     And admin can see announcement toast "Announcement berhasil tersimpan."
     And admin can see blank announcement with "Belum ada announcement untuk akun BSE ini"
+
+  @SS-4365 @continue
+  Scenario: [Billing Tracker][Productivity] Check annountment for BSE
+    Then admin can see bse name with:
+    | bse     |
+    | Bella   |
+    | Okta    |
+    | Maya    |
+    | Dida    |
+    | Sintia  |
+
+  @SS-4364
+  Scenario: [Billing Tracker][Productivity] Create announcement for 1 BSE
+    And admin choose bse name with "Dida"
+    And admin click on "Tambah" button
+    And admin input announcement with "Hallo Maya jangan sampai lupa untuk bikin announcement"
+    And admin can see announcement toast "Announcement berhasil tersimpan."
+    Then admin can see announcement toast "Hallo Maya jangan sampai lupa untuk bikin announcement"
+    And admin choose bse name with "Sintia"
+    Then admin can see blank announcement with "Belum ada announcement untuk akun BSE ini"
