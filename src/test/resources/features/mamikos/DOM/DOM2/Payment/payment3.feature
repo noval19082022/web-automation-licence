@@ -148,9 +148,12 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
     And admin bangkrupux save after input field on edit discount admin fee
     Then admin verify see text "Success."
 
-  @TEST_SS-2914 @Automated @web-covered @continue
+  @TEST_SS-2914 @Automated @web-covered
   Scenario: [BackOffice][Discount Admin Fee] Admin delete invoice discount
     Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to discount admin fee discount menu
     And admin bangkerupux create admin fee discount with name discount "hapus langsung" amount "999"
     And admin bangkerupux want to delete admin fee discount that has name "hapus langsung"
@@ -159,8 +162,12 @@ Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
   @TEST_SS-2915 @Automated @web-covered @continue
   Scenario: [BackOffice][Discount Admin Fee] Admin create invoice discount
     Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to discount admin fee discount menu
     And admin bangkerupux create admin fee discount with name discount "create invoice discount hapus langsung" amount "999"
+    And admin bangkerupux want to delete admin fee discount that has name "create invoice discount hapus langsung"
     Then admin verify see text "Success."
 
   @TEST_SS-2926 @Automated @web-covered @continue
