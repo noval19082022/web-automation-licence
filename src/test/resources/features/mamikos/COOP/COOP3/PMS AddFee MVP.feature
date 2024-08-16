@@ -150,3 +150,59 @@ Feature: PMS - Add fee MVP
       | Parkir Mobil       | 10000 |
       | Alat Elektronik    | 50000  |
     Then admin click on ya simpan button
+
+  @SS-4354
+  Scenario: [PMS][New booking] Create new booking or DBEt for 3Bulanan and added biaya tambahan for have Hitungan per Bulan
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0812000008 | 0812000007 | qwerty123 |
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant logs out
+    When admin go to pms singgahsini
+    And admin login pms :
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
+    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+    And admin create contract tenant new booking
+    And admin selected type room
+    And admin fill phone number tenant "0812000008"
+    Then admin see informasi penyewa
+    And admin fill informasi pembayaran:
+      | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
+      | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+    And admin add other cost:
+      | Nama Biaya         | Harga  |
+      | Parkir Mobil       | 10000 |
+      | Alat Elektronik    | 50000  |
+    And admin click on save button
+
+    @SS-4332
+    Scenario:[PMS][New Booking/DBET] Admin create more than one biaya tambahan
+      Given user go to mamikos homepage
+      When user login as tenant via phone number:
+        | phone stag | phone prod | password  |
+        | 0812000008 | 0812000007 | qwerty123 |
+      And user cancel booking
+      And user go to mamikos homepage
+      And tenant logs out
+      When admin go to pms singgahsini
+      And admin login pms :
+        | email             | password     |
+        | pman@mamiteam.com | pmanM4m1t34m |
+      And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+      And admin create contract tenant new booking
+      And admin selected type room
+      And admin fill phone number tenant "0812000008"
+      Then admin see informasi penyewa
+      And admin fill informasi pembayaran:
+        | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
+        | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+      And admin add other cost:
+        | Nama Biaya         | Harga  |
+        | Parkir Mobil       | 10000  |
+        | Bawa Blender       | 50000  |
+        | Bawa Kulkas        | 50000  |
+        | Laundry            | 5000   |
+      And admin click on save button

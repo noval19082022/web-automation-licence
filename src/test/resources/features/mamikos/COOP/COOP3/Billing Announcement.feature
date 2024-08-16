@@ -48,8 +48,11 @@ Feature: Billing Announcement
   Scenario: [Billing Tracker][Productivity] Create announcement for 1 BSE
     And admin choose bse name with "Dida"
     And admin click on "Tambah" button
-    And admin input announcement with "Hallo Maya jangan sampai lupa untuk bikin announcement"
+    And admin input announcement with "Hallo Dida jangan sampai lupa untuk bikin announcement"
     And admin can see announcement toast "Announcement berhasil tersimpan."
-    Then admin can see announcement toast "Hallo Maya jangan sampai lupa untuk bikin announcement"
+    Then admin can see announcement toast "Hallo Dida jangan sampai lupa untuk bikin announcement"
     And admin choose bse name with "Sintia"
     Then admin can see blank announcement with "Belum ada announcement untuk akun BSE ini"
+    When admin choose bse name with "Dida"
+    And admin click on "Ubah" button
+    And admin input announcement with " "
