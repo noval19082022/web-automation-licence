@@ -276,4 +276,3 @@ Feature: Waiting List - Kost Detail
       | kost name stag                                                 | kost name prod  |
       | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Arac Penuh |
     Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
-
