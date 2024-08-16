@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import utilities.PlaywrightHelpers;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -14,6 +15,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class RedirectOwnerSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    LoadingPO loadingPO = new LoadingPO(page);
 
     @And("user redirected to owner dashboard")
     public void userRedirectedToOwnerDashboard() {
@@ -22,7 +24,7 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to mamiads page")
     public void userRedirectedToMamiadsPage() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.MAMIADS));
     }
 
@@ -44,31 +46,31 @@ public class RedirectOwnerSteps {
 
     @Then("user redirected to mamitour landing page")
     public void user_redirected_to_mamitour_landing_page() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMITOUR);
     }
 
     @And("user redirected to pusat bantuan mamitour page")
     public void userRedirectedToPusatBantuanMamitourPage() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
     }
 
     @Then("owner redirect to select package GP2 page")
     public void owner_redirect_to_select_package_gp2_page() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_PACKAGE2);
     }
 
     @Then("user redirected to mamiprime landing page")
     public void userRedirectedToMamiprimeLandingPage() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIPRIME);
     }
 
     @Then("user redirected to mamiprime history page")
     public void userRedirectedToMamiprimeHistoryPage() {
-        playwright.waitTillPageLoaded();
+        loadingPO.waitForLoadingIconDisappear();
         assertThat(page).hasURL(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_HISTORY);
     }
 }

@@ -1,23 +1,21 @@
 package steps.mamikos.bangkrupux;
+
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.WhitelistFeaturePO;
-import utilities.PlaywrightHelpers;
-
-
 
 
 public class WhitelistFeatureSteps {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     WhitelistFeaturePO whitelistFeaturePO = new WhitelistFeaturePO(page);
 
     @Then("admin can see message {string}")
     public void admin_can_see_message(String message) {
-     Assert.assertEquals(whitelistFeaturePO.getTitleMessageAllertWhitelist(message),message,"message doesnt equals");
+        Assert.assertEquals(whitelistFeaturePO.getTitleMessageAllertWhitelist(message), message, "message doesnt equals");
     }
 
     @When("admin select feature with {string}")
@@ -35,4 +33,13 @@ public class WhitelistFeatureSteps {
         whitelistFeaturePO.addButtonWhitelist();
     }
 
+    @And("admin search whitelist owner by user_id {string}")
+    public void adminSearchWhitelistOwnerByUser_id(String user_id) {
+        whitelistFeaturePO.searchByUserId(user_id);
+    }
+
+    @Then("admin click on delete btn on whitelist menu for order {string}")
+    public void adminClickOnDeleteBtnOnWhitelistMenu(String order) {
+        whitelistFeaturePO.clickOnDeleteBtn(order);
+    }
 }

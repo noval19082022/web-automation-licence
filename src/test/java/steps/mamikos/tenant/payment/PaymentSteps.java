@@ -139,12 +139,12 @@ public class PaymentSteps {
 
     @And("tenant select payment method using BNI")
     public void tenantSelectPaymentMethodUsingBNI() {
-     //   invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
+        //   invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
-        var amountPembayaranBNI =invoicePO.getAmountPembayaranBNINumberText();
+        var amountPembayaranBNI = invoicePO.getAmountPembayaranBNINumberText();
         page = ActiveContext.getActiveBrowserContext().pages().get(1);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
@@ -159,7 +159,7 @@ public class PaymentSteps {
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
-        var amountPembayaranBNI =invoicePO.getAmountPembayaranBNINumberText();
+        var amountPembayaranBNI = invoicePO.getAmountPembayaranBNINumberText();
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
@@ -214,6 +214,7 @@ public class PaymentSteps {
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBRI(kodePembayaran);
     }
+
     @Then("user/tenant/admin refresh invoice page and see payment success")
     public void refreshInvoiceAndSeePaymentSucess() {
         var pw = new PlaywrightHelpers(ActiveContext.getActivePage());
@@ -270,10 +271,20 @@ public class PaymentSteps {
 
     @Then("tenant will see invoice {string}")
     public void tenantWillSeeInvoice(String statusInvoice) {
-        Assert.assertEquals(kostSaya.isPaymentSuccessText(statusInvoice),""+statusInvoice +"");
+        Assert.assertEquals(kostSaya.isPaymentSuccessText(statusInvoice), "" + statusInvoice + "");
     }
+
     @And("user/tenant click item card billing has been paid")
     public void tenantClickBillingHasBeenPaid() {
         kostSaya.clickItemCardBillingHasBeenPaid();
+    }
+
+    @And("owner/tenant/user see billing details invoice")
+    public void billingDetailInvoice(List<String> datas) {
+        var invoceBillingDetail = invoicePO.getInvoiceBillingDetail();
+        for (String data : datas) {
+            Assert.assertTrue(invoceBillingDetail.contains(data),
+                    String.format("invoice billing details is: %s and not contains: %s", invoceBillingDetail, data));
+        }
     }
 }

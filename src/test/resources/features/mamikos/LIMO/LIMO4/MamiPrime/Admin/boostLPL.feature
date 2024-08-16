@@ -1,4 +1,4 @@
-@LIMO4 @regression
+@LIMO4 @regression @BoosLPLMenu
 Feature: Admin Boost LPL
 
   @TEST_LIMO-259 @continue @boostLpl @WEB @AUTOMATED
