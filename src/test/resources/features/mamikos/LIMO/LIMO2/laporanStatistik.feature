@@ -1,6 +1,7 @@
 @listing-monetization @regression @LIMO2
 Feature: Laporan Statistik
 
+  @LIMO-4055
   Scenario: [WEB][Statistic Page] Owner only have 2 active kost and auto select kost listing that are in the top order
     Given user go to mamikos homepage
     When user login as owner:
@@ -11,14 +12,16 @@ Feature: Laporan Statistik
       | KosName         |
       | Kost Bandicoot Tobelo Tobelo Halmahera |
 
+  @LIMO-277
   Scenario: [WEB][Statistic Page] Statistic section when owner have 1 propety just activated by today
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod | password  |
-      | 0891202303 | 0          | qwerty123 |
+      | 0891202412 | 0          | qwerty123 |
     And owner accsess statistic page
     Then owner can see display empty state "Properti Belum Memiliki Performa"
 
+  @LIMO-276
   Scenario: [WEB][Statistic Page][Filter 7 days] Check when owner have property active less than 7 days, but more than 1 day
     Given user go to mamikos homepage
     When user login as owner:
