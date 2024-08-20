@@ -144,4 +144,9 @@ public class onboardingSteps {
     public void admin_should_redirect_to_mamikos() {
         Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/","URL Mamikos tidak sesuai");
     }
+
+    @Then("step section header is {string}")
+    public void step_section_header_is(String header) {
+        Assert.assertEquals(onboarding.getStepHeader(),header);
+    }
 }
