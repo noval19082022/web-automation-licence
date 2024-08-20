@@ -18,6 +18,7 @@ public class landingPagePO {
     private Locator keluarButton;
     private Locator onboardingButton;
     private Locator daftarAgenButton;
+    private Locator loginErrorMessage;
 
     public landingPagePO(Page page){
         this.page = page;
@@ -32,6 +33,7 @@ public class landingPagePO {
         keluarButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Keluar"));
         onboardingButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Onboarding"));
         daftarAgenButton = page.locator("#introSection").getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Daftar Sekarang"));
+        loginErrorMessage = page.locator(".bg-c-field__message");
     }
 
     /**
@@ -83,5 +85,13 @@ public class landingPagePO {
      */
     public void daftarAgen() {
         playwright.clickOn(daftarAgenButton);
+    }
+
+    /**
+     * Get Login Mantool Error Message
+     * @return String
+     */
+    public String getLoginErrorMessage() {
+        return playwright.getText(loginErrorMessage);
     }
 }
