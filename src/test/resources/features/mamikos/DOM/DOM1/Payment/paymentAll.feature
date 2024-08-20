@@ -1,4 +1,4 @@
-@DOM11 @essentialTest
+@DOM1 @essentialTest
 Feature: Payment All
 
   Scenario: Delete and create contract
