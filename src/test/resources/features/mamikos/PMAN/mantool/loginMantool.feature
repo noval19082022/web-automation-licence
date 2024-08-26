@@ -27,3 +27,33 @@
         | 083214140881      | qwerty123 |
       Then should redirect to onboarding page
       And step section header is "Langkah Awal Agen Input Data"
+
+    @TEST_SS-925 @continue
+    Scenario: Login agen input data using old account
+      Given admin navigate to mantool
+      When admin login agen mantool
+        | No Handphone stag | password  |
+        | 083214140884      | qwerty123 |
+      Then should redirect to onboarding page
+      And step section header is "Langkah Awal Agen Input Data"
+
+    @TEST_SS-939 @continue
+    Scenario: Agen visit LCT
+      When agen click button "Link Leads Mamikos"
+      Then agen should redirect to "https://jambu.kerupux.com/leads/agen/leads-management?activeTab=submitted" in new tab
+      And admin close unused browser tab
+
+    @TEST_SS-932 @continue
+    Scenario: Logout from onboarding page
+      When agen logout from onboarding page
+      Then agen should redirect to mantool landing page
+
+    @TEST_SS-933 @continue
+    Scenario: Visit onboarding page after logout
+      When agen visit onboarding page agen
+      Then agen should redirect to mantool landing page
+
+    @TEST_SS-940
+    Scenario: Visit LCT after logout
+      When agen visit LCT
+      Then agen should redirect to mantool landing page
