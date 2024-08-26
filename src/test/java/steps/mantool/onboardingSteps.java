@@ -1,6 +1,7 @@
 package steps.mantool;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
@@ -148,5 +149,29 @@ public class onboardingSteps {
     @Then("step section header is {string}")
     public void step_section_header_is(String header) {
         Assert.assertEquals(onboarding.getStepHeader(),header);
+    }
+
+    @When("agen logout from onboarding page")
+    public void agen_logout_from_onboarding_page() {
+        onboarding.logoutAgen();
+    }
+
+    @Then("agen should redirect to mantool landing page")
+    public void agen_should_redirect_to_mantool_landing_page() {
+        String landingPageURL = "https://jambu.kerupux.com/agen";
+
+        playwright.hardWait(3000.0);
+        Assert.assertEquals(playwright.getPageUrl(), landingPageURL);
+    }
+
+    @When("agen visit onboarding page agen")
+    public void agen_visit_onboarding_page_agen() {
+        playwright.navigateTo("https://jambu.kerupux.com/leads/mitra-agen/onboarding",3000.0, LoadState.LOAD);
+    }
+
+    @When("agen visit LCT")
+    public void agen_visit_lct() {
+        playwright.navigateTo("https://jambu.kerupux.com/leads/agen/leads-management?activeTab=submitted",3000.0, LoadState.LOAD);
+        playwright.hardWait(3000.0);
     }
 }
