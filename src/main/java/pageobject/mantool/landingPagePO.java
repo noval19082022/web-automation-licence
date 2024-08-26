@@ -19,6 +19,7 @@ public class landingPagePO {
     private Locator onboardingButton;
     private Locator daftarAgenButton;
     private Locator loginErrorMessage;
+    private Locator lupaPasswordButton;
 
     public landingPagePO(Page page){
         this.page = page;
@@ -34,6 +35,7 @@ public class landingPagePO {
         onboardingButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Onboarding"));
         daftarAgenButton = page.locator("#introSection").getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Daftar Sekarang"));
         loginErrorMessage = page.locator(".bg-c-field__message");
+        lupaPasswordButton = page.getByText("Lupa password?");
     }
 
     /**
@@ -93,5 +95,13 @@ public class landingPagePO {
      */
     public String getLoginErrorMessage() {
         return playwright.getText(loginErrorMessage);
+    }
+
+    /**
+     * go to forgot password mantool page
+     */
+    public void goToForgotPasswordMantool() {
+        playwright.clickOn(loginAgenButton);
+        playwright.clickOn(lupaPasswordButton);
     }
 }

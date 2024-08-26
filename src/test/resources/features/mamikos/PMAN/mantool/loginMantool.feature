@@ -19,6 +19,15 @@
       Then should redirect to onboarding page
       And step section header is "Langkah Awal Agen Akuisisi"
 
+    @TEST_SS-959 @test
+    Scenario: Login agen akuisisi using old account
+      Given admin navigate to mantool
+      When admin login agen mantool
+        | No Handphone stag | password  |
+        | 082212340909      | qwerty123 |
+      Then should redirect to onboarding page
+      And step section header is "Langkah Awal Agen Akuisisi"
+
     @TEST_SS-958
     Scenario: Login agen input data
       Given admin navigate to mantool
