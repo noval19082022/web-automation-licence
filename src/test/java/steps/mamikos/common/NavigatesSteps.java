@@ -186,7 +186,12 @@ public class NavigatesSteps {
         playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS);
         loading.waitForLoadingIconDisappear();
-        propertySaya.clickClosePopUpBBKIfExist();
+//        propertySaya.clickClosePopUpBBKIfExist();
+    }
+
+    @When("owner close pop up bbk on property saya page")
+    public void closeBBK() {
+        propertySaya.clickClosePopUpBBKOnPropertySaya();
     }
 
     @When("owner navigates to {string}")
