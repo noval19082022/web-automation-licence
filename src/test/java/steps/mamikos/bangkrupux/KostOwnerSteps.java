@@ -52,6 +52,11 @@ public class KostOwnerSteps {
         kostOwner.clickOnFirstVerifyButton();
     }
 
+    @And("user verify the kos in admin kos owner if exist")
+    public void userVerifyTheKosInAdminKosOwnerIfExist() {
+        kostOwner.clickOnFirstVerifyButtonIfExist();
+    }
+
     @And("admin bangkrupux search kost owner in admin kos owner page")
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage() {
         kostOwner.searchKosName(Mamikos.getPropertyKosName());
