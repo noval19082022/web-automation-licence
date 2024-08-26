@@ -19,7 +19,7 @@
       Then should redirect to onboarding page
       And step section header is "Langkah Awal Agen Akuisisi"
 
-    @TEST_SS-959 @test
+    @TEST_SS-959
     Scenario: Login agen akuisisi using old account
       Given admin navigate to mantool
       When admin login agen mantool
