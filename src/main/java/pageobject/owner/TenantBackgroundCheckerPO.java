@@ -20,6 +20,12 @@ public class TenantBackgroundCheckerPO {
     Locator beliPaketButton;
     Locator kostNotActiveInformation;
     Locator gp2TBCInformation;
+    Locator tooltipPembayaranSewa;
+    Locator tooltipChatActive;
+    Locator tooltipKetepatanWaktuBayar;
+    Locator tooltipRataDurasiSewa;
+    Locator tooltipRataNominalSewa;
+    Locator tooltipPengajuanSewa;
 
     public TenantBackgroundCheckerPO(Page page) {
         this.page = page;
@@ -34,6 +40,14 @@ public class TenantBackgroundCheckerPO {
         beliPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Beli Paket"));
         kostNotActiveInformation = page.locator("//*[@class='bg-c-modal__body-title']");
         gp2TBCInformation = page.locator("//*[@class='bg-c-empty-state__title']");
+        tooltipPembayaranSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(2) > div:nth-of-type(1) .tenant-background-checker-item__icon");
+        tooltipChatActive = page.locator(".tenant-background-checker-activity > div:nth-of-type(1) > div:nth-of-type(1) .tenant-background-checker-item__icon");
+        tooltipKetepatanWaktuBayar = page.locator(".tenant-background-checker-activity > div:nth-of-type(2) > div:nth-of-type(2) .tenant-background-checker-item__icon");
+        tooltipRataNominalSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(3) > div:nth-of-type(2) .tenant-background-checker-item__icon");
+        tooltipRataDurasiSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(3) > div:nth-of-type(1) .tenant-background-checker-item__icon");
+        tooltipPengajuanSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(1) > div:nth-of-type(2) .tenant-background-checker-item__icon");
+
+
     }
 
     /**
@@ -118,5 +132,53 @@ public class TenantBackgroundCheckerPO {
      */
     public Boolean isInfoTBCPageDisplayed() {
         return playwright.waitTillLocatorIsVisible(gp2TBCInformation);
+    }
+
+    /**
+     * Check if information messgase
+     *
+     * @return true if displayed
+     */
+    public Boolean isTooltipMessageDisplayed(String tooltip) {
+        Locator text = page.locator("//div[@class='bg-c-tooltip__content-text'][normalize-space()='"+tooltip+"']");
+        return playwright.waitTillLocatorIsVisible(text);
+    }
+
+    /**
+     * Check if information messgase
+     *
+     * @return true if displayed
+     */
+    public Boolean isTextPopupDisplayed(String textPopup) {
+        Locator text = page.locator("//h3[normalize-space()='"+textPopup+"']");
+        return playwright.waitTillLocatorIsVisible(text);
+    }
+
+    /**
+     * Check  information from tooltip
+     *
+     * @return true if displayed
+     */
+    public void clickOnTooltip(String tooltipName) {
+        switch (tooltipName) {
+            case "chatActive":
+                playwright.clickOn(tooltipChatActive);
+                break;
+            case "pembayaranSewa":
+                playwright.clickOn(tooltipPembayaranSewa);
+                break;
+            case "ketepatanWaktuBayar":
+                playwright.clickOn(tooltipKetepatanWaktuBayar);
+                break;
+            case "rataRataDurasiSewa":
+                playwright.clickOn(tooltipRataDurasiSewa);
+                break;
+            case "rataRataNominalSewa":
+                playwright.clickOn(tooltipRataNominalSewa);
+                break;
+            case "pengajuanSewa":
+                playwright.clickOn(tooltipPengajuanSewa);
+                break;
+        }
     }
 }
