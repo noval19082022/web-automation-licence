@@ -121,6 +121,16 @@ public class KostOwnerPO {
     }
 
     /**
+     * Click on first verify button if exist
+     */
+    public void clickOnFirstVerifyButtonIfExist() {
+        if (playwright.waitTillLocatorIsVisible(firstVerifyButton, 5_000.0)) {
+            playwright.clickOn(firstVerifyButton);
+        }
+        playwright.waitTillPageLoaded(5_000.0);
+    }
+
+    /**
      * Navigate to url delete kos on admin
      *
      */

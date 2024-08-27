@@ -52,6 +52,8 @@ public class PropertySayaPO {
     Locator addDataButton;
     Locator addNewKosButton;
     Locator closePopupBBKIcon;
+    Locator popUpBBkDialog;
+    Locator closeBBKDialog;
     Locator fullnameTextbox;
     Locator bankAccountNumberTextbox;
     Locator bankOwnerNameTextbox;
@@ -244,6 +246,8 @@ public class PropertySayaPO {
         addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
         addNewKosButton = page.getByText("+ Tambah Kos Baru");
         closePopupBBKIcon = page.locator(".bg-c-modal__action-closable");
+        popUpBBkDialog = page.locator(".auto-active-bbk-intercept-modal");
+        closeBBKDialog = page.locator(".owner-intercept-booking-modal__close-button");
         fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
         bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
         bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
@@ -692,14 +696,13 @@ public class PropertySayaPO {
         playwright.clickOn(closePopupBBKIcon);
     }
 
+
     /**
-     * Click on close at pop up BBK if exist
+     * Click on close at pop up BBK on property saya
      */
-    public void clickClosePopUpBBKIfExist() {
-        if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon, 1000.0)) {
-            playwright.waitFor(closePopupBBKIcon);
-            playwright.clickOn(closePopupBBKIcon);
-        }
+    public void clickClosePopUpBBKOnPropertySaya() {
+        playwright.waitFor(closeBBKDialog);
+        playwright.clickOn(closeBBKDialog);
     }
 
     /**
