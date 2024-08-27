@@ -25,7 +25,7 @@ public class LoadingPO {
      */
     public void waitForLoadingIconDisappear() {
         var waitDelay = 5000.0;
-        var maxLoop = 10;
+        var maxLoop = 15;
         if (playwright.waitTillLocatorIsVisible(loadingIcon.nth(0)) || playwright.waitTillLocatorIsVisible(loadingAnimation)) {
             List<Locator> loadingIconList = playwright.getLocators(loadingIcon);
             if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {

@@ -20,7 +20,7 @@ Feature: MamiPoin Tenant Riwayat Poin Page
   @SS-5064 @continue
   Scenario: MamiPoin Grouped by Month
     Then user verify point history grouped by months
-      | Juli 2023 |
+      | Januari 2024 |
 
   @SS-5065 @continue
   Scenario: Filter Poin Diterima

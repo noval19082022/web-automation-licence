@@ -55,4 +55,13 @@ public class landingPageSteps {
     public void user_daftar_agen() {
         landingPage.daftarAgen();
     }
+
+    @Then("show login mantool error message {string}")
+    public void show_login_mantool_error_message(String error) {
+        Assert.assertEquals(landingPage.getLoginErrorMessage(),error);
+    }
+    @Given("user visit forgot password mantool")
+    public void user_visit_forgot_password_mantool() {
+        landingPage.goToForgotPasswordMantool();
+    }
 }

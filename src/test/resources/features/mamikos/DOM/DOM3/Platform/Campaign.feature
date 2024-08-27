@@ -163,7 +163,11 @@ Feature: [Test-Execution][DOM] Web - Campaign
 
   @TEST_SS-2980 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - Play Video
-    Given user visit page "/enaknyangekos"
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user want to play the video on LandingPage EnaknyaNgekos
     Then user see pop up video player is shown on EnaknyaNgekos LP and can play video it

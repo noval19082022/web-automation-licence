@@ -173,7 +173,8 @@ public class SinggahsiniLandingPageSteps {
             URL = "https://www.youtube.com/channel/UCDH3m6FZPy0X8D13h4GQz-A";
         } else if (link.equalsIgnoreCase("Antifraud")) {
             URL = "https://help.mamikos.com/post/bagaimana-agar-transaksi-saya-aman-di-mamikos";
-
+        } else if (link.equalsIgnoreCase("Property page")){
+            URL = "https://sini-jambu.kerupux.com/property-detail/10872/overview";
         }
 
         Assert.assertEquals(singgahsini.getNewTabURL(),URL);

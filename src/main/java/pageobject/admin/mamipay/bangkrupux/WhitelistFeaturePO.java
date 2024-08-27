@@ -1,4 +1,5 @@
 package pageobject.admin.mamipay.bangkrupux;
+
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -10,6 +11,9 @@ public class WhitelistFeaturePO {
     Locator buttonAdd;
     Locator selectFeature;
     Locator inputOwnerId;
+    Locator ownerIdPlaceHolder;
+    Locator searchBtn;
+    Locator deleteBtn;
 
     public WhitelistFeaturePO(Page page) {
         this.page = page;
@@ -17,20 +21,23 @@ public class WhitelistFeaturePO {
         buttonAdd = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Add"));
         selectFeature = page.locator("//select[@name='name']");
         inputOwnerId = page.getByPlaceholder("user_id");
+        ownerIdPlaceHolder = page.getByPlaceholder("Owner Id");
+        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        deleteBtn = page.getByTitle("delete");
     }
 
     /**
      * Choose feature whitelist
      */
     public void chooseFeatureWhitelist(String feature) {
-        playwright.selectDropdownByValue(selectFeature,feature);
+        playwright.selectDropdownByValue(selectFeature, feature);
     }
 
     /**
      * input user id (owner id)
      */
     public void inputOwnerId(String ownerId) {
-       playwright.fill(inputOwnerId,ownerId);
+        playwright.fill(inputOwnerId, ownerId);
     }
 
     /**
@@ -42,10 +49,38 @@ public class WhitelistFeaturePO {
 
     /**
      * Get Text of alert from whitelist feature
+     *
      * @return Text of Messsage Allert
      */
     public String getTitleMessageAllertWhitelist(String message) {
-       Locator messageAllert = page.getByText(message);
+        Locator messageAllert = page.getByText(message);
         return playwright.getText(messageAllert);
+    }
+
+    /**
+     * search owner by user_d
+     *
+     * @param userId
+     */
+    public void searchByUserId(String userId) {
+        playwright.clickLocatorAndTypeKeyboard(ownerIdPlaceHolder, userId);
+        playwright.clickOn(searchBtn);
+    }
+
+    /**
+     * clickOn delete Btn
+     *
+     * @param index
+     */
+    public void clickOnDeleteBtn(String index) {
+        var order = Integer.parseInt(index);
+        // Ensure the position is at least 1
+        var position = Math.max(order, 1);
+
+        // Adjust for 0-based indexing in Playwright
+        var deleteButton = deleteBtn.nth(position - 1);
+
+        // Click and accept the dialog
+        playwright.acceptDialog(deleteButton);
     }
 }

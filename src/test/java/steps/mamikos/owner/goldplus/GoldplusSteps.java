@@ -62,6 +62,12 @@ public class GoldplusSteps {
         gpSubmission.clicksOnBayarSekarangButton();
     }
 
+    @When("owner close gp onboarding if exist")
+    public void ownerCloseGpOnBoardingIfExist() {
+        loading.waitForLoadingIconDisappear();
+        goldplus.closeGpOnBoardingIfExist();
+    }
+
     @When("user choose Goldplus package {int}")
     public void xuser_choose_goldplus_package(int packages) {
         goldplus.clickOnGoldplusPackageButton(packages);
@@ -85,6 +91,15 @@ public class GoldplusSteps {
         goldplus.inputGoldplusPhoneNumber(phoneNumber);
         playwright.clickOnTextButton("Reset");
         Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
+    }
+
+    @When("user wants to reset Goldplus for owner with phone number")
+    public void user_wants_to_reset_Goldplus_for_owner_with_phone_numbers(List<String> phoneNumbers) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+        for (var phoneNumber: phoneNumbers) {
+            goldplus.inputGoldplusPhoneNumber(phoneNumber);
+            playwright.clickOnTextButton("Reset");
+        }
     }
 
     //------ Recurring Mamipay ------//
@@ -168,6 +183,11 @@ public class GoldplusSteps {
     @Then("verify unpaid invoice is {int}")
     public void verifyUnpaidInvoiceIs(int unpaidInvoice) {
         Assert.assertTrue(unpaidInvoice == goldplus.getCountInvoiceUnpaid());
+    }
+
+    @Then("verify unpaid invoice more than {int}")
+    public void verifyUnpaidInvoiceMoreThan(int unpaidInvoice) {
+        Assert.assertTrue(unpaidInvoice < goldplus.getCountInvoiceUnpaid());
     }
 
     @When("owner wants to extends Goldplus from chatlist")
@@ -736,5 +756,10 @@ public class GoldplusSteps {
     public void ownerSeeThatTheTextIsDisplayedOnGoldplusPage(String text) {
         playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
+    }
+
+    @And("owner GP-1 upgrade paket to GP-2 from TBC detail page")
+    public void ownerGPUpgradePaketToGPFromTBCDetailPage() {
+        goldplus.upgradePaketGp1ToGp2();
     }
 }

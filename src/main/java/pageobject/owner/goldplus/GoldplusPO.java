@@ -23,7 +23,6 @@ public class GoldplusPO {
     Locator selectRadioButtonYes;
     Locator messageText;
     Locator lihatTagihanTable;
-    Locator actionButtonPopUp;
     Locator widgetGP;
     Locator snkGoldplusCheckbox;
     Locator weeklyPeriode;
@@ -53,6 +52,7 @@ public class GoldplusPO {
     Locator benefitGP;
     Locator detailManfaatGP2;
     Locator filterPaketGoldplusAnda;
+    Locator closeBtn;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -87,6 +87,10 @@ public class GoldplusPO {
     Locator saveButton;
     Locator warningMessage;
     Locator successMessage;
+
+    //====== TBC Detail page =======//
+    Locator upgradePaketBtnOnTbc;
+    Locator upgradePaketBtnPopUpOnTbc;
 
 
     public GoldplusPO(Page page) {
@@ -131,6 +135,7 @@ public class GoldplusPO {
         buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         detailManfaatGP1 = page.getByText("Lihat Detail Manfaatchevron-right").nth(1);
         detailManfaatGP2 = page.getByText("Lihat Detail Manfaatchevron-right").first();
+        closeBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         imagePopupRecurring = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("business-with-goldplus"));
         textTitlePopupRecurring = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Masa aktif GoldPlus akan habis."));
         textSubtitlePopUpRecurring = page.getByText("Ayo, segera perpanjang paket GoldPlus Anda sekarang.");
@@ -155,6 +160,8 @@ public class GoldplusPO {
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         warningMessage = page.locator("//div[@class='alert alert-danger alert-dismissable']");
         successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
+        upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
+        upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
     }
 
     /**
@@ -955,5 +962,19 @@ public class GoldplusPO {
      */
     public String getSuccessMessage() {
         return playwright.getText(successMessage).replaceAll(" ID \\d+ ", "").replaceAll("×\\s+", "");
+    }
+
+    public void closeGpOnBoardingIfExist() {
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+            playwright.clickOn(closeBtn);
+        }
+    }
+
+    /**
+     * upgrade paket Gp1 to Gp 2 from TBC detail page
+     */
+    public void upgradePaketGp1ToGp2() {
+        playwright.clickOn(upgradePaketBtnOnTbc);
+        playwright.clickOn(upgradePaketBtnPopUpOnTbc);
     }
 }

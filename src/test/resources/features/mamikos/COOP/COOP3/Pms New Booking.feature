@@ -147,7 +147,7 @@ Feature: Pms New Booking
       | Per Bulan     | today            | 1 Bulan     | Full Payment      |
     Then admin verify see text "Pilih metode pembayaran"
 
-  @SS-5098 @continue
+  @SS-5098
   Scenario: admin additional price deposit and Mamiservice
     Given admin go to pms singgahsini
     And admin go to room allotment page "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"

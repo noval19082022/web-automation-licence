@@ -328,6 +328,7 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isWeeklyQuotaChatroomPresent() {
+        playwright.waitTillLocatorIsVisible(weeklyQuotaChatroomHeader);
         return weeklyQuotaChatroomHeader.isVisible();
     }
 
@@ -336,6 +337,7 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isRegisterGPButtonChatroomPresent() {
+        playwright.waitTillLocatorIsVisible(registerGoldplusButton);
         return registerGoldplusButton.isVisible();
     }
 

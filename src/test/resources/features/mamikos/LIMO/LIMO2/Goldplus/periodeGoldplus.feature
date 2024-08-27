@@ -57,8 +57,7 @@ Feature: Check Period Goldplus Page
 
   @TEST_LIMO-3524
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when favorite label more than 1
-    Scenario: Setting label favorite more than 1
-    And admin successfully additional favorite labels 4 Month
+    Then admin successfully additional favorite labels 4 Month
     And mamikos bangkrupux admin should be successfully logged out
 
     #Scenario: check list periode

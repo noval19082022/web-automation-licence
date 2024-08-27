@@ -66,11 +66,6 @@ public class CommonSteps {
         ActiveContext.setActivePage(pages.get(0));
     }
 
-    @Then("user/owner/tenant go back to previous page")
-    public void user_go_back_to_previous_page() {
-        page.goBack();
-    }
-
     @Then("The system should display {string} button as enabled")
     public void the_system_should_display_button_as_enabled(String buttonName) {
         Assert.assertFalse(page.isVisible("//*[@disabled='disabled'][contains(., '" + buttonName + "')]"));
@@ -116,5 +111,10 @@ public class CommonSteps {
     @Then("admin should not be able to see the text {string}")
     public void adminShouldNotBeAbleToSeeTheText(String info) {
         Assert.assertFalse(playwright.isTextDisplayed(info));
+    }
+
+    @And("admin/user/tenant/owner go back to previous page")
+    public void adminGoBackToPreviousPage() {
+        ActiveContext.getActivePage().goBack();
     }
 }

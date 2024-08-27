@@ -250,10 +250,16 @@ public class GolplusContractPO {
      * @param packageGP of goldplus package
      */
     public void selectDropdownPackage(String packageGP) {
-        Locator element =  page.locator("//select[@name='package']");
-        playwright.selectDropdownByValue(element,packageGP);
+        page.evaluate("(packageName) => {" +
+                "  const select = document.querySelector('select[name=\"package\"]');" +
+                "  const option = Array.from(select.options).find(o => o.text.includes(packageName));" +
+                "  if (option) {" +
+                "    option.selected = true;" +
+                "    select.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "  } else {" +
+                "    console.error('Option not found:', packageName);" +
+                "  }" +
+                "}", packageGP);
     }
-
-
 }
 
