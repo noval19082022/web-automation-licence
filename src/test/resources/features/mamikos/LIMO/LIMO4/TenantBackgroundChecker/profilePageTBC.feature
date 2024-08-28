@@ -34,7 +34,7 @@ Feature: Profile Tenant Background Checker
     When owner click button "Beli Paket" on TBC page
     Then owner redirect to select package GP2 page
 
-  @LIMO-325
+  @TEST_LIMO-325
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check Section at page profil tenant
     Given user go to mamikos homepage
     When user login as owner:
@@ -48,7 +48,7 @@ Feature: Profile Tenant Background Checker
     Then owner will see that the text "0892-20xx-xx" is displayed
    # And owner can see Tenant Historical Summary Data with Jumlah Pengajuan Sewa,Jumlah Pembayaran Sewa,Rata-Rata Durasi Sewa,Rata-Rata Nominal Sewa,Jumlah Chat yang Aktif
 
-  @LIMO-324
+  @TEST_LIMO-324
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check tooltip at section data profil tenant
     Given user go to mamikos homepage
     When user login as owner:
@@ -69,7 +69,7 @@ Feature: Profile Tenant Background Checker
     When owner click on tooltip "pengajuanSewa"
     Then owner see explain is "Total pengajuan sewa kos yang telah dilakukan penyewa sejak terdaftar di Mamikos."
 
-  @LIMO-322
+  @TEST_LIMO-322
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check condition when owner already GP 1
     Given user go to mamikos homepage
     When user login as owner:
@@ -79,7 +79,7 @@ Feature: Profile Tenant Background Checker
     And owner open TBC Lihat Profil at chatroom "Noval Abis Delete Aja"
     Then owner GP-1 upgrade paket to GP-2 from TBC detail page
 
-    @LIMO-322
+    @TEST_LIMO-322
   Scenario:[Web][Tenant Background Checker][Profil Tenant] Check condition when owner have invoice single or multiple GP 1 activation
     Given user go to mamikos homepage
     When user login as owner:
