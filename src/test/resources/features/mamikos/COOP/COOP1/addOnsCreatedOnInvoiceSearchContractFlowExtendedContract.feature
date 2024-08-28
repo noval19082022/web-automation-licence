@@ -2,7 +2,7 @@
 Feature: addOns Created On Invoice Search Contract Flow Extended Contract
 
 
-  @SSCOOP-3772
+  @SS-3772
   Scenario: [Add Ons - Extended Contract] Get And Create Tenant Data Add Ons
     When playwright create register device id for tenant with parameters:
       | device_identifier | Mamitest0891111020198     |
@@ -26,7 +26,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
       | phone stag    | phone prod    |
       | 0891111020198 | 0891111020198 |
 
-  @SSCOOP-3775
+  @SS-3775
   Scenario: [Add Ons - Extended Contract] Playwright create booking
     When playwright create register device id for tenant with parameters:
       | device_identifier | Mamitest0891111020198     |
@@ -42,7 +42,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
       | songId     | 58650684 |
       | roomTypeId | 6194     |
 
-  @SSCOOP-3776
+  @SS-3776
   Scenario: [Add Ons - Extended Contract] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
@@ -53,7 +53,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @SSCOOP-3777
+  @SS-3777
   Scenario: [Add Ons - Extended Contract] Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -65,7 +65,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  @SSCOOP-3778
+  @SS-3778
   Scenario: [Add Ons - Extended Contract] Admin Master Add, Add Ons Fee On Auto Extend Invoice With Booked Status
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -80,7 +80,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
 
-  @SSCOOP-3779
+  @SS-3779
   Scenario: [Add Ons - Extended Contract] Tenant Pay Booking 2nd Month For Add Ons Flow Extended Contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -91,7 +91,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
     And tenant set active page to 1
     Then tenant pay booking to extended contract using ovo "081280003230"
 
-  @SSCOOP-3780
+  @SS-3780
   Scenario: [Add Ons - Extended Contract] Admin Master Verify That Add Ons Successfully Added To Tenant Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -104,7 +104,7 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
     And tenant set active page to 1
     Then tenant can see additional price "Laundry" with price "Rp100.000"
 
-  @SSCOOP-3783
+  @SS-3783
   Scenario Outline: [Add Ons - Extended Contract] Get Active Contract And Active Booking For Add Ons
     When playwright create register device id for tenant with parameters:
       | device_identifier | Mamitest0891111020198     |
@@ -123,11 +123,11 @@ Feature: addOns Created On Invoice Search Contract Flow Extended Contract
       | verified   |
       | checked_in |
 
-  @SSCOOP-3782
+  @SS-3782
   Scenario: [Add Ons - Extended Contract] Verify Active Contract And Active Booking For Add Ons
     When playwright check for active contract and active booking
 
-  @SSCOOP-3781
+  @SS-3781
   Scenario: [Add Ons - Extended Contract] Tenant Batalkan Pengajuan Sewa For Add Ons
     And playwright batalkan pengajuan sewa for tenant
 		

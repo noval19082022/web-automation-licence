@@ -762,4 +762,8 @@ public class GoldplusSteps {
     public void ownerGPUpgradePaketToGPFromTBCDetailPage() {
         goldplus.upgradePaketGp1ToGp2();
     }
+    @And("owner click on upgrade package at tbc profile tenant")
+    public void ownerClickOnUpgradePackage() {
+        goldplus.clickOnUpgradePackage();
+    }
 }
