@@ -1103,6 +1103,18 @@ public class HomepagePO {
         return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
 
+    /**
+     * verify add fee from pms kk on booking form
+     * @param addfeetext
+     * @return text
+     */
+    public boolean getAddFeeKK(String addfeetext){
+        Locator addFeeKKtext = page.locator("//p[contains(.,'"+addfeetext+"')]");
+        return playwright.waitTillLocatorIsVisible(addFeeKKtext);
+    }
+
+
+
     //---Daftar Properti---//
 
     /**

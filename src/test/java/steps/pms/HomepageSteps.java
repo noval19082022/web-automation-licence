@@ -436,6 +436,14 @@ public class HomepageSteps {
         homepage.getPriceTextNewRules(text);
     }
 
+    @Then("admin can see addfee KK with:")
+    public void admin_can_see_addfee_kk_with(DataTable tables){
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String addfeetext = row.get("addfee name");
+            Assert.assertTrue(homepage.getAddFeeKK(addfeetext), "elemet not appears");
+        }
+    }
+
     //---Daftar Properti---//
     @When("admin clicks kebab button")
     public void admin_clicks_kebab_button(){

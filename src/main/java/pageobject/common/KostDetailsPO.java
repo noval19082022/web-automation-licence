@@ -2275,6 +2275,16 @@ public class KostDetailsPO {
     }
 
     /**
+     * check phone number placeholder
+     * @param text
+     * @return text
+     */
+    public boolean isPhoneNumberPlaceHolderText(String text){
+        Locator phonePlaceholdertext = page.locator("//input[@placeholder='"+text+"']");
+        return playwright.waitTillLocatorIsVisible(phonePlaceholdertext);
+    }
+
+    /**
      * click on camera shutter
      */
     public void uploadIdVerification() {
