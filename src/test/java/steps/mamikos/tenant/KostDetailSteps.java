@@ -534,4 +534,9 @@ public class KostDetailSteps {
     public void tenant_can_see_enable_send_button(){
         Assert.assertTrue(kostDetail.isKirimButtonDisplayed(), "not see Kirim button");
     }
+
+    @Then("tenant can see placeholder phone number with {string}")
+    public void tenant_can_see_placeholder_hone_number_with(String text){
+        Assert.assertTrue(kostDetail.isPhoneNumberPlaceHolderText(text), "not see place holder");
+    }
 }

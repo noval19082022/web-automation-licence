@@ -276,3 +276,16 @@ Feature: Waiting List - Kost Detail
       | kost name stag                                                 | kost name prod  |
       | Kost Singgahsini Waiting List AT Tipe B Cilacap Tengah Cilacap | Kost Arac Penuh |
     Then tenant can see "Kamu ada di daftar tunggu. Kami akan hubungi jika ada kamar kosong."
+
+
+  @TEST_SS-4314
+  Scenario: [Web][Waiting List ][Waiting List Form]Check daftar tunggu form when tenant haven't verified phone number and haven't room type
+    Given user go to mamikos homepage
+    And user login as tenant via facebook:
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+    And tenant search kost then go to kost details:
+      | kost name stag                                                 | kost name prod  |
+      | Kost Fahmi Singgahsini Ketiga Indralaya Utara Ogan Ilir | Kost Arac Penuh |
+    And tenant click "Ikut Daftar Tunggu"
+    Then tenant can see placeholder phone number with "Contoh: 081244335566"
