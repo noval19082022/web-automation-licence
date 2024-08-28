@@ -977,4 +977,10 @@ public class GoldplusPO {
         playwright.clickOn(upgradePaketBtnOnTbc);
         playwright.clickOn(upgradePaketBtnPopUpOnTbc);
     }
+    /**
+     * click on upgrade paket at profile tenant
+     */
+    public void clickOnUpgradePackage() {
+        playwright.clickOn(upgradePaketBtnOnTbc);
+    }
 }

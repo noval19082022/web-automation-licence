@@ -20,37 +20,37 @@ public class TenantBackgroundCheckerSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     @Then("owner can see entry point TBC Lihat Profil at chatroom {string}")
-    public void owner_can_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt){
+    public void owner_can_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
-        Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(),"entry point not displayed");
+        Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point not displayed");
     }
 
     @And("owner can see coachmark tenant background checker")
     public void owner_can_see_coachmark_tenant_background_checker() {
         playwright.hardWait(2000.0);
-        Assert.assertTrue(tenantBackgroundCheckerPO.isCoachmarkDisplayed(),"coachmark not displayed");
-        Assert.assertEquals(tenantBackgroundCheckerPO.getTitleCoachmark(),tenantBackgroundCheckerPO.getTitleCoachmark(),"title doesnt match");
-        Assert.assertEquals(tenantBackgroundCheckerPO.getDesCoachmark(),tenantBackgroundCheckerPO.getDesCoachmark(),"desc coachmark doesnt match");
+        Assert.assertTrue(tenantBackgroundCheckerPO.isCoachmarkDisplayed(), "coachmark not displayed");
+        Assert.assertEquals(tenantBackgroundCheckerPO.getTitleCoachmark(), tenantBackgroundCheckerPO.getTitleCoachmark(), "title doesnt match");
+        Assert.assertEquals(tenantBackgroundCheckerPO.getDesCoachmark(), tenantBackgroundCheckerPO.getDesCoachmark(), "desc coachmark doesnt match");
     }
 
     @Then("coachmark is closed")
     public void coachmark_is_closed() {
-       Assert.assertFalse(tenantBackgroundCheckerPO.isCoachmarkDisplayed(),"coachmark still show");
+        Assert.assertFalse(tenantBackgroundCheckerPO.isCoachmarkDisplayed(), "coachmark still show");
     }
 
     @Then("owner can see entry point TBC Lihat Profil second time at chatroom {string}")
     public void owner_can_see_entry_point_tbc_lihat_profil_second_time_at_chatroom(String buttonTxt) {
         chat.clickButtonOnChatRoomList(buttonTxt);
-        Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(),"entry point not displayed");
+        Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point not displayed");
     }
 
     @Then("tenant can't see entry point TBC Lihat Profil at chatroom {string}")
     public void tenant_cant_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.clickButtonOnChatRoomList(buttonTxt);
-        Assert.assertFalse(tenantBackgroundCheckerPO.isLihatProfilDisplayed(),"entry point displayed");
+        Assert.assertFalse(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point displayed");
     }
 
     @And("owner open TBC Lihat Profil at chatroom {string}")
@@ -99,6 +99,20 @@ public class TenantBackgroundCheckerSteps {
 
     @Then("owner will back to TBC page")
     public void owner_will_back_to_tbc_page() {
-        Assert.assertTrue(tenantBackgroundCheckerPO.isInfoTBCPageDisplayed(),"Information doesn't show");
+        Assert.assertTrue(tenantBackgroundCheckerPO.isInfoTBCPageDisplayed(), "Information doesn't show");
+    }
+
+    @When("owner click on tooltip {string}")
+    public void owner_click_tooltip(String tooltipName) {
+        tenantBackgroundCheckerPO.clickOnTooltip(tooltipName);
+    }
+
+    @Then("owner see explain is {string}")
+    public void owner_see_explain_is(String tooltip) {
+        Assert.assertTrue(tenantBackgroundCheckerPO.isTooltipMessageDisplayed(tooltip), "Information doesn't show");
+    }
+    @Then("owner see popup text {string}")
+    public void owner_see_popup_text(String textPopup) {
+        Assert.assertTrue(tenantBackgroundCheckerPO.isTextPopupDisplayed(textPopup), "Information doesn't show");
     }
 }

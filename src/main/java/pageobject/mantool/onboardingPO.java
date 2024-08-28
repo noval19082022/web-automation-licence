@@ -22,6 +22,9 @@ public class onboardingPO {
     private Locator checkboxChecked;
     private Locator mitraAgenBreadcrumb;
     private Locator mamikosBreadcrumb;
+    private Locator stepHeaderTitle;
+    private Locator profileAvatar;
+    private Locator keluarButton;
 
     public onboardingPO(Page page){
         this.page = page;
@@ -38,6 +41,9 @@ public class onboardingPO {
         checkboxChecked = page.locator(".bg-c-checkbox--checked");
         mitraAgenBreadcrumb = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mitra Agen"));
         mamikosBreadcrumb = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos"));
+        stepHeaderTitle = page.locator(".onboarding-steps__indicator p");
+        profileAvatar = page.getByAltText("Avatar");
+        keluarButton = page.getByText("Keluar");
     }
 
     /**
@@ -162,5 +168,21 @@ public class onboardingPO {
      */
     public void clickBreadcrumbMamikos() {
         playwright.clickOn(mamikosBreadcrumb);
+    }
+
+    /**
+     * Get onboarding header
+     * @return String
+     */
+    public String getStepHeader() {
+        return playwright.getText(stepHeaderTitle);
+    }
+
+    /**
+     * Logout Agen
+     */
+    public void logoutAgen() {
+        playwright.clickOn(profileAvatar);
+        playwright.clickOn(keluarButton);
     }
 }

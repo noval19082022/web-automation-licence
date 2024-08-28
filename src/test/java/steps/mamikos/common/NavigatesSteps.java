@@ -186,7 +186,11 @@ public class NavigatesSteps {
         playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS);
         loading.waitForLoadingIconDisappear();
-        propertySaya.clickClosePopUpBBKIfExist();
+    }
+
+    @When("owner close pop up bbk on property saya page")
+    public void closeBBK() {
+        propertySaya.clickClosePopUpBBKOnPropertySaya();
     }
 
     @When("owner navigates to {string}")
@@ -445,7 +449,7 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + "/admin/gold-plus/package/346/edit", 30000.0, LoadState.LOAD);
     }
 
-    @Given("admin navigate to mantool")
+    @Given("admin/user navigate to mantool")
     public void admin_navigate_to_mantool() {
         playwright.navigateTo(Mamikos.URL+"/agen");
     }

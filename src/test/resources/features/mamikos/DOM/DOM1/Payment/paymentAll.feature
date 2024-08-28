@@ -32,7 +32,6 @@ Feature: Payment All
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 081328787342 | 081328787342 | Perempuan |
-    And owner click nanti saja for recurring GoldPlus
     And owner accept booking and select the room
     And owner logs out
 

@@ -129,27 +129,30 @@ Feature: Billing Reminder
     Then user open " Whatsapp Template" submenu of Billing Reminder Template
 		
 		 # Scenario: user set the initial state to display Whatsapp template Day 3
-    When user set the initial state to display Billing template Day "3" "42"
-		
-		#  Scenario: Delete Template
-    When user delete billing Template with content "recurringbooking_voucher_d_plus_1_update"
-    Then user verify delete billing Template with content "recurringbooking_voucher_d_plus_1_update"
+    When user set the initial state to display Billing template Day "-5" "42"
 		
 		#  Scenario: Add Template With Existing Day Period
     Given user create new WhatsApp template:
       | day | WATemplate |
-      | -1  | 40         |
+      | -5  | 40         |
     Then user verify cannot create billing reminder template
-		
+
+		#  Scenario: Delete Template
+    When user delete billing Template with content "recurringbooking_voucher_d_plus_1_update"
+    Then user verify delete billing Template with content "recurringbooking_voucher_d_plus_1_update"
 		#  Scenario: Add Template
+
     Given user create new WhatsApp template:
       | day | WATemplate |
       | 0   | 42         |
     Then user verify Template subject with "recurringbooking_voucher_d_plus_1_update"
-		
+
 		#  Scenario: Edit Template
     Given user edit WhatsApp template:
       | day | WATemplate |
-      | 0   | 42         |
-    Then user verify Template subject with "recurringbooking_voucher_d_plus_1_update"
-		
+      | 0   | 60         |
+    Then user verify Template subject with "inform_manual_invoice"
+
+		#  Scenario: Delete Template
+    When user delete billing Template with content "inform_manual_invoice"
+    Then user verify delete billing Template with content "inform_manual_invoice"
