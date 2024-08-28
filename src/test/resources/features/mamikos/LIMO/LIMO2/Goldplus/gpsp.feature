@@ -143,8 +143,8 @@ Feature: Owner GPSP
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 2" is displayed
 
-  @TEST_LIMO-1640
-  Scenario: [Improve GPSP][Upgrade GP] Owner GP 1 wants to upgrade GP with new special price
+  @TEST_LIMO-1640 @TEST_LIMO-1639
+  Scenario: [Improve GPSP][Upgrade GP] Owner GP 1 wants to upgrade GP with new/old special price
     #login admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
