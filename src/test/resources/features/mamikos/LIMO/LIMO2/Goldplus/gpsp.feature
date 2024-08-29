@@ -156,7 +156,7 @@ Feature: Owner GPSP
     And admin input owner id with "99454618"
     And admin select feature with "gp_special_pricing_medium_5"
     And admin click submit button
-#    Then admin will see that the text "successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
+    Then admin will see that the text "successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
     And admin try to logout from mamikos
 
     #login owner
@@ -215,7 +215,6 @@ Feature: Owner GPSP
     And admin input owner id with "99454618"
     And admin select feature with "gp_special_pricing_medium_5"
     And admin click submit button
-#    Then admin will see that the text "successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
     And admin try to logout from mamikos
 
     # login owner
@@ -259,3 +258,58 @@ Feature: Owner GPSP
       | day | phone_number |
       | H3  | 0898761239   |
     Then admin will see that the text "The Order cannot be recurred!" is displayed
+
+  @TEST_LIMO-1637
+  Scenario: [Improve GPSP][Recurring GP] When owner already GP with new special price, then get invoice recurring with new special price
+    # login admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin wants to add whitelist feature
+    And admin input owner id with "99454618"
+    And admin select feature with "gp_special_pricing_medium_5"
+    And admin click submit button
+    And admin try to logout from mamikos
+
+    # login owner
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0898761239 | 0          | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And owner select payment using alfamart xendit as payment method from invoice detail
+    Then owner will see that the text "Pembayaran Berhasil" is displayed
+    Then owner see billing details invoice
+      | GP High Segment periode 1 Bulan |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
+    And owner navigates to owner dashboard
+    Then owner will see that the text "GoldPlus 1" is displayed
+    And owner try to logout from mamikos
+
+    #recurring owner
+    And admin mamipay wants to create gold plus recurring for phone number
+      | day | phone_number |
+      | H7  | 0898761239   |
+
+#    When owner already recurring
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0898761239 | 0          | qwerty123 |
+    Then owner will see that the text is displayed
+      | Masa aktif GoldPlus akan habis.                      |
+      | Ayo, segera perpanjang paket GoldPlus Anda sekarang. |
+    And owner wants to paid invoice recurring from recurring pop up
+    Then owner will see that the text is displayed
+      | GP High Segment periode 1 Bulan |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
+    And owner select payment using alfamart xendit as payment method from invoice detail
+    And owner navigates to owner dashboard
+    Then owner will see that the text "GoldPlus 1" is displayed

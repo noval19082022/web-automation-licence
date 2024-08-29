@@ -401,5 +401,10 @@ public class OwnerDashboardSteps {
     public void user_click_on_mamiprime_widget_at_owner_dashboard() {
         ownerDashboardPO.clickMamiprimeWidget();
     }
+
+    @And("owner wants to paid invoice recurring from recurring pop up")
+    public void ownerWantsToPaidInvoiceRecurringFromRecurringPopUp() {
+        ownerDashboardPO.clickOnPerpanjangGoldPlusPopUp();
+    }
 }
 
