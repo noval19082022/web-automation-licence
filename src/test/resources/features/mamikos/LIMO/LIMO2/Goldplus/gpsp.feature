@@ -34,8 +34,8 @@ Feature: Owner GPSP
     And tenant make bill payments using "ovo"
     Then owner see billing details invoice
       | GoldPlus 1 (reg#1m) periode 1 Bulan |
-      | Rp79.000                  |
-      | Total Pembayaran Rp82.500 |
+      | Rp79.000                            |
+      | Total Pembayaran Rp82.500           |
     And owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
     And owner try to logout from mamikos
@@ -65,6 +65,7 @@ Feature: Owner GPSP
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice more than 1
     When user click Lihat Tagihan on riwayat
+#    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
       | GoldPlus 2 |
       | GP2        |
@@ -201,3 +202,60 @@ Feature: Owner GPSP
     And admin search whitelist owner by user_id "99454618"
     Then admin click on delete btn on whitelist menu for order "1"
     Then admin will see that the text "feature `gp_special_pricing_medium_5` has been deleted" is displayed
+
+  @TEST_LIMO-1638
+  Scenario: [Improve GPSP][Recurring GP] When owner already GP with new special price, before recurring admin deleted assigment
+    # login admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin wants to add whitelist feature
+    And admin input owner id with "99454618"
+    And admin select feature with "gp_special_pricing_medium_5"
+    And admin click submit button
+#    Then admin will see that the text "successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
+    And admin try to logout from mamikos
+
+    # login owner
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0898761239 | 0          | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And owner select payment using alfamart xendit as payment method from invoice detail
+    Then owner will see that the text "Pembayaran Berhasil" is displayed
+    Then owner see billing details invoice
+      | GP High Segment periode 1 Bulan |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
+    And owner navigates to owner dashboard
+    Then owner will see that the text "GoldPlus 1" is displayed
+    And owner try to logout from mamikos
+
+    # deleted assignment from admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin search whitelist owner by user_id "99454618"
+    Then admin click on delete btn on whitelist menu for order "1"
+    Then admin will see that the text "feature `gp_special_pricing_medium_5` has been deleted" is displayed
+
+    # admin send recurring after delete gp premium
+    ##recurring GP H-7
+    And admin mamipay wants to create gold plus recurring for phone number
+      | day | phone_number |
+      | H7  | 0898761239   |
+    Then admin will see that the text "The Order cannot be recurred!" is displayed
+
+    ##recurring GP H-3 (cause H-3 ,scheduler running for recurring weekly)
+    And admin mamipay wants to create gold plus recurring for phone number
+      | day | phone_number |
+      | H3  | 0898761239   |
+    Then admin will see that the text "The Order cannot be recurred!" is displayed
