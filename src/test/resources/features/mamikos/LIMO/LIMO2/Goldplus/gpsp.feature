@@ -313,3 +313,63 @@ Feature: Owner GPSP
     And owner select payment using alfamart xendit as payment method from invoice detail
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
+
+  @TEST_LIMO-1636
+  Scenario: [Improve GPSP][Activation GP] When owner already have unpaid invoice GP with new special price, then deleted from assign new special price
+    # login admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin wants to add whitelist feature
+    And admin input owner id with "99454618"
+    And admin select feature with "gp_special_pricing_medium_5"
+    And admin click submit button
+    And admin try to logout from mamikos
+
+   #login owner
+   #Buy Goldplus
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0898761239 | 0          | qwerty123 |
+    And owner navigates to owner dashboard
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And tenant make bill payments using "ovo"
+    Then owner see billing details invoice
+      | Rincian Pembayaran GP High Segment periode 1 Bulan |
+      | Rp130.000                                          |
+      | Total Pembayaran Rp133.500                         |
+    And owner navigates to owner dashboard
+    Then owner will see that the text "Menunggu Pembayaran" is displayed
+    And owner try to logout from mamikos
+
+    #deleted assign from admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin search whitelist owner by user_id "99454618"
+    Then admin click on delete btn on whitelist menu for order "1"
+    Then admin will see that the text "feature `gp_special_pricing_medium_5` has been deleted" is displayed
+    And owner try to logout from mamikos
+
+    #cek invoice
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0898761239 | 0          | qwerty123 |
+    And owner navigates to owner dashboard
+    And user click widget GP "Menunggu Pembayaran"
+    And user click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
+    And owner select payment using alfamart xendit as payment method from invoice detail
+    Then owner see billing details invoice
+      | Rincian Pembayaran GP High Segment periode 1 Bulan |
+      | Rp130.000                                          |
+      | Total Pembayaran Rp133.500                         |
+    And owner navigates to owner dashboard
+    Then owner will see that the text "GoldPlus 1" is displayed
