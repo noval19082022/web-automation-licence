@@ -23,6 +23,7 @@ public class KostOwnerPO {
     Locator reasonRejectonCheckbox;
     Locator phoneOwnerSearch;
     Locator rejectBbkButton;
+    Locator firstApproveButton;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -35,6 +36,7 @@ public class KostOwnerPO {
         firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
         firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
         phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
+        firstApproveButton = page.locator("(//a[@title='Verify'])[1]");
     }
 
     /**
@@ -139,12 +141,29 @@ public class KostOwnerPO {
     }
 
     /**
+     * Navigate to url approve kos on admin
+     *
+     */
+    public void navigateToApproveUrl() {
+        playwright.navigateTo(this.getKosListApproveUrl());
+    }
+
+    /**
      * Get url list kos delete
      *
      * @return attribute href from firstDeleteButton
      */
     public String getKosListDeleteUrl() {
         return playwright.getAttributeValue(firstDeleteButton, "href");
+    }
+
+    /**
+     * Get url list kos active
+     *
+     * @return attribute href from firstDeleteButton
+     */
+    public String getKosListApproveUrl() {
+        return playwright.getAttributeValue(firstApproveButton, "href");
     }
 
     /**

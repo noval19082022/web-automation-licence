@@ -8,11 +8,21 @@ Feature: Owner GPSP
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number
       | 0898761238 |
-      | 0898761237 |
+      | 0898761239 |
 
   @TEST_LIMO-1654
   Scenario: [Improve GPSP][Multiple Invoice] Owner Non GP already have invoice unpaid, different day already assign new segment, then owner select package GP
-    # login owner 0898761238 (99454617)
+  #check if the whitelist has not detele
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin search whitelist owner by user_id "99454617"
+    Then admin click on delete btn on whitelist menu for order "1"
+    And admin try to logout from mamikos
+
+   #Buy Goldplus
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod | password  |
@@ -21,9 +31,9 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And  tenant make bill payments using "ovo"
+    And tenant make bill payments using "ovo"
     Then owner see billing details invoice
-      | GoldPlus 1                |
+      | GoldPlus 1 (reg#1m) periode 1 Bulan |
       | Rp79.000                  |
       | Total Pembayaran Rp82.500 |
     And owner navigates to owner dashboard
@@ -40,7 +50,7 @@ Feature: Owner GPSP
     And admin input owner id with "99454617"
     And admin select feature with "gp_special_pricing_medium_5"
     And admin click submit button
-    Then admin will see that the text "Success! User `99454617` successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
+    Then admin will see that the text "Success! User `99454617` successfully whitelisted for feature `gp_special_pricing_medium_5`" is displayed
     And admin try to logout from mamikos
 
     #login owner
@@ -55,7 +65,6 @@ Feature: Owner GPSP
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice more than 1
     When user click Lihat Tagihan on riwayat
-#    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
       | GoldPlus 2 |
       | GP2        |
@@ -83,7 +92,6 @@ Feature: Owner GPSP
     And admin input owner id with "99454618"
     And admin select feature with "gp_special_pricing_medium_5"
     And admin click submit button
-    Then admin will see that the text "Success! User `99454618` successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
     And admin try to logout from mamikos
 
     # login owner 0898761239 (99454618)

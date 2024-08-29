@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO1 @mamipoinOwnerEntryPoint @mamipoinOwner @mamiPointBlacklistWhitelist @DONEMIGRATINGTONEWBOARD
+@listing-monetization @regression @LIMO1
 Feature: Mamipoint Blacklist and Whitelist Admin (Already migrate
 
   @TEST_LIMO-3298 @Automated @Web @listing-monetization @mamipoin-owner @continue
@@ -12,8 +12,8 @@ Feature: Mamipoint Blacklist and Whitelist Admin (Already migrate
   @TEST_LIMO-3299 @Automated @Web @listing-monetization @mamipoin-owner @continue
   Scenario: [Admin] Change Blacklist to Whitelist
     Then admin successfully "whitelisted" user named "Ramos Pembina Komsel1" with status "Blacklist"
-    Then admin successfully "blacklisted" user named "Rega Dian Watts" with status "Whitelist"
+    Then admin successfully "blacklisted" user named "Rega Dian update" with status "Whitelist"
 
   @TEST_LIMO-3300 @Automated @Web @listing-monetization @mamipoin-owner
   Scenario: [Admin] Change Blacklist to Whitelist
-    Then admin successfully "whitelisted" user named "Rega Dian Watts" with status "Blacklist"
+    Then admin successfully "whitelisted" user named "Rega Dian update" with status "Blacklist"
