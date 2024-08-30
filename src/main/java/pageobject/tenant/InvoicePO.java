@@ -157,7 +157,7 @@ public class InvoicePO {
         sayaSudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
-        ubahLink = page.getByText("Ubah");
+        ubahLink = page.locator("//div[@class='invoice-select-method']//a[text()='Ubah']");
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
         IndomaretLabel = page.locator("#invoicePayment").getByText("Indomaret");
