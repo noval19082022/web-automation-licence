@@ -93,6 +93,8 @@ public class OwnerDashboardPO {
     private Locator mamiprimeBannerPopUp;
     private Locator mamiprimeBannerCloseButton;
 
+    private Locator perpanjangBtnReccuringGpPopUp;
+
     public OwnerDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -169,6 +171,8 @@ public class OwnerDashboardPO {
         mamiprimeWidget = page.getByTestId("membership-prime-card");
         mamiprimeBannerPopUp = page.frameLocator("iframe >> nth=0").getByRole(AriaRole.LINK);
         mamiprimeBannerCloseButton = page.frameLocator("iframe >> nth=0").getByLabel("Close");
+
+        perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
     }
 
     /**
@@ -873,5 +877,12 @@ public class OwnerDashboardPO {
      */
     public void closeMamiprimeBanner() {
         playwright.clickOn(mamiprimeBannerCloseButton);
+    }
+
+    /**
+     * click on perpanjang btn on gold plus pop up recurring
+     */
+    public void clickOnPerpanjangGoldPlusPopUp() {
+        playwright.clickOn(perpanjangBtnReccuringGpPopUp);
     }
 }

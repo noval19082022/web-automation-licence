@@ -27,6 +27,10 @@ public class AdminMamipayDashboardPO {
     Locator phoneOwnerTextbox;
     Locator deleteMamipayButton;
 
+    Locator inputPhoneNumberRecurring;
+    Locator optionGpRecurring;
+    Locator createRecurringBtn;
+
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -43,6 +47,10 @@ public class AdminMamipayDashboardPO {
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         phoneOwnerTextbox = page.locator("//input[@name='search_value']");
         deleteMamipayButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(""));
+
+        inputPhoneNumberRecurring = page.locator("form").filter(new Locator.FilterOptions().setHasText("Create Recurring")).getByPlaceholder("Phone Number");
+        optionGpRecurring = page.getByRole(AriaRole.COMBOBOX);
+        createRecurringBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Recurring"));
     }
 
     /**
@@ -126,7 +134,6 @@ public class AdminMamipayDashboardPO {
 
     /**
      * admin click on filter status
-     *
      */
     public void clickOnFilterStatusDropdown() {
         filterStatusDropdown.click();
@@ -134,7 +141,6 @@ public class AdminMamipayDashboardPO {
 
     /**
      * admin click on filter rules
-     *
      */
     public void clickOnFilterRulesDropdown() {
         filterRuleDropdown.click();
@@ -142,7 +148,6 @@ public class AdminMamipayDashboardPO {
 
     /**
      * admin click on filter team
-     *
      */
     public void clickOnFilterTeamDropdown() {
         playwright.waitFor(filterTeamDropdown);
@@ -151,42 +156,38 @@ public class AdminMamipayDashboardPO {
 
     /**
      * admin click on dropdown filter status
-     *
      */
     public String getAllFilterOptions(String filter) {
-        Locator text = page.locator("//li[normalize-space()='"+filter+"']");
+        Locator text = page.locator("//li[normalize-space()='" + filter + "']");
         return playwright.getText(text);
     }
+
     /**
      * admin click on filter
-     *
      */
     public void clickOnFilter(String filter) {
-        String text = "//li[normalize-space()='"+filter+"']";
+        String text = "//li[normalize-space()='" + filter + "']";
         ElementHandle element = page.querySelector(text);
         element.click();
     }
 
     /**
      * admin click on search button
-     *
      */
     public void clickOnSearchButton() {
-       playwright.clickOn(searchButton);
+        playwright.clickOn(searchButton);
     }
 
     /**
      * admin see result select filter
-     *
      */
     public String getResultSelectFilter(String filter) {
-        Locator text = page.locator("(//*[.='"+filter+"'])[1]");
+        Locator text = page.locator("(//*[.='" + filter + "'])[1]");
         return playwright.getText(text);
     }
 
     /**
      * admin input voucher
-     *
      */
     public void clickOnInputVoucher(String id) {
         String inputTextbox = "//*[@name='campaign_voucher']";
@@ -208,8 +209,8 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Search phone owner and press Enter
-     * @param phoneOwner
      *
+     * @param phoneOwner
      */
     public void searchPhoneOwner(String phoneOwner) {
         playwright.forceFill(phoneOwnerTextbox, phoneOwner);
@@ -218,8 +219,8 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Verify the first delete mamipay button is displayed
-     * @return boolean (true, false)
      *
+     * @return boolean (true, false)
      */
     public boolean isFirstDeleteMamipayDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(deleteMamipayButton, 3000.0);
@@ -227,8 +228,6 @@ public class AdminMamipayDashboardPO {
 
     /**
      * Click first delete mamipay button
-     *
-     *
      */
     public void clickOnFirstDeleteMamipay() {
         playwright.clickOn(deleteMamipayButton);
@@ -236,21 +235,36 @@ public class AdminMamipayDashboardPO {
     }
 
     //-------------addFee MVP-------------//
+
     /**
      * click on Add fee button on detail fee page
      */
-    public void clickOnAddFee(){
+    public void clickOnAddFee() {
         Locator addFeeButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Fee"));
         playwright.clickOn(addFeeButton);
     }
 
     /**
      * validate Biaya Tambahan Opsional di Kos
+     *
      * @param text
      * @return text
      */
-    public Boolean isOptionalAddFeeVisible(String text){
-        Locator optionalAddFee = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(""+text+""));
+    public Boolean isOptionalAddFeeVisible(String text) {
+        Locator optionalAddFee = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("" + text + ""));
         return playwright.waitTillLocatorIsVisible(optionalAddFee, 2000.0);
+    }
+
+    /**
+     * input owner phone number for recurring gold plus
+     *
+     * @param day
+     * @param phoneNumber
+     */
+    public void inputRecurringGoldplusPhoneNumber(String day, String phoneNumber) {
+        day = day.replaceAll("-", "").replaceAll(" ", "").toLowerCase();
+        playwright.clickLocatorAndTypeKeyboard(inputPhoneNumberRecurring, phoneNumber);
+        playwright.selectDropdownByValue(optionGpRecurring, day);
+        playwright.clickOn(createRecurringBtn);
     }
 }

@@ -37,6 +37,13 @@ public class CommonSteps {
         Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
     }
 
+    @Then("user/owner/tenant/admin will see that the text is displayed")
+    public void user_will_see_that_the_text_(List<String> sentences) {
+        for (var sentence : sentences) {
+            Assert.assertTrue(playwright.isTextDisplayed(sentence, 5000));
+        }
+    }
+
     @Then("user/owner/tenant should not be able to see the text {string}")
     public void owner_should_not_be_able_to_see_the_text(String text) {
         Assert.assertFalse(playwright.isTextDisplayed(text));
