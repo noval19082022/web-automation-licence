@@ -360,7 +360,7 @@ public class PlaywrightHelpers {
      * @return String
      */
     public String getNormalizeText(Locator locator){
-        return locator.textContent().trim().replaceAll("[\\t\\n\\r]+"," ");
+        return locator.textContent().trim().replaceAll("[\\t\\n\\r\\s]+"," ");
     }
 
     /**
