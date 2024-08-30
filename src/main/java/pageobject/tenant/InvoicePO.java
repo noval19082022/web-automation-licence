@@ -761,11 +761,10 @@ public class InvoicePO {
      * Click MamiPoin Toggle Button to On/Off
      */
     public void clickMamipoinToggleButtonToOnOff() {
-        if (mamipoinToggleButton.isChecked()) {
-            mamipoinToggleButton.uncheck();
-        } else {
-            mamipoinToggleButton.check();
+        if (playwright.isRadioButtonChecked(mamipoinToggleButton)) {
+            playwright.uncheckBox(mamipoinToggleButton);
         }
+        playwright.checkBox(mamipoinToggleButton);
     }
 
     /**
