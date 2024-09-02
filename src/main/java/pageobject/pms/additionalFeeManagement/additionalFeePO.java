@@ -114,6 +114,9 @@ public class additionalFeePO {
         int page = 1;
         int lastPage = Integer.parseInt(playwright.getText(lastPageButton));
 
+        playwright.reloadPage();
+        playwright.waitTillPageLoaded();
+
         do{
             //check in page n, if there is biaya tambahan {name}
             for (int i = 0; i < namaBiaya.count(); i++) {
