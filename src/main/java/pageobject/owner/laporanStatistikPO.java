@@ -15,6 +15,7 @@ public class laporanStatistikPO {
     private Locator elementPeriode;
     private Locator greenGraphic;
     private Locator redGraphic;
+    private Locator grayGraphic;
 
     public laporanStatistikPO(Page page) {
         this.page = page;
@@ -26,8 +27,8 @@ public class laporanStatistikPO {
         this.totalClickElement = page.locator(".statistic-kos-data > div:nth-of-type(3) > .statistic-kos-data__value");
         this.elementPeriode = page.locator(".bg-u-mr-xxs");
         this.greenGraphic = page.locator(".bg-u-text-green-500 > .bg-c-icon");
-        this.greenGraphic = page.locator(".bg-u-text-red-500 > .bg-c-icon");
-
+        this.redGraphic = page.locator(".bg-u-text-red-500 > .bg-c-icon");
+        this.grayGraphic = page.locator(".statistic-kos-data > div:nth-of-type(3) .bg-c-icon");
     }
 
     /**
@@ -136,8 +137,10 @@ public class laporanStatistikPO {
     public boolean ownerSeeGraphic() {
         if (playwright.waitTillLocatorIsVisible(greenGraphic)) {
             return playwright.waitTillLocatorIsVisible(greenGraphic);
-        } else {
+        } else if (playwright.waitTillLocatorIsVisible(redGraphic)) {
             return playwright.waitTillLocatorIsVisible(redGraphic);
+        } else {
+            return playwright.waitTillLocatorIsVisible(grayGraphic);
         }
     }
 }
