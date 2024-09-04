@@ -443,8 +443,6 @@ public class KostLandingAreaPO {
 
     public void clickLoadMore(){
         playwright.pageScrollInView(loadMoreText);
-//        if(playwright.waitTillLocatorIsVisible(loadMoreText, 5000.0)) {
             playwright.clickOn(loadMoreText);
-//        }
     }
 }

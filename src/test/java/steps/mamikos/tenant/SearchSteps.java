@@ -561,7 +561,6 @@ public class SearchSteps {
 
     @Then("user can see total kost in area with {string}")
     public void user_can_see_total_kost_in_area_with(String text){
-//        Assert.assertTrue(kostLanding.getTotalSearchAreatext(text), "doest not match total kost in this area");
         kostLanding.getTotalSearchAreatext(text);
     }
 
