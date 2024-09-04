@@ -82,6 +82,11 @@ public class HomepageSteps {
         homepage.clickOnTypeRoom();
     }
 
+    @And("admin choose dbet category with {string}")
+    public void admin_choose_dbet_category_with(String text){
+        homepage.selectDbetCategory(text);
+    }
+
     @And("admin fill phone number tenant {string}")
     public void admin_fill_number_handphone_tenant(String number) {
         homepage.fillNumberHandphoneTenant(number);
@@ -441,6 +446,14 @@ public class HomepageSteps {
         for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
             String addfeetext = row.get("addfee name");
             Assert.assertTrue(homepage.getAddFeeKK(addfeetext), "elemet not appears");
+        }
+    }
+
+    @Then("admin can see add fee from pms with:")
+    public void admin_can_see_add_fee_from_pms_with(DataTable tables){
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String addfeename = row.get("name");
+            Assert.assertTrue(homepage.getAddFeeSelected(addfeename), "elemet not appears");
         }
     }
 

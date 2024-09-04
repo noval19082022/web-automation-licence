@@ -558,4 +558,15 @@ public class SearchSteps {
         searchPO = homePO.clickOnSearchButton();
         searchPO.clickPopularArea(place, popPlace);
     }
+
+    @Then("user can see total kost in area with {string}")
+    public void user_can_see_total_kost_in_area_with(String text){
+//        Assert.assertTrue(kostLanding.getTotalSearchAreatext(text), "doest not match total kost in this area");
+        kostLanding.getTotalSearchAreatext(text);
+    }
+
+    @And("tenant can click on load more button")
+    public void tenant_can_click_on_load_more_button(){
+        kostLanding.clickLoadMore();
+    }
 }

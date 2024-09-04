@@ -68,7 +68,6 @@ Feature: PMS - Add fee MVP
     And admin click on add fee button
     Then admin cant see "Biaya Tambahan Opsional di Kos"
 
-
   @SS-5074
   Scenario: [AddFee][PMS] Check Biaya tambahan on New booking when setting KK with tipe pembayaran satu kali
  # Scenario: Terminated contract
@@ -178,7 +177,7 @@ Feature: PMS - Add fee MVP
       | Alat Elektronik    | 50000  |
     And admin click on save button
 
-    @SS-4332
+    @SS-4332 @a
     Scenario:[PMS][New Booking/DBET] Admin create more than one biaya tambahan
       Given user go to mamikos homepage
       When user login as tenant via phone number:
@@ -206,6 +205,26 @@ Feature: PMS - Add fee MVP
         | Bawa Kulkas        | 50000  |
         | Laundry            | 5000   |
       And admin click on save button
+      Then admin click on ya simpan button
+
+   @SS-4333
+   Scenario: [Bangkerupux][Data booking] Admin check data biaya tambahan create from PMS
+     Given admin go to mamikos bangkrupux admin
+     When admin login to bangkrupux:
+       | email stag                   | email prod                   | password  |
+       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+     And admin bangkrupux navigate to data booking menu
+     And admin show filter data booking
+     And admin filter data booking by tenant phone number:
+       | Tenant Phone | Kos Type |
+       | 0812000008   | All      |
+     And admin click actions button on booking list
+     And admin accept booking for kost add fee
+     Then admin can see add fee from pms with:
+     | Name |
+     | Parkir Mobil |
+     | Bawa Blender |
+
 
     @SS-4331
     Scenario: [PMS][New booking/DBET] Admin check list addfee must same with PMS-kk in dropdown
