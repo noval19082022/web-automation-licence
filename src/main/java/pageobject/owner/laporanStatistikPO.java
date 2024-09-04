@@ -135,12 +135,8 @@ public class laporanStatistikPO {
      * @return
      */
     public boolean ownerSeeGraphic() {
-        if (playwright.waitTillLocatorIsVisible(greenGraphic)) {
-            return playwright.waitTillLocatorIsVisible(greenGraphic);
-        } else if (playwright.waitTillLocatorIsVisible(redGraphic)) {
-            return playwright.waitTillLocatorIsVisible(redGraphic);
-        } else {
-            return playwright.waitTillLocatorIsVisible(grayGraphic);
-        }
+        return playwright.waitTillLocatorIsVisible(greenGraphic) ||
+                playwright.waitTillLocatorIsVisible(redGraphic) ||
+                playwright.waitTillLocatorIsVisible(grayGraphic);
     }
 }
