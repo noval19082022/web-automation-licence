@@ -22,6 +22,7 @@ Feature: PMS New DBET
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
+    And admin choose dbet category with "BSE - BSE Workaround"
     And admin fill phone number tenant "011"
     Then admin can see "Nomor handphone harus diawali dengan 08" on phone number
     When admin fill phone number tenant "081"
@@ -38,6 +39,7 @@ Feature: PMS New DBET
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
+    And admin choose dbet category with "BSE - BSE Workaround"
     And admin click on save button
     Then admin can see "Data wajib diisi" on tenant name
     And admin fill nama tenant "Maya 12"
@@ -52,6 +54,7 @@ Feature: PMS New DBET
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
+    And admin choose dbet category with "BSE - BSE Workaround"
     And admin fill email tenant "tenanttujuh"
     And admin click on save button
     Then admin can see "Penulisan alamat email salah" on email

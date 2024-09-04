@@ -171,6 +171,13 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Ajukan Check-out"
     Then admin can see contract status with "Ajukan Check-out"
 
+  @SS-4361 @continue
+  Scenario: [Billing Tracker][Productivity] Check contract when tenant request terminated contract
+    When admin click on reset button
+    And admin clicks on next month in calendar
+    And admin filter contract status with "Ajukan Check-out"
+    Then admin can see contract status with "Ajukan Check-out"
+
   @SS-4372 @continue
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Check-out + Sudah Check-out
     When admin can see contract status with "Ajukan Check-out"

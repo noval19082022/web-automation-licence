@@ -110,20 +110,14 @@ public class HomepagePO {
 
     //-----------create dbet--------//
     Locator dbetButton;
-
     Locator phoneNumberErrorMessage;
-
     Locator tenantNameErrorMessage;
-
     Locator emailTenant;
-
     Locator emailErrorMessage;
-
     Locator tenantGender;
-
     Locator tenantJobs;
-
     Locator yaSimpanButton;
+    Locator dbetCategoryButton;
 
     //---Kontrak Kerja Sama Tab---//
     Locator kontrakKerjaSamaTab;
@@ -203,6 +197,7 @@ public class HomepagePO {
         RoomNotAvailable = page.locator("//div[contains(text(),'Kamar tidak tersedia')]");
         selectMethodPayment = page.locator("//span[normalize-space()='Pilih metode pembayaran']");
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
+        dbetCategoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kategori kontrak DBET dropdown-down"));
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -345,6 +340,16 @@ public class HomepagePO {
         playwright.waitFor(dropdownTypeRoom);
         playwright.clickOn(dropdownTypeRoom);
         playwright.clickOn(selectedTypeRoom);
+    }
+
+    /**
+     * Select dbet category
+     * @param text
+     */
+    public void selectDbetCategory(String text){
+        playwright.clickOn(dbetCategoryButton);
+        Locator categoryNametext = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+text+""));
+        playwright.clickOn(categoryNametext);
     }
 
     /**
@@ -1111,6 +1116,11 @@ public class HomepagePO {
     public boolean getAddFeeKK(String addfeetext){
         Locator addFeeKKtext = page.locator("//p[contains(.,'"+addfeetext+"')]");
         return playwright.waitTillLocatorIsVisible(addFeeKKtext);
+    }
+
+    public boolean getAddFeeSelected(String addfeename){
+        Locator addFeeSelectedText = page.locator("//input[@name =\"costs[fixed][0][name]\"]");
+        return playwright.waitTillLocatorIsVisible(addFeeSelectedText);
     }
 
 
