@@ -177,7 +177,7 @@ Feature: PMS - Add fee MVP
       | Alat Elektronik    | 50000  |
     And admin click on save button
 
-    @SS-4332 @a
+    @SS-4332
     Scenario:[PMS][New Booking/DBET] Admin create more than one biaya tambahan
       Given user go to mamikos homepage
       When user login as tenant via phone number:

@@ -356,7 +356,7 @@ public class BillingTrackePO {
      * click next on pagination
      */
     public void clickOnPagination(){
-        playwright.clickOn(nextPaginationButton);
+            playwright.clickOn(nextPaginationButton);
     }
 
     /**
