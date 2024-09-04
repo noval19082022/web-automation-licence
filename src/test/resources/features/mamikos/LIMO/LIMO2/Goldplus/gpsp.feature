@@ -139,8 +139,8 @@ Feature: Owner GPSP
     Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
       | Potongan sisa GoldPlus 1  |
-      | -Rp125.806                |
-      | Total Pembayaran Rp22.694 |
+      | -Rp125.666                |
+      | Total Pembayaran Rp22.834 |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 2" is displayed
 

@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
+import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import pageobject.tenant.payment.PaymentPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -60,7 +62,6 @@ public class InvoicePO {
     Locator kelolaTagihanButton;
     Locator selectKostName;
     Locator nextButton;
-    Locator inputMonthFilter;
     Locator checkMonth;
     Locator txtRentPerPeriodInvoiceDetail;
     Locator txtTotalCostInvoiceDetail;
@@ -135,7 +136,6 @@ public class InvoicePO {
         openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
-        inputMonthFilter = page.locator("//*[@class='billing-management-input-trigger bg-c-dropdown'][1]");
         txtRentPerPeriodInvoiceDetail = page.locator("div:nth-child(10) > div:nth-child(2)");
         txtTotalCostInvoiceDetail = page.locator("div:nth-child(14) > div:nth-child(2)");
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
@@ -534,7 +534,8 @@ public class InvoicePO {
      * @throws InterruptedException
      */
     public void selectManageNextBillsMonthFilter(String monthNumber) throws InterruptedException {
-        playwright.clickOn(inputMonthFilter);
+        TenantBillManagementPO TenantBillManagement = new TenantBillManagementPO(page);
+        TenantBillManagement.clickOnFilterMonth();
         if (monthNumber.equals("12")) {
             playwright.clickOn(nextButton);
             playwright.clickOn(page.getByText("Januari"));
@@ -550,7 +551,8 @@ public class InvoicePO {
      * Select month filter by month october
      */
     public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
-        playwright.clickOn(inputMonthFilter);
+        TenantBillManagementPO TenantBillManagement = new TenantBillManagementPO(page);
+        TenantBillManagement.clickOnFilterMonth();
         playwright.clickOn(page.getByText("Januari"));
     }
 

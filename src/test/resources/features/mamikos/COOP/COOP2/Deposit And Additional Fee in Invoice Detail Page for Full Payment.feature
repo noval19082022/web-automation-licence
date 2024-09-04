@@ -59,6 +59,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | search by      | renter_phone_number |
       | search value   | 0890867321212       |
       | invoice number | default             |
+    When admin deletes additional other price with name below :
+      | Biaya Layanan |
     Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
     When admin deletes additional other price with name below :
       | Listrik |

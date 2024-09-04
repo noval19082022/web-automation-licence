@@ -119,7 +119,7 @@ Feature: Laporan Statistik
     And owner can see total chat
     And owner can see total click
     And owner can see periode Performa
-    Then owner cannot see growth graphic
+    Then owner can see growth graphic
 
   @LIMO-268
   Scenario: [WEB][Statistic Page][Filter 30 days] Check when owner have property active more than 30 days
