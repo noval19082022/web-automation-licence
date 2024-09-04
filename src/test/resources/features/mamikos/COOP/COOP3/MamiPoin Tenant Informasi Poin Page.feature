@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3 @ss
+@COOP-5027 @COOP3
 Feature: MamiPoin Tenant Informasi Poin Page
 
 

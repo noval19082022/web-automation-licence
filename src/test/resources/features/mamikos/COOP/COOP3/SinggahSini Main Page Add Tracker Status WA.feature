@@ -30,5 +30,5 @@ Feature: SinggahSini Main Page Add Tracker Status WA
   Scenario: Tanya Alamat via map is tracked on BSE Tenant Tracker
     When user choose "Nama Penyewa" and input "Noval" in the search field on main page
     And user click search button on main page filter
-    Then user verify search result on main page bse contains "Terbayar Lunas"
+    Then user verify search result on main page bse contains "Sudah Check-out"
 		

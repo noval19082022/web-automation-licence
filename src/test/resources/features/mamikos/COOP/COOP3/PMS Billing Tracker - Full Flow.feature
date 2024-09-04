@@ -19,7 +19,7 @@ Feature: Update Billing tracker flow
     And user go to mamikos homepage
     When tenant search kost then go to kost details:
       | kost name stag                                                   | kost name prod                                           |
-      | Kost Singgahsini Bundaran Aloha Deluxe Sidoarjo  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+      | Kost Singgahsini Bundaran Aloha Superior Sidoarjo  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
     And user dismiss FTUE booking benefit
     And tenant booking kost for "today"
     And user go to mamikos homepage
@@ -194,7 +194,6 @@ Feature: Update Billing tracker flow
     And admin click on pagination
     Then admin can see contract status with "Sudah Check-out"
     And admin filter contract status with "Aktif"
-    And admin click on pagination
     Then admin can see contract status with "Aktif"
 
   @SS-4378 @continue
