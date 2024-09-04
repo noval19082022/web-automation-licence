@@ -233,7 +233,7 @@ Feature: Ubah Anggaran
       | text status   | Tidak Naik                                                       |
       | toggle status | off                                                              |
       | status desc   | Klik tombol untuk naikkan iklan                                  |
-      | text anggaran | Hari ini Rp500 sudah dipakai dari batas pemakaian saldo Rp10.000 |
+      | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000   |
 
   @LIMO-3796
   Scenario: Naikan iklan - To make sure wording while iklan Off by owner when set daily budget and saldo burn > 0

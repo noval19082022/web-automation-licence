@@ -303,7 +303,7 @@ public class PaymentSteps {
 
     @When("payment owner/tenant/user success using ovo as payment method")
     public void payment_owner_success_using_ovo_as_payment_method() {
-        invoice.paymentOVO("081280003230");
+        invoice.paymentOVO("0812999000");
     }
 
     @When("tenant make bill payments using {string}")

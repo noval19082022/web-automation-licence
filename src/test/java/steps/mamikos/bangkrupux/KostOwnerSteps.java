@@ -68,6 +68,12 @@ public class KostOwnerSteps {
         kostOwner.navigateToDeleteUrl();
     }
 
+    @And("admin accept kos")
+    public void adminApproveKos() {
+        BangKrupuxTestData.hrefApproveKosUrl(kostOwner.getKosListApproveUrl());
+        kostOwner.navigateToApproveUrl();
+    }
+
     @And("admin reject kos")
     public void adminRejectKos() {
         BangKrupuxTestData.hrefRejectKostUrl(kostOwner.getKosListRejectUrl());

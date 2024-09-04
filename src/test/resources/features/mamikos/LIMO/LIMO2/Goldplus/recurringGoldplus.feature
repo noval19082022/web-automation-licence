@@ -75,7 +75,7 @@ Feature: Goldplus Recurring
     And owner navigates to owner dashboard
     And owner should not be able to see the text "Perpanjang paket Goldplus yuk!"
 
-  @TEST_LIMO-3533 @GPNoval1
+  @TEST_LIMO-3533
   Scenario: Owner doesn't get recurring reminder pop up
     When user sets recurring "H2" for number "082233545514"
     And owner navigates to owner dashboard

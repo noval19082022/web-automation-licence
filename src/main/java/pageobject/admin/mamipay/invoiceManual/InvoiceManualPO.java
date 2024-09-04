@@ -76,6 +76,7 @@ public class InvoiceManualPO {
     private Locator listingName;
     private Locator jnsBiayaOnRincianPmbayaran;
     private Locator namaBiayaOnRincianPmbayaran;
+    private Locator durasiBiayaOnRincianPmbayaran;
     private Locator totalPembayaranOnRightSide;
     // Invoice Detail Page
 
@@ -122,7 +123,10 @@ public class InvoiceManualPO {
     private Locator startDate;
     private Locator endDateCalendar;
     private Locator endDate;
-    private Locator durasiBiayaText;
+    private Locator tambahDurasiButton;
+    private Locator kurangiDurasiButton;
+    private Locator satuanDurasiDropdown;
+    private Locator satuanDurasiValue;
     private Locator jumlahBiayaText;
     private Locator submitBiayaButton;
     private Locator namaBiayaErrMsg;
@@ -175,7 +179,7 @@ public class InvoiceManualPO {
         invoiceNumberLast = page.locator("td > .bg-c-link ").last();
         searchBar = page.getByTestId("invoice-manual-filter-searchbar");
         searchBtn = page.getByTestId("invoice-manual-filter-button-apply");
-        noInvoiceCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(0);
+        noInvoiceCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td/a").nth(0);
         detailPenyewaCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(1);
         namaListingCol = page.locator("//tr[@data-testid='invoice-manual-item-0']/td").nth(2);
         searchDropDown = page.locator("//span[@class='bg-c-select__trigger-text']");
@@ -201,9 +205,13 @@ public class InvoiceManualPO {
         jenisBiayaDropdown = page.getByTestId("invoice-manual-filter-type").getByTestId("select-checkbox");
 
         //---Invoice Detail Page---//
-        listingName = page.getByText("Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara");
-        namaBiayaOnRincianPmbayaran = page.getByText("Parkir Mobil (3 hari)");
-        totalPembayaranOnRightSide = page.locator("//div[@class='invoice-detail-row-section']//p)[4]");
+        jenisPembayaran = page.locator("#invoiceContent div p").nth(3);
+        totalPembayaranOnLeftSide = page.locator("p.invoice-total-amount");
+        listingName = page.locator("p.property-name");
+        jnsBiayaOnRincianPmbayaran = page.locator(".collapse-content p").first();
+        namaBiayaOnRincianPmbayaran = page.locator(".invoice-detail-row-section div p").first();
+        durasiBiayaOnRincianPmbayaran = page.locator(".invoice-detail-row-section div p").nth(1);
+        totalPembayaranOnRightSide = page.locator("p.invoice-detail-price");
 
         //---Buat Invoice Page---//
         backButtonBuatInvoice = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("back"));
@@ -236,9 +244,11 @@ public class InvoiceManualPO {
 
         //---Tambah Biaya Pop Up---//
         namaBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih nama biaya"));
-        startDateCalendar = page.getByTestId("billing-modal-start-date").getByPlaceholder("Pilih tanggal di sini");
-        endDateCalendar = page.getByTestId("billing-modal-end-date").getByPlaceholder("Pilih tanggal di sini");
-        durasiBiayaText = page.getByPlaceholder("Contoh: 2 hari ");
+        startDateCalendar = page.getByTestId("start-period-date-0").getByPlaceholder("Pilih tanggal di sini");
+        endDateCalendar = page.getByTestId("end-period-date-0").getByPlaceholder("Pilih tanggal di sini");
+        tambahDurasiButton = page.getByTestId("increase-time-qty-0");
+        kurangiDurasiButton = page.getByTestId("decrease-time-qty-0");
+        satuanDurasiDropdown = page.getByTestId("fee-time-unit-0").first();
         jumlahBiayaText = page.getByTestId("billing-modal-jumlah-biaya");
         submitBiayaButton = page.getByTestId("add-cost-data");
         toastMessage = page.locator(".global-toast");
@@ -262,7 +272,7 @@ public class InvoiceManualPO {
         titleExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-title']");
         descriptionExitBuatInvoicePopUp = page.locator("//*[@class='bg-c-modal__body-description']");
         tidakButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tidak"));
-        yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya"));
+        yaButtonExitBuatInvoicePopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya").setExact(true));
 
         //---Ubah Status Invoice---//
         kembaliBtnOnUbahStatus = page.getByTestId("change-status-cancel");
@@ -335,13 +345,6 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Click Tambah Biaya to add Biaya Tambahan / Sewa
-     */
-    public void tambahBiayaButton() {
-        tambahBiayaButton.click();
-    }
-
-    /**
      * Select nama biaya in Pop Up Tambah Biaya
      * @param namaBiaya
      */
@@ -390,43 +393,19 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Select date periode akhir in Pop Up Tambah Biaya
-     * @param periodeAkhir
+     * Fill durasi biaya in Pop Up Tambah Biaya
+     * @param durasi
+     * @param satuanWaktu
      */
-    public void setPeriodeAkhirInvoiceManual(String periodeAkhir) {
-        if (periodeAkhir.equalsIgnoreCase("today")){
-            //get today date
-            SimpleDateFormat today = new SimpleDateFormat("d");
-            Date dates = new Date();
-            endDate = page.locator("//span[@class='cell day today'][contains(text(),'"+today.format(dates)+"')]");
-        } else if (periodeAkhir.equalsIgnoreCase("tomorrow")) {
-            //get tomorrow date
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE, 1);
-            Date dt = calendar.getTime();
-            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
-            endDate = page.locator("(//span[@class='cell day today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
-        } else if (periodeAkhir.equalsIgnoreCase("day after tomorrow")) {
-            //get day after tomorrow
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE, 2);
-            Date dt = calendar.getTime();
-            SimpleDateFormat tomorrow = new SimpleDateFormat("d");
-            endDate = page.locator("(//span[@class='cell day disabled today']/parent::div/following-sibling::*[contains(., '" +tomorrow.format(dt)+ "')])[1]");
-        } else {
-            endDate = page.getByTestId("billing-modal-end-date").getByText(periodeAkhir);
+    public void setDurasiBiayaInvoiceManual(String durasi, String satuanWaktu) {
+        satuanDurasiValue = page.locator("[data-testid='fee-time-unit-0'] .bg-c-dropdown__menu-item-content",new Page.LocatorOptions().setHasText(satuanWaktu));
+
+        for (int i=1;i<Integer.parseInt(durasi);i++){
+            playwright.clickOn(tambahDurasiButton);
         }
 
-        endDateCalendar.click();
-        endDate.click();
-    }
-
-    /**
-     * Fill durasi biaya in Pop Up Tambah Biaya
-     * @param durasiBiaya
-     */
-    public void setDurasiBiayaInvoiceManual(String durasiBiaya) {
-        durasiBiayaText.fill(durasiBiaya);
+        playwright.clickOn(satuanDurasiDropdown);
+        playwright.clickOn(satuanDurasiValue);
     }
 
     /**
@@ -438,125 +417,10 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Submit biaya and assert toast message
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void submitBiayaInvoiceManual(String type) {
-        submitBiayaButton.click();
-        toastMessage.waitFor();
-        if (type.equalsIgnoreCase("Biaya Tambahan")){
-            assertThat(toastMessage).hasText("Biaya Tambahan berhasil ditambahkan");
-        } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            assertThat(toastMessage).hasText("Biaya Sewa berhasil ditambahkan");
-        }
-    }
-
-    /**
      * Click Buat dan Kirim button
      */
     public void previewBuatdanKirimInvoiceManual() {
         buatDanKirimButton.click();
-    }
-
-    /**
-     * Assert nama biaya in Buat dan Kirim pop up
-     * @param namaBiaya
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void assertNamaBiayaInPreviewBuatDanKirim(String namaBiaya, String type) {
-        if (type.equalsIgnoreCase("Biaya Tambahan")){
-            assertThat(buatdanKirimPopUpTable.nth(6)).hasText(namaBiaya);
-        } else if (type.equalsIgnoreCase("Biaya Sewa"))
-            assertThat(buatdanKirimPopUpTable.nth(5)).hasText(namaBiaya);
-    }
-
-    /**
-     * Assert periode awal in Buat dan Kirim pop up
-     * @param periodeAwal
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void assertPeriodeAwalInPreviewBuatDanKirim(String periodeAwal,String type) {
-        if (periodeAwal.equalsIgnoreCase("today")){
-            //get today
-            SimpleDateFormat today = new SimpleDateFormat("dd/MM/yyyy");
-            Date dates = new Date();
-
-            if (type.equalsIgnoreCase("Biaya Tambahan")){
-                assertThat(buatdanKirimPopUpTable.nth(7)).hasText(today.format(dates));
-            } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-                assertThat(buatdanKirimPopUpTable.nth(6)).hasText(today.format(dates));
-
-            }
-        } else {
-            //get today
-            SimpleDateFormat today = new SimpleDateFormat("/MM/yyyy");
-            Date dates = new Date();
-
-            if (type.equalsIgnoreCase("Biaya Tambahan")){
-                assertThat(buatdanKirimPopUpTable.nth(7)).hasText(periodeAwal+today.format(dates));
-            } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-                assertThat(buatdanKirimPopUpTable.nth(6)).hasText(periodeAwal+today.format(dates));
-            }
-        }
-    }
-
-    /**
-     * Assert periode akhir in Buat dan Kirim pop up
-     * @param periodeAkhir
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void assertPeriodeAkhirInPreviewBuatDanKirim(String periodeAkhir, String type) {
-        if (periodeAkhir.equalsIgnoreCase("tomorrow")){
-            //get tomorrow
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE, 1);
-            SimpleDateFormat tomorrow = new SimpleDateFormat("dd/MM/yyyy");
-            Date dt = calendar.getTime();
-
-            if (type.equalsIgnoreCase("Biaya Tambahan")){
-                assertThat(buatdanKirimPopUpTable.nth(8)).hasText(tomorrow.format(dt));
-            } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-                assertThat(buatdanKirimPopUpTable.nth(7)).hasText(tomorrow.format(dt));
-            }
-        } else {
-            //get today
-            SimpleDateFormat today = new SimpleDateFormat("/MM/yyyy");
-            Date dates = new Date();
-
-            if (type.equalsIgnoreCase("Biaya Tambahan")){
-                assertThat(buatdanKirimPopUpTable.nth(8)).hasText(periodeAkhir+today.format(dates));
-            } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-                assertThat(buatdanKirimPopUpTable.nth(7)).hasText(periodeAkhir+today.format(dates));
-            }
-        }
-    }
-
-    /**
-     * Assert julah biaya in Buat dan Kirim pop up
-     * @param jumlahBiaya
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void assertJumlahBiayaInPreviewBuatDanKirim(String jumlahBiaya, String type) {
-        if (type.equalsIgnoreCase("Biaya Tambahan")){
-            assertThat(buatdanKirimPopUpTable.nth(9)).hasText(jumlahBiaya);
-        } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-            assertThat(buatdanKirimPopUpTable.nth(8)).hasText(jumlahBiaya);
-        }
-    }
-
-    /**
-     * Assert disburse to pemilik in Buat dan Kirim pop up
-     * @param disburseToPemilik
-     * @param type (Biaya Tambahan / Biaya Sewa)
-     */
-    public void assertDisburseToPemilikInPreviewBuatDanKirim(String disburseToPemilik,String type) {
-        if (!disburseToPemilik.equalsIgnoreCase("-")){
-            if (type.equalsIgnoreCase("Biaya Tambahan")){
-                assertThat(buatdanKirimPopUpTable.nth(10)).hasText(disburseToPemilik);
-            } else if (type.equalsIgnoreCase("Biaya Sewa")) {
-                assertThat(buatdanKirimPopUpTable.nth(9)).hasText(disburseToPemilik);
-            }
-        }
     }
 
     /**
@@ -633,21 +497,21 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Assert nama biaya in Jenis Biaya tooltips
-     * @param namaBiaya
+     * get Nama Biaya Hover
+     * @return
      */
-    public void assertNamaBiayaHover(String namaBiaya) {
-        namaBiayaHover = page.locator("((//tbody/tr)["+rowInvoiceData.all().size()+"]/td)[4]//p").nth(1);
-        assertThat(namaBiayaHover).hasText(namaBiaya);
+    public String getNamaBiayaHover() {
+        namaBiayaHover = page.locator("((//tbody/tr)["+rowInvoiceData.all().size()+"]/td)[4]//p").nth(0);
+        return playwright.getNormalizeText(namaBiayaHover);
     }
 
     /**
-     * Assert jumlah biaya in Jenis Biaya tooltips
-     * @param jumlahBiaya
+     * get Jumlah Biaya when hover
+     * @return
      */
-    public void assertJumlahBiayaHover(String jumlahBiaya) {
-        jumlahBiayaHover = page.locator("((//tbody/tr)["+rowInvoiceData.all().size()+"]/td)[4]//p").nth(2);
-        assertThat(jumlahBiayaHover).hasText(jumlahBiaya);
+    public String getJumlahBiayaHover() {
+        jumlahBiayaHover = page.locator("((//tbody/tr)["+rowInvoiceData.all().size()+"]/td)[4]//p").nth(1);
+        return playwright.getNormalizeText(jumlahBiayaHover);
     }
 
     /**
@@ -773,56 +637,59 @@ public class InvoiceManualPO {
     }
 
     /**
-     * assert Jenis Pembayaran on Detail Invoice Page
-     * @param invType
+     * Get Jenis Pembayaran on Detail Invoice Page
+     * @return String
      */
-    public void assertJenisPembayaran(String invType){
-        jenisPembayaran = page.locator("#invoiceBill").getByText(invType);
-        assertThat(jenisPembayaran);
-        System.out.println(jenisPembayaran);
+    public String getJenisPembayaran(){
+        return playwright.getText(jenisPembayaran);
     }
 
     /**
-     * assert Total Pembayaran on Left Side on Detail Invoice Page
+     * Get Total Pembayaran on Left Side on Detail Invoice Page
+     * @return String
      */
-    public void assertTotalPembayaranOnLeftSide(){
-        totalPembayaranOnLeftSide = page.locator("#invoiceBill").getByText("Rp25.000");
-        assertThat(totalPembayaranOnLeftSide);
-        System.out.println(totalPembayaranOnLeftSide);
+    public String getTotalPembayaran(){
+        return playwright.getText(totalPembayaranOnLeftSide);
     }
 
     /**
-     * assert Listing Name on Detail Invoice Page
+     * Get Listing Name on Detail Invoice Page
+     * @return String
      */
-    public void assertListingName(){
-        assertThat(listingName);
-        System.out.println(listingName);
+    public String getListingName(){
+        return playwright.getText(listingName);
     }
 
     /**
-     * assert Jenis Biaya on Rincian Pembayaran at Detail Invoice Page
-     * @param invType
+     * Get Jenis Biaya on Rincian Pembayaran at Detail Invoice Page
+     * @return String
      */
-    public void assertJenisBiayaOnRincianPembayaran(String invType){
-        jnsBiayaOnRincianPmbayaran = page.getByTestId("invoiceBillingDetails-payment").getByText(invType);
-        assertThat(jnsBiayaOnRincianPmbayaran);
-        System.out.println(jnsBiayaOnRincianPmbayaran);
+    public String getJenisPembayaranRincian(){
+        return playwright.getText(jnsBiayaOnRincianPmbayaran);
     }
 
     /**
      * assert Nama Biaya on Rincian Pembayaran at Detail Invoice Page
+     * @return String
      */
-    public void assertNamaBiayaOnRincianPembayaran(){
-        assertThat(namaBiayaOnRincianPmbayaran);
-        System.out.println(namaBiayaOnRincianPmbayaran);
+    public String getNamaBiayaRincian(){
+        return playwright.getText(namaBiayaOnRincianPmbayaran);
     }
 
     /**
-     * assert Total Pembayaran on Right Side at Detail Invoice Page
+     * Get Durasi Biaya in Rincian Pembayaran
+     * @return String
      */
-    public void assertTotalPembayaranOnRightSide(){
-        assertThat(totalPembayaranOnRightSide);
-        System.out.println(totalPembayaranOnRightSide);
+    public String getDurasiBiayaRincian() {
+        return playwright.getText(durasiBiayaOnRincianPmbayaran);
+    }
+
+    /**
+     * Get Total Pembayaran on Right Side at Detail Invoice Page
+     * @return String
+     */
+    public String getTotalPembayaranRincian(){
+        return playwright.getText(totalPembayaranOnRightSide);
     }
 
     /**
@@ -836,31 +703,32 @@ public class InvoiceManualPO {
     }
 
     /**
-     * assert Nomor Invoice on No Invoice coloumn
-     * @param result1
+     * Get Nomor Invoice on No Invoice coloumn
+     * @return String
      */
-    public void assertNoInvoice(String result1){assertThat(noInvoiceCol).hasText(result1);
+    public String getNoInvoiceFirstRow(){
+        return playwright.getText(noInvoiceCol);
     }
 
     /**
-     * assert Detail Penyewa on Detail Penyewa coloumn
+     * Get Nama Penyewa on Detail Penyewa coloumn
      * Split the detail penyewa value
      * And get the nama penyewa only
-     * @param result2
-     * @return
+     * @return String
      */
-    public String assertDetailPenyewa(String result2){String full = playwright.getText(detailPenyewaCol);
+    public String getDetailPenyewaFirstRow(){
+        String full = playwright.getText(detailPenyewaCol);
         String result = full.substring(0,24);
         System.out.println(result);
-        return result2;
+        return result;
     }
 
     /**
-     * assert Nama Listing on Nama Listing coloumn
-     * @param result3
+     * Get Nama Listing on Nama Listing coloumn
+     * @return String
      */
-    public void assertNamaListing(String result3){
-        assertThat(namaListingCol).hasText(result3);
+    public String getNamaListingFirstRow(){
+        return playwright.getText(namaListingCol);
     }
 
     /**
@@ -1175,13 +1043,6 @@ public class InvoiceManualPO {
     }
 
     /**
-     * Clear durasi biaya
-     */
-    public void clearDurasiBiayaInvoiceManual() {
-        durasiBiayaText.clear();
-    }
-
-    /**
      * Set Nama Biaya for Lainnya
      */
     public void setNamaBiayaLainnyaInvoiceManual() {
@@ -1373,31 +1234,16 @@ public class InvoiceManualPO {
         playwright.clickOn(tickPaid);
     }
 
-    /**
-     * ticks on Jenis Biaya Tambahan at Jenis Biaya dropdown
-     * and without clicks Terapkan
-     * @param value
-     */
-    public void tickJenisBiayaTambahanWithoutClicksTerapkan(String value){
-        //clicks Jenis Biaya dropdown
+    public void tickJenisBiayaCheckbox(String value) {
+        if (value.equalsIgnoreCase("Biaya Sewa")){
+            tickJenisBiaya = page.getByTestId("select-checkbox-rent-0");
+        } else if (value.equalsIgnoreCase("Biaya Tambahan")) {
+            tickJenisBiaya = page.getByTestId("select-checkbox-additional_cost-1");
+        } else if (value.equalsIgnoreCase("Master Data")) {
+            tickJenisBiaya = page.getByTestId("select-checkbox-additional_fee-2");
+        }
+
         playwright.clickOn(jenisBiayaDropdown);
-
-        //biaya tambahan
-        tickJenisBiaya = page.locator("//p[contains(., '" +value+ "')]").first();
-        playwright.clickOn(tickJenisBiaya);
-    }
-
-    /**
-     * ticks on Jenis Biaya Sewa at Jenis Biaya dropdown
-     * and without clicks Terapkan
-     * @param value
-     */
-    public void tickJenisBiayaSewaWithoutClicksTerapkan(String value){
-        //clicks Jenis Biaya dropdown
-        playwright.clickOn(jenisBiayaDropdown);
-
-        //biaya sewa
-        tickJenisBiaya = page.locator("//div[@data-testid='select-checkbox-rent-1']//p[contains(text(),'" +value+ "')]");
         playwright.clickOn(tickJenisBiaya);
     }
 
@@ -1526,6 +1372,10 @@ public class InvoiceManualPO {
         }
     }
 
+    /**
+     * Get last invoice number
+     * @return String
+     */
     public String getLastInvoiceNumber() {
         lastInvoiceNumber = page.locator("tr td>a:nth-of-type(1)").last();
         return playwright.getText(lastInvoiceNumber);

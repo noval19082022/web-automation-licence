@@ -1,4 +1,4 @@
-@newowner-dashboard @regression @LIMO2 @listing-monetization @ownerDashboardGP @rechecking @DONEMIGRATINGTONEWBOARD
+@newowner-dashboard @regression @LIMO2 @listing-monetization @ownerDashboardGP
 Feature: Owner Dashboard GP
 
   @resetGP
