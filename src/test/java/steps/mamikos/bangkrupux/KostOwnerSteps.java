@@ -1,5 +1,6 @@
 package steps.mamikos.bangkrupux;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
@@ -20,13 +21,14 @@ public class KostOwnerSteps {
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName) {
         kostOwner.searchKosName(kostName);
     }
+    @And("admin bangkrupux search booking owner request {string} in admin booking owner request page")
+    public void adminBangkrupuxSearchBookingOwnerRequestInAdminKosOwnerPage(String kostName) {
+        kostOwner.searchKosNameBookingOwnerRequest(kostName);
+    }
 
     @And("admin reject BBK kos")
     public void adminRejectBBKKos() {
-        playwright.hardWait(3000.0);
-        kostOwner.clickOnRejectBBK();
-        kostOwner.clickOnFirstRadioButton();
-        kostOwner.clickOnRejectButton();
+            kostOwner.clickOnRejectBBK();
     }
 
     @And("admin reject bulk BBK kos")

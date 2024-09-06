@@ -64,7 +64,7 @@ public class GoldplusSteps {
 
     @When("owner close gp onboarding if exist")
     public void ownerCloseGpOnBoardingIfExist() {
-        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded();
         goldplus.closeGpOnBoardingIfExist();
     }
 
