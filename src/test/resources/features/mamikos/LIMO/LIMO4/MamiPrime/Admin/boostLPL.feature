@@ -65,9 +65,6 @@ Feature: Admin Boost LPL
   @TEST_LIMO-260 @boostLpl @WEB @AUTOMATED
   Scenario: [WEB][Admin] As an admin, I would like to input a listing for its score to be boosted in LPL
     Given admin go to mamikos bangkrupux admin
-    And admin login to bangkrupux:
-      | email stag                     | email prod | password  |
-      | uncle.limo2@admin-mamiteam.com |            | qwerty123 |
     When admin accsess menu boot LPL
     * admin input kost name with "Kost Twister Konro Depok Sleman" at form add boost lpl
     * admin wants to add listing to boost lpl
