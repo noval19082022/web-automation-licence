@@ -1,7 +1,7 @@
 @BBM6 @COOP6
 Feature: Owner - Penyewa Feature
 
-  @waitingTerminateConfirmation
+  @waitingTerminateConfirmation @a
   Scenario: Cancel and create booking
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -49,7 +49,7 @@ Feature: Owner - Penyewa Feature
     And tenant navigate to riwayat and draf booking
     Then tenant checkin kost from riwayat booking
 
-  @messageRequestTerminatedContract @TEST_SS-3539
+  @messageRequestTerminatedContract @TEST_SS-3539 @a
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -57,12 +57,15 @@ Feature: Owner - Penyewa Feature
       | 0892202358 | 08100000622 | qwerty123 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
-    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
     And user click review kost
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user click ajukan berhenti sewa on kontrak saya after review kos
+    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user click ajukan berhenti sewa on kontrak saya after input data diri
+    Then tenant can see "Pastikan form sudah diisi dengan benar untuk memudahkan pemilik melakukan konfirmasi." on bank account section
+    And tenant click on "Kirim form ke pemilik" button on popup confirmation
+    And tenant navigate to kontrak kost saya
     And user logs out as a Tenant user
     When user login as owner:
       | phone stag   | phone prod  | password  |

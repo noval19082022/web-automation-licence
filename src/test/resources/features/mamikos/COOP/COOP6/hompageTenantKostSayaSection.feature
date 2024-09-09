@@ -11,16 +11,16 @@ Feature: Homepage - Kost Saya Section
     And user redirected to owner dashboard
     And user navigate to penyewa page
     And user search kost in penyewa menu "unique code"
-    And user click Selengkapnya button on "Podcast" contract
+    And user click Selengkapnya button on "Tenant Unique Code Tersisa" contract
     And user click Kirim ulang kode hyperlink
     Then user will redirect to Kirim kode unik ke penyewa page
-    And user will see phone number of owner "0892202411" or "0890000001004"
+    And user will see phone number of owner "08922024111" or "0890000001004"
     When user click Ubah nomor HP hyperlink
     And user change owner's phone number into "0890000001004" and click Gunakan
-    Then user will see phone number of owner "0890000001004" or "0892202411"
+    Then user will see phone number of owner "0890000001004" or "08922024111"
     When user click Ubah nomor HP hyperlink
-    And user change owner's phone number into "0892202411" and click Gunakan
-    Then user will see phone number of owner "0892202411" or "0892202411"
+    And user change owner's phone number into "08922024111" and click Gunakan
+    Then user will see phone number of owner "08922024111" or "08922024111"
 
   @TEST_SS-3477
   #warningDontHaveKosSayaAtSemuaFilter.feature

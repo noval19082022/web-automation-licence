@@ -407,7 +407,7 @@ public class KostDetailsPO {
         this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
         this.ownerStatement = page.locator("//div[@class='detail-kost-owner-section__owner-title']");
-        this.ownerImageProfile = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("foto profile")).first();
+        this.ownerImageProfile = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Foto Owner")).first();
         this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
         this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");
         this.bookingProcessed = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(0);

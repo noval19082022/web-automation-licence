@@ -332,4 +332,4 @@
       And tenant search kost then go to kost details:
         | kost name stag                               | kost name prod         |
         | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
-      Then tenant can choose checkin date in the next "4" month
+      Then tenant can choose checkin date in the next "5" month
