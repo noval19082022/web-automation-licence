@@ -1,7 +1,7 @@
 @BBM6 @COOP6
 Feature: Owner - Penyewa Feature
 
-  @waitingTerminateConfirmation @a
+  @waitingTerminateConfirmation
   Scenario: Cancel and create booking
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -49,7 +49,7 @@ Feature: Owner - Penyewa Feature
     And tenant navigate to riwayat and draf booking
     Then tenant checkin kost from riwayat booking
 
-  @messageRequestTerminatedContract @TEST_SS-3539 @a
+  @messageRequestTerminatedContract @TEST_SS-3539
   Scenario: check waiting terminated confirmation status
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -1,4 +1,4 @@
-@COOP6 @BBM6 @ownerBadges
+@COOP6 @BBM6
 Feature: Check Owner Badges
 
 
