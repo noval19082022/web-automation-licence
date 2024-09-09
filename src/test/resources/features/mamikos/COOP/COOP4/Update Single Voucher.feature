@@ -1,7 +1,7 @@
 @COOP4
 Feature: Admin - Update Single Voucher
 
-  @TEST_SS-4277 @continue
+  @continue
   Scenario: Create Single Voucher Prefix Without Fill Email Field
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -34,7 +34,7 @@ Feature: Admin - Update Single Voucher
     And admin master clicks on add single voucher button in voucher form
     Then admin can sees callout message is "New targeted voucher added!"
 
-  @continue
+  @TEST_SS-4277 @continue
   Scenario: Update Single Voucher
     Given admin go to mamikos mamipay admin
     And admin search single voucher with name and edit index "1":

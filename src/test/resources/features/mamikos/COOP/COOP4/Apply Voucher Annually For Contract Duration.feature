@@ -1,7 +1,6 @@
 @COOP4
 Feature: Apply Voucher Annually For Contract Duration
 
-  @TEST_SS-4255
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -39,6 +38,7 @@ Feature: Apply Voucher Annually For Contract Duration
       | Adi Auto Voucher Satu | Adi Auto Voucher Satu |
     Then owner should redirect back to pengajuan booking page
 
+  @TEST_SS-4255
   Scenario: Tenant Apply Voucher VYEARLYUSAGE
     Given user go to mamikos homepage
     When user login as tenant via phone number:
