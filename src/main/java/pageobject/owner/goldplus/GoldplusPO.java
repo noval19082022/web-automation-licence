@@ -965,7 +965,8 @@ public class GoldplusPO {
     }
 
     public void closeGpOnBoardingIfExist() {
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+        playwright.hardWait(1);
+        if (playwright.waitTillLocatorIsVisible(closeBtn)) {
             playwright.clickOn(closeBtn);
         }
     }

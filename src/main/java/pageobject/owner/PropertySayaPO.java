@@ -259,7 +259,7 @@ public class PropertySayaPO {
         editDataLainBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Data Lain"));
         titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
-        locationTextBox = page.getByTestId("mamikosInput");
+        locationTextBox = page.locator("//input[@placeholder='Masukkan nama lokasi/ area/ alamat']");
         addressNotesInput = page.getByRole(AriaRole.TEXTBOX).nth(2);
         promoNgebutLabel = page.locator(".media-content");
         closeInfobarButton = page.locator(".delete");
@@ -701,8 +701,12 @@ public class PropertySayaPO {
      * Click on close at pop up BBK on property saya
      */
     public void clickClosePopUpBBKOnPropertySaya() {
-        playwright.waitFor(closeBBKDialog);
-        playwright.clickOn(closeBBKDialog);
+        if (playwright.waitTillLocatorIsVisible(closeBBKDialog)) {
+            playwright.waitFor(closeBBKDialog);
+            playwright.clickOn(closeBBKDialog);
+        } else {
+            playwright.reloadPage();
+        }
     }
 
     /**

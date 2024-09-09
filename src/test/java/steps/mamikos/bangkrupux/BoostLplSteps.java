@@ -1,7 +1,9 @@
 package steps.mamikos.bangkrupux;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -53,7 +55,7 @@ public class BoostLplSteps {
     @When("admin input kost name with {string} at form add boost lpl")
     public void admin_input_kost_name_with_at_form_add_boost_lpl(String kosName) {
         boostLpl.clickOnButtonAddLpl();
-      boostLpl.searchKosNameToBoost(kosName);
+        boostLpl.searchKosNameToBoost(kosName);
 
     }
 
@@ -64,9 +66,20 @@ public class BoostLplSteps {
 
     @When("admin wants to add listing to boost lpl")
     public void admin_wants_to_add_listing_to_boost_lpl() {
-        boostLpl.clickButtonBoostLpl();
-        Assert.assertTrue(boostLpl.isPopUpAddBoostLplAppear(),"pop up not appear");
-        boostLpl.clickButtonYesLpl();
+        if (playwright.isTextDisplayed("Boosted")) {
+            playwright.navigateTo(Mamikos.URL + "/admin/lpl-boost", 30000.0, LoadState.LOAD);
+            boostLpl.searchKosNameLPLbyListing("Kost Twister Konro Depok Sleman");
+            boostLpl.clickOnDeleteButton();
+            boostLpl.clickOnButtonAddLpl();
+            boostLpl.searchKosNameToBoost("Kost Twister Konro Depok Sleman");
+            boostLpl.clickButtonBoostLpl();
+            Assert.assertTrue(boostLpl.isPopUpAddBoostLplAppear(), "pop up not appear");
+            boostLpl.clickButtonYesLpl();
+        } else {
+            boostLpl.clickButtonBoostLpl();
+            Assert.assertTrue(boostLpl.isPopUpAddBoostLplAppear(), "pop up not appear");
+            boostLpl.clickButtonYesLpl();
+        }
     }
 
     @Then("admin can see {string} was added with lpl score is {string}")

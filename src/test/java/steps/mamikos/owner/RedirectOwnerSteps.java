@@ -52,7 +52,7 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to pusat bantuan mamitour page")
     public void userRedirectedToPusatBantuanMamitourPage() {
-        loadingPO.waitForLoadingIconDisappear();
+        playwright.hardWait(3);
         Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
     }
 

@@ -3,9 +3,8 @@ Feature: Edit Kost
 
   @precondition
   Scenario: Verify Edited Kos In Admin Kos oke bebek Vviop Depok Sleman
-    Given user try to logout from mamikos
-    When admin go to mamikos bangkrupux admin
-    And admin login to bangkrupux:
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
