@@ -500,7 +500,7 @@ public class MamikosVoucherFormPO {
         else {
             day = startDate;
         }
-        String dateElement = "//body[@class='skin-green sidebar-mini']/div[5]//div[.='"+day+"']";
+        String dateElement = "//body[@class='skin-green sidebar-mini']/div[2]//div[.='"+day+"']";
         String date = java.getTimeStamp("YYYY/MM");
 
         startDateInput.click();
