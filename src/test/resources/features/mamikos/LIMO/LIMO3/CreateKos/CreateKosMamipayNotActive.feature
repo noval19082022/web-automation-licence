@@ -12,7 +12,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And admin search owner phone "0812345670004" in mamipay owner list
     And admin delete the mamipay data from first list
 
-  @CreateKosExistTypeMamipayNotActv  @TEST_LIMO-3670
+  @CreateKosExistTypeMamipayNotActv @TEST_LIMO-3670
   Scenario: Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:

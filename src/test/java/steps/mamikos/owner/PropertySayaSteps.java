@@ -269,6 +269,7 @@ public class PropertySayaSteps {
 
     @And("user click button edit {string} kos")
     public void userClickButtonEditKos(String updateData) {
+        playwright.hardWait(5000);
         playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDataKos(updateData);
@@ -1040,7 +1041,6 @@ public class PropertySayaSteps {
     @When("user clicks on edit data kos button")
     public void userClicksOnEditDataKosButton() {
         propertySaya.clickOnEditDataKosButton();
-        loading.waitForLoadingIconDisappear();
     }
 
     @When("user delete active other additional price")

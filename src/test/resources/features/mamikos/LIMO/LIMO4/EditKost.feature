@@ -66,7 +66,7 @@ Feature: Edit Kost
     And user click button edit finished
     And user click done in success page pop up of edit kos
     And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
-    Then user see kos with name "Kos oke bebek Vviop Depok Sleman", status "Diperiksa Admin" and type "Kos Putra"
+    Then user see kos with name "Kos oke bebek Vviop Depok Sleman Patikraja Banyumas", status "Aktif" and type "Kos Putra"
 
   @TEST_LIMO-3436 @WEB @AUTOMATED
   Scenario: Verify Edited Kos In Admin Kos oke bebek Vviop Depok Sleman
