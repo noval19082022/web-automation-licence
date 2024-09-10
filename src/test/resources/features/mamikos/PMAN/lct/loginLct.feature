@@ -1,8 +1,8 @@
-@regression @essentialTest2 @pman3 @pman-prod @lct
+@regression @essentialTest2 @pman3 @pman @pman-prod @lct
 
   Feature: Login LCT
 
-    @TEST_SS-621
+    @TEST_SS-621 @continue
     Scenario: Login as BD
       Given admin navigate to mantool
       When admin login agen mantool
@@ -13,9 +13,10 @@
       Then agen should redirect to "LCT" in new tab
       And agen role should be "business development"
 
-    @TEST_SS-619
+    @TEST_SS-619 @continue
     Scenario: Login as MDR
-      Given admin navigate to mantool
+      Given admin close unused browser tab
+      And admin logout mantool
       When admin login agen mantool
         | No Handphone stag | No Handphone prod | password      |
         | 089966561212      | 0890000003481     | Bismillah@01  |
@@ -26,7 +27,8 @@
 
     @TEST_SS-626
     Scenario: Login as AO
-      Given admin navigate to mantool
+      Given admin close unused browser tab
+      And admin logout mantool
       When admin login agen mantool
         | No Handphone stag | No Handphone prod | password      |
         | 089966561213      | 0890000003479     | Bismillah@01  |
