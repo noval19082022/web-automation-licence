@@ -86,7 +86,7 @@ public class KostLandingAreaPO {
         this.videoIsOccur = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator("video");
         this.videoIsPlayed = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator(".ytp-timed-markers-container");
         this.enaknyaNgekostBenefitsSection = page.locator("#enaknyangekosBenefits");
-        loadMoreText = page.locator("//a[@class=\"Lihat lebih banyak lagi\"]");
+        loadMoreText = page.locator("//a[@class=\"list__content-load-link\"]");
     }
 
     /**
@@ -443,6 +443,6 @@ public class KostLandingAreaPO {
 
     public void clickLoadMore(){
         playwright.pageScrollInView(loadMoreText);
-            playwright.clickOn(loadMoreText);
+        playwright.clickOn(loadMoreText);
     }
 }

@@ -352,7 +352,7 @@ public class PaymentSteps {
 
     @When("system display remaining payment {string} use mamipoin for payment monthly")
     public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
-        String remainingPaymentBefore = "Rp508.000";
+        String remainingPaymentBefore = "Rp507.500";
         String remainingPaymentAfter = "Rp507.500";
 
         if(condition.equals("before")){
