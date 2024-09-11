@@ -137,7 +137,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
       | add data pengelola | pengelola name | pengelola phone |
       | yes                | Omeii          | 083333373777    |
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"
@@ -226,7 +226,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
       | add data pengelola | pengelola name | pengelola phone |
       | yes                | Omeii          | 083333373777    |
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"
@@ -309,7 +309,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
       | add data pengelola | pengelola name | pengelola phone |
       | yes                | Omeii          | 083333373777    |
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"
@@ -387,7 +387,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And owner set rules kos:
       | Dilarang bawa hewan |
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"

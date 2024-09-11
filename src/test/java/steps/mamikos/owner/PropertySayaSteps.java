@@ -1166,4 +1166,9 @@ public class PropertySayaSteps {
     public void ownerClosePopUpInEditKost() {
         propertySaya.clickCloseBtnIfExist();
     }
+
+    @And("owner click on leftlet marker")
+    public void ownerClickOnLeftletMarker() {
+        propertySaya.leftletMarker();
+    }
 }

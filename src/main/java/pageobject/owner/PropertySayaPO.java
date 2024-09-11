@@ -214,6 +214,7 @@ public class PropertySayaPO {
     Locator destinationPhotoRoomMoved;
     Locator kostNameField2;
     Locator favoritedSection;
+    Locator leafletMarkerIcon;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -383,6 +384,7 @@ public class PropertySayaPO {
         destinationPhotoRoomMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto dalam kamar")).locator("span").nth(1);
         favoritedSection = page.getByText("Difavoritkan 0");
         kostNameField2 = page.locator("//div[@class='bg-c-input step-one__input bg-c-input--disabled bg-c-input--lg']");
+        leafletMarkerIcon = page.locator("//img[@class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive leaflet-marker-draggable']");
     }
 
     /**
@@ -2522,5 +2524,13 @@ public class PropertySayaPO {
      */
     public void clickCloseBtnIfExist() {
         if (playwright.waitTillLocatorIsVisible(closeBtn, 1_000.0)) playwright.clickOn(closeBtn);
+    }
+    /**
+     * Input location kos
+     *
+     */
+    public void leftletMarker() {
+        playwright.waitTillLocatorIsVisible(leafletMarkerIcon);
+        playwright.clickOn(leafletMarkerIcon);
     }
 }

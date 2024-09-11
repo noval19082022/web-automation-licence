@@ -37,7 +37,7 @@ Feature: Create Kos From Home
   @TEST_LIMO-970 @createNewKos @continue
   Scenario: [Form add New Kost][Foto Kos]Upload photo with invalid photos
     When owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner invalid upload photo "bangunan tampak depan"
