@@ -78,7 +78,7 @@ public class JoinSinggahsiniPO {
      * Navigate to singgahsini.id
      */
     public void navigateToSinggahsiniId() {
-        playwright.navigateTo(Mamikos.Singgahsini_URL,30000.0);
+        playwright.navigateTo(Mamikos.Singgahsini_URL,60000.0);
     }
 
     /**
