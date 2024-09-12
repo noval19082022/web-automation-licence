@@ -269,6 +269,7 @@ public class PropertySayaSteps {
 
     @And("user click button edit {string} kos")
     public void userClickButtonEditKos(String updateData) {
+        playwright.hardWait(5000);
         playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDataKos(updateData);
@@ -594,7 +595,7 @@ public class PropertySayaSteps {
     @And("owner click lanjutkan button for next steps")
     public void ownerClickLanjutkanButtonForNextSteps() {
         propertySaya.clickOnLanjutkan();
-       // loading.waitForLoadingIconDisappear();
+        loading.waitForLoadingIconDisappear();
     }
 
     @And("owner invalid upload photo {string}")
@@ -1040,7 +1041,6 @@ public class PropertySayaSteps {
     @When("user clicks on edit data kos button")
     public void userClicksOnEditDataKosButton() {
         propertySaya.clickOnEditDataKosButton();
-        loading.waitForLoadingIconDisappear();
     }
 
     @When("user delete active other additional price")
@@ -1165,5 +1165,10 @@ public class PropertySayaSteps {
     @When("owner close pop up in edit kost")
     public void ownerClosePopUpInEditKost() {
         propertySaya.clickCloseBtnIfExist();
+    }
+
+    @And("owner click on leftlet marker")
+    public void ownerClickOnLeftletMarker() {
+        propertySaya.leftletMarker();
     }
 }

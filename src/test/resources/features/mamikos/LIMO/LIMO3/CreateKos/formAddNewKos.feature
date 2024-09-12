@@ -15,7 +15,7 @@ Feature: Form Add New Kos
       | kos name             | room type check | room type name | kos type | description kos      | build kos | other note                   |
       | Kos Draft Foto Kamar | yes             | tipe A         | boy      | Kos draft foto kamar | 2020      | Akan dihapus setelah terbuat |
     When owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"

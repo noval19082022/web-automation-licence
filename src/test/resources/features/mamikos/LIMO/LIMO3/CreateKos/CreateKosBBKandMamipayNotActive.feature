@@ -20,7 +20,7 @@ Feature: Create new kos with owner that doesn't activate mamipay and BBK
     And owner upload valid rule kos
     Then verify warning upload gagal disappear
     When owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner invalid upload photo "bangunan tampak depan"
