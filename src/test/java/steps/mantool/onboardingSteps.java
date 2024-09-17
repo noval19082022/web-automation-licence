@@ -121,8 +121,8 @@ public class onboardingSteps {
     }
     @Then("agen should redirect to {string} in new tab")
     public void agen_should_redirect_to_in_new_tab(String url) {
-        playwright.hardWait(5000.0);
         playwright = new PlaywrightHelpers(page1);
+        playwright.hardWait(5000.0);
         if (url.equalsIgnoreCase("LCT")){
             String lctUrl = Mamikos.HOMEPAGE_LCT+"?activeTab=submitted";
             Assert.assertEquals(playwright.getPageUrl(), lctUrl, "URL tidak sesuai");
@@ -132,6 +132,7 @@ public class onboardingSteps {
     }
     @When("admin click in breadcrumb {string}")
     public void admin_click_in_breadcrumb(String menu) {
+        playwright.waitTillPageLoaded();
         if (menu.equalsIgnoreCase("Mitra Agen")){
             onboarding.clickBreadcrumbMitraAgen();
         } else if (menu.equalsIgnoreCase("Mamikos")) {
