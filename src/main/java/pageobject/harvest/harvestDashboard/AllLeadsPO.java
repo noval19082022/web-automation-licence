@@ -56,10 +56,10 @@ public class AllLeadsPO {
         logoutButton = page.getByText("Logout", new Page.GetByTextOptions().setExact(true));
 
         //--- Edit Table ---//
-        editTableButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("editEdit Table"));
+        editTableButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage Leads"));
 
         //--- Batalkan Edit ---//
-        batalkanEditButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("closeBatalkan Edit"));
+        batalkanEditButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
 
         //--- Filter ---//
         filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filter Filter"));
