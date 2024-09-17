@@ -1735,7 +1735,7 @@ public class KostDetailsPO {
     public boolean isFTUEBookingBenefitVisible() {
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(300);
-            if (ftueSlider.isVisible()) {
+            if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
             playwright.hardWait(500);
@@ -2025,7 +2025,7 @@ public class KostDetailsPO {
     public boolean isFTUEBookingBenefitIsNotVisible() {
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(300);
-            if (ftueSlider.isVisible()) {
+            if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
             playwright.hardWait(500);
