@@ -1,4 +1,4 @@
-@DOM4
+@DOM4 @DONE_SEARCH_MIGRATE
 Feature: FTUE Booking Benefit
 
   @ftuebookingbenefit @continue @TEST_SS-3257
@@ -7,9 +7,9 @@ Feature: FTUE Booking Benefit
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos Dom Automation PLM Tipe E Kretek Bantul | Kos DC BAR Automation Tipe A |
+    And tenant redirect to kost details:
+      | kost path stag                                                                         | kost path prod               |
+      | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul | Kos DC BAR Automation Tipe A |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -21,9 +21,9 @@ Feature: FTUE Booking Benefit
   @ftuebookingbenefit @TEST_SS-3258
   Scenario: User Can Use Button On FTUE Booking Benefit
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod               |
-      | Kos Dom Automation PLM Tipe E Kretek Bantul | Kos DC BAR Automation Tipe A |
+    And tenant redirect to kost details:
+      | kost path stag                                                                         | kost path prod               |
+      | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul | Kos DC BAR Automation Tipe A |
     When user dismiss FTUE booking benefit
     Then user can not see FTUE booking benefit
 
@@ -33,9 +33,9 @@ Feature: FTUE Booking Benefit
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod               |
-      | Kos Dom Automation PLM Tipe E Kretek Bantul | Kos DC BAR Automation Tipe A |
+    And tenant redirect to kost details:
+      | kost path stag                                                                         | kost path prod               |
+      | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul | Kos DC BAR Automation Tipe A |
     And tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -44,9 +44,9 @@ Feature: FTUE Booking Benefit
       | Hore! Pemilik kos siap menerimamu! Segera lakukan pembayaran sebelum kedaluwarsa ya.       |
       | Setelah pembayaran diterima pemilik, kamar kos sudah siap kamu huni.                       |
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                                      |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then tenant can see FTUE booking benefit with wording:
       | Hanya butuh 4 langkah untuk booking kos tanpa harus ketemu pemilik kos.                    |
       | Udah ngerasa ada kosan yang cocok? Klik “Ajukan Sewa” buat mengajukan sewa ke pemilik kos. |
@@ -61,13 +61,13 @@ Feature: FTUE Booking Benefit
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod                                      |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     When user dismiss FTUE booking benefit
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod               |
+    And tenant redirect to kost details:
+      | kost path stag       | kost path prod               |
       | Kose Full Automation | Kost Automation Putri Tobelo |
     Then user can not see FTUE booking benefit
 
@@ -77,9 +77,9 @@ Feature: FTUE Booking Benefit
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag     | kost name prod             |
-      | Kost BG Automation | Kost Dumbledore Automation |
+    And tenant redirect to kost details:
+      | kost path stag                                         | kost path prod             |
+      | kost-sorong-kost-campur-eksklusif-kost-bg-automation-1 | Kost Dumbledore Automation |
     Then user can not see FTUE booking benefit
 
   @ftuebookingbenefit @TEST_SS-3256
