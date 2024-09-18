@@ -1,7 +1,6 @@
 @COOP4
 Feature: Successfully Payment with Voucher
 
-  @TEST_SS-4265
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -25,8 +24,8 @@ Feature: Successfully Payment with Voucher
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag | kost name prod |
-      | Kost Reykjavik | Kost Reykjavik |
+      | kost path stag                                        | kost path prod |
+      | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -41,7 +40,7 @@ Feature: Successfully Payment with Voucher
       | Budi Tromol Coop Automation | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @tenantInputVoucher @continue
+  @tenantInputVoucher @continue @TEST_SS-4265
   Scenario: Tenant pay kos with voucher
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -61,4 +60,3 @@ Feature: Successfully Payment with Voucher
     And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
-		

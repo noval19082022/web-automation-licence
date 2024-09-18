@@ -1,7 +1,6 @@
 @COOP4
 Feature: Voucher cannot use invoice settlement
 
-  @TEST_SS-4278
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -23,8 +22,8 @@ Feature: Voucher cannot use invoice settlement
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
+      | kost path stag                                                | kost path prod            |
+      | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-1 | Kost Wild Rift Settlement |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -58,7 +57,7 @@ Feature: Voucher cannot use invoice settlement
     And tenant want to see invoice on riwayat booking after payment
     Then tenant will see payment is success
 
-  @tenantPaySTWithVoucher
+  @tenantPaySTWithVoucher @TEST_SS-4278
   Scenario: Invoice Settlement and Voucher For First Full Paid
     Given user go to mamikos homepage
     And tenant navigate to tagihan kost saya

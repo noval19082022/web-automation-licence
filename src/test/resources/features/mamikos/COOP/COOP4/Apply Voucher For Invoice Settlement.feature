@@ -23,9 +23,9 @@ Feature: Apply Voucher For Invoice Settlement
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag           | kost name prod           |
-      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
+    And tenant redirect to kost details:
+      | kost path stag                                                              | kost path prod           |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-with-dp  | Kost Adi Auto Voucher DP |
     And tenant booking kost for "tomorrow" and input rent duration equals to 4
     Then tenant should success booking kost
 
