@@ -99,7 +99,7 @@ public class OwnerDashboardPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
-        manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
+        manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
         pengajuanSewaBtn = playwright.getButtonBySetName("Pengajuan Sewa");
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
