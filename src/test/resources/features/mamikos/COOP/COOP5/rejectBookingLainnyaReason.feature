@@ -21,9 +21,9 @@ Feature: OB Reject Booking With Lainnya Reason
 
   Scenario: create booking
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
+    When tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-11 | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 

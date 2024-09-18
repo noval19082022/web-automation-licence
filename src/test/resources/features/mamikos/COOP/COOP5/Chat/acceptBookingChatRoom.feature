@@ -28,9 +28,9 @@ Feature: Accept Booking from Chat room
       When user login as tenant via phone number:
         | phone stag    | phone prod    | password      |
         | 08100000622   | 0890867321212 | qwerty123     |
-      And tenant search kost then go to kost details:
-        | kost name stag            | kost name prod            |
-        | Kost Automation New Coop Kece | Kost Adi Auto FullPaid AddFee Deposit       |
+      And tenant redirect to kost details:
+        | kost path stag                                               | kost path prod               |
+        | kost-halmahera-utara-kost-campur-murah-kost-automation-new-1 | Kos DC BAR Automation Tipe A |
       And tenant booking kost for "today"
       Then tenant should success booking kost
 

@@ -7,9 +7,9 @@ Feature: Kost Validation
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
       | 081000000910   |  0891111020199  | qwerty123    |
-    And tenant search kost then go to kost details:
-      | kost name stag            			    | kost name prod              |
-      | Kost Singgahsini Rocket Tipe F Kediri   | Kost Singgahsini Arac Ipi   |
+    And tenant redirect to kost details:
+      | kost path stag                                                        | kost path prod               |
+      | kost-kediri-kost-campur-murah-kost-singgahsini-rocket-tipe-f-kediri-2 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Belum ada data jenis kelamin"
@@ -20,9 +20,9 @@ Feature: Kost Validation
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
       | 0812000009     |  0812000009     | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag            			    | kost name prod              |
-      | Kost Singgahsini Rocket Tipe F Kediri   | Kost Singgahsini Arac Ipi   |
+    And tenant redirect to kost details:
+      | kost path stag                                                        | kost path prod               |
+      | kost-kediri-kost-campur-murah-kost-singgahsini-rocket-tipe-f-kediri-2 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Kos ini khusus untuk karyawan"
@@ -39,10 +39,10 @@ Feature: Kost Validation
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
-      | 08100000616    |  0891111020199  | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag            			                 | kost name prod              |
-      | Kost Singgahsini Rocket Kediri Tipe A Badas Kediri   | Kost Singgahsini Arac Ipi   |
+      | 08100000616    |  0891111020199  | qwerty123    |
+    And tenant redirect to kost details:
+      | kost path stag                                                                     | kost path prod               |
+      | kost-kediri-kost-campur-murah-kost-singgahsini-rocket-kediri-tipe-a-badas-kediri-2 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Kos ini khusus untuk mahasiswa"
@@ -60,9 +60,9 @@ Feature: Kost Validation
     When user login as tenant via phone number:
       | phone stag     |  phone prod     | password     |
       | 08100000623  |  0891111020199  | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag            			    | kost name prod              |
-      | Kost Singgahsini Rocket Tipe E Kediri   | Kost Singgahsini Arac Ipi   |
+    And tenant redirect to kost details:
+      | kost path stag                                                        | kost path prod               |
+      | kost-kediri-kost-campur-murah-kost-singgahsini-rocket-tipe-e-kediri-2 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant booking kost for "Tomorrow"
     Then tenant should reach booking form

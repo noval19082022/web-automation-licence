@@ -12,15 +12,15 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
   @TEST_SSCOOP-3511 @Automated @kost-saya-revamp-phase1 @web @xray-update @TEST_SSCOOP-3565
   Scenario: [Home Page][Kost Saya Section ]Check kost saya section when have Cancelled status and have Draft booking
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                     | kost name prod                        |
-      | Kost Surabaya Cancel Booking Homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-surabaya-cancel-booking-homepage-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag           | kost name prod                        |
-      | Kost Cibinong Bogor COOP Kece | Kost Adi Auto FullPaid AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kota-depok-kost-putra-murah-kost-cibinong-bogor-coop-kece-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "Tomorrow"
     And user click back button
     And user click Save Draft Button
@@ -39,15 +39,15 @@ Feature: BnB feature with background Delete All Need Confirmation Booking Reques
   @TEST_SS-3545 @Automated @kost-saya-revamp-phase1 @web @xray-update
   Scenario: [Homepage ][Coba cara baru bayar kos]Check when tenant not have booked status (batalkan booking) and draft booking (delete draft)
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                     | kost name prod                        |
-      | Kost Surabaya Cancel Booking Homepage Tobelo Utara Halmahera Utara | Kost Adi Auto FullPaid AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kota-depok-kost-putra-murah-kost-cibinong-bogor-coop-kece-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     Then tenant should success booking kost
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag               | kost name prod                        |
-      | Kos Papalova Rajeg Tangerang | Kost Adi Auto FullPaid AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kos-papalova-rajeg-tangerang-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "Tomorrow"
     And user click back button
     And user click Save Draft Button

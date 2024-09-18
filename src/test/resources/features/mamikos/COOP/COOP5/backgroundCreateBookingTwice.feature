@@ -9,9 +9,9 @@ Feature: BnB feature with background create booking twice
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                        | kost name prod            |
-      | Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara | Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara|
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                         | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-purwokerto-reject-n-waiting-feature-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And tenant search kost then go to kost details:

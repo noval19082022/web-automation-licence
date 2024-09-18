@@ -9,9 +9,9 @@ Feature: BnB feature with background booking kost - reject booking
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Mini Regression Rajeg Tangerang | Kost Adi Auto FullPaid AddFee Deposit|
+    And tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-eksklusif-kost-mini-regression-rajeg-tangerang | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user
