@@ -1,4 +1,4 @@
-@DOM3 @platfrom
+@DOM3 @platfrom @PLATFORM_SEARCH_MIGRATE
 Feature: [Test-Execution][DOM] Web - Platform
 
   @TEST_SS-2974 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
@@ -31,9 +31,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_SS-2993 @Automated @web-covered
   Scenario: [Web][Pop up login] Tenant - Click Maps
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                             | kost name prod               |
-      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-desta-kost-tobello-tobelo-halmahera-utara | Kos DC BAR Automation Tipe G |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     And user click back button in login page
@@ -52,9 +52,9 @@ Feature: [Test-Execution][DOM] Web - Platform
   @TEST_SS-5134 @Automated @DOM3 @web-covered
   Scenario: [Login][Owner] Login From Detail Page
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                             | kost name prod               |
-      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-desta-kost-tobello-tobelo-halmahera-utara | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up
@@ -65,9 +65,9 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
-    And tenant search kost then go to kost details:
-      | kost name stag                             | kost name prod               |
-      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-desta-kost-tobello-tobelo-halmahera-utara | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see tanya alamat lengkap button
     Then user want to ask kost address
 
