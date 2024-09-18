@@ -1,4 +1,4 @@
-@DOM4
+@DOM4 @NAVBAR_SEARCH_MIGRATE
 Feature: Navbar Tenant
 
   @TEST_SS-3221 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-search
@@ -32,9 +32,9 @@ Feature: Navbar Tenant
   @TEST_SS-3181 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod                                      |
-      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-b-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then user in kost detail navbar before login appears
 
   @TEST_SS-3217 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-after-login @navbar-search
@@ -90,8 +90,8 @@ Feature: Navbar Tenant
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 089988776655 | 089988776655 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod                                      |
-      | ATCOOP12 Kos Dom Automation PLM Tipe B Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-b-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     Then navbar after login appears
 

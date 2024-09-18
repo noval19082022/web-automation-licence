@@ -1,4 +1,4 @@
-@DOM3 @essentialTest
+@DOM3 @essentialTest @REGISTER_SEARCH_MIGRATE
 Feature: New Flow Register Tenant
 
   @navigateToRegisterPageTenant @TEST_SS-3065 @Automated @DOM3 @web-covered
@@ -232,9 +232,9 @@ Feature: New Flow Register Tenant
   @TEST_SS-3087
   Scenario: Register Tenant - tenant register from kost detail
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-b-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user clicks on Enter button Tenant
     And user clicks on Register button
     Then user redirected to "/register-pencari?source=property%20detail%20page"

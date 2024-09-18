@@ -1,12 +1,12 @@
-@DOM1
+@DOM1 @MARS_SEARCH_MIGRATE
 Feature: Mars Project
 
   @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check functionality FTUE Pop Up Before Send Chat
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 0888881241     | 0888881241     | qamamikos123    |
+      | phone stag | phone prod | password     |
+      | 0888881241 | 0888881241 | qamamikos123 |
     * owner wants to accsess chatroom
     Then owner will see card box contains "Sisa Kuota"
     * owner will see card box contains "Daftar GoldPlus"
@@ -26,8 +26,8 @@ Feature: Mars Project
   Scenario: [Web][Mars] Owner runs out of quota
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password      |
-      | 0888881241     | 0888881243     | qamamikos123  |
+      | phone stag | phone prod | password     |
+      | 0888881241 | 0888881243 | qamamikos123 |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
     And search chat in chatlist "Vu Zet"
@@ -37,8 +37,8 @@ Feature: Mars Project
   Scenario: [Web][Mars] Owner registered as goldplus
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 0888881251     | 083132396282   | qamamikos    |
+      | phone stag | phone prod   | password  |
+      | 0888881251 | 083132396282 | qamamikos |
     * owner wants to accsess chatroom
     Then owner will see card box contains "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."
@@ -54,8 +54,8 @@ Feature: Mars Project
   Scenario: [Web][Mars] Check the appearence of Mars
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 0888881241     | 0888881241     | qamamikos123 |
+      | phone stag | phone prod | password     |
+      | 0888881241 | 0888881241 | qamamikos123 |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
     And user see the appearence of Mars chatlist
@@ -66,11 +66,11 @@ Feature: Mars Project
   Scenario: [Web][Mars] Hide owner last seen on kost chatroom
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0888881476    | 083176408442  | qwerty123    |
-    And tenant search kost then go to kost details:
-      | kost name stag                                    | kost name prod                         |
-      | Kost Doraemon The Explorer Cilacap Tengah Cilacap | Kos Dom Automation Distrik Misool Raja |
+      | phone stag | phone prod   | password  |
+      | 0888881476 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod                         |
+      | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
@@ -80,11 +80,11 @@ Feature: Mars Project
   Scenario: [Web][Mars] Check autoreply of chat on P2 Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0888881476    | 083176408442  | qwerty123    |
-    And tenant search kost then go to kost details:
-      | kost name stag                                    | kost name prod                         |
-      | Kost Doraemon The Explorer Cilacap Tengah Cilacap | Kos Dom Automation Distrik Misool Raja |
+      | phone stag | phone prod   | password  |
+      | 0888881476 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod                         |
+      | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
@@ -94,11 +94,11 @@ Feature: Mars Project
   Scenario: [Web][Mars] Check autoreply of chat on P1 Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0888881476    | 083176408442  | qwerty123    |
-    And tenant search kost then go to kost details:
-      | kost name stag   | kost name prod   |
-      | Kos Laris Kretek | Kos Laris Kretek |
+      | phone stag | phone prod   | password  |
+      | 0888881476 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                       | kost path prod   |
+      | kost-bantul-kost-campur-eksklusif-kos-laris-kretek-1 | Kos Laris Kretek |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
