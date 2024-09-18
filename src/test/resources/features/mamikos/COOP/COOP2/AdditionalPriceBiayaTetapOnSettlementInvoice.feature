@@ -26,9 +26,9 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
     When user login as tenant via phone number:
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                                 | kost name prod                                 |
-      | Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera | Kost Bagas Dp Only Automation Tobelo Halmahera |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                            | kost path prod                                 |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-dp-only-automation-tobelo-halmahera-utara | Kost Bagas Dp Only Automation Tobelo Halmahera |
     And tenant booking kost
     Then tenant should success booking kost
 

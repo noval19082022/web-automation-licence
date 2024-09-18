@@ -26,9 +26,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
     When user login as tenant via phone number:
       | phone stag   | phone prod    | password  |
       | 087708777618 | 0890867321212 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                                    | kost name prod            |
-      | Test Regression Kost Bagas Automation Add Tobelo Halmahera Utara  | Kost Adi Auto SinggahSini |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                        | kost path prod            |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-automation-add-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
