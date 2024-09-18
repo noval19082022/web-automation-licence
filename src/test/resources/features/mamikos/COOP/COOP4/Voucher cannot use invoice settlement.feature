@@ -21,7 +21,7 @@ Feature: Voucher cannot use invoice settlement
   @tenantBookingKos
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
+    And tenant redirect to kost details:
       | kost path stag                                                | kost path prod            |
       | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-1 | Kost Wild Rift Settlement |
     And tenant booking kost for "today" and input rent duration equals to 4
