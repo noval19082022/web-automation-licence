@@ -22,9 +22,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   @SS-4983
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                           | kost name prod            |
-      | Test Automation Kost First Invoice Bagas Hahahehe Tobelo Halmahera Utara | Kost Adi Auto SinggahSini |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                | kost path prod            |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-first-invoice-bagas-hahahehe-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 

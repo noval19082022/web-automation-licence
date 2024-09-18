@@ -25,9 +25,9 @@ Feature: addOns Fee Recurring Invoice Negative
   @SS-4947
   Scenario: [Add Ons - Fee Recurring Invoice Negative Scenario] Tenant booking kos
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod        |
-      | Kost Adi Auto Add Ons | Kost Adi Auto Add Ons |
+    And tenant redirect to kost details:
+      | kost path stag                                                                    | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons  | Kost Adi Auto Add Ons |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 

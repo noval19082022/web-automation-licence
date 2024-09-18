@@ -23,9 +23,9 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
   @SS-4975
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                        | kost name prod                                        |
-      | Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                             | kost path prod                                        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-automation-hahahehe-tobelo-halmahera-utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |
     When tenant booking kost
     Then tenant should success booking kost
 
