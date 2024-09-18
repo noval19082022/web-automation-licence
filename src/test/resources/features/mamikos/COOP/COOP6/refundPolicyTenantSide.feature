@@ -7,9 +7,9 @@ Feature: Update Refund Policy kost pilar 1 and reguler
     When user login as tenant via phone number:
       | phone stag     | phone prod    | password      |
       | 0890000000314  | 0890000000314 | Bismillah@01  |
-    And tenant search kost then go to kost details:
-      | kost name stag       | kost name prod       |
-      | Kost Garden Abepura  | Kost Garden Abepura  |
+    And tenant redirect to kost details:
+      | kost path stag                                      | kost path prod               |
+      | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     Then tenant can see refund policy on kost detail
     When tenant click bagaimana ketentuannya
     Then tenant can see refund policy information with:
@@ -28,9 +28,9 @@ Feature: Update Refund Policy kost pilar 1 and reguler
     When user login as tenant via phone number:
       | phone stag     | phone prod    | password      |
       | 0890000000314  | 0890000000314 | Bismillah@01  |
-    And tenant search kost then go to kost details:
-      | kost name stag                  | kost name prod       |
-      | Kost Cibinong Bogor COOP Kece   | kost cibinong bogor  |
+    And tenant redirect to kost details:
+      | kost path stag                                                   | kost path prod               |
+      | kost-kota-depok-kost-putra-murah-kost-cibinong-bogor-coop-kece-2 | Kos DC BAR Automation Tipe A |
     And user dismiss FTUE booking benefit
     Then tenant can see refund policy on kost detail
     When tenant click bagaimana ketentuannya
