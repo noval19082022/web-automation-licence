@@ -23,9 +23,9 @@ Feature: [Web][Profile page] feature with background navigate profile page
 		
 		  #Scenario: create booking
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                             | kost name prod |
-      | Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara | Kost Reykjavik |
+    And tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-kota-payakumbuh-kost-campur-eksklusif-kost-singgahsini-noval-tipe-a-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
 

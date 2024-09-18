@@ -17,9 +17,9 @@ Feature: Tiki Taka - Bank Account
       | phone stag  | phone prod  | password  |
       | 0816000001  | 0816000001  | qwerty123 |
     And user cancel booking
-    When tenant search kost then go to kost details:
-      | kost name stag                                           | kost name prod                                           |
-      | Kost Fahmi Singgahsini Pertama Indralaya Utara Ogan Ilir | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kabupaten-ogan-ilir-kost-campur-eksklusif-kost-fahmi-singgahsini-pertama-indralaya-utara-ogan-ilir-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user
@@ -83,9 +83,9 @@ Feature: Tiki Taka - Bank Account
       | phone stag  | phone prod  | password  |
       | 0816000001  | 0816000001  | qwerty123 |
     And user cancel booking
-    When tenant search kost then go to kost details:
-      | kost name stag                                           | kost name prod                                           |
-      | Kost Scenario Tujuh Balik Bukit Lampung Barat | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-tujuh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user

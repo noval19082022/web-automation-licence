@@ -23,9 +23,9 @@ Feature: Accept Booking from Chat room with DP
   @rentKostMonthWithDP
   Scenario: Tenant booking Bulanan for Kost set DP
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag      | kost name prod                        |
-      | Kost Automation New Coop Kece | Kost Adi Auto FullPaid AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-halmahera-utara-kost-campur-murah-kost-automation-new-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 

@@ -9,9 +9,9 @@ Feature: BnB feature with background booking until rejected by owner
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                        | kost name prod                                           |
-      | Kost Gowongan Jaya Pancoran Mas Depok | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                           | kost path prod               |
+      | kost-kota-depok-kost-putri-murah-kost-gowongan-jaya-pancoran-mas-depok-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user

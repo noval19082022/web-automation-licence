@@ -49,9 +49,9 @@
     And owner click kriteria penyewa with "Boleh bawa anak"
     And owner click Simpan at Peraturan Masuk Kos page
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                     | kost name prod                                            |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     Then tenant can see peraturan kost with "Boleh bawa anak"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -122,9 +122,9 @@
     And owner click kriteria penyewa with "Boleh untuk pasutri"
     And owner click Simpan at Peraturan Masuk Kos page
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                    | kost name prod                                            |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     Then tenant can see peraturan kost with "Boleh pasutri"
 
   @TEST_SS-3454 @TEST_SS-3446 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
@@ -146,9 +146,9 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                    | kost name prod                                            |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     Then tenant can see peraturan kost with "Khusus Mahasiswa"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -160,9 +160,9 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                     | kost name prod                                            |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     Then tenant can see peraturan kost with "Khusus karyawan"
     When owner navigates to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -202,9 +202,9 @@
 
   #Scenario: tenant booking today
       Given user go to mamikos homepage
-      And tenant search kost then go to kost details:
-        | kost name stag                               | kost name prod         |
-        | Kost Mars September Rajeg Tangerang          | Dont Starve To Get Her |
+      And tenant redirect to kost details:
+        | kost path stag                                                                 | kost path prod               |
+        | kost-kabupaten-tangerang-kost-campur-murah-kost-mars-september-rajeg-tangerang | Kos DC BAR Automation Tipe A |
       And tenant booking kost
       Then tenant should success booking kost
 
@@ -233,9 +233,9 @@
 
   #Scenario: tenant booking today
       Given user go to mamikos homepage
-      And tenant search kost then go to kost details:
-        | kost name stag                               | kost name prod         |
-        | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
+      And tenant redirect to kost details:
+        | kost path stag                                                                            | kost path prod               |
+        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
       Then tenant see today's date and cannot make booking
 
     @TEST_SS-3337
@@ -263,9 +263,9 @@
 
   #Scenario: tenant booking today
       Given user go to mamikos homepage
-      And tenant search kost then go to kost details:
-        | kost name stag                               | kost name prod         |
-        | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
+      And tenant redirect to kost details:
+        | kost path stag                                                                            | kost path prod               |
+        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
       Then tenant see today's date and cannot make booking
 
     @TEST_SS-3336
@@ -296,9 +296,9 @@
 
   #Scenario: tenant booking today
       Given user go to mamikos homepage
-      And tenant search kost then go to kost details:
-        | kost name stag                               | kost name prod         |
-        | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
+      And tenant redirect to kost details:
+        | kost path stag                                                                            | kost path prod               |
+        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
       Then tenant can choose checkin date in the next "1" week
 
     @TEST_COOP-916
@@ -329,7 +329,7 @@
 
   #Scenario: tenant booking today
       Given user go to mamikos homepage
-      And tenant search kost then go to kost details:
-        | kost name stag                               | kost name prod         |
-        | Kost Primaya Tangerang Pasar Kemis Tangerang | Dont Starve To Get Her |
+      And tenant redirect to kost details:
+        | kost path stag                                                                            | kost path prod               |
+        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
       Then tenant can choose checkin date in the next "4" month
