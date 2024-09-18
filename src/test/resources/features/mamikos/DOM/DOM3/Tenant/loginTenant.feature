@@ -1,4 +1,4 @@
-@regression @loginTenant @DOM3 @essentialTest
+@regression @loginTenant @DOM3 @essentialTest @LOGIN_SEARCH_MIGRATE
 Feature: Tenant - Login
 
   @loginByFB @TEST_SS-2977
@@ -73,18 +73,18 @@ Feature: Tenant - Login
   @fromListingDetailPageClickFavorite @TEST_SS-3057
   Scenario: Pop up login - Click Favorite
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                              | kost name prod                                      |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user can favorite kost not login
     Then user see login pop up in favorite page
 
   @fromListingDetailPageClickMaps @TEST_SS-3058
   Scenario: Pop up login - Click Maps
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     Then user want to reached map section and see lihat peta button
     When user want to see more detail kost location
     Then user see login pop up in favorite page
@@ -129,47 +129,47 @@ Feature: Tenant - Login
   @TEST_SS-3060
   Scenario: [Login Tenant] - tenant login by click lihat fasilitas kamar
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos Dom Automation PLM Tipe G Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                                                         | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-g-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user want to see more detail room facility section on the kost detail page
     And user login from kost detail via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0879864312548 | 08100000622   | qwerty123    |
+      | phone stag    | phone prod  | password  |
+      | 0879864312548 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     Then user tenant profile picture is shown
 
   @TEST_SS-3061
   Scenario: [Login Tenant] - tenant login by click lihat fasilitas umum
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     And user want to see more detail facility umum
     And user login from kost detail via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0879864312548 | 08100000622   | qwerty123    |
+      | phone stag    | phone prod  | password  |
+      | 0879864312548 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     Then user tenant profile picture is shown
 
   @TEST_SS-3062
   Scenario: [Login Tenant] - tenant login with facebook in landing page
     Given user go to mamikos homepage
-      When user search keyword:
-        | search stag | search prod |
-        | UGM         | UGM         |
-      And user login as tenant via facebook:
-        | email stag          | email prod          | password           |
-        | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-      And user navigate to kost saya page
-      Then user tenant profile picture is shown
+    When user search keyword:
+      | search stag | search prod |
+      | UGM         | UGM         |
+    And user login as tenant via facebook:
+      | email stag          | email prod          | password           |
+      | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
+    And user navigate to kost saya page
+    Then user tenant profile picture is shown
 
   @TEST_SS-3063
   Scenario: [Login Tenant] - tenant login with facebook in detail kos
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     And user login as tenant via facebook:
       | email stag          | email prod          | password           |
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
