@@ -1,7 +1,7 @@
 @COOP4
 Feature: Apply Voucher Monthly For Contract Duration
 
-  @TEST_SS-4264 @Automated @COOP @Web
+  @Automated @COOP @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -23,9 +23,9 @@ Feature: Apply Voucher Monthly For Contract Duration
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod        |
-      | Kost Adi Auto Regular | Kost Adi Auto Regular |
+    And tenant redirect to kost details:
+      | kost path stag                                                                | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1  | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 
@@ -39,6 +39,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | Adi Auto Voucher Dua | Adi Auto Voucher Dua |
     Then owner should redirect back to pengajuan booking page
 
+  @TEST_SS-4264
   Scenario: Tenant Apply Voucher AUTOMONTHLY
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -72,9 +73,9 @@ Feature: Apply Voucher Monthly For Contract Duration
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod        |
-      | Kost Adi Auto Regular | Kost Adi Auto Regular |
+    And tenant redirect to kost details:
+      | kost path stag                                                                | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1  | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
@@ -88,6 +89,7 @@ Feature: Apply Voucher Monthly For Contract Duration
       | Adi Auto Voucher Dua | Adi Auto Voucher Dua |
     Then owner should redirect back to pengajuan booking page
 
+  @TEST_SS-4264
   Scenario: Tenant Apply Voucher AUTOMONTHLY
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -99,4 +101,3 @@ Feature: Apply Voucher Monthly For Contract Duration
       | voucher name stag | voucher name prod |
       | AUTOMONTHLY       | AUTOMONTHLY       |
     Then tenant can see voucher is applied
-		

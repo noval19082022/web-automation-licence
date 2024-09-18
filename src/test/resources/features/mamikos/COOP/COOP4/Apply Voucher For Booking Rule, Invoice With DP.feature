@@ -1,7 +1,6 @@
 @COOP4
 Feature: Apply Voucher For Booking Rule, Invoice With DP
 
-  @TEST_SS-4256
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -23,9 +22,9 @@ Feature: Apply Voucher For Booking Rule, Invoice With DP
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag           | kost name prod           |
-      | Kost Adi Auto Voucher DP | Kost Adi Auto Voucher DP |
+    And tenant redirect to kost details:
+      | kost path stag                                                              | kost path prod           |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-with-dp  | Kost Adi Auto Voucher DP |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -100,7 +99,7 @@ Feature: Apply Voucher For Booking Rule, Invoice With DP
       | AUTOFPAIDRECSET   | AUTOFPAIDRECSET   |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."
 
-  @continue
+  @continue @TEST_SS-4256
   Scenario: Invoice DP and Voucher For DP
     When tenant set active page to 1
     And tenant input voucher:
