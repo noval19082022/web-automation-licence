@@ -1,4 +1,4 @@
-@DOM4 @essentialTest
+@DOM4 @essentialTest @CHAT_SEARCH_MIGRATE
 Feature: Chat and Chat Optimization
 
   @TEST_SS-3290
@@ -15,9 +15,9 @@ Feature: Chat and Chat Optimization
   @TEST_SS-3291
   Scenario: [Dweb][Kost Detail][Chat] Show login pop up when click chat button without login
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                                      | kost name prod                                      |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then user login from kost detail via phone number:
@@ -30,9 +30,9 @@ Feature: Chat and Chat Optimization
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                      | kost name prod                                      |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                                      |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then user see phone number field and selectable question options :
@@ -60,9 +60,9 @@ Feature: Chat and Chat Optimization
     And user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                      | kost name prod                             |
-      | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Kost Automation Mix Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul | Kost Automation Mix Tobelo Halmahera Utara |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "Cara menghubungi pemilik?"
@@ -75,8 +75,8 @@ Feature: Chat and Chat Optimization
   Scenario: [Dweb][Kost Detail][Chat] Owner can send message to Tenant
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 08888812912  | 083132824758 | qwerty123 |
+      | phone stag  | phone prod   | password  |
+      | 08888812912 | 083132824758 | qwerty123 |
     And user click chat button in top bar owner home page
     And search chat in chatlist "Coop Chat Automation"
     And user dismiss FTUE TBC
@@ -90,47 +90,49 @@ Feature: Chat and Chat Optimization
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                             | kost name prod                                             |
-      | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                         | kost path prod                                             |
+      | kost-kabupaten-cilacap-kost-putri-eksklusif-kos-bx-automation-bbk-non-available-cilacap-tengah-cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
     And user sees the Booking button disable
 
-  @TEST_SS-3266
+  @TEST_SS-3266 @CHAT_OUTLINE_SEARCH_MIGRATE
   Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 0888881477   | 083176408442 | qwerty123 |
-    And user search for Kost with name "<property>" and selects matching result
+      | phone stag | phone prod   | password  |
+      | 0888881477 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag | kost path prod                             |
+      | <property>     | Kost Automation Mix Tobelo Halmahera Utara |
     And tenant dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "<question>"
     And user click send chat from popup
     Then user see autoreply message "<autoreply text>"
     Examples:
-      | name                     | property                                            | question                  | autoreply text                                                                                                                                          |
-      | Ada diskon               | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
-      | Masih ada kamar          | Kos Dom Automation PLM Tipe E Kretek Bantul         | Masih ada kamar?          | Ada. Di kos ini masih ada 10 kamar kosong, sesuai update dari pemilik pada                                                                              |
-      | Tanya-tanya dulu         | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
-      | Cara menghubungi pemilik | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
-      | Alamat kos di mana       | ATDOM12 Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                                                                            |
-      | Bisa pasutri             | Kos Dom Automation PLM Tipe C Kretek Bantul         | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
-      | Tidak bisa pasutri       | Kos Dom Automation PLM Tipe E Kretek Bantul         | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
-      | Boleh bawa hewan         | Kos Dom Automation PLM Tipe C Kretek Bantul         | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
-      | Tidak boleh bawa hewan   | Kos Dom Automation PLM Tipe E Kretek Bantul         | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
+      | name                     | property                                                                                                                            | question                  | autoreply text                                                                                                                                          |
+      | Ada diskon               | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
+      | Masih ada kamar          | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Masih ada kamar?          | Ada. Di kos ini masih ada 10 kamar kosong, sesuai update dari pemilik pada                                                                              |
+      | Tanya-tanya dulu         | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
+      | Cara menghubungi pemilik | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
+      | Alamat kos di mana       | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                                                                            |
+      | Bisa pasutri             | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-c-kretek-bantul                                             | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
+      | Tidak bisa pasutri       | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
+      | Boleh bawa hewan         | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-c-kretek-bantul                                             | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
+      | Tidak boleh bawa hewan   | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
 
   @TEST_SS-3269
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
-      | 0888881477   | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                          | kost name prod                                         |
-      | Kos BX Automation BBK Available Cilacap Selatan Cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |
+      | phone stag | phone prod   | password  |
+      | 0888881477 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod                                         |
+      | kost-kabupaten-cilacap-kost-putra-eksklusif-kos-bx-automation-bbk-available-cilacap-selatan-cilacap | Kos BX Automation BBK Available Tobelo Halmahera Utara |
     And tenant booking kost
     Then tenant should success booking kost
     And tenant navigate to riwayat and draf booking
@@ -146,16 +148,18 @@ Feature: Chat and Chat Optimization
     When user login as tenant via phone number:
       | phone stag  | phone prod   | password  |
       | 08999222999 | 083176408442 | qwerty123 |
-    And user search for Kost with name "<property>" and selects matching result
+    And tenant redirect to kost details:
+      | kost path stag | kost path prod                             |
+      | <property>     | Kost Automation Mix Tobelo Halmahera Utara |
     And user click chat in kos detail
     And user select question "Boleh tanya-tanya dulu?"
     And user click send chat from popup
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
     And user clicks the Lihat Iklan button and redirect to detail property
     Examples:
-      | property                                                   |
-      | Kos BX Automation Non BBK Cilacap Selatan Cilacap          |
-      | Kos BX Automation BBK Non Available Cilacap Tengah Cilacap |
+      | property                                                                                               |
+      | kost-kabupaten-cilacap-kost-putra-eksklusif-kos-bx-automation-non-bbk-cilacap-selatan-cilacap          |
+      | kost-kabupaten-cilacap-kost-putri-eksklusif-kos-bx-automation-bbk-non-available-cilacap-tengah-cilacap |
 
   @TEST_SS-3259
   Scenario: [Dweb][Apartemen Detail][Chat] Check roomcard on apartemen should not display
