@@ -23,7 +23,7 @@ Feature: Apply Voucher Monthly For Contract Duration
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
-    And tenant search kost then go to kost details:
+    And tenant redirect to kost details:
       | kost path stag                                                                | kost path prod        |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1  | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Bulan"

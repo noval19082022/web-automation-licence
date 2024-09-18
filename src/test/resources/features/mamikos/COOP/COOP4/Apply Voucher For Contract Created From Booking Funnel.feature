@@ -22,7 +22,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
+    And tenant redirect to kost details:
       | kost path stag                                        | kost path prod                                        |
       | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  |
     And tenant booking kost for "today" and input rent duration equals to 2

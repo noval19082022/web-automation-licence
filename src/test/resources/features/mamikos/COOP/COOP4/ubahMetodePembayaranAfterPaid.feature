@@ -23,7 +23,7 @@ Feature: Click Button Ubah Metode Pembayaran After Paid
   @tenantBookingKos
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
+    And tenant redirect to kost details:
       | kost path stag                                        | kost path prod |
       | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 4
