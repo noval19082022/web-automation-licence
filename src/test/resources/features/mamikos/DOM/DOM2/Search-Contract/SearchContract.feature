@@ -155,9 +155,9 @@ Feature: Search Contract
 
 		#  Scenario: Tenant booking and payment for weekly period
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod       |
-      | Desta Automation Tobelo Halmahera Utara | kost payment desta 2 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                             | kost path prod       |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-desta-automation-tobelo-halmahera-utara-2 | kost payment desta 2 |
     And tenant booking kost for "today"
 
 		#  Scenario: Owner accept booking from tenant
