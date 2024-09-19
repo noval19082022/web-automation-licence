@@ -49,23 +49,29 @@ public class AdminMamipayAdditionalPriceSteps {
 
     @Then("admin can sees total cost is basic amount + deposit fee + additional fee + admin fee")
     public void adminCanSeesTotalCostIsBasicAmountDepositFeeAdditionalFeeAdminFee() {
+        Assert.assertTrue(invoiceAdmin.isToastVisible());
         Integer totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
         Integer deposit = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
         Integer basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Basic Amount").split(",", 2)[0]);
         Integer otherPrice = invoiceAdmin.getOtherPriceNumber("Biaya Tetap");
         Integer adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
-        Integer totalToAssert = deposit + basicAmount + otherPrice + adminFee;
+        Integer discountAdmin = invoiceAdmin.getOtherPriceNumber("Admin Discount");
+
+        Integer totalToAssert = deposit + basicAmount + otherPrice + adminFee - discountAdmin ;
         Assert.assertEquals(totalCost, totalToAssert, "Is not match");
     }
 
 
     @Then("admin can sees total cost is basic amount + deposit fee + admin fee")
     public void admin_can_sees_total_cost_is_basic_amount_deposit_fee_admin_fee() {
+        Assert.assertTrue(invoiceAdmin.isToastVisible());
         Integer totalCost = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Total Amount").split(",", 2)[0]);
         Integer deposit = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Invoice Deposit Fee").split(",", 2)[0]);
         Integer basicAmount = JavaHelpers.extractNumber(invoiceAdmin.getInvoiceElementValue("Basic Amount").split(",", 2)[0]);
         Integer adminFee = invoiceAdmin.getOtherPriceNumber("Admin");
-        Integer totalToAssert = deposit + basicAmount + adminFee;
+        Integer discountAdmin = invoiceAdmin.getOtherPriceNumber("Admin Discount");
+
+        Integer totalToAssert = deposit + basicAmount + adminFee - discountAdmin;
         Assert.assertEquals(totalCost, totalToAssert, "Is not match");
     }
 
