@@ -68,6 +68,7 @@ public class MamikosListInvoicePO {
     Locator updateFeeAdditionalPriceButton;
     Locator actionResult;
     Locator editBasicAmountButton;
+    private Locator toastMessage;
 
     public MamikosListInvoicePO(Page page) {
         this.page = page;
@@ -124,6 +125,7 @@ public class MamikosListInvoicePO {
         updateFeeAdditionalPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Fee"));
         actionResult = page.getByText("The cost value must be an integer.");
         editBasicAmountButton = page.locator("//i[@class='fa fa-edit']");
+        toastMessage = page.locator(".callout");
     }
 
     /**
@@ -721,4 +723,11 @@ public class MamikosListInvoicePO {
         }
     }
 
+    /**
+     * Check toast message visible or not
+     * @return boolean
+     */
+    public Boolean isToastVisible() {
+        return playwright.isLocatorVisibleAfterLoad(toastMessage,5000.0);
+    }
 }
