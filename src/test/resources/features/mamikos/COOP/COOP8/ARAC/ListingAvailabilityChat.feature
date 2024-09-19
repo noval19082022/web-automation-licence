@@ -8,9 +8,9 @@
       When user login as tenant via phone number:
         | phone stag     |  phone prod     | password     |
         | 0891111020199  |  0891111020199  | mamikosqa123 |
-      And tenant search kost then go to kost details:
-        | kost name stag               | kost name prod               |
-        | Kost General Irvi Automation Abiansemal Badung | Kost General Irvi Automation |
+      And tenant redirect to kost details:
+        | kost path stag                                                                               | kost path prod               |
+        | kost-kabupaten-badung-kost-campur-eksklusif-kost-general-irvi-automation-abiansemal-badung-1 | Kos DC BAR Automation Tipe A |
       And user click chat in kos detail
       And user select question "Halo, ada kos yang masih kosong?"
       And user click send chat from popup
@@ -23,9 +23,9 @@
       When user login as tenant via phone number:
         | phone stag     |  phone prod     | password     |
         | 0891111020199  |  0891111020199  | mamikosqa123 |
-      And tenant search kost then go to kost details:
-        | kost name stag                       | kost name prod                       |
-        | Kost Singgahsini Full Ipi Automation Denpasar Utara Denpasar | Kost Singgahsini Full Ipi Automation |
+      And tenant redirect to kost details:
+        | kost path stag                                                                                      | kost path prod               |
+        | kost-kota-denpasar-kost-campur-murah-kost-singgahsini-full-ipi-automation-denpasar-utara-denpasar-2 | Kos DC BAR Automation Tipe A |
       And tenant can see kamar penuh
       Then tenant can see "Ikut daftar tunggu" button
 

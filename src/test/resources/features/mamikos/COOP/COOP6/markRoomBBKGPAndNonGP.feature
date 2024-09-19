@@ -22,9 +22,9 @@ Feature: Owner - Penyewa Feature
 
 #  Scenario: create booking
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                                 | kost name prod |
-      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-putra-murah-kost-singgahsini-noval-tipe-c-tobelo-utara-halmahera-utara-arac-grade-a-tobelo-halmahera-utara-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -112,9 +112,9 @@ Feature: Owner - Penyewa Feature
 
     # Scenario: tenant booking kost
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                    |
-      | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                                     | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-bima-booking-dp-biaya-lain-dan-denda-automation-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 

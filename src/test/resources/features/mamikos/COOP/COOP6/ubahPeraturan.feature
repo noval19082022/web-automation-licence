@@ -245,6 +245,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
+      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
       And owner click on dropdown waktu masuk kos
@@ -275,6 +276,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
+      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
       And owner click on dropdown jumlah jarak waktu terjauh
@@ -308,6 +310,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
+      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
       And owner click on dropdown satuan waktu jarak waktu terjauh
