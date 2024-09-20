@@ -2,7 +2,7 @@
 Feature: SinggahSini Tenant Tracker Uncontrolled Property
 
 
-  @SS-4249 @Automated @web
+  @Automated @web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -51,6 +51,7 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
+  @SS-4249
   Scenario: Check-in Fase and Status for Uncontrolled Property
     Given admin go to pms singgahsini
     When admin login pms :
