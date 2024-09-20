@@ -1,7 +1,6 @@
 @COOP3
 Feature: BlockLine Status Dashboard Pms
 
-  @SS-5052
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -45,6 +44,7 @@ Feature: BlockLine Status Dashboard Pms
       | Tenant Wl Eight | Hagaromo Otsutsuki |
     Then owner should redirect back to pengajuan booking page
 
+  @SS-5052
   Scenario: Block line status Waiting for payment
     Given admin go to pms singgahsini
     When admin login pms :
@@ -61,6 +61,7 @@ Feature: BlockLine Status Dashboard Pms
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "0890867321212" without close the page
 
+  @SS-5052
   Scenario: Block line status Waiting for check-in
     Given admin go to pms singgahsini
     When admin login pms :
@@ -77,7 +78,8 @@ Feature: BlockLine Status Dashboard Pms
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 
-  Scenario: Block line status Waiting for check-in
+  @SS-5052
+  Scenario: Block line status Stay - Booking
     Given admin go to pms singgahsini
     When admin login pms :
       | email             | password     |
