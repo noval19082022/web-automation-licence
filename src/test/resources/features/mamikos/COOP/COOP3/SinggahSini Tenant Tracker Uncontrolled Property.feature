@@ -2,7 +2,7 @@
 Feature: SinggahSini Tenant Tracker Uncontrolled Property
 
 
-  @SS-4249 @Automated @web
+  @Automated @web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -22,9 +22,9 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod        |
-      | Kost Adi Auto Regular | Kost Adi Auto Regular |
+    And tenant redirect to kost details:
+      | kost path stag                                                               | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1 | Kost Adi Auto Regular |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -51,6 +51,7 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
+  @SS-4249
   Scenario: Check-in Fase and Status for Uncontrolled Property
     Given admin go to pms singgahsini
     When admin login pms :
