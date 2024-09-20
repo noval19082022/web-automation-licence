@@ -22,9 +22,9 @@ Feature: SinggahSini Tenant Tracker Controlled Property
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                          | kost path prod                                   |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-singgahsini-tobelo-halmahera-utara-1 | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 

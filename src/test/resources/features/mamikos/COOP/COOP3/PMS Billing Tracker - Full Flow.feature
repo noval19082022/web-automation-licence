@@ -17,9 +17,9 @@ Feature: Update Billing tracker flow
       | 08100000214  | 0816000001  | qwerty123 |
     And user cancel booking
     And user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                                                   | kost name prod                                           |
-      | Kost Singgahsini Bundaran Aloha Superior Sidoarjo  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod                                           |
+      | kost-kabupaten-sidoarjo-kost-campur-murah-kost-singgahsini-bundaran-aloha-superior-sidoarjo-2  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
     And user dismiss FTUE booking benefit
     And tenant booking kost for "today"
     And user go to mamikos homepage
