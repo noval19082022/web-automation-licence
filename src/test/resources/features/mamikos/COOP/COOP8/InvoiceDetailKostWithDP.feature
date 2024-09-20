@@ -21,9 +21,9 @@ Feature: Invoice Detail Kost With DP
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod        |
-      | Kost Adi Auto Add Ons | Kost Adi Auto Add Ons |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 

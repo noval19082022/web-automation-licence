@@ -12,7 +12,7 @@ Feature: Listing Availability on Kost Detail
     And user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                                      | kost path prod               |
-      | ost-kabupaten-lampung-barat-kost-campur-murah-kos-dhiandra-auto-listing-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-lampung-barat-kost-campur-murah-kos-dhiandra-auto-listing-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"
     Then tenant should see ajukan sewa button is "enable"
