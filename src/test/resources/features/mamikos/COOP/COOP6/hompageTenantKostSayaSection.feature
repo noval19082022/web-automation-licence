@@ -1,4 +1,4 @@
-@BBM6 @COOP6 @BnBFeature @BnBFeature3
+@BBM6 @COOP6 @BnBFeature @BnBFeature3 @a
 Feature: Homepage - Kost Saya Section
 
   @TEST_SS-3511 @continue
@@ -67,11 +67,11 @@ Feature: Homepage - Kost Saya Section
     And user click delete button on tab one draft booking
     Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag      |
-      | Kost Garden Abepura |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
-    And tenant booking kost for "tomorrow"
+    And tenant booking kost for "Tomorrow"
     And user click back button
     Then tenant verify the confirmation cancel booking pop up
     And user click Save Draft Button
@@ -92,11 +92,11 @@ Feature: Homepage - Kost Saya Section
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag      |
-      | Kost Garden Abepura |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
-    And tenant booking kost "today" "Per Bulan"
+    And tenant booking kost for "Tomorrow"
     Then tenant should success booking kost
     When user go to mamikos homepage
     Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"
@@ -118,9 +118,9 @@ Feature: Homepage - Kost Saya Section
     And user click Mau Coba Dong section at homepage
     Then user will see kos saya is still empty
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                               |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "tomorrow"
     And user click back button
@@ -143,9 +143,9 @@ Feature: Homepage - Kost Saya Section
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                               |
-      | Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost "today" "Per Bulan"
     Then tenant should success booking kost
     When user go to mamikos homepage

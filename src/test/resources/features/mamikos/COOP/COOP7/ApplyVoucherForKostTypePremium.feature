@@ -24,9 +24,9 @@ Feature: Apply Voucher For Kost Type Premium
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kos Raya Gasim            | Kos Raya Gasim            |
+    And tenant redirect to kost details:
+      | kost path stag                                   | kost path prod               |
+      | kost-sorong-kost-campur-eksklusif-kos-raya-gasim | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 
