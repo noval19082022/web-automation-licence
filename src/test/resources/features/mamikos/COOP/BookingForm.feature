@@ -13,9 +13,9 @@ Feature: Booking with upload docs
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
       | 0812345667788 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod       |
-      | Desta Automation Tobelo Halmahera Utara | kost payment desta 2 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                             | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-desta-automation-tobelo-halmahera-utara-2 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     Then user will see rule "Maks. 4"
     * user will see rule "Boleh pasutri"

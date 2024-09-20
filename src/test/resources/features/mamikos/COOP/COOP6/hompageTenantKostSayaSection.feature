@@ -1,4 +1,4 @@
-@BBM6 @COOP6 @BnBFeature @BnBFeature3 @a
+@BBM6 @COOP6 @BnBFeature @BnBFeature3
 Feature: Homepage - Kost Saya Section
 
   @TEST_SS-3511 @continue
@@ -96,7 +96,7 @@ Feature: Homepage - Kost Saya Section
       | kost path stag                                                                                      | kost path prod               |
       | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
-    And tenant booking kost for "Tomorrow"
+    And tenant booking kost for "today"
     Then tenant should success booking kost
     When user go to mamikos homepage
     Then user can see shortcut homepage with "Pengajuan sewa lagi dicek pemilik"

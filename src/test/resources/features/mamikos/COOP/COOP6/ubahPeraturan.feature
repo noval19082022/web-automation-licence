@@ -248,11 +248,9 @@
       And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
-      And owner click on dropdown waktu masuk kos
-      And user click on "3" button
-      And owner click on simpan button on popup total day
-      And user click on "Simpan" button
-      And user click on "Simpan" button
+      And owner choose minim checkin time with :
+        | waktu   | tanggal |
+        | Hari    | 3       |
       Then owner can see make rules booking page
       And owner logs out
 
@@ -279,14 +277,9 @@
       And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
-      And owner click on dropdown jumlah jarak waktu terjauh
-      And user click on "3" button
-      And owner click on simpan button on popup total day
-      And owner click on dropdown satuan waktu jarak waktu terjauh
-      And user click on "Minggu" button
-      And owner click on simpan button on popup satuan waktu
-      And user click on "Simpan" button
-      And user click on "Simpan" button
+      And owner choose minim checkin time with :
+        | waktu   | tanggal |
+        | Minggu  | 3       |
       Then owner can see make rules booking page
       And owner logs out
 

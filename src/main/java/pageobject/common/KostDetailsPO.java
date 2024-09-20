@@ -330,7 +330,7 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya Pemilik"));
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
-        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
+        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
         this.btnMauDong = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mau Dong!"));
         this.btnSayaMengerti = page.getByText("Saya Mengerti");
 
@@ -718,7 +718,7 @@ public class KostDetailsPO {
      */
     public void clickOnSayaMengertiButton() {
         for (int i = 0; i < 2; i++) {
-            playwright.pageScrollToDown(300);
+            playwright.pageScrollToDown(500);
             if (btnSayaMengerti.isVisible()) {
                 break;
             }

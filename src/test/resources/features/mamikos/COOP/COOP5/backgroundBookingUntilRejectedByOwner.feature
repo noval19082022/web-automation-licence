@@ -24,7 +24,7 @@ Feature: BnB feature with background booking until rejected by owner
     And owner reject booking from view detail
     And owner select reason reject kos "Dokumen tidak lengkap"
     And user navigates to owner dashboard
-    And owner should successfully log out
+    And owner logs out
 
   @TEST_SS-3426
   Scenario: [Home Page][Kost Saya Section ]Check Kost saya section when tenant have booking with Reject status (BBM-967)
