@@ -25,6 +25,7 @@ public class agentRegistrationSteps {
         registration.fillEmail("agenautomation@gmail.com");
         registration.fillUsia("21");
         registration.fillNoKTP("3402091290390002");
+        registration.fillAddress("Jl Nurul Huda No 28 RT 22 Macanan");
         registration.fillPassword("qwerty123");
         registration.fillKonfirmasiPassword("qwerty123");
         registration.clickBerikutnya();
