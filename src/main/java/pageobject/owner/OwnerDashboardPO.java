@@ -158,7 +158,7 @@ public class OwnerDashboardPO {
         mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
         pageHeader = page.locator(".room-page__header");
-        totalNotBookingPopup = page.locator(".suggestion-modal__title");
+        totalNotBookingPopup = page.locator("div.suggestion-modal__title");
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
