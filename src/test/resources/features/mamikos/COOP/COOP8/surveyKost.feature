@@ -40,7 +40,9 @@ Feature: Survey Tenant
   @TEST_SS-3644 @continue
   Scenario: Submit Survey for Uncontrolled Property
     When user go to mamikos homepage
-    And user search for Kost with name "Kos Loyal Kretek" and selects matching result
+    And tenant redirect to kost details:
+      | kost path stag                                       | kost path prod               |
+      | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1 | Kos DC BAR Automation Tipe A |
     And user click chat in kos detail
     Then question "Saya ingin survei dulu" is not displayed
 
