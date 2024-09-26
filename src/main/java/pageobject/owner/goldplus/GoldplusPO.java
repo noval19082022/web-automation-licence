@@ -456,6 +456,7 @@ public class GoldplusPO {
                 element = "//*[contains(@class,'goldplus-mamiads-detail__item-saving')]";
                 break;
         }
+        playwright.waitFor(tutupListBalanceGP);
         playwright.pageScrollUntilElementIsVisible(tutupListBalanceGP);
         return  playwright.getText(playwright.getLocators(page.locator(element)).get(index));
     }
@@ -497,6 +498,7 @@ public class GoldplusPO {
      * @return String text saldo MamiAds
      */
     public String getTextSaldoMamiAds() {
+        playwright.waitTillLocatorIsVisible(saldoMamiadsText);
         return playwright.getText(saldoMamiadsText);
     }
 

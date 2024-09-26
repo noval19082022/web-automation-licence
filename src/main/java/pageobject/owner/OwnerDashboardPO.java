@@ -823,6 +823,7 @@ public class OwnerDashboardPO {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
+        playwright.waitTillPageLoaded();
         playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
     }

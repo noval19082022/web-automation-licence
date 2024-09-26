@@ -17,7 +17,7 @@ Feature: List Riwayat Transaction Account
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | phone prod    | password  |
-      | 083176408449  | 0895365624343 | qwerty123 |
+      | 085697344170  | 0895365624343 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user verify count of riwayat before beli saldo
