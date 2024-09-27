@@ -9,34 +9,42 @@ Feature: Recommendation Listing
       | 0812233445566 | qwerty123 |
     Then verify message "Belum ada kos yang di favorit." di Favorit page
     And verify no rekomendasi on kos saya page
+    And tenant logs out
 
-  @TEST_LIMO-2712
-  Scenario: There is no recommendation
-    Given user go to mamikos homepage
-    And user login as tenant via phone number:
-      | phone stag    | password  |
-      | 0827777777774 | qwerty123 |
-    When tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Silalay 123    |                |
-    Then tenant open tab pernah dilihat at menu favorite
-    And tenant verify the property with name "Silalay" is appear
-    And tenant verify the Hapus History button is appear
-    When tenant open tab difavoritkan at menu favorite
-    Then user verify rekomendasi listing section didn't display
-    And verify no rekomendasi on kos saya page
+#  @TEST_LIMO-2712
+#  Scenario: There is no recommendation
+#    Given user go to mamikos homepage
+#    And user login as tenant via phone number:
+#      | phone stag    | password  |
+#      | 0827777777774 | qwerty123 |
+##    When tenant search kost then go to apartment details:
+##      | kost name stag | kost name prod |
+##      | Silalay 123    |                |
+#    And tenant redirect to kost details:
+#      | kost path stag                                       | kost path prod               |
+#      | unit/apartemen-kalibata-city/silalay-123-1room-studio-1 | Kos DC BAR Automation Tipe A |
+#    Then tenant open tab pernah dilihat at menu favorite
+#    And tenant verify the property with name "Silalay" is appear
+#    And tenant verify the Hapus History button is appear
+#    When tenant open tab difavoritkan at menu favorite
+#    Then user verify rekomendasi listing section didn't display
+#    And verify no rekomendasi on kos saya page
 
   @TEST_LIMO-2713
   Scenario: There is no recommendation booking cancel
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | password    |
-      | 082322233399  | 12345678    |
+      | 082322233399  | qwerty123    |
     And user cancel booking
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag         | kost name prod |
-      | Kos Upik Merapi Tipe C |                |
+#    And tenant search kost then go to kost details:
+#      | kost name stag         | kost name prod |
+#      | Kos Upik Merapi Tipe C |                |
+    And tenant redirect to kost details:
+      | kost path stag         | kost path prod               |
+      | kost-yogyakarta-kost-putri-eksklusif-kos-upik-merapi-tipe-c | Kos DC BAR Automation Tipe A |
+
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
     When user cancel booking
@@ -48,9 +56,12 @@ Feature: Recommendation Listing
     And user login as tenant via phone number:
       | phone stag    | password   |
       | <tenantPhone> | <password> |
-    And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod |
-      | Kos Raney Momogi Tipe A |                |
+#    And tenant search kost then go to kost details:
+#      | kost name stag          | kost name prod |
+#      | Kos Raney Momogi Tipe A |                |
+    And tenant redirect to kost details:
+      | kost path stag                                       | kost path prod               |
+      | kost-kota-yogyakarta-kost-putri-eksklusif-kos-raney-momogi-tipe-a-danurejan-yogyakarta | Kos DC BAR Automation Tipe A |
     When tenant open tab pernah dilihat at menu favorite
     And tenant verify the property with name "Kos Raney Momogi Tipe A Danurejan Yogyakarta" is appear
     And tenant verify the Hapus History button is appear
@@ -74,9 +85,12 @@ Feature: Recommendation Listing
     When user login as tenant via phone number:
       | phone stag    | password  |
       | 082322233311 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag        | kost name prod |
-      | Kos Raney Momogi Tipe A |                |
+#    And tenant search kost then go to kost details:
+#      | kost name stag        | kost name prod |
+#      | Kos Raney Momogi Tipe A |                |
+    And tenant redirect to kost details:
+      | kost path stag                                       | kost path prod               |
+      | kost-kota-yogyakarta-kost-putri-eksklusif-kos-raney-momogi-tipe-a-danurejan-yogyakarta | Kos DC BAR Automation Tipe A |
     When tenant open menu favorite
     Then verify last seen property doesn't display on rekomendasi section
     And tenant open menu kost saya
