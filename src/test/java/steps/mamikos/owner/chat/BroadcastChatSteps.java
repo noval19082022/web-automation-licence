@@ -258,6 +258,11 @@ public class BroadcastChatSteps {
         broadcast.clickOnLihatInvoiceButton();
     }
 
+    @And("user/owner dismiss FTUE Broadcast")
+    public void userOwnerDismissFTUEBroadcast() {
+        broadcast.dismisFtuebroadcast();
+    }
+
     @And("user/owner dismiss FTUE Broadcast if exist")
     public void userOwnerDismissFTUEBroadcastIfExist() {
         broadcast.dismisFtuebroadcastIfExist();

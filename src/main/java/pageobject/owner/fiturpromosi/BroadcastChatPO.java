@@ -57,7 +57,7 @@ public class BroadcastChatPO {
     public BroadcastChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        warningBroadcastText =page.locator(".bg-c-modal__body-title");
+        warningBroadcastText = page.locator(".bg-c-modal__body-title");
         searchKostInputBC = page.getByTestId("broadcastChat-searchBarKosList");
         listSelectBroadcastKost = page.locator(".disabled-card");
         firstBroadcastChatOption = page.locator(".broadcast-chat-message-card__message");
@@ -99,7 +99,7 @@ public class BroadcastChatPO {
         tidakJadiButtonPopUp = playwright.getButtonBySetName("Tidak Jadi");
         keluarButton = playwright.getButtonBySetName("Keluar");
         lihatInvoiceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Invoice"));
-        ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus: Broadcast Chat"));
+        ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus"));
         closeBtn = page.getByTestId("close-button");
         ubahHyperlink = page.getByText("ubah").first();
     }
@@ -110,7 +110,7 @@ public class BroadcastChatPO {
      * @return Text of broadcast
      */
     public String getWarningBroadcastText() {
-        playwright.waitTillLocatorIsVisible(warningBroadcastText,30000.0);
+        playwright.waitTillLocatorIsVisible(warningBroadcastText, 30000.0);
         return playwright.getText(warningBroadcastText);
     }
 
@@ -125,7 +125,6 @@ public class BroadcastChatPO {
 
     /**
      * verify kost card is disable
-     *
      */
     public boolean isKostCardDisabled() {
         return playwright.getAttributeValue(kostListBroadcastChat, "class").contains("disabled-card");
@@ -151,11 +150,12 @@ public class BroadcastChatPO {
      * click on button masukan pesan broadcast chat
      */
     public void selectMessageOptionBC(int messageOption) {
-        playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption-1));
+        playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption - 1));
     }
 
     /**
      * Get message BC after selected
+     *
      * @return error message after selected
      */
     public String getMessageBCselected() {
@@ -188,6 +188,7 @@ public class BroadcastChatPO {
 
     /**
      * Get counter char text at input Broadcast message
+     *
      * @return counter wrong
      */
     public String getCountText() {
@@ -196,6 +197,7 @@ public class BroadcastChatPO {
 
     /**
      * Get error Input Template Broadcast Chat Template Message
+     *
      * @return error Input Template Broadcast Chat Template Message
      */
     public String getErrorInputBroadcastText() {
@@ -205,11 +207,13 @@ public class BroadcastChatPO {
 
     /**
      * Get Preview Message Broadcast Chat
+     *
      * @return Preview Message Broadcast Chat
      */
     public String getPreviewMessageBC() {
         return playwright.getText(previewBroadcastMessageText);
     }
+
     /**
      * click on back Button BC
      */
@@ -268,6 +272,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify anda belum memiliki kos aktif text displayed
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isAndaBelumMemilikiKosAktifTextDisplayed() {
@@ -276,6 +281,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify the visibility of tambahkan kos button
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isTambahKosButtonVisible() {
@@ -284,6 +290,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify the visibility of broadcast chat package content
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isBroadcastChatPackageContentVisible() {
@@ -293,6 +300,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify the visibility of lihat detail button
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isLihatDetailButtonVisible() {
@@ -302,6 +310,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify the visibility of ajukan ganti paket button
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isAjukanGantiPaketVisible() {
@@ -311,6 +320,7 @@ public class BroadcastChatPO {
 
     /**
      * Verify the visibility of beli paket button
+     *
      * @return boolean visible true, otherwise false
      */
     public boolean isBeliPaketButtonVisible() {
@@ -319,6 +329,7 @@ public class BroadcastChatPO {
 
     /**
      * Get GP header text
+     *
      * @return String data type
      */
     public String getGpPackageHeader() {
@@ -353,6 +364,7 @@ public class BroadcastChatPO {
 
     /**
      * Click on tambah broadcast result kos name
+     *
      * @param kosName kost name
      */
     public void clickOnTambahBroadcastChatKostNameResult(String kosName) {
@@ -370,6 +382,7 @@ public class BroadcastChatPO {
 
     /**
      * Get toast text
+     *
      * @return String data type
      */
     public String getToastText() {
@@ -385,6 +398,7 @@ public class BroadcastChatPO {
 
     /**
      * Get displaying search result kos name text
+     *
      * @return String data type
      */
     public String getDisplayingSearchResultKosNameText() {
@@ -394,6 +408,7 @@ public class BroadcastChatPO {
 
     /**
      * Get empty kos header text
+     *
      * @return String data type
      */
     public String getEmptyKosHeaderText() {
@@ -402,6 +417,7 @@ public class BroadcastChatPO {
 
     /**
      * Get empty kos body text
+     *
      * @return String data type
      */
     public String getEmptyKosBodyText() {
@@ -438,6 +454,7 @@ public class BroadcastChatPO {
 
     /**
      * Get button detail text
+     *
      * @return String data type
      */
     public String getButtonDetailText() {
@@ -446,6 +463,7 @@ public class BroadcastChatPO {
 
     /**
      * Get button submission text
+     *
      * @return String data type
      */
     public String getButtonSubmissionText() {
@@ -463,8 +481,19 @@ public class BroadcastChatPO {
     /**
      * dismiss FTUE broadcast
      */
+    public void dismisFtuebroadcast() {
+        playwright.clickOn(closeBtn);
+    }
+
+    /**
+     * dismiss FTUE broadcast if exist
+     */
     public void dismisFtuebroadcastIfExist() {
-        playwright.clickIfElementVisibleAfterLoad(ftueBroadcast, closeBtn, 2_000.0);
+        var ftueExistCondition = ((playwright.waitTillLocatorIsVisible(ftueBroadcast, 1_000.0)) ||
+                playwright.waitTillLocatorIsVisible(closeBtn, 1_000.0));
+        if (ftueExistCondition) {
+            playwright.clickOn(closeBtn);
+        }
     }
 
     /**
