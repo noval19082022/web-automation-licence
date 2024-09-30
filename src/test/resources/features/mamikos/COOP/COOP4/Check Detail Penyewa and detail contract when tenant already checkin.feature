@@ -19,5 +19,5 @@ Feature: Check Detail Penyewa and detail contract when tenant already checkin
     And user navigate to penyewa page
     And user search kost "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user click Selengkapnya button on "Dhiandra At Detail" contract
-    Then user can see disclaimer "Penyewa dijadwalkan check-in kos pada 1 Maret 2023. Uang sewa akan ditransfer ke rekening Anda dalam 1x24 jam setelah penyewa klik “Check-in” via Mamikos."
+    Then user can see disclaimer "Penyewa dijadwalkan check-in kos pada 30 September 2024. Uang sewa akan ditransfer ke rekening Anda dalam 1x24 jam setelah penyewa klik “Check-in” via Mamikos."
 		
