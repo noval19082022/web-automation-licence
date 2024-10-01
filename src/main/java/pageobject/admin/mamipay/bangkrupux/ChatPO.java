@@ -20,13 +20,13 @@ public class ChatPO {
     public ChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("CS Sarah Consultant")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
+        tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("CS Okta Consultant")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
         chatRoomMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Chat Room"));
-        kostTitleList = page.getByText("Krisna : kost gp regression 193 duplikat 2");
-        chatKosTitle = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Krisna : kost gp regression 193 duplikat 2"));
+        kostTitleList = page.getByText("Bakwan Ebi Bin Tahuan : Kost Apik Batas Nusa Tipe A Seturan Yogyakarta");
+        chatKosTitle = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Bakwan Ebi Bin Tahuan : Kost Apik Batas Nusa Tipe A Seturan Yogyakarta"));
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
-        allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terbaru"));
+        allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
     }
 
     /**
