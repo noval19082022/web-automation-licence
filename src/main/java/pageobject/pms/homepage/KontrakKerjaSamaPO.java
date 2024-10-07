@@ -9,8 +9,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 public class KontrakKerjaSamaPO {
     private Page page;
-//    private PlaywrightHelpers playwright;
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    PlaywrightHelpers playwright;
 
     Locator toastMessage;
 
@@ -159,8 +158,9 @@ public class KontrakKerjaSamaPO {
 
     public KontrakKerjaSamaPO (Page page){
         this.page = page;
+        playwright = new PlaywrightHelpers(page);
 
-        toastMessage = page.locator(".bg-c-toast__content");
+        toastMessage = page.locator(".bg-c-toast__content").first();
 
         kontrakKerjaSamaTab = page.locator("[aria-controls='contract']");
         sectionOwnerProfile = page.locator("#owner-profile");
@@ -203,39 +203,39 @@ public class KontrakKerjaSamaPO {
         modelKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(1);
         basicCommission = page.locator("#partnership-detail .bg-c-list-item__description").nth(2);
         totalKamar = page.locator("#partnership-detail .bg-c-list-item__description").nth(3);
-        tipeJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(4);
-        presentaseJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(5);
-        jumlahJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(6);
-        tipeAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(7);
-        presentaseAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(8);
-        jumlahAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(9);
-        pendapatanPemilikBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(10);
-        pendapatanMamikosBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(11);
-        jangkaWaktu = page.locator("#partnership-detail .bg-c-list-item__description").nth(12);
-        awalKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(13);
-        akhirKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(14);
-        biayaKeanggotaan = page.locator("#partnership-detail .bg-c-list-item__description").nth(15);
+        jangkaWaktu = page.locator("#partnership-detail .bg-c-list-item__description").nth(4);
+        awalKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(5);
+        akhirKerjaSama = page.locator("#partnership-detail .bg-c-list-item__description").nth(6);
+        biayaKeanggotaan = page.locator("#partnership-detail .bg-c-list-item__description").nth(7);
+        tipeJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(8);
+        presentaseJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(9);
+        jumlahJp = page.locator("#partnership-detail .bg-c-list-item__description").nth(10);
+        tipeAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(11);
+        presentaseAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(12);
+        jumlahAdp = page.locator("#partnership-detail .bg-c-list-item__description").nth(13);
+        pendapatanPemilikBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(14);
+        pendapatanMamikosBooking = page.locator("#partnership-detail .bg-c-list-item__description").nth(15);
         ubahDetailKerjaSamaButton = page.locator("#partnership-detail").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
         hybridSection = page.getByText("Ketentuan Komisi dari Penyewa DBET");
-        pendapatanPemilikDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(12);
-        pendapatanMamikosDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(13);
+        pendapatanPemilikDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(16);
+        pendapatanMamikosDbet = page.locator("#partnership-detail .bg-c-list-item__description").nth(17);
 
         jenisProdukSelect = page.locator(".bg-c-select").first();
         modelKerjaSamaSelect = page.locator(".bg-c-select").nth(1);
         basiCommissionInput = page.locator(".bg-c-input__field").first();
         tipeJpSelect = page.locator(".bg-c-select").nth(2);
         tipeJpNone = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("None")).locator("a");
-        presentaseJpInput = page.locator(".bg-c-input__field").nth(2);
-        jumlahJpInput = page.locator(".bg-c-input__field").nth(3);
+        presentaseJpInput = page.locator(".bg-c-input__field").nth(6);
+        jumlahJpInput = page.locator(".bg-c-input__field").nth(7);
         tipeAdpSelect = page.locator(".bg-c-select").nth(3);
         tipeAdpNone = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("None")).locator("a");
-        presentaseAdpInput = page.locator(".bg-c-input__field").nth(4);
-        jumlahAdpInput = page.locator(".bg-c-input__field").nth(5);
+        presentaseAdpInput = page.locator(".bg-c-input__field").nth(8);
+        jumlahAdpInput = page.locator(".bg-c-input__field").nth(9);
         hybridButton = page.locator(".bg-c-switch__input");
         hybridButtonOff = page.locator(".bg-c-switch--off");
-        penpadatanDbetMamikosInput = page.locator(".bg-c-input__field").nth(9);
+        penpadatanDbetMamikosInput = page.locator(".bg-c-input__field").nth(13);
         jangkaWaktuKerjaSamaInput = page.getByRole(AriaRole.TEXTBOX).filter(new Locator.FilterOptions().setHasText("Bulan")).getByRole(AriaRole.TEXTBOX);
-        biayaKeanggotaanInput = page.getByTestId("input-currency-masking").last();
+        biayaKeanggotaanInput = page.getByTestId("input-currency-masking").first();
 
         biayaTambahanSection = page.locator(".organism-additional-price");
         biayaTambahanName = page.locator(".organism-additional-price .bg-c-list-item__title--has-description");
@@ -506,6 +506,7 @@ public class KontrakKerjaSamaPO {
      * scroll to view section detail kerja sama
      */
     public void viewSectionDetailKerjaSama() {
+        playwright.waitTillPageLoaded();
         detailKerjaSamaSection.waitFor();
         detailKerjaSamaSection.scrollIntoViewIfNeeded();
     }
@@ -656,6 +657,7 @@ public class KontrakKerjaSamaPO {
         simpanButton.scrollIntoViewIfNeeded();
         simpanButton.click();
         confirmSimpanButton.click();
+        playwright.waitTillLocatorIsVisible(toastMessage,30000.0);
     }
 
     /**

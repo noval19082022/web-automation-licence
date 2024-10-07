@@ -130,7 +130,7 @@ public class KontrakKerjaSamaSteps {
         String end = kontrak.get(0).get("Akhir Kerja Sama");
         String fee = kontrak.get(0).get("Biaya Keanggotaan");
 
-        playwright.hardWait(5000);
+        playwright.hardWait(10000);
         page.reload();
         contract.viewSectionDetailKerjaSama();
 
@@ -158,10 +158,10 @@ public class KontrakKerjaSamaSteps {
         contract.editJenisProduk(produk);
         contract.editModelKerjaSama(model);
         contract.editBasicCommission(commission);
-        contract.editJp(jpType, jpPrecentage, jpAmount);
-        contract.editAdp(adpType, adpPrecentage, adpAmount);
         contract.editJangkaWaktuKerjaSama(month);
         contract.editBiayaKeanggotaan(fee);
+        contract.editJp(jpType, jpPrecentage, jpAmount);
+        contract.editAdp(adpType, adpPrecentage, adpAmount);
         contract.submitEditDetailKerjaSama();
     }
     @When("admin turn on Hybrid and set mamikos precentage to {string} percent")
