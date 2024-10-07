@@ -53,7 +53,7 @@ Feature: Kontrak Kerja Sama
     When admin see detail kerja sama
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
     #Admin edit detail kerja sama
     When admin edit detail kerja sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
@@ -64,10 +64,10 @@ Feature: Kontrak Kerja Sama
     #revert back detail kerja sama
     When admin edit detail kerja sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | Full A  | 5%            | 4000000   | None      | -               | -           | 24            | 25000          |
+      | Apik          | Static Rate       | 20%               | Full A  | 5%            | 4000000   | None      | -               | -%          | 24            | 25000          |
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%              | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
 
   @TEST_SS-784 @continue
   Scenario: See and Edit Detail Kerja Sama Hybrid
