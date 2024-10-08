@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO5
 Feature: Update Price from Dashboard
 
   @TEST_LIMO-907 @WEB @AUTOMATED

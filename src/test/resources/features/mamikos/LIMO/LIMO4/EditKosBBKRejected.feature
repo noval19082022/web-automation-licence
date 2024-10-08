@@ -1,4 +1,4 @@
-@regression @LIMO4 @EditRejectKost
+@regression @LIMO5 @EditRejectKost
 Feature: Edit Kos BBK Rejected
 
   Scenario: Reject BBK Kos
