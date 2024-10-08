@@ -1,5 +1,5 @@
-@LIMO4 @regression @landingpageowner
-Feature: Entry point Landing Page Owner
+@LIMO5 @regression @landingpageowner
+Feature: Entry Point Landing Page Owner
 
   @TEST_LIMO-365 @entrypointLPOwner @WEB @AUTOMATED
   Scenario: [Homepage][Non Login] User can see entry point landing page owner
