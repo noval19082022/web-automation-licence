@@ -1,4 +1,4 @@
-@COOP3 @fail
+@COOP3
 Feature: SinggahSini Tenant Tracker Controlled Property
 
 
