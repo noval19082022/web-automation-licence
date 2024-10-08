@@ -143,6 +143,7 @@ public class KostDetailsPO {
     private Locator tabPOILandmark;
     private Locator latestChat;
     private Locator chatRoom;
+    private Locator mapSection;
 
     // ------------ Kos Report Section -----------
     private Locator kosReportContainer;
@@ -390,6 +391,7 @@ public class KostDetailsPO {
         this.tabPOILandmark = page.getByTestId("kost-landmark-list__tabs");
         this.latestChat = page.locator(".mc-balloon-chat__content").locator("div").last();
         this.chatRoom = page.locator(".mc-chat-room");
+        this.mapSection = page.getByTestId("map-container");
 
         // ------------ Kos Report Section -----------
         this.kosReportContainer = page.locator(".kost-report-container .kost-report");
@@ -2369,5 +2371,20 @@ public class KostDetailsPO {
      */
     public boolean isPromoOwnerDisplayed(String promoOwner) {
         return playwright.isTextDisplayed(promoOwner);
+    }
+
+    /**
+     * Scroll down until map section
+     */
+    public void scrollToViewMap() {
+        int maxloop = 0;
+
+        do {
+            maxloop++;
+            playwright.pageScrollToDown(100);
+            playwright.hardWait(1000);
+
+            if (maxloop == 100) break;
+        } while (!mapSection.isVisible());
     }
 }
