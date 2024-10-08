@@ -13,7 +13,7 @@ Feature: Broadcast Chat Owner
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
     Given user go to mamikos homepage
     Given user login as owner:
@@ -28,6 +28,32 @@ Feature: Broadcast Chat Owner
     And user click back arrow button on BC page
     And owner clicks on Keluar button
     Then user redirected to "/broadcast-chat/kos"
+
+  @TEST_LIMO-3631 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  Scenario: [Broadcast Chat][Select Message] User change message template on the list
+    When owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
+
+  @TEST_LIMO-3632 @continue
+  Scenario: [Broadcast Chat][Select Message]User select 1st message template on the list
+    Then the selected message should be visible on the details page of the broadcast:
+	 """
+	 Halo, +Calon Penyewa
+        +Calon Penyewa akan disesuaikan dengan nama penyewa yang terdaftar di Mamikos.
+        , ada kos bagus nih untuk kamu. Yuk lihat dan booking! Banyak keunggulannya seperti:
+	 """
+
+  @TEST_LIMO-3633 @continue
+  Scenario: [Broadcast Chat][Select Message]User select 2nd message template on the list
+    When owner edit template message on Broadcast Chat to row number 2
+    Then the selected message should be visible on the details page of the broadcast:
+	 """
+	 +Calon Penyewa
+        +Calon Penyewa akan disesuaikan dengan nama penyewa yang terdaftar di Mamikos.
+	, nikmati promo Mamikos untuk booking kos! Cek kosnya dan langsung booking. Jangan sampai terlewatkan, ya.
+	"""
+    Then user verify input broadcast message is not visible
 
   #deleting booking for future proof test
   @continue
@@ -57,6 +83,5 @@ Feature: Broadcast Chat Owner
   Scenario: Verify Active Contract And Active Booking For Add Ons - Extended Contract
     When playwright check for active contract and active booking
 
-  @continue
   Scenario: Tenant Batalkan Pengajuan Sewa For Add Ons - Extended Contract
     And playwright batalkan pengajuan sewa for tenant

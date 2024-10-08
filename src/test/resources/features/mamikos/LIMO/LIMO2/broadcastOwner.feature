@@ -163,53 +163,6 @@ Feature: Broadcast Chat Owner
     And user clicks on the close icon next to the search bar to reset it
     Then the list of Kos should be displayed
 
-  @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
-    Given user go to mamikos homepage
-    Given user login as owner:
-      | phone stag  | phone prod | password  |
-      | 08713399866 | 0          | qwerty123 |
-    When owner navigates to broadcast chat page
-    When owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
-    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
-    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
-    And user click back arrow button on BC page
-    And user clicks on Tidak Jadi button
-    And user click back arrow button on BC page
-    And owner clicks on Keluar button
-    Then user redirected to "/broadcast-chat/kos"
-
-  @TEST_LIMO-3631 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
-  Scenario: [Broadcast Chat][Select Message] User change message template on the list
-    Given user go to mamikos homepage
-    Given user login as owner:
-      | phone stag  | phone prod | password  |
-      | 08713399866 | 0          | qwerty123 |
-    When owner navigates to broadcast chat page
-    When owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
-    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
-    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
-
-  @TEST_LIMO-3632 @continue
-  Scenario: [Broadcast Chat][Select Message]User select 1st message template on the list
-    Then the selected message should be visible on the details page of the broadcast:
-	 """
-	 Halo, +Calon Penyewa
-        +Calon Penyewa akan disesuaikan dengan nama penyewa yang terdaftar di Mamikos.
-        , ada kos bagus nih untuk kamu. Yuk lihat dan booking! Banyak keunggulannya seperti:
-	 """
-
-  @TEST_LIMO-3633
-  Scenario: [Broadcast Chat][Select Message]User select 2nd message template on the list
-    When owner edit template message on Broadcast Chat to row number 2
-    Then the selected message should be visible on the details page of the broadcast:
-	 """
-	 +Calon Penyewa
-        +Calon Penyewa akan disesuaikan dengan nama penyewa yang terdaftar di Mamikos.
-	, nikmati promo Mamikos untuk booking kos! Cek kosnya dan langsung booking. Jangan sampai terlewatkan, ya.
-	"""
-    Then user verify input broadcast message is not visible
-
   @TEST_LIMO-3634 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario Outline: [Broadcast Chat][Create Broadcast chat]User want to input phone number/email/link on template message is editable
     Given user go to mamikos homepage
