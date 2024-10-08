@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @lawackmaintenance
+@listing-monetization @regression @LIMO5 @broadcastChat @staging-only
 Feature: Broadcast Chat Owner
 
   #test is precondition only
