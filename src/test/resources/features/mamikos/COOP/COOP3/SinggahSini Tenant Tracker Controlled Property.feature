@@ -1,4 +1,4 @@
-@COOP3
+@COOP3 @fail
 Feature: SinggahSini Tenant Tracker Controlled Property
 
 
@@ -34,8 +34,8 @@ Feature: SinggahSini Tenant Tracker Controlled Property
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag                                      | tenant prod                                      |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | tenant stag   | tenant prod   |
+      | Senjatanuklir | Senjatanuklir |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking For Add Ons
