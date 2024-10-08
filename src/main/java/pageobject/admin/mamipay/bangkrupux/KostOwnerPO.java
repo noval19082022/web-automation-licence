@@ -160,6 +160,7 @@ public class KostOwnerPO {
      * @return attribute href from firstDeleteButton
      */
     public String getKosListDeleteUrl() {
+        playwright.waitTillPageLoaded();
         return playwright.getAttributeValue(firstDeleteButton, "href");
     }
 

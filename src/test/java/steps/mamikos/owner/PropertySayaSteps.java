@@ -383,9 +383,11 @@ public class PropertySayaSteps {
 
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
+        if (playwright.isTextDisplayed("Beberapa Kos Belum Dapat Dibooking")){
+            propertySaya.clickClosePopUpBBKOnPropertySaya();
+    }
         propertySaya.clickTambahDataIklan(jenisProperti);
     }
-
     @And("owner fills data apartemen with Property Name is {string}")
     public void ownerFillsDataApartemenWithPropertyNameIs(String propertyName) {
         propertySaya.inputPropertyName(propertyName);
@@ -682,6 +684,7 @@ public class PropertySayaSteps {
 
     @Then("verify message {string} the room type")
     public void verifyMessageTheRoomType(String roomTypeMessageText) {
+        playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         Assert.assertEquals(propertySaya.getRoomTypeMessage(roomTypeMessageText), roomTypeMessageText, "Room type message doesn't match!");
     }
