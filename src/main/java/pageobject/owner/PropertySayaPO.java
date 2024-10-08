@@ -1315,6 +1315,7 @@ public class PropertySayaPO {
      * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
+        playwright.hardWait(7000);
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
         playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
@@ -1577,8 +1578,7 @@ public class PropertySayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.hardWait(2_000.0);
-        playwright.waitTillLocatorIsVisible(lanjutkanButton, 7_000.0);
+        playwright.hardWait(7000);
         playwright.clickOn(lanjutkanButton);
     }
 

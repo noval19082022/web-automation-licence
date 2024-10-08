@@ -62,10 +62,10 @@ Feature: Create Kos From Home
     And owner invalid upload photo "kamar mandi"
     Then verify warning upload gagal
     When owner valid upload photo kos
+    And owner click lanjutkan button for next steps
 
   @TEST_LIMO-954 @createNewKos
   Scenario:[Add New Kost][Dashboard]Add new kost from Dashboard (status property kos diperiksa admin/reject && status apartment diperiksa admin/reject )
-    And owner click lanjutkan button for next steps
     And user check facilities under "Fasilitas Umum"
       | Air Jernih |
     And user check facilities under "Fasilitas Kamar"
