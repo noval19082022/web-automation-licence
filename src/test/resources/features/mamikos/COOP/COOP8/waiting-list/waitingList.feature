@@ -62,8 +62,8 @@ Feature: Waiting List - Kost Detail
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P2 when have recomendation kost
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
-      | kost-bantul-kost-putra-murah-kost-putra-pak-sunarto-sewon-bantul | Kos DC BAR Automation Tipe A |
+      | kost path stag                                             | kost path prod               |
+      | kost-bantul-kost-campur-murah-kost-sekitarnya-mamitest-3-1 | Kos DC BAR Automation Tipe A |
     When tenant can see "Tanya pemilik" button
     When tenant can see "Lihat kost lain" button
     And tenant click on "Lihat kos lain" button

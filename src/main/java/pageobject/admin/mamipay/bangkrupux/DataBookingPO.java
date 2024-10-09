@@ -75,7 +75,7 @@ public class DataBookingPO {
         this.sendRejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send"));
         this.showAllButton = page.getByText("Tampilkan Filter");
         this.allKostDropdown = page.locator("#select2-kost_type-container");
-        this.allKostTestingDropdown = page.getByRole(AriaRole.TREEITEM, new Page.GetByRoleOptions().setName("All Testing"));
+        this.allKostTestingDropdown = page.locator("//ul[@class=\"select2-results__options select2-results__options--nested\"]//li[contains(.,'All Testing')]");
         this.filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
         this.phoneNumberTextField = page.getByPlaceholder("Ex: 081987654321");
     }
