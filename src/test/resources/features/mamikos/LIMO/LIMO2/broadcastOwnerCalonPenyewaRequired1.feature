@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @lawackmt
+@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @broadcastChatOwner3
 Feature: Broadcast Chat Owner
 
   #test is precondition only
@@ -14,7 +14,7 @@ Feature: Broadcast Chat Owner
     Then tenant should success booking kost
 
   @TEST_LIMO-3641 @continue
-  Scenario:[Broadcast Chat][Create Broadcast chat]User want to save template without add message on tempalate is editable
+  Scenario:[Broadcast Chat][Create Broadcast chat]User Want To Save Template Without Add Message On Template Is Editable
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
