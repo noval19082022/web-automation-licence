@@ -78,7 +78,7 @@ public class PaymentSteps {
         var biayaLayanan = invoice.getBiayaLayananMamirooms();
         var voucherDeductionValue = invoice.getVoucherReductionPrice(voucher);
         var totalPayment = invoice.getTotalPembayaran();
-        var totalAfterDeduction = subTotal - voucherDeductionValue - biayaLayanan;
+        var totalAfterDeduction = subTotal - voucherDeductionValue;
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue + ", biaya layanan mamirooms: " + biayaLayanan);
     }
