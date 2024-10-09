@@ -1,4 +1,4 @@
-@regression @LIMO4 @updateKamar
+@regression @LIMO5 @updateKamar
 Feature: Update Kamar
 
   @TEST_LIMO-876 @WEB @AUTOMATED

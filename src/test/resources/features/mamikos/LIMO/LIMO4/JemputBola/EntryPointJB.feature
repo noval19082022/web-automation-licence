@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO5
 Feature: Entry Point Jemput Bola
 
   @TEST_LIMO-361 @TEST_LIMO-362 @TEST_LIMO-357 @WEB @AUTOMATED @reviewLater

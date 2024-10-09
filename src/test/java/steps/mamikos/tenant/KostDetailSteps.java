@@ -229,6 +229,7 @@ public class KostDetailSteps {
 
     @When("user want to ask kost address")
     public void userAskAdreess() {
+        kostDetail.scrollToViewMap();
         kostDetail.clickOnTanyaAlamatBtn();
     }
 

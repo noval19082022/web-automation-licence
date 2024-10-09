@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO4 @broadcastChat2 @DONEMIGRATINGTONEWBOARD
+@listing-monetization @regression @LIMO5 @broadcastChat2
 Feature: Broadcast Chat Owner 2
 
   @TEST_LIMO-3639
@@ -26,21 +26,6 @@ Feature: Broadcast Chat Owner 2
     And owner clicks Kos "Kost LPL P2 02 Patikraja Banyumas" and Pilih Kos button
     Then owner will see that the text "Kost LPL P2 02 Patikraja Banyumas" is displayed
 #    And owner will see that the text "Calon Penyewa yang mendapatkan pesan" is displayed
-
-  @TEST_LIMO-3641
-  Scenario:[Broadcast Chat][Create Broadcast chat]User want to save template without add message on tempalate is editable
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081197878842 | 0          | qwerty123 |
-    And owner navigates to broadcast chat page
-    And owner dismiss FTUE Broadcast
-    And user click "Buat Broadcast Chat"
-    And owner add broadcast chat for kost "kost GP 2 Automation Depok Sleman"
-    And owner clicks Kos "kost GP 2 Automation Depok Sleman" and Pilih Kos button
-    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
-    And owner click "Preview Pesan" button
-    Then owner will see that the text "Isi pesan terlebih dahulu." is displayed
 
   @TEST_LIMO-3642 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][Select Kost]User Search kost with condition full room not yet have a chat

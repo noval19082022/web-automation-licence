@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamitour
+@regression @LIMO5 @mamitour
 Feature: Visit Landing Page Mamitour
 
   @TEST_LIMO-3693 @continue @WEB @AUTOMATED @MAMITOUR

@@ -1,4 +1,4 @@
-@regression @LIMO4 @landingPagePrime
+@regression @LIMO5 @landingPagePrime
 Feature: Mamiprime Landing Page
 
   @TEST_LIMO-3547 @continue @WEB @AUTOMATED
