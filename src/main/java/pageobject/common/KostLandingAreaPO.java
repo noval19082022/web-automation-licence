@@ -197,6 +197,9 @@ public class KostLandingAreaPO {
      * click on lihat lebih banyak button
      */
     public void clickOnLihatLebihBanyakButton() {
+        if (!playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton)) {
+            playwright.pageScrollUntilElementIsVisible(lihatLebihBanyakButton);
+        }
         playwright.clickOn(lihatLebihBanyakButton);
     }
 
