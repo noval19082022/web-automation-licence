@@ -1,14 +1,14 @@
 @listing-monetization @regression @LIMO5 @broadcastChat @staging-only
-Feature: Broadcast Chat Owner
+Feature: Broadcast Chat Owner Tenant Booking Required
 
   #test is precondition only
   Scenario: Tenant Booking kos for today
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 08100000622   | 0890867321212 | qwerty123     |
+      | phone stag  | phone prod    | password  |
+      | 08100000622 | 0890867321212 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                               | kost path prod               |
+      | kost path stag                                                           | kost path prod                                                           |
       | kost-kota-yogyakarta-kost-campur-murah-kos-fathul-khair-jetis-yogyakarta | kost-kota-yogyakarta-kost-campur-murah-kos-fathul-khair-jetis-yogyakarta |
     And tenant booking kost for "today"
     Then tenant should success booking kost
@@ -61,9 +61,9 @@ Feature: Broadcast Chat Owner
     When playwright create register device id for tenant with parameters:
       | device_identifier | Mamitest08100000622     |
       | device_uuid       | Mamitest08100000622uuid |
-      | device_platform   | Mamitest                  |
+      | device_platform   | Mamitest                |
       | phone_number      | 08100000622             |
-      | password          | qwerty123              |
+      | password          | qwerty123               |
     When tenant login trough api
 
   @continue
