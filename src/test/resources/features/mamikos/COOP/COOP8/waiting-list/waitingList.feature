@@ -1,4 +1,4 @@
-@BBM8 @waitingList @a
+@BBM8 @waitingList
 Feature: Waiting List - Kost Detail
 
   @TEST_SS-4210 @waiting-list @web

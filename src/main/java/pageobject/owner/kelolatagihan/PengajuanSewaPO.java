@@ -284,6 +284,21 @@ public class PengajuanSewaPO {
     }
 
     /**
+     * click tanggal
+     */
+    public void clickOnTanggal(String tanggal){
+        selectMinCheckinAmmount = page.locator("//p[normalize-space()='"+tanggal+"']");
+        playwright.clickOn(selectMinCheckinAmmount);
+    }
+
+    /**
+     * click checkbox today
+     */
+    public void clickOnToday(){
+        playwright.clickOn(toogleTodayButton);
+    }
+
+    /**
      * click kriteria calon penyewa button
      */
     public void clickKriteriaCalonPenyewaButton() {
