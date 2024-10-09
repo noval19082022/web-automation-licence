@@ -1,5 +1,5 @@
 @listing-monetization @regression @LIMO5 @broadcastChat @staging-only
-Feature: Broadcast Chat Owner
+Feature: Broadcast Chat Owner Tenant Booking Required
 
   #test is precondition only
   Scenario: Tenant Booking kos for today
