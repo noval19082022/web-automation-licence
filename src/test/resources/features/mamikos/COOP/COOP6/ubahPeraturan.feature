@@ -305,12 +305,12 @@
       And owner navigate to rules enter kos
       And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
       And owner clicks on ubah waktu button
-      And owner click on toggle pengajuan dan waktu masuk kos if active
+      And owner click on toogle today
       And owner click on dropdown satuan waktu jarak waktu terjauh
       And user click on "Bulan" button
       And owner click on simpan button on popup satuan waktu
       And owner click on dropdown jumlah jarak waktu terjauh
-      And user click on "5" button
+      And owner click on tanggal "5"
       And owner click on simpan button on popup total day
       And user click on "Simpan" button
       And user click on "Simpan" button
@@ -328,4 +328,4 @@
       And tenant redirect to kost details:
         | kost path stag                                                                            | kost path prod               |
         | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant can choose checkin date in the next "4" month
+      Then tenant can choose checkin date in the next "5" month
