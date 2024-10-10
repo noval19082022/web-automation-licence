@@ -51,13 +51,11 @@ Feature: Area Boundaries
     When user search and go to kost landing based on area:
       | search keyword | Sleman |
       | area result    | Sleman |
-#    Then user can see kos list result area are the list below:
-#      | Tanah Sereal |
-#      | Sleman        |
-#      | Sleman Utara  |
-#      | Sleman Barat  |
-#      | Sukaraja     |
-#      | Jasinga      |
+    Then user can see kos list result area are the list below:
+      | Sleman  |
+      | Pakem   |
+      | Sleman  |
+      | Ngaglik |
 
   @areaboundaries @TEST_SS-3235
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
