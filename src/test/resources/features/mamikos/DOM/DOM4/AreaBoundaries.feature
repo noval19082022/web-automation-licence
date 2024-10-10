@@ -1,34 +1,34 @@
-@DOM4 @areaboundaries
+@DOM4 @DOMareaboundaries
 Feature: Area Boundaries
 
   @continue @TEST_SS-3246
   Scenario: User Can Search Kost Based On Landing Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Bogor       |
-      | area result    | Bogor       |
-    Then user can see the kost list are from "Bogor"
+      | search keyword | Sleman |
+      | area result    | Sleman |
+    Then user can see the kost list are from "Sleman"
 
   @continue @TEST_SS-3234
-  Scenario: User Can See Kost List Is Only 1
-    Given user filter price minimal to 1900000, and maximal to 1900000
+  Scenario: User Can See Kost List Is more than 1
+    Given user filter price minimal to 230000, and maximal to 231000
     Then user can see kost landing behavior for kost list with just 1 result
 
   @emptystateareaboundaries @TEST_SS-3232
   Scenario: User Can See Area Boundaries With Result Is 0
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Bogor           |
-      | area result    | Bogor |
-    Given user filter price minimal to 10000000, and maximal to 10000000
+      | search keyword | Sleman |
+      | area result    | Sleman |
+    Given user filter price minimal to 10000, and maximal to 20000
     Then user can see empty state kost landing area
 
   @areaboundaries @continue @TEST_SS-3242
   Scenario: User Can See Area Boundaries With Result Are 20
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Cilacap Tengah |
-      | area result    | Cilacap Tengah |
+      | search keyword | Sleman |
+      | area result    | Sleman |
     Then user can see kost list is more than 16
 
 #  @areaboundaries @continue
@@ -49,31 +49,30 @@ Feature: Area Boundaries
   Scenario: User Can Use Cari Berdasarkan Peta Button And Result Are Related To The Predefine Area
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Bogor |
-      | area result    | Bogor |
+      | search keyword | Sleman |
+      | area result    | Sleman |
     Then user can see kos list result area are the list below:
-      | Tanah Sereal |
-      | Bogor        |
-      | Bogor Utara  |
-      | Bogor Barat  |
-      | Sukaraja     |
-      | Jasinga      |
+      | Sleman  |
+      | Pakem   |
+      | Sleman  |
+      | Ngaglik |
 
   @areaboundaries @TEST_SS-3235
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Batam   |
-      | area result    | Batam   |
+      | search keyword | Batam |
+      | area result    | Batam |
     When user activate Dikelola Mamikos filter
-    Then user can see kos tidak ditemukan state on kos landing area
+#    Then user can see kos tidak ditemukan state on kos landing area
+    Then user will see that the text "Kos Tidak Ditemukan" is displayed
 
   @areaboundaries @continue @TEST_SS-3250
   Scenario: [Dweb][Listing Kos][Area Boundaries] User Can Use Price Sorting From Lower To Greater
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Padang   |
-      | area result    | Padang   |
+      | search keyword | Padang |
+      | area result    | Padang |
     When user set price sorting from lower to greater
     Then user can see kos list rearrange from cheaper to expensive
 
@@ -81,7 +80,7 @@ Feature: Area Boundaries
   Scenario: [Dweb][Listing Kos][Area Boundaries] User Can Use Price Sorting From Greater To Lower
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Padang   |
-      | area result    | Padang   |
+      | search keyword | Padang |
+      | area result    | Padang |
     And user set price sorting from greater to lower
     Then user can see kos list rearrange from expensive to cheaper
