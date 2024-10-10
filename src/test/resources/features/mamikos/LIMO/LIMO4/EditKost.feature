@@ -1,4 +1,4 @@
-@regression @LIMO5 @editKost123456
+@regression @LIMO4 @editKost123456
 Feature: Edit Kost
 
   @precondition

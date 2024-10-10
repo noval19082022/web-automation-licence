@@ -99,7 +99,9 @@ public class PaymentPO extends InvoicePO {
     public String isPaymentSuccessText() {
         playwright.hardWait(2_000.0);
         if (!playwright.waitTillLocatorIsVisible(paymentSuccessText, 5_000.0)) {
-            playwright.reloadPage();
+            for (int i = 0; i < 5; i++) {
+                playwright.reloadPage();
+            }
         }
         return playwright.getText(paymentSuccessText);
     }
