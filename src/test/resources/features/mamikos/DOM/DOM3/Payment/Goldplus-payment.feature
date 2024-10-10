@@ -179,7 +179,7 @@ Feature: Payment Goldplus staging
     And user click on lihat detail voucher
     Then owner will see that the text "Kode Voucher: COBATESMINIMUM" is displayed
 
-  @deleteVoucherGp @GPNoval
+  @deleteVoucherGp
   Scenario: User want to delete voucher after input voucher in GP invoice
     Given user go to mamikos homepage
     When user login as owner:
