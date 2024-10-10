@@ -124,7 +124,14 @@ public class SearchPO {
     public KostLandingAreaPO searchByArea(String area, String areaToClick) {
         inputSearch.fill(area);
         Locator firstAreaResult = page.getByText(areaToClick).first();
-        firstAreaResult.click();
+        if(!playwright.waitTillLocatorIsVisible(firstAreaResult)) {
+            firstAreaResult = page.locator("a")
+                    .filter(new Locator.FilterOptions()
+                            .setHasText(areaToClick))
+                    .first();
+        }
+
+        playwright.clickOn(firstAreaResult);
         return new KostLandingAreaPO(page);
     }
 
