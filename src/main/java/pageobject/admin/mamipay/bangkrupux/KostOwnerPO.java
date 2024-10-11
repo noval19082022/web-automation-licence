@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
@@ -56,7 +57,7 @@ public class KostOwnerPO {
     public void searchKosName(String kosName) {
         playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
         playwright.pressKeyboardKey("Enter");
-        playwright.waitTillPageLoaded(3e5);
+        playwright.waitTillPageLoaded(GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
@@ -129,7 +130,7 @@ public class KostOwnerPO {
      * Click on first verify button
      */
     public void clickOnFirstVerifyButton() {
-        playwright.waitForSelectorState(actionBox.first(), WaitForSelectorState.ATTACHED, 3e5);
+        playwright.waitForSelectorState(actionBox.first(), WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
         playwright.clickIfElementVisible(verifyButton.first(), updateStatus, 30000.0);
         playwright.waitTillPageLoaded(30000.0);
     }

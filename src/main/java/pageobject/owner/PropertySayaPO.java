@@ -5,6 +5,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.JavaHelpers;
@@ -400,11 +401,11 @@ public class PropertySayaPO {
      */
     public void searchKostPropertySaya(String kostName) {
         playwright.waitTillPageLoaded();
-        playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, 3e5);
+        playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
-        playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, 3e5);
+        playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(kostSearch);
     }
 
@@ -825,7 +826,7 @@ public class PropertySayaPO {
     public void clickEditDataKos(String dataKos) {
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
         playwright.clickOn(editDataKos);
-        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 3e5);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
