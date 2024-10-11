@@ -289,7 +289,8 @@ public class GoldplusPO {
      *
      */
     public int getCountInvoiceUnpaid() {
-        playwright.hardWait(3000);
+        playwright.hardWait(7000);
+        playwright.waitTillPageLoaded();
         return playwright.getLocators(lihatTagihanTable).size();
     }
 

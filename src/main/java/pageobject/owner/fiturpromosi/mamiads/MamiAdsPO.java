@@ -127,7 +127,7 @@ public class MamiAdsPO {
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
-        this.lihatDetailVoucher = page.getByTestId("lihatDetailvoucher_btn");
+        this.lihatDetailVoucher = page.getByTestId("lihatDetailvoucher_btn").first();
 
         //--- Jemput Bola Entry Point ---//
         this.entryPointJBSection = page.locator("(//div[@class='mami-ads-statistic-main'])[1]");

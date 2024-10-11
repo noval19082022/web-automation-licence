@@ -120,3 +120,78 @@ Feature: Payment Goldplus staging
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
+
+  @payBniWithVoucher
+  Scenario: Owner Purchase GP using bni
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | GPFIX5K           | VTOTALUSAGE       |
+    And owner select payment method from invoice detail using BNI
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
+    Then owner will see that the text "Lunas" is displayed
+
+  @invalidVoucherGP
+  Scenario: user input manually invalid voucher
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | GPFIX10K          | VTOTALUSAGE       |
+    Then tenant can see warning message "Kode voucher tidak ditemukan."
+
+  @closePopUpInvoice
+  Scenario: user want to close popup voucher
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And user click button masukan on voucher
+    And user can click close button on popup
+    Then owner will see that the text "Voucher Anda" is displayed
+
+  @viewDetailVoucher
+  Scenario: user want to close popup voucher
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And user click button masukan on voucher
+    And user can click close button on popup
+    And user click on lihat detail voucher
+    Then owner will see that the text "Kode Voucher: COBATESMINIMUM" is displayed
+
+  @deleteVoucherGp
+  Scenario: User want to delete voucher after input voucher in GP invoice
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 089145645609 | 0          | qwerty123 |
+    And owner waiting the page reload
+    And user click daftar GP button
+    And user wants to subscribe Goldplus 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | GPFIX5K           | VTOTALUSAGE       |
+    And owner click "Hapus"
+    Then user verify the toast "Voucher Dihapus"
+
+

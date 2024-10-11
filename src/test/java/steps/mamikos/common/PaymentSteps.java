@@ -58,6 +58,12 @@ public class PaymentSteps {
         invoice.clickOnPakaiVoucherButton();
     }
 
+    @When("user click button masukan on voucher")
+    public void tenantApplyVoucher() throws InterruptedException {
+        invoice.clickOnMasukkanVoucher();
+        invoice.clickOnMasukkanVoucherPopUp();
+    }
+
     @Then("tenant can see voucher is applied")
     public void tenantCanSeeVoucherIsApplied() {
         Assert.assertEquals(invoice.getToastText(), "Voucher Dipakai");
