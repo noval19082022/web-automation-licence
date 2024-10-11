@@ -55,7 +55,7 @@ public class KostOwnerSteps {
 
     @And("user verify the kos in admin kos owner if exist")
     public void userVerifyTheKosInAdminKosOwnerIfExist() {
-        kostOwner.clickOnFirstVerifyButtonIfExist();
+        kostOwner.clickVerifyButtonIfExists();
     }
 
     @And("admin bangkrupux search kost owner in admin kos owner page")

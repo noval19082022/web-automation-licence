@@ -137,7 +137,7 @@ public class KostOwnerPO {
     /**
      * Click on first verify button if exist
      */
-    public void clickOnFirstVerifyButtonIfExist() {
+    public void clickVerifyButtonIfExists() {
         if (playwright.waitTillLocatorIsVisible(verifyButton, 5000.0)) {
             playwright.clickOn(verifyButton);
         }
