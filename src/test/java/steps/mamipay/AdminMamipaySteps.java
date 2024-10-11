@@ -8,8 +8,6 @@ import io.cucumber.java.en.And;
 import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
-
 public class AdminMamipaySteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);

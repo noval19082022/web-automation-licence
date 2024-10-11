@@ -2,7 +2,6 @@ package steps.mamikos.lct;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.lct.homepageLctPO;

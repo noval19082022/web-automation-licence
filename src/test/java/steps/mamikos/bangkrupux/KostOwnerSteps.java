@@ -1,6 +1,5 @@
 package steps.mamikos.bangkrupux;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
@@ -56,7 +55,7 @@ public class KostOwnerSteps {
 
     @And("user verify the kos in admin kos owner if exist")
     public void userVerifyTheKosInAdminKosOwnerIfExist() {
-        kostOwner.clickOnFirstVerifyButtonIfExist();
+        kostOwner.clickVerifyButtonIfExists();
     }
 
     @And("admin bangkrupux search kost owner in admin kos owner page")

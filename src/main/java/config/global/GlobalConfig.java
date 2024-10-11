@@ -15,5 +15,5 @@ public class GlobalConfig {
     public static final int SCREEN_HEIGHT = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ? 1080 : JavaHelpers.getScreenHeight();
     public static final double DEFAULT_NAVIGATION_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "defaultNavigationTimeout"));
     public static final double DEFAULT_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "defaultTimeout"));
-
+    public static final double LONG_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "longWaitTime"));
 }
