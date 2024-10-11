@@ -3,9 +3,14 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import com.microsoft.playwright.options.WaitUntilState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
+
+import javax.swing.plaf.nimbus.State;
+import java.util.Enumeration;
 
 public class KostOwnerPO {
     private Page page;
@@ -18,13 +23,15 @@ public class KostOwnerPO {
     Locator rejectButton;
     Locator verifyIcon;
     Locator alertMessage;
-    Locator firstVerifyButton;
+    Locator verifyButton;
     Locator firstDeleteButton;
     Locator firstRejectKosButton;
     Locator reasonRejectonCheckbox;
     Locator phoneOwnerSearch;
     Locator rejectBbkButton;
     Locator firstApproveButton;
+    Locator updateStatus;
+    Locator actionBox;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -34,7 +41,7 @@ public class KostOwnerPO {
         firstBBKDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
-        firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
+        verifyButton = page.locator("//*[@title='Verify']");
         firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
         firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
         phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
@@ -42,6 +49,8 @@ public class KostOwnerPO {
         rejectBbkButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reject").setExact(true));
         firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
+        updateStatus = page.getByText("× Success! Room has been successfully updated");
+        actionBox = page.locator(".btn-action-group");
     }
 
     /**
@@ -51,7 +60,7 @@ public class KostOwnerPO {
     public void searchKosName(String kosName) {
         playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
         playwright.pressKeyboardKey("Enter");
-        playwright.hardWait(5000);
+        playwright.waitTillPageLoaded(3e5);
     }
 
     /**
@@ -124,16 +133,17 @@ public class KostOwnerPO {
      * Click on first verify button
      */
     public void clickOnFirstVerifyButton() {
-        playwright.clickOn(firstVerifyButton);
-        playwright.waitTillPageLoaded(5_000.0);
+        playwright.waitForSelectorState(actionBox.first(), WaitForSelectorState.ATTACHED, 3e5);
+        playwright.clickIfElementVisible(verifyButton.first(), updateStatus, 30000.0);
+        playwright.waitTillPageLoaded(30000.0);
     }
 
     /**
      * Click on first verify button if exist
      */
     public void clickOnFirstVerifyButtonIfExist() {
-        if (playwright.waitTillLocatorIsVisible(firstVerifyButton, 5000.0)) {
-            playwright.clickOn(firstVerifyButton);
+        if (playwright.waitTillLocatorIsVisible(verifyButton, 5000.0)) {
+            playwright.clickOn(verifyButton);
         }
         playwright.waitTillPageLoaded(5000.0);
     }

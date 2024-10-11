@@ -1,10 +1,7 @@
 package utilities;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.ElementState;
-import com.microsoft.playwright.options.LoadState;
-import com.microsoft.playwright.options.SelectOption;
+import com.microsoft.playwright.options.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Paths;
@@ -117,8 +114,6 @@ public class PlaywrightHelpers {
 
     /**
      * Back to previous page
-     *
-     *
      */
     public void backToPreviousPage() {
         page.goBack();
@@ -197,7 +192,6 @@ public class PlaywrightHelpers {
 
     /**
      * Wait till locator is visible then click on desired locator
-     *
      * @param locator target locator
      */
     public void waitForLocatorVisibleAndClickOn(Locator locator) {
@@ -208,12 +202,27 @@ public class PlaywrightHelpers {
     /**
      * click locator if some locator exist
      * this method is suitable for dynamic element
-     * example usage src/main/java/pageobject/owner/fiturpromosi/BroadcastChatPO.java on method clickOnTambahBroadcastChatButton()
      * @param locatorCLick target click locator
      */
     public void clickIfElementVisible(Locator locatorCLick) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
             clickOn(locatorCLick);
+        } else {
+            logElementNotClickable(locatorCLick);
+        }
+    }
+
+    /**
+     * click locator if some locator exist
+     * this method is suitable for dynamic element
+     * @param locatorCLick target click locator
+     * @param locatorWait locator wait
+     * @param timeout timeout in milliseconds
+     */
+    public void clickIfElementVisible(Locator locatorCLick, Locator locatorWait, Double timeout) {
+        if (waitTillLocatorIsVisible(locatorCLick)) {
+            forceClickOn(locatorCLick);
+            waitForSelectorState(locatorWait, WaitForSelectorState.VISIBLE, timeout);
         } else {
             logElementNotClickable(locatorCLick);
         }
@@ -227,21 +236,6 @@ public class PlaywrightHelpers {
      */
     public void clickIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
-            clickOn(locatorCLick);
-        } else {
-            logElementNotClickable(locatorCLick);
-        }
-    }
-
-    /**
-     * click locator if some locator exist after load
-     * this method is suitable for dynamic pop up
-     * @param locatorExist seen locator
-     * @param locatorCLick target click locator
-     * @param timeout timeout time waiting
-     */
-    public void clickIfElementVisibleAfterLoad(Locator locatorExist, Locator locatorCLick , double timeout) {
-        if (isLocatorVisibleAfterLoad(locatorExist, timeout)) {
             clickOn(locatorCLick);
         } else {
             logElementNotClickable(locatorCLick);
@@ -539,6 +533,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait till page loaded
+     * Default wait time is 30 seconds
      */
     public void waitTillPageLoaded() {
         page.waitForLoadState(LoadState.LOAD);
@@ -553,7 +548,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait till page loaded
-     * @param timeout double data type
+     * @param timeout double data type in millisecond
      */
     public void waitTillPageLoaded(Double timeout) {
         page.waitForLoadState(LoadState.LOAD, new Page.WaitForLoadStateOptions().setTimeout(timeout));
@@ -584,6 +579,16 @@ public class PlaywrightHelpers {
                 }
             } while (waitTillLocatorIsVisible(locator));
         }
+    }
+
+    /**
+     * Wait for locator have target state
+     * @param locator target locator
+     * @param state WaitForSelectorState VISIBLE ATTACHED DETACHED
+     * @param timeout timeout wait duration in millisecond
+     */
+    public void waitForSelectorState(Locator locator, WaitForSelectorState state, Double timeout) {
+        locator.waitFor(new Locator.WaitForOptions().setState(state).setTimeout(timeout));
     }
 
     //---- Wait Part ----\\

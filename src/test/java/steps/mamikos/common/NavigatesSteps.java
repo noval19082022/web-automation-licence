@@ -304,7 +304,7 @@ public class NavigatesSteps {
 
     @And("admin bangkrupux navigate to kost owner menu")
     public void adminNavigatesToKostOwnerMenu() {
-        playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 3e5, LoadState.LOAD);
     }
 
     @And("admin bangkrupux navigate to booking owner request menu")

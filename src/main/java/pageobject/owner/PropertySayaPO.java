@@ -4,6 +4,7 @@ import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.JavaHelpers;
@@ -215,6 +216,8 @@ public class PropertySayaPO {
     Locator kostNameField2;
     Locator favoritedSection;
     Locator leafletMarkerIcon;
+    Locator loadingSpinner;
+    Locator filterRoomBox;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -385,6 +388,9 @@ public class PropertySayaPO {
         favoritedSection = page.getByText("Difavoritkan 0");
         kostNameField2 = page.locator("//div[@class='bg-c-input step-one__input bg-c-input--disabled bg-c-input--lg']");
         leafletMarkerIcon = page.locator("//img[@class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive leaflet-marker-draggable']");
+        loadingSpinner = page.locator(".c-loader").first();
+        filterRoomBox = page.locator("#ownerKosContainer");
+
     }
 
     /**
@@ -394,9 +400,11 @@ public class PropertySayaPO {
      */
     public void searchKostPropertySaya(String kostName) {
         playwright.waitTillPageLoaded();
+        playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, 3e5);
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
+        playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, 3e5);
         playwright.clickOn(kostSearch);
     }
 
@@ -623,6 +631,7 @@ public class PropertySayaPO {
      * Click on lihat selengkapnya button in first kos list
      */
     public void clickOnLihatSelengkapnyaButton() {
+        playwright.waitForSelectorState(lihatSelengkapnyaButton, WaitForSelectorState.VISIBLE, 1000.0 * 300);
         playwright.clickOn(lihatSelengkapnyaButton);
     }
 
@@ -816,6 +825,7 @@ public class PropertySayaPO {
     public void clickEditDataKos(String dataKos) {
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
         playwright.clickOn(editDataKos);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 3e5);
     }
 
     /**
