@@ -235,6 +235,7 @@ public class ChatTenantPO {
      *
      */
     public void clickOnSendFormButton(String send) {
+        playwright.hardWait(7000);
         playwright.waitTillPageLoaded();
         String inputTextbox = "//*[normalize-space()='"+send+"']";
         ElementHandle element = page.querySelector(inputTextbox);
