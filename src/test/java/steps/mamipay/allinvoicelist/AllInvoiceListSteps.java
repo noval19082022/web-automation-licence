@@ -5,7 +5,6 @@ import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.payment.Payment;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;

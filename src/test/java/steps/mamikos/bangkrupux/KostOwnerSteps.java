@@ -1,6 +1,5 @@
 package steps.mamikos.bangkrupux;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
