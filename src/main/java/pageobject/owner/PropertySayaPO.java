@@ -856,6 +856,7 @@ public class PropertySayaPO {
     public void clickEditDoneButton() {
         playwright.hardWait(2000.0);
         playwright.clickOn(editSelesaiButton);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
