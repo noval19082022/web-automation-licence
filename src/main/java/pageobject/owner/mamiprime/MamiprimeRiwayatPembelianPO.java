@@ -3,6 +3,8 @@ package pageobject.owner.mamiprime;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
@@ -31,7 +33,7 @@ public class MamiprimeRiwayatPembelianPO {
      * Navigates to Riwayat Pembelian Mamiprime
      */
     public void navigatesToRiwayatPembelianMamiprime() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_HISTORY, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_HISTORY, GlobalConfig.LONG_TIMEOUT, LoadState.LOAD);
     }
 
     /**
@@ -92,7 +94,6 @@ public class MamiprimeRiwayatPembelianPO {
      *
      */
     public void clickOnLatestUnpaidTransactionMamiprime() {
-        playwright.clickOn(unpaidTransactionMamiprimeList);
+        playwright.clickOn(unpaidTransactionMamiprimeList, GlobalConfig.LONG_TIMEOUT, WaitForSelectorState.ATTACHED);
     }
-
 }

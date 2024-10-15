@@ -1,4 +1,4 @@
-@regression @LIMO4 @MamiprimeRiwayatPage
+@regression @LIMO4 @mamiprimeRiwayatPage1
 Feature: Riwayat Mamiprime Page
 
   @TEST_LIMO-3540 @continue @WEB @AUTOMATED
