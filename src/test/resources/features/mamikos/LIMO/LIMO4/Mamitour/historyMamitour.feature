@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamitour
+@regression @LIMO4 @mamitour @mamitourHistory
 Feature: Mamitour History
 
   @TEST_LIMO-1121 @WEB @AUTOMATED @MAMITOUR
