@@ -131,6 +131,17 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Click on a desired locator
+     * @param locator target locator
+     * @param timeout timeout in milliseconds
+     * @param state WaitForSelectorState VISIBLE ATTACHED DETACHED
+     */
+    public void clickOn(Locator locator, Double timeout, WaitForSelectorState state) {
+        locator.waitFor(new Locator.WaitForOptions().setState(state).setTimeout(timeout));
+        locator.click(new Locator.ClickOptions());
+    }
+
+    /**
      * click on locator and typing inside of placeholder like real keyboard
      *
      * @param element
