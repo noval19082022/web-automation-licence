@@ -72,12 +72,11 @@ Feature: Mars Project
       | kost path stag                                                                                 | kost path prod                         |
       | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
     And user click chat in kos detail
-    And user select question "Boleh tanya-tanya dulu?"
-    And user click send chat from popup
+    And tenant enter text "Boleh tanya-tanya dulu?" in chat page
     Then user cant see last owner seen
 
   @TEST_SS-2813 @Automated @MARS-DOM @Web @discovery-platform
-  Scenario: [Web][Mars] Check autoreply of chat on P2 Kost
+  Scenario: [Web][Mars] Check autoreply of chat on P2 Kost when user already send message
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod   | password  |
@@ -85,10 +84,9 @@ Feature: Mars Project
     And tenant redirect to kost details:
       | kost path stag                                                                                 | kost path prod                         |
       | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
-    And user select question "Boleh tanya-tanya dulu?"
-    And user click send chat from popup
-    Then chat room appear with latest message "Mohon tunggu balasan dari pemilik kos ini."
+    Then chat room appear with latest message "Boleh tanya-tanya dulu?"
 
   @TEST_SS-2814 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check autoreply of chat on P1 Kost
@@ -101,6 +99,5 @@ Feature: Mars Project
       | kost-bantul-kost-campur-eksklusif-kos-laris-kretek-1 | Kos Laris Kretek |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
-    And user select question "Boleh tanya-tanya dulu?"
-    And user click send chat from popup
+    And user select chat preset question "Boleh tanya-tanya dulu?"
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."

@@ -99,6 +99,17 @@ public class ChatTenantPO {
     }
 
     /**
+     * Click one of question in chat preset button
+     * @param text is position from top
+     *
+     */
+    public void clickPresetQuestion(String text) {
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        playwright.clickOn(questionOption);
+        playwright.hardWait(5000);
+        }
+
+    /**
      * Click ajukan sewa button in question pop up
      *
      */

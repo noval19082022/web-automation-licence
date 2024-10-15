@@ -83,7 +83,7 @@ Feature: Blacklist User
       | phone stag   | phone prod   | password  |
       | 089536519944 | 089536519944 | qwerty123 |
 
-  @continue @TEST_SS-2817
+  @TEST_SS-2817
   Scenario Outline: [WEB][Blacklist] Admin Add blacklist user from homepage blacklist user
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -106,6 +106,11 @@ Feature: Blacklist User
 
   @TEST_DOM-2639 @TEST_SS-2824
   Scenario Outline: [WEB][Blacklist] After blacklist email user try login via Facebook
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And user access menu blacklist user
     When user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     And user click blacklist on homepage blacklist
     And user fill note "Blacklist by Automation"
