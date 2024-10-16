@@ -1,4 +1,4 @@
-@COOP-4993 @COOP2
+@COOP-4993 @COOP2 @loadingrevamp
 Feature: Additional Price Biaya Lainnya Recurring Invoice
 
 

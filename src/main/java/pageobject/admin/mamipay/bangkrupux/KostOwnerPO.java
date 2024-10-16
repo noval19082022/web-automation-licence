@@ -168,6 +168,7 @@ public class KostOwnerPO {
      */
     public String getKosListDeleteUrl() {
         playwright.waitTillPageLoaded();
+        playwright.waitForSelectorState(firstDeleteButton, WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
         return playwright.getAttributeValue(firstDeleteButton, "href");
     }
 
