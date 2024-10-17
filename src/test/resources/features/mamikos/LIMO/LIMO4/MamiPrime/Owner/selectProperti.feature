@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamiprime
+@regression @LIMO4 @mamiprime @selectPropertySection
 Feature: Select property section
 
   @TEST_LIMO-3595 @continue @WEB @AUTOMATED

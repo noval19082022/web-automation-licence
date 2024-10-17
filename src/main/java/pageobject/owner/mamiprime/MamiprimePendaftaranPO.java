@@ -4,6 +4,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
@@ -45,7 +47,7 @@ public class MamiprimePendaftaranPO {
      * Navigates to Pendaftaran Mamiprime page
      */
     public void navigatesToPendaftaranMamiprime() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_PENDAFTARAN, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME_PENDAFTARAN, GlobalConfig.LONG_TIMEOUT, LoadState.LOAD);
     }
 
     /**
@@ -123,7 +125,7 @@ public class MamiprimePendaftaranPO {
      * @return true or false
      */
     public boolean isListPeriodeAppear()  {
-        playwright.waitFor(propertyNamePrime);
+        playwright.waitForSelectorState(listAllPeriode, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         return playwright.waitTillLocatorIsVisible(listAllPeriode);
     }
 

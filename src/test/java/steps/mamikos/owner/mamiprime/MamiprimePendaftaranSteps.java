@@ -26,25 +26,24 @@ public class MamiprimePendaftaranSteps {
 
     @Then("owner can see {string} has label {string} at section select property")
     public void owner_can_see_has_label_at_section_select_property(String kost, String label) {
-       Assert.assertEquals(mamiprimePendaftaran.getPropertyNamePrime(),kost,"Name property doesnt equals");
+       Assert.assertEquals(mamiprimePendaftaran.getPropertyNamePrime(),kost,"Name property does not equals");
        Assert.assertEquals(mamiprimePendaftaran.getLabelTextFull(),label,"Label name doesnt equal");
     }
 
     @Then("owner can see information {string} at section select periode")
     public void owner_can_see_information_at_section_select_periode(String information) {
         Assert.assertTrue(mamiprimePendaftaran.checkImageFullisShow(),"image not show");
-        Assert.assertEquals(mamiprimePendaftaran.getInformationTextPrimeFull(),information,"Information doesnt equal");
-
+        Assert.assertEquals(mamiprimePendaftaran.getInformationTextPrimeFull(),information,"Information does not equal");
     }
 
     @Then("owner can see description information {string} at section select periode")
     public void owner_can_see_description_information_at_section_select_periode(String desc) {
-        Assert.assertEquals(mamiprimePendaftaran.getDescInformationTextPrimeFull(),desc,"Description doesnt equal");
+        Assert.assertEquals(mamiprimePendaftaran.getDescInformationTextPrimeFull(),desc,"Description does not equal");
     }
 
     @Then("owner can see {string} doesnt have label {string} at section select property")
     public void owner_can_see_doesnt_have_label_at_section_select_property(String kost, String label) {
-        Assert.assertEquals(mamiprimePendaftaran.getPropertyNamePrime(),kost,"Name property doesnt equals");
+        Assert.assertEquals(mamiprimePendaftaran.getPropertyNamePrime(),kost,"Name property does not equals");
         Assert.assertFalse(mamiprimePendaftaran.isLabelFullPrimeisAppear(),"Label full is appear");
 
     }
