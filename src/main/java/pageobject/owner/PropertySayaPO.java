@@ -1006,7 +1006,7 @@ public class PropertySayaPO {
             playwright.clickOn(jenisPropertiRadioButton);
             playwright.clickOnTextButton("Tambahkan Data", 3000.0);
         } else {
-            playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
+            playwright.waitTillLocatorIsVisible(tambahDataIklan, GlobalConfig.LONG_TIMEOUT);
             playwright.clickOn(tambahDataIklan);
         playwright.clickOn(tambahIklanBaru);
         jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
@@ -1782,6 +1782,7 @@ public class PropertySayaPO {
      */
     public String getRoomTypeMessage(String roomTypeMessageText) {
         roomTypeWarning = page.getByText(roomTypeMessageText);
+        playwright.waitForSelectorState(roomTypeWarning, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         return playwright.getText(roomTypeWarning);
     }
 
