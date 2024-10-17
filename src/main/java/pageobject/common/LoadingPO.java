@@ -32,12 +32,10 @@ public class LoadingPO {
             List<Locator> loadingIconList = playwright.getLocators(loadingIcon);
             if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {
                 for (Locator loadingIcon : loadingIconList) {
-                    //playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
                     playwright.waitForSelectorState(loadingIcon, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
                 }
             }
             if (playwright.waitTillLocatorIsVisible(loadingAnimation)) {
-                //playwright.waitTillLocatorIsNotVisible(loadingAnimation, waitDelay, maxLoop);
                 playwright.waitForSelectorState(loadingAnimation, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
             }
         }
