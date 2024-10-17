@@ -187,6 +187,7 @@ public class KostOwnerPO {
      *
      */
     public String getKosListRejectUrl() {
+        playwright.waitForSelectorState(firstRejectKosButton, WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
         return playwright.getAttributeValue(firstRejectKosButton, "href");
     }
 

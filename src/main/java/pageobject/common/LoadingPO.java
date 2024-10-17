@@ -33,12 +33,12 @@ public class LoadingPO {
             if (playwright.waitTillLocatorIsVisible(loadingIconList.get(0))) {
                 for (Locator loadingIcon : loadingIconList) {
                     //playwright.waitTillLocatorIsNotVisible(loadingIcon, waitDelay, maxLoop);
-                    playwright.waitForSelectorState(loadingIcon, WaitForSelectorState.DETACHED, GlobalConfig.LONG_TIMEOUT);
+                    playwright.waitForSelectorState(loadingIcon, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
                 }
             }
             if (playwright.waitTillLocatorIsVisible(loadingAnimation)) {
                 //playwright.waitTillLocatorIsNotVisible(loadingAnimation, waitDelay, maxLoop);
-                playwright.waitForSelectorState(loadingAnimation, WaitForSelectorState.DETACHED, GlobalConfig.LONG_TIMEOUT);
+                playwright.waitForSelectorState(loadingAnimation, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
             }
         }
     }
