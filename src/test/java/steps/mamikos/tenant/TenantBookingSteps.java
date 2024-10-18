@@ -119,6 +119,13 @@ public class TenantBookingSteps {
         bookingForm.cancelBooking();
     }
 
+    @And("user cancel booking for check recommendation kos")
+    public void userCancelBookingForCheckRecommendationKos() {
+        page.navigate(Mamikos.URL + "/user/booking/");
+        bookingForm = new BookingFormPO(page);
+        bookingForm.cancelBookingForCheckRecommendation();
+    }
+
     @And("user cancel booking with reason {string}")
     public void user_cancel_booking_with_reason(String reason) throws InterruptedException {
         page.navigate(Mamikos.URL + "/user/booking/");

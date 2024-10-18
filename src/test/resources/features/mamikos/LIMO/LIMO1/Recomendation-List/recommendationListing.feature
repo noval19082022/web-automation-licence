@@ -38,13 +38,9 @@ Feature: Recommendation Listing
       | 082322233399  | qwerty123    |
     And user cancel booking
     And user go to mamikos homepage
-#    And tenant search kost then go to kost details:
-#      | kost name stag         | kost name prod |
-#      | Kos Upik Merapi Tipe C |                |
     And tenant redirect to kost details:
       | kost path stag         | kost path prod               |
       | kost-yogyakarta-kost-putri-eksklusif-kos-upik-merapi-tipe-c | Kos DC BAR Automation Tipe A |
-
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
     When user cancel booking
@@ -107,3 +103,20 @@ Feature: Recommendation Listing
     And tenant set active page to 2
     And user can unfavorite the kost for recomendation listing
     Then user can verify kost after unfavorite the kost
+
+  @TEST_LIMO-1452
+  Scenario: Make sure If tenant click back button, then tenant will be redirected back to Detail Booking screen
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password    |
+      | 082322233399  | qwerty123   |
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag         | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kos-digitec-male-rajeg-tangerang | Kos DC BAR Automation Tipe A |
+    And tenant booking kost "tomorrow" "Per Bulan"
+    Then tenant should success booking kost
+    And user cancel booking for check recommendation kos
+    And owner click back previous button
+    Then tenant check status booking is "Dibatalkan"
