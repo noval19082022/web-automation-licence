@@ -41,6 +41,7 @@ public class MamiAdsPO {
     private Locator saldoAmount6000;
     Locator kamarPenuhText;
     private Locator beliSaldoBtnPopupToggle;
+    private Locator continuePaymentBuySaldoMamiads;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -106,6 +107,7 @@ public class MamiAdsPO {
         this.saldoTitleList = page.locator(".balance-list-item__price");
         this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
         this.saldoAmount6000 = page.locator(".bg-c-grid > div:nth-of-type(1) .bg-c-button");
+        this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -820,6 +822,13 @@ public class MamiAdsPO {
         return saldo
                 .replace("Rp", "")
                 .replace(".", "");
+    }
+
+    /**
+     * Click on beli saldo with status menunggu pembayaran
+     */
+    public void userContinuePaymentBuySaldoMamiads() {
+        playwright.clickOn(continuePaymentBuySaldoMamiads);
     }
 }
 

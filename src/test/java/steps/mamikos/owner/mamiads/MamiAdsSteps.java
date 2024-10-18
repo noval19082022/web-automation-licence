@@ -366,4 +366,10 @@ public class MamiAdsSteps {
     public void ownerClickSimpanPengaturanOnUbahAnggaran() {
         mamiAdsPO.clickOnSimpanPengaturanUbahAnggaran();
     }
+
+    @And("user continue payment buy saldo mamiads")
+    public void userContinuePaymentBuySaldoMamiads() {
+        mamiAdsPO.userContinuePaymentBuySaldoMamiads();
+    }
+
 }

@@ -49,6 +49,7 @@ public class RiwayatBookingSteps {
     public void tenant_check_status_booking_is(String status) {
         page.navigate(Mamikos.URL + "/user/booking/");
         Assert.assertEquals(riwayatBooking.getFirstListBookingStatusText(), status);
+
     }
 
     @Then("tenant can see ajukan sewa text button")
