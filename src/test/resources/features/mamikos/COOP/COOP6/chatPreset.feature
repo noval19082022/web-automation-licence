@@ -31,7 +31,7 @@ Feature: Chat Preset
     And user select chat preset question "Bisa pasutri?"
     Then chat room appear with latest message "Kos ini bisa disewa pasutri ya, kak."
 
-  @TEST_SS-6051 @continue @a
+  @TEST_SS-6051 @continue
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and doesn't have pasutri
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -43,7 +43,7 @@ Feature: Chat Preset
     And user select chat preset question "Bisa pasutri?"
     Then chat room appear with latest message "Kos ini tidak bisa disewa pasutri ya, kak. Apakah kakak sedang mencari kos yang bisa pasutri?"
 
-  @TEST_SS-6052 @continue @a
+  @TEST_SS-6052 @continue
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh bawa hewan on chat preset and check the answer for kost P1 and kost have tagging bawa hewan
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
@@ -52,7 +52,7 @@ Feature: Chat Preset
     And user select chat preset question "Boleh bawa hewan?"
     Then chat room appear with latest message "Penyewa boleh membawa hewan di kos ini ya, kak."
 
-  @TEST_SS-6053 @a
+  @TEST_SS-6053
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh bawa hewan on chat preset and check the answer for kost P1 and kost dont have tagging bawa hewan
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
