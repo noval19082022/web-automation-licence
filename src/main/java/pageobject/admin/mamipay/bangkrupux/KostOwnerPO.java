@@ -57,7 +57,7 @@ public class KostOwnerPO {
     public void searchKosName(String kosName) {
         playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
         playwright.pressKeyboardKey("Enter");
-        playwright.waitTillPageLoaded(GlobalConfig.LONG_TIMEOUT);
+        playwright.hardWait(2_000.0);
     }
 
     /**
@@ -142,7 +142,7 @@ public class KostOwnerPO {
         if (playwright.waitTillLocatorIsVisible(verifyButton, 5000.0)) {
             playwright.clickOn(verifyButton);
         }
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.hardWait(2000.0);
     }
 
     /**
