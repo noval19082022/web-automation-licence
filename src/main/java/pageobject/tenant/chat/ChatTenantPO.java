@@ -110,6 +110,16 @@ public class ChatTenantPO {
         }
 
     /**
+     * verify chat preset question
+      * @param text
+     * @return text example : Ada diskon untuk kos ini?
+     */
+    public boolean isChatPresetQuestionVisible(String text) {
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        return playwright.waitTillLocatorIsVisible(questionOption, 3000.0);
+    }
+
+    /**
      * Click ajukan sewa button in question pop up
      *
      */
