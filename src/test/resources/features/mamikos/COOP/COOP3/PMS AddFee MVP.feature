@@ -131,7 +131,7 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
@@ -163,14 +163,14 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
     Then admin see informasi penyewa
     And admin fill informasi pembayaran:
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-      | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+      | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     And admin add other cost:
       | Nama Biaya         | Harga  |
       | Parkir Mobil       | 10000 |
@@ -190,14 +190,14 @@ Feature: PMS - Add fee MVP
       And admin login pms :
         | email             | password     |
         | pman@mamiteam.com | pmanM4m1t34m |
-      And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
       And admin create contract tenant new booking
       And admin selected type room
       And admin fill phone number tenant "0812000008"
       Then admin see informasi penyewa
       And admin fill informasi pembayaran:
         | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-        | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+        | Per Bulan     | today            | 3 Bulan     | Full Payment      |
       And admin add other cost:
         | Nama Biaya         | Harga  |
         | Parkir Mobil       | 10000  |
@@ -217,7 +217,7 @@ Feature: PMS - Add fee MVP
      And admin show filter data booking
      And admin filter data booking by tenant phone number:
        | Tenant Phone | Kos Type |
-       | 0812000008   | All      |
+       | 0812000008   | All Testing     |
      And admin click actions button on booking list
      And admin accept booking for kost add fee
      Then admin can see add fee from pms with:
@@ -225,21 +225,20 @@ Feature: PMS - Add fee MVP
      | Parkir Mobil |
      | Bawa Blender |
 
-
     @SS-4331
     Scenario: [PMS][New booking/DBET] Admin check list addfee must same with PMS-kk in dropdown
       When admin go to pms singgahsini
       And admin login pms :
         | email             | password     |
         | pman@mamiteam.com | pmanM4m1t34m |
-      And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
       And admin create contract tenant new booking
       And admin selected type room
       And admin fill phone number tenant "0812000008"
       Then admin see informasi penyewa
       And admin fill informasi pembayaran:
         | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-        | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+        | Per Bulan     | today            | 3 Bulan     | Full Payment      |
       Then admin can see addfee KK with:
         | addfee name |
         | Alat Elektronik |

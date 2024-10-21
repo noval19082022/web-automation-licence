@@ -253,6 +253,7 @@ public class HomepagePO {
      */
     public void clickRoomAllotment() {
         roomAllotmentBtn.click();
+        playwright.hardWait(15000.0);
     }
 
     /**
