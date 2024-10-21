@@ -23,6 +23,8 @@ public class SearchPO {
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
+    Locator suggestionPrimeResutls;
+    Locator suggestionNonPrimeResutls;
     Locator promoNgebutFilter;
     Locator dikelolaMamikosFilter;
     Locator dikelolaMamikosDesc;
@@ -63,6 +65,8 @@ public class SearchPO {
         this.resultBasedOnArea = page.locator("//h2[@class = 'list__title']");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
+        suggestionPrimeResutls = page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item");
+        suggestionNonPrimeResutls = page.getByTestId("suggestionBox-roomListNonPrime");
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
@@ -626,6 +630,17 @@ public class SearchPO {
         resultLocator.first().click();
     }
 
+
+    /**
+     * Enter Text in search bar and select result
+     *
+     * @param searchText is text we want to search
+     */
+    public void enterTextToSearch(String searchText) {
+        playwright.clickLocatorAndTypeKeyboard(inputSearch, searchText);
+        playwright.hardWait(1_000.0);
+    }
+
     /**
      * List all listing facilities in search result
      *
@@ -746,5 +761,13 @@ public class SearchPO {
     public void clickPopularArea(String place, String popPlace) {
         playwright.clickOn(page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName(place)));
         playwright.clickOn(page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(popPlace)));
+    }
+
+    public List<String> getListSuggestionKostNamePrime() {
+        return playwright.getListInnerTextFromListLocator(suggestionPrimeResutls);
+    }
+
+    public List<String> getListSuggestionKostNameNonPrime() {
+        return playwright.getListInnerTextFromListLocator(suggestionNonPrimeResutls);
     }
 }
