@@ -111,6 +111,7 @@ public class TenantBackgroundCheckerSteps {
     public void owner_see_explain_is(String tooltip) {
         Assert.assertTrue(tenantBackgroundCheckerPO.isTooltipMessageDisplayed(tooltip), "Information doesn't show");
     }
+
     @Then("owner see popup text {string}")
     public void owner_see_popup_text(String textPopup) {
         Assert.assertTrue(tenantBackgroundCheckerPO.isTextPopupDisplayed(textPopup), "Information doesn't show");

@@ -638,7 +638,6 @@ public class SearchPO {
      */
     public void enterTextToSearch(String searchText) {
         playwright.clickLocatorAndTypeKeyboard(inputSearch, searchText);
-        playwright.hardWait(1_000.0);
     }
 
     /**
