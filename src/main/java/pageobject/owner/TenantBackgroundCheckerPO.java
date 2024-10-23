@@ -91,6 +91,7 @@ public class TenantBackgroundCheckerPO {
      */
     public void clickOnLihatProfil(){
         playwright.clickOn(lihatProfilTextButton);
+        playwright.waitTillPageLoaded();
     }
 
     /**

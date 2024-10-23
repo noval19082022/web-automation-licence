@@ -142,7 +142,7 @@ public class KostOwnerPO {
         if (playwright.waitTillLocatorIsVisible(verifyButton, 5000.0)) {
             playwright.clickOn(verifyButton);
         }
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded();
     }
 
     /**
