@@ -1,4 +1,4 @@
-@LIMO4 @regression
+@LIMO4 @regression @tbclimo
 Feature: Profile Tenant Background Checker
 
   @TEST_LIMO-315 @WEB @AUTOMATED
@@ -19,7 +19,7 @@ Feature: Profile Tenant Background Checker
       | phone stag   | phone prod   | password  |
       | 083355251016 | 083355251016 | qwerty123 |
     And user click chat button in top bar owner home page
-    And owner doesn't have GP open TBC Lihat Profil at chatroom "Narendra Putra"
+    And owner doesn't have GP open TBC Lihat Profil at chatroom "Desta Tenant D"
     When owner click button "Beli Paket" on TBC page
     Then owner should see anda belum memiliki kos aktif pop up
 
@@ -79,7 +79,7 @@ Feature: Profile Tenant Background Checker
     And owner open TBC Lihat Profil at chatroom "Noval Abis Delete Aja"
     Then owner GP-1 upgrade paket to GP-2 from TBC detail page
 
-    @TEST_LIMO-322
+  @TEST_LIMO-322
   Scenario:[Web][Tenant Background Checker][Profil Tenant] Check condition when owner have invoice single or multiple GP 1 activation
     Given user go to mamikos homepage
     When user login as owner:

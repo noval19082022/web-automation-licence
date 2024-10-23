@@ -87,6 +87,26 @@ public class HomepageSteps {
         homepage.selectDbetCategory(text);
     }
 
+    @And("user click dropdown kategori kontrak DBET field")
+    public void user_click_dropdown_kategori_dbet(){
+        homepage.clickDbetCategoryButton();
+    }
+
+    @Then("user validate this {string} is shown in kategori kontrak DBET field")
+    public void user_validate_this_option_is_show_in_kategori_kontrak_dbet_field(String option){
+        Assert.assertEquals(homepage.getDbetCategoryResult(option), option, "not appears dbet category according list");
+    }
+
+    @Then("admin can see contract id is disabled")
+    public void admin_can_see_contract_id_is_disabled(){
+        homepage.assertContractIdDisable();
+    }
+
+    @Then("admin can see contract id is enabled")
+    public void admin_can_see_contract_id_is_enabled(){
+        homepage.assertContractIdEnabled();
+    }
+
     @And("admin fill phone number tenant {string}")
     public void admin_fill_number_handphone_tenant(String number) {
         homepage.fillNumberHandphoneTenant(number);
