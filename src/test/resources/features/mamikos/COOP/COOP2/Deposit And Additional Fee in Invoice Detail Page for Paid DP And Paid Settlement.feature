@@ -23,9 +23,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid 
   @SS-5035
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Paid DP And Paid Settlement] Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                  | kost name prod                  |
-      | Kost Adi Auto DP AddFee Deposit | Kost Adi Auto DP AddFee Deposit |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                            | kost path prod                  |
+      | kost-kabupaten-manggarai-kost-campur-eksklusif-kost-adi-auto-dp-additional-fee-langke-rembong-manggarai-1 | Kost Adi Auto DP AddFee Deposit |
     And tenant booking kost
     Then tenant should success booking kost
 

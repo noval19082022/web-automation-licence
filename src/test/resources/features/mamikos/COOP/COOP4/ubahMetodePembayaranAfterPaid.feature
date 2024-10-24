@@ -1,7 +1,6 @@
 @COOP4
 Feature: Click Button Ubah Metode Pembayaran After Paid
 
-  @TEST_SS-4391
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -24,9 +23,9 @@ Feature: Click Button Ubah Metode Pembayaran After Paid
   @tenantBookingKos
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag | kost name prod |
-      | Kost Reykjavik | Kost Reykjavik |
+    And tenant redirect to kost details:
+      | kost path stag                                        | kost path prod |
+      | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -41,7 +40,7 @@ Feature: Click Button Ubah Metode Pembayaran After Paid
       | Budi Tromol Coop Automation | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @tenantPayWithVoucher @continue
+  @tenantPayWithVoucher @continue @TEST_SS-4391
   Scenario: click "Ubah Metode Pembayaran" After Paid
     Given user go to mamikos homepage
     When user login as tenant via phone number:

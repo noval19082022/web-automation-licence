@@ -24,9 +24,9 @@ Feature: Apply Voucher For Room Type Gold Plus
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod        |
-      | Adi Automate Gp1        | Kos Rampak Gasim      |
+    And tenant redirect to kost details:
+      | kost path stag                                                                | kost path prod               |
+      | kost-kabupaten-rembang-kost-campur-eksklusif-adi-automate-gp1-lasem-rembang-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 

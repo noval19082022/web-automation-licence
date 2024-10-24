@@ -74,7 +74,7 @@ Feature: Kost List
       | 3      |
       | 4      |
 
-  @TEST_SS-568
+  @TEST_SS-568 @continue
   Scenario: Search Kost List by Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -85,34 +85,22 @@ Feature: Kost List
     When admin search kost by name "Tobelo Asri"
     Then show result kost "Tobelo Asri"
 
-  @TEST_SS-636
+  @TEST_SS-636 @continue
   Scenario: Search Kost List by Owner Name
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
-    And admin access menu "Kost List" sub menu of management level
+    Given admin access menu "Kost List" sub menu of management level
     #serach by owner name
     When admin search kost by owner name "Yudha Chandra"
     Then show all kost belongs to owner "Yudha Chandra"
 
-  @TEST_SS-650
+  @TEST_SS-650 @continue
   Scenario: Search Kost List by Owner Phone Number
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
-    And admin access menu "Kost List" sub menu of management level
+    Given admin access menu "Kost List" sub menu of management level
     #search by owner phone number
     When admin search kost by owner phone number "085947715987"
     Then show all kost belongs to owner phone number "085947715987"
 
   @TEST_SS-580
   Scenario: Search Kost List by Multiple Filter
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
     When admin access menu "Kost List" sub menu of management level
     And admin search kost by name "Kost Singgahsini Kedai Kopi Tipe B Halmahera Utara"
     And admin search kost by owner name "Okta BSE"

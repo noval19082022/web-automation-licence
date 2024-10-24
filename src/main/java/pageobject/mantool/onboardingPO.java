@@ -3,7 +3,6 @@ package pageobject.mantool;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
 public class onboardingPO {
@@ -25,6 +24,7 @@ public class onboardingPO {
     private Locator stepHeaderTitle;
     private Locator profileAvatar;
     private Locator keluarButton;
+    private Locator suratKeteranganLink;
 
     public onboardingPO(Page page){
         this.page = page;
@@ -44,6 +44,7 @@ public class onboardingPO {
         stepHeaderTitle = page.locator(".onboarding-steps__indicator p");
         profileAvatar = page.getByAltText("Avatar");
         keluarButton = page.getByText("Keluar");
+        suratKeteranganLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Surat Keterangan"));
     }
 
     /**
@@ -84,7 +85,8 @@ public class onboardingPO {
      * Click Surat Keterangan link
      */
     public void clickSuratKeterangan() {
-        playwright.clickOnText("Surat Keterangan");
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(suratKeteranganLink);
     }
 
     /**

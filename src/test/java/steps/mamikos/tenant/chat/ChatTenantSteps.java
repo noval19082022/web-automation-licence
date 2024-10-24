@@ -45,6 +45,16 @@ public class ChatTenantSteps {
         chat.clickQuestion(questionOption);
     }
 
+    @And("user select chat preset question {string}")
+    public void userSelectQChatPresetuestion(String questionOption) {
+        chat.clickPresetQuestion(questionOption);
+    }
+
+    @Then("user can see chat preset question {string}")
+    public void userVerifyChatPresetQuestion(String questionOption){
+        chat.isChatPresetQuestionVisible(questionOption);
+    }
+
     @Then("it will redirect to Booking page")
     public void itWillRedirectToBookingPage() {
     }

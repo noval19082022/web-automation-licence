@@ -77,6 +77,7 @@ public class MamikosVoucherFormPO {
     Locator partnerVoucherTotalQuota;
     Locator addPartnerVoucher;
     Locator fieldRequiredValidationMessage;
+    private Locator removeCityButton;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -137,6 +138,7 @@ public class MamikosVoucherFormPO {
         partnerVoucherTotalQuota = page.locator("input[name=\"limit\"]");
         addPartnerVoucher = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Voucher"));
         fieldRequiredValidationMessage = page.locator("//*[@class='callout callout-danger']//li");
+        removeCityButton = page.getByTitle("Remove item");
     }
 
     /**
@@ -500,7 +502,7 @@ public class MamikosVoucherFormPO {
         else {
             day = startDate;
         }
-        String dateElement = "//body[@class='skin-green sidebar-mini']/div[5]//div[.='"+day+"']";
+        String dateElement = "//body[@class='skin-green sidebar-mini']/div[2]//div[.='"+day+"']";
         String date = java.getTimeStamp("YYYY/MM");
 
         startDateInput.click();
@@ -648,6 +650,7 @@ public class MamikosVoucherFormPO {
                 playwright.clickOn(page.locator("(//span[@class='select2-selection__choice__remove'])[" + i+1 + "]"));
             }
         }
+        playwright.clickOn(removeCityButton);
         playwright.forceFill(applicableForCityEditText, city);
         playwright.clickOn(page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(city)));
     }
@@ -663,6 +666,9 @@ public class MamikosVoucherFormPO {
             for (int i=0 ; i<count; i++){
                 playwright.clickOn(page.locator("(//span[@class='select2-selection__choice__remove'])[" + i+1 + "]"));
             }
+        }
+        if (playwright.isLocatorVisibleAfterLoad(removeCityButton,5000.0)){
+            playwright.clickOn(removeCityButton);
         }
         playwright.forceFill(notApplicableForCityEditText, city);
         playwright.clickOn(page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(city)));

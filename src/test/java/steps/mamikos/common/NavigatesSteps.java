@@ -3,6 +3,7 @@ package steps.mamikos.common;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.global.FlowControl;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.api.AjukanSewaStatus;
 import data.mamikos.Mamikos;
@@ -184,7 +185,7 @@ public class NavigatesSteps {
     @When("owner navigates to property saya kos")
     public void userNavigateToPropertySayaKos() {
         playwright.waitTillPageLoaded();
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, GlobalConfig.LONG_TIMEOUT);
         loading.waitForLoadingIconDisappear();
     }
 
@@ -304,8 +305,15 @@ public class NavigatesSteps {
 
     @And("admin bangkrupux navigate to kost owner menu")
     public void adminNavigatesToKostOwnerMenu() {
-        playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + "/admin/owner?#owner", GlobalConfig.LONG_TIMEOUT, LoadState.LOAD);
     }
+
+    @And("admin bangkrupux navigate to booking owner request menu")
+    public void adminNavigatesToBookingOwnerRequest() {
+        playwright.navigateTo(Mamikos.URL + "/admin/booking/owner/request/#booking-owner", 30000.0, LoadState.LOAD);
+    }
+
+
 
     @And("admin go to kost level menu")
     public void adminGoToKostLevelMenu() {

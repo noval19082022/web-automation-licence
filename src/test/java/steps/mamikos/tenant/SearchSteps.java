@@ -18,6 +18,7 @@ import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class SearchSteps {
     Page page = ActiveContext.getActivePage();
@@ -357,6 +358,16 @@ public class SearchSteps {
         search.enterTextToSearchAndSelectResultCity(city);
     }
 
+    @When("user want to visit search page from homepage")
+    public void user_visit_search_page() {
+        home.clickOnSearchButton();
+    }
+
+    @When("user type to search kost with keywords {string}")
+    public void user_search_for_keyword_(String city) {
+        search.enterTextToSearch(city);
+    }
+
     @Then("user sees the facilities on kos card are {string} or {string} or {string}")
     public void user_sees_the_facilities_on_kos_card_are_or_or(String facility1, String facility2, String facility3) {
         List<String> addressList = search.listKostFacilities();
@@ -557,5 +568,62 @@ public class SearchSteps {
     public void userVisitSearchPageAndVisitPopularSearchBasedOnForLocationOn(String place, String popPlace) {
         searchPO = homePO.clickOnSearchButton();
         searchPO.clickPopularArea(place, popPlace);
+    }
+
+    @Then("user can see total kost in area with {string}")
+    public void user_can_see_total_kost_in_area_with(String text){
+        kostLanding.getTotalSearchAreatext(text);
+    }
+
+    @And("tenant can click on load more button")
+    public void tenant_can_click_on_load_more_button(){
+        kostLanding.clickLoadMore();
+    }
+
+    @And("user verify see kost name {string} in suggestion prime list")
+    public void user_verify_see_kos_prime_on_list(String kostName) {
+        searchPO = Optional.ofNullable(searchPO).orElseGet(() -> new SearchPO(page));
+        var kostPrime = searchPO.getListSuggestionKostNamePrime();
+
+        var isExistCount = 0;
+        for (var kost : kostPrime) {
+            if (kost.contains(kostName)) {
+                isExistCount++;
+            }
+        }
+
+        Assert.assertTrue(isExistCount > 0, String.format("kost %s not exist in prime", kostName));
+        Assert.assertFalse(isExistCount > 1, String.format("kost %s exist more than once in prime with count %d", kostName, isExistCount));
+    }
+
+    @And("user verify see kost name {string} is not exist in suggestion prime list")
+    public void user_verify_see_kos_not_prime_on_list(String kostName) {
+        searchPO = Optional.ofNullable(searchPO).orElseGet(() -> new SearchPO(page));
+        var kostPrime = searchPO.getListSuggestionKostNamePrime();
+
+        var isExistCount = 0;
+        for (var kost : kostPrime) {
+            if (kost.contains(kostName)) {
+                isExistCount++;
+            }
+        }
+
+        Assert.assertFalse(isExistCount > 0, String.format("kost %s is exist in prime", kostName));
+    }
+
+    @And("user verify see kost name {string} in suggestion nama kost terkait list")
+    public void user_verify_see_kos_non_prime_on_list(String kostName) {
+        searchPO = Optional.ofNullable(searchPO).orElseGet(() -> new SearchPO(page));
+        var kostNonPrime = searchPO.getListSuggestionKostNameNonPrime();
+
+        var isExistCount = 0;
+        for (var kost : kostNonPrime) {
+            if (kost.contains(kostName)) {
+                isExistCount++;
+            }
+        }
+
+        Assert.assertTrue(isExistCount > 0, String.format("kost %s not exist in nama kost terkait", kostName));
+        Assert.assertFalse(isExistCount > 1, String.format("kost %s exist more than once in nama kost terkait with count %d", kostName, isExistCount));
     }
 }

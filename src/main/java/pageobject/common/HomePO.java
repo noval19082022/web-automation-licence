@@ -98,7 +98,7 @@ public class HomePO {
         this.cariApaDropDownMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
         this.btnMasuk = page.getByTestId("entryButton");
         this.cariButton = playwright.filterLocatorHasText(locatorHelpers.span, "Cari");
-        mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
+        mamikosLogo = page.getByTestId("bg-l-footer-general").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Mamikos Logo"));
         userProfile = page.locator("div.user-profile-dropdown");
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));
         promoNgebutOptions = page.locator("#flashsale #userLocation");

@@ -125,9 +125,9 @@ Feature: Additional price for kos owner
       | phone stag | phone prod   | password  |
       | 0892202357 | 083176408442 | qwerty123 |
     And user cancel booking
-    And tenant search kost then go to kost details:
-      | kost name stag                                                | kost name prod           |
-      | Kost Singgah Sini B Inter Millan Tobelo Utara Halmahera Utara | Kost Adi Auto Voucher DP |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                     | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-singgah-sini-b-inter-millan-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
     And tenant logs out

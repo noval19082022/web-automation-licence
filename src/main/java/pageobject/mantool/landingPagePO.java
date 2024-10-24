@@ -80,6 +80,7 @@ public class landingPagePO {
     public void goToOnboarding() {
         playwright.clickOn(profileButton);
         playwright.clickOn(onboardingButton);
+        playwright.waitTillPageLoaded();
     }
 
     /**

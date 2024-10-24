@@ -5,7 +5,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
-import pageobject.lct.homepageLctPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import utilities.LocatorHelpers;
@@ -93,11 +92,13 @@ public class OwnerDashboardPO {
     private Locator mamiprimeBannerPopUp;
     private Locator mamiprimeBannerCloseButton;
 
+    private Locator perpanjangBtnReccuringGpPopUp;
+
     public OwnerDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
-        manajemenKost = playwright.locatorByRoleAndText(locator.roleComplementary, "Manajemen Kos");
+        manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
         pengajuanSewaBtn = playwright.getButtonBySetName("Pengajuan Sewa");
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
@@ -156,7 +157,7 @@ public class OwnerDashboardPO {
         mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
         pageHeader = page.locator(".room-page__header");
-        totalNotBookingPopup = page.locator(".suggestion-modal__title");
+        totalNotBookingPopup = page.locator("div.suggestion-modal__title");
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
@@ -169,6 +170,8 @@ public class OwnerDashboardPO {
         mamiprimeWidget = page.getByTestId("membership-prime-card");
         mamiprimeBannerPopUp = page.frameLocator("iframe >> nth=0").getByRole(AriaRole.LINK);
         mamiprimeBannerCloseButton = page.frameLocator("iframe >> nth=0").getByLabel("Close");
+
+        perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
     }
 
     /**
@@ -222,7 +225,7 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        playwright.waitTillLocatorIsVisible(nantiSajaButton,2000.0);
+        playwright.waitTillLocatorIsVisible(nantiSajaButton, 2000.0);
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
         }
@@ -819,6 +822,7 @@ public class OwnerDashboardPO {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
+        playwright.waitTillPageLoaded();
         playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
     }
@@ -873,5 +877,12 @@ public class OwnerDashboardPO {
      */
     public void closeMamiprimeBanner() {
         playwright.clickOn(mamiprimeBannerCloseButton);
+    }
+
+    /**
+     * click on perpanjang btn on gold plus pop up recurring
+     */
+    public void clickOnPerpanjangGoldPlusPopUp() {
+        playwright.clickOn(perpanjangBtnReccuringGpPopUp);
     }
 }

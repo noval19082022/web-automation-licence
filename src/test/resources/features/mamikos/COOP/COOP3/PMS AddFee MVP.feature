@@ -68,7 +68,6 @@ Feature: PMS - Add fee MVP
     And admin click on add fee button
     Then admin cant see "Biaya Tambahan Opsional di Kos"
 
-
   @SS-5074
   Scenario: [AddFee][PMS] Check Biaya tambahan on New booking when setting KK with tipe pembayaran satu kali
  # Scenario: Terminated contract
@@ -132,7 +131,7 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
@@ -164,14 +163,14 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
     Then admin see informasi penyewa
     And admin fill informasi pembayaran:
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-      | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+      | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     And admin add other cost:
       | Nama Biaya         | Harga  |
       | Parkir Mobil       | 10000 |
@@ -191,14 +190,14 @@ Feature: PMS - Add fee MVP
       And admin login pms :
         | email             | password     |
         | pman@mamiteam.com | pmanM4m1t34m |
-      And admin go to room allotment page "Kost Singgahsini Rumah nDalem Kretek"
+      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
       And admin create contract tenant new booking
       And admin selected type room
       And admin fill phone number tenant "0812000008"
       Then admin see informasi penyewa
       And admin fill informasi pembayaran:
         | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-        | Per 3 Bulan     | today            | 3 Bulan     | Full Payment      |
+        | Per Bulan     | today            | 3 Bulan     | Full Payment      |
       And admin add other cost:
         | Nama Biaya         | Harga  |
         | Parkir Mobil       | 10000  |
@@ -206,3 +205,44 @@ Feature: PMS - Add fee MVP
         | Bawa Kulkas        | 50000  |
         | Laundry            | 5000   |
       And admin click on save button
+      Then admin click on ya simpan button
+
+   @SS-4333
+   Scenario: [Bangkerupux][Data booking] Admin check data biaya tambahan create from PMS
+     Given admin go to mamikos bangkrupux admin
+     When admin login to bangkrupux:
+       | email stag                   | email prod                   | password  |
+       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+     And admin bangkrupux navigate to data booking menu
+     And admin show filter data booking
+     And admin filter data booking by tenant phone number:
+       | Tenant Phone | Kos Type |
+       | 0812000008   | All Testing     |
+     And admin click actions button on booking list
+     And admin accept booking for kost add fee
+     Then admin can see add fee from pms with:
+     | Name |
+     | Parkir Mobil |
+     | Bawa Blender |
+
+    @SS-4331
+    Scenario: [PMS][New booking/DBET] Admin check list addfee must same with PMS-kk in dropdown
+      When admin go to pms singgahsini
+      And admin login pms :
+        | email             | password     |
+        | pman@mamiteam.com | pmanM4m1t34m |
+      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
+      And admin create contract tenant new booking
+      And admin selected type room
+      And admin fill phone number tenant "0812000008"
+      Then admin see informasi penyewa
+      And admin fill informasi pembayaran:
+        | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
+        | Per Bulan     | today            | 3 Bulan     | Full Payment      |
+      Then admin can see addfee KK with:
+        | addfee name |
+        | Alat Elektronik |
+        | Bawa Air Fryer  |
+        | Bawa Blender    |
+        | Bawa Dispenser  |
+        | Bawa Hair Dryer |

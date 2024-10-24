@@ -7,9 +7,9 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890000000313 | 0890000000313 | Bismillah@01 |
-    And tenant search kost then go to kost details:
-      | kost name stag                          | kost name prod                          |
-      | Kost Jawa Tobelo Utara Halmahera Utara  | kost Jawa Tobelo Utara Halmahera Utara  |
+    And tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-jawa-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
@@ -22,9 +22,9 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
   @TEST_SS-3410
   Scenario: [Pengajuan Sewa][TnC Booking]Check TnC booking for kost Singgah sini, APIK and Kos Pilihan
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod       |
-      | Kost Cibinong Bogor COOP Kece | kost cibinong bogor  |
+    And tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-kota-depok-kost-putra-murah-kost-cibinong-bogor-coop-kece-2 | Kos DC BAR Automation Tipe A |
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
     Then user will open new tab and go to Booking form

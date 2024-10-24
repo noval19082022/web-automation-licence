@@ -2,7 +2,7 @@
 Feature: SinggahSini Tenant Tracker Controlled Property
 
 
-  @SS-4242 @Automated @web
+  @Automated @web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -22,9 +22,9 @@ Feature: SinggahSini Tenant Tracker Controlled Property
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                   | kost name prod                                   |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                          | kost path prod                                   |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-singgahsini-tobelo-halmahera-utara-1 | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -34,8 +34,8 @@ Feature: SinggahSini Tenant Tracker Controlled Property
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag                                      | tenant prod                                      |
-      | Kost Adi Auto SinggahSini Tobelo Halmahera Utara | Kost Adi Auto SinggahSini Tobelo Halmahera Utara |
+      | tenant stag   | tenant prod   |
+      | Senjatanuklir | Senjatanuklir |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking For Add Ons
@@ -46,6 +46,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
 
+  @SS-4242
   Scenario: Booking Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :
@@ -68,6 +69,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
     And tenant checkin kost from riwayat booking
     Then tenant navigate to tagihan kost saya
 
+  @SS-4242
   Scenario: Check-in Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :

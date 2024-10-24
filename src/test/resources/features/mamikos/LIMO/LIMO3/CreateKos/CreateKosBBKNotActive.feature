@@ -20,7 +20,7 @@ Feature: Create new kos with owner not active BBK
       | Security     |
     And owner upload valid rule kos
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"
@@ -164,7 +164,7 @@ Feature: Create new kos with owner not active BBK
       | add data pengelola | pengelola name | pengelola phone |
       | yes                | Omeii          | 083333373777    |
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"

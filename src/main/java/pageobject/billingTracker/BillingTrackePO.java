@@ -3,7 +3,6 @@ package pageobject.billingTracker;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
 public class BillingTrackePO {
@@ -356,7 +355,7 @@ public class BillingTrackePO {
      * click next on pagination
      */
     public void clickOnPagination(){
-        playwright.clickOn(nextPaginationButton);
+            playwright.clickOn(nextPaginationButton);
     }
 
     /**

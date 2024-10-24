@@ -2,7 +2,7 @@
 Feature: New Flow Register Owner
 
   @TEST_SS-2804 @Automated @DOM @web-covered
-   Scenario: [WEB][Register Owner] Navigate To Register Page
+  Scenario: [WEB][Register Owner] Navigate To Register Page
     Given user go to mamikos homepage
     When user clicks on Enter button
     And user clicks on Register button
@@ -199,9 +199,9 @@ Feature: New Flow Register Owner
   @TEST_SS-2806
   Scenario: Register Owner - Owner register from kost detail
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     When user clicks on Enter button
     And user clicks on Register button
     Then user redirected to "register-pemilik?source=property%20detail%20page"

@@ -1,4 +1,4 @@
-@LIMO4 @regression @landingpageowner
+@LIMO5 @regression @landingpageowner
 Feature: Landing Page Owner
 
   @TEST_LIMO-370 @continue @WEB @AUTOMATED

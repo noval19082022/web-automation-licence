@@ -67,7 +67,7 @@ public class TenantBillManagementPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         filterKos = page.locator("div.bm-filter__kost");
-        filterMonth = page.locator("input[type=\"text\"]").first();
+        filterMonth = page.locator("//div[@class='vdp-datepicker bg-c-input bg-c-input--has-right-icon bg-c-input--lg']").first();
         invoiceList = page.getByTestId("invoice-status-label").last();
         sudahByrTab = page.getByText("Sudah bayar");
         successTransferLabel = page.getByTestId("invoice-status-label");
@@ -139,7 +139,7 @@ public class TenantBillManagementPO {
      * @param month String type month name
      */
     public void selectMonthFilter(String month) {
-        Locator monthName = page.getByTestId("billingManagementFilterDate-wrapper").getByText(month);
+        Locator monthName = page.locator("//span[contains(.,'"+month+"')]").getByText(month);
         playwright.waitFor(filterMonth, 30000.0);
         if (!filterMonth.allInnerTexts().get(0).contains(month)) {
             playwright.clickOn(filterMonth);

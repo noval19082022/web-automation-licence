@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +15,7 @@ import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.Map;
 
 public class CommonSteps {
     Page page = ActiveContext.getActivePage();
@@ -35,6 +37,13 @@ public class CommonSteps {
     @Then("user/owner/tenant/admin will see that the text {string} is displayed")
     public void user_will_see_that_the_text_is_displayed(String text) {
         Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
+    }
+
+    @Then("user/owner/tenant/admin will see that the text is displayed")
+    public void user_will_see_that_the_text_(List<String> sentences) {
+        for (var sentence : sentences) {
+            Assert.assertTrue(playwright.isTextDisplayed(sentence, 5000));
+        }
     }
 
     @Then("user/owner/tenant should not be able to see the text {string}")
@@ -64,6 +73,15 @@ public class CommonSteps {
             numberOfTabsToClose--;
         }
         ActiveContext.setActivePage(pages.get(0));
+    }
+
+    @When("user/tenant/owner redirect to apartment details:")
+    public void tenantGoToApartmentDetails(DataTable table) {
+        Map<String, String> apartmentPath;
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        apartmentPath = table.asMap(String.class, String.class);
+        String pathUrlApartment = Mamikos.URL + "/unit" +apartmentPath.get(Mamikos.ENV);
+        playwright.navigateTo(pathUrlApartment);
     }
 
     @Then("The system should display {string} button as enabled")

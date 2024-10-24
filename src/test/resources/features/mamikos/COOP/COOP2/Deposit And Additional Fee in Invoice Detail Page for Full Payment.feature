@@ -23,9 +23,9 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
   @SS-5031
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                  | kost name prod                                                  |
-      | Test Regression Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                      | kost path prod                                                  |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-auto-fullpaid-addfee-deposit-tobelo-halmahera-utara | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -59,6 +59,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | search by      | renter_phone_number |
       | search value   | 0890867321212       |
       | invoice number | default             |
+    When admin deletes additional other price with name below :
+      | Biaya layanan Mamikos|
     Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
     When admin deletes additional other price with name below :
       | Listrik |

@@ -20,9 +20,9 @@ Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Kost Wild Rift Settlement | Kost Wild Rift Settlement |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                     | kost path prod               |
+      | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-1 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant booking kost for "today"
     Then tenant should success booking kost

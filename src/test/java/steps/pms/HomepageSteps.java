@@ -82,6 +82,31 @@ public class HomepageSteps {
         homepage.clickOnTypeRoom();
     }
 
+    @And("admin choose dbet category with {string}")
+    public void admin_choose_dbet_category_with(String text){
+        homepage.selectDbetCategory(text);
+    }
+
+    @And("user click dropdown kategori kontrak DBET field")
+    public void user_click_dropdown_kategori_dbet(){
+        homepage.clickDbetCategoryButton();
+    }
+
+    @Then("user validate this {string} is shown in kategori kontrak DBET field")
+    public void user_validate_this_option_is_show_in_kategori_kontrak_dbet_field(String option){
+        Assert.assertEquals(homepage.getDbetCategoryResult(option), option, "not appears dbet category according list");
+    }
+
+    @Then("admin can see contract id is disabled")
+    public void admin_can_see_contract_id_is_disabled(){
+        homepage.assertContractIdDisable();
+    }
+
+    @Then("admin can see contract id is enabled")
+    public void admin_can_see_contract_id_is_enabled(){
+        homepage.assertContractIdEnabled();
+    }
+
     @And("admin fill phone number tenant {string}")
     public void admin_fill_number_handphone_tenant(String number) {
         homepage.fillNumberHandphoneTenant(number);
@@ -434,6 +459,22 @@ public class HomepageSteps {
     @Then("admin can see add fee with price {string}")
     public void admin_can_see_add_fee_with_price(String text){
         homepage.getPriceTextNewRules(text);
+    }
+
+    @Then("admin can see addfee KK with:")
+    public void admin_can_see_addfee_kk_with(DataTable tables){
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String addfeetext = row.get("addfee name");
+            Assert.assertTrue(homepage.getAddFeeKK(addfeetext), "elemet not appears");
+        }
+    }
+
+    @Then("admin can see add fee from pms with:")
+    public void admin_can_see_add_fee_from_pms_with(DataTable tables){
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String addfeename = row.get("name");
+            Assert.assertTrue(homepage.getAddFeeSelected(addfeename), "elemet not appears");
+        }
     }
 
     //---Daftar Properti---//

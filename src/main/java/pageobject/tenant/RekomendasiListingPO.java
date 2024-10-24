@@ -157,7 +157,7 @@ public class RekomendasiListingPO {
      * @return boolean
      */
     public boolean isPropertyVisible(String property) {
-        String element = "//*[contains(., '" + property+ "')]";
+        String element = "(//*[contains(., '" + property+ "')])[1]";
         return playwright.waitTillLocatorIsVisible(page.locator(element),1000.0);
     }
 

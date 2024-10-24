@@ -9,6 +9,8 @@ import utilities.PlaywrightHelpers;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class HomepagePO {
     private final Page page;
     private final PlaywrightHelpers playwright;
@@ -110,20 +112,15 @@ public class HomepagePO {
 
     //-----------create dbet--------//
     Locator dbetButton;
-
     Locator phoneNumberErrorMessage;
-
     Locator tenantNameErrorMessage;
-
     Locator emailTenant;
-
     Locator emailErrorMessage;
-
     Locator tenantGender;
-
     Locator tenantJobs;
-
     Locator yaSimpanButton;
+    Locator dbetCategoryButton;
+    Locator contractIdText;
 
     //---Kontrak Kerja Sama Tab---//
     Locator kontrakKerjaSamaTab;
@@ -203,6 +200,8 @@ public class HomepagePO {
         RoomNotAvailable = page.locator("//div[contains(text(),'Kamar tidak tersedia')]");
         selectMethodPayment = page.locator("//span[normalize-space()='Pilih metode pembayaran']");
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
+        dbetCategoryButton = page.locator("//div[@data-testid=\"categorySelect_ddl\"]//div[@class=\"bg-c-select__trigger bg-c-select__trigger--lg\"]");
+        contractIdText = page.locator("//input[@id=\"contractId_txt\"]");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -258,6 +257,7 @@ public class HomepagePO {
      */
     public void clickRoomAllotment() {
         roomAllotmentBtn.click();
+        playwright.hardWait(15000.0);
     }
 
     /**
@@ -305,7 +305,7 @@ public class HomepagePO {
      * Click on tambah penyewa menu in homepage
      */
     public void clickOnTambahPenyewa() {
-        playwright.hardWait(8000.0);
+        playwright.hardWait(10000.0);
         playwright.clickOn(tambahPenyewaButton);
     }
 
@@ -345,6 +345,47 @@ public class HomepagePO {
         playwright.waitFor(dropdownTypeRoom);
         playwright.clickOn(dropdownTypeRoom);
         playwright.clickOn(selectedTypeRoom);
+    }
+
+    /**
+     * Select dbet category
+     * @param text
+     */
+    public void selectDbetCategory(String text){
+        playwright.clickOn(dbetCategoryButton);
+        Locator categoryNametext = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+text+""));
+        playwright.clickOn(categoryNametext);
+    }
+
+    /**
+     * click on dbet category
+     */
+    public void clickDbetCategoryButton(){
+        playwright.clickOn(dbetCategoryButton);
+    }
+
+    /**
+     * validate category dbet is visible
+     * @param option
+     * @return option
+     */
+    public String getDbetCategoryResult(String option){
+        Locator categoryNametext = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+option+""));
+        return playwright.getText(categoryNametext);
+    }
+
+    /**
+     * Assert contract id button when disable
+     */
+    public void assertContractIdDisable(){;
+        assertThat(contractIdText).isDisabled();
+    }
+
+    /**
+     * Assert contract id button when enabled
+     */
+    public void assertContractIdEnabled(){;
+        assertThat(contractIdText).isEnabled();
     }
 
     /**
@@ -1102,6 +1143,23 @@ public class HomepagePO {
         Locator priceTextAddFee = page.locator("//*[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(priceTextAddFee);
     }
+
+    /**
+     * verify add fee from pms kk on booking form
+     * @param addfeetext
+     * @return text
+     */
+    public boolean getAddFeeKK(String addfeetext){
+        Locator addFeeKKtext = page.locator("//p[contains(.,'"+addfeetext+"')]");
+        return playwright.waitTillLocatorIsVisible(addFeeKKtext);
+    }
+
+    public boolean getAddFeeSelected(String addfeename){
+        Locator addFeeSelectedText = page.locator("//input[@name =\"costs[fixed][0][name]\"]");
+        return playwright.waitTillLocatorIsVisible(addFeeSelectedText);
+    }
+
+
 
     //---Daftar Properti---//
 

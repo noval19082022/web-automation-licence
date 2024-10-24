@@ -29,9 +29,9 @@ Feature: Owner - Login
   @TEST_SS-2760 @Automated @DOM @web-covered
   Scenario: [Web][New Flow][Login Owner] Login From detail kos
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     Then user want to reached map section and see lihat peta button
     #user want to see map more detail
     When user want to see more detail kost location
@@ -41,16 +41,16 @@ Feature: Owner - Login
   Scenario: [WEB][Login Owner] using Wrong phone number alfabet
     Given user go to mamikos homepage
     When user login as owner with wrong phone number:
-      | phone stag   | phone prod   | password       |
-      | qwerty       | qwerty123    | 1d0lt3stb4ru99 |
-      Then user verify login error messages "Format Nomor Handphone salah."
+      | phone stag | phone prod | password       |
+      | qwerty     | qwerty123  | 1d0lt3stb4ru99 |
+    Then user verify login error messages "Format Nomor Handphone salah."
 
   @TEST_SS-2760
   Scenario: [Web][New Flow][Login Owner] Login From detail kos
     Given user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag               | kost name prod               |
-      | Kos DC BAR Automation Tipe G | Kos DC BAR Automation Tipe G |
+    When tenant redirect to kost details:
+      | kost path stag                                                             | kost path prod                                                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     Then user want to reached map section and see lihat peta button
     When user login as owner:
       | phone stag   | phone prod   | password     |

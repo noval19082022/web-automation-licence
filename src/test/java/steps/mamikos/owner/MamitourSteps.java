@@ -37,7 +37,6 @@ public class MamitourSteps {
 
     @Then("user will {string} Lihat Riwayat button")
     public void user_will_x_riwayat_button(String state) {
-        loading.waitForLoadingIconDisappear();
         if (state.equals("see")) {
             Assert.assertTrue(mamitour.isRiwayatButtonVisible(), "Riwayat button is not visible");
         } else {

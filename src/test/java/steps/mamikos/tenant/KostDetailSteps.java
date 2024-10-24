@@ -229,6 +229,7 @@ public class KostDetailSteps {
 
     @When("user want to ask kost address")
     public void userAskAdreess() {
+        kostDetail.scrollToViewMap();
         kostDetail.clickOnTanyaAlamatBtn();
     }
 
@@ -533,5 +534,10 @@ public class KostDetailSteps {
     @Then("tenant can see enable send button")
     public void tenant_can_see_enable_send_button(){
         Assert.assertTrue(kostDetail.isKirimButtonDisplayed(), "not see Kirim button");
+    }
+
+    @Then("tenant can see placeholder phone number with {string}")
+    public void tenant_can_see_placeholder_hone_number_with(String text){
+        Assert.assertTrue(kostDetail.isPhoneNumberPlaceHolderText(text), "not see place holder");
     }
 }

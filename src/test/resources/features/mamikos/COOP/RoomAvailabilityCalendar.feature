@@ -22,9 +22,9 @@ Feature: Room avability calender
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
       | 0812345667788 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                      | kost name prod       |
-      | Kost Singgahsini Noval Tipe Episode | kost payment desta 2 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                             | kost path prod               |
+      | kost-halmahera-utara-kost-campur-murah-kost-singgahsini-noval-tipe-c-tobelo-utara-halmahera-utara-tipe-premium-tobelo-halmahera-utara-duplikat-1-2 | Kos DC BAR Automation Tipe A |
     And tenant dismiss FTUE booking benefit
     Then Tenant see booking date according to BSS setting
     And user logs out as a Tenant user
@@ -48,7 +48,7 @@ Feature: Room avability calender
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
       | 0812345667788 | 083176408442 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                      | kost name prod       |
-      | Kost Singgahsini Noval Tipe Episode | kost payment desta 2 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                             | kost path prod               |
+      | kost-halmahera-utara-kost-campur-murah-kost-singgahsini-noval-tipe-c-tobelo-utara-halmahera-utara-tipe-premium-tobelo-halmahera-utara-duplikat-1-2 | Kos DC BAR Automation Tipe A |
     Then Tenant see booking date according to BSS setting

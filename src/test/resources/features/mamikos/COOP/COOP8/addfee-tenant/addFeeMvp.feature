@@ -16,9 +16,9 @@ Feature: Add fee Mvp - Tenant
     When user login as tenant via phone number:
       | phone stag   | password |
       | 08100000213 | qwerty123 |
-    And tenant search kost then go to kost details:
-      | kost name stag                                        |
-      | Kosan Geng Keju Swiss Cheese Gondokusuman Yogyakarta  |
+    And tenant redirect to kost details:
+      | kost path stag                                                                               | kost path prod               |
+      | kost-kota-yogyakarta-kost-putri-murah-kosan-geng-keju-swiss-cheese-gondokusuman-yogyakarta-1 | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     Then tenant cant see "Tambahan barang dan fasilitas" on booking form
@@ -31,9 +31,9 @@ Feature: Add fee Mvp - Tenant
     Given user go to mamikos homepage
     When user cancel booking
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                   |
-      | Kost Scenario Delapan Balik Bukit Lampung Barat  |
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-delapan-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     Then tenant cant see "Tambahan barang dan fasilitas" on booking form
@@ -44,9 +44,9 @@ Feature: Add fee Mvp - Tenant
   @TEST-SS-2710 @continue @TEST_SS-2711 @TEST_SS-2712
   Scenario: [Tenant][Detail booking]  Tenant see optional biaya tambahan from PMS-KK
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                |
-      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Tambahan barang dan fasilitas" on booking form
@@ -74,9 +74,9 @@ Feature: Add fee Mvp - Tenant
      When user go to mamikos homepage
      And user cancel booking
      When user go to mamikos homepage
-     And tenant search kost then go to kost details:
-       | kost name stag                                   |
-       | Kost Scenario Delapan Balik Bukit Lampung Barat  |
+     And tenant redirect to kost details:
+       | kost path stag                                                         | kost path prod               |
+       | kost-kost-campur-murah-kost-scenario-delapan-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
      And tenant dismiss promo ngebut pop up
      And tenant booking kost for "Tomorrow"
      And user can set Ajukan Sewa
@@ -89,9 +89,9 @@ Feature: Add fee Mvp - Tenant
     When user go to mamikos homepage
     And user cancel booking
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                |
-      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     Then tenant can see "Tambahan barang dan fasilitas" on booking form
@@ -110,9 +110,9 @@ Feature: Add fee Mvp - Tenant
     When user go to mamikos homepage
     And user cancel booking
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                |
-      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     And tenant click on pilih tambahan on booking form
@@ -129,9 +129,9 @@ Feature: Add fee Mvp - Tenant
      When user go to mamikos homepage
      And user cancel booking
      And user go to mamikos homepage
-     And tenant search kost then go to kost details:
-       | kost name stag                |
-       | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+     And tenant redirect to kost details:
+       | kost path stag                                                         | kost path prod               |
+       | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
      And tenant dismiss promo ngebut pop up
      And tenant booking kost for "Tomorrow"
      And tenant input catatan tambahan with "Saya bawa kucing meongmeong"
@@ -145,9 +145,9 @@ Feature: Add fee Mvp - Tenant
     When user go to mamikos homepage
     And user cancel booking
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                        |
-      | Kost Scenario Sepuluh Balik Bukit Lampung Barat  |
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
     And tenant click on pilih tambahan on booking form

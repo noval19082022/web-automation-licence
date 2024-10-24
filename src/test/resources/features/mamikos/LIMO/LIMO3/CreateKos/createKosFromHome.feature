@@ -37,7 +37,7 @@ Feature: Create Kos From Home
   @TEST_LIMO-970 @createNewKos @continue
   Scenario: [Form add New Kost][Foto Kos]Upload photo with invalid photos
     When owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner invalid upload photo "bangunan tampak depan"
@@ -62,10 +62,10 @@ Feature: Create Kos From Home
     And owner invalid upload photo "kamar mandi"
     Then verify warning upload gagal
     When owner valid upload photo kos
+    And owner click lanjutkan button for next steps
 
   @TEST_LIMO-954 @createNewKos
   Scenario:[Add New Kost][Dashboard]Add new kost from Dashboard (status property kos diperiksa admin/reject && status apartment diperiksa admin/reject )
-    And owner click lanjutkan button for next steps
     And user check facilities under "Fasilitas Umum"
       | Air Jernih |
     And user check facilities under "Fasilitas Kamar"

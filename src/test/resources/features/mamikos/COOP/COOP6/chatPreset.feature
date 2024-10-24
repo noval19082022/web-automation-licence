@@ -1,0 +1,107 @@
+@BBM6 @chatPreset
+Feature: Chat Preset
+
+  @TEST_SS-6049 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question and answer Ada diskon untuk kos ini for Kost P1 doesn't have discount
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081300000001  | 0890000000314 | qwerty123    |
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
+    Then user can see chat preset question "Ada diskon untuk kos ini?"
+    And user select chat preset question "Ada diskon untuk kos ini?"
+    Then chat room appear with latest message "Yah, mohon maaf. Belum ada diskon yang tersedia untuk kos ini."
+
+  @TEST_SS-6048 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question and answer Ada diskon untuk kos ini for Kost P1 have discount
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Griya Warungboto Tipe A Yogyakarta"
+    Then user can see chat preset question "Ada diskon untuk kos ini?"
+    And user select chat preset question "Ada diskon untuk kos ini?"
+    Then chat room appear with latest message "Ada dong. Diskon yang tersedia: Promo listrik. Potongan listrik Rp20.000 dibulan pertaman. Periode promo 20 Oct 2024 s/d 31 Jul 2025."
+
+  @TEST_SS-6050 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and have pasutri
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Agnes Tabelo Tipe A Halmahera"
+    Then user can see chat preset question "Bisa pasutri?"
+    And user select chat preset question "Bisa pasutri?"
+    Then chat room appear with latest message "Kos ini bisa disewa pasutri ya, kak."
+
+  @TEST_SS-5892 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] check the answer ada fasilitas parkir for kost P1 have parkir mobil and parkir motor
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Apik Kost Apik Harpalyke Haya Grey Tobelo Halmahera Utara"
+    Then user can see chat preset question "Ada fasilitas parkir?"
+    And user select chat preset question "Ada fasilitas parkir?"
+    Then chat room appear with latest message "Ada fasilitas parkir motor dan mobil ya, kak. Biaya tambahan: Parkir Mobil Rp10.000/Bulan. Parkir Motor Rp5.000/Bulan. Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."
+
+  @TEST_SS-5893 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] check the answer ada fasilitas parkir for kost P1 doesnt have parkir
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Apik Serayu Utara Tipe A Kretek"
+    Then user can see chat preset question "Ada fasilitas parkir?"
+    And user select chat preset question "Ada fasilitas parkir?"
+    Then chat room appear with latest message "Mohon menunggu maksimal 1x24 jam untuk informasi ter-update disampaikan oleh pengelola kos ya, kak."
+
+  @TEST_SS-5858
+  Scenario: [Chat][Auto Reply] Auto reply question for condition "Tidak bisa sekamar berdua"
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Gita Tipe A Halmahera Utara"
+    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp50.000/Bulan."
+
+  @TEST_SS-6051 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and doesn't have pasutri
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081300000002  | 0890000000314 | qwerty123    |
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Apik Cheap Door Mawar Maluku Utara"
+    Then user can see chat preset question "Bisa pasutri?"
+    And user select chat preset question "Bisa pasutri?"
+    Then chat room appear with latest message "Kos ini tidak bisa disewa pasutri ya, kak. Apakah kakak sedang mencari kos yang bisa pasutri?"
+
+  @TEST_SS-6052 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh bawa hewan on chat preset and check the answer for kost P1 and kost have tagging bawa hewan
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
+    Then user can see chat preset question "Boleh bawa hewan?"
+    And user select chat preset question "Boleh bawa hewan?"
+    Then chat room appear with latest message "Penyewa boleh membawa hewan di kos ini ya, kak."
+
+  @TEST_SS-6053 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh bawa hewan on chat preset and check the answer for kost P1 and kost dont have tagging bawa hewan
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Apik Cheap Door Mawar Maluku Utara"
+    Then user can see chat preset question "Boleh bawa hewan?"
+    And user select chat preset question "Boleh bawa hewan?"
+    Then chat room appear with latest message "Penyewa tidak boleh bawa hewan peliharaan di kos ini ya, kak. Apakah kakak sedang mencari kos yang bisa bawa hewan peliharaan?"
+
+  @TEST_SS-5890 @continue
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Ada Parkir on chat preset and check the answer for kost P1 and have add fee Biaya parkir mobil
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Fahmi Singgahsini Campur Indralaya Utara Ogan Ilir"
+    Then user can see chat preset question "Ada fasilitas parkir?"
+    And user select chat preset question "Ada fasilitas parkir?"
+    Then chat room appear with latest message "Ada fasilitas parkir mobil ya, kak. Biaya tambahan: Parkir Mobil Rp10.000/Bulan.Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."
+
+  @TEST_SS-5891
+  Scenario: [Chat preset][Auto reply][Chat Room] Check question Ada Parkir Motor on chat preset and check the answer for kost P1
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Apik Bohemian Tipe A Cilacap Tengah"
+    Then user can see chat preset question "Ada fasilitas parkir?"
+    And user select chat preset question "Ada fasilitas parkir?"
+    Then chat room appear with latest message "Ada fasilitas parkir motor ya, kak. Biaya tambahan: Parkir Motor Rp10.000/Minggu.Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."

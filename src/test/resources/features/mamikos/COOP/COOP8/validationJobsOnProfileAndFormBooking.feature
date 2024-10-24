@@ -7,9 +7,9 @@ Feature: Edit profile for jobs as Lainnya
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 0812000007   | 08100000630   | qwerty123     |
-    And tenant search kost then go to kost details:
-      | kost name stag                               | kost name prod                         |
-      | Kost Jawa Tobelo Utara Halmahera Utara       | kost Jawa Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                          | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-jawa-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "tomorrow" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
@@ -21,9 +21,9 @@ Feature: Edit profile for jobs as Lainnya
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000630   | 08100000630   | qwerty123     |
-    And tenant search kost then go to kost details:
-      | kost name stag                                                  | kost name prod                                            |
-      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara       | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                   | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-irvi-automation-add-ons-tobelo-barat-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "tomorrow" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page
@@ -83,9 +83,9 @@ Feature: Edit profile for jobs as Lainnya
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password      |
       | 08100000627   | 08100000630   | qwerty123     |
-    And tenant search kost then go to kost details:
-      | kost name stag                                              | kost name prod                         |
-      | Kost Irvi Automation Add Ons Tobelo Barat Halmahera Utara   | kost Jawa Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                   | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-irvi-automation-add-ons-tobelo-barat-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "tomorrow" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page

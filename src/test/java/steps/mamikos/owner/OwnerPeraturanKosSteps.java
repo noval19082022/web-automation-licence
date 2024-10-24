@@ -125,5 +125,15 @@ public class OwnerPeraturanKosSteps {
     public void ownerClickOnSimpanPopupUnitTime() {
         pengajuanBooking.ownerClickOnSimpanPopupUnitTime();
     }
+
+    @And("owner click on tanggal {string}")
+    public void clickOnTanggal(String tanggal){
+        pengajuanBooking.clickOnTanggal(tanggal);
+    }
+
+    @And("owner click on toogle today")
+    public void ownerClickOnToogleToday(){
+        pengajuanBooking.clickOnToday();
+    }
 }
 

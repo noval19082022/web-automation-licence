@@ -38,7 +38,7 @@ public class AdditionalKostPO {
         inputFieldlantai = page.locator("#floor");
         searchRoomId= page.getByLabel("Search:");
         deleteRoomButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Delete"));
-        deletePopupText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Delete Confirmation"));
+        deletePopupText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Yakin menghapus kamar?"));
     }
 
     /**

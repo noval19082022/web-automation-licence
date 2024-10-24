@@ -1,5 +1,23 @@
-@regression @LIMO4 @updateKamar
+@regression @LIMO5 @updateKamar
 Feature: Update Kamar
+
+  @TEST_LIMO-876 @WEB @AUTOMATED
+  Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by add new rooms and delete it
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password    |
+      | 083176408319   | 083176408311   | qwerty123   |
+    When owner navigates to property saya kos
+    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Kamar"
+    And owner add room with name or room number "26"
+    And owner click simpan on add room pop up
+    Then user can sees toast on update room as "Kosong" "Total Kamar 7"
+    And user see total room is "Total Kamar 7" in update room page
+    When user enter text "26" on search bar in room allotment and hit enter
+    And user delete room name or number in room allotment
+    Then user see total room is "Total Kamar 6" in update room page
 
   @TEST_LIMO-3463 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update rooms become unavailable
@@ -29,20 +47,6 @@ Feature: Update Kamar
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Terisi" in update room page
     Then user see total room is "Total Kamar 0" in update room page
-
-  @TEST_LIMO-876 @continue @WEB @AUTOMATED
-  Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by add new rooms and delete it
-    When owner navigates to property saya kos
-    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
-    And user click Lihat Selengkapnya button for edit
-    And owner click "Update Kamar"
-    And owner add room with name or room number "26"
-    And owner click simpan on add room pop up
-    Then user can sees toast on update room as "Kosong" "Total Kamar 25"
-    And user see total room is "Total Kamar 25" in update room page
-    When user enter text "26" on search bar in room allotment and hit enter
-    And user delete room name or number in room allotment
-    Then user see total room is "Total Kamar 24" in update room page
 
   @TEST_LIMO-874 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update text box "Lantai (Opsional)"

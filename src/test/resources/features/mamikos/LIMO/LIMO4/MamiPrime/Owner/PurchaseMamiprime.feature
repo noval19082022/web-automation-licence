@@ -34,13 +34,13 @@ Feature: Purchase Mamiprime
       | phone stag   | phone prod   | password   |
       | 082233545512 | 0            | 12345678  |
     And owner navigate to pendaftaran mamiprime page
-    And owner already choose period "7 Hari" with price "Rp237.500"
+    And owner already choose period "7 Hari" with price "Rp164.500"
     And owner wants to change "MamiPrime - Kata Kunci (7 Hari)" at detail tagihan page
     Then owner will back to pendafatarn mamiprime page
 
   @TEST_LIMO-3563 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
-    When owner already choose period "14 Hari" with price "Rp475.000"
+    When owner already choose period "14 Hari" with price "Rp308.000"
     Then owner can see package prime selected is "MamiPrime - Kata Kunci (14 Hari)"
 
   @TEST_LIMO-625 @continue @WEB @AUTOMATED

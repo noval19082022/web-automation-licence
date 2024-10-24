@@ -48,6 +48,7 @@ public class KostLandingAreaPO {
     private Locator videoIsOccur;
     private Locator videoIsPlayed;
     private Locator enaknyaNgekostBenefitsSection;
+    private Locator loadMoreText;
 
     public KostLandingAreaPO(Page page) {
         this.page = page;
@@ -85,6 +86,7 @@ public class KostLandingAreaPO {
         this.videoIsOccur = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator("video");
         this.videoIsPlayed = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator(".ytp-timed-markers-container");
         this.enaknyaNgekostBenefitsSection = page.locator("#enaknyangekosBenefits");
+        loadMoreText = page.locator("//a[@class=\"list__content-load-link\"]");
     }
 
     /**
@@ -195,6 +197,9 @@ public class KostLandingAreaPO {
      * click on lihat lebih banyak button
      */
     public void clickOnLihatLebihBanyakButton() {
+        if (!playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton)) {
+            playwright.pageScrollUntilElementIsVisible(lihatLebihBanyakButton);
+        }
         playwright.clickOn(lihatLebihBanyakButton);
     }
 
@@ -432,5 +437,15 @@ public class KostLandingAreaPO {
     public void setSortingFromLowerToGreater(){
         playwright.clickOnText("Paling direkomendasikan");
         playwright.clickOnText("Harga terendah");
+    }
+
+    public String getTotalSearchAreatext(String text){
+        Locator totalSearchAreatext = page.locator("//h2[contains(., '"+text+"')]");
+        return playwright.getText(totalSearchAreatext);
+    }
+
+    public void clickLoadMore(){
+        playwright.pageScrollInView(loadMoreText);
+        playwright.clickOn(loadMoreText);
     }
 }

@@ -59,7 +59,7 @@ public class AdminApproveBookingPO {
         Locator dataFilterPhone = page.locator("//input[@placeholder='Ex: 081987654321']");
         playwright.fill(dataFilterPhone,tenantPhone);
         playwright.clickOn(dropdownFilterDataKosType);
-        Locator fillTextboxKosType = page.locator("//span[@class='select2-search select2-search--dropdown']//input[@role='textbox']");
+        Locator fillTextboxKosType = page.locator("//span[@class='select2-search select2-search--dropdown']//input[@role='searchbox']");
         playwright.fill(fillTextboxKosType,kosType);
         Locator dataFilterkosType = page.locator("//li[@class='select2-results__option select2-results__option--highlighted']");
         playwright.clickOn(dataFilterkosType);

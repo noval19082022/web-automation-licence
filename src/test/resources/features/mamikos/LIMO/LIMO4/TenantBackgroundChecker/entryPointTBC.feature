@@ -1,5 +1,5 @@
-@LIMO4 @regression
-Feature: Entry point Tenant Background Checker
+@LIMO5 @regression
+Feature: Entry Point Tenant Background Checker
 
   @TEST_LIMO-328 @entrypointTBC @continue @WEB @AUTOMATED
   Scenario: [WEB][Chat Owner] Show Tenant Background Checker entry point upon accessing a chat room

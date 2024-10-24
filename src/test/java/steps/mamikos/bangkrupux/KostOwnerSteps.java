@@ -20,13 +20,14 @@ public class KostOwnerSteps {
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName) {
         kostOwner.searchKosName(kostName);
     }
+    @And("admin bangkrupux search booking owner request {string} in admin booking owner request page")
+    public void adminBangkrupuxSearchBookingOwnerRequestInAdminKosOwnerPage(String kostName) {
+        kostOwner.searchKosNameBookingOwnerRequest(kostName);
+    }
 
     @And("admin reject BBK kos")
     public void adminRejectBBKKos() {
-        playwright.hardWait(3000.0);
-        kostOwner.clickOnRejectBBK();
-        kostOwner.clickOnFirstRadioButton();
-        kostOwner.clickOnRejectButton();
+            kostOwner.clickOnRejectBBK();
     }
 
     @And("admin reject bulk BBK kos")
@@ -54,7 +55,7 @@ public class KostOwnerSteps {
 
     @And("user verify the kos in admin kos owner if exist")
     public void userVerifyTheKosInAdminKosOwnerIfExist() {
-        kostOwner.clickOnFirstVerifyButtonIfExist();
+        kostOwner.clickVerifyButtonIfExists();
     }
 
     @And("admin bangkrupux search kost owner in admin kos owner page")
@@ -66,6 +67,12 @@ public class KostOwnerSteps {
     public void adminDeleteKos() {
         BangKrupuxTestData.hrefDeleteKosUrl(kostOwner.getKosListDeleteUrl());
         kostOwner.navigateToDeleteUrl();
+    }
+
+    @And("admin accept kos")
+    public void adminApproveKos() {
+        BangKrupuxTestData.hrefApproveKosUrl(kostOwner.getKosListApproveUrl());
+        kostOwner.navigateToApproveUrl();
     }
 
     @And("admin reject kos")

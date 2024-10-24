@@ -1,7 +1,6 @@
 @COOP4
 Feature: Invoice Type based on contract
 
-  @TEST_SS-4261
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -21,9 +20,9 @@ Feature: Invoice Type based on contract
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag   | kost name prod   |
-      | Kos Loyal Kretek | Kos Loyal Kretek |
+    And tenant redirect to kost details:
+      | kost path stag                                        | kost path prod                                        |
+      | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -37,6 +36,7 @@ Feature: Invoice Type based on contract
       | Adi Auto Voucher Base On User | Adi Auto Voucher Base On User |
     Then owner should redirect back to pengajuan booking page
 
+  @TEST_SS-4261
   Scenario: Tenant Apply Voucher Invoice Type based on contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:

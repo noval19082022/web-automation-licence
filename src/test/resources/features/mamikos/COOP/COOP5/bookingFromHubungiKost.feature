@@ -23,9 +23,9 @@ Feature: OB Booking From Hubungi Kost
   @TEST_COOP-1995
   Scenario: OB Booking Hubungi Kost From Detail Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                    | kost name prod                                                                    |
-      | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                               | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-bima-booking-dp-biaya-lain-dan-denda-automation-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And user click chat in kos detail
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
     And tenant click button ajukan sewa from chat popup

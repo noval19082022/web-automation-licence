@@ -1,7 +1,6 @@
 @COOP4
 Feature: Apply Voucher For Contract Created From Booking Funnel
 
-  @TEST_SS-4258
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -23,9 +22,9 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
 
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag   | kost name prod   |
-      | Kos Loyal Kretek | Kos Loyal Kretek |
+    And tenant redirect to kost details:
+      | kost path stag                                        | kost path prod                                        |
+      | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -39,7 +38,7 @@ Feature: Apply Voucher For Contract Created From Booking Funnel
       | Kos Loyal Kretek | Kos Loyal Kretek |
     Then owner should redirect back to pengajuan booking page
 
-  @continue
+  @continue @TEST_SS-4258
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
     Given user go to mamikos homepage
     When user login as tenant via phone number:

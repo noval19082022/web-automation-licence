@@ -81,6 +81,10 @@ public class WhitelistFeaturePO {
         var deleteButton = deleteBtn.nth(position - 1);
 
         // Click and accept the dialog
-        playwright.acceptDialog(deleteButton);
+        if (playwright.waitTillLocatorIsVisible(deleteButton)) {
+            playwright.acceptDialog(deleteButton);
+        } else {
+            playwright.reloadPage();
+        }
     }
 }

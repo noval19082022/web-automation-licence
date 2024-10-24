@@ -16,7 +16,7 @@
         | Onboarding  |
         | Keluar      |
 
-    @TEST_SS-591 @continue
+    @TEST_SS-591
     Scenario: Breadcrumb agen Skema 1
       Then onboarding page breadcrumb title is "Onboarding Agen Akuisisi"
       When admin click in breadcrumb "Mitra Agen"
@@ -27,8 +27,11 @@
 
     @TEST_SS-605 @continue
     Scenario: Onboarding Section Skema 1
-      When admin navigate to mantool
-      And admin go to onboarding page
+      Given admin navigate to mantool
+      When admin login agen mantool
+        | No Handphone stag | password  |
+        | 083214140880      | qwerty123 |
+      Then should redirect to onboarding page
       Then onboarding title is "Selamat Akun Skema Satu"
       And onboarding description are
         | Anda telah bergabung sebagai Agen Akuisisi Mamikos. Silakan ikuti beberapa langkah berikut ini untuk mulai.  |

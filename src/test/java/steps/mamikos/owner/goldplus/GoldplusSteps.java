@@ -6,9 +6,9 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.en.Given;
 import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
@@ -45,10 +45,10 @@ public class GoldplusSteps {
     public void user_wants_to_subscribe_goldplus(int paket) {
         loading.waitForLoadingIconDisappear();
         playwright.waitTillPageLoaded();
-        if (home.getURL().equals(Mamikos.URL+"/goldplus/submission/packages")){
+        if (home.getURL().equals(Mamikos.URL + "/goldplus/submission/packages")) {
             goldplus.clickOnGPPackage(paket);
-        } else{
-            navigate.userNavigateTo("/goldplus/submission/periode/gp"+paket);
+        } else {
+            navigate.userNavigateTo("/goldplus/submission/periode/gp" + paket);
         }
 
         if (playwright.isTextDisplayed("1 Minggu")) {
@@ -64,30 +64,30 @@ public class GoldplusSteps {
 
     @When("owner close gp onboarding if exist")
     public void ownerCloseGpOnBoardingIfExist() {
-        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded();
         goldplus.closeGpOnBoardingIfExist();
     }
 
     @When("user choose Goldplus package {int}")
     public void xuser_choose_goldplus_package(int packages) {
         goldplus.clickOnGoldplusPackageButton(packages);
-        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp"+packages) && !gpSubmission.isFavoritGpRadioSelected()) {
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp" + packages) && !gpSubmission.isFavoritGpRadioSelected()) {
             playwright.reloadPage();
             gpSubmission.clickOnGpSatuFirstRadioButton();
         }
-        Mamikos.setGpPackageChoosed("GoldPlus "+packages);
+        Mamikos.setGpPackageChoosed("GoldPlus " + packages);
         goldplus.getTextPeriodeChoosed();
         gpSubmission.clicksOnPilihPaketButton();
     }
 
     @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
-    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus(){
+    public void user_click_checkbox_syarat_dan_ketentuan_umum_goldplus() {
         goldplus.clickOnCheckbox();
     }
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_number(String phoneNumber) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_TESTING_TOOLS);
         goldplus.inputGoldplusPhoneNumber(phoneNumber);
         playwright.clickOnTextButton("Reset");
         Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
@@ -95,8 +95,8 @@ public class GoldplusSteps {
 
     @When("user wants to reset Goldplus for owner with phone number")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_numbers(List<String> phoneNumbers) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_TESTING_TOOLS);
-        for (var phoneNumber: phoneNumbers) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_TESTING_TOOLS);
+        for (var phoneNumber : phoneNumbers) {
             goldplus.inputGoldplusPhoneNumber(phoneNumber);
             playwright.clickOnTextButton("Reset");
         }
@@ -173,10 +173,10 @@ public class GoldplusSteps {
 
     @Then("user see Title on page {string} is {string} with message:")
     public void userSeeTitleOnPageIsWithMessage(String page, String title, String docString) {
-        switch (page){
+        switch (page) {
             case "cek properti sekitar":
                 Assert.assertTrue(playwright.isTextDisplayed(title, 1000));
-                Assert.assertEquals(goldplus.getMessage(),docString.replaceAll("\\s", ""));
+                Assert.assertEquals(goldplus.getMessage(), docString.replaceAll("\\s", ""));
         }
     }
 
@@ -213,7 +213,7 @@ public class GoldplusSteps {
     }
 
     @When("owner wants to access goldplus dashboard")
-    public void owner_wants_to_access_goldplus_dashboard(){
+    public void owner_wants_to_access_goldplus_dashboard() {
         playwright.clickOnText("Perpanjang paket Goldplus yuk!");
     }
 
@@ -283,7 +283,7 @@ public class GoldplusSteps {
 
     @Then("owner can see swiper number {int} is selected")
     public void ownerCanSeeSwiperNumberNumberIsSelected(int number) {
-        Assert.assertFalse(panduanGP.getGPswipperAttribute(number -1 , "class").contains(".gp-swiper__step--dim"));
+        Assert.assertFalse(panduanGP.getGPswipperAttribute(number - 1, "class").contains(".gp-swiper__step--dim"));
     }
 
     @Then("owner can see selected swiper with title {int}")
@@ -386,7 +386,7 @@ public class GoldplusSteps {
 
     @Then("user verify {string} is appear")
     public void userVerifyIsAppear(String textMessage) {
-        switch(textMessage){
+        switch (textMessage) {
             case "list of Goldplus package":
                 playwright.hardWait(3000);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
@@ -424,6 +424,7 @@ public class GoldplusSteps {
         goldplus.clickOnPelajariCaranyaButton();
         panduanGP.clickOnMemantauPerformaKosButton();
     }
+
     @When("owner close pop up detail manfaat")
     public void owner_close_pop_up_detail_manfaat() {
         playwright.hardWait(1000.0);
@@ -449,7 +450,7 @@ public class GoldplusSteps {
 
     @When("user scroll to section pembayaran tagihan goldplus")
     public void user_scroll_to_section_pembayaran_tagihan_goldplus() {
-       goldplus.scrollToTagihanSection();
+        goldplus.scrollToTagihanSection();
     }
 
     @Then("user see list detail tagihan goldplus")
@@ -469,18 +470,18 @@ public class GoldplusSteps {
 
     @Then("owner will see card box contains {string}")
     public void owner_will_see_card_box_contains(String benefit) {
-        Assert.assertTrue(chat.gpPacakgeText().contains(benefit),"GP Package not contain benefit "+benefit);
+        Assert.assertTrue(chat.gpPacakgeText().contains(benefit), "GP Package not contain benefit " + benefit);
     }
 
     @And("owner will see chat list page empty state")
-    public void owner_will_see_chat_list_page_empty_state(){
+    public void owner_will_see_chat_list_page_empty_state() {
         Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
         chat.dismissFTUEMarsKuotaNol();
     }
 
     @Then("user verify last ftue is {string}")
     public void user_verify_last_ftue_is(String kuota) {
-        Assert.assertEquals(chat.lastFTUEnonGoldplusText(),kuota,"FTUE doesnt match");
+        Assert.assertEquals(chat.lastFTUEnonGoldplusText(), kuota, "FTUE doesnt match");
     }
 
     @When("owner cek promo owner when not GP")
@@ -489,28 +490,29 @@ public class GoldplusSteps {
     }
 
     @Then("owner will see pop up reminder recurring is displayed")
-    public void owner_will_see_pop_up_reminder_recurring_is_displayed(){
+    public void owner_will_see_pop_up_reminder_recurring_is_displayed() {
         playwright.waitTillPageLoaded(10000.0);
-        Assert.assertTrue(goldplus.isButtonRecurringPopUpVisible(),"Button not visible");
-        Assert.assertTrue(goldplus.isTitlePopUpRecurringVisible(),"title recurring is not visible");
-        Assert.assertTrue(goldplus.isSubtitlePopUpRecurringVisible(),"subtitle recurring is not visible");
-        Assert.assertTrue(goldplus.isImageRecurringPopupVisible(),"image is not visible");
+        Assert.assertTrue(goldplus.isButtonRecurringPopUpVisible(), "Button not visible");
+        Assert.assertTrue(goldplus.isTitlePopUpRecurringVisible(), "title recurring is not visible");
+        Assert.assertTrue(goldplus.isSubtitlePopUpRecurringVisible(), "subtitle recurring is not visible");
+        Assert.assertTrue(goldplus.isImageRecurringPopupVisible(), "image is not visible");
     }
 
     @When("owner wants to proccess recurring GP")
-    public void owner_wants_to_proccess_recurring_GP(){
+    public void owner_wants_to_proccess_recurring_GP() {
         loading.waitForLoadingIconDisappear();
         goldplus.clickOnPerpanjangBtn();
     }
 
     @When("owner will be redirected to invoice recurring")
-    public void owner_will_be_redirected_to_invoice_recurring(){
+    public void owner_will_be_redirected_to_invoice_recurring() {
         loading.waitForLoadingIconDisappear();
         playwright.waitTillPageLoaded(10000.0);
         Assert.assertTrue(goldplus.gpPackageText());
     }
+
     @And("user view detail list saldo MamiAds")
-    public void user_view_detail_list_saldo_mamiads( DataTable dataTable) {
+    public void user_view_detail_list_saldo_mamiads(DataTable dataTable) {
         playwright.waitTillPageLoaded();
         playwright.hardWait(3000.0);
         List<Map<String, String>> table = dataTable.asMaps();
@@ -541,8 +543,8 @@ public class GoldplusSteps {
     @Then("user verify the {string} and the price is {string} already {string} on Rincian Pembayaran")
     public void user_verify_the_and_the_price_is_already_on_rincian_pembayaran(String saldo, String rincian, String validation) {
         Mamikos.setGpPackageChoosed(goldplus.getTextGpPackageChoosed());
-        System.out.println("Paket yang dipilih: "+ Mamikos.getGpPackageChoosed());
-        switch (validation){
+        System.out.println("Paket yang dipilih: " + Mamikos.getGpPackageChoosed());
+        switch (validation) {
             case "choosen":
                 Assert.assertEquals(goldplus.getTextSaldoMamiAds(), saldo, "saldo MamiAds  is not match");
                 Assert.assertEquals(goldplus.getTextRinicianMamiAds(), rincian, "rincian MamiAds  is not match");
@@ -580,7 +582,7 @@ public class GoldplusSteps {
 
     @When("owner wants to see Lihat Detail Manfaat Goldplus Satu")
     public void owner_wants_to_see_lihat_detail_manfaat_goldplus_satu() {
-       goldplus.clickOnDetailManfaatGP1();
+        goldplus.clickOnDetailManfaatGP1();
     }
 
     @When("owner wants to see Lihat Detail Manfaat Goldplus Dua")
@@ -590,17 +592,17 @@ public class GoldplusSteps {
 
     @Then("owner see benefit {string} is displayed")
     public void owner_see_benefit_is_displayed(String benefit) {
-        Assert.assertEquals(goldplus.getTextManfaatGP(benefit),benefit,"not match benefit");
+        Assert.assertEquals(goldplus.getTextManfaatGP(benefit), benefit, "not match benefit");
     }
 
     @Then("owner see benefit in {string} is {string} is displayed")
     public void owner_see_benefit_in_is_is_displayed(String packageGP, String benefitGP) {
-        switch (packageGP){
+        switch (packageGP) {
             case "golplus 2":
-                Assert.assertEquals(goldplus.getTextManfaatGP2(benefitGP),benefitGP,"benefit doesnt match");
+                Assert.assertEquals(goldplus.getTextManfaatGP2(benefitGP), benefitGP, "benefit doesnt match");
                 break;
             case "golplus 1":
-                Assert.assertEquals(goldplus.getTextManfaatGP1(benefitGP),benefitGP,"benefit doesnt match");
+                Assert.assertEquals(goldplus.getTextManfaatGP1(benefitGP), benefitGP, "benefit doesnt match");
                 break;
         }
     }
@@ -608,7 +610,7 @@ public class GoldplusSteps {
     //------ Terminated Contract GP ------//
     @When("user wants to terminate Goldplus for owner with phone number {string}")
     public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.GOLDPLUS_CONTRACT);
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_CONTRACT);
         goldplus.searchPhoneNumberGP(phoneNumber);
         playwright.clickOnTextButton("Terminate");
         playwright.clickOnTextButton("Yes, terminate it!");
@@ -616,21 +618,22 @@ public class GoldplusSteps {
     }
 
     @When("owner navigate to list package goldplus 2")
-    public void owner_navigate_to_list_package_goldplus_2(){
+    public void owner_navigate_to_list_package_goldplus_2() {
         playwright.waitTillPageLoaded(10000.0);
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_2, 30000.0, LoadState.LOAD);
     }
 
     @When("owner navigate to list package goldplus 1")
-    public void owner_navigate_to_list_package_goldplus_1(){
+    public void owner_navigate_to_list_package_goldplus_1() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.GOLDPLUS_SUBMISSION_1, 30000.0, LoadState.LOAD);
         loading.waitForLoadingIconDisappear();
     }
 
     @When("owner click nanti saja for recurring GoldPlus")
-    public void owner_click_nanti_saja_for_recurring_goldplus(){
+    public void owner_click_nanti_saja_for_recurring_goldplus() {
         playwright.clickOnTextButton("Nanti Saja");
     }
+
     @And("owner click filter {string} in Pembayaran Tagihan Goldplus page")
     public void ownerClickFilterInPembayaranTagihanGoldplusPage(String filter) {
         goldplus.clickFilterInPaymentBillingGp(filter);
@@ -646,7 +649,7 @@ public class GoldplusSteps {
     public void ownerWillSeeThatDetailTextOnGoldplusGuidesPage(DataTable dataTable) {
         List<Map<String, String>> table = dataTable.asMaps();
         for (Map<String, String> content : table) {
-            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")),"Text doesn't match");
+            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")), "Text doesn't match");
         }
     }
 
@@ -655,7 +658,7 @@ public class GoldplusSteps {
         goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
         Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
         Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"), Mamikos.getGpPackageChoosed());
-        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"),"Belum dipilih");
+        Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"), "Belum dipilih");
         Assert.assertEquals(goldplus.getRincianGP(), Mamikos.getGpPackageChoosed(), "GoldPlus  is not match");
         Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
         Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
@@ -663,7 +666,7 @@ public class GoldplusSteps {
 
     @Then("user will see that the goldplus package choosed is displayed")
     public void userWillSeeThatTheGoldplusPackageChoosedIsDisplayed() {
-        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed()+" (reg#1m) periode "+ Mamikos.getGpPeriodeChoosed());
+        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed() + " (reg#1m) periode " + Mamikos.getGpPeriodeChoosed());
     }
 
     @Then("user will see that the goldplus package on rincian pembayaran detail tagihan")
@@ -679,26 +682,26 @@ public class GoldplusSteps {
 
     @Then("owner can see detail tagihan goldplus page with title {string}")
     public void owner_can_see_detail_tagihan_goldplus_page_with_title(String status) {
-        Assert.assertEquals(goldplus.statusTransactionGP(status),status,"status not equals");
+        Assert.assertEquals(goldplus.statusTransactionGP(status), status, "status not equals");
     }
 
 
     @Then("owner can see detail tagihan paid goldplus page with title {string}")
     public void owner_can_see_detail_tagihan_paid_goldplus_page_with_title(String status) {
-       Assert.assertEquals(goldplus.statusTransactionPaidGP(),status,"status paid not show");
+        Assert.assertEquals(goldplus.statusTransactionPaidGP(), status, "status paid not show");
     }
 
     @Then("owner can see {string} at section Paket yang Anda pilih")
     public void owner_can_see_at_section_paket_yang_anda_pilih(String packageGP) {
-       Assert.assertTrue(goldplus.sectionPackageSelectedIsVisible(),"section not visible");
-       Assert.assertTrue(goldplus.packageGP(packageGP),"package GP not show");
+        Assert.assertTrue(goldplus.sectionPackageSelectedIsVisible(), "section not visible");
+        Assert.assertTrue(goldplus.packageGP(packageGP), "package GP not show");
 
     }
 
     @Then("owner can see {string} at section rincian pembayaran goldplus")
     public void owner_can_see_at_section_rincian_pembayaran_goldplus(String packageGP) {
-        Assert.assertTrue(goldplus.sectionDetailBillingdIsVisible(),"section not visible");
-        Assert.assertTrue(goldplus.packageGP(packageGP),"package GP not show");
+        Assert.assertTrue(goldplus.sectionDetailBillingdIsVisible(), "section not visible");
+        Assert.assertTrue(goldplus.packageGP(packageGP), "package GP not show");
     }
 
     @Given("owner paid transaction from detail tagihan page")
@@ -708,8 +711,8 @@ public class GoldplusSteps {
 
     @Given("owner select transaction paid from history transaction goldplus")
     public void owner_select_transaction_paid_from_history_transaction_goldplus() {
-       goldplus.clickOnTabSelesaiRiwayatGP();
-       goldplus.clickOnTransactionGPPaid();
+        goldplus.clickOnTabSelesaiRiwayatGP();
+        goldplus.clickOnTransactionGPPaid();
     }
 
     @Then("owner select transaction expired from history transaction goldplus")
@@ -721,17 +724,17 @@ public class GoldplusSteps {
     @Then("owner can see pop up goldplus with title {string}")
     public void owner_can_see_pop_up_goldplus_with_title(String title) {
         if (goldplus.imagePopUpWeeklyIsVisible()) {
-            Assert.assertTrue(goldplus.imagePopUpWeeklyIsVisible(),"image not show");
-            Assert.assertEquals(goldplus.getTitlePopUpWeekly(title),title,"title not equals");
+            Assert.assertTrue(goldplus.imagePopUpWeeklyIsVisible(), "image not show");
+            Assert.assertEquals(goldplus.getTitlePopUpWeekly(title), title, "title not equals");
         }
     }
 
     @Then("owner can see pop up golplus with desc {string}")
     public void owner_can_see_pop_up_golplus_with_desc(String desc) {
         if (goldplus.buttonLihatFiturWeeklyIsVisible()) {
-            Assert.assertTrue(goldplus.buttonLihatFiturWeeklyIsVisible(),"button not visible");
-            Assert.assertTrue(goldplus.buttonNantiSajaWeeklyIsVisible(),"button nanti saja not visible");
-            Assert.assertEquals(goldplus.getDescPopUpWeekly(desc),desc,"description not equals");
+            Assert.assertTrue(goldplus.buttonLihatFiturWeeklyIsVisible(), "button not visible");
+            Assert.assertTrue(goldplus.buttonNantiSajaWeeklyIsVisible(), "button nanti saja not visible");
+            Assert.assertEquals(goldplus.getDescPopUpWeekly(desc), desc, "description not equals");
         }
     }
 
@@ -761,5 +764,10 @@ public class GoldplusSteps {
     @And("owner GP-1 upgrade paket to GP-2 from TBC detail page")
     public void ownerGPUpgradePaketToGPFromTBCDetailPage() {
         goldplus.upgradePaketGp1ToGp2();
+    }
+
+    @And("owner click on upgrade package at tbc profile tenant")
+    public void ownerClickOnUpgradePackage() {
+        goldplus.clickOnUpgradePackage();
     }
 }

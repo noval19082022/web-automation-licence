@@ -1,7 +1,6 @@
 @COOP4
 Feature: Invalid Voucher After Applied, Invalid Contract Period
 
-  @TEST_SS-4279
   Scenario: Admin Edit Voucher AUTOCHNGEPERIOD and Change Contract Period to Monthly
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -31,9 +30,9 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     When user login as tenant via phone number:
       | phone stag    | phone prod  | password     |
       | 0888123321888 | 08100000622 | mamikosqa123 |
-    And tenant search kost then go to kost details:
-      | kost name stag | kost name prod |
-      | Kost Reykjavik | Kost Reykjavik |
+    And tenant redirect to kost details:
+      | kost path stag                                        | kost path prod |
+      | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kost Reykjavik |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 
@@ -43,8 +42,10 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     When user login as owner:
       | phone stag    | phone prod    | password     |
       | 0890000000289 | 0890000000289 | Bismillah@01 |
-    And owner accept booking via Homepage
-    And owner back to owner dashboard
+    And owner accept booking from tenant:
+      | tenant stag                 |
+      | Budi Tromol Coop Automation |
+    Then owner should redirect back to pengajuan booking page
 
   @tenantInputVoucher
   Scenario: Tenant Input Voucher ATCHANGEPERIOD
@@ -71,7 +72,7 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     And admin master clicks on edit mass voucher button in voucher form
     Then System display alert message on mamipay web
 
-  @tenantInputVoucherAfterUpdate
+  @tenantInputVoucherAfterUpdate @TEST_SS-4279
   Scenario: Tenant Input Voucher ATCHANGEPERIOD
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -83,4 +84,3 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
       | voucher name stag | voucher name prod |
       | ATCHANGEPERIOD    | AUTOCHNGEPERIOD   |
     Then Voucher code has been used
-		

@@ -99,6 +99,27 @@ public class ChatTenantPO {
     }
 
     /**
+     * Click one of question in chat preset button
+     * @param text is position from top
+     *
+     */
+    public void clickPresetQuestion(String text) {
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        playwright.clickOn(questionOption);
+        playwright.hardWait(5000);
+        }
+
+    /**
+     * verify chat preset question
+      * @param text
+     * @return text example : Ada diskon untuk kos ini?
+     */
+    public boolean isChatPresetQuestionVisible(String text) {
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        return playwright.waitTillLocatorIsVisible(questionOption, 3000.0);
+    }
+
+    /**
      * Click ajukan sewa button in question pop up
      *
      */
@@ -235,6 +256,7 @@ public class ChatTenantPO {
      *
      */
     public void clickOnSendFormButton(String send) {
+        playwright.hardWait(7000);
         playwright.waitTillPageLoaded();
         String inputTextbox = "//*[normalize-space()='"+send+"']";
         ElementHandle element = page.querySelector(inputTextbox);

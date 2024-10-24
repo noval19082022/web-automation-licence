@@ -11,7 +11,6 @@ import utilities.PlaywrightHelpers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -143,6 +142,7 @@ public class KostDetailsPO {
     private Locator tabPOILandmark;
     private Locator latestChat;
     private Locator chatRoom;
+    private Locator mapSection;
 
     // ------------ Kos Report Section -----------
     private Locator kosReportContainer;
@@ -330,7 +330,7 @@ public class KostDetailsPO {
         this.tanyaPemilikKostLink = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanya Pemilik"));
         this.chatKostPopUp = page.locator(".modal-chat__body");
         this.hubungiKostHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Hubungi Kost"));
-        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
+        this.btnMamikosPromoNgebut = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Mamikos Promo Ngebut"));
         this.btnMauDong = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mau Dong!"));
         this.btnSayaMengerti = page.getByText("Saya Mengerti");
 
@@ -390,6 +390,7 @@ public class KostDetailsPO {
         this.tabPOILandmark = page.getByTestId("kost-landmark-list__tabs");
         this.latestChat = page.locator(".mc-balloon-chat__content").locator("div").last();
         this.chatRoom = page.locator(".mc-chat-room");
+        this.mapSection = page.getByTestId("map-container");
 
         // ------------ Kos Report Section -----------
         this.kosReportContainer = page.locator(".kost-report-container .kost-report");
@@ -407,7 +408,7 @@ public class KostDetailsPO {
         this.closeStatisticsModalBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
         this.ownerNameText = page.locator("#kostOwnerInformation").locator(".owner-information__name");
         this.ownerStatement = page.locator("//div[@class='detail-kost-owner-section__owner-title']");
-        this.ownerImageProfile = page.locator("#kostOwnerInformation .owner-information__profile");
+        this.ownerImageProfile = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Foto Owner")).first();
         this.ownerStatus = page.locator("#kostOwnerInformation .owner-information__type");
         this.successfulTansaction = page.locator("#kostOwnerInformation .owner-kost-information__label");
         this.bookingProcessed = page.locator("#kostOwnerInformation .owner-rate-information__info").nth(0);
@@ -718,7 +719,7 @@ public class KostDetailsPO {
      */
     public void clickOnSayaMengertiButton() {
         for (int i = 0; i < 2; i++) {
-            playwright.pageScrollToDown(300);
+            playwright.pageScrollToDown(500);
             if (btnSayaMengerti.isVisible()) {
                 break;
             }
@@ -1735,7 +1736,7 @@ public class KostDetailsPO {
     public boolean isFTUEBookingBenefitVisible() {
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(300);
-            if (ftueSlider.isVisible()) {
+            if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
             playwright.hardWait(500);
@@ -2025,7 +2026,7 @@ public class KostDetailsPO {
     public boolean isFTUEBookingBenefitIsNotVisible() {
         for (int i = 0; i < 4; i++) {
             playwright.pageScrollToDown(300);
-            if (ftueSlider.isVisible()) {
+            if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
             playwright.hardWait(500);
@@ -2275,6 +2276,16 @@ public class KostDetailsPO {
     }
 
     /**
+     * check phone number placeholder
+     * @param text
+     * @return text
+     */
+    public boolean isPhoneNumberPlaceHolderText(String text){
+        Locator phonePlaceholdertext = page.locator("//input[@placeholder='"+text+"']");
+        return playwright.waitTillLocatorIsVisible(phonePlaceholdertext);
+    }
+
+    /**
      * click on camera shutter
      */
     public void uploadIdVerification() {
@@ -2359,5 +2370,20 @@ public class KostDetailsPO {
      */
     public boolean isPromoOwnerDisplayed(String promoOwner) {
         return playwright.isTextDisplayed(promoOwner);
+    }
+
+    /**
+     * Scroll down until map section
+     */
+    public void scrollToViewMap() {
+        int maxloop = 0;
+
+        do {
+            maxloop++;
+            playwright.pageScrollToDown(100);
+            playwright.hardWait(1000);
+
+            if (maxloop == 100) break;
+        } while (!mapSection.isVisible());
     }
 }

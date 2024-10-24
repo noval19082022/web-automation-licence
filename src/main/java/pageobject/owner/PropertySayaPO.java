@@ -4,6 +4,8 @@ import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.JavaHelpers;
@@ -212,8 +214,11 @@ public class PropertySayaPO {
     Locator toastMessageNotSelectDestinationPhoto;
     Locator destinationPhotoMoved;
     Locator destinationPhotoRoomMoved;
-
+    Locator kostNameField2;
     Locator favoritedSection;
+    Locator leafletMarkerIcon;
+    Locator loadingSpinner;
+    Locator filterRoomBox;
 
     public PropertySayaPO(Page page) {
         this.page = page;
@@ -259,7 +264,7 @@ public class PropertySayaPO {
         editDataLainBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Data Lain"));
         titleSuccessEditPopUpText = page.locator(".bg-c-modal__body-title");
         doneButtonEditKosPopUp = page.locator(".bg-c-button--md.bg-c-button--primary");
-        locationTextBox = page.getByTestId("mamikosInput");
+        locationTextBox = page.locator("//input[@placeholder='Masukkan nama lokasi/ area/ alamat']");
         addressNotesInput = page.getByRole(AriaRole.TEXTBOX).nth(2);
         promoNgebutLabel = page.locator(".media-content");
         closeInfobarButton = page.locator(".delete");
@@ -293,8 +298,8 @@ public class PropertySayaPO {
         tambahFotoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Foto"));
         fotoPeraturan = page.locator(".image-uploader__preview").first();
         lanjutkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
-        inputLocation = page.locator("//*[@data-testid='mamikosInput']");
-        firstLocationSuggestion = page.locator("//*[@data-testid='suggestionItem']").first();
+        inputLocation = page.locator("//input[@placeholder='Masukkan nama lokasi/ area/ alamat']");
+        firstLocationSuggestion = page.locator("//a[@class=('bg-c-dropdown__menu-item bg-u-radius-md')]").first();
         searchInput = page.getByPlaceholder("Masukkan nama atau nomor kamar");
         firstEditButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit")).first();
         alreadyInhabitedCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
@@ -382,6 +387,11 @@ public class PropertySayaPO {
         destinationPhotoMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto tampilan dalam bangunan")).locator("span").nth(1);
         destinationPhotoRoomMoved = page.locator("label").filter(new Locator.FilterOptions().setHasText("Foto dalam kamar")).locator("span").nth(1);
         favoritedSection = page.getByText("Difavoritkan 0");
+        kostNameField2 = page.locator("//div[@class='bg-c-input step-one__input bg-c-input--disabled bg-c-input--lg']");
+        leafletMarkerIcon = page.locator("//img[@class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive leaflet-marker-draggable']");
+        loadingSpinner = page.locator(".c-loader").first();
+        filterRoomBox = page.locator("#ownerKosContainer");
+
     }
 
     /**
@@ -391,9 +401,11 @@ public class PropertySayaPO {
      */
     public void searchKostPropertySaya(String kostName) {
         playwright.waitTillPageLoaded();
+        playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
         Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
+        playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(kostSearch);
     }
 
@@ -422,6 +434,7 @@ public class PropertySayaPO {
      * @return string kos name
      */
     public String getFirstKosName() {
+        playwright.waitTillPageLoaded();
         return playwright.getText(firstKosNameLabel);
     }
 
@@ -619,6 +632,7 @@ public class PropertySayaPO {
      * Click on lihat selengkapnya button in first kos list
      */
     public void clickOnLihatSelengkapnyaButton() {
+        playwright.waitForSelectorState(lihatSelengkapnyaButton, WaitForSelectorState.VISIBLE, 1000.0 * 300);
         playwright.clickOn(lihatSelengkapnyaButton);
     }
 
@@ -701,8 +715,12 @@ public class PropertySayaPO {
      * Click on close at pop up BBK on property saya
      */
     public void clickClosePopUpBBKOnPropertySaya() {
-        playwright.waitFor(closeBBKDialog);
-        playwright.clickOn(closeBBKDialog);
+        if (playwright.waitTillLocatorIsVisible(closeBBKDialog)) {
+            playwright.waitFor(closeBBKDialog);
+            playwright.clickOn(closeBBKDialog);
+        } else {
+            playwright.reloadPage();
+        }
     }
 
     /**
@@ -806,10 +824,9 @@ public class PropertySayaPO {
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        playwright.waitTillPageLoaded();
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
-        playwright.waitTillLocatorIsVisible(editDataKos, 9_000.0);
         playwright.clickOn(editDataKos);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
@@ -839,6 +856,7 @@ public class PropertySayaPO {
     public void clickEditDoneButton() {
         playwright.hardWait(2000.0);
         playwright.clickOn(editSelesaiButton);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
@@ -988,7 +1006,7 @@ public class PropertySayaPO {
             playwright.clickOn(jenisPropertiRadioButton);
             playwright.clickOnTextButton("Tambahkan Data", 3000.0);
         } else {
-            playwright.waitTillLocatorIsVisible(tambahDataIklan, 5000.0);
+            playwright.waitTillLocatorIsVisible(tambahDataIklan, GlobalConfig.LONG_TIMEOUT);
             playwright.clickOn(tambahDataIklan);
         playwright.clickOn(tambahIklanBaru);
         jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
@@ -1272,7 +1290,11 @@ public class PropertySayaPO {
      */
     public void inputKosName(String kosName) {
         playwright.waitTillLocatorIsVisible(kostNameField, 3000.0);
-        playwright.waitFor(kostNameField, 10000.0);
+        if (playwright.waitTillLocatorIsVisible(kostNameField2)) {
+            playwright.clickOn(kostNameField2);
+        } else {
+            playwright.clickOn(kostNameField);
+        }
         playwright.forceFill(kostNameField, kosName);
     }
 
@@ -1305,6 +1327,7 @@ public class PropertySayaPO {
      * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
+        playwright.hardWait(7000);
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
         playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
@@ -1455,8 +1478,7 @@ public class PropertySayaPO {
         page.reload();
         playwright.clickOn(inputLocation);
         playwright.realKeyboardType(keyLocation);
-        ;
-        playwright.hardWait(10000.0);
+        playwright.hardWait(1000.0);
         playwright.clickOn(firstLocationSuggestion);
     }
 
@@ -1568,8 +1590,7 @@ public class PropertySayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.hardWait(2_000.0);
-        playwright.waitTillLocatorIsVisible(lanjutkanButton, 7_000.0);
+        playwright.hardWait(7000);
         playwright.clickOn(lanjutkanButton);
     }
 
@@ -1633,7 +1654,7 @@ public class PropertySayaPO {
      * @param monthlyPrice
      */
     public void inputMonthyPrice(String monthlyPrice) {
-        playwright.waitTillPageLoaded(3000.0);
+        playwright.waitTillPageLoaded();
         playwright.clickOn(priceMonthlyField);
         playwright.clearText(priceMonthlyField);
         playwright.realKeyboardType(monthlyPrice);
@@ -1761,6 +1782,7 @@ public class PropertySayaPO {
      */
     public String getRoomTypeMessage(String roomTypeMessageText) {
         roomTypeWarning = page.getByText(roomTypeMessageText);
+        playwright.waitForSelectorState(roomTypeWarning, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         return playwright.getText(roomTypeWarning);
     }
 
@@ -2515,5 +2537,13 @@ public class PropertySayaPO {
      */
     public void clickCloseBtnIfExist() {
         if (playwright.waitTillLocatorIsVisible(closeBtn, 1_000.0)) playwright.clickOn(closeBtn);
+    }
+    /**
+     * Input location kos
+     *
+     */
+    public void leftletMarker() {
+        playwright.waitTillLocatorIsVisible(leafletMarkerIcon);
+        playwright.clickOn(leafletMarkerIcon);
     }
 }

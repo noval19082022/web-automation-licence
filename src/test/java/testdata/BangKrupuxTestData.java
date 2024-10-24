@@ -11,6 +11,7 @@ public class BangKrupuxTestData {
     private static String ownerRoomGroupUntil;
     private static String urlDeleteKos;
     private static String urlRejectKos;
+    private static String urlApproveKos;
 
     public static void setKostName(String kostName) {
         BangKrupuxTestData.kostName = kostName;
@@ -22,6 +23,10 @@ public class BangKrupuxTestData {
 
     public static void hrefDeleteKosUrl(String kosListDeleteUrl) {
         BangKrupuxTestData.urlDeleteKos = kosListDeleteUrl;
+    }
+
+    public static void hrefApproveKosUrl(String kosListApproveUrl) {
+        BangKrupuxTestData.urlApproveKos = kosListApproveUrl;
     }
 
     public  static void hrefRejectKostUrl(String kosListRejectUrl){

@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @DONEMIGRATINGTONEWBOARD
+@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @loadingrevamp
 Feature: Create Kos Mamipay Active
 
   @TEST_LIMO-776 @Automated @web-covered
@@ -119,7 +119,7 @@ Feature: Create Kos Mamipay Active
       | Security     |
     And owner upload valid rule kos
     And owner click Lanjutkan for input kos address
-    And owner input address is "Tobelo"
+    And owner click on leftlet marker
     And owner click lanjutkan button for next steps
     And user clicks on the close button
     And owner upload valid photo "bangunan tampak depan"
@@ -241,7 +241,7 @@ Feature: Create Kos Mamipay Active
       And owner upload valid rule kos
       Then verify warning upload gagal disappear
       When owner click Lanjutkan for input kos address
-      And owner input address is "Tobelo"
+      And owner click on leftlet marker
       And owner click lanjutkan button for next steps
       And user clicks on the close button
       And owner upload valid photo "bangunan tampak depan"

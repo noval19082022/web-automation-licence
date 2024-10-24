@@ -289,7 +289,8 @@ public class GoldplusPO {
      *
      */
     public int getCountInvoiceUnpaid() {
-        playwright.hardWait(3000);
+        playwright.hardWait(7000);
+        playwright.waitTillPageLoaded();
         return playwright.getLocators(lihatTagihanTable).size();
     }
 
@@ -456,6 +457,7 @@ public class GoldplusPO {
                 element = "//*[contains(@class,'goldplus-mamiads-detail__item-saving')]";
                 break;
         }
+        playwright.waitFor(tutupListBalanceGP);
         playwright.pageScrollUntilElementIsVisible(tutupListBalanceGP);
         return  playwright.getText(playwright.getLocators(page.locator(element)).get(index));
     }
@@ -497,6 +499,7 @@ public class GoldplusPO {
      * @return String text saldo MamiAds
      */
     public String getTextSaldoMamiAds() {
+        playwright.waitTillLocatorIsVisible(saldoMamiadsText);
         return playwright.getText(saldoMamiadsText);
     }
 
@@ -965,7 +968,8 @@ public class GoldplusPO {
     }
 
     public void closeGpOnBoardingIfExist() {
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+        playwright.hardWait(1);
+        if (playwright.waitTillLocatorIsVisible(closeBtn)) {
             playwright.clickOn(closeBtn);
         }
     }
@@ -976,5 +980,11 @@ public class GoldplusPO {
     public void upgradePaketGp1ToGp2() {
         playwright.clickOn(upgradePaketBtnOnTbc);
         playwright.clickOn(upgradePaketBtnPopUpOnTbc);
+    }
+    /**
+     * click on upgrade paket at profile tenant
+     */
+    public void clickOnUpgradePackage() {
+        playwright.clickOn(upgradePaketBtnOnTbc);
     }
 }

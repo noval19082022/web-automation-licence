@@ -61,7 +61,7 @@ public class TenantCommunicationPO {
         resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
         emptyPageTenantTrackerText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Data Tidak Ditemukan"));
         actionButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
-        displayDataRow = page.locator("//p[@class=\"tenant-tracker__result-text bg-c-text bg-c-text--input-lg\"]");
+        displayDataRow = page.locator(".tenant-tracker__result-text");
         buttonTambahCatatan = page.locator("//a[contains(.,'+ Tambah Catatan')]").first();
         fieldNote = page.getByPlaceholder("Tulis di sini...");
         simpanNoteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
@@ -269,12 +269,17 @@ public class TenantCommunicationPO {
 
     /**
      * Verify display data row
-     * @return true if actions column is visible
+     * @return true if pagination info contains Menampilkan 20 dari xxx riwayat
      */
     public boolean verifyDisplayDataRow(){
+        boolean result = false;
+
         playwright.waitTillPageLoaded();
-//        playwright.pageScrollInView(displayDataRow);
-        return playwright.waitTillLocatorIsVisible(displayDataRow);
+        String pagination = playwright.getText(displayDataRow);
+        if (pagination.contains("Menampilkan 20")){
+            result = true;
+        }
+        return result;
     }
 
     /**

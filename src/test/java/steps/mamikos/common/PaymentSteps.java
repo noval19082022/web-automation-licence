@@ -58,6 +58,12 @@ public class PaymentSteps {
         invoice.clickOnPakaiVoucherButton();
     }
 
+    @When("user click button masukan on voucher")
+    public void tenantApplyVoucher() throws InterruptedException {
+        invoice.clickOnMasukkanVoucher();
+        invoice.clickOnMasukkanVoucherPopUp();
+    }
+
     @Then("tenant can see voucher is applied")
     public void tenantCanSeeVoucherIsApplied() {
         Assert.assertEquals(invoice.getToastText(), "Voucher Dipakai");
@@ -78,7 +84,7 @@ public class PaymentSteps {
         var biayaLayanan = invoice.getBiayaLayananMamirooms();
         var voucherDeductionValue = invoice.getVoucherReductionPrice(voucher);
         var totalPayment = invoice.getTotalPembayaran();
-        var totalAfterDeduction = subTotal - voucherDeductionValue - biayaLayanan;
+        var totalAfterDeduction = subTotal - voucherDeductionValue;
         Assert.assertEquals(totalPayment, totalAfterDeduction,
                 "Check total pembayaran setelah voucher dipakai, subtotal pembayaran: " + subTotal + ", total pembayaran: " + totalPayment + ", diskon dari voucher: " + voucherDeductionValue + ", biaya layanan mamirooms: " + biayaLayanan);
     }
@@ -303,7 +309,7 @@ public class PaymentSteps {
 
     @When("payment owner/tenant/user success using ovo as payment method")
     public void payment_owner_success_using_ovo_as_payment_method() {
-        invoice.paymentOVO("081280003230");
+        invoice.paymentOVO("0812999000");
     }
 
     @When("tenant make bill payments using {string}")
@@ -352,7 +358,7 @@ public class PaymentSteps {
 
     @When("system display remaining payment {string} use mamipoin for payment monthly")
     public void system_display_remaining_payment_use_mamipoin_for_payment(String condition) {
-        String remainingPaymentBefore = "Rp508.000";
+        String remainingPaymentBefore = "Rp507.500";
         String remainingPaymentAfter = "Rp507.500";
 
         if(condition.equals("before")){

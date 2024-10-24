@@ -40,6 +40,7 @@ public class BookingFormPO {
     Locator yesCancelBookingBtn;
     Locator pengajuanSewaText;
     Locator chatPemilikButton;
+    Locator viewRecommendationKos;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -73,6 +74,7 @@ public class BookingFormPO {
         this.yesCancelBookingBtn = page.locator("//*[@id='bookingModalCancel' and @style]//*[contains(text(), 'Ya, Batalkan')]");
         this.pengajuanSewaText = page.locator("//*[@id='bookingContainer']");
         this.chatPemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chat Chat Pemilik")).first();
+        this.viewRecommendationKos = page.locator("//button[normalize-space()='Lihat Rekomendasi Kos']");
     }
 
     /**
@@ -170,6 +172,27 @@ public class BookingFormPO {
                     playwright.clickOn(closeBtn);
                     page.reload();
                 }
+            }
+        }
+    }
+
+    /**
+     * click on Lihat Selengkapnya
+     * click on Batalkan Booking
+     * click on cancel reason button
+     * click on Ya Batalkan button
+     */
+    public void cancelBookingForCheckRecommendation() {
+        var bookingNeedConfirmation = 0;
+        if(tungguKonfirmasiPemilik.first().isVisible()) {
+            bookingNeedConfirmation = playwright.getLocators(tungguKonfirmasiPemilik).size();
+            for (int i = 0; i < bookingNeedConfirmation; i++) {
+                playwright.clickOn(lihatSelengkapnyaWaitingConfirmationTextLink.first());
+                playwright.clickOn(batalkanPengajuanSewaButton.first());
+                playwright.clickOn(cancelReasonButton);
+                playwright.clickOn(confirmCancelButton);
+                playwright.waitTillLocatorIsVisible(viewRecommendationKos);
+                playwright.clickOn(viewRecommendationKos);
             }
         }
     }

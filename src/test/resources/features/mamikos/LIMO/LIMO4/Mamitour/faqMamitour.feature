@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamitour
+@regression @LIMO4 @mamitour @faqMamitour
 Feature: FAQ Mamitour
 
   @TEST_LIMO-1124 @continue
@@ -33,7 +33,7 @@ Feature: FAQ Mamitour
     When user click "Bagaimana ketentuan urutan lantai untuk pengambilan gambar?"
     Then user should not be able to see the text "Standar MamiTour yakni 2 lantai berurutan dari atas tanah, dengan jalan masuk ke bangunan kos. Jika Anda memiliki tambahan lantai, Anda dapat menambahnya saat pembayaran."
 
-  @TEST_LIMO-3690 @continue
+  @TEST_LIMO-3690
   Scenario: [Web][Mamitour] Pusat Bantuan Mamitour
     When user click on pusat bantuan mamitour
     And owner set active page to 1

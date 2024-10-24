@@ -1,5 +1,5 @@
-@regression @LIMO4 @contentMamiprime
-Feature: check content mamiprime at landing page
+@regression @LIMO @contentMamiprime
+Feature: Check Content Mamiprime At Landing Page
 
   @TEST_LIMO-3535 @continue @WEB @AUTOMATED
   Scenario: Check content at mamiprime landing page

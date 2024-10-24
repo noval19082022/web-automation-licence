@@ -3,6 +3,8 @@ package pageobject.admin.mamipay.bangkrupux;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
@@ -11,30 +13,41 @@ public class KostOwnerPO {
     private Page page;
     PlaywrightHelpers playwright;
     Locator kosNameSearch;
+    Locator kosNameSearchBookingOwnerRequest;
     Locator firstBBKDataButton;
     Locator firstRejectButton;
     Locator firstRejectReasonRadioButton;
     Locator rejectButton;
     Locator verifyIcon;
     Locator alertMessage;
-    Locator firstVerifyButton;
+    Locator verifyButton;
     Locator firstDeleteButton;
     Locator firstRejectKosButton;
     Locator reasonRejectonCheckbox;
     Locator phoneOwnerSearch;
     Locator rejectBbkButton;
+    Locator firstApproveButton;
+    Locator updateStatus;
+    Locator actionBox;
 
     public KostOwnerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         kosNameSearch = page.getByPlaceholder("Nama Kost", new Page.GetByPlaceholderOptions().setExact(true));
+        kosNameSearchBookingOwnerRequest =page.locator("//input[@placeholder='Kost name']");
         firstBBKDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
-        firstVerifyButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("").setExact(true));
+        verifyButton = page.locator("//*[@title='Verify']");
         firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
         firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
         phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
+        firstApproveButton = page.locator("(//a[@title='Verify'])[1]");
+        rejectBbkButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reject").setExact(true));
+        firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
+        rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
+        updateStatus = page.getByText("× Success! Room has been successfully updated");
+        actionBox = page.locator(".btn-action-group");
     }
 
     /**
@@ -43,6 +56,16 @@ public class KostOwnerPO {
      */
     public void searchKosName(String kosName) {
         playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
+        playwright.pressKeyboardKey("Enter");
+        playwright.waitTillPageLoaded(GlobalConfig.LONG_TIMEOUT);
+    }
+
+    /**
+     * Search kos name then hit enter
+     * @param kosName of Kos Name
+     */
+    public void searchKosNameBookingOwnerRequest(String kosName) {
+        playwright.clickLocatorAndTypeKeyboard(kosNameSearchBookingOwnerRequest, kosName);
         playwright.pressKeyboardKey("Enter");
         playwright.hardWait(1_000.0);
         playwright.waitTillPageLoaded();
@@ -71,17 +94,8 @@ public class KostOwnerPO {
      *
      */
     public void clickOnFirstRadioButton() {
-        firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         playwright.pageScrollUntilElementIsVisible(firstRejectReasonRadioButton);
         playwright.clickOn(firstRejectReasonRadioButton);
-    }
-
-    /**
-     * Click on Reject BBK button
-     */
-    public void clickOnRejectButton() {
-        rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
-        playwright.clickOn(rejectButton);
     }
 
     /**
@@ -116,18 +130,19 @@ public class KostOwnerPO {
      * Click on first verify button
      */
     public void clickOnFirstVerifyButton() {
-        playwright.clickOn(firstVerifyButton);
-        playwright.waitTillPageLoaded(5_000.0);
+        playwright.waitForSelectorState(actionBox.first(), WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
+        playwright.clickIfElementVisible(verifyButton.first(), updateStatus, 30000.0);
+        playwright.waitTillPageLoaded(30000.0);
     }
 
     /**
      * Click on first verify button if exist
      */
-    public void clickOnFirstVerifyButtonIfExist() {
-        if (playwright.waitTillLocatorIsVisible(firstVerifyButton, 5_000.0)) {
-            playwright.clickOn(firstVerifyButton);
+    public void clickVerifyButtonIfExists() {
+        if (playwright.waitTillLocatorIsVisible(verifyButton, 5000.0)) {
+            playwright.clickOn(verifyButton);
         }
-        playwright.waitTillPageLoaded(5_000.0);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -139,12 +154,31 @@ public class KostOwnerPO {
     }
 
     /**
+     * Navigate to url approve kos on admin
+     *
+     */
+    public void navigateToApproveUrl() {
+        playwright.navigateTo(this.getKosListApproveUrl());
+    }
+
+    /**
      * Get url list kos delete
      *
      * @return attribute href from firstDeleteButton
      */
     public String getKosListDeleteUrl() {
+        playwright.waitTillPageLoaded();
+        playwright.waitForSelectorState(firstDeleteButton, WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
         return playwright.getAttributeValue(firstDeleteButton, "href");
+    }
+
+    /**
+     * Get url list kos active
+     *
+     * @return attribute href from firstDeleteButton
+     */
+    public String getKosListApproveUrl() {
+        return playwright.getAttributeValue(firstApproveButton, "href");
     }
 
     /**
@@ -153,6 +187,7 @@ public class KostOwnerPO {
      *
      */
     public String getKosListRejectUrl() {
+        playwright.waitForSelectorState(firstRejectKosButton, WaitForSelectorState.ATTACHED, GlobalConfig.LONG_TIMEOUT);
         return playwright.getAttributeValue(firstRejectKosButton, "href");
     }
 
@@ -194,13 +229,19 @@ public class KostOwnerPO {
 
     /**
      * Click Reject button on request BBK form
-     *
-     *
      */
     public void clickOnRejectBBK() {
-        rejectBbkButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reject").setExact(true));
-        playwright.clickOn(rejectBbkButton);
+        Locator rejectBbkButton = page.locator("//a[normalize-space()='Reject']");
+        if (playwright.waitTillLocatorIsVisible(rejectBbkButton)) {
+            playwright.clickOn(rejectBbkButton);
+            playwright.pageScrollUntilElementIsVisible(firstRejectReasonRadioButton);
+            playwright.clickOn(firstRejectReasonRadioButton);
+            playwright.clickOn(rejectButton);
+        } else {
+            playwright.reloadPage();
+        }
     }
+
 
     /**
      * Click tombol BBK Data button and open new tab Data BBK owner

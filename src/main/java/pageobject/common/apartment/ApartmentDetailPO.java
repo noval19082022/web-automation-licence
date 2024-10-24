@@ -33,8 +33,12 @@ public class ApartmentDetailPO {
      * click on favorite btn
      */
     public void clickOnFavoriteBtn() {
-        playwright.clickOn(favoriteBtn);
-    }
+//        Locator locator = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--md btn-love--red-icon']//*[name()='svg']");
+//        if (playwright.waitTillLocatorIsVisible(locator)) {
+//            playwright.clickOn(favoriteBtn);
+//        }
+            playwright.clickOn(favoriteBtn);
+        }
 
     /**
      * get success message after favorite the apartement

@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamiprime
+@regression @LIMO4 @LIMOmamiprime
 Feature: Detail Pemesanan
 
   @TEST_LIMO-3574 @continue @WEB @AUTOMATED
@@ -21,20 +21,20 @@ Feature: Detail Pemesanan
 
   @TEST_LIMO-3575 @continue @WEB @AUTOMATED
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Selected property and selected periode
-    When owner only choose period "7 Hari" with price "Rp356.250"
+    When owner only choose period "7 Hari" with price "Rp305.500"
     Then Validate Lanjut Bayar button on periode mamiprime is enable
 
   @TEST_LIMO-3573 @continue @WEB @AUTOMATED
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Select periode 14 Days
-    When owner only choose period "14 Hari" with price "Rp712.500"
+    When owner only choose period "14 Hari" with price "Rp572.000"
     Then Validate Lanjut Bayar button on periode mamiprime is enable
 
   @TEST_LIMO-3577 @continue @WEB @AUTOMATED
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Select periode 30 Days
-    When owner only choose period "30 Hari" with price "Rp1.275.000"
+    When owner only choose period "30 Hari" with price "Rp1.105.000"
     Then Validate Lanjut Bayar button on periode mamiprime is enable
 
   @TEST_LIMO-3578 @WEB @AUTOMATED
   Scenario: [Web][Mamiprime][Pendaftaran Mamiprime] Select periode 60 Days
-    When owner only choose period "60 Hari" with price "Rp3.000.000"
+    When owner only choose period "60 Hari" with price "Rp2.210.000"
     Then Validate Lanjut Bayar button on periode mamiprime is enable

@@ -13,8 +13,9 @@ public class laporanStatistikPO {
     private Locator totalChatElement;
     private Locator totalClickElement;
     private Locator elementPeriode;
-    private Locator graphic;
-
+    private Locator greenGraphic;
+    private Locator redGraphic;
+    private Locator grayGraphic;
 
     public laporanStatistikPO(Page page) {
         this.page = page;
@@ -25,8 +26,9 @@ public class laporanStatistikPO {
         this.totalChatElement = page.locator(".statistic-kos-data > div:nth-of-type(2) > .statistic-kos-data__value");
         this.totalClickElement = page.locator(".statistic-kos-data > div:nth-of-type(3) > .statistic-kos-data__value");
         this.elementPeriode = page.locator(".bg-u-mr-xxs");
-        this.graphic = page.locator(".bg-u-text-green-500 > .bg-c-icon");
-
+        this.greenGraphic = page.locator(".bg-u-text-green-500 > .bg-c-icon");
+        this.redGraphic = page.locator(".bg-u-text-red-500 > .bg-c-icon");
+        this.grayGraphic = page.locator(".statistic-kos-data > div:nth-of-type(3) .bg-c-icon");
     }
 
     /**
@@ -38,6 +40,7 @@ public class laporanStatistikPO {
 
     /**
      * System selected listing
+     *
      * @return
      */
     public String autoSelectedListing(String type) {
@@ -71,6 +74,7 @@ public class laporanStatistikPO {
 
     /**
      * get total data sewa at laporan statistik
+     *
      * @return
      */
     public boolean getDataTotalSewa() {
@@ -86,6 +90,7 @@ public class laporanStatistikPO {
 
     /**
      * get total data chat at laporan statistik
+     *
      * @return
      */
     public boolean getDataTotalChat() {
@@ -101,6 +106,7 @@ public class laporanStatistikPO {
 
     /**
      * get total data click at laporan statistik
+     *
      * @return
      */
     public boolean getDataTotalClick() {
@@ -113,18 +119,24 @@ public class laporanStatistikPO {
         }
         return playwright.waitTillLocatorIsVisible(totalSewaElement);
     }
+
     /**
      * get total data periode at laporan statistik
+     *
      * @return
      */
     public boolean getDataperiode() {
         return playwright.waitTillLocatorIsVisible(elementPeriode);
     }
+
     /**
      * Graphic at laporan statistik
+     *
      * @return
      */
     public boolean ownerSeeGraphic() {
-        return playwright.waitTillLocatorIsVisible(graphic);
+        return playwright.waitTillLocatorIsVisible(greenGraphic) ||
+                playwright.waitTillLocatorIsVisible(redGraphic) ||
+                playwright.waitTillLocatorIsVisible(grayGraphic);
     }
 }

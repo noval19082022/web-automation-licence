@@ -22,9 +22,9 @@ Feature: Owner - Penyewa Feature
 
 #  Scenario: create booking
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                                 | kost name prod |
-      | Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo Halmahera Utara | kost reykjavik |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-putra-murah-kost-singgahsini-noval-tipe-c-tobelo-utara-halmahera-utara-arac-grade-a-tobelo-halmahera-utara-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
     And tenant logs out
@@ -57,12 +57,15 @@ Feature: Owner - Penyewa Feature
       | 0892202358 | 08100000622 | qwerty123 |
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
-    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
     And user click review kost
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user click ajukan berhenti sewa on kontrak saya after review kos
+    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user click ajukan berhenti sewa on kontrak saya after input data diri
+    Then tenant can see "Pastikan form sudah diisi dengan benar untuk memudahkan pemilik melakukan konfirmasi." on bank account section
+    And tenant click on "Kirim form ke pemilik" button on popup confirmation
+    And tenant navigate to kontrak kost saya
     And user logs out as a Tenant user
     When user login as owner:
       | phone stag   | phone prod  | password  |
@@ -80,7 +83,7 @@ Feature: Owner - Penyewa Feature
       | phone stag   | phone prod  | password  |
       | 089120220103 | 08100000622 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara Grand Batavia Tobelo Halmahera Utara"
     And owner set Kelola Tagihan filter month to "Januari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
@@ -109,9 +112,9 @@ Feature: Owner - Penyewa Feature
 
     # Scenario: tenant booking kost
     And user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag                                                                    |
-      | Kost Bima Booking Dp Biaya Lain Dan Denda Automation Tobelo Utara Halmahera Utara |
+    And tenant redirect to kost details:
+      | kost path stag                                                                                                                     | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-bima-booking-dp-biaya-lain-dan-denda-automation-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 

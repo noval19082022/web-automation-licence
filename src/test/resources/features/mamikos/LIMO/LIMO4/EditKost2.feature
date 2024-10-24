@@ -1,47 +1,43 @@
-@regression @LIMO4 @editKost123456
+@regression @LIMO4 @editKostFeature2
 Feature: Edit Kost 2
 
   @precondition
   Scenario: Verify Edited Kos In Admin MAMAHMUDALIMO
-    Given user try to logout from mamikos
-    When admin go to mamikos bangkrupux admin
-    And admin login to bangkrupux:
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
-    And user verify the kos in admin kos owner if exist
+    And user verify the kos in admin kos owner
 
-  @TEST_LIMO-850 @continue
-  Scenario Outline: Status kos is active or reject and owner edit description kos
+  @TEST_LIMO-850
+  Scenario: Status kos is active or reject and owner edit description kos
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 081328787342 | 081328787342 | Perempuan |
     And owner dismiss FTUE goldplus
     And owner navigates to property saya kos
-    And owner search kost "<kost name>" on property saya page
+    And owner search kost "MAMAHMUDALIMO" on property saya page
     And user click Lihat Selengkapnya button for edit
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
       | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
-      | <kost name> | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+      | MAMAHMUDALIMO | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
     And user click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And user click done in success page pop up of edit kos
-    Then user see kos with name "<kost name>", status "Diperiksa Admin" and type "Kos Campur"
-    Examples:
-      | kost name     |
-      | MAMAHMUDALIMO |
+    Then user see kos with name "MAMAHMUDALIMO", status "Diperiksa Admin" and type "Kos Campur"
 
   @TEST_LIMO-3435 @WEB @AUTOMATED
   Scenario: Verify Edited Kos In Admin MAMAHMUDALIMO
-    Given user try to logout from mamikos
-    When admin go to mamikos bangkrupux admin
-    And admin login to bangkrupux:
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    When admin go to mamikos bangkrupux admin
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
     And user verify the kos in admin kos owner
@@ -53,7 +49,7 @@ Feature: Edit Kost 2
       | phone stag   | phone prod   | password  |
       | 081328787342 | 081328787342 | Perempuan |
     And owner dismiss FTUE goldplus
-    And owner navigates to property saya kos
+    Given owner navigates to property saya kos
     And owner search kost "MAMAHMUDALIMO" on property saya page
     And user click Lihat Selengkapnya button for edit
     And user clicks on edit data kos button
@@ -78,7 +74,6 @@ Feature: Edit Kost 2
     And user select destination move photo room on "Foto tampilan dalam bangunan"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
-
   Scenario: [Edit kos][Foto Kos]Edit kost with condition user with old kost && wants to edit foto && user already have photo booking active
     Given user go to mamikos homepage
     When user login as owner:
@@ -92,6 +87,16 @@ Feature: Edit Kost 2
     And user click button edit "Foto Kos" kos
     Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
     And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
+
+  Scenario: Verify Edited Kos In Admin PAPASUKA GENIT
+    Given user try to logout from mamikos
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to kost owner menu
+    And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
+    And user verify the kos in admin kos owner
 
   @TEST_LIMO-3434 @continue @editKost123 @WEB @AUTOMATED
   Scenario: [Edit kos][Edit data needs verification process] Status kos == active or reject && owner edit data needs verification process
@@ -131,9 +136,6 @@ Feature: Edit Kost 2
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And user click done in success page pop up of edit kos
     Then user see kos with name "PAPASUKA GENIT", status "Diperiksa Admin" and type "Kos Campur"
-#    Examples:
-#      | kost nama      |
-#      | PAPASUKA GENIT |
 
   @TEST_LIMO-2716 @editKost123
   Scenario: [Edit kos][Harga]Intercept confirmation on screen "Harga"
@@ -208,7 +210,6 @@ Feature: Edit Kost 2
 
   @TEST_LIMO-855 @WEB @AUTOMATED
   Scenario: [Edit kos][Kos]Edit kost with condition user with old kost && Foto Kos OR Foto Kamar belum di mapping ke yg baru (dari data lama) OR Provinsi field kosong
-#    When user click on "close" button
     When owner close pop up in edit kost
     And owner clear description kost on edit page
     Then owner will see that the text "Anda belum mengisi deskripsi kos." is displayed

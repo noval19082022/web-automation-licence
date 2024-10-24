@@ -269,6 +269,7 @@ public class PropertySayaSteps {
 
     @And("user click button edit {string} kos")
     public void userClickButtonEditKos(String updateData) {
+        playwright.hardWait(5000);
         playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDataKos(updateData);
@@ -382,9 +383,11 @@ public class PropertySayaSteps {
 
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
+        if (playwright.isTextDisplayed("Beberapa Kos Belum Dapat Dibooking")){
+            propertySaya.clickClosePopUpBBKOnPropertySaya();
+    }
         propertySaya.clickTambahDataIklan(jenisProperti);
     }
-
     @And("owner fills data apartemen with Property Name is {string}")
     public void ownerFillsDataApartemenWithPropertyNameIs(String propertyName) {
         propertySaya.inputPropertyName(propertyName);
@@ -594,7 +597,7 @@ public class PropertySayaSteps {
     @And("owner click lanjutkan button for next steps")
     public void ownerClickLanjutkanButtonForNextSteps() {
         propertySaya.clickOnLanjutkan();
-       // loading.waitForLoadingIconDisappear();
+        loading.waitForLoadingIconDisappear();
     }
 
     @And("owner invalid upload photo {string}")
@@ -681,6 +684,7 @@ public class PropertySayaSteps {
 
     @Then("verify message {string} the room type")
     public void verifyMessageTheRoomType(String roomTypeMessageText) {
+        playwright.waitTillPageLoaded();
         loading.waitForLoadingIconDisappear();
         Assert.assertEquals(propertySaya.getRoomTypeMessage(roomTypeMessageText), roomTypeMessageText, "Room type message doesn't match!");
     }
@@ -1040,7 +1044,6 @@ public class PropertySayaSteps {
     @When("user clicks on edit data kos button")
     public void userClicksOnEditDataKosButton() {
         propertySaya.clickOnEditDataKosButton();
-        loading.waitForLoadingIconDisappear();
     }
 
     @When("user delete active other additional price")
@@ -1165,5 +1168,10 @@ public class PropertySayaSteps {
     @When("owner close pop up in edit kost")
     public void ownerClosePopUpInEditKost() {
         propertySaya.clickCloseBtnIfExist();
+    }
+
+    @And("owner click on leftlet marker")
+    public void ownerClickOnLeftletMarker() {
+        propertySaya.leftletMarker();
     }
 }

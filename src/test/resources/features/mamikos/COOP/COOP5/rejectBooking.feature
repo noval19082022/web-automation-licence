@@ -22,9 +22,9 @@ Feature: OB Owner Reject Booking Full Room
 
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
-    And tenant search kost then go to kost details:
-      | kost name stag            | kost name prod            |
-      | Dont Starve To Get Her    | Dont Starve To Get Her    |
+    And tenant redirect to kost details:
+      | kost path stag                                                      | kost path prod               |
+      | kost-kabupaten-sleman-kost-putri-eksklusif-dont-starve-to-get-her-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 

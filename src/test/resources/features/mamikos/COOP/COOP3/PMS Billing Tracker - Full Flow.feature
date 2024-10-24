@@ -17,9 +17,9 @@ Feature: Update Billing tracker flow
       | 08100000214  | 0816000001  | qwerty123 |
     And user cancel booking
     And user go to mamikos homepage
-    When tenant search kost then go to kost details:
-      | kost name stag                                                   | kost name prod                                           |
-      | Kost Singgahsini Bundaran Aloha Deluxe Sidoarjo  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+    When tenant redirect to kost details:
+      | kost path stag                                                                                 | kost path prod                                           |
+      | kost-kabupaten-sidoarjo-kost-campur-murah-kost-singgahsini-bundaran-aloha-superior-sidoarjo-2  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
     And user dismiss FTUE booking benefit
     And tenant booking kost for "today"
     And user go to mamikos homepage
@@ -171,6 +171,13 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Ajukan Check-out"
     Then admin can see contract status with "Ajukan Check-out"
 
+  @SS-4361 @continue
+  Scenario: [Billing Tracker][Productivity] Check contract when tenant request terminated contract
+    When admin click on reset button
+    And admin clicks on next month in calendar
+    And admin filter contract status with "Ajukan Check-out"
+    Then admin can see contract status with "Ajukan Check-out"
+
   @SS-4372 @continue
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Check-out + Sudah Check-out
     When admin can see contract status with "Ajukan Check-out"
@@ -187,7 +194,6 @@ Feature: Update Billing tracker flow
     And admin click on pagination
     Then admin can see contract status with "Sudah Check-out"
     And admin filter contract status with "Aktif"
-    And admin click on pagination
     Then admin can see contract status with "Aktif"
 
   @SS-4378 @continue
