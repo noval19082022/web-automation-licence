@@ -1,4 +1,4 @@
-@regression @LIMO5 @GPNoval
+@regression @LIMO5
 Feature: Prime suggestion
 
 @TEST_LIMO-4080
