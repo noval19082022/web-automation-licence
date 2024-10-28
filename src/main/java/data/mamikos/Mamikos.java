@@ -88,6 +88,7 @@ public class Mamikos {
     public static final String MAMIPRIME_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "historyMamiprime");
     public static final String LOGIN_USER = JavaHelpers.getPropertyValue(MAMIKOS, "loginUSer");
     public static final String MAMIPRIME_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeTestingTools");
+    public static final String ADMIN_PRIME_SUGGESTION = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeSuggestion");
 
 
     @Setter @Getter
