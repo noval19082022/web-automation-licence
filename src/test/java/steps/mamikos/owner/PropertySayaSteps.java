@@ -52,7 +52,6 @@ public class PropertySayaSteps {
         kosId = table.asMap(String.class, String.class);
         String pathUrlUpdateKosPriceById = Mamikos.OWNER_URL + Mamikos.OWNER_KOS_ROOMS_PRICE + kosId.get(Mamikos.ENV) + Mamikos.OWNER_REDIRECT + Mamikos.OWNER_PAGE_KOS;
         playwright.navigateTo(pathUrlUpdateKosPriceById);
-        page.pause();
     }
 
     @When("owner search kost {string} on property saya page")
