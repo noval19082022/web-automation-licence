@@ -88,6 +88,8 @@ public class HomePO {
     private Locator copyrightFooter;
     private Locator appStoreFooterMenu;
     private Locator googlePlayBtn;
+    private Locator kebijakanPrivasiPopup;
+    private Locator sayaSetujuButton;
 
 
 
@@ -124,6 +126,8 @@ public class HomePO {
         this.lihatPengajuanLainBtn = page.locator("a.bg-c-link:nth-child(2)");
         lihatSemuaSekitarKampus = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua →")).nth(1);
         lihatSemuaAreaKostTerpopuler = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat semua →")).first();
+        kebijakanPrivasiPopup = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pembaharuan Kebijakan Privasi"));
+        sayaSetujuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Setuju"));
 
 
         //header
@@ -886,5 +890,16 @@ public class HomePO {
     public LoginPO clickOnButtonMasukOnPopularArea() {
         logInButtonPopularAreaPage.click();
         return new LoginPO(page);
+    }
+
+    /**
+     * Dismiss Pembaharuan Kebijakan Privasi pop-up
+     *
+     */
+    public void clickOnSayaSetujuButton() {
+        playwright.hardWait(2000);
+        if (playwright.waitTillLocatorIsVisible(kebijakanPrivasiPopup, 3000.0)) {
+            playwright.clickOn(sayaSetujuButton);
+        }
     }
 }
