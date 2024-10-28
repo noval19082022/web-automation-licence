@@ -897,7 +897,7 @@ public class HomePO {
      *
      */
     public void clickOnSayaSetujuButton() {
-        playwright.hardWait(2000);
+        playwright.hardWait(5000);
         if (playwright.waitTillLocatorIsVisible(kebijakanPrivasiPopup, 3000.0)) {
             playwright.clickOn(sayaSetujuButton);
         }
