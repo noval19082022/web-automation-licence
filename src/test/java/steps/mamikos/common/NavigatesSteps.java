@@ -475,4 +475,8 @@ public class NavigatesSteps {
     public void admin_navigates_to_harvest_dashboard() {
         loginHarvestDashboard.navigateToHarvestDashboard();
     }
+    @When("admin navigate to admin prime suggestion")
+    public void adminNavigateToAdminPrimeSuggestion() {
+        playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_PRIME_SUGGESTION);
+    }
 }

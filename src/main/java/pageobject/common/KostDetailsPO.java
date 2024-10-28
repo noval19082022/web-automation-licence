@@ -1739,7 +1739,7 @@ public class KostDetailsPO {
             if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
-            playwright.hardWait(500);
+            playwright.hardWait(1000);
         }
         playwright.waitTillLocatorIsVisible(ftuePopUP,3000.0);
         return playwright.waitTillLocatorIsVisible(ftuePopUP);

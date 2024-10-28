@@ -1,6 +1,7 @@
 package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -43,19 +44,29 @@ public class PropertySayaSteps {
 
     private List<Map<String, String>> property;
 
-    @And("owner search kost {string} on property saya page")
+    @When("user/owner use direct url access to update kos price:")
+    public void userGoToEditKosPageByKosId(DataTable table) {
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        Map<String, String> kosId;
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        kosId = table.asMap(String.class, String.class);
+        String pathUrlUpdateKosPriceById = Mamikos.OWNER_URL + Mamikos.OWNER_KOS_ROOMS_PRICE + kosId.get(Mamikos.ENV) + Mamikos.OWNER_REDIRECT + Mamikos.OWNER_PAGE_KOS;
+        playwright.navigateTo(pathUrlUpdateKosPriceById);
+    }
+
+    @When("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
         loading.waitForLoadingIconDisappear();
         propertySaya.searchKostPropertySaya(kostName);
         Mamikos.setPropertyKosName(kostName);
     }
 
-    @And("owner click update kamar kost")
+    @When("owner click update kamar kost")
     public void ownerClickUpdateKamarKost() {
         propertySaya.clickUpdateKamarButton();
     }
 
-    @And("owner set status kamar is kosong")
+    @When("owner set status kamar is kosong")
     public void ownerSetStatusKamarIsKosong() {
         propertySaya.clickUpdateKamarEmptyButton();
     }
@@ -68,7 +79,7 @@ public class PropertySayaSteps {
         Assert.assertEquals(propertySaya.getFirstKosType(type), type, "Kos type is wrong");
     }
 
-    @And("user click kos {string} in update price list")
+    @When("user click kos {string} in update price list")
     public void userClickKosInUpdatePriceList(String kosName) {
         propertySaya.clickOnKosName(kosName);
     }

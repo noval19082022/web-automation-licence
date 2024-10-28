@@ -1,34 +1,32 @@
-@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @broadcastChatOwner3
-Feature: Broadcast Chat Owner Tenant Booking Required 2
+@broadcastChat @owner @staging @broadcastChat
+Feature: Broadcast Chat Owner Tenant Booking Required 3
 
-  #test is precondition only
   Scenario: Tenant Booking kos for today
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod    | password  |
       | 08100000622 | 0890867321212 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                                              | kost path prod                                                              |
-      | kost-kabupaten-sleman-kost-campur-murah-kost-gp-2-automation-depok-sleman-2 | kost-kabupaten-sleman-kost-campur-murah-kost-gp-2-automation-depok-sleman-2 |
+      | kost path stag                                                                | kost path prod                                                                |
+      | kost-kabupaten-banyumas-kost-campur-murah-kost-lpl-p2-01-patikraja-banyumas-2 | kost-kabupaten-banyumas-kost-campur-murah-kost-lpl-p2-01-patikraja-banyumas-2 |
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_LIMO-3641 @continue
-  Scenario:[Broadcast Chat][Create Broadcast chat]User Want To Save Template Without Add Message On Template Is Editable
+  @TEST_LIMO-3640 @Broadcast-chat @GP2 @automated @listing-monetization @web @broadcast-chat2-lagi
+  Scenario: [Broadcast Chat][Create Broadcast chat]User want to change kost after input message chat
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 081197878842 | 0          | qwerty123 |
+      | 081328787342 | 0          | Perempuan |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
-    And user click "Buat Broadcast Chat"
-    And owner add broadcast chat for kost "kost GP 2 Automation Depok Sleman"
-    And owner clicks Kos "kost GP 2 Automation Depok Sleman" and Pilih Kos button
-    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
-    And owner click "Preview Pesan" button
-    Then owner will see that the text "Isi pesan terlebih dahulu." is displayed
+    And owner add broadcast chat for kost "Kost LPL P2 01 Patikraja Banyumas"
+    And owner clicks Kos "Kost LPL P2 01 Patikraja Banyumas" and Pilih Kos button
+    And owner click button ubah to change kos broadcast
+    And owner add broadcast chat for kost "Kost LPL P2 02 Patikraja Banyumas"
+    And owner clicks Kos "Kost LPL P2 02 Patikraja Banyumas" and Pilih Kos button
+    Then owner will see that the text "Kost LPL P2 02 Patikraja Banyumas" is displayed
 
-  #deleting booking for future proof test
   @continue
   Scenario: Batalkan Booking
     When playwright create register device id for tenant with parameters:
