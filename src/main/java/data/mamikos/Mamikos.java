@@ -17,6 +17,7 @@ public class Mamikos {
     public static final String ADMINMAMIPAY = JavaHelpers.getPropertyValue(MAMIKOS, "backoffice_" + ENV);
     public static final String KOST_SAYA_BILLING = JavaHelpers.getPropertyValue(MAMIKOS, "kostSayaBilling");
     public static final String TENANT_EDIT_PROFILE = JavaHelpers.getPropertyValue(MAMIKOS,"tenantEditProfile");
+    public static final String OWNER_EDIT_KOST = JavaHelpers.getPropertyValue(MAMIKOS, "ownerEditKos");
     public static final String TENANT_RIWAYAT_BOOKING = JavaHelpers.getPropertyValue(MAMIKOS, "tenantRiwayatBooking");
     public static final String KELOLA_TAGIHAN = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKelolaTagihan");
     public static final String FAVORITE_PAGE = JavaHelpers.getPropertyValue(MAMIKOS, "favoritePage");
@@ -89,6 +90,9 @@ public class Mamikos {
     public static final String LOGIN_USER = JavaHelpers.getPropertyValue(MAMIKOS, "loginUSer");
     public static final String MAMIPRIME_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeTestingTools");
     public static final String ADMIN_PRIME_SUGGESTION = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeSuggestion");
+    public static final String OWNER_KOS_ROOMS_PRICE = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKosRoomsPrice");
+    public static final String OWNER_REDIRECT = JavaHelpers.getPropertyValue(MAMIKOS, "redirectOwner_" + ENV);
+    public static final String OWNER_PAGE_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "ownerPageKos");
 
 
     @Setter @Getter
