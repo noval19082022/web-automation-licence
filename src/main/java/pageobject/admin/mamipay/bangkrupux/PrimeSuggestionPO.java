@@ -1,6 +1,5 @@
 package pageobject.admin.mamipay.bangkrupux;
 
-import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
