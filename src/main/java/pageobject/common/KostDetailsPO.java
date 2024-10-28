@@ -4,6 +4,7 @@ import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.global.GlobalConfig;
 import pageobject.tenant.BookingFormPO;
 import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
@@ -1739,7 +1740,7 @@ public class KostDetailsPO {
             if (playwright.waitTillLocatorIsVisible(ftueSlider.first())) {
                 break;
             }
-            playwright.hardWait(500);
+            playwright.hardWait(1000);
         }
         playwright.waitTillLocatorIsVisible(ftuePopUP,3000.0);
         return playwright.waitTillLocatorIsVisible(ftuePopUP);
