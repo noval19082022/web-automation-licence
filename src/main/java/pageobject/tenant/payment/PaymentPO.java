@@ -38,8 +38,8 @@ public class PaymentPO extends InvoicePO {
         this.paymentAmount = page.getByLabel("Payment Amount");
         this.flagBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
         // CC
-        this.codeCCPlaceHolder = page.frameLocator("iframe").frameLocator("iframe[title='Bank Authentication']").getByPlaceholder(" Enter Code Here");
-        this.submitBtnForCC = page.frameLocator("iframe").frameLocator("iframe[title='Bank Authentication']").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("SUBMIT"));
+        this.codeCCPlaceHolder = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByPlaceholder(" Enter Code Here");
+        this.submitBtnForCC = page.frameLocator("#universalInvoiceContainer iframe").frameLocator("iframe[title=\"Bank Authentication\"]").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("SUBMIT"));
         // riwayat booking
         this.lihatSelengkapnya = page.getByText("Lihat selengkapnya").first();
         this.lihatInvoice = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Invoice"));
@@ -65,6 +65,7 @@ public class PaymentPO extends InvoicePO {
      * Payment method using cc
      */
     public void paymentUsingCC() {
+        playwright.waitFor(codeCCPlaceHolder, 5_000.0);
         playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
         playwright.clickOn(submitBtnForCC);
         playwright.hardWait(3_000.00);
