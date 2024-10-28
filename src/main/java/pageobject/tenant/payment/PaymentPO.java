@@ -65,7 +65,7 @@ public class PaymentPO extends InvoicePO {
      * Payment method using cc
      */
     public void paymentUsingCC() {
-        playwright.waitFor(codeCCPlaceHolder, 5_000.0);
+        playwright.waitFor(codeCCPlaceHolder, 10_000.0);
         playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
         playwright.clickOn(submitBtnForCC);
         playwright.hardWait(3_000.00);
