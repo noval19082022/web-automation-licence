@@ -214,6 +214,7 @@ public class NavigatesSteps {
     public void userNavigatesToOwnerDashboard() {
         playwright.navigateTo(Mamikos.OWNER_URL, 30000.0);
         loading.waitForLoadingIconDisappear();
+        home.clickOnSayaSetujuButton();
     }
 
     @And("tenant navigate to riwayat kos page")
