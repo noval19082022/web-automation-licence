@@ -89,6 +89,7 @@ public class Mamikos {
     public static final String MAMIPRIME_HISTORY = JavaHelpers.getPropertyValue(MAMIKOS, "historyMamiprime");
     public static final String LOGIN_USER = JavaHelpers.getPropertyValue(MAMIKOS, "loginUSer");
     public static final String MAMIPRIME_TESTING_TOOLS = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeTestingTools");
+    public static final String ADMIN_PRIME_SUGGESTION = JavaHelpers.getPropertyValue(MAMIKOS, "mamiprimeSuggestion");
     public static final String OWNER_KOS_ROOMS_PRICE = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKosRoomsPrice");
     public static final String OWNER_REDIRECT = JavaHelpers.getPropertyValue(MAMIKOS, "redirectOwner_" + ENV);
     public static final String OWNER_PAGE_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "ownerPageKos");

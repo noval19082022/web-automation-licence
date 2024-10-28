@@ -214,6 +214,7 @@ public class NavigatesSteps {
     public void userNavigatesToOwnerDashboard() {
         playwright.navigateTo(Mamikos.OWNER_URL, 30000.0);
         loading.waitForLoadingIconDisappear();
+        home.clickOnSayaSetujuButton();
     }
 
     @And("tenant navigate to riwayat kos page")
@@ -473,5 +474,9 @@ public class NavigatesSteps {
     @When("admin navigates to Harvest Dashboard")
     public void admin_navigates_to_harvest_dashboard() {
         loginHarvestDashboard.navigateToHarvestDashboard();
+    }
+    @When("admin navigate to admin prime suggestion")
+    public void adminNavigateToAdminPrimeSuggestion() {
+        playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_PRIME_SUGGESTION);
     }
 }
