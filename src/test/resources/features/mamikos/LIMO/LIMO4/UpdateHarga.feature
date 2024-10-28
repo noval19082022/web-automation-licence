@@ -1,16 +1,16 @@
-@regression @LIMO5 @updatePrice
+@regression @LIMO5 @updatePrice @cektimeouts
 Feature: Update Harga
 
   @TEST_LIMO-909 @continue @updatePrice @WEB @AUTOMATED
   Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Inactive with update price
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
-    And owner navigates to property saya kos
-    And owner search kost "Mamites Kos coba baru" on property saya page
-    And user click Lihat Selengkapnya button for edit
-    And owner click "Update Harga"
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
+    And owner use direct url access to update kos price:
+      | env  | kost id  |
+      | stag | /20609677 |
+      | prod | /         |
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
 
@@ -133,8 +133,8 @@ Feature: Update Harga
   Scenario Outline: [WEB][Update Harga] Update price kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kost Tester" on property saya page
     And user click Lihat Selengkapnya button for edit

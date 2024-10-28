@@ -224,7 +224,7 @@ public class PropertySayaPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
-        kostDropdown = page.getByText("Cari kos Anda disini...");
+        kostDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari kos Anda di sini... dropdown-down"));
         searchKostTextbox = page.getByPlaceholder("Search");
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
         updateKamarButton = page.getByText("Update Kamar", new Page.GetByTextOptions().setExact(true));
