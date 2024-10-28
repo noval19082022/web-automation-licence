@@ -1,4 +1,4 @@
-@regression @LIMO5 @updatePrice
+@regression @LIMO5 @updatePrice @updateHarga
 Feature: Update Harga
 
   @TEST_LIMO-909 @continue @updatePrice @WEB @AUTOMATED
