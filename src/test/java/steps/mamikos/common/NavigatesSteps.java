@@ -17,7 +17,7 @@ import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.harvest.CheckPropertyPO;
 import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
-import pageobject.owner.PropertySayaPO;
+import pageobject.owner.PropertiSayaPO;
 import pageobject.pms.LoginPMSPO;
 import pageobject.tenant.profile.VerifikasiAkunPO;
 import utilities.PlaywrightHelpers;
@@ -34,7 +34,7 @@ public class NavigatesSteps {
     VerifikasiAkunPO verifikasiAkun = new VerifikasiAkunPO(page);
     LoadingPO loading = new LoadingPO(page);
     CheckPropertyPO checkProperty = new CheckPropertyPO(page);
-    PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
+    PropertiSayaPO propertySaya = new PropertiSayaPO(ActiveContext.getActivePage());
     LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
 
     @Given("user go to mamikos homepage")

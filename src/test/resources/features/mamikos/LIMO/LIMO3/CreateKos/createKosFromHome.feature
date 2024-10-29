@@ -23,7 +23,7 @@ Feature: Create Kos From Home
     And owner navigates to property saya kos
     And owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
-    And owner click "Tambah Kos Baru"
+    And owner clicks on Tambah Kos Baru button
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos                 | build kos | other note |
       | kos Automation TEST | yes             | Tipe A         | girl     | kos for case invalid rule photo | 2023      |            |
