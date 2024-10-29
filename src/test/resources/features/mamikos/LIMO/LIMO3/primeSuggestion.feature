@@ -1,7 +1,7 @@
 @LIMO3 @PrimeSuggestion
 Feature: Prime Suggestion
 
-  @TEST_LIMO-4569
+  @TEST_LIMO-4569 @maintelimo3
   Scenario: [WEB][Prime Sugestion] Display "Rekomendasi buat Kamu" for prime keyword search
     Given user go to mamikos homepage
     When user want to visit search page from homepage

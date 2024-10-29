@@ -379,6 +379,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get list text content from locator
+     * @param locator target locator
+     * @return List of string
+     */
+    public List<String> getListTextContentsFromLocator(Locator locator) {
+        waitTillLocatorIsVisible(locator);
+        return locator.allTextContents();
+    }
+
+    /**
      * Get value from input element
      *
      * @param locator playwright locator
@@ -600,6 +610,10 @@ public class PlaywrightHelpers {
      */
     public void waitForSelectorState(Locator locator, WaitForSelectorState state, Double timeout) {
         locator.waitFor(new Locator.WaitForOptions().setState(state).setTimeout(timeout));
+    }
+
+    public Integer waitForElementCount(Locator locator, int count) {
+        return locator.count();
     }
 
     //---- Wait Part ----\\
