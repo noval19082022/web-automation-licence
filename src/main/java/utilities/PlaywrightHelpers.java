@@ -612,10 +612,6 @@ public class PlaywrightHelpers {
         locator.waitFor(new Locator.WaitForOptions().setState(state).setTimeout(timeout));
     }
 
-    public Integer waitForElementCount(Locator locator, int count) {
-        return locator.count();
-    }
-
     //---- Wait Part ----\\
 
     //---- Locator Part ----\\
