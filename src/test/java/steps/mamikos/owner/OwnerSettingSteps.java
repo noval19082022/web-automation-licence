@@ -9,7 +9,7 @@ import org.testng.Assert;
 import pageobject.owner.OwnerSettingPO;
 import utilities.PlaywrightHelpers;
 
-public class ownerSettingSteps {
+public class OwnerSettingSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerSettingPO ownerSettingPO = new OwnerSettingPO(ActiveContext.getActivePage());
@@ -60,7 +60,7 @@ public class ownerSettingSteps {
     public void ownerFillsNamaLengkapOwner(String text) {
         ownerSettingPO.inputNameOwner(text);
         ownerSettingPO.clickOnSubmitButton();
-        playwright.hardWait(2);
+        playwright.hardWait(2000);
     }
 
     @Then("verify nama lengkap owner")
