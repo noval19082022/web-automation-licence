@@ -1,4 +1,4 @@
-@broadcastChat @owner @staging @broadcastChat
+@broadcastChat @owner @staging @broadcastChat @LIMO5
 Feature: Broadcast Chat Owner Tenant Booking Required 3
 
   Scenario: Tenant Booking kos for today
