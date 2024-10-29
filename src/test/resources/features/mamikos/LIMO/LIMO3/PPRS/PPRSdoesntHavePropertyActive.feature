@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @DONEMIGRATINGTONEWBOARD
+@regression @LIMO3 @listing-monetization
 Feature: PPRS - Check statistic section when doesnt have property active
 
 
