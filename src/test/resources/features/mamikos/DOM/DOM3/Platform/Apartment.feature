@@ -93,17 +93,16 @@ Feature: [Test-Execution][DOM] Web - apartment
       | 0891234567897  | 08100000622 | qwerty123 |
     Then tenant can see profile dropdown option
 
-  @TEST_SS-2983 @Automated @web-covered @DOM400
+  @TEST_SS-2983 @Automated @web-covered @DOM411
   Scenario: [Web][Apartement] Tenant Hubungi Pengelola
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0888881478  | 08100000622 | qwerty123 |
-    When user go to landing apartment
-    Then user redirected to "/apartemen"
-    And user search "Rane 78 " on landing apartment
-    And open first apartment details
-    And tenant set active page to 1
+    And tenant redirect to apartment details:
+      | environment | apartment path                                      |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1 |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1 |
     When user click on hubungi pengelola button
 #    And user select question "Boleh tahu alamat lengkap apartemen ini?"
 #    And user click send chat from popup

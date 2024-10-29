@@ -1,5 +1,6 @@
 package pageobject.common.apartment;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -13,6 +14,7 @@ public class ApartmentDetailPO {
     private Locator successMsgPopUp;
     private Locator apartDetailContainer;
     private Locator firstApartment;
+    private Locator hubungiPengelola;
 
     public ApartmentDetailPO(Page page) {
         this.page = page;
@@ -22,6 +24,7 @@ public class ApartmentDetailPO {
         this.successMsgPopUp = page.getByText("Sukses tersimpan");
         this.apartDetailContainer = page.locator("//div[@class='detail']");
         firstApartment = page.locator(".room-list__card");
+        hubungiPengelola = page.locator("//*[@class='card-footer']//button[contains(@class, 'track-message-apt')]");
     }
 
     /**
@@ -29,7 +32,7 @@ public class ApartmentDetailPO {
      */
     public void clickContactApt() {
         playwright.pageScrollToDown(300);
-        playwright.clickOn(contactApartmentButton);
+        playwright.doubleClick(hubungiPengelola);
     }
 
     /**
