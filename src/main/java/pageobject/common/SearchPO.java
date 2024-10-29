@@ -767,6 +767,10 @@ public class SearchPO {
     }
 
     public List<String> getListSuggestionKostNameNonPrime() {
-        return playwright.getListInnerTextFromListLocator(suggestionNonPrimeResutls);
+        return playwright.getListTextContentsFromLocator(suggestionNonPrimeResutls);
+    }
+
+    public Boolean isPrimeSuggestionBoxVisible() {
+        return playwright.waitTillLocatorIsVisible(suggestionPrimeResultsBox, 3000.0);
     }
 }

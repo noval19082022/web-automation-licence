@@ -1,7 +1,7 @@
-@LIMO3 @PrimeSuggestion
+@LIMO3 @PrimeSuggestion @maintelimo3
 Feature: Prime Suggestion
 
-  @TEST_LIMO-4569 @maintelimo3
+  @TEST_LIMO-4569
   Scenario: [WEB][Prime Sugestion] Display "Rekomendasi buat Kamu" for prime keyword search
     Given user go to mamikos homepage
     When user want to visit search page from homepage
@@ -13,7 +13,7 @@ Feature: Prime Suggestion
     Given user go to mamikos homepage
     When user want to visit search page from homepage
     And user type to search kost with keywords "Jakarta Type B"
-    Then user verify see kost name "Jakarta Type B" is not exist in suggestion prime list
+    Then user can not see any prime suggestion list
     Then user verify see kost name "Jakarta Type B" in suggestion nama kost terkait list
 
   @TEST_LIMO-4573

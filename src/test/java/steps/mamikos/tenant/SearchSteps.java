@@ -611,10 +611,11 @@ public class SearchSteps {
         Assert.assertFalse(isExistCount > 0, String.format("kost %s is exist in prime", kostName));
     }
 
-    @And("user verify see kost name {string} in suggestion nama kost terkait list")
+    @Then("user verify see kost name {string} in suggestion nama kost terkait list")
     public void user_verify_see_kos_non_prime_on_list(String kostName) {
         searchPO = Optional.ofNullable(searchPO).orElseGet(() -> new SearchPO(page));
         var kostNonPrime = searchPO.getListSuggestionKostNameNonPrime();
+        System.out.println(kostNonPrime);
 
         var isExistCount = 0;
         for (var kost : kostNonPrime) {
@@ -625,5 +626,10 @@ public class SearchSteps {
 
         Assert.assertTrue(isExistCount > 0, String.format("kost %s not exist in nama kost terkait", kostName));
         Assert.assertFalse(isExistCount > 1, String.format("kost %s exist more than once in nama kost terkait with count %d", kostName, isExistCount));
+    }
+
+    @Then("user can not see any prime suggestion list")
+    public void userCanNotSeeAnyPrimeSuggestionList() {
+        Assert.assertFalse(search.isPrimeSuggestionBoxVisible());
     }
 }
