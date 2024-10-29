@@ -761,15 +761,27 @@ public class SearchPO {
         playwright.clickOn(page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(popPlace)));
     }
 
+    /**
+     * Get list of suggestion kost name prime
+     * @return list of texts inside prime suggestion box
+     */
     public List<String> getListSuggestionKostNamePrime() {
         playwright.waitFor(suggestionPrimeResutls.first());
         return playwright.getListTextContentsFromLocator(suggestionPrimeResultsBox);
     }
 
+    /**
+     * Get list of suggestion kost name non prime
+     * @return list of texts inside non-prime suggestion box
+     */
     public List<String> getListSuggestionKostNameNonPrime() {
         return playwright.getListTextContentsFromLocator(suggestionNonPrimeResutls);
     }
 
+    /**
+     * Check if prime suggestion box is visible
+     * @return true if prime suggestion box is visible
+     */
     public Boolean isPrimeSuggestionBoxVisible() {
         return playwright.waitTillLocatorIsVisible(suggestionPrimeResultsBox, 3000.0);
     }
