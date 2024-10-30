@@ -18,12 +18,14 @@ public class SearchPO {
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
     //private static String propertyName;
-    @Setter @Getter public static String Property;
+    @Setter @Getter
+    public static String Property;
 
     Locator resultBasedOnArea;
     Locator area;
     Locator suggetionKostOnTheSearchListNumberSix;
     Locator suggestionPrimeResutls;
+    Locator suggestionPrimeResultsBox;
     Locator suggestionNonPrimeResutls;
     Locator promoNgebutFilter;
     Locator dikelolaMamikosFilter;
@@ -46,8 +48,6 @@ public class SearchPO {
     Locator sortingButton;
     Locator firstPriceListing;
     Locator lastPriceListing;
-    private Locator FTUETitleText;
-    private Locator popUpConfirmationbutton;
     private Locator suggestionResult;
 
     //--------- Map Section ----------
@@ -66,6 +66,7 @@ public class SearchPO {
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
         suggestionPrimeResutls = page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item");
+        suggestionPrimeResultsBox = page.getByTestId("suggestionBox-roomList");
         suggestionNonPrimeResutls = page.getByTestId("suggestionBox-roomListNonPrime");
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Ngebut"));
@@ -89,8 +90,6 @@ public class SearchPO {
         this.sortingButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Rekomendasi"));
         this.firstPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[1]");
         this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
-        this.FTUETitleText = page.locator("//h2[@data-path='lbl_popperTitle']");
-        this.popUpConfirmationbutton = page.locator("button[data-path='btn_popperAction']");
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
@@ -762,11 +761,28 @@ public class SearchPO {
         playwright.clickOn(page.getByTestId("popular-primary").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(popPlace)));
     }
 
+    /**
+     * Get list of suggestion kost name prime
+     * @return list of texts inside prime suggestion box
+     */
     public List<String> getListSuggestionKostNamePrime() {
-        return playwright.getListInnerTextFromListLocator(suggestionPrimeResutls);
+        playwright.waitFor(suggestionPrimeResutls.first());
+        return playwright.getListTextContentsFromLocator(suggestionPrimeResultsBox);
     }
 
+    /**
+     * Get list of suggestion kost name non prime
+     * @return list of texts inside non-prime suggestion box
+     */
     public List<String> getListSuggestionKostNameNonPrime() {
-        return playwright.getListInnerTextFromListLocator(suggestionNonPrimeResutls);
+        return playwright.getListTextContentsFromLocator(suggestionNonPrimeResutls);
+    }
+
+    /**
+     * Check if prime suggestion box is visible
+     * @return true if prime suggestion box is visible
+     */
+    public Boolean isPrimeSuggestionBoxVisible() {
+        return playwright.waitTillLocatorIsVisible(suggestionPrimeResultsBox, 3000.0);
     }
 }

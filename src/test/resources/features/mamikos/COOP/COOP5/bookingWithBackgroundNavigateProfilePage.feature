@@ -37,7 +37,6 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And owner navigates to owner dashboard
     And owner accept booking via Homepage
 
-  @continue
   Scenario: Tenant pay kos
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -47,6 +46,10 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And tenant pay kost from riwayat booking using ovo "0890867321217" without close the page
 
   Scenario: Tenant check-in kos
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0892202358 | 0892202358 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant checkin kost from riwayat booking
 

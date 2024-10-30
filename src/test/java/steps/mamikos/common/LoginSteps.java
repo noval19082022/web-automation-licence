@@ -59,6 +59,7 @@ public class LoginSteps {
             .fillPassword(password)
             .clickOnLoginButton()
             .waitTillLogoIsVisible();
+        home.clickOnSayaSetujuButton();
     }
 
     @When("user login as tenant via facebook:")
@@ -73,6 +74,7 @@ public class LoginSteps {
                 .fillPasswordFacebook(password)
                 .clickOnLoginFacebookButton();
         login.clickOnContinueFBButton();
+        home.clickOnSayaSetujuButton();
     }
 
     @When("user login as tenant via google")
@@ -92,6 +94,7 @@ public class LoginSteps {
             .clickOnLoginButton();
         Mamikos.setPhoneOwner(phone);
         loading.waitForLoadingIconDisappear();
+        home.clickOnSayaSetujuButton();
     }
 
     @When("user login as owner from mamiads landing page:")
@@ -102,6 +105,7 @@ public class LoginSteps {
         owner.fillPhoneNumber(phone)
                 .fillPassword(password)
                 .clickOnLoginButtonMA();
+        home.clickOnSayaSetujuButton();
     }
 
     @When("admin login to mamipay:")

@@ -1,5 +1,6 @@
 package pageobject.common.apartment;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -12,6 +13,8 @@ public class ApartmentDetailPO {
     private Locator favoriteBtn;
     private Locator successMsgPopUp;
     private Locator apartDetailContainer;
+    private Locator firstApartment;
+    private Locator hubungiPengelola;
 
     public ApartmentDetailPO(Page page) {
         this.page = page;
@@ -20,23 +23,22 @@ public class ApartmentDetailPO {
         this.favoriteBtn = page.getByTestId("btn-love");
         this.successMsgPopUp = page.getByText("Sukses tersimpan");
         this.apartDetailContainer = page.locator("//div[@class='detail']");
+        firstApartment = page.locator(".room-list__card");
+        hubungiPengelola = page.locator("//*[@class='card-footer']//button[contains(@class, 'track-message-apt')]");
     }
 
     /**
      * Click on Hubungi Pengelola Apartnent
      */
     public void clickContactApt() {
-        playwright.clickOn(contactApartmentButton);
+        playwright.pageScrollToDown(300);
+        playwright.doubleClick(hubungiPengelola);
     }
 
     /**
      * click on favorite btn
      */
     public void clickOnFavoriteBtn() {
-//        Locator locator = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--md btn-love--red-icon']//*[name()='svg']");
-//        if (playwright.waitTillLocatorIsVisible(locator)) {
-//            playwright.clickOn(favoriteBtn);
-//        }
             playwright.clickOn(favoriteBtn);
         }
 
@@ -53,5 +55,12 @@ public class ApartmentDetailPO {
      */
     public void waitTillApartDetailPageVisible() {
         playwright.waitForElementStateToBe(apartDetailContainer, "visible");
+    }
+
+    /**
+     * Click on apartment detail
+     */
+    public void clickOnApartmentDetail() {
+        playwright.clickOn(firstApartment);
     }
 }

@@ -1,6 +1,7 @@
-package steps.mamikos.owner;
+package steps.mamikos.owner.propertisaya;
 
 import com.microsoft.playwright.Page;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.owner.AddTenantPO;
-import pageobject.owner.PropertySayaPO;
+import pageobject.owner.PropertiSayaPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -22,9 +23,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertTrue;
 
-public class PropertySayaSteps {
+public class PropertiSayaSteps {
     Page page = ActiveContext.getActivePage();
-    PropertySayaPO propertySaya = new PropertySayaPO(ActiveContext.getActivePage());
+    PropertiSayaPO propertySaya = new PropertiSayaPO(ActiveContext.getActivePage());
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
     LoadingPO loading = new LoadingPO(page);
     AddTenantPO addTenantPO = new AddTenantPO(page);
@@ -43,19 +44,29 @@ public class PropertySayaSteps {
 
     private List<Map<String, String>> property;
 
-    @And("owner search kost {string} on property saya page")
+    @When("user/owner use direct url access to update kos price:")
+    public void userGoToEditKosPageByKosId(DataTable table) {
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        Map<String, String> kosId;
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        kosId = table.asMap(String.class, String.class);
+        String pathUrlUpdateKosPriceById = Mamikos.OWNER_URL + Mamikos.OWNER_KOS_ROOMS_PRICE + kosId.get(Mamikos.ENV) + Mamikos.OWNER_REDIRECT + Mamikos.OWNER_PAGE_KOS;
+        playwright.navigateTo(pathUrlUpdateKosPriceById);
+    }
+
+    @When("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
         loading.waitForLoadingIconDisappear();
         propertySaya.searchKostPropertySaya(kostName);
         Mamikos.setPropertyKosName(kostName);
     }
 
-    @And("owner click update kamar kost")
+    @When("owner click update kamar kost")
     public void ownerClickUpdateKamarKost() {
         propertySaya.clickUpdateKamarButton();
     }
 
-    @And("owner set status kamar is kosong")
+    @When("owner set status kamar is kosong")
     public void ownerSetStatusKamarIsKosong() {
         propertySaya.clickUpdateKamarEmptyButton();
     }
@@ -68,7 +79,7 @@ public class PropertySayaSteps {
         Assert.assertEquals(propertySaya.getFirstKosType(type), type, "Kos type is wrong");
     }
 
-    @And("user click kos {string} in update price list")
+    @When("user click kos {string} in update price list")
     public void userClickKosInUpdatePriceList(String kosName) {
         propertySaya.clickOnKosName(kosName);
     }
@@ -383,11 +394,12 @@ public class PropertySayaSteps {
 
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
-        if (playwright.isTextDisplayed("Beberapa Kos Belum Dapat Dibooking")){
+        if (playwright.isTextDisplayed("Beberapa Kos Belum Dapat Dibooking")) {
             propertySaya.clickClosePopUpBBKOnPropertySaya();
-    }
+        }
         propertySaya.clickTambahDataIklan(jenisProperti);
     }
+
     @And("owner fills data apartemen with Property Name is {string}")
     public void ownerFillsDataApartemenWithPropertyNameIs(String propertyName) {
         propertySaya.inputPropertyName(propertyName);
@@ -453,8 +465,7 @@ public class PropertySayaSteps {
             Assert.assertEquals(propertySaya.getStatusProperty(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
         } else if (status.equals("Ditolak")) {
             Assert.assertEquals(propertySaya.getStatusPropertyReject(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
-        }
-        else if (status.equals("Aktif")) {
+        } else if (status.equals("Aktif")) {
             Assert.assertEquals(propertySaya.getStatusPropertyVerified(propertySaya.getSearchPropertyName()), status, "Status doesn't match!");
         }
     }
@@ -652,8 +663,8 @@ public class PropertySayaSteps {
         propertySaya.waitPageLoaded();
         Assert.assertTrue(propertySaya.getFirstKosName().contains(Mamikos.getPropertyKosName()),
                 "Kos name is wrong"
-                + "expected contains: " + Mamikos.getPropertyKosName()
-                + "actual: " + propertySaya.getFirstKosName());
+                        + "expected contains: " + Mamikos.getPropertyKosName()
+                        + "actual: " + propertySaya.getFirstKosName());
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
     }
@@ -691,7 +702,7 @@ public class PropertySayaSteps {
 
     @When("owner input room type with {string}")
     public void ownerInputRoomTypeWith(String text) {
-        if (text.equals("{random_text}")){
+        if (text.equals("{random_text}")) {
             int length = 3;
             boolean useLetters = true;
             boolean useNumbers = true;
@@ -982,7 +993,7 @@ public class PropertySayaSteps {
 
     @And("owner click {string} in kebijakan baru mamikos pop up")
     public void ownerClickInKebijakanBaruMamikosPopUp(String text) {
-        if (propertySaya.isBBKPopUpVisible()){
+        if (propertySaya.isBBKPopUpVisible()) {
             propertySaya.clickOnKebijakanBaruMamikosPopUp(text);
         }
     }
@@ -1011,13 +1022,13 @@ public class PropertySayaSteps {
 
     @When("owner click on Add Renter button")
     public void ownerClickOnAddRenterButton() {
-       propertySaya.clickOnAddRenterButton();
+        propertySaya.clickOnAddRenterButton();
     }
 
     @Then("owner redirected to Input Renter's Information form with valid kost name")
     public void ownerRedirectedToInputRenterSInformationFormWithValidKostName() {
         Assert.assertTrue(addTenantPO.getFormTitle("Masukkan Informasi Penyewa"), "Form title doesn't match!");
-        Assert.assertEquals(addTenantPO.getSelectedKostName().replaceAll("×  ×   \n+\t\t\t\t",""), Mamikos.getPropertyKosName(), "Kos name doesn't match!");
+        Assert.assertEquals(addTenantPO.getSelectedKostName().replaceAll("×  ×   \n+\t\t\t\t", ""), Mamikos.getPropertyKosName(), "Kos name doesn't match!");
         Assert.assertTrue(addTenantPO.getFullRoomName().contains("kamar"));
     }
 
@@ -1064,12 +1075,12 @@ public class PropertySayaSteps {
 
     @Then("owner can see emphty property")
     public void owner_can_see_emphty_property() {
-        Assert.assertTrue(propertySaya.isImageZeroPresent(),"image not visible");
+        Assert.assertTrue(propertySaya.isImageZeroPresent(), "image not visible");
     }
 
     @Then("owner can see {string} at apartment card")
     public void owner_can_see_at_apartment_card(String text) {
-       Assert.assertEquals(propertySaya.getRejectTextApartment(),text,"text reject doesnt equals");
+        Assert.assertEquals(propertySaya.getRejectTextApartment(), text, "text reject doesnt equals");
     }
 
     @Then("owner can see button update kamar")

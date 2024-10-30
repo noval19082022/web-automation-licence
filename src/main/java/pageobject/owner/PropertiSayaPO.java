@@ -16,9 +16,9 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-public class PropertySayaPO {
-    private Page page;
-    private PlaywrightHelpers playwright;
+public class PropertiSayaPO {
+    private final Page page;
+    private final PlaywrightHelpers playwright;
     @Setter
     @Getter
     private String searchPropertyName;
@@ -188,7 +188,7 @@ public class PropertySayaPO {
     Locator editRoomIcn;
     Locator toastMessage;
     Locator updateRoom;
-    private Locator editDataKosButton;
+    private final Locator editDataKosButton;
     Locator btnDeleteActiveOtherPrice;
     Locator hapusConfirmation;
     Locator textOtherPriceActiveName;
@@ -219,12 +219,13 @@ public class PropertySayaPO {
     Locator leafletMarkerIcon;
     Locator loadingSpinner;
     Locator filterRoomBox;
+    Locator tambahkanData;
 
-    public PropertySayaPO(Page page) {
+    public PropertiSayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
-        kostDropdown = page.getByText("Cari kos Anda disini...");
+        kostDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari kos Anda di sini... dropdown-down"));
         searchKostTextbox = page.getByPlaceholder("Search");
         lihatSelengkapnyaButton = page.getByText("Lihat Selengkapnya").first();
         updateKamarButton = page.getByText("Update Kamar", new Page.GetByTextOptions().setExact(true));
@@ -271,7 +272,7 @@ public class PropertySayaPO {
         priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
         modalPopUp = page.locator("//div[@class='modal-content']");
         statusKos = page.locator(".kos-card__status-name--kos-verified");
-        tambahDataIklan = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Tambahkan Data Iklan"));
+        tambahDataIklan = page.getByTestId("add-room-btn");
         tambahIklanBaru = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Iklan Baru"));
         propertyNameField = page.locator("//input[@id='propertyName']");
         unitNameField = page.locator("//input[@name='Nama unit']");
@@ -391,7 +392,7 @@ public class PropertySayaPO {
         leafletMarkerIcon = page.locator("//img[@class='leaflet-marker-icon leaflet-zoom-animated leaflet-interactive leaflet-marker-draggable']");
         loadingSpinner = page.locator(".c-loader").first();
         filterRoomBox = page.locator("#ownerKosContainer");
-
+        tambahkanData = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data").setExact(true));
     }
 
     /**
@@ -905,7 +906,7 @@ public class PropertySayaPO {
     public void insertKosLocation(String locationName) {
         playwright.hardWait(3000.0);
         page.onDialog(dialog -> {
-            System.out.println(String.format("Allow", dialog.message()));
+            System.out.printf("Allow%n", dialog.message());
             dialog.dismiss();
         });
         playwright.clickOn(locationTextBox);
@@ -1004,17 +1005,17 @@ public class PropertySayaPO {
             jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
             playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
             playwright.clickOn(jenisPropertiRadioButton);
-            playwright.clickOnTextButton("Tambahkan Data", 3000.0);
+            playwright.clickOn(tambahkanData);
         } else {
             playwright.waitTillLocatorIsVisible(tambahDataIklan, GlobalConfig.LONG_TIMEOUT);
             playwright.clickOn(tambahDataIklan);
-        playwright.clickOn(tambahIklanBaru);
-        jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
-        playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
-        playwright.clickOn(jenisPropertiRadioButton);
-        playwright.clickOnTextButton("Tambahkan Data", 3000.0);
-    }
+            playwright.clickOn(tambahIklanBaru);
+            jenisPropertiRadioButton = page.locator("#ownerModalAdd").getByText(jenisProperti);
+            playwright.waitTillLocatorIsVisible(jenisPropertiRadioButton, 3000.0);
+            playwright.clickOn(jenisPropertiRadioButton);
+            playwright.clickOn(tambahkanData);
         }
+    }
 
     /**
      * Input property name
@@ -2538,9 +2539,9 @@ public class PropertySayaPO {
     public void clickCloseBtnIfExist() {
         if (playwright.waitTillLocatorIsVisible(closeBtn, 1_000.0)) playwright.clickOn(closeBtn);
     }
+
     /**
      * Input location kos
-     *
      */
     public void leftletMarker() {
         playwright.waitTillLocatorIsVisible(leafletMarkerIcon);

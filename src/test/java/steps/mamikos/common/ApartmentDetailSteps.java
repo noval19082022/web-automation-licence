@@ -26,4 +26,9 @@ public class ApartmentDetailSteps {
     public void userGetSuccessMessage(String msg) {
         Assert.assertEquals(msg, apartment.getSuccessMessage());
     }
+
+    @And("open first apartment details")
+    public void openFirstApartmentDetails() {
+        apartment.clickOnApartmentDetail();
+    }
 }

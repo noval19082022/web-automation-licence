@@ -1,16 +1,16 @@
-@regression @LIMO5 @updatePrice
+@regression @LIMO5 @updatePrice @updateHarga
 Feature: Update Harga
 
   @TEST_LIMO-909 @continue @updatePrice @WEB @AUTOMATED
   Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Inactive with update price
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
-    And owner navigates to property saya kos
-    And owner search kost "Mamites Kos coba baru" on property saya page
-    And user click Lihat Selengkapnya button for edit
-    And owner click "Update Harga"
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
+    And owner use direct url access to update kos price:
+      | env  | kost id   |
+      | stag | /20609677 |
+      | prod | /         |
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
 
@@ -61,16 +61,6 @@ Feature: Update Harga
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
     And user see daily, weekly, monthly, three monthly, six monthly, and yearly price is same with previous price
-
-  @TEST_LIMO-770 @continue @WEB @AUTOMATED
-  Scenario: [WEB][Update Harga] Owner can't update price when "promo ngebut" active
-    When owner navigates to property saya kos
-    And owner search kost "Kose Putra Automation" on property saya page
-    And user click Lihat Selengkapnya button for edit
-    And owner click "Update Harga"
-    Then user see infobar in update price with text "Anda sedang mengikuti promo ngebut, harga tidak dapat diubah sampai promo berakhir"
-    And user see monthly price field is disabled
-    When user close infobar promo ngebut in update price
 
   @TEST_LIMO-882 @WEB @AUTOMATED
   Scenario Outline: [WEB][Update Harga] Update Price with Invalid value
@@ -133,13 +123,12 @@ Feature: Update Harga
   Scenario Outline: [WEB][Update Harga] Update price kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
-    And owner navigates to property saya kos
-    And owner search kost "Kost Tester" on property saya page
-    And user click Lihat Selengkapnya button for edit
-    And owner click "Update Harga"
-    And user clicks update price button
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
+    And owner use direct url access to update kos price:
+      | env  | kost id   |
+      | stag | /10596875 |
+      | prod | /         |
     And user click see other prices
     And user input monthly price with "<Monthly Price>"
     And user input daily price with "<Daily Price>"
@@ -159,3 +148,17 @@ Feature: Update Harga
       | Daily Price | Weekly Price | Monthly Price | Three Monthly Price | Six Monthly Price | Yearly Price |
       | 1000000     | 1500000      | 2500000       | 3000000             | 3500000           | 4000000      |
       | 150000      | 500000       | 3000000       | 9000000             | 18000000          | 36000000     |
+
+  @TEST_LIMO-770 @WEB @AUTOMATED
+  Scenario: [WEB][Update Harga] Owner can't update price when "promo ngebut" active
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password   |
+      | 089604239098 | 089604239098 | widyarini1 |
+    When owner navigates to property saya kos
+    And owner search kost "Kos Widyarini Ownerrrr Gondomanan" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Harga"
+    Then user see infobar in update price with text "Anda sedang mengikuti promo ngebut, harga tidak dapat diubah sampai promo berakhir"
+    And user see monthly price field is disabled
+    When user close infobar promo ngebut in update price
