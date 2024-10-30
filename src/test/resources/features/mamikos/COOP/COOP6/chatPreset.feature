@@ -97,7 +97,7 @@ Feature: Chat Preset
     And user select chat preset question "Ada fasilitas parkir?"
     Then chat room appear with latest message "Ada fasilitas parkir motor ya, kak. Biaya tambahan: Parkir Motor Rp10.000/Minggu.Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."
 
-  @TEST_SS-5858 @continue @a
+  @TEST_SS-5858 @continue
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Tidak bisa sekamar berdua"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -109,7 +109,7 @@ Feature: Chat Preset
     And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
     Then chat room appear with latest message "Mohon menunggu maksimal 1x24 jam untuk informasi ter-update disampaikan oleh pengelola kos ya, kak."
 
-  @TEST_SS-5859 @continue @a
+  @TEST_SS-5859 @continue
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Bisa Sekamar Berdua"
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
@@ -118,7 +118,7 @@ Feature: Chat Preset
     And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
     Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp100.000/Bulan."
 
-  @TEST_SS-5861 @continue @a
+  @TEST_SS-5861 @continue
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Sekamar bertiga"
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
@@ -127,7 +127,7 @@ Feature: Chat Preset
     And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
     Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp100.000/Bulan."
 
-  @TEST_SS-5860 @a
+  @TEST_SS-5860
   Scenario: [Chat][Auto Reply] Add criteria question "SekamarLebihDariDuaOrang"
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
