@@ -40,7 +40,7 @@ Feature: Chat Preset
     And user select chat preset question "Ada fasilitas parkir?"
     Then chat room appear with latest message "Ada fasilitas parkir motor dan mobil ya, kak. Biaya tambahan: Parkir Mobil Rp10.000/Bulan. Parkir Motor Rp5.000/Bulan. Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."
 
-  @TEST_SS-5893 @continue
+  @TEST_SS-5893
   Scenario: [Chat preset][Auto reply][Chat Room] check the answer ada fasilitas parkir for kost P1 doesnt have parkir
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
@@ -48,15 +48,6 @@ Feature: Chat Preset
     Then user can see chat preset question "Ada fasilitas parkir?"
     And user select chat preset question "Ada fasilitas parkir?"
     Then chat room appear with latest message "Mohon menunggu maksimal 1x24 jam untuk informasi ter-update disampaikan oleh pengelola kos ya, kak."
-
-  @TEST_SS-5858
-  Scenario: [Chat][Auto Reply] Auto reply question for condition "Tidak bisa sekamar berdua"
-    When user go to mamikos homepage
-    And user click on chat button in top bar tenant home page
-    And user click "Kost Singgahsini Gita Tipe A Halmahera Utara"
-    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
-    And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
-    Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp50.000/Bulan."
 
   @TEST_SS-6051 @continue
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and doesn't have pasutri
@@ -105,3 +96,40 @@ Feature: Chat Preset
     Then user can see chat preset question "Ada fasilitas parkir?"
     And user select chat preset question "Ada fasilitas parkir?"
     Then chat room appear with latest message "Ada fasilitas parkir motor ya, kak. Biaya tambahan: Parkir Motor Rp10.000/Minggu.Untuk ketersediaannya, kami akan periksa kembali dan update infonya kepada kakak maksimal 1x24 jam. Mohon menunggu, ya."
+
+  @TEST_SS-5858 @continue @a
+  Scenario: [Chat][Auto Reply] Auto reply question for condition "Tidak bisa sekamar berdua"
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 081300000003  | 0890000000314 | qwerty123    |
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Gita Tipe A Halmahera Utara"
+    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    Then chat room appear with latest message "Mohon menunggu maksimal 1x24 jam untuk informasi ter-update disampaikan oleh pengelola kos ya, kak."
+
+  @TEST_SS-5859 @continue @a
+  Scenario: [Chat][Auto Reply] Auto reply question for condition "Bisa Sekamar Berdua"
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
+    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp100.000/Bulan."
+
+  @TEST_SS-5861 @continue @a
+  Scenario: [Chat][Auto Reply] Auto reply question for condition "Sekamar bertiga"
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
+    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    And user select chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+    Then chat room appear with latest message "Tipe kamar ini bisa diisi maks. 2 orang/ kamar ya, kak. Biaya tambahan: Sekamar Berdua Rp100.000/Bulan."
+
+  @TEST_SS-5860 @a
+  Scenario: [Chat][Auto Reply] Add criteria question "SekamarLebihDariDuaOrang"
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
+    Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
