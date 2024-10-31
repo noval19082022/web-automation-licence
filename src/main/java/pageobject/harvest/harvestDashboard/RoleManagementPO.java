@@ -16,6 +16,9 @@ public class RoleManagementPO {
     private Locator searchByValue;
     private Locator searchMemberText;
     private Locator suggestionMemberText;
+    private Locator listMemberName;
+    private Locator listMemberEmail;
+    private Locator deleteListMemberButton;
 
     public RoleManagementPO(Page page){
         this.page = page;
@@ -27,6 +30,9 @@ public class RoleManagementPO {
         searchMemberText = page.getByPlaceholder("Cari");
         searchByDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nama Lengkap dropdown-down"));
         searchByValue = page.locator("a").filter(new Locator.FilterOptions().setHasText("Nama Lengkap"));
+        listMemberName = page.locator("(//td/p)[2]");
+        listMemberEmail = page.locator("(//td/p)[3]");
+        deleteListMemberButton = page.locator("(//td/*)[4]");
     }
 
     /**
@@ -80,5 +86,38 @@ public class RoleManagementPO {
 
         playwright.clickOn(searchByDropdown);
         playwright.clickOn(searchByValue);
+    }
+
+    /**
+     * click suggestion member
+     * @param name
+     */
+    public void clickSuggestionMember(String name) {
+        suggestionMemberText = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(name));
+
+        playwright.clickOn(suggestionMemberText);
+    }
+
+    /**
+     * Get list member name
+     * @return String
+     */
+    public String getListMemberName() {
+        return playwright.getText(listMemberName);
+    }
+
+    /**
+     * Get list member email
+     * @return String
+     */
+    public String getListMemberEmail() {
+        return playwright.getText(listMemberEmail);
+    }
+
+    /**
+     * Delete list member
+     */
+    public void deleteListMember() {
+        playwright.clickOn(deleteListMemberButton);
     }
 }

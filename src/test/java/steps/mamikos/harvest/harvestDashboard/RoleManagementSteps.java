@@ -2,6 +2,7 @@ package steps.mamikos.harvest.harvestDashboard;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -30,5 +31,25 @@ public class RoleManagementSteps {
     @When("admin change search member search by {string}")
     public void admin_change_search_member_search_by(String value) {
         role.searchBy(value);
+    }
+    @When("admin choose member {string}")
+    public void admin_choose_member(String name) {
+        role.clickSuggestionMember(name);
+    }
+    @Then("member {string} should add in list member")
+    public void member_should_add_in_list_member(String member) {
+        if (member.equalsIgnoreCase("Yudha")) {
+            Assert.assertEquals(role.getListMemberName(), "Yudha");
+            Assert.assertEquals(role.getListMemberEmail(), "yudha@mamiteam.com");
+        }else if (member.equalsIgnoreCase("Yudha Ferroza")){
+            Assert.assertEquals(role.getListMemberName(), "Yudha Ferroza Hadi Kus Chandra");
+            Assert.assertEquals(role.getListMemberEmail(), "yudha@mamikos.com");
+        } else {
+            System.out.println("Invalid Member Name");
+        }
+    }
+    @Given("admin delete list member")
+    public void admin_delete_list_member() {
+        role.deleteListMember();
     }
 }
