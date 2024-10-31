@@ -38,9 +38,9 @@ public class RoleManagementSteps {
     }
     @Then("member {string} should add in list member")
     public void member_should_add_in_list_member(String member) {
-        if (member.equalsIgnoreCase("Yudha")) {
-            Assert.assertEquals(role.getListMemberName(), "Yudha");
-            Assert.assertEquals(role.getListMemberEmail(), "yudha@mamiteam.com");
+        if (member.equalsIgnoreCase("Upras")) {
+            Assert.assertEquals(role.getListMemberName(), "Upras Hanif Marfuah");
+            Assert.assertEquals(role.getListMemberEmail(), "upras@mamikos.com");
         }else if (member.equalsIgnoreCase("Yudha Ferroza")){
             Assert.assertEquals(role.getListMemberName(), "Yudha Ferroza Hadi Kus Chandra");
             Assert.assertEquals(role.getListMemberEmail(), "yudha@mamikos.com");
