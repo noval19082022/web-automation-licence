@@ -79,12 +79,7 @@ public class ChatSteps {
 
     @And("admin filter {string} on chat list")
     public void admin_filter_on_chat_list(String text){
-        if(text.equalsIgnoreCase("Important")) {
             chatAdmin.clickImportantFilterButton(text);
-        }
-        else if(text.equalsIgnoreCase("Unread")){
-            chatAdmin.clickImportantFilterButton(text);
-        }
     }
 
     @Then("admin can see unread counter on list with {string}")
