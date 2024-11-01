@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.admin.testingtools.GoldPlusPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
@@ -31,6 +32,7 @@ public class GoldplusSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     NavigatesSteps navigate = new NavigatesSteps();
     GoldplusPO goldplus = new GoldplusPO(page);
+    GoldPlusPO goldPlusTestingTools = new GoldPlusPO(page);
     ChatOwnerPO chat = new ChatOwnerPO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
     HomePO home = new HomePO(page);
@@ -87,17 +89,17 @@ public class GoldplusSteps {
 
     @When("user wants to reset Goldplus for owner with phone number {string}")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_number(String phoneNumber) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_TESTING_TOOLS);
-        goldplus.inputGoldplusPhoneNumber(phoneNumber);
-        playwright.clickOnTextButton("Reset");
+        goldPlusTestingTools.navigatesToGoldPlusTestingToolsPage();
+        goldPlusTestingTools.inputGoldplusPhoneNumber(phoneNumber);
+        goldPlusTestingTools.clickOnGoldPlusResetButton();
         Assert.assertTrue(playwright.isTextDisplayed("Reset success!"));
     }
 
     @When("user wants to reset Goldplus for owner with phone number")
     public void user_wants_to_reset_Goldplus_for_owner_with_phone_numbers(List<String> phoneNumbers) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_TESTING_TOOLS);
+        goldPlusTestingTools.navigatesToGoldPlusTestingToolsPage();
         for (var phoneNumber : phoneNumbers) {
-            goldplus.inputGoldplusPhoneNumber(phoneNumber);
+            goldPlusTestingTools.inputGoldplusPhoneNumber(phoneNumber);
             playwright.clickOnTextButton("Reset");
         }
     }
