@@ -121,6 +121,8 @@ public class HomepagePO {
     Locator yaSimpanButton;
     Locator dbetCategoryButton;
     Locator contractIdText;
+    Locator notestext;
+    Locator notesCountertext;
 
     //---Kontrak Kerja Sama Tab---//
     Locator kontrakKerjaSamaTab;
@@ -202,6 +204,8 @@ public class HomepagePO {
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
         dbetCategoryButton = page.locator("//div[@data-testid=\"categorySelect_ddl\"]//div[@class=\"bg-c-select__trigger bg-c-select__trigger--lg\"]");
         contractIdText = page.locator("//input[@id=\"contractId_txt\"]");
+        notestext = page.getByPlaceholder("Isi catatan di sini");
+        notesCountertext = page.locator(".bg-c-textarea__counter");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -1209,4 +1213,29 @@ public class HomepagePO {
         return playwright.getText(namaPropertiInTable);
     }
     //---End of Daftar Properti---//
+
+    //-----contract accuracy----//
+
+    /**
+     * verify notes is visible
+     * @return notes field
+     */
+    public boolean isNotesVisible(){
+        return playwright.waitTillLocatorIsVisible(notestext, 3000.0);
+    }
+
+    /**
+     * Input notes
+     * @param text
+     */
+    public void inputNotes(String text){
+        playwright.fill(notestext, text);
+    }
+
+    /**
+     * verify notes counter is visible
+     */
+    public void notesCounterVisible(){
+        playwright.getText(notesCountertext);
+    }
 }

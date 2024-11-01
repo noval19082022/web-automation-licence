@@ -62,4 +62,34 @@ public class ChatSteps {
         chatAdmin.getResutlSearch();
     }
 
+    @And("admin click {string} on chat list")
+    public void admin_click_on_chat_list(String text){
+        if(text.equalsIgnoreCase("mark important")){
+            chatAdmin.clickMarkImportant();
+        }
+        else if(text.equalsIgnoreCase("unmark important")){
+            chatAdmin.clickUnmarkImportan();
+        }
+    }
+
+    @Then("admin can see mark important on list")
+    public void admin_can_see_mark_important_on_list(){
+        Assert.assertTrue(chatAdmin.getImportantButtonOnList(), "not appears mark important");
+    }
+
+    @And("admin filter {string} on chat list")
+    public void admin_filter_on_chat_list(String text){
+        if(text.equalsIgnoreCase("Important")) {
+            chatAdmin.clickImportantFilterButton(text);
+        }
+        else if(text.equalsIgnoreCase("Unread")){
+            chatAdmin.clickImportantFilterButton(text);
+        }
+    }
+
+    @Then("admin can see unread counter on list with {string}")
+    public void admin_can_see_unread_counter_on_list_with(String text){
+        chatAdmin.getUnreadCounterText(text);
+    }
+
 }

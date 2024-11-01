@@ -33,3 +33,29 @@ Feature: Rajawali Chat Room
     When admin select filter "tenant"
     And admin fill search chat with "empatt"
     Then admin can see result data
+
+  @TEST_SS-5741
+   Scenario: [Bangkerupux][Rajawali Chat Room] BSE marked important chat
+    When admin click "mark important" on chat list
+    Then admin can see mark important on list
+
+  @TEST_SS-5742
+  Scenario: [Bangkerupux][Rajawali Chat Room] BSE unmarked important chat
+    When admin filter "Important" on chat list
+    Then admin can see mark important on list
+    And admin filter "Important" on chat list
+    And admin click "unmark important" on chat list
+
+  @TEST_SS-5743
+  Scenario: [Bangkerupux][Rajawali Chat Room] BSE filter Important Chat - Only choose important filter
+    When admin filter "Important" on chat list
+    Then admin can see mark important on list
+
+  @TEST_SS-5744
+  Scenario: [Bangkerupux][Rajawali Chat Room] BSE filter Important Chat - Choose important and unread filter
+    When admin filter "Important" on chat list
+    Then admin can see result data
+    When admin filter "Important" on chat list
+    And admin filter "Unread" on chat list
+    Then admin can see mark important on list
+    Then admin can see unread counter on list with "1"
