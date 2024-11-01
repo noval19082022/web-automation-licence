@@ -17,6 +17,11 @@ public class ChatPO {
     Locator allChatMenu;
     Locator searchType;
 
+    //-----important---//
+    Locator markImportantButton;
+    Locator importantMark;
+
+
     public ChatPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -27,6 +32,10 @@ public class ChatPO {
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
+
+        //--------important----//
+        markImportantButton = page.locator(".list-item__left-content > div > svg").first();
+        importantMark = page.locator("path:nth-child(2)").first();
     }
 
     /**
@@ -108,5 +117,48 @@ public class ChatPO {
     public String getResutlSearch() {
         Locator textTitle = page.locator("//*[@id='group_list']");
         return playwright.getText(textTitle);
+    }
+
+    //--------important----//
+
+    /**
+     * click on mark important in list
+     */
+    public void clickMarkImportant(){
+        playwright.clickOn(markImportantButton);
+    }
+
+    /**
+     * click important or unread on filter data
+     * @param text
+     */
+    public void clickImportantFilterButton(String text){
+        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+""));
+        playwright.clickOn(filterButton);
+    }
+
+    /**
+     * verify mark important button on list
+     * @return
+     */
+    public boolean getImportantButtonOnList(){
+        return playwright.waitTillLocatorIsVisible(importantMark);
+    }
+
+    /**
+     * click unmark important
+     */
+    public void clickUnmarkImportan(){
+        playwright.clickOn(importantMark);
+    }
+
+    /**
+     * get unread counter text on list
+     * @param number
+     * @return number
+     */
+    public boolean getUnreadCounterText(String number){
+        Locator unreadChatCountertext = page.getByText(""+number+"", new Page.GetByTextOptions().setExact(true)).nth(1);
+        return playwright.waitTillLocatorIsVisible(unreadChatCountertext);
     }
 }
