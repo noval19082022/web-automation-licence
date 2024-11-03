@@ -249,8 +249,8 @@ public class PropertiSayaPO {
         firstDeleteButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("delete")).first();
         deleteButtonInPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
         icnClose = page.locator("a").filter(new Locator.FilterOptions().setHasText("close"));
-        addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data"));
-        addNewKosButton = page.getByText("+ Tambah Kos Baru");
+        addDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data").setExact(true));
+        addNewKosButton = page.getByText("+ Tambah Kos Baru").first();
         closePopupBBKIcon = page.locator(".bg-c-modal__action-closable");
         popUpBBkDialog = page.locator(".auto-active-bbk-intercept-modal");
         closeBBKDialog = page.locator(".owner-intercept-booking-modal__close-button");
