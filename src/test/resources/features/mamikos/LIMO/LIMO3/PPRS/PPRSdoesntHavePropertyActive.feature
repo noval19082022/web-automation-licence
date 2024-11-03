@@ -11,7 +11,7 @@ Feature: PPRS - Check statistic section when doesnt have property active
     Then owner can see section Laporan Statistik when doesnt have property active
     And owner can see title "Data Properti Belum Ada" at section statistic
     And owner can see desc "Anda belum punya properti yang terverifikasi. Data properti terverifikasi akan muncul di sini." at section statistic
-    And owner should successfully log out
+    And owner try to logout from mamikos
     Examples:
     #owner doesnt have property
     #owner only have 1 kost non active

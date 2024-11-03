@@ -826,7 +826,12 @@ public class PropertiSayaPO {
      */
     public void clickEditDataKos(String dataKos) {
         editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
-        playwright.clickOn(editDataKos);
+        if (playwright.waitTillLocatorIsVisible(editDataKos)) {
+            playwright.clickOn(editDataKos);
+        } else {
+            editDataKos = page.getByText(dataKos).first();
+            playwright.clickOn(editDataKos);
+        }
         playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
@@ -839,7 +844,12 @@ public class PropertiSayaPO {
     public void clickFacilitiesCheckbox(String section, String facility) {
         fasilitasFeature = page.locator("//h4[contains(., '" + section + "')]/following::div//span[contains(text(), '" + facility + "')]").first();
         playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
-        playwright.clickOn(fasilitasFeature);
+        if (playwright.waitTillLocatorIsVisible(fasilitasFeature)) {
+            playwright.clickOn(fasilitasFeature);
+        } else {
+            fasilitasFeature = page.getByText(facility, new Page.GetByTextOptions().setExact(true));
+            playwright.clickOn(fasilitasFeature);
+        }
     }
 
     /**
