@@ -829,8 +829,8 @@ public class PropertiSayaPO {
         if (playwright.waitTillLocatorIsVisible(editDataKos)) {
             playwright.clickOn(editDataKos);
         } else {
-            var editData = String.format("%s Edit", dataKos);
-            editDataKos = page.getByText(editData);
+            var lengkapiData = String.format("%s Lengkapi", dataKos);
+            editDataKos = page.getByText(lengkapiData);
             playwright.clickOn(editDataKos);
         }
         playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
