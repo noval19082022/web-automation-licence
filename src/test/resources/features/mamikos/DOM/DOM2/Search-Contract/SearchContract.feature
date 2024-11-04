@@ -67,6 +67,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
     And admin input biaya kerusakan "50000"
@@ -211,6 +212,7 @@ Feature: Search Contract
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by "Renter Phone Number" and input field "089220211208"
+    And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see detail pop up "Edit Deposit for Confirm to Finance"
 
