@@ -96,32 +96,7 @@ Feature: Chat and Chat Optimization
       | kost-kabupaten-cilacap-kost-putri-eksklusif-kos-bx-automation-bbk-non-available-cilacap-tengah-cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
     And user click chat in kos detail
     Then user sees the Booking button disable
-
-#  @TEST_SS-3266 @CHAT_OUTLINE_SEARCH_MIGRATE
-#  Scenario Outline: [Dweb][Kost Detail][Chat]Check autoreply text after select question <name>
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag | phone prod   | password  |
-#      | 0888881477 | 083176408442 | qwerty123 |
-#    And tenant redirect to kost details:
-#      | kost path stag | kost path prod                             |
-#      | <property>     | Kost Automation Mix Tobelo Halmahera Utara |
-#    And tenant dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user select question "<question>"
-#    And user click send chat from popup
-#    Then user see autoreply message "<autoreply text>"
-#    Examples:
-#      | name                     | property                                                                                                                            | question                  | autoreply text                                                                                                                                          |
-#      | Ada diskon               | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Ada diskon untuk kos ini? | Diskon yang berlaku saat ini:                                                                                                                           |
-#      | Masih ada kamar          | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Masih ada kamar?          | Ada. Di kos ini masih ada 10 kamar kosong, sesuai update dari pemilik pada                                                                              |
-#      | Tanya-tanya dulu         | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Boleh tanya-tanya dulu?   | Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos.                                                                            |
-#      | Cara menghubungi pemilik | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Cara menghubungi pemilik? | Chatroom ini telah terhubung dengan pemilik kost, Anda dapat mengajukan pertanyaan dan berkomunikasi dengan pemilik iklan secara real time atau hubungi |
-#      | Alamat kos di mana       | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-a-kretek-bantul Kos Dom Automation PLM Tipe A Kretek Bantul | Alamat kos di mana?       | beralamat di                                                                                                                                            |
-#      | Bisa pasutri             | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-c-kretek-bantul                                             | Bisa pasutri?             | Pasutri bisa menyewa kos ini.                                                                                                                           |
-#      | Tidak bisa pasutri       | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Bisa pasutri?             | Pasutri tidak bisa menyewa kos ini.                                                                                                                     |
-#      | Boleh bawa hewan         | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dom-automation-plm-tipe-c-kretek-bantul                                             | Boleh bawa hewan?         | Kamu boleh membawa hewan ke kos ini.                                                                                                                    |
-#      | Tidak boleh bawa hewan   | kost-kabupaten-bantul-kost-putri-eksklusif-kos-dom-automation-plm-tipe-e-kretek-bantul                                              | Boleh bawa hewan?         | Kamu tidak boleh membawa hewan ke kos ini.                                                                                                              |
+                                                                                                             |
 
   @TEST_SS-3269
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
@@ -166,6 +141,4 @@ Feature: Chat and Chat Optimization
     And user go to apartment details from apartment landing list number 1
     And tenant set active page to 1
     And user click on hubungi pengelola button
-#    And user select question "Boleh tahu alamat lengkap apartemen ini?"
-#    And user click send chat from popup
     Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
