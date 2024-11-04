@@ -133,3 +133,19 @@ Feature: Chat Preset
     And user click on chat button in top bar tenant home page
     And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
     Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
+
+  @TEST_SS-6322
+  Scenario: [Chat][Auto Reply] Auto reply question for condition "Boleh tanya-tanya dulu?"
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 08999222999   | 083176408442 | qwerty123    |
+    And tenant redirect to kost details:
+      | kost path stag | kost path prod                             |
+      | kost-kabupaten-bantul-kost-campur-eksklusif-kost-singgahsini-cemara-pinus-tipe-a-bantul-2 | Kost Singgahsini Cemara Pinus Tipe A Bantul |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    Then user can see chat preset question "Boleh tanya-tanya dulu?"
+    And user select chat preset question "Boleh tanya-tanya dulu?"
+    Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
+
