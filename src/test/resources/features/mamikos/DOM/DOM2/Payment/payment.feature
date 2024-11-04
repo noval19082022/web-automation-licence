@@ -35,7 +35,7 @@ Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
     When admin go to "Search Contract" menu
     And admin search contract by tenant phone number:
       | phone stag   | phone prod    |
-      | 089220211208 | 0890867321212 |
+      | 0813000002   | 0890867321212 |
     And admin search contract by kost level "APIK"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
@@ -78,7 +78,11 @@ Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
   @TEST_SS-2879 @Automated @web-covered @continue
   Scenario: [BackOffice][Search Contract][Edit Deposit] see Sisa Deposit
     Given admin go to mamikos mamipay admin
-    When admin search contract by Renter Phone Number and input field "089220211208"
+    When admin go to "Search Contract" menu
+    And admin search contract by tenant phone number:
+      | phone stag      | phone prod    |
+      | 089220211208    | 0890867321212 |
+    And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
     And admin input biaya kerusakan "60000"
