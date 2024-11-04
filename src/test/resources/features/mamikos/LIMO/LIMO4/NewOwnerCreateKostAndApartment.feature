@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO4 @newOwnerCreateApartment
 Feature: New Owner Create Kost and Apartment
 
   @TEST_LIMO-3441 @backPage @continue
