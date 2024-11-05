@@ -364,8 +364,11 @@ public class MamiAdsPO {
      * @return int countHistoryIcn
      */
     public int getCountRiwayatBeliSaldo() {
-        playwright.waitTillLocatorIsVisible(beliSaldoBtn, 5000.0);
-        return Integer.parseInt(playwright.getText(countHistoryIcon));
+        if (playwright.waitTillLocatorIsVisible(countHistoryIcon, 3000.0)) {
+            return Integer.parseInt(playwright.getText(countHistoryIcon));
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -783,7 +786,6 @@ public class MamiAdsPO {
     public void clickOnSimpanPengaturanUbahAnggaran() {
         playwright.clickOn(simpanPengaturanButton);
     }
-
 
 
     // ----------------- PART OF PRIVATE METHOD -----------------

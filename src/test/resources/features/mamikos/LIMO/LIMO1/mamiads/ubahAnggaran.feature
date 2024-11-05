@@ -261,13 +261,13 @@ Feature: Ubah Anggaran
       | 0891202407 | 089504220900 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
-    And user click ubah on "Kost sambal bakar konoha Rajeg Tangerang"
+    And user click ubah on "Kost sambal bakar konoha TIPE A Rajeg Tangerang"
     And user set anggaran to dibatasi harian
     And owner click Simpan Pengaturan on ubah anggaran
-    And user click "on" toggle the "Kost sambal bakar konoha Rajeg Tangerang"
+    And user click "on" toggle the "Kost sambal bakar konoha TIPE A Rajeg Tangerang"
     And user click "Ya, Nonaktifkan" button on pop up switch toggle iklan
     Then user verify the toast "Iklan berhenti dinaikkan."
-    And user click "off" toggle the "Kost sambal bakar konoha Rajeg Tangerang"
+    And user click "off" toggle the "Kost sambal bakar konoha TIPE A Rajeg Tangerang"
     And user click "Aktifkan" button on pop up switch toggle iklan
     Then user verify the toast "Iklan berhasil dinaikkan"
 
