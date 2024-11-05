@@ -100,7 +100,7 @@ public class GoldplusSteps {
         goldPlusTestingTools.navigatesToGoldPlusTestingToolsPage();
         for (var phoneNumber : phoneNumbers) {
             goldPlusTestingTools.inputGoldplusPhoneNumber(phoneNumber);
-            playwright.clickOnTextButton("Reset");
+            goldPlusTestingTools.clickOnGoldPlusResetButton();
         }
     }
 

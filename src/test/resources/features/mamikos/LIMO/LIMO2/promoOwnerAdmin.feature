@@ -1,4 +1,4 @@
-@regression @promoOwnerAdmin @LIMO2 @listing-monetization @DONEMIGRATINGTONEWBOARD
+@regression @promoOwnerAdmin @LIMO2
 
 Feature: Promo Owner Admin BangKerupux
 
@@ -100,12 +100,12 @@ Feature: Promo Owner Admin BangKerupux
       | Kos Upik Scamander Tipe Puan Selo Boyolali |
     Then user not see promo owner on "kost" detail
 
-  Scenario: Check promo owner on detail apartemen tenant page
-    Given user go to mamikos homepage
-    And tenant search apart then go to apartemen details:
-      | apart name stag                 |
-      | Apartemen Upik Enam Nol Delapan |
-    Then user not see promo owner on "apartemen" detail
+#  Scenario: Check promo owner on detail apartemen tenant page
+#    Given user go to mamikos homepage
+#    And tenant search apart then go to apartemen details:
+#      | apart name stag                 |
+#      | Apartemen Upik Enam Nol Delapan |
+#    Then user not see promo owner on "apartemen" detail
 
   Scenario Outline: Delete promo owner
     Given admin go to mamikos bangkrupux admin

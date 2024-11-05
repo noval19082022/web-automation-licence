@@ -113,7 +113,7 @@ Feature: Laporan Statistik
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
     And owner accsess statistic page
-    And user click on "Kos QuQu 77 ex jati 2" button
+    And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "7 Hari" at statistic report
     And owner can see total sewa
     And owner can see total chat
@@ -128,7 +128,7 @@ Feature: Laporan Statistik
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
     And owner accsess statistic page
-    And user click on "Kos QuQu 77 ex jati 2" button
+    And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "30 Hari" at statistic report
     And owner can see total sewa
     And owner can see total chat
@@ -144,7 +144,7 @@ Feature: Laporan Statistik
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
     And owner accsess statistic page
-    And user click on "Kos QuQu 77 ex jati 2" button
+    And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "30 Hari" at statistic report
     And owner click on tooltip at performa section
     Then owner will see that the text "Keterangan Performa" is displayed

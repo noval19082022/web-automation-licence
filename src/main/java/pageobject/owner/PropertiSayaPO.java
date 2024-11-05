@@ -1487,10 +1487,10 @@ public class PropertiSayaPO {
      * @param keyLocation select the first location suggestion
      */
     public void inputLocationKos(String keyLocation) {
-        page.reload();
+       // page.reload();
         playwright.clickOn(inputLocation);
         playwright.realKeyboardType(keyLocation);
-        playwright.hardWait(1000.0);
+        playwright.hardWait(3000.0);
         playwright.clickOn(firstLocationSuggestion);
     }
 
@@ -1602,7 +1602,7 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.hardWait(7000);
+        playwright.hardWait(3000);
         playwright.clickOn(lanjutkanButton);
     }
 

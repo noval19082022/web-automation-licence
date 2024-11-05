@@ -98,7 +98,7 @@ public class GoldplusPO {
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("'broadcast-message'"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
-        recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
+        recurringPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(2);
         selectRecurringPeriod = page.locator("[name='h']");
         editPackageAdminGP1Button = page.locator("//a[@href='https://jambu.kerupux.com/admin/gold-plus/package/148/edit#gold-plus']");
         editPackageAdminGP2Button = page.locator("//a[@href='https://jambu.kerupux.com/admin/gold-plus/package/159/edit#gold-plus']");
