@@ -162,4 +162,9 @@ public class JoinSinggahsiniSteps {
     public void user_confirm_pop_up() {
         joinSinggahsini.closeSuccessRegisterPopUp();
     }
+
+    @Then("form contains total kamar field")
+    public void form_contains_total_kamar_field() {
+        Assert.assertTrue(joinSinggahsini.isTotalKamarFieldVisible());
+    }
 }
