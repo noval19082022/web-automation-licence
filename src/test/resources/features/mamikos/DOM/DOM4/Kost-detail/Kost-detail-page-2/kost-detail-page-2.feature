@@ -100,7 +100,7 @@ Feature: Kost detail page 2
     Given user go to mamikos homepage
     When tenant redirect to kost details:
       | kost path stag                                                             | kost path prod                                                             |
-      | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
+      | kost-sleman-kost-campur-murah-kost-apik-desta-tipe-a-tamvan-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     Then user see benefit title, benefit description
 
   @TEST_SS-3193 @Automated @DOM4 @Web @discovery-platform @review-kost @localhost
