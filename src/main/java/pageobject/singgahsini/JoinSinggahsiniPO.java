@@ -321,4 +321,12 @@ public class JoinSinggahsiniPO {
     public void closeSuccessRegisterPopUp() {
         playwright.clickOn(okeSuccessPopUpButton);
     }
+
+    /**
+     * Assert total kamar visible
+     * @return boolean
+     */
+    public boolean isTotalKamarFieldVisible() {
+        return playwright.isLocatorVisibleAfterLoad(totalKamarField,10000.0);
+    }
 }

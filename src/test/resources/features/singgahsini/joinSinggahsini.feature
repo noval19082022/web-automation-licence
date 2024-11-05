@@ -84,11 +84,15 @@
       And user choose "Keluar" in confirmation pop up
       Then user should be redirect to singgahsini.id
 
-    @TEST_SS-620
-    Scenario: Fill form register Singgahsini
+    @TEST_SS-205 @continue
+    Scenario: Have Total Kamar field
       Given user navigates to singgahsini.id
       When user open register form
-      And user submit daftar singgahsini
+      Then form contains total kamar field
+
+    @TEST_SS-620
+    Scenario: Fill form register Singgahsini
+      When user submit daftar singgahsini
         | Nama Lengkap        | No Handphone  | Kos Name            | Total Kamar | Kota   | Kecamatan  | Kelurahan     | Alamat                |
         | Automation Testing  | 088820203113  | Kost Tes Automation | 5           | Bantul | Kretek     | Parangtritis  | Jl Jembatan Kretek 1  |
       Then system show pop up success register
