@@ -148,4 +148,3 @@ Feature: Chat Preset
     Then user can see chat preset question "Boleh tanya-tanya dulu?"
     And user select chat preset question "Boleh tanya-tanya dulu?"
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
-

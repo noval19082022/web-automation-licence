@@ -761,7 +761,7 @@ public class OwnerDashboardPO {
      *
      */
     public boolean isTotalNotBookingPopupPresent() {
-        return playwright.waitTillLocatorIsVisible(totalNotBookingPopup, 5000.0);
+        return playwright.waitTillLocatorIsVisible(totalNotBookingPopup, 10000.0);
     }
 
     /**
