@@ -1,4 +1,4 @@
-@BBM6
+@BBM6 @COOP6
 Feature: [TnC Invoice][Detail Invoice] Check TnC Invoice on Invoice Page
 
   @TEST_SS-3404

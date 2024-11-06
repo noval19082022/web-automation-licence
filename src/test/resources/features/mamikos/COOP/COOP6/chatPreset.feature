@@ -1,4 +1,4 @@
-@BBM6 @chatPreset
+@BBM6 @COOP6 @chatPreset
 Feature: Chat Preset
 
   @TEST_SS-6049 @continue

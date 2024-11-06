@@ -1,4 +1,4 @@
-@BBM6 @kostSaya
+@BBM6 @COOP6 @kostSaya
   Feature: Kost Saya
 
   @TEST_SS-3524 @fasilitasKost @kost-saya @continue
