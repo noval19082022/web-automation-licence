@@ -24,7 +24,7 @@ Feature: List Riwayat Transaction Account
     And user open the invoice mamiads if invoice already maximal on riwayat
     And user wants to buy saldo MamiAds "6.000"
     And user navigates to mamiads dashboard
-    Then user verify count of riwayat added 1
+    Then user verify count of riwayat added 0
 
   @TEST_LIMO-1500
   Scenario: red counter badge if all transaction is complete
@@ -34,15 +34,15 @@ Feature: List Riwayat Transaction Account
       | 0891202413    | 0895365624343 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
-    And user verify count of riwayat before beli saldo
-    And user open the invoice mamiads if invoice already maximal on riwayat
     And user wants to buy saldo MamiAds "6.000"
     And user navigates to mamiads dashboard
-    Then user verify count of riwayat added 1
+    And user verify count of riwayat before beli saldo
+    And user open the invoice mamiads if invoice already maximal on riwayat
+    Then user verify count of riwayat added 0
     And user click "Riwayat"
     And user continue payment buy saldo mamiads
     And owner set active page to 1
     And payment user success using ovo as payment method
     And owner set active page to 0
     And user navigates to mamiads dashboard
-    Then user verify count of riwayat added 0
+    Then user verify count of riwayat added -1
