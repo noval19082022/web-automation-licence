@@ -138,7 +138,7 @@ Feature: [Test-Execution][DOM] Web - apartment
       | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     Then tenant can see profile dropdown option
 
-  @TEST_SS-2987 @Automated @web-covered @DOM400
+  @TEST_SS-2987 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Contact Apartment
     Given user go to mamikos homepage
     When user login as tenant via phone number:

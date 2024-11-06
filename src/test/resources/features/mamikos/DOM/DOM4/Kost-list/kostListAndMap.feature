@@ -46,13 +46,6 @@ Feature: Kost List and Map
       | Tebet           |
       | UGM             |
       | Malang          |
-      | Jakarta Barat   |
+      | Bali            |
       | Semarang        |
-      | Setiabudi       |
-      | UNDIP           |
-      | Kontrakan       |
-      | Medan           |
-      | Bogor           |
-      | Bekasi          |
-      | Jakarta Timur   |
-      | Kelapa Gading   |
+

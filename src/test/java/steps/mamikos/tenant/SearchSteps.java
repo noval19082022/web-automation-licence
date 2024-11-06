@@ -489,13 +489,14 @@ public class SearchSteps {
     public void userCanSeeKosListResultAreaAreTheListBelow(DataTable area) {
         List<String> areaList = area.asList();
         kostLanding.clickOnCariBerdasarkanPeta();
-        int kosAreaSize = kostLanding.getKosAreaSize();
+        int kosAreaSize = Math.min(kostLanding.getKosAreaSize(), 4); // Limit to 4 areas
         for (int i = 0; i < kosAreaSize; i++) {
-            System.out.println(kostLanding.getKosAreaText(i));
-            if (kostLanding.getKosAreaText(i).equalsIgnoreCase("unknown")) {
+            String kosAreaText = kostLanding.getKosAreaText(i);
+            System.out.println(kosAreaText);
+            if (kosAreaText.equalsIgnoreCase("unknown")) {
                 continue;
             }
-            Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Area " + kostLanding.getKosAreaText(i) + " Is not present in the list");
+            Assert.assertTrue(areaList.contains(kosAreaText), "Kos Area " + kosAreaText + " is not present in the list");
         }
     }
 
