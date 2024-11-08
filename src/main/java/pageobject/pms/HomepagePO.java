@@ -123,6 +123,7 @@ public class HomepagePO {
     Locator contractIdText;
     Locator notestext;
     Locator notesCountertext;
+    Locator contractIdErrorMessage;
 
     //---Kontrak Kerja Sama Tab---//
     Locator kontrakKerjaSamaTab;
@@ -206,6 +207,7 @@ public class HomepagePO {
         contractIdText = page.locator("//input[@id=\"contractId_txt\"]");
         notestext = page.getByPlaceholder("Isi catatan di sini");
         notesCountertext = page.locator(".bg-c-textarea__counter");
+        contractIdErrorMessage = page.locator("//div[@label=\"Contract ID\"]//*[@class=\"bg-c-field__message\"]");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -390,6 +392,24 @@ public class HomepagePO {
      */
     public void assertContractIdEnabled(){;
         assertThat(contractIdText).isEnabled();
+    }
+
+    /**
+     * input contract id
+     * @param number
+     */
+    public void fillContractId(String number){
+        contractIdText.fill(number);
+        Locator contractIdText = page.getByTestId("fieldWithOptions-options").locator("a");
+        playwright.clickOn(contractIdText);
+    }
+
+    /**
+     * get error message on contract id
+     * @return
+     */
+    public String errorTextVisible(){
+        return playwright.getText(contractIdErrorMessage);
     }
 
     /**

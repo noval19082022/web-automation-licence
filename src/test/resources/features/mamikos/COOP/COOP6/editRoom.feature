@@ -1,4 +1,4 @@
-@BBM6 @ketersediaanKamar
+@BBM6 @ketersediaanKamar @COOP6
 Feature: Change the room on Data Ketersedian Kamar
 
   @TEST_SS-3363

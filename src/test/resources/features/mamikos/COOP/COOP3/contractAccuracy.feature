@@ -1,4 +1,4 @@
-@BBM6 @contractAccuracyDbet
+@COOP3 @contractAccuracyDbet
 Feature: Contract Accuracy DBET - PMS
 
   @TEST_SS-5469
@@ -70,3 +70,16 @@ Feature: Contract Accuracy DBET - PMS
     Examples:
       | Catatan  |
       | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also thee|
+
+  @TEST_SS-5441 @a
+  Scenario: [PMS][Room Allotment][Tambah Penyewa] User create DBET tenant using active contract ID
+    Given admin go to pms singgahsini
+    When admin login pms :
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
+    And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
+    And admin create contract tenant dbet
+    And admin selected type room
+    And admin choose dbet category with "Billing - Ubah Jatuh Tempo"
+    And admin input contract id with "70066"
+    Then admin can see "Hanya bisa memasukkan Contract ID yang sudah diakhiri." on contract id
