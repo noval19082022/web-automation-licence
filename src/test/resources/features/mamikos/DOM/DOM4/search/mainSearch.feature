@@ -182,7 +182,7 @@ Feature: Main Search
       | Bandung chevron-down | Jakarta chevron-down          | Malang chevron-down      | Semarang chevron-down   | Yogyakarta chevron-down  |
       | Stasiun Cikudapateuh | Stasiun MRT Setiabudi	     | Stasiun Ngebruk	        | Stasiun Tawang	      | Stasiun Wates            |
       | Stasiun Ciroyom	     | Stasiun Dukuh Atas / Sudirman | Stasiun Kepanjen	        | Stasiun Jerakah	      | Stasiun Lempuyangan      |
-      | Stasiun Andir	     | Halte Monas	                 | Stasiun Malang Kotabaru	| Stasiun Alastua	      | Stasiun Rewulu           |
+      | Stasiun Andir	     | Halte Monas	                  | Stasiun Malang Kotabaru	| Stasiun Alastua	      | Stasiun Rewulu           |
       | Stasiun Cimindi	     | Stasiun MRT Bendungan Hilir	 | Stasiun Pakisaji         | Stasiun Semarang Gudang | Stasiun Patukan          |
 
   @TEST_SS-3243 @Automated @DOM4 @Web @discovery-platform @search @search-result-halte
@@ -226,8 +226,8 @@ Feature: Main Search
       | city stag                | city prod                  |
       | Yogyakarta chevron-down  | Yogyakarta chevron-down    |
     And under area city click
-      | city stag      | city prod    |
-      | Sleman         | Sleman       |
+      | city stag         | city prod    |
+      | Bantul            | Bantul       |
     And user set price sorting from lower to greater
     Then user can see kos list rearrange from cheaper to expensive
 
