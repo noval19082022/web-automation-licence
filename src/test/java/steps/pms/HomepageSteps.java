@@ -107,6 +107,16 @@ public class HomepageSteps {
         homepage.assertContractIdEnabled();
     }
 
+    @And("admin input contract id with {string}")
+    public void admin_input_contract_id_with(String number){
+        homepage.fillContractId(number);
+    }
+
+    @Then("admin can see {string} on contract id")
+    public void admin_can_see_on_contract_id(String text){
+        Assert.assertEquals(homepage.errorTextVisible(), text, "not appears message");
+    }
+
     @Then("admin can see and type in field {string} atleast 5 char and <= 300 character limit")
     public void admin_can_see_and_type_in_field_atleasr_character_limit(String text){
         homepage.isNotesVisible();
