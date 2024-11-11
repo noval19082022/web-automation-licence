@@ -1,4 +1,4 @@
-@COOP3 @fail
+@COOP3
 Feature: Mamipoin Tenant Dapatkan Poin Page
 
 
