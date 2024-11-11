@@ -37,10 +37,11 @@ public class CheckPropertyPO {
     }
 
     /**
-     * Search Property by Nama Properto
+     * Search Property by Nama Properti
      * @param keyword
      */
     public void searchNamaProperti(String keyword) {
+        page.setDefaultTimeout(60000.0);
         playwright.fill(searchBar, keyword);
         playwright.waitTillNetworkIdle();
     }
