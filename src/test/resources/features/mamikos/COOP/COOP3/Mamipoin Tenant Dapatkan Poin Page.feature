@@ -1,4 +1,4 @@
-@COOP3
+@COOP3 @fail
 Feature: Mamipoin Tenant Dapatkan Poin Page
 
 
@@ -17,7 +17,7 @@ Feature: Mamipoin Tenant Dapatkan Poin Page
   @continue
   Scenario: Headline on Dapatkan Poin Page
     Then user verify dapatkan poin headline "Cara Mudah Mendapatkan MamiPoin"
-    And user verify dapatkan poin subtitle "Kamu bisa mengumpulkan MamiPoin dengan melakukan aktivitas-aktivitas		berikut."
+    And user verify dapatkan poin subtitle "Kamu bisa mengumpulkan MamiPoin dengan melakukan aktivitas-aktivitas berikut."
 
   @continue
   Scenario: Content on Dapatkan Poin Page
