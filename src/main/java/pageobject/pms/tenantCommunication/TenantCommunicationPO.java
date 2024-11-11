@@ -272,14 +272,7 @@ public class TenantCommunicationPO {
      * @return true if pagination info contains Menampilkan 20 dari xxx riwayat
      */
     public boolean verifyDisplayDataRow(){
-        boolean result = false;
-
-        playwright.waitTillPageLoaded();
-        String pagination = playwright.getText(displayDataRow);
-        if (pagination.contains("Menampilkan 20")){
-            result = true;
-        }
-        return result;
+        return playwright.getText(displayDataRow).contains("Menampilkan 20");
     }
 
     /**
