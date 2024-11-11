@@ -131,7 +131,7 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
@@ -163,7 +163,7 @@ Feature: PMS - Add fee MVP
     And admin login pms :
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
-    And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
+    And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
     And admin fill phone number tenant "0812000008"
@@ -190,7 +190,7 @@ Feature: PMS - Add fee MVP
       And admin login pms :
         | email             | password     |
         | pman@mamiteam.com | pmanM4m1t34m |
-      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
+      And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
       And admin create contract tenant new booking
       And admin selected type room
       And admin fill phone number tenant "0812000008"
@@ -231,7 +231,7 @@ Feature: PMS - Add fee MVP
       And admin login pms :
         | email             | password     |
         | pman@mamiteam.com | pmanM4m1t34m |
-      And admin go to room allotment page "Kost Singgahsini Biru Halmahera Utara"
+      And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
       And admin create contract tenant new booking
       And admin selected type room
       And admin fill phone number tenant "0812000008"
@@ -242,7 +242,7 @@ Feature: PMS - Add fee MVP
       Then admin can see addfee KK with:
         | addfee name |
         | Alat Elektronik |
-        | Bawa Air Fryer  |
         | Bawa Blender    |
-        | Bawa Dispenser  |
-        | Bawa Hair Dryer |
+        | Bawa Kulkas     |
+        | Laundry         |
+        | Parkir Mobil    |
