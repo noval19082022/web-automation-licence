@@ -55,6 +55,7 @@ public class AdditionalKostPO {
      */
     public void searchKosAdditional(String keyword){
         playwright.clickLocatorAndTypeKeyboard(searchBoxNamaKost, keyword);
+        playwright.hardWait(2000);
         playwright.clickOn(searchButton);
     }
 
