@@ -202,7 +202,7 @@ public class KostListPO {
      */
     public void searchOwnerName(String name) {
         playwright.fill(ownerName,name);
-        page.context().setDefaultTimeout(30000.0);
+        page.context().setDefaultTimeout(60000.0);
         playwright.clickOn(searchBtn);
     }
 

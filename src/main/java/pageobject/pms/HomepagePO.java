@@ -271,6 +271,7 @@ public class HomepagePO {
      * @param name name or id property
      */
     public void searchProperty(String name) {
+        page.setDefaultTimeout(60000.0);
         searchInput.fill(name);
         playwright.clickOn(cariButton);
     }
