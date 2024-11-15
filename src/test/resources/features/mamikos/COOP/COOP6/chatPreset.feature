@@ -134,7 +134,7 @@ Feature: Chat Preset
     And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
     Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
 
-  @TEST_SS-6322 @continue @a
+  @TEST_SS-6322 @continue
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Boleh tanya-tanya dulu?"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
