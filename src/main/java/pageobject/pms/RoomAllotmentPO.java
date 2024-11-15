@@ -96,6 +96,23 @@ public class RoomAllotmentPO {
     }
 
     /**
+     * click on ooo type dropdown button
+     */
+    public void clickOnDropdowrnType(){
+        outOfOrderTypeDropdown.click();
+    }
+
+    /**
+     * verify oout of order type
+     * @param type
+     * @return type
+     */
+    public String getOutOfOrderType(String type){
+        outOfOrderType = page.locator("a").filter(new Locator.FilterOptions().setHasText(type));
+        return playwright.getText(outOfOrderType);
+    }
+
+    /**
      * Click end date on date picker
      * @param day refers to today, yesterday, tomorrow or even date
      */
