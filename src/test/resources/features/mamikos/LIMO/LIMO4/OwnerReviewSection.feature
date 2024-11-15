@@ -8,7 +8,7 @@ Feature: Owner - Review Section
       | phone stag      | phone prod      | password   |
       | 0812345670001   | 0812345670001   | qwerty123  |
     And user click on rating card details
-    Then user validate review section with "Belum ada user yang review kost"
+    Then owner will see that the text "Belum ada user yang review kost" is displayed
 
   @TEST_LIMO-1078 @yourkosrating-listingcardclicked @continue @WEB @AUTOMATED
   Scenario: [Owner Dahsboard][Rating Kost]Review Section - Your kost rating and Listing card clicked

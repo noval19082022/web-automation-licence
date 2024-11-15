@@ -1,4 +1,4 @@
-@regression @LIMO4 @LIMOmamiprime
+@regression @LIMO4 @LIMOmamiprimeDetailPemesanan
 Feature: Detail Pemesanan
 
   @TEST_LIMO-3574 @continue @WEB @AUTOMATED

@@ -1,4 +1,4 @@
-@regression @LIMO4
+@regression @LIMO4 @LIMO-Homepage-owner
 Feature: Homepage
 
   @TEST_LIMO-3445 @navbarAfter @continue @WEB @AUTOMATED
