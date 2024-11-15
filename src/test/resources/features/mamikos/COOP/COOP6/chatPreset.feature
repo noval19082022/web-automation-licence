@@ -149,13 +149,10 @@ Feature: Chat Preset
     And user select chat preset question "Boleh tanya-tanya dulu?"
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
 
-  @TEST_SS-5950 @a
+  @TEST_SS-5950
   Scenario: [Chat Menu][Chat Room] Redirection back button to chat page
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
     And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
     And user click back button chatroom
     Then user can see Chat list title
-
-
-
