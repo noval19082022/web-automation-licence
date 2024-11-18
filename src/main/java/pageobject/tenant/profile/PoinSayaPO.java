@@ -49,7 +49,7 @@ public class PoinSayaPO {
         dapatkanPoinHeadline = page.getByText("Cara Mudah Mendapatkan MamiPoin");
         dapatkanPoinSubtitle = page.getByText("Kamu bisa mengumpulkan MamiPoin dengan melakukan aktivitas-aktivitas berikut.");
         navHeader = page.locator(".nav-section");
-        entryPointTenantMamipoin = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Poin Saya Baru"));
+        entryPointTenantMamipoin = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Poin Saya"));
         titleMamipoinLandingPage = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("MamiPoin").setExact(true));
         informasiPoinButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Informasi Poin"));
         riwayatPoinButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Semua")).first();

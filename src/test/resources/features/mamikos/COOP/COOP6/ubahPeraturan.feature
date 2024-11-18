@@ -1,4 +1,4 @@
-@BBM6 @ubahPeraturan
+@BBM6 @ubahPeraturan @COOP6
   Feature: Owner - Ubah Peraturan
 
   @TEST_SS-3458 @automated @booking-stay-setting @continue
@@ -328,4 +328,4 @@
       And tenant redirect to kost details:
         | kost path stag                                                                            | kost path prod               |
         | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant can choose checkin date in the next "5" month
+      Then tenant can choose checkin date in the next "4" month

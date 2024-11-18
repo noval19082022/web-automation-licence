@@ -121,6 +121,9 @@ public class HomepagePO {
     Locator yaSimpanButton;
     Locator dbetCategoryButton;
     Locator contractIdText;
+    Locator notestext;
+    Locator notesCountertext;
+    Locator contractIdErrorMessage;
 
     //---Kontrak Kerja Sama Tab---//
     Locator kontrakKerjaSamaTab;
@@ -202,6 +205,9 @@ public class HomepagePO {
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
         dbetCategoryButton = page.locator("//div[@data-testid=\"categorySelect_ddl\"]//div[@class=\"bg-c-select__trigger bg-c-select__trigger--lg\"]");
         contractIdText = page.locator("//input[@id=\"contractId_txt\"]");
+        notestext = page.getByPlaceholder("Isi catatan di sini");
+        notesCountertext = page.locator(".bg-c-textarea__counter");
+        contractIdErrorMessage = page.locator("//div[@label=\"Contract ID\"]//*[@class=\"bg-c-field__message\"]");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -265,6 +271,7 @@ public class HomepagePO {
      * @param name name or id property
      */
     public void searchProperty(String name) {
+        page.setDefaultTimeout(60000.0);
         searchInput.fill(name);
         playwright.clickOn(cariButton);
     }
@@ -386,6 +393,24 @@ public class HomepagePO {
      */
     public void assertContractIdEnabled(){;
         assertThat(contractIdText).isEnabled();
+    }
+
+    /**
+     * input contract id
+     * @param number
+     */
+    public void fillContractId(String number){
+        contractIdText.fill(number);
+        Locator contractIdText = page.getByTestId("fieldWithOptions-options").locator("a");
+        playwright.clickOn(contractIdText);
+    }
+
+    /**
+     * get error message on contract id
+     * @return
+     */
+    public String errorTextVisible(){
+        return playwright.getText(contractIdErrorMessage);
     }
 
     /**
@@ -1209,4 +1234,29 @@ public class HomepagePO {
         return playwright.getText(namaPropertiInTable);
     }
     //---End of Daftar Properti---//
+
+    //-----contract accuracy----//
+
+    /**
+     * verify notes is visible
+     * @return notes field
+     */
+    public boolean isNotesVisible(){
+        return playwright.waitTillLocatorIsVisible(notestext, 3000.0);
+    }
+
+    /**
+     * Input notes
+     * @param text
+     */
+    public void inputNotes(String text){
+        playwright.fill(notestext, text);
+    }
+
+    /**
+     * verify notes counter is visible
+     */
+    public void notesCounterVisible(){
+        playwright.getText(notesCountertext);
+    }
 }

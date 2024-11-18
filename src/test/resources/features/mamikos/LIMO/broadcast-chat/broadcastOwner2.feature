@@ -11,7 +11,7 @@ Feature: Broadcast Chat Owner 2
     And user opens the chatroom in the "1" order on chat list
     Then chat room appear with latest message "automation broadcast, nikmati promo Mamikos untuk booking kos! Cek kosnya dan langsung booking. Jangan sampai terlewatkan, ya."
 
-  @TEST_LIMO-3640 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  @TEST_LIMO-3640 @Broadcast-chat @GP2 @automated @listing-monetization @web @broadcast-chat2-lagi
   Scenario: [Broadcast Chat][Create Broadcast chat]User want to change kost after input message chat
     Given user go to mamikos homepage
     When user login as owner:

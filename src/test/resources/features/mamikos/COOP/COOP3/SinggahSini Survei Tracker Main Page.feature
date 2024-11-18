@@ -11,7 +11,7 @@ Feature: SinggahSini Survei Tracker Main Page
     And admin go to survey tracker menu
     Then user see pagination menu on Detail Tenant is displayed
     When user click pagination number "2"
-    Then user see display data row from 20 riwayat
+    Then user see display data row survei tracker from 20 riwayat
 
   @continue
   Scenario: Main Page Display

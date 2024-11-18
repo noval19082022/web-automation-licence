@@ -91,7 +91,7 @@ public class BroadcastChatPO {
         toastContentText = page.locator(".bg-c-toast__content");
         bantuanDanTipsButton = playwright.getButtonBySetName("Bantuan & Tips");
         displayingSearchResultKosNameText = page.getByTestId("broadcastChat-listKos").getByRole(AriaRole.PARAGRAPH).first();
-        pilihKosButton = playwright.getButtonByText("Pilih Kos");
+        pilihKosButton = page.getByTestId("broadcastChat-selectKosButton");
         emptyKosHeaderText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).first();
         emptyKosBodyText = page.locator(".select-kos__not-found").getByRole(AriaRole.PARAGRAPH).last();
         masukkanPesanButton = page.getByText("Masukan Pesan");

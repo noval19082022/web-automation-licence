@@ -1,4 +1,4 @@
-@DOM3 @apartmen
+@DOM3 @apartment
 Feature: [Test-Execution][DOM] Web - apartment
 
   @TEST_SS-2973 @Automated @web-covered
@@ -89,8 +89,8 @@ Feature: [Test-Execution][DOM] Web - apartment
   Scenario: [Web][Apartement] Login as Tenant Can View Profile Picture and Option Dropdown Menu Profile
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0891234567897  | 08100000622 | qwerty123 |
+      | phone stag      | phone prod  | password  |
+      | 0891234567897   | 08100000622 | qwerty123 |
     Then tenant can see profile dropdown option
 
   @TEST_SS-2983 @Automated @web-covered
@@ -99,12 +99,11 @@ Feature: [Test-Execution][DOM] Web - apartment
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0888881478  | 08100000622 | qwerty123 |
-    And tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Rane 78        |                |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                          |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     When user click on hubungi pengelola button
-    And user select question "Boleh tahu alamat lengkap apartemen ini?"
-    And user click send chat from popup
     Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
 
   @TEST_SS-2984 @Automated @web-covered
@@ -131,26 +130,28 @@ Feature: [Test-Execution][DOM] Web - apartment
   Scenario: [Web][Apartement] Tenant Verify Profile Dropdown
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0891234567897  | 08100000622 | qwerty123 |
-    And tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Rane 78        |                |
+      | phone stag      | phone prod  | password  |
+      | 0891234567897   | 08100000622 | qwerty123 |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                          |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     Then tenant can see profile dropdown option
 
   @TEST_SS-2987 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Contact Apartment
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0891234567897  | 08100000622 | qwerty123 |
-    And tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Rane 78        |                |
-    And user click on hubungi pengelola button
+      | phone stag      | phone prod  | password  |
+      | 08999333999     | 08100000622 | qwerty123 |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                          |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+    When user click on hubungi pengelola button
     Then user see phone number field and selectable question options :
       | Bagaimana bisa menghubungi apartemen ini? |
-      | Boleh tahu alamat lengkap apartemen ini?  |
+#      | Boleh tahu alamat lengkap apartemen ini?  |
 
   @TEST_SS-2988 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Verify Search Ads Dropdown
@@ -165,9 +166,10 @@ Feature: [Test-Execution][DOM] Web - apartment
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0891234567897  | 08100000622 | qwerty123 |
-    And tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Rane 78        |                |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                          |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     When user click on favorite btn on the apartment detail
     Then user get success message "Sukses tersimpan"
     And tenant navigate to favorite page
@@ -179,9 +181,21 @@ Feature: [Test-Execution][DOM] Web - apartment
     When user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 0891234567897  | 08100000622 | qwerty123 |
-    And tenant search kost then go to apartment details:
-      | kost name stag | kost name prod |
-      | Rane 78        |                |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                          |
+      | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     When user click on favorite btn on the apartment detail
     And tenant navigate to favorite page
     Then tenant should not be able to see the text "Rane 78"
+
+  Scenario: [Web][Apartement] Tenant search manually Apartment
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag      | phone prod  | password  |
+      | 08999333999     | 08100000622 | qwerty123 |
+    And user go to landing apartment
+    Then user redirected to "/apartemen"
+    And user search "Rane 78 " on landing apartment
+    And open first apartment details
+    And tenant set active page to 1

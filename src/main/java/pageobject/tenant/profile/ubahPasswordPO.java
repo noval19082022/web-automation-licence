@@ -21,7 +21,7 @@ public class ubahPasswordPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         pengaturan = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pengaturan"));
-        ubahPassword = page.getByText("Ubah", new Page.GetByTextOptions().setExact(true));
+        ubahPassword = page.getByText("Ubah Password");
         passwordLama = page.getByPlaceholder("Masukkan password lama");
         passwordBaru = page.getByPlaceholder("Masukkan password baru");
         ketikUlangPassword = page.getByPlaceholder("Ketik ulang password");

@@ -9,7 +9,7 @@ import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.owner.MamipayPO;
 import pageobject.owner.OwnerDashboardPO;
-import pageobject.owner.PropertySayaPO;
+import pageobject.owner.PropertiSayaPO;
 import utilities.PlaywrightHelpers;
 
 public class MamipaySteps {
@@ -17,7 +17,7 @@ public class MamipaySteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamipayPO mamipayPO = new MamipayPO(ActiveContext.getActivePage());
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(ActiveContext.getActivePage());
-    PropertySayaPO propertySaya = new PropertySayaPO (ActiveContext.getActivePage());
+    PropertiSayaPO propertySaya = new PropertiSayaPO(ActiveContext.getActivePage());
     LoadingPO loadingPO = new LoadingPO(ActiveContext.getActivePage());
     Page page1;
 

@@ -184,8 +184,15 @@ public class BroadcastChatSteps {
 
     @When("owner add broadcast chat for kost {string}")
     public void ownerAddBroadcastChatForKost(String kostName) {
-        loading.waitForLoadingIconDisappear();
-        broadcast.clickOnTambahBroadcastChatButton();
+        try {
+            loading.waitForLoadingIconDisappear();
+            broadcast.clickOnTambahBroadcastChatButton();
+        } catch (Exception e) {
+            playwright.reloadPage();
+        } finally {
+            loading.waitForLoadingIconDisappear();
+            broadcast.clickOnTambahBroadcastChatButton();
+        }
         broadcast.searchKostBC(kostName);
     }
 

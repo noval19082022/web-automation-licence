@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization @LIMO2-staging @gpWeekly @DONEMIGRATINGTONEWBOARD
+@regression @LIMO2 @gpWeekly
 Feature: GP Weekly
 
 
@@ -57,7 +57,6 @@ Feature: GP Weekly
   @TEST_LIMO-3495 @continue
   Scenario: GoldPlus Weekly Recurring - Cancel Recurring
     Given owner navigates to owner dashboard
-    And owner click nanti saja for recurring GoldPlus
     When owner wants to access goldplus dashboard
     Then owner will be redirected to invoice recurring
 

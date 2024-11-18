@@ -1,4 +1,4 @@
-@regression @LIMO2 @LIMO2-staging @goldplusRecurring @DONEMIGRATINGTONEWBOARD
+@regression @LIMO2 @goldplusRecurring
 # Recurring GPLT
 Feature: Goldplus Recurring
 

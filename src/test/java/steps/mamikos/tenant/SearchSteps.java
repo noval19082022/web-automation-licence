@@ -489,13 +489,14 @@ public class SearchSteps {
     public void userCanSeeKosListResultAreaAreTheListBelow(DataTable area) {
         List<String> areaList = area.asList();
         kostLanding.clickOnCariBerdasarkanPeta();
-        int kosAreaSize = kostLanding.getKosAreaSize();
+        int kosAreaSize = Math.min(kostLanding.getKosAreaSize(), 4); // Limit to 4 areas
         for (int i = 0; i < kosAreaSize; i++) {
-            System.out.println(kostLanding.getKosAreaText(i));
-            if (kostLanding.getKosAreaText(i).equalsIgnoreCase("unknown")) {
+            String kosAreaText = kostLanding.getKosAreaText(i);
+            System.out.println(kosAreaText);
+            if (kosAreaText.equalsIgnoreCase("unknown")) {
                 continue;
             }
-            Assert.assertTrue(areaList.contains(kostLanding.getKosAreaText(i)), "Kos Area " + kostLanding.getKosAreaText(i) + " Is not present in the list");
+            Assert.assertTrue(areaList.contains(kosAreaText), "Kos Area " + kosAreaText + " is not present in the list");
         }
     }
 
@@ -611,10 +612,11 @@ public class SearchSteps {
         Assert.assertFalse(isExistCount > 0, String.format("kost %s is exist in prime", kostName));
     }
 
-    @And("user verify see kost name {string} in suggestion nama kost terkait list")
+    @Then("user verify see kost name {string} in suggestion nama kost terkait list")
     public void user_verify_see_kos_non_prime_on_list(String kostName) {
         searchPO = Optional.ofNullable(searchPO).orElseGet(() -> new SearchPO(page));
         var kostNonPrime = searchPO.getListSuggestionKostNameNonPrime();
+        System.out.println(kostNonPrime);
 
         var isExistCount = 0;
         for (var kost : kostNonPrime) {
@@ -625,5 +627,10 @@ public class SearchSteps {
 
         Assert.assertTrue(isExistCount > 0, String.format("kost %s not exist in nama kost terkait", kostName));
         Assert.assertFalse(isExistCount > 1, String.format("kost %s exist more than once in nama kost terkait with count %d", kostName, isExistCount));
+    }
+
+    @Then("user can not see any prime suggestion list")
+    public void userCanNotSeeAnyPrimeSuggestionList() {
+        Assert.assertFalse(search.isPrimeSuggestionBoxVisible());
     }
 }

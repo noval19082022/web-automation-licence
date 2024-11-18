@@ -13,6 +13,7 @@ public class SurveyTrackerPO {
     Locator pilihPlatformValue;
     Locator pilihStatusPlatformFilter;
     Locator pilihStatusPlatformValue;
+    Locator dataCounterText;
 
     public SurveyTrackerPO(Page page) {
         this.page = page;
@@ -20,6 +21,7 @@ public class SurveyTrackerPO {
         penyewaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filter Filter"));
         pilihPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih platform survei dropdown-down"));
         pilihStatusPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status survei dropdown-down"));
+        dataCounterText = page.locator(".secondary-bar__result-text");
     }
 
     /**
@@ -45,5 +47,13 @@ public class SurveyTrackerPO {
         playwright.clickOn(pilihStatusPlatformFilter);
         pilihStatusPlatformValue = page.locator("a").filter(new Locator.FilterOptions().setHasText(filterStatus));
         playwright.clickOn(pilihStatusPlatformValue);
+    }
+
+    /**
+     * Check pagination display correct data
+     * @return boolean
+     */
+    public boolean isPaginationCorrect() {
+        return playwright.getText(dataCounterText).contains("Menampilkan 20");
     }
 }

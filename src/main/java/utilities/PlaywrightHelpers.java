@@ -379,6 +379,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get list text content from locator
+     * @param locator target locator
+     * @return List of string
+     */
+    public List<String> getListTextContentsFromLocator(Locator locator) {
+        waitTillLocatorIsVisible(locator);
+        return locator.allTextContents();
+    }
+
+    /**
      * Get value from input element
      *
      * @param locator playwright locator
@@ -743,7 +753,6 @@ public class PlaywrightHelpers {
 
     /**
      * Hard wait before an action
-     *
      * @param time Double data type
      */
     public void hardWait(double time) {

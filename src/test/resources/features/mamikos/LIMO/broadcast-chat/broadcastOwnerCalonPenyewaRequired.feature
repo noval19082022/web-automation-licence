@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO5 @broadcastChat @staging-only
+@listing-monetization @regression @LIMO5 @broadcastChat1 @staging-only
 Feature: Broadcast Chat Owner Tenant Booking Required
 
   #test is precondition only
@@ -16,11 +16,11 @@ Feature: Broadcast Chat Owner Tenant Booking Required
   @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
     Given user go to mamikos homepage
-    Given user login as owner:
+    When user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-    When owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
     And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     And user click back arrow button on BC page

@@ -49,7 +49,6 @@ public class ChatOwnerSteps {
     @And("search chat in chatlist {string}")
     public void searchChatInChatlist(String inputText) {
         chat.searchChatTenant(inputText);
-
     }
 
     @When("owner enter text {string} in chat page")

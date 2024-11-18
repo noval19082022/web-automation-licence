@@ -2,7 +2,6 @@
 Feature: New Progress bar on Profile
 
 	@TEST_SS-3318 @Manual @update-user-profile @TEST_SS-3315
-	@continue
 	Scenario: [Profile][Informasi Pribadi]Tenant only complete for mandatory profile
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -13,7 +12,6 @@ Feature: New Progress bar on Profile
 		And user logs out as a Tenant user
 
 	@TEST_SS-3317 @update-user-profile @TEST_SS-3331
-	@continue
 	Scenario: [Profile][Informasi Pribadi]Tenant Batal to complete their profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -29,7 +27,6 @@ Feature: New Progress bar on Profile
 		And user logs out as a Tenant user
 
 	@TEST_SS-3319 @update-user-profile @TEST_SS-3332
-	@continue
 	Scenario: [Profile][Informasi Pribadi]Check the display and mandatory on profile page
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -46,7 +43,6 @@ Feature: New Progress bar on Profile
 		And user logs out as a Tenant user
 
 	@TEST_SS-3316
-	@continue
 	Scenario: [Profile][Informasi Pribadi]Check profile when tenant first time login to mamikos
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -57,7 +53,6 @@ Feature: New Progress bar on Profile
 		And user logs out as a Tenant user
 
 	@TEST_SS-3313
-	@continue
 	Scenario: [Profile Page][User Profile]Check red dot at navbar when tenant not complete fill the profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -70,7 +65,6 @@ Feature: New Progress bar on Profile
 		Then user logs out as a Tenant user
 
 	@TEST_SS-3312
-	@continue
 	Scenario: [Profile Page][User Profile]Check red dot when tenant only input mandatory field
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -82,7 +76,7 @@ Feature: New Progress bar on Profile
 		When user navigate to kost saya page
 		Then user logs out as a Tenant user
 
-	@TEST_SS-3321 @continue
+	@TEST_SS-3321
 	Scenario: [Profile Page][User Profile]Check ret dot when tenant hasn’t verified the account and completed the profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -95,7 +89,6 @@ Feature: New Progress bar on Profile
 		Then user logs out as a Tenant user
 
 	@TEST_SS-3320 @reddot1
-	@continue
 	Scenario: [Profile Page][User Profile][Profile Page][User Profile]Check red dot at navbar when tenant verified the account but not completed the profile infomation
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -113,7 +106,6 @@ Feature: New Progress bar on Profile
 		Then user logs out as a Tenant user
 
 	@TEST_SS-4964 @reddot1
-	@continue
 	Scenario: [Profile Page][User Profile][Profile Page][User Profile]Check red dot at navbar when tenant verified the account and completed the profile infomation
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:
@@ -130,7 +122,6 @@ Feature: New Progress bar on Profile
 		Then user logs out as a Tenant user
 
 	@TEST_SS-3314
-	@continue
 	Scenario: [Profile][Informasi Pribadi]Tenant complete their profile information
 		Given user go to mamikos homepage
 		When user login as tenant via phone number:

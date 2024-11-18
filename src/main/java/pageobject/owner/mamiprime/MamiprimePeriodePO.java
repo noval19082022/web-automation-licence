@@ -19,7 +19,7 @@ public class MamiprimePeriodePO {
      * @param periode return periode
      */
     public String getPeriodPrime(String periode) {
-        Locator periodeResult = page.getByText(periode);
+        Locator periodeResult = page.getByText(periode).first();
         return playwright.getText(periodeResult);
     }
 
@@ -29,7 +29,7 @@ public class MamiprimePeriodePO {
      * @param pricePrime return price peride
      */
     public String getPricePeriod(String pricePrime) {
-        Locator pricePrimeResult = page.getByText(pricePrime);
+        Locator pricePrimeResult = page.getByText(pricePrime).first();
         return playwright.getText(pricePrimeResult);
     }
 
@@ -37,7 +37,7 @@ public class MamiprimePeriodePO {
      * Click on periode selected
      */
     public void clickOnPeriodePrime(String pricePrime) {
-        Locator pricePrimeResult = page.getByText(pricePrime);
+        Locator pricePrimeResult = page.getByText(pricePrime).first();
         playwright.waitFor(pricePrimeResult);
         playwright.clickOn(pricePrimeResult);
     }

@@ -1,8 +1,8 @@
-@regression @listingavailability
+@regression @listingavailability @BBM8
 
   Feature: Listing Availability on Chat Room
 
-    @TEST_SS-3333 @BBM8
+    @TEST_SS-3333
     Scenario: Check "Ajukan Sewa" button if the room is available for today
       Given user go to mamikos homepage
       When user login as tenant via phone number:
@@ -12,8 +12,6 @@
         | kost path stag                                                                               | kost path prod               |
         | kost-kabupaten-badung-kost-campur-eksklusif-kost-general-irvi-automation-abiansemal-badung-1 | Kos DC BAR Automation Tipe A |
       And user click chat in kos detail
-      And user select question "Halo, ada kos yang masih kosong?"
-      And user click send chat from popup
       And user click Ajukan Sewa "today" from chat room
       Then user will open new tab and go to Booking form
 
