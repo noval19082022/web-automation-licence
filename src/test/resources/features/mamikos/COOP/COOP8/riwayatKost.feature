@@ -20,6 +20,7 @@ Feature: riwayat kost
     Then user will open new tab and go to Booking form
     When user go to mamikos homepage
     Then user logs out as a Tenant user
+    And user close unused browser tab
 
   @emptyRiwayatKos @TEST_SS-3309
   Scenario: Check riwayat kos when empty condition
