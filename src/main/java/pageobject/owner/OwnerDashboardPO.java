@@ -125,11 +125,11 @@ public class OwnerDashboardPO {
         bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         promoAdsButton = page.locator("//span[.='Promosikan Iklan Anda']");
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        propertySayaDropdownMenu = page.locator("//div[@class='form-control dropdown-toggle']");
+        propertySayaDropdownMenu = page.locator("//div[@class='bg-c-dropdown']");
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
-        chatCSButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat CS"));
-        contactUsPopUp = page.frameLocator("iframe[name=\"Messaging window\"]").getByRole(AriaRole.HEADING, new FrameLocator.GetByRoleOptions().setName("Mami Support"));
+        chatCSButton = page.getByTestId("chat-cs-btn");
+        contactUsPopUp = page.locator("//iframe[@title='Messaging window']");
         greetingUserLabel = page.locator(".greeting-section__name");
         accountSettingsButton = page.getByText("Setelan Akun");
         logoutOwnerPageButton = page.getByText("Logout");

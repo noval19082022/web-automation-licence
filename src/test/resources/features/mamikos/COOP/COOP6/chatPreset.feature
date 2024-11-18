@@ -134,7 +134,7 @@ Feature: Chat Preset
     And user click "Kost Singgahsini Sanrio Kitty Halmahera Utara"
     Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
 
-  @TEST_SS-6322
+  @TEST_SS-6322 @continue
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Boleh tanya-tanya dulu?"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -148,3 +148,11 @@ Feature: Chat Preset
     Then user can see chat preset question "Boleh tanya-tanya dulu?"
     And user select chat preset question "Boleh tanya-tanya dulu?"
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
+
+  @TEST_SS-5950
+  Scenario: [Chat Menu][Chat Room] Redirection back button to chat page
+    When user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
+    And user click back button chatroom
+    Then user can see Chat list title

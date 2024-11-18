@@ -112,4 +112,14 @@ public class RoomAllotmentSteps {
         Assert.assertEquals(roomAllotment.getTitlePopup(), title);
         Assert.assertEquals(roomAllotment.getSubtitlePopup(), subtitle);
     }
+
+    @And("admin click on dropdown type")
+    public void adminClickOnDropdownType(){
+        roomAllotment.clickOnDropdowrnType();
+    }
+
+    @Then("admin validate this {string} on out of order type")
+    public void adminValidateThisOnOutOfOrderType(String type){
+        Assert.assertEquals(roomAllotment.getOutOfOrderType(type), type, "oo type not same");
+    }
 }
