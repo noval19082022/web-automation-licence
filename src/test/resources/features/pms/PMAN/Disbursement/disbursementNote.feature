@@ -9,6 +9,7 @@
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
       #admin inputs Characters in Keterangan section
       And admin inputs characters "note <= 1500"
