@@ -198,4 +198,8 @@ public class DisbursementSteps {
     public void show_only_disbursment_for(String name) {
         Assert.assertEquals(disbursement.getPropertyNameinList(),name);
     }
+    @When("admin select disbursement period {string}")
+    public void admin_select_disbursement_period(String period) {
+        disbursement.selectDisbursementPeriod(period);
+    }
 }

@@ -18,7 +18,8 @@
       When admin search disbursement "Kost Apik"
       Then show all disbursement list
       #search property name keyword
-      When admin search disbursement "Khusus Automation"
+      When admin select disbursement period "Periode 1"
+      And admin search disbursement "Khusus Automation"
       Then show only disbursment for "Kost Apik Khusus Automation PMAN Halmahera Utara"
       #search full property name
       When admin search disbursement "Kost Apik Khusus Automation PMAN Halmahera Utara"
