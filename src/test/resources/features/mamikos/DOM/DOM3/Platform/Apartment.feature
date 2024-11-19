@@ -1,4 +1,4 @@
-@DOM3 @apartment
+@SS16 @apartment
 Feature: [Test-Execution][DOM] Web - apartment
 
   @TEST_SS-2973 @Automated @web-covered

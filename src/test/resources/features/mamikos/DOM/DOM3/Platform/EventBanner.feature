@@ -1,4 +1,4 @@
-@DOM3 @EventBanner
+@SS16 @EventBanner
 Feature: [Test-Execution][DOM] Web - Event Banner
 
   @TEST_SS-3020 @Automated @DOM3 @web-covered

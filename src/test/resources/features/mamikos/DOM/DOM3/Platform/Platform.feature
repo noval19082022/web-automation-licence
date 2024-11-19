@@ -1,4 +1,4 @@
-@DOM3 @platfrom @PLATFORM_SEARCH_MIGRATE
+@SS16 @platfrom @PLATFORM_SEARCH_MIGRATE
 Feature: [Test-Execution][DOM] Web - Platform
 
   @TEST_SS-2974 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
