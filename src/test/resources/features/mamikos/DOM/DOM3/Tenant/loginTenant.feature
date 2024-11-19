@@ -1,4 +1,4 @@
-@regression @loginTenant @DOM3 @essentialTest @LOGIN_SEARCH_MIGRATE
+@regression @loginTenant @SS16 @essentialTest @LOGIN_SEARCH_MIGRATE
 Feature: Tenant - Login
 
   @loginByFB @TEST_SS-2977

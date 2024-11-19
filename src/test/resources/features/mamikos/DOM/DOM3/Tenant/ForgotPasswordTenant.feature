@@ -1,5 +1,4 @@
-@DOM3 @forgotPasswordTenant
-
+@SS16 @forgotPasswordTenant
 Feature: Tenant Forgot Password
 
   @forgotPasswordTenantViaSms @TEST_SS-2926
