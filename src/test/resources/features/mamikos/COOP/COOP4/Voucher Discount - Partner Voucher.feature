@@ -1,4 +1,4 @@
-@SS14
+@SS15
 Feature: Voucher Discount - Partner Voucher
 
   @TEST_SS-4274 @Automated @COOP @Web @continue
