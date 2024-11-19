@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Tenant use MamiPoin in Invoice
 
   @TEST_SS-4276 @continue

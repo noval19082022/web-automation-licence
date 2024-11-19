@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Invalid Voucher After Applied, Invalid Contract Period
 
   Scenario: Admin Edit Voucher AUTOCHNGEPERIOD and Change Contract Period to Monthly

@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Successfully Payment with Voucher
 
   Scenario: Admin Batalkan Contract
