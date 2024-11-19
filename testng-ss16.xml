@@ -5,7 +5,7 @@
     <parameter name="squadName" value="Singahsini"/>
     <test name="Singgahsini SS16">
         <classes>
-            <class name="runners.SS15TestRunner"/>
+            <class name="runners.SS16TestRunner"/>
         </classes>
     </test>
 
