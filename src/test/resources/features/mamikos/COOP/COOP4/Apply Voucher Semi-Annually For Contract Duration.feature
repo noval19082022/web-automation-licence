@@ -1,4 +1,4 @@
-@SS15
+@COOP4
 Feature: Apply Voucher Semi-Annually For Contract Duration
 
   Scenario: Admin Batalkan Contract
