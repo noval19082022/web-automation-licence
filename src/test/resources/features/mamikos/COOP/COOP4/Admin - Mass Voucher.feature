@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: [Web][Voucher] Admin - Mass Voucher
 
   @TEST_SS-4272 @Automated @continue

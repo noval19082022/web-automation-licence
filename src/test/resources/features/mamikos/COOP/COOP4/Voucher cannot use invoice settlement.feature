@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Voucher cannot use invoice settlement
 
   Scenario: Admin Batalkan Contract

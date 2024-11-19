@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Invalid Voucher After Applied, Voucher Is Inactive
 
   @TEST_SS-4270
