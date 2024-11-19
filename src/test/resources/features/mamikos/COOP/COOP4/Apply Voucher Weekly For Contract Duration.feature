@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Apply Voucher Weekly For Contract Duration
 
   Scenario: Admin Batalkan Contract
