@@ -48,7 +48,7 @@ public class ChatTenantPO {
         disabledRoomCardBookingButton = page.locator(".mc-product-card__action-button");
         seeAdsButton = page.getByTestId("chatRoomHeaderWrapper");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
-        ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa")).nth(1);
+        ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
         ubahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Jadwal"));
         cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Survei"));
