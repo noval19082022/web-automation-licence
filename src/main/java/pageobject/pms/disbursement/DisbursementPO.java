@@ -37,6 +37,7 @@ public class DisbursementPO {
     private Locator emptyStateSubtitle;
     private Locator propertyNameText;
     private Locator disbursementPeriodSelect;
+    private Locator cancelAutoTransferButton;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -598,5 +599,14 @@ public class DisbursementPO {
             playwright.clickOn(disbursementPeriodSelect);
             playwright.clickOn(periode);
         }
+    }
+
+    /**
+     * Verify button cancel auto transfer button
+     * @return boolean
+     */
+    public boolean isButtonCancelAutoTransferVisible() {
+        cancelAutoTransferButton = page.getByText("Cancel Auto Transfer");
+        return playwright.isLocatorVisibleAfterLoad(cancelAutoTransferButton,5000.0);
     }
 }
