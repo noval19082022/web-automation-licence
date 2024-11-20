@@ -64,7 +64,7 @@ public class RiwayatKostPO {
         closeButton = page.locator("#bookingModalFacilities").getByTitle("Tutup");
         lihatRiwayatTransaksiButton = page.getByText("Lihat Riwayat Transaksi");
         kembaliKeBookingButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kembali ke Booking"));
-        bookingUlangButton = page.getByText("Booking Ulang");
+        bookingUlangButton = page.locator("div.detail-action-buttons > a > button").first();
         bookingFormTitle = page.getByTestId("booking-request-form__container").getByText("Pengajuan Sewa", new Locator.GetByTextOptions().setExact(true));
         emptyStateTitleRiwayatKos = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos"));
         emptyStateSubtitleRiwayatKos = page.getByText("Semua kos yang pernah kamu sewa di Mamikos nantinya akan muncul di halaman ini.");
