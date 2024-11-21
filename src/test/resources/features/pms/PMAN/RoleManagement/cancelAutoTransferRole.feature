@@ -66,7 +66,7 @@
       When admin refresh page 0
       Then cancel auto transfer disbursement button is visible
 
-    @TEST_SS-6358 @continue
+    @TEST_SS-6359 @continue
     Scenario: Remove member Cancel Auto Transfer
       Given owner set browser context to "context1"
       And bring page to front
