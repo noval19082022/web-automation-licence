@@ -1,7 +1,7 @@
 @SS16 @campaigns @web
 Feature: [Test-Execution][DOM] Web - Campaign
 
-  @TEST_SS-3000 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-3000 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Google Play icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -9,7 +9,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
 
-  @TEST_SS-3002 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3002 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -17,7 +17,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://www.instagram.com/mamikosapp/"
 
-  @TEST_SS-3003 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3003 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -25,7 +25,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://x.com/mamikosapp"
 
-  @TEST_SS-3004 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3004 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -33,7 +33,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://www.facebook.com/mamikosapp"
 
-  @TEST_SS-3005 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-3005 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - tentang kami
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -41,7 +41,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/tentang-kami"
 
-  @TEST_SS-5139 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5139 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - career
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -49,7 +49,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/career"
 
-  @TEST_SS-5140 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5140 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - mamiads
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -57,7 +57,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/mamiads"
 
-  @TEST_SS-5141 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5141 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - help
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -65,7 +65,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/"
 
-  @TEST_SS-5142 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5142 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - info
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -73,7 +73,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://mamikos.com/info/"
 
-#  @TEST_SS-5143 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+#  @TEST_SS-5143 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
 #  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - corporate
 #    Given user visit page "/enaknyangekos"
 #    When user is on the LandingPage EnaknyaNgekos
@@ -81,7 +81,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
 #    And tenant set active page to 1
 #    Then user redirected to "https://mamikos.com/info/mamikos-corporate-accommodation/"
 
-  @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - kebijakan privasi
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -89,7 +89,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/post/kebijakan-privasi-mamikos"
 
-  @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -97,7 +97,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
 
-  @TEST_SS-5145 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-5145 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: View Content - click Cari kos Singgahsini
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
@@ -105,34 +105,34 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to "https://singgahsini.id/"
 
-  @TEST_SS-3011 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3011 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - Scroll Page
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     Then user verify see button Mulai Cari Kos when scroll into Kenapa #EnaknyaNgekos
 
-  @TEST_CSS-3014 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_CSS-3014 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Booking Kos
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user click booking kos button
     Then user redirected to "/booking"
 
-  @TEST_SS-3015 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3015 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Fitur Unggulan
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Fitur Unggulan on the header on enaknyangekos page
     Then user will see that the text "Fitur-fitur yang kamu pakai buat #EnaknyaNgekos" is displayed
 
-  @TEST_SS-3017 @TESTSET_UG-6228 @Automated @DOM3 @web-covered
+  @TEST_SS-3017 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Produk dan Layanan
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Product dan layanan on the header on enaknyangekos page
     Then user will see that the text "Kenapa #EnaknyaNgekos?" is displayed
 
-  @TEST_SS-3024 @TESTSET_UG-6228 @AUTOMATED @DOM3 @web-covered
+  @TEST_SS-3024 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - click Mulai Cari Kos
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
