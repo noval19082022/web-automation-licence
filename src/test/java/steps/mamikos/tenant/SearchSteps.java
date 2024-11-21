@@ -633,4 +633,19 @@ public class SearchSteps {
     public void userCanNotSeeAnyPrimeSuggestionList() {
         Assert.assertFalse(search.isPrimeSuggestionBoxVisible());
     }
+
+    @When("user click on cluster number {string} on maps")
+    public void userClickOnClusterNumberOnMaps(String number){
+        search.clickMapsClusterButton(number);
+    }
+
+    @When("user click on {string} on maps")
+    public void userCLickOnMaps(String text){
+        if(text.equalsIgnoreCase("zoom in")){
+            search.clickZoomInButton();
+        }
+        else if(text.equalsIgnoreCase("zoom out")){
+            search.clickZoomOutButton();
+        }
+    }
 }

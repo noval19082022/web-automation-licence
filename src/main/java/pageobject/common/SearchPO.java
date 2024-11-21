@@ -53,6 +53,8 @@ public class SearchPO {
     //--------- Map Section ----------
     private Locator mapLegendButton;
     private Locator mapLegendClosedStatus;
+    private Locator zoomInButton;
+    private Locator zoomOutButton;
 
 
     public SearchPO(Page page) {
@@ -93,6 +95,9 @@ public class SearchPO {
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
+        this.zoomInButton = page.locator("a.leaflet-control-zoom-in");
+        this.zoomOutButton = page.locator("a.leaflet-control-zoom-out");
+
     }
 
     /**
@@ -784,5 +789,30 @@ public class SearchPO {
      */
     public Boolean isPrimeSuggestionBoxVisible() {
         return playwright.waitTillLocatorIsVisible(suggestionPrimeResultsBox, 3000.0);
+    }
+
+    //--------------SRP-------------------//
+
+    /**
+     * click cluster on maps
+     * @param number
+     */
+    public void clickMapsClusterButton(String number){
+        Locator mapsClusterButton = page.locator("//div[@class=\"leaflet-pane leaflet-marker-pane\"]//span[contains(text(),'"+number+"')]").first();
+        playwright.clickOn(mapsClusterButton);
+    }
+
+    /**
+     * click on zoom in button
+     */
+    public void clickZoomInButton(){
+        playwright.clickOn(zoomInButton);
+    }
+
+    /**
+     * click on zoom out button
+     */
+    public void clickZoomOutButton(){
+        playwright.clickOn(zoomOutButton);
     }
 }
