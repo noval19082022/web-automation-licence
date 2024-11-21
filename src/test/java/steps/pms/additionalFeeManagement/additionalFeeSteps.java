@@ -97,4 +97,66 @@ public class additionalFeeSteps {
     public void no_additional_fee_master_data_with_name(String name) {
         Assert.assertFalse(additionalFee.isBiayaTambahanExist(name));
     }
+    @Then("admin can view {int} additional fee per page")
+    public void admin_can_view_additional_fee_per_page(Integer maxList) {
+        Assert.assertEquals(additionalFee.countMasterDataList(),maxList);
+    }
+    @Then("all id using prefix {string}")
+    public void all_id_using_prefix(String prefix) {
+        for (int i=0;i<10;i++) {
+            String pf = additionalFee.getPrefixID(i);
+            Assert.assertEquals(pf,prefix);
+        }
+    }
+    @Then("tipe pembayaran {string} color is correct")
+    public void tipe_pembayaran_color_is(String type) {
+        String textColor = null, bgColor = null;
+
+        switch (type){
+            case "Tetap":
+                textColor = "rgb(0, 82, 164)";
+                bgColor = "rgb(241, 247, 255)";
+                break;
+            case "Satu Kali":
+                textColor = "rgb(140, 59, 0)";
+                bgColor = "rgb(252, 247, 227)";
+                break;
+        }
+        additionalFee.assertTipePembayaranCSS(type,"color",textColor);
+        additionalFee.assertTipePembayaranCSS(type,"background-color",bgColor);
+    }
+    @Then("waktu penentuan harga biaya {string} color is correct")
+    public void waktu_penentuan_harga_biaya_color_is(String type) {
+        String textColor = null, bgColor = null;
+
+        switch (type){
+            case "Ditentukan di Awal":
+                textColor = "rgb(1, 96, 52)";
+                bgColor = "rgb(237, 249, 244)";
+                break;
+            case "Disesuaikan dengan Tagihan":
+                textColor = "rgb(140, 59, 0)";
+                bgColor = "rgb(252, 247, 227)";
+                break;
+        }
+        additionalFee.assertWaktuPenentuanHargaCSS(type,"color",textColor);
+        additionalFee.assertWaktuPenentuanHargaCSS(type,"background-color",bgColor);
+    }
+    @Then("penyewa bisa pilih mandiri {string} color is correct")
+    public void penyewa_bisa_pilih_mandiri_color_is(String type) {
+        String textColor = null, bgColor = null;
+
+        switch (type){
+            case "Ya":
+                textColor = "rgb(1, 96, 52)";
+                bgColor = "rgb(237, 249, 244)";
+                break;
+            case "Tidak":
+                textColor = "rgb(140, 59, 0)";
+                bgColor = "rgb(252, 247, 227)";
+                break;
+        }
+        additionalFee.assertPenyewaPilihMandiriCSS(type,"color",textColor);
+        additionalFee.assertPenyewaPilihMandiriCSS(type,"background-color",bgColor);
+    }
 }
