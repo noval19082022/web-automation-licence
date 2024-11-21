@@ -10,7 +10,7 @@ Feature: SRP
     Then user can see total kost in area with "Ditemukan 899 kos-kosan di sekitar Surabaya City, Jawa Timur, Indonesia"
     When tenant can click on load more button
 
-  @SS-4389 @b
+  @SS-4389
   Scenario: [WEB]User click cluster on map and produces < 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -21,7 +21,7 @@ Feature: SRP
     Then user can see total kost in area with "Ditemukan 3 kos-kosan di sekitar Pandaan Artha Jaya, Jalan Urip Sumoharjo, Pesantren, Pandaan, Pasuruan, Jawa Timur, Indonesia"
     When user click on cluster number "Rp300rb" on maps
 
-  @SS-4388 @b
+  @SS-4388
   Scenario: [WEB]User zoom in and out map and produces < 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -32,7 +32,7 @@ Feature: SRP
     When user click on "zoom out" on maps
     Then user can see total kost in area with "Ditemukan 29 kos-kosan di sekitar Pandaan Artha Jaya, Jalan Urip Sumoharjo, Pesantren, Pandaan, Pasuruan, Jawa Timur, Indonesia"
 
-  @SS-4384 @b
+  @SS-4384
   Scenario: [WEB]User click cluster on map and produces >= 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
@@ -43,7 +43,7 @@ Feature: SRP
     Then user can see total kost in area with "Ditemukan 13 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on cluster number "Rp600rb" on maps
 
-  @SS-4387 @b
+  @SS-4387
   Scenario: [WEB]User zoom in and out map and produces >= 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
