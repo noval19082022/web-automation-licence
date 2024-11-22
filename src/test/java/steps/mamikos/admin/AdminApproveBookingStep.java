@@ -4,6 +4,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.AdminApproveBookingPO;
 import utilities.JavaHelpers;
 
@@ -60,5 +61,10 @@ public class AdminApproveBookingStep {
     @And("admin click on next button accept booking for kost add fee")
     public void admin_click_on_next_button_accept_booking_for_kost_add_fee(){
         adminApproveBooking.clickOnNextButonConfirmBooking();
+    }
+
+    @Then("admin can see {string} on confirm booking page")
+    public void admin_can_see_on_confirm_booking_page(String addfeeName){
+        Assert.assertTrue(adminApproveBooking.isAddFeeTextVisible(addfeeName), "not appears add fee");
     }
 }

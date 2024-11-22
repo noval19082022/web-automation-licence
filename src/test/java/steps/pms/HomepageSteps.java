@@ -526,5 +526,33 @@ public class HomepageSteps {
         }
     }
     //---End of Daftar Properti---//
+
+    //-------reschedule------//
+    @And("admin create contract tenant reschedule")
+    public void admin_create_contract_tenant_reschedule(){
+        homepage.clickOnTambahPenyewa();
+        homepage.clickOnBooking();
+        homepage.clickOnDropdownTipeBooking();
+        homepage.clickOnReschedule();
+        homepage.clickOnSelanjutnyaButton();
+    }
+
+    @And("admin fill checkin with {string}")
+    public void admin_fill_checkin_with(String date){
+        homepage.fillTanggalCheckInKos(date);
+    }
+
+    @Then("admin can see other cost:")
+    public void admin_can_see_other_cost(DataTable tables) {
+        for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
+            String addfeetext = row.get("addfee name");
+            Assert.assertTrue(homepage.getAddFeeisVisible(addfeetext), "is displayed");
+        }
+    }
+
+    @And("admin click on confirm save button")
+    public void admin_click_on_confirm_save_button(){
+        homepage.clickOnAgreeButton();
+    }
 }
 
