@@ -1,4 +1,4 @@
-@DOM3 @changePasswordTenant
+@SS16 @changePasswordTenant
 Feature: Change password tenant
 
   @TEST_SS-3028 @continue

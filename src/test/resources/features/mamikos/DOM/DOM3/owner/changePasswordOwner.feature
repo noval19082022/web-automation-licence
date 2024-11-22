@@ -1,4 +1,4 @@
-@DOM3 @changePasswordOwner
+@SS16 @changePasswordOwner
 Feature: Change password owner
 
   @TEST_SS-3035 @continue

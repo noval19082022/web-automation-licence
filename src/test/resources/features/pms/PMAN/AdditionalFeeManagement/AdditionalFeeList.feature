@@ -105,3 +105,22 @@ Feature: Additional Fee Master Data List
     #delete additional fee master data
     When admin delete additional fee "Penyewa Stay dan Booking"
     Then no additional fee master data with name "Penyewa Stay dan Booking"
+
+  @TEST_SS-743 @continue
+  Scenario: Max list per page
+    Given admin go to pms singgahsini
+    And admin login pms :
+      | email             | password      |
+      | pman@mamiteam.com | pmanM4m1t34m  |
+    And admin go to additional fee management menu
+    Then admin can view 10 additional fee per page
+
+  @TEST_SS-6530
+  Scenario: Master data list appearance
+    Then all id using prefix "AF"
+    And tipe pembayaran "Tetap" color is correct
+    And tipe pembayaran "Satu Kali" color is correct
+    And waktu penentuan harga biaya "Ditentukan di Awal" color is correct
+    And waktu penentuan harga biaya "Disesuaikan dengan Tagihan" color is correct
+    And penyewa bisa pilih mandiri "Ya" color is correct
+    And penyewa bisa pilih mandiri "Tidak" color is correct
