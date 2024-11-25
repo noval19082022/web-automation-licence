@@ -25,6 +25,7 @@ Feature: Riwayat Mamiprime Page
   @TEST_LIMO-605 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner only have transaction unpaid at tab dalam proses
     When owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And Owner purchase mamiprime periode "7 Hari"
     And Owner navigate to riwayat pembelian mamiprime
     Then Owner will see transaction unpaid mamiprime
@@ -32,7 +33,7 @@ Feature: Riwayat Mamiprime Page
   @TEST_LIMO-3536 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Redirection invoice unpaid mamiprime
     When Owner click the latest unpaid invoice mamiprime
-    Then owner see jenis pembayaran "MamiPrime - Kata Kunci (7 Hari)"
+    Then owner see jenis pembayaran "MamiPrime - Halaman Hasil Pencarian (7 Hari)"
 
   @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime
@@ -49,6 +50,7 @@ Feature: Riwayat Mamiprime Page
       | phone stag   | phone prod | password |
       | 082233545512 | 0          | 12345678 |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And Owner purchase mamiprime periode "7 Hari"
     Then payment owner success using ovo as payment method
     When Owner navigate to riwayat pembelian mamiprime

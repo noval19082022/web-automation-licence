@@ -37,7 +37,7 @@ public class MamiprimePeriodePO {
      * Click on periode selected
      */
     public void clickOnPeriodePrime(String pricePrime) {
-        Locator pricePrimeResult = page.getByText(pricePrime).first();
+        Locator pricePrimeResult = page.getByText(pricePrime);
         playwright.waitFor(pricePrimeResult);
         playwright.clickOn(pricePrimeResult);
     }
