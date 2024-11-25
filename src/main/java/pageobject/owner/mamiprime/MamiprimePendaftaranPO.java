@@ -14,6 +14,7 @@ public class MamiprimePendaftaranPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator nonGPInformationText;
+    Locator lanjutkanBtn;
     Locator labelPropertyFull;
     Locator propertyNamePrime;
     Locator imageFullforPrime;
@@ -30,6 +31,7 @@ public class MamiprimePendaftaranPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.nonGPInformationText = page.locator(".bg-c-alert__content-description");
+        this.lanjutkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
         this.labelPropertyFull = page.locator("//div[@class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-grey']");
         this.propertyNamePrime = page.locator(".prime-property-list__list-item-name");
         this.imageFullforPrime =  page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Room already full"));
@@ -181,5 +183,16 @@ public class MamiprimePendaftaranPO {
     public boolean isPendaftaranPrimeAppear()  {
         playwright.waitFor(registerPrimeHeader);
         return playwright.waitTillLocatorIsVisible(registerPrimeHeader);
+    }
+
+    public void selectOptionMamiprime(String mamiprimeOption) {
+        playwright.clickOn(
+                page.getByTestId("package-placement-result")
+                        .locator("div")
+                        .filter(new Locator.FilterOptions()
+                                .setHasText(mamiprimeOption))
+                        .nth(3)
+        );
+        playwright.clickOn(lanjutkanBtn);
     }
 }

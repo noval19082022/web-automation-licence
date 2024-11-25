@@ -34,6 +34,7 @@ Feature: Purchase Mamiprime
       | phone stag   | phone prod   | password   |
       | 082233545512 | 0            | 12345678  |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
     And owner wants to change "MamiPrime - Kata Kunci (7 Hari)" at detail tagihan page
     Then owner will back to pendafatarn mamiprime page
