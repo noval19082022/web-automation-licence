@@ -3,6 +3,7 @@ package steps.mamikos.admin;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
 import pageobject.admin.mamipay.bangkrupux.PrimeSuggestionPO;
 import utilities.PlaywrightHelpers;
 
@@ -61,4 +62,43 @@ public class PrimeSuggestionStep {
         prime.clickOnSavePrimeSuggestion();
     }
 
+    @And("admin click on show keyword button")
+    public void admin_click_on_show_keyword_button(){
+        prime.adminClickOnShowKeywordButton();
+    }
+
+    @And("admin click on add keyword button")
+    public void admin_click_on_add_keyword_button(){
+        prime.adminClickOnAddKeywordButton();
+    }
+
+    @And("admin click on add button")
+    public void admin_click_on_add_button(){
+        prime.adminClickOnAddButton();
+    }
+
+    @And("admin search area {string}")
+    public void admin_search_area(String area){
+        prime.searchArea(area);
+    }
+
+    @When("Admin click on delete")
+    public void Admin_click_on_delete(){
+        prime.adminClickOnDelete();
+    }
+
+    @And("admin click on dropdown all status")
+    public void Admin_click_on_dropdown_all_status(){
+        prime.adminClickOnDropdownAllStatus();
+    }
+
+    @And("admin click on filter {string}")
+    public void Admin_click_on_filter(String text){
+        prime.adminClickOnfilter(text);
+    }
+
+    @And("admin see list status mamiprime {string}")
+    public void Admin_list_status_mamiprime (String text){
+        prime.adminSeeListStatusMamiprime(text);
+    }
 }
