@@ -14,8 +14,6 @@ Feature: Purchase Mamiprime
       | phone number  |
       | 082220240418  |
       | 082120240419  |
-      | 082020240419  |
-      | 082220240419  |
 
   @TEST_LIMO-628 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Beli Paket] Owner only have apartment active
@@ -37,7 +35,6 @@ Feature: Purchase Mamiprime
     Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
     And owner wants to change "MamiPrime - Halaman Hasil Pencarian (7 Hari)" at detail tagihan page
-    Then owner will back to pendafatarn mamiprime page
 
   @TEST_LIMO-3563 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
