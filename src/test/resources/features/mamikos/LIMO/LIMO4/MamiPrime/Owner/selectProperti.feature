@@ -9,6 +9,7 @@ Feature: Select property section
       | phone stag   | phone prod | password  |
       | 082233545519 |            | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner can see information "Kos Ini Sedang Penuh" at section select periode
     And owner can see description information "Kost Automation GP Weekly Tobelo Halmahera Utara sedang penuh sehingga tidak dapat didaftarkan ke MamiPrime." at section select periode
 
@@ -25,6 +26,7 @@ Feature: Select property section
       | phone stag   | phone prod | password |
       | 082233545515 |            | 12345678 |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner can see information "Kuota Daerah Kos Penuh" at section select periode
     And owner can see description information "Saat ini, kuota MamiPrime untuk daerah Kost Sparkle Experiment Non GP Wonokromo Surabaya sudah penuh. Silakan kembali dalam beberapa waktu lagi." at section select periode
 
@@ -40,6 +42,7 @@ Feature: Select property section
       | phone stag   | phone prod | password  |
       | 082233545517 |            | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     Then owner can see "Kost AT Snow Jetis Yogyakarta" doesnt have label "Kuota Daerah Penuh" at section select property
     And owner will see Pilih Periode section will display package prices
 
@@ -50,8 +53,10 @@ Feature: Select property section
       | phone stag   | phone prod | password |
       | 082233545512 | 0          | 12345678 |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And Owner purchase mamiprime periode "7 Hari"
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     Then owner should not be able to see the text "Kost AT lagi Gedang Sari Gunung Kidul"
 
   @TEST_LIMO-3596 @WEB @AUTOMATED
@@ -60,6 +65,7 @@ Feature: Select property section
     When Owner click the latest unpaid invoice mamiprime
     Then payment owner success using ovo as payment method
     When owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     Then owner should not be able to see the text "Kost AT lagi Gedang Sari Gunung Kidul"
 
   @dataPrepareScenario @WEB @AUTOMATED
