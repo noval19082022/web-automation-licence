@@ -33,7 +33,7 @@ Feature: Riwayat Mamiprime Page
   @TEST_LIMO-3536 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Redirection invoice unpaid mamiprime
     When Owner click the latest unpaid invoice mamiprime
-    Then owner see jenis pembayaran "MamiPrime - Kata Kunci (7 Hari)"
+    Then owner see jenis pembayaran "MamiPrime - Halaman Hasil Pencarian (7 Hari)"
 
   @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime

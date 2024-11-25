@@ -38,7 +38,7 @@ public class MamiprimePendaftaranPO {
         this.informationFullforPrime = page.locator("//h4[@class='bg-c-empty-state__title']");
         this.descInformationPrime = page.locator(".bg-c-empty-state__description");
         this.listAllPeriode = page.locator(".prime-period__grid");
-        this.ubahTagihanPrime = page.locator(".prime-payment-detail__change-package");
+        this.ubahTagihanPrime = page.getByText("Ubah");
         this.ubahTagihanPrimeHeader = page.locator(".bg-c-text--heading-4");
         this.registerPrimeHeader = page.locator(".prime-package__title");
         this.btnLanjutBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Bayar"));
@@ -193,6 +193,9 @@ public class MamiprimePendaftaranPO {
                                 .setHasText(mamiprimeOption))
                         .nth(3)
         );
+    }
+
+    public void clickOnLanjutkanBtnFromMamiprimeLanding() {
         playwright.clickOn(lanjutkanBtn);
     }
 }

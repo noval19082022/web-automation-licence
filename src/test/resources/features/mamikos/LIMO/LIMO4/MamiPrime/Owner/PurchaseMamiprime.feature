@@ -36,13 +36,13 @@ Feature: Purchase Mamiprime
     And owner navigate to pendaftaran mamiprime page
     Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
-    And owner wants to change "MamiPrime - Kata Kunci (7 Hari)" at detail tagihan page
+    And owner wants to change "MamiPrime - Halaman Hasil Pencarian (7 Hari)" at detail tagihan page
     Then owner will back to pendafatarn mamiprime page
 
   @TEST_LIMO-3563 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
     When owner already choose period "14 Hari" with price "Rp308.000"
-    Then owner can see package prime selected is "MamiPrime - Kata Kunci (14 Hari)"
+    Then owner can see package prime selected is "MamiPrime - Halaman Hasil Pencarian (14 Hari)"
 
   @TEST_LIMO-625 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Pendaftaran Mamiprime] Detail Tagihan
@@ -51,7 +51,7 @@ Feature: Purchase Mamiprime
   @TEST_LIMO-3564 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] Bayar Sekarang
     When owner click bayar sekarang at detail tagihan mamiprime
-    Then owner will see that the text "MamiPrime - Kata Kunci (14 Hari)" is displayed
+    Then owner will see that the text "MamiPrime - Halaman Hasil Pencarian (14 Hari)" is displayed
 
   @TEST_LIMO-641 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Universal Invoice] Owner wants to paid prime invoice
