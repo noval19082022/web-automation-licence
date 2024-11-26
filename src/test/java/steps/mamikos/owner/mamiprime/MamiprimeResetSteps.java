@@ -15,10 +15,11 @@ public class MamiprimeResetSteps {
 
     @When("admin wants to reset mamiprime for owner with property ID {string}")
     public void admin_wants_to_reset_mamiprime_for_owner_with_property_id(String propertyID) {
-        playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.MAMIPRIME_TESTING_TOOLS);
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX + "/lpl-boost");
         mamiprimeResetPO.inputProperyID(propertyID);
-        playwright.clickOnTextButton("Reset");
-        Assert.assertTrue(playwright.isTextDisplayed("Success Reset MamiPrime"));
+        mamiprimeResetPO.clickOnSearchBtn();
+        mamiprimeResetPO.clickOnDeleteBtn();
+        mamiprimeResetPO.acceptDeletePopUp();
     }
 
 }
