@@ -48,7 +48,7 @@ Feature: Purchase Mamiprime
   @TEST_LIMO-3564 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] Bayar Sekarang
     When owner click bayar sekarang at detail tagihan mamiprime
-    Then owner will see that the text "MamiPrime - Kata Kunci (14 Hari)" is displayed
+    Then owner will see that the text "MamiPrime - Halaman Hasil Pencarian (14 Hari)" is displayed
 
   @TEST_LIMO-641 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Universal Invoice] Owner wants to paid prime invoice
@@ -56,8 +56,8 @@ Feature: Purchase Mamiprime
 
   @dataPrepareScenario @WEB @AUTOMATED
   Scenario: Reset Mamiprime
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin wants to reset mamiprime for owner with property ID "1000030951"
