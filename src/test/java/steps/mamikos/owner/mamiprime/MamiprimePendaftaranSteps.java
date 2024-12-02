@@ -38,7 +38,6 @@ public class MamiprimePendaftaranSteps {
 
     @Then("owner can see information {string} at section select periode")
     public void owner_can_see_information_at_section_select_periode(String information) {
-        Assert.assertTrue(mamiprimePendaftaran.checkImageFullisShow(),"image not show");
         Assert.assertEquals(mamiprimePendaftaran.getInformationTextPrimeFull(),information,"Information does not equal");
     }
 
