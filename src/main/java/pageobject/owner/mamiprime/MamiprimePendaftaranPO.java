@@ -17,7 +17,6 @@ public class MamiprimePendaftaranPO {
     Locator lanjutkanBtn;
     Locator labelPropertyFull;
     Locator propertyNamePrime;
-    Locator imageFullforPrime;
     Locator informationFullforPrime;
     Locator descInformationPrime;
     Locator listAllPeriode;
@@ -32,9 +31,8 @@ public class MamiprimePendaftaranPO {
         this.playwright = new PlaywrightHelpers(page);
         this.nonGPInformationText = page.locator(".bg-c-alert__content-description");
         this.lanjutkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
-        this.labelPropertyFull = page.locator("//div[@class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-grey']");
+        this.labelPropertyFull = page.locator("//div[normalize-space()='Kamar Penuh']");
         this.propertyNamePrime = page.locator(".prime-property-list__list-item-name");
-        this.imageFullforPrime =  page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Room already full"));
         this.informationFullforPrime = page.locator("//h4[@class='bg-c-empty-state__title']");
         this.descInformationPrime = page.locator(".bg-c-empty-state__description");
         this.listAllPeriode = page.locator(".prime-period__grid");
@@ -77,18 +75,8 @@ public class MamiprimePendaftaranPO {
      * @return string
      */
     public String getLabelTextFull()  {
-        playwright.waitFor(labelPropertyFull);
-        return playwright.getText(labelPropertyFull);
-    }
-
-    /**
-     * Get Text at label property prime
-     *
-     * @return string
-     */
-    public boolean checkImageFullisShow(){
-        playwright.waitFor(imageFullforPrime);
-        return playwright.waitTillLocatorIsVisible(imageFullforPrime);
+        playwright.waitFor(labelPropertyFull.first());
+        return playwright.getText(labelPropertyFull.first());
     }
 
     /**
@@ -118,7 +106,7 @@ public class MamiprimePendaftaranPO {
      */
     public boolean isLabelFullPrimeisAppear()  {
         playwright.waitFor(propertyNamePrime);
-       return playwright.waitTillLocatorIsVisible(labelPropertyFull);
+       return playwright.waitTillLocatorIsVisible(labelPropertyFull.first());
     }
 
     /**

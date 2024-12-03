@@ -37,11 +37,12 @@ Feature: Riwayat Mamiprime Page
 
   @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin wants to reset mamiprime for owner with property ID "1000030951"
+#    And admin wants to reset mamiprime for owner with property ID "1000030951"
+    And admin mamipay wants to reset mamiprime srp for owner with property ID "1000030951"
 
   @TEST_LIMO-3537 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner have transaction paid and active prime at tab selesai
@@ -58,8 +59,9 @@ Feature: Riwayat Mamiprime Page
 
   @testDataPrepared @WEB @AUTOMATED
   Scenario: Reset Mamiprime
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-    And admin wants to reset mamiprime for owner with property ID "1000030951"
+#    And admin wants to reset mamiprime for owner with property ID "1000030951"
+    And admin mamipay wants to reset mamiprime srp for owner with property ID "1000030951"

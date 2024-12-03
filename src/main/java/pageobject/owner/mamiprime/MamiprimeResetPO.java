@@ -12,6 +12,8 @@ public class MamiprimeResetPO {
     Locator searchBtn;
     Locator deleteBtn;
     Locator yesBtn;
+    Locator rooTypeIdPlaceHolder;
+    Locator resetBtnPrimeSrp;
 
     public MamiprimeResetPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
@@ -19,10 +21,12 @@ public class MamiprimeResetPO {
         this.searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         this.deleteBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
         this.yesBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Yes"));
+        this.rooTypeIdPlaceHolder = page.getByPlaceholder("Room Type ID (Designer ID)");
+        this.resetBtnPrimeSrp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).first();
     }
 
     /**
-     * Input property ID to reset mamiprime
+     * Input property ID to reset mamiprime on bangker
      */
     public void inputProperyID(String propertyID) {
         playwright.clickLocatorAndTypeKeyboard(propertyIDInput, propertyID);
@@ -38,5 +42,14 @@ public class MamiprimeResetPO {
 
     public void acceptDeletePopUp() {
         playwright.clickOn(yesBtn);
+    }
+
+    /**
+     * Input property reset mamiprime on mamipay
+     *
+     */
+    public void resetMamiprimeSrp(String propertyId) {
+        playwright.clickLocatorAndTypeKeyboard(rooTypeIdPlaceHolder.first(), propertyId);
+        playwright.clickOn(resetBtnPrimeSrp);
     }
 }

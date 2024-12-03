@@ -22,4 +22,10 @@ public class MamiprimeResetSteps {
         mamiprimeResetPO.acceptDeletePopUp();
     }
 
+    @When("admin mamipay wants to reset mamiprime srp for owner with property ID {string}")
+    public void admin__mamipay_wants_to_reset_mamiprime_for_owner_with_property_id(String propertyID) {
+        playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/testing-tools/mamiprime");
+        mamiprimeResetPO.resetMamiprimeSrp(propertyID);
+    }
+
 }

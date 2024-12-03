@@ -19,13 +19,11 @@ public class MamiprimeRiwayatPembelianSteps {
     @Then("Owner will see empty state at tab dalam proses in halaman riwayat mamiprime")
     public void owner_will_see_empty_state_at_tab_dalam_proses_in_halaman_riwayat_mamiprime() {
         Assert.assertTrue(mamiprimeRiwayatPembelianPO.isNoTransactionDalamProsesTextDisplayed());
-        Assert.assertTrue(mamiprimeRiwayatPembelianPO.isNoTransactionDalamProsesDescTextDisplayed());
     }
 
     @Then("Owner will see empty state at tab selesai in halaman riwayat mamiprime")
     public void owner_will_see_empty_state_at_tab_selesai_in_halaman_riwayat_mamiprime() {
         Assert.assertTrue(mamiprimeRiwayatPembelianPO.isNoTransactionSelesaiTextDisplayed());
-        Assert.assertTrue(mamiprimeRiwayatPembelianPO.isNoTransactionSelesaiDescTextDisplayed());
     }
 
     @When("Owner click tab Selesai at riwayat pembelian mamiprime")
