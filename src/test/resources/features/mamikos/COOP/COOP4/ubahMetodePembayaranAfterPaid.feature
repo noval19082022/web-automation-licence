@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Click Button Ubah Metode Pembayaran After Paid
 
   Scenario: Admin Batalkan Contract

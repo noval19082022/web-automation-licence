@@ -36,6 +36,8 @@ public class DisbursementPO {
     private Locator emptyStateTitle;
     private Locator emptyStateSubtitle;
     private Locator propertyNameText;
+    private Locator disbursementPeriodSelect;
+    private Locator cancelAutoTransferButton;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -100,6 +102,7 @@ public class DisbursementPO {
         emptyStateTitle = page.getByText("Data Tidak Ditemukan", new Page.GetByTextOptions().setExact(true));
         emptyStateSubtitle = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan tidak sesuai.");
         propertyNameText = page.locator(".ss-table tbody tr td:nth-of-type(2)");
+        disbursementPeriodSelect = page.locator(".bg-c-select__trigger-text");
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -583,5 +586,27 @@ public class DisbursementPO {
      */
     public String getPropertyNameinList() {
         return playwright.getText(propertyNameText);
+    }
+
+    /**
+     * change periode disbursement
+     * @param period
+     */
+    public void selectDisbursementPeriod(String period) {
+        Locator periode = page.getByText(period).last();
+
+        if(!playwright.getText(disbursementPeriodSelect).contains(period)) {
+            playwright.clickOn(disbursementPeriodSelect);
+            playwright.clickOn(periode);
+        }
+    }
+
+    /**
+     * Verify button cancel auto transfer button
+     * @return boolean
+     */
+    public boolean isButtonCancelAutoTransferVisible() {
+        cancelAutoTransferButton = page.getByText("Cancel Auto Transfer");
+        return playwright.isLocatorVisibleAfterLoad(cancelAutoTransferButton,5000.0);
     }
 }

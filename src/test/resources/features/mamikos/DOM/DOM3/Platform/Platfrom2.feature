@@ -1,7 +1,7 @@
-@DOM3 @platfrom
+@SS16 @platfrom
 Feature: [Test-Execution][DOM] Web - Platform
   
-  @TEST_SS-5137 @Automated @DOM3 @web-covered
+  @TEST_SS-5137 @Automated @web-covered
   Scenario: [Test][Admin][SanJunipero] Slug name already exist
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -14,19 +14,19 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkrupux save Sanjunipero on create new san junipero
     Then admin verify see text "The slug has already been taken."
 
-  @TEST_SS-5138 @Automated @DOM3 @web-covered
+  @TEST_SS-5138 @Automated @web-covered
   Scenario: [Web][Landing Kos][Popular city] Search Time Period
     Given user go to mamikos homepage
     When user open Popular Area in Yogyakarta
     Then user should redirect to link that contains "/kost/kost-jogja-murah"
 
-  @TEST_SS-4717 @Automated @DOM3 @web-covered
+  @TEST_SS-4717 @Automated @web-covered
   Scenario: [Web][Landing Kos][Popular campus] Search Kost Type
     Given user go to mamikos homepage
     When  user open Around University in UNDIP
     Then user should redirect to link that contains "/kost/kost-dekat-undip-semarang-murah"
 
-  @TEST_SS-3001 @TESTSET_UG-4894 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @TEST_SS-3001 @TESTSET_UG-4894 @TESTSET_PF-1792 @Automated @web-covered
   Scenario: [Web Owner][Bell Notification] Bell icon - lihat semua clicked
     Given user go to mamikos homepage
     When user login as owner:
@@ -38,7 +38,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And owner wants to see all notification
     Then user redirected to "/ownerpage/notification"
 
-  @TEST_SS-3007 @Automated @DOM3 @web-covered
+  @TEST_SS-3007 @Automated @web-covered
   Scenario: [Test][Admin][SanJunipero] User able to enable certain landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -52,7 +52,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And admin bangkerupux preview action kost on sanjunipero page
     Then admin can see kost list is more than 0
 
-  @TEST_SS-3008 @TEST_DOM-313 @Automated @DOM3 @web-covered
+  @TEST_SS-3008 @TEST_DOM-313 @Automated @web-covered
   Scenario: [Tenant][Promo page] Check pagination in promo page
     Given user navigates to promo mamikos
   ## this step is comment because page https://promo.mamikos.com/ is empty
@@ -63,7 +63,7 @@ Feature: [Test-Execution][DOM] Web - Platform
 #    When user click page index "2"
 #    Then promo page "2" will be opened
 
-  @TEST_SS-3010 @TESTSET_PF-1393 @Automated @DOM3 @web-covered
+  @TEST_SS-3010 @TESTSET_PF-1393 @Automated @web-covered
   Scenario Outline: [WEB Tenant][Register] error message "Penulisan alamat email salah"
     Given user go to mamikos homepage
     When user want to register as tenant
@@ -74,7 +74,7 @@ Feature: [Test-Execution][DOM] Web - Platform
       | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
       | draft@xyz.com.net | Mohon masukkan email yang valid                |
 
-  @TEST_SS-3012 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  @TEST_SS-3012 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @web-covered
   Scenario: [Test][Filter][Landing Page][SanJunipero] Check on Gender filter data kost in the landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -87,7 +87,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user will see that the text "Putra" is displayed
     Then user will see that the text "Putri" is displayed
 
-  @TEST_SS-3013 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @DOM3 @web-covered
+  @TEST_SS-3013 @TESTSET_MT-1726 @TESTSET_UG-6247 @TESTSET_PF-1952 @TESTSET_PF-1400 @Automated @web-covered
   Scenario: [Test][Filter][Landing Page][SanJunipero] Check on filter data kost in the landing page
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -99,7 +99,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Then user will see that the text "Semua Area" is displayed
     Then user will see that the text "Paling direkomendasikan" is displayed
 
-  @TEST_SS-3016 @TESTSET_PF-1393 @TESTSET_PF-1951 @Automated @DOM3 @web-covered
+  @TEST_SS-3016 @TESTSET_PF-1393 @TESTSET_PF-1951 @Automated @web-covered
   Scenario: [WEB Tenant][Register] error message "Nomor handphone harus diawali dengan 08."
     Given user go to mamikos homepage
     When user want to register as tenant
@@ -134,7 +134,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
-  @TEST_SS-3022 @Automated @DOM3 @web-covered
+  @TEST_SS-3022 @Automated @web-covered
   Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
@@ -144,7 +144,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     And user want to see more detail kost location
     Then user will see login pop up
 
-  @TEST_SS-3023 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
+  @TEST_SS-3023 @TESTSET_PF-1792 @Automated @web-covered
   Scenario Outline: [Tenant][Password - Reg tenant]passowrd with symbol&numeric
     Given user go to mamikos homepage
     When user want to register as tenant

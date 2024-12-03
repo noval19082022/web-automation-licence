@@ -9,6 +9,7 @@
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
       #create tambahan pendapatan
       When admin add new tambahan pendapatan
@@ -37,6 +38,7 @@
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
       When admin click riwayat transfer pendapatan
       Then admin should redirect to riwayat transfer pendapatan section
@@ -48,6 +50,7 @@
         | email             | password      |
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
       Then button refresh should be visible
       #Approve from detail disbursement
@@ -57,11 +60,13 @@
       Then button refresh should be visible
       #Approve from list disbursement
       When admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin search disbursement "Khusus Automation"
       And admin "approve" disbursement from list
       And admin go to detail transfer
       Then button refresh should be invisible
       When admin go to Disbursement menu
+      And admin select disbursement period "Periode 1"
       And admin search disbursement "Khusus Automation"
       And admin "unapprove" disbursement from list
       And admin go to detail transfer
@@ -75,5 +80,6 @@
         | pman@mamiteam.com | pmanM4m1t34m  |
       And admin go to Disbursement menu
       And admin clicks on next month in calendar
+      And admin select disbursement period "Periode 1"
       And admin search disbursement "Khusus Automation"
       Then empty state in Disbursement menu is displayed

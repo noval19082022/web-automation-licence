@@ -117,4 +117,12 @@ public class AdminApproveBookingPO {
         playwright.clickOn(nextConfirmBooking);
         playwright.clickOn(confirmBooking);
     }
+
+    /**
+     * validate add fee on confirm booking admin page
+     */
+    public boolean isAddFeeTextVisible(String addfeeName){
+        Locator addFeeName = page.locator("//input[@value='"+addfeeName+"']");
+        return playwright.waitTillLocatorIsVisible(addFeeName);
+    }
 }

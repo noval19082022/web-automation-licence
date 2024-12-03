@@ -18,6 +18,12 @@ public class MamiprimePendaftaranSteps {
         mamiprimePendaftaran.navigatesToPendaftaranMamiprime();
     }
 
+    @When("owner select option mamiprime {string} from mamiprime landing")
+    public void  owner_navigate_to_pendaftaran_mamiprime_page_and_select_mamiprime_srp(String mamiprimeOption){
+        mamiprimePendaftaran.selectOptionMamiprime(mamiprimeOption);
+        mamiprimePendaftaran.clickOnLanjutkanBtnFromMamiprimeLanding();
+    }
+
     @Then("owner will see additional information related to GP")
     public void owner_will_see_additional_information_related_to_gp(){
         String expected = "Anda belum memakai GoldPlus. Pemakaian MamiPrime bersama GoldPlus akan membawa hasil yang optimal.";
@@ -32,7 +38,6 @@ public class MamiprimePendaftaranSteps {
 
     @Then("owner can see information {string} at section select periode")
     public void owner_can_see_information_at_section_select_periode(String information) {
-        Assert.assertTrue(mamiprimePendaftaran.checkImageFullisShow(),"image not show");
         Assert.assertEquals(mamiprimePendaftaran.getInformationTextPrimeFull(),information,"Information does not equal");
     }
 
@@ -56,9 +61,8 @@ public class MamiprimePendaftaranSteps {
     @When("owner wants to change {string} at detail tagihan page")
     public void owner_wants_to_change_at_detail_tagihan_page(String packgaePrime) {
         Assert.assertTrue(mamiprimePendaftaran.isDetailTagihanAppear(),"detail tagihan page doesnt appear");
-       Assert.assertEquals(mamiprimePendaftaran.getPackagePrimeDetailTagihan(packgaePrime),packgaePrime,"package prime doesnt equal");
-       mamiprimePendaftaran.clickOnUbahTagihanPrime();
-
+        Assert.assertEquals(mamiprimePendaftaran.getPackagePrimeDetailTagihan(packgaePrime),packgaePrime,"package prime doesnt equal");
+        mamiprimePendaftaran.clickOnUbahTagihanPrime();
     }
 
     @Then("owner will back to pendafatarn mamiprime page")

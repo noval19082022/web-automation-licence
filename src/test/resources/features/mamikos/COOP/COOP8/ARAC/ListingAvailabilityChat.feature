@@ -8,10 +8,8 @@
       When user login as tenant via phone number:
         | phone stag     |  phone prod     | password     |
         | 0891111020199  |  0891111020199  | mamikosqa123 |
-      And tenant redirect to kost details:
-        | kost path stag                                                                               | kost path prod               |
-        | kost-kabupaten-badung-kost-campur-eksklusif-kost-general-irvi-automation-abiansemal-badung-1 | Kos DC BAR Automation Tipe A |
-      And user click chat in kos detail
+      And user click on chat button in top bar tenant home page
+      And user click "Kost General Irvi Automation Abiansemal Badung"
       And user click Ajukan Sewa "today" from chat room
       Then user will open new tab and go to Booking form
 

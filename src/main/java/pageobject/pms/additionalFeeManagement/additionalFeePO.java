@@ -9,6 +9,7 @@ public class additionalFeePO {
     private Page page;
     PlaywrightHelpers playwright;
 
+    private Locator idBiayaText;
     private Locator namaBiaya;
     private Locator tipePembayaran;
     private Locator satuanBiaya;
@@ -24,6 +25,7 @@ public class additionalFeePO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
+        idBiayaText = page.locator("tr td:nth-of-type(1)");
         namaBiaya = page.locator("tr td:nth-of-type(2)");
         tipePembayaran = page.locator("tr td:nth-of-type(3) div");
         satuanBiaya = page.locator("tr td:nth-of-type(4) span:nth-child(2)");
@@ -149,12 +151,32 @@ public class additionalFeePO {
     }
 
     /**
-     * Assert Waktu Penentuan Harga CSS
+     * Assert Tipe Pembayaran color
+     * @param type tipe pembayaran name
      * @param property css property
+     * @param value css value
+     */
+    public void assertTipePembayaranCSS(String type,String property, String value) {
+        playwright.assertHaveCss(tipePembayaran.filter(new Locator.FilterOptions().setHasText(type)).first(),property,value);
+    }
+
+    /**
+     * Assert Waktu Penentuan Harga CSS
+     * @param property css properties
      * @param value value css property
      */
     public void assertWaktuPenentuanHargaCSS(String property, String value) {
         playwright.assertHaveCss(waktuPenentuanHarga.first(),property,value);
+    }
+
+    /**
+     * Assert waktu penentuan harga color
+     * @param type waktu penentuan harga name
+     * @param property css properties
+     * @param value css value
+     */
+    public void assertWaktuPenentuanHargaCSS(String type,String property, String value) {
+        playwright.assertHaveCss(waktuPenentuanHarga.filter(new Locator.FilterOptions().setHasText(type)).first(),property,value);
     }
 
     /**
@@ -164,5 +186,31 @@ public class additionalFeePO {
      */
     public void assertPenyewaPilihMandiriCSS(String property, String value) {
         playwright.assertHaveCss(penyewaBisaPilihMandiri.first(),property,value);
+    }
+
+    /**
+     * Assert penyewa pilih mandiri color
+     * @param type penyewa pilih mandiri name
+     * @param property css properties
+     * @param value css value
+     */
+    public void assertPenyewaPilihMandiriCSS(String type,String property, String value) {
+        playwright.assertHaveCss(penyewaBisaPilihMandiri.filter(new Locator.FilterOptions().setHasText(type)).first(),property,value);
+    }
+
+    /**
+     * count master data list displayed
+     * @return integer
+     */
+    public Integer countMasterDataList() {
+        return playwright.countLocator(namaBiaya);
+    }
+
+    /**
+     * Get ID
+     * @return String
+     */
+    public String getPrefixID(int i) {
+        return playwright.getText(idBiayaText.nth(i)).substring(0,2);
     }
 }

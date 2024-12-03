@@ -1,5 +1,4 @@
-@DOM3 @verificationTenant
-
+@SS16 @verificationTenant
 Feature: Verification Tenant
 
   @TEST_SS-2949

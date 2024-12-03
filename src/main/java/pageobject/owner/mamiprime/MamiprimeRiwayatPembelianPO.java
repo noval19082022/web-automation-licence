@@ -42,7 +42,7 @@ public class MamiprimeRiwayatPembelianPO {
      * @return Belum Ada Transaksi
      */
     public boolean isNoTransactionDalamProsesTextDisplayed(){
-        return noTransactionDalamProsesText.isVisible();
+        return playwright.waitTillLocatorIsVisible(noTransactionDalamProsesText);
     }
 
     /**
@@ -60,7 +60,7 @@ public class MamiprimeRiwayatPembelianPO {
      * @return Belum Ada Transaksi
      */
     public boolean isNoTransactionSelesaiTextDisplayed(){
-        return noTransactionSelesaiText.isVisible();
+        return playwright.waitTillLocatorIsVisible(noTransactionSelesaiText);
     }
 
     /**

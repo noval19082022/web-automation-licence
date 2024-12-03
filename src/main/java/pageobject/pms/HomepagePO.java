@@ -141,6 +141,10 @@ public class HomepagePO {
     //-------Billing tracker--------//
     Locator billingTrackerMenu;
 
+    //-------reschedule-------//
+    Locator rescheduleButton;
+    Locator agreeButton;
+
     public HomepagePO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -208,6 +212,10 @@ public class HomepagePO {
         notestext = page.getByPlaceholder("Isi catatan di sini");
         notesCountertext = page.locator(".bg-c-textarea__counter");
         contractIdErrorMessage = page.locator("//div[@label=\"Contract ID\"]//*[@class=\"bg-c-field__message\"]");
+
+        //---reschedule----//
+        rescheduleButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Reschedule"));
+        agreeButton = page.locator("//button[contains(.,'Setuju')]");
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -1258,5 +1266,31 @@ public class HomepagePO {
      */
     public void notesCounterVisible(){
         playwright.getText(notesCountertext);
+    }
+
+    //------------reschedule----------//
+
+    /**
+     * click reshedule button
+     */
+    public void clickOnReschedule(){
+        playwright.clickOn(rescheduleButton);
+    }
+
+    /**
+     * validate add fee visible on reschedule form
+     * @param text
+     * @return text
+     */
+    public boolean getAddFeeisVisible(String text){
+        Locator addFeeName = page.locator("//input[@id=\"additionalPriceName1_txt\"]");
+        return playwright.waitTillLocatorIsVisible(addFeeName);
+    }
+
+    /**
+     * click Setuju button on save confirmation popup
+     */
+    public void clickOnAgreeButton(){
+        playwright.clickOn(agreeButton);
     }
 }

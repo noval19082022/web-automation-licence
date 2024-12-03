@@ -1,4 +1,4 @@
-@COOP-5843 @COOP4
+@COOP-5843 @SS15
 Feature: Voucher Suggestion
 
   @TEST_SS-4280

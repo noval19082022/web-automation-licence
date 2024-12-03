@@ -32,6 +32,7 @@ public class RoleManagementPO {
     Locator toast;
     Locator roleNameErrorMessage;
     Locator permissionChecked;
+    Locator permissionName;
     //End Tambah Role
 
     //Assign Member
@@ -311,6 +312,17 @@ public class RoleManagementPO {
      */
     public void clickActionButton() {
         playwright.clickOn(actionButton.first());
+    }
+
+    /**
+     * Verify is permission name exist in permission list
+     * @param permission
+     * @return boolean
+     */
+    public boolean isPermissionExist(String permission) {
+        permissionName = page.getByText(permission);
+
+        return playwright.isLocatorVisibleAfterLoad(permissionName,5000.0);
     }
 }
 

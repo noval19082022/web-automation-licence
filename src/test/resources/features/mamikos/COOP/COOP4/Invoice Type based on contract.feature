@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Invoice Type based on contract
 
   Scenario: Admin Batalkan Contract

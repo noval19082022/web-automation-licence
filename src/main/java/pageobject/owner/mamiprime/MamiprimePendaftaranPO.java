@@ -14,9 +14,9 @@ public class MamiprimePendaftaranPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator nonGPInformationText;
+    Locator lanjutkanBtn;
     Locator labelPropertyFull;
     Locator propertyNamePrime;
-    Locator imageFullforPrime;
     Locator informationFullforPrime;
     Locator descInformationPrime;
     Locator listAllPeriode;
@@ -30,13 +30,13 @@ public class MamiprimePendaftaranPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.nonGPInformationText = page.locator(".bg-c-alert__content-description");
-        this.labelPropertyFull = page.locator("//div[@class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-grey']");
+        this.lanjutkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        this.labelPropertyFull = page.locator("//div[normalize-space()='Kamar Penuh']");
         this.propertyNamePrime = page.locator(".prime-property-list__list-item-name");
-        this.imageFullforPrime =  page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Room already full"));
         this.informationFullforPrime = page.locator("//h4[@class='bg-c-empty-state__title']");
         this.descInformationPrime = page.locator(".bg-c-empty-state__description");
         this.listAllPeriode = page.locator(".prime-period__grid");
-        this.ubahTagihanPrime = page.locator(".prime-payment-detail__change-package");
+        this.ubahTagihanPrime = page.getByText("Ubah");
         this.ubahTagihanPrimeHeader = page.locator(".bg-c-text--heading-4");
         this.registerPrimeHeader = page.locator(".prime-package__title");
         this.btnLanjutBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Bayar"));
@@ -75,18 +75,8 @@ public class MamiprimePendaftaranPO {
      * @return string
      */
     public String getLabelTextFull()  {
-        playwright.waitFor(labelPropertyFull);
-        return playwright.getText(labelPropertyFull);
-    }
-
-    /**
-     * Get Text at label property prime
-     *
-     * @return string
-     */
-    public boolean checkImageFullisShow(){
-        playwright.waitFor(imageFullforPrime);
-        return playwright.waitTillLocatorIsVisible(imageFullforPrime);
+        playwright.waitFor(labelPropertyFull.first());
+        return playwright.getText(labelPropertyFull.first());
     }
 
     /**
@@ -116,7 +106,7 @@ public class MamiprimePendaftaranPO {
      */
     public boolean isLabelFullPrimeisAppear()  {
         playwright.waitFor(propertyNamePrime);
-       return playwright.waitTillLocatorIsVisible(labelPropertyFull);
+       return playwright.waitTillLocatorIsVisible(labelPropertyFull.first());
     }
 
     /**
@@ -181,5 +171,19 @@ public class MamiprimePendaftaranPO {
     public boolean isPendaftaranPrimeAppear()  {
         playwright.waitFor(registerPrimeHeader);
         return playwright.waitTillLocatorIsVisible(registerPrimeHeader);
+    }
+
+    public void selectOptionMamiprime(String mamiprimeOption) {
+        playwright.clickOn(
+                page.getByTestId("package-placement-result")
+                        .locator("div")
+                        .filter(new Locator.FilterOptions()
+                                .setHasText(mamiprimeOption))
+                        .nth(3)
+        );
+    }
+
+    public void clickOnLanjutkanBtnFromMamiprimeLanding() {
+        playwright.clickOn(lanjutkanBtn);
     }
 }

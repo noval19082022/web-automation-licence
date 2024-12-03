@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Kost Review
 
   @TEST_SS-4271 @continue

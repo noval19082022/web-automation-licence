@@ -8,11 +8,12 @@ Feature: Detail Pemesanan
       | phone stag   | phone prod   | password  |
       | 083355251030 | 083355251030 | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
-    Then owner will see additional information related to GP
+#    Then owner will see additional information related to GP
+  Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
 
   @TEST_LIMO-651 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Select Period] Check content at section select periode of prime
-    Then owner will see that the text "Kos yang terverifikasi akan muncul di sini." is displayed
+    Then owner will see that the text "Kos terverifikasi yang akan ditayangkan" is displayed
     Then owner will see that the text "Lama tayang kos di layanan MamiPrime." is displayed
 
   @TEST_LIMO-3577 @continue @WEB @AUTOMATED

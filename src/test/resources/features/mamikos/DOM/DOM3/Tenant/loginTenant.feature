@@ -1,4 +1,4 @@
-@regression @loginTenant @DOM3 @essentialTest @LOGIN_SEARCH_MIGRATE
+@regression @loginTenant @SS16 @essentialTest @LOGIN_SEARCH_MIGRATE
 Feature: Tenant - Login
 
   @loginByFB @TEST_SS-2977
@@ -9,7 +9,7 @@ Feature: Tenant - Login
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
     Then user tenant profile picture is shown
 
-  @TEST_SS-3052 @Automated @DOM3 @web-covered @noFillPassword
+  @TEST_SS-3052 @Automated @web-covered @noFillPassword
   Scenario: [Login Tenant] No fill password
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete password fill
@@ -17,7 +17,7 @@ Feature: Tenant - Login
       | 089220221220 | 08100000622 | qwerty123 |
     Then user verify login error messages "Password harus diisi."
 
-  @TEST_SS-3053 @Automated @DOM3 @web-covered @wrongNumber
+  @TEST_SS-3053 @Automated @web-covered @wrongNumber
   Scenario: [Login Tenant] Wrong number
     Given user go to mamikos homepage
     When user clicks on Enter button as tenant delete phone number fill
@@ -57,7 +57,7 @@ Feature: Tenant - Login
     And user clicks on simpan password button
     Then user see successfully changed password "Password berhasil diubah"
 
-#  @popUpClose @TEST_COOP-5356 @Automated @DOM3 @web-covered
+#  @popUpClose @TEST_COOP-5356 @Automated @web-covered
 #  Scenario: Pop up login - Pop up close
 #    Given user go to mamikos homepage
 #    When user masuk sebagai
@@ -89,7 +89,7 @@ Feature: Tenant - Login
     When user want to see more detail kost location
     Then user see login pop up in favorite page
 
-  @TEST_SS-3049 @DOM3
+  @TEST_SS-3049
   Scenario: [Setelan Akun][Profile Picture]Login - Profile Picture is null
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -98,7 +98,7 @@ Feature: Tenant - Login
     And user navigate to kost saya page
     Then user tenant verify profil picture is null
 
-  @TEST_SS-5153 @DOM3
+  @TEST_SS-5153
   Scenario: [Setelan Akun][Profile Picture]Login Tenant - Profile Picture is show
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -107,7 +107,7 @@ Feature: Tenant - Login
     And user navigate to kost saya page
     Then user tenant profile picture is shown
 
-  @TEST_SS-3051 @DOM3
+  @TEST_SS-3051
   Scenario: [Login Tenant] using Wrong phone number alfabet
     Given user go to mamikos homepage
     When user login with alfabet phone number

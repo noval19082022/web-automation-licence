@@ -1,5 +1,4 @@
-@DOM3 @forgotPasswordTenant
-
+@SS16 @forgotPasswordTenant
 Feature: Tenant Forgot Password
 
   @forgotPasswordTenantViaSms @TEST_SS-2926
@@ -20,7 +19,7 @@ Feature: Tenant Forgot Password
 #    And user choose verification by WA
 #    Then user verify otp form appear on page send OTP "Nomor handphone ini telah terdaftar sebagai akun pencari kos di Mamikos"
 
-  @TEST_SS-2970 @Automated @DOM3 @web-covered
+  @TEST_SS-2970 @Automated @web-covered
   Scenario: [Web Tenant][Forgot Password - Phone Number]Error Message - Phone number is registered
     Given user go to mamikos homepage
     When user click on button masuk pencari kos

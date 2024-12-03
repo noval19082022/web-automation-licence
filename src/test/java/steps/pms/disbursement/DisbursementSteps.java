@@ -198,4 +198,16 @@ public class DisbursementSteps {
     public void show_only_disbursment_for(String name) {
         Assert.assertEquals(disbursement.getPropertyNameinList(),name);
     }
+    @When("admin select disbursement period {string}")
+    public void admin_select_disbursement_period(String period) {
+        disbursement.selectDisbursementPeriod(period);
+    }
+    @Then("cancel auto transfer disbursement button is visible")
+    public void cancel_auto_transfer_disbursement_button_is_visible() {
+        Assert.assertTrue(disbursement.isButtonCancelAutoTransferVisible());
+    }
+    @Then("cancel auto transfer disbursement button is not visible")
+    public void cancel_auto_transfer_disbursement_button_is_not_visible() {
+        Assert.assertFalse(disbursement.isButtonCancelAutoTransferVisible());
+    }
 }

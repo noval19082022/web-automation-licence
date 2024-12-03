@@ -236,5 +236,13 @@ public class RoleManagementSteps {
             Assert.assertEquals(role.getActionButtonName(button.get(i)),button.get(i));
         }
     }
+    @Then("permission {string} should exist in permission list")
+    public void permission_should_exist_in_permission_list(String permission) {
+        Assert.assertTrue(role.isPermissionExist(permission));
+    }
+    @When("admin atur member role")
+    public void admin_atur_member_role(){
+        role.assignMember();
+    }
 }
 

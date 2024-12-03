@@ -14,8 +14,6 @@ Feature: Purchase Mamiprime
       | phone number  |
       | 082220240418  |
       | 082120240419  |
-      | 082020240419  |
-      | 082220240419  |
 
   @TEST_LIMO-628 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Beli Paket] Owner only have apartment active
@@ -34,14 +32,14 @@ Feature: Purchase Mamiprime
       | phone stag   | phone prod   | password   |
       | 082233545512 | 0            | 12345678  |
     And owner navigate to pendaftaran mamiprime page
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
-    And owner wants to change "MamiPrime - Kata Kunci (7 Hari)" at detail tagihan page
-    Then owner will back to pendafatarn mamiprime page
+    And owner wants to change "MamiPrime - Halaman Hasil Pencarian (7 Hari)" at detail tagihan page
 
   @TEST_LIMO-3563 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] set different period after click ubah
     When owner already choose period "14 Hari" with price "Rp308.000"
-    Then owner can see package prime selected is "MamiPrime - Kata Kunci (14 Hari)"
+    Then owner can see package prime selected is "MamiPrime - Halaman Hasil Pencarian (14 Hari)"
 
   @TEST_LIMO-625 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Pendaftaran Mamiprime] Detail Tagihan
@@ -50,7 +48,7 @@ Feature: Purchase Mamiprime
   @TEST_LIMO-3564 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] Bayar Sekarang
     When owner click bayar sekarang at detail tagihan mamiprime
-    Then owner will see that the text "MamiPrime - Kata Kunci (14 Hari)" is displayed
+    Then owner will see that the text "MamiPrime - Halaman Hasil Pencarian (14 Hari)" is displayed
 
   @TEST_LIMO-641 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Universal Invoice] Owner wants to paid prime invoice
@@ -58,8 +56,8 @@ Feature: Purchase Mamiprime
 
   @dataPrepareScenario @WEB @AUTOMATED
   Scenario: Reset Mamiprime
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin wants to reset mamiprime for owner with property ID "1000030951"

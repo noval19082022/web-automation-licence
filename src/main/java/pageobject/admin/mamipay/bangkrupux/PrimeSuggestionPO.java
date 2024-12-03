@@ -1,7 +1,10 @@
 package pageobject.admin.mamipay.bangkrupux;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
@@ -18,6 +21,13 @@ public class PrimeSuggestionPO {
     Locator createButton;
     Locator editPrimeSuggestion;
     Locator savePrimeSuggestion;
+    Locator showKeywordButton;
+    Locator addKeywordButton;
+    Locator addButton;
+    Locator areaName;
+    Locator searchBtn;
+    Locator deleteButton;
+    Locator dropdownAllStatus;
 
 
     public PrimeSuggestionPO(Page page) {
@@ -26,13 +36,21 @@ public class PrimeSuggestionPO {
 
         addKosButton = page.locator("//a[@class='btn btn-primary btn-sm']");
         inputKosName = page.locator("//input[@placeholder='Keyword']");
-        searchButton = page.locator("//button[normalize-space()='Search']");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         selectButton = page.locator("//a[normalize-space()='Select']");
         previewButton = page.locator("//button[normalize-space()='Preview']");
         createButton = page.locator("//button[normalize-space()='Create']");
         editPrimeSuggestion = page.locator("//a[@class=\"btn btn-default btn-sm\"]/following::a[@class=\"btn btn-default btn-xs\"][2]");
         savePrimeSuggestion = page.locator("//button[normalize-space()='Save']");
+        showKeywordButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("102 Kos XDR Rajeg Tangerang Rajeg Tangerang ID: 1000038887 Song ID: 91566437 active  Show Keywords 11 Nov 2024 15:54:08 by: Playwright Automation  Edit")).getByRole(AriaRole.LINK).first();
+        addKeywordButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Keyword"));
+        addButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("tangerang  Add")).getByRole(AriaRole.BUTTON);
+        areaName = page.getByPlaceholder("Search Keyword");
+        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        deleteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
+        dropdownAllStatus = page.getByRole(AriaRole.COMBOBOX);
     }
+
     /**
      * input kost name
      */
@@ -103,5 +121,64 @@ public class PrimeSuggestionPO {
      */
     public void clickOnSavePrimeSuggestion(){
         playwright.clickOn(savePrimeSuggestion);
+    }
+
+    /**
+     * click on show keyword button
+     */
+    public void adminClickOnShowKeywordButton(){
+        playwright.clickOn(showKeywordButton);
+    }
+
+    /**
+     * click on add keyword button
+     */
+    public void adminClickOnAddKeywordButton(){
+        playwright.clickOn(addKeywordButton);
+    }
+
+    /**
+     * click on add keyword button
+     */
+    public void adminClickOnAddButton(){
+        playwright.clickOn(addButton);
+    }
+
+    /**
+     * Search area on search bar
+     * @param area
+     */
+    public void searchArea(String area) {
+        playwright.fill(areaName, area);
+        playwright.clickOn(searchBtn);
+    }
+
+    /**
+     * click on delete button
+     */
+    public void adminClickOnDelete(){
+        playwright.clickOn(deleteButton);
+    }
+
+    /**
+     * click on dropdown
+     */
+    public void adminClickOnDropdownAllStatus(){
+        playwright.clickOn(dropdownAllStatus);
+    }
+
+    /**
+     * select filter
+     */
+    public void adminClickOnfilter(String text){
+        page.getByRole(AriaRole.COMBOBOX).selectOption(text);
+    }
+
+    /**
+     * get status mamiprime
+     */
+    public boolean adminSeeListStatusMamiprime(String text){
+        Locator getResultStatus = page.locator("(//label[@class='label status-inactive'][normalize-space()='"+text+"'])[1]");
+        return playwright.waitTillLocatorIsVisible(getResultStatus, 3000.0);
     }
 }

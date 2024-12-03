@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: [Web][Voucher]Admin - Single Voucher
 
   @TEST_SS-4275 @LIMO-235

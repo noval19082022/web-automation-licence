@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Filter Voucher
 
   Background: Open voucher menu

@@ -1,4 +1,4 @@
-@COOP4
+@SS15
 Feature: Apply Voucher Quarterly For Contract Duration
 
   Scenario: Admin Batalkan Contract
