@@ -15,6 +15,7 @@ import utilities.PlaywrightHelpers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -267,6 +268,9 @@ public class MamiAdsSteps {
 
     @And("user set anggaran harian to {string}")
     public void user_set_anggaran_harian_to_x(String anggaran) {
+        if (anggaran.equals("random 5k")) {
+            anggaran = random5k();
+        }
         mamiAdsPO.inputNominalAnggaran(anggaran);
     }
 
@@ -372,4 +376,13 @@ public class MamiAdsSteps {
         mamiAdsPO.userContinuePaymentBuySaldoMamiads();
     }
 
+    private String random5k() {
+        Random random = new Random();
+
+        // Generate a random integer between 5000 (inclusive) and 6000 (exclusive)
+        int randomInt = 5000 + random.nextInt(1000);
+
+        // Convert the integer to a string
+        return Integer.toString(randomInt);
+    }
 }

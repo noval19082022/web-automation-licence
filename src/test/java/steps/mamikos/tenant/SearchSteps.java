@@ -513,6 +513,14 @@ public class SearchSteps {
         Assert.assertTrue(suggestionInnerText.get(0).contains(suggestion));
     }
 
+    @And("user select first kost on the search result to burn saldo {int} times")
+    public void selectFisrtKost(int times) {
+        searchPO = new SearchPO(ActiveContext.getActivePage());
+        for (int i = 0; i < times; i++) {
+            searchPO.selectFirstKostOnSearchResult();
+        }
+    }
+
     @When("user use filter {string}")
     public void userUseFilter(String filter) {
         kostLanding.clickOnFilter(filter);

@@ -49,6 +49,7 @@ public class SearchPO {
     Locator firstPriceListing;
     Locator lastPriceListing;
     private Locator suggestionResult;
+    private Locator kostCard;
 
     //--------- Map Section ----------
     private Locator mapLegendButton;
@@ -95,6 +96,7 @@ public class SearchPO {
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
         this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
+        this.kostCard = page.getByTestId("kostRoomCard");
         this.zoomInButton = page.locator("a.leaflet-control-zoom-in");
         this.zoomOutButton = page.locator("a.leaflet-control-zoom-out");
 
@@ -754,6 +756,10 @@ public class SearchPO {
     public List<String> getSuggestionText() {
         playwright.hardWait(1000);
         return suggestionResult.allInnerTexts();
+    }
+
+    public void selectFirstKostOnSearchResult() {
+        playwright.clickOn(kostCard.first());
     }
 
     /**
