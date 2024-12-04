@@ -25,33 +25,22 @@ public class AdminMamiadsPO {
      * setup on page https://jambu.kerupux.com/admin/request/kost/99454727
      *
      * @param viewPoint
+     * @param usedPoint
+     * @param allocatedPoint
      */
-    public void inputViewPointValueOnKostListMamiadsSeting(String viewPoint) {
+    public void inputPointValueOnKostListMamiadsSeting(String viewPoint, String usedPoint, String allocatedPoint) {
         playwrightHelpers.clearText(inputViewSaldoMamiadsPlaceHolder);
         viewPoint = viewPoint.isEmpty() ? "0" : viewPoint;
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputViewSaldoMamiadsPlaceHolder, viewPoint);
-    }
 
-    /**
-     * setup on page https://jambu.kerupux.com/admin/request/kost/99454727
-     *
-     * @param usedPoint
-     */
-    public void inputUsedPointValueOnKostListMamiadsSeting(String usedPoint) {
         playwrightHelpers.clearText(inputUsedSaldoMamiadsPlaceHolder);
         usedPoint = usedPoint.isEmpty() ? "0" : usedPoint;
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputUsedSaldoMamiadsPlaceHolder, usedPoint);
-    }
 
-    /**
-     * setup on page https://jambu.kerupux.com/admin/request/kost/99454727
-     *
-     * @param allocatedPoint
-     */
-    public void inputAllocatedPointValueOnKostListMamiadsSeting(String allocatedPoint) {
         playwrightHelpers.clearText(inputAllocatedSaldoMamiadsPlaceHolder);
         allocatedPoint = allocatedPoint.isEmpty() ? "0" : allocatedPoint;
         playwrightHelpers.clickLocatorAndTypeKeyboard(inputAllocatedSaldoMamiadsPlaceHolder, allocatedPoint);
+
     }
 
     /**
