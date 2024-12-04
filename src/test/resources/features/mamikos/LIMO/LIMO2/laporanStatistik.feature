@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2
+@listing-monetization @regression @LIMO5
 Feature: Laporan Statistik
 
   @LIMO-4055
