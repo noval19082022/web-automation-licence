@@ -10,7 +10,8 @@ Feature: Mamiads Burn Saldo
     And admin visit page "/admin/request/kost/99454727"
     And admin bangkrupux adjust mamiads with intial value "7500" usage "" and alocated "0"
 
-  Scenario Outline: activate mamiads iklan
+  @TEST_LIMO-1507
+  Scenario Outline: [MamjAds][Naikkan iklan]: Activate mamiads iklan
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod | password  |
@@ -32,7 +33,7 @@ Feature: Mamiads Burn Saldo
     When user want to search kost list by place on "Purwokerto" from homepage
     And user select first kost on the search result to burn saldo 5 times
 
-  @TEST_LIMO-1508 @TEST_LIMO-1507
+  @TEST_LIMO-1508
   Scenario Outline: [MamiAds][Naikkan Iklan] Switch OFF ads while saldo burn > 0 from maximal budget
     Given user go to mamikos homepage
     When user login as owner:
