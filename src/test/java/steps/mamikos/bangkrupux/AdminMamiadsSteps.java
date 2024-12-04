@@ -11,9 +11,7 @@ public class AdminMamiadsSteps {
 
     @And("admin bangkrupux adjust mamiads with intial value {string} usage {string} and alocated {string}")
     public void adminBangkrupuxAdjustMamiadsWithIntialValueUsageAndAlocated(String viewPoint, String usedPoint, String allocatedPoint) {
-        adminMamiadsPO.inputViewPointValueOnKostListMamiadsSeting(viewPoint);
-        adminMamiadsPO.inputUsedPointValueOnKostListMamiadsSeting(usedPoint);
-        adminMamiadsPO.inputAllocatedPointValueOnKostListMamiadsSeting(allocatedPoint);
+        adminMamiadsPO.inputPointValueOnKostListMamiadsSeting(viewPoint, usedPoint, allocatedPoint);
         adminMamiadsPO.tapOnUpdateBtnOnMamiadsSetting();
     }
 }
