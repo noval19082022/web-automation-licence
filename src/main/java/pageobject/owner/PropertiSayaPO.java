@@ -1602,7 +1602,6 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.hardWait(3000);
         playwright.clickOn(lanjutkanButton);
     }
 

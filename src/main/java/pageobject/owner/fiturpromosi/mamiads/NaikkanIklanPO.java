@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.time.Duration;
+
 public class NaikkanIklanPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -241,6 +243,7 @@ public class NaikkanIklanPO {
         } else {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
         }
+        playwright.waitTillLocatorIsVisible(switchToggleLocator);
         if (switchToggleLocator.isChecked()) {
             switchToggleLocator.uncheck();
         } else {
