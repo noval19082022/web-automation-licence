@@ -221,63 +221,63 @@ Feature: Create Kos Mamipay Active
       | Harga per 6 bulan min. Rp100.000 dan maks. Rp100.000.000. |
       | Harga per tahun min. Rp100.000 dan maks. Rp100.000.000.   |
 
-    @TEST_LIMO-3669
-    Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag    | password    |
-        | 083176408311 | qwerty123 |
-      And owner navigates to property saya kos
-      And owner click tambah data iklan "Kost"
-      And owner click "Tambah Kos Baru"
-      And owner input kos name "Property Automation" for existing kost name
-      Then verify message "Nama ini telah digunakan kos lain." the room type
-      When owner fills valid data kos as expected
-        | kos name            | room type check | room type name | kos type | description kos                   | build kos | other note                   |
-        | kos Automation TEST| no              |                | boy      | kos harusnya Kost noBBK noMamipay | 2020      | Akan dihapus setelah terbuat |
-      And owner set rules kos:
-        | Ada jam malam |
-      And owner upload rule kos
-      And owner upload valid rule kos
-      Then verify warning upload gagal disappear
-      When owner click Lanjutkan for input kos address
-      And owner click on leftlet marker
-      And owner click lanjutkan button for next steps
-      And user clicks on the close button
-      And owner upload valid photo "bangunan tampak depan"
-      And owner upload valid photo "tampilan dalam bangunan"
-      And owner upload valid photo "tampak dari jalan"
-      And owner click lanjutkan button for next steps
-      And owner upload valid photo "depan kamar"
-      And owner upload valid photo "dalam kamar"
-      And owner upload valid photo "kamar mandi"
-      And owner click lanjutkan button for next steps
-      And user check facilities under "Fasilitas Umum"
-        | Dapur |
-      And user check facilities under "Fasilitas Kamar"
-        | AC |
-      And user check facilities under "Fasilitas Kamar Mandi"
-        | Bathup |
-        | Gayung |
-      And user check facilities under "Parkir"
-        | Parkir Mobil |
-      And owner click lanjutkan button for next steps
-      And owner select size room "3 x 4"
-      And owner input total room and room available as expected
-        | total room | room available |
-        | 1         | 1             |
-      And owner click "Atur Ketersediaan Kamar" ketersediaan kamar
-      And owner input room name or number in room allotment page with "2"
-      And user click back button in page input kos
-      And owner click "Keluar" input data on pop up
-      And owner input total room and room available as expected
-        | total room | room available |
-        | 2         | 1               |
-      And owner click lanjutkan button for next steps
-      And owner input the price room as expected
-        | monthly price | check min rent duration | min rent duration | check other price | daily price | weekly price | three monthly price | six monthly price | yearly price |
-        | 500000        | no                      |                   | no                |             |              |                     |                   |              |
-      And owner navigates to owner dashboard
-      And owner navigates to property saya kos
-      Then user see kos with valid name, status "Draft" and type "Kos Putra"
-      When user delete first kos on the list
+  @TEST_LIMO-3669
+  Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 083176408311 | qwerty123 |
+    And owner navigates to property saya kos
+    And owner click tambah data iklan "Kost"
+    And owner click "Tambah Kos Baru"
+    And owner input kos name "Property Automation" for existing kost name
+    Then verify message "Nama ini telah digunakan kos lain." the room type
+    When owner fills valid data kos as expected
+      | kos name            | room type check | room type name | kos type | description kos                   | build kos | other note                   |
+      | kos Automation TEST | no              |                | boy      | kos harusnya Kost noBBK noMamipay | 2020      | Akan dihapus setelah terbuat |
+    And owner set rules kos:
+      | Ada jam malam |
+    And owner upload rule kos
+    And owner upload valid rule kos
+    Then verify warning upload gagal disappear
+    When owner click Lanjutkan for input kos address
+    And owner click on leftlet marker
+    And owner click lanjutkan button for next steps
+    And user clicks on the close button
+    And owner upload valid photo "bangunan tampak depan"
+    And owner upload valid photo "tampilan dalam bangunan"
+    And owner upload valid photo "tampak dari jalan"
+    And owner click lanjutkan button for next steps
+    And owner upload valid photo "depan kamar"
+    And owner upload valid photo "dalam kamar"
+    And owner upload valid photo "kamar mandi"
+    And owner click lanjutkan button for next steps
+    And user check facilities under "Fasilitas Umum"
+      | Dapur |
+    And user check facilities under "Fasilitas Kamar"
+      | AC |
+    And user check facilities under "Fasilitas Kamar Mandi"
+      | Bathup |
+      | Gayung |
+    And user check facilities under "Parkir"
+      | Parkir Mobil |
+    And owner click lanjutkan button for next steps
+    And owner select size room "3 x 4"
+    And owner input total room and room available as expected
+      | total room | room available |
+      | 1          | 1              |
+    And owner click "Atur Ketersediaan Kamar" ketersediaan kamar
+    And owner input room name or number in room allotment page with "2"
+    And user click back button in page input kos
+    And owner click "Keluar" input data on pop up
+    And owner input total room and room available as expected
+      | total room | room available |
+      | 2          | 1              |
+    And owner click lanjutkan button for next steps
+    And owner input the price room as expected
+      | monthly price | check min rent duration | min rent duration | check other price | daily price | weekly price | three monthly price | six monthly price | yearly price |
+      | 500000        | no                      |                   | no                |             |              |                     |                   |              |
+    And owner navigates to owner dashboard
+    And owner navigates to property saya kos
+    Then user see kos with valid name, status "Draft" and type "Kos Putra"
+    When user delete first kos on the list

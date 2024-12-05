@@ -885,6 +885,7 @@ public class PropertiSayaSteps {
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
 
         propertySaya.inputMonthyPrice(table.get(0).get("monthly price"));
+        // sometimes daily pricec is disable
         propertySaya.inputOtherPrice("Hari", table.get(0).get("daily price"), 1);
         propertySaya.inputOtherPrice("Minggu", table.get(0).get("weekly price"), 2);
         propertySaya.inputOtherPrice("3 Bulan", table.get(0).get("three monthly price"), 3);
