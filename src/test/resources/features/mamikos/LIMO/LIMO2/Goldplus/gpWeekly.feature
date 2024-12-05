@@ -57,6 +57,7 @@ Feature: GP Weekly
   @TEST_LIMO-3495 @continue
   Scenario: GoldPlus Weekly Recurring - Cancel Recurring
     Given owner navigates to owner dashboard
+    And  user can click close button on popup
     When owner wants to access goldplus dashboard
     Then owner will be redirected to invoice recurring
 
