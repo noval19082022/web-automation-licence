@@ -1600,7 +1600,7 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.clickOn(lanjutkanButton);
+        playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton);
     }
 
     /**
@@ -1867,7 +1867,7 @@ public class PropertiSayaPO {
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(3000);
+        playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
     }
 
     /**
