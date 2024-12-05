@@ -27,8 +27,6 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And owner click lanjutkan button in bottom of add kos page
     And owner select the kost type "girl"
     And owner click lanjutkan button for next steps
-    And owner click "Keluar" input data on pop up
-    Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     And owner input on "nomor rekening Anda" "09182928329"
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"

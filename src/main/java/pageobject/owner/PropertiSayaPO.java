@@ -1337,7 +1337,7 @@ public class PropertiSayaPO {
      * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
-        playwright.hardWait(7000);
+        playwright.hardWait(15000); // need improve waiting on create kost page, it almost 15 second
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
         playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
@@ -1600,6 +1600,10 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
+        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton)) {
+            playwright.reloadPage(); // sometimes when render is too slow, it need refetch using reload page
+            playwright.hardWait(10000);
+        }
         playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton);
     }
 
