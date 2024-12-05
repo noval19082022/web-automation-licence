@@ -1,4 +1,4 @@
-@regression @LIMO5
+@regression @LIMO5 @GPNoval
 Feature: Update Room from Dashboard
 
   @TEST_LIMO-899 @WEB @AUTOMATED @continue @updateRoomDashboard

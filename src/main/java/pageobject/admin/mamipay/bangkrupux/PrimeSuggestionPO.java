@@ -42,12 +42,12 @@ public class PrimeSuggestionPO {
         createButton = page.locator("//button[normalize-space()='Create']");
         editPrimeSuggestion = page.locator("//a[@class=\"btn btn-default btn-sm\"]/following::a[@class=\"btn btn-default btn-xs\"][2]");
         savePrimeSuggestion = page.locator("//button[normalize-space()='Save']");
-        showKeywordButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("102 Kos XDR Rajeg Tangerang Rajeg Tangerang ID: 1000038887 Song ID: 91566437 active  Show Keywords 11 Nov 2024 15:54:08 by: Playwright Automation  Edit")).getByRole(AriaRole.LINK).first();
+        showKeywordButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("Kos XDR Rajeg Tangerang Rajeg Tangerang")).getByRole(AriaRole.LINK).first();
         addKeywordButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Keyword"));
         addButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("tangerang  Add")).getByRole(AriaRole.BUTTON);
         areaName = page.getByPlaceholder("Search Keyword");
         searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
-        deleteButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
+        deleteButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("tangerang ")).getByRole(AriaRole.BUTTON);
         dropdownAllStatus = page.getByRole(AriaRole.COMBOBOX);
     }
 
