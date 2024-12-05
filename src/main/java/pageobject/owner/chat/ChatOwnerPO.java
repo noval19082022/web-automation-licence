@@ -408,7 +408,6 @@ public class ChatOwnerPO {
         if (playwright.isTextDisplayed("Lihat Fitur")) {
             playwright.clickOn(lihatFiturFTUEJB);
         }
-        // playwright.clickOn(lihatFiturFTUEJB);
         playwright.navigateTo(Mamikos.OWNER_URL);
         if (playwright.isTextDisplayed("Lihat Fitur")) {
             playwright.clickOn(lihatFiturFTUEJB);
