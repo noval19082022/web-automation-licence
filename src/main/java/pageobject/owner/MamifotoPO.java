@@ -424,6 +424,7 @@ public class MamifotoPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean mamifotoHeaderStatusPembelianisAppear() {
+        playwright.waitTillLocatorIsVisible(headerStatusPembelian);
         return headerStatusPembelian.isVisible();
     }
 

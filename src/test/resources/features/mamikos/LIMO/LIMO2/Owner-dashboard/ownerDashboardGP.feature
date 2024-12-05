@@ -17,7 +17,7 @@ Feature: Owner Dashboard GP
       | 082233545515 | 0          | 12345678 |
     And user click info untuk anda "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
     And user will see that the text "1 chat room" is displayed
-    When owner navigates to owner dashboard
+    And owner navigates to owner dashboard
     Then owner should successfully log out
 
   @TEST_LIMO-3602 @continue @kuotaChatRedirection
