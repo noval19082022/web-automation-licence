@@ -11,6 +11,8 @@ import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class AllLeadsSteps {
 
     Page page = ActiveContext.getActivePage();
@@ -164,5 +166,11 @@ public class AllLeadsSteps {
     @Then("admin redirect to login harvest page")
     public void admin_redirect_to_login_harvest_page() {
         Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/leads/harvest/auth");
+    }
+    @Then("all leads table contains column")
+    public void all_leads_table_contains_column(List<String> column) {
+        for (int i = 0; i < column.size(); i++) {
+            Assert.assertEquals(allLeads.getColumnName(i), column.get(i));
+        }
     }
 }
