@@ -665,7 +665,6 @@ public class PropertiSayaPO {
      * Get number of total room
      */
     public String getTextTotalRoom() {
-        playwright.hardWait(3000.0);
         return playwright.getText(textTotalRoom);
     }
 
@@ -1602,7 +1601,6 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.hardWait(3000);
         playwright.clickOn(lanjutkanButton);
     }
 

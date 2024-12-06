@@ -82,8 +82,6 @@ public class OwnerDashboardSteps {
 
     @And("user click menu {string} on feature waktunya mengelola property")
     public void userClickOnFeatureWaktunyaMengelolaProperty(String menu) {
-        playwright.waitTillPageLoaded(10000.0);
-        loading.waitForLoadingIconDisappear();
         ownerDashboardPO.clickOnMenuKelolaProperty(menu);
     }
 
