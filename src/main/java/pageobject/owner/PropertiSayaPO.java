@@ -828,9 +828,8 @@ public class PropertiSayaPO {
         if (playwright.waitTillLocatorIsVisible(editDataKos)) {
             playwright.clickOn(editDataKos);
         } else {
-            var lengkapiData = String.format("%s Lengkapi", dataKos);
-            editDataKos = page.getByText(lengkapiData);
-            playwright.clickOn(editDataKos);
+            playwright.reloadPage();
+            playwright.waitForLocatorVisibleAndClickOn(editDataKos);
         }
         playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
@@ -1338,7 +1337,7 @@ public class PropertiSayaPO {
      * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
-        playwright.hardWait(7000);
+        playwright.hardWait(15000); // need improve waiting on create kost page, it almost 15 second
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
         playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
@@ -1601,7 +1600,11 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        playwright.clickOn(lanjutkanButton);
+        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first())) {
+            playwright.reloadPage(); // sometimes when render is too slow, it need refetch using reload page
+            playwright.hardWait(10000);
+        }
+        playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton.first());
     }
 
     /**
@@ -1705,6 +1708,10 @@ public class PropertiSayaPO {
      * @param index      eg. harga per hari, harga per minggu, per 3 bulan, per 6 bulan, per tahun
      */
     public void inputOtherPrice(String priceType, String otherPrice, int index) {
+        if (!otherPriceCheckbox.isChecked()) {
+            playwright.clickOn(otherPriceCheckbox);
+        }
+
         otherKostPriceMonthlyCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga Per " + priceType)).locator("span");
         otherKostPriceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div[" + index + "]/div[@class='bg-c-field']/input[@class='input step-seven__input']");
         if (otherKostPriceMonthlyCheckbox.isChecked()) {
@@ -1864,7 +1871,7 @@ public class PropertiSayaPO {
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(3000);
+        playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
     }
 
     /**
