@@ -13,6 +13,7 @@ public class AllLeadsPO {
     Locator allLeadsTitlePage;
     Locator profileNameText;
     Locator logoutButton;
+    Locator columnName;
 
     //--- Edit Table ---//
     Locator editTableButton;
@@ -54,6 +55,7 @@ public class AllLeadsPO {
         allLeadsTitlePage = page.getByText("All Leads Table");
         profileNameText = page.locator(".user-data-profile p").first();
         logoutButton = page.getByText("Logout", new Page.GetByTextOptions().setExact(true));
+        columnName = page.locator("th p");
 
         //--- Edit Table ---//
         editTableButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage Leads"));
@@ -334,6 +336,14 @@ public class AllLeadsPO {
      */
     public void logoutHarvest() {
         playwright.clickOn(logoutButton);
+    }
+
+    /**
+     * Get Column Name
+     * @return String
+     */
+    public String getColumnName(int i) {
+        return playwright.getText(columnName.nth(i));
     }
     //--- End of Confirmation Perubahan Belum Tersimpan ---//
 }
