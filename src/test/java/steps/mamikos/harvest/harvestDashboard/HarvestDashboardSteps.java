@@ -1,6 +1,7 @@
 package steps.mamikos.harvest.harvestDashboard;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.Then;
@@ -17,6 +18,7 @@ public class HarvestDashboardSteps {
 
     @Then("admin should redirect to All leads menu")
     public void admin_should_redirect_to_all_leads_menu() {
+        page.waitForLoadState(LoadState.LOAD);
         Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/all-leads");
     }
 
@@ -27,6 +29,7 @@ public class HarvestDashboardSteps {
 
     @Then("admin should redirect to harvest {string}")
     public void admin_should_redirect_to_harvest(String url) {
+        page.waitForLoadState(LoadState.LOAD);
         Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/"+url);
     }
 }
