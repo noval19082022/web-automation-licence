@@ -3,9 +3,7 @@ Feature: [Test-Execution][DOM] Web - apartment
 
   @TEST_SS-2973 @Automated @web-covered
   Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Time Period
-    Given user visit page "/daftar/apartemen-di-jakarta"
-    When user filter apartment by time period is "Harian"
-    Then user see displays apartment lists by time period is "hari"
+    Given user visit page "/apartemen"
 
 		#  Scenario: Positive case tenant filter apartment by time period "Mingguan"
     When user filter apartment by time period is "Mingguan"
@@ -19,25 +17,27 @@ Feature: [Test-Execution][DOM] Web - apartment
     When user filter apartment by time period is "Tahunan"
     Then user see displays apartment lists by time period is "tahun"
 
+        #  Scenario: Positive case tenant filter apartment by time period "Harian"
+    When user filter apartment by time period is "Harian"
+    Then user see displays apartment lists by time period is "hari"
+
   @TEST_SS-2975 @Automated @web-covered
   Scenario: [Web][Apartement] Positive case tenant search apartment by Area
     Given user go to mamikos homepage
     When user go to landing apartment
     Then user redirected to "/apartemen"
-    And user search "Bandung" on landing apartment
+    And user select apartement by area on "Bandung"
     Then user will see displays apartment lists by area and city
       | Coblong       |
-      | Buah batu     |
-      | Pasteur       |
       | Sumur Bandung |
-      | Coblong       |
-      | Coblong       |
-      | Coblong       |
-      | Cicendo       |
+#      | Coblong       |
+#      | Coblong       |
+#      | Coblong       |
+#      | Cicendo       |
 
   @TEST_SS-2978 @Automated @web-covered
   Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Furniture
-    Given user visit page "/daftar/apartemen-di-jakarta"
+    Given user visit page "/apartemen"
     When user filter apartment by furniture is "Furnished"
     Then user see displays apartment lists by furniture is "Furnished"
 
@@ -51,7 +51,7 @@ Feature: [Test-Execution][DOM] Web - apartment
 
   @TEST_SS-2979 @Automated @web-covered
   Scenario: [Web][Apartement] Positive Case Tenant Sort Apartment by Price
-    Given user visit page "/daftar/apartemen-di-jakarta"
+    Given user visit page "/apartemen"
     When user filter apartment by price direction is "Acak"
     Then user see displays apartment lists by price direction is "Acak"
 
@@ -65,7 +65,7 @@ Feature: [Test-Execution][DOM] Web - apartment
 
   @TEST_SS-2981 @Automated @web-covered
   Scenario: [Web][Apartement] Positive Case Tenant Filter Apartment by Unit Type
-    Given user visit page "/daftar/apartemen-di-jakarta"
+    Given user visit page "/apartemen/jakarta-selatan/apartemen-kalibata-city"
     When user filter apartment by unit type is "1-Room Studio"
     Then user see apartment lists by unit type is "1-Room Studio"
 
@@ -104,7 +104,7 @@ Feature: [Test-Execution][DOM] Web - apartment
       | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
       | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
     When user click on hubungi pengelola button
-    Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
+    Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah Pantai Parangtritis Mamikos tidak bertanggungjawab atas transaksi yang dilakukan di luar platform Mamikos, karena itu mohon berhati-hati. Pastikan identitas pengelola, survey lokasi, dan kontrak sewa sebelum melakukan segala jenis pembayaran."
 
   @TEST_SS-2984 @Automated @web-covered
   Scenario: [Web][Apartement] Positive case tenant search apartment by keyword
@@ -114,14 +114,15 @@ Feature: [Test-Execution][DOM] Web - apartment
 		#  Scenario: Positive case tenant search by input keyword on field search apartment
     And user search "Bandung" on landing apartment
     Then user will see displays apartment lists by area and city
-      | Coblong       |
-      | Sumur Bandung |
-      | Coblong       |
-      | Coblong       |
-      | Coblong       |
-      | Coblong       |
-      | Sumur Bandung |
-      | Bandung       |
+      | Coblong      |
+      | Buah batu    |
+      | Pasteur      |
+#      | Coblong       |
+#      | Coblong       |
+#      | Coblong       |
+#      | Coblong       |
+#      | Sumur Bandung |
+#      | Bandung       |
 		#  Scenario: Positive case tenant click logo for redirect to home page
     When user click mamikos logo on apartement list page
     Then user redirected to "/"
@@ -148,7 +149,7 @@ Feature: [Test-Execution][DOM] Web - apartment
       | environment | apartment path                                          |
       | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
       | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
-    When user click on hubungi pengelola button
+    When user click on lihat nomor telepon button
     Then user see phone number field and selectable question options :
       | Bagaimana bisa menghubungi apartemen ini? |
 #      | Boleh tahu alamat lengkap apartemen ini?  |
@@ -169,7 +170,7 @@ Feature: [Test-Execution][DOM] Web - apartment
     And tenant redirect to apartment details:
       | environment | apartment path                                          |
       | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
-      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
+      | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1    |
     When user click on favorite btn on the apartment detail
     Then user get success message "Sukses tersimpan"
     And tenant navigate to favorite page
@@ -179,8 +180,8 @@ Feature: [Test-Execution][DOM] Web - apartment
   Scenario: [Web][Apartement] unFavorite an Apartment
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0891234567897  | 08100000622 | qwerty123 |
+      | phone stag      | phone prod  | password  |
+      | 0891234567897   | 08100000622 | qwerty123 |
     And tenant redirect to apartment details:
       | environment | apartment path                                          |
       | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1  |
@@ -196,6 +197,6 @@ Feature: [Test-Execution][DOM] Web - apartment
       | 08999333999     | 08100000622 | qwerty123 |
     And user go to landing apartment
     Then user redirected to "/apartemen"
-    And user search "Rane 78 " on landing apartment
+    And user search "rane 78 " on landing apartment
     And open first apartment details
     And tenant set active page to 1

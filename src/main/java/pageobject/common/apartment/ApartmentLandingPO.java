@@ -40,7 +40,7 @@ public class ApartmentLandingPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.mamikosLogo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("logo_mamikos_white"));
-        inputSearch = page.getByPlaceholder("Ketik yang Anda cari...");
+        inputSearch = page.getByPlaceholder("Masukan nama apartemen/area/alamat");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
         apartemenTidakDitemukanText = page.getByText("Apartemen tidak ditemukan.");
         noPropertyImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Kost tidak ditemukan"));
@@ -49,10 +49,10 @@ public class ApartmentLandingPO {
         detailApartment = page.locator("#detailApartmentContainer");
         hapusHistoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Histori"));
         rekomendasiTitle = page.locator(".premium-recom-title");
-        this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka Waktu Harian Mingguan Bulanan Tahunan$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Perabotan Semua Furnished Semi Furnished Not furnished$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Urutkan Acak Harga Termurah Harga Termahal$|^Urutkan Acak Harga Termurah Harga Termahal Kosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe Unit Semua 1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka WaktuHarianMingguanBulananTahunan$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^PerabotanSemuaFurnishedSemi FurnishedNot furnished$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^UrutkanAcakHarga terendahHarga tertinggiKosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe UnitSemua1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringAreaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("dropdown-down"));
         this.filteringArea = page.locator("a");
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
