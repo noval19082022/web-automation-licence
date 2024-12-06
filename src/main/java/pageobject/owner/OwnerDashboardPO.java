@@ -162,7 +162,7 @@ public class OwnerDashboardPO {
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
-        dariMamikosBanner = page.locator(".image > a").first();
+        dariMamikosBanner = page.locator(".banner-card__image-wrapper > .bg-c-image__img").first();
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
         daftarGpButton = page.getByTestId("registerGP_btn");
