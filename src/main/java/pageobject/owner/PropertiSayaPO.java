@@ -1600,11 +1600,11 @@ public class PropertiSayaPO {
      * Click Lanjutkan button (without access geolocation permission)
      */
     public void clickOnLanjutkan() {
-        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton)) {
+        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first())) {
             playwright.reloadPage(); // sometimes when render is too slow, it need refetch using reload page
             playwright.hardWait(10000);
         }
-        playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton);
+        playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton.first());
     }
 
     /**
