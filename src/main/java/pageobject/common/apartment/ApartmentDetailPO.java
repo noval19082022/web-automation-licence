@@ -15,6 +15,7 @@ public class ApartmentDetailPO {
     private Locator apartDetailContainer;
     private Locator firstApartment;
     private Locator hubungiPengelola;
+    private Locator lihatNomorTelepon;
 
     public ApartmentDetailPO(Page page) {
         this.page = page;
@@ -24,7 +25,8 @@ public class ApartmentDetailPO {
         this.successMsgPopUp = page.getByText("Sukses tersimpan");
         this.apartDetailContainer = page.locator("//div[@class='detail']");
         firstApartment = page.locator(".room-list__card");
-        hubungiPengelola = page.locator("//*[@class='card-footer']//button[contains(@class, 'track-message-apt')]");
+        hubungiPengelola = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Pengelola"));
+        lihatNomorTelepon = page.locator("#priceCard").getByText("Lihat Nomor Telepon");
     }
 
     /**
@@ -33,6 +35,14 @@ public class ApartmentDetailPO {
     public void clickContactApt() {
         playwright.pageScrollToDown(300);
         playwright.doubleClick(hubungiPengelola);
+    }
+
+    /**
+     * Click on Lihat Nomor Telepon Apartnent
+     */
+    public void clicklihatNomorTeleponApt() {
+        playwright.pageScrollToDown(300);
+        playwright.clickOn(lihatNomorTelepon);
     }
 
     /**

@@ -17,6 +17,11 @@ public class ApartmentDetailSteps {
         apartment.clickContactApt();
     }
 
+    @And("user click on lihat nomor telepon button")
+    public void userClickOnLihatNomorTeleponButton() {
+        apartment.clicklihatNomorTeleponApt();
+    }
+
     @When("user click on favorite btn on the apartment detail")
     public void userClickOnFavoriteBtnOnTheApartmentDetail() {
         apartment.clickOnFavoriteBtn();
