@@ -608,7 +608,7 @@ public class PropertiSayaSteps {
     @And("owner click lanjutkan button for next steps")
     public void ownerClickLanjutkanButtonForNextSteps() {
         propertySaya.clickOnLanjutkan();
-        loading.waitForLoadingIconDisappear();
+       // loading.waitForLoadingIconDisappear();
     }
 
     @And("owner invalid upload photo {string}")

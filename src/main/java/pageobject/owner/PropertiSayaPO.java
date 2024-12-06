@@ -665,7 +665,6 @@ public class PropertiSayaPO {
      * Get number of total room
      */
     public String getTextTotalRoom() {
-        playwright.hardWait(3000.0);
         return playwright.getText(textTotalRoom);
     }
 
