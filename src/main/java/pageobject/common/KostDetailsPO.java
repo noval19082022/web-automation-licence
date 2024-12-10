@@ -789,7 +789,7 @@ public class KostDetailsPO {
      * this method will be click facilty umum section and more facility list will be appear
      */
     public void clickFasilitasUmumSeeAll(){
-        playwright.pageScrollUntilElementIsVisible(facilityUmumBtn);
+        playwright.pageScrollToDown(1900);
         playwright.waitTillLocatorIsVisible(facilityUmumBtn);
         playwright.clickOn(facilityUmumBtn);
     }
