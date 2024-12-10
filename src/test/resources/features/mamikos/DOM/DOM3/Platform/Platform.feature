@@ -46,8 +46,8 @@ Feature: [Test-Execution][DOM] Web - Platform
     When user login as tenant via facebook:
       | email stag          | email prod          | password           |
       | ncihuciha@gmail.com | ncihuciha@gmail.com | mamikosJAYAJAYA999 |
-    And user visit page "/user"
-    Then user should not be able to see the text "Pengaturan"
+    And user visit page "/user/pengaturan"
+    Then user should not be able to see the text "Ubah Password"
 
   @TEST_SS-5134 @Automated @web-covered
   Scenario: [Login][Owner] Login From Detail Page
