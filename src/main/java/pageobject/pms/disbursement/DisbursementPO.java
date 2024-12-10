@@ -548,7 +548,7 @@ public class DisbursementPO {
         Date dates = new Date();
         System.out.println(today.format(dates));
         playwright.clickOn(calendarView);
-        if (today.format(dates).equalsIgnoreCase("Desember")){
+        if (today.format(dates).equalsIgnoreCase("December")){
             playwright.waitForLocatorVisibleAndClickOn(arrowRightButton);
             playwright.clickOn(monthJanuari);
         } else {
