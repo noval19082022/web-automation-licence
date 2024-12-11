@@ -288,11 +288,91 @@ Feature: Broadcast Chat Owner
   @TEST_LIMO-1158 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][View Receiver]user want to see receiver
     Given user go to mamikos homepage
-    Given user login as owner:
+    When user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
-    When owner navigates to broadcast chat page
-    When owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner navigates to broadcast chat page
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
     And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
     And user click "Lihat Penerima"
     Then Lihat penerima page is displayed
+
+  @LIMO-191
+  Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08713399866 | 0          | qwerty123 |
+    And owner navigates to broadcast chat page
+    And owner add broadcast chat for kost "Kos Fathul Khair Jetis Yogyakarta"
+    And owner clicks Kos "Kos Fathul Khair Jetis Yogyakarta" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
+    And owner click on ubah button on the pesan anda section
+    And owner Masukan Pesan and choose row number 2 from the broadcast chat dashboard
+    Then owner will see that the text "Pesan yang ingin Anda buat" is displayed
+
+  @LIMO-189
+  Scenario: [Broadcast Chat][Chat]user want to received broadcast chat and see the broadcast chat
+    #reset broadcast chat
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Broadcast for owner with phone number "0891202413"
+
+    #owner send broadcast chat
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag | phone prod | password  |
+      | 0891202413 | 0          | qwerty123 |
+    When owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast
+    And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
+    And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
+    And user input message on Broadcast Chat "Kopi Kapal Api dan Udud Jarcok Filter"
+    And user click "Preview Pesan" button
+    Then user see "Kopi Kapal Api dan Udud Jarcok Filter" on Preview Broadcast Message
+    And user click on "Kirim" button
+    And owner click close icon pop up
+    And owner back to owner dashboard
+    And owner logs out
+    When user login as tenant via phone number:
+      | phone stag   | phone prod | password  |
+      | 081280003230 | 0          | qwerty123 |
+    And user click on chat button in top bar tenant home page
+    And user opens the chatroom in the "1" order on chat list
+    Then chat room appear with latest message "Banyak keunggulannya seperti: Kopi Kapal Api dan Udud Jarcok Filter"
+
+  @LIMO-188
+  Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod | password  |
+      | 0891202416 | 0          | qwerty123 |
+    And owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast
+    Then owner will see that the text "Semua kos Anda sedang dalam keadaan penuh" is displayed
+    And owner see button create broadcast chat will be disable
+
+  @LIMO-187
+  Scenario: [Broadcast Chat][Create Broadcast chat] Send broadcast with template without fill message
+       #reset broadcast chat
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Broadcast for owner with phone number "0891202413"
+
+    #Owner send broadcast without fill text
+    Given user go to mamikos homepage
+    Given user login as owner:
+      | phone stag | phone prod | password  |
+      | 0891202413 | 0          | qwerty123 |
+    When owner navigates to broadcast chat page
+    And owner dismiss FTUE Broadcast
+    And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
+    And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
+    And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
+    And user click "Preview Pesan" button
+    Then user should see the message "Isi pesan terlebih dahulu." displayed under text field

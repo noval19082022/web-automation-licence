@@ -28,6 +28,10 @@ public class BroadcastChatPO {
     Locator cancelGoldPlusButton;
     Locator backGoldplusbutton;
     Locator lihatPenerimaSection;
+    Locator ubahButtonOnPesanAndaSection;
+    Locator broadcastPhoneNumberInput;
+    Locator broadcastResetButton;
+    Locator createBroadcastChatButton;
     private Locator andaBelumMemilikiKosActiveText;
     private Locator tambahKosButton;
     private Locator broadcastChatPackageContent;
@@ -102,6 +106,10 @@ public class BroadcastChatPO {
         ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus"));
         closeBtn = page.getByTestId("close-button");
         ubahHyperlink = page.getByText("ubah").first();
+        ubahButtonOnPesanAndaSection= page.getByText("Ubah").nth(1);
+        broadcastPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
+        broadcastResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).nth(1);
+        createBroadcastChatButton = page.locator("//button[normalize-space()='Buat Broadcast Chat']");
     }
 
     /**
@@ -150,6 +158,14 @@ public class BroadcastChatPO {
      * click on button masukan pesan broadcast chat
      */
     public void selectMessageOptionBC(int messageOption) {
+//        playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption - 1));
+//    }
+        // Pastikan messageOption adalah valid
+        if (messageOption < 1 || messageOption > playwright.getLocators(firstBroadcastChatOption).size()) {
+            throw new IllegalArgumentException("Invalid message option: " + messageOption);
+        }
+
+        // Klik opsi pesan berdasarkan indeks yang dipilih
         playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption - 1));
     }
 
@@ -501,5 +517,34 @@ public class BroadcastChatPO {
      */
     public void clickOnUbahKostBroadcast() {
         playwright.clickOn(ubahHyperlink);
+    }
+
+    /**
+     * click on ubah in pesan anda
+     */
+    public void clickOnUbahButtonOnThePesanAndaSection() {
+        playwright.clickOn(ubahButtonOnPesanAndaSection);
+    }
+
+    /**
+     * Input phone number to reset Broadcast chat
+     */
+    public void inputBroadcastPhoneNumber(String phoneNumberGP) {
+        playwright.fill(broadcastPhoneNumberInput, phoneNumberGP);
+    }
+
+    /**
+     * Click on Broadcasr chat reset button
+     */
+    public void clickOnBroadcastResetButton() {
+        playwright.clickOn(broadcastResetButton);
+    }
+
+    /**
+     * user as owner click Button Daftar
+     * @return
+     */
+    public Boolean disableCreateBroadcastChatButton() {
+        return createBroadcastChatButton.isDisabled();
     }
 }
