@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.admin.testingtools.GoldPlusPO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
@@ -18,6 +19,7 @@ public class BroadcastChatSteps {
     LoadingPO loading = new LoadingPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+    GoldPlusPO goldPlusTestingTools = new GoldPlusPO(page);
 
     @Then("user verify pop up message {string} is appear")
     public void user_verify_pop_up_message_is_appear(String message) {
@@ -232,7 +234,9 @@ public class BroadcastChatSteps {
 
     @And("owner Masukan Pesan and choose row number {int} from the broadcast chat dashboard")
     public void ownerMasukanPesanAndChooseRowNumberFromTheBroadcastChatDashboard(int broadcastChatOptionNumber) {
-        broadcast.clicksOnMasukkanPesanButton();
+       if (playwright.isTextDisplayed("Masukan Pesan")){
+           broadcast.clicksOnMasukkanPesanButton();
+       }
         broadcast.selectMessageOptionBC(broadcastChatOptionNumber);
         broadcast.clicksOnPilihPesanButton();
     }
@@ -278,5 +282,22 @@ public class BroadcastChatSteps {
     @And("owner click button ubah to change kos broadcast")
     public void ownerClickButtonUbahToChangeKosBroadcast() {
         broadcast.clickOnUbahKostBroadcast();
+    }
+
+    @And("owner click on ubah button on the pesan anda section")
+    public void ownerClickOnUbahButtonOnThePesanAndaSection() {
+        broadcast.clickOnUbahButtonOnThePesanAndaSection();
+    }
+
+    @When("user wants to reset Broadcast for owner with phone number {string}")
+    public void user_wants_to_reset_Goldplus_for_owner_with_phone_number(String phoneNumber) {
+        goldPlusTestingTools.navigatesToGoldPlusTestingToolsPage();
+        broadcast.inputBroadcastPhoneNumber(phoneNumber);
+        broadcast.clickOnBroadcastResetButton();
+    }
+
+    @Then("owner see button create broadcast chat will be disable")
+    public void ownerSeeButtonCreateBroadcastChatWillBeDisable() {
+        Assert.assertTrue(broadcast.disableCreateBroadcastChatButton(), "Button is enable");
     }
 }
