@@ -297,7 +297,7 @@ Feature: Broadcast Chat Owner
     And user click "Lihat Penerima"
     Then Lihat penerima page is displayed
 
-  @LIMO-191
+  @TEST_LIMO-191
   Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
     Given user go to mamikos homepage
     When user login as owner:
@@ -311,7 +311,7 @@ Feature: Broadcast Chat Owner
     And owner Masukan Pesan and choose row number 2 from the broadcast chat dashboard
     Then owner will see that the text "Pesan yang ingin Anda buat" is displayed
 
-  @LIMO-189
+  @TEST_LIMO-189
   Scenario: [Broadcast Chat][Chat]user want to received broadcast chat and see the broadcast chat
     #reset broadcast chat
     Given admin go to mamikos mamipay admin
@@ -344,7 +344,7 @@ Feature: Broadcast Chat Owner
     And user opens the chatroom in the "1" order on chat list
     Then chat room appear with latest message "Banyak keunggulannya seperti: Kopi Kapal Api dan Udud Jarcok Filter"
 
-  @LIMO-188
+  @TEST_LIMO-188
   Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
     Given user go to mamikos homepage
     When user login as owner:
@@ -355,7 +355,7 @@ Feature: Broadcast Chat Owner
     Then owner will see that the text "Semua kos Anda sedang dalam keadaan penuh" is displayed
     And owner see button create broadcast chat will be disable
 
-  @LIMO-187
+  @TEST_LIMO-187
   Scenario: [Broadcast Chat][Create Broadcast chat] Send broadcast with template without fill message
        #reset broadcast chat
     Given admin go to mamikos mamipay admin
