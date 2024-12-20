@@ -263,7 +263,7 @@ Feature: PMS - Add fee MVP
       | email             | password     |
       | pman@mamiteam.com | pmanM4m1t34m |
     And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
-    And admin create contract tenant reschedule
+    And admin create contract tenant "reschedule"
     And admin selected type room
     And admin input contract id with "71305"
     And admin fill checkin with "tomorrow"
@@ -292,3 +292,68 @@ Feature: PMS - Add fee MVP
     Then admin can see "Parkir Mobil" on confirm booking page
     When admin can see "Rp10.000" on confirm booking page
     And admin click on next button accept booking for kost add fee
+
+  @SS-4350
+  Scenario: [PMS][Relocation] Create Relocation when that booking has biaya tambahan
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag    | phone prod    |
+      | 0813000002    | 0813000002    |
+    When user go to mamikos homepage
+    Then user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0813000002 | 0812000007 | qwerty123 |
+    And user cancel booking
+
+#    Scenario: Relocation
+    Given admin go to pms singgahsini
+    When admin login pms :
+      | email             | password     |
+      | pman@mamiteam.com | pmanM4m1t34m |
+    And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
+    And admin create contract tenant "relocation"
+    And admin selected type room
+    And admin input contract id with "71305"
+    And admin fill informasi pembayaran:
+      | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
+      | Per Bulan   | today            | 3 Bulan     | Full Payment      |
+    And admin click on save button
+
+  @SS-4351
+  Scenario: [Bangkerupux][Confirm booking] Admin check confirm booking form for Kost P2
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then admin search contract by tenant phone number and akhiri contract:
+      | phone stag    | phone prod    |
+      | 0813000002    | 0813000002    |
+    When user go to mamikos homepage
+    Then user login as tenant via phone number:
+      | phone stag | phone prod | password  |
+      | 0813000002 | 0812000007 | qwerty123 |
+    And user cancel booking
+    When user go to mamikos homepage
+    Then tenant redirect to kost details:
+      | kost path stag                                   | kost path prod               |
+      | kost-jayapura-kost-putri-murah-kost-riniya-papua | Kos DC BAR Automation Tipe A |
+    And tenant booking kost for "today"
+    And user go to mamikos homepage
+    And user logs out as a Tenant user
+
+#    Scenario: confirm booking
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And admin bangkrupux navigate to data booking menu
+    And admin show filter data booking
+    And admin filter data booking by tenant phone number:
+      | Tenant Phone | Kos Type |
+      | 0813000002   | All    |
+    And admin click actions button on booking list
+    And admin accept booking for kost add fee
+    Then admin click on next button accept booking for kost add fee

@@ -528,13 +528,21 @@ public class HomepageSteps {
     //---End of Daftar Properti---//
 
     //-------reschedule------//
-    @And("admin create contract tenant reschedule")
-    public void admin_create_contract_tenant_reschedule(){
+    @And("admin create contract tenant {string}")
+    public void admin_create_contract_tenant(String text){
         homepage.clickOnTambahPenyewa();
         homepage.clickOnBooking();
         homepage.clickOnDropdownTipeBooking();
-        homepage.clickOnReschedule();
-        homepage.clickOnSelanjutnyaButton();
+        if(text.equalsIgnoreCase("reschedule")){
+            homepage.clickOnReschedule();
+            homepage.clickOnSelanjutnyaButton();
+        }
+        else if(text.equalsIgnoreCase("relocation")){
+            homepage.clickRelocationButton();
+            homepage.clickOnSelanjutnyaButton();
+        }
+
+
     }
 
     @And("admin fill checkin with {string}")

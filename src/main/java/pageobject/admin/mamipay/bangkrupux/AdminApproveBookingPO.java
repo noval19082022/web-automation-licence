@@ -34,7 +34,7 @@ public class AdminApproveBookingPO {
         dropdownFilterDataKosType = page.locator("#select2-kost_type-container");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
         actionButton = page.locator("(//button[@type='button'][normalize-space()='Actions'])[1]");
-        confirmButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Confirm"));
+        confirmButton = page.locator("td.table-action-column > div > ul > li:nth-child(3) > a");
         nextConfirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lanjutkan"));
         confirmBooking = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Konfirmasi"));
         deleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus"));
