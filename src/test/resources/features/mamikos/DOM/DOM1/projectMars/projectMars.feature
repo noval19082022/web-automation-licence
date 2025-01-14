@@ -19,7 +19,7 @@ Feature: Mars Project
     Then verify title ftue is "Mau chat bebas kuota?" and description "Jika tidak ingin menunggu, Anda bisa daftar GoldPlus untuk chat bebas kuota."
     When user click "Saya Mengerti" on ftue
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Vu Zet"
+    And search chat in chatlist "Gagami"
     Then user see the appearence of Mars chatroom
 
   @TEST_SS-2809 @Automated @MARS-DOM @Web @discovery-platform
@@ -30,7 +30,7 @@ Feature: Mars Project
       | 0888881241 | 0888881243 | qamamikos123 |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Vu Zet"
+    And search chat in chatlist "Gagami"
     Then user see attachment button is disabled
 
   @TEST_SS-2810 @Automated @MARS-DOM @Web @discovery-platform
@@ -59,7 +59,7 @@ Feature: Mars Project
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
     And user see the appearence of Mars chatlist
-    And search chat in chatlist "Vu Zet"
+    And search chat in chatlist "Gagami"
     Then user see the appearence of Mars chatroom
 
   @TEST_SS-2812 @Automated @MARS-DOM @Web @discovery-platform

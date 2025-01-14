@@ -8,9 +8,9 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner want to buy mamiads saldo with nominal "Rp27.000"
+    And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment using alfamart xendit as payment method from invoice detail
-    Then owner will see that the text "Pembayaran Berhasil" is displayed
+    Then owner verify invoice success paid mamiads
 
   @TEST_SS-3099 @paymentPermata
   Scenario: [Owner][Payment premium] Owner paid premium paket using Permata

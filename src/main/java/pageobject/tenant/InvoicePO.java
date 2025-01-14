@@ -380,6 +380,7 @@ public class InvoicePO {
     public void clickOnBayarSekarang() {
         playwright.pageScrollInView(page.getByText("Sembunyikan"));
         playwright.clickOn(bayarSekarangButton);
+        playwright.hardWait(2000.0);
     }
 
     /**
