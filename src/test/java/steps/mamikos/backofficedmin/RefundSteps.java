@@ -71,10 +71,11 @@ public class RefundSteps {
         refundPO.fillRefundAmount(amount);
     }
 
-    @And("admin change of reason list to pemilik membatalkan for refund")
-    public void adminChangeOfReasonListToPemilikMembatalkanForRefund() {
-        refundPO.chooseRefundReasonPemilikMembatalkan();
+    @And("admin change of reason list to {string} for refund")
+    public void adminChangeOfReasonListToForRefund(String Reason) {
+        refundPO.chooseRefundReasonPemilikMembatalkan(Reason);
     }
+
 
     @And("admin set to refund the paid invoice")
     public void adminSetToRefundThePaidInvoice() {
@@ -136,4 +137,10 @@ public class RefundSteps {
             refundPO.adminSearchDataRefund(name, value);
         }
     }
+
+    @Then("admin verify warning text {string}")
+    public void adminVerifyWarningText(String text) {
+        Assert.assertTrue(refundPO.isLessAmountVisible(text));
+    }
+
 }
