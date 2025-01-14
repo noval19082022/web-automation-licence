@@ -45,14 +45,17 @@ Feature: Payment Backoffice Staging 2 - Refund
     And user cancel booking
 
     ## create contract
-    When user visit page "/room/kost-kabupaten-banyumas-kost-campur-eksklusif-kost-automation-dom-boleh-refund-patikraja-banyumas-2"
+    When tenant redirect to kost details:
+      | kost path stag          | kost path prod               |
+      | kost-halmahera-utara-kost-putri-murah-kost-planet-neptunus | Kos DC BAR Automation Tipe A |
+#    user visit page "/room/kost-halmahera-utara-kost-putri-murah-kost-planet-neptunus"
     And tenant booking kost for "today"
     And tenant logs out
 
     ## owner accept
     When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
+      | phone stag    | phone prod   | password  |
+      | 0890000000281 | 081328787342 | qwerty123 |
     And owner accept booking and select the room
     Then owner should redirect back to pengajuan booking page
     And owner logs out
@@ -88,12 +91,12 @@ Feature: Payment Backoffice Staging 2 - Refund
     When admin navigate to mamipay refund page
     And admin pick one invoice on list to refund from cc payment
     And admin uncheck admin fee for refund
-    And admin edit paid amount credit card "2000000" for refund
-    Then admin verify see text "Paid amount must be less than refund amount"
+    And admin edit paid amount credit card "2500000" for refund
+    Then admin verify warning text "Paid amount must be less than refund amount"
 
-    #  Scenario: Admin edit paid amount & uncheck admin fee
+#      Scenario: Admin edit paid amount & uncheck admin fee
     And admin edit paid amount credit card "20000" for refund
-    And admin change of reason list to pemilik membatalkan for refund
+    And admin change of reason list to "Pemilik Membatalkan" for refund
     And admin set to refund the paid invoice
     Then admin verify see text "Refund transaction created."
 
@@ -156,7 +159,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin pick one invoice on list to refund
     And admin uncheck admin fee for refund
     And admin edit paid amount credit card "20000" for refund
-    And admin change of reason list to pemilik membatalkan for refund
+    And admin change of reason list to "Pemilik Membatalkan" for refund
     And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
     And admin set to refund the paid invoice
     Then admin verify see text "Refund transaction created."

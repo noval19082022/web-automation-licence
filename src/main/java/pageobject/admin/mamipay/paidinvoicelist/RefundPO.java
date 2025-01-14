@@ -34,6 +34,7 @@ public class RefundPO {
     // failed list
     private Locator failed;
     private Locator detailBtn;
+    private Locator amountRefundWarningText;
     //--- export transferred report detail ----
     private Locator chooseDateTransferredReport;
     private Locator chooseExportForToday;
@@ -47,6 +48,7 @@ public class RefundPO {
     private Locator filterTransactionBtn;
     private Locator phoneNumberPlaceHolder;
     private Locator cariBtn;
+    private Locator reasonField;
 
     public RefundPO(Page page) {
         this.page = page;
@@ -57,8 +59,8 @@ public class RefundPO {
         this.selectedBankForRefund = page.getByRole(AriaRole.COMBOBOX).getByRole(AriaRole.TEXTBOX).first();
         this.selectBank = page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Mandiri")).locator("span").nth(1);
         this.searchBankName = page.locator("input[type='search']");
-        this.checkMarkAdminFee = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya admin dikembalikan")).first();
-        this.inputAmountRefund = page.getByPlaceholder("Input paid amount").first();
+        this.checkMarkAdminFee = page.locator("//div[@class='refund-invoice__modal modal fade in']//label[1]/input[1]");
+        this.inputAmountRefund = page.locator("//div[@class='refund-invoice__modal modal fade in']//div[1]/input[@class='form-control']");
         this.inputRekeningNumber = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nomor rekening"));
         this.inputRekeningName = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama pemilik rekening"));
         this.refundReasonDropDown = page.locator(".refund-invoice__modal-select").first();
@@ -76,6 +78,7 @@ public class RefundPO {
         //---- failed list
         this.failed = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Failed"));
         this.detailBtn = page.getByRole(AriaRole.ROW).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Detail")).first();
+        this.amountRefundWarningText = page.locator(".box-body > div:nth-of-type(1) div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(1)");
         //--- export transferred detail ---
         this.chooseDateTransferredReport = page.locator("#refund-invoice-daterange");
         this.chooseExportForToday = page.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Today"));
@@ -89,6 +92,7 @@ public class RefundPO {
         this.filterTransactionBtn = page.getByText("Tampilkan Filter");
         this.phoneNumberPlaceHolder = page.getByPlaceholder("Ex: 081987654321");
         this.cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
+        this.reasonField = page.locator("//div[@class='refund-invoice__modal modal fade in']//select[@class='form-control refund-invoice__modal-select']");
     }
 
     /**
@@ -180,7 +184,7 @@ public class RefundPO {
      * clickOn the admin fee on refund process
      */
     public void clickOnCheckAdminFee() {
-        playwrightHelpers.clickOn(checkMarkAdminFee);
+        playwrightHelpers.uncheckBox(checkMarkAdminFee);
     }
 
     /**
@@ -196,8 +200,9 @@ public class RefundPO {
     /**
      * choose Pemilik membatalkan for refund reason
      */
-    public void chooseRefundReasonPemilikMembatalkan() {
-        playwrightHelpers.selectDropdownByValue(refundReasonDropDown, "Pemilik Membatalkan");
+    public void chooseRefundReasonPemilikMembatalkan(String Reason) {
+        playwrightHelpers.clickOn(reasonField);
+        playwrightHelpers.selectDropdownBySelectOption(reasonField, new SelectOption().setValue(Reason));
     }
 
     /**
@@ -296,4 +301,14 @@ public class RefundPO {
         playwrightHelpers.fill(valueBy, value);
         playwrightHelpers.clickOn(searchBtnAction);
     }
+
+    /**
+     * check if amount refund warning text is visible
+     *
+     * @return boolean
+     */
+    public boolean isLessAmountVisible(String text) {
+        return playwrightHelpers.getText(amountRefundWarningText).contains(text);
+    }
+
 }
