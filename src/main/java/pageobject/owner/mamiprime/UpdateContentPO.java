@@ -14,9 +14,12 @@ public class UpdateContentPO {
 
     // Invoice List Page
     private Locator tanyaJawabOnTable;
+    private Locator textSini;
 
     public UpdateContentPO(Page page) {
         this.page = page;
+
+        this.textSini = page.locator("//a[normalize-space()='sini']");
 
     }
 
@@ -29,5 +32,14 @@ public class UpdateContentPO {
             playwright.pageScrollInView(tanyaJawabOnTable);
             return playwright.getText(tanyaJawabOnTable);
         }
+
+    /**
+     * Click on text sini
+     */
+
+    public void clickOnTextSini(){
+        playwright.clickOn(textSini);
+    }
+
     }
 

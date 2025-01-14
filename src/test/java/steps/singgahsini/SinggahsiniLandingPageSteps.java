@@ -175,6 +175,8 @@ public class SinggahsiniLandingPageSteps {
             URL = "https://help.mamikos.com/post/bagaimana-agar-transaksi-saya-aman-di-mamikos";
         } else if (link.equalsIgnoreCase("Property page")){
             URL = "https://sini-jambu.kerupux.com/property-detail/10872/overview";
+        }else if (link.equalsIgnoreCase("Mamiprime")){
+            URL = "https://help.mamikos.com/post/di-mana-saja-tempat-penayangan-kos-di-mamiprime";
         }
 
         Assert.assertEquals(singgahsini.getNewTabURL(),URL);
