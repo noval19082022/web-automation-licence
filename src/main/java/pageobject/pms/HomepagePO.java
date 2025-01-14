@@ -144,6 +144,7 @@ public class HomepagePO {
     //-------reschedule-------//
     Locator rescheduleButton;
     Locator agreeButton;
+    Locator relocationButton;
 
     public HomepagePO(Page page) {
         this.page = page;
@@ -213,9 +214,10 @@ public class HomepagePO {
         notesCountertext = page.locator(".bg-c-textarea__counter");
         contractIdErrorMessage = page.locator("//div[@label=\"Contract ID\"]//*[@class=\"bg-c-field__message\"]");
 
-        //---reschedule----//
+        //---reschedule & relocation----//
         rescheduleButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Reschedule"));
         agreeButton = page.locator("//button[contains(.,'Setuju')]");
+        relocationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Relocation"));
 
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
@@ -1275,6 +1277,13 @@ public class HomepagePO {
      */
     public void clickOnReschedule(){
         playwright.clickOn(rescheduleButton);
+    }
+
+    /**
+     * click relocation button
+     */
+    public void clickRelocationButton(){
+        playwright.clickOn(relocationButton);
     }
 
     /**
