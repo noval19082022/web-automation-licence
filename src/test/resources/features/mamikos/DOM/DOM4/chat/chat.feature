@@ -96,7 +96,6 @@ Feature: Chat and Chat Optimization
       | kost-kabupaten-cilacap-kost-putri-eksklusif-kos-bx-automation-bbk-non-available-cilacap-tengah-cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
     And user click chat in kos detail
     Then user sees the Booking button disable
-                                                                                                             |
 
   @TEST_SS-3269
   Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
