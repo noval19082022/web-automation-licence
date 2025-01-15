@@ -146,7 +146,7 @@ public class NavigatesSteps {
     @Given("user navigates to mamikos-history")
     public void userNavigatesToMamikosHistory() {
         playwright = new PlaywrightHelpers(page);
-        playwright.navigateTo(Mamikos.URL + Mamikos.HISTORY, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + Mamikos.NOLOGIN, 30000.0, LoadState.LOAD);
     }
 
     @Given("user navigates to promo ngebut landing page")

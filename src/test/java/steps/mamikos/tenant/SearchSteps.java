@@ -52,6 +52,14 @@ public class SearchSteps {
         Assert.assertTrue(home.isEnterButtonDisplayed(), "Enter button not present!");
     }
 
+    @Then("Check navbar before login appears in pencari login")
+    public void CheckNavbarBeforeLoginAppearsInPencariLogin() {
+        Assert.assertTrue(home.isBookingKosNotDisplayed(), "Booking Kos button is present, but it should not be!");
+        Assert.assertTrue(home.isDownloadAppNotDisplayed(), "Download App button present, but it should not be!");
+        Assert.assertTrue(home.isPromosiAdsNotDisplayed(), "Promosi Iklan button present, but it should not be!");
+        Assert.assertTrue(home.isEnterButtonNotDisplayed(), "Enter button present, but it should not be!");
+    }
+
     @Then("user in kost detail navbar before login appears")
     public void userInKostDetailNavbarBeforeLoginAppears() throws InterruptedException {
 
