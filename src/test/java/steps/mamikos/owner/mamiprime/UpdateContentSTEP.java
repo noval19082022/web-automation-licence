@@ -3,6 +3,7 @@ package steps.mamikos.owner.mamiprime;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import pageobject.owner.mamiprime.UpdateContentPO;
 
@@ -27,5 +28,10 @@ public class UpdateContentSTEP {
                 updateContent.assertTanyaJawabOnTable(tanyaJawabTable);
             }
         }
+    }
+
+    @And("owner click on text sini")
+    public void owner_click_on_text_sini() {
+        updateContent.clickOnTextSini();
     }
 }
