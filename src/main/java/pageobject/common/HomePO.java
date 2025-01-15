@@ -132,15 +132,15 @@ public class HomePO {
 
         //header
         this.helpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        this.termAndConditionButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Syarat dan Ketentuan"));
+        this.termAndConditionButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Syarat dan Ketentuan").setExact(true));
         this.promoAdsButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Promote Promosikan Iklan Anda"));
         this.favoriteButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Favorit"));
         this.downloadAppButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Smartphone Download App"));
         this.chatHeaderButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat"));
         this.notificationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("notification"));
         this.otherButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lainnya"));
-        this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa?"));
-        this.bookingKosButtonHeadBar = page.locator("#app .nav-topbar-left > a:nth-child(2)");
+        this.searchIklanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
+        this.bookingKosButtonHeadBar = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         flashSaleIcon = page.getByText("flash");
         this.firstKostPromoIcon = page.locator(".rc-price__other-promo-icon").first();
         this.kostMenuDropdown = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("bed Kos"));
@@ -169,7 +169,7 @@ public class HomePO {
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
         this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
-        this.copyrightFooter = page.getByText("© 2024 Mamikos.com. All rights reserved");
+        this.copyrightFooter = page.getByText("© 2025 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
         this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
     }
@@ -299,12 +299,30 @@ public class HomePO {
     }
 
     /**
+     * Check element promosi ads button header is not displayed
+     *
+     * @return status true / false
+     */
+    public boolean isPromosiAdsNotDisplayed() {
+        return !playwright.waitTillLocatorIsVisible(promoAdsButton, 50.0);
+    }
+
+    /**
      * Enter Button is  Displayed
      *
      * @return true / false
      */
     public boolean isEnterButtonDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(btnMasuk, 50.0);
+    }
+
+    /**
+     * Enter Button is not Displayed
+     *
+     * @return true / false
+     */
+    public boolean isEnterButtonNotDisplayed() {
+        return !playwright.isLocatorVisibleAfterLoad(btnMasuk, 50.0);
     }
 
     /**
@@ -323,6 +341,15 @@ public class HomePO {
      */
     public boolean isDownloadAppDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(downloadAppButton, 50.0);
+    }
+
+    /**
+     * Check element download app button header is not displayed
+     *
+     * @return status true / false
+     */
+    public boolean isDownloadAppNotDisplayed() {
+        return !playwright.isLocatorVisibleAfterLoad(downloadAppButton, 50.0);
     }
 
 
@@ -404,6 +431,15 @@ public class HomePO {
      */
     public boolean isBookingKosDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
+    }
+
+    /**
+     * Check element booking kos button header is not displayed
+     *
+     * @return status true / false
+     */
+    public boolean isBookingKosNotDisplayed() {
+        return !playwright.isLocatorVisibleAfterLoad(bookingKosButtonHeadBar, 50.0);
     }
 
     /**

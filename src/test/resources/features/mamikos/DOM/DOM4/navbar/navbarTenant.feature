@@ -27,7 +27,7 @@ Feature: Navbar Tenant
   @TEST_SS-3198 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-other @TEST_COOP-5679
   Scenario: [Dweb][Navbar]Check Navbar in url mamikos-history Page Before login
     Given user navigates to mamikos-history
-    Then navbar before login appears
+    Then Check navbar before login appears in pencari login
 
   @TEST_SS-3181 @Automated @DOM4 @Web @discovery-platform @navbar @navbar-before-login @navbar-kost-detail
   Scenario: [Dweb][Kost Detail][Navbar]Check Navbar in Kost Detail Page Before login
