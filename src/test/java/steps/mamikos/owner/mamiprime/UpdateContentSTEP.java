@@ -34,4 +34,11 @@ public class UpdateContentSTEP {
     public void owner_click_on_text_sini() {
         updateContent.clickOnTextSini();
     }
+
+    @And("user see auto-select would be the first order")
+    public void owner_see_auto_select_first_order() {
+        updateContent.ownerSeeAutoSelectFirstOrder();
+    }
+
+
 }

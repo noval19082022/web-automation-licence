@@ -15,11 +15,13 @@ public class UpdateContentPO {
     // Invoice List Page
     private Locator tanyaJawabOnTable;
     private Locator textSini;
+    private Locator autoSelectFirstOrder;
 
     public UpdateContentPO(Page page) {
         this.page = page;
 
         this.textSini = page.locator("//a[normalize-space()='sini']");
+        this.autoSelectFirstOrder = page.locator("//a[@class='bg-c-link prime-property-list__list-item bg-c-link--high-naked prime-property-list__list-item--active']");
 
     }
 
@@ -41,5 +43,13 @@ public class UpdateContentPO {
         playwright.clickOn(textSini);
     }
 
+    /**
+     * Get locator auto select first order
+     */
+
+    public void ownerSeeAutoSelectFirstOrder(){
+        playwright.getLocators(autoSelectFirstOrder);
     }
+
+}
 
