@@ -925,7 +925,7 @@ public class HomepagePO {
      */
     public void ticksHospitality(String pilihHospitality) {
         playwright.clickOn(pilihHospitalityDropdown);
-        hospitalityValue = page.getByText(pilihHospitality);
+        hospitalityValue = page.getByText(pilihHospitality).first();
         playwright.clickOn(hospitalityValue);
     }
 
