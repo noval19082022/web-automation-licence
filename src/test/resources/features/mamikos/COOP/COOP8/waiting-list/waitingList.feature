@@ -54,8 +54,8 @@ Feature: Waiting List - Kost Detail
       | kost-kabupaten-bantul-kost-campur-murah-rega-satu-parangtritis-type-g | Kos DC BAR Automation Tipe A |
     Then tenant can see kamar penuh
     When tenant can see "Tanya pemilik" button
-    Then tenant can see "Lihat tipe lain" button
-    And tenant click on "Lihat tipe lain" button
+    Then tenant can see "lihat tipe kamar lainnya" button
+    And tenant click on "lihat tipe kamar lainnya" button
     Then tenant see "lihat tipe" section
 
   @TEST_SS-4215 @waiting-list @web @continue
@@ -65,8 +65,8 @@ Feature: Waiting List - Kost Detail
       | kost path stag                                             | kost path prod               |
       | kost-bantul-kost-campur-murah-kost-sekitarnya-mamitest-3-1 | Kos DC BAR Automation Tipe A |
     When tenant can see "Tanya pemilik" button
-    When tenant can see "Lihat kost lain" button
-    And tenant click on "Lihat kos lain" button
+    When tenant can see "lihat tipe kamar lainnya" button
+    And tenant click on "lihat tipe kamar lainnya" button
     Then tenant see "kamu mungkin menyukainya" section
 
   @TEST_SS-4216 @waiting-list @web @BBM8
