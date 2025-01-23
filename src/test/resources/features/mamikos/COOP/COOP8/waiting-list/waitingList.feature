@@ -15,6 +15,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Lihat tipe lain" button
     And tenant click on "Lihat tipe lain" button
     Then tenant see "lihat tipe" section
+    And tenant can't see "kamu mungkin menyukainya" section
 
   @TEST_SS-4210 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P1 when have tipe Lain(tipe lain not available)
@@ -57,6 +58,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "lihat tipe kamar lainnya" button
     And tenant click on "lihat tipe kamar lainnya" button
     Then tenant see "lihat tipe" section
+    And tenant can't see "kamu mungkin menyukainya" section
 
   @TEST_SS-4215 @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list  for kost P2 when have recomendation kost
