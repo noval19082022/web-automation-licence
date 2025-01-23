@@ -412,6 +412,16 @@ public class TenantBookingSteps {
         }
     }
 
+    @Then("tenant can't see {string} section")
+    public void tenantCantSeeXSection(String text) {
+        if (text.equalsIgnoreCase("lihat tipe lain")) {
+            kostDetail.isAnotherTypeSectionNotVisible();
+        } else if (text.equalsIgnoreCase("kamu mungkin menyukainya")) {
+            kostDetail.isAnotherKosSectionNotVisible(); // Memastikan tidak terlihat
+        }
+    }
+
+
     @Then("tenant/user can see {string}")
     public void tenantCanSeeX(String text) {
         if (text.equalsIgnoreCase("Kos ini khusus untuk karyawan")) {

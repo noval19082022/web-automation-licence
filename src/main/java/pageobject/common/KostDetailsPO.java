@@ -2098,6 +2098,23 @@ public class KostDetailsPO {
     }
 
     /**
+     * Check the visibility of tipe lain section is not visible
+     * @return boolean
+     */
+    public boolean isAnotherTypeSectionNotVisible() {
+        return !anotherTypeSection.isVisible();
+    }
+
+    /**
+     * Check if the "text"  is not visible
+     * @return boolean
+     */
+    public boolean isAnotherKosSectionNotVisible() {
+        return !anotherKosSection.isVisible();
+    }
+
+
+    /**
      * Check the visibility of kamu mungkin menyukainya section
      * @return boolean
      */

@@ -16,7 +16,6 @@ Feature: riwayat kost
     Then user will see review page and user click close on review page
     When user click Lihat Riwayat Transaksi and user click Kembali ke Booking button
     And user click Booking Ulang
-    And tenant set active page to 1
     Then user will open new tab and go to Booking form
     When user go to mamikos homepage
     Then user logs out as a Tenant user
