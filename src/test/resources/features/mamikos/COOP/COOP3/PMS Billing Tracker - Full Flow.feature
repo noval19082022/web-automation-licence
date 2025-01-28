@@ -1,4 +1,4 @@
-@COOP3 @billingTrackerFull
+@COOP3 @billingTrackerFull @fail
 Feature: Update Billing tracker flow
 
   Scenario: Terminated contract
@@ -163,8 +163,8 @@ Feature: Update Billing tracker flow
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Checkout
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to billing tracker
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
