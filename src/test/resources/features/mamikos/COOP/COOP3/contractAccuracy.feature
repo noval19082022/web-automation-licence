@@ -5,8 +5,8 @@ Feature: Contract Accuracy DBET - PMS
     Scenario: [PMS][Room Allotment][Add DBET] User check required of kategori kontrak field
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -19,8 +19,8 @@ Feature: Contract Accuracy DBET - PMS
    Scenario Outline: [PMS][Room Allotment][Add DBET] User check permission to fill of Contract ID field based on Kategori Kontrak field
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -40,8 +40,8 @@ Feature: Contract Accuracy DBET - PMS
   Scenario Outline: [PMS][Room Allotment][Add DBET] User check value dropdown kategori kontrak
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -60,8 +60,8 @@ Feature: Contract Accuracy DBET - PMS
   Scenario Outline: [PMS][Room Allotment][Tambah Penyewa] Check field Notes
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -75,8 +75,8 @@ Feature: Contract Accuracy DBET - PMS
   Scenario: [PMS][Room Allotment][Tambah Penyewa] User create DBET tenant using active contract ID
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room

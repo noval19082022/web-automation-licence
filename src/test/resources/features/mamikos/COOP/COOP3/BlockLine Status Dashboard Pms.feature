@@ -20,8 +20,8 @@ Feature: BlockLine Status Dashboard Pms
   Scenario: Add tenant when the kost has an additional price, deposit & denda
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -48,8 +48,8 @@ Feature: BlockLine Status Dashboard Pms
   Scenario: Block line status Waiting for payment
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
     Then admin see block line status "Waiting for payment"
 
@@ -65,8 +65,8 @@ Feature: BlockLine Status Dashboard Pms
   Scenario: Block line status Waiting for check-in
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
     Then admin see block line status "Waiting for check-in"
 
@@ -82,8 +82,8 @@ Feature: BlockLine Status Dashboard Pms
   Scenario: Block line status Stay - Booking
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
     Then admin see block line status "Stay - Booking"
 		

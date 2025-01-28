@@ -57,8 +57,8 @@ Feature: Update Billing tracker flow
     Scenario: check data on billing tracker and filter with aktif contract status
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to billing tracker
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"

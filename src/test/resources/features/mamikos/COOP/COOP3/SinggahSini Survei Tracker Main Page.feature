@@ -6,8 +6,8 @@ Feature: SinggahSini Survei Tracker Main Page
   Scenario: Pagination Functionality
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to survey tracker menu
     Then user see pagination menu on Detail Tenant is displayed
     When user click pagination number "2"
