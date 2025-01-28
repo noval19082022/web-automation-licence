@@ -6,8 +6,8 @@
     Scenario: Add New Lokasi Strategis
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to detail property "Khusus Automation"
       And admin go to detail kos tab
       And admin ubah data property

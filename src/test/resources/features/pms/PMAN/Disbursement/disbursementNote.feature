@@ -6,8 +6,8 @@
     Scenario: Valid notes when character NOT NULL & <=1500
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"

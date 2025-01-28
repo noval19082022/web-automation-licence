@@ -6,8 +6,8 @@
     Scenario: Role list display
       Given admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       When admin go to role management menu
       Then role list should contains column
         | Nama Role         |

@@ -6,8 +6,8 @@ Feature: Homepage menu
   Scenario: Check empty state in Homepage menu
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin search property by name "Lalala"
     Then empty state in Homepage menu is displayed
 

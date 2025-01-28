@@ -6,8 +6,8 @@ Feature: Overview
   Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to detail property "Khusus Automation"
     Then profil property should match
       | ID    | Nama Property                                     | Jenis Produk  | Tipe                    | Syarat Pekerjaan Penyewa      | Syarat Agama Penyewa            | Alamat                          | Peta Lokasi                                             |

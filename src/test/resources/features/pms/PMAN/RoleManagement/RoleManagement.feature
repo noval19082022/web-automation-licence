@@ -8,8 +8,8 @@ Feature: Role Management
     And bring page to front
     And admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to role management menu
       #back from tambah Role
     When admin go to tambah role

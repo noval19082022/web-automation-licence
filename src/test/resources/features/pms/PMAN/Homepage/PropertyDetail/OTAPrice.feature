@@ -6,8 +6,8 @@ Feature: Check OTA Price in Detail Kontrak PMS
   Scenario: Check All listings that Does Not Have OTA Price
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to detail property "Male"
     And admin see detail kerja sama
     Then OTA Prices are displayed in Rincian Tipe Kamar dan Harga section

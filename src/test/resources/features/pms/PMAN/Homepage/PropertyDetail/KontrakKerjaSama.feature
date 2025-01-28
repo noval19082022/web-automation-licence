@@ -6,8 +6,8 @@ Feature: Kontrak Kerja Sama
   Scenario: See and Edit Profil Pemilik
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to detail property "Khusus Automation"
     When admin see profil pemilik
     Then profil pemilik section match with data

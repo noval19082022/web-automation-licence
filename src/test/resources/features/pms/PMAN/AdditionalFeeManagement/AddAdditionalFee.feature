@@ -6,8 +6,8 @@
     Scenario: Additional fee name max 60 char validation
       Given admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to additional fee management menu
       When admin add new additional fee
       #input nama biaya exact 60 char
@@ -113,8 +113,8 @@
       Scenario: Delete master data that are being used in Biaya Tambahan
       Given admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to additional fee management menu
       #create master data
       When admin add new additional fee

@@ -6,8 +6,8 @@ Feature: Additional Fee Master Data List
   Scenario: Check Biaya Tambahan Tetap, Satuan Waktu only, Ditentukan di Awal, Penyewa Tidak bisa pilih mandiri
     Given admin go to pms singgahsini
     And admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to additional fee management menu
     #add additional fee master data
     When admin add new additional fee
@@ -110,8 +110,8 @@ Feature: Additional Fee Master Data List
   Scenario: Max list per page
     Given admin go to pms singgahsini
     And admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to additional fee management menu
     Then admin can view 10 additional fee per page
 

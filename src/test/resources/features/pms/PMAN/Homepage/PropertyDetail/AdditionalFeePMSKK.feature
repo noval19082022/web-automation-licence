@@ -6,8 +6,8 @@ Feature: Additional Fee PMS KK
   Scenario: Check Empty State in Biaya Tambahan PMS KK
     Given admin go to pms singgahsini
     And admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to detail property "Khusus Automation"
     And admin see detail kerja sama
     Then empty state in Biaya Tambahan is displayed

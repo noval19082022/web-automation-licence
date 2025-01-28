@@ -6,8 +6,8 @@
     Scenario: Close Action Button in Daftar Property Page
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin clicks kebab button
       Then Action button is displayed in Daftar Property page
       When admin clicks outside Action Button

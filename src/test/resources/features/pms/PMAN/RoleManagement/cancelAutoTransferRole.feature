@@ -8,8 +8,8 @@
       And bring page to front
       When admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to role management menu
       And admin go to tambah role
       Then permission "Akses Disbursement - Cancel Auto Transfer" should exist in permission list
