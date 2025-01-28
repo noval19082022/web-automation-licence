@@ -8,8 +8,8 @@
       And bring page to front
       And admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin clicks on Edit Table button
       Then Yes and No buttons in every row are displayed
 

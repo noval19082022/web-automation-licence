@@ -23,8 +23,8 @@ Feature: PMS - Add fee MVP
   Scenario: [PMS] Create new booking or DBET when kost doesn't have PMS KK Add fee
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Bale Mantu Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -88,8 +88,8 @@ Feature: PMS - Add fee MVP
 
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Bundaran Aloha Sidoarjo"
     And admin create contract tenant new booking
     And admin selected type room
@@ -129,8 +129,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -161,8 +161,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -188,8 +188,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -229,8 +229,8 @@ Feature: PMS - Add fee MVP
   Scenario: [PMS][New booking/DBET] Admin check list addfee must same with PMS-kk in dropdown
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -260,8 +260,8 @@ Feature: PMS - Add fee MVP
   Scenario: [PMS][Reschedule] Create Reschedule when that booking has biaya tambahan
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
     And admin create contract tenant "reschedule"
     And admin selected type room
@@ -311,8 +311,8 @@ Feature: PMS - Add fee MVP
 #    Scenario: Relocation
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
     And admin create contract tenant "relocation"
     And admin selected type room

@@ -5,8 +5,8 @@ Feature: PMS New DBET
   Scenario: [PMS-DBET][DBET Form]Check validation on on all field
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -17,8 +17,8 @@ Feature: PMS New DBET
   Scenario: [PMS-DBET][Phone number]Check validation on Phone number
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -34,8 +34,8 @@ Feature: PMS New DBET
   Scenario: [PMS-DBET][Phone number]Check validation on Tenant Name
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room
@@ -49,8 +49,8 @@ Feature: PMS New DBET
   Scenario: [PMS-DBET][Phone number]Check validation on Email
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to room allotment page "Kost Singgahsini Rumah Bata Bantul"
     And admin create contract tenant dbet
     And admin selected type room

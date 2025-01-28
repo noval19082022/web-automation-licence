@@ -6,8 +6,8 @@
     Scenario: Admin Search Property by Property Name
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin search property by one name "khusus"
       And property is displayed
       When admin clear keyword in Homepage

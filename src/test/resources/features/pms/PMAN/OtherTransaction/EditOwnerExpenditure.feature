@@ -5,8 +5,8 @@
     Background: Open Other Transaction Menu
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to other transation menu
 
     @TEST_SS-699

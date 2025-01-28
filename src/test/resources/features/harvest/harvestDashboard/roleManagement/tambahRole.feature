@@ -6,8 +6,8 @@
     Scenario: Find member by name using 3 letter
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       When admin add new role harvest "Automation"
       And admin search member "upr"
       Then system should show member suggestion "Upras Hanif Marfuah (upras@mamikos.com)"

@@ -6,8 +6,8 @@
     Scenario: Add new Additional Fee
       Given admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to additional fee management menu
       When admin add new additional fee
       When admin input nama biaya "Automated Biaya PMAN"
@@ -28,8 +28,8 @@
     Scenario: Check Auto Disbursement Change Log When Auto Disbursement turn into "ON/OFF"
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to detail property "Khusus Automation"
     #Check Auto Disbursement ON
       And admin change Transfer Pendapatan Otomatis to "ON"
@@ -46,8 +46,8 @@
     Scenario: See and Edit Penanggung Jawab
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to detail property "Khusus Automation"
       When admin see penanggung jawab section
       Then penanggung jawab should be match
@@ -93,8 +93,8 @@
     Scenario: Add valid owner expenditure
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to other transation menu
       When admin add new owner expenditure "Reimbursement" in property "Khusus Automation"
       And admin add multiple biaya pengeluaran :
@@ -128,8 +128,8 @@
       And bring page to front
       And admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to role management menu
       #back from tambah Role
       When admin go to tambah role

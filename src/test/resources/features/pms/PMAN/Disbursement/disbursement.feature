@@ -6,8 +6,8 @@
     Scenario: Tambahan Pendapatan for Owner
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
@@ -35,8 +35,8 @@
     Scenario: Check Riwayat Transfer Pendapatan
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
@@ -47,8 +47,8 @@
     Scenario: Button Refresh Availablity
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       And admin select disbursement period "Periode 1"
       And admin go to detail transfer "Khusus Automation"
@@ -76,8 +76,8 @@
     Scenario: Check empty state in the transfer pendapatan pemilik table
       Given admin go to pms singgahsini
       When admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       And admin clicks on next month in calendar
       And admin select disbursement period "Periode 1"

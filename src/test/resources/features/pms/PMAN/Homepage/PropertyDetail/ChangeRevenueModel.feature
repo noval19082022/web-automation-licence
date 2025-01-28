@@ -6,8 +6,8 @@ Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
   Scenario: Get Correct Informasi Transfer Pendapatan Properti for Hybrid Revenue Model
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to Disbursement menu
     And admin go to detail transfer "Khusus Automation"
     And admin open new page

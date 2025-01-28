@@ -7,8 +7,8 @@
       #search empty keyword
       Given admin go to pms singgahsini
       And admin login pms :
-        | email             | password      |
-        | pman@mamiteam.com | pmanM4m1t34m  |
+        | email             | password        |
+        | pman@mamiteam.com | pmanM4m1t34m!!  |
       And admin go to Disbursement menu
       When admin search disbursement ""
       Then show all disbursement list

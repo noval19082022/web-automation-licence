@@ -5,8 +5,8 @@ Feature: Billing Announcement
   Scenario: [Billing tracker][Announcement]Check annountment for BSE
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to billing tracker
     And admin click on expand billing announcement
     And admin choose bse name with "Maya"
