@@ -1,7 +1,7 @@
 @COOP3
 Feature: Mamipoin Tenant Landing Page
 
-  @SS-5060 @fail
+  @SS-5060
   Scenario: MamiPoin Tenant Landing Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
