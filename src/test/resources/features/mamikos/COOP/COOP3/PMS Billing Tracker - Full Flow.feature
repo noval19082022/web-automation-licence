@@ -1,4 +1,4 @@
-@COOP3 @billingTrackerFull @fail
+@COOP3 @billingTrackerFull
 Feature: Update Billing tracker flow
 
   Scenario: Terminated contract

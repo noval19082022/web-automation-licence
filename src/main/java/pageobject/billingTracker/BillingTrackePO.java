@@ -322,6 +322,7 @@ public class BillingTrackePO {
         playwright.clickOn(contractStatusText);
         playwright.clickOn(applyButton);
         playwright.clickOn(searchButton);
+        playwright.waitTillNetworkIdle();
     }
 
     /**
