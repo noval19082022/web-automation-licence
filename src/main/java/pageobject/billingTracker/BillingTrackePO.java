@@ -78,6 +78,7 @@ public class BillingTrackePO {
         playwright.clickOn(searchTypeText);
         playwright.fill(searchInputField, text);
         playwright.clickOn(searchButton);
+        playwright.waitTillNetworkIdle();
     }
 
     /**

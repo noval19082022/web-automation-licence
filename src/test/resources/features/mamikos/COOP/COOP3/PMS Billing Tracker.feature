@@ -41,12 +41,11 @@ Feature: Billing Tracker
   Scenario: [Billing Tracker][View Data]Check invoice billing when tenant have many recurring invoice
     When admin click on reset button
     And admin choose month "Maret"
-    And admin search billing tracker by "No. HP Penyewa" and "081280003230"
+    And admin search billing tracker by "No. HP Penyewa" and "081197878413"
     Then Admin can see all invoice recurring from mamipay :
       | Jatuh Tempo | Nama Biaya |
-      | 01 Mar      | Recurring  |
-      | 07 Mar      | Recurring  |
-      | 15 Mar      | Recurring  |
+      | 10 Mar      | Recurring  |
+      | 27 Mar      | Recurring  |
 
   @SS-4307 @continue
   Scenario: [Billing Tracker][Title billing tracker]Check expands for Billing team announcement title
@@ -63,7 +62,7 @@ Feature: Billing Tracker
   @SS-5087 @continue
   Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number
     When admin click on reset button
-    And admin choose month "Agustus"
+    And admin choose month "Januari"
     And admin search billing tracker by "No. HP Penyewa" and "085246113222"
     Then admin click on "085246113222" link button
     And admin close unused browser tab
@@ -77,7 +76,7 @@ Feature: Billing Tracker
   @SS-4366
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status active & unpaid
     When admin click on reset button
-    And admin choose month "Agustus"
+    And admin choose month "Januari"
     And admin filter contract status with "Aktif"
     Then admin can see contract status with "Aktif"
     And admin clicks on Filter button
