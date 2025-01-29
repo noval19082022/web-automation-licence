@@ -6,8 +6,8 @@ Feature: MamiPoin Tenant Riwayat Poin Page
   Scenario: Tenant already on Riwayat Poin page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0890867321215 | 0890867321215 | mamikosqa123 |
+      | phone stag | phone prod    | password  |
+      | 0810000008 | 0890867321215 | qwerty123 |
     And tenant navigate to mamipoin history page
     Then user verify title in the riwayat poin page is displayed
     And user verify filter in the riwayat poin page is displayed
@@ -20,7 +20,7 @@ Feature: MamiPoin Tenant Riwayat Poin Page
   @SS-5064 @continue
   Scenario: MamiPoin Grouped by Month
     Then user verify point history grouped by months
-      | Januari 2024 |
+      | November 2024 |
 
   @SS-5065 @continue
   Scenario: Filter Poin Diterima
