@@ -64,6 +64,7 @@ public class AdminApproveBookingPO {
         Locator dataFilterkosType = page.locator("//li[@class='select2-results__option select2-results__option--highlighted']");
         playwright.clickOn(dataFilterkosType);
         playwright.clickOn(searchButton);
+        playwright.waitTillNetworkIdle();
     }
     /**
      * click action button in data booking
