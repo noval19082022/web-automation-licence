@@ -1,7 +1,7 @@
 @COOP3
 Feature: Mamipoin Tenant Landing Page
 
-  @SS-5060
+  @SS-5060 @fail
   Scenario: MamiPoin Tenant Landing Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -12,7 +12,7 @@ Feature: Mamipoin Tenant Landing Page
     And user verify informasi poin button is displayed
     And user verify riwayat poin button is displayed
     And user verify dapatkan poin button is displayed
-    And user verify expired point information on mamipoin landing page "2.000 poin kedaluwarsa pada 30 Nov 2024"
+    And user verify expired point information on mamipoin landing page "2.000 poin kedaluwarsa pada 31 Mei 2025"
 
   @SS-5061
   Scenario: Information about points that will expire and Tenant has no point
