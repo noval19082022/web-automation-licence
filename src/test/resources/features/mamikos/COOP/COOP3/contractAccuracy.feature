@@ -81,5 +81,5 @@ Feature: Contract Accuracy DBET - PMS
     And admin create contract tenant dbet
     And admin selected type room
     And admin choose dbet category with "Billing - Ubah Jatuh Tempo"
-    And admin input contract id with "70066"
+    And admin input contract id with "72660"
     Then admin can see "Hanya bisa memasukkan Contract ID yang sudah diakhiri." on contract id
