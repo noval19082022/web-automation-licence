@@ -34,8 +34,8 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
       | phone stag     | phone prod     | password     |
       | 08900000000022 | 08900000000022 | mamikosqa123 |
     And owner accept booking from tenant:
-      | tenant stag           | tenant prod           |
-      | Kost Adi Auto Regular | Kost Adi Auto Regular |
+      | tenant stag   | tenant prod           |
+      | Senjatanuklir | Kost Adi Auto Regular |
     Then owner should redirect back to pengajuan booking page
 
   Scenario: Tenant Pay 1st Month Booking For Add Ons

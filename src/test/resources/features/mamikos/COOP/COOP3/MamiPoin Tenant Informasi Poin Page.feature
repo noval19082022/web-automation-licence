@@ -17,7 +17,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
   @SS-5058
   Scenario: Description on Tanggal Kedaluwarsa
     Then user verify expired point on information point page
-      | 30 Nov 2024 |
+      | 31 Mei 2025 |
 
   @SS-5059
   Scenario: MamiPoin Tenant Informasi Poin Page When the User Poin is Empty
