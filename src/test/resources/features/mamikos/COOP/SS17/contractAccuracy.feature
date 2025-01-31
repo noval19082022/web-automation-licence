@@ -1,4 +1,4 @@
-@COOP3 @contractAccuracyDbet
+@SS17 @contractAccuracyDbet
 Feature: Contract Accuracy DBET - PMS
 
   @TEST_SS-5469

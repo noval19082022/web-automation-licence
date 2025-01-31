@@ -1,4 +1,4 @@
-@COOP3
+@SS17
 Feature: Pms New Booking
 
 

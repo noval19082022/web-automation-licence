@@ -1,4 +1,4 @@
-@COOP3 @dbetpms
+@SS17 @dbetpms
 Feature: PMS New DBET
 
   @SS-5099
