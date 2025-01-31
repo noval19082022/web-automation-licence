@@ -1,4 +1,4 @@
-@COOP3 @AddfeeMvp
+@SS17 @AddfeeMvp
 Feature: PMS - Add fee MVP
 
   @TEST_SS-5069
