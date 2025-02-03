@@ -6,8 +6,8 @@ Feature: Create OOO "Room Preparation" Type
   Scenario: Delete OOO From Room Allotment Page
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
 #    And admin search "Kost Singgahsini Auto Listing"
     And admin delete OOO on:

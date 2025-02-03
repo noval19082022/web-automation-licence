@@ -50,8 +50,8 @@ Feature: Survey Tenant
   Scenario: Survey Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password      |
-      | pman@mamiteam.com | pmanM4m1t34m  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Nama Properti" and input "Kost Adi Auto SinggahSini Tobelo Halmahera Utara" in the search field on main page
     Then user verify nama property on main page filter is "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"

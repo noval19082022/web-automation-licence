@@ -5,8 +5,8 @@ Feature: OOO Reason Options
   Scenario Outline: [PMS][Calender View] Check Kategori option in order at form edit reason in calendar view
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin set out of order on room "4"
     And admin click on dropdown type
@@ -26,8 +26,8 @@ Feature: OOO Reason Options
   Scenario: delete ooo
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password     |
-      | pman@mamiteam.com | pmanM4m1t34m |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Ersa Tobelo Halmahera Utara"
     And admin delete OOO on:
       | room number | start date |
