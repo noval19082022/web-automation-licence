@@ -37,6 +37,8 @@ public class ChatOwnerPO {
     Locator gpPacakgeText;
     Locator lastFTUEMars;
     Locator ftueMarsBroadcast;
+    Locator ftueSurveyTitle;
+    Locator berikutnyaBtn;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
     Locator Iunderstand;
@@ -77,6 +79,8 @@ public class ChatOwnerPO {
         gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
         ftueMarsBroadcast = page.getByTestId("ftueTooltipCarousel");
+        ftueSurveyTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Baru! Terima Survei Kos"));
+        berikutnyaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya"));
         chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
@@ -94,9 +98,17 @@ public class ChatOwnerPO {
         playwright.clickOn(ownerChatButton);
     }
 
-    public void dismissFTUEMarsGPAndBroadCastIfExist() {
+    public void dismissFTUEMarsGPAndSurveyIfExist() {
         if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 3000.0)) {
             this.dismissFTUEMarsGPAndBroadCast();
+        }
+
+        this.dismissFtueSurveyIfExist();
+    }
+
+    public void dismissFtueSurveyIfExist() {
+        if (playwright.waitTillLocatorIsVisible(ftueSurveyTitle, 3000.0)) {
+            playwright.clickOn(berikutnyaBtn);
         }
     }
 
@@ -405,6 +417,7 @@ public class ChatOwnerPO {
      * click on lihat button on JB coachmark
      */
     public void dismissFTUEJemputBola() {
+        this.dismissFtueSurveyIfExist();
         if (playwright.isTextDisplayed("Lihat Fitur")) {
             playwright.clickOn(lihatFiturFTUEJB);
         }
