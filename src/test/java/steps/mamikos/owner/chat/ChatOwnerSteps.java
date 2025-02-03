@@ -21,7 +21,7 @@ public class ChatOwnerSteps {
     @And("user click chat button in top bar owner home page")
     public void userClickChatButtonInTopBarOwnerHomePage() {
         chat.clickChatOwner();
-        chat.dismissFTUEMarsGPAndBroadCastIfExist();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
         chat.dismissFTUEJemputBolaIfExist();
     }
 
@@ -118,7 +118,7 @@ public class ChatOwnerSteps {
 
     @And("user dismiss FTUE MARS Goldplus and FTUE Broadcast")
     public void userDismissFTUEMARSGoldplusAndFTUEBroadcast() {
-        chat.dismissFTUEMarsGPAndBroadCastIfExist();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
     }
 
     @Then("user see attachment button is enabled")
