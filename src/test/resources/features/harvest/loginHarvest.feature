@@ -14,8 +14,8 @@
     Scenario: Login using invalid account
       When admin navigates to Harvest Dashboard Login
       And admin login Harvest Dashboard:
-        | email                        | password      |
-        | automationpman10@mamikos.com | pmanM4m1t34m  |
+        | email                        | password       |
+        | automationpman10@mamikos.com | pmanM4m1t34m!! |
       Then admin stay in login harvest page
       And show login harvest error message "Terjadi kesalahan, silakan coba lagi."
 
