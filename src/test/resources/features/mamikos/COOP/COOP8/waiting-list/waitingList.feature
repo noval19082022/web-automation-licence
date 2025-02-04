@@ -76,9 +76,10 @@ Feature: Waiting List - Kost Detail
     When user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                                      | kost path prod               |
-      | kost-kabupaten-nabire-kost-campur-murah-kost-rini-dua-menou-nabire-1 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-ngawi-kost-campur-murah-kost-rini-ngawi-mantingan-ngawi | Kos DC BAR Automation Tipe A |
     And tenant can see kamar penuh
     Then tenant can see "Tanya pemilik" button
+    When tenant can see "Ikut daftar tunggu" button
 
   @TEST_SS_4219  @waiting-list @web @continue
   Scenario: [Web][Waiting List ][Kost detail]Check kost detail when already submit waiting list and acces another kost with fully room
