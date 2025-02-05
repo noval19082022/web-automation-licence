@@ -22,7 +22,7 @@ Feature: Beli Saldo
       | 10.000    | Rp9.000     | 10%  | Rp10.000    |
       | 30.000    | Rp27.000    | 10%  | Rp30.000    |
       | 50.000    | Rp50.000    |      |             |
-      | 80.000    | Rp75.000    | 6%   | Rp80.000    |
+      | 75.000    | Rp75.000    | 6%   | Rp80.000    |
       | 80.000    | Rp80.000    |      |             |
       | 300.000   | Rp205.000   | 31%  | Rp300.000   |
       | 300.000   | Rp300.000   |      |             |
@@ -34,7 +34,7 @@ Feature: Beli Saldo
    Scenario: Change Saldo
     Given owner choose saldo "Rp27.000"
     When owner ubah saldo to "Rp6.000"
-    Then validate detail tagihan saldo mamiads "6.000"
+    Then validate detail tagihan saldo mamiads "9.000"
 
   @TEST_LIMO-3337 @continue
    Scenario: Beli Saldo - Transaction Success

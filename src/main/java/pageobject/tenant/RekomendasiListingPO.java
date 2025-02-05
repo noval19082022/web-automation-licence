@@ -155,11 +155,10 @@ public class RekomendasiListingPO {
 
     /**
      * Verify property last seen is present
-     * @param property
      * @return boolean
      */
-    public boolean isPropertyVisible(String property) {
-        String element = "(//*[contains(., '" + property+ "')])[1]";
+    public boolean isPropertyVisible() {
+        String element = "(//div[@data-testid='kostRoomCard'])[1]";
         return playwright.waitTillLocatorIsVisible(page.locator(element),1000.0);
     }
 

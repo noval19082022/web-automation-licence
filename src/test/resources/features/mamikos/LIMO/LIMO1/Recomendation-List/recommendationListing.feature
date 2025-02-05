@@ -1,4 +1,4 @@
-@LIMO1 @DONEMIGRATINGTONEWBOARD
+@LIMO1 @DONEMIGRATINGTONEWBOARD @viu
 Feature: Recommendation Listing
 
   @TEST_LIMO-2711
@@ -79,20 +79,17 @@ Feature: Recommendation Listing
       | phone stag    | password  |
       | 0892202501    | qwerty123 |
     And tenant search kost then go to kost details:
-      | kost name stag          | kost name prod |
-      | Kos Raney Momogi Tipe A |                |
-    And tenant redirect to kost details:
-      | kost path stag                                       | kost path prod               |
-      | kost-kota-yogyakarta-kost-putri-eksklusif-kos-raney-momogi-tipe-a-danurejan-yogyakarta | Kos DC BAR Automation Tipe A |
+      | kost name stag             | kost name prod |
+      | Kos Raney Aphrodite Tipe 3 |                |
     When tenant open menu favorite
-    Then verify last seen property doesn't display on rekomendasi section
+    Then verify last seen property display on rekomendasi section
     And tenant open menu kost saya
-    Then verify last seen property doesn't display on rekomendasi section
+    Then verify last seen property display on rekomendasi section
     When tenant see first kost rekomendasi at kos saya page
     Then user can favorite the kost for recomendation listing
     And tenant set active page to 1
     When tenant navigate to kost saya page
-   # Then tenant can not see kos after favorited that kos at recomendation section
+    Then verify last seen property display on rekomendasi section
 
   @TEST_LIMO-2716
   Scenario: Verify kost is show at rekomendation section after unfavorite kost
