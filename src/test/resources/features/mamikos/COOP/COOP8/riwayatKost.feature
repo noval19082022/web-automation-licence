@@ -1,7 +1,7 @@
 @riwayatKost @BBM8
 Feature: riwayat kost
 
-  @TEST_SS-3385 @continue
+  @TEST_SS-3385
   Scenario: check riwayat list and riwayat detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
