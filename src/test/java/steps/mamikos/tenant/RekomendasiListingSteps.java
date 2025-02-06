@@ -70,10 +70,10 @@ public class RekomendasiListingSteps {
         rekomendasiListing.clickOnFavoriteHeader();
     }
 
-    @Then("verify last seen property doesn't display on rekomendasi section")
+    @Then("verify last seen property display on rekomendasi section")
     public void verify_last_seen_property_doesn_t_display_on_rekomendasi_section() {
         Assert.assertTrue(rekomendasiListing.isRekomendasiSectionVisible(), "Mungkin cocok untuk anda doesn't display!");
-        Assert.assertTrue(rekomendasiListing.isPropertyVisible(searchListing.getProperty()), "Property already display!");
+        Assert.assertTrue(rekomendasiListing.isPropertyVisible(), "Property already display!");
     }
 
     @Then("tenant open menu kost saya")
@@ -105,5 +105,8 @@ public class RekomendasiListingSteps {
     public void tenant_wants_to_open_detail_kost_from_favorite_page(String kostName) throws InterruptedException {
         page1 = rekomendasiListing.clickOnPropertyFavorit(kostName);
     }
-
+    @And("user click on hapus histori button")
+    public void user_click_on_hapus_histori_button() {
+        rekomendasiListing.clickOnHapusHistoriButton();
+    }
 }

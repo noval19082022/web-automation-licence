@@ -15,7 +15,7 @@ Feature: GP Crosseling
     Then user view detail list saldo MamiAds
       | saldo     | cashback  | disc | salePrice   | discPriceMamiAds | saving          |
       | 1.500.000 | + 150.000 | 10%  | Rp1.350.000 | 1.500.000        | Hemat Rp300.000 |
-      | 6.000     | + 600     |      | Rp6.000     |                  | Hemat Rp600     |
+      | 10.000    | + 1.000   | 10%  | Rp9.000     |  10.000          | Hemat Rp2.000   |
       | 30.000    | + 3.000   | 10%  | Rp27.000    |  30.000          | Hemat Rp6.000   |
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3358
@@ -24,15 +24,15 @@ Feature: GP Crosseling
     Then user view detail list saldo MamiAds
       | saldo     | cashback  | disc | salePrice   | discPriceMamiAds | saving            |
       | 1.500.000 | + 150.000 | 10%  | Rp1.350.000 | 1.500.000        | Hemat Rp300.000   |
-      | 6.000     | + 600     |      | Rp6.000     |                  | Hemat Rp600       |
+      | 10.000    | + 1.000   | 10%  | Rp9.000     | 10.000           | Hemat Rp2.000     |
       | 30.000    | + 3.000   | 10%  | Rp27.000    | 30.000           | Hemat Rp6.000     |
       | 50.000    | + 5.000   |      | Rp50.000    |                  | Hemat Rp5.000     |
-      | 75.000    | + 7.500   | 6%   | Rp75.000    | 80.000           | Hemat Rp7.500     |
-      | 80.000    | + 8.000   |      | Rp75.000    |                  | Hemat Rp13.000    |
-      | 205.000   | + 20.500  | 8%   | Rp205.000   | 300.000          | Hemat Rp20.500    |
-      | 300.000   | + 30.000  |      | Rp276.000   |                  | Hemat Rp54.000    |
-      | 850.000   | + 85.000  | 7%   | Rp850.000   | 1.000.000        | Hemat Rp85.000    |
-      | 1.000.000 | + 100.000 | 10%  | Rp925.000   | 5.000.000        | Hemat Rp175.000   |
+      | 75.000    | + 8.000   | 6%   | Rp75.000    | 80.000           | Hemat Rp13.000    |
+      | 80.000    | + 8.000   |      | Rp80.000    |                  | Hemat Rp8.000     |
+      | 300.000   | + 30.000  | 31%  | Rp205.000   | 300.000          | Hemat Rp125.000   |
+      | 300.000   | + 30.000  |      | Rp300.000   |                  | Hemat Rp30.000    |
+      | 850.000   | + 85.000  |      | Rp850.000   |                  | Hemat Rp85.000    |
+      | 1.000.000 | + 100.000 | 15%  | Rp850.000   | 1.000.000        | Hemat Rp250.000   |
     When user click "Tutup"
     And user choose saldo "Rp1.350.000" on GoldPlus section
 
@@ -90,7 +90,7 @@ Feature: GP Crosseling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp27.000" saldo "30.000"
+    And validate status transaction mamiads is "Lunas" with price "Rp27.000" saldo "Saldo 30.000"
 
   @terminate @gpCrossPaid @TEST_LIMO-3352
   Scenario: Terminate GP

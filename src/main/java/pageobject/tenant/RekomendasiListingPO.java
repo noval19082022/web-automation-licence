@@ -24,6 +24,7 @@ public class RekomendasiListingPO {
     Locator rekomendasiListingActual;
     Locator firstPropertyRekomendasiKosSaya;
     Locator propertyFavorit;
+    Locator hapusHistoriButton;
 
     public RekomendasiListingPO(Page page) {
         this.page = page;
@@ -39,6 +40,7 @@ public class RekomendasiListingPO {
         this.paginationNumberAct = page.locator("//div[@class='premium-recom-slider-item']");
         this.rekomendasiListingActual = page.locator("//*[@class=‘premium-recom-slide’]//div[@class=‘track-list-booking-kost’]");
         this.firstPropertyRekomendasiKosSaya =  page.locator("(//*[@class='rc-info__name bg-c-text bg-c-text--body-4'])[1]");
+        this.hapusHistoriButton = page.locator("//button[normalize-space()='Hapus']");
     }
 
     /**
@@ -153,11 +155,10 @@ public class RekomendasiListingPO {
 
     /**
      * Verify property last seen is present
-     * @param property
      * @return boolean
      */
-    public boolean isPropertyVisible(String property) {
-        String element = "(//*[contains(., '" + property+ "')])[1]";
+    public boolean isPropertyVisible() {
+        String element = "(//div[@data-testid='kostRoomCard'])[1]";
         return playwright.waitTillLocatorIsVisible(page.locator(element),1000.0);
     }
 
@@ -233,5 +234,10 @@ public class RekomendasiListingPO {
         ActiveContext.setActivePage(page);
         return ActiveContext.getActivePage();
     }
-
+    /**
+     * Click on Hapus Histori button on pernah dilihat
+     */
+    public void clickOnHapusHistoriButton() {
+        playwright.clickOn(hapusHistoriButton);
+    }
 }

@@ -90,7 +90,7 @@ public class MamiAdsSteps {
 
     @And("detail list saldo as expected")
     public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded(3000.0);
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;int j=0;
         for (Map<String, String> content : table) {
