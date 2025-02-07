@@ -1,4 +1,4 @@
-@LIMO1 @DONEMIGRATINGTONEWBOARD @viu
+@LIMO1 @DONEMIGRATINGTONEWBOARD @viu @cekfailed
 Feature: Recommendation Listing
 
   @TEST_LIMO-2711
@@ -77,7 +77,7 @@ Feature: Recommendation Listing
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | password  |
-      | 0892202501    | qwerty123 |
+      | 0892202413    | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag             | kost name prod |
       | Kos Raney Aphrodite Tipe 3 |                |

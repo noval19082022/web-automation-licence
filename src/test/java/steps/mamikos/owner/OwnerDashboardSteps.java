@@ -373,6 +373,7 @@ public class OwnerDashboardSteps {
 
     @And("user click daftar GP button")
     public void userClickDaftarGPButton() {
+        loading.waitForLoadingIconDisappear();
         ownerDashboardPO.clickOnDaftarGP();
     }
 
