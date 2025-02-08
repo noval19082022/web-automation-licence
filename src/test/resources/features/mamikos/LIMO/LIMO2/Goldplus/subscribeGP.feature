@@ -21,9 +21,9 @@ Feature: Subscribe GP from all entry point
   Scenario: Check subscribe GP from entry point chatrooms
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | password  |
+      | phone stag    | password  |
       | 0812345670001 | qwerty123 |
-    When owner click "Daftar GoldPlus" button on chatrooms "Rega Tenant Tiga"
+    When owner click "Daftar GoldPlus" button on chatrooms "Noval"
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
 
   @TEST_LIMO-3549 @otherEntryPointExceptInfoUntukAnda @continue

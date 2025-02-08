@@ -52,6 +52,7 @@ public class GoldplusPO {
     Locator detailManfaatGP2;
     Locator filterPaketGoldplusAnda;
     Locator closeBtn;
+    Locator perpanjangButton;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -160,6 +161,7 @@ public class GoldplusPO {
         successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
         upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
+        perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
     }
 
     /**
@@ -706,8 +708,7 @@ public class GoldplusPO {
      * Click 'Perpanjang' button on chat room
      */
     public void clickOnPerpanjangBtnOnChatRoom(){
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
-        playwright.clickOnTextButton("Perpanjang");
+        playwright.clickOn(perpanjangButton);
     }
 
     /**

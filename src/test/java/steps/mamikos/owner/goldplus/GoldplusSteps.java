@@ -201,10 +201,11 @@ public class GoldplusSteps {
     @When("owner wants to extends Goldplus from chatroom")
     public void owner_wants_to_extends_goldplus_from_chatroom() {
         loading.waitForLoadingIconDisappear();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
         chat.clickChatOwner();
         chat.dismissFTUEMarsGPAndBroadCast();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
         chat.dismissFTUEJemputBolaIfExist();
-        playwright.clickOnTextButton("Akun Test");
         goldplus.clickOnPerpanjangBtnOnChatRoom();
     }
 
@@ -263,7 +264,6 @@ public class GoldplusSteps {
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBolaIfExist();
         chat.searchChatTenant(tenantName);
-        chat.dismissFTUETBC();
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
