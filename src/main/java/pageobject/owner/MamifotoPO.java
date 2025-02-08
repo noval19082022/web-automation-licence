@@ -119,7 +119,7 @@ public class MamifotoPO {
         this.titleTingkatkanKinerja = page.getByText("Tingkatkan Kinerja Kos");
         this.subtitleTingkatkanKinerja = page.getByText("Lengkapi kos Anda dengan fitur berikut.");
         this.sewaMamifoto = page.locator("a").filter(new Locator.FilterOptions().setHasText("camera MamiFoto Sewa jasa foto kos profesional chevron-right"));
-        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosan Anda!"));
+        this.mamifotoInfoUntukAnda = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan Anda!"));
         this.lihatPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Paket"));
         this.packageFirstMamifoto = page.getByTestId("select-mamifoto-package").first();
         this.popUpDoesntHaveProperty = page.getByText("Anda Belum Memiliki Properti Tambahkan properti terlebih dahulu.");
@@ -133,7 +133,7 @@ public class MamifotoPO {
         this.headerFAQ = page.getByText("Tanya Jawab");
         this.faqFirstList = page.getByText("Jenis foto apa saja yang akan saya dapat?");
         this.contentFAQfirstList = page.getByText("Tergantung dari jenis paket yang dipilih, Anda bisa mendapatkan foto landscape f");
-        this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari Mami foto dan tingkatkan daya tarik kosa"));
+        this.mamiFotoInfoUntukAndaNonProperty = page.locator("a").filter(new Locator.FilterOptions().setHasText("Sewa jasa foto & video profesional dari MamiFoto dan tingkatkan daya tarik kosan Anda!"));
         this.riwayatPaketButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Riwayat Paket"));
         this.headerRiwayatPembelian = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Riwayat Pembelian"));
         this.tabSelesaiMamifoto = page.locator("//a[contains(.,'Selesai')]");
