@@ -210,8 +210,8 @@ public class MamifotoSteps {
     @When("owner paid MamiFoto")
     public void owner_paid_mami_foto() {
         mamifoto.clickOnButtonBayarSekarangMamifoto();
-        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
         Assert.assertEquals(mamifoto.getTextDiscountGPInvoiceMamifoto(),mamifoto.getTextDiscountGPInvoiceMamifoto(),"text doesnt match");
+        Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
     }
 
     @Then("verify discount price GP doesnt appear on the package list")

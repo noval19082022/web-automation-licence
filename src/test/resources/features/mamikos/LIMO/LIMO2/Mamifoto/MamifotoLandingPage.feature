@@ -5,8 +5,8 @@ Feature: Check Mamifoto Landing Page
   Scenario: [WEB][MamiFoto] Owner visits Landing Page of MamiFoto
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password  |
-      | 082233545506 | 0          | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202202 | 0          | qwerty123 |
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
 
