@@ -1,10 +1,8 @@
 package pageobject.admin.mamipay.bangkrupux;
 
-import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;

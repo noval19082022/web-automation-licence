@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.time.Duration;
-
 public class NaikkanIklanPO {
     private Page page;
     private PlaywrightHelpers playwright;
