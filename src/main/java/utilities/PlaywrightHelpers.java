@@ -389,6 +389,15 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get text content from locator
+     * @param locator target Locator playwright locator
+     * @return String data type
+     */
+    public String getLocatorTextContent(Locator locator) {
+        return locator.textContent();
+    }
+
+    /**
      * Get value from input element
      *
      * @param locator playwright locator

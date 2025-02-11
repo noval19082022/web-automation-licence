@@ -7,6 +7,8 @@ import com.microsoft.playwright.options.AriaRole;
 import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 public class GoldplusPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -92,6 +94,8 @@ public class GoldplusPO {
     Locator upgradePaketBtnOnTbc;
     Locator upgradePaketBtnPopUpOnTbc;
 
+    private Locator mamikosActionCard;
+
 
     public GoldplusPO(Page page) {
         this.page = page;
@@ -162,6 +166,7 @@ public class GoldplusPO {
         upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
+        mamikosActionCard = page.locator(".mk-action-card__main");
     }
 
     /**
@@ -261,10 +266,19 @@ public class GoldplusPO {
      *
      */
     public void clickOnInfoUntukAnda(String infoUntukAndaMessage) {
-        playwright.waitTillPageLoaded(10000.0);
-        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
-        playwright.pageScrollToDown(5000);
-        playwright.clickOn(infoUntukAndaOption);
+        List<Locator> mamikosActionCardLocators = playwright.getLocators(mamikosActionCard);
+        for (Locator locator : mamikosActionCardLocators) {
+            String mamikosActionCardInnerText = playwright.getLocatorTextContent(locator);
+            System.out.println("mamikosActionCardInnerText: " + mamikosActionCardInnerText);
+            if (mamikosActionCardInnerText.contains(infoUntukAndaMessage)) {
+                playwright.clickOn(locator);
+                break;
+            }
+        }
+//        playwright.waitTillPageLoaded(10000.0);
+//        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
+//        playwright.pageScrollToDown(5000);
+//        playwright.clickOn(infoUntukAndaOption);
     }
 
     /**
