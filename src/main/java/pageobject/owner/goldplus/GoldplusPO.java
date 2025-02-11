@@ -275,10 +275,6 @@ public class GoldplusPO {
                 break;
             }
         }
-//        playwright.waitTillPageLoaded(10000.0);
-//        infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
-//        playwright.pageScrollToDown(5000);
-//        playwright.clickOn(infoUntukAndaOption);
     }
 
     /**
