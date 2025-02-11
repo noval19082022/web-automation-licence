@@ -4,7 +4,6 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 import pageobject.owner.mamiprime.MamiprimeResetPO;
 import utilities.PlaywrightHelpers;
 

@@ -15,7 +15,7 @@ Feature: Owner Dashboard GP
     When user login as owner:
       | phone stag   | phone prod | password |
       | 082233545515 | 0          | 12345678 |
-    And user click info untuk anda "1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
+    And user click info untuk anda "calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
     And user will see that the text "1 chat room" is displayed
     And owner navigates to owner dashboard
     Then owner should successfully log out
