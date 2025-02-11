@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import config.global.GlobalConfig;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -14,7 +15,6 @@ public class MamifotoPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
-
 
     //Locator Mamifoto at owner dashboard
     Locator mamifotoMenuSidebar;
@@ -50,7 +50,6 @@ public class MamifotoPO {
     Locator backPilihPaketIcon;
     Locator headerDiscountGP;
     private Locator mamiFotoContentPackage;
-
 
     //Locator Mamifoto at history transaction
     Locator headerRiwayatPembelian;
@@ -101,11 +100,6 @@ public class MamifotoPO {
     Locator alertSuccsess;
     Locator ownerPhoneNumber;
     Locator statusInvoice;
-
-
-
-
-
 
     public MamifotoPO(Page page) {
         this.page = page;
@@ -737,7 +731,10 @@ public class MamifotoPO {
      * Navigates to mamifoto page
      */
     public void navigatesToMamifotoPage() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIFOTO, GlobalConfig.DEFAULT_TIMEOUT, LoadState.LOAD);
+        if(!playwright.waitTillLocatorIsVisible(mamiFotoLandingPageContent, GlobalConfig.DEFAULT_TIMEOUT)){
+            playwright.reloadPage();
+        }
     }
 
     /**

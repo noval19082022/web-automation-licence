@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @mamifotoAdmin @DONEMIGRATINGTONEWBOARD
+@LIMO2 @Mamifoto @mamifotoAdmin
 Feature: Create invoice mamifoto from admin
 
   @TEST_LIMO-3568 @continue
@@ -13,13 +13,13 @@ Feature: Create invoice mamifoto from admin
     And mamikos bangkrupux admin should be successfully logged out
 
   @TEST_LIMO-3569
-    Scenario: [WEB] Owner wants to paid Mamifoto Invoice from admin
-      Given user go to mamikos homepage
-      And user login as owner:
-        | phone stag   | phone prod | password  |
-        | 082233545509 | 0          | 12345678 |
-      * owner wants to accsess mamifoto
-      * owner click riwayat paket button
-      When owner see Riwayat MamiFoto purchase page
-      Then owner can verify transaction have status "Menunggu Pembayaran" from "MamiFoto A GP"
-      And payment owner success using ovo as payment method
+  Scenario: [WEB] Owner wants to paid Mamifoto Invoice from admin
+    Given user go to mamikos homepage
+    And user login as owner:
+      | phone stag   | phone prod | password  |
+      | 082233545509 | 0          | 12345678 |
+    * owner wants to accsess mamifoto
+    * owner click riwayat paket button
+    When owner see Riwayat MamiFoto purchase page
+    Then owner can verify transaction have status "Menunggu Pembayaran" from "MamiFoto A GP"
+    And payment owner success using ovo as payment method
