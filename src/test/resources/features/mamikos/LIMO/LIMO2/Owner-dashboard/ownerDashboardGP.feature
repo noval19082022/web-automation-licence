@@ -1,4 +1,4 @@
-@regression @LIMO2 @ownerDashboardGP @checklogoutremove
+@regression @LIMO2 @ownerDashboardGP
 Feature: Owner Dashboard GP
 
   @resetGP

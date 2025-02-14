@@ -1,4 +1,4 @@
-@LIMO2 @runningcheckfailed
+@LIMO2
 Feature: Owner GPSP
 
   Background: reset gp owner
