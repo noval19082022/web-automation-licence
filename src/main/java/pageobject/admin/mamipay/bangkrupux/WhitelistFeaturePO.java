@@ -11,7 +11,7 @@ public class WhitelistFeaturePO {
     Locator buttonAdd;
     Locator selectFeature;
     Locator inputOwnerId;
-    Locator ownerIdPlaceHolder;
+    Locator ownerIdInput;
     Locator searchBtn;
     Locator deleteBtn;
 
@@ -21,8 +21,8 @@ public class WhitelistFeaturePO {
         buttonAdd = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Add"));
         selectFeature = page.locator("//select[@name='name']");
         inputOwnerId = page.getByPlaceholder("user_id");
-        ownerIdPlaceHolder = page.getByPlaceholder("Owner Id");
-        searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        ownerIdInput = page.getByPlaceholder("Owner Id");
+        searchBtn = page.locator("#buttonSearch");
         deleteBtn = page.getByTitle("delete");
     }
 
@@ -63,7 +63,7 @@ public class WhitelistFeaturePO {
      * @param userId
      */
     public void searchByUserId(String userId) {
-        playwright.clickLocatorAndTypeKeyboard(ownerIdPlaceHolder, userId);
+        playwright.fill(ownerIdInput, userId);
         playwright.clickOn(searchBtn);
     }
 

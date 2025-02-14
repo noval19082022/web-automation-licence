@@ -1,4 +1,4 @@
-@regression @LIMO2 @ownerDashboardGP
+@regression @LIMO2 @ownerDashboardGP @checklogoutremove
 Feature: Owner Dashboard GP
 
   @resetGP
@@ -18,7 +18,6 @@ Feature: Owner Dashboard GP
     And user click info untuk anda "calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
     And user will see that the text "1 chat room" is displayed
     And owner navigates to owner dashboard
-    Then owner should successfully log out
 
   @TEST_LIMO-3602 @continue @kuotaChatRedirection
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
@@ -32,7 +31,6 @@ Feature: Owner Dashboard GP
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
     And user click info untuk anda "Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat."
     Then owner navigate to list goldplus package
-    And owner should successfully log out
 
   @TEST_LIMO-3604 @continue @nonExperimentRedirection
   Scenario: See info untuk anda while MARS NON GP with doesnt have unreplied chat and doesnt have quota
@@ -46,7 +44,6 @@ Feature: Owner Dashboard GP
   Scenario: check redirection info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota
     And user click info untuk anda "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!"
     Then user should redirect to link "https://owner-jambu.kerupux.com/goldplus/submission/packages?redirection_source=infountukanda"
-    And owner should successfully log out
 
   @TEST_LIMO-3606
   Scenario: See info untuk anda while MARS GP with have unreplied chat Goldplus 1 or Goldplus 2
@@ -86,7 +83,6 @@ Feature: Owner Dashboard GP
       | <ownerPhone> | <password> |
     Then widget daftar GP is not appears
     And info untuk anda section GP "GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran! " is not appears
-    And owner should successfully log out
     Examples:
     #owner doesnt have property
     #owner only have 1 kost non active

@@ -861,7 +861,7 @@ public class PlaywrightHelpers {
      * Wait until element locator button based on text is visible
      *
      * @param button Locator type based on text
-     *               default timeout
+     * default timeout
      * @return boolean
      */
     public boolean isButtonWithTextDisplayed(String button) {
@@ -871,7 +871,6 @@ public class PlaywrightHelpers {
     /**
      * Helper to type like real keyboard
      * note: this method need some action such as click locator
-     *
      * @param text string
      */
     public void realKeyboardType(String text) {
