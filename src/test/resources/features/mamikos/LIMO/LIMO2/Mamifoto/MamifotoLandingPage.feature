@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @DONEMIGRATINGTONEWBOARD
+@LIMO2 @Mamifoto
 Feature: Check Mamifoto Landing Page
 
   @TEST_LIMO-3587 @continue @declarative @listing-monetization @reviewed @Automated @web @playWright
@@ -7,18 +7,21 @@ Feature: Check Mamifoto Landing Page
     And user login as owner:
       | phone stag | phone prod | password  |
       | 0891202202 | 0          | qwerty123 |
+    And owner dismiss active pop-ups
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page
 
   @continue @TEST_LIMO-3588
   Scenario: Owner visits Landing Page of MamiFoto from Info Untuk Anda Card
     When owner back to owner dashboard
+    And owner dismiss active pop-ups
     And owner click info untuk anda for mamifoto
     Then owner can see mamifoto page
 
   @continue @TEST_LIMO-3589
   Scenario: Owner visits Landing Page of MamiFoto from Tingkatkan Kinerja Kos Section
     When owner back to owner dashboard
+    And owner dismiss active pop-ups
     And owner click section Tingkatkan Kinerja Kost
     Then owner can see mamifoto page
 
@@ -38,4 +41,3 @@ Feature: Check Mamifoto Landing Page
     And owner click any faq button
     Then owner see detail FAQ
     And owner should successfully log out
-

@@ -7,16 +7,20 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.MamifotoPO;
+import pageobject.owner.OwnerDashboardPO;
 import pageobject.tenant.InvoicePO;
+import testdata.OwnerDashboardTestData;
 import utilities.PlaywrightHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     MamifotoPO mamifoto = new MamifotoPO (page);
     InvoicePO invoice = new InvoicePO(page);
-
-
+    OwnerDashboardPO owner = new OwnerDashboardPO(page);
 
     @When("owner click menu sidebar Mamifoto")
     public void owner_click_menu_sidebar_mamifoto() {
@@ -47,9 +51,14 @@ public class MamifotoSteps {
     }
     @Then("owner click info untuk anda for mamifoto")
     public void owner_click_info_untuk_anda_for_mamifoto()  {
-       Assert.assertEquals(mamifoto.getMamifotoInfoUntukAndaText(),mamifoto.getMamifotoInfoUntukAndaText(),"text doesnt match");
-       mamifoto.clickOnMamifotoInfoUntukAnda();
+        List<String> listInfoUntukAnda = new ArrayList<>();
+        for (var locator : owner.getListInfoUntukAndaParagraphLocators()) {
+            listInfoUntukAnda.add(playwright.getText(locator).trim());
+        }
+        Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Not contains mamifoto info untuk anda");
+        owner.clicksOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
+
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
         mamifoto.clickOnLihatPaket();
@@ -303,6 +312,4 @@ public class MamifotoSteps {
     public void owner_wants_to_accsess_mamifoto() {
         mamifoto.navigatesToMamifotoPage();
     }
-
-
 }

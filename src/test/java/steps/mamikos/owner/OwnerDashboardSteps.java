@@ -405,5 +405,10 @@ public class OwnerDashboardSteps {
     public void ownerWantsToPaidInvoiceRecurringFromRecurringPopUp() {
         ownerDashboardPO.clickOnPerpanjangGoldPlusPopUp();
     }
+
+    @When("owner dismiss active pop-ups")
+    public void ownerDismissActivePopUps() {
+        ownerDashboardPO.clicksOnCloseIconDialogOwnerPopUp();
+    }
 }
 
