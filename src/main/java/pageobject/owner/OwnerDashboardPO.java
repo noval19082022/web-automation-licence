@@ -3,9 +3,11 @@ package pageobject.owner;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import pageobject.owner.kelolatagihan.TenantBillManagementPO;
+import utilities.JavaHelpers;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -892,7 +894,7 @@ public class OwnerDashboardPO {
      * clicks on dialog owner pop-ups
      */
     public void clicksOnCloseIconDialogOwnerPopUp() {
-        System.out.println("on check for pop up");
+        playwright.waitTillDomContentLoaded(5000.0);
         if (playwright.waitTillLocatorIsVisible(dialogPopUp)) {
             List<Locator>popUpLocators = playwright.getLocators(dialogPopUp);
             for (var locator : popUpLocators) {

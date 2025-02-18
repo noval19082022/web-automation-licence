@@ -58,6 +58,7 @@ public class MamifotoSteps {
         Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Not contains mamifoto info untuk anda");
         owner.clickOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
+
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
         mamifoto.clickOnLihatPaket();
