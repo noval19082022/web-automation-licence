@@ -909,7 +909,11 @@ public class OwnerDashboardPO {
         return playwright.getLocators(widgetInfoUntukAndaParagraph);
     }
 
-    public void clickOnInfoUntukAnda(String targetTextToClick) {
+    /**
+     * Click on info untuk anda
+     * @param targetTextToClick String
+     */
+    public void clicksOnInfoUntukAnda(String targetTextToClick) {
         Locator infoUntukAndaLocatorToClick = page.locator("a").filter(new Locator.FilterOptions().setHasText(targetTextToClick));
         playwright.clickOn(infoUntukAndaLocatorToClick);
     }

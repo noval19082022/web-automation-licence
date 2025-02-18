@@ -56,7 +56,7 @@ public class MamifotoSteps {
             listInfoUntukAnda.add(playwright.getText(locator).trim());
         }
         Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Not contains mamifoto info untuk anda");
-        owner.clickOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
+        owner.clicksOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
 
     @When("owner click Lihat Paket button")
