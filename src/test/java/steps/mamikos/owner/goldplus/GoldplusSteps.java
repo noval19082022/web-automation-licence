@@ -477,7 +477,7 @@ public class GoldplusSteps {
 
     @And("owner will see chat list page empty state")
     public void owner_will_see_chat_list_page_empty_state() {
-        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
+        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "empty state not preset");
         chat.dismissFTUEMarsKuotaNol();
     }
 

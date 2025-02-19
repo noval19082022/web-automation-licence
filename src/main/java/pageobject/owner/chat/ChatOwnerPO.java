@@ -81,7 +81,7 @@ public class ChatOwnerPO {
         ftueMarsBroadcast = page.getByTestId("ftueTooltipCarousel");
         ftueSurveyTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Baru! Terima Survei Kos"));
         berikutnyaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya"));
-        chatListEmptyState = page.locator("//div[@class='mc-channel-list__empty']");
+        chatListEmptyState = page.getByText("Chat kosong");
         Iunderstand = page.locator("//button[@class=' shepherd-button ']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
