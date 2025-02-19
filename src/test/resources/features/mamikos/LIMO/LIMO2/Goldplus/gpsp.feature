@@ -1,4 +1,4 @@
-@LIMO2 @FAILEDTEST_LIMO-1654
+@LIMO2
 Feature: Owner GPSP
 
   Background: reset gp owner
