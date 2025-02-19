@@ -1,4 +1,4 @@
-@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization @essentialTest3 @DONEMIGRATINGTONEWBOARD
+@regression @goldPlus @subcribeGp @allEntryPoint @LIMO2 @listing-monetization @essentialTest3
 Feature: Subscribe GP from all entry point
 
   @TEST_LIMO-3543
@@ -13,7 +13,7 @@ Feature: Subscribe GP from all entry point
     Examples:
       | ownerPhone     | password    | infoUntukAnda                                                                          | expectedDisplay            |
     #  | 0892092027     | digantilagi | Kuota chat habis. 1 pencari kos menunggu balasan, pakai GoldPlus agar bisa balas chat. | list of Goldplus package   |
-      | 088112233451   | qwerty123   | 1 calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking.                | Daftar GoldPlus            |
+      | 088112233451   | qwerty123   | calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking.                  | Daftar GoldPlus            |
       | 08167382940592 | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
       | 088112233453   | qwerty123   | GoldPlus 2 diskon 15% hanya dengan voucher di halaman pembayaran!                      | Pilih Periode Berlangganan |
 
