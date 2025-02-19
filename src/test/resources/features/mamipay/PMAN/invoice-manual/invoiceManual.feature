@@ -56,7 +56,7 @@
       When admin clicks invoice number with unpaid status
       Then invoice detail is displayed in new tab
 
-    @continue @TEST_SS-559 @fail
+    @continue @TEST_SS-559
     Scenario: Search invoice manual by Nomor Invoice
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
