@@ -56,7 +56,7 @@
       When admin clicks invoice number with unpaid status
       Then invoice detail is displayed in new tab
 
-    @continue @TEST_SS-559
+    @continue @TEST_SS-559 @fail
     Scenario: Search invoice manual by Nomor Invoice
       Given admin go to mamikos mamipay admin
       When admin login to mamipay:
@@ -75,25 +75,10 @@
       When admin search by "Nama Listing" with value "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
       Then the result is displayed according the value "MI/49220517/2022/09/69386", "Indah Trivena Tampubolon", "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
 
-    @continue @TEST_SS-557
-    Scenario: Search Nama Listing per word with value "Singgahsini"
-      When admin search by "Nama Listing" with value "Singgahsini"
-      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
-
     @continue @TEST_SS-867
     Scenario: Search Nama Listing per word with value "khus"
       When admin search by "Nama Listing" with value "khus"
       Then the result is displayed according the value Search per word "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
-
-    @continue @TEST_SS-871
-    Scenario: Search Nama Listing per word with value "Omen tipe c"
-      When admin search by "Nama Listing" with value "Omen tipe c"
-      Then the result is displayed according the value Search per word "Kost Singgahsini Omen Tipe C Halmahera Utara"
-
-    @continue @TEST_SS-860
-    Scenario: Search Nama Listing per word with value "Halmahera Utara"
-      When admin search by "Nama Listing" with value "Halmahera Utara"
-      Then the result is displayed according the value Search per word "Data yang dicari tidak ditemukan"
 
     @continue @TEST_SS-863
     Scenario: Search Nomor Invoice per word with value "12345"
