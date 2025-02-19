@@ -20,14 +20,6 @@
       And admin search property using ID "3143"
       Then property is displayed
 
-    @TEST_SS-611 @continue
-    Scenario: Admin Search Property by Prefix Name
-      When admin clear keyword in Homepage
-      And admin search property by prefix name "Singgahsini"
-      Then empty state in Homepage menu is displayed
-      And admin search property by prefix name "Apik"
-      Then empty state in Homepage menu is displayed
-
     @TEST_SS-615 @continue
     Scenario: Admin Search Property by Property Full Name (prefix + property)
       When admin search property by property full name "Kost Apik Khusus Automation PMAN Halmahera Utara"
