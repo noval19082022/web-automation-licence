@@ -164,7 +164,7 @@ public class GoldplusSteps {
     @And("user click info untuk anda {string}")
     public void userClickInfoUntukAnda(String infoUntukAnda) {
         playwright.waitTillPageLoaded();
-        goldplus.clickOnInfoUntukAnda(infoUntukAnda);
+        owner.clicksOnInfoUntukAnda(infoUntukAnda);
     }
 
     @Then("user verify Lihat Invoice visible")
@@ -394,7 +394,7 @@ public class GoldplusSteps {
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Daftar GoldPlus":
-                chat.dismissFTUEMars();
+                chat.dismissAllFTUE();
                 chat.dismissFTUEMarsKuotaNol();
                 chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
