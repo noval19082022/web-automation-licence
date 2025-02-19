@@ -892,7 +892,7 @@ public class OwnerDashboardPO {
      * clicks on dialog owner pop-ups
      */
     public void clicksOnCloseIconDialogOwnerPopUp() {
-        playwright.waitTillDomContentLoaded(5000.0);
+        playwright.hardWait(5000.0);
         if (playwright.waitTillLocatorIsVisible(dialogPopUp)) {
             List<Locator>popUpLocators = playwright.getLocators(dialogPopUp);
             for (var locator : popUpLocators) {
