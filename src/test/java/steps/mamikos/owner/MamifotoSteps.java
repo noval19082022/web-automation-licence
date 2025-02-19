@@ -112,8 +112,12 @@ public class MamifotoSteps {
 
     @Then("owner click info untuk anda for mamifoto non property")
     public void owner_click_info_untuk_anda_for_mamifoto_non_property() {
-        Assert.assertEquals(mamifoto.getMamifotoInfoUntukAndaNonPropertyText(),mamifoto.getMamifotoInfoUntukAndaNonPropertyText(),"text doenst match");
-        mamifoto.clickOnMamifotoInfoUntukAndaNonProperty();
+        List<String> listInfoUntukAnda = new ArrayList<>();
+        for (var locator : owner.getListInfoUntukAndaParagraphLocators()) {
+            listInfoUntukAnda.add(playwright.getText(locator).trim());
+        }
+        Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Info untuk anda not contains : " + OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
+        owner.clicksOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
 
     @Then("owner click riwayat paket button")
