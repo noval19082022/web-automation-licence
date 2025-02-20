@@ -269,6 +269,26 @@ public class BoostLplPO {
     }
 
     /**
+     * Verify setting table from halaman hasil pencarian havevisible props
+     * @param props
+     * return true if props visible
+     */
+    public Boolean isHalamanHasilPencarianPropsVisible(String props) {
+        Locator halamanHasilPencarianSubdistrik = page.locator("//td[contains(.,'Halaman Hasil Pencarian')]/preceding-sibling::td[contains(.,'"+props+"')]");
+        return playwright.waitTillLocatorIsVisible(halamanHasilPencarianSubdistrik, 30000.0);
+    }
+
+    /**
+     * Verify setting table from halaman pencarian kos have visible props
+     * @param props
+     * return true if props visible
+     */
+    public Boolean isHalamanPencarianKosPropsVisible(String props) {
+        Locator halamanPencarianKosSubdistrik = page.locator("//td[contains(.,'Halaman Pencarian Kos')]/preceding-sibling::td[contains(.,'"+props+"')]");
+        return playwright.waitTillLocatorIsVisible(halamanPencarianKosSubdistrik, 30000.0);
+    }
+
+    /**
      * Verify slot subdistrict
      * @param slot
      * return slot subdistrict

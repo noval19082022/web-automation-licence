@@ -110,8 +110,10 @@ public class BoostLplSteps {
 
     @Then("admin can see result data of district id {string} with name {string}")
     public void admin_can_see_result_data_of_district_id_with_name(String id, String name) {
-      Assert.assertEquals(id,boostLpl.getSubdistrictId(id),"id subdistrict doesnt equal");
-      Assert.assertEquals(name,boostLpl.getSubdistrictName(name),"name subdistrict doesnt equal");
+        Assert.assertTrue(boostLpl.isHalamanHasilPencarianPropsVisible(id),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanPencarianKosPropsVisible(id),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanHasilPencarianPropsVisible(name),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanPencarianKosPropsVisible(name),"id subdistrict doesnt appear");
     }
 
     @Given("admin can see slot is {string}")

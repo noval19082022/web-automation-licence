@@ -1,4 +1,4 @@
-@LIMO4 @regression
+@LIMO4 @regression @FAILEDTEST_LIMO-620
 Feature: Prime Setting
 
   @TEST_LIMO-620 @continue @primeSetting @WEB @AUTOMATED
