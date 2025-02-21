@@ -133,6 +133,6 @@ public class CommonSteps {
 
     @And("admin/user/tenant/owner go back to previous page")
     public void adminGoBackToPreviousPage() {
-        ActiveContext.getActivePage().goBack();
+        playwright.backToPreviousPage();
     }
 }

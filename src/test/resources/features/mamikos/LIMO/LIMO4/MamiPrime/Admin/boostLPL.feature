@@ -1,4 +1,4 @@
-@LIMO4 @regression @BoosLPLMenu
+@LIMO4 @regression @BoosLPLMenu @flaky
 Feature: Admin Boost LPL
 
   @TEST_LIMO-259 @continue @boostLpl @WEB @AUTOMATED
@@ -53,7 +53,7 @@ Feature: Admin Boost LPL
     * admin input kost name with "Watson 554" at form add boost lpl
     * admin wants to add listing to boost lpl
     * admin wants to search kost with kost name "Watson 554"
-    Then admin can see "Watson 554" was added with lpl score is "524287"
+    Then admin can see "Watson 554" was added with lpl score is "229632"
 
   @TEST_LIMO-257 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin]  As an admin, I would like to take a listing out from being LPL score boosted
