@@ -5,7 +5,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.When;
 import pageobject.pms.sidebarMenuPO;
 
-public class commonSteps {
+public class CommonSteps {
     Page page = ActiveContext.getActivePage();
 
     sidebarMenuPO menu = new sidebarMenuPO(page);

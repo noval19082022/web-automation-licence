@@ -463,8 +463,8 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL+"/agen");
     }
 
-    @Given("admin wants to accsess prime setting")
-    public void admin_wants_to_accsess_prime_setting() {
+    @Given("admin wants to access prime setting")
+    public void admin_wants_to_access_prime_setting() {
         playwright.navigateTo(Mamikos.URL + "/admin/prime", 30000.0, LoadState.LOAD);
     }
     @Given("admin navigates to Harvest Dashboard Login")
