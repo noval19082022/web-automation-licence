@@ -76,4 +76,4 @@ Feature: Homepage menu
     #Search property with fourth word in title
     When admin clear keyword in Homepage
     And admin search property by name "Automation"
-    Then empty state in Homepage menu is displayed
+    Then property is displayed
