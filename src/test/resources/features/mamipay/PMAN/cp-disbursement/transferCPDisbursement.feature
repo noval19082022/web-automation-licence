@@ -17,7 +17,7 @@ Feature: CP Disbursement - Transfer CP Disbursement
     Then system show message "Transfer berhasil di request"
     #Check in Transfer Diproses tab
     And admin open "Transfer Diproses" tab
-    When admin search cp disbursement by "Nama Property" using keyword "Harapan"
+    When admin search cp disbursement by "Nama Property" using keyword "Harapan B"
     Then disbursement "edit" is displayed in Process tab
 
   @TEST_SS-662 @continue
