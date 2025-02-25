@@ -1668,6 +1668,7 @@ public class PropertiSayaPO {
      */
     public void inputMonthyPrice(String monthlyPrice) {
         playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(priceMonthlyField);
         playwright.clickOn(priceMonthlyField);
         playwright.clearText(priceMonthlyField);
         playwright.realKeyboardType(monthlyPrice);
