@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
+import org.testng.Assert;
 import pageobject.tenant.survei.KostDetailSurveiPO;
 
 import java.util.List;
@@ -41,5 +42,10 @@ public class KostDetailSurveiStep {
                 kostDetailSurvei.assertkosAndalanOnTable(kosAndalanTable);
             }
         }
+    }
+
+    @Then ("user see label Baru should be displayed on the kost detail page")
+    public void userSeeNewLabelIndetailkos(){
+        Assert.assertTrue(kostDetailSurvei.userSeeNewLabelIndetailkos());
     }
 }

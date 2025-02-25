@@ -56,3 +56,28 @@ Feature: Survei - kos detail
     Then "Bisa Refund" are displayed in the kos andalan
       | Bisa Refund |
       | Sesuai dengan ketentuan dan kebijakan refund yang berlaku di Mamikos.|
+
+  @TEST_LIMO-7038
+  Scenario: Not Display Survey Benefit for Non Kost GP
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag      | phone prod  | password     |
+      | 0891111020199   | 0           | mamikosqa123 |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                      |
+      | stag        | /apartemen-kalibata-city/silalay-123-1room-studio-1 |
+    And user dismiss FTUE booking benefit
+    Then user see label Baru should be displayed on the kost detail page
+
+  @TEST_LIMO-7043
+  Scenario: Not Display Survey Benefit for Non Kost GP
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag      | phone prod  | password     |
+      | 0891111020199   | 0           | mamikosqa123 |
+    And tenant redirect to apartment details:
+      | environment | apartment path                                      |
+      | stag        | /apartemen-kalibata-city/silalay-123-1room-studio-1 |
+    Then "Survei Kos Tersedia" are not displayed in the kos pilar non gp
+      | Survei Kos Tersedia |
+      | Ajukan survei ke pemilik via chat di platform. Setelahnya, kamu juga bisa dapatkan voucher spesial dari Mamikos.|
