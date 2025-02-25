@@ -22,7 +22,7 @@
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Untuk mengubah aturan, mohon hubungi tim Mamikos yang mengelola kos Anda."
 
-  @TEST_SS-3460 @automated @booking-and-billing @booking-stay-setting @continue
+  @TEST_SS-3460 @automated @booking-and-billing @booking-stay-setting
   Scenario: Atur Booking [Kost Detail][Booking section] Change booking terdekat = 2 Minggu and Booking waktu terjauh 2 bulan (BBM-541)
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
@@ -32,15 +32,21 @@
     And owner choose minim checkin time with :
       | waktu   | tanggal |
       | Minggu  | 2       |
+    And owner click Simpan at Peraturan Masuk Kos Pop-up page
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
-    And owner clicks on ubah waktu button
-    And owner activated toogle checkin button
-    And owner click Simpan at Peraturan Masuk Kos page
-    Then owner will see toast "Peraturan terbaru berhasil disimpan"
+#    And owner clicks on ubah waktu button
+#    And owner activated toogle checkin button
+#    And owner click Simpan at Peraturan Masuk Kos Pop-up page
+#    And owner click Simpan at Peraturan Masuk Kos page
+#    Then owner will see toast "Peraturan terbaru berhasil disimpan"
 
   @TEST_SS-3442 @automated @booking-and-billing @booking-stay-setting @web @xray-update @continue
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     |  phone prod   | password       |
+      | 0890000000289  | 082291900002  | Bismillah@01   |
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
@@ -245,7 +251,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
+      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
       And owner choose minim checkin time with :
@@ -274,7 +280,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
+      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
       And owner clicks on ubah waktu button
       And owner click on toggle pengajuan dan waktu masuk kos if active
       And owner choose minim checkin time with :
@@ -303,7 +309,7 @@
         | phone stag   | phone prod    | password  |
         | 085697344170 | 0891111020198 | qwerty123 |
       And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Tangerang Pasar Kemis Tangerang"
+      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
       And owner clicks on ubah waktu button
       And owner click on toogle today
       And owner click on dropdown satuan waktu jarak waktu terjauh

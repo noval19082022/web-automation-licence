@@ -32,6 +32,7 @@ public class PengajuanSewaPO {
     private Locator selectKosButton;
     private Locator pilihKosUbahPeraturanButton;
     private Locator simpanPeraturanButton;
+    private Locator simpanPeraturanPopUp;
     private Locator toastPeraturanButton;
     private Locator waktuMulaiNgekosButton;
     private Locator ubahWaktu;
@@ -84,6 +85,7 @@ public class PengajuanSewaPO {
         this.peraturanKosText = page.locator("//*[@id='BookingSettingDesktop']");
         this.selectKosButton = page.getByPlaceholder("Pilih Kos");
         this.simpanPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.simpanPeraturanPopUp = page.getByTestId("checkin-save-btn");
         this.waktuMulaiNgekosButton = page.getByText("Waktu mulai masuk kos");
         this.toogleTodayButton = page.getByRole(AriaRole.CHECKBOX);
         this.minCheckinButton = page.getByTestId("min-checkin-time-unit").getByPlaceholder("hari");
@@ -231,6 +233,13 @@ public class PengajuanSewaPO {
      */
     public void simpanPeraturanButton(){
         playwright.clickOn(simpanPeraturanButton);
+    }
+
+    /**
+     * Click Simpan button on peraturan waktu ngekos pop-up
+     */
+    public void simpanPeraturanPopUp(){
+        playwright.clickOn(simpanPeraturanPopUp);
     }
 
     /**
