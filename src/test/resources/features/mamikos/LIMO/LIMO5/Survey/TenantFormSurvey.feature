@@ -19,3 +19,17 @@ Feature: Tenant Form Survey Kost P2
     And user click on simpan profile btn
     Then user see pop up success save profile text
     Then user will see that the text "Formulir survei kos" is displayed
+
+  @TEST_LIMO-7130
+  Scenario: [Survey][Form request] The default for dates is always display today’s date
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    Then user verify survey date on form is "today"

@@ -10,6 +10,8 @@ public class TenantSurveyFormPO {
     private Page page;
     private PlaywrightHelpers playwright;
 
+    Locator dateOption;
+    Locator dateView;
     Locator clockOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
@@ -20,6 +22,8 @@ public class TenantSurveyFormPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
+        dateOption = page.getByPlaceholder("Pilih tanggal survei kos");
+        dateView = page.locator("//span[@class='cell day selected today']");
         clockOption = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jam dropdown-down"));
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
@@ -46,5 +50,9 @@ public class TenantSurveyFormPO {
 
     public String popUpSuccessSaveProfile() {
         return playwright.getText(popUpSuccessSaveProfileText);
+    }
+
+    public String getSurveyDateOnForm() {
+        return playwright.getText(dateView);
     }
 }

@@ -138,4 +138,13 @@ public class tenantSurveySteps {
     public void userSeePopUpSuccessSaveProfileText() {
         Assert.assertEquals(tenantSurveyFormPO.popUpSuccessSaveProfile(), "Data profil tersimpan.");
     }
+
+    @Then("user verify survey date on form is {string}")
+    public void userVeritfySurveyDateOnFormIs(String date) {
+        if (date.contains("today")) {
+            date = JavaHelpers.getCurrentDateOrTime("d");
+        }
+
+        Assert.assertEquals(tenantSurveyFormPO.getSurveyDateOnForm(), date);
+    }
 }
