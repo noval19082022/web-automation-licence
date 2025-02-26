@@ -72,7 +72,7 @@ Feature: [Owner] Update Content Landing Page & Adjust API Pop Up logic
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod | password  |
-      | 0891202202 | 0890910001 | qwerty123 |
+      | 0891202412 | 0890910001 | qwerty123 |
     And owner access mamiprime landing page
     And owner wants to buy mamiprime from header
     Then owner will see that the text "Anda belum memakai GoldPlus. Pemakaian MamiPrime bersama GoldPlus akan membawa hasil yang optimal." is displayed

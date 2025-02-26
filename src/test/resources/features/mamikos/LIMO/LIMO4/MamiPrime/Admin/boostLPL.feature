@@ -1,4 +1,4 @@
-@LIMO4 @regression @BoosLPLMenu @flaky
+@LIMO4 @regression @BoosLPLMenu
 Feature: Admin Boost LPL
 
   @TEST_LIMO-259 @continue @boostLpl @WEB @AUTOMATED
@@ -69,7 +69,7 @@ Feature: Admin Boost LPL
     * admin input kost name with "Kost Twister Konro Depok Sleman" at form add boost lpl
     * admin wants to add listing to boost lpl
     * admin wants to search kost with kost name "Kost Twister Konro Depok Sleman"
-    Then admin can see "Kost Twister Konro Depok Sleman" was added with lpl score is "524287"
+    Then admin can see "Kost Twister Konro Depok Sleman" was added with lpl score is "233888"
     #deleted listing from boost lpl
     When admin delete listing from boost lpl
     * admin wants to search kost with kost name "Kost Twister Konro Depok Sleman"
