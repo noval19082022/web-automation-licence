@@ -14,6 +14,7 @@ public class TenantSurveyFormPO {
     Locator dateViewSelected;
     Locator dateViewToday;
     Locator nextMonthBtn;
+    Locator previousMonthBtn;
     Locator clockOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
@@ -28,6 +29,7 @@ public class TenantSurveyFormPO {
         dateViewSelected = page.locator("//div[@class='chat-sheet']").locator(".selected");
         dateViewToday = page.locator("//span[@class='cell day selected today']");
         nextMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
+        previousMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-left"));
         clockOption = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jam dropdown-down"));
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");

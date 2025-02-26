@@ -50,3 +50,18 @@ Feature: Tenant Form Survey Kost P2
     And user tap on next month survey date on form survey
     Then user able to select date "15" on form survey
     Then user verify survey date on form is "15"
+
+  @TEST_LIMO-7132
+  Scenario: [Survey][Form request ] Tenant Cannot Select a Date Beyond 1 Month
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open survey date option on form survey
+    Then user verify previous date is disable

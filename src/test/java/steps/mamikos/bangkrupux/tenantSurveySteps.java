@@ -166,4 +166,16 @@ public class tenantSurveySteps {
     public void userAbleToSelectDateOnFormSurvey(String date) {
         tenantSurveyFormPO.selectSurveyDate(date);
     }
+
+    @Then("user verify previous date is disable")
+    public void userVerifyPreviousMonthButtonIsDisable() {
+        var previousDate = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
+        var dateToday = JavaHelpers.getCurrentDateOrTime("d");
+
+        // trying to click previous day
+        tenantSurveyFormPO.selectSurveyDate(previousDate);
+
+        // expected still pick today
+        Assert.assertEquals(tenantSurveyFormPO.getSurveyDateAutoSelected(), dateToday);
+    }
 }
