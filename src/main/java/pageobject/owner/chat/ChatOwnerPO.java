@@ -48,6 +48,7 @@ public class ChatOwnerPO {
     Locator lihatFiturFTUEJB;
     Locator lihatProfilPenyewaLabelOnChatroom;
     Locator nextFtueButton;
+    Locator surveyKostBtn;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -90,6 +91,7 @@ public class ChatOwnerPO {
         lihatFiturFTUEJB = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat Fitur"));
         lihatProfilPenyewaLabelOnChatroom = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
         nextFtueButton = page.locator("[class*='next-button']");
+        surveyKostBtn = page.getByText("Survei Kos").first();
     }
 
     /**
@@ -453,5 +455,9 @@ public class ChatOwnerPO {
             }
             maxLoop++;
         } while (playwright.waitTillLocatorIsVisible(nextFtueButton, 7_000.0));
+    }
+
+    public void clickOnSurveyKostBtn() {
+        playwright.clickOn(surveyKostBtn);
     }
 }

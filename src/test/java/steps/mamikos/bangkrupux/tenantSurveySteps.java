@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.tenantSurveyPO;
+import pageobject.tenant.survei.TenantSurveyFormPO;
 import utilities.JavaHelpers;
 
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class tenantSurveySteps {
     Page page = ActiveContext.getActivePage();
     tenantSurveyPO surveyPO = new tenantSurveyPO(page);
+    TenantSurveyFormPO tenantSurveyFormPO = new TenantSurveyFormPO(page);
     private JavaHelpers java = new JavaHelpers();
 
     @And("user edit Tenant Survey on {string}")
@@ -33,14 +35,14 @@ public class tenantSurveySteps {
     @Then("user verify change survey success alert with {string}")
     public void user_verify_change_survey_success_alert_with(String text) throws InterruptedException {
         Assert.assertTrue(surveyPO.isAlertAppear(), "Success alert is not appeared");
-        String actualAlertText = surveyPO.getAlertText().substring(2,72).trim();
+        String actualAlertText = surveyPO.getAlertText().substring(2, 72).trim();
         Assert.assertEquals(actualAlertText, text, "Success alert text is not equal to " + text);
     }
 
     @And("user change survey date to {string}")
     public void user_change_survey_date_to(String date) throws ParseException, InterruptedException {
         String exactDate = "";
-        if(date.equalsIgnoreCase("Tomorrow")){
+        if (date.equalsIgnoreCase("Tomorrow")) {
             exactDate = java.updateTime("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", 1, 0, 0, 0);
         }
         surveyPO.changeSurveyDate(exactDate);
@@ -69,7 +71,7 @@ public class tenantSurveySteps {
     public void user_filter_Tenant_Survey_using_survey_date_on(String date) throws InterruptedException {
         surveyPO.clickTenantSurveyMenu();
         surveyPO.fillOnSurveyDateFilter(date);
-        Assert.assertTrue(surveyPO.isSearchButtonDisplayed(),"Search button is not displayed");
+        Assert.assertTrue(surveyPO.isSearchButtonDisplayed(), "Search button is not displayed");
         surveyPO.clickOnSearchFilterButton();
     }
 
@@ -115,6 +117,83 @@ public class tenantSurveySteps {
     public void userVerifyTenantSurveyDateFilterResultWith(String tenantSurveyDate) {
         List<String> tenantSurveySurveyDate = surveyPO.getTenantSurveyDateTableResult();
         Assert.assertTrue(tenantSurveySurveyDate.get(0).contains(tenantSurveyDate));
+    }
+
+    @And("user tap on edit profile on survey form")
+    public void userTapOnEditProfileOnSurveyForm() {
+        tenantSurveyFormPO.tapOnEditProfile();
+    }
+
+    @And("user edit profile name from survey form request {string}")
+    public void userEditProfileNameFromSurveyFormRequest(String name) {
+        tenantSurveyFormPO.editNameProfile(name);
+    }
+
+    @And("user click on simpan profile btn")
+    public void userClickOnSimpanProfileBtn() {
+        tenantSurveyFormPO.setSaveProfileBtn();
+    }
+
+    @Then("user see pop up success save profile text")
+    public void userSeePopUpSuccessSaveProfileText() {
+        Assert.assertEquals(tenantSurveyFormPO.popUpSuccessSaveProfile(), "Data profil tersimpan.");
+    }
+
+    @Then("user verify survey date on form is {string}")
+    public void userVeritfySurveyDateOnFormIs(String dateExpected) {
+        var dateOnForm = dateExpected.contains("today") ?
+                tenantSurveyFormPO.getSurveyDateAutoSelected() :
+                tenantSurveyFormPO.getSurveyDateSelectedOnForm();
+
+        if (dateExpected.contains("today")) {
+            dateExpected = JavaHelpers.getCurrentDateOrTime("d");
+        }
+
+        Assert.assertEquals(dateOnForm, dateExpected);
+    }
+
+    @And("user open survey date option on form survey")
+    public void userOpenSurveyDateOptionOnFormSurvey() {
+        tenantSurveyFormPO.tapOnSurveyDateForm();
+    }
+
+    @And("user tap on next month survey date on form survey")
+    public void userTapOnNextMonthSurveyDateOnFormSurvey() {
+        tenantSurveyFormPO.tapOnNextMonthBtnSurveyDateForm();
+    }
+
+    @Then("user able to select date {string} on form survey")
+    public void userAbleToSelectDateOnFormSurvey(String date) {
+        tenantSurveyFormPO.selectSurveyDate(date);
+    }
+
+    @Then("user verify previous date is disable")
+    public void userVerifyPreviousMonthButtonIsDisable() {
+        var previousDate = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
+        var dateToday = JavaHelpers.getCurrentDateOrTime("d");
+
+        // trying to click previous day
+        tenantSurveyFormPO.selectSurveyDate(previousDate);
+
+        // expected still pick today
+        Assert.assertEquals(tenantSurveyFormPO.getSurveyDateAutoSelected(), dateToday);
+    }
+
+    @And("user open time survey option on form survey")
+    public void userOpenTimeSurveyOptionOnFormSurvey() {
+        tenantSurveyFormPO.tapOnSurveyTimeOption();
+    }
+
+    @Then("user verify available time is higher than current time")
+    public void userVerifyAvailableTimeIsHigherThanCurrentTime() {
+        var currentTime = JavaHelpers.getCurrentTimeGMT7();
+
+        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+
+        for (var time : timeAvailable) {
+            Assert.assertTrue(
+                    JavaHelpers.isTimeGreater(time, currentTime));
+        }
     }
 
 }
