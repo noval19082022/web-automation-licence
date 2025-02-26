@@ -178,4 +178,22 @@ public class tenantSurveySteps {
         // expected still pick today
         Assert.assertEquals(tenantSurveyFormPO.getSurveyDateAutoSelected(), dateToday);
     }
+
+    @And("user open time survey option on form survey")
+    public void userOpenTimeSurveyOptionOnFormSurvey() {
+        tenantSurveyFormPO.tapOnSurveyTimeOption();
+    }
+
+    @Then("user verify available time is higher than current time")
+    public void userVerifyAvailableTimeIsHigherThanCurrentTime() {
+        var currentTime = JavaHelpers.getCurrentTimeGMT7();
+
+        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+
+        for (var time : timeAvailable) {
+            Assert.assertTrue(
+                    JavaHelpers.isTimeGreater(time, currentTime));
+        }
+    }
+
 }

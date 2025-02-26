@@ -65,3 +65,25 @@ Feature: Tenant Form Survey Kost P2
     And user tap on survey kost btn on detail chatroom
     And user open survey date option on form survey
     Then user verify previous date is disable
+
+#  https://mamiteam-qa3.atlassian.net/browse/LIMO-7133
+  @TEST_LIMO-7133
+  Scenario: [Survey][Form request] Dropdown Shows Available Times
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user verify available time is higher than current time
+#    Then user see the following time options:
+#  08:00, 08:30, 09:00, 09:30, 10:00,
+#  10:30, 11:00, 11:30, 12:00, 12:30,
+#  13:00, 13:30, 14:00, 14:30, 15:00,
+#  15:30, 16:00, 16:30, 17:00, 17:30,
+#  18:00, 18:30, 19:00.

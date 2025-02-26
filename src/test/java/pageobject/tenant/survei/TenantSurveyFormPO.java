@@ -6,6 +6,11 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TenantSurveyFormPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -15,7 +20,7 @@ public class TenantSurveyFormPO {
     Locator dateViewToday;
     Locator nextMonthBtn;
     Locator previousMonthBtn;
-    Locator clockOption;
+    Locator timeOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
     Locator saveProfileBtn;
@@ -30,7 +35,7 @@ public class TenantSurveyFormPO {
         dateViewToday = page.locator("//span[@class='cell day selected today']");
         nextMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         previousMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-left"));
-        clockOption = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jam dropdown-down"));
+        timeOption = page.getByTestId("available-time");
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
@@ -77,5 +82,48 @@ public class TenantSurveyFormPO {
     public void selectSurveyDate(String date) {
         var locator = page.getByText(date, new Page.GetByTextOptions().setExact(true)).nth(1);
         playwright.clickOn(locator);
+    }
+
+    public void tapOnSurveyTimeOption() {
+        playwright.clickOn(timeOption);
+    }
+
+    public String[] getCurrentAvailableTime() {
+        var timeAvailable = playwright.getText(timeOption);
+
+        // this condition will prevent if automation run more than 19:00
+        if (timeAvailable.equals("There is no data")) {
+            var timeCustom = JavaHelpers.getModifiedTimeGMT7(1);
+            return extractAllTimes(timeCustom);
+        }
+
+        return extractAllTimes(timeAvailable);
+    }
+
+
+
+
+    //******** Private METHOD PART ********
+
+    /**
+     * Extracts all valid time strings in "HH:mm" format from a given string.
+     *
+     * @param text The input string containing multiple times.
+     * @return Array of valid time strings in "HH:mm" format.
+     */
+    private String[] extractAllTimes(String text) {
+        List<String> times = new ArrayList<>();
+
+        // Define a regex pattern to match "HH:mm" format (24-hour time)
+        Pattern pattern = Pattern.compile("\\b(\\d{2}:\\d{2})\\b");
+        Matcher matcher = pattern.matcher(text);
+
+        // Find all occurrences and add to list
+        while (matcher.find()) {
+            times.add(matcher.group(1));
+        }
+
+        // Convert List to String[]
+        return times.toArray(new String[0]);
     }
 }
