@@ -9,11 +9,12 @@ public class KostDetailSurveiPO {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
     private Locator kosAndalanOnTable;
+    private Locator newLabelIndetailKos;
 
     public KostDetailSurveiPO(Page page) {
         this.page = page;
 
-      //  this.kosAndalanOnTable = page.locator("//p[contains(text(),'Kos ini bisa di-booking dan dibayar di situs dan a')]");
+        this.newLabelIndetailKos = page.locator("//div[@class='bg-u-ml-xxxs bg-c-label bg-c-label--pill bg-c-label--pill-yellow']");
 
     }
 
@@ -25,5 +26,13 @@ public class KostDetailSurveiPO {
         kosAndalanOnTable = page.locator("//p[contains(text(),'"+ name +"')]");
         playwright.pageScrollInView(kosAndalanOnTable);
         return playwright.getText(kosAndalanOnTable);
+    }
+
+    /**
+     * New label survei
+     * @return
+     */
+    public boolean userSeeNewLabelIndetailkos() {
+        return playwright.waitTillLocatorIsVisible(newLabelIndetailKos);
     }
 }
