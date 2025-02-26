@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JavaHelpers {
+    private static final String[] SYLLABLES = {"al", "be", "co", "da", "el", "fa", "go", "ha", "in", "jo"};
 
     // --- Date and Time -- \\
 
@@ -66,6 +67,22 @@ public class JavaHelpers {
         Calendar calendar = Calendar.getInstance();
         return new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)];
     }
+
+
+    /**
+     * generate random name
+     * @param length
+     * @return
+     */
+    public static String generateRandomName(int length) {
+        Random random = new Random();
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            name.append(SYLLABLES[random.nextInt(SYLLABLES.length)]);
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1); // Capitalize first letter
+    }
+
 
     /**
      * Get month name with locale

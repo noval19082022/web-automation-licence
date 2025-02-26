@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.tenantSurveyPO;
+import pageobject.tenant.survei.TenantSurveyFormPO;
 import utilities.JavaHelpers;
 
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class tenantSurveySteps {
     Page page = ActiveContext.getActivePage();
     tenantSurveyPO surveyPO = new tenantSurveyPO(page);
+    TenantSurveyFormPO tenantSurveyFormPO = new TenantSurveyFormPO(page);
     private JavaHelpers java = new JavaHelpers();
 
     @And("user edit Tenant Survey on {string}")
@@ -117,4 +119,23 @@ public class tenantSurveySteps {
         Assert.assertTrue(tenantSurveySurveyDate.get(0).contains(tenantSurveyDate));
     }
 
+    @And("user tap on edit profile on survey form")
+    public void userTapOnEditProfileOnSurveyForm() {
+        tenantSurveyFormPO.tapOnEditProfile();
+    }
+
+    @And("user edit profile name from survey form request {string}")
+    public void userEditProfileNameFromSurveyFormRequest(String name) {
+        tenantSurveyFormPO.editNameProfile(name);
+    }
+
+    @And("user click on simpan profile btn")
+    public void userClickOnSimpanProfileBtn() {
+        tenantSurveyFormPO.setSaveProfileBtn();
+    }
+
+    @Then("user see pop up success save profile text")
+    public void userSeePopUpSuccessSaveProfileText() {
+        Assert.assertEquals(tenantSurveyFormPO.popUpSuccessSaveProfile(), "Data profil tersimpan.");
+    }
 }
