@@ -33,3 +33,20 @@ Feature: Tenant Form Survey Kost P2
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     Then user verify survey date on form is "today"
+
+  @TEST_LIMO-7131
+  Scenario: [Survey][Form request] Tenants can select a survey date up to 1 month from today's date.
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open survey date option on form survey
+    And user tap on next month survey date on form survey
+    Then user able to select date "15" on form survey
+    Then user verify survey date on form is "15"

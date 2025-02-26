@@ -11,7 +11,9 @@ public class TenantSurveyFormPO {
     private PlaywrightHelpers playwright;
 
     Locator dateOption;
-    Locator dateView;
+    Locator dateViewSelected;
+    Locator dateViewToday;
+    Locator nextMonthBtn;
     Locator clockOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
@@ -23,7 +25,9 @@ public class TenantSurveyFormPO {
         playwright = new PlaywrightHelpers(page);
 
         dateOption = page.getByPlaceholder("Pilih tanggal survei kos");
-        dateView = page.locator("//span[@class='cell day selected today']");
+        dateViewSelected = page.locator("//div[@class='chat-sheet']").locator(".selected");
+        dateViewToday = page.locator("//span[@class='cell day selected today']");
+        nextMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         clockOption = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih jam dropdown-down"));
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
@@ -52,7 +56,24 @@ public class TenantSurveyFormPO {
         return playwright.getText(popUpSuccessSaveProfileText);
     }
 
-    public String getSurveyDateOnForm() {
-        return playwright.getText(dateView);
+    public String getSurveyDateAutoSelected() {
+        return playwright.getText(dateViewToday);
+    }
+
+    public String getSurveyDateSelectedOnForm() {
+        return playwright.getText(dateViewSelected);
+    }
+
+    public void tapOnSurveyDateForm() {
+        playwright.clickOn(dateOption);
+    }
+
+    public void tapOnNextMonthBtnSurveyDateForm() {
+        playwright.clickOn(nextMonthBtn);
+    }
+
+    public void selectSurveyDate(String date) {
+        var locator = page.getByText(date, new Page.GetByTextOptions().setExact(true)).nth(1);
+        playwright.clickOn(locator);
     }
 }
