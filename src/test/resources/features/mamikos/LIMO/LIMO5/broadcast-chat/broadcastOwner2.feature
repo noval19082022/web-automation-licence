@@ -63,8 +63,8 @@ Feature: Broadcast Chat Owner 2
       | 081328787342 | 0          | Perempuan |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
-    And owner add broadcast chat for kost "Kost LPL P2 01 Patikraja Banyumas"
-    And owner clicks Kos "Kost LPL P2 01 Patikraja Banyumas" and Pilih Kos button
+    And owner add broadcast chat for kost "kost automation DOM boleh refund Patikraja Banyumas"
+    And owner clicks Kos "kost automation DOM boleh refund Patikraja Banyumas" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
     Then user verify input broadcast message is visible
     And owner edit template message on Broadcast Chat to row number 2
