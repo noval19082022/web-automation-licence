@@ -19,12 +19,12 @@ Feature: Broadcast Chat Owner 2
       | 081328787342 | 0          | Perempuan |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
-    And owner add broadcast chat for kost "Kost LPL P2 01 Patikraja Banyumas"
-    And owner clicks Kos "Kost LPL P2 01 Patikraja Banyumas" and Pilih Kos button
+    And owner add broadcast chat for kost "kost automation DOM boleh refund Patikraja Banyumas"
+    And owner clicks Kos "kost automation DOM boleh refund Patikraja Banyumas" and Pilih Kos button
     And owner click button ubah to change kos broadcast
-    And owner add broadcast chat for kost "Kost LPL P2 02 Patikraja Banyumas"
-    And owner clicks Kos "Kost LPL P2 02 Patikraja Banyumas" and Pilih Kos button
-    Then owner will see that the text "Kost LPL P2 02 Patikraja Banyumas" is displayed
+    And owner add broadcast chat for kost "kost jambu jambu lpl Patikraja Banyumas"
+    And owner clicks Kos "kost jambu jambu lpl Patikraja Banyumas" and Pilih Kos button
+    Then owner will see that the text "kost jambu jambu lpl Patikraja Banyumas" is displayed
 #    And owner will see that the text "Calon Penyewa yang mendapatkan pesan" is displayed
 
   @TEST_LIMO-3642 @Broadcast-chat @GP2 @automated @listing-monetization @web
