@@ -1,4 +1,4 @@
-@LIMO50 @regression
+@LIMO5 @regression
 Feature: Entry Point Tenant Background Checker
 
   @TEST_LIMO-328 @entrypointTBC @continue @WEB @AUTOMATED
