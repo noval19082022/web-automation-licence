@@ -11,7 +11,7 @@ public class BroadcastChatPO {
     Locator warningBroadcastText;
     Locator searchKostInputBC;
     Locator listSelectBroadcastKost;
-    Locator firstBroadcastChatOption;
+    Locator broadcastChatOptions;
     Locator backButtonBC;
     Locator brodcastMessageField;
     Locator closeSearchBroadcastSearchIcon;
@@ -64,7 +64,7 @@ public class BroadcastChatPO {
         warningBroadcastText = page.locator(".bg-c-modal__body-title");
         searchKostInputBC = page.getByTestId("broadcastChat-searchBarKosList");
         listSelectBroadcastKost = page.locator(".disabled-card");
-        firstBroadcastChatOption = page.locator(".broadcast-chat-message-card__message");
+        broadcastChatOptions = page.locator(".broadcast-chat-message-card__message");
         backButtonBC = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("back"));
         brodcastMessageField = page.locator(".bg-c-textarea__field");
         closeSearchBroadcastSearchIcon = page.getByRole(AriaRole.BUTTON).nth(3);
@@ -106,7 +106,7 @@ public class BroadcastChatPO {
         ftueBroadcast = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Fitur baru GoldPlus"));
         closeBtn = page.getByTestId("close-button");
         ubahHyperlink = page.getByText("ubah").first();
-        ubahButtonOnPesanAndaSection= page.getByText("Ubah").nth(1);
+        ubahButtonOnPesanAndaSection = page.getByText("Ubah").nth(1);
         broadcastPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
         broadcastResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).nth(1);
         createBroadcastChatButton = page.locator("//button[normalize-space()='Buat Broadcast Chat']");
@@ -158,15 +158,13 @@ public class BroadcastChatPO {
      * click on button masukan pesan broadcast chat
      */
     public void selectMessageOptionBC(int messageOption) {
-//        playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption - 1));
-//    }
         // Pastikan messageOption adalah valid
-        if (messageOption < 1 || messageOption > playwright.getLocators(firstBroadcastChatOption).size()) {
-            throw new IllegalArgumentException("Invalid message option: " + messageOption);
+        if (messageOption < 1 || messageOption > playwright.getLocators(broadcastChatOptions).size()) {
+            playwright.clickOn(broadcastChatOptions.nth(0));
+        } else {
+            // Klik opsi pesan berdasarkan indeks yang dipilih
+            playwright.clickOn(playwright.getLocators(broadcastChatOptions).get(messageOption - 1));
         }
-
-        // Klik opsi pesan berdasarkan indeks yang dipilih
-        playwright.clickOn(playwright.getLocators(firstBroadcastChatOption).get(messageOption - 1));
     }
 
     /**
@@ -542,6 +540,7 @@ public class BroadcastChatPO {
 
     /**
      * user as owner click Button Daftar
+     *
      * @return
      */
     public Boolean disableCreateBroadcastChatButton() {
