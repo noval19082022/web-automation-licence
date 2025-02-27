@@ -1,4 +1,4 @@
-@LIMO5 @regression
+@LIMO50 @regression
 Feature: Entry Point Tenant Background Checker
 
   @TEST_LIMO-328 @entrypointTBC @continue @WEB @AUTOMATED
@@ -20,7 +20,7 @@ Feature: Entry Point Tenant Background Checker
     # open chatroom second time
     When owner navigates to owner dashboard
     * user click chat button in top bar owner home page
-    Then owner can see entry point TBC Lihat Profil second time at chatroom "Rega Tenant Tiga"
+    Then owner can see entry point TBC Lihat Profil second time at chatroom "Noval Abis Delete"
     And coachmark is closed
 
   @TEST_LIMO-3703 @WEB @AUTOMATED
