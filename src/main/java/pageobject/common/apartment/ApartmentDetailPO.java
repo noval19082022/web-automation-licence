@@ -56,6 +56,7 @@ public class ApartmentDetailPO {
      * @return
      */
     public String getSuccessMessage() {
+        playwright.waitTillLocatorIsVisible(successMsgPopUp);
         return playwright.getText(successMsgPopUp);
     }
 

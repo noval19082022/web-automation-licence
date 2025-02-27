@@ -651,7 +651,7 @@ public class CpDisbursementPO {
      */
     public String getNamaPropCol() {
         System.out.println(namaPropertyTable.first());
-        return playwright.getText(namaPropertyTable.first()).substring(0, 45);
+        return playwright.getText(namaPropertyTable.first()).substring(0, 46);
     }
 
     /**

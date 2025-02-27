@@ -4,6 +4,10 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BoostLplPO {
     private Page page;
     PlaywrightHelpers playwright;
@@ -269,6 +273,26 @@ public class BoostLplPO {
     }
 
     /**
+     * Verify setting table from halaman hasil pencarian havevisible props
+     * @param props
+     * return true if props visible
+     */
+    public Boolean isHalamanHasilPencarianPropsVisible(String props) {
+        Locator halamanHasilPencarianSubdistrik = page.locator("//td[contains(.,'Halaman Hasil Pencarian')]/preceding-sibling::td[contains(.,'"+props+"')]");
+        return playwright.waitTillLocatorIsVisible(halamanHasilPencarianSubdistrik, 30000.0);
+    }
+
+    /**
+     * Verify setting table from halaman pencarian kos have visible props
+     * @param props
+     * return true if props visible
+     */
+    public Boolean isHalamanPencarianKosPropsVisible(String props) {
+        Locator halamanPencarianKosSubdistrik = page.locator("//td[contains(.,'Halaman Pencarian Kos')]/preceding-sibling::td[contains(.,'"+props+"')]");
+        return playwright.waitTillLocatorIsVisible(halamanPencarianKosSubdistrik, 30000.0);
+    }
+
+    /**
      * Verify slot subdistrict
      * @param slot
      * return slot subdistrict
@@ -289,11 +313,19 @@ public class BoostLplPO {
      * Input slot district
      * @param slotDistrict of slot subdistrict
      */
-    public void inputSlotDistrict(String slotDistrict) {
-        playwright.waitTillLocatorIsVisible(btnEditSlot);
-        playwright.clickOn(btnEditSlot);
+    public void inputSlotDistrict(String slotDistrict, String districtType) {
+        clicksOnEditSlotButton(districtType);
         playwright.fill(inputSlot,slotDistrict);
         playwright.clickOn(btnSaveSlot);
+    }
+
+    /**
+     * Clicks on district type edit button
+     * @param type district type must be "Halaman Pencarian Kos" or "Halaman Hasil Pencarian"
+     */
+    public void clicksOnEditSlotButton(String type) {
+        Locator buttonEditSlot = page.locator("//td[contains(.,'"+type+"')]/following-sibling::td/a");
+        playwright.clickOn(buttonEditSlot);
     }
 
     /**
@@ -318,20 +350,30 @@ public class BoostLplPO {
     /**
      * Verify package name of subdistrict
      * @param packageName
-     * return package name prime
+     * return package name list prime
      */
-    public String getPackageName(String packageName) {
-        Locator pacakgeNameResult = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(packageName));
-        return playwright.getText(pacakgeNameResult);
+    public List<String> getPackageName(String packageName) {
+        Locator packageNameResult = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(packageName));
+        List<Locator> packageNameResults = playwright.getLocators(packageNameResult);
+        List<String> packageNameList = new ArrayList<>();
+        for (var locator : packageNameResults) {
+            packageNameList.add(playwright.getText(locator));
+        }
+        return packageNameList;
     }
 
     /**
      * Verify label favorite of subdistrict
      * @param favoritLabel
-     * return favorit label at prime setting
+     * return favorit label list at prime setting
      */
-    public String getLabelName(String favoritLabel) {
+    public List<String> getLabelName(String favoritLabel) {
         Locator labelNameResult = page.locator("//span[.='"+favoritLabel+"']");
-        return playwright.getText(labelNameResult);
+        List<Locator> labelNameResults = playwright.getLocators(labelNameResult);
+        List<String> labelNameList = new ArrayList<>();
+        for (var locator : labelNameResults) {
+            labelNameList.add(playwright.getText(locator));
+        }
+        return labelNameList;
     }
 }

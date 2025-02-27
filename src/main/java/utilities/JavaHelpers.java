@@ -19,7 +19,9 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.*;
@@ -27,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JavaHelpers {
+    private static final String[] SYLLABLES = {"al", "be", "co", "da", "el", "fa", "go", "ha", "in", "jo"};
 
     // --- Date and Time -- \\
 
@@ -66,6 +69,104 @@ public class JavaHelpers {
         Calendar calendar = Calendar.getInstance();
         return new DateFormatSymbols().getMonths()[calendar.get(Calendar.MONTH)];
     }
+
+    /**
+     * Get the current time in GMT+7 and round it to the nearest 30-minute interval.
+     * The rounding follows this rule:
+     * - Minutes < 15 → Round down to "HH:00"
+     * - Minutes between 15-44 → Round to "HH:30"
+     * - Minutes ≥ 45 → Round up to the next hour "HH:00"
+     *
+     * @return String representation of the rounded time in "HH:mm" format.
+     */
+    public static String getCurrentTimeGMT7() {
+        // Get current time in GMT+7
+        LocalTime now = LocalTime.now(ZoneId.of("Asia/Bangkok"));
+
+        // Round to the nearest 30-minute interval
+        int minutes = now.getMinute();
+        int roundedMinutes = (minutes < 15) ? 0 : (minutes < 45) ? 30 : 0;
+        LocalTime roundedTime = now.withMinute(roundedMinutes).withSecond(0);
+        if (minutes >= 45) {
+            roundedTime = roundedTime.plusHours(1); // Move to the next hour if minutes >= 45
+        }
+
+        // Format the time as HH:mm
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return roundedTime.format(formatter);
+    }
+
+
+    /**
+     * Get the current time in GMT+7 and modify it by adding or subtracting minutes.
+     *
+     * @param minutesOffset The number of minutes to add (positive) or subtract (negative).
+     * @return String representation of the modified time in "HH:mm" format.
+     */
+    public static String getModifiedTimeGMT7(int minutesOffset) {
+        // Get current time in GMT+7
+        LocalTime now = LocalTime.now(ZoneId.of("Asia/Bangkok"));
+
+        // Modify time by adding/subtracting minutes
+        LocalTime modifiedTime = now.plusMinutes(minutesOffset);
+
+        // Format the time as "HH:mm"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return modifiedTime.format(formatter);
+    }
+
+    /**
+     * Compare two time strings in "HH:mm" format.
+     *
+     * @param time1 First time string (e.g., "08:00").
+     * @param time2 Second time string (e.g., "07:30").
+     * @return 1 if time1 > time2, -1 if time1 < time2, 0 if they are equal.
+     */
+    public static int compareTimes(String time1, String time2) {
+        // Define time formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Parse time strings into LocalTime objects
+        LocalTime t1 = LocalTime.parse(time1, formatter);
+        LocalTime t2 = LocalTime.parse(time2, formatter);
+
+        // Compare times
+        return t1.compareTo(t2);
+    }
+
+    /**
+     * Check if time1 is greater than time2 (time1 > time2).
+     *
+     * @param time1 First time string in "HH:mm" format (e.g., "08:00").
+     * @param time2 Second time string in "HH:mm" format (e.g., "07:30").
+     * @return true if time1 is after time2, false otherwise.
+     */
+    public static boolean isTimeGreater(String time1, String time2) {
+        // Define time formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Parse time strings into LocalTime objects
+        LocalTime t1 = LocalTime.parse(time1, formatter);
+        LocalTime t2 = LocalTime.parse(time2, formatter);
+
+        // Compare times and return boolean result
+        return t1.isAfter(t2);
+    }
+
+    /**
+     * generate random name
+     * @param length
+     * @return
+     */
+    public static String generateRandomName(int length) {
+        Random random = new Random();
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            name.append(SYLLABLES[random.nextInt(SYLLABLES.length)]);
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1); // Capitalize first letter
+    }
+
 
     /**
      * Get month name with locale

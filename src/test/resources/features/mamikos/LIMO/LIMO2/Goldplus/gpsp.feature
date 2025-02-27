@@ -10,9 +10,7 @@ Feature: Owner GPSP
       | 0898761238 |
       | 0898761239 |
 
-  @TEST_LIMO-1654
-  Scenario: [Improve GPSP][Multiple Invoice] Owner Non GP already have invoice unpaid, different day already assign new segment, then owner select package GP
-  #check if the whitelist has not detele
+  Scenario: [Improve GPSP][Multiple Invoice] Check if the whitelist has not detele
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -20,8 +18,9 @@ Feature: Owner GPSP
     And admin accsess menu whitelist feature
     And admin search whitelist owner by user_id "99454617"
     Then admin click on delete btn on whitelist menu for order "1"
-    And admin try to logout from mamikos
 
+  @TEST_LIMO-1654
+  Scenario: [Improve GPSP][Multiple Invoice] Owner Non GP already have invoice unpaid, different day already assign new segment, then owner select package GP
    #Buy Goldplus
     Given user go to mamikos homepage
     When user login as owner:

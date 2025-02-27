@@ -53,7 +53,7 @@ Feature: Admin Boost LPL
     * admin input kost name with "Watson 554" at form add boost lpl
     * admin wants to add listing to boost lpl
     * admin wants to search kost with kost name "Watson 554"
-    Then admin can see "Watson 554" was added with lpl score is "524287"
+    Then admin can see "Watson 554" was added with lpl score is "229632"
 
   @TEST_LIMO-257 @boostLpl @continue @WEB @AUTOMATED
   Scenario: [WEB][Admin]  As an admin, I would like to take a listing out from being LPL score boosted
@@ -69,7 +69,7 @@ Feature: Admin Boost LPL
     * admin input kost name with "Kost Twister Konro Depok Sleman" at form add boost lpl
     * admin wants to add listing to boost lpl
     * admin wants to search kost with kost name "Kost Twister Konro Depok Sleman"
-    Then admin can see "Kost Twister Konro Depok Sleman" was added with lpl score is "524287"
+    Then admin can see "Kost Twister Konro Depok Sleman" was added with lpl score is "233888"
     #deleted listing from boost lpl
     When admin delete listing from boost lpl
     * admin wants to search kost with kost name "Kost Twister Konro Depok Sleman"

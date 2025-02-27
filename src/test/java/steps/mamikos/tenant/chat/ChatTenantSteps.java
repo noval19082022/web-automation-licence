@@ -160,4 +160,9 @@ public class ChatTenantSteps {
     public void userClickBackButtonChatroom() {
         chat.clickBackButtonChatroom();
     }
+
+    @And("user tap on survey kost btn on detail chatroom")
+    public void userTapOnSurveyKostBtnOnDetailChatroom() {
+        chat.clickOnSurveyKosButton();
+    }
 }

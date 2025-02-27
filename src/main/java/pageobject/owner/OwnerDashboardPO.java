@@ -92,6 +92,8 @@ public class OwnerDashboardPO {
     private Locator mamiprimeBannerCloseButton;
 
     private Locator perpanjangBtnReccuringGpPopUp;
+    private Locator dialogPopUp;
+    private Locator widgetInfoUntukAndaParagraph;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -169,8 +171,9 @@ public class OwnerDashboardPO {
         mamiprimeWidget = page.getByTestId("membership-prime-card");
         mamiprimeBannerPopUp = page.frameLocator("iframe >> nth=0").getByRole(AriaRole.LINK);
         mamiprimeBannerCloseButton = page.frameLocator("iframe >> nth=0").getByLabel("Close");
-
         perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
+        dialogPopUp = page.locator("//*[@role='dialog' and @aria-modal='true']//button[@class='bg-c-modal__action-closable']");
+        widgetInfoUntukAndaParagraph = page.locator("//*[contains(text(),'Info untuk Anda')]/following-sibling::*[@class='widget-card__content']//p");
     }
 
     /**
@@ -883,5 +886,35 @@ public class OwnerDashboardPO {
      */
     public void clickOnPerpanjangGoldPlusPopUp() {
         playwright.clickOn(perpanjangBtnReccuringGpPopUp);
+    }
+
+    /**
+     * clicks on dialog owner pop-ups
+     */
+    public void clicksOnCloseIconDialogOwnerPopUp() {
+        playwright.hardWait(5000.0);
+        if (playwright.waitTillLocatorIsVisible(dialogPopUp)) {
+            List<Locator>popUpLocators = playwright.getLocators(dialogPopUp);
+            for (var locator : popUpLocators) {
+                playwright.clickOn(locator);
+            }
+        }
+    }
+
+    /**
+     * Get list info untuk anda inner text
+     * @return List of String
+     */
+    public List<Locator> getListInfoUntukAndaParagraphLocators() {
+        return playwright.getLocators(widgetInfoUntukAndaParagraph);
+    }
+
+    /**
+     * Click on info untuk anda
+     * @param targetTextToClick String
+     */
+    public void clicksOnInfoUntukAnda(String targetTextToClick) {
+        Locator infoUntukAndaLocatorToClick = page.locator("a").filter(new Locator.FilterOptions().setHasText(targetTextToClick));
+        playwright.clickOn(infoUntukAndaLocatorToClick);
     }
 }

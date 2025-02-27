@@ -11,6 +11,7 @@ import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.BoostLplPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
 
 
 public class BoostLplSteps {
@@ -110,18 +111,21 @@ public class BoostLplSteps {
 
     @Then("admin can see result data of district id {string} with name {string}")
     public void admin_can_see_result_data_of_district_id_with_name(String id, String name) {
-      Assert.assertEquals(id,boostLpl.getSubdistrictId(id),"id subdistrict doesnt equal");
-      Assert.assertEquals(name,boostLpl.getSubdistrictName(name),"name subdistrict doesnt equal");
+        Assert.assertTrue(boostLpl.isHalamanHasilPencarianPropsVisible(id),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanPencarianKosPropsVisible(id),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanHasilPencarianPropsVisible(name),"id subdistrict doesnt appear");
+        Assert.assertTrue(boostLpl.isHalamanPencarianKosPropsVisible(name),"id subdistrict doesnt appear");
     }
 
     @Given("admin can see slot is {string}")
     public void admin_can_see_slot_is(String slot) {
-        Assert.assertEquals(boostLpl.getSlotSubdistrict(slot),slot,"Slot doesnt equal");
+        Assert.assertTrue(boostLpl.isHalamanHasilPencarianPropsVisible(slot));
+        Assert.assertTrue(boostLpl.isHalamanPencarianKosPropsVisible(slot));
     }
 
-    @When("admin wants to adjust slot {string}")
-    public void admin_wants_to_adjust_slot(String slot) {
-       boostLpl.inputSlotDistrict(slot);
+    @When("admin wants to adjust slot {string} for district type of {string}")
+    public void admin_wants_to_adjust_slot(String slot, String districtType) {
+       boostLpl.inputSlotDistrict(slot, districtType);
     }
 
     @Then("admin can see message {string} at prime setting")
@@ -136,7 +140,13 @@ public class BoostLplSteps {
 
     @Then("admin can see package name {string} has label {string}")
     public void admin_can_see_package_name_has_label(String packageName, String label) {
-        Assert.assertEquals(boostLpl.getPackageName(packageName),packageName,"package name doesnt equal");
-        Assert.assertEquals(boostLpl.getLabelName(label),label,"label doesnt equal");
+        List<String> packageNameList = boostLpl.getPackageName(packageName);
+        List<String> labelNameList = boostLpl.getLabelName(label);
+        for (var packageToAssert : packageNameList) {
+            Assert.assertEquals(packageToAssert, packageName,"package name doesnt equal");
+        }
+        for (var labelToAssert : labelNameList) {
+            Assert.assertEquals(labelToAssert, label,"label doesnt equal");
+        }
     }
 }

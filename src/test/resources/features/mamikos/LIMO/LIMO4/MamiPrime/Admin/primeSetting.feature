@@ -8,7 +8,7 @@ Feature: Prime Setting
       | email stag                     | email prod | password  |
       | uncle.limo2@admin-mamiteam.com |            | qwerty123 |
     #search by name invalid
-    And admin wants to accsess prime setting
+    And admin wants to access prime setting
     When admin search subdistrict with "aaa"
     Then admin cannot see result at prime setting
     #searcg by subdistrict invalid
@@ -26,26 +26,39 @@ Feature: Prime Setting
 
   @TEST_LIMO-619 @primeSetting @continue @WEB @AUTOMATED
   Scenario: [Admin][Prime Menu] Admin adjusts slotting for a specific district
-    Given admin wants to accsess prime setting
-    * admin search subdistrict with "Wamena"
-    * admin can see slot is "Slot: 10"
+    Given admin wants to access prime setting
+    When admin search subdistrict with "Wamena"
     #invalid
-    When admin wants to adjust slot " "
+    And admin wants to adjust slot " " for district type of "Halaman Pencarian Kos"
+    Then admin can see message "The slot field is required." at prime setting
+    When admin wants to access prime setting
+    And admin search subdistrict with "Wamena"
+    When admin wants to adjust slot " " for district type of "Halaman Hasil Pencarian"
     Then admin can see message "The slot field is required." at prime setting
     #Valid
-    When admin wants to adjust slot "15" from page slot
-    * admin search subdistrict with "Wamena"
+    When admin wants to access prime setting
+    And admin search subdistrict with "Wamena"
+    And admin wants to adjust slot "15" for district type of "Halaman Pencarian Kos"
+    And admin wants to access prime setting
+    And admin search subdistrict with "Wamena"
+    And admin wants to adjust slot "15" for district type of "Halaman Hasil Pencarian"
+    And admin search subdistrict with "Wamena"
     Then admin can see slot is "Slot: 15"
     #revert slot to 10
-    When admin wants to adjust slot "10"
-    * admin search subdistrict with "Wamena"
-    * admin can see slot is "Slot: 10"
+    When admin wants to access prime setting
+    And admin search subdistrict with "Wamena"
+    And admin wants to adjust slot "10" for district type of "Halaman Pencarian Kos"
+    And admin wants to access prime setting
+    And admin search subdistrict with "Wamena"
+    And admin wants to adjust slot "10" for district type of "Halaman Hasil Pencarian"
+    And admin search subdistrict with "Wamena"
+    Then admin can see slot is "Slot: 10"
 
   @TEST_LIMO-621 @primeSetting @WEB @AUTOMATED
   Scenario: [Admin][Prime Menu] Admin sets default favorite pricing on Prime Settings menu
-    Given admin wants to accsess prime setting
+    Given admin wants to access prime setting
     When admin search subdistrict with "Aceh"
     Then admin can see package name "30 Hari" has label "Favorit"
-    And admin reset form search subdsitrict
-    When admin search subdistrict with "Wamena"
+    When admin reset form search subdsitrict
+    And admin search subdistrict with "Wamena"
     Then admin can see package name "30 Hari" has label "Favorit"

@@ -40,6 +40,11 @@ public class OwnerPeraturanKosSteps {
         pengajuanBooking.simpanPeraturanButton();
     }
 
+    @And("owner click Simpan at Peraturan Masuk Kos Pop-up page")
+    public void ownerClickSimpanAtPeraturanMasukKosPopUp(){
+        pengajuanBooking.simpanPeraturanPopUp();
+    }
+
     @Then("owner will see toast {string}")
     public void ownerWillSeeToastPeraturanMasukKos(String toast){
         pengajuanBooking.getToastText(toast);

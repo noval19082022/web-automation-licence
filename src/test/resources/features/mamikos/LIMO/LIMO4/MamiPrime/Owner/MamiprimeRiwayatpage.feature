@@ -5,8 +5,8 @@ Feature: Riwayat Mamiprime Page
   Scenario: Entry point riwayat mamiprime
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545512 | 0          | 12345678 |
+      | phone stag | phone prod | password  |
+      | 0891202405 | 0          | qwerty123 |
     And owner close gp onboarding if exist
     And user click on mamiprime widget at owner dashboard
     Then user see lihat riwayat button

@@ -164,7 +164,7 @@ public class GoldplusSteps {
     @And("user click info untuk anda {string}")
     public void userClickInfoUntukAnda(String infoUntukAnda) {
         playwright.waitTillPageLoaded();
-        goldplus.clickOnInfoUntukAnda(infoUntukAnda);
+        owner.clicksOnInfoUntukAnda(infoUntukAnda);
     }
 
     @Then("user verify Lihat Invoice visible")
@@ -394,7 +394,7 @@ public class GoldplusSteps {
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Daftar GoldPlus":
-                chat.dismissFTUEMars();
+                chat.dismissAllFTUE();
                 chat.dismissFTUEMarsKuotaNol();
                 chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
@@ -477,7 +477,7 @@ public class GoldplusSteps {
 
     @And("owner will see chat list page empty state")
     public void owner_will_see_chat_list_page_empty_state() {
-        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "emphty state not preset");
+        Assert.assertTrue(chat.isChatListEmptyStatePresent(), "empty state not preset");
         chat.dismissFTUEMarsKuotaNol();
     }
 

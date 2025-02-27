@@ -1,4 +1,4 @@
-@regression @LIMO2 @listing-monetization @GpChatListOwnerExperiment @DONEMIGRATINGTONEWBOARD
+@regression @LIMO2 @listing-monetization @GpChatListOwnerExperiment
 Feature: Owner Experiment- GP Chat List
 
   @TEST_LIMO-3391 @MARS @MARS-LIMO @listing-monetization @web @automated
