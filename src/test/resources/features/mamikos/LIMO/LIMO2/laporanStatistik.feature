@@ -1,7 +1,7 @@
 @listing-monetization @regression @LIMO5
 Feature: Laporan Statistik
 
-  @LIMO-4055
+  @TEST_LIMO-4055
   Scenario: [WEB][Statistic Page] Owner only have 2 active kost and auto select kost listing that are in the top order
     Given user go to mamikos homepage
     When user login as owner:
@@ -12,7 +12,7 @@ Feature: Laporan Statistik
       | KosName         |
       | Kost Bandicoot Tobelo Tobelo Halmahera |
 
-  @LIMO-277
+  @TEST_LIMO-277
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
@@ -106,7 +106,7 @@ Feature: Laporan Statistik
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
 
-  @LIMO-276
+  @TEST_LIMO-276
   Scenario: [WEB][Statistic Page][Filter 7 days] Check when owner have property active less than 7 days, but more than 1 day
     Given user go to mamikos homepage
     When user login as owner:
@@ -121,7 +121,7 @@ Feature: Laporan Statistik
     And owner can see periode Performa
     Then owner can see growth graphic
 
-  @LIMO-268
+  @TEST_LIMO-268
   Scenario: [WEB][Statistic Page][Filter 30 days] Check when owner have property active more than 30 days
     Given user go to mamikos homepage
     When user login as owner:
@@ -137,7 +137,7 @@ Feature: Laporan Statistik
     And owner will see that the text "* Kenaikan/penurunan dibandingkan dengan periode sebelumnya." is displayed
     Then owner can see growth graphic
 
-  @LIMO-266
+  @TEST_LIMO-266
   Scenario: [WEB][Statistic Page][Filter 30 days] Check when owner have property active more than 30 days
     Given user go to mamikos homepage
     When user login as owner:
