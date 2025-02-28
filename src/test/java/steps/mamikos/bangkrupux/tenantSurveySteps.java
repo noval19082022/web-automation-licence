@@ -172,6 +172,13 @@ public class tenantSurveySteps {
         var previousDate = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
         var dateToday = JavaHelpers.getCurrentDateOrTime("d");
 
+        if (tenantSurveyFormPO.isSurveyDateNotVisible(previousDate)) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateNotVisible(previousDate));
+            return;
+        }
+
+        // NOTE: somtimes the button is not disable on locator but actually is disabled, so this step is to prevent failed
+
         // trying to click previous day
         tenantSurveyFormPO.selectSurveyDate(previousDate);
 

@@ -84,6 +84,11 @@ public class TenantSurveyFormPO {
         playwright.clickOn(locator);
     }
 
+    public boolean isSurveyDateNotVisible(String date) {
+        var locator = page.getByText(date, new Page.GetByTextOptions().setExact(true)).nth(1);
+        return !playwright.waitTillLocatorIsVisible(locator);
+    }
+
     public void tapOnSurveyTimeOption() {
         playwright.clickOn(timeOption);
     }
@@ -99,8 +104,6 @@ public class TenantSurveyFormPO {
 
         return extractAllTimes(timeAvailable);
     }
-
-
 
 
     //******** Private METHOD PART ********
