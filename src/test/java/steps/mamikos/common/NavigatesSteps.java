@@ -479,4 +479,10 @@ public class NavigatesSteps {
     public void adminNavigateToAdminPrimeSuggestion() {
         playwright.navigateTo(Mamikos.URL+Mamikos.ADMIN_PRIME_SUGGESTION);
     }
+
+    @And("admin bangkerupux navigates landmark data menu")
+    public void admin_bangkerupux_naviagtes_landmark_data_menu(){
+        playwright.navigateTo(Mamikos.URL + "/admin/landmark", 40000.0, LoadState.LOAD);
+    }
+
 }
