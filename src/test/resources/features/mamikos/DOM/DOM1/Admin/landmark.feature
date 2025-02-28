@@ -1,4 +1,4 @@
-@DOM1
+@DOM1 @a
 Feature: Landmark
 
   @TEST_SS-7302
@@ -10,18 +10,18 @@ Feature: Landmark
     Then admin bangkerupux navigates landmark data menu
     And admin can see main menu with "<text>"
     Examples:
-      | text                        |
-      | ID  |
-      | Name |
-      | Parent Category          |
-      | Category |
-      | Is Show on SRP             |
-      | Icon |
+      | text                |
+      | ID                  |
+      | Name                |
+      | Parent Category     |
+      | Category            |
+      | Is Show on SRP      |
+      | Icon                |
       | Location (lat, lon) |
-      | Score |
-      | Subdistrict |
-      | Rooms Count   |
-      | Action  |
+      | Score               |
+      | Subdistrict         |
+      | Rooms Count         |
+      | Action              |
 
   @TEST_SS-7303
   Scenario: [Web][Bangker][Landmark Data]Admin check search landmark

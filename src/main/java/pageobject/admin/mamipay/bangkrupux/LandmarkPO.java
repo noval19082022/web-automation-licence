@@ -117,7 +117,14 @@ public class LandmarkPO {
      * get text for show in srp
      */
     public boolean getShowSrp(String text){
-        Locator getSrpStatus = page.locator("(//span[@class='label label-success'][normalize-space()='Yes'])[1]");
-        return page.getByText(String.valueOf(getSrpStatus)).isVisible();
+        if(text.equalsIgnoreCase("Yes")){
+            Locator getSrpStatusYes = page.locator("(//span[@class='label label-success'][normalize-space()='Yes'])[1]");
+            return getSrpStatusYes.isVisible();
+        }
+        else if(text.equalsIgnoreCase("No")){
+            Locator getSrpStatusNo = page.locator("(//span[@class='label label-danger'][normalize-space()='No'])[1]");
+            return getSrpStatusNo.isVisible();
+        }
+        return false;
     }
 }

@@ -58,7 +58,6 @@ public class LandmarkStep {
 
     @Then("admin can see show in srp with {string}")
     public void admin_can_see_show_in_srp_with(String text){
-        landmark.getShowSrp(text);
-//        Assert.assertTrue(landmark.getShowSrp(text), "not appears show srp");
+        Assert.assertTrue(landmark.getShowSrp(text), "not appears show srp");
     }
 }
