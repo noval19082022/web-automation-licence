@@ -135,8 +135,8 @@ public class laporanStatistikPO {
      * @return
      */
     public boolean ownerSeeGraphic() {
-        return playwright.waitTillLocatorIsVisible(greenGraphic) ||
-                playwright.waitTillLocatorIsVisible(redGraphic) ||
-                playwright.waitTillLocatorIsVisible(grayGraphic);
+        return playwright.waitTillLocatorIsVisible(greenGraphic.first()) ||
+                playwright.waitTillLocatorIsVisible(redGraphic.first()) ||
+                playwright.waitTillLocatorIsVisible(grayGraphic.first());
     }
 }

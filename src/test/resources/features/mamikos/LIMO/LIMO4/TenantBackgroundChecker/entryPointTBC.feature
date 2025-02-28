@@ -8,7 +8,7 @@ Feature: Entry Point Tenant Background Checker
       | phone stag     | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
     And owner wants to accsess chatroom
-    Then owner can see entry point TBC Lihat Profil at chatroom "Rega Tenant Tiga"
+    Then owner can see entry point TBC Lihat Profil at chatroom "Noval Abis Delete"
 
   @TEST_LIMO-327 @entrypointTBC @WEB @AUTOMATED
   Scenario: [WEB][Chat] Show Tenant Background Checker onboarding (coachmark) section upon accessing a chat room
@@ -20,7 +20,7 @@ Feature: Entry Point Tenant Background Checker
     # open chatroom second time
     When owner navigates to owner dashboard
     * user click chat button in top bar owner home page
-    Then owner can see entry point TBC Lihat Profil second time at chatroom "Rega Tenant Tiga"
+    Then owner can see entry point TBC Lihat Profil second time at chatroom "Noval Abis Delete"
     And coachmark is closed
 
   @TEST_LIMO-3703 @WEB @AUTOMATED

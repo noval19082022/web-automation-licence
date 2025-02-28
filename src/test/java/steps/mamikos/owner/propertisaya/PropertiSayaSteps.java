@@ -542,6 +542,7 @@ public class PropertiSayaSteps {
     @And("owner input address is {string}")
     public void ownerInputAddressIs(String keyLocation) {
         propertySaya.inputLocationKos(keyLocation);
+        propertySaya.reinputIfAlamatStillNull(keyLocation);
     }
 
     @When("owner click Lanjutkan for input kos address")

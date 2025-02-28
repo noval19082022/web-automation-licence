@@ -8,7 +8,7 @@ Feature: Update Kamar
       | phone stag     | phone prod     | password    |
       | 083176408319   | 083176408311   | qwerty123   |
     When owner navigates to property saya kos
-    And owner search kost "Kos oke bebek Vviop Depok Sleman" on property saya page
+    And owner search kost "Kos oke bebek" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
     And owner add room with name or room number "26"

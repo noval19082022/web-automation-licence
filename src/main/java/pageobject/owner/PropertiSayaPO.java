@@ -1493,6 +1493,19 @@ public class PropertiSayaPO {
     }
 
     /**
+     * Re-Input location kos if alamt is blank
+     *
+     * @param keyLocation select the first location suggestion
+     */
+    public void reinputIfAlamatStillNull(String keyLocation)  {
+        var alamatTextBox = page.getByRole(AriaRole.TEXTBOX).nth(2);
+        if (playwright.getText(alamatTextBox).isEmpty()) {
+            playwright.clearText(inputLocation);
+            this.inputLocationKos(keyLocation);
+        }
+    }
+
+    /**
      * Insert text to search bar in room allotment and hit enter
      *
      * @param text is text we want to insert

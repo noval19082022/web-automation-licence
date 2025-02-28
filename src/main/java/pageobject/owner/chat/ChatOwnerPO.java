@@ -53,7 +53,7 @@ public class ChatOwnerPO {
     public ChatOwnerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        ownerChatButton = page.locator("//p[normalize-space()='Chat']");
+        ownerChatButton = page.getByText("Chat").nth(0);
         emptyChatImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chat kosong"));
         emptyChatDesc = page.getByText("Tidak ada percakapan saat ini.");
         emptyChatIndicator = page.getByText("Chat kosong");
