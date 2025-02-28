@@ -46,17 +46,32 @@ Feature: Landmark
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     Then admin bangkerupux navigates landmark data menu
-    When admin choose search by "category"
+    When admin choose filter catogory by "Food Stalls"
     And admin click search button
-    Then admin can see data with name "Masjid Jami Al-Hidayah Ciekek"
+    Then admin can see category with name "Food Stalls"
+    When admin choose filter catogory by "Shopping"
+    And admin click search button
+    Then admin can see category with name "Shopping"
+    When admin choose filter catogory by "Mosque"
+    And admin click search button
+    Then admin can see category with name "Mosque"
+    When admin choose filter catogory by "Church"
+    And admin click search button
+    Then admin can see category with name "Church"
+    When admin choose filter catogory by "Pagoda"
+    And admin click search button
+    Then admin can see category with name "Pagoda"
 
-  @TEST_SS-7305
+  @TEST_SS-7305 @a
   Scenario: [Web][Bangker][Landmark Data]Admin check filtering by Is Show on SRP
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     Then admin bangkerupux navigates landmark data menu
-    When admin choose search by "show srp yes"
+    When admin choose filter show in srp with "show srp yes"
     And admin click search button
-    Then admin can see data with name "Institut Teknologi Bandung"
+    Then admin can see show in srp with "Yes"
+    When admin choose filter show in srp with "show srp no"
+    And admin click search button
+    Then admin can see show in srp with "No"

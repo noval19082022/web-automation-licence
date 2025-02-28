@@ -36,19 +36,48 @@ public class LandmarkPO {
      */
     public void clickSearchType(String text){
         Locator searchByType = page.locator("select[name=\"search_by\"]");
-        Locator filterCategory = page.locator("select[name=\"category_id\"]");
-        Locator categorySrp = page.locator("select[name=\"is_shown_srp\"]");
         if (text.equalsIgnoreCase("id")){
             playwright.selectDropdownByValue(searchByType, "id");
         }
         else if(text.equalsIgnoreCase("name")){
             playwright.selectDropdownByValue(searchByType, "name");
         }
-        else if(text.equalsIgnoreCase("category")){
+    }
+
+    /**
+     * choose category landmark
+     * @param text
+     */
+    public void filterCatrgory(String text){
+        Locator filterCategory = page.locator("select[name=\"category_id\"]");
+        if(text.equalsIgnoreCase("Food Stalls")){
+            playwright.selectDropdownByValue(filterCategory, "1");
+        }
+        else if(text.equalsIgnoreCase("Shopping")){
+            playwright.selectDropdownByValue(filterCategory, "2");
+        }
+        else if(text.equalsIgnoreCase("Mosque")){
             playwright.selectDropdownByValue(filterCategory, "3");
         }
-        else if(text.equalsIgnoreCase("show srp yes")){
+        if(text.equalsIgnoreCase("Church")){
+            playwright.selectDropdownByValue(filterCategory, "4");
+        }
+        if(text.equalsIgnoreCase("Pagoda")){
+            playwright.selectDropdownByValue(filterCategory, "5");
+        }
+    }
+
+    /**
+     * select filter srp
+     * @param text
+     */
+    public void filterShowSrp(String text){
+        Locator categorySrp = page.locator("select[name=\"is_shown_srp\"]");
+        if(text.equalsIgnoreCase("show srp yes")){
             playwright.selectDropdownByValue(categorySrp, "yes");
+        }
+        else if(text.equalsIgnoreCase("show srp no")){
+            playwright.selectDropdownByValue(categorySrp, "no");
         }
     }
 
@@ -71,9 +100,24 @@ public class LandmarkPO {
      * get text data result
      * @param text
      */
-    public void getIdAndNameText(String text){
+    public boolean getIdAndNameText(String text){
         Locator idNameText = page.locator("//*[contains(text(),'"+text+"')]");
-        playwright.getText(idNameText);
+        return playwright.waitTillLocatorIsVisible(idNameText);
     }
 
+    /**
+     * verify text for category landmark
+     */
+    public boolean getCategory(String name){
+        Locator categoryText = page.locator("//*[@class=\"table table-striped\"]//td[contains(text(),'"+name+"')]").first();
+        return playwright.waitTillLocatorIsVisible(categoryText);
+    }
+
+    /**
+     * get text for show in srp
+     */
+    public boolean getShowSrp(String text){
+        Locator getSrpStatus = page.locator("(//span[@class='label label-success'][normalize-space()='Yes'])[1]");
+        return page.getByText(String.valueOf(getSrpStatus)).isVisible();
+    }
 }
