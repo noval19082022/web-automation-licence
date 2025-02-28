@@ -99,6 +99,7 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(ownerChatButton);
         playwright.clickOn(ownerChatButton);
     }
 
