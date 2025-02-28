@@ -116,3 +116,18 @@ Feature: Tenant Form Survey Kost P2
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     Then user will see that the text "Mohon lengkapi data profilmu sebelum mengajukan survei." is displayed
+
+    @TEST_LIMO-7137
+    Scenario: [Survey][Form request] No Time Available When Tenant Submits Survey if more than 19:00 today
+      Given user go to mamikos homepage
+      When user login as tenant via phone number:
+        | phone stag    | phone prod   | password  |
+        | 0811978788415 | 087708777615 | qwerty123 |
+      And tenant search kost then go to kost details:
+        | kost name stag              | kost name prod              |
+        | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+      And user dismiss FTUE booking benefit
+      And user click chat in kos detail
+      And user tap on survey kost btn on detail chatroom
+      And user open time survey option on form survey
+      Then user see there is no available survey time for today if open more than 19:00

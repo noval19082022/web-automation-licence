@@ -212,4 +212,14 @@ public class tenantSurveySteps {
         var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
         tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
     }
+
+    @Then("user see there is no available survey time for today if open more than 19:00")
+    public void userSeeThereIsNoAvailableSurveyTimeForTodayIfOpenMoreThan() {
+        var currentTime = JavaHelpers.getCurrentTimeGMT7();
+
+        if (JavaHelpers.isTimeGreater(currentTime, "19:00")) {
+            var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+            Assert.assertEquals(timeAvailable.length, 0);
+        }
+    }
 }
