@@ -129,4 +129,9 @@ public class TenantSurveyFormPO {
         // Convert List to String[]
         return times.toArray(new String[0]);
     }
+
+    public void selectTimeOption(String time) {
+       var timeOptionLocator = page.locator("a").filter(new Locator.FilterOptions().setHasText(time));
+       playwright.clickOn(timeOptionLocator);
+    }
 }

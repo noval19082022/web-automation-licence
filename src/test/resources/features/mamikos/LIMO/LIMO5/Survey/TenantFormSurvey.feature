@@ -87,3 +87,28 @@ Feature: Tenant Form Survey Kost P2
 #  13:00, 13:30, 14:00, 14:30, 15:00,
 #  15:30, 16:00, 16:30, 17:00, 17:30,
 #  18:00, 18:30, 19:00.
+
+  @TEST_LIMO-7134
+  Scenario: [Survey][Form request] Tenant Can Select a Specific Time
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user select survey available time
+#    Given user navigates to mamikos
+#    When user login as tenant
+#    And user search kos type Andalan [Kost Joglo Sofa Dekat UGM Depok Sleman]
+#    And user click on Tanya Pemilik
+#    And user choose saya ingin survei dulu
+#    And user click on kirim button
+#    Then user direct to chatroom
+#    And user click on survey kos in chatroom
+#    And user Select one of times from the list provided (example: 10:30).
+#    Then user see selected time is successfully displayed in the form.

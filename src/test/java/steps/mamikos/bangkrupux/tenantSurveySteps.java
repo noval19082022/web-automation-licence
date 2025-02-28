@@ -207,4 +207,9 @@ public class tenantSurveySteps {
         }
     }
 
+    @Then("user select survey available time")
+    public void userSelectSurveyTimeHoursFromCurrentTime() {
+        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+        tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
+    }
 }
