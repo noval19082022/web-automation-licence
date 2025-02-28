@@ -102,13 +102,17 @@ Feature: Tenant Form Survey Kost P2
     And user tap on survey kost btn on detail chatroom
     And user open time survey option on form survey
     Then user select survey available time
-#    Given user navigates to mamikos
-#    When user login as tenant
-#    And user search kos type Andalan [Kost Joglo Sofa Dekat UGM Depok Sleman]
-#    And user click on Tanya Pemilik
-#    And user choose saya ingin survei dulu
-#    And user click on kirim button
-#    Then user direct to chatroom
-#    And user click on survey kos in chatroom
-#    And user Select one of times from the list provided (example: 10:30).
-#    Then user see selected time is successfully displayed in the form.
+
+  @TEST_LIMO-7135
+  Scenario: [Survey][Form request] Validation Error for Missing Fields
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788412 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    Then user will see that the text "Mohon lengkapi data profilmu sebelum mengajukan survei." is displayed
