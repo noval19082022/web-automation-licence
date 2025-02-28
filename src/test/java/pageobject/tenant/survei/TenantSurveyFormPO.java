@@ -26,6 +26,7 @@ public class TenantSurveyFormPO {
     Locator genderPlaceHolder;
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
+    Locator ajukanSurveyBtn;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -42,6 +43,7 @@ public class TenantSurveyFormPO {
         genderPlaceHolder = page.getByText("Jenis Kelamin Laki-laki Perempuan Laki-laki dropdown-down Laki-laki Perempuan").locator("span");
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
+        ajukanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Survei"));
     }
 
     public void tapOnEditProfile() {
@@ -114,6 +116,11 @@ public class TenantSurveyFormPO {
 
     public String getTenantGender() {
         return playwright.getText(genderPlaceHolder);
+    }
+
+
+    public boolean isAjukanSurveyBtnDisable() {
+        return playwright.isButtonDisable(ajukanSurveyBtn);
     }
 
 

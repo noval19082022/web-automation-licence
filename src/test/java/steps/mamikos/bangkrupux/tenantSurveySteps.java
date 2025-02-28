@@ -229,4 +229,9 @@ public class tenantSurveySteps {
 
         Assert.assertEquals(genderOnForm, gender);
     }
+
+    @Then("user verify ajukan survey btn is disable on survey form")
+    public void userVerifyAjukanSurveyBtnIsDisableOnSurveyForm() {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnDisable());
+    }
 }
