@@ -234,4 +234,9 @@ public class tenantSurveySteps {
     public void userVerifyAjukanSurveyBtnIsDisableOnSurveyForm() {
         Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnDisable());
     }
+
+    @Then("user verify ajukan survey btn is enable on survey form")
+    public void userVerifyAjukanSurveyBtnIsEnableOnSurveyForm() {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnEnable());
+    }
 }

@@ -123,6 +123,11 @@ public class TenantSurveyFormPO {
         return playwright.isButtonDisable(ajukanSurveyBtn);
     }
 
+    public boolean isAjukanSurveyBtnEnable() {
+        return playwright.isButtonEnable(ajukanSurveyBtn);
+    }
+
+
 
     //******** Private METHOD PART ********
 
