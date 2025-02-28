@@ -1,4 +1,4 @@
-@LIMO5 @burnSaldoMamiads123
+@LIMO5 @burnSaldoMamiads
 Feature: Mamiads Burn Saldo
 
   Scenario: Inject To Set Saldo Mamiads on admin page
