@@ -1,4 +1,4 @@
-@LIMO5
+@LIMO5 @tenantSurveyP2
 Feature: Tenant Form Survey Kost P2
 
   @TEST_LIMO-7129
@@ -117,17 +117,35 @@ Feature: Tenant Form Survey Kost P2
     And user tap on survey kost btn on detail chatroom
     Then user will see that the text "Mohon lengkapi data profilmu sebelum mengajukan survei." is displayed
 
-    @TEST_LIMO-7137
-    Scenario: [Survey][Form request] No Time Available When Tenant Submits Survey if more than 19:00 today
-      Given user go to mamikos homepage
-      When user login as tenant via phone number:
-        | phone stag    | phone prod   | password  |
-        | 0811978788415 | 087708777615 | qwerty123 |
-      And tenant search kost then go to kost details:
-        | kost name stag              | kost name prod              |
-        | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
-      And user dismiss FTUE booking benefit
-      And user click chat in kos detail
-      And user tap on survey kost btn on detail chatroom
-      And user open time survey option on form survey
-      Then user see there is no available survey time for today if open more than 19:00
+  @TEST_LIMO-7137
+  Scenario: [Survey][Form request] No Time Available When Tenant Submits Survey if more than 19:00 today
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user see there is no available survey time for today if open more than 19:00
+
+  @TEST_LIMO-7138
+  Scenario: [Survey][Form request] Data Validation must be the same between User Profile Form and Survey Form
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    Then user will see that the text "Formulir survei kos" is displayed
+    And user tap on edit profile on survey form
+    Then user will see that the text "Data yang Akan Survei Kos" is displayed
+    Then user see the gender on survey form is "Laki-laki"
+    Then user will see that the text "Mahasiswa" is displayed

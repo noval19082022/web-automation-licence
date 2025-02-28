@@ -222,4 +222,11 @@ public class tenantSurveySteps {
             Assert.assertEquals(timeAvailable.length, 0);
         }
     }
+
+    @Then("user see the gender on survey form is {string}")
+    public void userSeeTheGenderOnSurveyFormIs(String gender) {
+        var genderOnForm = tenantSurveyFormPO.getTenantGender();
+
+        Assert.assertEquals(genderOnForm, gender);
+    }
 }

@@ -23,6 +23,7 @@ public class TenantSurveyFormPO {
     Locator timeOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
+    Locator genderPlaceHolder;
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
 
@@ -38,6 +39,7 @@ public class TenantSurveyFormPO {
         timeOption = page.getByTestId("available-time");
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
+        genderPlaceHolder = page.getByText("Jenis Kelamin Laki-laki Perempuan Laki-laki dropdown-down Laki-laki Perempuan").locator("span");
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
     }
@@ -105,6 +107,15 @@ public class TenantSurveyFormPO {
         return extractAllTimes(timeAvailable);
     }
 
+    public void selectTimeOption(String time) {
+        var timeOptionLocator = page.locator("a").filter(new Locator.FilterOptions().setHasText(time));
+        playwright.clickOn(timeOptionLocator);
+    }
+
+    public String getTenantGender() {
+        return playwright.getText(genderPlaceHolder);
+    }
+
 
     //******** Private METHOD PART ********
 
@@ -128,10 +139,5 @@ public class TenantSurveyFormPO {
 
         // Convert List to String[]
         return times.toArray(new String[0]);
-    }
-
-    public void selectTimeOption(String time) {
-       var timeOptionLocator = page.locator("a").filter(new Locator.FilterOptions().setHasText(time));
-       playwright.clickOn(timeOptionLocator);
     }
 }
