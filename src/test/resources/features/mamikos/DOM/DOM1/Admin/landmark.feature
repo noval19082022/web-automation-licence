@@ -62,7 +62,7 @@ Feature: Landmark
     And admin click search button
     Then admin can see category with name "Pagoda"
 
-  @TEST_SS-7305 @a
+  @TEST_SS-7305
   Scenario: [Web][Bangker][Landmark Data]Admin check filtering by Is Show on SRP
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
