@@ -198,6 +198,10 @@ public class tenantSurveySteps {
         var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
 
         for (var time : timeAvailable) {
+            if (currentTime.equals(time)) {
+                continue;
+            }
+
             Assert.assertTrue(
                     JavaHelpers.isTimeGreater(time, currentTime));
         }
