@@ -45,7 +45,7 @@ public class ChatTenantPO {
         latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
-        disabledRoomCardBookingButton = page.locator("//button[@class='bg-c-button mc-product-card__action-button track_request_booking bg-c-button--primary bg-c-button--sm bg-c-button--block']");
+        disabledRoomCardBookingButton = page.locator(".track_request_booking");
         seeAdsButton = page.getByTestId("chatRoomHeaderWrapper");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
