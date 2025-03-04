@@ -207,4 +207,36 @@ public class tenantSurveySteps {
         }
     }
 
+    @Then("user select survey available time")
+    public void userSelectSurveyTimeHoursFromCurrentTime() {
+        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+        tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
+    }
+
+    @Then("user see there is no available survey time for today if open more than 19:00")
+    public void userSeeThereIsNoAvailableSurveyTimeForTodayIfOpenMoreThan() {
+        var currentTime = JavaHelpers.getCurrentTimeGMT7();
+
+        if (JavaHelpers.isTimeGreater(currentTime, "19:00")) {
+            var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
+            Assert.assertEquals(timeAvailable.length, 0);
+        }
+    }
+
+    @Then("user see the gender on survey form is {string}")
+    public void userSeeTheGenderOnSurveyFormIs(String gender) {
+        var genderOnForm = tenantSurveyFormPO.getTenantGender();
+
+        Assert.assertEquals(genderOnForm, gender);
+    }
+
+    @Then("user verify ajukan survey btn is disable on survey form")
+    public void userVerifyAjukanSurveyBtnIsDisableOnSurveyForm() {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnDisable());
+    }
+
+    @Then("user verify ajukan survey btn is enable on survey form")
+    public void userVerifyAjukanSurveyBtnIsEnableOnSurveyForm() {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnEnable());
+    }
 }

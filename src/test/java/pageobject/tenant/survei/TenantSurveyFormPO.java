@@ -23,8 +23,10 @@ public class TenantSurveyFormPO {
     Locator timeOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
+    Locator genderPlaceHolder;
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
+    Locator ajukanSurveyBtn;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -38,8 +40,10 @@ public class TenantSurveyFormPO {
         timeOption = page.getByTestId("available-time");
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
+        genderPlaceHolder = page.getByText("Jenis Kelamin Laki-laki Perempuan Laki-laki dropdown-down Laki-laki Perempuan").locator("span");
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
+        ajukanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Survei"));
     }
 
     public void tapOnEditProfile() {
@@ -104,6 +108,25 @@ public class TenantSurveyFormPO {
 
         return extractAllTimes(timeAvailable);
     }
+
+    public void selectTimeOption(String time) {
+        var timeOptionLocator = page.locator("a").filter(new Locator.FilterOptions().setHasText(time));
+        playwright.clickOn(timeOptionLocator);
+    }
+
+    public String getTenantGender() {
+        return playwright.getText(genderPlaceHolder);
+    }
+
+
+    public boolean isAjukanSurveyBtnDisable() {
+        return playwright.isButtonDisable(ajukanSurveyBtn);
+    }
+
+    public boolean isAjukanSurveyBtnEnable() {
+        return playwright.isButtonEnable(ajukanSurveyBtn);
+    }
+
 
 
     //******** Private METHOD PART ********
