@@ -12,6 +12,8 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -665,6 +667,7 @@ public class PropertiSayaPO {
      * Get number of total room
      */
     public String getTextTotalRoom() {
+        playwright.waitTillLocatorIsVisible(textTotalRoom);
         return playwright.getText(textTotalRoom);
     }
 
@@ -1546,9 +1549,24 @@ public class PropertiSayaPO {
      */
     public void filterRoomTable(String filter) {
         playwright.hardWait(1000.0);
-        playwright.clickOn(roomFilterDropdown);
-        filterTable = page.getByText(filter).first();
+
+        List<String> dropdownOptions = Arrays.asList(
+                "Semua Kamar dropdown-down",
+                "Kamar Terisi dropdown-down",
+                "Kamar Kosong dropdown-down"
+        );
+
+        for (String option : dropdownOptions) {
+            roomFilterDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(option));
+            if (playwright.waitTillLocatorIsVisible(roomFilterDropdown)) {
+                playwright.clickOn(roomFilterDropdown);
+                break;
+            }
+        }
+
+        filterTable = page.locator("a").filter(new Locator.FilterOptions().setHasText(filter));;
         playwright.clickOn(filterTable);
+        playwright.hardWait(1000.0);
     }
 
     /**
