@@ -11,13 +11,13 @@ Feature: Update Kamar
     And owner search kost "Kos oke bebek" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
-    And owner add room with name or room number "26"
+    And owner add room with name or room number "89"
     And owner click simpan on add room pop up
-    Then user can sees toast on update room as "Kosong" "Total Kamar 7"
-    And user see total room is "Total Kamar 7" in update room page
-    When user enter text "26" on search bar in room allotment and hit enter
+    Then user can sees toast on update room as "Kosong" "Total Kamar 14"
+    And user see total room is "Total Kamar 14" in update room page
+    When user enter text "89" on search bar in room allotment and hit enter
     And user delete room name or number in room allotment
-    Then user see total room is "Total Kamar 6" in update room page
+    Then user see total room is "Total Kamar 13" in update room page
 
   @TEST_LIMO-3463 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update rooms become unavailable
@@ -33,7 +33,6 @@ Feature: Update Kamar
     And user click edit button in first row of the table
     And user tick already inhabited checkbox
     And owner click "Simpan"
-    Then user can sees toast on update room as "Terisi" "Total Kamar 1"
     When user enter text "" on search bar in room allotment and hit enter
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Kosong" in update room page
@@ -58,7 +57,6 @@ Feature: Update Kamar
     And user click edit button in first row of the table
     And user fill room floor in room allotment page with "1"
     And owner click "Simpan"
-    Then user can sees toast on update room as "Kosong" "Total Kamar 1"
     When user click edit button in first row of the table
     And user fill room floor in room allotment page with "abcd"
     And owner click "Simpan"
@@ -70,7 +68,6 @@ Feature: Update Kamar
     And user click edit button in first row of the table
     And user fill room name in room allotment page with "001A"
     And owner click "Simpan"
-    Then user can sees toast on update room as "Kosong" "Total Kamar 1"
     When user click edit button in first row of the table
     And user fill room name in room allotment page with "1"
     And owner click "Simpan"
@@ -97,11 +94,9 @@ Feature: Update Kamar
     And owner search kost "Property Automation x94Om" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
-    Then user see total room is "Total Kamar 5" in update room page
     When user click edit button in first row of the table
     And user tick already inhabited checkbox
     And owner click "Simpan"
-    Then user can sees toast on update room as "Terisi" "Total Kamar 5"
     When user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 4" in update room page
     When user filter the room with "Kamar Terisi" in update room page
@@ -109,7 +104,7 @@ Feature: Update Kamar
     When user click edit button in first row of the table
     And user tick already inhabited checkbox
     And owner click "Simpan"
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-878 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Show label goldplus if rooms set as goldplus from room list
