@@ -27,6 +27,7 @@ public class TenantSurveyFormPO {
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
     Locator ajukanSurveyBtn;
+    Locator chevronToDetailSurvey;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -44,6 +45,7 @@ public class TenantSurveyFormPO {
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
         ajukanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Survei"));
+        chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
     }
 
     public void tapOnEditProfile() {
@@ -127,6 +129,9 @@ public class TenantSurveyFormPO {
         return playwright.isButtonEnable(ajukanSurveyBtn);
     }
 
+    public void tapOnAjukanSurveyBtn() {
+        playwright.clickOn(ajukanSurveyBtn);
+    }
 
 
     //******** Private METHOD PART ********
