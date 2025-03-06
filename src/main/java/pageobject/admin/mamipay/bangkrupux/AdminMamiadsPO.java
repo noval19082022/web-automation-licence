@@ -52,7 +52,7 @@ public class AdminMamiadsPO {
     public void tapOnUpdateBtnOnMamiadsSetting() {
         page.onceDialog(dialog -> {
             System.out.printf("Dialog message: %s%n", dialog.message());
-            dialog.dismiss();
+            dialog.accept();
         });
         playwrightHelpers.clickOn(updateBtn);
     }
