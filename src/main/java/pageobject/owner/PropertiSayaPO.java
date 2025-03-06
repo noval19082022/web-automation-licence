@@ -1542,33 +1542,6 @@ public class PropertiSayaPO {
         return playwright.getText(statusRoom);
     }
 
-//    /**
-//     * Filter room table with selected text in param
-//     *
-//     * @param filter is room filter text
-//     */
-//    public void filterRoomTable(String filter) {
-//        playwright.hardWait(1000.0);
-//        if (playwright.waitTillLocatorIsVisible(roomFilterDropdown)) {
-//            playwright.clickOn(roomFilterDropdown);
-//        } else {
-//            roomFilterDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Semua Kamar dropdown-down"));
-//            if (playwright.waitTillLocatorIsVisible(roomFilterDropdown)) {
-//                playwright.clickOn(roomFilterDropdown);
-//            } else {
-//                roomFilterDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kamar Terisi dropdown-down"));
-//                if (playwright.waitTillLocatorIsVisible(roomFilterDropdown)) {
-//                    playwright.clickOn(roomFilterDropdown);
-//                } else {
-//                    roomFilterDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kamar Kosong dropdown-down"));
-//                    playwright.clickOn(roomFilterDropdown);
-//                }
-//            }
-//        }
-//        filterTable = page.getByText(filter).first();
-//        playwright.clickOn(filterTable);
-//    }
-
     /**
      * Filter room table with selected text in param
      *
