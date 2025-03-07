@@ -110,10 +110,6 @@ public class ChatTenantSteps {
         }
     }
 
-    @And("user change schedule survey if the survey already submitted")
-    public void user_change_schedule_survey() {
-            chat.clickOnUbahJadwalOnHeaderChatRoomButton();
-        }
     @And("user click on survey kos button")
     public void user_click_on_survey_kos_button() {
         chat.clickOnSurveyKosButton();

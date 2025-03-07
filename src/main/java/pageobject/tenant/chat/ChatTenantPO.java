@@ -26,7 +26,6 @@ public class ChatTenantPO {
     Locator ownerLastSeen;
     Locator ajukanSewaChatRoomButton;
     Locator ajukanSewaPopUpChatRoomButton;
-    Locator ubahJadwalButton;
     Locator cancelSurveyButton;
     Locator surveyKosButton;
     Locator dropdownTimeSurvey;
@@ -54,7 +53,6 @@ public class ChatTenantPO {
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
-        ubahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Jadwal"));
         cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan"));
         surveyKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Kos"));
         dropdownTimeSurvey =  page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
@@ -214,16 +212,6 @@ public class ChatTenantPO {
         }
         playwright.clickOn(ajukanSewaPopUpChatRoomButton);
     }
-
-    /**
-     * Click on ubah jadwal button
-     *
-     */
-    public void clickOnUbahJadwalOnHeaderChatRoomButton() {
-        playwright.waitTillLocatorIsVisible(ubahJadwalButton);
-        playwright.clickOn(ubahJadwalButton);
-    }
-
 
     public void visitDetailSurveyFromChatroom() {
         playwright.clickOn(chevronToDetailSurvey);
