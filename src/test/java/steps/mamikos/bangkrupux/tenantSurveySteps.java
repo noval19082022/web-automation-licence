@@ -210,7 +210,15 @@ public class tenantSurveySteps {
     @Then("user select survey available time")
     public void userSelectSurveyTimeHoursFromCurrentTime() {
         var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
-        tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
+        if (timeAvailable.length != 0) {
+            tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
+        } else {
+            tenantSurveyFormPO.tapOnSurveyDateForm();
+            tenantSurveyFormPO.tapOnNextMonthBtnSurveyDateForm();
+            tenantSurveyFormPO.selectSurveyDate("15");
+            tenantSurveyFormPO.tapOnSurveyTimeOption();
+            tenantSurveyFormPO.selectTimeOption("08:00");
+        }
     }
 
     @Then("user see there is no available survey time for today if open more than 19:00")
@@ -238,5 +246,10 @@ public class tenantSurveySteps {
     @Then("user verify ajukan survey btn is enable on survey form")
     public void userVerifyAjukanSurveyBtnIsEnableOnSurveyForm() {
         Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnEnable());
+    }
+
+    @Then("user tap on ajukan survey btn on form")
+    public void tapAjukanSurveyBtn() {
+        tenantSurveyFormPO.tapOnAjukanSurveyBtn();
     }
 }

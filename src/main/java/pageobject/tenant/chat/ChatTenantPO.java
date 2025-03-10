@@ -26,7 +26,6 @@ public class ChatTenantPO {
     Locator ownerLastSeen;
     Locator ajukanSewaChatRoomButton;
     Locator ajukanSewaPopUpChatRoomButton;
-    Locator ubahJadwalButton;
     Locator cancelSurveyButton;
     Locator surveyKosButton;
     Locator dropdownTimeSurvey;
@@ -35,6 +34,10 @@ public class ChatTenantPO {
     Locator backButtonChatroom;
     Locator charoomCardList;
     Locator ftueSlider;
+    Locator chevronToDetailSurvey;
+    Locator batalkanSurveyForm;
+    Locator sendBatalkanSurveyBtn;
+    Locator backBtnToChatroomFromSurveyDetail;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -50,15 +53,18 @@ public class ChatTenantPO {
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
-        ubahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Jadwal"));
-        cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan Survei"));
+        cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan"));
         surveyKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Kos"));
         dropdownTimeSurvey =  page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
         tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
-        confirmationUbahJadwalButton = page.locator("//button[normalize-space()='Batalkan Survei']//following-sibling::button");
+        confirmationUbahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Survei"));
         backButtonChatroom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
         charoomCardList = page.locator(".mc-channel-list-card");
         this.ftueSlider = page.getByText("Lanjut");
+        chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
+        batalkanSurveyForm = page.getByPlaceholder("Ceritakan secara singkat dan jelas.");
+        sendBatalkanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
+        backBtnToChatroomFromSurveyDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
     }
 
     /**
@@ -207,13 +213,8 @@ public class ChatTenantPO {
         playwright.clickOn(ajukanSewaPopUpChatRoomButton);
     }
 
-    /**
-     * Click on ubah jadwal button
-     *
-     */
-    public void clickOnUbahJadwalOnHeaderChatRoomButton() {
-        playwright.waitTillLocatorIsVisible(ubahJadwalButton);
-        playwright.clickOn(ubahJadwalButton);
+    public void visitDetailSurveyFromChatroom() {
+        playwright.clickOn(chevronToDetailSurvey);
     }
 
     /**
@@ -293,5 +294,18 @@ public class ChatTenantPO {
      */
     public void clickBackButtonChatroom() {
         playwright.clickOn(backButtonChatroom);
+    }
+
+    public void fillBatalkanForm(String text) {
+        playwright.clickOn(batalkanSurveyForm);
+        playwright.clickLocatorAndTypeKeyboard(batalkanSurveyForm, text);
+    }
+
+    public void sendFormBatalkanSurvey() {
+        playwright.clickOn(sendBatalkanSurveyBtn);
+    }
+
+    public void backToChatroomFromSurveyDetail() {
+        playwright.clickOn(backBtnToChatroomFromSurveyDetail);
     }
 }
