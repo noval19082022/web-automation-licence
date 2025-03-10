@@ -69,9 +69,8 @@ public class ChatTenantSteps {
         if (playwright.isTextDisplayed("Saya Mengerti", 5)) {
             kostDetail.dismissFTUE();
             Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-        }
-        else{
-            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+        } else {
+            Assert.assertTrue(chat.getLatestChatText().replaceAll("\\s", "").trim().contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
         }
     }
 

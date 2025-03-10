@@ -42,7 +42,7 @@ public class ChatTenantPO {
         questionsOption = page.locator("//*[@class='wrapper-question']/child::div");
         ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
-        latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
+        latestChat = page.locator("(//div[@class='mc-balloon-chat__content']//div)[last()]");
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator(".track_request_booking");
@@ -143,6 +143,7 @@ public class ChatTenantPO {
     public String getLatestChatText() {
         playwright.pageScrollUntilElementIsVisible(latestChat);
         playwright.waitTillLocatorIsVisible(latestChat);
+        playwright.hardWait(5);
         return playwright.getText(latestChat);
     }
 

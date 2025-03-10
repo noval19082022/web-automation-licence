@@ -4,7 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
-public class customQuestionPO {
+public class CustomQuestionPO {
     private Page page;
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
@@ -15,7 +15,7 @@ public class customQuestionPO {
     Locator inputTextbox;
     Locator linkTextHapus;
 
-    public customQuestionPO(Page page) {
+    public CustomQuestionPO(Page page) {
         this.page = page;
         this.filterSurveiKos = page.locator("//span[@id='filter-survey-tenant']");
         this.pengaturanSurveiKos = page.locator("//div[@class='mc-channel-list__setting-card bg-c-card bg-c-card--lined bg-c-card--sm bg-c-card--light bg-c-card--clickable']");

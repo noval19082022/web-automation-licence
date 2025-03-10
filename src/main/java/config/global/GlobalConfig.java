@@ -11,8 +11,8 @@ public class GlobalConfig {
     public static final boolean SET_ACCEPT_DOWNLOAD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setAcceptDownload"));
     public static final boolean SET_VIDEO_RECORD = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setVideoRecord"));
     public static final boolean SET_TRACING = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "setTracing"));
-    public static final int SCREEN_WIDTH = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ?  1920 : JavaHelpers.getScreenWidth();
-    public static final int SCREEN_HEIGHT = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ? 1080 : JavaHelpers.getScreenHeight();
+    public static final int SCREEN_WIDTH = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ?  1400 : JavaHelpers.getScreenWidth();
+    public static final int SCREEN_HEIGHT = Boolean.parseBoolean(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "ci/cd")) ? 750 : JavaHelpers.getScreenHeight();
     public static final double DEFAULT_NAVIGATION_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "defaultNavigationTimeout"));
     public static final double DEFAULT_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "defaultTimeout"));
     public static final double LONG_TIMEOUT = Double.parseDouble(JavaHelpers.getPropertyValue(GLOBAL_CONFIG_PROPERTIES, "longWaitTime"));
