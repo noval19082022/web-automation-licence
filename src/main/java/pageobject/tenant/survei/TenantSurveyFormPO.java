@@ -29,6 +29,7 @@ public class TenantSurveyFormPO {
     Locator ajukanSurveyBtn;
     Locator chevronDetailSurvei;
     Locator inputTextbox;
+    Locator chevronToDetailSurvey;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -48,6 +49,7 @@ public class TenantSurveyFormPO {
         ajukanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Survei"));
         chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
+        chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
     }
 
     public void tapOnEditProfile() {
@@ -131,6 +133,9 @@ public class TenantSurveyFormPO {
         return playwright.isButtonEnable(ajukanSurveyBtn);
     }
 
+    public void tapOnAjukanSurveyBtn() {
+        playwright.clickOn(ajukanSurveyBtn);
+    }
 
 
     //******** Private METHOD PART ********
@@ -174,4 +179,5 @@ public class TenantSurveyFormPO {
         playwright.waitTillLocatorIsVisible(inputTextbox);
         playwright.fill(inputTextbox, text);
     }
+
 }
