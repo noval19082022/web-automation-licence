@@ -5,8 +5,8 @@ Feature: Batalkan survei P2
   Scenario: Cancel survey request with a valid reason
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod   | password  |
-      | 0811978788415 | 087708777615 | qwerty123 |
+      | phone stag | phone prod   | password  |
+      | 0892202413 | 087708777615 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
@@ -27,8 +27,8 @@ Feature: Batalkan survei P2
   Scenario: Attempt to cancel a survey request without providing a reason
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod   | password  |
-      | 0811978788415 | 087708777615 | qwerty123 |
+      | phone stag | phone prod   | password  |
+      | 0892202413 | 087708777615 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
