@@ -10,7 +10,6 @@ Feature: Survey Tenant
       | 0811978788416 | 0812000005 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-    And user batalkan survey if the survey already submitted
     And user tap on survey kost btn on detail chatroom
     And user open time survey option on form survey
     Then user select survey available time

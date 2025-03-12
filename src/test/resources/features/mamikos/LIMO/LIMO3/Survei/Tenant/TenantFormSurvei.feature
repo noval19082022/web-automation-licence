@@ -1,4 +1,4 @@
-@LIMO5 @tenantSurveyP2
+@LIMO3 @tenantSurveyP2
 Feature: Tenant Form Survey Kost P2
 
   @TEST_LIMO-7129

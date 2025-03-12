@@ -66,12 +66,11 @@ public class ChatTenantSteps {
 
     @And("chat room appear with latest message {string}")
     public void chatRoomAppearWithLatestMessage(String chatText) {
-        playwright.hardWait(3000.0); // hard wait for waiting mesage is sent from send bird
         if (playwright.isTextDisplayed("Saya Mengerti", 5)) {
             kostDetail.dismissFTUE();
             Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
-        } else{
-            Assert.assertTrue(chat.getLatestChatText().trim().replaceAll("\\s", "").contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
+        } else {
+            Assert.assertTrue(chat.getLatestChatText().replaceAll("\\s", "").trim().contains(chatText.replaceAll("\\s", "")), "Latest message in chat is wrong");
         }
     }
 
@@ -107,12 +106,23 @@ public class ChatTenantSteps {
             chat.clickOnBatalkanSurveiButton();
             chat.fillBatalkanForm("kita juga dari perusahaan banteng mas");
             chat.sendFormBatalkanSurvey();
+        }else {
+            chat.clickOnSurveyKosButton();
         }
     }
 
+    @And("user change schedule survey if the survey already submitted")
+    public void user_change_schedule_survey() {
+            chat.clickOnUbahJadwalOnHeaderChatRoomButton();
+        }
     @And("user click on survey kos button")
     public void user_click_on_survey_kos_button() {
         chat.clickOnSurveyKosButton();
+    }
+
+    @And("user input time survey {string}")
+    public void user_input_time_survey(String time) {
+        chat.inputTimeSurvey(time);
     }
 
     @And("user click on chat button in top bar tenant home page")

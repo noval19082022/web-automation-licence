@@ -27,6 +27,8 @@ public class TenantSurveyFormPO {
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
     Locator ajukanSurveyBtn;
+    Locator chevronDetailSurvei;
+    Locator inputTextbox;
     Locator chevronToDetailSurvey;
 
     public TenantSurveyFormPO(Page page) {
@@ -45,6 +47,8 @@ public class TenantSurveyFormPO {
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
         ajukanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Survei"));
+        chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
+        inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
     }
 
@@ -157,4 +161,23 @@ public class TenantSurveyFormPO {
         // Convert List to String[]
         return times.toArray(new String[0]);
     }
+
+    /**
+     * Click on detail survei
+     *
+     */
+    public void userClickOnChevronDetailSurvei() {
+        playwright.clickOn(chevronDetailSurvei);
+    }
+
+    /**
+     * Fills reason cancel survei
+     *
+     * @param text
+     */
+    public void userFillFormReasonCancelSurvei(String text) {
+        playwright.waitTillLocatorIsVisible(inputTextbox);
+        playwright.fill(inputTextbox, text);
+    }
+
 }

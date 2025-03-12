@@ -1,4 +1,4 @@
-package steps.mamikos.bangkrupux;
+package steps.mamikos.tenant.survei;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
@@ -248,8 +248,18 @@ public class tenantSurveySteps {
         Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnEnable());
     }
 
+    @And("user click on chevron detail survei")
+    public void userClickOnChevronDetailSurvei() {
+        tenantSurveyFormPO.userClickOnChevronDetailSurvei();
+    }
+
     @Then("user tap on ajukan survey btn on form")
     public void tapAjukanSurveyBtn() {
         tenantSurveyFormPO.tapOnAjukanSurveyBtn();
+    }
+
+    @And("user fill form reason cancel survei {string}")
+    public void userFillFormReasonCancelSurvei(String text){
+        tenantSurveyFormPO.userFillFormReasonCancelSurvei(text);
     }
 }

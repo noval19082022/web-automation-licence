@@ -38,6 +38,8 @@ public class ChatTenantPO {
     Locator batalkanSurveyForm;
     Locator sendBatalkanSurveyBtn;
     Locator backBtnToChatroomFromSurveyDetail;
+    Locator chevronDetailSurvei;
+    Locator inputTextbox;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -45,7 +47,7 @@ public class ChatTenantPO {
         questionsOption = page.locator("//*[@class='wrapper-question']/child::div");
         ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
-        latestChat = page.locator("(//div[@class='mc-balloon-chat__content']/div)[last()]");
+        latestChat = page.locator("(//div[@class='mc-balloon-chat__content']//div)[last()]");
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator(".track_request_booking");
@@ -55,7 +57,7 @@ public class ChatTenantPO {
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
         cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan"));
         surveyKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Kos"));
-        dropdownTimeSurvey =  page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
+        dropdownTimeSurvey = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
         tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
         confirmationUbahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Survei"));
         backButtonChatroom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
@@ -65,16 +67,19 @@ public class ChatTenantPO {
         batalkanSurveyForm = page.getByPlaceholder("Ceritakan secara singkat dan jelas.");
         sendBatalkanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         backBtnToChatroomFromSurveyDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
+        chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
+        inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
     }
 
     /**
      * List all questions in pop up
+     *
      * @return list questions
      */
     public List<String> listQuestions() {
         List<String> questionsListing = new ArrayList<>();
         List<Locator> questionsList = questionsOption.all();
-        for (Locator i : questionsList ){
+        for (Locator i : questionsList) {
             questionsListing.add(playwright.getText(i));
         }
         return questionsListing;
@@ -91,11 +96,11 @@ public class ChatTenantPO {
 
     /**
      * Click one of question in radio button
-     * @param text is position from top
      *
+     * @param text is position from top
      */
     public void clickQuestion(String text) {
-        Locator questionOption = page.getByText(""+text+"");
+        Locator questionOption = page.getByText("" + text + "");
         playwright.clickOn(questionOption);
         playwright.hardWait(5000);
         KostDetailsPO ChatTenantPO = new KostDetailsPO(page);
@@ -106,28 +111,28 @@ public class ChatTenantPO {
 
     /**
      * Click one of question in chat preset button
-     * @param text is position from top
      *
+     * @param text is position from top
      */
     public void clickPresetQuestion(String text) {
-        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText("" + text + "");
         playwright.clickOn(questionOption);
         playwright.hardWait(5000);
-        }
+    }
 
     /**
      * verify chat preset question
-      * @param text
+     *
+     * @param text
      * @return text example : Ada diskon untuk kos ini?
      */
     public boolean isChatPresetQuestionVisible(String text) {
-        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText(""+text+"");
+        Locator questionOption = page.getByTestId("chatPretextDropdown-body").getByText("" + text + "");
         return playwright.waitTillLocatorIsVisible(questionOption, 3000.0);
     }
 
     /**
      * Click ajukan sewa button in question pop up
-     *
      */
     public void clickAjukanSewaButton() {
         playwright.clickOn(ajukanSewaButton);
@@ -135,6 +140,7 @@ public class ChatTenantPO {
 
     /**
      * Click send in question pop up
+     *
      * @throws InterruptedException
      */
     public void clickSend() {
@@ -144,9 +150,11 @@ public class ChatTenantPO {
 
     /**
      * Get latest chat
+     *
      * @return String latest chat (most bottom chat)
      */
     public String getLatestChatText() {
+        playwright.hardWait(10);
         playwright.pageScrollUntilElementIsVisible(latestChat);
         playwright.waitTillLocatorIsVisible(latestChat);
         return playwright.getText(latestChat);
@@ -154,8 +162,9 @@ public class ChatTenantPO {
 
     /**
      * tenant Enter text to textbox
+     *
      * @param message is text we want to enter
-     * Hit send after enter message
+     *                Hit send after enter message
      */
     public void insertChatText(String message) {
         chatTextBox.fill(message);
@@ -164,15 +173,15 @@ public class ChatTenantPO {
 
     /**
      * Check booking button disable is present
+     *
      * @return boolean
      */
     public boolean isBookingButtonDisablePresent() {
-          return playwright.isButtonDisable(disabledRoomCardBookingButton);
+        return playwright.isButtonDisable(disabledRoomCardBookingButton);
     }
 
     /**
      * Click Lihat Iklan button
-     *
      */
     public void clickLihatIklanButton() {
         playwright.clickOn(seeAdsButton);
@@ -180,6 +189,7 @@ public class ChatTenantPO {
 
     /**
      * Check Owner Last Seen chatroom is present
+     *
      * @return true if appear
      */
     public boolean isOwnerLastSeenPresent() {
@@ -189,9 +199,10 @@ public class ChatTenantPO {
     /**
      * Click on Ajukan Sewa from chatroom
      * Select booking date
-     * @param date tomorrow, today, or specific date by number on string data type
      *
-     * Click on Ajukan Sewa from Pop Up Chat Room Button
+     * @param date tomorrow, today, or specific date by number on string data type
+     *             <p>
+     *             Click on Ajukan Sewa from Pop Up Chat Room Button
      */
     public void clickOnAjukanSewaChatRoomButton(String date) {
         playwright.clickOn(ajukanSewaChatRoomButton);
@@ -219,7 +230,6 @@ public class ChatTenantPO {
 
     /**
      * Click on batalkan survey button
-     *
      */
     public void clickOnBatalkanSurveiButton() {
         playwright.clickOn(cancelSurveyButton);
@@ -227,11 +237,24 @@ public class ChatTenantPO {
 
     /**
      * Click on survey button
-     *
      */
     public void clickOnSurveyKosButton() {
-        playwright.clickOn(surveyKosButton);
+        playwright.waitTillLocatorIsVisible(confirmationUbahJadwalButton);
+        playwright.hardWait(5);
+        if (playwright.isButtonWithTextDisplayed("Ubah Survei")){
+            playwright.clickOn(chevronDetailSurvei);
+            playwright.clickOn(cancelSurveyButton);
+            playwright.waitTillLocatorIsVisible(inputTextbox);
+            playwright.fill(inputTextbox, "Saya ingin membatalkan ajukan survei");
+            playwright.clickOnText("Kirim");
+            playwright.hardWait(5);
+            playwright.clickOn(surveyKosButton);
+    } else {
+            playwright.hardWait(5);
+            playwright.waitTillLocatorIsVisible(surveyKosButton);
+            playwright.clickOn(surveyKosButton);
     }
+}
 
     /**
      * admin input voucher
@@ -294,6 +317,15 @@ public class ChatTenantPO {
      */
     public void clickBackButtonChatroom() {
         playwright.clickOn(backButtonChatroom);
+    }
+
+    /**
+     * Click on ubah jadwal button
+     *
+     */
+    public void clickOnUbahJadwalOnHeaderChatRoomButton() {
+        playwright.waitTillLocatorIsVisible(confirmationUbahJadwalButton);
+        playwright.clickOn(confirmationUbahJadwalButton);
     }
 
     public void fillBatalkanForm(String text) {

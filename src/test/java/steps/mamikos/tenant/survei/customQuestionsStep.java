@@ -1,16 +1,15 @@
 package steps.mamikos.tenant.survei;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import org.testng.Assert;
-import pageobject.tenant.survei.customQuestionPO;
+import pageobject.tenant.survei.CustomQuestionPO;
 import utilities.PlaywrightHelpers;
 
 public class customQuestionsStep {
     Page page = ActiveContext.getActivePage();
-    customQuestionPO customQuestion = new customQuestionPO(page);
+    CustomQuestionPO customQuestion = new CustomQuestionPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
 
