@@ -30,7 +30,7 @@ Feature: Purchase Mamiprime
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password   |
-      | 082233545512 | 0            | 12345678  |
+      | 082233545512 | 0            | 12345678   |
     And owner navigate to pendaftaran mamiprime page
     Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
@@ -61,3 +61,82 @@ Feature: Purchase Mamiprime
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin wants to reset mamiprime for owner with property ID "1000030951"
+
+  @TEST_LIMO-4557 @WEB @AUTOMATED
+  Scenario: Listing full room available and check label "kamar penuh and aktif"
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod   | password  |
+      | 0891202407 | 0            | qwerty123 |
+    And owner navigate to pendaftaran mamiprime page
+    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+    Then owner will see that the text "Kamar Penuh" is displayed
+    Then owner will see that the text "Aktif" is displayed
+
+  @TEST_LIMO-4560 @WEB @AUTOMATED
+  Scenario: auto-select would be the 1st order of listing that is available
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod   | password  |
+      | 0891202405 | 0            | qwerty123 |
+    And owner navigate to pendaftaran mamiprime page
+    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+    Then owner see auto-select would be the first order
+
+  @TEST_LIMO-4927 @WEB @AUTOMATED
+  Scenario: Section on “pendaftaran mamiprime“ display a maximum of 5 only keywords
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod   | password  |
+      | 0891202405 | 0            | qwerty123 |
+    And owner navigate to pendaftaran mamiprime page
+    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+    Then "Keyword" are displayed in the register mamiprime
+      | Keyword       |
+      | jatiwaringin  |
+      | rajeg         |
+      | jatiwar       |
+      | sasak         |
+      | jati waringin |
+
+  @TEST_LIMO-4782 @WEB @AUTOMATED
+  Scenario: Click on Hubungi kami on page Lihat kata kunci
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod   | password  |
+      | 0891202405 | 0            | qwerty123 |
+    And owner navigate to pendaftaran mamiprime page
+    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+    And owner click "Lihat kata kunci lainnya"
+    And owner click on Hubungi Kami
+    And owner set active page to 1
+    Then user should redirect to link "https://help.mamikos.com/hubungi-kami"
+
+#  @TEST_LIMO-4784 @WEB @AUTOMATED
+#  Scenario: Click on Chat dengan CS on page Mamihelp
+#    Given user go to mamikos homepage
+#    When user login as owner:
+#      | phone stag | phone prod   | password  |
+#      | 0891202405 | 0            | qwerty123 |
+#    And owner navigate to pendaftaran mamiprime page
+#    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+#    And owner click "Lihat kata kunci lainnya"
+#    And owner click on Hubungi Kami
+#    And owner set active page to 1
+#    And user click text "Langsung chat di sini dengan customer service kami."
+#    Then user see Contact us pop up is appear
+
+  @TEST_LIMO-4786 @WEB @AUTOMATED
+  Scenario: Click on Whatsapp on page Mamihelp
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod   | password  |
+      | 0891202405 | 0            | qwerty123 |
+    And owner navigate to pendaftaran mamiprime page
+    And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
+    And owner click "Lihat kata kunci lainnya"
+    And owner click on Hubungi Kami
+    And owner set active page to 1
+    And user click text "Hubungi customer service lewat WhatsApp Anda (chat only)."
+    And owner set active page to 3
+    Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"

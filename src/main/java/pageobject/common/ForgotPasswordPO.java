@@ -3,6 +3,7 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -211,8 +212,7 @@ public class ForgotPasswordPO {
      * @return nextPage forgot password
      */
     public ForgotPasswordPO clickTextAndRedierctNextPage(String text) {
-        Page nextPage = playwright.movePageByClickLocator(page,
-                page.getByText(text));
+        Page nextPage = playwright.movePageByClickLocator(page, page.getByText(text));
         return new ForgotPasswordPO(nextPage);
     }
 }

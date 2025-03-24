@@ -1,16 +1,20 @@
 package pageobject.owner.mamiprime;
 
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import config.global.GlobalConfig;
+import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import pageobject.common.ForgotPasswordPO;
 import utilities.PlaywrightHelpers;
 
-public class MamiprimePendaftaranPO {
+import java.util.List;
 
+public class MamiprimePendaftaranPO {
     private Page page;
     private PlaywrightHelpers playwright;
     Locator nonGPInformationText;
@@ -24,7 +28,10 @@ public class MamiprimePendaftaranPO {
     Locator ubahTagihanPrimeHeader;
     Locator registerPrimeHeader;
     Locator btnLanjutBayar;
-
+    Locator autoSelectFirstOrder;
+    Locator keyword;
+    Locator hubungiKami;
+    Locator chatDenganCS;
 
     public MamiprimePendaftaranPO(Page page) {
         this.page = page;
@@ -40,7 +47,9 @@ public class MamiprimePendaftaranPO {
         this.ubahTagihanPrimeHeader = page.locator(".bg-c-text--heading-4");
         this.registerPrimeHeader = page.locator(".prime-package__title");
         this.btnLanjutBayar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Bayar"));
-
+        this.autoSelectFirstOrder = page.locator("//a[@class='bg-c-link prime-property-list__list-item bg-c-link--high-naked prime-property-list__list-item--active']");
+        this.hubungiKami = page.locator("//div[@class='bg-c-list-item']");
+        this.chatDenganCS = page.locator("(//div[@class='bg-c-grid__item bg-is-col-4'])[2]");
     }
 
     /**
@@ -185,5 +194,39 @@ public class MamiprimePendaftaranPO {
 
     public void clickOnLanjutkanBtnFromMamiprimeLanding() {
         playwright.clickOn(lanjutkanBtn);
+    }
+
+    /**
+     * Auto select first order
+     */
+    public void ownerSeeAutoSelectFirstOrder() {
+        playwright.waitTillLocatorIsVisible(autoSelectFirstOrder);
+    }
+
+    /**
+     * Assert Keyword
+     * @param name
+     */
+    public String assertkeyword(String name){
+        keyword = page.locator("//div[normalize-space()='"+ name +"']");
+        playwright.pageScrollInView(keyword);
+        return playwright.getText(keyword);
+    }
+
+    /**
+     * Click on Hubungi Kami
+     */
+    public void ownerClickOnHubungiKami() {
+        playwright.pageScrollInView(hubungiKami);
+        playwright.clickOn(hubungiKami);
+    }
+
+    /**
+     * Click on Chat dengan CS
+     * @return
+     */
+    public void ownerClickOnChatDenganCS() {
+        playwright.waitTillLocatorIsVisible(chatDenganCS);
+        playwright.clickOn(chatDenganCS);
     }
 }
