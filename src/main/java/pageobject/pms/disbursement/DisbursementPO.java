@@ -595,8 +595,8 @@ public class DisbursementPO {
     public void selectDisbursementPeriod(String period) {
         Locator periode = page.getByText(period).last();
 
-        if(!playwright.getText(disbursementPeriodSelect).contains(period)) {
-            playwright.clickOn(disbursementPeriodSelect);
+        if(!playwright.getText(disbursementPeriodSelect.last()).contains(period)) {
+            playwright.clickOn(disbursementPeriodSelect.last());
             playwright.clickOn(periode);
         }
     }
