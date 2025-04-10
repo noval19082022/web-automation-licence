@@ -19,7 +19,7 @@ Feature: Broadcast Chat Owner Tenant Booking Required 3
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And user wants to reset Broadcast for owner with phone number "081197878842"
+    And user wants to reset Broadcast for owner with phone number "081328787342"
 
     Given user go to mamikos homepage
     When user login as owner:
