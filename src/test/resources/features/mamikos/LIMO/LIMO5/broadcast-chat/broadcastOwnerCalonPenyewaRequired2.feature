@@ -14,6 +14,13 @@ Feature: Broadcast Chat Owner Tenant Booking Required 3
 
   @TEST_LIMO-3640 @Broadcast-chat @GP2 @automated @listing-monetization @web @broadcast-chat2-lagi
   Scenario: [Broadcast Chat][Create Broadcast chat]User want to change kost after input message chat
+           #reset broadcast chat
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Broadcast for owner with phone number "081197878842"
+
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
