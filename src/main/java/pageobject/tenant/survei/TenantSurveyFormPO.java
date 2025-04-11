@@ -32,6 +32,7 @@ public class TenantSurveyFormPO {
     Locator chevronDetailSurvei;
     Locator inputTextbox;
     Locator chevronToDetailSurvey;
+    Locator orangLainYangAkanDatangSurveyToogle;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -53,6 +54,7 @@ public class TenantSurveyFormPO {
         chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
+        orangLainYangAkanDatangSurveyToogle = page.getByRole(AriaRole.CHECKBOX);
     }
 
 
@@ -195,5 +197,10 @@ public class TenantSurveyFormPO {
 
         var date = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']").getByText(randomStr).first();
         playwright.clickOn(date);
+    }
+
+    public void checkedOnToogleOrangLainYangAkanDatangSurvei() {
+        playwright.checkBox(orangLainYangAkanDatangSurveyToogle);
+        playwright.zoomOutBrowser("0.8");
     }
 }

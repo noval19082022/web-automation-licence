@@ -26,11 +26,12 @@ public class PlaywrightHelpers {
 
     /**
      * this method will be reload the active page if element is not visible after loading
-     * @param times how many you would to reload
+     *
+     * @param times   how many you would to reload
      * @param locator the expected locator that you want to visible
      */
     public void reloadPageIfLocatorNotVisibleAfterLoad(int times, Locator locator) {
-        if(this.isLocatorVisibleAfterLoad(locator, 1000.0)){
+        if (this.isLocatorVisibleAfterLoad(locator, 1000.0)) {
             for (int i = 0; i < times; i++) {
                 reloadPage();
                 if (waitTillLocatorIsVisible(locator)) break;
@@ -43,7 +44,7 @@ public class PlaywrightHelpers {
      * This method checks if the provided locator element is visible within a short timeout (e.g., 1 second) after the page loads.
      * If not, it attempts to reload the page up to the specified number of times (`times`) until the element becomes visible.
      *
-     * @param times The maximum number of times to attempt reloading the page.
+     * @param times   The maximum number of times to attempt reloading the page.
      * @param locator The expected locator element to check for visibility.
      */
     public void reloadPageIfElementNotVisible(int times, Locator locator) {
@@ -55,6 +56,7 @@ public class PlaywrightHelpers {
 
     /**
      * Reload page with timeout
+     *
      * @param timeout
      */
     public void reloadPage(Double timeout) {
@@ -103,6 +105,7 @@ public class PlaywrightHelpers {
 
     /**
      * This overloaded version of the navigateTo method navigates to a URL and waits for a specific locator.
+     *
      * @param url     String data type of URL format
      * @param locator The locator to wait for.
      * @param timeout Double data type of specific timeout
@@ -132,9 +135,10 @@ public class PlaywrightHelpers {
 
     /**
      * Click on a desired locator
+     *
      * @param locator target locator
      * @param timeout timeout in milliseconds
-     * @param state WaitForSelectorState VISIBLE ATTACHED DETACHED
+     * @param state   WaitForSelectorState VISIBLE ATTACHED DETACHED
      */
     public void clickOn(Locator locator, Double timeout, WaitForSelectorState state) {
         locator.waitFor(new Locator.WaitForOptions().setState(state).setTimeout(timeout));
@@ -203,6 +207,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait till locator is visible then click on desired locator
+     *
      * @param locator target locator
      */
     public void waitForLocatorVisibleAndClickOn(Locator locator) {
@@ -213,6 +218,7 @@ public class PlaywrightHelpers {
     /**
      * click locator if some locator exist
      * this method is suitable for dynamic element
+     *
      * @param locatorCLick target click locator
      */
     public void clickIfElementVisible(Locator locatorCLick) {
@@ -226,9 +232,10 @@ public class PlaywrightHelpers {
     /**
      * click locator if some locator exist
      * this method is suitable for dynamic element
+     *
      * @param locatorCLick target click locator
-     * @param locatorWait locator wait
-     * @param timeout timeout in milliseconds
+     * @param locatorWait  locator wait
+     * @param timeout      timeout in milliseconds
      */
     public void clickIfElementVisible(Locator locatorCLick, Locator locatorWait, Double timeout) {
         if (waitTillLocatorIsVisible(locatorCLick)) {
@@ -242,8 +249,9 @@ public class PlaywrightHelpers {
     /**
      * click locator if some locator exist after load
      * this method is suitable for dynamic pop up
+     *
      * @param locatorCLick target click locator
-     * @param timeout timeout
+     * @param timeout      timeout
      */
     public void clickIfElementVisibleAfterLoad(Locator locatorCLick, double timeout) {
         if (isLocatorVisibleAfterLoad(locatorCLick, timeout)) {
@@ -255,6 +263,7 @@ public class PlaywrightHelpers {
 
     /**
      * Scroll to coordinate
+     *
      * @param deltaX
      * @param deltaY
      */
@@ -264,6 +273,7 @@ public class PlaywrightHelpers {
 
     /**
      * Simulate tap keyboard
+     *
      * @param key
      */
     public void tapKeyboard(String key) {
@@ -272,8 +282,9 @@ public class PlaywrightHelpers {
 
     /**
      * Force fill input to locator with disabled fill attribute
+     *
      * @param locator targeted locator
-     * @param data String data type
+     * @param data    String data type
      */
     public void forceFill(Locator locator, String data) {
         locator.fill(data, new Locator.FillOptions().setForce(true));
@@ -281,8 +292,9 @@ public class PlaywrightHelpers {
 
     /**
      * Fill input to locator
+     *
      * @param locator targeted locator
-     * @param data String data type
+     * @param data    String data type
      */
     public void fill(Locator locator, String data) {
         locator.fill(data);
@@ -290,21 +302,23 @@ public class PlaywrightHelpers {
 
     /**
      * Input to locator character by character
+     *
      * @param locator locator targeted locator
-     * @param data data String data type
+     * @param data    data String data type
      */
-    public void fillCharacterByCharacter(Locator locator, String data){
-        locator.pressSequentially(data,new Locator.PressSequentiallyOptions().setDelay(1000.0));
+    public void fillCharacterByCharacter(Locator locator, String data) {
+        locator.pressSequentially(data, new Locator.PressSequentiallyOptions().setDelay(1000.0));
     }
 
     /**
      * Input to locator character by character with delay
+     *
      * @param locator input
-     * @param data text
-     * @param delay delay
+     * @param data    text
+     * @param delay   delay
      */
-    public void fillCharacterByCharacter(Locator locator, String data, Double delay){
-        locator.pressSequentially(data,new Locator.PressSequentiallyOptions().setDelay(delay));
+    public void fillCharacterByCharacter(Locator locator, String data, Double delay) {
+        locator.pressSequentially(data, new Locator.PressSequentiallyOptions().setDelay(delay));
     }
 
     /**
@@ -352,6 +366,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get text content of a locator
+     *
      * @param locator target locator
      * @return String data type
      */
@@ -361,15 +376,17 @@ public class PlaywrightHelpers {
 
     /**
      * Get text content of a locator and normalize all (enter) in it
+     *
      * @param locator target locator
      * @return String
      */
-    public String getNormalizeText(Locator locator){
-        return locator.textContent().trim().replaceAll("[\\t\\n\\r\\s]+"," ");
+    public String getNormalizeText(Locator locator) {
+        return locator.textContent().trim().replaceAll("[\\t\\n\\r\\s]+", " ");
     }
 
     /**
      * get list text from locator that represent list, for example kost name on listing
+     *
      * @param locator
      * @return list string
      */
@@ -380,6 +397,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get list text content from locator
+     *
      * @param locator target locator
      * @return List of string
      */
@@ -390,6 +408,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get text content from locator
+     *
      * @param locator target Locator playwright locator
      * @return String data type
      */
@@ -423,6 +442,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get button by aria role contain text
+     *
      * @param buttonText text on button
      * @return Locator playwright
      */
@@ -432,6 +452,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get button by aria role with set name
+     *
      * @param buttonText text on button
      * @return Locator playwright
      */
@@ -441,8 +462,9 @@ public class PlaywrightHelpers {
 
     /**
      * Get button by aria role with set name and exact
+     *
      * @param buttonText text on button
-     * @param exact boolean
+     * @param exact      boolean
      * @return Locator playwright
      */
     public Locator getButtonBySetName(String buttonText, boolean exact) {
@@ -451,9 +473,10 @@ public class PlaywrightHelpers {
 
     /**
      * Get total locator found
+     *
      * @param locator
      */
-    public int countLocator(Locator locator){
+    public int countLocator(Locator locator) {
         return locator.count();
     }
 
@@ -534,6 +557,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for load state before and check visibility of target locator
+     *
      * @param locator
      * @param timeout
      * @return
@@ -546,7 +570,8 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator
-     * @param locator  Locator data type
+     *
+     * @param locator Locator data type
      */
     public void waitFor(Locator locator) {
         locator.waitFor();
@@ -554,6 +579,7 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for a locator with timeout
+     *
      * @param locator  Locator data type
      * @param duration set duration in double
      */
@@ -572,12 +598,13 @@ public class PlaywrightHelpers {
     /**
      * Wait until no network activity
      */
-    public void waitTillNetworkIdle(){
+    public void waitTillNetworkIdle() {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     /**
      * Wait till page loaded
+     *
      * @param timeout double data type in millisecond
      */
     public void waitTillPageLoaded(Double timeout) {
@@ -594,9 +621,10 @@ public class PlaywrightHelpers {
 
     /**
      * Hard wait until a locator visibility is ended
-     * @param locator Locator data type
+     *
+     * @param locator       Locator data type
      * @param waitTimeDelay Double data type
-     * @param maxLoop int data type
+     * @param maxLoop       int data type
      */
     public void waitTillLocatorIsNotVisible(Locator locator, Double waitTimeDelay, int maxLoop) {
         if (waitTillLocatorIsVisible(locator)) {
@@ -613,8 +641,9 @@ public class PlaywrightHelpers {
 
     /**
      * Wait for locator have target state
+     *
      * @param locator target locator
-     * @param state WaitForSelectorState VISIBLE ATTACHED DETACHED
+     * @param state   WaitForSelectorState VISIBLE ATTACHED DETACHED
      * @param timeout timeout wait duration in millisecond
      */
     public void waitForSelectorState(Locator locator, WaitForSelectorState state, Double timeout) {
@@ -627,6 +656,7 @@ public class PlaywrightHelpers {
 
     /**
      * hover specific locator
+     *
      * @param locator
      */
     public void hover(Locator locator) {
@@ -671,7 +701,7 @@ public class PlaywrightHelpers {
      *
      * @param locator target locator
      */
-    public void clearText(Locator locator){
+    public void clearText(Locator locator) {
         locator.clear();
     }
 
@@ -720,18 +750,20 @@ public class PlaywrightHelpers {
 
     /**
      * Scroll Down Helper until locator is visible
+     *
      * @param locator
      * @param scrollPerPixel
      */
     public void pageScrollUntilElementIsVisibleWithPixel(Locator locator, int scrollPerPixel) {
         for (int i = 0; i < 200; i++) {
-            page.evaluate("window.scrollBy(0,"+scrollPerPixel+")");
+            page.evaluate("window.scrollBy(0," + scrollPerPixel + ")");
             if (waitTillLocatorIsVisible(locator)) break;
         }
     }
 
     /**
      * Scroll down to locator
+     *
      * @param locator
      */
     public void pageScrollInView(Locator locator) {
@@ -762,6 +794,7 @@ public class PlaywrightHelpers {
 
     /**
      * Hard wait before an action
+     *
      * @param time Double data type
      */
     public void hardWait(double time) {
@@ -780,6 +813,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get page URL
+     *
      * @return string data type
      */
     public String getPageUrl() {
@@ -861,7 +895,7 @@ public class PlaywrightHelpers {
      * Wait until element locator button based on text is visible
      *
      * @param button Locator type based on text
-     * default timeout
+     *               default timeout
      * @return boolean
      */
     public boolean isButtonWithTextDisplayed(String button) {
@@ -871,6 +905,7 @@ public class PlaywrightHelpers {
     /**
      * Helper to type like real keyboard
      * note: this method need some action such as click locator
+     *
      * @param text string
      */
     public void realKeyboardType(String text) {
@@ -907,6 +942,7 @@ public class PlaywrightHelpers {
 
     /**
      * check if data is null or blank
+     *
      * @param locator
      * @return
      */
@@ -938,7 +974,7 @@ public class PlaywrightHelpers {
      * Click on a desired locator based on button text
      *
      * @param linkText target locator
-     *                   default timeout
+     *                 default timeout
      */
     public void clickOnLinkButton(String linkText) {
         clickOn(locatorByRoleSetName(AriaRole.LINK, linkText).first());
@@ -946,20 +982,22 @@ public class PlaywrightHelpers {
 
     /**
      * Verify radio button is check
+     *
      * @param locator
      */
-    public boolean isRadioButtonChecked(Locator locator){
+    public boolean isRadioButtonChecked(Locator locator) {
         return locator.isChecked();
     }
 
     /**
      * Assert CSS in locator
+     *
      * @param locator
-     * @param css CSS property name.
-     * @param value CSS property value.
+     * @param css     CSS property name.
+     * @param value   CSS property value.
      */
-    public void assertHaveCss(Locator locator, String css, String value){
-        assertThat(locator).hasCSS(css,value);
+    public void assertHaveCss(Locator locator, String css, String value) {
+        assertThat(locator).hasCSS(css, value);
     }
     //---- Assert Part ----\\
 
@@ -967,6 +1005,7 @@ public class PlaywrightHelpers {
 
     /**
      * logging into console if element is clicked or not
+     *
      * @param locator clickable
      */
     private void logElementNotClickable(Locator locator) {
@@ -974,7 +1013,7 @@ public class PlaywrightHelpers {
     }
 
     /**
-     *  This method will be used to scroll to up
+     * This method will be used to scroll to up
      */
     public void scrollToUp(Page page) {
         page.evaluate("async () => { " +
@@ -988,6 +1027,7 @@ public class PlaywrightHelpers {
 
     /**
      * Get page title
+     *
      * @return String
      */
     public String getPageTitle() {
@@ -996,12 +1036,26 @@ public class PlaywrightHelpers {
 
     /**
      * Uplaod file using file from resources folder
+     *
      * @param locator
      * @param path
      */
     public void uploadFile(Locator locator, String path) {
         String projectpath = System.getProperty("user.dir");
 
-        locator.setInputFiles(Paths.get(projectpath+"/"+path));
+        locator.setInputFiles(Paths.get(projectpath + "/" + path));
+    }
+
+    /**
+     * Simulates zooming out the browser by applying a CSS scale transformation to the page's body.
+     * <p>
+     * This does not perform an actual browser zoom (like Ctrl + -), but visually scales the entire
+     * page content using CSS. Useful for layout or screenshot testing when a zoomed-out view is needed.
+     *
+     * @param percentageInDecimal A string representing the zoom scale factor (e.g., "0.8" for 80% zoom).
+     */
+    public void zoomOutBrowser(String percentageInDecimal) {
+        var expression = String.format("document.body.style.transform = 'scale(%s)'", percentageInDecimal);
+        page.evaluate(expression);
     }
 }

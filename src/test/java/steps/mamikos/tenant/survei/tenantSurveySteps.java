@@ -267,4 +267,9 @@ public class tenantSurveySteps {
     public void userEditBirthdayFromSurveyFormRequest() {
         tenantSurveyFormPO.editRandomProfileBirthdayDate();
     }
+
+    @And("user check on toggle button orang lain yang akan datang survei")
+    public void userCheckOnToggleButtonOrangLainYangAkanDatangSurvei() {
+        tenantSurveyFormPO.checkedOnToogleOrangLainYangAkanDatangSurvei();
+    }
 }
