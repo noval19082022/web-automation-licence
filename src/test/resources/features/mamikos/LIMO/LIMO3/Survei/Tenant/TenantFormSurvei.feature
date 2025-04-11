@@ -262,4 +262,18 @@ Feature: Tenant Form Survey Kost P2
     And user check on toggle button orang lain yang akan datang survei
     Then user will see that the text "Nama" is displayed
     Then user will see that the text "Hubungan" is displayed
+
+  @TEST_LIMO-7169
+  Scenario: [Survey][Form request] Display Fields ‘Nama’ and ‘Hubungan’ After Activating the Button
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
     Then user will see that the text "Tidak boleh kosong." is displayed
