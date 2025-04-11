@@ -227,3 +227,22 @@ Feature: Tenant Form Survey Kost P2
     Then user select survey available time
     Then user will see that the text "Mohon lengkapi data profilmu sebelum mengajukan survei." is displayed
     Then user verify ajukan survey btn is disable on survey form
+
+
+  @TEST_LIMO-7167
+  Scenario: [Survey][Form request] If tenant data is updated on the survey form, it will automatically be applied to the user profile.
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user tap on edit profile on survey form
+    And user edit profile name from survey form request "random"
+    And user edit random birthday from survey form request
+    And user click on simpan profile btn
+    Then user see pop up success save profile text

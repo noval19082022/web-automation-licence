@@ -262,4 +262,9 @@ public class tenantSurveySteps {
     public void userFillFormReasonCancelSurvei(String text){
         tenantSurveyFormPO.userFillFormReasonCancelSurvei(text);
     }
+
+    @And("user edit random birthday from survey form request")
+    public void userEditBirthdayFromSurveyFormRequest() {
+        tenantSurveyFormPO.editRandomProfileBirthdayDate();
+    }
 }

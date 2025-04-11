@@ -8,6 +8,7 @@ import utilities.PlaywrightHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +24,7 @@ public class TenantSurveyFormPO {
     Locator timeOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
+    Locator profileBirthdayPlaceHolder;
     Locator genderPlaceHolder;
     Locator saveProfileBtn;
     Locator popUpSuccessSaveProfileText;
@@ -43,6 +45,7 @@ public class TenantSurveyFormPO {
         timeOption = page.getByTestId("available-time");
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
+        profileBirthdayPlaceHolder = page.getByPlaceholder("Masukkan Tanggal Lahir");
         genderPlaceHolder = page.getByText("Jenis Kelamin Laki-laki Perempuan Laki-laki dropdown-down Laki-laki Perempuan").locator("span");
         saveProfileBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         popUpSuccessSaveProfileText = page.locator(".mc-chat-room__toast");
@@ -51,6 +54,33 @@ public class TenantSurveyFormPO {
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
     }
+
+
+    //******** Private METHOD PART ********
+
+    /**
+     * Extracts all valid time strings in "HH:mm" format from a given string.
+     *
+     * @param text The input string containing multiple times.
+     * @return Array of valid time strings in "HH:mm" format.
+     */
+    private String[] extractAllTimes(String text) {
+        List<String> times = new ArrayList<>();
+
+        // Define a regex pattern to match "HH:mm" format (24-hour time)
+        Pattern pattern = Pattern.compile("\\b(\\d{2}:\\d{2})\\b");
+        Matcher matcher = pattern.matcher(text);
+
+        // Find all occurrences and add to list
+        while (matcher.find()) {
+            times.add(matcher.group(1));
+        }
+
+        // Convert List to String[]
+        return times.toArray(new String[0]);
+    }
+
+    //************************************************************************************************************
 
     public void tapOnEditProfile() {
         playwright.clickOn(editProfileBtn);
@@ -137,34 +167,8 @@ public class TenantSurveyFormPO {
         playwright.clickOn(ajukanSurveyBtn);
     }
 
-
-    //******** Private METHOD PART ********
-
-    /**
-     * Extracts all valid time strings in "HH:mm" format from a given string.
-     *
-     * @param text The input string containing multiple times.
-     * @return Array of valid time strings in "HH:mm" format.
-     */
-    private String[] extractAllTimes(String text) {
-        List<String> times = new ArrayList<>();
-
-        // Define a regex pattern to match "HH:mm" format (24-hour time)
-        Pattern pattern = Pattern.compile("\\b(\\d{2}:\\d{2})\\b");
-        Matcher matcher = pattern.matcher(text);
-
-        // Find all occurrences and add to list
-        while (matcher.find()) {
-            times.add(matcher.group(1));
-        }
-
-        // Convert List to String[]
-        return times.toArray(new String[0]);
-    }
-
     /**
      * Click on detail survei
-     *
      */
     public void userClickOnChevronDetailSurvei() {
         playwright.clickOn(chevronDetailSurvei);
@@ -180,4 +184,16 @@ public class TenantSurveyFormPO {
         playwright.fill(inputTextbox, text);
     }
 
+    /**
+     * edit random profile birthday
+     */
+    public void editRandomProfileBirthdayDate() {
+        playwright.clickOn(profileBirthdayPlaceHolder);
+
+        int randomNum = ThreadLocalRandom.current().nextInt(10, 16); // 16 is exclusive
+        String randomStr = String.valueOf(randomNum);
+
+        var date = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']").getByText(randomStr).first();
+        playwright.clickOn(date);
+    }
 }
