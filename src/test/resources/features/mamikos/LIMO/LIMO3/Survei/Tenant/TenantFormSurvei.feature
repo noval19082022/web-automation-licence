@@ -316,3 +316,25 @@ Feature: Tenant Form Survey Kost P2
     And user fill nama for orang lain yang akan datang survey with value "Maksimum 50 karakter.Maksimum 50 karakter.Maksimum 50 karakter."
     And user fill hubungan for orang lain yang akan datang survey with value "Maksimum 50 karakter.Maksimum 50 karakter.Maksimum 50 karakter."
     Then user will see that the text "Maksimum 50 karakter." is displayed
+
+  @TEST_LIMO-7172
+  Scenario: [Survey][Form request] Field will save the data When Button is Deactivated
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pm"
+    And user fill hubungan for orang lain yang akan datang survey with value "ok"
+    Then user will see that the text "Minimum 3 karakter." is displayed
+    And user uncheck on toggle button orang lain yang akan datang survei
+    And user check on toggle button orang lain yang akan datang survei
+    Then user should not be able to see the text "Tidak boleh kosong."
+    Then user will see that the text "Minimum 3 karakter." is displayed

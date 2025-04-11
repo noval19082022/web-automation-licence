@@ -208,6 +208,10 @@ public class TenantSurveyFormPO {
         playwright.zoomOutBrowser("0.8");
     }
 
+    public void uncheckedOnToogleOrangLainYangAkanDatangSurvei() {
+        playwright.uncheckBox(orangLainYangAkanDatangSurveyToogle);
+    }
+
     public void fillNamaOrangLainYangAkanDatangSurvey(String nama) {
         playwright.clickLocatorAndTypeKeyboard(namaOrangLainYangAkanDatangSurveyPlaceHolder, nama);
     }
