@@ -358,3 +358,27 @@ Feature: Tenant Form Survey Kost P2
     And user fill nama for orang lain yang akan datang survey with value "pmo"
     And user fill hubungan for orang lain yang akan datang survey with value "ook"
     Then user verify ajukan survey btn is enable on survey form
+    And user fill nama for orang lain yang akan datang survey with value ""
+    And user fill hubungan for orang lain yang akan datang survey with value ""
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    Then user verify ajukan survey btn is disable on survey form
+
+  @TEST_LIMO-7174
+  Scenario: [Survey][Form request] Enable "Ajukan Survey" Button After Filling All Mandatory Fields
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user select survey available time
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pmo"
+    And user fill hubungan for orang lain yang akan datang survey with value "ook"
+    Then user verify ajukan survey btn is enable on survey form

@@ -213,10 +213,12 @@ public class TenantSurveyFormPO {
     }
 
     public void fillNamaOrangLainYangAkanDatangSurvey(String nama) {
+        playwright.clearText(namaOrangLainYangAkanDatangSurveyPlaceHolder);
         playwright.clickLocatorAndTypeKeyboard(namaOrangLainYangAkanDatangSurveyPlaceHolder, nama);
     }
 
     public void fillHubunganOrangLainYangAkanDatangSurvey(String hubungan) {
+        playwright.clearText(hubunganOrangLainYangAkanDatangSurveyPlaceHolder);
         playwright.clickLocatorAndTypeKeyboard(hubunganOrangLainYangAkanDatangSurveyPlaceHolder, hubungan);
     }
 }
