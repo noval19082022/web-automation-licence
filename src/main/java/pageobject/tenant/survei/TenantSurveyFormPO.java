@@ -33,6 +33,8 @@ public class TenantSurveyFormPO {
     Locator inputTextbox;
     Locator chevronToDetailSurvey;
     Locator orangLainYangAkanDatangSurveyToogle;
+    Locator namaOrangLainYangAkanDatangSurveyPlaceHolder;
+    Locator hubunganOrangLainYangAkanDatangSurveyPlaceHolder;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -55,6 +57,8 @@ public class TenantSurveyFormPO {
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
         orangLainYangAkanDatangSurveyToogle = page.getByRole(AriaRole.CHECKBOX);
+        namaOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Masukkan nama orang yang akan datang survei");
+        hubunganOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Contoh: Kakak, Teman");
     }
 
 
@@ -202,5 +206,13 @@ public class TenantSurveyFormPO {
     public void checkedOnToogleOrangLainYangAkanDatangSurvei() {
         playwright.checkBox(orangLainYangAkanDatangSurveyToogle);
         playwright.zoomOutBrowser("0.8");
+    }
+
+    public void fillNamaOrangLainYangAkanDatangSurvey(String nama) {
+        playwright.clickLocatorAndTypeKeyboard(namaOrangLainYangAkanDatangSurveyPlaceHolder, nama);
+    }
+
+    public void fillHubunganOrangLainYangAkanDatangSurvey(String hubungan) {
+        playwright.clickLocatorAndTypeKeyboard(hubunganOrangLainYangAkanDatangSurveyPlaceHolder, hubungan);
     }
 }

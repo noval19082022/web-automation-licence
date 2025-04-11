@@ -272,4 +272,14 @@ public class tenantSurveySteps {
     public void userCheckOnToggleButtonOrangLainYangAkanDatangSurvei() {
         tenantSurveyFormPO.checkedOnToogleOrangLainYangAkanDatangSurvei();
     }
+
+    @And("user fill nama for orang lain yang akan datang survey with value {string}")
+    public void userFillNamaForOrangLainYangAkanDatangSurveyWithValue(String nama) {
+        tenantSurveyFormPO.fillNamaOrangLainYangAkanDatangSurvey(nama);
+    }
+
+    @And("user fill hubungan for orang lain yang akan datang survey with value {string}")
+    public void userFillHubunganForOrangLainYangAkanDatangSurveyWithValue(String hubungan) {
+        tenantSurveyFormPO.fillHubunganOrangLainYangAkanDatangSurvey(hubungan);
+    }
 }
