@@ -382,3 +382,19 @@ Feature: Tenant Form Survey Kost P2
     And user fill nama for orang lain yang akan datang survey with value "pmo"
     And user fill hubungan for orang lain yang akan datang survey with value "ook"
     Then user verify ajukan survey btn is enable on survey form
+
+  @TEST_LIMO-7175
+  Scenario: [Survey][Form request] Pilar 1 system does not need to display error text to complete the data.
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 082291821983 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    And user select survey available time
+    Then user should not be able to see the text "Mohon lengkapi data profilmu sebelum mengajukan survei."
