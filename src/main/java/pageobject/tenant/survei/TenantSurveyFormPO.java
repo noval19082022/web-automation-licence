@@ -196,7 +196,7 @@ public class TenantSurveyFormPO {
     public void editRandomProfileBirthdayDate() {
         playwright.clickOn(profileBirthdayPlaceHolder);
 
-        int randomNum = ThreadLocalRandom.current().nextInt(10, 16); // 16 is exclusive
+        int randomNum = ThreadLocalRandom.current().nextInt(10, 14); // 16 is exclusive
         String randomStr = String.valueOf(randomNum);
 
         var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
@@ -204,8 +204,8 @@ public class TenantSurveyFormPO {
         var date = basedLocator.getByText(randomStr).first();
 
         if (!playwright.waitTillLocatorIsVisible(date)) {
-            randomStr = String.valueOf(randomNum+1);
-            basedLocator.getByText(randomStr).first();
+            randomStr = String.valueOf(randomNum + 1);
+            date = basedLocator.getByText(randomStr).first();
         }
         playwright.clickOn(date);
     }
