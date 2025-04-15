@@ -15,6 +15,13 @@ Feature: Broadcast Chat Owner Tenant Booking Required 2
 
   @TEST_LIMO-3641 @continue
   Scenario:[Broadcast Chat][Create Broadcast chat]User Want To Save Template Without Add Message On Template Is Editable
+       #reset broadcast chat
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Broadcast for owner with phone number "081197878842"
+
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
