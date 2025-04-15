@@ -262,4 +262,29 @@ public class tenantSurveySteps {
     public void userFillFormReasonCancelSurvei(String text){
         tenantSurveyFormPO.userFillFormReasonCancelSurvei(text);
     }
+
+    @And("user edit random birthday from survey form request")
+    public void userEditBirthdayFromSurveyFormRequest() {
+        tenantSurveyFormPO.editRandomProfileBirthdayDate();
+    }
+
+    @And("user check on toggle button orang lain yang akan datang survei")
+    public void userCheckOnToggleButtonOrangLainYangAkanDatangSurvei() {
+        tenantSurveyFormPO.checkedOnToogleOrangLainYangAkanDatangSurvei();
+    }
+
+    @And("user uncheck on toggle button orang lain yang akan datang survei")
+    public void userUnCheckOnToggleButtonOrangLainYangAkanDatangSurvei() {
+        tenantSurveyFormPO.uncheckedOnToogleOrangLainYangAkanDatangSurvei();
+    }
+
+    @And("user fill nama for orang lain yang akan datang survey with value {string}")
+    public void userFillNamaForOrangLainYangAkanDatangSurveyWithValue(String nama) {
+        tenantSurveyFormPO.fillNamaOrangLainYangAkanDatangSurvey(nama);
+    }
+
+    @And("user fill hubungan for orang lain yang akan datang survey with value {string}")
+    public void userFillHubunganForOrangLainYangAkanDatangSurveyWithValue(String hubungan) {
+        tenantSurveyFormPO.fillHubunganOrangLainYangAkanDatangSurvey(hubungan);
+    }
 }

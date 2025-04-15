@@ -227,3 +227,174 @@ Feature: Tenant Form Survey Kost P2
     Then user select survey available time
     Then user will see that the text "Mohon lengkapi data profilmu sebelum mengajukan survei." is displayed
     Then user verify ajukan survey btn is disable on survey form
+
+
+  @TEST_LIMO-7167
+  Scenario: [Survey][Form request] If tenant data is updated on the survey form, it will automatically be applied to the user profile.
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user tap on edit profile on survey form
+    And user edit profile name from survey form request "random"
+    And user edit random birthday from survey form request
+    And user click on simpan profile btn
+    Then user see pop up success save profile text
+
+  @TEST_LIMO-7168
+  Scenario: [Survey][Form request] Display Fields ‘Nama’ and ‘Hubungan’ After Activating the Button
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Nama" is displayed
+    Then user will see that the text "Hubungan" is displayed
+
+  @TEST_LIMO-7169
+  Scenario: [Survey][Form request] Display Fields ‘Nama’ and ‘Hubungan’ After Activating the Button
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+
+  @TEST_LIMO-7170
+  Scenario: [Survey][Form request] Error Messages Disappear After Filling Fields
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "paman"
+    And user fill hubungan for orang lain yang akan datang survey with value "hahaha"
+    Then user should not be able to see the text "Tidak boleh kosong."
+
+  @TEST_LIMO-7171
+  Scenario: [Survey][Form request] Check minimum and maximum character
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pm"
+    And user fill hubungan for orang lain yang akan datang survey with value "ok"
+    Then user will see that the text "Minimum 3 karakter." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "Maksimum 50 karakter.Maksimum 50 karakter.Maksimum 50 karakter."
+    And user fill hubungan for orang lain yang akan datang survey with value "Maksimum 50 karakter.Maksimum 50 karakter.Maksimum 50 karakter."
+    Then user will see that the text "Maksimum 50 karakter." is displayed
+
+  @TEST_LIMO-7172
+  Scenario: [Survey][Form request] Field will save the data When Button is Deactivated
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag     | phone prod   | password  |
+      | 08191911991238 | 087708777612 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pm"
+    And user fill hubungan for orang lain yang akan datang survey with value "ok"
+    Then user will see that the text "Minimum 3 karakter." is displayed
+    And user uncheck on toggle button orang lain yang akan datang survei
+    And user check on toggle button orang lain yang akan datang survei
+    Then user should not be able to see the text "Tidak boleh kosong."
+    Then user will see that the text "Minimum 3 karakter." is displayed
+
+  @TEST_LIMO-7173
+  Scenario: [Survey][Form request] Button Disables Again If a Field is Cleared
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user select survey available time
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pmo"
+    And user fill hubungan for orang lain yang akan datang survey with value "ook"
+    Then user verify ajukan survey btn is enable on survey form
+    And user fill nama for orang lain yang akan datang survey with value ""
+    And user fill hubungan for orang lain yang akan datang survey with value ""
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    Then user verify ajukan survey btn is disable on survey form
+
+  @TEST_LIMO-7174
+  Scenario: [Survey][Form request] Enable "Ajukan Survey" Button After Filling All Mandatory Fields
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod   | password  |
+      | 0811978788415 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    Then user select survey available time
+    And user check on toggle button orang lain yang akan datang survei
+    Then user will see that the text "Tidak boleh kosong." is displayed
+    And user fill nama for orang lain yang akan datang survey with value "pmo"
+    And user fill hubungan for orang lain yang akan datang survey with value "ook"
+    Then user verify ajukan survey btn is enable on survey form
+
+  @TEST_LIMO-7175
+  Scenario: [Survey][Form request] Pilar 1 system does not need to display error text to complete the data.
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 082291821983 | 087708777615 | qwerty123 |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user open time survey option on form survey
+    And user select survey available time
+    Then user should not be able to see the text "Mohon lengkapi data profilmu sebelum mengajukan survei."
