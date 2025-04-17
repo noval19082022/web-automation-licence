@@ -1060,6 +1060,10 @@ public class PlaywrightHelpers {
         page.evaluate(expression);
     }
 
+    /**
+     * Select date survei
+     *
+     */
     public void selectDateSurvei(String date) {
         if (date.equalsIgnoreCase("tomorrow")) {
             this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
