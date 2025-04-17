@@ -241,13 +241,7 @@ public class TenantSurveyFormPO {
      */
     public void userSelectDateSurvei(String date) {
         Locator datePick;
-        if (date.equalsIgnoreCase("tomorrow")) {
-            this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
-        } else if (date.equalsIgnoreCase("today")) {
-            this.date = JavaHelpers.getCurrentDateOrTime("d");
-        } else {
-            this.date = date;
-        }
+        playwright.selectDateSurvei(date);
         selectDateSurvei.click();
         datePick = page.locator("//div[@class='date-wrapper']");
         List<Locator> datePicks = playwright.getLocators(datePick);

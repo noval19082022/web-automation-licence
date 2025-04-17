@@ -12,6 +12,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @Slf4j
 public class PlaywrightHelpers {
     Page page;
+    String date;
 
     public PlaywrightHelpers(Page page) {
         this.page = page;
@@ -84,7 +85,7 @@ public class PlaywrightHelpers {
     /**
      * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
      *
-     * @param url   String data type of URL format
+     * @param url   String data type of URL formatte
      * @param state The load state to wait for before navigating.
      */
     public void navigateTo(String url, Double timeout, LoadState state) {
@@ -1057,5 +1058,15 @@ public class PlaywrightHelpers {
     public void zoomOutBrowser(String percentageInDecimal) {
         var expression = String.format("document.body.style.transform = 'scale(%s)'", percentageInDecimal);
         page.evaluate(expression);
+    }
+
+    public void selectDateSurvei(String date) {
+        if (date.equalsIgnoreCase("tomorrow")) {
+            this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        } else if (date.equalsIgnoreCase("today")) {
+            this.date = JavaHelpers.getCurrentDateOrTime("d");
+        } else {
+            this.date = date;
+        }
     }
 }
