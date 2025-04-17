@@ -154,9 +154,11 @@ public class ChatTenantPO {
      * @return String latest chat (most bottom chat)
      */
     public String getLatestChatText() {
-        playwright.hardWait(10);
+        playwright.hardWait(5);
         playwright.pageScrollUntilElementIsVisible(latestChat);
         playwright.waitTillLocatorIsVisible(latestChat);
+        String chatText = playwright.getText(latestChat);
+        System.out.println("Isi chat terakhir: " + chatText);
         return playwright.getText(latestChat);
     }
 

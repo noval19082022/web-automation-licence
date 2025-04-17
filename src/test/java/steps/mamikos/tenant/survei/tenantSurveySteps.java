@@ -287,4 +287,13 @@ public class tenantSurveySteps {
     public void userFillHubunganForOrangLainYangAkanDatangSurveyWithValue(String hubungan) {
         tenantSurveyFormPO.fillHubunganOrangLainYangAkanDatangSurvey(hubungan);
     }
+
+    @And("user select date {string} survei")
+    public void userSelectDateSurvei(String date) throws ParseException {
+        String dateTime = "";
+        if (date.equalsIgnoreCase("tomorrow")) {
+            dateTime = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", "en", 0, 1, 0, 0, 0);
+            tenantSurveyFormPO.userSelectDateSurvei(dateTime);
+        }
+    }
 }

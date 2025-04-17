@@ -6,6 +6,7 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,7 +16,9 @@ import java.util.regex.Pattern;
 public class TenantSurveyFormPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    JavaHelpers java = new JavaHelpers();
 
+    String date;
     Locator dateOption;
     Locator dateViewSelected;
     Locator dateViewToday;
@@ -35,6 +38,7 @@ public class TenantSurveyFormPO {
     Locator orangLainYangAkanDatangSurveyToogle;
     Locator namaOrangLainYangAkanDatangSurveyPlaceHolder;
     Locator hubunganOrangLainYangAkanDatangSurveyPlaceHolder;
+    Locator selectDateSurvei;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -59,6 +63,7 @@ public class TenantSurveyFormPO {
         orangLainYangAkanDatangSurveyToogle = page.getByRole(AriaRole.CHECKBOX);
         namaOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Masukkan nama orang yang akan datang survei");
         hubunganOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Contoh: Kakak, Teman");
+        selectDateSurvei = page.locator("//div[@class='bg-c-datepicker']");
     }
 
 
@@ -227,5 +232,23 @@ public class TenantSurveyFormPO {
     public void fillHubunganOrangLainYangAkanDatangSurvey(String hubungan) {
         playwright.clearText(hubunganOrangLainYangAkanDatangSurveyPlaceHolder);
         playwright.clickLocatorAndTypeKeyboard(hubunganOrangLainYangAkanDatangSurveyPlaceHolder, hubungan);
+    }
+
+    /**
+     * user select date survei
+     *
+     * @param date
+     */
+    public void userSelectDateSurvei(String date) {
+        Locator datePick;
+        playwright.selectDateSurvei(date);
+        selectDateSurvei.click();
+        datePick = page.locator("//div[@class='date-wrapper']");
+        List<Locator> datePicks = playwright.getLocators(datePick);
+        for (Locator pick : datePicks) {
+            if (pick.isEnabled() && pick.isVisible()) {
+                pick.click();
+            }
+        }
     }
 }
