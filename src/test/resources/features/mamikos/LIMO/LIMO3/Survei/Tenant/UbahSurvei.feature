@@ -1,7 +1,7 @@
 @LIMO3 @tenantSurveyP2
 Feature: Ubah Survei
 
-  @TEST_LIMO-7151 @TEST_LIMO-7281
+  @TEST_LIMO-7151 @TEST_LIMO-7281 @continue
   Scenario: Chatroom Reschedule survey request
     Given user go to mamikos homepage
     When user login as tenant via phone number:
