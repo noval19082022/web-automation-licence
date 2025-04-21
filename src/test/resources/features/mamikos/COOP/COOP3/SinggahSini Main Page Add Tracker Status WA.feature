@@ -9,7 +9,7 @@ Feature: SinggahSini Main Page Add Tracker Status WA
       | email             | password        |
       | pman@mamiteam.com | pmanM4m1t34m!!  |
     And admin go to tenant communication menu
-    And user choose "Nama Properti" and input "BSE" in the search field on main page
+    And user choose "Nama Properti" and input "serayu" in the search field on main page
     And user click search button on main page filter
     And user click action Button on tenant communication page
     And user set the initial state to "Tambah track status chat WA"
@@ -18,7 +18,7 @@ Feature: SinggahSini Main Page Add Tracker Status WA
     Then user verify search result on main page bse contains Prioritaskan
 
   Scenario: Add track WA status on existing row
-    When user choose "Nama Properti" and input "BSE" in the search field on main page
+    When user choose "Nama Properti" and input "serayu" in the search field on main page
     And user click search button on main page filter
     And user click action Button on tenant communication page
     And user set the initial state to "Tambah track status chat WA"
