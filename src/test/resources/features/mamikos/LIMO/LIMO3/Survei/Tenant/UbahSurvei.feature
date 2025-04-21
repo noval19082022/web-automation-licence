@@ -35,3 +35,10 @@ Feature: Ubah Survei
     Then toast message "Waktu survei berhasil diubah." should be appear
     Then chat room appear with latest message "Survei Diubah"
 
+#    Scenario wajib setelah pengajuan survei (Cancel survei)
+  Scenario: Cancel Survei kost
+    And user click on chevron detail survei
+    And user click on "Batalkan" button
+    And user fill form reason cancel survei "Saya ingin membatalkan ajukan survei"
+    And user click on "Kirim" button
+    Then toast message "Survei berhasil dibatalkan." should be appear
