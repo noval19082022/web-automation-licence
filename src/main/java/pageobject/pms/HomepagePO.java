@@ -233,7 +233,7 @@ public class HomepagePO {
         pilihASDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih AS dropdown-down"));
         pilihHospitalityDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Hospitality dropdown-down"));
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
-        clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round"));
+        clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round").setExact(true));
         totalPropertyText = page.locator(".total-data");
 
         //---Kontrak Kerja Sama Tab---//
