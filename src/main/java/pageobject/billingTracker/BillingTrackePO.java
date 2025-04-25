@@ -43,7 +43,7 @@ public class BillingTrackePO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
-        searchTypeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nama Penyewa dropdown-down"));
+        searchTypeButton = page.locator("div.bg-c-dropdown__trigger > div > span");
         searchInputField = page.getByPlaceholder("Cari");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("search Cari"));
         resultDataTable = page.locator("tbody > tr:nth-child(1)").first();
