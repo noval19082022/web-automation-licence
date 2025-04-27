@@ -27,7 +27,7 @@ Feature: Tenant Form Survey Kost P2
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
-    Then user verify survey date on form is "today"
+    Then user select date "today" survei
 
   @TEST_LIMO-7131
   Scenario: [Survey][Form request] Tenants can select a survey date up to 1 month from today's date.

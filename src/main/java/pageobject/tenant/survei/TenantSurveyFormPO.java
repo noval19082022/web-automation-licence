@@ -136,7 +136,7 @@ public class TenantSurveyFormPO {
     }
 
     public boolean isSurveyDateNotVisible(String date) {
-        var locator = page.getByText(date, new Page.GetByTextOptions().setExact(true)).nth(1);
+        var locator = page.getByText(date, new Page.GetByTextOptions().setExact(true)).nth(0);
         return !playwright.waitTillLocatorIsVisible(locator);
     }
 

@@ -12,15 +12,15 @@ Feature: Prime Suggestion
   Scenario: [WEB][Prime Suggestion] Display "Nama Kost Terkait" for non-prime keyword search
     Given user go to mamikos homepage
     When user want to visit search page from homepage
-    And user type to search kost with keywords "Jakarta Type B"
+    And user type to search kost with keywords "bekasi"
     Then user can not see any prime suggestion list
-    Then user verify see kost name "Jakarta Type B" in suggestion nama kost terkait list
+    Then user verify see kost name "Kost Shireen Bekasi Timur Bekasi" in suggestion nama kost terkait list
 
   @TEST_LIMO-4573
   Scenario: [WEB][Prime Suggestion] Kost is display on "Nama Kost Terkait" when assign as prime keyword and status active
     Given user go to mamikos homepage
     When user want to visit search page from homepage
-    And user type to search kost with keywords "jakarta type"
-    Then user will see that the text "Jakarta Type A Menteng Jakarta Pusat" is displayed
-    Then user verify see kost name "Jakarta Type A Menteng Jakarta Pusat" in suggestion prime list
-    Then user verify see kost name "Jakarta Type A Menteng Jakarta Pusat" in suggestion nama kost terkait list
+    And user type to search kost with keywords "tangerang"
+    Then user will see that the text "Kos QuQu 88 Rajeg Tangerang" is displayed
+    Then user verify see kost name "Kos QuQu 88 Rajeg Tangerang" in suggestion prime list
+    Then user verify see kost name "Kost Tangcity Tangerang Kota Tangerang" in suggestion nama kost terkait list

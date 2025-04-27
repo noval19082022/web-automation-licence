@@ -6,7 +6,7 @@ Feature: Survei - custom questions
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod   | password  |
-      | 0891202413 | 087880495933 | qwerty123 |
+      | 0891202202 | 087880495933 | qwerty123 |
     And user click chat button in top bar owner home page
     And user dismiss FTUE MARS Goldplus and FTUE Broadcast
     And user click on filter survei kos
