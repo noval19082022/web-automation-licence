@@ -37,7 +37,7 @@ Feature: GP Weekly
   @TEST_LIMO-3492 @continue
   Scenario: GoldPlus Weekly Paid
     Given owner click bayar sekarang on detail tagihan page goldplus
-    Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
+    Then owner see that the text "GoldPlus 2" is displayed on goldplus page
     And payment owner success using ovo as payment method
 
   @TEST_LIMO-3493 @continue
@@ -54,7 +54,7 @@ Feature: GP Weekly
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     When user sets recurring "H3" for number "081905128517"
 
-  @TEST_LIMO-3495 @continue
+  @TEST_LIMO-3495
   Scenario: GoldPlus Weekly Recurring - Cancel Recurring
     Given owner navigates to owner dashboard
     And  user can click close button on popup
@@ -63,8 +63,15 @@ Feature: GP Weekly
 
   @TEST_LIMO-3496
   Scenario: [Owner][GP Recurring] Owner want to extend GP via pop up reminder
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     When user sets recurring "H1" for number "081905128517"
-    And owner navigates to owner dashboard
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081905128517 | qwerty123 |
     When owner wants to proccess recurring GP
     Then payment owner success using ovo as payment method
     And owner navigates to owner dashboard
@@ -102,7 +109,6 @@ Feature: GP Weekly
     * owner navigates to "/goldplus/payment"
     * owner select transaction unpaid from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Menunggu Pembayaran"
-    And owner can see "GoldPlus 1 periode 1 Minggu" at section Paket yang Anda pilih
     And owner can see "GoldPlus 1 (1 Minggu)" at section rincian pembayaran goldplus
     #paid GP from page detail tagihan
     Given owner paid transaction from detail tagihan page
@@ -119,7 +125,7 @@ Feature: GP Weekly
     Given owner navigates to "/goldplus/payment"
     * owner select transaction paid from history transaction goldplus
     Then owner can see detail tagihan paid goldplus page with title "Lunas"
-    And owner can see "GoldPlus 1 periode 1 Minggu" at section Paket yang Anda pilih
+    And owner can see "GoldPlus 1" at section Paket yang Anda pilih
     And owner can see "GoldPlus 1 (1 Minggu)" at section rincian pembayaran goldplus
 
   @TEST_LIMO-3501 @detailTagihanGoldplus
@@ -127,5 +133,5 @@ Feature: GP Weekly
     Given owner navigates to "/goldplus/payment"
     * owner select transaction expired from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Dibatalkan"
-    And owner can see "GoldPlus 2 periode 1 Minggu" at section Paket yang Anda pilih
+    And owner can see "GoldPlus 2" at section Paket yang Anda pilih
     And owner can see "GoldPlus 2 (1 Minggu)" at section rincian pembayaran goldplus

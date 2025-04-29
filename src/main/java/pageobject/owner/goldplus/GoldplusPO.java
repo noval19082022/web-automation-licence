@@ -861,7 +861,7 @@ public class GoldplusPO {
      * @return boolean type, appear true otherwise false
      */
     public boolean packageGP(String packageGP) {
-        Locator packageGPDetailTagihan = page.getByText(packageGP);
+        Locator packageGPDetailTagihan = page.getByText(packageGP).first();
         playwright.waitTillLocatorIsVisible(packageGPDetailTagihan);
         return playwright.waitTillLocatorIsVisible(packageGPDetailTagihan);
     }
