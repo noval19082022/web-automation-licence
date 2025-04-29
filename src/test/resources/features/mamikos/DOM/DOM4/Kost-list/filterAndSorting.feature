@@ -48,7 +48,7 @@ Feature: Filter and Sorting
 
   @TEST_SS-3245 @Automated @Web @discovery-platform @filter
   Scenario: [Dweb][Listing Kos][Filter] Check Dikelola Mamikos filter functionality
-    Given user navigates to mamikos kost kost jogja murah
+    Given user navigates to ugm kost listing
     When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
 
