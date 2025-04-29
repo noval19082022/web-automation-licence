@@ -1074,7 +1074,7 @@ public class KostDetailsPO {
      * @return 'boolean' 'Tanya alamat' button on map section for login condition visibility
      */
     public boolean isTanyaAlamatBtnPresent() {
-        playwright.pageScrollToDown(2500);
+        playwright.pageScrollToDown(3100);
         playwright.pageScrollInView(tanyaAlamatLengkapBtn);
         return playwright.waitTillLocatorIsVisible(tanyaAlamatLengkapBtn);
     }

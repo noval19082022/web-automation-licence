@@ -142,6 +142,7 @@ public class SearchPO {
         }
 
         playwright.clickOn(firstAreaResult);
+        playwright.hardWait(2000.0);
         return new KostLandingAreaPO(page);
     }
 
@@ -539,7 +540,6 @@ public class SearchPO {
      */
     public void activateKosAndalanFilter() {
         kosAndalanFilter.click();
-        kosAndalanToggle.click();
     }
 
     /**
@@ -556,7 +556,6 @@ public class SearchPO {
      */
     public void activatePromoNgebutFilter() {
         promoNgebutFilter.click();
-        promoNgebutToggle.click();
     }
 
     /**
