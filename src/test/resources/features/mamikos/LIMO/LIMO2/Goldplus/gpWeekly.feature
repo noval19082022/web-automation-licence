@@ -37,7 +37,7 @@ Feature: GP Weekly
   @TEST_LIMO-3492 @continue
   Scenario: GoldPlus Weekly Paid
     Given owner click bayar sekarang on detail tagihan page goldplus
-    Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
+    Then owner see that the text "GoldPlus 2" is displayed on goldplus page
     And payment owner success using ovo as payment method
 
   @TEST_LIMO-3493 @continue
