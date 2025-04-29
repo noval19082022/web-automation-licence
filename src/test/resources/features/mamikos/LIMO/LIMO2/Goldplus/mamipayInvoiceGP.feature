@@ -17,8 +17,8 @@ Feature: Check search function GP Invoice
 
   @TEST_LIMO-3504 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Owner Phone Number
-    When admin search invoice Goldplus based on "Owner Phone Number" and value "0833000008"
-    Then user will see that the text "0833000008" is displayed
+    When admin search invoice Goldplus based on "Owner Phone Number" and value "081328787342"
+    Then user will see that the text "081328787342" is displayed
 
   @TEST_LIMO-3505 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Invalid Owner Phone Number
@@ -27,8 +27,8 @@ Feature: Check search function GP Invoice
 
   @TEST_LIMO-3506 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Invoice Code
-    When admin search invoice Goldplus based on "Invoice Code" and value "13837"
-    Then user will see that the text "13837" is displayed
+    When admin search invoice Goldplus based on "Invoice Code" and value "148974"
+    Then user will see that the text "148974" is displayed
 
   @TEST_LIMO-3507 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Invalid Invoice Code
@@ -38,7 +38,7 @@ Feature: Check search function GP Invoice
   @TEST_LIMO-3508 @continue @search-GP-Invoice
   Scenario: Reset Search Detail
     When admin click button reset
-    Then user will see that the text "Pembayaran GoldPlus" is displayed
+    Then user will see that the text "GoldPlus" is displayed
 
   @TEST_LIMO-3509 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Status Transaction Unpaid
