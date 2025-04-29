@@ -354,7 +354,7 @@ public class PropertiSayaPO {
         deleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus")).first();
         confirmDeleteOtherPrice = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
-        selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai").setExact(true));
+        selesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
         bbkDataButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("BBK Data"));
         pengelolaCheckbox = page.locator("label").filter(new Locator.FilterOptions().setHasText("Anda ingin tambahkan data pengelola? checkmark")).locator("span");
         pengelolaNameField = page.locator("input[type=text]").nth(2);

@@ -66,7 +66,7 @@ Feature: Survei - kos detail
     And tenant redirect to apartment details:
       | environment | apartment path                                      |
       | stag        | /apartemen-kalibata-city/silalay-123-1room-studio-1 |
-    And user dismiss FTUE booking benefit
+   # And user dismiss FTUE booking benefit
     Then user see label Baru should be displayed on the kost detail page
 
   @TEST_LIMO-7043

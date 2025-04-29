@@ -69,7 +69,7 @@ public class SearchPO {
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
         suggestionPrimeResutls = page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item");
-        suggestionPrimeResultsBox = page.getByTestId("suggestionBox-roomList");
+        suggestionPrimeResultsBox = page.getByTestId("suggestionBox-roomList").first();
         suggestionNonPrimeResutls = page.getByTestId("suggestionBox-roomListNonPrime");
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Ngebut"));
@@ -785,6 +785,7 @@ public class SearchPO {
      * @return list of texts inside non-prime suggestion box
      */
     public List<String> getListSuggestionKostNameNonPrime() {
+        playwright.waitFor(suggestionNonPrimeResutls);
         return playwright.getListTextContentsFromLocator(suggestionNonPrimeResutls);
     }
 
