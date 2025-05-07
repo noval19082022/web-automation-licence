@@ -24,8 +24,8 @@ Feature: Update Harga
     And user see six monthly price is "10000000"
     And user see yearly price is "20000000"
     When owner navigates to property saya kos
-    And owner search kost "Automation Kos" on property saya page
-    Then user see kos with name "Automation Kos", status "Aktif" and type "Kos Putra"
+    And owner search kost "Kose Full Automation" on property saya page
+    Then user see kos with name "Kose Full Automation", status "Aktif" and type "Kos Campur"
 
   @TEST_LIMO-886 @continue @updatePrice @WEB @AUTOMATED
   Scenario: [WEB][Update Harga] Access page "Update Harga" from entry point kost list when kost status == Active with update price
