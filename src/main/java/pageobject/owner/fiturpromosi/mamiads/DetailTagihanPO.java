@@ -15,7 +15,7 @@ public class DetailTagihanPO {
     private Locator rincianPembayaranProdukText;
     private Locator rincianPembayaranNominalText;
     private Locator totalPembayaranText;
-    private Locator ubahSaldoText;
+    private Locator ubahSaldoBtn;
     private Locator bayarSekarangBtnOnDetailTagihan;
 
     public DetailTagihanPO(Page page) {
@@ -27,7 +27,7 @@ public class DetailTagihanPO {
         this.rincianPembayaranProdukText = page.locator(".detail-subtitle");
         this.rincianPembayaranNominalText = page.locator(".nominal").first();
         this.totalPembayaranText = page.locator(".nominal").last();
-        this.ubahSaldoText = page.getByText("Ubah", new Page.GetByTextOptions().setExact(true));
+        this.ubahSaldoBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Ulang Nominal MamiAds"));
         this.bayarSekarangBtnOnDetailTagihan = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Bayar Sekarang");
     }
 
@@ -70,8 +70,8 @@ public class DetailTagihanPO {
     /**
      * click on Ubah to change amount of saldo mamiads
      */
-    public void clickOnUbahText(){
-        playwright.clickOn(ubahSaldoText);
+    public void clickOnUbahSaldo(){
+        playwright.clickOn(ubahSaldoBtn);
     }
 
     /**

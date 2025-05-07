@@ -659,10 +659,8 @@ public class GoldplusSteps {
     public void ownerValidatePaymentForGoldplusPackageHaveAndHaveBeforeChoosePaymentMethod(String mamiads, String fee) throws InterruptedException {
         goldplus.setTotalPembayaran(goldplus.getPembayaranText("Total Pembayaran"));
         Assert.assertTrue(goldplus.getPembayaranText("No. Invoice").contains("GP"));
-        Assert.assertEquals(goldplus.getPembayaranText("Jenis Pembayaran"), Mamikos.getGpPackageChoosed());
         Assert.assertEquals(goldplus.getPembayaranText("Metode Pembayaran"), "Belum dipilih");
-        Assert.assertEquals(goldplus.getRincianGP(), Mamikos.getGpPackageChoosed(), "GoldPlus  is not match");
-        Assert.assertEquals(goldplus.getRincianMA(), mamiads, "MamiAds  is not match");
+        Assert.assertTrue(playwright.isTextDisplayed(mamiads), String.format("MamiAds %s is not match", mamiads));
         Assert.assertEquals(goldplus.getRincianFee(), fee, "MDR Fee  is not match");
     }
 

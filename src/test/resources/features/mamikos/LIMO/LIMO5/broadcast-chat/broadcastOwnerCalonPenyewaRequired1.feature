@@ -13,7 +13,7 @@ Feature: Broadcast Chat Owner Tenant Booking Required 2
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
-  @TEST_LIMO-3641 @continue
+  @TEST_LIMO-3641 @TEST_LIMO-184 @continue
   Scenario:[Broadcast Chat][Create Broadcast chat]User Want To Save Template Without Add Message On Template Is Editable
        #reset broadcast chat
     Given admin go to mamikos mamipay admin

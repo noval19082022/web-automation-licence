@@ -17,7 +17,7 @@ public class DetailTagihanSteps {
 
     @And("owner ubah saldo to {string}")
     public void owner_ubah_saldo_to(String saldo){
-        detailTagihanPO.clickOnUbahText();
+        detailTagihanPO.clickOnUbahSaldo();
         mamiAdsPO.choosingSaldoToBuy(saldo);
     }
 
