@@ -11,7 +11,7 @@ Feature: Edit Kost 2
     And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-850
+  @TEST_LIMO-850 @TEST_LIMO-860 @TEST_LIMO-847
   Scenario: Status kos is active or reject and owner edit description kos
     Given user go to mamikos homepage
     When user login as owner:
@@ -42,7 +42,7 @@ Feature: Edit Kost 2
     And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
     And user verify the kos in admin kos owner
 
-  @TEST_LIMO-858 @updatefotokost
+  @TEST_LIMO-858 @updatefotokost @TEST_LIMO-857
   Scenario: [Edit kos][Foto Kamar] Edit foto kamar with move or merge foto
     Given user go to mamikos homepage
     When user login as owner:
@@ -137,7 +137,7 @@ Feature: Edit Kost 2
     And user click done in success page pop up of edit kos
     Then user see kos with name "PAPASUKA GENIT", status "Diperiksa Admin" and type "Kos Campur"
 
-  @TEST_LIMO-2716 @editKost123
+  @TEST_LIMO-2716 @editKost123 @TEST_LIMO-853
   Scenario: [Edit kos][Harga]Intercept confirmation on screen "Harga"
     Given user try to logout from mamikos
     When admin go to mamikos bangkrupux admin
