@@ -15,3 +15,4 @@
       Then admin should redirect to harvest "setting-area-priority"
       When admin click sidebar menu "Role Management"
       Then admin should redirect to harvest "role-management"
+

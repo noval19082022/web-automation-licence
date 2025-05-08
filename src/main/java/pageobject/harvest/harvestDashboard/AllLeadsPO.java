@@ -48,6 +48,13 @@ public class AllLeadsPO {
     Locator titleConfirmationPerubahanBelumTersimpan;
     Locator subtitleConfirmationPerubahanBelumTersimpan;
 
+    //-------------Search and filter all leads table -------------//
+    Locator searchTypeLeads;
+    Locator searchButton;
+    Locator searchInput;
+
+
+
     public AllLeadsPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -84,6 +91,12 @@ public class AllLeadsPO {
         //--- Confirmation Perubahan Belum Tersimpan ---//
         titleConfirmationPerubahanBelumTersimpan = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Perubahan Belum Tersimpan"));
         subtitleConfirmationPerubahanBelumTersimpan = page.getByText("Terdapat perubahan yang belum disimpan. Simpan perubahan sebelum melanjutkan?");
+
+        //-------------Search and filter all leads table -------------//
+        searchTypeLeads = page.locator("div.bg-c-select.bg-c-searchbar__select-input > div > div.bg-c-dropdown__trigger");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari").setExact(true));
+        searchInput = page.locator("input[type=\"text\"]");
+
     }
 
     /**
@@ -346,4 +359,30 @@ public class AllLeadsPO {
         return playwright.getText(columnName.nth(i));
     }
     //--- End of Confirmation Perubahan Belum Tersimpan ---//
+
+
+    //-------------Search and filter all leads table -------------//
+
+    /**
+     * Search type leads and input text
+     * @param typeLeads
+     * @param text
+     */
+    public void searchTypeLeads(String typeLeads, String text) {
+        playwright.clickOn(searchTypeLeads);
+        Locator searchTypeLeadsDropdown = page.locator("a").filter(new Locator.FilterOptions().setHasText(""+typeLeads+""));
+        playwright.clickOn(searchTypeLeadsDropdown);
+        searchInput.fill(text);
+        playwright.clickOn(searchButton);
+    }
+
+    /**
+     * Get result search leads
+     * @param text
+     * @return
+     */
+    public String getDataInTable(String text){
+        Locator searchData = page.getByText(""+text+"");
+        return playwright.getText(searchData);
+    }
 }

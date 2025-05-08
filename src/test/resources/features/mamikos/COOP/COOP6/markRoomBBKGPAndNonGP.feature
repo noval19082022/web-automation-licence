@@ -81,10 +81,10 @@ Feature: Owner - Penyewa Feature
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod  | password  |
-      | 089120220103 | 08100000622 | qwerty123 |
+      | 089604239091 | 08100000622 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara Grand Batavia Tobelo Halmahera Utara"
-    And owner set Kelola Tagihan filter month to "Januari" month
+    And owner search kost in billing management "Rini punya kost tipe A"
+    And owner set Kelola Tagihan filter month to "Februari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
 
