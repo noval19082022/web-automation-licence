@@ -18,7 +18,7 @@ Feature: Profile Tenant Background Checker
       | phone stag   | phone prod   | password  |
       | 083355251016 | 083355251016 | qwerty123 |
     And user click chat button in top bar owner home page
-    And owner doesn't have GP open TBC Lihat Profil at chatroom "Desta Tenant D"
+    And owner doesn't have GP open TBC Lihat Profil at chatroom "Tenant Automation"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-320 @WEB @AUTOMATED

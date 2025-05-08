@@ -138,5 +138,5 @@ Feature: Purchase Mamiprime
     And owner click on Hubungi Kami
     And owner set active page to 1
     And user click text "Hubungi customer service lewat WhatsApp Anda (chat only)."
-    And owner set active page to 3
+    And owner set active page to 2
     Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"

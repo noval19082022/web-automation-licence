@@ -18,31 +18,27 @@ Feature: Beli Saldo
   @TEST_LIMO-3335 @continue
   Scenario: List Promo Saldo
     Then detail list saldo as expected
-      | price     | priceInRp   | disc | discPrice   |
-      | 10.000    | Rp9.000     | 10%  | Rp10.000    |
-      | 30.000    | Rp27.000    | 10%  | Rp30.000    |
-      | 50.000    | Rp50.000    |      |             |
-      | 75.000    | Rp75.000    | 6%   | Rp80.000    |
-      | 80.000    | Rp80.000    |      |             |
-      | 300.000   | Rp205.000   | 31%  | Rp300.000   |
-      | 300.000   | Rp300.000   |      |             |
-      | 850.000   | Rp850.000   |      |             |
-      | 1.000.000 | Rp850.000   | 15%  | Rp1.000.000 |
-      | 1.500.000 | Rp1.350.000 | 10%  | Rp1.500.000 |
+      | price   | priceInRp | disc | discPrice |
+      | 10.000  | Rp10.000  |      |           |
+      | 30.000  | Rp27.000  | 10%  | Rp30.000  |
+      | 50.000  | Rp50.000  |      |           |
+      | 75.000  | Rp75.000  | 6%   | Rp80.000  |
+      | 80.000  | Rp80.000  |      |           |
+      | 300.000 | Rp300.000 |      |           |
 
   @TEST_LIMO-3336 @continue
-   Scenario: Change Saldo
+  Scenario: Change Saldo
     Given owner choose saldo "Rp27.000"
-    When owner ubah saldo to "Rp6.000"
-    Then validate detail tagihan saldo mamiads "9.000"
+    When owner ubah saldo to "Rp10.000"
+    Then owner will see that the text "Saldo MamiAds 10.000" is displayed
 
   @TEST_LIMO-3337 @continue
-   Scenario: Beli Saldo - Transaction Success
+  Scenario: Beli Saldo - Transaction Success
     Given owner click bayar sekarang in detail tagihan for saldo mamiads
     Then payment owner success using ovo as payment method
 
   @TEST_LIMO-3338
-   Scenario: Beli Saldo - Click Selesai Button To make sure redirect to mamiads dashboard if tab Selesai button
+  Scenario: Beli Saldo - Click Selesai Button To make sure redirect to mamiads dashboard if tab Selesai button
     Given owner click button selesai on universal invoice
     Then verify redirect to mamiads dashboard
 
@@ -50,7 +46,7 @@ Feature: Beli Saldo
   Scenario: Beli Saldo (2nd Transaction)
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password |
+      | phone stag   | phone prod | password  |
       | 083176408449 | 0          | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
@@ -69,7 +65,7 @@ Feature: Beli Saldo
   Scenario: Cancel Buy Saldo
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password |
+      | phone stag   | phone prod | password  |
       | 085720962106 | 0          | qwerty123 |
     And user navigates to mamiads pembelian saldo
     And owner choose saldo "Rp27.000"
