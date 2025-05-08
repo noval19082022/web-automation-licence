@@ -53,8 +53,6 @@ public class AllLeadsPO {
     Locator searchButton;
     Locator searchInput;
 
-
-
     public AllLeadsPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
