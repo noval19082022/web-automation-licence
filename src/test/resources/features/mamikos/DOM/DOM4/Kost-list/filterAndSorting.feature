@@ -80,7 +80,7 @@ Feature: Filter and Sorting
     When user selects sorting "Harga terendah" in kost listing
     Then user can see kos list rearrange from cheaper to expensive
 
-  @TEST_SS-8001 @b
+  @TEST_SS-8001
   Scenario Outline: [Web][Improvement SRP][Filtering structure]Check filtering structure bar on SRP page
     Given user navigates to ugm kost listing
     When user selects sorting "Harga terendah" in kost listing
@@ -91,7 +91,7 @@ Feature: Filter and Sorting
     | Dikelola Mamikos |
     | Kos Andalan |
 
-    @TEST_SS-8004 @b
+    @TEST_SS-8004
     Scenario Outline: [Web][Improvement SRP][Usp filter]Check USP filter on SRP page
       Given user navigates to ugm kost listing
       When user selects sorting "Harga terendah" in kost listing
@@ -102,7 +102,7 @@ Feature: Filter and Sorting
       | Kos Andalan |  Chat lebih cepat dengan pemilik. |
       | Promo Ngebut |  Ngekos lebih hemat dengan diskon spesial dari Mamikos. |
 
-    @TEST_SS-8002 @b
+    @TEST_SS-8002
     Scenario: [Web][Improvement SRP][Filtering]Filter for any item
       Given user navigates to ugm kost listing
       When user activate Dikelola Mamikos filter
@@ -110,7 +110,7 @@ Feature: Filter and Sorting
       Then user validate the result kos have Dikelola Mamikos label
       And user can see total kost in area with "Ditemukan 5 kos-kosan di sekitar UGM"
 
-    @TEST_SS-8005 @b
+    @TEST_SS-8005
     Scenario Outline: [Web][Improvement SRP][Usp filter]Check USP filter when has an active Promo ngebut
       Given user navigates to ugm kost listing
       Then user clicks the "<filter>" button and the description will appears "<desc>"

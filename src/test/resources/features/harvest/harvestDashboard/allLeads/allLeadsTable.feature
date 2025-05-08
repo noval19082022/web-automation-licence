@@ -43,7 +43,7 @@
         | Modified By           |
         | isJunk                |
 
-    @TEST_SS-7489 @b
+    @TEST_SS-7489
     Scenario: [Web][Harverst][Search]Admin search by Nomor HP Pemilik
       Given admin navigates to Harvest Dashboard Login
       When admin login Harvest Dashboard:
@@ -53,7 +53,7 @@
       And admin search by "No HP Pemilik" with "087655762276"
       Then admin validate data in table with "087655762276"
 
-    @TEST_SS-7490 @b
+    @TEST_SS-7490
     Scenario: [Web][Harverst][Search]Admin search by Leads ID
       Given admin navigates to Harvest Dashboard Login
       When admin login Harvest Dashboard:
@@ -63,7 +63,7 @@
       And admin search by "Lead ID" with "AO35517"
       Then admin validate data in table with "AO35517"
 
-    @TEST_SS-7491 @b
+    @TEST_SS-7491
     Scenario: [Web][Harverst][Search]Admin search Nama Kos
       Given admin navigates to Harvest Dashboard Login
       When admin login Harvest Dashboard:
@@ -73,7 +73,7 @@
       And admin search by "Nama Kos" with "Kost Zahroni"
       Then admin validate data in table with "Kost Zahroni"
 
-    @TEST_SS-7492 @b
+    @TEST_SS-7492
       Scenario: [Web][Harverst][Search]Admin search by Nama Pemilik
       Given admin navigates to Harvest Dashboard Login
       When admin login Harvest Dashboard:
