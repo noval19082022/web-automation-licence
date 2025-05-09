@@ -485,4 +485,9 @@ public class NavigatesSteps {
         playwright.navigateTo(Mamikos.URL + "/admin/landmark", 40000.0, LoadState.LOAD);
     }
 
+    @Then("admin bangkerupux navigates listing featured menu")
+    public void admin_bangkerupux_naviagtes_listing_featured_menu(){
+        playwright.navigateTo(Mamikos.URL + "/admin/featured/listing", 40000.0, LoadState.LOAD);
+    }
+
 }
