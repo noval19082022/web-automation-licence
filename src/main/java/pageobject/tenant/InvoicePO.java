@@ -553,7 +553,7 @@ public class InvoicePO {
     public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
         TenantBillManagementPO TenantBillManagement = new TenantBillManagementPO(page);
         TenantBillManagement.clickOnFilterMonth();
-        playwright.clickOn(page.getByText("Januari"));
+        playwright.clickOn(page.getByText("Februari"));
     }
 
 

@@ -157,17 +157,18 @@ public class SearchSteps {
     @Then("user clicks the {string} button and the description will appears {string}")
     public void userClicksTheButtonAndTheDescriptionWillAppears(String filter, String text) throws InterruptedException {
         if (filter.equalsIgnoreCase("Promo Ngebut")) {
-            search.clickPromoNgebutFilter();
+            playwright.waitTillPageLoaded(1000.0);
             String desc = search.getPromoNgebutDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Description Promo Ngebut text is wrong");
         } else if (filter.equalsIgnoreCase("Dikelola Mamikos")) {
-            search.clickDikelolaMamikosFilter();
+            playwright.waitTillPageLoaded(1000.0);
             String desc = search.getDikelolaMamikosDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Dikelola Mamikos Description text is wrong");
         } else if (filter.equalsIgnoreCase("Kos Andalan")) {
-            search.clickKosAndalanFilter();
+            playwright.waitTillPageLoaded(1000.0);
+//            search.clickKosAndalanFilter();
             String desc = search.getKosAndalanDescText().replaceAll("\\s", "");
             String expected = text.toLowerCase().replaceAll("\\s", "");
             Assert.assertTrue(desc.contains(expected), "Kos Andalan Description text is wrong");
@@ -662,6 +663,14 @@ public class SearchSteps {
         }
         else if(text.equalsIgnoreCase("zoom out")){
             search.clickZoomOutButton();
+        }
+    }
+
+    @Then("user can see usp filter with {string}")
+    public void userCanSeeUspFilter(String filter){
+        List<String> filterText = search.getFilterText(filter);
+        for (String a : filterText) {
+            Assert.assertEquals(a, filter);
         }
     }
 }

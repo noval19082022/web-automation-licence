@@ -6,10 +6,10 @@ Feature: Filter and Sorting
     Given user navigates to ugm kost listing
     Then user clicks the "<filter>" button and the description will appears "<desc>"
     Examples:
-      | filter           | desc                                                                                                       |
-      | Promo Ngebut     | Dapat diskon pembayaran pertama harga sewa. Diskon hanya berlaku selama program berlangsung.               |
-      | Dikelola Mamikos | Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. Lokasi terverifikasi, bangunan kos lolos seleksi.    |
-      | Kos Andalan      | Kos favorit dengan harga hemat, dengan berbagai pilihan tipe kamar. Tersebar di ratusan kota di Indonesia. |
+      | filter | desc |
+      | Dikelola Mamikos: Singgahsini & APIK  |  Fasilitas tidak sesuai iklan, kami garansi refund. |
+      | Kos Andalan |  Chat lebih cepat dengan pemilik. |
+      | Promo Ngebut |  Ngekos lebih hemat dengan diskon spesial dari Mamikos. |
 
   @TEST_SS-3199 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter]Check filter gender and verify the result
@@ -79,3 +79,43 @@ Feature: Filter and Sorting
     Given user navigates to ugm kost listing
     When user selects sorting "Harga terendah" in kost listing
     Then user can see kos list rearrange from cheaper to expensive
+
+  @TEST_SS-8001
+  Scenario Outline: [Web][Improvement SRP][Filtering structure]Check filtering structure bar on SRP page
+    Given user navigates to ugm kost listing
+    When user selects sorting "Harga terendah" in kost listing
+    Then user can see usp filter with "<filter>"
+    Examples:
+    | filter |
+    | Promo Ngebut |
+    | Dikelola Mamikos |
+    | Kos Andalan |
+
+    @TEST_SS-8004
+    Scenario Outline: [Web][Improvement SRP][Usp filter]Check USP filter on SRP page
+      Given user navigates to ugm kost listing
+      When user selects sorting "Harga terendah" in kost listing
+      Then user clicks the "<filter>" button and the description will appears "<desc>"
+      Examples:
+      | filter | desc |
+      | Dikelola Mamikos: Singgahsini & APIK  |  Fasilitas tidak sesuai iklan, kami garansi refund. |
+      | Kos Andalan |  Chat lebih cepat dengan pemilik. |
+      | Promo Ngebut |  Ngekos lebih hemat dengan diskon spesial dari Mamikos. |
+
+    @TEST_SS-8002
+    Scenario: [Web][Improvement SRP][Filtering]Filter for any item
+      Given user navigates to ugm kost listing
+      When user activate Dikelola Mamikos filter
+      And user sets Kos Andalan filter
+      Then user validate the result kos have Dikelola Mamikos label
+      And user can see total kost in area with "Ditemukan 5 kos-kosan di sekitar UGM"
+
+    @TEST_SS-8005
+    Scenario Outline: [Web][Improvement SRP][Usp filter]Check USP filter when has an active Promo ngebut
+      Given user navigates to ugm kost listing
+      Then user clicks the "<filter>" button and the description will appears "<desc>"
+      Examples:
+        | filter | desc |
+        | Dikelola Mamikos: Singgahsini & APIK  |  Fasilitas tidak sesuai iklan, kami garansi refund. |
+        | Kos Andalan |  Chat lebih cepat dengan pemilik. |
+        | Promo Ngebut |  Ngekos lebih hemat dengan diskon spesial dari Mamikos. |

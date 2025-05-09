@@ -73,11 +73,11 @@ public class SearchPO {
         suggestionNonPrimeResutls = page.getByTestId("suggestionBox-roomListNonPrime");
 
         this.promoNgebutFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Ngebut"));
-        this.promoNgebutDesc = page.getByText("Dapat diskon pembayaran pertama harga sewa. ");
+        this.promoNgebutDesc = page.getByText("Ngekos lebih hemat dengan diskon spesial dari Mamikos.");
         this.dikelolaMamikosFilter = page.getByTestId("singgahsini-filter_btn");
-        this.dikelolaMamikosDesc = page.getByText("Pilihan Kos Terjamin. Disurvey langsung oleh Mamikos. ");
+        this.dikelolaMamikosDesc = page.getByText("Fasilitas tidak sesuai iklan, kami garansi refund.");
         this.kosAndalanFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos Andalan"));
-        this.kosAndalanDesc = page.getByText("Kos favorit dengan harga hemat, ");
+        this.kosAndalanDesc = page.getByText("Chat lebih cepat dengan pemilik.");
         this.kosAndalanToggle = page.locator("[data-popper-placement='bottom-start'] .bg-c-switch");
         this.kosAndalanLabel = page.locator(".rc-overview__label").first();
         this.promoNgebutToggle = page.locator("//span[@data-path='lbl_flash_sale']/following-sibling::div//input");
@@ -821,4 +821,20 @@ public class SearchPO {
     public void clickZoomOutButton(){
         playwright.clickOn(zoomOutButton);
     }
+
+    /**
+     * List all listing filter structure in search result
+     *
+     * @return list of filter structure (String)
+     */
+    public List getFilterText(String text){
+        List<String> filterList = new ArrayList<>();
+        Locator filterLabel = page.locator("//span[contains(@class='filterKostTypeWrapper','"+text+"')]");
+        List<Locator> elements = filterLabel.all();
+        for (Locator a : elements) {
+            filterList.add(playwright.getText(a));
+        }
+        return filterList;
+    }
+
 }

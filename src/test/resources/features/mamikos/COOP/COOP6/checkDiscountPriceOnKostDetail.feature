@@ -9,7 +9,7 @@ Feature: Check Harga Coret on Kost Detail
       | 0890000000314 | 0890000000314 | Bismillah@01 |
     And tenant redirect to kost details:
       | kost path stag                                                                | kost path prod               |
-      | kost-kabupaten-bantul-kost-campur-eksklusif-kost-banana-white-kretek-bantul-2 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-lombok-barat-kost-campur-eksklusif-kost-singgahsini-rizki-abadi-tipe-a-lombok-2| Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant fill booking data for "tomorrow" and "Per Minggu"
     Then user can see harga coret on price section
