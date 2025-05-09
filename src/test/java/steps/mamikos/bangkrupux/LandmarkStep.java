@@ -60,4 +60,30 @@ public class LandmarkStep {
     public void admin_can_see_show_in_srp_with(String text){
         Assert.assertTrue(landmark.getShowSrp(text), "not appears show srp");
     }
+
+    @And("admin click on remapping button")
+    public void admin_click_on_remapping_button(){
+        landmark.clickRemappingButton();
+    }
+
+    @Then("admin can see success alert remapping")
+    public void admin_can_see_success_alert_remapping(){
+        Assert.assertTrue(landmark.getSuccessAlertRemapping(), "not appears success alert remapping");
+    }
+
+    @And("admin clicks on edit button")
+    public void admin_clicks_on_edit_button(){
+        landmark.clickEditButton();
+    }
+
+    @Then("admin can see edit page")
+    public void admin_can_see_edit_page(){
+        Assert.assertTrue(landmark.getEditPageText(), "not appears edit page");
+    }
+
+    @And("admin update score with {string}")
+    public void admin_update_score_with(String score){
+        landmark.updateScore(score);
+    }
+
 }

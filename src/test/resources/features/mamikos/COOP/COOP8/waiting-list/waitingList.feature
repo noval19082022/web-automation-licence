@@ -292,3 +292,22 @@ Feature: Waiting List - Kost Detail
       | kost-kabupaten-ogan-ilir-kost-campur-eksklusif-kost-fahmi-singgahsini-ketiga-indralaya-utara-ogan-ilir-1 | Kos DC BAR Automation Tipe A |
     And tenant click "Ikut Daftar Tunggu"
     Then tenant can see placeholder phone number with "Contoh: 081244335566"
+
+  @TEST_SS-6994 @continue
+  Scenario: [Web]Favorit][Waiting List]Check ikut daftar tunggu label on favorit page
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0813000001   | 081000006116  | qwerty123    |
+    Then tenant navigate to favorite page
+    Then tenant will see that the text "Ikut Daftar Tunggu" is displayed
+
+  @TEST_SS-7012
+  Scenario: [Web][Kost Detail][Waiting List] Check waiting list for kost p2 and check form
+    When tenant redirect to kost details:
+      | kost path stag                                                  | kost path prod               |
+      | kost-pasuruan-kost-campur-murah-kost-pandaan-b-ismiati-pasuruan | Kos DC BAR Automation Tipe A |
+    And tenant can see kamar penuh
+    Then tenant can see "Tanya pemilik" button
+    When tenant can see "Ikut daftar tunggu" button
+
