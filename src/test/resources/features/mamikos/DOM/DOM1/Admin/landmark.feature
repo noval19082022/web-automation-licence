@@ -75,3 +75,28 @@ Feature: Landmark
     When admin choose filter show in srp with "show srp no"
     And admin click search button
     Then admin can see show in srp with "No"
+
+  @TEST_SS-7306 @continue
+  Scenario: [Web][Bangker][Landmark Data]Admin check remapping button
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    Then admin bangkerupux navigates landmark data menu
+    When admin choose search by "name"
+    And admin input search with "Rumah Desta"
+    And admin click search button
+    And admin click on remapping button
+    And admin can see success alert remapping
+    Then admin can see data with name "58"
+
+  @TEST_SS-7307
+  Scenario: [Web][Bangker][Landmark Data]Admin edit landmark
+    Then admin bangkerupux navigates landmark data menu
+    When admin choose search by "name"
+    And admin input search with "Ajamu Banksumut"
+    And admin click search button
+    And admin clicks on edit button
+    Then admin can see edit page
+    And admin update score with "100"
+    Then admin can see success alert remapping
