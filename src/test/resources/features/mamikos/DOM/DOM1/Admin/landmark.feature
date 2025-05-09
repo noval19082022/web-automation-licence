@@ -1,4 +1,4 @@
-@DOM1 @a
+@DOM1
 Feature: Landmark
 
   @TEST_SS-7302
