@@ -173,4 +173,14 @@ public class AllLeadsSteps {
             Assert.assertEquals(allLeads.getColumnName(i), column.get(i));
         }
     }
+
+    @When("admin search by {string} with {string}")
+    public void admin_search_by_with(String searchTypeLeads, String text) {
+        allLeads.searchTypeLeads(searchTypeLeads, text);
+    }
+
+    @Then("admin validate data in table with {string}")
+    public void admin_validate_data_in_table_with(String text) {
+        allLeads.getDataInTable(text);
+    }
 }
