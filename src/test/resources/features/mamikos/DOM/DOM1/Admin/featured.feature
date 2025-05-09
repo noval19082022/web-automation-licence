@@ -1,4 +1,4 @@
-@DOM1 @a
+@DOM1
 Feature: Listing Featured
 
   @TEST_SS-7285 @continue
