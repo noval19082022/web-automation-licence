@@ -18,19 +18,19 @@ Feature: Beli Saldo
   @TEST_LIMO-3335 @continue
   Scenario: List Promo Saldo
     Then detail list saldo as expected
-      | price   | priceInRp | disc | discPrice |
-      | 10.000  | Rp10.000  |      |           |
-      | 30.000  | Rp27.000  | 10%  | Rp30.000  |
-      | 50.000  | Rp50.000  |      |           |
-      | 75.000  | Rp75.000  | 6%   | Rp80.000  |
-      | 80.000  | Rp80.000  |      |           |
-      | 300.000 | Rp300.000 |      |           |
+      | priceTitle | priceInRp | disc | priceStrike |
+      | 10 ribu    | Rp10.000  |      |             |
+      | 30 ribu    | Rp27.000  | 10%  | Rp30.000    |
+      | 50 ribu    | Rp50.000  |      |             |
+      | 75 ribu    | Rp75.000  | 6%   | Rp80.000    |
+      | 80 ribu    | Rp80.000  |      |             |
+      | 300 ribu   | Rp276.000 |      | Rp300.000   |
 
   @TEST_LIMO-3336 @continue
   Scenario: Change Saldo
     Given owner choose saldo "Rp27.000"
     When owner ubah saldo to "Rp10.000"
-    Then owner will see that the text "Saldo MamiAds 10.000" is displayed
+    Then owner will see that the text "Saldo MamiAds 10 ribu" is displayed
 
   @TEST_LIMO-3337 @continue
   Scenario: Beli Saldo - Transaction Success
