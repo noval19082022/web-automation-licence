@@ -75,7 +75,7 @@ Feature: GP Crosseling
     And user choose saldo "Rp27.000" on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
     And owner click bayar sekarang on detail tagihan page goldplus
-    Then owner validate payment for goldplus package have "Saldo MamiAds 30.000 + GoldPlus 1" and have "Biaya Transaksi" before choose payment method
+    Then owner validate payment for goldplus package have "Saldo MamiAds 30 ribu + GoldPlus 1" and have "Biaya Transaksi" before choose payment method
     And user navigate to mamiads history page
     And user will see that the text "Saldo MamiAds 30 ribu + GoldPlus 1" is displayed
 
@@ -87,7 +87,7 @@ Feature: GP Crosseling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30.000 + GoldPlus 1 (reg#1m) (1 Bulan)"
+    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (reg#1m) (1 Bulan)"
 
   @terminate @gpCrossPaid @TEST_LIMO-3352
   Scenario: Terminate GP
