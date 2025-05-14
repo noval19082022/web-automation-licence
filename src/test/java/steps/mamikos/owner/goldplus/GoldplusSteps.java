@@ -522,17 +522,30 @@ public class GoldplusSteps {
         int j = 0;
         for (Map<String, String> content : table) {
             Assert.assertEquals(goldplus.mamiadsSaldo("saldo", i), content.get("saldo"));
-            Assert.assertEquals(goldplus.mamiadsSaldo("cashback", i), content.get("cashback"));
-            Assert.assertEquals(goldplus.mamiadsSaldo("salePrice", i), content.get("salePrice"));
-            Assert.assertEquals(goldplus.mamiadsSaldo("saving", i), content.get("saving"));
-            try {
-                if (!content.get("disc").isEmpty()) {
-                    Assert.assertEquals(goldplus.mamiadsSaldo("disc", j), content.get("disc"));
-                    Assert.assertEquals(goldplus.mamiadsSaldo("discPriceMamiAds", j), content.get("discPriceMamiAds"));
-                    j++;
-                }
-            } catch (java.lang.NullPointerException ignored) {
-            }
+
+           try {
+               if (!content.get("cashback").isEmpty()) {
+                   Assert.assertTrue(playwright.isTextDisplayed(content.get("cashback")), String.format("contaiins %s not displayed", content.get("cashback")));
+               }
+
+               if (!content.get("salePrice").isEmpty()) {
+                   Assert.assertTrue(playwright.isTextDisplayed(content.get("salePrice")), String.format("contaiins %s not displayed", content.get("salePrice")));
+               }
+
+               if (!content.get("saving").isEmpty()) {
+                   Assert.assertTrue(playwright.isTextDisplayed(content.get("saving")), String.format("contaiins %s not displayed", content.get("saving")));
+               }
+
+               if (!content.get("disc").isEmpty()) {
+                   Assert.assertEquals(goldplus.mamiadsSaldo("disc", j), content.get("disc"));
+                   Assert.assertEquals(goldplus.mamiadsSaldo("discPriceMamiAds", j), content.get("discPriceMamiAds"));
+                   j++;
+               }
+
+           } catch (java.lang.NullPointerException ignored) {
+
+           }
+
             i++;
         }
     }

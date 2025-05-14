@@ -36,9 +36,10 @@ public class MamiAdsPO {
     private Locator paduanMamiadsBackButton;
     private Locator cobaSekarangButtonHeader;
     private Locator saldoTitleName;
-    private Locator saldoTitleList;
+    private Locator saldoTitleActualPrice;
+    private Locator selectSaldoList;
     private Locator buySaldoBtnList;
-    private Locator saldoAmount6000;
+    private Locator saldoAmountFirstIndex;
     Locator kamarPenuhText;
     private Locator beliSaldoBtnPopupToggle;
     private Locator continuePaymentBuySaldoMamiads;
@@ -103,10 +104,11 @@ public class MamiAdsPO {
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
         this.beliSaldoBtnPopupToggle = page.locator("#button-right-modal-toggle-confirm-beli-saldo");
-        this.saldoTitleName = page.locator("//div[@class='balance-list-item__name']");
-        this.saldoTitleList = page.locator(".balance-list-item__price");
+        this.saldoTitleName = page.locator("//div[@class='balance-mamiads-item__option-label-package']");
+        this.saldoTitleActualPrice = page.locator(".balance-mamiads-item__option-price-actual");
+        this.selectSaldoList = page.locator(".bg-c-radio__icon > span");
         this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
-        this.saldoAmount6000 = page.locator(".bg-c-grid > div:nth-of-type(1) .bg-c-button");
+        this.saldoAmountFirstIndex = page.locator(".bg-c-radio__icon > span").first();
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
@@ -250,17 +252,17 @@ public class MamiAdsPO {
     public String listSaldo(String listSaldo, int index) {
         String element = "";
         switch (listSaldo) {
-            case "price":
-                element = ".balance-list-item__name";
+            case "priceTitle":
+                element = ".balance-mamiads-item__option-label-package";
                 break;
             case "priceInRp":
-                element = ".balance-list-item__price";
+                element = ".balance-mamiads-item__option-price-actual";
                 break;
             case "disc":
-                element = ".percentage";
+                element = ".bg-u-text-red-600";
                 break;
-            case "discPrice":
-                element = ".amount";
+            case "priceStrike":
+                element = ".bg-u-text-neutral-400";
                 break;
         }
         return playwright.getText(playwright.getLocators(page.locator(element)).get(index));
@@ -284,11 +286,12 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
-        playwright.waitTillLocatorIsVisible(saldoTitleList.first());
+        playwright.waitTillLocatorIsVisible(saldoTitleActualPrice.first());
         var found = choosingSaldo(saldo);
         if (!found) {
             // default saldo is 6000
-            playwright.clickOn(saldoAmount6000);
+            playwright.clickOn(saldoAmountFirstIndex);
+            playwright.clickOn(buySaldoBtnList);
         }
     }
 
@@ -797,7 +800,7 @@ public class MamiAdsPO {
      */
     private boolean choosingSaldo(String saldo) {
         boolean found = true;
-        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleList);
+        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleActualPrice);
         if (!listSaldoTitles.contains(saldo)) {
             listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleName);
         }
@@ -813,7 +816,8 @@ public class MamiAdsPO {
                 .orElse(-1);
 
         if (indexToClick != -1) {
-            playwright.clickOn(buySaldoBtnList.nth(indexToClick));
+            playwright.clickOn(selectSaldoList.nth(indexToClick));
+            playwright.clickOn(buySaldoBtnList);
             return found;
         } else {
             return !found;
