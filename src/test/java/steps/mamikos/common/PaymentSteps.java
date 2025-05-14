@@ -231,6 +231,7 @@ public class PaymentSteps {
 
     @Then("owner can sees total amount is basic amount plus other price")
     public void ownerCanSeesTotalAmountIsBasicAmountPlusOtherPrice(List<Integer> priceList) {
+        playwright.waitTillPageLoaded();
         int totalCost = JavaHelpers.extractNumber(invoice.getTotalCostInvoiceDetail());
         int perPeriodCost = JavaHelpers.extractNumber(invoice.getRentCostPerPeriodInvoiceDetail());
         int additionalPriceCost = 0;
