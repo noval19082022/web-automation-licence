@@ -27,8 +27,8 @@ Feature: GP Crosseling
       | 10 ribu  |          |      |             | 10.000           | Hemat Rp0       |
       | 30 ribu  | + 3.000  | 10%  | Rp27.000    | 30.000           | Hemat Rp6.000   |
       | 50 ribu  | + 5.000  |      | Rp50.000    | 50.000           | Hemat Rp5.000   |
-      | 75.000   | + 7.500  | 6%   | Rp75.000    | 80.000           | Hemat Rp12.500  |
-      | 80.000   | + 8.000  |      | Rp80.000    |                  | Hemat Rp8.000   |
+      | 75 ribu  | + 7.500  | 6%   | Rp75.000    | 80.000           | Hemat Rp12.500  |
+      | 80 ribu  | + 8.000  |      | Rp80.000    |                  | Hemat Rp8.000   |
 
     When user click "Tutup"
     And user choose saldo "Rp10.000" on GoldPlus section
@@ -57,12 +57,12 @@ Feature: GP Crosseling
     When user click on ubah package gold plus button
     And user choose Goldplus package 2
     And user choose saldo "Rp27.000" on GoldPlus section
-    Then user verify the "Saldo MamiAds 30 ribu" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "choosen" on Rincian Pembayaran
 
   @mamiads  @gpCrossSelling @TEST_LIMO-3349
   Scenario: Cancel saldo mamiads
     And user unchoose saldo on GoldPlus section
-    Then user verify the "Saldo MamiAds 30 ribu" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
+    Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
 
   @continue @gpCrossPaid @TEST_LIMO-1393
   Scenario: [Owner dashboard][Crosseling GP and MamiAds]To make sure saldo mamiads DIDN'T appear on Riwayat Saldo Mamiads while status GP = menunggu pembayaran
