@@ -68,8 +68,9 @@ public class sidebarMenuPO {
      * click Tenant Communication Menu
      */
     public void clickTenantCommunicationMenu() {
-        tenantCommunicationButton.waitFor();
-        tenantCommunicationButton.click();
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(tenantCommunicationButton);
+        playwright.pageScrollToDown(100);
     }
 
     /**
