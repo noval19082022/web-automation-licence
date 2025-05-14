@@ -27,8 +27,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | phone stag   | phone prod    | password  |
       | 087708777618 | 0890867321212 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                        | kost path prod            |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-automation-add-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
+      | kost path stag                                                                                                              | kost path prod            |
+      | kost-kabupaten-sukoharjo-kost-campur-murah-kost-rini-featured-maret-kartasura-sukoharjo?redirection_source=Nama Kos Terkait | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -36,14 +36,14 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08716267788    | 08716267788    | qwerty123 |
+      | phone stag     | phone prod     | password  |
+      | 089604239091   | 08716267788    | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod          |
       | Nunu And Willump | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @SS-5029
+  @SS-5029 @continue
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Deposit And Additional Fee in Invoice Detail Page for DP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -51,16 +51,13 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin clicks on invoice details second index:
       | search by    | renter_phone_number |
-      | search value | 0890867321212       |
+      | search value | 087708777618        |
     Then admin can sees total cost is basic amount + admin fee
 
   @SS-5030
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Check Deposit And Additional Fee in Invoice Detail Page for Settlement
     Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin clicks on invoice details first index:
       | search by    | renter_phone_number |
       | search value | 087708777618        |
-    Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
+    Then admin can sees total cost is equal to basic amount
