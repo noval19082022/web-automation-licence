@@ -35,13 +35,13 @@ Feature: GP Crosseling
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3350
   Scenario: Rincian pembayaran while saldo MamiAds and GoldPlus
-    Then user verify the "Saldo MamiAds 10 ribu" and the price is "Rp10.000" already "choosen" on Rincian Pembayaran
+    Then user verify the "Saldo MamiAds 10.000" and the price is "Rp10.000" already "choosen" on Rincian Pembayaran
 
   @mamiads  @gpCrossSelling @TEST_LIMO-3352
   Scenario: Ubah package GP after choose MamiAds
     When user click on ubah package gold plus button
     And user choose Goldplus package 2
-    Then user verify the "Saldo MamiAds 10 ribu" and the price is "Rp10.000" already "choosen" on Rincian Pembayaran
+    Then user verify the "Saldo MamiAds 10.000" and the price is "Rp10.000" already "choosen" on Rincian Pembayaran
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3354
   Scenario: Cancel select saldo mamiads
