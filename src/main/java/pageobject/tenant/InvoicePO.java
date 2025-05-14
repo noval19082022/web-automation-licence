@@ -135,8 +135,8 @@ public class InvoicePO {
         openTagihan = page.locator("//*[@class='billing-management-table__row']").first();
         kelolaTagihanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         nextButton = page.getByRole(AriaRole.IMG).filter(new Locator.FilterOptions().setHasText("arrow-right"));
-        txtRentPerPeriodInvoiceDetail = page.locator("div:nth-child(10) > div:nth-child(2)");
-        txtTotalCostInvoiceDetail = page.locator("div:nth-child(14) > div:nth-child(2)");
+        txtRentPerPeriodInvoiceDetail = page.locator("div.has-text-right").nth(4);
+        txtTotalCostInvoiceDetail = page.locator("div.has-text-right").last();
         txtAddCostInvoiceDetail = page.locator("div:nth-child(12) > .item-section > div:nth-child(2)");
         txtOVO = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("OVO - MamiPAY"));
         noOvoTextBox = page.getByPlaceholder("08...");
@@ -463,6 +463,7 @@ public class InvoicePO {
      * @return String data type of invoice number
      */
     public String getTotalCostInvoiceDetail() {
+        playwright.waitTillLocatorIsVisible(txtTotalCostInvoiceDetail);
         return playwright.getText(txtTotalCostInvoiceDetail).trim();
     }
 

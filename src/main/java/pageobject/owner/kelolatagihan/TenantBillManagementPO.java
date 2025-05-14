@@ -139,8 +139,9 @@ public class TenantBillManagementPO {
      * @param month String type month name
      */
     public void selectMonthFilter(String month) {
-        Locator monthName = page.locator("//span[contains(.,'"+month+"')]").getByText(month);
+        Locator monthName = page.getByText(month, new Page.GetByTextOptions().setExact(true));
         playwright.waitFor(filterMonth, 30000.0);
+        playwright.waitTillPageLoaded();
         if (!filterMonth.allInnerTexts().get(0).contains(month)) {
             playwright.clickOn(filterMonth);
             playwright.clickOn(monthName);
