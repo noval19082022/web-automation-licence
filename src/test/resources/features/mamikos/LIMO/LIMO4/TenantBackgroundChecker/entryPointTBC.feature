@@ -30,4 +30,4 @@ Feature: Entry Point Tenant Background Checker
       | phone stag      | phone prod  | password     |
       | 0891111020199   | 0           | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    Then tenant can't see entry point TBC Lihat Profil at chatroom "Kost General Irvi Automation"
+    Then tenant can't see entry point TBC Lihat Profil at chatroom "Kost Tanjakan Indah Rajeg Tangerang"
