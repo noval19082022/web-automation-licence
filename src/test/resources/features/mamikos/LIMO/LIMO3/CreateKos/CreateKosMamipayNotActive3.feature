@@ -19,6 +19,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
       | phone stag    | password  |
       | 0812345670004 | qwerty123 |
     And owner navigates to property saya kos
+    And owner click close icon pop up
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected

@@ -17,9 +17,9 @@ Feature: Survei - kos detail
     Then "Booking Langsung" are displayed in the kos andalan
       | Booking Langsung |
       | Kos ini bisa di-booking dan dibayar di situs dan aplikasi Mamikos, tanpa harus ketemuan dengan pemilik.|
-    Then "Bisa Refund" are displayed in the kos andalan
-      | Bisa Refund |
-      | Sesuai dengan ketentuan dan kebijakan refund yang berlaku di Mamikos.|
+    Then "Ketentuan Refund" are displayed in the kos andalan
+      | Ketentuan Refund |
+      | Kos bisa refund sesuai dengan ketentuan dan kebijakan refund yang berlaku di Mamikos.|
 
   @TEST_LIMO-7036
   Scenario: Not Display Survey Benefit for Non Kost GP
