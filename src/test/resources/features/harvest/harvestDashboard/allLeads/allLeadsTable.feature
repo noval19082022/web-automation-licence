@@ -1,4 +1,4 @@
-@regression @pman3 @harvest
+@regression @pman3 @harvest @a
 
   Feature: All Leads Table
 
@@ -105,6 +105,7 @@
       And admin clicks Filter in Harvest Dashboard
       And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
       And admin selects "Kecamatan" and "Palmerah" from dropdown
+      And admin click on terapkan button
       Then admin validate kota name with "Palmerah"
 
     @TEST_SS-7495
@@ -118,4 +119,5 @@
       And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
       And admin selects "Kecamatan" and "Palmerah" from dropdown
       And admin selects "Kelurahan" and "Kemanggisan" from dropdown
+      And admin click on terapkan button
       Then admin validate kota name with "Kemanggisan"
