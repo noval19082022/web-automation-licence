@@ -3,6 +3,7 @@ package steps.mamikos.harvest.harvestDashboard;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -74,6 +75,22 @@ public class AllLeadsSteps {
     public void admin_clicks_Filter_in_Harvest_Dashboard(){
         allLeads.clicksFilter();
     }
+
+    @And("admin selects {string} and {string} from dropdown")
+    public void admin_selects_and_from_dropdown(String text, String kabupaten){
+        allLeads.inputKota(text, kabupaten);
+    }
+
+    @And("admin click on terapkan button")
+    public void admin_click_on_terapkan_button(){
+        allLeads.clicksTerapkan();
+    }
+
+    @Then("admin validate kota name with {string}")
+    public void admin_validate_kota_name_with(String text) {
+        Assert.assertEquals(allLeads.getKotaName(text), text);
+    }
+
     //--- End of Filter ---//
 
     //--- Batalkan Edit ---//
