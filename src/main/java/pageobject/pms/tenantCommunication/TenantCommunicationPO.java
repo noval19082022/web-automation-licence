@@ -77,12 +77,10 @@ public class TenantCommunicationPO {
      * Select Main Page filter
      */
     public void selectMainPageFilter(String mainPageFilter) {
-        if(playwright.waitTillLocatorIsVisible(mainPageFilterMenu,4.0)) {
-            searchFieldMainPage = page.locator("//li/a[contains(., '" + mainPageFilter + "')]");
-            playwright.reloadPage();
-            playwright.clickOn(mainPageFilterMenu);
-            playwright.clickOn(searchFieldMainPage);
-        }
+        searchFieldMainPage = page.locator("//li/a[contains(., '" + mainPageFilter + "')]");
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(mainPageFilterMenu);
+        playwright.clickOn(searchFieldMainPage);
     }
 
     /**

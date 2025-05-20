@@ -11,12 +11,14 @@ public class ListingFeaturedPO {
 
     Locator searchButton;
     Locator confirmButton;
+    Locator columnName;
 
     public ListingFeaturedPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         confirmButton = page.locator("//button[@class=\"swal2-confirm swal2-styled\"]");
+        columnName = page.locator("tr th");
     }
 
     /**
@@ -68,12 +70,25 @@ public class ListingFeaturedPO {
         if (text.equalsIgnoreCase("Mark as Featured")) {
             Locator markAsFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-thumbs-up')]");;
             playwright.clickOn(markAsFeatured);
+            playwright.clickOn(confirmButton);
         }
         else if (text.equalsIgnoreCase("Unmark as Featured")) {
             Locator markAsUnFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-circle-arrow-down')]");;
             playwright.clickOn(markAsUnFeatured);
+            playwright.clickOn(confirmButton);
         }
-        playwright.clickOn(confirmButton);
+        else if (text.equalsIgnoreCase("Photo")) {
+            Locator photoButton = page.locator("//a[contains(text(),'Photo')]");
+            playwright.clickOn(photoButton);
+        }
+    }
+
+    /**
+     * Get Column Name
+     * @return String
+     */
+    public String getColumnName(int i) {
+        return playwright.getText(columnName.nth(i));
     }
 
 }

@@ -94,12 +94,12 @@ public class MamiAdsSteps {
         List<Map<String, String>> table = dataTable.asMaps();
         int i=0;int j=0;
         for (Map<String, String> content : table) {
-            Assert.assertEquals(mamiAdsPO.listSaldo("price",i),content.get("price"));
+            Assert.assertEquals(mamiAdsPO.listSaldo("priceTitle",i),content.get("priceTitle"));
             Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
             try{
                 if(!content.get("disc").isEmpty()){
                     Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
-                    Assert.assertEquals(mamiAdsPO.listSaldo("discPrice",j),content.get("discPrice"));
+                    Assert.assertEquals(mamiAdsPO.listSaldo("priceStrike",j),content.get("priceStrike"));
                     j++;
                 }
             } catch (java.lang.NullPointerException ignored) { }

@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.ListingFeaturedPO;
 import utilities.PlaywrightHelpers;
+import java.util.List;
 
 public class ListingFeaturedSteps {
     Page page = ActiveContext.getActivePage();
@@ -34,5 +35,12 @@ public class ListingFeaturedSteps {
     public void admin_search_by_status(String status){
         listingFeatured.filteringByStatus(status);
         listingFeatured.clickSearchButton();
+    }
+
+    @And("featured table contains column")
+    public void featured_table_contains_column(List<String> column) {
+        for (int i = 0; i < column.size(); i++) {
+            Assert.assertEquals(listingFeatured.getColumnName(i), column.get(i));
+        }
     }
 }

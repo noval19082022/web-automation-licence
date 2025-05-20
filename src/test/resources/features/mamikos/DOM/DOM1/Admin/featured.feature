@@ -44,9 +44,33 @@ Feature: Listing Featured
     When admin click "Mark as Featured" on listing
     Then admin can see "good" on list
 
-  @TEST_SS-7296
+  @TEST_SS-7296 @continue
   Scenario: [Web][Featured Listing][Action]Admin flag Unmark as Featured
     And admin bangkerupux navigates listing featured menu
     And admin search by "kost_id" and input "1000042065" on fetaured list
     When admin click "Unmark as Featured" on listing
     Then admin can see "was_good" on list
+
+  @TEST_SS-7284 @continue
+  Scenario: [Web][Featured Listing][Data]Admin check Photo button
+    When admin bangkerupux navigates listing featured menu
+    And admin search by "phone_number" and input "082239391319" on fetaured list
+    And admin click "Photo" on listing
+    Then admin can see "Kost Griya Naryo Tipe A Ngemplak Sleman" on list
+
+  @TEST_SS-7283
+  Scenario: [Web][Featured Listing][Data]Admin check featured Listing Menu
+    When admin bangkerupux navigates listing featured menu
+    Then featured table contains column
+      | Kost ID               |
+      | Owner Phone Number      |
+      | Owner Registered At      |
+      | Room Name                |
+      | Chat Room Count          |
+      | Purchaser Category (yearly) |
+      | Purchase Frequency (yearly, freq) |
+      | ARPU (yearly, gerak)              |
+      | Rating                          |
+      | Photo Card                      |
+      | Featured Status                 |
+      | Action                          |
