@@ -1,4 +1,4 @@
-@regression @pman3 @harvest @a
+@regression @pman3 @harvest
 
   Feature: All Leads Table
 
