@@ -438,6 +438,7 @@ public class KostLandingAreaPO {
     }
 
     public String getTotalSearchAreatext(String text){
+        playwright.hardWait(1000.0);
         Locator totalSearchAreatext = page.locator("//h2[contains(., '"+text+"')]");
         return playwright.getText(totalSearchAreatext);
     }

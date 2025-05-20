@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
+import javax.swing.text.StyledEditorKit;
+
 public class AllLeadsPO {
 
     private Page page;
@@ -251,6 +253,31 @@ public class AllLeadsPO {
     public void clicksTerapkan() {
         playwright.clickOn(terapkanButton);
     }
+
+    /**
+     * select kota
+     * @param text
+     * @param kabupaten
+     */
+    public void inputKota(String text, String kabupaten) {
+        Locator pilihKota = page.locator("//p[text()='"+text+"']/parent::div//span[text()='Pilih']");
+        playwright.clickOn(pilihKota);
+        Locator inputKotaText = page.locator("//p[text()='"+text+"']/parent::div//div//ul//span//input");
+        playwright.fill(inputKotaText, kabupaten);
+        Locator clickKotaName = page.locator("//p[text()='"+text+"']/parent::div//div//ul//li//div[text()='"+kabupaten+"']");
+        playwright.clickOn(clickKotaName);
+    }
+
+    /**
+     * get name on data listing
+     * @param text
+     * @return
+     */
+    public String getKotaName(String text) {
+        Locator getKotaName = page.locator("//p[@class=\"bg-c-text bg-c-text--body-4\"][contains(., '"+text+"')]").first();
+        return playwright.getText(getKotaName);
+    }
+
     //--- End of Filter ---//
 
     //--- Confirmation Batalkan ---//
