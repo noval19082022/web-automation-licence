@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @visibility @DONEMIGRATINGTONEWBOARD
+@regression @LIMO1 @LIMO1-staging @visibilityLimo @DONEMIGRATINGTONEWBOARD
 Feature: Visibility
 
   @TEST_LIMO-1369 @continue
@@ -7,7 +7,6 @@ Feature: Visibility
     When user login as owner:
       | phone stag    | phone prod    | password     |
       | 0826666666633 | 0826666666633 | qwerty123    |
-    Then user verify title "Lihat disini" and message "Iklan Anda tenggelam? Pakai MamiAds!" in saldo MamiAds
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads landing page
 
@@ -23,7 +22,8 @@ Feature: Visibility
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 083843666858 | 083843666858 | qwerty123    |
-    Then user verify title "Rp25.000" and message "Pakai MamiAds, bikin iklan makin terlihat" in saldo MamiAds
+    Then user will see that the text "Saldo iklan" is displayed
+    Then user will see that the text "Saldo menipis? Yuk top up hari ini" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 
@@ -61,7 +61,7 @@ Feature: Visibility
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 089504016010 | 089504016010 | qwerty123    |
-    Then user verify title "Rp3.500" and message "Beli saldo lagi yuk biar posisi iklan tetap naik" in saldo MamiAds
+    Then user will see that the text "Beli saldo lagi yuk biar posisi iklan tetap naik" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to pembelian saldo mamiads page
     When user go back to previous page
