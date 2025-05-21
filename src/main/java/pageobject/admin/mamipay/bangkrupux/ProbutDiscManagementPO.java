@@ -81,13 +81,6 @@ public class ProbutDiscManagementPO {
         playwrightHelpers.clickOn(redirectionLink);
     }
 
-//    /**
-//     * click on search button
-//     */
-//    public void clickOnSearchButton() {
-//        playwrightHelpers.clickOn(searchButton);
-//    }
-
     /**
      * Verify search result
      * @return
