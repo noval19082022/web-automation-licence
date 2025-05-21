@@ -82,3 +82,42 @@
       And admin should redirect to Harvest Dashboard
       And admin search by "Nama Pemilik" with "Imam Zahroni"
       Then admin validate data in table with "Imam Zahroni"
+
+    @TEST_SS-7493
+    Scenario: [Web][Harverst][Filter]Admin filter by Kota
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email                         | password  |
+        | automationpman01@mamikos.com  | qwerty123 |
+      And admin should redirect to Harvest Dashboard
+      And admin clicks Filter in Harvest Dashboard
+      And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
+      And admin click on terapkan button
+      Then admin validate kota name with "Kota Jakarta Barat"
+
+    @TEST_SS-7494
+    Scenario: [Web][Harverst][Filter]Admin filter by Kecamatan
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email                         | password  |
+        | automationpman01@mamikos.com  | qwerty123 |
+      And admin should redirect to Harvest Dashboard
+      And admin clicks Filter in Harvest Dashboard
+      And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
+      And admin selects "Kecamatan" and "Palmerah" from dropdown
+      And admin click on terapkan button
+      Then admin validate kota name with "Palmerah"
+
+    @TEST_SS-7495
+    Scenario: [Web][Harverst][Filter]Admin filter by Kelurahan
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email                         | password  |
+        | automationpman01@mamikos.com  | qwerty123 |
+      And admin should redirect to Harvest Dashboard
+      And admin clicks Filter in Harvest Dashboard
+      And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
+      And admin selects "Kecamatan" and "Palmerah" from dropdown
+      And admin selects "Kelurahan" and "Kemanggisan" from dropdown
+      And admin click on terapkan button
+      Then admin validate kota name with "Kemanggisan"
