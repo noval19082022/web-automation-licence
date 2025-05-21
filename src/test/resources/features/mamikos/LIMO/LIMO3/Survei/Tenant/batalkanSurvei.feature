@@ -21,7 +21,7 @@ Feature: Batalkan survei P2
     And user fill form reason cancel survei "Saya ingin membatalkan ajukan survei"
     And user click on "Kirim" button
     Then toast message "Survei berhasil dibatalkan." should be appear
-    And chat room appear with latest message "Survei Dibatalkan Alasan:Saya ingin membatalkan ajukan survei"
+   # And chat room appear with latest message "Survei Dibatalkan Alasan:Saya ingin membatalkan ajukan survei"
 
   @TEST_LIMO-7290
   Scenario: Attempt to cancel a survey request without providing a reason

@@ -392,7 +392,7 @@ Feature: Tenant Form Survey Kost P2
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                |
       | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
-    And user dismiss FTUE booking benefit
+#    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user open time survey option on form survey

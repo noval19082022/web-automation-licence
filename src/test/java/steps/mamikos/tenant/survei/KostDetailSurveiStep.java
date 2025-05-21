@@ -21,7 +21,7 @@ public class KostDetailSurveiStep {
         kosAndalan = tables.asMaps();
         int limit = name.equalsIgnoreCase("Survei Kos Tersedia") ? 1 :
                 name.equalsIgnoreCase("Booking Langsung") ? 2 :
-                name.equalsIgnoreCase("Bisa Refund") ? 3 : 0;
+                name.equalsIgnoreCase("Ketentuan Refund") ? 3 : 0;
         limit = Math.min(limit, kosAndalan.size());
 
         for (int i = 0; i < limit; i++) {
