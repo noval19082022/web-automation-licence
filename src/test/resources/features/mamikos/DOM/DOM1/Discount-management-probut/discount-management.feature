@@ -129,3 +129,58 @@ Feature: Probut Discount Management
     And Admin bangkrupux visit promo ngebut discount management
     And Admin upload csv discount management with file names "update_discount_fill_dicount_type_owner_fill_by_nominal_but_discount_type_mamikos_is_null.csv"
     Then admin should be able to see the text "Success! File processed successfully."
+
+  @TEST_SS-8147 @a
+  Scenario: [Web][Discount Management][Search] Search by Listing name
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin search by listing name with "Kost Apik Marlin Tipe A"
+    And admin click on search button
+    Then admin can see kost name on discount management page
+
+  @TEST_SS-8146 @a
+    Scenario: [Web][Discount Management][Discount Link Redirection]Admin check redirection link
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin search by listing name with "Kost Apik Marlin Tipe A"
+    And admin click on search button
+    Then admin click on redirection link kost name
+
+  @TEST_SS-8143 @a
+  Scenario: [Web][Discount Management][Filter]Filter by Mapping Status with Live
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter Mapping status with "Live"
+    And admin click on search button
+    Then admin can see status "Live" on list
+
+  @TEST_SS-8142 @a
+  Scenario: [Web][Discount Management][Filter]Filter by Mapping Status with All
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter Mapping status with "All Mapping Status"
+    And admin click on search button
+    Then admin can see status "Live" on list
+
+  @TEST_SS-8144 @a
+  Scenario: [Web][Discount Management][Filter]Filter by Mapping Status with Not Live
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter Mapping status with "Not Live"
+    And admin click on search button
+    Then admin can see status "Not Live" on list
