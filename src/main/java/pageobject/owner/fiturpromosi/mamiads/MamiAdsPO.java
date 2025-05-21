@@ -601,7 +601,8 @@ public class MamiAdsPO {
      */
     public void clickOnUbahbutton(String adsName) {
         String ubahButton = "//div[@class='mami-ads-widget']/div[contains(.,'" + adsName + "')]//a";
-        playwright.clickOn(page.locator(ubahButton));
+        var locator = page.locator(ubahButton).first();
+        playwright.clickOn(locator);
     }
 
     /**
