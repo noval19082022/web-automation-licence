@@ -186,7 +186,7 @@ Feature: Probut Discount Management
     Then admin can see status "Not Live" on list
 
   @TEST_SS-8140
-    Scenario: [Web][Discount Management][Filter]Filter by Listing status with active
+  Scenario: [Web][Discount Management][Filter]Filter by Listing status with active
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -197,7 +197,7 @@ Feature: Probut Discount Management
     Then admin can see status "Active" on list
 
   @TEST_SS-8139
-    Scenario: [Web][Discount Management][Filter]Filter by Listing status with all
+  Scenario: [Web][Discount Management][Filter]Filter by Listing status with all
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -208,7 +208,7 @@ Feature: Probut Discount Management
     Then admin can see status "Active" on list
 
   @TEST_SS-8141
-    Scenario: [Web][Discount Management][Filter]Filter by Listing status with inactive
+  Scenario: [Web][Discount Management][Filter]Filter by Listing status with inactive
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -219,7 +219,7 @@ Feature: Probut Discount Management
     Then admin can see status "Inactive" on list
 
   @TEST_SS-8136
-    Scenario: [Web][Discount Management][Filter]Filter by Persentage for Mamikos
+  Scenario: [Web][Discount Management][Filter]Filter by Persentage for Mamikos
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -244,7 +244,7 @@ Feature: Probut Discount Management
     Then admin can see discount with "100,000 (10%)" on list
 
   @TEST_SS-8137
-    Scenario: [Web][Discount Management][Filter]Filter by Persentage for Owner
+  Scenario: [Web][Discount Management][Filter]Filter by Persentage for Owner
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
