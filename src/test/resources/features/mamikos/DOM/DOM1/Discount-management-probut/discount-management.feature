@@ -159,7 +159,7 @@ Feature: Probut Discount Management
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And Admin bangkrupux visit promo ngebut discount management
-    And admin choose filter Mapping status with "Live"
+    And admin choose filter "mapping-status" with "Live"
     And admin click on search button
     Then admin can see status "Live" on list
 
@@ -170,7 +170,7 @@ Feature: Probut Discount Management
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And Admin bangkrupux visit promo ngebut discount management
-    And admin choose filter Mapping status with "All Mapping Status"
+    And admin choose filter "mapping-status" with "All Mapping Status"
     And admin click on search button
     Then admin can see status "Live" on list
 
@@ -181,6 +181,76 @@ Feature: Probut Discount Management
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And Admin bangkrupux visit promo ngebut discount management
-    And admin choose filter Mapping status with "Not Live"
+    And admin choose filter "mapping-status" with "Not Live"
     And admin click on search button
     Then admin can see status "Not Live" on list
+
+  @TEST_SS-8140
+    Scenario: [Web][Discount Management][Filter]Filter by Listing status with active
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter "room-status" with "Active"
+    And admin click on search button
+    Then admin can see status "Active" on list
+
+  @TEST_SS-8139
+    Scenario: [Web][Discount Management][Filter]Filter by Listing status with all
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter "room-status" with "All"
+    And admin click on search button
+    Then admin can see status "Active" on list
+
+  @TEST_SS-8141
+    Scenario: [Web][Discount Management][Filter]Filter by Listing status with inactive
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter "room-status" with "Inactive"
+    And admin click on search button
+    Then admin can see status "Inactive" on list
+
+  @TEST_SS-8136
+    Scenario: [Web][Discount Management][Filter]Filter by Persentage for Mamikos
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And Admin search by listing name with "Kost Apik Marlin Tipe A"
+    And admin choose filter "discount-source" with "Mamikos"
+    And admin input persentage with "10"
+    And admin click on search button
+    Then admin can see discount with "100,000 (10%)" on list
+
+  @TEST_SS-8135
+  Scenario: [Web][Discount Management][Filter]Filter by Persentage for all
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter "discount-source" with "All Discount"
+    And admin input persentage with "10"
+    And admin click on search button
+    Then admin can see discount with "100,000 (10%)" on list
+
+  @TEST_SS-8137
+    Scenario: [Web][Discount Management][Filter]Filter by Persentage for Owner
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And Admin bangkrupux visit promo ngebut discount management
+    And admin choose filter "discount-source" with "Owner"
+    And admin input persentage with "10"
+    And admin click on search button
+    Then admin can see discount with "50,000 (10%)" on list

@@ -44,14 +44,24 @@ public class ProbutDiscManagementSteps {
         probutDiscManagementPO.clickOnRedirectionLink();
     }
 
-    @And("admin choose filter Mapping status with {string}")
-    public void adminChooseFilterMappingStatusWith(String text) {
-        probutDiscManagementPO.selectMappingStatus(text);
+    @And("admin choose filter {string} with {string}")
+    public void adminChooseFilterMappingStatusWith(String type, String text) {
+        probutDiscManagementPO.selectMappingStatus(type, text);
     }
 
     @Then("admin can see status {string} on list")
     public void adminCanSeeStatusOnList(String text) {
         Assert.assertEquals(probutDiscManagementPO.getMappingStatusText(text), text, "live not found");
+    }
+
+    @And("admin input persentage with {string}")
+    public void adminInputPersentageWith(String text) {
+        probutDiscManagementPO.inputPersentage(text);
+    }
+
+    @Then("admin can see discount with {string} on list")
+    public void adminCanSeeDiscountOnList(String text) {
+        Assert.assertEquals(probutDiscManagementPO.getPersentageText(text), text, "discount not found");
     }
 
 }
