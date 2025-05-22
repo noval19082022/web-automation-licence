@@ -19,12 +19,12 @@ public class ProbutDiscManagementPO {
     private Locator uploadBulkBtn;
     private Locator removeBulkBtn;
     private Locator inputListingNameText;
-    private Locator searchButton;
     private Locator kostName;
     private Locator redirectionLink;
-    private Locator kostNameOnDetail;
     private Locator mappingStatusType;
     private Locator mappingStatusText;
+    private Locator percentageInput;
+    private Locator persentageText;
 
     public ProbutDiscManagementPO(Page page) {
         this.page = page;
@@ -37,10 +37,9 @@ public class ProbutDiscManagementPO {
         this.uploadBulkBtn = page.locator("#bulkUploadButton");
         this.removeBulkBtn = page.locator("#bulkRemoveButton");
         this.inputListingNameText = page.locator("//input[@placeholder=\"Listing Name\"]");
-        this.searchButton = page.locator("//button[@id=\"buttonSearch\"]");
         this.kostName = page.locator("//span[@class=\"font-semi-large\"]").first();
         this.redirectionLink = page.locator("//a[@class=\"text-success\"]").first();
-        this.mappingStatusType = page.locator("//select[@name=\"mapping-status\"]");
+        this.percentageInput = page.locator("//input[@name=\"percentage\"]");
     }
 
     public void uploadBulkDiscountCsv(String fileName) {
@@ -94,9 +93,9 @@ public class ProbutDiscManagementPO {
      * select mapping status
      * @param text
      */
-    public void selectMappingStatus(String text) {
+    public void selectMappingStatus(String type,String text) {
+        mappingStatusType = page.locator("//select[@name='"+type+"']");
         playwrightHelpers.clickOn(mappingStatusType);
-
         if(text.equalsIgnoreCase("All Mapping Status")){
             playwrightHelpers.selectDropdownByValue(mappingStatusType, "all");
         }
@@ -105,6 +104,24 @@ public class ProbutDiscManagementPO {
         }
         else if(text.equalsIgnoreCase("Not Live")){
             playwrightHelpers.selectDropdownByValue(mappingStatusType, "unmapped");
+        }
+        else if(text.equalsIgnoreCase("All")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "0");
+        }
+        else if(text.equalsIgnoreCase("Active")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "1");
+        }
+        else if(text.equalsIgnoreCase("Inactive")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "3");
+        }
+        else if(text.equalsIgnoreCase("All Discount")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "all");
+        }
+        else if(text.equalsIgnoreCase("Mamikos")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "mamikos");
+        }
+        else if(text.equalsIgnoreCase("Owner")){
+            playwrightHelpers.selectDropdownByValue(mappingStatusType, "owner");
         }
     }
 
@@ -117,5 +134,24 @@ public class ProbutDiscManagementPO {
         mappingStatusText = page.locator("//td[contains(.,'"+text+"')]").first();
         playwrightHelpers.waitTillPageLoaded();
         return playwrightHelpers.getText(mappingStatusText);
+    }
+
+    /**
+     * input persentage
+     * @param text
+     */
+    public void inputPersentage(String text){
+        playwrightHelpers.fill(percentageInput, text);
+    }
+
+    /**
+     * get persentage text on list
+     * @param text
+     * @return
+     */
+    public String getPersentageText(String text){
+        persentageText = page.locator("//strong[contains(.,'"+text+"')]").first();
+        playwrightHelpers.waitTillPageLoaded();
+        return playwrightHelpers.getText(persentageText);
     }
 }
