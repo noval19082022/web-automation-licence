@@ -34,11 +34,11 @@ Feature: CP Disbursement - Transfer CP Disbursement
       | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
       | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
     And admin submit tambah data transfer
+    And admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
     Then new cp disbursement data should add in daftar transfer
       | Tanggal Transfer ke Pemilik | Nama Property                                     | Tipe Transaksi  | Total Pendapatan  | Detail Rekening                   |
       | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara  | Commission      | Rp100.000         | Yudha Ferroza 10000245429 mandiri |
     #transfer cp disbursement
-    When admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
     Then show all disbursement from property name "Kost Apik Khusus Automation PMAN Halmahera Utara"
     When admin checks Preview Data Transfer
     Then Data Transfer that has been inputted is displayed on Preview Data Transfer

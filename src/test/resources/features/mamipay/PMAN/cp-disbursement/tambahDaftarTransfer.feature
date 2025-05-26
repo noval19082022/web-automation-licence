@@ -70,6 +70,7 @@ Feature: CP Disbursement - Tambah Daftar Transfer
   Scenario: Submit with valid data
     When admin select tipe transaksi lainnya "Automation Testing PMAN"
     And admin submit tambah data transfer
+    And admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
     Then new cp disbursement data should add in daftar transfer
       | Tanggal Transfer ke Pemilik | Nama Property                                     | Tipe Transaksi          | Total Pendapatan  | Detail Rekening                   |
       | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara  | Automation Testing PMAN | Rp100.000         | Yudha Ferroza 10000245429 mandiri |
