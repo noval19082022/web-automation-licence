@@ -127,7 +127,7 @@ public class MamiAdsPO {
         this.voucherCodeField = page.getByTestId("codeVoucher_txt");
         this.pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         this.warningMessageVoucher = page.getByTestId("warning_txt");
-        this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close")).first();
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
