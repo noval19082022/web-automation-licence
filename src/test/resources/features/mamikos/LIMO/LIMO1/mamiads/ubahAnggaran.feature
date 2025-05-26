@@ -253,7 +253,7 @@ Feature: Ubah Anggaran
       | status desc   | Klik tombol untuk naikkan iklan                             |
       | text anggaran | Tipe Anggaran: Rp10.000 per-hari                            |
 
-  @LIMO-3795
+  @LIMO-3795  @LIMO-2327
   Scenario: Naikan iklan - [MamiAds][Naikkan Iklan]: Switch OFF ads while saldo burn > 0 from maximal budget
     Given user go to mamikos homepage
     When user login as owner:
@@ -284,23 +284,3 @@ Feature: Ubah Anggaran
     And user set anggaran harian to "10000"
     And owner click Simpan Pengaturan on ubah anggaran
     Then user will see that the text "Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000" is displayed
-
-  @LIMO-2327
-  Scenario: [MamiAds][Naikkan Iklan]: Switch OFF ads while saldo burn > 0 from daily budget
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202302 | 089504220900 | qwerty123 |
-    And user navigates to mamiads dashboard
-    And user close mamiads onboarding popup
-    And user click ubah on "Kost Gowongan Jaya Pancoran Mas Depok"
-    And user set anggaran to dibatasi harian
-    And user set anggaran harian to "10000"
-    And owner click Simpan Pengaturan on ubah anggaran
-    Then user will see that the text "Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000" is displayed
-    And user click "on" toggle the "Kost Gowongan Jaya Pancoran Mas Depok"
-    And user click "Ya, Nonaktifkan" button on pop up switch toggle iklan
-    Then user verify the toast "Iklan berhenti dinaikkan."
-    And user click "off" toggle the "Kost Gowongan Jaya Pancoran Mas Depok"
-    And user click "Aktifkan" button on pop up switch toggle iklan
-    Then user verify the toast "Iklan berhasil dinaikkan"

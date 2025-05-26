@@ -236,7 +236,7 @@ public class NaikkanIklanPO {
      * @params toggleStatus, adsName
      */
     public void clickToggleTheAds(String toggleStatus, String adsName) {
-        if (toggleStatus.equals("off")) {
+        if (toggleStatus.equalsIgnoreCase("off")) {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");
         } else {
             switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");

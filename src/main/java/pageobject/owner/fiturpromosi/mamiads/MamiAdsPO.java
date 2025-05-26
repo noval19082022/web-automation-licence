@@ -10,6 +10,7 @@ import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class MamiAdsPO {
@@ -28,6 +29,9 @@ public class MamiAdsPO {
     private Locator cobaSekarangBtnOnWebview;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
+    private Locator warningIconBanner;
+    private Locator closeBtnWarningBanner;
+    private Locator lihatInfoLanjutWarningBanner;
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
@@ -96,6 +100,9 @@ public class MamiAdsPO {
         this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").first();
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
+        this.warningIconBanner = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("warning-triangle-glyph"));
+        this.closeBtnWarningBanner = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.lihatInfoLanjutWarningBanner = page.getByText("Lihat Info lanjut");
         this.beliSaldoBtn = page.getByText("Beli Saldo", new Page.GetByTextOptions().setExact(true));
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
@@ -127,7 +134,7 @@ public class MamiAdsPO {
         this.voucherCodeField = page.getByTestId("codeVoucher_txt");
         this.pakaiVoucherButton = page.getByTestId("pakaiVoucher_btn");
         this.warningMessageVoucher = page.getByTestId("warning_txt");
-        this.icnButtonCLose = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.icnButtonCLose = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^close$"))).getByRole(AriaRole.BUTTON);
         this.messageOnOffVoucher = page.locator("//*[@class='bg-c-toast__content']");
         this.deleteVoucher = page.getByTestId("hapusVoucher_link");
         this.listElement = page.locator(".scroll-element__item > div:nth-of-type(4) .c-container__left");
@@ -601,7 +608,8 @@ public class MamiAdsPO {
      */
     public void clickOnUbahbutton(String adsName) {
         String ubahButton = "//div[@class='mami-ads-widget']/div[contains(.,'" + adsName + "')]//a";
-        playwright.clickOn(page.locator(ubahButton));
+        var locator = page.locator(ubahButton).first();
+        playwright.clickOn(locator);
     }
 
     /**
@@ -835,6 +843,20 @@ public class MamiAdsPO {
      */
     public void userContinuePaymentBuySaldoMamiads() {
         playwright.clickOn(continuePaymentBuySaldoMamiads);
+    }
+
+    public boolean warningBannerIsOccured() {
+        return playwright.waitTillLocatorIsVisible(warningIconBanner);
+    }
+
+    public void closeWarningBanner() {
+        playwright.clickOn(closeBtnWarningBanner);
+    }
+
+    public void clickOnLihatInfoLanjutWarningBanner() {
+        this.page = page.waitForPopup(() -> {
+            playwright.clickOn(lihatInfoLanjutWarningBanner);
+        });
     }
 }
 

@@ -376,6 +376,27 @@ public class MamiAdsSteps {
         mamiAdsPO.userContinuePaymentBuySaldoMamiads();
     }
 
+
+    @And("user see waning banner mamiads is exist")
+    public void userSeeWaningBannerMamiadsIsExist() {
+        Assert.assertTrue(mamiAdsPO.warningBannerIsOccured());
+    }
+
+    @And("user see waning banner mamiads is not exist")
+    public void userSeeWaningBannerMamiadsIsNotExist() {
+        Assert.assertFalse(mamiAdsPO.warningBannerIsOccured());
+    }
+
+    @And("user close mamiads warning banner")
+    public void userCloseMamiadsWarningBanner() {
+        mamiAdsPO.closeWarningBanner();
+    }
+
+    @And("user click on Lihat Info Lanjut mamiads warning banner")
+    public void lihatInfoLanjut() {
+        mamiAdsPO.clickOnLihatInfoLanjutWarningBanner();
+    }
+
     private String random5k() {
         Random random = new Random();
 
