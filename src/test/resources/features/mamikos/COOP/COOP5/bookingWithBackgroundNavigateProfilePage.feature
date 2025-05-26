@@ -86,7 +86,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And tenant set active page to 0
     And user navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
-    And user stop rent kost with reason "Jarak Kos Terlalu Jauh"
+    And user stop rent kost with reason "Alasan Pribadi" and subreason "-"
     And user click review kost
     And user input review kost with rating 5:
       | review stop rent stag       |
