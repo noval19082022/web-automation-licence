@@ -45,7 +45,7 @@ Feature: Warning Bannner Mamiads
 
   @TEST_LIMO-8292
   Scenario: [Web][Info Warning Banner] Redirect to mamihelp if user click CTA “Lihat Info Lanjut“
-    And user clicks on "Lihat Info lanjut"
+    And user click on Lihat Info Lanjut mamiads warning banner
     And owner set active page to 1
     Then user will see that the text "Apa itu MamiAds?" is displayed
 
