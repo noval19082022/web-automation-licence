@@ -61,7 +61,7 @@ Feature: Owner - Penyewa Feature
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user stop rent kost with reason "Alasan Pribadi" and subreason "-"
     And user click ajukan berhenti sewa on kontrak saya after input data diri
     Then tenant can see "Pastikan form sudah diisi dengan benar untuk memudahkan pemilik melakukan konfirmasi." on bank account section
     And tenant click on "Kirim form ke pemilik" button on popup confirmation
