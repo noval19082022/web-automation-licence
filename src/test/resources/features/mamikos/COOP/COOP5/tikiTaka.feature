@@ -1,4 +1,4 @@
-@BBM5 @tikiTaka
+@BBM5 @tikiTaka @fail
 Feature: Tiki Taka - Bank Account
 
   Background: Terminated contract
@@ -56,7 +56,7 @@ Feature: Tiki Taka - Bank Account
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user stop rent kost with reason "Alasan Pribadi" and subreason "-"
     And user click ajukan berhenti sewa on kontrak saya after input data diri
 
 #  @TEST_SS-4302
@@ -119,7 +119,7 @@ Feature: Tiki Taka - Bank Account
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user stop rent kost with reason "Alasan Pribadi" and subreason "-"
     And user click ajukan berhenti sewa on kontrak saya after input data diri
     Then tenant can see "Pastikan form sudah diisi dengan benar untuk memudahkan pemilik melakukan konfirmasi." on bank account section
     And tenant click on "Kirim form ke pemilik" button on popup confirmation
