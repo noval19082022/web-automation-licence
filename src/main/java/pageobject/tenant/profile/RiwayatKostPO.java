@@ -45,6 +45,8 @@ public class RiwayatKostPO {
     Locator fillReviewKost;
     Locator closePopUpButton;
     Locator kostReviewEntryPointNotDisplayed;
+    Locator reasonRadioButton;
+    Locator subreasonRadioButton;
 
     //----------tiki taka----------//
     Locator bankNameButton;
@@ -281,14 +283,17 @@ public class RiwayatKostPO {
     }
 
     /**
-     * Click reason Ajukan Berhenti Sewa text
-     *
+     * Click reason Ajukan Berhenti Sewa text and subreason
+     * @param reason
+     * @param subreason
      */
-    public void clickReasonStopRent(String reason) {
-        playwright.hardWait(3000);
-        String selector = "//p[contains(.,'"+ reason +"')]";
-        ElementHandle element = page.querySelector(selector);
-        element.click();
+    public void clickReasonStopRent(String reason, String subreason) {
+        reasonRadioButton = page.getByText(reason);
+        playwright.clickOn(reasonRadioButton);
+        if (!subreason.equalsIgnoreCase("-")) {
+            subreasonRadioButton = page.getByText(subreason);
+            playwright.clickOn(subreasonRadioButton);
+        }
     }
 
     /**

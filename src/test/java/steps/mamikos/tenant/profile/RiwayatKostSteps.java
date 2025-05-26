@@ -122,9 +122,9 @@ public class RiwayatKostSteps {
     public void user_verify_Kost_Review_entry_point_is_not_displayed() {
         Assert.assertTrue(riwayatKost.isKostReviewEntryPointNotDisplayed());
     }
-    @When("user stop rent kost with reason {string}")
-    public void user_stop_rent_with_reason(String reason) {
-        riwayatKost.clickReasonStopRent(reason);
+    @When("user stop rent kost with reason {string} and subreason {string}")
+    public void user_stop_rent_with_reason_and_subreason(String reason, String subreason) {
+        riwayatKost.clickReasonStopRent(reason, subreason);
     }
 
     @And("user input review kost with rating 5:")

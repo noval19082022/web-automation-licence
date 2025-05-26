@@ -153,7 +153,7 @@ Feature: Update Billing tracker flow
     And user input review kost with rating 5:
       | review stop rent stag       |
       | Kost sangat aman dan bersih |
-    And user stop rent kost with reason "Sudah Selesai Studi"
+    And user stop rent kost with reason "Lingkungan" and subreason "Tidak aman"
     And user click ajukan berhenti sewa on kontrak saya after input data diri
     And tenant click on "Kirim form ke pemilik" button on popup confirmation
     When tenant navigate to kontrak kost saya
