@@ -29,6 +29,9 @@ public class MamiAdsPO {
     private Locator cobaSekarangBtnOnWebview;
     //--- Mamiads Page ---//
     private Locator cobaSekarangBtnOnPopUp;
+    private Locator warningIconBanner;
+    private Locator closeBtnWarningBanner;
+    private Locator lihatInfoLanjutWarningBanner;
     private Locator beliSaldoBtn;
     private Locator titleEmptyFilterText;
     private Locator messageEmptyFilterText;
@@ -97,6 +100,9 @@ public class MamiAdsPO {
         this.cobaSekarangBtnOnWebview = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang").first();
         //--- Mamiads Page ---//
         this.cobaSekarangBtnOnPopUp = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Coba Sekarang");
+        this.warningIconBanner = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("warning-triangle-glyph"));
+        this.closeBtnWarningBanner = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        this.lihatInfoLanjutWarningBanner = page.getByText("Lihat Info lanjut");
         this.beliSaldoBtn = page.getByText("Beli Saldo", new Page.GetByTextOptions().setExact(true));
         this.titleEmptyFilterText = page.locator(".bg-c-empty-state__title");
         this.messageEmptyFilterText = page.locator(".bg-c-empty-state__description");
@@ -837,6 +843,20 @@ public class MamiAdsPO {
      */
     public void userContinuePaymentBuySaldoMamiads() {
         playwright.clickOn(continuePaymentBuySaldoMamiads);
+    }
+
+    public boolean warningBannerIsOccured() {
+        return playwright.waitTillLocatorIsVisible(warningIconBanner);
+    }
+
+    public void closeWarningBanner() {
+        playwright.clickOn(closeBtnWarningBanner);
+    }
+
+    public void clickOnLihatInfoLanjutWarningBanner() {
+        this.page = page.waitForPopup(() -> {
+            playwright.clickOn(lihatInfoLanjutWarningBanner);
+        });
     }
 }
 
