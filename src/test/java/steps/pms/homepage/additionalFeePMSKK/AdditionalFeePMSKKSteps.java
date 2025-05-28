@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.pms.homepage.additionalFeePMSKK.AdditionalFeePMSKKPO;
 
@@ -63,9 +64,36 @@ public class AdditionalFeePMSKKSteps {
             } else {
                 Assert.assertEquals(additionalFeePMSKK.getHargaInListing(i), harga, "Harga does not match!");
             }
-
             i++;
-            additionalFeePMSKK.expandAddFee();
+        }
+        additionalFeePMSKK.expandAddFee();
+    }
+
+    @When("admin edit additional fee in {string}")
+    public void admin_edit_additional_fee_in(String listing) {
+        additionalFeePMSKK.expandAddFee();
+        if (listing.equalsIgnoreCase("Tipe A")){
+            additionalFeePMSKK.clickEditOnType(1000023998);
+        } else if (listing.equalsIgnoreCase("Tipe B")){
+            additionalFeePMSKK.clickEditOnType(1000024001);
+        } else if (listing.equalsIgnoreCase("Tipe C")){
+            additionalFeePMSKK.clickEditOnType(1000024002);
+        } else {
+            System.out.println("Invalid Listing Type");
+        }
+    }
+
+    @When("admin delete additional fee in {string}")
+    public void admin_delete_additional_fee_in(String listing) {
+        additionalFeePMSKK.expandAddFee();
+        if (listing.equalsIgnoreCase("Tipe A")) {
+            additionalFeePMSKK.clickDeleteOnType(1000023998);
+        } else if (listing.equalsIgnoreCase("Tipe B")) {
+            additionalFeePMSKK.clickDeleteOnType(1000024001);
+        } else if (listing.equalsIgnoreCase("Tipe C")) {
+            additionalFeePMSKK.clickDeleteOnType(1000024002);
+        } else {
+            System.out.println("Invalid Listing Type");
         }
     }
 }

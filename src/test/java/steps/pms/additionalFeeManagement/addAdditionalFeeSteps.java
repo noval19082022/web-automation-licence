@@ -53,6 +53,7 @@ public class addAdditionalFeeSteps {
     }
     @When("admin select satuan waktu biaya {string}")
     public void admin_select_satuan_waktu_biaya(String satuan) {
+        addAdditionalFee.clickSatuanWaktuBiayaDropdown();
         addAdditionalFee.selectSatuanWaktuBiaya(satuan);
     }
     @When("admin submit additional fee")

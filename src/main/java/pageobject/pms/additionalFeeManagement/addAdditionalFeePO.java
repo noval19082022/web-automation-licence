@@ -24,6 +24,7 @@ public class addAdditionalFeePO {
     private Locator toastMessage;
     private Locator fasePenyewaPilihBiayaBookingButton;
     private Locator fasePenyewaPilihBiayaStayButton;
+    private Locator satuanWaktuBiayaDropdown;
 
     public addAdditionalFeePO(Page page){
         this.page = page;
@@ -43,6 +44,7 @@ public class addAdditionalFeePO {
         toastMessage = page.locator(".global-toast");
         fasePenyewaPilihBiayaBookingButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Booking"));
         fasePenyewaPilihBiayaStayButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Stay"));
+        satuanWaktuBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih satuan waktu biaya"));
     }
 
     /**
@@ -153,8 +155,7 @@ public class addAdditionalFeePO {
      * @param satuan
      */
     public void selectSatuanWaktuBiaya(String satuan) {
-        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(satuan));
-
+        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(satuan)); //page.getByText("checkmarkBulanan")
         playwright.clickOn(satuanBiaya);
     }
 
@@ -210,5 +211,12 @@ public class addAdditionalFeePO {
         } else {
             System.out.println("Invalid Option");
         }
+    }
+
+    /**
+     * Click on Satuan Waktu Biaya Dropdown
+     */
+    public void clickSatuanWaktuBiayaDropdown() {
+        playwright.clickOn(satuanWaktuBiayaDropdown);
     }
 }
