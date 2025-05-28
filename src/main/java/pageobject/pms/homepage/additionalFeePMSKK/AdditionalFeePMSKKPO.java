@@ -23,6 +23,9 @@ public class AdditionalFeePMSKKPO {
     private Locator expandBtn;
     private Locator hargaInListing;
     private Locator kebabBtn;
+    private Locator editOnTypeButton;
+    private Locator deleteOnTypeButton;
+    private Locator deleteConfirmationButton;
 
     public AdditionalFeePMSKKPO(Page page){
         this.page = page;
@@ -30,9 +33,10 @@ public class AdditionalFeePMSKKPO {
 
         emptyState = page.getByText("Tidak ada data yang ditampilkan");
         tambahBiayaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Biaya"));
-        totalListingAdditionalFee = page.locator("tbody:first-of-type").nth(2).locator("td:nth-of-type(2)");
+        totalListingAdditionalFee = page.locator(".additional-fee-content__table-body-price-table tbody tr");
         expandBtn = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--sm']");
         kebabBtn = page.locator("//div[@data-testid='additional-fee-action']");
+        deleteConfirmationButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus").setExact(true));
     }
 
     /**
@@ -46,7 +50,7 @@ public class AdditionalFeePMSKKPO {
     /**
      * Clicks Tambah Biaya button in Biaya Tambahan table
      */
-    public void clicksTambahBiayaButton() {
+    public void clickAddFeeButton() {
         playwright.clickOn(tambahBiayaBtn);
     }
 
@@ -168,5 +172,24 @@ public class AdditionalFeePMSKKPO {
      */
     public boolean isKebabBtnVisible() {
         return playwright.isLocatorVisibleAfterLoad(kebabBtn, 10000.0);
+    }
+
+    /**
+     * Click Edit On Type button
+     * @param id
+     */
+    public void clickEditOnType(int id) {
+        editOnTypeButton = page.getByTestId("ubah-listing-price-"+id);
+        playwright.clickOn(editOnTypeButton);
+    }
+
+    /**
+     * Click Delete On Type button
+     * @param id
+     */
+    public void clickDeleteOnType(int id) {
+        deleteOnTypeButton = page.getByTestId("hapus-listing-price-"+id);
+        playwright.clickOn(deleteOnTypeButton);
+        playwright.clickOn(deleteConfirmationButton);
     }
 }
