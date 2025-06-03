@@ -44,7 +44,7 @@
 
     @continue @TEST_SS-853
     Scenario: Add new Additional Fee
-      When admin select satuan waktu biaya "Harian"
+      When admin choose satuan waktu biaya "Harian"
       And admin submit additional fee
       Then new additional fee "Automated Biaya PMAN" added
         | Tipe Pembayaran | Satuan Biaya Top  | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
@@ -62,21 +62,21 @@
       Then button tambah disabled
       #Nama Biaya Empty
       When admin select tipe pembayaran biaya "Tetap"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah disabled
       #Tipe Pembayaran biaya Empty
       When admin refresh page 0
       When admin input nama biaya "Automated Biaya PMAN"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah disabled
       # Waktu penentuan harga biaya Empty
       When admin refresh page 0
       When admin input nama biaya "Automated Biaya PMAN"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah disabled
@@ -91,20 +91,20 @@
       When admin refresh page 0
       When admin input nama biaya "Automated Biaya PMAN"
       When admin select tipe pembayaran biaya "Tetap"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       Then button tambah disabled
       #Fase penyewa pilih biaya empty
       When admin refresh page 0
       When admin input nama biaya "Automated Biaya PMAN"
       When admin select tipe pembayaran biaya "Tetap"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       Then button tambah disabled
       #All field is fill
       When admin refresh page 0
       When admin input nama biaya "Automated Biaya PMAN"
       When admin select tipe pembayaran biaya "Tetap"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       Then button tambah enable
@@ -120,7 +120,7 @@
       When admin add new additional fee
       And admin input nama biaya "Automated Biaya PMAN Deleted"
       And admin select tipe pembayaran biaya "Tetap"
-      And admin select satuan waktu biaya "Harian"
+      And admin choose satuan waktu biaya "Harian"
       And admin select penyewa bisa pilih mandiri "Ya"
       And admin select fase penyewa pilih biaya "Booking"
       And admin submit additional fee

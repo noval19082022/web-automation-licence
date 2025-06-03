@@ -1,5 +1,6 @@
 package steps.pms.homepage.additionalFeePMSKK;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;
@@ -155,5 +156,10 @@ public class AddAdditionalFeePMSKKSteps {
     @When("admin submit edit additional fee")
     public void admin_submit_edit_additional_fee() {
         addAdditionalFeePMSKK.clicksEditButtonInBiayaTambahanPopUp();
+    }
+    @When("admin select satuan waktu biaya {string}")
+    public void admin_select_satuan_waktu_biaya(String satuan) {
+        addAdditionalFeePMSKK.clickSatuanWaktuBiayaDropdown();
+        addAdditionalFeePMSKK.selectSatuanWaktuBiaya(satuan);
     }
 }

@@ -24,7 +24,6 @@ public class addAdditionalFeePO {
     private Locator toastMessage;
     private Locator fasePenyewaPilihBiayaBookingButton;
     private Locator fasePenyewaPilihBiayaStayButton;
-    private Locator satuanWaktuBiayaDropdown;
 
     public addAdditionalFeePO(Page page){
         this.page = page;
@@ -44,7 +43,6 @@ public class addAdditionalFeePO {
         toastMessage = page.locator(".global-toast");
         fasePenyewaPilihBiayaBookingButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Booking"));
         fasePenyewaPilihBiayaStayButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Stay"));
-        satuanWaktuBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih satuan waktu biaya"));
     }
 
     /**
@@ -150,15 +148,6 @@ public class addAdditionalFeePO {
         return playwright.isButtonDisable(penyewaBisaPilihMandiriTidakRadioButton);
     }
 
-    /**
-     * Select satuan waktu biaya
-     * @param satuan
-     */
-    public void selectSatuanWaktuBiaya(String satuan) {
-        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(satuan)); //page.getByText("checkmarkBulanan")
-        playwright.clickOn(satuanBiaya);
-    }
-
 
     /**
      * submit additional fee
@@ -214,9 +203,20 @@ public class addAdditionalFeePO {
     }
 
     /**
-     * Click on Satuan Waktu Biaya Dropdown
+     * Select satuan waktu biaya
+     * @param waktu
      */
-    public void clickSatuanWaktuBiayaDropdown() {
-        playwright.clickOn(satuanWaktuBiayaDropdown);
+    public void selectSatuanWaktuBiaya(String waktu) {
+        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(waktu)); //page.getByText("checkmarkBulanan")
+        playwright.clickOn(satuanBiaya);
+    }
+
+    /**
+     * Select satuan besaran biaya
+     * @param besaran
+     */
+    public void selectSatuanBesaranBiaya(String besaran) {
+        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(besaran)); //page.getByText("checkmarkBulanan")
+        playwright.clickOn(satuanBiaya);
     }
 }

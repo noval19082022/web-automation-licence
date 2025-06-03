@@ -1,4 +1,4 @@
-@regression @pman2 @pms @additionalFeePMSKK
+@regression @pman2 @pms @additionalFeePMSKK @fail
 
 Feature: Additional Fee PMS KK
 
@@ -154,6 +154,87 @@ Feature: Additional Fee PMS KK
     #@TEST_PMAN-8663
     #Scenario: Delete additional fee in General Level
     When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
+
+  @TEST_SS-7636 @continue
+  Scenario: Add existing additional fee
+    Given admin go to pms singgahsini
+    And admin login pms :
+      | email             | password        |
+      | pman@mamiteam.com | pmanM4m1t34m!!  |
+    And admin go to detail property "Harapan Bunda"
+    And admin see detail kerja sama
+    When admin add existing additional fee "Benefit Asuransi & Biaya Admin"
+    Then admin can't find additional fee
+
+  @TEST_SS-7637 @continue
+  Scenario: Add additional fee in specific listing
+    When admin go to pms singgahsini
+    And admin go to detail property "Khusus Automation"
+    And admin see detail kerja sama
+    And admin select additional fee "Bawa Rice Cooker"
+    And admin turn off toggle terapkan ke semua listing
+    Then dropdown pilih listing appear
+    And dropdown pilih listing contains listing
+      | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara |
+      | Kost Apik Khusus Automation PMAN Tipe B Halmahera Utara |
+      | Kost Apik Khusus Automation PMAN Tipe C Halmahera Utara |
+    When admin check listing "Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara"
+    And admin select ketentuan bagi hasil "Full ke Pemilik"
+    And admin select satuan waktu biaya "Bulanan"
+    And admin fill harga bulanan "30000"
+    And admin select satuan besaran biaya "Item/pcs"
+    And admin submit additional fee pms
+    Then additional fee is created in PMS KK
+      | Nama Biaya       | Penyewa Bisa Pilih Mandiri | Jenis Biaya | Termasuk di Dalam Harga Sewa  | Tipe Pembayaran Biaya | Ketentuan Bagi Hasil  |
+      | Bawa Rice Cooker | Ya  Booking dan Stay       | Opsional    | Tidak                         | Tetap                 | Full ke Pemilik       |
+    And additional fee is created in every listing
+      | Listing | Harga                           |
+      | Tipe A  | Rp30.000 / Bulan (Per item/pcs) |
+    #delete additional fee
+    When admin delete additional fee in General Level
+    Then additional fee is deleted from Biaya Tambahan table
+
+  @TEST_SS-143 @continue
+  Scenario: Edit additional fee in listing level
+    #Add new additional fee
+    When admin select additional fee "Alat Elektronik"
+    And admin select ketentuan bagi hasil "Sesuai Basic Commission"
+    And admin choose jenis biaya "Opsional"
+    And admin select satuan waktu biaya "Bulanan"
+    And admin fill harga bulanan "1000000"
+    And admin select satuan besaran biaya "Item/pcs"
+    And admin submit additional fee pms
+    Then additional fee is created in PMS KK
+      | Nama Biaya       | Penyewa Bisa Pilih Mandiri | Jenis Biaya | Termasuk di Dalam Harga Sewa  | Tipe Pembayaran Biaya | Ketentuan Bagi Hasil   |
+      | Alat Elektronik  | Tidak                      | Opsional    | Tidak                         | Tetap                 | Sesuai Basic Commission|
+    And additional fee is created in every listing
+      | Listing | Harga                               |
+      | Tipe A  | Rp1.000.000 / Bulan (Per item/pcs)  |
+      | Tipe B  | Rp1.000.000 / Bulan (Per item/pcs)  |
+      | Tipe C  | Rp1.000.000 / Bulan (Per item/pcs)  |
+    #Edit additional fee
+    When admin edit additional fee in "Tipe A"
+    And admin fill harga bulanan "200000"
+    And admin submit edit additional fee
+    Then additional fee is created in every listing
+      | Listing | Harga                               |
+      | Tipe A  | Rp200.000 / Bulan (Per item/pcs)    |
+      | Tipe B  | Rp1.000.000 / Bulan (Per item/pcs)  |
+      | Tipe C  | Rp1.000.000 / Bulan (Per item/pcs)  |
+
+  @TEST_SS-140
+  Scenario: Delete additional fee in Listing level
+    When admin delete additional fee in "Tipe A"
+    Then additional fee is created in every listing
+      | Listing | Harga                               |
+      | Tipe B  | Rp1.000.000 / Bulan (Per item/pcs)  |
+      | Tipe C  | Rp1.000.000 / Bulan (Per item/pcs)  |
+    When admin delete additional fee in "Tipe B"
+    Then additional fee is created in every listing
+      | Listing | Harga                               |
+      | Tipe C  | Rp1.000.000 / Bulan (Per item/pcs)  |
+    When admin delete additional fee in "Tipe C"
     Then additional fee is deleted from Biaya Tambahan table
 
   @TEST_SS-7636 @continue
