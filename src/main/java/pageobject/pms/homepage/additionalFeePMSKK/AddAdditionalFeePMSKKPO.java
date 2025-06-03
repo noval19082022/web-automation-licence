@@ -37,6 +37,8 @@ public class AddAdditionalFeePMSKKPO {
     private Locator satuanBesaranBiayaDropdown;
     private Locator feeUnitRadioButton;
     private Locator feeOptionRadioButton;
+    private Locator satuanBiaya;
+    private Locator satuanWaktuBiayaDropdown;
 
     public AddAdditionalFeePMSKKPO(Page page){
         this.page = page;
@@ -56,6 +58,7 @@ public class AddAdditionalFeePMSKKPO {
         dropdownListing = page.locator(".search-checkbox__trigger", new Page.LocatorOptions().setHasText("Pilih listing yang akan diterapkan"));
         closeButton = page.locator(".bg-c-modal__action-closable");
         satuanBesaranBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih satuan besaran biaya"));
+        satuanWaktuBiayaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih satuan waktu biaya"));
     }
 
     /**
@@ -278,5 +281,21 @@ public class AddAdditionalFeePMSKKPO {
      */
     public void clicksEditButtonInBiayaTambahanPopUp() {
         playwright.clickOn(ubahBtnInTambahBiayaTambahan);
+    }
+
+    /**
+     * Click on Satuan Waktu Biaya Dropdown
+     */
+    public void clickSatuanWaktuBiayaDropdown() {
+        playwright.clickOn(satuanWaktuBiayaDropdown);
+    }
+
+    /**
+     * Select satuan waktu biaya
+     * @param satuan
+     */
+    public void selectSatuanWaktuBiaya(String satuan) {
+        satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(satuan)); //page.getByText("checkmarkBulanan")
+        playwright.clickOn(satuanBiaya);
     }
 }

@@ -51,10 +51,13 @@ public class addAdditionalFeeSteps {
         Assert.assertTrue(addAdditionalFee.isPenyewaBisaPilihMandiriYaDisabled());
         Assert.assertTrue(addAdditionalFee.isPenyewaBisaPilihMandiriTidakDisabled());
     }
-    @When("admin select satuan waktu biaya {string}")
-    public void admin_select_satuan_waktu_biaya(String satuan) {
-        addAdditionalFee.clickSatuanWaktuBiayaDropdown();
-        addAdditionalFee.selectSatuanWaktuBiaya(satuan);
+    @When("admin choose satuan waktu biaya {string}")
+    public void admin_choose_satuan_waktu_biaya(String waktu) {
+        addAdditionalFee.selectSatuanWaktuBiaya(waktu);
+    }
+    @When("admin choose satuan besaran biaya {string}")
+    public void admin_choose_satuan_besaran_biaya(String besaran) {
+        addAdditionalFee.selectSatuanBesaranBiaya(besaran);
     }
     @When("admin submit additional fee")
     public void admin_submit_additional_fee() {
