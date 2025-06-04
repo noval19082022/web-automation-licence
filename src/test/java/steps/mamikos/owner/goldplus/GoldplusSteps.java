@@ -264,6 +264,7 @@ public class GoldplusSteps {
         chat.dismissFtueSurveyIfExist();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBolaIfExist();
+        chat.dismissFTUETBCIfExist();
         chat.searchChatTenant(tenantName);
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
