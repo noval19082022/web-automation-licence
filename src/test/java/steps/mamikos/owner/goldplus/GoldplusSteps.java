@@ -260,7 +260,7 @@ public class GoldplusSteps {
     @When("owner click {string} button on chatrooms {string}")
     public void ownerClickButtonOnChatrooms(String buttonTxt, String tenantName) {
         chat.clickChatOwner();
-        chat.dismissFTUEMars();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBolaIfExist();
         chat.searchChatTenant(tenantName);
