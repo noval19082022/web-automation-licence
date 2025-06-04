@@ -1,4 +1,4 @@
-@GPinvoiceList @invoice @listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD
+@GPinvoiceList @invoice @listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD @invoiceGPMamipay
 Feature: Check search function GP Invoice
 
   @TEST_LIMO-3502 @Automated @GP-Invoice-List @MamiPay @Web @essential-limo @listing-monetization @search-GP-Invoice @continue
@@ -58,12 +58,12 @@ Feature: Check search function GP Invoice
   @TEST_LIMO-3512 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Package Goldplus 1
     When admin search invoice Goldplus based on Package and value "gp1"
-    Then user will see that the text "GP1" is displayed
+    Then user will see that the text "GP1" is displayed on the table
 
   @TEST_LIMO-3513 @continue @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on Package Goldplus 2
     When admin search invoice Goldplus based on Package and value "gp2"
-    Then user will see that the text "GP2" is displayed
+    Then user will see that the text "GP2" is displayed on the table
 
   @TEST_LIMO-3514 @search-GP-Invoice
   Scenario: Search Invoice Goldplus based on date
