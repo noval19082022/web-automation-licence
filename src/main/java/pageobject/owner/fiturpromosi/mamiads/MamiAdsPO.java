@@ -59,6 +59,8 @@ public class MamiAdsPO {
     //--- Beli Saldo Mamiads Page ----//
     private Locator countHistoryIcon;
     private Locator detailTagihanSection;
+    private Locator unselectedGoldplus;
+    private Locator selectedGoldplus;
     //--- voucher ---//
     private Locator inputVoucher;
     private Locator inputVoucherPopUp;
@@ -127,6 +129,8 @@ public class MamiAdsPO {
         //--- Beli Saldo Mamiads Page ---//
         this.countHistoryIcon = page.locator(".history-icon__counter");
         this.detailTagihanSection = page.locator(".purchase-detail__header");
+        this.unselectedGoldplus = page.locator("(//button[normalize-space()='Ditambahkan'])[1]");
+        this.selectedGoldplus = page.locator("(//button[normalize-space()='Tambahkan'])[1]");
 
         //--- voucher owner ---//
         this.inputVoucher = page.getByTestId("masukkan_link");
@@ -223,6 +227,9 @@ public class MamiAdsPO {
     }
 
     public void clickSaldoMamiadsCard() {
+        if (playwright.isButtonWithTextDisplayed("Nanti Saja")) {
+            playwright.clickOnTextButton("close");
+        }
         playwright.clickOn(saldoMamiadsCard);
     }
 
@@ -299,6 +306,22 @@ public class MamiAdsPO {
             // default saldo is 6000
             playwright.clickOn(saldoAmountFirstIndex);
             playwright.clickOn(buySaldoBtnList);
+        }
+    }
+
+    /**
+     * buy saldo with GP or not GP on mamiads saldo page
+     */
+    public void selectGoldplusOrunSelectGoldplus(String goldplus) {
+        switch (goldplus) {
+            case "notBuyGP":
+                playwright.clickOn(unselectedGoldplus);
+                break;
+            case "buyGP":
+                playwright.clickOn(selectedGoldplus);
+                break;
+            default:
+                System.out.println("Parameter goldplus = " + goldplus);
         }
     }
 

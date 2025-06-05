@@ -32,9 +32,9 @@ Feature: Owner GPSP
     And user wants to subscribe Goldplus 1
     And tenant make bill payments using "ovo"
     Then owner see billing details invoice
-      | GoldPlus 1                |
-      | Rp79.000                  |
-      | Total Pembayaran Rp82.500 |
+      | GoldPlus 1 (reg#1m) (1 Bulan) |
+      | Rp79.000                            |
+      | Total Pembayaran Rp82.500           |
     And owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
     And owner try to logout from mamikos
@@ -64,9 +64,11 @@ Feature: Owner GPSP
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice more than 1
     When user click Lihat Tagihan on riwayat
-#    Then payment owner success using ovo as payment method
+    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | GoldPlus 2 |
+      | GP High Segment periode 1 Bulan |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
     And owner try to logout from mamikos
 
     # deleted assignment from admin
@@ -224,11 +226,13 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And payment owner success using ovo as payment method
+   # And owner select payment using alfamart xendit as payment method from invoice detail
+    Then payment owner success using ovo as payment method
+    Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment            |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GP High Segment (1 Bulan) |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
     And owner try to logout from mamikos
@@ -279,11 +283,13 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And  payment owner success using ovo as payment method
+    #And owner select payment using alfamart xendit as payment method from invoice detail
+    Then payment owner success using ovo as payment method
+    Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment            |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GP High Segment (1 Bulan) |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
     And owner try to logout from mamikos
@@ -303,10 +309,10 @@ Feature: Owner GPSP
       | Ayo, segera perpanjang paket GoldPlus Anda sekarang. |
     And owner wants to paid invoice recurring from recurring pop up
     Then owner will see that the text is displayed
-      | GP High Segment            |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
-    And  payment owner success using ovo as payment method
+      | GP High Segment (1 Bulan)  |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
+    And owner select payment using alfamart xendit as payment method from invoice detail
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
 
@@ -334,11 +340,11 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And tenant make bill payments using "ovo"
+    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | Rincian Pembayaran GP High Segment |
-      | Rp130.000                          |
-      | Total Pembayaran Rp133.500         |
+      | Rincian Pembayaran GP High Segment (1 Bulan) |
+      | Rp130.000                                          |
+      | Total Pembayaran Rp133.500                         |
     And owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
     And owner try to logout from mamikos

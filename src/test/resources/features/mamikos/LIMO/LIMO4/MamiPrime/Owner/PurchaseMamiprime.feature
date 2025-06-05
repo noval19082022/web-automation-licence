@@ -92,12 +92,12 @@ Feature: Purchase Mamiprime
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     Then "Keyword" are displayed in the register mamiprime
-      | Keyword       |
-      | jatiwaringin  |
-      | rajeg         |
-      | jatiwar       |
-      | sasak         |
-      | jati waringin |
+      | Keyword   |
+      | tegalan   |
+      | Tanjung p |
+      | Tegal A   |
+      | Tj.p      |
+      | Telukna   |
 
   @TEST_LIMO-4782 @WEB @AUTOMATED
   Scenario: Click on Hubungi kami on page Lihat kata kunci
