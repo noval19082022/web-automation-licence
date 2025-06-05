@@ -179,4 +179,9 @@ public class TenantCommunicationSteps {
     public void user_click_track_status_chat_wa() {
         tenantCommunication.clickTrackStatusWAButton();
     }
+
+    @And("user search kost name with {string}")
+    public void user_search_kost_name_with(String kostName) {
+        tenantCommunication.searchKostName(kostName);
+    }
 }

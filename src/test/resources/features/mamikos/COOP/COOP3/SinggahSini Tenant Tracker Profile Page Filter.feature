@@ -12,7 +12,7 @@ Feature: SinggahSini Tenant Tracker Profile Page Filter
     And user choose "Nama Penyewa" and input "Adisinggahsini" in the search field on main page
     And user click search button on main page filter
     And user clicks on the tenant name on the first row
-    And user choose "Nama Penyewa" and input "Kost Adi Manual" in the search field on main page
+    And user search kost name with "Kost Adi Manual"
     And user click search button on main page filter
     Then user see pagination menu on Detail Tenant is displayed
     And user verify nama property on profile page filter is "Kost Adi Manual"

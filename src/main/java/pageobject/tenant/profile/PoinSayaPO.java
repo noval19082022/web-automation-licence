@@ -199,6 +199,7 @@ public class PoinSayaPO {
      * @return boolean
      */
     public Boolean isInformasiPoinButtonDisplayed() {
+        playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(informasiPoinButton);
     }
 
