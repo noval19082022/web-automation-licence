@@ -1,4 +1,4 @@
-@LIMO2 @viu
+@LIMO2
 Feature: Owner GPSP
 
   Background: reset gp owner
@@ -309,7 +309,7 @@ Feature: Owner GPSP
       | Ayo, segera perpanjang paket GoldPlus Anda sekarang. |
     And owner wants to paid invoice recurring from recurring pop up
     Then owner will see that the text is displayed
-      | GP High Segment periode 1 Bulan |
+      | GP High Segment (1 Bulan)  |
       | Rp130.000                       |
       | Total Pembayaran Rp133.500      |
     And owner select payment using alfamart xendit as payment method from invoice detail

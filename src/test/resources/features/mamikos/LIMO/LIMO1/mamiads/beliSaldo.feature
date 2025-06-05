@@ -99,7 +99,6 @@ Feature: Beli Saldo
     And payment owner success using ovo as payment method
     Then owner verify invoice success paid mamiads
 
-
   @TEST_LIMO-8304
   Scenario: View MA-only Purchase
     Given user go to mamikos homepage
