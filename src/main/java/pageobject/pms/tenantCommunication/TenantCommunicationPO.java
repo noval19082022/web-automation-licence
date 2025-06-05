@@ -42,6 +42,7 @@ public class TenantCommunicationPO {
     Locator buttonTambahStatusWA;
     Locator getStatusWA;
     Locator trackChatWAButton;
+    Locator searchKostName;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -70,6 +71,7 @@ public class TenantCommunicationPO {
         buttonTambahStatusWA = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah"));
         getStatusWA = page.locator("tbody > tr:nth-of-type(1) .table-body__label");
         trackChatWAButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plusTrack Status Chat WA"));
+        searchKostName = page.locator("//input[@data-testid=\"search-field\"]");
     }
 
     /**
@@ -361,6 +363,13 @@ public class TenantCommunicationPO {
      */
     public void clickTrackStatusWAButton() {
         playwright.clickOn(trackChatWAButton);
+    }
+
+    /**
+     * search kost name
+     */
+    public void searchKostName(String kostName) {
+        playwright.fill(searchKostName, kostName);
     }
 
 }
