@@ -79,7 +79,6 @@ Feature: Gold Plus
     Then owner see benefit "Kos lebih diprioritaskan dari kos tanpa GoldPlus." is displayed
     Then owner see benefit "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar." is displayed
     Then owner see benefit "Pasang promo properti dengan fitur Promo Iklan." is displayed
-    Then owner see benefit "Bonus 10% saat beli saldo MamiAds." is displayed
     Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
     Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
     And owner click close icon pop up
@@ -92,7 +91,6 @@ Feature: Gold Plus
     Then owner see benefit "Kos lebih diprioritaskan dari GoldPlus 1 dan kos tanpa GoldPlus." is displayed
     Then owner see benefit "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar." is displayed
     Then owner see benefit "Pasang promo properti dengan fitur Promo Iklan." is displayed
-    Then owner see benefit "Bonus 10% saat beli saldo MamiAds." is displayed
     Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
     Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
 

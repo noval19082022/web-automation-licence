@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD
+@listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD @CreateContract
 Feature: Create Contract Goldplus at Mamipay
 
   @createContractGP @continue @TEST_LIMO-3553
