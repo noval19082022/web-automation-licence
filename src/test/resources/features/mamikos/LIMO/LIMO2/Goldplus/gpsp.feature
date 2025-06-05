@@ -1,4 +1,4 @@
-@LIMO2
+@LIMO2 @viu
 Feature: Owner GPSP
 
   Background: reset gp owner
@@ -32,7 +32,7 @@ Feature: Owner GPSP
     And user wants to subscribe Goldplus 1
     And tenant make bill payments using "ovo"
     Then owner see billing details invoice
-      | GoldPlus 1 (reg#1m) periode 1 Bulan |
+      | GoldPlus 1 (reg#1m) (1 Bulan) |
       | Rp79.000                            |
       | Total Pembayaran Rp82.500           |
     And owner navigates to owner dashboard
@@ -64,10 +64,11 @@ Feature: Owner GPSP
     And owner navigates to "/goldplus/payment"
     Then verify unpaid invoice more than 1
     When user click Lihat Tagihan on riwayat
-#    Then payment owner success using ovo as payment method
+    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | GoldPlus 2 |
-      | GP2        |
+      | GP High Segment periode 1 Bulan |
+      | Rp130.000                       |
+      | Total Pembayaran Rp133.500      |
     And owner try to logout from mamikos
 
     # deleted assignment from admin
@@ -225,10 +226,11 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And owner select payment using alfamart xendit as payment method from invoice detail
+   # And owner select payment using alfamart xendit as payment method from invoice detail
+    Then payment owner success using ovo as payment method
     Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment periode 1 Bulan |
+      | GP High Segment (1 Bulan) |
       | Rp130.000                       |
       | Total Pembayaran Rp133.500      |
     And owner navigates to owner dashboard
@@ -281,10 +283,11 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And owner select payment using alfamart xendit as payment method from invoice detail
+    #And owner select payment using alfamart xendit as payment method from invoice detail
+    Then payment owner success using ovo as payment method
     Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment periode 1 Bulan |
+      | GP High Segment (1 Bulan) |
       | Rp130.000                       |
       | Total Pembayaran Rp133.500      |
     And owner navigates to owner dashboard
@@ -337,9 +340,9 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And tenant make bill payments using "ovo"
+    Then payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | Rincian Pembayaran GP High Segment periode 1 Bulan |
+      | Rincian Pembayaran GP High Segment (1 Bulan) |
       | Rp130.000                                          |
       | Total Pembayaran Rp133.500                         |
     And owner navigates to owner dashboard

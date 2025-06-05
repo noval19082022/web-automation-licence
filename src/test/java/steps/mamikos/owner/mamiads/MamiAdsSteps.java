@@ -55,6 +55,28 @@ public class MamiAdsSteps {
         detailTagihanPO.clicksOnBayarSekarangButton();
     }
 
+    @And("owner want to buy mamiads saldo with nominal {string} without buying Goldplus {string}")
+    public void ownerWantToBuyMamiadsSaldoWithoutGP(String saldo, String goldplus) {
+        mamiAdsPO.clickSaldoMamiadsCard();
+        mamiAdsPO.handleRedirectToMamiadsWebview();
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+        mamiAdsPO.selectGoldplusOrunSelectGoldplus(goldplus);
+        detailTagihanPO.clicksOnBayarSekarangButton();
+    }
+
+    @And("owner want to buy mamiads saldo with nominal {string} with buying Goldplus {string}")
+    public void ownerWantToBuyMamiadsSaldoWithGP(String saldo, String goldplus) {
+        mamiAdsPO.clickSaldoMamiadsCard();
+        mamiAdsPO.handleRedirectToMamiadsWebview();
+       // mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
+        mamiAdsPO.choosingSaldoToBuy(saldo);
+        mamiAdsPO.selectGoldplusOrunSelectGoldplus(goldplus);
+        detailTagihanPO.clicksOnBayarSekarangButton();
+    }
+
     @And("user filter iklan by iklan nonaktif")
     public void userFilterIklanByIklanNonaktif() {
         mamiAdsPO.clickOnSemuaIklan();

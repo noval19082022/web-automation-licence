@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @beliSaldo @DONEMIGRATINGTONEWBOARD
+@regression @LIMO1 @LIMO1-staging @beliSaldo @DONEMIGRATINGTONEWBOARD @viu
 Feature: Beli Saldo
 
   @TEST_LIMO-3333 @belisaldo @continue
@@ -73,3 +73,64 @@ Feature: Beli Saldo
     And user will see title and message on Dalam Proses tab
     And user click "Selesai"
     Then user will see title and message on Selesai tab
+
+  @TEST_LIMO-8300 @continue
+  Scenario: Purchase MamiAds without GP
+    #scenario reset gp
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Goldplus for owner with phone number "0891202513"
+   #scenario buy mamiads
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 0891202513  | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp10.000" without buying Goldplus "notBuyGP"
+    And payment owner success using ovo as payment method
+    Then owner verify invoice success paid mamiads
+
+  @TEST_LIMO-8301
+  Scenario: Purchase MamiAds with GP
+    And owner close page number 1
+    When owner navigates to owner dashboard
+    And owner want to buy mamiads saldo with nominal "Rp10.000" with buying Goldplus "buyGP"
+    And payment owner success using ovo as payment method
+    Then owner verify invoice success paid mamiads
+
+
+  @TEST_LIMO-8304
+  Scenario: View MA-only Purchase
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 0891202513  | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp80.000"
+    And user navigate to mamiads history page
+    Then admin should be able to see the text "Saldo 80 ribu"
+    And user continue payment buy saldo mamiads
+    And owner set active page to 1
+    And payment user success using ovo as payment method
+    Then owner verify invoice success paid mamiads
+
+  @TEST_LIMO-8305
+  Scenario: View MA + GP Purchase
+    #scenario reset gp
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Goldplus for owner with phone number "0891202513"
+   #scenario buy mamiads
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 0891202513  | 08123450977 | qwerty123 |
+    And owner want to buy mamiads saldo with nominal "Rp80.000"
+    And user navigate to mamiads history page
+    Then admin should be able to see the text "Saldo 80 ribu"
+    And user continue payment buy saldo mamiads
+    And owner set active page to 1
+    And payment user success using ovo as payment method
+    Then owner verify invoice success paid mamiads
