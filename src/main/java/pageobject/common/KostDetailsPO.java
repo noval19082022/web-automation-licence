@@ -275,6 +275,14 @@ public class KostDetailsPO {
     Locator toggleFotoKartuIdentitas;
     Locator toggleJatuhTempo;
 
+    //-------------------USP---------------//
+    private Locator uspHeader;
+    private Locator uspContainer;
+    private Locator uspTitle;
+    private Locator uspDescription;
+    private Locator refundTitle;
+    private Locator refundDescription;
+
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -514,6 +522,14 @@ public class KostDetailsPO {
         notificationOnHeader = page.locator("//a[@aria-label='notification']");
         toggleFotoKartuIdentitas = page.locator("(//input[@type='checkbox'])[1]");
         toggleJatuhTempo = page.locator("(//input[@type='checkbox'])[2]");
+
+        //-------------------USP---------------//
+        uspHeader = page.locator(".detail-kost-benefit-title");
+        uspContainer = page.getByTestId("kostBenefitContent");
+        uspTitle = page.locator(".detail-kost-benefit-content-wrapper-information__title");
+        uspDescription = page.locator(".detail-kost-benefit-content-wrapper-information__subtitle");
+        refundTitle = page.locator(".detail-kost-refund__title");
+        refundDescription = page.locator(".detail-kost-refund__description");
 
     }
 
@@ -2402,5 +2418,50 @@ public class KostDetailsPO {
 
             if (maxloop == 100) break;
         } while (!mapSection.isVisible());
+    }
+
+    /**
+     * Get USP header
+     * @return String USP header
+     */
+    public String  getUSPHeader() {
+        playwright.pageScrollInView(uspHeader);
+        return playwright.getText(uspHeader);
+    }
+
+    /**
+     * Get USP title
+     * @param index USP title index
+     * @return String USP title
+     */
+    public String getUSPTitle(int index) {
+        playwright.pageScrollToDown(600);
+        return playwright.getText(uspTitle.nth(index));
+    }
+
+    /**
+     * Get USP description
+     * @param index USP description index
+     * @return String USP description
+     */
+    public String getUSPDescription(int index) {
+        return playwright.getText(uspDescription.nth(index));
+    }
+
+    /**
+     * Get refund title
+     * @return String refund title
+     */
+    public String getRefundTitle() {
+        playwright.pageScrollToDown(600);
+        return playwright.getText(refundTitle);
+    }
+
+    /**
+     * Get refund description
+     * @return String refund description
+     */
+    public String getRefundDescription() {
+        return playwright.getText(refundDescription);
     }
 }

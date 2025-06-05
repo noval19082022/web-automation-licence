@@ -261,6 +261,10 @@ public class ChatOwnerPO {
         playwright.clickOn(sayaMengertiChatRoom);
     }
 
+    public void dismissFTUETBCIfExist() {
+        playwright.clickIfElementVisible(sayaMengertiChatRoom, sayaMengertiChatRoom,3_0000.0);
+    }
+
     /**
      * Dismiss FTUE Broadcast
      */

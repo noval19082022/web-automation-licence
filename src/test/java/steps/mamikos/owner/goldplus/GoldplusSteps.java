@@ -261,8 +261,10 @@ public class GoldplusSteps {
     public void ownerClickButtonOnChatrooms(String buttonTxt, String tenantName) {
         chat.clickChatOwner();
         chat.dismissFTUEMars();
+        chat.dismissFtueSurveyIfExist();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBolaIfExist();
+        chat.dismissFTUETBCIfExist();
         chat.searchChatTenant(tenantName);
         chat.clickButtonOnChatRoomList(buttonTxt);
     }

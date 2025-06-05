@@ -1,4 +1,4 @@
-@LIMO2
+@LIMO2 @GPSPOWNER
 Feature: Owner GPSP
 
   Background: reset gp owner
@@ -368,10 +368,10 @@ Feature: Owner GPSP
     And owner navigates to owner dashboard
     And user click widget GP "Menunggu Pembayaran"
     And user click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
-    And owner select payment using alfamart xendit as payment method from invoice detail
+    And payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | Rincian Pembayaran GP High Segment periode 1 Bulan |
-      | Rp130.000                                          |
-      | Total Pembayaran Rp133.500                         |
+      | GP High Segment            |
+      | Rp130.000                  |
+      | Total Pembayaran Rp133.500 |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
