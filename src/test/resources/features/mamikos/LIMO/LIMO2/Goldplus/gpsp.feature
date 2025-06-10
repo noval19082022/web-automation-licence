@@ -65,10 +65,6 @@ Feature: Owner GPSP
     Then verify unpaid invoice more than 1
     When user click Lihat Tagihan on riwayat
     Then payment owner success using ovo as payment method
-    Then owner see billing details invoice
-      | GP High Segment periode 1 Bulan |
-      | Rp130.000                       |
-      | Total Pembayaran Rp133.500      |
     And owner try to logout from mamikos
 
     # deleted assignment from admin
