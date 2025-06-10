@@ -267,6 +267,7 @@ public class GoldplusSteps {
         chat.dismissFTUETBCIfExist();
         chat.searchChatTenant(tenantName);
         chat.clickButtonOnChatRoomList(buttonTxt);
+        chat.dismissFTUETBCIfExist();
     }
 
     //------ GP Onboarding ------//
