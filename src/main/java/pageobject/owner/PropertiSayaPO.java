@@ -718,7 +718,6 @@ public class PropertiSayaPO {
         }
     }
 
-
     /**
      * Click on close at pop up BBK on property saya
      */
