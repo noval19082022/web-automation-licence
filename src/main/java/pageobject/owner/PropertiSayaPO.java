@@ -709,8 +709,13 @@ public class PropertiSayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        playwright.waitFor(closePopupBBKIcon);
-        playwright.clickOn(closePopupBBKIcon);
+        var popUpDismiss = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Ingin Kamar Kosong Anda Cepat")).locator("a").first();
+        if (playwright.isLocatorVisibleAfterLoad(popUpDismiss, 3000.0)) {
+            playwright.clickOn(popUpDismiss);
+        } else if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)) {
+            playwright.waitFor(closePopupBBKIcon);
+            playwright.clickOn(closePopupBBKIcon);
+        }
     }
 
 
@@ -2257,6 +2262,13 @@ public class PropertiSayaPO {
     public boolean BBKPopUpVisible() {
         Locator popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
         return playwright.isLocatorVisibleAfterLoad(popUpBBK, 2000.0);
+    }
+
+    /**
+     * Click on close at pop up BBL
+     */
+    public boolean CloseBtnPopUpBBKIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(closePopupBBKIcon, 2000.0);
     }
 
     /**

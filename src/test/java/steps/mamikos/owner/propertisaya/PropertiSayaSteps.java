@@ -223,7 +223,7 @@ public class PropertiSayaSteps {
     @And("owner close pop up BBK at kos list page")
     public void ownerClosePopUpBBKAtKosListPage() {
         loading.waitForLoadingIconDisappear();
-        if (propertySaya.BBKPopUpVisible()) {
+        if (propertySaya.BBKPopUpVisible() || propertySaya.CloseBtnPopUpBBKIsVisible()) {
             propertySaya.clickClosePopUpBBK();
         }
     }
