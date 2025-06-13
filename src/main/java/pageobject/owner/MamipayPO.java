@@ -74,6 +74,14 @@ public class MamipayPO {
      */
     public void inputTextField(String fieldName, String inputText) {
         String element = "[placeholder='Masukkan "+ fieldName +"']";
+
+        // switch the element
+        if (fieldName.contains("Pilih nama bank") || fieldName.contains("nama bank")) {
+            element = "[placeholder='Pilih nama bank']";
+        } else if (fieldName.contains("nama pemilik rekening")) {
+            element = "[placeholder='Pastikan sama dengan buku rekening bank']";
+        }
+
         playwright.forceFill(page.locator(element), inputText);
     }
 
