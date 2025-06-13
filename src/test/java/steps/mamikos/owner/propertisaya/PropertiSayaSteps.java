@@ -394,6 +394,7 @@ public class PropertiSayaSteps {
 
     @And("owner click tambah data iklan {string}")
     public void ownerClickTambahDataIklan(String jenisProperti) {
+        playwright.waitTillPageLoaded();
         if (playwright.isTextDisplayed("Beberapa Kos Belum Dapat Dibooking")) {
             propertySaya.clickClosePopUpBBKOnPropertySaya();
         }
