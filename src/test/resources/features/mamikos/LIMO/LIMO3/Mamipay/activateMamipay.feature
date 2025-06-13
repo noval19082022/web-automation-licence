@@ -39,9 +39,9 @@ Feature: Activate Mamipay
 
   @invalidName @continue @TEST_LIMO-3685
   Scenario: Invalid name
-    And owner input on "nama lengkap" ""
+    And owner input on "Masukkan nama lengkap Anda sesuai KTP" ""
     Then user should see the message "Nama lengkap tidak boleh kosong." displayed under text field
-    When owner input on "nama lengkap" "Yu"
+    When owner input on "Masukkan nama lengkap Anda sesuai KTP" "Yu"
     Then user should see the message "Minimal 3 Karakter" displayed under text field
     And verify mamipay form information:
     """
@@ -52,8 +52,8 @@ Feature: Activate Mamipay
 
   @submitInputFormDataDiri @TEST_LIMO-3686
   Scenario: Valid input form data diri
-    When owner input on "nama lengkap" "tiara"
-    Then verify kirim data button is disable
+    When owner input on "Masukkan nama lengkap Anda sesuai KTP Anda sesuai KTP" "tiara"
+    Given verify kirim data button is disable
     When owner check term and condition
     And owner set active page to 0
     And owner click term and condition

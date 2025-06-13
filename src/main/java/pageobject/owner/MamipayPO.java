@@ -25,7 +25,7 @@ public class MamipayPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
-        namaLengkap = page.locator("[placeholder='Masukkan nama lengkap']");
+        namaLengkap = page.locator("[placeholder='Masukkan nama lengkap Anda sesuai KTP']");
         infoMamipay = page.locator(".media-content");
         termAndConditionCheck = page.locator(".check");
         kirimDataButton = page.locator(".button");
