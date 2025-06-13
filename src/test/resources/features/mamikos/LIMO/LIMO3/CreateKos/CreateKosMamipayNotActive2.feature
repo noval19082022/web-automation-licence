@@ -161,6 +161,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"

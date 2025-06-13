@@ -78,6 +78,7 @@ Feature: Create new kos with owner not active BBK
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Campur"
@@ -213,6 +214,7 @@ Feature: Create new kos with owner not active BBK
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"

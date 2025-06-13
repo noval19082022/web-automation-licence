@@ -256,11 +256,11 @@ public class PropertiSayaPO {
         closePopupBBKIcon = page.locator(".bg-c-modal__action-closable");
         popUpBBkDialog = page.locator(".auto-active-bbk-intercept-modal");
         closeBBKDialog = page.locator(".owner-intercept-booking-modal__close-button");
-        fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
-        bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
-        bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
-        bankNameDropdown = page.getByPlaceholder("Masukkan nama bank");
-        termAndConsCheckbox = page.locator(".check");
+        fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap Anda sesuai KTP");
+        bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening");
+        bankOwnerNameTextbox = page.getByPlaceholder("Pastikan sama dengan buku rekening bank");
+        bankNameDropdown = page.getByPlaceholder("Pilih nama bank");
+        termAndConsCheckbox = page.locator(".bg-c-checkbox__icon");
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
