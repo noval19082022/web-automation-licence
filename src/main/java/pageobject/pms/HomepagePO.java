@@ -1090,7 +1090,7 @@ public class HomepagePO {
      * @return String All BSE Value
      */
     public String getAllBSEValueInTable(int indexBSE) {
-        BSEInTable = page.locator("tr td:nth-of-type(5)").nth(indexBSE);
+        BSEInTable = page.locator("tr td:nth-of-type(6)").nth(indexBSE);
         return playwright.getText(BSEInTable);
     }
 

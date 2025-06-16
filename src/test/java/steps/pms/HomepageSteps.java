@@ -375,7 +375,6 @@ public class HomepageSteps {
         for (i=0; i<totalRow; i++){
             playwright.waitTillPageLoaded();
             Assert.assertEquals(homepage.getAllBSEValueInTable(i), filter, "BSE does not match!");
-            System.out.println(homepage.getAllBSEValueInTable(i));
         }
     }
 
