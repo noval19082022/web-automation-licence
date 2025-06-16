@@ -31,22 +31,22 @@ Feature: Kontrak Kerja Sama
   @continue @TEST_SS-824 @pman2
   Scenario: See and Edit Informasi Transfer Pendapatan
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer     |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Transfer Bulanan         | 5 (Cut Off: 1-30/31) |
     #Admin edit informasi transfer pendapatan
     When admin edit informasi transfer pendapatan
       | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
-      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | Tanggal 20        |
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
-      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer    |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | Transfer Bulanan         | 20 (Cut Off: 16-15) |
     #revert back informasi transfer pendapatan
     When admin edit informasi transfer pendapatan
       | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Tanggal 5         |
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer     |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Transfer Bulanan         | 5 (Cut Off: 1-30/31) |
 
   @continue @TEST_SS-823
   Scenario: See and Edit Detail Kerja Sama
