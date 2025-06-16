@@ -668,7 +668,7 @@ public class PropertiSayaSteps {
                         contains(
                                 Mamikos.
                                         getPropertyKosName().
-                                        toLowerCase().replace("kos", "kost")
+                                        toLowerCase()
                         ),
                 "Kos name is wrong"
                         + " expected contains: " + Mamikos.getPropertyKosName()

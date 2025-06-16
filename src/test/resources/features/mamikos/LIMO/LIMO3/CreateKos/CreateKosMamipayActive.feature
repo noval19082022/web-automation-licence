@@ -113,7 +113,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos       | build kos | other note |
-      | kos Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
+      | kost Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |
@@ -234,7 +234,7 @@ Feature: Create Kos Mamipay Active
     Then verify message "Nama ini telah digunakan kos lain." the room type
     When owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos                   | build kos | other note                   |
-      | kos Automation TEST | no              |                | boy      | kos harusnya Kost noBBK noMamipay | 2020      | Akan dihapus setelah terbuat |
+      | kost Automation TEST | no              |                | boy      | kos harusnya Kost noBBK noMamipay | 2020      | Akan dihapus setelah terbuat |
     And owner set rules kos:
       | Ada jam malam |
     And owner upload rule kos
