@@ -27,7 +27,7 @@ public class MamipayPO {
 
         namaLengkap = page.locator("[placeholder='Masukkan nama lengkap Anda sesuai KTP']");
         infoMamipay = page.locator(".media-content");
-        termAndConditionCheck = page.locator(".check");
+        termAndConditionCheck = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         kirimDataButton = page.locator(".button");
         termAndCondition = page.locator("//a[.='Syarat dan Ketentuan']");
         username = page.locator(".c-mk-header__username");
