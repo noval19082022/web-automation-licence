@@ -39,4 +39,8 @@ public class LoadingPO {
             }
         }
     }
+
+    public boolean loadingAnimationIsExist() {
+        return playwright.waitTillLocatorIsVisible(loadingAnimation) || playwright.waitTillLocatorIsVisible(loadingIcon);
+    }
 }
