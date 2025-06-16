@@ -206,7 +206,7 @@ Feature: Create Kos Mamipay Active
       | phone stag   | password  |
       | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Property Automation Tipe GNR Tobelo Halmahera Utara" on property saya page
+    And owner search kost "Kost Property Automation Tipe GNR Tobelo Halmahera Utara" on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
     And user click button edit "Harga" kos
     And owner edit data harga kos as expected
