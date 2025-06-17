@@ -98,13 +98,15 @@ public class KontrakKerjaSamaSteps {
         String bankName = transfer.get(0).get("Nama Bank");
         String branch = transfer.get(0).get("Cabang");
         String pemilik = transfer.get(0).get("Nama Pemilik");
+        String tipeTransfer = transfer.get(0).get("Tipe Transfer Pendapatan");
         String tanggalTransfer = transfer.get(0).get("Tanggal Transfer");
 
-        contract.assertNoRekening(noRek);
-        contract.assertNamaBank(bankName);
-        contract.assertCabangBank(branch);
-        contract.assertNamaPemilikRekening(pemilik);
-        contract.assertTanggalTransfer(tanggalTransfer);
+        Assert.assertEquals(contract.getNoRekening(), noRek);
+        Assert.assertEquals(contract.getNamaBank(), bankName);
+        Assert.assertEquals(contract.getCabangBank(), branch);
+        Assert.assertEquals(contract.getNamaPemilikRekening(), pemilik);
+        Assert.assertEquals(contract.getTipeTransfer(), tipeTransfer);
+        Assert.assertEquals(contract.getTanggalTransfer(), tanggalTransfer);
     }
     @When("admin see detail kerja sama")
     public void admin_see_detail_kerja_sama() {

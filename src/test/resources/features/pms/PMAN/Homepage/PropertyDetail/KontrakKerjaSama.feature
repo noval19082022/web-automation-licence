@@ -31,43 +31,43 @@ Feature: Kontrak Kerja Sama
   @continue @TEST_SS-824 @pman2
   Scenario: See and Edit Informasi Transfer Pendapatan
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer     |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Transfer Bulanan         | 5 (Cut Off: 1-30/31) |
     #Admin edit informasi transfer pendapatan
     When admin edit informasi transfer pendapatan
       | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
-      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | Tanggal 20        |
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tanggal Transfer  |
-      | 10002000       | Muamalat    | Yogyakarta | Chandra       | 20                |
+      | Nomor Rekening | Nama Bank   | Cabang     | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer    |
+      | 10002000       | Muamalat    | Yogyakarta | Chandra       | Transfer Bulanan         | 20 (Cut Off: 16-15) |
     #revert back informasi transfer pendapatan
     When admin edit informasi transfer pendapatan
       | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Tanggal 5         |
     Then informasi transfer pendapatan should be match with data
-      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tanggal Transfer  |
-      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | 5                 |
+      | Nomor Rekening    | Nama Bank   | Cabang    | Nama Pemilik  | Tipe Transfer Pendapatan | Tanggal Transfer     |
+      | 10000245429       | Mandiri     | Bantul    | Yudha Ferroza | Transfer Bulanan         | 5 (Cut Off: 1-30/31) |
 
   @continue @TEST_SS-823
   Scenario: See and Edit Detail Kerja Sama
     When admin see detail kerja sama
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%               | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%              | -           | 75%             | 25%             | 12 Bulan      | 27 October 2024 | 26 October 2025   | Rp25.000          |
     #Admin edit detail kerja sama
     When admin edit detail kerja sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
-      | Singgahsini   | Commission Rate   | 15%               | Partial | 10            | 2000000   | 6 Bulan   | 5               | 4000000     | 12            | 5000              |
+      | Singgahsini   | Commission Rate   | 15%               | Partial | 10            | 2000000   | 6 Bulan   | 5               | 4000000     | 16            | 5000              |
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Singgahsini   | Commission Rate   | 15%               | 9           | Partial | 10%           | Rp2.000.000 | 6 Bulan   | 5%              | Rp4.000.000 | 70%             | 30%             | 12 Bulan      | 27 October 2023 | 26 October 2024   | Rp5.000           |
+      | Singgahsini   | Commission Rate   | 15%               | 9           | Partial | 10%           | Rp2.000.000 | 6 Bulan   | 5%              | Rp4.000.000 | 70%             | 30%             | 16 Bulan      | 27 October 2024 | 26 February 2026  | Rp5.000           |
     #revert back detail kerja sama
     When admin edit detail kerja sama
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Tipe JP | Presentase JP | Jumlah JP | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Jangka Waktu  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | Full A  | 5%            | 4000000   | None      | -               | -%          | 24            | 25000          |
+      | Apik          | Static Rate       | 20%               | Full A  | 5%            | 4000000   | None      | -               | -%          | 12            | 25000          |
     Then detail kerja sama should be match with data
       | Jenis Produk  | Model Kerja Sama  | Basic Commission  | Total Kamar | Tipe JP | Presentase JP | Jumlah JP   | Tipe ADP  | Presentase ADP  | Jumlah ADP  | Pemilik Booking | Mamikos Booking | Jangka Waktu  | Awal Kerja Sama | Akhir Kerja Sama  | Biaya Keanggotaan |
-      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%              | -           | 75%             | 25%             | 24 Bulan      | 27 October 2023 | 26 October 2025   | Rp25.000          |
+      | Apik          | Static Rate       | 20%               | 9           | Full A  | 5%            | Rp4.000.000 | -         | -%              | -           | 75%             | 25%             | 12 Bulan      | 27 October 2024 | 26 October 2025   | Rp25.000          |
 
   @TEST_SS-784 @continue
   Scenario: See and Edit Detail Kerja Sama Hybrid

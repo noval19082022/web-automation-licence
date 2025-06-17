@@ -44,6 +44,7 @@ public class KontrakKerjaSamaPO {
     Locator namaBank;
     Locator cabangBank;
     Locator namaPemilikRekening;
+    Locator tipeTransferPendapatan;
     Locator tanggalTransferPemilik;
     Locator ubahInformasiTransferPendapatanButton;
     //End Informasi Transfer Pendapatan
@@ -188,7 +189,8 @@ public class KontrakKerjaSamaPO {
         namaBank = page.locator("#disbursement-information .bg-c-list-item__description").nth(1);
         cabangBank = page.locator("#disbursement-information .bg-c-list-item__description").nth(2);
         namaPemilikRekening = page.locator("#disbursement-information .bg-c-list-item__description").nth(3);
-        tanggalTransferPemilik = page.locator("#disbursement-information .bg-c-list-item__description").nth(4);
+        tipeTransferPendapatan = page.locator("#disbursement-information .bg-c-list-item__description").nth(4);
+        tanggalTransferPemilik = page.locator("#disbursement-information .bg-c-list-item__description").nth(5);
         ubahInformasiTransferPendapatanButton = page.locator("#disbursement-information").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
 
         nomorRekeningInput = page.locator("input.bg-c-input__field").nth(0);
@@ -401,43 +403,11 @@ public class KontrakKerjaSamaPO {
     }
 
     /**
-     * Assert No Rekening in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
-     * @param noRek
-     */
-    public void assertNoRekening(String noRek) {
-        assertThat(nomorRekening).hasText(noRek);
-    }
-
-    /**
-     * Assert Nama Bank in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
-     * @param bankName
-     */
-    public void assertNamaBank(String bankName) {
-        assertThat(namaBank).hasText(bankName);
-    }
-
-    /**
-     * Assert Cabang Bank in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
-     * @param branch
-     */
-    public void assertCabangBank(String branch) {
-        assertThat(cabangBank).hasText(branch);
-    }
-
-    /**
      * Assert Nama Pemilik Rekening in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
      * @param pemilik
      */
     public void assertNamaPemilikRekening(String pemilik) {
         assertThat(namaPemilikRekening).hasText(pemilik);
-    }
-
-    /**
-     * Assert Tanggal Transfer ke Pemilik in Kontrak Kerja Sama tab, Informasi Transfer Pendapatan section
-     * @param tanggalTransfer
-     */
-    public void assertTanggalTransfer(String tanggalTransfer) {
-        assertThat(tanggalTransferPemilik).hasText(tanggalTransfer);
     }
 
     /**
@@ -987,5 +957,53 @@ public class KontrakKerjaSamaPO {
      */
     public int getTotalRow(){
         return rowRincianTipeKamarDanHarga.count();
+    }
+
+    /**
+     * Get String Tipe Transfer Pendapatan
+     * @return String Tipe Transfer Pendapatan
+     */
+    public String getTipeTransfer() {
+        return playwright.getText(tipeTransferPendapatan);
+    }
+
+    /**
+     * Get String No Rekening
+     * @return String Nomor Rekening
+     */
+    public String getNoRekening() {
+        return playwright.getText(nomorRekening);
+    }
+
+    /**
+     * Get String Nama Bank
+     * @return String Nama Bank
+     */
+    public String getNamaBank() {
+        return playwright.getText(namaBank);
+    }
+
+    /**
+     * Get String Cabang Bank
+     * @return String Cabang Bank
+     */
+    public String getCabangBank() {
+        return playwright.getText(cabangBank);
+    }
+
+    /**
+     * Get String Nama Pemilik Rekening
+     * @return String Nama Pemilik Rekening
+     */
+    public String getNamaPemilikRekening() {
+        return playwright.getText(namaPemilikRekening);
+    }
+
+    /**
+     * Get String Tanggal Transfer
+     * @return String Tanggal Transfer
+     */
+    public String getTanggalTransfer() {
+        return playwright.getText(tanggalTransferPemilik);
     }
 }

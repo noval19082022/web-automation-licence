@@ -222,11 +222,11 @@ public class HomepagePO {
         //---Filter---//
         filterBtn = page.locator("//span[contains(., 'Filter')]");
         totalFilter = page.locator(".bg-c-badge-counter");
-        tglLiveMulai = page.getByTestId("homeFilterModalDate-datePickerStart").getByPlaceholder("Pilih tanggal mulai");
+        tglLiveMulai = page.locator("#homeFilterModalDate-datePickerStart");
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
-        tglLiveAkhir = page.getByTestId("homeFilterModalDate-datePickerEnd").getByPlaceholder("Pilih tanggal akhir");
-        tglExpiredMulai = page.getByTestId("undefined-datePickerStart").getByPlaceholder("Pilih tanggal mulai");
-        tglExpiredAkhir = page.getByTestId("undefined-datePickerEnd").getByPlaceholder("Pilih tanggal akhir");
+        tglLiveAkhir = page.locator("#homeFilterModalDate-datePickerEnd");
+        tglExpiredMulai = page.locator("#homeFilterModalExpiredDate-datePickerStart");
+        tglExpiredAkhir = page.locator("#homeFilterModalExpiredDate-datePickerEnd");
         pilihProdukDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih produk dropdown-down"));
         pilihBSEDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih BSE dropdown-down"));
         pilihBDDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih BD dropdown-down"));
@@ -845,7 +845,7 @@ public class HomepagePO {
         playwright.clickOn(monthOctober);
 
         //select date based on parameter
-        selectDate = page.getByTestId("undefined-datePickerStart").getByText(tanggalExpiredMulai, new Locator.GetByTextOptions().setExact(true)).first();
+        selectDate = page.getByTestId("homeFilterModalExpiredDate-datePickerStart").getByText(tanggalExpiredMulai, new Locator.GetByTextOptions().setExact(true)).first();
         playwright.clickOn(selectDate);
     }
 
@@ -873,7 +873,7 @@ public class HomepagePO {
         playwright.clickOn(monthDecember);
 
         //select date based on parameter
-        selectDate = page.getByTestId("undefined-datePickerEnd").getByText(tanggalExpiredAkhir);
+        selectDate = page.getByTestId("homeFilterModalExpiredDate-datePickerEnd").getByText(tanggalExpiredAkhir);
         playwright.clickOn(selectDate);
     }
 
@@ -1090,7 +1090,7 @@ public class HomepagePO {
      * @return String All BSE Value
      */
     public String getAllBSEValueInTable(int indexBSE) {
-        BSEInTable = page.locator("tr td:nth-of-type(5)").nth(indexBSE);
+        BSEInTable = page.locator("tr td:nth-of-type(6)").nth(indexBSE);
         return playwright.getText(BSEInTable);
     }
 
