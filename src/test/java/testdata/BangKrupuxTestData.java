@@ -32,4 +32,28 @@ public class BangKrupuxTestData {
     public  static void hrefRejectKostUrl(String kosListRejectUrl){
         BangKrupuxTestData.urlRejectKos = kosListRejectUrl;
     }
+
+    public static String getUrlDeleteKos() {
+        return urlDeleteKos;
+    }
+
+    public static void setUrlDeleteKos(String urlDeleteKos) {
+        BangKrupuxTestData.urlDeleteKos = urlDeleteKos;
+    }
+
+    public static String getUrlRejectKos() {
+        return urlRejectKos;
+    }
+
+    public static void setUrlRejectKos(String urlRejectKos) {
+        BangKrupuxTestData.urlRejectKos = urlRejectKos;
+    }
+
+    public static String getUrlApproveKos() {
+        return urlApproveKos;
+    }
+
+    public static void setUrlApproveKos(String urlApproveKos) {
+        BangKrupuxTestData.urlApproveKos = urlApproveKos;
+    }
 }
