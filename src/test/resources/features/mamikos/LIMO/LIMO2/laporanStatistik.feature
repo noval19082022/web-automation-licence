@@ -24,7 +24,7 @@ Feature: Laporan Statistik
     And user click add new kos button
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name        | kos type | description kos       | build kos | other note |
-      | kos Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
+      | kost Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |

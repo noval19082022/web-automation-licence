@@ -262,7 +262,9 @@ public class ChatOwnerPO {
     }
 
     public void dismissFTUETBCIfExist() {
-        playwright.clickIfElementVisible(sayaMengertiChatRoom, sayaMengertiChatRoom,3_0000.0);
+        if (playwright.waitTillLocatorIsVisible(sayaMengertiChatRoom, 3_000.0)) {
+            playwright.clickOn(sayaMengertiChatRoom);
+        }
     }
 
     /**

@@ -223,7 +223,7 @@ public class PropertiSayaSteps {
     @And("owner close pop up BBK at kos list page")
     public void ownerClosePopUpBBKAtKosListPage() {
         loading.waitForLoadingIconDisappear();
-        if (propertySaya.BBKPopUpVisible()) {
+        if (propertySaya.BBKPopUpVisible() || propertySaya.CloseBtnPopUpBBKIsVisible()) {
             propertySaya.clickClosePopUpBBK();
         }
     }
@@ -662,10 +662,17 @@ public class PropertiSayaSteps {
     @Then("user see kos with valid name, status {string} and type {string}")
     public void userSeeKosWithValidNameStatusAndType(String status, String kosType) {
         propertySaya.waitPageLoaded();
-        Assert.assertTrue(propertySaya.getFirstKosName().contains(Mamikos.getPropertyKosName()),
+        Assert.assertTrue(propertySaya.
+                        getFirstKosName().
+                        toLowerCase().
+                        contains(
+                                Mamikos.
+                                        getPropertyKosName().
+                                        toLowerCase()
+                        ),
                 "Kos name is wrong"
-                        + "expected contains: " + Mamikos.getPropertyKosName()
-                        + "actual: " + propertySaya.getFirstKosName());
+                        + " expected contains: " + Mamikos.getPropertyKosName()
+                        + " actual: " + propertySaya.getFirstKosName());
         Assert.assertTrue(propertySaya.getFirstKosStatus(status).contains(status), "Kos name field is still enable");
         Assert.assertEquals(propertySaya.getFirstKosType(kosType), kosType, "Kos type is wrong");
     }

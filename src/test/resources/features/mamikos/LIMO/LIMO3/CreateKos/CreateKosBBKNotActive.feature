@@ -14,7 +14,7 @@ Feature: Create new kos with owner not active BBK
     And user click add new kos button
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name        | kos type | description kos       | build kos | other note |
-      | kos Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
+      | kost Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |
@@ -78,6 +78,7 @@ Feature: Create new kos with owner not active BBK
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Campur"
@@ -157,7 +158,7 @@ Feature: Create new kos with owner not active BBK
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos              | build kos | other note                   |
-      | kos automation test | yes             | Tipe A         | girl     | Kos new draft not active BBK | 2020      | Akan dihapus setelah terbuat |
+      | kost automation test | yes             | Tipe A         | girl     | Kos new draft not active BBK | 2020      | Akan dihapus setelah terbuat |
     And owner set rules kos:
       | Dilarang bawa hewan |
     And owner input data pengelola as expected:
@@ -213,6 +214,7 @@ Feature: Create new kos with owner not active BBK
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
     And user see active mamipay form with Bank Name "CTBC (Chinatrust) Indonesia"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"

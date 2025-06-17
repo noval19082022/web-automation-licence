@@ -256,11 +256,11 @@ public class PropertiSayaPO {
         closePopupBBKIcon = page.locator(".bg-c-modal__action-closable");
         popUpBBkDialog = page.locator(".auto-active-bbk-intercept-modal");
         closeBBKDialog = page.locator(".owner-intercept-booking-modal__close-button");
-        fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap");
-        bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening Anda");
-        bankOwnerNameTextbox = page.getByPlaceholder("Masukkan nama pemilik rekening");
-        bankNameDropdown = page.getByPlaceholder("Masukkan nama bank");
-        termAndConsCheckbox = page.locator(".check");
+        fullnameTextbox = page.getByPlaceholder("Masukkan nama lengkap Anda sesuai KTP");
+        bankAccountNumberTextbox = page.getByPlaceholder("Masukkan nomor rekening");
+        bankOwnerNameTextbox = page.getByPlaceholder("Pastikan sama dengan buku rekening bank");
+        bankNameDropdown = page.getByPlaceholder("Pilih nama bank");
+        termAndConsCheckbox = page.locator(".bg-c-checkbox__icon");
         submitDataMamipayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim Data"));
         backButtonActivationSent = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         editSelesaiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Edit Selesai"));
@@ -709,10 +709,14 @@ public class PropertiSayaPO {
      * Click on close at pop up BBL
      */
     public void clickClosePopUpBBK() {
-        playwright.waitFor(closePopupBBKIcon);
-        playwright.clickOn(closePopupBBKIcon);
+        var popUpDismiss = page.getByRole(AriaRole.DIALOG).filter(new Locator.FilterOptions().setHasText("Ingin Kamar Kosong Anda Cepat")).locator("a").first();
+        if (playwright.isLocatorVisibleAfterLoad(popUpDismiss, 3000.0)) {
+            playwright.clickOn(popUpDismiss);
+        } else if (playwright.waitTillLocatorIsVisible(closePopupBBKIcon)) {
+            playwright.waitFor(closePopupBBKIcon);
+            playwright.clickOn(closePopupBBKIcon);
+        }
     }
-
 
     /**
      * Click on close at pop up BBK on property saya
@@ -2257,6 +2261,13 @@ public class PropertiSayaPO {
     public boolean BBKPopUpVisible() {
         Locator popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
         return playwright.isLocatorVisibleAfterLoad(popUpBBK, 2000.0);
+    }
+
+    /**
+     * Click on close at pop up BBL
+     */
+    public boolean CloseBtnPopUpBBKIsVisible() {
+        return playwright.isLocatorVisibleAfterLoad(closePopupBBKIcon, 2000.0);
     }
 
     /**

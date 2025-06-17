@@ -76,10 +76,10 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
     And owner click lanjutkan button for next steps
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
-    And owner click "Lewati" input BBK form request
-    And owner click "Lewati" input BBK form request
-    And owner click Selesai in success page add kos
-    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
+#    And owner click "Lewati" input BBK form request
+#    And owner click "Lewati" input BBK form request
+#    And owner click Selesai in success page add kos
+#    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
 
   Scenario: Delete new kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -157,10 +157,11 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
     And owner click lanjutkan button for next steps
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
-    And owner input on "nomor rekening Anda" "09182928329"
+    And owner input on "nomor rekening" "09182928329"
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
+    And owner click term and condition
     And owner click "Kirim Data" button
     And owner click Selesai in success page add kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"

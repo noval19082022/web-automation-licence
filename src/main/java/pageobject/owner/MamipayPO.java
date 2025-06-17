@@ -25,9 +25,9 @@ public class MamipayPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
-        namaLengkap = page.locator("[placeholder='Masukkan nama lengkap']");
+        namaLengkap = page.locator("[placeholder='Masukkan nama lengkap Anda sesuai KTP']");
         infoMamipay = page.locator(".media-content");
-        termAndConditionCheck = page.locator(".check");
+        termAndConditionCheck = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         kirimDataButton = page.locator(".button");
         termAndCondition = page.locator("//a[.='Syarat dan Ketentuan']");
         username = page.locator(".c-mk-header__username");
@@ -74,6 +74,14 @@ public class MamipayPO {
      */
     public void inputTextField(String fieldName, String inputText) {
         String element = "[placeholder='Masukkan "+ fieldName +"']";
+
+        // switch the element
+        if (fieldName.contains("Pilih nama bank") || fieldName.contains("nama bank")) {
+            element = "[placeholder='Pilih nama bank']";
+        } else if (fieldName.contains("nama pemilik rekening")) {
+            element = "[placeholder='Pastikan sama dengan buku rekening bank']";
+        }
+
         playwright.forceFill(page.locator(element), inputText);
     }
 
