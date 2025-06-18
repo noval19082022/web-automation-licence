@@ -576,8 +576,12 @@ public class HomepageSteps {
 
         for (i=0; i<totalRow; i++){
             Assert.assertEquals(homepage.getTransferType(i), transferType, "Produk does not match!");
-            System.out.println(homepage.getTransferType(i));
         }
+    }
+
+    @Then("display property list name {string}")
+    public void display_property_list_name(String propertyName) {
+        Assert.assertEquals(homepage.getNamaPropertiInTable(propertyName), propertyName, "Nama Properti does not match!");
     }
 }
 
