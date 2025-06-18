@@ -70,6 +70,9 @@ public class HomepagePO {
     Locator ASInTable;
     Locator hospitalityInTable;
     Locator resetBtn;
+    Locator transferTypeDropdown;
+    Locator transferTypeValue;
+    Locator transferTypeList;
 
     Locator tambahPenyewaButton;
     Locator bookingButton;
@@ -235,6 +238,7 @@ public class HomepagePO {
         pilihKotaDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kota dropdown-down"));
         clicksClearBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close-round").setExact(true));
         totalPropertyText = page.locator(".total-data");
+        transferTypeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Pilih Tipe Transfer Pendapatan dropdown-down"));
 
         //---Kontrak Kerja Sama Tab---//
         kontrakKerjaSamaTab = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kontrak Kerja Sama"));
@@ -1301,5 +1305,25 @@ public class HomepagePO {
      */
     public void clickOnAgreeButton(){
         playwright.clickOn(agreeButton);
+    }
+
+    /**
+     * Selects Tipe Transfer Pendapatan
+     * @param transferType transfer type
+     */
+    public void selectsTipeTransfer(String transferType) {
+        transferTypeValue = page.locator("a").filter(new Locator.FilterOptions().setHasText(transferType));
+        playwright.clickOn(transferTypeDropdown);
+        playwright.clickOn(transferTypeValue);
+    }
+
+    /**
+     * Get String Transfer Type in Homepage Table
+     * @param index index
+     * @return String Transfer Type
+     */
+    public String getTransferType(int index) {
+        transferTypeList = page.locator("tr td:nth-of-type(5)");
+        return playwright.getText(transferTypeList.nth(index));
     }
 }
