@@ -33,7 +33,7 @@ Feature: Promo Owner Admin BangKerupux
       | email stag                 | email prod                 | password  |
       | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
-    And admin search the title promo "Title Promo Owner" on search box
+    And admin search the title promo "Kost Beth Harmon Tipe A Kretek Bantul" on search box
     And admin delete the promo admin
 
   @TEST_LIMO-3658
@@ -44,7 +44,7 @@ Feature: Promo Owner Admin BangKerupux
       | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
     And admin accsess menu promo owner to create promo owner
-    And admin fill " Kost Beth Harmon Tipe A Kretek Bantul" at search kost form
+    And admin fill "Kost Beth Harmon Tipe A Kretek Bantul" at search kost form
     And admin fills valid data promo owner as expected
       | title             | content                                             | start-date | end-date               |
       | Title Promo Owner | Ini adalah promo owner yang disi dari halaman admin | tomorrow   | the day after tomorrow |

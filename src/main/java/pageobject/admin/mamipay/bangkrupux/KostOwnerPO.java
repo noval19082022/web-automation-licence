@@ -27,6 +27,7 @@ public class KostOwnerPO {
     Locator phoneOwnerSearch;
     Locator rejectBbkButton;
     Locator firstApproveButton;
+    Locator verifyKostButton;
     Locator updateStatus;
     Locator actionBox;
 
@@ -40,9 +41,10 @@ public class KostOwnerPO {
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
         verifyButton = page.locator("//*[@title='Verify']");
         firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
-        firstDeleteButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Delete").first();
+        firstDeleteButton = page.locator(".btn-action-group > a:nth-child(3)").first();
         phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
         firstApproveButton = page.locator("(//a[@title='Verify'])[1]");
+        verifyKostButton = page.locator("//form[@method='GET']//button[@class='btn btn-sm btn-success'][normalize-space()='Verify']");
         rejectBbkButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reject").setExact(true));
         firstRejectReasonRadioButton = page.locator("//div[@class='iradio_minimal']");
         rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
@@ -153,13 +155,13 @@ public class KostOwnerPO {
         playwright.navigateTo(this.getKosListDeleteUrl());
     }
 
-    /**
-     * Navigate to url approve kos on admin
-     *
-     */
-    public void navigateToApproveUrl() {
-        playwright.navigateTo(this.getKosListApproveUrl());
-    }
+//    /**
+//     * Navigate to url approve kos on admin
+//     *
+//     */
+//    public void navigateToApproveUrl() {
+//        playwright.navigateTo(this.getKosListApproveUrl());
+//    }
 
     /**
      * Get url list kos delete
@@ -177,8 +179,9 @@ public class KostOwnerPO {
      *
      * @return attribute href from firstDeleteButton
      */
-    public String getKosListApproveUrl() {
-        return playwright.getAttributeValue(firstApproveButton, "href");
+    public void getKosListApproveUrl() {
+        playwright.clickOn(firstApproveButton);
+        playwright.clickOn(verifyKostButton);
     }
 
     /**

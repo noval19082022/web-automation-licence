@@ -71,8 +71,7 @@ public class KostOwnerSteps {
 
     @And("admin accept kos")
     public void adminApproveKos() {
-        BangKrupuxTestData.hrefApproveKosUrl(kostOwner.getKosListApproveUrl());
-        kostOwner.navigateToApproveUrl();
+        kostOwner.getKosListApproveUrl();
     }
 
     @And("admin reject kos")

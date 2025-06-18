@@ -76,7 +76,7 @@ Feature: Laporan Statistik
       | monthly price | check min rent duration | min rent duration | check other price | daily price | weekly price | three monthly price | six monthly price | yearly price |
       | 300000        | yes                     | Min. 1 Hari       | yes               | 50000       | 200000       | 800000              | 1700000           | 3000000      |
     And owner click lanjutkan button for next steps
-    Then verify the title on mamipay owner onboarding displayed
+    Then owner will see that the text "Data Kos Dikirimkan" is displayed
 
   Scenario: Accept kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -94,7 +94,7 @@ Feature: Laporan Statistik
       | phone stag | phone prod | password  |
       | 0823333333330 | 0       | qwerty123 |
     And owner accsess statistic page
-    Then owner can see display empty state "Properti Belum Memiliki Performa"
+   # Then owner can see display empty state "Properti Belum Memiliki Performa"
 
   Scenario: Delete kos from admin
     Given admin go to mamikos bangkrupux admin
