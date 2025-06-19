@@ -139,7 +139,7 @@ public class OwnerDashboardPO {
         widgetSubtitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-subtitle bg-c-text bg-c-text--body-2']");
         ratingCardDetails = page.locator(".rating-card__details");
         reviewLists = page.locator(".rating-card");
-        detailReviewLists = page.locator("//*[@class='row stats-list']");
+        detailReviewLists = page.locator("(//div[@class='row stats-list'])[1]");
         ratingCardWrapperLists = page.locator(".rating-card__wrapper");
         mamiadsSubtitle = page.locator("//span[@class='bg-c-text bg-c-text--body-4']");
         mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");

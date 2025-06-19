@@ -306,7 +306,7 @@ public class PropertiSayaSteps {
 
     @Then("owner/user click button edit finished")
     public void userClickButtonEditFinished() {
-        loading.waitForLoadingIconDisappear();
+       // loading.waitForLoadingIconDisappear();
         propertySaya.clickEditDoneButton();
     }
 
