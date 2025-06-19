@@ -1,4 +1,4 @@
-@ss @pman2 @pms @filterTipeTransfer @test
+@ss @pman2 @pms @filterTipeTransfer
 
 Feature: Filter Tipe Transfer
 
