@@ -561,5 +561,27 @@ public class HomepageSteps {
     public void admin_click_on_confirm_save_button(){
         homepage.clickOnAgreeButton();
     }
+
+    @When("admin filter Tipe Transfer {string}")
+    public void admin_filter_tipe_transfer(String transferType) {
+        homepage.clicksFilter();
+        homepage.selectsTipeTransfer(transferType);
+        homepage.clicksTerapkanBtn();
+    }
+
+    @Then("display property list with Tipe Transfer {string}")
+    public void display_property_list_with_tipe_transfer(String transferType) {
+        int i;
+        int totalRow = homepage.getTotalRow();
+
+        for (i=0; i<totalRow; i++){
+            Assert.assertEquals(homepage.getTransferType(i), transferType, "Produk does not match!");
+        }
+    }
+
+    @Then("display property list name {string}")
+    public void display_property_list_name(String propertyName) {
+        Assert.assertEquals(homepage.getNamaPropertiInTable(propertyName), propertyName, "Nama Properti does not match!");
+    }
 }
 
