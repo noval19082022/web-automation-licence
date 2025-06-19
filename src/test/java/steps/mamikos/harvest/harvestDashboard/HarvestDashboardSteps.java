@@ -32,4 +32,16 @@ public class HarvestDashboardSteps {
         page.waitForLoadState(LoadState.LOAD);
         Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/"+url);
     }
+
+    @Then("admin can view {string} button")
+    public void admin_can_view_button(String buttonName) {
+        page.waitForLoadState(LoadState.LOAD);
+        Assert.assertTrue(dashboard.isButtonVisible(buttonName));
+    }
+
+    @Then("admin can't view {string} button")
+    public void admin_can_t_view_button(String buttonName) {
+        page.waitForLoadState(LoadState.LOAD);
+        Assert.assertFalse(dashboard.isButtonVisible(buttonName));
+    }
 }
