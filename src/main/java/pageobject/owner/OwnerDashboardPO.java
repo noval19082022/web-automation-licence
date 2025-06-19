@@ -126,11 +126,11 @@ public class OwnerDashboardPO {
         bookingKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Icon Sewa Kos Sewa Kos"));
         promoAdsButton = page.locator("//span[.='Promosikan Iklan Anda']");
         homeHelpCenterButton = page.locator("#globalNavbar").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
-        propertySayaDropdownMenu = page.locator("//div[@class='bg-c-dropdown']");
+        propertySayaDropdownMenu = page.locator("(//div[@class='bg-c-grid__item bg-is-col-3'])[1]");
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByTestId("chat-cs-btn");
-        contactUsPopUp = page.locator("//iframe[@title='Messaging window']");
+        contactUsPopUp = page.locator("//iframe[@title='Jendela pesan']");
         greetingUserLabel = page.locator(".greeting-section__name");
         accountSettingsButton = page.getByText("Setelan Akun");
         logoutOwnerPageButton = page.getByText("Logout");
@@ -139,7 +139,7 @@ public class OwnerDashboardPO {
         widgetSubtitleWaktunyaMengelolaProperti = page.locator("//*[@class='mk-action-card__main-content-subtitle bg-c-text bg-c-text--body-2']");
         ratingCardDetails = page.locator(".rating-card__details");
         reviewLists = page.locator(".rating-card");
-        detailReviewLists = page.locator("//*[@class='row stats-list']");
+        detailReviewLists = page.locator("(//div[@class='row stats-list'])[1]");
         ratingCardWrapperLists = page.locator(".rating-card__wrapper");
         mamiadsSubtitle = page.locator("//span[@class='bg-c-text bg-c-text--body-4']");
         mamiadsLihatDisini = page.locator("//h2[@class='bg-c-text bg-c-text--title-2']");
@@ -441,7 +441,6 @@ public class OwnerDashboardPO {
      * @return true if dropdown menu showing. Otherwise false
      */
     public boolean isPropertyMenuDropdownShowing(){
-        playwright.waitFor(propertySayaDropdownMenu,2000.0);
         return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu);
     }
 
@@ -584,7 +583,7 @@ public class OwnerDashboardPO {
      * @return true or false
      */
     public Boolean isDetailedReviewListsAppear() {
-        return playwright.waitTillLocatorIsVisible(detailReviewLists.first());
+        return playwright.waitTillLocatorIsVisible(detailReviewLists, 5000.0);
     }
 
     /**

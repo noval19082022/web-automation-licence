@@ -1,5 +1,5 @@
-@regression @LIMO4 @LIMO-Homepage-owner
-Feature: Homepage
+@regression @LIMO4 @LIMO-Homepage-owner @viu
+Feature: Owner Homepage
 
   @TEST_LIMO-3445 @navbarAfter @continue @WEB @AUTOMATED
   Scenario: Positive case Check Navbar login as owner

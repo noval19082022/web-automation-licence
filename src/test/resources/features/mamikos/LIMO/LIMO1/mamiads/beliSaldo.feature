@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @beliSaldo @DONEMIGRATINGTONEWBOARD @viu
+@regression @LIMO1 @LIMO1-staging @beliSaldo @DONEMIGRATINGTONEWBOARD
 Feature: Beli Saldo
 
   @TEST_LIMO-3333 @belisaldo @continue

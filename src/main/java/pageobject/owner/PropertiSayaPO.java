@@ -736,6 +736,7 @@ public class PropertiSayaPO {
      * @return String Full Name inputted text
      */
     public String getInputTextFullName() {
+        playwright.waitTillLocatorIsVisible(fullnameTextbox);
         return playwright.getInputValue(fullnameTextbox);
     }
 
@@ -906,6 +907,7 @@ public class PropertiSayaPO {
      * @return String pop up title
      */
     public String getTitlePopUpSuccessEditKos() {
+        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText);
         return playwright.getText(titleSuccessEditPopUpText);
     }
 
