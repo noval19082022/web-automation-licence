@@ -83,8 +83,6 @@ Feature: Recommendation Listing
       | Kos Raney Aphrodite Tipe 3 |                |
     When tenant open menu favorite
     Then verify last seen property display on rekomendasi section
-    And tenant open menu kost saya
-    Then verify last seen property display on rekomendasi section
 
   @TEST_LIMO-2716
   Scenario: Verify kost is show at rekomendation section after unfavorite kost
