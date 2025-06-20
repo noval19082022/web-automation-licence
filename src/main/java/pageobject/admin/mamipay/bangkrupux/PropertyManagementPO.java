@@ -12,6 +12,8 @@ public class PropertyManagementPO {
     private Locator propertyMenu;
     private Locator searchPropertyNamePlaceHolder;
     private Locator searchBtn;
+    private Locator quickAllocationCheckBox;
+    private Locator acceptDeactiveQuickAllocationBtn;
 
     public PropertyManagementPO(Page page) {
         this.page = page;
@@ -20,6 +22,8 @@ public class PropertyManagementPO {
         this.propertyMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Property").setExact(true));
         this.searchPropertyNamePlaceHolder = page.getByPlaceholder("Nama Property");
         this.searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        this.quickAllocationCheckBox = page.getByRole(AriaRole.CHECKBOX).first();
+        this.acceptDeactiveQuickAllocationBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Nonaktifkan"));
     }
 
     /**
@@ -44,5 +48,13 @@ public class PropertyManagementPO {
     public void searchPropertyName(String propertyName) {
         playwrightHelpers.clickLocatorAndTypeKeyboard(searchPropertyNamePlaceHolder, propertyName);
         playwrightHelpers.clickOn(searchBtn);
+    }
+
+    public void deactivateQuickAllocationIfActive() {
+        if (playwrightHelpers.isRadioButtonChecked(quickAllocationCheckBox)) {
+            playwrightHelpers.uncheckBox(quickAllocationCheckBox);
+            playwrightHelpers.clickOn(acceptDeactiveQuickAllocationBtn);
+        }
+        playwrightHelpers.reloadPage();
     }
 }

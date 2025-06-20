@@ -113,7 +113,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos       | build kos | other note |
-      | kost Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
+      | kos Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |
