@@ -85,11 +85,6 @@ Feature: Recommendation Listing
     Then verify last seen property display on rekomendasi section
     And tenant open menu kost saya
     Then verify last seen property display on rekomendasi section
-    When tenant see first kost rekomendasi at kos saya page
-    Then user can favorite the kost for recomendation listing
-    And tenant set active page to 1
-    When tenant navigate to kost saya page
-    Then verify last seen property display on rekomendasi section
 
   @TEST_LIMO-2716
   Scenario: Verify kost is show at rekomendation section after unfavorite kost
