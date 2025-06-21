@@ -157,7 +157,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
     And owner click lanjutkan button for next steps
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
-    And owner input on "nomor rekening" "09182928329"
+    And owner input on "Masukkan nomor rekening" "09182928329"
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"

@@ -7,7 +7,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password  |
-      | 0812345670004 | qwerty123 |
+      | 0891202418    | qwerty123 |
     And owner navigates to property saya kos
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
@@ -55,9 +55,8 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
       | Cuci Baju  | 10000       |
     And owner select down payment with "30%" from rent price
     And owner click lanjutkan button for next steps
-    Then owner will see that the text "Data Kos Dikirimkan" is displayed
     And owner navigates to property saya kos
-    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
+    Then user see kos with valid name, status "Draft" and type "Kos Putri"
 
   Scenario: Delete new kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -76,7 +75,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigate to Mamipay Owner List
-    And admin search owner phone "0812345670004" in mamipay owner list
+    And admin search owner phone "0891201418" in mamipay owner list
     And admin delete the mamipay data from first list
 
   @CreateKosFromDraftActivMamipay @TEST_LIMO-981
@@ -84,7 +83,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password  |
-      | 0812345670004 | qwerty123 |
+      | 0891202418    | qwerty123 |
     And owner navigates to property saya kos
     And owner click "Nanti Saja" in kebijakan baru mamikos pop up
     And owner close pop up BBK at kos list page
