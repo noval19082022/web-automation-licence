@@ -20,7 +20,7 @@ Feature: Pms New Booking
     And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room
-    And admin fill nama tenant "Noval Abis Delete Aja"
+    And admin fill nama tenant "Gattuso"
     Then admin see informasi penyewa
 
   @SS-5090 @continue
