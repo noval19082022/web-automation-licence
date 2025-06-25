@@ -2,7 +2,7 @@
 
   Feature: Garansi Akurat - USP
 
-    @TEST_SS-8043
+    @TEST_SS-8043 @continue
     Scenario: Check USP in Singgahsini listing
       Given user go to mamikos homepage
       When tenant search kost then go to kost details:
@@ -11,13 +11,13 @@
       And tenant dismiss FTUE booking benefit
       Then tenant can see "Singgahsini" USP
 
-    @TEST_SS-8044
+    @TEST_SS-8044 @continue
     Scenario: Check USP in APIK listing
       Given user go to mamikos homepage
       When tenant search kost then go to kost details:
-        | kost name stag    | kost name prod    |
-        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara |
-      And tenant dismiss FTUE booking benefit
+        | kost name stag                   | kost name prod    |
+        |  Kost Apik Marlin Tipe A Lombok  |  Kost Apik Marlin Tipe A Lombok  |
+      And tenant dismiss promo ngebut pop up
       Then tenant can see "APIK" USP
 
     @TEST_SS-8047
@@ -27,12 +27,11 @@
       When tenant search kost then go to kost details:
         | kost name stag   | kost name prod   |
         | Kost Singgahsini Pangeran Kumbang Tipe A Halmahera Utara | Kost Singgahsini Pangeran Kumbang Tipe A Halmahera Utara |
-      And tenant dismiss FTUE booking benefit
       Then tenant can see new refund wording
       #kost apik
       When tenant search kost then go to kost details:
-        | kost name stag    | kost name prod    |
-        | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara | Kost Apik Khusus Automation PMAN Tipe A Halmahera Utara |
+        | kost name stag                   | kost name prod    |
+        |  Kost Apik Marlin Tipe A Lombok  |  Kost Apik Marlin Tipe A Lombok  |
       Then tenant can see new refund wording
       #kost andalan
       When tenant search kost then go to kost details:
