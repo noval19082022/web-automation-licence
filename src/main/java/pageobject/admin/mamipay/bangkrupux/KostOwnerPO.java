@@ -1,5 +1,6 @@
 package pageobject.admin.mamipay.bangkrupux;
 
+import com.microsoft.playwright.Frame;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -30,6 +31,7 @@ public class KostOwnerPO {
     Locator verifyKostButton;
     Locator updateStatus;
     Locator actionBox;
+    Locator confirmRejectButton;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -50,6 +52,7 @@ public class KostOwnerPO {
         rejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reject").setExact(true));
         updateStatus = page.getByText("× Success! Room has been successfully updated");
         actionBox = page.locator(".btn-action-group");
+        confirmRejectButton = page.locator("//button[normalize-space()='Reject']");
     }
 
     /**
@@ -237,9 +240,13 @@ public class KostOwnerPO {
         Locator rejectBbkButton = page.locator("//a[normalize-space()='Reject']");
         if (playwright.waitTillLocatorIsVisible(rejectBbkButton)) {
             playwright.clickOn(rejectBbkButton);
-            playwright.pageScrollUntilElementIsVisible(firstRejectReasonRadioButton);
-            playwright.clickOn(firstRejectReasonRadioButton);
-            playwright.clickOn(rejectButton);
+//            playwright.waitTillLocatorIsVisible(firstRejectReasonRadioButton);
+//            playwright.clickOn(firstRejectReasonRadioButton);
+            Locator inputText= page.locator("//textarea[@name='reject_remark_text']");
+            playwright.forceFill(inputText, "Reject BBK");
+            playwright.waitTillLocatorIsVisible(confirmRejectButton);
+            playwright.clickOn(confirmRejectButton);
+        //    page.mouse().click(6149, 3311);
         } else {
             playwright.reloadPage();
         }

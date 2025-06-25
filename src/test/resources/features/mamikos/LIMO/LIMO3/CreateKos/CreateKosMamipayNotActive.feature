@@ -1,4 +1,4 @@
-@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive1 @DONEMIGRATINGTONEWBOARD
+@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive1 @DONEMIGRATINGTONEWBOARD @viu
 
 Feature: Create new kos with owner that hasn't activate mamipay
 # comment due to duplicate test case on @TEST_LIMO-3670
@@ -89,7 +89,7 @@ Feature: Create new kos with owner that hasn't activate mamipay
     And owner click lanjutkan button for next steps
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
-    And owner input on "nomor rekening" "09182928329"
+    And owner input on "Masukkan nomor rekening" "555444333"
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"

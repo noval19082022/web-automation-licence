@@ -2,6 +2,7 @@
 
 Feature: Activate Mamipay
 
+
   @invalidBankAccountNumber @continue @TEST_LIMO-3682
   Scenario: Invalid input bank account number
     Given user go to mamikos homepage
@@ -12,13 +13,13 @@ Feature: Activate Mamipay
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     Then verify nama lengkap equals username owner
-    When owner input on "nomor rekening" ""
+    When owner input on "Masukkan nomor rekening" ""
     Then user should see the message "Nomor rekening tidak boleh kosong." displayed under text field
-    When owner input on "nomor rekening" "QWERTY"
+    When owner input on "Masukkan nomor rekening" "QWERTY"
     Then user should see the message "Hanya diisi dengan angka" displayed under text field
-    When owner input on "nomor rekening" "123"
+    When owner input on "Masukkan nomor rekening" "123"
     Then user should see the message "Minimal 5 Karakter" displayed under text field
-    When owner input on "nomor rekening" "09182928329"
+    When owner input on "Masukkan nomor rekening" "09182928329"
 
   @invalidBankName @continue @TEST_LIMO-3683
   Scenario: Invalid bank name
@@ -39,24 +40,25 @@ Feature: Activate Mamipay
 
   @invalidName @continue @TEST_LIMO-3685
   Scenario: Invalid name
-    And owner input on "nama lengkap Anda sesuai KTP Anda sesuai KTP" ""
+    And owner input on "Masukkan nama lengkap Anda sesuai KTP" ""
     Then user should see the message "Nama lengkap tidak boleh kosong." displayed under text field
-    When owner input on "nama lengkap Anda sesuai KTP Anda sesuai KTP" "Yu"
+    When owner input on "Masukkan nama lengkap Anda sesuai KTP" "Yu"
     Then user should see the message "Minimal 3 Karakter" displayed under text field
     And verify mamipay form information:
     """
-    Pastikan data Anda benar dan sesuai, agar uang pembayaran kos dapat
-          ditransfer dengan lancar.
+    Pastikan data benar agar uang pembayaran sewa kos dapat ditransfer
+          dengan lancar.
     """
    And verify kirim data button is disable
 
   @submitInputFormDataDiri @TEST_LIMO-3686
   Scenario: Valid input form data diri
-    When owner input on "nama lengkap Anda sesuai KTP Anda sesuai KTP" "tiara"
+    When owner input on "Masukkan nama lengkap Anda sesuai KTP" "tiara"
     Given verify kirim data button is disable
     When owner check term and condition
+    And owner close page number 1
     And owner set active page to 0
-    And owner click term and condition
+    #And owner click term and condition
     And owner click "Kirim Data" button
     Then user see success add data kos pop up with text "Permintaan Aktivasi Dikirimkan"
     And owner click "Kembali" button

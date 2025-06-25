@@ -34,8 +34,6 @@ public class KostOwnerSteps {
     public void adminRejectBulkBBKKos() {
         playwright.hardWait(3000.0);
         kostOwner.clickOnRejectBBK();
-        kostOwner.clickOnFirstRadioButton();
-        kostOwner.clickOnRejectBulkButton();
     }
 
     @And("admin verify the property {string}")

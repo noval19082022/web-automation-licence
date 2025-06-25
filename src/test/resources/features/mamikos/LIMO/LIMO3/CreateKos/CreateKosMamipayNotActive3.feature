@@ -2,24 +2,13 @@
 
 Feature: Create new kos with owner that hasn't activate mamipay (3)
 
-  Scenario: Delete mamipay owner
-    # Check if account has mamipay, if true then delete it
-    Given admin go to mamikos mamipay admin
-    And admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigate to Mamipay Owner List
-    And admin search owner phone "0812345670004" in mamipay owner list
-    And admin delete the mamipay data from first list
-
   @CreateKosNewTypeSkipMamipay @TEST_LIMO-916
   Scenario: Owner create new kos but skip fill mamipay data at form Lengkapi Data Diri && skip at page "Tanya Jawab"
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password  |
-      | 0812345670004 | qwerty123 |
+      | 0891202418    | qwerty123 |
     And owner navigates to property saya kos
-    #And owner click close icon pop up
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
@@ -66,12 +55,8 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
       | Cuci Baju  | 10000       |
     And owner select down payment with "30%" from rent price
     And owner click lanjutkan button for next steps
-    Then verify the title on mamipay owner onboarding displayed
-    When owner click Lanjutkan button
-#    And owner click "Lewati" input BBK form request
-#    And owner click "Lewati" input BBK form request
-#    And owner click Selesai in success page add kos
-#    Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
+    And owner navigates to property saya kos
+    Then user see kos with valid name, status "Draft" and type "Kos Putri"
 
   Scenario: Delete new kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -90,7 +75,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin navigate to Mamipay Owner List
-    And admin search owner phone "0812345670004" in mamipay owner list
+    And admin search owner phone "0891201418" in mamipay owner list
     And admin delete the mamipay data from first list
 
   @CreateKosFromDraftActivMamipay @TEST_LIMO-981
@@ -98,9 +83,10 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | password  |
-      | 0812345670004 | qwerty123 |
+      | 0891202418    | qwerty123 |
     And owner navigates to property saya kos
     And owner click "Nanti Saja" in kebijakan baru mamikos pop up
+    And owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
@@ -138,6 +124,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner navigates to owner dashboard
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putra"
+
     #continue create kos draft
     When owner search kos on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
@@ -147,13 +134,13 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner click lanjutkan button for next steps
     Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
-    And owner input on "nomor rekening Anda" "09182928329"
+    And owner input on "Masukkan nomor rekening" "09182928329"
     And owner input on "nama pemilik rekening" "Omaiwa wo shinderu"
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
-    And owner click "Lewati" button
-    And owner click "Lewati" button
-    And owner click done in success page
+    And owner click term and condition
+    And owner click "Kirim Data" button
+    And owner navigates to property saya kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putra"
 
   @CreateKosFromDraftActivMamipay

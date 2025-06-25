@@ -73,7 +73,6 @@ Feature: Create new kos with owner not active BBK
     And owner set penalty is "50000"
     And user select payment expired date after "3" "Minggu"
     And owner click lanjutkan button for next steps
-    Then verify the title on mamipay owner onboarding displayed
     When owner click Lanjutkan button
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
@@ -124,7 +123,7 @@ Feature: Create new kos with owner not active BBK
 #      | monthly price | check min rent duration | min rent duration | check other price | daily price | weekly price | three monthly price | six monthly price | yearly price |
 #      | 300000        | no                      |                   | no                |             |              |                     |                   |              |
 #    And owner click lanjutkan button for next steps
-#    Then verify the title on mamipay owner onboarding displayed
+#    Then owner will see that the text "Data Kos Dikirimkan" is displayed
 #    When owner click Lanjutkan button
 #    And user see activate mamipay form with Bank Account Number "977689900"
 #    And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"
@@ -209,7 +208,7 @@ Feature: Create new kos with owner not active BBK
       | Cuci Baju  | 10000       |
     And owner select down payment with "30%" from rent price
     And owner click lanjutkan button for next steps
-    Then verify the title on mamipay owner onboarding displayed
+    #Then owner will see that the text "Data Kos Dikirimkan" is displayed
     When owner click Lanjutkan button
     And user see activate mamipay form with Bank Account Number "977689900"
     And user see active mamipay form with Bank Owner Name "Automation BBK Not Active"

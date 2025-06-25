@@ -2,6 +2,7 @@ package pageobject.owner;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
 import utilities.PlaywrightHelpers;
 
@@ -26,10 +27,10 @@ public class MamipayPO {
         this.playwright = new PlaywrightHelpers(page);
 
         namaLengkap = page.locator("[placeholder='Masukkan nama lengkap Anda sesuai KTP']");
-        infoMamipay = page.locator(".media-content");
+        infoMamipay = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pastikan data benar agar uang"));
         termAndConditionCheck = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
-        kirimDataButton = page.locator(".button");
-        termAndCondition = page.locator("//a[.='Syarat dan Ketentuan']");
+        kirimDataButton = page.locator("//button[normalize-space()='Kirim Data']");
+        termAndCondition = page.locator("//a[normalize-space()='Syarat dan Ketentuan']");
         username = page.locator(".c-mk-header__username");
         bankNameLabel = page.locator("//label[.='Nama Bank']");
         autoBbkCard = page.locator("//*[@class='auto-bbk-info-bar']");
@@ -73,7 +74,7 @@ public class MamipayPO {
      *
      */
     public void inputTextField(String fieldName, String inputText) {
-        String element = "[placeholder='Masukkan "+ fieldName +"']";
+        String element = "[placeholder='"+ fieldName +"']";
 
         // switch the element
         if (fieldName.contains("Pilih nama bank") || fieldName.contains("nama bank")) {
