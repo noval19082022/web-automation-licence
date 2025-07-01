@@ -26,7 +26,7 @@ Feature: Create Kos From Home
     And owner clicks on Tambah Kos Baru button
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos                 | build kos | other note |
-      | kost Automation TEST | yes             | Tipe A         | girl     | kos for case invalid rule photo | 2023      |            |
+      | kos Automation TEST | yes             | Tipe A         | girl     | kos for case invalid rule photo | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
     And owner upload rule kos

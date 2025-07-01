@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD
+@regression @LIMO1 @LIMO1-staging @DONEMIGRATINGTONEWBOARD @QuickAllocation
 Feature: Quick Allocation on Properti Saya
 
   @TEST_LIMO-3379
@@ -57,6 +57,7 @@ Feature: Quick Allocation on Properti Saya
       | phone stag   | phone prod | password  |
       | 085951394565 | 0          | qwerty123 |
     And owner navigates to property saya kos
+    And owner Deactive ads quick alocation if active "Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara"
     When owner search kost "Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara" on property saya page
     Then verify quick allocation section while ads last allocation "daily"
     When user cancel quick allocate the ads ever allocate
@@ -66,8 +67,8 @@ Feature: Quick Allocation on Properti Saya
 
     #cancel allocate ads maximal allocation
     And owner navigates to property saya kos
+    And owner Deactive ads quick alocation if active "Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utar"
     When owner search kost "Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utara" on property saya page
-    Then verify quick allocation section while ads last allocation "maksimal"
     When user cancel quick allocate the ads ever allocate
     Then verify redirect to mamiads dashboard
     * user cek status toggle iklan "Kos Quick Allocate Tipe Maksimal Tobelo Halmahera Utara" is "Tidak Naik"

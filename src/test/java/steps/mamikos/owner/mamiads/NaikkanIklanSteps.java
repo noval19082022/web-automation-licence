@@ -86,7 +86,7 @@ public class NaikkanIklanSteps {
     }
 
     @Then("verify quick allocation section while ads last allocation {string}")
-    public void verifyQuickAllocationSectionWhileAdsLastAllocation(String tipeAllocation) throws InterruptedException {
+    public void verifyQuickAllocationSectionWhileAdsLastAllocation(String tipeAllocation) {
         String adsDescText = "Tipe anggaran: Rp10.000 per-hari";
         String adsDescTextMax = "Tipe anggaran: Saldo Maksimal";
 
@@ -111,7 +111,7 @@ public class NaikkanIklanSteps {
     }
 
     @Then("verify redirect to mamiads dashboard")
-    public void verify_redirect_to_mamiads_dashboard() throws InterruptedException {
+    public void verify_redirect_to_mamiads_dashboard() {
         playwright.hardWait(3000.0);
         home = new HomePO(ActiveContext.getActivePage());
         String actualUrl = home.getURL();
