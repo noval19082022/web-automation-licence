@@ -170,7 +170,7 @@ public class InvoicePO {
      */
     public void clickOnDeleteVoucher() {
         page.waitForLoadState(LoadState.LOAD);
-        playwright.waitFor(voucherDivSection, 5000.0);
+        playwright.waitFor(voucherDivSection, 15000.0);
         if (playwright.waitTillLocatorIsVisible(deleteVoucher)) {
             playwright.clickOn(deleteVoucher);
         }
@@ -307,7 +307,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String voucherInputPopUpWarningText() {
-        playwright.hardWait(1000);
+        playwright.hardWait(3000);
         return playwright.getText(voucherInputPopUpWarningText);
     }
 

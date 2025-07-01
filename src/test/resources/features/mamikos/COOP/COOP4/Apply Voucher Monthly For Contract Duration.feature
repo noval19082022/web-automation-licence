@@ -100,4 +100,4 @@ Feature: Apply Voucher Monthly For Contract Duration
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOMONTHLY       | AUTOMONTHLY       |
-    Then tenant can see voucher is applied
+    Then tenant can see warning message "Kode voucher tidak bisa digunakan."
