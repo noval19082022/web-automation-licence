@@ -15,6 +15,7 @@ public class CreateKosPO {
     }
 
     public void clickOnTambahKosBaruButton() {
+        playwright.waitTillLocatorIsVisible(tambahKosBaruButton);
         playwright.waitFor(tambahKosBaruButton, 3000.0);
         playwright.clickOn(tambahKosBaruButton);
     }

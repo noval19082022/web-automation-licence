@@ -42,7 +42,7 @@ public class KostOwnerPO {
         firstRejectButton = page.locator("//a[contains(.,'Edit Kost')]");
         alertMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
         verifyButton = page.locator("//*[@title='Verify']");
-        firstRejectKosButton = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(Mamikos.getPropertyKosName())).getByTitle("Alasan ditolak");
+        firstRejectKosButton = page.locator("a:nth-child(5)").first();
         firstDeleteButton = page.locator(".btn-action-group > a:nth-child(3)").first();
         phoneOwnerSearch = page.getByPlaceholder("No. Telp. Owner");
         firstApproveButton = page.locator("(//a[@title='Verify'])[1]");

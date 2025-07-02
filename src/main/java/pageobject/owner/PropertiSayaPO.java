@@ -1909,7 +1909,7 @@ public class PropertiSayaPO {
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
+        playwright.hardWait(2000); // improve hardwait, sometimes it wait too long for waiting until success upload
     }
 
     /**

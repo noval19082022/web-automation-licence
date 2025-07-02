@@ -113,7 +113,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos       | build kos | other note |
-      | kos Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
+      | kost Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |
@@ -206,7 +206,7 @@ Feature: Create Kos Mamipay Active
       | phone stag   | password  |
       | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Property Automation Tipe GNR Tobelo Halmahera Utara" on property saya page
+    And owner search kost "Kost Automation TEST NB62KV2B" on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
     And user click button edit "Harga" kos
     And owner edit data harga kos as expected
