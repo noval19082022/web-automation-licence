@@ -10,6 +10,7 @@ import pageobject.common.HomePO;
 import pageobject.pms.disbursement.DisbursementPO;
 import utilities.JavaHelpers;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class DisbursementSteps {
     Page page = ActiveContext.getActivePage();
     DisbursementPO disbursement = new DisbursementPO(page);
     HomePO home = new HomePO(page);
+    private JavaHelpers java = new JavaHelpers();
 
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
     public static final String ENV = JavaHelpers.getPropertyValue(MAMIKOS, "env");
@@ -209,5 +211,31 @@ public class DisbursementSteps {
     @Then("cancel auto transfer disbursement button is not visible")
     public void cancel_auto_transfer_disbursement_button_is_not_visible() {
         Assert.assertFalse(disbursement.isButtonCancelAutoTransferVisible());
+    }
+
+    @Then("filter transfer is {string}")
+    public void filter_transfer_is(String type) {
+        Assert.assertEquals(disbursement.getFilterTransferType(),type);
+    }
+    @Then("filter transfer period is {string}")
+    public void filter_transfer_period_is(String period) {
+        Assert.assertEquals(disbursement.getFilterTransferPeriod(),period);
+    }
+    @Then("admin can see total transfer amount in {string}")
+    public void admin_can_see_total_transfer_amount_in(String cutoff) throws ParseException {
+        String month = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "MMMM yyyy", "id", 0, 0, 0, 0, 0);
+        System.out.println(month);
+        String transferTitle = "Total Transfer "+month+" ("+cutoff+")";
+        System.out.println(transferTitle);
+        Assert.assertEquals(disbursement.getTotalTransferTitle(),transferTitle);
+    }
+    @When("admin select filter transfer {string}")
+    public void admin_select_filter_transfer(String schedule) {
+        disbursement.selectFilterTransfer(schedule);
+    }
+    @When("admin select filter transfer period {string}")
+    public void admin_select_filter_transfer_period(String transferPeriod) {
+        disbursement.selectFilterTransferPeriod(transferPeriod);
+        disbursement.applyFilter();
     }
 }
