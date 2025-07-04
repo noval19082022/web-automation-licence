@@ -9,8 +9,9 @@ public class GoldPlusSubmissionPO {
     private PlaywrightHelpers playwright;
 
     private Locator pilihPaketButton;
+    private Locator pilihPeriode;
     private Locator bayarSekarangButton;
-    private Locator gpSatuFirstRadioButton;
+    private Locator gpSectionCardList;
     private Locator selectedFavoritGpPackage;
     private Locator selectedGpPeriode;
 
@@ -18,18 +19,25 @@ public class GoldPlusSubmissionPO {
         this.page = page;
         playwright = new PlaywrightHelpers(this.page);
         pilihPaketButton = playwright.getButtonBySetName("Pilih");
+        pilihPeriode = playwright.getButtonBySetName("Pilih Periode");
         bayarSekarangButton = playwright.getButtonBySetName("Bayar Sekarang Rp");
-        gpSatuFirstRadioButton = page.locator(".bg-c-radio__icon").first();
+        gpSectionCardList = page.getByTestId("periode-card-gp");
         selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");
         selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
     }
 
+//    /**
+//     * Clicks on pilih periode button
+//     */
+//    public void clicksOnPilihPeriodeButton() {
+//        playwright.clickOn(pilihPeriode);
+//    }
+
     /**
      * Clicks on pilih paket button
      */
-    public void clicksOnPilihPaketButton() {
-        playwright.waitFor(pilihPaketButton,30000.0);
-        playwright.clickOn(pilihPaketButton);
+    public void clicksOnPilihPeriodeButton() {
+        playwright.clickOn(pilihPeriode);
     }
 
     /**
@@ -44,9 +52,15 @@ public class GoldPlusSubmissionPO {
     /**
      * Click on gp satu 3 bulan radio button
      */
-    public void clickOnGpSatuFirstRadioButton() {
-        playwright.waitFor(gpSatuFirstRadioButton);
-        playwright.clickOn(gpSatuFirstRadioButton);
+    public void clickOnGpSatuFirstRadioButton(boolean tapPilihPeriode) {
+        playwright.waitFor(gpSectionCardList.first());
+        var carList = playwright.getLocators(gpSectionCardList);
+
+        playwright.clickOn(carList.get(carList.size() -1));
+
+        if (tapPilihPeriode) {
+            playwright.clickOn(pilihPeriode);
+        }
     }
 
     /**

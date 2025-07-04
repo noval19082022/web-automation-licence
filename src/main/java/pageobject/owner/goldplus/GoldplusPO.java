@@ -145,7 +145,7 @@ public class GoldplusPO {
         buttonExtendGPpopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         gpPackageChoosed = page.locator(".goldplus-package-detail__item-title");
         gpPackageRincianPembayaranDetailTagihan = page.locator("//p[@class='goldplus-package-detail__item-title bg-c-text bg-c-text--body-1']");
-        gpPeriodeChoosed = page.locator("//div[contains(@class,'-radio--checked')]/following-sibling::*//p[contains(@class,'bg-c-text--body-2')]");
+        gpPeriodeChoosed = page.locator(".goldplus-periode-select__periode-card-footer");
         favoritLabel = page.getByText("Favorit");
         selectTransactionUnpaid = page.getByTestId("goldplusPaymentUnpaid-0").getByText("Lihat Tagihan");
         sectionPackageSelected = page.locator(".goldplus-package-detail");
