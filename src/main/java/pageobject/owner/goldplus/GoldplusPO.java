@@ -119,7 +119,7 @@ public class GoldplusPO {
         daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
         closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
         gpStatusFilter = page.locator(".goldplus-room-card__gp-status");
-        backFromFilter = page.locator(".bg-c-icon[data-v-7e8d294e]");
+        backFromFilter = page.getByTestId("back-button");
         tagihanGPSection = page.locator("//div[@class='gold-plus-features']/div[4]");
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
