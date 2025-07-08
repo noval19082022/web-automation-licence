@@ -2,8 +2,15 @@
 Feature: Reschedule and Relocation
 
   Background: Admin go to duration section form via booking now
-    Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 0890867321227 | 0890867321227 | mamikosqa123 |
+    And tenant navigate to riwayat and draf booking
+    And tenant cancel all need confirmation booking request
+    Then tenant logs out
+    When admin go to mamikos bangkrupux admin
+    And admin login to bangkrupux:
       | email stag                   | email prod                   | password  |
       | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   | qwerty123 |
     And admin go to data booking menu
