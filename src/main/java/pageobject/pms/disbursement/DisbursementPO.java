@@ -39,6 +39,13 @@ public class DisbursementPO {
     private Locator disbursementPeriodSelect;
     private Locator cancelAutoTransferButton;
 
+    //Filter Disbursement
+    private Locator filterTransferType;
+    private Locator filterTransferPeriod;
+    private Locator totalTransferTitle;
+    private Locator filterTransferPeriodValue;
+    private Locator filterTransferValue;
+
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
     Locator rincianPenjualanSection;
@@ -103,6 +110,11 @@ public class DisbursementPO {
         emptyStateSubtitle = page.getByText("Data tidak ditemukan di filter atau kata kunci yang Anda gunakan tidak sesuai.");
         propertyNameText = page.locator(".ss-table tbody tr td:nth-of-type(2)");
         disbursementPeriodSelect = page.locator(".bg-c-select__trigger-text");
+
+        //Filter Disbursement
+        filterTransferType = page.locator(".bg-c-select__trigger-text").first();
+        filterTransferPeriod = page.locator(".bg-c-select__trigger-text").last();
+        totalTransferTitle = page.locator("p.bg-u-text-neutral-500");
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -608,5 +620,56 @@ public class DisbursementPO {
     public boolean isButtonCancelAutoTransferVisible() {
         cancelAutoTransferButton = page.getByText("Cancel Auto Transfer");
         return playwright.isLocatorVisibleAfterLoad(cancelAutoTransferButton,5000.0);
+    }
+
+    /**
+     * Get filter transfer type in Disbursement page
+     * @return  String
+     */
+    public String getFilterTransferType() {
+        return playwright.getText(filterTransferType);
+    }
+
+    /**
+     * Get filter transfer period in Disbursement page
+     * @return  String
+     */
+    public String getFilterTransferPeriod() {
+        return playwright.getText(filterTransferPeriod);
+    }
+
+    /**
+     * Get total transfer title in Disbursement page
+     * @return  String
+     */
+    public String getTotalTransferTitle() {
+        return playwright.getText(totalTransferTitle);
+    }
+
+    /**
+     * Select filter transfer period in Disbursement page
+     * @param transferPeriod String data type
+     */
+    public void selectFilterTransferPeriod(String transferPeriod) {
+        filterTransferPeriodValue = page.locator("a").filter(new Locator.FilterOptions().setHasText(transferPeriod));
+        playwright.clickOn(filterTransferPeriod);
+        playwright.clickOn(filterTransferPeriodValue);
+    }
+
+    /**
+     * Apply filter in Disbursement page
+     */
+    public void applyFilter() {
+        playwright.clickOn(cariBtn);
+    }
+
+    /**
+     * Select filter transfer in Disbursement page
+     * @param schedule String data type
+     */
+    public void selectFilterTransfer(String schedule) {
+        filterTransferValue = page.locator("a").filter(new Locator.FilterOptions().setHasText(schedule));
+        playwright.clickOn(filterTransferType);
+        playwright.clickOn(filterTransferValue);
     }
 }
