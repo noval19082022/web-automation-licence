@@ -22,7 +22,7 @@ Feature: Kost Review Not Submitted Display
   @TEST_SS-3630 @continue
   Scenario: Kos Saya - The review menu page
     When tenant navigate to kost saya page
-    Then there will be a kost saya with the title "Bagaimana pengalaman ngekosmu?Menyenangkan atau ada yang perlu ditingkatkan? Yuk, tulis review kamu."
+    Then there will be a kost saya with the title "Bagaimana pengalaman ngekosmu? Menyenangkan atau ada yang perlu ditingkatkan? Yuk, tulis review kamu."
 
   @TEST_SS-3981 @TEST_COOP-2906 @continue
   Scenario: Kos Saya - The review menu redirection to review page
@@ -34,7 +34,7 @@ Feature: Kost Review Not Submitted Display
   Scenario: Kos Saya (Ajukan Berhenti Sewa) - The review menu page
     When tenant navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
-    Then there will be a ajukan sewa with the title "Bagaimana pengalaman ngekosmu?Menyenangkan atau ada yang perlu ditingkatkan? Yuk, tulis review kamu."
+    Then there will be a ajukan sewa with the title "Bagaimana pengalaman ngekosmu? Menyenangkan atau ada yang perlu ditingkatkan? Yuk, tulis review kamu."
 
   @TEST_SS-3996 @continue
   Scenario: Kos Saya (Ajukan Berhenti Sewa) - The review menu redirection to review page

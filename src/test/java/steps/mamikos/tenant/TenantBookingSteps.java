@@ -582,4 +582,19 @@ public class TenantBookingSteps {
         kostDetail = searchPO.searchByText(apartName);
         apartDetail.waitTillApartDetailPageVisible();
     }
+
+    @Then("tenant can see {string} section")
+    public void tenantCanSeeSection(String voucherName) {
+        Assert.assertEquals(kostDetail.getVoucherTextDisplayed(voucherName), voucherName, "Voucher is not displayed");
+    }
+
+    @And("tenant click on {string} section")
+    public void tenantClickOnSection(String voucherName) {
+        kostDetail.clickONVoucher(voucherName);
+    }
+
+    @Then("tenant can see voucher list")
+    public void tenantCanSeeVoucherList() {
+        Assert.assertTrue(kostDetail.getVoucherList(), "Voucher list is not displayed");
+    }
 }

@@ -27,8 +27,8 @@ public class ChatPO {
         this.playwright = new PlaywrightHelpers(page);
         tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("CS Okta Consultant")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
         chatRoomMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Chat Room"));
-        kostTitleList = page.getByText("Bakwan Ebi Bin Tahuan : Kost Apik Batas Nusa Tipe A Seturan Yogyakarta");
-        chatKosTitle = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Bakwan Ebi Bin Tahuan : Kost Apik Batas Nusa Tipe A Seturan Yogyakarta"));
+        kostTitleList = page.locator("//div[@class=\"list-item\"]").first();
+        chatKosTitle = page.locator("//div[@class=\"chat-title is-group\"]");
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));

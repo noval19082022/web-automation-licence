@@ -283,6 +283,9 @@ public class KostDetailsPO {
     private Locator refundTitle;
     private Locator refundDescription;
 
+    //-------------------Voucher---------------//
+    private Locator voucherList;
+
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -530,6 +533,9 @@ public class KostDetailsPO {
         uspDescription = page.locator(".detail-kost-benefit-content-wrapper-information__subtitle");
         refundTitle = page.locator(".detail-kost-refund__title");
         refundDescription = page.locator(".detail-kost-refund__description");
+
+        //------------voucher------------//
+        voucherList = page.locator("//div[@class=\"all-vouchers-modal__vouchers bg-u-pt-md\"]");
 
     }
 
@@ -2463,5 +2469,35 @@ public class KostDetailsPO {
      */
     public String getRefundDescription() {
         return playwright.getText(refundDescription);
+    }
+
+    /**
+     * Get voucher text
+     * @param voucherName voucher name
+     * @return String voucher text
+     */
+    public String getVoucherTextDisplayed(String voucherName) {
+        Locator voucherText = page.locator("//p[contains(.,'"+voucherName+"')]");
+        playwright.waitTillPageLoaded();
+        return playwright.getText(voucherText);
+    }
+
+    /**
+     * Click on voucher
+     * @param voucherName
+     */
+    public void clickONVoucher(String voucherName) {
+        Locator voucher = page.locator("//p[contains(.,'"+voucherName+"')]");
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(voucher);
+    }
+
+    /**
+     * Check if voucher list is visible
+     * @return voucher list
+     */
+    public boolean getVoucherList() {
+        playwright.waitTillPageLoaded();
+        return playwright.waitTillLocatorIsVisible(voucherList);
     }
 }
