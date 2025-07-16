@@ -52,7 +52,7 @@ public class GoldplusPeriodSteps {
     @When("owner choose periode goldplus {string}")
     public void owner_choose_periode_goldplus(String period){
         goldplus.clickOnPeriodGoldPlus(period);
-        gpSubmission.clicksOnPilihPaketButton();
+        gpSubmission.clicksOnPilihPeriodeButton();
     }
 
 }

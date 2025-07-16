@@ -119,7 +119,7 @@ public class GoldplusPO {
         daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
         closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
         gpStatusFilter = page.locator(".goldplus-room-card__gp-status");
-        backFromFilter = page.locator(".bg-c-icon[data-v-7e8d294e]");
+        backFromFilter = page.getByTestId("back-button");
         tagihanGPSection = page.locator("//div[@class='gold-plus-features']/div[4]");
         tableTagihanGP = page.locator("//div[@id='goldplusPaymentDone']");
         lihatSelengkapnyaTagihanGP = page.locator("//div[4]//a[.='Lihat Selengkapnya']");
@@ -145,7 +145,7 @@ public class GoldplusPO {
         buttonExtendGPpopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         gpPackageChoosed = page.locator(".goldplus-package-detail__item-title");
         gpPackageRincianPembayaranDetailTagihan = page.locator("//p[@class='goldplus-package-detail__item-title bg-c-text bg-c-text--body-1']");
-        gpPeriodeChoosed = page.locator("//div[contains(@class,'-radio--checked')]/following-sibling::*//p[contains(@class,'bg-c-text--body-2')]");
+        gpPeriodeChoosed = page.locator(".goldplus-periode-select__periode-card-footer");
         favoritLabel = page.getByText("Favorit");
         selectTransactionUnpaid = page.getByTestId("goldplusPaymentUnpaid-0").getByText("Lihat Tagihan");
         sectionPackageSelected = page.locator(".goldplus-package-detail");
