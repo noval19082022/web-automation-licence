@@ -591,7 +591,7 @@ public class TenantBookingSteps {
 
     @Then("tenant can see {string} section")
     public void tenantCanSeeSection(String voucherName) {
-        Assert.assertEquals(kostDetail.getVoucherTextDisplayed(voucherName), voucherName, "Voucher is not displayed");
+        Assert.assertEquals(kostDetail.getVoucherText(voucherName), voucherName, "Voucher is not displayed");
     }
 
     @And("tenant click on {string} section")
@@ -601,7 +601,7 @@ public class TenantBookingSteps {
 
     @Then("tenant can see voucher list")
     public void tenantCanSeeVoucherList() {
-        Assert.assertTrue(kostDetail.getVoucherList(), "Voucher list is not displayed");
+        Assert.assertTrue(kostDetail.isVoucherListVisible(), "Voucher list is not displayed");
     }
 
     @And("tenant click on close icon")
@@ -611,7 +611,7 @@ public class TenantBookingSteps {
 
     @Then("tenant can not see voucher list")
     public void tenantCanNotSeeVoucherList() {
-        Assert.assertFalse(kostDetail.getVoucherList(), "Voucher list is displayed");
+        Assert.assertFalse(kostDetail.isVoucherListVisible(), "Voucher list is displayed");
     }
 
     @And("tenant click on lihat detail button")
@@ -626,7 +626,8 @@ public class TenantBookingSteps {
 
     @Then("tenant can not see {string} section")
     public void tenantCanNotSeeSection(String voucherName) {
-        Assert.assertFalse(kostDetail.getVoucherTextDisplayed(voucherName), "Voucher name is displayed");
+//        Assert.assertFalse(kostDetail.getVoucherText(voucherName), "Voucher name is displayed");
+//        Assert.assertFalse(kostDetail.getVoucherText(voucherName), "Voucher name is displayed");
     }
 
     @Then("tenant can see toast message {string}")

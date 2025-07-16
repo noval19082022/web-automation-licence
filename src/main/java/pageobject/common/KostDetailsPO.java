@@ -2485,10 +2485,21 @@ public class KostDetailsPO {
      * @param voucherName voucher name
      * @return String voucher text
      */
-    public boolean getVoucherTextDisplayed(String voucherName) {
+    public String getVoucherText(String voucherName) {
         Locator voucherText = page.locator("//p[contains(.,'"+voucherName+"')]");
         playwright.waitTillPageLoaded();
-        return playwright.waitTillLocatorIsVisible(voucherText);
+        return playwright.getText(voucherText);
+    }
+
+    /**
+     * Check if voucher text is visible for kost p2
+     * @param voucherName
+     * @return voucher text name
+     */
+    public boolean isVoucherTextVisible(String voucherName) {
+        Locator voucherTextName = page.locator("//p[contains(.,'"+voucherName+"')]");
+        playwright.waitTillPageLoaded();
+        return playwright.waitTillLocatorIsVisible(voucherTextName);
     }
 
     /**
@@ -2505,7 +2516,7 @@ public class KostDetailsPO {
      * Check if voucher list is visible
      * @return voucher list
      */
-    public boolean getVoucherList() {
+    public boolean isVoucherListVisible() {
         playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(voucherList);
     }
