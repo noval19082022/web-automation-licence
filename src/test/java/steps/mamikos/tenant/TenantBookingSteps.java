@@ -626,8 +626,7 @@ public class TenantBookingSteps {
 
     @Then("tenant can not see {string} section")
     public void tenantCanNotSeeSection(String voucherName) {
-//        Assert.assertFalse(kostDetail.getVoucherText(voucherName), "Voucher name is displayed");
-//        Assert.assertFalse(kostDetail.getVoucherText(voucherName), "Voucher name is displayed");
+        Assert.assertFalse(kostDetail.isVoucherTextVisible(voucherName), "Voucher name is displayed");
     }
 
     @Then("tenant can see toast message {string}")
