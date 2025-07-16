@@ -597,4 +597,15 @@ public class TenantBookingSteps {
     public void tenantCanSeeVoucherList() {
         Assert.assertTrue(kostDetail.getVoucherList(), "Voucher list is not displayed");
     }
+
+    @Then("tenant not see room limit alert")
+    public void tenant_not_see_room_limit_alert() {
+        Assert.assertFalse(bookingForm.isRoomLimitAlertDisplayed());
+    }
+
+    @Then("tenant can see room limit alert")
+    public void tenant_can_see_room_limit_alert() {
+        Assert.assertTrue(bookingForm.isRoomLimitAlertDisplayed());
+        Assert.assertEquals(bookingForm.getRoomLimitAlertText(),"Sisa n kamar, jangan sampai kehabisan!");
+    }
 }
