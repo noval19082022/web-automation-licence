@@ -2555,5 +2555,4 @@ public class KostDetailsPO {
     public void clickOnSalinDetailButton(){
         playwright.clickOn(salinDetailButton);
     }
-
 }
