@@ -41,6 +41,8 @@ public class BookingFormPO {
     Locator pengajuanSewaText;
     Locator chatPemilikButton;
     Locator viewRecommendationKos;
+    Locator roomLimitAlert;
+    Locator roomLimitAlertText;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -75,6 +77,8 @@ public class BookingFormPO {
         this.pengajuanSewaText = page.locator("//*[@id='bookingContainer']");
         this.chatPemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chat Chat Pemilik")).first();
         this.viewRecommendationKos = page.locator("//button[normalize-space()='Lihat Rekomendasi Kos']");
+        roomLimitAlert = page.getByTestId("bookingRequestForm-roomScarcityPrompt");
+        roomLimitAlertText = page.locator("div[data-testid='bookingRequestForm-roomScarcityPrompt'] p");
     }
 
     /**
@@ -424,5 +428,24 @@ public class BookingFormPO {
     public String getDeskriptionDiri(){
         Locator getDeskriptionText = page.locator("//*[@class=\"booking-item --tenant-description\"]/div").last();
        return playwright.getText(getDeskriptionText);
+    }
+
+    /**
+     * Check visibility room limit alert
+     * @return true or false
+     */
+    public boolean isRoomLimitAlertDisplayed() {
+        return playwright.isLocatorVisibleAfterLoad(roomLimitAlert,5000.0);
+    }
+
+    /**
+     * Get room limit alert text
+     * replace "Sisa [1-5] kamar" to "Sisa n kamar"
+     * @return String
+     */
+    public String getRoomLimitAlertText(){
+        String originalText = playwright.getText(roomLimitAlertText);
+        String text = originalText.replaceAll("(Sisa )\\d+( kamar)", "$1n$2");
+        return text;
     }
 }
