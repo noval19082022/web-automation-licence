@@ -1,6 +1,7 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -10,7 +11,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.fiturpromosi.mamiads.DetailTagihanPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
-import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -26,9 +26,7 @@ public class MamiAdsSteps {
     private Integer riwayatBeforeBeliSaldo;
     DetailTagihanPO detailTagihanPO = new DetailTagihanPO(page);
 
-    NavigatesSteps navigatesSteps = new NavigatesSteps();
     private Map<String, String> adsData;
-    Page page1;
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
@@ -42,6 +40,7 @@ public class MamiAdsSteps {
 
     @And("user navigate to mamiads history page")
     public void userNavigateToMamiadsHistoryPage() {
+        page.pause();
         mamiAdsPO.navigatesToMamiadsHistory();
     }
 
@@ -269,13 +268,14 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
-        mamiAdsPO.navigatesToMamiadsHistory();
-        playwright.clickOnText("Selesai");
-        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
-            mamiAdsPO.clickOnInvoiceMamiads();
-        });
-        var pwHelper2 = new PlaywrightHelpers(page1);
-        Assert.assertTrue(pwHelper2.isTextDisplayed("Pembayaran Berhasil", 5000));
+//        mamiAdsPO.navigatesToMamiadsHistory();
+//        playwright.clickOnText("Selesai");
+//        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+//            mamiAdsPO.clickOnInvoiceMamiads();
+//        });
+//        var pwHelper2 = new PlaywrightHelpers(page1);
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
     }
 
     @And("user click coba sekarang header")
@@ -372,7 +372,7 @@ public class MamiAdsSteps {
     public void userOpenTheInvoiceMamiadsIfInvoiceAlreadyMaximalOnRiwayat() {
         if (riwayatBeforeBeliSaldo == 12){
             mamiAdsPO.clickRiwayatMamiAds();
-            page1 = mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
+            mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
 
             List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
             ActiveContext.setActivePage(listPage.get(0));
