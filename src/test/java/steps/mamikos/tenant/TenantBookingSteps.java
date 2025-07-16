@@ -632,6 +632,6 @@ public class TenantBookingSteps {
 
     @Then("tenant can see toast message {string}")
     public void tenantCanSeeToastMessage(String toastMessage) {
-        Assert.assertEquals(kostDetail.isToastSuccessIsVisible(), toastMessage, "Toast message is not displayed");
+        Assert.assertEquals(kostDetail.getToastSuccess(), toastMessage, "Toast message is not displayed");
     }
 }

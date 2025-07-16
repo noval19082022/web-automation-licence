@@ -2556,7 +2556,7 @@ public class KostDetailsPO {
      * get toast message
      * @return text
      */
-    public String isToastSuccessIsVisible(){
+    public String getToastSuccess(){
         return playwright.getText(toastMessage);
     }
 
