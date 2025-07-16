@@ -285,6 +285,11 @@ public class KostDetailsPO {
 
     //-------------------Voucher---------------//
     private Locator voucherList;
+    private Locator closeVoucher;
+    private Locator lihatDetailVoucher;
+    private Locator salinButton;
+    private Locator toastMessage;
+    private Locator salinDetailButton;
 
 
     public KostDetailsPO(Page page) {
@@ -536,7 +541,11 @@ public class KostDetailsPO {
 
         //------------voucher------------//
         voucherList = page.locator("//div[@class=\"all-vouchers-modal__vouchers bg-u-pt-md\"]");
-
+        closeVoucher = page.locator("//button[@class = 'bg-c-modal__action-closable']");
+        lihatDetailVoucher = page.locator("div:nth-child(2) > .voucher-card__title-container > .bg-u-mt-xxxs > .bg-c-link");
+        salinButton = page.locator("//button[contains(.,'Salin')]").first();
+        toastMessage = page.getByText("Kode voucher berhasil disalin.");
+        salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
     }
 
     /**
@@ -2476,10 +2485,10 @@ public class KostDetailsPO {
      * @param voucherName voucher name
      * @return String voucher text
      */
-    public String getVoucherTextDisplayed(String voucherName) {
+    public boolean getVoucherTextDisplayed(String voucherName) {
         Locator voucherText = page.locator("//p[contains(.,'"+voucherName+"')]");
         playwright.waitTillPageLoaded();
-        return playwright.getText(voucherText);
+        return playwright.waitTillLocatorIsVisible(voucherText);
     }
 
     /**
@@ -2500,4 +2509,51 @@ public class KostDetailsPO {
         playwright.waitTillPageLoaded();
         return playwright.waitTillLocatorIsVisible(voucherList);
     }
+
+    /**
+     * click close icon
+     */
+    public void clickCloseIcon(){
+        playwright.clickOn(closeVoucher);
+    }
+
+    /**
+     * click on lihat detail button
+     */
+    public void clickOnLihatDetailButton(){
+        playwright.clickOn(lihatDetailVoucher);
+    }
+
+    /**
+     * get voucher name
+     * @param voucherName
+     * @return
+     */
+    public String getVoucherName(String voucherName){
+        Locator voucherNameText = page.locator("//p[contains(.,'"+voucherName+"')]").nth(1);
+        return playwright.getText(voucherNameText);
+    }
+
+    /**
+     * click on salin button on list
+     */
+    public void clickOnSalinButton(){
+        playwright.clickOn(salinButton);
+    }
+
+    /**
+     * get toast message
+     * @return text
+     */
+    public String isToastSuccessIsVisible(){
+        return playwright.getText(toastMessage);
+    }
+
+    /**
+     * click on salin button on detail voucher
+     */
+    public void clickOnSalinDetailButton(){
+        playwright.clickOn(salinDetailButton);
+    }
+
 }

@@ -14,11 +14,49 @@ Feature: Voucher Kost Detail
     And tenant click on "Voucher Khusus Singgahsini" section
     Then tenant can see voucher list
 
-  @TEST_SS-8408
-    Scenario: [Web][Kost Detail][Voucher]Check voucher when  have voucher  available (Kost Apik)
+  @TEST_SS-8408 @continue
+  Scenario: [Web][Kost Detail][Voucher]Check voucher when  have voucher  available (Kost Apik)
     Given tenant redirect to kost details:
       | kost path stag                                                                                | kost path prod               |
       | kost-kabupaten-lombok-barat-kost-campur-eksklusif-kost-apik-marlin-tipe-a-lombok-2 | Kos DC BAR Automation Tipe A |
     Then tenant can see "Voucher Khusus APIK" section
     And tenant click on "Voucher Khusus APIK" section
     Then tenant can see voucher list
+
+  @TEST_SS-8412 @continue @a
+  Scenario: [Web][Kost Detail][Voucher]Tenant check voucher when open kost p2
+    When tenant redirect to kost details:
+      | kost path stag                                                                                | kost path prod               |
+      | kost-kota-yogyakarta-kost-campur-eksklusif-kos-raya-raney-tipe-raya-3-danurejan-yogyakarta | Kos DC BAR Automation Tipe A |
+    And user dismiss promo ngebut pop up
+    Then tenant can not see "Voucher Khusus Singgahsini" section
+
+  @TEST_SS-8411 @continue @a
+  Scenario: [Web][Kost Detail][Voucher]Check close icon from voucher list
+    When tenant redirect to kost details:
+      | kost path stag                                                                                | kost path prod               |
+      | kost-kabupaten-lampung-barat-kost-campur-eksklusif-kost-singgahsini-negri-atas-awan-balik-bukit-lampung-barat-1| Kos DC BAR Automation Tipe A |
+    And tenant click on "Voucher Khusus Singgahsini" section
+    Then tenant can see voucher list
+    And tenant click on close icon
+    Then tenant can not see voucher list
+
+  @TEST_SS-8410 @continue @a
+  Scenario: [Web][Kost Detail][Voucher]Tenant check Lihat detail button
+    When tenant click on "Voucher Khusus Singgahsini" section
+    Then tenant can see voucher list
+    And tenant click on lihat detail button
+    Then tenant can see voucher detail with "Rini voucher weekly"
+
+  @TEST_SS-8418 @a
+  Scenario: [Web][Voucher list][Voucher List ]Salin voucher code
+    When tenant redirect to kost details:
+      | kost path stag                                                                                | kost path prod               |
+      | kost-kabupaten-lampung-barat-kost-campur-eksklusif-kost-singgahsini-negri-atas-awan-balik-bukit-lampung-barat-1| Kos DC BAR Automation Tipe A |
+    And tenant click on "Voucher Khusus Singgahsini" section
+    And tenant click on "Salin" button
+    Then tenant can see toast message "Kode voucher berhasil disalin."
+    And tenant click on lihat detail button
+    Then tenant can see voucher detail with "Rini voucher weekly"
+    And tenant click on "Salin Detail" button
+    Then tenant can see toast message "Kode voucher berhasil disalin."

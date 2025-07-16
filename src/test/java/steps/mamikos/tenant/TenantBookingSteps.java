@@ -401,6 +401,12 @@ public class TenantBookingSteps {
         } else if (text.equalsIgnoreCase("Lihat kos lain")) {
             kostDetail.clickAnotherKosButton();
         }
+        else if (text.equalsIgnoreCase("Salin")){
+            kostDetail.clickOnSalinButton();
+        }
+        else if (text.equalsIgnoreCase("Salin Detail")){
+            kostDetail.clickOnSalinDetailButton();
+        }
     }
 
     @Then("tenant see {string} section")
@@ -596,5 +602,35 @@ public class TenantBookingSteps {
     @Then("tenant can see voucher list")
     public void tenantCanSeeVoucherList() {
         Assert.assertTrue(kostDetail.getVoucherList(), "Voucher list is not displayed");
+    }
+
+    @And("tenant click on close icon")
+    public void tenantClickOnCloseIcon() {
+        kostDetail.clickCloseIcon();
+    }
+
+    @Then("tenant can not see voucher list")
+    public void tenantCanNotSeeVoucherList() {
+        Assert.assertFalse(kostDetail.getVoucherList(), "Voucher list is displayed");
+    }
+
+    @And("tenant click on lihat detail button")
+    public void tenantClickOnLihatDetailButton() {
+        kostDetail.clickOnLihatDetailButton();
+    }
+
+    @Then("tenant can see voucher detail with {string}")
+    public void tenantCanSeeVoucherDetailWith(String voucherName) {
+        Assert.assertEquals(kostDetail.getVoucherName(voucherName), voucherName, "Voucher name is not displayed");
+    }
+
+    @Then("tenant can not see {string} section")
+    public void tenantCanNotSeeSection(String voucherName) {
+        Assert.assertFalse(kostDetail.getVoucherTextDisplayed(voucherName), "Voucher name is displayed");
+    }
+
+    @Then("tenant can see toast message {string}")
+    public void tenantCanSeeToastMessage(String toastMessage) {
+        Assert.assertEquals(kostDetail.isToastSuccessIsVisible(), toastMessage, "Toast message is not displayed");
     }
 }
