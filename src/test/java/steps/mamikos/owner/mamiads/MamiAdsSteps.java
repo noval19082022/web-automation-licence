@@ -252,12 +252,6 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
-//        mamiAdsPO.navigatesToMamiadsHistory();
-//        playwright.clickOnText("Selesai");
-//        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
-//            mamiAdsPO.clickOnInvoiceMamiads();
-//        });
-//        var pwHelper2 = new PlaywrightHelpers(page1);
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
     }
