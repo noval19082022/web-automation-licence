@@ -6,8 +6,8 @@ Feature: Voucher Saya Page
   Scenario: Voucher List Display and Scrolling
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password      |
-      | 0819090909   | 0819090909   | qwerty123     |
+      | phone stag | phone prod | password  |
+      | 0819090909 | 0819090909 | qwerty123 |
     And tenant navigates to voucher saya page
     Then user see voucher list header
     And user see "Tersedia" tab on voucher saya page
@@ -29,7 +29,7 @@ Feature: Voucher Saya Page
     And user see voucher list disabled Kode Voucher label on kadaluwarsa page
     And user see voucher list disabled Voucher code on kadaluwarsa page
 
-    @TEST_SS-4154
+  @TEST_SS-4154
   Scenario: Voucher Detail Display, Scrolling, and Salin Button Functionality
     When tenant navigates to voucher saya page
     And user click Salin button from voucher list
@@ -77,8 +77,8 @@ Feature: Voucher Saya Page
   Scenario: Empty State Landing Page displayed
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password      |
-      | 089767561234 | 089767561234 | mamikosqa123  |
+      | phone stag   | phone prod   | password     |
+      | 089767561234 | 089767561234 | mamikosqa123 |
     And tenant navigates to voucher saya page
     When user click "Tersedia" tab on voucher saya page
     Then user see Tersedia Empty State Landing Page

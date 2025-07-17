@@ -9,7 +9,6 @@ import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class MamiAdsPO {
@@ -46,6 +45,7 @@ public class MamiAdsPO {
     Locator kamarPenuhText;
     private Locator beliSaldoBtnPopupToggle;
     private Locator continuePaymentBuySaldoMamiads;
+    private Locator balanceListContainer;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -118,6 +118,7 @@ public class MamiAdsPO {
         this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
         this.saldoAmountFirstIndex = page.locator(".bg-c-radio__icon > span").first();
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
+        this.balanceListContainer = page.locator(".balance-list__container");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -264,6 +265,8 @@ public class MamiAdsPO {
      */
     public String listSaldo(String listSaldo, int index) {
         String element = "";
+        System.out.println(getBalanceListSnapshot());
+        page.pause();
         switch (listSaldo) {
             case "priceTitle":
                 element = "//p[contains(text(), 'ribu') or contains(text(), 'juta')]";
@@ -872,6 +875,16 @@ public class MamiAdsPO {
         this.page = page.waitForPopup(() -> {
             playwright.clickOn(lihatInfoLanjutWarningBanner);
         });
+    }
+
+    /**
+     * Get aria snapshot of the balance list container
+     * Useful for accessibility testing and debugging of the balance list section
+     * 
+     * @return String representation of the balance list container's accessibility tree
+     */
+    public String getBalanceListSnapshot() {
+        return playwright.getAriaSnapshot(balanceListContainer);
     }
 }
 

@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import javax.swing.text.StyledEditorKit;
-
 public class AllLeadsPO {
 
     private Page page;

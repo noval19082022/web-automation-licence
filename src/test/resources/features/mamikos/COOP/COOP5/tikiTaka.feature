@@ -7,18 +7,18 @@ Feature: Tiki Taka - Bank Account
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0816000001    | 0816000001    |
+      | phone stag | phone prod |
+      | 0816000001 | 0816000001 |
 
   @TEST_SS-4300 @TEST_SS-4302 @TEST_SS-4301
   Scenario: [WEB][Ajukan Berhenti Sewa] Check Bank account form for Kost P1 have Deposit
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0816000001  | 0816000001  | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0816000001 | 0816000001 | qwerty123 |
     And user cancel booking
     When tenant redirect to kost details:
-      | kost path stag                                               | kost path prod               |
+      | kost path stag                                                                                            | kost path prod               |
       | kost-kabupaten-ogan-ilir-kost-campur-eksklusif-kost-fahmi-singgahsini-pertama-indralaya-utara-ogan-ilir-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
@@ -28,8 +28,8 @@ Feature: Tiki Taka - Bank Account
       | 085312345690 | 0890000000289 | qwerty123 |
     And owner navigates to owner dashboard
     And owner accept booking from tenant:
-      | tenant stag     | tenant prod        |
-      | Akun Tiki taka | Hagaromo Otsutsuki  |
+      | tenant stag    | tenant prod        |
+      | Akun Tiki taka | Hagaromo Otsutsuki |
     Then owner should redirect back to pengajuan booking page
     And owner navigates to owner dashboard
     Then owner logs out
@@ -62,8 +62,8 @@ Feature: Tiki Taka - Bank Account
 #  @TEST_SS-4302
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Confirmation Pop Up - Confirm
     Then tenant can see popup with:
-    | Nama bank | Nomor rekening | Nama pemilik rekening |
-    | BCA       | 9900090900   | Akun Tiki Taka          |
+      | Nama bank | Nomor rekening | Nama pemilik rekening |
+      | BCA       | 9900090900     | Akun Tiki Taka        |
 
 #  @TEST_SS-4301
 #  Scenario: [WEB][Ajukan Berhenti Sewa] Cancel ajukan berhenti sewa submitted
@@ -80,22 +80,22 @@ Feature: Tiki Taka - Bank Account
   Scenario: Booking and confirm booking
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 0816000001  | 0816000001  | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0816000001 | 0816000001 | qwerty123 |
     And user cancel booking
     When tenant redirect to kost details:
-      | kost path stag                                               | kost path prod               |
+      | kost path stag                                                       | kost path prod               |
       | kost-kost-campur-murah-kost-scenario-tujuh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today"
     And user go to mamikos homepage
     And user logs out as a Tenant user
     Then user login as owner:
-      | phone stag   | phone prod    | password  |
+      | phone stag   | phone prod   | password  |
       | 087800001007 | 087800001007 | qwerty123 |
     And owner navigates to owner dashboard
     And owner accept booking from tenant:
-      | tenant stag     | tenant prod        |
-      | Akun Tiki taka | Hagaromo Otsutsuki  |
+      | tenant stag    | tenant prod        |
+      | Akun Tiki taka | Hagaromo Otsutsuki |
     Then owner should redirect back to pengajuan booking page
     And owner navigates to owner dashboard
     Then owner logs out

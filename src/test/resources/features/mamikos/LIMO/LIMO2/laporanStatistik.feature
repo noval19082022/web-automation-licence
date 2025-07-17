@@ -9,7 +9,7 @@ Feature: Laporan Statistik
       | 0891202303 | 0          | qwerty123 |
     And owner accsess statistic page
     Then auto select kost listing that are in the top order
-      | KosName         |
+      | KosName                                |
       | Kost Bandicoot Tobelo Tobelo Halmahera |
 
   @TEST_LIMO-277
@@ -23,7 +23,7 @@ Feature: Laporan Statistik
     And owner click tambah data iklan "Kost"
     And user click add new kos button
     And owner fills valid data kos as expected
-      | kos name            | room type check | room type name        | kos type | description kos       | build kos | other note |
+      | kos name             | room type check | room type name        | kos type | description kos       | build kos | other note |
       | kost Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
@@ -91,8 +91,8 @@ Feature: Laporan Statistik
   Scenario: [WEB][Statistic Page] Statistic section when owner have 1 propety just activated by today
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod | password  |
-      | 0823333333330 | 0       | qwerty123 |
+      | phone stag    | phone prod | password  |
+      | 0823333333330 | 0          | qwerty123 |
     And owner accsess statistic page
    # Then owner can see display empty state "Properti Belum Memiliki Performa"
 

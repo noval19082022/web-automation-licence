@@ -6,8 +6,8 @@ Feature: Filter Tipe Transfer
   Scenario: Filter by Tipe Transfer Bulanan
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin filter Tipe Transfer "Transfer Bulanan"
     Then display property list with Tipe Transfer "Transfer Bulanan"
     #search property monthly
@@ -21,8 +21,8 @@ Feature: Filter Tipe Transfer
   Scenario: Filter by Tipe Transfer Mingguan
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin filter Tipe Transfer "Transfer Mingguan"
     Then display property list with Tipe Transfer "Transfer Mingguan"
     #search property monthly

@@ -143,7 +143,7 @@ Feature: Tenant - Login
   Scenario: [Login Tenant] - tenant login by click lihat fasilitas umum
     Given user go to mamikos homepage
     When tenant redirect to kost details:
-      | kost path stag                                                             | kost path prod                                                             |
+      | kost path stag                                                                               | kost path prod                                                             |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-komplit-desta-tobelo-halmahera-utara-1 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     And user want to see more detail facility umum
     And user login from kost detail via phone number:

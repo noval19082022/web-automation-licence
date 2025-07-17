@@ -5,7 +5,7 @@ Feature: Mamipoin Tenant Landing Page
   Scenario: MamiPoin Tenant Landing Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod    | password  |
+      | phone stag  | phone prod    | password  |
       | 08123000002 | 0890867321215 | qwerty123 |
     And user navigate to kost saya page
     And user clicks on mamipoin tenant entry point button

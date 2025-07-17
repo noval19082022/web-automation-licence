@@ -127,7 +127,7 @@ Feature: Search Invoice
     Then invoice will changes to "<output>"
     Examples:
       | method | output |
-      | Unpaid   | Unpaid |
+      | Unpaid | Unpaid |
 
   @TEST_SS-2843 @DOM2 @searchInvoiceGlobal @continue
   Scenario: [Mamipay][Search Invoice]Change transaction from unpaid to paid not in mamipay

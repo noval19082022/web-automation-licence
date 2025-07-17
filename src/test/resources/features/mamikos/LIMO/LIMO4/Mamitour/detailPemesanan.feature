@@ -5,8 +5,8 @@ Feature: Detail Pemesanan
   Scenario: [Web][Mamitour] Check default state of detail pemesanan
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod    | password  |
-      | 087133998156 | 0             | qwerty123 |
+      | phone stag   | phone prod | password  |
+      | 087133998156 | 0          | qwerty123 |
     And user navigate to mamitour landing page
     And user click on pesan sekarang button
     Then user verify default state of detail pemesanan

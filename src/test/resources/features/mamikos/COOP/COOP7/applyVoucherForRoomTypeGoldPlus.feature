@@ -18,8 +18,8 @@ Feature: Apply Voucher For Room Type Gold Plus
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag     |  phone prod     | password  |
-      | 083824996373   |  083824996373   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 083824996373 | 083824996373 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -33,8 +33,8 @@ Feature: Apply Voucher For Room Type Gold Plus
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod     | password     |
-      | 0895359416718   | 0895359416718  | P@ssw0rd    |
+      | phone stag    | phone prod    | password |
+      | 0895359416718 | 0895359416718 | P@ssw0rd |
     And owner accept booking and select the room
     Then owner should redirect back to pengajuan booking page
 
@@ -42,34 +42,34 @@ Feature: Apply Voucher For Room Type Gold Plus
   Scenario: Tenant Apply Voucher Applicable for Room Type
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag     |  phone prod     | password  |
-      | 083824996373   |  083824996373   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 083824996373 | 083824996373 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
-      | voucher name stag   | voucher name prod   |
-      | VAFORROOMGP11       | VAFORROOMGP11       |
+      | voucher name stag | voucher name prod |
+      | VAFORROOMGP11     | VAFORROOMGP11     |
     Then tenant can see voucher is applied
 
   @continue
   Scenario: Tenant Apply Voucher Not Applicable for Room Type
     When tenant set active page to 1
     And tenant apply voucher:
-      | voucher name stag    | voucher name prod  |
-      | VNAFORROOMGP11       | VNAFORROOMGP11     |
+      | voucher name stag | voucher name prod |
+      | VNAFORROOMGP11    | VNAFORROOMGP11    |
     Then Voucher code has been used
 
   @continue
   Scenario: Tenant Apply Voucher Not Applicable For Other Room Type
     When tenant set active page to 1
     And tenant apply voucher:
-      | voucher name stag    | voucher name prod  |
-      | VNAFORROOMGP21       | VNAFORROOMGP21     |
+      | voucher name stag | voucher name prod |
+      | VNAFORROOMGP21    | VNAFORROOMGP21    |
     Then tenant can see voucher is applied
 
   Scenario: Tenant Apply Voucher Applicable For Other Room Type
     When tenant set active page to 1
     And tenant apply voucher:
-      | voucher name stag    | voucher name prod  |
-      | VAFORROOMGP21        | VAFORROOMGP21      |
+      | voucher name stag | voucher name prod |
+      | VAFORROOMGP21     | VAFORROOMGP21     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."

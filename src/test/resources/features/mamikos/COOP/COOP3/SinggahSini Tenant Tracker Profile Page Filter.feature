@@ -6,8 +6,8 @@ Feature: SinggahSini Tenant Tracker Profile Page Filter
   Scenario: Filter By Nama Properti
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Nama Penyewa" and input "Adisinggahsini" in the search field on main page
     And user click search button on main page filter

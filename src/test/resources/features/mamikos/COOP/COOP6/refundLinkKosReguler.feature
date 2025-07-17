@@ -5,8 +5,8 @@ Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar
   Scenario: Tenant see refund policy on Detail Booking (Pilar 2)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    |  phone prod     | password  |
-      | 089000000611  |  089000000611   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 089000000611 | 089000000611 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button lihat selengkapnya riwayat booking
     And user click on link refund

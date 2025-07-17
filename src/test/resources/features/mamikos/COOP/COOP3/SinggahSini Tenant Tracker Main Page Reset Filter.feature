@@ -6,8 +6,8 @@ Feature: SinggahSini Tenant Tracker Main Page Reset Filter
   Scenario: Reset button On filter Page
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Survei" on filter tahapan and "Diajukan" on filter status
     And user click on terapkan button

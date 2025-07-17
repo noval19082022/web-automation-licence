@@ -3,12 +3,12 @@
 Feature: Admin Survey
 
   @TEST_SS-3555
-  @continue
+    @continue
   Scenario Outline: Change the survey status to waiting
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | qaeautomation3@mamikos.com   | qaeautomation3@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user edit Tenant Survey on "<name>"
     And user change survey status to "Waiting"
     Then user verify change survey success alert with "Success! Survey <name> (<kos>) berhasil dirubah"
@@ -17,7 +17,7 @@ Feature: Admin Survey
       | Aditenant ubah | Kos Lempuyangan |
 
   @TEST_SS-3556
-  @continue
+    @continue
   Scenario Outline: Change the survey status to on survey
     Given admin go to mamikos bangkrupux admin
     And user edit Tenant Survey on "<name>"
@@ -28,7 +28,7 @@ Feature: Admin Survey
       | Aditenant ubah | Kos Lempuyangan |
 
   @TEST_SS-3561
-  @continue
+    @continue
   Scenario Outline: Change the survey status to cancelled
     Given admin go to mamikos bangkrupux admin
     And user edit Tenant Survey on "<name>"
@@ -39,7 +39,7 @@ Feature: Admin Survey
       | Aditenant ubah | Kos Lempuyangan |
 
   @TEST_SS-3562
-  @continue
+    @continue
   Scenario Outline: Change the survey date
     Given admin go to mamikos bangkrupux admin
     And user edit Tenant Survey on "<name>"
@@ -50,7 +50,7 @@ Feature: Admin Survey
       | Aditenant ubah | Kos Lempuyangan |
 
   @TEST_SS-3560
-  @continue
+    @continue
   Scenario Outline: Change the survey time
     Given admin go to mamikos bangkrupux admin
     And user edit Tenant Survey on "<name>"

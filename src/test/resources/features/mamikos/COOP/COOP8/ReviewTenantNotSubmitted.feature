@@ -44,13 +44,13 @@ Feature: Kost Review Not Submitted Display
   @TEST_SS-3619 @continue
   Scenario: Review Page
     Then user see at review page contains:
-      | Review Page        |
-      | Kebersihan*        |
-      | Keamanan*          |
-      | Kenyamanan*        |
-      | Fasilitas Kamar*   |
-      | Fasilitas Umum*    |
-      | Kesesuaian Harga*  |
+      | Review Page       |
+      | Kebersihan*       |
+      | Keamanan*         |
+      | Kenyamanan*       |
+      | Fasilitas Kamar*  |
+      | Fasilitas Umum*   |
+      | Kesesuaian Harga* |
 
   @TEST_SS-3997
   Scenario: Kos Saya (Ajukan Berhenti Sewa) - Ajukan Berhenti Sewa button is disabled if the tenant hasn't submitted a review yet

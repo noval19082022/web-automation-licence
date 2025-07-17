@@ -5,22 +5,22 @@ Feature: Purchase Mamiprime
   Scenario Outline: [WEB][Mamikos Prime][Beli Paket] Owner doesn't have property active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password   |
-      | <phone number> | <phone number> | qwerty123  |
+      | phone stag     | phone prod     | password  |
+      | <phone number> | <phone number> | qwerty123 |
     And user click on mamiprime widget at owner dashboard
     And owner wants to buy mamiprime from header
     Then user will see pop up doesnt have property on mamiprime
     Examples:
-      | phone number  |
-      | 082220240418  |
-      | 082120240419  |
+      | phone number |
+      | 082220240418 |
+      | 082120240419 |
 
   @TEST_LIMO-628 @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Beli Paket] Owner only have apartment active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password   |
-      | 082320240418 | 082320240418 | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 082320240418 | 082320240418 | qwerty123 |
     And user click on mamiprime widget at owner dashboard
     And owner wants to buy mamiprime from header
     Then user will see pop up doesnt have property on mamiprime
@@ -29,8 +29,8 @@ Feature: Purchase Mamiprime
   Scenario: [WEB][Mamikos Prime][Detail Tagihan] Ubah Periode
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password   |
-      | 082233545512 | 0            | 12345678   |
+      | phone stag   | phone prod | password |
+      | 082233545512 | 0          | 12345678 |
     And owner navigate to pendaftaran mamiprime page
     Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And owner already choose period "7 Hari" with price "Rp164.500"
@@ -66,8 +66,8 @@ Feature: Purchase Mamiprime
   Scenario: Listing full room available and check label "kamar penuh and aktif"
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202407 | 0            | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202407 | 0          | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     Then owner will see that the text "Kamar Penuh" is displayed
@@ -77,8 +77,8 @@ Feature: Purchase Mamiprime
   Scenario: auto-select would be the 1st order of listing that is available
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202405 | 0            | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202405 | 0          | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     Then owner see auto-select would be the first order
@@ -87,8 +87,8 @@ Feature: Purchase Mamiprime
   Scenario: Section on “pendaftaran mamiprime“ display a maximum of 5 only keywords
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202405 | 0            | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202405 | 0          | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     Then "Keyword" are displayed in the register mamiprime
@@ -103,8 +103,8 @@ Feature: Purchase Mamiprime
   Scenario: Click on Hubungi kami on page Lihat kata kunci
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202405 | 0            | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202405 | 0          | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     And owner click "Lihat kata kunci lainnya"
@@ -130,8 +130,8 @@ Feature: Purchase Mamiprime
   Scenario: Click on Whatsapp on page Mamihelp
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod   | password  |
-      | 0891202405 | 0            | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202405 | 0          | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     And owner click "Lihat kata kunci lainnya"

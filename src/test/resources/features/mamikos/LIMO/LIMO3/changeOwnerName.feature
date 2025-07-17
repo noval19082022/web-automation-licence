@@ -5,8 +5,8 @@ Feature: Owner Setting - Change Owner Name
   Scenario: [Setelan Akun][Change Name] Change Owner Name
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password   |
-      | 0812345670001 | qwerty123  |
+      | phone stag    | password  |
+      | 0812345670001 | qwerty123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Nama Lengkap"
     And owner fills nama lengkap owner "Change name test"

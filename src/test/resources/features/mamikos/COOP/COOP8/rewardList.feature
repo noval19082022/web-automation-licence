@@ -5,8 +5,8 @@ Feature: [Loyalty Reward Management][Reward List]Reward List Management page dis
   Scenario: Reward List Management page display
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user access to Reward List menu
     Then system display Reward List Management page
     When user filter reward name "Reward Automation"

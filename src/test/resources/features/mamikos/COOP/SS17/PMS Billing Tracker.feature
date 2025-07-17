@@ -5,8 +5,8 @@ Feature: Billing Tracker
   Scenario: [Billing Tracker][Search]By Nama Penyewa when [Keywords] >= 3
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to billing tracker
     And admin search billing tracker by "Nama Penyewa" and "ed"
     Then admin can see validation "Minimal 3 karakter"
@@ -52,12 +52,12 @@ Feature: Billing Tracker
     When admin go to billing tracker
     And admin click on expand billing announcement
     Then admin can see bse name with:
-      | bse     |
-      | Bella   |
-      | Okta    |
-      | Maya    |
-      | Dida    |
-      | Sintia  |
+      | bse    |
+      | Bella  |
+      | Okta   |
+      | Maya   |
+      | Dida   |
+      | Sintia |
 
   @SS-5087 @continue
   Scenario: [Billing Tracker][Tenant phone number]Check phone number is same to tenant not verified phone number

@@ -36,8 +36,8 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123 |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -86,8 +86,8 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner go to bill page of kost "Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

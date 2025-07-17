@@ -5,8 +5,8 @@ Feature: Manage User Point
   Scenario: [Point Management][User Point] Filter User Point By Keyword
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     * admin access user point menu
     When user filter user point by keyword "tenant name" is "Amanda"
     * user clicks on Search button
@@ -45,8 +45,8 @@ Feature: Manage User Point
   Scenario: [Point Management][User Point] Blacklist and Whitelist User Point
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     * admin access user point menu
     When user filter user point by keyword "phone number" is "08766236902"
     * user clicks on Search button
@@ -70,8 +70,8 @@ Feature: Manage User Point
   Scenario: [Point Management][User Point] Adjust Point Topup
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     * admin access user point menu
     When user filter user point by keyword "phone number" is "0895359416718"
     * user clicks on Search button
@@ -99,8 +99,8 @@ Feature: Manage User Point
   Scenario: [Point Management][User Point] Manage User Point Display
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     * admin access user point menu
     Then user see Bulk Adjust Point button
     * user see Bulk Update Blacklist button

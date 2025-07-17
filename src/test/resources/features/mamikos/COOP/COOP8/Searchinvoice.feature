@@ -157,7 +157,7 @@ Feature: Search invoice
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     When admin clicks on Search Invoice Menu form left bar
     And admin search invoice:
-      | search by    | invoice_number        |
+      | search by    | invoice_number            |
       | search value | DP/38443528/2024/03/90665 |
     And user click on detail fee button
     Then admin see edit basic amount button disable

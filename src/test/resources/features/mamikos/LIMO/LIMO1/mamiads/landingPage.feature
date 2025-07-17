@@ -5,7 +5,7 @@ Feature: MamiAds Landing Page
   Scenario: [Web][MamiAds][Landing Page] Check landing page mamiAds
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password |
+      | phone stag   | phone prod | password  |
       | 085951394565 | 0          | qwerty123 |
     And user go to mamikos homepage
     And user click "Promosikan Iklan Anda"

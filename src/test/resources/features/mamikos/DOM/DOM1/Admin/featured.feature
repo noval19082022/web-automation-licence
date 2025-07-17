@@ -62,15 +62,15 @@ Feature: Listing Featured
   Scenario: [Web][Featured Listing][Data]Admin check featured Listing Menu
     When admin bangkerupux navigates listing featured menu
     Then featured table contains column
-      | Kost ID               |
-      | Owner Phone Number      |
-      | Owner Registered At      |
-      | Room Name                |
-      | Chat Room Count          |
-      | Purchaser Category (yearly) |
+      | Kost ID                           |
+      | Owner Phone Number                |
+      | Owner Registered At               |
+      | Room Name                         |
+      | Chat Room Count                   |
+      | Purchaser Category (yearly)       |
       | Purchase Frequency (yearly, freq) |
       | ARPU (yearly, gerak)              |
-      | Rating                          |
-      | Photo Card                      |
-      | Featured Status                 |
-      | Action                          |
+      | Rating                            |
+      | Photo Card                        |
+      | Featured Status                   |
+      | Action                            |

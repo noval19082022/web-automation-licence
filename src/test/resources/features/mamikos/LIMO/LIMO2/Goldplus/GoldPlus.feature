@@ -50,13 +50,13 @@ Feature: Gold Plus
     Then validate that owner have "Menunggu Pembayaran"
     And owner should successfully log out
 
-    @continue #reset GP
-    Scenario: delete or reset data GP
-      Given admin go to mamikos mamipay admin
-      And admin login to mamipay:
-        | email stag                   | email prod                   | password  |
-        | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-      Then user wants to reset Goldplus for owner with phone number "082233545506"
+  @continue #reset GP
+  Scenario: delete or reset data GP
+    Given admin go to mamikos mamipay admin
+    And admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    Then user wants to reset Goldplus for owner with phone number "082233545506"
 
   @TEST_LIMO-3402 @GP @automated @listing-monetization @web @web-covered
   Scenario: [Owner][GP Widget]Check GP Widget "Sedang Diproses"
@@ -71,7 +71,7 @@ Feature: Gold Plus
     #detail manfaat GP 1
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
+      | phone stag    | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
     And owner navigate to list goldplus package
     When owner wants to see Lihat Detail Manfaat Goldplus Satu
@@ -99,7 +99,7 @@ Feature: Gold Plus
   Scenario: [WEB][Pilih Paket GP] As a property owner, I would like to know the difference between GP 1 and GP 2 benefits
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password  |
+      | phone stag    | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
     When owner navigate to list goldplus package
     #list manfaat Goldplus 2
