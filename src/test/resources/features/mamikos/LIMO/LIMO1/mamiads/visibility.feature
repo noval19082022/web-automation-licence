@@ -23,7 +23,7 @@ Feature: Visibility
       | phone stag   | phone prod   | password     |
       | 083843666858 | 083843666858 | qwerty123    |
     Then user will see that the text "Saldo iklan" is displayed
-    Then user will see that the text "Saldo menipis? Yuk top up hari ini" is displayed
+    Then user will see that the text "Isi saldo 500rb, lebih hemat 75,000!" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 

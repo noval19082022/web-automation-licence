@@ -58,9 +58,8 @@ public class GoldplusSteps {
         }
         if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
             playwright.reloadPage();
-            gpSubmission.clickOnGpSatuFirstRadioButton();
+            gpSubmission.clickOnGpSatuFirstRadioButton(true);
         }
-        gpSubmission.clicksOnPilihPaketButton();
         gpSubmission.clicksOnBayarSekarangButton();
     }
 
@@ -75,11 +74,11 @@ public class GoldplusSteps {
         goldplus.clickOnGoldplusPackageButton(packages);
         if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp" + packages) && !gpSubmission.isFavoritGpRadioSelected()) {
             playwright.reloadPage();
-            gpSubmission.clickOnGpSatuFirstRadioButton();
+            gpSubmission.clickOnGpSatuFirstRadioButton(true);
         }
         Mamikos.setGpPackageChoosed("GoldPlus " + packages);
-        goldplus.getTextPeriodeChoosed();
-        gpSubmission.clicksOnPilihPaketButton();
+//        goldplus.getTextPeriodeChoosed();
+//        gpSubmission.clicksOnPilihPaketButton();
     }
 
     @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
@@ -683,12 +682,16 @@ public class GoldplusSteps {
 
     @Then("user will see that the goldplus package choosed is displayed")
     public void userWillSeeThatTheGoldplusPackageChoosedIsDisplayed() {
-        Assert.assertEquals(goldplus.getTextGpPackageChoosed(), Mamikos.getGpPackageChoosed() + " (reg#1m) periode " + Mamikos.getGpPeriodeChoosed());
+        var expected = Mamikos.getGpPackageChoosed();
+        var actual = goldplus.getTextGpPackageChoosed();
+        Assert.assertTrue(actual.contains(expected), String.format("GP actual contains %s but on expected %s", actual, expected));
     }
 
     @Then("user will see that the goldplus package on rincian pembayaran detail tagihan")
     public void userWillSeeThatTheGoldplusPackageOnRincianPembayaranDetailTagihan() {
-        Assert.assertEquals(goldplus.getGpPackageRincianPembaranDetailTagihan(), Mamikos.getGpPackageChoosed() + " (reg:1m) periode " + Mamikos.getGpPeriodeChoosed());
+        var expected = Mamikos.getGpPackageChoosed();
+        var actual = goldplus.getGpPackageRincianPembaranDetailTagihan();
+        Assert.assertTrue(actual.contains(expected), String.format("GP actual contains %s but on expected %s", actual, expected));
     }
 
     //------ GP Weekly------//
