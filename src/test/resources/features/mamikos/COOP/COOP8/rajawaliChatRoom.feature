@@ -4,8 +4,8 @@ Feature: Rajawali Chat Room
   Background: Login admin and navigates to Rajawali chat
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod              |password   |
-      | qaeautomation3@mamikos.com   | laksana@mamikos.com     |qwerty123  |
+      | email stag                 | email prod          | password  |
+      | qaeautomation3@mamikos.com | laksana@mamikos.com | qwerty123 |
     And user go to Rajawali Chat Room
     And user click on the Group Chat
 
@@ -28,14 +28,14 @@ Feature: Rajawali Chat Room
     And admin fill search chat with "kost singgahsini camon"
     Then admin can see result data
 
-   @rajawali-chat @toAutomate @web
+  @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Tenant
     When admin select filter "tenant"
     And admin fill search chat with "empatt"
     Then admin can see result data
 
   @TEST_SS-5741
-   Scenario: [Bangkerupux][Rajawali Chat Room] BSE marked important chat
+  Scenario: [Bangkerupux][Rajawali Chat Room] BSE marked important chat
     When admin click "mark important" on chat list
     Then admin can see mark important on list
 

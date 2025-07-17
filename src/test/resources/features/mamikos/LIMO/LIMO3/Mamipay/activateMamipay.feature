@@ -49,7 +49,7 @@ Feature: Activate Mamipay
     Pastikan data benar agar uang pembayaran sewa kos dapat ditransfer
           dengan lancar.
     """
-   And verify kirim data button is disable
+    And verify kirim data button is disable
 
   @submitInputFormDataDiri @TEST_LIMO-3686
   Scenario: Valid input form data diri

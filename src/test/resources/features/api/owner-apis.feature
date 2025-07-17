@@ -16,6 +16,6 @@ Feature: Owner API
       | group  |   |
       | limit  | 1 |
     And playwright get owner available room for kos with id:
-      | kos id | 58650684      |
-  And playwright get room allotment or available room for kos with id:
-      | kos id | 58650684      |
+      | kos id | 58650684 |
+    And playwright get room allotment or available room for kos with id:
+      | kos id | 58650684 |

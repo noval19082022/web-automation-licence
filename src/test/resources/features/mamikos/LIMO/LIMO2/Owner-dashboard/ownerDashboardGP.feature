@@ -90,6 +90,6 @@ Feature: Owner Dashboard GP
     #owner only have kost draft
       | ownerPhone   | password  |
       | 0876623622   | qwerty123 |
-      | 0876623687  | 12345678  |
+      | 0876623687   | 12345678  |
       | 085687543611 | 12345678  |
       | 085213497843 | 12345678  |

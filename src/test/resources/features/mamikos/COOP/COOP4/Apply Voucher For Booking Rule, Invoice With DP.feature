@@ -23,8 +23,8 @@ Feature: Apply Voucher For Booking Rule, Invoice With DP
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                              | kost path prod           |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-with-dp  | Kost Adi Auto Voucher DP |
+      | kost path stag                                                             | kost path prod           |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-with-dp | Kost Adi Auto Voucher DP |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 

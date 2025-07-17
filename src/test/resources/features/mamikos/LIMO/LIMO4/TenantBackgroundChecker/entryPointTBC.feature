@@ -5,7 +5,7 @@ Feature: Entry Point Tenant Background Checker
   Scenario: [WEB][Chat Owner] Show Tenant Background Checker entry point upon accessing a chat room
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod | password  |
+      | phone stag    | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
     And owner wants to accsess chatroom
     Then owner can see entry point TBC Lihat Profil at chatroom "Noval Abis Delete"
@@ -27,7 +27,7 @@ Feature: Entry Point Tenant Background Checker
   Scenario: [Web][Chat Tenant] Entry point tenant background checker not show
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag      | phone prod  | password     |
-      | 0891111020199   | 0           | mamikosqa123 |
+      | phone stag    | phone prod | password     |
+      | 0891111020199 | 0          | mamikosqa123 |
     And user click on chat button in top bar tenant home page
     Then tenant can't see entry point TBC Lihat Profil at chatroom "Kost Tanjakan Indah Rajeg Tangerang"

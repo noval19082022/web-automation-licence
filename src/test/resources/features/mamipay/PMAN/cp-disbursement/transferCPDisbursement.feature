@@ -28,22 +28,22 @@ Feature: CP Disbursement - Transfer CP Disbursement
     And admin search property "khu" in tambah data transfer
     And admin select suggestion "Kost Apik Khusus Automation PMAN Halmahera Utara"
     Then transfer information should auto fill
-      | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik |
-      | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          |
+      | Product Type | Bank    | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik |
+      | APIK         | mandiri | 10000245429    | Yudha Ferroza         | 083342344565          |
     When admin fill remaining field
-      | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Berkas Laporan  | Tipe Disbursement     |
-      | 100000            | Commission      | today             | pdf example.pdf | Disbursement susulan  |
+      | Total Pendapatan | Tipe Transaksi | Tanggal Transfer | Berkas Laporan  | Tipe Disbursement    |
+      | 100000           | Commission     | today            | pdf example.pdf | Disbursement susulan |
     And admin submit tambah data transfer
     And admin search cp disbursement by "Nama Property" using keyword "Khusus Automation"
     Then new cp disbursement data should add in daftar transfer
-      | Tanggal Transfer ke Pemilik | Nama Property                                     | Tipe Transaksi  | Total Pendapatan  | Detail Rekening                   |
-      | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara  | Commission      | Rp100.000         | Yudha Ferroza 10000245429 mandiri |
+      | Tanggal Transfer ke Pemilik | Nama Property                                    | Tipe Transaksi | Total Pendapatan | Detail Rekening                   |
+      | (Today)                     | Kost Apik Khusus Automation PMAN Halmahera Utara | Commission     | Rp100.000        | Yudha Ferroza 10000245429 mandiri |
     #transfer cp disbursement
     Then show all disbursement from property name "Kost Apik Khusus Automation PMAN Halmahera Utara"
     When admin checks Preview Data Transfer
     Then Data Transfer that has been inputted is displayed on Preview Data Transfer
-      | Nama Property                                     | Product Type | Bank     | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik | Total Pendapatan  | Tipe Transaksi  | Tanggal Transfer  | Tipe Disbursement     |
-      | Kost Apik Khusus Automation PMAN Halmahera Utara  | APIK         | mandiri  | 10000245429    | Yudha Ferroza         | 083342344565          | 100000.00         | Commission      | today             | Disbursement susulan  |
+      | Nama Property                                    | Product Type | Bank    | Nomor Rekening | Nama Pemilik Rekening | Nomor Telepon Pemilik | Total Pendapatan | Tipe Transaksi | Tanggal Transfer | Tipe Disbursement    |
+      | Kost Apik Khusus Automation PMAN Halmahera Utara | APIK         | mandiri | 10000245429    | Yudha Ferroza         | 083342344565          | 100000.00        | Commission     | today            | Disbursement susulan |
     When admin clicks Transfer Sekarang on Preview Data Transfer
     #Check in Transfer Diproses tab
     And admin open "Transfer Diproses" tab

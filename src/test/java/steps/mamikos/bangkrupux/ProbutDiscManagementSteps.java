@@ -2,7 +2,6 @@ package steps.mamikos.bangkrupux;
 
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;

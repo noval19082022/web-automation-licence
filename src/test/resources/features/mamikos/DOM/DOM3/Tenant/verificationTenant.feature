@@ -5,8 +5,8 @@ Feature: Verification Tenant
   Scenario: [Web Tenant][email validation] User verification from incoming email
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 083311231115  | 083311231115 | asdf1234 |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "aiueooo@gmail.com"
@@ -17,8 +17,8 @@ Feature: Verification Tenant
   Scenario: [Web Tenant][phone number - verifikasi page ] Change Phone number data valid
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
@@ -28,8 +28,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][Phone Number - verifikasi page]when Phone number is empty
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user empty phone number field
@@ -39,8 +39,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][email - verifikasi] Email already registered
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "tenantmars@gmail.com"
@@ -50,8 +50,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][email - verifikasi] Email with wrong format
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "qaautomation@mamikos"
@@ -61,8 +61,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][Phone Number - verifikasi page] Verification - Kirim ulang OTP Message
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "8239231283"
@@ -72,8 +72,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][email - verifikasi] When empty email
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user empty email address field
@@ -83,8 +83,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][Phone Number - verifikasi page] Input number < 8
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with condition into "8112069"
@@ -94,8 +94,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][Phone Number - verifikasi page] Input number > 14
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "81120699900000"
@@ -105,8 +105,8 @@ Feature: Verification Tenant
   Scenario: [Tenant][Phone Number - verifikasi page] Phone number already exist
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with "898765432166"
@@ -116,8 +116,8 @@ Feature: Verification Tenant
   Scenario: Verification - Email is not correct
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user change email to "tenantmars@gmail.comm"
@@ -127,8 +127,8 @@ Feature: Verification Tenant
   Scenario: Verification - input using alphabet
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password     |
-      | 083311231115 | 083311231115 | asdf1234     |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     And user edit phone number with condition into "qwertyuiop"
@@ -144,22 +144,22 @@ Feature: Verification Tenant
     And user open verifikasi akun menu
     Then user can see "Kami melindungi informasi dan penggunaan data diri para pengguna kami." on verifikasi identitas
 
-    @TEST_SS-2670 @automated @uxImprovement
-    Scenario: [Web][UX Improvement][Tenant Verification account]Update booking microcopy at User page verification description after verified
-      Given user go to mamikos homepage
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0810000091    | 0890000000314 | qwerty123 |
-      And user navigate to kost saya page
-      And user open verifikasi akun menu
-      Then user can see "Terima kasih, kini kamu dapat menikmati proses Sewa Langsung via Mamikos lebih mudah." on verifikasi identitas
+  @TEST_SS-2670 @automated @uxImprovement
+  Scenario: [Web][UX Improvement][Tenant Verification account]Update booking microcopy at User page verification description after verified
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod    | password  |
+      | 0810000091 | 0890000000314 | qwerty123 |
+    And user navigate to kost saya page
+    And user open verifikasi akun menu
+    Then user can see "Terima kasih, kini kamu dapat menikmati proses Sewa Langsung via Mamikos lebih mudah." on verifikasi identitas
 
   @TEST_SS-2961
   Scenario: [Web Tenant][email validation] User has not verified their identity
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 083311231115  | 083311231115 | asdf1234 |
+      | phone stag   | phone prod   | password |
+      | 083311231115 | 083311231115 | asdf1234 |
     And user navigate to kost saya page
     And user open verifikasi akun menu
     Then user can see "Kamu belum mengunggah foto kartu identitas" on verifikasi identitas

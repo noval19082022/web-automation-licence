@@ -5,8 +5,8 @@ Feature: Billing Announcement
   Scenario: [Billing tracker][Announcement]Check annountment for BSE
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to billing tracker
     And admin click on expand billing announcement
     And admin choose bse name with "Maya"
@@ -37,12 +37,12 @@ Feature: Billing Announcement
   @SS-4365 @continue
   Scenario: [Billing Tracker][Productivity] Check annountment for BSE
     Then admin can see bse name with:
-    | bse     |
-    | Bella   |
-    | Okta    |
-    | Maya    |
-    | Dida    |
-    | Sintia  |
+      | bse    |
+      | Bella  |
+      | Okta   |
+      | Maya   |
+      | Dida   |
+      | Sintia |
 
   @SS-4364
   Scenario: [Billing Tracker][Productivity] Create announcement for 1 BSE

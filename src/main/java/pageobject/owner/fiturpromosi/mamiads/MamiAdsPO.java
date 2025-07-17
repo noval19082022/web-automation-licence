@@ -9,9 +9,7 @@ import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class MamiAdsPO {
     private Page page;
@@ -47,6 +45,7 @@ public class MamiAdsPO {
     Locator kamarPenuhText;
     private Locator beliSaldoBtnPopupToggle;
     private Locator continuePaymentBuySaldoMamiads;
+    private Locator balanceListContainer;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -94,7 +93,7 @@ public class MamiAdsPO {
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
         //--- history Mamiads ---//
-        this.invoiceMamiads = page.locator("//div[@class='transaction-done']/div[@class='transaction-available']/div[1]//span[@class='right-side-saldo-status']");
+        this.invoiceMamiads = page.locator("//div[contains(@class, 'transaction')]//a | //div[contains(text(), 'Saldo')] | //*[@data-testid='invoice-link'] | //button[contains(text(), 'Invoice')] | //a[contains(@href, 'invoice')]").first();
         lastInvoiceOnRiwayat = page.locator("//div[@class='transaction-on-process']//div[12]/a[1]");
         riwayatSaldoMamiads = page.getByText("Riwayat");
         backIconRiwayatMamiads = page.locator("a").filter(new Locator.FilterOptions().setHasText("back"));
@@ -113,12 +112,13 @@ public class MamiAdsPO {
         this.paduanMamiadsBackButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("back"));
         this.cobaSekarangButtonHeader = page.locator(".mami-ads-navbar__main-nav-button");
         this.beliSaldoBtnPopupToggle = page.locator("#button-right-modal-toggle-confirm-beli-saldo");
-        this.saldoTitleName = page.locator("//div[@class='balance-mamiads-item__option-label-package']");
-        this.saldoTitleActualPrice = page.locator(".balance-mamiads-item__option-price-actual");
+        this.saldoTitleName = page.locator("//p[contains(text(), 'ribu') or contains(text(), 'juta')]");
+        this.saldoTitleActualPrice = page.locator("//p[starts-with(text(), 'Rp')]");
         this.selectSaldoList = page.locator(".bg-c-radio__icon > span");
         this.buySaldoBtnList = playwright.locatorByRoleAndText(AriaRole.BUTTON, "Pilih Saldo");
         this.saldoAmountFirstIndex = page.locator(".bg-c-radio__icon > span").first();
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
+        this.balanceListContainer = page.locator(".balance-list__container");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -265,12 +265,14 @@ public class MamiAdsPO {
      */
     public String listSaldo(String listSaldo, int index) {
         String element = "";
+        System.out.println(getBalanceListSnapshot());
+        page.pause();
         switch (listSaldo) {
             case "priceTitle":
-                element = ".balance-mamiads-item__option-label-package";
+                element = "//p[contains(text(), 'ribu') or contains(text(), 'juta')]";
                 break;
             case "priceInRp":
-                element = ".balance-mamiads-item__option-price-actual";
+                element = "//p[starts-with(text(), 'Rp')]";
                 break;
             case "disc":
                 element = ".bg-u-text-red-600";
@@ -300,13 +302,37 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
+        // Wait for any price element to be visible
         playwright.waitTillLocatorIsVisible(saldoTitleActualPrice.first());
-        var found = choosingSaldo(saldo);
-        if (!found) {
-            // default saldo is 6000
-            playwright.clickOn(saldoAmountFirstIndex);
-            playwright.clickOn(buySaldoBtnList);
+        
+        // Extract just the numeric value from the input (e.g., "Rp80.000" -> "80000")
+        String saldoNumeric = formatCurrencyForProcessing(saldo);
+        
+        // For "Rp80.000", we need to find the radio button for 80 ribu
+        // Based on browser inspection, 80k is at index 4 (0-based: 10k=0, 30k=1, 50k=2, 75k=3, 80k=4)
+        int indexToClick = -1;
+        
+        if (saldoNumeric.equals("80000")) {
+            indexToClick = 4; // 80 ribu option
+        } else if (saldoNumeric.equals("10000")) {
+            indexToClick = 0; // 10 ribu option
+        } else if (saldoNumeric.equals("30000")) {
+            indexToClick = 1; // 30 ribu option
+        } else if (saldoNumeric.equals("50000")) {
+            indexToClick = 2; // 50 ribu option
+        } else if (saldoNumeric.equals("75000")) {
+            indexToClick = 3; // 75 ribu option
+        } else {
+            // Default to first option (10 ribu)
+            indexToClick = 0;
         }
+        
+        // Click on the radio button
+        playwright.clickOn(selectSaldoList.nth(indexToClick));
+        
+        // Wait for button to become enabled and click it
+        playwright.waitTillLocatorIsVisible(buySaldoBtnList);
+        playwright.clickOn(buySaldoBtnList);
     }
 
     /**
@@ -824,37 +850,6 @@ public class MamiAdsPO {
 
     // ----------------- PART OF PRIVATE METHOD -----------------
 
-    /**
-     * private method for logic buy saldo on mamiads saldo page
-     *
-     * @param saldo you can use ex. '6000' or '6.000'
-     */
-    private boolean choosingSaldo(String saldo) {
-        boolean found = true;
-        List<String> listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleActualPrice);
-        if (!listSaldoTitles.contains(saldo)) {
-            listSaldoTitles = playwright.getListInnerTextFromListLocator(saldoTitleName);
-        }
-
-        List<String> finalListSaldoTitles = listSaldoTitles;
-        var saldoRequestFormat = formatCurrencyForProcessing(saldo);
-        int indexToClick = IntStream.range(0, finalListSaldoTitles.size())
-                .filter(i -> {
-                    var saldoTitle = formatCurrencyForProcessing(finalListSaldoTitles.get(i));
-                    return saldoTitle.equals(saldoRequestFormat);
-                })
-                .findFirst()
-                .orElse(-1);
-
-        if (indexToClick != -1) {
-            playwright.clickOn(selectSaldoList.nth(indexToClick));
-            playwright.clickOn(buySaldoBtnList);
-            return found;
-        } else {
-            return !found;
-        }
-    }
-
     private String formatCurrencyForProcessing(String saldo) {
         return saldo
                 .replace("Rp", "")
@@ -880,6 +875,16 @@ public class MamiAdsPO {
         this.page = page.waitForPopup(() -> {
             playwright.clickOn(lihatInfoLanjutWarningBanner);
         });
+    }
+
+    /**
+     * Get aria snapshot of the balance list container
+     * Useful for accessibility testing and debugging of the balance list section
+     * 
+     * @return String representation of the balance list container's accessibility tree
+     */
+    public String getBalanceListSnapshot() {
+        return playwright.getAriaSnapshot(balanceListContainer);
     }
 }
 

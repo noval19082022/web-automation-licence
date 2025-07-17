@@ -17,15 +17,15 @@ Feature: Kost List and Map
       | Rp1,85jt  |
       | Rp2,455jt |
     * user can check the legend of map description cluster
-      | Jumlah kos:       |
-      | Kos Campur:       |
-      | Kos Putra:        |
-      | Kos Putri:        |
+      | Jumlah kos: |
+      | Kos Campur: |
+      | Kos Putra:  |
+      | Kos Putri:  |
     * user can check the legend of map information cluster
-      | Total dari kos yang ada di area sekitar titik yang dipilih.   |
-      | Harga berwarna ungu menandakan sebuah kos campur.             |
-      | Harga berwarna biru menandakan sebuah kos putra.              |
-      | Harga berwarna merah muda menandakan ada sebuah kos putri.    |
+      | Total dari kos yang ada di area sekitar titik yang dipilih. |
+      | Harga berwarna ungu menandakan sebuah kos campur.           |
+      | Harga berwarna biru menandakan sebuah kos putra.            |
+      | Harga berwarna merah muda menandakan ada sebuah kos putri.  |
     When user want to close the legend map
     Then user will see the pop up closed
 

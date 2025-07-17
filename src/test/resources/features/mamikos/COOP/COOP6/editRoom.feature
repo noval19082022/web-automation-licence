@@ -5,8 +5,8 @@ Feature: Change the room on Data Ketersedian Kamar
   Scenario: [Data Ketersediaan Kamar][Edit Kost Room]Change the room name/number when room status is occupied with contract
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user access menu kost Additional
     And user search "testbagas Pasawahan Kuningan" in kost additional
     And user click on atur ketersediaan button
@@ -18,8 +18,8 @@ Feature: Change the room on Data Ketersedian Kamar
   Scenario: [Data Ketersediaan Kamar][Edit Kost Room]Change the room name/number when room status is occupied without contract
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user access menu kost Additional
     And user search "testbagas Pasawahan Kuningan" in kost additional
     And user click on atur ketersediaan button
@@ -34,8 +34,8 @@ Feature: Change the room on Data Ketersedian Kamar
   Scenario: [Data Ketersediaan Kamar][Delete Kost Room]Delete button is remain locked when when room status is occupied with contract
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And user access menu kost Additional
     And user search "testbagas Pasawahan Kuningan" in kost additional
     And user click on atur ketersediaan button

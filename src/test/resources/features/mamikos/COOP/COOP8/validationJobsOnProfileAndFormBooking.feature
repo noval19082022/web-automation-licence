@@ -5,8 +5,8 @@ Feature: Edit profile for jobs as Lainnya
   Scenario: Click Ajukan Sewa Button if user has not fill Deskripsi when user choose Lainnya as Pekerjaan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 0812000007   | 08100000630   | qwerty123     |
+      | phone stag | phone prod  | password  |
+      | 0812000007 | 08100000630 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                          | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-jawa-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
@@ -19,8 +19,8 @@ Feature: Edit profile for jobs as Lainnya
   Scenario: Change pekerjaan to Karyawan and fill with invalid data from booking detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 08100000630   | 08100000630   | qwerty123     |
+      | phone stag  | phone prod  | password  |
+      | 08100000630 | 08100000630 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                                                   | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-irvi-automation-add-ons-tobelo-barat-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
@@ -81,8 +81,8 @@ Feature: Edit profile for jobs as Lainnya
   Scenario: [Web][UX Booking] When update jobs in profile page, must update jobs in campus/institution from booking form
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 08100000627   | 08100000630   | qwerty123     |
+      | phone stag  | phone prod  | password  |
+      | 08100000627 | 08100000630 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                                                   | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-irvi-automation-add-ons-tobelo-barat-halmahera-utara-1 | Kos DC BAR Automation Tipe A |

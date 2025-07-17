@@ -31,8 +31,8 @@ Feature: Chat and Chat Optimization
       | phone stag   | phone prod   | password  |
       | 081223344570 | 083176408442 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                          | kost path prod                                      |
-      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-kuning-tobelo-halmahera-utara-2   | Kost Kuning Tobelo Halmahera Utara                 |
+      | kost path stag                                                                        | kost path prod                     |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-kuning-tobelo-halmahera-utara-2 | Kost Kuning Tobelo Halmahera Utara |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then user see phone number field and selectable question options :

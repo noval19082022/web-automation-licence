@@ -7,14 +7,14 @@ Feature: Add fee Mvp - Tenant
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag     | phone prod     |
-      | 08100000213    | 08100000213    |
+      | phone stag  | phone prod  |
+      | 08100000213 | 08100000213 |
 
   @TEST-SS-2709 @continue
   Scenario: [Tenant][Detail booking]  for P2 in the kos details there is no order form
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | password |
+      | phone stag  | password  |
       | 08100000213 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                               | kost path prod               |
@@ -69,20 +69,20 @@ Feature: Add fee Mvp - Tenant
     And tenant click on save button
     Then tenant can see "Bawa Televisi, Parkir Motor, Bawa Kulkas" on booking form
 
-   @TEST_SS-2714 @continue
-   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra fee and don't write a note
-     When user go to mamikos homepage
-     And user cancel booking
-     When user go to mamikos homepage
-     And tenant redirect to kost details:
-       | kost path stag                                                         | kost path prod               |
-       | kost-kost-campur-murah-kost-scenario-delapan-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
-     And tenant dismiss promo ngebut pop up
-     And tenant booking kost for "Tomorrow"
-     And user can set Ajukan Sewa
-     Then tenant should success booking kost
-     And tenant click on chat pemilik
-     Then tenant can see tenant description with "-"
+  @TEST_SS-2714 @continue
+  Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra fee and don't write a note
+    When user go to mamikos homepage
+    And user cancel booking
+    When user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-delapan-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "Tomorrow"
+    And user can set Ajukan Sewa
+    Then tenant should success booking kost
+    And tenant click on chat pemilik
+    Then tenant can see tenant description with "-"
 
   @TEST_SS-2713 @continue
   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if choose additional fee but don't have note
@@ -124,21 +124,21 @@ Feature: Add fee Mvp - Tenant
     And tenant click on chat pemilik
     Then tenant can see tenant description with "Parkir Motor dan Saya bawa kucing meongmeong"
 
-   @TEST_SS-4286 @continue
-   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra charge but have note
-     When user go to mamikos homepage
-     And user cancel booking
-     And user go to mamikos homepage
-     And tenant redirect to kost details:
-       | kost path stag                                                         | kost path prod               |
-       | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
-     And tenant dismiss promo ngebut pop up
-     And tenant booking kost for "Tomorrow"
-     And tenant input catatan tambahan with "Saya bawa kucing meongmeong"
-     And user can set Ajukan Sewa
-     Then tenant should success booking kost
-     And tenant click on chat pemilik
-     Then tenant can see tenant description with "Saya bawa kucing meongmeong"
+  @TEST_SS-4286 @continue
+  Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra charge but have note
+    When user go to mamikos homepage
+    And user cancel booking
+    And user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                         | kost path prod               |
+      | kost-kost-campur-murah-kost-scenario-sepuluh-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
+    And tenant dismiss promo ngebut pop up
+    And tenant booking kost for "Tomorrow"
+    And tenant input catatan tambahan with "Saya bawa kucing meongmeong"
+    And user can set Ajukan Sewa
+    Then tenant should success booking kost
+    And tenant click on chat pemilik
+    Then tenant can see tenant description with "Saya bawa kucing meongmeong"
 
   @TEST_SS-4287
   Scenario: [Booking form][Autofill Note] Simpan draft when select catatan tambahan and input permintaan ke pemilik text

@@ -32,7 +32,7 @@ Feature: [Web][Voucher] Admin - Mass Voucher
     And admin master clicks on add mass voucher button in voucher form
     Then admin can sees callout message is "New mass voucher added!"
 
-   @continue
+  @continue
   Scenario: Update Mass Voucher
     Given admin go to mamikos mamipay admin
     And admin search mass voucher with name and edit index "1":

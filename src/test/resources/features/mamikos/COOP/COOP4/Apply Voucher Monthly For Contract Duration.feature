@@ -24,8 +24,8 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                | kost path prod        |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1  | Kost Adi Auto Regular |
+      | kost path stag                                                               | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1 | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 
@@ -74,8 +74,8 @@ Feature: Apply Voucher Monthly For Contract Duration
       | phone stag    | phone prod    | password     |
       | 0890867321211 | 0890867321211 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                | kost path prod        |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1  | Kost Adi Auto Regular |
+      | kost path stag                                                               | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-regular-1 | Kost Adi Auto Regular |
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 

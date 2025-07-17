@@ -7,10 +7,10 @@ Feature: OB Reject Booking With Lainnya Reason
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 08100000618   | 08100000618 |
+      | phone stag  | phone prod  |
+      | 08100000618 | 08100000618 |
 
-   @continue
+  @continue
   Scenario: Cancel and Create Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -22,7 +22,7 @@ Feature: OB Reject Booking With Lainnya Reason
   Scenario: create booking
     Given user go to mamikos homepage
     When tenant redirect to kost details:
-      | kost path stag                                                      | kost path prod               |
+      | kost path stag                                                 | kost path prod               |
       | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-11 | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
@@ -39,7 +39,7 @@ Feature: OB Reject Booking With Lainnya Reason
   Scenario: Tenant Check Reject Reason After Owner Reject
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod  | password   |
-      | 08100000618  | 08100000618 | qwerty123  |
+      | phone stag  | phone prod  | password  |
+      | 08100000618 | 08100000618 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     Then user check booking status is rejected by owner with reason "Saya sudah ada yang punya"

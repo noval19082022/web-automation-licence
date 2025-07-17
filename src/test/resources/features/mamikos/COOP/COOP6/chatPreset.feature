@@ -5,8 +5,8 @@ Feature: Chat Preset
   Scenario: [Chat preset][Auto reply][Chat Room] Check question and answer Ada diskon untuk kos ini for Kost P1 doesn't have discount
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 081300000001  | 0890000000314 | qwerty123    |
+      | phone stag   | phone prod    | password  |
+      | 081300000001 | 0890000000314 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
     Then user can see chat preset question "Ada diskon untuk kos ini?"
@@ -53,8 +53,8 @@ Feature: Chat Preset
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and doesn't have pasutri
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 081300000002  | 0890000000314 | qwerty123    |
+      | phone stag   | phone prod    | password  |
+      | 081300000002 | 0890000000314 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Apik Cheap Door Mawar Maluku Utara"
     Then user can see chat preset question "Bisa pasutri?"
@@ -101,8 +101,8 @@ Feature: Chat Preset
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Tidak bisa sekamar berdua"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 081300000003  | 0890000000314 | qwerty123    |
+      | phone stag   | phone prod    | password  |
+      | 081300000003 | 0890000000314 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Singgahsini Gita Tipe A Halmahera Utara"
     Then user can see chat preset question "Kamar bisa diisi lebih dari 1 orang?"
@@ -138,10 +138,10 @@ Feature: Chat Preset
   Scenario: [Chat][Auto Reply] Auto reply question for condition "Boleh tanya-tanya dulu?"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 08999222999   | 083176408442 | qwerty123    |
+      | phone stag  | phone prod   | password  |
+      | 08999222999 | 083176408442 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag | kost path prod                             |
+      | kost path stag                                                                            | kost path prod                              |
       | kost-kabupaten-bantul-kost-campur-eksklusif-kost-singgahsini-cemara-pinus-tipe-a-bantul-2 | Kost Singgahsini Cemara Pinus Tipe A Bantul |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail

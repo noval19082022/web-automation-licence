@@ -5,8 +5,8 @@ Feature: Change password owner
   Scenario: Change password with wrong old password
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password      |
-      | 0888881289    | qamamikos123  |
+      | phone stag | password     |
+      | 0888881289 | qamamikos123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Password"
     And owner fills old password "qwerty1234"
@@ -67,8 +67,8 @@ Feature: Change password owner
   Scenario: Owner success change password
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password   |
-      | 0888881291    | qwerty123  |
+      | phone stag | password  |
+      | 0888881291 | qwerty123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"

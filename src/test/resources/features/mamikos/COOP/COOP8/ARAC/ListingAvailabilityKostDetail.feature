@@ -5,13 +5,13 @@ Feature: Listing Availability on Kost Detail
   Scenario: Check "Ajukan Sewa" button if the room is available for today
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    |  phone prod    | password  |
-      | 082245501002  |  082245501002  | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 082245501002 | 082245501002 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                                     | kost path prod               |
       | kost-kabupaten-lampung-barat-kost-campur-murah-kos-dhiandra-auto-listing-balik-bukit-lampung-barat | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"

@@ -5,8 +5,8 @@ Feature: Update Price from Dashboard
   Scenario Outline: [Update Harga][Dashboard]Access page "Update Harga" from entry point dashboard when kost status == Active with update price
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password   |
-      | 08713399866   | 08713399866   | qwerty123  |
+      | phone stag  | phone prod  | password  |
+      | 08713399866 | 08713399866 | qwerty123 |
     And user click menu "Atur Harga" on feature waktunya mengelola property
     And user click kos "Kos Fathul Khair Tipe bala bala Jetis Yogyakarta" in update price list
     And user click see other prices

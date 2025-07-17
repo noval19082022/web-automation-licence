@@ -26,8 +26,8 @@ Feature: addOns Kost With DP
   Scenario: [Add Ons - Kost With DP] Tenant booking kos
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                | kost path prod        |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-dp-only-1  | Kost Adi Auto Add Ons |
+      | kost path stag                                                               | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-dp-only-1 | Kost Adi Auto Add Ons |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
@@ -46,7 +46,7 @@ Feature: addOns Kost With DP
   Scenario: [Add Ons - Kost With DP] Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
+      | phone stag    | phone prod   | password     |
       | 0891111020198 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "085699988800"

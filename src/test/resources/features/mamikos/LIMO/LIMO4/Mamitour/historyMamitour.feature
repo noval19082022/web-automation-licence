@@ -10,9 +10,9 @@ Feature: Mamitour History
     And user navigate to mamitour landing page
     Then user will "<status>" Lihat Riwayat button
     Examples:
-      | phone number   | status   |
-      | 0826666666633  | see      |
-      | 0895365623388  | not see  |
+      | phone number  | status  |
+      | 0826666666633 | see     |
+      | 0895365623388 | not see |
 
   @TEST_LIMO-3692 @WEB @AUTOMATED @MAMITOUR
   Scenario: [Web][Mamitour] See have transaction dalam proses tab and do not have transaction on selesai tab

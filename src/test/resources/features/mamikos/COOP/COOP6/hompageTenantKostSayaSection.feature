@@ -68,7 +68,7 @@ Feature: Homepage - Kost Saya Section
     Then tenant cannot see "Kost Garden Abepura" as kost name and kost location
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                      | kost path prod               |
       | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "Tomorrow"
@@ -93,7 +93,7 @@ Feature: Homepage - Kost Saya Section
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                      | kost path prod               |
       | kost-jayapura-kost-putri-murah-kost-garden-abepura- | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "today"
@@ -119,7 +119,7 @@ Feature: Homepage - Kost Saya Section
     Then user will see kos saya is still empty
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                                                      | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And tenant dismiss promo ngebut pop up
     And tenant booking kost for "tomorrow"
@@ -144,7 +144,7 @@ Feature: Homepage - Kost Saya Section
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                                                      | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-madiun-buat-draft-homepage-tobelo-utara-halmahera-utara-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost "today" "Per Bulan"
     Then tenant should success booking kost

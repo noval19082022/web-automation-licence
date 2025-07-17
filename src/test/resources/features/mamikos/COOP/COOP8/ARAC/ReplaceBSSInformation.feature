@@ -9,7 +9,7 @@ Feature: Replace BSS Information
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                               | kost path prod               |
       | kost-kabupaten-badung-kost-campur-eksklusif-kost-general-irvi-automation-abiansemal-badung-1 | Kos DC BAR Automation Tipe A |
     And tenant open calendar from kost detail
     Then tenant will see BSS Information "Berikut adalah tanggal check-in (mulai ngekos) yang tersedia."

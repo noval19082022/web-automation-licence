@@ -34,12 +34,12 @@ Feature: Recommendation Listing
   Scenario: There is no recommendation booking cancel
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | password    |
-      | 082322233399  | qwerty123    |
+      | phone stag   | password  |
+      | 082322233399 | qwerty123 |
     And user cancel booking
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag         | kost path prod               |
+      | kost path stag                                              | kost path prod               |
       | kost-yogyakarta-kost-putri-eksklusif-kos-upik-merapi-tipe-c | Kos DC BAR Automation Tipe A |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
@@ -53,7 +53,7 @@ Feature: Recommendation Listing
       | phone stag    | password   |
       | <tenantPhone> | <password> |
     And tenant redirect to kost details:
-      | kost path stag                                       | kost path prod               |
+      | kost path stag                                                                         | kost path prod               |
       | kost-kota-yogyakarta-kost-putri-eksklusif-kos-raney-momogi-tipe-a-danurejan-yogyakarta | Kos DC BAR Automation Tipe A |
     When tenant open tab pernah dilihat at menu favorite
     And tenant verify the property with name "Kos Raney Momogi Tipe A" is appear
@@ -76,8 +76,8 @@ Feature: Recommendation Listing
   Scenario: Check property recommendation section after favorite
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | password  |
-      | 0892202413    | qwerty123 |
+      | phone stag | password  |
+      | 0892202413 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag             | kost name prod |
       | Kos Raney Aphrodite Tipe 3 |                |
@@ -96,12 +96,12 @@ Feature: Recommendation Listing
   Scenario: Make sure If tenant click back button, then tenant will be redirected back to Detail Booking screen
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | password    |
-      | 082322233399  | qwerty123   |
+      | phone stag   | password  |
+      | 082322233399 | qwerty123 |
     And user cancel booking
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag         | kost path prod               |
+      | kost path stag                                                              | kost path prod               |
       | kost-kabupaten-tangerang-kost-campur-murah-kos-digitec-male-rajeg-tangerang | Kos DC BAR Automation Tipe A |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost

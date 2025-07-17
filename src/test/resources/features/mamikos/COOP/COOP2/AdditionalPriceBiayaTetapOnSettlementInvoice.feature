@@ -36,8 +36,8 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Settlement Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -47,7 +47,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Settlement Invoice] Tenant Pay DP Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
+      | phone stag   | phone prod   | password     |
       | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "08126000444"
@@ -75,7 +75,7 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Settlement Invoice] Tenant Check Additional Price Biaya Tetap Added By Admin On First Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | phone prod   | password  |
+      | phone stag   | phone prod   | password     |
       | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
     And tenant go to invoice DP from riwayat booking
@@ -86,8 +86,8 @@ Feature: Additional Price Biaya Tetap On Settlement Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On Settlement Invoice] Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123 |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner go to bill page of kost "Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"

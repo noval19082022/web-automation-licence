@@ -33,8 +33,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -84,8 +84,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On Invoice Recurring] Owner Check Additional Price Biaya Tetap and Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner goes to bills details
       | kost name stag                                                        | kost name prod      |
       | Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Adi Auto Fpaid |

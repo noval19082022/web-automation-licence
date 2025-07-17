@@ -142,7 +142,7 @@ Feature: Probut Discount Management
     Then admin can see kost name on discount management page
 
   @TEST_SS-8146
-    Scenario: [Web][Discount Management][Discount Link Redirection]Admin check redirection link
+  Scenario: [Web][Discount Management][Discount Link Redirection]Admin check redirection link
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |

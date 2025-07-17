@@ -5,8 +5,8 @@ Feature: List Riwayat Transaction Account
   Scenario: List Riwayat Transaction Account - Empty
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password  |
-      | 085720962106  | qwerty123 |
+      | phone stag   | password  |
+      | 085720962106 | qwerty123 |
     And user navigate to mamiads history page
     And user will see title and message on Dalam Proses tab
     And user click "Selesai"
@@ -16,8 +16,8 @@ Feature: List Riwayat Transaction Account
   Scenario: To make sure red counter badge if owner have on going transaction
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password  |
-      | 085697344170  | 0895365624343 | qwerty123 |
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0895365624343 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user verify count of riwayat before beli saldo
@@ -30,8 +30,8 @@ Feature: List Riwayat Transaction Account
   Scenario: red counter badge if all transaction is complete
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password  |
-      | 0891202413    | 0895365624343 | qwerty123 |
+      | phone stag | phone prod    | password  |
+      | 0891202413 | 0895365624343 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user wants to buy saldo MamiAds "6.000"

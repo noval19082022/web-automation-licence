@@ -43,7 +43,7 @@ Feature: Quick Allocation on Properti Saya
   Scenario: Cancel Quick Allocation on Listing has never been promoted before
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password  |
+      | phone stag   | phone prod | password |
       | 082233545507 | 0          | 12345678 |
     And owner navigates to property saya kos
     When owner search kost "Kost Automation GP 2 Depok Sleman" on property saya page
@@ -106,7 +106,7 @@ Feature: Quick Allocation on Properti Saya
   Scenario: [Property Saya Kos][MamiAds][Saldo mamiads 0]: Owner ever allocate and ever paid mamiads
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password  |
+      | phone stag   | phone prod | password |
       | 082233545511 | 0          | 12345678 |
     And owner navigates to property saya kos
     When owner search kost "Kost A 123 Depok Sleman" on property saya page
