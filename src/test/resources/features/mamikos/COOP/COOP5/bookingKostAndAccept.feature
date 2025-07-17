@@ -20,8 +20,8 @@ Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more t
     #Scenario: create booking
     When user go to mamikos homepage
     And tenant search kost then go to kost details:
-      | kost name stag   | kost name prod    |
-      | Kost Reykjavik   | Kost Reykjavik   |
+      | kost name stag | kost name prod |
+      | Kost Reykjavik | Kost Reykjavik |
     And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 

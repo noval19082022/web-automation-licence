@@ -5,8 +5,8 @@ Feature: FAQ Mamitour
   Scenario: [Web][Mamitour] Tanya Jawab Mamitour
     Given user go to mamikos homepage
     When user login as owner:
-    | phone stag    | phone prod    | password     |
-    | 0826666666633 | 0826666666633 | qwerty123    |
+      | phone stag    | phone prod    | password  |
+      | 0826666666633 | 0826666666633 | qwerty123 |
     And user access mamitour from owner dashboard
     And user click "Apa itu MamiTour?"
     Then user will see that the text "MamiTour adalah jasa virtual tour atau tur virtual dari Mamikos untuk simulasi keliling properti kos. Pengguna bisa berjalan dari satu ruang ke ruang lain di kos Anda secara online seperti berjalan di dunia nyata dan melihat sekeliling dengan sudut pandang 360°." is displayed

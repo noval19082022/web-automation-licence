@@ -17,7 +17,7 @@ Feature: Manage Booking And Billing
   Scenario: Manage Booking And Bills Menu - Registered Mamipay but don't have kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password    |
+      | phone stag     | password  |
       | 08211223344512 | qwerty123 |
     Then verify info untuk anda Auto BBK not displayed
     When owner navigates to property saya kos

@@ -5,8 +5,8 @@ Feature: Owner Homepage
   Scenario: Positive case Check Navbar login as owner
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password   |
-      | 083176408311   | 083132824758   | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083132824758 | qwerty123 |
     Then check the header menu display on homepage owner
     And user see username in top right shows as "abcdefghijklmnopqrst"
 
@@ -63,8 +63,8 @@ Feature: Owner Homepage
   Scenario: Check Add Kost button when owner doesn't have kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod     | password    |
-      | 0876623622   | 0876623622     | qwerty123   |
+      | phone stag | phone prod | password  |
+      | 0876623622 | 0876623622 | qwerty123 |
     And user click menu "Tambah Properti" on feature waktunya mengelola property
     Then user should redirect to link "https://owner-jambu.kerupux.com/choose-property-type"
 
@@ -72,8 +72,8 @@ Feature: Owner Homepage
   Scenario: If profile name more than 30 char show ellipsis
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod     | password    |
-      | 082233545506   | 0812345670008  | qwerty123   |
+      | phone stag   | phone prod    | password  |
+      | 082233545506 | 0812345670008 | qwerty123 |
     Then user see username in top right shows as "Rega Automate Dua Nama Panjang..."
     And owner should successfully log out
 
@@ -81,8 +81,8 @@ Feature: Owner Homepage
   Scenario: Widget Waktunya Mengelola Properti - Kos non active 1 & Apartemen 0
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag      | phone prod     | password      |
-      | 0895332021435   | 0895332021435  | digantilagi   |
+      | phone stag    | phone prod    | password    |
+      | 0895332021435 | 0895332021435 | digantilagi |
     Then user see widget waktunya mengelola properti is as expected
       | title                      | subtitle                       |
       | Atur Ketersediaan Kamar    | Mengelola data kamar kos       |
@@ -96,23 +96,23 @@ Feature: Owner Homepage
   Scenario: Widget Waktunya Mengelola Properti - Kos active 1 & Apartemen 0
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod    | password      |
-      | 083185622167   | 083185622167  | qwerty123     |
+      | phone stag   | phone prod   | password  |
+      | 083185622167 | 083185622167 | qwerty123 |
     Then user see widget waktunya mengelola properti is as expected
-      | title                   | subtitle                       |
-      | Atur Ketersediaan Kamar | Mengelola data kamar kos       |
-      | Atur Harga              | Update harga sewa di iklan kos |
-      | Ubah Peraturan Masuk Kos| Aturan untuk calon penyewa     |
-      | Penyewa                 | Daftar kontrak penyewa kos     |
-      | Tambah Penyewa          | Menambah kontrak penyewa       |
-      | Pusat Bantuan           | Info bantuan seputar Mamikos   |
+      | title                    | subtitle                       |
+      | Atur Ketersediaan Kamar  | Mengelola data kamar kos       |
+      | Atur Harga               | Update harga sewa di iklan kos |
+      | Ubah Peraturan Masuk Kos | Aturan untuk calon penyewa     |
+      | Penyewa                  | Daftar kontrak penyewa kos     |
+      | Tambah Penyewa           | Menambah kontrak penyewa       |
+      | Pusat Bantuan            | Info bantuan seputar Mamikos   |
 
   @TEST_LIMO-3450 @functionBackatHomeSetprice @continue @WEB @AUTOMATED
   Scenario: Check function back at home widget (Set Price)
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod    | password    |
-      | 083176408449   | 083176408449  | qwerty123   |
+      | phone stag   | phone prod   | password  |
+      | 083176408449 | 083176408449 | qwerty123 |
     And user click menu "Atur Harga" on feature waktunya mengelola property
     When user click back button in page
     Then user should redirect to link "https://owner-jambu.kerupux.com/"
@@ -127,14 +127,14 @@ Feature: Owner Homepage
   Scenario Outline: Widget Waktunya Mengelola Properti - Kos active 0/verification & Apartemen 0/1
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod    | password    |
-      | <user>         | <user>        | qwerty123   |
+      | phone stag | phone prod | password  |
+      | <user>     | <user>     | qwerty123 |
     Then user see widget waktunya mengelola properti is as expected
       | title           | subtitle                     |
       | Tambah Properti | Buat Kos/Apartemen Anda      |
       | Pusat Bantuan   | Info bantuan seputar Mamikos |
     Examples:
-      | user           |
-      | 0876623622     |
-      | 0876623611     |
-      | 083151487757   |
+      | user         |
+      | 0876623622   |
+      | 0876623611   |
+      | 083151487757 |

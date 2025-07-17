@@ -24,7 +24,7 @@ Feature: OB Booking From Hubungi Kost
   Scenario: OB Booking Hubungi Kost From Detail Kost
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                               | kost path prod               |
+      | kost path stag                                                                                                                     | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-bima-booking-dp-biaya-lain-dan-denda-automation-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And user click chat in kos detail
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"

@@ -12,15 +12,15 @@ Feature: OOO Reason Options
     And admin click on dropdown type
     Then admin validate this "<type>" on out of order type
     Examples:
-    | type |
-    | Room preparation |
-    | Renovasi         |
-    | Short Stay       |
-    | Undertable       |
-    | Dipakai Owner    |
-    | Internal Case    |
-    | Terminate        |
-    | Lainnya          |
+      | type             |
+      | Room preparation |
+      | Renovasi         |
+      | Short Stay       |
+      | Undertable       |
+      | Dipakai Owner    |
+      | Internal Case    |
+      | Terminate        |
+      | Lainnya          |
 
   @continue
   Scenario: delete ooo

@@ -5,8 +5,8 @@ Feature: Check Content Mamiprime At Landing Page
   Scenario: Check content at mamiprime landing page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod  | password   |
-      | 0890910001 | 0890910001  | qwerty123  |
+      | phone stag | phone prod | password  |
+      | 0890910001 | 0890910001 | qwerty123 |
     And owner access mamiprime landing page
     Then user will see text "Buat Kos Makin Populer dengan MamiPrime" on landing page mamiprime
     And user will see text "Layanan yang memaksimalkan jangkauan iklan kos di MAmikos agar bisnis Anda makin optimal." on landing page mamiprime

@@ -1,12 +1,12 @@
 @BBM6 @ubahPeraturan @COOP6
-  Feature: Owner - Ubah Peraturan
+Feature: Owner - Ubah Peraturan
 
   @TEST_SS-3458 @automated @booking-stay-setting @continue
   Scenario: Dashboard[Pengajuan Booking][Ubah peraturan masuk kos]check button name on dashboard and pengajuan booking page (BBM-536)
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     |  phone prod   | password       |
-      | 0890000000289  | 082291900002  | Bismillah@01   |
+      | phone stag    | phone prod   | password     |
+      | 0890000000289 | 082291900002 | Bismillah@01 |
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
     When owner click on pengajuan sewa
@@ -30,8 +30,8 @@
     And owner select kost "kost flores Tobelo Utara Halmahera Utara"
     And owner clicks on ubah waktu button
     And owner choose minim checkin time with :
-      | waktu   | tanggal |
-      | Minggu  | 2       |
+      | waktu  | tanggal |
+      | Minggu | 2       |
     And owner click Simpan at Peraturan Masuk Kos Pop-up page
     And owner click Simpan at Peraturan Masuk Kos page
     Then owner will see toast "Peraturan terbaru berhasil disimpan"
@@ -45,8 +45,8 @@
   Scenario: [Ubah peraturan masuk kos][Kriteria calon penyewa] Activated Boleh Bawa Anak (COOP-1897)
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     |  phone prod   | password       |
-      | 0890000000289  | 082291900002  | Bismillah@01   |
+      | phone stag    | phone prod   | password     |
+      | 0890000000289 | 082291900002 | Bismillah@01 |
     When owner back to owner dashboard
     And owner click ubah peraturan at "dashboard"
     Then owner redirect to Peraturan Masuk Kos page
@@ -186,152 +186,152 @@
     And owner clicks on ubah waktu button
     Then owner can see "Jarak waktu terdekat (pengajuan dan tanggal masuk kos)" on ubah peraturan
 
-    @TEST_SS-3334
-    Scenario: Check the earliest availability kost if the earliest available room to sell is today and BSS Waktu masuk kos terdekat setelah booking is 0 days
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod    | password  |
-        | 085697344170 | 0891111020198 | qwerty123 |
-      And owner navigate to rules enter kos
-      And owner clicks on ubah waktu button
-      And owner click on toggle pengajuan dan waktu masuk kos
-      And user click on "Simpan" button
-      And user click on "Simpan" button
-      Then owner can see make rules booking page
-      And owner logs out
+  @TEST_SS-3334
+  Scenario: Check the earliest availability kost if the earliest available room to sell is today and BSS Waktu masuk kos terdekat setelah booking is 0 days
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0891111020198 | qwerty123 |
+    And owner navigate to rules enter kos
+    And owner clicks on ubah waktu button
+    And owner click on toggle pengajuan dan waktu masuk kos
+    And user click on "Simpan" button
+    And user click on "Simpan" button
+    Then owner can see make rules booking page
+    And owner logs out
 
  # Scenario: Cancel Booking if Tenant Have Booking
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0890000000131 | 0890000000131 | qwerty123 |
-      And user cancel booking
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
+    And user cancel booking
 
   #Scenario: tenant booking today
-      Given user go to mamikos homepage
-      And tenant redirect to kost details:
-        | kost path stag                                                                 | kost path prod               |
-        | kost-kabupaten-tangerang-kost-campur-murah-kost-mars-september-rajeg-tangerang | Kos DC BAR Automation Tipe A |
-      And tenant booking kost
-      Then tenant should success booking kost
+    Given user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                                 | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-mars-september-rajeg-tangerang | Kos DC BAR Automation Tipe A |
+    And tenant booking kost
+    Then tenant should success booking kost
 
-    @TEST_COOP-813
-    Scenario: BSS Waktu masuk kos terdekat setelah booking is 8 days
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod    | password  |
-        | 085697344170 | 0891111020198 | qwerty123 |
-      And owner navigate to rules enter kos
-      And owner clicks on ubah waktu button
-      And owner click on toggle pengajuan dan waktu masuk kos if active
-      And owner click on dropdown waktu masuk kos
-      And user click on "8" button
-      And owner click on simpan button on popup total day
-      And user click on "Simpan" button
-      And user click on "Simpan" button
-      Then owner can see make rules booking page
-      And owner logs out
+  @TEST_COOP-813
+  Scenario: BSS Waktu masuk kos terdekat setelah booking is 8 days
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0891111020198 | qwerty123 |
+    And owner navigate to rules enter kos
+    And owner clicks on ubah waktu button
+    And owner click on toggle pengajuan dan waktu masuk kos if active
+    And owner click on dropdown waktu masuk kos
+    And user click on "8" button
+    And owner click on simpan button on popup total day
+    And user click on "Simpan" button
+    And user click on "Simpan" button
+    Then owner can see make rules booking page
+    And owner logs out
 
  # Scenario: Cancel Booking if Tenant Have Booking
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0890000000131 | 0890000000131 | qwerty123 |
-      And user cancel booking
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
+    And user cancel booking
 
   #Scenario: tenant booking today
-      Given user go to mamikos homepage
-      And tenant redirect to kost details:
-        | kost path stag                                                                            | kost path prod               |
-        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant see today's date and cannot make booking
+    Given user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                                            | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+    Then tenant see today's date and cannot make booking
 
-    @TEST_SS-3337
-    Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 days
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod    | password  |
-        | 085697344170 | 0891111020198 | qwerty123 |
-      And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
-      And owner clicks on ubah waktu button
-      And owner click on toggle pengajuan dan waktu masuk kos if active
-      And owner choose minim checkin time with :
-        | waktu   | tanggal |
-        | Hari    | 3       |
-      Then owner can see make rules booking page
-      And owner logs out
+  @TEST_SS-3337
+  Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 days
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0891111020198 | qwerty123 |
+    And owner navigate to rules enter kos
+    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner clicks on ubah waktu button
+    And owner click on toggle pengajuan dan waktu masuk kos if active
+    And owner choose minim checkin time with :
+      | waktu | tanggal |
+      | Hari  | 3       |
+    Then owner can see make rules booking page
+    And owner logs out
 
  # Scenario: Cancel Booking if Tenant Have Booking
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0890000000131 | 0890000000131 | qwerty123 |
-      And user cancel booking
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
+    And user cancel booking
 
   #Scenario: tenant booking today
-      Given user go to mamikos homepage
-      And tenant redirect to kost details:
-        | kost path stag                                                                            | kost path prod               |
-        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant see today's date and cannot make booking
+    Given user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                                            | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+    Then tenant see today's date and cannot make booking
 
-    @TEST_SS-3336
-    Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 weeks
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod    | password  |
-        | 085697344170 | 0891111020198 | qwerty123 |
-      And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
-      And owner clicks on ubah waktu button
-      And owner click on toggle pengajuan dan waktu masuk kos if active
-      And owner choose minim checkin time with :
-        | waktu   | tanggal |
-        | Minggu  | 3       |
-      Then owner can see make rules booking page
-      And owner logs out
+  @TEST_SS-3336
+  Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 3 weeks
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0891111020198 | qwerty123 |
+    And owner navigate to rules enter kos
+    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner clicks on ubah waktu button
+    And owner click on toggle pengajuan dan waktu masuk kos if active
+    And owner choose minim checkin time with :
+      | waktu  | tanggal |
+      | Minggu | 3       |
+    Then owner can see make rules booking page
+    And owner logs out
 
  # Scenario: Cancel Booking if Tenant Have Booking
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0890000000131 | 0890000000131 | qwerty123 |
-      And user cancel booking
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
+    And user cancel booking
 
   #Scenario: tenant booking today
-      Given user go to mamikos homepage
-      And tenant redirect to kost details:
-        | kost path stag                                                                            | kost path prod               |
-        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant can choose checkin date in the next "1" week
+    Given user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                                            | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+    Then tenant can choose checkin date in the next "1" week
 
-    @TEST_COOP-916
-    Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 5 month
-      Given user go to mamikos homepage
-      When user login as owner:
-        | phone stag   | phone prod    | password  |
-        | 085697344170 | 0891111020198 | qwerty123 |
-      And owner navigate to rules enter kos
-      And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
-      And owner clicks on ubah waktu button
-      And owner click on toogle today
-      And owner click on dropdown satuan waktu jarak waktu terjauh
-      And user click on "Bulan" button
-      And owner click on simpan button on popup satuan waktu
-      And owner click on dropdown jumlah jarak waktu terjauh
-      And owner click on tanggal "5"
-      And owner click on simpan button on popup total day
-      And user click on "Simpan" button
-      And user click on "Simpan" button
-      Then owner can see make rules booking page
-      And owner logs out
+  @TEST_COOP-916
+  Scenario: Check the latest availability kos if BSS Waktu masuk kos terjauh setelah booking is 5 month
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password  |
+      | 085697344170 | 0891111020198 | qwerty123 |
+    And owner navigate to rules enter kos
+    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner clicks on ubah waktu button
+    And owner click on toogle today
+    And owner click on dropdown satuan waktu jarak waktu terjauh
+    And user click on "Bulan" button
+    And owner click on simpan button on popup satuan waktu
+    And owner click on dropdown jumlah jarak waktu terjauh
+    And owner click on tanggal "5"
+    And owner click on simpan button on popup total day
+    And user click on "Simpan" button
+    And user click on "Simpan" button
+    Then owner can see make rules booking page
+    And owner logs out
 
  # Scenario: Cancel Booking if Tenant Have Booking
-      When user login as tenant via phone number:
-        | phone stag    | phone prod    | password  |
-        | 0890000000131 | 0890000000131 | qwerty123 |
-      And user cancel booking
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
+    And user cancel booking
 
   #Scenario: tenant booking today
-      Given user go to mamikos homepage
-      And tenant redirect to kost details:
-        | kost path stag                                                                            | kost path prod               |
-        | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
-      Then tenant can choose checkin date in the next "4" month
+    Given user go to mamikos homepage
+    And tenant redirect to kost details:
+      | kost path stag                                                                            | kost path prod               |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+    Then tenant can choose checkin date in the next "4" month

@@ -1,7 +1,6 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -40,7 +39,6 @@ public class MamiAdsSteps {
 
     @And("user navigate to mamiads history page")
     public void userNavigateToMamiadsHistoryPage() {
-        page.pause();
         mamiAdsPO.navigatesToMamiadsHistory();
     }
 
@@ -109,23 +107,9 @@ public class MamiAdsSteps {
         Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
     }
 
-    @And("detail list saldo as expected")
-    public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
-        playwright.waitTillPageLoaded(3000.0);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i=0;int j=0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(mamiAdsPO.listSaldo("priceTitle",i),content.get("priceTitle"));
-            Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
-            try{
-                if(!content.get("disc").isEmpty()){
-                    Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
-                    Assert.assertEquals(mamiAdsPO.listSaldo("priceStrike",j),content.get("priceStrike"));
-                    j++;
-                }
-            } catch (java.lang.NullPointerException ignored) { }
-            i++;
-        }
+    @Then("detail list saldo as expected")
+    public void user_see_below_data_is_correct_as_text(String saldoIklanList) {
+        Assert.assertEquals(mamiAdsPO.getBalanceListSnapshot(), saldoIklanList);
     }
 
     @And("owner choose saldo {string}")

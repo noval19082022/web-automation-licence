@@ -4,8 +4,8 @@ Feature: BnB feature with background create booking twice
   Scenario: Tenant Booking Kost Twice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 08100000618   | 08100000618   | qwerty123     |
+      | phone stag  | phone prod  | password  |
+      | 08100000618 | 08100000618 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
     And user go to mamikos homepage
@@ -25,8 +25,8 @@ Feature: BnB feature with background create booking twice
   Scenario: Check Kost saya section when tenant have booking with Reject status but have Booking menunggu konfirmasi
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod    | password     |
-      | 0890000000289  | 0890000000289 | Bismillah@01 |
+      | phone stag    | phone prod    | password     |
+      | 0890000000289 | 0890000000289 | Bismillah@01 |
     And owner navigate to pengajuan booking page
     And owner choose filter kost for "Kost Purwokerto Reject N Waiting Feature Tobelo Utara Halmahera Utara"
     And user clicks on Booking Details button
@@ -36,8 +36,8 @@ Feature: BnB feature with background create booking twice
     And owner should successfully log out
     And user go to mamikos homepage
     And user login as tenant via phone number:
-      | phone stag    | phone prod    | password      |
-      | 08100000618   | 08100000618   | qwerty123     |
+      | phone stag  | phone prod  | password  |
+      | 08100000618 | 08100000618 | qwerty123 |
     Then user can see shortcut homepage with "Yah, pengajuan sewamu ditolak"
     When tenant navigate to riwayat and draf booking
     And user cancel booking

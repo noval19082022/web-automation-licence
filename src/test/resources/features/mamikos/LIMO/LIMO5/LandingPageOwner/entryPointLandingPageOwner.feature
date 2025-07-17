@@ -15,14 +15,14 @@ Feature: Entry Point Landing Page Owner
   #tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag      | phone prod  | password     |
-      | 0891111020199   | 0           | mamikosqa123 |
+      | phone stag    | phone prod | password     |
+      | 0891111020199 | 0          | mamikosqa123 |
     Then user cannot see entry point landing page owner
     And user logs out as a Tenant user
   #owner
     When user login as owner:
-      | phone stag     | phone prod | password  |
-      | 0812345670001  | 0          | qwerty123 |
+      | phone stag    | phone prod | password  |
+      | 0812345670001 | 0          | qwerty123 |
     And user go to mamikos homepage
     Then user cannot see entry point landing page owner
     When user click "Promosikan Iklan Anda"

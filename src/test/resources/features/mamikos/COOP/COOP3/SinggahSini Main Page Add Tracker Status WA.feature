@@ -6,8 +6,8 @@ Feature: SinggahSini Main Page Add Tracker Status WA
   Scenario: Add Track Status Chat WA on existing user
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Nama Properti" and input "serayu" in the search field on main page
     And user click search button on main page filter
@@ -39,8 +39,8 @@ Feature: SinggahSini Main Page Add Tracker Status WA
     #check in Tenant Tracker
     When admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     When user choose "Nama Penyewa" and input "Automation CRM" in the search field on main page
     And user click search button on main page filter

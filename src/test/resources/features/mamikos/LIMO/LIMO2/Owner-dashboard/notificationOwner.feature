@@ -6,7 +6,7 @@ Feature: See all notification from owner
   Scenario: [Owner Dashboard][Notification] See all notification from owner
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag | phone prod | password |
+      | phone stag   | phone prod | password  |
       | 086412300123 | 0          | qwerty123 |
     When owner open notification icon
     And owner wants to see all notification

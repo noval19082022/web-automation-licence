@@ -5,8 +5,8 @@ Feature: Atur promo owner
   Scenario: Delete promo owner
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
     And admin search the title promo "Update promo owner AT" on search box
     And admin delete the promo admin
@@ -15,8 +15,8 @@ Feature: Atur promo owner
   Scenario: Create new promo owner
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password   |
-      | 08713399866  | qwerty123  |
+      | phone stag  | password  |
+      | 08713399866 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
@@ -43,8 +43,8 @@ Feature: Atur promo owner
   Scenario: Verifikasi Promo Owner from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
     And admin search the title promo "Update promo owner AT" on search box
     Then admin verified the promo owner "Update promo owner AT"
@@ -53,8 +53,8 @@ Feature: Atur promo owner
   Scenario: Check Promo Owner after verified by admin
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password   |
-      | 08713399866  | qwerty123  |
+      | phone stag  | password  |
+      | 08713399866 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
@@ -65,8 +65,8 @@ Feature: Atur promo owner
   Scenario: Admin unverified promo
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
     And admin search the title promo "Update promo owner AT" on search box
     Then admin unverified the promo owner
@@ -75,8 +75,8 @@ Feature: Atur promo owner
   Scenario: Check Promo Owner after unverified by admin
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password   |
-      | 08713399866  | qwerty123  |
+      | phone stag  | password  |
+      | 08713399866 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kos Fathul Khair Jetis Yogyakarta" on property saya page
     And owner atur promo owner
@@ -93,8 +93,8 @@ Feature: Atur promo owner
   Scenario: Delete promo owner
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigates to Promo Owner
     And admin search the title promo "Update promo owner AT" on search box
     And admin delete the promo admin

@@ -9,8 +9,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod     |
-      | 0890867321212 | 0890867321212  |
+      | phone stag    | phone prod    |
+      | 0890867321212 | 0890867321212 |
 
   @SS-4974 @continue
   Scenario: Cancel Booking if Tenant Have Booking
@@ -33,8 +33,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -84,8 +84,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
   Scenario:  Owner Check Additional Price Biaya Tetap and Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner goes to bills details
       | kost name stag                                                        | kost name prod                                        |
       | Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |

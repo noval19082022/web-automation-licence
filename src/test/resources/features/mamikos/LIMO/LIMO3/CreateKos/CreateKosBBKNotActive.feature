@@ -13,7 +13,7 @@ Feature: Create new kos with owner not active BBK
     And owner click tambah data iklan "Kost"
     And user click add new kos button
     And owner fills valid data kos as expected
-      | kos name            | room type check | room type name        | kos type | description kos       | build kos | other note |
+      | kos name             | room type check | room type name        | kos type | description kos       | build kos | other note |
       | kost Automation TEST | yes             | Tipe New BBK Rejected | mix      | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
@@ -156,7 +156,7 @@ Feature: Create new kos with owner not active BBK
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
-      | kos name            | room type check | room type name | kos type | description kos              | build kos | other note                   |
+      | kos name             | room type check | room type name | kos type | description kos              | build kos | other note                   |
       | kost automation test | yes             | Tipe A         | girl     | Kos new draft not active BBK | 2020      | Akan dihapus setelah terbuat |
     And owner set rules kos:
       | Dilarang bawa hewan |

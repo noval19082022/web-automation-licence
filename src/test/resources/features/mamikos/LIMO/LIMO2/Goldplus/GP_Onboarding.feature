@@ -9,18 +9,18 @@ Feature: Owner Dashboard GP-Onboarding
       | 087133998156 | 0          | qwerty123 |
     And owner go to panduan gold plus page
     Then owner will see that detail text on goldplus guides page:
-    |TextOnPage|
-    |Naikkan Posisi Iklan Properti dengan MamiAds|
-    |Dengan Saldo MamiAds, iklan Anda bisa mendapat lebih banyak pengunjung.|
-    |Dapatkan keuntungan MamiAds sebagai berikut:|
-    |Properti Tampil Lebih di Atas|
-    |Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian.|
-    |Properti Tampil di Banyak Tempat|
-    |Terima poin cukup dengan beraktivitas di Mamikos. Bagi pengguna GoldPlus, poin yang didapat akan lebih banyak.|
-    |Tentukan Anggaran Harian|
-    |Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.|
-    |Pantau Performa Iklan|
-    |Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.|
+      | TextOnPage                                                                                                     |
+      | Naikkan Posisi Iklan Properti dengan MamiAds                                                                   |
+      | Dengan Saldo MamiAds, iklan Anda bisa mendapat lebih banyak pengunjung.                                        |
+      | Dapatkan keuntungan MamiAds sebagai berikut:                                                                   |
+      | Properti Tampil Lebih di Atas                                                                                  |
+      | Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian.   |
+      | Properti Tampil di Banyak Tempat                                                                               |
+      | Terima poin cukup dengan beraktivitas di Mamikos. Bagi pengguna GoldPlus, poin yang didapat akan lebih banyak. |
+      | Tentukan Anggaran Harian                                                                                       |
+      | Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.                                |
+      | Pantau Performa Iklan                                                                                          |
+      | Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.                                    |
 
   @continue @TEST_LIMO-3406
   Scenario: [Web Owner][GP-Onboarding] Swiper Left/Previous Button Should Be Disabled
@@ -66,16 +66,16 @@ Feature: Owner Dashboard GP-Onboarding
   Scenario: [Web Owner][GP-Onboarding] Owner click on "Coba Sekarang"
     When owner clicks on coba sekarang button
     Then owner will see that detail text on popup mamiads:
-    | TextPopUp     |
-    | Properti Tampil Lebih di Atas                                                                                        |
-    | Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian.         |
-    | Properti Tampil di Banyak Tempat                                                                                     |
-    | Iklan tayang di berbagai titik strategis di aplikasi dan web Mamikos.                                                |
-    | Tentukan Anggaran Harian                                                                                             |
-    | Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.                                      |
-    | Pantau Performa Iklan                                                                                                |
-    | Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.                                          |
-    | Cara Menggunakan MamiAds                                                                                             |
+      | TextPopUp                                                                                                    |
+      | Properti Tampil Lebih di Atas                                                                                |
+      | Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian. |
+      | Properti Tampil di Banyak Tempat                                                                             |
+      | Iklan tayang di berbagai titik strategis di aplikasi dan web Mamikos.                                        |
+      | Tentukan Anggaran Harian                                                                                     |
+      | Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.                              |
+      | Pantau Performa Iklan                                                                                        |
+      | Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.                                  |
+      | Cara Menggunakan MamiAds                                                                                     |
 
   @continue @TEST_LIMO-3411
   Scenario: Swiper Left/Previous Button On Gold Plus Onboarding Pop-Up Should Be Disabled
@@ -124,16 +124,16 @@ Feature: Owner Dashboard GP-Onboarding
     When owner navigates to owner dashboard
     And owner go to panduan gold plus memantau performa kos page
     Then owner will see that detail text on goldplus guides page:
-    |TextOnPage|
-    |Pantau Performa Bisnis Kos dengan Statistik GoldPlus|
-    |Statistik GoldPlus memperlihatkan data terkini seputar iklan kos Anda, untuk keputusan bisnis yang lebih baik.|
-    |Di Statistik GoldPlus, Anda dapat melihat:|
-    |Performa Iklan Kos Anda|
-    |Anda bisa lihat seberapa banyak kunjungan iklan, chat, booking, dan performa lainnya di kos Anda.|
-    |Gambaran Profil Pencari Kos|
-    |Cari tahu pencari kos seperti apa yang mem-booking kos Anda.|
+      | TextOnPage                                                                                                     |
+      | Pantau Performa Bisnis Kos dengan Statistik GoldPlus                                                           |
+      | Statistik GoldPlus memperlihatkan data terkini seputar iklan kos Anda, untuk keputusan bisnis yang lebih baik. |
+      | Di Statistik GoldPlus, Anda dapat melihat:                                                                     |
+      | Performa Iklan Kos Anda                                                                                        |
+      | Anda bisa lihat seberapa banyak kunjungan iklan, chat, booking, dan performa lainnya di kos Anda.              |
+      | Gambaran Profil Pencari Kos                                                                                    |
+      | Cari tahu pencari kos seperti apa yang mem-booking kos Anda.                                                   |
     And owner will see that detail text on popup mamiads:
-    |Cara menggunakan Statistik GoldPlus|
+      | Cara menggunakan Statistik GoldPlus |
 
   @continue @TEST_LIMO-3416
   Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Left/Previous Button Should Be Disabled
@@ -186,8 +186,8 @@ Feature: Owner Dashboard GP-Onboarding
     When owner can see gp statistic header text as "Statistik GoldPlus"
     Then owner can see gp statistic filter text number <number> is "<package>"
     Examples:
-      | number | package    |
-      | 1      | Semua      |
+      | number | package |
+      | 1      | Semua   |
 
   @TEST_LIMO-3422
   Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List

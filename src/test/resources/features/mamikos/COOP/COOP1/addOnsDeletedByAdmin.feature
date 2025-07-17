@@ -29,8 +29,8 @@ Feature: addOns Deleted By Admin
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                    | kost path prod        |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons  | Kost Adi Auto Add Ons |
+      | kost path stag                                                                   | kost path prod        |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons | Kost Adi Auto Add Ons |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 

@@ -8,8 +8,8 @@ Feature: PMS - Add fee MVP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0812000008    | 0812000008    |
+      | phone stag | phone prod |
+      | 0812000008 | 0812000008 |
 
   @TEST_SS-5070
   Scenario: Tenant cancel Booking
@@ -23,8 +23,8 @@ Feature: PMS - Add fee MVP
   Scenario: [PMS] Create new booking or DBET when kost doesn't have PMS KK Add fee
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Bale Mantu Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -47,7 +47,7 @@ Feature: PMS - Add fee MVP
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone | Kos Type |
+      | Tenant Phone | Kos Type    |
       | 0812000008   | All Testing |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
@@ -76,8 +76,8 @@ Feature: PMS - Add fee MVP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0812000007    | 0812000007    |
+      | phone stag | phone prod |
+      | 0812000007 | 0812000007 |
 
  # Scenario: Tenant cancel Booking
     Given user go to mamikos homepage
@@ -88,8 +88,8 @@ Feature: PMS - Add fee MVP
 
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Bundaran Aloha Sidoarjo"
     And admin create contract tenant new booking
     And admin selected type room
@@ -129,8 +129,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -140,14 +140,14 @@ Feature: PMS - Add fee MVP
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
       | Per Bulan     | today            | 1 Bulan     | Full Payment      |
     And admin add other cost:
-      | Nama Biaya         | Harga  |
-      | Parkir Mobil       | 10000 |
-      | Alat Elektronik    | 50000  |
+      | Nama Biaya      | Harga |
+      | Parkir Mobil    | 10000 |
+      | Alat Elektronik | 50000 |
     And admin click on save button
     Then admin see has fee Informasi Biaya Lain:
-      | Nama Biaya         | Harga  |
-      | Parkir Mobil       | 10000 |
-      | Alat Elektronik    | 50000  |
+      | Nama Biaya      | Harga |
+      | Parkir Mobil    | 10000 |
+      | Alat Elektronik | 50000 |
     Then admin click on ya simpan button
 
   @TEST_SS-4354
@@ -161,8 +161,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -172,9 +172,9 @@ Feature: PMS - Add fee MVP
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
       | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     And admin add other cost:
-      | Nama Biaya         | Harga  |
-      | Parkir Mobil       | 10000 |
-      | Alat Elektronik    | 50000  |
+      | Nama Biaya      | Harga |
+      | Parkir Mobil    | 10000 |
+      | Alat Elektronik | 50000 |
     And admin click on save button
 
   @TEST_SS-4332
@@ -188,8 +188,8 @@ Feature: PMS - Add fee MVP
     And tenant logs out
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -199,11 +199,11 @@ Feature: PMS - Add fee MVP
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
       | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     And admin add other cost:
-      | Nama Biaya         | Harga  |
-      | Parkir Mobil       | 10000  |
-      | Bawa Blender       | 50000  |
-      | Bawa Kulkas        | 50000  |
-      | Laundry            | 5000   |
+      | Nama Biaya   | Harga |
+      | Parkir Mobil | 10000 |
+      | Bawa Blender | 50000 |
+      | Bawa Kulkas  | 50000 |
+      | Laundry      | 5000  |
     And admin click on save button
     Then admin click on ya simpan button
 
@@ -216,12 +216,12 @@ Feature: PMS - Add fee MVP
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone | Kos Type |
-      | 0812000008   | All Testing     |
+      | Tenant Phone | Kos Type    |
+      | 0812000008   | All Testing |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
     Then admin can see add fee from pms with:
-      | Name |
+      | Name         |
       | Parkir Mobil |
       | Bawa Blender |
 
@@ -229,8 +229,8 @@ Feature: PMS - Add fee MVP
   Scenario: [PMS][New booking/DBET] Admin check list addfee must same with PMS-kk in dropdown
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Lapangan Tembak Halmahera Utara"
     And admin create contract tenant new booking
     And admin selected type room
@@ -240,7 +240,7 @@ Feature: PMS - Add fee MVP
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
       | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     Then admin can see addfee KK with:
-      | addfee name |
+      | addfee name     |
       | Alat Elektronik |
       | Bawa Blender    |
       | Bawa Kulkas     |
@@ -253,15 +253,15 @@ Feature: PMS - Add fee MVP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag     | phone prod    |
-      | 0813000002     | 0813000002    |
+      | phone stag | phone prod |
+      | 0813000002 | 0813000002 |
 
   @TEST_SS-4349
   Scenario: [PMS][Reschedule] Create Reschedule when that booking has biaya tambahan
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
     And admin create contract tenant "reschedule"
     And admin selected type room
@@ -283,8 +283,8 @@ Feature: PMS - Add fee MVP
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone  | Kos Type |
-      | 0813000002    | All      |
+      | Tenant Phone | Kos Type |
+      | 0813000002   | All      |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
     Then admin can see "Benefit Asuransi & Biaya Admin" on confirm booking page
@@ -300,8 +300,8 @@ Feature: PMS - Add fee MVP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0813000002    | 0813000002    |
+      | phone stag | phone prod |
+      | 0813000002 | 0813000002 |
     When user go to mamikos homepage
     Then user login as tenant via phone number:
       | phone stag | phone prod | password  |
@@ -311,15 +311,15 @@ Feature: PMS - Add fee MVP
 #    Scenario: Relocation
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Omah Ngembel Pajangan"
     And admin create contract tenant "relocation"
     And admin selected type room
     And admin input contract id with "71305"
     And admin fill informasi pembayaran:
       | Hitungan Sewa | Tanggal Check-in | Durasi Sewa | Metode Pembayaran |
-      | Per Bulan   | today            | 3 Bulan     | Full Payment      |
+      | Per Bulan     | today            | 3 Bulan     | Full Payment      |
     And admin click on save button
 
   @TEST_SS-4351
@@ -329,8 +329,8 @@ Feature: PMS - Add fee MVP
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
-      | 0813000002    | 0813000002    |
+      | phone stag | phone prod |
+      | 0813000002 | 0813000002 |
     When user go to mamikos homepage
     Then user login as tenant via phone number:
       | phone stag | phone prod | password  |
@@ -353,7 +353,7 @@ Feature: PMS - Add fee MVP
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
       | Tenant Phone | Kos Type |
-      | 0813000002   | All    |
+      | 0813000002   | All      |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
     Then admin click on next button accept booking for kost add fee

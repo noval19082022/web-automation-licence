@@ -7,19 +7,19 @@ Feature: Update Billing tracker flow
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag     | phone prod    |
-      | 08100000214    | 0816000001    |
+      | phone stag  | phone prod |
+      | 08100000214 | 0816000001 |
 
   Scenario: Booking and confirm kost
     Given user go to mamikos homepage
     Then user login as tenant via phone number:
-      | phone stag   | phone prod  | password  |
-      | 08100000214  | 0816000001  | qwerty123 |
+      | phone stag  | phone prod | password  |
+      | 08100000214 | 0816000001 | qwerty123 |
     And user cancel booking
     And user go to mamikos homepage
     When tenant redirect to kost details:
-      | kost path stag                                                                                 | kost path prod                                           |
-      | kost-kabupaten-sidoarjo-kost-campur-murah-kost-singgahsini-bundaran-aloha-superior-sidoarjo-2  | kost lombok homepage reject Tobelo Utara Halmahera Utara |
+      | kost path stag                                                                                | kost path prod                                           |
+      | kost-kabupaten-sidoarjo-kost-campur-murah-kost-singgahsini-bundaran-aloha-superior-sidoarjo-2 | kost lombok homepage reject Tobelo Utara Halmahera Utara |
     And user dismiss FTUE booking benefit
     And tenant booking kost for "today"
     And user go to mamikos homepage
@@ -31,14 +31,14 @@ Feature: Update Billing tracker flow
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone  | Kos Type |
-      | 08100000214   | All      |
+      | Tenant Phone | Kos Type |
+      | 08100000214  | All      |
     And admin click actions button on booking list
     And admin accept booking for kost add fee
     And admin click on next button accept booking for kost add fee
 
 #    Tenant paid invoice
-    Scenario: tenant paid invoice
+  Scenario: tenant paid invoice
     When user go to mamikos homepage
     And user login as tenant via phone number:
       | phone stag  | phone prod    | password  |
@@ -53,12 +53,12 @@ Feature: Update Billing tracker flow
     And user logs out as a Tenant user
 
 #      tenant check data on billing tracker
-    @SS-4375 @continue
-    Scenario: check data on billing tracker and filter with aktif contract status
+  @SS-4375 @continue
+  Scenario: check data on billing tracker and filter with aktif contract status
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to billing tracker
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
@@ -69,11 +69,11 @@ Feature: Update Billing tracker flow
   Scenario: [Billing Tracker][Notes]Create notes on invoice
     When admin can see "Tambah Catatan" button
     And admin fill notes tracker with:
-      | type             | notes          |
-      | Refund (garansi) | updated again  |
+      | type             | notes         |
+      | Refund (garansi) | updated again |
     Then admin can see notes with:
-      | type             | notes          |
-      | Refund (garansi) | updated again  |
+      | type             | notes         |
+      | Refund (garansi) | updated again |
 
 
   @SS-5082 @continue
@@ -82,19 +82,19 @@ Feature: Update Billing tracker flow
       | type  | notes             |
       | Blast | Tutup jam 9 malam |
     Then admin can see notes with:
-      | type             | notes              |
-      | Refund (garansi) | updated again      |
-      | Blast            | Tutup jam 9 malam  |
+      | type             | notes             |
+      | Refund (garansi) | updated again     |
+      | Blast            | Tutup jam 9 malam |
 
   @SS-4309 @continue
-   Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
+  Scenario: [Billing Tracker][Notes]Create notes for many tag on 1 invoice
     And admin fill notes tracker with:
-      | type            | notes               |
-      | Input cash out  | cash out tanggal 5  |
+      | type           | notes              |
+      | Input cash out | cash out tanggal 5 |
     Then admin can see notes with:
-      | type            | notes               |
-      | Input cash out  | cash out tanggal 5  |
-      | Blast           | Tutup jam 9 malam   |
+      | type           | notes              |
+      | Input cash out | cash out tanggal 5 |
+      | Blast          | Tutup jam 9 malam  |
     And admin click on Lihat lebih banyak catatan note dropdown
     Then admin can see notes with:
       | type             | notes              |
@@ -109,15 +109,15 @@ Feature: Update Billing tracker flow
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
     And admin filter contract status with "Aktif"
     When admin fill notes tracker with:
-      | type                | notes                         |
-      | Pindah jatuh tempo  | jatuh tempo pindah tanggal 5  |
+      | type               | notes                        |
+      | Pindah jatuh tempo | jatuh tempo pindah tanggal 5 |
     And admin click on Lihat lebih banyak catatan note dropdown
     Then admin can see notes with:
-      | type                | notes                         |
-      | Refund (garansi)    | updated again                 |
-      | Blast               | Tutup jam 9 malam             |
-      | Input cash out      | cash out tanggal 5            |
-      | Pindah jatuh tempo  | jatuh tempo pindah tanggal 5  |
+      | type               | notes                        |
+      | Refund (garansi)   | updated again                |
+      | Blast              | Tutup jam 9 malam            |
+      | Input cash out     | cash out tanggal 5           |
+      | Pindah jatuh tempo | jatuh tempo pindah tanggal 5 |
 
   @SS-5086 @continue @SS-4308
   Scenario: [Billing Tracker][Notes]Edit notes
@@ -135,11 +135,11 @@ Feature: Update Billing tracker flow
     And admin filter contract status with "Aktif"
     And admin click on Lihat lebih banyak catatan note dropdown
     Then admin can see notes with:
-      | type                | notes                         |
-      | Pindah tipe kamar   | jatuh tempo pindah tanggal 5  |
-      | Input cash out      | cash out tanggal 5            |
-      | Blast               | Tutup jam 9 malam             |
-      | Refund (garansi)    | updated again                 |
+      | type              | notes                        |
+      | Pindah tipe kamar | jatuh tempo pindah tanggal 5 |
+      | Input cash out    | cash out tanggal 5           |
+      | Blast             | Tutup jam 9 malam            |
+      | Refund (garansi)  | updated again                |
     When admin can see "Sembunyikan" button
 
   Scenario: tenant ajukan berhenti sewa
@@ -163,8 +163,8 @@ Feature: Update Billing tracker flow
   Scenario: [Billing Tracker][Productivity] Check filter combination contract status Ajukan Checkout
     When admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to billing tracker
     And admin clicks on next month in calendar
     And admin search billing tracker by "No. HP Penyewa" and "08100000214"
@@ -203,8 +203,8 @@ Feature: Update Billing tracker flow
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag      | phone prod    |
-      | 08100000214     | 0816000001    |
+      | phone stag  | phone prod |
+      | 08100000214 | 0816000001 |
     When admin go to pms singgahsini
     And admin go to billing tracker
     And admin clicks on next month in calendar
@@ -253,8 +253,8 @@ Feature: Update Billing tracker flow
     When admin click on reset button
     And admin clicks on Filter button
     And admin can see contract status filtering with:
-    | status            |
-    | Aktif             |
-    | Ajukan Check-out  |
-    | Akan Check-out    |
-    | Sudah Check-out   |
+      | status           |
+      | Aktif            |
+      | Ajukan Check-out |
+      | Akan Check-out   |
+      | Sudah Check-out  |

@@ -6,8 +6,8 @@ Feature: Owner Profile Picture - Owner Setting
   Scenario: [Setelan Akun][Profile Picture] Profile Picture is displayed
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password   |
-      | 083176408311 | qwerty123  |
+      | phone stag   | password  |
+      | 083176408311 | qwerty123 |
     Then verify the profile picture is displayed
 
   @TEST_LIMO-803 @continue

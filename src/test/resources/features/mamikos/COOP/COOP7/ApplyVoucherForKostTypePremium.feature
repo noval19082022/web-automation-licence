@@ -18,8 +18,8 @@ Feature: Apply Voucher For Kost Type Premium
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag     |  phone prod     | password  |
-      | 083824996373   |  083824996373   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 083824996373 | 083824996373 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -33,8 +33,8 @@ Feature: Apply Voucher For Kost Type Premium
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 083176408449   | 0895365624343  | qwerty123    |
+      | phone stag   | phone prod    | password  |
+      | 083176408449 | 0895365624343 | qwerty123 |
     And owner accept booking
     Then owner should redirect back to pengajuan booking page
 
@@ -42,18 +42,18 @@ Feature: Apply Voucher For Kost Type Premium
   Scenario: Tenant Apply Voucher for Kost Type Premium
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag     |  phone prod     | password  |
-      | 083824996373   |  083824996373   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 083824996373 | 083824996373 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant click button bayar sekarang
     And tenant apply voucher:
-      | voucher name stag  | voucher name prod  |
-      | VAFORPREMIUM       | VAFORPREMIUM       |
+      | voucher name stag | voucher name prod |
+      | VAFORPREMIUM      | VAFORPREMIUM      |
     Then tenant can see voucher is applied
 
   Scenario: Tenant Apply Voucher Not Applicable Kost Type Premium
     When tenant set active page to 1
     And tenant apply voucher:
-      | voucher name stag   | voucher name prod |
-      | VANONPREMIUM1       | VANONPREMIUM1     |
+      | voucher name stag | voucher name prod |
+      | VANONPREMIUM1     | VANONPREMIUM1     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."

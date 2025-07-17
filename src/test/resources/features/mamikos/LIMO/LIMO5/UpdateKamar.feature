@@ -5,8 +5,8 @@ Feature: Update Kamar
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by add new rooms and delete it
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408319   | 083176408311   | qwerty123   |
+      | phone stag   | phone prod   | password  |
+      | 083176408319 | 083176408311 | qwerty123 |
     When owner navigates to property saya kos
     And owner search kost "Kos oke bebek" on property saya page
     And user click Lihat Selengkapnya button for edit
@@ -23,8 +23,8 @@ Feature: Update Kamar
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update rooms become unavailable
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password    |
-      | 083176408311   | 083176408311   | qwerty123   |
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kos Testing 123 Tipe B Danurejan Yogyakarta" on property saya page
     And user click Lihat Selengkapnya button for edit

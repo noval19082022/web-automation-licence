@@ -5,8 +5,8 @@ Feature: Manage Point Expiry
   Scenario: [Point Management][Expiry]Update Point Expiry
     Given admin go to mamikos bangkrupux admin
     * admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     * admin access point expiry menu
     And user fill Owner Point Expiry in with "5"
     And user fill Tenant Point Expiry in with "10"

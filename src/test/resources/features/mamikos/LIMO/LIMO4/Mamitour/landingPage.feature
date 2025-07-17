@@ -5,8 +5,8 @@ Feature: Visit Landing Page Mamitour
   Scenario: [Web][Mamitour] Visit landing page mamitour from owner dashboard
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password     |
-      | 0826666666633 | 0826666666633 | qwerty123    |
+      | phone stag    | phone prod    | password  |
+      | 0826666666633 | 0826666666633 | qwerty123 |
     And user access mamitour from owner dashboard
     Then user redirected to mamitour landing page
     And user will see title "Simulasi keliling kos pakai MamiTour" on landing page mamitour

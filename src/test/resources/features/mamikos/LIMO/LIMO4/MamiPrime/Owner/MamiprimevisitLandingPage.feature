@@ -5,8 +5,8 @@ Feature: Mamiprime Landing Page
   Scenario: Visit landing page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod  | password   |
-      | 0890910001 | 0890910001  | qwerty123  |
+      | phone stag | phone prod | password  |
+      | 0890910001 | 0890910001 | qwerty123 |
     And user click on mamiprime widget at owner dashboard
     Then user redirected to mamiprime landing page
 
@@ -60,8 +60,8 @@ Feature: Mamiprime Landing Page
     #login as owner
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod  | password   |
-      | 0890910001 | 0890910001  | qwerty123  |
+      | phone stag | phone prod | password  |
+      | 0890910001 | 0890910001 | qwerty123 |
     Then owner access mamiprime landing page
 
   @TEST_LIMO-626 @WEB @AUTOMATED
@@ -83,6 +83,6 @@ Feature: Mamiprime Landing Page
     #login as owner
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag | phone prod  | password   |
-      | 0890910001 | 0890910001  | qwerty123  |
+      | phone stag | phone prod | password  |
+      | 0890910001 | 0890910001 | qwerty123 |
     Then owner navigate to pendaftaran mamiprime page

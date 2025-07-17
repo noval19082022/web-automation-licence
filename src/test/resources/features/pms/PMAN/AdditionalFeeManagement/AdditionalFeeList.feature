@@ -6,8 +6,8 @@ Feature: Additional Fee Master Data List
   Scenario: Check Biaya Tambahan Tetap, Satuan Waktu only, Ditentukan di Awal, Penyewa Tidak bisa pilih mandiri
     Given admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to additional fee management menu
     #add additional fee master data
     When admin add new additional fee
@@ -19,8 +19,8 @@ Feature: Additional Fee Master Data List
     And admin select penyewa bisa pilih mandiri "Tidak"
     And admin submit additional fee
     Then new additional fee "Tetap waktu only" added
-      | Tipe Pembayaran | Satuan Biaya Top           | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
-      | Tetap           | Harian, Mingguan, Bulanan  | -                   | Ditentukan di Awal          | Tidak                       |
+      | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri |
+      | Tetap           | Harian, Mingguan, Bulanan | -                   | Ditentukan di Awal          | Tidak                      |
     #delete additional fee master data
     When admin delete additional fee "Tetap waktu only"
     Then no additional fee master data with name "Tetap waktu only"
@@ -36,8 +36,8 @@ Feature: Additional Fee Master Data List
     And admin choose satuan waktu biaya "Bulanan"
     And admin submit additional fee
     Then new additional fee "Disesuaikan Tagihan" added
-      | Tipe Pembayaran | Satuan Biaya Top           | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  |
-      | Satu Kali       | Harian, Mingguan, Bulanan  | -                   | Disesuaikan dengan Tagihan  | Tidak                       |
+      | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri |
+      | Satu Kali       | Harian, Mingguan, Bulanan | -                   | Disesuaikan dengan Tagihan  | Tidak                      |
     #delete additional fee master data
     When admin delete additional fee "Disesuaikan Tagihan"
     Then no additional fee master data with name "Disesuaikan Tagihan"
@@ -55,8 +55,8 @@ Feature: Additional Fee Master Data List
     And admin select fase penyewa pilih biaya "Booking"
     And admin submit additional fee
     Then new additional fee "Tetap besaran only" added
-      | Tipe Pembayaran | Satuan Biaya Top                    | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  | Fase Penyewa Pilih Biaya |
-      | Tetap           | Kilogram (kg), Item/pcs, Per orang  | -                   | Ditentukan di Awal          | Ya                          | Booking                  |
+      | Tipe Pembayaran | Satuan Biaya Top                   | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
+      | Tetap           | Kilogram (kg), Item/pcs, Per orang | -                   | Ditentukan di Awal          | Ya                         | Booking                  |
     #delete additional fee master data
     When admin delete additional fee "Tetap besaran only"
     Then no additional fee master data with name "Tetap besaran only"
@@ -77,8 +77,8 @@ Feature: Additional Fee Master Data List
     And admin select fase penyewa pilih biaya "Stay"
     And admin submit additional fee
     Then new additional fee "Satu Kali waktu dan besaran" added
-      | Tipe Pembayaran | Satuan Biaya Top           | Satuan Biaya Bottom                 | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  | Fase Penyewa Pilih Biaya |
-      | Satu Kali       | Harian, Mingguan, Bulanan  | Kilogram (kg), Item/pcs, Per orang  | Ditentukan di Awal          | Ya                          | Stay                     |
+      | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom                | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
+      | Satu Kali       | Harian, Mingguan, Bulanan | Kilogram (kg), Item/pcs, Per orang | Ditentukan di Awal          | Ya                         | Stay                     |
     #delete additional fee master data
     When admin delete additional fee "Satu Kali waktu dan besaran"
     Then no additional fee master data with name "Satu Kali waktu dan besaran"
@@ -100,8 +100,8 @@ Feature: Additional Fee Master Data List
     And admin select fase penyewa pilih biaya "Booking"
     And admin submit additional fee
     Then new additional fee "Penyewa Stay dan Booking" added
-      | Tipe Pembayaran | Satuan Biaya Top           | Satuan Biaya Bottom                 | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri  | Fase Penyewa Pilih Biaya |
-      | Satu Kali       | Harian, Mingguan, Bulanan  | Kilogram (kg), Item/pcs, Per orang  | Ditentukan di Awal          | Ya                          | Stay dan Booking         |
+      | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom                | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
+      | Satu Kali       | Harian, Mingguan, Bulanan | Kilogram (kg), Item/pcs, Per orang | Ditentukan di Awal          | Ya                         | Stay dan Booking         |
     #delete additional fee master data
     When admin delete additional fee "Penyewa Stay dan Booking"
     Then no additional fee master data with name "Penyewa Stay dan Booking"
@@ -110,8 +110,8 @@ Feature: Additional Fee Master Data List
   Scenario: Max list per page
     Given admin go to pms singgahsini
     And admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to additional fee management menu
     Then admin can view 10 additional fee per page
 

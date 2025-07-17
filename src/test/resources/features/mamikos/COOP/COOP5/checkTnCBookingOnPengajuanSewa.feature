@@ -8,7 +8,7 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
       | phone stag    | phone prod    | password     |
       | 0890000000313 | 0890000000313 | Bismillah@01 |
     And tenant redirect to kost details:
-      | kost path stag                                                      | kost path prod               |
+      | kost path stag                                                                          | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-jawa-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And user want to dismiss FTUE
     And tenant fill booking data for "today" and "Per Bulan"
@@ -23,7 +23,7 @@ Feature: Check Update TnC Booking on Pengajuan sewa page
   Scenario: [Pengajuan Sewa][TnC Booking]Check TnC booking for kost Singgah sini, APIK and Kos Pilihan
     Given user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                      | kost path prod               |
+      | kost path stag                                                   | kost path prod               |
       | kost-kota-depok-kost-putra-murah-kost-cibinong-bogor-coop-kece-2 | Kos DC BAR Automation Tipe A |
     And tenant fill booking data for "today" and "Per Bulan"
     And tenant click ajukan sewa button on kost detail page

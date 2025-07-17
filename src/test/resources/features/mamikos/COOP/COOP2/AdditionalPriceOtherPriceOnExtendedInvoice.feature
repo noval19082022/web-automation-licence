@@ -36,8 +36,8 @@ Feature: Additional Price Other Price On Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111 | 08916727111       | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod          |
       | Nunu And Willump | Adi Auto Addons Satu |
@@ -87,8 +87,8 @@ Feature: Additional Price Other Price On Extended Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On Extended Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08916727111    | 08916727111    | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08916727111 | 08916727111 | qwerty123 |
     And owner go to bill page of kost "Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara" on month of "next"
     And owner go to detail tagihan
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

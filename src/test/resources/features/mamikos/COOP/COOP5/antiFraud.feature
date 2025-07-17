@@ -5,8 +5,8 @@ Feature: AntiFraud
   Scenario: [Web][Chat room] Click  "Gimana Mamikos mencegah penipuan? " Redirection to Mamihelp
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | password |
-      | 0892202409  | qwerty123|
+      | phone stag | password  |
+      | 0892202409 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user opens the chatroom in the "1" order on chat list
     And user click text "Gimana Mamikos mencegah penipuan?"
@@ -50,8 +50,8 @@ Feature: AntiFraud
   Scenario: [Web][Chat room] Repeated suspicious Keyword
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | password |
-      | 08100000213 | qwerty123|
+      | phone stag  | password  |
+      | 08100000213 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user opens the chatroom in the "1" order on chat list
     And tenant enter text "Survey" in chat page

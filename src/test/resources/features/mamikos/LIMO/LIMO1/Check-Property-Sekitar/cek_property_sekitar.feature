@@ -5,7 +5,7 @@ Feature: Cek Properti Sekitar
   Scenario: [Fitur Promosi][Cek Properti Sekitar] Make sure owner will redirect to Cek Properti Sekitar page
     Given user go to mamikos homepage
     And user login as owner:
-      | phone stag   | password   |
+      | phone stag    | password  |
       | 0812345670001 | qwerty123 |
     When owner accsess cek properti sekitar
     And redirected to cek properti sekitar page

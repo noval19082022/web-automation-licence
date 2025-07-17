@@ -71,7 +71,7 @@ Feature: Create Kos From Home
     And user check facilities under "Fasilitas Kamar"
       | Kasur |
     And user check facilities under "Fasilitas Kamar Mandi"
-      | Air panas|
+      | Air panas |
     And user check facilities under "Parkir"
       | Parkir Sapi |
     And owner click lanjutkan button for next steps
@@ -88,11 +88,11 @@ Feature: Create Kos From Home
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putri"
 
   @deleteKosFromAdmin
-    Scenario: Delete kos from admin
+  Scenario: Delete kos from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
     And admin bangkrupux search kost owner in admin kos owner page
     And admin delete kos

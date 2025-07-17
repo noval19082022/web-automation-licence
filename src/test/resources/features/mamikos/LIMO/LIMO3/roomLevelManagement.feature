@@ -6,8 +6,8 @@ Feature: Room Level Management
   Scenario: [Admin] Add Room Level
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                   | email prod                   |password  |
-      | Automation.pw1@mamikos.com   | Automation.pw1@mamikos.com   |qwerty123 |
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin go to room level menu
     And admin click on add "Room" level
     And admin fill out form "add room" level "Room Level Testing"

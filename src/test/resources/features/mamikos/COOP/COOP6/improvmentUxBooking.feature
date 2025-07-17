@@ -19,7 +19,7 @@ Feature: UX improvment booking
   Scenario: [Web][UX Booking] Update wording content Belum bisa mengajukan sewa
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   | password |
+      | phone stag  | password  |
       | 08100000211 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                                           | kost path prod               |

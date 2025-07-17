@@ -6,8 +6,8 @@ Feature: FAQ
   Scenario: Search Question and Answer in FAQ
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     And admin go to FAQ menu
     #Search Question
     And admin search "upgrade" in FAQ "Question"
@@ -37,7 +37,7 @@ Feature: FAQ
   Scenario: Verify FAQ Content
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     And admin go to FAQ menu
     Then show manage level FAQ content

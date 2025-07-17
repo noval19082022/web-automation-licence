@@ -19,9 +19,9 @@ Feature: New Flow Register Tenant
       | Masukkan nomor handphone. |
       | Masukkan alamat email.    |
     Then user verify password error messages
-      | Masukkan password.        |
+      | Masukkan password. |
     Then user verify confirm password error messages
-      | Masukkan password.        |
+      | Masukkan password. |
 
   @blankNameTenant @TEST_SS-3067 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Blank name
@@ -42,9 +42,9 @@ Feature: New Flow Register Tenant
       | <Error Message> |
       | <Error Message> |
     Examples:
-      | Name       | Error Message              |
-      | !@#$%3212  | Masukkan karakter alfabet. |
-      | rh         | Minimal 3 karakter.        |
+      | Name      | Error Message              |
+      | !@#$%3212 | Masukkan karakter alfabet. |
+      | rh        | Minimal 3 karakter.        |
 
   @noInputPhone @TEST_SS-3069 @TESTSET_PF-1792 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - No input phone number
@@ -97,7 +97,7 @@ Feature: New Flow Register Tenant
     And user clicks on Register button
     And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "at@test.com", " ", " "
     Then user verify password error messages
-      | Masukkan password.        |
+      | Masukkan password. |
 
   @passwordLessThan8Char @TEST_SS-3075 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Input password less than 8 characters
@@ -116,9 +116,9 @@ Feature: New Flow Register Tenant
     And user fills out registration form without click register "Rheza Haryo Hanggara", "08210391239921", "at@test.com", "<Password>", " "
     Then user verify password more than 8 characters
     Examples:
-      | Password    |
-      | qwerty1233  |
-      | 12345!@#$%  |
+      | Password   |
+      | qwerty1233 |
+      | 12345!@#$% |
 
   @showPasswordInputTenant @TEST_SS-3077 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Check eye icon
@@ -148,7 +148,7 @@ Feature: New Flow Register Tenant
       | <Error Message> |
       | <Error Message> |
     Examples:
-      | Email             | Error Message |
+      | Email             | Error Message                                  |
       | asdasd.com        | Gunakan format email seperti: mami@mamikos.com |
       | draft@xyz.com.net | Mohon masukkan email yang valid                |
 
@@ -172,7 +172,7 @@ Feature: New Flow Register Tenant
     And user clicks on Register button
     And user fills out registration form without click register "Rheza", "08119787884", "at@test.com", "qwerty123", "confirmPassword"
     Then user verify error messages
-      | Nomor handphone ini sudah digunakan untuk verifikasi di akun lain.|
+      | Nomor handphone ini sudah digunakan untuk verifikasi di akun lain. |
 
   @TEST_SS-3064 @Automated @DOM3 @web-covered
   Scenario: Register Tenant - Input password using alfabet only

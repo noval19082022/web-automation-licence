@@ -13,8 +13,8 @@ Feature: Reject Booking From Owner Dashboard
     #Scenario: cancel booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag             | phone prod            | password   |
-      | <tenant phone number>  | <tenant phone number> | qwerty123  |
+      | phone stag            | phone prod            | password  |
+      | <tenant phone number> | <tenant phone number> | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant cancel all need confirmation booking request
 

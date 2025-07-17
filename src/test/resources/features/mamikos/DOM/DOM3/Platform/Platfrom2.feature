@@ -1,6 +1,6 @@
 @SS16 @platfrom
 Feature: [Test-Execution][DOM] Web - Platform
-  
+
   @TEST_SS-5137 @Automated @web-covered
   Scenario: [Test][Admin][SanJunipero] Slug name already exist
     Given admin go to mamikos bangkrupux admin
@@ -138,8 +138,8 @@ Feature: [Test-Execution][DOM] Web - Platform
   Scenario: [Web][Non Login][Pop Up Login] From Listing Detail Page
     Given user go to mamikos homepage
     When tenant search kost then go to kost details:
-      | kost name stag                             | kost name prod               |
-      | Desta Kost Tobello Tobelo Halmahera Utara  | Kos DC BAR Automation Tipe G |
+      | kost name stag                            | kost name prod               |
+      | Desta Kost Tobello Tobelo Halmahera Utara | Kos DC BAR Automation Tipe G |
     And user want to reached map section and see lihat peta button
     And user want to see more detail kost location
     Then user will see login pop up

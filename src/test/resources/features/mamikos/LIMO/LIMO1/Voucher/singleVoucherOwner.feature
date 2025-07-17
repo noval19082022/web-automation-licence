@@ -97,7 +97,7 @@ Feature: Single voucher owner
       | hehehe        | today      | tomorrow |
     And Admin fill all required voucher field on create single voucher
       | Voucher PrefixCode | Total Voucher | Discount Type | Discount Amount | Upload Owner List | Invoice Type | Double Redeem With MamiPoin |
-      | heheheeh           | 1             | fix           | 6666666         | invalid           | recurring   | yes                         |
+      | heheheeh           | 1             | fix           | 6666666         | invalid           | recurring    | yes                         |
     And Admin click Create Voucher Single list button
     Then admin will see that the text "Invalid targeted users csv file format" is displayed
     Then admin will see that the text "Total targeted users must equal with total vouchers" is displayed
