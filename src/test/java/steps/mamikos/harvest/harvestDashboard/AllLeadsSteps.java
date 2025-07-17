@@ -91,6 +91,23 @@ public class AllLeadsSteps {
         Assert.assertEquals(allLeads.getKotaName(text), text);
     }
 
+    @When("admin filter Leads Curation {string}")
+    public void admin_filter_leads_curation(String value) {
+        allLeads.clicksFilter();
+        allLeads.selectsLeadsCuration(value);
+        allLeads.clicksTerapkan();
+    }
+
+    @Then("system only show {string} leads")
+    public void system_only_show_leads(String value) {
+        if (value.equalsIgnoreCase("uncurated")){
+            value = "";
+        }
+
+        for (int i=0; i<allLeads.rowCount(); i++){
+            Assert.assertEquals(allLeads.getLeadsCurationStatus(i), value);
+        }
+    }
     //--- End of Filter ---//
 
     //--- Batalkan Edit ---//
@@ -164,6 +181,15 @@ public class AllLeadsSteps {
         Assert.assertEquals(allLeads.getProfileName(),"Automation Pman");
         Assert.assertEquals(playwright.getPageTitle(),"Mamikos Harvest");
     }
+
+    @Then("admin should redirect to Harvest Dashboard as admin")
+    public void admin_should_redirect_to_harvest_dashboard_as_admin() {
+        Assert.assertTrue(allLeads.isAllLeadsTableVisible());
+        Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/all-leads");
+        Assert.assertEquals(allLeads.getProfileName(),"PMAN Admin");
+        Assert.assertEquals(playwright.getPageTitle(),"Mamikos Harvest");
+    }
+
     @Then("admin stay in login harvest page")
     public void admin_stay_in_login_harvest_page() {
         Assert.assertEquals(playwright.getPageUrl(),Mamikos.URL+"/leads/harvest/auth");
@@ -199,5 +225,19 @@ public class AllLeadsSteps {
     @Then("admin validate data in table with {string}")
     public void admin_validate_data_in_table_with(String text) {
         allLeads.getDataInTable(text);
+    }
+
+    @When("admin mark leads submit to kissflow as {string}")
+    public void admin_mark_leads_submit_to_kissflow_as(String value) {
+        allLeads.clickManageLeads();
+        allLeads.selectsSubmitToKissflow(value);
+        allLeads.clicksSubmitToKissflow();
+        allLeads.confirmSubmitToKissflow();
+        allLeads.clicksBatalkanEdit();
+    }
+    @Then("leads should be have label in Leads Status {string}")
+    public void leads_should_be_have_label_in_leads_status(String label) {
+        playwright.waitTillPageLoaded();
+        Assert.assertEquals(allLeads.getLeadsCurationStatus(0), label);
     }
 }

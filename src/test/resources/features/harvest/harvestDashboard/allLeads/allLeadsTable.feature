@@ -121,3 +121,47 @@
       And admin selects "Kelurahan" and "Kemanggisan" from dropdown
       And admin click on terapkan button
       Then admin validate kota name with "Kemanggisan"
+
+    @TEST_SS-8910 @continue
+    Scenario: Admin filter Uncurated Leads Curation Status
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email                         | password  |
+        | automationpman01@mamikos.com  | qwerty123 |
+      Then admin should redirect to Harvest Dashboard
+      When admin filter Leads Curation "Uncurated"
+      Then system only show "uncurated" leads
+
+    @TEST_SS-8911 @continue
+    Scenario: Admin filter Submitted to Kissflow Leads Curation Status
+      When admin filter Leads Curation "Submitted to Kissflow"
+      Then system only show "Submitted to Kissflow" leads
+
+    @TEST_SS-8912
+    Scenario: Admin filter Not Eligible to P1 Leads Curation Status
+      When admin filter Leads Curation "Not Eligible to P1"
+      Then system only show "Not Eligible to P1" leads
+
+    @TEST_SS-954
+    Scenario: Admin mark leads as Submitted to Kissflow
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email              | password       |
+        | pman@mamiteam.com  | pmanM4m1t34m!! |
+      Then admin should redirect to Harvest Dashboard as admin
+      When admin filter ILB only
+      And admin filter Leads Curation "Uncurated"
+      And admin mark leads submit to kissflow as "Yes"
+      Then leads should be have label in Leads Status "Submitted to Kissflow"
+
+    @TEST_SS-946
+    Scenario: Admin mark leads as Not Eligible to P1
+      Given admin navigates to Harvest Dashboard Login
+      When admin login Harvest Dashboard:
+        | email              | password       |
+        | pman@mamiteam.com  | pmanM4m1t34m!! |
+      Then admin should redirect to Harvest Dashboard as admin
+      When admin filter ILB only
+      And admin filter Leads Curation "Uncurated"
+      And admin mark leads submit to kissflow as "No"
+      Then leads should be have label in Leads Status "Not Eligible to P1"
