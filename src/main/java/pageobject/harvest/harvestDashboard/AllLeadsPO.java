@@ -14,11 +14,16 @@ public class AllLeadsPO {
     Locator profileNameText;
     Locator logoutButton;
     Locator columnName;
+    Locator leadsCurationStatus;
+    Locator row;
 
     //--- Edit Table ---//
-    Locator editTableButton;
+    Locator manageLeadsButton;
     Locator yesButton;
     Locator noButton;
+    Locator submitToKissflowButtonOption;
+    Locator submitToKissflowButton;
+    Locator confirmSubmitToKissflowButton;
 
     //--- Batalkan Edit ---//
     Locator batalkanEditButton;
@@ -32,6 +37,7 @@ public class AllLeadsPO {
     Locator checkBoxAllArea;
     Locator dropdownJumlahKamar;
     Locator roomZeroToFive;
+    Locator dropdownLeadsCuration;
     Locator terapkanButton;
 
     //--- Confirmation Batalkan ---//
@@ -61,9 +67,13 @@ public class AllLeadsPO {
         profileNameText = page.locator(".user-data-profile p").first();
         logoutButton = page.getByText("Logout", new Page.GetByTextOptions().setExact(true));
         columnName = page.locator("th p");
+        leadsCurationStatus = page.locator("td:nth-of-type(16) p");
+        row = page.locator("tr.content");
 
         //--- Edit Table ---//
-        editTableButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage Leads"));
+        manageLeadsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage Leads"));
+        submitToKissflowButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit to Kissflow"));
+        confirmSubmitToKissflowButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
 
         //--- Batalkan Edit ---//
         batalkanEditButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
@@ -76,6 +86,7 @@ public class AllLeadsPO {
         checkBoxAreaNonP1 = page.getByText("Area Non P1");
         checkBoxAllArea = page.getByText("All Area");
         dropdownJumlahKamar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(">5 Kamar dropdown-down"));
+        dropdownLeadsCuration = page.locator(".bg-c-modal .bg-c-dropdown__trigger").first();
         roomZeroToFive = page.locator("a").filter(new Locator.FilterOptions().setHasText("0-5 Kamar"));
         terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
 
@@ -114,7 +125,7 @@ public class AllLeadsPO {
      */
     public void clicksEditTableButton() {
         playwright.waitTillPageLoaded();
-        playwright.clickOn(editTableButton);
+        playwright.clickOn(manageLeadsButton);
     }
 
     /**
@@ -407,5 +418,63 @@ public class AllLeadsPO {
     public String getDataInTable(String text){
         Locator searchData = page.getByText(""+text+"");
         return playwright.getText(searchData);
+    }
+
+    /**
+     * Select Leads Curation
+     * @param value example "Submitted to Kissflow"
+     */
+    public void selectsLeadsCuration(String value) {
+        playwright.clickOn(dropdownLeadsCuration);
+        Locator selectLeadsCuration = page.locator("a").filter(new Locator.FilterOptions().setHasText(value));
+        playwright.clickOn(selectLeadsCuration);
+    }
+
+    /**
+     * Get Row Count
+     * @return int
+     */
+    public int rowCount() {
+        return playwright.countLocator(row);
+    }
+
+    /**
+     * Get Leads Curation Status
+     * @param i index
+     * @return String
+     */
+    public String getLeadsCurationStatus(int i) {
+        playwright.pageScrollInView(leadsCurationStatus.nth(i));
+        return playwright.getText(leadsCurationStatus.nth(i));
+    }
+
+    /**
+     * Click on Manage Leads button
+     */
+    public void clickManageLeads() {
+        playwright.clickOn(manageLeadsButton);
+    }
+
+    /**
+     * Selects on Submit to Kissflow button
+     * @param value example "Submitted to Kissflow"
+     */
+    public void selectsSubmitToKissflow(String value) {
+        submitToKissflowButtonOption = page.locator("tr.content:nth-of-type(1) .bg-c-radio").filter(new Locator.FilterOptions().setHasText(value));
+        playwright.clickOn(submitToKissflowButtonOption);
+    }
+
+    /**
+     * Clicks on Submit to Kissflow button
+     */
+    public void clicksSubmitToKissflow() {
+        playwright.clickOn(submitToKissflowButton);
+    }
+
+    /**
+     * Clicks on Confirm Submit to Kissflow button
+     */
+    public void confirmSubmitToKissflow() {
+        playwright.clickOn(confirmSubmitToKissflowButton);
     }
 }
