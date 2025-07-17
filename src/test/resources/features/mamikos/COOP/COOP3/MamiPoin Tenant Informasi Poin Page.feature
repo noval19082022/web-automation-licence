@@ -6,7 +6,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
   Scenario: MamiPoin Tenant Informasi Poin Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod    | password  |
+      | phone stag  | phone prod    | password  |
       | 08123000002 | 0890867321215 | qwerty123 |
     And tenant navigate to mamipoint expired page
     Then user verify title in the informasi poin page is displayed

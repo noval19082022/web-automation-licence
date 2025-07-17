@@ -27,8 +27,8 @@ Feature: Additional Price Biaya Lainnya On First Invoice
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                    | kost path prod            |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-auto-paid-tobelo-halmahera-utara  | Kost Adi Auto SinggahSini |
+      | kost path stag                                                                                   | kost path prod            |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-auto-paid-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -36,8 +36,8 @@ Feature: Additional Price Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On First Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122   | 089172812122   | qwerty123 |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -81,8 +81,8 @@ Feature: Additional Price Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Lainnya On First Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122   | 089172812122   | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner go to bill page of kost "Test Automation kost Bagas Auto Paid Tobelo Halmahera Utara" on month of "current"
     And owner go to detail tagihan with tenant name is "Hagaromo Otsutsuki" and jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"

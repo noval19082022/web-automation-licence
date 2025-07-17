@@ -21,8 +21,8 @@ Feature: Invoice Type based on contract
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                        | kost path prod                                        |
-      | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1  |
+      | kost path stag                                       | kost path prod                                       |
+      | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1 | kost-bantul-kost-campur-eksklusif-kos-loyal-kretek-1 |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
 

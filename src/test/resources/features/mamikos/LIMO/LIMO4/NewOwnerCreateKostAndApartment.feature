@@ -5,8 +5,8 @@ Feature: New Owner Create Kost and Apartment
   Scenario: New Owner wants to click back after at page create kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password    |
-      | 0876623622   | 0876623622   | qwerty123   |
+      | phone stag | phone prod | password  |
+      | 0876623622 | 0876623622 | qwerty123 |
     And user click menu "Tambah Properti" on feature waktunya mengelola property
     And user click back button in page
     Then check the header menu display on homepage owner

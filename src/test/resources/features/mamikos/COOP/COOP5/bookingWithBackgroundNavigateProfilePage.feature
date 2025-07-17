@@ -24,7 +24,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
 		  #Scenario: create booking
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                      | kost path prod               |
+      | kost path stag                                                                                        | kost path prod               |
       | kost-kota-payakumbuh-kost-campur-eksklusif-kost-singgahsini-noval-tipe-a-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost
@@ -81,7 +81,7 @@ Feature: [Web][Profile page] feature with background navigate profile page
     And user verify Kost Review entry point is not displayed
     Then user see activities in My Kos
 
-@TEST_SS-3520
+  @TEST_SS-3520
   Scenario: [Kost saya][Kontrak]Check kontrak section when tenant has contract from dbet (BBM-908)
     And tenant set active page to 0
     And user navigate to kontrak kost saya

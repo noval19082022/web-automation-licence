@@ -16,7 +16,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
+      | phone stag    | phone prod    | password  |
       | 0895131932292 | 0895131932292 | qwerty123 |
     And user cancel booking
 
@@ -41,7 +41,7 @@ Feature: SinggahSini Tenant Tracker Controlled Property
   Scenario: Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
+      | phone stag    | phone prod    | password  |
       | 0895131932292 | 0895131932292 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
@@ -50,8 +50,8 @@ Feature: SinggahSini Tenant Tracker Controlled Property
   Scenario: Booking Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "No. HP Penyewa" and input "0895131932292" in the search field on main page
     And user click search button on main page filter
@@ -73,8 +73,8 @@ Feature: SinggahSini Tenant Tracker Controlled Property
   Scenario: Check-in Fase and Status for Controlled Property
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "No. HP Penyewa" and input "0895131932292" in the search field on main page
     And user click search button on main page filter

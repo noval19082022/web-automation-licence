@@ -6,8 +6,8 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
   Scenario: Owner create new kos but skip fill mamipay data at form Lengkapi Data Diri && skip at page "Tanya Jawab"
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password  |
-      | 0891202418    | qwerty123 |
+      | phone stag | password  |
+      | 0891202418 | qwerty123 |
     And owner navigates to property saya kos
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"
@@ -82,8 +82,8 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
   Scenario: Create kos from kos with status draft && user doesn't active mamipay
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password  |
-      | 0891202418    | qwerty123 |
+      | phone stag | password  |
+      | 0891202418 | qwerty123 |
     And owner navigates to property saya kos
     And owner click "Nanti Saja" in kebijakan baru mamikos pop up
     And owner close pop up BBK at kos list page

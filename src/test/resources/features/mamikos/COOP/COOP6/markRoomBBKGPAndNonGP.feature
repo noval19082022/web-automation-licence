@@ -23,7 +23,7 @@ Feature: Owner - Penyewa Feature
 #  Scenario: create booking
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                                                                                   | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-putra-murah-kost-singgahsini-noval-tipe-c-tobelo-utara-halmahera-utara-arac-grade-a-tobelo-halmahera-utara-2 | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 0
     Then tenant should success booking kost

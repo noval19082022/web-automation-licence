@@ -1,6 +1,5 @@
 package steps.pms.homepage.additionalFeePMSKK;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.datatable.DataTable;

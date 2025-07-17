@@ -7,8 +7,8 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant kost name:
-      | kostName stag                  | kostName prod               |
-      | Dont Starve To Get Her         | Dont Starve To Get Her      |
+      | kostName stag          | kostName prod          |
+      | Dont Starve To Get Her | Dont Starve To Get Her |
     And admin terminate contract
     Then admin should success terminate contract
 
@@ -16,8 +16,8 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag   |  phone prod   | password  |
-      | 08100000090  |  08100000090  | qwerty123 |
+      | phone stag  | phone prod  | password  |
+      | 08100000090 | 08100000090 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -32,8 +32,8 @@ Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat an
   Scenario: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat and have BSS varian
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password       |
-      | 081362464341  | 081362464341  | 1d0lt3stb4ru   |
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     And owner navigate to pengajuan booking page
     And owner choose filter kost for "Dont Starve To Get Her"
     And user clicks on Booking Details button

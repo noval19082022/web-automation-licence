@@ -6,8 +6,8 @@ Feature: Pms New Booking
   Scenario: Phone number tenant verified
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to room allotment page "Kost Singgahsini Modern Villa Bantul"
     And admin create contract tenant new booking
     And admin selected type room

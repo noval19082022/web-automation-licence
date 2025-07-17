@@ -5,8 +5,8 @@ Feature: Change email owner
   Scenario: Change email owner using registered email
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password      |
-      | 0888881289    | qamamikos123  |
+      | phone stag | password     |
+      | 0888881289 | qamamikos123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "plmrega123@mailinator.com"
@@ -16,8 +16,8 @@ Feature: Change email owner
   Scenario: Change email owner
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password   |
-      | 0888881281    | qamamikos  |
+      | phone stag | password  |
+      | 0888881281 | qamamikos |
     And owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "coopowneraAT@mailinator.com"
@@ -34,8 +34,8 @@ Feature: Change email owner
   Scenario: Change email owner using wrong format
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password      |
-      | 081328787343  | qwerty123     |
+      | phone stag   | password  |
+      | 081328787343 | qwerty123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "coop124@mailinator"
@@ -45,8 +45,8 @@ Feature: Change email owner
   Scenario: Change email owner using invalid email
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password      |
-      | 0888881289    | qamamikos123  |
+      | phone stag | password     |
+      | 0888881289 | qamamikos123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Email"
     And owner change email to "Coop123@phdaily.com"

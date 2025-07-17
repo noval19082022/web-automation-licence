@@ -6,8 +6,8 @@ Feature: Access Point SS Dashboard From Pillar 2
   Scenario: Check Access Point SS Dashboard which Owner has Pillar 1
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    |  phone prod    | password     |
-      | 085577872323  |  085600867992  | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 085577872323 | 085600867992 | qwerty123 |
     And owner clicks Kembali ke Mamikos on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 2
     When owner clicks Dashboard Singgahsini on top right corner Profil

@@ -11,7 +11,7 @@ Feature: Billing Reminder
 
 		#  Scenario: Add Template With Existing Day Period
     Given user create new PN template:
-      | day | title            | content                  |
+      | day | title                                    | content                                                   |
       | -1  | Pake Mamikos, bayar kos bisa di mana aja | Buat melanjutkan sewa kos, yuk lakukan pembayaran di sini |
     Then user verify cannot create billing reminder template
 		
@@ -21,14 +21,14 @@ Feature: Billing Reminder
 		
 		#  Scenario: Add Template
     Given user create new PN template:
-      | day | title            | content                  |
+      | day | title                                    | content                                                   |
       | -1  | Pake Mamikos, bayar kos bisa di mana aja | Buat melanjutkan sewa kos, yuk lakukan pembayaran di sini |
     Then user verify Template subject with "Pake Mamikos, bayar kos bisa di mana aja"
     Then user verify Template content with "Buat melanjutkan sewa kos, yuk lakukan pembayaran di sini"
 		
 		#  Scenario: Edit Template
     Given user edit PN template:
-      | day | title            | content                  |
+      | day | title                                    | content                                                   |
       | -1  | Pake Mamikos, bayar kos bisa di mana aja | Buat melanjutkan sewa kos, yuk lakukan pembayaran di sini |
     Then user verify Template subject with "Pake Mamikos, bayar kos bisa di mana aja"
     Then user verify Template content with "Buat melanjutkan sewa kos, yuk lakukan pembayaran di sini"
@@ -133,8 +133,8 @@ Feature: Billing Reminder
 		
 		#  Scenario: Add Template With Existing Day Period
     Given user create new WhatsApp template:
-      | day | WATemplate |
-      | 3  | recurringbooking_d_plus_3         |
+      | day | WATemplate                |
+      | 3   | recurringbooking_d_plus_3 |
     Then user verify cannot create billing reminder template
 
 		#  Scenario: Delete Template
@@ -143,14 +143,14 @@ Feature: Billing Reminder
 		#  Scenario: Add Template
 
     Given user create new WhatsApp template:
-      | day | WATemplate |
-      | -7   | recurringbooking_d_minus_7         |
+      | day | WATemplate                 |
+      | -7  | recurringbooking_d_minus_7 |
     Then user verify Template subject with "recurringbooking_d_minus_7"
 
 		#  Scenario: Edit Template
     Given user edit WhatsApp template:
-      | day | WATemplate |
-      | -7   | inform_manual_invoice         |
+      | day | WATemplate            |
+      | -7  | inform_manual_invoice |
     Then user verify Template subject with "inform_manual_invoice"
 
 		#  Scenario: Delete Template

@@ -229,11 +229,11 @@ Feature: Ubah Anggaran
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     Then user check ads status:
-      | ads name      | Kost SkinCare Tobelo Tobelo Halmahera Utara                      |
-      | text status   | Tidak Naik                                                       |
-      | toggle status | off                                                              |
-      | status desc   | Klik tombol untuk naikkan iklan                                  |
-      | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000   |
+      | ads name      | Kost SkinCare Tobelo Tobelo Halmahera Utara                    |
+      | text status   | Tidak Naik                                                     |
+      | toggle status | off                                                            |
+      | status desc   | Klik tombol untuk naikkan iklan                                |
+      | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000 |
 
   @LIMO-3796
   Scenario: Naikan iklan - To make sure wording while iklan Off by owner when set daily budget and saldo burn > 0
@@ -247,11 +247,11 @@ Feature: Ubah Anggaran
     And user set anggaran harian to "10000"
     And owner click Simpan Pengaturan on ubah anggaran
     And user check ads status:
-      | ads name      | Kost Supersemar Tobelo Halmahera Utara                      |
-      | text status   | Tidak Naik                                                  |
-      | toggle status | off                                                         |
-      | status desc   | Klik tombol untuk naikkan iklan                             |
-      | text anggaran | Tipe Anggaran: Rp10.000 per-hari                            |
+      | ads name      | Kost Supersemar Tobelo Halmahera Utara |
+      | text status   | Tidak Naik                             |
+      | toggle status | off                                    |
+      | status desc   | Klik tombol untuk naikkan iklan        |
+      | text anggaran | Tipe Anggaran: Rp10.000 per-hari       |
 
   @LIMO-3795  @LIMO-2327
   Scenario: Naikan iklan - [MamiAds][Naikkan Iklan]: Switch OFF ads while saldo burn > 0 from maximal budget

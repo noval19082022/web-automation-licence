@@ -6,8 +6,8 @@ Feature: Kost List
   Scenario: Check components of active kost
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password   |
-      | 083176408311   | 083132824758   | qwerty123  |
+      | phone stag   | phone prod   | password  |
+      | 083176408311 | 083132824758 | qwerty123 |
     And owner navigates to property saya kos
     And owner search kost "Kose Putri AutomationEeJwe Ibu Halmahera Barat" on property saya page
     Then user see kos with name "Kose Putri AutomationEeJwe Ibu Halmahera Barat", status "Aktif" and type "Kos Putra"

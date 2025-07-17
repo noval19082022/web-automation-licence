@@ -5,8 +5,8 @@ Feature: Owner Setting - Change Owner Number
   Scenario: Change Owner Number - No input phone number
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password   |
-      | 087133998156  | qwerty123  |
+      | phone stag   | password  |
+      | 087133998156 | qwerty123 |
     And owner navigates to Akun menu
     And owner click on Ubah "Nomor Handphone"
     Then owner delete nomor handphone owner

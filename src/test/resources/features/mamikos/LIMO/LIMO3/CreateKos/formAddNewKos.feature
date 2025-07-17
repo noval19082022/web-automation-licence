@@ -6,8 +6,8 @@ Feature: Form Add New Kos
   Scenario: [Form add New Kost][Foto Kos]Update, delete, and moved photo kos
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | password    |
-      | 083176408311 | qwerty123   |
+      | phone stag   | password  |
+      | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
     And owner click tambah data iklan "Kost"
     And owner click "Tambah Kos Baru"

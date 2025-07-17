@@ -5,8 +5,8 @@ Feature: [Owner Dashboard]MamiPoin Owner Tukar Poin Page
   Scenario: [Owner Dashboard]MamiPoin Owner Tukar Poin Page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 08776633551| 0          | mamikosqa123 |
+      | phone stag  | phone prod | password     |
+      | 08776633551 | 0          | mamikosqa123 |
     And user click mamipoin in owner's menu
     Then user verify MamiPoin onboarding is appear
     When user clicks on tukar poin button

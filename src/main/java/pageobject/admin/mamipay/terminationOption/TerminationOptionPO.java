@@ -2,9 +2,8 @@ package pageobject.admin.mamipay.terminationOption;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import utilities.PlaywrightHelpers;
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.PlaywrightHelpers;
 
 public class TerminationOptionPO {
     private Page page;
