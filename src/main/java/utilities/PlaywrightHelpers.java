@@ -910,6 +910,9 @@ public class PlaywrightHelpers {
      * @param text string
      */
     public void realKeyboardType(String text) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("Text parameter cannot be null or empty for keyboard typing");
+        }
         page.keyboard().type(text);
     }
 

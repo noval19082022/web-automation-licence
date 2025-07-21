@@ -832,7 +832,7 @@ public class PropertiSayaPO {
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        editDataKos = page.locator("//span[contains(.,'" + dataKos + "')]/following-sibling::span");
+        editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
         if (playwright.waitTillLocatorIsVisible(editDataKos)) {
             playwright.clickOn(editDataKos);
         } else {

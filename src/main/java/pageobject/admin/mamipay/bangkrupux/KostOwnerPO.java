@@ -60,6 +60,7 @@ public class KostOwnerPO {
      * @param kosName of Kos Name
      */
     public void searchKosName(String kosName) {
+        playwright.waitTillLocatorIsVisible(kosNameSearch);
         playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
         playwright.pressKeyboardKey("Enter");
         playwright.waitTillPageLoaded(GlobalConfig.LONG_TIMEOUT);
