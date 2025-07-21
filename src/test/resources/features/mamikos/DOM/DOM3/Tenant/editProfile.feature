@@ -6,8 +6,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Gender - Edit Profile] not choose gender
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221221  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221221 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     Then user will see that the text "Wajib diisi" is displayed
@@ -16,8 +16,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][City - Edit Profile ]not select city
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click kota asal dropdown
@@ -27,8 +27,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Education - Edit Profile]Not choose education
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click on last education tenant
@@ -38,8 +38,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][No.darurat - Edit Profile ] input valid number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user input phone number darurat more than "0812123123" character
@@ -49,8 +49,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Pekerjaan - Default - Edit profile]check validation pekerjaan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221221  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221221 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     Then user will see that the text "Wajib diisi" is displayed
@@ -59,8 +59,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Pekerjaan - Mahasiswa - Edit Profile]Choose list Universitas
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221221  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221221 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -71,8 +71,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Pekerjaan - Mahasiswa - Edit Profile]see university
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221221  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221221 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -83,8 +83,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][DOB - Edit Profile]Blank DOB
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221221  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221221 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click icon calendar
@@ -94,8 +94,8 @@ Feature: Edit Profile
   Scenario: [Web Tenant][Edit Profile] Change all field data existing
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click icon calendar
@@ -112,8 +112,8 @@ Feature: Edit Profile
   Scenario: [Tenant][full name - Edit Profile] Change name tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user fills fullname "zoro"
@@ -123,8 +123,8 @@ Feature: Edit Profile
   Scenario: [Tenant][full name - Edit Profile]blank name
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user fills fullname ""
@@ -134,8 +134,8 @@ Feature: Edit Profile
   Scenario: [Tenant][full name - Edit Profile]name with number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user fills fullname "zoro1998"
@@ -145,8 +145,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Lainnya- Edit Profile]not fill text box
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -157,8 +157,8 @@ Feature: Edit Profile
   Scenario: [Tenant][DOB - Edit profile]change DOB
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click icon calendar
@@ -168,8 +168,8 @@ Feature: Edit Profile
   Scenario: [Tenant][City - Edit Profile ]Search city
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user select city "Kuningan"
@@ -179,8 +179,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Gender - Edit Profile]change gender
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose dropdown "laki-laki"
@@ -190,8 +190,8 @@ Feature: Edit Profile
   Scenario: [Tenant][City - Edit Profile ]change City
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user select city "kabupaten aceh barat"
@@ -201,8 +201,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Karyawan - Lainnya- Edit Profile]fill text box
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -214,8 +214,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]list office name
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -226,8 +226,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]type office name not matched with list
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -238,8 +238,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Lainnya- Edit Profile]Change Pekerjaan
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -251,8 +251,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]type office name matched with list
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -263,8 +263,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Mahasiswa - Lainnya- Edit Profile]fill text box
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -276,8 +276,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]Choose list office
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -288,8 +288,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile]Change office name
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -300,8 +300,8 @@ Feature: Edit Profile
   Scenario: [Tenant][profesion - Edit Profile ]choose profesion lainnya
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click dropdown pilih instansi "lainnya"
@@ -312,8 +312,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]type university name not matched with list
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -324,8 +324,8 @@ Feature: Edit Profile
   Scenario: [Tenant][profesion - Edit Profile ]Not choose profesion
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Lainnya"
@@ -335,8 +335,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]type university name matched with list
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Mahasiswa"
@@ -347,8 +347,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Mahasiswa - Edit Profile]Select Mahasiswa and choose universitas indonesia
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "mahasiswa"
@@ -359,8 +359,8 @@ Feature: Edit Profile
   Scenario Outline: [Tenant][Status - Edit profile]Change marital status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click on marital status dropdown
@@ -375,8 +375,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Status - Edit Profile]Not choose marital status
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089513193288  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089513193288 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click on marital status dropdown
@@ -386,8 +386,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Education - Edit Profile]last education
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user click on last education tenant
@@ -398,8 +398,8 @@ Feature: Edit Profile
   Scenario: [Tenant][No.darurat - Edit Profile ]input number darurat < 8
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user input phone number darurat more than "0812" character
@@ -409,8 +409,8 @@ Feature: Edit Profile
   Scenario: [Tenant][No.darurat - Edit Profile ]input number darurat > 14
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user input phone number darurat more than "0812123123000014" character
@@ -420,8 +420,8 @@ Feature: Edit Profile
   Scenario: [Tenant][Pekerjaan - Karyawan - Edit Profile] Dropdown list office name
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089220221220  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -432,8 +432,8 @@ Feature: Edit Profile
   Scenario: [Tenant][profesion - Edit Profile]fill profession as Karyawan using more than 50 characters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-        | phone stag  | phone prod  | password  |
-        | 089786127612  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089786127612 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Karyawan"
@@ -446,8 +446,8 @@ Feature: Edit Profile
   Scenario: [Tenant][profesion - Edit Profile]fill profession as Mahasiswa using more than 50 characters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089786127612  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089786127612 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Mahasiswa"
@@ -460,8 +460,8 @@ Feature: Edit Profile
   Scenario: [Tenant][profesion - Edit Profile]fill profession as Lainnya using more than 50 characters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 089786127612  | 08100000622 | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089786127612 | 08100000622 | qwerty123 |
     And user navigate to kost saya page
     And user click on profile card
     And user choose profession "Lainnya"

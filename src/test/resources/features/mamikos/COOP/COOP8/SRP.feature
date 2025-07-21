@@ -5,8 +5,8 @@ Feature: SRP
   Scenario: [WEB] Check total kos in page 20 listing
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | City Home - Banjarmasin       |
-      | area result    | City Home - Banjarmasin       |
+      | search keyword | City Home - Banjarmasin |
+      | area result    | City Home - Banjarmasin |
     Then user can see total kost in area with "Ditemukan 55 kos-kosan di sekitar City Home - Banjarmasin, Jl. Cemp. IV, Mawar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70115"
     When tenant can click on load more button
 
@@ -14,8 +14,8 @@ Feature: SRP
   Scenario: [WEB]User click cluster on map and produces < 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Pandaan      |
-      | area result    | Pandaan Artha Jaya       |
+      | search keyword | Pandaan            |
+      | area result    | Pandaan Artha Jaya |
     Then user can see total kost in area with "Ditemukan 32 kos-kosan di sekitar Pandaan Artha Jaya, Jalan Urip Sumoharjo, Pesantren, Pandaan, Pasuruan, Jawa Timur, Indonesia"
     When user click on cluster number "3" on maps
     Then user can see total kost in area with "Ditemukan 3 kos-kosan di sekitar Pandaan Artha Jaya, Jalan Urip Sumoharjo, Pesantren, Pandaan, Pasuruan, Jawa Timur, Indonesia"
@@ -25,8 +25,8 @@ Feature: SRP
   Scenario: [WEB]User zoom in and out map and produces < 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | Pandaan      |
-      | area result    | Pandaan Artha Jaya       |
+      | search keyword | Pandaan            |
+      | area result    | Pandaan Artha Jaya |
     When user click on "zoom in" on maps
     Then user can see total kost in area with "Ditemukan 21 kos-kosan di sekitar Pandaan Artha Jaya, Jalan Urip Sumoharjo, Pesantren, Pandaan, Pasuruan, Jawa Timur, Indonesia"
     When user click on "zoom out" on maps
@@ -36,8 +36,8 @@ Feature: SRP
   Scenario: [WEB]User click cluster on map and produces >= 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | UNDIP                              |
-      | area result    | Universitas Diponegoro (UNDIP)     |
+      | search keyword | UNDIP                          |
+      | area result    | Universitas Diponegoro (UNDIP) |
     Then user can see total kost in area with "Ditemukan 680 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on cluster number "13" on maps
     Then user can see total kost in area with "Ditemukan 13 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
@@ -47,8 +47,8 @@ Feature: SRP
   Scenario: [WEB]User zoom in and out map and produces >= 240 kos
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | UNDIP                              |
-      | area result    | Universitas Diponegoro (UNDIP)     |
+      | search keyword | UNDIP                          |
+      | area result    | Universitas Diponegoro (UNDIP) |
     When user click on "zoom in" on maps
     Then user can see total kost in area with "Ditemukan 352 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on "zoom out" on maps

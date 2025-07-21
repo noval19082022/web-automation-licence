@@ -1,7 +1,7 @@
 @regression @LIMO5
 Feature: Prime suggestion
 
-@TEST_LIMO-4080
+  @TEST_LIMO-4080
   Scenario: [Admin][Add listing] input listing for appears kos recommendation section
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

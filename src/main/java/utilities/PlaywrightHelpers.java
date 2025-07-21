@@ -1076,4 +1076,16 @@ public class PlaywrightHelpers {
             this.date = date;
         }
     }
+
+    /**
+     * Get accessibility tree snapshot of a specific element
+     * This method captures the ARIA accessibility tree representation of the specified element
+     * Useful for accessibility testing and debugging
+     * 
+     * @param locator The locator for the element to capture the aria snapshot
+     * @return String representation of the accessibility tree
+     */
+    public String getAriaSnapshot(Locator locator) {
+        return locator.ariaSnapshot();
+    }
 }

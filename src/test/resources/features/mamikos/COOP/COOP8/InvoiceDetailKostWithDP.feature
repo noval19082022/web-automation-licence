@@ -22,7 +22,7 @@ Feature: Invoice Detail Kost With DP
   Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                      | kost path prod               |
+      | kost path stag                                                                   | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons | Kos DC BAR Automation Tipe A |
     And tenant booking kost for "today" and input rent duration equals to 4
     Then tenant should success booking kost
@@ -45,7 +45,7 @@ Feature: Invoice Detail Kost With DP
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
-    @TEST_SS-3392
+  @TEST_SS-3392
   Scenario: Deposit And Additional Fee In Invoice Detail Page For Full Payment
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

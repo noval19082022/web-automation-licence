@@ -33,20 +33,20 @@ Feature: Payment Backoffice Staging 2 - Refund
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
-      | phone stag | phone prod  |
+      | phone stag  | phone prod  |
       | 08922024103 | 08119787884 |
     And admin want to batalkan contract if exist
 
     ## cancel booking if tenant have booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
+      | phone stag  | phone prod   | password  |
       | 08922024103 | 083176408442 | qwerty123 |
     And user cancel booking
 
     ## create contract
     When tenant redirect to kost details:
-      | kost path stag          | kost path prod               |
+      | kost path stag                                             | kost path prod               |
       | kost-halmahera-utara-kost-putri-murah-kost-planet-neptunus | Kos DC BAR Automation Tipe A |
 #    user visit page "/room/kost-halmahera-utara-kost-putri-murah-kost-planet-neptunus"
     And tenant booking kost for "today"
@@ -62,7 +62,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 
     # Scenario: Tenant pay boarding house for weekly rent
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
+      | phone stag  | phone prod   | password  |
       | 08922024103 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant select payment method Credit Card
@@ -79,8 +79,8 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone  | Kos Type |
-      | 08922024103   | All Testing |
+      | Tenant Phone | Kos Type    |
+      | 08922024103  | All Testing |
     And admin set allow refund the transaction
 
   Scenario: Admin edit paid amount more than refund amount
@@ -108,14 +108,14 @@ Feature: Payment Backoffice Staging 2 - Refund
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin search contract by tenant phone number:
-      | phone stag | phone prod  |
+      | phone stag  | phone prod  |
       | 08922024103 | 08119787884 |
     And admin want to batalkan contract if exist
 
     ## cancel booking if tenant have booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
+      | phone stag  | phone prod   | password  |
       | 08922024103 | 083176408442 | qwerty123 |
     And user cancel booking
 
@@ -134,7 +134,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 
     ## Scenario: Tenant pay boarding house
     When user login as tenant via phone number:
-      | phone stag | phone prod   | password  |
+      | phone stag  | phone prod   | password  |
       | 08922024103 | 083176408442 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "08922024103"
@@ -149,8 +149,8 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin bangkrupux navigate to data booking menu
     And admin show filter data booking
     And admin filter data booking by tenant phone number:
-      | Tenant Phone  | Kos Type |
-      | 08922024103   | All Testing |
+      | Tenant Phone | Kos Type    |
+      | 08922024103  | All Testing |
     And admin set allow refund the transaction
 
     #  Scenario: Admin edit paid amount & uncheck admin fee
@@ -346,16 +346,16 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin navigate to mamipay refund page
     And admin visit transferred list on refund page
     And admin search data refund by using:
-      | Search by            | Value     |
-      | <Dropdown>           | <Search>  |
+      | Search by  | Value    |
+      | <Dropdown> | <Search> |
     Then admin verify see text "Daftar Invoice Refund"
     Examples:
-      | Dropdown             | Search                 |
-      | Tenant Name          | Noval Abis Delete Aja  |
-      | Tenant Phone Number  | 081280003230           |
-      | Owner Phone Number   | 089120220103           |
-      | Owner Name           | Coba delete akun owner |
-      | Invoice Number       | 24873147/2023/01/66689 |
+      | Dropdown            | Search                 |
+      | Tenant Name         | Noval Abis Delete Aja  |
+      | Tenant Phone Number | 081280003230           |
+      | Owner Phone Number  | 089120220103           |
+      | Owner Name          | Coba delete akun owner |
+      | Invoice Number      | 24873147/2023/01/66689 |
 
         ## flip step is comment impacted otp login on bigflip
 #    #  Scenario: Admin payment from bigflip

@@ -34,8 +34,8 @@ Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
     Given admin go to mamikos mamipay admin
     When admin go to "Search Contract" menu
     And admin search contract by tenant phone number:
-      | phone stag   | phone prod    |
-      | 0813000002   | 0890867321212 |
+      | phone stag | phone prod    |
+      | 0813000002 | 0890867321212 |
     And admin search contract by kost level "APIK"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"
@@ -80,8 +80,8 @@ Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
     Given admin go to mamikos mamipay admin
     When admin go to "Search Contract" menu
     And admin search contract by tenant phone number:
-      | phone stag      | phone prod    |
-      | 089220211208    | 0890867321212 |
+      | phone stag   | phone prod    |
+      | 089220211208 | 0890867321212 |
     And admin search contract by kost level "SinggahSini"
     And admin want to edit deposit
     Then admin will see detail pop up "Pastikan data rekening dan kerusakan sudah sesuai"

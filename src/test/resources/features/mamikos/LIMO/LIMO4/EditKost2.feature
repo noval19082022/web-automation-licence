@@ -24,7 +24,7 @@ Feature: Edit Kost 2
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
-      | kos name    | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      | kos name      | room type check | room type name | kos type | description kos                     | build kos | other note     |
       | MAMAHMUDALIMO | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
     And user click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"

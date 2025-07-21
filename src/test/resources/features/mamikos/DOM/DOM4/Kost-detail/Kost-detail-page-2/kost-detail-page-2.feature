@@ -99,7 +99,7 @@ Feature: Kost detail page 2
   Scenario: [Dweb][Kost Detail] Check Kost Benefit section
     Given user go to mamikos homepage
     When tenant redirect to kost details:
-      | kost path stag                                                             | kost path prod                                                             |
+      | kost path stag                                                | kost path prod                                                             |
       | kost-sleman-kost-campur-murah-kost-apik-desta-tipe-a-tamvan-2 | kost-kabupaten-bantul-kost-campur-eksklusif-kos-dc-bar-automation-tipe-g-2 |
     Then user see benefit title, benefit description
 

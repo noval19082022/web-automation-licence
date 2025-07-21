@@ -8,15 +8,15 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod  |
-      | 08912887122   | 08912887122 |
+      | phone stag  | phone prod  |
+      | 08912887122 | 08912887122 |
 
   @SS-4982 @continue
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 08912887122 | 08912887122     | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08912887122 | 08912887122 | qwerty123 |
     And user cancel booking
 
   @SS-4983
@@ -32,8 +32,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122   | 089172812122   | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag            | tenant prod            |
       | Bagas First Invoice At | Bagas First Invoice At |
@@ -43,8 +43,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Get Invoice Number
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 08912887122   | 08912887122   | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08912887122 | 08912887122 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant get invoice number from riwayat booking
 
@@ -66,8 +66,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap and Biaya Lainnya On First Invoice] Tenant Check Additional Price Biaya Tetap and Lainnya Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 08912887122   | 08912887122   | qwerty123    |
+      | phone stag  | phone prod  | password  |
+      | 08912887122 | 08912887122 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And user open riwayat booking
     Then tenant can sees total cost is equal to basic amount, admin fee plus additional price below
@@ -77,8 +77,8 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On First Invoice
   Scenario: Owner can sees total amount is basic amount plus other price
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122   | 089172812122   | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner goes to bills details
       | kost name stag                                                           | kost name prod      |
       | Test Automation Kost First Invoice Bagas Hahahehe Tobelo Halmahera Utara | Kost Adi Auto Fpaid |

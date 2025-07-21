@@ -69,9 +69,9 @@ Feature: Example Of Create And Accept Booking Through API
       | password          | mamikosqa123               |
     When owner login trough api
     And playwright get owner available room for kos with id:
-      | kos id | 58650684      |
+      | kos id | 58650684 |
     And playwright get room allotment or available room for kos with id:
-      | kos id | 58650684      |
+      | kos id | 58650684 |
     And playwright get owner booking accept details
     And playwright set accept booking data for owner
     And playwright create body accept booking for owner

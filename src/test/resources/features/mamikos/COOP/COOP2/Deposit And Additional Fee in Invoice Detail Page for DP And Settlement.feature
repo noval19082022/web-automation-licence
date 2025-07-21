@@ -36,8 +36,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for DP And Settlement
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for DP And Settlement] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password  |
-      | 089604239091   | 08716267788    | qwerty123 |
+      | phone stag   | phone prod  | password  |
+      | 089604239091 | 08716267788 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag      | tenant prod          |
       | Nunu And Willump | Adi Auto Addons Satu |

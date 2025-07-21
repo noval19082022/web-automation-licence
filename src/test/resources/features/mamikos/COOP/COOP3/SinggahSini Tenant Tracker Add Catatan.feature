@@ -6,8 +6,8 @@ Feature: SinggahSini Tenant Tracker Add Catatan
   Scenario: Add Catatan on Detail Penyewa
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Nama Penyewa" and input "adiSinggahSini" in the search field on main page
     And user click search button on main page filter

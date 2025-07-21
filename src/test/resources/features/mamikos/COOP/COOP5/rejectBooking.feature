@@ -7,8 +7,8 @@ Feature: OB Owner Reject Booking Full Room
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant kost name:
-      | kostName stag                  | kostName prod            |
-      | Dont Starve To Get Her         | Dont Starve To Get Her   |
+      | kostName stag          | kostName prod          |
+      | Dont Starve To Get Her | Dont Starve To Get Her |
     And admin terminate contract
     Then admin should success terminate contract
 
@@ -16,8 +16,8 @@ Feature: OB Owner Reject Booking Full Room
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag     |  phone prod     | password  |
-      | 0890000000131  |  0890000000131  | qwerty123 |
+      | phone stag    | phone prod    | password  |
+      | 0890000000131 | 0890000000131 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -32,8 +32,8 @@ Feature: OB Owner Reject Booking Full Room
   Scenario: Owner Reject Booking Full Room
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password        |
-      | 081362464341   | 081362464341   | 1d0lt3stb4ru    |
+      | phone stag   | phone prod   | password     |
+      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
     And owner reject booking from dashboard
     And owner select reason reject kos "Calon penyewa perlu survei terlebih dulu"
 

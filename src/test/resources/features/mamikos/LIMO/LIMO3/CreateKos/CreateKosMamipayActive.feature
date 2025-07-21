@@ -236,7 +236,7 @@ Feature: Create Kos Mamipay Active
     And owner input kos name "Property Automation" for existing kost name
     Then verify message "Nama ini telah digunakan kos lain." the room type
     When owner fills valid data kos as expected
-      | kos name            | room type check | room type name | kos type | description kos                   | build kos | other note                   |
+      | kos name             | room type check | room type name | kos type | description kos                   | build kos | other note                   |
       | kost Automation TEST | no              |                | boy      | kos harusnya Kost noBBK noMamipay | 2020      | Akan dihapus setelah terbuat |
     And owner set rules kos:
       | Ada jam malam |

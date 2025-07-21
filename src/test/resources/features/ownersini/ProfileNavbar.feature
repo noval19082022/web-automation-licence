@@ -6,8 +6,8 @@ Feature: Profile Navbar
   Scenario: Check Redirection to Owner Pillar 2
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    |  phone prod    | password     |
-      | 089712123030  |  089712123030  | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089712123030 | 089712123030 | qwerty123 |
     And owner clicks Kembali ke Mamikos on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 2
 

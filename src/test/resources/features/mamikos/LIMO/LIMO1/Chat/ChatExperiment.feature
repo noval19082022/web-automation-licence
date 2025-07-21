@@ -5,8 +5,8 @@ Feature: Chat Experiment
   Scenario: CRUD owner chat experiment
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | qaeautomation3@mamikos.com | laksana@mamikos.com        | qwerty123 |
+      | email stag                 | email prod          | password  |
+      | qaeautomation3@mamikos.com | laksana@mamikos.com | qwerty123 |
     And user access menu owner chat experiment
     And user clicks on button add owner
     And user add new owner id "99452469"

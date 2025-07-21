@@ -36,8 +36,8 @@ Feature: Additional Price Biaya Tetap On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122   | 089172812122   | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag        | tenant prod          |
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
@@ -81,8 +81,8 @@ Feature: Additional Price Biaya Tetap On First Invoice
   Scenario: [Add Ons - Additional Price Biaya Tetap On First Invoice] Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 089172812122 | 089172812122     | qwerty123    |
+      | phone stag   | phone prod   | password  |
+      | 089172812122 | 089172812122 | qwerty123 |
     And owner go to bill page of kost "Test Automation kost Bagas Auto Paid Tobelo Halmahera Utara" on month of "current"
     And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
     Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"

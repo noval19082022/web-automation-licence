@@ -6,8 +6,8 @@ Feature: Add and Edit Room Level
   Scenario: Search Room Level Function
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     And admin go to room level menu
     And admin search room level "SinggahSini"
     Then search result "SinggahSini" is displayed
@@ -38,8 +38,8 @@ Feature: Add and Edit Room Level
     #Add charging fee > 100%
     Given admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     When admin go to room level menu
     And admin add room level "Test Charging Fee"
     And set charging fee "200"
@@ -54,8 +54,8 @@ Feature: Add and Edit Room Level
   Scenario: Update Room Level Without Fill Level Name
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
-      | email stag                    | email prod                    | password        |
-      | automationpman01@mamikos.com  | automationpman01@mamikos.com  | qwerty123       |
+      | email stag                   | email prod                   | password  |
+      | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
     And admin go to room level menu
     And admin search room level "Automation PMAN"
     And admin edit room level with empty level name

@@ -9,15 +9,15 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then admin search contract by tenant phone number and akhiri contract:
-      | phone stag    | phone prod    |
+      | phone stag    | phone prod   |
       | 0895131932292 | 089612561233 |
 
-    @continue
+  @continue
   Scenario: Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password  |
-      | 0895131932292  | 089612561233  | qwerty123 |
+      | phone stag    | phone prod   | password  |
+      | 0895131932292 | 089612561233 | qwerty123 |
     And user cancel booking
 
   Scenario: Tenant Booking Kost
@@ -41,8 +41,8 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
   Scenario: Tenant Pay 1st Month Booking For Add Ons
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag    | phone prod    | password  |
-      | 0895131932292  | 089612561233  | qwerty123 |
+      | phone stag    | phone prod   | password  |
+      | 0895131932292 | 089612561233 | qwerty123 |
     And tenant navigate to riwayat and draf booking
     And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
     And tenant set active page to 0
@@ -55,8 +55,8 @@ Feature: SinggahSini Tenant Tracker Uncontrolled Property
   Scenario: Check-in Fase and Status for Uncontrolled Property
     Given admin go to pms singgahsini
     When admin login pms :
-      | email             | password        |
-      | pman@mamiteam.com | pmanM4m1t34m!!  |
+      | email             | password       |
+      | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to tenant communication menu
     And user choose "Nama Properti" and input "Kost jakarta barat" in the search field on main page
     And user click search button on main page filter

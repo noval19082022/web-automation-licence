@@ -9,7 +9,7 @@ Feature: Detail Pemesanan
       | 083355251030 | 083355251030 | qwerty123 |
     And owner navigate to pendaftaran mamiprime page
 #    Then owner will see additional information related to GP
-  Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
+    Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
 
   @TEST_LIMO-651 @continue @WEB @AUTOMATED
   Scenario: [WEB][Mamikos Prime][Select Period] Check content at section select periode of prime

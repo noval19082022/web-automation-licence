@@ -20,7 +20,7 @@ Feature: Goldplus Recurring
     Then payment owner success using ovo as payment method
 
   @continue @TEST_LIMO-3527
-    Scenario: Login to mamipay
+  Scenario: Login to mamipay
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |

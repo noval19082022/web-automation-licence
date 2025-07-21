@@ -10,7 +10,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.owner.fiturpromosi.mamiads.DetailTagihanPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
-import steps.mamikos.common.NavigatesSteps;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -26,9 +25,7 @@ public class MamiAdsSteps {
     private Integer riwayatBeforeBeliSaldo;
     DetailTagihanPO detailTagihanPO = new DetailTagihanPO(page);
 
-    NavigatesSteps navigatesSteps = new NavigatesSteps();
     private Map<String, String> adsData;
-    Page page1;
 
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
@@ -110,23 +107,9 @@ public class MamiAdsSteps {
         Assert.assertTrue(mamiAdsPO.favoriteSaldo(saldo));
     }
 
-    @And("detail list saldo as expected")
-    public void user_see_below_data_is_correct_as_text(DataTable dataTable) {
-        playwright.waitTillPageLoaded(3000.0);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i=0;int j=0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(mamiAdsPO.listSaldo("priceTitle",i),content.get("priceTitle"));
-            Assert.assertEquals(mamiAdsPO.listSaldo("priceInRp",i),content.get("priceInRp"));
-            try{
-                if(!content.get("disc").isEmpty()){
-                    Assert.assertEquals(mamiAdsPO.listSaldo("disc",j),content.get("disc"));
-                    Assert.assertEquals(mamiAdsPO.listSaldo("priceStrike",j),content.get("priceStrike"));
-                    j++;
-                }
-            } catch (java.lang.NullPointerException ignored) { }
-            i++;
-        }
+    @Then("detail list saldo as expected")
+    public void user_see_below_data_is_correct_as_text(String saldoIklanList) {
+        Assert.assertEquals(mamiAdsPO.getBalanceListSnapshot(), saldoIklanList);
     }
 
     @And("owner choose saldo {string}")
@@ -269,13 +252,8 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
-        mamiAdsPO.navigatesToMamiadsHistory();
-        playwright.clickOnText("Selesai");
-        var page1 = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
-            mamiAdsPO.clickOnInvoiceMamiads();
-        });
-        var pwHelper2 = new PlaywrightHelpers(page1);
-        Assert.assertTrue(pwHelper2.isTextDisplayed("Pembayaran Berhasil", 5000));
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
     }
 
     @And("user click coba sekarang header")
@@ -372,7 +350,7 @@ public class MamiAdsSteps {
     public void userOpenTheInvoiceMamiadsIfInvoiceAlreadyMaximalOnRiwayat() {
         if (riwayatBeforeBeliSaldo == 12){
             mamiAdsPO.clickRiwayatMamiAds();
-            page1 = mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
+            mamiAdsPO.clickInvoiceMamiadsOnRiwayat();
 
             List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
             ActiveContext.setActivePage(listPage.get(0));

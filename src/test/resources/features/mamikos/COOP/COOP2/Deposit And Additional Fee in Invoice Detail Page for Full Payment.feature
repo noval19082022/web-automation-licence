@@ -24,8 +24,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
   Scenario: [Invoice admin - Deposit And Additional Fee in Invoice Detail Page for Full Payment] Tenant Booking Kost
     Given user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                                                                                      | kost path prod                                                  |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-auto-fullpaid-addfee-deposit-tobelo-halmahera-utara | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara  |
+      | kost path stag                                                                                                      | kost path prod                                                 |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-auto-fullpaid-addfee-deposit-tobelo-halmahera-utara | Kost Bagas Auto FullPaid AddFee Deposit Tobelo Halmahera Utara |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -33,8 +33,8 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
   Scenario: [Invoice admin - eposit And Additional Fee in Invoice Detail Page for Full Payment] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod     | password     |
-      | 08716267788    | 08716267788    | qwerty123 |
+      | phone stag  | phone prod  | password  |
+      | 08716267788 | 08716267788 | qwerty123 |
     And owner accept booking from tenant:
       | tenant stag          | tenant prod          |
       | Adi Auto Addons Satu | Adi Auto Addons Satu |
@@ -60,7 +60,7 @@ Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
       | search value   | 0890867321212       |
       | invoice number | default             |
     When admin deletes additional other price with name below :
-      | Biaya layanan Mamikos|
+      | Biaya layanan Mamikos |
     Then admin can sees total cost is basic amount + deposit fee + additional fee + admin fee
     When admin deletes additional other price with name below :
       | Listrik |

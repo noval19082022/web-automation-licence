@@ -1,4 +1,4 @@
-@regression @LIMO1 @LIMO1-staging @beliSaldo @DONEMIGRATINGTONEWBOARD
+@regression @LIMO1 @LIMO1-staging @beliSaldo
 Feature: Beli Saldo
 
   @TEST_LIMO-3333 @belisaldo @continue
@@ -13,24 +13,75 @@ Feature: Beli Saldo
 
   @TEST_LIMO-3334 @continue
   Scenario: Favorite Saldo
-    Then favorit saldo is "Rp1.350.000"
+    Then favorit saldo is "Rp150.000"
 
   @TEST_LIMO-3335 @continue
   Scenario: List Promo Saldo
     Then detail list saldo as expected
-      | priceTitle | priceInRp | disc | priceStrike |
-      | 10 ribu    | Rp10.000  |      |             |
-      | 30 ribu    | Rp27.000  | 10%  | Rp30.000    |
-      | 50 ribu    | Rp50.000  |      |             |
-      | 75 ribu    | Rp75.000  | 6%   | Rp80.000    |
-      | 80 ribu    | Rp80.000  |      |             |
-      | 300 ribu   | Rp276.000 |      | Rp300.000   |
+      """
+      - paragraph: Saldo Iklan
+      - paragraph: Harga
+      - radio
+      - paragraph
+      - paragraph: 150 ribu Favorit
+      - paragraph: Rp150.000
+      - radio
+      - paragraph
+      - paragraph: 10 ribu
+      - paragraph: Rp10.000
+      - radio
+      - paragraph
+      - paragraph: 30 ribu
+      - paragraph: + Bonus 3 ribu (khusus GoldPlus)
+      - paragraph: Rp27.000
+      - paragraph: 10%
+      - paragraph: Rp30.000
+      - radio
+      - paragraph
+      - paragraph: 75 ribu
+      - paragraph: + Bonus 7.5 ribu (khusus GoldPlus)
+      - paragraph: Rp75.000
+      - paragraph: 6%
+      - paragraph: Rp80.000
+      - radio
+      - paragraph
+      - paragraph: 80 ribu
+      - paragraph: + Bonus 8 ribu (khusus GoldPlus)
+      - paragraph: Rp80.000
+      - radio
+      - paragraph
+      - paragraph: 300 ribu
+      - paragraph: + Bonus 24 ribu (khusus GoldPlus)
+      - paragraph: Rp276.000
+      - paragraph: 8%
+      - paragraph: Rp300.000
+      - radio
+      - paragraph
+      - paragraph: 850 ribu
+      - paragraph: + Bonus 85 ribu (khusus GoldPlus)
+      - paragraph: Rp850.000
+      - radio
+      - paragraph
+      - paragraph: 1 juta
+      - paragraph: + Bonus 100 ribu (khusus GoldPlus)
+      - paragraph: Rp850.000
+      - paragraph: 15%
+      - paragraph: Rp1.000.000
+      - radio
+      - paragraph
+      - paragraph: 20 juta
+      - paragraph: + Bonus 4.4 juta (khusus GoldPlus)
+      - paragraph: Rp10.000.000
+      - paragraph: 50%
+      - paragraph: Rp20.000.000
+      - button "Pilih Saldo" [disabled]
+      """
 
   @TEST_LIMO-3336 @continue
   Scenario: Change Saldo
     Given owner choose saldo "Rp27.000"
-    When owner ubah saldo to "Rp10.000"
-    Then owner will see that the text "Saldo MamiAds 10 ribu" is displayed
+    When owner ubah saldo to "Rp80.000"
+    Then owner will see that the text "Saldo MamiAds 80 ribu" is displayed
 
   @TEST_LIMO-3337 @continue
   Scenario: Beli Saldo - Transaction Success
@@ -85,15 +136,14 @@ Feature: Beli Saldo
    #scenario buy mamiads
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag  | phone prod  | password  |
-      | 0891202513  | 08123450977 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0891202513 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp10.000" without buying Goldplus "notBuyGP"
     And payment owner success using ovo as payment method
     Then owner verify invoice success paid mamiads
 
   @TEST_LIMO-8301
   Scenario: Purchase MamiAds with GP
-    And owner close page number 1
     When owner navigates to owner dashboard
     And owner want to buy mamiads saldo with nominal "Rp10.000" with buying Goldplus "buyGP"
     And payment owner success using ovo as payment method
@@ -103,8 +153,8 @@ Feature: Beli Saldo
   Scenario: View MA-only Purchase
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag  | phone prod  | password  |
-      | 0891202513  | 08123450977 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0891202513 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp80.000"
     And user navigate to mamiads history page
     Then admin should be able to see the text "Saldo 80 ribu"
@@ -124,8 +174,8 @@ Feature: Beli Saldo
    #scenario buy mamiads
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag  | phone prod  | password  |
-      | 0891202513  | 08123450977 | qwerty123 |
+      | phone stag | phone prod  | password  |
+      | 0891202513 | 08123450977 | qwerty123 |
     And owner want to buy mamiads saldo with nominal "Rp80.000"
     And user navigate to mamiads history page
     Then admin should be able to see the text "Saldo 80 ribu"

@@ -137,6 +137,6 @@ Feature: Agent Registration
     When agen accept term and conditions
     And agen Daftar Agen
     Then show pop up data confirmation
-      | Skema         | No KTP            | Email                     | Password Akun | Nama Bank   | Nomor Rekening  |
-      | Agen Akuisisi | 3402091290390000  | agenautomation@gmail.com  | qwerty123     | Mandiri     | 1480004082237   |
+      | Skema         | No KTP           | Email                    | Password Akun | Nama Bank | Nomor Rekening |
+      | Agen Akuisisi | 3402091290390000 | agenautomation@gmail.com | qwerty123     | Mandiri   | 1480004082237  |
     And pop up konfirmasi data have captcha

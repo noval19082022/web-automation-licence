@@ -5,8 +5,8 @@ Feature: Change password tenant
   Scenario: [Tenant] Change password more than 25 characters
     Given user go to mamikos homepage
     When user login as tenant via phone number:
-      | phone stag  | phone prod  | password  |
-      | 083311231114  | 083311231113 | asdf1234 |
+      | phone stag   | phone prod   | password |
+      | 083311231114 | 083311231113 | asdf1234 |
     And user navigate to kost saya page
     And user clicks on pengaturan button
     And user fills password lama "asdf1234"
@@ -102,7 +102,7 @@ Feature: Change password tenant
     And user empty the confirmation password field
     Then user get error message "Masukkan password."
 
-    @TEST_SS-3048
+  @TEST_SS-3048
   Scenario: [Tenant] Success change password
     Given user navigate to kost saya page
     And user clicks on pengaturan button

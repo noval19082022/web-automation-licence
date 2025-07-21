@@ -16,31 +16,31 @@ Feature: Create Contract Goldplus at Mamipay
     And user see warning notification "The package field is required."
 
   @createContractGP @continue @TEST_LIMO-3554
-    Scenario: Owner Want To Create GP Contract with Invalid value
+  Scenario: Owner Want To Create GP Contract with Invalid value
     When user input phone number with "asdfgh"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "The selected phone number is invalid."
     And user see warning notification "The package field is required."
 
   @createContractGP @continue @TEST_LIMO-3555
-    Scenario: Owner Want To Create GP Contract without selecting goldplus package
+  Scenario: Owner Want To Create GP Contract without selecting goldplus package
     When user input phone number with "082233545511"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "The package field is required."
 
   @createContractGP @continue @TEST_LIMO-3556
-    Scenario: Owner Want To Create GP Contract with owner already have goldplus contract
+  Scenario: Owner Want To Create GP Contract with owner already have goldplus contract
     When user input phone number with "082233545512"
     And user selected goldplus package with "GP 1 Tanpa bonus periode 1 Bulan"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "User 082233545512 already has active goldplus contract."
 
-   @TEST_LIMO-2452  @createContractGP @TEST_LIMO-3557
-    Scenario: [Admin][GP Contract]User want to Create GoldPlus Contract with Valid Value
-     When user input phone number with "082233545517"
-     And user selected goldplus package with "GP 1 Tanpa bonus periode 1 Bulan"
-     And user confirmed to create GP Contract and invoice
-     Then user see warning notification "New Contract successfully created."
-     And admin can see list "Pembayaran GP 1 Tanpa bonus Activation" with status "unpaid" , invoice status is "invoiced"
+  @TEST_LIMO-2452  @createContractGP @TEST_LIMO-3557
+  Scenario: [Admin][GP Contract]User want to Create GoldPlus Contract with Valid Value
+    When user input phone number with "082233545517"
+    And user selected goldplus package with "GP 1 Tanpa bonus periode 1 Bulan"
+    And user confirmed to create GP Contract and invoice
+    Then user see warning notification "New Contract successfully created."
+    And admin can see list "Pembayaran GP 1 Tanpa bonus Activation" with status "unpaid" , invoice status is "invoiced"
      #reset GP
-     And user wants to reset Goldplus for owner with phone number "082233545517"
+    And user wants to reset Goldplus for owner with phone number "082233545517"
