@@ -35,6 +35,7 @@ Feature: Disbursement List
       | email             | password       |
       | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to Disbursement menu
+    When admin select filter transfer period "Periode 1 (Tanggal 1)"
     Then filter transfer is "Transfer Bulanan"
     And filter transfer period is "Periode 1 (Tanggal 1)"
     And admin can see total transfer amount in "Periode 1"
