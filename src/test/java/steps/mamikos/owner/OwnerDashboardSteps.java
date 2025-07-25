@@ -198,7 +198,7 @@ public class OwnerDashboardSteps {
     @And("user see widget waktunya mengelola properti is as expected")
     public void user_see_widget_waktunya_mengelola_properti_is_as_expected(DataTable dataTable) {
         List<Map<String, String>> table = dataTable.asMaps();
-        int i = 2;
+        int i = 3;
         for (Map<String, String> content : table) {
             Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to " + content.get("title"));
             Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"), "subtitle not equal to" + content.get("subtitle"));

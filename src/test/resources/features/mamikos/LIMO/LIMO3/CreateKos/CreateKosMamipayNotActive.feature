@@ -1,4 +1,4 @@
-@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive1 @DONEMIGRATINGTONEWBOARD @viu
+@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive1 @DONEMIGRATINGTONEWBOARD
 
 Feature: Create new kos with owner that hasn't activate mamipay
 # comment due to duplicate test case on @TEST_LIMO-3670

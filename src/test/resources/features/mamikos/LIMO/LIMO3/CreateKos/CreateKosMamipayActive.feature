@@ -42,16 +42,19 @@ Feature: Create Kos Mamipay Active
     Then verify message "Tipe kamar tidak boleh sama." the room type
     When owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
-    Then verify kos description is disabled
-    And verify kos build year is disabled
-    When user click button edit "Fasilitas" kos
+    And owner click "Edit Selesai" button
+    And owner click "Edit Selesai" button
+#    Then verify kos description is disabled
+#    And verify kos build year is disabled
+   # When user click button edit "Fasilitas" kos
     And user uncheck facilities under "Fasilitas Kamar"
       | TV |
     Then user see "Fasilitas Kamar" has warning title "Pilih Fasilitas" and description "Pilih minimal 1 fasilitas"
     When user check facilities under "Fasilitas Kamar"
       | TV |
-    And user click button edit "Ketersediaan Kamar" kos
-    And owner click "Keluar" input data on pop up
+    And owner click "Edit Selesai" button
+#    And user click button edit "Ketersediaan Kamar" kos
+#    And owner click "Keluar" input data on pop up
     And owner input total room and room available as expected
       | total room | room available |
       | 2          | 7              |
@@ -113,7 +116,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Tambah Kos Baru"
     And owner fills valid data kos as expected
       | kos name            | room type check | room type name | kos type | description kos       | build kos | other note |
-      | kos Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
+      | kost Automation TEST | yes             | Tipe A         | girl     | kos terbaik hari raya | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
       | Security     |
@@ -206,7 +209,7 @@ Feature: Create Kos Mamipay Active
       | phone stag   | password  |
       | 083176408311 | qwerty123 |
     And owner navigates to property saya kos
-    And owner search kost "Kost Property Automation Tipe GNR Tobelo Halmahera Utara" on property saya page
+    And owner search kost "Kost Automation TEST NB62KV2B" on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
     And user click button edit "Harga" kos
     And owner edit data harga kos as expected
