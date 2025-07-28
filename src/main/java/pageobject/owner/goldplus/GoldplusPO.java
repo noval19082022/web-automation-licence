@@ -95,6 +95,14 @@ public class GoldplusPO {
     Locator upgradePaketBtnPopUpOnTbc;
 
     private Locator mamikosActionCard;
+    private Locator mamiadsBalanceListContainer;
+    private Locator rincianPembayaranSection;
+    private Locator totalPembayaranSection;
+    
+    // === GoldPlus Period Selection Popup === //
+    private Locator goldplusPeriodSelectionPopup;
+    private Locator goldplusPeriodOptions;
+    private Locator pilihPeriodeButton;
 
 
     public GoldplusPO(Page page) {
@@ -167,6 +175,14 @@ public class GoldplusPO {
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         mamikosActionCard = page.locator(".mk-action-card__main");
+        mamiadsBalanceListContainer = page.locator(".goldplus-mamiads-detail");
+        rincianPembayaranSection = page.locator(".goldplus-billing-detail").locator("div").filter(new Locator.FilterOptions().setHasText("Rincian Pembayaran"));
+        totalPembayaranSection = page.locator(".goldplus-billing-detail__billing-total");
+        
+        // GoldPlus Period Selection Popup locators
+        goldplusPeriodSelectionPopup = page.locator("//div[contains(@class, 'goldplus-periode-select')]");
+        goldplusPeriodOptions = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]");
+        pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
     }
 
     /**
@@ -988,5 +1004,123 @@ public class GoldplusPO {
      */
     public void clickOnUpgradePackage() {
         playwright.clickOn(upgradePaketBtnOnTbc);
+    }
+
+    /**
+     * Get aria snapshot of the MamiAds balance list container in GoldPlus cross-selling section
+     * Useful for accessibility testing and debugging of the balance list section
+     * 
+     * @return String representation of the MamiAds balance list container's accessibility tree
+     */
+    public String getMamiadsBalanceListSnapshot() {
+        return playwright.getAriaSnapshot(mamiadsBalanceListContainer);
+    }
+
+    /**
+     * Get aria snapshot of the Rincian Pembayaran section in GoldPlus billing detail
+     * Useful for accessibility testing and debugging of the billing details section
+     * 
+     * @return String representation of the Rincian Pembayaran section's accessibility tree
+     */
+    public String getRincianPembayaranSnapshot() {
+        return playwright.getAriaSnapshot(rincianPembayaranSection);
+    }
+
+    /**
+     * Get aria snapshot of the Total Pembayaran section in GoldPlus billing detail
+     * Useful for accessibility testing and debugging of the total billing amount
+     * 
+     * @return String representation of the Total Pembayaran section's accessibility tree
+     */
+    public String getTotalPembayaranSnapshot() {
+        return playwright.getAriaSnapshot(totalPembayaranSection);
+    }
+    
+    /**
+     * Handle the GoldPlus period selection popup that appears when clicking "daftar GP button"
+     * This popup appears in the @TEST_LIMO-1393 scenario
+     * 
+     * @param periodOption The period option to select (e.g., "4 Bulan", "3 Bulan", "1 Bulan")
+     */
+    public void handleGoldplusPeriodSelectionPopup(String periodOption) {
+        playwright.waitTillPageLoaded();
+        
+        // Check if we're on the GoldPlus period selection page
+        if (page.url().contains("goldplus/submission/periode")) {
+            System.out.println("GoldPlus period selection popup detected. Selecting period: " + periodOption);
+            
+            // Wait for the period options to be visible
+            playwright.waitFor(goldplusPeriodOptions.first());
+            
+            // Click the specific period option
+            Locator periodToSelect = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '" + periodOption + "')]");
+            if (playwright.waitTillLocatorIsVisible(periodToSelect, 5000.0)) {
+                playwright.clickOn(periodToSelect);
+                System.out.println("Selected period: " + periodOption);
+            } else {
+                System.out.println("Period option not found: " + periodOption + ". Selecting default favorite option.");
+                selectDefaultFavoritePeriod();
+            }
+            
+            // Click the "Pilih Periode" button if it exists
+            if (playwright.waitTillLocatorIsVisible(pilihPeriodeButton, 3000.0)) {
+                playwright.clickOn(pilihPeriodeButton);
+                System.out.println("Clicked 'Pilih Periode' button");
+            }
+        } else {
+            System.out.println("Not on GoldPlus period selection page. Current URL: " + page.url());
+        }
+    }
+    
+    /**
+     * Select the default favorite period option in the GoldPlus period selection popup
+     */
+    private void selectDefaultFavoritePeriod() {
+        // Look for the favorite option (marked with "Favorit" badge)
+        Locator favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and .//div[contains(text(), 'Favorit')]]");
+        if (playwright.waitTillLocatorIsVisible(favoriteOption, 3000.0)) {
+            playwright.clickOn(favoriteOption);
+            System.out.println("Selected favorite period option");
+        } else {
+            // If no favorite option, select the first available option
+            Locator firstOption = goldplusPeriodOptions.first();
+            if (playwright.waitTillLocatorIsVisible(firstOption, 3000.0)) {
+                playwright.clickOn(firstOption);
+                System.out.println("Selected first available period option");
+            }
+        }
+    }
+    
+    /**
+     * Check if the GoldPlus period selection popup is visible
+     * 
+     * @return true if popup is visible, false otherwise
+     */
+    public boolean isGoldplusPeriodSelectionPopupVisible() {
+        return page.url().contains("goldplus/submission/periode") && 
+               playwright.waitTillLocatorIsVisible(goldplusPeriodOptions.first(), 3000.0);
+    }
+    
+    /**
+     * Handle any popup that appears when clicking "daftar GP button"
+     * This is the main method that should be called in the test steps
+     * 
+     * @param periodOption Optional period to select, defaults to favorite if not specified
+     */
+    public void handleDaftarGPPopup(String periodOption) {
+        if (isGoldplusPeriodSelectionPopupVisible()) {
+            if (periodOption != null && !periodOption.isEmpty()) {
+                handleGoldplusPeriodSelectionPopup(periodOption);
+            } else {
+                handleGoldplusPeriodSelectionPopup("4 Bulan"); // Default to favorite option
+            }
+        }
+    }
+    
+    /**
+     * Handle popup with default favorite period selection
+     */
+    public void handleDaftarGPPopup() {
+        handleDaftarGPPopup(null);
     }
 }

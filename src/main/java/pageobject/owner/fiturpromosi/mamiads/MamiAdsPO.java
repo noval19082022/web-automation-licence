@@ -266,7 +266,6 @@ public class MamiAdsPO {
     public String listSaldo(String listSaldo, int index) {
         String element = "";
         System.out.println(getBalanceListSnapshot());
-        page.pause();
         switch (listSaldo) {
             case "priceTitle":
                 element = "//p[contains(text(), 'ribu') or contains(text(), 'juta')]";
