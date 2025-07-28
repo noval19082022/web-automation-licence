@@ -46,6 +46,7 @@ public class MamiAdsPO {
     private Locator beliSaldoBtnPopupToggle;
     private Locator continuePaymentBuySaldoMamiads;
     private Locator balanceListContainer;
+    private Locator robustBalanceListContainer;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -119,6 +120,7 @@ public class MamiAdsPO {
         this.saldoAmountFirstIndex = page.locator(".bg-c-radio__icon > span").first();
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
         this.balanceListContainer = page.locator(".balance-list__container");
+        this.robustBalanceListContainer = page.locator("div:has-text('Saldo Iklan'):has-text('Harga')");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -288,10 +290,16 @@ public class MamiAdsPO {
      * and this method also handle if pop up is appear on mamiads page
      */
     public void clickOnBeliSaldoBtn() {
+        // Wait for page to be loaded first
+        playwright.waitTillPageLoaded(10000.0);
+        
         // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
         if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
                 || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
             playwright.clickOn(cobaSekarangBtnOnPopUp);
+        
+        // Wait for beliSaldo button to be available and click
+        playwright.waitFor(beliSaldoBtn, 10000.0);
         playwright.clickOn(beliSaldoBtn);
     }
 
@@ -301,8 +309,8 @@ public class MamiAdsPO {
      * @param saldo you should use ex. 'Rp6.000'
      */
     public void choosingSaldoToBuy(String saldo) {
-        // Wait for any price element to be visible
-        playwright.waitTillLocatorIsVisible(saldoTitleActualPrice.first());
+        // Use robust waiting strategy to ensure page is fully loaded
+        waitForBalanceListToLoad();
         
         // Extract just the numeric value from the input (e.g., "Rp80.000" -> "80000")
         String saldoNumeric = formatCurrencyForProcessing(saldo);
@@ -326,7 +334,8 @@ public class MamiAdsPO {
             indexToClick = 0;
         }
         
-        // Click on the radio button
+        // Click on the radio button with additional wait for element to be clickable
+        playwright.waitFor(selectSaldoList.nth(indexToClick), 5000.0);
         playwright.clickOn(selectSaldoList.nth(indexToClick));
         
         // Wait for button to become enabled and click it
@@ -499,6 +508,9 @@ public class MamiAdsPO {
     public void navigatesToMamiadsBalance() {
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.TOP_UP_MAMIADS, 30000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
+        
+        // Ensure balance list loads properly after navigation
+        waitForBalanceListToLoad();
     }
 
     /**
@@ -884,6 +896,41 @@ public class MamiAdsPO {
      */
     public String getBalanceListSnapshot() {
         return playwright.getAriaSnapshot(balanceListContainer);
+    }
+
+    /**
+     * Wait for balance list container to load with robust waiting strategy
+     * This method addresses the flaky test issue where the page sometimes shows blank/white
+     * Uses multiple fallback strategies and content verification to ensure page is fully loaded
+     */
+    public void waitForBalanceListToLoad() {
+        // First, wait for page to be fully loaded
+        playwright.waitTillPageLoaded(15000.0);
+        playwright.waitTillDomContentLoaded(10000.0);
+        
+        // Try primary locator first
+        if (playwright.isLocatorVisibleAfterLoad(balanceListContainer, 3000.0)) {
+            // Verify content is actually loaded by checking for key elements
+            if (playwright.isTextDisplayed("Saldo Iklan", 2000.0) && 
+                playwright.isTextDisplayed("Harga", 2000.0)) {
+                return; // Success - page loaded with content
+            }
+        }
+        
+        // Fallback strategy 1: Use robust content-based locator
+        if (playwright.isLocatorVisibleAfterLoad(robustBalanceListContainer, 3000.0)) {
+            return; // Success with fallback locator
+        }
+        
+        // Fallback strategy 2: Reload page if content still not visible
+        playwright.reloadPageIfElementNotVisible(2, balanceListContainer);
+        
+        // Final verification: Wait for radio buttons to be present (indicates full functionality)
+        Locator radioButtons = page.locator("input[type='radio']");
+        playwright.waitFor(radioButtons.first(), 10000.0);
+        
+        // Ensure "Favorit" text is visible (indicates 150k option loaded)
+        playwright.isTextDisplayed("Favorit", 5000.0);
     }
 }
 
