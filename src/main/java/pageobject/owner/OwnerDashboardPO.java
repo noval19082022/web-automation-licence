@@ -131,7 +131,7 @@ public class OwnerDashboardPO {
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByTestId("chat-cs-btn");
-        contactUsPopUp = page.locator("//iframe[@title='Jendela pesan']");
+        contactUsPopUp = page.locator("//iframe[@title='Messaging window']");
         greetingUserLabel = page.locator(".greeting-section__name");
         accountSettingsButton = page.getByText("Setelan Akun");
         logoutOwnerPageButton = page.getByText("Logout");
@@ -483,6 +483,7 @@ public class OwnerDashboardPO {
      * @return true if appear
      */
     public boolean isContactUsPresent() {
+        playwright.waitFor(contactUsPopUp);
         return playwright.waitTillLocatorIsVisible(contactUsPopUp);
     }
 

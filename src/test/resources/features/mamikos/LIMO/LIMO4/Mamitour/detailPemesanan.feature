@@ -1,4 +1,4 @@
-@regression @LIMO4 @mamitour
+@regression @LIMO4 @mamitourDetailPemesan
 Feature: Detail Pemesanan
 
   @TEST_LIMO-3689 @continue
