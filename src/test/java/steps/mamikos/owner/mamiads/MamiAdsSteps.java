@@ -30,6 +30,7 @@ public class MamiAdsSteps {
     @When("user navigates to mamiads dashboard")
     public void user_navigates_to_mamiads_dashboard() {
         mamiAdsPO.navigatesToMamiads();
+        page.pause();
     }
 
     @When("user navigates to mamiads pembelian saldo")
