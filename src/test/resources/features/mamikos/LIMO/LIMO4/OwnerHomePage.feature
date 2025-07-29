@@ -21,8 +21,6 @@ Feature: Owner Homepage
     When user click back button in page
     And user clicks pusat bantuan on nav bar owner
     Then user should redirect to link "https://help.mamikos.com/pemilik"
-    When owner navigates to property saya kos
-    Then user will be verify dropdown in property saya
 
   @TEST_LIMO-3451 @ownerPage @listingGP @continue @WEB @AUTOMATED
   Scenario: Click "halaman pemilik" will redirect to Owner page

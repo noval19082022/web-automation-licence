@@ -72,6 +72,7 @@ public class TenantBackgroundCheckerSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBola();
+        chat.searchChatTenant(buttonTxt);
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
