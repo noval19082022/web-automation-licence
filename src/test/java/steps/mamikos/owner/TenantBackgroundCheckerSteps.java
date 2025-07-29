@@ -72,7 +72,6 @@ public class TenantBackgroundCheckerSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBola();
-        chat.searchChatTenant(buttonTxt);
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
@@ -87,7 +86,7 @@ public class TenantBackgroundCheckerSteps {
     @And("owner doesn't have GP open TBC Lihat Profil at chatroom {string}")
     public void owner_doesnt_have_gp_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.dismissFTUEJemputBola();
-        chat.clickButtonOnChatRoomList(buttonTxt);
+        chat.searchChatTenant(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
     }
