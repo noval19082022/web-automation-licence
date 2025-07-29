@@ -1,34 +1,42 @@
 @LIMO4 @regression @tbclimo4
 Feature: Profile Tenant Background Checker
 
+  Scenario: reset Gp
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to reset Goldplus for owner with phone number
+      | 08119787884 |
+
   @TEST_LIMO-315 @WEB @AUTOMATED
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check back on tenant profile page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod    | password     |
-      | 0891111020203 | 0891111020203 | mamikosqa123 |
+      | phone stag  | phone prod    | password  |
+      | 08119787884 | 0891111020203 | Perempuan |
     And user click chat button in top bar owner home page
-    And owner open TBC Lihat Profil at chatroom "Staging Tbc Test"
+    And owner open TBC Lihat Profil at chatroom "Coba Daftar"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-317 @WEB @AUTOMATED
   Scenario: [Web][Chat Room][Tenant Background Checker] Check entry point when owner only have apartement
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 083355251016 | 083355251016 | qwerty123 |
+      | phone stag  | phone prod   | password  |
+      | 08119787884 | 083355251016 | Perempuan |
     And user click chat button in top bar owner home page
-    And owner doesn't have GP open TBC Lihat Profil at chatroom "Tenant Automation"
+    And owner doesn't have GP open TBC Lihat Profil at chatroom "Desta Fajri"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-320 @WEB @AUTOMATED
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check condition when owner not GP
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 083355251030 | 083355251030 | qwerty123 |
+      | phone stag  | phone prod   | password  |
+      | 08119787884 | 083355251030 | Perempuan |
     And owner wants to accsess chatroom
-    And owner Non GP open TBC Lihat Profil at chatroom "Rega Tenant Tiga"
+    And owner Non GP open TBC Lihat Profil at chatroom "Tenant No Profile"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
 #  @TEST_LIMO-325
