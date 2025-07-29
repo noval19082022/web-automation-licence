@@ -37,6 +37,10 @@ public class JoinSinggahsiniSteps {
     public void user_should_redirect_to(String url) {
         String daftarURL = singgahsiniUrl+url;
 
+        if (ENV.equalsIgnoreCase("stag")){
+            daftarURL = "https://jambu.kerupux.com/singgahsini/daftar";
+        }
+
         Assert.assertEquals(joinSinggahsini.getURLSinggahsini(),daftarURL);
     }
     @Then("page contains title {string}")
