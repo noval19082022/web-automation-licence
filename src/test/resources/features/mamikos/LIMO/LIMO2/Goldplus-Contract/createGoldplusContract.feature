@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @CreateContract @saktiCheck
+@listing-monetization @regression @LIMO2 @CreateContract
 Feature: Create Contract Goldplus at Mamipay
 
   @createContractGP @continue @TEST_LIMO-3553
