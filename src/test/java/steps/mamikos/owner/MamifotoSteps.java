@@ -30,10 +30,12 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
+        // Use enhanced wait method for better reliability
         try {
             mamifoto.waitForMamiFotoPageLoad();
             Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
         } catch (Exception e) {
+            // Fallback to original method
             playwright.hardWait(2000);
             if (!mamifoto.isMamitFotoLandingPageVisible()) {
                 playwright.reloadPage();

@@ -95,6 +95,8 @@ public class GoldplusPO {
     Locator upgradePaketBtnPopUpOnTbc;
 
     private Locator mamikosActionCard;
+    private Locator periodeBerlanggananContainer;
+    private Locator paketJangkaPanjangContainer;
 
 
     public GoldplusPO(Page page) {
@@ -167,6 +169,8 @@ public class GoldplusPO {
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         mamikosActionCard = page.locator(".mk-action-card__main");
+        periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
+        paketJangkaPanjangContainer = page.locator("div.goldplus-periode-select__list").nth(1);
     }
 
     /**
@@ -211,16 +215,16 @@ public class GoldplusPO {
         String element = "";
         switch (listPeriod) {
             case "periodGP":
-                element = ".goldplus-periode-select__option-label-package";
+                element = ".goldplus-periode-select__periode-card-header-right p.bg-c-text.bg-c-text--body-1";
                 break;
             case "freeMamiAds":
-                element = ".goldplus-periode-select__option-label-mamiads";
+                element = ".goldplus-periode-select__periode-card-footer-left p.bg-c-text.bg-c-text--label-4";
                 break;
             case "actualPrice":
-                element = ".goldplus-periode-select__option-price-actual";
+                element = ".goldplus-periode-select__periode-card-header-left p.bg-c-text.bg-c-text--body-1";
                 break;
             case "discPrice":
-                element = ".goldplus-periode-select__option-price-discount";
+                element = ".goldplus-periode-select__periode-card-discount p.bg-u-text-neutral-400.bg-c-text.bg-c-text--body-4.bg-c-text--strikethrough";
                 break;
         }
         playwright.waitFor(page.locator(element).first());
@@ -696,7 +700,7 @@ public class GoldplusPO {
      * Click on radio button on Pilih Periode Berlangganan page
      */
     public void clickOnPeriodGoldPlus(String period){
-        playwright.clickOn(page.locator("//*[contains(@class, 'goldplus-periode-select__list')][contains(.,'"+period+"')] //label"));
+        playwright.clickOn(page.locator(".goldplus-periode-select__periode-card").filter(new Locator.FilterOptions().setHasText(period)));
     }
     /**
      * Click on filter in payment billing GP
@@ -988,5 +992,38 @@ public class GoldplusPO {
      */
     public void clickOnUpgradePackage() {
         playwright.clickOn(upgradePaketBtnOnTbc);
+    }
+
+    /**
+     * Get aria snapshot of the Periode Berlangganan package container
+     * This captures the accessibility tree representation of all subscription packages
+     * @return String representation of the accessibility tree
+     */
+    public String getPeriodeBerlanggananAriaSnapshot() {
+        // Use the pre-initialized container locator
+        playwright.waitFor(periodeBerlanggananContainer);
+        return playwright.getAriaSnapshot(periodeBerlanggananContainer);
+    }
+
+    /**
+     * Get aria snapshot of a specific package by index
+     * @param index The index of the package (0-based)
+     * @return String representation of the package accessibility tree
+     */
+    public String getPackageAriaSnapshotByIndex(int index) {
+        Locator packageCard = page.locator(".goldplus-periode-select__periode-card").nth(index);
+        playwright.waitFor(packageCard);
+        return playwright.getAriaSnapshot(packageCard);
+    }
+
+    /**
+     * Get aria snapshot of the Paket Jangka Panjang section (2nd goldplus-periode-select__list)
+     * This captures the accessibility tree representation of the long-term packages
+     * @return String representation of the accessibility tree
+     */
+    public String getPaketJangkaPanjangAriaSnapshot() {
+        // Use the pre-initialized container locator
+        playwright.waitFor(paketJangkaPanjangContainer);
+        return playwright.getAriaSnapshot(paketJangkaPanjangContainer);
     }
 }

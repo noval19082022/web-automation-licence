@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO2 @DONEMIGRATINGTONEWBOARD @CreateContract
+@listing-monetization @regression @LIMO2 @CreateContract @saktiCheck
 Feature: Create Contract Goldplus at Mamipay
 
   @createContractGP @continue @TEST_LIMO-3553
@@ -31,16 +31,16 @@ Feature: Create Contract Goldplus at Mamipay
   @createContractGP @continue @TEST_LIMO-3556
   Scenario: Owner Want To Create GP Contract with owner already have goldplus contract
     When user input phone number with "082233545512"
-    And user selected goldplus package with "GP 1 Tanpa bonus periode 1 Bulan"
+    And user selected goldplus package with "GoldPlus 1 periode 1 Bulan"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "User 082233545512 already has active goldplus contract."
 
   @TEST_LIMO-2452  @createContractGP @TEST_LIMO-3557
   Scenario: [Admin][GP Contract]User want to Create GoldPlus Contract with Valid Value
     When user input phone number with "082233545517"
-    And user selected goldplus package with "GP 1 Tanpa bonus periode 1 Bulan"
+    And user selected goldplus package with "GoldPlus 1 periode 1 Bulan"
     And user confirmed to create GP Contract and invoice
     Then user see warning notification "New Contract successfully created."
-    And admin can see list "Pembayaran GP 1 Tanpa bonus Activation" with status "unpaid" , invoice status is "invoiced"
+    And admin can see list "Pembayaran GoldPlus 1 Activation" with status "unpaid" , invoice status is "invoiced"
      #reset GP
     And user wants to reset Goldplus for owner with phone number "082233545517"
