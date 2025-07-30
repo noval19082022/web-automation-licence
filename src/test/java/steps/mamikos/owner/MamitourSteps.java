@@ -84,8 +84,8 @@ public class MamitourSteps {
 
     @And("user verify default state of detail pemesanan")
     public void user_verify_default_state_of_detail_pemesanan() {
-        Assert.assertTrue(mamitour.isChooseMamitourPackageDropdownVisible());
-        Assert.assertFalse(mamitour.isPesanSekarangDetailPemesananEnable());
+        Assert.assertTrue(mamitour.isChooseMamitourPackageDropdownVisible(), "Choose mamitour package not visible");
+        Assert.assertFalse(mamitour.isPesanSekarangDetailPemesananEnable(), "Pesan sekarang btn not disable");
         Assert.assertEquals(mamitour.getTotalPriceText(), "Rp0", "Total is not the same");
     }
 

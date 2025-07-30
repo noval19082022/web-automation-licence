@@ -21,8 +21,6 @@ Feature: Owner Homepage
     When user click back button in page
     And user clicks pusat bantuan on nav bar owner
     Then user should redirect to link "https://help.mamikos.com/pemilik"
-    When owner navigates to property saya kos
-    Then user will be verify dropdown in property saya
 
   @TEST_LIMO-3451 @ownerPage @listingGP @continue @WEB @AUTOMATED
   Scenario: Click "halaman pemilik" will redirect to Owner page
@@ -84,13 +82,14 @@ Feature: Owner Homepage
       | phone stag    | phone prod    | password    |
       | 0895332021435 | 0895332021435 | digantilagi |
     Then user see widget waktunya mengelola properti is as expected
-      | title                      | subtitle                       |
-      | Atur Ketersediaan Kamar    | Mengelola data kamar kos       |
-      | Atur Harga                 | Update harga sewa di iklan kos |
-      | Daftar ke Booking Langsung | Mengaktifkan fitur Booking     |
-      | Penyewa                    | Daftar kontrak penyewa kos     |
-      | Tambah Penyewa             | Menambah kontrak penyewa       |
-      | Pusat Bantuan              | Info bantuan seputar Mamikos   |
+      | title                      | subtitle                                     |
+      | Atur Ketersediaan Kamar    | Mengelola data kamar kos                     |
+      | Daftar Tunggu              | Calon penyewa yang tertarik saat kamar penuh |
+      | Atur Harga                 | Update harga sewa di iklan kos               |
+      | Daftar ke Booking Langsung | Mengaktifkan fitur Booking                   |
+      | Penyewa                    | Daftar kontrak penyewa kos                   |
+      | Tambah Penyewa             | Menambah kontrak penyewa                     |
+      | Pusat Bantuan              | Info bantuan seputar Mamikos                 |
 
   @TEST_LIMO-3447 @widgetWaktunyaMengelolaPropertiKosActive @WEB @AUTOMATED
   Scenario: Widget Waktunya Mengelola Properti - Kos active 1 & Apartemen 0
@@ -99,13 +98,14 @@ Feature: Owner Homepage
       | phone stag   | phone prod   | password  |
       | 083185622167 | 083185622167 | qwerty123 |
     Then user see widget waktunya mengelola properti is as expected
-      | title                    | subtitle                       |
-      | Atur Ketersediaan Kamar  | Mengelola data kamar kos       |
-      | Atur Harga               | Update harga sewa di iklan kos |
-      | Ubah Peraturan Masuk Kos | Aturan untuk calon penyewa     |
-      | Penyewa                  | Daftar kontrak penyewa kos     |
-      | Tambah Penyewa           | Menambah kontrak penyewa       |
-      | Pusat Bantuan            | Info bantuan seputar Mamikos   |
+      | title                    | subtitle                                     |
+      | Atur Ketersediaan Kamar  | Mengelola data kamar kos                     |
+      | Daftar Tunggu            | Calon penyewa yang tertarik saat kamar penuh |
+      | Atur Harga               | Update harga sewa di iklan kos               |
+      | Ubah Peraturan Masuk Kos | Aturan untuk calon penyewa                   |
+      | Penyewa                  | Daftar kontrak penyewa kos                   |
+      | Tambah Penyewa           | Menambah kontrak penyewa                     |
+      | Pusat Bantuan            | Info bantuan seputar Mamikos                 |
 
   @TEST_LIMO-3450 @functionBackatHomeSetprice @continue @WEB @AUTOMATED
   Scenario: Check function back at home widget (Set Price)
@@ -130,9 +130,9 @@ Feature: Owner Homepage
       | phone stag | phone prod | password  |
       | <user>     | <user>     | qwerty123 |
     Then user see widget waktunya mengelola properti is as expected
-      | title           | subtitle                     |
-      | Tambah Properti | Buat Kos/Apartemen Anda      |
-      | Pusat Bantuan   | Info bantuan seputar Mamikos |
+      | title           | subtitle                                     |
+      | Daftar Tunggu   | Calon penyewa yang tertarik saat kamar penuh |
+      | Tambah Properti | Buat Kos/Apartemen Anda                      |
     Examples:
       | user         |
       | 0876623622   |

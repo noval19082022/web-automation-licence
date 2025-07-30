@@ -1,4 +1,5 @@
-@singgahsini @regression @pman @pman-prod
+#This feature will be covered in visual regression test
+@singgahsini @regression
 
 Feature: Verify Each Section Content
 

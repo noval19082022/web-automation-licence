@@ -97,7 +97,7 @@ public class Mamikos {
 
 
     @Setter @Getter
-    private static  String propertyKosName;
+    private static String propertyKosName;
 
     @Setter @Getter
     private static String rejectReason;

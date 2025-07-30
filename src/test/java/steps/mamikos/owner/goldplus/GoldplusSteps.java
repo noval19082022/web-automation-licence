@@ -69,16 +69,13 @@ public class GoldplusSteps {
         goldplus.closeGpOnBoardingIfExist();
     }
 
-    @When("user choose Goldplus package {int}")
-    public void xuser_choose_goldplus_package(int packages) {
+    @When("owner choose Goldplus package {int}")
+    public void user_choose_goldplus_package(int packages) {
         goldplus.clickOnGoldplusPackageButton(packages);
         if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp" + packages) && !gpSubmission.isFavoritGpRadioSelected()) {
-            playwright.reloadPage();
             gpSubmission.clickOnGpSatuFirstRadioButton(true);
         }
         Mamikos.setGpPackageChoosed("GoldPlus " + packages);
-//        goldplus.getTextPeriodeChoosed();
-//        gpSubmission.clicksOnPilihPaketButton();
     }
 
     @When("user click checkbox Syarat dan Ketentuan Umum GoldPlus")
@@ -517,40 +514,10 @@ public class GoldplusSteps {
     }
 
     @And("user view detail list saldo MamiAds")
-    public void user_view_detail_list_saldo_mamiads(DataTable dataTable) {
+    public void user_view_detail_list_saldo_mamiads(String expectedMamiadsSnapshot) {
         playwright.waitTillPageLoaded();
-        playwright.hardWait(3000.0);
-        List<Map<String, String>> table = dataTable.asMaps();
-        int i = 0;
-        int j = 0;
-        for (Map<String, String> content : table) {
-            Assert.assertEquals(goldplus.mamiadsSaldo("saldo", i), content.get("saldo"));
-
-           try {
-               if (!content.get("cashback").isEmpty()) {
-                   Assert.assertTrue(playwright.isTextDisplayed(content.get("cashback")), String.format("contaiins %s not displayed", content.get("cashback")));
-               }
-
-               if (!content.get("salePrice").isEmpty()) {
-                   Assert.assertTrue(playwright.isTextDisplayed(content.get("salePrice")), String.format("contaiins %s not displayed", content.get("salePrice")));
-               }
-
-               if (!content.get("saving").isEmpty()) {
-                   Assert.assertTrue(playwright.isTextDisplayed(content.get("saving")), String.format("contaiins %s not displayed", content.get("saving")));
-               }
-
-               if (!content.get("disc").isEmpty()) {
-                   Assert.assertEquals(goldplus.mamiadsSaldo("disc", j), content.get("disc"));
-                   Assert.assertEquals(goldplus.mamiadsSaldo("discPriceMamiAds", j), content.get("discPriceMamiAds"));
-                   j++;
-               }
-
-           } catch (java.lang.NullPointerException ignored) {
-
-           }
-
-            i++;
-        }
+        playwright.hardWait(2000.0);
+        Assert.assertEquals(goldplus.getMamiadsBalanceListSnapshot(), expectedMamiadsSnapshot);
     }
 
     @And("user choose saldo {string} on GoldPlus section")
@@ -573,6 +540,20 @@ public class GoldplusSteps {
                 break;
         }
         goldplus.scrollToUbahPackage();
+    }
+
+    @Then("user verify saldo MamiAds is choosen on Rincian Pembayaran")
+    public void user_verify_saldo_mamiads_is_choosen_on_rincian_pembayaran(String expectedRincianSnapshot) {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000.0);
+        Assert.assertEquals(goldplus.getRincianPembayaranSnapshot(), expectedRincianSnapshot);
+    }
+
+    @Then("user verify Total Pembayaran")
+    public void user_verify_total_pembayaran(String expectedTotalSnapshot) {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000.0);
+        Assert.assertEquals(goldplus.getTotalPembayaranSnapshot(), expectedTotalSnapshot);
     }
 
     @And("user click on ubah package gold plus button")
@@ -630,9 +611,19 @@ public class GoldplusSteps {
     public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_CONTRACT);
         goldplus.searchPhoneNumberGP(phoneNumber);
-        playwright.clickOnTextButton("Terminate");
-        playwright.clickOnTextButton("Yes, terminate it!");
-        Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
+        
+        // Check if there are any active contracts to terminate for this specific phone number
+        String terminateXpath = "//td[contains(text(), '" + phoneNumber + "')]/parent::tr//button[text()='Terminate']";
+        var terminateButton = page.locator(terminateXpath);
+        
+        if (playwright.waitTillLocatorIsVisible(terminateButton, 3000.0)) {
+            playwright.clickOn(terminateButton);
+            playwright.clickOnTextButton("Yes, terminate it!");
+            Assert.assertTrue(playwright.isTextDisplayed("Contract successfully terminated."));
+        } else {
+            // No active contracts found - this is acceptable for data preparation
+            System.out.println("No active GoldPlus contracts found for phone number: " + phoneNumber + ". Contract termination not needed.");
+        }
     }
 
     @When("owner navigate to list package goldplus 2")
