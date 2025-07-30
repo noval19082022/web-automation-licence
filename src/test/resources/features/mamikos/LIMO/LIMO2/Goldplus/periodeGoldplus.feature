@@ -1,23 +1,70 @@
-@regression @LIMO2 @listing-monetization @periodeGP @DONEMIGRATINGTONEWBOARD
+@regression @LIMO2 @listing-monetization @periodeGP
 Feature: Check Period Goldplus Page
 
   @TEST_LIMO-3520
   Scenario: [WEB][Owner][Period GP][Non Weekly]Check List Period at GPLT
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545515 | 0          | 12345678 |
+      | phone stag     | phone prod | password |
+      | 0812345678123 | 0          | qwerty123 |
     And owner navigates to owner dashboard
     When owner navigate to list package goldplus 2
     Then user verify list of Periode Berlangganan is appear
-      | periodGP        | freeMamiAds            | actualPrice | discPrice   |
-      | 1 Bulan         | Gratis MamiAds 100.000 | Rp145.000   | Rp150.000   |
-      | 2 Bulan         | Gratis MamiAds 20.000  | Rp278.400   | Rp290.000   |
-      | 3 Bulan Favorit | Gratis MamiAds 25.000  | Rp417.600   | Rp435.000   |
-      | 4 Bulan Favorit | Gratis MamiAds 40.000  | Rp320.000   | Rp450.000   |
-      | 6 Bulan         | Gratis MamiAds 60.000  | Rp817.800   | Rp870.000   |
-      | 9 Bulan         | Gratis MamiAds 80.000  | Rp1.000.000 | Rp1.200.000 |
-      | 12 Bulan        | Gratis MamiAds 120.000 | Rp1.740.000 | Rp2.000.000 |
+      """
+      - img "back"
+      - paragraph: Pilih Periode Goldplus 2
+      - paragraph: Paket Dasar
+      - paragraph: Rp145.000 per bulan
+      - paragraph: Diskon 3%
+      - paragraph: Rp150.000
+      - separator
+      - paragraph: + Gratis MamiAds 100.000
+      - paragraph: Paket Jangka Panjang
+      - paragraph: Bisa chat dengan penyewa kapanpun
+      - paragraph: Rp1.740.000
+      - paragraph: Diskon 13%
+      - paragraph: Rp2.000.000
+      - paragraph: 12 Bulan
+      - paragraph: Rp145.000 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 120.000
+      - paragraph: Rp1.000.000
+      - paragraph: Diskon 17%
+      - paragraph: Rp1.200.000
+      - paragraph: 9 Bulan
+      - paragraph: Rp111.111 per bulan
+      - paragraph: Rp817.800
+      - paragraph: Diskon 6%
+      - paragraph: Rp870.000
+      - paragraph: 6 Bulan
+      - paragraph: Rp136.300 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 60.000
+      - paragraph: Rp320.000
+      - paragraph: Diskon 29%
+      - paragraph: Rp450.000
+      - paragraph: 4 Bulan
+      - paragraph: Rp80.000 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 40.000
+      - text: Favorit
+      - paragraph: Rp417.600
+      - paragraph: Diskon 4%
+      - paragraph: Rp435.000
+      - paragraph: 3 Bulan
+      - paragraph: Rp139.200 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 25.000
+      - text: Favorit
+      - paragraph: Rp278.400
+      - paragraph: Diskon 4%
+      - paragraph: Rp290.000
+      - paragraph: 2 Bulan
+      - paragraph: Rp139.200 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 20.000
+      - button "Pilih Periode"
+      """
 
   @TEST_LIMO-3521
   Scenario: Setting label favorite change to no
@@ -33,17 +80,53 @@ Feature: Check Period Goldplus Page
   Scenario: [WEB][Owner][Period GP]Check List Period at GPLT when don't have favorite label
     When user go to mamikos homepage
     And user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545515 | 0          | 12345678 |
+      | phone stag     | phone prod | password |
+      | 0812345678123 | 0          | qwerty123 |
     When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
-      | periodGP | freeMamiAds            | actualPrice | discPrice |
-      | 1 Bulan  | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
-      | 3 Bulan  | Gratis MamiAds 177.000 | Rp232.260   | Rp237.000 |
-      | 4 Bulan  | Gratis MamiAds 236.000 | Rp224.200   | Rp300.000 |
-      | 6 Bulan  | Gratis MamiAds 354.000 | Rp455.040   | Rp474.000 |
-      | 12 Bulan | Gratis MamiAds 708.000 | Rp862.680   | Rp948.000 |
-    And user should not be able to see the text "Favorit"
+      """
+      - img "back"
+      - paragraph: Pilih Periode Goldplus 1
+      - paragraph: Paket Dasar
+      - paragraph: Rp79.000 per bulan
+      - paragraph: Diskon 12%
+      - paragraph: Rp90.000
+      - separator
+      - paragraph: + Gratis MamiAds 120.000
+      - text: Favorit
+      - paragraph: Paket Jangka Panjang
+      - paragraph: Bisa chat dengan penyewa kapanpun
+      - paragraph: Rp862.680
+      - paragraph: Diskon 9%
+      - paragraph: Rp948.000
+      - paragraph: 12 Bulan
+      - paragraph: Rp71.890 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 708.000
+      - paragraph: Rp455.040
+      - paragraph: Diskon 4%
+      - paragraph: Rp474.000
+      - paragraph: 6 Bulan
+      - paragraph: Rp75.840 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 354.000
+      - paragraph: Rp224.200
+      - paragraph: Diskon 25%
+      - paragraph: Rp300.000
+      - paragraph: 4 Bulan
+      - paragraph: Rp56.050 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 236.000
+      - paragraph: Rp232.260
+      - paragraph: Diskon 2%
+      - paragraph: Rp237.000
+      - paragraph: 3 Bulan
+      - paragraph: Rp77.420 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 177.000
+      - button "Pilih Periode"
+      """
+    And owner should not see "Favorit" on Paket Jangka Panjang
     And owner should successfully log out
 
   @continue @TEST_LIMO-3523
@@ -63,16 +146,53 @@ Feature: Check Period Goldplus Page
     #Scenario: check list periode
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545515 | 0          | 12345678 |
+      | phone stag     | phone prod | password |
+      | 0812345678123 | 0          | qwerty123 |
     When owner navigate to list package goldplus 1
     Then user verify list of Periode Berlangganan is appear
-      | periodGP        | freeMamiAds            | actualPrice | discPrice |
-      | 1 Bulan         | Gratis MamiAds 120.000 | Rp79.000    | Rp89.000  |
-      | 3 Bulan Favorit | Gratis MamiAds 177.000 | Rp232.260   | Rp237.000 |
-      | 4 Bulan         | Gratis MamiAds 236.000 | Rp224.200   | Rp300.000 |
-      | 6 Bulan         | Gratis MamiAds 354.000 | Rp455.040   | Rp474.000 |
-      | 12 Bulan        | Gratis MamiAds 708.000 | Rp862.680   | Rp948.000 |
+      """
+      - img "back"
+      - paragraph: Pilih Periode Goldplus 1
+      - paragraph: Paket Dasar
+      - paragraph: Rp79.000 per bulan
+      - paragraph: Diskon 12%
+      - paragraph: Rp90.000
+      - separator
+      - paragraph: + Gratis MamiAds 120.000
+      - text: Favorit
+      - paragraph: Paket Jangka Panjang
+      - paragraph: Bisa chat dengan penyewa kapanpun
+      - paragraph: Rp862.680
+      - paragraph: Diskon 9%
+      - paragraph: Rp948.000
+      - paragraph: 12 Bulan
+      - paragraph: Rp71.890 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 708.000
+      - paragraph: Rp455.040
+      - paragraph: Diskon 4%
+      - paragraph: Rp474.000
+      - paragraph: 6 Bulan
+      - paragraph: Rp75.840 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 354.000
+      - paragraph: Rp224.200
+      - paragraph: Diskon 25%
+      - paragraph: Rp300.000
+      - paragraph: 4 Bulan
+      - paragraph: Rp56.050 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 236.000
+      - paragraph: Rp232.260
+      - paragraph: Diskon 2%
+      - paragraph: Rp237.000
+      - paragraph: 3 Bulan
+      - paragraph: Rp77.420 per bulan
+      - separator
+      - paragraph: + Gratis MamiAds 177.000
+      - text: Favorit
+      - button "Pilih Periode"
+      """
     And owner should successfully log out
 
   @unfavorite @TEST_LIMO-3525
