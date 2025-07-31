@@ -8,7 +8,7 @@ Feature: Edit Kost
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "Kos oke bebek Vvv Depok Sleman" in admin kos owner page
+    And admin bangkrupux search kost owner "Kos oke bebek Vvv Depok Sleman" with phone number "083176408319" in admin kos owner page
     And user verify the kos in admin kos owner if exist
 
   @TEST_LIMO-938 @EditKosInvalidFacility @continue
@@ -76,5 +76,5 @@ Feature: Edit Kost
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "Kos oke bebek Vvv Depok Sleman" in admin kos owner page
+    And admin bangkrupux search kost owner "Kos oke bebek Vvv Depok Sleman" with phone number "083176408319" in admin kos owner page
     And user verify the kos in admin kos owner if exist
