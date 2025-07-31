@@ -14,13 +14,13 @@ Feature: Gold Plus
       | phone stag   | phone prod | password  |
       | 082233545506 | 0          | qwerty123 |
     And user click daftar GP button
-    And user choose Goldplus package 1
+    And user select package GP 1
     Then user will see that the goldplus package choosed is displayed
 
   @TEST_LIMO-3397 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
-    And user choose Goldplus package 2
+    And user select package GP 2
     Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
   @TEST_LIMO-3398 @TEST_LIMO-149 @uncheckT&C @continue
