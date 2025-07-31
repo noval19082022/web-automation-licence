@@ -1,4 +1,4 @@
-@regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization @DONEMIGRATINGTONEWBOARD @viu
+@regression @goldPlus @goldplusRegister @LIMO2 @listing-monetization @DONEMIGRATINGTONEWBOARD
 Feature: Revamp GP Package Options
 
   @TEST_LIMO-8950 @Automated @LIMO2
