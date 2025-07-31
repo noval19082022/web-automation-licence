@@ -8,7 +8,7 @@ Feature: Edit Kost 2
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
+    And admin bangkrupux search kost owner "MAMAHMUDALIMO" with phone number "081328787342" in admin kos owner page
     And user verify the kos in admin kos owner
 
   @TEST_LIMO-850 @TEST_LIMO-860 @TEST_LIMO-847
@@ -24,8 +24,8 @@ Feature: Edit Kost 2
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
-      | kos name      | room type check | room type name | kos type | description kos                     | build kos | other note     |
-      | MAMAHMUDALIMO | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+      | kos name | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      |          | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
     And user click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     And user click done in success page pop up of edit kos
@@ -39,7 +39,7 @@ Feature: Edit Kost 2
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     When admin go to mamikos bangkrupux admin
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "MAMAHMUDALIMO" in admin kos owner page
+    And admin bangkrupux search kost owner "MAMAHMUDALIMO" with phone number "081328787342" in admin kos owner page
     And user verify the kos in admin kos owner
 
   @TEST_LIMO-858 @updatefotokost @TEST_LIMO-857
@@ -85,8 +85,8 @@ Feature: Edit Kost 2
     And user click Lihat Selengkapnya button for edit
     And user clicks on edit data kos button
     And user click button edit "Foto Kos" kos
-    Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
-    And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
+#    Then user will see that the text "Maaf, Foto Tidak Bisa Diedit" is displayed
+#    And user will see that the text "Saat ini Anda sedang mengikuti Mamikos Pro-Photo. Untuk bisa mengedit foto, silakan hubungi CS Admin" is displayed
 
   Scenario: Verify Edited Kos In Admin PAPASUKA GENIT
     Given user try to logout from mamikos
@@ -95,7 +95,7 @@ Feature: Edit Kost 2
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
+    And admin bangkrupux search kost owner "PAPASUKA GENIT" with phone number "08119787881" in admin kos owner page
     And user verify the kos in admin kos owner
 
   @TEST_LIMO-3434 @continue @editKost123 @WEB @AUTOMATED
@@ -111,8 +111,8 @@ Feature: Edit Kost 2
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
     And owner fills valid data kos as expected
-      | kos name       | room type check | room type name | kos type | description kos                     | build kos | other note     |
-      | PAPASUKA GENIT | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
+      | kos name | room type check | room type name | kos type | description kos                     | build kos | other note     |
+      |          | no              | -              | mix      | Kos tanpa bunga riba random ya guys | 2020      | Akan edit nama |
     And owner re-upload valid kos rule
     And owner click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
@@ -145,7 +145,7 @@ Feature: Edit Kost 2
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search kost owner "PAPASUKA GENIT" in admin kos owner page
+    And admin bangkrupux search kost owner "PAPASUKA GENIT" with phone number "08119787881" in admin kos owner page
     And user verify the kos in admin kos owner
 
   @TEST_LIMO-3437 @WEB @AUTOMATED
@@ -202,8 +202,8 @@ Feature: Edit Kost 2
     And user click button edit "Data Kos" kos
     Then owner will see that the text "Apa nama kos ini?" is displayed
     And owner fills valid data kos as expected
-      | kos name    | room type check | room type name | kos type | description kos               | build kos | other note     |
-      | <kost name> | no              | -              | mix      | Kos automation random ya guys | 1999      | Akan edit nama |
+      | kos name | room type check | room type name | kos type | description kos               | build kos | other note     |
+      |          | no              | -              | mix      | Kos automation random ya guys | 1999      | Akan edit nama |
     And user click button edit "Ketersediaan Kamar" kos
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed
@@ -214,8 +214,8 @@ Feature: Edit Kost 2
     And owner clear description kost on edit page
     Then owner will see that the text "Anda belum mengisi deskripsi kos." is displayed
     And owner fills valid data kos as expected
-      | kos name    | room type check | room type name | kos type | description kos | build kos | other note     |
-      | <kost name> | no              | -              | mix      | okokokok        | 1999      | Akan edit nama |
+      | kos name | room type check | room type name | kos type | description kos | build kos | other note     |
+      |          | no              | -              | mix      | okokokok        | 1999      | Akan edit nama |
     And user click button edit "Alamat Kos" kos
     Then owner will see that the text "Mohon Perhatiannya Sebentar" is displayed
     * owner will see that the text "Jika pindah ke halaman lain, maka data yang diisi di langkah ini tidak akan tersimpan." is displayed

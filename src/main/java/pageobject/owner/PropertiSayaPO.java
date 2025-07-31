@@ -1308,6 +1308,10 @@ public class PropertiSayaPO {
      * @param kosName (include random text from property saya steps)
      */
     public void inputKosName(String kosName) {
+        if (kosName.contains("null ") || kosName.isEmpty()) {
+            return; // returning input kost name when empty
+        }
+
         playwright.waitTillLocatorIsVisible(kostNameField, 3000.0);
         if (playwright.waitTillLocatorIsVisible(kostNameField2)) {
             playwright.clickOn(kostNameField2);
