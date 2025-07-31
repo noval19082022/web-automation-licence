@@ -29,7 +29,6 @@ public class GoldplusPO {
     Locator weeklyPeriode;
     Locator pelajariCaranyaButton;
     Locator gpPackageTable;
-    Locator daftarButtonOnLandingPageGP;
     Locator closePopUpDetailManfaat;
     Locator gpStatusFilter;
     Locator backFromFilter;
@@ -116,7 +115,6 @@ public class GoldplusPO {
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
         gpPackageTable = page.locator(".goldplus-package-content__packages-wrapper");
-        daftarButtonOnLandingPageGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar")).nth(1);
         closePopUpDetailManfaat = page.locator(".bg-c-modal__action-closable");
         gpStatusFilter = page.locator(".goldplus-room-card__gp-status");
         backFromFilter = page.getByTestId("back-button");
@@ -280,7 +278,6 @@ public class GoldplusPO {
     /**
      * Get message text empty state
      * @return String message text
-     *
      */
     public String getMessage() {
         return playwright.getText(messageText).replaceAll("\\s", "");
@@ -289,7 +286,6 @@ public class GoldplusPO {
     /**
      * Get unpaid invoice GP
      * @return int, count of unpaid invoice GP
-     *
      */
     public int getCountInvoiceUnpaid() {
         playwright.hardWait(7000);
@@ -299,8 +295,6 @@ public class GoldplusPO {
 
     /**
      * Click widget GP when status menunggu pembayaran
-     *
-     *
      */
     public void clickOnWidgetGP() {
         playwright.hardWait(3000);
@@ -328,8 +322,6 @@ public class GoldplusPO {
 
     /**
      * Select periode weekly
-     *
-     *
      */
     public void clickOnPeriodeWeekly() {
         playwright.clickOn(weeklyPeriode);
@@ -338,8 +330,6 @@ public class GoldplusPO {
 
     /**
      * Click on Pelajari Caranya button
-     *
-     *
      */
     public void clickOnPelajariCaranyaButton() {
         playwright.clickOn(pelajariCaranyaButton);
@@ -349,7 +339,6 @@ public class GoldplusPO {
     /**
      * Verify package table is display
      * @return boolean (true if table displayed, false if table doesn't displayed)
-     *
      */
     public boolean isGpPackageTableDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(gpPackageTable, 5000.0);
@@ -357,8 +346,6 @@ public class GoldplusPO {
 
     /**
     * Click on icon close pop up detail manfaat
-    *
-    *
     */
     public void clickOnCLosePopUpManfaat() {
         playwright.pageScrollUntilElementIsVisible(closePopUpDetailManfaat);
@@ -367,7 +354,6 @@ public class GoldplusPO {
 
     /**
      * Get status paket goldplus at tab filter
-     *
      * @return String status paket goldplus
      */
     public String getStatusPaketGoldPlus() {
@@ -376,7 +362,6 @@ public class GoldplusPO {
 
     /**
      * Click on icon back from filter gp
-     *
      */
     public void clickOnIconBackFilter() {
         playwright.clickOn(backFromFilter);
@@ -384,7 +369,6 @@ public class GoldplusPO {
 
     /**
      * Scroll to tagihan goldplus at dashboard GP
-     *
      */
     public void scrollToTagihanSection() {
         tagihanGPSection.scrollIntoViewIfNeeded();
@@ -415,7 +399,6 @@ public class GoldplusPO {
 
     /**
      * Click 'Perpanjang' button on pop up recurring GoldPlus
-     *
      */
     public void clickOnPerpanjangBtn(){
         playwright.clickOnTextButton("Perpanjang");
@@ -424,7 +407,6 @@ public class GoldplusPO {
     /**
      * Verify 'GoldPlus 1 periode 4 Bulan' is display
      * @return boolean (true if text displayed, false if text doesn't displayed)
-     *
      */
     public Boolean gpPackageText(){
         playwright.waitTillPageLoaded(10000.0);
@@ -434,7 +416,6 @@ public class GoldplusPO {
 
     /**
      * Get MamiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
-     *
      * @param index input with mamiadsSaldo
      * @return String MAmiAds saldo, cashback, disc, salePrice, discount price MamiAds and saving
      */
@@ -467,7 +448,6 @@ public class GoldplusPO {
 
     /**
      * user choose saldo
-     *
      * @param saldo type saldo
      * @throws InterruptedException
      */
@@ -479,7 +459,6 @@ public class GoldplusPO {
 
     /**
      * user unchoose saldo
-     *
      * @throws InterruptedException
      */
     public void unCheckedSaldo() throws InterruptedException {
@@ -489,7 +468,6 @@ public class GoldplusPO {
 
     /**
      * Get text rincian MamiAds
-     *
      * @return String text rincian MamiAds
      */
     public String getTextRinicianMamiAds() {
@@ -498,7 +476,6 @@ public class GoldplusPO {
 
     /**
      * Get text saldo MamiAds
-     *
      * @return String text saldo MamiAds
      */
     public String getTextSaldoMamiAds() {
@@ -508,7 +485,6 @@ public class GoldplusPO {
 
     /**
      * Verify the mamiads package not displayed from rincian pembayaran
-     *
      * @return false
      */
     public boolean isRincianNotVisible() {
@@ -517,7 +493,6 @@ public class GoldplusPO {
 
     /**
      * Verify the saldo mamiads not displayed from rincian pembayaran
-     *
      * @return false
      */
     public boolean isSaldoNotVisible() {
@@ -526,7 +501,6 @@ public class GoldplusPO {
 
     /**
      * Scroll to element Ubah Package GP
-     *
      */
     public void scrollToUbahPackage() {
         playwright.pageScrollUntilElementIsVisible(changeGPButton);
@@ -534,7 +508,6 @@ public class GoldplusPO {
 
     /**
      * Click on ubah gold plus
-     *
      * @throws InterruptedException
      */
     public void clickOnUbahGoldPlus() throws InterruptedException {
@@ -630,7 +603,6 @@ public class GoldplusPO {
 
     /**
      * Check Info Untuk Anda on owner dashboard
-     *
      */
     public boolean isInfoUntukAndaAppear(String infoUntukAndaMessage) {
         infoUntukAndaOption = page.locator("//p[contains(.,'"+infoUntukAndaMessage+"')]");
@@ -640,7 +612,6 @@ public class GoldplusPO {
 
     /**
      * Check Info Untuk Anda on owner dashboard
-     *
      */
     public boolean isInfoUntukAndaIsNotAppear(String infoUntukAndaMessage) {
         playwright.waitTillPageLoaded(10000.0);
@@ -936,7 +907,6 @@ public class GoldplusPO {
     /**
      * Edit field price on goldplus package edit
      * @param price
-     *
      */
     public void editPriceGp(int price) {
         playwright.forceFill(priceField, String.valueOf(price));
@@ -944,8 +914,6 @@ public class GoldplusPO {
 
     /**
      * Click save button
-     *
-     *
      */
     public void clickSaveButton() {
         playwright.clickOn(saveButton);
@@ -954,7 +922,6 @@ public class GoldplusPO {
     /**
      * Verify the warning message
      * @return warningMessage
-     *
      */
     public String getWarningMessageEditGp() {
         return playwright.getText(warningMessage).replaceAll("×\\s+", "");
@@ -963,7 +930,6 @@ public class GoldplusPO {
     /**
      * Verify the success message
      * @return successMessage
-     *
      */
     public String getSuccessMessage() {
         return playwright.getText(successMessage).replaceAll(" ID \\d+ ", "").replaceAll("×\\s+", "");

@@ -815,6 +815,24 @@ public class OwnerDashboardPO {
     }
 
     /**
+     * Check if GP widget is visible on dashboard
+     *
+     * @return boolean
+     */
+    public boolean isGPWidgetVisible() {
+        return playwright.waitTillLocatorIsVisible(gpWidgetButton, 5000.0);
+    }
+
+    /**
+     * Click on GP widget from dashboard
+     */
+    public void clickOnGPWidget() {
+        playwright.waitFor(gpWidgetButton, 5000.0);
+        playwright.clickOn(gpWidgetButton);
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
      * Click daftar GP on owner dashboard
      *
      *

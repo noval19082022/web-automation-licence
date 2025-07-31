@@ -121,6 +121,4 @@ public class GolplusContractSteps {
         goldplusContractPO.selectDropdownPackage(goldplus);
 
     }
-
-
 }

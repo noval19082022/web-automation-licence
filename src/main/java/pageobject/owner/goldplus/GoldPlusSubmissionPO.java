@@ -4,6 +4,9 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoldPlusSubmissionPO {
     private Page page;
     private PlaywrightHelpers playwright;
@@ -14,6 +17,7 @@ public class GoldPlusSubmissionPO {
     private Locator gpSectionCardList;
     private Locator selectedFavoritGpPackage;
     private Locator selectedGpPeriode;
+    private Locator periodOptionsList;
 
     public GoldPlusSubmissionPO(Page page) {
         this.page = page;
@@ -24,6 +28,7 @@ public class GoldPlusSubmissionPO {
         gpSectionCardList = page.getByTestId("periode-card-gp");
         selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");
         selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
+        periodOptionsList = page.locator("//div[@class='goldplus-periode-select']");
     }
 
 //    /**
@@ -77,5 +82,22 @@ public class GoldPlusSubmissionPO {
      */
     public boolean isGpPeriodeSelected() {
         return playwright.waitTillLocatorIsVisible(selectedGpPeriode.first());
+    }
+
+    /**
+     * Get all period options displayed on the page
+     * @return List of period option texts
+     */
+    public List<String> getAllPeriodOptions() {
+        List<String> periodTexts = new ArrayList<>();
+        playwright.waitFor(periodOptionsList.first(), 5000.0);
+
+        int count = periodOptionsList.count();
+        for (int i = 0; i < count; i++) {
+            String periodText = periodOptionsList.nth(i).textContent().trim();
+            periodTexts.add(periodText);
+        }
+
+        return periodTexts;
     }
 }

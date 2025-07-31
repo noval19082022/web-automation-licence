@@ -20,7 +20,8 @@ public class WhitelistFeatureSteps {
 
     @When("admin select feature with {string}")
     public void admin_select_feature_with(String feature) {
-        whitelistFeaturePO.chooseFeatureWhitelist(feature);
+        // Check if feature is already selected, if yes then skip selection
+        whitelistFeaturePO.chooseFeatureWhitelistIfNotSelected(feature);
     }
 
     @When("admin input owner id with {string}")
@@ -41,5 +42,20 @@ public class WhitelistFeatureSteps {
     @Then("admin click on delete btn on whitelist menu for order {string}")
     public void adminClickOnDeleteBtnOnWhitelistMenu(String order) {
         whitelistFeaturePO.clickOnDeleteBtn(order);
+    }
+
+    @And("admin click edit button for owner")
+    public void adminClickEditButtonForOwner() {
+        whitelistFeaturePO.clickOnEditButton();
+    }
+
+    @And("admin save whitelist changes")
+    public void adminSaveWhitelistChanges() {
+        whitelistFeaturePO.clickOnSaveButton();
+    }
+
+    @And("admin logout from bangkrupux")
+    public void adminLogoutFromBangkrupux() {
+        whitelistFeaturePO.clickOnLogoutButton();
     }
 }

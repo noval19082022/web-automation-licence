@@ -245,7 +245,7 @@ public class GolplusContractPO {
     }
 
     /**
-     * Select package Goldplis
+     * Select package Goldplus
      * @param packageGP of goldplus package
      */
     public void selectDropdownPackage(String packageGP) {
